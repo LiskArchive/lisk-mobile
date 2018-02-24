@@ -7,21 +7,21 @@ import actionTypes from '../../constants/actions';
  */
 const accounts = (state = { list: [], active: -1 }, action) => {
   switch (action.type) {
-    case accountUpdated:
+    case actionTypes.accountUpdated:
       return state;
-    case accountLoggedOut:
+    case actionTypes.accountLoggedOut:
       return state;
-    case accountLoggedIn:
+    case actionTypes.accountLoggedIn:
       return state;
-    case accountLocked:
+    case actionTypes.accountLocked:
       return state;
-    case accountUnlocked:
+    case actionTypes.accountUnlocked:
       return state;
-    case accountSetAsActive:
+    case actionTypes.accountSetAsActive:
       return state;
-    case accountsRetrieved:
+    case actionTypes.accountsRetrieved:
       return state;
-    case accountStored:
+    case actionTypes.accountStored:
       return state;
     default:
       return state;
