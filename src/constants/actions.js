@@ -10,7 +10,7 @@ const actionTypes = {
   accountStored: 'ACCOUNT_STORED',
   // Peers
   activePeerSet: 'ACTIVE_PEER_SET',
-  activePeerUpdateD: 'ACTIVE_PEER_UPDATED',
+  activePeerUpdated: 'ACTIVE_PEER_UPDATED',
   // Loading
   loadingStarted: 'LOADING_STARTED',
   loadingFinished: 'LOADING_FINISHED',
