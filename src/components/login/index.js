@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import Login from './login';
 import { activePeerSet } from '../../actions/peers';
 import { accountSaved } from '../../actions/accounts';
@@ -20,4 +19,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withRouter(Login));
+)(Login);
