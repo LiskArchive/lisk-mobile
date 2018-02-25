@@ -1,4 +1,4 @@
-import Lisk from 'lisk-js';
+// import Lisk from 'lisk-js';
 import actionTypes from '../constants/actions';
 import { getMainNetNode, getNetHash } from '../utilities/networks';
 
@@ -6,7 +6,7 @@ const peerSet = (data, config) => ({
   data: Object.assign({
     passphrase: data.passphrase,
     publicKey: data.publicKey,
-    activePeer: Lisk.api(config),
+    // activePeer: Lisk.api(config),
     noSavedAccounts: data.noSavedAccounts,
   }),
   type: actionTypes.activePeerSet,
