@@ -7,7 +7,7 @@ const actionTypes = {
   accountUnlocked: 'ACCOUNT_UNLOCKED',
   accountSetAsActive: 'ACCOUNT_SET_AS_ACTIVE',
   accountsRetrieved: 'ACCOUNTS_RETRIEVED',
-  accountStored: 'ACCOUNT_STORED',
+  accountsStored: 'ACCOUNTS_STORED',
   // Peers
   activePeerSet: 'ACTIVE_PEER_SET',
   activePeerUpdated: 'ACTIVE_PEER_UPDATED',
