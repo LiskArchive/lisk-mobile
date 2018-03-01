@@ -19,10 +19,8 @@ const accounts = (state = { list: [], active: -1 }, action) => {
       return state;
     case actionTypes.accountSetAsActive:
       return state;
-    case actionTypes.accountsRetrieved:
-      return state;
-    case actionTypes.accountStored:
-      return state;
+    case actionTypes.accountsStored:
+      return Object.assign({}, action.data);
     default:
       return state;
   }
