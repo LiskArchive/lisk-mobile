@@ -6,7 +6,6 @@ const blankAccounts = { list: [], active: -1 };
 const validateAccounts = (data) => {
   const parsedData = JSON.parse(data);
   if (parsedData.list && parseInt(parsedData.active) < parsedData.list.length) {
-    console.log('got valid');
     return parsedData;
   }
   return blankAccounts;
@@ -16,7 +15,7 @@ const validateAccounts = (data) => {
 async function persistData (key, data) {
   try {
     await AsyncStorage.removeItem(key);
-    await AsyncStorage.setItem(key, data);
+    await AsyncStorage.setItem(key, JSON.stringify(data));
     return data;
   } catch (error) {
     return new Promise()
