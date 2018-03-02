@@ -22,9 +22,10 @@ class Landing extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('Did update', this.props.accounts);
     if (this.props.accounts.list.length > 0) {
-      console.log('should Redirect');
+      console.log('Redirect to Referrer or Transactions page');
+    } else {
+      console.log('Redirect to Login page');
     }
   }
 
