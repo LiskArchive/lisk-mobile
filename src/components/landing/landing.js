@@ -3,8 +3,13 @@ import { Text } from 'react-native';
 import { getNetwork, networks } from '../../utilities/networks';
 
 /**
- * The container component containing login
- * and create account functionality
+ * This component would be mounted first and would be used to config and redirect
+ * the application to referer page or Login
+ *
+ * @todo Implement saved language detection
+ * @todo Implement release notification
+ * @todo Implement custom message: this can be used in case we need to notify the user
+ * about any unforeseen issue/change
  */
 class Landing extends React.Component {
   constructor() {
