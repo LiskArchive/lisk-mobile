@@ -3,8 +3,9 @@ import { TextInput, Button, Picker, View } from 'react-native';
 import { getNetwork, networks } from '../../utilities/networks';
 
 /**
- * The container component containing login
- * and create account functionality
+ * The container component containing login and create account functionality
+ * 
+ * @todo 
  */
 class Login extends React.Component {
   constructor() {
@@ -13,24 +14,37 @@ class Login extends React.Component {
     this.state = {
       passphrase: '',
       address: '',
-      network: networks.mainNet.code,
+      network: networks.mainNet,
     };
   }
 
-  componentWillMount() {
-    this.network = getNetwork(this.state.network);
+  trim(passphrase) {
+    return passphrase.trim().replace(/\s+/g, ' ');
   }
 
+  /**
+   * Will be called when login form submits
+   * 
+   * @param {String} passphrase - valid mnemonic passphrase
+   */
   onLoginSubmission(passphrase) {
     this.props.activePeerSet({
-      passphrase,
+      passphrase: this.trim(passphrase),
       network: this.state.network,
     });
   }
 
-  changeHandler(name, value) {
+  /**
+   * General change handler to get bound to react component event listeners
+   * 
+   * @param {String} key - The key in react component state to be altered
+   * @param {any} value - The corresponding value. interface depends on the key
+   * 
+   * @todo Implement error status/message
+   */
+  changeHandler(key, value) {
     this.setState({
-      [name]: value,
+      [key]: value,
     });
   }
 
@@ -40,7 +54,7 @@ class Login extends React.Component {
         selectedValue={this.state.network}
         onValueChange={this.changeHandler.bind(this, 'network')}>
         {
-          Object.keys(networks).map((item, index) => <Picker.Item label={networks[item].name} value={index} />)
+          Object.keys(networks).map((item, index) => <Picker.Item label={networks[item].name} value={networks[item]} />)
         }
       </Picker>
       <TextInput type='text'
