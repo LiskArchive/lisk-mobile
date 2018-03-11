@@ -28,10 +28,10 @@ class Login extends React.Component {
    * @param {String} passphrase - valid mnemonic passphrase
    */
   onLoginSubmission(passphrase) {
-    // this.props.activePeerSet({
-    //   passphrase: this.trim(passphrase),
-    //   network: this.state.network,
-    // });
+    this.props.activePeerSet({
+      passphrase: this.trim(passphrase),
+      network: this.state.network,
+    });
     this.props.navigation.navigate('Main');
   }
 
@@ -68,7 +68,7 @@ class Login extends React.Component {
         value={this.state.address}
         onChangeText={this.changeHandler.bind(this, 'address')}/>
       <Button
-        onPress={this.onLoginSubmission.bind(this)}
+        onPress={this.onLoginSubmission.bind(this, this.state.address)}
         title="Login"/>
       </View>);
   }
