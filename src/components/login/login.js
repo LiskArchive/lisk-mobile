@@ -28,10 +28,11 @@ class Login extends React.Component {
    * @param {String} passphrase - valid mnemonic passphrase
    */
   onLoginSubmission(passphrase) {
-    this.props.activePeerSet({
-      passphrase: this.trim(passphrase),
-      network: this.state.network,
-    });
+    // this.props.activePeerSet({
+    //   passphrase: this.trim(passphrase),
+    //   network: this.state.network,
+    // });
+    this.props.navigation.navigate('Main');
   }
 
   /**
@@ -54,7 +55,10 @@ class Login extends React.Component {
         selectedValue={this.state.network}
         onValueChange={this.changeHandler.bind(this, 'network')}>
         {
-          Object.keys(networks).map((item, index) => <Picker.Item label={networks[item].name} value={networks[item]} />)
+          Object.keys(networks).map((item, index) => <Picker.Item 
+            key={index}
+            label={networks[item].name}
+            value={networks[item]} />)
         }
       </Picker>
       <TextInput type='text'
