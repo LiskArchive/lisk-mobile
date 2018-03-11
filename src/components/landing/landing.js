@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { getNetwork, networks } from '../../utilities/networks';
+import Router from '../router';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -35,7 +35,7 @@ class Landing extends React.Component {
   }
 
   render() {
-    return (<Text>Lisk Mobile</Text>);
+    return (<Router />);
   }
 }
 
