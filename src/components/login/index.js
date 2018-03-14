@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import Login from './login';
-import { activePeerSet } from '../../actions/peers';
-import { accountSaved } from '../../actions/accounts';
+import { accountSaved, accountLoggedIn } from '../../actions/accounts';
 
 /**
  * Using react-redux connect to pass state and dispatch to Login
@@ -12,7 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  activePeerSet: data => dispatch(activePeerSet(data)),
+  accountLoggedIn: data => dispatch(accountLoggedIn(data)),
   accountSaved: () => dispatch(accountSaved()),
 });
 

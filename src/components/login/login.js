@@ -24,15 +24,16 @@ class Login extends React.Component {
 
   /**
    * Will be called when login form submits
+   * fires the activePeerSet action
    * 
    * @param {String} passphrase - valid mnemonic passphrase
    */
   onLoginSubmission(passphrase) {
-    this.props.activePeerSet({
+    console.log('Submitted', passphrase);
+    this.props.accountLoggedIn({
       passphrase: this.trim(passphrase),
-      network: this.state.network,
     });
-    this.props.navigation.navigate('Main');
+    // this.props.navigation.navigate('Main');
   }
 
   /**
