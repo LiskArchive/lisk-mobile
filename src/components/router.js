@@ -1,9 +1,10 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
-import Login from '../components/login';
-import Transactions from '../components/transactions';
-import Send from '../components/send';
+import Landing from './landing';
+import Login from './login';
+import Transactions from './transactions';
+import Send from './send';
 
 export const Tabs = TabNavigator({
   Transactions: {
@@ -26,6 +27,12 @@ export const Tabs = TabNavigator({
 
 export default StackNavigator(
   {
+    Landing: {
+      screen: Landing,
+      navigationOptions: {
+        header: null
+      },
+    },
     Login: {
       screen: Login,
       navigationOptions: {
