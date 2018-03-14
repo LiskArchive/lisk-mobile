@@ -48,12 +48,12 @@ export default StackNavigator(
           backgroundColor: '#ffffff',
           borderBottomColor: '#3868B5',
           borderBottomWidth: 3
-      }
+        }
       }
     }
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Landing',
     mode: 'modal',
   },
 );

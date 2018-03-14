@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { getNetwork, networks } from '../../utilities/networks';
 import Router from '../router';
 
@@ -36,7 +37,8 @@ class Landing extends React.Component {
   }
 
   render() {
-    return (<Router />);
+    // ToDo : this Text need to be replaced by a snipper component
+    return (<Text>Landing...</Text>);
   }
 }
 
