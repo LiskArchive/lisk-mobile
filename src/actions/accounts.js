@@ -55,5 +55,5 @@ export const accountLoggedIn = ({ passphrase }) =>
           type: actionTypes.accountLoggedIn,
           data: accounts,
         });
-      });
+      }).catch(error => console.log(error));
   }

@@ -11,32 +11,34 @@
  * 
  * @returns {Promise} The HTTP call promise
  */
-async function Http (path, data, method='GET') {
+function Http (path, data, method='GET') {
   let url;
+  let options = {};
   let payload;
   if (typeof method === 'string' && method !== 'GET') {
-    url = `http://localhost:5000${url}`;
+    url = `http://localhost:5000${path}`;
     payload = JSON.stringify(data);
+    return fetch(
+      url, {
+        method,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: payload
+    }).then(res => res.json());
   } else {
-    const params = Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
-    url = `http://localhost:5000${url}?${params}`;
+    const params = Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
+    url = `http://localhost:5000${path}?${params}`;
     payload = JSON.stringify({});
-  }
-  let response = await fetch(
-    url, {
-      method,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: payload
-  });
-  let responseText = await response.text();
-  if (response.status >= 200 && response.status < 300) {
-    return responseText;
-  
-  } else {
-    throw responseText
+    return fetch(
+      url, {
+        method,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+    }).then(res => res.json());
   }
 }
 
