@@ -1,5 +1,6 @@
 import actionTypes from "../constants/actions";
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
+import { getAccount, extractAddress } from '../utilities/http';
 
 /**
  * Stores the given accounts data in AsyncStorage
@@ -39,6 +40,19 @@ export const accountsRetrieved = () =>
       .then((accounts) => {
         dispatch({
           type: actionTypes.accountsRetrieved,
+          data: accounts,
+        });
+      });
+  }
+
+export const accountLoggedIn = ({ passphrase }) =>
+  (dispatch) => {
+    console.log('Fetching');
+    getAccount(extractAddress(passphrase))
+      .then((account) => {
+        console.log('Account Fetched', account);
+        dispatch({
+          type: actionTypes.accountLoggedIn,
           data: accounts,
         });
       });
