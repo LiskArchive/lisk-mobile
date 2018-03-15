@@ -18,6 +18,12 @@ class Login extends React.Component {
     };
   }
 
+  componentDidUpdate() {
+    if (this.props.accounts.list.length > 0) {
+      this.props.navigation.navigate('Main');
+    }
+  }
+
   trim(passphrase) {
     return passphrase.trim().replace(/\s+/g, ' ');
   }

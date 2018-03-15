@@ -61,7 +61,7 @@ export const accountLoggedIn = ({ passphrase }) =>
       .then((account) => {
         dispatch({
           type: actionTypes.accountLoggedIn,
-          data: accounts,
+          data: account,
         });
       }).catch(error => console.log(error));
   };
