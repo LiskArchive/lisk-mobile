@@ -20,7 +20,7 @@ export const accountsStored = (data) =>
           type: actionTypes.accountsStored,
         });
       });
-  }
+  };
 
 /**
  * Retrieves the stored accounts and then
@@ -43,17 +43,35 @@ export const accountsRetrieved = () =>
           data: accounts,
         });
       });
-  }
+  };
 
+/**
+ * Uses Http call to fetch Account and delegate info of a given
+ * passphrase and dispatches accountLoggedIn action
+ *
+ * @todo Implement delegate Api call
+ *
+ * @param {Object} data
+ * @param {String} data.passphrase - The valid passphrase to login using
+ * @returns {Function} Thunk function
+ */
 export const accountLoggedIn = ({ passphrase }) =>
   (dispatch) => {
-    console.log('Fetching');
     getAccount(extractAddress(passphrase))
       .then((account) => {
-        console.log('Account Fetched', account);
         dispatch({
           type: actionTypes.accountLoggedIn,
           data: accounts,
         });
       });
-  }
+  };
+
+/**
+ * Returns action object with no Api calls.
+ *
+ * @returns {Object} Action object including action type
+ */
+export const accountLoggedOut = () =>
+  ({
+    type: actionTypes.accountLoggedOut,
+  });
