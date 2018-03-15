@@ -12,7 +12,7 @@ const accounts = (state = { list: [], active: -1 }, action) => {
     case actionTypes.accountLoggedOut:
       return state;
     case actionTypes.accountLoggedIn:
-      return state;
+      return Object.assign({}, { list: [...state.list, action.data], active: 0 });
     case actionTypes.accountLocked:
       return state;
     case actionTypes.accountUnlocked:
@@ -20,7 +20,7 @@ const accounts = (state = { list: [], active: -1 }, action) => {
     case actionTypes.accountSetAsActive:
       return state;
     case actionTypes.accountsRetrieved:
-      return Object.assign({}, action.data);
+      return Object.assign({}, state, action.data);
     default:
       return state;
   }
