@@ -1,3 +1,5 @@
+import actionTypes from '../../constants/actions';
+
 /**
  * The reducer of transactions.
  * this reducer implements the required logic to add, update and reset
@@ -7,7 +9,7 @@
  * @param {Array} state.pending
  * @param {Array} state.confirmed
  * @param {Number} state.count
- * @param {Object} action 
+ * @param {Object} action
  * @param {String} action.type
  * @param {Object} action.data
  */
@@ -17,7 +19,7 @@ const transactions = (state = { pending: [], confirmed: [], count: null }, actio
       return Object.assign({}, state, {
         confirmed: [
           ...state.confirmed,
-          ...action.data.confirmed,
+          ...action.data.transactions,
         ],
         count: action.data.count,
       });
@@ -29,3 +31,5 @@ const transactions = (state = { pending: [], confirmed: [], count: null }, actio
       return state;
   }
 };
+
+export default transactions;
