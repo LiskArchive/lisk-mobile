@@ -96,3 +96,17 @@ export const getTransactions = (data) => {
 
   return Http('/transactions', params);
 }
+
+/**
+ * Creates a new transactions
+ *
+ * @param {Object} data
+ * @param {String} data.recipientId - A valid Lisk ID
+ * @param {Object} data.amount - Amount of lisk multiplied by 10^8
+ * @param {Object} data.secret - Primary passphrase (Valid mnemonic)
+ * @param {Object} data.secondSecret - Secondary passphrase (Valid mnemonic)
+ *
+ * @returns {Promise} The HTTP call promise
+ */
+export const send = (data) =>
+  Http('/transactions', data, 'POST');
