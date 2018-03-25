@@ -44,6 +44,7 @@ export default StackNavigator(
       screen: Tabs,
       navigationOptions:  {
         title: 'Lisk Nano',
+        headerBackTitle: 'Back',
         headerLeft: null,
         headerStyle: {
           backgroundColor: '#3868B5',
@@ -57,7 +58,9 @@ export default StackNavigator(
       screen: TxDetail,
       navigationOptions:  {
         title: 'Lisk Nano',
-        headerLeft: null,
+        headerBackTitleStyle: {
+          color: '#000',
+        },
         headerStyle: {
           backgroundColor: '#3868B5',
           borderBottomColor: '#3868B5',
