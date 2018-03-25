@@ -57,11 +57,12 @@ export const accountsRetrieved = () =>
  */
 export const accountLoggedIn = ({ passphrase }) =>
   (dispatch) => {
+    console.log('getting accunt for ', passphrase)
     getAccount(extractAddress(passphrase))
       .then((account) => {
         dispatch({
           type: actionTypes.accountLoggedIn,
-          data: account,
+          data: { ...account, passphrase },
         });
       }).catch(error => console.log(error));
   };

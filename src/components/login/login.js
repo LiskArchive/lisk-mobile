@@ -35,7 +35,7 @@ class Login extends React.Component {
    * @param {String} passphrase - valid mnemonic passphrase
    */
   onLoginSubmission(passphrase) {
-    console.log('Submitted', passphrase);
+    passphrase = 'reopen parrot fever infant general life surface this frame village color position';
     this.props.accountLoggedIn({
       passphrase: this.trim(passphrase),
     });

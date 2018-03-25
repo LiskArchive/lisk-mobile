@@ -22,17 +22,19 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "bignumber.js": "^6.0.0",
     "expo": "^25.0.0",
     "history": "^4.7.2",
     "lisk-js": "^0.5.1",
     "prop-types": "^15.6.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-navigation": "^1.5.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
+    "react-test-renderer": "16.2.0",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "react-navigation": "^1.5.1",
-    "react-test-renderer": "16.2.0"
+    "redux-connect-decorator": "^0.2.0",
+    "redux-thunk": "^2.2.0"
   }
 }

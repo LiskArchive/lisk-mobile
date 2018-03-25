@@ -1,3 +1,5 @@
+const queryStringify = (data) =>
+  Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
 /**
  * This is a wrapper over react native fetch Api
  * Which returns a promise to be easily used in actions and middlewares
@@ -28,7 +30,7 @@ function Http (path, data, method='GET') {
         body: payload
     }).then(res => res.json());
   } else {
-    const params = Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
+    const params = queryStringify(data);
     url = `http://localhost:5000${path}?${params}`;
     payload = JSON.stringify({});
     return fetch(
@@ -65,3 +67,46 @@ export const getAccount = (address) =>
 export const extractAddress = (key) =>
   // Http('/address', { key });
   '6307319849853921018L';
+
+/**
+ * Gets the list of transactions for a given filtering config
+ *
+ * @param {Object} data
+ * @param {String?} data.senderId - A valid Lisk ID to filter the senderID
+ * @param {String?} data.recipientId - A valid Lisk ID to filter the recipientId
+ * @param {Number?} limit - defaults on 25
+ * @param {Number?} offset - defaults on 0
+ * @param {String?} orderBy - defaults on timestamp:desc
+ *
+ * @returns {Promise} The HTTP call promise
+ */
+export const getTransactions = (data) => {
+  const params = Object.assign({
+    limit: 25,
+    offset: 0,
+    orderBy: 'timestamp:desc'
+  }, data);
+  if (!params.senderId) {
+    delete params.senderId
+  }
+
+  if (!params.recipientId) {
+    delete params.recipientId
+  }
+
+  return Http('/transactions', params);
+}
+
+/**
+ * Creates a new transactions
+ *
+ * @param {Object} data
+ * @param {String} data.recipientId - A valid Lisk ID
+ * @param {Object} data.amount - Amount of lisk multiplied by 10^8
+ * @param {Object} data.secret - Primary passphrase (Valid mnemonic)
+ * @param {Object} data.secondSecret - Secondary passphrase (Valid mnemonic)
+ *
+ * @returns {Promise} The HTTP call promise
+ */
+export const send = (data) =>
+  Http('/transactions', data, 'POST');

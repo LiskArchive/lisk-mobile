@@ -1,16 +1,17 @@
 import React from 'react';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import Landing from './landing';
 import Login from './login';
 import Transactions from './transactions';
+import TxDetail from './txDetail';
 import Send from './send';
 
 export const Tabs = TabNavigator({
   Transactions: {
     screen: Transactions,
     navigationOptions: {
-      tabBarLabel: 'Send',
+      tabBarLabel: 'Transactions',
       tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
     },
   },
@@ -42,14 +43,38 @@ export default StackNavigator(
     Main: {
       screen: Tabs,
       navigationOptions:  {
-        title: 'Balance: 12233 LISK',
+        title: 'Lisk Nano',
         headerLeft: null,
         headerStyle: {
-          backgroundColor: '#ffffff',
+          backgroundColor: '#3868B5',
           borderBottomColor: '#3868B5',
+          color: '#FFFFFF',
           borderBottomWidth: 3
         }
       }
+    },
+    TxDetail: {
+      screen: TxDetail,
+      navigationOptions:  {
+        title: 'Lisk Nano',
+        headerLeft: null,
+        headerStyle: {
+          backgroundColor: '#3868B5',
+          borderBottomColor: '#3868B5',
+          color: '#FFFFFF',
+          borderBottomWidth: 3
+        }
+      }
+      // navigationOptions: ({ navigation }) => ({
+      //   title: `${navigation.state.params.tx.id}'s Profile'`,
+      //   headerLeft: null,
+      //   headerStyle: {
+      //     backgroundColor: '#3868B5',
+      //     borderBottomColor: '#3868B5',
+      //     color: '#FFFFFF',
+      //     borderBottomWidth: 3
+      //   }
+      // }),
     }
   },
   {
