@@ -1,5 +1,7 @@
 import actionTypes from '../constants/actions';
-import { getTransactions } from '../utilities/http';
+import txConstants from '../constants/transactions';
+import { getTransactions, send } from '../utilities/http';
+import { toRawLsk } from '../utilities/conversions';
 
 export const transactionsLoaded = data =>
   (dispatch) => {
@@ -15,8 +17,23 @@ export const transactionsLoaded = data =>
       }).catch(error => console.log(error));
   };
 
-export const transactionAdded = data => ({
-  data,
-  type: actionTypes.transactionAdded,
-});
-
+export const transactionAdded = (data, account) =>
+  (dispatch) => {
+    console.log('Making Api call', data);
+    send(data)
+      .then((res, oth) => {
+        dispatch({
+          data: {
+            id: res.transactionId,
+            senderPublicKey: account.publicKey,
+            senderId: account.address,
+            recipientId: data.recipientId,
+            amount: toRawLsk(data.amount),
+            fee: txConstants.send.fee,
+            type: txConstants.send.type,
+          },
+          type: actionTypes.transactionAdded,
+        });
+      })
+      .catch(error => console.log(error));
+  };
