@@ -16,6 +16,7 @@ const actionTypes = {
   loadingFinished: 'LOADING_FINISHED',
   // Transactions
   transactionsLoaded: 'TRANSACTIONS_LOADED',
+  transactionAdded: 'TRANSACTIONS_ADDED',
 };
 
 export default actionTypes;
