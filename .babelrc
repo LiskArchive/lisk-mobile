@@ -2,7 +2,12 @@
   "presets": ["babel-preset-expo"],
   "env": {
     "development": {
-      "plugins": ["transform-react-jsx-source"]
+      "plugins": [
+        "transform-react-jsx-source",
+        "babel-plugin-transform-decorators-legacy",
+        "babel-plugin-transform-decorators",
+        "transform-class-properties"
+      ]
     }
   }
 }
