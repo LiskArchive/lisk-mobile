@@ -1,28 +1,11 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
+import styles from './styles';
 
 class Result extends React.Component {
   render() {
     const { address, amount } = this.props;
-    const styles = StyleSheet.create({
-      container: {
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        flex: 1,
-        backgroundColor: '#ffffff',
-      },
-      inner: {
-        padding: 20
-      },
-      button: {
-        marginTop: 20
-      },
-      title: {
-        fontSize: 30,
-        marginBottom: 20,
-      }
-    });
     return (<View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>
