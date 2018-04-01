@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
+import BackgroundImage from '../background';
+import Logo from '../logo';
 import { getNetwork, networks } from '../../utilities/networks';
 import Router from '../router';
 
@@ -38,7 +40,14 @@ class Landing extends React.Component {
 
   render() {
     // ToDo : this Text need to be replaced by a snipper component
-    return (<Text>Landing...</Text>);
+    return (<View style={{
+        flex: 1,
+        backgroundColor: '#666',
+      }}>
+      <BackgroundImage />
+      <Logo />
+      <Text>Landing...</Text>
+    </View>);
   }
 }
 
