@@ -6,12 +6,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    alignItems: 'left',
+    // alignItems: 'left',
     fontWeight: 'bold',
-    fontSize: '16px',
+    fontSize: 16,
   },
   value: {
-    alignItems: 'right',
+    // alignItems: 'right',
   }
 });
 
