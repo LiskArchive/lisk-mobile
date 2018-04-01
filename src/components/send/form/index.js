@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
+import styles from './styles';
 
 class Form extends React.Component {
   state = {
@@ -21,17 +22,6 @@ class Form extends React.Component {
     });
   }
   render() {
-    const styles = StyleSheet.create({
-      container: {
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        flex: 1,
-        backgroundColor: '#ffffff',
-      },
-      button: {
-        top: 20,
-      },
-    });
     return (<View style={styles.container}>
         <View>
           <FormLabel>Address</FormLabel>
