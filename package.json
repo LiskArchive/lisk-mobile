@@ -6,9 +6,8 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators": "^6.24.1",
     "jest-expo": "25.0.0",
-    "react-native-elements": "^0.19.0",
-    "react-native-scripts": "1.11.1",
-    "redux-connect-decorator": "^0.2.0"
+    "redux-connect-decorator": "^0.2.0",
+    "react-native-scripts": "1.11.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -25,10 +24,13 @@
     "bignumber.js": "^6.0.0",
     "expo": "^25.0.0",
     "history": "^4.7.2",
-    "lisk-js": "^0.5.1",
     "prop-types": "^15.6.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-native-elements": "^0.19.0",
+    "react-native-linear-gradient": "^2.4.0",
+    "react-native-socketio": "^0.3.0",
+    "react-native-svg-uri": "^1.2.3",
     "react-navigation": "^1.5.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",

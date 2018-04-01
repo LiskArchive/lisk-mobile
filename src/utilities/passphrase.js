@@ -39,12 +39,15 @@ const mnemonic = word => [
  *  {Number[]} words - The v. status of each word
  *  {Boolean} valid - The v. status of the given passphrase
  */
-export const isValidPassphrase = (passphrase) => {
-  const rawWords = passphrase.trim().replace(/\s+/g, ' ').split(' ');
-  const words = new Array(words.length);
+export const validatePassphrase = (passphrase) => {
+  const rawWords = passphrase.trim().replace(/\s+/g, ' ').split(' ').filter(item => item !== '');
+  if (rawWords.length === 0) {
+    return 3; // empty string
+  }
+  const words = new Array(rawWords.length);
 
   const wordsStatus = words.map((word) => {
-    if (!mnemonic.isValid(word)) {
+    if (!mnemonic(word)) {
       return 1; // not a mnemonic word
     } else if (words.indexOf(word) !== words.lastIndexOf(word)) {
       return 2; // duplicated
@@ -58,5 +61,5 @@ export const isValidPassphrase = (passphrase) => {
   } else if (valid === 0 && words.length < 12) {
     valid = 1;
   }
-  return { words, valid };
+  return valid;
 };
