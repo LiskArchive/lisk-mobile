@@ -19,7 +19,6 @@ export const transactionsLoaded = data =>
 
 export const transactionAdded = (data, account) =>
   (dispatch) => {
-    console.log('Making Api call', data);
     send(data)
       .then((res, oth) => {
         dispatch({
