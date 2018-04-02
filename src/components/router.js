@@ -11,6 +11,7 @@ export const Tabs = TabNavigator({
   Transactions: {
     screen: Transactions,
     navigationOptions: {
+      title: 'Transactions',
       tabBarLabel: 'Transactions',
       tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
     },
@@ -18,11 +19,22 @@ export const Tabs = TabNavigator({
   Send: {
     screen: Send,
     navigationOptions: {
+      title: 'Send',
       tabBarLabel: 'Send',
-      tabBarIcon: ({ tintColor }) => <Icon name="launch" size={35} color={tintColor} />
+      tabBarIcon: ({ tintColor }) => <Icon name="send" size={35} color={tintColor} />
     },
   },
 }, {
+  tabBarOptions: {
+    // activeTintColor: '#e91e63',
+    labelStyle: {
+      fontSize: 14,
+    },
+    style: {
+      paddingTop: 5,
+      marginBottom: 0,
+    },
+  },
   headerMode: 'screen',
 });
 
@@ -43,13 +55,12 @@ export default StackNavigator(
     Main: {
       screen: Tabs,
       navigationOptions:  {
-        title: 'Lisk Nano',
         headerBackTitle: 'Back',
+        headerTintColor: '#ffffff',
         headerLeft: null,
         headerStyle: {
           backgroundColor: '#3868B5',
           borderBottomColor: '#3868B5',
-          color: '#FFFFFF',
           borderBottomWidth: 3
         }
       }
@@ -57,14 +68,11 @@ export default StackNavigator(
     TxDetail: {
       screen: TxDetail,
       navigationOptions:  {
-        title: 'Lisk Nano',
-        headerBackTitleStyle: {
-          color: '#000',
-        },
+        title: 'Details',
+        headerTintColor: '#ffffff',
         headerStyle: {
           backgroundColor: '#3868B5',
           borderBottomColor: '#3868B5',
-          color: '#FFFFFF',
           borderBottomWidth: 3
         }
       }
