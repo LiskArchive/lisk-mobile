@@ -16,7 +16,7 @@ const styles = {
   errorMessage: {
     fontSize: 14,
     height: 26,
-  }
+  },
 };
 
 export default StyleSheet.create(styles);
