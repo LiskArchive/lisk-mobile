@@ -13,12 +13,14 @@ const queryStringify = (data) =>
  * 
  * @returns {Promise} The HTTP call promise
  */
+// const baseURL = 'http://10.197.52.95:5000';
+const baseURL = 'http://localhost:5000';
 function Http (path, data, method='GET') {
   let url;
   let options = {};
   let payload;
   if (typeof method === 'string' && method !== 'GET') {
-    url = `http://localhost:5000${path}`;
+    url = `${baseURL}${path}`;
     payload = JSON.stringify(data);
     return fetch(
       url, {
@@ -28,10 +30,11 @@ function Http (path, data, method='GET') {
           'Content-Type': 'application/json',
         },
         body: payload
-    }).then(res => res.json());
+    }).then(res => res.json())
+    .catch(error => console.log(error));
   } else {
     const params = queryStringify(data);
-    url = `http://localhost:5000${path}?${params}`;
+    url = `${baseURL}${path}?${params}`;
     payload = JSON.stringify({});
     return fetch(
       url, {
@@ -40,7 +43,8 @@ function Http (path, data, method='GET') {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-    }).then(res => res.json());
+    }).then(res => res.json())
+    .catch(error => console.log(error));
   }
 }
 
@@ -93,7 +97,6 @@ export const getTransactions = (data) => {
   if (!params.recipientId) {
     delete params.recipientId
   }
-
   return Http('/transactions', params);
 }
 

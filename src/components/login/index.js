@@ -27,7 +27,7 @@ class Login extends React.Component {
 
     this.state = {
       passphrase: {
-        value: '',
+        value: 'reopen parrot fever infant general life surface this frame village color position',
         validity: validatePassphrase(''),
       },
       messages: [
@@ -55,14 +55,11 @@ class Login extends React.Component {
    * @param {String} passphrase - valid mnemonic passphrase
    */
   onLoginSubmission(passphrase) {
-    console.log('onLoginSubmission',passphrase.validity);
     if (passphrase.validity !== 0 && passphrase.validity !== 3) {
       this.passphraseInput.shake()
     } else {
-      console.log('logging in');
       this.props.accountLoggedIn({
-        // passphrase: this.trim(passphrase.value),
-        passphrase: 'reopen parrot fever infant general life surface this frame village color position',
+        passphrase: this.trim(passphrase.value),
       });
     }
   }

@@ -30,7 +30,7 @@ class Transactions extends React.Component {
     const activeAccount = this.props.accounts.list[this.props.accounts.active];
     this.props.transactionsLoaded({
       senderId: activeAccount.address,
-      recipientId: '',
+      recipientId: activeAccount.address,
     });
   }
 
