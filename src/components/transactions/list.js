@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Lis, ListView } from 'react-native-elements'
+import { List, ListView } from 'react-native-elements'
 import Item from './item';
 
 export default ({ transactions, account, navigation, pending }) =>
