@@ -40,6 +40,6 @@ export default ({ navigation }) => {
     <Text h4 style={styles.title}>Amount :</Text>
     <Text style={styles.value}>{ tx.amount }</Text>
     <Text h4 style={styles.title}>Date :</Text>
-    <formattedDate style={styles.value}>{ tx.timestamp }</formattedDate>
+    <FormattedDate style={styles.value}>{ tx.timestamp }</FormattedDate>
   </View>);
 }

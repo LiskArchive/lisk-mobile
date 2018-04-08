@@ -9,9 +9,9 @@ import moment from 'moment';
 const fromLiskTimestamp = value =>
   new Date((((Date.UTC(2016, 4, 24, 17, 0, 0, 0) / 1000) + value) * 1000));
 
-const formattedDate = ({ children, style }) => {
+const FormattedDate = ({ children, style }) => {
   const absoluteDate = fromLiskTimestamp(children);
   return <Text style={style}>{ moment(absoluteDate).format('LL') }</Text>
 }
 
-export default formattedDate;
+export default FormattedDate;
