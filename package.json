@@ -24,6 +24,7 @@
     "bignumber.js": "^6.0.0",
     "expo": "^25.0.0",
     "history": "^4.7.2",
+    "moment": "^2.22.0",
     "prop-types": "^15.6.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
