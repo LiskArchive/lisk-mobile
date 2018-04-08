@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-elements';
-import FormatedDate from '../formatedDate';
+import FormattedDate from '../formattedDate';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,6 +40,6 @@ export default ({ navigation }) => {
     <Text h4 style={styles.title}>Amount :</Text>
     <Text style={styles.value}>{ tx.amount }</Text>
     <Text h4 style={styles.title}>Date :</Text>
-    <FormatedDate style={styles.value}>{ tx.timestamp }</FormatedDate>
+    <formattedDate style={styles.value}>{ tx.timestamp }</formattedDate>
   </View>);
 }
