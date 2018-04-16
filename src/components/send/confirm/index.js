@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import connect from 'redux-connect-decorator';
 import { transactionAdded } from '../../../actions/transactions';

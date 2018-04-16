@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import styles from './styles';
-import regex from '../../../constants/regex';
+import reg from '../../../constants/regex';
 
 class Form extends React.Component {
   constructor() {
@@ -14,8 +14,8 @@ class Form extends React.Component {
     }
 
     this.validator = {
-      address: str => regex.address.test(str),
-      amount: str => regex.amount.test(str),
+      address: str => reg.address.test(str),
+      amount: str => reg.amount.test(str),
     };
   }
 

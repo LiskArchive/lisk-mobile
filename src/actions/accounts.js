@@ -56,8 +56,7 @@ export const accountsRetrieved = () =>
  * @returns {Function} Thunk function
  */
 export const accountLoggedIn = ({ passphrase }) =>
-  (dispatch) => {
-    console.log('getting accunt for ', passphrase)
+  (dispatch) =>
     getAccount(extractAddress(passphrase))
       .then((account) => {
         dispatch({
@@ -65,7 +64,6 @@ export const accountLoggedIn = ({ passphrase }) =>
           data: { ...account, passphrase },
         });
       }).catch(error => console.log(error));
-  };
 
 /**
  * Returns action object with no Api calls.
