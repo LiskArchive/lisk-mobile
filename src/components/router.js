@@ -3,16 +3,19 @@ import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigatio
 import { Icon } from 'react-native-elements';
 import Landing from './landing';
 import Login from './login';
-import Transactions from './transactions';
 import TxDetail from './txDetail';
 import Send from './send';
+import Explore from './explore';
+import Wallet from './wallet';
+import OwnWallet from './ownWallet';
+import styles from './styles';
 
 export const Tabs = TabNavigator({
-  Transactions: {
-    screen: Transactions,
+  OwnWallet: {
+    screen: OwnWallet,
     navigationOptions: {
-      title: 'Transactions',
-      tabBarLabel: 'Transactions',
+      title: 'Wallet',
+      tabBarLabel: 'Wallet',
       tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
     },
   },
@@ -24,9 +27,16 @@ export const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name="send" size={35} color={tintColor} />
     },
   },
+  Explore: {
+    screen: Explore,
+    navigationOptions: {
+      title: 'Explore',
+      tabBarLabel: 'Explore',
+      tabBarIcon: ({ tintColor }) => <Icon name="search" size={35} color={tintColor} />
+    },
+  },
 }, {
   tabBarOptions: {
-    // activeTintColor: '#e91e63',
     labelStyle: {
       fontSize: 14,
     },
@@ -56,11 +66,23 @@ export default StackNavigator(
       screen: Tabs,
       navigationOptions:  {
         headerBackTitle: 'Back',
-        headerTintColor: '#ffffff',
+        headerTintColor: styles.white,
         headerLeft: null,
         headerStyle: {
-          backgroundColor: '#3868B5',
-          borderBottomColor: '#3868B5',
+          backgroundColor: styles.headerColor,
+          borderBottomColor: styles.headerColor,
+          borderBottomWidth: 3
+        }
+      }
+    },
+    Wallet: {
+      screen: Wallet,
+      navigationOptions:  {
+        title: 'Wallet',
+        headerTintColor: styles.white,
+        headerStyle: {
+          backgroundColor: styles.headerColor,
+          borderBottomColor: styles.headerColor,
           borderBottomWidth: 3
         }
       }
@@ -69,27 +91,16 @@ export default StackNavigator(
       screen: TxDetail,
       navigationOptions:  {
         title: 'Details',
-        headerTintColor: '#ffffff',
+        headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: '#3868B5',
-          borderBottomColor: '#3868B5',
+          backgroundColor: styles.headerColor,
+          borderBottomColor: styles.headerColor,
           borderBottomWidth: 3
         }
       }
-      // navigationOptions: ({ navigation }) => ({
-      //   title: `${navigation.state.params.tx.id}'s Profile'`,
-      //   headerLeft: null,
-      //   headerStyle: {
-      //     backgroundColor: '#3868B5',
-      //     borderBottomColor: '#3868B5',
-      //     color: '#FFFFFF',
-      //     borderBottomWidth: 3
-      //   }
-      // }),
     }
   },
   {
     initialRouteName: 'Landing',
-    mode: 'modal',
   },
 );
