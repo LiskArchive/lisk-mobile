@@ -3,9 +3,8 @@ const actionTypes = {
   accountUpdated: 'ACCOUNT_UPDATED',
   accountLoggedOut: 'ACCOUNT_LOGGED_OUT',
   accountLoggedIn: 'ACCOUNT_LOGGED_IN',
-  accountLocked: 'ACCOUNT_LOCKED',
-  accountUnlocked: 'ACCOUNT_UNLOCKED',
-  accountSetAsActive: 'ACCOUNT_SET_AS_ACTIVE',
+  accountFollowed: 'ACCOUNT_FOLLOWED',
+  accountUnFollowed: 'ACCOUNT_UN_FOLLOWED',
   accountsRetrieved: 'ACCOUNTS_RETRIEVED',
   accountsStored: 'ACCOUNTS_STORED',
   // Peers

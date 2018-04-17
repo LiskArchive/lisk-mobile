@@ -5,14 +5,11 @@ import BackgroundImage from '../background';
 import Logo from '../logo';
 import { getNetwork, networks } from '../../utilities/networks';
 import Router from '../router';
-import { activePeerSet } from '../../actions/peers';
 import { accountsRetrieved } from '../../actions/accounts';
 
 @connect(state => ({
-  peers: state.peers,
   accounts: state.accounts,
 }), {
-  activePeerSet,
   accountsRetrieved,
 })
 
@@ -41,10 +38,7 @@ class Landing extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.accounts.list.length > 0) {
-      console.log('Redirect to Referrer or Transactions page');
-    } else {
-      console.log('Redirect to Login page');
+    if (!this.props.accounts.active) {
       this.props.navigation.navigate('Login');
     }
   }

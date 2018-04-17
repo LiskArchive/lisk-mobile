@@ -32,7 +32,7 @@ import extractAddress from '../../utilities/http';
  */
 class Wallet extends React.Component {
   componentWillMount() {
-    this.activeAccount = this.props.accounts.list[this.props.accounts.active];
+    this.activeAccount = this.props.accounts.active;
   }
 
   componentDidMount() {

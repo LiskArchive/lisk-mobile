@@ -39,7 +39,7 @@ class Login extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.accounts.list.length > 0) {
+    if (this.props.accounts.active) {
       this.props.navigation.navigate({
         routeName: 'Main',
         params: { address: '6307319849853921018L', key: 'address' },

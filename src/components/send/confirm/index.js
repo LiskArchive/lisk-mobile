@@ -16,7 +16,7 @@ class Form extends React.Component {
   send = () => {
     const { amount, address, accounts,
       transactionAdded, nextStep } = this.props;
-    const activeAccount = accounts.list[accounts.active];
+    const activeAccount = accounts.active;
     transactionAdded({
       recipientId: address,
       amount: toRawLsk(amount),
