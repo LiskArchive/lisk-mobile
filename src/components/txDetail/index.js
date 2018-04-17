@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { View, Text } from 'react-native';
 import { Divider } from 'react-native-elements';
 import FormattedDate from '../formattedDate';
+import { fromRawLsk } from '../../utilities/conversions';
 import styles from './styles';
 
 export default ({ navigation }) => {
@@ -18,7 +19,7 @@ export default ({ navigation }) => {
     <Text style={styles.value}>{ tx.recipientId }</Text>
     <Divider style={styles.divider} />
     <Text h4 style={styles.title}>Amount :</Text>
-    <Text style={styles.value}>{ tx.amount }</Text>
+    <Text style={styles.value}>{ `${fromRawLsk(tx.amount)} LSK` }</Text>
     <Text h4 style={styles.title}>Date :</Text>
     <FormattedDate style={styles.value}>{ tx.timestamp }</FormattedDate>
   </View>);

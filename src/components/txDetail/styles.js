@@ -17,6 +17,11 @@ const styles = {
     margin: 20,
     marginBottom: 0,
     backgroundColor: '#ccc'
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    verticalAlign: 'middle'
   }
 };
 
