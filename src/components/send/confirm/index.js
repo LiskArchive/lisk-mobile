@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { Button, Card } from 'react-native-elements';
+import { Button, FormLabel } from 'react-native-elements';
 import connect from 'redux-connect-decorator';
 import { transactionAdded } from '../../../actions/transactions';
 import styles from './styles'
@@ -29,15 +29,23 @@ class Form extends React.Component {
   render() {
     const { address, amount } = this.props;
     return (<View style={styles.container}>
-      <Card
-        title={`${amount} LSK`}>
-        <Text>To: {address}</Text>
+      <View style={styles.verticalAligner}>
+        <Text style={[styles.heading, styles.centerAlign, styles.gray]}>Confirm to send</Text>
+        <View style={styles.row}>
+          <FormLabel>To:</FormLabel>
+          <FormLabel labelStyle={[styles.address, styles.black]}>{address}</FormLabel>
+          <Text></Text>
+        </View>
+        <View style={styles.row}>
+          <FormLabel>Total (including 0.1LSK fee):</FormLabel>
+          <FormLabel labelStyle={[styles.amount, styles.black]}>{`${parseFloat(amount) + 0.1} LSK`}</FormLabel>
+        </View>
         <Button
           backgroundColor='#ff6236'
           style={styles.button}
           onPress={this.send}
           title='Next' />
-      </Card>
+      </View>
     </View>);
   }
 }

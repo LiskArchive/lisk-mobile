@@ -16,7 +16,17 @@ const styles = {
   title: {
     fontSize: 30,
     marginBottom: 20,
-  }
+  },
+  centerAlign: {
+    textAlign: 'center',
+  },
+  gray: {
+    color: '#666',
+  },
+  heading: {
+    fontSize: 24,
+    paddingBottom: 80,
+  },
 };
 
 export default StyleSheet.create(styles);

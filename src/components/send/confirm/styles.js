@@ -7,8 +7,38 @@ const styles = {
     flex: 1,
     backgroundColor: '#ffffff',
   },
-  inner: {
-    padding: 20
+  verticalAligner: {
+    padding: 20,
+  },
+  centerAlign: {
+    textAlign: 'center',
+  },
+  leftAlign: {
+    textAlign: 'left',
+  },
+  gray: {
+    color: '#666',
+  },
+  black: {
+    color: '#000',
+  },
+  heading: {
+    fontSize: 24,
+    paddingBottom: 80,
+  },
+  row: {
+  },
+  title: {
+    fontSize: 12,
+    paddingBottom: 10,
+  },
+  amount: {
+    fontSize: 24,
+    paddingBottom: 15,
+  },
+  address: {
+    fontSize: 24,
+    paddingBottom: 15,
   },
   button: {
     borderRadius: 0,
