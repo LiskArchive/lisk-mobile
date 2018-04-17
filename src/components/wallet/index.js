@@ -69,6 +69,7 @@ class Wallet extends React.Component {
       }
       
       <Transactions transactions={this.state.transactions}
+        navigate={this.props.navigation.navigate}
         account={this.state.account.address} />
     </View>);
   }

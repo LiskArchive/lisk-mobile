@@ -46,6 +46,7 @@ class Wallet extends React.Component {
     return (<View>
       {/* Here we can have a component to show some activity */}
       <Transactions transactions={this.props.transactions}
+        navigate={this.props.navigation.navigate}
         account={this.activeAccount.address} />
     </View>);
   }

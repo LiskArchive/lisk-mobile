@@ -17,13 +17,13 @@ class Transactions extends React.Component {
   }
 
   render() {
-    const { transactions, navigation, account } = this.props;
+    const { transactions, navigate, account } = this.props;
     return (<ScrollView>
       {
         !transactions || (transactions.count === 0 && transactions.pending.length === 0) ?
           <Empty /> :
           <List
-            navigation={navigation}
+            navigate={navigate}
             account={account}
             pending={transactions.pending}
             transactions={transactions.confirmed} />

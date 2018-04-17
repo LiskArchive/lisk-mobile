@@ -40,7 +40,10 @@ class Login extends React.Component {
 
   componentDidUpdate() {
     if (this.props.accounts.list.length > 0) {
-      this.props.navigation.navigate('Main');
+      this.props.navigation.navigate({
+        routeName: 'Main',
+        params: { address: '6307319849853921018L', key: 'address' },
+      });
     }
   }
 
@@ -88,6 +91,7 @@ class Login extends React.Component {
         <Logo />
         <FormLabel>Passphrase</FormLabel>
         <FormInput
+          styles={styles.input}
           ref={ref => this.passphraseInput = ref}
           value={passphrase.value}
           onChangeText={this.changeHandler.bind(this, 'passphrase')}/>
