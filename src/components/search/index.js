@@ -62,6 +62,7 @@ class Search extends React.Component {
         ref={input => this.query = input }
         onChangeText={(value) => this.changeHandler('query', value)}/>
       <Button
+        disabled={this.state.query.value.length < 2}
         onPress={this.search.bind(this)}
         buttonStyle={styles.button}
         backgroundColor='#ff6236'

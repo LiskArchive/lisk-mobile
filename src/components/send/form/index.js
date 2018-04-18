@@ -66,6 +66,7 @@ class Form extends React.Component {
             }
           </FormValidationMessage>
           <Button
+            disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onPress={this.goToNextState}
             buttonStyle={styles.button}
             backgroundColor='#ff6236'
