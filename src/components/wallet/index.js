@@ -11,11 +11,6 @@ import actionTypes from '../../constants/actions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 
-@connect(state => ({
-  accounts: state.accounts,
-  transactions: state.transactions,
-}), {
-})
 
 
 /**
@@ -27,9 +22,18 @@ import Transactions from '../transactions';
  * @todo Implement custom message: this can be used in case we need to notify the user
  * about any unforeseen issue/change
  */
+@connect(state => ({
+  accounts: state.accounts,
+  transactions: state.transactions,
+}), {
+})
 class Wallet extends React.Component {
   state = {
     account: {},
+    transactions: {
+      confirmed: [],
+      pending: []
+    },
   }
 
   componentDidMount() {
@@ -38,16 +42,17 @@ class Wallet extends React.Component {
     this.setAccount();
   }
 
-  setTransactions() {
+  setTransactions = () => {
     getTransactions({
       senderId: this.address,
       recipientId: this.address,
+      offset: this.state.transactions.confirmed.length,
     }).then((res) => {
       const { transactions, count } = res;
       this.setState({
         transactions: {
           count,
-          confirmed: transactions,
+          confirmed: [ ...this.state.transactions.confirmed, ...transactions ],
           pending: [],
         },
       });
@@ -69,6 +74,7 @@ class Wallet extends React.Component {
       }
       
       <Transactions transactions={this.state.transactions}
+        loadMore={this.setTransactions}
         navigate={this.props.navigation.navigate}
         account={this.state.account.address} />
     </View>);

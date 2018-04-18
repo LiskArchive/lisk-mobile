@@ -9,16 +9,40 @@ import Empty from './empty';
  * @todo 
  */
 class Transactions extends React.Component {
-  constructor() {
-    super();
+  state = {
+    reachEnd: true,
+  };
 
-    this.state = {
+  
+  loadMore = ({nativeEvent}) => {
+
+    const { transactions } = this.props;
+
+    const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+      const paddingToBottom = 20;
+      return (layoutMeasurement.height + contentOffset.y >=
+        contentSize.height - paddingToBottom) && this.state.reachEnd;
     };
+    if (isCloseToBottom(nativeEvent) && transactions.confirmed.length < transactions.count ) {
+      console.log('end');
+      this.props.loadMore();
+      this.setState({
+        reachEnd: false,
+      });
+    }
+  }
+
+  componentWillReceiveProps = () => {
+    this.setState({
+      reachEnd: true,
+    });
   }
 
   render() {
     const { transactions, navigate, account } = this.props;
-    return (<ScrollView>
+
+    return (<ScrollView onScroll={this.loadMore}
+    scrollEventThrottle={400}>
       {
         !transactions || (transactions.count === 0 && transactions.pending.length === 0) ?
           <Empty /> :

@@ -39,6 +39,7 @@ class Wallet extends React.Component {
     this.props.transactionsLoaded({
       senderId: this.activeAccount.address,
       recipientId: this.activeAccount.address,
+      offset: 0,
     });
   }
 
@@ -46,6 +47,11 @@ class Wallet extends React.Component {
     return (<View>
       {/* Here we can have a component to show some activity */}
       <Transactions transactions={this.props.transactions}
+        loadMore={() =>this.props.transactionsLoaded({
+          senderId: this.activeAccount.address,
+          recipientId: this.activeAccount.address,
+          offset: this.props.transactions.confirmed.length,
+        })}
         navigate={this.props.navigation.navigate}
         account={this.activeAccount.address} />
     </View>);
