@@ -20,8 +20,7 @@ const styles = {
   },
   avatar: {
     width: 40,
-    height: 40,
-    verticalAlign: 'middle'
+    height: 40
   }
 };
 
