@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 import Landing from './landing';
 import Login from './login';
 import TxDetail from './txDetail';
@@ -9,6 +9,7 @@ import Explore from './explore';
 import Wallet from './wallet';
 import OwnWallet from './ownWallet';
 import styles from './styles';
+import LogoutButton from './logoutButton';
 
 export const Tabs = TabNavigator({
   OwnWallet: {
@@ -65,6 +66,7 @@ export default StackNavigator(
     Main: {
       screen: Tabs,
       navigationOptions:  {
+        headerRight: <LogoutButton />,
         headerBackTitle: 'Back',
         headerTintColor: styles.white,
         headerLeft: null,
@@ -78,6 +80,7 @@ export default StackNavigator(
     Wallet: {
       screen: Wallet,
       navigationOptions:  {
+        headerRight: <LogoutButton />,
         title: 'Wallet',
         headerTintColor: styles.white,
         headerStyle: {
@@ -90,6 +93,7 @@ export default StackNavigator(
     TxDetail: {
       screen: TxDetail,
       navigationOptions:  {
+        headerRight: <LogoutButton />,
         title: 'Details',
         headerTintColor: styles.white,
         headerStyle: {
