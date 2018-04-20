@@ -10,8 +10,7 @@ import { getTransactions, getAccount, extractAddress } from '../../utilities/htt
 import actionTypes from '../../constants/actions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
-
-
+import InfiniteScrollView from '../infiniteScrollView';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -60,14 +59,17 @@ class Wallet extends React.Component {
   }
 
   setAccount() {
-    getAccount(this.address)
+    getAccount(this.props.navigation.state.params.address)
       .then((account) => {
         this.setState({ account });
       });
   }
 
   render() {
-    return (<View>
+    return (<InfiniteScrollView
+      list={this.state.transactions.confirmed}
+      count={this.state.transactions.count}
+      loadMore={this.setTransactions}>
       {
         this.state.account ?
           <AccountSummary account={this.state.account} /> : <Text>Loading account</Text>
@@ -77,7 +79,7 @@ class Wallet extends React.Component {
         loadMore={this.setTransactions}
         navigate={this.props.navigation.navigate}
         account={this.state.account.address} />
-    </View>);
+    </InfiniteScrollView>);
   }
 }
 
