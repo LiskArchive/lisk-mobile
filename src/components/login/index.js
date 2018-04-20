@@ -2,7 +2,7 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import { Button, FormLabel,
-  FormInput, FormValidationMessage } from 'react-native-elements'
+  FormInput, FormValidationMessage } from 'react-native-elements';
 import { accountSaved, accountLoggedIn } from '../../actions/accounts';
 import styles from './styles';
 import { validatePassphrase } from '../../utilities/passphrase';
@@ -40,10 +40,7 @@ class Login extends React.Component {
 
   componentDidUpdate() {
     if (this.props.accounts.active) {
-      this.props.navigation.navigate({
-        routeName: 'Main',
-        params: { address: '6307319849853921018L', key: 'address' },
-      });
+      this.props.navigation.replace('Main');
     }
   }
 
