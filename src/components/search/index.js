@@ -66,7 +66,7 @@ class Search extends React.Component {
         onPress={this.search.bind(this)}
         buttonStyle={styles.button}
         backgroundColor='#ff6236'
-        title='Sch' />
+        title='Search' />
     </View>);
   }
 }
