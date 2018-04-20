@@ -6,7 +6,7 @@ import Confirm from './confirm';
 import Result from './result';
 
 export default () => (
-  <MultiStep finalCallback={() => console.log('done')}>
+  <MultiStep finalCallback={() => {}}>
     <Form/>
     <Confirm />
     <Result />
