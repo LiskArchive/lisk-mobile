@@ -13,14 +13,7 @@ import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import extractAddress from '../../utilities/http';
 import styles from './styles';
-
-@connect(state => ({
-  accounts: state.accounts,
-  transactions: state.transactions,
-}), {
-  transactionsLoaded,
-})
-
+import InfiniteScrollView from '../infiniteScrollView';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -31,6 +24,12 @@ import styles from './styles';
  * @todo Implement custom message: this can be used in case we need to notify the user
  * about any unforeseen issue/change
  */
+@connect(state => ({
+  accounts: state.accounts,
+  transactions: state.transactions,
+}), {
+  transactionsLoaded,
+})
 class Wallet extends React.Component {
   componentWillMount() {
     this.activeAccount = this.props.accounts.active;
@@ -45,7 +44,14 @@ class Wallet extends React.Component {
   }
 
   render() {
-    return (<View>
+    return (<InfiniteScrollView
+      list={this.props.transactions.confirmed}
+      count={this.props.transactions.count}
+      loadMore={() =>this.props.transactionsLoaded({
+        senderId: this.activeAccount.address,
+        recipientId: this.activeAccount.address,
+        offset: this.props.transactions.confirmed.length,
+      })}>
       {
         !this.props.accounts.active ?
           <Text>Loading account</Text> :
@@ -53,14 +59,9 @@ class Wallet extends React.Component {
           </AccountSummary>
       }
       <Transactions transactions={this.props.transactions}
-        loadMore={() =>this.props.transactionsLoaded({
-          senderId: this.activeAccount.address,
-          recipientId: this.activeAccount.address,
-          offset: this.props.transactions.confirmed.length,
-        })}
         navigate={this.props.navigation.navigate}
         account={this.activeAccount.address} />
-    </View>);
+    </InfiniteScrollView>);
   }
 }
 
