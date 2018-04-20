@@ -46,6 +46,32 @@ export const accountsRetrieved = () =>
   };
 
 /**
+ * Returns a pure action object to store the given account
+ * in the list of followed accounts
+ *
+ * @param {String} address - Valid Lisk ID
+ * 
+ * @returns {Object} - Pure action function
+ */
+export const accountFollowed = (address) => ({
+    type: actionTypes.accountFollowed,
+    data: address,
+  });
+
+/**
+ * Returns a pure action object to remove the given account
+ * from the list of followed accounts
+ *
+ * @param {String} account.address - Valid Lisk ID
+ * 
+ * @returns {Object} - Pure action function
+ */
+export const accountUnFollowed = (address) => ({
+  type: actionTypes.accountUnFollowed,
+  data: address,
+});
+
+/**
  * Uses Http call to fetch Account and delegate info of a given
  * passphrase and dispatches accountLoggedIn action
  *
