@@ -41,6 +41,7 @@ class Wallet extends React.Component {
     this.props.transactionsLoaded({
       senderId: this.activeAccount.address,
       recipientId: this.activeAccount.address,
+      offset: 0,
     });
   }
 
@@ -56,6 +57,11 @@ class Wallet extends React.Component {
           </AccountSummary>
       }
       <Transactions transactions={this.props.transactions}
+        loadMore={() =>this.props.transactionsLoaded({
+          senderId: this.activeAccount.address,
+          recipientId: this.activeAccount.address,
+          offset: this.props.transactions.confirmed.length,
+        })}
         navigate={this.props.navigation.navigate}
         account={this.activeAccount.address} />
     </View>);

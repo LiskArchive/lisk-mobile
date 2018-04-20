@@ -20,6 +20,7 @@ export default ({ navigation }) => {
     <Divider style={styles.divider} />
     <Text h4 style={styles.title}>Amount :</Text>
     <Text style={styles.value}>{ `${fromRawLsk(tx.amount)} LSK` }</Text>
+    <Divider style={styles.divider} />
     <Text h4 style={styles.title}>Date :</Text>
     <FormattedDate style={styles.value}>{ tx.timestamp }</FormattedDate>
   </View>);
