@@ -1,6 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import BackgroundImage from '../background';
 import Logo from '../logo';
 import { getNetwork, networks } from '../../utilities/networks';
@@ -12,6 +13,7 @@ import actionTypes from '../../constants/actions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import extractAddress from '../../utilities/http';
+import styles from './styles';
 
 @connect(state => ({
   accounts: state.accounts,
@@ -44,7 +46,15 @@ class Wallet extends React.Component {
 
   render() {
     return (<View>
-      {/* Here we can have a component to show some activity */}
+      {
+        !this.props.accounts.active ?
+          <Text>Loading account</Text> :
+          <AccountSummary account={this.props.accounts.active}>
+            <Button
+              title='Logout'
+              buttonStyle={styles.logout}/>
+          </AccountSummary>
+      }
       <Transactions transactions={this.props.transactions}
         navigate={this.props.navigation.navigate}
         account={this.activeAccount.address} />
