@@ -1,11 +1,13 @@
 import { AsyncStorage } from 'react-native';
 import storage from "../constants/storage";
+import reg from '../constants/regex';
 
-const blankAccounts = { list: [], active: -1 };
+const blankAccounts = [];
+const storageTitle = 'LiskfollowedAccounts';
 
 const validateAccounts = (data) => {
   const parsedData = JSON.parse(data);
-  if (parsedData.list && parseInt(parsedData.active) < parsedData.list.length) {
+  if (parsedData.reduce((acc, item) => reg.address.test(item), true)) {
     return parsedData;
   }
   return blankAccounts;
@@ -35,11 +37,16 @@ async function fetchData (key) {
 }
 
 export const retrieveAccounts = () =>
-  fetchData(storage.accounts)
+  fetchData(storageTitle)
     .then(data => validateAccounts(data))
     .catch(() => blankAccounts);
 
-export const storeAccounts = (data) =>
-  persistData(storage.accounts, data)
+export const storeFollowedAccount = (address, list) =>
+  persistData(storageTitle, [...list.filter(item => item !== address), address])
+    .then(data => data)
+    .catch(err => err);
+
+export const storeUnFollowedAccount = (address, list) =>
+  persistData(storageTitle, list.filter(item => item !== address))
     .then(data => data)
     .catch(err => err);
