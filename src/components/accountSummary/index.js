@@ -14,7 +14,6 @@ import styles from './styles';
   accountFollowed,
   accountUnFollowed,
 })
-
 class AccountSummary extends React.Component {
   toggleFollow(address) {
     const { account, followedAccounts, accountFollowed, accountUnFollowed } = this.props;

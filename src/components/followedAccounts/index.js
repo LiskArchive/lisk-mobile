@@ -13,7 +13,6 @@ import Empty from './empty';
 @connect(state => ({
   accounts: state.accounts,
 }), {})
-
 class FollowedAccounts extends React.Component {
   render() {
     const { accounts } = this.props;
