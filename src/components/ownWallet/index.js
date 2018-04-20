@@ -1,7 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
 import BackgroundImage from '../background';
 import Logo from '../logo';
 import { getNetwork, networks } from '../../utilities/networks';
@@ -51,9 +50,6 @@ class Wallet extends React.Component {
         !this.props.accounts.active ?
           <Text>Loading account</Text> :
           <AccountSummary account={this.props.accounts.active}>
-            <Button
-              title='Logout'
-              buttonStyle={styles.logout}/>
           </AccountSummary>
       }
       <Transactions transactions={this.props.transactions}
