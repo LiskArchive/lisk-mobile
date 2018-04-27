@@ -8,10 +8,10 @@ const styles = {
     backgroundColor: '#ffffff',
   },
   inner: {
-    padding: 20
+    padding: 20,
   },
   button: {
-    marginTop: 20
+    marginTop: 20,
   },
   title: {
     fontSize: 30,

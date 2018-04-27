@@ -1,6 +1,5 @@
 import React from 'react';
-import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
-import { Icon, Button } from 'react-native-elements';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import Landing from './landing';
 import Login from './login';
 import TxDetail from './txDetail';
@@ -10,14 +9,16 @@ import Wallet from './wallet';
 import OwnWallet from './ownWallet';
 import styles from './styles';
 import LogoutButton from './logoutButton';
+import Icon from './toolBox/icons';
 
+// eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: {
       title: 'Wallet',
       tabBarLabel: 'Wallet',
-      tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
+      tabBarIcon: <Icon name='list' color={styles.iconsTintColor} />,
     },
   },
   Send: {
@@ -25,7 +26,7 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Send',
       tabBarLabel: 'Send',
-      tabBarIcon: ({ tintColor }) => <Icon name="send" size={35} color={tintColor} />
+      tabBarIcon: <Icon name='send' color={styles.iconsTintColor} />,
     },
   },
   Explore: {
@@ -33,7 +34,7 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Explore',
       tabBarLabel: 'Explore',
-      tabBarIcon: ({ tintColor }) => <Icon name="search" size={35} color={tintColor} />
+      tabBarIcon: <Icon name='search' color={styles.iconsTintColor} />,
     },
   },
 }, {
@@ -49,23 +50,24 @@ export const Tabs = TabNavigator({
   headerMode: 'screen',
 });
 
+// eslint-disable-next-line new-cap
 export default StackNavigator(
   {
     Landing: {
       screen: Landing,
       navigationOptions: {
-        header: null
+        header: null,
       },
     },
     Login: {
       screen: Login,
       navigationOptions: {
-        header: null
+        header: null,
       },
     },
     Main: {
       screen: Tabs,
-      navigationOptions:  {
+      navigationOptions: {
         headerRight: <LogoutButton />,
         headerBackTitle: 'Back',
         headerTintColor: styles.white,
@@ -73,36 +75,36 @@ export default StackNavigator(
         headerStyle: {
           backgroundColor: styles.headerColor,
           borderBottomColor: styles.headerColor,
-          borderBottomWidth: 3
-        }
-      }
+          borderBottomWidth: 3,
+        },
+      },
     },
     Wallet: {
       screen: Wallet,
-      navigationOptions:  {
+      navigationOptions: {
         headerRight: <LogoutButton />,
         title: 'Wallet',
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
           borderBottomColor: styles.headerColor,
-          borderBottomWidth: 3
-        }
-      }
+          borderBottomWidth: 3,
+        },
+      },
     },
     TxDetail: {
       screen: TxDetail,
-      navigationOptions:  {
+      navigationOptions: {
         headerRight: <LogoutButton />,
         title: 'Details',
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
           borderBottomColor: styles.headerColor,
-          borderBottomWidth: 3
-        }
-      }
-    }
+          borderBottomWidth: 3,
+        },
+      },
+    },
   },
   {
     initialRouteName: 'Landing',

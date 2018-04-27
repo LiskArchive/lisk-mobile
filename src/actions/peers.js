@@ -1,7 +1,8 @@
 // import Lisk from 'lisk-js';
 import actionTypes from '../constants/actions';
-import { getMainNetNode, getNetHash } from '../utilities/networks';
 
+// This is supended until we can decide about Lisk elements
+// eslint-disable-next-line
 const peerSet = (data, config) => ({
   data: Object.assign({
     passphrase: data.passphrase,

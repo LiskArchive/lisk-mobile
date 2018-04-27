@@ -16,18 +16,17 @@ const mnemonic = word => [
   'ashley',
   'marcel',
   'rose',
-  'luis',
-  ].includes(word);
+  'luis'].includes(word);
 
 /**
  * Checks validity of passphrase using to mnemonic
- * 
+ *
  * detects validity of each word individually
  * the resulting array is a number instead of each word indicating its validity status
  * 0 -> valid
  * 1 -> not a mnemonic word
  * 2 -> duplicated
- * 
+ *
  * over status:
  * valid {Number}
  * 0 -> valid
@@ -39,6 +38,7 @@ const mnemonic = word => [
  *  {Number[]} words - The v. status of each word
  *  {Boolean} valid - The v. status of the given passphrase
  */
+// eslint-disable-next-line import/prefer-default-export
 export const validatePassphrase = (passphrase) => {
   const rawWords = passphrase.trim().replace(/\s+/g, ' ').split(' ').filter(item => item !== '');
   if (rawWords.length === 0) {
@@ -55,7 +55,7 @@ export const validatePassphrase = (passphrase) => {
     return 0; // valid and unique
   });
 
-  let valid = words.reduce((acc, item) => acc + item, 0);
+  let valid = wordsStatus.reduce((acc, item) => acc + item, 0);
   if (valid > 0) {
     valid = 2;
   } else if (valid === 0 && words.length < 12) {

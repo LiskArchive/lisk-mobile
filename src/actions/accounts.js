@@ -1,4 +1,4 @@
-import actionTypes from "../constants/actions";
+import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
 import { getAccount, extractAddress } from '../utilities/http';
 
@@ -12,7 +12,7 @@ import { getAccount, extractAddress } from '../utilities/http';
  * @param {Object} data - The accounts data to get stored in asyncStorage
  * @returns {Function} Thunk action function
  */
-export const accountsStored = (data) =>
+export const accountsStored = data =>
   (dispatch) => {
     storeAccounts(data)
       .then(() => {
@@ -31,7 +31,7 @@ export const accountsStored = (data) =>
  * in Storage utility, thus no need for such logics here.
  *
  * Rejection must is handled in Storage utility and returns Raw account interface
- * 
+ *
  * @returns {Function} Thunk action function
  */
 export const accountsRetrieved = () =>
@@ -50,23 +50,23 @@ export const accountsRetrieved = () =>
  * in the list of followed accounts
  *
  * @param {String} address - Valid Lisk ID
- * 
+ *
  * @returns {Object} - Pure action function
  */
-export const accountFollowed = (address) => ({
-    type: actionTypes.accountFollowed,
-    data: address,
-  });
+export const accountFollowed = address => ({
+  type: actionTypes.accountFollowed,
+  data: address,
+});
 
 /**
  * Returns a pure action object to remove the given account
  * from the list of followed accounts
  *
  * @param {String} account.address - Valid Lisk ID
- * 
+ *
  * @returns {Object} - Pure action function
  */
-export const accountUnFollowed = (address) => ({
+export const accountUnFollowed = address => ({
   type: actionTypes.accountUnFollowed,
   data: address,
 });
@@ -82,14 +82,14 @@ export const accountUnFollowed = (address) => ({
  * @returns {Function} Thunk function
  */
 export const accountLoggedIn = ({ passphrase }) =>
-  (dispatch) =>
+  dispatch =>
     getAccount(extractAddress(passphrase))
       .then((account) => {
         dispatch({
           type: actionTypes.accountLoggedIn,
           data: { ...account, passphrase },
         });
-      }).catch(error => console.log(error));
+      });
 
 /**
  * Returns action object with no Api calls.

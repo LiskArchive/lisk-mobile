@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = {
-  image:{
+  image: {
     backgroundColor: '#002449',
     flex: 1,
     resizeMode: 'cover',

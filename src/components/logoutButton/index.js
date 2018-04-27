@@ -2,17 +2,17 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { Button } from 'react-native-elements';
-import { accountLoggedOut } from '../../actions/accounts';
+import { accountLoggedOut as accountLoggedOutAction } from '../../actions/accounts';
 
 @connect(() => ({}), {
-  accountLoggedOut,
+  accountLoggedOut: accountLoggedOutAction,
 })
 class LogoutButton extends React.Component {
-	render() {
-		const { accountLoggedOut } = this.props;
-		return <Button title='Logout' onPress={accountLoggedOut} buttonStyle ={{backgroundColor: "transparent"}}/>;
-	}
+  render() {
+    const { accountLoggedOut } = this.props;
+    return <Button title='Logout' onPress={accountLoggedOut} buttonStyle ={{ backgroundColor: 'transparent' }}/>;
+  }
 }
 
 export default LogoutButton;
-	
+

@@ -73,8 +73,7 @@ class MultiStep extends React.Component {
   }
 
   render() {
-    const { children, finalCallback,
-      browsable, backButtonLabel, prevPage } = this.props;
+    const { children, finalCallback } = this.props;
     const { step } = this.state;
     const extraProps = {
       nextStep: step.nextStep,

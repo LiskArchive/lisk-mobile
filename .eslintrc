@@ -1,0 +1,52 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb-base",
+    "plugin:react/recommended"
+  ],
+  "env": {
+      "browser": true
+  },
+  "plugins": [
+    "react",
+    "import",
+    "babel",
+    "jest"
+  ],
+  "globals": {
+    "describe": true,
+    "it": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "PRODUCTION": true,
+    "TEST": true
+  },
+  "rules": {
+    "func-names": "off",
+    "global-require": "off",
+    "new-cap": ["error", {
+      "newIsCapExceptions": ["mnemonic"]
+    }],
+
+    "react/prop-types": "off",
+    "no-plusplus": "off",
+    "no-underscore-dangle": "off",
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": [
+        "./src/**/*.test.js",
+        "./test/**/*.js",
+        "./src/**/stories.js",
+        "./src/tests.js",
+        "./src/i18n-scanner.js"
+        ]
+      }
+    ],
+    "linebreak-style": 0,
+    "no-param-reassign": "off"
+  },
+  "settings": {
+    "mocha/additionalTestFunctions": [
+      "describeModule"
+    ]
+  }
+}

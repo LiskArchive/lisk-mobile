@@ -1,5 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-const styles = {};
+const styles = {
+  container: {
+
+  },
+};
 
 export default StyleSheet.create(styles);

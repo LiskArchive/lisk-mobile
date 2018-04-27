@@ -1,5 +1,4 @@
 import { AsyncStorage } from 'react-native';
-import storage from "../constants/storage";
 import reg from '../constants/regex';
 
 const blankAccounts = [];
@@ -14,7 +13,7 @@ const validateAccounts = (data) => {
 };
 
 
-async function persistData (key, data) {
+async function persistData(key, data) {
   try {
     await AsyncStorage.removeItem(key);
     await AsyncStorage.setItem(key, JSON.stringify(data));
@@ -22,17 +21,17 @@ async function persistData (key, data) {
   } catch (error) {
     return new Promise()
       .then(() => ({ message: 'Error persisting accounts 1' }))
-      .catch(() => ({ message: 'Error persisting accounts 2' }))
+      .catch(() => ({ message: 'Error persisting accounts 2' }));
   }
 }
 
-async function fetchData (key) {
+async function fetchData(key) {
   try {
     return await AsyncStorage.getItem(key);
   } catch (error) {
     return new Promise()
       .then(() => ({ message: 'Error retrieving accounts 1' }))
-      .catch(() => ({ message: 'Error retrieving accounts 2' }))
+      .catch(() => ({ message: 'Error retrieving accounts 2' }));
   }
 }
 

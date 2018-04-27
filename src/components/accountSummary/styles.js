@@ -31,7 +31,7 @@ const styles = {
     fontSize: 12,
     color: '#666',
     textAlign: 'center',
-  }
+  },
 };
 
 export default StyleSheet.create(styles);

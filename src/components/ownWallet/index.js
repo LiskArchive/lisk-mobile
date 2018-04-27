@@ -1,18 +1,9 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { Text, View } from 'react-native';
-import BackgroundImage from '../background';
-import Logo from '../logo';
-import { getNetwork, networks } from '../../utilities/networks';
-import Router from '../router';
-import { activePeerSet } from '../../actions/peers';
-import { accountsRetrieved } from '../../actions/accounts';
-import { transactionsLoaded } from '../../actions/transactions';
-import actionTypes from '../../constants/actions';
+import { Text } from 'react-native';
+import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
-import extractAddress from '../../utilities/http';
-import styles from './styles';
 import InfiniteScrollView from '../infiniteScrollView';
 
 /**
@@ -28,7 +19,7 @@ import InfiniteScrollView from '../infiniteScrollView';
   accounts: state.accounts,
   transactions: state.transactions,
 }), {
-  transactionsLoaded,
+  transactionsLoaded: transactionsLoadedAction,
 })
 class Wallet extends React.Component {
   componentWillMount() {
@@ -47,7 +38,7 @@ class Wallet extends React.Component {
     return (<InfiniteScrollView
       list={this.props.transactions.confirmed}
       count={this.props.transactions.count}
-      loadMore={() =>this.props.transactionsLoaded({
+      loadMore={() => this.props.transactionsLoaded({
         senderId: this.activeAccount.address,
         recipientId: this.activeAccount.address,
         offset: this.props.transactions.confirmed.length,

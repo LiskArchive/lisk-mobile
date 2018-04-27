@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 const styles = {
+  container: {
+    marginTop: 0,
+  },
   listItemEven: {
     backgroundColor: '#eff4f9',
   },
@@ -10,7 +13,7 @@ const styles = {
   noBorder: {
     borderWidth: 0,
     marginTop: -1,
-  }
+  },
 };
 
 export default StyleSheet.create(styles);

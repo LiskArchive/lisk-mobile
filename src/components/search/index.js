@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
+import React from 'react';
+import { View } from 'react-native';
+import { Button, FormLabel, FormInput } from 'react-native-elements';
 import styles from './styles';
 import reg from '../../constants/regex';
 
@@ -15,7 +15,7 @@ class Search extends React.Component {
     };
 
     this.validator = {
-      query: str => true,
+      query: () => true,
     };
   }
 
@@ -49,18 +49,20 @@ class Search extends React.Component {
       validity = this.validator[name](value) ? 0 : 1;
     }
 
-    this.setState({[name]: {
-      value,
-      validity,
-    }});
+    this.setState({
+      [name]: {
+        value,
+        validity,
+      },
+    });
   }
 
   render() {
     return (<View>
       <FormLabel style={styles.title}>Search for Lisk ID, Tx ID or delegate name</FormLabel>
       <FormInput
-        ref={input => this.query = input }
-        onChangeText={(value) => this.changeHandler('query', value)}/>
+        ref={(input) => { this.query = input; }}
+        onChangeText={value => this.changeHandler('query', value)}/>
       <Button
         disabled={this.state.query.value.length < 2}
         onPress={this.search.bind(this)}

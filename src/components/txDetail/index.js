@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import { Divider } from 'react-native-elements';
 import FormattedDate from '../formattedDate';
 import { fromRawLsk } from '../../utilities/conversions';
 import styles from './styles';
 
-export default ({ navigation }) => {
+const TxDetail = ({ navigation }) => {
   const tx = navigation.getParam('tx', null);
 
   return (<View style={styles.container}>
@@ -24,4 +24,6 @@ export default ({ navigation }) => {
     <Text h4 style={styles.title}>Date :</Text>
     <FormattedDate style={styles.value}>{ tx.timestamp }</FormattedDate>
   </View>);
-}
+};
+
+export default TxDetail;
