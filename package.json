@@ -1,21 +1,40 @@
 {
   "name": "lisk-mobile",
   "version": "0.1.0",
+  "description": "The official Lisk mobile application",
+  "homepage": "https://github.com/LiskHQ/lisk-mobile",
+  "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",
   "private": true,
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.15.1",
+    "eslint-plugin-react": "^7.7.0",
     "jest-expo": "25.0.0",
-    "redux-connect-decorator": "^0.2.0",
-    "react-native-scripts": "1.11.1"
+    "react-native-scripts": "1.11.1",
+    "redux-connect-decorator": "^0.2.0"
   },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js"
+    "test": "node node_modules/jest/bin/jest.js",
+    "eslint": "eslint ./"
+  },
+  "author": "Lisk Foundation <admin@lisk.io>, lightcurve GmbH <admin@lightcurve.io>",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LiskHQ/lisk-mobile"
   },
   "jest": {
     "preset": "jest-expo"
@@ -38,6 +57,11 @@
     "react-test-renderer": "16.2.0",
     "redux": "^3.7.2",
     "redux-connect-decorator": "^0.2.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "eslint": "4.8.0",
+    "eslint-config-airbnb": "15.1.0",
+    "eslint-config-google": "0.9.1",
+    "eslint-loader": "1.9.0",
+    "eslint-plugin-babel": "4.1.2"
   }
 }
