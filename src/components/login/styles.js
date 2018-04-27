@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 const styles = {
-  content:{
-    flex:1,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center'
+  content: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  container:{
+  container: {
     width: '100%',
   },
   button: {

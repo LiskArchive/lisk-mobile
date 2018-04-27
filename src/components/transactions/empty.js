@@ -1,5 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-export default () =>
-  (<Text>No Transactions</Text>);
+const EmptyState = () =>
+  <Text>No Transactions</Text>;
+
+export default EmptyState;

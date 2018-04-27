@@ -5,8 +5,8 @@ import Empty from './empty';
 
 /**
  * The container component containing login and create account functionality
- * 
- * @todo 
+ *
+ * @todo
  */
 class Transactions extends React.Component {
   render() {

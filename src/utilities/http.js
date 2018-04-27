@@ -1,4 +1,4 @@
-const queryStringify = (data) =>
+const queryStringify = data =>
   Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
 /**
  * This is a wrapper over react native fetch Api
@@ -10,42 +10,36 @@ const queryStringify = (data) =>
  *  This method adds http://localhost:5000 to the beginning
  * @param {Object} data - A key-value pair of payload data
  * @param {String?} method - GET/POST/UPDATE/DELETE
- * 
+ *
  * @returns {Promise} The HTTP call promise
  */
 // const baseURL = 'http://10.197.52.95:5000';
 const baseURL = 'http://localhost:5000';
-function Http (path, data, method='GET') {
+function Http(path, data, method = 'GET') {
   let url;
-  let options = {};
   let payload;
   if (typeof method === 'string' && method !== 'GET') {
     url = `${baseURL}${path}`;
     payload = JSON.stringify(data);
-    return fetch(
-      url, {
-        method,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: payload
-    }).then(res => res.json())
-    .catch(error => console.log(error));
-  } else {
-    const params = queryStringify(data);
-    url = `${baseURL}${path}?${params}`;
-    payload = JSON.stringify({});
-    return fetch(
-      url, {
-        method,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-    }).then(res => res.json())
-    .catch(error => console.log(error));
+    return fetch(url, {
+      method,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: payload,
+    }).then(res => res.json());
   }
+  const params = queryStringify(data);
+  url = `${baseURL}${path}?${params}`;
+  payload = JSON.stringify({});
+  return fetch(url, {
+    method,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(res => res.json());
 }
 
 /**
@@ -55,7 +49,8 @@ function Http (path, data, method='GET') {
  * @param {String} address - Lisk ID
  * @returns {Promise} The HTTP call promise
  */
-export const getAccount = (address) =>
+export const getAccount = address =>
+  // eslint-disable-next-line new-cap
   Http('/getAccount', { address });
 
 /**
@@ -64,12 +59,12 @@ export const getAccount = (address) =>
  *
  * @todo This is temporary and must be removed after Lisk elements
  * is injected to this project
+ * Must be Http('/address', { key });
  *
  * @param {String} key - A valid Passphrase or PublicKey
  * @returns {Promise} The HTTP call promise
  */
-export const extractAddress = (key) =>
-  // Http('/address', { key });
+export const extractAddress = () =>
   '6307319849853921018L';
 
 /**
@@ -88,17 +83,18 @@ export const getTransactions = (data) => {
   const params = Object.assign({
     limit: 25,
     offset: 0,
-    orderBy: 'timestamp:desc'
+    orderBy: 'timestamp:desc',
   }, data);
   if (!params.senderId) {
-    delete params.senderId
+    delete params.senderId;
   }
 
   if (!params.recipientId) {
-    delete params.recipientId
+    delete params.recipientId;
   }
+  // eslint-disable-next-line new-cap
   return Http('/transactions', params);
-}
+};
 
 /**
  * Creates a new transactions
@@ -111,5 +107,6 @@ export const getTransactions = (data) => {
  *
  * @returns {Promise} The HTTP call promise
  */
-export const send = (data) =>
+export const send = data =>
+  // eslint-disable-next-line new-cap
   Http('/transactions', data, 'POST');

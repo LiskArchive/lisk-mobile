@@ -1,26 +1,25 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
-import { Button, FormLabel,
-  FormInput, FormValidationMessage } from 'react-native-elements';
-import { accountSaved, accountLoggedIn } from '../../actions/accounts';
+import {
+  Button, FormLabel,
+  FormInput, FormValidationMessage,
+} from 'react-native-elements';
+import { accountLoggedIn as accountLoggedInAction } from '../../actions/accounts';
 import styles from './styles';
 import { validatePassphrase } from '../../utilities/passphrase';
 import Logo from '../logo';
+
+/**
+ * The container component containing login and create account functionality
+ */
 
 @connect(state => ({
   peers: state.peers,
   accounts: state.accounts,
 }), {
-  accountLoggedIn,
-  accountSaved,
+  accountLoggedIn: accountLoggedInAction,
 })
-
-/**
- * The container component containing login and create account functionality
- * 
- * @todo 
- */
 class Login extends React.Component {
   constructor() {
     super();
@@ -44,6 +43,7 @@ class Login extends React.Component {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   trim(passphrase) {
     return passphrase.trim().replace(/\s+/g, ' ');
   }
@@ -51,12 +51,12 @@ class Login extends React.Component {
   /**
    * Will be called when login form submits
    * fires the activePeerSet action
-   * 
+   *
    * @param {String} passphrase - valid mnemonic passphrase
    */
   onLoginSubmission(passphrase) {
     if (passphrase.validity !== 0 && passphrase.validity !== 3) {
-      this.passphraseInput.shake()
+      this.passphraseInput.shake();
     } else {
       this.props.accountLoggedIn({
         passphrase: this.trim(passphrase.value),
@@ -66,10 +66,10 @@ class Login extends React.Component {
 
   /**
    * General change handler to get bound to react component event listeners
-   * 
+   *
    * @param {String} key - The key in react component state to be altered
    * @param {any} value - The corresponding value. interface depends on the key
-   * 
+   *
    * @todo Implement error status/message
    */
   changeHandler(key, value) {
@@ -89,7 +89,7 @@ class Login extends React.Component {
         <FormLabel>Passphrase</FormLabel>
         <FormInput
           styles={styles.input}
-          ref={ref => this.passphraseInput = ref}
+          ref={(ref) => { this.passphraseInput = ref; }}
           value={passphrase.value}
           onChangeText={this.changeHandler.bind(this, 'passphrase')}/>
         <FormValidationMessage labelStyle={styles.errorMessage}>

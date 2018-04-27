@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Image } from 'react-native';
 import bg from '../../assets/images/bg.png';
 import styles from './styles';

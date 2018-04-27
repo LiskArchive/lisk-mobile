@@ -1,14 +1,13 @@
 import React, { Fragment } from 'react';
 import connect from 'redux-connect-decorator';
 import { FormLabel } from 'react-native-elements';
-import { TextInput, Button, Text, ScrollView } from 'react-native';
 import List from './list';
 import Empty from './empty';
 
 /**
  * The container component containing login and create account functionality
- * 
- * @todo 
+ *
+ * @todo
  */
 @connect(state => ({
   accounts: state.accounts,

@@ -1,13 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { Text, View } from 'react-native';
-import BackgroundImage from '../background';
-import Logo from '../logo';
-import { getNetwork, networks } from '../../utilities/networks';
-import Router from '../router';
-import { activePeerSet } from '../../actions/peers';
-import { getTransactions, getAccount, extractAddress } from '../../utilities/http';
-import actionTypes from '../../constants/actions';
+import { Text } from 'react-native';
+import { getTransactions, getAccount } from '../../utilities/http';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
@@ -24,14 +18,13 @@ import InfiniteScrollView from '../infiniteScrollView';
 @connect(state => ({
   accounts: state.accounts,
   transactions: state.transactions,
-}), {
-})
+}), {})
 class Wallet extends React.Component {
   state = {
     account: {},
     transactions: {
       confirmed: [],
-      pending: []
+      pending: [],
     },
   }
 
@@ -51,7 +44,7 @@ class Wallet extends React.Component {
       this.setState({
         transactions: {
           count,
-          confirmed: [ ...this.state.transactions.confirmed, ...transactions ],
+          confirmed: [...this.state.transactions.confirmed, ...transactions],
           pending: [],
         },
       });
@@ -74,7 +67,7 @@ class Wallet extends React.Component {
         this.state.account ?
           <AccountSummary account={this.state.account} /> : <Text>Loading account</Text>
       }
-      
+
       <Transactions transactions={this.state.transactions}
         loadMore={this.setTransactions}
         navigate={this.props.navigation.navigate}

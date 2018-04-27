@@ -10,7 +10,7 @@ const styles = {
   noBorder: {
     borderWidth: 0,
     marginTop: -1,
-  }
+  },
 };
 
 export default StyleSheet.create(styles);

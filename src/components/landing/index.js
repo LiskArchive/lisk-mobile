@@ -4,14 +4,8 @@ import { Text, View } from 'react-native';
 import BackgroundImage from '../background';
 import Logo from '../logo';
 import { getNetwork, networks } from '../../utilities/networks';
-import Router from '../router';
-import { accountsRetrieved } from '../../actions/accounts';
-
-@connect(state => ({
-  accounts: state.accounts,
-}), {
-  accountsRetrieved,
-})
+import { accountsRetrieved as accountsRetrievedAction } from '../../actions/accounts';
+import styles from './styles';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -22,6 +16,11 @@ import { accountsRetrieved } from '../../actions/accounts';
  * @todo Implement custom message: this can be used in case we need to notify the user
  * about any unforeseen issue/change
  */
+@connect(state => ({
+  accounts: state.accounts,
+}), {
+  accountsRetrieved: accountsRetrievedAction,
+})
 class Landing extends React.Component {
   constructor() {
     super();
@@ -43,12 +42,12 @@ class Landing extends React.Component {
     }
   }
 
+  /**
+   * @todo this Text need to be replaced by a snipper component
+   */
+  // eslint-disable-next-line class-methods-use-this
   render() {
-    // ToDo : this Text need to be replaced by a snipper component
-    return (<View style={{
-        flex: 1,
-        backgroundColor: '#666',
-      }}>
+    return (<View style={styles.container}>
       <BackgroundImage />
       <Logo />
       <Text>Landing...</Text>

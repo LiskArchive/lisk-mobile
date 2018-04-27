@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = {
-  image:{
+  image: {
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 60,

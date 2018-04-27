@@ -2,20 +2,21 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { Button, FormLabel } from 'react-native-elements';
 import connect from 'redux-connect-decorator';
-import { transactionAdded } from '../../../actions/transactions';
-import styles from './styles'
-import { toRawLsk } from  '../../../utilities/conversions';
+import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
+import styles from './styles';
+import { toRawLsk } from '../../../utilities/conversions';
 
-@connect(state => ({ 
+@connect(state => ({
   accounts: state.accounts,
-}), { 
-  transactionAdded,
+}), {
+  transactionAdded: transactionAddedAction,
 })
 
 class Form extends React.Component {
   send = () => {
-    const { amount, address, accounts,
-      transactionAdded, nextStep } = this.props;
+    const {
+      amount, address, accounts, nextStep, transactionAdded,
+    } = this.props;
     const activeAccount = accounts.active;
     transactionAdded({
       recipientId: address,
@@ -23,7 +24,7 @@ class Form extends React.Component {
       secret: activeAccount.passphrase,
       secondSecret: null,
     }, activeAccount);
-    nextStep()
+    nextStep();
   }
 
   render() {

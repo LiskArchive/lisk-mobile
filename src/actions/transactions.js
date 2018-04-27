@@ -14,13 +14,13 @@ export const transactionsLoaded = data =>
             count,
           },
         });
-      }).catch(error => console.log(error));
+      });
   };
 
 export const transactionAdded = (data, account) =>
   (dispatch) => {
     send(data)
-      .then((res, oth) => {
+      .then((res) => {
         dispatch({
           data: {
             id: res.transactionId,
@@ -33,6 +33,5 @@ export const transactionAdded = (data, account) =>
           },
           type: actionTypes.transactionAdded,
         });
-      })
-      .catch(error => console.log(error));
+      });
   };

@@ -1,22 +1,26 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { Icon } from 'react-native-elements';
-import { accountFollowed, accountUnFollowed } from '../../actions/accounts';
+import {
+  accountFollowed as accountFollowedAction,
+  accountUnFollowed as accountUnFollowedAction,
+} from '../../actions/accounts';
 import Avatar from '../avatar';
-import FormattedDate from '../formattedDate';
 import { fromRawLsk } from '../../utilities/conversions';
 import styles from './styles';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
 }), {
-  accountFollowed,
-  accountUnFollowed,
+  accountFollowed: accountFollowedAction,
+  accountUnFollowed: accountUnFollowedAction,
 })
 class AccountSummary extends React.Component {
   toggleFollow(address) {
-    const { account, followedAccounts, accountFollowed, accountUnFollowed } = this.props;
+    const {
+      account, followedAccounts, accountFollowed, accountUnFollowed,
+    } = this.props;
     if (!followedAccounts.includes(account.address)) {
       accountFollowed(address);
     } else {

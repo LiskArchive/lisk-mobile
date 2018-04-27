@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { Text } from 'react-native';
 import moment from 'moment';
 
@@ -18,12 +18,12 @@ const fromLiskTimestamp = value =>
  * @param {Object} params
  * @param {Object} params.children - React native children passed to Component
  * @param {Object} params.style - The style rules passed from parent
- * 
+ *
  * @returns {Object} React native Text component
  */
 const FormattedDate = ({ children, style }) => {
   const absoluteDate = fromLiskTimestamp(children);
-  return <Text style={style}>{ moment(absoluteDate).format('LL') }</Text>
-}
+  return <Text style={style}>{ moment(absoluteDate).format('LL') }</Text>;
+};
 
 export default FormattedDate;
