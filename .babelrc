@@ -4,7 +4,8 @@
     "development": {
       "plugins": [
         "transform-react-jsx-source",
-        "babel-plugin-transform-decorators",
+        "transform-decorators-legacy",
+        "plugin-transform-decorators",
         "transform-class-properties"
       ]
     }
