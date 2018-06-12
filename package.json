@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "init": "npm run link",
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "npm run link"
   },
   "dependencies": {
     "@tradle/react-native-http": "^2.0.1",
@@ -18,7 +18,6 @@
     "dns.js": "^1.0.1",
     "domain-browser": "^1.2.0",
     "events": "^1.1.1",
-    "expo": "^25.0.0",
     "history": "^4.7.2",
     "https-browserify": "0.0.1",
     "lisk-elements": "github:reyraa/lisk-elements#update-dependencies-experimental",
@@ -65,7 +64,6 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators": "^6.24.1",
     "babel-preset-react-native": "4.0.0",
-    "expo": "^25.0.0",
     "jest": "23.1.0",
     "react-test-renderer": "16.3.1",
     "redux-connect-decorator": "^0.2.0",
