@@ -7,7 +7,7 @@
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
     "test": "jest",
     "postinstall": "npm run link",
-    "eslint": "eslint ./"
+    "test:format": "eslint ./"
   },
   "dependencies": {
     "@tradle/react-native-http": "^2.0.1",
