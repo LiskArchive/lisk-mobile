@@ -1,4 +1,5 @@
 import actionTypes from '../../constants/actions';
+import { merge } from '../../utilities/helpers';
 
 /**
  * The reducer of transactions.
@@ -16,7 +17,7 @@ import actionTypes from '../../constants/actions';
 const transactions = (state = { pending: [], confirmed: [], count: null }, action) => {
   switch (action.type) {
     case actionTypes.transactionsLoaded:
-      return Object.assign({}, state, {
+      return merge(state, {
         confirmed: [
           ...state.confirmed,
           ...action.data.transactions,
@@ -24,7 +25,7 @@ const transactions = (state = { pending: [], confirmed: [], count: null }, actio
         count: action.data.count,
       });
     case actionTypes.transactionAdded:
-      return Object.assign({}, state, {
+      return merge(state, {
         pending: [action.data, ...state.pending],
       });
     default:
