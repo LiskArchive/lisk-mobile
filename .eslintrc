@@ -15,7 +15,8 @@
   ],
   "globals": {
     "describe": true,
-    "it": true,
+    "test": true,
+    "expect": true,
     "beforeEach": true,
     "afterEach": true,
     "PRODUCTION": true,
