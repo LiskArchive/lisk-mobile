@@ -1,8 +1,5 @@
 import Lisk from 'lisk-elements';
 
-// const queryStringify = data =>
-//   Object.keys(data).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`).join('&');
-
 /**
  * Returns a promise to fetch the details of a
  * given Lisk ID (address)
