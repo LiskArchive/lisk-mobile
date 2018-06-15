@@ -8,4 +8,5 @@
  * @returns {Object} - A new object, result of merging
  *  the object properties from right to left
  */
+// eslint-disable-next-line import/prefer-default-export
 export const merge = (...rest) => Object.assign({}, ...rest);
