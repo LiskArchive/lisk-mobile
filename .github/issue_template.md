@@ -15,9 +15,9 @@ If you need technical assistance for running the Lisk Mobile app please consult 
 Please try defining in multiple steps
 
 ### Expected behaviour
-What should happen.
+What should happen?
 
-### Actual behavior
+### Actual behaviour
 What really happened.
 
 ### Errors
@@ -26,7 +26,7 @@ If you face this issue in development space and see an error, please paste it he
 
 <!----Format For Feature Requests------->
 *Note*
-If you like to develop this feature, please contact to our developers in Gitter before starting to work, to make sure no one else is doing the same.
+If you like to develop this feature, please contact our developers in Gitter before starting to work, to make sure no one else is doing the same.
 If you want to discuss the feature before you actually write the code you are welcome to do it by first submitting an issue.
 
 ### Description
@@ -36,7 +36,7 @@ Briefly describe the feature you want.
 Explain why this feature is needed.
 
 ### Requirements
-Create a list of what you want this feature request to fulfill.
+Create a list of what you want this feature request to fulfil.
 
 ### Open Questions (optional)
 Anything you want to discuss.
