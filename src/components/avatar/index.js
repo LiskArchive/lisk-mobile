@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import Svg,{ Circle, Polygon, Rect } from 'react-native-svg';
+import Svg, { Circle, Polygon, Rect } from 'react-native-svg';
 import BigNumber from 'bignumber.js';
-import sha256 from 'js-sha256';
+import crypto from 'crypto';
 import { Gradients, gradientSchemes } from './gradients';
 import styles from './styles';
 
@@ -138,7 +138,7 @@ const getShape = (chunk, size, gradient, sizeScale = 1) => {
     props: {
       ...shapes[shapeNames[chunk.substr(0, 2) % shapeNames.length]].props,
       fill: gradient.url,
-      transform: `rotate(${chunk.substr(1, 2) * 3.6}, ${size / 2}, ${size / 2})`,
+      // transform: `rotate(${chunk.substr(1, 2) * 3.6}, ${size / 2}, ${size / 2})`,
     },
   };
 };
@@ -161,14 +161,15 @@ const pickTwo = (chunk, options) => ([
 ]);
 
 const getHashChunks = (address) => {
-  const addressHash = new BigNumber(`0x${sha256(address)}`).toString().substr(3);
+  const hash = crypto.createHash('sha256');
+  const addressHash = new BigNumber(`0x${hash.update(address).digest('hex')}`).toString().substr(3);
   return addressHash.match(/\d{5}/g);
 };
 
-const randomId = () => `avatar-${[1,2,3,4].map(num => Math.random() * 100).join('')}`;
+const randomId = () => `avatar-${[1, 2, 3, 4].map(() => Math.random() * 100).join('')}`;
 
 class Avatar extends React.Component {
-  shouldComponentUpdate(nextProps, state) {
+  shouldComponentUpdate(nextProps) {
     return nextProps.address !== this.props.address;
   }
 
@@ -178,9 +179,7 @@ class Avatar extends React.Component {
 
   render() {
     const size = 200;
-    const {
-      address, avatarWrapper,
-    } = this.props;
+    const { address } = this.props;
 
     const replaceUrlByHashOnScheme = gradientScheme => ({
       ...gradientScheme,
