@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
     "test": "run-s test:format test:react-native",
+    "test:live": "jest --watch",
     "test:react-native": "jest --no-cache",
     "test:format": "eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
