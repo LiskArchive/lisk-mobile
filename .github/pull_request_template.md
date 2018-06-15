@@ -1,8 +1,8 @@
 <!---
 Hints for a successful PR:
-1. Please open an issue before starting to fix a bug or implementing a feature, in order to make sure your changes in aligned with the project goals. This way, you'll also find out if any one else is working on a similar change.
+1. Please open an issue before starting to fix a bug or implementing a feature, in order to make sure your changes in aligned with the project goals. This way, you'll also find out if anyone else is working on a similar change.
 2. Please do open a PR introducing big chunks of changes in a lot of files. instead, please consider breaking the issue into multiple smaller issues.
-3. Please fill our the template bellow for ease of review.
+3. Please fill out the template below for ease of review.
 -->
 
 # What was the bug or feature?
@@ -12,15 +12,15 @@ Please describe the bug you fixed or the feature you introduced. If the bug or f
 Please provide a short description of your changes.
 
 ## Type of change
-Pleas choose one of the options:
+Please choose one of the options:
 
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] Enhancement (non-breaking change which adds functionality)
+- [ ] Bug fix (a non-breaking change which fixes an issue)
+- [ ] Enhancement (a non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] Documentation Fix
 
 ### How to test it?
-You can recommend a scenario by which reviewers can make sure your changes fulfill your goal(s).
+You can recommend a scenario by which reviewers can make sure your changes fulfil your goal(s).
 
 
 # Checklist:
