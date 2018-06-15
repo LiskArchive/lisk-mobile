@@ -1,12 +1,6 @@
 import React from 'react';
-import { View, Image } from 'react-native';
-import Svg,{
-  Circle,
-  LinearGradient,
-  RadialGradient,
-  Polygon,
-  Rect,
-} from 'react-native-svg';
+import { View } from 'react-native';
+import Svg,{ Circle, Polygon, Rect } from 'react-native-svg';
 import BigNumber from 'bignumber.js';
 import sha256 from 'js-sha256';
 import { Gradients, gradientSchemes } from './gradients';
@@ -185,7 +179,7 @@ class Avatar extends React.Component {
   render() {
     const size = 200;
     const {
-      address, className,
+      address, avatarWrapper,
     } = this.props;
 
     const replaceUrlByHashOnScheme = gradientScheme => ({
@@ -211,8 +205,8 @@ class Avatar extends React.Component {
       getShape(addressHashChunks[3], size, secondaryGradients[1], 0.18),
     ];
     return (
-      <View style={[styles.figure, avatarWrapper]}>
-        <Svg height={size} width={size}>
+      <View style={styles.figure}>
+        <Svg height={size} width={size} style={styles.avatar}>
           <Gradients scheme={gradientsSchemesUrlsHashed}/>
           {shapes.map((shape, i) => (
             <shape.component {...shape.props} key={i}/>
@@ -222,7 +216,5 @@ class Avatar extends React.Component {
     );
   }
 }
-
-//style={[styles.avatar, avatarImage]}
 
 export default Avatar;

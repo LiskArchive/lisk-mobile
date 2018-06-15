@@ -1,4 +1,5 @@
 import React from 'react';
+import { Defs, Stop, LinearGradient } from 'react-native-svg';
 
 const gradSpecs = [
   {
@@ -913,13 +914,13 @@ export const gradientSchemes = gradSpecs.map(spec => ({
 }));
 
 export const Gradients = ({ scheme }) => (
-  <defs>
+  <Defs>
     {[...scheme.primary, ...scheme.secondary].map(spec => (
-      <linearGradient id={spec.id} key={spec.id} gradientTransform={`rotate(${spec.rotate})`}>
-        {spec.colors.map((color, i) => (
-          <stop stopColor={color} offset={`${i * (100 / (spec.colors.length - 1))}%`} key={i}/>
-        ))}
-      </linearGradient>
+      <LinearGradient id={spec.id} key={spec.id} gradientTransform={`rotate(${spec.rotate})`}>
+          {spec.colors.map((color, i) => (
+            <Stop stopColor={color} offset={`${i * (100 / (spec.colors.length - 1))}%`} key={i}/>
+          ))}
+      </LinearGradient>
     ))}
-  </defs>
+  </Defs>
 );

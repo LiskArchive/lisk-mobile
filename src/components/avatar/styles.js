@@ -9,6 +9,8 @@ const styles = {
   avatar: {
     width: 134,
     height: 138,
+    borderRadius: 100,
+    overflow: 'hidden',
   },
 };
 
