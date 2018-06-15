@@ -28,8 +28,7 @@ class Wallet extends React.Component {
 
   componentDidMount() {
     this.props.transactionsLoaded({
-      senderId: this.activeAccount.address,
-      recipientId: this.activeAccount.address,
+      senderIdOrRecipientId: this.activeAccount.address,
       offset: 0,
     });
   }
@@ -39,8 +38,7 @@ class Wallet extends React.Component {
       list={this.props.transactions.confirmed}
       count={this.props.transactions.count}
       loadMore={() => this.props.transactionsLoaded({
-        senderId: this.activeAccount.address,
-        recipientId: this.activeAccount.address,
+        senderIdOrRecipientId: this.activeAccount.address,
         offset: this.props.transactions.confirmed.length,
       })}>
       {

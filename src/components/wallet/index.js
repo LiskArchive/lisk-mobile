@@ -36,8 +36,7 @@ class Wallet extends React.Component {
 
   setTransactions = () => {
     getTransactions({
-      senderId: this.address,
-      recipientId: this.address,
+      senderIdOrRecipientId: this.address,
       offset: this.state.transactions.confirmed.length,
     }).then((res) => {
       const { transactions, count } = res;
