@@ -4,7 +4,6 @@ import { Text, View } from 'react-native';
 import BackgroundImage from '../background';
 import Logo from '../logo';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
-import { getNetwork, networks } from '../../utilities/networks';
 import { accountsRetrieved as accountsRetrievedAction } from '../../actions/accounts';
 import styles from './styles';
 
@@ -24,17 +23,7 @@ import styles from './styles';
   accountsRetrieved: accountsRetrievedAction,
 })
 class Landing extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      address: '',
-      network: networks.mainNet.code,
-    };
-  }
-
   componentWillMount() {
-    this.network = getNetwork(this.state.network);
     this.props.peerSet();
     this.props.accountsRetrieved();
   }
