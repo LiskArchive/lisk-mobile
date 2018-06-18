@@ -1,8 +1,6 @@
 import actionTypes from '../constants/actions';
 import txConstants from '../constants/transactions';
-import { send } from '../utilities/http';
-import { getTransactions } from '../utilities/api/account';
-import { toRawLsk } from '../utilities/conversions';
+import { getTransactions, send } from '../utilities/api/account';
 
 export const transactionsLoaded = data =>
   (dispatch, getState) => {
@@ -20,8 +18,9 @@ export const transactionsLoaded = data =>
   };
 
 export const transactionAdded = (data, account) =>
-  (dispatch) => {
-    send(data)
+  (dispatch, getState) => {
+    const { activePeer } = getState().peers;
+    send(activePeer, data)
       .then((res) => {
         dispatch({
           data: {
@@ -29,7 +28,7 @@ export const transactionAdded = (data, account) =>
             senderPublicKey: account.publicKey,
             senderId: account.address,
             recipientId: data.recipientId,
-            amount: toRawLsk(data.amount),
+            amount: data.amount,
             fee: txConstants.send.fee,
             type: txConstants.send.type,
           },
