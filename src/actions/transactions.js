@@ -1,17 +1,19 @@
 import actionTypes from '../constants/actions';
 import txConstants from '../constants/transactions';
-import { getTransactions, send } from '../utilities/http';
+import { send } from '../utilities/http';
+import { getTransactions } from '../utilities/api/account';
 import { toRawLsk } from '../utilities/conversions';
 
 export const transactionsLoaded = data =>
-  (dispatch) => {
-    getTransactions(data)
-      .then(({ transactions, count }) => {
+  (dispatch, getState) => {
+    const { activePeer } = getState().peers;
+    getTransactions(activePeer, data)
+      .then((response) => {
         dispatch({
           type: actionTypes.transactionsLoaded,
           data: {
-            transactions,
-            count,
+            transactions: response.data,
+            count: response.count,
           },
         });
       });

@@ -26,7 +26,7 @@ class Login extends React.Component {
 
     this.state = {
       passphrase: {
-        value: 'reopen parrot fever infant general life surface this frame village color position',
+        value: 'wagon stock borrow episode laundry kitten salute link globe zero feed marble',
         validity: validatePassphrase(''),
       },
       messages: [

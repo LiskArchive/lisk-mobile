@@ -1,15 +1,11 @@
-// import Lisk from 'lisk-js';
+import Lisk from 'lisk-elements';
 import actionTypes from '../constants/actions';
 
-// This is supended until we can decide about Lisk elements
-// eslint-disable-next-line
-const peerSet = (data, config) => ({
-  data: Object.assign({
-    passphrase: data.passphrase,
-    publicKey: data.publicKey,
-    // activePeer: Lisk.api(config),
-    noSavedAccounts: data.noSavedAccounts,
-  }),
+const network = 'customNode';
+const serverAddress = 'http://localhost:4000';
+
+const peerSet = config => ({
+  data: new Lisk.APIClient(config.nodes, { nethash: config.nethash }),
   type: actionTypes.activePeerSet,
 });
 
@@ -21,11 +17,32 @@ const peerSet = (data, config) => ({
  * @param {Object} data - Active peer data and the passphrase of account
  * @returns {Object} Action object
  */
-export const activePeerSet = data => ({
-  data,
-  type: actionTypes.activePeerSet,
-});
+export const activePeerSet = data =>
+  (dispatch) => {
+    const config = { nethash: 'net' };
 
+    if (network === 'customNode') {
+      config.nodes = [serverAddress];
+      const liskAPIClient = new Lisk.APIClient(config.nodes, { nethash: config.nethash });
+      // loadingStarted('getConstants');
+      liskAPIClient.node.getConstants().then((response) => {
+        // loadingFinished('getConstants');
+        config.nethash = response.data.nethash;
+        dispatch(peerSet(config));
+      }).catch(() => {
+        // loadingFinished('getConstants');
+        // dispatch(errorToastDisplayed({ label: i18next.t('Unable to connect to the node') }));
+      });
+    } else if (network === 'testnet') {
+      config.nodes = Lisk.APIClient.constants.TESTNET_NODES;
+      config.nethash = Lisk.APIClient.constants.TESTNET_NETHASH;
+      dispatch(peerSet(data, config));
+    } else if (network === 'mainnet') {
+      config.nodes = Lisk.APIClient.constants.MAINNET_NODES;
+      config.nethash = Lisk.APIClient.constants.MAINNET_NETHASH;
+      dispatch(peerSet(data, config));
+    }
+  };
 
 /**
  * Returns required action object to partially

@@ -13,16 +13,18 @@ class InfiniteScrollView extends React.Component {
   state = {
     reachEnd: true,
   };
+  canLoadMore = true;
 
   loadMore = ({ nativeEvent }) => {
-    const { list, count } = this.props;
+    // const { list, count } = this.props;
 
     const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
       const paddingToBottom = 20;
       return (layoutMeasurement.height + contentOffset.y >=
         contentSize.height - paddingToBottom) && this.state.reachEnd;
     };
-    if (isCloseToBottom(nativeEvent) && list.length < count) {
+    if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
+      this.canLoadMore = false;
       this.props.loadMore();
       this.setState({
         reachEnd: false,
@@ -34,6 +36,10 @@ class InfiniteScrollView extends React.Component {
     this.setState({
       reachEnd: true,
     });
+  }
+
+  componentWillUpdate = (nextProps) => {
+    this.canLoadMore = (this.props.list.length < nextProps.list.length);
   }
 
   render() {

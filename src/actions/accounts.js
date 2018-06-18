@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
-import { getAccount, extractAddress } from '../utilities/http';
+import { getAccount, extractAddress } from '../utilities/api/account';
 
 /**
  * Stores the given accounts data in AsyncStorage
@@ -82,15 +82,16 @@ export const accountUnFollowed = address => ({
  * @returns {Function} Thunk function
  */
 export const accountLoggedIn = ({ passphrase }) =>
-  dispatch =>
-    getAccount(extractAddress(passphrase))
+  (dispatch, getState) => {
+    const { activePeer } = getState().peers;
+    getAccount(activePeer, extractAddress(passphrase))
       .then((account) => {
         dispatch({
           type: actionTypes.accountLoggedIn,
           data: { ...account, passphrase },
         });
       });
-
+  };
 /**
  * Returns action object with no Api calls.
  *
