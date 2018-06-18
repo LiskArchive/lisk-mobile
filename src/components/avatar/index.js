@@ -138,7 +138,8 @@ const getShape = (chunk, size, gradient, sizeScale = 1) => {
     props: {
       ...shapes[shapeNames[chunk.substr(0, 2) % shapeNames.length]].props,
       fill: gradient.url,
-      // transform: `rotate(${chunk.substr(1, 2) * 3.6}, ${size / 2}, ${size / 2})`,
+      rotation: chunk.substr(1, 2) * 3.6,
+      origin: '100, 100',
     },
   };
 };
