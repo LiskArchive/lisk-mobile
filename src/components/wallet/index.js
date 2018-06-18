@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { Text } from 'react-native';
-import { getTransactions, getAccount } from '../../utilities/http';
+import { getTransactions, getAccount } from '../../utilities/api/account';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
@@ -18,6 +18,7 @@ import InfiniteScrollView from '../infiniteScrollView';
 @connect(state => ({
   accounts: state.accounts,
   transactions: state.transactions,
+  activePeer: state.peers.activePeer,
 }), {})
 class Wallet extends React.Component {
   state = {
@@ -35,15 +36,14 @@ class Wallet extends React.Component {
   }
 
   setTransactions = () => {
-    getTransactions({
+    getTransactions(this.props.activePeer, {
       senderIdOrRecipientId: this.address,
       offset: this.state.transactions.confirmed.length,
     }).then((res) => {
-      const { transactions, count } = res;
+      const { data } = res;
       this.setState({
         transactions: {
-          count,
-          confirmed: [...this.state.transactions.confirmed, ...transactions],
+          confirmed: [...this.state.transactions.confirmed, ...data],
           pending: [],
         },
       });
@@ -51,7 +51,7 @@ class Wallet extends React.Component {
   }
 
   setAccount() {
-    getAccount(this.props.navigation.state.params.address)
+    getAccount(this.props.activePeer, this.props.navigation.state.params.address)
       .then((account) => {
         this.setState({ account });
       });
