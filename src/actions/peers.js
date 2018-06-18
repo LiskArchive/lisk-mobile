@@ -1,17 +1,6 @@
 import Lisk from 'lisk-elements';
 import actionTypes from '../constants/actions';
 
-// This is supended until we can decide about Lisk elements
-// eslint-disable-next-line
-// const peerSet = (data, config) => ({
-//   data: Object.assign({
-//     passphrase: data.passphrase,
-//     publicKey: data.publicKey,
-//     // activePeer: Lisk.api(config),
-//     noSavedAccounts: data.noSavedAccounts,
-//   }),
-//   type: actionTypes.activePeerSet,
-// });
 const network = 'customNode';
 const serverAddress = 'http://localhost:4000';
 
@@ -38,7 +27,6 @@ export const activePeerSet = data =>
       // loadingStarted('getConstants');
       liskAPIClient.node.getConstants().then((response) => {
         // loadingFinished('getConstants');
-        console.log(response.data.nethash);
         config.nethash = response.data.nethash;
         dispatch(peerSet(config));
       }).catch(() => {
