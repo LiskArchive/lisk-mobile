@@ -33,10 +33,10 @@ class AccountSummary extends React.Component {
     const iconName = followedAccounts.includes(account.address) ? 'star' : 'star-o';
     return (<View>
       {
-        account ?
+        account && account.address ?
         <View style={styles.container}>
           { children }
-          <Avatar address={account.address}/>
+          <Avatar address={account.address} size={200}/>
           <Text style={styles.address}>{ account.address }</Text>
           <Text style={styles.balance}>
             <Text style={styles.value}>{ fromRawLsk(account.balance) }</Text>
