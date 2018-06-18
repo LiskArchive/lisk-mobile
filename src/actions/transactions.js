@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actions';
 import txConstants from '../constants/transactions';
-import { getTransactions, send } from '../utilities/api/account';
+import { getTransactions, send } from '../utilities/api/transactions';
 
 export const transactionsLoaded = data =>
   (dispatch, getState) => {

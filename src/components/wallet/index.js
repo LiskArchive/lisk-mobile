@@ -1,7 +1,8 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { Text } from 'react-native';
-import { getTransactions, getAccount } from '../../utilities/api/account';
+import { getAccount } from '../../utilities/api/account';
+import { getTransactions } from '../../utilities/api/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
