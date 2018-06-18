@@ -21,8 +21,8 @@ class Form extends React.Component {
     transactionAdded({
       recipientId: address,
       amount: toRawLsk(amount),
-      secret: activeAccount.passphrase,
-      secondSecret: null,
+      passphrase: activeAccount.passphrase,
+      secondPassphrase: null,
     }, activeAccount);
     nextStep();
   }
