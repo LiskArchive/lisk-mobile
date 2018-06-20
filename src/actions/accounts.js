@@ -101,3 +101,31 @@ export const accountLoggedOut = () =>
   ({
     type: actionTypes.accountLoggedOut,
   });
+
+
+export const blockUpdated = ({ transactions }) => (dispatch, getState) => {
+  if (transactions) {
+    const accountAddress = getState().accounts.active.address;
+    const blockContainsRelevantTransaction = transactions.filter((transaction) => {
+      const sender = transaction ? transaction.senderId : null;
+      const recipient = transaction ? transaction.recipientId : null;
+      return accountAddress === recipient || accountAddress === sender;
+    }).length > 0;
+    if (blockContainsRelevantTransaction) {
+      const { activePeer } = getState().peers;
+      setTimeout(() => {
+        getAccount(activePeer, accountAddress)
+          .then((account) => {
+            dispatch({
+              type: actionTypes.accountUpdated,
+              data: account,
+            });
+          });
+        dispatch({
+          type: actionTypes.transactionsUpdated,
+          data: { confirmed: transactions },
+        });
+      }, 5000);
+    }
+  }
+};

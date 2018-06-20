@@ -21,6 +21,15 @@ if (typeof localStorage !== 'undefined') {
   localStorage.debug = isDev ? '*' : ''
 }
 
+if (global.navigator && global.navigator.product === 'ReactNative') {
+  global.navigator.mimeTypes = '';
+  try {
+      global.navigator.userAgent = 'ReactNative';
+  }
+  catch (e) {
+      console.log('Tried to fake useragent, but failed. This is normal on some devices, you may ignore this error: ' + e.message);
+  }
+}
 // If using the crypto shim, uncomment the following line to ensure
 // crypto is loaded first, so it can populate global.crypto
 // require('crypto')

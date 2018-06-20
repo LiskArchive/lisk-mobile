@@ -29,8 +29,11 @@ export const getTransactions = (activePeer, data) => {
  *
  * @returns {Promise} The HTTP call promise
  */
-export const send = (activePeer, data) => {
-  const transaction = Lisk.transaction.transfer(data);
-  return activePeer.transactions.broadcast(transaction);
-};
+export const send = (activePeer, data) =>
+  new Promise((resolve, reject) => {
+    const transaction = Lisk.transaction.transfer(data);
+    activePeer.transactions.broadcast(transaction).then(() => {
+      resolve(transaction);
+    }).catch(error => reject(error));
+  });
 
