@@ -16,6 +16,7 @@ const actionTypes = {
   // Transactions
   transactionsLoaded: 'TRANSACTIONS_LOADED',
   transactionAdded: 'TRANSACTIONS_ADDED',
+  transactionsUpdated: 'TRANSACTIONS_UPDATED',
 };
 
 export default actionTypes;
