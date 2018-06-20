@@ -11,7 +11,6 @@ export const transactionsLoaded = data =>
           type: actionTypes.transactionsLoaded,
           data: {
             transactions: response.data,
-            count: response.count,
           },
         });
       });
@@ -24,7 +23,7 @@ export const transactionAdded = (data, account) =>
       .then((res) => {
         dispatch({
           data: {
-            id: res.transactionId,
+            id: res.id,
             senderPublicKey: account.publicKey,
             senderId: account.address,
             recipientId: data.recipientId,
