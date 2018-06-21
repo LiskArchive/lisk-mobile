@@ -17,7 +17,7 @@ import regex from '../../constants/regex';
   accountUnFollowed: accountUnFollowedAction,
   accountEdited: accountEditedAction,
 })
-class FormModal extends React.Component {
+class FAModal extends React.Component {
   state = {
     label: {
       value: '',
@@ -125,4 +125,4 @@ class FormModal extends React.Component {
   }
 }
 
-export default FormModal;
+export default FAModal;
