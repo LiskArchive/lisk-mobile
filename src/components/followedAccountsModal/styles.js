@@ -32,16 +32,16 @@ const styles = {
     backgroundColor: '#fff',
     borderRadius: styleGuide.boxes.buttonBorderRadius,
     borderWidth: styleGuide.boxes.buttonBorderRadius,
-    borderColor: '#17499b',
-    color: '#3c7fb4',
+    borderColor: styleGuide.colors.primary3,
+    color: styleGuide.colors.primary5,
   },
   updateButton: {
     color: '#fff',
-    backgroundColor: '#17499b',
+    backgroundColor: styleGuide.colors.primary3,
   },
   deleteButton: {
     backgroundColor: '#fff',
-    color: '#da1d00',
+    color: styleGuide.colors.action1,
   },
 };
 
