@@ -7,7 +7,7 @@ import styles from './styles';
 
 const TxDetail = ({ navigation }) => {
   const tx = navigation.getParam('tx', null);
-
+  console.log(tx);
   return (<View style={styles.container}>
     <Text h4 style={styles.title}>Transaction ID :</Text>
     <Text style={styles.value}>{ tx.id }</Text>
@@ -23,6 +23,11 @@ const TxDetail = ({ navigation }) => {
     <Divider style={styles.divider} />
     <Text h4 style={styles.title}>Date :</Text>
     <FormattedDate style={styles.value}>{ tx.timestamp }</FormattedDate>
+    {tx.asset.data ? <View>
+      <Divider style={styles.divider} />
+      <Text h4 style={styles.title}>reference :</Text>
+      <Text style={styles.value}>{ tx.asset.data }</Text>
+    </View> : null }
   </View>);
 };
 
