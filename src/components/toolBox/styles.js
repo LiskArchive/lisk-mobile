@@ -32,8 +32,8 @@ const styles = {
   },
   button: {
     fontSize: styleGuide.fontSizes.base,
-    height: 36,
-    lineHeight: 36,
+    height: styleGuide.boxes.buttonHeight,
+    lineHeight: styleGuide.boxes.buttonHeight,
     textAlign: 'center',
   },
   primaryButtonColor: {
