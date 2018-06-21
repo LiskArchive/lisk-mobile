@@ -8,7 +8,7 @@ const styles = {
   },
   modalWrapper: {
     height: 300,
-    backgroundColor: '#fff',
+    backgroundColor: styleGuide.colors.white,
     paddingTop: styleGuide.boxes.boxPadding,
     paddingBottom: styleGuide.boxes.boxPadding,
     borderRadius: styleGuide.boxes.boxBorderRadius,
@@ -29,18 +29,18 @@ const styles = {
   },
   cancelButton: {
     height: styleGuide.boxes.borderedButtonHeight,
-    backgroundColor: '#fff',
+    backgroundColor: styleGuide.colors.white,
     borderRadius: styleGuide.boxes.buttonBorderRadius,
     borderWidth: styleGuide.boxes.buttonBorderRadius,
     borderColor: styleGuide.colors.primary3,
     color: styleGuide.colors.primary5,
   },
   updateButton: {
-    color: '#fff',
+    color: styleGuide.colors.white,
     backgroundColor: styleGuide.colors.primary3,
   },
   deleteButton: {
-    backgroundColor: '#fff',
+    backgroundColor: styleGuide.colors.white,
     color: styleGuide.colors.action1,
   },
 };
