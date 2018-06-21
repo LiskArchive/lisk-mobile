@@ -10,6 +10,7 @@ const styles = {
   button: {
     color: '#333',
     marginTop: 20,
+    backgroundColor: '#ff6236',
   },
   errorMessage: {
     fontSize: 14,
