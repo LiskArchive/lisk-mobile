@@ -15,7 +15,7 @@ import { toRawLsk } from '../../../utilities/conversions';
 class Form extends React.Component {
   send = () => {
     const {
-      amount, address, accounts, nextStep, transactionAdded,
+      amount, address, accounts, nextStep, transactionAdded, reference,
     } = this.props;
     const activeAccount = accounts.active;
     transactionAdded({
@@ -23,24 +23,28 @@ class Form extends React.Component {
       amount: toRawLsk(amount),
       passphrase: activeAccount.passphrase,
       secondPassphrase: null,
+      data: reference || null,
     }, activeAccount);
     nextStep();
   }
 
   render() {
-    const { address, amount } = this.props;
+    const { address, amount, reference } = this.props;
     return (<View style={styles.container}>
       <View style={styles.verticalAligner}>
         <Text style={[styles.heading, styles.centerAlign, styles.gray]}>Confirm to send</Text>
         <View style={styles.row}>
           <FormLabel>To:</FormLabel>
           <FormLabel labelStyle={[styles.address, styles.black]}>{address}</FormLabel>
-          <Text></Text>
         </View>
         <View style={styles.row}>
-          <FormLabel>Total (including 0.1LSK fee):</FormLabel>
-          <FormLabel labelStyle={[styles.amount, styles.black]}>{`${parseFloat(amount) + 0.1} LSK`}</FormLabel>
+        <FormLabel>Total (including 0.1LSK fee):</FormLabel>
+        <FormLabel labelStyle={[styles.amount, styles.black]}>{`${parseFloat(amount) + 0.1} LSK`}</FormLabel>
         </View>
+        {reference ? <View style={styles.row}>
+          <FormLabel>reference:</FormLabel>
+          <FormLabel labelStyle={[styles.address, styles.black]}>{reference}</FormLabel>
+        </View> : null}
         <Button
           backgroundColor='#ff6236'
           style={styles.button}
