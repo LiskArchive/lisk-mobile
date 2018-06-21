@@ -6,7 +6,9 @@ const storageTitle = 'LiskfollowedAccounts';
 
 const validateAccounts = (data) => {
   const parsedData = JSON.parse(data);
-  if (parsedData.reduce((acc, item) => reg.address.test(item), true)) {
+  console.log('Validate >>>', parsedData);
+  if (parsedData.reduce((acc, item) =>
+    reg.address.test(item.address) && item.label.length < 16, true)) {
     return parsedData;
   }
   return blankAccounts;
@@ -20,8 +22,8 @@ async function persistData(key, data) {
     return data;
   } catch (error) {
     return new Promise()
-      .then(() => ({ message: 'Error persisting accounts 1' }))
-      .catch(() => ({ message: 'Error persisting accounts 2' }));
+      .then(() => ({ message: 'Error persisting accounts' }))
+      .catch(() => ({ message: 'Error persisting accounts' }));
   }
 }
 
@@ -30,8 +32,8 @@ async function fetchData(key) {
     return await AsyncStorage.getItem(key);
   } catch (error) {
     return new Promise()
-      .then(() => ({ message: 'Error retrieving accounts 1' }))
-      .catch(() => ({ message: 'Error retrieving accounts 2' }));
+      .then(() => ({ message: 'Error retrieving accounts' }))
+      .catch(() => ({ message: 'Error retrieving accounts' }));
   }
 }
 
@@ -40,12 +42,7 @@ export const retrieveAccounts = () =>
     .then(data => validateAccounts(data))
     .catch(() => blankAccounts);
 
-export const storeFollowedAccount = (address, list) =>
-  persistData(storageTitle, [...list.filter(item => item !== address), address])
-    .then(data => data)
-    .catch(err => err);
-
-export const storeUnFollowedAccount = (address, list) =>
-  persistData(storageTitle, list.filter(item => item !== address))
+export const storeFollowedAccount = followedAccountsList =>
+  persistData(storageTitle, followedAccountsList)
     .then(data => data)
     .catch(err => err);
