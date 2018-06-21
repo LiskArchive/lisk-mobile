@@ -1,8 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, FormLabel, FormInput } from 'react-native-elements';
+import { FormLabel, FormInput } from 'react-native-elements';
 import styles from './styles';
 import reg from '../../constants/regex';
+import { PrimaryButton } from '../toolBox/button';
 
 class Search extends React.Component {
   constructor() {
@@ -63,12 +64,10 @@ class Search extends React.Component {
       <FormInput
         ref={(input) => { this.query = input; }}
         onChangeText={value => this.changeHandler('query', value)}/>
-      <Button
+      <PrimaryButton
         disabled={this.state.query.value.length < 2}
-        onPress={this.search.bind(this)}
-        buttonStyle={styles.button}
-        backgroundColor='#ff6236'
-        title='Search' />
+        onClick={this.search.bind(this)}
+        style={styles.button}>Search</PrimaryButton>
     </View>);
   }
 }

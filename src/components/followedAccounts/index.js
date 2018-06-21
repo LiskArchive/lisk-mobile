@@ -3,6 +3,7 @@ import connect from 'redux-connect-decorator';
 import { FormLabel } from 'react-native-elements';
 import List from './list';
 import Empty from './empty';
+import Modal from '../followedAccountsModal';
 
 /**
  * The container component containing login and create account functionality
@@ -10,22 +11,40 @@ import Empty from './empty';
  * @todo
  */
 @connect(state => ({
-  accounts: state.accounts,
+  followedAccounts: state.accounts.followed,
 }), {})
 class FollowedAccounts extends React.Component {
+  state = {
+    modalVisible: false,
+    address: null,
+  }
+
+  toggleModal(address) {
+    this.setState({
+      modalVisible: !this.state.modalVisible,
+      address: address || '',
+    });
+  }
+
   render() {
-    const { accounts } = this.props;
+    const { followedAccounts } = this.props;
+    const { modalVisible, address } = this.state;
     return (<Fragment>
       {
-        accounts.followed.length === 0 ?
+        followedAccounts.length === 0 ?
           <Empty /> :
           <Fragment>
             <FormLabel>Followed Accounts</FormLabel>
             <List
+              edit={this.toggleModal.bind(this)}
               navigate={this.props.navigation.navigate}
-              followedAccounts={accounts.followed} />
+              followedAccounts={followedAccounts} />
           </Fragment>
       }
+      <Modal
+        hide={this.toggleModal.bind(this)}
+        address={address}
+        isVisible={modalVisible}/>
     </Fragment>);
   }
 }

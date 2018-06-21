@@ -1,5 +1,5 @@
 import actionTypes from '../../constants/actions';
-import { storeFollowedAccount, storeUnFollowedAccount } from '../../utilities/storage';
+import { storeFollowedAccount } from '../../utilities/storage';
 
 const peersMiddleware = store => next => (action) => {
   next(action);
@@ -7,10 +7,9 @@ const peersMiddleware = store => next => (action) => {
 
   switch (action.type) {
     case actionTypes.accountFollowed:
-      storeFollowedAccount(action.data, accounts.followed);
-      break;
+    case actionTypes.accountEdited:
     case actionTypes.accountUnFollowed:
-      storeUnFollowedAccount(action.data, accounts.followed);
+      storeFollowedAccount(accounts.followed);
       break;
     default: break;
   }

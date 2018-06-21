@@ -8,6 +8,7 @@ import {
 } from '../../actions/accounts';
 import Avatar from '../avatar';
 import { fromRawLsk } from '../../utilities/conversions';
+import Modal from '../followedAccountsModal';
 import styles from './styles';
 
 @connect(state => ({
@@ -17,20 +18,22 @@ import styles from './styles';
   accountUnFollowed: accountUnFollowedAction,
 })
 class AccountSummary extends React.Component {
-  toggleFollow(address) {
-    const {
-      account, followedAccounts, accountFollowed, accountUnFollowed,
-    } = this.props;
-    if (!followedAccounts.includes(account.address)) {
-      accountFollowed(address);
-    } else {
-      accountUnFollowed(address);
-    }
+  state = {
+    modalVisible: false,
+  }
+
+  toggleModal() {
+    this.setState({
+      modalVisible: !this.state.modalVisible,
+    });
   }
 
   render() {
     const { account, followedAccounts, children } = this.props;
-    const iconName = followedAccounts.includes(account.address) ? 'star' : 'star-o';
+    const followedAccount = followedAccounts.filter(item =>
+      item.address === account.address)[0];
+    const iconName = (followedAccount && followedAccount.address) ? 'star' : 'star-o';
+
     return (<View>
       {
         account && account.address ?
@@ -46,10 +49,14 @@ class AccountSummary extends React.Component {
             name={iconName}
             type='font-awesome'
             color='#f50'
-            onPress={this.toggleFollow.bind(this, account.address)} />
+            onPress={this.toggleModal.bind(this)} />
         </View> :
         <Text h4>Fetching account info</Text>
       }
+      <Modal
+        hide={this.toggleModal.bind(this)}
+        address={account.address}
+        isVisible={this.state.modalVisible}/>
     </View>);
   }
 }

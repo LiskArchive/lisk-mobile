@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import styleGuide from '../../constants/styleGuide';
 
 const styles = {
   listItemEven: {
@@ -6,6 +7,9 @@ const styles = {
   },
   listItemOdd: {
     backgroundColor: '#fff',
+  },
+  itemTitle: {
+    paddingLeft: styleGuide.boxes.elementPadding,
   },
   noBorder: {
     borderWidth: 0,

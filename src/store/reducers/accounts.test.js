@@ -3,11 +3,11 @@ import actionTypes from '../../constants/actions';
 
 describe('Reducers: Accounts', () => {
   const followed = [
-    { id: '1234567890L' },
-    { id: '1234567891L' },
+    { address: '1234567890L' },
+    { address: '1234567891L' },
   ];
   const accountA = {
-    id: '1234567890L',
+    address: '1234567890L',
     publicKey: 'sample_key_A',
     balance: 1200000000,
   };
@@ -35,17 +35,9 @@ describe('Reducers: Accounts', () => {
 
   test('should remove given account from state.followed array in case of accountUnFollowed', () => {
     const currentState = { active: null, followed: [accountA] };
-    const action = { type: actionTypes.accountUnFollowed, data: accountA };
+    const action = { type: actionTypes.accountUnFollowed, data: accountA.address };
     const changedState = accounts(currentState, action);
     expect(changedState.followed.length).toBe(0);
-  });
-
-  test('should fill followed account with given list in case of accountUnFollowed', () => {
-    const currentState = { active: null, followed: [] };
-    const action = { type: actionTypes.accountsRetrieved, data: [accountA] };
-    const changedState = accounts(currentState, action);
-    expect(changedState.active).toBeNull();
-    expect(changedState.followed).toEqual([accountA]);
   });
 
   test('should make no change in case of accountsStored', () => {

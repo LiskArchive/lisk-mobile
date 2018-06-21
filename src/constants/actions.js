@@ -4,6 +4,7 @@ const actionTypes = {
   accountLoggedOut: 'ACCOUNT_LOGGED_OUT',
   accountLoggedIn: 'ACCOUNT_LOGGED_IN',
   accountFollowed: 'ACCOUNT_FOLLOWED',
+  accountEdited: 'ACCOUNT_EDITED',
   accountUnFollowed: 'ACCOUNT_UN_FOLLOWED',
   accountsRetrieved: 'ACCOUNTS_RETRIEVED',
   accountsStored: 'ACCOUNTS_STORED',
