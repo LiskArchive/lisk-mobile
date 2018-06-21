@@ -38,7 +38,7 @@ class FAModal extends React.Component {
     if (!this.props.isVisible && nextProps.isVisible) {
       this.setState({
         address: {
-          value: nextProps.address || '',
+          value: nextProps.address || this.props.address || '',
           validity: 0,
         },
         label: {

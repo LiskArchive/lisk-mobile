@@ -29,17 +29,6 @@ class AccountSummary extends React.Component {
     });
   }
 
-  toggleFollow(address) {
-    const {
-      account, followedAccounts, accountFollowed, accountUnFollowed,
-    } = this.props;
-    if (!followedAccounts.includes(account.address)) {
-      accountFollowed(address, 'custom label');
-    } else {
-      accountUnFollowed(address);
-    }
-  }
-
   render() {
     const { account, followedAccounts, children } = this.props;
     const followedAccount = followedAccounts.filter(item =>
@@ -61,13 +50,13 @@ class AccountSummary extends React.Component {
             name={iconName}
             type='font-awesome'
             color='#f50'
-            onPress={this.toggleFollow.bind(this, account.address)} />
+            onPress={this.toggleModal.bind(this)} />
         </View> :
         <Text h4>Fetching account info</Text>
       }
       <Modal
         hide={this.toggleModal.bind(this)}
-        address={followedAccount.address}
+        address={followedAccount.address || account.address}
         label={followedAccount.label}
         isVisible={this.state.modalVisible}/>
     </View>);
