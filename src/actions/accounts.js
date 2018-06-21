@@ -50,12 +50,16 @@ export const accountsRetrieved = () =>
  * in the list of followed accounts
  *
  * @param {String} address - Valid Lisk ID
+ * @param {String} label - A custom string of length 3-16
  *
  * @returns {Object} - Pure action function
  */
-export const accountFollowed = address => ({
+export const accountFollowed = (address, label) => ({
   type: actionTypes.accountFollowed,
-  data: address,
+  data: {
+    address,
+    label,
+  },
 });
 
 /**
@@ -69,6 +73,22 @@ export const accountFollowed = address => ({
 export const accountUnFollowed = address => ({
   type: actionTypes.accountUnFollowed,
   data: address,
+});
+
+/**
+ * Returns a pure action object to edit/update the values of
+ * a followed account
+ *
+ * @param {String} address - Valid Lisk ID
+ * @param {Object} updatedData
+ * @param {String} updatedData.address - Valid Lisk ID
+ * @param {String} updatedData.label - A string title/label of length 3-18 chars
+ *
+ * @returns {Object} - Pure action function
+ */
+export const accountEdited = (address, updatedData) => ({
+  type: actionTypes.accountEdited,
+  data: { address, updatedData },
 });
 
 /**
