@@ -22,11 +22,25 @@ const transactions = (state = { pending: [], confirmed: [], count: null }, actio
           ...state.confirmed,
           ...action.data.transactions,
         ],
-        count: action.data.count,
       });
     case actionTypes.transactionAdded:
       return merge(state, {
         pending: [action.data, ...state.pending],
+      });
+    case actionTypes.transactionsUpdated:
+      return Object.assign({}, state, {
+        // Filter any newly confirmed transaction from pending
+        pending: state.pending.filter(pendingTransaction =>
+          action.data.confirmed.filter(transaction =>
+            transaction.id === pendingTransaction.id).length === 0),
+        // Add any newly confirmed transaction to confirmed
+        confirmed: [
+          ...action.data.confirmed,
+          ...state.confirmed.filter(confirmedTransaction =>
+            action.data.confirmed.filter(transaction =>
+              transaction.id === confirmedTransaction.id).length === 0),
+        ],
+        count: action.data.count,
       });
     default:
       return state;
