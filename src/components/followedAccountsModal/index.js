@@ -36,15 +36,18 @@ class FAModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.isVisible && nextProps.isVisible) {
+      const followedAccount = nextProps.accounts.followed.filter(item =>
+        item.address === nextProps.address);
       this.setState({
         address: {
-          value: nextProps.address || this.props.address || '',
+          value: nextProps.address || '',
           validity: 0,
         },
         label: {
-          value: nextProps.label || '',
-          validity: nextProps.label ? 0 : -1,
+          value: followedAccount.length ? followedAccount[0].label : '',
+          validity: followedAccount.length ? 0 : -1,
         },
+        isFollowed: followedAccount.length,
       });
     }
   }
@@ -83,6 +86,7 @@ class FAModal extends React.Component {
   }
 
   render() {
+    const { isFollowed } = this.state;
     return (
       <Modal
         backdropColor='black'
@@ -102,7 +106,7 @@ class FAModal extends React.Component {
               onChangeText={value => this.changeHandler('address', value)}/>
 
 
-            <FormLabel>Label</FormLabel>
+            <FormLabel>Label (Optional)</FormLabel>
             <FormInput
               ref={(input) => { this.labelInput = input; }}
               value={this.state.label.value}
@@ -114,10 +118,13 @@ class FAModal extends React.Component {
                 style={[styles.button, styles.cancelButton]}>Cancel</Button>
               <Button
                 onClick={this.update.bind(this)}
-                style={[styles.button, styles.updateButton]}>Update</Button>
-              <Button
-                onClick={this.delete.bind(this)}
-                style={[styles.button, styles.deleteButton]}>Delete</Button>
+                style={[styles.button, styles.updateButton]}>{ isFollowed ? 'Update' : 'Follow' }</Button>
+              {
+                isFollowed ?
+                  <Button
+                    onClick={this.delete.bind(this)}
+                    style={[styles.button, styles.deleteButton]}>Unfollow</Button> : null
+              }
             </View>
           </View>
       </Modal>

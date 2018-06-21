@@ -20,7 +20,6 @@ import styles from './styles';
 class AccountSummary extends React.Component {
   state = {
     modalVisible: false,
-    account: null,
   }
 
   toggleModal() {
@@ -32,8 +31,8 @@ class AccountSummary extends React.Component {
   render() {
     const { account, followedAccounts, children } = this.props;
     const followedAccount = followedAccounts.filter(item =>
-      item.address === account.address)[0] || { address: null, label: null };
-    const iconName = followedAccount.address ? 'star' : 'star-o';
+      item.address === account.address)[0];
+    const iconName = (followedAccount && followedAccount.address) ? 'star' : 'star-o';
 
     return (<View>
       {
@@ -56,8 +55,7 @@ class AccountSummary extends React.Component {
       }
       <Modal
         hide={this.toggleModal.bind(this)}
-        address={followedAccount.address || account.address}
-        label={followedAccount.label}
+        address={account.address}
         isVisible={this.state.modalVisible}/>
     </View>);
   }
