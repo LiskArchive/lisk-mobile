@@ -26,7 +26,7 @@ const TxDetail = ({ navigation }) => {
       <Divider style={styles.divider} />
       <Text h4 style={styles.title}>reference :</Text>
       <Text style={styles.value}>{ tx.asset.data }</Text>
-    </View> : null }
+    </View> : null}
   </View>);
 };
 
