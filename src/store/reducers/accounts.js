@@ -21,13 +21,19 @@ const accounts = (state = { active: null, followed: [] }, action) => {
       return merge(state, { active: null });
     case actionTypes.accountLoggedIn:
       return merge(state, { active: action.data });
+    case actionTypes.accountEdited:
+      return merge(state, {
+        followed: [...state.followed.filter(item =>
+          item.address !== action.data.address), action.data.updatedData],
+      });
     case actionTypes.accountFollowed:
       return merge(state, {
-        followed: [...state.followed.filter(item => item !== action.data), action.data],
+        followed: [...state.followed.filter(item =>
+          item.address !== action.data.address), action.data],
       });
     case actionTypes.accountUnFollowed:
       return merge(state, {
-        followed: [...state.followed.filter(item => item !== action.data)],
+        followed: [...state.followed.filter(item => item.address !== action.data)],
       });
     case actionTypes.accountsRetrieved:
       return merge(state, { followed: action.data });
