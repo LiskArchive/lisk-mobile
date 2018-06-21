@@ -6,7 +6,6 @@ const storageTitle = 'LiskfollowedAccounts';
 
 const validateAccounts = (data) => {
   const parsedData = JSON.parse(data);
-  console.log('Validate >>>', parsedData);
   if (parsedData.reduce((acc, item) =>
     reg.address.test(item.address) && item.label.length < 16, true)) {
     return parsedData;

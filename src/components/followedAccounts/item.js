@@ -20,7 +20,8 @@ class Item extends React.Component {
       }
       subtitle={account.label || ''}
       title={
-        <Text style={styles.itemTitle} onPress={this.showWallet.bind(this, account.address)}>{account.address}</Text>
+        <Text style={styles.itemTitle}
+          onPress={this.showWallet.bind(this, account.address)}>{account.address}</Text>
       } />);
   }
 }
