@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
-    "test": "run test:format && npm run test:react-native",
+    "test": "npm run test:format && npm run test:react-native",
     "test:live": "jest --watch",
     "test:react-native": "jest --no-cache",
     "test:format": "eslint ./",
