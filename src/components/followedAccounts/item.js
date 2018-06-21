@@ -1,5 +1,7 @@
 import React from 'react';
-import { ListItem } from 'react-native-elements';
+import { Text } from 'react-native';
+import { ListItem, Icon } from 'react-native-elements';
+import styles from './styles';
 
 class Item extends React.Component {
   showWallet(address) {
@@ -10,11 +12,16 @@ class Item extends React.Component {
   }
 
   render() {
-    const { address } = this.props;
+    const { account, edit } = this.props;
 
     return (<ListItem
-      onPress={this.showWallet.bind(this, address)}
-      title={address} />);
+      rightIcon={
+        <Icon name='edit' color='#666' size={18} onPress={() => edit(account.address)}/>
+      }
+      subtitle={account.label || ''}
+      title={
+        <Text style={styles.itemTitle} onPress={this.showWallet.bind(this, account.address)}>{account.address}</Text>
+      } />);
   }
 }
 
