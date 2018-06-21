@@ -7,7 +7,6 @@ import styles from './styles';
 
 const TxDetail = ({ navigation }) => {
   const tx = navigation.getParam('tx', null);
-  console.log(tx);
   return (<View style={styles.container}>
     <Text h4 style={styles.title}>Transaction ID :</Text>
     <Text style={styles.value}>{ tx.id }</Text>
