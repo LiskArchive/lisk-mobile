@@ -11,11 +11,13 @@ class Form extends React.Component {
     this.state = {
       address: { value: '', validity: -1 },
       amount: { value: '', validity: -1 },
+      reference: { value: '', validity: -1 },
     };
 
     this.validator = {
       address: str => reg.address.test(str),
       amount: str => reg.amount.test(str),
+      reference: str => (str.length === 0 || str.length < 64),
     };
   }
 
@@ -41,6 +43,7 @@ class Form extends React.Component {
     this.props.nextStep({
       amount: this.state.amount.value,
       address: this.state.address.value,
+      reference: this.state.reference.value,
     });
   }
 
@@ -65,6 +68,16 @@ class Form extends React.Component {
             {
               this.state.amount.validity === 1 ?
                 'Invalid amount value' : ''
+            }
+          </FormValidationMessage>
+          <FormLabel>Reference</FormLabel>
+          <FormInput
+            ref={(input) => { this.reference = input; }}
+            onChangeText={value => this.changeHandler('reference', value)}/>
+          <FormValidationMessage labelStyle={styles.errorMessage}>
+            {
+              this.state.reference.validity === 1 ?
+                'Maximum length of 64 characters is exceeded.' : ''
             }
           </FormValidationMessage>
           <Button
