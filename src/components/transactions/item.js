@@ -1,7 +1,9 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { fromRawLsk } from '../../utilities/conversions';
 import styles from './styles';
+import FormattedNumber from '../formattedNumber';
 
 class Item extends React.Component {
   showDetail(tx) {
@@ -27,13 +29,15 @@ class Item extends React.Component {
     }
 
     const style = (index % 2 === 0) ? styles.listItemEven : styles.listItemOdd;
-
+    const amount = <Text>
+      <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber> LSK
+    </Text>;
     return (<ListItem
       containerStyle={[style, styles.noBorder]}
       onPress={this.showDetail.bind(this, tx)}
       key={tx.id}
       leftIcon={{ name: arrow, style: { color: iconColor } }}
-      title={`${fromRawLsk(tx.amount)} LSK`}
+      title={amount}
       subtitle={`${recipient}`} />);
   }
 }

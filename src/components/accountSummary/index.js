@@ -9,6 +9,7 @@ import {
 import Avatar from '../avatar';
 import { fromRawLsk } from '../../utilities/conversions';
 import styles from './styles';
+import FormattedNumber from '../formattedNumber';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -39,7 +40,9 @@ class AccountSummary extends React.Component {
           <Avatar address={account.address} size={200}/>
           <Text style={styles.address}>{ account.address }</Text>
           <Text style={styles.balance}>
-            <Text style={styles.value}>{ fromRawLsk(account.balance) }</Text>
+            <Text style={styles.value}>
+              <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>
+            </Text>
             <Text style={styles.unit}>LSK</Text>
           </Text>
           <Icon
