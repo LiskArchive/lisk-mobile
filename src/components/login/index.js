@@ -1,10 +1,11 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View } from 'react-native';
+import { KeyboardAvoidingView, View } from 'react-native';
 import {
-  Button, FormLabel,
+  FormLabel,
   FormInput, FormValidationMessage,
 } from 'react-native-elements';
+import { PrimaryButton } from '../toolBox/button';
 import { accountLoggedIn as accountLoggedInAction } from '../../actions/accounts';
 import styles from './styles';
 import { validatePassphrase } from '../../utilities/passphrase';
@@ -13,6 +14,7 @@ import Logo from '../logo';
 /**
  * The container component containing login and create account functionality
  */
+const pass = 'wagon stock borrow episode laundry kitten salute link globe zero feed marble';
 
 @connect(state => ({
   peers: state.peers,
@@ -26,14 +28,9 @@ class Login extends React.Component {
 
     this.state = {
       passphrase: {
-        value: 'wagon stock borrow episode laundry kitten salute link globe zero feed marble',
-        validity: validatePassphrase(''),
+        value: pass,
+        validity: validatePassphrase(pass),
       },
-      messages: [
-        '',
-        'No non-mnemonic or duplicated words',
-        'Passphrase is short',
-      ],
     };
   }
 
@@ -55,7 +52,7 @@ class Login extends React.Component {
    * @param {String} passphrase - valid mnemonic passphrase
    */
   onLoginSubmission(passphrase) {
-    if (passphrase.validity !== 0 && passphrase.validity !== 3) {
+    if (passphrase.validity.length !== 0) {
       this.passphraseInput.shake();
     } else {
       this.props.accountLoggedIn({
@@ -82,30 +79,30 @@ class Login extends React.Component {
   }
 
   render() {
-    const { passphrase, messages } = this.state;
-    return (<View style={styles.content}>
+    const { passphrase } = this.state;
+    const error = passphrase.validity
+      .filter(item =>
+        item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
+    return (<KeyboardAvoidingView style={styles.content} behavior="padding" enabled>
       <View style={styles.container}>
         <Logo />
         <FormLabel>Passphrase</FormLabel>
         <FormInput
-          styles={styles.input}
+          style={styles.input}
+          autoCapitalize = 'none'
+          multiline = {true}
           ref={(ref) => { this.passphraseInput = ref; }}
           value={passphrase.value}
           onChangeText={this.changeHandler.bind(this, 'passphrase')}/>
         <FormValidationMessage labelStyle={styles.errorMessage}>
-          {
-            (passphrase.validity === 1 ||
-            passphrase.validity === 2) ?
-            messages[passphrase.validity] : ''
-          }
+        { error.length ? error[0].message.replace(' Please check the passphrase.', '') : '' }
         </FormValidationMessage>
-        <Button
+        <PrimaryButton
           style={styles.button}
-          backgroundColor='#ff6236'
-          onPress={this.onLoginSubmission.bind(this, passphrase)}
-          title="Login"/>
+          disabled={passphrase.validity.length !== 0}
+          onClick={this.onLoginSubmission.bind(this, passphrase)}>Login</PrimaryButton>
       </View>
-    </View>);
+    </KeyboardAvoidingView>);
   }
 }
 
