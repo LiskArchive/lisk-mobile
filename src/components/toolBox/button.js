@@ -3,26 +3,32 @@ import { TouchableHighlight, Text } from 'react-native';
 import theme from './styles';
 
 const labelStyle = (propsStyle, disabled) => {
-  const style = [theme.button];
-  if (disabled) style.push(theme.disabledButtonColor);
-  else style.push(theme.primaryButtonColor);
-  if (propsStyle !== undefined && propsStyle instanceof Object) propsStyle = [propsStyle];
+  const style = [theme.button, theme.primaryButtonColor];
 
-  return style.concat(propsStyle);
+  const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
+  propStylesArr.forEach(element => style.push(element));
+
+  if (disabled) style.push(theme.disabledButtonColor);
+
+  return style;
 };
 
 const primaryStyle = (propsStyle, disabled) => {
-  const style = [theme.button];
+  const style = [
+    theme.button,
+    theme.primaryButtonColor,
+    theme.primaryButtonBg,
+  ];
+
+  const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
+  propStylesArr.forEach(element => style.push(element));
+
   if (disabled) {
     style.push(theme.disabledButtonColor);
     style.push(theme.disabledButtonBg);
-  } else {
-    style.push(theme.primaryButtonColor);
-    style.push(theme.primaryButtonBg);
   }
-  if (propsStyle !== undefined && propsStyle instanceof Object) propsStyle = [propsStyle];
 
-  return style.concat(propsStyle);
+  return style;
 };
 
 const modifyProps = (props) => {
