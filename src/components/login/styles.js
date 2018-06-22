@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import styleGuide from '../../constants/styleGuide';
 
 const styles = {
   content: {
@@ -7,15 +8,21 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  input: {
+    lineHeight: styleGuide.boxes.buttonHeight,
+    height: 2 * styleGuide.boxes.buttonHeight,
+  },
   container: {
     width: '100%',
   },
   button: {
-    backgroundColor: '#ff6236',
+    backgroundColor: styleGuide.colors.action4,
+    marginRight: styleGuide.boxes.boxPadding,
+    marginLeft: styleGuide.boxes.boxPadding,
   },
   errorMessage: {
     fontSize: 14,
-    height: 26,
+    height: 42,
   },
 };
 

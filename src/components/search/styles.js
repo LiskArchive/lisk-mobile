@@ -1,16 +1,18 @@
 import { StyleSheet } from 'react-native';
+import styleGuide from '../../constants/styleGuide';
 
 const styles = {
   title: {
-    color: '#000',
+    color: styleGuide.colors.black,
   },
   input: {
-    color: '#333',
+    color: styleGuide.colors.grayScale1,
   },
   button: {
-    color: '#333',
     marginTop: 20,
-    backgroundColor: '#ff6236',
+    backgroundColor: styleGuide.colors.action4,
+    marginRight: styleGuide.boxes.boxPadding,
+    marginLeft: styleGuide.boxes.boxPadding,
   },
   errorMessage: {
     fontSize: 14,
