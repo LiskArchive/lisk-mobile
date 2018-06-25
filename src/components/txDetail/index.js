@@ -5,6 +5,7 @@ import FormattedDate from '../formattedDate';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import styles from './styles';
+import CopyToClipBoard from '../copyToClipboard';
 
 const TxDetail = ({ navigation }) => {
   const tx = navigation.getParam('tx', null);
@@ -13,10 +14,10 @@ const TxDetail = ({ navigation }) => {
     <Text style={styles.value}>{ tx.id }</Text>
     <Divider style={styles.divider} />
     <Text h4 style={styles.title}>Sender :</Text>
-    <Text style={styles.value}>{ tx.senderId }</Text>
+    <CopyToClipBoard style={styles.value} value={tx.senderId} icon={true} />
     <Divider style={styles.divider} />
     <Text h4 style={styles.title}>Recipient :</Text>
-    <Text style={styles.value}>{ tx.recipientId }</Text>
+    <CopyToClipBoard style={styles.value} value={tx.recipientId} icon={true} />
     <Divider style={styles.divider} />
     <Text h4 style={styles.title}>Amount :</Text>
     <Text style={styles.value}>
