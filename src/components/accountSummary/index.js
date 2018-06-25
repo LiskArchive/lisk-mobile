@@ -11,6 +11,7 @@ import { fromRawLsk } from '../../utilities/conversions';
 import Modal from '../followedAccountsModal';
 import styles from './styles';
 import FormattedNumber from '../formattedNumber';
+import CopyToClipBoard from '../copyToClipboard';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -41,7 +42,7 @@ class AccountSummary extends React.Component {
         <View style={styles.container}>
           { children }
           <Avatar address={account.address} size={200}/>
-          <Text style={styles.address}>{ account.address }</Text>
+          <CopyToClipBoard style={styles.address} value={account.address} icon={false} />
           <Text style={styles.balance}>
             <Text style={styles.value}>
               <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>

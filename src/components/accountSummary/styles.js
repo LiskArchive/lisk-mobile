@@ -26,6 +26,7 @@ const styles = {
     color: '#ff6236',
     textAlign: 'center',
     marginBottom: 20,
+    width: '100%',
   },
   title: {
     fontSize: 12,
