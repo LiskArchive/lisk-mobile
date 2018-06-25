@@ -11,7 +11,7 @@ const TxDetail = ({ navigation }) => {
   const tx = navigation.getParam('tx', null);
   return (<View style={styles.container}>
     <Text h4 style={styles.title}>Transaction ID :</Text>
-    <Text style={styles.value}>{ tx.id }</Text>
+    <CopyToClipBoard style={styles.value} value={tx.id} icon={true} />
     <Divider style={styles.divider} />
     <Text h4 style={styles.title}>Sender :</Text>
     <CopyToClipBoard style={styles.value} value={tx.senderId} icon={true} />
