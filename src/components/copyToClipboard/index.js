@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Clipboard } from 'react-native';
 import { Icon } from 'react-native-elements';
+import styles from './styles';
 
 class CopyToClipBoard extends React.Component {
   state = { copied: false };
@@ -13,20 +14,18 @@ class CopyToClipBoard extends React.Component {
   }
   render() {
     const { icon, value, style } = this.props;
-    return (<View style={{
-        minWidth: '20%',
-        flexDirection: 'row',
-      }}
+    return (<View style={styles.container}
     >
-     <Text
+    <Text
       style={style}
       onPress={this.copy}>
         {this.state.copied ? 'copied to clipboard' : value}
-      </Text>
-     {(icon && !this.state.copied) ?
-        <Icon
-          onPress={this.copy}
-          type='font-awesome' name='copy' size={18} /> : null }
+    </Text>
+    {(icon && !this.state.copied) ?
+      <Icon
+        iconStyle={styles.icon}
+        onPress={this.copy}
+        type='font-awesome' name='copy' size={18} /> : null }
     </View>);
   }
 }
