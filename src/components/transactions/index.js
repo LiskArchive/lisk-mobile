@@ -14,7 +14,8 @@ class Transactions extends React.Component {
 
     return (<View>
       {
-        !transactions || (transactions.count === 0 && transactions.pending.length === 0) ?
+        (!transactions ||
+          (transactions.confirmed.length === 0 && transactions.pending.length === 0)) ?
           <Empty /> :
           <List
             navigate={navigate}
