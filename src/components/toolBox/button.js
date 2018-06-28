@@ -43,8 +43,8 @@ const modifyProps = (props) => {
 export const Button = (props) => {
   const modifiedProps = modifyProps(props);
 
-  return (<TouchableHighlight {...modifiedProps} style={theme.primaryButton}>
-    <Text style={props.style || {}}>{props.children || ''}</Text>
+  return (<TouchableHighlight underlayColor='transparent' {...modifiedProps} style={theme.primaryButton}>
+    <Text style={props.style || {}}>{props.children || props.title}</Text>
   </TouchableHighlight>);
 };
 

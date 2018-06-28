@@ -1,7 +1,7 @@
 export default {
   // heights
-  buttonHeight: 36,
-  borderedButtonHeight: 36,
+  buttonHeight: 46,
+  borderedButtonHeight: 46,
   // paddings
   boxPadding: 20,
   elementPadding: 10,

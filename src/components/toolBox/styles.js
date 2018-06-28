@@ -5,18 +5,22 @@ const styles = {
   h1: {
     color: styleGuide.colors.black,
     fontSize: styleGuide.fontSizes.h1,
+    fontWeight: 'bold',
   },
   h2: {
     color: styleGuide.colors.black,
     fontSize: styleGuide.fontSizes.h2,
+    fontWeight: 'bold',
   },
   h3: {
     color: styleGuide.colors.black,
     fontSize: styleGuide.fontSizes.h3,
+    fontWeight: 'bold',
   },
   h4: {
     color: styleGuide.colors.black,
     fontSize: styleGuide.fontSizes.h4,
+    fontWeight: 'bold',
   },
   p: {
     fontSize: styleGuide.fontSizes.base,

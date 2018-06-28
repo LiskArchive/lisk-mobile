@@ -6,8 +6,6 @@ const styles = {
     backgroundColor: '#FFFFFF',
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 16,
     padding: 20,
   },
   value: {

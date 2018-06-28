@@ -9,6 +9,8 @@ const styles = {
   },
   verticalAligner: {
     padding: 20,
+    marginLeft: 20,
+    marginRight: 20,
   },
   centerAlign: {
     textAlign: 'center',
@@ -33,7 +35,6 @@ const styles = {
     paddingBottom: 10,
   },
   amount: {
-    fontSize: 24,
     paddingBottom: 15,
   },
   address: {
@@ -42,10 +43,13 @@ const styles = {
   },
   button: {
     borderRadius: 0,
-    marginLeft: 0,
-    marginRight: 0,
     marginBottom: 0,
     marginTop: 20,
+  },
+  label: {
+    color: '#86939e',
+    marginTop: 15,
+    marginBottom: 1,
   },
 };
 

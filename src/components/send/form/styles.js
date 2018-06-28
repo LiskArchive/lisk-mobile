@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import styleGuide from '../../../constants/styleGuide';
 
 const styles = {
   container: {
@@ -9,6 +10,9 @@ const styles = {
   },
   button: {
     top: 20,
+    backgroundColor: styleGuide.colors.action4,
+    marginRight: styleGuide.boxes.boxPadding,
+    marginLeft: styleGuide.boxes.boxPadding,
   },
   errorMessage: {
     fontSize: 14,
