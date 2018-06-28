@@ -13,14 +13,18 @@ class CopyToClipBoard extends React.Component {
     }, 4000);
   }
   render() {
-    const { icon, value, style } = this.props;
+    const {
+      icon, value, style, type,
+    } = this.props;
+    const Element = type || Text;
+
     return (<View style={styles.container}
     >
-    <Text
+    <Element
       style={style}
       onPress={this.copy}>
         {this.state.copied ? 'copied to clipboard' : value}
-    </Text>
+    </Element>
     {(icon && !this.state.copied) ?
       <Icon
         iconStyle={styles.icon}
