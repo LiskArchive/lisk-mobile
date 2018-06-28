@@ -11,7 +11,9 @@ const styles = {
     padding: 20,
   },
   balance: {
-    textAlign: 'center',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   unit: {
     fontSize: 16,

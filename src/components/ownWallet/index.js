@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { Text } from 'react-native';
+import { H4 } from '../toolBox/typography';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
@@ -43,7 +43,7 @@ class Wallet extends React.Component {
       })}>
       {
         !this.props.accounts.active ?
-          <Text>Loading account</Text> :
+          <H4>Loading account</H4> :
           <AccountSummary account={this.props.accounts.active}>
           </AccountSummary>
       }

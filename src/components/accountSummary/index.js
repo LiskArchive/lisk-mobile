@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { Icon } from 'react-native-elements';
 import {
@@ -12,6 +12,7 @@ import Modal from '../followedAccountsModal';
 import styles from './styles';
 import FormattedNumber from '../formattedNumber';
 import CopyToClipBoard from '../copyToClipboard';
+import { H4, P, H2 } from '../toolBox/typography';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -42,20 +43,20 @@ class AccountSummary extends React.Component {
         <View style={styles.container}>
           { children }
           <Avatar address={account.address} size={200}/>
-          <CopyToClipBoard style={styles.address} value={account.address} icon={false} />
-          <Text style={styles.balance}>
-            <Text style={styles.value}>
+          <CopyToClipBoard type={P} style={styles.address} value={account.address} icon={false} />
+          <View style={styles.balance}>
+            <H2 style={styles.value}>
               <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>
-            </Text>
-            <Text style={styles.unit}>LSK</Text>
-          </Text>
+            </H2>
+            <P style={styles.unit}>LSK</P>
+          </View>
           <Icon
             name={iconName}
             type='font-awesome'
             color='#f50'
             onPress={this.toggleModal.bind(this)} />
         </View> :
-        <Text h4>Fetching account info</Text>
+        <H4>Fetching account info</H4>
       }
       <Modal
         hide={this.toggleModal.bind(this)}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
+import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
+import { PrimaryButton } from '../../toolBox/button';
 import styles from './styles';
 import reg from '../../../constants/regex';
 
@@ -80,11 +81,10 @@ class Form extends React.Component {
                 'Maximum length of 64 characters is exceeded.' : ''
             }
           </FormValidationMessage>
-          <Button
+          <PrimaryButton
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
-            onPress={this.goToNextState}
-            buttonStyle={styles.button}
-            backgroundColor='#ff6236'
+            onClick={this.goToNextState}
+            style={styles.button}
             title='Next' />
         </View>
       </View>);

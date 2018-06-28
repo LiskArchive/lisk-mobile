@@ -12,6 +12,7 @@ const styles = {
   },
   button: {
     marginTop: 20,
+    backgroundColor: '#008722',
   },
   title: {
     fontSize: 30,

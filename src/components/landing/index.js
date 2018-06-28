@@ -1,6 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { H4 } from '../toolBox/typography';
 import BackgroundImage from '../background';
 import Logo from '../logo';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
@@ -42,7 +43,7 @@ class Landing extends React.Component {
     return (<View style={styles.container}>
       <BackgroundImage />
       <Logo />
-      <Text>Landing...</Text>
+      <H4>Landing...</H4>
     </View>);
   }
 }

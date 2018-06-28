@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
 import styles from './styles';
+import { P } from '../toolBox/typography';
 
 class Item extends React.Component {
   showWallet(address) {
@@ -20,8 +20,10 @@ class Item extends React.Component {
       }
       subtitle={account.label || ''}
       title={
-        <Text style={styles.itemTitle}
-          onPress={this.showWallet.bind(this, account.address)}>{account.address}</Text>
+        <P style={styles.itemTitle}
+          onPress={this.showWallet.bind(this, account.address)}>
+          {account.address}
+        </P>
       } />);
   }
 }
