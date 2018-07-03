@@ -59,6 +59,16 @@ const styles = {
     borderWidth: 2,
     borderColor: styleGuide.colors.primary4,
   },
+  inputLabel: {
+    color: styleGuide.colors.grayScale2,
+  },
+  input: {
+    borderBottomColor: styleGuide.colors.grayScale3,
+    paddingBottom: 5,
+  },
+  errorMessage: {
+    color: styleGuide.colors.action2,
+  },
 };
 
 export default StyleSheet.create(styles);
