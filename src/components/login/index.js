@@ -1,15 +1,12 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { KeyboardAvoidingView, View } from 'react-native';
-import {
-  FormLabel,
-  FormInput, FormValidationMessage,
-} from 'react-native-elements';
 import { PrimaryButton } from '../toolBox/button';
 import { accountLoggedIn as accountLoggedInAction } from '../../actions/accounts';
 import styles from './styles';
 import { validatePassphrase } from '../../utilities/passphrase';
 import Logo from '../logo';
+import Input from '../toolBox/input';
 
 /**
  * The container component containing login and create account functionality
@@ -51,7 +48,7 @@ class Login extends React.Component {
    *
    * @param {String} passphrase - valid mnemonic passphrase
    */
-  onLoginSubmission(passphrase) {
+  onLoginSubmission = (passphrase) => {
     if (passphrase.validity.length !== 0) {
       this.passphraseInput.shake();
     } else {
@@ -86,17 +83,18 @@ class Login extends React.Component {
     return (<KeyboardAvoidingView style={styles.content} behavior="padding" enabled>
       <View style={styles.container}>
         <Logo />
-        <FormLabel>Passphrase</FormLabel>
-        <FormInput
-          style={styles.input}
-          autoCapitalize = 'none'
-          multiline = {true}
-          ref={(ref) => { this.passphraseInput = ref; }}
+        <Input
+          label='Passphrase'
+          reference={(ref) => { this.passphraseInput = ref; }}
+          styles={{ input: styles.input }}
           value={passphrase.value}
-          onChangeText={this.changeHandler.bind(this, 'passphrase')}/>
-        <FormValidationMessage labelStyle={styles.errorMessage}>
-        { error.length ? error[0].message.replace(' Please check the passphrase.', '') : '' }
-        </FormValidationMessage>
+          onChange={this.changeHandler.bind(this, 'passphrase')}
+          multiline={true}
+          error={
+            (error.length > 0 && error[0].message && error[0].message.length > 0) ?
+            error[0].message.replace(' Please check the passphrase.', '') : ''
+          }
+        />
         <PrimaryButton
           style={styles.button}
           disabled={passphrase.validity.length !== 0}

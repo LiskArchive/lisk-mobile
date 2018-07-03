@@ -40,11 +40,11 @@ const styles = {
     lineHeight: styleGuide.boxes.buttonHeight,
     textAlign: 'center',
   },
-  primaryButtonColor: {
+  primaryButton: {
     color: styleGuide.colors.white,
   },
-  primaryButtonBg: {
-    backgroundColor: styleGuide.colors.action4,
+  buttonWrapper: {
+    borderRadius: 3,
   },
   disabledButtonColor: {
     color: styleGuide.colors.grayScale4,
@@ -54,8 +54,20 @@ const styles = {
   },
   labelButton: {
     backgroundColor: 'transparent',
-    color: styleGuide.colors.white,
+    color: styleGuide.colors.primary4,
     fontSize: styleGuide.fontSizes.base,
+    borderWidth: 2,
+    borderColor: styleGuide.colors.primary4,
+  },
+  inputLabel: {
+    color: styleGuide.colors.grayScale2,
+  },
+  input: {
+    borderBottomColor: styleGuide.colors.grayScale3,
+    paddingBottom: 5,
+  },
+  errorMessage: {
+    color: styleGuide.colors.action2,
   },
 };
 

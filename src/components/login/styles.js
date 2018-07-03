@@ -7,16 +7,12 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  input: {
-    lineHeight: styleGuide.boxes.buttonHeight,
-    height: 2 * styleGuide.boxes.buttonHeight,
+    backgroundColor: '#fff',
   },
   container: {
     width: '100%',
   },
   button: {
-    backgroundColor: styleGuide.colors.action4,
     marginRight: styleGuide.boxes.boxPadding,
     marginLeft: styleGuide.boxes.boxPadding,
   },

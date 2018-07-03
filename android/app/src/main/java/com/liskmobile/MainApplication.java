@@ -7,7 +7,6 @@ import com.horcrux.svg.SvgPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.tradle.react.UdpSocketsModule;
 import com.peel.react.TcpSocketsModule;
-import com.gcrabtree.rctsocketio.SocketIoPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.peel.react.rnos.RNOSModule;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -35,7 +34,6 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new UdpSocketsModule(),
             new TcpSocketsModule(),
-            new SocketIoPackage(),
             new RandomBytesPackage(),
             new RNOSModule(),
             new LinearGradientPackage()

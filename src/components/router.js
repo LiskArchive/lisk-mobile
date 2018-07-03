@@ -1,5 +1,6 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
+import { Image, View } from 'react-native';
 import Landing from './landing';
 import Login from './login';
 import TxDetail from './txDetail';
@@ -10,6 +11,7 @@ import OwnWallet from './ownWallet';
 import styles from './styles';
 import LogoutButton from './logoutButton';
 import Icon from './toolBox/icons';
+import Src from '../assets/images/strapes.png';
 
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
@@ -68,40 +70,55 @@ export default StackNavigator(
     Main: {
       screen: Tabs,
       navigationOptions: {
+        headerBackground: (<View>
+          <Image
+          style={{ position: 'absolute', width: '100%' }}
+          source={Src}
+        />
+        </View>),
         headerRight: <LogoutButton />,
         headerBackTitle: 'Back',
         headerTintColor: styles.white,
         headerLeft: null,
         headerStyle: {
-          backgroundColor: styles.headerColor,
-          borderBottomColor: styles.headerColor,
-          borderBottomWidth: 3,
+          backgroundColor: 'transparent',
+          overflow: 'hidden',
         },
       },
     },
     Wallet: {
       screen: Wallet,
       navigationOptions: {
+        headerBackground: (<View>
+          <Image
+          style={{ position: 'absolute', width: '100%' }}
+          source={Src}
+        />
+        </View>),
         headerRight: <LogoutButton />,
         title: 'Wallet',
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
-          borderBottomColor: styles.headerColor,
-          borderBottomWidth: 3,
+          overflow: 'hidden',
         },
       },
     },
     TxDetail: {
       screen: TxDetail,
       navigationOptions: {
+        headerBackground: (<View>
+          <Image
+          style={{ position: 'absolute', width: '100%' }}
+          source={Src}
+        />
+        </View>),
         headerRight: <LogoutButton />,
         title: 'Details',
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
-          borderBottomColor: styles.headerColor,
-          borderBottomWidth: 3,
+          overflow: 'hidden',
         },
       },
     },
