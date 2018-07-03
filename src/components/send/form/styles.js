@@ -10,7 +10,6 @@ const styles = {
   },
   button: {
     top: 20,
-    backgroundColor: styleGuide.colors.action4,
     marginRight: styleGuide.boxes.boxPadding,
     marginLeft: styleGuide.boxes.boxPadding,
   },
