@@ -1,10 +1,12 @@
 import actionTypes from '../constants/actions';
 import txConstants from '../constants/transactions';
 import { getTransactions, send } from '../utilities/api/transactions';
+import { loadingStarted, loadingFinished } from './loading';
 
 export const transactionsLoaded = data =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
+    dispatch(loadingStarted(actionTypes.transactionsLoaded));
     getTransactions(activePeer, data)
       .then((response) => {
         dispatch({
@@ -13,6 +15,7 @@ export const transactionsLoaded = data =>
             transactions: response.data,
           },
         });
+        dispatch(loadingFinished(actionTypes.transactionsLoaded));
       });
   };
 

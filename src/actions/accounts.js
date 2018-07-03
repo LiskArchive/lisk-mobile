@@ -1,6 +1,7 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
 import { getAccount, extractAddress } from '../utilities/api/account';
+import { loadingStarted, loadingFinished } from './loading';
 
 /**
  * Stores the given accounts data in AsyncStorage
@@ -104,12 +105,14 @@ export const accountEdited = (address, updatedData) => ({
 export const accountLoggedIn = ({ passphrase }) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
+    dispatch(loadingStarted(actionTypes.accountLoggedIn));
     getAccount(activePeer, extractAddress(passphrase))
       .then((account) => {
         dispatch({
           type: actionTypes.accountLoggedIn,
           data: { ...account, passphrase },
         });
+        dispatch(loadingFinished(actionTypes.accountLoggedIn));
       });
   };
 /**
