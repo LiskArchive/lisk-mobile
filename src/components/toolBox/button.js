@@ -1,9 +1,11 @@
 import React from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 import { TouchableHighlight, Text } from 'react-native';
 import theme from './styles';
+import Colors from '../../constants/styleGuide/colors';
 
 const labelStyle = (propsStyle, disabled) => {
-  const style = [theme.button, theme.primaryButtonColor];
+  const style = [theme.button, theme.labelButton];
 
   const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
   propStylesArr.forEach(element => style.push(element));
@@ -16,8 +18,7 @@ const labelStyle = (propsStyle, disabled) => {
 const primaryStyle = (propsStyle, disabled) => {
   const style = [
     theme.button,
-    theme.primaryButtonColor,
-    theme.primaryButtonBg,
+    theme.primaryButton,
   ];
 
   const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
@@ -43,13 +44,29 @@ const modifyProps = (props) => {
 export const Button = (props) => {
   const modifiedProps = modifyProps(props);
 
-  return (<TouchableHighlight underlayColor='transparent' {...modifiedProps} style={theme.primaryButton}>
+  return (<TouchableHighlight underlayColor='transparent' {...modifiedProps}>
     <Text style={props.style || {}}>{props.children || props.title}</Text>
   </TouchableHighlight>);
 };
 
-export const PrimaryButton = props =>
-  <Button {...props} style={primaryStyle(props.style, props.disabled)} />;
+export const PrimaryButton = props => (<LinearGradient
+    start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+    colors={props.disabled ?
+      [Colors.grayScale3, Colors.grayScale3] :
+      [Colors.action4, Colors.action2]}
+    style={[theme.buttonWrapper, props.style]}>
+    <Button {...props} style={primaryStyle(props.disabled)} />
+  </LinearGradient>);
+
+
+export const SecondaryButton = props => (<LinearGradient
+  start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+  colors={props.disabled ?
+    [Colors.grayScale3, Colors.grayScale3] :
+    [Colors.primary4, Colors.primary2]}
+  style={[theme.buttonWrapper, props.style]}>
+  <Button {...props} style={primaryStyle(props.disabled)} />
+</LinearGradient>);
 
 export const LabelButton = props =>
   <Button {...props} style={labelStyle(props.style, props.disabled)} />;
