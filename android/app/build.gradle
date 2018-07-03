@@ -141,7 +141,6 @@ dependencies {
     compile project(':react-native-vector-icons')
     compile project(':react-native-udp')
     compile project(':react-native-tcp')
-    compile project(':react-native-socketio')
     compile project(':react-native-randombytes')
     compile project(':react-native-os')
     compile project(':react-native-linear-gradient')
