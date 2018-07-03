@@ -82,7 +82,6 @@ export default StackNavigator(
         headerLeft: null,
         headerStyle: {
           backgroundColor: 'transparent',
-          borderBottomWidth: 3,
           overflow: 'hidden',
         },
       },
@@ -90,26 +89,36 @@ export default StackNavigator(
     Wallet: {
       screen: Wallet,
       navigationOptions: {
+        headerBackground: (<View>
+          <Image
+          style={{ position: 'absolute', width: '100%' }}
+          source={Src}
+        />
+        </View>),
         headerRight: <LogoutButton />,
         title: 'Wallet',
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
-          borderBottomColor: styles.headerColor,
-          borderBottomWidth: 3,
+          overflow: 'hidden',
         },
       },
     },
     TxDetail: {
       screen: TxDetail,
       navigationOptions: {
+        headerBackground: (<View>
+          <Image
+          style={{ position: 'absolute', width: '100%' }}
+          source={Src}
+        />
+        </View>),
         headerRight: <LogoutButton />,
         title: 'Details',
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
-          borderBottomColor: styles.headerColor,
-          borderBottomWidth: 3,
+          overflow: 'hidden',
         },
       },
     },
