@@ -7,10 +7,7 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  input: {
-    lineHeight: styleGuide.boxes.buttonHeight,
-    height: 2 * styleGuide.boxes.buttonHeight,
+    backgroundColor: '#fff',
   },
   container: {
     width: '100%',

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import { PrimaryButton } from '../../toolBox/button';
 import styles from './styles';
 import reg from '../../../constants/regex';
+import Input from '../../toolBox/input';
 
 class Form extends React.Component {
   constructor() {
@@ -51,36 +51,37 @@ class Form extends React.Component {
   render() {
     return (<View style={styles.container}>
         <View>
-          <FormLabel>Address</FormLabel>
-          <FormInput
-            ref={(input) => { this.address = input; }}
-            onChangeText={value => this.changeHandler('address', value)}/>
-          <FormValidationMessage labelStyle={styles.errorMessage}>
-            {
+          <Input
+            label='Address'
+            reference={(input) => { this.address = input; }}
+            styles={{ errorMessage: styles.errorMessage }}
+            onChange={value => this.changeHandler('address', value)}
+            error={
               this.state.address.validity === 1 ?
                 'Invalid address' : ''
             }
-          </FormValidationMessage>
-          <FormLabel>Amount</FormLabel>
-          <FormInput
-            ref={(input) => { this.amount = input; }}
-            onChangeText={value => this.changeHandler('amount', value)}/>
-          <FormValidationMessage labelStyle={styles.errorMessage}>
-            {
+          />
+          <Input
+            label='Amount'
+            reference={(input) => { this.amount = input; }}
+            styles={{ errorMessage: styles.errorMessage }}
+            onChange={value => this.changeHandler('amount', value)}
+            error={
               this.state.amount.validity === 1 ?
                 'Invalid amount value' : ''
             }
-          </FormValidationMessage>
-          <FormLabel>Reference</FormLabel>
-          <FormInput
-            ref={(input) => { this.reference = input; }}
-            onChangeText={value => this.changeHandler('reference', value)}/>
-          <FormValidationMessage labelStyle={styles.errorMessage}>
-            {
+          />
+          <Input
+            label='Reference'
+            reference={(input) => { this.reference = input; }}
+            styles={{ errorMessage: styles.errorMessage }}
+            multiline={true}
+            onChange={value => this.changeHandler('reference', value)}
+            error={
               this.state.reference.validity === 1 ?
                 'Maximum length of 64 characters is exceeded.' : ''
             }
-          </FormValidationMessage>
+          />
           <PrimaryButton
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onClick={this.goToNextState}
