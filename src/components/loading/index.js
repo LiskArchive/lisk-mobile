@@ -1,41 +1,42 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { Text } from 'react-native';
+import { View } from 'react-native';
+import styles from './styles';
 
 @connect(state => ({
   loading: state.loading,
-  peers: state.peers,
 }), {})
-class LoadingBar extends React.Component {
+class Loading extends React.Component {
   constructor() {
     super();
-    this.state = {};
-    this.markedAsLoaded = false;
+    this.state = {
+      visible: false,
+    };
+    this.animationDuration = 1000;
   }
 
-  markLoaded() {
-    this.props.markAsLoaded();
-    this.markedAsLoaded = true;
+  show() {
+    this.setState({
+      visible: true,
+      startTime: new Date(),
+    });
+  }
+
+  hide() {
+    const offset = new Date() - this.state.startTime;
+    this.timeout = setTimeout(() => {
+      this.setState({ visible: false });
+    }, this.animationDuration - (offset % this.animationDuration));
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.markedAsLoaded && nextProps.peers.data) this.markLoaded();
-
-    if (nextProps.loading && nextProps.loading.length > 0 && this.props.loading.length === 0) {
-      this.startTime = new Date();
-      this.setState({ visible: true });
+    if (nextProps.loading) {
+      if (nextProps.loading.length > 0 && this.props.loading.length === 0) {
+        this.show();
+      } else if (nextProps.loading.length === 0 && this.props.loading.length > 0) {
+        this.hide();
+      }
     }
-    if (nextProps.loading && nextProps.loading.length === 0 && this.props.loading.length > 0) {
-      const timeDiff = new Date() - this.startTime;
-      const animationDuration = 1000;
-      this.timeout = setTimeout(() => {
-        this.setState({ visible: false });
-      }, animationDuration - (timeDiff % animationDuration));
-    }
-  }
-
-  componentDidMount() {
-    if (this.props.peers.data) this.markLoaded();
   }
 
   componentWillUnmount() {
@@ -43,8 +44,8 @@ class LoadingBar extends React.Component {
   }
 
   render() {
-    return <Text>{ this.state.visible ? 'Loading...' : '' }</Text>;
+    return <View style={this.state.visible ? styles.visible : styles.hidden}></View>;
   }
 }
 
-export default LoadingBar;
+export default Loading;
