@@ -1,14 +1,17 @@
 import { StyleSheet } from 'react-native';
+import styleGuide from '../../../constants/styleGuide';
+
 
 const styles = {
   container: {
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     flex: 1,
     backgroundColor: '#ffffff',
-  },
-  inner: {
-    padding: 20,
+    paddingRight: styleGuide.boxes.boxPadding,
+    paddingLeft: styleGuide.boxes.boxPadding,
+    paddingTop: 60,
+    paddingBottom: 35,
   },
   button: {
     marginTop: 20,
@@ -18,15 +21,15 @@ const styles = {
     fontSize: 30,
     marginBottom: 20,
   },
-  centerAlign: {
-    textAlign: 'center',
-  },
   gray: {
     color: '#666',
   },
   heading: {
     fontSize: 24,
     paddingBottom: 80,
+  },
+  subtitle: {
+    color: styleGuide.colors.grayScale2,
   },
 };
 

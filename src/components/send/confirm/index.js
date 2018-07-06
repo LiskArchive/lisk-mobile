@@ -5,7 +5,8 @@ import { transactionAdded as transactionAddedAction } from '../../../actions/tra
 import styles from './styles';
 import { toRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
-import { H2, H4 } from '../../toolBox/typography';
+import Avatar from '../../avatar';
+import { H1, H3, P } from '../../toolBox/typography';
 
 @connect(state => ({
   accounts: state.accounts,
@@ -32,24 +33,32 @@ class Form extends React.Component {
   render() {
     const { address, amount, reference } = this.props;
     return (<View style={styles.container}>
-      <View style={styles.verticalAligner}>
-        <H2 style={[styles.heading, styles.centerAlign, styles.gray]}>Confirm to send</H2>
-        <View style={styles.row}>
-          <H4 style={styles.label}>To:</H4>
-          <H2 labelStyle={[styles.address, styles.black]}>{address}</H2>
+      <View style={styles.innerContainer}>
+        <View style={styles.titleContainer}>
+          <H1>Sending</H1>
+          <P style={styles.subtitle}>You are about to send tokens to other addresses.</P>
         </View>
-        <View style={styles.row}>
-        <H4 style={styles.label}>Total (including 0.1LSK fee):</H4>
-        <H2 labelStyle={[styles.amount, styles.black]}>{`${parseFloat(amount) + 0.1} LSK`}</H2>
+        <View>
+          <View style={styles.row}>
+            <P style={styles.label}>Address</P>
+            <View style={styles.addressContainer}>
+              <Avatar address={address} style={styles.avatar} size={35}/>
+              <H3 labelStyle={[styles.address, styles.black]}>{address}</H3>
+            </View>
+          </View>
+          <View style={styles.row}>
+            <P style={styles.label}>Amount (including 0.1LSK fee):</P>
+            <H3 labelStyle={[styles.amount, styles.black]}>{`${parseFloat(amount) + 0.1} LSK`}</H3>
+          </View>
+          {reference ? <View style={styles.row}>
+            <P style={styles.label}>Reference:</P>
+            <H3 labelStyle={[styles.address, styles.black]}>{reference}</H3>
+          </View> : null}
         </View>
-        {reference ? <View style={styles.row}>
-          <H4 style={styles.label}>reference:</H4>
-          <H2 labelStyle={[styles.address, styles.black]}>{reference}</H2>
-        </View> : null}
         <PrimaryButton
           style={styles.button}
           onClick={this.send}
-          title='Next' />
+          title='Confirm' />
       </View>
     </View>);
   }

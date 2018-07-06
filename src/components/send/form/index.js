@@ -1,26 +1,28 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { View } from 'react-native';
+import { KeyboardAccessoryNavigation } from 'react-native-keyboard-accessory';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { PrimaryButton } from '../../toolBox/button';
+import { P, H1 } from '../../toolBox/typography';
 import styles from './styles';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
 
 class Form extends React.Component {
-  constructor() {
-    super();
+    references = [];
 
-    this.state = {
+    state = {
       address: { value: '', validity: -1 },
       amount: { value: '', validity: -1 },
       reference: { value: '', validity: -1 },
     };
 
-    this.validator = {
+    validator = {
       address: str => reg.address.test(str),
       amount: str => reg.amount.test(str),
       reference: str => (str.length === 0 || str.length < 64),
     };
-  }
+    activeInputRef = null;
 
   /**
    * @param {String} name - the key to set on state
@@ -40,6 +42,17 @@ class Form extends React.Component {
     });
   }
 
+  changeInputFocus = (direction = 1) => {
+    let focusingRef = this.activeInputRef + direction;
+    if (focusingRef < 0) {
+      focusingRef = 0;
+    }
+    if (focusingRef > 2) {
+      focusingRef = 2;
+    }
+    this.references[`${focusingRef}`].focus();
+  }
+
   goToNextState = () => {
     this.props.nextStep({
       amount: this.state.amount.value,
@@ -49,46 +62,73 @@ class Form extends React.Component {
   }
 
   render() {
-    return (<View style={styles.container}>
+    return (
+      <Fragment>
+      <KeyboardAwareScrollView
+        enableAutomaticScroll={true}
+        extraScrollHeight={70}
+        contentContainerStyle={styles.container}
+        innerRef={(view) => {
+          this.scroll = view;
+        }}
+      >
+      <View style={styles.innerContainer}>
+        <View style={styles.titleContainer}>
+          <H1>Send</H1>
+          <P style={styles.subtitle}>Send Lisk tokens to other accounts</P>
+        </View>
         <View>
           <Input
             label='Address'
-            reference={(input) => { this.address = input; }}
-            styles={{ errorMessage: styles.errorMessage }}
+            reference={(input) => { this.references[0] = input; }}
+            styles={{ errorMessage: styles.errorMessage, input: styles.input }}
             onChange={value => this.changeHandler('address', value)}
+            value={this.state.address.value}
             error={
               this.state.address.validity === 1 ?
                 'Invalid address' : ''
             }
+            onFocus={() => { this.activeInputRef = 0; }}
           />
           <Input
             label='Amount'
-            reference={(input) => { this.amount = input; }}
-            styles={{ errorMessage: styles.errorMessage }}
+            reference={(input) => { this.references[1] = input; }}
+            styles={{ errorMessage: styles.errorMessage, input: styles.input }}
             onChange={value => this.changeHandler('amount', value)}
+            value={this.state.amount.value}
             error={
               this.state.amount.validity === 1 ?
                 'Invalid amount value' : ''
             }
+            onFocus={() => { this.activeInputRef = 1; }}
           />
           <Input
             label='Reference'
-            reference={(input) => { this.reference = input; }}
-            styles={{ errorMessage: styles.errorMessage }}
+            reference={(input) => { this.references[2] = input; }}
+            styles={{ errorMessage: styles.errorMessage, input: styles.input }}
             multiline={true}
             onChange={value => this.changeHandler('reference', value)}
             error={
               this.state.reference.validity === 1 ?
                 'Maximum length of 64 characters is exceeded.' : ''
             }
+            onFocus={() => { this.activeInputRef = 2; }}
           />
+          </View>
           <PrimaryButton
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onClick={this.goToNextState}
             style={styles.button}
             title='Next' />
-        </View>
-      </View>);
+          </View>
+        </KeyboardAwareScrollView>
+        <KeyboardAccessoryNavigation
+          style={{ marginBottom: -60 }}
+          onNext={() => this.changeInputFocus(1)}
+          onPrevious={() => this.changeInputFocus(-1)}
+        />
+      </Fragment>
+    );
   }
 }
 

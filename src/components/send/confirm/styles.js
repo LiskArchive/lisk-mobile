@@ -1,16 +1,22 @@
 import { StyleSheet } from 'react-native';
+import styleGuide from '../../../constants/styleGuide';
 
 const styles = {
   container: {
-    flexDirection: 'column',
-    justifyContent: 'space-around',
     flex: 1,
     backgroundColor: '#ffffff',
   },
+  innerContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginRight: styleGuide.boxes.boxPadding,
+    marginLeft: styleGuide.boxes.boxPadding,
+    paddingTop: 60,
+    paddingBottom: 35,
+  },
   verticalAligner: {
     padding: 20,
-    marginLeft: 20,
-    marginRight: 20,
   },
   centerAlign: {
     textAlign: 'center',
@@ -29,6 +35,7 @@ const styles = {
     paddingBottom: 80,
   },
   row: {
+    marginBottom: 20,
   },
   title: {
     fontSize: 12,
@@ -49,7 +56,19 @@ const styles = {
   label: {
     color: '#86939e',
     marginTop: 15,
-    marginBottom: 1,
+    fontSize: 14,
+    marginBottom: 7,
+  },
+  subtitle: {
+    color: styleGuide.colors.grayScale2,
+  },
+  addressContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  avatar: {
+    paddingBottom: 0,
+    marginRight: 20,
   },
 };
 
