@@ -4,8 +4,10 @@ import Form from './form';
 import Confirm from './confirm';
 import Result from './result';
 
-const Send = () => (
-  <MultiStep finalCallback={() => {}}>
+const Send = ({ navigation }) => (
+  <MultiStep finalCallback={() => {
+    navigation.navigate({ routeName: 'OwnWallet' });
+  }}>
     <Form/>
     <Confirm />
     <Result />
