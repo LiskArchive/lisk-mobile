@@ -11,19 +11,21 @@ import theme from './styles';
  * @param {Number} props.size - THe size of the icon in pixels, defaults to 35
  */
 const Input = ({
-  label, reference, styles, value, onChange, error, multiline,
+  label, reference, styles, value, onChange, error, multiline, onFocus,
 }) => (<View>
   <FormLabel labelStyle={[theme.inputLabel, styles.inputLabel]}>{label}</FormLabel>
   <FormInput
     containerStyle={[theme.input, styles.input]}
+    textStyle={styles.input}
     autoCapitalize = 'none'
     multiline = {multiline}
     ref={input => reference(input)}
     value={value}
-    onChangeText={onChange}/>
-  <FormValidationMessage labelStyle={[theme.errorMessage, styles.errorMessage]}>
+    onChangeText={onChange}
+    onFocus={onFocus}/>
+  {error ? <FormValidationMessage labelStyle={[theme.errorMessage, styles.errorMessage]}>
   { error }
-  </FormValidationMessage>
+  </FormValidationMessage> : null }
 </View>);
 
 export default Input;
