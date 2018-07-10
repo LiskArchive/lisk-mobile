@@ -7,9 +7,6 @@ const styles = {
     paddingBottom: 20,
   },
   avatar: {
-    width: 134,
-    height: 138,
-    borderRadius: 100,
     overflow: 'hidden',
   },
 };

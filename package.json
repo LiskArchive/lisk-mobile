@@ -38,6 +38,8 @@
     "react-native-crypto": "^2.1.2",
     "react-native-elements": "^0.19.0",
     "react-native-http": "github:tradle/react-native-http#834492d",
+    "react-native-keyboard-accessory": "0.0.12",
+    "react-native-keyboard-aware-scroll-view": "^0.6.0",
     "react-native-level-fs": "^3.0.1",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-modal": "^6.1.0",
