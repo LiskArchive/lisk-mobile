@@ -1,16 +1,26 @@
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, DeviceInfo } from 'react-native';
+import { Header } from 'react-navigation';
+import styleGuide from '../../constants/styleGuide';
+
+const top = DeviceInfo.isIPhoneX_deprecated ? Header.HEIGHT + 23 : Header.HEIGHT;
 
 const styles = {
-  visible: {
-    width: 200,
+  wrapper: {
+    width: '100%',
     height: 3,
-    backgroundColor: '#f00',
+    position: 'absolute',
+    zIndex: 10,
+    top,
+    left: 0,
+    overflow: 'hidden',
   },
-  hidden: {
+  stripe: {
+    backgroundColor: styleGuide.colors.action4,
+    position: 'absolute',
     width: 200,
     height: 3,
-    backgroundColor: '#0f0',
+    top: 0,
   },
 };
 

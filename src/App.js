@@ -7,8 +7,8 @@ import store from './store/index';
 const App = () => (
   <Provider store={store}>
     <Fragment>
-      <Router />
       <Loading />
+      <Router />
     </Fragment>
   </Provider>
 );

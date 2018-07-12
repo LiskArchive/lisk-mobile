@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View } from 'react-native';
+import { View, Animated, Dimensions } from 'react-native';
 import styles from './styles';
 
 @connect(state => ({
@@ -9,24 +9,38 @@ import styles from './styles';
 class Loading extends React.Component {
   constructor() {
     super();
-    this.state = {
-      visible: false,
-    };
+    const { width } = Dimensions.get('window');
     this.animationDuration = 1000;
+    this.startValue = -200;
+    this.endValue = width;
+    this.state = {
+      left: new Animated.Value(-200),
+    };
+    this.visible = false;
   }
 
   show() {
-    this.setState({
-      visible: true,
-      startTime: new Date(),
-    });
+    this.visible = true;
+    this.animate();
   }
 
   hide() {
-    const offset = new Date() - this.state.startTime;
-    this.timeout = setTimeout(() => {
-      this.setState({ visible: false });
-    }, this.animationDuration - (offset % this.animationDuration));
+    this.visible = false;
+  }
+
+  animate() {
+    if (this.visible) {
+      const fn = this.animate.bind(this);
+      Animated.timing(this.state.left, {
+        toValue: this.endValue,
+        duration: this.animationDuration,
+      }).start(() => {
+        Animated.timing(this.state.left, {
+          toValue: this.startValue,
+          duration: this.animationDuration,
+        }).start(fn);
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,12 +53,10 @@ class Loading extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
-
   render() {
-    return <View style={this.state.visible ? styles.visible : styles.hidden}></View>;
+    return <View style={styles.wrapper}>
+      <Animated.View style={[styles.stripe, { left: this.state.left }]}></Animated.View>
+    </View>;
   }
 }
 
