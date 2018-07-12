@@ -4,7 +4,7 @@ const styles = {
   figure: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 20,
+    overflow: 'hidden',
   },
   avatar: {
     overflow: 'hidden',
