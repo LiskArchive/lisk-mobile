@@ -22,6 +22,7 @@ export const transactionsLoaded = data =>
 export const transactionAdded = (data, account) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
+    dispatch(loadingStarted(actionTypes.transactionAdded));
     send(activePeer, data)
       .then((res) => {
         dispatch({
@@ -36,5 +37,6 @@ export const transactionAdded = (data, account) =>
           },
           type: actionTypes.transactionAdded,
         });
+        dispatch(loadingFinished(actionTypes.transactionAdded));
       });
   };
