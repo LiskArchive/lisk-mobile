@@ -13,6 +13,11 @@ import LogoutButton from './logoutButton';
 import Icon from './toolBox/icons';
 import Src from '../assets/images/strapes.png';
 
+const MenuIcon = ({ focused, icon }) => {
+  const color = focused ? '#1F55A0' : '#000';
+  return <Icon name={icon} style={{ marginBottom: 0 }} tintColor={color} />;
+};
+
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
   OwnWallet: {
@@ -20,7 +25,7 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Wallet',
       tabBarLabel: 'Wallet',
-      tabBarIcon: <Icon name='list' color={styles.iconsTintColor} />,
+      tabBarIcon: ({ focused }) => <MenuIcon icon='list' focused={focused} />, //eslint-disable-line
     },
   },
   Send: {
@@ -28,7 +33,7 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Send',
       tabBarLabel: 'Send',
-      tabBarIcon: <Icon name='send' color={styles.iconsTintColor} />,
+      tabBarIcon: ({ focused }) => <MenuIcon icon='send' focused={focused} />, //eslint-disable-line
     },
   },
   Explore: {
@@ -36,17 +41,26 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Explore',
       tabBarLabel: 'Explore',
-      tabBarIcon: <Icon name='search' color={styles.iconsTintColor} />,
+      tabBarIcon: ({ focused }) => <MenuIcon icon='search' focused={focused} />, //eslint-disable-line
     },
   },
 }, {
+  tabBarPosition: 'bottom',
+  swipeEnabled: false,
   tabBarOptions: {
+    activeTintColor: '#1F55A0',
+    inactiveTintColor: '#525252',
+    showIcon: true,
+    style: {
+      backgroundColor: '#fff',
+      borderColor: ' #F2F2F2',
+      borderTopWidth: 1,
+      height: 65,
+      zIndex: 99,
+      paddingTop: 2,
+    },
     labelStyle: {
       fontSize: 14,
-    },
-    style: {
-      paddingTop: 5,
-      marginBottom: 0,
     },
   },
   headerMode: 'screen',
