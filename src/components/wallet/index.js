@@ -6,6 +6,10 @@ import { getTransactions } from '../../utilities/api/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
+import {
+  loadingStarted as loadingStartedAction,
+  loadingFinished as loadingFinishedAction,
+} from '../../actions/loading';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -20,7 +24,10 @@ import InfiniteScrollView from '../infiniteScrollView';
   accounts: state.accounts,
   transactions: state.transactions,
   activePeer: state.peers.activePeer,
-}), {})
+}), {
+  loadingStarted: loadingStartedAction,
+  loadingFinished: loadingFinishedAction,
+})
 class Wallet extends React.Component {
   state = {
     account: {},
@@ -37,6 +44,7 @@ class Wallet extends React.Component {
   }
 
   setTransactions = () => {
+    this.props.loadingStarted('getTransactions');
     getTransactions(this.props.activePeer, {
       senderIdOrRecipientId: this.address,
       offset: this.state.transactions.confirmed.length,
@@ -48,6 +56,7 @@ class Wallet extends React.Component {
           pending: [],
         },
       });
+      this.props.loadingFinished('getTransactions');
     });
   }
 
