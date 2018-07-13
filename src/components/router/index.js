@@ -1,20 +1,20 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import { Image, View } from 'react-native';
-import Landing from './landing';
-import Login from './login';
-import TxDetail from './txDetail';
-import Send from './send';
-import Explore from './explore';
-import Wallet from './wallet';
-import OwnWallet from './ownWallet';
-import styles from './styles';
-import LogoutButton from './logoutButton';
-import Icon from './toolBox/icons';
-import Src from '../assets/images/strapes.png';
+import Landing from '../landing';
+import Login from '../login';
+import TxDetail from '../txDetail';
+import Send from '../send';
+import Explore from '../explore';
+import Wallet from '../wallet';
+import OwnWallet from '../ownWallet';
+import styles from '../styles';
+import LogoutButton from '../logoutButton';
+import Icon from '../toolBox/icons';
+import Bg from '../headerBackground';
+import tabBarOptions from './tabBarOptions';
 
 const MenuIcon = ({ focused, icon }) => {
-  const color = focused ? '#1F55A0' : '#000';
+  const color = focused ? tabBarOptions.activeTintColor : '#000';
   return <Icon name={icon} style={{ marginBottom: 0 }} tintColor={color} />;
 };
 
@@ -47,22 +47,7 @@ export const Tabs = TabNavigator({
 }, {
   tabBarPosition: 'bottom',
   swipeEnabled: false,
-  tabBarOptions: {
-    activeTintColor: '#1F55A0',
-    inactiveTintColor: '#525252',
-    showIcon: true,
-    style: {
-      backgroundColor: '#fff',
-      borderColor: ' #F2F2F2',
-      borderTopWidth: 1,
-      height: 65,
-      zIndex: 99,
-      paddingTop: 2,
-    },
-    labelStyle: {
-      fontSize: 14,
-    },
-  },
+  tabBarOptions,
   headerMode: 'screen',
 });
 
@@ -84,12 +69,7 @@ export default StackNavigator(
     Main: {
       screen: Tabs,
       navigationOptions: {
-        headerBackground: (<View>
-          <Image
-          style={{ position: 'absolute', width: '100%' }}
-          source={Src}
-        />
-        </View>),
+        headerBackground: <Bg />,
         headerRight: <LogoutButton />,
         headerBackTitle: 'Back',
         headerTintColor: styles.white,
@@ -103,12 +83,7 @@ export default StackNavigator(
     Wallet: {
       screen: Wallet,
       navigationOptions: {
-        headerBackground: (<View>
-          <Image
-          style={{ position: 'absolute', width: '100%' }}
-          source={Src}
-        />
-        </View>),
+        headerBackground: <Bg />,
         headerRight: <LogoutButton />,
         title: 'Wallet',
         headerTintColor: styles.white,
@@ -121,12 +96,7 @@ export default StackNavigator(
     TxDetail: {
       screen: TxDetail,
       navigationOptions: {
-        headerBackground: (<View>
-          <Image
-          style={{ position: 'absolute', width: '100%' }}
-          source={Src}
-        />
-        </View>),
+        headerBackground: <Bg />,
         headerRight: <LogoutButton />,
         title: 'Details',
         headerTintColor: styles.white,
