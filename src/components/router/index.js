@@ -1,17 +1,22 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import { Image, View } from 'react-native';
-import Landing from './landing';
-import Login from './login';
-import TxDetail from './txDetail';
-import Send from './send';
-import Explore from './explore';
-import Wallet from './wallet';
-import OwnWallet from './ownWallet';
-import styles from './styles';
-import LogoutButton from './logoutButton';
-import Icon from './toolBox/icons';
-import Src from '../assets/images/strapes.png';
+import Landing from '../landing';
+import Login from '../login';
+import TxDetail from '../txDetail';
+import Send from '../send';
+import Explore from '../explore';
+import Wallet from '../wallet';
+import OwnWallet from '../ownWallet';
+import styles from '../styles';
+import LogoutButton from '../logoutButton';
+import Icon from '../toolBox/icons';
+import Bg from '../headerBackground';
+import tabBarOptions from './tabBarOptions';
+
+const MenuIcon = ({ focused, icon }) => {
+  const color = focused ? tabBarOptions.activeTintColor : '#000';
+  return <Icon name={icon} style={{ marginBottom: 0 }} tintColor={color} />;
+};
 
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
@@ -20,7 +25,7 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Wallet',
       tabBarLabel: 'Wallet',
-      tabBarIcon: <Icon name='list' color={styles.iconsTintColor} />,
+      tabBarIcon: ({ focused }) => <MenuIcon icon='list' focused={focused} />, //eslint-disable-line
     },
   },
   Send: {
@@ -28,7 +33,7 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Send',
       tabBarLabel: 'Send',
-      tabBarIcon: <Icon name='send' color={styles.iconsTintColor} />,
+      tabBarIcon: ({ focused }) => <MenuIcon icon='send' focused={focused} />, //eslint-disable-line
     },
   },
   Explore: {
@@ -36,19 +41,13 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Explore',
       tabBarLabel: 'Explore',
-      tabBarIcon: <Icon name='search' color={styles.iconsTintColor} />,
+      tabBarIcon: ({ focused }) => <MenuIcon icon='search' focused={focused} />, //eslint-disable-line
     },
   },
 }, {
-  tabBarOptions: {
-    labelStyle: {
-      fontSize: 14,
-    },
-    style: {
-      paddingTop: 5,
-      marginBottom: 0,
-    },
-  },
+  tabBarPosition: 'bottom',
+  swipeEnabled: false,
+  tabBarOptions,
   headerMode: 'screen',
 });
 
@@ -70,12 +69,7 @@ export default StackNavigator(
     Main: {
       screen: Tabs,
       navigationOptions: {
-        headerBackground: (<View>
-          <Image
-          style={{ position: 'absolute', width: '100%' }}
-          source={Src}
-        />
-        </View>),
+        headerBackground: <Bg />,
         headerRight: <LogoutButton />,
         headerBackTitle: 'Back',
         headerTintColor: styles.white,
@@ -89,12 +83,7 @@ export default StackNavigator(
     Wallet: {
       screen: Wallet,
       navigationOptions: {
-        headerBackground: (<View>
-          <Image
-          style={{ position: 'absolute', width: '100%' }}
-          source={Src}
-        />
-        </View>),
+        headerBackground: <Bg />,
         headerRight: <LogoutButton />,
         title: 'Wallet',
         headerTintColor: styles.white,
@@ -107,12 +96,7 @@ export default StackNavigator(
     TxDetail: {
       screen: TxDetail,
       navigationOptions: {
-        headerBackground: (<View>
-          <Image
-          style={{ position: 'absolute', width: '100%' }}
-          source={Src}
-        />
-        </View>),
+        headerBackground: <Bg />,
         headerRight: <LogoutButton />,
         title: 'Details',
         headerTintColor: styles.white,
