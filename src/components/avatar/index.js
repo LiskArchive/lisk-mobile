@@ -205,12 +205,14 @@ class Avatar extends React.Component {
       getShape(addressHashChunks[3], size, secondaryGradients[1], 0.18),
     ];
     return (
-      <View style={[styles.figure, this.props.style]}>
+      <View style={[styles.figure, this.props.style,
+        { maxWidth: size, borderRadius: this.props.size / 2 },
+      ]}>
         <Svg viewBox="0 0 200 200"
           preserveAspectRatio="none"
           height={this.props.size}
           width={this.props.size}
-          style={[styles.avatar, { borderRadius: this.props.size / 2 }]}>
+          style={[styles.avatar, { width: size, height: size, borderRadius: this.props.size / 2 }]}>
           <Gradients scheme={gradientsSchemesUrlsHashed}/>
           {shapes.map((shape, i) => (
             <shape.component {...shape.props} key={i}/>

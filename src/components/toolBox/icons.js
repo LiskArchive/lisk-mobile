@@ -9,7 +9,13 @@ import { Icon as NativeIcon } from 'react-native-elements';
  * @param {String} props.name - An icon name existing in our icons list
  * @param {Number} props.size - THe size of the icon in pixels, defaults to 35
  */
-const Icon = ({ tintColor, name, size }) =>
-  <NativeIcon name={name} size={size || 35} color={tintColor} />;
+const Icon = ({
+  tintColor, name, size, style, onPress,
+}) => <NativeIcon
+  iconStyle={style}
+  name={name}
+  size={size || 35}
+  onPress={onPress}
+  color={tintColor} />;
 
 export default Icon;

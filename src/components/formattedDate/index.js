@@ -21,9 +21,10 @@ const fromLiskTimestamp = value =>
  *
  * @returns {Object} React native Text component
  */
-const FormattedDate = ({ children, style }) => {
+const FormattedDate = ({ children, style, type }) => {
+  const Element = type || Text;
   const absoluteDate = fromLiskTimestamp(children);
-  return <Text style={style}>{ moment(absoluteDate).format('LL') }</Text>;
+  return <Element style={style}>{ moment(absoluteDate).format('LL') }</Element>;
 };
 
 export default FormattedDate;
