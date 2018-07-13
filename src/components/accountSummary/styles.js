@@ -1,14 +1,24 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import styleGuide from '../../constants/styleGuide';
 
+const { width } = Dimensions.get('window');
 const styles = {
   container: {
-    backgroundColor: '#fff',
-    width: '94%',
-    marginTop: 10,
+    backgroundColor: styleGuide.colors.white,
+    width: width - (2 * styleGuide.boxes.boxPadding),
+    marginTop: 50,
     marginBottom: 10,
-    marginRight: '3%',
-    marginLeft: '3%',
-    padding: 20,
+    marginRight: styleGuide.boxes.boxPadding,
+    marginLeft: styleGuide.boxes.boxPadding,
+    padding: styleGuide.boxes.boxPadding,
+    borderRadius: styleGuide.boxes.boxBorderRadius,
+    shadowColor: styleGuide.colors.primary5,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 15,
+    shadowRadius: 20,
+  },
+  avatar: {
+    marginTop: -60,
   },
   balance: {
     width: '100%',

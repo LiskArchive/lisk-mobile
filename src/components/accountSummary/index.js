@@ -42,7 +42,7 @@ class AccountSummary extends React.Component {
         account && account.address ?
         <View style={styles.container}>
           { children }
-          <Avatar address={account.address} size={200}/>
+          <Avatar address={account.address} size={80} style={styles.avatar} />
           <CopyToClipBoard type={P} style={styles.address} value={account.address} icon={false} />
           <View style={styles.balance}>
             <H2 style={styles.value}>
