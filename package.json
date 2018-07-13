@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "build:android": "react-native run-android",
+    "build:ios": "react-native run-ios",
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
     "test": "npm run test:format && npm run test:react-native",
     "test:live": "jest --watch",
