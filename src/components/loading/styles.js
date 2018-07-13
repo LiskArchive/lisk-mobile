@@ -1,23 +1,28 @@
 
-import { StyleSheet, DeviceInfo } from 'react-native';
+import { StyleSheet, DeviceInfo, Platform } from 'react-native';
 import { Header } from 'react-navigation';
 import styleGuide from '../../constants/styleGuide';
 
-const top = DeviceInfo.isIPhoneX_deprecated ? Header.HEIGHT + 23 : Header.HEIGHT;
+let wrapper = {
+  backgroundColor: styleGuide.colors.primary3,
+};
+if (Platform.OS === 'ios') {
+  wrapper = {
+    zIndex: 10,
+    top: DeviceInfo.isIPhoneX_deprecated ? Header.HEIGHT + 23 : Header.HEIGHT,
+    left: 0,
+    position: 'absolute',
+  };
+}
 
 const styles = {
-  wrapper: {
+  wrapper: Object.assign({}, {
     width: '100%',
     height: 3,
-    position: 'absolute',
-    zIndex: 10,
-    top,
-    left: 0,
     overflow: 'hidden',
-  },
+  }, wrapper),
   stripe: {
     backgroundColor: styleGuide.colors.action4,
-    position: 'absolute',
     width: 200,
     height: 3,
     top: 0,

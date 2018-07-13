@@ -16,20 +16,20 @@ class Loading extends React.Component {
     this.state = {
       left: new Animated.Value(-200),
     };
-    this.visible = false;
+    this.playing = false;
   }
 
   show() {
-    this.visible = true;
+    this.playing = true;
     this.animate();
   }
 
   hide() {
-    this.visible = false;
+    this.playing = false;
   }
 
   animate() {
-    if (this.visible) {
+    if (this.playing) {
       const fn = this.animate.bind(this);
       Animated.timing(this.state.left, {
         toValue: this.endValue,
