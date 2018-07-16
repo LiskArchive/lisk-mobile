@@ -1,3 +1,4 @@
+import BackgroundTimer from 'react-native-background-timer';
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
 import { getAccount, extractAddress } from '../utilities/api/account';
@@ -135,8 +136,8 @@ export const blockUpdated = ({ transactions }) => (dispatch, getState) => {
       return accountAddress === recipient || accountAddress === sender;
     }).length > 0;
     if (blockContainsRelevantTransaction) {
-      const { activePeer } = getState().peers;
-      setTimeout(() => {
+      BackgroundTimer.runBackgroundTimer(() => {
+        const { activePeer } = getState().peers;
         getAccount(activePeer, accountAddress)
           .then((account) => {
             dispatch({
