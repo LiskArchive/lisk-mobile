@@ -11,7 +11,9 @@ const closeConnection = () => {
 };
 
 const socketSetup = (store) => {
-  connection = io.connect(store.getState().peers.activePeer.currentNode);
+  connection = io.connect(store.getState().peers.activePeer.currentNode, {
+    transports: ['websocket'],
+  });
   connection.on('blocks/change', (block) => {
     store.dispatch(blockUpdated(block));
   });
