@@ -135,8 +135,8 @@ export const blockUpdated = ({ transactions }) => (dispatch, getState) => {
       return accountAddress === recipient || accountAddress === sender;
     }).length > 0;
     if (blockContainsRelevantTransaction) {
-      const { activePeer } = getState().peers;
       setTimeout(() => {
+        const { activePeer } = getState().peers;
         getAccount(activePeer, accountAddress)
           .then((account) => {
             dispatch({
