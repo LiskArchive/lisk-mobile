@@ -5,7 +5,8 @@ import styles from './styles';
 import FormattedNumber from '../formattedNumber';
 import Avatar from '../avatar';
 import FormattedDate from '../formattedDate';
-import { H4, Small } from '../toolBox/typography';
+import { P, H4, Small } from '../toolBox/typography';
+import { stringShortener } from '../../utilities/helpers';
 
 
 class Item extends React.Component {
@@ -20,10 +21,10 @@ class Item extends React.Component {
     const { tx, account } = this.props;
     // const confirmed = tx.timestamp !== undefined;
     let direction = 'incoming';
-    let address = tx.senderId;
+    let address = stringShortener(tx.senderId, 2);
     if (account === tx.senderId) {
       direction = 'outgoing';
-      address = tx.recipientId;
+      address = stringShortener(tx.recipientId, 2);
     }
 
     if (tx.type === 3) {
@@ -41,7 +42,7 @@ class Item extends React.Component {
         <Avatar address={address} size={50} />
       </View>
       <View style={styles.column}>
-        <H4 style={styles.address}>{address}</H4>
+        <P style={styles.address}>{address}</P>
         <FormattedDate type={Small} style={styles.date}>{ tx.timestamp }</FormattedDate>
       </View>
       <View style={[styles.column, styles.amountWrapper]}>
