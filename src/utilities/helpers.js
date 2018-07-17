@@ -8,5 +8,27 @@
  * @returns {Object} - A new object, result of merging
  *  the object properties from right to left
  */
-// eslint-disable-next-line import/prefer-default-export
 export const merge = (...rest) => Object.assign({}, ...rest);
+
+/**
+ * Shortens a given string by replacing a certain number of
+ * characters with ellipsis (...).
+ * if only one parameter passed, it'll add ellipsis to the end:
+ * shortAddress("A very long stringified term") === "A very lon..."
+ *
+ * if rightPadd is passed it'll keep some trailing characters:
+ * shortAddress("12345678901111L, 3) === "1234567890...11L"
+ *
+ * No change will be applied for already short strings
+ *
+ * @param {String} str - Any string to get shortened
+ * @param {Number?} rightPadd - how many characters should be shown after ellipsis
+ *
+ * @returns {String} - the shortened string
+ */
+export const stringShortener = (str, rightPadd) => {
+  if (str.length > 15) {
+    return `${str.substr(0, 10)}...${rightPadd ? str.substr(-1 * rightPadd) : ''}`;
+  }
+  return str;
+};
