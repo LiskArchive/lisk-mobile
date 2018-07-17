@@ -20,6 +20,7 @@
     "bignumber.js": "^6.0.0",
     "browserify-zlib": "^0.1.4",
     "buffer": "^4.9.1",
+    "buffer-reverse": "^1.0.1",
     "console-browserify": "^1.1.0",
     "constants-browserify": "^1.0.0",
     "dns.js": "^1.0.1",
