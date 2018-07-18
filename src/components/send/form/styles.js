@@ -3,8 +3,7 @@ import styleGuide from '../../../constants/styleGuide';
 
 const styles = {
   container: {
-    flex: 1,
-    flexDirection: 'column',
+    height: '100%',
   },
   innerContainer: {
     flexDirection: 'column',
