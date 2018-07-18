@@ -21,10 +21,10 @@ class Item extends React.Component {
     const { tx, account } = this.props;
     // const confirmed = tx.timestamp !== undefined;
     let direction = 'incoming';
-    let address = stringShortener(tx.senderId, 2);
+    let address = stringShortener(tx.senderId, 10, 3);
     if (account === tx.senderId) {
       direction = 'outgoing';
-      address = stringShortener(tx.recipientId, 2);
+      address = stringShortener(tx.recipientId, 10, 3);
     }
 
     if (tx.type === 3) {

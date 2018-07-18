@@ -22,13 +22,14 @@ export const merge = (...rest) => Object.assign({}, ...rest);
  * No change will be applied for already short strings
  *
  * @param {String} str - Any string to get shortened
- * @param {Number?} rightPadd - how many characters should be shown after ellipsis
+ * @param {Number?} leftPadd - how many characters should be shown before ellipsis. default 10
+ * @param {Number?} rightPadd - how many characters should be shown after ellipsis. default 0
  *
  * @returns {String} - the shortened string
  */
-export const stringShortener = (str, rightPadd) => {
+export const stringShortener = (str, leftPadd = 10, rightPadd = 0) => {
   if (str.length > 15) {
-    return `${str.substr(0, 10)}...${rightPadd ? str.substr(-1 * rightPadd) : ''}`;
+    return `${str.substr(0, leftPadd)}...${rightPadd ? str.substr(-1 * rightPadd) : ''}`;
   }
   return str;
 };
