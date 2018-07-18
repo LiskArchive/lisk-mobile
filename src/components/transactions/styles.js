@@ -8,11 +8,15 @@ const styles = {
   },
   itemContainer: {
     width: '100%',
-    height: 100,
+    height: 80,
+    paddingTop: 15,
+    paddingBottom: 15,
     backgroundColor: styleGuide.colors.white,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'stretch',
+    borderBottomColor: '#e3ebf2',
+    borderBottomWidth: 1,
   },
   amountWrapper: {
     flex: 1,
