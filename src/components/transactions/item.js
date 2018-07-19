@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { fromRawLsk } from '../../utilities/conversions';
 import styles from './styles';
 import FormattedNumber from '../formattedNumber';
@@ -37,7 +37,7 @@ class Item extends React.Component {
 
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
 
-    return (<View style={styles.itemContainer} onPress={this.showDetail.bind(this, tx)}>
+    return (<TouchableOpacity style={styles.itemContainer} onPress={this.showDetail.bind(this, tx)}>
       <View style={[styles.itemColumn, styles.avatar]}>
         <Avatar address={address} size={50} />
       </View>
@@ -50,7 +50,7 @@ class Item extends React.Component {
           <FormattedNumber>{amount}</FormattedNumber> Ⱡ
         </H4>
       </View>
-    </View>);
+    </TouchableOpacity>);
   }
 }
 
