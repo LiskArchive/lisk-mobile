@@ -15,20 +15,16 @@ const labelStyle = (propsStyle, disabled) => {
   return style;
 };
 
-const primaryStyle = (propsStyle, disabled) => {
+const primaryStyle = (disabled) => {
   const style = [
     theme.button,
     theme.primaryButton,
   ];
 
-  const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
-  propStylesArr.forEach(element => style.push(element));
-
   if (disabled) {
     style.push(theme.disabledButtonColor);
     style.push(theme.disabledButtonBg);
   }
-
   return style;
 };
 
@@ -45,7 +41,7 @@ export const Button = (props) => {
   const modifiedProps = modifyProps(props);
 
   return (<TouchableHighlight underlayColor='transparent' {...modifiedProps}>
-    <Text style={props.style || {}}>{props.children || props.title}</Text>
+    <Text style={props.style}>{props.children || props.title}</Text>
   </TouchableHighlight>);
 };
 

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { View } from 'react-native';
-import { KeyboardAccessoryNavigation } from 'react-native-keyboard-accessory';
+import { View, Platform } from 'react-native';
+import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { PrimaryButton } from '../../toolBox/button';
 import { P, H1 } from '../../toolBox/typography';
@@ -15,6 +15,7 @@ class Form extends React.Component {
       address: { value: '', validity: -1 },
       amount: { value: '', validity: -1 },
       reference: { value: '', validity: -1 },
+      opacity: 1,
     };
 
     validator = {
@@ -42,6 +43,10 @@ class Form extends React.Component {
     });
   }
 
+  changeButtonOpacity = (val) => {
+    this.setState({ opacity: val });
+  }
+
   changeInputFocus = (direction = 1) => {
     let focusingRef = this.activeInputRef + direction;
     if (focusingRef < 0) {
@@ -62,15 +67,15 @@ class Form extends React.Component {
   }
 
   render() {
+    const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
     return (
       <Fragment>
       <KeyboardAwareScrollView
-        enableAutomaticScroll={true}
-        extraScrollHeight={70}
-        contentContainerStyle={styles.container}
-        innerRef={(view) => {
-          this.scroll = view;
-        }}
+        enableOnAndroid={true}
+        enableResetScrollToCoords={false}
+        contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}
+        onKeyboardDidShow={() => this.changeButtonOpacity(0)}
+        onKeyboardDidHide={() => this.changeButtonOpacity(1)}
       >
       <View style={styles.innerContainer}>
         <View style={styles.titleContainer}>
@@ -118,15 +123,17 @@ class Form extends React.Component {
           <PrimaryButton
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onClick={this.goToNextState}
-            style={styles.button}
+            style={[styles.button, { opacity: this.state.opacity }]}
             title='Next' />
           </View>
         </KeyboardAwareScrollView>
-        <KeyboardAccessoryNavigation
-          style={{ marginBottom: -60 }}
-          onNext={() => this.changeInputFocus(1)}
-          onPrevious={() => this.changeInputFocus(-1)}
-        />
+        <KeyboardAccessoryView
+         style={styles[keyboardButtonStyle]}>
+          <PrimaryButton
+            disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
+            onClick={this.goToNextState}
+            title='Next' />
+        </KeyboardAccessoryView>
       </Fragment>
     );
   }
