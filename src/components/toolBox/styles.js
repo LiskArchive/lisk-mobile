@@ -108,6 +108,9 @@ const styles = {
   errorIcon: {
     color: styleGuide.colors.action1,
   },
+  inputErrorStyle: {
+    borderBottomColor: styleGuide.colors.action1,
+  },
 };
 
 export default StyleSheet.create(styles);

@@ -13,23 +13,26 @@ import theme from './styles';
  */
 const Input = ({
   label, reference, styles, value, onChange, error, multiline, onFocus,
-}) => (<View>
-  <FormLabel labelStyle={[theme.inputLabel, styles.inputLabel]}>{label}</FormLabel>
-  <FormInput
-    containerStyle={[theme.input, styles.input]}
-    inputStyle={[theme.inputText, styles.inputText]}
-    autoCapitalize = 'none'
-    multiline = {multiline}
-    ref={input => reference(input)}
-    value={value}
-    onChangeText={onChange}
-    onFocus={onFocus}/>
-  {error ? <View style={[theme.errorMessageContainer, styles.errorMessage] }>
-    <Icon size={16} name='cancel' style={theme.errorIcon} />
-    <FormValidationMessage labelStyle={[theme.errorMessage]}>
-      { error }
-    </FormValidationMessage>
-  </View> : null }
-</View>);
+}) => {
+  const inputErrorStyle = error ? theme.inputErrorStyle : {};
+  return (<View>
+    <FormLabel labelStyle={[theme.inputLabel, styles.inputLabel]}>{label}</FormLabel>
+    <FormInput
+      containerStyle={[theme.input, styles.input, inputErrorStyle]}
+      inputStyle={[theme.inputText, styles.inputText]}
+      autoCapitalize = 'none'
+      multiline = {multiline}
+      ref={input => reference(input)}
+      value={value}
+      onChangeText={onChange}
+      onFocus={onFocus}/>
+    {error ? <View style={[theme.errorMessageContainer, styles.errorMessage] }>
+      <Icon size={16} name='cancel' style={theme.errorIcon} />
+      <FormValidationMessage labelStyle={[theme.errorMessage]}>
+        { error }
+      </FormValidationMessage>
+    </View> : null }
+  </View>);
+};
 
 export default Input;
