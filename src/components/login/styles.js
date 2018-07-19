@@ -15,13 +15,7 @@ const styles = {
   button: {
     marginRight: styleGuide.boxes.boxPadding,
     marginLeft: styleGuide.boxes.boxPadding,
-  },
-  errorMessage: {
-    fontSize: 14,
-    height: 42,
-  },
-  input: {
-    marginBottom: 30,
+    marginTop: 30,
   },
 };
 
