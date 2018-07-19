@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, DeviceInfo, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { PrimaryButton } from '../../toolBox/button';
@@ -67,20 +67,7 @@ class Form extends React.Component {
   }
 
   render() {
-    const keyboardButtonStyle = Platform.OS === 'ios' ?
-      {
-        backgroundColor: 'transparent',
-        marginBottom: DeviceInfo.isIPhoneX_deprecated ? -98 : -65,
-      } :
-      {
-        backgroundColor: 'transparent',
-        position: 'absolute',
-        bottom: 0,
-        top: 0,
-        right: 0,
-        left: 0,
-        zIndex: 9999,
-      };
+    const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
     return (
       <Fragment>
       <KeyboardAwareScrollView
@@ -141,7 +128,7 @@ class Form extends React.Component {
           </View>
         </KeyboardAwareScrollView>
         <KeyboardAccessoryView
-         style={keyboardButtonStyle}>
+         style={styles[keyboardButtonStyle]}>
           <PrimaryButton
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onClick={this.goToNextState}

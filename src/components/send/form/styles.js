@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, DeviceInfo } from 'react-native';
 import styleGuide from '../../../constants/styleGuide';
 
 const styles = {
@@ -31,6 +31,19 @@ const styles = {
   titleContainer: {
     marginRight: styleGuide.boxes.boxPadding,
     marginLeft: styleGuide.boxes.boxPadding,
+  },
+  iosKeyboard: {
+    backgroundColor: 'transparent',
+    marginBottom: DeviceInfo.isIPhoneX_deprecated ? -98 : -65,
+  },
+  androidKeyboard: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    bottom: 0,
+    top: 0,
+    right: 0,
+    left: 0,
+    zIndex: 9999,
   },
 };
 
