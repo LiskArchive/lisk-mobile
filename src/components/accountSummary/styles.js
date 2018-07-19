@@ -4,7 +4,7 @@ import styleGuide from '../../constants/styleGuide';
 
 const { width } = Dimensions.get('window');
 const profileMarginTop = 20;
-const profileExpandedHeight = 166;
+const profileExpandedHeight = 176;
 const styles = {
   container: {
     width: '100%',
