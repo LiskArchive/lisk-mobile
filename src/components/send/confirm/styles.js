@@ -60,6 +60,7 @@ const styles = {
     marginBottom: 7,
   },
   subtitle: {
+    marginTop: 20,
     color: styleGuide.colors.grayScale2,
   },
   addressContainer: {
