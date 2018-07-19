@@ -24,7 +24,6 @@ const primaryStyle = (disabled) => {
   if (disabled) {
     style.push(theme.disabledButtonColor);
   }
-
   return style;
 };
 
@@ -41,7 +40,7 @@ export const Button = (props) => {
   const modifiedProps = modifyProps(props);
 
   return (<TouchableHighlight underlayColor='transparent' {...modifiedProps}>
-    <Text style={props.style || {}}>{props.children || props.title}</Text>
+    <Text style={props.style}>{props.children || props.title}</Text>
   </TouchableHighlight>);
 };
 

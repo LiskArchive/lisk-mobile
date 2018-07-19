@@ -1,19 +1,18 @@
 import React from 'react';
 import { List as NativeList } from 'react-native-elements';
 import Item from './item';
-import styles from './styles';
 
 const List = ({
   transactions, account, navigate, pending,
 }) =>
-  (<NativeList containerStyle={styles.contaier}>
+  (<NativeList containerStyle={{ borderTopWidth: 0 }}>
     {
-      pending.map((tx, index) => <Item navigate={navigate}
-        account={account} key={tx} tx={tx} index={index} />)
+      pending.map(tx => <Item navigate={navigate}
+        account={account} key={tx} tx={tx} />)
     }
     {
-      transactions.map((tx, index) => <Item navigate={navigate}
-        account={account} key={tx.id} tx={tx} index={index + (pending.length % 2)} />)
+      transactions.map(tx => <Item navigate={navigate}
+        account={account} key={tx.id} tx={tx} />)
     }
   </NativeList>);
 

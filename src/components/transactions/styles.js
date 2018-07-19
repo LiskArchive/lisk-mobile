@@ -1,19 +1,45 @@
 import { StyleSheet } from 'react-native';
+import styleGuide from '../../constants/styleGuide';
 
 const styles = {
   container: {
-    marginTop: 0,
+    paddingRight: 20,
+    paddingLeft: 20,
   },
-  listItemEven: {
-    backgroundColor: '#eff4f9',
+  itemContainer: {
+    width: '100%',
+    height: 100,
+    paddingTop: 25,
+    paddingBottom: 25,
+    backgroundColor: styleGuide.colors.white,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    borderBottomColor: '#e3ebf2',
+    borderBottomWidth: 1,
   },
-  listItemOdd: {
-    backgroundColor: '#fff',
+  amountWrapper: {
+    flex: 1,
   },
-  noBorder: {
-    borderWidth: 0,
-    marginTop: -1,
+  amount: {
+    paddingTop: 4,
+    width: '100%',
+    textAlign: 'right',
   },
+  date: {
+    color: styleGuide.colors.grayScale1,
+  },
+  address: {
+    paddingTop: 4,
+    paddingBottom: 4,
+  },
+  avatar: {
+    paddingRight: 15,
+  },
+  incoming: {
+    color: styleGuide.colors.success1,
+  },
+
 };
 
 export default StyleSheet.create(styles);

@@ -1,9 +1,12 @@
 import React from 'react';
-import { ListItem } from 'react-native-elements';
+import { View, TouchableOpacity } from 'react-native';
 import { fromRawLsk } from '../../utilities/conversions';
 import styles from './styles';
 import FormattedNumber from '../formattedNumber';
-import { P } from '../toolBox/typography';
+import Avatar from '../avatar';
+import FormattedDate from '../formattedDate';
+import { P, H4, Small } from '../toolBox/typography';
+import { stringShortener } from '../../utilities/helpers';
 
 
 class Item extends React.Component {
@@ -13,33 +16,41 @@ class Item extends React.Component {
       params: { tx },
     });
   }
-  render() {
-    const { tx, account, index } = this.props;
-    let arrow = account === tx.senderId ? 'call-made' : 'call-received';
-    let iconColor = account === tx.senderId ? '#EE622D' : '#96C256';
-    arrow = tx.timestamp ? arrow : 'error-outline';
-    iconColor = tx.timestamp ? iconColor : '#F7C343';
-    let recipient = tx.recipientId;
 
-    if (tx.type === 3) {
-      recipient = 'Vote';
-    } else if (tx.type === 2) {
-      recipient = 'Register Delegate';
-    } else if (tx.type === 1) {
-      recipient = 'Register Second Passphrase';
+  render() {
+    const { tx, account } = this.props;
+    // const confirmed = tx.timestamp !== undefined;
+    let direction = 'incoming';
+    let address = stringShortener(tx.senderId, 10, 3);
+    if (account === tx.senderId) {
+      direction = 'outgoing';
+      address = stringShortener(tx.recipientId, 10, 3);
     }
 
-    const style = (index % 2 === 0) ? styles.listItemEven : styles.listItemOdd;
-    const amount = <P>
-      <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber> LSK
-    </P>;
-    return (<ListItem
-      containerStyle={[style, styles.noBorder]}
-      onPress={this.showDetail.bind(this, tx)}
-      key={tx.id}
-      leftIcon={{ name: arrow, style: { color: iconColor } }}
-      title={amount}
-      subtitle={`${recipient}`} />);
+    if (tx.type === 3) {
+      address = 'Vote';
+    } else if (tx.type === 2) {
+      address = 'Register Delegate';
+    } else if (tx.type === 1) {
+      address = 'Register 2nd Passphrase';
+    }
+
+    const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
+
+    return (<TouchableOpacity style={styles.itemContainer} onPress={this.showDetail.bind(this, tx)}>
+      <View style={[styles.itemColumn, styles.avatar]}>
+        <Avatar address={address} size={50} />
+      </View>
+      <View style={styles.column}>
+        <P style={styles.address}>{address}</P>
+        <FormattedDate type={Small} style={styles.date}>{ tx.timestamp }</FormattedDate>
+      </View>
+      <View style={[styles.column, styles.amountWrapper]}>
+        <H4 style={[styles.amount, styles[direction]]}>
+          <FormattedNumber>{amount}</FormattedNumber> Ⱡ
+        </H4>
+      </View>
+    </TouchableOpacity>);
   }
 }
 

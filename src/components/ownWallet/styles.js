@@ -1,13 +1,17 @@
 import { StyleSheet } from 'react-native';
+import styleGuide from '../../constants/styleGuide';
 
 const styles = {
-  logout: {
-    backgroundColor: 'rgba(92, 99,216, 1)',
-    width: 80,
-    height: 40,
-    borderColor: 'transparent',
-    borderWidth: 0,
-    borderRadius: 5,
+  container: {
+    backgroundColor: styleGuide.colors.white,
+    paddingBottom: 70,
+  },
+  scrollView: {
+    marginTop: -70,
+    paddingTop: 70,
+  },
+  accountSummary: {
+    zIndex: 2,
   },
 };
 

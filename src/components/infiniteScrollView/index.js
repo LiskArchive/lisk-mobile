@@ -44,7 +44,9 @@ class InfiniteScrollView extends React.Component {
 
   render() {
     return <ScrollView onScroll={this.loadMore}
-    scrollEventThrottle={400}>{this.props.children}</ScrollView>;
+      style={this.props.style}
+      stickyHeaderIndices={this.props.stickyHeaderIndices}
+      scrollEventThrottle={400}>{this.props.children}</ScrollView>;
   }
 }
 
