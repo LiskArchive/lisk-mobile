@@ -15,18 +15,14 @@ const labelStyle = (propsStyle, disabled) => {
   return style;
 };
 
-const primaryStyle = (propsStyle, disabled) => {
+const primaryStyle = (disabled) => {
   const style = [
     theme.button,
     theme.primaryButton,
   ];
 
-  const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
-  propStylesArr.forEach(element => style.push(element));
-
   if (disabled) {
     style.push(theme.disabledButtonColor);
-    style.push(theme.disabledButtonBg);
   }
 
   return style;
@@ -52,9 +48,12 @@ export const Button = (props) => {
 export const PrimaryButton = props => (<LinearGradient
     start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
     colors={props.disabled ?
-      [Colors.grayScale3, Colors.grayScale3] :
+      [Colors.white, Colors.white] :
       [Colors.action4, Colors.action2]}
-    style={[theme.buttonWrapper, props.style]}>
+    style={props.disabled ?
+      [theme.disabledButtonBg, props.style] :
+      [theme.buttonWrapper, props.style]
+    }>
     <Button {...props} style={primaryStyle(props.disabled)} />
   </LinearGradient>);
 
@@ -64,7 +63,10 @@ export const SecondaryButton = props => (<LinearGradient
   colors={props.disabled ?
     [Colors.grayScale3, Colors.grayScale3] :
     [Colors.primary4, Colors.primary2]}
-  style={[theme.buttonWrapper, props.style]}>
+  style={props.disabled ?
+    [theme.disabledButtonBg, props.style] :
+    [theme.buttonWrapper, props.style]
+  }>
   <Button {...props} style={primaryStyle(props.disabled)} />
 </LinearGradient>);
 
