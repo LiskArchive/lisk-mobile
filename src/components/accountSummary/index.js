@@ -40,17 +40,20 @@ class AccountSummary extends React.Component {
       </View>
       {
         account && account.address ?
-        <View style={[styles.container, styles.profileShadow]}>
-          <View style={styles.row}>
-            <Avatar address={account.address} size={80} style={styles.avatar} />
+        <View style={styles.container}>
+          <View style={[styles.row, styles.avatar]}>
+            <Avatar address={account.address} size={80} />
           </View>
-          <CopyToClipBoard type={P} style={styles.address} value={account.address} icon={false} />
-          <View style={styles.row}>
+          <View style={[styles.row, styles.address]}>
+            <CopyToClipBoard type={P} style={styles.addressP} value={account.address} icon={false} />
+          </View>
+          <View style={[styles.row, styles.balance]}>
             <H2 style={styles.value}>
               <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>
             </H2>
             <H2 style={styles.unit}>Ⱡ</H2>
           </View>
+          <View style={styles.box} />
         </View> :
         <H4>Fetching account info</H4>
       }
