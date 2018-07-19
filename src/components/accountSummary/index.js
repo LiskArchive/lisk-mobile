@@ -1,7 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { Icon } from 'react-native-elements';
 import {
   accountFollowed as accountFollowedAction,
   accountUnFollowed as accountUnFollowedAction,
@@ -13,6 +12,7 @@ import styles from './styles';
 import FormattedNumber from '../formattedNumber';
 import CopyToClipBoard from '../copyToClipboard';
 import { H4, P, H2 } from '../toolBox/typography';
+import stripes from '../../assets/images/strapes.png';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -32,29 +32,29 @@ class AccountSummary extends React.Component {
   }
 
   render() {
-    const { account, followedAccounts, children } = this.props;
-    const followedAccount = followedAccounts.filter(item =>
-      item.address === account.address)[0];
-    const iconName = (followedAccount && followedAccount.address) ? 'star' : 'star-o';
+    const { account } = this.props;
 
-    return (<View>
+    return (<View style={this.props.style}>
+      <View style={styles.bg}>
+        <Image style={styles.bgImage} source={stripes} />
+      </View>
       {
         account && account.address ?
         <View style={styles.container}>
-          { children }
-          <Avatar address={account.address} size={200}/>
-          <CopyToClipBoard type={P} style={styles.address} value={account.address} icon={false} />
-          <View style={styles.balance}>
+          <View style={[styles.row, styles.avatar]}>
+            <Avatar address={account.address} size={80} />
+          </View>
+          <View style={[styles.row, styles.address]}>
+            <CopyToClipBoard type={P} style={styles.addressP}
+              value={account.address} icon={false} />
+          </View>
+          <View style={[styles.row, styles.balance]}>
             <H2 style={styles.value}>
               <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>
             </H2>
-            <P style={styles.unit}>LSK</P>
+            <H2 style={styles.unit}>Ⱡ</H2>
           </View>
-          <Icon
-            name={iconName}
-            type='font-awesome'
-            color='#f50'
-            onPress={this.toggleModal.bind(this)} />
+          <View style={styles.box} />
         </View> :
         <H4>Fetching account info</H4>
       }

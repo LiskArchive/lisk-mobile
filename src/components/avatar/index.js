@@ -179,8 +179,8 @@ class Avatar extends React.Component {
   }
 
   render() {
-    const size = 200;
-    const { address } = this.props;
+    const { address, size } = this.props;
+    const canvasSize = 200;
 
     const replaceUrlByHashOnScheme = gradientScheme => ({
       ...gradientScheme,
@@ -199,20 +199,24 @@ class Avatar extends React.Component {
     const primaryGradients = pickTwo(addressHashChunks[1], gradientsSchemesUrlsHashed.primary);
     const secondaryGradients = pickTwo(addressHashChunks[2], gradientsSchemesUrlsHashed.secondary);
     const shapes = [
-      getBackgroundCircle(size, primaryGradients[0]),
-      getShape(addressHashChunks[1], size, primaryGradients[1], 1),
-      getShape(addressHashChunks[2], size, secondaryGradients[0], 0.23),
-      getShape(addressHashChunks[3], size, secondaryGradients[1], 0.18),
+      getBackgroundCircle(canvasSize, primaryGradients[0]),
+      getShape(addressHashChunks[1], canvasSize, primaryGradients[1], 1),
+      getShape(addressHashChunks[2], canvasSize, secondaryGradients[0], 0.23),
+      getShape(addressHashChunks[3], canvasSize, secondaryGradients[1], 0.18),
     ];
     return (
       <View style={[styles.figure, this.props.style,
-        { maxWidth: size, borderRadius: this.props.size / 2 },
+        { width: size, borderRadius: size / 2 },
       ]}>
-        <Svg viewBox="0 0 200 200"
+        <Svg viewBox={`0 0 ${canvasSize} ${canvasSize}`}
           preserveAspectRatio="none"
-          height={this.props.size}
-          width={this.props.size}
-          style={[styles.avatar, { width: size, height: size, borderRadius: this.props.size / 2 }]}>
+          height={size}
+          width={size}
+          style={[styles.avatar, {
+            width: canvasSize,
+            height: canvasSize,
+            borderRadius: size / 2,
+            }]}>
           <Gradients scheme={gradientsSchemesUrlsHashed}/>
           {shapes.map((shape, i) => (
             <shape.component {...shape.props} key={i}/>
