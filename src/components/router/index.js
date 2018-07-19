@@ -4,7 +4,7 @@ import Landing from '../landing';
 import Login from '../login';
 import TxDetail from '../txDetail';
 import Send from '../send';
-import Explore from '../explore';
+// import Explore from '../explore';
 import Wallet from '../wallet';
 import OwnWallet from '../ownWallet';
 import styles from '../styles';
@@ -36,14 +36,15 @@ export const Tabs = TabNavigator({
       tabBarIcon: ({ focused }) => <MenuIcon icon='send' focused={focused} />, //eslint-disable-line
     },
   },
-  Explore: {
-    screen: Explore,
-    navigationOptions: {
-      title: 'Explore',
-      tabBarLabel: 'Explore',
-      tabBarIcon: ({ focused }) => <MenuIcon icon='search' focused={focused} />, //eslint-disable-line
-    },
-  },
+  // Explore: {
+  //   screen: Explore,
+  //   navigationOptions: {
+  //     title: 'Explore',
+  //     tabBarLabel: 'Explore',
+  //     tabBarIcon: ({ focused }) => <MenuIcon icon='search'
+  // focused={focused} />, //eslint-disable-line
+  //   },
+  // },
 }, {
   tabBarPosition: 'bottom',
   swipeEnabled: false,
