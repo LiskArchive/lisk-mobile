@@ -4,7 +4,7 @@ export default {
   showIcon: true,
   style: {
     backgroundColor: '#fff',
-    borderColor: '#f2f2f2',
+    borderColor: '#e3ebf2',
     borderTopWidth: 1,
     height: 65,
     zIndex: 99,
