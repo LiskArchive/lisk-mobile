@@ -1,4 +1,6 @@
 export default {
-  heading: 'gilroy',
-  context: 'Open Sans',
+  heading: 'Gilroy-Bold',
+  context: 'OpenSans-Regular',
+  contextSemiBold: 'OpenSans-Bold',
+  contextLight: 'OpenSans-Light',
 };

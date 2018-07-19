@@ -1,8 +1,9 @@
 export default {
-  h1: 32,
+  h1: 28,
   h2: 24,
-  h3: 18,
-  h4: 15,
-  base: 15,
+  h3: 22,
+  h4: 19,
+  base: 16,
   small: 12,
+  input: 14,
 };
