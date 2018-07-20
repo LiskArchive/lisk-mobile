@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { H4 } from '../toolBox/typography';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
@@ -24,6 +24,12 @@ import styles from './styles';
   transactionsLoaded: transactionsLoadedAction,
 })
 class Wallet extends React.Component {
+  state = {
+    scrollY: new Animated.Value(0),
+  };
+
+  scrollView = null;
+
   componentWillMount() {
     this.activeAccount = this.props.accounts.active;
   }
@@ -35,16 +41,26 @@ class Wallet extends React.Component {
     });
   }
 
+  onScroll() {
+    return Animated.event([{
+      nativeEvent: { contentOffset: { y: this.state.scrollY } },
+    }]);
+  }
+
   render() {
     return (<View style={styles.container}>
       {
         !this.props.accounts.active ?
           <H4>Loading account</H4> :
           <AccountSummary
+            scrollY={this.state.scrollY}
             account={this.props.accounts.active}
             style={styles.accountSummary} />
       }
       <InfiniteScrollView
+        ref={(el) => { if (el) this.scrollView = el; }}
+        scrollEventThrottle={8}
+        onScroll={this.onScroll.call(this)}
         style={[styles.scrollView]}
         list={this.props.transactions.confirmed}
         count={this.props.transactions.count}
