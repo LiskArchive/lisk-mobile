@@ -14,6 +14,11 @@
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "postinstall": "npm run link"
   },
+  "rnpm": {
+    "assets": [
+      "./src/assets/fonts/"
+    ]
+  },
   "dependencies": {
     "@tradle/react-native-http": "^2.0.1",
     "assert": "^1.4.1",

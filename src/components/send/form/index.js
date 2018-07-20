@@ -98,7 +98,7 @@ class Form extends React.Component {
           <Input
             label='Amount'
             reference={(input) => { this.references[1] = input; }}
-            styles={{ errorMessage: styles.errorMessage, input: styles.input }}
+            styles={{ input: styles.input }}
             onChange={value => this.changeHandler('amount', value)}
             value={this.state.amount.value}
             error={
@@ -130,6 +130,7 @@ class Form extends React.Component {
         <KeyboardAccessoryView
          style={styles[keyboardButtonStyle]}>
           <PrimaryButton
+            style={styles.stickyButton}
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onClick={this.goToNextState}
             title='Next' />

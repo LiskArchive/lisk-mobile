@@ -20,9 +20,6 @@ const styles = {
     fontSize: 14,
     height: 42,
   },
-  input: {
-    marginBottom: 30,
-  },
 };
 
 export default StyleSheet.create(styles);

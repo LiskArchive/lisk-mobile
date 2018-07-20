@@ -18,11 +18,11 @@ const styles = {
     marginRight: styleGuide.boxes.boxPadding,
     marginLeft: styleGuide.boxes.boxPadding,
   },
-  errorMessage: {
-    fontSize: 14,
-    // height: 26,
+  stickyButton: {
+    borderWidth: 0,
   },
   subtitle: {
+    marginTop: 20,
     color: styleGuide.colors.grayScale2,
   },
   input: {

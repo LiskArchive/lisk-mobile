@@ -29,6 +29,7 @@ const styles = {
     paddingBottom: 80,
   },
   subtitle: {
+    marginTop: 20,
     color: styleGuide.colors.grayScale2,
   },
 };
