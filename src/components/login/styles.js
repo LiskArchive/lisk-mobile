@@ -4,17 +4,17 @@ import styleGuide from '../../constants/styleGuide';
 const styles = {
   content: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#fff',
   },
   container: {
     width: '100%',
+    flexDirection: 'column',
+    marginTop: 60,
   },
   button: {
     marginRight: styleGuide.boxes.boxPadding,
     marginLeft: styleGuide.boxes.boxPadding,
+    marginBottom: 60,
   },
   errorMessage: {
     fontSize: 14,

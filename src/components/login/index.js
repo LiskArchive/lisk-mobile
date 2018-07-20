@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import connect from 'redux-connect-decorator';
-import { KeyboardAvoidingView, View } from 'react-native';
+import { View, Platform } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { PrimaryButton } from '../toolBox/button';
 import { accountLoggedIn as accountLoggedInAction } from '../../actions/accounts';
 import styles from './styles';
@@ -27,6 +29,7 @@ class Login extends React.Component {
       passphrase: {
         value: pass,
         validity: validatePassphrase(pass),
+        buttonStyle: null,
       },
     };
   }
@@ -75,32 +78,64 @@ class Login extends React.Component {
     });
   }
 
+  shrinkButton = (status) => {
+    if (status) {
+      this.setState({ buttonStyle: styles.button });
+    } else {
+      this.setState({ buttonStyle: null });
+    }
+  }
+
   render() {
     const { passphrase } = this.state;
     const error = passphrase.validity
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
-    return (<KeyboardAvoidingView style={styles.content} behavior="padding" enabled>
-      <View style={styles.container}>
-        <Logo />
-        <Input
-          label='Passphrase'
-          reference={(ref) => { this.passphraseInput = ref; }}
-          styles={{ input: styles.input }}
-          value={passphrase.value}
-          onChange={this.changeHandler.bind(this, 'passphrase')}
-          multiline={true}
-          error={
-            (error.length > 0 && error[0].message && error[0].message.length > 0) ?
-            error[0].message.replace(' Please check the passphrase.', '') : ''
-          }
-        />
+    return (<Fragment>
+      <KeyboardAwareScrollView
+        onKeyboardDidHide={() => this.shrinkButton(true)}
+        onKeyboardDidShow={() => this.shrinkButton(false)}
+        style={styles.content}>
+        <View style={styles.container}>
+          <View>
+            <Logo />
+            <Input
+              label='Passphrase'
+              reference={(ref) => { this.passphraseInput = ref; }}
+              styles={{ input: styles.input }}
+              value={passphrase.value}
+              onChange={this.changeHandler.bind(this, 'passphrase')}
+              onFocus={() => this.shrinkButton(false)}
+              onBlur={() => this.shrinkButton(true)}
+              multiline={true}
+              autoFocus={true}
+              autoCorrect={false}
+              error={
+                (error.length > 0 && error[0].message && error[0].message.length > 0) ?
+                error[0].message.replace(' Please check the passphrase.', '') : ''
+              }
+            />
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
+      <KeyboardAccessoryView
+      style={[{
+        borderTopColor: '#fff',
+        backgroundColor: '#fff',
+      }, Platform.OS === 'ios' ? null : {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+      }]}
+      animationOn={false}
+      alwaysVisible={true} >
         <PrimaryButton
-          style={styles.button}
-          disabled={passphrase.validity.length !== 0}
-          onClick={this.onLoginSubmission.bind(this, passphrase)}>Login</PrimaryButton>
-      </View>
-    </KeyboardAvoidingView>);
+        style={this.state.buttonStyle}
+        disabled={passphrase.validity.length !== 0}
+        onClick={this.onLoginSubmission.bind(this, passphrase)}>Login</PrimaryButton>
+      </KeyboardAccessoryView>
+    </Fragment>);
   }
 }
 
