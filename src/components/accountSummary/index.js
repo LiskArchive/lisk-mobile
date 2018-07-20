@@ -12,7 +12,9 @@ import styles from './styles';
 import FormattedNumber from '../formattedNumber';
 import CopyToClipBoard from '../copyToClipboard';
 import { H4, P, H2 } from '../toolBox/typography';
-import stripes from '../../assets/images/strapes.png';
+import stripes from '../../assets/images/stripes.png';
+
+const { width } = Dimensions.get('window');
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
