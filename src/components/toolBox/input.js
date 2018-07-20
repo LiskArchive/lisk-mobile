@@ -12,20 +12,24 @@ import theme from './styles';
  * @param {Number} props.size - THe size of the icon in pixels, defaults to 35
  */
 const Input = ({
-  label, reference, styles, value, onChange, error, multiline, onFocus,
+  label, reference, styles, value, onChange, error,
+  multiline, onFocus, autoFocus, onBlur, autoCorrect,
 }) => {
   const inputErrorStyle = error ? theme.inputErrorStyle : {};
   return (<View>
     <FormLabel labelStyle={[theme.inputLabel, styles.inputLabel]}>{label}</FormLabel>
     <FormInput
-      containerStyle={[theme.input, styles.input, inputErrorStyle]}
-      inputStyle={[theme.inputText, styles.inputText]}
+    containerStyle={[theme.input, styles.input, inputErrorStyle]}
+      textStyle={styles.input}
       autoCapitalize = 'none'
       multiline = {multiline}
       ref={input => reference(input)}
       value={value}
+      autoFocus={autoFocus}
       onChangeText={onChange}
-      onFocus={onFocus}/>
+      autoCorrect={autoCorrect}
+      onFocus={onFocus}
+      onBlur={onBlur} />
     {error ? <View style={[theme.errorMessageContainer, styles.errorMessage] }>
       <Icon size={16} name='cancel' style={theme.errorIcon} />
       <FormValidationMessage labelStyle={[theme.errorMessage]}>
