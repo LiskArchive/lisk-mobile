@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
 import {
   accountFollowed as accountFollowedAction,
@@ -8,11 +8,12 @@ import {
 import Avatar from '../avatar';
 import { fromRawLsk } from '../../utilities/conversions';
 import Modal from '../followedAccountsModal';
-import styles from './styles';
+import styles, { consts } from './styles';
 import FormattedNumber from '../formattedNumber';
 import CopyToClipBoard from '../copyToClipboard';
 import { H4, P, H2 } from '../toolBox/typography';
-import stripes from '../../assets/images/strapes.png';
+import stripes from '../../assets/images/stripes.png';
+
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -31,31 +32,75 @@ class AccountSummary extends React.Component {
     });
   }
 
+  interpolate(props) {
+    return Object.keys(props).reduce((interpolated, key) => {
+      interpolated[key] = this.props.scrollY.interpolate({
+        inputRange: [0, 80],
+        outputRange: props[key],
+        extrapolate: 'clamp',
+      });
+
+      return interpolated;
+    }, {});
+  }
+
   render() {
     const { account } = this.props;
+    const itpl = this.interpolate.bind(this);
 
     return (<View style={this.props.style}>
-      <View style={styles.bg}>
+      <Animated.View style={[
+        styles.bg,
+        itpl({ height: [consts.bg.expanded, consts.bg.shrunk] }),
+      ]}>
         <Image style={styles.bgImage} source={stripes} />
-      </View>
+      </Animated.View>
       {
         account && account.address ?
-        <View style={styles.container}>
-          <View style={[styles.row, styles.avatar]}>
+        <Animated.View style={[
+          styles.container,
+          itpl({
+            height: [consts.container.expanded, consts.container.shrunk],
+          })]}>
+          <Animated.View style={[
+            styles.avatar,
+            itpl({
+              left: [consts.avatar.expanded.left, consts.avatar.shrunk.left],
+              top: [consts.avatar.expanded.top, consts.avatar.shrunk.top],
+            }),
+          ]}>
             <Avatar address={account.address} size={80} />
-          </View>
-          <View style={[styles.row, styles.address]}>
+          </Animated.View>
+          <Animated.View style={[
+            styles.address,
+            itpl({
+              top: [consts.address.expanded.top, consts.address.shrunk.top],
+              paddingLeft: [consts.address.expanded.paddingLeft, consts.address.shrunk.paddingLeft],
+            }),
+          ]}>
             <CopyToClipBoard type={P} style={styles.addressP}
-              value={account.address} icon={false} />
-          </View>
-          <View style={[styles.row, styles.balance]}>
+              value={account.address} icon={true} />
+          </Animated.View>
+          <Animated.View style={[
+            styles.balance,
+            itpl({
+              top: [consts.balance.expanded.top, consts.balance.shrunk.top],
+              paddingLeft: [consts.balance.expanded.paddingLeft, consts.balance.shrunk.paddingLeft],
+            }),
+          ]}>
             <H2 style={styles.value}>
               <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>
             </H2>
             <H2 style={styles.unit}>Ⱡ</H2>
-          </View>
-          <View style={styles.box} />
-        </View> :
+          </Animated.View>
+          <Animated.View style={[
+            styles.box,
+            itpl({
+              top: [consts.box.expanded.top, consts.box.shrunk.top],
+              height: [consts.box.expanded.height, consts.box.shrunk.height],
+            }),
+          ]} />
+        </Animated.View> :
         <H4>Fetching account info</H4>
       }
       <Modal

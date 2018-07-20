@@ -16,8 +16,6 @@ class InfiniteScrollView extends React.Component {
   canLoadMore = true;
 
   loadMore = ({ nativeEvent }) => {
-    // const { list, count } = this.props;
-
     const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
       const paddingToBottom = 20;
       return (layoutMeasurement.height + contentOffset.y >=
@@ -42,11 +40,16 @@ class InfiniteScrollView extends React.Component {
     this.canLoadMore = (this.props.list.length < nextProps.list.length);
   }
 
+  onScroll(e) {
+    this.props.onScroll(e);
+    this.loadMore(e);
+  }
+
   render() {
-    return <ScrollView onScroll={this.loadMore}
+    return <ScrollView onScroll={this.onScroll.bind(this)}
       style={this.props.style}
       stickyHeaderIndices={this.props.stickyHeaderIndices}
-      scrollEventThrottle={400}>{this.props.children}</ScrollView>;
+      scrollEventThrottle={8}>{this.props.children}</ScrollView>;
   }
 }
 
