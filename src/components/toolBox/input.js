@@ -11,7 +11,8 @@ import theme from './styles';
  * @param {Number} props.size - THe size of the icon in pixels, defaults to 35
  */
 const Input = ({
-  label, reference, styles, value, onChange, error, multiline, onFocus,
+  label, reference, styles, value, onChange, error,
+  multiline, onFocus, autoFocus, onBlur, autoCorrect,
 }) => (<View>
   <FormLabel labelStyle={[theme.inputLabel, styles.inputLabel]}>{label}</FormLabel>
   <FormInput
@@ -21,8 +22,11 @@ const Input = ({
     multiline = {multiline}
     ref={input => reference(input)}
     value={value}
+    autoFocus={autoFocus}
     onChangeText={onChange}
-    onFocus={onFocus}/>
+    autoCorrect={autoCorrect}
+    onFocus={onFocus}
+    onBlur={onBlur} />
   {error ? <FormValidationMessage labelStyle={[theme.errorMessage, styles.errorMessage]}>
   { error }
   </FormValidationMessage> : null }
