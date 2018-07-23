@@ -20,6 +20,11 @@ const styles = {
     fontSize: 14,
     height: 42,
   },
+  input: {
+    paddingRight: styleGuide.boxes.boxPadding,
+    borderRightWidth: styleGuide.boxes.boxPadding,
+    borderRightColor: 'transparent',
+  },
 };
 
 export default StyleSheet.create(styles);
