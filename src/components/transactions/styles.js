@@ -3,8 +3,10 @@ import styleGuide from '../../constants/styleGuide';
 
 const styles = {
   container: {
+    flex: 1,
     paddingRight: 20,
     paddingLeft: 20,
+    paddingTop: 20,
   },
   itemContainer: {
     width: '100%',
@@ -17,6 +19,13 @@ const styles = {
     alignItems: 'stretch',
     borderBottomColor: '#e3ebf2',
     borderBottomWidth: 1,
+  },
+  h1: {
+    marginBottom: 0,
+  },
+  nativeList: {
+    marginTop: 0,
+    borderTopWidth: 0,
   },
   amountWrapper: {
     flex: 1,
