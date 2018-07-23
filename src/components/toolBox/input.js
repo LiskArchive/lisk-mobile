@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-import Icon from './icons';
+import Icon from './icon';
 import theme from './styles';
 /**
  * This is thematic wrapper over Icon component of react native elements
