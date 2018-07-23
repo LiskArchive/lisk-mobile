@@ -48,7 +48,23 @@ const styles = {
   incoming: {
     color: styleGuide.colors.success1,
   },
-
+  emptyState: {
+    width: '100%',
+    display: 'flex',
+    flex: 1,
+    backgroundColor: styleGuide.colors.white,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 50,
+  },
+  noActivity: {
+    width: 178,
+    height: 199,
+  },
+  noTxTitle: {
+    paddingTop: 10,
+    color: styleGuide.colors.grayScale2,
+  },
 };
 
 export default StyleSheet.create(styles);
