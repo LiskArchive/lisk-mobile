@@ -81,7 +81,10 @@ const styles = {
   inputText: {
     fontWeight: 'bold',
     color: styleGuide.colors.black,
+    fontSize: styleGuide.fontSizes.input,
     fontFamily: styleGuide.fonts.contextSemiBold,
+    lineHeight: 30,
+    minHeight: 30,
   },
   input: {
     borderBottomColor: styleGuide.colors.grayScale1,

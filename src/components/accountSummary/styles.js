@@ -102,6 +102,7 @@ const styles = {
     width: '100%',
     textAlign: 'center',
     lineHeight: 25,
+    color: styleGuide.colors.grayScale1,
   },
   balance: {
     height: 25,

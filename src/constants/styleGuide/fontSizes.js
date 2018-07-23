@@ -5,5 +5,5 @@ export default {
   h4: 16,
   base: 16,
   small: 12,
-  input: 14,
+  input: 13,
 };

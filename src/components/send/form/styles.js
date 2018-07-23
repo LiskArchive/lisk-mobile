@@ -9,8 +9,8 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     flex: 1,
-    backgroundColor: '#ffffff',
-    paddingTop: 60,
+    backgroundColor: styleGuide.colors.white,
+    paddingTop: 36,
     paddingBottom: 60,
   },
   button: {
@@ -22,7 +22,7 @@ const styles = {
     borderWidth: 0,
   },
   subtitle: {
-    marginTop: 20,
+    marginTop: 7,
     color: styleGuide.colors.grayScale2,
   },
   input: {
@@ -44,6 +44,8 @@ const styles = {
     right: 0,
     left: 0,
     zIndex: 9999,
+  },
+  avatar: {
   },
 };
 

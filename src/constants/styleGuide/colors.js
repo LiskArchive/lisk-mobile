@@ -7,6 +7,7 @@ export default {
   primary6: '#008bff',
   primary7: '#004aff',
   primary8: '#93f4fe',
+  primary9: '#17499B',
   black: '#000',
   grayScale1: '#3c5068',
   grayScale2: '#74869b',

@@ -3,10 +3,10 @@ import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import styles from './styles';
-import { toRawLsk } from '../../../utilities/conversions';
+import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
-import { H1, H3, P } from '../../toolBox/typography';
+import { H1, H4, P } from '../../toolBox/typography';
 
 @connect(state => ({
   accounts: state.accounts,
@@ -43,22 +43,22 @@ class Form extends React.Component {
             <P style={styles.label}>Address</P>
             <View style={styles.addressContainer}>
               <Avatar address={address} style={styles.avatar} size={35}/>
-              <H3 labelStyle={[styles.address, styles.black]}>{address}</H3>
+              <H4 labelStyle={[styles.address, styles.black]}>{address}</H4>
             </View>
           </View>
           <View style={styles.row}>
-            <P style={styles.label}>Amount (including 0.1LSK fee):</P>
-            <H3 labelStyle={[styles.amount, styles.black]}>{`${parseFloat(amount) + 0.1} LSK`}</H3>
+            <P style={styles.label}>Amount (including 0.1 Ⱡ fee):</P>
+            <H4 labelStyle={[styles.amount, styles.black]}>{`${fromRawLsk(toRawLsk(amount) + 1e7)} Ⱡ`}</H4>
           </View>
           {reference ? <View style={styles.row}>
             <P style={styles.label}>Reference:</P>
-            <H3 labelStyle={[styles.address, styles.black]}>{reference}</H3>
+            <H4 labelStyle={[styles.address, styles.black]}>{reference}</H4>
           </View> : null}
         </View>
         <PrimaryButton
           style={styles.button}
           onClick={this.send}
-          title='Confirm' />
+          title='Send now' />
       </View>
     </View>);
   }

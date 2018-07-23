@@ -80,7 +80,7 @@ class Form extends React.Component {
       <View style={styles.innerContainer}>
         <View style={styles.titleContainer}>
           <H1>Send</H1>
-          <P style={styles.subtitle}>Send Lisk tokens to other accounts</P>
+          <P style={styles.subtitle}>Send Lisk tokens to other accounts.</P>
         </View>
         <View>
           <Input
@@ -96,7 +96,7 @@ class Form extends React.Component {
             onFocus={() => { this.activeInputRef = 0; }}
           />
           <Input
-            label='Amount'
+            label='Amount (Ⱡ)'
             reference={(input) => { this.references[1] = input; }}
             styles={{ input: styles.input }}
             onChange={value => this.changeHandler('amount', value)}
@@ -108,7 +108,7 @@ class Form extends React.Component {
             onFocus={() => { this.activeInputRef = 1; }}
           />
           <Input
-            label='Reference'
+            label='Reference (Optional)'
             reference={(input) => { this.references[2] = input; }}
             styles={{ errorMessage: styles.errorMessage, input: styles.input }}
             multiline={true}
@@ -124,7 +124,7 @@ class Form extends React.Component {
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onClick={this.goToNextState}
             style={[styles.button, { opacity: this.state.opacity }]}
-            title='Next' />
+            title='Continue' />
           </View>
         </KeyboardAwareScrollView>
         <KeyboardAccessoryView
@@ -133,7 +133,7 @@ class Form extends React.Component {
             style={styles.stickyButton}
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onClick={this.goToNextState}
-            title='Next' />
+            title='Continue' />
         </KeyboardAccessoryView>
       </Fragment>
     );

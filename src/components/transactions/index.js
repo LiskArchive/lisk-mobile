@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import List from './list';
-import { H1 } from '../toolBox/typography';
+import { H3 } from '../toolBox/typography';
 import styles from './styles';
 
 /**
@@ -19,7 +19,7 @@ class Transactions extends React.Component {
           (transactions.confirmed.length === 0 && transactions.pending.length === 0)) ?
           <Fragment></Fragment> :
           <Fragment>
-            <H1 style={styles.h1}>Activity</H1>
+            <H3 style={styles.title}>Activity</H3>
             <List
               navigate={navigate}
               account={account}

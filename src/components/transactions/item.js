@@ -5,7 +5,7 @@ import styles from './styles';
 import FormattedNumber from '../formattedNumber';
 import Avatar from '../avatar';
 import FormattedDate from '../formattedDate';
-import { P, H4, Small } from '../toolBox/typography';
+import { H4, Small } from '../toolBox/typography';
 import { stringShortener } from '../../utilities/helpers';
 
 
@@ -42,7 +42,7 @@ class Item extends React.Component {
         <Avatar address={address} size={50} />
       </View>
       <View style={styles.column}>
-        <P style={styles.address}>{address}</P>
+        <H4 style={styles.address}>{address}</H4>
         <FormattedDate type={Small} style={styles.date}>{ tx.timestamp }</FormattedDate>
       </View>
       <View style={[styles.column, styles.amountWrapper]}>

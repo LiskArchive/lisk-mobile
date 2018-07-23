@@ -10,7 +10,7 @@ const styles = {
     backgroundColor: '#ffffff',
     paddingRight: styleGuide.boxes.boxPadding,
     paddingLeft: styleGuide.boxes.boxPadding,
-    paddingTop: 60,
+    paddingTop: 37,
     paddingBottom: 35,
   },
   button: {
@@ -29,7 +29,7 @@ const styles = {
     paddingBottom: 80,
   },
   subtitle: {
-    marginTop: 20,
+    marginTop: 7,
     color: styleGuide.colors.grayScale2,
   },
 };

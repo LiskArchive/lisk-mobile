@@ -19,7 +19,7 @@ const styles = {
     borderBottomColor: '#e3ebf2',
     borderBottomWidth: 1,
   },
-  h1: {
+  title: {
     marginBottom: 0,
   },
   nativeList: {
