@@ -5,6 +5,7 @@ import { H4 } from '../toolBox/typography';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
+import Empty from '../transactions/empty';
 import InfiniteScrollView from '../infiniteScrollView';
 import styles from './styles';
 
@@ -48,6 +49,7 @@ class Wallet extends React.Component {
   }
 
   render() {
+    const { transactions, transactionsLoaded } = this.props;
     return (<View style={styles.container}>
       {
         !this.props.accounts.active ?
@@ -57,21 +59,25 @@ class Wallet extends React.Component {
             account={this.props.accounts.active}
             style={styles.accountSummary} />
       }
-      <InfiniteScrollView
-        ref={(el) => { if (el) this.scrollView = el; }}
-        scrollEventThrottle={8}
-        onScroll={this.onScroll.call(this)}
-        style={[styles.scrollView]}
-        list={this.props.transactions.confirmed}
-        count={this.props.transactions.count}
-        loadMore={() => this.props.transactionsLoaded({
-          senderIdOrRecipientId: this.activeAccount.address,
-          offset: this.props.transactions.confirmed.length,
-        })}>
-        <Transactions transactions={this.props.transactions}
-          navigate={this.props.navigation.navigate}
-          account={this.activeAccount.address} />
-      </InfiniteScrollView>
+      {
+        (transactions.confirmed.length === 0 && transactions.pending.length === 0) ?
+        <Empty /> :
+        <InfiniteScrollView
+          ref={(el) => { if (el) this.scrollView = el; }}
+          scrollEventThrottle={8}
+          onScroll={this.onScroll.call(this)}
+          style={[styles.scrollView]}
+          list={transactions.confirmed}
+          count={transactions.count}
+          loadMore={() => transactionsLoaded({
+            senderIdOrRecipientId: this.activeAccount.address,
+            offset: transactions.confirmed.length,
+          })}>
+          <Transactions transactions={transactions}
+            navigate={this.props.navigation.navigate}
+            account={this.activeAccount.address} />
+        </InfiniteScrollView>
+      }
     </View>);
   }
 }
