@@ -12,7 +12,7 @@ const styles = {
     justifyContent: 'space-between',
     marginRight: styleGuide.boxes.boxPadding,
     marginLeft: styleGuide.boxes.boxPadding,
-    paddingTop: 60,
+    paddingTop: 36,
     paddingBottom: 35,
   },
   verticalAligner: {
@@ -54,13 +54,16 @@ const styles = {
     marginTop: 20,
   },
   label: {
-    color: '#86939e',
     marginTop: 15,
-    fontSize: 14,
     marginBottom: 7,
+
+    color: styleGuide.colors.grayScale1,
+    fontFamily: styleGuide.fonts.contextLight,
+    fontSize: styleGuide.fontSizes.input,
+    fontWeight: '400',
   },
   subtitle: {
-    marginTop: 20,
+    marginTop: 7,
     color: styleGuide.colors.grayScale2,
   },
   addressContainer: {
