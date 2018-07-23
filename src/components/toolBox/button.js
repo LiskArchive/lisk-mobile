@@ -61,7 +61,7 @@ export const SecondaryButton = props => (<LinearGradient
   start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
   colors={props.disabled ?
     [Colors.grayScale3, Colors.grayScale3] :
-    [Colors.primary4, Colors.primary2]}
+    [Colors.primary4, Colors.primary9]}
   style={props.disabled ?
     [theme.disabledButtonBg, props.style] :
     [theme.buttonWrapper, props.style]
