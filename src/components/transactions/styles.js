@@ -3,7 +3,6 @@ import styleGuide from '../../constants/styleGuide';
 
 const styles = {
   container: {
-    flex: 1,
     paddingRight: 20,
     paddingLeft: 20,
     paddingTop: 20,
