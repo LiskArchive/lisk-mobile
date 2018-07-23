@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import Colors from '../../constants/styleGuide/colors';
+import Fonts from '../../constants/styleGuide/fonts';
 
 const styles = {
   container: {
@@ -13,7 +14,7 @@ const styles = {
     backgroundColor: '#ccc',
   },
   title: {
-    paddingTop: 40,
+    paddingTop: 15,
   },
   address: {
     fontSize: 24,
@@ -22,11 +23,12 @@ const styles = {
   value: {
     marginBottom: 20,
     alignItems: 'center',
-    color: Colors.grayScale1,
+    color: Colors.black,
+    fontFamily: Fonts.context,
   },
   label: {
-    color: '#86939e',
-    fontSize: 14,
+    color: '#3C5068',
+    fontSize: 13,
     marginBottom: 7,
   },
   addressContainer: {
@@ -38,7 +40,7 @@ const styles = {
     marginRight: 20,
   },
   senderAndRecipient: {
-    marginTop: 30,
+    marginTop: 24,
   },
   row: {
     marginBottom: 30,
