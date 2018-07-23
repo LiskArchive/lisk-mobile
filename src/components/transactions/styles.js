@@ -3,8 +3,10 @@ import styleGuide from '../../constants/styleGuide';
 
 const styles = {
   container: {
+    flex: 1,
     paddingRight: 20,
     paddingLeft: 20,
+    paddingTop: 20,
   },
   itemContainer: {
     width: '100%',
@@ -17,6 +19,13 @@ const styles = {
     alignItems: 'stretch',
     borderBottomColor: '#e3ebf2',
     borderBottomWidth: 1,
+  },
+  h1: {
+    marginBottom: 0,
+  },
+  nativeList: {
+    marginTop: 0,
+    borderTopWidth: 0,
   },
   amountWrapper: {
     flex: 1,
@@ -39,7 +48,23 @@ const styles = {
   incoming: {
     color: styleGuide.colors.success1,
   },
-
+  emptyState: {
+    width: '100%',
+    display: 'flex',
+    flex: 1,
+    backgroundColor: styleGuide.colors.white,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 50,
+  },
+  noActivity: {
+    width: 178,
+    height: 199,
+  },
+  noTxTitle: {
+    paddingTop: 10,
+    color: styleGuide.colors.grayScale2,
+  },
 };
 
 export default StyleSheet.create(styles);
