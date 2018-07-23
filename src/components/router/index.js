@@ -9,14 +9,13 @@ import Wallet from '../wallet';
 import OwnWallet from '../ownWallet';
 import styles from '../styles';
 import LogoutButton from '../logoutButton';
-import Icon from '../toolBox/icons';
+import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
 import tabBarOptions from './tabBarOptions';
-
-const MenuIcon = ({ focused, icon }) => {
-  const color = focused ? tabBarOptions.activeTintColor : '#000';
-  return <Icon name={icon} style={{ marginBottom: 0 }} tintColor={color} />;
-};
+import homeInactiveIcon from '../../assets/images/icons/homeInactive.svg';
+import homeActiveIcon from '../../assets/images/icons/homeActive.svg';
+import sendActiveIcon from '../../assets/images/icons/sendActive.svg';
+import sendInactiveIcon from '../../assets/images/icons/sendInactive.svg';
 
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
@@ -25,7 +24,7 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Wallet',
       tabBarLabel: 'Wallet',
-      tabBarIcon: ({ focused }) => <MenuIcon icon='list' focused={focused} />, //eslint-disable-line
+      tabBarIcon: ({ focused }) => <MenuIcon active={homeActiveIcon} inactive={homeInactiveIcon} focused={focused} />, //eslint-disable-line
     },
   },
   Send: {
@@ -33,7 +32,7 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Send',
       tabBarLabel: 'Send',
-      tabBarIcon: ({ focused }) => <MenuIcon icon='send' focused={focused} />, //eslint-disable-line
+      tabBarIcon: ({ focused }) => <MenuIcon active={sendActiveIcon} inactive={sendInactiveIcon} focused={focused} />, //eslint-disable-line
     },
   },
   // Explore: {
