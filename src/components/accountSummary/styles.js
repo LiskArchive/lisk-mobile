@@ -92,15 +92,18 @@ const styles = {
   },
   address: {
     height: 45,
+    width: '100%',
     paddingTop: 10,
     paddingBottom: 10,
     position: 'absolute',
     zIndex: 4,
     elevation: 4,
   },
-  addressP: {
+  addressContainer: {
+    justifyContent: 'center',
     width: '100%',
-    textAlign: 'center',
+  },
+  addressP: {
     lineHeight: 25,
     color: styleGuide.colors.grayScale1,
   },

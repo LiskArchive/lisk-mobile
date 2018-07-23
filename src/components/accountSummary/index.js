@@ -10,7 +10,7 @@ import { fromRawLsk } from '../../utilities/conversions';
 import Modal from '../followedAccountsModal';
 import styles, { consts } from './styles';
 import FormattedNumber from '../formattedNumber';
-import CopyToClipBoard from '../copyToClipboard';
+import Share from '../share';
 import { H4, P, H2 } from '../toolBox/typography';
 import stripes from '../../assets/images/stripes.png';
 
@@ -78,7 +78,8 @@ class AccountSummary extends React.Component {
               paddingLeft: [consts.address.expanded.paddingLeft, consts.address.shrunk.paddingLeft],
             }),
           ]}>
-            <CopyToClipBoard type={P} style={styles.addressP}
+            <Share type={P} style={styles.addressP}
+              containerStyle={styles.addressContainer}
               value={account.address} icon={true} />
           </Animated.View>
           <Animated.View style={[
