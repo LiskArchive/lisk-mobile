@@ -5,7 +5,7 @@ import styles from './styles';
 import FormattedNumber from '../formattedNumber';
 import Avatar from '../avatar';
 import FormattedDate from '../formattedDate';
-import { P, H4, Small } from '../toolBox/typography';
+import { H4, Small } from '../toolBox/typography';
 import { stringShortener } from '../../utilities/helpers';
 
 

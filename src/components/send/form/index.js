@@ -7,7 +7,6 @@ import { P, H1 } from '../../toolBox/typography';
 import styles from './styles';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
-import Avatar from '../../avatar';
 
 class Form extends React.Component {
     references = [];
