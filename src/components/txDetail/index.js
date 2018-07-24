@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import Icon from '../toolBox/icon';
 import FormattedDate from '../formattedDate';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
