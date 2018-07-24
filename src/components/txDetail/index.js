@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Share } from 'react-native';
-import Icon from '../toolBox/icons';
+import { View } from 'react-native';
 import FormattedDate from '../formattedDate';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import styles from './styles';
-import CopyToClipBoard from '../copyToClipboard';
+import Share from '../share';
 import { H4, P, H1 } from '../toolBox/typography';
 import Avatar from '../avatar';
 
@@ -18,14 +17,14 @@ const TxDetail = ({ navigation }) => {
         <P style={styles.label}>Sender</P>
         <View style={styles.addressContainer}>
           <Avatar address={tx.senderId} style={styles.avatar} size={50}/>
-          <CopyToClipBoard type={H4} value={tx.senderId} icon={true} />
+          <Share type={H4} value={tx.senderId} icon={true} />
         </View>
       </View>
       <View style={styles.row}>
         <P style={styles.label}>Recipient</P>
         <View style={styles.addressContainer}>
           <Avatar address={tx.recipientId} style={styles.avatar} size={50}/>
-          <CopyToClipBoard type={H4} value={tx.recipientId} icon={true} />
+          <Share type={H4} value={tx.recipientId} icon={true} />
         </View>
       </View>
     </View>
@@ -41,18 +40,7 @@ const TxDetail = ({ navigation }) => {
       </View> : null}
     <P style={styles.label}>Transaction ID</P>
     <View style={styles.addressContainer}>
-      <H4 style={[styles.value, styles.transactionId]}>{tx.id}</H4>
-      <Icon
-      size={20}
-      style={styles.shareIcon}
-      onPress={() => {
-        Share.share({
-          message: tx.id,
-          url: '',
-        });
-      }}
-      name="share"
-      />
+      <Share type={H4} value={tx.id} icon={true} style={[styles.value, styles.transactionId]} />
     </View>
   </View>);
 };
