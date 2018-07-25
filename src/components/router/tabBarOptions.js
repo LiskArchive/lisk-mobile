@@ -1,17 +1,31 @@
-export default {
-  activeTintColor: '#1F55A0',
-  inactiveTintColor: '#525252',
-  showIcon: true,
+import { Platform, DeviceInfo } from 'react-native';
+import { merge } from '../../utilities/helpers';
+import colors from '../../constants/styleGuide/colors';
+
+const stylesheet = {
   style: {
-    backgroundColor: '#fff',
-    borderColor: '#e3ebf2',
+    backgroundColor: colors.white,
+    borderTopColor: colors.grayScale5,
     borderTopWidth: 1,
-    height: 58,
     zIndex: 99,
-    paddingTop: 11,
   },
   labelStyle: {
-    paddingTop: 8,
-    fontSize: 14,
+    fontSize: 12,
   },
 };
+
+if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
+  stylesheet.style.height = 55;
+  stylesheet.style.paddingTop = 5;
+} else if (Platform.OS === 'ios' && !DeviceInfo.isIPhoneX_deprecated) {
+  stylesheet.style.height = 60;
+  stylesheet.labelStyle.paddingBottom = 5;
+}
+
+export default merge({
+  activeTintColor: colors.primary5,
+  inactiveTintColor: colors.grayScale2,
+  showIcon: true,
+  showLabel: true,
+  upperCaseLabel: false,
+}, stylesheet);

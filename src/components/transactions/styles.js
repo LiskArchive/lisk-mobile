@@ -16,7 +16,7 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'stretch',
-    borderBottomColor: '#e3ebf2',
+    borderBottomColor: styleGuide.colors.grayScale5,
     borderBottomWidth: 1,
   },
   title: {
