@@ -21,10 +21,12 @@ class Item extends React.Component {
     const { tx, account } = this.props;
     // const confirmed = tx.timestamp !== undefined;
     let direction = 'incoming';
-    let address = stringShortener(tx.senderId, 10, 3);
+    let address = tx.senderId;
+    let addressShortened = stringShortener(tx.senderId, 10, 3);
     if (account === tx.senderId) {
       direction = 'outgoing';
-      address = stringShortener(tx.recipientId, 10, 3);
+      address = tx.recipientId;
+      addressShortened = stringShortener(tx.recipientId, 10, 3);
     }
 
     if (tx.type === 3) {
@@ -36,13 +38,14 @@ class Item extends React.Component {
     }
 
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
+    console.log('info add ', address);
 
     return (<TouchableOpacity style={styles.itemContainer} onPress={this.showDetail.bind(this, tx)}>
       <View style={[styles.itemColumn, styles.avatar]}>
         <Avatar address={address} size={50} />
       </View>
       <View style={styles.column}>
-        <H4 style={styles.address}>{address}</H4>
+        <H4 style={styles.address}>{addressShortened}</H4>
         <FormattedDate type={Small} style={styles.date}>{ tx.timestamp }</FormattedDate>
       </View>
       <View style={[styles.column, styles.amountWrapper]}>
