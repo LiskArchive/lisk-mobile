@@ -12,6 +12,9 @@ const stylesheet = {
   labelStyle: {
     fontSize: 12,
   },
+  indicatorStyle: {
+    backgroundColor: colors.white,
+  },
 };
 
 if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
