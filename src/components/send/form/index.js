@@ -2,12 +2,18 @@ import React, { Fragment } from 'react';
 import { View, Platform } from 'react-native';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import connect from 'redux-connect-decorator';
 import { PrimaryButton } from '../../toolBox/button';
+import { fromRawLsk } from '../../../utilities/conversions';
+import transactions from '../../../constants/transactions';
 import { P, H1 } from '../../toolBox/typography';
 import styles from './styles';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
 
+@connect(state => ({
+  account: state.accounts.active,
+}), {})
 class Form extends React.Component {
     references = [];
 
@@ -20,7 +26,10 @@ class Form extends React.Component {
 
     validator = {
       address: str => reg.address.test(str),
-      amount: str => reg.amount.test(str),
+      amount: str => (
+        reg.amount.test(str) &&
+        parseFloat(str) < fromRawLsk(this.props.account.balance - transactions.send.fee)
+      ),
       reference: str => (str.length === 0 || str.length < 64),
     };
     activeInputRef = null;
