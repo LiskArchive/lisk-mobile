@@ -9,25 +9,41 @@ import txCreatedAnim from '../../../assets/animations/tx-created.json';
 import txPendingAnim from '../../../assets/animations/tx-pending.json';
 import txConfirmedAnim from '../../../assets/animations/tx-confirmed.json';
 
+const createdAnimDuration = 3890;
+const pendingRoundAnimDuration = 440;
+const singleAnimRound = createdAnimDuration + pendingRoundAnimDuration;
+
 @connect(state => ({
   account: state.accounts.active,
-  pending: state.transactions.pending,
+  transactions: state.transactions,
 }), {})
 class Result extends React.Component {
   state = {
     animSrc: txCreatedAnim,
+    loop: false,
+  };
+  timeouts = {
+    created: null,
+    confirmed: null,
   };
 
   componentDidMount() {
+    this.startDate = new Date();
     this.play('created');
   }
 
-  componentDidUpdate(nextProp) {
-    const currentTx = this.props.pending.filter(tx =>
-      tx.id === this.props.txId);
-    const nextTx = nextProp.pending.filter(tx =>
-      tx.id === this.props.txId);
-    if (nextTx && nextTx.timestamp && !currentTx.timestamp) {
+  componentWillUnmount() {
+    clearTimeout(this.timeouts.created);
+    clearTimeout(this.timeouts.confirmed);
+  }
+
+  componentWillUpdate(nextProp) {
+    const nowPending = this.props.transactions.pending.filter(tx =>
+      tx.id === this.props.txId).length > 0;
+    const nextConfirmed = nextProp.transactions.confirmed.filter(tx =>
+      tx.id === this.props.txId).length > 0;
+
+    if (nowPending && nextConfirmed) {
       this.play('confirmed');
     }
   }
@@ -36,22 +52,28 @@ class Result extends React.Component {
     if (stage === 'created') {
       this.setState({
         animSrc: txCreatedAnim,
+        loop: false,
       });
       this.animation.play();
-      setTimeout(() => {
+      this.timeouts.created = setTimeout(() => {
         this.setState({
           animSrc: txPendingAnim,
+          loop: true,
         });
         this.animation.play();
-      }, 3890);
+      }, createdAnimDuration);
     } else if (stage === 'confirmed') {
-      this.setState({
-        animSrc: txConfirmedAnim,
-      });
-      this.animation.play();
-      setTimeout(() => {
-        this.animation.stop();
-      }, 5430);
+      const timeLapsed = new Date() - this.startDate;
+      const delay = (timeLapsed > singleAnimRound) ?
+        timeLapsed % pendingRoundAnimDuration : singleAnimRound - timeLapsed;
+
+      this.timeouts.confirmed = setTimeout(() => {
+        this.setState({
+          animSrc: txConfirmedAnim,
+          loop: false,
+        });
+        this.animation.play();
+      }, delay);
     }
   }
 
@@ -65,7 +87,7 @@ class Result extends React.Component {
         </P>
       </View>
       <View style={styles.illustration}>
-        <LottieView source={this.state.animSrc} ref={(el) => { this.animation = el; }}/>
+        <LottieView source={this.state.animSrc} loop={this.state.loop} ref={(el) => { this.animation = el; }}/>
       </View>
       <SecondaryButton
         style={styles.button}
