@@ -34,6 +34,7 @@
     "history": "^4.7.2",
     "https-browserify": "0.0.1",
     "lisk-elements": "github:reyraa/lisk-elements#update-dependencies-experimental",
+    "lottie-react-native": "^2.3.2",
     "moment": "^2.22.0",
     "numeral": "^2.0.6",
     "path-browserify": "0.0.0",
