@@ -26,8 +26,7 @@ class Form extends React.Component {
       passphrase: activeAccount.passphrase,
       secondPassphrase: null,
       data: reference || null,
-    }, activeAccount);
-    nextStep();
+    }, activeAccount, nextStep);
   }
 
   render() {
