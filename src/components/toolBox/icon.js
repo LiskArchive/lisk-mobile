@@ -17,7 +17,7 @@ const Icomoon = createIconSetFromIcoMoon(iconsConfig);
  */
 const Icon = ({
   name, size, color, style, onPress,
-}) => (
-  <Icomoon name={name} size={size || 35} color={color} style={style} onPress={onPress} />);
+}) =>
+  <Icomoon name={name} size={size || 35} color={color} style={style} onPress={onPress} />;
 
 export default Icon;
