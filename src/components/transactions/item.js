@@ -45,7 +45,6 @@ class Item extends React.Component {
     }
 
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
-    console.log('info add ', address);
 
     const props = {
       style: styles.itemContainer,
