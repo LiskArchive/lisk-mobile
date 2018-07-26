@@ -1,9 +1,10 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
-import { H4 } from '../toolBox/typography';
-import BackgroundImage from '../background';
-import Logo from '../logo';
+import LottieView from 'lottie-react-native';
+import landingAnimation from '../../assets/animations/welcome.json';
+import { H1, P } from '../toolBox/typography';
+import { SecondaryButton } from '../toolBox/button';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import { accountsRetrieved as accountsRetrievedAction } from '../../actions/accounts';
 import styles from './styles';
@@ -29,10 +30,15 @@ class Landing extends React.Component {
     this.props.accountsRetrieved();
   }
 
-  componentDidUpdate() {
+  /* componentDidUpdate() {
     if (!this.props.accounts.active) {
       this.props.navigation.navigate('Login');
     }
+  } */
+
+
+  componentDidMount() {
+    this.animation.play();
   }
 
   /**
@@ -41,9 +47,24 @@ class Landing extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   render() {
     return (<View style={styles.container}>
-      <BackgroundImage />
-      <Logo />
-      <H4>Landing...</H4>
+      <View style={styles.textContainer}>
+        <LottieView style={styles.logo}
+        source={landingAnimation}
+        ref={(el) => { this.animation = el; }}
+        />
+        <View>
+          <H1 style={styles.header}>Welcome to Lisk Mobile</H1>
+          <P style={styles.description}>
+            With Lisk Mobile, you can send and receive LSK tokens,
+             monitor account activity and more.
+          </P>
+          <SecondaryButton
+            onClick={() => {
+              this.props.navigation.navigate('Login');
+            }}
+            style={styles.button}>Continue</SecondaryButton>
+        </View>
+      </View>
     </View>);
   }
 }
