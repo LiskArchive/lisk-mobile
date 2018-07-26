@@ -28,6 +28,8 @@ const styles = {
   },
   amountWrapper: {
     flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
   },
   amount: {
     paddingTop: 4,
@@ -63,6 +65,10 @@ const styles = {
   noTxTitle: {
     paddingTop: 10,
     color: styleGuide.colors.grayScale2,
+  },
+  pendingIcon: {
+    width: 40,
+    height: 30,
   },
 };
 
