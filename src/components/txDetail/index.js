@@ -34,10 +34,13 @@ const TxDetail = ({ navigation }) => {
     </H4>
     <P style={styles.label}>Date</P>
     <FormattedDate type={H4} style={styles.value}>{ tx.timestamp }</FormattedDate>
-    {tx.asset.data ? <View>
-      <P style={styles.label}>reference</P>
-      <H4 style={styles.value}>{ tx.asset.data }</H4>
-      </View> : null}
+    {
+      (tx.asset && tx.asset.data) ?
+      <View>
+        <P style={styles.label}>reference</P>
+        <H4 style={styles.value}>{ tx.asset.data }</H4>
+      </View> : null
+    }
     <P style={styles.label}>Transaction ID</P>
     <View style={styles.addressContainer}>
       <Share type={H4} value={tx.id} icon={true} style={[styles.value, styles.transactionId]} />
