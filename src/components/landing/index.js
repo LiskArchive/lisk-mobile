@@ -28,6 +28,9 @@ class Landing extends React.Component {
   componentWillMount() {
     this.props.peerSet();
     this.props.accountsRetrieved();
+    if (!this.focusListener) {
+      this.focusListener = this.props.navigation.addListener('willFocus', this.focus);
+    }
   }
 
   /* componentDidUpdate() {
@@ -48,11 +51,25 @@ class Landing extends React.Component {
     }, 150);
   }
 
+  componentDidUnMount() {
+    this.focusListener.remove();
+  }
+
+  focus = () => {
+    if (!this.props.accounts.active) {
+      this.props.navigation.navigate('Login');
+    }
+    if (this.props.accounts && this.props.accounts.active) {
+      this.props.navigation.navigate('OwnWallet');
+    }
+  }
+
   /**
    * @todo this Text need to be replaced by a snipper component
    */
   // eslint-disable-next-line class-methods-use-this
   render() {
+    console.log('mount');
     return (<View style={styles.container}>
       <View style={styles.textContainer}>
         <LottieView style={styles.logo}
