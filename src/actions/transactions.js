@@ -19,7 +19,7 @@ export const transactionsLoaded = data =>
       });
   };
 
-export const transactionAdded = (data, account) =>
+export const transactionAdded = (data, account, cb) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
     dispatch(loadingStarted(actionTypes.transactionAdded));
@@ -38,5 +38,6 @@ export const transactionAdded = (data, account) =>
           type: actionTypes.transactionAdded,
         });
         dispatch(loadingFinished(actionTypes.transactionAdded));
+        cb({ txId: res.id });
       });
   };

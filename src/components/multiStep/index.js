@@ -36,6 +36,10 @@ class MultiStep extends React.Component {
     };
   }
 
+  componentDidUpdate(newProps) {
+    if (newProps.reset !== this.props.reset) this.reset();
+  }
+
   next(data) {
     const newState = Object.assign({}, this.state);
     newState.step.current++;

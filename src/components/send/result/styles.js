@@ -32,6 +32,11 @@ const styles = {
     marginTop: 7,
     color: styleGuide.colors.grayScale2,
   },
+  illustration: {
+    width: '100%',
+    height: 300,
+    paddingBottom: 50,
+  },
 };
 
 export default StyleSheet.create(styles);
