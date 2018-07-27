@@ -5,13 +5,17 @@ const styles = {
   container: {
     backgroundColor: Colors.white,
     flex: 1,
-    alignContent: 'space-around',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
   },
   textContainer: {
+    flexDirection: 'column',
+    height: '100%',
     alignItems: 'center',
+    justifyContent: 'space-around',
+    paddingTop: 0,
+    paddingBottom: 0,
   },
   header: {
     textAlign: 'center',
@@ -30,7 +34,8 @@ const styles = {
   },
   logo: {
     width: 350,
-    height: 300,
+    height: 380,
+    paddingBottom: 0,
   },
 };
 
