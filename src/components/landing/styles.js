@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
+import Colors from '../../constants/styleGuide/colors';
 
 const styles = {
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     flex: 1,
     alignContent: 'space-around',
     justifyContent: 'center',
@@ -17,7 +18,7 @@ const styles = {
   },
   description: {
     textAlign: 'center',
-    color: '#74869B',
+    color: Colors.grayScale2,
     paddingTop: 10,
     marginRight: 30,
     marginLeft: 30,
@@ -30,7 +31,6 @@ const styles = {
   logo: {
     width: 350,
     height: 300,
-    // backgroundColor: '#f0f',
   },
 };
 
