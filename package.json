@@ -12,7 +12,7 @@
     "test:react-native": "jest --no-cache",
     "test:format": "eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
-    "postinstall": "npm run link"
+    "postinstall": "npm run link && rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
   },
   "rnpm": {
     "assets": [
@@ -34,7 +34,7 @@
     "history": "^4.7.2",
     "https-browserify": "0.0.1",
     "lisk-elements": "github:reyraa/lisk-elements#update-dependencies-experimental",
-    "lottie-react-native": "^2.3.2",
+    "lottie-react-native": "=2.3.2",
     "moment": "^2.22.0",
     "numeral": "^2.0.6",
     "path-browserify": "0.0.0",
