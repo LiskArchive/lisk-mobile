@@ -41,6 +41,13 @@ class Landing extends React.Component {
     this.animation.play();
   }
 
+  goToLogin = () => {
+    this.animation.reset();
+    setTimeout(() => {
+      this.props.navigation.navigate('Login');
+    }, 150);
+  }
+
   /**
    * @todo this Text need to be replaced by a snipper component
    */
@@ -59,9 +66,7 @@ class Landing extends React.Component {
              monitor account activity and more.
           </P>
           <SecondaryButton
-            onClick={() => {
-              this.props.navigation.navigate('Login');
-            }}
+            onClick={this.goToLogin}
             style={styles.button}>Continue</SecondaryButton>
         </View>
       </View>

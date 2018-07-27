@@ -5,11 +5,12 @@ const styles = {
     backgroundColor: '#fff',
     flex: 1,
     alignContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
   },
   textContainer: {
-    flex: 1,
+    alignItems: 'center',
   },
   header: {
     textAlign: 'center',
@@ -27,8 +28,9 @@ const styles = {
     marginLeft: 10,
   },
   logo: {
-    width: 250,
-    height: 400,
+    width: 350,
+    height: 300,
+    // backgroundColor: '#f0f',
   },
 };
 
