@@ -87,7 +87,10 @@ class Result extends React.Component {
         </P>
       </View>
       <View style={styles.illustration}>
-        <LottieView source={this.state.animSrc} loop={this.state.loop} ref={(el) => { this.animation = el; }}/>
+        <LottieView
+          source={this.state.animSrc}
+          loop={this.state.loop}
+          ref={(el) => { this.animation = el; }}/>
       </View>
       <SecondaryButton
         style={styles.button}
