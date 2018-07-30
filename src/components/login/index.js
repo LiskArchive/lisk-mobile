@@ -82,7 +82,7 @@ class Login extends React.Component {
     if (status) {
       this.setState({ buttonStyle: styles.button });
     } else {
-      this.setState({ buttonStyle: null });
+      this.setState({ buttonStyle: { borderWidth: 0 } });
     }
   }
 
