@@ -31,7 +31,7 @@ const Input = ({
       onFocus={onFocus}
       onBlur={onBlur} />
     {error ? <View style={[theme.errorMessageContainer, styles.errorMessage] }>
-      <Icon size={16} name='cancel' style={theme.errorIcon} />
+      <Icon size={16} name='error' style={theme.errorIcon} />
       <FormValidationMessage labelStyle={[theme.errorMessage]}>
         { error }
       </FormValidationMessage>
