@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import Colors from '../../constants/styleGuide/colors';
 
 const styles = {
@@ -29,8 +29,8 @@ const styles = {
   },
   button: {
     marginTop: 20,
-    marginRight: 10,
-    marginLeft: 10,
+    marginRight: Platform.OS === 'ios' ? 10 : 30,
+    marginLeft: Platform.OS === 'ios' ? 10 : 30,
   },
   logo: {
     width: 350,

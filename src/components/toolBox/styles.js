@@ -44,24 +44,23 @@ const styles = {
   },
   button: {
     fontSize: styleGuide.fontSizes.base,
-    height: styleGuide.boxes.buttonHeight,
-    lineHeight: styleGuide.boxes.buttonHeight,
     fontFamily: styleGuide.fonts.context,
     textAlign: 'center',
   },
   primaryButton: {
     color: styleGuide.colors.white,
+    lineHeight: styleGuide.boxes.buttonHeight,
   },
   buttonWrapper: {
     borderRadius: 3,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
   disabledButtonColor: {
     color: styleGuide.colors.grayScale3,
   },
   disabledButtonBg: {
-    borderRadius: 3,
     backgroundColor: styleGuide.colors.white,
-    borderWidth: 2,
     borderColor: styleGuide.colors.grayScale3,
   },
   labelButton: {

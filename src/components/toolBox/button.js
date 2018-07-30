@@ -49,10 +49,11 @@ export const PrimaryButton = props => (<LinearGradient
     colors={props.disabled ?
       [Colors.white, Colors.white] :
       [Colors.action4, Colors.action2]}
-    style={props.disabled ?
-      [theme.disabledButtonBg, props.style] :
-      [theme.buttonWrapper, props.style]
-    }>
+    style={[
+      theme.buttonWrapper,
+      props.style,
+      props.disabled ? theme.disabledButtonBg : null,
+    ]}>
     <Button {...props} style={primaryStyle(props.disabled)} />
   </LinearGradient>);
 
@@ -62,10 +63,11 @@ export const SecondaryButton = props => (<LinearGradient
   colors={props.disabled ?
     [Colors.grayScale3, Colors.grayScale3] :
     [Colors.primary4, Colors.primary9]}
-  style={props.disabled ?
-    [theme.disabledButtonBg, props.style] :
-    [theme.buttonWrapper, props.style]
-  }>
+  style={[
+    theme.buttonWrapper,
+    props.style,
+    props.disabled ? theme.disabledButtonBg : null,
+  ]}>
   <Button {...props} style={primaryStyle(props.disabled)} />
 </LinearGradient>);
 
