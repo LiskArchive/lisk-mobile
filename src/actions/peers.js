@@ -2,7 +2,7 @@ import Lisk from 'lisk-elements';
 import actionTypes from '../constants/actions';
 
 const network = 'customNode';
-const serverAddress = 'http://localhost:4000';
+const serverAddress = 'http://10.194.50.94:4000';
 
 const peerSet = config => ({
   data: new Lisk.APIClient(config.nodes, { nethash: config.nethash }),

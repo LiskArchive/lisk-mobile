@@ -6,16 +6,36 @@ import Confirm from './confirm';
 import Result from './result';
 import styles from './styles';
 
-const Send = ({ navigation }) => (
-  <View style={styles.wrapper}>
-    <MultiStep finalCallback={() => {
-      navigation.navigate({ routeName: 'OwnWallet' });
-    }}>
-      <Form/>
-      <Confirm />
-      <Result />
-    </MultiStep>
-  </View>
-);
+class Send extends React.Component {
+  state = { focused: 1 };
+  componentDidMount() {
+    this.subs = [
+      this.props.navigation.addListener('didFocus', () => this.didFocus()),
+    ];
+  }
+
+  componentWillUnmount() {
+    this.subs.forEach(sub => sub.remove());
+  }
+
+  didFocus() {
+    this.setState({ focused: !this.state.focused });
+  }
+
+  render() {
+    const { navigation } = this.props;
+    return (
+      <View style={styles.wrapper}>
+        <MultiStep finalCallback={() => {
+          navigation.navigate({ routeName: 'OwnWallet' });
+        }} reset={this.state.focused}>
+          <Form/>
+          <Confirm />
+          <Result navigation={navigation}/>
+        </MultiStep>
+      </View>
+    );
+  }
+}
 
 export default Send;
