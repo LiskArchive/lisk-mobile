@@ -34,7 +34,7 @@ const styles = {
   },
   iosKeyboard: {
     backgroundColor: 'transparent',
-    marginBottom: DeviceInfo.isIPhoneX_deprecated ? -98 : -65,
+    marginBottom: DeviceInfo.isIPhoneX_deprecated ? -90 : -60,
   },
   androidKeyboard: {
     backgroundColor: 'transparent',
