@@ -94,6 +94,7 @@ class Form extends React.Component {
         <View>
           <Input
             label='Address'
+            autoCorrect={false}
             reference={(input) => { this.references[0] = input; }}
             styles={{ errorMessage: styles.errorMessage, input: styles.input }}
             onChange={value => this.changeHandler('address', value)}
@@ -106,6 +107,7 @@ class Form extends React.Component {
           />
           <Input
             label='Amount (Ⱡ)'
+            autoCorrect={false}
             reference={(input) => { this.references[1] = input; }}
             styles={{ input: styles.input }}
             onChange={value => this.changeHandler('amount', value)}
@@ -118,6 +120,7 @@ class Form extends React.Component {
           />
           <Input
             label='Reference (Optional)'
+            autoCorrect={false}
             reference={(input) => { this.references[2] = input; }}
             styles={{ errorMessage: styles.errorMessage, input: styles.input }}
             multiline={true}
