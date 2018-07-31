@@ -9,8 +9,8 @@ import txCreatedAnim from '../../../assets/animations/tx-created.json';
 import txPendingAnim from '../../../assets/animations/tx-pending.json';
 import txConfirmedAnim from '../../../assets/animations/tx-confirmed.json';
 
-const createdAnimDuration = 3890;
-const pendingRoundAnimDuration = 440;
+const createdAnimDuration = 4340;
+const pendingRoundAnimDuration = 720;
 const singleAnimRound = createdAnimDuration + pendingRoundAnimDuration;
 
 @connect(state => ({

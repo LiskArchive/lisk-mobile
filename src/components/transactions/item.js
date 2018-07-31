@@ -8,7 +8,7 @@ import Avatar from '../avatar';
 import FormattedDate from '../formattedDate';
 import { H4, Small } from '../toolBox/typography';
 import { stringShortener } from '../../utilities/helpers';
-import loadingAnimation from '../../assets/animations/loading.json';
+import loadingAnimation from '../../assets/animations/loading-dots.json';
 
 
 class Item extends React.Component {
