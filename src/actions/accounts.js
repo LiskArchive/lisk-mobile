@@ -154,7 +154,6 @@ export const accountLoggedOut = () =>
 // };
 
 export const blockUpdated = () => (dispatch, getState) => {
-  console.log('info -- updated');
   const { address } = getState().accounts.active;
   const { activePeer } = getState().peers;
   const { confirmed } = getState().transactions;
