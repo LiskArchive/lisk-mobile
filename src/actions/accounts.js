@@ -2,6 +2,7 @@ import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
 import { getAccount, extractAddress } from '../utilities/api/account';
 import { loadingStarted, loadingFinished } from './loading';
+import { getTransactions } from '../utilities/api/transactions';
 
 /**
  * Stores the given accounts data in AsyncStorage
@@ -125,30 +126,56 @@ export const accountLoggedOut = () =>
     type: actionTypes.accountLoggedOut,
   });
 
+// export const blockUpdated = ({ transactions }) => (dispatch, getState) => {
+//   if (transactions) {
+//     const accountAddress = getState().accounts.active.address;
+//     const blockContainsRelevantTransaction = transactions.filter((transaction) => {
+//       const sender = transaction ? transaction.senderId : null;
+//       const recipient = transaction ? transaction.recipientId : null;
+//       return accountAddress === recipient || accountAddress === sender;
+//     }).length > 0;
+//     if (blockContainsRelevantTransaction) {
+//       setTimeout(() => {
+//         const { activePeer } = getState().peers;
+//         getAccount(activePeer, accountAddress)
+//           .then((account) => {
+//             dispatch({
+//               type: actionTypes.accountUpdated,
+//               data: account,
+//             });
+//           });
+//         dispatch({
+//           type: actionTypes.transactionsUpdated,
+//           data: { confirmed: transactions },
+//         });
+//       }, 5000);
+//     }
+//   }
+// };
 
-export const blockUpdated = ({ transactions }) => (dispatch, getState) => {
-  if (transactions) {
-    const accountAddress = getState().accounts.active.address;
-    const blockContainsRelevantTransaction = transactions.filter((transaction) => {
-      const sender = transaction ? transaction.senderId : null;
-      const recipient = transaction ? transaction.recipientId : null;
-      return accountAddress === recipient || accountAddress === sender;
-    }).length > 0;
-    if (blockContainsRelevantTransaction) {
-      setTimeout(() => {
-        const { activePeer } = getState().peers;
-        getAccount(activePeer, accountAddress)
-          .then((account) => {
-            dispatch({
-              type: actionTypes.accountUpdated,
-              data: account,
-            });
-          });
+export const blockUpdated = () => (dispatch, getState) => {
+  console.log('info -- updated');
+  const { address } = getState().accounts.active;
+  const { activePeer } = getState().peers;
+  const { confirmed } = getState().transactions;
+  const lastTx = confirmed.length > 0 ? confirmed[0] : [];
+  getTransactions(activePeer, {
+    senderIdOrRecipientId: address,
+    offset: 0,
+  }).then((response) => {
+    const newTransactions = response.data.filter(tx => tx.timestamp > lastTx.timestamp);
+    if (newTransactions.length) {
+      dispatch({
+        type: actionTypes.transactionsUpdated,
+        data: { confirmed: newTransactions },
+      });
+
+      getAccount(activePeer, address).then((account) => {
         dispatch({
-          type: actionTypes.transactionsUpdated,
-          data: { confirmed: transactions },
+          type: actionTypes.accountUpdated,
+          data: account,
         });
-      }, 5000);
+      });
     }
-  }
+  });
 };
