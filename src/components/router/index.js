@@ -64,9 +64,9 @@ export default StackNavigator(
     },
     Main: {
       screen: Tabs,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton />,
+        headerRight: <LogoutButton navigation={navigation} />,
         headerBackTitle: 'Back',
         headerTintColor: styles.white,
         headerLeft: null,
@@ -74,33 +74,33 @@ export default StackNavigator(
           backgroundColor: 'transparent',
           overflow: 'hidden',
         },
-      },
+      }),
     },
     Wallet: {
       screen: Wallet,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton />,
+        headerRight: <LogoutButton navigation={navigation} />,
         title: 'Wallet',
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
           overflow: 'hidden',
         },
-      },
+      }),
     },
     TxDetail: {
       screen: TxDetail,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton />,
+        headerRight: <LogoutButton navigation={navigation} />,
         title: 'Details',
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
           overflow: 'hidden',
         },
-      },
+      }),
     },
   },
   {
