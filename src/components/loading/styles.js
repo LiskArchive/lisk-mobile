@@ -21,11 +21,12 @@ const styles = {
     height: 3,
     overflow: 'hidden',
   }, wrapper),
-  stripe: {
-    backgroundColor: styleGuide.colors.action4,
-    width: 200,
-    height: 3,
-    top: 0,
+  animation: {
+    width: '100%',
+    height: 200,
+    top: -59,
+    left: 0,
+    position: 'absolute',
   },
 };
 

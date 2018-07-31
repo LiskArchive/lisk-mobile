@@ -1,7 +1,9 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Animated, Dimensions } from 'react-native';
+import { View } from 'react-native';
+import LottieView from 'lottie-react-native';
 import styles from './styles';
+import progressBar from '../../assets/animations/progressBar.json';
 
 @connect(state => ({
   loading: state.loading,
@@ -9,38 +11,18 @@ import styles from './styles';
 class Loading extends React.Component {
   constructor() {
     super();
-    const { width } = Dimensions.get('window');
-    this.animationDuration = 1000;
-    this.startValue = -200;
-    this.endValue = width;
     this.state = {
-      left: new Animated.Value(-200),
+      loop: true,
     };
-    this.playing = false;
   }
 
   show() {
-    this.playing = true;
-    this.animate();
+    this.setState({ loop: true });
+    this.animation.play();
   }
 
   hide() {
-    this.playing = false;
-  }
-
-  animate() {
-    if (this.playing) {
-      const fn = this.animate.bind(this);
-      Animated.timing(this.state.left, {
-        toValue: this.endValue,
-        duration: this.animationDuration,
-      }).start(() => {
-        Animated.timing(this.state.left, {
-          toValue: this.startValue,
-          duration: this.animationDuration,
-        }).start(fn);
-      });
-    }
+    this.setState({ loop: false });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,7 +37,11 @@ class Loading extends React.Component {
 
   render() {
     return <View style={styles.wrapper}>
-      <Animated.View style={[styles.stripe, { left: this.state.left }]}></Animated.View>
+      <LottieView
+        style={styles.animation}
+        source={progressBar}
+        loop={this.state.loop}
+        ref={(el) => { this.animation = el; }}/>
     </View>;
   }
 }
