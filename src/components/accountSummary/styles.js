@@ -5,7 +5,7 @@ import styleGuide from '../../constants/styleGuide';
 const { width } = Dimensions.get('window');
 
 export const consts = {
-  width: Dimensions.get('window'),
+  width,
   container: {
     expanded: 176,
     shrunk: 110,
