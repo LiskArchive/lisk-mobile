@@ -67,8 +67,8 @@ const styles = {
     color: styleGuide.colors.grayScale2,
   },
   pendingIcon: {
-    width: 40,
-    height: 30,
+    width: 18,
+    height: 18,
   },
 };
 

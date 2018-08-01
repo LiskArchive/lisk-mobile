@@ -1,5 +1,5 @@
 
-import { StyleSheet, DeviceInfo, Platform } from 'react-native';
+import { StyleSheet, DeviceInfo, Platform, Dimensions } from 'react-native';
 import { Header } from 'react-navigation';
 import styleGuide from '../../constants/styleGuide';
 
@@ -15,17 +15,21 @@ if (Platform.OS === 'ios') {
   };
 }
 
+const { width } = Dimensions.get('window');
+const height = Math.floor((10 / 523) * width);
+
 const styles = {
   wrapper: Object.assign({}, {
     width: '100%',
-    height: 3,
+    height: 2,
     overflow: 'hidden',
   }, wrapper),
-  stripe: {
-    backgroundColor: styleGuide.colors.action4,
-    width: 200,
-    height: 3,
+  animation: {
+    width,
+    height,
     top: 0,
+    left: 0,
+    position: 'absolute',
   },
 };
 
