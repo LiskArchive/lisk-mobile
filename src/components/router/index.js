@@ -12,13 +12,15 @@ import LogoutButton from '../logoutButton';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
 import tabBarOptions from './tabBarOptions';
+import Icon from '../toolBox/icon';
+import colors from '../../constants/styleGuide/colors';
 
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: {
-      title: 'Wallet',
+      title: <Icon name='lisk' size={30} color={colors.white} />,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
     },
@@ -26,7 +28,7 @@ export const Tabs = TabNavigator({
   Send: {
     screen: Send,
     navigationOptions: {
-      title: 'Send',
+      title: <Icon name='lisk' size={30} color={colors.white} />,
       tabBarLabel: 'Send',
       tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
     },
@@ -59,7 +61,14 @@ export default StackNavigator(
     Login: {
       screen: Login,
       navigationOptions: {
-        header: null,
+        headerRight: null,
+        headerBackTitle: 'Back',
+        headerStyle: {
+          backgroundColor: colors.white,
+          borderBottomColor: colors.white,
+          borderBottomWidth: 0,
+        },
+        title: <Icon name='lisk' size={30} color={colors.primary9} />,
       },
     },
     Main: {
@@ -81,7 +90,7 @@ export default StackNavigator(
       navigationOptions: {
         headerBackground: <Bg />,
         headerRight: <LogoutButton />,
-        title: 'Wallet',
+        title: <Icon name='lisk' size={30} color={colors.white} />,
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
@@ -94,7 +103,7 @@ export default StackNavigator(
       navigationOptions: {
         headerBackground: <Bg />,
         headerRight: <LogoutButton />,
-        title: 'Details',
+        title: <Icon name='lisk' size={30} color={colors.white} />,
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
