@@ -92,32 +92,30 @@ class Login extends React.Component {
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
     return (<View style={styles.wrapper}>
+      <View style={styles.titleContainer}>
+        <H1 style={styles.title}>Login to your account</H1>
+      </View>
       <KeyboardAwareScrollView animated={true}
         onKeyboardDidHide={() => this.shrinkButton(true)}
         onKeyboardDidShow={() => this.shrinkButton(false)}
         contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}>
         <View style={styles.innerContainer}>
-          {/* <Logo size={30} /> */}
-          <View style={styles.titleContainer}>
-            <H1 style={styles.title}>Login to your account</H1>
-          </View>
-          <View>
-            <Input
-              label='Passphrase'
-              reference={(ref) => { this.passphraseInput = ref; }}
-              styles={{ input: styles.input }}
-              value={passphrase.value}
-              onChange={this.changeHandler.bind(this, 'passphrase')}
-              onFocus={() => this.shrinkButton(false)}
-              onBlur={() => this.shrinkButton(true)}
-              multiline={true}
-              autoFocus={true}
-              autoCorrect={false}
-              error={
-                (error.length > 0 && error[0].message && error[0].message.length > 0) ?
-                error[0].message.replace(' Please check the passphrase.', '') : ''
-              }/>
-          </View>
+          <View style={styles.placeholder}></View>
+          <Input
+            label='Passphrase'
+            reference={(ref) => { this.passphraseInput = ref; }}
+            styles={{ input: styles.input }}
+            value={passphrase.value}
+            onChange={this.changeHandler.bind(this, 'passphrase')}
+            onFocus={() => this.shrinkButton(false)}
+            onBlur={() => this.shrinkButton(true)}
+            multiline={true}
+            autoFocus={true}
+            autoCorrect={false}
+            error={
+              (error.length > 0 && error[0].message && error[0].message.length > 0) ?
+              error[0].message.replace(' Please check the passphrase.', '') : ''
+            }/>
           <View style={styles.placeholder}></View>
         </View>
       </KeyboardAwareScrollView>

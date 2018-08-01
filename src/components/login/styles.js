@@ -18,7 +18,7 @@ const styles = {
     paddingBottom: 60,
   },
   titleContainer: {
-    paddingTop: 85,
+    paddingTop: 35,
   },
   placeholder: {
     width: '100%',
