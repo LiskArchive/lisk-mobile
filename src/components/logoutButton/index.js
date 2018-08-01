@@ -9,8 +9,12 @@ import { accountLoggedOut as accountLoggedOutAction } from '../../actions/accoun
 })
 class LogoutButton extends React.Component {
   render() {
-    const { accountLoggedOut } = this.props;
-    return <Button title='Logout' onPress={accountLoggedOut} buttonStyle ={{ backgroundColor: 'transparent' }}/>;
+    const { accountLoggedOut, navigation } = this.props;
+    return <Button title='Logout' onPress={() => {
+      accountLoggedOut();
+      navigation.navigate('Login');
+    }
+    } buttonStyle ={{ backgroundColor: 'transparent' }}/>;
   }
 }
 

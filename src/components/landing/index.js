@@ -48,6 +48,7 @@ class Landing extends React.Component {
     }, 150);
   }
 
+
   /**
    * @todo this Text need to be replaced by a snipper component
    */
