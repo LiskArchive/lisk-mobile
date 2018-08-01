@@ -62,10 +62,11 @@ export default StackNavigator(
       screen: Login,
       navigationOptions: {
         headerRight: null,
+        headerBackTitle: 'Back',
         headerStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: colors.white,
+          borderBottomColor: colors.white,
           borderBottomWidth: 0,
-          borderBottomColor: '#fff',
         },
         title: <Icon name='lisk' size={30} color={colors.primary9} />,
       },
@@ -75,6 +76,7 @@ export default StackNavigator(
       navigationOptions: {
         headerBackground: <Bg />,
         headerRight: <LogoutButton />,
+        headerBackTitle: 'Back',
         headerTintColor: styles.white,
         headerLeft: null,
         headerStyle: {
