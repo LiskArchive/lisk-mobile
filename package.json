@@ -98,7 +98,9 @@
     "jest-fetch-mock": "^1.6.2",
     "react-test-renderer": "16.3.1",
     "redux-connect-decorator": "^0.2.0",
-    "rn-nodeify": "github:mvayngrib/rn-nodeify"
+    "rn-nodeify": "github:mvayngrib/rn-nodeify",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
   },
   "jest": {
     "preset": "react-native"
