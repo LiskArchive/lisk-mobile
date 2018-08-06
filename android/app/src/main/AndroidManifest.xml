@@ -25,7 +25,7 @@
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:screenOrientation="portrait"
         android:exported="true"
-        android:windowSoftInputMode="stateVisible|adjustResize">
+        android:windowSoftInputMode="adjustResize">
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>

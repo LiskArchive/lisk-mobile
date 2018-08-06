@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "build:android": "react-native run-android",
     "build:ios": "react-native run-ios",
+    "release:android": "cd android && ./gradlew assembleRelease",
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
     "test": "npm run test:format && npm run test:react-native",
     "test:live": "jest --watch",
@@ -98,7 +99,9 @@
     "jest-fetch-mock": "^1.6.2",
     "react-test-renderer": "16.3.1",
     "redux-connect-decorator": "^0.2.0",
-    "rn-nodeify": "github:mvayngrib/rn-nodeify"
+    "rn-nodeify": "github:mvayngrib/rn-nodeify",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
   },
   "jest": {
     "preset": "react-native"
