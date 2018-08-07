@@ -32,8 +32,10 @@ export const getTransactions = (activePeer, data) => {
 export const send = (activePeer, data) =>
   new Promise((resolve, reject) => {
     const transaction = Lisk.transaction.transfer(data);
-    activePeer.transactions.broadcast(transaction).then(() => {
-      resolve(transaction);
-    }).catch(error => reject(error));
+    setTimeout(() => {
+      activePeer.transactions.broadcast(transaction).then(() => {
+        resolve(transaction);
+      }).catch(error => reject(error));
+    }, 1001);
   });
 
