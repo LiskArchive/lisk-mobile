@@ -1,4 +1,4 @@
-package com.liskmobile;
+package com.lisk;
 
 import android.content.Intent;
 import android.os.Bundle;

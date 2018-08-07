@@ -61,10 +61,10 @@ class Landing extends React.Component {
         ref={(el) => { this.animation = el; }}
         />
         <View>
-          <H1 style={styles.header}>Welcome to Lisk Mobile</H1>
+          <H1 style={styles.header}>Welcome to Lisk</H1>
           <P style={styles.description}>
-            With Lisk Mobile, you can send and receive LSK tokens,
-             monitor account activity and more.
+            With Lisk mobile wallet, you can send LSK tokens,
+             monitor your account activity{'\n'} and more.
           </P>
           <SecondaryButton
             onClick={this.goToLogin}
