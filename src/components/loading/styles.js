@@ -16,12 +16,12 @@ if (Platform.OS === 'ios') {
 }
 
 const { width } = Dimensions.get('window');
-const height = Math.floor((10 / 523) * width);
+const height = Math.floor((16 / 523) * width);
 
 const styles = {
   wrapper: Object.assign({}, {
     width: '100%',
-    height: 2,
+    height: 4,
     overflow: 'hidden',
   }, wrapper),
   animation: {
