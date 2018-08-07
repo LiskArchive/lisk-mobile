@@ -10,8 +10,6 @@ import txPendingAnim from '../../../assets/animations/tx-pending.json';
 import txConfirmedAnim from '../../../assets/animations/tx-confirmed.json';
 
 const createdAnimDuration = 4340;
-const pendingRoundAnimDuration = 720;
-const singleAnimRound = createdAnimDuration + pendingRoundAnimDuration;
 
 @connect(state => ({
   account: state.accounts.active,
@@ -19,9 +17,9 @@ const singleAnimRound = createdAnimDuration + pendingRoundAnimDuration;
 }), {})
 class Result extends React.Component {
   state = {
-    animSrc: txCreatedAnim,
-    loop: false,
+    step: 0,
   };
+  animation = [];
   timeouts = {
     created: null,
     confirmed: null,
@@ -50,30 +48,20 @@ class Result extends React.Component {
 
   play(stage) {
     if (stage === 'created') {
-      this.setState({
-        animSrc: txCreatedAnim,
-        loop: false,
-      });
-      this.animation.play();
+      this.animation[0].play();
       this.timeouts.created = setTimeout(() => {
         this.setState({
-          animSrc: txPendingAnim,
-          loop: true,
+          step: 1,
+        }, () => {
+          this.animation[1].play();
         });
-        this.animation.play();
       }, createdAnimDuration);
     } else if (stage === 'confirmed') {
-      const timeLapsed = new Date() - this.startDate;
-      const delay = (timeLapsed > singleAnimRound) ?
-        timeLapsed % pendingRoundAnimDuration : singleAnimRound - timeLapsed;
-
-      this.timeouts.confirmed = setTimeout(() => {
-        this.setState({
-          animSrc: txConfirmedAnim,
-          loop: false,
-        });
-        this.animation.play();
-      }, delay);
+      this.setState({
+        step: 2,
+      }, () => {
+        this.animation[2].play();
+      });
     }
   }
 
@@ -87,10 +75,21 @@ class Result extends React.Component {
         </P>
       </View>
       <View style={styles.illustration}>
-        <LottieView
-          source={this.state.animSrc}
-          loop={this.state.loop}
-          ref={(el) => { this.animation = el; }}/>
+        {this.state.step === 0 ? <LottieView
+          source={txCreatedAnim}
+          loop={false}
+          ref={(el) => { this.animation[0] = el; }}/>
+          : null}
+        {this.state.step === 1 ? <LottieView
+          source={txPendingAnim}
+          loop={true}
+          ref={(el) => { this.animation[1] = el; }}/>
+          : null}
+        {this.state.step === 2 ? <LottieView
+          source={txConfirmedAnim}
+          loop={false}
+          ref={(el) => { this.animation[2] = el; }}/>
+          : null}
       </View>
       <SecondaryButton
         style={styles.button}
