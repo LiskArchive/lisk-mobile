@@ -62,6 +62,7 @@ const styles = {
   disabledButtonBg: {
     backgroundColor: styleGuide.colors.white,
     borderColor: styleGuide.colors.grayScale3,
+    borderWidth: 2,
   },
   labelButton: {
     backgroundColor: 'transparent',

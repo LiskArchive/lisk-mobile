@@ -35,6 +35,7 @@ const styles = {
   iosKeyboard: {
     backgroundColor: 'transparent',
     marginBottom: DeviceInfo.isIPhoneX_deprecated ? -89 : -59,
+    borderRadius: 0,
   },
   androidKeyboard: {
     backgroundColor: 'transparent',
@@ -44,6 +45,7 @@ const styles = {
     right: 0,
     left: 0,
     zIndex: 9999,
+    borderRadius: 0,
   },
   avatar: {
   },

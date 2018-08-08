@@ -15,14 +15,34 @@ const styles = {
     flex: 1,
     backgroundColor: styleGuide.colors.white,
     paddingTop: 36,
-    paddingBottom: 60,
+    paddingBottom: 20,
   },
   titleContainer: {
     paddingTop: 35,
   },
   placeholder: {
     width: '100%',
-    height: 2,
+    height: 20,
+  },
+  connectionErrorContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginLeft: 20,
+    paddingRight: 20,
+    opacity: 0,
+    paddingBottom: 10,
+  },
+  connectionError: {
+    color: styleGuide.colors.grayScale1,
+    fontFamily: styleGuide.fonts.context,
+    fontSize: styleGuide.fontSizes.input,
+  },
+  connectionErrorIcon: {
+    color: styleGuide.colors.action1,
+    marginRight: 5,
+  },
+  visible: {
+    opacity: 1,
   },
   title: {
     paddingLeft: styleGuide.boxes.boxPadding,
@@ -52,6 +72,11 @@ const styles = {
     top: 0,
     left: 0,
     right: 0,
+  },
+  buttonSticky: {
+    borderRadius: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
   },
 };
 
