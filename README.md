@@ -5,7 +5,38 @@ Lisk Mobile is a cross-platform application written in React Native and primaril
 Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for more information.
 ## Development
 
-#### Installation
+### Pre-Installation
+The next section details the prerequisites to install Lisk Mobile from source using the different tagged releases.
+
+
+ - Git
+   - `brew install git` 
+ - NodeJS (recommended 6.11.0)
+   - `brew install node`
+ - npm (recommended 4.5.0)
+   - npm is shipped with NodeJS. but to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
+ - watchman
+   - `brew install watchman`
+ - react-native-cli
+   - Install using npm
+
+### iOS
+You'll need the xCode installed in your machine to run the app in simulator.
+
+### Android
+ - Install [Android Studio](https://developer.android.com/studio/index.html), which sould have these options checked installed:
+   - Android SDK
+   - Android SDK Platform
+   - Performance (Intel ® HAXM)
+   - Android Virtual Device
+ - Install the Android SDK. Consider these configurations:
+  - compileSdkVersion: 26
+  - buildToolsVersion: 27.0.3
+
+ 
+
+
+### Installation
 
 ```
 git clone https://github.com/LiskHQ/lisk-mobile.git
@@ -14,26 +45,35 @@ npm install
 npm run start
 ```
 
-#### Development environment
+### Development environment
 You can run the project in xCode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
 
-#### Build
+### Run
+```
+npm start
+```
+
+### Build
+For iOS
 
 ```
-npm run build
+npm run build:ios
+```
+
+
+For Android
+
+```
+npm run build:android
 ```
 
 ## Run unit tests
 
-#### Single run
+### Single run
 ```
 npm run test
 ```
 
-#### Run each time a file changes
-```
-npm run test-live
-```
 
 ## Contributors
 See [contributors section](https://github.com/LiskHQ/lisk-mobile/graphs/contributors).
