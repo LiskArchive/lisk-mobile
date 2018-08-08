@@ -90,7 +90,7 @@ class Login extends React.Component {
     if (status) {
       this.setState({ buttonStyle: styles.button });
     } else {
-      this.setState({ buttonStyle: { borderWidth: 0 } });
+      this.setState({ buttonStyle: styles.buttonSticky });
     }
   }
 
@@ -108,7 +108,6 @@ class Login extends React.Component {
         onKeyboardDidShow={() => this.shrinkButton(false)}
         contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}>
         <View style={styles.innerContainer}>
-          <View style={styles.placeholder}></View>
           <Input
             label='Passphrase'
             reference={(ref) => { this.passphraseInput = ref; }}
@@ -124,23 +123,18 @@ class Login extends React.Component {
               (error.length > 0 && error[0].message && error[0].message.length > 0) ?
               error[0].message.replace(' Please check the passphrase.', '') : ''
             }/>
-          <View style={styles.placeholder}>
-            {
-              connectionError ?
-              <View style={[styles.connectionErrorContainer, styles.connectionError] }>
-                <Icon size={16} name='error' style={styles.connectionErrorIcon} />
-                <Small style={styles.connectionError}>
-                  Could not connect to the blockchain, try later!
-                </Small>
-              </View> : null
-            }
-          </View>
         </View>
       </KeyboardAwareScrollView>
       <KeyboardAccessoryView
         style={[styles.allWhite, Platform.OS === 'ios' ? null : styles.sticky]}
         animationOn={false}
-        alwaysVisible={true} >
+        alwaysVisible={true}>
+        <View style={[styles.connectionErrorContainer, connectionError ? styles.visible : null]}>
+          <Icon size={16} name='error' style={styles.connectionErrorIcon} />
+          <Small style={styles.connectionError}>
+            Could not connect to the blockchain, try later!
+          </Small>
+        </View>
         <PrimaryButton
         style={this.state.buttonStyle}
         disabled={passphrase.validity.length !== 0}
