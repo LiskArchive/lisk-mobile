@@ -13,8 +13,6 @@ import { H1 } from '../toolBox/typography';
 /**
  * The container component containing login and create account functionality
  */
-const pass = 'wagon stock borrow episode laundry kitten salute link globe zero feed marble';
-
 @connect(state => ({
   peers: state.peers,
   accounts: state.accounts,
@@ -27,8 +25,8 @@ class Login extends React.Component {
 
     this.state = {
       passphrase: {
-        value: pass,
-        validity: validatePassphrase(pass),
+        value: '',
+        validity: validatePassphrase(''),
         buttonStyle: null,
       },
     };
