@@ -103,7 +103,7 @@ export const accountEdited = (address, updatedData) => ({
  * @param {String} data.passphrase - The valid passphrase to login using
  * @returns {Function} Thunk function
  */
-export const accountLoggedIn = ({ passphrase }) =>
+export const accountLoggedIn = ({ passphrase }, cb) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
     dispatch(loadingStarted(actionTypes.accountLoggedIn));
@@ -114,6 +114,9 @@ export const accountLoggedIn = ({ passphrase }) =>
           data: { ...account, passphrase },
         });
         dispatch(loadingFinished(actionTypes.accountLoggedIn));
+      }).catch((err) => {
+        dispatch(loadingFinished(actionTypes.accountLoggedIn));
+        cb(err);
       });
   };
 /**
