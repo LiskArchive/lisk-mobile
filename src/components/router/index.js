@@ -14,6 +14,7 @@ import Bg from '../headerBackground';
 import tabBarOptions from './tabBarOptions';
 import Icon from '../toolBox/icon';
 import colors from '../../constants/styleGuide/colors';
+import IconButton from './iconButton';
 
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
@@ -60,16 +61,21 @@ export default StackNavigator(
     },
     Login: {
       screen: Login,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         headerRight: null,
-        headerBackTitle: 'Back',
+        headerLeft: <IconButton
+          icon='back'
+          target='Landing'
+          title=''
+          color={colors.primary9}
+          navigation={navigation} />,
         headerStyle: {
           backgroundColor: colors.white,
           borderBottomColor: colors.white,
           borderBottomWidth: 0,
         },
         title: <Icon name='lisk' size={30} color={colors.primary9} />,
-      },
+      }),
     },
     Main: {
       screen: Tabs,
