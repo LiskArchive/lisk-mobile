@@ -8,7 +8,8 @@ import { accountLoggedIn as accountLoggedInAction } from '../../actions/accounts
 import styles from './styles';
 import { validatePassphrase } from '../../utilities/passphrase';
 import Input from '../toolBox/input';
-import { H1 } from '../toolBox/typography';
+import { H1, Small } from '../toolBox/typography';
+import Icon from '../toolBox/icon';
 
 /**
  * The container component containing login and create account functionality
@@ -52,11 +53,18 @@ class Login extends React.Component {
    * @param {String} passphrase - valid mnemonic passphrase
    */
   onLoginSubmission = (passphrase) => {
+    this.setState({
+      connectionError: false,
+    });
     if (passphrase.validity.length !== 0) {
       this.passphraseInput.shake();
     } else {
       this.props.accountLoggedIn({
         passphrase: this.trim(passphrase.value),
+      }, () => {
+        this.setState({
+          connectionError: true,
+        });
       });
     }
   }
@@ -87,7 +95,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { passphrase } = this.state;
+    const { passphrase, connectionError } = this.state;
     const error = passphrase.validity
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
@@ -116,7 +124,17 @@ class Login extends React.Component {
               (error.length > 0 && error[0].message && error[0].message.length > 0) ?
               error[0].message.replace(' Please check the passphrase.', '') : ''
             }/>
-          <View style={styles.placeholder}></View>
+          <View style={styles.placeholder}>
+            {
+              connectionError ?
+              <View style={[styles.connectionErrorContainer, styles.connectionError] }>
+                <Icon size={16} name='error' style={styles.connectionErrorIcon} />
+                <Small style={styles.connectionError}>
+                  Could not connect to the blockchain, try later!
+                </Small>
+              </View> : null
+            }
+          </View>
         </View>
       </KeyboardAwareScrollView>
       <KeyboardAccessoryView

@@ -15,14 +15,34 @@ const styles = {
     flex: 1,
     backgroundColor: styleGuide.colors.white,
     paddingTop: 36,
-    paddingBottom: 60,
+    paddingBottom: 20,
   },
   titleContainer: {
     paddingTop: 35,
   },
   placeholder: {
     width: '100%',
-    height: 2,
+    height: 20,
+  },
+  connectionErrorContainer: {
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginLeft: 20,
+    paddingRight: 20,
+  },
+  connectionError: {
+    color: styleGuide.colors.grayScale1,
+    fontFamily: styleGuide.fonts.context,
+    marginBottom: 20,
+    paddingTop: 0,
+    marginLeft: 5,
+    marginRight: 0,
+    marginTop: 0,
+    fontSize: styleGuide.fontSizes.input,
+  },
+  connectionErrorIcon: {
+    color: styleGuide.colors.action1,
   },
   title: {
     paddingLeft: styleGuide.boxes.boxPadding,
