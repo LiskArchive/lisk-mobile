@@ -63,7 +63,7 @@ class Landing extends React.Component {
         <View>
           <H1 style={styles.header}>Welcome to Lisk</H1>
           <P style={styles.description}>
-            With Lisk mobile wallet, you can send LSK tokens,
+            With Lisk mobile wallet, you can send LSK{'\n'}tokens,
              monitor your account activity{'\n'} and more.
           </P>
           <SecondaryButton
