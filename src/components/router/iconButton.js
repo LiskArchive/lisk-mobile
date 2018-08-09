@@ -8,7 +8,7 @@ const IconButton = ({
 }) =>
   <TouchableHighlight onPress={() => navigation.replace(target)} style={styles.iconButton}>
     <Fragment>
-      <Icon name={icon} size={24} color={color} />
+      <Icon name={icon} size={30} color={color} />
       <Text style={styles.iconButtonTitle}>{ title }</Text>
     </Fragment>
   </TouchableHighlight>;
