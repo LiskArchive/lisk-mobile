@@ -19,7 +19,9 @@ const styles = {
     marginLeft: styleGuide.boxes.boxPadding,
   },
   stickyButton: {
-    borderWidth: 0,
+    borderRadius: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
   },
   subtitle: {
     marginTop: 7,
