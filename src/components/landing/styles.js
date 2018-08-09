@@ -24,8 +24,8 @@ const styles = {
     textAlign: 'center',
     color: Colors.grayScale2,
     paddingTop: 10,
-    marginRight: 30,
-    marginLeft: 30,
+    marginRight: 20,
+    marginLeft: 20,
   },
   button: {
     marginTop: 20,
@@ -34,7 +34,7 @@ const styles = {
   },
   logo: {
     width: 350,
-    height: 380,
+    height: 350,
     paddingBottom: 0,
   },
 };

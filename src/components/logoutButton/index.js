@@ -1,8 +1,9 @@
 
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { Button } from 'react-native-elements';
+import { LabelButton } from '../toolBox/button';
 import { accountLoggedOut as accountLoggedOutAction } from '../../actions/accounts';
+import styles from './styles';
 
 @connect(() => ({}), {
   accountLoggedOut: accountLoggedOutAction,
@@ -10,11 +11,10 @@ import { accountLoggedOut as accountLoggedOutAction } from '../../actions/accoun
 class LogoutButton extends React.Component {
   render() {
     const { accountLoggedOut, navigation } = this.props;
-    return <Button title='Logout' onPress={() => {
+    return <LabelButton title='' onClick={() => {
       accountLoggedOut();
       navigation.navigate('Login');
-    }
-    } buttonStyle ={{ backgroundColor: 'transparent' }}/>;
+    }} style ={styles.button}>Logout</LabelButton>;
   }
 }
 

@@ -118,7 +118,7 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "com.lisk"
+        applicationId "org.lisk.mobile"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
