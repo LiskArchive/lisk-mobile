@@ -33,9 +33,10 @@ const styles = {
     marginLeft: Platform.OS === 'ios' ? 10 : 30,
   },
   logo: {
-    width: 350,
-    height: 350,
+    width: 460,
+    height: 460,
     paddingBottom: 0,
+    top: -25,
   },
 };
 
