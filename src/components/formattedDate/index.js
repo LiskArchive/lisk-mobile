@@ -24,7 +24,7 @@ const fromLiskTimestamp = value =>
 const FormattedDate = ({
   children, style, type, format,
 }) => {
-  const dateFormat = format || 'LL';
+  const dateFormat = format || 'MMM D, YYYY';
   const Element = type || Text;
   const absoluteDate = fromLiskTimestamp(children);
   return <Element style={style}>{ moment(absoluteDate).format(dateFormat) }</Element>;
