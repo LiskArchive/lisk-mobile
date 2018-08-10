@@ -99,7 +99,7 @@ class Login extends React.Component {
         item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
     return (<View style={styles.wrapper}>
       <View style={styles.titleContainer}>
-        <H1 style={styles.title}>Login to your account</H1>
+        <H1 style={styles.title}>Sign into your account</H1>
       </View>
       <KeyboardAwareScrollView animated={true}
         onKeyboardDidHide={() => this.shrinkButton(true)}
@@ -136,7 +136,7 @@ class Login extends React.Component {
         <PrimaryButton
         style={this.state.buttonStyle}
         disabled={passphrase.validity.length !== 0}
-        onClick={this.onLoginSubmission.bind(this, passphrase)}>Login</PrimaryButton>
+        onClick={this.onLoginSubmission.bind(this, passphrase)}>Sign in</PrimaryButton>
       </KeyboardAccessoryView>
     </View>);
   }

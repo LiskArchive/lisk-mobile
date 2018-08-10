@@ -33,11 +33,11 @@ const TxDetail = ({ navigation }) => {
     <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber> Ⱡ
     </H4>
     <P style={styles.label}>Date</P>
-    <FormattedDate type={H4} style={styles.value}>{ tx.timestamp }</FormattedDate>
+    <FormattedDate format='LL LTS' type={H4} style={styles.value}>{ tx.timestamp }</FormattedDate>
     {
       (tx.asset && tx.asset.data) ?
       <View>
-        <P style={styles.label}>reference</P>
+        <P style={styles.label}>Reference</P>
         <H4 style={styles.value}>{ tx.asset.data }</H4>
       </View> : null
     }
