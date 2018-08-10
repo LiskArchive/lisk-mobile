@@ -18,7 +18,15 @@ const Share = ({
           url: '',
         })}>{value || children}</Element>
       {
-        icon ? <Icon style={styles.icon} name='share' size={14} color={colors.grayScale1} /> : null
+        icon ? <Icon
+                style={styles.icon}
+                name='share'
+                size={14}
+                onPress={() => ShareAPI.share({
+                  message: value || children,
+                  url: '',
+                })}
+                color={colors.grayScale1} /> : null
       }
     </View>
   );

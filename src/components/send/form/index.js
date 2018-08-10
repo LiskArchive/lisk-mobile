@@ -3,7 +3,7 @@ import { View, Platform } from 'react-native';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import connect from 'redux-connect-decorator';
-import { PrimaryButton } from '../../toolBox/button';
+import { SecondaryButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
 import { P, H1 } from '../../toolBox/typography';
@@ -89,7 +89,7 @@ class Form extends React.Component {
       <View style={styles.innerContainer}>
         <View style={styles.titleContainer}>
           <H1>Send</H1>
-          <P style={styles.subtitle}>Send Lisk tokens to other accounts.</P>
+          <P style={styles.subtitle}>Send LSK tokens to other accounts</P>
         </View>
         <View>
           <Input
@@ -132,7 +132,7 @@ class Form extends React.Component {
             onFocus={() => { this.activeInputRef = 2; }}
           />
           </View>
-          <PrimaryButton
+          <SecondaryButton
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onClick={this.goToNextState}
             style={[styles.button, { opacity: this.state.opacity }]}
@@ -141,7 +141,7 @@ class Form extends React.Component {
         </KeyboardAwareScrollView>
         <KeyboardAccessoryView
          style={styles[keyboardButtonStyle]}>
-          <PrimaryButton
+          <SecondaryButton
             style={styles.stickyButton}
             disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
             onClick={this.goToNextState}

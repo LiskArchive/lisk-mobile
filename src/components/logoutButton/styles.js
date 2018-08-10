@@ -9,6 +9,7 @@ const styles = {
     color: colors.white,
     borderWidth: 0,
     textAlign: 'right',
+    fontWeight: '500',
   },
 };
 
