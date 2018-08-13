@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import Landing from '../landing';
 import Login from '../login';
 import TxDetail from '../txDetail';
@@ -12,16 +12,24 @@ import LogoutButton from '../logoutButton';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
 import tabBarOptions from './tabBarOptions';
-import Icon from '../toolBox/icon';
 import colors from '../../constants/styleGuide/colors';
-import IconButton from './iconButton';
+import { IconButton } from '../toolBox/button';
+import Logo from './logo';
+
+const resetNavigationStack = (navigation, routeName) => {
+  navigation
+    .dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName })],
+    }));
+};
 
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: {
-      title: <Icon name='lisk' size={30} color={colors.white} />,
+      title: <Logo color={colors.white}/>,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
     },
@@ -29,7 +37,7 @@ export const Tabs = TabNavigator({
   Send: {
     screen: Send,
     navigationOptions: {
-      title: <Icon name='lisk' size={30} color={colors.white} />,
+      title: <Logo color={colors.white}/>,
       tabBarLabel: 'Send',
       tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
     },
@@ -65,16 +73,16 @@ export default StackNavigator(
         headerRight: null,
         headerLeft: <IconButton
           icon='back'
-          target='Landing'
           title=''
-          color={colors.primary9}
-          navigation={navigation} />,
+          onPress={() => resetNavigationStack(navigation, 'Landing')}
+          style={styles.iconButton}
+          color={colors.primary9} />,
         headerStyle: {
           backgroundColor: colors.white,
           borderBottomColor: colors.white,
           borderBottomWidth: 0,
         },
-        title: <Icon name='lisk' size={30} color={colors.primary9} />,
+        title: <Logo color={colors.primary9} />,
       }),
     },
     Main: {
@@ -82,8 +90,6 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         headerRight: <LogoutButton navigation={navigation} />,
-        headerBackTitle: 'Back',
-        headerTintColor: styles.white,
         headerLeft: null,
         headerStyle: {
           backgroundColor: 'transparent',
@@ -96,7 +102,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         headerRight: <LogoutButton navigation={navigation} />,
-        title: <Icon name='lisk' size={30} color={colors.white} />,
+        title: <Logo color={colors.white}/>,
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
@@ -109,7 +115,13 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         headerRight: <LogoutButton navigation={navigation} />,
-        title: <Icon name='lisk' size={30} color={colors.white} />,
+        title: <Logo color={colors.white}/>,
+        headerLeft: <IconButton
+          icon='back'
+          title=''
+          onPress={() => navigation.pop()}
+          style={styles.iconButton}
+          color={colors.white} />,
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: styles.headerColor,
