@@ -56,6 +56,18 @@ const styles = {
     borderWidth: 2,
     borderColor: 'transparent',
   },
+  iconButton: {
+    width: 40,
+    height: 30,
+    paddingLeft: styleGuide.boxes.elementPadding,
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    alignItems: 'center',
+  },
+  iconButtonTitle: {
+    color: styleGuide.colors.primary9,
+    lineHeight: 18,
+  },
   disabledButtonColor: {
     color: styleGuide.colors.grayScale3,
   },
