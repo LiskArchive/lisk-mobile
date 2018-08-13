@@ -8,6 +8,7 @@ const styles = {
     alignContent: 'space-around',
   },
   scrollView: {
+    marginTop: -10,
   },
   accountSummary: {
     zIndex: 2,

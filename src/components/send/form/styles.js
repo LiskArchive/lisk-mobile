@@ -30,9 +30,38 @@ const styles = {
   input: {
     marginTop: 0,
   },
-  titleContainer: {
+  headings: {
     marginRight: styleGuide.boxes.boxPadding,
     marginLeft: styleGuide.boxes.boxPadding,
+  },
+  balanceWrapper: {
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderColor: styleGuide.colors.grayScale5,
+    marginTop: 20,
+    paddingTop: 10,
+    paddingBottom: 16,
+    paddingRight: styleGuide.boxes.boxPadding,
+    paddingLeft: styleGuide.boxes.boxPadding,
+  },
+  balanceValue: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: 8,
+  },
+  number: {
+    color: styleGuide.colors.primary5,
+    lineHeight: 25,
+  },
+  unit: {
+    color: styleGuide.colors.primary5,
+    lineHeight: 25,
+    marginLeft: 5,
+    marginTop: -3,
   },
   iosKeyboard: {
     backgroundColor: 'transparent',

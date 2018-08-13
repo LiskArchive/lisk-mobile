@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { TouchableHighlight, Text } from 'react-native';
 import theme from './styles';
 import Colors from '../../constants/styleGuide/colors';
+import Icon from './icon';
 
 const labelStyle = (propsStyle, disabled) => {
   const style = [theme.button, theme.labelButton];
@@ -61,7 +62,7 @@ export const PrimaryButton = props => (<LinearGradient
 export const SecondaryButton = props => (<LinearGradient
   start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
   colors={props.disabled ?
-    [Colors.grayScale3, Colors.grayScale3] :
+    [Colors.white, Colors.white] :
     [Colors.primary4, Colors.primary9]}
   style={[
     theme.buttonWrapper,
@@ -73,3 +74,19 @@ export const SecondaryButton = props => (<LinearGradient
 
 export const LabelButton = props =>
   <Button {...props} style={labelStyle(props.style, props.disabled)} />;
+
+
+export const IconButton = (props) => {
+  const {
+    titleStyle, style, title, icon, color,
+  } = props;
+  const viewProps = Object.keys(props)
+    .filter(key => !(/titleStyle|style|title|icon|color/.test(key)))
+    .reduce((acc, key) => { acc[key] = props[key]; return acc; }, {});
+  return (<TouchableHighlight underlayColor='transparent' {...viewProps} style={[theme.iconButton, style]}>
+    <Fragment>
+      <Icon name={icon} size={30} color={color} />
+      <Text style={[theme.iconButtonTitle, titleStyle]}>{ title }</Text>
+    </Fragment>
+  </TouchableHighlight>);
+};

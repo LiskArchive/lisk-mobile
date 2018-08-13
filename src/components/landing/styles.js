@@ -1,5 +1,7 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 import Colors from '../../constants/styleGuide/colors';
+
+const { height } = Dimensions.get('window');
 
 const styles = {
   container: {
@@ -33,9 +35,10 @@ const styles = {
     marginLeft: Platform.OS === 'ios' ? 10 : 30,
   },
   logo: {
-    width: 350,
-    height: 350,
+    width: 460,
+    height: height < 640 ? 350 : 460,
     paddingBottom: 0,
+    top: -25,
   },
 };
 

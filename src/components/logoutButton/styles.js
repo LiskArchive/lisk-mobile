@@ -5,7 +5,7 @@ const styles = {
   button: {
     paddingRight: 20,
     paddingTop: 8,
-    paddingBottom: 8,
+    paddingBottom: 16,
     color: colors.white,
     borderWidth: 0,
     textAlign: 'right',

@@ -7,7 +7,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: styleGuide.boxes.white,
     paddingRight: styleGuide.boxes.boxPadding,
     paddingLeft: styleGuide.boxes.boxPadding,
     paddingTop: 37,
@@ -15,14 +15,11 @@ const styles = {
   },
   button: {
     marginTop: 20,
-    backgroundColor: '#008722',
+    backgroundColor: styleGuide.boxes.success1,
   },
   title: {
     fontSize: 30,
     marginBottom: 20,
-  },
-  gray: {
-    color: '#666',
   },
   heading: {
     fontSize: 24,
