@@ -1,10 +1,10 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 import colors from '../../constants/styleGuide/colors';
 
 const styles = {
   button: {
     paddingRight: 20,
-    paddingTop: (Platform.OS === 'ios') ? 0 : 8,
+    paddingTop: 8,
     paddingBottom: 16,
     color: colors.white,
     borderWidth: 0,

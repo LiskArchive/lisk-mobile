@@ -5,7 +5,7 @@ const styles = {
   back: {
     width: 60,
     height: 40,
-    marginTop: (Platform.OS === 'ios') ? Math.floor((Header.HEIGHT - 30) / 2) : 6,
+    marginTop: (Platform.OS === 'ios') ? 0 : 6,
   },
   logo: {
     lineHeight: 40,
