@@ -30,6 +30,7 @@ export const Tabs = TabNavigator({
     screen: OwnWallet,
     navigationOptions: {
       title: <Logo color={colors.white}/>,
+      headerLeft: null,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
     },
@@ -90,7 +91,6 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         headerRight: <LogoutButton navigation={navigation} />,
-        headerLeft: null,
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
