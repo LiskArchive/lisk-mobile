@@ -26,6 +26,7 @@ class Result extends React.Component {
   };
 
   componentDidMount() {
+    this.props.navigation.setParams({ showButtonLeft: false });
     this.startDate = new Date();
     this.play('created');
   }

@@ -29,6 +29,16 @@ class Form extends React.Component {
     }, activeAccount, nextStep);
   }
 
+  goback = () => {
+    const { address, amount, reference } = this.props;
+    return this.props.prevStep({ address, amount, reference });
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ showButtonLeft: true, action: this.goback });
+  }
+
+
   render() {
     const { address, amount, reference } = this.props;
     return (<View style={styles.container}>
