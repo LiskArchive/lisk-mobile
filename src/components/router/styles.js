@@ -1,5 +1,4 @@
 import { StyleSheet, Platform } from 'react-native';
-import { Header } from 'react-navigation';
 
 const styles = {
   back: {
