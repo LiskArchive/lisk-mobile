@@ -36,7 +36,7 @@ class Form extends React.Component {
         <View style={styles.titleContainer}>
           <H1>Ready to Send</H1>
           <P style={styles.subtitle}>
-            You are about to send tokens{'\n'} to another address.
+            You are about to send tokens{'\n'}to another address.
           </P>
         </View>
         <View>

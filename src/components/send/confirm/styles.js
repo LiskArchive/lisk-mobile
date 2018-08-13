@@ -4,7 +4,7 @@ import styleGuide from '../../../constants/styleGuide';
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: styleGuide.colors.white,
   },
   innerContainer: {
     flex: 1,
@@ -24,18 +24,15 @@ const styles = {
   leftAlign: {
     textAlign: 'left',
   },
-  gray: {
-    color: '#666',
-  },
   black: {
-    color: '#000',
+    color: styleGuide.colors.black,
   },
   heading: {
     fontSize: 24,
     paddingBottom: 80,
   },
   row: {
-    marginBottom: 20,
+    marginBottom: 4,
   },
   title: {
     fontSize: 12,
