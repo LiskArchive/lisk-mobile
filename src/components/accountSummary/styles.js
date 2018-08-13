@@ -85,6 +85,8 @@ const styles = {
     color: styleGuide.colors.primary5,
     fontSize: 23,
     lineHeight: 25,
+    marginLeft: 5,
+    marginTop: -3,
   },
   value: {
     color: styleGuide.colors.primary5,
@@ -112,6 +114,7 @@ const styles = {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     alignSelf: 'flex-end',
     position: 'absolute',
     zIndex: 4,
