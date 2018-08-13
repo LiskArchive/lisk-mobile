@@ -7,18 +7,18 @@ const { width } = Dimensions.get('window');
 export const consts = {
   width,
   container: {
-    expanded: 176,
+    expanded: 185,
     shrunk: 110,
-    marginTop: 20,
+    marginTop: 6,
   },
   bg: {
-    expanded: 128,
-    shrunk: 70,
+    expanded: 116,
+    shrunk: 56,
   },
   box: {
     expanded: {
-      height: 132,
-      top: 40,
+      height: 125,
+      top: 50,
     },
     shrunk: {
       height: 100,
@@ -37,7 +37,7 @@ export const consts = {
   },
   address: {
     expanded: {
-      top: 80,
+      top: 83,
       paddingLeft: 0,
     },
     shrunk: {
