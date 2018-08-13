@@ -15,7 +15,13 @@ import { H1, H4, P } from '../../toolBox/typography';
 })
 
 class Form extends React.Component {
+  state = {
+    disableButton: false,
+  }
   send = () => {
+    this.setState({
+      disableButton: true,
+    });
     const {
       amount, address, accounts, nextStep, transactionAdded, reference,
     } = this.props;
@@ -29,13 +35,13 @@ class Form extends React.Component {
     }, activeAccount, nextStep);
   }
 
-  goback = () => {
+  goBack = () => {
     const { address, amount, reference } = this.props;
     return this.props.prevStep({ address, amount, reference });
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: true, action: this.goback });
+    this.props.navigation.setParams({ showButtonLeft: true, action: this.goBack });
   }
 
 
@@ -67,6 +73,7 @@ class Form extends React.Component {
           </View> : null}
         </View>
         <PrimaryButton
+          disabled={this.state.disableButton}
           style={styles.button}
           onClick={this.send}
           title='Send now' />
