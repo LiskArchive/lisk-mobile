@@ -9,9 +9,9 @@ const styles = {
   },
   itemContainer: {
     width: '100%',
-    height: 100,
-    paddingTop: 25,
-    paddingBottom: 25,
+    height: 90,
+    paddingTop: 20,
+    paddingBottom: 20,
     backgroundColor: styleGuide.colors.white,
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -20,7 +20,7 @@ const styles = {
     borderBottomWidth: 1,
   },
   title: {
-    marginBottom: 0,
+    marginBottom: 15,
   },
   nativeList: {
     marginTop: 0,
