@@ -32,7 +32,13 @@ class Wallet extends React.Component {
   scrollView = null;
 
   componentWillMount() {
-    this.activeAccount = this.props.accounts.active;
+    console.log('Wallet : componentWillMount');
+    this.activeAccount = this.props.accounts.active || {};
+  }
+
+  componentWillReceiveProps() {
+    console.log('Wallet : componentWillReceiveProps');
+    this.activeAccount = this.props.accounts.active || {};
   }
 
   componentDidMount() {
