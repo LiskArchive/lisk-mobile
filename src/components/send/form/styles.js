@@ -49,12 +49,19 @@ const styles = {
   balanceValue: {
     width: '100%',
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'flex-start',
     paddingTop: 8,
   },
   number: {
     color: styleGuide.colors.primary5,
     lineHeight: 25,
+  },
+  unit: {
+    color: styleGuide.colors.primary5,
+    lineHeight: 25,
+    marginLeft: 5,
+    marginTop: -3,
   },
   iosKeyboard: {
     backgroundColor: 'transparent',
