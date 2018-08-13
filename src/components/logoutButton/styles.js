@@ -4,7 +4,7 @@ import colors from '../../constants/styleGuide/colors';
 const styles = {
   button: {
     paddingRight: 20,
-    paddingTop: 0,
+    paddingTop: 8,
     paddingBottom: 16,
     color: colors.white,
     borderWidth: 0,

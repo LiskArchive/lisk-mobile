@@ -106,7 +106,7 @@ class AccountSummary extends React.Component {
       }
       <Modal
         hide={this.toggleModal.bind(this)}
-        address={account.address}
+        address={account ? account.address : {}}
         isVisible={this.state.modalVisible}/>
     </View>);
   }

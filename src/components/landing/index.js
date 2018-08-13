@@ -6,7 +6,10 @@ import landingAnimation from '../../assets/animations/welcome.json';
 import { H1, P } from '../toolBox/typography';
 import { SecondaryButton } from '../toolBox/button';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
-import { accountsRetrieved as accountsRetrievedAction } from '../../actions/accounts';
+import {
+  accountsRetrieved as accountsRetrievedAction,
+  accountLoggedOut as accountLoggedOutAction,
+} from '../../actions/accounts';
 import styles from './styles';
 
 /**
@@ -23,6 +26,7 @@ import styles from './styles';
 }), {
   peerSet: activePeerSetAction,
   accountsRetrieved: accountsRetrievedAction,
+  accountLoggedOut: accountLoggedOutAction,
 })
 class Landing extends React.Component {
   componentWillMount() {
@@ -30,24 +34,32 @@ class Landing extends React.Component {
     this.props.accountsRetrieved();
   }
 
-  /* componentDidUpdate() {
-    if (!this.props.accounts.active) {
-      this.props.navigation.navigate('Login');
+  resetUserInfo() {
+    if (this.props.accounts.active) {
+      this.timeout = setTimeout(() => {
+        this.props.accountLoggedOut();
+      }, 140);
     }
-  } */
-
+  }
 
   componentDidMount() {
     this.animation.play();
+  }
+
+  componentWillReceiveProps() {
+    this.resetUserInfo();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
 
   goToLogin = () => {
     this.animation.reset();
     setTimeout(() => {
       this.props.navigation.navigate('Login');
-    }, 150);
+    }, 160);
   }
-
 
   /**
    * @todo this Text need to be replaced by a snipper component

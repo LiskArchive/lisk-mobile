@@ -1,5 +1,7 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 import Colors from '../../constants/styleGuide/colors';
+
+const { height } = Dimensions.get('window');
 
 const styles = {
   container: {
@@ -34,7 +36,7 @@ const styles = {
   },
   logo: {
     width: 460,
-    height: 460,
+    height: height < 640 ? 350 : 460,
     paddingBottom: 0,
     top: -25,
   },

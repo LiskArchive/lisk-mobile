@@ -28,6 +28,8 @@ class Form extends React.Component {
       address: str => reg.address.test(str),
       amount: str => (
         reg.amount.test(str) &&
+        this.props.account &&
+        this.props.account.balance > transactions.send.fee &&
         parseFloat(str) < fromRawLsk(this.props.account.balance - transactions.send.fee)
       ),
       reference: str => (str.length === 0 || str.length < 64),
@@ -117,9 +119,11 @@ class Form extends React.Component {
             <Small style={styles.subtitle}>YOUR CURRENT BALANCE</Small>
             <View style={styles.balanceValue}>
               <H2 style={styles.number}>
-                <FormattedNumber>{fromRawLsk(this.props.account.balance)}</FormattedNumber>
+                <FormattedNumber>
+                  {fromRawLsk(this.props.account ? this.props.account.balance : 0)}
+                </FormattedNumber>
               </H2>
-              <H2 style={styles.number}>Ⱡ</H2>
+              <H2 style={styles.unit}>Ⱡ</H2>
             </View>
           </View>
         </View>
