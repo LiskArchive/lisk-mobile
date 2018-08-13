@@ -5,7 +5,7 @@ import Fonts from '../../constants/styleGuide/fonts';
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.white,
     padding: 20,
   },
   divider: {
@@ -21,7 +21,7 @@ const styles = {
     paddingBottom: 15,
   },
   value: {
-    marginBottom: 20,
+    marginBottom: 16,
     alignItems: 'center',
     color: Colors.black,
     fontFamily: Fonts.context,
@@ -43,7 +43,7 @@ const styles = {
     marginTop: 24,
   },
   row: {
-    marginBottom: 30,
+    marginBottom: 26,
   },
   shareIcon: {
     marginLeft: 10,
