@@ -6,10 +6,11 @@ import connect from 'redux-connect-decorator';
 import { SecondaryButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
-import { P, H1 } from '../../toolBox/typography';
+import { P, H1, H2, Small } from '../../toolBox/typography';
 import styles from './styles';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
+import FormattedNumber from '../../formattedNumber';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -88,8 +89,19 @@ class Form extends React.Component {
       >
       <View style={styles.innerContainer}>
         <View style={styles.titleContainer}>
-          <H1>Send</H1>
-          <P style={styles.subtitle}>Send LSK tokens to other accounts</P>
+          <View style={styles.headings}>
+            <H1>Send</H1>
+            <P style={styles.subtitle}>Send LSK tokens to other accounts</P>
+          </View>
+          <View style={styles.balanceWrapper}>
+            <Small style={styles.subtitle}>YOUR CURRENT BALANCE</Small>
+            <View style={styles.balanceValue}>
+              <H2 style={styles.number}>
+                <FormattedNumber>{fromRawLsk(this.props.account.balance)}</FormattedNumber>
+              </H2>
+              <H2 style={styles.number}>Ⱡ</H2>
+            </View>
+          </View>
         </View>
         <View>
           <Input
