@@ -19,7 +19,7 @@ class Send extends React.Component {
       onPress={() => {
         params.action();
       }}
-      style={styles.iconButton}
+      style={styles.back}
       color={colors.white} /> : null,
     };
   };
