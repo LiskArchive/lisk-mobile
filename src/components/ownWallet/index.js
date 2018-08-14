@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { H4 } from '../toolBox/typography';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
