@@ -9,7 +9,6 @@ class LogoutButton extends React.Component {
   render() {
     const { navigation } = this.props;
     return <LabelButton title='' onClick={() => {
-      // navigation.navigate('Landing');
       navigation
         .dispatch(NavigationActions.reset({
           index: 0,
