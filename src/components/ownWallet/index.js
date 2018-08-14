@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { H4 } from '../toolBox/typography';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import Empty from '../transactions/empty';
+import Loading from '../transactions/loading';
 import InfiniteScrollView from '../infiniteScrollView';
 import styles from './styles';
 
@@ -27,6 +27,7 @@ import styles from './styles';
 class Wallet extends React.Component {
   state = {
     scrollY: new Animated.Value(0),
+    theme: 'loading',
   };
 
   scrollView = null;
@@ -35,8 +36,14 @@ class Wallet extends React.Component {
     this.activeAccount = this.props.accounts.active || {};
   }
 
-  componentWillReceiveProps() {
+  componentDidUpdate() {
+    const { confirmed, pending } = this.props.transactions;
     this.activeAccount = this.props.accounts.active || {};
+    if (this.state.theme === 'loading' || this.state.theme === 'empty') {
+      this.setState({
+        theme: (confirmed.length === 0 && pending.length === 0) ? 'empty' : 'list',
+      });
+    }
   }
 
   componentDidMount() {
@@ -56,17 +63,20 @@ class Wallet extends React.Component {
     const { transactions, transactionsLoaded } = this.props;
     return (<View style={styles.container}>
       {
-        !this.props.accounts.active ?
-          <H4>Loading account</H4> :
+        this.props.accounts.active ?
           <AccountSummary
             scrollY={this.state.scrollY}
             account={this.props.accounts.active}
-            style={styles.accountSummary} />
+            style={styles.accountSummary} /> : null
       }
       {
-        (transactions.confirmed.length === 0 && transactions.pending.length === 0) ?
-        <Empty /> :
-        <InfiniteScrollView
+        (this.state.theme === 'loading') ? <Loading /> : null
+      }
+      {
+        (this.state.theme === 'empty') ? <Empty /> : null
+      }
+      {
+        (this.state.theme === 'list') ? <InfiniteScrollView
           ref={(el) => { if (el) this.scrollView = el; }}
           scrollEventThrottle={8}
           onScroll={this.onScroll.call(this)}
@@ -80,7 +90,7 @@ class Wallet extends React.Component {
           <Transactions transactions={transactions}
             navigate={this.props.navigation.navigate}
             account={this.activeAccount.address} />
-        </InfiniteScrollView>
+        </InfiniteScrollView> : null
       }
     </View>);
   }

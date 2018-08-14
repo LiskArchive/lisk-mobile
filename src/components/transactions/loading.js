@@ -4,12 +4,12 @@ import noActivity from '../../assets/images/noActivity.png';
 import { P } from '../toolBox/typography';
 import styles from './styles';
 
-const EmptyState = () =>
+const LoadingState = () =>
   <View style={styles.emptyState}>
     <Image
       style={styles.noActivity}
       source={noActivity} />
-    <P style={styles.noTxTitle}>You do not have any recent activity.</P>
+    <P style={styles.noTxTitle}>Loading account info...</P>
   </View>;
 
-export default EmptyState;
+export default LoadingState;

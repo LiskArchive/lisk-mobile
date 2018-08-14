@@ -46,8 +46,11 @@ class Landing extends React.Component {
     this.animation.play();
   }
 
-  componentWillReceiveProps() {
-    this.resetUserInfo();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.accounts.active && this.props.accounts.active &&
+      (nextProps.accounts.active.balance === this.props.accounts.active.balance)) {
+      this.resetUserInfo();
+    }
   }
 
   componentWillUnmount() {
