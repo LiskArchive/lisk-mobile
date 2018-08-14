@@ -17,7 +17,6 @@ import FormattedNumber from '../../formattedNumber';
 }), {})
 class Form extends React.Component {
     references = [];
-
     state = {
       address: { value: '', validity: -1 },
       amount: { value: '', validity: -1 },
@@ -53,6 +52,27 @@ class Form extends React.Component {
         validity,
       },
     });
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ showButtonLeft: false });
+    if (this.props.prevState.address) {
+      const state = {
+        address: {
+          value: this.props.prevState.address || '',
+          validity: 0,
+        },
+        amount: {
+          value: this.props.prevState.amount || '',
+          validity: 0,
+        },
+        reference: {
+          value: this.props.prevState.reference || '',
+          validity: 0,
+        },
+      };
+      this.setState(state);
+    }
   }
 
   changeButtonOpacity = (val) => {
@@ -141,6 +161,7 @@ class Form extends React.Component {
             styles={{ errorMessage: styles.errorMessage, input: styles.input }}
             multiline={true}
             onChange={value => this.changeHandler('reference', value)}
+            value={this.state.reference.value}
             error={
               this.state.reference.validity === 1 ?
                 'Maximum length of 64 characters is exceeded.' : ''
