@@ -1,6 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Platform } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { PrimaryButton } from '../toolBox/button';
@@ -35,7 +36,12 @@ class Login extends React.Component {
 
   componentDidUpdate() {
     if (this.props.accounts.active) {
-      this.props.navigation.replace('Main');
+      // this.props.navigation.replace('Main');
+      this.props.navigation
+        .dispatch(NavigationActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'Main' })],
+        }));
     }
   }
 
