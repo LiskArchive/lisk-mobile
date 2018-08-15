@@ -75,6 +75,17 @@ class Form extends React.Component {
     }
   }
 
+  componentWillReceiveProps() {
+    const { value } = this.state.amount;
+    const validator = this.validator.amount;
+    this.setState({
+      amount: {
+        validity: validator(value),
+        value,
+      },
+    });
+  }
+
   changeButtonOpacity = (val) => {
     this.setState({ opacity: val });
   }
