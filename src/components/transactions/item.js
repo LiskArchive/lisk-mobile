@@ -46,17 +46,9 @@ class Item extends React.Component {
 
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
 
-    const props = {
-      style: styles.itemContainer,
-    };
-    let Element = View;
-
-    if (typeof this.props.tx.timestamp === 'number') {
-      props.onPress = this.showDetail.bind(this, tx);
-      Element = TouchableOpacity;
-    }
-
-    return (<Element { ...props }>
+    return (<TouchableOpacity
+      style={styles.itemContainer}
+      onPress={this.showDetail.bind(this, tx)}>
       <View style={[styles.itemColumn, styles.avatar]}>
         <Avatar address={address} size={50} />
       </View>
@@ -79,7 +71,7 @@ class Item extends React.Component {
             </View> : null
         }
       </View>
-    </Element>);
+    </TouchableOpacity>);
   }
 }
 
