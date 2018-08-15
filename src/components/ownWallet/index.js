@@ -39,7 +39,8 @@ class Wallet extends React.Component {
   componentDidUpdate() {
     const { confirmed, pending } = this.props.transactions;
     this.activeAccount = this.props.accounts.active || {};
-    if (this.state.theme === 'loading' || this.state.theme === 'empty') {
+    if (this.state.theme === 'loading' ||
+      (this.state.theme === 'empty' && confirmed.length > 0)) {
       this.setState({
         theme: (confirmed.length === 0 && pending.length === 0) ? 'empty' : 'list',
       });
