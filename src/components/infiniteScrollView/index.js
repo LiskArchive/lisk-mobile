@@ -10,34 +10,23 @@ import { ScrollView } from 'react-native';
  * @param {Number} count - The maximum amount possible in the list
  */
 class InfiniteScrollView extends React.Component {
-  state = {
-    reachEnd: true,
-  };
   canLoadMore = true;
 
   loadMore = ({ nativeEvent }) => {
     const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
       const paddingToBottom = 20;
       return (layoutMeasurement.height + contentOffset.y >=
-        contentSize.height - paddingToBottom) && this.state.reachEnd;
+        contentSize.height - paddingToBottom);
     };
+
     if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
       this.canLoadMore = false;
       this.props.loadMore();
-      this.setState({
-        reachEnd: false,
-      });
     }
   }
 
-  componentWillReceiveProps = () => {
-    this.setState({
-      reachEnd: true,
-    });
-  }
-
   componentWillUpdate = (nextProps) => {
-    this.canLoadMore = (this.props.list.length < nextProps.list.length);
+    this.canLoadMore = (this.props.list.length !== nextProps.list.length);
   }
 
   onScroll(e) {
