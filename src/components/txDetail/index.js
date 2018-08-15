@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import FormattedDate from '../formattedDate';
 import { fromRawLsk } from '../../utilities/conversions';
@@ -30,10 +30,15 @@ const TxDetail = ({ navigation }) => {
     </View>
     <P style={styles.label}>Amount :</P>
     <H4 style={styles.value}>
-    <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber> Ⱡ
+      <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber> Ⱡ
     </H4>
-    <P style={styles.label}>Date</P>
-    <FormattedDate format='MMM D, YYYY LTS' type={H4} style={styles.value}>{ tx.timestamp }</FormattedDate>
+    {
+      tx.confirmations ?
+      <Fragment>
+        <P style={styles.label}>Date</P>
+        <FormattedDate format='MMM D, YYYY LTS' type={H4} style={styles.value}>{ tx.timestamp }</FormattedDate>
+      </Fragment> : null
+    }
     {
       (tx.asset && tx.asset.data) ?
       <View>
@@ -41,6 +46,8 @@ const TxDetail = ({ navigation }) => {
         <H4 style={styles.value}>{ tx.asset.data }</H4>
       </View> : null
     }
+    <P style={styles.label}>Confirmations</P>
+    <H4 style={styles.value}>{tx.confirmations || 'Not confirmed yet.'}</H4>
     <P style={styles.label}>Transaction ID</P>
     <View style={styles.addressContainer}>
       <Share type={H4} value={tx.id} icon={true} style={[styles.value, styles.transactionId]} />
