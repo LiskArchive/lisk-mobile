@@ -36,7 +36,6 @@ class Login extends React.Component {
 
   componentDidUpdate() {
     if (this.props.accounts.active) {
-      // this.props.navigation.replace('Main');
       this.props.navigation
         .dispatch(NavigationActions.reset({
           index: 0,

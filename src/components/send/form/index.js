@@ -118,8 +118,7 @@ class Form extends React.Component {
         enableResetScrollToCoords={false}
         contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}
         onKeyboardDidShow={() => this.changeButtonOpacity(0)}
-        onKeyboardDidHide={() => this.changeButtonOpacity(1)}
-      >
+        onKeyboardDidHide={() => this.changeButtonOpacity(1)}>
       <View style={styles.innerContainer}>
         <View style={styles.titleContainer}>
           <View style={styles.headings}>
