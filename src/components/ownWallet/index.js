@@ -81,7 +81,7 @@ class Wallet extends React.Component {
           scrollEventThrottle={8}
           onScroll={this.onScroll.call(this)}
           style={[styles.scrollView]}
-          list={transactions.confirmed}
+          list={[...transactions.pending, ...transactions.confirmed]}
           count={transactions.count}
           loadMore={() => transactionsLoaded({
             senderIdOrRecipientId: this.activeAccount.address,
