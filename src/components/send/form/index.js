@@ -123,7 +123,7 @@ class Form extends React.Component {
         <View style={styles.titleContainer}>
           <View style={styles.headings}>
             <H1>Send</H1>
-            <P style={styles.subtitle}>Send LSK tokens to other accounts</P>
+            <P style={styles.subtitle}>Send LSK tokens to other accounts.</P>
           </View>
           <View style={styles.balanceWrapper}>
             <Small style={styles.subtitle}>YOUR CURRENT BALANCE</Small>
