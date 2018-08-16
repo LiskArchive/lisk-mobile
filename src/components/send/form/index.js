@@ -160,7 +160,7 @@ class Form extends React.Component {
             styles={{ input: styles.input }}
             onChange={value => this.changeHandler('amount', value)}
             value={this.state.amount.value}
-            keyboardType='numeric'
+            keyboardType='decimal-pad'
             error={
               this.state.amount.validity === 1 ?
                 'Invalid amount value' : ''
