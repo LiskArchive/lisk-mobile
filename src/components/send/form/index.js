@@ -59,11 +59,11 @@ class Form extends React.Component {
     if (this.props.prevState.address) {
       const state = {
         address: {
-          value: this.props.prevState.address || '',
+          value: this.props.prevState.address,
           validity: 0,
         },
         amount: {
-          value: this.props.prevState.amount || '',
+          value: this.props.prevState.amount,
           validity: 0,
         },
         reference: {
@@ -75,15 +75,17 @@ class Form extends React.Component {
     }
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
     const { value } = this.state.amount;
     const validator = this.validator.amount;
-    this.setState({
-      amount: {
-        validity: validator(value),
-        value,
-      },
-    });
+    if (this.props.account.balance !== nextProps.account.balance) {
+      this.setState({
+        amount: {
+          validity: validator(value),
+          value,
+        },
+      });
+    }
   }
 
   changeButtonOpacity = (val) => {
