@@ -52,7 +52,7 @@ class Form extends React.Component {
         <View style={styles.titleContainer}>
           <H1>Ready to Send</H1>
           <P style={styles.subtitle}>
-            You are about to send tokens{'\n'}to another address.
+            You are about to send LSK tokens{'\n'}to another address.
           </P>
         </View>
         <View>
@@ -64,11 +64,11 @@ class Form extends React.Component {
             </View>
           </View>
           <View style={styles.row}>
-            <P style={styles.label}>Amount (including 0.1 Ⱡ fee):</P>
+            <P style={styles.label}>Amount (including 0.1 Ⱡ fee)</P>
             <H4 labelStyle={[styles.amount, styles.black]}>{`${fromRawLsk(toRawLsk(amount) + 1e7)} Ⱡ`}</H4>
           </View>
           {reference ? <View style={styles.row}>
-            <P style={styles.label}>Reference:</P>
+            <P style={styles.label}>Reference</P>
             <H4 labelStyle={[styles.address, styles.black]}>{reference}</H4>
           </View> : null}
         </View>
