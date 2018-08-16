@@ -2,6 +2,8 @@ import React from 'react';
 import { Text } from 'react-native';
 import theme from './styles';
 
+Text.defaultProps.allowFontScaling = false;
+
 export const H1 = ({ children, style, onPress }) =>
   <Text style={[theme.h1, style]} onPress={onPress}>{ children }</Text>;
 

@@ -29,6 +29,7 @@ const Input = ({
       onChangeText={onChange}
       autoCorrect={autoCorrect}
       onFocus={onFocus}
+      allowFontScaling={false}
       onBlur={onBlur} />
     {error ? <View style={[theme.errorMessageContainer, styles.errorMessage] }>
       <Icon size={16} name='error' style={theme.errorIcon} />

@@ -15,6 +15,7 @@ const stylesheet = {
   indicatorStyle: {
     backgroundColor: colors.white,
   },
+  allowFontScaling: false,
 };
 
 if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
