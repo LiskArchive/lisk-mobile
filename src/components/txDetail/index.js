@@ -28,7 +28,7 @@ const TxDetail = ({ navigation }) => {
         </View>
       </View>
     </View>
-    <P style={styles.label}>Amount :</P>
+    <P style={styles.label}>Amount</P>
     <H4 style={styles.value}>
       <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber> Ⱡ
     </H4>
