@@ -14,6 +14,7 @@ import theme from './styles';
 const Input = ({
   label, reference, styles, value, onChange, error,
   multiline, onFocus, autoFocus, onBlur, autoCorrect,
+  keyboardType,
 }) => {
   const inputErrorStyle = error ? theme.inputErrorStyle : {};
   return (<View>
@@ -25,6 +26,7 @@ const Input = ({
       multiline = {multiline}
       ref={input => reference(input)}
       value={value}
+      keyboardType={keyboardType || 'default'}
       autoFocus={autoFocus}
       onChangeText={onChange}
       autoCorrect={autoCorrect}
