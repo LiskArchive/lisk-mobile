@@ -48,7 +48,7 @@ class Form extends React.Component {
 
     this.setState({
       [name]: {
-        value,
+        value: name === 'amount' ? value.replace(',', '.') : value,
         validity,
       },
     });
