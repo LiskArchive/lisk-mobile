@@ -2,6 +2,9 @@
   "name": "Lisk",
   "version": "0.1.0",
   "private": true,
+  "description": "The official mobile wallet of Lisk platform",
+  "homepage": "https://github.com/LiskHQ/lisk-mobile",
+  "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "build:android": "react-native run-android",
