@@ -7,8 +7,9 @@ import styles from './styles';
 import Share from '../share';
 import { H4, P, H1 } from '../toolBox/typography';
 import Avatar from '../avatar';
+import transactions from '../../constants/transactions';
 
-const txTypes = ['transfer', 'Delegate registration', 'Second passphrase registration', 'Vote'];
+const txTypes = ['send', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 const TxDetail = ({ navigation }) => {
   const tx = navigation.getParam('tx', null);
@@ -43,9 +44,13 @@ const TxDetail = ({ navigation }) => {
       </Fragment> :
       <Fragment>
         <P style={styles.label}>Type</P>
-        <H4 style={styles.value}>{ txTypes[tx.type] }</H4>
+        <H4 style={styles.value}>{transactions[txTypes[tx.type]].title}</H4>
       </Fragment>
     }
+    <P style={styles.label}>Fee</P>
+    <H4 style={styles.value}>
+      <FormattedNumber>{fromRawLsk(transactions[txTypes[tx.type]].fee)}</FormattedNumber> Ⱡ
+    </H4>
     {
       tx.confirmations ?
       <Fragment>
