@@ -8,6 +8,8 @@ import Share from '../share';
 import { H4, P, H1 } from '../toolBox/typography';
 import Avatar from '../avatar';
 
+const txTypes = ['transfer', 'Delegate registration', 'Second passphrase registration', 'Vote'];
+
 const TxDetail = ({ navigation }) => {
   const tx = navigation.getParam('tx', null);
   return (<View style={styles.container}>
@@ -20,18 +22,30 @@ const TxDetail = ({ navigation }) => {
           <Share type={H4} value={tx.senderId} icon={true} />
         </View>
       </View>
-      <View style={styles.row}>
-        <P style={styles.label}>Recipient</P>
-        <View style={styles.addressContainer}>
-          <Avatar address={tx.recipientId} style={styles.avatar} size={50}/>
-          <Share type={H4} value={tx.recipientId} icon={true} />
-        </View>
-      </View>
+      {
+        tx.type === 0 ?
+        <View style={styles.row}>
+          <P style={styles.label}>Recipient</P>
+          <View style={styles.addressContainer}>
+            <Avatar address={tx.recipientId} style={styles.avatar} size={50}/>
+            <Share type={H4} value={tx.recipientId} icon={true} />
+          </View>
+        </View> : null
+      }
     </View>
-    <P style={styles.label}>Amount</P>
-    <H4 style={styles.value}>
-      <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber> Ⱡ
-    </H4>
+    {
+      tx.type === 0 ?
+      <Fragment>
+        <P style={styles.label}>Amount</P>
+        <H4 style={styles.value}>
+          <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber> Ⱡ
+        </H4>
+      </Fragment> :
+      <Fragment>
+        <P style={styles.label}>Type</P>
+        <H4 style={styles.value}>{ txTypes[tx.type] }</H4>
+      </Fragment>
+    }
     {
       tx.confirmations ?
       <Fragment>

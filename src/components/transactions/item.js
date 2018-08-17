@@ -30,18 +30,18 @@ class Item extends React.Component {
     let direction = 'incoming';
     let address = tx.senderId;
     let addressShortened = stringShortener(tx.senderId, 10, 3);
-    if (account === tx.senderId) {
+    if (account === tx.senderId && tx.type === 0) {
       direction = 'outgoing';
       address = tx.recipientId;
       addressShortened = stringShortener(tx.recipientId, 10, 3);
     }
-
+    let title = address;
     if (tx.type === 3) {
-      address = 'Vote';
+      title = 'Vote';
     } else if (tx.type === 2) {
-      address = 'Register Delegate';
+      title = 'Register Delegate';
     } else if (tx.type === 1) {
-      address = 'Register 2nd Passphrase';
+      title = 'Register 2nd Passphrase';
     }
 
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
@@ -53,7 +53,7 @@ class Item extends React.Component {
         <Avatar address={address} size={50} />
       </View>
       <View style={styles.column}>
-        <H4 style={styles.address}>{addressShortened}</H4>
+        <H4 style={styles.address}>{tx.type === 0 ? addressShortened : title}</H4>
         {
           typeof this.props.tx.timestamp !== 'number' ?
           <Small style={styles.date}>Pending confirmation</Small> :
