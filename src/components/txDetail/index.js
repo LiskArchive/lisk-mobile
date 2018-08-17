@@ -36,7 +36,7 @@ const TxDetail = ({ navigation }) => {
       tx.confirmations ?
       <Fragment>
         <P style={styles.label}>Date</P>
-        <FormattedDate format='MMM D, YYYY LTS' type={H4} style={styles.value}>{ tx.timestamp }</FormattedDate>
+        <FormattedDate format='MMM D, YYYY - LTS' type={H4} style={styles.value}>{ tx.timestamp }</FormattedDate>
       </Fragment> : null
     }
     {
