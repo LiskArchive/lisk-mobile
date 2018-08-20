@@ -9,7 +9,9 @@ import FormattedDate from '../formattedDate';
 import { H4, Small } from '../toolBox/typography';
 import { stringShortener } from '../../utilities/helpers';
 import loadingAnimation from '../../assets/animations/loading-dots.json';
+import transactions from '../../constants/transactions';
 
+const txTypes = ['send', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 class Item extends React.Component {
   showDetail(tx) {
@@ -30,18 +32,10 @@ class Item extends React.Component {
     let direction = 'incoming';
     let address = tx.senderId;
     let addressShortened = stringShortener(tx.senderId, 10, 3);
-    if (account === tx.senderId) {
+    if (account === tx.senderId && tx.type === 0) {
       direction = 'outgoing';
       address = tx.recipientId;
       addressShortened = stringShortener(tx.recipientId, 10, 3);
-    }
-
-    if (tx.type === 3) {
-      address = 'Vote';
-    } else if (tx.type === 2) {
-      address = 'Register Delegate';
-    } else if (tx.type === 1) {
-      address = 'Register 2nd Passphrase';
     }
 
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
@@ -53,7 +47,9 @@ class Item extends React.Component {
         <Avatar address={address} size={50} />
       </View>
       <View style={styles.column}>
-        <H4 style={styles.address}>{addressShortened}</H4>
+        <H4 style={styles.address}>
+          {tx.type === 0 ? addressShortened : transactions[txTypes[tx.type]].title}
+        </H4>
         {
           typeof this.props.tx.timestamp !== 'number' ?
           <Small style={styles.date}>Pending confirmation</Small> :
@@ -61,9 +57,12 @@ class Item extends React.Component {
         }
       </View>
       <View style={[styles.column, styles.amountWrapper]}>
-        <H4 style={[styles.amount, styles[direction]]}>
-          <FormattedNumber>{amount}</FormattedNumber> Ⱡ
-        </H4>
+      {
+        tx.type === 0 ?
+          <H4 style={[styles.amount, styles[direction]]}>
+            <FormattedNumber>{amount}</FormattedNumber> Ⱡ
+          </H4> : null
+      }
         {
           typeof this.props.tx.timestamp !== 'number' ?
             <View style={styles.pendingIcon}>
