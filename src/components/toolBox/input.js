@@ -14,7 +14,7 @@ import theme from './styles';
 const Input = ({
   label, reference, styles, value, onChange, error,
   multiline, onFocus, autoFocus, onBlur, autoCorrect,
-  keyboardType,
+  keyboardType, allowFontScaling, secureTextEntry,
 }) => {
   const inputErrorStyle = error ? theme.inputErrorStyle : {};
   return (<View>
@@ -31,7 +31,8 @@ const Input = ({
       onChangeText={onChange}
       autoCorrect={autoCorrect}
       onFocus={onFocus}
-      allowFontScaling={false}
+      allowFontScaling={allowFontScaling}
+      secureTextEntry={secureTextEntry}
       onBlur={onBlur} />
     {error ? <View style={[theme.errorMessageContainer, styles.errorMessage] }>
       <Icon size={16} name='error' style={theme.errorIcon} />
