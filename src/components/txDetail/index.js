@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import FormattedDate from '../formattedDate';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
@@ -13,7 +13,7 @@ const txTypes = ['send', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 const TxDetail = ({ navigation }) => {
   const tx = navigation.getParam('tx', null);
-  return (<View style={styles.container}>
+  return (<ScrollView style={styles.container}>
     <H1 style={styles.title}>Transaction details</H1>
     <View style={styles.senderAndRecipient}>
       <View style={styles.row}>
@@ -71,7 +71,7 @@ const TxDetail = ({ navigation }) => {
     <View style={styles.addressContainer}>
       <Share type={H4} value={tx.id} icon={true} style={[styles.value, styles.transactionId]} />
     </View>
-  </View>);
+  </ScrollView>);
 };
 
 export default TxDetail;
