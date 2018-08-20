@@ -61,8 +61,11 @@ const styles = {
     paddingRight: styleGuide.boxes.boxPadding,
     borderRightWidth: styleGuide.boxes.boxPadding,
     borderRightColor: 'transparent',
+    color: 'black',
+    fontSize: 13,
+    letterSpacing: 1,
+    fontFamily: styleGuide.fonts.passphrase,
   },
-
   allWhite: {
     borderTopColor: styleGuide.colors.white,
     backgroundColor: styleGuide.colors.white,
