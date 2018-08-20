@@ -3,4 +3,5 @@ export default {
   context: 'OpenSans-Regular',
   contextSemiBold: 'OpenSans-Bold',
   contextLight: 'OpenSans-Light',
+  passphrase: 'Dots',
 };

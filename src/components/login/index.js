@@ -27,6 +27,7 @@ class Login extends React.Component {
 
     this.state = {
       passphrase: {
+        shadowText: '',
         value: '',
         validity: validatePassphrase(''),
         buttonStyle: null,
@@ -98,6 +99,7 @@ class Login extends React.Component {
   }
 
   render() {
+    const isIOS = Platform.OS === 'ios';
     const { passphrase, connectionError } = this.state;
     const error = passphrase.validity
       .filter(item =>
@@ -119,9 +121,10 @@ class Login extends React.Component {
             onChange={this.changeHandler.bind(this, 'passphrase')}
             onFocus={() => this.shrinkButton(false)}
             onBlur={() => this.shrinkButton(true)}
-            multiline={true}
             autoFocus={true}
             autoCorrect={false}
+            multiline={isIOS}
+            secureTextEntry={!isIOS}
             error={
               (error.length > 0 && error[0].message && error[0].message.length > 0) ?
               error[0].message.replace(' Please check the passphrase.', '') : ''
