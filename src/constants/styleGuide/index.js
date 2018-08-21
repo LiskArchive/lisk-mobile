@@ -1,11 +1,9 @@
-import fonts from './fonts';
-import colors from './colors';
-import fontSizes from './fontSizes';
-import boxes from './boxes';
+import fontsConstants from './fonts';
+import colorsConstants from './colors';
+import fontSizesConstants from './fontSizes';
+import boxesConstants from './boxes';
 
-export default {
-  fonts,
-  colors,
-  fontSizes,
-  boxes,
-};
+export const fonts = fontsConstants;
+export const colors = colorsConstants;
+export const fontSizes = fontSizesConstants;
+export const boxes = boxesConstants;

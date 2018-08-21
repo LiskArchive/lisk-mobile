@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 import Icon from '../toolBox/icon';
-import colors from '../../constants/styleGuide/colors';
+import { colors } from '../../constants/styleGuide';
 
 const Logo = ({ color, size, style }) =>
   <View style={[styles.image, style]}>

@@ -1,6 +1,6 @@
 import { Platform, DeviceInfo } from 'react-native';
 import { merge } from '../../utilities/helpers';
-import colors from '../../constants/styleGuide/colors';
+import { colors } from '../../constants/styleGuide';
 
 const stylesheet = {
   style: {

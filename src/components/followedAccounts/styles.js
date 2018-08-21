@@ -1,15 +1,15 @@
 import { StyleSheet } from 'react-native';
-import styleGuide from '../../constants/styleGuide';
+import { boxes, colors } from '../../constants/styleGuide';
 
 const styles = {
   listItemEven: {
-    backgroundColor: '#eff4f9',
+    backgroundColor: colors.grayScale5,
   },
   listItemOdd: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   itemTitle: {
-    paddingLeft: styleGuide.boxes.elementPadding,
+    paddingLeft: boxes.elementPadding,
   },
   noBorder: {
     borderWidth: 0,

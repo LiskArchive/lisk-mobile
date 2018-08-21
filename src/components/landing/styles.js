@@ -1,11 +1,11 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
-import Colors from '../../constants/styleGuide/colors';
+import { colors } from '../../constants/styleGuide';
 
 const { height } = Dimensions.get('window');
 
 const styles = {
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -24,7 +24,7 @@ const styles = {
   },
   description: {
     textAlign: 'center',
-    color: Colors.grayScale2,
+    color: colors.grayScale2,
     paddingTop: 10,
     marginRight: 20,
     marginLeft: 20,
