@@ -1,50 +1,50 @@
 import { StyleSheet } from 'react-native';
-import { fonts, colors, fontSizes, boxes } from '../../constants/styleGuide';
+import { fonts, colors, boxes } from '../../constants/styleGuide';
 
 const styles = {
   h1: {
     color: colors.black,
-    fontSize: fontSizes.h1,
+    fontSize: fonts.size.h1,
     fontWeight: 'bold',
-    fontFamily: fonts.heading,
+    fontFamily: fonts.family.heading,
   },
   h2: {
     color: colors.black,
-    fontSize: fontSizes.h2,
+    fontSize: fonts.size.h2,
     fontWeight: 'bold',
-    fontFamily: fonts.heading,
+    fontFamily: fonts.family.heading,
   },
   h3: {
     color: colors.black,
-    fontSize: fontSizes.h3,
+    fontSize: fonts.size.h3,
     fontWeight: 'bold',
-    fontFamily: fonts.heading,
+    fontFamily: fonts.family.heading,
   },
   h4: {
     color: colors.black,
-    fontSize: fontSizes.h4,
+    fontSize: fonts.size.h4,
     fontWeight: 'bold',
-    fontFamily: fonts.heading,
+    fontFamily: fonts.family.heading,
   },
   p: {
-    fontSize: fontSizes.base,
-    fontFamily: fonts.context,
+    fontSize: fonts.size.base,
+    fontFamily: fonts.family.context,
   },
   span: {
-    fontSize: fontSizes.base,
-    fontFamily: fonts.context,
+    fontSize: fonts.size.base,
+    fontFamily: fonts.family.context,
   },
   small: {
-    fontSize: fontSizes.small,
-    fontFamily: fonts.context,
+    fontSize: fonts.size.small,
+    fontFamily: fonts.family.context,
   },
   a: {
-    fontSize: fontSizes.base,
-    fontFamily: fonts.context,
+    fontSize: fonts.size.base,
+    fontFamily: fonts.family.context,
   },
   button: {
-    fontSize: fontSizes.base,
-    fontFamily: fonts.context,
+    fontSize: fonts.size.base,
+    fontFamily: fonts.family.context,
     textAlign: 'center',
   },
   primaryButton: {
@@ -79,22 +79,22 @@ const styles = {
   labelButton: {
     backgroundColor: 'transparent',
     color: colors.primary4,
-    fontSize: fontSizes.base,
+    fontSize: fonts.size.base,
     borderWidth: 2,
     borderColor: colors.primary4,
-    fontFamily: fonts.context,
+    fontFamily: fonts.family.context,
   },
   inputLabel: {
     color: colors.grayScale1,
-    fontFamily: fonts.contextLight,
-    fontSize: fontSizes.input,
+    fontFamily: fonts.family.contextLight,
+    fontSize: fonts.size.input,
     fontWeight: '400',
   },
   inputText: {
     fontWeight: 'bold',
     color: colors.black,
-    fontSize: fontSizes.input,
-    fontFamily: fonts.contextSemiBold,
+    fontSize: fonts.size.input,
+    fontFamily: fonts.family.contextSemiBold,
     lineHeight: 30,
     minHeight: 30,
   },
@@ -112,13 +112,13 @@ const styles = {
   },
   errorMessage: {
     color: colors.grayScale1,
-    fontFamily: fonts.context,
+    fontFamily: fonts.family.context,
     marginBottom: 20,
     paddingTop: 0,
     marginLeft: 5,
     marginRight: 0,
     marginTop: 0,
-    fontSize: fontSizes.input,
+    fontSize: fonts.size.input,
   },
   errorIcon: {
     color: colors.action1,

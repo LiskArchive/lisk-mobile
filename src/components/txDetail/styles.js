@@ -23,7 +23,7 @@ const styles = {
     marginBottom: 16,
     alignItems: 'center',
     color: colors.black,
-    fontFamily: fonts.context,
+    fontFamily: fonts.family.context,
   },
   label: {
     color: '#3C5068',

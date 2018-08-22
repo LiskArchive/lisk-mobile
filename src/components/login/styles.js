@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, fontSizes, fonts, boxes } from '../../constants/styleGuide';
+import { colors, fonts, boxes } from '../../constants/styleGuide';
 
 const styles = {
   wrapper: {
@@ -34,8 +34,8 @@ const styles = {
   },
   connectionError: {
     color: colors.grayScale1,
-    fontFamily: fonts.context,
-    fontSize: fontSizes.input,
+    fontFamily: fonts.family.context,
+    fontSize: fonts.size.input,
   },
   connectionErrorIcon: {
     color: colors.action1,

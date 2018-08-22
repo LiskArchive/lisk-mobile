@@ -1,5 +1,5 @@
 import { StyleSheet, DeviceInfo } from 'react-native';
-import styleGuide from '../../../constants/styleGuide';
+import { colors, boxes } from '../../../constants/styleGuide';
 
 const styles = {
   container: {
@@ -9,14 +9,14 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     flex: 1,
-    backgroundColor: styleGuide.colors.white,
+    backgroundColor: colors.white,
     paddingTop: 36,
     paddingBottom: 60,
   },
   button: {
     top: 20,
-    marginRight: styleGuide.boxes.boxPadding,
-    marginLeft: styleGuide.boxes.boxPadding,
+    marginRight: boxes.boxPadding,
+    marginLeft: boxes.boxPadding,
   },
   stickyButton: {
     borderRadius: 0,
@@ -25,26 +25,26 @@ const styles = {
   },
   subtitle: {
     marginTop: 7,
-    color: styleGuide.colors.grayScale2,
+    color: colors.grayScale2,
   },
   input: {
     marginTop: 0,
   },
   headings: {
-    marginRight: styleGuide.boxes.boxPadding,
-    marginLeft: styleGuide.boxes.boxPadding,
+    marginRight: boxes.boxPadding,
+    marginLeft: boxes.boxPadding,
   },
   balanceWrapper: {
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderColor: styleGuide.colors.grayScale5,
+    borderColor: colors.grayScale5,
     marginTop: 20,
     paddingTop: 10,
     paddingBottom: 16,
-    paddingRight: styleGuide.boxes.boxPadding,
-    paddingLeft: styleGuide.boxes.boxPadding,
+    paddingRight: boxes.boxPadding,
+    paddingLeft: boxes.boxPadding,
   },
   balanceValue: {
     width: '100%',
@@ -54,11 +54,11 @@ const styles = {
     paddingTop: 8,
   },
   number: {
-    color: styleGuide.colors.primary5,
+    color: colors.primary5,
     lineHeight: 25,
   },
   unit: {
-    color: styleGuide.colors.primary5,
+    color: colors.primary5,
     lineHeight: 25,
     marginLeft: 5,
     marginTop: -3,
