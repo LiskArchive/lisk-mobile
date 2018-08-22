@@ -166,6 +166,13 @@ android {
 }
 
 dependencies {
+    compile (project(':react-native-camera')) {
+    exclude group: "com.google.android.gms"
+        compile 'com.android.support:exifinterface:27.+'
+        compile ('com.google.android.gms:play-services-vision:12.0.1') {
+            force = true
+        }
+    }
     compile project(':lottie-react-native')
     compile project(':react-native-background-timer')
     compile project(':react-native-svg')
@@ -185,4 +192,16 @@ dependencies {
 task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
+}
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:27.1.0'
+    }
 }
