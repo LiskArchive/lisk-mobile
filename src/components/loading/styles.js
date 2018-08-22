@@ -1,10 +1,10 @@
 
 import { StyleSheet, DeviceInfo, Platform, Dimensions } from 'react-native';
 import { Header } from 'react-navigation';
-import styleGuide from '../../constants/styleGuide';
+import { colors } from '../../constants/styleGuide';
 
 let wrapper = {
-  backgroundColor: styleGuide.colors.primary3,
+  backgroundColor: colors.primary3,
 };
 if (Platform.OS === 'ios') {
   wrapper = {

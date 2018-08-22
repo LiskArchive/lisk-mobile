@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
-import Colors from '../../constants/styleGuide/colors';
-import Fonts from '../../constants/styleGuide/fonts';
+import { colors, fonts } from '../../constants/styleGuide';
 
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
     padding: 20,
   },
   divider: {
@@ -23,8 +22,8 @@ const styles = {
   value: {
     marginBottom: 16,
     alignItems: 'center',
-    color: Colors.black,
-    fontFamily: Fonts.context,
+    color: colors.black,
+    fontFamily: fonts.family.context,
   },
   label: {
     color: '#3C5068',

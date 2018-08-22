@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions, DeviceInfo, Platform } from 'react-native';
 import { Header } from 'react-navigation';
-import styleGuide from '../../constants/styleGuide';
+import { colors, boxes } from '../../constants/styleGuide';
 
 const { width } = Dimensions.get('window');
 
@@ -75,21 +75,21 @@ const styles = {
     position: 'absolute',
     zIndex: 4,
     elevation: 4,
-    shadowColor: styleGuide.colors.primary5,
+    shadowColor: colors.primary5,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 10,
     borderRadius: 40,
   },
   unit: {
-    color: styleGuide.colors.primary5,
+    color: colors.primary5,
     fontSize: 23,
     lineHeight: 25,
     marginLeft: 5,
     marginTop: -3,
   },
   value: {
-    color: styleGuide.colors.primary5,
+    color: colors.primary5,
     lineHeight: 25,
   },
   address: {
@@ -107,7 +107,7 @@ const styles = {
   },
   addressP: {
     lineHeight: 25,
-    color: styleGuide.colors.grayScale1,
+    color: colors.grayScale1,
   },
   balance: {
     height: 25,
@@ -136,16 +136,16 @@ const styles = {
       -1 * (Header.HEIGHT + 24) : -1 * (Header.HEIGHT + 1),
   },
   box: {
-    width: width - (2 * styleGuide.boxes.boxPadding),
-    shadowColor: styleGuide.colors.primary5,
+    width: width - (2 * boxes.boxPadding),
+    shadowColor: colors.primary5,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 10,
     position: 'absolute',
-    left: styleGuide.boxes.boxPadding,
+    left: boxes.boxPadding,
     zIndex: 1,
-    borderRadius: styleGuide.boxes.boxBorderRadius,
-    backgroundColor: styleGuide.colors.white,
+    borderRadius: boxes.boxBorderRadius,
+    backgroundColor: colors.white,
     elevation: 3,
   },
 };

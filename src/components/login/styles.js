@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import styleGuide from '../../constants/styleGuide';
+import { colors, fonts, boxes } from '../../constants/styleGuide';
 
 const styles = {
   wrapper: {
-    backgroundColor: styleGuide.colors.white,
+    backgroundColor: colors.white,
     flex: 1,
   },
   container: {
@@ -13,7 +13,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     flex: 1,
-    backgroundColor: styleGuide.colors.white,
+    backgroundColor: colors.white,
     paddingTop: 36,
     paddingBottom: 20,
   },
@@ -33,24 +33,24 @@ const styles = {
     paddingBottom: 10,
   },
   connectionError: {
-    color: styleGuide.colors.grayScale1,
-    fontFamily: styleGuide.fonts.context,
-    fontSize: styleGuide.fontSizes.input,
+    color: colors.grayScale1,
+    fontFamily: fonts.family.context,
+    fontSize: fonts.size.input,
   },
   connectionErrorIcon: {
-    color: styleGuide.colors.action1,
+    color: colors.action1,
     marginRight: 5,
   },
   visible: {
     opacity: 1,
   },
   title: {
-    paddingLeft: styleGuide.boxes.boxPadding,
-    paddingRight: styleGuide.boxes.boxPadding,
+    paddingLeft: boxes.boxPadding,
+    paddingRight: boxes.boxPadding,
   },
   button: {
-    marginRight: styleGuide.boxes.boxPadding,
-    marginLeft: styleGuide.boxes.boxPadding,
+    marginRight: boxes.boxPadding,
+    marginLeft: boxes.boxPadding,
     marginBottom: 60,
   },
   errorMessage: {
@@ -58,17 +58,17 @@ const styles = {
     height: 42,
   },
   input: {
-    paddingRight: styleGuide.boxes.boxPadding,
-    borderRightWidth: styleGuide.boxes.boxPadding,
+    paddingRight: boxes.boxPadding,
+    borderRightWidth: boxes.boxPadding,
     borderRightColor: 'transparent',
     color: 'black',
     fontSize: 13,
     letterSpacing: 1,
-    fontFamily: styleGuide.fonts.passphrase,
+    fontFamily: fonts.family.passphrase,
   },
   allWhite: {
-    borderTopColor: styleGuide.colors.white,
-    backgroundColor: styleGuide.colors.white,
+    borderTopColor: colors.white,
+    backgroundColor: colors.white,
   },
   sticky: {
     position: 'absolute',

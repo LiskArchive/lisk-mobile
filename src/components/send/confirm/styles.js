@@ -1,17 +1,17 @@
 import { StyleSheet } from 'react-native';
-import styleGuide from '../../../constants/styleGuide';
+import { boxes, colors, fonts } from '../../../constants/styleGuide';
 
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: styleGuide.colors.white,
+    backgroundColor: colors.white,
   },
   innerContainer: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginRight: styleGuide.boxes.boxPadding,
-    marginLeft: styleGuide.boxes.boxPadding,
+    marginRight: boxes.boxPadding,
+    marginLeft: boxes.boxPadding,
     paddingTop: 36,
     paddingBottom: 35,
   },
@@ -25,7 +25,7 @@ const styles = {
     textAlign: 'left',
   },
   black: {
-    color: styleGuide.colors.black,
+    color: colors.black,
   },
   heading: {
     fontSize: 24,
@@ -54,14 +54,14 @@ const styles = {
     marginTop: 15,
     marginBottom: 7,
 
-    color: styleGuide.colors.grayScale1,
-    fontFamily: styleGuide.fonts.contextLight,
-    fontSize: styleGuide.fontSizes.input,
+    color: colors.grayScale1,
+    fontFamily: fonts.family.contextLight,
+    fontSize: fonts.size.input,
     fontWeight: '400',
   },
   subtitle: {
     marginTop: 7,
-    color: styleGuide.colors.grayScale2,
+    color: colors.grayScale2,
   },
   addressContainer: {
     flexDirection: 'row',

@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from '../toolBox/icon';
-import colors from '../../constants/styleGuide/colors';
+import { colors } from '../../constants/styleGuide';
 
 const MenuIcon = ({ focused, name }) => {
   const color = focused ? colors.primary5 : colors.grayScale3;

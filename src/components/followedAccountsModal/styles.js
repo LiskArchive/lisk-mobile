@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import styleGuide from '../../constants/styleGuide';
+import { boxes, colors } from '../../constants/styleGuide';
 
 const styles = {
   modal: {
@@ -8,15 +8,15 @@ const styles = {
   },
   modalWrapper: {
     height: 300,
-    backgroundColor: styleGuide.colors.white,
-    paddingTop: styleGuide.boxes.boxPadding,
-    paddingBottom: styleGuide.boxes.boxPadding,
-    borderRadius: styleGuide.boxes.boxBorderRadius,
+    backgroundColor: colors.white,
+    paddingTop: boxes.boxPadding,
+    paddingBottom: boxes.boxPadding,
+    borderRadius: boxes.boxBorderRadius,
   },
   actionBar: {
     width: '100%',
-    height: styleGuide.boxes.buttonHeight,
-    padding: styleGuide.boxes.boxPadding,
+    height: boxes.buttonHeight,
+    padding: boxes.boxPadding,
     flexDirection: 'row',
     alignContent: 'flex-start',
     flex: 1,
@@ -24,24 +24,24 @@ const styles = {
   button: {
     paddingRight: 10,
     paddingLeft: 10,
-    height: styleGuide.boxes.buttonHeight,
-    lineHeight: styleGuide.boxes.buttonHeight,
+    height: boxes.buttonHeight,
+    lineHeight: boxes.buttonHeight,
   },
   cancelButton: {
-    height: styleGuide.boxes.borderedButtonHeight,
-    backgroundColor: styleGuide.colors.white,
-    borderRadius: styleGuide.boxes.buttonBorderRadius,
-    borderWidth: styleGuide.boxes.buttonBorderRadius,
-    borderColor: styleGuide.colors.primary3,
-    color: styleGuide.colors.primary5,
+    height: boxes.borderedButtonHeight,
+    backgroundColor: colors.white,
+    borderRadius: boxes.buttonBorderRadius,
+    borderWidth: boxes.buttonBorderRadius,
+    borderColor: colors.primary3,
+    color: colors.primary5,
   },
   updateButton: {
-    color: styleGuide.colors.white,
-    backgroundColor: styleGuide.colors.primary3,
+    color: colors.white,
+    backgroundColor: colors.primary3,
   },
   deleteButton: {
-    backgroundColor: styleGuide.colors.white,
-    color: styleGuide.colors.action1,
+    backgroundColor: colors.white,
+    color: colors.action1,
   },
 };
 
