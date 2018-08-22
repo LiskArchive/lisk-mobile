@@ -64,7 +64,7 @@ const styles = {
     color: 'black',
     fontSize: 13,
     letterSpacing: 1,
-    fontFamily: styleGuide.fonts.passphrase,
+    fontFamily: fonts.family.passphrase,
   },
   allWhite: {
     borderTopColor: colors.white,
