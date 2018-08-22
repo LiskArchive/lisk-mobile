@@ -3,6 +3,7 @@ import { View, Platform } from 'react-native';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import connect from 'redux-connect-decorator';
+import { RNCamera } from 'react-native-camera';
 import { SecondaryButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
@@ -22,6 +23,7 @@ class Form extends React.Component {
       amount: { value: '', validity: -1 },
       reference: { value: '', validity: -1 },
       opacity: 1,
+      cameraVisibility: false,
     };
 
     validator = {
@@ -111,10 +113,57 @@ class Form extends React.Component {
     });
   }
 
+  toggleCamera = () => {
+    this.props.navigation.setParams({
+      tabBar: !this.state.cameraVisibility,
+      showButtonLeft: !this.state.cameraVisibility,
+      action: this.toggleCamera,
+      onBackPress: this.toggleCamera,
+    });
+    this.setState({
+      cameraVisibility: !this.state.cameraVisibility,
+    });
+  };
+
+  readQRcode = (event) => {
+    this.toggleCamera();
+    const liskProtocolReg = /recipient=\d{1,21}L.*/;
+    if (liskProtocolReg.test(event.data)) {
+      const address = event.data.match(/\d{1,21}L/)[0];
+      const amount = event.data.match(/\d*$/)[0];
+      this.setState({
+        address: {
+          value: address,
+          validity: 0,
+        },
+      });
+      this.changeHandler('amount', amount);
+    } else {
+      this.setState({
+        amount: {
+          value: '',
+          validity: -1,
+        },
+      });
+      this.changeHandler('address', event.data);
+    }
+  }
+
   render() {
     const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
     return (
       <Fragment>
+      { this.state.cameraVisibility ? <RNCamera
+        ref={(ref) => {
+          this.camera = ref;
+        }}
+        style = {styles.cameraPreview}
+        onBarCodeRead={this.readQRcode}
+        barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+        type={RNCamera.Constants.Type.back}
+        permissionDialogTitle={'Permission to use camera'}
+        permissionDialogMessage={'We need your permission to use your camera phone'}
+        ><View style={styles.cameraOverlay}></View></RNCamera> : null}
       <KeyboardAwareScrollView
         enableOnAndroid={true}
         enableResetScrollToCoords={false}
@@ -140,6 +189,7 @@ class Form extends React.Component {
           </View>
         </View>
         <View>
+          <Small onPress={this.toggleCamera} style={styles.scanButton}>Scan</Small>
           <Input
             label='Address'
             autoCorrect={false}

@@ -1,6 +1,8 @@
-import { StyleSheet, DeviceInfo } from 'react-native';
+import { StyleSheet, DeviceInfo, Dimensions } from 'react-native';
 import styleGuide from '../../../constants/styleGuide';
 
+
+const { height, width } = Dimensions.get('window');
 const styles = {
   container: {
     height: '100%',
@@ -78,7 +80,32 @@ const styles = {
     zIndex: 9999,
     borderRadius: 0,
   },
-  avatar: {
+  cameraPreview: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    flex: 1,
+    height,
+    width,
+    zIndex: 99,
+  },
+  cameraOverlay: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#394451',
+    opacity: 0.85,
+  },
+  scanButton: {
+    position: 'absolute',
+    right: 10,
+    fontSize: 14,
+    zIndex: 99,
+    top: 33,
+    lineHeight: 30,
+    paddingRight: 10,
+    paddingLeft: 10,
+    paddingBottom: 10,
+    color: styleGuide.colors.primary5,
   },
 };
 
