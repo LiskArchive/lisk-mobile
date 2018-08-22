@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Share as ShareAPI } from 'react-native';
 import Icon from '../toolBox/icon';
-import colors from '../../constants/styleGuide/colors';
+import { colors } from '../../constants/styleGuide';
 import styles from './styles';
 
 const Share = ({

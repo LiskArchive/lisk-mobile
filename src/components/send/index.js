@@ -6,7 +6,7 @@ import Confirm from './confirm';
 import Result from './result';
 import styles from './styles';
 import { IconButton } from '../toolBox/button';
-import colors from '../../constants/styleGuide/colors';
+import { colors } from '../../constants/styleGuide';
 
 class Send extends React.Component {
   state = { focused: 1 };

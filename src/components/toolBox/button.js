@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { TouchableHighlight, Text } from 'react-native';
 import theme from './styles';
-import Colors from '../../constants/styleGuide/colors';
+import { colors } from '../../constants/styleGuide';
 import Icon from './icon';
 
 const labelStyle = (propsStyle, disabled) => {
@@ -48,8 +48,8 @@ export const Button = (props) => {
 export const PrimaryButton = props => (<LinearGradient
     start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
     colors={props.disabled ?
-      [Colors.white, Colors.white] :
-      [Colors.action4, Colors.action2]}
+      [colors.white, colors.white] :
+      [colors.action4, colors.action2]}
     style={[
       theme.buttonWrapper,
       props.style,
@@ -62,8 +62,8 @@ export const PrimaryButton = props => (<LinearGradient
 export const SecondaryButton = props => (<LinearGradient
   start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
   colors={props.disabled ?
-    [Colors.white, Colors.white] :
-    [Colors.primary4, Colors.primary9]}
+    [colors.white, colors.white] :
+    [colors.primary4, colors.primary9]}
   style={[
     theme.buttonWrapper,
     props.style,

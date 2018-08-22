@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import styleGuide from '../../constants/styleGuide';
+import { colors } from '../../constants/styleGuide';
 
 const styles = {
   container: {
-    backgroundColor: styleGuide.colors.white,
+    backgroundColor: colors.white,
     flex: 1,
     alignContent: 'space-around',
   },

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import styleGuide from '../../constants/styleGuide';
+import { colors } from '../../constants/styleGuide';
 
 const styles = {
   container: {
@@ -12,11 +12,11 @@ const styles = {
     height: 90,
     paddingTop: 20,
     paddingBottom: 20,
-    backgroundColor: styleGuide.colors.white,
+    backgroundColor: colors.white,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'stretch',
-    borderBottomColor: styleGuide.colors.grayScale5,
+    borderBottomColor: colors.grayScale5,
     borderBottomWidth: 1,
   },
   title: {
@@ -37,7 +37,7 @@ const styles = {
     textAlign: 'right',
   },
   date: {
-    color: styleGuide.colors.grayScale1,
+    color: colors.grayScale1,
   },
   address: {
     paddingTop: 4,
@@ -47,13 +47,13 @@ const styles = {
     paddingRight: 15,
   },
   incoming: {
-    color: styleGuide.colors.success1,
+    color: colors.success1,
   },
   emptyState: {
     width: '100%',
     display: 'flex',
     flex: 1,
-    backgroundColor: styleGuide.colors.white,
+    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 50,
@@ -64,7 +64,7 @@ const styles = {
   },
   noTxTitle: {
     paddingTop: 10,
-    color: styleGuide.colors.grayScale2,
+    color: colors.grayScale2,
   },
   pendingIcon: {
     width: 18,

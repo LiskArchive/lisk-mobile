@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import styleGuide from '../../../constants/styleGuide';
+import { boxes, colors } from '../../../constants/styleGuide';
 
 
 const styles = {
@@ -7,15 +7,15 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     flex: 1,
-    backgroundColor: styleGuide.boxes.white,
-    paddingRight: styleGuide.boxes.boxPadding,
-    paddingLeft: styleGuide.boxes.boxPadding,
+    backgroundColor: boxes.white,
+    paddingRight: boxes.boxPadding,
+    paddingLeft: boxes.boxPadding,
     paddingTop: 37,
     paddingBottom: 35,
   },
   button: {
     marginTop: 20,
-    backgroundColor: styleGuide.boxes.success1,
+    backgroundColor: boxes.success1,
   },
   title: {
     fontSize: 30,
@@ -27,7 +27,7 @@ const styles = {
   },
   subtitle: {
     marginTop: 7,
-    color: styleGuide.colors.grayScale2,
+    color: colors.grayScale2,
   },
   illustration: {
     width: '100%',

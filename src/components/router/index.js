@@ -12,7 +12,7 @@ import LogoutButton from '../logoutButton';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
 import tabBarOptions from './tabBarOptions';
-import colors from '../../constants/styleGuide/colors';
+import { colors } from '../../constants/styleGuide';
 import { IconButton } from '../toolBox/button';
 import Logo from './logo';
 
