@@ -4,6 +4,8 @@ import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import connect from 'redux-connect-decorator';
 import { RNCamera } from 'react-native-camera';
+import QRCode from '@remobile/react-native-qrcode-local-image';
+import CameraRollPicker from 'react-native-camera-roll-picker';
 import { SecondaryButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
@@ -24,6 +26,7 @@ class Form extends React.Component {
       reference: { value: '', validity: -1 },
       opacity: 1,
       cameraVisibility: false,
+      galleryVisibility: false,
     };
 
     validator = {
@@ -125,12 +128,43 @@ class Form extends React.Component {
     });
   };
 
+  toggleGallery = () => {
+    this.props.navigation.setParams({
+      tabBar: true,
+      showButtonLeft: true,
+      action: !this.state.galleryVisibility ? this.toggleGallery : this.toggleCamera,
+      onBackPress: this.toggleGallery,
+    });
+    this.setState({
+      cameraVisibility: !this.state.cameraVisibility,
+      galleryVisibility: !this.state.galleryVisibility,
+    });
+  }
+
+  readFromPhotoGallery = (items) => {
+    this.setState({
+      galleryVisibility: false,
+    });
+    this.props.navigation.setParams({
+      tabBar: false,
+      showButtonLeft: false,
+    });
+    if (items.length > 0) {
+      QRCode.decode(items[0].uri, (error, result) => {
+        this.decodeQR(result);
+      });
+    }
+  }
   readQRcode = (event) => {
     this.toggleCamera();
+    this.decodeQR(event.data);
+  }
+
+  decodeQR = (data) => {
     const liskProtocolReg = /recipient=\d{1,21}L.*/;
-    if (liskProtocolReg.test(event.data)) {
-      const address = event.data.match(/\d{1,21}L/)[0];
-      const amount = event.data.match(/\d*$/)[0];
+    if (liskProtocolReg.test(data)) {
+      const address = data.match(/\d{1,21}L/)[0];
+      const amount = data.match(/\d*$/)[0];
       this.setState({
         address: {
           value: address,
@@ -145,7 +179,7 @@ class Form extends React.Component {
           validity: -1,
         },
       });
-      this.changeHandler('address', event.data);
+      this.changeHandler('address', data);
     }
   }
 
@@ -163,7 +197,16 @@ class Form extends React.Component {
         type={RNCamera.Constants.Type.back}
         permissionDialogTitle={'Permission to use camera'}
         permissionDialogMessage={'We need your permission to use your camera phone'}
-        ><View style={styles.cameraOverlay}></View></RNCamera> : null}
+        >
+        <Small onPress={this.toggleGallery}
+        style={styles.galleryButton}>show gallery</Small>
+      </RNCamera> : null}
+      {this.state.galleryVisibility ? <View style={styles.cameraPreview}>
+        <CameraRollPicker
+          selectSingleItem={true}
+          callback={this.readFromPhotoGallery}
+        />
+      </View> : null }
       <KeyboardAwareScrollView
         enableOnAndroid={true}
         enableResetScrollToCoords={false}

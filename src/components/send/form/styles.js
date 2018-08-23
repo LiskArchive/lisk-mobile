@@ -107,6 +107,13 @@ const styles = {
     paddingBottom: 10,
     color: colors.primary5,
   },
+  galleryButton: {
+    position: 'absolute',
+    right: 30,
+    top: 20,
+    lineHeight: 30,
+    backgroundColor: colors.primary5,
+  },
 };
 
 export default StyleSheet.create(styles);
