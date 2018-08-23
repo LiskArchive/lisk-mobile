@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform, PermissionsAndroid } from 'react-native';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import connect from 'redux-connect-decorator';
@@ -117,6 +117,24 @@ class Form extends React.Component {
   }
 
   toggleCamera = () => {
+    async function requestCameraPermission() {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+          {
+            title: 'Lisk mobile Camera Permission',
+            message: 'Cool Photo App needs access to your camera ' +
+                       'so you can take awesome pictures.'
+          },
+        );
+        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+          this.toggleGallery();
+        }
+      } catch (err) {
+        console.warn(err)
+      }
+    }
+    requestCameraPermission();
     this.props.navigation.setParams({
       tabBar: !this.state.cameraVisibility,
       showButtonLeft: !this.state.cameraVisibility,
