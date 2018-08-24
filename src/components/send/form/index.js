@@ -123,15 +123,14 @@ class Form extends React.Component {
           PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
           {
             title: 'Lisk mobile Camera Permission',
-            message: 'Cool Photo App needs access to your camera ' +
-                       'so you can take awesome pictures.'
+            message: 'Lisk mobile needs access to your camera ',
           },
         );
         if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
           this.toggleGallery();
         }
       } catch (err) {
-        console.warn(err)
+        this.toggleGallery();
       }
     }
     requestCameraPermission();
