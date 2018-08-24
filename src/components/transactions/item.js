@@ -6,7 +6,7 @@ import styles from './styles';
 import FormattedNumber from '../formattedNumber';
 import Avatar from '../avatar';
 import FormattedDate from '../formattedDate';
-import { H4, Small } from '../toolBox/typography';
+import { B, Small } from '../toolBox/typography';
 import { stringShortener } from '../../utilities/helpers';
 import loadingAnimation from '../../assets/animations/loading-dots.json';
 import transactions from '../../constants/transactions';
@@ -47,9 +47,9 @@ class Item extends React.Component {
         <Avatar address={address} size={50} />
       </View>
       <View style={styles.column}>
-        <H4 style={styles.address}>
+        <B style={styles.address}>
           {tx.type === 0 ? addressShortened : transactions[txTypes[tx.type]].title}
-        </H4>
+        </B>
         {
           typeof this.props.tx.timestamp !== 'number' ?
           <Small style={styles.date}>Pending confirmation</Small> :
@@ -59,9 +59,9 @@ class Item extends React.Component {
       <View style={[styles.column, styles.amountWrapper]}>
       {
         tx.type === 0 ?
-          <H4 style={[styles.amount, styles[direction]]}>
+          <B style={[styles.amount, styles[direction]]}>
             <FormattedNumber>{amount}</FormattedNumber> Ⱡ
-          </H4> : null
+          </B> : null
       }
         {
           typeof this.props.tx.timestamp !== 'number' ?

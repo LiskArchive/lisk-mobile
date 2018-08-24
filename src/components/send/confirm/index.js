@@ -6,7 +6,7 @@ import styles from './styles';
 import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
-import { H1, H4, P } from '../../toolBox/typography';
+import { H1, B, P } from '../../toolBox/typography';
 
 @connect(state => ({
   accounts: state.accounts,
@@ -60,16 +60,16 @@ class Form extends React.Component {
             <P style={styles.label}>Address</P>
             <View style={styles.addressContainer}>
               <Avatar address={address} style={styles.avatar} size={35}/>
-              <H4 labelStyle={[styles.address, styles.black]}>{address}</H4>
+              <B labelStyle={[styles.address, styles.black]}>{address}</B>
             </View>
           </View>
           <View style={styles.row}>
             <P style={styles.label}>Amount (including 0.1 Ⱡ fee)</P>
-            <H4 labelStyle={[styles.amount, styles.black]}>{`${fromRawLsk(toRawLsk(amount) + 1e7)} Ⱡ`}</H4>
+            <B labelStyle={[styles.amount, styles.black]}>{`${fromRawLsk(toRawLsk(amount) + 1e7)} Ⱡ`}</B>
           </View>
           {reference ? <View style={styles.row}>
             <P style={styles.label}>Reference</P>
-            <H4 labelStyle={[styles.address, styles.black]}>{reference}</H4>
+            <B labelStyle={[styles.address, styles.black]}>{reference}</B>
           </View> : null}
         </View>
         <PrimaryButton
