@@ -5,7 +5,7 @@ import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import styles from './styles';
 import Share from '../share';
-import { H4, P, H1 } from '../toolBox/typography';
+import { B, P, H1 } from '../toolBox/typography';
 import Avatar from '../avatar';
 import transactions from '../../constants/transactions';
 
@@ -20,7 +20,7 @@ const TxDetail = ({ navigation }) => {
         <P style={styles.label}>Sender</P>
         <View style={styles.addressContainer}>
           <Avatar address={tx.senderId} style={styles.avatar} size={50}/>
-          <Share type={H4} value={tx.senderId} icon={true} />
+          <Share type={B} value={tx.senderId} icon={true} />
         </View>
       </View>
       {
@@ -29,7 +29,7 @@ const TxDetail = ({ navigation }) => {
           <P style={styles.label}>Recipient</P>
           <View style={styles.addressContainer}>
             <Avatar address={tx.recipientId} style={styles.avatar} size={50}/>
-            <Share type={H4} value={tx.recipientId} icon={true} />
+            <Share type={B} value={tx.recipientId} icon={true} />
           </View>
         </View> : null
       }
@@ -38,38 +38,38 @@ const TxDetail = ({ navigation }) => {
       tx.type === 0 ?
       <Fragment>
         <P style={styles.label}>Amount</P>
-        <H4 style={styles.value}>
+        <B style={styles.value}>
           <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber> Ⱡ
-        </H4>
+        </B>
       </Fragment> :
       <Fragment>
         <P style={styles.label}>Type</P>
-        <H4 style={styles.value}>{transactions[txTypes[tx.type]].title}</H4>
+        <B style={styles.value}>{transactions[txTypes[tx.type]].title}</B>
       </Fragment>
     }
     <P style={styles.label}>Fee</P>
-    <H4 style={styles.value}>
+    <B style={styles.value}>
       <FormattedNumber>{fromRawLsk(transactions[txTypes[tx.type]].fee)}</FormattedNumber> Ⱡ
-    </H4>
+    </B>
     {
       tx.confirmations ?
       <Fragment>
         <P style={styles.label}>Date</P>
-        <FormattedDate format='MMM D, YYYY - LTS' type={H4} style={styles.value}>{ tx.timestamp }</FormattedDate>
+        <FormattedDate format='MMM D, YYYY - LTS' type={B} style={styles.value}>{ tx.timestamp }</FormattedDate>
       </Fragment> : null
     }
     {
       (tx.asset && tx.asset.data) ?
       <View>
         <P style={styles.label}>Reference</P>
-        <H4 style={styles.value}>{ tx.asset.data }</H4>
+        <B style={styles.value}>{ tx.asset.data }</B>
       </View> : null
     }
     <P style={styles.label}>Confirmations</P>
-    <H4 style={styles.value}>{tx.confirmations || 'Not confirmed yet.'}</H4>
+    <B style={styles.value}>{tx.confirmations || 'Not confirmed yet.'}</B>
     <P style={styles.label}>Transaction ID</P>
     <View style={styles.addressContainer}>
-      <Share type={H4} value={tx.id} icon={true} style={[styles.value, styles.transactionId]} />
+      <Share type={B} value={tx.id} icon={true} style={[styles.value, styles.transactionId]} />
     </View>
   </ScrollView>);
 };
