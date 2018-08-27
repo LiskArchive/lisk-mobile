@@ -6,11 +6,12 @@ import {
 } from './utils';
 
 const MultiStepNav = ({
-  steps, interactive, current, backButtonTitle,
+  steps, interactive, current, backButtonTitle, activeTitle,
   groupButton, stepButton, backButton, hideGroups, hideSteps,
   prevPage, prevStep, move, normalizedStyles,
-}) =>
-  (<Element {...normalizedStyles.multiStepNavWrapper}>
+}) => {
+  const ActiveTitle = activeTitle;
+  return (<Element {...normalizedStyles.multiStepNavWrapper}>
     {
       (backButton !== undefined && backButton !== null) ?
         <NavigatorButton
@@ -18,6 +19,12 @@ const MultiStepNav = ({
           disabled={current === 0}
           onClick={() => backButtonFn(current, prevPage, prevStep)}>{
             backButtonTitle}</NavigatorButton> : null
+    }
+    {
+      ActiveTitle ?
+        <ActiveTitle>{
+          hideSteps ? steps[current].props.group : steps[current].props.title
+        }</ActiveTitle> : null
     }
     <Element {...normalizedStyles.multiStepGroupWrapper}>
       {
@@ -45,5 +52,6 @@ const MultiStepNav = ({
       }
     </Element>
   </Element>);
+};
 
 export default MultiStepNav;

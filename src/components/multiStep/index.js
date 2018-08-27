@@ -89,8 +89,9 @@ class MultiStep extends React.Component {
 
   render() {
     const {
-      children, finalCallback, backButtonTitle, styles, hideGroups, hideSteps,
-      interactive, backButton, prevPage, navigatorButton, groupButton, stepButton,
+      children, finalCallback, backButtonTitle, styles,
+      interactive, backButton, prevPage, hideGroups, hideSteps,
+      activeTitle, navigatorButton, groupButton, stepButton,
     } = this.props;
     const { data, current } = this.state;
     const extraProps = {
@@ -122,6 +123,7 @@ class MultiStep extends React.Component {
             stepButton={stepButton}
             interactive={interactive}
             current={current}
+            activeTitle={activeTitle}
             navigatorButton={navigatorButton}
             backButton={backButton}
             backButtonTitle={backButtonTitle}
