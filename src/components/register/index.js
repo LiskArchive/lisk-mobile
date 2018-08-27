@@ -5,15 +5,14 @@ import Confirm from './confirm';
 import Success from './success';
 import SafeKeeping from './safeKeeping';
 import Intro from './intro';
+import { H4 } from '../toolBox/typography';
 import styles from './styles';
 
-const NavButton = props => <View {...props} style={styles.navButton}></View>;
+const NavButton = props =>
+  <Text {...props} style={[styles.navButton, props.disabled ? styles.disabledNavButton : null]} />;
+const ActiveTitle = props => <H4 style={styles.activeGroupTitle} {...props} />;
 
 class Register extends React.Component {
-  componentDidMount() {
-    this.nav.move({ to: 5 });
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -23,12 +22,13 @@ class Register extends React.Component {
           styles={styles}
           hideSteps={true}
           interactive={true}
-          groupButton={<NavButton />}
+          groupButton={NavButton}
+          activeTitle={ActiveTitle}
           backButtonTitle='Back'>
-          <Intro title='step 1' group='page 1'></Intro>
-          <SafeKeeping title='step 2' group='page 2'></SafeKeeping>
-          <Confirm title='step 3' group='page 3'></Confirm>
-          <Success title='step 4' group='page 3'></Success>
+          <Intro title='create' group='1. Creating your account'></Intro>
+          <SafeKeeping title='safekeeping' group='2. Saving your passphrase'></SafeKeeping>
+          <Confirm title='verify' group='3. Verifying your passphrase'></Confirm>
+          <Success title='success' group='3. Verifying your passphrase'></Success>
         </MultiStep>
       </View>
     );
