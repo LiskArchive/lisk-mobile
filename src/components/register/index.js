@@ -28,7 +28,7 @@ class Register extends React.Component {
           <Intro title='step 1' group='page 1'></Intro>
           <SafeKeeping title='step 2' group='page 2'></SafeKeeping>
           <Confirm title='step 3' group='page 3'></Confirm>
-          <Success title='step 4' group='page 4'></Success>
+          <Success title='step 4' group='page 3'></Success>
         </MultiStep>
       </View>
     );
