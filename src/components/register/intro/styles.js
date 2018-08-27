@@ -1,7 +1,10 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../../constants/styleGuide/colors';
+import { colors } from '../../../constants/styleGuide';
 
-const circleColors = ['#9cb4fa', '#a9dcf8', '#fe7354'];
+const liskIdIconColor = '#9cb4fa';
+const avatarIconColor = '#a9dcf8';
+const secureIconColor = '#fe7354';
+
 const styles = {
   container: {
     flexDirection: 'column',
@@ -35,13 +38,13 @@ const styles = {
     justifyContent: 'center',
   },
   color1: {
-    backgroundColor: circleColors[0],
+    backgroundColor: liskIdIconColor,
   },
   color2: {
-    backgroundColor: circleColors[1],
+    backgroundColor: avatarIconColor,
   },
   color3: {
-    backgroundColor: circleColors[2],
+    backgroundColor: secureIconColor,
   },
   description: {
     color: colors.grayScale2,
