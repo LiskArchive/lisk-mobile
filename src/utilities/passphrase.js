@@ -25,3 +25,13 @@ export const validatePassphrase = (passphrase) => {
   if (passphrase.trim().length === 0) return [{ code: 'empty_value' }];
   return Lisk.passphrase.validation.getPassphraseValidationErrors(passphrase);
 };
+
+/**
+ * @returns {string} a valid mnemoic passphrase
+ * Generate a random mnemonic (uses crypto.randomBytes under the hood),
+ * defaults to 128-bits of entropy var mnemonic = bip39.generateMnemonic()
+ */
+export const generatePassphrase = () => {
+  const { Mnemonic } = Lisk.passphrase;
+  return Mnemonic.generateMnemonic();
+};
