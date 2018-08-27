@@ -4,6 +4,7 @@ import Landing from '../landing';
 import Login from '../login';
 import TxDetail from '../txDetail';
 import Send from '../send';
+import Register from '../register';
 // import Explore from '../explore';
 import Wallet from '../wallet';
 import OwnWallet from '../ownWallet';
@@ -64,6 +65,12 @@ export default StackNavigator(
   {
     Landing: {
       screen: Landing,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Register: {
+      screen: Register,
       navigationOptions: {
         header: null,
       },
