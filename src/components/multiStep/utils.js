@@ -47,7 +47,7 @@ export const groupSteps = steps =>
  * @param {Object} styles - Object of the styles or class names
  * @returns {Object} - Objects with defined key names for React and RN
  */
-export const getStyles = (styles) =>
+export const getStyles = styles =>
   Object.keys(styles).reduce((acc, key) => {
     acc[key] = (typeof document !== 'undefined') ?
       { className: styles[key] } : { style: styles[key] };
