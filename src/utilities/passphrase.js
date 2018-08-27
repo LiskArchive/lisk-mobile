@@ -25,3 +25,9 @@ export const validatePassphrase = (passphrase) => {
   if (passphrase.trim().length === 0) return [{ code: 'empty_value' }];
   return Lisk.passphrase.validation.getPassphraseValidationErrors(passphrase);
 };
+
+
+export const generatePassphrase = () => {
+  const { Mnemonic } = Lisk.passphrase;
+  return Mnemonic.generateMnemonic();
+};
