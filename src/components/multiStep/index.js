@@ -1,4 +1,7 @@
 import React from 'react';
+import Nav from './navigator';
+import { Element } from './element';
+import { getStyles } from './utils';
 
 /**
  *
@@ -23,28 +26,13 @@ class MultiStep extends React.Component {
     super();
 
     this.state = {
-      step: {
-        nextStep: (data) => {
-          this.next.call(this, data);
-        },
-        prevStep: (data) => {
-          this.prev.call(this, data);
-        },
-        data: [{}],
-        current: 0,
-      },
+      data: [{}],
+      current: 0,
     };
   }
 
-  componentDidUpdate(newProps) {
-    if (newProps.reset !== this.props.reset) this.reset();
-  }
-
   next(data) {
-    const newState = Object.assign({}, this.state);
-    newState.step.current++;
-    newState.step.data[newState.step.current] = data;
-    this.setState(newState);
+    this.move({ moves: 1, data });
   }
 
   /**
@@ -57,44 +45,92 @@ class MultiStep extends React.Component {
    * @memberOf MultiStep
    *
    */
-  prev(config) {
-    const getTarget = (current) => {
-      if (current === 0) return current;
-      else if (!config || !config.reset) return current - 1;
-      else if (config.reset) return 0;
-      else if (config.jump <= current) return current - Math.abs(Math.floor(config.jump));
-      else if (config.to <= current) return Math.abs(Math.floor(config.to));
-      return current;
-    };
-    const newState = Object.assign({}, this.state);
-    newState.step.current = getTarget(this.state.step.current);
-    newState.step.data = (config && config.reset && !config.amount) ? [{}] : newState.step.data;
-    this.setState(newState);
+  prev() {
+    this.move({ moves: -1 });
   }
 
   reset() {
-    this.prev({ reset: true });
+    this.move({ to: 0, reset: true });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  keepTargetInRange(target, moves, current, totalSteps) {
+    if (typeof target === 'number') {
+      return Math.max(Math.min(target, totalSteps - 1), 0);
+    }
+    return (moves > 0) ?
+      Math.min(current + moves, totalSteps - 1) :
+      Math.max(0, current + moves);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  setData(dataList, reset, stepData, target) {
+    let newDataList = Object.assign({}, dataList);
+    if (reset) {
+      newDataList = [{}];
+    } else {
+      newDataList[target] = stepData || newDataList[target] || {};
+    }
+
+    return newDataList;
+  }
+
+  move({
+    moves, to, stepData, reset,
+  }) {
+    const { current, data } = this.state;
+    const { children } = this.props;
+
+    const next = this.keepTargetInRange(to, moves, current, children.length);
+    const nextData = this.setData(data, reset, stepData, next);
+
+    this.setState({ current: next, data: nextData });
   }
 
   render() {
-    const { children, finalCallback } = this.props;
-    const { step } = this.state;
+    const {
+      children, finalCallback, backButtonTitle, styles, hideGroups, hideSteps,
+      interactive, backButton, prevPage, navigatorButton,
+    } = this.props;
+    const { data, current } = this.state;
     const extraProps = {
-      nextStep: step.nextStep,
-      prevStep: step.prevStep,
-      ...step.data[step.current],
+      nextStep: this.next.bind(this),
+      prevStep: this.prev.bind(this),
+      ...data[current],
     };
 
-    if (step.current === (children.length - 1)) {
+    if (current === (children.length - 1)) {
       if (typeof finalCallback === 'function') {
         extraProps.finalCallback = finalCallback;
       }
       extraProps.reset = this.reset.bind(this);
     } else {
-      extraProps.prevState = Object.assign({}, step.data[step.current + 1]);
+      extraProps.prevState = Object.assign({}, data[current + 1]);
     }
 
-    return (React.cloneElement(children[step.current], extraProps));
+    const normalizedStyles = getStyles(styles);
+
+    return (<Element {...normalizedStyles.multiStepWrapper}>
+      {
+        this.props.showNav ?
+          <Nav
+            normalizedStyles={normalizedStyles}
+            hideGroups={hideGroups}
+            hideSteps={hideSteps}
+            steps={children}
+            interactive={interactive}
+            current={current}
+            navigatorButton={navigatorButton}
+            backButton={backButton}
+            backButtonTitle={backButtonTitle}
+            prevPage={prevPage}
+            prevStep={this.prev.bind(this)}
+            move={this.move.bind(this)} /> : null
+      }
+      {
+        React.cloneElement(children[current], extraProps)
+      }
+    </Element>);
   }
 }
 
