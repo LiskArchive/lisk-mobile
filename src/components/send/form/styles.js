@@ -90,10 +90,16 @@ const styles = {
     zIndex: 99,
   },
   cameraOverlay: {
-    flex: 1,
-    alignItems: 'center',
     backgroundColor: '#394451',
     opacity: 0.85,
+    // width: 200,
+    paddingLeft: 20,
+
+    paddingRight: 20,
+    paddingTop: 24,
+    paddingBottom: 24,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   scanButton: {
     position: 'absolute',
@@ -108,11 +114,16 @@ const styles = {
     color: colors.primary5,
   },
   galleryButton: {
-    position: 'absolute',
-    right: 30,
-    top: 20,
-    lineHeight: 30,
+    borderRadius: 4,
+    height: 48,
+    width: 48,
     backgroundColor: colors.primary5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  galleryDescription: {
+    color: '#fff',
+    maxWidth: 230,
   },
 };
 

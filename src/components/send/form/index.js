@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, Platform, PermissionsAndroid } from 'react-native';
+import { View, Platform, PermissionsAndroid, TouchableOpacity } from 'react-native';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import connect from 'redux-connect-decorator';
@@ -14,6 +14,7 @@ import styles from './styles';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
 import FormattedNumber from '../../formattedNumber';
+import Icon from '../../toolBox/icon';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -133,7 +134,7 @@ class Form extends React.Component {
         this.toggleGallery();
       }
     }
-    requestCameraPermission();
+    if (Platform.OS !== 'ios') requestCameraPermission();
     this.props.navigation.setParams({
       tabBar: !this.state.cameraVisibility,
       showButtonLeft: !this.state.cameraVisibility,
@@ -204,20 +205,27 @@ class Form extends React.Component {
     const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
     return (
       <Fragment>
-      { this.state.cameraVisibility ? <RNCamera
-        ref={(ref) => {
-          this.camera = ref;
-        }}
-        style = {styles.cameraPreview}
-        onBarCodeRead={this.readQRcode}
-        barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-        type={RNCamera.Constants.Type.back}
-        permissionDialogTitle={'Permission to use camera'}
-        permissionDialogMessage={'We need your permission to use your camera phone'}
-        >
-        <Small onPress={this.toggleGallery}
-        style={styles.galleryButton}>show gallery</Small>
-      </RNCamera> : null}
+      {this.state.cameraVisibility ?
+        <RNCamera
+          ref={(ref) => {
+            this.camera = ref;
+          }}
+          style = {styles.cameraPreview}
+          onBarCodeRead={this.readQRcode}
+          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+          type={RNCamera.Constants.Type.back}
+          permissionDialogTitle={'Permission to use camera'}
+          permissionDialogMessage={'We need your permission to use your camera phone'} >
+          <View style={styles.cameraOverlay}>
+            <P style={styles.galleryDescription}>
+              Scan the QR code or upload from your camera roll.
+            </P>
+            <TouchableOpacity onPress={this.toggleGallery} style={styles.galleryButton}>
+              <Icon size={18} color='#fff' name='lisk' />
+            </TouchableOpacity>
+          </View>
+        </RNCamera>
+      : null}
       {this.state.galleryVisibility ? <View style={styles.cameraPreview}>
         <CameraRollPicker
           selectSingleItem={true}
