@@ -19,6 +19,9 @@ export const H4 = ({ children, style, onPress }) =>
 export const P = ({ children, style, onPress }) =>
   <Text style={[theme.p, style]} onPress={onPress}>{ children }</Text>;
 
+export const B = ({ children, style, onPress }) =>
+  <Text style={[theme.B, style]} onPress={onPress}>{ children }</Text>;
+
 export const Span = ({ children, style, onPress }) =>
   <Text style={[theme.span, style]} onPress={onPress}>{ children }</Text>;
 
