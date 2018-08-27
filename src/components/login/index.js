@@ -4,7 +4,7 @@ import { View, Platform } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
-import { PrimaryButton } from '../toolBox/button';
+import { PrimaryButton, Button } from '../toolBox/button';
 import { accountLoggedIn as accountLoggedInAction } from '../../actions/accounts';
 import styles from './styles';
 import { validatePassphrase } from '../../utilities/passphrase';
@@ -27,9 +27,8 @@ class Login extends React.Component {
 
     this.state = {
       passphrase: {
-        shadowText: '',
-        value: '',
-        validity: validatePassphrase(''),
+        value: 'wagon stock borrow episode laundry kitten salute link globe zero feed marble',
+        validity: validatePassphrase('wagon stock borrow episode laundry kitten salute link globe zero feed marble'),
         buttonStyle: null,
       },
     };
@@ -141,6 +140,7 @@ class Login extends React.Component {
             Could not connect to the blockchain, try later!
           </Small>
         </View>
+        <Button onClick={() => this.props.navigation.navigate('Register')} title='Register' />
         <PrimaryButton
         style={this.state.buttonStyle}
         disabled={passphrase.validity.length !== 0}
