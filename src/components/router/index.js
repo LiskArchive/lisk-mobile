@@ -72,7 +72,8 @@ export default StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        header: null,
+        headerRight: null,
+        title: <Logo color={colors.primary9} />,
       },
     },
     Login: {
