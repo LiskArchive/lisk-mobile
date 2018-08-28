@@ -19,7 +19,7 @@ class Register extends React.Component {
         <MultiStep
           ref={(el) => { this.nav = el; }}
           showNav={true}
-          styles={styles}
+          navStyles={styles}
           hideSteps={true}
           interactive={true}
           groupButton={NavButton}
