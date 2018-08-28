@@ -2,7 +2,7 @@ import React from 'react';
 import NavigatorButton from './navigatorButton';
 import { Element } from './element';
 import {
-  backButtonFn, isActiveStep, isActiveGroup, groupSteps,
+  backButtonFn, isActiveStep, isActiveGroup, groupSteps, noGroupTitle,
 } from './utils';
 
 const MultiStepNav = ({
@@ -11,6 +11,8 @@ const MultiStepNav = ({
   prevPage, prevStep, move, normalizedStyles,
 }) => {
   const ActiveTitle = activeTitle;
+  const groupedSteps = groupSteps(steps);
+  console.log('>', groupedSteps);
   return (<Element {...normalizedStyles.multiStepNavWrapper}>
     {
       (backButton !== undefined && backButton !== null) ?
@@ -21,17 +23,17 @@ const MultiStepNav = ({
             backButtonTitle}</NavigatorButton> : null
     }
     {
-      ActiveTitle ?
+      ActiveTitle && groupedSteps.title !== noGroupTitle ?
         <ActiveTitle>{
           hideSteps ? steps[current].props.group : steps[current].props.title
         }</ActiveTitle> : null
     }
     <Element {...normalizedStyles.multiStepGroupWrapper}>
       {
-        groupSteps(steps).map((group, gIdx) =>
+        groupedSteps.map((group, gIdx) =>
           <Element {...normalizedStyles.multiStepGroup} key={`group-${group.title}-${gIdx}`}>
             {
-              !hideGroups ?
+              !hideGroups && group.title !== noGroupTitle ?
               <NavigatorButton
                 customButton={groupButton}
                 onClick={() => { if (interactive) move({ to: (group.steps[0].index) }); }}
