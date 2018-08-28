@@ -5,12 +5,12 @@ import Confirm from './confirm';
 import Success from './success';
 import SafeKeeping from './safeKeeping';
 import Intro from './intro';
-import { H4 } from '../toolBox/typography';
+import { Small } from '../toolBox/typography';
 import styles from './styles';
 
 const NavButton = props =>
   <Text {...props} style={[styles.navButton, props.disabled ? styles.disabledNavButton : null]} />;
-const ActiveTitle = props => <H4 style={styles.activeGroupTitle} {...props} />;
+const ActiveTitle = props => <Small style={styles.activeGroupTitle} {...props} />;
 
 class Register extends React.Component {
   render() {
@@ -21,7 +21,6 @@ class Register extends React.Component {
           showNav={true}
           navStyles={styles}
           hideSteps={true}
-          interactive={true}
           groupButton={NavButton}
           activeTitle={ActiveTitle}
           backButtonTitle='Back'>
