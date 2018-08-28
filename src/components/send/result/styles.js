@@ -4,6 +4,9 @@ import { boxes, colors } from '../../../constants/styleGuide';
 
 const styles = {
   container: {
+    height: '100%',
+  },
+  innerContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     flex: 1,
