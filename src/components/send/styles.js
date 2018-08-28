@@ -1,4 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
+import { colors } from '../../constants/styleGuide';
 
 const styles = {
   back: {
@@ -7,7 +8,7 @@ const styles = {
     marginTop: (Platform.OS === 'ios') ? 0 : 6,
   },
   wrapper: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white,
     flex: 1,
   },
 };
