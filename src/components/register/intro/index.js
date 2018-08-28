@@ -18,6 +18,7 @@ class Intro extends React.Component {
     this.setState({
       passphrase,
     });
+    this.props.navigation.setParams({ action: false });
   }
   confirm = (status) => {
     this.setState({
@@ -74,6 +75,7 @@ class Intro extends React.Component {
               width={36}
               onSyncPress={this.confirm}
               backgroundActive={colors.primary5}
+              backgroundInactive={colors.grayScale3}
             />
             <Small style={styles.label}>
               I understand that it is my responsibility to keep my passphrase safe.

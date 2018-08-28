@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, DeviceInfo } from 'react-native';
 import { colors } from '../../../constants/styleGuide';
 
 const liskIdIconColor = '#9cb4fa';
@@ -12,6 +12,7 @@ const styles = {
     marginLeft: 20,
     flex: 1,
     justifyContent: 'space-between',
+    paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 90 : 60,
   },
   header: {
     marginTop: 17,
