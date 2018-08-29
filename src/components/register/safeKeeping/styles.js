@@ -1,4 +1,4 @@
-import { StyleSheet, Platform, DeviceInfo } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors, fonts } from '../../../constants/styleGuide';
 
 const styles = {
@@ -8,7 +8,6 @@ const styles = {
     marginLeft: 20,
     flex: 1,
     justifyContent: 'space-between',
-    paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 90 : 60,
   },
   header: {
     marginTop: 17,
