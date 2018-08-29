@@ -21,7 +21,7 @@ const qrCodeSize = Math.min(pageHeight - 335, Math.floor(deviceWidth() * 0.8));
 @connect(state => ({
   account: state.accounts.active,
 }), {})
-class Receive extends React.Component {
+class Request extends React.Component {
   state = {
     amount: { value: '', validity: -1 },
   };
@@ -62,8 +62,8 @@ class Receive extends React.Component {
         <View style={styles.innerContainer}>
           <View style={styles.titleContainer}>
             <View style={styles.headings}>
-              <H1>Receive</H1>
-              <P style={styles.subtitle}>Receive LSK tokens from other accounts.</P>
+              <H1>Request</H1>
+              <P style={styles.subtitle}>Request LSK tokens from other accounts.</P>
             </View>
           </View>
           <View style={styles.main}>
@@ -99,4 +99,4 @@ class Receive extends React.Component {
   }
 }
 
-export default Receive;
+export default Request;
