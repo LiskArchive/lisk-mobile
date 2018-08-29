@@ -1,8 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Platform } from 'react-native';
-import QRCode from 'react-native-qrcode';
-import { NavigationActions } from 'react-navigation';
+import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Share from '../share';
 import styles from './styles';
@@ -25,6 +24,12 @@ class Request extends React.Component {
   state = {
     amount: { value: '', validity: -1 },
   };
+
+  componentDidMount() {
+    this.setState({
+      url: this.props.account.address,
+    });
+  }
 
   validator = {
     amount: str => reg.amount.test(str),
@@ -71,9 +76,8 @@ class Request extends React.Component {
             <QRCode
               value={this.state.url}
               size={qrCodeSize}
-              style={styles.qrCode}
-              bgColor='#263344'
-              fgColor={colors.white}/>
+              color='#263344'
+              backgroundColor={colors.white}/>
             <View style={styles.share}>
               <Share type={P} value={this.state.url}
                 style={styles.blue} color={colors.primary5} icon={true}>Share</Share>
