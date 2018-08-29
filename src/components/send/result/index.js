@@ -68,37 +68,39 @@ class Result extends React.Component {
 
   render() {
     return (<View style={styles.container}>
-      <View>
-        <H1>Sent</H1>
-        <P style={styles.subtitle}>
-          Thank you. Your transaction is being processed.
-          It may take up to 15 minutes to be secured in the blockchain.
-        </P>
+      <View style={styles.innerContainer}>
+        <View>
+          <H1>Sent</H1>
+          <P style={styles.subtitle}>
+            Thank you. Your transaction is being processed.
+            It may take up to 15 minutes to be secured in the blockchain.
+          </P>
+        </View>
+        <View style={styles.illustration}>
+          {this.state.step === 0 ? <LottieView
+            source={txCreatedAnim}
+            loop={false}
+            ref={(el) => { this.animation[0] = el; }}/>
+            : null}
+          {this.state.step === 1 ? <LottieView
+            source={txPendingAnim}
+            loop={true}
+            ref={(el) => { this.animation[1] = el; }}/>
+            : null}
+          {this.state.step === 2 ? <LottieView
+            source={txConfirmedAnim}
+            loop={false}
+            ref={(el) => { this.animation[2] = el; }}/>
+            : null}
+        </View>
+        <SecondaryButton
+          style={styles.button}
+          onClick={() => {
+            this.props.finalCallback();
+            this.props.reset();
+          }}
+          title='Return to home' />
       </View>
-      <View style={styles.illustration}>
-        {this.state.step === 0 ? <LottieView
-          source={txCreatedAnim}
-          loop={false}
-          ref={(el) => { this.animation[0] = el; }}/>
-          : null}
-        {this.state.step === 1 ? <LottieView
-          source={txPendingAnim}
-          loop={true}
-          ref={(el) => { this.animation[1] = el; }}/>
-          : null}
-        {this.state.step === 2 ? <LottieView
-          source={txConfirmedAnim}
-          loop={false}
-          ref={(el) => { this.animation[2] = el; }}/>
-          : null}
-      </View>
-      <SecondaryButton
-        style={styles.button}
-        onClick={() => {
-          this.props.finalCallback();
-          this.props.reset();
-        }}
-        title='Return to home' />
     </View>);
   }
 }

@@ -13,14 +13,16 @@ export const Element = ({ children, type, ...rest }) => {
   }
 };
 
-export const Button = ({ children, type, ...rest }) => {
+export const Button = ({
+  children, type, onClick, ...rest
+}) => {
   if (typeof document !== 'undefined') {
-    return <button {...rest}>{children}</button>;
+    return <button {...rest} onClick={onClick}>{children}</button>;
   }
   try {
     const ReactButton = require('react-native').Button;
     const Type = type || ReactButton;
-    return <Type {...rest} title={typeof children === 'string' ? children : 'Button'}>{children}</Type>;
+    return <Type {...rest} onPress={onClick} title={typeof children === 'string' ? children : 'Button'}>{children}</Type>;
   } catch (e) {
     return {};
   }

@@ -1,4 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
+import { colors } from '../../constants/styleGuide';
 
 const styles = {
   back: {
@@ -7,8 +8,11 @@ const styles = {
     marginTop: (Platform.OS === 'ios') ? 0 : 6,
   },
   wrapper: {
-    backgroundColor: '#ffffff',
-    flex: 1,
+    backgroundColor: colors.white,
+    height: '100%',
+  },
+  multiStepWrapper: {
+    height: '100%',
   },
 };
 

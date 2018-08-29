@@ -1,30 +1,35 @@
 import React from 'react';
+import { View, Text } from 'react-native';
 import MultiStep from '../multiStep';
 import Confirm from './confirm';
 import Success from './success';
 import SafeKeeping from './safeKeeping';
 import Intro from './intro';
+import { Small } from '../toolBox/typography';
 import styles from './styles';
 
-class Register extends React.Component {
-  componentDidMount() {
-    this.nav.move({ to: 5 });
-  }
+const NavButton = props =>
+  <Text {...props} style={[styles.navButton, props.disabled ? styles.disabledNavButton : null]} />;
+const ActiveTitle = props => <Small style={styles.activeGroupTitle} {...props} />;
 
+class Register extends React.Component {
   render() {
     return (
-      <MultiStep
-        ref={(el) => { this.nav = el; }}
-        showNav={true}
-        styles={styles}
-        hideSteps={true}
-        interactive={true}
-        backButtonTitle='Back'>
-        <Intro title='step 1' group='page 1'></Intro>
-        <SafeKeeping title='step 2' group='page 2'></SafeKeeping>
-        <Confirm title='step 3' group='page 3'></Confirm>
-        <Success title='step 4' group='page 4'></Success>
-      </MultiStep>
+      <View style={styles.container}>
+        <MultiStep
+          ref={(el) => { this.nav = el; }}
+          showNav={true}
+          navStyles={styles}
+          hideSteps={true}
+          groupButton={NavButton}
+          activeTitle={ActiveTitle}
+          backButtonTitle='Back'>
+          <Intro title='create' group='1. Creating your account'></Intro>
+          <SafeKeeping title='safekeeping' group='2. Saving your passphrase'></SafeKeeping>
+          <Confirm title='verify' group='3. Verifying your passphrase'></Confirm>
+          <Success title='success' group='3. Verifying your passphrase'></Success>
+        </MultiStep>
+      </View>
     );
   }
 }

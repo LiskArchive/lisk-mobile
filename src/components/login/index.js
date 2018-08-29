@@ -4,13 +4,15 @@ import { View, Platform } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
-import { PrimaryButton, Button } from '../toolBox/button';
+import { PrimaryButton } from '../toolBox/button';
 import { accountLoggedIn as accountLoggedInAction } from '../../actions/accounts';
 import styles from './styles';
 import { validatePassphrase } from '../../utilities/passphrase';
 import Input from '../toolBox/input';
-import { H1, Small } from '../toolBox/typography';
+import { H1, Small, P, A } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
+
+const devDefaultPass = process.env.passphrase || '';
 
 /**
  * The container component containing login and create account functionality
@@ -27,8 +29,8 @@ class Login extends React.Component {
 
     this.state = {
       passphrase: {
-        value: 'wagon stock borrow episode laundry kitten salute link globe zero feed marble',
-        validity: validatePassphrase('wagon stock borrow episode laundry kitten salute link globe zero feed marble'),
+        value: devDefaultPass,
+        validity: validatePassphrase(devDefaultPass),
         buttonStyle: null,
       },
     };
@@ -140,7 +142,10 @@ class Login extends React.Component {
             Could not connect to the blockchain, try later!
           </Small>
         </View>
-        <Button onClick={() => this.props.navigation.navigate('Register')} title='Register' />
+        <View style={styles.registerLinkWrapper}>
+          <P style={styles.registerQuestion}>{"Don't have a Lisk ID?"}</P>
+          <A style={styles.registerLink} onPress={() => this.props.navigation.navigate('Register')}>Create it now</A>
+        </View>
         <PrimaryButton
         style={this.state.buttonStyle}
         disabled={passphrase.validity.length !== 0}

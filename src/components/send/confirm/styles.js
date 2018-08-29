@@ -3,8 +3,7 @@ import { boxes, colors, fonts } from '../../../constants/styleGuide';
 
 const styles = {
   container: {
-    flex: 1,
-    backgroundColor: colors.white,
+    height: '100%',
   },
   innerContainer: {
     flex: 1,

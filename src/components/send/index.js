@@ -9,7 +9,6 @@ import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
 
 class Send extends React.Component {
-  state = { focused: 1 };
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
@@ -35,22 +34,23 @@ class Send extends React.Component {
   }
 
   didFocus() {
-    this.setState({ focused: !this.state.focused });
+    this.nav.reset();
   }
 
   render() {
     const { navigation } = this.props;
-    return (
-      <View style={styles.wrapper}>
-        <MultiStep finalCallback={() => {
+    return (<View style={styles.wrapper}>
+      <MultiStep
+        finalCallback={() => {
           navigation.navigate({ routeName: 'OwnWallet' });
-        }} reset={this.state.focused}>
-          <Form navigation={this.props.navigation}/>
-          <Confirm navigation={this.props.navigation} />
-          <Result navigation={this.props.navigation}/>
-        </MultiStep>
-      </View>
-    );
+        }}
+        navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
+        ref={(el) => { this.nav = el; }}>
+        <Form title='form' navigation={this.props.navigation}/>
+        <Confirm title='confirm' navigation={this.props.navigation} />
+        <Result title='result' navigation={this.props.navigation}/>
+      </MultiStep>
+    </View>);
   }
 }
 

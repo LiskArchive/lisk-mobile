@@ -1,20 +1,55 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, DeviceInfo } from 'react-native';
+import { colors } from '../../constants/styleGuide';
+
+const navigatorHeight = 75 + (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated ? 23 : 0);
 
 const styles = {
+  container: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: colors.grayScale4,
+    paddingBottom: navigatorHeight,
+  },
   back: {
     color: 'black',
   },
   multiStepWrapper: {
-    color: 'black',
+    height: '100%',
   },
   multiStepNavWrapper: {
-    color: 'black',
+    height: navigatorHeight,
+    width: '100%',
+    position: 'absolute',
+    bottom: -1 * navigatorHeight,
+    left: 0,
+    paddingTop: 24,
   },
   multiStepGroupWrapper: {
-    color: 'black',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   multiStepGroup: {
-    color: 'black',
+    height: '100%',
+  },
+  navButton: {
+    width: 52,
+    height: 3,
+    fontSize: 1,
+    color: 'transparent',
+    marginTop: 14,
+    marginRight: 10,
+    marginLeft: 10,
+    backgroundColor: colors.grayScale3,
+  },
+  disabledNavButton: {
+    backgroundColor: colors.black,
+  },
+  activeGroupTitle: {
+    width: '100%',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 };
 

@@ -81,6 +81,19 @@ const styles = {
     borderLeftWidth: 0,
     borderRightWidth: 0,
   },
+  registerLinkWrapper: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingBottom: 20,
+  },
+  registerQuestion: {
+    color: colors.grayScale2,
+  },
+  registerLink: {
+    color: colors.primary5,
+    fontWeight: 'bold',
+  },
 };
 
 export default StyleSheet.create(styles);

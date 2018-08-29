@@ -13,7 +13,8 @@ const NavigatorButton = ({ children, customButton, ...rest }) => {
   if (customButton === undefined) {
     return <Button {...rest}>{children}</Button>;
   }
-  return <customButton {...rest}>{children}</customButton>;
+  const CustomButton = customButton;
+  return <CustomButton onPress={rest.onClick} {...rest}>{children}</CustomButton>;
 };
 
 export default NavigatorButton;
