@@ -16,6 +16,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import org.reactnative.camera.RNCameraPackage;
+import com.remobile.qrcodeLocalImage.RCTQRCodeLocalImagePackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RCTQRCodeLocalImagePackage(),
             new LottiePackage(),
             new BackgroundTimerPackage(),
             new SvgPackage(),
@@ -40,6 +43,7 @@ public class MainApplication extends Application implements ReactApplication {
             new TcpSocketsModule(),
             new RandomBytesPackage(),
             new RNOSModule(),
+            new RNCameraPackage(),
             new LinearGradientPackage()
       );
     }

@@ -72,5 +72,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+		<!-- Include this only if you are planning to use the camera roll -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>we use your photo library to access your stored qr codes</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We will use your comera to scan QRcodes</string>
 </dict>
 </plist>
