@@ -9,7 +9,10 @@ const styles = {
   },
   wrapper: {
     backgroundColor: colors.white,
-    flex: 1,
+    height: '100%',
+  },
+  multiStepWrapper: {
+    height: '100%',
   },
 };
 

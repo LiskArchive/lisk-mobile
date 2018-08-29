@@ -8,8 +8,7 @@ const styles = {
   innerContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    flex: 1,
-    backgroundColor: colors.white,
+    height: '100%',
     paddingTop: 36,
     paddingBottom: 60,
   },

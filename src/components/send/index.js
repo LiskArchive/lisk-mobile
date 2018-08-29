@@ -39,20 +39,18 @@ class Send extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    return (
-      <View style={styles.wrapper}>
-        <MultiStep
-          finalCallback={() => {
-            navigation.navigate({ routeName: 'OwnWallet' });
-          }}
-          navStyles={{}}
-          ref={(el) => { this.nav = el; }}>
-          <Form title='form' navigation={this.props.navigation}/>
-          <Confirm title='confirm' navigation={this.props.navigation} />
-          <Result title='result' navigation={this.props.navigation}/>
-        </MultiStep>
-      </View>
-    );
+    return (<View style={styles.wrapper}>
+      <MultiStep
+        finalCallback={() => {
+          navigation.navigate({ routeName: 'OwnWallet' });
+        }}
+        navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
+        ref={(el) => { this.nav = el; }}>
+        <Form title='form' navigation={this.props.navigation}/>
+        <Confirm title='confirm' navigation={this.props.navigation} />
+        <Result title='result' navigation={this.props.navigation}/>
+      </MultiStep>
+    </View>);
   }
 }
 
