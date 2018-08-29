@@ -51,6 +51,15 @@ const styles = {
     textAlign: 'center',
     fontWeight: 'bold',
   },
+  backButton: {
+    width: 60,
+    height: 40,
+    marginTop: (Platform.OS === 'ios') ? 0 : 8,
+  },
+  logo: {
+    lineHeight: 40,
+    top: -11,
+  },
 };
 
 export default StyleSheet.create(styles);
