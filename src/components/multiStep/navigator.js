@@ -12,7 +12,6 @@ const MultiStepNav = ({
 }) => {
   const ActiveTitle = activeTitle;
   const groupedSteps = groupSteps(steps);
-  console.log('>', groupedSteps);
   return (<Element {...normalizedStyles.multiStepNavWrapper}>
     {
       (backButton !== undefined && backButton !== null) ?

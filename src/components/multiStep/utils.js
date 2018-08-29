@@ -37,7 +37,6 @@ export const backButtonFn = (current, prevPage, prevStep) => {
 export const groupSteps = (steps) => {
   const allGroupsValid = steps.reduce((prevGroupsWereValid, step) =>
     typeof step.props.group === 'string' && prevGroupsWereValid, true);
-  console.log('allGroupsValid', allGroupsValid);
 
   return steps.reduce((grouped, step, index) => {
     const g = grouped.filter(group => (group.title === step.props.group));

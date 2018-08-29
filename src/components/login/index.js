@@ -143,7 +143,7 @@ class Login extends React.Component {
           </Small>
         </View>
         <View style={styles.registerLinkWrapper}>
-          <P style={styles.registerQuestion}>Don't have a Lisk ID? </P>
+          <P style={styles.registerQuestion}>{"Don't have a Lisk ID?"}</P>
           <A style={styles.registerLink} onPress={() => this.props.navigation.navigate('Register')}>Create it now</A>
         </View>
         <PrimaryButton
