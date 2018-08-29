@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import styleGuide from '../../constants/styleGuide';
+import { colors, boxes } from '../../constants/styleGuide';
 
 const styles = {
   wrapper: {
-    backgroundColor: styleGuide.colors.white,
+    backgroundColor: colors.white,
   },
   container: {
     height: '100%',
@@ -12,17 +12,17 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     flex: 1,
-    backgroundColor: styleGuide.colors.white,
+    backgroundColor: colors.white,
     paddingTop: 36,
     paddingBottom: 60,
   },
   subtitle: {
     marginTop: 7,
-    color: styleGuide.colors.grayScale2,
+    color: colors.grayScale2,
   },
   headings: {
-    marginRight: styleGuide.boxes.boxPadding,
-    marginLeft: styleGuide.boxes.boxPadding,
+    marginRight: boxes.boxPadding,
+    marginLeft: boxes.boxPadding,
   },
   main: {
     flexDirection: 'column',
@@ -42,7 +42,7 @@ const styles = {
     height: 100,
   },
   blue: {
-    color: styleGuide.colors.primary5,
+    color: colors.primary5,
   },
 };
 
