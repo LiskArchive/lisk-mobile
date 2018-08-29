@@ -5,7 +5,7 @@ import { colors } from '../../constants/styleGuide';
 import styles from './styles';
 
 const Share = ({
-  icon, value, style, type, children, containerStyle,
+  icon, value, style, type, children, containerStyle, color,
 }) => {
   const Element = type || Text;
 
@@ -16,7 +16,7 @@ const Share = ({
         onPress={() => ShareAPI.share({
           message: value || children,
           url: '',
-        })}>{value || children}</Element>
+        })}>{children || value}</Element>
       {
         icon ? <Icon
                 style={styles.icon}
@@ -26,7 +26,7 @@ const Share = ({
                   message: value || children,
                   url: '',
                 })}
-                color={colors.grayScale1} /> : null
+                color={color || colors.grayScale1} /> : null
       }
     </View>
   );

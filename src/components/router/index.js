@@ -7,6 +7,7 @@ import Send from '../send';
 import Register from '../register';
 // import Explore from '../explore';
 import Wallet from '../wallet';
+import Request from '../request';
 import OwnWallet from '../ownWallet';
 import styles from './styles';
 import LogoutButton from '../logoutButton';
@@ -41,6 +42,14 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: <Logo />,
       tabBarLabel: 'Send',
+      tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
+    },
+  },
+  Request: {
+    screen: Request,
+    navigationOptions: {
+      title: <Logo />,
+      tabBarLabel: 'Request',
       tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
     },
   },
