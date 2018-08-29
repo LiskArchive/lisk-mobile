@@ -179,10 +179,13 @@ class Form extends React.Component {
   }
 
   decodeQR = (data) => {
-    const liskProtocolReg = /recipient=\d{1,21}L.*/;
-    if (liskProtocolReg.test(data)) {
-      const address = data.match(/\d{1,21}L/)[0];
-      const amount = data.match(/\d*$/)[0];
+    const recipientReg = /recipient=\d{1,21}L/;
+    const amountReg = /amount=(\d+)\.?(\d+)?/;
+    const liskProtocolReg = /^[l|L]isk:\/\//;
+
+    if (liskProtocolReg.test(data) && recipientReg.test(data)) {
+      const address = data.match(recipientReg)[0].replace('recipient=', '');
+      const amount = data.match(amountReg)[0].replace('amount=', '');
       this.setState({
         address: {
           value: address,
