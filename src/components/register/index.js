@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, BackHandler } from 'react-native';
+import { View, Text } from 'react-native';
 import MultiStep from '../multiStep';
 import Confirm from './confirm';
 import Success from './success';
