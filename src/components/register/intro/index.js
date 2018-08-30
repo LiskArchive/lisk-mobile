@@ -33,7 +33,7 @@ class Intro extends React.Component {
           <B style={styles.subHeader}>Here’s what you will get:</B>
           <View style={styles.row}>
             <View style={[styles.iconWrapper, styles.color1]}>
-              <Icon name='lisk' color='#fff' size={18}/>
+              <Icon name='lisk-id' color='#fff' size={16}/>
             </View>
             <View style={styles.textWrapper}>
               <B style={styles.rowTitle}>Your Lisk ID</B>
@@ -45,7 +45,7 @@ class Intro extends React.Component {
           </View>
           <View style={styles.row}>
             <View style={[styles.iconWrapper, styles.color2]}>
-              <Icon name='lisk' color='#fff' size={18}/>
+              <Icon name='avatar' color='#fff' size={18}/>
             </View>
             <View style={styles.textWrapper}>
               <B style={styles.rowTitle}>A unique avatar</B>
@@ -57,7 +57,7 @@ class Intro extends React.Component {
           </View>
           <View style={styles.row}>
             <View style={[styles.iconWrapper, styles.color3]}>
-              <Icon name='lisk' color='#fff' size={18}/>
+              <Icon name='passphrase' color='#fff' size={16}/>
             </View>
             <View style={styles.textWrapper}>
               <B style={styles.rowTitle}>A secure passphrase</B>

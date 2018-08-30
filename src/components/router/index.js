@@ -50,7 +50,7 @@ export const Tabs = TabNavigator({
     navigationOptions: {
       title: <Logo />,
       tabBarLabel: 'Request',
-      tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
+      tabBarIcon: ({ focused }) => <MenuIcon name='request' focused={focused} />, //eslint-disable-line
     },
   },
   // Explore: {
