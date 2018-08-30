@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Clipboard } from 'react-native';
-import { Icon } from 'react-native-elements';
+import Icon from '../toolBox/icon';
+import { colors } from '../../constants/styleGuide';
 import styles from './styles';
 
 class CopyToClipBoard extends React.Component {
@@ -14,25 +15,26 @@ class CopyToClipBoard extends React.Component {
   }
   render() {
     const {
-      icon, value, style, type, label,
+      showIcon, value, type, label, iconColor, iconSize,
+      style, iconStyle, labelStyle,
     } = this.props;
     const Element = type || Text;
     const text = label || value;
 
-    return (<View style={styles.container}
-    >
-    <Element
-      style={style}
-      onPress={this.copy}>
-        {this.state.copied ? 'copied to clipboard' : text }
-    </Element>
-    {(icon && !this.state.copied) ?
-      <Icon
-        style={style}
-        iconStyle={styles.icon}
-        onPress={this.copy}
-        type='font-awesome' name='copy' size={18} /> : null }
-    </View>);
+    return (<View style={[styles.container, style]}>
+      <Element
+        style={labelStyle}
+        onPress={this.copy}>
+          {this.state.copied ? 'copied to clipboard' : text }
+      </Element>
+      {(showIcon && !this.state.copied) ?
+        <Icon
+          onPress={this.copy}
+          name='copy'
+          color={iconColor || colors.white}
+          size={iconSize || 16}
+          style={[styles.icon, iconStyle]}/> : null }
+      </View>);
   }
 }
 
