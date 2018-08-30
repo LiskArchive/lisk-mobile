@@ -1,4 +1,5 @@
 import Lisk from 'lisk-elements';
+import fillWordsList from 'bip39/wordlists/english.json'; // eslint-disable-line import/no-extraneous-dependencies
 
 /**
  * Checks validity of passphrase using to mnemonic
@@ -34,4 +35,41 @@ export const validatePassphrase = (passphrase) => {
 export const generatePassphrase = () => {
   const { Mnemonic } = Lisk.passphrase;
   return Mnemonic.generateMnemonic();
+};
+
+/**
+ * it generates 2 set of array witch contains some options for filling empty spaces
+ * @param {array} passphraseWords - it contains an array of passphrase words
+ * @param {array} missingWords - indexes of missing word in passphrase
+ */
+export const assembleWordOptions = (passphraseWords, missingWords) => {
+  const getRandomWord = () => {
+    let rand;
+
+    do {
+      rand = Math.floor(Math.random() * 2048);
+    }
+    while (passphraseWords.includes(fillWordsList[rand]));
+
+    return fillWordsList[rand];
+  };
+
+  const mixWithMissingWords = (options) => {
+    options.forEach((list, listIndex) => {
+      const rand = Math.floor(Math.random() * 0.99 * list.length);
+      list[rand] = passphraseWords[missingWords[listIndex]];
+    });
+
+    return options;
+  };
+
+  const wordOptions = [];
+  for (let i = 0; i < missingWords.length; i++) {
+    wordOptions[i] = [];
+    for (let j = 0; j < 3; j++) {
+      wordOptions[i][j] = getRandomWord();
+    }
+  }
+
+  return mixWithMissingWords(wordOptions);
 };
