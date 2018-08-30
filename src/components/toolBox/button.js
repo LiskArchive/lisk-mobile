@@ -76,17 +76,32 @@ export const LabelButton = props =>
   <Button {...props} style={labelStyle(props.style, props.disabled)} />;
 
 
+/**
+ * Creates a button with and icon on the side. direction of the icon and title
+ * can be set in style property through flex properties.
+ * any other property not mentioned here will be applied to the TouchableHighlight
+ *
+ * @param {Object} props
+ * @param {Object|Number?} props.titleStyle - Will be applied to the Text element.
+ *  can be a style object or a numeric style reference
+ * @param {Object|Number?} props.style Will be applied to the clickable wrapper.
+ *  can be a style object or a numeric style reference
+ * @param {String?} props.title The title of the button
+ * @param {String} props.icon The name of the icon defined in icon fonts
+ * @param {String?} props.color The icon color. define the title color in titleStyle. default: #000
+ * @param {Number?} props.iconSize The size of the icon in pixels
+ */
 export const IconButton = (props) => {
   const {
-    titleStyle, style, title, icon, color,
+    titleStyle, style, title, icon, color, iconSize,
   } = props;
   const viewProps = Object.keys(props)
     .filter(key => !(/titleStyle|style|title|icon|color/.test(key)))
     .reduce((acc, key) => { acc[key] = props[key]; return acc; }, {});
   return (<TouchableHighlight underlayColor='transparent' {...viewProps} style={[theme.iconButton, style]}>
     <Fragment>
-      <Icon name={icon} size={30} color={color} />
-      <Text style={[theme.iconButtonTitle, titleStyle]}>{ title }</Text>
+      <Icon name={icon} size={iconSize || 30} color={color || '#000'} />
+      <Text style={[theme.iconButtonTitle, titleStyle]}>{ title || '' }</Text>
     </Fragment>
   </TouchableHighlight>);
 };

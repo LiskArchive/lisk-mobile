@@ -7,7 +7,7 @@ export default {
     passphrase: 'Dots',
   },
   size: {
-    h1: 28,
+    h1: 26,
     h2: 24,
     h3: 22,
     h4: 19,

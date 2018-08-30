@@ -25,7 +25,12 @@ class SafeKeeping extends React.Component {
     return (
       <View style={styles.container}>
         <View>
-          <H1 style={styles.header}>Passphrase, the only way{'\n'}to access your account.</H1>
+          <View style={styles.titleContainer}>
+            <H1 style={styles.header}>Your passphrase</H1>
+            <P style={styles.subtitle}>
+              The only way to access your account.
+            </P>
+          </View>
           <View style={styles.passphraseContainer}>
             <P style={styles.passphraseTitle}>This is your passphrase:</P>
             <B style={styles.passphrase}>
@@ -34,9 +39,12 @@ class SafeKeeping extends React.Component {
           </View>
           <View style={styles.copyContainer}>
             <CopyToClipboard
-              style={styles.copy}
+              style={styles.copyContainer}
+              labelStyle={styles.copy}
+              iconStyle={styles.copy}
               label='Copy to clipboard'
-              icon={true}
+              showIcon={true}
+              iconSize={14}
               value={this.props.passphrase}
               type={B}/>
           </View>

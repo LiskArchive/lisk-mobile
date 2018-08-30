@@ -6,7 +6,7 @@ import connect from 'redux-connect-decorator';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
 import CameraRollPicker from 'react-native-camera-roll-picker';
-import { SecondaryButton } from '../../toolBox/button';
+import { SecondaryButton, IconButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
 import { P, H1, H2, Small } from '../../toolBox/typography';
@@ -15,6 +15,7 @@ import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
 import FormattedNumber from '../../formattedNumber';
 import Icon from '../../toolBox/icon';
+import { colors } from '../../../constants/styleGuide';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -224,7 +225,7 @@ class Form extends React.Component {
               Scan the QR code or upload from your camera roll.
             </P>
             <TouchableOpacity onPress={this.toggleGallery} style={styles.galleryButton}>
-              <Icon size={18} color='#fff' name='lisk' />
+              <Icon size={18} color={colors.white} name='gallery' />
             </TouchableOpacity>
           </View>
         </RNCamera>
@@ -260,7 +261,14 @@ class Form extends React.Component {
           </View>
         </View>
         <View>
-          <Small onPress={this.toggleCamera} style={styles.scanButton}>Scan</Small>
+          <IconButton
+            onPress={this.toggleCamera}
+            titleStyle={styles.scanButtonTitle}
+            style={styles.scanButton}
+            title='Scan'
+            icon='scanner'
+            iconSize={16}
+            color={colors.primary5} />
           <Input
             label='Address'
             autoCorrect={false}

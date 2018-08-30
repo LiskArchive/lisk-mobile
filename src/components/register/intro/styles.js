@@ -14,7 +14,7 @@ const styles = {
     justifyContent: 'space-between',
   },
   header: {
-    marginTop: 17,
+    marginTop: 8,
   },
   subHeader: {
     marginTop: 14,

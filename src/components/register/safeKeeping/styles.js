@@ -10,7 +10,11 @@ const styles = {
     justifyContent: 'space-between',
   },
   header: {
-    marginTop: 17,
+    marginTop: 8,
+    paddingBottom: 12,
+  },
+  subTitle: {
+    color: colors.grayScale2,
   },
   subHeader: {
     marginTop: 14,
@@ -45,7 +49,7 @@ const styles = {
   },
   copyContainer: {
     alignItems: 'center',
-    marginTop: 11,
+    marginTop: 5,
   },
   copy: {
     color: colors.primary5,

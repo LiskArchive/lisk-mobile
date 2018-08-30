@@ -31,8 +31,8 @@ const styles = {
     fontFamily: fonts.family.context,
   },
   b: {
-    fontSize: fonts.base,
-    fontFamily: fonts.context,
+    fontSize: fonts.size.base,
+    fontFamily: fonts.family.context,
     fontWeight: 'bold',
   },
   span: {

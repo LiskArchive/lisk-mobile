@@ -103,14 +103,20 @@ const styles = {
   scanButton: {
     position: 'absolute',
     right: 10,
-    fontSize: 14,
     zIndex: 99,
     top: 33,
-    lineHeight: 30,
-    paddingRight: 10,
+    paddingRight: 15,
     paddingLeft: 10,
     paddingBottom: 10,
+    width: 80,
+    height: 30,
+  },
+  scanButtonTitle: {
+    fontSize: 14,
     color: colors.primary5,
+    width: 39,
+    lineHeight: 30,
+    paddingLeft: 5,
   },
   galleryButton: {
     borderRadius: 4,
