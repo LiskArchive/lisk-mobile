@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import List from './list';
-import { H3, Small } from '../toolBox/typography';
+import { H3, Small, A } from '../toolBox/typography';
 import styles from './styles';
 import { fromRawLsk } from '../../utilities/conversions';
 import Icon from '../toolBox/icon';
@@ -25,18 +25,14 @@ class Transactions extends React.Component {
           <Fragment>
             <H3 style={styles.title}>Activity</H3>
             {!account.initialized && balance > 0.1 ?
-              <View style={
-                {
-                  flexDirection: 'row',
-                }
-              }>
+              <View style={styles.initContainer}>
                 <Icon name='warning' color={colors.action1} size={18} />
                 <Small style={styles.initText}>Your Lisk ID is not initialized.
-                  <Small
+                  <A
                     style={styles.link}
                     onPress={() => {
                       navigate('Send', { initialize: true });
-                    }}>Initialize it now</Small>
+                    }}> Initialize it now</A>
                 </Small>
               </View> : null
             }
