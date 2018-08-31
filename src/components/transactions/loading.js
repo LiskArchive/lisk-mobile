@@ -7,9 +7,9 @@ import styles from './styles';
 
 const LoadingState = () =>
   <View style={styles.emptyState}>
-    <SvgUri
-      style={styles.noActivity}
-      source={noActivity} />
+    <View style={styles.noActivity}>
+      <SvgUri source={noActivity} />
+    </View>
     <P style={styles.noTxTitle}>Loading account info...</P>
   </View>;
 
