@@ -16,6 +16,7 @@ import Input from '../../toolBox/input';
 import FormattedNumber from '../../formattedNumber';
 import Icon from '../../toolBox/icon';
 import { colors } from '../../../constants/styleGuide';
+import Avatar from '../../avatar';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -207,6 +208,7 @@ class Form extends React.Component {
 
   render() {
     const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
+    const isValidAddress = this.state.address.validity === 0;
     return (
       <Fragment>
       {this.state.cameraVisibility ?
@@ -260,7 +262,7 @@ class Form extends React.Component {
             </View>
           </View>
         </View>
-        <View>
+        <View style={styles.address}>
           <IconButton
             onPress={this.toggleCamera}
             titleStyle={styles.scanButtonTitle}
@@ -269,11 +271,18 @@ class Form extends React.Component {
             icon='scanner'
             iconSize={16}
             color={colors.primary5} />
+          {
+            isValidAddress ?
+              <Avatar style={styles.avatar} address={this.state.address.value} size={36} /> : null
+          }
           <Input
             label='Address'
             autoCorrect={false}
             reference={(input) => { this.references[0] = input; }}
-            styles={{ errorMessage: styles.errorMessage, input: styles.input }}
+            styles={{
+              errorMessage: styles.errorMessage,
+              input: [styles.input, (isValidAddress ? styles.indented : null)],
+            }}
             onChange={value => this.changeHandler('address', value)}
             value={this.state.address.value}
             error={

@@ -127,8 +127,21 @@ const styles = {
     justifyContent: 'center',
   },
   galleryDescription: {
-    color: '#fff',
+    color: colors.white,
     maxWidth: 230,
+  },
+  address: {
+    width: '100%',
+    height: 68,
+  },
+  avatar: {
+    position: 'absolute',
+    zIndex: 0,
+    left: 20,
+    top: 30,
+  },
+  indented: {
+    marginLeft: 40,
   },
 };
 
