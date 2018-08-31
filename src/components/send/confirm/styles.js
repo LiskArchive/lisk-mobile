@@ -70,6 +70,9 @@ const styles = {
     paddingBottom: 0,
     marginRight: 20,
   },
+  link: {
+    color: colors.primary5,
+  },
 };
 
 export default StyleSheet.create(styles);

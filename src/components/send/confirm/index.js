@@ -1,12 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Linking } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import styles from './styles';
 import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
-import { H1, B, P } from '../../toolBox/typography';
+import { H1, B, P, A } from '../../toolBox/typography';
 
 const messages = {
   initialize: {
@@ -36,9 +36,8 @@ class Form extends React.Component {
     this.setState({
       disableButton: true,
     });
-    const {
-      amount, address, accounts, nextStep, transactionAdded, reference,
-    } = this.props;
+    const { accounts, nextStep, transactionAdded } = this.props;
+    const { amount, address, reference } = this.state;
     const activeAccount = accounts.active;
     transactionAdded({
       recipientId: address,
@@ -54,10 +53,14 @@ class Form extends React.Component {
     return this.props.prevStep({ address, amount, reference });
   }
 
+  openAcademy = () => {
+    Linking.openURL('https://help.lisk.io/account-security/should-i-initialize-my-lisk-account').catch(err => console.error('An error occurred', err));
+  }
+
   accountInitialization() {
     this.setState({
       address: this.props.accounts.active.address,
-      amount: 0,
+      amount: 0.1,
       reference: messages.initialize.reference,
     });
   }
@@ -85,7 +88,13 @@ class Form extends React.Component {
       <View style={styles.innerContainer}>
         <View style={styles.titleContainer}>
           <H1>{ messages[actionType].title }</H1>
-          <P style={styles.subtitle}>{ messages[actionType].subtitle }</P>
+          <P style={styles.subtitle}>
+            { messages[actionType].subtitle }
+            {
+              actionType === 'initialize' ?
+              <A style={styles.link} onPress={this.openAcademy}> Read more</A> : ''
+            }
+          </P>
         </View>
         <View>
           <View style={styles.row}>
