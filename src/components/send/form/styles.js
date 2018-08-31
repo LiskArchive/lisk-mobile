@@ -1,21 +1,20 @@
-import { StyleSheet, DeviceInfo, Dimensions } from 'react-native';
+import { StyleSheet, DeviceInfo, Dimensions, Platform } from 'react-native';
 import { colors, boxes } from '../../../constants/styleGuide';
 
 
 const { height, width } = Dimensions.get('window');
 const styles = {
   container: {
-    height: '100%',
+    minHeight: '100%',
   },
   innerContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: '100%',
     paddingTop: 36,
-    paddingBottom: 60,
+    paddingBottom: 24,
   },
   button: {
-    top: 20,
     marginRight: boxes.boxPadding,
     marginLeft: boxes.boxPadding,
   },
@@ -104,7 +103,7 @@ const styles = {
     position: 'absolute',
     right: 10,
     zIndex: 99,
-    top: 33,
+    top: 47,
     paddingRight: 15,
     paddingLeft: 10,
     paddingBottom: 10,
@@ -130,18 +129,42 @@ const styles = {
     color: colors.white,
     maxWidth: 230,
   },
-  address: {
+  addressContainer: {
     width: '100%',
-    height: 68,
+  },
+  addressInput: {
+    ...Platform.select({
+      android: {
+        height: 58,
+        lineHeight: 28,
+        paddingTop: 15,
+        paddingBottom: 15,
+      },
+      ios: {
+        height: 48,
+        lineHeight: 48,
+      },
+    }),
+  },
+  addressInputContainer: {
+    ...Platform.select({
+      android: {
+        minHeight: 58,
+      },
+      ios: {
+        minHeight: 48,
+      },
+    }),
   },
   avatar: {
     position: 'absolute',
     zIndex: 0,
     left: 20,
-    top: 30,
+    top: 41,
+    opacity: 0,
   },
-  indented: {
-    marginLeft: 40,
+  visible: {
+    opacity: 1,
   },
 };
 
