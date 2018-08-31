@@ -34,7 +34,7 @@ const chooseRandomWords = (qty, words) => {
     missing.push(randomIndex(missing, words));
   }
 
-  return missing.sort((a, b) => a > b);
+  return missing;
 };
 
 class Confirm extends React.Component {
@@ -65,7 +65,7 @@ class Confirm extends React.Component {
     const passphrase = this.props.passphrase.split(' ');
     const words = this.props.passphrase.match(/\w+/g);
 
-    const missing = chooseRandomWords(2, words).sort((a, b) => a - b);
+    const missing = chooseRandomWords(2, words);
     this.setState({
       missing,
       options: assembleWordOptions(passphrase, missing),
@@ -144,7 +144,6 @@ class Confirm extends React.Component {
   generatePlaceholder(index, optionIndex) {
     const style = this.state.visibleOptions === optionIndex ?
       styles.placeholder : styles.deActivePlaceholder;
-    // const selectedStyle = this.state.answers[optionIndex] ? styles.selectedPlaceholder : {};
     return <Button
       key={index}
       title={this.state.answers[optionIndex].value}
