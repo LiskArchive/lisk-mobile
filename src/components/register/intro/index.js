@@ -18,7 +18,7 @@ class Intro extends React.Component {
     this.setState({
       passphrase,
     });
-    this.props.navigation.setParams({ action: false });
+    this.props.navigation.setParams({ action: this.props.navigation.pop });
   }
   confirm = (status) => {
     this.setState({

@@ -60,4 +60,3 @@ const styles = {
 };
 
 export default StyleSheet.create(styles);
-// box-shadow: 0 0 20px 0 ;
