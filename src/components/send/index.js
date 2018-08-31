@@ -24,10 +24,11 @@ class Send extends React.Component {
     };
   };
   componentDidMount() {
+    const { navigation } = this.props;
     this.subs = [
-      this.props.navigation.addListener('didFocus', () => this.didFocus()),
+      navigation.addListener('didFocus', () => this.didFocus()),
     ];
-    this.props.navigation.setParams({ showButtonLeft: false });
+    navigation.setParams({ showButtonLeft: false });
   }
 
   componentWillUnmount() {
@@ -35,7 +36,9 @@ class Send extends React.Component {
   }
 
   didFocus() {
-    this.nav.reset();
+    const { navigation } = this.props;
+    if (navigation.getParam('initialize', false)) this.nav.move({ to: 1 });
+    else this.nav.reset();
   }
 
   render() {
