@@ -16,6 +16,7 @@ import Input from '../../toolBox/input';
 import FormattedNumber from '../../formattedNumber';
 import Icon from '../../toolBox/icon';
 import { colors } from '../../../constants/styleGuide';
+import Avatar from '../../avatar';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -49,13 +50,14 @@ class Form extends React.Component {
    */
   changeHandler = (name, value) => {
     let validity = -1;
-    if (value !== '') {
-      validity = this.validator[name](value) ? 0 : 1;
+    const trimmedValue = value.trim();
+    if (trimmedValue !== '') {
+      validity = this.validator[name](trimmedValue) ? 0 : 1;
     }
 
     this.setState({
       [name]: {
-        value: name === 'amount' ? value.replace(',', '.') : value,
+        value: name === 'amount' ? trimmedValue.replace(',', '.') : trimmedValue,
         validity,
       },
     });
@@ -207,6 +209,7 @@ class Form extends React.Component {
 
   render() {
     const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
+    const { address, amount } = this.state;
     return (
       <Fragment>
       {this.state.cameraVisibility ?
@@ -239,80 +242,93 @@ class Form extends React.Component {
       <KeyboardAwareScrollView
         enableOnAndroid={true}
         enableResetScrollToCoords={false}
-        contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}
+        contentContainerStyle={Platform.OS === 'ios' ? styles.container : styles.container}
         onKeyboardDidShow={() => this.changeButtonOpacity(0)}
         onKeyboardDidHide={() => this.changeButtonOpacity(1)}>
-      <View style={styles.innerContainer}>
-        <View style={styles.titleContainer}>
-          <View style={styles.headings}>
-            <H1>Send</H1>
-            <P style={styles.subtitle}>Send LSK tokens to other accounts.</P>
-          </View>
-          <View style={styles.balanceWrapper}>
-            <Small style={styles.subtitle}>YOUR CURRENT BALANCE</Small>
-            <View style={styles.balanceValue}>
-              <H2 style={styles.number}>
-                <FormattedNumber>
-                  {fromRawLsk(this.props.account ? this.props.account.balance : 0)}
-                </FormattedNumber>
-              </H2>
-              <H2 style={styles.unit}>Ⱡ</H2>
+        <View style={styles.innerContainer}>
+          <View style={styles.titleContainer}>
+            <View style={styles.headings}>
+              <H1>Send</H1>
+              <P style={styles.subtitle}>Send LSK tokens to other accounts.</P>
+            </View>
+            <View style={styles.balanceWrapper}>
+              <Small style={styles.subtitle}>YOUR CURRENT BALANCE</Small>
+              <View style={styles.balanceValue}>
+                <H2 style={styles.number}>
+                  <FormattedNumber>
+                    {fromRawLsk(this.props.account ? this.props.account.balance : 0)}
+                  </FormattedNumber>
+                </H2>
+                <H2 style={styles.unit}>Ⱡ</H2>
+              </View>
             </View>
           </View>
-        </View>
-        <View>
-          <IconButton
-            onPress={this.toggleCamera}
-            titleStyle={styles.scanButtonTitle}
-            style={styles.scanButton}
-            title='Scan'
-            icon='scanner'
-            iconSize={16}
-            color={colors.primary5} />
-          <Input
-            label='Address'
-            autoCorrect={false}
-            reference={(input) => { this.references[0] = input; }}
-            styles={{ errorMessage: styles.errorMessage, input: styles.input }}
-            onChange={value => this.changeHandler('address', value)}
-            value={this.state.address.value}
-            error={
-              this.state.address.validity === 1 ?
-                'Invalid address' : ''
-            }
-            onFocus={() => { this.activeInputRef = 0; }}
-          />
-          <Input
-            label='Amount (Ⱡ)'
-            autoCorrect={false}
-            reference={(input) => { this.references[1] = input; }}
-            styles={{ input: styles.input }}
-            onChange={value => this.changeHandler('amount', value)}
-            value={this.state.amount.value}
-            keyboardType='numeric'
-            error={
-              this.state.amount.validity === 1 ?
-                'Invalid amount value' : ''
-            }
-            onFocus={() => { this.activeInputRef = 1; }}
-          />
-          <Input
-            label='Reference (Optional)'
-            autoCorrect={false}
-            reference={(input) => { this.references[2] = input; }}
-            styles={{ errorMessage: styles.errorMessage, input: styles.input }}
-            multiline={true}
-            onChange={value => this.changeHandler('reference', value)}
-            value={this.state.reference.value}
-            error={
-              this.state.reference.validity === 1 ?
-                'Maximum length of 64 characters is exceeded.' : ''
-            }
-            onFocus={() => { this.activeInputRef = 2; }}
-          />
+          <View style={styles.form}>
+            <View style={styles.addressContainer}>
+              <IconButton
+                onPress={this.toggleCamera}
+                titleStyle={styles.scanButtonTitle}
+                style={styles.scanButton}
+                title='Scan'
+                icon='scanner'
+                iconSize={16}
+                color={colors.primary5} />
+              <Avatar
+                style={[styles.avatar, address.validity === 0 ? styles.visible : null]}
+                address={address.value.trim()}
+                size={34} />
+              <Input
+                label='Address'
+                autoCorrect={false}
+                reference={(input) => { this.references[0] = input; }}
+                styles={{
+                  errorMessage: styles.errorMessage,
+                  input: [
+                    styles.input,
+                    styles.addressInput,
+                  ],
+                  containerStyle: styles.addressInputContainer,
+                }}
+                onChange={value => this.changeHandler('address', value)}
+                value={`${address.validity === 0 ? '              ' : ''}${address.value}`}
+                error={
+                  address.validity === 1 ?
+                    'Invalid address' : ''
+                }
+                onFocus={() => { this.activeInputRef = 0; }}
+              />
+            </View>
+            <Input
+              label='Amount (Ⱡ)'
+              autoCorrect={false}
+              reference={(input) => { this.references[1] = input; }}
+              styles={{ input: styles.input }}
+              onChange={value => this.changeHandler('amount', value)}
+              value={amount.value}
+              keyboardType='numeric'
+              error={
+                amount.validity === 1 ?
+                  'Invalid amount value' : ''
+              }
+              onFocus={() => { this.activeInputRef = 1; }}
+            />
+            <Input
+              label='Reference (Optional)'
+              autoCorrect={false}
+              reference={(input) => { this.references[2] = input; }}
+              styles={{ errorMessage: styles.errorMessage, input: styles.input }}
+              multiline={true}
+              onChange={value => this.changeHandler('reference', value)}
+              value={this.state.reference.value}
+              error={
+                this.state.reference.validity === 1 ?
+                  'Maximum length of 64 characters is exceeded.' : ''
+              }
+              onFocus={() => { this.activeInputRef = 2; }}
+            />
           </View>
           <SecondaryButton
-            disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
+            disabled={address.validity !== 0 || amount.validity !== 0}
             onClick={this.goToNextState}
             style={[styles.button, { opacity: this.state.opacity }]}
             title='Continue' />
@@ -322,7 +338,7 @@ class Form extends React.Component {
          style={styles[keyboardButtonStyle]}>
           <SecondaryButton
             style={styles.stickyButton}
-            disabled={this.state.address.validity !== 0 || this.state.amount.validity !== 0}
+            disabled={address.validity !== 0 || amount.validity !== 0}
             onClick={this.goToNextState}
             title='Continue' />
         </KeyboardAccessoryView>
