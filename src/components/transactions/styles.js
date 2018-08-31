@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constants/styleGuide';
+import { colors, fonts } from '../../constants/styleGuide';
 
 const styles = {
   container: {
@@ -70,12 +70,17 @@ const styles = {
     width: 18,
     height: 18,
   },
+  initContainer: {
+    flexDirection: 'row',
+    paddingBottom: 22,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.grayScale5,
+  },
   initText: {
     marginLeft: 7,
-    marginBottom: 22,
   },
   link: {
-    marginLeft: 5,
+    fontSize: fonts.size.small,
     color: colors.primary6,
   },
 };
