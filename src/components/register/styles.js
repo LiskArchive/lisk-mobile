@@ -41,7 +41,7 @@ const styles = {
     marginTop: 14,
     marginRight: 10,
     marginLeft: 10,
-    backgroundColor: colors.grayScale3,
+    backgroundColor: colors.grayScale5,
   },
   disabledNavButton: {
     backgroundColor: colors.black,
