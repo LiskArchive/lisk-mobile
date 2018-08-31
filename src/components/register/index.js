@@ -15,6 +15,9 @@ const NavButton = props =>
 const ActiveTitle = props => <Small style={styles.activeGroupTitle} {...props} />;
 
 class Register extends React.Component {
+  state = {
+    showNav: true,
+  };
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
@@ -30,22 +33,22 @@ class Register extends React.Component {
         }}
         style={styles.backButton}
         color={colors.primary9}/> :
-        <IconButton
-          icon='back'
-          title=''
-          onPress={() => navigation.pop()}
-          style={styles.backButton}
-          iconButtonTitle={styles.backTitle}
-          color={colors.primary9} />,
+        null,
     };
   };
+  hideNav = () => {
+    this.setState({
+      showNav: false,
+    });
+  }
   render() {
     const { navigation } = this.props;
+    const noNavStyle = this.state.showNav ? {} : { paddingBottom: 0 };
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, noNavStyle]}>
         <MultiStep
           ref={(el) => { this.nav = el; }}
-          showNav={true}
+          showNav={this.state.showNav}
           navStyles={styles}
           hideSteps={true}
           groupButton={NavButton}
@@ -54,7 +57,9 @@ class Register extends React.Component {
           <Intro title='create' group='1. Creating your account' navigation={navigation}></Intro>
           <SafeKeeping title='safekeeping' group='2. Saving your passphrase' navigation={navigation}></SafeKeeping>
           <Confirm title='verify' group='3. Verifying your passphrase' navigation={navigation}></Confirm>
-          <Success title='success' group='3. Verifying your passphrase' navigation={navigation}></Success>
+          <Success title='success' group='3. Verifying your passphrase'
+            hideNav={this.hideNav}
+            navigation={navigation}></Success>
         </MultiStep>
       </View>
     );
