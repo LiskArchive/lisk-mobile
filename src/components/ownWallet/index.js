@@ -90,7 +90,7 @@ class Wallet extends React.Component {
           })}>
           <Transactions transactions={transactions}
             navigate={this.props.navigation.navigate}
-            account={this.activeAccount.address} />
+            account={this.activeAccount} />
         </InfiniteScrollView> : null
       }
     </View>);
