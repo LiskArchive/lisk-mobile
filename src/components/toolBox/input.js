@@ -20,8 +20,8 @@ const Input = ({
   return (<View>
     <FormLabel labelStyle={[theme.inputLabel, styles.inputLabel]}>{label}</FormLabel>
     <FormInput
-      containerStyle={[theme.input, inputErrorStyle]}
-      inputStyle={[theme.inputText, styles.input]}
+      containerStyle={[theme.inputContainer, inputErrorStyle, styles.containerStyle]}
+      inputStyle={[theme.input, styles.input]}
       autoCapitalize = 'none'
       multiline = {multiline}
       ref={input => reference(input)}

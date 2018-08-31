@@ -95,7 +95,7 @@ const styles = {
     fontSize: fonts.size.input,
     fontWeight: '400',
   },
-  inputText: {
+  input: {
     fontWeight: 'bold',
     color: colors.black,
     fontSize: fonts.size.input,
@@ -103,8 +103,9 @@ const styles = {
     lineHeight: 30,
     minHeight: 30,
   },
-  input: {
-    borderBottomColor: colors.grayScale1,
+  inputContainer: {
+    // borderBottomColor: colors.grayScale1,
+    borderBottomColor: 'green',
     paddingBottom: 5,
   },
   errorMessageContainer: {
