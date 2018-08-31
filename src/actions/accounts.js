@@ -109,6 +109,7 @@ export const accountLoggedIn = ({ passphrase }, cb) =>
     dispatch(loadingStarted(actionTypes.accountLoggedIn));
     getAccount(activePeer, extractAddress(passphrase))
       .then((account) => {
+        account.initialized = (account.publicKey);
         dispatch({
           type: actionTypes.accountLoggedIn,
           data: { ...account, passphrase },
