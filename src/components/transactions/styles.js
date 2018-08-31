@@ -70,6 +70,14 @@ const styles = {
     width: 18,
     height: 18,
   },
+  initText: {
+    marginLeft: 7,
+    marginBottom: 22,
+  },
+  link: {
+    marginLeft: 5,
+    color: colors.primary6,
+  },
 };
 
 export default StyleSheet.create(styles);
