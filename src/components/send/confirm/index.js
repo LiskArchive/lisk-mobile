@@ -8,6 +8,20 @@ import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import { H1, B, P } from '../../toolBox/typography';
 
+const messages = {
+  initialize: {
+    title: 'Initialize your account',
+    subtitle: 'By initializing your account, you are taking an additional step towards securing your account.',
+    button: 'Initialize now',
+    reference: 'Account initialization',
+  },
+  send: {
+    title: 'Ready to Send',
+    subtitle: "You are about to send LSK tokens{'\n'}to another address.",
+    button: 'Send now',
+  },
+};
+
 @connect(state => ({
   accounts: state.accounts,
 }), {
@@ -40,26 +54,44 @@ class Form extends React.Component {
     return this.props.prevStep({ address, amount, reference });
   }
 
+  accountInitialization() {
+    this.setState({
+      address: this.props.accounts.active.address,
+      amount: 0,
+      reference: messages.initialize.reference,
+    });
+  }
+
   componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: true, action: this.goBack });
+    const {
+      navigation, accounts, address, reference,
+    } = this.props;
+
+    // Undefined address means we escaped the form step to initialize the account
+    if (!address && !accounts.active.initialized) {
+      this.accountInitialization();
+    } else {
+      this.setState({ accounts, address, reference });
+      navigation.setParams({ showButtonLeft: true, action: this.goBack });
+    }
   }
 
 
   render() {
-    const { address, amount, reference } = this.props;
+    const { address, amount, reference } = this.state;
+    const actionType = (amount === 0 && reference === 'Account initialization') ? 'initialize' : 'send';
+
     return (<View style={styles.container}>
       <View style={styles.innerContainer}>
         <View style={styles.titleContainer}>
-          <H1>Ready to Send</H1>
-          <P style={styles.subtitle}>
-            You are about to send LSK tokens{'\n'}to another address.
-          </P>
+          <H1>{ messages[actionType].title }</H1>
+          <P style={styles.subtitle}>{ messages[actionType].subtitle }</P>
         </View>
         <View>
           <View style={styles.row}>
             <P style={styles.label}>Address</P>
             <View style={styles.addressContainer}>
-              <Avatar address={address} style={styles.avatar} size={35}/>
+              <Avatar address={address || ''} style={styles.avatar} size={35}/>
               <B labelStyle={[styles.address, styles.black]}>{address}</B>
             </View>
           </View>
@@ -76,7 +108,7 @@ class Form extends React.Component {
           disabled={this.state.disableButton}
           style={styles.button}
           onClick={this.send}
-          title='Send now' />
+          title={ messages[actionType].button } />
       </View>
     </View>);
   }
