@@ -82,7 +82,9 @@ class Form extends React.Component {
 
   render() {
     const { address, amount, reference } = this.state;
-    const actionType = (amount === 0 && reference === 'Account initialization') ? 'initialize' : 'send';
+    const { active } = this.props.accounts;
+    const actionType = (!active.initialized && address === active.address &&
+      reference === 'Account initialization') ? 'initialize' : 'send';
 
     return (<View style={styles.container}>
       <View style={styles.innerContainer}>
