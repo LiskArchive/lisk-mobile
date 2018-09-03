@@ -1,8 +1,12 @@
 import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import List from './list';
-import { H3 } from '../toolBox/typography';
+import { H3, Small, A } from '../toolBox/typography';
 import styles from './styles';
+import { fromRawLsk } from '../../utilities/conversions';
+import Icon from '../toolBox/icon';
+import colors from '../../constants/styleGuide/colors';
+
 
 /**
  * The container component containing login and create account functionality
@@ -12,7 +16,7 @@ import styles from './styles';
 class Transactions extends React.Component {
   render() {
     const { transactions, navigate, account } = this.props;
-
+    const balance = parseFloat(fromRawLsk(account.balance));
     return (<View style={styles.container}>
       {
         (!transactions ||
@@ -20,9 +24,21 @@ class Transactions extends React.Component {
           <Fragment></Fragment> :
           <Fragment>
             <H3 style={styles.title}>Activity</H3>
+            {!account.initialized && balance >= 0.1 ?
+              <View style={styles.initContainer}>
+                <Icon name='warning' color={colors.action1} size={18} />
+                <Small style={styles.initText}>Your Lisk ID is not initialized.
+                  <A
+                    style={styles.link}
+                    onPress={() => {
+                      navigate('Send', { initialize: true });
+                    }}> Initialize it now</A>
+                </Small>
+              </View> : null
+            }
             <List
               navigate={navigate}
-              account={account}
+              account={account.address}
               pending={transactions.pending}
               transactions={transactions.confirmed} />
           </Fragment>
