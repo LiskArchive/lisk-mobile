@@ -29,12 +29,6 @@ class Scanner extends React.Component {
     });
   }
 
-  requestPermissions = () => {
-    Permissions.checkMultiple(['camera', 'photo']).then((response) => {
-      this.setPermissions(response);
-    });
-  }
-
   setPermissions = (permissions) => {
     const { camera, photo } = this.state;
     camera.permitted = permissions.camera === 'authorized';
@@ -43,36 +37,28 @@ class Scanner extends React.Component {
   }
 
   toggleCamera = () => {
-    if (!this.state.camera.permitted) {
-      this.requestPermissions();
-    } else {
-      this.props.navigation.setParams({
-        tabBar: !this.state.cameraVisibility,
-        showButtonLeft: !this.state.cameraVisibility,
-        action: this.toggleCamera,
-        onBackPress: this.toggleCamera,
-      });
-      this.setState({
-        cameraVisibility: !this.state.cameraVisibility,
-      });
-    }
+    this.props.navigation.setParams({
+      tabBar: !this.state.cameraVisibility,
+      showButtonLeft: !this.state.cameraVisibility,
+      action: this.toggleCamera,
+      onBackPress: this.toggleCamera,
+    });
+    this.setState({
+      cameraVisibility: !this.state.cameraVisibility,
+    });
   };
 
   toggleGallery = () => {
-    if (!this.state.photo.permitted) {
-      this.requestPermissions();
-    } else {
-      this.props.navigation.setParams({
-        tabBar: true,
-        showButtonLeft: true,
-        action: !this.state.galleryVisibility ? this.toggleGallery : this.toggleCamera,
-        onBackPress: this.toggleGallery,
-      });
-      this.setState({
-        cameraVisibility: !this.state.cameraVisibility,
-        galleryVisibility: !this.state.galleryVisibility,
-      });
-    }
+    this.props.navigation.setParams({
+      tabBar: true,
+      showButtonLeft: true,
+      action: !this.state.galleryVisibility ? this.toggleGallery : this.toggleCamera,
+      onBackPress: this.toggleGallery,
+    });
+    this.setState({
+      cameraVisibility: !this.state.cameraVisibility,
+      galleryVisibility: !this.state.galleryVisibility,
+    });
   }
 
   readFromPhotoGallery = (items) => {
