@@ -111,7 +111,7 @@ export const accountLoggedIn = ({ passphrase }, cb) =>
       .then((account) => {
         dispatch({
           type: actionTypes.accountLoggedIn,
-          data: { ...account, passphrase, initialized: !!account.publicKey },
+          data: { ...account, passphrase },
         });
         dispatch(loadingFinished(actionTypes.accountLoggedIn));
       }).catch((err) => {
