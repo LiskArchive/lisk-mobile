@@ -11,7 +11,7 @@ import { stringShortener } from '../../utilities/helpers';
 import loadingAnimation from '../../assets/animations/loading-dots.json';
 import transactions from '../../constants/transactions';
 
-const txTypes = ['send', 'setSecondPassphrase', 'registerDelegate', 'vote'];
+const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 class Item extends React.Component {
   showDetail(tx) {
@@ -37,7 +37,6 @@ class Item extends React.Component {
       address = tx.recipientId;
       addressShortened = stringShortener(tx.recipientId, 10, 3);
     }
-
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
 
     return (<TouchableOpacity
@@ -48,7 +47,8 @@ class Item extends React.Component {
       </View>
       <View style={styles.column}>
         <B style={styles.address}>
-          {tx.type === 0 ? addressShortened : transactions[txTypes[tx.type]].title}
+          {(tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
+            addressShortened : transactions[txTypes[tx.type]].title}
         </B>
         {
           typeof this.props.tx.timestamp !== 'number' ?
@@ -58,7 +58,7 @@ class Item extends React.Component {
       </View>
       <View style={[styles.column, styles.amountWrapper]}>
       {
-        tx.type === 0 ?
+        (tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
           <B style={[styles.amount, styles[direction]]}>
             <FormattedNumber>{amount}</FormattedNumber> Ⱡ
           </B> : null
