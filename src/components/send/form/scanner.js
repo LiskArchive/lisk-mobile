@@ -65,9 +65,10 @@ class Scanner extends React.Component {
   }
 
   readFromPhotoGallery = (items) => {
-    const { photo } = this.state;
+    const { photo, camera } = this.state;
     photo.visible = false;
-    this.setState({ photo });
+    camera.visible = false;
+    this.setState({ photo, camera });
 
     this.props.navigation.setParams({
       tabBar: photo.visible,
