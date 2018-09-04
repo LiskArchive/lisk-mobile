@@ -8,7 +8,7 @@ import styles from './styles';
 const EmptyState = () =>
   <View style={styles.emptyState}>
     <View style={styles.noActivity}>
-      <SvgUri source={noActivity} />
+      <SvgUri width={110} source={noActivity} />
     </View>
     <P style={styles.noTxTitle}>You do not have any recent activity.</P>
   </View>;

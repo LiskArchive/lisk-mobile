@@ -56,11 +56,11 @@ const styles = {
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 50,
   },
   noActivity: {
-    width: 237,
-    height: 220,
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 10,
   },
   noTxTitle: {
     paddingTop: 10,
