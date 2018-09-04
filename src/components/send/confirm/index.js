@@ -77,7 +77,7 @@ class Form extends React.Component {
       this.accountInitialization();
     } else {
       this.setState({
-        accounts, address, amount, reference,
+        accounts, address, reference, amount,
       });
       navigation.setParams({ showButtonLeft: true, action: this.goBack });
     }
