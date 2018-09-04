@@ -1,5 +1,6 @@
 import { StyleSheet, DeviceInfo, Dimensions, Platform } from 'react-native';
 import { colors, boxes } from '../../../constants/styleGuide';
+import { viewportHeight, headerHeight } from '../../../utilities/device';
 
 
 const { height, width } = Dimensions.get('window');
@@ -90,9 +91,7 @@ const styles = {
   cameraOverlay: {
     backgroundColor: '#394451',
     opacity: 0.85,
-    // width: 200,
     paddingLeft: 20,
-
     paddingRight: 20,
     paddingTop: 24,
     paddingBottom: 24,
@@ -121,9 +120,14 @@ const styles = {
     borderRadius: 4,
     height: 48,
     width: 48,
-    backgroundColor: colors.primary5,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  galleryEnabled: {
+    backgroundColor: colors.primary5,
+  },
+  galleryDisabled: {
+    backgroundColor: colors.grayScale2,
   },
   galleryDescription: {
     color: colors.white,
@@ -165,6 +169,29 @@ const styles = {
   },
   visible: {
     opacity: 1,
+  },
+  permissionRequestWrapper: {
+    position: 'absolute',
+    height: viewportHeight() + headerHeight(),
+    width: '100%',
+    top: 0,
+    left: 0,
+    backgroundColor: colors.grayScale4,
+    zIndex: 2,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  permissionIcon: {
+    width: 80,
+    height: 80,
+    marginBottom: 20,
+  },
+  permissionDescription: {
+    marginTop: 10,
+    maxWidth: '80%',
+    textAlign: 'center',
+    color: colors.grayScale2,
   },
 };
 

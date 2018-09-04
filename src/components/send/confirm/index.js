@@ -49,12 +49,14 @@ class Form extends React.Component {
   }
 
   goBack = () => {
-    const { address, amount, reference } = this.props;
+    const { address, amount, reference } = this.state;
     return this.props.prevStep({ address, amount, reference });
   }
 
   openAcademy = () => {
-    Linking.openURL('https://help.lisk.io/account-security/should-i-initialize-my-lisk-account').catch(err => console.error('An error occurred', err));
+    Linking.openURL('https://help.lisk.io/account-security/should-i-initialize-my-lisk-account')
+      // eslint-disable-next-line no-console
+      .catch(err => console.error('An error occurred', err));
   }
 
   accountInitialization() {
@@ -67,14 +69,16 @@ class Form extends React.Component {
 
   componentDidMount() {
     const {
-      navigation, accounts, address, reference,
+      navigation, accounts, address, reference, amount,
     } = this.props;
 
     // Undefined address means we escaped the form step to initialize the account
     if (!address && !accounts.active.initialized) {
       this.accountInitialization();
     } else {
-      this.setState({ accounts, address, reference });
+      this.setState({
+        accounts, address, amount, reference,
+      });
       navigation.setParams({ showButtonLeft: true, action: this.goBack });
     }
   }
