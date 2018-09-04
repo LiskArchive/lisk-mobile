@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1.0</string>
+	<string>0.2.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -35,8 +35,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We will use your comera to scan QRcodes</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Lisk uses your photo library to access your stored qr codes.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Lisk uses your photo library to access your stored qr codes.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -72,10 +78,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-		<!-- Include this only if you are planning to use the camera roll -->
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>we use your photo library to access your stored qr codes</string>
-	<key>NSCameraUsageDescription</key>
-	<string>We will use your comera to scan QRcodes</string>
 </dict>
 </plist>

@@ -59,8 +59,8 @@ const styles = {
     paddingTop: 50,
   },
   noActivity: {
-    width: 178,
-    height: 199,
+    width: 237,
+    height: 220,
   },
   noTxTitle: {
     paddingTop: 10,

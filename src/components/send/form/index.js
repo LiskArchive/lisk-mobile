@@ -1,11 +1,8 @@
 import React, { Fragment } from 'react';
-import { View, Platform, PermissionsAndroid, TouchableOpacity } from 'react-native';
+import { View, Platform } from 'react-native';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import connect from 'redux-connect-decorator';
-import { RNCamera } from 'react-native-camera';
-import QRCode from '@remobile/react-native-qrcode-local-image';
-import CameraRollPicker from 'react-native-camera-roll-picker';
 import { SecondaryButton, IconButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
@@ -14,9 +11,9 @@ import styles from './styles';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
 import FormattedNumber from '../../formattedNumber';
-import Icon from '../../toolBox/icon';
 import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
+import Scanner from './scanner';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -27,9 +24,7 @@ class Form extends React.Component {
       address: { value: '', validity: -1 },
       amount: { value: '', validity: -1 },
       reference: { value: '', validity: -1 },
-      opacity: 1,
-      cameraVisibility: false,
-      galleryVisibility: false,
+      secondaryButtonOpacity: 1,
     };
 
     validator = {
@@ -50,17 +45,26 @@ class Form extends React.Component {
    */
   changeHandler = (name, value) => {
     let validity = -1;
-    const trimmedValue = value.trim();
-    if (trimmedValue !== '') {
-      validity = this.validator[name](trimmedValue) ? 0 : 1;
+    if (value !== '') {
+      validity = this.validator[name](value) ? 0 : 1;
     }
 
     this.setState({
       [name]: {
-        value: name === 'amount' ? trimmedValue.replace(',', '.') : trimmedValue,
+        value,
         validity,
       },
     });
+  }
+
+  setAddress = (value) => {
+    const trimmedValue = value.trim();
+    this.changeHandler('address', trimmedValue);
+  }
+
+  setAmount = (value) => {
+    const normalizedValue = value.replace(',', '.');
+    this.changeHandler('amount', normalizedValue);
   }
 
   componentDidMount() {
@@ -98,7 +102,7 @@ class Form extends React.Component {
   }
 
   changeButtonOpacity = (val) => {
-    this.setState({ opacity: val });
+    this.setState({ secondaryButtonOpacity: val });
   }
 
   changeInputFocus = (direction = 1) => {
@@ -120,125 +124,16 @@ class Form extends React.Component {
     });
   }
 
-  toggleCamera = () => {
-    async function requestCameraPermission() {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-          {
-            title: 'Lisk mobile Camera Permission',
-            message: 'Lisk mobile needs access to your camera ',
-          },
-        );
-        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-          this.toggleGallery();
-        }
-      } catch (err) {
-        this.toggleGallery();
-      }
-    }
-    if (Platform.OS !== 'ios') requestCameraPermission();
-    this.props.navigation.setParams({
-      tabBar: !this.state.cameraVisibility,
-      showButtonLeft: !this.state.cameraVisibility,
-      action: this.toggleCamera,
-      onBackPress: this.toggleCamera,
-    });
-    this.setState({
-      cameraVisibility: !this.state.cameraVisibility,
-    });
-  };
-
-  toggleGallery = () => {
-    this.props.navigation.setParams({
-      tabBar: true,
-      showButtonLeft: true,
-      action: !this.state.galleryVisibility ? this.toggleGallery : this.toggleCamera,
-      onBackPress: this.toggleGallery,
-    });
-    this.setState({
-      cameraVisibility: !this.state.cameraVisibility,
-      galleryVisibility: !this.state.galleryVisibility,
-    });
-  }
-
-  readFromPhotoGallery = (items) => {
-    this.setState({
-      galleryVisibility: false,
-    });
-    this.props.navigation.setParams({
-      tabBar: false,
-      showButtonLeft: false,
-    });
-    if (items.length > 0) {
-      QRCode.decode(items[0].uri, (error, result) => {
-        this.decodeQR(result);
-      });
-    }
-  }
-  readQRcode = (event) => {
-    this.toggleCamera();
-    this.decodeQR(event.data);
-  }
-
-  decodeQR = (data) => {
-    const recipientReg = /recipient=\d{1,21}L/;
-    const amountReg = /amount=(\d+)\.?(\d+)?/;
-    const liskProtocolReg = /^[l|L]isk:\/\//;
-
-    if (liskProtocolReg.test(data) && recipientReg.test(data)) {
-      const address = data.match(recipientReg)[0].replace('recipient=', '');
-      const amount = data.match(amountReg)[0].replace('amount=', '');
-      this.setState({
-        address: {
-          value: address,
-          validity: 0,
-        },
-      });
-      this.changeHandler('amount', amount);
-    } else {
-      this.setState({
-        amount: {
-          value: '',
-          validity: -1,
-        },
-      });
-      this.changeHandler('address', data);
-    }
-  }
-
   render() {
     const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
     const { address, amount } = this.state;
     return (
       <Fragment>
-      {this.state.cameraVisibility ?
-        <RNCamera
-          ref={(ref) => {
-            this.camera = ref;
-          }}
-          style = {styles.cameraPreview}
-          onBarCodeRead={this.readQRcode}
-          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-          type={RNCamera.Constants.Type.back}
-          permissionDialogTitle={'Permission to use camera'}
-          permissionDialogMessage={'We need your permission to use your camera phone'} >
-          <View style={styles.cameraOverlay}>
-            <P style={styles.galleryDescription}>
-              Scan the QR code or upload from your camera roll.
-            </P>
-            <TouchableOpacity onPress={this.toggleGallery} style={styles.galleryButton}>
-              <Icon size={18} color={colors.white} name='gallery' />
-            </TouchableOpacity>
-          </View>
-        </RNCamera>
-      : null}
-      {this.state.galleryVisibility ? <View style={styles.cameraPreview}>
-        <CameraRollPicker
-          selectSingleItem={true}
-          callback={this.readFromPhotoGallery}
-        />
-      </View> : null }
+      <Scanner
+        ref={(el) => { this.scanner = el; }}
+        navigation={this.props.navigation}
+        setAddress={this.setAddress}
+        setAmount={this.setAmount}/>
       <KeyboardAwareScrollView
         enableOnAndroid={true}
         enableResetScrollToCoords={false}
@@ -266,7 +161,7 @@ class Form extends React.Component {
           <View style={styles.form}>
             <View style={styles.addressContainer}>
               <IconButton
-                onPress={this.toggleCamera}
+                onPress={() => this.scanner.toggleCamera()}
                 titleStyle={styles.scanButtonTitle}
                 style={styles.scanButton}
                 title='Scan'
@@ -289,7 +184,7 @@ class Form extends React.Component {
                   ],
                   containerStyle: styles.addressInputContainer,
                 }}
-                onChange={value => this.changeHandler('address', value)}
+                onChange={value => this.setAddress(value)}
                 value={`${address.validity === 0 ? '              ' : ''}${address.value}`}
                 error={
                   address.validity === 1 ?
@@ -303,7 +198,7 @@ class Form extends React.Component {
               autoCorrect={false}
               reference={(input) => { this.references[1] = input; }}
               styles={{ input: styles.input }}
-              onChange={value => this.changeHandler('amount', value)}
+              onChange={value => this.setAmount(value)}
               value={amount.value}
               keyboardType='numeric'
               error={
@@ -330,7 +225,7 @@ class Form extends React.Component {
           <SecondaryButton
             disabled={address.validity !== 0 || amount.validity !== 0}
             onClick={this.goToNextState}
-            style={[styles.button, { opacity: this.state.opacity }]}
+            style={[styles.button, { opacity: this.state.secondaryButtonOpacity }]}
             title='Continue' />
           </View>
         </KeyboardAwareScrollView>

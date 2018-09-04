@@ -1,15 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
-import noActivity from '../../assets/images/loadingWallet.svg';
+import { View, Image } from 'react-native';
+import noActivity from '../../assets/images/loadingWallet.png';
 import { P } from '../toolBox/typography';
 import styles from './styles';
 
 const LoadingState = () =>
   <View style={styles.emptyState}>
-    <View style={styles.noActivity}>
-      <SvgUri source={noActivity} />
-    </View>
+    <Image source={noActivity} style={styles.noActivity} />
     <P style={styles.noTxTitle}>Loading account info...</P>
   </View>;
 
