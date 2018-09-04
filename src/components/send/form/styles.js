@@ -7,6 +7,7 @@ const { height, width } = Dimensions.get('window');
 const styles = {
   container: {
     minHeight: '100%',
+    zIndex: 1,
   },
   innerContainer: {
     flexDirection: 'column',
@@ -177,7 +178,7 @@ const styles = {
     top: 0,
     left: 0,
     backgroundColor: colors.grayScale4,
-    zIndex: 2,
+    zIndex: 10,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -188,10 +189,10 @@ const styles = {
     marginBottom: 20,
   },
   permissionDescription: {
-    marginTop: 10,
+    marginTop: 2,
     maxWidth: '80%',
     textAlign: 'center',
-    color: colors.grayScale2,
+    // color: colors.grayScale2,
   },
 };
 

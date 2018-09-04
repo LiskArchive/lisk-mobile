@@ -6,6 +6,7 @@ import QRCode from '@remobile/react-native-qrcode-local-image';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import styles from './styles';
 import CameraAccess from './cameraAccess';
+import CameraOverlay from './cameraOverlay';
 
 class Scanner extends React.Component {
   state = {
@@ -31,44 +32,48 @@ class Scanner extends React.Component {
 
   setPermissions = (permissions) => {
     const { camera, photo } = this.state;
-    camera.permitted = permissions.camera === 'authorized';
-    photo.permitted = permissions.photo === 'authorized';
+    camera.permitted = permissions.camera;
+    photo.permitted = permissions.photo;
     this.setState({ camera, photo });
   }
 
   toggleCamera = () => {
+    const { camera } = this.state;
     this.props.navigation.setParams({
-      tabBar: !this.state.cameraVisibility,
-      showButtonLeft: !this.state.cameraVisibility,
+      tabBar: !camera.visible,
+      showButtonLeft: !camera.visible,
       action: this.toggleCamera,
       onBackPress: this.toggleCamera,
     });
-    this.setState({
-      cameraVisibility: !this.state.cameraVisibility,
-    });
+
+    camera.visible = !camera.visible;
+    this.setState({ camera });
   };
 
   toggleGallery = () => {
+    const { photo, camera } = this.state;
     this.props.navigation.setParams({
       tabBar: true,
       showButtonLeft: true,
-      action: !this.state.galleryVisibility ? this.toggleGallery : this.toggleCamera,
+      action: !photo.visible ? this.toggleGallery : this.toggleCamera,
       onBackPress: this.toggleGallery,
     });
-    this.setState({
-      cameraVisibility: !this.state.cameraVisibility,
-      galleryVisibility: !this.state.galleryVisibility,
-    });
+
+    photo.visible = !photo.visible;
+    photo.camera = !photo.camera;
+    this.setState({ camera, photo });
   }
 
   readFromPhotoGallery = (items) => {
-    this.setState({
-      galleryVisibility: false,
-    });
+    const { photo } = this.state;
+    photo.visible = false;
+    this.setState({ photo });
+
     this.props.navigation.setParams({
-      tabBar: false,
-      showButtonLeft: false,
+      tabBar: photo.visible,
+      showButtonLeft: photo.visible,
     });
+
     if (items.length > 0) {
       QRCode.decode(items[0].uri, (error, result) => {
         this.decodeQR(result);
@@ -101,7 +106,7 @@ class Scanner extends React.Component {
     return (
       <Fragment>
         {
-          this.state.cameraVisibility ?
+          this.state.camera.permitted !== 'denied' && this.state.camera.visible ?
             <RNCamera
               ref={(ref) => {
                 this.camera = ref;
@@ -112,23 +117,24 @@ class Scanner extends React.Component {
               type={RNCamera.Constants.Type.back}
               permissionDialogTitle={'Permission to use camera'}
               permissionDialogMessage={'Lisk needs to connect to your camera'} >
-              {
-                ({ status }) =>
-                  <CameraAccess
-                    toggleGallery={this.toggleGallery}
-                    cameraStatus={status}
-                    galleryStatus={this.state.photo.permitted} />
-              }
+              <CameraOverlay
+                toggleGallery={this.toggleGallery}
+                galleryStatus={this.state.photo.permitted} />
             </RNCamera>
           : null
         }
         {
-          this.state.galleryVisibility ? <View style={styles.cameraPreview}>
-            <CameraRollPicker
-              selectSingleItem={true}
-              callback={this.readFromPhotoGallery}
-            />
-          </View> : null
+          this.state.camera.permitted === 'denied' && this.state.camera.visible ?
+            <CameraAccess /> : null
+        }
+        {
+          this.state.camera.permitted !== 'denied' && this.state.photo.visible ?
+            <View style={styles.cameraPreview}>
+              <CameraRollPicker
+                selectSingleItem={true}
+                callback={this.readFromPhotoGallery}
+              />
+            </View> : null
         }
       </Fragment>
     );
