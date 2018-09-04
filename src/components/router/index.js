@@ -82,7 +82,7 @@ export default StackNavigator(
       screen: Register,
       navigationOptions: {
         headerRight: null,
-        title: <Logo color={colors.primary9} />,
+        title: <Logo color={colors.grayScale1} />,
       },
     },
     Login: {

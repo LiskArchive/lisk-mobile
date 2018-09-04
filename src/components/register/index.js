@@ -32,7 +32,7 @@ class Register extends React.Component {
           params.action();
         }}
         style={styles.backButton}
-        color={colors.primary9}/> :
+        color={colors.grayScale1}/> :
         null,
     };
   };
