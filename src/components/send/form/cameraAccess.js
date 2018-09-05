@@ -20,7 +20,6 @@ const CameraAccess = () => (
         Tap on the icon above to go to settings.
       </P>
     </Fragment>
-  </TouchableHighlight>
-);
+  </TouchableHighlight>);
 
 export default CameraAccess;
