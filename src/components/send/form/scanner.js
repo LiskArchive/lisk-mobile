@@ -3,10 +3,10 @@ import { View, Platform } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
-import CameraRollPicker from 'react-native-camera-roll-picker';
 import styles from './styles';
 import CameraAccess from './cameraAccess';
 import CameraOverlay from './cameraOverlay';
+import CameraRoll from './cameraRoll';
 
 class Scanner extends React.Component {
   state = {
@@ -51,7 +51,7 @@ class Scanner extends React.Component {
   };
 
   toggleGallery = () => {
-    const { photo, camera } = this.state;
+    const { photo } = this.state;
     this.props.navigation.setParams({
       tabBar: true,
       showButtonLeft: true,
@@ -60,7 +60,7 @@ class Scanner extends React.Component {
     });
 
     photo.visible = !photo.visible;
-    this.setState({ camera, photo });
+    this.setState({ photo });
   }
 
   readFromPhotoGallery = (items) => {
@@ -107,8 +107,6 @@ class Scanner extends React.Component {
     return (
       <Fragment>
         {
-          (camera.permission !== 'denied' ||
-          (camera.permission === 'authorized' && Platform.OS === 'android')) &&
           camera.visible ?
             <RNCamera
               ref={(ref) => {
@@ -126,23 +124,10 @@ class Scanner extends React.Component {
             </RNCamera>
           : null
         }
-        {
-          (camera.permission === 'denied' ||
-          (camera.permission === 'undetermined' && Platform.OS === 'android')) &&
-          camera.visible ?
-            <CameraAccess /> : null
-        }
-        {
-          (camera.permission === 'authorized' ||
-          (camera.permission === 'undetermined' && Platform.OS === 'android')) &&
-          photo.visible ?
-            <View style={[styles.preview, styles.photoPreview]}>
-              <CameraRollPicker
-                selectSingleItem={true}
-                callback={this.readFromPhotoGallery}
-              />
-            </View> : null
-        }
+        <CameraRoll
+          onSelect={this.readFromPhotoGallery}
+          permission={photo.permission}
+          visible={photo.visible} />
       </Fragment>
     );
   }
