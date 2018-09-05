@@ -49,6 +49,7 @@
     "querystring-es3": "^0.2.1",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-native-app-settings": "^2.0.0",
     "react-native-background-timer": "^2.0.1",
     "react-native-camera": "^1.2.0",
     "react-native-camera-kit": "^6.2.6",

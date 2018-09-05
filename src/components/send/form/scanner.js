@@ -1,26 +1,28 @@
 import React, { Fragment } from 'react';
-import { View } from 'react-native';
+import { AppState } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
-import CameraRollPicker from 'react-native-camera-roll-picker';
 import styles from './styles';
 import CameraAccess from './cameraAccess';
+import CameraOverlay from './cameraOverlay';
+import CameraRoll from './cameraRoll';
 
 class Scanner extends React.Component {
   state = {
     camera: {
-      permitted: false,
+      permission: 'undetermined',
       visible: false,
     },
     photo: {
-      permitted: false,
+      permission: 'undetermined',
       visible: false,
     },
   }
 
   componentDidMount() {
     this.checkPermissions();
+    AppState.addEventListener('change', this.checkPermissions);
   }
 
   checkPermissions = () => {
@@ -29,60 +31,50 @@ class Scanner extends React.Component {
     });
   }
 
-  requestPermissions = () => {
-    Permissions.checkMultiple(['camera', 'photo']).then((response) => {
-      this.setPermissions(response);
-    });
-  }
-
   setPermissions = (permissions) => {
     const { camera, photo } = this.state;
-    camera.permitted = permissions.camera === 'authorized';
-    photo.permitted = permissions.photo === 'authorized';
+    camera.permission = permissions.camera;
+    photo.permission = permissions.photo;
     this.setState({ camera, photo });
   }
 
   toggleCamera = () => {
-    if (!this.state.camera.permitted) {
-      this.requestPermissions();
-    } else {
-      this.props.navigation.setParams({
-        tabBar: !this.state.cameraVisibility,
-        showButtonLeft: !this.state.cameraVisibility,
-        action: this.toggleCamera,
-        onBackPress: this.toggleCamera,
-      });
-      this.setState({
-        cameraVisibility: !this.state.cameraVisibility,
-      });
-    }
+    const { camera } = this.state;
+    this.props.navigation.setParams({
+      tabBar: !camera.visible,
+      showButtonLeft: !camera.visible,
+      action: this.toggleCamera,
+      onBackPress: this.toggleCamera,
+    });
+
+    camera.visible = !camera.visible;
+    this.setState({ camera });
   };
 
   toggleGallery = () => {
-    if (!this.state.photo.permitted) {
-      this.requestPermissions();
-    } else {
-      this.props.navigation.setParams({
-        tabBar: true,
-        showButtonLeft: true,
-        action: !this.state.galleryVisibility ? this.toggleGallery : this.toggleCamera,
-        onBackPress: this.toggleGallery,
-      });
-      this.setState({
-        cameraVisibility: !this.state.cameraVisibility,
-        galleryVisibility: !this.state.galleryVisibility,
-      });
-    }
+    const { photo } = this.state;
+    this.props.navigation.setParams({
+      tabBar: true,
+      showButtonLeft: true,
+      action: !photo.visible ? this.toggleGallery : this.toggleCamera,
+      onBackPress: this.toggleGallery,
+    });
+
+    photo.visible = !photo.visible;
+    this.setState({ photo });
   }
 
   readFromPhotoGallery = (items) => {
-    this.setState({
-      galleryVisibility: false,
-    });
+    const { photo, camera } = this.state;
+    photo.visible = false;
+    camera.visible = false;
+    this.setState({ photo, camera });
+
     this.props.navigation.setParams({
-      tabBar: false,
-      showButtonLeft: false,
+      tabBar: photo.visible,
+      showButtonLeft: photo.visible,
     });
+
     if (items.length > 0) {
       QRCode.decode(items[0].uri, (error, result) => {
         this.decodeQR(result);
@@ -112,38 +104,33 @@ class Scanner extends React.Component {
   }
 
   render() {
+    const { camera, photo } = this.state;
     return (
       <Fragment>
         {
-          this.state.cameraVisibility ?
+          camera.visible ?
             <RNCamera
               ref={(ref) => {
                 this.camera = ref;
               }}
-              style = {styles.cameraPreview}
+              style = {[styles.preview, styles.cameraPreview]}
               onBarCodeRead={this.readQRcode}
               barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
               type={RNCamera.Constants.Type.back}
+              notAuthorizedView={<CameraAccess />}
+              pendingAuthorizationView={<CameraAccess />}
               permissionDialogTitle={'Permission to use camera'}
               permissionDialogMessage={'Lisk needs to connect to your camera'} >
-              {
-                ({ status }) =>
-                  <CameraAccess
-                    toggleGallery={this.toggleGallery}
-                    cameraStatus={status}
-                    galleryStatus={this.state.photo.permitted} />
-              }
+              <CameraOverlay
+                toggleGallery={this.toggleGallery}
+                photoPermission={photo.permission} />
             </RNCamera>
           : null
         }
-        {
-          this.state.galleryVisibility ? <View style={styles.cameraPreview}>
-            <CameraRollPicker
-              selectSingleItem={true}
-              callback={this.readFromPhotoGallery}
-            />
-          </View> : null
-        }
+        <CameraRoll
+          onSelect={this.readFromPhotoGallery}
+          permission={photo.permission}
+          visible={photo.visible} />
       </Fragment>
     );
   }

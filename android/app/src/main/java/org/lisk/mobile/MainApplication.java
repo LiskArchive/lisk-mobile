@@ -3,6 +3,7 @@ package org.lisk.mobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.krazylabs.OpenAppSettingsPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.horcrux.svg.SvgPackage;
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new OpenAppSettingsPackage(),
             new RCTQRCodeLocalImagePackage(),
             new LottiePackage(),
             new BackgroundTimerPackage(),
