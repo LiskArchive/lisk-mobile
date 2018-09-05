@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
@@ -11,11 +11,11 @@ import CameraOverlay from './cameraOverlay';
 class Scanner extends React.Component {
   state = {
     camera: {
-      permitted: false,
+      permission: 'undetermined',
       visible: false,
     },
     photo: {
-      permitted: false,
+      permission: 'undetermined',
       visible: false,
     },
   }
@@ -32,8 +32,8 @@ class Scanner extends React.Component {
 
   setPermissions = (permissions) => {
     const { camera, photo } = this.state;
-    camera.permitted = permissions.camera;
-    photo.permitted = permissions.photo;
+    camera.permission = permissions.camera;
+    photo.permission = permissions.photo;
     this.setState({ camera, photo });
   }
 
@@ -60,7 +60,6 @@ class Scanner extends React.Component {
     });
 
     photo.visible = !photo.visible;
-    photo.camera = !photo.camera;
     this.setState({ camera, photo });
   }
 
@@ -104,15 +103,18 @@ class Scanner extends React.Component {
   }
 
   render() {
+    const { camera, photo } = this.state;
     return (
       <Fragment>
         {
-          this.state.camera.permitted !== 'denied' && this.state.camera.visible ?
+          (camera.permission !== 'denied' ||
+          (camera.permission === 'authorized' && Platform.OS === 'android')) &&
+          camera.visible ?
             <RNCamera
               ref={(ref) => {
                 this.camera = ref;
               }}
-              style = {styles.cameraPreview}
+              style = {[styles.preview, styles.cameraPreview]}
               onBarCodeRead={this.readQRcode}
               barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
               type={RNCamera.Constants.Type.back}
@@ -120,17 +122,21 @@ class Scanner extends React.Component {
               permissionDialogMessage={'Lisk needs to connect to your camera'} >
               <CameraOverlay
                 toggleGallery={this.toggleGallery}
-                galleryStatus={this.state.photo.permitted} />
+                photoPermission={photo.permission} />
             </RNCamera>
           : null
         }
         {
-          this.state.camera.permitted === 'denied' && this.state.camera.visible ?
+          (camera.permission === 'denied' ||
+          (camera.permission === 'undetermined' && Platform.OS === 'android')) &&
+          camera.visible ?
             <CameraAccess /> : null
         }
         {
-          this.state.camera.permitted !== 'denied' && this.state.photo.visible ?
-            <View style={styles.cameraPreview}>
+          (camera.permission === 'authorized' ||
+          (camera.permission === 'undetermined' && Platform.OS === 'android')) &&
+          photo.visible ?
+            <View style={[styles.preview, styles.photoPreview]}>
               <CameraRollPicker
                 selectSingleItem={true}
                 callback={this.readFromPhotoGallery}

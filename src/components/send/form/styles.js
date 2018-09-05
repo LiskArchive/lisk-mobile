@@ -80,14 +80,19 @@ const styles = {
     zIndex: 9999,
     borderRadius: 0,
   },
-  cameraPreview: {
+  preview: {
     position: 'absolute',
     top: 0,
     left: 0,
     flex: 1,
     height,
     width,
+  },
+  cameraPreview: {
     zIndex: 99,
+  },
+  photoPreview: {
+    zIndex: 100,
   },
   cameraOverlay: {
     backgroundColor: '#394451',
