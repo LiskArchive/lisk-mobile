@@ -6,7 +6,7 @@ import styles from './styles';
 
 const LoadingState = () =>
   <View style={styles.emptyState}>
-    <Image source={noActivity} style={styles.noActivity} />
+    <Image source={noActivity} style={styles.loading} />
     <P style={styles.noTxTitle}>Loading account info...</P>
   </View>;
 

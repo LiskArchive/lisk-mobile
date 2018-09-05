@@ -62,6 +62,10 @@ const styles = {
     alignItems: 'center',
     marginBottom: 10,
   },
+  loading: {
+    width: 237,
+    height: 220,
+  },
   noTxTitle: {
     paddingTop: 10,
     color: colors.grayScale2,
