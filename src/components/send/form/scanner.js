@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, Platform } from 'react-native';
+import { AppState } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
@@ -22,6 +22,7 @@ class Scanner extends React.Component {
 
   componentDidMount() {
     this.checkPermissions();
+    AppState.addEventListener('change', this.checkPermissions);
   }
 
   checkPermissions = () => {
@@ -116,6 +117,8 @@ class Scanner extends React.Component {
               onBarCodeRead={this.readQRcode}
               barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
               type={RNCamera.Constants.Type.back}
+              notAuthorizedView={<CameraAccess />}
+              pendingAuthorizationView={<CameraAccess />}
               permissionDialogTitle={'Permission to use camera'}
               permissionDialogMessage={'Lisk needs to connect to your camera'} >
               <CameraOverlay
