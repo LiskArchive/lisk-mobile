@@ -4,6 +4,11 @@ export default {
     fee: 1e7,
     title: 'Transfer',
   },
+  accountInitialization: {
+    type: 0,
+    fee: 1e7,
+    title: 'Account initialization',
+  },
   setSecondPassphrase: {
     type: 1,
     fee: 5e8,

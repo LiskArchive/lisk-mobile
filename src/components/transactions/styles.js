@@ -56,9 +56,13 @@ const styles = {
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 50,
   },
   noActivity: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  loading: {
     width: 237,
     height: 220,
   },

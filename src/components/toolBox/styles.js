@@ -58,7 +58,7 @@ const styles = {
   },
   buttonWrapper: {
     borderRadius: 3,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: 'transparent',
   },
   iconButton: {
@@ -79,7 +79,7 @@ const styles = {
   disabledButtonBg: {
     backgroundColor: colors.white,
     borderColor: colors.grayScale3,
-    borderWidth: 2,
+    borderWidth: 1,
   },
   labelButton: {
     backgroundColor: 'transparent',
@@ -104,8 +104,7 @@ const styles = {
     minHeight: 30,
   },
   inputContainer: {
-    // borderBottomColor: colors.grayScale1,
-    borderBottomColor: 'green',
+    borderBottomColor: colors.grayScale1,
     paddingBottom: 5,
   },
   errorMessageContainer: {
