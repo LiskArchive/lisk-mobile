@@ -6,6 +6,9 @@ const avatarIconColor = '#a9dcf8';
 const secureIconColor = '#fe7354';
 
 const styles = {
+  scrollContainer: {
+    flexGrow: 1,
+  },
   container: {
     flexDirection: 'column',
     marginRight: 20,
