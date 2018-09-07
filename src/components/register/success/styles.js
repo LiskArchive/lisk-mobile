@@ -21,9 +21,13 @@ const styles = {
     marginBottom: 25,
     color: colors.grayScale1,
   },
-  image: {
+  imageContainer: {
     marginTop: 52,
     alignItems: 'center',
+  },
+  image: {
+    width: 198,
+    height: 198,
   },
   button: {
     marginBottom: DeviceInfo.isIPhoneX_deprecated ? 35 : 25,

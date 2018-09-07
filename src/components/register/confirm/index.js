@@ -1,10 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
+import { View, Image } from 'react-native';
 import styles from './styles';
 import { H1, H4, P } from '../../toolBox/typography';
 import { SecondaryButton, Button } from '../../toolBox/button';
-import image from '../../../assets/images/safekeeping.svg';
+import image from '../../../assets/images/registrationProcess/verify2x.png';
 import { assembleWordOptions } from '../../../utilities/passphrase';
 
 /**
@@ -161,10 +160,9 @@ class Confirm extends React.Component {
           </P>
 
         </View>
-        <View style={styles.image} >
-          <SvgUri
-            width="120"
-            height="120"
+        <View style={styles.imageContainer} >
+          <Image
+            style={styles.image}
             source={image}
           />
         </View>

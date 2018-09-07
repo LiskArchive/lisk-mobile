@@ -14,11 +14,15 @@ const styles = {
   },
   subHeader: {
     marginTop: 14,
-    marginBottom: 25,
     color: colors.grayScale1,
   },
-  image: {
+  imageContainer: {
+    marginTop: -25,
     alignItems: 'center',
+  },
+  image: {
+    width: 116,
+    height: 160,
   },
   passphraseContainer: {
     flexDirection: 'row',

@@ -1,10 +1,9 @@
 import React from 'react';
-import SvgUri from 'react-native-svg-uri';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import styles from './styles';
 import { H1, P } from '../../toolBox/typography';
 import { SecondaryButton } from '../../toolBox/button';
-import image from '../../../assets/images/success.svg';
+import image from '../../../assets/images/registrationProcess/success3x.png';
 
 class Success extends React.Component {
   componentDidMount() {
@@ -23,10 +22,9 @@ class Success extends React.Component {
               receiving LSK tokens.
             </P>
           </View>
-          <View style={styles.image} >
-            <SvgUri
-              width="198"
-              height="198"
+          <View style={styles.imageContainer} >
+            <Image
+              style={styles.image}
               source={image}
             />
           </View>

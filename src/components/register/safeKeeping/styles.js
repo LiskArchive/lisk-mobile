@@ -29,11 +29,11 @@ const styles = {
     backgroundColor: colors.white,
     padding: 20,
     shadowColor: '#0279b6',
-    shadowOffset: { width: 0, height: 0 },
+    // shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
     shadowRadius: 20,
     marginTop: 24,
-    elevation: 5,
+    // elevation: 5,
   },
   passphraseTitle: {
     color: colors.grayScale2,
@@ -54,8 +54,12 @@ const styles = {
   copy: {
     color: colors.primary5,
   },
-  image: {
+  imageContainer: {
     alignItems: 'center',
+  },
+  image: {
+    width: 429,
+    height: 140,
   },
 };
 
