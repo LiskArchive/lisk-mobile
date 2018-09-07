@@ -1,11 +1,10 @@
 import React from 'react';
-import SvgUri from 'react-native-svg-uri';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import styles from './styles';
 import { H1, B, P } from '../../toolBox/typography';
 import CopyToClipboard from '../../copyToClipboard';
 import { SecondaryButton } from '../../toolBox/button';
-import vault from '../../../assets/images/vault.svg';
+import vault from '../../../assets/images/registrationProcess/vault2x.png';
 // import colors from '../../../constants/styleGuide/colors';
 
 class SafeKeeping extends React.Component {
@@ -48,10 +47,9 @@ class SafeKeeping extends React.Component {
               type={B}/>
           </View>
         </View>
-        <View style={styles.image} >
-          <SvgUri
-            width="148"
-            height="148"
+        <View style={styles.imageContainer} >
+          <Image
+            style={styles.image}
             source={vault}
           />
         </View>

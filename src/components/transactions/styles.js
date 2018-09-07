@@ -87,6 +87,10 @@ const styles = {
     fontSize: fonts.size.small,
     color: colors.primary6,
   },
+  image: {
+    width: 110,
+    height: 126,
+  },
 };
 
 export default StyleSheet.create(styles);
