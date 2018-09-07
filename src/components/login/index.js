@@ -28,6 +28,7 @@ class Login extends React.Component {
     super();
 
     this.state = {
+      keyboard: true,
       passphrase: {
         value: devDefaultPass,
         validity: validatePassphrase(devDefaultPass),
@@ -91,6 +92,11 @@ class Login extends React.Component {
     });
   }
 
+  goToRegistration = () => {
+    this.passphraseInput.blur();
+    this.props.navigation.navigate('Register');
+  }
+
   shrinkButton = (status) => {
     if (status) {
       this.setState({ buttonStyle: styles.button });
@@ -122,7 +128,7 @@ class Login extends React.Component {
             onChange={this.changeHandler.bind(this, 'passphrase')}
             onFocus={() => this.shrinkButton(false)}
             onBlur={() => this.shrinkButton(true)}
-            autoFocus={true}
+            autoFocus={this.state.keyboard}
             autoCorrect={false}
             multiline={isIOS}
             secureTextEntry={!isIOS}
@@ -134,7 +140,7 @@ class Login extends React.Component {
       </KeyboardAwareScrollView>
       <KeyboardAccessoryView
         style={[styles.allWhite, Platform.OS === 'ios' ? null : styles.sticky]}
-        animationOn={false}
+        animationOn='none'
         alwaysVisible={true}>
         <View style={[styles.connectionErrorContainer, connectionError ? styles.visible : null]}>
           <Icon size={16} name='error' style={styles.connectionErrorIcon} />
@@ -144,7 +150,7 @@ class Login extends React.Component {
         </View>
         <View style={styles.registerLinkWrapper}>
           <P style={styles.registerQuestion}>{"Don't have a Lisk ID? "}</P>
-          <A style={styles.registerLink} onPress={() => this.props.navigation.navigate('Register')}>Create it now</A>
+          <A style={styles.registerLink} onPress={this.goToRegistration}>Create it now</A>
         </View>
         <PrimaryButton
         style={this.state.buttonStyle}
