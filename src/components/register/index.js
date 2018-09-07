@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, BackHandler } from 'react-native';
 import MultiStep from '../multiStep';
 import Confirm from './confirm';
 import Success from './success';
@@ -13,13 +13,18 @@ import { colors } from '../../constants/styleGuide';
 const NavButton = props =>
   <Text {...props} style={[styles.navButton, props.disabled ? styles.disabledNavButton : null]} />;
 const ActiveTitle = props => <Small style={styles.activeGroupTitle} {...props} />;
-
+let backCallback;
 class Register extends React.Component {
   state = {
     showNav: true,
   };
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
+    backCallback = () => {
+      params.action();
+      return true;
+    };
+    BackHandler.addEventListener('hardwareBackPress', backCallback);
     return {
       headerStyle: {
         backgroundColor: '#F9FDFF',
@@ -39,6 +44,14 @@ class Register extends React.Component {
   hideNav = () => {
     this.setState({
       showNav: false,
+    });
+  }
+  componentDidMount() {
+    this.props.navigation.addListener('willBlur', () => {
+      BackHandler.addEventListener('hardwareBackPress', () => {
+        this.props.navigation.pop();
+        return true;
+      });
     });
   }
   render() {
