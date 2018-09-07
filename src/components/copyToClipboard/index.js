@@ -9,10 +9,15 @@ class CopyToClipBoard extends React.Component {
   copy = () => {
     this.setState({ copied: !this.state.copied });
     Clipboard.setString(this.props.value);
-    setTimeout(() => {
+    this.Timeout = setTimeout(() => {
       this.setState({ copied: !this.state.copied });
     }, 4000);
   }
+
+  componentWillUnmount() {
+    clearTimeout(this.Timeout);
+  }
+
   render() {
     const {
       showIcon, value, type, label, iconColor, iconSize,
