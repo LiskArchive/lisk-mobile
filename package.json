@@ -22,6 +22,12 @@
       "./src/assets/fonts/"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test:format",
+      "pre-push": "npm test"
+    }
+  },
   "dependencies": {
     "@remobile/react-native-qrcode-local-image": "github:yasharAyari/react-native-qrcode-local-image#support-import-from-cameraroll",
     "@tradle/react-native-http": "^2.0.1",
@@ -106,6 +112,7 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jest": "^21.22.0",
     "eslint-plugin-react": "7.4.0",
+    "husky": "^1.0.0-rc.13",
     "jest": "^23.1.0",
     "jest-cli": "^22.4.2",
     "jest-fetch-mock": "^1.6.2",
