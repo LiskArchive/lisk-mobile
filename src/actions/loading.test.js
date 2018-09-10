@@ -7,7 +7,7 @@ import {
 
 describe('actions: loading', () => {
   describe('loadingStarted', () => {
-    test('should create an action to show loading bar', () => {
+    it('should create an action to show loading bar', () => {
       const data = 'test';
 
       const expectedAction = {
@@ -19,7 +19,7 @@ describe('actions: loading', () => {
   });
 
   describe('loadingFinished', () => {
-    test('should create an action to hide loading bar', () => {
+    it('should create an action to hide loading bar', () => {
       const data = 'test';
 
       const expectedAction = {

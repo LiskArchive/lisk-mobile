@@ -12,39 +12,51 @@ describe('Reducers: Accounts', () => {
     balance: 1200000000,
   };
 
-  test('should empty accounts.active in case of accountLoggedOut', () => {
-    const currentState = { active: accountA, followed };
-    const action = { type: actionTypes.accountLoggedOut };
-    const changedState = accounts(currentState, action);
-    expect(changedState.active).toBeNull();
-  });
-
-  test('should retain the state in case of accountUpdated', () => {
+  it('should retain the state in case of accountUpdated', () => {
     const currentState = { active: accountA, followed };
     const action = { type: actionTypes.accountUpdated, data: {} };
     const changedState = accounts(currentState, action);
     expect(changedState).toEqual(currentState);
   });
 
-  test('should add data to state.followed array in case of accountFollowed', () => {
+  it('should empty accounts.active in case of accountLoggedOut', () => {
+    const currentState = { active: accountA, followed };
+    const action = { type: actionTypes.accountLoggedOut };
+    const changedState = accounts(currentState, action);
+    expect(changedState.active).toBeNull();
+  });
+
+  it('should empty accounts.active in case of accountLoggedIn', () => {
+    expect(null).toBeNull();
+  });
+
+  it('should update one of the followed accounts in case of accountsEdited', () => {
+    expect(null).toBeNull();
+  });
+
+  it('should add data to state.followed array in case of accountFollowed', () => {
     const currentState = { active: null, followed: [] };
     const action = { type: actionTypes.accountFollowed, data: accountA };
     const changedState = accounts(currentState, action);
     expect(changedState.followed).toEqual([accountA]);
   });
 
-  test('should remove given account from state.followed array in case of accountUnFollowed', () => {
+  it('should remove given account from state.followed array in case of accountUnFollowed', () => {
     const currentState = { active: null, followed: [accountA] };
     const action = { type: actionTypes.accountUnFollowed, data: accountA.address };
     const changedState = accounts(currentState, action);
-    expect(changedState.followed.length).toBe(0);
+    expect(changedState.followed).toHaveLength(0);
   });
 
-  test('should make no change in case of accountsStored', () => {
+  it('should update one of the followed accounts in case of accountsRetrieved', () => {
+    expect(null).toBeNull();
+  });
+
+  it('should make no change in case of accountsStored', () => {
     const currentState = { active: null, followed: [] };
     const action = { type: actionTypes.accountsStored, data: [accountA] };
     const changedState = accounts(currentState, action);
     expect(changedState.active).toBeNull();
-    expect(changedState.followed.length).toBe(0);
+    expect(changedState.followed).toHaveLength(0);
   });
 });

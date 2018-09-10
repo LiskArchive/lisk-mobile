@@ -15,7 +15,7 @@ describe('Reducers: Transactions', () => {
     fee: 10000000,
   };
 
-  test('should add new transactions to confirmed list in case of actionTypes.transactionsLoaded', () => {
+  it('should add new transactions to confirmed list in case of actionTypes.transactionsLoaded', () => {
     const state = { pending: [], confirmed: [transaction1], count: 2 };
     const action = {
       type: actionTypes.transactionsLoaded,
@@ -25,7 +25,7 @@ describe('Reducers: Transactions', () => {
     expect(changedState.confirmed).toEqual([transaction1, transaction2]);
   });
 
-  test('should unshift new transactions to pending list in case of actionTypes.transactionAdded', () => {
+  it('should unshift new transactions to pending list in case of actionTypes.transactionAdded', () => {
     const state = { pending: [], confirmed: [], count: null };
     const action = { type: actionTypes.transactionAdded, data: transaction1 };
     const changedState = transactions(state, action);
