@@ -13,7 +13,7 @@
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
     "test": "jest --rootDir=./ --config=./jest/main-config.js --coverage",
     "test:live": "jest --rootDir=./ --config=./jest/main-config.js --watch --coverage",
-    "test:format": "eslint ./",
+    "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "postinstall": "npm run link"
   },
