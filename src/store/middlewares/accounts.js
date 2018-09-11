@@ -1,7 +1,7 @@
 import actionTypes from '../../constants/actions';
 import { storeFollowedAccount } from '../../utilities/storage';
 
-const peersMiddleware = store => next => (action) => {
+const accountsMiddleware = store => next => (action) => {
   next(action);
   const { accounts } = store.getState();
 
@@ -15,4 +15,4 @@ const peersMiddleware = store => next => (action) => {
   }
 };
 
-export default peersMiddleware;
+export default accountsMiddleware;
