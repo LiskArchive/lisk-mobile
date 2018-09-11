@@ -9,7 +9,7 @@ import actionTypes from '../../constants/actions';
  *
  * @returns {Object} The latest state
  */
-const dialog = (state = [], action) => {
+const dialog = (state = [], action = {}) => {
   switch (action.type) {
     case actionTypes.loadingStarted:
       return [...state, action.data];

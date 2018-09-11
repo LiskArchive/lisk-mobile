@@ -9,6 +9,12 @@ describe('Reducers: Loading', () => {
     state = ['loading_1', 'loading_2'];
   });
 
+  it('should create the empty state initially', () => {
+    const createdState = loading();
+    const emptyState = [];
+    expect(createdState).toEqual(emptyState);
+  });
+
   it('should return loading array with the new loading if action.type = actionTypes.loadingStarted', () => {
     const action = {
       type: actionTypes.loadingStarted,
