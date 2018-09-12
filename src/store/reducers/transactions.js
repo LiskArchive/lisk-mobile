@@ -14,7 +14,7 @@ import { merge } from '../../utilities/helpers';
  * @param {String} action.type
  * @param {Object} action.data
  */
-const transactions = (state = { pending: [], confirmed: [], count: null }, action) => {
+const transactions = (state = { pending: [], confirmed: [], count: null }, action = {}) => {
   switch (action.type) {
     case actionTypes.transactionsLoaded:
       return merge(state, {

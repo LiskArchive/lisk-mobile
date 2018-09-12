@@ -13,7 +13,7 @@ import { merge } from '../../utilities/helpers';
  *
  * @returns {Object} The latest state
  */
-const accounts = (state = { active: null, followed: [] }, action) => {
+const accounts = (state = { active: null, followed: [] }, action = {}) => {
   switch (action.type) {
     case actionTypes.accountUpdated:
       return merge(state, { active: merge(state.active, action.data) });
@@ -21,11 +21,6 @@ const accounts = (state = { active: null, followed: [] }, action) => {
       return merge(state, { active: null });
     case actionTypes.accountLoggedIn:
       return merge(state, { active: action.data });
-    case actionTypes.accountEdited:
-      return merge(state, {
-        followed: [...state.followed.filter(item =>
-          item.address !== action.data.address), action.data.updatedData],
-      });
     case actionTypes.accountFollowed:
       return merge(state, {
         followed: [...state.followed.filter(item =>
