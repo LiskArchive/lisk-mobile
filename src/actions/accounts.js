@@ -107,7 +107,7 @@ export const accountLoggedIn = ({ passphrase }, cb) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
     dispatch(loadingStarted(actionTypes.accountLoggedIn));
-    getAccount(activePeer, extractAddress(passphrase))
+    return getAccount(activePeer, extractAddress(passphrase))
       .then((account) => {
         dispatch({
           type: actionTypes.accountLoggedIn,
