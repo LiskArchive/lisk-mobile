@@ -19,7 +19,7 @@ pipeline {
     stage ('Run Unit Tests') {
       steps {
         sh '''
-        npm run test:react-native
+        npm run test
         '''
       }
     }
