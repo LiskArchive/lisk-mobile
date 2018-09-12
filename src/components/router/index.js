@@ -31,12 +31,17 @@ const resetNavigationStack = (navigation, routeName) => {
 export const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
-    navigationOptions: {
-      headerLeft: null,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <IconButton
+        icon='settings'
+        iconSize={20}
+        onPress={() => navigation.navigate({ routeName: 'Settings' })}
+        style={styles.settings}
+        color={colors.white} />,
       title: <Logo />,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
-    },
+    }),
   },
   Send: {
     screen: Send,
@@ -121,15 +126,28 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         headerRight: <LogoutButton navigation={navigation} />,
-        headerLeft: <IconButton
-          icon='settings'
-          title=''
-          onPress={() => navigation.navigate('Settings')}
-          style={styles.settings}
-          iconButtonTitle={styles.settingsTitle}
-          color={colors.white} />,
         title: <Logo />,
         headerTintColor: colors.white,
+        headerStyle: {
+          backgroundColor: colors.primary5,
+          overflow: 'hidden',
+        },
+      }),
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions: ({ navigation }) => ({
+        headerBackground: <Bg />,
+        headerRight: <LogoutButton navigation={navigation} />,
+        title: <Logo />,
+        headerLeft: <IconButton
+          icon='back'
+          title=''
+          onPress={() => navigation.pop()}
+          style={styles.back}
+          iconButtonTitle={styles.backTitle}
+          color={colors.white} />,
+        headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: colors.primary5,
           overflow: 'hidden',
@@ -149,19 +167,6 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.white} />,
-        headerTintColor: styles.white,
-        headerStyle: {
-          backgroundColor: colors.primary5,
-          overflow: 'hidden',
-        },
-      }),
-    },
-    Settings: {
-      screen: Settings,
-      navigationOptions: ({ navigation }) => ({
-        headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
-        title: <Logo />,
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: colors.primary5,
