@@ -9,6 +9,7 @@ import Register from '../register';
 import Wallet from '../wallet';
 import Request from '../request';
 import OwnWallet from '../ownWallet';
+import Settings from '../settings';
 import styles from './styles';
 import LogoutButton from '../logoutButton';
 import MenuIcon from './menuIcon';
@@ -120,6 +121,13 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         headerRight: <LogoutButton navigation={navigation} />,
+        headerLeft: <IconButton
+          icon='settings'
+          title=''
+          onPress={() => navigation.navigate('Settings')}
+          style={styles.settings}
+          iconButtonTitle={styles.settingsTitle}
+          color={colors.white} />,
         title: <Logo />,
         headerTintColor: colors.white,
         headerStyle: {
@@ -141,6 +149,19 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.white} />,
+        headerTintColor: styles.white,
+        headerStyle: {
+          backgroundColor: colors.primary5,
+          overflow: 'hidden',
+        },
+      }),
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions: ({ navigation }) => ({
+        headerBackground: <Bg />,
+        headerRight: <LogoutButton navigation={navigation} />,
+        title: <Logo />,
         headerTintColor: styles.white,
         headerStyle: {
           backgroundColor: colors.primary5,
