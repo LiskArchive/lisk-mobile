@@ -1,7 +1,6 @@
 import Lisk from 'lisk-elements';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-// import moxios from 'moxios';
 import {
   accountFollowed,
   accountUnFollowed,
@@ -13,7 +12,6 @@ import {
   accountsRetrieved,
 } from './accounts';
 import actionTypes from '../constants/actions';
-// import { retrieveAccounts, storeAccounts } from '../utilities/storage';
 import * as storageUtility from '../utilities/storage';
 import * as accountUtility from '../utilities/api/account';
 import * as transactionsUtility from '../utilities/api/transactions';
