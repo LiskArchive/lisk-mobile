@@ -23,7 +23,7 @@ const transactions = (state = { pending: [], confirmed: [], count: null }, actio
           ...action.data.transactions,
         ],
       });
-    case actionTypes.transactionAdded:
+    case actionTypes.pendingTransactionAdded:
       return merge(state, {
         pending: [action.data, ...state.pending],
       });

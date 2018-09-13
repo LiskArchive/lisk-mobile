@@ -16,7 +16,7 @@ const actionTypes = {
   loadingFinished: 'LOADING_FINISHED',
   // Transactions
   transactionsLoaded: 'TRANSACTIONS_LOADED',
-  transactionAdded: 'TRANSACTIONS_ADDED',
+  pendingTransactionAdded: 'PENDING_TRANSACTIONS_ADDED',
   transactionsUpdated: 'TRANSACTIONS_UPDATED',
 };
 
