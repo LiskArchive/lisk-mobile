@@ -1,8 +1,11 @@
 import Lisk from 'lisk-elements';
 import actionTypes from '../constants/actions';
 
-const network = process.env.network || 'mainnet';
-const serverAddress = process.env.address || 'http://localhost:4000';
+
+const getNetwork = env => ({
+  network: env.network || 'mainnet',
+  serverAddress: env.address || 'http://localhost:4000',
+});
 
 const peerSet = config => ({
   data: new Lisk.APIClient(config.nodes, { nethash: config.nethash }),
@@ -17,10 +20,10 @@ const peerSet = config => ({
  * @param {Object} data - Active peer data and the passphrase of account
  * @returns {Object} Action object
  */
-export const activePeerSet = () =>
+export const activePeerSet = (env = process.env) =>
   (dispatch) => {
+    const { network, serverAddress } = getNetwork(env);
     const config = { nethash: 'net' };
-
     if (network === 'customNode') {
       config.nodes = [serverAddress];
       const liskAPIClient = new Lisk.APIClient(config.nodes, { nethash: config.nethash });
