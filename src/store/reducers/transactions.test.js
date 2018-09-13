@@ -32,7 +32,7 @@ describe('Reducers: Transactions', () => {
   });
 
   it('should unshift new transactions to pending list in case of actionTypes.transactionAdded', () => {
-    const action = { type: actionTypes.transactionAdded, data: transaction1 };
+    const action = { type: actionTypes.pendingTransactionAdded, data: transaction1 };
     const changedState = transactions(emptyState, action);
     expect(changedState.pending).toEqual([transaction1]);
   });
