@@ -19,15 +19,16 @@ export const transactionsLoaded = data =>
       });
   };
 
-export const transactionAdded = (data, account, cb) =>
+export const transactionAdded = (data, cb) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
+    const account = getState().accounts.active;
     dispatch(loadingStarted(actionTypes.transactionAdded));
     send(activePeer, data)
-      .then((res) => {
+      .then(({ id }) => {
         dispatch({
           data: {
-            id: res.id,
+            id,
             senderPublicKey: account.publicKey,
             senderId: account.address,
             recipientId: data.recipientId,
@@ -35,9 +36,9 @@ export const transactionAdded = (data, account, cb) =>
             fee: txConstants.send.fee,
             type: txConstants.send.type,
           },
-          type: actionTypes.transactionAdded,
+          type: actionTypes.pendingTransactionAdded,
         });
         dispatch(loadingFinished(actionTypes.transactionAdded));
-        cb({ txId: res.id });
+        cb({ txId: id });
       });
   };

@@ -38,14 +38,13 @@ class Form extends React.Component {
     });
     const { accounts, nextStep, transactionAdded } = this.props;
     const { amount, address, reference } = this.state;
-    const activeAccount = accounts.active;
     transactionAdded({
       recipientId: address,
       amount: toRawLsk(amount),
-      passphrase: activeAccount.passphrase,
+      passphrase: accounts.active.passphrase,
       secondPassphrase: null,
       data: reference || null,
-    }, activeAccount, nextStep);
+    }, nextStep);
   }
 
   goBack = () => {

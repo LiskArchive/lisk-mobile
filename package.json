@@ -11,8 +11,8 @@
     "build:ios": "react-native run-ios",
     "release:android": "cd android && ./gradlew assembleRelease",
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
-    "test": "jest --rootDir=./ --config=./jest/main-config.js --coverage",
-    "test:live": "jest --rootDir=./ --config=./jest/main-config.js --watch --coverage",
+    "test": "jest --env=jsdom --testURL=http://localhost/ --rootDir=./ --config=./jest/main-config.js --coverage",
+    "test:live": "jest --env=jsdom --rootDir=./ --config=./jest/main-config.js --watch --coverage",
     "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "postinstall": "npm run link"
@@ -117,8 +117,10 @@
     "jest-cli": "^22.4.2",
     "jest-fetch-mock": "^1.6.2",
     "jest-runner-eslint": "^0.6.0",
+    "moxios": "^0.4.0",
     "react-test-renderer": "16.3.1",
     "redux-connect-decorator": "^0.2.0",
+    "redux-mock-store": "^1.5.3",
     "rn-nodeify": "github:mvayngrib/rn-nodeify"
   },
   "react-native": {
