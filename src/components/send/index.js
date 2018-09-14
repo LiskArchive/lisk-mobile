@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import MultiStep from '../multiStep';
 import Form from './form';
-import Confirm from './confirm';
+import Overview from './overview';
 import Result from './result';
 import styles from './styles';
 import { IconButton } from '../toolBox/button';
@@ -51,7 +51,7 @@ class Send extends React.Component {
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         ref={(el) => { this.nav = el; }}>
         <Form title='form' navigation={this.props.navigation}/>
-        <Confirm title='confirm' navigation={this.props.navigation} />
+        <Overview title='confirm' navigation={this.props.navigation} />
         <Result title='result' navigation={this.props.navigation}/>
       </MultiStep>
     </View>);

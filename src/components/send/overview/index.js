@@ -28,7 +28,7 @@ const messages = {
   transactionAdded: transactionAddedAction,
 })
 
-class Form extends React.Component {
+class Overview extends React.Component {
   state = {
     disableButton: false,
   }
@@ -128,4 +128,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default Overview;
