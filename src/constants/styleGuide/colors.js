@@ -14,6 +14,7 @@ export default {
   grayScale3: '#94a2ab',
   grayScale4: '#f9fbfd',
   grayScale5: '#eaf1f4',
+  grayScale6: '#8399aa',
   white: '#fff',
   action1: '#da1d00',
   action2: '#c80039',
