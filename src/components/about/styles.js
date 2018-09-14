@@ -49,6 +49,10 @@ const styles = {
     marginTop: 18,
     marginBottom: 6,
   },
+  link: {
+    color: colors.primary5,
+    marginTop: 10,
+  },
 };
 
 export default StyleSheet.create(styles);
