@@ -10,6 +10,7 @@ import Wallet from '../wallet';
 import Request from '../request';
 import OwnWallet from '../ownWallet';
 import Settings from '../settings';
+import About from '../about';
 import styles from './styles';
 import LogoutButton from '../logoutButton';
 import MenuIcon from './menuIcon';
@@ -136,6 +137,26 @@ export default StackNavigator(
     },
     Settings: {
       screen: Settings,
+      navigationOptions: ({ navigation }) => ({
+        headerBackground: <Bg />,
+        headerRight: <LogoutButton navigation={navigation} />,
+        title: <Logo />,
+        headerLeft: <IconButton
+          icon='back'
+          title=''
+          onPress={() => navigation.pop()}
+          style={styles.back}
+          iconButtonTitle={styles.backTitle}
+          color={colors.white} />,
+        headerTintColor: styles.white,
+        headerStyle: {
+          backgroundColor: colors.primary5,
+          overflow: 'hidden',
+        },
+      }),
+    },
+    About: {
+      screen: About,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         headerRight: <LogoutButton navigation={navigation} />,
