@@ -17,6 +17,7 @@ const Settings = ({ navigation }) => (
       <View style={styles.item}>
         <ItemTitle
           navigation={navigation}
+          target='About'
           icon='about'
           iconSize={21}
           title='About Lisk'/>
