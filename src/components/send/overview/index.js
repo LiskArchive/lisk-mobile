@@ -37,12 +37,14 @@ class Overview extends React.Component {
       disableButton: true,
     });
     const { accounts, nextStep, transactionAdded } = this.props;
-    const { amount, address, reference } = this.state;
+    const {
+      amount, address, reference, secondPassphrase,
+    } = this.state;
     transactionAdded({
       recipientId: address,
       amount: toRawLsk(amount),
       passphrase: accounts.active.passphrase,
-      secondPassphrase: null,
+      secondPassphrase,
       data: reference || null,
     }, nextStep);
   }
@@ -68,7 +70,7 @@ class Overview extends React.Component {
 
   componentDidMount() {
     const {
-      navigation, accounts, address, reference, amount,
+      navigation, accounts, address, reference, amount, secondPassphrase,
     } = this.props;
 
     // Undefined address means we escaped the form step to initialize the account
@@ -76,7 +78,7 @@ class Overview extends React.Component {
       this.accountInitialization();
     } else {
       this.setState({
-        accounts, address, reference, amount,
+        accounts, address, reference, amount, secondPassphrase,
       });
       navigation.setParams({ showButtonLeft: true, action: this.goBack });
     }
