@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import Icon from './icon';
 import theme from './styles';
@@ -11,7 +11,7 @@ import theme from './styles';
  * @param {String} props.name - An icon name existing in our icons list
  * @param {Number} props.size - THe size of the icon in pixels, defaults to 35
  */
-const Input = ({
+export const Input = ({
   label, reference, styles, value, onChange, error,
   multiline, onFocus, autoFocus, onBlur, autoCorrect,
   keyboardType, allowFontScaling, secureTextEntry,
@@ -43,4 +43,20 @@ const Input = ({
   </View>);
 };
 
-export default Input;
+
+export const PassphraseInput = ({
+  label, reference, style, value, onChange, error, toggleFocus,
+}) =>
+  (<Input
+    label={label}
+    reference={reference}
+    styles={{ input: [theme.passphraseInput, style] }}
+    value={value}
+    onChange={onChange}
+    onFocus={() => toggleFocus(false)}
+    onBlur={() => toggleFocus(true)}
+    autoFocus={true}
+    autoCorrect={false}
+    multiline={Platform.OS === 'ios'}
+    secureTextEntry={Platform.OS !== 'ios'}
+    error={error} />);
