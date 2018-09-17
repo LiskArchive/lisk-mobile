@@ -5,6 +5,7 @@ import { boxes, colors } from '../../../constants/styleGuide';
 const styles = {
   container: {
     height: '100%',
+    backgroundColor: colors.white,
   },
   innerContainer: {
     flexDirection: 'column',

@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react';
-import { View, Platform } from 'react-native';
-import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
+import React from 'react';
+import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import connect from 'redux-connect-decorator';
 import { SecondaryButton, IconButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
+import StickyButton from '../tools/stickyButton';
 import { P, H1, H2, Small } from '../../toolBox/typography';
 import styles from './styles';
 import reg from '../../../constants/regex';
-import Input from '../../toolBox/input';
+import { Input } from '../../toolBox/input';
 import FormattedNumber from '../../formattedNumber';
 import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
@@ -125,19 +125,19 @@ class Form extends React.Component {
   }
 
   render() {
-    const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
     const { address, amount } = this.state;
     return (
-      <Fragment>
+      <View style={styles.wrapper}>
       <Scanner
         ref={(el) => { this.scanner = el; }}
         navigation={this.props.navigation}
         setAddress={this.setAddress}
         setAmount={this.setAmount}/>
       <KeyboardAwareScrollView
+        automaticallyAdjustContentInsets={false}
         enableOnAndroid={true}
         enableResetScrollToCoords={false}
-        contentContainerStyle={Platform.OS === 'ios' ? styles.container : styles.container}
+        contentContainerStyle={styles.container}
         onKeyboardDidShow={() => this.changeButtonOpacity(0)}
         onKeyboardDidHide={() => this.changeButtonOpacity(1)}>
         <View style={styles.innerContainer}>
@@ -229,15 +229,10 @@ class Form extends React.Component {
             title='Continue' />
           </View>
         </KeyboardAwareScrollView>
-        <KeyboardAccessoryView
-         style={styles[keyboardButtonStyle]}>
-          <SecondaryButton
-            style={styles.stickyButton}
-            disabled={address.validity !== 0 || amount.validity !== 0}
-            onClick={this.goToNextState}
-            title='Continue' />
-        </KeyboardAccessoryView>
-      </Fragment>
+        <StickyButton title='Continue'
+          disabled={address.validity !== 0 || amount.validity !== 0}
+          onClick={this.goToNextState}/>
+      </View>
     );
   }
 }
