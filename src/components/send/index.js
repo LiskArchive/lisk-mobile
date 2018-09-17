@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
 import MultiStep from '../multiStep';
 import Form from './form';
 import Overview from './overview';
+import Confirm from './confirm';
 import Result from './result';
 import styles from './styles';
 import { IconButton } from '../toolBox/button';
@@ -43,18 +43,17 @@ class Send extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    return (<View style={styles.wrapper}>
-      <MultiStep
+    return (<MultiStep
         finalCallback={() => {
           navigation.navigate({ routeName: 'OwnWallet' });
         }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         ref={(el) => { this.nav = el; }}>
         <Form title='form' navigation={this.props.navigation}/>
-        <Overview title='confirm' navigation={this.props.navigation} />
+        <Confirm title='confirm' navigation={this.props.navigation} />
+        <Overview title='overview' navigation={this.props.navigation} />
         <Result title='result' navigation={this.props.navigation}/>
-      </MultiStep>
-    </View>);
+      </MultiStep>);
   }
 }
 
