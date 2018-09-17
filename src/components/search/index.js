@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import styles from './styles';
 import reg from '../../constants/regex';
 import { PrimaryButton } from '../toolBox/button';
-import Input from '../toolBox/input';
+import { Input } from '../toolBox/input';
 
 class Search extends React.Component {
   constructor() {
@@ -60,16 +60,15 @@ class Search extends React.Component {
 
   render() {
     return (<View>
-
       <Input
-      label='Search for Lisk ID, Tx ID or delegate name'
-      reference={(input) => { this.query = input; }}
-      styles={{
-        input: styles.input,
-        inputLabel: styles.title,
-      }}
-      onChange={value => this.changeHandler('query', value)}
-    />
+        label='Search for Lisk ID, Tx ID or delegate name'
+        reference={(input) => { this.query = input; }}
+        styles={{
+          input: styles.input,
+          inputLabel: styles.title,
+        }}
+        onChange={value => this.changeHandler('query', value)}
+      />
       <PrimaryButton
         disabled={this.state.query.value.length < 2}
         onClick={this.search.bind(this)}

@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Share from '../share';
 import styles from './styles';
 import { viewportHeight, deviceWidth } from '../../utilities/device';
-import Input from '../toolBox/input';
+import { Input } from '../toolBox/input';
 import { H1, P, B } from '../toolBox/typography';
 import reg from '../../constants/regex';
 import colors from '../../constants/styleGuide/colors';
