@@ -117,10 +117,14 @@ class Form extends React.Component {
   }
 
   goToNextState = () => {
-    this.props.nextStep({
-      amount: this.state.amount.value,
-      address: this.state.address.value,
-      reference: this.state.reference.value,
+    const { secondPublicKey } = this.props.account;
+    this.props.move({
+      to: secondPublicKey ? 1 : 2,
+      stepData: {
+        amount: this.state.amount.value,
+        address: this.state.address.value,
+        reference: this.state.reference.value,
+      },
     });
   }
 
