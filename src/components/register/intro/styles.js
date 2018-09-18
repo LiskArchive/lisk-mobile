@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { colors } from '../../../constants/styleGuide';
+
+const { height } = Dimensions.get('window');
 
 const liskIdIconColor = '#9cb4fa';
 const avatarIconColor = '#a9dcf8';
@@ -27,7 +29,7 @@ const styles = {
   row: {
     flexDirection: 'row',
     paddingRight: 50,
-    marginBottom: 23,
+    marginBottom: height > 640 ? 23 : 5,
   },
   rowTitle: {
     marginTop: 5,
