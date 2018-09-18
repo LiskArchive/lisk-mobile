@@ -42,8 +42,6 @@ const styles = {
     borderBottomColor: 'transparent',
   },
   avatar: {
-    width: 80,
-    height: 80,
     top: 0,
     position: 'absolute',
     zIndex: 4,

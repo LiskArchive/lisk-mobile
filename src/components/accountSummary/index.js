@@ -41,15 +41,17 @@ class AccountSummary extends React.Component {
     });
   }
 
-  interpolate = (key, props, range = [0, 80]) =>
-    props.reduce((interpolated, prop) => {
-      interpolated[prop] = this.props.scrollY.interpolate({
-        inputRange: range,
-        outputRange: animationRanges[key][prop],
-        extrapolate: 'clamp',
-        easing: easings.easeOutQuad,
-      });
+  createInterpolatedValue = (outputRange, inputRange = [0, 80]) =>
+    this.props.scrollY.interpolate({
+      inputRange,
+      outputRange,
+      extrapolate: 'clamp',
+      easing: easings.easeOutQuad,
+    });
 
+  interpolate = (key, props, range) =>
+    props.reduce((interpolated, prop) => {
+      interpolated[prop] = this.createInterpolatedValue(animationRanges[key][prop], range);
       return interpolated;
     }, {});
 
@@ -72,6 +74,8 @@ class AccountSummary extends React.Component {
     const Anim = Animated.View;
     const itpl = this.interpolate;
     const { opacity } = this.state;
+    const avatarScale = this.createInterpolatedValue([1, 0.85]);
+    const avatarTranslate = this.createInterpolatedValue([0, -6]);
 
     return (<View style={this.props.style}>
       <Anim style={[styles.bg, { opacity }, itpl('bg', ['height'])]}>
@@ -82,7 +86,8 @@ class AccountSummary extends React.Component {
         <Anim style={[styles.container, itpl('container', ['height'])]}>
           <Anim style={[styles.avatar, { opacity },
             itpl('avatar', ['width', 'height', 'left', 'top'], [0, 35, 70])]}>
-            <Avatar address={account.address} size={80} />
+            <Avatar address={account.address}
+              size={80} scale={avatarScale} translate={avatarTranslate} />
           </Anim>
           <Anim onLayout={e => this.setPadding(e, 'address')}
             style={[styles.address, { opacity }, itpl('address', ['top', 'left'])]}>
