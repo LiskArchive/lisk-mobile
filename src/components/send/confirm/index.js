@@ -51,7 +51,7 @@ class Confirm extends React.Component {
       extractPublicKey(passphrase) !== this.props.accounts.active.secondPublicKey) {
       validity.push({
         code: 'dose_not_belong',
-        message: 'This passphrase does not belong to current account.',
+        message: 'This is not your second passphrase.',
       });
     }
 
