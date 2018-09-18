@@ -27,10 +27,12 @@ class AccountSummary extends React.Component {
     modalVisible: false,
     balanceWidth: 0,
     addressWidth: 0,
+    opacity: new Animated.Value(0),
   }
 
   componentDidMount() {
     this.screenWidth = Dimensions.get('window').width;
+    this.initialFadeIn();
   }
 
   toggleModal() {
@@ -58,30 +60,38 @@ class AccountSummary extends React.Component {
     }
   }
 
+  initialFadeIn = () => {
+    Animated.timing(this.state.opacity, {
+      toValue: 100,
+      duration: 500,
+    }).start();
+  }
+
   render() {
     const { account } = this.props;
     const Anim = Animated.View;
     const itpl = this.interpolate;
+    const { opacity } = this.state;
 
     return (<View style={this.props.style}>
-      <Anim style={[styles.bg, itpl('bg', ['height'])]}>
+      <Anim style={[styles.bg, { opacity }, itpl('bg', ['height'])]}>
         <Image style={styles.bgImage} source={stripes} />
       </Anim>
       {
         account && account.address ?
         <Anim style={[styles.container, itpl('container', ['height'])]}>
-          <Anim style={[styles.avatar,
+          <Anim style={[styles.avatar, { opacity },
             itpl('avatar', ['width', 'height', 'left', 'top'], [0, 35, 70])]}>
             <Avatar address={account.address} size={80} />
           </Anim>
           <Anim onLayout={e => this.setPadding(e, 'address')}
-            style={[styles.address, itpl('address', ['top', 'left'])]}>
+            style={[styles.address, { opacity }, itpl('address', ['top', 'left'])]}>
             <Share type={P} style={styles.addressP}
               containerStyle={styles.addressContainer}
               value={account.address} icon={true} />
           </Anim>
           <Anim onLayout={e => this.setPadding(e, 'balance')}
-            style={[styles.balance, itpl('balance', ['top', 'left'])]}>
+            style={[styles.balance, { opacity }, itpl('balance', ['top', 'left'])]}>
             <H2 style={styles.value}>
               <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>
             </H2>

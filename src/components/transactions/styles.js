@@ -91,6 +91,10 @@ const styles = {
     width: 110,
     height: 126,
   },
+  footer: {
+    height: 90,
+    width: '100%',
+  },
 };
 
 export default StyleSheet.create(styles);
