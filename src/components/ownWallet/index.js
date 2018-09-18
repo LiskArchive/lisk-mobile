@@ -6,8 +6,12 @@ import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import Empty from '../transactions/empty';
 import Loading from '../transactions/loading';
+import { viewportHeight } from '../../utilities/device';
 import InfiniteScrollView from '../infiniteScrollView';
 import styles from './styles';
+
+const itemHeight = 90;
+const summaryHeight = 250;
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -41,8 +45,10 @@ class Wallet extends React.Component {
     this.activeAccount = this.props.accounts.active || {};
     if (this.state.theme === 'loading' ||
       (this.state.theme === 'empty' && confirmed.length > 0)) {
+      const txNum = pending.length + confirmed.length;
       this.setState({
         theme: (confirmed.length === 0 && pending.length === 0) ? 'empty' : 'list',
+        footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < txNum,
       });
     }
   }
@@ -58,6 +64,13 @@ class Wallet extends React.Component {
     return Animated.event([{
       nativeEvent: { contentOffset: { y: this.state.scrollY } },
     }]);
+  }
+
+  initialAnimation = (el) => {
+    if (!this.scrollView) {
+      this.scrollView = el;
+      this.scrollView.scrollTo(1);
+    }
   }
 
   render() {
@@ -78,7 +91,7 @@ class Wallet extends React.Component {
       }
       {
         (this.state.theme === 'list') ? <InfiniteScrollView
-          ref={(el) => { if (el) this.scrollView = el; }}
+          ref={this.initialAnimation}
           scrollEventThrottle={8}
           onScroll={this.onScroll.call(this)}
           style={[styles.scrollView]}
@@ -89,6 +102,7 @@ class Wallet extends React.Component {
             offset: transactions.confirmed.length,
           })}>
           <Transactions transactions={transactions}
+            footer={this.state.footer}
             navigate={this.props.navigation.navigate}
             account={this.activeAccount} />
         </InfiniteScrollView> : null

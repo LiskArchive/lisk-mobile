@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import List from './list';
+import Footer from './footer';
 import { H3, Small, A } from '../toolBox/typography';
 import styles from './styles';
 import { fromRawLsk } from '../../utilities/conversions';
@@ -15,7 +16,9 @@ import colors from '../../constants/styleGuide/colors';
  */
 class Transactions extends React.Component {
   render() {
-    const { transactions, navigate, account } = this.props;
+    const {
+      transactions, navigate, account, footer,
+    } = this.props;
     const balance = parseFloat(fromRawLsk(account.balance));
     return (<View style={styles.container}>
       {
@@ -41,6 +44,9 @@ class Transactions extends React.Component {
               account={account.address}
               pending={transactions.pending}
               transactions={transactions.confirmed} />
+            {
+              footer ? <Footer /> : null
+            }
           </Fragment>
       }
     </View>);
