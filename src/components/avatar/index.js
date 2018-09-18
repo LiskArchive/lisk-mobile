@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Animated } from 'react-native';
 import Svg from 'react-native-svg';
 import { Gradients, gradientSchemes } from './gradients';
 import {
@@ -18,7 +18,20 @@ class Avatar extends React.Component {
   }
 
   render() {
-    const { address, size } = this.props;
+    const {
+      address, size, scale, translate,
+    } = this.props;
+    let Wrapper = View;
+    const scaleAttr = {};
+    if (scale) {
+      Wrapper = Animated.View;
+      scaleAttr.transform = [
+        { scaleX: scale },
+        { scaleY: scale },
+        { translateY: translate },
+        { translateX: translate },
+      ];
+    }
     const canvasSize = 200;
 
     const addressHashChunks = getHashChunks(address);
@@ -40,16 +53,16 @@ class Avatar extends React.Component {
       getShape(addressHashChunks[3], canvasSize, secondaryGradients[1], 0.18),
     ];
     return (
-      <View style={[styles.figure, this.props.style,
-        { width: size, borderRadius: size / 2 },
+      <Wrapper style={[styles.figure, this.props.style,
+        { width: size, borderRadius: size / 2 }, scaleAttr,
       ]}>
         <Svg viewBox={`0 0 ${canvasSize} ${canvasSize}`}
           preserveAspectRatio="none"
           height={size}
           width={size}
           style={[styles.avatar, {
-            width: canvasSize,
-            height: canvasSize,
+            width: '100%',
+            height: '100%',
             borderRadius: size / 2,
             }]}>
           <Gradients scheme={gradientsSchemesUrlsHashed}/>
@@ -57,7 +70,7 @@ class Avatar extends React.Component {
             <shape.component {...shape.props} key={i}/>
           ))}
         </Svg>
-      </View>
+      </Wrapper>
     );
   }
 }
