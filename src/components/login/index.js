@@ -38,7 +38,7 @@ class Login extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.accounts.active) {
+    if (this.props.accounts.active && this.props.navigation.isFocused()) {
       this.props.navigation
         .dispatch(NavigationActions.reset({
           index: 0,
