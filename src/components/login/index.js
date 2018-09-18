@@ -8,7 +8,7 @@ import { PrimaryButton } from '../toolBox/button';
 import { accountLoggedIn as accountLoggedInAction } from '../../actions/accounts';
 import styles from './styles';
 import { validatePassphrase } from '../../utilities/passphrase';
-import { PassphraseInput } from '../toolBox/input';
+import Input from '../toolBox/input';
 import { H1, Small, P, A } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 
@@ -118,13 +118,18 @@ class Login extends React.Component {
         onKeyboardDidShow={() => this.shrinkButton(false)}
         contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}>
         <View style={styles.innerContainer}>
-          <PassphraseInput
+          <Input
             label='Passphrase'
-            toggleFocus={this.shrinkButton}
             reference={(ref) => { this.passphraseInput = ref; }}
             styles={{ input: styles.input }}
             value={passphrase.value}
             onChange={this.changeHandler.bind(this, 'passphrase')}
+            onFocus={() => this.shrinkButton(false)}
+            onBlur={() => this.shrinkButton(true)}
+            autoFocus={true}
+            autoCorrect={false}
+            multiline={Platform.OS === 'ios'}
+            secureTextEntry={Platform.OS !== 'ios'}
             error={
               (error.length > 0 && error[0].message && error[0].message.length > 0) ?
               error[0].message.replace(' Please check the passphrase.', '') : ''

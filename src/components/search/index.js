@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import styles from './styles';
 import reg from '../../constants/regex';
 import { PrimaryButton } from '../toolBox/button';
-import { Input } from '../toolBox/input';
+import Input from '../toolBox/input';
 
 class Search extends React.Component {
   constructor() {

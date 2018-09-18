@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, boxes } from '../../../constants/styleGuide';
+import { colors, boxes, fonts } from '../../../constants/styleGuide';
 
 const styles = {
   wrapper: {
@@ -30,6 +30,10 @@ const styles = {
     paddingRight: boxes.boxPadding,
     borderRightWidth: boxes.boxPadding,
     borderRightColor: 'transparent',
+    color: 'black',
+    fontSize: 13,
+    letterSpacing: 1,
+    fontFamily: fonts.family.passphrase,
   },
   headings: {
     marginRight: boxes.boxPadding,

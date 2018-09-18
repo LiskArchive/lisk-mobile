@@ -9,7 +9,7 @@ import StickyButton from '../tools/stickyButton';
 import { P, H1, H2, Small } from '../../toolBox/typography';
 import styles from './styles';
 import reg from '../../../constants/regex';
-import { Input } from '../../toolBox/input';
+import Input from '../../toolBox/input';
 import FormattedNumber from '../../formattedNumber';
 import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';

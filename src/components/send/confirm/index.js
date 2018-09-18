@@ -1,15 +1,14 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Image } from 'react-native';
+import { View, Image, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validatePassphrase } from '../../../utilities/passphrase';
-import { PassphraseInput } from '../../toolBox/input';
+import { extractPublicKey } from '../../../utilities/api/account';
+import Input from '../../toolBox/input';
 import StickyButton from '../tools/stickyButton';
 import { H1, P } from '../../toolBox/typography';
 import secondPassphraseImage from '../../../assets/images/secondPassphrase.png';
 import styles from './styles';
-
-const devDefaultPass = process.env.passphrase || '';
 
 /**
  * The container component containing login and create account functionality
@@ -21,8 +20,8 @@ const devDefaultPass = process.env.passphrase || '';
 class Confirm extends React.Component {
   state = {
     secondPassphrase: {
-      value: devDefaultPass,
-      validity: validatePassphrase(devDefaultPass),
+      value: '',
+      validity: validatePassphrase(''),
       buttonStyle: null,
     },
   }
@@ -46,6 +45,19 @@ class Confirm extends React.Component {
     });
   }
 
+  validatePassphrase = (passphrase) => {
+    const validity = validatePassphrase(passphrase);
+    if (validity.length === 0 &&
+      extractPublicKey(passphrase) !== this.props.accounts.active.secondPublicKey) {
+      validity.push({
+        code: 'dose_not_belong',
+        message: 'This passphrase does not belong to current account.',
+      });
+    }
+
+    return validity;
+  }
+
   /**
    * General change handler to get bound to react component event listeners
    *
@@ -54,11 +66,11 @@ class Confirm extends React.Component {
    *
    * @todo Implement error status/message
    */
-  changeHandler(key, value) {
+  changeHandler = (value) => {
     this.setState({
-      [key]: {
+      secondPassphrase: {
         value,
-        validity: validatePassphrase(value),
+        validity: this.validatePassphrase(value),
       },
     });
   }
@@ -98,13 +110,18 @@ class Confirm extends React.Component {
               <Image style={styles.illustration} source={secondPassphraseImage} />
             </View>
           </View>
-          <PassphraseInput
+          <Input
             label='Second Passphrase'
-            toggleFocus={this.shrinkButton}
             reference={(ref) => { this.SecondPassphraseInput = ref; }}
             styles={{ input: styles.input }}
             value={secondPassphrase.value}
-            onChange={this.changeHandler.bind(this, 'secondPassphrase')}
+            onChange={this.changeHandler}
+            onFocus={() => this.shrinkButton(false)}
+            onBlur={() => this.shrinkButton(true)}
+            autoFocus={true}
+            autoCorrect={false}
+            multiline={Platform.OS === 'ios'}
+            secureTextEntry={Platform.OS !== 'ios'}
             error={
               (error.length > 0 && error[0].message && error[0].message.length > 0) ?
               error[0].message.replace(' Please check the passphrase.', '') : ''
