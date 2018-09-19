@@ -25,7 +25,7 @@ class SafeKeeping extends React.Component {
         <View>
           <View style={styles.titleContainer}>
             <H1 style={styles.header}>Your passphrase</H1>
-            <P style={styles.subtitle}>
+            <P style={styles.subHeader}>
               The only way to access your account.
             </P>
           </View>
