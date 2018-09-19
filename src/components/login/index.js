@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Platform } from 'react-native';
+import { View, Platform, NetInfo } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
@@ -33,6 +33,10 @@ class Login extends React.Component {
         validity: validatePassphrase(devDefaultPass),
         buttonStyle: null,
       },
+      apiError: {
+        code: null,
+        message: 'No errors.',
+      },
     };
   }
 
@@ -44,6 +48,10 @@ class Login extends React.Component {
           actions: [NavigationActions.navigate({ routeName: 'Main' })],
         }));
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -58,20 +66,33 @@ class Login extends React.Component {
    * @param {String} passphrase - valid mnemonic passphrase
    */
   onLoginSubmission = (passphrase) => {
-    this.setState({
-      connectionError: false,
-    });
-    if (passphrase.validity.length !== 0) {
-      this.passphraseInput.shake();
-    } else {
+    if (passphrase.validity.length === 0 && NetInfo.isConnected) {
       this.props.accountLoggedIn({
         passphrase: this.trim(passphrase.value),
       }, () => {
-        this.setState({
-          connectionError: true,
+        this.showError({
+          code: 'wrong_transaction',
+          message: 'Could not connect to the blockchain.',
         });
       });
+    } else {
+      this.showError({
+        code: 'no_connection',
+        message: 'Please check your internet connection.',
+      });
     }
+  }
+
+  showError = ({ code, message }) => {
+    this.setState({
+      apiError: { code, message },
+    });
+
+    this.timeout = setTimeout(() => {
+      this.setState({
+        apiError: { code: null, message: 'No errors.' },
+      });
+    }, 2000);
   }
 
   /**
@@ -105,8 +126,8 @@ class Login extends React.Component {
   }
 
   render() {
-    const { passphrase, connectionError } = this.state;
-    const error = passphrase.validity
+    const { passphrase, apiError } = this.state;
+    const passphraseErrors = passphrase.validity
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
     return (<View style={styles.wrapper}>
@@ -131,8 +152,9 @@ class Login extends React.Component {
             multiline={Platform.OS === 'ios'}
             secureTextEntry={Platform.OS !== 'ios'}
             error={
-              (error.length > 0 && error[0].message && error[0].message.length > 0) ?
-              error[0].message.replace(' Please check the passphrase.', '') : ''
+              (passphraseErrors.length > 0 && passphraseErrors[0].message &&
+              passphraseErrors[0].message.length > 0) ?
+              passphraseErrors[0].message.replace(' Please check the passphrase.', '') : ''
             }/>
         </View>
       </KeyboardAwareScrollView>
@@ -140,11 +162,9 @@ class Login extends React.Component {
         style={[styles.allWhite, Platform.OS === 'ios' ? null : styles.sticky]}
         animationOn='none'
         alwaysVisible={true}>
-        <View style={[styles.connectionErrorContainer, connectionError ? styles.visible : null]}>
-          <Icon size={16} name='error' style={styles.connectionErrorIcon} />
-          <Small style={styles.connectionError}>
-            Could not connect to the blockchain, try later!
-          </Small>
+        <View style={[styles.connectionErrorContainer, apiError.code ? styles.visible : null]}>
+          <Icon size={16} name='no-connection' style={styles.connectionErrorIcon} />
+          <Small style={styles.connectionError}>{apiError.message}</Small>
         </View>
         <View style={styles.registerLinkWrapper}>
           <P style={styles.registerQuestion}>{"Don't have a Lisk ID? "}</P>
