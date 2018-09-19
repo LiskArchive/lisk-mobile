@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { colors, fonts } from '../../../constants/styleGuide';
+
+const { height } = Dimensions.get('window');
 
 const styles = {
   container: {
@@ -10,7 +12,7 @@ const styles = {
     justifyContent: 'space-between',
   },
   header: {
-    marginTop: 17,
+    marginTop: 8,
   },
   subHeader: {
     marginTop: 14,
@@ -74,7 +76,7 @@ const styles = {
     backgroundColor: colors.grayScale3,
   },
   optionsContainer: {
-    marginTop: 25,
+    marginTop: height > 640 ? 25 : 5,
     height: 38,
     flexDirection: 'row',
     width: '100%',
@@ -84,7 +86,7 @@ const styles = {
   option: {
     height: 38,
     lineHeight: 38,
-    width: 99,
+    width: height > 640 ? 99 : 77,
     backgroundColor: '#74869B',
     borderRadius: 4,
     color: colors.white,
