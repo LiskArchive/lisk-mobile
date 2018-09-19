@@ -96,6 +96,7 @@ class MultiStep extends React.Component {
     const { data, current } = this.state;
     const extraProps = {
       nextStep: this.next.bind(this),
+      move: this.move.bind(this),
       prevStep: this.prev.bind(this),
       ...data[current],
     };

@@ -131,6 +131,12 @@ const styles = {
   inputErrorStyle: {
     borderBottomColor: colors.action1,
   },
+  passphraseInput: {
+    color: 'black',
+    fontSize: 13,
+    letterSpacing: 1,
+    fontFamily: fonts.family.passphrase,
+  },
 };
 
 export default StyleSheet.create(styles);

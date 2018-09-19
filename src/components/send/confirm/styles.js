@@ -1,77 +1,66 @@
 import { StyleSheet } from 'react-native';
-import { boxes, colors, fonts } from '../../../constants/styleGuide';
+import { colors, boxes, fonts } from '../../../constants/styleGuide';
 
 const styles = {
+  wrapper: {
+    backgroundColor: colors.white,
+  },
   container: {
     height: '100%',
   },
   innerContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginRight: boxes.boxPadding,
-    marginLeft: boxes.boxPadding,
+    height: '100%',
     paddingTop: 36,
-    paddingBottom: 35,
-  },
-  verticalAligner: {
-    padding: 20,
-  },
-  centerAlign: {
-    textAlign: 'center',
-  },
-  leftAlign: {
-    textAlign: 'left',
-  },
-  black: {
-    color: colors.black,
-  },
-  heading: {
-    fontSize: 24,
-    paddingBottom: 80,
-  },
-  row: {
-    marginBottom: 4,
-  },
-  title: {
-    fontSize: 12,
-    paddingBottom: 10,
-  },
-  amount: {
-    paddingBottom: 15,
-  },
-  address: {
-    fontSize: 24,
-    paddingBottom: 15,
+    paddingBottom: 24,
   },
   button: {
-    borderRadius: 0,
-    marginBottom: 0,
-    marginTop: 20,
+    marginRight: boxes.boxPadding,
+    marginLeft: boxes.boxPadding,
   },
-  label: {
-    marginTop: 15,
-    marginBottom: 7,
-
-    color: colors.grayScale1,
-    fontFamily: fonts.family.contextLight,
-    fontSize: fonts.size.input,
-    fontWeight: '400',
+  buttonSticky: {
+    borderRadius: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
   },
   subtitle: {
     marginTop: 7,
     color: colors.grayScale2,
   },
-  addressContainer: {
+  input: {
+    paddingRight: boxes.boxPadding,
+    borderRightWidth: boxes.boxPadding,
+    borderRightColor: 'transparent',
+    color: 'black',
+    fontSize: 13,
+    letterSpacing: 1,
+    fontFamily: fonts.family.passphrase,
+  },
+  headings: {
+    marginRight: boxes.boxPadding,
+    marginLeft: boxes.boxPadding,
+  },
+  illustrationWrapper: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 40,
   },
-  avatar: {
-    paddingBottom: 0,
-    marginRight: 20,
+  illustration: {
+    width: 85,
+    height: 85,
   },
-  link: {
-    color: colors.primary5,
+  visible: {
+    opacity: 1,
+  },
+  allWhite: {
+    borderTopColor: colors.white,
+    backgroundColor: colors.white,
+  },
+  sticky: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'yellow',
   },
 };
 

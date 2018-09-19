@@ -5,6 +5,7 @@ const { height } = Dimensions.get('window');
 const styles = {
   container: {
     height: '100%',
+    backgroundColor: colors.white,
   },
   innerContainer: {
     flexDirection: 'column',

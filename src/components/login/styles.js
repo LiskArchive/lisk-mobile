@@ -31,11 +31,15 @@ const styles = {
     paddingRight: 20,
     opacity: 0,
     paddingBottom: 10,
+    marginBottom: -30,
+    backgroundColor: colors.white,
+    elevation: 2,
+    zIndex: 2,
   },
   connectionError: {
     color: colors.grayScale1,
     fontFamily: fonts.family.context,
-    fontSize: fonts.size.input,
+    fontSize: fonts.size.small,
   },
   connectionErrorIcon: {
     color: colors.action1,

@@ -1,13 +1,15 @@
-import { StyleSheet, DeviceInfo, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 import { colors, boxes } from '../../../constants/styleGuide';
 import { viewportHeight, headerHeight } from '../../../utilities/device';
 
 
 const { height, width } = Dimensions.get('window');
 const styles = {
+  wrapper: {
+    backgroundColor: colors.white,
+  },
   container: {
-    minHeight: '100%',
-    zIndex: 1,
+    height: '100%',
   },
   innerContainer: {
     flexDirection: 'column',
@@ -19,11 +21,6 @@ const styles = {
   button: {
     marginRight: boxes.boxPadding,
     marginLeft: boxes.boxPadding,
-  },
-  stickyButton: {
-    borderRadius: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
   },
   subtitle: {
     marginTop: 7,
@@ -64,21 +61,6 @@ const styles = {
     lineHeight: 25,
     marginLeft: 5,
     marginTop: -3,
-  },
-  iosKeyboard: {
-    backgroundColor: 'transparent',
-    marginBottom: DeviceInfo.isIPhoneX_deprecated ? -89 : -59,
-    borderRadius: 0,
-  },
-  androidKeyboard: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    bottom: 0,
-    top: 0,
-    right: 0,
-    left: 0,
-    zIndex: 9999,
-    borderRadius: 0,
   },
   preview: {
     position: 'absolute',
