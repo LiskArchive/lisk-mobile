@@ -11,7 +11,6 @@ const styles = {
   },
   header: {
     marginTop: 8,
-    paddingBottom: 12,
   },
   subTitle: {
     color: colors.grayScale2,
