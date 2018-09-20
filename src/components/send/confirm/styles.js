@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, DeviceInfo } from 'react-native';
 import { colors, boxes, fonts } from '../../../constants/styleGuide';
 
 const styles = {
@@ -16,6 +16,7 @@ const styles = {
   button: {
     marginRight: boxes.boxPadding,
     marginLeft: boxes.boxPadding,
+    bottom: 100,
   },
   buttonSticky: {
     borderRadius: 0,
@@ -61,6 +62,22 @@ const styles = {
     left: 0,
     right: 0,
     backgroundColor: 'yellow',
+  },
+  iosKeyboard: {
+    backgroundColor: 'transparent',
+    height: 'auto',
+    marginBottom: DeviceInfo.isIPhoneX_deprecated ? -39 : -9,
+    borderRadius: 0,
+  },
+  androidKeyboard: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    bottom: 0,
+    top: 0,
+    right: 0,
+    left: 0,
+    zIndex: 9999,
+    borderRadius: 0,
   },
 };
 

@@ -1,11 +1,12 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
+import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { View, Image, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validatePassphrase } from '../../../utilities/passphrase';
 import { extractPublicKey } from '../../../utilities/api/account';
 import Input from '../../toolBox/input';
-import StickyButton from '../tools/stickyButton';
+import { SecondaryButton } from '../../toolBox/button';
 import { H1, P } from '../../toolBox/typography';
 import secondPassphraseImage from '../../../assets/images/secondPassphrase.png';
 import styles from './styles';
@@ -22,7 +23,7 @@ class Confirm extends React.Component {
     secondPassphrase: {
       value: '',
       validity: validatePassphrase(''),
-      buttonStyle: null,
+      buttonStyle: styles.button,
     },
   }
 
@@ -89,7 +90,7 @@ class Confirm extends React.Component {
   }
 
   render() {
-    const { secondPassphrase } = this.state;
+    const { secondPassphrase, buttonStyle } = this.state;
     const error = secondPassphrase.validity
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || secondPassphrase.validity.length === 1);
@@ -128,9 +129,16 @@ class Confirm extends React.Component {
             }/>
         </View>
       </KeyboardAwareScrollView>
-      <StickyButton title='Continue'
-        disabled={secondPassphrase.validity.length !== 0}
-        onClick={this.onSubmission}/>
+      <KeyboardAccessoryView
+        style={styles[Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard']}
+        animationOn='none'
+        alwaysVisible={true}>
+        <SecondaryButton
+          disabled={secondPassphrase.validity.length !== 0}
+          title='Continue'
+          onClick={this.onSubmission}
+          style={buttonStyle} />
+      </KeyboardAccessoryView>
     </View>);
   }
 }

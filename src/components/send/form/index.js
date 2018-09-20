@@ -1,11 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import connect from 'redux-connect-decorator';
 import { SecondaryButton, IconButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
-import StickyButton from '../tools/stickyButton';
 import { P, H1, H2, Small } from '../../toolBox/typography';
 import styles from './styles';
 import reg from '../../../constants/regex';
@@ -233,9 +233,16 @@ class Form extends React.Component {
             title='Continue' />
           </View>
         </KeyboardAwareScrollView>
-        <StickyButton title='Continue'
-          disabled={address.validity !== 0 || amount.validity !== 0}
-          onClick={this.goToNextState}/>
+        <KeyboardAccessoryView
+          style={styles[Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard']}
+          animationOn='none'
+          alwaysVisible={true}>
+          <SecondaryButton
+            disabled={address.validity !== 0 || amount.validity !== 0}
+            title='Continue'
+            onClick={this.goToNextState}
+            style={styles.buttonSticky} />
+        </KeyboardAccessoryView>
       </View>
     );
   }

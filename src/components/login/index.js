@@ -151,9 +151,9 @@ class Login extends React.Component {
           <A style={styles.registerLink} onPress={this.goToRegistration}>Create it now</A>
         </View>
         <PrimaryButton
-        style={this.state.buttonStyle}
-        disabled={passphrase.validity.length !== 0}
-        onClick={this.onLoginSubmission.bind(this, passphrase)}>Sign in</PrimaryButton>
+          style={this.state.buttonStyle}
+          disabled={passphrase.validity.length !== 0}
+          onClick={this.onLoginSubmission.bind(this, passphrase)}>Sign in</PrimaryButton>
       </KeyboardAccessoryView>
     </View>);
   }
