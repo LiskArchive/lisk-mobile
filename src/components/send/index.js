@@ -20,7 +20,7 @@ class Send extends React.Component {
         params.action();
       }}
       style={styles.back}
-      color={colors.white} /> : null,
+      color={colors.white} /> : <IconButton color='transparent' icon='back'/>,
     };
   };
   componentDidMount() {

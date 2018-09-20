@@ -29,6 +29,11 @@ class Register extends React.Component {
       headerStyle: {
         backgroundColor: '#F9FDFF',
         borderBottomWidth: 0,
+        elevation: 0,
+      },
+      headerTitleStyle: {
+        textAlign: 'center',
+        flex: 1,
       },
       headerLeft: (params && params.action) ? <IconButton
         icon='back'
@@ -39,6 +44,7 @@ class Register extends React.Component {
         style={styles.backButton}
         color={colors.grayScale1}/> :
         null,
+      headerRight: (params && params.action) ? <IconButton color='transparent' icon='back'/> : null,
     };
   };
   hideNav = () => {
