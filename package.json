@@ -32,7 +32,7 @@
     "@remobile/react-native-qrcode-local-image": "github:yasharAyari/react-native-qrcode-local-image#support-import-from-cameraroll",
     "@tradle/react-native-http": "^2.0.1",
     "assert": "^1.4.1",
-    "bignumber.js": "^6.0.0",
+    "bignumber.js": "^7.2.1",
     "browserify-zlib": "^0.1.4",
     "buffer": "^4.9.1",
     "buffer-reverse": "^1.0.1",
