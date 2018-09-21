@@ -23,7 +23,7 @@ class Form extends React.Component {
     state = {
       address: { value: '', validity: -1 },
       amount: { value: '', validity: -1 },
-      reference: { value: '', validity: -1 },
+      reference: { value: '', validity: 0 },
       secondaryButtonOpacity: 1,
     };
 
@@ -45,7 +45,7 @@ class Form extends React.Component {
    */
   changeHandler = (name, value) => {
     let validity = -1;
-    if (value !== '') {
+    if (value !== '' || name === 'reference') {
       validity = this.validator[name](value) ? 0 : 1;
     }
 
@@ -126,7 +126,7 @@ class Form extends React.Component {
 
   render() {
     const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
-    const { address, amount } = this.state;
+    const { address, amount, reference } = this.state;
     return (
       <Fragment>
       <Scanner
@@ -223,7 +223,7 @@ class Form extends React.Component {
             />
           </View>
           <SecondaryButton
-            disabled={address.validity !== 0 || amount.validity !== 0}
+            disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
             onClick={this.goToNextState}
             style={[styles.button, { opacity: this.state.secondaryButtonOpacity }]}
             title='Continue' />
@@ -233,7 +233,7 @@ class Form extends React.Component {
          style={styles[keyboardButtonStyle]}>
           <SecondaryButton
             style={styles.stickyButton}
-            disabled={address.validity !== 0 || amount.validity !== 0}
+            disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
             onClick={this.goToNextState}
             title='Continue' />
         </KeyboardAccessoryView>
