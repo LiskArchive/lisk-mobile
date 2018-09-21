@@ -31,6 +31,8 @@ const styles = {
   },
   input: {
     marginTop: 0,
+    flexWrap: 'wrap',
+    flex: 1,
   },
   headings: {
     marginRight: boxes.boxPadding,
