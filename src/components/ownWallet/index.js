@@ -58,6 +58,7 @@ class Wallet extends React.Component {
       senderIdOrRecipientId: this.activeAccount.address,
       offset: 0,
     });
+    this.initialAnimation();
   }
 
   onScroll() {
@@ -66,11 +67,16 @@ class Wallet extends React.Component {
     }]);
   }
 
-  initialAnimation = (el) => {
-    if (!this.scrollView) {
-      this.scrollView = el;
-      this.scrollView.scrollTo(1);
-    }
+  initialAnimation = () => {
+    this.timeout = setTimeout(() => {
+      if (this.scrollView) {
+        this.scrollView.scrollTo(1);
+      }
+    }, 100);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
 
   render() {
@@ -91,7 +97,7 @@ class Wallet extends React.Component {
       }
       {
         (this.state.theme === 'list') ? <InfiniteScrollView
-          ref={this.initialAnimation}
+          ref={(el) => { this.scrollView = el; }}
           scrollEventThrottle={8}
           onScroll={this.onScroll.call(this)}
           style={[styles.scrollView]}

@@ -12,9 +12,8 @@ import styles, { animationRanges } from './styles';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
 import { H4, P, H2 } from '../toolBox/typography';
-import easings from '../../utilities/easing';
 import stripes from '../../assets/images/stripes.png';
-
+import easing from '../../utilities/easing';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -27,7 +26,10 @@ class AccountSummary extends React.Component {
     modalVisible: false,
     balanceWidth: 0,
     addressWidth: 0,
-    opacity: new Animated.Value(0),
+    initialAnimations: {
+      opacity: new Animated.Value(0),
+      top: new Animated.Value(-20),
+    },
   }
 
   componentDidMount() {
@@ -46,7 +48,6 @@ class AccountSummary extends React.Component {
       inputRange,
       outputRange,
       extrapolate: 'clamp',
-      easing: easings.easeOutQuad,
     });
 
   interpolate = (key, props, range) =>
@@ -63,9 +64,17 @@ class AccountSummary extends React.Component {
   }
 
   initialFadeIn = () => {
-    Animated.timing(this.state.opacity, {
-      toValue: 100,
-      duration: 500,
+    const { opacity, top } = this.state.initialAnimations;
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 400,
+      delay: 100,
+    }).start();
+    Animated.timing(top, {
+      toValue: 0,
+      duration: 400,
+      delay: 100,
+      easing: easing.easeInOutQuart,
     }).start();
   }
 
@@ -73,17 +82,17 @@ class AccountSummary extends React.Component {
     const { account } = this.props;
     const Anim = Animated.View;
     const itpl = this.interpolate;
-    const { opacity } = this.state;
+    const { opacity, top } = this.state.initialAnimations;
     const avatarScale = this.createInterpolatedValue([1, 0.85]);
     const avatarTranslate = this.createInterpolatedValue([0, -6]);
 
     return (<View style={this.props.style}>
-      <Anim style={[styles.bg, { opacity }, itpl('bg', ['height'])]}>
+      <Anim style={[styles.bg, itpl('bg', ['height'])]}>
         <Image style={styles.bgImage} source={stripes} />
       </Anim>
       {
         account && account.address ?
-        <Anim style={[styles.container, itpl('container', ['height'])]}>
+        <Anim style={[styles.container, { opacity, top }, itpl('container', ['height'])]}>
           <Anim style={[styles.avatar, { opacity },
             itpl('avatar', ['width', 'height', 'left', 'top'], [0, 35, 70])]}>
             <Avatar address={account.address}
