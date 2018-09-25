@@ -8,23 +8,20 @@ const styles = {
   wrapper: {
     backgroundColor: colors.white,
   },
-  container: {
-    height: '100%',
+  subtitle: {
+    marginTop: 7,
+    color: colors.grayScale2,
   },
   innerContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '100%',
-    paddingTop: 36,
     paddingBottom: 24,
   },
-  button: {
-    marginRight: boxes.boxPadding,
-    marginLeft: boxes.boxPadding,
+  titleContainer: {
+    paddingTop: 36,
   },
-  subtitle: {
-    marginTop: 7,
-    color: colors.grayScale2,
+  form: {
+    paddingBottom: 20,
   },
   input: {
     marginTop: 0,

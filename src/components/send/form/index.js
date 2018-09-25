@@ -1,9 +1,7 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
+import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { SecondaryButton, IconButton } from '../../toolBox/button';
+import { IconButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
 import { P, H1, H2, Small } from '../../toolBox/typography';
@@ -14,6 +12,7 @@ import FormattedNumber from '../../formattedNumber';
 import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
 import Scanner from './scanner';
+import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -132,19 +131,20 @@ class Form extends React.Component {
     const { address, amount } = this.state;
     return (
       <View style={styles.wrapper}>
-      <Scanner
-        ref={(el) => { this.scanner = el; }}
-        navigation={this.props.navigation}
-        setAddress={this.setAddress}
-        setAmount={this.setAmount}/>
-      <KeyboardAwareScrollView
-        automaticallyAdjustContentInsets={false}
-        enableOnAndroid={true}
-        enableResetScrollToCoords={false}
-        contentContainerStyle={styles.container}
-        onKeyboardDidShow={() => this.changeButtonOpacity(0)}
-        onKeyboardDidHide={() => this.changeButtonOpacity(1)}>
-        <View style={styles.innerContainer}>
+        <Scanner
+          ref={(el) => { this.scanner = el; }}
+          navigation={this.props.navigation}
+          setAddress={this.setAddress}
+          setAmount={this.setAmount}/>
+        <KeyboardAwareScrollView
+          disabled={address.validity !== 0 || amount.validity !== 0}
+          onSubmit={this.goToNextState}
+          hasTabBar={true}
+          button={{
+            title: 'Continue',
+            type: 'inBox',
+          }}
+          styles={{ container: styles.container, innerContainer: styles.innerContainer }}>
           <View style={styles.titleContainer}>
             <View style={styles.headings}>
               <H1>Send</H1>
@@ -226,23 +226,7 @@ class Form extends React.Component {
               onFocus={() => { this.activeInputRef = 2; }}
             />
           </View>
-          <SecondaryButton
-            disabled={address.validity !== 0 || amount.validity !== 0}
-            onClick={this.goToNextState}
-            style={[styles.button, { opacity: this.state.secondaryButtonOpacity }]}
-            title='Continue' />
-          </View>
         </KeyboardAwareScrollView>
-        <KeyboardAccessoryView
-          style={styles[Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard']}
-          animationOn='none'
-          alwaysVisible={true}>
-          <SecondaryButton
-            disabled={address.validity !== 0 || amount.validity !== 0}
-            title='Continue'
-            onClick={this.goToNextState}
-            style={styles.buttonSticky} />
-        </KeyboardAccessoryView>
       </View>
     );
   }
