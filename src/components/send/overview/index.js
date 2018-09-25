@@ -40,6 +40,7 @@ class Overview extends React.Component {
     const {
       amount, address, reference, secondPassphrase,
     } = this.state;
+
     transactionAdded({
       recipientId: address,
       amount: toRawLsk(amount),

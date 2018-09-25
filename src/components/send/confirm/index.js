@@ -34,13 +34,13 @@ class Confirm extends React.Component {
     return passphrase.trim().replace(/\s+/g, ' ');
   }
 
-  onSubmission = (secondPassphrase) => {
+  onSubmission = () => {
     const { amount, address, reference } = this.props;
     this.props.nextStep({
       amount,
       address,
       reference,
-      secondPassphrase,
+      secondPassphrase: this.state.secondPassphrase.value,
     });
   }
 
