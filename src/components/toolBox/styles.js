@@ -1,5 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, DeviceInfo, Platform } from 'react-native';
 import { fonts, colors, boxes } from '../../constants/styleGuide';
+import { viewportHeight } from '../../utilities/device';
+
+const bottomOffset = DeviceInfo.isIPhoneX_deprecated ? 30 : 0;
 
 const styles = {
   h1: {
@@ -136,6 +139,68 @@ const styles = {
     fontSize: 13,
     letterSpacing: 1,
     fontFamily: fonts.family.passphrase,
+  },
+  scrollViewContainer: {
+    minHeight: viewportHeight(),
+  },
+  scrollViewInnerContainer: {
+    height: '100%',
+  },
+  offKeyboardButton: {
+    marginRight: boxes.boxPadding,
+    marginLeft: boxes.boxPadding,
+  },
+  keyboardStickyButton: {
+    borderRadius: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+  },
+  hasTabBar: {
+    ...Platform.select({
+      android: {
+        top: -50,
+      },
+      ios: {
+        marginBottom: DeviceInfo.isIPhoneX_deprecated ? -41 : -12,
+      },
+    }),
+  },
+  hiddenStickyButton: {
+    bottom: -100,
+    marginRight: boxes.boxPadding,
+    marginLeft: boxes.boxPadding,
+  },
+  pullUp: {
+    ...Platform.select({
+      android: {
+        top: -20,
+      },
+      ios: {
+        marginBottom: (20 + bottomOffset),
+      },
+    }),
+  },
+  overlay: {
+    zIndex: 9999,
+  },
+  keyboard: {
+    ...Platform.select({
+      android: {
+        backgroundColor: 'transparent',
+        borderTopColor: 'transparent',
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        left: 0,
+        borderRadius: 0,
+      },
+      ios: {
+        backgroundColor: 'transparent',
+        borderTopColor: 'transparent',
+        height: 'auto',
+        borderRadius: 0,
+      },
+    }),
   },
 };
 
