@@ -6,21 +6,25 @@ pipeline {
       steps {
         script{
           cache_file = restoreCache("package.json")
-          sh 'npm install'
+          nvm(getNodejsVersion()) {
+            sh 'npm install'
+          }
           saveCache(cache_file, './node_modules', 10)
         }
       }
     }
     stage ('Run ESLint') {
       steps {
-        sh 'npm run test:format'
+        nvm(getNodejsVersion()) {
+          sh 'npm run test:format'
+        }
       }
     }
     stage ('Run unit tests') {
       steps {
-        sh '''
-        npm run test
-        '''
+        nvm(getNodejsVersion()) {
+          sh 'npm run test'
+        }
       }
     }
   }
