@@ -17,7 +17,7 @@ const messages = {
   },
   send: {
     title: 'Ready to Send',
-    subtitle: "You are about to send LSK tokens{'\n'}to another address.",
+    subtitle: 'You are about to send LSK tokens to another address.',
     button: 'Send now',
   },
 };
