@@ -11,6 +11,7 @@ import Request from '../request';
 import OwnWallet from '../ownWallet';
 import Settings from '../settings';
 import About from '../about';
+import Terms from '../terms';
 import styles from './styles';
 import LogoutButton from '../logoutButton';
 import MenuIcon from './menuIcon';
@@ -55,6 +56,7 @@ export const Tabs = TabNavigator({
   Request: {
     screen: Request,
     navigationOptions: {
+      headerLeft: <IconButton color='transparent' icon='back'/>,
       title: <Logo />,
       tabBarLabel: 'Request',
       tabBarIcon: ({ focused }) => <MenuIcon name='request' focused={focused} />, //eslint-disable-line
@@ -88,14 +90,13 @@ export default StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        headerRight: null,
         title: <Logo color={colors.grayScale1} />,
       },
     },
     Login: {
       screen: Login,
       navigationOptions: ({ navigation }) => ({
-        headerRight: null,
+        headerRight: <IconButton color='transparent' icon='back'/>,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -106,7 +107,12 @@ export default StackNavigator(
         headerStyle: {
           backgroundColor: colors.white,
           borderBottomColor: colors.white,
-          borderBottomWidth: 0,
+          elevation: 0,
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          alignSelf: 'center',
+          flex: 1,
         },
         title: <Logo color={colors.primary9} />,
       }),
@@ -119,6 +125,10 @@ export default StackNavigator(
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
         },
       }),
     },
@@ -153,6 +163,10 @@ export default StackNavigator(
           backgroundColor: colors.primary5,
           overflow: 'hidden',
         },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
       }),
     },
     About: {
@@ -173,6 +187,34 @@ export default StackNavigator(
           backgroundColor: colors.primary5,
           overflow: 'hidden',
         },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
+      }),
+    },
+    Terms: {
+      screen: Terms,
+      navigationOptions: ({ navigation }) => ({
+        headerBackground: <Bg />,
+        headerRight: <LogoutButton navigation={navigation} />,
+        title: <Logo />,
+        headerLeft: <IconButton
+          icon='back'
+          title=''
+          onPress={() => navigation.pop()}
+          style={styles.back}
+          iconButtonTitle={styles.backTitle}
+          color={colors.white} />,
+        headerTintColor: styles.white,
+        headerStyle: {
+          backgroundColor: colors.primary5,
+          overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
       }),
     },
     TxDetail: {
@@ -192,6 +234,10 @@ export default StackNavigator(
         headerStyle: {
           backgroundColor: colors.primary5,
           overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
         },
       }),
     },

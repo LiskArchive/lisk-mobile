@@ -7,11 +7,6 @@ import styles from './styles';
 const Settings = ({ navigation }) => (
   <View style={styles.container}>
     <H1>Settings</H1>
-
-    <View style={styles.group}>
-      <H4>Privacy</H4>
-    </View>
-
     <View style={styles.group}>
       <H4>About</H4>
       <View style={styles.item}>
@@ -21,6 +16,14 @@ const Settings = ({ navigation }) => (
           icon='about'
           iconSize={21}
           title='About Lisk'/>
+      </View>
+      <View style={styles.item}>
+        <ItemTitle
+          navigation={navigation}
+          icon='terms'
+          target='Terms'
+          iconSize={21}
+          title='Terms of use'/>
       </View>
     </View>
   </View>

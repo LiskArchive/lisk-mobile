@@ -36,7 +36,7 @@ const styles = {
   },
   logo: {
     width: 460,
-    height: height < 640 ? 350 : 460,
+    height: height < 640 ? 310 : 460,
     paddingBottom: 0,
     top: -25,
   },

@@ -105,6 +105,7 @@ const styles = {
     fontFamily: fonts.family.contextSemiBold,
     lineHeight: 30,
     minHeight: 30,
+    width: '100%',
   },
   inputContainer: {
     borderBottomColor: colors.grayScale1,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Animated } from 'react-native';
+import { View, Image, Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
 import {
   accountFollowed as accountFollowedAction,
@@ -8,12 +8,12 @@ import {
 import Avatar from '../avatar';
 import { fromRawLsk } from '../../utilities/conversions';
 import Modal from '../followedAccountsModal';
-import styles, { consts } from './styles';
+import styles, { animationRanges } from './styles';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
 import { H4, P, H2 } from '../toolBox/typography';
 import stripes from '../../assets/images/stripes.png';
-
+import easing from '../../utilities/easing';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -24,6 +24,17 @@ import stripes from '../../assets/images/stripes.png';
 class AccountSummary extends React.Component {
   state = {
     modalVisible: false,
+    balanceWidth: 0,
+    addressWidth: 0,
+    initialAnimations: {
+      opacity: new Animated.Value(0),
+      top: new Animated.Value(-20),
+    },
+  }
+
+  componentDidMount() {
+    this.screenWidth = Dimensions.get('window').width;
+    this.initialFadeIn();
   }
 
   toggleModal() {
@@ -32,76 +43,76 @@ class AccountSummary extends React.Component {
     });
   }
 
-  interpolate(props) {
-    return Object.keys(props).reduce((interpolated, key) => {
-      interpolated[key] = this.props.scrollY.interpolate({
-        inputRange: [0, 80],
-        outputRange: props[key],
-        extrapolate: 'clamp',
-      });
+  createInterpolatedValue = (outputRange, inputRange = [0, 80]) =>
+    this.props.scrollY.interpolate({
+      inputRange,
+      outputRange,
+      extrapolate: 'clamp',
+    });
 
+  interpolate = (key, props, range) =>
+    props.reduce((interpolated, prop) => {
+      interpolated[prop] = this.createInterpolatedValue(animationRanges[key][prop], range);
       return interpolated;
     }, {});
+
+  setPadding = (e, name) => {
+    if (animationRanges[name].left[0] === 33) {
+      const { width } = e.nativeEvent.layout;
+      animationRanges[name].left[0] = Math.floor((this.screenWidth - width) / 2);
+    }
+  }
+
+  initialFadeIn = () => {
+    const { opacity, top } = this.state.initialAnimations;
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 400,
+      delay: 100,
+    }).start();
+    Animated.timing(top, {
+      toValue: 0,
+      duration: 400,
+      delay: 100,
+      easing: easing.easeInOutQuart,
+    }).start();
   }
 
   render() {
     const { account } = this.props;
-    const itpl = this.interpolate.bind(this);
+    const Anim = Animated.View;
+    const itpl = this.interpolate;
+    const { opacity, top } = this.state.initialAnimations;
+    const avatarScale = this.createInterpolatedValue([1, 0.85]);
+    const avatarTranslate = this.createInterpolatedValue([0, -6]);
 
     return (<View style={this.props.style}>
-      <Animated.View style={[
-        styles.bg,
-        itpl({ height: [consts.bg.expanded, consts.bg.shrunk] }),
-      ]}>
+      <Anim style={[styles.bg, itpl('bg', ['height'])]}>
         <Image style={styles.bgImage} source={stripes} />
-      </Animated.View>
+      </Anim>
       {
         account && account.address ?
-        <Animated.View style={[
-          styles.container,
-          itpl({
-            height: [consts.container.expanded, consts.container.shrunk],
-          })]}>
-          <Animated.View style={[
-            styles.avatar,
-            itpl({
-              left: [consts.avatar.expanded.left, consts.avatar.shrunk.left],
-              top: [consts.avatar.expanded.top, consts.avatar.shrunk.top],
-            }),
-          ]}>
-            <Avatar address={account.address} size={80} />
-          </Animated.View>
-          <Animated.View style={[
-            styles.address,
-            itpl({
-              top: [consts.address.expanded.top, consts.address.shrunk.top],
-              paddingLeft: [consts.address.expanded.paddingLeft, consts.address.shrunk.paddingLeft],
-            }),
-          ]}>
+        <Anim style={[styles.container, { opacity, top }, itpl('container', ['height'])]}>
+          <Anim style={[styles.avatar, { opacity },
+            itpl('avatar', ['width', 'height', 'left', 'top'], [0, 35, 70])]}>
+            <Avatar address={account.address}
+              size={80} scale={avatarScale} translate={avatarTranslate} />
+          </Anim>
+          <Anim onLayout={e => this.setPadding(e, 'address')}
+            style={[styles.address, { opacity }, itpl('address', ['top', 'left'])]}>
             <Share type={P} style={styles.addressP}
               containerStyle={styles.addressContainer}
               value={account.address} icon={true} />
-          </Animated.View>
-          <Animated.View style={[
-            styles.balance,
-            itpl({
-              top: [consts.balance.expanded.top, consts.balance.shrunk.top],
-              paddingLeft: [consts.balance.expanded.paddingLeft, consts.balance.shrunk.paddingLeft],
-            }),
-          ]}>
+          </Anim>
+          <Anim onLayout={e => this.setPadding(e, 'balance')}
+            style={[styles.balance, { opacity }, itpl('balance', ['top', 'left'])]}>
             <H2 style={styles.value}>
               <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>
             </H2>
             <H2 style={styles.unit}>Ⱡ</H2>
-          </Animated.View>
-          <Animated.View style={[
-            styles.box,
-            itpl({
-              top: [consts.box.expanded.top, consts.box.shrunk.top],
-              height: [consts.box.expanded.height, consts.box.shrunk.height],
-            }),
-          ]} />
-        </Animated.View> :
+          </Anim>
+          <Anim style={[styles.box, itpl('box', ['top', 'height'])]} />
+        </Anim> :
         <H4>Fetching account info</H4>
       }
       <Modal

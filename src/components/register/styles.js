@@ -1,6 +1,7 @@
-import { StyleSheet, Platform, DeviceInfo } from 'react-native';
+import { StyleSheet, Platform, DeviceInfo, Dimensions } from 'react-native';
 import { colors } from '../../constants/styleGuide';
 
+const { height } = Dimensions.get('window');
 const navigatorHeight = 75 + (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated ? 23 : 0);
 
 const styles = {
@@ -8,7 +9,7 @@ const styles = {
     height: '100%',
     width: '100%',
     backgroundColor: colors.grayScale4,
-    paddingBottom: navigatorHeight,
+    paddingBottom: height > 640 ? navigatorHeight : 0,
   },
   back: {
     color: 'black',
@@ -17,7 +18,7 @@ const styles = {
     height: '100%',
   },
   multiStepNavWrapper: {
-    height: navigatorHeight,
+    height: height > 640 ? navigatorHeight : 0,
     width: '100%',
     position: 'absolute',
     bottom: -1 * navigatorHeight,

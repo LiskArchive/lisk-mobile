@@ -19,39 +19,40 @@ import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 }), {})
 class Form extends React.Component {
     references = [];
-    state = {
-      address: { value: '', validity: -1 },
-      amount: { value: '', validity: -1 },
-      reference: { value: '', validity: -1 },
-      secondaryButtonOpacity: 1,
-    };
 
     validator = {
-      address: str => reg.address.test(str),
-      amount: str => (
-        reg.amount.test(str) &&
+      address: (str) => {
+        if (str === '') return -1;
+        return reg.address.test(str) ? 0 : 1;
+      },
+      amount: (str) => {
+        if (str === '') return -1;
+        return (reg.amount.test(str) &&
         this.props.account &&
         this.props.account.balance > transactions.send.fee &&
-        parseFloat(str) < fromRawLsk(this.props.account.balance - transactions.send.fee)
-      ),
-      reference: str => (str.length === 0 || str.length < 64),
+        parseFloat(str) < fromRawLsk(this.props.account.balance - transactions.send.fee)) ? 0 : 1;
+      },
+      // eslint-disable-next-line no-confusing-arrow
+      reference: str => (str.length < 64) ? 0 : 1,
     };
     activeInputRef = null;
+
+    state = {
+      address: { value: '', validity: this.validator.address('') },
+      amount: { value: '', validity: this.validator.amount('') },
+      reference: { value: '', validity: this.validator.reference('') },
+      secondaryButtonOpacity: 1,
+    };
 
   /**
    * @param {String} name - the key to set on state
    * @param {Any} value the Value corresponding the given key
    */
   changeHandler = (name, value) => {
-    let validity = -1;
-    if (value !== '') {
-      validity = this.validator[name](value) ? 0 : 1;
-    }
-
     this.setState({
       [name]: {
         value,
-        validity,
+        validity: this.validator[name](value),
       },
     });
   }
@@ -128,7 +129,7 @@ class Form extends React.Component {
   }
 
   render() {
-    const { address, amount } = this.state;
+    const { address, amount, reference } = this.state;
     return (
       <View style={styles.wrapper}>
         <Scanner
@@ -137,7 +138,7 @@ class Form extends React.Component {
           setAddress={this.setAddress}
           setAmount={this.setAmount}/>
         <KeyboardAwareScrollView
-          disabled={address.validity !== 0 || amount.validity !== 0}
+          disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
           onSubmit={this.goToNextState}
           hasTabBar={true}
           button={{
