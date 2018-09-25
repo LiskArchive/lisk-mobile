@@ -3,7 +3,7 @@ module.exports = {
   transform: {
     '^.+\\.js$': 'babel-jest',
   },
-  preset: 'react-native',
+  // preset: 'react-native',
   collectCoverage: true,
   collectCoverageFrom: [
     './src/**/*.js',

@@ -161,7 +161,7 @@ export const blockUpdated = () => (dispatch, getState) => {
   const { activePeer } = getState().peers;
   const { confirmed } = getState().transactions;
   const lastTx = confirmed.length > 0 ? confirmed[0] : { timestamp: 0 };
-  getTransactions(activePeer, {
+  return getTransactions(activePeer, {
     senderIdOrRecipientId: address,
     offset: 0,
   }).then((response) => {
