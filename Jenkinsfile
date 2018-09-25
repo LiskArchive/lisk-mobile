@@ -27,12 +27,10 @@ pipeline {
   post {
     success {
       script {
-        if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-          previous_build = currentBuild.getPreviousBuild()
-          if (previous_build != null && previous_build.result == 'FAILURE') {
-            build_info = getBuildInfo()
-            liskSlackSend('good', "Recovery: build ${build_info} was successful.")
-          }
+        previous_build = currentBuild.getPreviousBuild()
+        if (previous_build != null && previous_build.result == 'FAILURE') {
+          build_info = getBuildInfo()
+          liskSlackSend('good', "Recovery: build ${build_info} was successful.")
         }
       }
     }
