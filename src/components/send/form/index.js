@@ -1,9 +1,7 @@
-import React, { Fragment } from 'react';
-import { View, Platform } from 'react-native';
-import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import React from 'react';
+import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { SecondaryButton, IconButton } from '../../toolBox/button';
+import { IconButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
 import { P, H1, H2, Small } from '../../toolBox/typography';
@@ -14,6 +12,7 @@ import FormattedNumber from '../../formattedNumber';
 import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
 import Scanner from './scanner';
+import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -118,30 +117,35 @@ class Form extends React.Component {
   }
 
   goToNextState = () => {
-    this.props.nextStep({
-      amount: this.state.amount.value,
-      address: this.state.address.value,
-      reference: this.state.reference.value,
+    const { secondPublicKey } = this.props.account;
+    this.props.move({
+      to: secondPublicKey ? 1 : 2,
+      stepData: {
+        amount: this.state.amount.value,
+        address: this.state.address.value,
+        reference: this.state.reference.value,
+      },
     });
   }
 
   render() {
-    const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
     const { address, amount, reference } = this.state;
     return (
-      <Fragment>
-      <Scanner
-        ref={(el) => { this.scanner = el; }}
-        navigation={this.props.navigation}
-        setAddress={this.setAddress}
-        setAmount={this.setAmount}/>
-      <KeyboardAwareScrollView
-        enableOnAndroid={true}
-        enableResetScrollToCoords={false}
-        contentContainerStyle={Platform.OS === 'ios' ? styles.container : styles.container}
-        onKeyboardDidShow={() => this.changeButtonOpacity(0)}
-        onKeyboardDidHide={() => this.changeButtonOpacity(1)}>
-        <View style={styles.innerContainer}>
+      <View style={styles.wrapper}>
+        <Scanner
+          ref={(el) => { this.scanner = el; }}
+          navigation={this.props.navigation}
+          setAddress={this.setAddress}
+          setAmount={this.setAmount}/>
+        <KeyboardAwareScrollView
+          disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
+          onSubmit={this.goToNextState}
+          hasTabBar={true}
+          button={{
+            title: 'Continue',
+            type: 'inBox',
+          }}
+          styles={{ container: styles.container, innerContainer: styles.innerContainer }}>
           <View style={styles.titleContainer}>
             <View style={styles.headings}>
               <H1>Send</H1>
@@ -223,22 +227,8 @@ class Form extends React.Component {
               onFocus={() => { this.activeInputRef = 2; }}
             />
           </View>
-          <SecondaryButton
-            disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
-            onClick={this.goToNextState}
-            style={[styles.button, { opacity: this.state.secondaryButtonOpacity }]}
-            title='Continue' />
-          </View>
         </KeyboardAwareScrollView>
-        <KeyboardAccessoryView
-         style={styles[keyboardButtonStyle]}>
-          <SecondaryButton
-            style={styles.stickyButton}
-            disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
-            onClick={this.goToNextState}
-            title='Continue' />
-        </KeyboardAccessoryView>
-      </Fragment>
+      </View>
     );
   }
 }

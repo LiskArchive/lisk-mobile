@@ -5,7 +5,10 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    padding: 20,
+    paddingTop: 0,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   divider: {
     margin: 20,
@@ -13,7 +16,7 @@ const styles = {
     backgroundColor: '#ccc',
   },
   title: {
-    paddingTop: 15,
+    paddingTop: 35,
   },
   address: {
     fontSize: 24,
