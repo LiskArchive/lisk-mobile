@@ -1,13 +1,11 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { View, Image, Platform } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validatePassphrase } from '../../../utilities/passphrase';
 import { extractPublicKey } from '../../../utilities/api/account';
 import Input from '../../toolBox/input';
-import { SecondaryButton } from '../../toolBox/button';
 import { H1, P } from '../../toolBox/typography';
+import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import secondPassphraseImage from '../../../assets/images/secondPassphrase.png';
 import styles from './styles';
 
@@ -76,40 +74,35 @@ class Confirm extends React.Component {
     });
   }
 
-  shrinkButton = (status) => {
-    if (status) {
-      this.setState({ buttonStyle: styles.button });
-    } else {
-      this.setState({ buttonStyle: styles.buttonSticky });
-    }
-  }
-
   goBack = () => {
     const { address, amount, reference } = this.props;
     return this.props.prevStep({ address, amount, reference });
   }
 
   render() {
-    const { secondPassphrase, buttonStyle } = this.state;
+    const { secondPassphrase } = this.state;
     const error = secondPassphrase.validity
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || secondPassphrase.validity.length === 1);
     return (<View style={styles.wrapper}>
-      <KeyboardAwareScrollView animated={true}
-        style={styles.container}
-        onKeyboardDidHide={() => this.shrinkButton(true)}
-        onKeyboardDidShow={() => this.shrinkButton(false)}>
-        <View style={styles.innerContainer}>
-          <View style={styles.titleContainer}>
-            <View style={styles.headings}>
-              <H1>Confirm your identity</H1>
-              <P style={styles.subtitle}>
-                Enter you second passphrase to continue to transaction overview page.
-              </P>
-            </View>
-            <View style={styles.illustrationWrapper}>
-              <Image style={styles.illustration} source={secondPassphraseImage} />
-            </View>
+      <KeyboardAwareScrollView
+        disabled={secondPassphrase.validity.length !== 0}
+        onSubmit={this.onSubmission}
+        hasTabBar={true}
+        styles={{ innerContainer: styles.innerContainer }}
+        button={{
+          title: 'Continue',
+          type: 'inBox',
+        }}>
+        <View style={styles.titleContainer}>
+          <View style={styles.headings}>
+            <H1>Confirm your identity</H1>
+            <P style={styles.subtitle}>
+              Enter you second passphrase to continue to transaction overview page.
+            </P>
+          </View>
+          <View style={styles.illustrationWrapper}>
+            <Image style={styles.illustration} source={secondPassphraseImage} />
           </View>
           <Input
             label='Second Passphrase'
@@ -117,8 +110,6 @@ class Confirm extends React.Component {
             styles={{ input: styles.input }}
             value={secondPassphrase.value}
             onChange={this.changeHandler}
-            onFocus={() => this.shrinkButton(false)}
-            onBlur={() => this.shrinkButton(true)}
             autoFocus={true}
             autoCorrect={false}
             multiline={Platform.OS === 'ios'}
@@ -129,16 +120,6 @@ class Confirm extends React.Component {
             }/>
         </View>
       </KeyboardAwareScrollView>
-      <KeyboardAccessoryView
-        style={styles[Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard']}
-        animationOn='none'
-        alwaysVisible={true}>
-        <SecondaryButton
-          disabled={secondPassphrase.validity.length !== 0}
-          title='Continue'
-          onClick={this.onSubmission}
-          style={buttonStyle} />
-      </KeyboardAccessoryView>
     </View>);
   }
 }

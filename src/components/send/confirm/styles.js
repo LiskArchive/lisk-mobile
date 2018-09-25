@@ -5,12 +5,9 @@ const styles = {
   wrapper: {
     backgroundColor: colors.white,
   },
-  container: {
-    height: '100%',
-  },
   innerContainer: {
-    height: '100%',
-    paddingTop: 36,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     paddingBottom: 24,
   },
   button: {
@@ -39,6 +36,7 @@ const styles = {
   headings: {
     marginRight: boxes.boxPadding,
     marginLeft: boxes.boxPadding,
+    paddingTop: 36,
   },
   illustrationWrapper: {
     flexDirection: 'row',
