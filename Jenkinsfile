@@ -2,7 +2,7 @@
 pipeline {
   agent { node { label 'lisk-mobile' } }
   stages {
-    stage ('Build Dependencies') {
+    stage ('Build dependencies') {
       steps {
         script{
           cache_file = restoreCache("package.json")
@@ -11,12 +11,12 @@ pipeline {
         }
       }
     }
-    stage ('Run Eslint') {
+    stage ('Run ESLint') {
       steps {
         sh 'npm run test:format'
       }
     }
-    stage ('Run Unit Tests') {
+    stage ('Run unit tests') {
       steps {
         sh '''
         npm run test
