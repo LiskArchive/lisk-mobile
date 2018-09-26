@@ -118,11 +118,11 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "org.lisk.mobile"
+        applicationId "io.lisk.mobile"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 5
-        versionName "0.1"
+        versionCode 3
+        versionName "0.3"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
