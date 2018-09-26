@@ -96,6 +96,7 @@
   },
   "devDependencies": {
     "asyncstorage-down": "^4.0.1",
+    "babel-core": "^6.26.3",
     "babel-eslint": "=8.0.2",
     "babel-jest": "23.0.1",
     "babel-plugin-rewrite-require": "^1.14.5",
