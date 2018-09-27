@@ -27,11 +27,11 @@ class Form extends React.Component {
         return reg.address.test(str) ? 0 : 1;
       },
       amount: (str) => {
+        const { account } = this.props;
         if (str === '') return -1;
         return (reg.amount.test(str) &&
-        this.props.account &&
-        this.props.account.balance > transactions.send.fee &&
-        parseFloat(str) < fromRawLsk(this.props.account.balance - transactions.send.fee)) ? 0 : 1;
+          account && account.balance > transactions.send.fee &&
+          parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
       },
       reference: (str) => {
         const uint8array = new TextEncoder().encode(str);
@@ -119,16 +119,16 @@ class Form extends React.Component {
     this.references[`${focusingRef}`].focus();
   }
 
-  goToNextState = () => {
+  forward = () => {
     const { secondPublicKey } = this.props.account;
-    this.props.move({
-      to: secondPublicKey ? 1 : 2,
-      stepData: {
-        amount: this.state.amount.value,
-        address: this.state.address.value,
-        reference: this.state.reference.value,
-      },
-    });
+    const to = secondPublicKey ? 1 : 2;
+    const stepData = {
+      amount: this.state.amount.value,
+      address: this.state.address.value,
+      reference: this.state.reference.value,
+    };
+
+    this.props.move({ to, stepData });
   }
 
   render() {
@@ -142,7 +142,7 @@ class Form extends React.Component {
           setAmount={this.setAmount}/>
         <KeyboardAwareScrollView
           disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
-          onSubmit={this.goToNextState}
+          onSubmit={this.forward}
           hasTabBar={true}
           button={{
             title: 'Continue',

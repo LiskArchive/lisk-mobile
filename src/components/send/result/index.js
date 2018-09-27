@@ -2,6 +2,7 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import LottieView from 'lottie-react-native';
+import { accountUpdated as accountUpdatedAction } from '../../../actions/transactions';
 import styles from './styles';
 import { SecondaryButton } from '../../toolBox/button';
 import { H1, P } from '../../toolBox/typography';
@@ -14,7 +15,9 @@ const createdAnimDuration = 4340;
 @connect(state => ({
   account: state.accounts.active,
   transactions: state.transactions,
-}), {})
+}), {
+  accountUpdated: accountUpdatedAction,
+})
 class Result extends React.Component {
   state = {
     step: 0,
@@ -29,6 +32,7 @@ class Result extends React.Component {
     this.props.navigation.setParams({ showButtonLeft: false });
     this.startDate = new Date();
     this.play('created');
+    this.markAsInitialized();
   }
 
   componentWillUnmount() {
@@ -45,6 +49,15 @@ class Result extends React.Component {
     if (nowPending && nextConfirmed) {
       this.play('confirmed');
     }
+  }
+
+  /**
+   * If the account is not initialized, the first outgoing
+   * transaction initializes it. I mark the account initialized
+   * on every transaction.
+   */
+  markAsInitialized() {
+    this.props.accountUpdated({ initialized: true });
   }
 
   play(stage) {

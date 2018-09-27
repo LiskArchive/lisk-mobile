@@ -27,19 +27,12 @@ const messages = {
 }), {
   transactionAdded: transactionAddedAction,
 })
-
 class Overview extends React.Component {
-  state = {
-    disableButton: false,
-  }
   send = () => {
-    this.setState({
-      disableButton: true,
-    });
-    const { accounts, nextStep, transactionAdded } = this.props;
     const {
+      accounts, nextStep, transactionAdded,
       amount, address, reference, secondPassphrase,
-    } = this.state;
+    } = this.props;
 
     transactionAdded({
       recipientId: address,
@@ -50,7 +43,8 @@ class Overview extends React.Component {
     }, nextStep);
   }
 
-  goBack = () => {
+  back = () => {
+    // @todo if initialize to home
     const { address, amount, reference } = this.state;
     return this.props.prevStep({ address, amount, reference });
   }
@@ -61,36 +55,24 @@ class Overview extends React.Component {
       .catch(err => console.error('An error occurred', err));
   }
 
-  accountInitialization() {
-    this.setState({
-      address: this.props.accounts.active.address,
-      amount: 0.1,
-      reference: messages.initialize.reference,
+  componentDidMount() {
+    if (this.props.navigation.state.params.initialize) {
+      this.setState({
+        initialize: true,
+      });
+    }
+
+    this.props.navigation.setParams({
+      showButtonLeft: true,
+      action: this.back,
+      initialize: false,
     });
   }
 
-  componentDidMount() {
-    const {
-      navigation, accounts, address, reference, amount, secondPassphrase,
-    } = this.props;
-
-    // Undefined address means we escaped the form step to initialize the account
-    if (!address && !accounts.active.initialized) {
-      this.accountInitialization();
-    } else {
-      this.setState({
-        accounts, address, reference, amount, secondPassphrase,
-      });
-      navigation.setParams({ showButtonLeft: true, action: this.goBack });
-    }
-  }
-
-
   render() {
-    const { address, amount, reference } = this.state;
-    const { active } = this.props.accounts;
-    const actionType = (!active.initialized && address === active.address &&
-      reference === 'Account initialization') ? 'initialize' : 'send';
+    const actionType = this.props.navigation.state.params.initialize || this.state.initialize ?
+      'initialize' : 'send';
+    const { address, amount, reference } = this.props;
 
     return (<View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -122,7 +104,6 @@ class Overview extends React.Component {
           </View> : null}
         </View>
         <PrimaryButton
-          disabled={this.state.disableButton}
           style={styles.button}
           onClick={this.send}
           title={ messages[actionType].button } />

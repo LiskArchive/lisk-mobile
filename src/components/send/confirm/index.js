@@ -34,7 +34,7 @@ class Confirm extends React.Component {
     return passphrase.trim().replace(/\s+/g, ' ');
   }
 
-  onSubmission = () => {
+  forward = () => {
     const { amount, address, reference } = this.props;
     this.props.nextStep({
       amount,
@@ -87,7 +87,7 @@ class Confirm extends React.Component {
     return (<View style={styles.wrapper}>
       <KeyboardAwareScrollView
         disabled={secondPassphrase.validity.length !== 0}
-        onSubmit={this.onSubmission}
+        onSubmit={this.forward}
         hasTabBar={true}
         styles={{ innerContainer: styles.innerContainer }}
         button={{
