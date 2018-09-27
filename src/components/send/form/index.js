@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { TextEncoder } from 'text-encoding';
 import { IconButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
@@ -32,8 +33,10 @@ class Form extends React.Component {
         this.props.account.balance > transactions.send.fee &&
         parseFloat(str) < fromRawLsk(this.props.account.balance - transactions.send.fee)) ? 0 : 1;
       },
-      // eslint-disable-next-line no-confusing-arrow
-      reference: str => (str.length < 64) ? 0 : 1,
+      reference: (str) => {
+        const uint8array = new TextEncoder().encode(str);
+        return uint8array.length > 64 ? 1 : 0;
+      },
     };
     activeInputRef = null;
 
