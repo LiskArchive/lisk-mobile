@@ -42,6 +42,10 @@ class Transactions extends React.Component {
     }).start();
   }
 
+  onPress = () => {
+    this.props.navigate('Send', { initialize: true });
+  }
+
   render() {
     const {
       transactions, navigate, account, footer,
@@ -63,9 +67,7 @@ class Transactions extends React.Component {
                 <Small style={styles.initText}>Your Lisk ID is not initialized.
                   <A
                     style={styles.link}
-                    onPress={() => {
-                      navigate('Send', { initialize: true });
-                    }}> Initialize it now</A>
+                    onPress={this.onPress}> Initialize it now</A>
                 </Small>
               </View> : null
             }
