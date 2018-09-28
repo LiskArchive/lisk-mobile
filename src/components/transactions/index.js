@@ -61,10 +61,10 @@ class Transactions extends React.Component {
           <Fragment></Fragment> :
           <Fragment>
             <H3 style={styles.title}>Activity</H3>
-            {!account.initialized && balance >= 0.1 ?
+            {!account.initialized && balance >= 0.2 ?
               <View style={styles.initContainer}>
                 <Icon name='warning' color={colors.action1} size={18} />
-                <Small style={styles.initText}>Your Lisk ID is not initialized.
+                <Small style={styles.initText}>Your account is not initialized.
                   <A
                     style={styles.link}
                     onPress={this.onPress}> Initialize it now</A>
