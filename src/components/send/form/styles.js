@@ -130,10 +130,12 @@ const styles = {
         lineHeight: 28,
         paddingTop: 15,
         paddingBottom: 15,
+        paddingLeft: 40,
       },
       ios: {
         height: 48,
         lineHeight: 48,
+        paddingLeft: 40,
       },
     }),
   },
@@ -152,7 +154,7 @@ const styles = {
     zIndex: 0,
     left: 20,
     top: 41,
-    opacity: 0,
+    opacity: 0.2,
   },
   visible: {
     opacity: 1,

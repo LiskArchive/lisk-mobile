@@ -61,8 +61,7 @@ class Form extends React.Component {
   }
 
   setAddress = (value) => {
-    const trimmedValue = value.trim();
-    this.changeHandler('address', trimmedValue);
+    this.changeHandler('address', value);
   }
 
   setAmount = (value) => {
@@ -178,7 +177,7 @@ class Form extends React.Component {
                 color={colors.primary5} />
               <Avatar
                 style={[styles.avatar, address.validity === 0 ? styles.visible : null]}
-                address={address.value.trim()}
+                address={address.validity === 0 ? address.value : '000L'}
                 size={34} />
               <Input
                 label='Address'
@@ -193,7 +192,7 @@ class Form extends React.Component {
                   containerStyle: styles.addressInputContainer,
                 }}
                 onChange={value => this.setAddress(value)}
-                value={`${address.validity === 0 ? '              ' : ''}${address.value}`}
+                value={address.value}
                 error={
                   address.validity === 1 ?
                     'Invalid address' : ''
