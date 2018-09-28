@@ -66,9 +66,8 @@ class Overview extends React.Component {
   }
 
   back = () => {
-    // @todo if initialize to home
-    const { address, amount, reference } = this.state;
-    return this.props.prevStep({ address, amount, reference });
+    const to = this.props.account.secondPublicKey ? -1 : -2;
+    return this.props.prevStep(to);
   }
 
   openAcademy = () => {

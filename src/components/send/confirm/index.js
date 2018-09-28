@@ -26,7 +26,7 @@ class Confirm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: true, action: this.goBack });
+    this.props.navigation.setParams({ showButtonLeft: true, action: this.back });
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -43,6 +43,8 @@ class Confirm extends React.Component {
       secondPassphrase: this.state.secondPassphrase.value,
     });
   }
+
+  back = () => this.props.prevStep();
 
   validatePassphrase = (passphrase) => {
     const validity = validatePassphrase(passphrase);
@@ -72,11 +74,6 @@ class Confirm extends React.Component {
         validity: this.validatePassphrase(value),
       },
     });
-  }
-
-  goBack = () => {
-    const { address, amount, reference } = this.props;
-    return this.props.prevStep({ address, amount, reference });
   }
 
   render() {

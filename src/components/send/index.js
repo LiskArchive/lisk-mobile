@@ -61,10 +61,10 @@ class Send extends React.Component {
         }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         ref={(el) => { this.nav = el; }}>
-        <Form title='form' navigation={this.props.navigation}/>
-        <Confirm title='confirm' navigation={this.props.navigation} />
-        <Overview title='overview' navigation={this.props.navigation} />
-        <Result title='result' navigation={this.props.navigation}/>
+        <Form title='form' navigation={navigation}/>
+        <Confirm title='confirm' navigation={navigation} />
+        <Overview title='overview' navigation={navigation} />
+        <Result title='result' navigation={navigation}/>
       </MultiStep>);
   }
 }
