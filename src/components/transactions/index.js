@@ -42,6 +42,10 @@ class Transactions extends React.Component {
     }).start();
   }
 
+  onPress = () => {
+    this.props.navigate('Send', { initialize: true });
+  }
+
   render() {
     const {
       transactions, navigate, account, footer,
@@ -57,15 +61,13 @@ class Transactions extends React.Component {
           <Fragment></Fragment> :
           <Fragment>
             <H3 style={styles.title}>Activity</H3>
-            {!account.initialized && balance >= 0.1 ?
+            {!account.initialized && balance >= 0.2 ?
               <View style={styles.initContainer}>
                 <Icon name='warning' color={colors.action1} size={18} />
-                <Small style={styles.initText}>Your Lisk ID is not initialized.
+                <Small style={styles.initText}>Your account is not initialized.
                   <A
                     style={styles.link}
-                    onPress={() => {
-                      navigate('Send', { initialize: true });
-                    }}> Initialize it now</A>
+                    onPress={this.onPress}> Initialize it now</A>
                 </Small>
               </View> : null
             }

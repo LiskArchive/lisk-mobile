@@ -74,6 +74,25 @@ const styles = {
   link: {
     color: colors.primary5,
   },
+  errorContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginLeft: 20,
+    paddingRight: 20,
+    opacity: 0,
+  },
+  error: {
+    color: colors.grayScale1,
+    fontFamily: fonts.family.context,
+    fontSize: fonts.size.input,
+  },
+  errorIcon: {
+    color: colors.action1,
+    marginRight: 5,
+  },
+  visible: {
+    opacity: 1,
+  },
 };
 
 export default StyleSheet.create(styles);

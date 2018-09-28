@@ -1,12 +1,15 @@
 import React from 'react';
 import { View, Linking } from 'react-native';
 import connect from 'redux-connect-decorator';
+import reg from '../../../constants/regex';
+import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import styles from './styles';
 import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
-import { H1, B, P, A } from '../../toolBox/typography';
+import Icon from '../../toolBox/icon';
+import { H1, B, P, A, Small } from '../../toolBox/typography';
 
 const messages = {
   initialize: {
@@ -23,36 +26,48 @@ const messages = {
 };
 
 @connect(state => ({
-  accounts: state.accounts,
+  account: state.accounts.active,
 }), {
   transactionAdded: transactionAddedAction,
 })
-
 class Overview extends React.Component {
   state = {
-    disableButton: false,
+    initialize: false,
+    amountValidity: true,
+    errorMessage: null,
   }
+
+  validator = {
+    amount: (str) => {
+      const { account } = this.props;
+      return (reg.amount.test(str) &&
+        account && account.balance > transactions.send.fee &&
+        parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
+    },
+  };
+
   send = () => {
-    this.setState({
-      disableButton: true,
-    });
-    const { accounts, nextStep, transactionAdded } = this.props;
     const {
+      account, nextStep, transactionAdded,
       amount, address, reference, secondPassphrase,
-    } = this.state;
+    } = this.props;
 
     transactionAdded({
       recipientId: address,
       amount: toRawLsk(amount),
-      passphrase: accounts.active.passphrase,
+      passphrase: account.passphrase,
       secondPassphrase,
       data: reference || null,
-    }, nextStep);
+    }, nextStep, (err) => {
+      const errorMessage = (err && /Status\s409/.test(err.message)) ?
+        'Your balance is insufficient.' : 'An error happened. Please try later.';
+      this.setState({ errorMessage });
+    });
   }
 
-  goBack = () => {
-    const { address, amount, reference } = this.state;
-    return this.props.prevStep({ address, amount, reference });
+  back = () => {
+    const to = this.props.account.secondPublicKey ? -1 : -2;
+    return this.props.prevStep(to);
   }
 
   openAcademy = () => {
@@ -61,36 +76,35 @@ class Overview extends React.Component {
       .catch(err => console.error('An error occurred', err));
   }
 
-  accountInitialization() {
-    this.setState({
-      address: this.props.accounts.active.address,
-      amount: 0.1,
-      reference: messages.initialize.reference,
+  componentDidMount() {
+    let { back } = this;
+    if (this.props.navigation.state.params.initialize) {
+      this.setState({
+        initialize: true,
+      });
+
+      back = this.props.navigation.goBack;
+    }
+
+    this.props.navigation.setParams({
+      showButtonLeft: true,
+      action: back,
+      initialize: false,
     });
   }
 
-  componentDidMount() {
-    const {
-      navigation, accounts, address, reference, amount, secondPassphrase,
-    } = this.props;
-
-    // Undefined address means we escaped the form step to initialize the account
-    if (!address && !accounts.active.initialized) {
-      this.accountInitialization();
-    } else {
+  componentDidUpdate(nextProps) {
+    if (this.props.account && nextProps.account.balance !== this.props.account.balance) {
       this.setState({
-        accounts, address, reference, amount, secondPassphrase,
+        amountValidity: this.validator.amount(this.props.amount),
       });
-      navigation.setParams({ showButtonLeft: true, action: this.goBack });
     }
   }
 
-
   render() {
-    const { address, amount, reference } = this.state;
-    const { active } = this.props.accounts;
-    const actionType = (!active.initialized && address === active.address &&
-      reference === 'Account initialization') ? 'initialize' : 'send';
+    const actionType = this.props.navigation.state.params.initialize || this.state.initialize ?
+      'initialize' : 'send';
+    const { address, amount, reference } = this.props;
 
     return (<View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -121,11 +135,17 @@ class Overview extends React.Component {
             <B labelStyle={[styles.address, styles.black]}>{reference}</B>
           </View> : null}
         </View>
-        <PrimaryButton
-          disabled={this.state.disableButton}
-          style={styles.button}
-          onClick={this.send}
-          title={ messages[actionType].button } />
+        <View>
+          <View style={[styles.errorContainer, this.state.errorMessage ? styles.visible : null]}>
+            <Icon size={16} name='warning' style={styles.errorIcon} />
+            <Small style={styles.error}>{this.state.errorMessage}</Small>
+          </View>
+          <PrimaryButton
+            disabled={!this.state.amountValidity}
+            style={styles.button}
+            onClick={this.send}
+            title={ messages[actionType].button } />
+        </View>
       </View>
     </View>);
   }

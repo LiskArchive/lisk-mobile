@@ -23,7 +23,7 @@ const summaryHeight = 250;
  * about any unforeseen issue/change
  */
 @connect(state => ({
-  accounts: state.accounts,
+  account: state.accounts.active,
   transactions: state.transactions,
 }), {
   transactionsLoaded: transactionsLoadedAction,
@@ -36,13 +36,8 @@ class Wallet extends React.Component {
 
   scrollView = null;
 
-  componentWillMount() {
-    this.activeAccount = this.props.accounts.active || {};
-  }
-
   componentDidUpdate() {
     const { confirmed, pending } = this.props.transactions;
-    this.activeAccount = this.props.accounts.active || {};
     if (this.state.theme === 'loading' ||
       (this.state.theme === 'empty' && confirmed.length > 0)) {
       const txNum = pending.length + confirmed.length;
@@ -55,7 +50,7 @@ class Wallet extends React.Component {
 
   componentDidMount() {
     this.props.transactionsLoaded({
-      senderIdOrRecipientId: this.activeAccount.address,
+      senderIdOrRecipientId: this.props.account.address,
       offset: 0,
     });
     this.initialAnimation();
@@ -83,10 +78,10 @@ class Wallet extends React.Component {
     const { transactions, transactionsLoaded } = this.props;
     return (<View style={styles.container}>
       {
-        this.props.accounts.active ?
+        this.props.account ?
           <AccountSummary
             scrollY={this.state.scrollY}
-            account={this.props.accounts.active}
+            account={this.props.account}
             style={styles.accountSummary} /> : null
       }
       {
@@ -104,13 +99,13 @@ class Wallet extends React.Component {
           list={[...transactions.pending, ...transactions.confirmed]}
           count={transactions.count}
           loadMore={() => transactionsLoaded({
-            senderIdOrRecipientId: this.activeAccount.address,
+            senderIdOrRecipientId: this.props.account.address,
             offset: transactions.confirmed.length,
           })}>
           <Transactions transactions={transactions}
             footer={this.state.footer}
             navigate={this.props.navigation.navigate}
-            account={this.activeAccount} />
+            account={this.props.account} />
         </InfiniteScrollView> : null
       }
     </View>);

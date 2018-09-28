@@ -1,4 +1,5 @@
 import React from 'react';
+import connect from 'redux-connect-decorator';
 import MultiStep from '../multiStep';
 import Form from './form';
 import Overview from './overview';
@@ -8,6 +9,9 @@ import styles from './styles';
 import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
 
+@connect(state => ({
+  account: state.accounts.active,
+}), {})
 class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -37,8 +41,16 @@ class Send extends React.Component {
 
   didFocus() {
     const { navigation } = this.props;
-    if (navigation.getParam('initialize', false)) this.nav.move({ to: 1 });
-    else this.nav.reset();
+    if (navigation.getParam('initialize', false)) {
+      this.nav.move({
+        to: 2,
+        stepData: {
+          address: this.props.account.address,
+          amount: 0.1,
+          reference: 'Account initialization',
+        },
+      });
+    } else this.nav.reset();
   }
 
   render() {
@@ -49,10 +61,10 @@ class Send extends React.Component {
         }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         ref={(el) => { this.nav = el; }}>
-        <Form title='form' navigation={this.props.navigation}/>
-        <Confirm title='confirm' navigation={this.props.navigation} />
-        <Overview title='overview' navigation={this.props.navigation} />
-        <Result title='result' navigation={this.props.navigation}/>
+        <Form title='form' navigation={navigation}/>
+        <Confirm title='confirm' navigation={navigation} />
+        <Overview title='overview' navigation={navigation} />
+        <Result title='result' navigation={navigation}/>
       </MultiStep>);
   }
 }

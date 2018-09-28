@@ -26,7 +26,7 @@ class Confirm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: true, action: this.goBack });
+    this.props.navigation.setParams({ showButtonLeft: true, action: this.back });
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -34,7 +34,7 @@ class Confirm extends React.Component {
     return passphrase.trim().replace(/\s+/g, ' ');
   }
 
-  onSubmission = () => {
+  forward = () => {
     const { amount, address, reference } = this.props;
     this.props.nextStep({
       amount,
@@ -43,6 +43,8 @@ class Confirm extends React.Component {
       secondPassphrase: this.state.secondPassphrase.value,
     });
   }
+
+  back = () => this.props.prevStep();
 
   validatePassphrase = (passphrase) => {
     const validity = validatePassphrase(passphrase);
@@ -74,11 +76,6 @@ class Confirm extends React.Component {
     });
   }
 
-  goBack = () => {
-    const { address, amount, reference } = this.props;
-    return this.props.prevStep({ address, amount, reference });
-  }
-
   render() {
     const { secondPassphrase } = this.state;
     const error = secondPassphrase.validity
@@ -87,7 +84,7 @@ class Confirm extends React.Component {
     return (<View style={styles.wrapper}>
       <KeyboardAwareScrollView
         disabled={secondPassphrase.validity.length !== 0}
-        onSubmit={this.onSubmission}
+        onSubmit={this.forward}
         hasTabBar={true}
         styles={{ innerContainer: styles.innerContainer }}
         button={{
