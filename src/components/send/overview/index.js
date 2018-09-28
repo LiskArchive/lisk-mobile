@@ -1,12 +1,15 @@
 import React from 'react';
 import { View, Linking } from 'react-native';
 import connect from 'redux-connect-decorator';
+import reg from '../../../constants/regex';
+import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import styles from './styles';
 import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
-import { H1, B, P, A } from '../../toolBox/typography';
+import Icon from '../../toolBox/icon';
+import { H1, B, P, A, Small } from '../../toolBox/typography';
 
 const messages = {
   initialize: {
@@ -23,24 +26,43 @@ const messages = {
 };
 
 @connect(state => ({
-  accounts: state.accounts,
+  account: state.accounts.active,
 }), {
   transactionAdded: transactionAddedAction,
 })
 class Overview extends React.Component {
+  state = {
+    initialize: false,
+    amountValidity: true,
+    errorMessage: null,
+  }
+
+  validator = {
+    amount: (str) => {
+      const { account } = this.props;
+      return (reg.amount.test(str) &&
+        account && account.balance > transactions.send.fee &&
+        parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
+    },
+  };
+
   send = () => {
     const {
-      accounts, nextStep, transactionAdded,
+      account, nextStep, transactionAdded,
       amount, address, reference, secondPassphrase,
     } = this.props;
 
     transactionAdded({
       recipientId: address,
       amount: toRawLsk(amount),
-      passphrase: accounts.active.passphrase,
+      passphrase: account.passphrase,
       secondPassphrase,
       data: reference || null,
-    }, nextStep);
+    }, nextStep, (err) => {
+      const errorMessage = (err && /Status\s409/.test(err.message)) ?
+        'Your balance is insufficient.' : 'An error happened. Please try later.';
+      this.setState({ errorMessage });
+    });
   }
 
   back = () => {
@@ -56,17 +78,28 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
+    let { back } = this;
     if (this.props.navigation.state.params.initialize) {
       this.setState({
         initialize: true,
       });
+
+      back = this.props.navigation.goBack;
     }
 
     this.props.navigation.setParams({
       showButtonLeft: true,
-      action: this.back,
+      action: back,
       initialize: false,
     });
+  }
+
+  componentDidUpdate(nextProps) {
+    if (this.props.account && nextProps.account.balance !== this.props.account.balance) {
+      this.setState({
+        amountValidity: this.validator.amount(this.props.amount),
+      });
+    }
   }
 
   render() {
@@ -103,10 +136,17 @@ class Overview extends React.Component {
             <B labelStyle={[styles.address, styles.black]}>{reference}</B>
           </View> : null}
         </View>
-        <PrimaryButton
-          style={styles.button}
-          onClick={this.send}
-          title={ messages[actionType].button } />
+        <View>
+          <View style={[styles.errorContainer, this.state.errorMessage ? styles.visible : null]}>
+            <Icon size={16} name='warning' style={styles.errorIcon} />
+            <Small style={styles.error}>{this.state.errorMessage}</Small>
+          </View>
+          <PrimaryButton
+            disabled={!this.state.amountValidity}
+            style={styles.button}
+            onClick={this.send}
+            title={ messages[actionType].button } />
+        </View>
       </View>
     </View>);
   }
