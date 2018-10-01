@@ -35,7 +35,7 @@ const styles = {
   },
   illustration: {
     width: '100%',
-    height: height < 640 ? 200 : 300,
+    height: height <= 640 ? 200 : 300,
     paddingBottom: 50,
   },
 };

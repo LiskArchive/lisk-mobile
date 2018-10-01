@@ -12,7 +12,7 @@ import reg from '../../constants/regex';
 import colors from '../../constants/styleGuide/colors';
 
 const pageHeight = viewportHeight();
-const qrCodeSize = Math.min(pageHeight - 335, Math.floor(deviceWidth() * 0.8));
+const qrCodeSize = Math.min(pageHeight - 400, Math.floor(deviceWidth() * 0.8));
 
 /**
  * The container component containing login and create account functionality
