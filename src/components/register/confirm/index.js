@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import styles from './styles';
-import { H1, H4, P } from '../../toolBox/typography';
+import { H1, H4, P, B } from '../../toolBox/typography';
 import { SecondaryButton, Button } from '../../toolBox/button';
 import verifyImage from '../../../assets/images/registrationProcess/verify3x.png';
 import verifiedImage from '../../../assets/images/registrationProcess/verified3x.png';
 import { assembleWordOptions } from '../../../utilities/passphrase';
+import { viewportHeight } from '../../../utilities/device';
 
 /**
  * Returns a random index which doesn't exist in list
@@ -131,12 +132,13 @@ class Confirm extends React.Component {
   }
 
   renderPassphrase = () => {
+    const Element = viewportHeight() < 640 ? B : H4;
     const passphrase = this.props.passphrase.split(' ');
     return this.state.missing.length > 0 ? passphrase.map((val, index) => {
       const optionIndex = this.state.missing.indexOf(index);
       const element = optionIndex >= 0 ?
         this.generatePlaceholder(index, optionIndex) :
-        <H4 key={index} style={styles.word}>{val}</H4>;
+        <Element key={index} style={styles.word}>{val}</Element>;
       return element;
     }) : null;
   }
@@ -157,7 +159,7 @@ class Confirm extends React.Component {
         <View>
           <H1 style={styles.header}>Verify your passphrase</H1>
           <P style={styles.subHeader}>
-            Please tap on the empty boxes and select{'\n'}the correct word from the options.
+            Please tap on the empty boxes and select the correct word from the options.
           </P>
           <View style={styles.imageContainer} >
             <Image
