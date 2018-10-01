@@ -6,7 +6,7 @@ import { extractPublicKey } from '../../../utilities/api/account';
 import Input from '../../toolBox/input';
 import { H1, P } from '../../toolBox/typography';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import secondPassphraseImage from '../../../assets/images/secondPassphrase.png';
+import secondPassphraseImage from '../../../assets/images/secondPassphrase3x.png';
 import styles from './styles';
 
 /**
