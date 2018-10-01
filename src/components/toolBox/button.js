@@ -93,12 +93,15 @@ export const LabelButton = props =>
  */
 export const IconButton = (props) => {
   const {
-    titleStyle, style, title, icon, color, iconSize,
+    titleStyle, style, title, icon, color, iconSize, onClick,
   } = props;
   const viewProps = Object.keys(props)
     .filter(key => !(/titleStyle|style|title|icon|color/.test(key)))
     .reduce((acc, key) => { acc[key] = props[key]; return acc; }, {});
-  return (<TouchableHighlight underlayColor='transparent' {...viewProps} style={[theme.iconButton, style]}>
+  return (<TouchableHighlight
+    onPress={onClick}
+    underlayColor='transparent' {...viewProps}
+    style={[theme.iconButton, style]}>
     <Fragment>
       <Icon name={icon} size={iconSize || 30} color={color || '#000'} />
       <Text style={[theme.iconButtonTitle, titleStyle]}>{ title || '' }</Text>

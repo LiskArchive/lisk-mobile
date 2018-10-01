@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { H1, H4 } from '../toolBox/typography';
 import ItemTitle from './itemTitle';
+import LogoutButton from '../logoutButton';
 import styles from './styles';
 
 const Settings = ({ navigation }) => (
@@ -24,6 +25,9 @@ const Settings = ({ navigation }) => (
           target='Terms'
           iconSize={21}
           title='Terms of use'/>
+      </View>
+      <View style={styles.item}>
+        <LogoutButton navigation={navigation} />
       </View>
     </View>
   </View>

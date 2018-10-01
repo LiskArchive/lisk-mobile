@@ -3,13 +3,19 @@ import { colors } from '../../constants/styleGuide';
 
 const styles = {
   button: {
+    width: '100%',
     paddingRight: 20,
     paddingTop: 8,
     paddingBottom: 16,
-    color: colors.white,
     borderWidth: 0,
-    textAlign: 'right',
+    paddingLeft: 0,
+  },
+  title: {
+    paddingLeft: 10,
+    fontSize: 16,
     fontWeight: '500',
+    textAlign: 'left',
+    color: colors.primary5,
   },
 };
 

@@ -74,8 +74,18 @@ class Wallet extends React.Component {
     clearTimeout(this.timeout);
   }
 
+
+  loadMore = () => {
+    if (this.props.account) {
+      this.props.transactionsLoaded({
+        senderIdOrRecipientId: this.props.account.address,
+        offset: this.props.transactions.confirmed.length,
+      });
+    }
+  }
+
   render() {
-    const { transactions, transactionsLoaded } = this.props;
+    const { transactions } = this.props;
     return (<View style={styles.container}>
       {
         this.props.account ?
@@ -98,10 +108,7 @@ class Wallet extends React.Component {
           style={[styles.scrollView]}
           list={[...transactions.pending, ...transactions.confirmed]}
           count={transactions.count}
-          loadMore={() => transactionsLoaded({
-            senderIdOrRecipientId: this.props.account.address,
-            offset: transactions.confirmed.length,
-          })}>
+          loadMore={this.loadMore}>
           <Transactions transactions={transactions}
             footer={this.state.footer}
             navigate={this.props.navigation.navigate}

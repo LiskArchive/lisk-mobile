@@ -93,7 +93,7 @@ class Form extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { value } = this.state.amount;
     const validator = this.validator.amount;
-    if (this.props.account.balance !== nextProps.account.balance) {
+    if (nextProps.account && this.props.account.balance !== nextProps.account.balance) {
       this.setState({
         amount: {
           validity: validator(value),
