@@ -3,7 +3,7 @@ import { Image, TouchableHighlight } from 'react-native';
 import OpenAppSettings from 'react-native-app-settings';
 import styles from './styles';
 import { P, H4 } from '../../toolBox/typography';
-import cameraPermissionIcon from '../../../assets/images/cameraPermissionIcon.png';
+import cameraPermissionIcon from '../../../assets/images/camera3x.png';
 
 const CameraAccess = () => (
   <TouchableHighlight

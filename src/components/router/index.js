@@ -13,7 +13,6 @@ import Settings from '../settings';
 import About from '../about';
 import Terms from '../terms';
 import styles from './styles';
-import LogoutButton from '../logoutButton';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
 import tabBarOptions from './tabBarOptions';
@@ -29,17 +28,20 @@ const resetNavigationStack = (navigation, routeName) => {
     }));
 };
 
+const SettingButton = ({ navigation }) =>
+  <IconButton
+    icon='settings'
+    iconSize={20}
+    onPress={() => navigation.navigate({ routeName: 'Settings' })}
+    style={styles.settings}
+    color={colors.white} />;
+
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: ({ navigation }) => ({
-      headerLeft: <IconButton
-        icon='settings'
-        iconSize={20}
-        onPress={() => navigation.navigate({ routeName: 'Settings' })}
-        style={styles.settings}
-        color={colors.white} />,
+      headerRight: <SettingButton navigation={navigation} />,
       title: <Logo />,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
@@ -47,20 +49,22 @@ export const Tabs = TabNavigator({
   },
   Send: {
     screen: Send,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
+      headerRight: <SettingButton navigation={navigation} />,
       title: <Logo />,
       tabBarLabel: 'Send',
       tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
-    },
+    }),
   },
   Request: {
     screen: Request,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
+      headerRight: <SettingButton navigation={navigation} />,
       headerLeft: <IconButton color='transparent' icon='back'/>,
       title: <Logo />,
       tabBarLabel: 'Request',
       tabBarIcon: ({ focused }) => <MenuIcon name='request' focused={focused} />, //eslint-disable-line
-    },
+    }),
   },
   // Explore: {
   //   screen: Explore,
@@ -119,9 +123,8 @@ export default StackNavigator(
     },
     Main: {
       screen: Tabs,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
@@ -134,9 +137,8 @@ export default StackNavigator(
     },
     Wallet: {
       screen: Wallet,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         title: <Logo />,
         headerTintColor: colors.white,
         headerStyle: {
@@ -149,7 +151,6 @@ export default StackNavigator(
       screen: Settings,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         title: <Logo />,
         headerLeft: <IconButton
           icon='back'
@@ -173,7 +174,6 @@ export default StackNavigator(
       screen: About,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         title: <Logo />,
         headerLeft: <IconButton
           icon='back'
@@ -197,7 +197,6 @@ export default StackNavigator(
       screen: Terms,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         title: <Logo />,
         headerLeft: <IconButton
           icon='back'
@@ -221,7 +220,6 @@ export default StackNavigator(
       screen: TxDetail,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         title: <Logo />,
         headerLeft: <IconButton
           icon='back'

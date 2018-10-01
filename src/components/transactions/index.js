@@ -50,7 +50,7 @@ class Transactions extends React.Component {
     const {
       transactions, navigate, account, footer,
     } = this.props;
-    const balance = parseFloat(fromRawLsk(account.balance));
+    const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
 
@@ -73,7 +73,7 @@ class Transactions extends React.Component {
             }
             <List
               navigate={navigate}
-              account={account.address}
+              account={account ? account.address : ''}
               pending={transactions.pending}
               transactions={transactions.confirmed} />
             {

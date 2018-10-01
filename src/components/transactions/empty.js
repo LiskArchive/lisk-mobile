@@ -7,7 +7,7 @@ import styles from './styles';
 const EmptyState = () =>
   <View style={styles.emptyState}>
     <View style={styles.noActivity}>
-      <Image style={styles.image} source={noActivity} />
+      <Image style={styles.empty} source={noActivity} />
     </View>
     <P style={styles.noTxTitle}>You do not have any recent activity.</P>
   </View>;
