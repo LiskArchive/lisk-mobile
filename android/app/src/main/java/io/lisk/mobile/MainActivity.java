@@ -1,4 +1,4 @@
-package org.lisk.mobile;
+package io.lisk.mobile;
 
 import com.facebook.react.ReactActivity;
 

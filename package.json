@@ -1,6 +1,6 @@
 {
   "name": "Lisk",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "description": "The official mobile wallet of Lisk platform",
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
@@ -97,6 +97,7 @@
   },
   "devDependencies": {
     "asyncstorage-down": "^4.0.1",
+    "babel-core": "^6.26.3",
     "babel-eslint": "=8.0.2",
     "babel-jest": "23.0.1",
     "babel-plugin-rewrite-require": "^1.14.5",
