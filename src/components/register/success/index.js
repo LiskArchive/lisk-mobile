@@ -16,7 +16,7 @@ class Success extends React.Component {
         <View>
           <View style={styles.titleContainer}>
             <H1 style={styles.header}>Perfect! You’re all set.</H1>
-            <P style={styles.subtitle}>
+            <P style={styles.subTitle}>
               All the steps needed for creating an ID are{'\n'}
               complete. You can now start sending and{'\n'}
               receiving LSK tokens.

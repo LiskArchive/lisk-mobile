@@ -62,6 +62,10 @@ const styles = {
     alignItems: 'center',
     marginBottom: 10,
   },
+  empty: {
+    width: 222,
+    height: 109,
+  },
   loading: {
     width: 237,
     height: 220,
@@ -86,10 +90,6 @@ const styles = {
   link: {
     fontSize: fonts.size.small,
     color: colors.primary6,
-  },
-  image: {
-    width: 110,
-    height: 126,
   },
   footer: {
     height: 90,

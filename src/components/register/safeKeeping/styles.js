@@ -16,9 +16,9 @@ const styles = {
     color: colors.grayScale2,
   },
   subHeader: {
-    marginTop: 14,
+    marginTop: 8,
     marginBottom: 25,
-    color: colors.grayScale1,
+    color: colors.grayScale2,
   },
   label: {
     color: colors.grayScale2,
@@ -28,11 +28,9 @@ const styles = {
     backgroundColor: colors.white,
     padding: 20,
     shadowColor: '#0279b6',
-    // shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
     shadowRadius: 20,
-    marginTop: 24,
-    // elevation: 5,
+    marginTop: 10,
   },
   passphraseTitle: {
     color: colors.grayScale2,
@@ -44,7 +42,7 @@ const styles = {
   },
   passphrase: {
     marginTop: 7,
-    color: colors.primary1,
+    color: colors.black,
   },
   copyContainer: {
     alignItems: 'center',
@@ -57,8 +55,12 @@ const styles = {
     alignItems: 'center',
   },
   image: {
-    width: 429,
-    height: 140,
+    width: 111,
+    height: 111,
+  },
+  caption: {
+    color: colors.grayScale2,
+    marginTop: 15,
   },
 };
 

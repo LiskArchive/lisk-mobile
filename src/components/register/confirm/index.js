@@ -3,7 +3,8 @@ import { View, Image } from 'react-native';
 import styles from './styles';
 import { H1, H4, P } from '../../toolBox/typography';
 import { SecondaryButton, Button } from '../../toolBox/button';
-import image from '../../../assets/images/registrationProcess/verify2x.png';
+import verifyImage from '../../../assets/images/registrationProcess/verify3x.png';
+import verifiedImage from '../../../assets/images/registrationProcess/verified3x.png';
 import { assembleWordOptions } from '../../../utilities/passphrase';
 
 /**
@@ -158,15 +159,12 @@ class Confirm extends React.Component {
           <P style={styles.subHeader}>
             Please tap on the empty boxes and select{'\n'}the correct word from the options.
           </P>
-
-        </View>
-        <View style={styles.imageContainer} >
-          <Image
-            style={styles.image}
-            source={image}
-          />
-        </View>
-        <View>
+          <View style={styles.imageContainer} >
+            <Image
+              style={styles.image}
+              source={this.state.buttonStatus ? verifyImage : verifiedImage}
+            />
+          </View>
           <View style={styles.passphraseContainer}>
             { this.renderPassphrase() }
           </View>

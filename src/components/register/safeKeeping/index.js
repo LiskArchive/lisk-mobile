@@ -4,8 +4,7 @@ import styles from './styles';
 import { H1, B, P } from '../../toolBox/typography';
 import CopyToClipboard from '../../copyToClipboard';
 import { SecondaryButton } from '../../toolBox/button';
-import vault from '../../../assets/images/registrationProcess/vault2x.png';
-// import colors from '../../../constants/styleGuide/colors';
+import image from '../../../assets/images/registrationProcess/passphrase3x.png';
 
 class SafeKeeping extends React.Component {
   state = {
@@ -44,14 +43,15 @@ class SafeKeeping extends React.Component {
               showIcon={true}
               iconSize={14}
               value={this.props.passphrase}
-              type={B}/>
+              type={P}/>
           </View>
         </View>
         <View style={styles.imageContainer} >
           <Image
             style={styles.image}
-            source={vault}
+            source={image}
           />
+          <P style={styles.caption}>Keep it safe!</P>
         </View>
         <View>
           <SecondaryButton

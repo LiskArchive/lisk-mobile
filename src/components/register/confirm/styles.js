@@ -11,20 +11,24 @@ const styles = {
     flex: 1,
     justifyContent: 'space-between',
   },
+  headerContainer: {
+    backgroundColor: 'red',
+  },
   header: {
     marginTop: 8,
   },
   subHeader: {
-    marginTop: 14,
-    color: colors.grayScale1,
+    marginTop: 7,
+    color: colors.grayScale2,
   },
   imageContainer: {
-    marginTop: -25,
     alignItems: 'center',
+    marginTop: 30,
+    marginBottom: 30,
   },
   image: {
-    width: 116,
-    height: 160,
+    width: 91,
+    height: 110,
   },
   passphraseContainer: {
     flexDirection: 'row',
