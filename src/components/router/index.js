@@ -36,12 +36,14 @@ const SettingButton = ({ navigation }) =>
     style={styles.settings}
     color={colors.white} />;
 
+const placeHolderButton = <IconButton color='transparent' icon='back'/>;
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
+      headerLeft: placeHolderButton,
       title: <Logo />,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
@@ -60,7 +62,7 @@ export const Tabs = TabNavigator({
     screen: Request,
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
-      headerLeft: <IconButton color='transparent' icon='back'/>,
+      headerLeft: placeHolderButton,
       title: <Logo />,
       tabBarLabel: 'Request',
       tabBarIcon: ({ focused }) => <MenuIcon name='request' focused={focused} />, //eslint-disable-line
@@ -100,7 +102,7 @@ export default StackNavigator(
     Login: {
       screen: Login,
       navigationOptions: ({ navigation }) => ({
-        headerRight: <IconButton color='transparent' icon='back'/>,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
