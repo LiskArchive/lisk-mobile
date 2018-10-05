@@ -2,37 +2,39 @@
 pipeline {
   agent { node { label 'lisk-mobile' } }
   stages {
-    stage ('Build Dependencies') {
+    stage ('Build dependencies') {
       steps {
         script{
           cache_file = restoreCache("package.json")
-          sh 'npm install'
+          nvm(getNodejsVersion()) {
+            sh 'npm install'
+          }
           saveCache(cache_file, './node_modules', 10)
         }
       }
     }
-    stage ('Run Eslint') {
+    stage ('Run ESLint') {
       steps {
-        sh 'npm run test:format'
+        nvm(getNodejsVersion()) {
+          sh 'npm run test:format'
+        }
       }
     }
-    stage ('Run Unit Tests') {
+    stage ('Run unit tests') {
       steps {
-        sh '''
-        npm run test
-        '''
+        nvm(getNodejsVersion()) {
+          sh 'npm run test'
+        }
       }
     }
   }
   post {
     success {
       script {
-        if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-          previous_build = currentBuild.getPreviousBuild()
-          if (previous_build != null && previous_build.result == 'FAILURE') {
-            build_info = getBuildInfo()
-            liskSlackSend('good', "Recovery: build ${build_info} was successful.")
-          }
+        previous_build = currentBuild.getPreviousBuild()
+        if (previous_build != null && previous_build.result == 'FAILURE') {
+          build_info = getBuildInfo()
+          liskSlackSend('good', "Recovery: build ${build_info} was successful.")
         }
       }
     }
