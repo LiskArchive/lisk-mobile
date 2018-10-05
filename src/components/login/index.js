@@ -108,28 +108,32 @@ class Login extends React.Component {
     this.setState({
       connectionError: false,
     });
-    FingerprintScanner.isSensorAvailable().then(() => {
-      this.passphraseInput.blur();
-      Alert.alert(
-        '',
-        'would you like to store your passphrase in a secure location on your phone ?',
-        [
-          {
-            text: 'Cancel',
-            onPress: () => this.goToWallet(passphrase),
-          },
-          {
-            text: 'OK',
-            onPress: () => bioMetricAuthentication(
-              () => this.goToWallet(passphrase, true),
-              () => this.goToWallet(passphrase),
-              'Scan your fingerprint on the device scanner to store your passphrase',
-            ),
-          },
-        ],
-        { cancelable: false },
-      );
-    }).catch(() => this.goToWallet(passphrase));
+    if (!this.passphrase) {
+      FingerprintScanner.isSensorAvailable().then(() => {
+        this.passphraseInput.blur();
+        Alert.alert(
+          '',
+          'would you like to store your passphrase in a secure location on your phone ?',
+          [
+            {
+              text: 'Cancel',
+              onPress: () => this.goToWallet(passphrase),
+            },
+            {
+              text: 'OK',
+              onPress: () => bioMetricAuthentication(
+                () => this.goToWallet(passphrase, true),
+                () => this.goToWallet(passphrase),
+                'Scan your fingerprint on the device scanner to store your passphrase',
+              ),
+            },
+          ],
+          { cancelable: false },
+        );
+      }).catch(() => this.goToWallet(passphrase));
+    } else {
+      this.goToWallet(passphrase);
+    }
   }
 
   /**
