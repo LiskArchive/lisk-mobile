@@ -38,10 +38,10 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Lisk uses  your comera to scan QRcodes</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Lisk uses your photo library to access your stored qr codes.</string>
+	<string></string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Lisk uses your photo library to access your stored qr codes.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Lisk uses your photo library to access your stored qr codes.</string>
 	<key>UIAppFonts</key>
 	<array>
@@ -78,5 +78,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>$(PRODUCT_NAME) Authentication</string>
 </dict>
 </plist>

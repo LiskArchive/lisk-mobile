@@ -3,6 +3,8 @@ package org.lisk.mobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.hieuvp.fingerprint.ReactNativeFingerprintScannerPackage;
+import com.oblador.keychain.KeychainPackage;
 import com.krazylabs.OpenAppSettingsPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
@@ -35,6 +37,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeFingerprintScannerPackage(),
+            new KeychainPackage(),
             new OpenAppSettingsPackage(),
             new RCTQRCodeLocalImagePackage(),
             new LottiePackage(),
