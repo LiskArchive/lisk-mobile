@@ -11,15 +11,10 @@ const styles = {
   },
   header: {
     marginTop: 8,
-    paddingBottom: 12,
+    paddingBottom: 8,
   },
   subTitle: {
     color: colors.grayScale2,
-  },
-  subHeader: {
-    marginTop: 14,
-    marginBottom: 25,
-    color: colors.grayScale1,
   },
   imageContainer: {
     marginTop: 52,

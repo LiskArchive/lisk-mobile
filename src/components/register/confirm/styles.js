@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { colors, fonts } from '../../../constants/styleGuide';
+
+const { height } = Dimensions.get('window');
 
 const styles = {
   container: {
@@ -9,20 +11,24 @@ const styles = {
     flex: 1,
     justifyContent: 'space-between',
   },
+  headerContainer: {
+    backgroundColor: 'red',
+  },
   header: {
-    marginTop: 17,
+    marginTop: 8,
   },
   subHeader: {
-    marginTop: 14,
-    color: colors.grayScale1,
+    marginTop: 7,
+    color: colors.grayScale2,
   },
   imageContainer: {
-    marginTop: -25,
     alignItems: 'center',
+    marginTop: 30,
+    marginBottom: 30,
   },
   image: {
-    width: 116,
-    height: 160,
+    width: 91,
+    height: 110,
   },
   passphraseContainer: {
     flexDirection: 'row',
@@ -31,16 +37,16 @@ const styles = {
   },
   word: {
     marginRight: 10,
-    lineHeight: 39,
+    lineHeight: height < 640 ? 30 : 39,
   },
   placeholder: {
     borderWidth: 1,
     borderColor: colors.primary5,
     backgroundColor: colors.white,
-    height: 39,
+    height: height < 640 ? 30 : 39,
     minWidth: 87,
     marginRight: 10,
-    lineHeight: 39,
+    lineHeight: height < 640 ? 30 : 39,
     borderRadius: 4,
     marginBottom: 5,
     textAlign: 'center',
@@ -49,10 +55,10 @@ const styles = {
     borderColor: colors.grayScale5,
     backgroundColor: colors.grayScale5,
     borderWidth: 1,
-    height: 39,
+    height: height < 640 ? 30 : 39,
     minWidth: 87,
     marginRight: 10,
-    lineHeight: 39,
+    lineHeight: height < 640 ? 30 : 39,
     borderRadius: 4,
     marginBottom: 5,
     textAlign: 'center',
@@ -74,7 +80,7 @@ const styles = {
     backgroundColor: colors.grayScale3,
   },
   optionsContainer: {
-    marginTop: 25,
+    marginTop: height > 640 ? 25 : 5,
     height: 38,
     flexDirection: 'row',
     width: '100%',
@@ -84,7 +90,7 @@ const styles = {
   option: {
     height: 38,
     lineHeight: 38,
-    width: 99,
+    width: height > 640 ? 99 : 77,
     backgroundColor: '#74869B',
     borderRadius: 4,
     color: colors.white,

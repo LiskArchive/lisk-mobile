@@ -1,36 +1,32 @@
-import { StyleSheet, DeviceInfo, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 import { colors, boxes } from '../../../constants/styleGuide';
 import { viewportHeight, headerHeight } from '../../../utilities/device';
 
 
 const { height, width } = Dimensions.get('window');
 const styles = {
-  container: {
-    minHeight: '100%',
-    zIndex: 1,
-  },
-  innerContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '100%',
-    paddingTop: 36,
-    paddingBottom: 24,
-  },
-  button: {
-    marginRight: boxes.boxPadding,
-    marginLeft: boxes.boxPadding,
-  },
-  stickyButton: {
-    borderRadius: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
+  wrapper: {
+    backgroundColor: colors.white,
   },
   subtitle: {
     marginTop: 7,
     color: colors.grayScale2,
   },
+  innerContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    paddingBottom: 24,
+  },
+  titleContainer: {
+    paddingTop: 36,
+  },
+  form: {
+    paddingBottom: 20,
+  },
   input: {
     marginTop: 0,
+    flexWrap: 'wrap',
+    flex: 1,
   },
   headings: {
     marginRight: boxes.boxPadding,
@@ -64,21 +60,6 @@ const styles = {
     lineHeight: 25,
     marginLeft: 5,
     marginTop: -3,
-  },
-  iosKeyboard: {
-    backgroundColor: 'transparent',
-    marginBottom: DeviceInfo.isIPhoneX_deprecated ? -89 : -59,
-    borderRadius: 0,
-  },
-  androidKeyboard: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    bottom: 0,
-    top: 0,
-    right: 0,
-    left: 0,
-    zIndex: 9999,
-    borderRadius: 0,
   },
   preview: {
     position: 'absolute',
@@ -149,10 +130,12 @@ const styles = {
         lineHeight: 28,
         paddingTop: 15,
         paddingBottom: 15,
+        paddingLeft: 40,
       },
       ios: {
         height: 48,
         lineHeight: 48,
+        paddingLeft: 40,
       },
     }),
   },
@@ -171,7 +154,7 @@ const styles = {
     zIndex: 0,
     left: 20,
     top: 41,
-    opacity: 0,
+    opacity: 0.2,
   },
   visible: {
     opacity: 1,

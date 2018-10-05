@@ -6,8 +6,12 @@ import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import Empty from '../transactions/empty';
 import Loading from '../transactions/loading';
+import { viewportHeight } from '../../utilities/device';
 import InfiniteScrollView from '../infiniteScrollView';
 import styles from './styles';
+
+const itemHeight = 90;
+const summaryHeight = 250;
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -19,7 +23,7 @@ import styles from './styles';
  * about any unforeseen issue/change
  */
 @connect(state => ({
-  accounts: state.accounts,
+  account: state.accounts.active,
   transactions: state.transactions,
 }), {
   transactionsLoaded: transactionsLoadedAction,
@@ -32,26 +36,24 @@ class Wallet extends React.Component {
 
   scrollView = null;
 
-  componentWillMount() {
-    this.activeAccount = this.props.accounts.active || {};
-  }
-
   componentDidUpdate() {
     const { confirmed, pending } = this.props.transactions;
-    this.activeAccount = this.props.accounts.active || {};
     if (this.state.theme === 'loading' ||
       (this.state.theme === 'empty' && confirmed.length > 0)) {
+      const txNum = pending.length + confirmed.length;
       this.setState({
         theme: (confirmed.length === 0 && pending.length === 0) ? 'empty' : 'list',
+        footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < txNum,
       });
     }
   }
 
   componentDidMount() {
     this.props.transactionsLoaded({
-      senderIdOrRecipientId: this.activeAccount.address,
+      senderIdOrRecipientId: this.props.account.address,
       offset: 0,
     });
+    this.initialAnimation();
   }
 
   onScroll() {
@@ -60,14 +62,36 @@ class Wallet extends React.Component {
     }]);
   }
 
+  initialAnimation = () => {
+    this.timeout = setTimeout(() => {
+      if (this.scrollView) {
+        this.scrollView.scrollTo(1);
+      }
+    }, 100);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
+
+  loadMore = () => {
+    if (this.props.account) {
+      this.props.transactionsLoaded({
+        senderIdOrRecipientId: this.props.account.address,
+        offset: this.props.transactions.confirmed.length,
+      });
+    }
+  }
+
   render() {
-    const { transactions, transactionsLoaded } = this.props;
+    const { transactions } = this.props;
     return (<View style={styles.container}>
       {
-        this.props.accounts.active ?
+        this.props.account ?
           <AccountSummary
             scrollY={this.state.scrollY}
-            account={this.props.accounts.active}
+            account={this.props.account}
             style={styles.accountSummary} /> : null
       }
       {
@@ -78,19 +102,17 @@ class Wallet extends React.Component {
       }
       {
         (this.state.theme === 'list') ? <InfiniteScrollView
-          ref={(el) => { if (el) this.scrollView = el; }}
+          ref={(el) => { this.scrollView = el; }}
           scrollEventThrottle={8}
           onScroll={this.onScroll.call(this)}
           style={[styles.scrollView]}
           list={[...transactions.pending, ...transactions.confirmed]}
           count={transactions.count}
-          loadMore={() => transactionsLoaded({
-            senderIdOrRecipientId: this.activeAccount.address,
-            offset: transactions.confirmed.length,
-          })}>
+          loadMore={this.loadMore}>
           <Transactions transactions={transactions}
+            footer={this.state.footer}
             navigate={this.props.navigation.navigate}
-            account={this.activeAccount} />
+            account={this.props.account} />
         </InfiniteScrollView> : null
       }
     </View>);

@@ -34,23 +34,12 @@ class Landing extends React.Component {
     this.props.accountsRetrieved();
   }
 
-  resetUserInfo() {
-    if (this.props.accounts.active) {
-      this.timeout = setTimeout(() => {
-        this.props.accountLoggedOut();
-      }, 140);
-    }
-  }
-
   componentDidMount() {
     this.animation.play();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.accounts.active && this.props.accounts.active &&
-      (nextProps.accounts.active.balance === this.props.accounts.active.balance)) {
-      this.resetUserInfo();
-    }
+    this.props.navigation.addListener(
+      'didFocus',
+      () => { this.props.accountLoggedOut(); },
+    );
   }
 
   componentWillUnmount() {

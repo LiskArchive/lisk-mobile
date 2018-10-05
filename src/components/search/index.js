@@ -60,16 +60,15 @@ class Search extends React.Component {
 
   render() {
     return (<View>
-
       <Input
-      label='Search for Lisk ID, Tx ID or delegate name'
-      reference={(input) => { this.query = input; }}
-      styles={{
-        input: styles.input,
-        inputLabel: styles.title,
-      }}
-      onChange={value => this.changeHandler('query', value)}
-    />
+        label='Search for Lisk ID, Tx ID or delegate name'
+        reference={(input) => { this.query = input; }}
+        styles={{
+          input: styles.input,
+          inputLabel: styles.title,
+        }}
+        onChange={value => this.changeHandler('query', value)}
+      />
       <PrimaryButton
         disabled={this.state.query.value.length < 2}
         onClick={this.search.bind(this)}

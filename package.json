@@ -1,6 +1,6 @@
 {
   "name": "Lisk",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "description": "The official mobile wallet of Lisk platform",
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
@@ -32,7 +32,7 @@
     "@remobile/react-native-qrcode-local-image": "github:yasharAyari/react-native-qrcode-local-image#support-import-from-cameraroll",
     "@tradle/react-native-http": "^2.0.1",
     "assert": "^1.4.1",
-    "bignumber.js": "^6.0.0",
+    "bignumber.js": "^7.2.1",
     "browserify-zlib": "^0.1.4",
     "buffer": "^4.9.1",
     "buffer-reverse": "^1.0.1",
@@ -90,6 +90,7 @@
     "socket.io-client": "^2.1.1",
     "stream-browserify": "^1.0.0",
     "string_decoder": "^0.10.31",
+    "text-encoding": "^0.6.4",
     "timers-browserify": "^1.4.2",
     "tty-browserify": "0.0.0",
     "url": "^0.10.3",
@@ -98,6 +99,7 @@
   },
   "devDependencies": {
     "asyncstorage-down": "^4.0.1",
+    "babel-core": "^6.26.3",
     "babel-eslint": "=8.0.2",
     "babel-jest": "23.0.1",
     "babel-plugin-rewrite-require": "^1.14.5",

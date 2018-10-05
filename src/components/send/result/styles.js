@@ -1,10 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { boxes, colors } from '../../../constants/styleGuide';
 
-
+const { height } = Dimensions.get('window');
 const styles = {
   container: {
     height: '100%',
+    backgroundColor: colors.white,
   },
   innerContainer: {
     flexDirection: 'column',
@@ -34,7 +35,7 @@ const styles = {
   },
   illustration: {
     width: '100%',
-    height: 300,
+    height: height <= 640 ? 200 : 300,
     paddingBottom: 50,
   },
 };

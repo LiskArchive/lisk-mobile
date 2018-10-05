@@ -1,9 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { colors } from '../../../constants/styleGuide';
 
-const liskIdIconColor = '#9cb4fa';
-const avatarIconColor = '#a9dcf8';
-const secureIconColor = '#fe7354';
+const { height } = Dimensions.get('window');
 
 const styles = {
   scrollContainer: {
@@ -27,27 +25,19 @@ const styles = {
   row: {
     flexDirection: 'row',
     paddingRight: 50,
-    marginBottom: 23,
+    marginBottom: height > 640 ? 10 : 3,
+    paddingBottom: height > 640 ? 14 : 3,
+  },
+  separator: {
+    borderBottomColor: colors.grayScale5,
+    borderBottomWidth: 1,
   },
   rowTitle: {
     marginTop: 5,
   },
-  iconWrapper: {
-    width: 36,
-    height: 36,
-    borderRadius: 50,
+  icon: {
     marginRight: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  color1: {
-    backgroundColor: liskIdIconColor,
-  },
-  color2: {
-    backgroundColor: avatarIconColor,
-  },
-  color3: {
-    backgroundColor: secureIconColor,
+    marginTop: 10,
   },
   description: {
     color: colors.grayScale2,

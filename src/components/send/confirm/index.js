@@ -1,131 +1,124 @@
 import React from 'react';
-import { View, Linking } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
+import { View, Image, Platform } from 'react-native';
+import { validatePassphrase } from '../../../utilities/passphrase';
+import { extractPublicKey } from '../../../utilities/api/account';
+import Input from '../../toolBox/input';
+import { H1, P } from '../../toolBox/typography';
+import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
+import secondPassphraseImage from '../../../assets/images/secondPassphrase3x.png';
 import styles from './styles';
-import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
-import { PrimaryButton } from '../../toolBox/button';
-import Avatar from '../../avatar';
-import { H1, B, P, A } from '../../toolBox/typography';
 
-const messages = {
-  initialize: {
-    title: 'Initialize your account',
-    subtitle: 'By initializing your account, you are taking an additional step towards securing your account.',
-    button: 'Initialize now',
-    reference: 'Account initialization',
-  },
-  send: {
-    title: 'Ready to Send',
-    subtitle: "You are about to send LSK tokens{'\n'}to another address.",
-    button: 'Send now',
-  },
-};
-
+/**
+ * The container component containing login and create account functionality
+ */
 @connect(state => ({
+  peers: state.peers,
   accounts: state.accounts,
-}), {
-  transactionAdded: transactionAddedAction,
-})
-
-class Form extends React.Component {
+}), {})
+class Confirm extends React.Component {
   state = {
-    disableButton: false,
-  }
-  send = () => {
-    this.setState({
-      disableButton: true,
-    });
-    const { accounts, nextStep, transactionAdded } = this.props;
-    const { amount, address, reference } = this.state;
-    transactionAdded({
-      recipientId: address,
-      amount: toRawLsk(amount),
-      passphrase: accounts.active.passphrase,
-      secondPassphrase: null,
-      data: reference || null,
-    }, nextStep);
-  }
-
-  goBack = () => {
-    const { address, amount, reference } = this.state;
-    return this.props.prevStep({ address, amount, reference });
-  }
-
-  openAcademy = () => {
-    Linking.openURL('https://help.lisk.io/account-security/should-i-initialize-my-lisk-account')
-      // eslint-disable-next-line no-console
-      .catch(err => console.error('An error occurred', err));
-  }
-
-  accountInitialization() {
-    this.setState({
-      address: this.props.accounts.active.address,
-      amount: 0.1,
-      reference: messages.initialize.reference,
-    });
+    secondPassphrase: {
+      value: '',
+      validity: validatePassphrase(''),
+      buttonStyle: styles.button,
+    },
   }
 
   componentDidMount() {
-    const {
-      navigation, accounts, address, reference, amount,
-    } = this.props;
-
-    // Undefined address means we escaped the form step to initialize the account
-    if (!address && !accounts.active.initialized) {
-      this.accountInitialization();
-    } else {
-      this.setState({
-        accounts, address, reference, amount,
-      });
-      navigation.setParams({ showButtonLeft: true, action: this.goBack });
-    }
+    this.props.navigation.setParams({ showButtonLeft: true, action: this.back });
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  trim(passphrase) {
+    return passphrase.trim().replace(/\s+/g, ' ');
+  }
+
+  forward = () => {
+    const { amount, address, reference } = this.props;
+    this.props.nextStep({
+      amount,
+      address,
+      reference,
+      secondPassphrase: this.state.secondPassphrase.value,
+    });
+  }
+
+  back = () => this.props.prevStep();
+
+  validatePassphrase = (passphrase) => {
+    const validity = validatePassphrase(passphrase);
+    if (validity.length === 0 &&
+      extractPublicKey(passphrase) !== this.props.accounts.active.secondPublicKey) {
+      validity.push({
+        code: 'dose_not_belong',
+        message: 'This is not your second passphrase.',
+      });
+    }
+
+    return validity;
+  }
+
+  /**
+   * General change handler to get bound to react component event listeners
+   *
+   * @param {String} key - The key in react component state to be altered
+   * @param {any} value - The corresponding value. interface depends on the key
+   *
+   * @todo Implement error status/message
+   */
+  changeHandler = (value) => {
+    this.setState({
+      secondPassphrase: {
+        value,
+        validity: this.validatePassphrase(value),
+      },
+    });
+  }
 
   render() {
-    const { address, amount, reference } = this.state;
-    const { active } = this.props.accounts;
-    const actionType = (!active.initialized && address === active.address &&
-      reference === 'Account initialization') ? 'initialize' : 'send';
-
-    return (<View style={styles.container}>
-      <View style={styles.innerContainer}>
+    const { secondPassphrase } = this.state;
+    const error = secondPassphrase.validity
+      .filter(item =>
+        item.code !== 'INVALID_MNEMONIC' || secondPassphrase.validity.length === 1);
+    return (<View style={styles.wrapper}>
+      <KeyboardAwareScrollView
+        disabled={secondPassphrase.validity.length !== 0}
+        onSubmit={this.forward}
+        hasTabBar={true}
+        styles={{ innerContainer: styles.innerContainer }}
+        button={{
+          title: 'Continue',
+          type: 'inBox',
+        }}>
         <View style={styles.titleContainer}>
-          <H1>{ messages[actionType].title }</H1>
-          <P style={styles.subtitle}>
-            { messages[actionType].subtitle }
-            {
-              actionType === 'initialize' ?
-              <A style={styles.link} onPress={this.openAcademy}> Read more</A> : ''
-            }
-          </P>
-        </View>
-        <View>
-          <View style={styles.row}>
-            <P style={styles.label}>Address</P>
-            <View style={styles.addressContainer}>
-              <Avatar address={address || ''} style={styles.avatar} size={35}/>
-              <B labelStyle={[styles.address, styles.black]}>{address}</B>
-            </View>
+          <View style={styles.headings}>
+            <H1>Confirm your identity</H1>
+            <P style={styles.subtitle}>
+              Enter you second passphrase to continue to transaction overview page.
+            </P>
           </View>
-          <View style={styles.row}>
-            <P style={styles.label}>Amount (including 0.1 Ⱡ fee)</P>
-            <B labelStyle={[styles.amount, styles.black]}>{`${fromRawLsk(toRawLsk(amount) + 1e7)} Ⱡ`}</B>
+          <View style={styles.illustrationWrapper}>
+            <Image style={styles.illustration} source={secondPassphraseImage} />
           </View>
-          {reference ? <View style={styles.row}>
-            <P style={styles.label}>Reference</P>
-            <B labelStyle={[styles.address, styles.black]}>{reference}</B>
-          </View> : null}
+          <Input
+            label='Second Passphrase'
+            reference={(ref) => { this.SecondPassphraseInput = ref; }}
+            styles={{ input: styles.input }}
+            value={secondPassphrase.value}
+            onChange={this.changeHandler}
+            autoFocus={true}
+            autoCorrect={false}
+            multiline={Platform.OS === 'ios'}
+            secureTextEntry={Platform.OS !== 'ios'}
+            error={
+              (error.length > 0 && error[0].message && error[0].message.length > 0) ?
+              error[0].message.replace(' Please check the passphrase.', '') : ''
+            }/>
         </View>
-        <PrimaryButton
-          disabled={this.state.disableButton}
-          style={styles.button}
-          onClick={this.send}
-          title={ messages[actionType].button } />
-      </View>
+      </KeyboardAwareScrollView>
     </View>);
   }
 }
 
-export default Form;
+export default Confirm;

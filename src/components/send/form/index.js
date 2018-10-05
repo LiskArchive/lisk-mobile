@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
-import { View, Platform } from 'react-native';
-import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import React from 'react';
+import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { SecondaryButton, IconButton } from '../../toolBox/button';
+import { TextEncoder } from 'text-encoding';
+import { IconButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
 import { P, H1, H2, Small } from '../../toolBox/typography';
@@ -14,52 +13,55 @@ import FormattedNumber from '../../formattedNumber';
 import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
 import Scanner from './scanner';
+import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 
 @connect(state => ({
   account: state.accounts.active,
 }), {})
 class Form extends React.Component {
     references = [];
-    state = {
-      address: { value: '', validity: -1 },
-      amount: { value: '', validity: -1 },
-      reference: { value: '', validity: -1 },
-      secondaryButtonOpacity: 1,
-    };
 
     validator = {
-      address: str => reg.address.test(str),
-      amount: str => (
-        reg.amount.test(str) &&
-        this.props.account &&
-        this.props.account.balance > transactions.send.fee &&
-        parseFloat(str) < fromRawLsk(this.props.account.balance - transactions.send.fee)
-      ),
-      reference: str => (str.length === 0 || str.length < 64),
+      address: (str) => {
+        if (str === '') return -1;
+        return reg.address.test(str) ? 0 : 1;
+      },
+      amount: (str) => {
+        const { account } = this.props;
+        if (str === '') return -1;
+        return (reg.amount.test(str) &&
+          account && account.balance > transactions.send.fee &&
+          parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
+      },
+      reference: (str) => {
+        const uint8array = new TextEncoder().encode(str);
+        return uint8array.length > 64 ? 1 : 0;
+      },
     };
     activeInputRef = null;
+
+    state = {
+      address: { value: '', validity: this.validator.address('') },
+      amount: { value: '', validity: this.validator.amount('') },
+      reference: { value: '', validity: this.validator.reference('') },
+      secondaryButtonOpacity: 1,
+    };
 
   /**
    * @param {String} name - the key to set on state
    * @param {Any} value the Value corresponding the given key
    */
   changeHandler = (name, value) => {
-    let validity = -1;
-    if (value !== '') {
-      validity = this.validator[name](value) ? 0 : 1;
-    }
-
     this.setState({
       [name]: {
         value,
-        validity,
+        validity: this.validator[name](value),
       },
     });
   }
 
   setAddress = (value) => {
-    const trimmedValue = value.trim();
-    this.changeHandler('address', trimmedValue);
+    this.changeHandler('address', value);
   }
 
   setAmount = (value) => {
@@ -91,7 +93,7 @@ class Form extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { value } = this.state.amount;
     const validator = this.validator.amount;
-    if (this.props.account.balance !== nextProps.account.balance) {
+    if (nextProps.account && this.props.account.balance !== nextProps.account.balance) {
       this.setState({
         amount: {
           validity: validator(value),
@@ -116,31 +118,36 @@ class Form extends React.Component {
     this.references[`${focusingRef}`].focus();
   }
 
-  goToNextState = () => {
-    this.props.nextStep({
+  forward = () => {
+    const { secondPublicKey } = this.props.account;
+    const to = secondPublicKey ? 1 : 2;
+    const stepData = {
       amount: this.state.amount.value,
       address: this.state.address.value,
       reference: this.state.reference.value,
-    });
+    };
+
+    this.props.move({ to, stepData });
   }
 
   render() {
-    const keyboardButtonStyle = Platform.OS === 'ios' ? 'iosKeyboard' : 'androidKeyboard';
-    const { address, amount } = this.state;
+    const { address, amount, reference } = this.state;
     return (
-      <Fragment>
-      <Scanner
-        ref={(el) => { this.scanner = el; }}
-        navigation={this.props.navigation}
-        setAddress={this.setAddress}
-        setAmount={this.setAmount}/>
-      <KeyboardAwareScrollView
-        enableOnAndroid={true}
-        enableResetScrollToCoords={false}
-        contentContainerStyle={Platform.OS === 'ios' ? styles.container : styles.container}
-        onKeyboardDidShow={() => this.changeButtonOpacity(0)}
-        onKeyboardDidHide={() => this.changeButtonOpacity(1)}>
-        <View style={styles.innerContainer}>
+      <View style={styles.wrapper}>
+        <Scanner
+          ref={(el) => { this.scanner = el; }}
+          navigation={this.props.navigation}
+          setAddress={this.setAddress}
+          setAmount={this.setAmount}/>
+        <KeyboardAwareScrollView
+          disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
+          onSubmit={this.forward}
+          hasTabBar={true}
+          button={{
+            title: 'Continue',
+            type: 'inBox',
+          }}
+          styles={{ container: styles.container, innerContainer: styles.innerContainer }}>
           <View style={styles.titleContainer}>
             <View style={styles.headings}>
               <H1>Send</H1>
@@ -170,7 +177,7 @@ class Form extends React.Component {
                 color={colors.primary5} />
               <Avatar
                 style={[styles.avatar, address.validity === 0 ? styles.visible : null]}
-                address={address.value.trim()}
+                address={address.validity === 0 ? address.value : '000L'}
                 size={34} />
               <Input
                 label='Address'
@@ -185,7 +192,7 @@ class Form extends React.Component {
                   containerStyle: styles.addressInputContainer,
                 }}
                 onChange={value => this.setAddress(value)}
-                value={`${address.validity === 0 ? '              ' : ''}${address.value}`}
+                value={address.value}
                 error={
                   address.validity === 1 ?
                     'Invalid address' : ''
@@ -222,22 +229,8 @@ class Form extends React.Component {
               onFocus={() => { this.activeInputRef = 2; }}
             />
           </View>
-          <SecondaryButton
-            disabled={address.validity !== 0 || amount.validity !== 0}
-            onClick={this.goToNextState}
-            style={[styles.button, { opacity: this.state.secondaryButtonOpacity }]}
-            title='Continue' />
-          </View>
         </KeyboardAwareScrollView>
-        <KeyboardAccessoryView
-         style={styles[keyboardButtonStyle]}>
-          <SecondaryButton
-            style={styles.stickyButton}
-            disabled={address.validity !== 0 || amount.validity !== 0}
-            onClick={this.goToNextState}
-            title='Continue' />
-        </KeyboardAccessoryView>
-      </Fragment>
+      </View>
     );
   }
 }

@@ -4,73 +4,44 @@ import { colors, boxes } from '../../constants/styleGuide';
 
 const { width } = Dimensions.get('window');
 
-export const consts = {
+export const animationRanges = {
   width,
   container: {
-    expanded: 185,
-    shrunk: 110,
     marginTop: 6,
+    height: [185, 110],
   },
   bg: {
-    expanded: 116,
-    shrunk: 56,
+    height: [116, 56],
   },
   box: {
-    expanded: {
-      height: 125,
-      top: 50,
-    },
-    shrunk: {
-      height: 100,
-      top: 0,
-    },
+    height: [125, 100],
+    top: [50, 0],
   },
   avatar: {
-    expanded: {
-      left: Math.floor(width / 2) - 40,
-      top: 0,
-    },
-    shrunk: {
-      left: 30,
-      top: 10,
-    },
+    left: [Math.floor(width / 2) - 40, 40, 40],
+    top: [0, 0, 20],
+    width: [80, 70, 60],
+    height: [80, 70, 60],
   },
   address: {
-    expanded: {
-      top: 83,
-      paddingLeft: 0,
-    },
-    shrunk: {
-      top: 15,
-      paddingLeft: 80,
-    },
+    top: [83, 15],
+    left: [33, 110],
   },
   balance: {
-    expanded: {
-      top: 130,
-      paddingLeft: 0,
-    },
-    shrunk: {
-      top: 55,
-      paddingLeft: 80,
-    },
+    top: [130, 55],
+    left: [33, 110],
   },
-
 };
 
 const styles = {
   container: {
     width: '100%',
-    height: consts.container.expanded,
-    marginTop: consts.container.marginTop,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    height: animationRanges.container.height[0],
+    marginTop: animationRanges.container.marginTop,
     borderBottomWidth: 20,
     borderBottomColor: 'transparent',
   },
   avatar: {
-    height: 80,
-    width: 80,
     top: 0,
     position: 'absolute',
     zIndex: 4,
@@ -80,6 +51,7 @@ const styles = {
     shadowOpacity: 0.2,
     shadowRadius: 10,
     borderRadius: 40,
+    overflow: 'hidden',
   },
   unit: {
     color: colors.primary5,
@@ -94,7 +66,6 @@ const styles = {
   },
   address: {
     height: 45,
-    width: '100%',
     paddingTop: 10,
     paddingBottom: 10,
     position: 'absolute',
@@ -103,7 +74,6 @@ const styles = {
   },
   addressContainer: {
     justifyContent: 'center',
-    width: '100%',
   },
   addressP: {
     lineHeight: 25,
@@ -111,7 +81,6 @@ const styles = {
   },
   balance: {
     height: 25,
-    width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

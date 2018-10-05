@@ -12,7 +12,7 @@ import reg from '../../constants/regex';
 import colors from '../../constants/styleGuide/colors';
 
 const pageHeight = viewportHeight();
-const qrCodeSize = Math.min(pageHeight - 335, Math.floor(deviceWidth() * 0.8));
+const qrCodeSize = Math.min(pageHeight - 355, Math.floor(deviceWidth() * 0.8));
 
 /**
  * The container component containing login and create account functionality
@@ -39,8 +39,8 @@ class Request extends React.Component {
    * @param {Number} value - A valid amount in LSK
    */
   changeHandler = (val) => {
-    const { address } = this.props.account;
-    let url = this.props.account.address;
+    const address = this.props.account ? this.props.account.address : '';
+    let url = address;
     let amountValidity = -1;
     let amount = val;
     if (val !== '') {
@@ -59,6 +59,7 @@ class Request extends React.Component {
   }
 
   render() {
+    const address = this.props.account ? this.props.account.address : '';
     return (<View style={styles.wrapper}>
       <KeyboardAwareScrollView
         enableOnAndroid={true}
@@ -72,7 +73,7 @@ class Request extends React.Component {
             </View>
           </View>
           <View style={styles.main}>
-            <B style={styles.address}>{ this.props.account.address }</B>
+            <B style={styles.address}>{address}</B>
             <QRCode
               value={this.state.url}
               size={qrCodeSize}

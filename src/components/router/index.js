@@ -11,8 +11,8 @@ import Request from '../request';
 import OwnWallet from '../ownWallet';
 import Settings from '../settings';
 import About from '../about';
+import Terms from '../terms';
 import styles from './styles';
-import LogoutButton from '../logoutButton';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
 import tabBarOptions from './tabBarOptions';
@@ -28,17 +28,22 @@ const resetNavigationStack = (navigation, routeName) => {
     }));
 };
 
+const SettingButton = ({ navigation }) =>
+  <IconButton
+    icon='settings'
+    iconSize={20}
+    onPress={() => navigation.navigate({ routeName: 'Settings' })}
+    style={styles.settings}
+    color={colors.white} />;
+
+const placeHolderButton = <IconButton color='transparent' icon='back'/>;
 // eslint-disable-next-line new-cap
 export const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: ({ navigation }) => ({
-      headerLeft: <IconButton
-        icon='settings'
-        iconSize={20}
-        onPress={() => navigation.navigate({ routeName: 'Settings' })}
-        style={styles.settings}
-        color={colors.white} />,
+      headerRight: <SettingButton navigation={navigation} />,
+      headerLeft: placeHolderButton,
       title: <Logo />,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
@@ -46,19 +51,22 @@ export const Tabs = TabNavigator({
   },
   Send: {
     screen: Send,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
+      headerRight: <SettingButton navigation={navigation} />,
       title: <Logo />,
       tabBarLabel: 'Send',
       tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
-    },
+    }),
   },
   Request: {
     screen: Request,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
+      headerRight: <SettingButton navigation={navigation} />,
+      headerLeft: placeHolderButton,
       title: <Logo />,
       tabBarLabel: 'Request',
       tabBarIcon: ({ focused }) => <MenuIcon name='request' focused={focused} />, //eslint-disable-line
-    },
+    }),
   },
   // Explore: {
   //   screen: Explore,
@@ -88,14 +96,13 @@ export default StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        headerRight: null,
         title: <Logo color={colors.grayScale1} />,
       },
     },
     Login: {
       screen: Login,
       navigationOptions: ({ navigation }) => ({
-        headerRight: null,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -106,27 +113,34 @@ export default StackNavigator(
         headerStyle: {
           backgroundColor: colors.white,
           borderBottomColor: colors.white,
-          borderBottomWidth: 0,
+          elevation: 0,
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          alignSelf: 'center',
+          flex: 1,
         },
         title: <Logo color={colors.primary9} />,
       }),
     },
     Main: {
       screen: Tabs,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
         },
       }),
     },
     Wallet: {
       screen: Wallet,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         title: <Logo />,
         headerTintColor: colors.white,
         headerStyle: {
@@ -139,7 +153,6 @@ export default StackNavigator(
       screen: Settings,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         title: <Logo />,
         headerLeft: <IconButton
           icon='back'
@@ -152,6 +165,10 @@ export default StackNavigator(
         headerStyle: {
           backgroundColor: colors.primary5,
           overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
         },
       }),
     },
@@ -159,7 +176,6 @@ export default StackNavigator(
       screen: About,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         title: <Logo />,
         headerLeft: <IconButton
           icon='back'
@@ -173,13 +189,16 @@ export default StackNavigator(
           backgroundColor: colors.primary5,
           overflow: 'hidden',
         },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
       }),
     },
-    TxDetail: {
-      screen: TxDetail,
+    Terms: {
+      screen: Terms,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerRight: <LogoutButton navigation={navigation} />,
         title: <Logo />,
         headerLeft: <IconButton
           icon='back'
@@ -192,6 +211,33 @@ export default StackNavigator(
         headerStyle: {
           backgroundColor: colors.primary5,
           overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
+      }),
+    },
+    TxDetail: {
+      screen: TxDetail,
+      navigationOptions: ({ navigation }) => ({
+        headerBackground: <Bg />,
+        title: <Logo />,
+        headerLeft: <IconButton
+          icon='back'
+          title=''
+          onPress={() => navigation.pop()}
+          style={styles.back}
+          iconButtonTitle={styles.backTitle}
+          color={colors.white} />,
+        headerTintColor: styles.white,
+        headerStyle: {
+          backgroundColor: colors.primary5,
+          overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
         },
       }),
     },

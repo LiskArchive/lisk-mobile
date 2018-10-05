@@ -1,13 +1,17 @@
 import React from 'react';
-import { View } from 'react-native';
+import connect from 'redux-connect-decorator';
 import MultiStep from '../multiStep';
 import Form from './form';
+import Overview from './overview';
 import Confirm from './confirm';
 import Result from './result';
 import styles from './styles';
 import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
 
+@connect(state => ({
+  account: state.accounts.active,
+}), {})
 class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -20,7 +24,7 @@ class Send extends React.Component {
         params.action();
       }}
       style={styles.back}
-      color={colors.white} /> : null,
+      color={colors.white} /> : <IconButton color='transparent' icon='back'/>,
     };
   };
   componentDidMount() {
@@ -37,24 +41,31 @@ class Send extends React.Component {
 
   didFocus() {
     const { navigation } = this.props;
-    if (navigation.getParam('initialize', false)) this.nav.move({ to: 1 });
-    else this.nav.reset();
+    if (navigation.getParam('initialize', false)) {
+      this.nav.move({
+        to: 2,
+        stepData: {
+          address: this.props.account.address,
+          amount: 0.1,
+          reference: 'Account initialization',
+        },
+      });
+    } else this.nav.reset();
   }
 
   render() {
     const { navigation } = this.props;
-    return (<View style={styles.wrapper}>
-      <MultiStep
+    return (<MultiStep
         finalCallback={() => {
           navigation.navigate({ routeName: 'OwnWallet' });
         }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         ref={(el) => { this.nav = el; }}>
-        <Form title='form' navigation={this.props.navigation}/>
-        <Confirm title='confirm' navigation={this.props.navigation} />
-        <Result title='result' navigation={this.props.navigation}/>
-      </MultiStep>
-    </View>);
+        <Form title='form' navigation={navigation}/>
+        <Confirm title='confirm' navigation={navigation} />
+        <Overview title='overview' navigation={navigation} />
+        <Result title='result' navigation={navigation}/>
+      </MultiStep>);
   }
 }
 

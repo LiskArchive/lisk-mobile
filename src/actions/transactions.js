@@ -19,7 +19,7 @@ export const transactionsLoaded = data =>
       });
   };
 
-export const transactionAdded = (data, cb) =>
+export const transactionAdded = (data, success, error) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
     const account = getState().accounts.active;
@@ -39,6 +39,9 @@ export const transactionAdded = (data, cb) =>
           type: actionTypes.pendingTransactionAdded,
         });
         dispatch(loadingFinished(actionTypes.transactionAdded));
-        cb({ txId: id });
+        success({ txId: id });
+      }).catch((err) => {
+        dispatch(loadingFinished(actionTypes.transactionAdded));
+        error(err);
       });
   };
