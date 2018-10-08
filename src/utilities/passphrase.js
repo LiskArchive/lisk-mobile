@@ -1,5 +1,8 @@
 import Lisk from 'lisk-elements';
+import * as Keychain from 'react-native-keychain';
 import fillWordsList from 'bip39/wordlists/english.json'; // eslint-disable-line import/no-extraneous-dependencies
+import FingerprintScanner from 'react-native-fingerprint-scanner';
+import { extractAddress } from './api/account';
 
 /**
  * Checks validity of passphrase using to mnemonic
@@ -35,6 +38,43 @@ export const validatePassphrase = (passphrase) => {
 export const generatePassphrase = () => {
   const { Mnemonic } = Lisk.passphrase;
   return Mnemonic.generateMnemonic();
+};
+
+/**
+ * @param {string} passphrase
+ * Store the passphrase and address on the keychain of the device
+ */
+export const storePassphraseInKeyChain = (passphrase) => {
+  const address = extractAddress(passphrase);
+  Keychain.setGenericPassword(address, passphrase);
+};
+
+export const getPassphraseFromKeyChain = () => Keychain.getGenericPassword();
+
+/**
+ * @param {function} successCallback
+ * @param {function} errorCallback
+ * @param {string} description - this is the description that will be shown in IOS
+ *  when a device request fingerprint
+ * first check bio metric Sensor availability after that authenticate a user base on that
+ */
+export const bioMetricAuthentication = async (
+  successCallback, errorCallback = err => err, description,
+) => {
+  try {
+    await FingerprintScanner.isSensorAvailable();
+    try {
+      await FingerprintScanner
+        .authenticate({
+          description: description || 'Scan your fingerprint on the device scanner to login',
+        });
+      successCallback();
+    } catch (error) {
+      errorCallback(error);
+    }
+  } catch (error) {
+    errorCallback(error);
+  }
 };
 
 /**

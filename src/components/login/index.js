@@ -1,10 +1,15 @@
 import React, { Fragment } from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Platform } from 'react-native';
+import { View, Platform, Alert } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { accountLoggedIn as accountLoggedInAction } from '../../actions/accounts';
 import styles from './styles';
-import { validatePassphrase } from '../../utilities/passphrase';
+import { validatePassphrase,
+  storePassphraseInKeyChain,
+  getPassphraseFromKeyChain,
+  bioMetricAuthentication,
+} from '../../utilities/passphrase';
 import Input from '../toolBox/input';
 import { H1, Small, P, A } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
@@ -49,6 +54,35 @@ class Login extends React.Component {
     };
   }
 
+  async componentDidMount() {
+    const { password } = await getPassphraseFromKeyChain();
+    this.passphrase = password;
+    const login = () => {
+      this.passphraseInput.blur();
+      this.goToWallet({
+        value: password || '',
+        validity: validatePassphrase(password || ''),
+      });
+    };
+    if (password) {
+      bioMetricAuthentication(login, this.showKeyboard);
+    } else {
+      this.showKeyboard();
+    }
+  }
+
+  showKeyboard = () => {
+    setTimeout(() => {
+      if (this.props.navigation.isFocused()) {
+        this.passphraseInput.focus();
+      }
+    }, 500);
+  }
+
+  componentWillUnmount() { // eslint-disable-line
+    FingerprintScanner.release();
+  }
+
   componentDidUpdate() {
     if (this.props.accounts.active && this.props.navigation.isFocused()) {
       this.props.navigation
@@ -74,16 +108,31 @@ class Login extends React.Component {
     this.setState({
       connectionError: false,
     });
-    if (passphrase.validity.length !== 0) {
-      this.passphraseInput.shake();
+    if (!this.passphrase) {
+      FingerprintScanner.isSensorAvailable().then(() => {
+        this.passphraseInput.blur();
+        Alert.alert(
+          '',
+          'would you like to store your passphrase in a secure location on your phone ?',
+          [
+            {
+              text: 'Cancel',
+              onPress: () => this.goToWallet(passphrase),
+            },
+            {
+              text: 'OK',
+              onPress: () => bioMetricAuthentication(
+                () => this.goToWallet(passphrase, true),
+                () => this.goToWallet(passphrase),
+                'Scan your fingerprint on the device scanner to store your passphrase',
+              ),
+            },
+          ],
+          { cancelable: false },
+        );
+      }).catch(() => this.goToWallet(passphrase));
     } else {
-      this.props.accountLoggedIn({
-        passphrase: this.trim(passphrase.value),
-      }, () => {
-        this.setState({
-          connectionError: true,
-        });
-      });
+      this.goToWallet(passphrase);
     }
   }
 
@@ -107,6 +156,19 @@ class Login extends React.Component {
   goToRegistration = () => {
     this.passphraseInput.blur();
     this.props.navigation.navigate('Register');
+  }
+
+  goToWallet = (passphrase, authenticated) => {
+    if (authenticated) {
+      storePassphraseInKeyChain(passphrase.value);
+    }
+    this.props.accountLoggedIn({
+      passphrase: this.trim(passphrase.value),
+    }, () => {
+      this.setState({
+        connectionError: true,
+      });
+    });
   }
 
   shrinkButton = (status) => {
