@@ -1,16 +1,17 @@
 import React from 'react';
+import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { View } from 'react-native';
-import LottieView from 'lottie-react-native';
-import landingAnimation from '../../assets/animations/welcome.json';
-import { H1, P } from '../toolBox/typography';
-import { SecondaryButton } from '../toolBox/button';
+import SplashScreen from 'react-native-splash-screen';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import {
   accountsRetrieved as accountsRetrievedAction,
   accountLoggedOut as accountLoggedOutAction,
 } from '../../actions/accounts';
+import Icon from '../toolBox/icon';
+import easing from '../../utilities/easing';
+import { deviceHeight } from '../../utilities/device';
 import styles from './styles';
+import { colors } from '../../constants/styleGuide';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 console.disableYellowBox = true;
@@ -32,28 +33,47 @@ console.disableYellowBox = true;
   accountLoggedOut: accountLoggedOutAction,
 })
 class Landing extends React.Component {
+  state = {
+    bgOpacity: new Animated.Value(1),
+    iconOpacity: new Animated.Value(0),
+    top: new Animated.Value((deviceHeight() / 2) + 16),
+  }
+
+  animate = (cb) => {
+    Animated.timing(this.state.bgOpacity, {
+      toValue: 0,
+      duration: 900,
+      delay: 50,
+    }).start();
+    Animated.timing(this.state.top, {
+      toValue: 130,
+      duration: 600,
+      delay: 50,
+      easing: easing.easeOutQuart,
+    }).start();
+    Animated.timing(this.state.iconOpacity, {
+      toValue: 1,
+      duration: 300,
+      delay: 650,
+    }).start(cb);
+  }
+
   componentWillMount() {
     this.props.peerSet();
     this.props.accountsRetrieved();
   }
 
   componentDidMount() {
-    this.animation.play();
+    SplashScreen.hide();
+    this.animate(this.goToLogin);
     this.props.navigation.addListener(
       'didFocus',
       () => { this.props.accountLoggedOut(); },
     );
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
-
   goToLogin = () => {
-    this.animation.reset();
-    setTimeout(() => {
-      this.props.navigation.navigate('Login');
-    }, 160);
+    this.props.navigation.navigate('Login');
   }
 
   /**
@@ -61,23 +81,15 @@ class Landing extends React.Component {
    */
   // eslint-disable-next-line class-methods-use-this
   render() {
+    const { top, bgOpacity, iconOpacity } = this.state;
     return (<View style={styles.container}>
-      <View style={styles.textContainer}>
-        <LottieView style={styles.logo}
-        source={landingAnimation}
-        ref={(el) => { this.animation = el; }}
-        />
-        <View>
-          <H1 style={styles.header}>Welcome to Lisk</H1>
-          <P style={styles.description}>
-            With Lisk mobile wallet, you can send LSK{'\n'}tokens,
-             monitor your account activity{'\n'} and more.
-          </P>
-          <SecondaryButton
-            onClick={this.goToLogin}
-            style={styles.button}>Continue</SecondaryButton>
-        </View>
-      </View>
+      <Animated.View style={[styles.bg, { opacity: bgOpacity }]}></Animated.View>
+      <Animated.View style={[styles.figure, styles.static, { opacity: iconOpacity }]}>
+        <Icon name='lisk-full' size={60} color={colors.primary9} style={styles.logo} />
+      </Animated.View>
+      <Animated.View style={[styles.figure, styles.animating, { top }]}>
+        <Icon name='lisk-full' size={60} color={colors.white} style={styles.logo} />
+      </Animated.View>
     </View>);
   }
 }

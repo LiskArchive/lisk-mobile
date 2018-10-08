@@ -1,44 +1,40 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors } from '../../constants/styleGuide';
-
-const { height } = Dimensions.get('window');
 
 const styles = {
   container: {
     backgroundColor: colors.white,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
   },
-  textContainer: {
-    flexDirection: 'column',
+  bg: {
+    backgroundColor: colors.primary9,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    zIndex: 0,
+    width: '100%',
     height: '100%',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    paddingTop: 0,
-    paddingBottom: 0,
+    opacity: 0.3,
   },
-  header: {
-    textAlign: 'center',
+  figure: {
+    height: 60,
+    width: 153,
+    left: '50%',
+    marginLeft: -76,
+    position: 'absolute',
   },
-  description: {
-    textAlign: 'center',
-    color: colors.grayScale2,
-    paddingTop: 10,
-    marginRight: 20,
-    marginLeft: 20,
+  static: {
+    zIndex: 2,
+    top: 100,
   },
-  button: {
-    marginTop: 20,
-    marginRight: Platform.OS === 'ios' ? 10 : 30,
-    marginLeft: Platform.OS === 'ios' ? 10 : 30,
+  animating: {
+    zIndex: 1,
+    top: '50%',
+    marginTop: -30,
   },
-  logo: {
-    width: 460,
-    height: height <= 640 ? 310 : 460,
-    paddingBottom: 0,
-    top: -25,
+  image: {
+    height: 60,
+    width: 153,
   },
 };
 
