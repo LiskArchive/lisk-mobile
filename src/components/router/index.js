@@ -20,14 +20,6 @@ import { colors } from '../../constants/styleGuide';
 import { IconButton } from '../toolBox/button';
 import Logo from './logo';
 
-const resetNavigationStack = (navigation, routeName) => {
-  navigation
-    .dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName })],
-    }));
-};
-
 const SettingButton = ({ navigation }) =>
   <IconButton
     icon='settings'
@@ -101,15 +93,9 @@ export default StackNavigator(
     },
     Login: {
       screen: Login,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         headerRight: placeHolderButton,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => resetNavigationStack(navigation, 'Landing')}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.primary9} />,
+        headerLeft: placeHolderButton,
         headerStyle: {
           backgroundColor: colors.white,
           borderBottomColor: colors.white,
