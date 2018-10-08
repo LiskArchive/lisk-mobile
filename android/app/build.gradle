@@ -168,6 +168,9 @@ android {
 dependencies {
     compile project(':react-native-fingerprint-scanner')
     compile project(':react-native-keychain')
+    compile project(':react-native-camera-kit')
+    compile project(':react-native-camera')
+    compile project(':@remobile/react-native-qrcode-local-image')
     compile project(':react-native-app-settings')
     compile (project(':react-native-camera')) {
     exclude group: "com.google.android.gms"
@@ -179,6 +182,7 @@ dependencies {
     compile project(':lottie-react-native')
     compile project(':react-native-background-timer')
     compile project(':react-native-svg')
+    compile project(':react-native-splash-screen')
     compile project(':react-native-vector-icons')
     compile project(':react-native-udp')
     compile project(':react-native-tcp')

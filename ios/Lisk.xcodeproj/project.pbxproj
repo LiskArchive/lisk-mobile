@@ -54,6 +54,7 @@
 		89136C304F664565A87459B8 /* libTcpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FCBA23F6D147ACB28C9A76 /* libTcpSockets.a */; };
 		A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		B6441690216B3DB2001E51B9 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B644168F216B3B3C001E51B9 /* libSplashScreen.a */; };
 		B647FAA6210720D700EFF1B7 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B647FA4F2107204B00EFF1B7 /* Lottie.framework */; };
 		B647FAA7210720D700EFF1B7 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B647FA4F2107204B00EFF1B7 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B96E288684794B8C97F129D9 /* libLottie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D26BB38DDE374F04BC18879A /* libLottie.a */; };
@@ -463,6 +464,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		B644168E216B3B3C001E51B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D7682761D8E76B80014119E;
+			remoteInfo = SplashScreen;
+		};
 		B647FA4E2107204B00EFF1B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C01809A59F8E4744858E8946 /* Lottie.xcodeproj */;
@@ -585,6 +593,7 @@
 		9F87DBCE083E405AA4F56F21 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B50438F35FD6440883A86E60 /* libLottieReactNative.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libLottieReactNative.a; sourceTree = "<group>"; };
+		B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		B7FCBA23F6D147ACB28C9A76 /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
 		B94922FA7F744DF8BA1C4815 /* TcpSockets.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = TcpSockets.xcodeproj; path = "../node_modules/react-native-tcp/ios/TcpSockets.xcodeproj"; sourceTree = "<group>"; };
 		BB865073FACB4AEEB229A6FF /* icomoon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoon.ttf; path = ../src/assets/fonts/icons/icomoon.ttf; sourceTree = "<group>"; };
@@ -618,6 +627,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				330DE28121523ABA00B584E3 /* libRNKeychain.a in Frameworks */,
+				B6441690216B3DB2001E51B9 /* libSplashScreen.a in Frameworks */,
 				3354ACA5212EBA0C0045554F /* libRCTCameraRoll.a in Frameworks */,
 				3354AC9E212EB8660045554F /* libRCTQRCodeLocalImage.a in Frameworks */,
 				336CC48A212D98600058C7E3 /* libRNCamera.a in Frameworks */,
@@ -939,6 +949,7 @@
 			isa = PBXGroup;
 			children = (
 				330DE23E21523A8400B584E3 /* RNKeychain.xcodeproj */,
+				B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */,
 				3354AC9F212EB9FD0045554F /* RCTCameraRoll.xcodeproj */,
 				3354AC62212EB8540045554F /* RCTQRCodeLocalImage.xcodeproj */,
 				336CC484212D98480058C7E3 /* RNCamera.xcodeproj */,
@@ -1010,6 +1021,14 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B644168B216B3B3C001E51B9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B644168F216B3B3C001E51B9 /* libSplashScreen.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1249,6 +1268,10 @@
 				{
 					ProductGroup = 33DD262820CFBC560061FC18 /* Products */;
 					ProjectRef = 3F921B75E2A44CB2AF90E226 /* RNVectorIcons.xcodeproj */;
+				},
+				{
+					ProductGroup = B644168B216B3B3C001E51B9 /* Products */;
+					ProjectRef = B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */;
 				},
 				{
 					ProductGroup = 33DD264720CFBC570061FC18 /* Products */;
@@ -1660,6 +1683,13 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		B644168F216B3B3C001E51B9 /* libSplashScreen.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSplashScreen.a;
+			remoteRef = B644168E216B3B3C001E51B9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		B647FA4F2107204B00EFF1B7 /* Lottie.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1912,6 +1942,7 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-app-settings/ios",
 					"$(SRCROOT)/../node_modules/react-native-fingerprint-scanner/ios",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios/**",
 				);
 				INFOPLIST_FILE = Lisk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
