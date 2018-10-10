@@ -1,12 +1,12 @@
 import React from 'react';
-import { List as NativeList } from 'react-native-elements';
+import { View } from 'react-native';
 import Item from './item';
 import styles from './styles';
 
 const List = ({
   transactions, account, navigate, pending,
 }) =>
-  (<NativeList containerStyle={styles.nativeList}>
+  (<View style={styles.nativeList}>
     {
       pending.map(tx => <Item navigate={navigate}
         account={account} key={tx} tx={tx} />)
@@ -15,6 +15,6 @@ const List = ({
       transactions.map(tx => <Item navigate={navigate}
         account={account} key={tx.id} tx={tx} />)
     }
-  </NativeList>);
+  </View>);
 
 export default List;
