@@ -7,7 +7,8 @@ const styles = {
     marginTop: (Platform.OS === 'ios') ? 0 : 6,
   },
   logo: {
-    top: -11,
+    lineHeight: 40,
+    top: -3,
   },
   settings: {
     paddingTop: 0,
