@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors, fonts, boxes } from '../../constants/styleGuide';
+import { deviceHeight } from '../../utilities/device';
 
 const styles = {
   wrapper: {
@@ -7,7 +8,8 @@ const styles = {
     flex: 1,
   },
   container: {
-    height: '100%',
+    height: deviceHeight() - 200,
+    top: 170,
   },
   innerContainer: {
     flexDirection: 'column',
@@ -17,8 +19,8 @@ const styles = {
     paddingTop: 36,
     paddingBottom: 20,
   },
-  titleContainer: {
-    paddingTop: 35,
+  paddingBottom: {
+    paddingBottom: 40,
   },
   placeholder: {
     width: '100%',
@@ -47,6 +49,9 @@ const styles = {
   title: {
     paddingLeft: boxes.boxPadding,
     paddingRight: boxes.boxPadding,
+    textAlign: 'center',
+    color: colors.grayScale2,
+    fontSize: fonts.size.base,
   },
   button: {
     marginRight: boxes.boxPadding,
@@ -78,18 +83,77 @@ const styles = {
     borderLeftWidth: 0,
     borderRightWidth: 0,
   },
-  registerLinkWrapper: {
+  linkWrapper: {
     width: '100%',
-    flexDirection: 'row',
     justifyContent: 'center',
     paddingBottom: 20,
   },
-  registerQuestion: {
-    color: colors.grayScale2,
+  row: {
+    flexDirection: 'row',
   },
-  registerLink: {
+  column: {
+    flexDirection: 'column',
+  },
+  question: {
+    color: colors.grayScale2,
+    textAlign: 'center',
+  },
+  link: {
     color: colors.primary5,
     fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  fillWidth: {
+    width: '100%',
+  },
+  splashContainer: {
+    backgroundColor: colors.white,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+  },
+  splashBg: {
+    backgroundColor: colors.primary9,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    opacity: 0.3,
+  },
+  splashFigure: {
+    height: 60,
+    width: 153,
+    left: '50%',
+    marginLeft: -76,
+    position: 'absolute',
+  },
+  splashStatic: {
+    zIndex: 2,
+    top: 100,
+  },
+  splashAnimating: {
+    zIndex: 1,
+    top: '50%',
+    marginTop: -30,
+  },
+  splashImage: {
+    height: 60,
+    width: 153,
+  },
+  waves: {
+    width: '100%',
+    height: deviceHeight() - 280,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  authTypeIcon: {
+
   },
 };
 
