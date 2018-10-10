@@ -12,6 +12,9 @@ import {
 } from '../../actions/accounts';
 import styles from './styles';
 
+// there is a warning in RNOS module. remove this then that warning is fixed
+console.disableYellowBox = true;
+
 /**
  * This component would be mounted first and would be used to config and redirect
  * the application to referer page or Login
