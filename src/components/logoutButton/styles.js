@@ -5,8 +5,6 @@ const styles = {
   button: {
     width: '100%',
     paddingRight: 20,
-    paddingTop: 8,
-    paddingBottom: 16,
     borderWidth: 0,
     paddingLeft: 0,
   },

@@ -7,7 +7,7 @@ import {
 } from '../../actions/accounts';
 import Avatar from '../avatar';
 import { fromRawLsk } from '../../utilities/conversions';
-import Modal from '../followedAccountsModal';
+// import Modal from '../followedAccountsModal';
 import styles, { animationRanges } from './styles';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
@@ -115,10 +115,10 @@ class AccountSummary extends React.Component {
         </Anim> :
         <H4>Fetching account info</H4>
       }
-      <Modal
+      {/* <Modal
         hide={this.toggleModal.bind(this)}
         address={account ? account.address : {}}
-        isVisible={this.state.modalVisible}/>
+      isVisible={this.state.modalVisible}/> */ }
     </View>);
   }
 }

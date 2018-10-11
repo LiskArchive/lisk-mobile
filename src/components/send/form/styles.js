@@ -126,15 +126,13 @@ const styles = {
   addressInput: {
     ...Platform.select({
       android: {
-        height: 58,
-        lineHeight: 28,
-        paddingTop: 15,
-        paddingBottom: 15,
+        height: 48,
+        // paddingTop: 10,
+        // paddingBottom: 15,
         paddingLeft: 40,
       },
       ios: {
         height: 48,
-        lineHeight: 48,
         paddingLeft: 40,
       },
     }),

@@ -1,6 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
+import { View, Text, TextInput } from 'react-native';
 import Icon from './icon';
 import theme from './styles';
 /**
@@ -14,14 +13,13 @@ import theme from './styles';
 const Input = ({
   label, reference, styles, value, onChange, error,
   multiline, onFocus, autoFocus, onBlur, autoCorrect,
-  keyboardType, allowFontScaling, secureTextEntry,
+  keyboardType, secureTextEntry,
 }) => {
   const inputErrorStyle = error ? theme.inputErrorStyle : {};
-  return (<View>
-    <FormLabel labelStyle={[theme.inputLabel, styles.inputLabel]}>{label}</FormLabel>
-    <FormInput
-      containerStyle={[theme.inputContainer, inputErrorStyle, styles.containerStyle]}
-      inputStyle={[theme.input, styles.input]}
+  return (<View style={[theme.inputContainer, styles.containerStyle]}>
+    <Text style={[theme.inputLabel, styles.inputLabel]}>{label}</Text>
+    <TextInput
+      style={[theme.input, inputErrorStyle, styles.input]}
       autoCapitalize = 'none'
       multiline = {multiline}
       ref={input => reference(input)}
@@ -31,14 +29,14 @@ const Input = ({
       onChangeText={onChange}
       autoCorrect={autoCorrect}
       onFocus={onFocus}
-      allowFontScaling={allowFontScaling}
+      allowFontScaling={false}
       secureTextEntry={secureTextEntry}
       onBlur={onBlur} />
     {error ? <View style={[theme.errorMessageContainer, styles.errorMessage] }>
       <Icon size={16} name='error' style={theme.errorIcon} />
-      <FormValidationMessage labelStyle={[theme.errorMessage]}>
+      <Text style={[theme.errorMessage]}>
         { error }
-      </FormValidationMessage>
+      </Text>
     </View> : null }
   </View>);
 };

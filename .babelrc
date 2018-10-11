@@ -1,29 +1,26 @@
 {
   "env": {
     "development": {
-      "presets": ["react-native"],
+      "presets": ["module:metro-react-native-babel-preset"],
       "plugins": [
-        "transform-react-jsx-source",
-        "transform-decorators-legacy",
-        "transform-decorators",
+        "@babel/plugin-transform-react-jsx-source",
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
         "transform-class-properties"
       ]
     },
     "production": {
-      "presets": ["react-native"],
+      "presets": ["module:metro-react-native-babel-preset"],
       "plugins": [
-        "transform-react-jsx-source",
-        "transform-decorators-legacy",
-        "transform-decorators",
+        "@babel/plugin-transform-react-jsx-source",
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
         "transform-class-properties"
       ]
     },
     "test": {
-      "presets": ["react-native"],
+      "presets": ["module:metro-react-native-babel-preset"],
       "plugins": [
-        "transform-react-jsx-source",
-        "transform-decorators-legacy",
-        "transform-decorators",
+        "@babel/plugin-transform-react-jsx-source",
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
         "transform-class-properties"
       ]
     }
