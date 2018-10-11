@@ -168,9 +168,7 @@ android {
 dependencies {
     compile project(':react-native-fingerprint-scanner')
     compile project(':react-native-keychain')
-    compile project(':react-native-camera-kit')
     compile project(':react-native-camera')
-    compile project(':@remobile/react-native-qrcode-local-image')
     compile project(':react-native-app-settings')
     compile (project(':react-native-camera')) {
     exclude group: "com.google.android.gms"

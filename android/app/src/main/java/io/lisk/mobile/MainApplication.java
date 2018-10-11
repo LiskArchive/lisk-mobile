@@ -5,9 +5,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.hieuvp.fingerprint.ReactNativeFingerprintScannerPackage;
 import com.oblador.keychain.KeychainPackage;
-import com.wix.RNCameraKit.RNCameraKitPackage;
 import org.reactnative.camera.RNCameraPackage;
-import com.remobile.qrcodeLocalImage.RCTQRCodeLocalImagePackage;
 import com.krazylabs.OpenAppSettingsPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
@@ -22,7 +20,6 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import org.reactnative.camera.RNCameraPackage;
 import com.remobile.qrcodeLocalImage.RCTQRCodeLocalImagePackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
@@ -44,7 +41,6 @@ public class MainApplication extends Application implements ReactApplication {
         new ReactNativeFingerprintScannerPackage(),
         new KeychainPackage(),
         new SplashScreenReactPackage(),
-        new RNCameraKitPackage(),
         new OpenAppSettingsPackage(),
         new RCTQRCodeLocalImagePackage(),
         new LottiePackage(),
