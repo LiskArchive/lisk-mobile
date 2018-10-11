@@ -1,5 +1,5 @@
 # Lisk Mobile
-Lisk Mobile is a cross-platform application written in React Native and primarily build for iOS and Android. It provides users with all the functionality they need to send and receive Lisk tokens. as we as reviewing the activity history of their or any other account in Lisk blockchain.
+Lisk Mobile is a cross-platform application written in React Native and primarily build for iOS and Android. It provides the users with all the functionality they need to send and receive LSK tokens, as well as reviewing the activity history of their or any other account in the Lisk blockchain.
 
 ## For Contributors
 Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for more information.

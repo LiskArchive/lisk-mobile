@@ -5,7 +5,7 @@ import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationActions, StackActions } from 'react-navigation';
 import styles from './styles';
-import { getPassphraseFromKeyChain } from '../../utilities/passphrase';
+import { getPassphraseFromKeyChain, storePassphraseInKeyChain } from '../../utilities/passphrase';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import {
   accountLoggedIn as accountLoggedInAction,
@@ -33,8 +33,8 @@ class Login extends React.Component {
     sensorType: null,
   }
 
-  toggleView = (view, sensorType) => {
-    this.setState({ view, sensorType });
+  changeHandler = (data) => {
+    this.setState(data);
   }
 
   componentWillMount() {
@@ -50,13 +50,19 @@ class Login extends React.Component {
       sensorType = null;
     }
     const signOut = this.props.navigation.getParam('signOut');
-    this.setState({ storedPassphrase: password });
     const delay = this.state.view === 'splash' && !signOut ? 700 : 0;
     this.timeout = setTimeout(() => {
       if (password && sensorType) {
-        this.toggleView('biometricAuth', sensorType);
+        this.changeHandler({
+          view: 'biometricAuth',
+          sensorType,
+          storedPassphrase: password,
+        });
       } else {
-        this.toggleView('form');
+        this.changeHandler({
+          view: 'biometricAuth',
+          sensorType: null,
+        });
       }
     }, delay);
   }
@@ -96,6 +102,8 @@ class Login extends React.Component {
       connectionError: false,
     });
 
+    storePassphraseInKeyChain(passphrase.value);
+
     this.props.accountLoggedIn({
       passphrase: passphrase.value,
     }, () => {
@@ -114,7 +122,7 @@ class Login extends React.Component {
         view === 'biometricAuth' ?
           <BiometricAuth
             animate={!signOut}
-            toggleView={this.toggleView}
+            toggleView={this.changeHandler}
             sensorType={sensorType}
             passphrase={storedPassphrase}
             login={this.onLoginSubmission} /> : null
@@ -124,7 +132,7 @@ class Login extends React.Component {
           <Form
             animate={!signOut}
             navigation={this.props.navigation}
-            toggleView={this.toggleView}
+            toggleView={this.changeHandler}
             login={this.onLoginSubmission} /> : null
       }
     </View>);

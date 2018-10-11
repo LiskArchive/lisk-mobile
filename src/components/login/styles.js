@@ -152,8 +152,21 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  invalidAuthBg: {
+    width: 84,
+    height: 84,
+    backgroundColor: colors.action1,
+    borderRadius: 42,
+    zIndex: 1,
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    marginLeft: -42,
+    marginTop: -42,
+    opacity: 0,
+  },
   authTypeIcon: {
-
+    zIndex: 2,
   },
 };
 
