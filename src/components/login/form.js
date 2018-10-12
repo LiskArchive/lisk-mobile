@@ -130,14 +130,14 @@ class Form extends React.Component {
             error[0].message.replace(' Please check the passphrase.', '') : ''
           }/>
         </Animated.View>
-        <KeyboardAwareScrollView
-          styles={{ container: { height: 0 } }}
-          extras={<Extras error={connectionError}
-          onPress={this.goToRegistration} opacity={opacity} />}
-          disabled={passphrase.validity.length !== 0}
-          onSubmit={this.props.login.bind(this, passphrase)}
-          button='Sign in'>
-        </KeyboardAwareScrollView>
+      <KeyboardAwareScrollView
+        styles={{}}
+        extras={<Extras error={connectionError}
+        onPress={this.goToRegistration} opacity={opacity} />}
+        disabled={passphrase.validity.length !== 0}
+        onSubmit={this.props.login.bind(this, passphrase)}
+        button='Sign in'>
+      </KeyboardAwareScrollView>
     </View>);
   }
 }

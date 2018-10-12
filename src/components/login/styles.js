@@ -22,7 +22,7 @@ const styles = {
     paddingBottom: 20,
   },
   paddingBottom: {
-    paddingBottom: 40,
+    paddingBottom: height <= 640 ? 0 : 40,
   },
   placeholder: {
     width: '100%',
