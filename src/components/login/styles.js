@@ -2,14 +2,16 @@ import { StyleSheet } from 'react-native';
 import { colors, fonts, boxes } from '../../constants/styleGuide';
 import { deviceHeight } from '../../utilities/device';
 
+const height = deviceHeight();
+
 const styles = {
   wrapper: {
     backgroundColor: colors.white,
     flex: 1,
   },
   container: {
-    height: deviceHeight() - 200,
-    top: 170,
+    height: '100%',
+    paddingTop: height <= 640 ? 100 : 170,
   },
   innerContainer: {
     flexDirection: 'column',
@@ -134,7 +136,7 @@ const styles = {
   },
   splashStatic: {
     zIndex: 2,
-    top: 100,
+    top: height < 640 ? 30 : 100,
   },
   splashAnimating: {
     zIndex: 1,
@@ -147,7 +149,10 @@ const styles = {
   },
   waves: {
     width: '100%',
-    height: deviceHeight() - 280,
+    height: '100%',
+    borderBottomColor: 'transparent',
+    borderBottomWidth: 110,
+    marginBottom: -110,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',

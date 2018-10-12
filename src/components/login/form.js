@@ -37,7 +37,7 @@ class Form extends React.Component {
 
   showKeyboard = () => {
     setTimeout(() => {
-      if (this.props.navigation.isFocused()) {
+      if (this.props.navigation.isFocused() && this.passphraseInput) {
         this.passphraseInput.focus();
       }
     }, 500);
@@ -107,13 +107,7 @@ class Form extends React.Component {
     const error = passphrase.validity
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
-    return (<KeyboardAwareScrollView
-      styles={{ container: styles.container }}
-      extras={<Extras error={connectionError}
-      onPress={this.goToRegistration} opacity={opacity} />}
-      disabled={passphrase.validity.length !== 0}
-      onSubmit={this.props.login.bind(this, passphrase)}
-      button='Sign in'>
+    return (<View style={styles.container}>
       <Animated.View
         style={[styles.titleContainer, styles.paddingBottom, { opacity }]}>
         <P style={styles.title}>The official Lisk mobile wallet.</P>
@@ -136,7 +130,15 @@ class Form extends React.Component {
             error[0].message.replace(' Please check the passphrase.', '') : ''
           }/>
         </Animated.View>
-    </KeyboardAwareScrollView>);
+        <KeyboardAwareScrollView
+          styles={{ container: { height: 0 } }}
+          extras={<Extras error={connectionError}
+          onPress={this.goToRegistration} opacity={opacity} />}
+          disabled={passphrase.validity.length !== 0}
+          onSubmit={this.props.login.bind(this, passphrase)}
+          button='Sign in'>
+        </KeyboardAwareScrollView>
+    </View>);
   }
 }
 
