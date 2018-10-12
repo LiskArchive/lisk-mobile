@@ -15,6 +15,9 @@ import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';
 
+// there is a warning in RNOS module. remove this then that warning is fixed
+console.disableYellowBox = true; // eslint-disable-line
+
 /**
  * The container component containing login and create account functionality
  */
@@ -60,7 +63,7 @@ class Login extends React.Component {
         });
       } else {
         this.changeHandler({
-          view: 'biometricAuth',
+          view: 'form',
           sensorType: null,
         });
       }

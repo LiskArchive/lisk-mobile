@@ -15,25 +15,20 @@ class BiometricAuth extends React.Component {
     tried: false,
   }
 
-  animations = {
-    startUp: null,
-    unauthorized: null,
-  }
-
   startUpAnimation = (callback) => {
-    this.animations.startUp.play();
+    this.startUpAnimEl.play();
     Animated.timing(this.state.opacity, {
       toValue: 1,
       duration: this.props.animate ? 300 : 0,
     }).start();
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       callback();
     }, 1500);
   }
 
   unauthorizedAnimation = () => {
     this.setState({ tried: true }, () => {
-      this.animations.unauthorized.play();
+      this.unAuthAnimEl.play();
     });
   }
 
@@ -48,6 +43,7 @@ class BiometricAuth extends React.Component {
 
   componentWillUnmount() { // eslint-disable-line
     FingerprintScanner.release();
+    clearTimeout(this.timeout);
   }
 
   render() {
@@ -66,11 +62,13 @@ class BiometricAuth extends React.Component {
           <LottieView
             source={waves}
             loop={false}
-            ref={(el) => { this.animations.unauthorized = el; }}/> :
+            style={{}}
+            ref={(el) => { this.unAuthAnimEl = el; }}/> :
           <LottieView
             source={waves}
             loop={false}
-            ref={(el) => { this.animations.startUp = el; }}/>
+            style={{}}
+            ref={(el) => { this.startUpAnimEl = el; }}/>
         }
         <Animated.View style={{ opacity }}>
           <Icon size={40} color={colors.white}
@@ -79,12 +77,9 @@ class BiometricAuth extends React.Component {
         </Animated.View>
       </View>
       <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
-        {
-          tried ?
-            <P style={[styles.question, styles.fillWidth]}>
-              Unauthorized! Please try again.4
-            </P> : null
-        }
+        <P style={[styles.question, styles.fillWidth, tried ? styles.error : styles.invisible]}>
+          Unauthorized! Please try again.
+        </P>
         <P style={[styles.question, styles.fillWidth]}>
           {
             `Don't want to use ${this.props.sensorType}?`
@@ -92,7 +87,7 @@ class BiometricAuth extends React.Component {
         </P>
         <A
           style={[styles.link, styles.fillWidth]}
-          onPress={() => this.props.toggleView('form')}>Sign in manually</A>
+          onPress={() => this.props.toggleView({ view: 'form' })}>Sign in manually</A>
       </Animated.View>
     </View>);
   }

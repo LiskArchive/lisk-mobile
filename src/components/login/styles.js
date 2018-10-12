@@ -168,6 +168,12 @@ const styles = {
   authTypeIcon: {
     zIndex: 2,
   },
+  error: {
+    color: colors.action1,
+  },
+  invisible: {
+    color: 'transparent',
+  },
 };
 
 export default StyleSheet.create(styles);
