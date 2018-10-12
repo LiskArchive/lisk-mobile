@@ -1,6 +1,5 @@
 import React from 'react';
-import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
-import Landing from '../landing';
+import { StackNavigator, createBottomTabNavigator } from 'react-navigation';
 import Login from '../login';
 import TxDetail from '../txDetail';
 import Send from '../send';
@@ -20,14 +19,6 @@ import { colors } from '../../constants/styleGuide';
 import { IconButton } from '../toolBox/button';
 import Logo from './logo';
 
-const resetNavigationStack = (navigation, routeName) => {
-  navigation
-    .dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName })],
-    }));
-};
-
 const SettingButton = ({ navigation }) =>
   <IconButton
     icon='settings'
@@ -38,13 +29,13 @@ const SettingButton = ({ navigation }) =>
 
 const placeHolderButton = <IconButton color='transparent' icon='back'/>;
 // eslint-disable-next-line new-cap
-export const Tabs = TabNavigator({
+const Tabs = createBottomTabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
       headerLeft: placeHolderButton,
-      title: <Logo />,
+      headerTitle: <Logo />,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
     }),
@@ -53,7 +44,7 @@ export const Tabs = TabNavigator({
     screen: Send,
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
-      title: <Logo />,
+      headerTitle: <Logo />,
       tabBarLabel: 'Send',
       tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
     }),
@@ -63,7 +54,7 @@ export const Tabs = TabNavigator({
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
       headerLeft: placeHolderButton,
-      title: <Logo />,
+      headerTitle: <Logo />,
       tabBarLabel: 'Request',
       tabBarIcon: ({ focused }) => <MenuIcon name='request' focused={focused} />, //eslint-disable-line
     }),
@@ -78,55 +69,32 @@ export const Tabs = TabNavigator({
   //   },
   // },
 }, {
-  tabBarPosition: 'bottom',
-  swipeEnabled: false,
   tabBarOptions,
-  headerMode: 'screen',
+  initialRouteName: 'OwnWallet',
 });
+
 
 // eslint-disable-next-line new-cap
 export default StackNavigator(
   {
-    Landing: {
-      screen: Landing,
-      navigationOptions: {
-        header: null,
-      },
-    },
     Register: {
       screen: Register,
       navigationOptions: {
-        title: <Logo color={colors.grayScale1} />,
+        headerTitle: <Logo color={colors.grayScale1} />,
       },
     },
     Login: {
       screen: Login,
-      navigationOptions: ({ navigation }) => ({
-        headerRight: placeHolderButton,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => resetNavigationStack(navigation, 'Landing')}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.primary9} />,
-        headerStyle: {
-          backgroundColor: colors.white,
-          borderBottomColor: colors.white,
-          elevation: 0,
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          alignSelf: 'center',
-          flex: 1,
-        },
-        title: <Logo color={colors.primary9} />,
-      }),
+      navigationOptions: {
+        header: null,
+      },
     },
     Main: {
       screen: Tabs,
-      navigationOptions: () => ({
+      navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
+        headerTitle: <Logo />,
+        headerRight: <SettingButton navigation={navigation} />,
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
@@ -141,7 +109,7 @@ export default StackNavigator(
       screen: Wallet,
       navigationOptions: () => ({
         headerBackground: <Bg />,
-        title: <Logo />,
+        headerTitle: <Logo />,
         headerTintColor: colors.white,
         headerStyle: {
           backgroundColor: colors.primary5,
@@ -153,7 +121,7 @@ export default StackNavigator(
       screen: Settings,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        title: <Logo />,
+        headerTitle: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -176,7 +144,7 @@ export default StackNavigator(
       screen: About,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        title: <Logo />,
+        headerTitle: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -199,7 +167,7 @@ export default StackNavigator(
       screen: Terms,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        title: <Logo />,
+        headerTitle: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -221,8 +189,9 @@ export default StackNavigator(
     TxDetail: {
       screen: TxDetail,
       navigationOptions: ({ navigation }) => ({
+        headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
-        title: <Logo />,
+        headerTitle: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -243,6 +212,7 @@ export default StackNavigator(
     },
   },
   {
-    initialRouteName: 'Landing',
+    initialRouteName: 'Login',
+    headerLayoutPreset: 'center',
   },
 );

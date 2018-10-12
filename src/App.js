@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
 import Router from './components/router';
 import Loading from './components/loading';
 import store from './store/index';

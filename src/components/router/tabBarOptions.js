@@ -24,6 +24,10 @@ if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
 } else if (Platform.OS === 'ios' && !DeviceInfo.isIPhoneX_deprecated) {
   stylesheet.style.height = 60;
   stylesheet.labelStyle.paddingBottom = 5;
+} else {
+  stylesheet.style.height = 60;
+  stylesheet.style.paddingBottom = 5;
+  stylesheet.style.paddingTop = 5;
 }
 
 export default merge({

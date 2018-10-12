@@ -49,7 +49,7 @@ export const PrimaryButton = props => (<LinearGradient
     start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
     colors={props.disabled ?
       [colors.white, colors.white] :
-      [colors.action4, colors.action2]}
+      [colors.action2, colors.action1]}
     style={[
       theme.buttonWrapper,
       props.style,
