@@ -95,6 +95,10 @@ const styles = {
     height: 90,
     width: '100%',
   },
+  image: {
+    width: 50,
+    height: 50,
+  },
 };
 
 export default StyleSheet.create(styles);
