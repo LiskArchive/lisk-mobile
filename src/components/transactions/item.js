@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { fromRawLsk } from '../../utilities/conversions';
 import styles from './styles';
@@ -14,10 +14,10 @@ import transactions from '../../constants/transactions';
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 class Item extends React.Component {
-  showDetail(tx) {
+  showDetail(tx, account) {
     this.props.navigate({
       routeName: 'TxDetail',
-      params: { tx },
+      params: { tx, account },
     });
   }
 
@@ -41,9 +41,13 @@ class Item extends React.Component {
 
     return (<TouchableOpacity
       style={styles.itemContainer}
-      onPress={this.showDetail.bind(this, tx)}>
+      onPress={this.showDetail.bind(this, tx, account)}>
       <View style={[styles.itemColumn, styles.avatar]}>
-        <Avatar address={address} size={50} />
+        {
+          (tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
+          <Avatar address={address} size={50} /> :
+          <Image source={transactions[txTypes[tx.type]].image} style={styles.image} />
+        }
       </View>
       <View style={styles.column}>
         <B style={styles.address}>
