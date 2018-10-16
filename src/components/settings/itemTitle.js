@@ -25,7 +25,10 @@ const ItemTitle = ({
     underlayColor: 'transparent',
   };
   if (typeof target === 'string') {
-    props.onPress = () => navigation.navigate(target);
+    props.onPress = () => navigation.navigate({
+      routeName: target,
+      params: { title },
+    });
   }
 
   return (<TouchableHighlight {...props}>
