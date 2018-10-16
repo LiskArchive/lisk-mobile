@@ -44,7 +44,7 @@ class EnableBioAuth extends React.Component {
       <View style={styles.wrapper}>
         <View style={styles.container}>
           <View>
-            <H1 style={styles.header}>You’re about to enable {title}.</H1>
+            <H1 style={styles.header}>Enabling {title}</H1>
             <B style={styles.subHeader}>Here’s what you need to know:</B>
             <View style={[styles.row, styles.separator]}>
               <Icon name='passphrase' style={styles.icon} color={colors.primary5} size={36}/>

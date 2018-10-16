@@ -2,6 +2,7 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Image } from 'react-native';
 import styles from './styles';
+import { deviceHeight } from '../../utilities/device';
 import {
   removePassphraseFromKeyChain,
   bioMetricAuthentication,
@@ -40,13 +41,15 @@ class DisableBioAuth extends React.Component {
 
   render() {
     const { passphrase } = this.props.account;
+    const title = this.props.navigation.getParam('title', null);
+
     return (<View style={styles.wrapper}>
         <View style={styles.container}>
           <View>
             <View style={styles.titleContainer}>
-              <H1 style={styles.header}>Your passphrase</H1>
+              <H1 style={styles.header}>Disabling {title}</H1>
               <P style={styles.subHeader}>
-                The only way to access your account.
+                Passphrase will be the only option to access your account.
               </P>
             </View>
             <View style={styles.passphraseContainer}>
@@ -67,13 +70,16 @@ class DisableBioAuth extends React.Component {
                 type={P}/>
             </View>
           </View>
-          <View style={styles.imageContainer} >
-            <Image
-              style={styles.image}
-              source={image}
-            />
-            <P style={styles.caption}>Keep it safe!</P>
-          </View>
+          {
+            deviceHeight() > 640 ?
+            <View style={styles.imageContainer}>
+              <Image
+                style={styles.image}
+                source={image}
+              />
+              <P style={styles.caption}>Keep it safe!</P>
+            </View> : null
+          }
           <View>
             <SecondaryButton
               disabled={this.state.buttonDisabled}
