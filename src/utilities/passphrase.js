@@ -49,6 +49,20 @@ export const storePassphraseInKeyChain = (passphrase) => {
   Keychain.setGenericPassword(address, passphrase);
 };
 
+/**
+ * Removes the passphrase and address on the keychain of the device
+ */
+export const removePassphraseFromKeyChain = async (
+  successCallback, errorCallback = err => err,
+) => {
+  try {
+    await Keychain.resetGenericPassword();
+    successCallback();
+  } catch (error) {
+    errorCallback(error);
+  }
+};
+
 export const getPassphraseFromKeyChain = () => Keychain.getGenericPassword();
 
 /**

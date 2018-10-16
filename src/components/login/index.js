@@ -5,12 +5,15 @@ import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationActions, StackActions } from 'react-navigation';
 import styles from './styles';
-import { getPassphraseFromKeyChain, storePassphraseInKeyChain } from '../../utilities/passphrase';
+import { getPassphraseFromKeyChain } from '../../utilities/passphrase';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import {
   accountLoggedIn as accountLoggedInAction,
   accountsRetrieved as accountsRetrievedAction,
 } from '../../actions/accounts';
+import {
+  settingsUpdated as settingsUpdatedAction,
+} from '../../actions/settings';
 import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';
@@ -28,6 +31,7 @@ console.disableYellowBox = true; // eslint-disable-line
   accountLoggedIn: accountLoggedInAction,
   peerSet: activePeerSetAction,
   accountsRetrieved: accountsRetrievedAction,
+  settingsUpdated: settingsUpdatedAction,
 })
 class Login extends React.Component {
   state = {
@@ -54,6 +58,13 @@ class Login extends React.Component {
     }
     const signOut = this.props.navigation.getParam('signOut');
     const delay = this.state.view === 'splash' && !signOut ? 700 : 0;
+
+    // Update the store
+    this.props.settingsUpdated({
+      sensorType,
+      hasStoredPassphrase: !!password,
+    });
+    // Update the component state
     this.timeout = setTimeout(() => {
       if (password && sensorType) {
         this.changeHandler({
@@ -105,7 +116,7 @@ class Login extends React.Component {
       connectionError: false,
     });
 
-    storePassphraseInKeyChain(passphrase.value);
+    // storePassphraseInKeyChain(passphrase.value);
 
     this.props.accountLoggedIn({
       passphrase: passphrase.value,

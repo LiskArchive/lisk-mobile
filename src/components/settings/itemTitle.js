@@ -18,21 +18,36 @@ import styles from './styles';
  *  we need this to ba able to navigate.
  */
 const ItemTitle = ({
-  icon, iconSize, title, target, navigation,
+  icon, iconSize, title, target, navigation, targetStateLabel,
 }) => {
   const props = {
     style: styles.itemTitle,
     underlayColor: 'transparent',
   };
   if (typeof target === 'string') {
-    props.onPress = () => navigation.navigate(target);
+    props.onPress = () => navigation.navigate({
+      routeName: target,
+      params: { title },
+    });
   }
 
   return (<TouchableHighlight {...props}>
     <Fragment>
       <Icon name={icon} size={iconSize} color={colors.grayScale6} style={styles.itemIcon} />
       <View style={styles.itemName}><P style={styles.itemNameText}>{title}</P></View>
-      <Icon name='forward' size={21} color={colors.black} style={styles.itemArrow} />
+      <View style={styles.itemArrow}>
+        {
+          typeof target === 'string' ?
+          <Fragment>
+            {
+              targetStateLabel ?
+                <P style={{ color: targetStateLabel[1] || colors.grayScale1 }}>
+                  {targetStateLabel[0]}</P> : null
+            }
+            <Icon name='forward' size={21} color={colors.black} />
+          </Fragment> : null
+        }
+      </View>
     </Fragment>
   </TouchableHighlight>);
 };
