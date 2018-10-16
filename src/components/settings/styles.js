@@ -36,8 +36,10 @@ const styles = {
     paddingRight: 2,
   },
   itemArrow: {
-    width: 24,
+    width: 44,
     height: 24,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 };
 
