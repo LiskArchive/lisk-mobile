@@ -35,6 +35,7 @@ const styles = {
     shadowOpacity: 0.1,
     shadowRadius: 20,
     marginTop: 10,
+    elevation: 1,
   },
   passphraseTitle: {
     color: colors.grayScale2,
