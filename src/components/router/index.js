@@ -11,6 +11,8 @@ import OwnWallet from '../ownWallet';
 import Settings from '../settings';
 import About from '../about';
 import Terms from '../terms';
+import EnableBioAuth from '../enableBioAuth';
+import DisableBioAuth from '../disableBioAuth';
 import styles from './styles';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
@@ -188,6 +190,54 @@ export default StackNavigator(
     },
     TxDetail: {
       screen: TxDetail,
+      navigationOptions: ({ navigation }) => ({
+        headerRight: <SettingButton navigation={navigation} />,
+        headerBackground: <Bg />,
+        headerTitle: <Logo />,
+        headerLeft: <IconButton
+          icon='back'
+          title=''
+          onPress={() => navigation.pop()}
+          style={styles.back}
+          iconButtonTitle={styles.backTitle}
+          color={colors.white} />,
+        headerTintColor: styles.white,
+        headerStyle: {
+          backgroundColor: colors.primary5,
+          overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
+      }),
+    },
+    EnableBioAuth: {
+      screen: EnableBioAuth,
+      navigationOptions: ({ navigation }) => ({
+        headerRight: <SettingButton navigation={navigation} />,
+        headerBackground: <Bg />,
+        headerTitle: <Logo />,
+        headerLeft: <IconButton
+          icon='back'
+          title=''
+          onPress={() => navigation.pop()}
+          style={styles.back}
+          iconButtonTitle={styles.backTitle}
+          color={colors.white} />,
+        headerTintColor: styles.white,
+        headerStyle: {
+          backgroundColor: colors.primary5,
+          overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
+      }),
+    },
+    DisableBioAuth: {
+      screen: DisableBioAuth,
       navigationOptions: ({ navigation }) => ({
         headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
