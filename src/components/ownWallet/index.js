@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
+import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import Empty from '../transactions/empty';
@@ -27,6 +28,7 @@ const summaryHeight = 250;
   transactions: state.transactions,
 }), {
   transactionsLoaded: transactionsLoadedAction,
+  updateTransactions: blockUpdatedAction,
 })
 class Wallet extends React.Component {
   state = {
@@ -108,6 +110,7 @@ class Wallet extends React.Component {
           style={[styles.scrollView]}
           list={[...transactions.pending, ...transactions.confirmed]}
           count={transactions.count}
+          refresh={this.props.updateTransactions}
           loadMore={this.loadMore}>
           <Transactions transactions={transactions}
             footer={this.state.footer}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 
 /**
  * InfiniteScrollView is a wrapper for react native ScrollView
@@ -11,6 +11,9 @@ import { ScrollView } from 'react-native';
  */
 class InfiniteScrollView extends React.Component {
   canLoadMore = true;
+  state = {
+    refreshing: false,
+  };
 
   loadMore = ({ nativeEvent }) => {
     const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
@@ -18,7 +21,6 @@ class InfiniteScrollView extends React.Component {
       return (layoutMeasurement.height + contentOffset.y >=
         contentSize.height - paddingToBottom);
     };
-
     if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
       this.canLoadMore = false;
       this.props.loadMore();
@@ -26,7 +28,7 @@ class InfiniteScrollView extends React.Component {
   }
 
   componentWillUpdate = (nextProps) => {
-    this.canLoadMore = (this.props.list.length !== nextProps.list.length);
+    this.canLoadMore = (this.props.list.length !== nextProps.list.length) || this.state.refreshing;
   }
 
   onScroll(e) {
@@ -38,12 +40,29 @@ class InfiniteScrollView extends React.Component {
     this.scrollView.scrollTo({ y });
   }
 
+  onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.props.refresh().then(() => {
+      setTimeout(() => {
+        this.setState({ refreshing: false });
+      }, 2000);
+    });
+  }
+
   render() {
     return <ScrollView onScroll={this.onScroll.bind(this)}
+      refreshControl={
+        <RefreshControl
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh}
+          />
+      }
       ref={((el) => { this.scrollView = el; })}
       style={this.props.style}
       stickyHeaderIndices={this.props.stickyHeaderIndices}
-      scrollEventThrottle={8}>{this.props.children}</ScrollView>;
+      scrollEventThrottle={8}>
+      {this.props.children}
+    </ScrollView>;
   }
 }
 
