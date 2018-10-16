@@ -30,28 +30,15 @@ class Settings extends React.Component {
             <View style={styles.group}>
               <H4>Security</H4>
               {
-                settings.sensorType === 'Face ID' ?
+                settings.sensorType ?
                   <View style={styles.item}>
                     <ItemTitle
                       navigation={navigation}
                       target={target}
                       targetStateLabel={targetStateLabel}
-                      icon='face-id-small'
+                      icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
                       iconSize={21}
-                      title='Face ID'/>
-                  </View> : null
-              }
-              {
-                (settings.sensorType === 'Touch ID' ||
-                settings.sensorType === 'Fingerprint') ?
-                  <View style={styles.item}>
-                    <ItemTitle
-                      navigation={navigation}
-                      target={target}
-                      targetStateLabel={targetStateLabel}
-                      icon='touch-id-small'
-                      iconSize={21}
-                      title='Touch ID'/>
+                      title={settings.sensorType}/>
                   </View> : null
               }
             </View> : null
