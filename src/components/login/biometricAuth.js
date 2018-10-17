@@ -62,7 +62,6 @@ class BiometricAuth extends React.Component {
       <View style={styles.waves}>
         {
           tried ?
-          // @todo The source of this animation must change
           <LottieView
             source={wavesError}
             loop={false}
