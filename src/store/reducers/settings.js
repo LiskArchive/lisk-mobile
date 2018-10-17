@@ -12,6 +12,7 @@ import actionTypes from '../../constants/actions';
 const settings = (state = {}, action = {}) => {
   switch (action.type) {
     case actionTypes.settingsUpdated:
+    case actionTypes.settingsRetrieved:
       return Object.assign({}, state, action.data);
     default:
       return state;

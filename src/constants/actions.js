@@ -20,6 +20,7 @@ const actionTypes = {
   transactionsUpdated: 'TRANSACTIONS_UPDATED',
   // Settings
   settingsUpdated: 'SETTINGS_UPDATED',
+  settingsRetrieved: 'SETTINGS_RETRIEVED',
 };
 
 export default actionTypes;
