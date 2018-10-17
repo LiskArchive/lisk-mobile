@@ -43,6 +43,17 @@ class Settings extends React.Component {
               }
             </View> : null
         }
+        {
+          (settings.sensorType && settings.hasStoredPassphrase) ?
+            <View style={styles.item}>
+              <ItemTitle
+                navigation={navigation}
+                target='PassphraseBackup'
+                icon='backup'
+                iconSize={21}
+                title='Backup your passphrase'/>
+            </View> : null
+        }
         <View style={styles.group}>
           <H4>About</H4>
           <View style={styles.item}>

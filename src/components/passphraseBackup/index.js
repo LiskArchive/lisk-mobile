@@ -1,55 +1,25 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Image } from 'react-native';
-import styles from './styles';
 import { deviceHeight } from '../../utilities/device';
-import {
-  removePassphraseFromKeyChain,
-  bioMetricAuthentication,
-} from '../../utilities/passphrase';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../actions/settings';
+import styles from './styles';
 import { H1, B, P } from '../toolBox/typography';
 import CopyToClipboard from '../copyToClipboard';
-import { SecondaryButton } from '../toolBox/button';
 import image from '../../assets/images/registrationProcess/passphrase3x.png';
 
 @connect(state => ({
   account: state.accounts.active,
-}), {
-  settingsUpdated: settingsUpdatedAction,
-})
-class DisableBioAuth extends React.Component {
-  state = {
-    buttonDisabled: false,
-  }
-
-  confirm = () => {
-    this.setState({ buttonDisabled: true });
-    bioMetricAuthentication(
-      () => {
-        removePassphraseFromKeyChain();
-        this.props.settingsUpdated({ hasStoredPassphrase: false });
-        this.props.navigation.pop();
-      },
-      () => {
-        this.setState({ buttonDisabled: false });
-      },
-    );
-  }
-
+}), {})
+class PassphraseBackup extends React.Component {
   render() {
     const { passphrase } = this.props.account;
-    const title = this.props.navigation.getParam('title', null);
-
     return (<View style={styles.wrapper}>
         <View style={styles.container}>
           <View>
             <View style={styles.titleContainer}>
-              <H1 style={styles.header}>Disabling {title}</H1>
+              <H1 style={styles.header}>Backup your passphrase</H1>
               <P style={styles.subHeader}>
-                Passphrase will be the only option to access your account.
+              Carefully write down or copy it to the clipboard.
               </P>
             </View>
             <View style={styles.passphraseContainer}>
@@ -80,16 +50,11 @@ class DisableBioAuth extends React.Component {
               <P style={styles.caption}>Keep it safe!</P>
             </View> : null
           }
-          <View>
-            <SecondaryButton
-              disabled={this.state.buttonDisabled}
-              style={styles.button}
-              onClick={this.confirm}
-              title='Disable' />
+          <View style={styles.placeholder}>
           </View>
         </View>
       </View>);
   }
 }
 
-export default DisableBioAuth;
+export default PassphraseBackup;
