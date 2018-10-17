@@ -1,10 +1,11 @@
 import React from 'react';
-import { Animated, View } from 'react-native';
+import { Animated, View, Image } from 'react-native';
 import Icon from '../toolBox/icon';
 import easing from '../../utilities/easing';
 import { deviceHeight } from '../../utilities/device';
 import styles from './styles';
 import { colors } from '../../constants/styleGuide';
+import topBubbles from '../../assets/images/topBubbles3x.png';
 
 class Splash extends React.Component {
   state = {
@@ -38,6 +39,9 @@ class Splash extends React.Component {
     const { top, bgOpacity, iconOpacity } = this.state;
     return (<View style={styles.splashContainer}>
       <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]}></Animated.View>
+      <Animated.View style={[styles.splashTopButtons]}>
+        <Image source={topBubbles} style={{ width: '100%', height: '100%' }} />
+      </Animated.View>
       <Animated.View style={[styles.splashFigure, styles.splashStatic, { opacity: iconOpacity }]}>
         <Icon name='lisk-full' size={60} color={colors.primary9} style={styles.splashLogo} />
       </Animated.View>
