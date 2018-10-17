@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import {
   storePassphraseInKeyChain,
@@ -13,6 +13,7 @@ import { H1, B, Small } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { SecondaryButton } from '../toolBox/button';
 import colors from '../../constants/styleGuide/colors';
+import FingerprintOverlay from '../fingerprintOverlay';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -22,20 +23,34 @@ import colors from '../../constants/styleGuide/colors';
 class EnableBioAuth extends React.Component {
   state = {
     buttonDisabled: false,
+    error: null,
+    show: false,
   }
 
   confirm = () => {
     this.setState({ buttonDisabled: true });
-    bioMetricAuthentication(
-      () => {
+    bioMetricAuthentication({
+      successCallback: () => {
         storePassphraseInKeyChain(this.props.account.passphrase);
         this.props.settingsUpdated({ hasStoredPassphrase: true });
         this.props.navigation.pop();
       },
-      () => {
+      errorCallback: () => {
         this.setState({ buttonDisabled: false });
       },
-    );
+      androidError: this.setError,
+    });
+
+    if (Platform.OS === 'android') {
+      this.props.navigation.setParams({
+        headerVisible: false,
+      });
+      this.setState({ show: true });
+    }
+  }
+
+  setError = (error) => {
+    this.setState({ error: error.message });
   }
 
   render() {
@@ -82,6 +97,7 @@ class EnableBioAuth extends React.Component {
             onClick={this.confirm}
             title='Enable' />
         </View>
+        <FingerprintOverlay error={this.state.error} show={this.state.show} />
       </View>);
   }
 }

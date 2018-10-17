@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Image } from 'react-native';
+import { View, Image, Platform } from 'react-native';
 import styles from './styles';
 import {
   removePassphraseFromKeyChain,
@@ -13,6 +13,7 @@ import { H1, B, P } from '../toolBox/typography';
 import CopyToClipboard from '../copyToClipboard';
 import { SecondaryButton } from '../toolBox/button';
 import image from '../../assets/images/registrationProcess/passphrase3x.png';
+import FingerprintOverlay from '../fingerprintOverlay';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -22,20 +23,34 @@ import image from '../../assets/images/registrationProcess/passphrase3x.png';
 class DisableBioAuth extends React.Component {
   state = {
     buttonDisabled: false,
+    error: null,
+    show: false,
   }
 
   confirm = () => {
-    this.setState({ buttonDisabled: true });
-    bioMetricAuthentication(
-      () => {
+    // this.setState({ buttonDisabled: true });
+    bioMetricAuthentication({
+      successCallback: () => {
         removePassphraseFromKeyChain();
         this.props.settingsUpdated({ hasStoredPassphrase: false });
         this.props.navigation.pop();
       },
-      () => {
+      errorCallback: () => {
         this.setState({ buttonDisabled: false });
       },
-    );
+      androidError: this.setError,
+    });
+
+    if (Platform.OS === 'android') {
+      this.props.navigation.setParams({
+        headerVisible: false,
+      });
+      this.setState({ show: true });
+    }
+  }
+
+  setError = (error) => {
+    this.setState({ error: error.message });
   }
 
   render() {
@@ -82,6 +97,7 @@ class DisableBioAuth extends React.Component {
               title='Disable' />
           </View>
         </View>
+        <FingerprintOverlay error={this.state.error} show={this.state.show} />
       </View>);
   }
 }

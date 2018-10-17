@@ -35,7 +35,8 @@ const styles = {
     shadowOpacity: 0.1,
     shadowRadius: 20,
     marginTop: 10,
-    elevation: 1,
+    borderColor: 'rgba(58, 131, 192, 0.1)',
+    borderWidth: Platform.OS === 'ios' ? 0 : 1,
   },
   passphraseTitle: {
     color: colors.grayScale2,

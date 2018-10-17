@@ -10,6 +10,7 @@ import { P, A } from '../toolBox/typography';
 import waves from '../../assets/animations/waves.json';
 import wavesError from '../../assets/animations/waves-error.json';
 
+
 class BiometricAuth extends React.Component {
   state = {
     opacity: new Animated.Value(0),
@@ -35,10 +36,10 @@ class BiometricAuth extends React.Component {
 
   componentDidMount() {
     this.startUpAnimation(() => {
-      bioMetricAuthentication(
-        () => this.props.login({ value: this.props.passphrase }),
-        () => this.unauthorizedAnimation(),
-      );
+      bioMetricAuthentication({
+        successCallback: () => this.props.login({ value: this.props.passphrase }),
+        androidError: this.unauthorizedAnimation,
+      });
     });
   }
 

@@ -2,6 +2,7 @@ import Lisk from 'lisk-elements';
 import * as Keychain from 'react-native-keychain';
 import fillWordsList from 'bip39/wordlists/english.json'; // eslint-disable-line import/no-extraneous-dependencies
 import FingerprintScanner from 'react-native-fingerprint-scanner';
+import { Platform } from 'react-native';
 import { extractAddress } from './api/account';
 
 /**
@@ -72,16 +73,19 @@ export const getPassphraseFromKeyChain = () => Keychain.getGenericPassword();
  *  when a device request fingerprint
  * first check bio metric Sensor availability after that authenticate a user base on that
  */
-export const bioMetricAuthentication = async (
-  successCallback, errorCallback = err => err, description,
-) => {
+export const bioMetricAuthentication = async ({
+  successCallback, errorCallback = err => err, description, androidError,
+}) => {
+  const authConfig = Platform.OS === 'ios' ?
+    {
+      description: description || 'Scan your fingerprint on the device scanner to login',
+    } :
+    { onAttempt: androidError };
   try {
     await FingerprintScanner.isSensorAvailable();
     try {
       await FingerprintScanner
-        .authenticate({
-          description: description || 'Scan your fingerprint on the device scanner to login',
-        });
+        .authenticate(authConfig);
       successCallback();
     } catch (error) {
       errorCallback(error);
