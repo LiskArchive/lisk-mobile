@@ -35,6 +35,7 @@ class Settings extends React.Component {
                     <ItemTitle
                       navigation={navigation}
                       target={target}
+                      authenticate={true}
                       targetStateLabel={targetStateLabel}
                       icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
                       iconSize={21}
@@ -49,6 +50,7 @@ class Settings extends React.Component {
               <ItemTitle
                 navigation={navigation}
                 target='PassphraseBackup'
+                authenticate={true}
                 icon='backup'
                 iconSize={21}
                 title='Backup your passphrase'/>
