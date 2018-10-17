@@ -61,6 +61,7 @@
 		BB6F346AB4A648A1BA54C57F /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5CB4BFCA24479DB6C41EDB /* libRNVectorIcons.a */; };
 		C1620BBB71794A2AA0AB390C /* libRNOpenAppSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A6FCB41158F4F90B94BED40 /* libRNOpenAppSettings.a */; };
 		D9D8E419A51C48EAA7460255 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 754CCB7535514702A07EE289 /* MaterialCommunityIcons.ttf */; };
+		EF44A06F7F1445B7BCE47C7E /* libSajjadBlurOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 912D99BBCCD84D1597505EA1 /* libSajjadBlurOverlay.a */; };
 		FD4CC47CB98340EAAA23C121 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C4BBF0DB7044654ABCFF9ED /* SimpleLineIcons.ttf */; };
 /* End PBXBuildFile section */
 
@@ -267,6 +268,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
 			remoteInfo = RNCamera;
+		};
+		338348B121762DA1004E2E7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F921B75E2A44CB2AF90E226 /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A39873CE1EA65EE60051E01A;
+			remoteInfo = "RNVectorIcons-tvOS";
+		};
+		338348B921762DA2004E2E7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FBF884305BC34B819528F026 /* SajjadBlurOverlay.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = SajjadBlurOverlay;
 		};
 		33DD262D20CFBC560061FC18 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -589,6 +604,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8CD4A0E456D843B18B84FB4B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		912D99BBCCD84D1597505EA1 /* libSajjadBlurOverlay.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSajjadBlurOverlay.a; sourceTree = "<group>"; };
 		928A6CDBC51B4EDB99C06F39 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		9F87DBCE083E405AA4F56F21 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -609,6 +625,7 @@
 		DEAB38B06D754CD8910C2257 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		E2DBFE87FDD0441CA831FDD3 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		FBF884305BC34B819528F026 /* SajjadBlurOverlay.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SajjadBlurOverlay.xcodeproj; path = "../node_modules/react-native-blur-overlay/ios/SajjadBlurOverlay.xcodeproj"; sourceTree = "<group>"; };
 		FE5CB4BFCA24479DB6C41EDB /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		FF1D9E33CBFA4D5D8AEB57C1 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -658,6 +675,7 @@
 				68A5B5B4132249F0ABC69837 /* libReactNativePermissions.a in Frameworks */,
 				C1620BBB71794A2AA0AB390C /* libRNOpenAppSettings.a in Frameworks */,
 				4A21D0120D4E4A66AB2BC412 /* libReactNativeFingerprintScanner.a in Frameworks */,
+				EF44A06F7F1445B7BCE47C7E /* libSajjadBlurOverlay.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,6 +865,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		338348B621762DA2004E2E7A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				338348BA21762DA2004E2E7A /* libSajjadBlurOverlay.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		33DD260220CFBC550061FC18 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -864,6 +890,7 @@
 				58CAE2B8D6914A1EAE566E95 /* libReactNativePermissions.a */,
 				2A6FCB41158F4F90B94BED40 /* libRNOpenAppSettings.a */,
 				5BF315E7838440F7A4020FB7 /* libReactNativeFingerprintScanner.a */,
+				912D99BBCCD84D1597505EA1 /* libSajjadBlurOverlay.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -872,6 +899,7 @@
 			isa = PBXGroup;
 			children = (
 				33DD262E20CFBC560061FC18 /* libRNVectorIcons.a */,
+				338348B221762DA1004E2E7A /* libRNVectorIcons-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -978,6 +1006,7 @@
 				CBE25F1D98994394A6391170 /* ReactNativePermissions.xcodeproj */,
 				CEABDB7540DE4FE3821473BA /* RNOpenAppSettings.xcodeproj */,
 				64706DEA34884121AA397B0B /* ReactNativeFingerprintScanner.xcodeproj */,
+				FBF884305BC34B819528F026 /* SajjadBlurOverlay.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1270,6 +1299,10 @@
 					ProjectRef = 3F921B75E2A44CB2AF90E226 /* RNVectorIcons.xcodeproj */;
 				},
 				{
+					ProductGroup = 338348B621762DA2004E2E7A /* Products */;
+					ProjectRef = FBF884305BC34B819528F026 /* SajjadBlurOverlay.xcodeproj */;
+				},
+				{
 					ProductGroup = B644168B216B3B3C001E51B9 /* Products */;
 					ProjectRef = B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */;
 				},
@@ -1485,6 +1518,20 @@
 			fileType = archive.ar;
 			path = libRNCamera.a;
 			remoteRef = 336CC488212D98480058C7E3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		338348B221762DA1004E2E7A /* libRNVectorIcons-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNVectorIcons-tvOS.a";
+			remoteRef = 338348B121762DA1004E2E7A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		338348BA21762DA2004E2E7A /* libSajjadBlurOverlay.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSajjadBlurOverlay.a;
+			remoteRef = 338348B921762DA2004E2E7A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		33DD262E20CFBC560061FC18 /* libRNVectorIcons.a */ = {
@@ -1857,12 +1904,14 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-app-settings/ios",
 					"$(SRCROOT)/../node_modules/react-native-fingerprint-scanner/ios",
+					"$(SRCROOT)/../node_modules/react-native-blur-overlay/ios",
 				);
 				INFOPLIST_FILE = LiskTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1898,12 +1947,14 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-app-settings/ios",
 					"$(SRCROOT)/../node_modules/react-native-fingerprint-scanner/ios",
+					"$(SRCROOT)/../node_modules/react-native-blur-overlay/ios",
 				);
 				INFOPLIST_FILE = LiskTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1943,6 +1994,7 @@
 					"$(SRCROOT)/../node_modules/react-native-app-settings/ios",
 					"$(SRCROOT)/../node_modules/react-native-fingerprint-scanner/ios",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-blur-overlay/ios",
 				);
 				INFOPLIST_FILE = Lisk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1980,6 +2032,7 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-app-settings/ios",
 					"$(SRCROOT)/../node_modules/react-native-fingerprint-scanner/ios",
+					"$(SRCROOT)/../node_modules/react-native-blur-overlay/ios",
 				);
 				INFOPLIST_FILE = Lisk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
