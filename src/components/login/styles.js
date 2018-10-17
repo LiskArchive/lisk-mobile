@@ -127,6 +127,14 @@ const styles = {
     height: '100%',
     opacity: 0.3,
   },
+  splashTopButtons: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: 375,
+    height: 97,
+    zIndex: 3,
+  },
   splashFigure: {
     height: 60,
     width: 153,
