@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import {
   storePassphraseInKeyChain,
-  bioMetricAuthentication,
 } from '../../utilities/passphrase';
 import {
   settingsUpdated as settingsUpdatedAction,
@@ -20,22 +19,10 @@ import colors from '../../constants/styleGuide/colors';
   settingsUpdated: settingsUpdatedAction,
 })
 class EnableBioAuth extends React.Component {
-  state = {
-    buttonDisabled: false,
-  }
-
   confirm = () => {
-    this.setState({ buttonDisabled: true });
-    bioMetricAuthentication(
-      () => {
-        storePassphraseInKeyChain(this.props.account.passphrase);
-        this.props.settingsUpdated({ hasStoredPassphrase: true });
-        this.props.navigation.pop();
-      },
-      () => {
-        this.setState({ buttonDisabled: false });
-      },
-    );
+    storePassphraseInKeyChain(this.props.account.passphrase);
+    this.props.settingsUpdated({ hasStoredPassphrase: true });
+    this.props.navigation.pop();
   }
 
   render() {
@@ -77,7 +64,6 @@ class EnableBioAuth extends React.Component {
             </View>
           </View>
           <SecondaryButton
-            disabled={this.state.buttonDisabled}
             style={styles.button}
             onClick={this.confirm}
             title='Enable' />

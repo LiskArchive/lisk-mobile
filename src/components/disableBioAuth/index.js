@@ -5,7 +5,6 @@ import styles from './styles';
 import { deviceHeight } from '../../utilities/device';
 import {
   removePassphraseFromKeyChain,
-  bioMetricAuthentication,
 } from '../../utilities/passphrase';
 import {
   settingsUpdated as settingsUpdatedAction,
@@ -21,22 +20,10 @@ import image from '../../assets/images/registrationProcess/passphrase3x.png';
   settingsUpdated: settingsUpdatedAction,
 })
 class DisableBioAuth extends React.Component {
-  state = {
-    buttonDisabled: false,
-  }
-
   confirm = () => {
-    this.setState({ buttonDisabled: true });
-    bioMetricAuthentication(
-      () => {
-        removePassphraseFromKeyChain();
-        this.props.settingsUpdated({ hasStoredPassphrase: false });
-        this.props.navigation.pop();
-      },
-      () => {
-        this.setState({ buttonDisabled: false });
-      },
-    );
+    removePassphraseFromKeyChain();
+    this.props.settingsUpdated({ hasStoredPassphrase: false });
+    this.props.navigation.pop();
   }
 
   render() {
@@ -82,7 +69,6 @@ class DisableBioAuth extends React.Component {
           }
           <View>
             <SecondaryButton
-              disabled={this.state.buttonDisabled}
               style={styles.button}
               onClick={this.confirm}
               title='Disable' />
