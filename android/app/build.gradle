@@ -166,6 +166,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-blur-overlay')
     compile project(':react-native-fingerprint-scanner')
     compile project(':react-native-keychain')
     compile project(':react-native-camera')

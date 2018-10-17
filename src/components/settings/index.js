@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { H1, H4 } from '../toolBox/typography';
+import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
 import LogoutButton from '../logoutButton';
 import styles from './styles';
@@ -11,6 +12,23 @@ import { colors } from '../../constants/styleGuide';
   settings: state.settings,
 }), {})
 class Settings extends React.Component {
+  state = {
+    error: null,
+    show: false,
+  }
+
+  setError = (error) => {
+    this.setState({ error: error.message });
+  }
+
+  showDialog = () => {
+    this.setState({ show: true });
+  }
+
+  hideDialog = () => {
+    this.setState({ show: false });
+  }
+
   render() {
     const { navigation, settings } = this.props;
     let target = 'EnableBioAuth';
@@ -34,6 +52,8 @@ class Settings extends React.Component {
                   <View style={styles.item}>
                     <ItemTitle
                       navigation={navigation}
+                      showDialog={this.showDialog}
+                      hideDialog={this.hideDialog}
                       target={target}
                       authenticate={true}
                       targetStateLabel={targetStateLabel}
@@ -51,6 +71,8 @@ class Settings extends React.Component {
                 navigation={navigation}
                 target='PassphraseBackup'
                 authenticate={true}
+                showDialog={this.showDialog}
+                hideDialog={this.hideDialog}
                 icon='backup'
                 iconSize={21}
                 title='Backup your passphrase'/>
@@ -78,6 +100,7 @@ class Settings extends React.Component {
             <LogoutButton navigation={navigation} />
           </View>
         </View>
+        <FingerprintOverlay error={this.state.error} show={this.state.show} />
       </View>);
   }
 }

@@ -1,11 +1,15 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationActions, StackActions } from 'react-navigation';
 import styles from './styles';
-import { getPassphraseFromKeyChain } from '../../utilities/passphrase';
+import {
+  getPassphraseFromKeyChain,
+  storePassphraseInKeyChain,
+  bioMetricAuthentication,
+} from '../../utilities/passphrase';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import {
   accountLoggedIn as accountLoggedInAction,
@@ -13,6 +17,7 @@ import {
 } from '../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
+  settingsRetrieved as settingsRetrievedAction,
 } from '../../actions/settings';
 import Splash from './splash';
 import Form from './form';
@@ -27,11 +32,13 @@ console.disableYellowBox = true; // eslint-disable-line
 @connect(state => ({
   peers: state.peers,
   accounts: state.accounts,
+  settings: state.settings,
 }), {
   accountLoggedIn: accountLoggedInAction,
   peerSet: activePeerSetAction,
   accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
+  settingsRetrieved: settingsRetrievedAction,
 })
 class Login extends React.Component {
   state = {
@@ -42,10 +49,6 @@ class Login extends React.Component {
 
   changeHandler = (data) => {
     this.setState(data);
-  }
-
-  componentWillMount() {
-    this.props.peerSet();
   }
 
   async defineDefaultAuthMethod() {
@@ -81,6 +84,75 @@ class Login extends React.Component {
     }, delay);
   }
 
+  promptBioAuth = (passphrase, cb) => {
+    this.props.settingsUpdated({
+      bioAuthRecommended: true,
+    });
+
+    Alert.alert(
+      'For ease of sign in',
+      'Do you want to use Biometric Authentication?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => cb(passphrase.value),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            bioMetricAuthentication(
+              () => {
+                storePassphraseInKeyChain(passphrase.value);
+                this.props.settingsUpdated({
+                  hasStoredPassphrase: true,
+                });
+                cb(passphrase.value);
+              },
+              () => {
+                cb(passphrase.value);
+              },
+            );
+          },
+        },
+      ],
+      { cancelable: false },
+    );
+  }
+
+  login = (passphrase) => {
+    this.props.accountLoggedIn({
+      passphrase,
+    }, () => {
+      this.setState({
+        connectionError: true,
+      });
+    });
+  }
+
+  /**
+   * Will be called when login form submits
+   * fires the activePeerSet action
+   *
+   * @param {String} passphrase - valid mnemonic passphrase
+   */
+  onFormSubmission = (passphrase) => {
+    this.setState({
+      connectionError: false,
+    });
+
+    if (!this.props.settings.bioAuthRecommended) {
+      this.promptBioAuth(passphrase, this.login);
+    } else {
+      this.login(passphrase.value);
+    }
+  }
+
+  componentWillMount() {
+    this.props.peerSet();
+    this.props.settingsRetrieved();
+  }
+
   componentDidMount() {
     SplashScreen.hide();
     this.defineDefaultAuthMethod();
@@ -105,28 +177,6 @@ class Login extends React.Component {
     clearTimeout(this.timeout);
   }
 
-  /**
-   * Will be called when login form submits
-   * fires the activePeerSet action
-   *
-   * @param {String} passphrase - valid mnemonic passphrase
-   */
-  onLoginSubmission = (passphrase) => {
-    this.setState({
-      connectionError: false,
-    });
-
-    // storePassphraseInKeyChain(passphrase.value);
-
-    this.props.accountLoggedIn({
-      passphrase: passphrase.value,
-    }, () => {
-      this.setState({
-        connectionError: true,
-      });
-    });
-  }
-
   render() {
     const { view, storedPassphrase, sensorType } = this.state;
     const signOut = this.props.navigation.getParam('signOut');
@@ -139,7 +189,7 @@ class Login extends React.Component {
             toggleView={this.changeHandler}
             sensorType={sensorType}
             passphrase={storedPassphrase}
-            login={this.onLoginSubmission} /> : null
+            login={this.onFormSubmission} /> : null
       }
       {
         view === 'form' ?
@@ -147,7 +197,7 @@ class Login extends React.Component {
             animate={!signOut}
             navigation={this.props.navigation}
             toggleView={this.changeHandler}
-            login={this.onLoginSubmission} /> : null
+            login={this.onFormSubmission} /> : null
       }
     </View>);
   }

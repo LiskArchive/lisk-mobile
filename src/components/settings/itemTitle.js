@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, TouchableHighlight } from 'react-native';
+import { View, TouchableHighlight, Platform } from 'react-native';
 import { P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { colors } from '../../constants/styleGuide';
@@ -20,53 +20,72 @@ import {
  * @param {Object} data.navigation - The Navigation object. if the target props is passed,
  *  we need this to ba able to navigate.
  */
-const ItemTitle = ({
-  icon, iconSize, title, target, navigation, targetStateLabel, authenticate,
-}) => {
-  const props = {
-    style: styles.itemTitle,
-    underlayColor: 'transparent',
-  };
-  if (typeof target === 'string') {
-    props.onPress = () => {
-      if (authenticate) {
-        bioMetricAuthentication(
-          () => {
+class ItemTitle extends React.Component {
+  authenticate = (cb) => {
+    bioMetricAuthentication({
+      successCallback: () => {
+        this.props.hideDialog();
+        cb();
+      },
+      errorCallback: () => {},
+      androidError: this.setError,
+    });
+
+    if (Platform.OS === 'android') {
+      this.props.navigation.setParams({
+        headerVisible: false,
+      });
+      this.props.showDialog();
+    }
+  }
+
+  render() {
+    const {
+      icon, iconSize, title, target, navigation, targetStateLabel, authenticate,
+    } = this.props;
+
+    const props = {
+      style: styles.itemTitle,
+      underlayColor: 'transparent',
+    };
+    if (typeof target === 'string') {
+      props.onPress = () => {
+        if (authenticate) {
+          this.authenticate(() => {
             navigation.navigate({
               routeName: target,
               params: { title },
             });
-          },
-          () => {},
-        );
-      } else {
-        navigation.navigate({
-          routeName: target,
-          params: { title },
-        });
-      }
-    };
-  }
-
-  return (<TouchableHighlight {...props}>
-    <Fragment>
-      <Icon name={icon} size={iconSize} color={colors.grayScale6} style={styles.itemIcon} />
-      <View style={styles.itemName}><P style={styles.itemNameText}>{title}</P></View>
-      <View style={styles.itemArrow}>
-        {
-          typeof target === 'string' ?
-          <Fragment>
-            {
-              targetStateLabel ?
-                <P style={{ color: targetStateLabel[1] || colors.grayScale1 }}>
-                  {targetStateLabel[0]}</P> : null
-            }
-            <Icon name='forward' size={21} color={colors.black} />
-          </Fragment> : null
+          });
+        } else {
+          navigation.navigate({
+            routeName: target,
+            params: { title },
+          });
         }
-      </View>
-    </Fragment>
-  </TouchableHighlight>);
-};
+      };
+    }
+
+    return (<TouchableHighlight {...props}>
+      <Fragment>
+        <Icon name={icon} size={iconSize} color={colors.grayScale6} style={styles.itemIcon} />
+        <View style={styles.itemName}><P style={styles.itemNameText}>{title}</P></View>
+        <View style={styles.itemArrow}>
+          {
+            typeof target === 'string' ?
+            <Fragment>
+              {
+                targetStateLabel ?
+                  <P style={{ color: targetStateLabel[1] || colors.grayScale1 }}>
+                    {targetStateLabel[0]}</P> : null
+              }
+              <Icon name='forward' size={21} color={colors.black} />
+            </Fragment> : null
+          }
+        </View>
+      </Fragment>
+    </TouchableHighlight>);
+  }
+}
 
 export default ItemTitle;
