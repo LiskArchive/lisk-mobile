@@ -5,7 +5,11 @@ import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationActions, StackActions } from 'react-navigation';
 import styles from './styles';
-import { getPassphraseFromKeyChain, storePassphraseInKeyChain } from '../../utilities/passphrase';
+import {
+  getPassphraseFromKeyChain,
+  storePassphraseInKeyChain,
+  bioMetricAuthentication,
+} from '../../utilities/passphrase';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import {
   accountLoggedIn as accountLoggedInAction,
@@ -97,11 +101,18 @@ class Login extends React.Component {
         {
           text: 'OK',
           onPress: () => {
-            storePassphraseInKeyChain(passphrase.value);
-            this.props.settingsUpdated({
-              hasStoredPassphrase: true,
-            });
-            cb(passphrase.value);
+            bioMetricAuthentication(
+              () => {
+                storePassphraseInKeyChain(passphrase.value);
+                this.props.settingsUpdated({
+                  hasStoredPassphrase: true,
+                });
+                cb(passphrase.value);
+              },
+              () => {
+                cb(passphrase.value);
+              },
+            );
           },
         },
       ],
