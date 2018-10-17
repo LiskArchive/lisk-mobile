@@ -4,6 +4,9 @@ import { P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { colors } from '../../constants/styleGuide';
 import styles from './styles';
+import {
+  bioMetricAuthentication,
+} from '../../utilities/passphrase';
 
 /**
  * A single setting item with icon and title
@@ -18,17 +21,31 @@ import styles from './styles';
  *  we need this to ba able to navigate.
  */
 const ItemTitle = ({
-  icon, iconSize, title, target, navigation, targetStateLabel,
+  icon, iconSize, title, target, navigation, targetStateLabel, authenticate,
 }) => {
   const props = {
     style: styles.itemTitle,
     underlayColor: 'transparent',
   };
   if (typeof target === 'string') {
-    props.onPress = () => navigation.navigate({
-      routeName: target,
-      params: { title },
-    });
+    props.onPress = () => {
+      if (authenticate) {
+        bioMetricAuthentication(
+          () => {
+            navigation.navigate({
+              routeName: target,
+              params: { title },
+            });
+          },
+          () => {},
+        );
+      } else {
+        navigation.navigate({
+          routeName: target,
+          params: { title },
+        });
+      }
+    };
   }
 
   return (<TouchableHighlight {...props}>
