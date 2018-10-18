@@ -80,16 +80,19 @@ class Result extends React.Component {
           {this.state.step === 0 ? <LottieView
             source={txCreatedAnim}
             loop={false}
+            style={{}}
             ref={(el) => { this.animation[0] = el; }}/>
             : null}
           {this.state.step === 1 ? <LottieView
             source={txPendingAnim}
             loop={true}
+            style={{}}
             ref={(el) => { this.animation[1] = el; }}/>
             : null}
           {this.state.step === 2 ? <LottieView
             source={txConfirmedAnim}
             loop={false}
+            style={{}}
             ref={(el) => { this.animation[2] = el; }}/>
             : null}
         </View>
