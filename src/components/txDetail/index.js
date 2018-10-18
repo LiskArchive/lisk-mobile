@@ -50,7 +50,10 @@ const TxDetail = ({ navigation }) => {
           </FormattedNumber> Ⱡ
         </H1>
       }
-      <FormattedDate format='MMM D, YYYY LTS' type={P} style={styles.date}>{ tx.timestamp }</FormattedDate>
+      {
+        tx.timestamp ?
+          <FormattedDate format='MMM D, YYYY LTS' type={P} style={styles.date}>{ tx.timestamp }</FormattedDate> : null
+      }
     </View>
     <View style={styles.detailRow}>
       <Icon name='send' size={20} color='#74869B' style={styles.rowIcon} />
