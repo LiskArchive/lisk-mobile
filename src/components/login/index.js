@@ -1,9 +1,10 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Alert } from 'react-native';
+import { View, Alert, Platform } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationActions, StackActions } from 'react-navigation';
+import FingerprintOverlay from '../fingerprintOverlay';
 import styles from './styles';
 import {
   getPassphraseFromKeyChain,
@@ -44,6 +45,22 @@ class Login extends React.Component {
   state = {
     storedPassphrase: null,
     view: 'splash',
+    androidDialog: {
+      error: null,
+      show: false,
+    },
+  }
+
+  showDialog = () => {
+    const { androidDialog } = this.state;
+    androidDialog.show = true;
+    this.setState({ androidDialog });
+  }
+
+  hideDialog = (cb) => {
+    const { androidDialog } = this.state;
+    androidDialog.show = false;
+    this.setState({ androidDialog }, cb);
   }
 
   changeHandler = (data) => {
@@ -99,20 +116,27 @@ class Login extends React.Component {
           text: 'OK',
           onPress: () => {
             bioMetricAuthentication({
+              description: 'Do you want to use Biometric Authentication?',
               successCallback: () => {
-                cb(passphrase.value);
-                storePassphraseInKeyChain(passphrase.value);
-                this.props.settingsUpdated({
-                  hasStoredPassphrase: true,
+                this.hideDialog(() => {
+                  storePassphraseInKeyChain(passphrase.value);
+                  this.props.settingsUpdated({
+                    hasStoredPassphrase: true,
+                  });
+                  cb(passphrase.value);
                 });
               },
-              errorCallback: () => {
-                cb(passphrase.value);
-              },
-              androidError: () => {
-                cb(passphrase.value);
+              errorCallback: () => {},
+              androidError: (error) => {
+                const { androidDialog } = this.state;
+                androidDialog.error = error;
+                this.setState({ androidDialog });
               },
             });
+
+            if (Platform.OS === 'android') {
+              this.showDialog();
+            }
           },
         },
       ],
@@ -139,8 +163,8 @@ class Login extends React.Component {
   onFormSubmission = (passphrase) => {
     this.setState({
       connectionError: false,
+      passphrase,
     });
-
     if (this.props.settings.sensorType && !this.props.settings.bioAuthRecommended) {
       this.promptBioAuth(passphrase, this.login);
     } else {
@@ -178,7 +202,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { view, storedPassphrase } = this.state;
+    const { view, storedPassphrase, androidDialog } = this.state;
     const { sensorType } = this.props.settings;
     const signOut = this.props.navigation.getParam('signOut');
 
@@ -201,6 +225,10 @@ class Login extends React.Component {
             toggleView={this.changeHandler}
             login={this.onFormSubmission} /> : null
       }
+      <FingerprintOverlay
+        onModalClosed={() => this.login(this.state.passphrase.value)}
+        error={androidDialog.error}
+        show={androidDialog.show} />
     </View>);
   }
 }

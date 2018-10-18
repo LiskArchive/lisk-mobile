@@ -99,6 +99,10 @@ class Form extends React.Component {
     this.animate();
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
   render() {
     const { passphrase, connectionError } = this.state;
     const {
@@ -135,7 +139,7 @@ class Form extends React.Component {
         extras={<Extras error={connectionError}
         onPress={this.goToRegistration} opacity={opacity} />}
         disabled={passphrase.validity.length !== 0}
-        onSubmit={this.props.login.bind(this, passphrase)}
+        onSubmit={() => this.onLoginSubmission(passphrase)}
         button='Sign in'>
       </KeyboardAwareScrollView>
     </View>);

@@ -16,6 +16,9 @@ class FingerprintOverlay extends React.Component {
   }
   closeModal = () => {
     this.ref.closeOverlay();
+    if (typeof this.props.onModalClosed === 'function') {
+      this.props.onModalClosed();
+    }
   }
   render() {
     const { error } = this.props;

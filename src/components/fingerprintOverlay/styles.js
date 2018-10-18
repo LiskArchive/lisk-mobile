@@ -6,6 +6,7 @@ const styles = {
   blurContainer: {
     flex: 1,
     marginTop: -55,
+    zIndex: 9999,
   },
   container: {
     position: 'absolute',
