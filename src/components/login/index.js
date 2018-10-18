@@ -3,7 +3,7 @@ import connect from 'redux-connect-decorator';
 import { View, Alert, Platform } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
-import { NavigationActions, StackActions } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 import FingerprintOverlay from '../fingerprintOverlay';
 import styles from './styles';
 import {
@@ -188,9 +188,11 @@ class Login extends React.Component {
    * @todo sign-out should happen in the setting page to prevent issues here
    */
   componentDidUpdate() {
-    if (this.props.accounts.active && this.props.navigation.isFocused()) {
+    if (this.props.accounts.active &&
+      this.props.navigation &&
+      this.props.navigation.isFocused()) {
       this.props.navigation
-        .dispatch(StackActions.reset({
+        .dispatch(NavigationActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'Main' })],
         }));

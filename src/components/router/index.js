@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import Login from '../login';
 import TxDetail from '../txDetail';
 import Send from '../send';
@@ -32,7 +32,7 @@ const SettingButton = ({ navigation }) =>
 
 const placeHolderButton = <IconButton color='transparent' icon='back'/>;
 // eslint-disable-next-line new-cap
-const Tabs = createBottomTabNavigator({
+const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: ({ navigation }) => ({
@@ -74,6 +74,7 @@ const Tabs = createBottomTabNavigator({
 }, {
   tabBarOptions,
   initialRouteName: 'OwnWallet',
+  headerMode: 'screen',
 });
 
 
