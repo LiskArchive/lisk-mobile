@@ -1,7 +1,7 @@
 
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { NavigationActions, StackActions } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 import {
   accountLoggedOut as accountLoggedOutAction,
 } from '../../actions/accounts';
@@ -14,7 +14,7 @@ const onClick = (navigation, accountLoggedOut) => {
   accountLoggedOut();
   // navigate to the login page
   navigation
-    .dispatch(StackActions.reset({
+    .dispatch(NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({
         routeName: 'Login',
