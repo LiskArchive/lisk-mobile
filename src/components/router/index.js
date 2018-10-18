@@ -72,6 +72,7 @@ const Tabs = TabNavigator({
   //   },
   // },
 }, {
+  tabBarPosition: 'bottom',
   tabBarOptions,
   initialRouteName: 'OwnWallet',
   headerMode: 'screen',
