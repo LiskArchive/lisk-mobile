@@ -33,6 +33,9 @@ export const transactionAdded = (data, success, error) =>
             senderId: account.address,
             recipientId: data.recipientId,
             amount: data.amount,
+            asset: {
+              data: data.data,
+            },
             fee: txConstants.send.fee,
             type: txConstants.send.type,
           },
