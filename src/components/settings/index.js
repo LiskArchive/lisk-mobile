@@ -18,7 +18,6 @@ class Settings extends React.Component {
   }
 
   setError = (error) => {
-    console.log(error);
     this.setState({ error: error.message });
   }
 

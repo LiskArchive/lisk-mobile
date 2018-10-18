@@ -37,7 +37,9 @@ class Form extends React.Component {
 
   showKeyboard = () => {
     setTimeout(() => {
-      if (this.props.navigation.isFocused() && this.passphraseInput) {
+      if (this.props.navigation &&
+        this.props.navigation.isFocused() &&
+        this.passphraseInput) {
         this.passphraseInput.focus();
       }
     }, 500);
