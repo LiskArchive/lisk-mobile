@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.3.0</string>
+	<string>0.4.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -43,6 +43,8 @@
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Lisk uses  your comera to scan QRcodes</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>$(PRODUCT_NAME) Authentication</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSMotionUsageDescription</key>
@@ -88,7 +90,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSFaceIDUsageDescription</key>
-	<string>$(PRODUCT_NAME) Authentication</string>
 </dict>
 </plist>
