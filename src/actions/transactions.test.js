@@ -69,51 +69,60 @@ describe('Action: Accounts', () => {
   transactionsUtility.send = jest.fn();
   transactionsUtility.getTransactions = jest.fn();
 
-  it('should load more transactions when transactionsLoaded is called', async () => {
-    const store = mockStore({
-      peers: { activePeer },
-      accounts: { active: account },
-      transactions: { confirmed: [] },
+  describe('transactionsLoaded', () => {
+    it('should load more transactions', async () => {
+      const store = mockStore({
+        peers: { activePeer },
+        accounts: { active: account },
+        transactions: { confirmed: [] },
+      });
+      const expectedActions = [
+        { type: actionTypes.loadingStarted, data: actionTypes.transactionsLoaded },
+        { type: actionTypes.transactionsLoaded, data: { transactions: transactions.data } },
+        { type: actionTypes.loadingFinished, data: actionTypes.transactionsLoaded },
+      ];
+      transactionsUtility.getTransactions.mockResolvedValue(transactions);
+      await store.dispatch(transactionsLoaded({ offset: 0 }));
+      expect(store.getActions()).toEqual(expectedActions);
     });
-    const expectedActions = [
-      { type: actionTypes.loadingStarted, data: actionTypes.transactionsLoaded },
-      { type: actionTypes.transactionsLoaded, data: { transactions: transactions.data } },
-      { type: actionTypes.loadingFinished, data: actionTypes.transactionsLoaded },
-    ];
-    transactionsUtility.getTransactions.mockResolvedValue(transactions);
-    await store.dispatch(transactionsLoaded({ offset: 0 }));
-    expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should transactionsAdded calls pendingTransactionAdded when send request is successful', async () => {
-    const store = mockStore({
-      peers: { activePeer },
-      accounts: { active: account },
-      transactions: { confirmed: [], pending: [] },
-    });
-    const cb = jest.fn();
-    const inputData = {
-      amount: 1000,
-      recipientId: 'recipientId',
-    };
-    const expectedActions = [
-      { type: actionTypes.loadingStarted, data: actionTypes.transactionsAdded },
-      {
-        type: actionTypes.pendingTransactionAdded,
-        data: {
-          id: transactions.data[0].id,
-          senderPublicKey: account.publicKey,
-          senderId: account.address,
-          ...inputData,
-          fee: txConstants.send.fee,
-          type: txConstants.send.type,
+  describe('transactionsAdded', () => {
+    it('should call pendingTransactionAdded when send request is successful', async () => {
+      const store = mockStore({
+        peers: { activePeer },
+        accounts: { active: account },
+        transactions: { confirmed: [], pending: [] },
+      });
+      const cb = jest.fn();
+      const inputData = {
+        amount: 1000,
+        recipientId: 'recipientId',
+        data: 'test ref',
+      };
+      const expectedActions = [
+        { type: actionTypes.loadingStarted, data: actionTypes.transactionsAdded },
+        {
+          type: actionTypes.pendingTransactionAdded,
+          data: {
+            id: transactions.data[0].id,
+            senderPublicKey: account.publicKey,
+            senderId: account.address,
+            amount: inputData.amount,
+            recipientId: inputData.recipientId,
+            fee: txConstants.send.fee,
+            asset: {
+              data: inputData.data,
+            },
+            type: txConstants.send.type,
+          },
         },
-      },
-      { type: actionTypes.loadingFinished, data: actionTypes.transactionsAdded },
-    ];
-    transactionsUtility.send.mockResolvedValue(transactions.data[0]);
-    await store.dispatch(transactionAdded(inputData, cb));
-    expect(store.getActions()).toEqual(expectedActions);
-    expect(cb.mock.calls).toHaveLength(1);
+        { type: actionTypes.loadingFinished, data: actionTypes.transactionsAdded },
+      ];
+      transactionsUtility.send.mockResolvedValue(transactions.data[0]);
+      await store.dispatch(transactionAdded(inputData, cb));
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(cb.mock.calls).toHaveLength(1);
+    });
   });
 });
