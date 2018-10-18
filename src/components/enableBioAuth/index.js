@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import {
   storePassphraseInKeyChain,
-  bioMetricAuthentication,
 } from '../../utilities/passphrase';
 import {
   settingsUpdated as settingsUpdatedAction,
@@ -13,7 +12,6 @@ import { H1, B, Small } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { SecondaryButton } from '../toolBox/button';
 import colors from '../../constants/styleGuide/colors';
-import FingerprintOverlay from '../fingerprintOverlay';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -21,36 +19,10 @@ import FingerprintOverlay from '../fingerprintOverlay';
   settingsUpdated: settingsUpdatedAction,
 })
 class EnableBioAuth extends React.Component {
-  state = {
-    buttonDisabled: false,
-    error: null,
-    show: false,
-  }
-
   confirm = () => {
-    this.setState({ buttonDisabled: true });
-    bioMetricAuthentication({
-      successCallback: () => {
-        storePassphraseInKeyChain(this.props.account.passphrase);
-        this.props.settingsUpdated({ hasStoredPassphrase: true });
-        this.props.navigation.pop();
-      },
-      errorCallback: () => {
-        this.setState({ buttonDisabled: false });
-      },
-      androidError: this.setError,
-    });
-
-    if (Platform.OS === 'android') {
-      this.props.navigation.setParams({
-        headerVisible: false,
-      });
-      this.setState({ show: true });
-    }
-  }
-
-  setError = (error) => {
-    this.setState({ error: error.message });
+    storePassphraseInKeyChain(this.props.account.passphrase);
+    this.props.settingsUpdated({ hasStoredPassphrase: true });
+    this.props.navigation.pop();
   }
 
   render() {
@@ -92,12 +64,10 @@ class EnableBioAuth extends React.Component {
             </View>
           </View>
           <SecondaryButton
-            disabled={this.state.buttonDisabled}
             style={styles.button}
             onClick={this.confirm}
             title='Enable' />
         </View>
-        <FingerprintOverlay error={this.state.error} show={this.state.show} />
       </View>);
   }
 }
