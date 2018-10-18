@@ -44,7 +44,6 @@ class Login extends React.Component {
   state = {
     storedPassphrase: null,
     view: 'splash',
-    sensorType: null,
   }
 
   changeHandler = (data) => {
@@ -72,13 +71,11 @@ class Login extends React.Component {
       if (password && sensorType) {
         this.changeHandler({
           view: 'biometricAuth',
-          sensorType,
           storedPassphrase: password,
         });
       } else {
         this.changeHandler({
           view: 'form',
-          sensorType: null,
         });
       }
     }, delay);
@@ -101,18 +98,21 @@ class Login extends React.Component {
         {
           text: 'OK',
           onPress: () => {
-            bioMetricAuthentication(
-              () => {
+            bioMetricAuthentication({
+              successCallback: () => {
+                cb(passphrase.value);
                 storePassphraseInKeyChain(passphrase.value);
                 this.props.settingsUpdated({
                   hasStoredPassphrase: true,
                 });
+              },
+              errorCallback: () => {
                 cb(passphrase.value);
               },
-              () => {
+              androidError: () => {
                 cb(passphrase.value);
               },
-            );
+            });
           },
         },
       ],
@@ -141,7 +141,7 @@ class Login extends React.Component {
       connectionError: false,
     });
 
-    if (!this.props.settings.bioAuthRecommended) {
+    if (this.props.settings.sensorType && !this.props.settings.bioAuthRecommended) {
       this.promptBioAuth(passphrase, this.login);
     } else {
       this.login(passphrase.value);
@@ -178,8 +178,10 @@ class Login extends React.Component {
   }
 
   render() {
-    const { view, storedPassphrase, sensorType } = this.state;
+    const { view, storedPassphrase } = this.state;
+    const { sensorType } = this.props.settings;
     const signOut = this.props.navigation.getParam('signOut');
+
     return (<View style={styles.wrapper}>
       <Splash animate={!signOut} />
       {
