@@ -18,11 +18,12 @@ class Settings extends React.Component {
   }
 
   setError = (error) => {
+    console.log(error);
     this.setState({ error: error.message });
   }
 
   showDialog = () => {
-    this.setState({ show: true });
+    this.setState({ error: null, show: true });
   }
 
   hideDialog = () => {
@@ -54,6 +55,7 @@ class Settings extends React.Component {
                       navigation={navigation}
                       showDialog={this.showDialog}
                       hideDialog={this.hideDialog}
+                      setError={this.setError}
                       target={target}
                       authenticate={true}
                       targetStateLabel={targetStateLabel}
@@ -73,6 +75,7 @@ class Settings extends React.Component {
                 authenticate={true}
                 showDialog={this.showDialog}
                 hideDialog={this.hideDialog}
+                setError={this.setError}
                 icon='backup'
                 iconSize={21}
                 title='Backup your passphrase'/>

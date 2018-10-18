@@ -28,7 +28,7 @@ class ItemTitle extends React.Component {
         cb();
       },
       errorCallback: () => {},
-      androidError: this.setError,
+      androidError: error => this.props.setError(error),
     });
 
     if (Platform.OS === 'android') {
