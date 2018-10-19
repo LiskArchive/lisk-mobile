@@ -59,7 +59,7 @@ class Settings extends React.Component {
                       authenticate={true}
                       targetStateLabel={targetStateLabel}
                       icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
-                      iconSize={21}
+                      iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
                       title={settings.sensorType}/>
                   </View> : null
               }
@@ -76,7 +76,7 @@ class Settings extends React.Component {
                 hideDialog={this.hideDialog}
                 setError={this.setError}
                 icon='backup'
-                iconSize={21}
+                iconSize={20}
                 title='Backup your passphrase'/>
             </View> : null
         }
@@ -87,7 +87,7 @@ class Settings extends React.Component {
               navigation={navigation}
               target='About'
               icon='about'
-              iconSize={21}
+              iconSize={20}
               title='About Lisk'/>
           </View>
           <View style={styles.item}>
@@ -95,7 +95,7 @@ class Settings extends React.Component {
               navigation={navigation}
               icon='terms'
               target='Terms'
-              iconSize={21}
+              iconSize={20}
               title='Terms of use'/>
           </View>
           <View style={styles.item}>
