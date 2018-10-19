@@ -38,7 +38,7 @@ const Tabs = TabNavigator({
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
       headerLeft: placeHolderButton,
-      headerTitle: <Logo />,
+      title: <Logo />,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
     }),
@@ -47,7 +47,7 @@ const Tabs = TabNavigator({
     screen: Send,
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
-      headerTitle: <Logo />,
+      title: <Logo />,
       tabBarLabel: 'Send',
       tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
     }),
@@ -57,20 +57,11 @@ const Tabs = TabNavigator({
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
       headerLeft: placeHolderButton,
-      headerTitle: <Logo />,
+      title: <Logo />,
       tabBarLabel: 'Request',
       tabBarIcon: ({ focused }) => <MenuIcon name='request' focused={focused} />, //eslint-disable-line
     }),
   },
-  // Explore: {
-  //   screen: Explore,
-  //   navigationOptions: {
-  //     title: 'Explore',
-  //     tabBarLabel: 'Explore',
-  //     tabBarIcon: ({ focused }) => <MenuIcon icon='search'
-  // focused={focused} />, //eslint-disable-line
-  //   },
-  // },
 }, {
   tabBarPosition: 'bottom',
   tabBarOptions,
@@ -98,7 +89,7 @@ export default StackNavigator(
       screen: Tabs,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerRight: <SettingButton navigation={navigation} />,
         headerStyle: {
           backgroundColor: 'transparent',
@@ -114,7 +105,7 @@ export default StackNavigator(
       screen: Wallet,
       navigationOptions: () => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerTintColor: colors.white,
         headerStyle: {
           backgroundColor: colors.primary5,
@@ -126,7 +117,8 @@ export default StackNavigator(
       screen: Settings,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -149,7 +141,7 @@ export default StackNavigator(
       screen: About,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -172,7 +164,7 @@ export default StackNavigator(
       screen: Terms,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -196,7 +188,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -220,7 +212,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -244,7 +236,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -268,7 +260,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
