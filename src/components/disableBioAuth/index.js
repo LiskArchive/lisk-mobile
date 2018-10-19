@@ -36,7 +36,7 @@ class DisableBioAuth extends React.Component {
             <View style={styles.titleContainer}>
               <H1 style={styles.header}>Disabling {title}</H1>
               <P style={styles.subHeader}>
-                Passphrase will be the only option to access your account.
+                Your passphrase will be the only option to access your account.
               </P>
             </View>
             <View style={styles.passphraseContainer}>

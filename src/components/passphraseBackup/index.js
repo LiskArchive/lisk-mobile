@@ -19,7 +19,7 @@ class PassphraseBackup extends React.Component {
             <View style={styles.titleContainer}>
               <H1 style={styles.header}>Backup your passphrase</H1>
               <P style={styles.subHeader}>
-              Carefully write down or copy it to the clipboard.
+              Carefully write it down or copy to the clipboard.
               </P>
             </View>
             <View style={styles.passphraseContainer}>
