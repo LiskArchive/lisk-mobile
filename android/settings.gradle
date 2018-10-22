@@ -5,12 +5,6 @@ include ':react-native-fingerprint-scanner'
 project(':react-native-fingerprint-scanner').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fingerprint-scanner/android')
 include ':react-native-keychain'
 project(':react-native-keychain').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-keychain/android')
-include ':react-native-camera-kit'
-project(':react-native-camera-kit').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-camera-kit/android')
-include ':react-native-camera'
-project(':react-native-camera').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-camera/android')
-include ':@remobile/react-native-qrcode-local-image'
-project(':@remobile/react-native-qrcode-local-image').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-qrcode-local-image/android')
 include ':react-native-app-settings'
 project(':react-native-app-settings').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-app-settings/android')
 include ':react-native-qrcode-local-image'
