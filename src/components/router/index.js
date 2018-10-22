@@ -76,7 +76,11 @@ export default StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        headerTitle: <Logo color={colors.grayScale1} />,
+        title: <Logo color={colors.grayScale1} />,
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
       },
     },
     Login: {
@@ -142,6 +146,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         title: <Logo />,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -165,6 +170,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         title: <Logo />,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
