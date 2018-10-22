@@ -65,15 +65,21 @@ class Wallet extends React.Component {
   }
 
   initialAnimation = () => {
-    this.timeout = setTimeout(() => {
+    this.timeout1 = setTimeout(() => {
       if (this.scrollView) {
         this.scrollView.scrollTo(1);
       }
     }, 100);
+    this.timeout2 = setTimeout(() => {
+      if (this.scrollView) {
+        this.scrollView.scrollTo(-1);
+      }
+    }, 120);
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timeout);
+    clearTimeout(this.timeout1);
+    clearTimeout(this.timeout2);
   }
 
 

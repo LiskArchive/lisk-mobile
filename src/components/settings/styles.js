@@ -29,10 +29,11 @@ const styles = {
   },
   itemNameText: {
     color: colors.grayScale1,
+    lineHeight: 20,
   },
   itemIcon: {
     width: 26,
-    height: 24,
+    height: 20,
     paddingRight: 2,
   },
   itemArrow: {

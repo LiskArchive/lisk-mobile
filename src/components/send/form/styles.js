@@ -100,7 +100,6 @@ const styles = {
     fontSize: 14,
     color: colors.primary5,
     width: 39,
-    lineHeight: 30,
     paddingLeft: 5,
   },
   galleryButton: {
