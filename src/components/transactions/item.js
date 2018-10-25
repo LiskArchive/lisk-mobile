@@ -70,7 +70,10 @@ class Item extends React.Component {
         {
           typeof this.props.tx.timestamp !== 'number' ?
             <View style={styles.pendingIcon}>
-              <LottieView source={loadingAnimation} ref={(el) => { this.animation = el; }}/>
+              <LottieView
+                source={loadingAnimation}
+                ref={(el) => { this.animation = el; }}
+                style={{}}/>
             </View> : null
         }
       </View>

@@ -1,9 +1,10 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Alert } from 'react-native';
+import { View, Alert, Platform } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
-import { NavigationActions, StackActions } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
+import FingerprintOverlay from '../fingerprintOverlay';
 import styles from './styles';
 import {
   getPassphraseFromKeyChain,
@@ -44,7 +45,22 @@ class Login extends React.Component {
   state = {
     storedPassphrase: null,
     view: 'splash',
-    sensorType: null,
+    androidDialog: {
+      error: null,
+      show: false,
+    },
+  }
+
+  showDialog = () => {
+    const { androidDialog } = this.state;
+    androidDialog.show = true;
+    this.setState({ androidDialog });
+  }
+
+  hideDialog = (cb) => {
+    const { androidDialog } = this.state;
+    androidDialog.show = false;
+    this.setState({ androidDialog }, cb);
   }
 
   changeHandler = (data) => {
@@ -72,13 +88,11 @@ class Login extends React.Component {
       if (password && sensorType) {
         this.changeHandler({
           view: 'biometricAuth',
-          sensorType,
           storedPassphrase: password,
         });
       } else {
         this.changeHandler({
           view: 'form',
-          sensorType: null,
         });
       }
     }, delay);
@@ -101,18 +115,28 @@ class Login extends React.Component {
         {
           text: 'OK',
           onPress: () => {
-            bioMetricAuthentication(
-              () => {
-                storePassphraseInKeyChain(passphrase.value);
-                this.props.settingsUpdated({
-                  hasStoredPassphrase: true,
+            bioMetricAuthentication({
+              description: 'Do you want to use Biometric Authentication?',
+              successCallback: () => {
+                this.hideDialog(() => {
+                  storePassphraseInKeyChain(passphrase.value);
+                  this.props.settingsUpdated({
+                    hasStoredPassphrase: true,
+                  });
+                  cb(passphrase.value);
                 });
-                cb(passphrase.value);
               },
-              () => {
-                cb(passphrase.value);
+              errorCallback: () => {},
+              androidError: (error) => {
+                const { androidDialog } = this.state;
+                androidDialog.error = error;
+                this.setState({ androidDialog });
               },
-            );
+            });
+
+            if (Platform.OS === 'android') {
+              this.showDialog();
+            }
           },
         },
       ],
@@ -139,9 +163,9 @@ class Login extends React.Component {
   onFormSubmission = (passphrase) => {
     this.setState({
       connectionError: false,
+      passphrase,
     });
-
-    if (!this.props.settings.bioAuthRecommended) {
+    if (this.props.settings.sensorType && !this.props.settings.bioAuthRecommended) {
       this.promptBioAuth(passphrase, this.login);
     } else {
       this.login(passphrase.value);
@@ -164,9 +188,11 @@ class Login extends React.Component {
    * @todo sign-out should happen in the setting page to prevent issues here
    */
   componentDidUpdate() {
-    if (this.props.accounts.active && this.props.navigation.isFocused()) {
+    if (this.props.accounts.active &&
+      this.props.navigation &&
+      this.props.navigation.isFocused()) {
       this.props.navigation
-        .dispatch(StackActions.reset({
+        .dispatch(NavigationActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'Main' })],
         }));
@@ -178,8 +204,10 @@ class Login extends React.Component {
   }
 
   render() {
-    const { view, storedPassphrase, sensorType } = this.state;
+    const { view, storedPassphrase, androidDialog } = this.state;
+    const { sensorType } = this.props.settings;
     const signOut = this.props.navigation.getParam('signOut');
+
     return (<View style={styles.wrapper}>
       <Splash animate={!signOut} />
       {
@@ -199,6 +227,10 @@ class Login extends React.Component {
             toggleView={this.changeHandler}
             login={this.onFormSubmission} /> : null
       }
+      <FingerprintOverlay
+        onModalClosed={() => this.login(this.state.passphrase.value)}
+        error={androidDialog.error}
+        show={androidDialog.show} />
     </View>);
   }
 }

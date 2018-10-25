@@ -50,10 +50,13 @@ const TxDetail = ({ navigation }) => {
           </FormattedNumber> Ⱡ
         </H1>
       }
-      <FormattedDate format='MMM D, YYYY LTS' type={P} style={styles.date}>{ tx.timestamp }</FormattedDate>
+      {
+        tx.timestamp ?
+          <FormattedDate format='MMM D, YYYY LTS' type={P} style={styles.date}>{ tx.timestamp }</FormattedDate> : null
+      }
     </View>
     <View style={styles.detailRow}>
-      <Icon name='send' size={20} color='#74869B' style={styles.rowIcon} />
+      <Icon name='send' size={22} color='#74869B' style={styles.rowIcon} />
       <View style={styles.rowContent}>
         <P style={styles.label}>
         { tx.type !== 0 || (tx.recipientId === tx.senderId) ?
@@ -70,7 +73,7 @@ const TxDetail = ({ navigation }) => {
     { tx.type !== 0 || (tx.recipientId === tx.senderId) ?
       null :
       <View style={styles.detailRow}>
-        <Icon name='recipient' size={20} color='#74869B' style={styles.rowIcon} />
+        <Icon name='recipient' size={22} color='#74869B' style={styles.rowIcon} />
         <View style={styles.rowContent}>
           <P style={styles.label}>Recipient</P>
           <View style={styles.addressContainer}>
@@ -81,7 +84,7 @@ const TxDetail = ({ navigation }) => {
       </View>
     }
     <View style={styles.detailRow}>
-      <Icon name='tx-fee' size={20} color='#74869B' style={styles.rowIcon} />
+      <Icon name='tx-fee' size={22} color='#74869B' style={styles.rowIcon} />
       <View style={styles.rowContent}>
         <P style={styles.label}>Transaction Fee</P>
         <B style={styles.value}>
@@ -92,7 +95,7 @@ const TxDetail = ({ navigation }) => {
     {
       (tx.asset && tx.asset.data) ?
       <View style={styles.detailRow}>
-        <Icon name='terms' size={20} color='#74869B' style={styles.rowIcon} />
+        <Icon name='reference' size={22} color='#74869B' style={styles.rowIcon} />
         <View style={styles.rowContent}>
           <P style={styles.label}>Reference</P>
           <B style={styles.value}>{ tx.asset.data }</B>
@@ -100,14 +103,14 @@ const TxDetail = ({ navigation }) => {
       </View> : null
     }
     <View style={styles.detailRow}>
-      <Icon name='confirmations' size={20} color='#74869B' style={styles.rowIcon} />
+      <Icon name='confirmation' size={22} color='#74869B' style={styles.rowIcon} />
       <View style={styles.rowContent}>
         <P style={styles.label}>Confirmations</P>
         <B style={styles.value}>{tx.confirmations || 'Not confirmed yet.'}</B>
       </View>
     </View>
     <View style={styles.detailRow}>
-      <Icon name='tx-id' size={20} color='#74869B' style={styles.rowIcon} />
+      <Icon name='tx-id' size={22} color='#74869B' style={styles.rowIcon} />
       <View style={styles.rowContent}>
         <P style={styles.label}>Transaction ID</P>
         <View style={styles.addressContainer}>

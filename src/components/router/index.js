@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import Login from '../login';
 import TxDetail from '../txDetail';
 import Send from '../send';
@@ -32,13 +32,13 @@ const SettingButton = ({ navigation }) =>
 
 const placeHolderButton = <IconButton color='transparent' icon='back'/>;
 // eslint-disable-next-line new-cap
-const Tabs = createBottomTabNavigator({
+const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
       headerLeft: placeHolderButton,
-      headerTitle: <Logo />,
+      title: <Logo />,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
     }),
@@ -47,7 +47,7 @@ const Tabs = createBottomTabNavigator({
     screen: Send,
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
-      headerTitle: <Logo />,
+      title: <Logo />,
       tabBarLabel: 'Send',
       tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
     }),
@@ -57,23 +57,16 @@ const Tabs = createBottomTabNavigator({
     navigationOptions: ({ navigation }) => ({
       headerRight: <SettingButton navigation={navigation} />,
       headerLeft: placeHolderButton,
-      headerTitle: <Logo />,
+      title: <Logo />,
       tabBarLabel: 'Request',
       tabBarIcon: ({ focused }) => <MenuIcon name='request' focused={focused} />, //eslint-disable-line
     }),
   },
-  // Explore: {
-  //   screen: Explore,
-  //   navigationOptions: {
-  //     title: 'Explore',
-  //     tabBarLabel: 'Explore',
-  //     tabBarIcon: ({ focused }) => <MenuIcon icon='search'
-  // focused={focused} />, //eslint-disable-line
-  //   },
-  // },
 }, {
+  tabBarPosition: 'bottom',
   tabBarOptions,
   initialRouteName: 'OwnWallet',
+  headerMode: 'screen',
 });
 
 
@@ -83,7 +76,11 @@ export default StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        headerTitle: <Logo color={colors.grayScale1} />,
+        title: <Logo color={colors.grayScale1} />,
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
       },
     },
     Login: {
@@ -96,7 +93,7 @@ export default StackNavigator(
       screen: Tabs,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerRight: <SettingButton navigation={navigation} />,
         headerStyle: {
           backgroundColor: 'transparent',
@@ -112,7 +109,7 @@ export default StackNavigator(
       screen: Wallet,
       navigationOptions: () => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerTintColor: colors.white,
         headerStyle: {
           backgroundColor: colors.primary5,
@@ -124,7 +121,8 @@ export default StackNavigator(
       screen: Settings,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -147,7 +145,8 @@ export default StackNavigator(
       screen: About,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -170,7 +169,8 @@ export default StackNavigator(
       screen: Terms,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -194,7 +194,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -218,7 +218,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -242,7 +242,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -266,7 +266,7 @@ export default StackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
-        headerTitle: <Logo />,
+        title: <Logo />,
         headerLeft: <IconButton
           icon='back'
           title=''

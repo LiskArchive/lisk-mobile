@@ -173,7 +173,7 @@ class Form extends React.Component {
                 style={styles.scanButton}
                 title='Scan'
                 icon='scanner'
-                iconSize={16}
+                iconSize={18}
                 color={colors.primary5} />
               <Avatar
                 style={[styles.avatar, address.validity === 0 ? styles.visible : null]}

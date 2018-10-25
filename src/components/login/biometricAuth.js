@@ -56,7 +56,7 @@ class BiometricAuth extends React.Component {
         <Animated.Text style={[styles.title, { opacity }]}>
           { this.props.sensorType === 'Face ID' ?
             'Look at the front camera to authenticate.' :
-            'Put your finger over the touch sensor to authenticate.'
+            'Place your finger over the touch sensor to authenticate.'
           }
         </Animated.Text>
       </View>
