@@ -121,8 +121,8 @@ android {
         applicationId "io.lisk.mobile"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 5
-        versionName "0.3.0"
+        versionCode 8
+        versionName "0.4.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -191,6 +191,7 @@ dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile project(':react-native-qrcode-local-image')
     compile "com.android.support:appcompat-v7:23.0.1"
+    compile "com.android.support:exifinterface:28.0.0"
     compile "com.facebook.react:react-native:+"  // From node_modules
 }
 
