@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:gravity="center"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/blue">
+  <ImageView
+    android:id="@+id/myimg"
+    android:layout_width="153dip"
+    android:layout_height="60dip"
+    android:background="@mipmap/lunch_screen_icon" />
+</LinearLayout>

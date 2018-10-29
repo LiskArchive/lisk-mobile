@@ -23,7 +23,7 @@ class Splash extends React.Component {
       delay: animate ? 50 : 0,
     }).start();
     Animated.timing(this.state.top, {
-      toValue: deviceHeight() < 640 ? 60 : 130,
+      toValue: deviceHeight() <= 640 ? 60 : 130,
       duration: animate ? 600 : 0,
       delay: animate ? 50 : 0,
       easing: easing.easeOutQuart,
