@@ -166,33 +166,33 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-blur-overlay')
-    compile project(':react-native-fingerprint-scanner')
-    compile project(':react-native-keychain')
-    compile project(':react-native-camera')
-    compile project(':react-native-app-settings')
-    compile (project(':react-native-camera')) {
+    implementation project(':react-native-blur-overlay')
+    implementation project(':react-native-fingerprint-scanner')
+    implementation project(':react-native-keychain')
+    implementation project(':react-native-camera')
+    implementation project(':react-native-app-settings')
+    implementation (project(':react-native-camera')) {
     exclude group: "com.google.android.gms"
         compile 'com.android.support:exifinterface:27.+'
         compile ('com.google.android.gms:play-services-vision:12.0.1') {
             force = true
         }
     }
-    compile project(':lottie-react-native')
-    compile project(':react-native-background-timer')
-    compile project(':react-native-svg')
-    compile project(':react-native-splash-screen')
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-udp')
-    compile project(':react-native-tcp')
-    compile project(':react-native-randombytes')
-    compile project(':react-native-os')
-    compile project(':react-native-linear-gradient')
-    compile fileTree(dir: "libs", include: ["*.jar"])
-    compile project(':react-native-qrcode-local-image')
-    compile "com.android.support:appcompat-v7:23.0.1"
-    compile "com.android.support:exifinterface:28.0.0"
-    compile "com.facebook.react:react-native:+"  // From node_modules
+    implementation project(':lottie-react-native')
+    implementation project(':react-native-background-timer')
+    implementation project(':react-native-svg')
+    implementation project(':react-native-splash-screen')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-udp')
+    implementation project(':react-native-tcp')
+    implementation project(':react-native-randombytes')
+    implementation project(':react-native-os')
+    implementation project(':react-native-linear-gradient')
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':react-native-qrcode-local-image')
+    implementation "com.android.support:appcompat-v7:23.0.1"
+    implementation "com.android.support:exifinterface:28.0.0"
+    implementation "com.facebook.react:react-native:+"  // From node_modules
 }
 
 // Run this once to be able to run the application with BUCK
