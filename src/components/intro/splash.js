@@ -16,25 +16,27 @@ class Splash extends React.Component {
   }
 
   componentDidMount() {
-    console.log('in splash');
-    // If animate is not true, set all the durations to zero (no-animation)
-    Animated.timing(this.state.bgOpacity, {
+    const {
+      top, bgOpacity, iconOpacity, txtOpacity,
+    } = this.state;
+
+    Animated.timing(bgOpacity, {
       toValue: 0,
       duration: 900,
       delay: 50,
     }).start();
-    Animated.timing(this.state.txtOpacity, {
+    Animated.timing(txtOpacity, {
       toValue: 1,
       duration: 900,
       delay: 650,
     }).start();
-    Animated.timing(this.state.top, {
+    Animated.timing(top, {
       toValue: (deviceHeight() / 2) - 50,
       duration: 600,
       delay: 50,
       easing: easing.easeOutQuart,
     }).start();
-    Animated.timing(this.state.iconOpacity, {
+    Animated.timing(iconOpacity, {
       toValue: 1,
       duration: 300,
       delay: 650,

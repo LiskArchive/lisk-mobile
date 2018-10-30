@@ -4,9 +4,7 @@ import { deviceHeight } from '../../utilities/device';
 
 const styles = {
   wrapper: {
-    backgroundColor: colors.primary9,
-  },
-  container: {
+    backgroundColor: colors.white,
     height: '100%',
   },
   splashContainer: {
@@ -26,7 +24,6 @@ const styles = {
     zIndex: 0,
     width: '100%',
     height: '100%',
-    opacity: 0.3,
   },
   splashTopButtons: {
     position: 'absolute',
@@ -67,6 +64,135 @@ const styles = {
   splashDescriptionP: {
     color: colors.grayScale2,
     textAlign: 'center',
+  },
+  headingContainer: {
+    backgroundColor: colors.white,
+    position: 'absolute',
+    left: 0,
+    top: 20,
+    zIndex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  headingTopBar: {
+    height: 50,
+    width: '100%',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingTop: 20,
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
+  headingSkipButton: {
+    lineHeight: 30,
+    height: 30,
+    width: 60,
+    borderWidth: 0,
+    textAlign: 'right',
+  },
+  descriptionsWrapper: {
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+    flex: 1,
+    justifyContent: 'flex-start',
+    zIndex: 3,
+  },
+  headingDescription: {
+    padding: 0,
+  },
+  headingDescriptionCntr: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+  headingDescriptionItem: {
+    padding: 0,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+  itemWrapper: {
+    height: 175,
+    textAlign: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  centralized: {
+    paddingBottom: 8,
+    paddingTop: 8,
+    width: '100%',
+    textAlign: 'center',
+  },
+  headingPagination: {
+    top: 165,
+    position: 'absolute',
+    height: 13,
+  },
+  illustrations: {
+    width: 320,
+    height: 523,
+    position: 'absolute',
+    top: 260,
+    left: '50%',
+    marginLeft: -160,
+  },
+  frame: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 0,
+  },
+  screens: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1,
+  },
+  deviceFrame: {
+    width: '100%',
+    height: '100%',
+  },
+  activityIllustration: {
+    width: 367,
+    height: 429,
+    top: 67,
+    marginLeft: -23,
+  },
+  transferIllustration: {
+    width: 282,
+    height: 321,
+    top: 120,
+    marginLeft: 19,
+  },
+  bioAuth: {
+    height: deviceHeight() - 300,
+  },
+  faceIdIllustration: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginLeft: -170,
+    marginTop: -190,
+    width: 250,
+    height: 250,
+  },
+  touchIdIllustration: {
+    position: 'absolute',
+    bottom: '50%',
+    right: '50%',
+    marginRight: -170,
+    marginBottom: -150,
+    width: 250,
+    height: 250,
+  },
+  startButton: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 };
 
