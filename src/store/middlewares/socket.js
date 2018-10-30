@@ -1,3 +1,4 @@
+import BackgroundTimer from 'react-native-background-timer';
 import actionTypes from '../../constants/actions';
 import { blockUpdated } from '../../actions/accounts';
 import { getAccount } from '../../utilities/api/account';
@@ -8,10 +9,9 @@ import { fromRawLsk } from '../../utilities/conversions';
  * Lisk core problem. we will enable socket connection
  * when Lisk core fix the issue
  */
-let interval;
 
 const closeConnection = () => {
-  clearInterval(interval);
+  BackgroundTimer.stopBackgroundTimer();
 };
 
 const createNotification = (changes, balance) => {
@@ -24,17 +24,21 @@ const createNotification = (changes, balance) => {
   sendNotifications(message);
 };
 
-const socketSetup = (store) => {
+const checkBalance = (store) => {
   const { activePeer } = store.getState().peers;
-  interval = setInterval(() => {
-    const { address, balance } = store.getState().accounts.active;
-    getAccount(activePeer, address).then((res) => {
-      if (res.balance !== balance) {
-        const changes = res.balance - balance;
-        createNotification(changes, res.balance);
-        store.dispatch(blockUpdated());
-      }
-    });
+  const { address, balance } = store.getState().accounts.active;
+  getAccount(activePeer, address).then((res) => {
+    if (res.balance !== balance) {
+      const changes = res.balance - balance;
+      createNotification(changes, res.balance);
+      store.dispatch(blockUpdated());
+    }
+  });
+};
+
+const socketSetup = (store) => {
+  BackgroundTimer.runBackgroundTimer(() => {
+    checkBalance(store);
   }, 30000);
 };
 
