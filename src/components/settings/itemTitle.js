@@ -48,7 +48,7 @@ class ItemTitle extends React.Component {
       style: styles.itemTitle,
       underlayColor: 'transparent',
     };
-    if (typeof target === 'string') {
+    if (target) {
       props.onPress = () => {
         if (authenticate) {
           this.authenticate(() => {
@@ -72,15 +72,11 @@ class ItemTitle extends React.Component {
         <View style={styles.itemName}><P style={styles.itemNameText}>{title}</P></View>
         <View style={styles.itemArrow}>
           {
-            typeof target === 'string' ?
+            target ?
             <Fragment>
-              {
-                targetStateLabel ?
-                  <P style={{ color: targetStateLabel[1] || colors.grayScale1 }}>
-                    {targetStateLabel[0]}</P> : null
-              }
+              { targetStateLabel }
               <Icon name='forward' size={21} color={colors.black} />
-            </Fragment> : null
+            </Fragment> : <Fragment>{ targetStateLabel }</Fragment>
           }
         </View>
       </Fragment>

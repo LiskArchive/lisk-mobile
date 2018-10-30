@@ -1,7 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { H1, H4 } from '../toolBox/typography';
+import Switch from 'react-native-switch-pro';
+import {
+  settingsUpdated as settingsUpdatedAction,
+} from '../../actions/settings';
+import { H1, H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
 import LogoutButton from '../logoutButton';
@@ -10,7 +14,9 @@ import { colors } from '../../constants/styleGuide';
 
 @connect(state => ({
   settings: state.settings,
-}), {})
+}), {
+  settingsUpdated: settingsUpdatedAction,
+})
 class Settings extends React.Component {
   state = {
     error: null,
@@ -39,6 +45,19 @@ class Settings extends React.Component {
       targetStateLabel[1] = colors.success1;
       target = 'DisableBioAuth';
     }
+    const sensorStatus = <P style={{ color: targetStateLabel[1] || colors.grayScale1 }}>
+      {targetStateLabel[0]}
+    </P>;
+    const switchButton = <Switch
+      value={settings.notification}
+      height={26}
+      width={43}
+      onSyncPress={() => {
+        this.props.settingsUpdated({ notification: !settings.notification });
+      }}
+      backgroundActive={colors.primary5}
+      backgroundInactive={colors.grayScale3}
+    />;
 
     return (
       <View style={styles.container}>
@@ -57,7 +76,7 @@ class Settings extends React.Component {
                       setError={this.setError}
                       target={target}
                       authenticate={true}
-                      targetStateLabel={targetStateLabel}
+                      targetStateLabel={sensorStatus}
                       icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
                       iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
                       title={settings.sensorType}/>
@@ -81,7 +100,7 @@ class Settings extends React.Component {
             </View> : null
         }
         <View style={styles.group}>
-          <H4>About</H4>
+          <H4>General</H4>
           <View style={styles.item}>
             <ItemTitle
               navigation={navigation}
@@ -97,6 +116,14 @@ class Settings extends React.Component {
               target='Terms'
               iconSize={20}
               title='Terms of use'/>
+          </View>
+          <View style={styles.item}>
+            <ItemTitle
+              navigation={navigation}
+              icon='notification'
+              iconSize={20}
+              targetStateLabel={switchButton}
+              title='Notification'/>
           </View>
           <View style={styles.item}>
             <LogoutButton navigation={navigation} />
