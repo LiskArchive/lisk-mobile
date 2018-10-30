@@ -14,6 +14,7 @@ import Terms from '../terms';
 import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
+import Intro from '../intro';
 import styles from './styles';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
@@ -285,9 +286,15 @@ export default StackNavigator(
         },
       }),
     },
+    Intro: {
+      screen: Intro,
+      navigationOptions: {
+        header: null,
+      },
+    },
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Intro',
     headerLayoutPreset: 'center',
   },
 );
