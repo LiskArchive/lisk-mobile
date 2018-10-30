@@ -15,7 +15,6 @@ const validateAccounts = (data) => {
 // eslint-disable-next-line
 const validateSettings = (data) => {
   const parsedData = JSON.parse(data);
-
   if (!parsedData || typeof parsedData !== 'object') return { validated: true };
   parsedData.validated = true;
   return parsedData;
