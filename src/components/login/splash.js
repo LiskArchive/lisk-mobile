@@ -20,18 +20,18 @@ class Splash extends React.Component {
     Animated.timing(this.state.bgOpacity, {
       toValue: 0,
       duration: animate ? 900 : 0,
-      delay: animate ? 50 : 0,
+      delay: animate ? 450 : 0,
     }).start();
     Animated.timing(this.state.top, {
       toValue: deviceHeight() <= 640 ? 60 : 130,
       duration: animate ? 600 : 0,
-      delay: animate ? 50 : 0,
+      delay: animate ? 450 : 0,
       easing: easing.easeOutQuart,
     }).start();
     Animated.timing(this.state.iconOpacity, {
       toValue: 1,
       duration: animate ? 300 : 0,
-      delay: animate ? 650 : 0,
+      delay: animate ? 1350 : 0,
     }).start();
   }
 

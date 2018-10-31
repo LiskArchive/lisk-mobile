@@ -18,7 +18,6 @@ import {
 } from '../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
-  settingsRetrieved as settingsRetrievedAction,
 } from '../../actions/settings';
 import Splash from './splash';
 import Form from './form';
@@ -28,7 +27,7 @@ import BiometricAuth from './biometricAuth';
 console.disableYellowBox = true; // eslint-disable-line
 
 /**
- * The container component containing login and create account functionality
+ * The settings state is passed through the landing component
  */
 @connect(state => ({
   peers: state.peers,
@@ -39,7 +38,6 @@ console.disableYellowBox = true; // eslint-disable-line
   peerSet: activePeerSetAction,
   accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
-  settingsRetrieved: settingsRetrievedAction,
 })
 class Login extends React.Component {
   state = {
@@ -76,7 +74,7 @@ class Login extends React.Component {
       sensorType = null;
     }
     const signOut = this.props.navigation.getParam('signOut');
-    const delay = this.state.view === 'splash' && !signOut ? 700 : 0;
+    const delay = this.state.view === 'splash' && !signOut ? 1100 : 0;
 
     // Update the store
     this.props.settingsUpdated({
@@ -174,7 +172,6 @@ class Login extends React.Component {
 
   componentWillMount() {
     this.props.peerSet();
-    this.props.settingsRetrieved();
   }
 
   componentDidMount() {
