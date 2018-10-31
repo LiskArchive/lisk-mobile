@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import Login from '../login';
 import TxDetail from '../txDetail';
 import Send from '../send';
@@ -15,6 +15,7 @@ import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
+import Landing from '../landing';
 import styles from './styles';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
@@ -292,9 +293,28 @@ export default StackNavigator(
         header: null,
       },
     },
+    Landing: {
+      screen: Landing,
+      navigationOptions: {
+        header: null,
+      },
+    },
   },
   {
-    initialRouteName: 'Intro',
+    initialRouteName: 'Landing',
     headerLayoutPreset: 'center',
+    transitionConfig: (props) => {
+      const { scene } = props;
+      return (scene.routeName === 'Landing' || scene.routeName === 'Login' || scene.routeName === 'Intro') ?
+        {
+          transitionSpec: {
+            duration: 0,
+          },
+        } : {
+          transitionSpec: {
+            duration: 400,
+          },
+        };
+    },
   },
 );
