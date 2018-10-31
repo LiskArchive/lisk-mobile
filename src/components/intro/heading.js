@@ -16,12 +16,44 @@ class Heading extends React.Component {
   state = {
     bgOpacity: new Animated.Value(0),
     logoOpacity: new Animated.Value(0),
+    frameOpacity: new Animated.Value(1),
+    activityOpacity: new Animated.Value(1),
+    transactionsOpacity: new Animated.Value(0),
+    bioAuthOpacity: new Animated.Value(0),
     index: 0,
   }
 
   onIndexChanged = (index) => {
     this.setState({ index });
+    this.animate(index);
   }
+
+  animate = (index) => {
+    const {
+      frameOpacity, activityOpacity, transactionsOpacity, bioAuthOpacity,
+    } = this.state;
+    const values = [
+      [1, 2, 0, 0],
+      [1, 0, 1, 0],
+      [0, 0, 0, 1],
+    ];
+    Animated.timing(frameOpacity, {
+      toValue: values[index][0],
+      duration: 400,
+    }).start();
+    Animated.timing(activityOpacity, {
+      toValue: values[index][1],
+      duration: 400,
+    }).start();
+    Animated.timing(transactionsOpacity, {
+      toValue: values[index][2],
+      duration: 400,
+    }).start();
+    Animated.timing(bioAuthOpacity, {
+      toValue: values[index][3],
+      duration: 400,
+    }).start();
+  };
 
   componentDidMount() {
     const {
@@ -31,18 +63,19 @@ class Heading extends React.Component {
     Animated.timing(bgOpacity, {
       toValue: 1,
       duration: 300,
-      delay: 1350,
+      delay: 950,
     }).start();
     Animated.timing(logoOpacity, {
       toValue: 1,
       duration: 400,
-      delay: 1350,
+      delay: 950,
     }).start();
   }
 
   render() {
     const {
-      bgOpacity, logoOpacity, index,
+      bgOpacity, logoOpacity, index, frameOpacity,
+      activityOpacity, transactionsOpacity, bioAuthOpacity,
     } = this.state;
 
     return (<Animated.View style={[styles.headingContainer, { opacity: bgOpacity }]}>
@@ -87,17 +120,17 @@ class Heading extends React.Component {
         </Swiper>
       </View>
 
-      <View style={styles.illustrations}>
-        <Animated.View style={[styles.frame, { opacity: index === 2 ? 0 : 1 }]}>
+      <View style={[styles.illustrations, { zIndex: index === 2 ? 10 : 0 }]}>
+        <Animated.View style={[styles.frame, { opacity: frameOpacity }]}>
           <Image source={frame} style={styles.deviceFrame} />
         </Animated.View>
-        <Animated.View style={[styles.screens, { opacity: index === 0 ? 1 : 0 }]}>
+        <Animated.View style={[styles.screens, { opacity: activityOpacity }]}>
           <Image source={activityScreen} style={styles.activityIllustration} />
         </Animated.View>
-        <Animated.View style={[styles.screens, { opacity: index === 1 ? 1 : 0 }]}>
+        <Animated.View style={[styles.screens, { opacity: transactionsOpacity }]}>
           <Image source={transferScreen} style={styles.transferIllustration} />
         </Animated.View>
-        <Animated.View style={[styles.screens, styles.bioAuth, { opacity: index === 2 ? 1 : 0 }]}>
+        <Animated.View style={[styles.screens, styles.bioAuth, { opacity: bioAuthOpacity }]}>
           <Image source={faceIdIllustration} style={styles.faceIdIllustration} />
           <Image source={touchIdIllustration} style={styles.touchIdIllustration} />
           <SecondaryButton
