@@ -67,7 +67,7 @@ class Avatar extends React.Component {
             }]}>
           <Gradients scheme={gradientsSchemesUrlsHashed}/>
           {shapes.map((shape, i) => (
-            <shape.component {...shape.props} key={i}/>
+            <shape.component {...shape.props} key={`${i}-${shape.component.displayName}-${Math.random()}`}/>
           ))}
         </Svg>
       </Wrapper>

@@ -6,6 +6,7 @@ import { IconButton } from '../../toolBox/button';
 import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
 import { P, H1, H2, Small } from '../../toolBox/typography';
+import Icon from '../../toolBox/icon';
 import styles from './styles';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
@@ -175,10 +176,18 @@ class Form extends React.Component {
                 icon='scanner'
                 iconSize={18}
                 color={colors.primary5} />
-              <Avatar
-                style={[styles.avatar, address.validity === 0 ? styles.visible : null]}
-                address={address.validity === 0 ? address.value : '000L'}
-                size={34} />
+              {
+                address.validity === 0 ?
+                  <Avatar
+                    style={[styles.avatar, address.validity === 0 ? styles.visible : null]}
+                    address={address.value}
+                    size={34} /> :
+                  <Icon
+                    style={[styles.avatar, address.validity === 0 ? styles.visible : null]}
+                    name='avatar-placeholder'
+                    size={34}
+                    color={colors.grayScale2} />
+              }
               <Input
                 label='Address'
                 autoCorrect={false}
