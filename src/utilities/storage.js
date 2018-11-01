@@ -12,23 +12,13 @@ const validateAccounts = (data) => {
   return blankAccounts;
 };
 
+// eslint-disable-next-line
 const validateSettings = (data) => {
   const parsedData = JSON.parse(data);
-  const test = {
-    hasStoredPassphrase: flag => typeof flag === 'boolean',
-    bioAuthRecommended: flag => typeof flag === 'boolean',
-    sensorType: str => /Face\sID|Fingerprint|Touch\sID/.test(str) || str === null,
-  };
 
-  if (!parsedData || typeof parsedData !== 'object') return {};
-  const validatedSettings = Object.keys(parsedData)
-    .reduce((acc, key) => {
-      if (test[key](parsedData[key])) {
-        acc[key] = parsedData[key];
-      }
-      return acc;
-    }, {});
-  return validatedSettings;
+  if (!parsedData || typeof parsedData !== 'object') return { validated: true };
+  parsedData.validated = true;
+  return parsedData;
 };
 
 async function persistData(key, data) {
