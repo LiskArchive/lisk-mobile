@@ -26,11 +26,14 @@ const createNotification = (changes, balance) => {
 
 const checkBalance = (store) => {
   const { activePeer } = store.getState().peers;
+  const { settings } = store.getState();
   const { address, balance } = store.getState().accounts.active;
   getAccount(activePeer, address).then((res) => {
     if (res.balance !== balance) {
       const changes = res.balance - balance;
-      createNotification(changes, res.balance);
+      if (settings.notificationAccess && settings.notification) {
+        createNotification(changes, res.balance);
+      }
       store.dispatch(blockUpdated());
     }
   });
