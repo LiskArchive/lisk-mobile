@@ -52,22 +52,39 @@ class Form extends React.Component {
    * @param {String} name - the key to set on state
    * @param {Any} value the Value corresponding the given key
    */
-  changeHandler = (name, value) => {
+  setReference = (value) => {
     this.setState({
-      [name]: {
+      reference: {
         value,
-        validity: this.validator[name](value),
+        validity: this.validator.reference(value),
       },
     });
   }
 
   setAddress = (value) => {
-    this.changeHandler('address', value);
+    clearTimeout(this.avatarPreviewTimeout);
+    this.setState({
+      address: {
+        value,
+        validity: this.validator.address(value),
+      },
+      avatarPreview: false,
+    });
+    this.avatarPreviewTimeout = setTimeout(() => {
+      this.setState({
+        avatarPreview: true,
+      });
+    }, 300);
   }
 
   setAmount = (value) => {
     const normalizedValue = value.replace(',', '.');
-    this.changeHandler('amount', normalizedValue);
+    this.setState({
+      amount: {
+        value,
+        validity: this.validator.amount(normalizedValue),
+      },
+    });
   }
 
   componentDidMount() {
@@ -132,7 +149,9 @@ class Form extends React.Component {
   }
 
   render() {
-    const { address, amount, reference } = this.state;
+    const {
+      address, amount, reference, avatarPreview,
+    } = this.state;
     return (
       <View style={styles.wrapper}>
         <Scanner
@@ -177,16 +196,16 @@ class Form extends React.Component {
                 iconSize={18}
                 color={colors.primary5} />
               {
-                address.validity === 0 ?
+                address.validity === 0 && avatarPreview ?
                   <Avatar
-                    style={[styles.avatar, address.validity === 0 ? styles.visible : null]}
+                    style={styles.avatar}
                     address={address.value}
                     size={34} /> :
                   <Icon
-                    style={[styles.avatar, address.validity === 0 ? styles.visible : null]}
+                    style={styles.avatar}
                     name='avatar-placeholder'
                     size={34}
-                    color={colors.grayScale2} />
+                    color={colors.grayScale4} />
               }
               <Input
                 label='Address'
@@ -229,7 +248,7 @@ class Form extends React.Component {
               reference={(input) => { this.references[2] = input; }}
               styles={{ errorMessage: styles.errorMessage, input: styles.input }}
               multiline={true}
-              onChange={value => this.changeHandler('reference', value)}
+              onChange={this.setReference}
               value={this.state.reference.value}
               error={
                 this.state.reference.validity === 1 ?
