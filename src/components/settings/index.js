@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import Switch from 'react-native-switch-pro';
 import {
@@ -129,7 +129,10 @@ class Settings extends React.Component {
             <LogoutButton navigation={navigation} />
           </View>
         </View>
-        <FingerprintOverlay error={this.state.error} show={this.state.show} />
+        {
+          Platform.OS === 'android' ?
+          <FingerprintOverlay error={this.state.error} show={this.state.show} /> : null
+        }
       </View>);
   }
 }
