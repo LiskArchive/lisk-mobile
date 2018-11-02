@@ -1,6 +1,8 @@
 
 import PushNotification from 'react-native-push-notification';
 import { PushNotificationIOS, Platform } from 'react-native';
+import { fromRawLsk } from './conversions';
+import { persistData } from './storage';
 
 export const initPushNotifications = () => {
   PushNotification.configure({
@@ -18,6 +20,17 @@ export const sendNotifications = (message) => {
     message,
     date: new Date(Date.now() + (2 * 1000)),
   });
+};
+
+export const createNotification = (changes, balance) => {
+  persistData('balance', balance);
+  let message;
+  if ((changes * 1) > 0) {
+    message = `you have received ${fromRawLsk(changes)} LSK. your new balance is ${fromRawLsk(balance)} LSk`;
+  } else {
+    message = `you have sent ${fromRawLsk(Math.abs(changes))} LSK. your new balance is ${fromRawLsk(balance)} LSk`;
+  }
+  sendNotifications(message);
 };
 
 export const requestNotificationPermissions = () => new Promise((resolve, reject) => {
