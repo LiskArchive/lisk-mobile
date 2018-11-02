@@ -12,12 +12,12 @@ import styles from './styles';
 const onClick = (navigation, accountLoggedOut) => {
   // clean active account
   accountLoggedOut();
-  // navigate to the login page
+  // navigate to the signIn page
   navigation
     .dispatch(NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({
-        routeName: 'Login',
+        routeName: 'SignIn',
         params: {
           signOut: true,
         },

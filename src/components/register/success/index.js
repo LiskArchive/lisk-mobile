@@ -32,7 +32,7 @@ class Success extends React.Component {
         <View>
           <SecondaryButton
             style={styles.button}
-            onClick={() => this.props.navigation.navigate('Login')}
+            onClick={() => this.props.navigation.navigate('SignIn')}
             title='Sign in now' />
         </View>
       </View>);

@@ -100,7 +100,7 @@ export const accountEdited = (address, updatedData) => ({
  * @todo Implement delegate Api call
  *
  * @param {Object} data
- * @param {String} data.passphrase - The valid passphrase to login using
+ * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
 export const accountLoggedIn = ({ passphrase }, cb) =>

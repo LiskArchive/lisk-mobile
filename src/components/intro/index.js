@@ -14,7 +14,7 @@ import styles from './styles';
 })
 class Intro extends React.Component {
   skip() {
-    this.props.navigation.navigate('Login', { signOut: true });
+    this.props.navigation.navigate('SignIn', { signOut: true });
   }
 
   componentDidMount() {

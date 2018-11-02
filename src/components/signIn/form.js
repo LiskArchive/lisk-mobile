@@ -80,9 +80,9 @@ class Form extends React.Component {
     }
   }
 
-  onLoginSubmission(passphrase) {
+  onSignInSubmission(passphrase) {
     this.passphraseInput.blur();
-    this.props.login(passphrase);
+    this.props.signIn(passphrase);
   }
 
   animate = () => {
@@ -141,7 +141,7 @@ class Form extends React.Component {
         extras={<Extras error={connectionError}
         onPress={this.goToRegistration} opacity={opacity} />}
         disabled={passphrase.validity.length !== 0}
-        onSubmit={() => this.onLoginSubmission(passphrase)}
+        onSubmit={() => this.onSignInSubmission(passphrase)}
         button='Sign in'>
       </KeyboardAwareScrollView>
     </View>);

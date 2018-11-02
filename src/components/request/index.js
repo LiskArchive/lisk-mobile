@@ -15,7 +15,7 @@ const pageHeight = viewportHeight();
 const qrCodeSize = Math.min(pageHeight - 355, Math.floor(deviceWidth() * 0.8));
 
 /**
- * The container component containing login and create account functionality
+ * The container component containing sign in and create account functionality
  */
 @connect(state => ({
   account: state.accounts.active,

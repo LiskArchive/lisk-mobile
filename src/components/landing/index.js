@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import Intro from '../intro';
-import Login from '../login';
+import SignIn from '../signIn';
 import {
   settingsRetrieved as settingsRetrievedAction,
 } from '../../actions/settings';
@@ -22,7 +22,7 @@ class Landing extends React.Component {
   componentDidUpdate() {
     if (this.props.settings.validated && !this.state.initialRoute) {
       this.setState({
-        initialRoute: this.props.settings.showedIntro ? 'Login' : 'Intro',
+        initialRoute: this.props.settings.showedIntro ? 'SignIn' : 'Intro',
       });
     }
   }
@@ -31,8 +31,8 @@ class Landing extends React.Component {
   render() {
     if (this.state.initialRoute === 'Intro') {
       return <Intro navigation={this.props.navigation} />;
-    } else if (this.state.initialRoute === 'Login') {
-      return <Login navigation={this.props.navigation} />;
+    } else if (this.state.initialRoute === 'SignIn') {
+      return <SignIn navigation={this.props.navigation} />;
     }
     return <View></View>;
   }

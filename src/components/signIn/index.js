@@ -40,7 +40,7 @@ console.disableYellowBox = true; // eslint-disable-line
   accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
 })
-class Login extends React.Component {
+class SignIn extends React.Component {
   state = {
     storedPassphrase: null,
     view: 'splash',
@@ -143,7 +143,7 @@ class Login extends React.Component {
     );
   }
 
-  login = (passphrase) => {
+  signIn = (passphrase) => {
     this.props.accountLoggedIn({
       passphrase,
     }, () => {
@@ -154,7 +154,7 @@ class Login extends React.Component {
   }
 
   /**
-   * Will be called when login form submits
+   * Will be called when sign in form submits
    * fires the activePeerSet action
    *
    * @param {String} passphrase - valid mnemonic passphrase
@@ -165,9 +165,9 @@ class Login extends React.Component {
       passphrase,
     });
     if (this.props.settings.sensorType && !this.props.settings.bioAuthRecommended) {
-      this.promptBioAuth(passphrase, this.login);
+      this.promptBioAuth(passphrase, this.signIn);
     } else {
-      this.login(passphrase.value);
+      this.signIn(passphrase.value);
     }
   }
 
@@ -216,7 +216,7 @@ class Login extends React.Component {
             toggleView={this.changeHandler}
             sensorType={sensorType}
             passphrase={storedPassphrase}
-            login={this.onFormSubmission} /> : null
+            signIn={this.onFormSubmission} /> : null
       }
       {
         view === 'form' ?
@@ -224,14 +224,14 @@ class Login extends React.Component {
             animate={!signOut}
             navigation={this.props.navigation}
             toggleView={this.changeHandler}
-            login={this.onFormSubmission} /> : null
+            signIn={this.onFormSubmission} /> : null
       }
       <FingerprintOverlay
-        onModalClosed={() => this.login(this.state.passphrase.value)}
+        onModalClosed={() => this.signIn(this.state.passphrase.value)}
         error={androidDialog.error}
         show={androidDialog.show} />
     </View>);
   }
 }
 
-export default Login;
+export default SignIn;
