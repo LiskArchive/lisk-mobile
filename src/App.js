@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Router from './components/router';
 import Loading from './components/loading';
 import store from './store/index';
+import { backgroundTaskInit } from './utilities/backgroundTask';
 
 
 const getActiveRouteName = (navigationState) => {
@@ -16,6 +17,8 @@ const getActiveRouteName = (navigationState) => {
   }
   return route.routeName;
 };
+
+backgroundTaskInit();
 
 const App = () => (
   <Provider store={store}>
