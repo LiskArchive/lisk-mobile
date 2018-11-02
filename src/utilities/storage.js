@@ -20,7 +20,7 @@ const validateSettings = (data) => {
   return parsedData;
 };
 
-async function persistData(key, data) {
+export async function persistData(key, data) {
   try {
     await AsyncStorage.removeItem(key);
     await AsyncStorage.setItem(key, JSON.stringify(data));
