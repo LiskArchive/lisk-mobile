@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
+import BackgroundTask from 'react-native-background-task'; // eslint-disable-line
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
 import {
@@ -12,6 +13,7 @@ import Empty from '../transactions/empty';
 import Loading from '../transactions/loading';
 import { viewportHeight } from '../../utilities/device';
 import { requestNotificationPermissions } from '../../utilities/notifications';
+import { initQueue } from '../../utilities/backgroundTask';
 import InfiniteScrollView from '../infiniteScrollView';
 import styles from './styles';
 
@@ -30,6 +32,7 @@ const summaryHeight = 250;
 @connect(state => ({
   account: state.accounts.active,
   transactions: state.transactions,
+  activePear: state.peers,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
@@ -56,6 +59,18 @@ class Wallet extends React.Component {
   }
 
   componentDidMount() {
+    BackgroundTask.schedule();
+    initQueue().then((queue) => {
+      queue.createJob(
+        'check-balance',
+        {
+          address: this.props.account.address,
+          serverUrl: this.props.activePear.nodes[0],
+        },
+        { attempts: 5, timeout: 15000 },
+        false,
+      );
+    });
     const { settingsUpdated, transactionsLoaded } = this.props;
     transactionsLoaded({
       senderIdOrRecipientId: this.props.account.address,
