@@ -151,10 +151,6 @@ const styles = {
     zIndex: 0,
     left: 20,
     top: 41,
-    opacity: 0.2,
-  },
-  visible: {
-    opacity: 1,
   },
   permissionRequestWrapper: {
     position: 'absolute',

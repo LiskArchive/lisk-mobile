@@ -226,10 +226,13 @@ class Login extends React.Component {
             toggleView={this.changeHandler}
             login={this.onFormSubmission} /> : null
       }
-      <FingerprintOverlay
-        onModalClosed={() => this.login(this.state.passphrase.value)}
-        error={androidDialog.error}
-        show={androidDialog.show} />
+      {
+        Platform.OS === 'android' ?
+        <FingerprintOverlay
+          onModalClosed={() => this.login(this.state.passphrase.value)}
+          error={androidDialog.error}
+          show={androidDialog.show} /> : null
+      }
     </View>);
   }
 }
