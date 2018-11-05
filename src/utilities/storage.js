@@ -32,7 +32,7 @@ export async function persistData(key, data) {
   }
 }
 
-async function fetchData(key) {
+export async function fetchData(key) {
   try {
     return await AsyncStorage.getItem(key);
   } catch (error) {
