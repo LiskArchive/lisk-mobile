@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { colors } from '../../constants/styleGuide';
+import { colors, themes } from '../../constants/styleGuide';
+import { createThemedStyles } from '../../utilities/helpers';
 
 const styles = {
   common: {
@@ -15,18 +15,17 @@ const styles = {
     },
   },
 
-  light: {
+  [themes.light]: {
     container: {
       backgroundColor: colors.white,
     },
   },
 
-  dark: {
+  [themes.dark]: {
     container: {
       backgroundColor: colors.black,
     },
   },
 };
 
-export const getStyles = (theme = 'light') => [StyleSheet.create(styles.common), StyleSheet.create(styles[theme])];
-export default getStyles();
+export default theme => createThemedStyles(styles, theme);

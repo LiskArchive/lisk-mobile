@@ -1,3 +1,28 @@
+import { StyleSheet } from 'react-native';
+import { themes } from '../constants/styleGuide';
+
+/**
+ * Helps to create themed stylesheet for components.
+ * @param {Object} styles - style declerations for the component.
+ * @param {String} theme - theme string.
+ *
+ * @returns {Object} - created stylesheet.
+ */
+export const createThemedStyles = (styles, theme = themes.light) => {
+  if (!styles.common) {
+    throw Error('Styles object should have declerations for shared styles.');
+  }
+
+  if (!styles[theme]) {
+    throw Error(`Styles object does not have declerations for a theme named ${theme}.`);
+  }
+
+  return {
+    ...StyleSheet.create(styles.common),
+    theme: StyleSheet.create(styles[theme]),
+  };
+};
+
 /**
  * Helps to keep the code clean while trying to
  * merge multiple objects immutably.
