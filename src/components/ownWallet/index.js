@@ -13,7 +13,7 @@ import Loading from '../transactions/loading';
 import { viewportHeight } from '../../utilities/device';
 import { requestNotificationPermissions } from '../../utilities/notifications';
 import InfiniteScrollView from '../infiniteScrollView';
-import getStyles from './styles';
+import styles from './styles';
 
 const itemHeight = 90;
 const summaryHeight = 250;
@@ -91,7 +91,6 @@ class Wallet extends React.Component {
     clearTimeout(this.timeout2);
   }
 
-
   loadMore = () => {
     if (this.props.account) {
       this.props.transactionsLoaded({
@@ -103,9 +102,8 @@ class Wallet extends React.Component {
 
   render() {
     const { transactions } = this.props;
-    const styles = getStyles();
 
-    return (<View style={[styles.container, styles.theme.container]}>
+    return (<View style={styles.container}>
       {
         this.props.account ?
           <AccountSummary

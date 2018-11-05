@@ -4,27 +4,27 @@ import { Provider } from 'react-redux';
 import Router from './components/router';
 import Loading from './components/loading';
 import store from './store/index';
+import ThemeContext from './contexts/theme';
+import { themes } from './constants/styleGuide';
 
-
-const getActiveRouteName = (navigationState) => {
-  if (!navigationState) {
-    return null;
+class App extends React.Component {
+  state = {
+    theme: themes.light,
   }
-  const route = navigationState.routes[navigationState.index];
-  if (route.routes) {
-    return getActiveRouteName(route);
-  }
-  return route.routeName;
-};
 
-const App = () => (
-  <Provider store={store}>
-    <Fragment>
-      <StatusBar barStyle="light-content" />
-      <Loading />
-      <Router />
-    </Fragment>
-  </Provider>
-);
+  render() {
+    return (
+      <Provider store={store}>
+        <ThemeContext.Provider value={this.state.theme}>
+          <Fragment>
+            <StatusBar barStyle="light-content" />
+            <Loading />
+            <Router />
+          </Fragment>
+       </ThemeContext.Provider>
+      </Provider>
+    );
+  }
+}
 
 export default App;
