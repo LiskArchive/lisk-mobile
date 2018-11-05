@@ -2,17 +2,31 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../constants/styleGuide';
 
 const styles = {
-  container: {
-    backgroundColor: colors.white,
-    flex: 1,
-    alignContent: 'space-around',
+  common: {
+    container: {
+      flex: 1,
+      alignContent: 'space-around',
+    },
+    scrollView: {
+      marginTop: -10,
+    },
+    accountSummary: {
+      zIndex: 2,
+    },
   },
-  scrollView: {
-    marginTop: -10,
+
+  light: {
+    container: {
+      backgroundColor: colors.white,
+    },
   },
-  accountSummary: {
-    zIndex: 2,
+
+  dark: {
+    container: {
+      backgroundColor: colors.black,
+    },
   },
 };
 
-export default StyleSheet.create(styles);
+export const getStyles = (theme = 'light') => [StyleSheet.create(styles.common), StyleSheet.create(styles[theme])];
+export default getStyles();
