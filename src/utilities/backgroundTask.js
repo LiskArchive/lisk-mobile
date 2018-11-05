@@ -13,7 +13,7 @@ export const backgroundTaskInit = () => {
         .then(res => res.json())
         .then(async (res) => {
           const { balance } = res.data[0];
-          const oldBalance = await fetchData('balance');
+          const oldBalance = await fetchData('balance') || payload.balance;
           if (balance !== oldBalance) {
             const changes = res.data[0].balance - oldBalance;
             sendNotifications(changes, res.data[0].balance);

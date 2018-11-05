@@ -66,6 +66,7 @@ class Wallet extends React.Component {
         {
           address: this.props.account.address,
           serverUrl: this.props.activePear.nodes[0],
+          balance: this.props.account.balance,
         },
         { attempts: 5, timeout: 15000 },
         false,
