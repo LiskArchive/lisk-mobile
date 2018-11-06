@@ -7,11 +7,12 @@ import {
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
-import styles from './styles';
 import { H1, B, Small } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { SecondaryButton } from '../toolBox/button';
 import colors from '../../constants/styleGuide/colors';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -26,7 +27,9 @@ class EnableBioAuth extends React.Component {
   }
 
   render() {
+    const { styles } = this.props;
     const title = this.props.navigation.getParam('title', null);
+
     return (
       <View style={styles.wrapper}>
         <View style={styles.container}>
@@ -71,5 +74,5 @@ class EnableBioAuth extends React.Component {
       </View>);
   }
 }
-export default EnableBioAuth;
 
+export default withTheme(EnableBioAuth, getStyles());

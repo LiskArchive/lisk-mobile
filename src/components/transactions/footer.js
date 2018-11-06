@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
-const EmptyState = () => <View style={styles.footer}></View>;
+const EmptyState = ({ styles }) => <View style={styles.footer}></View>;
 
-export default EmptyState;
+export default withTheme(EmptyState, getStyles());

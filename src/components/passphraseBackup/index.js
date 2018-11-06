@@ -2,17 +2,19 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Image } from 'react-native';
 import { deviceHeight } from '../../utilities/device';
-import styles from './styles';
 import { H1, B, P } from '../toolBox/typography';
 import CopyToClipboard from '../copyToClipboard';
 import image from '../../assets/images/registrationProcess/passphrase3x.png';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 @connect(state => ({
   account: state.accounts.active,
 }), {})
 class PassphraseBackup extends React.Component {
   render() {
-    const { passphrase } = this.props.account;
+    const { styles, account: { passphrase } } = this.props;
+
     return (<View style={styles.wrapper}>
         <View style={styles.container}>
           <View>
@@ -57,4 +59,4 @@ class PassphraseBackup extends React.Component {
   }
 }
 
-export default PassphraseBackup;
+export default withTheme(PassphraseBackup, getStyles());

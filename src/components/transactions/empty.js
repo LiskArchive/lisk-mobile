@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import noActivity from '../../assets/images/noActivity/noActivity2x.png';
 import { P } from '../toolBox/typography';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
-const EmptyState = () =>
+const EmptyState = ({ styles }) =>
   <View style={styles.emptyState}>
     <View style={styles.noActivity}>
       <Image style={styles.empty} source={noActivity} />
@@ -12,4 +13,4 @@ const EmptyState = () =>
     <P style={styles.noTxTitle}>You do not have any recent activity.</P>
   </View>;
 
-export default EmptyState;
+export default withTheme(EmptyState, getStyles());

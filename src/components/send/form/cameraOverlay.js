@@ -2,11 +2,12 @@ import React from 'react';
 import { View, TouchableHighlight, Platform } from 'react-native';
 import OpenAppSettings from 'react-native-app-settings';
 import Icon from '../../toolBox/icon';
-import styles from './styles';
 import { P } from '../../toolBox/typography';
 import { colors } from '../../../constants/styleGuide';
+import withTheme from '../../withTheme';
+import getStyles from './styles';
 
-const CameraOverlay = ({ photoPermission, toggleGallery }) => (
+const CameraOverlay = ({ styles, photoPermission, toggleGallery }) => (
   <View style={styles.cameraOverlay}>
     <P style={styles.galleryDescription}>
       {
@@ -34,4 +35,4 @@ const CameraOverlay = ({ photoPermission, toggleGallery }) => (
   </View>
 );
 
-export default CameraOverlay;
+export default withTheme(CameraOverlay, getStyles());

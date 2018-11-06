@@ -7,7 +7,8 @@ import Input from '../../toolBox/input';
 import { H1, P } from '../../toolBox/typography';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import secondPassphraseImage from '../../../assets/images/secondPassphrase3x.png';
-import styles from './styles';
+import withTheme from '../../withTheme';
+import getStyles from './styles';
 
 /**
  * The container component containing sign in and create account functionality
@@ -17,12 +18,15 @@ import styles from './styles';
   accounts: state.accounts,
 }), {})
 class Confirm extends React.Component {
-  state = {
-    secondPassphrase: {
-      value: '',
-      validity: validatePassphrase(''),
-      buttonStyle: styles.button,
-    },
+  constructor(props) {
+    super(props);
+    this.state = {
+      secondPassphrase: {
+        value: '',
+        validity: validatePassphrase(''),
+        buttonStyle: props.styles.button,
+      },
+    };
   }
 
   componentDidMount() {
@@ -77,7 +81,9 @@ class Confirm extends React.Component {
   }
 
   render() {
+    const { styles } = this.props;
     const { secondPassphrase } = this.state;
+
     const error = secondPassphrase.validity
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || secondPassphrase.validity.length === 1);
@@ -121,4 +127,4 @@ class Confirm extends React.Component {
   }
 }
 
-export default Confirm;
+export default withTheme(Confirm, getStyles());

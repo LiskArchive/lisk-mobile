@@ -1,10 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 import Item from './item';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 const List = ({
-  transactions, account, navigate, pending,
+  styles, transactions, account, navigate, pending,
 }) =>
   (<View style={styles.nativeList}>
     {
@@ -17,4 +18,4 @@ const List = ({
     }
   </View>);
 
-export default List;
+export default withTheme(List, getStyles());

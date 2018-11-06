@@ -5,9 +5,10 @@ import Form from './form';
 import Overview from './overview';
 import Confirm from './confirm';
 import Result from './result';
-import styles from './styles';
 import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -23,16 +24,17 @@ class Send extends React.Component {
       onPress={() => {
         params.action();
       }}
-      style={styles.back}
+      style={params && params.styles.back}
       color={colors.white} /> : <IconButton color='transparent' icon='back'/>,
     };
   };
+
   componentDidMount() {
-    const { navigation } = this.props;
+    const { styles, navigation } = this.props;
     this.subs = [
       navigation.addListener('didFocus', () => this.didFocus()),
     ];
-    navigation.setParams({ showButtonLeft: false });
+    navigation.setParams({ showButtonLeft: false, styles });
   }
 
   componentWillUnmount() {
@@ -54,7 +56,7 @@ class Send extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { styles, navigation } = this.props;
     return (<MultiStep
         finalCallback={() => {
           navigation.navigate({ routeName: 'OwnWallet' });
@@ -69,4 +71,4 @@ class Send extends React.Component {
   }
 }
 
-export default Send;
+export default withTheme(Send, getStyles());

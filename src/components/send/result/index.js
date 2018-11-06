@@ -2,12 +2,13 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import LottieView from 'lottie-react-native';
-import styles from './styles';
 import { SecondaryButton } from '../../toolBox/button';
 import { H1, P } from '../../toolBox/typography';
 import txCreatedAnim from '../../../assets/animations/tx-created.json';
 import txPendingAnim from '../../../assets/animations/tx-pending.json';
 import txConfirmedAnim from '../../../assets/animations/tx-confirmed.json';
+import withTheme from '../../withTheme';
+import getStyles from './styles';
 
 const createdAnimDuration = 4340;
 
@@ -67,6 +68,7 @@ class Result extends React.Component {
   }
 
   render() {
+    const { styles } = this.props;
     return (<View style={styles.container}>
       <View style={styles.innerContainer}>
         <View>
@@ -108,4 +110,4 @@ class Result extends React.Component {
   }
 }
 
-export default Result;
+export default withTheme(Result, getStyles());

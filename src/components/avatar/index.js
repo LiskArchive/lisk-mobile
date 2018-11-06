@@ -6,7 +6,8 @@ import {
   getShape, getBackgroundCircle, pickTwo, getHashChunks,
   randomId, replaceUrlByHashOnScheme,
 } from './utils';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 class Avatar extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -19,7 +20,7 @@ class Avatar extends React.Component {
 
   render() {
     const {
-      address, size, scale, translate,
+      styles, address, size, scale, translate,
     } = this.props;
     let Wrapper = View;
     const scaleAttr = {};
@@ -75,4 +76,4 @@ class Avatar extends React.Component {
   }
 }
 
-export default Avatar;
+export default withTheme(Avatar, getStyles());

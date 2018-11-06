@@ -1,9 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
 import CameraRollPicker from 'react-native-camera-roll-picker';
-import styles from './styles';
+import withTheme from '../../withTheme';
+import getStyles from './styles';
 
-const CameraRoll = ({ permission, visible, onSelect }) => {
+const CameraRoll = ({
+  styles, permission, visible, onSelect,
+}) => {
   if (permission !== 'denied' && visible) {
     return (
       <View style={[styles.preview, styles.photoPreview]}>
@@ -16,4 +19,4 @@ const CameraRoll = ({ permission, visible, onSelect }) => {
   return null;
 };
 
-export default CameraRoll;
+export default withTheme(CameraRoll, getStyles());

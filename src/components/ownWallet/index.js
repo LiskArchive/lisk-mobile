@@ -13,7 +13,8 @@ import Loading from '../transactions/loading';
 import { viewportHeight } from '../../utilities/device';
 import { requestNotificationPermissions } from '../../utilities/notifications';
 import InfiniteScrollView from '../infiniteScrollView';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 const itemHeight = 90;
 const summaryHeight = 250;
@@ -101,7 +102,7 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { transactions } = this.props;
+    const { styles, transactions } = this.props;
 
     return (<View style={styles.container}>
       {
@@ -137,4 +138,4 @@ class Wallet extends React.Component {
   }
 }
 
-export default Wallet;
+export default withTheme(Wallet, getStyles());

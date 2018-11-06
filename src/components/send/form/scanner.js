@@ -3,10 +3,11 @@ import { AppState } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
-import styles from './styles';
 import CameraAccess from './cameraAccess';
 import CameraOverlay from './cameraOverlay';
 import CameraRoll from './cameraRoll';
+import withTheme from '../../withTheme';
+import getStyles from './styles';
 
 class Scanner extends React.Component {
   state = {
@@ -104,6 +105,7 @@ class Scanner extends React.Component {
   }
 
   render() {
+    const { styles } = this.props;
     const { camera, photo } = this.state;
     return (
       <Fragment>
@@ -136,4 +138,4 @@ class Scanner extends React.Component {
   }
 }
 
-export default Scanner;
+export default withTheme(Scanner, getStyles());
