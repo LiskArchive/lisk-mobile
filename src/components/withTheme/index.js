@@ -1,24 +1,30 @@
 import React from 'react';
+import hoistNonReactStatics from 'hoist-non-react-statics';
 import ThemeContext from '../../contexts/theme';
 import { createThemedStyles } from '../../utilities/helpers';
 
-export default function withTheme(Component, styles, forwardRefs = false) {
+export default (Component, styles, forwardRefs = false) => {
   if (forwardRefs) {
-    return React.forwardRef((props, ref) => (
+    const WithTheme = React.forwardRef((props, ref) => (
       <ThemeContext.Consumer>
         {theme => (
           <Component
-            ref={ref}
             {...props}
+            ref={ref}
             styles={createThemedStyles(theme, styles)}
           />
         )}
       </ThemeContext.Consumer>
     ));
+
+    hoistNonReactStatics(WithTheme, Component);
+    WithTheme.displayName = `withTheme(${Component.displayName || Component.name}`;
+
+    return WithTheme;
   }
 
-  return function ThemedComponent(props) {
-    return (
+  return (props) => {
+    const WithTheme = (
       <ThemeContext.Consumer>
         {theme => (
           <Component
@@ -28,5 +34,10 @@ export default function withTheme(Component, styles, forwardRefs = false) {
         )}
       </ThemeContext.Consumer>
     );
+
+    hoistNonReactStatics(WithTheme, Component);
+    WithTheme.displayName = `withTheme(${Component.displayName || Component.name}`;
+
+    return WithTheme;
   };
-}
+};
