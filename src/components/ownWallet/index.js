@@ -20,7 +20,7 @@ const summaryHeight = 250;
 
 /**
  * This component would be mounted first and would be used to config and redirect
- * the application to referer page or Login
+ * the application to referer page or Sign In
  *
  * @todo Implement saved language detection
  * @todo Implement release notification

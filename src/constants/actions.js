@@ -1,8 +1,8 @@
 const actionTypes = {
   // Account
   accountUpdated: 'ACCOUNT_UPDATED',
-  accountLoggedOut: 'ACCOUNT_LOGGED_OUT',
-  accountLoggedIn: 'ACCOUNT_LOGGED_IN',
+  accountSignedOut: 'ACCOUNT_SIGNED_OUT',
+  accountSignedIn: 'ACCOUNT_SIGNED_IN',
   accountFollowed: 'ACCOUNT_FOLLOWED',
   accountEdited: 'ACCOUNT_EDITED',
   accountUnFollowed: 'ACCOUNT_UN_FOLLOWED',

@@ -48,9 +48,9 @@ describe('Reducers: Transactions', () => {
     expect(changedState).toEqual(expectedState);
   });
 
-  it('should revert to empty state in case of actionTypes.accountLoggedOut', () => {
+  it('should revert to empty state in case of actionTypes.accountSignedOut', () => {
     const state = { pending: [], confirmed: [transaction1, transaction2], count: 10 };
-    const action = { type: actionTypes.accountLoggedOut };
+    const action = { type: actionTypes.accountSignedOut };
     const changedState = transactions(state, action);
     expect(changedState).toEqual(emptyState);
   });

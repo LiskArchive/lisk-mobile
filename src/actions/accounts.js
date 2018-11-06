@@ -95,27 +95,27 @@ export const accountEdited = (address, updatedData) => ({
 
 /**
  * Uses Http call to fetch Account and delegate info of a given
- * passphrase and dispatches accountLoggedIn action
+ * passphrase and dispatches accountSignedIn action
  *
  * @todo Implement delegate Api call
  *
  * @param {Object} data
- * @param {String} data.passphrase - The valid passphrase to login using
+ * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
-export const accountLoggedIn = ({ passphrase }, cb) =>
+export const accountSignedIn = ({ passphrase }, cb) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
-    dispatch(loadingStarted(actionTypes.accountLoggedIn));
+    dispatch(loadingStarted(actionTypes.accountSignedIn));
     return getAccount(activePeer, extractAddress(passphrase))
       .then((account) => {
         dispatch({
-          type: actionTypes.accountLoggedIn,
+          type: actionTypes.accountSignedIn,
           data: { ...account, passphrase },
         });
-        dispatch(loadingFinished(actionTypes.accountLoggedIn));
+        dispatch(loadingFinished(actionTypes.accountSignedIn));
       }).catch((err) => {
-        dispatch(loadingFinished(actionTypes.accountLoggedIn));
+        dispatch(loadingFinished(actionTypes.accountSignedIn));
         cb(err);
       });
   };
@@ -124,9 +124,9 @@ export const accountLoggedIn = ({ passphrase }, cb) =>
  *
  * @returns {Object} Action object including action type
  */
-export const accountLoggedOut = () =>
+export const accountSignedOut = () =>
   ({
-    type: actionTypes.accountLoggedOut,
+    type: actionTypes.accountSignedOut,
   });
 
 // export const blockUpdated = ({ transactions }) => (dispatch, getState) => {

@@ -11,7 +11,7 @@ import easing from '../../utilities/easing';
 
 
 /**
- * The container component containing login and create account functionality
+ * The container component containing sign in and create account functionality
  *
  * @todo
  */

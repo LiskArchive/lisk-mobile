@@ -78,7 +78,7 @@ export const bioMetricAuthentication = async ({
 }) => {
   const authConfig = Platform.OS === 'ios' ?
     {
-      description: description || 'Scan your fingerprint on the device scanner to login',
+      description: description || 'Scan your fingerprint on the device scanner to sign in',
     } :
     { onAttempt: androidError };
   try {

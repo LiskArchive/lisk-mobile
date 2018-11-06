@@ -8,7 +8,7 @@ import {
 import { H1, H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
-import LogoutButton from '../logoutButton';
+import SignOutButton from '../signOutButton';
 import styles from './styles';
 import { colors } from '../../constants/styleGuide';
 
@@ -126,7 +126,7 @@ class Settings extends React.Component {
               title='Notification'/>
           </View>
           <View style={styles.item}>
-            <LogoutButton navigation={navigation} />
+            <SignOutButton navigation={navigation} />
           </View>
         </View>
         {

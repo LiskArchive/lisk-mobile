@@ -30,17 +30,17 @@ describe('Reducers: Accounts', () => {
     expect(changedState).toEqual(currentState);
   });
 
-  it('should empty accounts.active in case of accountLoggedOut', () => {
+  it('should empty accounts.active in case of accountSignedOut', () => {
     const currentState = { active: accountA, followed };
-    const action = { type: actionTypes.accountLoggedOut };
+    const action = { type: actionTypes.accountSignedOut };
     const changedState = accounts(currentState, action);
     expect(changedState.active).toBeNull();
   });
 
-  it('should set accounts.active in case of accountLoggedIn', () => {
+  it('should set accounts.active in case of accountSignedIn', () => {
     const currentState = { active: null, followed };
     const action = {
-      type: actionTypes.accountLoggedIn,
+      type: actionTypes.accountSignedIn,
       data: accountA,
     };
     const changedState = accounts(currentState, action);

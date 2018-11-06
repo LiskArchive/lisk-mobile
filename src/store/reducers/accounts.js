@@ -17,9 +17,9 @@ const accounts = (state = { active: null, followed: [] }, action = {}) => {
   switch (action.type) {
     case actionTypes.accountUpdated:
       return merge(state, { active: merge(state.active, action.data) });
-    case actionTypes.accountLoggedOut:
+    case actionTypes.accountSignedOut:
       return merge(state, { active: null });
-    case actionTypes.accountLoggedIn:
+    case actionTypes.accountSignedIn:
       return merge(state, { active: action.data });
     case actionTypes.accountFollowed:
       return merge(state, {

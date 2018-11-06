@@ -14,7 +14,7 @@ import {
 import { initPushNotifications } from '../../utilities/notifications';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import {
-  accountLoggedIn as accountLoggedInAction,
+  accountSignedIn as accountSignedInAction,
   accountsRetrieved as accountsRetrievedAction,
 } from '../../actions/accounts';
 import {
@@ -35,12 +35,12 @@ console.disableYellowBox = true; // eslint-disable-line
   accounts: state.accounts,
   settings: state.settings,
 }), {
-  accountLoggedIn: accountLoggedInAction,
+  accountSignedIn: accountSignedInAction,
   peerSet: activePeerSetAction,
   accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
 })
-class Login extends React.Component {
+class SignIn extends React.Component {
   state = {
     storedPassphrase: null,
     view: 'splash',
@@ -143,8 +143,8 @@ class Login extends React.Component {
     );
   }
 
-  login = (passphrase) => {
-    this.props.accountLoggedIn({
+  signIn = (passphrase) => {
+    this.props.accountSignedIn({
       passphrase,
     }, () => {
       this.setState({
@@ -154,7 +154,7 @@ class Login extends React.Component {
   }
 
   /**
-   * Will be called when login form submits
+   * Will be called when sign in form submits
    * fires the activePeerSet action
    *
    * @param {String} passphrase - valid mnemonic passphrase
@@ -165,9 +165,9 @@ class Login extends React.Component {
       passphrase,
     });
     if (this.props.settings.sensorType && !this.props.settings.bioAuthRecommended) {
-      this.promptBioAuth(passphrase, this.login);
+      this.promptBioAuth(passphrase, this.signIn);
     } else {
-      this.login(passphrase.value);
+      this.signIn(passphrase.value);
     }
   }
 
@@ -216,7 +216,7 @@ class Login extends React.Component {
             toggleView={this.changeHandler}
             sensorType={sensorType}
             passphrase={storedPassphrase}
-            login={this.onFormSubmission} /> : null
+            signIn={this.onFormSubmission} /> : null
       }
       {
         view === 'form' ?
@@ -224,12 +224,12 @@ class Login extends React.Component {
             animate={!signOut}
             navigation={this.props.navigation}
             toggleView={this.changeHandler}
-            login={this.onFormSubmission} /> : null
+            signIn={this.onFormSubmission} /> : null
       }
       {
         Platform.OS === 'android' ?
         <FingerprintOverlay
-          onModalClosed={() => this.login(this.state.passphrase.value)}
+          onModalClosed={() => this.signIn(this.state.passphrase.value)}
           error={androidDialog.error}
           show={androidDialog.show} /> : null
       }
@@ -237,4 +237,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default SignIn;

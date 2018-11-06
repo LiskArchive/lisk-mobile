@@ -3,21 +3,21 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { NavigationActions } from 'react-navigation';
 import {
-  accountLoggedOut as accountLoggedOutAction,
+  accountSignedOut as accountSignedOutAction,
 } from '../../actions/accounts';
 import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
 import styles from './styles';
 
-const onClick = (navigation, accountLoggedOut) => {
+const onClick = (navigation, accountSignedOut) => {
   // clean active account
-  accountLoggedOut();
-  // navigate to the login page
+  accountSignedOut();
+  // navigate to the signIn page
   navigation
     .dispatch(NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({
-        routeName: 'Login',
+        routeName: 'SignIn',
         params: {
           signOut: true,
         },
@@ -29,22 +29,22 @@ const onClick = (navigation, accountLoggedOut) => {
   peers: state.peers,
   accounts: state.accounts,
 }), {
-  accountLoggedOut: accountLoggedOutAction,
+  accountSignedOut: accountSignedOutAction,
 })
-class LogoutButton extends React.Component {
+class SignOutButton extends React.Component {
   render() {
     const {
-      navigation, titleStyle, style, accountLoggedOut,
+      navigation, titleStyle, style, accountSignedOut,
     } = this.props;
     return <IconButton
       icon='logout'
       iconSize={18}
       title='Sign out'
       color={colors.primary5}
-      onClick={() => onClick(navigation, accountLoggedOut)}
+      onClick={() => onClick(navigation, accountSignedOut)}
       titleStyle={[styles.title, titleStyle]}
       style ={[styles.button, style]} />;
   }
 }
 
-export default LogoutButton;
+export default SignOutButton;

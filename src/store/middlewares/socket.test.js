@@ -44,9 +44,9 @@ describe('Middleware: Accounts', () => {
     expect(next).toBeCalledWith(action);
   });
 
-  describe('In case of accountLoggedIn', () => {
+  describe('In case of accountSignedIn', () => {
     const action = {
-      type: actionTypes.accountLoggedIn,
+      type: actionTypes.accountSignedIn,
       data: accountA,
     };
 
@@ -88,10 +88,10 @@ describe('Middleware: Accounts', () => {
     });
   });
 
-  describe('In case of accountLoggedOut', () => {
+  describe('In case of accountSignedOut', () => {
     it('should clear the interval', () => {
       const action = {
-        type: actionTypes.accountLoggedOut,
+        type: actionTypes.accountSignedOut,
       };
       jest.useFakeTimers();
       socketMiddleware(store)(next)(action);

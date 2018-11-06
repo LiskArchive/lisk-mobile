@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import Login from '../login';
+import SignIn from '../signIn';
 import TxDetail from '../txDetail';
 import Send from '../send';
 import Register from '../register';
@@ -85,8 +85,8 @@ export default StackNavigator(
         },
       },
     },
-    Login: {
-      screen: Login,
+    SignIn: {
+      screen: SignIn,
       navigationOptions: {
         header: null,
       },
@@ -305,7 +305,7 @@ export default StackNavigator(
     headerLayoutPreset: 'center',
     transitionConfig: (props) => {
       const { scene } = props;
-      return (scene.routeName === 'Landing' || scene.routeName === 'Login' || scene.routeName === 'Intro') ?
+      return (scene.routeName === 'Landing' || scene.routeName === 'SignIn' || scene.routeName === 'Intro') ?
         {
           transitionSpec: {
             duration: 0,
