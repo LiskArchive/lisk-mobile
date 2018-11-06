@@ -5,7 +5,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 /* eslint-disable */
-const Terms = () => (
+const Terms = ({ styles }) => (
   <ScrollView style={styles.container}>
     <View style={styles.innerContainer}>
       <View style={styles.titleContainer}>

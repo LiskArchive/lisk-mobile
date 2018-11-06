@@ -54,6 +54,7 @@ class Scanner extends React.Component {
 
   toggleGallery = () => {
     const { photo } = this.state;
+
     this.props.navigation.setParams({
       tabBar: true,
       showButtonLeft: true,
@@ -138,4 +139,4 @@ class Scanner extends React.Component {
   }
 }
 
-export default withTheme(Scanner, getStyles());
+export default withTheme(Scanner, getStyles(), true);
