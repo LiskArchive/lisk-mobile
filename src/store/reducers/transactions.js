@@ -42,7 +42,7 @@ const transactions = (state = { pending: [], confirmed: [], count: null }, actio
         ],
         count: action.data.count,
       });
-    case actionTypes.accountLoggedOut:
+    case actionTypes.accountSignedOut:
       return { pending: [], confirmed: [], count: null };
     default:
       return state;

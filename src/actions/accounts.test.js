@@ -5,9 +5,9 @@ import {
   accountFollowed,
   accountUnFollowed,
   accountEdited,
-  accountLoggedIn,
+  accountSignedIn,
   blockUpdated,
-  accountLoggedOut,
+  accountSignedOut,
   accountsStored,
   accountsRetrieved,
 } from './accounts';
@@ -108,11 +108,11 @@ describe('Action: Accounts', () => {
     expect(accountUnFollowed(address)).toEqual(expectedValue);
   });
 
-  it('should returns an accountLoggedOut action object', () => {
+  it('should returns an accountSignedOut action object', () => {
     const expectedValue = {
-      type: actionTypes.accountLoggedOut,
+      type: actionTypes.accountSignedOut,
     };
-    expect(accountLoggedOut()).toEqual(expectedValue);
+    expect(accountSignedOut()).toEqual(expectedValue);
   });
 
   it('should returns an accountFollowed action object', () => {
@@ -165,17 +165,17 @@ describe('Action: Accounts', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should dispatch accountLoggedIn action when it receives data of user', async () => {
+  it('should dispatch accountSignedIn action when it receives data of user', async () => {
     const store = mockStore({ peers: { activePeer } });
     // const cb = jest.fn();
     const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
     const expectedActions = [
-      { type: actionTypes.loadingStarted, data: actionTypes.accountLoggedIn },
-      { type: actionTypes.accountLoggedIn, data: { ...account, passphrase } },
-      { type: actionTypes.loadingFinished, data: actionTypes.accountLoggedIn },
+      { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
+      { type: actionTypes.accountSignedIn, data: { ...account, passphrase } },
+      { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
     ];
     accountUtility.getAccount.mockResolvedValue(account);
-    await store.dispatch(accountLoggedIn({ passphrase }));
+    await store.dispatch(accountSignedIn({ passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
   });
 

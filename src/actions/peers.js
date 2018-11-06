@@ -15,7 +15,7 @@ const peerSet = config => ({
 /**
  * Returns required action object to set
  * the given peer data as active peer
- * This should be called once in login page
+ * This should be called once in sign in page
  *
  * @param {Object} data - Active peer data and the passphrase of account
  * @returns {Object} Action object

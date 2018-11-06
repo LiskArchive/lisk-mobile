@@ -48,10 +48,10 @@ const socketSetup = (store) => {
 const socketMiddleware = store => next => (action) => {
   next(action);
   switch (action.type) {
-    case actionTypes.accountLoggedIn:
+    case actionTypes.accountSignedIn:
       socketSetup(store);
       break;
-    case actionTypes.accountLoggedOut:
+    case actionTypes.accountSignedOut:
       closeConnection();
       break;
     default: break;
