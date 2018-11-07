@@ -9,8 +9,9 @@ import { H1, H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
 import SignOutButton from '../signOutButton';
-import styles from './styles';
 import { colors } from '../../constants/styleGuide';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 @connect(state => ({
   settings: state.settings,
@@ -36,7 +37,7 @@ class Settings extends React.Component {
   }
 
   render() {
-    const { navigation, settings } = this.props;
+    const { styles, navigation, settings } = this.props;
     let target = 'EnableBioAuth';
 
     const targetStateLabel = ['Off', colors.black];
@@ -137,4 +138,4 @@ class Settings extends React.Component {
   }
 }
 
-export default Settings;
+export default withTheme(Settings, getStyles());

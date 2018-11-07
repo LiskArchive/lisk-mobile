@@ -3,10 +3,11 @@ import { View, TouchableHighlight, Platform } from 'react-native';
 import { P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { colors } from '../../constants/styleGuide';
-import styles from './styles';
 import {
   bioMetricAuthentication,
 } from '../../utilities/passphrase';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 /**
  * A single setting item with icon and title
@@ -41,7 +42,7 @@ class ItemTitle extends React.Component {
 
   render() {
     const {
-      icon, iconSize, title, target, navigation, targetStateLabel, authenticate,
+      styles, icon, iconSize, title, target, navigation, targetStateLabel, authenticate,
     } = this.props;
 
     const props = {
@@ -84,4 +85,4 @@ class ItemTitle extends React.Component {
   }
 }
 
-export default ItemTitle;
+export default withTheme(ItemTitle, getStyles());

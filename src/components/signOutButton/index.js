@@ -1,4 +1,3 @@
-
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { NavigationActions } from 'react-navigation';
@@ -7,7 +6,8 @@ import {
 } from '../../actions/accounts';
 import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 const onClick = (navigation, accountSignedOut) => {
   // clean active account
@@ -34,7 +34,7 @@ const onClick = (navigation, accountSignedOut) => {
 class SignOutButton extends React.Component {
   render() {
     const {
-      navigation, titleStyle, style, accountSignedOut,
+      navigation, styles, titleStyle, style, accountSignedOut,
     } = this.props;
     return <IconButton
       icon='logout'
@@ -47,4 +47,4 @@ class SignOutButton extends React.Component {
   }
 }
 
-export default SignOutButton;
+export default withTheme(SignOutButton, getStyles());

@@ -7,7 +7,6 @@ import { fromRawLsk } from '../../../utilities/conversions';
 import transactions from '../../../constants/transactions';
 import { P, H1, H2, Small } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
-import styles from './styles';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
 import FormattedNumber from '../../formattedNumber';
@@ -15,6 +14,8 @@ import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
 import Scanner from './scanner';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
+import withTheme from '../../withTheme';
+import getStyles from './styles';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -88,7 +89,6 @@ class Form extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: false });
     if (this.props.prevState.address) {
       const state = {
         address: {
@@ -149,6 +149,7 @@ class Form extends React.Component {
   }
 
   render() {
+    const { styles } = this.props;
     const {
       address, amount, reference, avatarPreview,
     } = this.state;
@@ -263,4 +264,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default withTheme(Form, getStyles());

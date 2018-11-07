@@ -1,13 +1,13 @@
 import React from 'react';
 import { Image } from 'react-native';
 import bg from '../../assets/images/bg.png';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
-const BackgroundImage = () =>
+const BackgroundImage = ({ styles }) =>
   <Image
     style={styles.image}
     source={bg}
   />;
 
-export default BackgroundImage;
-
+export default withTheme(BackgroundImage, getStyles());

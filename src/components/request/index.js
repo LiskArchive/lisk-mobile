@@ -4,12 +4,13 @@ import { View, Platform } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Share from '../share';
-import styles from './styles';
 import { viewportHeight, deviceWidth } from '../../utilities/device';
 import Input from '../toolBox/input';
 import { H1, P, B } from '../toolBox/typography';
 import reg from '../../constants/regex';
 import colors from '../../constants/styleGuide/colors';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 const pageHeight = viewportHeight();
 const qrCodeSize = Math.min(pageHeight - 355, Math.floor(deviceWidth() * 0.8));
@@ -59,7 +60,9 @@ class Request extends React.Component {
   }
 
   render() {
-    const address = this.props.account ? this.props.account.address : '';
+    const { styles, account } = this.props;
+    const address = account ? account.address : '';
+
     return (<View style={styles.wrapper}>
       <KeyboardAwareScrollView
         enableOnAndroid={true}
@@ -104,4 +107,4 @@ class Request extends React.Component {
   }
 }
 
-export default Request;
+export default withTheme(Request, getStyles());

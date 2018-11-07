@@ -1,7 +1,4 @@
-import fontsConstants from './fonts';
-import colorsConstants from './colors';
-import boxesConstants from './boxes';
-
-export const fonts = fontsConstants;
-export const colors = colorsConstants;
-export const boxes = boxesConstants;
+export { default as colors } from './colors';
+export { default as fonts } from './fonts';
+export { default as boxes } from './boxes';
+export { default as themes } from './themes';

@@ -1,9 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import styles from './styles';
 import reg from '../../constants/regex';
 import { PrimaryButton } from '../toolBox/button';
 import Input from '../toolBox/input';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 class Search extends React.Component {
   constructor() {
@@ -59,6 +60,8 @@ class Search extends React.Component {
   }
 
   render() {
+    const { styles } = this.props;
+
     return (<View>
       <Input
         label='Search for Lisk ID, Tx ID or delegate name'
@@ -77,4 +80,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default withTheme(Search, getStyles());

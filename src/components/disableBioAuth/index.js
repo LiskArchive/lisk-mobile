@@ -1,7 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Image } from 'react-native';
-import styles from './styles';
 import { deviceHeight } from '../../utilities/device';
 import {
   removePassphraseFromKeyChain,
@@ -13,6 +12,8 @@ import { H1, B, P } from '../toolBox/typography';
 import CopyToClipboard from '../copyToClipboard';
 import { SecondaryButton } from '../toolBox/button';
 import image from '../../assets/images/registrationProcess/passphrase3x.png';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -27,7 +28,7 @@ class DisableBioAuth extends React.Component {
   }
 
   render() {
-    const { passphrase } = this.props.account;
+    const { styles, account: { passphrase } } = this.props;
     const title = this.props.navigation.getParam('title', null);
 
     return (<View style={styles.wrapper}>
@@ -78,4 +79,4 @@ class DisableBioAuth extends React.Component {
   }
 }
 
-export default DisableBioAuth;
+export default withTheme(DisableBioAuth, getStyles());

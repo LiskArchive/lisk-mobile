@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Image, Linking } from 'react-native';
 import { H1, H4, P, A } from '../toolBox/typography';
-import styles from './styles';
 import Logo from '../../assets/images/lisk-logo.png';
 import packageJson from '../../../package.json';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 const logoSize = 83;
 
@@ -13,7 +14,7 @@ const openLiskWebsite = () => {
     .catch(err => console.error('An error occurred', err));
 };
 
-const Settings = () => (
+const Settings = ({ styles }) => (
   <View style={styles.container}>
     <View style={styles.innerContainer}>
         <View>
@@ -38,4 +39,4 @@ const Settings = () => (
   </View>
 );
 
-export default Settings;
+export default withTheme(Settings, getStyles({ logoSize }));

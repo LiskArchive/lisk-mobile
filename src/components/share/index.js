@@ -2,10 +2,11 @@ import React from 'react';
 import { View, Text, Share as ShareAPI } from 'react-native';
 import Icon from '../toolBox/icon';
 import { colors } from '../../constants/styleGuide';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 const Share = ({
-  icon, value, style, type, children, containerStyle, color,
+  styles, icon, value, style, type, children, containerStyle, color,
 }) => {
   const Element = type || Text;
 
@@ -32,4 +33,4 @@ const Share = ({
   );
 };
 
-export default Share;
+export default withTheme(Share, getStyles());

@@ -3,12 +3,12 @@ import { View, Animated } from 'react-native';
 import List from './list';
 import Footer from './footer';
 import { H3, Small, A } from '../toolBox/typography';
-import styles from './styles';
 import { fromRawLsk } from '../../utilities/conversions';
 import Icon from '../toolBox/icon';
 import colors from '../../constants/styleGuide/colors';
 import easing from '../../utilities/easing';
-
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 /**
  * The container component containing sign in and create account functionality
@@ -48,7 +48,7 @@ class Transactions extends React.Component {
 
   render() {
     const {
-      transactions, navigate, account, footer,
+      styles, transactions, navigate, account, footer,
     } = this.props;
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
@@ -85,4 +85,4 @@ class Transactions extends React.Component {
   }
 }
 
-export default Transactions;
+export default withTheme(Transactions, getStyles());

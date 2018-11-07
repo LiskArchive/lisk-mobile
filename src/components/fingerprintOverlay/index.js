@@ -1,10 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 import BlurOverlay from 'react-native-blur-overlay';
-import styles from './styles';
 import Icon from '../toolBox/icon';
 import { H4, P } from '../toolBox/typography';
 import { colors } from '../../constants/styleGuide';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 class FingerprintOverlay extends React.Component {
   componentDidUpdate() {
@@ -14,14 +15,16 @@ class FingerprintOverlay extends React.Component {
       this.ref.closeOverlay();
     }
   }
+
   closeModal = () => {
     this.ref.closeOverlay();
     if (typeof this.props.onModalClosed === 'function') {
       this.props.onModalClosed();
     }
   }
+
   render() {
-    const { error } = this.props;
+    const { styles, error } = this.props;
     const iconColor = error ? colors.action1 : colors.primary5;
     const message = error ? 'Unauthorized! Please try again.' :
       'Scan your fingerprint on the\ndevice scanner to continue';
@@ -46,4 +49,4 @@ class FingerprintOverlay extends React.Component {
     </BlurOverlay>);
   }
 }
-export default FingerprintOverlay;
+export default withTheme(FingerprintOverlay, getStyles());

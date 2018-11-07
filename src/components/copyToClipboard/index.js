@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text, Clipboard } from 'react-native';
 import Icon from '../toolBox/icon';
 import { colors } from '../../constants/styleGuide';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 class CopyToClipBoard extends React.Component {
   state = { copied: false };
@@ -21,7 +22,7 @@ class CopyToClipBoard extends React.Component {
   render() {
     const {
       showIcon, value, type, label, iconColor, iconSize,
-      style, iconStyle, labelStyle,
+      styles, style, iconStyle, labelStyle,
     } = this.props;
     const Element = type || Text;
     const text = label || value;
@@ -43,4 +44,4 @@ class CopyToClipBoard extends React.Component {
   }
 }
 
-export default CopyToClipBoard;
+export default withTheme(CopyToClipBoard, getStyles());

@@ -2,7 +2,6 @@ import React from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { fromRawLsk } from '../../utilities/conversions';
-import styles from './styles';
 import FormattedNumber from '../formattedNumber';
 import Avatar from '../avatar';
 import FormattedDate from '../formattedDate';
@@ -10,6 +9,8 @@ import { B, Small } from '../toolBox/typography';
 import { stringShortener } from '../../utilities/helpers';
 import loadingAnimation from '../../assets/animations/loading-dots.json';
 import transactions from '../../constants/transactions';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
@@ -28,7 +29,7 @@ class Item extends React.Component {
   }
 
   render() {
-    const { tx, account } = this.props;
+    const { styles, tx, account } = this.props;
     let direction = 'incoming';
     let address = tx.senderId;
     let addressShortened = stringShortener(tx.senderId, 10, 3);
@@ -81,4 +82,4 @@ class Item extends React.Component {
   }
 }
 
-export default Item;
+export default withTheme(Item, getStyles());

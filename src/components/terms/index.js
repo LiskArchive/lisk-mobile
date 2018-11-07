@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { H1, H4, Small, B } from '../toolBox/typography';
-import styles from './styles';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 /* eslint-disable */
-const Terms = () => (
+const Terms = ({ styles }) => (
   <ScrollView style={styles.container}>
     <View style={styles.innerContainer}>
       <View style={styles.titleContainer}>
@@ -250,5 +251,4 @@ const Terms = () => (
   </ScrollView>
 );
 /* eslint-enable */
-export default Terms;
-
+export default withTheme(Terms, getStyles());

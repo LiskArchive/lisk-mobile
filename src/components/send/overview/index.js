@@ -4,12 +4,13 @@ import connect from 'redux-connect-decorator';
 import reg from '../../../constants/regex';
 import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
-import styles from './styles';
 import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
 import { H1, B, P, A, Small } from '../../toolBox/typography';
+import withTheme from '../../withTheme';
+import getStyles from './styles';
 
 const messages = {
   initialize: {
@@ -104,7 +105,9 @@ class Overview extends React.Component {
   render() {
     const actionType = this.props.navigation.state.params.initialize || this.state.initialize ?
       'initialize' : 'send';
-    const { address, amount, reference } = this.props;
+    const {
+      styles, address, amount, reference,
+    } = this.props;
 
     return (<View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -151,4 +154,4 @@ class Overview extends React.Component {
   }
 }
 
-export default Overview;
+export default withTheme(Overview, getStyles());

@@ -8,12 +8,13 @@ import {
 import Avatar from '../avatar';
 import { fromRawLsk } from '../../utilities/conversions';
 // import Modal from '../followedAccountsModal';
-import styles, { animationRanges } from './styles';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
 import { H4, P, H2 } from '../toolBox/typography';
 import stripes from '../../assets/images/stripes.png';
 import easing from '../../utilities/easing';
+import withTheme from '../withTheme';
+import getStyles, { animationRanges } from './styles';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -79,7 +80,7 @@ class AccountSummary extends React.Component {
   }
 
   render() {
-    const { account } = this.props;
+    const { styles, account } = this.props;
     const Anim = Animated.View;
     const itpl = this.interpolate;
     const { opacity, top } = this.state.initialAnimations;
@@ -123,4 +124,4 @@ class AccountSummary extends React.Component {
   }
 }
 
-export default AccountSummary;
+export default withTheme(AccountSummary, getStyles());
