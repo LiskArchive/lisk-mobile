@@ -159,12 +159,14 @@ class SignIn extends React.Component {
    *
    * @param {String} passphrase - valid mnemonic passphrase
    */
-  onFormSubmission = (passphrase) => {
+  onFormSubmission = (passphrase, submissionType) => {
     this.setState({
       connectionError: false,
       passphrase,
     });
-    if (this.props.settings.sensorType && !this.props.settings.bioAuthRecommended) {
+    if (this.props.settings.sensorType &&
+      !this.props.settings.bioAuthRecommended &&
+      submissionType === 'form') {
       this.promptBioAuth(passphrase, this.signIn);
     } else {
       this.signIn(passphrase.value);
