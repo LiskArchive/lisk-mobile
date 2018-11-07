@@ -11,7 +11,7 @@ class Splash extends React.Component {
   state = {
     bgOpacity: new Animated.Value(1),
     iconOpacity: new Animated.Value(0),
-    top: new Animated.Value((deviceHeight() / 2) + 16),
+    top: new Animated.Value((deviceHeight() / 2) - 18),
   }
 
   componentDidMount() {
