@@ -32,7 +32,7 @@ const summaryHeight = 250;
 @connect(state => ({
   account: state.accounts.active,
   transactions: state.transactions,
-  activePear: state.peers,
+  activePeer: state.peers.activePeer,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
@@ -60,18 +60,20 @@ class Wallet extends React.Component {
 
   componentDidMount() {
     BackgroundTask.schedule();
+    console.log(`${this.props.activePeer.nodes[0]}/api/accounts?address=${this.props.account.address}`);
     initQueue().then((queue) => {
+      console.log(queue);
       queue.createJob(
         'check-balance',
         {
+          serverUrl: this.props.activePeer.nodes[0],
           address: this.props.account.address,
-          serverUrl: this.props.activePear.nodes[0],
           balance: this.props.account.balance,
         },
-        { attempts: 5, timeout: 15000 },
+        { attempts: 1, timeout: 15000 },
         false,
       );
-    });
+    }).catch(err => console.log(err));
     const { settingsUpdated, transactionsLoaded } = this.props;
     transactionsLoaded({
       senderIdOrRecipientId: this.props.account.address,
