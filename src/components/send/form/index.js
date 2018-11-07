@@ -89,7 +89,6 @@ class Form extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: false });
     if (this.props.prevState.address) {
       const state = {
         address: {

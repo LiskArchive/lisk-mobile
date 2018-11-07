@@ -5,39 +5,46 @@ import { createThemedStyles } from '../../utilities/helpers';
 
 export default (Component, styles, forwardRefs = false) => {
   if (forwardRefs) {
-    const WithTheme = React.forwardRef((props, ref) => (
-      <ThemeContext.Consumer>
-        {theme => (
-          <Component
-            {...props}
-            ref={ref}
-            styles={createThemedStyles(theme, styles)}
-          />
-        )}
-      </ThemeContext.Consumer>
-    ));
+    class WithTheme extends React.Component {
+      render() {
+        const { forwardedRef, ...rest } = this.props;
 
-    hoistNonReactStatics(WithTheme, Component);
+        return (
+          <ThemeContext.Consumer>
+            {theme => (
+              <Component
+                ref={forwardedRef}
+                styles={createThemedStyles(theme, styles)}
+                theme={theme}
+                {...rest}
+              />
+            )}
+          </ThemeContext.Consumer>
+        );
+      }
+    }
+
     WithTheme.displayName = `withTheme(${Component.displayName || Component.name}`;
-
-    return WithTheme;
+    hoistNonReactStatics(WithTheme, Component);
+    return React.forwardRef((props, ref) => <WithTheme {...props} forwardedRef={ref} />);
   }
 
-  return (props) => {
-    const WithTheme = (
-      <ThemeContext.Consumer>
-        {theme => (
-          <Component
-            {...props}
-            styles={createThemedStyles(theme, styles)}
-          />
-        )}
-      </ThemeContext.Consumer>
-    );
+  class WithTheme extends React.Component {
+    render() {
+      return (
+        <ThemeContext.Consumer>
+          {theme => (
+            <Component
+              {...this.props}
+              styles={createThemedStyles(theme, styles)}
+              theme={theme}
+            />
+          )}
+        </ThemeContext.Consumer>
+      );
+    }
+  }
 
-    hoistNonReactStatics(WithTheme, Component);
-    WithTheme.displayName = `withTheme(${Component.displayName || Component.name}`;
-
-    return WithTheme;
-  };
+  WithTheme.displayName = `withTheme(${Component.displayName || Component.name}`;
+  return hoistNonReactStatics(WithTheme, Component);
 };

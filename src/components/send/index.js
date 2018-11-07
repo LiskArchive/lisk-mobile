@@ -16,6 +16,7 @@ import getStyles from './styles';
 class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
+
     return {
       tabBarVisible: !(params && params.tabBar),
       headerLeft: (params && params.showButtonLeft) ? <IconButton
@@ -24,7 +25,7 @@ class Send extends React.Component {
       onPress={() => {
         params.action();
       }}
-      style={params && params.styles.back}
+      style={params && params.styles && params.styles.back}
       color={colors.white} /> : <IconButton color='transparent' icon='back'/>,
     };
   };
