@@ -16,38 +16,25 @@ const getDisplayName = Component =>
  * should be true when wrapping them with this HOC.
  */
 export default (WrappedComponent, styles, forwardRefs = false) => {
-  if (forwardRefs) {
-    class WithTheme extends React.Component {
-      render() {
-        const { forwardedRef, ...rest } = this.props;
-
-        return (
-          <ThemeContext.Consumer>
-            {theme => (
-              <WrappedComponent
-                ref={forwardedRef}
-                styles={createThemedStyles(theme, styles)}
-                theme={theme}
-                {...rest}
-              />
-            )}
-          </ThemeContext.Consumer>
-        );
-      }
-    }
-
-    WithTheme.displayName = `withTheme(${getDisplayName(WrappedComponent)}`;
-    hoistNonReactStatics(WithTheme, WrappedComponent);
-    return React.forwardRef((props, ref) => <WithTheme {...props} forwardedRef={ref} />);
-  }
-
   class WithTheme extends React.Component {
     render() {
+      // normalized the forwarded reference
+      const props = Object.keys(this.props)
+        .filter(key => key !== 'forwardedRef')
+        .reduce((acc, key) => {
+          acc[key] = this.props[key];
+          return acc;
+        }, {});
+      if (this.props.forwardedRef) {
+        props.ref = this.props.forwardedRef;
+      }
+
+
       return (
         <ThemeContext.Consumer>
           {theme => (
             <WrappedComponent
-              {...this.props}
+              {...props}
               styles={createThemedStyles(theme, styles)}
               theme={theme}
             />
@@ -58,5 +45,9 @@ export default (WrappedComponent, styles, forwardRefs = false) => {
   }
 
   WithTheme.displayName = `withTheme(${getDisplayName(WrappedComponent)}`;
-  return hoistNonReactStatics(WithTheme, WrappedComponent);
+  const HoistedWithTheme = hoistNonReactStatics(WithTheme, WrappedComponent);
+
+  return forwardRefs ?
+    React.forwardRef((props, ref) => <HoistedWithTheme {...props} forwardedRef={ref} />) :
+    HoistedWithTheme;
 };
