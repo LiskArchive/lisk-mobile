@@ -4,7 +4,7 @@ export default ({ logoSize }) => ({
   common: {
     container: {
       height: '100%',
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
     },
     innerContainer: {
       flex: 1,
@@ -21,11 +21,11 @@ export default ({ logoSize }) => ({
       justifyContent: 'center',
     },
     copy: {
-      color: colors.grayScale2,
+      color: colors.light.grayScale2,
       width: 'auto',
     },
     version: {
-      color: colors.grayScale2,
+      color: colors.light.grayScale2,
     },
     centerAligned: {
       flexDirection: 'column',
@@ -48,7 +48,7 @@ export default ({ logoSize }) => ({
       marginBottom: 6,
     },
     link: {
-      color: colors.primary5,
+      color: colors.light.primary5,
       marginTop: 10,
     },
   },

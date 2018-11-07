@@ -5,7 +5,7 @@ export default () => ({
     container: {
       flex: 1,
       alignContent: 'space-around',
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
     },
     scrollView: {
       marginTop: -10,

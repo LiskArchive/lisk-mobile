@@ -20,7 +20,7 @@ export default () => ({
       // justifyContent: 'space-between',
     },
     title: {
-      color: colors.white,
+      color: colors.light.white,
       textAlign: 'center',
       marginTop: 20,
       paddingBottom: 20,
@@ -35,21 +35,21 @@ export default () => ({
     iconWrapper: {
       width: 100,
       height: 100,
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
       borderRadius: 50,
       paddingTop: 20,
       marginBottom: 24,
     },
     icon: {
       textAlign: 'center',
-      // color: colors.white,
+      // color: colors.light.white,
     },
     description: {
       textAlign: 'center',
-      color: colors.white,
+      color: colors.light.white,
     },
     error: {
-      color: colors.action1,
+      color: colors.light.action1,
       textAlign: 'center',
       // paddingBottom: 10,
       marginTop: 15,

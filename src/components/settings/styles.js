@@ -4,7 +4,7 @@ export default () => ({
   common: {
     container: {
       flex: 1,
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
       padding: 20,
     },
     group: {
@@ -12,7 +12,7 @@ export default () => ({
     },
     item: {
       borderBottomWidth: 1,
-      borderBottomColor: colors.grayScale5,
+      borderBottomColor: colors.light.grayScale5,
       paddingTop: 16,
       paddingBottom: 6,
     },
@@ -28,7 +28,7 @@ export default () => ({
       height: 24,
     },
     itemNameText: {
-      color: colors.grayScale1,
+      color: colors.light.grayScale1,
       lineHeight: 20,
     },
     itemIcon: {

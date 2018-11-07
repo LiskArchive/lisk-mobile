@@ -42,7 +42,7 @@ class Register extends React.Component {
           params.action();
         }}
         style={styles.backButton}
-        color={colors.grayScale1}/> :
+        color={colors.light.grayScale1}/> :
         null,
       headerRight: (params && params.action) ? <IconButton color='transparent' icon='back'/> : null,
     };

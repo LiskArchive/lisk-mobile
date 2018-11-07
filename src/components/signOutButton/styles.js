@@ -13,7 +13,7 @@ export default () => ({
       fontSize: 16,
       fontWeight: '500',
       textAlign: 'left',
-      color: colors.primary5,
+      color: colors.light.primary5,
     },
   },
 });

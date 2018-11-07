@@ -6,25 +6,25 @@ const bottomOffset = DeviceInfo.isIPhoneX_deprecated ? 30 : 0;
 
 const styles = {
   h1: {
-    color: colors.black,
+    color: colors.light.black,
     fontSize: fonts.size.h1,
     fontWeight: 'bold',
     fontFamily: fonts.family.heading,
   },
   h2: {
-    color: colors.black,
+    color: colors.light.black,
     fontSize: fonts.size.h2,
     fontWeight: 'bold',
     fontFamily: fonts.family.heading,
   },
   h3: {
-    color: colors.black,
+    color: colors.light.black,
     fontSize: fonts.size.h3,
     fontWeight: 'bold',
     fontFamily: fonts.family.heading,
   },
   h4: {
-    color: colors.black,
+    color: colors.light.black,
     fontSize: fonts.size.h4,
     fontWeight: 'bold',
     fontFamily: fonts.family.heading,
@@ -56,7 +56,7 @@ const styles = {
     textAlign: 'center',
   },
   primaryButton: {
-    color: colors.white,
+    color: colors.light.white,
     lineHeight: boxes.buttonHeight,
   },
   buttonWrapper: {
@@ -73,27 +73,27 @@ const styles = {
     alignItems: 'center',
   },
   iconButtonTitle: {
-    color: colors.primary9,
+    color: colors.light.primary9,
     lineHeight: 18,
   },
   disabledButtonColor: {
-    color: colors.grayScale3,
+    color: colors.light.grayScale3,
   },
   disabledButtonBg: {
-    backgroundColor: colors.white,
-    borderColor: colors.grayScale3,
+    backgroundColor: colors.light.white,
+    borderColor: colors.light.grayScale3,
     borderWidth: 1,
   },
   labelButton: {
     backgroundColor: 'transparent',
-    color: colors.primary4,
+    color: colors.light.primary4,
     fontSize: fonts.size.base,
     borderWidth: 2,
-    borderColor: colors.primary4,
+    borderColor: colors.light.primary4,
     fontFamily: fonts.family.context,
   },
   inputLabel: {
-    color: colors.grayScale1,
+    color: colors.light.grayScale1,
     fontFamily: fonts.family.contextLight,
     fontSize: fonts.size.input,
     fontWeight: '400',
@@ -105,13 +105,13 @@ const styles = {
   },
   input: {
     fontWeight: 'bold',
-    color: colors.black,
+    color: colors.light.black,
     fontSize: fonts.size.input,
     fontFamily: fonts.family.contextSemiBold,
     // lineHeight: 30,
     minHeight: 30,
     width: '100%',
-    borderBottomColor: colors.grayScale1,
+    borderBottomColor: colors.light.grayScale1,
     paddingBottom: 5,
     borderBottomWidth: 1,
     paddingTop: 5,
@@ -125,7 +125,7 @@ const styles = {
     // paddingRight: 20,
   },
   errorMessage: {
-    color: colors.grayScale1,
+    color: colors.light.grayScale1,
     fontFamily: fonts.family.context,
     marginBottom: 20,
     paddingTop: 0,
@@ -135,10 +135,10 @@ const styles = {
     fontSize: fonts.size.input,
   },
   errorIcon: {
-    color: colors.action1,
+    color: colors.light.action1,
   },
   inputErrorStyle: {
-    borderBottomColor: colors.action1,
+    borderBottomColor: colors.light.action1,
   },
   passphraseInput: {
     color: 'black',

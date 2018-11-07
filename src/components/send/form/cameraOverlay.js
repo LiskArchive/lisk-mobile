@@ -30,7 +30,7 @@ const CameraOverlay = ({ styles, photoPermission, toggleGallery }) => (
         styles.galleryButton,
         photoPermission ? styles.galleryEnabled : styles.galleryDisabled,
         ]}>
-      <Icon size={18} color={colors.white} name='gallery' />
+      <Icon size={18} color={colors.light.white} name='gallery' />
     </TouchableHighlight>
   </View>
 );

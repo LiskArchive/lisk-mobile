@@ -4,7 +4,7 @@ export default () => ({
   common: {
     container: {
       height: '100%',
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
     },
     innerContainer: {
       flex: 1,
@@ -24,10 +24,10 @@ export default () => ({
       // lineHeight: 41,
     },
     subTitle: {
-      color: colors.grayScale2,
+      color: colors.light.grayScale2,
     },
     link: {
-      color: colors.primary5,
+      color: colors.light.primary5,
       marginTop: 10,
     },
     itemTitle: {
@@ -36,7 +36,7 @@ export default () => ({
     },
     itemDescription: {
       lineHeight: 22,
-      color: colors.grayScale2,
+      color: colors.light.grayScale2,
     },
   },
 });

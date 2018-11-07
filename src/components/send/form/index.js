@@ -195,7 +195,7 @@ class Form extends React.Component {
                 title='Scan'
                 icon='scanner'
                 iconSize={18}
-                color={colors.primary5} />
+                color={colors.light.primary5} />
               {
                 address.validity === 0 && avatarPreview ?
                   <Avatar
@@ -206,7 +206,7 @@ class Form extends React.Component {
                     style={styles.avatar}
                     name='avatar-placeholder'
                     size={34}
-                    color={colors.grayScale4} />
+                    color={colors.light.grayScale4} />
               }
               <Input
                 label='Address'

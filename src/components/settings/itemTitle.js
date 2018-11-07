@@ -69,14 +69,14 @@ class ItemTitle extends React.Component {
 
     return (<TouchableHighlight {...props}>
       <Fragment>
-        <Icon name={icon} size={iconSize} color={colors.grayScale6} style={styles.itemIcon} />
+        <Icon name={icon} size={iconSize} color={colors.light.grayScale6} style={styles.itemIcon} />
         <View style={styles.itemName}><P style={styles.itemNameText}>{title}</P></View>
         <View style={styles.itemArrow}>
           {
             target ?
             <Fragment>
               { targetStateLabel }
-              <Icon name='forward' size={21} color={colors.black} />
+              <Icon name='forward' size={21} color={colors.light.black} />
             </Fragment> : <Fragment>{ targetStateLabel }</Fragment>
           }
         </View>

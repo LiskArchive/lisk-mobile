@@ -47,7 +47,7 @@ export default () => ({
       position: 'absolute',
       zIndex: 4,
       elevation: 4,
-      shadowColor: colors.primary5,
+      shadowColor: colors.light.primary5,
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.2,
       shadowRadius: 10,
@@ -55,14 +55,14 @@ export default () => ({
       overflow: 'hidden',
     },
     unit: {
-      color: colors.primary5,
+      color: colors.light.primary5,
       fontSize: 23,
       lineHeight: 25,
       marginLeft: 5,
       marginTop: -3,
     },
     value: {
-      color: colors.primary5,
+      color: colors.light.primary5,
       lineHeight: 25,
     },
     address: {
@@ -78,7 +78,7 @@ export default () => ({
     },
     addressP: {
       lineHeight: 25,
-      color: colors.grayScale1,
+      color: colors.light.grayScale1,
     },
     balance: {
       height: 25,
@@ -107,7 +107,7 @@ export default () => ({
     },
     box: {
       width: width - (2 * boxes.boxPadding),
-      shadowColor: colors.primary5,
+      shadowColor: colors.light.primary5,
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.2,
       shadowRadius: 10,
@@ -115,7 +115,7 @@ export default () => ({
       left: boxes.boxPadding,
       zIndex: 1,
       borderRadius: boxes.boxBorderRadius,
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
       elevation: 3,
     },
   },

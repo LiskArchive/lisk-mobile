@@ -13,19 +13,19 @@ const styles = {
     marginTop: 8,
   },
   subTitle: {
-    color: colors.grayScale2,
+    color: colors.light.grayScale2,
   },
   subHeader: {
     marginTop: 8,
     marginBottom: 25,
-    color: colors.grayScale2,
+    color: colors.light.grayScale2,
   },
   label: {
-    color: colors.grayScale2,
+    color: colors.light.grayScale2,
     marginLeft: 12,
   },
   passphraseContainer: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.light.white,
     padding: 20,
     shadowColor: '#0279b6',
     shadowOpacity: 0.1,
@@ -33,23 +33,23 @@ const styles = {
     marginTop: 10,
   },
   passphraseTitle: {
-    color: colors.grayScale2,
+    color: colors.light.grayScale2,
   },
   imageDescription: {
-    color: colors.grayScale2,
+    color: colors.light.grayScale2,
     marginTop: 16,
     fontFamily: fonts.family.context,
   },
   passphrase: {
     marginTop: 7,
-    color: colors.black,
+    color: colors.light.black,
   },
   copyContainer: {
     alignItems: 'center',
     marginTop: 5,
   },
   copy: {
-    color: colors.primary5,
+    color: colors.light.primary5,
   },
   imageContainer: {
     alignItems: 'center',
@@ -59,7 +59,7 @@ const styles = {
     height: 111,
   },
   caption: {
-    color: colors.grayScale2,
+    color: colors.light.grayScale2,
     marginTop: 15,
   },
 };

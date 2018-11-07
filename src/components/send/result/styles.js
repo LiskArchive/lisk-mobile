@@ -6,7 +6,7 @@ export default () => ({
   common: {
     container: {
       height: '100%',
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
     },
     innerContainer: {
       flexDirection: 'column',
@@ -32,7 +32,7 @@ export default () => ({
     },
     subtitle: {
       marginTop: 7,
-      color: colors.grayScale2,
+      color: colors.light.grayScale2,
     },
     illustration: {
       width: '100%',

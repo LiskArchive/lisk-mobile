@@ -75,7 +75,7 @@ class BiometricAuth extends React.Component {
             ref={(el) => { this.startUpAnimEl = el; }}/>
         }
         <Animated.View style={{ opacity }}>
-          <Icon size={40} color={colors.white}
+          <Icon size={40} color={colors.light.white}
             name={ this.props.sensorType === 'Face ID' ? 'face-id-full' : 'touch-id-full'}
             style={styles.authTypeIcon} />
         </Animated.View>

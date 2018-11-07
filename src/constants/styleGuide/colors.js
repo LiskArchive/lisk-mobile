@@ -1,4 +1,4 @@
-export default {
+const light = {
   primary1: '#001a3e',
   primary2: '#002449',
   primary3: '#013165',
@@ -21,4 +21,12 @@ export default {
   success1: '#008722',
   success2: '#96C256',
   warn: '#F7C343',
+};
+
+const dark = {
+};
+
+export default {
+  light,
+  dark,
 };

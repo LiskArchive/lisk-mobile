@@ -30,7 +30,7 @@ const SettingButton = ({ navigation }) =>
     iconSize={20}
     onPress={() => navigation.navigate({ routeName: 'Settings' })}
     style={styles.settings}
-    color={colors.white} />;
+    color={colors.light.white} />;
 
 const placeHolderButton = <IconButton color='transparent' icon='back'/>;
 // eslint-disable-next-line new-cap
@@ -78,7 +78,7 @@ export default StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        title: <Logo color={colors.grayScale1} />,
+        title: <Logo color={colors.light.grayScale1} />,
         headerTitleStyle: {
           textAlign: 'center',
           flex: 1,
@@ -112,9 +112,9 @@ export default StackNavigator(
       navigationOptions: () => ({
         headerBackground: <Bg />,
         title: <Logo />,
-        headerTintColor: colors.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
-          backgroundColor: colors.primary5,
+          backgroundColor: colors.light.primary5,
           overflow: 'hidden',
         },
       }),
@@ -131,10 +131,10 @@ export default StackNavigator(
           onPress={() => navigation.pop()}
           style={styles.back}
           iconButtonTitle={styles.backTitle}
-          color={colors.white} />,
+          color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.primary5,
+          backgroundColor: colors.light.primary5,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -155,10 +155,10 @@ export default StackNavigator(
           onPress={() => navigation.pop()}
           style={styles.back}
           iconButtonTitle={styles.backTitle}
-          color={colors.white} />,
+          color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.primary5,
+          backgroundColor: colors.light.primary5,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -179,10 +179,10 @@ export default StackNavigator(
           onPress={() => navigation.pop()}
           style={styles.back}
           iconButtonTitle={styles.backTitle}
-          color={colors.white} />,
+          color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.primary5,
+          backgroundColor: colors.light.primary5,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -203,10 +203,10 @@ export default StackNavigator(
           onPress={() => navigation.pop()}
           style={styles.back}
           iconButtonTitle={styles.backTitle}
-          color={colors.white} />,
+          color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.primary5,
+          backgroundColor: colors.light.primary5,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -227,10 +227,10 @@ export default StackNavigator(
           onPress={() => navigation.pop()}
           style={styles.back}
           iconButtonTitle={styles.backTitle}
-          color={colors.white} />,
+          color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.primary5,
+          backgroundColor: colors.light.primary5,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -251,10 +251,10 @@ export default StackNavigator(
           onPress={() => navigation.pop()}
           style={styles.back}
           iconButtonTitle={styles.backTitle}
-          color={colors.white} />,
+          color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.primary5,
+          backgroundColor: colors.light.primary5,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -275,10 +275,10 @@ export default StackNavigator(
           onPress={() => navigation.pop()}
           style={styles.back}
           iconButtonTitle={styles.backTitle}
-          color={colors.white} />,
+          color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.primary5,
+          backgroundColor: colors.light.primary5,
           overflow: 'hidden',
         },
         headerTitleStyle: {

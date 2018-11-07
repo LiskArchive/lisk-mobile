@@ -4,7 +4,7 @@ export default () => ({
   common: {
     container: {
       height: '100%',
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
     },
     innerContainer: {
       flex: 1,
@@ -25,7 +25,7 @@ export default () => ({
       textAlign: 'left',
     },
     black: {
-      color: colors.black,
+      color: colors.light.black,
     },
     heading: {
       fontSize: 24,
@@ -54,14 +54,14 @@ export default () => ({
       marginTop: 15,
       marginBottom: 7,
 
-      color: colors.grayScale1,
+      color: colors.light.grayScale1,
       fontFamily: fonts.family.contextLight,
       fontSize: fonts.size.input,
       fontWeight: '400',
     },
     subtitle: {
       marginTop: 7,
-      color: colors.grayScale2,
+      color: colors.light.grayScale2,
     },
     addressContainer: {
       flexDirection: 'row',
@@ -72,7 +72,7 @@ export default () => ({
       marginRight: 20,
     },
     link: {
-      color: colors.primary5,
+      color: colors.light.primary5,
     },
     errorContainer: {
       flexDirection: 'row',
@@ -82,12 +82,12 @@ export default () => ({
       opacity: 0,
     },
     error: {
-      color: colors.grayScale1,
+      color: colors.light.grayScale1,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
     },
     errorIcon: {
-      color: colors.action1,
+      color: colors.light.action1,
       marginRight: 5,
     },
     visible: {

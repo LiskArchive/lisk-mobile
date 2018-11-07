@@ -81,11 +81,11 @@ class Heading extends React.Component {
     return (<Animated.View style={[styles.headingContainer, { opacity: bgOpacity }]}>
       <Animated.View style={[styles.headingTopBar, { opacity: logoOpacity }]}>
         <Icon name='back' size={30} color='transparent' style={styles.headingSkipButton}/>
-        <Icon name='lisk' size={30} color={colors.primary9} style={styles.headingLogo} />
+        <Icon name='lisk' size={30} color={colors.light.primary9} style={styles.headingLogo} />
         {
           index !== 2 ?
           <LabelButton
-            style={[styles.headingSkipButton, { color: colors.grayScale1 }]}
+            style={[styles.headingSkipButton, { color: colors.light.grayScale1 }]}
             onClick={this.props.skip}>Skip</LabelButton> :
             <Icon name='back' size={30} color='transparent' style={styles.headingSkipButton}/>
         }
@@ -96,25 +96,25 @@ class Heading extends React.Component {
           containerStyle={styles.headingDescriptionCntr}
           loop={false}
           onIndexChanged={this.onIndexChanged}
-          dotColor={colors.grayScale5}
-          activeDotColor={colors.primary9}
+          dotColor={colors.light.grayScale5}
+          activeDotColor={colors.light.primary9}
           paginationStyle={styles.headingPagination}>
           <View style={styles.headingDescriptionItem}>
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Activity history</H2>
-              <P style={[styles.centralized, { color: colors.grayScale2 }]}>Get a full overview of your current{'\n'}balance, transaction history{'\n'}and much more.</P>
+              <P style={[styles.centralized, { color: colors.light.grayScale2 }]}>Get a full overview of your current{'\n'}balance, transaction history{'\n'}and much more.</P>
             </View>
           </View>
           <View style={styles.headingDescriptionItem}>
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Token transfer</H2>
-              <P style={[styles.centralized, { color: colors.grayScale2 }]}>Transfer your LSK tokens easily to{'\n'}other accounts by simply scanning{'\n'}their QR code.</P>
+              <P style={[styles.centralized, { color: colors.light.grayScale2 }]}>Transfer your LSK tokens easily to{'\n'}other accounts by simply scanning{'\n'}their QR code.</P>
             </View>
           </View>
           <View style={styles.headingDescriptionItem}>
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Secure authentication</H2>
-              <P style={[styles.centralized, { color: colors.grayScale2 }]}>Access all functions of the app{'\n'}quickly and securely via advanced{'\n'}biometric authentication.</P>
+              <P style={[styles.centralized, { color: colors.light.grayScale2 }]}>Access all functions of the app{'\n'}quickly and securely via advanced{'\n'}biometric authentication.</P>
             </View>
           </View>
         </Swiper>

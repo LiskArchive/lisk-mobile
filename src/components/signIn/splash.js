@@ -43,10 +43,10 @@ class Splash extends React.Component {
         <Image source={topBubbles} style={{ width: '100%', height: '100%' }} />
       </Animated.View>
       <Animated.View style={[styles.splashFigure, styles.splashStatic, { opacity: iconOpacity }]}>
-        <Icon name='lisk-full' size={60} color={colors.primary9} style={styles.splashLogo} />
+        <Icon name='lisk-full' size={60} color={colors.light.primary9} style={styles.splashLogo} />
       </Animated.View>
       <Animated.View style={[styles.splashFigure, styles.splashAnimating, { top }]}>
-        <Icon name='lisk-full' size={60} color={colors.white} style={styles.splashLogo} />
+        <Icon name='lisk-full' size={60} color={colors.light.white} style={styles.splashLogo} />
       </Animated.View>
     </View>);
   }

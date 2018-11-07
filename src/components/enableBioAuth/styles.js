@@ -6,7 +6,7 @@ const { height } = Dimensions.get('window');
 export default () => ({
   common: {
     wrapper: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
       flex: 1,
     },
     container: {
@@ -22,7 +22,7 @@ export default () => ({
     subHeader: {
       marginTop: 14,
       marginBottom: 25,
-      color: colors.grayScale1,
+      color: colors.light.grayScale1,
     },
     row: {
       flexDirection: 'row',
@@ -31,7 +31,7 @@ export default () => ({
       paddingBottom: height > 640 ? 14 : 3,
     },
     separator: {
-      borderBottomColor: colors.grayScale5,
+      borderBottomColor: colors.light.grayScale5,
       borderBottomWidth: 1,
     },
     rowTitle: {
@@ -42,11 +42,11 @@ export default () => ({
       marginTop: 10,
     },
     description: {
-      color: colors.grayScale2,
+      color: colors.light.grayScale2,
       marginTop: 5,
     },
     label: {
-      color: colors.grayScale2,
+      color: colors.light.grayScale2,
       marginLeft: 12,
     },
   },
