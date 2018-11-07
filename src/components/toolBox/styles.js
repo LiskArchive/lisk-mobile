@@ -135,10 +135,10 @@ const styles = {
     fontSize: fonts.size.input,
   },
   errorIcon: {
-    color: colors.light.actionRed,
+    color: colors.light.red,
   },
   inputErrorStyle: {
-    borderBottomColor: colors.light.actionRed,
+    borderBottomColor: colors.light.red,
   },
   passphraseInput: {
     color: 'black',

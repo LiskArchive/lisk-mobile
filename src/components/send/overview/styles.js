@@ -87,7 +87,7 @@ export default () => ({
       fontSize: fonts.size.input,
     },
     errorIcon: {
-      color: colors.light.actionRed,
+      color: colors.light.red,
       marginRight: 5,
     },
     visible: {

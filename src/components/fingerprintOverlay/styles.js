@@ -49,7 +49,7 @@ export default () => ({
       color: colors.light.white,
     },
     error: {
-      color: colors.light.actionRed,
+      color: colors.light.red,
       textAlign: 'center',
       // paddingBottom: 10,
       marginTop: 15,

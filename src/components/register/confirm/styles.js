@@ -72,8 +72,8 @@ const styles = {
     backgroundColor: colors.light.green,
   },
   errorButton: {
-    borderColor: colors.light.actionRed,
-    backgroundColor: colors.light.actionRed,
+    borderColor: colors.light.red,
+    backgroundColor: colors.light.red,
   },
   selectedPlaceholder: {
     borderColor: colors.light.gray4,

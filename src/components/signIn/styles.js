@@ -42,7 +42,7 @@ const styles = {
     fontSize: fonts.size.input,
   },
   connectionErrorIcon: {
-    color: colors.light.actionRed,
+    color: colors.light.red,
     marginRight: 5,
   },
   visible: {
@@ -168,7 +168,7 @@ const styles = {
   invalidAuthBg: {
     width: 84,
     height: 84,
-    backgroundColor: colors.light.actionRed,
+    backgroundColor: colors.light.red,
     borderRadius: 42,
     zIndex: 1,
     position: 'absolute',
@@ -182,7 +182,7 @@ const styles = {
     zIndex: 2,
   },
   error: {
-    color: colors.light.actionRed,
+    color: colors.light.red,
   },
   invisible: {
     color: 'transparent',

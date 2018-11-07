@@ -25,7 +25,7 @@ class FingerprintOverlay extends React.Component {
 
   render() {
     const { styles, error } = this.props;
-    const iconColor = error ? colors.light.actionRed : colors.light.blue;
+    const iconColor = error ? colors.light.red : colors.light.blue;
     const message = error ? 'Unauthorized! Please try again.' :
       'Scan your fingerprint on the\ndevice scanner to continue';
     return (<BlurOverlay
