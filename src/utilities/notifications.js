@@ -27,10 +27,12 @@ export const createNotification = (changes, balance) => {
   let message;
   if ((changes * 1) > 0) {
     message = `you have received ${fromRawLsk(changes)} LSK. your new balance is ${fromRawLsk(balance)} LSk`;
-  } else {
+  } else if ((changes * 1) < 0) {
     message = `you have sent ${fromRawLsk(Math.abs(changes))} LSK. your new balance is ${fromRawLsk(balance)} LSk`;
   }
-  sendNotifications(message);
+  if (message) {
+    sendNotifications(message);
+  }
 };
 
 export const requestNotificationPermissions = () => new Promise((resolve, reject) => {
