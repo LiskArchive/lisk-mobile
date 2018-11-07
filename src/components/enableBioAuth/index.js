@@ -37,7 +37,7 @@ class EnableBioAuth extends React.Component {
             <H1 style={styles.header}>Enabling {title}</H1>
             <B style={styles.subHeader}>Here’s what you need to know:</B>
             <View style={[styles.row, styles.separator]}>
-              <Icon name='passphrase' style={styles.icon} color={colors.light.primary5} size={36}/>
+              <Icon name='passphrase' style={styles.icon} color={colors.light.blue} size={36}/>
               <View style={styles.textWrapper}>
                 <B style={styles.rowTitle}>Your passphrase is still needed</B>
                 <Small style={styles.description}>
@@ -47,7 +47,7 @@ class EnableBioAuth extends React.Component {
               </View>
             </View>
             <View style={[styles.row, styles.separator]}>
-              <Icon name='address' style={styles.icon} color={colors.light.grayScale1} size={36}/>
+              <Icon name='address' style={styles.icon} color={colors.light.gray1} size={36}/>
               <View style={styles.textWrapper}>
                 <B style={styles.rowTitle}>You can always turn it off</B>
                 <Small style={styles.description}>
@@ -57,7 +57,7 @@ class EnableBioAuth extends React.Component {
               </View>
             </View>
             <View style={[styles.row]}>
-              <Icon name='avatar' style={styles.icon} color='#ffb533' size={36}/>
+              <Icon name='avatar' style={styles.icon} color={colors.light.yellow} size={36}/>
               <View style={styles.textWrapper}>
                 <B style={styles.rowTitle}>It’s fast and secure</B>
                 <Small style={styles.description}>

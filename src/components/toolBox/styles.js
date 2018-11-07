@@ -73,27 +73,27 @@ const styles = {
     alignItems: 'center',
   },
   iconButtonTitle: {
-    color: colors.light.primary9,
+    color: colors.light.actionBlue,
     lineHeight: 18,
   },
   disabledButtonColor: {
-    color: colors.light.grayScale3,
+    color: colors.light.gray4,
   },
   disabledButtonBg: {
     backgroundColor: colors.light.white,
-    borderColor: colors.light.grayScale3,
+    borderColor: colors.light.gray4,
     borderWidth: 1,
   },
   labelButton: {
     backgroundColor: 'transparent',
-    color: colors.light.primary4,
+    color: colors.light.actionBlueAccent,
     fontSize: fonts.size.base,
     borderWidth: 2,
-    borderColor: colors.light.primary4,
+    borderColor: colors.light.actionBlueAccent,
     fontFamily: fonts.family.context,
   },
   inputLabel: {
-    color: colors.light.grayScale1,
+    color: colors.light.gray1,
     fontFamily: fonts.family.contextLight,
     fontSize: fonts.size.input,
     fontWeight: '400',
@@ -111,7 +111,7 @@ const styles = {
     // lineHeight: 30,
     minHeight: 30,
     width: '100%',
-    borderBottomColor: colors.light.grayScale1,
+    borderBottomColor: colors.light.gray1,
     paddingBottom: 5,
     borderBottomWidth: 1,
     paddingTop: 5,
@@ -125,7 +125,7 @@ const styles = {
     // paddingRight: 20,
   },
   errorMessage: {
-    color: colors.light.grayScale1,
+    color: colors.light.gray1,
     fontFamily: fonts.family.context,
     marginBottom: 20,
     paddingTop: 0,
@@ -135,10 +135,10 @@ const styles = {
     fontSize: fonts.size.input,
   },
   errorIcon: {
-    color: colors.light.action1,
+    color: colors.light.actionRed,
   },
   inputErrorStyle: {
-    borderBottomColor: colors.light.action1,
+    borderBottomColor: colors.light.actionRed,
   },
   passphraseInput: {
     color: 'black',

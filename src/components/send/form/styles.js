@@ -10,7 +10,7 @@ export default () => ({
     },
     subtitle: {
       marginTop: 7,
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     innerContainer: {
       flexDirection: 'column',
@@ -37,7 +37,7 @@ export default () => ({
       borderBottomWidth: 1,
       borderLeftWidth: 0,
       borderRightWidth: 0,
-      borderColor: colors.light.grayScale5,
+      borderColor: colors.light.gray5,
       marginTop: 20,
       paddingTop: 10,
       paddingBottom: 16,
@@ -52,11 +52,11 @@ export default () => ({
       paddingTop: 8,
     },
     number: {
-      color: colors.light.primary5,
+      color: colors.light.blue,
       lineHeight: 25,
     },
     unit: {
-      color: colors.light.primary5,
+      color: colors.light.blue,
       lineHeight: 25,
       marginLeft: 5,
       marginTop: -3,
@@ -98,7 +98,7 @@ export default () => ({
     },
     scanButtonTitle: {
       fontSize: 14,
-      color: colors.light.primary5,
+      color: colors.light.blue,
       width: 39,
       paddingLeft: 5,
     },
@@ -110,10 +110,10 @@ export default () => ({
       justifyContent: 'center',
     },
     galleryEnabled: {
-      backgroundColor: colors.light.primary5,
+      backgroundColor: colors.light.blue,
     },
     galleryDisabled: {
-      backgroundColor: colors.light.grayScale2,
+      backgroundColor: colors.light.gray2,
     },
     galleryDescription: {
       color: colors.light.white,
@@ -158,7 +158,7 @@ export default () => ({
       width: '100%',
       top: 0,
       left: 0,
-      backgroundColor: colors.light.grayScale4,
+      backgroundColor: colors.light.gray6,
       zIndex: 10,
       flexDirection: 'column',
       justifyContent: 'center',
@@ -173,7 +173,7 @@ export default () => ({
       marginTop: 2,
       maxWidth: '80%',
       textAlign: 'center',
-      // color: colors.light.grayScale2,
+      // color: colors.light.gray2,
     },
   },
 });

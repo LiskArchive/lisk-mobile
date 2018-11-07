@@ -19,7 +19,7 @@ const styles = {
   },
   subHeader: {
     marginTop: 7,
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
   },
   imageContainer: {
     alignItems: 'center',
@@ -41,7 +41,7 @@ const styles = {
   },
   placeholder: {
     borderWidth: 1,
-    borderColor: colors.light.primary5,
+    borderColor: colors.light.blue,
     backgroundColor: colors.light.white,
     height: height < 640 ? 30 : 39,
     minWidth: 87,
@@ -52,8 +52,8 @@ const styles = {
     textAlign: 'center',
   },
   deActivePlaceholder: {
-    borderColor: colors.light.grayScale5,
-    backgroundColor: colors.light.grayScale5,
+    borderColor: colors.light.gray5,
+    backgroundColor: colors.light.gray5,
     borderWidth: 1,
     height: height < 640 ? 30 : 39,
     minWidth: 87,
@@ -68,16 +68,16 @@ const styles = {
     fontSize: fonts.base,
   },
   successButton: {
-    borderColor: colors.light.success1,
-    backgroundColor: colors.light.success1,
+    borderColor: colors.light.green,
+    backgroundColor: colors.light.green,
   },
   errorButton: {
-    borderColor: colors.light.action1,
-    backgroundColor: colors.light.action1,
+    borderColor: colors.light.actionRed,
+    backgroundColor: colors.light.actionRed,
   },
   selectedPlaceholder: {
-    borderColor: colors.light.grayScale3,
-    backgroundColor: colors.light.grayScale3,
+    borderColor: colors.light.gray4,
+    backgroundColor: colors.light.gray4,
   },
   optionsContainer: {
     marginTop: height > 640 ? 25 : 5,

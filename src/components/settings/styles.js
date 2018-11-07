@@ -12,7 +12,7 @@ export default () => ({
     },
     item: {
       borderBottomWidth: 1,
-      borderBottomColor: colors.light.grayScale5,
+      borderBottomColor: colors.light.gray5,
       paddingTop: 16,
       paddingBottom: 6,
     },
@@ -28,7 +28,7 @@ export default () => ({
       height: 24,
     },
     itemNameText: {
-      color: colors.light.grayScale1,
+      color: colors.light.gray1,
       lineHeight: 20,
     },
     itemIcon: {

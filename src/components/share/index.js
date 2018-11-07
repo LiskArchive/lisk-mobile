@@ -27,7 +27,7 @@ const Share = ({
                   message: value || children,
                   url: '',
                 })}
-                color={color || colors.light.grayScale1} /> : null
+                color={color || colors.light.gray1} /> : null
       }
     </View>
   );

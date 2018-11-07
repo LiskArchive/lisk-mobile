@@ -37,12 +37,12 @@ const styles = {
     paddingBottom: 10,
   },
   connectionError: {
-    color: colors.light.grayScale1,
+    color: colors.light.gray1,
     fontFamily: fonts.family.context,
     fontSize: fonts.size.input,
   },
   connectionErrorIcon: {
-    color: colors.light.action1,
+    color: colors.light.actionRed,
     marginRight: 5,
   },
   visible: {
@@ -52,7 +52,7 @@ const styles = {
     paddingLeft: boxes.boxPadding,
     paddingRight: boxes.boxPadding,
     textAlign: 'center',
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
     fontSize: fonts.size.base,
   },
   button: {
@@ -97,11 +97,11 @@ const styles = {
     flexDirection: 'column',
   },
   question: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
     textAlign: 'center',
   },
   link: {
-    color: colors.light.primary5,
+    color: colors.light.blue,
     fontWeight: 'bold',
     textAlign: 'center',
   },
@@ -118,7 +118,7 @@ const styles = {
     height: '100%',
   },
   splashBg: {
-    backgroundColor: colors.light.primary9,
+    backgroundColor: colors.light.actionBlue,
     position: 'absolute',
     left: 0,
     top: 0,
@@ -168,7 +168,7 @@ const styles = {
   invalidAuthBg: {
     width: 84,
     height: 84,
-    backgroundColor: colors.light.action1,
+    backgroundColor: colors.light.actionRed,
     borderRadius: 42,
     zIndex: 1,
     position: 'absolute',
@@ -182,7 +182,7 @@ const styles = {
     zIndex: 2,
   },
   error: {
-    color: colors.light.action1,
+    color: colors.light.actionRed,
   },
   invisible: {
     color: 'transparent',

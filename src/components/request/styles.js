@@ -18,7 +18,7 @@ export default () => ({
     },
     subtitle: {
       marginTop: 7,
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     headings: {
       marginRight: boxes.boxPadding,
@@ -42,7 +42,7 @@ export default () => ({
       height: 100,
     },
     blue: {
-      color: colors.light.primary5,
+      color: colors.light.blue,
     },
   },
 });

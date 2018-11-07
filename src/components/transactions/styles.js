@@ -16,7 +16,7 @@ export default () => ({
       flexDirection: 'row',
       justifyContent: 'flex-start',
       alignItems: 'stretch',
-      borderBottomColor: colors.light.grayScale5,
+      borderBottomColor: colors.light.gray5,
       borderBottomWidth: 1,
     },
     title: {
@@ -37,7 +37,7 @@ export default () => ({
       textAlign: 'right',
     },
     date: {
-      color: colors.light.grayScale1,
+      color: colors.light.gray1,
     },
     address: {
       paddingTop: 4,
@@ -47,7 +47,7 @@ export default () => ({
       paddingRight: 15,
     },
     incoming: {
-      color: colors.light.success1,
+      color: colors.light.green,
     },
     emptyState: {
       width: '100%',
@@ -72,7 +72,7 @@ export default () => ({
     },
     noTxTitle: {
       paddingTop: 10,
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     pendingIcon: {
       width: 18,
@@ -82,14 +82,14 @@ export default () => ({
       flexDirection: 'row',
       paddingBottom: 22,
       borderBottomWidth: 1,
-      borderBottomColor: colors.light.grayScale5,
+      borderBottomColor: colors.light.gray5,
     },
     initText: {
       marginLeft: 7,
     },
     link: {
       fontSize: fonts.size.small,
-      color: colors.light.primary6,
+      color: colors.light.blue,
     },
     footer: {
       height: 90,

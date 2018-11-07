@@ -54,14 +54,14 @@ export default () => ({
       marginTop: 15,
       marginBottom: 7,
 
-      color: colors.light.grayScale1,
+      color: colors.light.gray1,
       fontFamily: fonts.family.contextLight,
       fontSize: fonts.size.input,
       fontWeight: '400',
     },
     subtitle: {
       marginTop: 7,
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     addressContainer: {
       flexDirection: 'row',
@@ -72,7 +72,7 @@ export default () => ({
       marginRight: 20,
     },
     link: {
-      color: colors.light.primary5,
+      color: colors.light.blue,
     },
     errorContainer: {
       flexDirection: 'row',
@@ -82,12 +82,12 @@ export default () => ({
       opacity: 0,
     },
     error: {
-      color: colors.light.grayScale1,
+      color: colors.light.gray1,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
     },
     errorIcon: {
-      color: colors.light.action1,
+      color: colors.light.actionRed,
       marginRight: 5,
     },
     visible: {

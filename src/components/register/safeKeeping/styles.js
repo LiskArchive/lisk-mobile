@@ -13,15 +13,15 @@ const styles = {
     marginTop: 8,
   },
   subTitle: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
   },
   subHeader: {
     marginTop: 8,
     marginBottom: 25,
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
   },
   label: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
     marginLeft: 12,
   },
   passphraseContainer: {
@@ -33,10 +33,10 @@ const styles = {
     marginTop: 10,
   },
   passphraseTitle: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
   },
   imageDescription: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
     marginTop: 16,
     fontFamily: fonts.family.context,
   },
@@ -49,7 +49,7 @@ const styles = {
     marginTop: 5,
   },
   copy: {
-    color: colors.light.primary5,
+    color: colors.light.blue,
   },
   imageContainer: {
     alignItems: 'center',
@@ -59,7 +59,7 @@ const styles = {
     height: 111,
   },
   caption: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
     marginTop: 15,
   },
 };

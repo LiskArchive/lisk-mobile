@@ -17,7 +17,7 @@ const styles = {
     height: '100%',
   },
   splashBg: {
-    backgroundColor: colors.light.primary9,
+    backgroundColor: colors.light.actionBlue,
     position: 'absolute',
     left: 0,
     top: 0,
@@ -62,7 +62,7 @@ const styles = {
     textAlign: 'center',
   },
   splashDescriptionP: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
     textAlign: 'center',
   },
   headingContainer: {

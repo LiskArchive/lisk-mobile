@@ -24,7 +24,7 @@ const styles = {
   },
   date: {
     alignItems: 'center',
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
     fontFamily: fonts.family.context,
     marginTop: 5,
   },
@@ -66,9 +66,9 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#F8FCFF',
     borderBottomWidth: 1,
-    borderBottomColor: colors.light.grayScale5,
+    borderBottomColor: colors.light.gray5,
     borderTopWidth: 1,
-    borderTopColor: colors.light.grayScale5,
+    borderTopColor: colors.light.gray5,
   },
   row: {
     marginBottom: 14,
@@ -76,7 +76,7 @@ const styles = {
     alignItems: 'center',
   },
   incoming: {
-    color: colors.light.success1,
+    color: colors.light.green,
   },
   shareIcon: {
     marginLeft: 10,
@@ -90,7 +90,7 @@ const styles = {
     paddingBottom: 16,
     paddingTop: 16,
     borderBottomWidth: 1,
-    borderBottomColor: colors.light.grayScale5,
+    borderBottomColor: colors.light.gray5,
     marginLeft: 20,
     marginRight: 20,
   },

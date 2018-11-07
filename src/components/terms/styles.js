@@ -24,10 +24,10 @@ export default () => ({
       // lineHeight: 41,
     },
     subTitle: {
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     link: {
-      color: colors.light.primary5,
+      color: colors.light.blue,
       marginTop: 10,
     },
     itemTitle: {
@@ -36,7 +36,7 @@ export default () => ({
     },
     itemDescription: {
       lineHeight: 22,
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
   },
 });

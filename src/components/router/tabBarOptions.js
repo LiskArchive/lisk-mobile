@@ -5,7 +5,7 @@ import { colors } from '../../constants/styleGuide';
 const stylesheet = {
   style: {
     backgroundColor: colors.light.white,
-    borderTopColor: colors.light.grayScale5,
+    borderTopColor: colors.light.gray5,
     borderTopWidth: 1,
     zIndex: 99,
   },
@@ -27,8 +27,8 @@ if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
 }
 
 export default merge({
-  activeTintColor: colors.light.primary5,
-  inactiveTintColor: colors.light.grayScale2,
+  activeTintColor: colors.light.blue,
+  inactiveTintColor: colors.light.gray2,
   showIcon: true,
   showLabel: true,
   upperCaseLabel: false,

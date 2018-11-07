@@ -18,15 +18,15 @@ export default () => ({
       marginTop: 8,
     },
     subTitle: {
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     subHeader: {
       marginTop: 8,
       marginBottom: 25,
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     label: {
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
       marginLeft: 12,
     },
     passphraseContainer: {
@@ -40,10 +40,10 @@ export default () => ({
       borderWidth: Platform.OS === 'ios' ? 0 : 1,
     },
     passphraseTitle: {
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     imageDescription: {
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
       marginTop: 16,
       fontFamily: fonts.family.context,
     },
@@ -56,7 +56,7 @@ export default () => ({
       marginTop: 5,
     },
     copy: {
-      color: colors.light.primary5,
+      color: colors.light.blue,
     },
     imageContainer: {
       alignItems: 'center',
@@ -66,7 +66,7 @@ export default () => ({
       height: 111,
     },
     caption: {
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
       marginTop: 15,
     },
   },

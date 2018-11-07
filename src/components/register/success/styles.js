@@ -14,7 +14,7 @@ const styles = {
     paddingBottom: 8,
   },
   subTitle: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
   },
   imageContainer: {
     marginTop: 52,

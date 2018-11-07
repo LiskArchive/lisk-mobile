@@ -49,7 +49,7 @@ export const PrimaryButton = props => (<LinearGradient
     start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
     colors={props.disabled ?
       [colors.light.white, colors.light.white] :
-      [colors.light.action2, colors.light.action1]}
+      [colors.light.actionRedAccent, colors.light.actionRed]}
     style={[
       theme.buttonWrapper,
       props.style,
@@ -63,7 +63,7 @@ export const SecondaryButton = props => (<LinearGradient
   start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
   colors={props.disabled ?
     [colors.light.white, colors.light.white] :
-    [colors.light.primary4, colors.light.primary9]}
+    [colors.light.actionBlueAccent, colors.light.actionBlue]}
   style={[
     theme.buttonWrapper,
     props.style,

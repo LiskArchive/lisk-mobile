@@ -23,7 +23,7 @@ export default () => ({
     },
     subtitle: {
       marginTop: 7,
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     input: {
       paddingRight: boxes.boxPadding,

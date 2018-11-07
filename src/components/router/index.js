@@ -78,7 +78,7 @@ export default StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        title: <Logo color={colors.light.grayScale1} />,
+        title: <Logo color={colors.light.gray1} />,
         headerTitleStyle: {
           textAlign: 'center',
           flex: 1,
@@ -114,7 +114,7 @@ export default StackNavigator(
         title: <Logo />,
         headerTintColor: colors.light.white,
         headerStyle: {
-          backgroundColor: colors.light.primary5,
+          backgroundColor: colors.light.blue,
           overflow: 'hidden',
         },
       }),
@@ -134,7 +134,7 @@ export default StackNavigator(
           color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.light.primary5,
+          backgroundColor: colors.light.blue,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -158,7 +158,7 @@ export default StackNavigator(
           color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.light.primary5,
+          backgroundColor: colors.light.blue,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -182,7 +182,7 @@ export default StackNavigator(
           color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.light.primary5,
+          backgroundColor: colors.light.blue,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -206,7 +206,7 @@ export default StackNavigator(
           color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.light.primary5,
+          backgroundColor: colors.light.blue,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -230,7 +230,7 @@ export default StackNavigator(
           color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.light.primary5,
+          backgroundColor: colors.light.blue,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -254,7 +254,7 @@ export default StackNavigator(
           color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.light.primary5,
+          backgroundColor: colors.light.blue,
           overflow: 'hidden',
         },
         headerTitleStyle: {
@@ -278,7 +278,7 @@ export default StackNavigator(
           color={colors.light.white} />,
         headerTintColor: styles.white,
         headerStyle: {
-          backgroundColor: colors.light.primary5,
+          backgroundColor: colors.light.blue,
           overflow: 'hidden',
         },
         headerTitleStyle: {

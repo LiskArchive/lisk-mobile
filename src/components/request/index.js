@@ -84,7 +84,7 @@ class Request extends React.Component {
               backgroundColor={colors.light.white}/>
             <View style={styles.share}>
               <Share type={P} value={this.state.url}
-                style={styles.blue} color={colors.light.primary5} icon={true}>Share</Share>
+                style={styles.blue} color={colors.light.blue} icon={true}>Share</Share>
             </View>
           </View>
           <View style={styles.fieldset}>

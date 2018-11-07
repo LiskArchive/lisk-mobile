@@ -33,7 +33,7 @@ class Intro extends React.Component {
             <H1 style={styles.header}>You’re about to create{'\n'}your Lisk account.</H1>
             <B style={styles.subHeader}>Here’s what you will get:</B>
             <View style={[styles.row, styles.separator]}>
-              <Icon name='passphrase' style={styles.icon} color={colors.light.primary5} size={36}/>
+              <Icon name='passphrase' style={styles.icon} color={colors.light.blue} size={36}/>
               <View style={styles.textWrapper}>
                 <B style={styles.rowTitle}>A secure passphrase</B>
                 <Small style={styles.description}>
@@ -43,7 +43,7 @@ class Intro extends React.Component {
               </View>
             </View>
             <View style={[styles.row, styles.separator]}>
-              <Icon name='address' style={styles.icon} color={colors.light.grayScale1} size={36}/>
+              <Icon name='address' style={styles.icon} color={colors.light.gray1} size={36}/>
               <View style={styles.textWrapper}>
                 <B style={styles.rowTitle}>Your Lisk address</B>
                 <Small style={styles.description}>
@@ -53,7 +53,7 @@ class Intro extends React.Component {
               </View>
             </View>
             <View style={[styles.row, styles.separator]}>
-              <Icon name='avatar' style={styles.icon} color='#ffb533' size={36}/>
+              <Icon name='avatar' style={styles.icon} color={colors.light.yellow} size={36}/>
               <View style={styles.textWrapper}>
                 <B style={styles.rowTitle}>A unique avatar</B>
                 <Small style={styles.description}>
@@ -68,8 +68,8 @@ class Intro extends React.Component {
                 height={26}
                 width={43}
                 onSyncPress={this.confirm}
-                backgroundActive={colors.light.primary5}
-                backgroundInactive={colors.light.grayScale3}
+                backgroundActive={colors.light.blue}
+                backgroundInactive={colors.light.gray4}
               />
               <Small style={styles.label}>
                 I understand that it is my responsibility to keep my passphrase safe.

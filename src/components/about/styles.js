@@ -21,11 +21,11 @@ export default ({ logoSize }) => ({
       justifyContent: 'center',
     },
     copy: {
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
       width: 'auto',
     },
     version: {
-      color: colors.light.grayScale2,
+      color: colors.light.gray2,
     },
     centerAligned: {
       flexDirection: 'column',
@@ -48,7 +48,7 @@ export default ({ logoSize }) => ({
       marginBottom: 6,
     },
     link: {
-      color: colors.light.primary5,
+      color: colors.light.blue,
       marginTop: 10,
     },
   },

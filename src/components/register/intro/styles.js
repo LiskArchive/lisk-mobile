@@ -20,7 +20,7 @@ const styles = {
   subHeader: {
     marginTop: 14,
     marginBottom: 25,
-    color: colors.light.grayScale1,
+    color: colors.light.gray1,
   },
   row: {
     flexDirection: 'row',
@@ -29,7 +29,7 @@ const styles = {
     paddingBottom: height > 640 ? 14 : 3,
   },
   separator: {
-    borderBottomColor: colors.light.grayScale5,
+    borderBottomColor: colors.light.gray5,
     borderBottomWidth: 1,
   },
   rowTitle: {
@@ -40,11 +40,11 @@ const styles = {
     marginTop: 10,
   },
   description: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
     marginTop: 5,
   },
   label: {
-    color: colors.light.grayScale2,
+    color: colors.light.gray2,
     marginLeft: 12,
   },
 };

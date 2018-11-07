@@ -43,10 +43,10 @@ class Settings extends React.Component {
     const targetStateLabel = ['Off', colors.light.black];
     if (settings.sensorType && settings.hasStoredPassphrase) {
       targetStateLabel[0] = 'On';
-      targetStateLabel[1] = colors.light.success1;
+      targetStateLabel[1] = colors.light.green;
       target = 'DisableBioAuth';
     }
-    const sensorStatus = <P style={{ color: targetStateLabel[1] || colors.light.grayScale1 }}>
+    const sensorStatus = <P style={{ color: targetStateLabel[1] || colors.light.gray1 }}>
       {targetStateLabel[0]}
     </P>;
     const switchButton = <Switch
@@ -56,8 +56,8 @@ class Settings extends React.Component {
       onSyncPress={() => {
         this.props.settingsUpdated({ notification: !settings.notification });
       }}
-      backgroundActive={colors.light.primary5}
-      backgroundInactive={colors.light.grayScale3}
+      backgroundActive={colors.light.blue}
+      backgroundInactive={colors.light.gray4}
     />;
 
     return (
