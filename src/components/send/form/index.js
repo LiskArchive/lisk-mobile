@@ -46,6 +46,7 @@ class Form extends React.Component {
       amount: { value: '', validity: this.validator.amount('') },
       reference: { value: '', validity: this.validator.reference('') },
       secondaryButtonOpacity: 1,
+      avatarPreview: true,
     };
 
   /**
