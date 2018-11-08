@@ -1,10 +1,9 @@
 import { Platform, DeviceInfo } from 'react-native';
-import { colors, fonts } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
     wrapper: {
-      backgroundColor: colors.light.white,
       flex: 1,
     },
     container: {
@@ -17,45 +16,24 @@ export default () => ({
     header: {
       marginTop: 8,
     },
-    subTitle: {
-      color: colors.light.gray2,
-    },
     subHeader: {
       marginTop: 8,
       marginBottom: 25,
-      color: colors.light.gray2,
-    },
-    label: {
-      color: colors.light.gray2,
-      marginLeft: 12,
     },
     passphraseContainer: {
-      backgroundColor: colors.light.white,
       padding: 20,
-      shadowColor: '#0279b6',
       shadowOpacity: 0.1,
       shadowRadius: 20,
       marginTop: 10,
       elevation: 1,
-    },
-    passphraseTitle: {
-      color: colors.light.gray2,
-    },
-    imageDescription: {
-      color: colors.light.gray2,
-      marginTop: 16,
-      fontFamily: fonts.family.context,
+      shadowColor: '#0279b6',
     },
     passphrase: {
-      marginTop: 7,
-      color: colors.light.black,
+      marginTop: 8,
     },
     copyContainer: {
       alignItems: 'center',
-      marginTop: 5,
-    },
-    copy: {
-      color: colors.light.blue,
+      marginTop: 8,
     },
     imageContainer: {
       alignItems: 'center',
@@ -65,12 +43,65 @@ export default () => ({
       height: 111,
     },
     caption: {
-      color: colors.light.gray2,
       marginTop: 15,
     },
     placeholder: {
       height: 1,
       width: '100%',
+    },
+  },
+
+  [themes.light]: {
+    wrapper: {
+      backgroundColor: colors.light.white,
+    },
+    header: {
+      color: colors.light.black,
+    },
+    subHeader: {
+      color: colors.light.gray2,
+    },
+    passphraseContainer: {
+      backgroundColor: colors.light.white,
+    },
+    passphraseTitle: {
+      color: colors.light.gray2,
+    },
+    passphrase: {
+      color: colors.light.black,
+    },
+    copy: {
+      color: colors.light.blue,
+    },
+    caption: {
+      color: colors.light.gray2,
+    },
+  },
+
+  [themes.dark]: {
+    wrapper: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    header: {
+      color: colors.dark.white,
+    },
+    subHeader: {
+      color: colors.dark.gray1,
+    },
+    passphraseContainer: {
+      backgroundColor: '#011730',
+    },
+    passphraseTitle: {
+      color: colors.dark.gray4,
+    },
+    passphrase: {
+      color: colors.dark.white,
+    },
+    copy: {
+      color: colors.dark.blue,
+    },
+    caption: {
+      color: colors.dark.gray4,
     },
   },
 });
