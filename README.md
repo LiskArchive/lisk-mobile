@@ -10,7 +10,7 @@ The next section details the prerequisites to install Lisk Mobile from source us
 
 
  - Git
-   - `brew install git` 
+   - `brew install git`
  - NodeJS (recommended 8.3.0)
    - `brew install node`
  - npm (recommended 5.3.0)
@@ -33,7 +33,7 @@ You'll need the xCode installed in your machine to run the app in simulator.
   - compileSdkVersion: 26
   - buildToolsVersion: 27.0.3
 
- 
+
 
 
 ### Installation
@@ -47,6 +47,16 @@ npm run start
 
 ### Development environment
 You can run the project in xCode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
+
+#### Using environment variables
+You can fill out `env.json` with those variables:
+```
+  network     -> Lisk network's name.
+  address     -> Lisk network's url.
+  passphrase  -> Your LSK account passphrase, to be filled out automatically on login.
+```
+
+In order to avoid commiting that file you can use [this approach](https://stackoverflow.com/a/3320183).
 
 ### Run
 ```
@@ -87,4 +97,3 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the [GNU General Public License](https://github.com/LiskHQ/lisk-hub/tree/master/LICENSE) along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
