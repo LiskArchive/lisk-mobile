@@ -10,7 +10,7 @@ import {
 import { H1, B, Small } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { SecondaryButton } from '../toolBox/button';
-import colors from '../../constants/styleGuide/colors';
+import { themes, colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -27,41 +27,66 @@ class EnableBioAuth extends React.Component {
   }
 
   render() {
-    const { styles } = this.props;
-    const title = this.props.navigation.getParam('title', null);
+    const { theme, styles } = this.props;
+    const title = this.props.navigation.getParam('title', null) || 'Touch ID';
 
     return (
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={styles.container}>
           <View>
-            <H1 style={styles.header}>Enabling {title}</H1>
-            <B style={styles.subHeader}>Here’s what you need to know:</B>
-            <View style={[styles.row, styles.separator]}>
-              <Icon name='passphrase' style={styles.icon} color={colors.light.blue} size={36}/>
+            <H1 style={[styles.header, styles.theme.header]}>
+              {`You're about to enable ${title}`}
+            </H1>
+            <B style={[styles.subHeader, styles.theme.subHeader]}>
+              Here’s what you need to know:
+            </B>
+            <View style={[styles.row, styles.separator, styles.theme.separator]}>
+              <Icon
+                name='passphrase'
+                style={styles.icon}
+                color={colors[theme].blue}
+                size={36}
+              />
               <View style={styles.textWrapper}>
-                <B style={styles.rowTitle}>Your passphrase is still needed</B>
-                <Small style={styles.description}>
+                <B style={[styles.rowTitle, styles.theme.rowTitle]}>
+                  Your passphrase is still needed
+                </B>
+                <Small style={[styles.description, styles.theme.description]}>
                   You always need to keep your passphrase safe.
                   It will still be required for some actions.
                 </Small>
               </View>
             </View>
-            <View style={[styles.row, styles.separator]}>
-              <Icon name='address' style={styles.icon} color={colors.light.gray1} size={36}/>
+            <View style={[styles.row, styles.separator, styles.theme.separator]}>
+              <Icon
+                name='settings'
+                style={styles.icon}
+                color={colors[theme].yellow}
+                size={36}
+              />
               <View style={styles.textWrapper}>
-                <B style={styles.rowTitle}>You can always turn it off</B>
-                <Small style={styles.description}>
+                <B style={[styles.rowTitle, styles.theme.rowTitle]}>
+                  You can always turn it off
+                </B>
+                <Small style={[styles.description, styles.theme.description]}>
                   You can disable Face ID at anytime in Settings page.
                   then authenticate with passphrase.
                 </Small>
               </View>
             </View>
-            <View style={[styles.row]}>
-              <Icon name='avatar' style={styles.icon} color={colors.light.yellow} size={36}/>
+            <View style={[styles.row, styles.separator, styles.theme.separator]}>
+              <Icon
+                name='secure'
+                style={styles.icon}
+                color={theme === themes.light ? colors.light.gray1 : colors.dark.gray2}
+                size={36}
+              />
               <View style={styles.textWrapper}>
-                <B style={styles.rowTitle}>It’s fast and secure</B>
-                <Small style={styles.description}>
-                  The Avatar represents the address, making it easy to recognize.
+                <B style={[styles.rowTitle, styles.theme.rowTitle]}>
+                  Fast and secure
+                </B>
+                <Small style={[styles.description, styles.theme.description]}>
+                  {`${title} offers a secure and faster way to access the Lisk app.`}
                 </Small>
               </View>
             </View>
@@ -69,9 +94,11 @@ class EnableBioAuth extends React.Component {
           <SecondaryButton
             style={styles.button}
             onClick={this.confirm}
-            title='Enable' />
+            title={`Enable ${title}`}
+          />
         </View>
-      </View>);
+      </View>
+    );
   }
 }
 

@@ -1,12 +1,11 @@
 import { Dimensions, Platform, DeviceInfo } from 'react-native';
-import { colors } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
 
 const { height } = Dimensions.get('window');
 
 export default () => ({
   common: {
     wrapper: {
-      backgroundColor: colors.light.white,
       flex: 1,
     },
     container: {
@@ -22,7 +21,6 @@ export default () => ({
     subHeader: {
       marginTop: 14,
       marginBottom: 25,
-      color: colors.light.gray1,
     },
     row: {
       flexDirection: 'row',
@@ -31,7 +29,6 @@ export default () => ({
       paddingBottom: height > 640 ? 14 : 3,
     },
     separator: {
-      borderBottomColor: colors.light.gray5,
       borderBottomWidth: 1,
     },
     rowTitle: {
@@ -42,12 +39,52 @@ export default () => ({
       marginTop: 10,
     },
     description: {
-      color: colors.light.gray2,
       marginTop: 5,
     },
     label: {
-      color: colors.light.gray2,
       marginLeft: 12,
+    },
+  },
+
+  [themes.light]: {
+    wrapper: {
+      backgroundColor: colors.light.white,
+    },
+    header: {
+      color: colors.light.black,
+    },
+    subHeader: {
+      color: colors.light.gray2,
+    },
+    separator: {
+      borderBottomColor: colors.light.gray5,
+    },
+    rowTitle: {
+      color: colors.light.black,
+    },
+    description: {
+      color: colors.light.gray2,
+    },
+  },
+
+  [themes.dark]: {
+    wrapper: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    header: {
+      color: colors.dark.white,
+    },
+    subHeader: {
+      color: colors.dark.gray1,
+    },
+    separator: {
+      borderBottomColor: colors.dark.gray5,
+    },
+    rowTitle: {
+      color: colors.dark.white,
+    },
+    description: {
+      color: colors.dark.gray4,
     },
   },
 });
