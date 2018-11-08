@@ -14,29 +14,29 @@ const openLiskWebsite = () => {
     .catch(err => console.error('An error occurred', err));
 };
 
-const Settings = ({ styles }) => (
-  <View style={styles.container}>
+const About = ({ styles }) => (
+  <View style={[styles.container, styles.theme.container]}>
     <View style={styles.innerContainer}>
         <View>
-          <H1>About Lisk</H1>
+          <H1 style={styles.theme.header}>About Lisk</H1>
           <View style={styles.centerAligned}>
             <View style={styles.logo}>
               <Image source={Logo} style={styles.logoImage} width={logoSize} height={logoSize} />
             </View>
-            <H4 style={styles.appTitle}>Lisk</H4>
-            <P style={styles.version}>{`Version ${packageJson.version}`}</P>
-            <A onPress={openLiskWebsite} style={styles.link}>
+            <H4 style={[styles.appTitle, styles.theme.appTitle]}>Lisk</H4>
+            <P style={[styles.version, styles.theme.version]}>{`Version ${packageJson.version}`}</P>
+            <A onPress={openLiskWebsite} style={[styles.link, styles.theme.link]}>
               Read more in Lisk&reg; website
             </A>
           </View>
         </View>
         <View style={styles.footer}>
-          <P style={styles.copy}>Copyright &copy; </P>
-          <P style={styles.copy}>{(new Date()).getFullYear()}</P>
-          <P style={styles.copy}> Lisk Stiftung</P>
+          <P style={[styles.copy, styles.theme.copy]}>
+            Copyright &copy; {(new Date()).getFullYear()} Lisk Stiftung
+          </P>
         </View>
     </View>
   </View>
 );
 
-export default withTheme(Settings, getStyles({ logoSize }));
+export default withTheme(About, getStyles({ logoSize }));
