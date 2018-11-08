@@ -28,7 +28,7 @@ class EnableBioAuth extends React.Component {
 
   render() {
     const { theme, styles } = this.props;
-    const title = this.props.navigation.getParam('title', null) || 'Touch ID';
+    const title = this.props.navigation.getParam('title', null);
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
