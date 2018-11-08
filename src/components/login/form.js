@@ -82,7 +82,7 @@ class Form extends React.Component {
 
   onLoginSubmission(passphrase) {
     this.passphraseInput.blur();
-    this.props.login(passphrase);
+    this.props.login(passphrase, 'form');
   }
 
   animate = () => {
