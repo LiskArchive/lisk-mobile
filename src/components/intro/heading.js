@@ -102,25 +102,25 @@ class Heading extends React.Component {
           <View style={styles.headingDescriptionItem}>
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Activity history</H2>
-              <P style={[styles.centralized, { color: colors.grayScale2 }]}>Get a full overview of your current{'\n'}balance, transaction history{'\n'}and much more.</P>
+              <P style={[styles.centralized, styles.descriptionP]}>Get a full overview of your current{'\n'}balance, transaction history{'\n'}and much more.</P>
             </View>
           </View>
           <View style={styles.headingDescriptionItem}>
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Token transfer</H2>
-              <P style={[styles.centralized, { color: colors.grayScale2 }]}>Transfer your LSK tokens easily to{'\n'}other accounts by simply scanning{'\n'}their QR code.</P>
+              <P style={[styles.centralized, styles.descriptionP]}>Transfer your LSK tokens easily to{'\n'}other accounts by simply scanning{'\n'}their QR code.</P>
             </View>
           </View>
           <View style={styles.headingDescriptionItem}>
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Secure authentication</H2>
-              <P style={[styles.centralized, { color: colors.grayScale2 }]}>Access all functions of the app{'\n'}quickly and securely via advanced{'\n'}biometric authentication.</P>
+              <P style={[styles.centralized, styles.descriptionP]}>Access all functions of the app{'\n'}quickly and securely via advanced{'\n'}biometric authentication.</P>
             </View>
           </View>
         </Swiper>
       </View>
 
-      <View style={[styles.illustrations, { zIndex: index === 2 ? 10 : 0 }]}>
+      <View style={styles.illustrations}>
         <Animated.View style={[styles.frame, { opacity: frameOpacity }]}>
           <Image source={frame} style={styles.deviceFrame} />
         </Animated.View>
@@ -133,12 +133,14 @@ class Heading extends React.Component {
         <Animated.View style={[styles.screens, styles.bioAuth, { opacity: bioAuthOpacity }]}>
           <Image source={faceIdIllustration} style={styles.faceIdIllustration} />
           <Image source={touchIdIllustration} style={styles.touchIdIllustration} />
+        </Animated.View>
+      </View>
+      <Animated.View style={[styles.navigateButton, { opacity: bioAuthOpacity }]}>
           <SecondaryButton
             style={styles.startButton}
             onClick={this.props.skip}
             title='Start' />
         </Animated.View>
-      </View>
     </Animated.View>);
   }
 }

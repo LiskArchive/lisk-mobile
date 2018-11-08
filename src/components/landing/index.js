@@ -22,7 +22,7 @@ class Landing extends React.Component {
   componentDidUpdate() {
     if (this.props.settings.validated && !this.state.initialRoute) {
       this.setState({
-        initialRoute: this.props.settings.showedIntro ? 'Login' : 'Intro',
+        initialRoute: this.props.settings.showedIntro && false ? 'Login' : 'Intro',
       });
     }
   }
