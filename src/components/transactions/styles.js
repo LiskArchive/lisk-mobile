@@ -12,11 +12,11 @@ export default () => ({
       height: 90,
       paddingTop: 20,
       paddingBottom: 20,
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
       flexDirection: 'row',
       justifyContent: 'flex-start',
       alignItems: 'stretch',
-      borderBottomColor: colors.grayScale5,
+      borderBottomColor: colors.light.gray5,
       borderBottomWidth: 1,
     },
     title: {
@@ -37,7 +37,7 @@ export default () => ({
       textAlign: 'right',
     },
     date: {
-      color: colors.grayScale1,
+      color: colors.light.gray1,
     },
     address: {
       paddingTop: 4,
@@ -47,13 +47,13 @@ export default () => ({
       paddingRight: 15,
     },
     incoming: {
-      color: colors.success1,
+      color: colors.light.green,
     },
     emptyState: {
       width: '100%',
       display: 'flex',
       flex: 1,
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -72,7 +72,7 @@ export default () => ({
     },
     noTxTitle: {
       paddingTop: 10,
-      color: colors.grayScale2,
+      color: colors.light.gray2,
     },
     pendingIcon: {
       width: 18,
@@ -82,14 +82,14 @@ export default () => ({
       flexDirection: 'row',
       paddingBottom: 22,
       borderBottomWidth: 1,
-      borderBottomColor: colors.grayScale5,
+      borderBottomColor: colors.light.gray5,
     },
     initText: {
       marginLeft: 7,
     },
     link: {
       fontSize: fonts.size.small,
-      color: colors.primary6,
+      color: colors.light.blue,
     },
     footer: {
       height: 90,

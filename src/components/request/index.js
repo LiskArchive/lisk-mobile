@@ -81,10 +81,10 @@ class Request extends React.Component {
               value={this.state.url}
               size={qrCodeSize}
               color='#263344'
-              backgroundColor={colors.white}/>
+              backgroundColor={colors.light.white}/>
             <View style={styles.share}>
               <Share type={P} value={this.state.url}
-                style={styles.blue} color={colors.primary5} icon={true}>Share</Share>
+                style={styles.blue} color={colors.light.blue} icon={true}>Share</Share>
             </View>
           </View>
           <View style={styles.fieldset}>

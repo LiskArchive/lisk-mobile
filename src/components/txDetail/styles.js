@@ -4,7 +4,7 @@ import { colors, fonts } from '../../constants/styleGuide';
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.light.white,
     paddingTop: 0,
     paddingBottom: 20,
   },
@@ -24,13 +24,13 @@ const styles = {
   },
   date: {
     alignItems: 'center',
-    color: colors.grayScale2,
+    color: colors.light.gray2,
     fontFamily: fonts.family.context,
     marginTop: 5,
   },
   value: {
     alignItems: 'center',
-    color: colors.black,
+    color: colors.light.black,
     fontFamily: fonts.family.context,
   },
   label: {
@@ -66,9 +66,9 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#F8FCFF',
     borderBottomWidth: 1,
-    borderBottomColor: colors.grayScale5,
+    borderBottomColor: colors.light.gray5,
     borderTopWidth: 1,
-    borderTopColor: colors.grayScale5,
+    borderTopColor: colors.light.gray5,
   },
   row: {
     marginBottom: 14,
@@ -76,7 +76,7 @@ const styles = {
     alignItems: 'center',
   },
   incoming: {
-    color: colors.success1,
+    color: colors.light.green,
   },
   shareIcon: {
     marginLeft: 10,
@@ -90,7 +90,7 @@ const styles = {
     paddingBottom: 16,
     paddingTop: 16,
     borderBottomWidth: 1,
-    borderBottomColor: colors.grayScale5,
+    borderBottomColor: colors.light.gray5,
     marginLeft: 20,
     marginRight: 20,
   },

@@ -63,7 +63,7 @@ class Transactions extends React.Component {
             <H3 style={styles.title}>Activity</H3>
             {!account.initialized && balance >= 0.2 ?
               <View style={styles.initContainer}>
-                <Icon name='warning' color={colors.action1} size={18} />
+                <Icon name='warning' color={colors.light.red} size={18} />
                 <Small style={styles.initText}>Your account is not initialized.
                   <A
                     style={styles.link}

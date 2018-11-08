@@ -3,7 +3,7 @@ import { colors, boxes } from '../../constants/styleGuide';
 export default () => ({
   common: {
     wrapper: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
     },
     container: {
       height: '100%',
@@ -12,13 +12,13 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       flex: 1,
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
       paddingTop: 36,
       paddingBottom: 60,
     },
     subtitle: {
       marginTop: 7,
-      color: colors.grayScale2,
+      color: colors.light.gray2,
     },
     headings: {
       marginRight: boxes.boxPadding,
@@ -42,7 +42,7 @@ export default () => ({
       height: 100,
     },
     blue: {
-      color: colors.primary5,
+      color: colors.light.blue,
     },
   },
 });

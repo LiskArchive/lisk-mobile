@@ -4,7 +4,7 @@ import { colors, fonts } from '../../constants/styleGuide';
 export default () => ({
   common: {
     wrapper: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
       flex: 1,
     },
     container: {
@@ -18,19 +18,19 @@ export default () => ({
       marginTop: 8,
     },
     subTitle: {
-      color: colors.grayScale2,
+      color: colors.light.gray2,
     },
     subHeader: {
       marginTop: 8,
       marginBottom: 25,
-      color: colors.grayScale2,
+      color: colors.light.gray2,
     },
     label: {
-      color: colors.grayScale2,
+      color: colors.light.gray2,
       marginLeft: 12,
     },
     passphraseContainer: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
       padding: 20,
       shadowColor: '#0279b6',
       shadowOpacity: 0.1,
@@ -40,23 +40,23 @@ export default () => ({
       borderWidth: Platform.OS === 'ios' ? 0 : 1,
     },
     passphraseTitle: {
-      color: colors.grayScale2,
+      color: colors.light.gray2,
     },
     imageDescription: {
-      color: colors.grayScale2,
+      color: colors.light.gray2,
       marginTop: 16,
       fontFamily: fonts.family.context,
     },
     passphrase: {
       marginTop: 7,
-      color: colors.black,
+      color: colors.light.black,
     },
     copyContainer: {
       alignItems: 'center',
       marginTop: 5,
     },
     copy: {
-      color: colors.primary5,
+      color: colors.light.blue,
     },
     imageContainer: {
       alignItems: 'center',
@@ -66,7 +66,7 @@ export default () => ({
       height: 111,
     },
     caption: {
-      color: colors.grayScale2,
+      color: colors.light.gray2,
       marginTop: 15,
     },
   },

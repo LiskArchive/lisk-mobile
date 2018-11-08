@@ -26,7 +26,7 @@ class Send extends React.Component {
         params.action();
       }}
       style={params && params.styles && params.styles.back}
-      color={colors.white} /> : <IconButton color='transparent' icon='back'/>,
+      color={colors.light.white} /> : <IconButton color='transparent' icon='back'/>,
     };
   };
 

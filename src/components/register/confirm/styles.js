@@ -19,7 +19,7 @@ const styles = {
   },
   subHeader: {
     marginTop: 7,
-    color: colors.grayScale2,
+    color: colors.light.gray2,
   },
   imageContainer: {
     alignItems: 'center',
@@ -41,8 +41,8 @@ const styles = {
   },
   placeholder: {
     borderWidth: 1,
-    borderColor: colors.primary5,
-    backgroundColor: colors.white,
+    borderColor: colors.light.blue,
+    backgroundColor: colors.light.white,
     height: height < 640 ? 30 : 39,
     minWidth: 87,
     marginRight: 10,
@@ -52,8 +52,8 @@ const styles = {
     textAlign: 'center',
   },
   deActivePlaceholder: {
-    borderColor: colors.grayScale5,
-    backgroundColor: colors.grayScale5,
+    borderColor: colors.light.gray5,
+    backgroundColor: colors.light.gray5,
     borderWidth: 1,
     height: height < 640 ? 30 : 39,
     minWidth: 87,
@@ -63,21 +63,21 @@ const styles = {
     marginBottom: 5,
     textAlign: 'center',
     overflow: 'hidden',
-    color: colors.white,
+    color: colors.light.white,
     fontWeight: 'bold',
     fontSize: fonts.base,
   },
   successButton: {
-    borderColor: colors.success1,
-    backgroundColor: colors.success1,
+    borderColor: colors.light.green,
+    backgroundColor: colors.light.green,
   },
   errorButton: {
-    borderColor: colors.action1,
-    backgroundColor: colors.action1,
+    borderColor: colors.light.red,
+    backgroundColor: colors.light.red,
   },
   selectedPlaceholder: {
-    borderColor: colors.grayScale3,
-    backgroundColor: colors.grayScale3,
+    borderColor: colors.light.gray4,
+    backgroundColor: colors.light.gray4,
   },
   optionsContainer: {
     marginTop: height > 640 ? 25 : 5,
@@ -93,7 +93,7 @@ const styles = {
     width: height > 640 ? 99 : 77,
     backgroundColor: '#74869B',
     borderRadius: 4,
-    color: colors.white,
+    color: colors.light.white,
     textAlign: 'center',
     overflow: 'hidden',
   },

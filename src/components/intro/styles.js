@@ -4,11 +4,11 @@ import { deviceHeight } from '../../utilities/device';
 
 const styles = {
   wrapper: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.light.white,
     height: '100%',
   },
   splashContainer: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.light.white,
     position: 'absolute',
     left: 0,
     top: 0,
@@ -17,7 +17,7 @@ const styles = {
     height: '100%',
   },
   splashBg: {
-    backgroundColor: colors.primary9,
+    backgroundColor: colors.light.actionBlue,
     position: 'absolute',
     left: 0,
     top: 0,
@@ -62,11 +62,11 @@ const styles = {
     textAlign: 'center',
   },
   splashDescriptionP: {
-    color: colors.grayScale2,
+    color: colors.light.gray2,
     textAlign: 'center',
   },
   headingContainer: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.light.white,
     position: 'absolute',
     left: 0,
     top: 20,

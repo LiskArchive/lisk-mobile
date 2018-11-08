@@ -6,7 +6,7 @@ const height = deviceHeight();
 
 const styles = {
   wrapper: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.light.white,
     flex: 1,
   },
   container: {
@@ -17,7 +17,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.light.white,
     paddingTop: 36,
     paddingBottom: 20,
   },
@@ -37,12 +37,12 @@ const styles = {
     paddingBottom: 10,
   },
   connectionError: {
-    color: colors.grayScale1,
+    color: colors.light.gray1,
     fontFamily: fonts.family.context,
     fontSize: fonts.size.input,
   },
   connectionErrorIcon: {
-    color: colors.action1,
+    color: colors.light.red,
     marginRight: 5,
   },
   visible: {
@@ -52,7 +52,7 @@ const styles = {
     paddingLeft: boxes.boxPadding,
     paddingRight: boxes.boxPadding,
     textAlign: 'center',
-    color: colors.grayScale2,
+    color: colors.light.gray2,
     fontSize: fonts.size.base,
   },
   button: {
@@ -71,8 +71,8 @@ const styles = {
     fontFamily: fonts.family.passphrase,
   },
   allWhite: {
-    borderTopColor: colors.white,
-    backgroundColor: colors.white,
+    borderTopColor: colors.light.white,
+    backgroundColor: colors.light.white,
   },
   sticky: {
     position: 'absolute',
@@ -97,11 +97,11 @@ const styles = {
     flexDirection: 'column',
   },
   question: {
-    color: colors.grayScale2,
+    color: colors.light.gray2,
     textAlign: 'center',
   },
   link: {
-    color: colors.primary5,
+    color: colors.light.blue,
     fontWeight: 'bold',
     textAlign: 'center',
   },
@@ -109,7 +109,7 @@ const styles = {
     width: '100%',
   },
   splashContainer: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.light.white,
     position: 'absolute',
     left: 0,
     top: 0,
@@ -118,7 +118,7 @@ const styles = {
     height: '100%',
   },
   splashBg: {
-    backgroundColor: colors.primary9,
+    backgroundColor: colors.light.actionBlue,
     position: 'absolute',
     left: 0,
     top: 0,
@@ -168,7 +168,7 @@ const styles = {
   invalidAuthBg: {
     width: 84,
     height: 84,
-    backgroundColor: colors.action1,
+    backgroundColor: colors.light.red,
     borderRadius: 42,
     zIndex: 1,
     position: 'absolute',
@@ -182,7 +182,7 @@ const styles = {
     zIndex: 2,
   },
   error: {
-    color: colors.action1,
+    color: colors.light.red,
   },
   invisible: {
     color: 'transparent',

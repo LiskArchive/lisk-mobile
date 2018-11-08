@@ -4,7 +4,7 @@ import { colors, boxes, fonts } from '../../../constants/styleGuide';
 export default () => ({
   common: {
     wrapper: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.light.white,
     },
     innerContainer: {
       flexDirection: 'column',
@@ -23,7 +23,7 @@ export default () => ({
     },
     subtitle: {
       marginTop: 7,
-      color: colors.grayScale2,
+      color: colors.light.gray2,
     },
     input: {
       paddingRight: boxes.boxPadding,
@@ -52,8 +52,8 @@ export default () => ({
       opacity: 1,
     },
     allWhite: {
-      borderTopColor: colors.white,
-      backgroundColor: colors.white,
+      borderTopColor: colors.light.white,
+      backgroundColor: colors.light.white,
     },
     sticky: {
       position: 'absolute',

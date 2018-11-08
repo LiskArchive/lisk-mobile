@@ -40,7 +40,7 @@ class SignOutButton extends React.Component {
       icon='logout'
       iconSize={18}
       title='Sign out'
-      color={colors.primary5}
+      color={colors.light.blue}
       onClick={() => onClick(navigation, accountSignedOut)}
       titleStyle={[styles.title, titleStyle]}
       style ={[styles.button, style]} />;

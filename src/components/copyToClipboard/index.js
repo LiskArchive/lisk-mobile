@@ -37,7 +37,7 @@ class CopyToClipBoard extends React.Component {
         <Icon
           onPress={this.copy}
           name='copy'
-          color={iconColor || colors.white}
+          color={iconColor || colors.light.white}
           size={iconSize || 16}
           style={[styles.icon, iconStyle]}/> : null }
       </View>);

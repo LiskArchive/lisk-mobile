@@ -4,8 +4,8 @@ import { colors } from '../../constants/styleGuide';
 
 const stylesheet = {
   style: {
-    backgroundColor: colors.white,
-    borderTopColor: colors.grayScale5,
+    backgroundColor: colors.light.white,
+    borderTopColor: colors.light.gray5,
     borderTopWidth: 1,
     zIndex: 99,
   },
@@ -13,7 +13,7 @@ const stylesheet = {
     fontSize: 12,
   },
   indicatorStyle: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.light.white,
   },
   allowFontScaling: false,
 };
@@ -27,8 +27,8 @@ if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
 }
 
 export default merge({
-  activeTintColor: colors.primary5,
-  inactiveTintColor: colors.grayScale2,
+  activeTintColor: colors.light.blue,
+  inactiveTintColor: colors.light.gray2,
   showIcon: true,
   showLabel: true,
   upperCaseLabel: false,

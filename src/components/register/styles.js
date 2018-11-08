@@ -8,7 +8,7 @@ const styles = {
   container: {
     height: '100%',
     width: '100%',
-    backgroundColor: colors.grayScale4,
+    backgroundColor: colors.light.gray6,
     paddingBottom: height > 640 ? navigatorHeight : 0,
   },
   back: {
@@ -42,10 +42,10 @@ const styles = {
     marginTop: 14,
     marginRight: 10,
     marginLeft: 10,
-    backgroundColor: colors.grayScale5,
+    backgroundColor: colors.light.gray5,
   },
   disabledNavButton: {
-    backgroundColor: colors.black,
+    backgroundColor: colors.light.black,
   },
   activeGroupTitle: {
     width: '100%',

@@ -3,14 +3,14 @@ import { colors, boxes } from '../../constants/styleGuide';
 export default () => ({
   common: {
     title: {
-      color: colors.black,
+      color: colors.light.black,
     },
     input: {
-      color: colors.grayScale1,
+      color: colors.light.gray1,
     },
     button: {
       marginTop: 20,
-      backgroundColor: colors.action4,
+      backgroundColor: colors.light.actionRed4,
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
     },
