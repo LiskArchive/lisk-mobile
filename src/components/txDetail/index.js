@@ -28,8 +28,6 @@ const TxDetail = ({ navigation }) => {
     amountSign = '';
   }
 
-  console.log(amountStyle);
-
   return (<ScrollView style={styles.container}>
     <H1 style={styles.title}>Transaction details</H1>
     <View style={styles.senderAndRecipient}>
