@@ -92,9 +92,9 @@ export default StackNavigator(
         title: <Logo />,
         headerRight: placeHolderButton,
         headerLeft: placeHolderButton,
-        headerTintColor: colors.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
-          backgroundColor: colors.white,
+          backgroundColor: colors.light.white,
           overflow: 'hidden',
           borderBottomWidth: 0,
         },
@@ -145,7 +145,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -169,7 +169,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: styles.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -193,7 +193,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -217,7 +217,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -241,7 +241,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -265,7 +265,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -289,7 +289,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
