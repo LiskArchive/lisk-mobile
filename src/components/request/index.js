@@ -15,21 +15,16 @@ import getStyles from './styles';
 const pageHeight = viewportHeight();
 const qrCodeSize = Math.min(pageHeight - 355, Math.floor(deviceWidth() * 0.8));
 
-/**
- * The container component containing sign in and create account functionality
- */
 @connect(state => ({
   account: state.accounts.active,
-}), {})
+}))
 class Request extends React.Component {
-  state = {
-    amount: { value: '', validity: -1 },
-  };
-
-  componentDidMount() {
-    this.setState({
-      url: this.props.account.address,
-    });
+  constructor(props) {
+    super(props);
+    this.state = {
+      amount: { value: '', validity: -1 },
+      url: props.account ? props.account.address : '',
+    };
   }
 
   validator = {
@@ -40,8 +35,7 @@ class Request extends React.Component {
    * @param {Number} value - A valid amount in LSK
    */
   changeHandler = (val) => {
-    const address = this.props.account ? this.props.account.address : '';
-    let url = address;
+    const { address } = this.state;
     let amountValidity = -1;
     let amount = val;
     if (val !== '') {
@@ -51,7 +45,7 @@ class Request extends React.Component {
         validity: amountValidity,
       };
     }
-    url = amountValidity === 0 ? `lisk://wallet?recipient=${address}&amount=${val}` : address;
+    const url = amountValidity === 0 ? `lisk://wallet?recipient=${address}&amount=${val}` : address;
 
     this.setState({
       amount,
@@ -60,50 +54,63 @@ class Request extends React.Component {
   }
 
   render() {
-    const { styles, account } = this.props;
-    const address = account ? account.address : '';
+    const { styles } = this.props;
+    const { amount, address, url } = this.state;
 
-    return (<View style={styles.wrapper}>
-      <KeyboardAwareScrollView
-        enableOnAndroid={true}
-        enableResetScrollToCoords={false}
-        contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}>
-        <View style={styles.innerContainer}>
-          <View style={styles.titleContainer}>
-            <View style={styles.headings}>
-              <H1>Request</H1>
-              <P style={styles.subtitle}>Request LSK tokens from other accounts.</P>
+    return (
+      <View style={styles.wrapper}>
+        <KeyboardAwareScrollView
+          enableOnAndroid={true}
+          enableResetScrollToCoords={false}
+          contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}
+        >
+          <View style={styles.innerContainer}>
+            <View style={styles.titleContainer}>
+              <View style={styles.headings}>
+                <H1>Request</H1>
+                <P style={styles.subtitle}>
+                  Request LSK tokens from other accounts.
+                </P>
+              </View>
+            </View>
+            <View style={styles.main}>
+              <B style={styles.address}>
+                {address}
+              </B>
+              <QRCode
+                value={this.state.url}
+                size={qrCodeSize}
+                color='#263344'
+                backgroundColor={colors.light.white}
+              />
+              <View style={styles.share}>
+                <Share
+                  type={P}
+                  value={url}
+                  style={styles.blue}
+                  color={colors.light.blue}
+                  icon={true}
+                >
+                  Share
+                </Share>
+              </View>
+            </View>
+            <View style={styles.fieldset}>
+              <Input
+                label='Amount in Ⱡ (Optional)'
+                autoCorrect={false}
+                reference={(input) => { this.amountInput = input; }}
+                styles={{ errorMessage: styles.errorMessage, input: styles.input }}
+                onChange={this.changeHandler}
+                value={amount.value}
+                keyboardType='numeric'
+                error={amount.validity === 1 ? 'Invalid amount' : ''}
+              />
             </View>
           </View>
-          <View style={styles.main}>
-            <B style={styles.address}>{address}</B>
-            <QRCode
-              value={this.state.url}
-              size={qrCodeSize}
-              color='#263344'
-              backgroundColor={colors.light.white}/>
-            <View style={styles.share}>
-              <Share type={P} value={this.state.url}
-                style={styles.blue} color={colors.light.blue} icon={true}>Share</Share>
-            </View>
-          </View>
-          <View style={styles.fieldset}>
-            <Input
-              label='Amount in Ⱡ (Optional)'
-              autoCorrect={false}
-              reference={(input) => { this.amountInput = input; }}
-              styles={{ errorMessage: styles.errorMessage, input: styles.input }}
-              onChange={value => this.changeHandler(value)}
-              value={this.state.amount.value}
-              keyboardType='numeric'
-              error={
-                this.state.amount.validity === 1 ?
-                  'Invalid amount' : ''
-              }/>
-          </View>
-        </View>
-      </KeyboardAwareScrollView>
-    </View>);
+        </KeyboardAwareScrollView>
+      </View>
+    );
   }
 }
 
