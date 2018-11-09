@@ -40,7 +40,7 @@ class Splash extends React.Component {
     return (<View style={styles.splashContainer}>
       <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]}></Animated.View>
       <Animated.View style={[styles.splashTopButtons]}>
-        <Image source={topBubbles} style={{ width: '100%', height: '100%' }} />
+        <Image source={topBubbles} style={styles.topBubbles} />
       </Animated.View>
       <Animated.View style={[styles.splashFigure, styles.splashStatic, { opacity: iconOpacity }]}>
         <Icon name='lisk-full' size={60} color={colors.primary9} style={styles.splashLogo} />

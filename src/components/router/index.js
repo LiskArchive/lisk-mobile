@@ -88,7 +88,20 @@ export default StackNavigator(
     Login: {
       screen: Login,
       navigationOptions: {
-        header: null,
+        headerBackground: <Bg bgType='bubbles' />,
+        title: <Logo />,
+        headerRight: placeHolderButton,
+        headerLeft: placeHolderButton,
+        headerTintColor: colors.white,
+        headerStyle: {
+          backgroundColor: colors.white,
+          overflow: 'hidden',
+          borderBottomWidth: 0,
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
       },
     },
     Main: {
