@@ -325,7 +325,7 @@ export default StackNavigator(
           },
         } : {
           transitionSpec: {
-            duration: 400,
+            duration: 300,
           },
         };
     },
