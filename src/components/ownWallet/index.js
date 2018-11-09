@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Animated } from 'react-native';
+import { View, Linking, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
@@ -8,6 +8,7 @@ import Transactions from '../transactions';
 import Empty from '../transactions/empty';
 import Loading from '../transactions/loading';
 import { viewportHeight } from '../../utilities/device';
+import handleDeepLink from '../../utilities/deepLink';
 import InfiniteScrollView from '../infiniteScrollView';
 import withTheme from '../withTheme';
 import getStyles from './styles';
