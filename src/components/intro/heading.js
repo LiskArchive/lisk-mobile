@@ -144,11 +144,11 @@ class Heading extends React.Component {
         </Animated.View>
       </View>
       <Animated.View style={[styles.navigateButton, { opacity: bioAuthOpacity }]}>
-          <SecondaryButton
-            style={styles.startButton}
-            onClick={this.props.skip}
-            title='Start' />
-        </Animated.View>
+        <SecondaryButton
+          style={styles.startButton}
+          onClick={this.props.skip}
+          title='Start' />
+      </Animated.View>
     </Animated.View>);
   }
 }

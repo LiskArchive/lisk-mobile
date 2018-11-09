@@ -75,11 +75,11 @@ const styles = {
     height: '100%',
   },
   headingTopBar: {
-    height: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 94 : 74,
+    height: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 79 : 59,
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingTop: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 40 : 15,
+    paddingTop: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 25 : 0,
     paddingRight: 20,
     paddingLeft: 20,
     paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 24 : 29,
@@ -98,6 +98,7 @@ const styles = {
     flex: 1,
     justifyContent: 'flex-start',
     zIndex: 3,
+    elevation: 3,
   },
   headingDescription: {
     padding: 0,
@@ -139,6 +140,7 @@ const styles = {
     top: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 275 : 260,
     left: '50%',
     marginLeft: -160,
+    zIndex: 1,
   },
   frame: {
     width: '100%',
@@ -194,14 +196,11 @@ const styles = {
     height: 250,
   },
   startButton: {
-    position: 'absolute',
-    bottom: 0,
     width: '100%',
   },
   navigateButton: {
-    position: 'absolute',
     width: '100%',
-    bottom: 40,
+    bottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 60 : 40,
     borderRightWidth: 20,
     borderLeftWidth: 20,
     borderColor: 'transparent',

@@ -178,6 +178,7 @@ class SignIn extends React.Component {
 
   componentDidMount() {
     SplashScreen.hide();
+    this.props.settingsUpdated({ showedIntro: false });
     this.defineDefaultAuthMethod();
   }
 

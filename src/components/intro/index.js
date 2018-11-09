@@ -19,7 +19,7 @@ class Intro extends React.Component {
 
   componentDidMount() {
     SplashScreen.hide();
-    this.props.settingsUpdated({ showedIntro: true });
+    this.props.settingsUpdated({ showedIntro: false });
   }
 
   componentWillUnmount() {

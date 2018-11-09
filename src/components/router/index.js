@@ -93,10 +93,15 @@ export default StackNavigator(
         headerRight: placeHolderButton,
         headerLeft: placeHolderButton,
         headerTintColor: colors.light.white,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
         headerStyle: {
           backgroundColor: colors.light.white,
           overflow: 'hidden',
           borderBottomWidth: 0,
+          borderBottomColor: colors.light.white,
+          shadowOpacity: 0,
+          elevation: 0,
         },
         headerTitleStyle: {
           textAlign: 'center',
