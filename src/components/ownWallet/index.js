@@ -11,7 +11,6 @@ import Transactions from '../transactions';
 import Empty from '../transactions/empty';
 import Loading from '../transactions/loading';
 import { viewportHeight } from '../../utilities/device';
-import { requestNotificationPermissions } from '../../utilities/notifications';
 import InfiniteScrollView from '../infiniteScrollView';
 import styles from './styles';
 
@@ -33,7 +32,6 @@ const summaryHeight = 250;
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
-  settingsUpdated: settingsUpdatedAction,
 })
 class Wallet extends React.Component {
   state = {
@@ -56,14 +54,11 @@ class Wallet extends React.Component {
   }
 
   componentDidMount() {
-    const { settingsUpdated, transactionsLoaded } = this.props;
+    const { transactionsLoaded } = this.props;
     transactionsLoaded({
       senderIdOrRecipientId: this.props.account.address,
       offset: 0,
     });
-    requestNotificationPermissions()
-      .then(() => { settingsUpdated({ notificationAccess: true, notification: true }); })
-      .catch(() => { settingsUpdated({ notificationAccess: false }); });
     this.initialAnimation();
   }
 

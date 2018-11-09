@@ -2,7 +2,6 @@ import BackgroundTimer from 'react-native-background-timer';
 import socketMiddleware from './socket';
 import actionTypes from '../../constants/actions';
 import * as accountUtility from '../../utilities/api/account';
-import * as notificaionUtility from '../../utilities/notifications';
 
 describe('Middleware: Accounts', () => {
   const accountA = {
@@ -53,7 +52,6 @@ describe('Middleware: Accounts', () => {
     beforeEach(() => {
       jest.useFakeTimers();
       accountUtility.getAccount = jest.fn();
-      notificaionUtility.sendNotifications = jest.fn();
     });
 
     it('should create an interval to make fire actions', () => {

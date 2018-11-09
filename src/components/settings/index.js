@@ -1,10 +1,6 @@
 import React from 'react';
 import { View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
-import Switch from 'react-native-switch-pro';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../actions/settings';
 import { H1, H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
@@ -14,9 +10,7 @@ import { colors } from '../../constants/styleGuide';
 
 @connect(state => ({
   settings: state.settings,
-}), {
-  settingsUpdated: settingsUpdatedAction,
-})
+}), {})
 class Settings extends React.Component {
   state = {
     error: null,
@@ -48,16 +42,6 @@ class Settings extends React.Component {
     const sensorStatus = <P style={{ color: targetStateLabel[1] || colors.grayScale1 }}>
       {targetStateLabel[0]}
     </P>;
-    const switchButton = <Switch
-      value={settings.notification}
-      height={26}
-      width={43}
-      onSyncPress={() => {
-        this.props.settingsUpdated({ notification: !settings.notification });
-      }}
-      backgroundActive={colors.primary5}
-      backgroundInactive={colors.grayScale3}
-    />;
 
     return (
       <View style={styles.container}>
@@ -116,14 +100,6 @@ class Settings extends React.Component {
               target='Terms'
               iconSize={20}
               title='Terms of use'/>
-          </View>
-          <View style={styles.item}>
-            <ItemTitle
-              navigation={navigation}
-              icon='notification'
-              iconSize={20}
-              targetStateLabel={switchButton}
-              title='Notification'/>
           </View>
           <View style={styles.item}>
             <LogoutButton navigation={navigation} />
