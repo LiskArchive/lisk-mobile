@@ -1,10 +1,10 @@
 import { themes, colors } from '../../constants/styleGuide';
 
-export default () => ({
+export default ({ height }) => ({
   common: {
     wrapper: {},
     textContainer: {
-      paddingBottom: '20%',
+      paddingBottom: height * 0.1,
     },
     passphraseContainer: {
       padding: 20,

@@ -9,12 +9,9 @@ import passphraseImgDark from '../../assets/images/registrationProcess/passphras
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
-class PassphraseCopy extends React.Component {
-  constructor() {
-    super();
-    this.deviceHeight = deviceHeight();
-  }
+const height = deviceHeight();
 
+class PassphraseCopy extends React.Component {
   render() {
     const { theme, styles, passphrase } = this.props;
 
@@ -43,7 +40,7 @@ class PassphraseCopy extends React.Component {
           </View>
         </View>
         {
-          this.deviceHeight > 640 &&
+          height > 640 &&
           <View style={styles.imageContainer}>
             <Image
               style={styles.image}
@@ -59,4 +56,4 @@ class PassphraseCopy extends React.Component {
   }
 }
 
-export default withTheme(PassphraseCopy, getStyles());
+export default withTheme(PassphraseCopy, getStyles({ height }));
