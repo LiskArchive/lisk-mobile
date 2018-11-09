@@ -23,10 +23,6 @@ describe('Middleware: Accounts', () => {
       peers: {
         activePeer,
       },
-      settings: {
-        notificationAccess: true,
-        notification: true,
-      },
       accounts: {
         active: accountA,
         followed: [],
