@@ -11,7 +11,6 @@ import {
   storePassphraseInKeyChain,
   bioMetricAuthentication,
 } from '../../utilities/passphrase';
-import { initPushNotifications } from '../../utilities/notifications';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import {
   accountSignedIn as accountSignedInAction,
@@ -175,7 +174,6 @@ class SignIn extends React.Component {
 
   componentWillMount() {
     this.props.peerSet();
-    initPushNotifications();
   }
 
   componentDidMount() {
