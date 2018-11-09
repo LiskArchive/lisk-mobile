@@ -81,7 +81,7 @@ class Heading extends React.Component {
     return (<Animated.View style={[styles.headingContainer, { opacity: bgOpacity }]}>
       <Animated.View style={[styles.headingTopBar, { opacity: logoOpacity }]}>
         <Icon name='back' size={30} color='transparent' style={styles.headingSkipButton}/>
-        <Icon name='lisk' size={30} color={colors.primary9} style={styles.headingLogo} />
+        <Icon name='lisk' size={30} color={colors.primary5} style={styles.headingLogo} />
         {
           index !== 2 ?
           <LabelButton
@@ -97,7 +97,7 @@ class Heading extends React.Component {
           loop={false}
           onIndexChanged={this.onIndexChanged}
           dotColor={colors.grayScale5}
-          activeDotColor={colors.primary9}
+          activeDotColor={colors.primary5}
           paginationStyle={styles.headingPagination}>
           <View style={styles.headingDescriptionItem}>
             <View style={styles.itemWrapper}>
