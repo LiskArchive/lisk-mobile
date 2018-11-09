@@ -33,7 +33,7 @@ class Heading extends React.Component {
       frameOpacity, activityOpacity, transactionsOpacity, bioAuthOpacity,
     } = this.state;
     const values = [
-      [1, 2, 0, 0],
+      [1, 1, 0, 0],
       [1, 0, 1, 0],
       [0, 0, 0, 1],
     ];
