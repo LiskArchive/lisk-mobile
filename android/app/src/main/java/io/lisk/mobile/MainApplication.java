@@ -3,7 +3,6 @@ package io.lisk.mobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.bluroverly.SajjadBlurOverlayPackage;
 import com.hieuvp.fingerprint.ReactNativeFingerprintScannerPackage;
 import com.oblador.keychain.KeychainPackage;
@@ -40,7 +39,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
-        new ReactNativePushNotificationPackage(),
         new SajjadBlurOverlayPackage(),
         new ReactNativeFingerprintScannerPackage(),
         new KeychainPackage(),
