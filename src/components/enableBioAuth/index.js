@@ -17,8 +17,8 @@ import getStyles from './styles';
 @connect(state => ({
   account: state.accounts.active,
 }), {
-  settingsUpdated: settingsUpdatedAction,
-})
+    settingsUpdated: settingsUpdatedAction,
+  })
 class EnableBioAuth extends React.Component {
   confirm = () => {
     storePassphraseInKeyChain(this.props.account.passphrase);
@@ -41,12 +41,13 @@ class EnableBioAuth extends React.Component {
               Here’s what you need to know:
             </B>
             <View style={[styles.row, styles.separator, styles.theme.separator]}>
-              <Icon
-                name='passphrase'
-                style={styles.icon}
-                color={colors[theme].blue}
-                size={36}
-              />
+              <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
+                <Icon
+                  name='passphrase'
+                  color={colors[theme].blue}
+                  size={36}
+                />
+              </View>
               <View style={styles.textWrapper}>
                 <B style={[styles.rowTitle, styles.theme.rowTitle]}>
                   Your passphrase is still needed
@@ -58,12 +59,13 @@ class EnableBioAuth extends React.Component {
               </View>
             </View>
             <View style={[styles.row, styles.separator, styles.theme.separator]}>
-              <Icon
-                name='settings'
-                style={styles.icon}
-                color={colors[theme].yellow}
-                size={36}
-              />
+              <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
+                <Icon
+                  name='settings-bg'
+                  color={colors[theme].yellow}
+                  size={36}
+                />
+              </View>
               <View style={styles.textWrapper}>
                 <B style={[styles.rowTitle, styles.theme.rowTitle]}>
                   You can always turn it off
@@ -75,12 +77,13 @@ class EnableBioAuth extends React.Component {
               </View>
             </View>
             <View style={[styles.row, styles.separator, styles.theme.separator]}>
-              <Icon
-                name='secure'
-                style={styles.icon}
-                color={theme === themes.light ? colors.light.gray1 : colors.dark.gray2}
-                size={36}
-              />
+              <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
+                <Icon
+                  name='secure'
+                  color={theme === themes.light ? colors.light.gray1 : colors.dark.gray2}
+                  size={36}
+                />
+              </View>
               <View style={styles.textWrapper}>
                 <B style={[styles.rowTitle, styles.theme.rowTitle]}>
                   Fast and secure

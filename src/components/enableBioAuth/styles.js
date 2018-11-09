@@ -34,7 +34,9 @@ export default () => ({
     rowTitle: {
       marginTop: 5,
     },
-    icon: {
+    iconWrapper: {
+      height: 36,
+      borderRadius: 50,
       marginRight: 12,
       marginTop: 10,
     },
@@ -85,6 +87,9 @@ export default () => ({
     },
     description: {
       color: colors.dark.gray4,
+    },
+    iconWrapper: {
+      backgroundColor: colors.dark.white,
     },
   },
 });
