@@ -115,7 +115,7 @@ class SignIn extends React.Component {
       [
         {
           text: 'Cancel',
-          onPress: () => cb(passphrase.value),
+          onPress: () => cb(passphrase),
           style: 'cancel',
         },
         {
@@ -125,11 +125,11 @@ class SignIn extends React.Component {
               description: 'Do you want to use Biometric Authentication?',
               successCallback: () => {
                 this.hideDialog(() => {
-                  storePassphraseInKeyChain(passphrase.value);
+                  storePassphraseInKeyChain(passphrase);
                   this.props.settingsUpdated({
                     hasStoredPassphrase: true,
                   });
-                  cb(passphrase.value);
+                  cb(passphrase);
                 });
               },
               errorCallback: () => {},
@@ -176,7 +176,7 @@ class SignIn extends React.Component {
       submissionType === 'form') {
       this.promptBioAuth(passphrase, this.signIn);
     } else {
-      this.signIn(passphrase.value);
+      this.signIn(passphrase);
     }
   }
 
@@ -245,7 +245,7 @@ class SignIn extends React.Component {
       {
         Platform.OS === 'android' ?
         <FingerprintOverlay
-          onModalClosed={() => this.signIn(this.state.passphrase.value)}
+          onModalClosed={() => this.signIn(this.state.passphrase)}
           error={androidDialog.error}
           show={androidDialog.show} /> : null
       }

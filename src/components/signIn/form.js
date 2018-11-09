@@ -2,8 +2,8 @@ import React from 'react';
 import { Platform, View, Animated } from 'react-native';
 import styles from './styles';
 import Input from '../toolBox/input';
-import { validatePassphrase } from '../../utilities/passphrase';
 import { Small, P, A } from '../toolBox/typography';
+import { validatePassphrase } from '../../utilities/passphrase';
 import Icon from '../toolBox/icon';
 import KeyboardAwareScrollView from '../toolBox/keyboardAwareScrollView';
 
@@ -25,10 +25,10 @@ const Extras = ({ error, onPress, opacity }) => (<View>
 
 class Form extends React.Component {
   state = {
+    isSubmitted: false,
     passphrase: {
       value: devDefaultPass,
       validity: validatePassphrase(devDefaultPass),
-      buttonStyle: null,
     },
     animation: {
       opacity: new Animated.Value(0),
@@ -45,22 +45,10 @@ class Form extends React.Component {
     }, 500);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  trim(passphrase) {
-    return passphrase.trim().replace(/\s+/g, ' ');
-  }
-
-  /**
-   * General change handler to get bound to react component event listeners
-   *
-   * @param {String} key - The key in react component state to be altered
-   * @param {any} value - The corresponding value. interface depends on the key
-   *
-   * @todo Implement error status/message
-   */
-  changeHandler(key, value) {
+  onChangePassphrase = (value) => {
     this.setState({
-      [key]: {
+      isSubmitted: false,
+      passphrase: {
         value,
         validity: validatePassphrase(value),
       },
@@ -72,22 +60,20 @@ class Form extends React.Component {
     this.props.navigation.navigate('Register');
   }
 
-  shrinkButton = (status) => {
-    if (status) {
-      this.setState({ buttonStyle: styles.button });
-    } else {
-      this.setState({ buttonStyle: styles.buttonSticky });
-    }
-  }
+  onSignInSubmission = () => {
+    const { passphrase } = this.state;
 
-  onSignInSubmission(passphrase) {
-    this.passphraseInput.blur();
-    this.props.signIn(passphrase, 'form');
+    this.setState(prevState => ({ ...prevState, isSubmitted: true }), () => {
+      if (!passphrase.validity.length) {
+        this.passphraseInput.blur();
+        this.props.signIn(passphrase.value);
+      }
+    });
   }
 
   animate = () => {
     const { animate } = this.props;
-    const { opacity } = this.state.animation;
+    const { animation: { opacity } } = this.state;
 
     Animated.timing(opacity, {
       toValue: 1,
@@ -106,45 +92,58 @@ class Form extends React.Component {
   }
 
   render() {
-    const { passphrase, connectionError } = this.state;
     const {
-      opacity,
-    } = this.state.animation;
-    const error = passphrase.validity
-      .filter(item =>
-        item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
-    return (<View style={styles.container}>
-      <Animated.View
-        style={[styles.titleContainer, styles.paddingBottom, { opacity }]}>
-        <P style={styles.title}>The official Lisk mobile wallet.</P>
-      </Animated.View>
-      <Animated.View style={[{ opacity }]}>
-        <Input
-          label='Passphrase'
-          reference={(ref) => { this.passphraseInput = ref; }}
-          innerStyles={{ input: styles.input }}
-          value={passphrase.value}
-          onChange={this.changeHandler.bind(this, 'passphrase')}
-          onFocus={() => this.shrinkButton(false)}
-          onBlur={() => this.shrinkButton(true)}
-          autoFocus={true}
-          autoCorrect={false}
-          multiline={Platform.OS === 'ios'}
-          secureTextEntry={Platform.OS !== 'ios'}
-          error={
-            (error.length > 0 && error[0].message && error[0].message.length > 0) ?
-            error[0].message.replace(' Please check the passphrase.', '') : ''
-          }/>
+      isSubmitted, passphrase, connectionError, animation: { opacity },
+    } = this.state;
+
+    let errorMessage = '';
+
+    if (isSubmitted) {
+      const errors = passphrase.validity
+        .filter(item => item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
+
+      if (errors.length && errors[0].message && errors[0].message.length) {
+        errorMessage = errors[0].message.replace(' Please check the passphrase.', '');
+      }
+    }
+
+    return (
+      <View style={styles.container}>
+        <Animated.View
+          style={[styles.titleContainer, styles.paddingBottom, { opacity }]}
+        >
+          <P style={styles.title}>
+            The official Lisk mobile wallet.
+          </P>
         </Animated.View>
-      <KeyboardAwareScrollView
-        styles={{}}
-        extras={<Extras error={connectionError}
-        onPress={this.goToRegistration} opacity={opacity} />}
-        disabled={passphrase.validity.length !== 0}
-        onSubmit={() => this.onSignInSubmission(passphrase)}
-        button='Sign in'>
-      </KeyboardAwareScrollView>
-    </View>);
+        <Animated.View style={[{ opacity }]}>
+          <Input
+            label='Passphrase'
+            reference={(ref) => { this.passphraseInput = ref; }}
+            styles={{ input: styles.input }}
+            value={passphrase}
+            onChange={this.onChangePassphrase}
+            autoFocus={true}
+            autoCorrect={false}
+            multiline={Platform.OS === 'ios'}
+            secureTextEntry={Platform.OS !== 'ios'}
+            error={errorMessage}
+          />
+        </Animated.View>
+        <KeyboardAwareScrollView
+          button='Sign in'
+          onSubmit={this.onSignInSubmission}
+          disabled={passphrase.value.length === 0}
+          extras={
+            <Extras
+              error={connectionError}
+              onPress={this.goToRegistration}
+              opacity={opacity}
+            />
+          }
+        />
+      </View>
+    );
   }
 }
 
