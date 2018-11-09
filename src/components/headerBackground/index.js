@@ -1,13 +1,22 @@
 import React from 'react';
 import { Image, View } from 'react-native';
-import Src from '../../assets/images/stripes.png';
+import stripes from '../../assets/images/stripes.png';
+import topBubbles from '../../assets/images/topBubbles3x.png';
 import styles from './styles';
 
-const Bg = () => (<View>
-  <Image
-    style={styles.main}
-    source={Src}
-  />
-</View>);
+const Bg = ({ bgType }) => {
+  let numericDimensions = {};
+  let source = stripes;
+  if (bgType === 'bubbles') {
+    numericDimensions = { width: 375, height: 97 };
+    source = topBubbles;
+  }
+  return (<View>
+    <Image
+      style={[styles.main, numericDimensions]}
+      source={source}
+    />
+  </View>);
+};
 
 export default Bg;
