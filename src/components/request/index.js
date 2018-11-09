@@ -8,9 +8,9 @@ import { viewportHeight, deviceWidth } from '../../utilities/device';
 import Input from '../toolBox/input';
 import { H1, P, B } from '../toolBox/typography';
 import reg from '../../constants/regex';
-import colors from '../../constants/styleGuide/colors';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import { themes, colors } from '../../constants/styleGuide';
 
 const pageHeight = viewportHeight();
 const qrCodeSize = Math.min(pageHeight - 355, Math.floor(deviceWidth() * 0.8));
@@ -23,7 +23,7 @@ class Request extends React.Component {
     super(props);
     this.state = {
       amount: { value: '', validity: -1 },
-      url: props.account ? props.account.address : '',
+      url: props.account.address,
     };
   }
 
@@ -35,7 +35,7 @@ class Request extends React.Component {
    * @param {Number} value - A valid amount in LSK
    */
   changeHandler = (val) => {
-    const { address } = this.state;
+    const { account: { address } } = this.props;
     let amountValidity = -1;
     let amount = val;
     if (val !== '') {
@@ -54,42 +54,44 @@ class Request extends React.Component {
   }
 
   render() {
-    const { styles } = this.props;
-    const { amount, address, url } = this.state;
+    const { styles, theme, account: { address } } = this.props;
+    const { amount, url } = this.state;
 
     return (
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper, styles.theme.wrapper]}>
         <KeyboardAwareScrollView
           enableOnAndroid={true}
           enableResetScrollToCoords={false}
           contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}
         >
-          <View style={styles.innerContainer}>
-            <View style={styles.titleContainer}>
-              <View style={styles.headings}>
-                <H1>Request</H1>
-                <P style={styles.subtitle}>
-                  Request LSK tokens from other accounts.
-                </P>
-              </View>
+          <View style={[styles.innerContainer, styles.theme.innerContainer]}>
+            <View style={styles.headerContainer}>
+              <H1 style={[styles.header, styles.theme.header]}>
+                Request
+              </H1>
+              <P style={[styles.subHeader, styles.theme.subHeader]}>
+                Request LSK tokens from other accounts.
+              </P>
             </View>
             <View style={styles.main}>
-              <B style={styles.address}>
+              <B style={[styles.address, styles.theme.address]}>
                 {address}
               </B>
               <QRCode
-                value={this.state.url}
+                value={url}
                 size={qrCodeSize}
-                color='#263344'
-                backgroundColor={colors.light.white}
+                color={theme === themes.light ? '#263344' : colors.dark.gray4}
+                backgroundColor={
+                  theme === themes.light ? colors.light.white : colors.dark.screenBgNavy
+                }
               />
-              <View style={styles.share}>
+              <View style={styles.shareContainer}>
                 <Share
                   type={P}
                   value={url}
-                  style={styles.blue}
-                  color={colors.light.blue}
+                  style={styles.theme.share}
                   icon={true}
+                  iconColor={colors[theme].blue}
                 >
                   Share
                 </Share>
