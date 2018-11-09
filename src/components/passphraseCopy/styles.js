@@ -4,7 +4,7 @@ export default ({ height }) => ({
   common: {
     wrapper: {},
     textContainer: {
-      paddingBottom: height * 0.1,
+      paddingBottom: height * 0.075,
     },
     passphraseContainer: {
       padding: 20,
