@@ -18,6 +18,7 @@ import {
 } from '../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
+  settingsRetrieved as settingsRetrievedAction,
 } from '../../actions/settings';
 import Splash from './splash';
 import Form from './form';
@@ -38,15 +39,22 @@ console.disableYellowBox = true; // eslint-disable-line
   peerSet: activePeerSetAction,
   accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
+  settingsRetrieved: settingsRetrievedAction,
 })
 class SignIn extends React.Component {
   state = {
+    destinationDefined: false,
     storedPassphrase: null,
     view: 'splash',
     androidDialog: {
       error: null,
       show: false,
     },
+  }
+
+  init = () => {
+    this.defineDefaultAuthMethod();
+    SplashScreen.hide();
   }
 
   showDialog = () => {
@@ -177,17 +185,24 @@ class SignIn extends React.Component {
   }
 
   componentDidMount() {
-    SplashScreen.hide();
-    this.props.settingsUpdated({ showedIntro: false });
-    this.defineDefaultAuthMethod();
+    this.props.settingsRetrieved();
   }
 
-  /**
-   * After signed-in, accounts.active has value and this methods
-   * redirects to Main.
-   * @todo sign-out should happen in the setting page to prevent issues here
-   */
   componentDidUpdate() {
+    if (this.props.settings.validated &&
+      !this.state.destinationDefined) {
+      if (this.props.settings.showedIntro) {
+        this.init();
+      } else {
+        this.props.navigation.navigate('Intro');
+      }
+      this.setState({ destinationDefined: true });
+    }
+
+    /**
+     * After signed-in, accounts.active has value and this methods
+     * redirects to Main.
+     */
     if (this.props.accounts.active &&
       this.props.navigation &&
       this.props.navigation.isFocused()) {

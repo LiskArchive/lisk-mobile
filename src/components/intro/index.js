@@ -9,7 +9,9 @@ import {
 } from '../../actions/settings';
 import styles from './styles';
 
-@connect(state => ({}), {
+@connect(state => ({
+  settings: state.settings,
+}), {
   settingsUpdated: settingsUpdatedAction,
 })
 class Intro extends React.Component {
@@ -18,8 +20,10 @@ class Intro extends React.Component {
   }
 
   componentDidMount() {
-    SplashScreen.hide();
-    this.props.settingsUpdated({ showedIntro: false });
+    this.props.settingsUpdated({ showedIntro: true });
+    this.timeout = setTimeout(() => {
+      SplashScreen.hide();
+    }, 400);
   }
 
   componentWillUnmount() {

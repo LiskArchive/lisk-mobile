@@ -12,7 +12,7 @@ const styles = {
   },
   container: {
     height: '100%',
-    paddingTop: height <= 640 ? 100 : 170,
+    paddingTop: height <= 640 ? 70 : 170,
   },
   innerContainer: {
     flexDirection: 'column',
@@ -151,7 +151,7 @@ const styles = {
   },
   splashStatic: {
     zIndex: 2,
-    top: height <= 640 ? 30 : 100,
+    top: height <= 640 ? 0 : 100,
   },
   splashAnimating: {
     zIndex: 1,

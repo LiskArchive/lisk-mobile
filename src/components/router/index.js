@@ -15,7 +15,6 @@ import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
-import Landing from '../landing';
 import styles from './styles';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
@@ -88,25 +87,7 @@ export default StackNavigator(
     SignIn: {
       screen: SignIn,
       navigationOptions: {
-        headerBackground: <Bg bgType='bubbles' />,
-        title: <Logo />,
-        headerRight: placeHolderButton,
-        headerLeft: placeHolderButton,
-        headerTintColor: colors.light.white,
-        shadowOpacity: 0,
-        borderBottomWidth: 0,
-        headerStyle: {
-          backgroundColor: colors.light.white,
-          overflow: 'hidden',
-          borderBottomWidth: 0,
-          borderBottomColor: colors.light.white,
-          shadowOpacity: 0,
-          elevation: 0,
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
-        },
+        header: null,
       },
     },
     Main: {
@@ -174,7 +155,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.light.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -311,19 +292,13 @@ export default StackNavigator(
         header: null,
       },
     },
-    Landing: {
-      screen: Landing,
-      navigationOptions: {
-        header: null,
-      },
-    },
   },
   {
-    initialRouteName: 'Landing',
+    initialRouteName: 'SignIn',
     headerLayoutPreset: 'center',
     transitionConfig: (props) => {
       const { scene } = props;
-      return (scene.routeName === 'Landing' || scene.routeName === 'SignIn' || scene.routeName === 'Intro') ?
+      return (scene.routeName === 'SignIn' || scene.routeName === 'Intro') ?
         {
           transitionSpec: {
             duration: 0,

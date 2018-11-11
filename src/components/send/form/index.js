@@ -80,10 +80,10 @@ class Form extends React.Component {
   }
 
   setAmount = (value) => {
-    const normalizedValue = value.replace(',', '.');
+    const normalizedValue = value.replace(/[^0-9]/g, '.');
     this.setState({
       amount: {
-        value,
+        value: normalizedValue,
         validity: this.validator.amount(normalizedValue),
       },
     });
