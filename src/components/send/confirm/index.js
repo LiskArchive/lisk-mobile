@@ -110,7 +110,7 @@ class Confirm extends React.Component {
           <Input
             label='Second Passphrase'
             reference={(ref) => { this.SecondPassphraseInput = ref; }}
-            styles={{ input: styles.input }}
+            innerStyles={{ input: styles.input }}
             value={secondPassphrase.value}
             onChange={this.changeHandler}
             autoFocus={true}

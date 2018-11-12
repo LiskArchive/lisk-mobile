@@ -97,9 +97,8 @@ class Request extends React.Component {
             <View style={styles.fieldset}>
               <Input
                 label='Amount in Ⱡ (Optional)'
-                autoCorrect={false}
                 reference={(input) => { this.amountInput = input; }}
-                styles={{ errorMessage: styles.errorMessage, input: styles.input }}
+                autoCorrect={false}
                 onChange={this.changeHandler}
                 value={amount.value}
                 keyboardType='numeric'

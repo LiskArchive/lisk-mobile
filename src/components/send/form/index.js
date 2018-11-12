@@ -213,7 +213,7 @@ class Form extends React.Component {
                 label='Address'
                 autoCorrect={false}
                 reference={(input) => { this.references[0] = input; }}
-                styles={{
+                innerStyles={{
                   errorMessage: styles.errorMessage,
                   input: [
                     styles.input,
@@ -234,7 +234,7 @@ class Form extends React.Component {
               label='Amount (Ⱡ)'
               autoCorrect={false}
               reference={(input) => { this.references[1] = input; }}
-              styles={{ input: styles.input }}
+              innerStyles={{ input: styles.input }}
               onChange={value => this.setAmount(value)}
               value={amount.value}
               keyboardType='numeric'
@@ -248,7 +248,7 @@ class Form extends React.Component {
               label='Reference (Optional)'
               autoCorrect={false}
               reference={(input) => { this.references[2] = input; }}
-              styles={{ errorMessage: styles.errorMessage, input: styles.input }}
+              innerStyles={{ errorMessage: styles.errorMessage, input: styles.input }}
               multiline={true}
               onChange={this.setReference}
               value={this.state.reference.value}
