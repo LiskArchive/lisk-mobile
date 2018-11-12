@@ -34,6 +34,7 @@ const dark = {
   gray2: '#9EA8B4',
   gray3: '#D9E7F1',
   gray4: '#DDEAF4',
+  gray5: '#373E4F', // @TODO: this is also used in 320-dark-mode-settings-screen branch with the same name
 };
 
 export default {
