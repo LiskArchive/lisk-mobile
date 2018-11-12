@@ -1,5 +1,6 @@
 import settings from './settings';
 import actionTypes from '../../constants/actions';
+import { themes } from '../../constants/styleGuide';
 
 
 describe('Reducers: Settings', () => {
@@ -11,7 +12,7 @@ describe('Reducers: Settings', () => {
 
   it('should create the empty state initially', () => {
     const createdState = settings();
-    const emptyState = {};
+    const emptyState = { theme: themes.light };
     expect(createdState).toEqual(emptyState);
   });
 
