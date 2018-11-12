@@ -5,11 +5,9 @@ pipeline {
     stage ('Build dependencies') {
       steps {
         script{
-          cache_file = restoreCache("package.json")
           nvm(getNodejsVersion()) {
-            sh 'npm install'
+            sh 'npm ci'
           }
-          saveCache(cache_file, './node_modules', 10)
         }
       }
     }
