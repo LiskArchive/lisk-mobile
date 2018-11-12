@@ -1,10 +1,8 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Image } from 'react-native';
-import { deviceHeight } from '../../utilities/device';
-import { H1, B, P } from '../toolBox/typography';
-import CopyToClipboard from '../copyToClipboard';
-import image from '../../assets/images/registrationProcess/passphrase3x.png';
+import { View } from 'react-native';
+import { H1, P } from '../toolBox/typography';
+import PassphraseCopy from '../passphraseCopy';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -15,47 +13,21 @@ class PassphraseBackup extends React.Component {
   render() {
     const { styles, account: { passphrase } } = this.props;
 
-    return (<View style={styles.wrapper}>
+    return (
+      <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={styles.container}>
-          <View>
-            <View style={styles.titleContainer}>
-              <H1 style={styles.header}>Backup your passphrase</H1>
-              <P style={styles.subHeader}>
+          <View style={styles.titleContainer}>
+            <H1 style={[styles.header, styles.theme.header]}>
+              Backup your passphrase
+            </H1>
+            <P style={[styles.subHeader, styles.theme.subHeader]}>
               Carefully write it down or copy to the clipboard.
-              </P>
-            </View>
-            <View style={styles.passphraseContainer}>
-              <P style={styles.passphraseTitle}>This is your passphrase:</P>
-              <B style={styles.passphrase}>
-                {passphrase}
-              </B>
-            </View>
-            <View style={styles.copyContainer}>
-              <CopyToClipboard
-                style={styles.copyContainer}
-                labelStyle={styles.copy}
-                iconStyle={styles.copy}
-                label='Copy to clipboard'
-                showIcon={true}
-                iconSize={14}
-                value={passphrase}
-                type={P}/>
-            </View>
+            </P>
           </View>
-          {
-            deviceHeight() > 640 ?
-            <View style={styles.imageContainer}>
-              <Image
-                style={styles.image}
-                source={image}
-              />
-              <P style={styles.caption}>Keep it safe!</P>
-            </View> : null
-          }
-          <View style={styles.placeholder}>
-          </View>
+          <PassphraseCopy passphrase={passphrase} />
         </View>
-      </View>);
+      </View>
+    );
   }
 }
 

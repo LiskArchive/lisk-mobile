@@ -1,19 +1,17 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Image } from 'react-native';
-import { deviceHeight } from '../../utilities/device';
+import { View } from 'react-native';
 import {
   removePassphraseFromKeyChain,
 } from '../../utilities/passphrase';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
-import { H1, B, P } from '../toolBox/typography';
-import CopyToClipboard from '../copyToClipboard';
+import { H1, P } from '../toolBox/typography';
 import { SecondaryButton } from '../toolBox/button';
-import image from '../../assets/images/registrationProcess/passphrase3x.png';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import PassphraseCopy from '../passphraseCopy';
 
 @connect(state => ({
   account: state.accounts.active,
@@ -31,51 +29,30 @@ class DisableBioAuth extends React.Component {
     const { styles, account: { passphrase } } = this.props;
     const title = this.props.navigation.getParam('title', null);
 
-    return (<View style={styles.wrapper}>
+    return (
+      <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={styles.container}>
           <View>
-            <View style={styles.titleContainer}>
-              <H1 style={styles.header}>Disabling {title}</H1>
-              <P style={styles.subHeader}>
-                Your passphrase will be the only option to access your account.
+            <View>
+              <H1 style={[styles.header, styles.theme.header]}>
+                {`You're about to disable ${title}`}
+              </H1>
+              <P style={[styles.subHeader, styles.theme.subHeader]}>
+                Passphrase will be the only option to access your account.
               </P>
             </View>
-            <View style={styles.passphraseContainer}>
-              <P style={styles.passphraseTitle}>This is your passphrase:</P>
-              <B style={styles.passphrase}>
-                {passphrase}
-              </B>
-            </View>
-            <View style={styles.copyContainer}>
-              <CopyToClipboard
-                style={styles.copyContainer}
-                labelStyle={styles.copy}
-                iconStyle={styles.copy}
-                label='Copy to clipboard'
-                showIcon={true}
-                iconSize={14}
-                value={passphrase}
-                type={P}/>
-            </View>
+            <PassphraseCopy passphrase={passphrase} />
           </View>
-          {
-            deviceHeight() > 640 ?
-            <View style={styles.imageContainer}>
-              <Image
-                style={styles.image}
-                source={image}
-              />
-              <P style={styles.caption}>Keep it safe!</P>
-            </View> : null
-          }
+
           <View>
             <SecondaryButton
-              style={styles.button}
               onClick={this.confirm}
-              title='Disable' />
+              title={`Disable ${title}`}
+            />
           </View>
         </View>
-      </View>);
+      </View>
+    );
   }
 }
 
