@@ -1,10 +1,9 @@
-import { colors, boxes } from '../../constants/styleGuide';
+import { themes, colors, boxes } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
     container: {
       height: '100%',
-      backgroundColor: colors.light.white,
     },
     innerContainer: {
       flex: 1,
@@ -14,29 +13,52 @@ export default () => ({
       paddingTop: 36,
       paddingBottom: 35,
     },
-    centerAligned: {
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    title: {
+    header: {
       marginBottom: 6,
-      // lineHeight: 41,
+    },
+    itemTitle: {
+      marginTop: 16,
+      marginBottom: 8,
+    },
+    itemDescription: {
+      lineHeight: 22,
+    },
+  },
+
+  [themes.light]: {
+    container: {
+      backgroundColor: colors.light.white,
+    },
+    header: {
+      color: colors.light.black,
     },
     subTitle: {
       color: colors.light.gray2,
     },
-    link: {
-      color: colors.light.blue,
-      marginTop: 10,
-    },
     itemTitle: {
-      marginTop: 16,
-      lineHeight: 41,
+      color: colors.light.black,
     },
     itemDescription: {
-      lineHeight: 22,
       color: colors.light.gray2,
+      lineHeight: 22,
+    },
+  },
+
+  [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    header: {
+      color: colors.dark.white,
+    },
+    subTitle: {
+      color: colors.dark.gray3,
+    },
+    itemTitle: {
+      color: colors.dark.white,
+    },
+    itemDescription: {
+      color: colors.dark.gray3,
     },
   },
 });

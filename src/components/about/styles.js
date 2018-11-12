@@ -1,10 +1,9 @@
-import { colors, boxes } from '../../constants/styleGuide';
+import { themes, colors, fonts, boxes } from '../../constants/styleGuide';
 
 export default ({ logoSize }) => ({
   common: {
     container: {
       height: '100%',
-      backgroundColor: colors.light.white,
     },
     innerContainer: {
       flex: 1,
@@ -21,11 +20,7 @@ export default ({ logoSize }) => ({
       justifyContent: 'center',
     },
     copy: {
-      color: colors.light.gray2,
       width: 'auto',
-    },
-    version: {
-      color: colors.light.gray2,
     },
     centerAligned: {
       flexDirection: 'column',
@@ -48,8 +43,53 @@ export default ({ logoSize }) => ({
       marginBottom: 6,
     },
     link: {
-      color: colors.light.blue,
       marginTop: 10,
+    },
+    version: {
+      fontFamily: fonts.family.context,
+    },
+  },
+
+  [themes.light]: {
+    container: {
+      backgroundColor: colors.light.white,
+    },
+    header: {
+      color: colors.light.black,
+    },
+    appTitle: {
+      color: colors.light.black,
+    },
+    version: {
+      color: colors.light.gray2,
+    },
+    link: {
+      color: colors.light.blue,
+    },
+    copy: {
+      color: colors.light.gray2,
+      fontSize: 15,
+    },
+  },
+
+  [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    header: {
+      color: colors.dark.white,
+    },
+    appTitle: {
+      color: colors.dark.white,
+    },
+    version: {
+      color: colors.dark.gray3,
+    },
+    link: {
+      color: colors.dark.blue,
+    },
+    copy: {
+      color: colors.dark.gray1,
     },
   },
 });
