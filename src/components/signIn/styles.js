@@ -151,7 +151,7 @@ const styles = {
   },
   splashStatic: {
     zIndex: 2,
-    top: height <= 640 ? 0 : 100,
+    top: height <= 640 ? 10 : 100,
   },
   splashAnimating: {
     zIndex: 1,
