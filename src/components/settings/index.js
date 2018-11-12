@@ -113,14 +113,15 @@ class Settings extends React.Component {
           </View>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
-              icon='terms'
+              icon='dark-mode'
               iconSize={20}
               targetStateLabel={
                 <SwitchButton
+                  style={styles.switch}
                   value={isDarkMode}
                   onSyncPress={this.switchTheme} />
               }
-              title='Night mode'/>
+              title='Dark mode'/>
           </View>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle

@@ -14,6 +14,9 @@ export default () => ({
       paddingTop: 16,
       paddingBottom: 6,
     },
+    switch: {
+      top: -4,
+    },
   },
 
   [themes.light]: {
