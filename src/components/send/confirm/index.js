@@ -51,7 +51,9 @@ class Confirm extends React.Component {
     });
   }
 
-  back = () => this.props.prevStep();
+  back = () => {
+    this.props.prevStep();
+  };
 
   validatePassphrase = (passphrase) => {
     const validity = validatePassphrase(passphrase);

@@ -17,40 +17,91 @@ import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 
-const validator = {
-  address: (str) => {
-    if (str === '') return -1;
-    return reg.address.test(str) ? 0 : 1;
-  },
-  amount: (str, account) => {
-    if (str === '') return -1;
-    return (reg.amount.test(str) &&
-      account && account.balance > transactions.send.fee &&
-      parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
-  },
-  reference: (str) => {
-    const uint8array = new TextEncoder().encode(str);
-    return uint8array.length > 64 ? 1 : 0;
-  },
-};
-
 @connect(state => ({
   account: state.accounts.active,
-}), {})
-class Form extends React.Component {
-  static getDerivedStateFromProps(props) {
-    const { address = '', amount = '' } = (props.navigation.state.params || {});
-    return {
-      address: { value: address, validity: validator.address(address) },
-      amount: { value: amount, validity: validator.amount(amount, props.account) },
-      reference: { value: '', validity: validator.reference('') },
+}))
+class SendForm extends React.Component {
+  references = [];
+  activeInputRef = null;
+  validator = {
+    address: (str) => {
+      if (str === '') return -1;
+      return reg.address.test(str) ? 0 : 1;
+    },
+    amount: (str) => {
+      const { account } = this.props;
+      if (str === '') return -1;
+      return (reg.amount.test(str) &&
+        account && account.balance > transactions.send.fee &&
+        parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
+    },
+    reference: (str) => {
+      const uint8array = new TextEncoder().encode(str);
+      return uint8array.length > 64 ? 1 : 0;
+    },
+  };
+
+  constructor(props) {
+    super(props);
+    const { address = '', amount = '', reference = '' } = props.prevState;
+    this.state = {
+      address: {
+        value: address,
+        validity: this.validator.address(address),
+      },
+      amount: {
+        value: amount,
+        validity: this.validator.amount(amount),
+      },
+      reference: {
+        value: reference,
+        validity: this.validator.reference(reference),
+      },
       secondaryButtonOpacity: 1,
-      avatarPreview: !!address,
+      avatarPreview: true,
     };
   }
 
-  references = [];
-  activeInputRef = null;
+  componentDidMount() {
+    // Removes left button in case of move back event from the MultiStep navigator.
+    this.props.navigation.setParams({ showButtonLeft: false });
+  }
+
+  componentDidUpdate(prevProps) {
+    // Gets filled by navigation state change, when app is received linking event.
+    if (
+      prevProps.navigation.state && this.props.navigation.state &&
+      (prevProps.navigation.state.params !== this.props.navigation.state.params)
+    ) {
+      const { address = '', amount = '', reference = '' } = (this.props.navigation.state.params || {});
+      this.setState({
+        address: {
+          value: address,
+          validity: this.validator.address(address),
+        },
+        amount: {
+          value: amount,
+          validity: this.validator.amount(amount),
+        },
+        reference: {
+          value: reference,
+          validity: this.validator.reference(reference),
+        },
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { amount: { value } } = this.state;
+    if (nextProps.account && this.props.account.balance !== nextProps.account.balance) {
+      this.setState({
+        amount: {
+          value,
+          validity: this.validator.amount(value),
+        },
+      });
+    }
+  }
 
   /**
    * @param {String} name - the key to set on state
@@ -60,7 +111,7 @@ class Form extends React.Component {
     this.setState({
       reference: {
         value,
-        validity: validator.reference(value),
+        validity: this.validator.reference(value),
       },
     });
   }
@@ -70,7 +121,7 @@ class Form extends React.Component {
     this.setState({
       address: {
         value,
-        validity: validator.address(value),
+        validity: this.validator.address(value),
       },
       avatarPreview: false,
     });
@@ -86,41 +137,9 @@ class Form extends React.Component {
     this.setState({
       amount: {
         value,
-        validity: validator.amount(normalizedValue, this.props.account),
+        validity: this.validator.amount(normalizedValue),
       },
     });
-  }
-
-  componentDidMount() {
-    if (this.props.prevState.address) {
-      const state = {
-        address: {
-          value: this.props.prevState.address,
-          validity: 0,
-        },
-        amount: {
-          value: this.props.prevState.amount,
-          validity: 0,
-        },
-        reference: {
-          value: this.props.prevState.reference || '',
-          validity: 0,
-        },
-      };
-      this.setState(state);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { amount: value } = this.state;
-    if (nextProps.account && this.props.account.balance !== nextProps.account.balance) {
-      this.setState({
-        amount: {
-          validity: validator.amount(value, nextProps.account),
-          value,
-        },
-      });
-    }
   }
 
   changeButtonOpacity = (val) => {
@@ -155,22 +174,25 @@ class Form extends React.Component {
     const {
       address, amount, reference, avatarPreview,
     } = this.state;
+
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
           ref={(el) => { this.scanner = el; }}
           navigation={this.props.navigation}
           setAddress={this.setAddress}
-          setAmount={this.setAmount} />
+          setAmount={this.setAmount}
+        />
         <KeyboardAwareScrollView
-          disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
-          onSubmit={this.forward}
-          hasTabBar={true}
-          button={{
-            title: 'Continue',
-            type: 'inBox',
-          }}
-          styles={{ container: styles.container, innerContainer: styles.innerContainer }}>
+            disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
+            onSubmit={this.forward}
+            hasTabBar={true}
+            button={{
+              title: 'Continue',
+              type: 'inBox',
+            }}
+            styles={{ container: styles.container, innerContainer: styles.innerContainer }}
+          >
           <View style={styles.titleContainer}>
             <View style={styles.headings}>
               <H1 style={[styles.title, styles.theme.title]}>Send</H1>
@@ -199,18 +221,21 @@ class Form extends React.Component {
                 title='Scan'
                 icon='scanner'
                 iconSize={18}
-                color={colors.light.blue} />
+                color={colors.light.blue}
+              />
               {
                 address.validity === 0 && avatarPreview ?
                   <Avatar
                     style={styles.avatar}
                     address={address.value}
-                    size={34} /> :
+                    size={34}
+                  /> :
                   <Icon
                     style={styles.avatar}
                     name='avatar-placeholder'
                     size={34}
                     color={colors[theme].gray5} />
+                  />
               }
               <Input
                 label='Address'
@@ -268,4 +293,4 @@ class Form extends React.Component {
   }
 }
 
-export default withTheme(Form, getStyles());
+export default withTheme(SendForm, getStyles());

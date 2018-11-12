@@ -32,7 +32,7 @@ class MultiStep extends React.Component {
     };
   }
 
-  next(data) {
+  next = (data) => {
     this.move({ moves: 1, stepData: data });
   }
 
@@ -46,11 +46,11 @@ class MultiStep extends React.Component {
    * @memberOf MultiStep
    *
    */
-  prev(moves = -1) {
+  prev = (moves = -1) => {
     this.move({ moves });
   }
 
-  reset() {
+  reset = () => {
     this.move({ to: 0, reset: true });
   }
 
@@ -76,9 +76,9 @@ class MultiStep extends React.Component {
     return newDataList;
   }
 
-  move({
+  move = ({
     moves, to, stepData, reset,
-  }) {
+  }) => {
     const { current, data } = this.state;
     const origin = current;
     const { children } = this.props;
@@ -96,9 +96,9 @@ class MultiStep extends React.Component {
     } = this.props;
     const { data, current, origin } = this.state;
     const extraProps = {
-      nextStep: this.next.bind(this),
-      move: this.move.bind(this),
-      prevStep: this.prev.bind(this),
+      nextStep: this.next,
+      move: this.move,
+      prevStep: this.prev,
       ...data[current],
     };
 
@@ -106,37 +106,40 @@ class MultiStep extends React.Component {
       if (typeof finalCallback === 'function') {
         extraProps.finalCallback = finalCallback;
       }
-      extraProps.reset = this.reset.bind(this);
+      extraProps.reset = this.reset;
     } else {
       extraProps.prevState = Object.assign({}, data[origin]);
     }
 
     const normalizedStyles = getStyles(navStyles);
 
-    return (<Element {...normalizedStyles.multiStepWrapper}>
-      {
-        showNav ?
-          <Nav
-            normalizedStyles={normalizedStyles}
-            hideGroups={hideGroups}
-            hideSteps={hideSteps}
-            steps={children}
-            groupButton={groupButton}
-            stepButton={stepButton}
-            interactive={interactive}
-            current={current}
-            activeTitle={activeTitle}
-            navigatorButton={navigatorButton}
-            backButton={backButton}
-            backButtonTitle={backButtonTitle}
-            prevPage={prevPage}
-            prevStep={this.prev.bind(this)}
-            move={this.move.bind(this)} /> : null
-      }
-      {
-        React.cloneElement(children[current], extraProps)
-      }
-    </Element>);
+    return (
+      <Element {...normalizedStyles.multiStepWrapper}>
+        {
+          showNav ?
+            <Nav
+              normalizedStyles={normalizedStyles}
+              hideGroups={hideGroups}
+              hideSteps={hideSteps}
+              steps={children}
+              groupButton={groupButton}
+              stepButton={stepButton}
+              interactive={interactive}
+              current={current}
+              activeTitle={activeTitle}
+              navigatorButton={navigatorButton}
+              backButton={backButton}
+              backButtonTitle={backButtonTitle}
+              prevPage={prevPage}
+              prevStep={this.prev}
+              move={this.move}
+            /> : null
+        }
+        {
+          React.cloneElement(children[current], extraProps)
+        }
+      </Element>
+    );
   }
 }
 
