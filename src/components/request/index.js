@@ -51,8 +51,9 @@ class Request extends React.Component {
   }
 
   render() {
-    const { styles, theme, account: { address } } = this.props;
+    const { styles, theme, account } = this.props;
     const { amount, url } = this.state;
+    const { address } = (account || {});
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
