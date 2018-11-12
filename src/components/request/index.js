@@ -19,12 +19,9 @@ const qrCodeSize = Math.min(pageHeight - 355, Math.floor(deviceWidth() * 0.8));
   account: state.accounts.active,
 }))
 class Request extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      amount: { value: '', validity: -1 },
-      url: props.account.address,
-    };
+  state = {
+    amount: { value: '', validity: -1 },
+    url: '',
   }
 
   validator = {
@@ -78,7 +75,7 @@ class Request extends React.Component {
                 {address}
               </B>
               <QRCode
-                value={url}
+                value={url || address}
                 size={qrCodeSize}
                 color={theme === themes.light ? '#263344' : colors.dark.gray4}
                 backgroundColor={
