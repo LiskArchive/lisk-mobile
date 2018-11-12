@@ -166,7 +166,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-push-notification')
     implementation project(':react-native-blur-overlay')
     implementation project(':react-native-fingerprint-scanner')
     implementation project(':react-native-keychain')

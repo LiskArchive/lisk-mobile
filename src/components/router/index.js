@@ -15,7 +15,6 @@ import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
-import Landing from '../landing';
 import styles from './styles';
 import MenuIcon from './menuIcon';
 import Bg from '../headerBackground';
@@ -132,7 +131,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -156,7 +155,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -180,7 +179,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -204,7 +203,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -228,7 +227,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -252,7 +251,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -276,7 +275,7 @@ export default StackNavigator(
           style={styles.back}
           iconButtonTitle={styles.backTitle}
           color={colors.light.white} />,
-        headerTintColor: styles.white,
+        headerTintColor: colors.light.white,
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
@@ -293,26 +292,20 @@ export default StackNavigator(
         header: null,
       },
     },
-    Landing: {
-      screen: Landing,
-      navigationOptions: {
-        header: null,
-      },
-    },
   },
   {
-    initialRouteName: 'Landing',
+    initialRouteName: 'SignIn',
     headerLayoutPreset: 'center',
     transitionConfig: (props) => {
       const { scene } = props;
-      return (scene.routeName === 'Landing' || scene.routeName === 'SignIn' || scene.routeName === 'Intro') ?
+      return (scene.routeName === 'SignIn' || scene.routeName === 'Intro') ?
         {
           transitionSpec: {
             duration: 0,
           },
         } : {
           transitionSpec: {
-            duration: 400,
+            duration: 300,
           },
         };
     },

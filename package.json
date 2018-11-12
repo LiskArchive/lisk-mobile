@@ -1,6 +1,6 @@
 {
   "name": "Lisk",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "description": "The official mobile wallet of Lisk platform",
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
@@ -71,7 +71,6 @@
     "react-native-modal": "^6.1.0",
     "react-native-os": "^1.2.1",
     "react-native-permissions": "^1.1.1",
-    "react-native-push-notification": "^3.1.2",
     "react-native-qrcode-svg": "^5.1.0",
     "react-native-randombytes": "^3.5.0",
     "react-native-splash-screen": "^3.1.1",

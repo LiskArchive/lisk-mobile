@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, DeviceInfo } from 'react-native';
 import { colors } from '../../constants/styleGuide';
 import { deviceHeight } from '../../utilities/device';
 
@@ -75,13 +75,14 @@ const styles = {
     height: '100%',
   },
   headingTopBar: {
-    height: 50,
+    height: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 79 : 59,
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingTop: 20,
+    paddingTop: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 25 : 0,
     paddingRight: 20,
     paddingLeft: 20,
+    paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 24 : 29,
   },
   headingSkipButton: {
     lineHeight: 30,
@@ -97,6 +98,7 @@ const styles = {
     flex: 1,
     justifyContent: 'flex-start',
     zIndex: 3,
+    elevation: 3,
   },
   headingDescription: {
     padding: 0,
@@ -107,24 +109,27 @@ const styles = {
   },
   headingDescriptionItem: {
     padding: 0,
-    flex: 1,
+    // flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    height: 190,
+  },
+  itemWrapper: {
+    height: 160,
+    textAlign: 'center',
     flexDirection: 'column',
     justifyContent: 'flex-start',
   },
-  itemWrapper: {
-    height: 175,
-    textAlign: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
   centralized: {
-    paddingBottom: 8,
-    paddingTop: 8,
     width: '100%',
     textAlign: 'center',
   },
+  descriptionP: {
+    color: colors.grayScale2,
+    paddingTop: 20,
+  },
   headingPagination: {
-    top: 165,
+    top: 140,
     position: 'absolute',
     height: 13,
   },
@@ -132,9 +137,10 @@ const styles = {
     width: 320,
     height: 523,
     position: 'absolute',
-    top: 260,
+    top: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 275 : 260,
     left: '50%',
     marginLeft: -160,
+    zIndex: 1,
   },
   frame: {
     width: '100%',
@@ -176,7 +182,7 @@ const styles = {
     top: '50%',
     left: '50%',
     marginLeft: -170,
-    marginTop: -190,
+    marginTop: -220,
     width: 250,
     height: 250,
   },
@@ -185,14 +191,20 @@ const styles = {
     bottom: '50%',
     right: '50%',
     marginRight: -170,
-    marginBottom: -150,
+    marginBottom: -120,
     width: 250,
     height: 250,
   },
   startButton: {
-    position: 'absolute',
-    bottom: 0,
     width: '100%',
+  },
+  navigateButton: {
+    width: '100%',
+    bottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 60 : 40,
+    borderRightWidth: 20,
+    borderLeftWidth: 20,
+    borderColor: 'transparent',
+    zIndex: 10,
   },
 };
 

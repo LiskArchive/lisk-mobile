@@ -11,7 +11,6 @@ import {
   storePassphraseInKeyChain,
   bioMetricAuthentication,
 } from '../../utilities/passphrase';
-import { initPushNotifications } from '../../utilities/notifications';
 import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import {
   accountSignedIn as accountSignedInAction,
@@ -19,6 +18,7 @@ import {
 } from '../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
+  settingsRetrieved as settingsRetrievedAction,
 } from '../../actions/settings';
 import Splash from './splash';
 import Form from './form';
@@ -39,15 +39,22 @@ console.disableYellowBox = true; // eslint-disable-line
   peerSet: activePeerSetAction,
   accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
+  settingsRetrieved: settingsRetrievedAction,
 })
 class SignIn extends React.Component {
   state = {
+    destinationDefined: false,
     storedPassphrase: null,
     view: 'splash',
     androidDialog: {
       error: null,
       show: false,
     },
+  }
+
+  init = () => {
+    this.defineDefaultAuthMethod();
+    SplashScreen.hide();
   }
 
   showDialog = () => {
@@ -159,12 +166,14 @@ class SignIn extends React.Component {
    *
    * @param {String} passphrase - valid mnemonic passphrase
    */
-  onFormSubmission = (passphrase) => {
+  onFormSubmission = (passphrase, submissionType) => {
     this.setState({
       connectionError: false,
       passphrase,
     });
-    if (this.props.settings.sensorType && !this.props.settings.bioAuthRecommended) {
+    if (this.props.settings.sensorType &&
+      !this.props.settings.bioAuthRecommended &&
+      submissionType === 'form') {
       this.promptBioAuth(passphrase, this.signIn);
     } else {
       this.signIn(passphrase.value);
@@ -173,20 +182,27 @@ class SignIn extends React.Component {
 
   componentWillMount() {
     this.props.peerSet();
-    initPushNotifications();
   }
 
   componentDidMount() {
-    SplashScreen.hide();
-    this.defineDefaultAuthMethod();
+    this.props.settingsRetrieved();
   }
 
-  /**
-   * After signed-in, accounts.active has value and this methods
-   * redirects to Main.
-   * @todo sign-out should happen in the setting page to prevent issues here
-   */
   componentDidUpdate() {
+    if (this.props.settings.validated &&
+      !this.state.destinationDefined) {
+      if (this.props.settings.showedIntro) {
+        this.init();
+      } else {
+        this.props.navigation.navigate('Intro');
+      }
+      this.setState({ destinationDefined: true });
+    }
+
+    /**
+     * After signed-in, accounts.active has value and this methods
+     * redirects to Main.
+     */
     if (this.props.accounts.active &&
       this.props.navigation &&
       this.props.navigation.isFocused()) {

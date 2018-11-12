@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, DeviceInfo } from 'react-native';
+import { Header } from 'react-navigation';
 import { colors, fonts, boxes } from '../../constants/styleGuide';
 import { deviceHeight } from '../../utilities/device';
 
@@ -11,7 +12,7 @@ const styles = {
   },
   container: {
     height: '100%',
-    paddingTop: height <= 640 ? 100 : 170,
+    paddingTop: height <= 640 ? 70 : 170,
   },
   innerContainer: {
     flexDirection: 'column',
@@ -135,6 +136,12 @@ const styles = {
     height: 97,
     zIndex: 3,
   },
+  topBubbles: {
+    width: '100%',
+    height: '100%',
+    top: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ?
+      -1 * (Header.HEIGHT + 24) : -1 * (Header.HEIGHT + 1),
+  },
   splashFigure: {
     height: 60,
     width: 153,
@@ -144,7 +151,7 @@ const styles = {
   },
   splashStatic: {
     zIndex: 2,
-    top: height <= 640 ? 30 : 100,
+    top: height <= 640 ? 0 : 100,
   },
   splashAnimating: {
     zIndex: 1,

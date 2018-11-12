@@ -11,7 +11,7 @@ class Splash extends React.Component {
   state = {
     bgOpacity: new Animated.Value(1),
     iconOpacity: new Animated.Value(0),
-    top: new Animated.Value((deviceHeight() / 2) + 16),
+    top: new Animated.Value((deviceHeight() / 2) - 18),
   }
 
   componentDidMount() {
@@ -23,7 +23,7 @@ class Splash extends React.Component {
       delay: animate ? 450 : 0,
     }).start();
     Animated.timing(this.state.top, {
-      toValue: deviceHeight() <= 640 ? 60 : 130,
+      toValue: deviceHeight() <= 640 ? 10 : 130,
       duration: animate ? 600 : 0,
       delay: animate ? 450 : 0,
       easing: easing.easeOutQuart,
@@ -40,7 +40,7 @@ class Splash extends React.Component {
     return (<View style={styles.splashContainer}>
       <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]}></Animated.View>
       <Animated.View style={[styles.splashTopButtons]}>
-        <Image source={topBubbles} style={{ width: '100%', height: '100%' }} />
+        <Image source={topBubbles} style={styles.topBubbles} />
       </Animated.View>
       <Animated.View style={[styles.splashFigure, styles.splashStatic, { opacity: iconOpacity }]}>
         <Icon name='lisk-full' size={60} color={colors.light.actionBlue} style={styles.splashLogo} />
