@@ -5,12 +5,14 @@ export default function handleDeepLink(deepLink, navigation) {
     return;
   }
 
-  const url = new URL(deepLink, true);
-  const path = url.hostname;
+  const { hostname: path, query } = new URL(deepLink, true);
 
   switch (path) {
     case 'wallet':
-      navigation.navigate('Send', { address: url.query.recipient, amount: url.query.amount });
+      // @TODO: Discuss
+      setTimeout(() => {
+        navigation.navigate('Send', { query: { address: query.recipient, amount: query.amount } });
+      }, 250);
       break;
 
     default:

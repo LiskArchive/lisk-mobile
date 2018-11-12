@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Linking, Animated } from 'react-native';
+import { Platform, View, Linking, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';

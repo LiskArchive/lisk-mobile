@@ -63,17 +63,17 @@ class SendForm extends React.Component {
   }
 
   componentDidMount() {
-    // Removes left button in case of move back event from the MultiStep navigator.
     this.props.navigation.setParams({ showButtonLeft: false });
   }
 
   componentDidUpdate(prevProps) {
-    // Gets filled by navigation state change, when app is received linking event.
+    const { navigation: { state: { params } }, account } = this.props;
+
     if (
-      prevProps.navigation.state && this.props.navigation.state &&
-      (prevProps.navigation.state.params !== this.props.navigation.state.params)
+      prevProps.navigation.state.params && params &&
+      (prevProps.navigation.state.params.query !== params.query)
     ) {
-      const { address = '', amount = '', reference = '' } = (this.props.navigation.state.params || {});
+      const { address = '', amount = '', reference = '' } = (params.query || {});
       this.setState({
         address: {
           value: address,
@@ -89,11 +89,9 @@ class SendForm extends React.Component {
         },
       });
     }
-  }
 
-  componentWillReceiveProps(nextProps) {
-    const { amount: { value } } = this.state;
-    if (nextProps.account && this.props.account.balance !== nextProps.account.balance) {
+    if (account && account.balance !== prevProps.account.balance) {
+      const { amount: { value } } = this.state;
       this.setState({
         amount: {
           value,
