@@ -6,14 +6,19 @@ import { H1, H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
 import SignOutButton from '../signOutButton';
-import { colors } from '../../constants/styleGuide';
+import { colors, themes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
+import SwitchButton from './switchButton';
+import {
+  settingsUpdated as settingsUpdatedAction,
+} from '../../actions/settings';
 import getStyles from './styles';
 
 @connect(state => ({
   settings: state.settings,
 }), {
   accountSignedOut: accountSignedOutAction,
+  settingsUpdated: settingsUpdatedAction,
 })
 class Settings extends React.Component {
   state = {
@@ -33,12 +38,18 @@ class Settings extends React.Component {
     this.setState({ show: false });
   }
 
+  switchTheme = () => {
+    const isDarkMode = this.props.settings.theme === themes.dark;
+    this.props.settingsUpdated({ theme: isDarkMode ? themes.light : themes.dark });
+  }
+
   render() {
     const {
       styles, theme, navigation, settings,
     } = this.props;
 
     let target = 'EnableBioAuth';
+    const isDarkMode = settings.theme === themes.dark;
 
     const targetStateLabel = ['Off', colors[theme].black];
     if (settings.sensorType && settings.hasStoredPassphrase) {
@@ -101,6 +112,17 @@ class Settings extends React.Component {
               title='About Lisk'/>
           </View>
           <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              icon='terms'
+              iconSize={20}
+              targetStateLabel={
+                <SwitchButton
+                  value={isDarkMode}
+                  onSyncPress={this.switchTheme} />
+              }
+              title='Night mode'/>
+          </View>
+          <View style={styles.item}>
             <ItemTitle
               navigation={navigation}
               icon='terms'
