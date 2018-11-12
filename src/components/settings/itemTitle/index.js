@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { View, TouchableHighlight, Platform } from 'react-native';
-import { P } from '../toolBox/typography';
-import Icon from '../toolBox/icon';
-import { colors } from '../../constants/styleGuide';
+import { P } from '../../toolBox/typography';
+import Icon from '../../toolBox/icon';
+import { themes, colors } from '../../../constants/styleGuide';
 import {
   bioMetricAuthentication,
-} from '../../utilities/passphrase';
-import withTheme from '../withTheme';
+} from '../../../utilities/passphrase';
+import withTheme from '../../withTheme';
 import getStyles from './styles';
 
 /**
@@ -28,7 +28,7 @@ class ItemTitle extends React.Component {
         this.props.hideDialog();
         cb();
       },
-      errorCallback: () => {},
+      errorCallback: () => { },
       androidError: error => this.props.setError(error),
     });
 
@@ -42,13 +42,15 @@ class ItemTitle extends React.Component {
 
   render() {
     const {
-      styles, icon, iconSize, title, target, navigation, targetStateLabel, authenticate,
+      theme, styles, icon, iconSize, title, target,
+      navigation, targetStateLabel, authenticate,
     } = this.props;
 
     const props = {
-      style: styles.itemTitle,
+      style: styles.container,
       underlayColor: 'transparent',
     };
+
     if (target) {
       props.onPress = () => {
         if (authenticate) {
@@ -67,21 +69,35 @@ class ItemTitle extends React.Component {
       };
     }
 
-    return (<TouchableHighlight {...props}>
-      <Fragment>
-        <Icon name={icon} size={iconSize} color={colors.light.gray3} style={styles.itemIcon} />
-        <View style={styles.itemName}><P style={styles.itemNameText}>{title}</P></View>
-        <View style={styles.itemArrow}>
-          {
-            target ?
-            <Fragment>
-              { targetStateLabel }
-              <Icon name='forward' size={21} color={colors.light.black} />
-            </Fragment> : <Fragment>{ targetStateLabel }</Fragment>
-          }
-        </View>
-      </Fragment>
-    </TouchableHighlight>);
+    return (
+      <TouchableHighlight {...props}>
+        <Fragment>
+          <Icon
+            name={icon}
+            size={iconSize}
+            color={theme === themes.light ? colors.light.gray3 : colors.dark.gray2}
+            style={styles.itemIcon}
+          />
+          <View style={styles.name}>
+            <P style={[styles.nameText, styles.theme.nameText]}>{title}</P>
+          </View>
+          <View style={styles.arrow}>
+            {
+              target ?
+                <Fragment>
+                  {targetStateLabel}
+                  <Icon
+                    name='forward'
+                    size={21}
+                    color={theme === themes.light ? colors.light.black : colors.dark.white}
+                  />
+                </Fragment> :
+                <Fragment>{targetStateLabel}</Fragment>
+            }
+          </View>
+        </Fragment>
+      </TouchableHighlight>
+    );
   }
 }
 

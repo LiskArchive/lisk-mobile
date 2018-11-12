@@ -1,10 +1,9 @@
-import { colors } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
     container: {
       flex: 1,
-      backgroundColor: colors.light.white,
       padding: 20,
     },
     group: {
@@ -12,35 +11,38 @@ export default () => ({
     },
     item: {
       borderBottomWidth: 1,
-      borderBottomColor: colors.light.gray5,
       paddingTop: 16,
       paddingBottom: 6,
     },
-    itemTitle: {
-      flexDirection: 'row',
-      width: '100%',
-      height: 36,
-      paddingTop: 6,
-      paddingBottom: 6,
+  },
+
+  [themes.light]: {
+    container: {
+      backgroundColor: colors.light.white,
     },
-    itemName: {
-      flex: 1,
-      height: 24,
+    header: {
+      color: colors.light.black,
     },
-    itemNameText: {
-      color: colors.light.gray1,
-      lineHeight: 20,
+    subHeader: {
+      color: colors.light.black,
     },
-    itemIcon: {
-      width: 26,
-      height: 20,
-      paddingRight: 2,
+    item: {
+      borderBottomColor: colors.light.gray5,
     },
-    itemArrow: {
-      width: 44,
-      height: 24,
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
+  },
+
+  [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    header: {
+      color: colors.dark.white,
+    },
+    subHeader: {
+      color: colors.dark.white,
+    },
+    item: {
+      borderBottomColor: colors.dark.gray5,
     },
   },
 });

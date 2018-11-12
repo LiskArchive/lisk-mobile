@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { accountSignedOut as accountSignedOutAction } from '../../actions/accounts';
 import { H1, H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
@@ -11,7 +12,9 @@ import getStyles from './styles';
 
 @connect(state => ({
   settings: state.settings,
-}), {})
+}), {
+  accountSignedOut: accountSignedOutAction,
+})
 class Settings extends React.Component {
   state = {
     error: null,
@@ -31,29 +34,32 @@ class Settings extends React.Component {
   }
 
   render() {
-    const { styles, navigation, settings } = this.props;
+    const {
+      styles, theme, navigation, settings,
+    } = this.props;
+
     let target = 'EnableBioAuth';
 
-    const targetStateLabel = ['Off', colors.light.black];
+    const targetStateLabel = ['Off', colors[theme].black];
     if (settings.sensorType && settings.hasStoredPassphrase) {
       targetStateLabel[0] = 'On';
-      targetStateLabel[1] = colors.light.green;
+      targetStateLabel[1] = colors[theme].green;
       target = 'DisableBioAuth';
     }
-    const sensorStatus = <P style={{ color: targetStateLabel[1] || colors.light.gray1 }}>
+    const sensorStatus = <P style={{ color: targetStateLabel[1] || colors[theme].gray1 }}>
       {targetStateLabel[0]}
     </P>;
 
     return (
-      <View style={styles.container}>
-        <H1>Settings</H1>
+      <View style={[styles.container, styles.theme.container]}>
+        <H1 style={styles.theme.header}>Settings</H1>
         {
           settings.sensorType ?
             <View style={styles.group}>
-              <H4>Security</H4>
+              <H4 style={styles.theme.subHeader}>Security</H4>
               {
                 settings.sensorType ?
-                  <View style={styles.item}>
+                  <View style={[styles.item, styles.theme.item]}>
                     <ItemTitle
                       navigation={navigation}
                       showDialog={this.showDialog}
@@ -71,7 +77,7 @@ class Settings extends React.Component {
         }
         {
           (settings.sensorType && settings.hasStoredPassphrase) ?
-            <View style={styles.item}>
+            <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
                 target='PassphraseBackup'
@@ -85,8 +91,8 @@ class Settings extends React.Component {
             </View> : null
         }
         <View style={styles.group}>
-          <H4>General</H4>
-          <View style={styles.item}>
+          <H4 style={styles.theme.subHeader}>General</H4>
+          <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               navigation={navigation}
               target='About'
@@ -94,7 +100,7 @@ class Settings extends React.Component {
               iconSize={20}
               title='About Lisk'/>
           </View>
-          <View style={styles.item}>
+          <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               navigation={navigation}
               icon='terms'
@@ -102,8 +108,8 @@ class Settings extends React.Component {
               iconSize={20}
               title='Terms of use'/>
           </View>
-          <View style={styles.item}>
-            <SignOutButton navigation={navigation} />
+          <View style={[styles.item, styles.theme.item]}>
+            <SignOutButton navigation={navigation} signOut={this.props.accountSignedOut} />
           </View>
         </View>
         {

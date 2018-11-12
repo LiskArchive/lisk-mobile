@@ -1,4 +1,4 @@
-import { colors } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -13,7 +13,18 @@ export default () => ({
       fontSize: 16,
       fontWeight: '500',
       textAlign: 'left',
+    },
+  },
+
+  [themes.light]: {
+    title: {
       color: colors.light.blue,
+    },
+  },
+
+  [themes.dark]: {
+    title: {
+      color: colors.dark.blue,
     },
   },
 });
