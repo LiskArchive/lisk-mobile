@@ -1,19 +1,20 @@
 import React, { Fragment } from 'react';
 import { ScrollView, View, Image } from 'react-native';
 import FormattedDate from '../formattedDate';
+import withTheme from '../withTheme';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
-import styles from './styles';
 import Share from '../share';
 import { B, P, H1, H3 } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import Avatar from '../avatar';
 import transactions from '../../constants/transactions';
 import src from '../../assets/images/txDetail2x.png';
+import getStyles from './styles';
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
-const TxDetail = ({ navigation }) => {
+const TxDetail = ({ navigation, styles }) => {
   const tx = navigation.getParam('tx', null);
   const account = navigation.getParam('account', null);
   let arrowStyle;
@@ -28,7 +29,7 @@ const TxDetail = ({ navigation }) => {
     amountSign = '';
   }
 
-  return (<ScrollView style={styles.container}>
+  return (<ScrollView style={[styles.container, styles.theme.container]}>
     <H1 style={styles.title}>Transaction details</H1>
     <View style={styles.senderAndRecipient}>
       <View style={styles.row}>
@@ -121,4 +122,4 @@ const TxDetail = ({ navigation }) => {
   </ScrollView>);
 };
 
-export default TxDetail;
+export default withTheme(TxDetail, getStyles());
