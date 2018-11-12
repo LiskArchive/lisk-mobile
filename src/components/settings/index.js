@@ -122,7 +122,7 @@ class Settings extends React.Component {
               }
               title='Night mode'/>
           </View>
-          <View style={styles.item}>
+          <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               navigation={navigation}
               icon='terms'

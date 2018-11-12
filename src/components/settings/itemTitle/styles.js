@@ -16,12 +16,12 @@ export default () => ({
     nameText: {
       lineHeight: 20,
     },
-    itemIcon: {
+    icon: {
       width: 26,
       height: 20,
       paddingRight: 2,
     },
-    itemArrow: {
+    arrow: {
       width: 44,
       height: 24,
       flexDirection: 'row',

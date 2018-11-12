@@ -76,7 +76,7 @@ class ItemTitle extends React.Component {
             name={icon}
             size={iconSize}
             color={theme === themes.light ? colors.light.gray3 : colors.dark.gray2}
-            style={styles.itemIcon}
+            style={styles.icon}
           />
           <View style={styles.name}>
             <P style={[styles.nameText, styles.theme.nameText]}>{title}</P>
