@@ -1,4 +1,5 @@
 import actionTypes from '../../constants/actions';
+import { themes } from '../../constants/styleGuide';
 
 /**
  * This reducer is designed to store and retrieve the required data
@@ -9,7 +10,7 @@ import actionTypes from '../../constants/actions';
  *
  * @returns {Object} The latest state
  */
-const settings = (state = {}, action = {}) => {
+const settings = (state = { theme: themes.light }, action = {}) => {
   switch (action.type) {
     case actionTypes.settingsUpdated:
     case actionTypes.settingsRetrieved:
