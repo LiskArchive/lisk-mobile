@@ -68,8 +68,8 @@ const styles = () => ({
       flexDirection: 'row',
       alignItems: 'center',
     },
-    incoming: {
-    },
+    incoming: {},
+    outgoing: {},
     shareIcon: {
       marginLeft: 10,
     },
@@ -94,8 +94,8 @@ const styles = () => ({
     container: {
       backgroundColor: colors.light.white,
     },
-    divider: {
-      backgroundColor: '#ccc',
+    title: {
+      color: colors.light.black,
     },
     date: {
       color: colors.light.gray2,
@@ -109,10 +109,13 @@ const styles = () => ({
       borderTopColor: colors.light.gray5,
     },
     label: {
-      color: '#3C5068',
+      color: colors.light.gray1,
     },
     incoming: {
       color: colors.light.green,
+    },
+    outgoing: {
+      color: colors.light.black,
     },
     detailRow: {
       borderBottomColor: colors.light.gray5,
@@ -122,6 +125,32 @@ const styles = () => ({
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.screenBgNavy,
+    },
+    title: {
+      color: colors.dark.white,
+    },
+    date: {
+      color: colors.dark.gray2,
+    },
+    value: {
+      color: colors.dark.white,
+    },
+    senderAndRecipient: {
+      backgroundColor: colors.dark.tabBarBgNavy,
+      borderBottomColor: colors.dark.gray5,
+      borderTopColor: colors.dark.gray5,
+    },
+    label: {
+      color: colors.dark.gray4,
+    },
+    incoming: {
+      color: colors.dark.green,
+    },
+    outgoing: {
+      color: colors.dark.white,
+    },
+    detailRow: {
+      borderBottomColor: '#373E4F',
     },
   },
 });
