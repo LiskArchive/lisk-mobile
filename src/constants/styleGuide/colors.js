@@ -35,7 +35,7 @@ const dark = {
   gray3: '#D9E7F1',
   gray4: '#DDEAF4',
   // @TODO: switch gray5 and gray1 after dark mode is implemented for all screens
-  gray5: '#373E4F', 
+  gray5: '#373E4F',
 };
 
 export default {
