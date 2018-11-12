@@ -7,8 +7,8 @@ const switchButton = ({ value, height, onSyncPress }) => <Switch
   height={height || 26}
   width={43}
   onSyncPress={onSyncPress}
-  backgroundActive={colors.primary5}
-  backgroundInactive={colors.grayScale3}
+  backgroundActive={colors.dark.blue}
+  backgroundInactive={colors.dark.grayScale3}
 />;
 
 export default switchButton;
