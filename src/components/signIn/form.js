@@ -2,8 +2,8 @@ import React from 'react';
 import { Platform, View, Animated } from 'react-native';
 import styles from './styles';
 import Input from '../toolBox/input';
-import { Small, P, A } from '../toolBox/typography';
 import { validatePassphrase } from '../../utilities/passphrase';
+import { Small, P, A } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import KeyboardAwareScrollView from '../toolBox/keyboardAwareScrollView';
 
@@ -45,7 +45,7 @@ class Form extends React.Component {
     }, 500);
   }
 
-  onChangePassphrase = (value) => {
+  onPassphraseChange = (value) => {
     this.setState({
       isSubmitted: false,
       passphrase: {
@@ -63,7 +63,7 @@ class Form extends React.Component {
   onSignInSubmission = () => {
     const { passphrase } = this.state;
 
-    this.setState(prevState => ({ ...prevState, isSubmitted: true }), () => {
+    this.setState(({ isSubmitted: true }), () => {
       if (!passphrase.validity.length) {
         this.passphraseInput.blur();
         this.props.signIn(passphrase.value);
@@ -73,7 +73,7 @@ class Form extends React.Component {
 
   animate = () => {
     const { animate } = this.props;
-    const { animation: { opacity } } = this.state;
+    const { opacity } = this.state.animation;
 
     Animated.timing(opacity, {
       toValue: 1,
@@ -121,8 +121,8 @@ class Form extends React.Component {
             label='Passphrase'
             reference={(ref) => { this.passphraseInput = ref; }}
             styles={{ input: styles.input }}
-            value={passphrase}
-            onChange={this.onChangePassphrase}
+            value={passphrase.value}
+            onChange={this.onPassphraseChange}
             autoFocus={true}
             autoCorrect={false}
             multiline={Platform.OS === 'ios'}
