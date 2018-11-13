@@ -1,35 +1,64 @@
+import React from 'react';
+import { TabNavigator } from 'react-navigation';
 import { Platform, DeviceInfo } from 'react-native';
-import { merge } from '../../utilities/helpers';
-import { colors } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
+import withTheme from '../withTheme';
 
-const stylesheet = {
-  style: {
-    backgroundColor: colors.light.white,
-    borderTopColor: colors.light.gray5,
-    borderTopWidth: 1,
-    zIndex: 99,
+const getStyles = () => ({
+  common: {
+    style: {
+      borderTopWidth: 1,
+      zIndex: 99,
+    },
   },
-  labelStyle: {
-    fontSize: 12,
+  [themes.dark]: {
+    style: {
+      backgroundColor: colors.dark.tabBarBgNavy,
+      borderTopColor: colors.dark.tabBarBgNavy,
+    },
+    tint: {
+      color: colors.dark.white,
+    },
+    indicatorStyle: {
+      backgroundColor: colors.dark.tabBarBgNavy,
+    },
   },
-  indicatorStyle: {
-    backgroundColor: colors.light.white,
+  [themes.light]: {
+    style: {
+      backgroundColor: colors.light.white,
+      borderTopColor: colors.light.gray5,
+    },
+    tint: {
+      color: colors.light.blue,
+    },
+    indicatorStyle: {
+      backgroundColor: colors.light.white,
+    },
   },
-  allowFontScaling: false,
-};
+});
 
-if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
-  stylesheet.style.height = 55;
-  stylesheet.style.paddingTop = 5;
-} else if (Platform.OS === 'ios' && !DeviceInfo.isIPhoneX_deprecated) {
-  stylesheet.style.height = 60;
-  stylesheet.labelStyle.paddingBottom = 5;
-}
-
-export default merge({
-  activeTintColor: colors.light.blue,
-  inactiveTintColor: colors.light.gray2,
-  showIcon: true,
-  showLabel: true,
-  upperCaseLabel: false,
-}, stylesheet);
+const DefaultTabBar = TabNavigator.Presets.Default.tabBarComponent;
+export default withTheme(({ styles, ...props }) => {
+  const iosStyle = {};
+  const iosLabelStyle = {};
+  if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
+    iosStyle.height = 55;
+    iosStyle.paddingTop = 5;
+  } else if (Platform.OS === 'ios' && !DeviceInfo.isIPhoneX_deprecated) {
+    iosStyle.height = 60;
+    iosLabelStyle.paddingBottom = 5;
+  }
+  return (<DefaultTabBar
+      {...props}
+      activeTintColor={styles.theme.tint.color}
+      indicatorStyle={styles.theme.indicatorStyle}
+      inactiveTintColor={colors.light.gray2}
+      showIcon={true}
+      showLabel={true}
+      upperCaseLabel={false}
+      style={[styles.style, styles.theme.style, iosStyle]}
+      allowFontScaling={false}
+      labelStyle={[{ fontSize: 12 }, iosLabelStyle]}
+    />
+  );
+}, getStyles());
