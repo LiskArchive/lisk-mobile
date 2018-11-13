@@ -9,10 +9,7 @@ export default function handleDeepLink(deepLink, navigation) {
 
   switch (path) {
     case 'wallet':
-      // @TODO: Discuss
-      setTimeout(() => {
-        navigation.navigate('Send', { query: { address: query.recipient, amount: query.amount } });
-      }, 250);
+      navigation.navigate('Send', { query: { address: query.recipient, amount: query.amount } });
       break;
 
     default:
