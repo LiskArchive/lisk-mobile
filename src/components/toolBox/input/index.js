@@ -13,10 +13,10 @@ import getStyles from './styles';
  * @param {Number} props.size - THe size of the icon in pixels, defaults to 35
  */
 const Input = ({
-  reference = () => {}, innerStyles = {},
-  label, styles, value, onChange, error,
-  multiline, onFocus, autoFocus, onBlur, autoCorrect,
-  keyboardType, secureTextEntry,
+  reference = () => {}, innerStyles = {}, styles = {},
+  label, value, error, multiline, autoFocus, autoCorrect, secureTextEntry,
+  keyboardType = 'default', returnKeyType = 'default',
+  onChange, onFocus, onBlur, onSubmitEditing,
 }) => {
   const inputStyle = [
     styles.input,
@@ -38,7 +38,7 @@ const Input = ({
         multiline={multiline}
         ref={input => reference(input)}
         value={value}
-        keyboardType={keyboardType || 'default'}
+        keyboardType={keyboardType}
         autoFocus={autoFocus}
         onChangeText={onChange}
         autoCorrect={autoCorrect}
@@ -46,6 +46,8 @@ const Input = ({
         allowFontScaling={false}
         secureTextEntry={secureTextEntry}
         onBlur={onBlur}
+        returnKeyType={returnKeyType}
+        onSubmitEditing={onSubmitEditing}
       />
 
       {error ? (
