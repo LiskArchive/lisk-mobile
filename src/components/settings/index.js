@@ -39,8 +39,9 @@ class Settings extends React.Component {
   }
 
   switchTheme = () => {
-    const isDarkMode = this.props.settings.theme === themes.dark;
-    this.props.settingsUpdated({ theme: isDarkMode ? themes.light : themes.dark });
+    this.props.settingsUpdated({
+      theme: this.props.settings.theme === themes.dark ? themes.light : themes.dark,
+    });
   }
 
   render() {
@@ -49,7 +50,6 @@ class Settings extends React.Component {
     } = this.props;
 
     let target = 'EnableBioAuth';
-    const isDarkMode = settings.theme === themes.dark;
 
     const targetStateLabel = ['Off', colors[theme].black];
     if (settings.sensorType && settings.hasStoredPassphrase) {
@@ -118,7 +118,8 @@ class Settings extends React.Component {
               targetStateLabel={
                 <SwitchButton
                   style={styles.switch}
-                  value={isDarkMode}
+                  value={settings.theme === themes.dark}
+                  theme={theme}
                   onSyncPress={this.switchTheme} />
               }
               title='Dark mode'/>
