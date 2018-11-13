@@ -30,7 +30,6 @@ export default () => ({
       borderTopWidth: 0,
     },
     amountWrapper: {
-      // flex: 1,
       flexDirection: 'column',
       alignItems: 'flex-end',
     },
@@ -43,8 +42,10 @@ export default () => ({
       paddingTop: 4,
       paddingBottom: 4,
     },
-    avatar: {
+    avatarContainer: {
       paddingRight: 15,
+    },
+    avatar: {
       borderWidth: 1,
     },
     emptyState: {
@@ -115,7 +116,7 @@ export default () => ({
       color: colors.light.gray1,
     },
     avatar: {
-      borderColor: colors.light.white,
+      borderColor: '#f00',
     },
     incoming: {
       color: colors.light.green,

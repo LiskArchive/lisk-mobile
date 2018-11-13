@@ -44,7 +44,7 @@ class Item extends React.Component {
       style={[styles.itemContainer, styles.theme.itemContainer]}
       onPress={this.showDetail.bind(this, tx, account)}>
       <View style={styles.innerContainer}>
-      <View style={[styles.itemColumn, styles.avatar]}>
+      <View style={[styles.itemColumn, styles.avatarContainer]}>
         {
           (tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
           <Avatar address={address} size={50} style={styles.theme.avatar} /> :
