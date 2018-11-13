@@ -19,6 +19,10 @@ export default () => ({
       borderBottomColor: colors.light.gray5,
       borderBottomWidth: 1,
     },
+    heading: {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+    },
     title: {
       marginBottom: 15,
     },
