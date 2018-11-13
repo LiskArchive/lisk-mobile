@@ -6,14 +6,19 @@ import { H1, H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
 import SignOutButton from '../signOutButton';
-import { colors } from '../../constants/styleGuide';
+import { colors, themes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
+import SwitchButton from './switchButton';
+import {
+  settingsUpdated as settingsUpdatedAction,
+} from '../../actions/settings';
 import getStyles from './styles';
 
 @connect(state => ({
   settings: state.settings,
 }), {
   accountSignedOut: accountSignedOutAction,
+  settingsUpdated: settingsUpdatedAction,
 })
 class Settings extends React.Component {
   state = {
@@ -31,6 +36,12 @@ class Settings extends React.Component {
 
   hideDialog = () => {
     this.setState({ show: false });
+  }
+
+  switchTheme = () => {
+    this.props.settingsUpdated({
+      theme: this.props.settings.theme === themes.dark ? themes.light : themes.dark,
+    });
   }
 
   render() {
@@ -99,6 +110,19 @@ class Settings extends React.Component {
               icon='about'
               iconSize={20}
               title='About Lisk'/>
+          </View>
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              icon='dark-mode'
+              iconSize={20}
+              targetStateLabel={
+                <SwitchButton
+                  style={styles.switch}
+                  value={settings.theme === themes.dark}
+                  theme={theme}
+                  onSyncPress={this.switchTheme} />
+              }
+              title='Dark mode'/>
           </View>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle

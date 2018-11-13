@@ -11,8 +11,11 @@ export default () => ({
     },
     item: {
       borderBottomWidth: 1,
-      paddingTop: 16,
-      paddingBottom: 6,
+      paddingTop: 14,
+      paddingBottom: 10,
+    },
+    switch: {
+      top: -3,
     },
   },
 
