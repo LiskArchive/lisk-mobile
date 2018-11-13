@@ -41,7 +41,7 @@ const Tabs = TabNavigator({
       headerLeft: placeHolderButton,
       title: <Logo />,
       tabBarLabel: 'Wallet',
-      tabBarIcon: ({ focused }) => <MenuIcon name='home' focused={focused} />, //eslint-disable-line
+      tabBarIcon: ({ tintColor }) => <MenuIcon name='home' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
   Send: {
@@ -50,7 +50,7 @@ const Tabs = TabNavigator({
       headerRight: <SettingButton navigation={navigation} />,
       title: <Logo />,
       tabBarLabel: 'Send',
-      tabBarIcon: ({ focused }) => <MenuIcon name='send' focused={focused} />, //eslint-disable-line
+      tabBarIcon: ({ tintColor }) => <MenuIcon name='send' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
   Request: {
@@ -60,12 +60,12 @@ const Tabs = TabNavigator({
       headerLeft: placeHolderButton,
       title: <Logo />,
       tabBarLabel: 'Request',
-      tabBarIcon: ({ focused }) => <MenuIcon name='request' focused={focused} />, //eslint-disable-line
+      tabBarIcon: ({ tintColor }) => <MenuIcon name='request' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
 }, {
+  tabBarComponent: tabBarOptions,
   tabBarPosition: 'bottom',
-  tabBarOptions,
   initialRouteName: 'OwnWallet',
   headerMode: 'screen',
 });
