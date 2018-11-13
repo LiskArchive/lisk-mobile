@@ -40,11 +40,56 @@ class SendForm extends React.Component {
       return uint8array.length > 64 ? 1 : 0;
     },
   };
+  state = {
+    address: {
+      value: '',
+      validity: -1,
+    },
+    amount: {
+      value: '',
+      validity: -1,
+    },
+    reference: {
+      value: '',
+      validity: -1,
+    },
+    secondaryButtonOpacity: 1,
+    avatarPreview: true,
+  };
 
-  constructor(props) {
-    super(props);
-    const { address = '', amount = '', reference = '' } = props.prevState;
-    this.state = {
+  componentDidMount() {
+    const { prevState, navigation } = this.props;
+
+    if (Object.keys(prevState).length) {
+      this.setFormState(prevState);
+    } else if (navigation.state.params && navigation.state.params.query) {
+      this.setFormState(navigation.state.params.query);
+    }
+
+    this.props.navigation.setParams({ showButtonLeft: false });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { navigation: { state: { params } }, account } = this.props;
+    const prevParams = (prevProps.navigation.state ? prevProps.navigation.state.params : {});
+
+    if (params && params.query && (prevParams.query !== params.query)) {
+      this.setFormState(params.query);
+    }
+
+    if (prevProps.account && account && (account.balance !== prevProps.account.balance)) {
+      const { amount: { value } } = this.state;
+      this.setState({
+        amount: {
+          value,
+          validity: this.validator.amount(value),
+        },
+      });
+    }
+  }
+
+  setFormState = ({ address = '', amount = '', reference = '' }) => {
+    this.setState({
       address: {
         value: address,
         validity: this.validator.address(address),
@@ -57,48 +102,7 @@ class SendForm extends React.Component {
         value: reference,
         validity: this.validator.reference(reference),
       },
-      secondaryButtonOpacity: 1,
-      avatarPreview: true,
-    };
-  }
-
-  componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: false });
-  }
-
-  componentDidUpdate(prevProps) {
-    const { navigation: { state: { params } }, account } = this.props;
-
-    if (
-      prevProps.navigation.state.params && params &&
-      (prevProps.navigation.state.params.query !== params.query)
-    ) {
-      const { address = '', amount = '', reference = '' } = (params.query || {});
-      this.setState({
-        address: {
-          value: address,
-          validity: this.validator.address(address),
-        },
-        amount: {
-          value: amount,
-          validity: this.validator.amount(amount),
-        },
-        reference: {
-          value: reference,
-          validity: this.validator.reference(reference),
-        },
-      });
-    }
-
-    if (account && account.balance !== prevProps.account.balance) {
-      const { amount: { value } } = this.state;
-      this.setState({
-        amount: {
-          value,
-          validity: this.validator.amount(value),
-        },
-      });
-    }
+    });
   }
 
   /**
@@ -168,7 +172,7 @@ class SendForm extends React.Component {
   }
 
   render() {
-    const { theme, styles } = this.props;
+    const { navigation, account, theme, styles } = this.props;
     const {
       address, amount, reference, avatarPreview,
     } = this.state;
@@ -177,7 +181,7 @@ class SendForm extends React.Component {
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
           ref={(el) => { this.scanner = el; }}
-          navigation={this.props.navigation}
+          navigation={navigation}
           setAddress={this.setAddress}
           setAmount={this.setAmount}
         />
@@ -203,7 +207,7 @@ class SendForm extends React.Component {
               <View style={styles.balanceValue}>
                 <H2 style={[styles.number, styles.theme.number]}>
                   <FormattedNumber>
-                    {fromRawLsk(this.props.account ? this.props.account.balance : 0)}
+                    {fromRawLsk(account ? account.balance : 0)}
                   </FormattedNumber>
                 </H2>
                 <H2 style={[styles.unit, styles.theme.unit]}>Ⱡ</H2>
@@ -232,7 +236,7 @@ class SendForm extends React.Component {
                     style={styles.avatar}
                     name='avatar-placeholder'
                     size={34}
-                    color={colors[theme].gray5} />
+                    color={colors[theme].gray5}
                   />
               }
               <Input
@@ -247,7 +251,7 @@ class SendForm extends React.Component {
                   ],
                   containerStyle: styles.addressInputContainer,
                 }}
-                onChange={value => this.setAddress(value)}
+                onChange={this.setAddress}
                 value={address.value}
                 error={
                   address.validity === 1 ?
@@ -261,7 +265,7 @@ class SendForm extends React.Component {
               autoCorrect={false}
               reference={(input) => { this.references[1] = input; }}
               innerStyles={{ input: styles.input }}
-              onChange={value => this.setAmount(value)}
+              onChange={this.setAmount}
               value={amount.value}
               keyboardType='numeric'
               error={
@@ -277,9 +281,9 @@ class SendForm extends React.Component {
               innerStyles={{ errorMessage: styles.errorMessage, input: styles.input }}
               multiline={true}
               onChange={this.setReference}
-              value={this.state.reference.value}
+              value={reference.value}
               error={
-                this.state.reference.validity === 1 ?
+                reference.validity === 1 ?
                   'Maximum length of 64 characters is exceeded.' : ''
               }
               onFocus={() => { this.activeInputRef = 2; }}

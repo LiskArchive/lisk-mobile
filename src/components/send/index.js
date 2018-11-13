@@ -17,13 +17,13 @@ class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
-      tabBarVisible: !(params && params.tabBar),
-      headerLeft: (params && params.showButtonLeft) ? (
+      tabBarVisible: params.tabBar,
+      headerLeft: params.showButtonLeft ? (
         <IconButton
           icon='back'
           title=''
           onPress={params.action}
-          style={params && params.styles && params.styles.back}
+          style={params.styles && params.styles.back}
           color={colors.light.white}
         />
       ) : (
