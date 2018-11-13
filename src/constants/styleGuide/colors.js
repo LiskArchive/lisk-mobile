@@ -20,6 +20,7 @@ const light = {
   gray4: '#94a2ab',
   gray5: '#eaf1f4',
   gray6: '#f9fbfd',
+  incomingBg: '#E4F5F1',
 };
 
 const dark = {
@@ -36,6 +37,7 @@ const dark = {
   gray4: '#DDEAF4',
   // @TODO: switch gray5 and gray1 after dark mode is implemented for all screens
   gray5: '#373E4F',
+  incomingBg: '#0B2131',
 };
 
 export default {
