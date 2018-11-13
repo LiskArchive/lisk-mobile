@@ -9,9 +9,10 @@ import { B, P, H1, H3 } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import Avatar from '../avatar';
 import transactions from '../../constants/transactions';
-import src from '../../assets/images/txDetail2x.png';
+import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
+import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
-import { colors } from '../../constants/styleGuide';
+import { colors, themes } from '../../constants/styleGuide';
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
@@ -38,7 +39,11 @@ const TxDetail = ({ navigation, styles, theme }) => {
         <Image style={{ width: 50, height: 50 }} source={transactions[txTypes[tx.type]].image} /> :
         <Fragment>
           <Avatar address={account} size={50}/>
-          <Image source={src} style={[styles.arrow, arrowStyle]} />
+          {
+            theme === themes.light ?
+              <Image source={arrowLight} style={[styles.arrow, arrowStyle]} /> :
+              <Image source={arrowDark} style={[styles.arrow, arrowStyle]} />
+          }
           <Avatar address={secondAddress} size={50}/>
         </Fragment>
       }
