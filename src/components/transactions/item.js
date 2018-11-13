@@ -41,30 +41,37 @@ class Item extends React.Component {
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
 
     return (<TouchableOpacity
-      style={styles.itemContainer}
+      style={[styles.itemContainer, styles.theme.itemContainer]}
       onPress={this.showDetail.bind(this, tx, account)}>
+      <View style={styles.innerContainer}>
       <View style={[styles.itemColumn, styles.avatar]}>
         {
           (tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
-          <Avatar address={address} size={50} /> :
+          <Avatar address={address} size={50} style={styles.theme.avatar} /> :
           <Image source={transactions[txTypes[tx.type]].image} style={styles.image} />
         }
       </View>
       <View style={styles.column}>
-        <B style={styles.address}>
+        <B style={[styles.address, styles.theme.address]}>
           {(tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
             addressShortened : transactions[txTypes[tx.type]].title}
         </B>
         {
           typeof this.props.tx.timestamp !== 'number' ?
           <Small style={styles.date}>Pending confirmation</Small> :
-          <FormattedDate type={Small} style={styles.date}>{ tx.timestamp }</FormattedDate>
+          <FormattedDate type={Small} style={[styles.date, styles.theme.date]}>
+            { tx.timestamp }
+          </FormattedDate>
         }
+      </View>
       </View>
       <View style={[styles.column, styles.amountWrapper]}>
       {
         (tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
-          <B style={[styles.amount, styles[direction]]}>
+          <B style={[
+            styles.amount, styles.theme.amount,
+            styles[direction], styles.theme[direction],
+          ]}>
             <FormattedNumber>{amount}</FormattedNumber> Ⱡ
           </B> : null
       }

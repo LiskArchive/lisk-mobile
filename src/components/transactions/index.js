@@ -78,8 +78,8 @@ class Transactions extends React.Component {
           (transactions.confirmed.length === 0 && transactions.pending.length === 0)) ?
           <Fragment></Fragment> :
           <Fragment>
-            <View style={styles.heading}>
-              <H3 style={styles.title}>Activity</H3>
+            <View style={styles.innerContainer}>
+              <H3 style={[styles.title, styles.theme.title]}>Activity</H3>
               <IconButton
                 title=''
                 icon={settings.incognito ? 'disable-incognito' : 'enable-incognito'}
