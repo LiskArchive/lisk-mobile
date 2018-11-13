@@ -1,4 +1,4 @@
-import { colors } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -12,6 +12,16 @@ export default () => ({
     },
     accountSummary: {
       zIndex: 2,
+    },
+  },
+  [themes.light]: {
+    container: {
+      backgroundColor: colors.light.white,
+    },
+  },
+  [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.screenBgNavy,
     },
   },
 });

@@ -99,7 +99,7 @@ class Wallet extends React.Component {
   render() {
     const { styles, transactions } = this.props;
 
-    return (<View style={styles.container}>
+    return (<View style={[styles.container, styles.theme.container]}>
       {
         this.props.account ?
           <AccountSummary
