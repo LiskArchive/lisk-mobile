@@ -17,8 +17,8 @@ import getStyles from './styles';
 @connect(state => ({
   account: state.accounts.active,
 }), {
-    settingsUpdated: settingsUpdatedAction,
-  })
+  settingsUpdated: settingsUpdatedAction,
+})
 class EnableBioAuth extends React.Component {
   confirm = () => {
     storePassphraseInKeyChain(this.props.account.passphrase);

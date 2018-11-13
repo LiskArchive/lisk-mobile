@@ -16,6 +16,7 @@ import stripesDark from '../../assets/images/stripesDark.png';
 import easing from '../../utilities/easing';
 import withTheme from '../withTheme';
 import getStyles, { animationRanges } from './styles';
+import { themes } from '../../constants/styleGuide';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -89,9 +90,10 @@ class AccountSummary extends React.Component {
     const avatarTranslate = this.createInterpolatedValue([0, -6]);
     return (<View style={this.props.style}>
       <Anim style={[styles.bg, itpl('bg', ['height'])]}>
-        <Image style={styles.bgImage}
-          source={theme === 'light' ? stripesLight : stripesDark}
-        />
+        {
+          theme === themes.light ? <Image style={styles.bgImage} source={ stripesLight} /> :
+            <Image style={styles.bgImage} source={stripesDark} />
+        }
       </Anim>
       {
         account && account.address ?
