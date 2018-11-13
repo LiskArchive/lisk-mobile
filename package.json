@@ -12,7 +12,7 @@
     "release:android": "cd android && ./gradlew assembleRelease",
     "link": "./node_modules/.bin/rn-nodeify --hack --install && node androidSdkFix.js",
     "test": "jest --env=jsdom --testURL=http://localhost/ --rootDir=./ --config=./jest/main-config.js --coverage",
-    "test:live": "jest --env=jsdom --rootDir=./ --config=./jest/main-config.js --watch --coverage",
+    "test:live": "jest --env=jsdom --testURL=http://localhost/ --rootDir=./ --config=./jest/main-config.js --watch --coverage",
     "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "postinstall": "npm run link"
