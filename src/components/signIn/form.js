@@ -122,7 +122,7 @@ class Form extends React.Component {
         <Input
           label='Passphrase'
           reference={(ref) => { this.passphraseInput = ref; }}
-          styles={{ input: styles.input }}
+          innerStyles={{ input: styles.input }}
           value={passphrase.value}
           onChange={this.changeHandler.bind(this, 'passphrase')}
           onFocus={() => this.shrinkButton(false)}

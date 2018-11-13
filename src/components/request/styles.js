@@ -1,9 +1,9 @@
-import { colors, boxes } from '../../constants/styleGuide';
+import { themes, colors, boxes } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
     wrapper: {
-      backgroundColor: colors.light.white,
+      flex: 1,
     },
     container: {
       height: '100%',
@@ -12,17 +12,15 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       flex: 1,
-      backgroundColor: colors.light.white,
       paddingTop: 36,
       paddingBottom: 60,
     },
-    subtitle: {
-      marginTop: 7,
-      color: colors.light.gray2,
-    },
-    headings: {
+    headerContainer: {
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
+    },
+    subHeader: {
+      marginTop: 7,
     },
     main: {
       flexDirection: 'column',
@@ -33,16 +31,54 @@ export default () => ({
     },
     address: {
       marginBottom: 15,
-      color: '#263344',
     },
-    share: {
+    shareContainer: {
       marginTop: 15,
     },
     fieldset: {
       height: 100,
     },
-    blue: {
+  },
+
+  [themes.light]: {
+    wrapper: {
+      backgroundColor: colors.light.white,
+    },
+    innerContainer: {
+      backgroundColor: colors.light.white,
+    },
+    header: {
+      color: colors.light.black,
+    },
+    subHeader: {
+      color: colors.light.gray2,
+    },
+    address: {
+      color: '#263344',
+    },
+    share: {
       color: colors.light.blue,
+    },
+  },
+
+  [themes.dark]: {
+    wrapper: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    innerContainer: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    header: {
+      color: colors.dark.white,
+    },
+    subHeader: {
+      color: colors.dark.gray4,
+    },
+    address: {
+      color: colors.dark.white,
+    },
+    share: {
+      color: colors.dark.blue,
     },
   },
 });

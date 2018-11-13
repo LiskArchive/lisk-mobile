@@ -66,7 +66,7 @@ class Search extends React.Component {
       <Input
         label='Search for Lisk ID, Tx ID or delegate name'
         reference={(input) => { this.query = input; }}
-        styles={{
+        innerStyles={{
           input: styles.input,
           inputLabel: styles.title,
         }}
