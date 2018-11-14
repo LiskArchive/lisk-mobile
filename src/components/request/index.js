@@ -86,7 +86,7 @@ class Request extends React.Component {
               <View style={styles.shareContainer}>
                 <Share
                   type={P}
-                  value={url}
+                  value={url || address}
                   style={styles.theme.share}
                   icon={true}
                   iconColor={colors[theme].blue}
