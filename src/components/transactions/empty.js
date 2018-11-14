@@ -16,7 +16,7 @@ const EmptyState = ({ theme, styles }) =>
           <Image style={styles.empty} source={noActivityDark} />
       }
     </View>
-    <P style={styles.noTxTitle}>You do not have any recent activity.</P>
+    <P style={[styles.noTxTitle, styles.theme.noTxTitle]}>You do not have any recent activity.</P>
   </View>;
 
 export default withTheme(EmptyState, getStyles());
