@@ -66,7 +66,7 @@ class Transactions extends React.Component {
 
   render() {
     const {
-      styles, transactions, navigate, account, footer, settings,
+      styles, transactions, navigate, account, footer, settings, theme,
     } = this.props;
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
@@ -89,11 +89,11 @@ class Transactions extends React.Component {
                 />
             </View>
             {!account.initialized && balance >= 0.2 ?
-              <View style={styles.initContainer}>
-                <Icon name='warning' color={colors.light.red} size={18} />
-                <Small style={styles.initText}>Your account is not initialized.
-                  <A
-                    style={styles.link}
+              <View style={[styles.initContainer, styles.theme.initContainer]}>
+                <Icon name='warning' color={colors[theme].red} size={18} />
+                <Small style={[styles.initText, styles.theme.initText]}>
+                  Your account is not initialized.
+                  <A style={[styles.link, styles.theme.link]}
                     onPress={this.onPress}> Initialize it now</A>
                 </Small>
               </View> : null
@@ -111,5 +111,4 @@ class Transactions extends React.Component {
     </Anim>);
   }
 }
-
 export default withTheme(Transactions, getStyles());

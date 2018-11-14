@@ -15,7 +15,6 @@ export default () => ({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'stretch',
-      borderBottomColor: colors.light.gray5,
       borderBottomWidth: 1,
     },
     innerContainer: {
@@ -70,7 +69,6 @@ export default () => ({
     },
     noTxTitle: {
       paddingTop: 10,
-      color: colors.light.gray2,
     },
     pendingIcon: {
       width: 18,
@@ -80,14 +78,12 @@ export default () => ({
       flexDirection: 'row',
       paddingBottom: 22,
       borderBottomWidth: 1,
-      borderBottomColor: colors.light.gray5,
     },
     initText: {
       marginLeft: 7,
     },
     link: {
       fontSize: fonts.size.small,
-      color: colors.light.blue,
     },
     footer: {
       height: 90,
@@ -116,11 +112,23 @@ export default () => ({
       color: colors.light.gray1,
     },
     avatar: {
-      borderColor: '#f00',
+      borderColor: colors.light.white,
     },
     incoming: {
       color: colors.light.green,
       backgroundColor: colors.light.incomingBg,
+    },
+    noTxTitle: {
+      color: colors.light.gray2,
+    },
+    initContainer: {
+      borderBottomColor: colors.light.gray5,
+    },
+    initText: {
+      color: colors.light.black,
+    },
+    link: {
+      color: colors.light.blue,
     },
   },
   [themes.dark]: {
@@ -148,6 +156,18 @@ export default () => ({
     incoming: {
       color: colors.dark.green,
       backgroundColor: colors.dark.incomingBg,
+    },
+    noTxTitle: {
+      color: colors.dark.gray2,
+    },
+    initContainer: {
+      borderBottomColor: colors.dark.gray5,
+    },
+    initText: {
+      color: colors.dark.white,
+    },
+    link: {
+      color: colors.dark.blue,
     },
   },
 });
