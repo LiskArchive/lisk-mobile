@@ -3,9 +3,6 @@ import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../actions/settings';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import Empty from '../transactions/empty';
@@ -44,12 +41,22 @@ class Wallet extends React.Component {
 
   componentDidUpdate() {
     const { confirmed, pending } = this.props.transactions;
-    if (this.state.theme === 'loading' ||
-      (this.state.theme === 'empty' && confirmed.length > 0)) {
+    if (
+      this.state.theme === 'loading' ||
+      (this.state.theme === 'empty' && confirmed.length > 0)
+    ) {
       const txNum = pending.length + confirmed.length;
+      const theme = (confirmed.length === 0 && pending.length === 0) ? 'empty' : 'list';
+
       this.setState({
-        theme: (confirmed.length === 0 && pending.length === 0) ? 'empty' : 'list',
+        theme,
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < txNum,
+      }, () => {
+        if (theme === 'list') {
+          this.props.navigation.setParams({
+            scrollToTop: () => this.scrollView.scrollTo(0),
+          });
+        }
       });
     }
   }
@@ -63,11 +70,9 @@ class Wallet extends React.Component {
     this.initialAnimation();
   }
 
-  onScroll() {
-    return Animated.event([{
-      nativeEvent: { contentOffset: { y: this.state.scrollY } },
-    }]);
-  }
+  onScroll = () => Animated.event([{
+    nativeEvent: { contentOffset: { y: this.state.scrollY } },
+  }]);
 
   initialAnimation = () => {
     this.timeout1 = setTimeout(() => {

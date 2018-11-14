@@ -42,6 +42,13 @@ const Tabs = TabNavigator({
       title: <Logo />,
       tabBarLabel: 'Wallet',
       tabBarIcon: ({ tintColor }) => <MenuIcon name='home' tintColor={tintColor} />, //eslint-disable-line
+      tabBarOnPress: ({ defaultHandler, scene }) => {
+        if (scene.focused && scene.route.params && scene.route.params.scrollToTop) {
+          scene.route.params.scrollToTop();
+        } else {
+          defaultHandler(0);
+        }
+      },
     }),
   },
   Send: {
