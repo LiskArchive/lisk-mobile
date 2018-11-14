@@ -1,5 +1,9 @@
 import React, { Fragment } from 'react';
 import { View, Animated } from 'react-native';
+import connect from 'redux-connect-decorator';
+import {
+  settingsUpdated as settingsUpdatedAction,
+} from '../../actions/settings';
 import List from './list';
 import Footer from './footer';
 import { H3, Small, A } from '../toolBox/typography';
@@ -9,12 +13,20 @@ import colors from '../../constants/styleGuide/colors';
 import easing from '../../utilities/easing';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import { IconButton } from '../toolBox/button';
 
 /**
- * The container component containing sign in and create account functionality
+ * This component is a HOC to decide which state to show:
+ * Loading, Empty (No transactions) or the List view.
  *
- * @todo
+ * It performs the initial animation after the user logged in.
+ *
  */
+@connect(state => ({
+  settings: state.settings,
+}), {
+  settingsUpdated: settingsUpdatedAction,
+})
 class Transactions extends React.Component {
   state = {
     initialAnimations: {
@@ -46,9 +58,15 @@ class Transactions extends React.Component {
     this.props.navigate('Send', { initialize: true });
   }
 
+  toggleIncognito = () => {
+    this.props.settingsUpdated({
+      incognito: !this.props.settings.incognito,
+    });
+  }
+
   render() {
     const {
-      styles, transactions, navigate, account, footer,
+      styles, transactions, navigate, account, footer, settings,
     } = this.props;
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
@@ -60,7 +78,16 @@ class Transactions extends React.Component {
           (transactions.confirmed.length === 0 && transactions.pending.length === 0)) ?
           <Fragment></Fragment> :
           <Fragment>
-            <H3 style={styles.title}>Activity</H3>
+            <View style={styles.heading}>
+              <H3 style={styles.title}>Activity</H3>
+              <IconButton
+                title=''
+                icon={settings.incognito ? 'disable-incognito' : 'enable-incognito'}
+                color={colors.dark.gray2}
+                iconSize={18}
+                onClick={this.toggleIncognito}
+                />
+            </View>
             {!account.initialized && balance >= 0.2 ?
               <View style={styles.initContainer}>
                 <Icon name='warning' color={colors.light.red} size={18} />

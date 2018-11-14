@@ -44,6 +44,12 @@ class Settings extends React.Component {
     });
   }
 
+  toggleIncognito = () => {
+    this.props.settingsUpdated({
+      incognito: !this.props.settings.incognito,
+    });
+  }
+
   render() {
     const {
       styles, theme, navigation, settings,
@@ -64,28 +70,38 @@ class Settings extends React.Component {
     return (
       <View style={[styles.container, styles.theme.container]}>
         <H1 style={styles.theme.header}>Settings</H1>
-        {
-          settings.sensorType ?
-            <View style={styles.group}>
-              <H4 style={styles.theme.subHeader}>Security</H4>
-              {
-                settings.sensorType ?
-                  <View style={[styles.item, styles.theme.item]}>
-                    <ItemTitle
-                      navigation={navigation}
-                      showDialog={this.showDialog}
-                      hideDialog={this.hideDialog}
-                      setError={this.setError}
-                      target={target}
-                      authenticate={true}
-                      targetStateLabel={sensorStatus}
-                      icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
-                      iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
-                      title={settings.sensorType}/>
-                  </View> : null
+        <View style={styles.group}>
+          <H4 style={styles.theme.subHeader}>Security</H4>
+          {
+            settings.sensorType ?
+              <View style={[styles.item, styles.theme.item]}>
+                <ItemTitle
+                  navigation={navigation}
+                  showDialog={this.showDialog}
+                  hideDialog={this.hideDialog}
+                  setError={this.setError}
+                  target={target}
+                  authenticate={true}
+                  targetStateLabel={sensorStatus}
+                  icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
+                  iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
+                  title={settings.sensorType}/>
+              </View> : null
+          }
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              icon='enable-incognito'
+              iconSize={20}
+              targetStateLabel={
+                <SwitchButton
+                  style={styles.switch}
+                  value={settings.incognito}
+                  theme={theme}
+                  onSyncPress={this.toggleIncognito} />
               }
-            </View> : null
-        }
+              title='Incognito mode'/>
+          </View>
+        </View>
         {
           (settings.sensorType && settings.hasStoredPassphrase) ?
             <View style={[styles.item, styles.theme.item]}>
