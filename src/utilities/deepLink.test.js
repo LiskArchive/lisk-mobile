@@ -1,32 +1,41 @@
-import handleDeepLink from './deepLink';
+import deepLinkMapper from './deepLink';
 
 describe('Deep Link Handler', () => {
-  const navigation = {
-    navigate: jest.fn(),
-  };
-
-  it('does not call navigate function if given url is falsy', () => {
-    const url = '';
-    handleDeepLink(url, navigation);
-    expect(navigation.navigate).toHaveBeenCalledTimes(0);
+  it('returns null if given url is falsy', () => {
+    expect(deepLinkMapper('')).toBeNull();
   });
 
-  it('does not call navigate function if given url path is not handled', () => {
-    const url = 'lisk://test';
-    handleDeepLink(url, navigation);
-    expect(navigation.navigate).toHaveBeenCalledTimes(0);
+  it('returns null if given url path is not mapped', () => {
+    expect(deepLinkMapper('lisk://test')).toBeNull();
   });
 
-  it('handles request LSK urls', () => {
-    const url = 'lisk://wallet?recipient=16441330428379804182L&amount=10';
-    const expectedNavigateArguments = ['Send', {
-      query: {
-        address: '16441330428379804182L',
-        amount: '10',
+  it('handles urls with /transactions/send path', () => {
+    const url = 'lisk://main/transactions/send?recipient=1L&amount=1';
+    const expectedResult = {
+      name: 'Send',
+      params: {
+        query: {
+          address: '1L',
+          amount: '1',
+        },
       },
-    }];
+    };
 
-    handleDeepLink(url, navigation);
-    expect(navigation.navigate).toBeCalledWith(...expectedNavigateArguments);
+    expect(deepLinkMapper(url)).toMatchObject(expectedResult);
+  });
+
+  it('handles urls starting with wallet', () => {
+    const url = 'lisk://wallet?recipient=1L&amount=1';
+    const expectedResult = {
+      name: 'Send',
+      params: {
+        query: {
+          address: '1L',
+          amount: '1',
+        },
+      },
+    };
+
+    expect(deepLinkMapper(url)).toMatchObject(expectedResult);
   });
 });

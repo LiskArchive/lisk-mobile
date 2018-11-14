@@ -1,18 +1,27 @@
 import URL from 'url-parse';
 
-export default function handleDeepLink(deepLink, navigation) {
-  if (!deepLink) {
-    return;
+export default function deepLinkMapper(deepLinkURL) {
+  if (!deepLinkURL) {
+    return null;
   }
 
-  const { hostname: path, query } = new URL(deepLink, true);
+  const { hostname, pathname, query } = new URL(deepLinkURL, true);
+  const path = hostname === 'main' ? pathname : hostname;
 
   switch (path) {
     case 'wallet':
-      navigation.navigate('Send', { query: { address: query.recipient, amount: query.amount } });
-      break;
+    case '/transactions/send':
+      return {
+        name: 'Send',
+        params: {
+          query: {
+            address: query.recipient,
+            amount: query.amount,
+          },
+        },
+      };
 
     default:
-      break;
+      return null;
   }
 }

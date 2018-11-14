@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Alert, Platform } from 'react-native';
+import { Linking, View, Alert, Platform } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationActions } from 'react-navigation';
@@ -23,6 +23,7 @@ import {
 import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';
+import deepLinkMapper from '../../utilities/deepLink';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 console.disableYellowBox = true; // eslint-disable-line
@@ -46,6 +47,7 @@ class SignIn extends React.Component {
     destinationDefined: false,
     storedPassphrase: null,
     view: 'splash',
+    deepLinkURL: '',
     androidDialog: {
       error: null,
       show: false,
@@ -180,12 +182,57 @@ class SignIn extends React.Component {
     }
   }
 
+  onSignInCompleted = () => {
+    const { deepLinkURL } = this.state;
+
+    if (deepLinkURL) {
+      this.navigateToDeepLink(deepLinkURL);
+    } else {
+      this.props.navigation.dispatch(NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Main' })],
+      }));
+    }
+  }
+
+  onDeepLinkRequested = (event) => {
+    const isSignedIn = !!this.props.accounts.active;
+
+    if (isSignedIn) {
+      this.navigateToDeepLink(event.url);
+    } else {
+      this.setState({ deepLinkURL: event.url });
+    }
+  }
+
+  navigateToDeepLink = (url) => {
+    const linkedScreen = deepLinkMapper(url);
+
+    if (linkedScreen) {
+      this.props.navigation.navigate(linkedScreen.name, linkedScreen.params);
+    } else {
+      // @TODO: Navigate to different page or display an error message for unmapped deep links.
+      this.props.navigation.navigate('OwnWallet');
+    }
+  }
+
   componentWillMount() {
     this.props.peerSet();
   }
 
   componentDidMount() {
     this.props.settingsRetrieved();
+
+    // After sign out, there's no need to consume the launch URL for further sign-ins.
+    if (!this.props.navigation.getParam('signOut')) {
+      Linking.getInitialURL()
+        .then(url => this.setState({ deepLinkURL: url }))
+        // eslint-disable-next-line no-console
+        .catch(error => console.log('An error occurred while getting initial url', error));
+    }
+
+    Linking.removeAllListeners('url');
+    Linking.addEventListener('url', this.onDeepLinkRequested);
   }
 
   componentDidUpdate() {
@@ -203,14 +250,12 @@ class SignIn extends React.Component {
      * After signed-in, accounts.active has value and this methods
      * redirects to Main.
      */
-    if (this.props.accounts.active &&
+    if (
+      this.props.accounts.active &&
       this.props.navigation &&
-      this.props.navigation.isFocused()) {
-      this.props.navigation
-        .dispatch(NavigationActions.reset({
-          index: 0,
-          actions: [NavigationActions.navigate({ routeName: 'Main' })],
-        }));
+      this.props.navigation.isFocused()
+    ) {
+      this.onSignInCompleted();
     }
   }
 

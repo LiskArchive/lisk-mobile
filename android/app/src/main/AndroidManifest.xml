@@ -79,7 +79,7 @@
               <action android:name="android.intent.action.VIEW" />
               <category android:name="android.intent.category.DEFAULT" />
               <category android:name="android.intent.category.BROWSABLE" />
-              <data android:scheme="lisk" android:host="wallet" />
+              <data android:scheme="lisk" android:host="*" />
           </intent-filter>
       </activity>
 
