@@ -1,4 +1,4 @@
-import { colors, fonts } from '../../constants/styleGuide';
+import { themes, colors, fonts } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -12,14 +12,12 @@ export default () => ({
       height: 90,
       paddingTop: 20,
       paddingBottom: 20,
-      backgroundColor: colors.light.white,
       flexDirection: 'row',
-      justifyContent: 'flex-start',
+      justifyContent: 'space-between',
       alignItems: 'stretch',
-      borderBottomColor: colors.light.gray5,
       borderBottomWidth: 1,
     },
-    heading: {
+    innerContainer: {
       flexDirection: 'row',
       justifyContent: 'flex-start',
     },
@@ -31,7 +29,6 @@ export default () => ({
       borderTopWidth: 0,
     },
     amountWrapper: {
-      flex: 1,
       flexDirection: 'column',
       alignItems: 'flex-end',
     },
@@ -40,24 +37,20 @@ export default () => ({
       width: '100%',
       textAlign: 'right',
     },
-    date: {
-      color: colors.light.gray1,
-    },
     address: {
       paddingTop: 4,
       paddingBottom: 4,
     },
-    avatar: {
+    avatarContainer: {
       paddingRight: 15,
     },
-    incoming: {
-      color: colors.light.green,
+    avatar: {
+      borderWidth: 1,
     },
     emptyState: {
       width: '100%',
       display: 'flex',
       flex: 1,
-      backgroundColor: colors.light.white,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -76,7 +69,6 @@ export default () => ({
     },
     noTxTitle: {
       paddingTop: 10,
-      color: colors.light.gray2,
     },
     pendingIcon: {
       width: 18,
@@ -86,14 +78,12 @@ export default () => ({
       flexDirection: 'row',
       paddingBottom: 22,
       borderBottomWidth: 1,
-      borderBottomColor: colors.light.gray5,
     },
     initText: {
       marginLeft: 7,
     },
     link: {
       fontSize: fonts.size.small,
-      color: colors.light.blue,
     },
     footer: {
       height: 90,
@@ -102,6 +92,82 @@ export default () => ({
     image: {
       width: 50,
       height: 50,
+    },
+    incoming: {
+      paddingRight: 10,
+      paddingLeft: 10,
+      paddingBottom: 3,
+      borderRadius: 2,
+      overflow: 'hidden',
+    },
+  },
+  [themes.light]: {
+    itemContainer: {
+      borderBottomColor: colors.light.gray5,
+    },
+    emptyState: {
+      backgroundColor: colors.light.white,
+    },
+    date: {
+      color: colors.light.gray1,
+    },
+    avatar: {
+      borderColor: colors.light.white,
+    },
+    incoming: {
+      color: colors.light.green,
+      backgroundColor: colors.light.incomingBg,
+    },
+    noTxTitle: {
+      color: colors.light.gray2,
+    },
+    initContainer: {
+      borderBottomColor: colors.light.gray5,
+    },
+    initText: {
+      color: colors.light.black,
+    },
+    link: {
+      color: colors.light.blue,
+    },
+  },
+  [themes.dark]: {
+    title: {
+      color: colors.dark.white,
+    },
+    itemContainer: {
+      borderBottomColor: colors.dark.gray5,
+    },
+    emptyState: {
+      backgroundColor: colors.dark.gray5,
+    },
+    address: {
+      color: colors.dark.white,
+    },
+    date: {
+      color: colors.dark.gray4,
+    },
+    amount: {
+      color: colors.dark.white,
+    },
+    avatar: {
+      borderColor: colors.dark.gray5,
+    },
+    incoming: {
+      color: colors.dark.green,
+      backgroundColor: colors.dark.incomingBg,
+    },
+    noTxTitle: {
+      color: colors.dark.gray2,
+    },
+    initContainer: {
+      borderBottomColor: colors.dark.gray5,
+    },
+    initText: {
+      color: colors.dark.white,
+    },
+    link: {
+      color: colors.dark.blue,
     },
   },
 });

@@ -11,10 +11,12 @@ import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
 import { H4, P, H2 } from '../toolBox/typography';
-import stripes from '../../assets/images/stripes.png';
+import stripesLight from '../../assets/images/stripesLight.png';
+import stripesDark from '../../assets/images/stripesDark.png';
 import easing from '../../utilities/easing';
 import withTheme from '../withTheme';
 import getStyles, { animationRanges } from './styles';
+import { themes } from '../../constants/styleGuide';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -80,16 +82,18 @@ class AccountSummary extends React.Component {
   }
 
   render() {
-    const { styles, account } = this.props;
+    const { styles, account, theme } = this.props;
     const Anim = Animated.View;
     const itpl = this.interpolate;
     const { opacity, top } = this.state.initialAnimations;
     const avatarScale = this.createInterpolatedValue([1, 0.85]);
     const avatarTranslate = this.createInterpolatedValue([0, -6]);
-
     return (<View style={this.props.style}>
       <Anim style={[styles.bg, itpl('bg', ['height'])]}>
-        <Image style={styles.bgImage} source={stripes} />
+        {
+          theme === themes.light ? <Image style={styles.bgImage} source={ stripesLight} /> :
+            <Image style={styles.bgImage} source={stripesDark} />
+        }
       </Anim>
       {
         account && account.address ?
@@ -101,18 +105,18 @@ class AccountSummary extends React.Component {
           </Anim>
           <Anim onLayout={e => this.setPadding(e, 'address')}
             style={[styles.address, { opacity }, itpl('address', ['top', 'left'])]}>
-            <Share type={P} style={styles.addressP}
+            <Share type={P} style={[styles.addressP, styles.theme.addressP]}
               containerStyle={styles.addressContainer}
               value={account.address} icon={true} />
           </Anim>
           <Anim onLayout={e => this.setPadding(e, 'balance')}
             style={[styles.balance, { opacity }, itpl('balance', ['top', 'left'])]}>
-            <H2 style={styles.value}>
+            <H2 style={[styles.value, styles.theme.value]}>
               <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>
             </H2>
-            <H2 style={styles.unit}>Ⱡ</H2>
+            <H2 style={[styles.unit, styles.theme.unit]}>Ⱡ</H2>
           </Anim>
-          <Anim style={[styles.box, itpl('box', ['top', 'height'])]} />
+          <Anim style={[styles.box, styles.theme.box, itpl('box', ['top', 'height'])]} />
         </Anim> :
         <H4>Fetching account info</H4>
       }

@@ -1,23 +1,23 @@
 import React from 'react';
 import { Image, View } from 'react-native';
-import stripes from '../../assets/images/stripes.png';
-import topBubbles from '../../assets/images/topBubbles3x.png';
+import stripesLight from '../../assets/images/stripesLight.png';
+import stripesDark from '../../assets/images/stripesDark.png';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import themes from '../../constants/styleGuide/themes';
 
-const Bg = ({ bgType, styles }) => {
-  let numericDimensions = {};
-  let source = stripes;
-  if (bgType === 'bubbles') {
-    numericDimensions = { width: 375, height: 97 };
-    source = topBubbles;
-  }
-  return (<View>
-    <Image
-      style={[styles.main, numericDimensions]}
-      source={source}
-    />
+const Bg = ({ styles, theme }) => (<View>
+    {
+      theme === themes.light ?
+        <Image
+          style={styles.main}
+          source={stripesLight}
+        /> :
+      <Image
+        style={styles.main}
+        source={stripesDark}
+      />
+    }
   </View>);
-};
 
 export default withTheme(Bg, getStyles());
