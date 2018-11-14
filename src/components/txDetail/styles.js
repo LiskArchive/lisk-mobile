@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
 import { themes, colors, fonts } from '../../constants/styleGuide';
 
-const styles = () => ({
+export default () => ({
   common: {
     container: {
       flex: 1,
@@ -154,5 +153,3 @@ const styles = () => ({
     },
   },
 });
-
-export default StyleSheet.create(styles);
