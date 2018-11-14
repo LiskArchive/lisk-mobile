@@ -155,7 +155,7 @@ class Form extends React.Component {
       address, amount, reference, avatarPreview,
     } = this.state;
     return (
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
           ref={(el) => { this.scanner = el; }}
           navigation={this.props.navigation}
@@ -172,18 +172,20 @@ class Form extends React.Component {
           styles={{ container: styles.container, innerContainer: styles.innerContainer }}>
           <View style={styles.titleContainer}>
             <View style={styles.headings}>
-              <H1>Send</H1>
-              <P style={styles.subtitle}>Send LSK tokens to other accounts.</P>
+              <H1 style={[styles.title, styles.theme.title]}>Send</H1>
+              <P style={[styles.subtitle, styles.theme.subtitle]}>
+                Send LSK tokens to other accounts.
+              </P>
             </View>
-            <View style={styles.balanceWrapper}>
-              <Small style={styles.subtitle}>YOUR CURRENT BALANCE</Small>
+            <View style={[styles.balanceWrapper, styles.theme.balanceWrapper]}>
+              <Small style={[styles.subtitle, styles.theme.subtitle]}>YOUR CURRENT BALANCE</Small>
               <View style={styles.balanceValue}>
-                <H2 style={styles.number}>
+                <H2 style={[styles.number, styles.theme.number]}>
                   <FormattedNumber>
                     {fromRawLsk(this.props.account ? this.props.account.balance : 0)}
                   </FormattedNumber>
                 </H2>
-                <H2 style={styles.unit}>Ⱡ</H2>
+                <H2 style={[styles.unit, styles.theme.unit]}>Ⱡ</H2>
               </View>
             </View>
           </View>
@@ -191,7 +193,7 @@ class Form extends React.Component {
             <View style={styles.addressContainer}>
               <IconButton
                 onPress={() => this.scanner.toggleCamera()}
-                titleStyle={styles.scanButtonTitle}
+                titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
                 style={styles.scanButton}
                 title='Scan'
                 icon='scanner'
