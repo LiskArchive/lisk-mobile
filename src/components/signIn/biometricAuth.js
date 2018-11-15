@@ -37,7 +37,7 @@ class BiometricAuth extends React.Component {
   componentDidMount() {
     this.startUpAnimation(() => {
       bioMetricAuthentication({
-        successCallback: () => this.props.signIn({ value: this.props.passphrase }, 'biometricAuth'),
+        successCallback: () => this.props.signIn(this.props.passphrase, 'biometricAuth'),
         androidError: this.unauthorizedAnimation,
       });
     });

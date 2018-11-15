@@ -42,10 +42,11 @@ class PassphraseCopy extends React.Component {
         {
           height > 640 &&
           <View style={styles.imageContainer}>
-            <Image
-              style={styles.image}
-              source={theme === themes.light ? passphraseImg : passphraseImgDark}
-            />
+            {
+              theme === themes.light ?
+              <Image style={styles.image} source={passphraseImg} /> :
+              <Image style={styles.image} source={passphraseImgDark} />
+            }
             <P style={[styles.caption, styles.theme.caption]}>
               Keep it safe!
             </P>

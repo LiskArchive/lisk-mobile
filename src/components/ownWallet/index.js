@@ -3,9 +3,6 @@ import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../actions/settings';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import Empty from '../transactions/empty';
@@ -42,25 +39,41 @@ class Wallet extends React.Component {
 
   scrollView = null;
 
-  componentDidUpdate() {
-    const { confirmed, pending } = this.props.transactions;
-    if (this.state.theme === 'loading' ||
-      (this.state.theme === 'empty' && confirmed.length > 0)) {
-      const txNum = pending.length + confirmed.length;
+  componentDidMount() {
+    const { navigation, transactionsLoaded, account } = this.props;
+    transactionsLoaded({
+      senderIdOrRecipientId: account.address,
+      offset: 0,
+    });
+    navigation.setParams({
+      scrollToTop: () => {
+        if (this.scrollView) {
+          this.scrollView.scrollTo(0);
+        }
+      },
+    });
+    this.initialAnimation();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { theme } = this.state;
+    const { pending, confirmed } = this.props.transactions;
+    const transactionCount = pending.length + confirmed.length;
+    const previousTransactionCount = (
+      prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
+    );
+
+    if ((theme === 'empty' || theme === 'loading') && transactionCount !== previousTransactionCount) {
       this.setState({
-        theme: (confirmed.length === 0 && pending.length === 0) ? 'empty' : 'list',
-        footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < txNum,
+        theme: transactionCount === 0 ? 'empty' : 'list',
+        footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount,
       });
     }
   }
 
-  componentDidMount() {
-    const { transactionsLoaded } = this.props;
-    transactionsLoaded({
-      senderIdOrRecipientId: this.props.account.address,
-      offset: 0,
-    });
-    this.initialAnimation();
+  componentWillUnmount() {
+    clearTimeout(this.timeout1);
+    clearTimeout(this.timeout2);
   }
 
   onScroll() {
@@ -80,11 +93,6 @@ class Wallet extends React.Component {
         this.scrollView.scrollTo(-1);
       }
     }, 120);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeout1);
-    clearTimeout(this.timeout2);
   }
 
   loadMore = () => {
