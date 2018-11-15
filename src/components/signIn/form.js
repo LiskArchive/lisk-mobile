@@ -129,6 +129,8 @@ class Form extends React.Component {
             multiline={Platform.OS === 'ios'}
             secureTextEntry={Platform.OS !== 'ios'}
             error={errorMessage}
+            returnKeyType={Platform.OS === 'android' ? 'send' : 'default'}
+            onSubmitEditing={Platform.OS === 'android' ? this.onSignInSubmission : null}
           />
         </Animated.View>
         <KeyboardAwareScrollView
