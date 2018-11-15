@@ -25,7 +25,6 @@ export default () => ({
       paddingRight: boxes.boxPadding,
       borderRightWidth: boxes.boxPadding,
       borderRightColor: 'transparent',
-      color: 'black',
       fontSize: 13,
       letterSpacing: 1,
       fontFamily: fonts.family.passphrase,
