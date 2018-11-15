@@ -118,6 +118,7 @@ class Form extends React.Component {
         </Animated.View>
         <Animated.View style={[{ opacity }]}>
           <Input
+            noTheme={true}
             label='Passphrase'
             reference={(ref) => { this.passphraseInput = ref; }}
             innerStyles={{ input: styles.input }}
