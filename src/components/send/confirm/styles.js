@@ -1,11 +1,8 @@
 import { DeviceInfo } from 'react-native';
-import { colors, boxes, fonts } from '../../../constants/styleGuide';
+import { themes, colors, boxes, fonts } from '../../../constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {
-      backgroundColor: colors.light.white,
-    },
     innerContainer: {
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -23,7 +20,6 @@ export default () => ({
     },
     subtitle: {
       marginTop: 7,
-      color: colors.light.gray2,
     },
     input: {
       paddingRight: boxes.boxPadding,
@@ -51,10 +47,6 @@ export default () => ({
     visible: {
       opacity: 1,
     },
-    allWhite: {
-      borderTopColor: colors.light.white,
-      backgroundColor: colors.light.white,
-    },
     sticky: {
       position: 'absolute',
       bottom: 0,
@@ -77,6 +69,28 @@ export default () => ({
       left: 0,
       zIndex: 9999,
       borderRadius: 0,
+    },
+  },
+  [themes.light]: {
+    wrapper: {
+      backgroundColor: colors.light.white,
+    },
+    title: {
+      color: colors.light.black,
+    },
+    subtitle: {
+      color: colors.light.gray2,
+    },
+  },
+  [themes.dark]: {
+    wrapper: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    title: {
+      color: colors.dark.white,
+    },
+    subtitle: {
+      color: colors.dark.gray4,
     },
   },
 });

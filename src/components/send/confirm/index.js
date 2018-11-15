@@ -6,15 +6,18 @@ import { extractPublicKey } from '../../../utilities/api/account';
 import Input from '../../toolBox/input';
 import { H1, P } from '../../toolBox/typography';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import secondPassphraseImage from '../../../assets/images/secondPassphrase3x.png';
+import secondPassphraseImageLight from '../../../assets/images/secondPassphrase3xLight.png';
+import secondPassphraseImageDark from '../../../assets/images/secondPassphrase3xDark.png';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import { themes } from '../../../constants/styleGuide';
 
 /**
  * The container component containing sign in and create account functionality
  */
 @connect(state => ({
   peers: state.peers,
+
   accounts: state.accounts,
 }), {})
 class Confirm extends React.Component {
@@ -81,13 +84,13 @@ class Confirm extends React.Component {
   }
 
   render() {
-    const { styles } = this.props;
+    const { styles, theme } = this.props;
     const { secondPassphrase } = this.state;
 
     const error = secondPassphrase.validity
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || secondPassphrase.validity.length === 1);
-    return (<View style={styles.wrapper}>
+    return (<View style={[styles.wrapper, styles.theme.wrapper]}>
       <KeyboardAwareScrollView
         disabled={secondPassphrase.validity.length !== 0}
         onSubmit={this.forward}
@@ -99,13 +102,17 @@ class Confirm extends React.Component {
         }}>
         <View style={styles.titleContainer}>
           <View style={styles.headings}>
-            <H1>Confirm your identity</H1>
-            <P style={styles.subtitle}>
+            <H1 style={[styles.title, styles.theme.title]}>Confirm your identity</H1>
+            <P style={[styles.subtitle, styles.theme.subtitle]}>
               Enter you second passphrase to continue to transaction overview page.
             </P>
           </View>
           <View style={styles.illustrationWrapper}>
-            <Image style={styles.illustration} source={secondPassphraseImage} />
+            {
+              theme === themes.light ?
+                <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
+                <Image style={styles.illustration} source={secondPassphraseImageDark} />
+            }
           </View>
           <Input
             label='Second Passphrase'
