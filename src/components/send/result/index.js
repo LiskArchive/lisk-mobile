@@ -69,11 +69,11 @@ class Result extends React.Component {
 
   render() {
     const { styles } = this.props;
-    return (<View style={styles.container}>
+    return (<View style={[styles.container, styles.theme.container]}>
       <View style={styles.innerContainer}>
         <View>
-          <H1>Sent</H1>
-          <P style={styles.subtitle}>
+          <H1 style={[styles.title, styles.theme.title]}>Sent</H1>
+          <P style={[styles.subtitle, styles.theme.subtitle]}>
             Thank you. Your transaction is being processed.
             It may take up to 15 minutes to be secured in the blockchain.
           </P>

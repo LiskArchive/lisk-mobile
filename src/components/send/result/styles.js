@@ -1,12 +1,11 @@
 import { Dimensions } from 'react-native';
-import { boxes, colors } from '../../../constants/styleGuide';
+import { themes, boxes, colors } from '../../../constants/styleGuide';
 
 const { height } = Dimensions.get('window');
 export default () => ({
   common: {
     container: {
       height: '100%',
-      backgroundColor: colors.light.white,
     },
     innerContainer: {
       flexDirection: 'column',
@@ -20,7 +19,6 @@ export default () => ({
     },
     button: {
       marginTop: 20,
-      backgroundColor: boxes.success1,
     },
     title: {
       fontSize: 30,
@@ -32,12 +30,33 @@ export default () => ({
     },
     subtitle: {
       marginTop: 7,
-      color: colors.light.gray2,
     },
     illustration: {
       width: '100%',
       height: height <= 640 ? 200 : 300,
       paddingBottom: 50,
+    },
+  },
+  [themes.light]: {
+    container: {
+      backgroundColor: colors.light.white,
+    },
+    title: {
+      color: colors.light.black,
+    },
+    subtitle: {
+      color: colors.light.gray2,
+    },
+  },
+  [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    title: {
+      color: colors.dark.white,
+    },
+    subtitle: {
+      color: colors.dark.gray4,
     },
   },
 });
