@@ -89,6 +89,8 @@ class SendForm extends React.Component {
   }
 
   setFormState = ({ address = '', amount = '', reference = '' }) => {
+    clearTimeout(this.avatarPreviewTimeout);
+
     this.setState({
       address: {
         value: address,
@@ -102,7 +104,18 @@ class SendForm extends React.Component {
         value: reference,
         validity: this.validator.reference(reference),
       },
+      avatarPreview: false,
     });
+
+    this.setAvatarPreviewTimeout();
+  }
+
+  setAvatarPreviewTimeout = () => {
+    this.avatarPreviewTimeout = setTimeout(() => {
+      this.setState({
+        avatarPreview: true,
+      });
+    }, 300);
   }
 
   /**
@@ -120,6 +133,7 @@ class SendForm extends React.Component {
 
   setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
+
     this.setState({
       address: {
         value,
@@ -127,11 +141,8 @@ class SendForm extends React.Component {
       },
       avatarPreview: false,
     });
-    this.avatarPreviewTimeout = setTimeout(() => {
-      this.setState({
-        avatarPreview: true,
-      });
-    }, 300);
+
+    this.setAvatarPreviewTimeout();
   }
 
   setAmount = (value) => {
