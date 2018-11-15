@@ -109,33 +109,37 @@ class Overview extends React.Component {
       styles, address, amount, reference,
     } = this.props;
 
-    return (<View style={styles.container}>
+    return (<View style={[styles.container, styles.theme.container]}>
       <View style={styles.innerContainer}>
         <View style={styles.titleContainer}>
-          <H1>{ messages[actionType].title }</H1>
-          <P style={styles.subtitle}>
+          <H1 style={[styles.headerTitle, styles.theme.headerTitle]}>
+            { messages[actionType].title }
+          </H1>
+          <P style={[styles.subtitle, styles.theme.subtitle]}>
             { messages[actionType].subtitle }
             {
               actionType === 'initialize' ?
-              <A style={styles.link} onPress={this.openAcademy}> Read more</A> : ''
+              <A style={[styles.link, styles.theme.link]} onPress={this.openAcademy}> Read more</A> : ''
             }
           </P>
         </View>
         <View>
           <View style={styles.row}>
-            <P style={styles.label}>Address</P>
+            <P style={[styles.label, styles.theme.label]}>Address</P>
             <View style={styles.addressContainer}>
               <Avatar address={address || ''} style={styles.avatar} size={35}/>
-              <B labelStyle={[styles.address, styles.black]}>{address}</B>
+              <B style={[styles.address, styles.text, styles.theme.text]}>{address}</B>
             </View>
           </View>
           <View style={styles.row}>
-            <P style={styles.label}>Amount (including 0.1 Ⱡ fee)</P>
-            <B labelStyle={[styles.amount, styles.black]}>{`${fromRawLsk(toRawLsk(amount) + 1e7)} Ⱡ`}</B>
+            <P style={[styles.label, styles.theme.label]}>Amount (including 0.1 Ⱡ fee)</P>
+            <B style={[styles.text, styles.theme.text]}>
+              {`${fromRawLsk(toRawLsk(amount) + 1e7)} Ⱡ`}
+            </B>
           </View>
           {reference ? <View style={styles.row}>
-            <P style={styles.label}>Reference</P>
-            <B labelStyle={[styles.address, styles.black]}>{reference}</B>
+            <P style={[styles.label, styles.theme.label]}>Reference</P>
+            <B style={[styles.text, styles.theme.text]}>{reference}</B>
           </View> : null}
         </View>
         <View>
