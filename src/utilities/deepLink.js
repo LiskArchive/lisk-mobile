@@ -17,6 +17,7 @@ export default function deepLinkMapper(deepLinkURL) {
           query: {
             address: query.recipient,
             amount: query.amount,
+            reference: query.reference,
           },
         },
       };

@@ -10,13 +10,14 @@ describe('Deep Link Handler', () => {
   });
 
   it('handles urls with /transactions/send path', () => {
-    const url = 'lisk://main/transactions/send?recipient=1L&amount=1';
+    const url = 'lisk://main/transactions/send?recipient=1L&amount=1&reference=test';
     const expectedResult = {
       name: 'Send',
       params: {
         query: {
           address: '1L',
           amount: '1',
+          reference: 'test',
         },
       },
     };
@@ -25,13 +26,14 @@ describe('Deep Link Handler', () => {
   });
 
   it('handles urls starting with wallet', () => {
-    const url = 'lisk://wallet?recipient=1L&amount=1';
+    const url = 'lisk://wallet?recipient=1L&amount=1&reference=test';
     const expectedResult = {
       name: 'Send',
       params: {
         query: {
           address: '1L',
           amount: '1',
+          reference: 'test',
         },
       },
     };
