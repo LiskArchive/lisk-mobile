@@ -35,7 +35,7 @@ export default (WrappedComponent, styles, forwardRefs = false) => {
           {theme => (
             <WrappedComponent
               {...props}
-              styles={createThemedStyles(theme, styles)}
+              styles={createThemedStyles(theme, styles, this.props.noTheme)}
               theme={theme}
             />
           )}

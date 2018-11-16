@@ -1,10 +1,9 @@
-import { boxes, colors, fonts } from '../../../constants/styleGuide';
+import { themes, boxes, colors, fonts } from '../../../constants/styleGuide';
 
 export default () => ({
   common: {
     container: {
       height: '100%',
-      backgroundColor: colors.light.white,
     },
     innerContainer: {
       flex: 1,
@@ -24,9 +23,6 @@ export default () => ({
     leftAlign: {
       textAlign: 'left',
     },
-    black: {
-      color: colors.light.black,
-    },
     heading: {
       fontSize: 24,
       paddingBottom: 80,
@@ -42,7 +38,6 @@ export default () => ({
       paddingBottom: 15,
     },
     address: {
-      fontSize: 24,
       paddingBottom: 15,
     },
     button: {
@@ -53,7 +48,6 @@ export default () => ({
     label: {
       marginTop: 15,
       marginBottom: 7,
-
       color: colors.light.gray1,
       fontFamily: fonts.family.contextLight,
       fontSize: fonts.size.input,
@@ -61,7 +55,6 @@ export default () => ({
     },
     subtitle: {
       marginTop: 7,
-      color: colors.light.gray2,
     },
     addressContainer: {
       flexDirection: 'row',
@@ -71,9 +64,6 @@ export default () => ({
       paddingBottom: 0,
       marginRight: 20,
     },
-    link: {
-      color: colors.light.blue,
-    },
     errorContainer: {
       flexDirection: 'row',
       justifyContent: 'center',
@@ -82,16 +72,66 @@ export default () => ({
       opacity: 0,
     },
     error: {
-      color: colors.light.gray1,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
     },
     errorIcon: {
-      color: colors.light.red,
       marginRight: 5,
     },
     visible: {
       opacity: 1,
+    },
+  },
+  [themes.light]: {
+    container: {
+      backgroundColor: colors.light.white,
+    },
+    text: {
+      color: colors.light.black,
+    },
+    label: {
+      color: colors.light.gray1,
+    },
+    headerTitle: {
+      color: colors.light.black,
+    },
+    subtitle: {
+      color: colors.light.gray2,
+    },
+    link: {
+      color: colors.light.blue,
+    },
+    error: {
+      color: colors.light.gray1,
+    },
+    errorIcon: {
+      color: colors.light.red,
+    },
+  },
+  [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    text: {
+      color: colors.dark.white,
+    },
+    label: {
+      color: colors.dark.gray4,
+    },
+    headerTitle: {
+      color: colors.dark.white,
+    },
+    subtitle: {
+      color: colors.dark.gray4,
+    },
+    link: {
+      color: colors.dark.blue,
+    },
+    error: {
+      color: colors.dark.gray4,
+    },
+    errorIcon: {
+      color: colors.dark.red,
     },
   },
 });

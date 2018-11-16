@@ -1,16 +1,12 @@
 import { Dimensions, Platform } from 'react-native';
-import { colors, boxes } from '../../../constants/styleGuide';
+import { themes, colors, boxes } from '../../../constants/styleGuide';
 import { viewportHeight, headerHeight } from '../../../utilities/device';
 
 const { height, width } = Dimensions.get('window');
 export default () => ({
   common: {
-    wrapper: {
-      backgroundColor: colors.light.white,
-    },
     subtitle: {
       marginTop: 7,
-      color: colors.light.gray2,
     },
     innerContainer: {
       flexDirection: 'column',
@@ -37,7 +33,6 @@ export default () => ({
       borderBottomWidth: 1,
       borderLeftWidth: 0,
       borderRightWidth: 0,
-      borderColor: colors.light.gray5,
       marginTop: 20,
       paddingTop: 10,
       paddingBottom: 16,
@@ -52,11 +47,9 @@ export default () => ({
       paddingTop: 8,
     },
     number: {
-      color: colors.light.blue,
       lineHeight: 25,
     },
     unit: {
-      color: colors.light.blue,
       lineHeight: 25,
       marginLeft: 5,
       marginTop: -3,
@@ -98,7 +91,6 @@ export default () => ({
     },
     scanButtonTitle: {
       fontSize: 14,
-      color: colors.light.blue,
       width: 39,
       paddingLeft: 5,
     },
@@ -173,7 +165,66 @@ export default () => ({
       marginTop: 2,
       maxWidth: '80%',
       textAlign: 'center',
-      // color: colors.light.gray2,
+      color: colors.light.gray2,
+    },
+  },
+  [themes.light]: {
+    wrapper: {
+      backgroundColor: colors.light.white,
+    },
+    subtitle: {
+      color: colors.light.gray2,
+    },
+    balanceWrapper: {
+      borderColor: colors.light.gray5,
+    },
+    number: {
+      color: colors.light.blue,
+    },
+    unit: {
+      color: colors.light.blue,
+    },
+    scanButtonTitle: {
+      color: colors.light.blue,
+    },
+    permissionRequestWrapper: {
+      backgroundColor: colors.light.gray6,
+    },
+    permissionDescription: {
+      color: colors.light.gray2,
+    },
+  },
+  [themes.dark]: {
+    wrapper: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    subtitle: {
+      color: colors.dark.gray4,
+    },
+    balanceWrapper: {
+      borderColor: colors.dark.tabBarBgNavy,
+      backgroundColor: colors.dark.tabBarBgNavy,
+    },
+    number: {
+      color: colors.dark.white,
+    },
+    unit: {
+      color: colors.dark.white,
+    },
+    title: {
+      color: colors.dark.white,
+    },
+    scanButtonTitle: {
+      color: colors.dark.blue,
+    },
+    permissionRequestWrapper: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
+    permissionTitle: {
+      color: colors.dark.white,
+    },
+    permissionDescription: {
+      color: colors.dark.gray4,
     },
   },
 });

@@ -8,7 +8,7 @@ import { themes } from '../constants/styleGuide';
  *
  * @returns {Object} - created stylesheet.
  */
-export const createThemedStyles = (theme = themes.light, styles) => {
+export const createThemedStyles = (theme = themes.light, styles, noTheme) => {
   if (!styles.common) {
     throw Error('Styles object should have declerations for shared styles.');
   }
@@ -22,7 +22,7 @@ export const createThemedStyles = (theme = themes.light, styles) => {
 
   return {
     ...StyleSheet.create(styles.common),
-    theme: StyleSheet.create(styles[theme]),
+    theme: noTheme ? StyleSheet.create(styles[themes.light]) : StyleSheet.create(styles[theme]),
   };
 };
 
