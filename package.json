@@ -132,7 +132,7 @@
     "jest-transform-stub": "^1.0.0",
     "metro-react-native-babel-preset": "^0.45.6",
     "moxios": "^0.4.0",
-    "react-test-renderer": "16.3.1",
+    "react-test-renderer": "16.2.0",
     "redux-connect-decorator": "^0.2.0",
     "redux-mock-store": "^1.5.3",
     "rn-nodeify": "github:mvayngrib/rn-nodeify",
