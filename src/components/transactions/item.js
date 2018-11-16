@@ -16,8 +16,12 @@ import getStyles from './styles';
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 class Item extends React.Component {
-  showDetail = (tx, account, incognito) => {
-    this.props.navigate({
+  showDetail = () => {
+    const {
+      navigate, tx, account, incognito,
+    } = this.props;
+
+    navigate({
       routeName: 'TxDetail',
       params: { tx, account, incognito },
     });
@@ -45,7 +49,7 @@ class Item extends React.Component {
 
     return (<TouchableOpacity
       style={[styles.itemContainer, styles.theme.itemContainer]}
-      onPress={() => this.showDetail(tx, account, incognito)}>
+      onPress={this.showDetail}>
       <View style={styles.innerContainer}>
       <View style={[styles.itemColumn, styles.avatarContainer]}>
         {

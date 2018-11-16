@@ -200,7 +200,7 @@ export default StackNavigator(
     TxDetail: {
       screen: TxDetail,
       navigationOptions: ({ navigation }) => ({
-        headerRight: <SettingButton navigation={navigation} />,
+        headerRight: placeHolderButton,
         headerBackground: <Bg />,
         title: <Logo />,
         headerLeft: <IconButton
