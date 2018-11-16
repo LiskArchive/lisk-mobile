@@ -50,48 +50,6 @@ const styles = {
     fontSize: fonts.size.base,
     fontFamily: fonts.family.context,
   },
-  button: {
-    fontSize: fonts.size.base,
-    fontFamily: fonts.family.context,
-    textAlign: 'center',
-  },
-  primaryButton: {
-    color: colors.light.white,
-    lineHeight: boxes.buttonHeight,
-  },
-  buttonWrapper: {
-    borderRadius: 3,
-    borderWidth: 1,
-    borderColor: 'transparent',
-  },
-  iconButton: {
-    width: 40,
-    height: 30,
-    paddingLeft: boxes.elementPadding,
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
-    alignItems: 'center',
-  },
-  iconButtonTitle: {
-    color: colors.light.actionBlue,
-    lineHeight: 18,
-  },
-  disabledButtonColor: {
-    color: colors.light.gray4,
-  },
-  disabledButtonBg: {
-    backgroundColor: colors.light.white,
-    borderColor: colors.light.gray4,
-    borderWidth: 1,
-  },
-  labelButton: {
-    backgroundColor: 'transparent',
-    color: colors.light.actionBlueAccent,
-    fontSize: fonts.size.base,
-    borderWidth: 2,
-    borderColor: colors.light.actionBlueAccent,
-    fontFamily: fonts.family.context,
-  },
   inputLabel: {
     color: colors.light.gray1,
     fontFamily: fonts.family.contextLight,
@@ -158,8 +116,10 @@ const styles = {
   },
   keyboardStickyButton: {
     borderRadius: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
+    borderWidth: 0,
+    borderTopWidth: 1,
+    marginLeft: -1,
+    marginRight: -1,
   },
   hasTabBar: {
     ...Platform.select({
