@@ -28,7 +28,7 @@ class ScrollAwareActionBar extends React.Component {
 
   render() {
     const {
-      children, disabled, onSubmit,
+      children, disabled, onSubmit, noTheme,
       styles, button, hasTabBar, extras,
     } = this.props;
     const { buttonStyle } = this.state;
@@ -49,6 +49,7 @@ class ScrollAwareActionBar extends React.Component {
             {
               buttonStyle === theme.hiddenStickyButton ?
               <SecondaryButton
+                noTheme={noTheme}
                 style={theme.offKeyboardButton}
                 disabled={disabled}
                 title={typeof button === 'string' ? button : button.title}
@@ -66,6 +67,7 @@ class ScrollAwareActionBar extends React.Component {
           alwaysVisible={true}>
           { extras }
           <SecondaryButton
+            noTheme={noTheme}
             disabled={disabled}
             title={typeof button === 'string' ? button : button.title}
             onClick={onSubmit}

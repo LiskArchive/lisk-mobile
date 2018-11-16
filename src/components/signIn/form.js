@@ -132,6 +132,7 @@ class Form extends React.Component {
           />
         </Animated.View>
         <KeyboardAwareScrollView
+          noTheme={true}
           button='Sign in'
           onSubmit={this.onSignInSubmission}
           disabled={passphrase.value.length === 0}
