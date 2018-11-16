@@ -163,19 +163,21 @@ class SignIn extends React.Component {
   }
 
   /**
-   * Will be called when sign in form submits
+   * Will be called when sign in form is submitted
    * fires the activePeerSet action
    *
    * @param {String} passphrase - valid mnemonic passphrase
+   * @param {String} submissionType - 'form' or 'biometricAuth'
    */
   onFormSubmission = (passphrase, submissionType) => {
+    const { settings } = this.props;
+
     this.setState({
       connectionError: false,
       passphrase,
     });
-    if (this.props.settings.sensorType &&
-      !this.props.settings.bioAuthRecommended &&
-      submissionType === 'form') {
+
+    if (settings.sensorType && !settings.bioAuthRecommended && submissionType === 'form') {
       this.promptBioAuth(passphrase, this.signIn);
     } else {
       this.signIn(passphrase);
@@ -236,25 +238,19 @@ class SignIn extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.settings.validated &&
-      !this.state.destinationDefined) {
-      if (this.props.settings.showedIntro) {
+    const { settings, navigation, accounts } = this.props;
+    const { destinationDefined } = this.state;
+
+    if (settings.validated && !destinationDefined) {
+      if (settings.showedIntro) {
         this.init();
       } else {
-        this.props.navigation.navigate('Intro');
+        navigation.navigate('Intro');
       }
       this.setState({ destinationDefined: true });
     }
 
-    /**
-     * After signed-in, accounts.active has value and this methods
-     * redirects to Main.
-     */
-    if (
-      this.props.accounts.active &&
-      this.props.navigation &&
-      this.props.navigation.isFocused()
-    ) {
+    if (accounts.active && navigation && navigation.isFocused()) {
       this.onSignInCompleted();
     }
   }
