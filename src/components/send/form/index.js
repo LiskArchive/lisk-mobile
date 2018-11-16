@@ -19,36 +19,104 @@ import getStyles from './styles';
 
 @connect(state => ({
   account: state.accounts.active,
-}), {})
-class Form extends React.Component {
-    references = [];
+}))
+class SendForm extends React.Component {
+  references = [];
+  activeInputRef = null;
+  validator = {
+    address: (str) => {
+      if (str === '') return -1;
+      return reg.address.test(str) ? 0 : 1;
+    },
+    amount: (str) => {
+      const { account } = this.props;
+      if (str === '') return -1;
+      return (reg.amount.test(str) &&
+        account && account.balance > transactions.send.fee &&
+        parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
+    },
+    reference: (str) => {
+      const uint8array = new TextEncoder().encode(str);
+      return uint8array.length > 64 ? 1 : 0;
+    },
+  };
+  state = {
+    address: {
+      value: '',
+      validity: -1,
+    },
+    amount: {
+      value: '',
+      validity: -1,
+    },
+    reference: {
+      value: '',
+      validity: -1,
+    },
+    secondaryButtonOpacity: 1,
+    avatarPreview: true,
+  };
 
-    validator = {
-      address: (str) => {
-        if (str === '') return -1;
-        return reg.address.test(str) ? 0 : 1;
-      },
-      amount: (str) => {
-        const { account } = this.props;
-        if (str === '') return -1;
-        return (reg.amount.test(str) &&
-          account && account.balance > transactions.send.fee &&
-          parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
-      },
-      reference: (str) => {
-        const uint8array = new TextEncoder().encode(str);
-        return uint8array.length > 64 ? 1 : 0;
-      },
-    };
-    activeInputRef = null;
+  componentDidMount() {
+    const { prevState, navigation } = this.props;
 
-    state = {
-      address: { value: '', validity: this.validator.address('') },
-      amount: { value: '', validity: this.validator.amount('') },
-      reference: { value: '', validity: this.validator.reference('') },
-      secondaryButtonOpacity: 1,
-      avatarPreview: true,
-    };
+    if (Object.keys(prevState).length) {
+      this.setFormState(prevState);
+    } else if (navigation.state.params && navigation.state.params.query) {
+      this.setFormState(navigation.state.params.query);
+    }
+
+    this.props.navigation.setParams({ showButtonLeft: false });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { navigation: { state: { params } }, account } = this.props;
+    const prevParams = (prevProps.navigation.state ? prevProps.navigation.state.params : {});
+
+    if (params && params.query && (prevParams.query !== params.query)) {
+      this.setFormState(params.query);
+    }
+
+    if (prevProps.account && account && (account.balance !== prevProps.account.balance)) {
+      const { amount: { value } } = this.state;
+      this.setState({
+        amount: {
+          value,
+          validity: this.validator.amount(value),
+        },
+      });
+    }
+  }
+
+  setFormState = ({ address = '', amount = '', reference = '' }) => {
+    clearTimeout(this.avatarPreviewTimeout);
+
+    this.setState({
+      address: {
+        value: address,
+        validity: this.validator.address(address),
+      },
+      amount: {
+        value: amount,
+        validity: this.validator.amount(amount),
+      },
+      reference: {
+        value: reference,
+        validity: this.validator.reference(reference),
+      },
+      avatarPreview: false,
+    });
+
+    this.setAvatarPreviewTimeout();
+  }
+
+  setAvatarPreviewTimeout = () => {
+    this.avatarPreviewTimeout = setTimeout(() => {
+      this.setState({
+        avatarPreview: true,
+      });
+    }, 300);
+  }
 
   /**
    * @param {String} name - the key to set on state
@@ -65,6 +133,7 @@ class Form extends React.Component {
 
   setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
+
     this.setState({
       address: {
         value,
@@ -72,54 +141,18 @@ class Form extends React.Component {
       },
       avatarPreview: false,
     });
-    this.avatarPreviewTimeout = setTimeout(() => {
-      this.setState({
-        avatarPreview: true,
-      });
-    }, 300);
+
+    this.setAvatarPreviewTimeout();
   }
 
   setAmount = (value) => {
     const normalizedValue = value.replace(/[^0-9]/g, '.');
     this.setState({
       amount: {
-        value: normalizedValue,
+        value,
         validity: this.validator.amount(normalizedValue),
       },
     });
-  }
-
-  componentDidMount() {
-    if (this.props.prevState.address) {
-      const state = {
-        address: {
-          value: this.props.prevState.address,
-          validity: 0,
-        },
-        amount: {
-          value: this.props.prevState.amount,
-          validity: 0,
-        },
-        reference: {
-          value: this.props.prevState.reference || '',
-          validity: 0,
-        },
-      };
-      this.setState(state);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { value } = this.state.amount;
-    const validator = this.validator.amount;
-    if (nextProps.account && this.props.account.balance !== nextProps.account.balance) {
-      this.setState({
-        amount: {
-          validity: validator(value),
-          value,
-        },
-      });
-    }
   }
 
   changeButtonOpacity = (val) => {
@@ -150,26 +183,31 @@ class Form extends React.Component {
   }
 
   render() {
-    const { theme, styles } = this.props;
+    const {
+      navigation, account, theme, styles,
+    } = this.props;
     const {
       address, amount, reference, avatarPreview,
     } = this.state;
+
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
           ref={(el) => { this.scanner = el; }}
-          navigation={this.props.navigation}
+          navigation={navigation}
           setAddress={this.setAddress}
-          setAmount={this.setAmount}/>
+          setAmount={this.setAmount}
+        />
         <KeyboardAwareScrollView
-          disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
-          onSubmit={this.forward}
-          hasTabBar={true}
-          button={{
-            title: 'Continue',
-            type: 'inBox',
-          }}
-          styles={{ container: styles.container, innerContainer: styles.innerContainer }}>
+            disabled={address.validity !== 0 || amount.validity !== 0 || reference.validity !== 0}
+            onSubmit={this.forward}
+            hasTabBar={true}
+            button={{
+              title: 'Continue',
+              type: 'inBox',
+            }}
+            styles={{ container: styles.container, innerContainer: styles.innerContainer }}
+          >
           <View style={styles.titleContainer}>
             <View style={styles.headings}>
               <H1 style={[styles.title, styles.theme.title]}>Send</H1>
@@ -182,7 +220,7 @@ class Form extends React.Component {
               <View style={styles.balanceValue}>
                 <H2 style={[styles.number, styles.theme.number]}>
                   <FormattedNumber>
-                    {fromRawLsk(this.props.account ? this.props.account.balance : 0)}
+                    {fromRawLsk(account ? account.balance : 0)}
                   </FormattedNumber>
                 </H2>
                 <H2 style={[styles.unit, styles.theme.unit]}>Ⱡ</H2>
@@ -198,18 +236,21 @@ class Form extends React.Component {
                 title='Scan'
                 icon='scanner'
                 iconSize={18}
-                color={colors.light.blue} />
+                color={colors.light.blue}
+              />
               {
                 address.validity === 0 && avatarPreview ?
                   <Avatar
                     style={styles.avatar}
                     address={address.value}
-                    size={34} /> :
+                    size={34}
+                  /> :
                   <Icon
                     style={styles.avatar}
                     name='avatar-placeholder'
                     size={34}
-                    color={colors[theme].gray5} />
+                    color={colors[theme].gray5}
+                  />
               }
               <Input
                 label='Address'
@@ -223,7 +264,7 @@ class Form extends React.Component {
                   ],
                   containerStyle: styles.addressInputContainer,
                 }}
-                onChange={value => this.setAddress(value)}
+                onChange={this.setAddress}
                 value={address.value}
                 error={
                   address.validity === 1 ?
@@ -237,7 +278,7 @@ class Form extends React.Component {
               autoCorrect={false}
               reference={(input) => { this.references[1] = input; }}
               innerStyles={{ input: styles.input }}
-              onChange={value => this.setAmount(value)}
+              onChange={this.setAmount}
               value={amount.value}
               keyboardType='numeric'
               error={
@@ -253,9 +294,9 @@ class Form extends React.Component {
               innerStyles={{ errorMessage: styles.errorMessage, input: styles.input }}
               multiline={true}
               onChange={this.setReference}
-              value={this.state.reference.value}
+              value={reference.value}
               error={
-                this.state.reference.validity === 1 ?
+                reference.validity === 1 ?
                   'Maximum length of 64 characters is exceeded.' : ''
               }
               onFocus={() => { this.activeInputRef = 2; }}
@@ -267,4 +308,4 @@ class Form extends React.Component {
   }
 }
 
-export default withTheme(Form, getStyles());
+export default withTheme(SendForm, getStyles());

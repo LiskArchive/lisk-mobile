@@ -16,25 +16,28 @@ import getStyles from './styles';
 class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
-
     return {
-      tabBarVisible: !(params && params.tabBar),
-      headerLeft: (params && params.showButtonLeft) ? <IconButton
-      icon='back'
-      title=''
-      onPress={() => {
-        params.action();
-      }}
-      style={params && params.styles && params.styles.back}
-      color={colors.light.white} /> : <IconButton color='transparent' icon='back'/>,
+      tabBarVisible: params.tabBar,
+      headerLeft: params.showButtonLeft ? (
+        <IconButton
+          icon='back'
+          title=''
+          onPress={params.action}
+          style={params.styles && params.styles.back}
+          color={colors.light.white}
+        />
+      ) : (
+        <IconButton
+          color='transparent'
+          icon='back'
+        />
+      ),
     };
   };
 
   componentDidMount() {
     const { styles, navigation } = this.props;
-    this.subs = [
-      navigation.addListener('didFocus', () => this.didFocus()),
-    ];
+    this.subs = [navigation.addListener('didFocus', this.didFocus)];
     navigation.setParams({ showButtonLeft: false, styles });
   }
 
@@ -42,9 +45,8 @@ class Send extends React.Component {
     this.subs.forEach(sub => sub.remove());
   }
 
-  didFocus() {
-    const { navigation } = this.props;
-    if (navigation.getParam('initialize', false)) {
+  didFocus = () => {
+    if (this.props.navigation.getParam('initialize', false)) {
       this.nav.move({
         to: 2,
         stepData: {
@@ -53,22 +55,29 @@ class Send extends React.Component {
           reference: 'Account initialization',
         },
       });
-    } else this.nav.reset();
+    } else {
+      this.nav.reset();
+    }
+  }
+
+  finalCallback = () => {
+    this.props.navigation.navigate({ routeName: 'OwnWallet' });
   }
 
   render() {
     const { styles, navigation } = this.props;
-    return (<MultiStep
-        finalCallback={() => {
-          navigation.navigate({ routeName: 'OwnWallet' });
-        }}
+    return (
+      <MultiStep
+        ref={(el) => { this.nav = el; }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
-        ref={(el) => { this.nav = el; }}>
-        <Form title='form' navigation={navigation}/>
+        finalCallback={this.finalCallback}
+      >
+        <Form title='form' navigation={navigation} />
         <Confirm title='confirm' navigation={navigation} />
         <Overview title='overview' navigation={navigation} />
-        <Result title='result' navigation={navigation}/>
-      </MultiStep>);
+        <Result title='result' navigation={navigation} />
+      </MultiStep>
+    );
   }
 }
 
