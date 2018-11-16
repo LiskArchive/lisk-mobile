@@ -127,6 +127,7 @@ class Wallet extends React.Component {
           scrollEventThrottle={8}
           onScroll={this.onScroll.call(this)}
           style={[styles.scrollView]}
+          theme={this.props.theme}
           list={[...transactions.pending, ...transactions.confirmed]}
           count={transactions.count}
           refresh={this.props.updateTransactions}

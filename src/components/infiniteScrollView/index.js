@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
+import { themes, colors } from '../../constants/styleGuide';
 
 /**
  * InfiniteScrollView is a wrapper for react native ScrollView
@@ -31,7 +32,7 @@ class InfiniteScrollView extends React.Component {
     this.canLoadMore = (this.props.list.length !== nextProps.list.length) || this.state.refreshing;
   }
 
-  onScroll(e) {
+  onScroll = (e) => {
     this.props.onScroll(e);
     this.loadMore(e);
   }
@@ -50,20 +51,29 @@ class InfiniteScrollView extends React.Component {
   }
 
   render() {
-    return <ScrollView onScroll={this.onScroll.bind(this)}
-      refreshControl={
-        <RefreshControl
-          refreshing={this.state.refreshing}
-          onRefresh={this.onRefresh}
+    return (
+      <ScrollView
+        onScroll={this.onScroll}
+        refreshControl={
+          <RefreshControl
+            onRefresh={this.onRefresh}
+            refreshing={this.state.refreshing}
+            tintColor={this.props.theme === themes.light ? colors.light.gray4 : colors.dark.gray4}
           />
-      }
-      ref={((el) => { this.scrollView = el; })}
-      style={this.props.style}
-      stickyHeaderIndices={this.props.stickyHeaderIndices}
-      scrollEventThrottle={8}>
-      {this.props.children}
-    </ScrollView>;
+        }
+        ref={((el) => { this.scrollView = el; })}
+        style={this.props.style}
+        stickyHeaderIndices={this.props.stickyHeaderIndices}
+        scrollEventThrottle={8}
+      >
+        {this.props.children}
+      </ScrollView>
+    );
   }
 }
+
+InfiniteScrollView.defaultProps = {
+  theme: themes.light,
+};
 
 export default InfiniteScrollView;
