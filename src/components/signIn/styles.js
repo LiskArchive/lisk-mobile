@@ -66,10 +66,10 @@ const styles = {
     height: 42,
   },
   input: {
-    paddingRight: boxes.boxPadding,
     borderRightColor: 'transparent',
     color: 'black',
     fontFamily: fonts.family.passphrase,
+    textAlign: 'justify',
   },
   allWhite: {
     borderTopColor: colors.light.white,
