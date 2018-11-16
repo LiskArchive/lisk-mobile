@@ -104,10 +104,14 @@ export default () => ({
     blurMedium: {
       width: 89,
       height: 45,
+      marginTop: -10,
+      marginRight: -10,
     },
     blurSmall: {
       width: 72,
       height: 45,
+      marginTop: -10,
+      marginRight: -10,
     },
   },
   [themes.light]: {
