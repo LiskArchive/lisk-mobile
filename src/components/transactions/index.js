@@ -84,7 +84,7 @@ class Transactions extends React.Component {
                 title=''
                 icon={incognito ? 'disable-incognito' : 'enable-incognito'}
                 color={colors.dark.gray2}
-                iconSize={18}
+                iconSize={20}
                 onClick={this.toggleIncognito}
                 />
             </View>
