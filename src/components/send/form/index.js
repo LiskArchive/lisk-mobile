@@ -183,7 +183,9 @@ class SendForm extends React.Component {
   }
 
   render() {
-    const { navigation, account, theme, styles } = this.props;
+    const {
+      navigation, account, theme, styles,
+    } = this.props;
     const {
       address, amount, reference, avatarPreview,
     } = this.state;
