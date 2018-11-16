@@ -54,7 +54,7 @@ const TxDetail = ({ navigation, styles, theme }) => {
           {amountSign}
           <FormattedNumber>
             {fromRawLsk(tx.amount)}
-          </FormattedNumber> Ⱡ
+          </FormattedNumber>
         </H1>
       }
       {
@@ -98,7 +98,7 @@ const TxDetail = ({ navigation, styles, theme }) => {
       <View style={styles.rowContent}>
         <P style={[styles.label, styles.theme.label]}>Transaction Fee</P>
         <B style={[styles.value, styles.theme.value]}>
-          <FormattedNumber>{fromRawLsk(transactions[txTypes[tx.type]].fee)}</FormattedNumber> Ⱡ
+          <FormattedNumber>{fromRawLsk(transactions[txTypes[tx.type]].fee)}</FormattedNumber>
         </B>
       </View>
     </View>
