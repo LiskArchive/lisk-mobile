@@ -23,7 +23,7 @@ import { IconButton } from '../toolBox/button';
  *
  */
 @connect(state => ({
-  settings: state.settings,
+  incognito: state.settings.incognito,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
@@ -60,13 +60,13 @@ class Transactions extends React.Component {
 
   toggleIncognito = () => {
     this.props.settingsUpdated({
-      incognito: !this.props.settings.incognito,
+      incognito: !this.props.incognito,
     });
   }
 
   render() {
     const {
-      styles, transactions, navigate, account, footer, settings, theme,
+      styles, transactions, navigate, account, footer, incognito, theme,
     } = this.props;
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
@@ -82,7 +82,7 @@ class Transactions extends React.Component {
               <H3 style={[styles.title, styles.theme.title]}>Activity</H3>
               <IconButton
                 title=''
-                icon={settings.incognito ? 'disable-incognito' : 'enable-incognito'}
+                icon={incognito ? 'disable-incognito' : 'enable-incognito'}
                 color={colors.dark.gray2}
                 iconSize={18}
                 onClick={this.toggleIncognito}
@@ -99,6 +99,7 @@ class Transactions extends React.Component {
               </View> : null
             }
             <List
+              incognito={incognito}
               navigate={navigate}
               account={account ? account.address : ''}
               pending={transactions.pending}

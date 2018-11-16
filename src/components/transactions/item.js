@@ -11,6 +11,30 @@ import loadingAnimation from '../../assets/animations/loading-dots.json';
 import transactions from '../../constants/transactions';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import darkMediumOutgoing from '../../assets/images/amountBlur/outgoing/darkMedium.png';
+import darkSmallOutgoing from '../../assets/images/amountBlur/outgoing/darkSmall.png';
+import darkMediumIncoming from '../../assets/images/amountBlur/incoming/darkMedium.png';
+import darkSmallIncoming from '../../assets/images/amountBlur/incoming/darkSmall.png';
+import lightMediumOutgoing from '../../assets/images/amountBlur/outgoing/lightMedium.png';
+import lightSmallOutgoing from '../../assets/images/amountBlur/outgoing/lightSmall.png';
+import lightMediumIncoming from '../../assets/images/amountBlur/incoming/lightMedium.png';
+import lightSmallIncoming from '../../assets/images/amountBlur/incoming/lightSmall.png';
+
+const blurs = {
+  outgoing: {
+    darkMedium: darkMediumOutgoing,
+    darkSmall: darkSmallOutgoing,
+    lightMedium: lightMediumOutgoing,
+    lightSmall: lightSmallOutgoing,
+  },
+  incoming: {
+    darkMedium: darkMediumIncoming,
+    darkSmall: darkSmallIncoming,
+    lightMedium: lightMediumIncoming,
+    lightSmall: lightSmallIncoming,
+  },
+};
+
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
@@ -29,7 +53,9 @@ class Item extends React.Component {
   }
 
   render() {
-    const { styles, tx, account } = this.props;
+    const {
+      styles, tx, account, incognito, theme,
+    } = this.props;
     let direction = 'incoming';
     let address = tx.senderId;
     let addressShortened = stringShortener(tx.senderId, 10, 3);
@@ -39,6 +65,7 @@ class Item extends React.Component {
       addressShortened = stringShortener(tx.recipientId, 10, 3);
     }
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
+    const amountSize = amount.length > 2 ? 'Medium' : 'Small';
 
     return (<TouchableOpacity
       style={[styles.itemContainer, styles.theme.itemContainer]}
@@ -66,15 +93,22 @@ class Item extends React.Component {
       </View>
       </View>
       <View style={[styles.column, styles.amountWrapper]}>
-      {
-        (tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
-          <B style={[
-            styles.amount, styles.theme.amount,
-            styles[direction], styles.theme[direction],
-          ]}>
-            <FormattedNumber>{amount}</FormattedNumber> Ⱡ
-          </B> : null
-      }
+        {
+          (tx.type === 0 && (tx.recipientId !== tx.senderId)) && !incognito ?
+            <B style={[
+              styles.amount, styles.theme.amount,
+              styles[direction], styles.theme[direction],
+            ]}>
+              <FormattedNumber>{amount}</FormattedNumber>
+            </B> : null
+        }
+        {
+          (tx.type === 0 && (tx.recipientId !== tx.senderId)) && incognito ?
+            <View style={styles.amount}>
+              <Image style={styles[`blur${amountSize}`]}
+                source={blurs[direction][`${theme}${amountSize}`]} />
+            </View> : null
+        }
         {
           typeof this.props.tx.timestamp !== 'number' ?
             <View style={styles.pendingIcon}>
