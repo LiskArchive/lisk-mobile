@@ -224,9 +224,9 @@ export default StackNavigator(
     EnableBioAuth: {
       screen: EnableBioAuth,
       navigationOptions: ({ navigation }) => ({
-        headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
         title: <Logo />,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
@@ -248,9 +248,9 @@ export default StackNavigator(
     DisableBioAuth: {
       screen: DisableBioAuth,
       navigationOptions: ({ navigation }) => ({
-        headerRight: <SettingButton navigation={navigation} />,
         headerBackground: <Bg />,
         title: <Logo />,
+        headerRight: placeHolderButton,
         headerLeft: <IconButton
           icon='back'
           title=''
