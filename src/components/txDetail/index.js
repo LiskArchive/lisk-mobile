@@ -9,6 +9,7 @@ import { B, P, H1, H3 } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import Avatar from '../avatar';
 import transactions from '../../constants/transactions';
+import Blur from '../transactions/blur';
 import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
@@ -19,17 +20,22 @@ const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelega
 const TxDetail = ({ navigation, styles, theme }) => {
   const tx = navigation.getParam('tx', null);
   const account = navigation.getParam('account', null);
+  const incognito = navigation.getParam('incognito', null);
   let arrowStyle;
   let amountStyle = [styles.outgoing, styles.theme.outgoing];
   let secondAddress = tx.recipientId;
   let amountSign = '-';
+  let direction = 'outgoing';
 
   if ((account !== tx.senderId) && tx.type === 0) {
     arrowStyle = styles.reverseArrow;
     amountStyle = [styles.incoming, styles.theme.incoming];
     secondAddress = tx.senderId;
     amountSign = '';
+    direction = 'incoming';
   }
+
+  const normalizedAmount = fromRawLsk(tx.amount);
 
   return (<ScrollView style={[styles.container, styles.theme.container]}>
     <H1 style={[styles.title, styles.theme.title]}>Transaction details</H1>
@@ -49,13 +55,20 @@ const TxDetail = ({ navigation, styles, theme }) => {
       }
       </View>
       { tx.type !== 0 || (tx.recipientId === tx.senderId) ?
-        <H3 style={amountStyle}>{transactions[txTypes[tx.type]].title}</H3> :
-        <H1 style={amountStyle}>
-          {amountSign}
-          <FormattedNumber>
-            {fromRawLsk(tx.amount)}
-          </FormattedNumber>
-        </H1>
+        <H3 style={amountStyle}>{transactions[txTypes[tx.type]].title}</H3> : null
+      }
+      {
+        tx.type === 0 && (tx.recipientId !== tx.senderId) && !incognito ?
+          <H1 style={amountStyle}>
+            {amountSign}
+            <FormattedNumber>
+              {fromRawLsk(tx.amount)}
+            </FormattedNumber>
+          </H1> : null
+      }
+      {
+        tx.type === 0 && (tx.recipientId !== tx.senderId) && incognito ?
+          <Blur value={normalizedAmount} direction={direction} style={styles.amountBlur} /> : null
       }
       {
         tx.timestamp ?
