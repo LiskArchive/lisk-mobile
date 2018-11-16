@@ -28,7 +28,7 @@ export const animationRanges = {
     left: [33, 110],
   },
   balance: {
-    top: [130, 55],
+    top: [120, 45],
     left: [33, 110],
   },
 };
@@ -77,7 +77,7 @@ export default () => ({
       lineHeight: 25,
     },
     balance: {
-      height: 25,
+      height: 45,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
@@ -85,6 +85,9 @@ export default () => ({
       position: 'absolute',
       zIndex: 4,
       elevation: 4,
+    },
+    lift: {
+      marginTop: -10,
     },
     bg: {
       position: 'absolute',
@@ -111,6 +114,40 @@ export default () => ({
       zIndex: 1,
       borderRadius: boxes.boxBorderRadius,
       elevation: 3,
+    },
+    blurWrapper: {
+      backgroundColor: 'red',
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      height: 45,
+    },
+    blur: {
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      marginTop: -30,
+      zIndex: 2,
+      opacity: 0,
+    },
+    visibleBlur: {
+      opacity: 1,
+      color: 'rgba(255, 255, 255, 0.02)',
+    },
+    blurBig: {
+      width: 150,
+      height: 45,
+      marginLeft: -75,
+    },
+    blurMedium: {
+      width: 116,
+      height: 45,
+      marginLeft: -58,
+    },
+    blurSmall: {
+      width: 91,
+      height: 45,
+      marginLeft: -45,
     },
   },
   [themes.light]: {
