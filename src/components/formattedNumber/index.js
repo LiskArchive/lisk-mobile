@@ -5,7 +5,7 @@ import { Text } from 'react-native';
 const FormattedNumber = ({ val, children, type }) => {
   const Element = type || Text;
   const formatedNumber = numeral(val || children).format('0,0.[0000000000000]');
-  return <Element>{formatedNumber}</Element>;
+  return <Element>{formatedNumber} Ⱡ</Element>;
 };
 
 export default FormattedNumber;
