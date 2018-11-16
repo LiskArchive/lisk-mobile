@@ -87,6 +87,11 @@ export default () => ({
     rowIcon: {
       marginRight: 11,
     },
+    amountBlur: {
+      justifyContent: 'center',
+      textAlign: 'center',
+      flexDirection: 'row',
+    },
   },
 
   [themes.light]: {

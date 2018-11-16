@@ -36,6 +36,7 @@ export default () => ({
       paddingTop: 4,
       width: '100%',
       textAlign: 'right',
+      justifyContent: 'flex-end',
     },
     address: {
       paddingTop: 4,
@@ -99,6 +100,18 @@ export default () => ({
       paddingBottom: 3,
       borderRadius: 2,
       overflow: 'hidden',
+    },
+    blurMedium: {
+      width: 89,
+      height: 45,
+      marginTop: -10,
+      marginRight: -10,
+    },
+    blurSmall: {
+      width: 72,
+      height: 45,
+      marginTop: -10,
+      marginRight: -10,
     },
   },
   [themes.light]: {

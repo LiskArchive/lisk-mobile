@@ -9,16 +9,21 @@ import { B, Small } from '../toolBox/typography';
 import { stringShortener } from '../../utilities/helpers';
 import loadingAnimation from '../../assets/animations/loading-dots.json';
 import transactions from '../../constants/transactions';
+import Blur from './blur';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 class Item extends React.Component {
-  showDetail(tx, account) {
-    this.props.navigate({
+  showDetail = () => {
+    const {
+      navigate, tx, account, incognito,
+    } = this.props;
+
+    navigate({
       routeName: 'TxDetail',
-      params: { tx, account },
+      params: { tx, account, incognito },
     });
   }
 
@@ -29,7 +34,9 @@ class Item extends React.Component {
   }
 
   render() {
-    const { styles, tx, account } = this.props;
+    const {
+      styles, tx, account, incognito,
+    } = this.props;
     let direction = 'incoming';
     let address = tx.senderId;
     let addressShortened = stringShortener(tx.senderId, 10, 3);
@@ -42,7 +49,7 @@ class Item extends React.Component {
 
     return (<TouchableOpacity
       style={[styles.itemContainer, styles.theme.itemContainer]}
-      onPress={this.showDetail.bind(this, tx, account)}>
+      onPress={this.showDetail}>
       <View style={styles.innerContainer}>
       <View style={[styles.itemColumn, styles.avatarContainer]}>
         {
@@ -66,15 +73,19 @@ class Item extends React.Component {
       </View>
       </View>
       <View style={[styles.column, styles.amountWrapper]}>
-      {
-        (tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
-          <B style={[
-            styles.amount, styles.theme.amount,
-            styles[direction], styles.theme[direction],
-          ]}>
-            <FormattedNumber>{amount}</FormattedNumber> Ⱡ
-          </B> : null
-      }
+        {
+          (tx.type === 0 && (tx.recipientId !== tx.senderId)) && !incognito ?
+            <B style={[
+              styles.amount, styles.theme.amount,
+              styles[direction], styles.theme[direction],
+            ]}>
+              <FormattedNumber>{amount}</FormattedNumber>
+            </B> : null
+        }
+        {
+          (tx.type === 0 && (tx.recipientId !== tx.senderId)) && incognito ?
+            <Blur value={amount} direction={direction} /> : null
+        }
         {
           typeof this.props.tx.timestamp !== 'number' ?
             <View style={styles.pendingIcon}>

@@ -4,6 +4,7 @@ import connect from 'redux-connect-decorator';
 import reg from '../../../constants/regex';
 import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
+import FormattedNumber from '../../formattedNumber';
 import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
@@ -134,7 +135,7 @@ class Overview extends React.Component {
           <View style={styles.row}>
             <P style={[styles.label, styles.theme.label]}>Amount (including 0.1 Ⱡ fee)</P>
             <B style={[styles.text, styles.theme.text]}>
-              {`${fromRawLsk(toRawLsk(amount) + 1e7)} Ⱡ`}
+              <FormattedNumber>{fromRawLsk(toRawLsk(amount) + 1e7)}</FormattedNumber>
             </B>
           </View>
           {reference ? <View style={styles.row}>

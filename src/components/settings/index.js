@@ -57,7 +57,7 @@ class Settings extends React.Component {
 
     let target = 'EnableBioAuth';
 
-    const targetStateLabel = ['Off', colors[theme].black];
+    const targetStateLabel = ['Off', theme === themes.light ? colors.light.black : colors.dark.gray4];
     if (settings.sensorType && settings.hasStoredPassphrase) {
       targetStateLabel[0] = 'On';
       targetStateLabel[1] = colors[theme].green;

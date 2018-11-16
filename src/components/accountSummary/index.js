@@ -17,9 +17,20 @@ import easing from '../../utilities/easing';
 import withTheme from '../withTheme';
 import getStyles, { animationRanges } from './styles';
 import { themes } from '../../constants/styleGuide';
+import darkBig from '../../assets/images/balanceBlur/darkBig.png';
+import darkMedium from '../../assets/images/balanceBlur/darkMedium.png';
+import darkSmall from '../../assets/images/balanceBlur/darkSmall.png';
+import lightBig from '../../assets/images/balanceBlur/lightBig.png';
+import lightMedium from '../../assets/images/balanceBlur/lightMedium.png';
+import lightSmall from '../../assets/images/balanceBlur/lightSmall.png';
+
+const blurs = {
+  darkBig, darkMedium, darkSmall, lightBig, lightMedium, lightSmall,
+};
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
+  settings: state.settings,
 }), {
   accountFollowed: accountFollowedAction,
   accountUnFollowed: accountUnFollowedAction,
@@ -82,16 +93,23 @@ class AccountSummary extends React.Component {
   }
 
   render() {
-    const { styles, account, theme } = this.props;
+    const { styles, account, settings } = this.props;
     const Anim = Animated.View;
     const itpl = this.interpolate;
     const { opacity, top } = this.state.initialAnimations;
     const avatarScale = this.createInterpolatedValue([1, 0.85]);
     const avatarTranslate = this.createInterpolatedValue([0, -6]);
+    const normalizedBalance = fromRawLsk(account.balance);
+
+    let balanceSize = 'Small';
+    if (normalizedBalance.length > 6) balanceSize = 'Big';
+    else if (normalizedBalance.length > 2) balanceSize = 'Medium';
+
     return (<View style={this.props.style}>
       <Anim style={[styles.bg, itpl('bg', ['height'])]}>
         {
-          theme === themes.light ? <Image style={styles.bgImage} source={ stripesLight} /> :
+          settings.theme === themes.light ?
+            <Image style={styles.bgImage} source={ stripesLight} /> :
             <Image style={styles.bgImage} source={stripesDark} />
         }
       </Anim>
@@ -111,10 +129,14 @@ class AccountSummary extends React.Component {
           </Anim>
           <Anim onLayout={e => this.setPadding(e, 'balance')}
             style={[styles.balance, { opacity }, itpl('balance', ['top', 'left'])]}>
-            <H2 style={[styles.value, styles.theme.value]}>
-              <FormattedNumber>{fromRawLsk(account.balance)}</FormattedNumber>
-            </H2>
-            <H2 style={[styles.unit, styles.theme.unit]}>Ⱡ</H2>
+            <View style={styles.value}>
+              <FormattedNumber
+                style={[styles.theme.value, settings.incognito ? styles.visibleBlur : null]}
+                type={H2}>{fromRawLsk(account.balance)}</FormattedNumber>
+              <Image source={blurs[`${settings.theme}${balanceSize}`]}
+                style={[styles.blur, styles[`blur${balanceSize}`],
+                settings.incognito ? styles.visibleBlur : null]} />
+            </View>
           </Anim>
           <Anim style={[styles.box, styles.theme.box, itpl('box', ['top', 'height'])]} />
         </Anim> :

@@ -223,7 +223,6 @@ class SendForm extends React.Component {
                     {fromRawLsk(account ? account.balance : 0)}
                   </FormattedNumber>
                 </H2>
-                <H2 style={[styles.unit, styles.theme.unit]}>Ⱡ</H2>
               </View>
             </View>
           </View>
