@@ -150,7 +150,7 @@ class Form extends React.Component {
   }
 
   render() {
-    const { styles } = this.props;
+    const { theme, styles } = this.props;
     const {
       address, amount, reference, avatarPreview,
     } = this.state;
@@ -209,7 +209,7 @@ class Form extends React.Component {
                     style={styles.avatar}
                     name='avatar-placeholder'
                     size={34}
-                    color={colors.light.gray6} />
+                    color={colors[theme].gray5} />
               }
               <Input
                 label='Address'
