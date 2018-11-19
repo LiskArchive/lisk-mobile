@@ -9,6 +9,7 @@ import { B, Small } from '../toolBox/typography';
 import { stringShortener } from '../../utilities/helpers';
 import loadingAnimation from '../../assets/animations/loading-dots.json';
 import transactions from '../../constants/transactions';
+import { themes } from '../../constants/styleGuide';
 import Blur from './blur';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -35,7 +36,7 @@ class Item extends React.Component {
 
   render() {
     const {
-      styles, tx, account, incognito,
+      styles, theme, tx, account, incognito,
     } = this.props;
     let direction = 'incoming';
     let address = tx.senderId;
@@ -47,16 +48,22 @@ class Item extends React.Component {
     }
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
 
+    let image = null;
+    if (tx.type === 0 && (tx.recipientId !== tx.senderId)) {
+      image = <Avatar address={address} size={50} style={styles.theme.avatar} />;
+    } else {
+      image = (theme === themes.light ?
+        <Image source={transactions[txTypes[tx.type]].image(themes.light)} style={styles.image} /> :
+        <Image source={transactions[txTypes[tx.type]].image(themes.dark)} style={styles.image} />
+      );
+    }
+
     return (<TouchableOpacity
       style={[styles.itemContainer, styles.theme.itemContainer]}
       onPress={this.showDetail}>
       <View style={styles.innerContainer}>
       <View style={[styles.itemColumn, styles.avatarContainer]}>
-        {
-          (tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
-          <Avatar address={address} size={50} style={styles.theme.avatar} /> :
-          <Image source={transactions[txTypes[tx.type]].image} style={styles.image} />
-        }
+        {image}
       </View>
       <View style={styles.column}>
         <B style={[styles.address, styles.theme.address]}>
