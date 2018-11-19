@@ -6,15 +6,17 @@ import { colors, themes } from '../../../constants/styleGuide';
 import Icon from '../icon';
 import withTheme from '../../withTheme';
 
-const labelStyle = ({ propsStyle, disabled, styles }) => {
-  const style = [styles.button, styles.labelButton];
+const labelStyle = ({
+  propsStyle, disabled, styles, style,
+}) => {
+  const mergestyle = [styles.button, styles.labelButton];
 
   const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
-  propStylesArr.forEach(element => style.push(element));
+  propStylesArr.forEach(element => mergestyle.push(element));
 
-  if (disabled) style.push(styles.disabledButtonColor);
-
-  return style;
+  if (disabled) mergestyle.push(styles.disabledButtonColor);
+  mergestyle.push(style);
+  return mergestyle;
 };
 
 const primaryStyle = ({ styles, disabled, style }) => {
