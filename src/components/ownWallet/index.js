@@ -106,40 +106,63 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { styles, transactions } = this.props;
+    const { theme, scrollY, footer } = this.state;
+    const {
+      styles,
+      account,
+      transactions,
+      navigation,
+      updateTransactions,
+    } = this.props;
 
-    return (<View style={[styles.container, styles.theme.container]}>
-      {
-        this.props.account ?
-          <AccountSummary
-            scrollY={this.state.scrollY}
-            account={this.props.account}
-            style={styles.accountSummary} /> : null
-      }
-      {
-        (this.state.theme === 'loading') ? <Loading /> : null
-      }
-      {
-        (this.state.theme === 'empty') ? <Empty /> : null
-      }
-      {
-        (this.state.theme === 'list') ? <InfiniteScrollView
+    let content = null;
+
+    if (theme === 'loading') {
+      content = <Loading />;
+    } else {
+      const listContent = theme === 'list' ? (
+        <Transactions
+          transactions={transactions}
+          footer={footer}
+          navigate={navigation.navigate}
+          account={account}
+        />
+      ) : <Empty />;
+
+      const listElements = theme === 'list' ? [
+        ...transactions.pending, ...transactions.confirmed,
+      ] : ['emptyState'];
+
+      content = (
+        <InfiniteScrollView
           ref={(el) => { this.scrollView = el; }}
           scrollEventThrottle={8}
           onScroll={this.onScroll.call(this)}
           style={[styles.scrollView]}
-          theme={this.props.theme}
-          list={[...transactions.pending, ...transactions.confirmed]}
-          count={transactions.count}
-          refresh={this.props.updateTransactions}
-          loadMore={this.loadMore}>
-          <Transactions transactions={transactions}
-            footer={this.state.footer}
-            navigate={this.props.navigation.navigate}
-            account={this.props.account} />
-        </InfiniteScrollView> : null
-      }
-    </View>);
+          refresh={updateTransactions}
+          loadMore={this.loadMore}
+          list={listElements}
+          count={listElements.length}
+        >
+          {listContent}
+        </InfiniteScrollView>
+      );
+    }
+
+    return (
+      <View style={[styles.container, styles.theme.container]}>
+        {
+          account ? (
+            <AccountSummary
+              scrollY={scrollY}
+              account={account}
+              style={styles.accountSummary}
+            />
+          ) : null
+        }
+        {content}
+      </View>
+    );
   }
 }
 
