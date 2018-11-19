@@ -7,8 +7,10 @@ import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
 import SignOutButton from '../signOutButton';
 import { colors, themes } from '../../constants/styleGuide';
+import currencies from '../../constants/currencies';
 import withTheme from '../withTheme';
 import SwitchButton from './switchButton';
+import Picker from '../picker'; // eslint-disable-line
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
@@ -36,6 +38,12 @@ class Settings extends React.Component {
 
   hideDialog = () => {
     this.setState({ show: false });
+  }
+
+  changeCurrency = (currency) => {
+    this.props.settingsUpdated({
+      currency,
+    });
   }
 
   switchTheme = () => {
@@ -144,6 +152,25 @@ class Settings extends React.Component {
             <ItemTitle
               navigation={navigation}
               icon='terms'
+              iconSize={20}
+              title='Currency'
+              targetStateLabel={
+                <Picker
+                  options={currencies}
+                  value={settings.currency}
+                  onChange={this.changeCurrency}
+                  valueWrapper={P}
+                  valueStyle={{
+                    color: theme === themes.light ? colors.light.black : colors.dark.gray4,
+                  }}
+                />
+              }
+              onPress={this.showCurrencySelector} />
+          </View>
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              navigation={navigation}
+              icon='terms'
               target='Terms'
               iconSize={20}
               title='Terms of use'/>
@@ -156,7 +183,8 @@ class Settings extends React.Component {
           Platform.OS === 'android' ?
           <FingerprintOverlay error={this.state.error} show={this.state.show} /> : null
         }
-      </View>);
+      </View>
+    );
   }
 }
 
