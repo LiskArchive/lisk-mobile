@@ -19,7 +19,7 @@ const labelStyle = ({
   return mergestyle;
 };
 
-const primaryStyle = ({ styles, disabled, style }) => {
+const primaryStyle = ({ styles, disabled }) => {
   const mergestyle = [
     styles.button,
     styles.primaryButton,
@@ -29,7 +29,6 @@ const primaryStyle = ({ styles, disabled, style }) => {
     mergestyle.push(styles.disabledButtonColor);
     mergestyle.push(styles.theme.disabledButtonColor);
   }
-  mergestyle.push(style);
   return mergestyle;
 };
 
