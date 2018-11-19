@@ -164,8 +164,7 @@ class Settings extends React.Component {
                     color: theme === themes.light ? colors.light.black : colors.dark.gray4,
                   }}
                 />
-              }
-              onPress={this.showCurrencySelector} />
+              } />
           </View>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
