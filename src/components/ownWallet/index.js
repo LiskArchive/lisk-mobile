@@ -40,33 +40,34 @@ class Wallet extends React.Component {
   scrollView = null;
 
   componentDidMount() {
-    const { navigation, transactionsLoaded, account } = this.props;
+    const { transactionsLoaded, account } = this.props;
     transactionsLoaded({
       senderIdOrRecipientId: account.address,
       offset: 0,
     });
-    navigation.setParams({
-      scrollToTop: () => {
-        if (this.scrollView) {
-          this.scrollView.scrollTo(0);
-        }
-      },
-    });
     this.initialAnimation();
   }
 
-  componentDidUpdate(prevProps) {
-    const { theme } = this.state;
-    const { pending, confirmed } = this.props.transactions;
+  componentDidUpdate() {
+    let { theme } = this.state;
+    const { navigation, transactions: { pending, confirmed } } = this.props;
     const transactionCount = pending.length + confirmed.length;
-    const previousTransactionCount = (
-      prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
-    );
 
-    if ((theme === 'empty' || theme === 'loading') && transactionCount !== previousTransactionCount) {
+    if ((theme === 'loading') || (theme === 'empty' && transactionCount > 0)) {
+      theme = transactionCount === 0 ? 'empty' : 'list';
       this.setState({
-        theme: transactionCount === 0 ? 'empty' : 'list',
+        theme,
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount,
+      }, () => {
+        if (theme === 'list' && !navigation.getParam('scrollToTop', false)) {
+          navigation.setParams({
+            scrollToTop: () => {
+              if (this.scrollView) {
+                this.scrollView.scrollTo(0);
+              }
+            },
+          });
+        }
       });
     }
   }
