@@ -1,38 +1,50 @@
+import { themes } from './styleGuide';
 
-import accountInitialization from '../assets/images/txDetail/accountInitialization2x.png';
-import registerDelegate from '../assets/images/txDetail/registerDelegate2x.png';
-import setSecondPassphrase from '../assets/images/txDetail/setSecondPassphrase2x.png';
-import vote from '../assets/images/txDetail/vote2x.png';
+import accountInitializationLight from '../assets/images/txDetail/accountInitialization3xLight.png';
+import accountInitializationDark from '../assets/images/txDetail/accountInitialization3xDark.png';
+
+import setSecondPassphraseLight from '../assets/images/txDetail/setSecondPassphrase3xLight.png';
+import setSecondPassphraseDark from '../assets/images/txDetail/setSecondPassphrase3xDark.png';
+
+import registerDelegateLight from '../assets/images/txDetail/registerDelegate3xLight.png';
+import registerDelegateDark from '../assets/images/txDetail/registerDelegate3xDark.png';
+
+import voteLight from '../assets/images/txDetail/vote3xLight.png';
+import voteDark from '../assets/images/txDetail/vote3xDark.png';
 
 export default {
   send: {
     type: 0,
     fee: 1e7,
     title: 'Transfer',
-    image: null,
+    image: () => null,
   },
   accountInitialization: {
     type: 0,
     fee: 1e7,
     title: 'Account initialization',
-    image: accountInitialization,
+    image: theme => (
+      theme === themes.light ?
+        accountInitializationLight :
+        accountInitializationDark
+    ),
   },
   setSecondPassphrase: {
     type: 1,
     fee: 5e8,
     title: 'Second passphrase registration',
-    image: setSecondPassphrase,
+    image: theme => (theme === themes.light ? setSecondPassphraseLight : setSecondPassphraseDark),
   },
   registerDelegate: {
     type: 2,
     fee: 25e8,
     title: 'Delegate registration',
-    image: registerDelegate,
+    image: theme => (theme === themes.light ? registerDelegateLight : registerDelegateDark),
   },
   vote: {
     type: 3,
     fee: 1e8,
     title: 'Vote',
-    image: vote,
+    image: theme => (theme === themes.light ? voteLight : voteDark),
   },
 };

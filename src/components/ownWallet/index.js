@@ -55,20 +55,21 @@ class Wallet extends React.Component {
 
     if ((theme === 'loading') || (theme === 'empty' && transactionCount > 0)) {
       theme = transactionCount === 0 ? 'empty' : 'list';
+
       this.setState({
         theme,
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount,
-      }, () => {
-        if (theme === 'list' && !navigation.getParam('scrollToTop', false)) {
-          navigation.setParams({
-            scrollToTop: () => {
-              if (this.scrollView) {
-                this.scrollView.scrollTo(0);
-              }
-            },
-          });
-        }
       });
+
+      if (theme === 'list' && !navigation.getParam('scrollToTop', false)) {
+        navigation.setParams({
+          scrollToTop: () => {
+            if (this.scrollView) {
+              this.scrollView.scrollTo(0);
+            }
+          },
+        });
+      }
     }
   }
 
