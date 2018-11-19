@@ -1,20 +1,26 @@
 import actionTypes from '../../constants/actions';
+import currencies from '../../constants/currencies';
+import { merge } from '../../utilities/helpers';
 import { themes } from '../../constants/styleGuide';
 
+export const INITIAL_STATE = {
+  theme: themes.light,
+  currency: currencies[0],
+};
+
 /**
- * This reducer is designed to store and retrieve the required data
- * for displaying a loader spinner in a desired order
+ * This reducer is designed to store and retrieve the saved data
+ * for app general settings.
  *
- * @param {Array} state - An array of strings as ID value of each
- * action calling the loader
+ * @param {objec} state, initial state
  *
  * @returns {Object} The latest state
  */
-const settings = (state = { theme: themes.light }, action = {}) => {
+const settings = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case actionTypes.settingsUpdated:
     case actionTypes.settingsRetrieved:
-      return Object.assign({}, state, action.data);
+      return merge(state, action.data);
     default:
       return state;
   }
