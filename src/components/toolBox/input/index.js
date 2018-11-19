@@ -13,7 +13,8 @@ import getStyles from './styles';
  * @param {Number} props.size - THe size of the icon in pixels, defaults to 35
  */
 const Input = ({
-  label, reference, styles, innerStyles = {}, value, onChange, error,
+  reference = () => {}, innerStyles = {},
+  label, styles, value, onChange, error,
   multiline, onFocus, autoFocus, onBlur, autoCorrect,
   keyboardType, secureTextEntry,
 }) => {

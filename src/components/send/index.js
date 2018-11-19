@@ -13,6 +13,7 @@ import getStyles from './styles';
 
 @connect(state => ({
   account: state.accounts.active,
+  settings: state.settings,
 }), {})
 class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -66,7 +67,8 @@ class Send extends React.Component {
   }
 
   render() {
-    const { styles, navigation } = this.props;
+    const { styles, navigation, settings } = this.props;
+
     return (
       <MultiStep
         ref={(el) => { this.nav = el; }}
@@ -74,7 +76,12 @@ class Send extends React.Component {
         finalCallback={this.finalCallback}
       >
         <Recipient title='form' navigation={navigation} />
-        <Amount title='amount' navigation={navigation} />
+        <Amount
+          title='amount'
+          navigation={navigation}
+          currency={settings.currency}
+        />
+        <Form title='form' navigation={navigation} />
         <Confirm title='confirm' navigation={navigation} />
         <Overview title='overview' navigation={navigation} />
         <Result title='result' navigation={navigation} />
