@@ -131,16 +131,16 @@ const IconButton = (props) => {
   </TouchableHighlight>);
 };
 
-const pb = withTheme(PrimaryButton, getStyles());
-const sb = withTheme(SecondaryButton, getStyles());
-const lb = withTheme(LabelButton, getStyles());
-const ib = withTheme(IconButton, getStyles());
-const b = withTheme(Button, getStyles());
+const ThemedPrimaryButton = withTheme(PrimaryButton, getStyles());
+const ThemedSecondaryButton = withTheme(SecondaryButton, getStyles());
+const ThemedLabelButton = withTheme(LabelButton, getStyles());
+const ThemedIconButton = withTheme(IconButton, getStyles());
+const ThemedButton = withTheme(Button, getStyles());
 
 export {
-  pb as PrimaryButton,
-  sb as SecondaryButton,
-  lb as LabelButton,
-  ib as IconButton,
-  b as Button,
+  ThemedPrimaryButton as PrimaryButton,
+  ThemedSecondaryButton as SecondaryButton,
+  ThemedLabelButton as LabelButton,
+  ThemedIconButton as IconButton,
+  ThemedButton as Button,
 };
