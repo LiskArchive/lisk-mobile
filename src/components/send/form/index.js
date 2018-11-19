@@ -51,7 +51,7 @@ class SendForm extends React.Component {
     },
     reference: {
       value: '',
-      validity: -1,
+      validity: 0,
     },
     secondaryButtonOpacity: 1,
     avatarPreview: true,

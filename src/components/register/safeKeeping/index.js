@@ -56,6 +56,7 @@ class SafeKeeping extends React.Component {
         <View>
           <SecondaryButton
             style={styles.button}
+            noTheme={true}
             onClick={() => {
               this.props.nextStep({
                 passphrase: this.props.passphrase,

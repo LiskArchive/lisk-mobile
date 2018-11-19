@@ -182,6 +182,7 @@ class Confirm extends React.Component {
         <View>
           <SecondaryButton
             disabled={this.state.buttonStatus}
+            noTheme={true}
             style={styles.button}
             onClick={() => {
               this.props.nextStep({
