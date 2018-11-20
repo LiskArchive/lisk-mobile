@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavigationActions } from 'react-navigation';
+import { removePassphraseFromKeyChain } from '../../utilities/passphrase';
 import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
@@ -9,6 +10,7 @@ class SignOutButton extends React.Component {
   onClick = () => {
     // clean active account
     this.props.signOut();
+    removePassphraseFromKeyChain();
 
     // navigate to the signIn page
     this.props.navigation
