@@ -21,6 +21,13 @@ const accounts = (state = { active: null, followed: [] }, action = {}) => {
       return merge(state, { active: null });
     case actionTypes.accountSignedIn:
       return merge(state, { active: action.data });
+    case actionTypes.accountEdited:
+      return merge(state, {
+        followed: state.followed.map((item) => {
+          if (item.address === action.data.address) return action.data;
+          return item;
+        }),
+      });
     case actionTypes.accountFollowed:
       return merge(state, {
         followed: [...state.followed.filter(item =>
