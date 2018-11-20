@@ -10,7 +10,7 @@ export default () => ({
     },
     innerContainer: {
       flexDirection: 'column',
-      justifyContent: 'space-between',
+      // justifyContent: 'space-between',
       paddingBottom: 24,
     },
     titleContainer: {
@@ -27,32 +27,6 @@ export default () => ({
     headings: {
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
-    },
-    balanceWrapper: {
-      borderTopWidth: 1,
-      borderBottomWidth: 1,
-      borderLeftWidth: 0,
-      borderRightWidth: 0,
-      marginTop: 20,
-      paddingTop: 10,
-      paddingBottom: 16,
-      paddingRight: boxes.boxPadding,
-      paddingLeft: boxes.boxPadding,
-    },
-    balanceValue: {
-      width: '100%',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      paddingTop: 8,
-    },
-    number: {
-      lineHeight: 25,
-    },
-    unit: {
-      lineHeight: 25,
-      marginLeft: 5,
-      marginTop: -3,
     },
     preview: {
       position: 'absolute',
@@ -175,15 +149,6 @@ export default () => ({
     subtitle: {
       color: colors.light.gray2,
     },
-    balanceWrapper: {
-      borderColor: colors.light.gray5,
-    },
-    number: {
-      color: colors.light.blue,
-    },
-    unit: {
-      color: colors.light.blue,
-    },
     scanButtonTitle: {
       color: colors.light.blue,
     },
@@ -200,16 +165,6 @@ export default () => ({
     },
     subtitle: {
       color: colors.dark.gray4,
-    },
-    balanceWrapper: {
-      borderColor: colors.dark.tabBarBgNavy,
-      backgroundColor: colors.dark.tabBarBgNavy,
-    },
-    number: {
-      color: colors.dark.white,
-    },
-    unit: {
-      color: colors.dark.white,
     },
     title: {
       color: colors.dark.white,
