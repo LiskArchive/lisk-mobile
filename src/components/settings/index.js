@@ -7,10 +7,8 @@ import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
 import SignOutButton from '../signOutButton';
 import { colors, themes } from '../../constants/styleGuide';
-import currencies from '../../constants/currencies';
 import withTheme from '../withTheme';
 import SwitchButton from './switchButton';
-import Picker from '../picker'; // eslint-disable-line
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
@@ -38,12 +36,6 @@ class Settings extends React.Component {
 
   hideDialog = () => {
     this.setState({ show: false });
-  }
-
-  changeCurrency = (currency) => {
-    this.props.settingsUpdated({
-      currency,
-    });
   }
 
   switchTheme = () => {
@@ -154,17 +146,13 @@ class Settings extends React.Component {
               icon='terms'
               iconSize={20}
               title='Currency'
+              target='CurrencySelection'
               targetStateLabel={
-                <Picker
-                  options={currencies}
-                  value={settings.currency}
-                  onChange={this.changeCurrency}
-                  valueWrapper={P}
-                  valueStyle={{
-                    color: theme === themes.light ? colors.light.black : colors.dark.gray4,
-                  }}
-                />
-              } />
+                <P style={{ color: colors[theme].gray1 }}>
+                  {settings.currency}
+                </P>
+              }
+            />
           </View>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle

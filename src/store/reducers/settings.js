@@ -1,11 +1,11 @@
 import actionTypes from '../../constants/actions';
-import currencies from '../../constants/currencies';
+import { currencyKeys } from '../../constants/currencies';
 import { merge } from '../../utilities/helpers';
 import { themes } from '../../constants/styleGuide';
 
 export const INITIAL_STATE = {
   theme: themes.light,
-  currency: currencies[0],
+  currency: currencyKeys[0],
 };
 
 /**
