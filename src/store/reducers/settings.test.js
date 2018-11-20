@@ -1,7 +1,5 @@
-import settings from './settings';
+import settings, { INITIAL_STATE } from './settings';
 import actionTypes from '../../constants/actions';
-import { themes } from '../../constants/styleGuide';
-
 
 describe('Reducers: Settings', () => {
   let state;
@@ -12,8 +10,7 @@ describe('Reducers: Settings', () => {
 
   it('should create the empty state initially', () => {
     const createdState = settings();
-    const emptyState = { theme: themes.light };
-    expect(createdState).toEqual(emptyState);
+    expect(createdState).toEqual(INITIAL_STATE);
   });
 
   it('should return updated state in case of actionTypes.settingsUpdated', () => {
@@ -29,4 +26,3 @@ describe('Reducers: Settings', () => {
     });
   });
 });
-

@@ -10,6 +10,7 @@ import Request from '../request';
 import OwnWallet from '../ownWallet';
 import Settings from '../settings';
 import About from '../about';
+import CurrencySelection from '../currencySelection';
 import Terms from '../terms';
 import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
@@ -175,6 +176,30 @@ export default StackNavigator(
     },
     Terms: {
       screen: Terms,
+      navigationOptions: ({ navigation }) => ({
+        headerBackground: <Bg />,
+        title: <Logo />,
+        headerRight: placeHolderButton,
+        headerLeft: <IconButton
+          icon='back'
+          title=''
+          onPress={() => navigation.pop()}
+          style={styles.back}
+          iconButtonTitle={styles.backTitle}
+          color={colors.light.white} />,
+        headerTintColor: colors.light.white,
+        headerStyle: {
+          backgroundColor: colors.light.blue,
+          overflow: 'hidden',
+        },
+        headerTitleStyle: {
+          textAlign: 'center',
+          flex: 1,
+        },
+      }),
+    },
+    CurrencySelection: {
+      screen: CurrencySelection,
       navigationOptions: ({ navigation }) => ({
         headerBackground: <Bg />,
         title: <Logo />,

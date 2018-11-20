@@ -144,6 +144,20 @@ class Settings extends React.Component {
             <ItemTitle
               navigation={navigation}
               icon='terms'
+              iconSize={20}
+              title='Currency'
+              target='CurrencySelection'
+              targetStateLabel={
+                <P style={{ color: colors[theme].gray1 }}>
+                  {settings.currency}
+                </P>
+              }
+            />
+          </View>
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              navigation={navigation}
+              icon='terms'
               target='Terms'
               iconSize={20}
               title='Terms of use'/>
@@ -156,7 +170,8 @@ class Settings extends React.Component {
           Platform.OS === 'android' ?
           <FingerprintOverlay error={this.state.error} show={this.state.show} /> : null
         }
-      </View>);
+      </View>
+    );
   }
 }
 
