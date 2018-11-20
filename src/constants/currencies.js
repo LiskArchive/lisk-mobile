@@ -1,11 +1,11 @@
 export const currencyMap = {
   EUR: {
     symbol: '€',
-    label: 'Euro',
+    label: 'EUR',
   },
   USD: {
     symbol: '$',
-    label: 'US Dollar',
+    label: 'USD',
   },
 };
 

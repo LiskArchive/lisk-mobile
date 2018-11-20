@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, FlatList } from 'react-native';
+import { View, TouchableHighlight, FlatList } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { H1, P, B } from '../toolBox/typography';
+import { H1, P } from '../toolBox/typography';
+import Icon from '../toolBox/icon';
 import { currencyMap, currencyKeys } from '../../constants/currencies';
 import { settingsUpdated as settingsUpdatedAction } from '../../actions/settings';
+import { colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -13,42 +15,45 @@ import getStyles from './styles';
   settingsUpdated: settingsUpdatedAction,
 })
 class CurrencySelection extends React.Component {
-  onSelect = currencyKey => this.props.settingsUpdated({
-    currency: currencyKey,
-  })
+  onSelect = currency => this.props.settingsUpdated({ currency })
 
   render() {
-    const { styles, settings: { currency } } = this.props;
+    const { styles, theme, settings: { currency } } = this.props;
 
     return (
       <View style={[styles.container, styles.theme.container]}>
-        <H1 style={styles.theme.header}>
-          Select Your Currency
+        <H1 style={[styles.header, styles.theme.header]}>
+          Select your currency
         </H1>
-
-        <B style={[styles.subHeader, styles.theme.subHeader]}>
-          It will be shown across the app.
-        </B>
 
         <FlatList
           extraData={currency}
           data={currencyKeys}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => this.onSelect(item)}>
+            <TouchableHighlight
+              onPress={() => this.onSelect(item)}
+              underlayColor={colors[theme].boxBg}
+            >
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
-                <P style={[styles.itemSymbol, styles.theme.itemSymbol]}>
-                  {currencyMap[item].symbol}
-                </P>
-
-                <P style={[styles.itemLabel, styles.theme.itemLabel]}>
+                <P style={styles.theme.itemLabel}>
                   {currencyMap[item].label}
                 </P>
 
-                <P style={[styles.itemSelection, styles.theme.itemSelection]}>
-                  {currency === item ? 'TICK' : ''}
-                </P>
+                <View style={styles.itemSelection}>
+                  {currency === item ? (
+                    <Icon
+                      name="checkmark"
+                      color={colors[theme].blue}
+                      size={20}
+                      style={{
+                        width: 26,
+                        height: 20,
+                      }}
+                    />
+                  ) : null}
+                </View>
               </View>
-            </TouchableOpacity>
+            </TouchableHighlight>
           )}
         />
       </View>

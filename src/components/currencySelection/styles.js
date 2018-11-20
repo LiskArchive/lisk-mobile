@@ -6,8 +6,7 @@ export default () => ({
       flex: 1,
       padding: 20,
     },
-    subHeader: {
-      marginTop: 8,
+    header: {
       marginBottom: 16,
     },
     itemContainer: {
@@ -15,14 +14,9 @@ export default () => ({
       alignItems: 'center',
       paddingTop: 12,
       paddingBottom: 12,
-      paddingLeft: 2,
-      paddingRight: 2,
+      paddingLeft: 3,
+      paddingRight: 3,
       borderBottomWidth: 1,
-    },
-    itemSymbol: {
-    },
-    itemLabel: {
-      paddingLeft: 8,
     },
     itemSelection: {
       marginLeft: 'auto',
@@ -36,14 +30,8 @@ export default () => ({
     header: {
       color: colors.light.black,
     },
-    subHeader: {
-      color: colors.light.gray2,
-    },
     itemContainer: {
       borderBottomColor: colors.light.gray5,
-    },
-    itemSymbol: {
-      color: colors.light.black,
     },
     itemLabel: {
       color: colors.light.black,
@@ -60,14 +48,8 @@ export default () => ({
     header: {
       color: colors.dark.white,
     },
-    subHeader: {
-      color: colors.dark.gray1,
-    },
     itemContainer: {
       borderBottomColor: colors.dark.gray5,
-    },
-    itemSymbol: {
-      color: colors.dark.white,
     },
     itemLabel: {
       color: colors.dark.white,
