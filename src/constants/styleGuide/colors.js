@@ -22,6 +22,7 @@ const light = {
   gray6: '#f9fbfd',
   incomingBg: '#E4F5F1',
   boxBg: '#F5FBFE',
+  sendBalanceBg: '#EFF4F9',
 };
 
 const dark = {
@@ -40,6 +41,7 @@ const dark = {
   screenBgNavy: '#01071E',
   incomingBg: '#0B2131',
   boxBg: '#011832',
+  sendBalanceBg: '#011832',
 };
 
 export default {
