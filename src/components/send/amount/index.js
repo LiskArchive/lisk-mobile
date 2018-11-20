@@ -1,7 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import liskService from '../../../utilities/api/liskService';
+import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
+import transactions from '../../../constants/transactions';
+import { fromRawLsk } from '../../../utilities/conversions';
+import { B, P, H1 } from '../../toolBox/typography';
+import FormattedNumber from '../../formattedNumber';
+import reg from '../../../constants/regex';
 import Input from './input';
+import withTheme from '../../withTheme';
+import getStyles from './styles';
 
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
@@ -14,13 +22,18 @@ class Amount extends React.Component {
     priceTicker: {},
   };
 
-  componentDidMount() {
-    const { value } = this.props;
-    this.getPriceTicker();
+  validate = (str) => {
+    const { account } = this.props;
+    if (str === '') return -1;
+    return (
+      reg.amount.test(str) && account &&
+      account.balance > transactions.send.fee &&
+      parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)
+    ) ? 0 : 1;
+  };
 
-    if (value) {
-      this.onChange(value);
-    }
+  componentDidMount() {
+    this.getPriceTicker();
   }
 
   getPriceTicker = () => {
@@ -45,31 +58,73 @@ class Amount extends React.Component {
     this.setState({
       amount: {
         value,
-        validity: 0,
+        validity: this.validate(value),
         valueInCurrency,
       },
     });
   }
 
+  onSubmit = () => {
+    /*
+    const stepData = {
+      amount: this.state.amount.value,
+    };
+    */
+
+    // @TODO: Call this.props.move with stepData and to
+  }
+
   render() {
-    const { currency } = this.props;
+    const { styles, account, currency } = this.props;
     const { amount: { value, validity, valueInCurrency } } = this.state;
 
     return (
-      <View>
-        <Text>
-          {currency} {validity} {valueInCurrency}
-        </Text>
+      <View style={[styles.wrapper, styles.theme.wrapper]}>
+        <KeyboardAwareScrollView
+          disabled={validity !== 0}
+          onSubmit={this.onSubmit}
+          styles={{ innerContainer: styles.innerContainer }}
+          hasTabBar={true}
+          button={{
+            title: 'Continue',
+            type: 'inBox',
+          }}
+        >
+          <View>
+            <View style={styles.headerContainer}>
+              <H1 style={[styles.header, styles.theme.header]}>
+                Sending Lisk
+              </H1>
+              <P style={[styles.subHeader, styles.theme.subHeader]}>
+                Enter the amount of your transaction.
+              </P>
+            </View>
 
-        <Input
-          label="Amount (LSK)"
-          value={value}
-          onChange={this.onChange}
-          keyboardType="numeric"
-        />
+            <View style={[styles.balanceContainer, styles.theme.balanceContainer]}>
+              <B style={[styles.balanceText, styles.theme.balanceText]}>
+                {'You have '}
+              </B>
+              <B style={[styles.balanceNumber, styles.theme.balanceNumber]}>
+                <FormattedNumber>
+                  {fromRawLsk(account ? account.balance : 0)}
+                </FormattedNumber>
+              </B>
+            </View>
+
+            <Input
+              label="AMOUNT (LSK)"
+              value={value}
+              onChange={this.onChange}
+              keyboardType="numeric"
+              currency={currency}
+              valueInCurrency={valueInCurrency}
+              error={validity === 1 ? 'Invalid amount value' : ''}
+            />
+          </View>
+        </KeyboardAwareScrollView>
       </View>
     );
   }
 }
 
-export default Amount;
+export default withTheme(Amount, getStyles());
