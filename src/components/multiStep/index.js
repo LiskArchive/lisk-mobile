@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './navigator';
 import { Element } from './element';
 import { getStyles } from './utils';
+import { merge } from '../../utilities/helpers';
 
 /**
  *
@@ -22,15 +23,12 @@ import { getStyles } from './utils';
  *
  */
 class MultiStep extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      data: [{}],
-      current: 0,
-      origin: 0,
-    };
-  }
+  state = {
+    initialData: {},
+    data: [{}],
+    current: 0,
+    origin: 0,
+  };
 
   next = (data) => {
     this.move({ moves: 1, stepData: data });
@@ -50,8 +48,8 @@ class MultiStep extends React.Component {
     this.move({ moves });
   }
 
-  reset = () => {
-    this.move({ to: 0, reset: true });
+  reset = ({ initialData = {} }) => {
+    this.move({ to: 0, reset: true, initialData });
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -66,7 +64,7 @@ class MultiStep extends React.Component {
 
   // eslint-disable-next-line class-methods-use-this
   setData(dataList, reset, stepData, target) {
-    let newDataList = Object.assign({}, dataList);
+    let newDataList = merge({}, dataList);
     if (reset) {
       newDataList = [{}];
     } else {
@@ -77,7 +75,7 @@ class MultiStep extends React.Component {
   }
 
   move = ({
-    moves, to, stepData, reset,
+    moves, to, stepData, reset, initialData,
   }) => {
     const { current, data } = this.state;
     const origin = current;
@@ -85,7 +83,12 @@ class MultiStep extends React.Component {
 
     const next = this.keepTargetInRange(to, moves, current, children.length);
     const nextData = this.setData(data, reset, stepData, next);
-    this.setState({ current: next, data: nextData, origin });
+    this.setState({
+      current: next,
+      data: nextData,
+      origin,
+      initialData: initialData || this.state.initialData,
+    });
   }
 
   render() {
@@ -94,11 +97,16 @@ class MultiStep extends React.Component {
       interactive, backButton, prevPage, hideGroups, hideSteps,
       activeTitle, navigatorButton, groupButton, stepButton,
     } = this.props;
-    const { data, current, origin } = this.state;
+
+    const {
+      data, current, origin, initialData,
+    } = this.state;
+
     const extraProps = {
       nextStep: this.next,
       move: this.move,
       prevStep: this.prev,
+      initialData,
       ...data[current],
     };
 
@@ -108,7 +116,7 @@ class MultiStep extends React.Component {
       }
       extraProps.reset = this.reset;
     } else {
-      extraProps.prevState = Object.assign({}, data[origin]);
+      extraProps.prevState = merge({}, data[origin]);
     }
 
     const normalizedStyles = getStyles(navStyles);
