@@ -40,16 +40,9 @@ class Send extends React.Component {
 
   componentDidMount() {
     const { styles, navigation } = this.props;
-    this.subs = [navigation.addListener('didFocus', this.didFocus)];
     navigation.setParams({ showButtonLeft: false, styles });
-  }
 
-  componentWillUnmount() {
-    this.subs.forEach(sub => sub.remove());
-  }
-
-  didFocus = () => {
-    if (this.props.navigation.getParam('initialize', false)) {
+    if (navigation.getParam('initialze', false)) {
       this.nav.move({
         to: 2,
         stepData: {
@@ -58,8 +51,21 @@ class Send extends React.Component {
           reference: 'Account initialization',
         },
       });
-    } else {
-      this.nav.reset();
+    } else if (navigation.state.params && navigation.state.params.query) {
+      this.nav.reset({
+        initialData: navigation.state.params.query,
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { navigation: { state: { params = {} } } } = this.props;
+    const prevParams = (prevProps.navigation.state ? prevProps.navigation.state.params : {});
+
+    if (params.query && (prevParams.query !== params.query)) {
+      this.nav.reset({
+        initialData: params.query,
+      });
     }
   }
 
