@@ -87,7 +87,6 @@ class Send extends React.Component {
           currency={settings.currency}
           account={account}
         />
-        <Form title='form' navigation={navigation} />
         <Confirm title='confirm' navigation={navigation} />
         <Overview title='overview' navigation={navigation} />
         <Result title='result' navigation={navigation} />

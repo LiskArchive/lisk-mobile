@@ -2,9 +2,6 @@ import { themes, colors, fonts } from '../../../../constants/styleGuide';
 
 export default () => ({
   common: {
-    inputLabel: {
-      fontSize: fonts.size.input,
-    },
     input: {
       fontSize: fonts.size.h1,
     },

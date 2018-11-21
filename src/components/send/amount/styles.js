@@ -2,8 +2,6 @@ import { themes, colors, boxes } from '../../../constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {},
-    container: {},
     innerContainer: {
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -14,23 +12,30 @@ export default () => ({
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
     },
+    subHeader: {
+      marginTop: 5,
+    },
     balanceContainer: {
       marginTop: 20,
-      marginBottom: 5,
       paddingTop: 18,
       paddingBottom: 18,
       paddingRight: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
       flexDirection: 'row',
     },
-    subHeader: {
-      marginTop: 5,
-    },
     balanceText: {
       fontSize: 14,
     },
     balanceNumber: {
       fontSize: 14,
+    },
+    form: {
+      marginTop: 5,
+    },
+    input: {
+      marginTop: 0,
+      flexWrap: 'wrap',
+      flex: 1,
     },
   },
 

@@ -7,7 +7,7 @@ import { fromRawLsk } from '../../../utilities/conversions';
 import { B, P, H1 } from '../../toolBox/typography';
 import FormattedNumber from '../../formattedNumber';
 import reg from '../../../constants/regex';
-import Input from './input';
+import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 
@@ -34,6 +34,15 @@ class Amount extends React.Component {
   };
 
   componentDidMount() {
+    // will be working after #379
+    const initialValue = (
+      this.props.prevState.amount || ((this.props.initialData || {}).amount)
+    );
+
+    if (initialValue) {
+      this.onChange(initialValue);
+    }
+
     this.getPriceTicker();
   }
 
@@ -55,28 +64,28 @@ class Amount extends React.Component {
     const { currency } = this.props;
     const { priceTicker } = this.state;
     let valueInCurrency = 0;
+    const normalizedValue = value.replace(/[^0-9]/g, '.');
 
     if (priceTicker[currency]) {
-      valueInCurrency = (value * priceTicker[currency]).toFixed(2);
+      valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
     }
 
     this.setState({
       amount: {
         value,
-        validity: this.validate(value),
+        validity: this.validate(normalizedValue),
         valueInCurrency,
       },
     });
   }
 
   onSubmit = () => {
-    /*
-    const stepData = {
-      amount: this.state.amount.value,
-    };
-    */
-
-    // @TODO: Call this.props.move with stepData and to
+    this.props.move({
+      to: 4,
+      stepData: {
+        amount: this.state.amount.value,
+      },
+    });
   }
 
   render() {
@@ -84,7 +93,7 @@ class Amount extends React.Component {
     const { amount: { value, validity, valueInCurrency } } = this.state;
 
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
+      <View style={styles.theme.wrapper}>
         <KeyboardAwareScrollView
           disabled={validity !== 0}
           onSubmit={this.onSubmit}
@@ -116,16 +125,18 @@ class Amount extends React.Component {
               </B>
             </View>
 
-            <Input
-              label="AMOUNT (LSK)"
-              value={value}
-              onChange={this.onChange}
-              keyboardType="numeric"
-              currency={currency}
-              valueInCurrency={valueInCurrency}
-              error={validity === 1 ? 'Invalid amount value' : ''}
-            />
-          </View>
+            <View style={styles.form}>
+              <AmountInput
+                label="Amount (LSK)"
+                value={value}
+                onChange={this.onChange}
+                keyboardType="numeric"
+                currency={currency}
+                valueInCurrency={valueInCurrency}
+                error={validity === 1 ? 'Invalid amount value' : ''}
+              />
+            </View>
+           </View>
         </KeyboardAwareScrollView>
       </View>
     );
