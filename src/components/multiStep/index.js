@@ -30,6 +30,10 @@ class MultiStep extends React.Component {
     origin: 0,
   };
 
+  setInitialData = (initialData) => {
+    this.setState({ initialData });
+  }
+
   next = (data) => {
     this.move({ moves: 1, stepData: data });
   }
@@ -107,6 +111,7 @@ class MultiStep extends React.Component {
       move: this.move,
       prevStep: this.prev,
       initialData,
+      setInitialData: this.setInitialData,
       ...data[current],
     };
 
