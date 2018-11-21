@@ -67,7 +67,12 @@ class Send extends React.Component {
   }
 
   render() {
-    const { styles, navigation, settings } = this.props;
+    const {
+      styles,
+      account,
+      navigation,
+      settings,
+    } = this.props;
 
     return (
       <MultiStep
@@ -80,6 +85,7 @@ class Send extends React.Component {
           title='amount'
           navigation={navigation}
           currency={settings.currency}
+          account={account}
         />
         <Form title='form' navigation={navigation} />
         <Confirm title='confirm' navigation={navigation} />

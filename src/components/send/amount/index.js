@@ -13,9 +13,10 @@ import getStyles from './styles';
 
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
+  maxLength = 10
   state = {
     amount: {
-      value: 0,
+      value: '',
       validity: -1,
       valueInCurrency: 0,
     },
@@ -43,7 +44,11 @@ class Amount extends React.Component {
   }
 
   onChange = (value) => {
-    if (value > this.maxLSKSupply) {
+    if (value && (
+      value > this.maxLSKSupply ||
+      value.length > this.maxLength ||
+      Number.isNaN(parseFloat(value))
+    )) {
       return;
     }
 
@@ -93,10 +98,10 @@ class Amount extends React.Component {
           <View>
             <View style={styles.headerContainer}>
               <H1 style={[styles.header, styles.theme.header]}>
-                Sending Lisk
+                Send Lisk
               </H1>
               <P style={[styles.subHeader, styles.theme.subHeader]}>
-                Enter the amount of your transaction.
+                Enter the amount you want to send.
               </P>
             </View>
 

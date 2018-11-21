@@ -3,19 +3,19 @@ import { themes, colors, fonts } from '../../../../constants/styleGuide';
 export default () => ({
   common: {
     inputLabel: {
-      fontSize: 13,
+      fontSize: fonts.size.input,
     },
     input: {
-      fontSize: 32,
+      fontSize: fonts.size.h1,
     },
     currencyContainer: {
       position: 'absolute',
       zIndex: 99,
       right: 20,
-      top: 58,
+      top: 57,
     },
     currencyText: {
-      fontSize: 13,
+      fontSize: fonts.size.input,
       fontFamily: fonts.family.contextLight,
     },
   },
