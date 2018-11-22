@@ -1,7 +1,8 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import MultiStep from '../multiStep';
-import Form from './recipient';
+import Recipient from './recipient';
+import Amount from './amount';
 import Overview from './overview';
 import Confirm from './confirm';
 import Result from './result';
@@ -12,6 +13,7 @@ import getStyles from './styles';
 
 @connect(state => ({
   account: state.accounts.active,
+  settings: state.settings,
 }), {})
 class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -65,14 +67,26 @@ class Send extends React.Component {
   }
 
   render() {
-    const { styles, navigation } = this.props;
+    const {
+      styles,
+      account,
+      navigation,
+      settings,
+    } = this.props;
+
     return (
       <MultiStep
         ref={(el) => { this.nav = el; }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         finalCallback={this.finalCallback}
       >
-        <Form title='form' navigation={navigation} />
+        <Recipient title='form' navigation={navigation} />
+        <Amount
+          title='amount'
+          navigation={navigation}
+          currency={settings.currency}
+          account={account}
+        />
         <Confirm title='confirm' navigation={navigation} />
         <Overview title='overview' navigation={navigation} />
         <Result title='result' navigation={navigation} />

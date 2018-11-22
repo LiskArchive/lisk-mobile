@@ -7,7 +7,7 @@ const FormattedNumber = ({
 }) => {
   const Element = type || Text;
   const formatedNumber = numeral(val || children).format('0,0.[0000000000000]');
-  return <Element style={style}>{formatedNumber} Ⱡ</Element>;
+  return <Element style={style}>{formatedNumber} LSK</Element>;
 };
 
 export default FormattedNumber;
