@@ -53,14 +53,20 @@ export default () => ({
       marginBottom: 10,
     },
     empty: {
-      width: 222,
-      height: 109,
+      width: 80,
+      height: 80,
     },
     emptyTitle: {
       paddingTop: 10,
+      textAlign: 'center',
+      paddingRight: 40,
+      paddingLeft: 40,
     },
     icon: {
       marginTop: 15,
+    },
+    noResult: {
+      marginTop: 11,
     },
   },
   [themes.light]: {
@@ -78,9 +84,9 @@ export default () => ({
     },
     emptyTitle: {
       color: colors.light.gray2,
-      textAlign: 'center',
-      paddingRight: 40,
-      paddingLeft: 40,
+    },
+    noResult: {
+      color: colors.light.gray2,
     },
   },
   [themes.dark]: {
@@ -103,6 +109,9 @@ export default () => ({
       borderColor: colors.dark.gray5,
     },
     emptyTitle: {
+      color: colors.dark.gray2,
+    },
+    noResult: {
       color: colors.dark.gray2,
     },
   },
