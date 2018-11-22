@@ -42,7 +42,7 @@ class Scanner extends React.Component {
   toggleCamera = () => {
     const { camera } = this.state;
     this.props.navigation.setParams({
-      tabBar: !camera.visible,
+      tabBar: camera.visible,
       showButtonLeft: !camera.visible,
       action: this.toggleCamera,
       onBackPress: this.toggleCamera,
@@ -95,13 +95,11 @@ class Scanner extends React.Component {
     const liskProtocolReg = /^[l|L]isk:\/\//;
 
     if (liskProtocolReg.test(data) && recipientReg.test(data)) {
-      const address = data.match(recipientReg)[0].replace('recipient=', '');
-      const amount = data.match(amountReg)[0].replace('amount=', '');
-      this.props.setAddress(address || '');
-      this.props.setAmount(amount || '');
+      const address = data.match(recipientReg)[0].replace('recipient=', '') || '';
+      const amount = data.match(amountReg)[0].replace('amount=', '') || '';
+      this.props.setValues({ address, amount });
     } else {
-      this.props.setAddress(data || '');
-      this.props.setAmount('');
+      this.props.setValues({ address: data || '' });
     }
   }
 
