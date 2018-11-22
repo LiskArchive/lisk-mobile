@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { IconButton } from '../../toolBox/button';
 import { P, H1 } from '../../toolBox/typography';
@@ -12,33 +12,31 @@ import Scanner from './scanner';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import Bookmarks from '../../bookmarks';
 
 @connect(state => ({
   account: state.accounts.active,
 }))
 class Recipient extends React.Component {
   activeInputRef = null;
-  validator = {
-    address: (str) => {
-      if (str === '') return -1;
-      return reg.address.test(str) ? 0 : 1;
-    },
+  validator = (str) => {
+    if (str === '') return -1;
+    return reg.address.test(str) ? 0 : 1;
   };
+  scannedData = {};
   state = {
+    header: true,
     address: {
       value: '',
       validity: -1,
     },
-    amount: {
-      value: '',
-      validity: -1,
-    },
-    reference: {
-      value: '',
-      validity: 0,
-    },
-    avatarPreview: true,
+    avatarPreview: false,
   };
+
+  animatedStyles = {
+    height: new Animated.Value(100),
+    paddingTop: new Animated.Value(36),
+  }
 
   componentDidMount() {
     const { prevState, navigation } = this.props;
@@ -71,13 +69,13 @@ class Recipient extends React.Component {
     }
   }
 
-  setFormState = ({ address = '' }) => {
+  setFormState = ({ address = '', validate }) => {
     clearTimeout(this.avatarPreviewTimeout);
 
     this.setState({
       address: {
         value: address,
-        validity: this.validator.address(address),
+        validity: validate ? this.validator(address) : -1,
       },
       avatarPreview: false,
     });
@@ -93,28 +91,76 @@ class Recipient extends React.Component {
     }, 300);
   }
 
+  setValues = (data) => {
+    this.setAddress(data.address);
+    this.scannedData = data;
+    this.reference.focus();
+  }
+
   setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
-
+    if (this.validator(value) === 0) {
+      this.setAvatarPreviewTimeout();
+    }
     this.setState({
       address: {
         value,
-        validity: this.validator.address(value),
       },
       avatarPreview: false,
     });
-
-    this.setAvatarPreviewTimeout();
   }
 
-  forward = () => {
+  submitForm = () => {
+    const { value } = this.state.address;
+    const validity = this.validator(value);
+    if (validity === 0) {
+      this.forward();
+    } else {
+      this.setState({
+        address: { value, validity },
+      });
+    }
+  }
+
+  forward = (data) => {
     const { secondPublicKey } = this.props.account;
     const to = secondPublicKey ? 1 : 2;
-    const stepData = {
+    const stepData = data || Object.assign({}, this.scannedData, {
       address: this.state.address.value,
-    };
+    });
 
     this.props.move({ to, stepData });
+  }
+
+  onKeyboardOpen = (header) => {
+    const { height, paddingTop } = this.animatedStyles;
+    if (!header) {
+      Animated.parallel([
+        Animated.timing(paddingTop, {
+          toValue: 0,
+          duration: 400,
+          delay: 0,
+        }),
+        Animated.timing(height, {
+          toValue: 0,
+          duration: 400,
+          delay: 0,
+        }),
+      ]).start();
+    } else {
+      Animated.parallel([
+        Animated.timing(height, {
+          toValue: 100,
+          duration: 400,
+          delay: 0,
+        }),
+        Animated.timing(paddingTop, {
+          toValue: 36,
+          duration: 400,
+          delay: 0,
+        }),
+      ]).start();
+    }
   }
 
   render() {
@@ -124,33 +170,39 @@ class Recipient extends React.Component {
     const {
       address, avatarPreview,
     } = this.state;
+    const followed = [
+      { address: '123L', label: 'label 1' },
+      { address: '1234567891L', label: 'label 2' },
+      { address: '12345678901L', label: 'yashar aya' },
+      { address: '19934567891L', label: 'ali' },
+    ];
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
           ref={(el) => { this.scanner = el; }}
           navigation={navigation}
-          setAddress={this.setAddress}
-          setAmount={this.setAmount}
+          setValues={this.setValues}
         />
         <KeyboardAwareScrollView
-            disabled={address.validity !== 0}
-            onSubmit={this.forward}
+            onKeyboard={this.onKeyboardOpen}
+            onSubmit={this.submitForm}
             hasTabBar={true}
+            onStickyButton={true}
             button={{
               title: 'Continue',
               type: 'inBox',
             }}
             styles={{ container: styles.container, innerContainer: styles.innerContainer }}
           >
-          <View style={styles.titleContainer}>
+          <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
             <View style={styles.headings}>
               <H1 style={[styles.title, styles.theme.title]}>Recipient</H1>
               <P style={[styles.subtitle, styles.theme.subtitle]}>
               Insert address or search a bookmark.
               </P>
             </View>
-          </View>
+          </Animated.View>
           <View style={styles.form}>
             <View style={styles.addressContainer}>
               <IconButton
@@ -163,7 +215,7 @@ class Recipient extends React.Component {
                 color={colors.light.blue}
               />
               {
-                address.validity === 0 && avatarPreview ?
+                avatarPreview ?
                   <Avatar
                     style={styles.avatar}
                     address={address.value}
@@ -177,9 +229,9 @@ class Recipient extends React.Component {
                   />
               }
               <Input
-                label='Address'
+                label='Address or label'
                 autoCorrect={false}
-                reference={(input) => { this.references = input; }}
+                reference={(input) => { this.reference = input; }}
                 innerStyles={{
                   errorMessage: styles.errorMessage,
                   input: [
@@ -197,6 +249,7 @@ class Recipient extends React.Component {
                 onFocus={() => { this.activeInputRef = 0; }}
               />
             </View>
+            <Bookmarks list={followed} navigate={this.forward} query={this.state.address.value} />
           </View>
         </KeyboardAwareScrollView>
       </View>

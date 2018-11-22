@@ -10,11 +10,10 @@ export default () => ({
     },
     innerContainer: {
       flexDirection: 'column',
-      // justifyContent: 'space-between',
       paddingBottom: 24,
     },
     titleContainer: {
-      paddingTop: 36,
+      overflow: 'hidden',
     },
     form: {
       paddingBottom: 20,
