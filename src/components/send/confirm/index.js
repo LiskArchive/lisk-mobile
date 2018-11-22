@@ -12,12 +12,8 @@ import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { themes } from '../../../constants/styleGuide';
 
-/**
- * The container component containing sign in and create account functionality
- */
 @connect(state => ({
   peers: state.peers,
-
   accounts: state.accounts,
 }), {})
 class Confirm extends React.Component {
@@ -42,11 +38,8 @@ class Confirm extends React.Component {
   }
 
   forward = () => {
-    const { amount, address, reference } = this.props;
     this.props.nextStep({
-      amount,
-      address,
-      reference,
+      ...this.props.sharedData,
       secondPassphrase: this.state.secondPassphrase.value,
     });
   }

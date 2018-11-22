@@ -44,32 +44,40 @@ class Send extends React.Component {
     navigation.setParams({ showButtonLeft: false, styles });
   }
 
+  componentDidUpdate(prevProps) {
+    this.checkQuery(prevProps.navigation.getParam('query', {}));
+  }
+
   componentWillUnmount() {
     this.subs.forEach(sub => sub.remove());
+  }
+
+  checkQuery = (prevQuery = {}) => {
+    const query = this.props.navigation.getParam('query', {});
+
+    if ((prevQuery !== query) && query && (Object.keys(query).length)) {
+      this.nav.reset(query);
+      this.props.navigation.setParams({
+        query: {},
+      });
+    }
   }
 
   didFocus = () => {
     const { navigation, account } = this.props;
     const accountInitialization = navigation.getParam('initialize', false);
-    const query = navigation.getParam('query', {});
 
     if (accountInitialization) {
       this.nav.move({
         to: 2, // @TODO: update this to address Confirm screen after implementing the new design
-        stepData: {
+        data: {
           address: account.address,
           amount: 0.1,
           reference: 'Account initialization',
         },
       });
-    } else if (query && Object.keys(query).length) {
-      this.nav.reset({
-        initialData: query,
-      });
-
-      navigation.setParams({
-        query: {},
-      });
+    } else {
+      this.checkQuery();
     }
   }
 

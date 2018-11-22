@@ -51,7 +51,9 @@ class Overview extends React.Component {
   send = () => {
     const {
       account, nextStep, transactionAdded,
-      amount, address, reference, secondPassphrase,
+      sharedData: {
+        amount, address, reference, secondPassphrase,
+      },
     } = this.props;
 
     transactionAdded({
@@ -106,9 +108,8 @@ class Overview extends React.Component {
   render() {
     const actionType = this.props.navigation.state.params.initialize || this.state.initialize ?
       'initialize' : 'send';
-    const {
-      styles, address, amount, reference,
-    } = this.props;
+
+    const { styles, sharedData: { address, amount, reference } } = this.props;
 
     return (<View style={[styles.container, styles.theme.container]}>
       <View style={styles.innerContainer}>
