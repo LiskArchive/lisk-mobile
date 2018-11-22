@@ -3,6 +3,7 @@ import connect from 'redux-connect-decorator';
 import MultiStep from '../multiStep';
 import Recipient from './recipient';
 import Amount from './amount';
+import Reference from './reference';
 import Overview from './overview';
 import Confirm from './confirm';
 import Result from './result';
@@ -87,6 +88,7 @@ class Send extends React.Component {
           currency={settings.currency}
           account={account}
         />
+        <Reference title="reference" navigation={navigation} />
         <Confirm title='confirm' navigation={navigation} />
         <Overview title='overview' navigation={navigation} />
         <Result title='result' navigation={navigation} />
