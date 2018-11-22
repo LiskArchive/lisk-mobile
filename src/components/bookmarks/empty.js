@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import noActivityLight from '../../assets/images/noActivity/noActivity3xLight.png';
-import noActivityDark from '../../assets/images/noActivity/noActivity3xDark.png';
+import noActivityLight from '../../assets/images/send/noBookmarks3xLight.png';
+import noActivityDark from '../../assets/images/send/noBookmarks3xDark.png';
 import { P } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';
