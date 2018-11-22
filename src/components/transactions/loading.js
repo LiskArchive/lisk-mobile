@@ -7,7 +7,7 @@ import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
 
 const LoadingState = ({ theme, styles }) => (
-  <View style={styles.emptyState}>
+  <View style={styles.loadingState}>
     {
       theme === themes.light ?
         <Image source={noActivityLight} style={styles.loading} /> :

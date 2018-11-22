@@ -1,4 +1,5 @@
 import { themes, colors, fonts } from '../../constants/styleGuide';
+import { viewportHeight } from '../../utilities/device';
 
 export default () => ({
   common: {
@@ -48,12 +49,20 @@ export default () => ({
     avatar: {
       borderWidth: 1,
     },
+    loadingState: {
+      width: '100%',
+      display: 'flex',
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     emptyState: {
       width: '100%',
       display: 'flex',
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      marginTop: viewportHeight() / 7.5,
     },
     noActivity: {
       width: '100%',
