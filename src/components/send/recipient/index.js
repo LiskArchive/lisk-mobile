@@ -91,10 +91,10 @@ class Recipient extends React.Component {
     }, 300);
   }
 
-  setValues = (data) => {
+  onQRCodeRead = (data) => {
     this.setAddress(data.address);
     this.scannedData = data;
-    this.reference.focus();
+    this.input.focus();
   }
 
   setAddress = (value) => {
@@ -170,19 +170,13 @@ class Recipient extends React.Component {
     const {
       address, avatarPreview,
     } = this.state;
-    const followed = [
-      { address: '123L', label: 'label 1' },
-      { address: '1234567891L', label: 'label 2' },
-      { address: '12345678901L', label: 'yashar aya' },
-      { address: '19934567891L', label: 'ali' },
-    ];
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
           ref={(el) => { this.scanner = el; }}
           navigation={navigation}
-          setValues={this.setValues}
+          setValues={this.onQRCodeRead}
         />
         <KeyboardAwareScrollView
             onKeyboard={this.onKeyboardOpen}
@@ -231,7 +225,7 @@ class Recipient extends React.Component {
               <Input
                 label='Address or label'
                 autoCorrect={false}
-                reference={(input) => { this.reference = input; }}
+                reference={(input) => { this.input = input; }}
                 innerStyles={{
                   errorMessage: styles.errorMessage,
                   input: [
@@ -249,7 +243,7 @@ class Recipient extends React.Component {
                 onFocus={() => { this.activeInputRef = 0; }}
               />
             </View>
-            <Bookmarks list={followed} navigate={this.forward} query={this.state.address.value} />
+            <Bookmarks navigate={this.forward} query={this.state.address.value} />
           </View>
         </KeyboardAwareScrollView>
       </View>
