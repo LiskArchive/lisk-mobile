@@ -1,4 +1,5 @@
 import React from 'react';
+import { BackHandler } from 'react-native';
 import connect from 'redux-connect-decorator';
 import MultiStep from '../multiStep';
 import Recipient from './recipient';
@@ -41,7 +42,12 @@ class Send extends React.Component {
 
   componentDidMount() {
     const { styles, navigation } = this.props;
-    this.subs = [navigation.addListener('didFocus', this.didFocus)];
+
+    this.subs = [
+      navigation.addListener('didFocus', this.didFocus),
+      navigation.addListener('willBlur', this.willBlur),
+    ];
+
     navigation.setParams({ showButtonLeft: false, styles });
   }
 
@@ -68,6 +74,8 @@ class Send extends React.Component {
     const { navigation, accounts } = this.props;
     const accountInitialization = navigation.getParam('initialize', false);
 
+    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+
     if (accountInitialization) {
       this.nav.move({
         to: 5,
@@ -82,8 +90,23 @@ class Send extends React.Component {
     }
   }
 
+  willBlur = () => {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+  }
+
   finalCallback = () => {
     this.props.navigation.navigate({ routeName: 'OwnWallet' });
+  }
+
+  onBackButtonPressedAndroid = () => {
+    const action = this.props.navigation.getParam('action', false);
+
+    if (action && typeof action === 'function') {
+      action();
+      return true;
+    }
+
+    return false;
   }
 
   render() {
