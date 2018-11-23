@@ -76,7 +76,7 @@ class Recipient extends React.Component {
     const { value } = this.state.address;
     const validity = this.validator(value);
     if (validity === 0) {
-      this.forward();
+      this.forward({ step: 1 });
     } else {
       this.setState({
         address: { value, validity },
@@ -84,14 +84,17 @@ class Recipient extends React.Component {
     }
   }
 
-  forward = (data) => {
+  forward = ({ data, step }) => {
     const nextData = data ?
       merge(this.props.sharedData, data) :
       merge(this.props.sharedData, this.scannedData, {
         address: this.state.address.value,
       });
 
-    this.props.nextStep(nextData);
+    this.props.move({
+      to: step || 2,
+      data: nextData,
+    });
   }
 
   onKeyboardOpen = (header) => {
