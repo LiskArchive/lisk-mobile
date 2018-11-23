@@ -15,7 +15,7 @@ class Reference extends React.Component {
     },
   };
 
-  validate = (str) => {
+  validator = (str) => {
     const uint8array = new TextEncoder().encode(str);
     return uint8array.length > 64 ? 1 : 0;
   }
@@ -35,7 +35,7 @@ class Reference extends React.Component {
     this.setState({
       reference: {
         value,
-        validity: this.validate(value),
+        validity: this.validator(value),
       },
     });
   }
