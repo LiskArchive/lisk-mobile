@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
-import connect from 'redux-connect-decorator';
 import { IconButton } from '../../toolBox/button';
 import { P, H1 } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
@@ -10,13 +9,11 @@ import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
 import Scanner from './scanner';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
+import { merge } from '../../../utilities/helpers';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
 
-@connect(state => ({
-  account: state.accounts.active,
-}))
 class Recipient extends React.Component {
   activeInputRef = null;
   validator = (str) => {
@@ -32,55 +29,20 @@ class Recipient extends React.Component {
     },
     avatarPreview: false,
   };
-
   animatedStyles = {
     height: new Animated.Value(100),
     paddingTop: new Animated.Value(36),
   }
 
   componentDidMount() {
-    const { prevState, navigation } = this.props;
+    const { sharedData, navigation } = this.props;
 
-    if (Object.keys(prevState).length) {
-      this.setFormState(prevState);
-    } else if (navigation.state.params && navigation.state.params.query) {
-      this.setFormState(navigation.state.params.query);
+    if (sharedData.address) {
+      this.setAddress(sharedData.address);
+      setTimeout(() => this.input.focus(), 500);
     }
 
-    this.props.navigation.setParams({ showButtonLeft: false });
-  }
-
-  componentDidUpdate(prevProps) {
-    const { navigation: { state: { params } }, account } = this.props;
-    const prevParams = (prevProps.navigation.state ? prevProps.navigation.state.params : {});
-
-    if (params && params.query && (prevParams.query !== params.query)) {
-      this.setFormState(params.query);
-    }
-
-    if (prevProps.account && account && (account.balance !== prevProps.account.balance)) {
-      const { amount: { value } } = this.state;
-      this.setState({
-        amount: {
-          value,
-          validity: this.validator.amount(value),
-        },
-      });
-    }
-  }
-
-  setFormState = ({ address = '', validate }) => {
-    clearTimeout(this.avatarPreviewTimeout);
-
-    this.setState({
-      address: {
-        value: address,
-        validity: validate ? this.validator(address) : -1,
-      },
-      avatarPreview: false,
-    });
-
-    this.setAvatarPreviewTimeout();
+    navigation.setParams({ showButtonLeft: false });
   }
 
   setAvatarPreviewTimeout = () => {
@@ -123,11 +85,13 @@ class Recipient extends React.Component {
   }
 
   forward = (data) => {
-    const stepData = data || Object.assign({}, this.scannedData, {
-      address: this.state.address.value,
-    });
+    const nextData = data ?
+      merge(this.props.sharedData, data) :
+      merge(this.props.sharedData, this.scannedData, {
+        address: this.state.address.value,
+      });
 
-    this.props.move({ to: 1, stepData });
+    this.props.nextStep(nextData);
   }
 
   onKeyboardOpen = (header) => {

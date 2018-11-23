@@ -63,8 +63,8 @@ class Confirm extends React.Component {
   }
 
   generateTest = () => {
-    const passphrase = this.props.passphrase.split(' ');
-    const words = this.props.passphrase.match(/\w+/g);
+    const passphrase = this.props.sharedData.passphrase.split(' ');
+    const words = this.props.sharedData.passphrase.match(/\w+/g);
 
     const missing = chooseRandomWords(2, words);
     this.setState({
@@ -109,7 +109,7 @@ class Confirm extends React.Component {
   }
 
   checkAnswers = (answers) => {
-    const passphrase = this.props.passphrase.split(' ');
+    const passphrase = this.props.sharedData.passphrase.split(' ');
     const start = answers.filter(item => item.value).length;
     const result = answers.filter(item => passphrase.includes(item.value)).length;
     if (start === 2) {
@@ -133,7 +133,7 @@ class Confirm extends React.Component {
 
   renderPassphrase = () => {
     const Element = viewportHeight() < 640 ? B : H4;
-    const passphrase = this.props.passphrase.split(' ');
+    const passphrase = this.props.sharedData.passphrase.split(' ');
     return this.state.missing.length > 0 ? passphrase.map((val, index) => {
       const optionIndex = this.state.missing.indexOf(index);
       const element = optionIndex >= 0 ?

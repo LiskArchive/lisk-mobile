@@ -13,6 +13,7 @@ class Intro extends React.Component {
     passphrase: '',
     buttonStatus: true,
   }
+
   componentDidMount() {
     const passphrase = generatePassphrase();
     this.setState({
@@ -20,11 +21,19 @@ class Intro extends React.Component {
     });
     this.props.navigation.setParams({ action: this.props.navigation.pop });
   }
+
   confirm = (status) => {
     this.setState({
       buttonStatus: !status,
     });
   }
+
+  forward = () => {
+    this.props.nextStep({
+      passphrase: this.state.passphrase,
+    });
+  }
+
   render() {
     return (
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -79,11 +88,7 @@ class Intro extends React.Component {
             disabled={this.state.buttonStatus}
             noTheme={true}
             style={styles.button}
-            onClick={() => {
-              this.props.nextStep({
-                passphrase: this.state.passphrase,
-              });
-            }}
+            onClick={this.forward}
             title='Continue' />
           </View>
         </View>
