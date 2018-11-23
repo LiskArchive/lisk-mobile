@@ -41,12 +41,12 @@ class Amount extends React.Component {
       this.onChange(sharedData.amount);
     }
 
-    this.getPriceTicker();
-
     this.props.navigation.setParams({
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
+
+    this.getPriceTicker();
   }
 
   getPriceTicker = () => {

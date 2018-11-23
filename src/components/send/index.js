@@ -69,7 +69,7 @@ class Send extends React.Component {
 
     if (accountInitialization) {
       this.nav.move({
-        to: 2, // @TODO: update this to address Confirm screen after implementing the new design
+        to: 4, // @TODO: update this to address Confirm screen after implementing the new design
         data: {
           address: account.address,
           amount: 0.1,

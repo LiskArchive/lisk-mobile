@@ -6,6 +6,7 @@ import { P, H1 } from '../../toolBox/typography';
 import Input from '../../toolBox/input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import { merge } from '../../../utilities/helpers';
 
 class Reference extends React.Component {
   state = {
@@ -21,14 +22,16 @@ class Reference extends React.Component {
   }
 
   componentDidMount() {
-    // will be working after #379
-    const initialValue = (
-      this.props.prevState.reference || ((this.props.initialData || {}).reference)
-    );
+    const { sharedData } = this.props;
 
-    if (initialValue) {
-      this.onChange(initialValue);
+    if (sharedData.reference) {
+      this.onChange(sharedData.reference);
     }
+
+    this.props.navigation.setParams({
+      showButtonLeft: true,
+      action: () => this.props.prevStep(),
+    });
   }
 
   onChange = (value) => {
@@ -43,9 +46,9 @@ class Reference extends React.Component {
   onSubmit = () => {
     this.props.move({
       to: this.props.account.secondPublicKey ? 3 : 4,
-      stepData: {
+      data: merge(this.props.sharedData, {
         reference: this.state.reference.value,
-      },
+      }),
     });
   }
 
