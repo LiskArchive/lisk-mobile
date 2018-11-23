@@ -35,7 +35,7 @@ class Amount extends React.Component {
   };
 
   componentDidMount() {
-    const { sharedData, accounts } = this.props;
+    const { sharedData, accounts, navigation } = this.props;
     const status = accounts.followed
       .filter(item => item.address === (sharedData.address)).length > 0;
 
@@ -43,7 +43,7 @@ class Amount extends React.Component {
       this.onChange(sharedData.amount);
     }
 
-    this.props.navigation.setParams({
+    navigation.setParams({
       showButtonLeft: true,
       action: () => this.props.move({
         to: status ? 0 : 1,
@@ -133,6 +133,7 @@ class Amount extends React.Component {
 
             <View style={styles.form}>
               <AmountInput
+                autoFocus={true}
                 label="Amount (LSK)"
                 value={value}
                 onChange={this.onChange}

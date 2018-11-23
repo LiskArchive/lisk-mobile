@@ -22,15 +22,15 @@ class Reference extends React.Component {
   }
 
   componentDidMount() {
-    const { sharedData } = this.props;
+    const { navigation, prevStep, sharedData } = this.props;
 
     if (sharedData.reference) {
       this.onChange(sharedData.reference);
     }
 
-    this.props.navigation.setParams({
+    navigation.setParams({
       showButtonLeft: true,
-      action: () => this.props.prevStep(),
+      action: () => prevStep(),
     });
   }
 
@@ -80,6 +80,7 @@ class Reference extends React.Component {
 
             <View style={[styles.form, styles.theme.form]}>
               <Input
+                autoFocus={true}
                 label='Reference (Optional)'
                 autoCorrect={false}
                 innerStyles={{ input: styles.input }}
