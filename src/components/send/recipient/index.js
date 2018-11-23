@@ -90,10 +90,7 @@ class Recipient extends React.Component {
         address: this.state.address.value,
       });
 
-    this.props.move({
-      to: 1,
-      data: nextData,
-    });
+    this.props.nextStep(nextData);
   }
 
   onKeyboardOpen = (header) => {

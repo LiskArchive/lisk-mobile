@@ -76,12 +76,9 @@ class Amount extends React.Component {
   }
 
   onSubmit = () => {
-    this.props.move({
-      to: 2,
-      data: merge(this.props.sharedData, {
-        amount: this.state.amount.value,
-      }),
-    });
+    this.props.nextStep(merge(this.props.sharedData, {
+      amount: this.state.amount.value,
+    }));
   }
 
   render() {
