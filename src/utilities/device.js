@@ -39,6 +39,12 @@ export const headerHeight = () => {
 };
 
 /**
+ * @returns {Number} - The height of the TabBarBottom
+ */
+// https://github.com/react-navigation/react-navigation/blob/1.x/src/views/TabView/TabBarBottom.js#L296-L297
+export const tabBarHeight = () => 49;
+
+/**
  * @returns {Number} - The height of the view under the header and above the tabs bar
  */
 export const viewportHeight = () =>
