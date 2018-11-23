@@ -7,6 +7,7 @@ import { fromRawLsk } from '../../../utilities/conversions';
 import { B, P, H1 } from '../../toolBox/typography';
 import FormattedNumber from '../../formattedNumber';
 import reg from '../../../constants/regex';
+import { merge } from '../../../utilities/helpers';
 import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
@@ -17,13 +18,13 @@ class Amount extends React.Component {
   state = {
     amount: {
       value: '',
+      normalizedValue: '',
       validity: -1,
-      valueInCurrency: 0,
     },
     priceTicker: {},
   };
 
-  validate = (str) => {
+  validator = (str) => {
     const { account } = this.props;
     if (str === '') return -1;
     return (
@@ -34,16 +35,18 @@ class Amount extends React.Component {
   };
 
   componentDidMount() {
-    // will be working after #379
-    const initialValue = (
-      this.props.prevState.amount || ((this.props.initialData || {}).amount)
-    );
+    const { sharedData } = this.props;
 
-    if (initialValue) {
-      this.onChange(initialValue);
+    if (sharedData.amount) {
+      this.onChange(sharedData.amount);
     }
 
     this.getPriceTicker();
+
+    this.props.navigation.setParams({
+      showButtonLeft: true,
+      action: () => this.props.prevStep(),
+    });
   }
 
   getPriceTicker = () => {
@@ -61,20 +64,13 @@ class Amount extends React.Component {
       return;
     }
 
-    const { currency } = this.props;
-    const { priceTicker } = this.state;
-    let valueInCurrency = 0;
     const normalizedValue = value.replace(/[^0-9]/g, '.');
-
-    if (priceTicker[currency]) {
-      valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
-    }
 
     this.setState({
       amount: {
         value,
-        validity: this.validate(normalizedValue),
-        valueInCurrency,
+        normalizedValue,
+        validity: this.validator(normalizedValue),
       },
     });
   }
@@ -82,15 +78,24 @@ class Amount extends React.Component {
   onSubmit = () => {
     this.props.move({
       to: 2,
-      stepData: {
+      data: merge(this.props.sharedData, {
         amount: this.state.amount.value,
-      },
+      }),
     });
   }
 
   render() {
     const { styles, account, currency } = this.props;
-    const { amount: { value, validity, valueInCurrency } } = this.state;
+    const {
+      amount: { value, normalizedValue, validity },
+      priceTicker,
+    } = this.state;
+
+    let valueInCurrency = 0;
+
+    if (value && priceTicker[currency]) {
+      valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
+    }
 
     return (
       <View style={styles.theme.wrapper}>

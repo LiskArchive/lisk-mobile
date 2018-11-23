@@ -91,7 +91,7 @@ class Recipient extends React.Component {
       });
 
     this.props.move({
-      to: 2, // @TODO: Make it 1 when implementing Amount step.
+      to: 1,
       data: nextData,
     });
   }
