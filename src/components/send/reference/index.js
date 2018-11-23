@@ -42,7 +42,7 @@ class Reference extends React.Component {
 
   onSubmit = () => {
     this.props.move({
-      to: 5,
+      to: this.props.account.secondPublicKey ? 3 : 4,
       stepData: {
         reference: this.state.reference.value,
       },

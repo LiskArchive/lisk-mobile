@@ -81,14 +81,21 @@ class Send extends React.Component {
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         finalCallback={this.finalCallback}
       >
-        <Recipient title='form' navigation={navigation} />
+        <Recipient
+          title='form'
+          navigation={navigation}
+        />
         <Amount
           title='amount'
           navigation={navigation}
           currency={settings.currency}
           account={account}
         />
-        <Reference title="reference" navigation={navigation} />
+        <Reference
+          title="reference"
+          navigation={navigation}
+          account={account}
+        />
         <Confirm title='confirm' navigation={navigation} />
         <Overview title='overview' navigation={navigation} />
         <Result title='result' navigation={navigation} />
