@@ -56,7 +56,7 @@ class Reference extends React.Component {
     return (
       <View style={styles.theme.wrapper}>
         <KeyboardAwareScrollView
-          disabled={validity !== 0}
+          disabled={validity === 1}
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
           hasTabBar={true}
