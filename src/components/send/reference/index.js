@@ -86,7 +86,7 @@ class Reference extends React.Component {
                 multiline={true}
                 onChange={this.onChange}
                 value={value}
-                error={validity === 1 ? 'Maximum length of 64 characters is exceeded.' : ''}
+                error={validity === 1 ? 'Maximum length of 64 bytes is exceeded.' : ''}
               />
             </View>
           </View>
