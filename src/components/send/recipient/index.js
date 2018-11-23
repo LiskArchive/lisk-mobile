@@ -123,13 +123,11 @@ class Recipient extends React.Component {
   }
 
   forward = (data) => {
-    const { secondPublicKey } = this.props.account;
-    const to = secondPublicKey ? 1 : 2;
     const stepData = data || Object.assign({}, this.scannedData, {
       address: this.state.address.value,
     });
 
-    this.props.move({ to, stepData });
+    this.props.move({ to: 1, stepData });
   }
 
   onKeyboardOpen = (header) => {

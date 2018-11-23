@@ -3,6 +3,7 @@ import connect from 'redux-connect-decorator';
 import MultiStep from '../multiStep';
 import Recipient from './recipient';
 import Amount from './amount';
+import Reference from './reference';
 import Overview from './overview';
 import Confirm from './confirm';
 import Result from './result';
@@ -80,11 +81,19 @@ class Send extends React.Component {
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         finalCallback={this.finalCallback}
       >
-        <Recipient title='form' navigation={navigation} />
+        <Recipient
+          title='form'
+          navigation={navigation}
+        />
         <Amount
           title='amount'
           navigation={navigation}
           currency={settings.currency}
+          account={account}
+        />
+        <Reference
+          title="reference"
+          navigation={navigation}
           account={account}
         />
         <Confirm title='confirm' navigation={navigation} />

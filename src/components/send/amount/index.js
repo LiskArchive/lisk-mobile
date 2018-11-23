@@ -81,7 +81,7 @@ class Amount extends React.Component {
 
   onSubmit = () => {
     this.props.move({
-      to: 4,
+      to: 2,
       stepData: {
         amount: this.state.amount.value,
       },
