@@ -2,6 +2,7 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import MultiStep from '../multiStep';
 import Recipient from './recipient';
+import AddToBookmark from './addToBookmark';
 import Amount from './amount';
 import Reference from './reference';
 import Overview from './overview';
@@ -101,6 +102,10 @@ class Send extends React.Component {
       >
         <Recipient
           title='form'
+          navigation={navigation}
+        />
+        <AddToBookmark
+          title='addToBookmark'
           navigation={navigation}
         />
         <Amount
