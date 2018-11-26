@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import { TextEncoder } from 'text-encoding';
 import connect from 'redux-connect-decorator';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import { P, H1, Small } from '../../toolBox/typography';
@@ -23,10 +22,7 @@ class AddToBookmark extends React.Component {
     },
   };
 
-  validator = (str) => {
-    const uint8array = new TextEncoder().encode(str);
-    return uint8array.length > 64 ? 1 : 0;
-  }
+  validator = str => (str.length > 0 ? 0 : 1)
 
   componentDidMount() {
     this.props.navigation.setParams({
@@ -39,7 +35,7 @@ class AddToBookmark extends React.Component {
     this.setState({
       label: {
         value,
-        validity: this.validator(value),
+        // validity: this.validator(value),
       },
     });
   }
@@ -51,9 +47,17 @@ class AddToBookmark extends React.Component {
   }
 
   saveAndContinue = () => {
-    const { accountFollowed, sharedData } = this.props;
-    accountFollowed(sharedData.address, this.state.label.value);
-    this.forward();
+    const { value } = this.state.label;
+    const validity = this.validator(value);
+    if (validity === 0) {
+      const { accountFollowed, sharedData } = this.props;
+      accountFollowed(sharedData.address, value);
+      this.forward();
+    } else {
+      this.setState({
+        label: { value, validity },
+      });
+    }
   }
 
   render() {
@@ -73,7 +77,7 @@ class AddToBookmark extends React.Component {
           styles={{ innerContainer: styles.innerContainer }}
           hasTabBar={true}
           button={{
-            title: 'Continue',
+            title: 'Save and continue',
             type: 'inBox',
           }}
           extras={secondButton}
@@ -102,7 +106,7 @@ class AddToBookmark extends React.Component {
                 multiline={true}
                 onChange={this.onChange}
                 value={value}
-                error={validity === 1 ? 'Maximum length of 64 bytes is exceeded.' : ''}
+                error={validity === 1 ? 'Label can\'t be empty.' : ''}
               />
             </View>
           </View>
