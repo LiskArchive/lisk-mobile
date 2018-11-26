@@ -9,9 +9,10 @@ import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
-import { H1, B, P, A, Small } from '../../toolBox/typography';
+import { H1, H4, B, P, A, Small } from '../../toolBox/typography';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import { colors } from '../../../constants/styleGuide';
 
 const messages = {
   initialize: {
@@ -28,7 +29,7 @@ const messages = {
 };
 
 @connect(state => ({
-  account: state.accounts.active,
+  accounts: state.accounts,
 }), {
   transactionAdded: transactionAddedAction,
 })
@@ -41,16 +42,16 @@ class Overview extends React.Component {
 
   validator = {
     amount: (str) => {
-      const { account } = this.props;
+      const { active } = this.props.accounts;
       return (reg.amount.test(str) &&
-        account && account.balance > transactions.send.fee &&
-        parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
+      active && active.balance > transactions.send.fee &&
+        parseFloat(str) <= fromRawLsk(active.balance - transactions.send.fee)) ? 0 : 1;
     },
   };
 
   send = () => {
     const {
-      account, nextStep, transactionAdded,
+      accounts, nextStep, transactionAdded,
       sharedData: {
         amount, address, reference, secondPassphrase,
       },
@@ -59,7 +60,7 @@ class Overview extends React.Component {
     transactionAdded({
       recipientId: address,
       amount: toRawLsk(amount),
-      passphrase: account.passphrase,
+      passphrase: accounts.active.passphrase,
       secondPassphrase,
       data: reference || null,
     }, nextStep, (err) => {
@@ -70,7 +71,7 @@ class Overview extends React.Component {
   }
 
   back = () => {
-    const to = this.props.account.secondPublicKey ? -1 : -2;
+    const to = this.props.accounts.active.secondPublicKey ? -1 : -2;
     return this.props.prevStep(to);
   }
 
@@ -98,7 +99,8 @@ class Overview extends React.Component {
   }
 
   componentDidUpdate(nextProps) {
-    if (this.props.account && nextProps.account.balance !== this.props.account.balance) {
+    const { accounts } = this.props;
+    if (accounts.active && nextProps.accounts.active.balance !== accounts.active.balance) {
       this.setState({
         amountValidity: this.validator.amount(this.props.amount),
       });
@@ -109,7 +111,11 @@ class Overview extends React.Component {
     const actionType = this.props.navigation.state.params.initialize || this.state.initialize ?
       'initialize' : 'send';
 
-    const { styles, sharedData: { address, amount, reference } } = this.props;
+    const {
+      styles, accounts: { followed }, sharedData: { address, amount, reference },
+    } = this.props;
+
+    const bookmark = followed.filter(item => item.address === address);
 
     return (<View style={[styles.container, styles.theme.container]}>
       <View style={styles.innerContainer}>
@@ -126,23 +132,33 @@ class Overview extends React.Component {
           </P>
         </View>
         <View>
-          <View style={styles.row}>
-            <P style={[styles.label, styles.theme.label]}>Address</P>
-            <View style={styles.addressContainer}>
-              <Avatar address={address || ''} style={styles.avatar} size={35}/>
-              <B style={[styles.address, styles.text, styles.theme.text]}>{address}</B>
+          <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
+            <Avatar address={address || ''} style={styles.avatar} size={50}/>
+            {
+              bookmark.length === 1 ?
+                <H4 style={styles.theme.text}>{bookmark[0].label}</H4> : null
+            }
+            <P style={[styles.address, styles.text, styles.theme.text]}>{address}</P>
+          </View>
+          <View style={[styles.row, styles.theme.row]}>
+            <Icon name='amount' style={styles.icon} size={20} color={colors[this.props.theme].gray2} />
+            <View style={styles.rowContent}>
+              <P style={[styles.label, styles.theme.label]}>Amount (including 0.1 Ⱡ fee)</P>
+              <B style={[styles.text, styles.theme.text]}>
+                <FormattedNumber>{fromRawLsk(toRawLsk(amount) + 1e7)}</FormattedNumber>
+              </B>
             </View>
           </View>
-          <View style={styles.row}>
-            <P style={[styles.label, styles.theme.label]}>Amount (including 0.1 Ⱡ fee)</P>
-            <B style={[styles.text, styles.theme.text]}>
-              <FormattedNumber>{fromRawLsk(toRawLsk(amount) + 1e7)}</FormattedNumber>
-            </B>
-          </View>
-          {reference ? <View style={styles.row}>
-            <P style={[styles.label, styles.theme.label]}>Reference</P>
-            <B style={[styles.text, styles.theme.text]}>{reference}</B>
-          </View> : null}
+          {
+            reference ?
+              <View style={[styles.row, styles.theme.row]}>
+                <Icon name='reference' style={styles.icon} size={20} color={colors[this.props.theme].gray2} />
+                <View style={styles.rowContent}>
+                  <P style={[styles.label, styles.theme.label]}>Reference</P>
+                  <B style={[styles.text, styles.theme.text]}>{reference}</B>
+                </View>
+              </View> : null
+          }
         </View>
         <View>
           <View style={[styles.errorContainer, this.state.errorMessage ? styles.visible : null]}>

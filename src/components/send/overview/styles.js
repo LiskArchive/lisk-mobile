@@ -25,10 +25,19 @@ export default () => ({
     },
     heading: {
       fontSize: 24,
-      paddingBottom: 80,
+      paddingBottom: 28,
     },
     row: {
-      marginBottom: 4,
+      paddingBottom: 14,
+      borderBottomWidth: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+    },
+    icon: {
+      marginTop: 25,
+    },
+    rowContent: {
+      paddingLeft: 13,
     },
     title: {
       fontSize: 12,
@@ -38,7 +47,8 @@ export default () => ({
       paddingBottom: 15,
     },
     address: {
-      paddingBottom: 15,
+      paddingBottom: 20,
+      paddingTop: 5,
     },
     button: {
       borderRadius: 0,
@@ -46,8 +56,8 @@ export default () => ({
       marginTop: 20,
     },
     label: {
-      marginTop: 15,
-      marginBottom: 7,
+      marginTop: 14,
+      marginBottom: 2,
       color: colors.light.gray1,
       fontFamily: fonts.family.contextLight,
       fontSize: fonts.size.input,
@@ -57,12 +67,12 @@ export default () => ({
       marginTop: 7,
     },
     addressContainer: {
-      flexDirection: 'row',
+      flexDirection: 'column',
       alignItems: 'center',
+      textAlign: 'center',
     },
     avatar: {
-      paddingBottom: 0,
-      marginRight: 20,
+      paddingBottom: 10,
     },
     errorContainer: {
       flexDirection: 'row',
@@ -85,6 +95,9 @@ export default () => ({
   [themes.light]: {
     container: {
       backgroundColor: colors.light.white,
+    },
+    row: {
+      borderBottomColor: colors.light.gray5,
     },
     text: {
       color: colors.light.black,
@@ -111,6 +124,9 @@ export default () => ({
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.screenBgNavy,
+    },
+    row: {
+      borderBottomColor: colors.dark.gray5,
     },
     text: {
       color: colors.dark.white,
