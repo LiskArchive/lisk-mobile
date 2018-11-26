@@ -13,53 +13,60 @@ import { colors } from '../../constants/styleGuide';
 const NavButton = props =>
   <Text {...props} style={[styles.navButton, props.disabled ? styles.disabledNavButton : null]} />;
 const ActiveTitle = props => <Small style={styles.activeGroupTitle} {...props} />;
-let backCallback;
 class Register extends React.Component {
-  state = {
-    showNav: true,
-  };
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
-    backCallback = () => {
-      params.action();
-      return true;
-    };
-    BackHandler.addEventListener('hardwareBackPress', backCallback);
     return {
       headerStyle: {
         backgroundColor: '#F9FDFF',
-        borderBottomWidth: 0,
         elevation: 0,
       },
       headerTitleStyle: {
         textAlign: 'center',
         flex: 1,
       },
-      headerLeft: (params && params.action) ? <IconButton
-        icon='back'
-        title=''
-        onPress={() => {
-          params.action();
-        }}
-        style={styles.backButton}
-        color={colors.light.gray1}/> :
-        null,
-      headerRight: (params && params.action) ? <IconButton color='transparent' icon='back'/> : null,
+      headerLeft: (
+        <IconButton
+          icon='back'
+          title=''
+          onPress={() => (params.action ? params.action() : navigation.pop())}
+          style={styles.backButton}
+          color={colors.light.gray1}
+        />
+      ),
+      headerRight: <IconButton color='transparent' icon='back'/>,
     };
   };
+
+  state = {
+    showNav: true,
+  };
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+  }
+
+  componentWillUnmount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+  }
+
+  onBackButtonPressedAndroid = () => {
+    const action = this.props.navigation.getParam('action', false);
+
+    if (action && typeof action === 'function') {
+      action();
+      return true;
+    }
+
+    return false;
+  }
+
   hideNav = () => {
     this.setState({
       showNav: false,
     });
   }
-  componentDidMount() {
-    this.props.navigation.addListener('willBlur', () => {
-      BackHandler.addEventListener('hardwareBackPress', () => {
-        this.props.navigation.pop();
-        return true;
-      });
-    });
-  }
+
   render() {
     const { navigation } = this.props;
     const noNavStyle = this.state.showNav ? {} : { paddingBottom: 0 };
