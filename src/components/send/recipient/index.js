@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
+import connect from 'redux-connect-decorator';
 import { IconButton } from '../../toolBox/button';
 import { P, H1 } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
@@ -13,7 +14,13 @@ import { merge } from '../../../utilities/helpers';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
+import {
+  accountHasAlreadyFollowed as accountHasAlreadyFollowedAction,
+} from '../../../actions/accounts';
 
+@connect(() => ({}), {
+  accountHasAlreadyFollowed: accountHasAlreadyFollowedAction,
+})
 class Recipient extends React.Component {
   activeInputRef = null;
   validator = (str) => {
@@ -76,7 +83,7 @@ class Recipient extends React.Component {
     const { value } = this.state.address;
     const validity = this.validator(value);
     if (validity === 0) {
-      this.forward({ step: 1 });
+      this.forward();
     } else {
       this.setState({
         address: { value, validity },
@@ -84,15 +91,20 @@ class Recipient extends React.Component {
     }
   }
 
-  forward = ({ data, step }) => {
+  forward = (data) => {
+    const {
+      accountHasAlreadyFollowed,
+      sharedData,
+      move,
+    } = this.props;
     const nextData = data ?
-      merge(this.props.sharedData, data) :
-      merge(this.props.sharedData, this.scannedData, {
+      merge(sharedData, data) :
+      merge(sharedData, this.scannedData, {
         address: this.state.address.value,
       });
 
-    this.props.move({
-      to: step || 2,
+    move({
+      to: accountHasAlreadyFollowed(nextData.address) ? 2 : 1,
       data: nextData,
     });
   }

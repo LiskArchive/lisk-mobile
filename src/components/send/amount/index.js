@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import connect from 'redux-connect-decorator';
 import liskService from '../../../utilities/api/liskService';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import transactions from '../../../constants/transactions';
@@ -11,7 +12,13 @@ import { merge } from '../../../utilities/helpers';
 import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import {
+  accountHasAlreadyFollowed as accountHasAlreadyFollowedAction,
+} from '../../../actions/accounts';
 
+@connect(() => ({}), {
+  accountHasAlreadyFollowed: accountHasAlreadyFollowedAction,
+})
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
   maxLength = 10
@@ -35,7 +42,8 @@ class Amount extends React.Component {
   };
 
   componentDidMount() {
-    const { sharedData } = this.props;
+    const { sharedData, accountHasAlreadyFollowed } = this.props;
+    const status = accountHasAlreadyFollowed(sharedData.address);
 
     if (sharedData.amount) {
       this.onChange(sharedData.amount);
@@ -43,7 +51,9 @@ class Amount extends React.Component {
 
     this.props.navigation.setParams({
       showButtonLeft: true,
-      action: () => this.props.prevStep(),
+      action: () => this.props.move({
+        to: status ? 0 : 1,
+      }),
     });
 
     this.getPriceTicker();
