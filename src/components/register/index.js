@@ -19,6 +19,7 @@ class Register extends React.Component {
     return {
       headerStyle: {
         backgroundColor: '#F9FDFF',
+        borderBottomWidth: 0,
         elevation: 0,
       },
       headerTitleStyle: {
