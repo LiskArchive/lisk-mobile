@@ -14,7 +14,7 @@ class Item extends React.Component {
       navigate, data,
     } = this.props;
 
-    navigate({ data, step: 2 });
+    navigate(data);
   }
 
   render() {
