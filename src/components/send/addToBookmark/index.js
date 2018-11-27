@@ -7,7 +7,9 @@ import Input from '../../toolBox/input';
 import Avatar from '../../avatar';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
-import { accountFollowed as accountFollowedAction } from '../../../actions/accounts';
+import {
+  accountFollowed as accountFollowedAction,
+} from '../../../actions/accounts';
 
 @connect(state => ({
   account: state.accounts.followed,
@@ -16,9 +18,9 @@ import { accountFollowed as accountFollowedAction } from '../../../actions/accou
 })
 class AddToBookmark extends React.Component {
   state = {
+    buttonTitle: 'continue',
     label: {
       value: '',
-      validity: -1,
     },
   };
 
@@ -32,10 +34,11 @@ class AddToBookmark extends React.Component {
   }
 
   onChange = (value) => {
+    const validity = this.validator(value);
     this.setState({
+      buttonTitle: (validity === 0) ? 'Save and continue' : 'Continue',
       label: {
         value,
-        // validity: this.validator(value),
       },
     });
   }
@@ -52,40 +55,29 @@ class AddToBookmark extends React.Component {
     if (validity === 0) {
       const { accountFollowed, sharedData } = this.props;
       accountFollowed(sharedData.address, value);
-      this.forward();
-    } else {
-      this.setState({
-        label: { value, validity },
-      });
     }
+    this.forward();
   }
 
   render() {
     const { styles } = this.props;
-    const { label: { value, validity } } = this.state;
+    const { label: { value } } = this.state;
     const { address } = this.props.sharedData;
-    const secondButton = <View style={[styles.linkWrapper, styles.row]}>
-      <P style={[styles.link, styles.theme.link]} onPress={this.forward}>
-        Don’t save and continue
-      </P>
-    </View>;
     return (
       <View style={styles.theme.wrapper}>
         <KeyboardAwareScrollView
-          disabled={validity === 1}
           onSubmit={this.saveAndContinue}
           styles={{ innerContainer: styles.innerContainer }}
           hasTabBar={true}
           button={{
-            title: 'Save and continue',
+            title: this.state.buttonTitle,
             type: 'inBox',
           }}
-          extras={secondButton}
         >
           <View>
             <View style={styles.headerContainer}>
               <H1 style={[styles.header, styles.theme.header]}>
-                AddToBookmark
+                Add to bookmark
               </H1>
               <P style={[styles.subHeader, styles.theme.subHeader]}>
                 Optional: save for the future use.
@@ -102,11 +94,11 @@ class AddToBookmark extends React.Component {
               <Input
                 label='Label'
                 autoCorrect={false}
+                autoFocus={true}
                 innerStyles={{ input: styles.input }}
                 multiline={true}
                 onChange={this.onChange}
                 value={value}
-                error={validity === 1 ? 'Label can\'t be empty.' : ''}
               />
             </View>
           </View>
