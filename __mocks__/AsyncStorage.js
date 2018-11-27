@@ -17,7 +17,7 @@ class MockAsyncStorage {
     }
 
     this.cache[key] = data;
-    return resolve(true);
+    return resolve();
   })
 
   removeItem = key => new Promise((resolve, reject) => {
@@ -26,12 +26,12 @@ class MockAsyncStorage {
     }
 
     delete this.cache[key];
-    return resolve(true);
+    return resolve();
   })
 
   clear = () => new Promise((resolve) => {
     this.cache = {};
-    return resolve(true);
+    return resolve();
   })
 }
 
