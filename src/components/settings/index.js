@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
+import { ScrollView, View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { accountSignedOut as accountSignedOutAction } from '../../actions/accounts';
 import { H1, H4, P } from '../toolBox/typography';
@@ -68,7 +68,7 @@ class Settings extends React.Component {
     </P>;
 
     return (
-      <View style={[styles.container, styles.theme.container]}>
+      <ScrollView style={[styles.container, styles.theme.container]}>
         <H1 style={styles.theme.header}>Settings</H1>
         <View style={styles.group}>
           <H4 style={styles.theme.subHeader}>Security</H4>
@@ -170,7 +170,7 @@ class Settings extends React.Component {
           Platform.OS === 'android' ?
           <FingerprintOverlay error={this.state.error} show={this.state.show} /> : null
         }
-      </View>
+      </ScrollView>
     );
   }
 }

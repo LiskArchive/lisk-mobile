@@ -15,11 +15,8 @@ class Intro extends React.Component {
   }
 
   componentDidMount() {
-    const passphrase = generatePassphrase();
-    this.setState({
-      passphrase,
-    });
-    this.props.navigation.setParams({ action: this.props.navigation.pop });
+    this.setState({ passphrase: generatePassphrase() });
+    this.props.navigation.setParams({ action: false });
   }
 
   confirm = (status) => {
@@ -84,12 +81,13 @@ class Intro extends React.Component {
                 I understand that it is my responsibility to keep my passphrase safe.
               </Small>
             </View>
-          <SecondaryButton
-            disabled={this.state.buttonStatus}
-            noTheme={true}
-            style={styles.button}
-            onClick={this.forward}
-            title='Continue' />
+            <SecondaryButton
+              disabled={this.state.buttonStatus}
+              noTheme={true}
+              style={styles.button}
+              onClick={this.forward}
+              title='Continue'
+            />
           </View>
         </View>
       </ScrollView>);
