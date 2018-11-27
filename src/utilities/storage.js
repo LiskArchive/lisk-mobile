@@ -12,7 +12,6 @@ const validateAccounts = (data) => {
   return blankAccounts;
 };
 
-// eslint-disable-next-line
 const validateSettings = (data) => {
   const parsedData = JSON.parse(data);
   if (!parsedData || typeof parsedData !== 'object') return { validated: true };
@@ -20,25 +19,21 @@ const validateSettings = (data) => {
   return parsedData;
 };
 
-async function persistData(key, data) {
+export async function persistData(key, data) {
   try {
     await AsyncStorage.removeItem(key);
     await AsyncStorage.setItem(key, JSON.stringify(data));
     return data;
   } catch (error) {
-    return new Promise()
-      .then(() => ({ message: 'Error persisting data' }))
-      .catch(() => ({ message: 'Error persisting data' }));
+    throw new Error('Error retrieving data');
   }
 }
 
-async function fetchData(key) {
+export async function fetchData(key) {
   try {
     return await AsyncStorage.getItem(key);
   } catch (error) {
-    return new Promise()
-      .then(() => ({ message: 'Error retrieving data' }))
-      .catch(() => ({ message: 'Error retrieving data' }));
+    throw new Error('Error retrieving data');
   }
 }
 
