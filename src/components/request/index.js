@@ -1,12 +1,13 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Platform } from 'react-native';
+import { View, Platform, TouchableWithoutFeedback } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Share from '../share';
 import { viewportHeight, deviceWidth } from '../../utilities/device';
 import Input from '../toolBox/input';
 import { H1, P, B } from '../toolBox/typography';
+import Icon from '../toolBox/icon';
 import reg from '../../constants/regex';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -75,25 +76,33 @@ class Request extends React.Component {
               <B style={[styles.address, styles.theme.address]}>
                 {address}
               </B>
-              <QRCode
+              <Share
+                type={TouchableWithoutFeedback}
                 value={url || address}
-                size={qrCodeSize}
-                color={theme === themes.light ? '#263344' : colors.dark.gray4}
-                backgroundColor={
-                  theme === themes.light ? colors.light.white : colors.dark.screenBgNavy
-                }
-              />
-              <View style={styles.shareContainer}>
-                <Share
-                  type={P}
-                  value={url || address}
-                  style={styles.theme.share}
-                  icon={true}
-                  iconColor={colors[theme].blue}
-                >
-                  Share
-                </Share>
-              </View>
+              >
+                <View style={styles.shareContent}>
+                  <QRCode
+                    value={url || address}
+                    size={qrCodeSize}
+                    color={theme === themes.light ? '#263344' : colors.dark.gray4}
+                    backgroundColor={
+                      theme === themes.light ? colors.light.white : colors.dark.screenBgNavy
+                    }
+                  />
+
+                  <View style={styles.shareTextContainer}>
+                    <P style={[styles.shareText, styles.theme.shareText]}>
+                      Share
+                    </P>
+
+                    <Icon
+                      name='share'
+                      size={14}
+                      color={colors[theme].blue}
+                    />
+                  </View>
+                </View>
+              </Share>
             </View>
             <View style={styles.fieldset}>
               <Input
