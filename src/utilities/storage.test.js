@@ -1,4 +1,6 @@
-import { AsyncStorage } from 'react-native';
+jest.mock('AsyncStorage');
+
+// eslint-disable-next-line
 import {
   persistData,
   fetchData,
@@ -8,10 +10,6 @@ describe('storage: persistData/fetchData', () => {
   const KEY = 'key';
   const INVALID_KEY = {};
   const DATA = { test: 'test' };
-
-  afterAll(() => {
-    AsyncStorage.clear();
-  });
 
   it('writes to AsyncStorage', async () => {
     const result = await persistData(KEY, DATA);

@@ -1,8 +1,6 @@
-const reactNative = jest.genMockFromModule('react-native');
-
 class MockAsyncStorage {
-  constructor(cache = {}) {
-    this.cache = cache;
+  constructor() {
+    this.cache = {};
   }
 
   getItem = key => new Promise((resolve, reject) => {
@@ -37,6 +35,4 @@ class MockAsyncStorage {
   })
 }
 
-reactNative.AsyncStorage = new MockAsyncStorage();
-
-module.exports = reactNative;
+module.exports = new MockAsyncStorage();
