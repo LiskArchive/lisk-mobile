@@ -8,15 +8,12 @@ import { themes } from '../constants/styleGuide';
  *
  * @returns {Object} - created stylesheet.
  */
-export const createThemedStyles = (theme = themes.light, styles, noTheme) => {
+export const createThemedStyles = (theme, styles, noTheme = false) => {
   if (!styles.common) {
-    throw Error('Styles object should have declerations for shared styles.');
+    styles.common = {};
   }
 
   if (!styles[theme]) {
-    // @TODO: Remove this and throw an error with the same warning, after we implement dark theme.
-    // eslint-disable-next-line no-console
-    console.warn(`Styles object does not have declerations for a theme named ${theme}.`);
     styles[theme] = {};
   }
 
