@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import connect from 'redux-connect-decorator';
 import liskService from '../../../utilities/api/liskService';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import transactions from '../../../constants/transactions';
@@ -12,13 +11,7 @@ import { merge } from '../../../utilities/helpers';
 import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
-import {
-  accountHasAlreadyFollowed as accountHasAlreadyFollowedAction,
-} from '../../../actions/accounts';
 
-@connect(() => ({}), {
-  accountHasAlreadyFollowed: accountHasAlreadyFollowedAction,
-})
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
   maxLength = 10
@@ -32,18 +25,19 @@ class Amount extends React.Component {
   };
 
   validator = (str) => {
-    const { account } = this.props;
+    const { accounts } = this.props;
     if (str === '') return -1;
     return (
-      reg.amount.test(str) && account &&
-      account.balance > transactions.send.fee &&
-      parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)
+      reg.amount.test(str) && accounts.active &&
+      accounts.active.balance > transactions.send.fee &&
+      parseFloat(str) <= fromRawLsk(accounts.active.balance - transactions.send.fee)
     ) ? 0 : 1;
   };
 
   componentDidMount() {
-    const { sharedData, accountHasAlreadyFollowed } = this.props;
-    const status = accountHasAlreadyFollowed(sharedData.address);
+    const { sharedData, accounts } = this.props;
+    const status = accounts.followed
+      .filter(item => item.address === (sharedData.address)).length > 0;
 
     if (sharedData.amount) {
       this.onChange(sharedData.amount);
@@ -92,7 +86,7 @@ class Amount extends React.Component {
   }
 
   render() {
-    const { styles, account, currency } = this.props;
+    const { styles, accounts, currency } = this.props;
     const {
       amount: { value, normalizedValue, validity },
       priceTicker,
@@ -132,7 +126,7 @@ class Amount extends React.Component {
               </B>
               <B style={[styles.balanceNumber, styles.theme.balanceNumber]}>
                 <FormattedNumber>
-                  {fromRawLsk(account ? account.balance : 0)}
+                  {fromRawLsk(accounts.active.balance || 0)}
                 </FormattedNumber>
               </B>
             </View>

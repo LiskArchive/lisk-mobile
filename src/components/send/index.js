@@ -14,7 +14,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 @connect(state => ({
-  account: state.accounts.active,
+  accounts: state.accounts,
   settings: state.settings,
 }), {})
 class Send extends React.Component {
@@ -89,7 +89,7 @@ class Send extends React.Component {
   render() {
     const {
       styles,
-      account,
+      accounts,
       navigation,
       settings,
     } = this.props;
@@ -103,6 +103,7 @@ class Send extends React.Component {
         <Recipient
           title='form'
           navigation={navigation}
+          accounts={accounts}
         />
         <AddToBookmark
           title='addToBookmark'
@@ -112,12 +113,12 @@ class Send extends React.Component {
           title='amount'
           navigation={navigation}
           currency={settings.currency}
-          account={account}
+          accounts={accounts}
         />
         <Reference
           title="reference"
           navigation={navigation}
-          account={account}
+          account={accounts.active}
         />
         <Confirm title='confirm' navigation={navigation} />
         <Overview title='overview' navigation={navigation} />

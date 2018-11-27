@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
-import connect from 'redux-connect-decorator';
 import { IconButton } from '../../toolBox/button';
 import { P, H1 } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
@@ -14,13 +13,7 @@ import { merge } from '../../../utilities/helpers';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
-import {
-  accountHasAlreadyFollowed as accountHasAlreadyFollowedAction,
-} from '../../../actions/accounts';
 
-@connect(() => ({}), {
-  accountHasAlreadyFollowed: accountHasAlreadyFollowedAction,
-})
 class Recipient extends React.Component {
   activeInputRef = null;
   validator = (str) => {
@@ -92,8 +85,12 @@ class Recipient extends React.Component {
   }
 
   forward = (data) => {
+    const accountHasAlreadyFollowed = (address) => {
+      const { followed } = this.props.accounts;
+      return followed.filter(item => item.address === address).length > 0;
+    };
+
     const {
-      accountHasAlreadyFollowed,
       sharedData,
       move,
     } = this.props;
