@@ -18,13 +18,15 @@ import {
 })
 class AddToBookmark extends React.Component {
   state = {
-    buttonTitle: 'continue',
+    buttonTitle: 'Continue',
     label: {
       value: '',
+      validity: -1,
     },
   };
 
-  validator = str => (str.length > 0 ? 0 : 1)
+  validator = str => (str.length > 30 ? 1 : 0)
+  // validator = str => (str.length > 0 ? 0 : 1)
 
   componentDidMount() {
     this.props.navigation.setParams({
@@ -34,11 +36,12 @@ class AddToBookmark extends React.Component {
   }
 
   onChange = (value) => {
-    const validity = this.validator(value);
+    // const validity = this.validator(value);
     this.setState({
-      buttonTitle: (validity === 0) ? 'Save and continue' : 'Continue',
+      buttonTitle: (value.length > 0) ? 'Save and continue' : 'Continue',
       label: {
         value,
+        validity: this.validator(value),
       },
     });
   }
@@ -50,18 +53,19 @@ class AddToBookmark extends React.Component {
   }
 
   saveAndContinue = () => {
-    const { value } = this.state.label;
-    const validity = this.validator(value);
-    if (validity === 0) {
-      const { accountFollowed, sharedData } = this.props;
-      accountFollowed(sharedData.address, value);
+    const { value, validity } = this.state.label;
+    if (validity !== 1) {
+      if (value.length > 0) {
+        const { accountFollowed, sharedData } = this.props;
+        accountFollowed(sharedData.address, value);
+      }
+      this.forward();
     }
-    this.forward();
   }
 
   render() {
     const { styles } = this.props;
-    const { label: { value } } = this.state;
+    const { label } = this.state;
     const { address } = this.props.sharedData;
     return (
       <View style={styles.theme.wrapper}>
@@ -80,7 +84,7 @@ class AddToBookmark extends React.Component {
                 Add to bookmark
               </H1>
               <P style={[styles.subHeader, styles.theme.subHeader]}>
-                Optional: save for the future use.
+                Optional: Add a label to save the address for the future use.
               </P>
             </View>
             <View style={[styles.form, styles.theme.form]}>
@@ -98,7 +102,11 @@ class AddToBookmark extends React.Component {
                 innerStyles={{ input: styles.input }}
                 multiline={true}
                 onChange={this.onChange}
-                value={value}
+                error={
+                  label.validity === 1 ?
+                    'The label must be shorter than 20 characters.' : ''
+                }
+                value={label.value}
               />
             </View>
           </View>
