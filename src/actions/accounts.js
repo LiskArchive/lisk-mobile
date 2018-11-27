@@ -113,6 +113,7 @@ export const accountSignedIn = ({ passphrase }, cb) =>
           type: actionTypes.accountSignedIn,
           data: { ...account, passphrase },
         });
+        dispatch(accountsRetrieved());
         dispatch(loadingFinished(actionTypes.accountSignedIn));
       }).catch((err) => {
         dispatch(loadingFinished(actionTypes.accountSignedIn));

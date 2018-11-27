@@ -55,12 +55,15 @@ class ScrollAwareActionBar extends React.Component {
             { children }
             {
               !onStickyButton && buttonStyle === theme.hiddenStickyButton ?
-              <SecondaryButton
-                noTheme={noTheme}
-                style={theme.offKeyboardButton}
-                disabled={disabled}
-                title={typeof button === 'string' ? button : button.title}
-                onClick={onSubmit} /> : null
+              <View>
+                { extras }
+                <SecondaryButton
+                  noTheme={noTheme}
+                  style={theme.offKeyboardButton}
+                  disabled={disabled}
+                  title={typeof button === 'string' ? button : button.title}
+                  onClick={onSubmit} />
+              </View> : null
             }
           </View>
         </KeyboardAwareScrollView>

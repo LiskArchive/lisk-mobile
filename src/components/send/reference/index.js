@@ -45,7 +45,7 @@ class Reference extends React.Component {
 
   onSubmit = () => {
     this.props.move({
-      to: this.props.account.secondPublicKey ? 3 : 4,
+      to: this.props.account.secondPublicKey ? 4 : 5,
       data: merge(this.props.sharedData, {
         reference: this.state.reference.value,
       }),

@@ -85,13 +85,25 @@ class Recipient extends React.Component {
   }
 
   forward = (data) => {
+    const accountHasAlreadyFollowed = (address) => {
+      const { followed } = this.props.accounts;
+      return followed.filter(item => item.address === address).length > 0;
+    };
+
+    const {
+      sharedData,
+      move,
+    } = this.props;
     const nextData = data ?
-      merge(this.props.sharedData, data) :
-      merge(this.props.sharedData, this.scannedData, {
+      merge(sharedData, data) :
+      merge(sharedData, this.scannedData, {
         address: this.state.address.value,
       });
 
-    this.props.nextStep(nextData);
+    move({
+      to: accountHasAlreadyFollowed(nextData.address) ? 2 : 1,
+      data: nextData,
+    });
   }
 
   onKeyboardOpen = (header) => {
