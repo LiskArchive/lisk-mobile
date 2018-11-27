@@ -94,6 +94,21 @@ export const accountEdited = (address, updatedData) => ({
 });
 
 /**
+ * Returns a boolean that shows the input address exists in
+ * the followed list or not
+ *
+ * @param {String} address - Valid Lisk ID
+ *
+ * @returns {boolean} - Pure action function
+ */
+export const accountHasAlreadyFollowed = address => (dispatch, getState) => {
+  {
+    const { followed } = getState().accounts;
+    return followed.filter(item => item.address === address).length > 0;
+  }
+};
+
+/**
  * Uses Http call to fetch Account and delegate info of a given
  * passphrase and dispatches accountSignedIn action
  *
