@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock';
 import liskService from './liskService';
 
-describe('liskService', () => {
+describe('api/liskService', () => {
   describe('getPriceTicker method', () => {
     beforeEach(() => fetchMock.reset());
 
@@ -9,7 +9,7 @@ describe('liskService', () => {
       const response = { tickers: {} };
       fetchMock.once('*', response);
       const result = await liskService.getPriceTicker();
-      expect(result).toMatchObject(response);
+      expect(result).toEqual(response);
     });
 
     it('handles non-500 errors', async () => {
@@ -19,7 +19,7 @@ describe('liskService', () => {
       try {
         await liskService.getPriceTicker();
       } catch (error) {
-        expect(error).toMatchObject(response);
+        expect(error).toEqual(response);
       }
     });
 

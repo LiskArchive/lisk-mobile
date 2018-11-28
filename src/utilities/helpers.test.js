@@ -28,7 +28,7 @@ describe('helpers: createThemedStyles', () => {
   };
 
   it('creates themed styles as expected', () => {
-    expect(createThemedStyles(themes.light, styles)).toMatchObject({
+    expect(createThemedStyles(themes.light, styles)).toEqual({
       wrapper: {
         flex: 1,
       },
@@ -44,7 +44,7 @@ describe('helpers: createThemedStyles', () => {
     const stylesWithoutCommonKey = Object.assign({}, styles);
     delete stylesWithoutCommonKey.common;
 
-    expect(createThemedStyles(themes.light, stylesWithoutCommonKey)).toMatchObject({
+    expect(createThemedStyles(themes.light, stylesWithoutCommonKey)).toEqual({
       theme: {
         wrapper: {
           backgroundColor: 'white',
@@ -56,15 +56,16 @@ describe('helpers: createThemedStyles', () => {
   it('fills requested theme key with empty object if not present', () => {
     const stylesWithoutThemeKey = Object.assign({}, styles);
     delete stylesWithoutThemeKey[themes.light];
-    expect(createThemedStyles(themes.light, stylesWithoutThemeKey)).toMatchObject({
+    expect(createThemedStyles(themes.light, stylesWithoutThemeKey)).toEqual({
       wrapper: {
         flex: 1,
       },
+      theme: {},
     });
   });
 
   it('uses light theme by default if noTheme argument is passed', () => {
-    expect(createThemedStyles(themes.dark, styles, true)).toMatchObject({
+    expect(createThemedStyles(themes.dark, styles, true)).toEqual({
       wrapper: {
         flex: 1,
       },
@@ -99,7 +100,7 @@ describe('helpers: merge', () => {
     expect(result.a).toBe(expectedResult.a);
     expect(result.b).toBe(expectedResult.b);
     expect(result.c).toBe(expectedResult.c);
-    expect(result).toMatchObject(expectedResult);
+    expect(result).toEqual(expectedResult);
   });
 });
 
