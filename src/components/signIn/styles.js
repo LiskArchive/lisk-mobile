@@ -1,5 +1,4 @@
 import { StyleSheet, Platform, DeviceInfo } from 'react-native';
-import { Header } from 'react-navigation';
 import { colors, fonts, boxes } from '../../constants/styleGuide';
 import { deviceHeight } from '../../utilities/device';
 
@@ -142,8 +141,7 @@ const styles = {
   topBubbles: {
     width: '100%',
     height: '100%',
-    top: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ?
-      -1 * (Header.HEIGHT + 24) : -1 * (Header.HEIGHT + 1),
+    top: 0,
   },
   splashFigure: {
     height: 60,
