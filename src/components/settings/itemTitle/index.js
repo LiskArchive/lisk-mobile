@@ -42,8 +42,9 @@ class ItemTitle extends React.Component {
 
   render() {
     const {
-      theme, styles, icon, iconSize, title, target,
+      theme, styles, icon, iconSize = 20, title, target,
       navigation, targetStateLabel, authenticate,
+      description,
     } = this.props;
 
     const props = {
@@ -78,9 +79,18 @@ class ItemTitle extends React.Component {
             color={theme === themes.light ? colors.light.gray3 : colors.dark.gray2}
             style={styles.icon}
           />
-          <View style={styles.name}>
-            <P style={[styles.nameText, styles.theme.nameText]}>{title}</P>
+
+          <View style={styles.titleContainer}>
+            <P style={[styles.title, styles.theme.title]}>
+              {title}
+            </P>
+            {description ? (
+              <P style={[styles.subtitle, styles.theme.subtitle]}>
+                {description}
+              </P>
+            ) : null}
           </View>
+
           <View style={styles.arrow}>
             {
               target ?
