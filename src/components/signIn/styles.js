@@ -70,6 +70,9 @@ const styles = {
     color: 'black',
     fontFamily: fonts.family.passphrase,
     textAlign: 'justify',
+    paddingTop: 10,
+    paddingBottom: 10,
+    minHeight: 40,
   },
   allWhite: {
     borderTopColor: colors.light.white,
@@ -193,6 +196,35 @@ const styles = {
   },
   invisible: {
     color: 'transparent',
+  },
+  scanButton: {
+    position: 'absolute',
+    right: 6,
+    zIndex: 99,
+    top: 46,
+    paddingRight: 15,
+    paddingLeft: 10,
+    paddingBottom: 10,
+    width: 80,
+    height: 30,
+  },
+  scanButtonTitle: {
+    fontSize: 14,
+    width: 39,
+    paddingLeft: 5,
+    color: colors.light.blue,
+  },
+  scanner: {
+  },
+  cameraRoll: {
+    borderTopColor: colors.light.white,
+    borderTopWidth: (Platform.OS === 'ios' &&
+      DeviceInfo.isIPhoneX_deprecated) ? 74 : 50,
+  },
+  cameraOverlay: {
+    borderTopColor: 'rgba(57, 68, 81, 0.85)',
+    borderTopWidth: (Platform.OS === 'ios' &&
+      DeviceInfo.isIPhoneX_deprecated) ? 34 : 10,
   },
 };
 
