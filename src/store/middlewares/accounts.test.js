@@ -24,8 +24,7 @@ describe('Middleware: Accounts', () => {
 
   it('should pass the action', () => {
     const action = {
-      type: actionTypes.accountFollowed,
-      data: accountB,
+      type: 'ANY_OTHER_ACTION',
     };
 
     accountsMiddleware(store)(next)(action);
