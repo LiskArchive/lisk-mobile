@@ -1,12 +1,14 @@
 import { themes, colors, boxes } from '../../../constants/styleGuide';
-import { deviceType, tabBarHeight } from '../../../utilities/device';
+import { deviceType, deviceHeight, tabBarHeight } from '../../../utilities/device';
 
 export default () => ({
   common: {
     innerContainer: {
       flexDirection: 'column',
       justifyContent: 'space-between',
-      paddingBottom: (deviceType() === 'android' ? tabBarHeight() : 0) + 24,
+      paddingBottom: (
+        (deviceType() === 'android' && deviceHeight() < 720) ? tabBarHeight() : 0
+      ) + 24,
     },
     headerContainer: {
       paddingTop: 36,
