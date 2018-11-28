@@ -6,6 +6,9 @@ import { validatePassphrase } from '../../utilities/passphrase';
 import { Small, P, A } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import KeyboardAwareScrollView from '../toolBox/keyboardAwareScrollView';
+import Scanner from '../scanner';
+import { IconButton } from '../toolBox/button';
+import { colors } from '../../constants/styleGuide';
 
 const devDefaultPass = process.env.passphrase || '';
 
@@ -45,13 +48,15 @@ class Form extends React.Component {
     }, 500);
   }
 
-  onPassphraseChange = (value) => {
+  onInputChange = (value, cb) => {
     this.setState({
-      isSubmitted: false,
+      isSubmitted: true,
       passphrase: {
         value,
         validity: validatePassphrase(value),
       },
+    }, () => {
+      if (typeof cb === 'function') cb(value);
     });
   }
 
@@ -60,7 +65,7 @@ class Form extends React.Component {
     this.props.navigation.navigate('Register');
   }
 
-  onSignInSubmission = () => {
+  onFormSubmission = () => {
     const { passphrase } = this.state;
 
     this.setState(({ isSubmitted: true }), () => {
@@ -69,6 +74,10 @@ class Form extends React.Component {
         this.props.signIn(passphrase.value);
       }
     });
+  }
+
+  onQRCodeRead = (value) => {
+    this.onInputChange(value, this.onFormSubmission);
   }
 
   animate = () => {
@@ -80,6 +89,11 @@ class Form extends React.Component {
       duration: animate ? 400 : 0,
       delay: animate ? 200 : 0,
     }).start();
+  }
+
+  toggleCamera = () => {
+    this.passphraseInput.blur();
+    this.scanner.toggleCamera();
   }
 
   componentDidMount() {
@@ -109,6 +123,17 @@ class Form extends React.Component {
 
     return (
       <View style={styles.container}>
+        <Scanner
+          readFromCameraRoll={false}
+          closeScanner={this.toggleCamera}
+          containerStyles={{
+            scanner: styles.scanner,
+            cameraRoll: styles.cameraRoll,
+            cameraOverlay: styles.cameraOverlay,
+          }}
+          ref={(el) => { this.scanner = el; }}
+          navigation={this.props.navigation}
+          onQRCodeRead={this.onQRCodeRead} />
         <Animated.View
           style={[styles.titleContainer, styles.paddingBottom, { opacity }]}
         >
@@ -123,18 +148,29 @@ class Form extends React.Component {
             reference={(ref) => { this.passphraseInput = ref; }}
             innerStyles={{ input: styles.input }}
             value={passphrase.value}
-            onChange={this.onPassphraseChange}
+            onChange={this.onInputChange}
             autoFocus={true}
             autoCorrect={false}
             multiline={Platform.OS === 'ios'}
             secureTextEntry={Platform.OS !== 'ios'}
             error={errorMessage}
           />
+          {
+            passphrase.value === '' ?
+              <IconButton
+                onPress={this.toggleCamera}
+                titleStyle={styles.scanButtonTitle}
+                style={styles.scanButton}
+                title='Scan'
+                icon='scanner'
+                iconSize={18}
+                color={colors.light.blue} /> : null
+          }
         </Animated.View>
         <KeyboardAwareScrollView
           noTheme={true}
           button='Sign in'
-          onSubmit={this.onSignInSubmission}
+          onSubmit={this.onFormSubmission}
           disabled={passphrase.value.length === 0}
           extras={
             <Extras
