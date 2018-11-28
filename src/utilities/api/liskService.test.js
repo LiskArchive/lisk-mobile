@@ -14,7 +14,7 @@ describe('api/liskService', () => {
 
     it('handles non-500 errors', async () => {
       const response = { message: 'Error' };
-      fetchMock.once('*', { status: 404, body: response });
+      fetchMock.once('*', { status: 400, body: response });
 
       try {
         await liskService.getPriceTicker();
