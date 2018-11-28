@@ -80,13 +80,15 @@ class Transactions extends React.Component {
           <Fragment>
             <View style={styles.innerContainer}>
               <H3 style={[styles.title, styles.theme.title]}>Activity</H3>
-              <IconButton
-                title=''
-                icon={incognito ? 'disable-incognito' : 'enable-incognito'}
-                color={colors.dark.gray2}
-                iconSize={20}
-                onClick={this.toggleIncognito}
-                />
+              {incognito ?
+                <IconButton
+                  title=''
+                  icon={'disable-incognito'}
+                  color={colors.dark.gray2}
+                  iconSize={20}
+                  onClick={this.toggleIncognito}
+                /> : null
+              }
             </View>
             {!account.initialized && balance >= 0.2 ?
               <View style={[styles.initContainer, styles.theme.initContainer]}>
