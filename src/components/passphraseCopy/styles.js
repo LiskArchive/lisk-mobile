@@ -1,10 +1,11 @@
+import { Platform, DeviceInfo } from 'react-native';
 import { themes, colors } from '../../constants/styleGuide';
 
-export default ({ height }) => ({
+export default () => ({
   common: {
     wrapper: {},
     textContainer: {
-      paddingBottom: height * 0.075,
+      paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 30 : 20,
     },
     passphraseContainer: {
       padding: 20,

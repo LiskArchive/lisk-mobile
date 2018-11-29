@@ -26,7 +26,7 @@ const About = ({ styles }) => (
             <H4 style={[styles.appTitle, styles.theme.appTitle]}>Lisk</H4>
             <P style={[styles.version, styles.theme.version]}>{`Version ${packageJson.version}`}</P>
             <A onPress={openLiskWebsite} style={[styles.link, styles.theme.link]}>
-              Read more in Lisk&reg; website
+              Read more on the Lisk&reg; website
             </A>
           </View>
         </View>

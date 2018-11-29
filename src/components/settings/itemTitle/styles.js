@@ -4,40 +4,45 @@ export default () => ({
   common: {
     container: {
       flexDirection: 'row',
+      alignItems: 'center',
       width: '100%',
-      height: 36,
-      paddingTop: 6,
-      paddingBottom: 6,
     },
-    name: {
+    titleContainer: {
       flex: 1,
-      height: 24,
+      marginLeft: 5,
+      marginRight: 5,
     },
-    nameText: {
-      lineHeight: 20,
+    title: {
+    },
+    subtitle: {
+      paddingTop: 4,
+      paddingBottom: 2,
+      fontSize: 13,
     },
     icon: {
-      width: 26,
-      height: 20,
-      paddingRight: 2,
+      width: 25,
     },
     arrow: {
-      width: 44,
-      height: 24,
       flexDirection: 'row',
       justifyContent: 'flex-end',
     },
   },
 
   [themes.light]: {
-    nameText: {
+    title: {
       color: colors.light.gray1,
+    },
+    subtitle: {
+      color: colors.light.gray2,
     },
   },
 
   [themes.dark]: {
-    nameText: {
+    title: {
       color: colors.dark.gray4,
+    },
+    subtitle: {
+      color: colors.light.gray2,
     },
   },
 });

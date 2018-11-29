@@ -5,17 +5,23 @@ export default () => ({
     container: {
       flex: 1,
       padding: 20,
+      paddingTop: 36,
+      paddingBottom: 60,
     },
     group: {
       marginTop: 20,
     },
+    subHeader: {
+      marginBottom: 8,
+    },
     item: {
       borderBottomWidth: 1,
       paddingTop: 14,
-      paddingBottom: 10,
+      paddingBottom: 14,
+      minHeight: 36,
     },
-    switch: {
-      top: -3,
+    signOut: {
+      marginBottom: 40,
     },
   },
 

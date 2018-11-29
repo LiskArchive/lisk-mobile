@@ -57,21 +57,26 @@ class Settings extends React.Component {
 
     let target = 'EnableBioAuth';
 
-    const targetStateLabel = ['Off', theme === themes.light ? colors.light.black : colors.dark.gray4];
+    let targetStateLabel = ['Disabled', colors[theme].gray2];
     if (settings.sensorType && settings.hasStoredPassphrase) {
-      targetStateLabel[0] = 'On';
-      targetStateLabel[1] = colors[theme].green;
+      targetStateLabel = [
+        'Enabled',
+        theme === themes.light ? colors.light.black : colors.dark.white,
+      ];
       target = 'DisableBioAuth';
     }
-    const sensorStatus = <P style={{ color: targetStateLabel[1] || colors[theme].gray1 }}>
-      {targetStateLabel[0]}
-    </P>;
+    const sensorStatus = (
+      <P style={{ color: targetStateLabel[1] || colors[theme].gray1 }}>
+        {targetStateLabel[0]}
+      </P>
+    );
 
     return (
       <ScrollView style={[styles.container, styles.theme.container]}>
         <H1 style={styles.theme.header}>Settings</H1>
+
         <View style={styles.group}>
-          <H4 style={styles.theme.subHeader}>Security</H4>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>Security</H4>
           {
             settings.sensorType ?
               <View style={[styles.item, styles.theme.item]}>
@@ -91,15 +96,15 @@ class Settings extends React.Component {
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               icon='enable-incognito'
-              iconSize={20}
               targetStateLabel={
                 <SwitchButton
-                  style={styles.switch}
                   value={settings.incognito}
                   theme={theme}
                   onSyncPress={this.toggleIncognito} />
               }
-              title='Incognito mode'/>
+              title='Discreet mode'
+              description="Hide balance and transaction amounts."
+            />
           </View>
         </View>
         {
@@ -113,18 +118,17 @@ class Settings extends React.Component {
                 hideDialog={this.hideDialog}
                 setError={this.setError}
                 icon='backup'
-                iconSize={20}
                 title='Backup your passphrase'/>
             </View> : null
         }
+
         <View style={styles.group}>
-          <H4 style={styles.theme.subHeader}>General</H4>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>General</H4>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               navigation={navigation}
               target='About'
               icon='about'
-              iconSize={20}
               title='About Lisk'/>
           </View>
           <View style={[styles.item, styles.theme.item]}>
@@ -133,7 +137,6 @@ class Settings extends React.Component {
               iconSize={20}
               targetStateLabel={
                 <SwitchButton
-                  style={styles.switch}
                   value={settings.theme === themes.dark}
                   theme={theme}
                   onSyncPress={this.switchTheme} />
@@ -159,13 +162,17 @@ class Settings extends React.Component {
               navigation={navigation}
               icon='terms'
               target='Terms'
-              iconSize={20}
               title='Terms of use'/>
           </View>
+        </View>
+
+        <View style={[styles.group, styles.signOut]}>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
           <View style={[styles.item, styles.theme.item]}>
             <SignOutButton navigation={navigation} signOut={this.props.accountSignedOut} />
           </View>
         </View>
+
         {
           Platform.OS === 'android' ?
           <FingerprintOverlay error={this.state.error} show={this.state.show} /> : null

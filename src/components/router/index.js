@@ -297,7 +297,7 @@ export default StackNavigator(
     PassphraseBackup: {
       screen: PassphraseBackup,
       navigationOptions: ({ navigation }) => ({
-        headerRight: <SettingButton navigation={navigation} />,
+        headerRight: placeHolderButton,
         headerBackground: <Bg />,
         title: <Logo />,
         headerLeft: <IconButton

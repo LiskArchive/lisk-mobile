@@ -132,6 +132,8 @@ export default () => ({
     },
     visibleBlur: {
       opacity: 1,
+    },
+    invisibleTitle: {
       color: 'rgba(255, 255, 255, 0.02)',
     },
     blurBig: {

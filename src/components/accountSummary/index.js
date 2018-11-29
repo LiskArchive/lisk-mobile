@@ -131,7 +131,7 @@ class AccountSummary extends React.Component {
             style={[styles.balance, { opacity }, itpl('balance', ['top', 'left'])]}>
             <View style={styles.value}>
               <FormattedNumber
-                style={[styles.theme.value, settings.incognito ? styles.visibleBlur : null]}
+                style={[styles.theme.value, settings.incognito ? styles.invisibleTitle : null]}
                 type={H2}>{fromRawLsk(account.balance)}</FormattedNumber>
               <Image source={blurs[`${settings.theme}${balanceSize}`]}
                 style={[styles.blur, styles[`blur${balanceSize}`],

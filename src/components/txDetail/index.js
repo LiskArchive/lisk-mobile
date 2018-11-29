@@ -42,7 +42,10 @@ const TxDetail = ({ navigation, styles, theme }) => {
     <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
       <View style={styles.row}>
       { tx.type !== 0 || (tx.recipientId === tx.senderId) ?
-        <Image style={{ width: 50, height: 50 }} source={transactions[txTypes[tx.type]].image} /> :
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={transactions[txTypes[tx.type]].image(theme)}
+        /> :
         <Fragment>
           <Avatar address={account} size={50}/>
           {
