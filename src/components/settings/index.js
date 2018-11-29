@@ -166,7 +166,7 @@ class Settings extends React.Component {
           </View>
         </View>
 
-        <View style={styles.group}>
+        <View style={[styles.group, styles.signOut]}>
           <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
           <View style={[styles.item, styles.theme.item]}>
             <SignOutButton navigation={navigation} signOut={this.props.accountSignedOut} />

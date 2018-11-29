@@ -6,6 +6,7 @@ export default () => ({
       flex: 1,
       padding: 20,
       paddingTop: 36,
+      paddingBottom: 60,
     },
     group: {
       marginTop: 20,
@@ -18,6 +19,9 @@ export default () => ({
       paddingTop: 14,
       paddingBottom: 14,
       minHeight: 36,
+    },
+    signOut: {
+      marginBottom: 40,
     },
   },
 
