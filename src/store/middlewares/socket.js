@@ -12,10 +12,10 @@ const closeConnection = () => {
   BackgroundTimer.stopBackgroundTimer();
 };
 
-const checkBalance = (store) => {
+export const checkBalance = (store) => {
   const { activePeer } = store.getState().peers;
   const { address, balance } = store.getState().accounts.active;
-  getAccount(activePeer, address).then((res) => {
+  return getAccount(activePeer, address).then((res) => {
     if (res.balance !== balance) {
       store.dispatch(blockUpdated());
     }

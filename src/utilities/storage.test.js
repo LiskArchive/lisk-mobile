@@ -1,6 +1,3 @@
-/* eslint-disable import/first */
-jest.mock('AsyncStorage');
-
 import { AsyncStorage } from 'react-native';
 import {
   persistData,
@@ -13,6 +10,8 @@ import {
   retrieveAccounts,
 } from './storage';
 import { merge } from './helpers';
+
+jest.mock('AsyncStorage');
 
 describe('persistData/fetchData', () => {
   beforeAll(() => AsyncStorage.clear());
@@ -103,5 +102,3 @@ describe('storeFollowedAccounts/retrieveFollowedAccounts', () => {
     expect(result).toMatchObject(ACCOUNTS_TO_STORE);
   });
 });
-
-/* eslint-enable import/first */
