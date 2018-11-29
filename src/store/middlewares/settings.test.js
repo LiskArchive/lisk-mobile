@@ -12,10 +12,7 @@ describe('Middleware: Settings', () => {
   };
 
   it('should pass the action', () => {
-    const action = {
-      type: 'ANY_OTHER_ACTION',
-    };
-
+    const action = { type: 'ANY_ACTION' };
     settingsMiddleware(store)(next)(action);
     expect(next).toBeCalledWith(action);
   });

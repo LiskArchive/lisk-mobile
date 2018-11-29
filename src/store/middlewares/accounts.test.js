@@ -23,10 +23,7 @@ describe('Middleware: Accounts', () => {
   };
 
   it('should pass the action', () => {
-    const action = {
-      type: 'ANY_OTHER_ACTION',
-    };
-
+    const action = { type: 'ANY_ACTION' };
     accountsMiddleware(store)(next)(action);
     expect(next).toBeCalledWith(action);
   });
