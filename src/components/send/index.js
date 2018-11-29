@@ -65,14 +65,14 @@ class Send extends React.Component {
   }
 
   didFocus = () => {
-    const { navigation, account } = this.props;
+    const { navigation, accounts } = this.props;
     const accountInitialization = navigation.getParam('initialize', false);
 
     if (accountInitialization) {
       this.nav.move({
-        to: 4, // @TODO: update this to address Confirm screen after implementing the new design
+        to: 5,
         data: {
-          address: account.address,
+          address: accounts.active.address,
           amount: 0.1,
           reference: 'Account initialization',
         },

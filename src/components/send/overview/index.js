@@ -92,7 +92,7 @@ class Overview extends React.Component {
     }
 
     this.props.navigation.setParams({
-      showButtonLeft: true,
+      showButtonLeft: !this.props.navigation.state.params.initialize,
       action: back,
       initialize: false,
     });
@@ -116,6 +116,7 @@ class Overview extends React.Component {
     } = this.props;
 
     const bookmark = followed.filter(item => item.address === address);
+    const fee = actionType === 'initialize' ? 0 : 1e7;
 
     return (<View style={[styles.container, styles.theme.container]}>
       <View style={styles.innerContainer}>
@@ -141,11 +142,17 @@ class Overview extends React.Component {
             <P style={[styles.address, styles.text, styles.theme.text]}>{address}</P>
           </View>
           <View style={[styles.row, styles.theme.row]}>
-            <Icon name='amount' style={styles.icon} size={20} color={colors[this.props.theme].gray2} />
+            <Icon name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
+              style={styles.icon} size={20}
+              color={colors[this.props.theme].gray2} />
             <View style={styles.rowContent}>
-              <P style={[styles.label, styles.theme.label]}>Amount (including 0.1 Ⱡ fee)</P>
+              <P style={[styles.label, styles.theme.label]}>
+                {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK )'}
+              </P>
               <B style={[styles.text, styles.theme.text]}>
-                <FormattedNumber>{fromRawLsk(toRawLsk(amount) + 1e7)}</FormattedNumber>
+                <FormattedNumber>
+                  {fromRawLsk(toRawLsk(amount) + fee)}
+                </FormattedNumber>
               </B>
             </View>
           </View>
