@@ -84,7 +84,7 @@ class Reference extends React.Component {
               </P>
             </View>
 
-            <View style={[styles.form, styles.theme.form]}>
+            <View style={styles.form}>
               <Input
                 reference={(el) => { this.input = el; }}
                 label='Reference (Optional)'

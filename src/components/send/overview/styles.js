@@ -47,7 +47,7 @@ export default () => ({
       paddingBottom: 15,
     },
     address: {
-      paddingBottom: 20,
+      paddingBottom: 0,
       paddingTop: 5,
     },
     button: {
@@ -70,6 +70,7 @@ export default () => ({
       flexDirection: 'column',
       alignItems: 'center',
       textAlign: 'center',
+      marginTop: 15,
     },
     avatar: {
       paddingBottom: 10,
