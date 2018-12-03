@@ -27,8 +27,12 @@ class Amount extends React.Component {
   };
 
   validator = (str) => {
+    if (str === '' || str === '0') {
+      return 1;
+    }
+
     const { accounts } = this.props;
-    if (str === '') return -1;
+
     return (
       reg.amount.test(str) && accounts.active &&
       accounts.active.balance > transactions.send.fee &&
@@ -80,15 +84,24 @@ class Amount extends React.Component {
       amount: {
         value,
         normalizedValue,
-        validity: this.validator(normalizedValue),
+        validity: -1,
       },
     });
   }
 
   onSubmit = () => {
-    this.props.nextStep(merge(this.props.sharedData, {
-      amount: this.state.amount.value,
-    }));
+    const { amount } = this.state;
+    const validity = this.validator(amount.normalizedValue);
+
+    if (validity === 0) {
+      this.props.nextStep(merge(this.props.sharedData, {
+        amount: amount.normalizedValue,
+      }));
+    } else {
+      this.setState({
+        amount: merge(amount, { validity }),
+      });
+    }
   }
 
   render() {
@@ -107,7 +120,6 @@ class Amount extends React.Component {
     return (
       <View style={styles.theme.wrapper}>
         <KeyboardAwareScrollView
-          disabled={validity !== 0}
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
           hasTabBar={true}

@@ -39,7 +39,7 @@ class Recipient extends React.Component {
 
     if (sharedData.address) {
       this.setAddress(sharedData.address);
-      setTimeout(() => this.input.focus(), 500);
+      setTimeout(() => this.input.focus(), 250);
     }
 
     navigation.setParams({

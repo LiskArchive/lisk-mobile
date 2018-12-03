@@ -30,10 +30,6 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    form: {
-      borderTopWidth: 2,
-      borderColor: colors.light.boxBg,
-    },
     header: {
       color: colors.light.black,
     },

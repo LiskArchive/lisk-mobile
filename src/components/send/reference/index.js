@@ -44,18 +44,27 @@ class Reference extends React.Component {
     this.setState({
       reference: {
         value,
-        validity: this.validator(value),
+        validity: -1,
       },
     });
   }
 
   onSubmit = () => {
-    this.props.move({
-      to: this.props.account.secondPublicKey ? 4 : 5,
-      data: merge(this.props.sharedData, {
-        reference: this.state.reference.value,
-      }),
-    });
+    const { reference } = this.state;
+    const validity = this.validator(reference.value);
+
+    if (validity === 0) {
+      this.props.move({
+        to: this.props.account.secondPublicKey ? 4 : 5,
+        data: merge(this.props.sharedData, {
+          reference: reference.value,
+        }),
+      });
+    } else {
+      this.setState({
+        reference: merge(reference, { validity }),
+      });
+    }
   }
 
   render() {
@@ -65,7 +74,6 @@ class Reference extends React.Component {
     return (
       <View style={styles.theme.wrapper}>
         <KeyboardAwareScrollView
-          disabled={validity === 1}
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
           hasTabBar={true}
@@ -84,7 +92,7 @@ class Reference extends React.Component {
               </P>
             </View>
 
-            <View style={[styles.form, styles.theme.form]}>
+            <View style={styles.form}>
               <Input
                 reference={(el) => { this.input = el; }}
                 label='Reference (Optional)'

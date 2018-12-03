@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Linking } from 'react-native';
+import { View, Linking, ScrollView } from 'react-native';
 import connect from 'redux-connect-decorator';
 import reg from '../../../constants/regex';
 import transactions from '../../../constants/transactions';
@@ -118,9 +118,12 @@ class Overview extends React.Component {
     const bookmark = followed.filter(item => item.address === address);
     const fee = actionType === 'initialize' ? 0 : 1e7;
 
-    return (<View style={[styles.container, styles.theme.container]}>
-      <View style={styles.innerContainer}>
-        <View style={styles.titleContainer}>
+    return (
+      <ScrollView
+        style={[styles.container, styles.theme.container]}
+        contentContainerStyle={styles.innerContainer}
+      >
+        <View>
           <H1 style={[styles.headerTitle, styles.theme.headerTitle]}>
             { messages[actionType].title }
           </H1>
@@ -131,8 +134,6 @@ class Overview extends React.Component {
               <A style={[styles.link, styles.theme.link]} onPress={this.openAcademy}> Read more</A> : ''
             }
           </P>
-        </View>
-        <View>
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
             <Avatar address={address || ''} style={styles.avatar} size={50}/>
             {
@@ -178,8 +179,8 @@ class Overview extends React.Component {
             onClick={this.send}
             title={ messages[actionType].button } />
         </View>
-      </View>
-    </View>);
+      </ScrollView>
+    );
   }
 }
 
