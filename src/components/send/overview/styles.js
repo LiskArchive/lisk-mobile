@@ -3,25 +3,15 @@ import { themes, boxes, colors, fonts } from '../../../constants/styleGuide';
 export default () => ({
   common: {
     container: {
-      height: '100%',
     },
     innerContainer: {
-      flex: 1,
+      flexGrow: 1,
       flexDirection: 'column',
       justifyContent: 'space-between',
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
       paddingTop: 36,
       paddingBottom: 35,
-    },
-    verticalAligner: {
-      padding: 20,
-    },
-    centerAlign: {
-      textAlign: 'center',
-    },
-    leftAlign: {
-      textAlign: 'left',
     },
     heading: {
       fontSize: 24,
