@@ -24,21 +24,13 @@ import { colors } from '../../constants/styleGuide';
 import { IconButton } from '../toolBox/button';
 import Logo from './logo';
 
-const SettingButton = ({ navigation }) =>
-  <IconButton
-    icon='settings'
-    iconSize={20}
-    onPress={() => navigation.navigate({ routeName: 'Settings' })}
-    style={styles.settings}
-    color={colors.light.white} />;
-
 const placeHolderButton = <IconButton color='transparent' icon='back'/>;
 // eslint-disable-next-line new-cap
 const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
-    navigationOptions: ({ navigation }) => ({
-      headerRight: <SettingButton navigation={navigation} />,
+    navigationOptions: () => ({
+      headerRight: placeHolderButton,
       headerLeft: placeHolderButton,
       title: <Logo />,
       tabBarLabel: 'Wallet',
@@ -54,8 +46,8 @@ const Tabs = TabNavigator({
   },
   Send: {
     screen: Send,
-    navigationOptions: ({ navigation }) => ({
-      headerRight: <SettingButton navigation={navigation} />,
+    navigationOptions: () => ({
+      headerRight: placeHolderButton,
       title: <Logo />,
       tabBarLabel: 'Send',
       tabBarIcon: ({ tintColor }) => <MenuIcon name='send' tintColor={tintColor} />, //eslint-disable-line
@@ -63,12 +55,22 @@ const Tabs = TabNavigator({
   },
   Request: {
     screen: Request,
-    navigationOptions: ({ navigation }) => ({
-      headerRight: <SettingButton navigation={navigation} />,
+    navigationOptions: () => ({
+      headerRight: placeHolderButton,
       headerLeft: placeHolderButton,
       title: <Logo />,
       tabBarLabel: 'Request',
       tabBarIcon: ({ tintColor }) => <MenuIcon name='request' tintColor={tintColor} />, //eslint-disable-line
+    }),
+  },
+  Settings: {
+    screen: Settings,
+    navigationOptions: () => ({
+      headerRight: placeHolderButton,
+      headerLeft: placeHolderButton,
+      title: <Logo />,
+      tabBarLabel: 'Settings',
+      tabBarIcon: ({ tintColor }) => <MenuIcon name='settings' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
 }, {
@@ -77,7 +79,6 @@ const Tabs = TabNavigator({
   initialRouteName: 'OwnWallet',
   headerMode: 'screen',
 });
-
 
 // eslint-disable-next-line new-cap
 export default StackNavigator(
@@ -100,10 +101,10 @@ export default StackNavigator(
     },
     Main: {
       screen: Tabs,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         headerBackground: <Bg />,
         title: <Logo />,
-        headerRight: <SettingButton navigation={navigation} />,
+        headerRight: placeHolderButton,
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
@@ -123,30 +124,6 @@ export default StackNavigator(
         headerStyle: {
           backgroundColor: colors.light.blue,
           overflow: 'hidden',
-        },
-      }),
-    },
-    Settings: {
-      screen: Settings,
-      navigationOptions: ({ navigation }) => ({
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerRight: placeHolderButton,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => navigation.pop()}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.light.white} />,
-        headerTintColor: colors.light.white,
-        headerStyle: {
-          backgroundColor: colors.light.blue,
-          overflow: 'hidden',
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
         },
       }),
     },
