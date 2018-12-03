@@ -72,112 +72,113 @@ class Settings extends React.Component {
     );
 
     return (
-      <ScrollView style={[styles.container, styles.theme.container]}>
-        <H1 style={styles.theme.header}>Settings</H1>
+      <View style={[styles.container, styles.theme.container]}>
+        <ScrollView style={styles.innerContainer}>
+          <H1 style={styles.theme.header}>Settings</H1>
 
-        <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>Security</H4>
+          <View style={styles.group}>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>Security</H4>
+            {
+              settings.sensorType ?
+                <View style={[styles.item, styles.theme.item]}>
+                  <ItemTitle
+                    navigation={navigation}
+                    showDialog={this.showDialog}
+                    hideDialog={this.hideDialog}
+                    setError={this.setError}
+                    target={target}
+                    authenticate={true}
+                    targetStateLabel={sensorStatus}
+                    icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
+                    iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
+                    title={settings.sensorType}/>
+                </View> : null
+            }
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                icon='enable-incognito'
+                targetStateLabel={
+                  <SwitchButton
+                    value={settings.incognito}
+                    theme={theme}
+                    onSyncPress={this.toggleIncognito} />
+                }
+                title='Discreet mode'
+                description="Hide balance and transaction amounts."
+              />
+            </View>
+          </View>
           {
-            settings.sensorType ?
+            (settings.sensorType && settings.hasStoredPassphrase) ?
               <View style={[styles.item, styles.theme.item]}>
                 <ItemTitle
                   navigation={navigation}
+                  target='PassphraseBackup'
+                  authenticate={true}
                   showDialog={this.showDialog}
                   hideDialog={this.hideDialog}
                   setError={this.setError}
-                  target={target}
-                  authenticate={true}
-                  targetStateLabel={sensorStatus}
-                  icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
-                  iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
-                  title={settings.sensorType}/>
+                  icon='backup'
+                  title='Backup your passphrase'/>
               </View> : null
           }
-          <View style={[styles.item, styles.theme.item]}>
-            <ItemTitle
-              icon='enable-incognito'
-              targetStateLabel={
-                <SwitchButton
-                  value={settings.incognito}
-                  theme={theme}
-                  onSyncPress={this.toggleIncognito} />
-              }
-              title='Discreet mode'
-              description="Hide balance and transaction amounts."
-            />
-          </View>
-        </View>
-        {
-          (settings.sensorType && settings.hasStoredPassphrase) ?
+
+          <View style={styles.group}>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>General</H4>
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
-                target='PassphraseBackup'
-                authenticate={true}
-                showDialog={this.showDialog}
-                hideDialog={this.hideDialog}
-                setError={this.setError}
-                icon='backup'
-                title='Backup your passphrase'/>
-            </View> : null
-        }
+                target='About'
+                icon='about'
+                title='About Lisk'/>
+            </View>
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                icon='dark-mode'
+                iconSize={20}
+                targetStateLabel={
+                  <SwitchButton
+                    value={settings.theme === themes.dark}
+                    theme={theme}
+                    onSyncPress={this.switchTheme} />
+                }
+                title='Dark mode'/>
+            </View>
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
+                icon='terms'
+                iconSize={20}
+                title='Currency'
+                target='CurrencySelection'
+                targetStateLabel={
+                  <P style={{ color: colors[theme].gray1 }}>
+                    {settings.currency}
+                  </P>
+                }
+              />
+            </View>
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
+                icon='terms'
+                target='Terms'
+                title='Terms of use'/>
+            </View>
+          </View>
 
-        <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>General</H4>
-          <View style={[styles.item, styles.theme.item]}>
-            <ItemTitle
-              navigation={navigation}
-              target='About'
-              icon='about'
-              title='About Lisk'/>
+          <View style={[styles.group, styles.signOut]}>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
+            <View style={[styles.item, styles.theme.item]}>
+              <SignOutButton navigation={navigation} signOut={this.props.accountSignedOut} />
+            </View>
           </View>
-          <View style={[styles.item, styles.theme.item]}>
-            <ItemTitle
-              icon='dark-mode'
-              iconSize={20}
-              targetStateLabel={
-                <SwitchButton
-                  value={settings.theme === themes.dark}
-                  theme={theme}
-                  onSyncPress={this.switchTheme} />
-              }
-              title='Dark mode'/>
-          </View>
-          <View style={[styles.item, styles.theme.item]}>
-            <ItemTitle
-              navigation={navigation}
-              icon='terms'
-              iconSize={20}
-              title='Currency'
-              target='CurrencySelection'
-              targetStateLabel={
-                <P style={{ color: colors[theme].gray1 }}>
-                  {settings.currency}
-                </P>
-              }
-            />
-          </View>
-          <View style={[styles.item, styles.theme.item]}>
-            <ItemTitle
-              navigation={navigation}
-              icon='terms'
-              target='Terms'
-              title='Terms of use'/>
-          </View>
-        </View>
-
-        <View style={[styles.group, styles.signOut]}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
-          <View style={[styles.item, styles.theme.item]}>
-            <SignOutButton navigation={navigation} signOut={this.props.accountSignedOut} />
-          </View>
-        </View>
-
+        </ScrollView>
         {
           Platform.OS === 'android' ?
-          <FingerprintOverlay error={this.state.error} show={this.state.show} /> : null
+            <FingerprintOverlay error={this.state.error} show={this.state.show} /> : null
         }
-      </ScrollView>
+      </View>
     );
   }
 }
