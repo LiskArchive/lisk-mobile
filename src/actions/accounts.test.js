@@ -99,7 +99,6 @@ describe('Action: Accounts', () => {
     transactionsUtility.getTransactions = jest.fn();
   });
 
-
   it('should returns an accountUnFollowed action object', () => {
     const expectedValue = {
       type: actionTypes.accountUnFollowed,

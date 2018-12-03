@@ -1,44 +1,61 @@
 import { AsyncStorage } from 'react-native';
+import { merge } from './helpers';
 import reg from '../constants/regex';
 
-const blankAccounts = [];
+export const blankAccounts = [];
+export const blankSettings = {
+  validated: true,
+};
 
 const validateAccounts = (data) => {
-  const parsedData = JSON.parse(data);
-  if (parsedData.reduce((acc, item) =>
-    reg.address.test(item.address) && item.label.length < 16, true)) {
+  try {
+    const parsedData = Array.isArray(data) ? data : JSON.parse(data);
+
+    if (
+      !parsedData ||
+      !Array.isArray(parsedData) ||
+      !parsedData.reduce((acc, item) => (
+        reg.address.test(item.address) && item.label.length < 16
+      ), true)
+    ) {
+      return blankAccounts;
+    }
+
     return parsedData;
+  } catch (error) {
+    return blankAccounts;
   }
-  return blankAccounts;
 };
 
-// eslint-disable-next-line
 const validateSettings = (data) => {
-  const parsedData = JSON.parse(data);
-  if (!parsedData || typeof parsedData !== 'object') return { validated: true };
-  parsedData.validated = true;
-  return parsedData;
+  try {
+    const parsedData = typeof data === 'object' ? data : JSON.parse(data);
+
+    if (!parsedData || typeof parsedData !== 'object') {
+      return blankSettings;
+    }
+
+    return merge(parsedData, blankSettings);
+  } catch (error) {
+    return blankSettings;
+  }
 };
 
-async function persistData(key, data) {
+export async function persistData(key, data) {
   try {
     await AsyncStorage.removeItem(key);
     await AsyncStorage.setItem(key, JSON.stringify(data));
     return data;
   } catch (error) {
-    return new Promise()
-      .then(() => ({ message: 'Error persisting data' }))
-      .catch(() => ({ message: 'Error persisting data' }));
+    throw new Error('Error saving data');
   }
 }
 
-async function fetchData(key) {
+export async function fetchData(key) {
   try {
     return await AsyncStorage.getItem(key);
   } catch (error) {
-    return new Promise()
-      .then(() => ({ message: 'Error retrieving data' }))
-      .catch(() => ({ message: 'Error retrieving data' }));
+    throw new Error('Error retrieving data');
   }
 }
 
@@ -49,15 +66,15 @@ export const retrieveAccounts = () =>
 
 export const storeFollowedAccount = followedAccountsList =>
   persistData('LiskfollowedAccounts', followedAccountsList)
-    .then(data => data)
-    .catch(err => err);
+    .then(data => validateAccounts(data))
+    .catch(() => blankAccounts);
 
 export const getSettings = () =>
   fetchData('LiskSettings')
     .then(data => validateSettings(data))
-    .catch(() => blankAccounts);
+    .catch(() => blankSettings);
 
 export const storeSettings = settings =>
   persistData('LiskSettings', settings)
-    .then(data => data)
-    .catch(err => err);
+    .then(data => validateSettings(data))
+    .catch(() => blankSettings);
