@@ -11,22 +11,13 @@ const getStyles = () => ({
       zIndex: 99,
     },
   },
-  [themes.dark]: {
-    style: {
-      backgroundColor: colors.dark.tabBarBgNavy,
-      borderTopColor: colors.dark.tabBarBgNavy,
-    },
-    tint: {
-      color: colors.dark.white,
-    },
-    indicatorStyle: {
-      backgroundColor: colors.dark.tabBarBgNavy,
-    },
-  },
   [themes.light]: {
     style: {
-      backgroundColor: colors.light.white,
+      backgroundColor: colors.light.tabBarBg,
       borderTopColor: colors.light.gray5,
+    },
+    inactiveTint: {
+      color: colors.dark.gray2,
     },
     tint: {
       color: colors.light.blue,
@@ -35,30 +26,48 @@ const getStyles = () => ({
       backgroundColor: colors.light.white,
     },
   },
+  [themes.dark]: {
+    style: {
+      backgroundColor: colors.dark.tabBarBg,
+      borderTopColor: colors.dark.tabBarBg,
+    },
+    inactiveTint: {
+      color: colors.dark.gray2,
+    },
+    tint: {
+      color: colors.dark.white,
+    },
+    indicatorStyle: {
+      backgroundColor: colors.dark.tabBarBg,
+    },
+  },
 });
 
 const DefaultTabBar = TabNavigator.Presets.Default.tabBarComponent;
 export default withTheme(({ styles, ...props }) => {
-  const iosStyle = {};
-  const iosLabelStyle = {};
-  if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
-    iosStyle.height = 55;
-    iosStyle.paddingTop = 5;
-  } else if (Platform.OS === 'ios' && !DeviceInfo.isIPhoneX_deprecated) {
-    iosStyle.height = 60;
-    iosLabelStyle.paddingBottom = 5;
+  const platformStyle = {};
+
+  if (Platform.OS === 'ios') {
+    if (DeviceInfo.isIPhoneX_deprecated) {
+      platformStyle.height = 55;
+    } else {
+      platformStyle.height = 60;
+    }
+  } else {
+    platformStyle.paddingTop = 5;
+    platformStyle.paddingBottom = 5;
   }
+
   return (<DefaultTabBar
       {...props}
       activeTintColor={styles.theme.tint.color}
       indicatorStyle={styles.theme.indicatorStyle}
-      inactiveTintColor={colors.light.gray2}
+      inactiveTintColor={styles.theme.inactiveTint.color}
       showIcon={true}
-      showLabel={true}
+      showLabel={false}
       upperCaseLabel={false}
-      style={[styles.style, styles.theme.style, iosStyle]}
+      style={[styles.style, styles.theme.style, platformStyle]}
       allowFontScaling={false}
-      labelStyle={[{ fontSize: 12 }, iosLabelStyle]}
     />
   );
 }, getStyles());

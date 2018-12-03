@@ -23,6 +23,7 @@ const light = {
   incomingBg: '#E4F5F1',
   boxBg: '#F5FBFE',
   sendBalanceBg: '#EFF4F9',
+  tabBarBg: '#FAFCFE',
 };
 
 const dark = {
@@ -35,9 +36,8 @@ const dark = {
   gray2: '#9EA8B4',
   gray3: '#D9E7F1',
   gray4: '#DDEAF4',
-  // @TODO: switch gray5 and gray1 after dark mode is implemented for all screens
   gray5: '#373E4F',
-  tabBarBgNavy: '#00152D',
+  tabBarBg: '#00152D',
   screenBgNavy: '#01071E',
   incomingBg: '#0B2131',
   boxBg: '#011832',

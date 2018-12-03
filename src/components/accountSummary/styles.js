@@ -182,7 +182,7 @@ export default () => ({
     },
     box: {
       shadowColor: colors.light.black,
-      backgroundColor: colors.dark.tabBarBgNavy,
+      backgroundColor: colors.dark.tabBarBg,
     },
   },
 });
