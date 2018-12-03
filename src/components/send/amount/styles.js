@@ -15,12 +15,20 @@ export default () => ({
       flexDirection: 'row',
       padding: boxes.boxPadding,
       marginBottom: 5,
+      alignItems: 'center',
     },
     balanceText: {
       fontSize: 14,
     },
     balanceNumber: {
       fontSize: 14,
+    },
+    balanceIncognito: {
+      width: 80,
+      height: 20,
+    },
+    form: {
+      marginTop: 5,
     },
     input: {
       marginTop: 0,
