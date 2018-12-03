@@ -7,7 +7,9 @@ import Input from '../../toolBox/input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { merge } from '../../../utilities/helpers';
+import { deviceType } from '../../../utilities/device';
 
+const isAndroid = deviceType() === 'android';
 class Reference extends React.Component {
   state = {
     reference: {
@@ -32,6 +34,10 @@ class Reference extends React.Component {
       showButtonLeft: true,
       action: () => prevStep(),
     });
+
+    if (isAndroid) {
+      setTimeout(() => this.input.focus(), 250);
+    }
   }
 
   onChange = (value) => {
@@ -80,8 +86,9 @@ class Reference extends React.Component {
 
             <View style={[styles.form, styles.theme.form]}>
               <Input
-                autoFocus={true}
+                reference={(el) => { this.input = el; }}
                 label='Reference (Optional)'
+                autoFocus={!isAndroid}
                 autoCorrect={false}
                 innerStyles={{ input: styles.input }}
                 multiline={true}

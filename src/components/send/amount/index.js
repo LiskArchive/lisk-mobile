@@ -11,7 +11,9 @@ import { merge } from '../../../utilities/helpers';
 import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import { deviceType } from '../../../utilities/device';
 
+const isAndroid = deviceType() === 'android';
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
   maxLength = 10
@@ -51,6 +53,10 @@ class Amount extends React.Component {
     });
 
     this.getPriceTicker();
+
+    if (isAndroid) {
+      setTimeout(() => this.input.focus(), 250);
+    }
   }
 
   getPriceTicker = () => {
@@ -133,7 +139,8 @@ class Amount extends React.Component {
 
             <View style={styles.form}>
               <AmountInput
-                autoFocus={true}
+                reference={(el) => { this.input = el; }}
+                autoFocus={!isAndroid}
                 label="Amount (LSK)"
                 value={value}
                 onChange={this.onChange}
