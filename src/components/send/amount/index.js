@@ -11,7 +11,9 @@ import { merge } from '../../../utilities/helpers';
 import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import { deviceType } from '../../../utilities/device';
 
+const isAndroid = deviceType() === 'android';
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
   maxLength = 10
@@ -35,7 +37,7 @@ class Amount extends React.Component {
   };
 
   componentDidMount() {
-    const { sharedData, accounts } = this.props;
+    const { sharedData, accounts, navigation } = this.props;
     const status = accounts.followed
       .filter(item => item.address === (sharedData.address)).length > 0;
 
@@ -43,7 +45,7 @@ class Amount extends React.Component {
       this.onChange(sharedData.amount);
     }
 
-    this.props.navigation.setParams({
+    navigation.setParams({
       showButtonLeft: true,
       action: () => this.props.move({
         to: status ? 0 : 1,
@@ -51,6 +53,10 @@ class Amount extends React.Component {
     });
 
     this.getPriceTicker();
+
+    if (isAndroid) {
+      setTimeout(() => this.input.focus(), 250);
+    }
   }
 
   getPriceTicker = () => {
@@ -133,6 +139,8 @@ class Amount extends React.Component {
 
             <View style={styles.form}>
               <AmountInput
+                reference={(el) => { this.input = el; }}
+                autoFocus={!isAndroid}
                 label="Amount (LSK)"
                 value={value}
                 onChange={this.onChange}

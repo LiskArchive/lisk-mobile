@@ -10,7 +10,9 @@ import getStyles from './styles';
 import {
   accountFollowed as accountFollowedAction,
 } from '../../../actions/accounts';
+import { deviceType } from '../../../utilities/device';
 
+const isAndroid = deviceType() === 'android';
 @connect(state => ({
   account: state.accounts.followed,
 }), {
@@ -26,17 +28,19 @@ class AddToBookmark extends React.Component {
   };
 
   validator = str => (str.length > 30 ? 1 : 0)
-  // validator = str => (str.length > 0 ? 0 : 1)
 
   componentDidMount() {
     this.props.navigation.setParams({
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
+
+    if (isAndroid) {
+      setTimeout(() => this.input.focus(), 250);
+    }
   }
 
   onChange = (value) => {
-    // const validity = this.validator(value);
     this.setState({
       buttonTitle: (value.length > 0) ? 'Save and continue' : 'Continue',
       label: {
@@ -96,9 +100,10 @@ class AddToBookmark extends React.Component {
                 </View>
               </View>
               <Input
+                reference={(el) => { this.input = el; }}
                 label='Label'
+                autoFocus={!isAndroid}
                 autoCorrect={false}
-                autoFocus={true}
                 innerStyles={{ input: styles.input }}
                 multiline={true}
                 onChange={this.onChange}

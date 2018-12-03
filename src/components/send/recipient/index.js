@@ -42,7 +42,10 @@ class Recipient extends React.Component {
       setTimeout(() => this.input.focus(), 500);
     }
 
-    navigation.setParams({ showButtonLeft: false });
+    navigation.setParams({
+      showButtonLeft: false,
+      action: null,
+    });
   }
 
   setAvatarPreviewTimeout = () => {
