@@ -1,4 +1,4 @@
-import { themes, colors } from '../../constants/styleGuide';
+import { themes, colors, boxes } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -6,12 +6,10 @@ export default () => ({
       flex: 1,
     },
     innerContainer: {
-      padding: 20,
-      paddingTop: 36,
-      paddingBottom: 60,
+      padding: boxes.boxPadding,
     },
     group: {
-      marginTop: 20,
+      marginBottom: 20,
     },
     subHeader: {
       marginBottom: 8,
@@ -31,9 +29,6 @@ export default () => ({
     container: {
       backgroundColor: colors.light.white,
     },
-    header: {
-      color: colors.light.black,
-    },
     subHeader: {
       color: colors.light.black,
     },
@@ -45,9 +40,6 @@ export default () => ({
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    header: {
-      color: colors.dark.white,
     },
     subHeader: {
       color: colors.dark.white,
