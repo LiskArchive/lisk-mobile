@@ -9,7 +9,7 @@ import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
-import { H1, H4, B, P, A, Small } from '../../toolBox/typography';
+import { H4, B, P, A, Small } from '../../toolBox/typography';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
@@ -82,18 +82,26 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    let { back } = this;
+    let nextNavigationParams = {
+      title: messages.send.title,
+      action: this.back,
+      showButtonLeft: true,
+    };
+
     if (this.props.navigation.state.params.initialize) {
       this.setState({
         initialize: true,
       });
 
-      back = this.props.navigation.goBack;
+      nextNavigationParams = {
+        title: messages.initialize.title,
+        showButtonLeft: false,
+        action: this.props.navigation.back,
+      };
     }
 
     this.props.navigation.setParams({
-      showButtonLeft: !this.props.navigation.state.params.initialize,
-      action: back,
+      ...nextNavigationParams,
       initialize: false,
     });
   }
@@ -124,10 +132,7 @@ class Overview extends React.Component {
         contentContainerStyle={styles.innerContainer}
       >
         <View>
-          <H1 style={[styles.headerTitle, styles.theme.headerTitle]}>
-            { messages[actionType].title }
-          </H1>
-          <P style={[styles.subtitle, styles.theme.subtitle]}>
+          <P style={styles.theme.subtitle}>
             { messages[actionType].subtitle }
             {
               actionType === 'initialize' ?

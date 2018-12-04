@@ -9,15 +9,8 @@ export default () => ({
       paddingBottom: (deviceType() === 'android' ? tabBarHeight() : 0) + 24,
     },
     headerContainer: {
-      paddingTop: 36,
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
-    },
-    subHeader: {
-      marginTop: 5,
-    },
-    form: {
-      marginTop: 20,
+      margin: boxes.boxPadding,
+      marginBottom: 0,
     },
     input: {
       marginTop: 0,
@@ -30,9 +23,6 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    header: {
-      color: colors.light.black,
-    },
     subHeader: {
       color: colors.light.gray2,
     },
@@ -41,9 +31,6 @@ export default () => ({
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    header: {
-      color: colors.dark.white,
     },
     subHeader: {
       color: colors.dark.gray4,

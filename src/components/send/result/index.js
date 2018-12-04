@@ -3,7 +3,7 @@ import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { SecondaryButton } from '../../toolBox/button';
-import { H1, P } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import txCreatedAnim from '../../../assets/animations/tx-created.json';
 import txPendingAnim from '../../../assets/animations/tx-pending.json';
 import txConfirmedAnim from '../../../assets/animations/tx-confirmed.json';
@@ -27,7 +27,7 @@ class Result extends React.Component {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: false });
+    this.props.navigation.setParams({ title: 'Sent', showButtonLeft: false });
     this.startDate = new Date();
     this.play('created');
   }
@@ -69,33 +69,31 @@ class Result extends React.Component {
 
   render() {
     const { styles } = this.props;
-    return (<View style={[styles.container, styles.theme.container]}>
-      <View style={styles.innerContainer}>
-        <View>
-          <H1 style={[styles.title, styles.theme.title]}>Sent</H1>
-          <P style={[styles.subtitle, styles.theme.subtitle]}>
-            Thank you. Your transaction is being processed.
-            It may take up to 15 minutes to be secured in the blockchain.
-          </P>
-        </View>
+
+    return (
+      <View style={[styles.container, styles.theme.container]}>
+        <P style={styles.theme.subtitle}>
+          Thank you. Your transaction is being processed.
+          It may take up to 15 minutes to be secured in the blockchain.
+        </P>
         <View style={styles.illustration}>
           {this.state.step === 0 ? <LottieView
             source={txCreatedAnim}
             loop={false}
             style={{}}
-            ref={(el) => { this.animation[0] = el; }}/>
+            ref={(el) => { this.animation[0] = el; }} />
             : null}
           {this.state.step === 1 ? <LottieView
             source={txPendingAnim}
             loop={true}
             style={{}}
-            ref={(el) => { this.animation[1] = el; }}/>
+            ref={(el) => { this.animation[1] = el; }} />
             : null}
           {this.state.step === 2 ? <LottieView
             source={txConfirmedAnim}
             loop={false}
             style={{}}
-            ref={(el) => { this.animation[2] = el; }}/>
+            ref={(el) => { this.animation[2] = el; }} />
             : null}
         </View>
         <SecondaryButton
@@ -104,9 +102,10 @@ class Result extends React.Component {
             this.props.finalCallback();
             this.props.reset();
           }}
-          title='Return to home' />
+          title='Return to home'
+        />
       </View>
-    </View>);
+    );
   }
 }
 

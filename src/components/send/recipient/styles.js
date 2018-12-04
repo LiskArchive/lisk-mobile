@@ -5,27 +5,22 @@ import { viewportHeight, headerHeight } from '../../../utilities/device';
 const { height, width } = Dimensions.get('window');
 export default () => ({
   common: {
-    subtitle: {
-      marginTop: 7,
-    },
     innerContainer: {
       flexDirection: 'column',
       paddingBottom: 24,
     },
     titleContainer: {
       overflow: 'hidden',
+      marginRight: boxes.boxPadding,
+      marginLeft: boxes.boxPadding,
     },
     form: {
-      paddingBottom: 20,
+      paddingBottom: boxes.boxPadding,
     },
     input: {
       marginTop: 0,
       flexWrap: 'wrap',
       flex: 1,
-    },
-    headings: {
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
     },
     preview: {
       position: 'absolute',
@@ -44,8 +39,8 @@ export default () => ({
     cameraOverlay: {
       backgroundColor: '#394451',
       opacity: 0.85,
-      paddingLeft: 20,
-      paddingRight: 20,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
       paddingTop: 24,
       paddingBottom: 24,
       flexDirection: 'row',
@@ -164,9 +159,6 @@ export default () => ({
     },
     subtitle: {
       color: colors.dark.gray4,
-    },
-    title: {
-      color: colors.dark.white,
     },
     scanButtonTitle: {
       color: colors.dark.blue,

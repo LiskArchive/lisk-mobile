@@ -50,14 +50,12 @@ const Tabs = TabNavigator({
   },
   Send: {
     screen: Send,
-    navigationOptions: () => ({
-      title: 'Send',
+    navigationOptions: {
       headerTitle: HeaderTitle,
       headerRight: HeaderPlaceholderButton,
-      headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='send' tintColor={tintColor} />, //eslint-disable-line
-    }),
+    },
   },
   Request: {
     screen: Request,
