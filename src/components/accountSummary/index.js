@@ -7,14 +7,13 @@ import {
 } from '../../actions/accounts';
 import Avatar from '../avatar';
 import { fromRawLsk } from '../../utilities/conversions';
-// import Modal from '../followedAccountsModal';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
 import { H4, P, H2 } from '../toolBox/typography';
 import bg from '../../assets/images/bg.png';
 import easing from '../../utilities/easing';
 import withTheme from '../withTheme';
-import getStyles, { animationRanges } from './styles';
+import getStyles from './styles';
 import darkBig from '../../assets/images/balanceBlur/darkBig.png';
 import darkMedium from '../../assets/images/balanceBlur/darkMedium.png';
 import darkSmall from '../../assets/images/balanceBlur/darkSmall.png';
@@ -56,26 +55,6 @@ class AccountSummary extends React.Component {
     });
   }
 
-  createInterpolatedValue = (outputRange, inputRange = [0, 80]) =>
-    this.props.scrollY.interpolate({
-      inputRange,
-      outputRange,
-      extrapolate: 'clamp',
-    });
-
-  interpolate = (key, props, range) =>
-    props.reduce((interpolated, prop) => {
-      interpolated[prop] = this.createInterpolatedValue(animationRanges[key][prop], range);
-      return interpolated;
-    }, {});
-
-  setPadding = (e, name) => {
-    if (animationRanges[name].left[0] === 33) {
-      const { width } = e.nativeEvent.layout;
-      animationRanges[name].left[0] = Math.floor((this.screenWidth - width) / 2);
-    }
-  }
-
   initialFadeIn = () => {
     const { opacity, top } = this.state.initialAnimations;
     Animated.timing(opacity, {
@@ -92,12 +71,18 @@ class AccountSummary extends React.Component {
   }
 
   render() {
-    const { styles, account, settings } = this.props;
+    const {
+      styles, account, settings, priceTicker,
+    } = this.props;
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
-    const avatarScale = this.createInterpolatedValue([1, 0.85]);
-    const avatarTranslate = this.createInterpolatedValue([0, -6]);
     const normalizedBalance = fromRawLsk(account.balance);
+
+    let faitBalance = 0;
+
+    if (normalizedBalance && priceTicker[settings.currency]) {
+      faitBalance = (normalizedBalance * priceTicker[settings.currency]).toFixed(2);
+    }
 
     let balanceSize = 'Small';
     if (normalizedBalance.length > 6) balanceSize = 'Big';
@@ -109,8 +94,7 @@ class AccountSummary extends React.Component {
         <Anim style={[styles.container, { opacity, top }]}>
           <Image style={[styles.bg, styles.theme.bg]} source={bg} resizeMode='repeat' />
           <Anim style={[styles.avatar, { opacity }]}>
-            <Avatar address={account.address}
-              size={60} scale={avatarScale} translate={avatarTranslate} />
+            <Avatar address={account.address} size={60} />
           </Anim>
           <Anim style={[styles.address, { opacity }]}>
             <Share type={P}
@@ -127,7 +111,9 @@ class AccountSummary extends React.Component {
               style={[styles.blur, styles[`blur${balanceSize}`],
               settings.incognito ? styles.visibleBlur : null]} />
           </Anim>
-          <Anim style={[styles.box, styles.theme.box]} />
+          <Anim style={[styles.fiat, { opacity }]}>
+            <P style={[styles.fiatValue, styles.theme.fiatValue]}>{`~ ${faitBalance} ${settings.currency}`}</P>
+          </Anim>
         </Anim> :
         <H4>Fetching account info</H4>
       }

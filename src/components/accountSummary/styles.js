@@ -1,40 +1,13 @@
-import { Dimensions, DeviceInfo, Platform } from 'react-native';
+import { DeviceInfo, Platform } from 'react-native';
 import { Header } from 'react-navigation';
-import { themes, colors, boxes } from '../../constants/styleGuide';
-
-const { width } = Dimensions.get('window');
-
-export const animationRanges = {
-  width,
-  bg: {
-    height: [116, 56],
-  },
-  box: {
-    height: [125, 100],
-    top: [50, 0],
-  },
-  avatar: {
-    left: [Math.floor(width / 2) - 40, 40, 40],
-    top: [0, 0, 20],
-    width: [80, 70, 60],
-    height: [80, 70, 60],
-  },
-  address: {
-    top: [83, 15],
-    left: [33, 110],
-  },
-  balance: {
-    top: [120, 45],
-    left: [33, 110],
-  },
-};
+import { themes, colors } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
     container: {
       width: '100%',
-      height: 160,
-      backgroundColor: colors.dark.screenBgNavy,
+      height: 170,
+      backgroundColor: colors.dark.navigationBg,
       overflow: 'hidden',
     },
     avatar: {
@@ -71,9 +44,6 @@ export default () => ({
       zIndex: 2,
       elevation: 2,
     },
-    lift: {
-      marginTop: -10,
-    },
     bg: {
       position: 'absolute',
       left: 0,
@@ -84,19 +54,7 @@ export default () => ({
       width: '100%',
       overflow: 'hidden',
     },
-    box: {
-      width: width - (2 * boxes.boxPadding),
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.2,
-      shadowRadius: 10,
-      position: 'absolute',
-      left: boxes.boxPadding,
-      zIndex: 1,
-      borderRadius: boxes.boxBorderRadius,
-      elevation: 3,
-    },
     blurWrapper: {
-      backgroundColor: 'red',
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -131,6 +89,12 @@ export default () => ({
       height: 45,
       marginLeft: -45,
     },
+    fiat: {
+      width: '100%',
+      alignItems: 'center',
+      zIndex: 2,
+    },
+    fiatValue: {},
   },
   [themes.light]: {
     bg: {
@@ -145,9 +109,8 @@ export default () => ({
     addressP: {
       color: colors.light.gray5,
     },
-    box: {
-      shadowColor: colors.light.blue,
-      backgroundColor: colors.light.white,
+    fiatValue: {
+      color: colors.light.gray5,
     },
   },
   [themes.dark]: {
@@ -160,9 +123,8 @@ export default () => ({
     balance: {
       color: colors.dark.white,
     },
-    box: {
-      shadowColor: colors.light.black,
-      backgroundColor: colors.dark.navigationBg,
+    fiatValue: {
+      color: colors.dark.gray2,
     },
   },
 });
