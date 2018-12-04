@@ -167,6 +167,7 @@ android {
 
 dependencies {
     compile project(':react-native-haptic-feedback')
+    compile project(':react-native-interactable')
     implementation project(':react-native-blur-overlay')
     implementation project(':react-native-fingerprint-scanner')
     implementation project(':react-native-keychain')
