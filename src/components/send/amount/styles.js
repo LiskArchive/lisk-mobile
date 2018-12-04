@@ -17,6 +17,10 @@ export default () => ({
       marginBottom: 5,
       alignItems: 'center',
     },
+    balanceContainerIncognito: {
+      paddingTop: 9,
+      paddingBottom: 9,
+    },
     balanceText: {
       fontSize: 14,
     },
@@ -24,8 +28,9 @@ export default () => ({
       fontSize: 14,
     },
     balanceIncognito: {
-      width: 80,
-      height: 20,
+      width: 94,
+      height: 37,
+      marginLeft: -10,
     },
     form: {
       marginTop: 5,

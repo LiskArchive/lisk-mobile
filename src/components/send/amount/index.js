@@ -12,10 +12,10 @@ import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { deviceType } from '../../../utilities/device';
-import darkBig from '../../../assets/images/balanceBlur/darkBig.png';
-import lightBig from '../../../assets/images/balanceBlur/lightBig.png';
+import darkBlur from '../../../assets/images/amountFormBalanceBlur/dark.png';
+import lightBlur from '../../../assets/images/amountFormBalanceBlur/light.png';
 
-const blurs = { dark: darkBig, light: lightBig };
+const blurs = { dark: darkBlur, light: lightBlur };
 
 const isAndroid = deviceType() === 'android';
 class Amount extends React.Component {
@@ -144,7 +144,13 @@ class Amount extends React.Component {
               </P>
             </View>
 
-            <View style={[styles.balanceContainer, styles.theme.balanceContainer]}>
+            <View
+              style={[
+                styles.balanceContainer,
+                styles.theme.balanceContainer,
+                (incognito ? styles.balanceContainerIncognito : {}),
+              ]}
+            >
               <B style={[styles.balanceText, styles.theme.balanceText]}>
                 {'You have '}
               </B>
