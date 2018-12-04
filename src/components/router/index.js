@@ -190,7 +190,7 @@ export default StackNavigator(
     PassphraseBackup: {
       screen: PassphraseBackup,
       navigationOptions: {
-        title: 'Backup your passphrase',
+        title: 'Passphrase backup',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
