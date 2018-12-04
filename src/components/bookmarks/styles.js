@@ -1,4 +1,7 @@
+import { Dimensions } from 'react-native';
 import { themes, colors } from '../../constants/styleGuide';
+
+const Screen = Dimensions.get('window');
 
 export default () => ({
   common: {
@@ -8,13 +11,14 @@ export default () => ({
       paddingTop: 20,
     },
     itemContainer: {
+      flex: 1,
       width: '100%',
       height: 90,
       paddingTop: 20,
       paddingBottom: 20,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'stretch',
+      // flexDirection: 'row',
+      // justifyContent: 'space-between',
+      // alignItems: 'stretch',
       borderBottomWidth: 1,
     },
     innerContainer: {
@@ -67,6 +71,42 @@ export default () => ({
     },
     noResult: {
       marginTop: 11,
+    },
+    editButton: {
+      position: 'absolute',
+      top: 0,
+      left: Screen.width - 175,
+      width: Screen.width,
+      height: 90,
+      paddingLeft: 18,
+      backgroundColor: colors.light.sendBalanceBg,
+      justifyContent: 'center',
+    },
+    deleteButton: {
+      backgroundColor: colors.light.actionRed,
+      position: 'absolute',
+      top: 0,
+      left: Screen.width - 98,
+      width: Screen.width,
+      height: 90,
+      paddingLeft: 18,
+      justifyContent: 'center',
+    },
+    draggableRow: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      backgroundColor: 'transparent',
+      height: 75,
+      width: '100%',
+    },
+    row: {
+      left: 0,
+      right: 0,
+      height: 60,
+      backgroundColor: 'white',
+      width: '100%',
     },
   },
   [themes.light]: {
