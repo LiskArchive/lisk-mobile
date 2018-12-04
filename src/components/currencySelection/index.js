@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableHighlight, FlatList } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { H1, P } from '../toolBox/typography';
+import { P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { currencyMap, currencyKeys } from '../../constants/currencies';
 import { settingsUpdated as settingsUpdatedAction } from '../../actions/settings';
@@ -22,10 +22,6 @@ class CurrencySelection extends React.Component {
 
     return (
       <View style={[styles.container, styles.theme.container]}>
-        <H1 style={[styles.header, styles.theme.header]}>
-          Select your currency
-        </H1>
-
         <FlatList
           extraData={currency}
           data={currencyKeys}

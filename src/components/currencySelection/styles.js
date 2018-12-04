@@ -1,13 +1,10 @@
-import { themes, colors } from '../../constants/styleGuide';
+import { themes, colors, boxes } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
     container: {
       flex: 1,
-      padding: 20,
-    },
-    header: {
-      marginBottom: 16,
+      padding: boxes.boxPadding,
     },
     itemContainer: {
       flexDirection: 'row',
