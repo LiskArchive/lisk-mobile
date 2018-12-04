@@ -1,27 +1,20 @@
 import React from 'react';
 import { Image, View } from 'react-native';
-import stripesLight from '../../../assets/images/stripesLight.png';
-import stripesDark from '../../../assets/images/stripesDark.png';
+import bg from '../../../assets/images/bg.png';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
-import themes from '../../../constants/styleGuide/themes';
 
-const HeaderBackgroundImage = ({ styles, theme }) => (
-  <View>
+const HeaderBackgroundImage = ({ styles }) => (
+  <View style={styles.wrapper}>
     {
-      theme === themes.light ? (
-        <Image
-          style={styles.main}
-          source={stripesLight}
-        />
-      ) : (
-        <Image
-          style={styles.main}
-          source={stripesDark}
-        />
-      )
+      <Image
+        style={[styles.image, styles.theme.image]}
+        source={bg}
+        resizeMode='repeat'
+      />
     }
   </View>
 );
 
 export default withTheme(HeaderBackgroundImage, getStyles());
+
