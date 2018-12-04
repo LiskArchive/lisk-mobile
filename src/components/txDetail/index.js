@@ -38,7 +38,6 @@ const TxDetail = ({ navigation, styles, theme }) => {
   const normalizedAmount = fromRawLsk(tx.amount);
 
   return (<ScrollView style={[styles.container, styles.theme.container]}>
-    <H1 style={[styles.title, styles.theme.title]}>Transaction details</H1>
     <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
       <View style={styles.row}>
       { tx.type !== 0 || (tx.recipientId === tx.senderId) ?

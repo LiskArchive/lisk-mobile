@@ -11,11 +11,6 @@ export default () => ({
       margin: 20,
       marginBottom: 0,
     },
-    title: {
-      paddingTop: 35,
-      paddingLeft: 20,
-      paddingRight: 20,
-    },
     address: {
       fontSize: 24,
       paddingBottom: 15,
@@ -53,7 +48,6 @@ export default () => ({
       ],
     },
     senderAndRecipient: {
-      marginTop: 24,
       marginBottom: 10,
       paddingTop: 20,
       paddingBottom: 20,
@@ -98,9 +92,6 @@ export default () => ({
     container: {
       backgroundColor: colors.light.white,
     },
-    title: {
-      color: colors.light.black,
-    },
     date: {
       color: colors.light.gray2,
     },
@@ -129,9 +120,6 @@ export default () => ({
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    title: {
-      color: colors.dark.white,
     },
     date: {
       color: colors.dark.gray2,
