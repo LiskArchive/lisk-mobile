@@ -140,7 +140,7 @@ export default () => ({
       color: colors.dark.white,
     },
     senderAndRecipient: {
-      backgroundColor: colors.dark.tabBarBgNavy,
+      backgroundColor: colors.dark.navigationBg,
       borderBottomColor: colors.dark.gray5,
       borderTopColor: colors.dark.gray5,
     },
