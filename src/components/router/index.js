@@ -181,7 +181,6 @@ export default StackNavigator(
     DisableBioAuth: {
       screen: DisableBioAuth,
       navigationOptions: {
-        title: 'Disable BioAuth',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
