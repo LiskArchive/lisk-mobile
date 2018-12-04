@@ -6,10 +6,6 @@ const { width } = Dimensions.get('window');
 
 export const animationRanges = {
   width,
-  container: {
-    marginTop: 6,
-    height: [185, 110],
-  },
   bg: {
     height: [116, 56],
   },
@@ -37,38 +33,30 @@ export default () => ({
   common: {
     container: {
       width: '100%',
-      height: animationRanges.container.height[0],
-      marginTop: animationRanges.container.marginTop,
-      borderBottomWidth: 20,
-      borderBottomColor: 'transparent',
+      height: 160,
+      backgroundColor: colors.dark.screenBgNavy,
+      overflow: 'hidden',
     },
     avatar: {
       top: 0,
+      left: '50%',
+      marginLeft: -30,
       position: 'absolute',
       zIndex: 4,
       elevation: 4,
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.2,
       shadowRadius: 10,
-      borderRadius: 40,
+      borderRadius: 30,
       overflow: 'hidden',
     },
-    unit: {
-      fontSize: 23,
-      lineHeight: 25,
-      marginLeft: 5,
-      marginTop: -3,
-    },
-    value: {
-      lineHeight: 25,
-    },
     address: {
-      height: 45,
+      width: '100%',
       paddingTop: 10,
-      paddingBottom: 10,
-      position: 'absolute',
-      zIndex: 4,
-      elevation: 4,
+      paddingBottom: 3,
+      marginTop: 60,
+      textAlign: 'center',
+      zIndex: 2,
     },
     addressContainer: {
       justifyContent: 'center',
@@ -77,14 +65,11 @@ export default () => ({
       lineHeight: 25,
     },
     balance: {
-      height: 45,
-      flexDirection: 'row',
-      justifyContent: 'center',
+      height: 32,
+      width: '100%',
       alignItems: 'center',
-      alignSelf: 'flex-end',
-      position: 'absolute',
-      zIndex: 4,
-      elevation: 4,
+      zIndex: 2,
+      elevation: 2,
     },
     lift: {
       marginTop: -10,
@@ -92,17 +77,12 @@ export default () => ({
     bg: {
       position: 'absolute',
       left: 0,
-      top: 0,
-      zIndex: 0,
-      width: '100%',
-      overflow: 'hidden',
-    },
-    bgImage: {
-      position: 'absolute',
-      width: '100%',
-      left: 0,
       top: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ?
         -1 * (Header.HEIGHT + 24) : -1 * (Header.HEIGHT + 1),
+      zIndex: 1,
+      height: 280,
+      width: '100%',
+      overflow: 'hidden',
     },
     box: {
       width: width - (2 * boxes.boxPadding),
@@ -153,17 +133,17 @@ export default () => ({
     },
   },
   [themes.light]: {
+    bg: {
+      opacity: 1,
+    },
     avatar: {
       shadowColor: colors.light.blue,
     },
-    unit: {
-      color: colors.light.blue,
-    },
-    value: {
-      color: colors.light.blue,
+    balance: {
+      color: colors.light.white,
     },
     addressP: {
-      color: colors.light.gray1,
+      color: colors.light.gray5,
     },
     box: {
       shadowColor: colors.light.blue,
@@ -171,13 +151,13 @@ export default () => ({
     },
   },
   [themes.dark]: {
+    bg: {
+      opacity: 0.6,
+    },
     addressP: {
       color: colors.dark.gray2,
     },
-    value: {
-      color: colors.dark.white,
-    },
-    unit: {
+    balance: {
       color: colors.dark.white,
     },
     box: {
