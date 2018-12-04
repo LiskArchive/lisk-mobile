@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Share from '../share';
 import { viewportHeight, deviceWidth } from '../../utilities/device';
 import Input from '../toolBox/input';
-import { H1, P, B } from '../toolBox/typography';
+import { P, B } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import reg from '../../constants/regex';
 import withTheme from '../withTheme';
@@ -64,14 +64,9 @@ class Request extends React.Component {
           contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}
         >
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-            <View style={styles.headerContainer}>
-              <H1 style={[styles.header, styles.theme.header]}>
-                Request
-              </H1>
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
-                Request LSK tokens from other accounts.
-              </P>
-            </View>
+            <P style={[styles.subHeader, styles.theme.subHeader]}>
+              Request LSK tokens from other accounts.
+            </P>
             <View style={styles.main}>
               <B style={[styles.address, styles.theme.address]}>
                 {address}
