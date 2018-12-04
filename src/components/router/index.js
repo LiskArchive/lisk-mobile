@@ -3,6 +3,7 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import SignIn from '../signIn';
 import TxDetail from '../txDetail';
 import Send from '../send';
+import Bookmark from '../bookmarkPage';
 import Register from '../register';
 import Wallet from '../wallet';
 import Request from '../request';
@@ -59,6 +60,15 @@ const Tabs = TabNavigator({
       },
     },
   },
+  Bookmarks: {
+    screen: Bookmark,
+    navigationOptions: ({ navigation }) => ({
+      headerRight: <SettingButton navigation={navigation} />,
+      title: <Logo />,
+      tabBarLabel: 'Bookmarks',
+      tabBarIcon: ({ tintColor }) => <MenuIcon name='bookmark' tintColor={tintColor} />, //eslint-disable-line
+    }),
+  },
   Request: {
     screen: Request,
     navigationOptions: {
@@ -96,6 +106,7 @@ const Tabs = TabNavigator({
   tabBarPosition: 'bottom',
   initialRouteName: 'Home',
   headerMode: 'screen',
+  swipeEnabled: false,
 });
 
 // eslint-disable-next-line new-cap
