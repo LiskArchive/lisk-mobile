@@ -24,8 +24,8 @@ export default () => ({
   },
   [themes.dark]: {
     style: {
-      backgroundColor: colors.dark.tabBarBg,
-      borderTopColor: colors.dark.tabBarBg,
+      backgroundColor: colors.dark.navigationBg,
+      borderTopColor: colors.dark.navigationBg,
     },
     inactiveTint: {
       color: colors.dark.gray2,
@@ -34,7 +34,7 @@ export default () => ({
       color: colors.dark.white,
     },
     indicatorStyle: {
-      backgroundColor: colors.dark.tabBarBg,
+      backgroundColor: colors.dark.navigationBg,
     },
   },
 });

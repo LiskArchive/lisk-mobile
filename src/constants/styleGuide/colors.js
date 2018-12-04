@@ -37,7 +37,6 @@ const dark = {
   gray3: '#D9E7F1',
   gray4: '#DDEAF4',
   gray5: '#373E4F',
-  tabBarBg: '#00152D',
   screenBgNavy: '#01071E',
   incomingBg: '#0B2131',
   boxBg: '#011832',
