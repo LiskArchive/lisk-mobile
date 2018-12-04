@@ -105,21 +105,21 @@ class Settings extends React.Component {
                 description="Hide balance and transaction amounts."
               />
             </View>
+            {
+              (settings.sensorType && settings.hasStoredPassphrase) ?
+                <View style={[styles.item, styles.theme.item]}>
+                  <ItemTitle
+                    navigation={navigation}
+                    target='PassphraseBackup'
+                    authenticate={true}
+                    showDialog={this.showDialog}
+                    hideDialog={this.hideDialog}
+                    setError={this.setError}
+                    icon='backup'
+                    title='Backup your passphrase' />
+                </View> : null
+            }
           </View>
-          {
-            (settings.sensorType && settings.hasStoredPassphrase) ?
-              <View style={[styles.item, styles.theme.item]}>
-                <ItemTitle
-                  navigation={navigation}
-                  target='PassphraseBackup'
-                  authenticate={true}
-                  showDialog={this.showDialog}
-                  hideDialog={this.hideDialog}
-                  setError={this.setError}
-                  icon='backup'
-                  title='Backup your passphrase'/>
-              </View> : null
-          }
 
           <View style={styles.group}>
             <H4 style={[styles.subHeader, styles.theme.subHeader]}>General</H4>
