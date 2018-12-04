@@ -16,7 +16,7 @@ export default () => ({
       paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 30 : 20,
     },
     subHeader: {
-      marginBottom: 20,
+      marginBottom: boxes.boxPadding,
     },
     row: {
       flexDirection: 'row',
