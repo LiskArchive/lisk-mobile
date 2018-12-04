@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
+import liskService from '../../utilities/api/liskService';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
 import AccountSummary from '../accountSummary';
@@ -31,10 +32,11 @@ const summaryHeight = 250;
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
 })
-class Wallet extends React.Component {
+class Home extends React.Component {
   state = {
     scrollY: new Animated.Value(0),
     theme: 'loading',
+    priceTicker: {},
   };
 
   scrollView = null;
@@ -46,6 +48,7 @@ class Wallet extends React.Component {
       offset: 0,
     });
     this.initialAnimation();
+    this.getPriceTicker();
   }
 
   componentDidUpdate() {
@@ -106,8 +109,16 @@ class Wallet extends React.Component {
     }
   }
 
+  getPriceTicker = () => {
+    liskService.getPriceTicker()
+      .then(res => this.setState({ priceTicker: res.tickers.LSK }))
+      .catch(console.log); //eslint-disable-line
+  }
+
   render() {
-    const { theme, scrollY, footer } = this.state;
+    const {
+      theme, scrollY, footer, priceTicker,
+    } = this.state;
     const {
       styles,
       account,
@@ -157,6 +168,7 @@ class Wallet extends React.Component {
             <AccountSummary
               scrollY={scrollY}
               account={account}
+              priceTicker={priceTicker}
               style={styles.accountSummary}
             />
           ) : null
@@ -167,4 +179,4 @@ class Wallet extends React.Component {
   }
 }
 
-export default withTheme(Wallet, getStyles());
+export default withTheme(Home, getStyles());
