@@ -6,7 +6,7 @@ import Send from '../send';
 import Register from '../register';
 import Wallet from '../wallet';
 import Request from '../request';
-import OwnWallet from '../ownWallet';
+import Home from '../home';
 import Settings from '../settings';
 import About from '../about';
 import CurrencySelection from '../currencySelection';
@@ -27,8 +27,8 @@ import { colors } from '../../constants/styleGuide';
 
 // eslint-disable-next-line new-cap
 const Tabs = TabNavigator({
-  OwnWallet: {
-    screen: OwnWallet,
+  Home: {
+    screen: Home,
     navigationOptions: () => ({
       title: 'Your wallet',
       headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
@@ -84,7 +84,7 @@ const Tabs = TabNavigator({
 }, {
   tabBarComponent: TabBarComponent,
   tabBarPosition: 'bottom',
-  initialRouteName: 'OwnWallet',
+  initialRouteName: 'Home',
   headerMode: 'screen',
 });
 

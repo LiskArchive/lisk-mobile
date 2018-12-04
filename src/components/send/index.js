@@ -95,7 +95,7 @@ class Send extends React.Component {
   }
 
   finalCallback = () => {
-    this.props.navigation.navigate({ routeName: 'OwnWallet' });
+    this.props.navigation.navigate({ routeName: 'Home' });
   }
 
   onBackButtonPressedAndroid = () => {
