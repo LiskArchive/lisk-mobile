@@ -23,7 +23,7 @@ const light = {
   incomingBg: '#E4F5F1',
   boxBg: '#F5FBFE',
   sendBalanceBg: '#EFF4F9',
-  tabBarBg: '#FAFCFE',
+  navigationBg: '#FAFCFE',
 };
 
 const dark = {
@@ -42,6 +42,7 @@ const dark = {
   incomingBg: '#0B2131',
   boxBg: '#011832',
   sendBalanceBg: '#011832',
+  navigationBg: '#00152D',
 };
 
 export default {

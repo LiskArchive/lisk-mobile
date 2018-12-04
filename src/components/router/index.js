@@ -4,7 +4,6 @@ import SignIn from '../signIn';
 import TxDetail from '../txDetail';
 import Send from '../send';
 import Register from '../register';
-// import Explore from '../explore';
 import Wallet from '../wallet';
 import Request from '../request';
 import OwnWallet from '../ownWallet';
@@ -16,25 +15,30 @@ import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
-import styles from './styles';
-import MenuIcon from './menuIcon';
-import Bg from '../headerBackground';
-import tabBarOptions from './tabBarOptions';
+import HeaderBackground from './headerBackground';
+import HeaderBackgroundImage from './headerBackgroundImage';
+import HeaderTitle from './headerTitle';
+import HeaderLogo from './headerLogo';
+import HeaderPlaceholderButton from './headerPlaceholderButton';
+import HeaderBackButton from './headerBackButton';
+import TabBarIcon from './tabBarIcon';
+import TabBarComponent from './tabBarComponent';
 import { colors } from '../../constants/styleGuide';
-import { IconButton } from '../toolBox/button';
-import Logo from './logo';
 
-const placeHolderButton = <IconButton color='transparent' icon='back'/>;
 // eslint-disable-next-line new-cap
 const Tabs = TabNavigator({
   OwnWallet: {
     screen: OwnWallet,
     navigationOptions: () => ({
-      headerRight: placeHolderButton,
-      headerLeft: placeHolderButton,
-      title: <Logo />,
-      tabBarLabel: 'Wallet',
-      tabBarIcon: ({ tintColor }) => <MenuIcon name='home' tintColor={tintColor} />, //eslint-disable-line
+      title: 'Your wallet',
+      headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
+      headerRight: HeaderPlaceholderButton,
+      headerLeft: HeaderPlaceholderButton,
+      headerBackground: <HeaderBackgroundImage />,
+      headerStyle: {
+        overflow: 'hidden',
+      },
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='home' tintColor={tintColor} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, scene }) => {
         if (scene.focused && scene.route.params && scene.route.params.scrollToTop) {
           scene.route.params.scrollToTop();
@@ -47,34 +51,38 @@ const Tabs = TabNavigator({
   Send: {
     screen: Send,
     navigationOptions: () => ({
-      headerRight: placeHolderButton,
-      title: <Logo />,
-      tabBarLabel: 'Send',
-      tabBarIcon: ({ tintColor }) => <MenuIcon name='send' tintColor={tintColor} />, //eslint-disable-line
+      title: 'Send',
+      headerTitle: HeaderTitle,
+      headerRight: HeaderPlaceholderButton,
+      headerLeft: HeaderPlaceholderButton,
+      headerBackground: <HeaderBackground />,
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='send' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
   Request: {
     screen: Request,
     navigationOptions: () => ({
-      headerRight: placeHolderButton,
-      headerLeft: placeHolderButton,
-      title: <Logo />,
-      tabBarLabel: 'Request',
-      tabBarIcon: ({ tintColor }) => <MenuIcon name='request' tintColor={tintColor} />, //eslint-disable-line
+      title: 'Request',
+      headerTitle: HeaderTitle,
+      headerRight: HeaderPlaceholderButton,
+      headerLeft: HeaderPlaceholderButton,
+      headerBackground: <HeaderBackground />,
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
   Settings: {
     screen: Settings,
     navigationOptions: () => ({
-      headerRight: placeHolderButton,
-      headerLeft: placeHolderButton,
-      title: <Logo />,
-      tabBarLabel: 'Settings',
-      tabBarIcon: ({ tintColor }) => <MenuIcon name='settings' tintColor={tintColor} />, //eslint-disable-line
+      title: 'Settings',
+      headerTitle: HeaderTitle,
+      headerRight: HeaderPlaceholderButton,
+      headerLeft: HeaderPlaceholderButton,
+      headerBackground: <HeaderBackground />,
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='settings' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
 }, {
-  tabBarComponent: tabBarOptions,
+  tabBarComponent: TabBarComponent,
   tabBarPosition: 'bottom',
   initialRouteName: 'OwnWallet',
   headerMode: 'screen',
@@ -86,7 +94,7 @@ export default StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        title: <Logo color={colors.light.gray1} />,
+        title: <HeaderLogo color={colors.light.gray1} />,
         headerTitleStyle: {
           textAlign: 'center',
           flex: 1,
@@ -101,199 +109,95 @@ export default StackNavigator(
     },
     Main: {
       screen: Tabs,
-      navigationOptions: () => ({
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerRight: placeHolderButton,
+      navigationOptions: {
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
         },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
+      },
+    },
+    TxDetail: {
+      screen: TxDetail,
+      navigationOptions: {
+        title: 'Transaction Details',
+        headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
+        headerRight: HeaderPlaceholderButton,
+        headerLeft: props => <HeaderBackButton {...props} color={colors.light.white} />, //eslint-disable-line
+        headerBackground: <HeaderBackgroundImage />,
+        headerStyle: {
+          overflow: 'hidden',
         },
-      }),
+      },
     },
     Wallet: {
       screen: Wallet,
       navigationOptions: () => ({
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerTintColor: colors.light.white,
-        headerStyle: {
-          backgroundColor: colors.light.blue,
-          overflow: 'hidden',
-        },
+        title: 'Wallet',
+        headerTitle: HeaderTitle,
+        headerRight: HeaderPlaceholderButton,
+        headerLeft: HeaderBackButton,
+        headerBackground: <HeaderBackground />,
       }),
     },
     About: {
       screen: About,
-      navigationOptions: ({ navigation }) => ({
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerRight: placeHolderButton,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => navigation.pop()}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.light.white} />,
-        headerTintColor: colors.light.white,
-        headerStyle: {
-          backgroundColor: colors.light.blue,
-          overflow: 'hidden',
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
-        },
-      }),
+      navigationOptions: {
+        title: 'About',
+        headerTitle: HeaderTitle,
+        headerRight: HeaderPlaceholderButton,
+        headerLeft: HeaderBackButton,
+        headerBackground: <HeaderBackground />,
+      },
     },
     Terms: {
       screen: Terms,
-      navigationOptions: ({ navigation }) => ({
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerRight: placeHolderButton,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => navigation.pop()}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.light.white} />,
-        headerTintColor: colors.light.white,
-        headerStyle: {
-          backgroundColor: colors.light.blue,
-          overflow: 'hidden',
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
-        },
-      }),
+      navigationOptions: {
+        title: 'Terms',
+        headerTitle: HeaderTitle,
+        headerRight: HeaderPlaceholderButton,
+        headerLeft: HeaderBackButton,
+        headerBackground: <HeaderBackground />,
+      },
     },
     CurrencySelection: {
       screen: CurrencySelection,
-      navigationOptions: ({ navigation }) => ({
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerRight: placeHolderButton,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => navigation.pop()}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.light.white} />,
-        headerTintColor: colors.light.white,
-        headerStyle: {
-          backgroundColor: colors.light.blue,
-          overflow: 'hidden',
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
-        },
-      }),
-    },
-    TxDetail: {
-      screen: TxDetail,
-      navigationOptions: ({ navigation }) => ({
-        headerRight: placeHolderButton,
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => navigation.pop()}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.light.white} />,
-        headerTintColor: colors.light.white,
-        headerStyle: {
-          backgroundColor: colors.light.blue,
-          overflow: 'hidden',
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
-        },
-      }),
+      navigationOptions: {
+        title: 'Select your currency',
+        headerTitle: HeaderTitle,
+        headerRight: HeaderPlaceholderButton,
+        headerLeft: HeaderBackButton,
+        headerBackground: <HeaderBackground />,
+      },
     },
     EnableBioAuth: {
       screen: EnableBioAuth,
-      navigationOptions: ({ navigation }) => ({
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerRight: placeHolderButton,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => navigation.pop()}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.light.white} />,
-        headerTintColor: colors.light.white,
-        headerStyle: {
-          backgroundColor: colors.light.blue,
-          overflow: 'hidden',
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
-        },
-      }),
+      navigationOptions: {
+        title: 'Enable BioAuth',
+        headerTitle: HeaderTitle,
+        headerRight: HeaderPlaceholderButton,
+        headerLeft: HeaderBackButton,
+        headerBackground: <HeaderBackground />,
+      },
     },
     DisableBioAuth: {
       screen: DisableBioAuth,
-      navigationOptions: ({ navigation }) => ({
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerRight: placeHolderButton,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => navigation.pop()}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.light.white} />,
-        headerTintColor: colors.light.white,
-        headerStyle: {
-          backgroundColor: colors.light.blue,
-          overflow: 'hidden',
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
-        },
-      }),
+      navigationOptions: {
+        title: 'Disable BioAuth',
+        headerTitle: HeaderTitle,
+        headerRight: HeaderPlaceholderButton,
+        headerLeft: HeaderBackButton,
+        headerBackground: <HeaderBackground />,
+      },
     },
     PassphraseBackup: {
       screen: PassphraseBackup,
-      navigationOptions: ({ navigation }) => ({
-        headerRight: placeHolderButton,
-        headerBackground: <Bg />,
-        title: <Logo />,
-        headerLeft: <IconButton
-          icon='back'
-          title=''
-          onPress={() => navigation.pop()}
-          style={styles.back}
-          iconButtonTitle={styles.backTitle}
-          color={colors.light.white} />,
-        headerTintColor: colors.light.white,
-        headerStyle: {
-          backgroundColor: colors.light.blue,
-          overflow: 'hidden',
-        },
-        headerTitleStyle: {
-          textAlign: 'center',
-          flex: 1,
-        },
-      }),
+      navigationOptions: {
+        title: 'Backup your passphrase',
+        headerTitle: HeaderTitle,
+        headerRight: HeaderPlaceholderButton,
+        headerLeft: HeaderBackButton,
+        headerBackground: <HeaderBackground />,
+      },
     },
     Intro: {
       screen: Intro,
@@ -305,18 +209,14 @@ export default StackNavigator(
   {
     initialRouteName: 'SignIn',
     headerLayoutPreset: 'center',
-    transitionConfig: (props) => {
-      const { scene } = props;
-      return (scene.routeName === 'SignIn' || scene.routeName === 'Intro') ?
-        {
-          transitionSpec: {
-            duration: 0,
-          },
-        } : {
-          transitionSpec: {
-            duration: 300,
-          },
-        };
-    },
+    transitionConfig: ({ scene }) => (scene.routeName === 'SignIn' ? ({
+      transitionSpec: {
+        duration: 0,
+      },
+    }) : ({
+      transitionSpec: {
+        duration: 300,
+      },
+    })),
   },
 );
