@@ -1,5 +1,5 @@
 import { Dimensions, Platform, DeviceInfo } from 'react-native';
-import { themes, colors } from '../../constants/styleGuide';
+import { themes, colors, boxes } from '../../constants/styleGuide';
 
 const { height } = Dimensions.get('window');
 
@@ -11,16 +11,12 @@ export default () => ({
     container: {
       flexDirection: 'column',
       flex: 1,
-      padding: 20,
+      padding: boxes.boxPadding,
       justifyContent: 'space-between',
       paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 30 : 20,
     },
-    header: {
-      marginTop: 8,
-    },
     subHeader: {
-      marginTop: 14,
-      marginBottom: 25,
+      marginBottom: 20,
     },
     row: {
       flexDirection: 'row',
@@ -52,9 +48,6 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    header: {
-      color: colors.light.black,
-    },
     subHeader: {
       color: colors.light.gray2,
     },
@@ -72,9 +65,6 @@ export default () => ({
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    header: {
-      color: colors.dark.white,
     },
     subHeader: {
       color: colors.dark.gray1,

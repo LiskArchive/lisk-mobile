@@ -172,7 +172,6 @@ export default StackNavigator(
     EnableBioAuth: {
       screen: EnableBioAuth,
       navigationOptions: {
-        title: 'Enable BioAuth',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
