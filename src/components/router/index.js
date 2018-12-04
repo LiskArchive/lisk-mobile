@@ -142,7 +142,7 @@ export default StackNavigator(
     About: {
       screen: About,
       navigationOptions: {
-        title: 'About',
+        title: 'About Lisk',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
