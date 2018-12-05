@@ -15,10 +15,6 @@ export default () => ({
       position: 'absolute',
       zIndex: 4,
       elevation: 4,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.2,
-      shadowRadius: 10,
-      borderRadius: 30,
       overflow: 'hidden',
     },
     address: {
@@ -97,9 +93,6 @@ export default () => ({
   [themes.light]: {
     bg: {
       opacity: 1,
-    },
-    avatar: {
-      shadowColor: colors.light.blue,
     },
     balance: {
       color: colors.light.white,

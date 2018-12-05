@@ -27,12 +27,12 @@ export default () => ({
   },
   [themes.light]: {
     main: {
-      color: colors.light.black,
+      color: colors.light.white,
     },
   },
   [themes.dark]: {
     main: {
-      color: colors.dark.white,
+      color: colors.light.white,
     },
   },
 });
