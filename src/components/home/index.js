@@ -34,12 +34,19 @@ const summaryHeight = 250;
 })
 class Home extends React.Component {
   state = {
-    scrollY: new Animated.Value(0),
     theme: 'loading',
     priceTicker: {},
   };
 
+  scrollY = new Animated.Value(0);
   scrollView = null;
+
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    return ({
+      title: params.title || 'Your wallet',
+    });
+  }
 
   componentDidMount() {
     const { transactionsLoaded, account } = this.props;
@@ -65,6 +72,7 @@ class Home extends React.Component {
       });
 
       if (theme === 'list' && !navigation.getParam('scrollToTop', false)) {
+      headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
         navigation.setParams({
           scrollToTop: () => {
             if (this.scrollView) {
@@ -83,7 +91,7 @@ class Home extends React.Component {
 
   onScroll() {
     return Animated.event([{
-      nativeEvent: { contentOffset: { y: this.state.scrollY } },
+      nativeEvent: { contentOffset: { y: this.scrollY } },
     }]);
   }
 
@@ -117,7 +125,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      theme, scrollY, footer, priceTicker,
+      theme, footer, priceTicker,
     } = this.state;
     const {
       styles,
@@ -166,7 +174,8 @@ class Home extends React.Component {
         {
           account ? (
             <AccountSummary
-              scrollY={scrollY}
+              navigation={navigation}
+              scrollY={this.scrollY}
               account={account}
               priceTicker={priceTicker}
               style={styles.accountSummary}
