@@ -75,8 +75,7 @@ class EnableBioAuth extends React.Component {
                   You can always turn it off
                 </B>
                 <Small style={[styles.description, styles.theme.description]}>
-                  You can disable Face ID at anytime in Settings page.
-                  then authenticate with passphrase.
+                  {`You can disable ${title} at anytime in Settings page then authenticate with passphrase.`}
                 </Small>
               </View>
             </View>
