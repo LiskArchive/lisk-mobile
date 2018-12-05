@@ -20,9 +20,7 @@ const blurs = { dark: darkBlur, light: lightBlur };
 const isAndroid = deviceType() === 'android';
 @connect(state => ({
   priceTicker: state.liskService.priceTicker,
-}), {
-  getPriceTicker: getPriceTickerAction,
-})
+}))
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
   maxLength = 10
@@ -64,8 +62,6 @@ class Amount extends React.Component {
         to: status ? 0 : 1,
       }),
     });
-
-    this.props.getPriceTicker();
 
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
