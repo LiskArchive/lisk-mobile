@@ -281,7 +281,9 @@ class SignIn extends React.Component {
             animate={!signOut}
             navigation={this.props.navigation}
             toggleView={this.changeHandler}
-            signIn={this.onFormSubmission} /> : null
+            signIn={this.onFormSubmission}
+            connectionError={this.state.connectionError}
+          /> : null
       }
       {
         Platform.OS === 'android' ?
