@@ -21,6 +21,9 @@ const actionTypes = {
   // Settings
   settingsUpdated: 'SETTINGS_UPDATED',
   settingsRetrieved: 'SETTINGS_RETRIEVED',
+  // LiskService
+  priceTickerLoaded: 'PRICE_TICKER_LOADED',
+  priceTickerFailed: 'PRICE_TICKER_FAILED',
 };
 
 export default actionTypes;
