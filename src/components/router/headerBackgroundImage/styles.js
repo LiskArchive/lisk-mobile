@@ -7,9 +7,11 @@ export default () => ({
     },
     image: {
       position: 'absolute',
-      width: '100%',
       left: 0,
       top: 0,
+      width: 400,
+      minWidth: '100%',
+      height: 90,
     },
   },
   [themes.light]: {

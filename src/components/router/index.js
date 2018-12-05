@@ -18,6 +18,7 @@ import Intro from '../intro';
 import HeaderBackground from './headerBackground';
 import HeaderBackgroundImage from './headerBackgroundImage';
 import HeaderTitle from './headerTitle';
+import HomeHeaderTitle from './homeHeaderTitle';
 import HeaderLogo from './headerLogo';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
 import HeaderBackButton from './headerBackButton';
@@ -30,8 +31,7 @@ const Tabs = TabNavigator({
   Home: {
     screen: Home,
     navigationOptions: () => ({
-      title: 'Your wallet',
-      headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
+      headerTitle: HomeHeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackgroundImage />,
