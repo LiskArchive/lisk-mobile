@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Image } from 'react-native';
-import liskService from '../../../utilities/api/liskService';
+import { Image, View } from 'react-native';
+import connect from 'redux-connect-decorator';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import transactions from '../../../constants/transactions';
 import { fromRawLsk } from '../../../utilities/conversions';
@@ -18,6 +18,11 @@ import lightBlur from '../../../assets/images/amountFormBalanceBlur/light.png';
 const blurs = { dark: darkBlur, light: lightBlur };
 
 const isAndroid = deviceType() === 'android';
+@connect(state => ({
+  priceTicker: state.liskService.priceTicker,
+}), {
+  getPriceTicker: getPriceTickerAction,
+})
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
   maxLength = 10
@@ -27,7 +32,6 @@ class Amount extends React.Component {
       normalizedValue: '',
       validity: -1,
     },
-    priceTicker: {},
   };
 
   validator = (str) => {
@@ -61,17 +65,11 @@ class Amount extends React.Component {
       }),
     });
 
-    this.getPriceTicker();
+    this.props.getPriceTicker();
 
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
-  }
-
-  getPriceTicker = () => {
-    liskService.getPriceTicker()
-      .then(res => this.setState({ priceTicker: res.tickers.LSK }))
-      .catch(console.log); //eslint-disable-line
   }
 
   onChange = (value) => {
@@ -111,14 +109,11 @@ class Amount extends React.Component {
 
   render() {
     const {
-      theme,
+      theme, styles,
       settings: { currency, incognito },
-      styles, accounts,
+      accounts, priceTicker,
     } = this.props;
-    const {
-      amount: { value, normalizedValue, validity },
-      priceTicker,
-    } = this.state;
+    const { amount: { value, normalizedValue, validity } } = this.state;
 
     let valueInCurrency = 0;
 
