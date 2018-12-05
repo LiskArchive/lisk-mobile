@@ -1,0 +1,17 @@
+import actionTypes from '../../constants/actions';
+import { merge } from '../../utilities/helpers';
+
+export const INITIAL_STATE = {
+  priceTicker: {},
+};
+
+const liskService = (state = INITIAL_STATE, action = {}) => {
+  switch (action.type) {
+    case actionTypes.priceTickerLoaded:
+      return merge(state, { priceTicker: action.priceTicker });
+    default:
+      return state;
+  }
+};
+
+export default liskService;
