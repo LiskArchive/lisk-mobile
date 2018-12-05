@@ -5,7 +5,7 @@ import { accountSignedOut as accountSignedOutAction } from '../../actions/accoun
 import { H1, H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
-import SignOutButton from '../signOutButton';
+import SignOutButton from './signOutButton';
 import { colors, themes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import SwitchButton from './switchButton';
