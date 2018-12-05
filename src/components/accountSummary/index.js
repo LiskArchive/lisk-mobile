@@ -44,16 +44,19 @@ class AccountSummary extends React.Component {
     },
   }
 
-  componentDidMount() {
-    this.screenWidth = Dimensions.get('window').width;
-    this.initialFadeIn();
-  }
-
   toggleModal() {
     this.setState({
       modalVisible: !this.state.modalVisible,
     });
   }
+
+  interpolate = (inputRange, outputRange) =>
+    this.props.scrollY.interpolate({
+      inputRange,
+      outputRange,
+      extrapolate: 'clamp',
+    });
+
 
   initialFadeIn = () => {
     const { opacity, top } = this.state.initialAnimations;
@@ -70,16 +73,29 @@ class AccountSummary extends React.Component {
     }).start();
   }
 
+  componentDidMount() {
+    this.screenWidth = Dimensions.get('window').width;
+    this.initialFadeIn();
+    this.props.navigation.setParams({
+      title: {
+        placeHolder: 'Your wallet',
+        balance: fromRawLsk(this.props.account.balance),
+        address: this.props.account.address,
+        interpolate: this.interpolate,
+      },
+    });
+  }
+
   render() {
     const {
       styles, account, settings, priceTicker,
     } = this.props;
+    const { interpolate } = this;
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
     const normalizedBalance = fromRawLsk(account.balance);
 
     let faitBalance = 0;
-
     if (normalizedBalance && priceTicker[settings.currency]) {
       faitBalance = (normalizedBalance * priceTicker[settings.currency]).toFixed(2);
     }
@@ -91,19 +107,31 @@ class AccountSummary extends React.Component {
     return (<View style={this.props.style}>
       {
         account && account.address ?
-        <Anim style={[styles.container, { opacity, top }]}>
+        <Anim style={[styles.container, { opacity, top },
+          { marginTop: interpolate([0, 180], [0, -180]) }]}>
           <Image style={[styles.bg, styles.theme.bg]} source={bg} resizeMode='repeat' />
-          <Anim style={[styles.avatar, { opacity }]}>
+          <Anim style={[styles.avatar, { opacity },
+            { marginTop: interpolate([0, 100], [0, 100]) }]}>
             <Avatar address={account.address} size={60} />
           </Anim>
-          <Anim style={[styles.address, { opacity }]}>
+          <Anim style={[styles.address, { opacity },
+            {
+              opacity: interpolate([0, 30], [1, 0]),
+              top: interpolate([0, 100], [0, 80]),
+            },
+          ]}>
             <Share type={P}
               style={[styles.addressP, styles.theme.addressP]}
               iconColor={colors.light.gray5}
               containerStyle={styles.addressContainer}
               value={account.address} icon={true} />
           </Anim>
-          <Anim style={[styles.balance, { opacity }]}>
+          <Anim style={[styles.balance, { opacity },
+            {
+              opacity: interpolate([0, 50, 85], [1, 1, 0]),
+              top: interpolate([0, 100], [0, 50]),
+            },
+          ]}>
             <FormattedNumber
               style={[styles.theme.balance, settings.incognito ? styles.invisibleTitle : null]}
               type={H2}>{fromRawLsk(account.balance)}</FormattedNumber>
@@ -111,7 +139,12 @@ class AccountSummary extends React.Component {
               style={[styles.blur, styles[`blur${balanceSize}`],
               settings.incognito ? styles.visibleBlur : null]} />
           </Anim>
-          <Anim style={[styles.fiat, { opacity }]}>
+          <Anim style={[styles.fiat, { opacity },
+            {
+              opacity: interpolate([0, 30], [1, 0]),
+              top: interpolate([0, 100], [0, 20]),
+            },
+          ]}>
             <P style={[styles.fiatValue, styles.theme.fiatValue]}>{`~ ${faitBalance} ${settings.currency}`}</P>
           </Anim>
         </Anim> :

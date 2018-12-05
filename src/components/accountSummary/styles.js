@@ -1,5 +1,3 @@
-import { DeviceInfo, Platform } from 'react-native';
-import { Header } from 'react-navigation';
 import { themes, colors } from '../../constants/styleGuide';
 
 export default () => ({
@@ -47,11 +45,11 @@ export default () => ({
     bg: {
       position: 'absolute',
       left: 0,
-      top: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ?
-        -1 * (Header.HEIGHT + 24) : -1 * (Header.HEIGHT + 1),
+      top: 0,
       zIndex: 1,
-      height: 280,
-      width: '100%',
+      height: 170,
+      width: 400,
+      minWidth: '100%',
       overflow: 'hidden',
     },
     blurWrapper: {
