@@ -24,20 +24,13 @@ class Confirm extends React.Component {
     },
   };
 
-  componentDidMount() {
-    const { navigation, prevStep } = this.props;
-
-    navigation.setParams({
-      showButtonLeft: true,
-      action: () => prevStep(),
-    });
-  }
-
-  validatePassphrase = (passphrase) => {
-    const { accounts } = this.props;
+  validator = (passphrase) => {
     const validity = validatePassphrase(passphrase);
 
-    if (validity.length === 0 && extractPublicKey(passphrase) !== accounts.active.secondPublicKey) {
+    if (
+      validity.length === 0 &&
+      (extractPublicKey(passphrase) !== this.props.accounts.active.secondPublicKey)
+    ) {
       validity.push({
         code: 'dose_not_belong',
         message: 'This is not your second passphrase.',
@@ -45,6 +38,15 @@ class Confirm extends React.Component {
     }
 
     return validity;
+  }
+
+  componentDidMount() {
+    const { navigation, prevStep } = this.props;
+
+    navigation.setParams({
+      showButtonLeft: true,
+      action: () => prevStep(),
+    });
   }
 
   changeHandler = (value) => {
@@ -58,7 +60,7 @@ class Confirm extends React.Component {
 
   onSubmit = () => {
     const { secondPassphrase } = this.state;
-    const validity = validatePassphrase(secondPassphrase.value);
+    const validity = this.validator(secondPassphrase.value);
 
     if (validity.length) {
       this.setState({
