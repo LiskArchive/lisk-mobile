@@ -35,9 +35,6 @@ const Tabs = TabNavigator({
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackgroundImage />,
-      headerStyle: {
-        overflow: 'hidden',
-      },
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='home' tintColor={tintColor} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, scene }) => {
         if (scene.focused && scene.route.params && scene.route.params.scrollToTop) {
@@ -113,6 +110,7 @@ export default StackNavigator(
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
+          borderBottomWidth: 0,
         },
       },
     },

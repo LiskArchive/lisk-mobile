@@ -43,8 +43,7 @@ export default () => ({
       top: 0,
       zIndex: 1,
       height: 200,
-      width: 400,
-      minWidth: '100%',
+      width: '100%',
       overflow: 'hidden',
     },
     blurWrapper: {
