@@ -66,7 +66,7 @@ class Transactions extends React.Component {
 
   render() {
     const {
-      styles, transactions, navigate, account, footer, incognito, theme,
+      styles, transactions, navigate, account, footer, incognito, theme, placeholderStyle,
     } = this.props;
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
@@ -78,6 +78,7 @@ class Transactions extends React.Component {
           (transactions.confirmed.length === 0 && transactions.pending.length === 0)) ?
           <Fragment></Fragment> :
           <Fragment>
+            <View style={[styles.placeholder, placeholderStyle]}></View>
             <View style={styles.innerContainer}>
               <H3 style={[styles.title, styles.theme.title]}>Activity</H3>
               {incognito ?

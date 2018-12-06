@@ -5,7 +5,6 @@ export default () => ({
     container: {
       width: '100%',
       height: 170,
-      backgroundColor: colors.dark.navigationBg,
       overflow: 'hidden',
     },
     avatar: {
@@ -43,7 +42,7 @@ export default () => ({
       left: 0,
       top: 0,
       zIndex: 1,
-      height: 170,
+      height: 200,
       width: 400,
       minWidth: '100%',
       overflow: 'hidden',
@@ -91,6 +90,9 @@ export default () => ({
     fiatValue: {},
   },
   [themes.light]: {
+    container: {
+      backgroundColor: colors.light.brandingBlue,
+    },
     bg: {
       opacity: 1,
     },
@@ -105,6 +107,9 @@ export default () => ({
     },
   },
   [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.navigationBg,
+    },
     bg: {
       opacity: 0.6,
     },

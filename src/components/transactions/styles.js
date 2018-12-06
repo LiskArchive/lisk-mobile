@@ -22,6 +22,10 @@ export default () => ({
       flexDirection: 'row',
       justifyContent: 'flex-start',
     },
+    placeholder: {
+      height: 170,
+      width: '100%',
+    },
     title: {
       marginBottom: 15,
     },
@@ -55,6 +59,7 @@ export default () => ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      marginTop: 170,
     },
     emptyState: {
       width: '100%',
@@ -62,7 +67,7 @@ export default () => ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: viewportHeight() / 7.5,
+      marginTop: (viewportHeight() / 7.5) + 170,
     },
     noActivity: {
       width: '100%',

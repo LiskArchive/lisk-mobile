@@ -12,6 +12,10 @@ export default () => ({
     },
     accountSummary: {
       zIndex: 2,
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      width: '100%',
     },
   },
   [themes.light]: {

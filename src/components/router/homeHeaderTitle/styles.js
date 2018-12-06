@@ -1,10 +1,13 @@
 import { fonts, themes, colors } from '../../../constants/styleGuide';
 
+import { deviceType } from '../../../utilities/device';
+
 export default () => ({
   common: {
     container: {
       height: 30,
-      marginTop: -10,
+      width: '100%',
+      marginTop: deviceType() === 'iOSx' ? -10 : -5,
     },
     wrapper: {
       marginTop: -30,

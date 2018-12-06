@@ -3,23 +3,27 @@ import { themes, colors } from '../../../constants/styleGuide';
 export default () => ({
   common: {
     wrapper: {
-      backgroundColor: colors.dark.navigationBg,
+      width: '100%',
+      flex: 1,
     },
     image: {
-      position: 'absolute',
-      left: 0,
-      top: 0,
       width: 400,
+      height: 200,
       minWidth: '100%',
-      height: 90,
     },
   },
   [themes.light]: {
+    wrapper: {
+      backgroundColor: colors.light.brandingBlue,
+    },
     image: {
       opacity: 1,
     },
   },
   [themes.dark]: {
+    wrapper: {
+      backgroundColor: colors.dark.navigationBg,
+    },
     image: {
       opacity: 0.6,
     },

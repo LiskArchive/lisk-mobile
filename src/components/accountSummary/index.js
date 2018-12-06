@@ -57,7 +57,6 @@ class AccountSummary extends React.Component {
       extrapolate: 'clamp',
     });
 
-
   initialFadeIn = () => {
     const { opacity, top } = this.state.initialAnimations;
     Animated.timing(opacity, {
@@ -107,17 +106,17 @@ class AccountSummary extends React.Component {
     return (<View style={this.props.style}>
       {
         account && account.address ?
-        <Anim style={[styles.container, { opacity, top },
+        <Anim style={[styles.container, styles.theme.container, { opacity, top },
           { marginTop: interpolate([0, 180], [0, -180]) }]}>
-          <Image style={[styles.bg, styles.theme.bg]} source={bg} resizeMode='repeat' />
+          <Image style={[styles.bg, styles.theme.bg]} source={bg} />
           <Anim style={[styles.avatar, { opacity },
             { marginTop: interpolate([0, 100], [0, 100]) }]}>
             <Avatar address={account.address} size={60} />
           </Anim>
           <Anim style={[styles.address, { opacity },
             {
-              opacity: interpolate([0, 30], [1, 0]),
-              top: interpolate([0, 100], [0, 80]),
+              opacity: this.interpolate([0, 30], [1, 0]),
+              top: this.interpolate([0, 100], [0, 80]),
             },
           ]}>
             <Share type={P}
@@ -128,8 +127,8 @@ class AccountSummary extends React.Component {
           </Anim>
           <Anim style={[styles.balance, { opacity },
             {
-              opacity: interpolate([0, 50, 85], [1, 1, 0]),
-              top: interpolate([0, 100], [0, 50]),
+              opacity: this.interpolate([0, 50, 85], [1, 1, 0]),
+              top: this.interpolate([0, 100], [0, 50]),
             },
           ]}>
             <FormattedNumber
@@ -141,8 +140,8 @@ class AccountSummary extends React.Component {
           </Anim>
           <Anim style={[styles.fiat, { opacity },
             {
-              opacity: interpolate([0, 30], [1, 0]),
-              top: interpolate([0, 100], [0, 20]),
+              opacity: this.interpolate([0, 30], [1, 0]),
+              top: this.interpolate([0, 100], [0, 80]),
             },
           ]}>
             <P style={[styles.fiatValue, styles.theme.fiatValue]}>{`~ ${faitBalance} ${settings.currency}`}</P>
