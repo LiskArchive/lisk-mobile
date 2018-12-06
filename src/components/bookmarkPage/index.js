@@ -3,11 +3,33 @@ import { View, Animated, ScrollView, Keyboard } from 'react-native';
 import { B } from '../toolBox/typography';
 import reg from '../../constants/regex';
 import Input from '../toolBox/input';
+import { IconButton } from '../toolBox/button';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import { colors } from '../../constants/styleGuide';
 import Bookmarks from '../bookmarks';
 
 class Bookmark extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    return {
+      tabBarVisible: params.tabBar,
+      headerRight: <IconButton
+        icon='cross'
+        title=''
+        onPress={params.action}
+        iconSize={25}
+        style={params.styles && params.styles.headerButton}
+        color={colors.light.white}
+      />,
+      headerLeft: (
+        <IconButton
+          color='transparent'
+          icon='back'
+        />
+      ),
+    };
+  };
   activeInputRef = null;
   validator = (str) => {
     if (str === '') return -1;
@@ -28,6 +50,8 @@ class Bookmark extends React.Component {
   }
 
   componentDidMount() {
+    const { navigation, styles } = this.props;
+    navigation.setParams({ styles });
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.onKeyboardOpen);
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.onKeyboardClose);
   }
@@ -102,7 +126,10 @@ class Bookmark extends React.Component {
   }
 
   setRef = (ref, address) => {
-    if (!this.current) {
+    if (!address) {
+      this.prev = null;
+      this.current = null;
+    } else if (!this.current) {
       this.current = ref;
     } else if (address !== this.address) {
       this.resetPrev(this.current, ref, address);
@@ -147,7 +174,7 @@ class Bookmark extends React.Component {
                 }
               />
             </View>
-            <Bookmarks setRef={this.setRef} query={this.state.address.value} />
+            <Bookmarks draggable={true} setRef={this.setRef} query={this.state.address.value} />
           </View>
         </ScrollView>
       </View>

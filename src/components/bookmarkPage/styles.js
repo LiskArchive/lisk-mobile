@@ -1,12 +1,23 @@
+
+import { Platform } from 'react-native';
 import { themes, colors, boxes } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
+    headerButton: {
+      transform: [
+        { rotate: '45deg' },
+      ],
+      width: 40,
+      height: 40,
+      marginTop: (Platform.OS === 'ios') ? 0 : 6,
+    },
     wrapper: {
       flex: 1,
     },
     subtitle: {
       marginTop: 0,
+      maxWidth: '100%',
     },
     titleContainer: {
       overflow: 'hidden',
