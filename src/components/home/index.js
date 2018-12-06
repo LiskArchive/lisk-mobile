@@ -45,6 +45,12 @@ class Home extends React.Component {
     const { params = {} } = navigation.state;
     return ({
       title: params.title || 'Your wallet',
+      headerStyle: {
+        backgroundColor: 'transparent',
+        overflow: 'hidden',
+        borderBottomWidth: 0,
+        elevation: 0,
+      },
     });
   }
 

@@ -30,7 +30,7 @@ import { colors } from '../../constants/styleGuide';
 const Tabs = TabNavigator({
   Home: {
     screen: Home,
-    navigationOptions: () => ({
+    navigationOptions: {
       headerTitle: HomeHeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
@@ -43,40 +43,55 @@ const Tabs = TabNavigator({
           defaultHandler(0);
         }
       },
-    }),
+    },
   },
   Send: {
     screen: Send,
-    navigationOptions: () => ({
+    navigationOptions: {
       title: 'Send',
       headerTitle: HeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='send' tintColor={tintColor} />, //eslint-disable-line
-    }),
+      headerStyle: {
+        backgroundColor: 'transparent',
+        overflow: 'hidden',
+        elevation: 1,
+      },
+    },
   },
   Request: {
     screen: Request,
-    navigationOptions: () => ({
+    navigationOptions: {
       title: 'Request',
       headerTitle: HeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
-    }),
+      headerStyle: {
+        backgroundColor: 'transparent',
+        overflow: 'hidden',
+        elevation: 1,
+      },
+    },
   },
   Settings: {
     screen: Settings,
-    navigationOptions: () => ({
+    navigationOptions: {
       title: 'Settings',
       headerTitle: HeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='settings' tintColor={tintColor} />, //eslint-disable-line
-    }),
+      headerStyle: {
+        backgroundColor: 'transparent',
+        overflow: 'hidden',
+        elevation: 1,
+      },
+    },
   },
 }, {
   tabBarComponent: TabBarComponent,
@@ -107,11 +122,6 @@ export default StackNavigator(
     Main: {
       screen: Tabs,
       navigationOptions: {
-        headerStyle: {
-          backgroundColor: 'transparent',
-          overflow: 'hidden',
-          borderBottomWidth: 0,
-        },
       },
     },
     TxDetail: {
