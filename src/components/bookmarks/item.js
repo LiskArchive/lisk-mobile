@@ -16,28 +16,20 @@ import { themes, colors } from '../../constants/styleGuide';
 @connect(state => ({}), {
   accountUnFollowed: accountUnFollowedAction,
 })
-class Item extends React.Component {
+class draggableItem extends React.Component {
   _deltaX = new Animated.Value(0);
-  showDetail = () => {
-    const {
-      navigate, data,
-    } = this.props;
-
-    navigate(data);
-  }
 
   render() {
     const {
       styles, data, theme, navigate, accountUnFollowed, setRef,
     } = this.props;
-    const Element = navigate ? TouchableOpacity : View;
 
-    return (<Element
+    return (<View
       style={[styles.itemContainer, styles.theme.itemContainer]}
       onPress={this.showDetail}>
       <View style={styles.draggableRow} pointerEvents='box-none'>
           <Animated.View style={
-            [styles.editButton, {
+            [styles.editButton, styles.theme.editButton, {
               transform: [{
                 translateX: this._deltaX.interpolate({
                   inputRange: [-155, 0],
@@ -50,17 +42,17 @@ class Item extends React.Component {
               onPress={() => { this.ref.snapTo({ index: 0 }); }}
               style={styles.button}>
               <Icon
-                name='back'
+                name='edit-bookmark'
                 size={21}
-                style={styles.icon}
-                color={theme === themes.light ? colors.light.black : colors.dark.white}
+                style={[styles.iconButton, styles.theme.editContent]}
+                color={colors[theme].sendBalanceBg}
               />
-              <P>edit</P>
+              <P style={[styles.buttonContent, styles.theme.editContent]}>Edit</P>
             </TouchableOpacity>
           </Animated.View>
 
           <Animated.View style={
-            [styles.deleteButton, {
+            [styles.deleteButton, styles.theme.deleteButton, {
               transform: [{
                 translateX: this._deltaX.interpolate({
                   inputRange: [-155, 0],
@@ -70,15 +62,15 @@ class Item extends React.Component {
             },
             ]}>
             <TouchableOpacity
-              onPress={() => { accountUnFollowed(data.address); }}
+              onPress={() => { setRef(this.ref); accountUnFollowed(data.address); }}
               style={styles.button}>
               <Icon
-                name='forward'
+                name='delete-bookmark'
                 size={21}
-                style={styles.icon}
-                color={theme === themes.light ? colors.light.black : colors.dark.white}
+                style={styles.iconButton}
+                color={colors.light.white}
               />
-              <P>delete</P>
+              <P style={styles.buttonContent}>Delete</P>
             </TouchableOpacity>
           </Animated.View>
         </View>
@@ -119,8 +111,56 @@ class Item extends React.Component {
             }
           </View>
         </Interactable.View>
-    </Element>);
+    </View>);
   }
 }
 
-export default withTheme(Item, getStyles());
+class Item extends React.Component {
+  showDetail = () => {
+    const {
+      navigate, data,
+    } = this.props;
+
+    navigate(data);
+  }
+
+  render() {
+    const {
+      styles, data, theme,
+    } = this.props;
+
+    return (<TouchableOpacity
+      style={[styles.linkedItem, styles.theme.linkedItem]}
+      onPress={this.showDetail}>
+      <View style={styles.innerContainer}>
+        <View style={[styles.itemColumn, styles.avatarContainer]}>
+          <Avatar address={data.address} size={50} style={styles.theme.avatar} />
+        </View>
+        <View style={styles.column}>
+          <B style={[styles.address, styles.theme.address]}>
+            {data.label}
+          </B>
+          <Small style={[styles.label, styles.theme.label]}>
+            {data.address}
+          </Small>
+        </View>
+      </View>
+      <View style={[styles.column, styles.amountWrapper]}>
+        <Icon
+          name='forward'
+          size={21}
+          style={styles.icon}
+          color={theme === themes.light ? colors.light.black : colors.dark.white}
+        />
+      </View>
+    </TouchableOpacity>);
+  }
+}
+
+const themedDraggableItem = withTheme(draggableItem, getStyles());
+const themedItem = withTheme(Item, getStyles());
+
+export {
+  themedDraggableItem as DraggableItem,
+  themedItem as Item,
+};
