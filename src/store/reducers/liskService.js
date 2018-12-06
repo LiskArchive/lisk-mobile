@@ -7,7 +7,7 @@ export const INITIAL_STATE = {
 
 const liskService = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
-    case actionTypes.priceTickerLoaded:
+    case actionTypes.pricesRetrieved:
       return merge(state, { priceTicker: action.priceTicker });
     default:
       return state;

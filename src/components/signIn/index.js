@@ -20,7 +20,7 @@ import {
   settingsUpdated as settingsUpdatedAction,
   settingsRetrieved as settingsRetrievedAction,
 } from '../../actions/settings';
-import { getPriceTicker as getPriceTickerAction } from '../../actions/liskService';
+import { pricesRetrieved as pricesRetrievedAction } from '../../actions/liskService';
 import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';
@@ -42,7 +42,7 @@ console.disableYellowBox = true; // eslint-disable-line
   accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
   settingsRetrieved: settingsRetrievedAction,
-  getPriceTicker: getPriceTickerAction,
+  pricesRetrieved: pricesRetrievedAction,
 })
 class SignIn extends React.Component {
   state = {
@@ -187,7 +187,7 @@ class SignIn extends React.Component {
   }
 
   onSignInCompleted = () => {
-    this.props.getPriceTicker();
+    this.props.pricesRetrieved();
 
     if (this.state.deepLinkURL) {
       this.navigateToDeepLink(this.state.deepLinkURL);

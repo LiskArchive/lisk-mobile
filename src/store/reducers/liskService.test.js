@@ -13,9 +13,9 @@ describe('reducers: liskService', () => {
     expect(createdState).toEqual(INITIAL_STATE);
   });
 
-  it('should return updated state in case of actionTypes.priceTickerLoaded', () => {
+  it('should return updated state in case of actionTypes.pricesRetrieved', () => {
     const action = {
-      type: actionTypes.priceTickerLoaded,
+      type: actionTypes.pricesRetrieved,
       priceTicker: { USD: 1, EUR: 1 },
     };
 

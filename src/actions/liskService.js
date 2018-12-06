@@ -2,13 +2,10 @@ import liskService from '../utilities/api/liskService';
 import actionTypes from '../constants/actions';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getPriceTicker = () => dispatch =>
+export const pricesRetrieved = () => dispatch =>
   liskService.getPriceTicker()
     .then(res => dispatch({
-      type: actionTypes.priceTickerLoaded,
+      type: actionTypes.pricesRetrieved,
       priceTicker: res.tickers.LSK,
     }))
-    .catch(error => dispatch({
-      type: actionTypes.priceTickerFailed,
-      error,
-    }));
+    .catch(console.log); // eslint-disable-line
