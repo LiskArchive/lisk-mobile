@@ -62,11 +62,10 @@ const Tabs = TabNavigator({
   },
   Bookmarks: {
     screen: Bookmark,
-    navigationOptions: ({ navigation }) => ({
-      headerRight: <SettingButton navigation={navigation} />,
-      title: <Logo />,
+    navigationOptions: () => ({
+      title: 'Bookmarks',
       tabBarLabel: 'Bookmarks',
-      tabBarIcon: ({ tintColor }) => <MenuIcon name='bookmark' tintColor={tintColor} />, //eslint-disable-line
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='bookmark' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
   Request: {
