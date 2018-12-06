@@ -144,7 +144,7 @@ class Send extends React.Component {
         <Amount
           title='amount'
           navigation={navigation}
-          currency={settings.currency}
+          settings={settings}
           accounts={accounts}
         />
         <Reference

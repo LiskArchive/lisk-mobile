@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import liskService from '../../../utilities/api/liskService';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import transactions from '../../../constants/transactions';
@@ -12,6 +12,10 @@ import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { deviceType } from '../../../utilities/device';
+import darkBlur from '../../../assets/images/amountFormBalanceBlur/dark.png';
+import lightBlur from '../../../assets/images/amountFormBalanceBlur/light.png';
+
+const blurs = { dark: darkBlur, light: lightBlur };
 
 const isAndroid = deviceType() === 'android';
 class Amount extends React.Component {
@@ -106,7 +110,11 @@ class Amount extends React.Component {
   }
 
   render() {
-    const { styles, accounts, currency } = this.props;
+    const {
+      theme,
+      settings: { currency, incognito },
+      styles, accounts,
+    } = this.props;
     const {
       amount: { value, normalizedValue, validity },
       priceTicker,
@@ -136,15 +144,29 @@ class Amount extends React.Component {
               </P>
             </View>
 
-            <View style={[styles.balanceContainer, styles.theme.balanceContainer]}>
+            <View
+              style={[
+                styles.balanceContainer,
+                styles.theme.balanceContainer,
+                (incognito ? styles.balanceContainerIncognito : {}),
+              ]}
+            >
               <B style={[styles.balanceText, styles.theme.balanceText]}>
                 {'You have '}
               </B>
-              <B style={[styles.balanceNumber, styles.theme.balanceNumber]}>
-                <FormattedNumber>
+
+              {incognito ?
+                <Image
+                  source={blurs[theme]}
+                  style={styles.balanceIncognito}
+                /> :
+                <FormattedNumber
+                  type={B}
+                  style={[styles.balanceNumber, styles.theme.balanceNumber]}
+                >
                   {fromRawLsk(accounts.active.balance || 0)}
                 </FormattedNumber>
-              </B>
+              }
             </View>
 
             <View>
