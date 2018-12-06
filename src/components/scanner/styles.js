@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
 import { themes, colors } from '../../constants/styleGuide';
-import { viewportHeight, headerHeight } from '../../utilities/device';
+import { viewportHeight, headerHeight, deviceType } from '../../utilities/device';
 
 const { height, width } = Dimensions.get('window');
 export default () => ({
@@ -70,8 +70,12 @@ export default () => ({
       color: colors.light.gray2,
     },
     closeButton: {
-      marginTop: 28,
-      width: 100,
+      marginTop: deviceType() === 'iOSx' ? 30 : 18,
+      width: 80,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      paddingLeft: 0,
     },
   },
   [themes.light]: {
