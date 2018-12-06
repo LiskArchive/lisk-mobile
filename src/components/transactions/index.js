@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
@@ -59,6 +60,7 @@ class Transactions extends React.Component {
   }
 
   toggleIncognito = () => {
+    ReactNativeHapticFeedback.trigger('selection');
     this.props.settingsUpdated({
       incognito: !this.props.incognito,
     });
