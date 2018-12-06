@@ -4,7 +4,7 @@ import liskService from '../../../utilities/api/liskService';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import transactions from '../../../constants/transactions';
 import { fromRawLsk } from '../../../utilities/conversions';
-import { B, P, H1 } from '../../toolBox/typography';
+import { B, P } from '../../toolBox/typography';
 import FormattedNumber from '../../formattedNumber';
 import reg from '../../../constants/regex';
 import { merge } from '../../../utilities/helpers';
@@ -50,6 +50,7 @@ class Amount extends React.Component {
     }
 
     navigation.setParams({
+      title: 'Amount',
       showButtonLeft: true,
       action: () => this.props.move({
         to: status ? 0 : 1,
@@ -130,10 +131,7 @@ class Amount extends React.Component {
         >
           <View>
             <View style={styles.headerContainer}>
-              <H1 style={[styles.header, styles.theme.header]}>
-                Send Lisk
-              </H1>
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
+              <P style={styles.theme.subHeader}>
                 Enter the amount you want to send.
               </P>
             </View>
@@ -149,7 +147,7 @@ class Amount extends React.Component {
               </B>
             </View>
 
-            <View style={styles.form}>
+            <View>
               <AmountInput
                 reference={(el) => { this.input = el; }}
                 autoFocus={!isAndroid}

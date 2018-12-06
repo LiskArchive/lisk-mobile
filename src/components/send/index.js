@@ -10,7 +10,7 @@ import Overview from './overview';
 import Confirm from './confirm';
 import Result from './result';
 import { IconButton } from '../toolBox/button';
-import { colors } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -21,15 +21,17 @@ import getStyles from './styles';
 class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
+
     return {
       tabBarVisible: params.tabBar,
+      title: params.title || 'Send',
       headerLeft: params.showButtonLeft ? (
         <IconButton
-          icon='back'
           title=''
+          icon='back'
           onPress={params.action}
           style={params.styles && params.styles.back}
-          color={colors.light.white}
+          color={params.theme === themes.light ? colors.light.black : colors.dark.white}
         />
       ) : (
         <IconButton
@@ -41,14 +43,16 @@ class Send extends React.Component {
   };
 
   componentDidMount() {
-    const { styles, navigation } = this.props;
+    const { navigation } = this.props;
 
     this.subs = [
       navigation.addListener('didFocus', this.didFocus),
       navigation.addListener('willBlur', this.willBlur),
     ];
 
-    navigation.setParams({ showButtonLeft: false, styles });
+    navigation.setParams({
+      showButtonLeft: false,
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -71,11 +75,16 @@ class Send extends React.Component {
   }
 
   didFocus = () => {
-    const { navigation, accounts } = this.props;
-    const accountInitialization = navigation.getParam('initialize', false);
-
+    const {
+      styles,
+      theme,
+      navigation,
+      accounts,
+    } = this.props;
+    navigation.setParams({ styles, theme });
     BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
 
+    const accountInitialization = navigation.getParam('initialize', false);
     if (accountInitialization) {
       this.nav.move({
         to: 5,

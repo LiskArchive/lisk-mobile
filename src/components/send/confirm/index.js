@@ -4,7 +4,7 @@ import { View, Image, Platform } from 'react-native';
 import { validatePassphrase } from '../../../utilities/passphrase';
 import { extractPublicKey } from '../../../utilities/api/account';
 import Input from '../../toolBox/input';
-import { H1, P } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import secondPassphraseImageLight from '../../../assets/images/secondPassphrase3xLight.png';
 import secondPassphraseImageDark from '../../../assets/images/secondPassphrase3xDark.png';
@@ -30,6 +30,7 @@ class Confirm extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
+      title: 'Confirm your identity',
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
@@ -60,14 +61,6 @@ class Confirm extends React.Component {
     return validity;
   }
 
-  /**
-   * General change handler to get bound to react component event listeners
-   *
-   * @param {String} key - The key in react component state to be altered
-   * @param {any} value - The corresponding value. interface depends on the key
-   *
-   * @todo Implement error status/message
-   */
   changeHandler = (value) => {
     this.setState({
       secondPassphrase: {
@@ -84,47 +77,47 @@ class Confirm extends React.Component {
     const error = secondPassphrase.validity
       .filter(item =>
         item.code !== 'INVALID_MNEMONIC' || secondPassphrase.validity.length === 1);
-    return (<View style={[styles.wrapper, styles.theme.wrapper]}>
-      <KeyboardAwareScrollView
-        disabled={secondPassphrase.validity.length !== 0}
-        onSubmit={this.forward}
-        hasTabBar={true}
-        styles={{ innerContainer: styles.innerContainer }}
-        button={{
-          title: 'Continue',
-          type: 'inBox',
-        }}>
-        <View style={styles.titleContainer}>
-          <View style={styles.headings}>
-            <H1 style={[styles.title, styles.theme.title]}>Confirm your identity</H1>
+
+    return (
+      <View style={[styles.wrapper, styles.theme.wrapper]}>
+        <KeyboardAwareScrollView
+          disabled={secondPassphrase.validity.length !== 0}
+          onSubmit={this.forward}
+          hasTabBar={true}
+          styles={{ innerContainer: styles.innerContainer }}
+          button={{
+            title: 'Continue',
+            type: 'inBox',
+          }}>
+          <View style={styles.titleContainer}>
             <P style={[styles.subtitle, styles.theme.subtitle]}>
               Enter you second passphrase to continue to transaction overview page.
             </P>
+            <View style={styles.illustrationWrapper}>
+              {
+                theme === themes.light ?
+                  <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
+                  <Image style={styles.illustration} source={secondPassphraseImageDark} />
+              }
+            </View>
+            <Input
+              label='Second Passphrase'
+              reference={(ref) => { this.SecondPassphraseInput = ref; }}
+              innerStyles={{ input: styles.input }}
+              value={secondPassphrase.value}
+              onChange={this.changeHandler}
+              autoFocus={true}
+              autoCorrect={false}
+              multiline={Platform.OS === 'ios'}
+              secureTextEntry={Platform.OS !== 'ios'}
+              error={
+                (error.length > 0 && error[0].message && error[0].message.length > 0) ?
+                error[0].message.replace(' Please check the passphrase.', '') : ''
+              }/>
           </View>
-          <View style={styles.illustrationWrapper}>
-            {
-              theme === themes.light ?
-                <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
-                <Image style={styles.illustration} source={secondPassphraseImageDark} />
-            }
-          </View>
-          <Input
-            label='Second Passphrase'
-            reference={(ref) => { this.SecondPassphraseInput = ref; }}
-            innerStyles={{ input: styles.input }}
-            value={secondPassphrase.value}
-            onChange={this.changeHandler}
-            autoFocus={true}
-            autoCorrect={false}
-            multiline={Platform.OS === 'ios'}
-            secureTextEntry={Platform.OS !== 'ios'}
-            error={
-              (error.length > 0 && error[0].message && error[0].message.length > 0) ?
-              error[0].message.replace(' Please check the passphrase.', '') : ''
-            }/>
-        </View>
-      </KeyboardAwareScrollView>
-    </View>);
+        </KeyboardAwareScrollView>
+      </View>
+    );
   }
 }
 

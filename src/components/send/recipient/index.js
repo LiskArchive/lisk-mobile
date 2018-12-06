@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import { IconButton } from '../../toolBox/button';
-import { P, H1 } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
@@ -30,8 +30,8 @@ class Recipient extends React.Component {
     avatarPreview: false,
   };
   animatedStyles = {
-    height: new Animated.Value(100),
-    paddingTop: new Animated.Value(36),
+    height: new Animated.Value(40),
+    paddingTop: new Animated.Value(20),
   }
 
   componentDidMount() {
@@ -43,8 +43,9 @@ class Recipient extends React.Component {
     }
 
     navigation.setParams({
+      title: 'Recipient',
       showButtonLeft: false,
-      action: null,
+      action: false,
     });
   }
 
@@ -127,12 +128,12 @@ class Recipient extends React.Component {
     } else {
       Animated.parallel([
         Animated.timing(height, {
-          toValue: 100,
+          toValue: 40,
           duration: 400,
           delay: 0,
         }),
         Animated.timing(paddingTop, {
-          toValue: 36,
+          toValue: 20,
           duration: 400,
           delay: 0,
         }),
@@ -167,12 +168,9 @@ class Recipient extends React.Component {
             styles={{ container: styles.container, innerContainer: styles.innerContainer }}
           >
           <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-            <View style={styles.headings}>
-              <H1 style={[styles.title, styles.theme.title]}>Recipient</H1>
-              <P style={[styles.subtitle, styles.theme.subtitle]}>
+            <P style={styles.theme.subtitle}>
               Insert address or search a bookmark.
-              </P>
-            </View>
+            </P>
           </Animated.View>
           <View style={styles.form}>
             <View style={styles.addressContainer}>
