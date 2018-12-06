@@ -33,9 +33,13 @@ class Bookmarks extends React.Component {
         (list && list.length === 0 && query.length >= 0) ?
         <Empty /> :
         <Fragment>
-          <View style={styles.innerContainer}>
-            <Small style={[styles.title, styles.theme.title]}>BOOKMARKS</Small>
-          </View>
+            {
+              !draggable ?
+              <View style={styles.innerContainer}>
+                <Small style={[styles.title, styles.theme.title]}>BOOKMARKS</Small>
+              </View> :
+              null
+            }
           {
             filterList.length === 0 ?
               <View style={styles.innerContainer}>
