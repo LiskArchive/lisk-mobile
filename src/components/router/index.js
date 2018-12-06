@@ -46,6 +46,17 @@ const Tabs = TabNavigator({
       },
     },
   },
+  Request: {
+    screen: Request,
+    navigationOptions: () => ({
+      title: 'Request',
+      headerTitle: HeaderTitle,
+      headerRight: HeaderPlaceholderButton,
+      headerLeft: HeaderPlaceholderButton,
+      headerBackground: <HeaderBackground />,
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
+    }),
+  },
   Send: {
     screen: Send,
     navigationOptions: {
@@ -73,8 +84,6 @@ const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Request',
       headerTitle: HeaderTitle,
-      headerRight: HeaderPlaceholderButton,
-      headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
       headerStyle: {
