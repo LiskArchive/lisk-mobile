@@ -1,10 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import liskService from '../../../utilities/api/liskService';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import transactions from '../../../constants/transactions';
 import { fromRawLsk } from '../../../utilities/conversions';
-import { B, P, H1 } from '../../toolBox/typography';
+import { B, P } from '../../toolBox/typography';
 import FormattedNumber from '../../formattedNumber';
 import reg from '../../../constants/regex';
 import { merge } from '../../../utilities/helpers';
@@ -12,6 +12,10 @@ import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { deviceType } from '../../../utilities/device';
+import darkBlur from '../../../assets/images/amountFormBalanceBlur/dark.png';
+import lightBlur from '../../../assets/images/amountFormBalanceBlur/light.png';
+
+const blurs = { dark: darkBlur, light: lightBlur };
 
 const isAndroid = deviceType() === 'android';
 class Amount extends React.Component {
@@ -50,6 +54,7 @@ class Amount extends React.Component {
     }
 
     navigation.setParams({
+      title: 'Amount',
       showButtonLeft: true,
       action: () => this.props.move({
         to: status ? 0 : 1,
@@ -105,7 +110,11 @@ class Amount extends React.Component {
   }
 
   render() {
-    const { styles, accounts, currency } = this.props;
+    const {
+      theme,
+      settings: { currency, incognito },
+      styles, accounts,
+    } = this.props;
     const {
       amount: { value, normalizedValue, validity },
       priceTicker,
@@ -130,26 +139,37 @@ class Amount extends React.Component {
         >
           <View>
             <View style={styles.headerContainer}>
-              <H1 style={[styles.header, styles.theme.header]}>
-                Send Lisk
-              </H1>
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
+              <P style={styles.theme.subHeader}>
                 Enter the amount you want to send.
               </P>
             </View>
 
-            <View style={[styles.balanceContainer, styles.theme.balanceContainer]}>
+            <View
+              style={[
+                styles.balanceContainer,
+                styles.theme.balanceContainer,
+                (incognito ? styles.balanceContainerIncognito : {}),
+              ]}
+            >
               <B style={[styles.balanceText, styles.theme.balanceText]}>
                 {'You have '}
               </B>
-              <B style={[styles.balanceNumber, styles.theme.balanceNumber]}>
-                <FormattedNumber>
+
+              {incognito ?
+                <Image
+                  source={blurs[theme]}
+                  style={styles.balanceIncognito}
+                /> :
+                <FormattedNumber
+                  type={B}
+                  style={[styles.balanceNumber, styles.theme.balanceNumber]}
+                >
                   {fromRawLsk(accounts.active.balance || 0)}
                 </FormattedNumber>
-              </B>
+              }
             </View>
 
-            <View style={styles.form}>
+            <View>
               <AmountInput
                 reference={(el) => { this.input = el; }}
                 autoFocus={!isAndroid}

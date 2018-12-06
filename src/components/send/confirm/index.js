@@ -4,7 +4,7 @@ import { View, Image, Platform } from 'react-native';
 import { validatePassphrase } from '../../../utilities/passphrase';
 import { extractPublicKey } from '../../../utilities/api/account';
 import Input from '../../toolBox/input';
-import { H1, P } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import secondPassphraseImageLight from '../../../assets/images/secondPassphrase3xLight.png';
 import secondPassphraseImageDark from '../../../assets/images/secondPassphrase3xDark.png';
@@ -24,6 +24,14 @@ class Confirm extends React.Component {
     },
   };
 
+  componentDidMount() {
+    this.props.navigation.setParams({
+      title: 'Confirm your identity',
+      showButtonLeft: true,
+      action: () => this.props.prevStep(),
+    });
+  }
+
   validator = (passphrase) => {
     const validity = validatePassphrase(passphrase);
 
@@ -38,15 +46,6 @@ class Confirm extends React.Component {
     }
 
     return validity;
-  }
-
-  componentDidMount() {
-    const { navigation, prevStep } = this.props;
-
-    navigation.setParams({
-      showButtonLeft: true,
-      action: () => prevStep(),
-    });
   }
 
   changeHandler = (value) => {
@@ -99,15 +98,11 @@ class Confirm extends React.Component {
           button={{
             title: 'Continue',
             type: 'inBox',
-          }}
-        >
+          }}>
           <View style={styles.titleContainer}>
-            <View style={styles.headings}>
-              <H1 style={[styles.title, styles.theme.title]}>Confirm your identity</H1>
-              <P style={[styles.subtitle, styles.theme.subtitle]}>
-                Enter you second passphrase to continue to transaction overview page.
-              </P>
-            </View>
+            <P style={[styles.subtitle, styles.theme.subtitle]}>
+              Enter you second passphrase to continue to transaction overview page.
+            </P>
             <View style={styles.illustrationWrapper}>
               {
                 theme === themes.light ?

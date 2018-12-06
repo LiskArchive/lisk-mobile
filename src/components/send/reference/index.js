@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { TextEncoder } from 'text-encoding';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import { P, H1 } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import Input from '../../toolBox/input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
@@ -31,6 +31,7 @@ class Reference extends React.Component {
     }
 
     navigation.setParams({
+      title: 'Reference',
       showButtonLeft: true,
       action: () => prevStep(),
     });
@@ -84,15 +85,12 @@ class Reference extends React.Component {
         >
           <View>
             <View style={styles.headerContainer}>
-              <H1 style={[styles.header, styles.theme.header]}>
-                Reference
-              </H1>
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
+              <P style={styles.theme.subHeader}>
                 Add a reference to this transaction.
               </P>
             </View>
 
-            <View style={styles.form}>
+            <View>
               <Input
                 reference={(el) => { this.input = el; }}
                 label='Reference (Optional)'

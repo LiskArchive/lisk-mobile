@@ -7,7 +7,7 @@ import {
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
-import { H1, B, Small } from '../toolBox/typography';
+import { B, Small } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { SecondaryButton } from '../toolBox/button';
 import { themes, colors } from '../../constants/styleGuide';
@@ -20,6 +20,13 @@ import getStyles from './styles';
   settingsUpdated: settingsUpdatedAction,
 })
 class EnableBioAuth extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    const title = navigation.getParam('title', 'Bio Auth');
+    return {
+      title: `Enable ${title}`,
+    };
+  }
+
   confirm = () => {
     storePassphraseInKeyChain(this.props.account.passphrase);
     this.props.settingsUpdated({ hasStoredPassphrase: true });
@@ -27,16 +34,13 @@ class EnableBioAuth extends React.Component {
   }
 
   render() {
-    const { theme, styles } = this.props;
-    const title = this.props.navigation.getParam('title', null);
+    const { theme, styles, navigation } = this.props;
+    const title = navigation.getParam('title', 'Bio Auth');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={styles.container}>
           <View>
-            <H1 style={[styles.header, styles.theme.header]}>
-              {`You're about to enable ${title}`}
-            </H1>
             <B style={[styles.subHeader, styles.theme.subHeader]}>
               Here’s what you need to know:
             </B>
@@ -71,8 +75,7 @@ class EnableBioAuth extends React.Component {
                   You can always turn it off
                 </B>
                 <Small style={[styles.description, styles.theme.description]}>
-                  You can disable Face ID at anytime in Settings page.
-                  then authenticate with passphrase.
+                  {`You can disable ${title} at anytime in Settings page then authenticate with passphrase.`}
                 </Small>
               </View>
             </View>

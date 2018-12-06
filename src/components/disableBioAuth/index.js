@@ -7,7 +7,7 @@ import {
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
-import { H1, P } from '../toolBox/typography';
+import { P } from '../toolBox/typography';
 import { SecondaryButton } from '../toolBox/button';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -19,6 +19,13 @@ import PassphraseCopy from '../passphraseCopy';
   settingsUpdated: settingsUpdatedAction,
 })
 class DisableBioAuth extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    const title = navigation.getParam('title', 'Bio Auth');
+    return {
+      title: `Disable ${title}`,
+    };
+  }
+
   confirm = () => {
     removePassphraseFromKeyChain();
     this.props.settingsUpdated({ hasStoredPassphrase: false });
@@ -26,21 +33,16 @@ class DisableBioAuth extends React.Component {
   }
 
   render() {
-    const { styles, account: { passphrase } } = this.props;
-    const title = this.props.navigation.getParam('title', null);
+    const { styles, navigation, account: { passphrase } } = this.props;
+    const title = navigation.getParam('title', 'Bio Auth');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={styles.container}>
           <View>
-            <View>
-              <H1 style={[styles.header, styles.theme.header]}>
-                {`You're about to disable ${title}`}
-              </H1>
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
-                Passphrase will be the only option to access your account.
-              </P>
-            </View>
+            <P style={[styles.subHeader, styles.theme.subHeader]}>
+              Passphrase will be the only option to access your account.
+            </P>
             <PassphraseCopy passphrase={passphrase} />
           </View>
 

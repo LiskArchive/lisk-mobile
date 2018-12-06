@@ -9,26 +9,28 @@ export default () => ({
       paddingBottom: (deviceType() === 'android' ? tabBarHeight() : 0) + 24,
     },
     headerContainer: {
-      paddingTop: 36,
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
-    },
-    subHeader: {
-      marginTop: 5,
+      margin: boxes.boxPadding,
     },
     balanceContainer: {
-      marginTop: 20,
-      paddingTop: 18,
-      paddingBottom: 18,
-      paddingRight: boxes.boxPadding,
-      paddingLeft: boxes.boxPadding,
       flexDirection: 'row',
+      padding: boxes.boxPadding,
+      marginBottom: 5,
+      alignItems: 'center',
+    },
+    balanceContainerIncognito: {
+      paddingTop: 9,
+      paddingBottom: 9,
     },
     balanceText: {
       fontSize: 14,
     },
     balanceNumber: {
       fontSize: 14,
+    },
+    balanceIncognito: {
+      width: 94,
+      height: 37,
+      marginLeft: -10,
     },
     form: {
       marginTop: 5,
@@ -43,9 +45,6 @@ export default () => ({
   [themes.light]: {
     wrapper: {
       backgroundColor: colors.light.white,
-    },
-    header: {
-      color: colors.light.black,
     },
     subHeader: {
       color: colors.light.gray2,
@@ -64,9 +63,6 @@ export default () => ({
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    header: {
-      color: colors.dark.white,
     },
     subHeader: {
       color: colors.dark.gray4,

@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import { P, H1, Small } from '../../toolBox/typography';
+import { P, Small } from '../../toolBox/typography';
 import Input from '../../toolBox/input';
 import Avatar from '../../avatar';
 import withTheme from '../../withTheme';
@@ -31,6 +31,7 @@ class AddToBookmark extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
+      title: 'Add to bookmarks',
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
@@ -84,14 +85,11 @@ class AddToBookmark extends React.Component {
         >
           <View>
             <View style={styles.headerContainer}>
-              <H1 style={[styles.header, styles.theme.header]}>
-                Add to bookmark
-              </H1>
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
+              <P style={styles.theme.subHeader}>
                 Optional: Add a label to save the address for the future use.
               </P>
             </View>
-            <View style={[styles.form, styles.theme.form]}>
+            <View>
               <View style={styles.row}>
                 <P style={[styles.label, styles.theme.label]}>Address</P>
                 <View style={styles.addressContainer}>

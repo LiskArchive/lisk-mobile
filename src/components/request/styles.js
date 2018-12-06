@@ -12,15 +12,10 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       flex: 1,
-      paddingTop: 36,
+      padding: boxes.boxPadding,
       paddingBottom: 60,
     },
-    headerContainer: {
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
-    },
     subHeader: {
-      marginTop: 7,
     },
     main: {
       flexDirection: 'column',
@@ -56,9 +51,6 @@ export default () => ({
     innerContainer: {
       backgroundColor: colors.light.white,
     },
-    header: {
-      color: colors.light.black,
-    },
     subHeader: {
       color: colors.light.gray2,
     },
@@ -76,9 +68,6 @@ export default () => ({
     },
     innerContainer: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    header: {
-      color: colors.dark.white,
     },
     subHeader: {
       color: colors.dark.gray4,
