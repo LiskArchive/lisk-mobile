@@ -8,9 +8,9 @@ export default () => ({
       transform: [
         { rotate: '45deg' },
       ],
-      width: 40,
+      width: 60,
       height: 40,
-      marginTop: (Platform.OS === 'ios') ? 0 : 6,
+      marginTop: (Platform.OS === 'ios') ? 6 : 12,
     },
     wrapper: {
       flex: 1,

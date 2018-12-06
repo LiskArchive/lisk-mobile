@@ -4,9 +4,9 @@ import { B } from '../toolBox/typography';
 import reg from '../../constants/regex';
 import Input from '../toolBox/input';
 import { IconButton } from '../toolBox/button';
+import AddButton from './addButton';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { colors } from '../../constants/styleGuide';
 import Bookmarks from '../bookmarks';
 
 class Bookmark extends React.Component {
@@ -14,14 +14,7 @@ class Bookmark extends React.Component {
     const { params = {} } = navigation.state;
     return {
       tabBarVisible: params.tabBar,
-      headerRight: <IconButton
-        icon='cross'
-        title=''
-        onPress={params.action}
-        iconSize={25}
-        style={params.styles && params.styles.headerButton}
-        color={colors.light.white}
-      />,
+      headerRight: <AddButton onPress={params.action} style={params.styles} />,
       headerLeft: (
         <IconButton
           color='transparent'
@@ -50,8 +43,8 @@ class Bookmark extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation, styles } = this.props;
-    navigation.setParams({ styles });
+    const { navigation, styles, theme } = this.props;
+    navigation.setParams({ styles, theme });
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.onKeyboardOpen);
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.onKeyboardClose);
   }
