@@ -144,7 +144,12 @@ class AccountSummary extends React.Component {
               top: this.interpolate([0, 100], [0, 80]),
             },
           ]}>
-            <P style={[styles.fiatValue, styles.theme.fiatValue]}>{`~ ${faitBalance} ${settings.currency}`}</P>
+          {
+            !settings.incognito ?
+              <P style={[styles.fiatValue, styles.theme.fiatValue]}>
+                {`~ ${faitBalance} ${settings.currency}`}
+              </P> : null
+          }
           </Anim>
         </Anim> :
         <H4>Fetching account info</H4>

@@ -56,7 +56,7 @@ export default () => ({
       position: 'absolute',
       left: '50%',
       top: '50%',
-      marginTop: -30,
+      marginTop: -18,
       zIndex: 2,
       opacity: 0,
     },
@@ -64,7 +64,7 @@ export default () => ({
       opacity: 1,
     },
     invisibleTitle: {
-      color: 'rgba(255, 255, 255, 0.02)',
+      color: 'transparent',
     },
     blurBig: {
       width: 150,
