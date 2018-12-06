@@ -4,7 +4,7 @@ import connect from 'redux-connect-decorator';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
-import Item from './item';
+import { DraggableItem, Item } from './item';
 import Empty from './empty';
 import withTheme from '../withTheme';
 import { Small } from '../toolBox/typography';
@@ -18,7 +18,7 @@ import getStyles from './styles';
 class Bookmarks extends React.Component {
   render() {
     const {
-      styles, list, navigate, query, setRef,
+      styles, list, navigate, query, setRef, draggable,
     } = this.props;
 
     const filterList = list.filter((item) => {
@@ -26,6 +26,7 @@ class Bookmarks extends React.Component {
       return (item.address.indexOf(query) >= 0 ||
         item.label.indexOf(query) >= 0);
     });
+    const Element = draggable ? DraggableItem : Item;
 
     return (<View style={styles.container}>
       {
@@ -43,7 +44,7 @@ class Bookmarks extends React.Component {
                 </Small>
               </View> :
               filterList.map(item =>
-                <Item setRef={setRef} navigate={navigate} key={item.address} data={item} />)
+                <Element setRef={setRef} navigate={navigate} key={item.address} data={item} />)
           }
         </Fragment>
       }
