@@ -152,7 +152,7 @@ export default StackNavigator(
     Terms: {
       screen: Terms,
       navigationOptions: {
-        title: 'Terms',
+        title: 'Terms of use',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
