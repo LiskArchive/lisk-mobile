@@ -16,8 +16,8 @@ import darkBlur from '../../../assets/images/amountFormBalanceBlur/dark.png';
 import lightBlur from '../../../assets/images/amountFormBalanceBlur/light.png';
 
 const blurs = { dark: darkBlur, light: lightBlur };
-
 const isAndroid = deviceType() === 'android';
+
 @connect(state => ({
   priceTicker: state.liskService.priceTicker,
 }))
