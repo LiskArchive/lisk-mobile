@@ -20,6 +20,7 @@ import {
   settingsUpdated as settingsUpdatedAction,
   settingsRetrieved as settingsRetrievedAction,
 } from '../../actions/settings';
+import { pricesRetrieved as pricesRetrievedAction } from '../../actions/liskService';
 import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';
@@ -41,6 +42,7 @@ console.disableYellowBox = true; // eslint-disable-line
   accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
   settingsRetrieved: settingsRetrievedAction,
+  pricesRetrieved: pricesRetrievedAction,
 })
 class SignIn extends React.Component {
   state = {
@@ -185,10 +187,10 @@ class SignIn extends React.Component {
   }
 
   onSignInCompleted = () => {
-    const { deepLinkURL } = this.state;
+    this.props.pricesRetrieved();
 
-    if (deepLinkURL) {
-      this.navigateToDeepLink(deepLinkURL);
+    if (this.state.deepLinkURL) {
+      this.navigateToDeepLink(this.state.deepLinkURL);
     } else {
       this.props.navigation.dispatch(NavigationActions.reset({
         index: 0,
