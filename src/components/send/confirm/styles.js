@@ -6,20 +6,16 @@ export default () => ({
     innerContainer: {
       flexDirection: 'column',
       justifyContent: 'space-between',
+      padding: boxes.boxPadding,
       paddingBottom: 24,
     },
     button: {
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
       bottom: 100,
     },
     buttonSticky: {
       borderRadius: 0,
       borderLeftWidth: 0,
       borderRightWidth: 0,
-    },
-    subtitle: {
-      marginTop: 7,
     },
     input: {
       paddingRight: boxes.boxPadding,
@@ -29,15 +25,11 @@ export default () => ({
       letterSpacing: 1,
       fontFamily: fonts.family.passphrase,
     },
-    headings: {
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
-      paddingTop: 36,
-    },
     illustrationWrapper: {
       flexDirection: 'row',
       justifyContent: 'center',
-      paddingTop: 40,
+      paddingTop: 36,
+      paddingBottom: 8,
     },
     illustration: {
       width: 85,
@@ -74,9 +66,6 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    title: {
-      color: colors.light.black,
-    },
     subtitle: {
       color: colors.light.gray2,
     },
@@ -84,9 +73,6 @@ export default () => ({
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    title: {
-      color: colors.dark.white,
     },
     subtitle: {
       color: colors.dark.gray4,

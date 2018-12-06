@@ -3,16 +3,10 @@ import { themes, colors, fonts, boxes } from '../../constants/styleGuide';
 export default ({ logoSize }) => ({
   common: {
     container: {
-      height: '100%',
-    },
-    innerContainer: {
       flex: 1,
       flexDirection: 'column',
       justifyContent: 'space-between',
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
-      paddingTop: 36,
-      paddingBottom: 35,
+      padding: boxes.boxPadding,
     },
     footer: {
       width: '100%',
@@ -32,7 +26,6 @@ export default ({ logoSize }) => ({
       width: logoSize,
       height: logoSize,
       borderRadius: 18,
-      marginTop: 20,
     },
     logoImage: {
       width: logoSize,

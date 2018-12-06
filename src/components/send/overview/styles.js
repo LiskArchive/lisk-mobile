@@ -8,10 +8,7 @@ export default () => ({
       flexGrow: 1,
       flexDirection: 'column',
       justifyContent: 'space-between',
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
-      paddingTop: 36,
-      paddingBottom: 35,
+      margin: boxes.boxPadding,
     },
     heading: {
       fontSize: 24,
@@ -53,14 +50,12 @@ export default () => ({
       fontSize: fonts.size.input,
       fontWeight: '400',
     },
-    subtitle: {
-      marginTop: 7,
-    },
     addressContainer: {
       flexDirection: 'column',
       alignItems: 'center',
       textAlign: 'center',
-      marginTop: 15,
+      paddingTop: boxes.boxPadding,
+      paddingBottom: boxes.boxPadding,
     },
     avatar: {
       paddingBottom: 10,
@@ -96,9 +91,6 @@ export default () => ({
     label: {
       color: colors.light.gray1,
     },
-    headerTitle: {
-      color: colors.light.black,
-    },
     subtitle: {
       color: colors.light.gray2,
     },
@@ -124,9 +116,6 @@ export default () => ({
     },
     label: {
       color: colors.dark.gray4,
-    },
-    headerTitle: {
-      color: colors.dark.white,
     },
     subtitle: {
       color: colors.dark.gray4,

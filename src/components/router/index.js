@@ -48,10 +48,8 @@ const Tabs = TabNavigator({
   Send: {
     screen: Send,
     navigationOptions: {
-      title: 'Send',
       headerTitle: HeaderTitle,
       headerRight: HeaderPlaceholderButton,
-      headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='send' tintColor={tintColor} />, //eslint-disable-line
       headerStyle: {
@@ -150,7 +148,7 @@ export default StackNavigator(
     About: {
       screen: About,
       navigationOptions: {
-        title: 'About',
+        title: 'About Lisk',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
@@ -180,7 +178,6 @@ export default StackNavigator(
     EnableBioAuth: {
       screen: EnableBioAuth,
       navigationOptions: {
-        title: 'Enable BioAuth',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
@@ -190,7 +187,6 @@ export default StackNavigator(
     DisableBioAuth: {
       screen: DisableBioAuth,
       navigationOptions: {
-        title: 'Disable BioAuth',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
@@ -200,7 +196,7 @@ export default StackNavigator(
     PassphraseBackup: {
       screen: PassphraseBackup,
       navigationOptions: {
-        title: 'Backup your passphrase',
+        title: 'Passphrase backup',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
