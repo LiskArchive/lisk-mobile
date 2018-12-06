@@ -5,7 +5,7 @@ import { accountSignedOut as accountSignedOutAction } from '../../actions/accoun
 import { H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
-import SignOutButton from '../signOutButton';
+import SignOutButton from './signOutButton';
 import { colors, themes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import SwitchButton from './switchButton';
@@ -168,7 +168,11 @@ class Settings extends React.Component {
           <View style={[styles.group, styles.signOut]}>
             <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
             <View style={[styles.item, styles.theme.item]}>
-              <SignOutButton navigation={navigation} signOut={this.props.accountSignedOut} />
+              <SignOutButton
+                navigation={navigation}
+                signOut={this.props.accountSignedOut}
+                settings={settings}
+              />
             </View>
           </View>
         </ScrollView>
