@@ -31,7 +31,7 @@ class SignOutButton extends React.Component {
     let message;
 
     if (settings.hasStoredPassphrase) {
-      message = `You will need to reconfigure ${settings.sensorType} after signing in.`;
+      message = `You can sign back in using your passphrase and enable ${settings.sensorType} at any time.`;
     }
 
     Alert.alert('Are you sure?', message, [
