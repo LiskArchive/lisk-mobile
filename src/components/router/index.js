@@ -3,6 +3,7 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import SignIn from '../signIn';
 import TxDetail from '../txDetail';
 import Send from '../send';
+import Bookmark from '../bookmarkPage';
 import Register from '../register';
 import Wallet from '../wallet';
 import Request from '../request';
@@ -45,6 +46,17 @@ const Tabs = TabNavigator({
       },
     },
   },
+  Request: {
+    screen: Request,
+    navigationOptions: () => ({
+      title: 'Request',
+      headerTitle: HeaderTitle,
+      headerRight: HeaderPlaceholderButton,
+      headerLeft: HeaderPlaceholderButton,
+      headerBackground: <HeaderBackground />,
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
+    }),
+  },
   Send: {
     screen: Send,
     navigationOptions: {
@@ -59,21 +71,13 @@ const Tabs = TabNavigator({
       },
     },
   },
-  Request: {
-    screen: Request,
-    navigationOptions: {
-      title: 'Request',
-      headerTitle: HeaderTitle,
-      headerRight: HeaderPlaceholderButton,
-      headerLeft: HeaderPlaceholderButton,
-      headerBackground: <HeaderBackground />,
-      tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
-      headerStyle: {
-        backgroundColor: 'transparent',
-        overflow: 'hidden',
-        elevation: 1,
-      },
-    },
+  Bookmarks: {
+    screen: Bookmark,
+    navigationOptions: () => ({
+      title: 'Bookmarks',
+      tabBarLabel: 'Bookmarks',
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='bookmark' tintColor={tintColor} />, //eslint-disable-line
+    }),
   },
   Settings: {
     screen: Settings,
@@ -96,6 +100,7 @@ const Tabs = TabNavigator({
   tabBarPosition: 'bottom',
   initialRouteName: 'Home',
   headerMode: 'screen',
+  swipeEnabled: false,
 });
 
 // eslint-disable-next-line new-cap

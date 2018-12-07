@@ -65,6 +65,7 @@
     "react-native-fingerprint-scanner": "^2.4.0",
     "react-native-haptic-feedback": "^1.4.2",
     "react-native-http": "github:tradle/react-native-http#834492d",
+    "react-native-interactable": "^0.1.10",
     "react-native-keyboard-accessory": "0.1.5",
     "react-native-keyboard-aware-scroll-view": "^0.6.0",
     "react-native-keychain": "^3.0.0",
