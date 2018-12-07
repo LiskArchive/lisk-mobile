@@ -79,20 +79,6 @@ const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='bookmark' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
-  Request: {
-    screen: Request,
-    navigationOptions: {
-      title: 'Request',
-      headerTitle: HeaderTitle,
-      headerBackground: <HeaderBackground />,
-      tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
-      headerStyle: {
-        backgroundColor: 'transparent',
-        overflow: 'hidden',
-        elevation: 1,
-      },
-    },
-  },
   Settings: {
     screen: Settings,
     navigationOptions: {
