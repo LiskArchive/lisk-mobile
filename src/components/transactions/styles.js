@@ -6,12 +6,12 @@ export default () => ({
     container: {
       paddingRight: 20,
       paddingLeft: 20,
-      paddingTop: 20,
+      paddingTop: 35,
     },
     itemContainer: {
       width: '100%',
       height: 90,
-      paddingTop: 20,
+      paddingTop: 10,
       paddingBottom: 20,
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -21,6 +21,10 @@ export default () => ({
     innerContainer: {
       flexDirection: 'row',
       justifyContent: 'flex-start',
+    },
+    placeholder: {
+      height: 170,
+      width: '100%',
     },
     title: {
       marginBottom: 15,
@@ -55,6 +59,7 @@ export default () => ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      marginTop: 170,
     },
     emptyState: {
       width: '100%',
@@ -62,7 +67,7 @@ export default () => ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: viewportHeight() / 7.5,
+      marginTop: (viewportHeight() / 7.5) + 170,
     },
     noActivity: {
       width: '100%',

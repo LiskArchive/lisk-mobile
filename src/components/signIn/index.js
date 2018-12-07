@@ -216,7 +216,7 @@ class SignIn extends React.Component {
       this.props.navigation.navigate(linkedScreen.name, linkedScreen.params);
     } else {
       // @TODO: Navigate to different page or display an error message for unmapped deep links.
-      this.props.navigation.navigate('OwnWallet');
+      this.props.navigation.navigate('Home');
     }
   }
 

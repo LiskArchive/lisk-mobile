@@ -1,10 +1,31 @@
+import { themes, colors } from '../../../constants/styleGuide';
+
 export default () => ({
   common: {
-    main: {
-      position: 'absolute',
+    wrapper: {
       width: '100%',
-      left: 0,
-      top: 0,
+      flex: 1,
+    },
+    image: {
+      width: 400,
+      height: 200,
+      minWidth: '100%',
+    },
+  },
+  [themes.light]: {
+    wrapper: {
+      backgroundColor: colors.light.brandingBlue,
+    },
+    image: {
+      opacity: 1,
+    },
+  },
+  [themes.dark]: {
+    wrapper: {
+      backgroundColor: colors.dark.navigationBg,
+    },
+    image: {
+      opacity: 0.6,
     },
   },
 });

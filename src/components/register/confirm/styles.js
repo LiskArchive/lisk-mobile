@@ -12,7 +12,6 @@ const styles = {
     justifyContent: 'space-between',
   },
   headerContainer: {
-    backgroundColor: 'red',
   },
   header: {
     marginTop: 8,
