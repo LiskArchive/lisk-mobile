@@ -45,7 +45,7 @@ class Reference extends React.Component {
     this.setState({
       reference: {
         value,
-        validity: -1,
+        validity: this.validator(value),
       },
     });
   }
