@@ -67,7 +67,7 @@ export default () => ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: (viewportHeight() / 7.5) + 170,
+      marginTop: (viewportHeight() / 6) + 170,
     },
     noActivity: {
       width: '100%',
