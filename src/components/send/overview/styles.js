@@ -53,6 +53,9 @@ export default () => ({
       fontSize: fonts.size.input,
       fontWeight: '400',
     },
+    text: {
+      flexWrap: 'wrap',
+    },
     subtitle: {
       marginTop: 7,
     },
