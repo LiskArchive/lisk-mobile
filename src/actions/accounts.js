@@ -88,9 +88,9 @@ export const accountUnFollowed = address => ({
  *
  * @returns {Object} - Pure action function
  */
-export const accountEdited = (address, updatedData) => ({
+export const accountEdited = (address, label) => ({
   type: actionTypes.accountEdited,
-  data: { address, updatedData },
+  data: { address, label },
 });
 
 /**

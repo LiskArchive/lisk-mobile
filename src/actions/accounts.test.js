@@ -182,14 +182,12 @@ describe('Action: Accounts', () => {
   });
 
   it('should returns an accountEdited action object', () => {
-    const updatedData = {
-      label: 'test2',
-    };
+    const updatedData = 'test2';
     const expectedValue = {
       type: actionTypes.accountEdited,
       data: {
         address,
-        updatedData,
+        label: updatedData,
       },
     };
     expect(accountEdited(address, updatedData)).toEqual(expectedValue);
