@@ -67,7 +67,7 @@ class InfiniteScrollView extends React.Component {
         stickyHeaderIndices={this.props.stickyHeaderIndices}
         scrollEventThrottle={8}
       >
-        {this.props.children}
+        {this.props.render(this.state.refreshing)}
       </ScrollView>
     );
   }

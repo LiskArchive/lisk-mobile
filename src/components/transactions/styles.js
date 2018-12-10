@@ -25,6 +25,8 @@ export default () => ({
     placeholder: {
       height: 170,
       width: '100%',
+      justifyContent: 'flex-end',
+      paddingBottom: 25,
     },
     title: {
       marginBottom: 15,
@@ -62,17 +64,14 @@ export default () => ({
       marginTop: 170,
     },
     emptyState: {
-      width: '100%',
-      display: 'flex',
-      flex: 1,
+      paddingTop: 35,
       alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: (viewportHeight() / 6) + 170,
+      justifyContent: 'space-between',
     },
     noActivity: {
       width: '100%',
       alignItems: 'center',
-      marginBottom: 10,
+      marginTop: (viewportHeight() / 6) - 35,
     },
     empty: {
       width: 222,

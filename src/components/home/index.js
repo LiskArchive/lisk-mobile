@@ -153,18 +153,18 @@ class Home extends React.Component {
           loadMore={this.loadMore}
           list={listElements}
           count={transactions.count}
-        >
-          {
+          render={refreshing => (
             transactions.count > 0 ? (
               <Transactions
                 transactions={transactions}
                 footer={this.state.footer}
                 navigate={navigation.navigate}
                 account={account}
+                refreshing={refreshing}
               />
-            ) : <Empty />
-          }
-        </InfiniteScrollView>
+            ) : <Empty refreshing={refreshing} />
+          )}
+        />
       );
     }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { Platform, View, Image, ActivityIndicator } from 'react-native';
 import noActivityLight from '../../assets/images/noActivity/noActivity3xLight.png';
 import noActivityDark from '../../assets/images/noActivity/noActivity3xDark.png';
 import { P } from '../toolBox/typography';
@@ -7,8 +7,12 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
 
-const EmptyState = ({ theme, styles }) =>
+const EmptyState = ({ theme, styles, refreshing }) =>
   <View style={styles.emptyState}>
+    <View style={styles.placeholder}>
+      {(Platform.OS === 'ios' && refreshing) ? <ActivityIndicator size="large" /> : null}
+    </View>
+
     <View style={styles.noActivity}>
       {
         theme === themes.light ?
