@@ -1,4 +1,4 @@
-import transactions from './transactions';
+import transactions, { INITIAL_STATE } from './transactions';
 import actionTypes from '../../constants/actions';
 
 describe('Reducers: Transactions', () => {
@@ -14,7 +14,7 @@ describe('Reducers: Transactions', () => {
     amount: 200000000,
     fee: 10000000,
   };
-  const emptyState = { pending: [], confirmed: [], count: null };
+  const emptyState = INITIAL_STATE;
 
   it('should create the empty state initially', () => {
     const createdState = transactions();

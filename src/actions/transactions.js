@@ -13,6 +13,7 @@ export const transactionsLoaded = data =>
           type: actionTypes.transactionsLoaded,
           data: {
             transactions: response.data,
+            count: response.meta.count,
           },
         });
         dispatch(loadingFinished(actionTypes.transactionsLoaded));

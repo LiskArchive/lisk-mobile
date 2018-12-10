@@ -65,6 +65,9 @@ describe('Action: Accounts', () => {
         },
       },
     ],
+    meta: {
+      count: 2,
+    },
   };
   transactionsUtility.send = jest.fn();
   transactionsUtility.getTransactions = jest.fn();
@@ -77,9 +80,21 @@ describe('Action: Accounts', () => {
         transactions: { confirmed: [] },
       });
       const expectedActions = [
-        { type: actionTypes.loadingStarted, data: actionTypes.transactionsLoaded },
-        { type: actionTypes.transactionsLoaded, data: { transactions: transactions.data } },
-        { type: actionTypes.loadingFinished, data: actionTypes.transactionsLoaded },
+        {
+          type: actionTypes.loadingStarted,
+          data: actionTypes.transactionsLoaded,
+        },
+        {
+          type: actionTypes.transactionsLoaded,
+          data: {
+            transactions: transactions.data,
+            count: transactions.meta.count,
+          },
+        },
+        {
+          type: actionTypes.loadingFinished,
+          data: actionTypes.transactionsLoaded,
+        },
       ];
       transactionsUtility.getTransactions.mockResolvedValue(transactions);
       await store.dispatch(transactionsLoaded({ offset: 0 }));

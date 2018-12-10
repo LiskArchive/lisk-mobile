@@ -170,7 +170,10 @@ export const blockUpdated = () => (dispatch, getState) => {
     if (newTransactions.length) {
       dispatch({
         type: actionTypes.transactionsUpdated,
-        data: { confirmed: newTransactions },
+        data: {
+          confirmed: newTransactions,
+          count: response.meta.count,
+        },
       });
 
       getAccount(activePeer, address).then((account) => {
