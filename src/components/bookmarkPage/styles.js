@@ -17,6 +17,7 @@ export default () => ({
     },
     subtitle: {
       marginTop: 0,
+      height: 60,
       maxWidth: '100%',
     },
     titleContainer: {

@@ -44,7 +44,13 @@ class Bookmark extends React.Component {
 
   componentDidMount() {
     const { navigation, styles, theme } = this.props;
-    navigation.setParams({ styles, theme });
+    navigation.setParams({
+      styles,
+      theme,
+      action: () => {
+        navigation.navigate('AddBookmark');
+      },
+    });
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.onKeyboardOpen);
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.onKeyboardClose);
   }
@@ -130,7 +136,7 @@ class Bookmark extends React.Component {
   }
 
   render() {
-    const { styles } = this.props;
+    const { styles, navigation } = this.props;
     const {
       address,
     } = this.state;
@@ -167,7 +173,9 @@ class Bookmark extends React.Component {
                 }
               />
             </View>
-            <Bookmarks draggable={true} setRef={this.setRef} query={this.state.address.value} />
+            <Bookmarks
+              navigate={navigation.navigate}
+              draggable={true} setRef={this.setRef} query={this.state.address.value} />
           </View>
         </ScrollView>
       </View>
