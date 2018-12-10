@@ -43,7 +43,6 @@ class Recipient extends React.Component {
     }
 
     navigation.setParams({
-      title: 'Recipient',
       showButtonLeft: false,
       action: false,
     });

@@ -31,7 +31,6 @@ class Reference extends React.Component {
     }
 
     navigation.setParams({
-      title: 'Reference',
       showButtonLeft: true,
       action: () => prevStep(),
     });

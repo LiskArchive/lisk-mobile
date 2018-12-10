@@ -24,7 +24,7 @@ class Send extends React.Component {
 
     return {
       tabBarVisible: params.tabBar,
-      title: params.title || 'Send',
+      title: 'Send',
       headerLeft: params.showButtonLeft ? (
         <IconButton
           title=''

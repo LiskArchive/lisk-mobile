@@ -83,7 +83,6 @@ class Overview extends React.Component {
 
   componentDidMount() {
     let nextNavigationParams = {
-      title: messages.send.title,
       action: this.back,
       showButtonLeft: true,
     };
@@ -94,7 +93,6 @@ class Overview extends React.Component {
       });
 
       nextNavigationParams = {
-        title: messages.initialize.title,
         showButtonLeft: false,
         action: this.props.navigation.back,
       };
