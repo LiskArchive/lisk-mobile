@@ -27,7 +27,7 @@ class AddToBookmark extends React.Component {
     },
   };
 
-  validator = str => (str.length > 30 ? 1 : 0)
+  validator = str => (str.length > 20 ? 1 : 0)
 
   componentDidMount() {
     this.props.navigation.setParams({
