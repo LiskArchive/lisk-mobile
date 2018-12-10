@@ -71,7 +71,7 @@ class Form extends React.Component {
     this.setState(({ isSubmitted: true }), () => {
       if (!passphrase.validity.length) {
         this.passphraseInput.blur();
-        this.props.signIn(passphrase.value);
+        this.props.signIn(passphrase.value, 'form');
       }
     });
   }
