@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
-import liskService from '../../utilities/api/liskService';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
 import AccountSummary from '../accountSummary';
@@ -28,6 +27,7 @@ const summaryHeight = 250;
 @connect(state => ({
   account: state.accounts.active || {},
   transactions: state.transactions,
+  priceTicker: state.liskService.priceTicker,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
@@ -35,7 +35,6 @@ const summaryHeight = 250;
 class Home extends React.Component {
   state = {
     theme: 'loading',
-    priceTicker: {},
   };
 
   scrollY = new Animated.Value(0);
@@ -61,7 +60,6 @@ class Home extends React.Component {
       offset: 0,
     });
     this.initialAnimation();
-    this.getPriceTicker();
   }
 
   componentDidUpdate() {
@@ -78,7 +76,6 @@ class Home extends React.Component {
       });
 
       if (theme === 'list' && !navigation.getParam('scrollToTop', false)) {
-      headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
         navigation.setParams({
           scrollToTop: () => {
             if (this.scrollView) {
@@ -123,22 +120,15 @@ class Home extends React.Component {
     }
   }
 
-  getPriceTicker = () => {
-    liskService.getPriceTicker()
-      .then(res => this.setState({ priceTicker: res.tickers.LSK }))
-      .catch(console.log); //eslint-disable-line
-  }
-
   render() {
-    const {
-      theme, footer, priceTicker,
-    } = this.state;
+    const { theme, footer } = this.state;
     const {
       styles,
       account,
       transactions,
       navigation,
       updateTransactions,
+      priceTicker,
     } = this.props;
 
     let content = null;
