@@ -148,7 +148,7 @@ class Overview extends React.Component {
               color={colors[this.props.theme].gray2} />
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
-                {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK )'}
+                {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK)'}
               </P>
               <B style={[styles.text, styles.theme.text]}>
                 <FormattedNumber>
