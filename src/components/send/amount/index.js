@@ -27,7 +27,7 @@ class Amount extends React.Component {
   };
 
   validator = (str) => {
-    if (str === '' || str === '0') {
+    if (str === '' || parseFloat(str) === 0) {
       return 1;
     }
 
