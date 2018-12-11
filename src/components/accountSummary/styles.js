@@ -87,35 +87,79 @@ export default () => ({
       zIndex: 2,
     },
     fiatValue: {},
+    actionBar: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      height: 45,
+      width: '100%',
+      paddingHorizontal: 12,
+    },
+    bookmarkButton: {
+      marginHorizontal: 8,
+      minWidth: 45,
+      height: 45,
+      borderWidth: 1,
+      borderColor: colors.light.blue,
+      flexGrow: 1,
+      textAlign: 'center',
+    },
+    sendButton: {
+      marginHorizontal: 8,
+      minWidth: 200,
+      height: 45,
+      borderWidth: 1,
+      borderColor: colors.light.blue,
+      flexGrow: 1,
+      textAlign: 'center',
+    },
   },
   [themes.light]: {
-    container: {
+    homeContainer: {
       backgroundColor: colors.light.brandingBlue,
+    },
+    walletContainer: {
+      backgroundColor: colors.light.navigationBg,
     },
     bg: {
       opacity: 1,
     },
-    balance: {
+    homeBalance: {
       color: colors.light.white,
     },
-    addressP: {
+    walletBalance: {
+      color: colors.light.blue,
+    },
+    homeAddress: {
       color: colors.light.gray5,
+    },
+    walletAddress: {
+      color: colors.light.gray1,
     },
     fiatValue: {
       color: colors.light.gray5,
     },
   },
   [themes.dark]: {
-    container: {
+    homeContainer: {
+      backgroundColor: colors.dark.navigationBg,
+    },
+    walletContainer: {
       backgroundColor: colors.dark.navigationBg,
     },
     bg: {
       opacity: 0.6,
     },
-    addressP: {
+    homeAddress: {
       color: colors.dark.gray2,
     },
-    balance: {
+    walletAddress: {
+      color: colors.dark.gray2,
+    },
+    homeBalance: {
+      color: colors.dark.white,
+    },
+    walletBalance: {
       color: colors.dark.white,
     },
     fiatValue: {
