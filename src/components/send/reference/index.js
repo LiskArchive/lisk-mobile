@@ -54,12 +54,9 @@ class Reference extends React.Component {
     const validity = this.validator(reference.value);
 
     if (validity === 0) {
-      this.props.move({
-        to: this.props.account.secondPublicKey ? 4 : 5,
-        data: merge(this.props.sharedData, {
-          reference: reference.value,
-        }),
-      });
+      this.props.nextStep(merge(this.props.sharedData, {
+        reference: reference.value,
+      }));
     } else {
       this.setState({
         reference: merge(reference, { validity }),

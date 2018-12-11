@@ -13,6 +13,7 @@ import { IconButton } from '../toolBox/button';
 import { themes, colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import Progress from './progress';
 
 @connect(state => ({
   accounts: state.accounts,
@@ -126,35 +127,71 @@ class Send extends React.Component {
       settings,
     } = this.props;
 
+    const steps = [
+      {
+        component: Recipient,
+        props: {
+          title: 'form',
+          accounts,
+        },
+      },
+      {
+        component: AddToBookmark,
+        props: {
+          title: 'addToBookmark',
+        },
+      },
+      {
+        component: Amount,
+        props: {
+          title: 'amount',
+          settings,
+          accounts,
+        },
+      },
+      {
+        component: Reference,
+        props: {
+          title: 'reference',
+        },
+      },
+      {
+        component: Overview,
+        props: {
+          title: 'Overview',
+        },
+      },
+      {
+        component: Result,
+        props: {
+          title: 'result',
+        },
+      },
+    ];
+
+    if (accounts.active.secondPublicKey) {
+      steps.splice(4, 0, {
+        component: Confirm,
+        props: {
+          title: 'confirm',
+        },
+      });
+    }
+
     return (
       <MultiStep
         ref={(el) => { this.nav = el; }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         finalCallback={this.finalCallback}
+        Progress={Progress}
       >
-        <Recipient
-          title='form'
-          navigation={navigation}
-          accounts={accounts}
-        />
-        <AddToBookmark
-          title='addToBookmark'
-          navigation={navigation}
-        />
-        <Amount
-          title='amount'
-          navigation={navigation}
-          settings={settings}
-          accounts={accounts}
-        />
-        <Reference
-          title="reference"
-          navigation={navigation}
-          account={accounts.active}
-        />
-        <Confirm title='confirm' navigation={navigation} />
-        <Overview title='overview' navigation={navigation} />
-        <Result title='result' navigation={navigation} />
+        {steps.map(step => (
+          <step.component
+            key={step.props.title}
+            navigation={navigation}
+            {...step.props}
+          />
+        ))}
       </MultiStep>
     );
   }

@@ -10,5 +10,13 @@ export default () => ({
     multiStepWrapper: {
       height: '100%',
     },
+    progressContainer: {
+      height: 2,
+      backgroundColor: 'transparent',
+    },
+    progress: {
+      height: '100%',
+      backgroundColor: 'red',
+    },
   },
 });

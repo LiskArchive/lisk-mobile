@@ -70,11 +70,6 @@ class Overview extends React.Component {
     });
   }
 
-  back = () => {
-    const to = this.props.accounts.active.secondPublicKey ? -1 : -2;
-    return this.props.prevStep(to);
-  }
-
   openAcademy = () => {
     Linking.openURL('https://help.lisk.io/account-security/should-i-initialize-my-lisk-account')
       // eslint-disable-next-line no-console
@@ -83,7 +78,7 @@ class Overview extends React.Component {
 
   componentDidMount() {
     let nextNavigationParams = {
-      action: this.back,
+      action: this.props.prevStep,
       showButtonLeft: true,
     };
 
