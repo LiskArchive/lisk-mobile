@@ -38,10 +38,11 @@ class Result extends React.Component {
   }
 
   componentWillUpdate(nextProp) {
+    const { sharedData } = this.props;
     const nowPending = this.props.transactions.pending.filter(tx =>
-      tx.id === this.props.txId).length > 0;
+      tx.id === sharedData.txId).length > 0;
     const nextConfirmed = nextProp.transactions.confirmed.filter(tx =>
-      tx.id === this.props.txId).length > 0;
+      tx.id === sharedData.txId).length > 0;
 
     if (nowPending && nextConfirmed) {
       this.play('confirmed');
