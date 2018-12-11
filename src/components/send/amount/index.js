@@ -14,6 +14,7 @@ import getStyles from './styles';
 import { deviceType } from '../../../utilities/device';
 
 const isAndroid = deviceType() === 'android';
+
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
   maxLength = 10
