@@ -25,7 +25,7 @@ const summaryHeight = 250;
  * about any unforeseen issue/change
  */
 @connect(state => ({
-  account: state.accounts.active,
+  account: state.accounts.active || {},
   transactions: state.transactions,
 }), {
   transactionsLoaded: transactionsLoadedAction,
