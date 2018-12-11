@@ -178,13 +178,14 @@ class Home extends React.Component {
     return (
       <View style={[styles.container, styles.theme.container]}>
         {
-          account ? (
+          account && account.address ? (
             <AccountSummary
               navigation={navigation}
               scrollY={this.scrollY}
               account={account}
               priceTicker={priceTicker}
               style={styles.accountSummary}
+              type='home'
             />
           ) : null
         }
