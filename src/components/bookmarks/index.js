@@ -4,19 +4,12 @@ import connect from 'redux-connect-decorator';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
-import Item from './item';
+import { DraggableItem, Item } from './item';
 import Empty from './empty';
 import withTheme from '../withTheme';
 import { Small } from '../toolBox/typography';
 import getStyles from './styles';
 
-/**
- * This component is a HOC to decide which state to show:
- * Loading, Empty (No transactions) or the List view.
- *
- * It performs the initial animation after the user logged in.
- *
- */
 @connect(state => ({
   list: state.accounts.followed,
 }), {
@@ -25,7 +18,7 @@ import getStyles from './styles';
 class Bookmarks extends React.Component {
   render() {
     const {
-      styles, list, navigate, query,
+      styles, list, navigate, query, setRef, draggable,
     } = this.props;
 
     const filterList = list.filter((item) => {
@@ -33,15 +26,20 @@ class Bookmarks extends React.Component {
       return (item.address.indexOf(query) >= 0 ||
         item.label.indexOf(query) >= 0);
     });
+    const Element = draggable ? DraggableItem : Item;
 
     return (<View style={styles.container}>
       {
         (list && list.length === 0 && query.length >= 0) ?
         <Empty /> :
         <Fragment>
-          <View style={styles.innerContainer}>
-            <Small style={[styles.title, styles.theme.title]}>BOOKMARKS</Small>
-          </View>
+            {
+              !draggable ?
+              <View style={styles.innerContainer}>
+                <Small style={[styles.title, styles.theme.title]}>BOOKMARKS</Small>
+              </View> :
+              null
+            }
           {
             filterList.length === 0 ?
               <View style={styles.innerContainer}>
@@ -49,7 +47,8 @@ class Bookmarks extends React.Component {
                   This address is not part of your bookmarks, you can add it in the next step.
                 </Small>
               </View> :
-              filterList.map(item => <Item navigate={navigate} key={item.address} data={item} />)
+              filterList.map(item =>
+                <Element setRef={setRef} navigate={navigate} key={item.address} data={item} />)
           }
         </Fragment>
       }

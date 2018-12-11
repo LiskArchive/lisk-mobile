@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
+import liskService from '../../utilities/api/liskService';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
 import AccountSummary from '../accountSummary';
@@ -31,13 +32,27 @@ const summaryHeight = 250;
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
 })
-class Wallet extends React.Component {
+class Home extends React.Component {
   state = {
-    scrollY: new Animated.Value(0),
     theme: 'loading',
+    priceTicker: {},
   };
 
+  scrollY = new Animated.Value(0);
   scrollView = null;
+
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    return ({
+      title: params.title || 'Your wallet',
+      headerStyle: {
+        backgroundColor: 'transparent',
+        overflow: 'hidden',
+        borderBottomWidth: 0,
+        elevation: 0,
+      },
+    });
+  }
 
   componentDidMount() {
     const { transactionsLoaded, account } = this.props;
@@ -46,6 +61,7 @@ class Wallet extends React.Component {
       offset: 0,
     });
     this.initialAnimation();
+    this.getPriceTicker();
   }
 
   componentDidUpdate() {
@@ -62,6 +78,7 @@ class Wallet extends React.Component {
       });
 
       if (theme === 'list' && !navigation.getParam('scrollToTop', false)) {
+      headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
         navigation.setParams({
           scrollToTop: () => {
             if (this.scrollView) {
@@ -80,7 +97,7 @@ class Wallet extends React.Component {
 
   onScroll() {
     return Animated.event([{
-      nativeEvent: { contentOffset: { y: this.state.scrollY } },
+      nativeEvent: { contentOffset: { y: this.scrollY } },
     }]);
   }
 
@@ -106,8 +123,16 @@ class Wallet extends React.Component {
     }
   }
 
+  getPriceTicker = () => {
+    liskService.getPriceTicker()
+      .then(res => this.setState({ priceTicker: res.tickers.LSK }))
+      .catch(console.log); //eslint-disable-line
+  }
+
   render() {
-    const { theme, scrollY, footer } = this.state;
+    const {
+      theme, footer, priceTicker,
+    } = this.state;
     const {
       styles,
       account,
@@ -155,8 +180,10 @@ class Wallet extends React.Component {
         {
           account ? (
             <AccountSummary
-              scrollY={scrollY}
+              navigation={navigation}
+              scrollY={this.scrollY}
               account={account}
+              priceTicker={priceTicker}
               style={styles.accountSummary}
             />
           ) : null
@@ -167,4 +194,4 @@ class Wallet extends React.Component {
   }
 }
 
-export default withTheme(Wallet, getStyles());
+export default withTheme(Home, getStyles());

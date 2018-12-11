@@ -3,10 +3,11 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import SignIn from '../signIn';
 import TxDetail from '../txDetail';
 import Send from '../send';
+import Bookmark from '../bookmarkPage';
 import Register from '../register';
 import Wallet from '../wallet';
 import Request from '../request';
-import OwnWallet from '../ownWallet';
+import Home from '../home';
 import Settings from '../settings';
 import About from '../about';
 import CurrencySelection from '../currencySelection';
@@ -18,6 +19,7 @@ import Intro from '../intro';
 import HeaderBackground from './headerBackground';
 import HeaderBackgroundImage from './headerBackgroundImage';
 import HeaderTitle from './headerTitle';
+import HomeHeaderTitle from './homeHeaderTitle';
 import HeaderLogo from './headerLogo';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
 import HeaderBackButton from './headerBackButton';
@@ -27,17 +29,13 @@ import { colors } from '../../constants/styleGuide';
 
 // eslint-disable-next-line new-cap
 const Tabs = TabNavigator({
-  OwnWallet: {
-    screen: OwnWallet,
-    navigationOptions: () => ({
-      title: 'Your wallet',
-      headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      headerTitle: HomeHeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackgroundImage />,
-      headerStyle: {
-        overflow: 'hidden',
-      },
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='home' tintColor={tintColor} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, scene }) => {
         if (scene.focused && scene.route.params && scene.route.params.scrollToTop) {
@@ -46,15 +44,6 @@ const Tabs = TabNavigator({
           defaultHandler(0);
         }
       },
-    }),
-  },
-  Send: {
-    screen: Send,
-    navigationOptions: {
-      headerTitle: HeaderTitle,
-      headerRight: HeaderPlaceholderButton,
-      headerBackground: <HeaderBackground />,
-      tabBarIcon: ({ tintColor }) => <TabBarIcon name='send' tintColor={tintColor} />, //eslint-disable-line
     },
   },
   Request: {
@@ -68,22 +57,50 @@ const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
+  Send: {
+    screen: Send,
+    navigationOptions: {
+      headerTitle: HeaderTitle,
+      headerRight: HeaderPlaceholderButton,
+      headerBackground: <HeaderBackground />,
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='send' tintColor={tintColor} />, //eslint-disable-line
+      headerStyle: {
+        backgroundColor: 'transparent',
+        overflow: 'hidden',
+        elevation: 1,
+      },
+    },
+  },
+  Bookmarks: {
+    screen: Bookmark,
+    navigationOptions: () => ({
+      title: 'Bookmarks',
+      tabBarLabel: 'Bookmarks',
+      tabBarIcon: ({ tintColor }) => <TabBarIcon name='bookmark' tintColor={tintColor} />, //eslint-disable-line
+    }),
+  },
   Settings: {
     screen: Settings,
-    navigationOptions: () => ({
+    navigationOptions: {
       title: 'Settings',
       headerTitle: HeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='settings' tintColor={tintColor} />, //eslint-disable-line
-    }),
+      headerStyle: {
+        backgroundColor: 'transparent',
+        overflow: 'hidden',
+        elevation: 1,
+      },
+    },
   },
 }, {
   tabBarComponent: TabBarComponent,
   tabBarPosition: 'bottom',
-  initialRouteName: 'OwnWallet',
+  initialRouteName: 'Home',
   headerMode: 'screen',
+  swipeEnabled: false,
 });
 
 // eslint-disable-next-line new-cap
@@ -108,10 +125,6 @@ export default StackNavigator(
     Main: {
       screen: Tabs,
       navigationOptions: {
-        headerStyle: {
-          backgroundColor: 'transparent',
-          overflow: 'hidden',
-        },
       },
     },
     TxDetail: {

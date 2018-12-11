@@ -224,6 +224,14 @@ const styles = {
     borderTopWidth: (Platform.OS === 'ios' &&
       DeviceInfo.isIPhoneX_deprecated) ? 34 : 10,
   },
+  christmasHatContainer: {
+    position: 'absolute',
+    left: -12,
+  },
+  christmasHat: {
+    width: 58,
+    height: 43,
+  },
 };
 
 export default StyleSheet.create(styles);
