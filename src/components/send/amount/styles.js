@@ -18,17 +18,20 @@ export default () => ({
     },
     balanceContainer: {
       marginTop: 20,
-      paddingTop: 18,
-      paddingBottom: 18,
-      paddingRight: boxes.boxPadding,
-      paddingLeft: boxes.boxPadding,
       flexDirection: 'row',
+      padding: boxes.boxPadding,
+      marginBottom: 5,
+      alignItems: 'center',
     },
     balanceText: {
       fontSize: 14,
     },
     balanceNumber: {
       fontSize: 14,
+    },
+    balanceIncognito: {
+      width: 80,
+      height: 20,
     },
     form: {
       marginTop: 5,
