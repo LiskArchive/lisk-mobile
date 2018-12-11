@@ -29,7 +29,10 @@ const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
 // eslint-disable-next-line import/prefer-default-export
 export const validatePassphrase = (passphrase) => {
   if (passphrase.trim().length === 0) return [{ code: 'empty_value' }];
-  return Lisk.passphrase.validation.getPassphraseValidationErrors(passphrase);
+  const numberOfWords = Math.ceil(passphrase.trim().split(' ').length / 3) * 3;
+  const validPassLength = Math.max(Math.min(numberOfWords, 24), 12);
+  return Lisk.passphrase.validation
+    .getPassphraseValidationErrors(passphrase, undefined, validPassLength);
 };
 
 /**
