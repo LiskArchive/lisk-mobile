@@ -11,6 +11,10 @@ import secondPassphraseImageDark from '../../../assets/images/secondPassphrase3x
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { themes } from '../../../constants/styleGuide';
+import { deviceType } from '../../../utilities/device';
+
+const devDefaultSecondPass = process.env.secondPassphrase || '';
+const isAndroid = deviceType() === 'android';
 
 @connect(state => ({
   peers: state.peers,
@@ -19,8 +23,8 @@ import { themes } from '../../../constants/styleGuide';
 class Confirm extends React.Component {
   state = {
     secondPassphrase: {
-      value: '',
-      validity: [],
+      value: devDefaultSecondPass,
+      validity: validatePassphrase(devDefaultSecondPass),
     },
   };
 
@@ -30,6 +34,10 @@ class Confirm extends React.Component {
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
+
+    if (isAndroid) {
+      setTimeout(() => this.input.focus(), 250);
+    }
   }
 
   validator = (passphrase) => {
@@ -99,24 +107,27 @@ class Confirm extends React.Component {
             title: 'Continue',
             type: 'inBox',
           }}>
-          <View style={styles.titleContainer}>
-            <P style={[styles.subtitle, styles.theme.subtitle]}>
-              Enter you second passphrase to continue to transaction overview page.
-            </P>
-            <View style={styles.illustrationWrapper}>
-              {
-                theme === themes.light ?
-                  <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
-                  <Image style={styles.illustration} source={secondPassphraseImageDark} />
-              }
+          <View>
+            <View style={styles.titleContainer}>
+              <P style={[styles.subtitle, styles.theme.subtitle]}>
+                Enter you second passphrase to continue to transaction overview page.
+              </P>
+              <View style={styles.illustrationWrapper}>
+                {
+                  theme === themes.light ?
+                    <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
+                    <Image style={styles.illustration} source={secondPassphraseImageDark} />
+                }
+              </View>
             </View>
+
             <Input
               label='Second Passphrase'
-              reference={(ref) => { this.SecondPassphraseInput = ref; }}
+              reference={(ref) => { this.input = ref; }}
               innerStyles={{ input: styles.input }}
               value={secondPassphrase.value}
               onChange={this.changeHandler}
-              autoFocus={true}
+              autoFocus={!isAndroid}
               autoCorrect={false}
               multiline={Platform.OS === 'ios'}
               secureTextEntry={Platform.OS !== 'ios'}

@@ -16,8 +16,8 @@ import darkBlur from '../../../assets/images/amountFormBalanceBlur/dark.png';
 import lightBlur from '../../../assets/images/amountFormBalanceBlur/light.png';
 
 const blurs = { dark: darkBlur, light: lightBlur };
-
 const isAndroid = deviceType() === 'android';
+
 class Amount extends React.Component {
   maxLSKSupply = 125000000;
   maxLength = 10
@@ -169,19 +169,17 @@ class Amount extends React.Component {
               }
             </View>
 
-            <View>
-              <AmountInput
-                reference={(el) => { this.input = el; }}
-                autoFocus={!isAndroid}
-                label="Amount (LSK)"
-                value={value}
-                onChange={this.onChange}
-                keyboardType="numeric"
-                currency={currency}
-                valueInCurrency={valueInCurrency}
-                error={validity === 1 ? 'Invalid amount value' : ''}
-              />
-            </View>
+            <AmountInput
+              reference={(el) => { this.input = el; }}
+              autoFocus={!isAndroid}
+              label="Amount (LSK)"
+              value={value}
+              onChange={this.onChange}
+              keyboardType="numeric"
+              currency={currency}
+              valueInCurrency={valueInCurrency}
+              error={validity === 1 ? 'Invalid amount value' : ''}
+            />
            </View>
         </KeyboardAwareScrollView>
       </View>
