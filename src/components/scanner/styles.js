@@ -2,6 +2,7 @@ import { Dimensions } from 'react-native';
 import { themes, colors } from '../../constants/styleGuide';
 import { viewportHeight, headerHeight, deviceType } from '../../utilities/device';
 
+
 const { height, width } = Dimensions.get('window');
 export default () => ({
   common: {
