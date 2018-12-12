@@ -48,7 +48,9 @@ class Bookmark extends React.Component {
       styles,
       theme,
       action: () => {
-        navigation.navigate('AddBookmark');
+        navigation.navigate('AddBookmark', {
+          title: 'New bookmark',
+        });
       },
     });
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.onKeyboardOpen);

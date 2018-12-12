@@ -43,7 +43,10 @@ class draggableItem extends React.Component {
                 this.ref.snapTo({ index: 0 });
                 navigate({
                   routeName: 'AddBookmark',
-                  params: { account: data },
+                  params: {
+                    account: data,
+                    title: 'Edit bookmark',
+                  },
                 });
               }}
               style={styles.button}>

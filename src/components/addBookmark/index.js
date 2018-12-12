@@ -61,19 +61,16 @@ class AddToBookmark extends React.Component {
   componentDidMount() {
     const { navigation } = this.props;
     const account = navigation.getParam('account', null);
-    let title = 'New bookmark';
     if (!account) {
       setTimeout(() => {
         this.addressRef.focus();
       }, 300);
     } else {
-      title = 'Edit bookmark';
       this.setState({
         label: { value: account.label },
         incomingData: account,
       });
     }
-    navigation.setParams({ title });
   }
 
   setAvatarPreviewTimeout = () => {
