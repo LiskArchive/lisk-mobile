@@ -247,7 +247,6 @@ export default StackNavigator({ //eslint-disable-line
   AddBookmark: {
     screen: AddBookmark,
     navigationOptions: {
-      title: 'New bookmark',
       headerTitle: props => <HeaderTitle {...props} />, //eslint-disable-line
       headerRight: HeaderPlaceholderButton,
       headerLeft: props => <HeaderBackButton {...props} icon='cross' />, //eslint-disable-line
