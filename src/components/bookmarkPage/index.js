@@ -61,10 +61,6 @@ class Bookmark extends React.Component {
   }
 
   setAddress = (value) => {
-    clearTimeout(this.avatarPreviewTimeout);
-    if (this.validator(value) === 0) {
-      this.setAvatarPreviewTimeout();
-    }
     this.setState({
       address: {
         value,
