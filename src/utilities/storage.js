@@ -1,6 +1,5 @@
 import { AsyncStorage } from 'react-native';
 import { merge } from './helpers';
-import reg from '../constants/regex';
 
 export const blankAccounts = [];
 export const blankSettings = {
@@ -13,10 +12,7 @@ const validateAccounts = (data) => {
 
     if (
       !parsedData ||
-      !Array.isArray(parsedData) ||
-      !parsedData.reduce((acc, item) => (
-        reg.address.test(item.address) && item.label.length < 16
-      ), true)
+      !Array.isArray(parsedData)
     ) {
       return blankAccounts;
     }
