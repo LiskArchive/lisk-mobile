@@ -78,7 +78,8 @@ class Overview extends React.Component {
 
   componentDidMount() {
     let nextNavigationParams = {
-      action: this.props.prevStep,
+      title: messages.send.title,
+      action: () => this.props.prevStep(),
       showButtonLeft: true,
     };
 
@@ -88,8 +89,9 @@ class Overview extends React.Component {
       });
 
       nextNavigationParams = {
-        showButtonLeft: false,
+        title: messages.initialize.title,
         action: this.props.navigation.back,
+        showButtonLeft: false,
       };
     }
 
@@ -106,6 +108,10 @@ class Overview extends React.Component {
         amountValidity: this.validator.amount(this.props.amount),
       });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.navigation.setParams({ title: 'Send' });
   }
 
   render() {

@@ -124,7 +124,7 @@ class MultiStep extends React.Component {
             /> : null
         }
         {
-          Progress ? <Progress current={current} total={children.length} /> : null
+          Progress ? <Progress current={current + 1} total={children.length} /> : null
         }
         {
           React.cloneElement(children[current], extraProps)
