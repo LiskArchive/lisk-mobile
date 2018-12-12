@@ -20,8 +20,6 @@ const blurs = { dark: darkBig, light: lightBig };
 const isAndroid = deviceType() === 'android';
 
 class Amount extends React.Component {
-  maxLSKSupply = 125000000;
-  maxLength = 10
   state = {
     amount: {
       value: '',
@@ -75,14 +73,6 @@ class Amount extends React.Component {
   }
 
   onChange = (value) => {
-    if (value && (
-      value > this.maxLSKSupply ||
-      value.length > this.maxLength ||
-      Number.isNaN(parseFloat(value))
-    )) {
-      return;
-    }
-
     const normalizedValue = value.replace(/[^0-9]/g, '.');
 
     this.setState({
@@ -122,8 +112,9 @@ class Amount extends React.Component {
 
     let valueInCurrency = 0;
 
-    if (value && priceTicker[currency]) {
+    if (value && this.validator(value) === 0 && priceTicker[currency]) {
       valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
+      valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
 
     return (

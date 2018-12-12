@@ -5,7 +5,7 @@ import reg from '../../../constants/regex';
 import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import FormattedNumber from '../../formattedNumber';
-import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
+import { toRawLsk, fromRawLsk, includeFee } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
@@ -64,9 +64,7 @@ class Overview extends React.Component {
       secondPassphrase,
       data: reference || null,
     }, nextStep, (err) => {
-      const errorMessage = (err && /Status\s409/.test(err.message)) ?
-        'Your balance is insufficient.' : 'An error happened. Please try later.';
-      this.setState({ errorMessage });
+      this.setState({ errorMessage: err.message || 'An error happened. Please try later.' });
     });
   }
 
@@ -152,7 +150,7 @@ class Overview extends React.Component {
               </P>
               <B style={[styles.text, styles.theme.text]}>
                 <FormattedNumber>
-                  {fromRawLsk(toRawLsk(amount) + fee)}
+                  {includeFee(amount, fee)}
                 </FormattedNumber>
               </B>
             </View>
