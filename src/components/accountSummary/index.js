@@ -75,6 +75,16 @@ class AccountSummary extends React.Component {
   componentDidMount() {
     this.screenWidth = Dimensions.get('window').width;
     this.initialFadeIn();
+    this.configureNavigation();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.account.balance !== this.props.account.balance) {
+      this.configureNavigation();
+    }
+  }
+
+  configureNavigation() {
     this.props.navigation.setParams({
       title: {
         placeHolder: 'Your wallet',
