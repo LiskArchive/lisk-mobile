@@ -26,16 +26,20 @@ class Progress extends React.Component {
   }
 
   render() {
-    const { styles } = this.props;
+    const { styles, current, total } = this.props;
     const { progressRatio } = this.state;
 
     return (
-      <View style={[styles.progressContainer, styles.theme.progressContainer]}>
+      <View style={[
+        styles.progressContainer,
+        styles.theme.progressContainer,
+        { opacity: current === total ? 0 : 1 },
+      ]}>
         <Animated.View
           style={[styles.progress, styles.theme.progress, {
             width: progressRatio.interpolate({
               inputRange: [0, 1],
-              outputRange: ['0%', '100%'],
+              outputRange: ['0%', '120%'],
             }),
           }]}
         />
