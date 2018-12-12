@@ -24,13 +24,24 @@ import { P, Small } from '../toolBox/typography';
   accountEdited: accountEditedAction,
 })
 class AddToBookmark extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+
+    return {
+      title: params.title || '',
+    };
+  };
+
   activeInputRef = null;
   validator = {
     address: (str) => {
-      if (str === '') return -1;
+      if (str === '') return 2;
       return reg.address.test(str) ? 0 : 1;
     },
-    label: str => (str.length > 20 ? 1 : 0),
+    label: (str) => {
+      if (str === '') return 2;
+      return (str.length > 20 ? 1 : 0);
+    },
   };
 
   scannedData = {};
@@ -48,17 +59,21 @@ class AddToBookmark extends React.Component {
   };
 
   componentDidMount() {
-    const account = this.props.navigation.getParam('account', null);
+    const { navigation } = this.props;
+    const account = navigation.getParam('account', null);
+    let title = 'New bookmark';
     if (!account) {
       setTimeout(() => {
         this.addressRef.focus();
       }, 300);
     } else {
+      title = 'Edit bookmark';
       this.setState({
         label: { value: account.label },
         incomingData: account,
       });
     }
+    navigation.setParams({ title });
   }
 
   setAvatarPreviewTimeout = () => {
@@ -130,6 +145,22 @@ class AddToBookmark extends React.Component {
       address, avatarPreview, label, incomingData,
     } = this.state;
 
+    const errors = {
+      label: 'The label must be shorter than 20 characters.',
+      address: 'Invalid address',
+    };
+
+    const setError = (validity, fieldName) => {
+      switch (validity) {
+        case 1:
+          return errors[fieldName];
+        case 2:
+          return `${fieldName} is required`;
+        default:
+          return '';
+      }
+    };
+
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
@@ -183,10 +214,7 @@ class AddToBookmark extends React.Component {
                   }}
                   onChange={this.setAddress}
                   value={address.value}
-                  error={
-                    address.validity === 1 ?
-                      'Invalid address' : ''
-                  }
+                  error={setError(address.validity, 'address')}
                   onFocus={() => { this.activeInputRef = 0; }}
                 />
               </View> :
@@ -206,10 +234,7 @@ class AddToBookmark extends React.Component {
               innerStyles={{ input: styles.input }}
               multiline={true}
               onChange={this.setLabel}
-              error={
-                label.validity === 1 ?
-                  'The label must be shorter than 20 characters.' : ''
-              }
+              error={setError(label.validity, 'label')}
               value={label.value}
             />
           </View>
