@@ -16,6 +16,7 @@ import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
+import AddBookmark from '../addBookmark';
 import HeaderBackground from './headerBackground';
 import HeaderBackgroundImage from './headerBackgroundImage';
 import HeaderTitle from './headerTitle';
@@ -76,6 +77,8 @@ const Tabs = TabNavigator({
     navigationOptions: () => ({
       title: 'Bookmarks',
       tabBarLabel: 'Bookmarks',
+      headerTitle: HeaderTitle,
+      headerBackground: <HeaderBackground />,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='bookmark' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
@@ -103,8 +106,9 @@ const Tabs = TabNavigator({
   swipeEnabled: false,
 });
 
+
 // eslint-disable-next-line new-cap
-export default StackNavigator(
+const MainStack = StackNavigator(
   {
     Register: {
       screen: Register,
@@ -229,3 +233,30 @@ export default StackNavigator(
     })),
   },
 );
+
+
+export default StackNavigator({ //eslint-disable-line
+  Home: {
+    screen: MainStack,
+    navigationOptions: {
+      headerStyle: {
+        display: 'none',
+      },
+    },
+  },
+  AddBookmark: {
+    screen: AddBookmark,
+    navigationOptions: {
+      headerTitle: props => <HeaderTitle {...props} />, //eslint-disable-line
+      headerRight: HeaderPlaceholderButton,
+      headerLeft: props => <HeaderBackButton {...props} icon='cross' />, //eslint-disable-line
+      headerBackground: <HeaderBackground />,
+      headerStyle: {
+        overflow: 'hidden',
+        elevation: 0,
+      },
+    },
+  },
+}, {
+  mode: 'modal',
+});
