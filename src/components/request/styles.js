@@ -12,17 +12,17 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       flex: 1,
-      padding: boxes.boxPadding,
       paddingBottom: 60,
     },
     subHeader: {
+      margin: boxes.boxPadding,
     },
     main: {
       flexDirection: 'column',
       justifyContent: 'space-around',
       alignItems: 'center',
-      paddingTop: 40,
-      paddingBottom: 20,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     address: {
       marginBottom: 15,
@@ -41,6 +41,9 @@ export default () => ({
     },
     fieldset: {
       height: 100,
+    },
+    input: {
+      flex: 1,
     },
   },
 
