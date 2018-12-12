@@ -45,7 +45,7 @@ class Reference extends React.Component {
     this.setState({
       reference: {
         value,
-        validity: -1,
+        validity: this.validator(value),
       },
     });
   }
@@ -90,19 +90,17 @@ class Reference extends React.Component {
               </P>
             </View>
 
-            <View>
-              <Input
-                reference={(el) => { this.input = el; }}
-                label='Reference (Optional)'
-                autoFocus={!isAndroid}
-                autoCorrect={false}
-                innerStyles={{ input: styles.input }}
-                multiline={true}
-                onChange={this.onChange}
-                value={value}
-                error={validity === 1 ? 'Maximum length of 64 bytes is exceeded.' : ''}
-              />
-            </View>
+            <Input
+              reference={(el) => { this.input = el; }}
+              label='Reference (Optional)'
+              autoFocus={!isAndroid}
+              autoCorrect={false}
+              innerStyles={{ input: styles.input }}
+              multiline={true}
+              onChange={this.onChange}
+              value={value}
+              error={validity === 1 ? 'Maximum length of 64 bytes is exceeded.' : ''}
+            />
           </View>
         </KeyboardAwareScrollView>
       </View>

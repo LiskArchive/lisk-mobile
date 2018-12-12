@@ -160,19 +160,17 @@ class Amount extends React.Component {
               }
             </View>
 
-            <View>
-              <AmountInput
-                reference={(el) => { this.input = el; }}
-                autoFocus={!isAndroid}
-                label="Amount (LSK)"
-                value={value}
-                onChange={this.onChange}
-                keyboardType="numeric"
-                currency={currency}
-                valueInCurrency={valueInCurrency}
-                error={validity === 1 ? 'Invalid amount value' : ''}
-              />
-            </View>
+            <AmountInput
+              reference={(el) => { this.input = el; }}
+              autoFocus={!isAndroid}
+              label="Amount (LSK)"
+              value={value}
+              onChange={this.onChange}
+              keyboardType="numeric"
+              currency={currency}
+              valueInCurrency={valueInCurrency}
+              error={validity === 1 ? 'Invalid amount value' : ''}
+            />
            </View>
         </KeyboardAwareScrollView>
       </View>

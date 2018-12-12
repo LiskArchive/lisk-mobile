@@ -12,26 +12,28 @@ import { colors } from '../../constants/styleGuide';
 
 const devDefaultPass = process.env.passphrase || '';
 
-const Extras = ({ error, onPress, opacity }) => (<View>
-  <View style={[styles.connectionErrorContainer, error ? styles.visible : null]}>
-    <Icon size={16} name='error' style={styles.connectionErrorIcon} />
-    <Small style={styles.connectionError}>
-      Could not connect to the blockchain, try later!
-    </Small>
+const Extras = ({ error, onPress, opacity }) => (
+  <View>
+    {error ?
+      <View style={styles.connectionErrorContainer}>
+        <Icon size={16} name='error' style={styles.connectionErrorIcon} />
+        <Small style={styles.connectionError}>
+          Could not connect to the blockchain, try later!
+        </Small>
+      </View> :
+      <Animated.View style={[styles.linkWrapper, styles.row, { opacity }]}>
+        <P style={styles.question}>{"Don't have a Lisk ID? "}</P>
+        <A style={styles.link} onPress={onPress}>Create it now</A>
+      </Animated.View>
+    }
   </View>
-
-  <Animated.View style={[styles.linkWrapper, styles.row, { opacity }]}>
-    <P style={styles.question}>{"Don't have a Lisk ID? "}</P>
-    <A style={styles.link} onPress={onPress}>Create it now</A>
-  </Animated.View>
-</View>);
+);
 
 class Form extends React.Component {
   state = {
-    isSubmitted: false,
     passphrase: {
       value: devDefaultPass,
-      validity: validatePassphrase(devDefaultPass),
+      validity: [],
     },
     animation: {
       opacity: new Animated.Value(0),
@@ -50,10 +52,9 @@ class Form extends React.Component {
 
   onInputChange = (value, cb) => {
     this.setState({
-      isSubmitted: true,
       passphrase: {
         value,
-        validity: validatePassphrase(value),
+        validity: [],
       },
     }, () => {
       if (typeof cb === 'function') cb(value);
@@ -67,13 +68,19 @@ class Form extends React.Component {
 
   onFormSubmission = () => {
     const { passphrase } = this.state;
+    const validity = validatePassphrase(passphrase.value);
 
-    this.setState(({ isSubmitted: true }), () => {
-      if (!passphrase.validity.length) {
-        this.passphraseInput.blur();
-        this.props.signIn(passphrase.value);
-      }
-    });
+    if (!validity.length) {
+      this.passphraseInput.blur();
+      this.props.signIn(passphrase.value, 'form');
+    } else {
+      this.setState({
+        passphrase: {
+          value: passphrase.value,
+          validity,
+        },
+      });
+    }
   }
 
   onQRCodeRead = (value) => {
@@ -106,13 +113,11 @@ class Form extends React.Component {
   }
 
   render() {
-    const {
-      isSubmitted, passphrase, connectionError, animation: { opacity },
-    } = this.state;
+    const { passphrase, animation: { opacity } } = this.state;
 
     let errorMessage = '';
 
-    if (isSubmitted) {
+    if (passphrase.validity.length) {
       const errors = passphrase.validity
         .filter(item => item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
 
@@ -171,10 +176,9 @@ class Form extends React.Component {
           noTheme={true}
           button='Sign in'
           onSubmit={this.onFormSubmission}
-          disabled={passphrase.value.length === 0}
           extras={
             <Extras
-              error={connectionError}
+              error={this.props.connectionError}
               onPress={this.goToRegistration}
               opacity={opacity}
             />

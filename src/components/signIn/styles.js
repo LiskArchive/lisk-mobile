@@ -33,7 +33,6 @@ const styles = {
     justifyContent: 'center',
     marginLeft: 20,
     paddingRight: 20,
-    opacity: 0,
     paddingBottom: 10,
   },
   connectionError: {

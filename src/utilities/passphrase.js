@@ -25,9 +25,11 @@ import { extractAddress } from './api/account';
  *  {String} code - specified the possible codes in the description above
  *  {String} message - A descriptive message for what went wrong
  */
-// eslint-disable-next-line import/prefer-default-export
 export const validatePassphrase = (passphrase) => {
-  if (passphrase.trim().length === 0) return [{ code: 'empty_value' }];
+  if (passphrase.trim().length === 0) {
+    return [{ code: 'empty_value', message: 'Invalid Passphrase' }];
+  }
+
   return Lisk.passphrase.validation.getPassphraseValidationErrors(passphrase);
 };
 
