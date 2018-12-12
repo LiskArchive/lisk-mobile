@@ -23,7 +23,6 @@ export const transactionAdded = (data, success, error) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
     const account = getState().accounts.active;
-    dispatch(loadingStarted(actionTypes.transactionAdded));
     send(activePeer, data)
       .then(({ id }) => {
         dispatch({
@@ -41,10 +40,8 @@ export const transactionAdded = (data, success, error) =>
           },
           type: actionTypes.pendingTransactionAdded,
         });
-        dispatch(loadingFinished(actionTypes.transactionAdded));
         success({ txId: id });
       }).catch((err) => {
-        dispatch(loadingFinished(actionTypes.transactionAdded));
         error(err);
       });
   };

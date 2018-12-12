@@ -31,7 +31,6 @@ class AddToBookmark extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      title: 'Add to bookmarks',
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });

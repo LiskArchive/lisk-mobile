@@ -56,7 +56,6 @@ class Amount extends React.Component {
     }
 
     navigation.setParams({
-      title: 'Amount',
       showButtonLeft: true,
       action: () => this.props.move({
         to: status ? 0 : 1,

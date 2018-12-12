@@ -30,7 +30,6 @@ class Confirm extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      title: 'Confirm your identity',
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
