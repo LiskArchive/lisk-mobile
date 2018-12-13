@@ -50,6 +50,14 @@ export default () => ({
       fontSize: fonts.size.input,
       fontWeight: '400',
     },
+    text: {
+      flexWrap: 'wrap',
+      flex: 1,
+      paddingRight: 20,
+    },
+    subtitle: {
+      marginTop: 7,
+    },
     addressContainer: {
       flexDirection: 'column',
       alignItems: 'center',

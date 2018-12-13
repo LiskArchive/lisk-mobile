@@ -135,11 +135,17 @@ export default () => ({
     emptyState: {
       backgroundColor: colors.light.white,
     },
+    address: {
+      color: colors.light.black,
+    },
     date: {
       color: colors.light.gray1,
     },
     avatar: {
       borderColor: colors.light.white,
+    },
+    outgoing: {
+      color: colors.light.black,
     },
     incoming: {
       color: colors.light.green,
@@ -174,11 +180,11 @@ export default () => ({
     date: {
       color: colors.dark.gray4,
     },
-    amount: {
-      color: colors.dark.white,
-    },
     avatar: {
       borderColor: colors.dark.gray5,
+    },
+    outgoing: {
+      color: colors.dark.white,
     },
     incoming: {
       color: colors.dark.green,

@@ -1,9 +1,10 @@
-import Lisk from 'lisk-elements';
+import Lisk from '@liskhq/lisk-client';
 import * as Keychain from 'react-native-keychain';
-import fillWordsList from 'bip39/wordlists/english.json'; // eslint-disable-line import/no-extraneous-dependencies
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
 import { extractAddress } from './api/account';
+
+const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
 
 /**
  * Checks validity of passphrase using to mnemonic
@@ -26,11 +27,11 @@ import { extractAddress } from './api/account';
  *  {String} message - A descriptive message for what went wrong
  */
 export const validatePassphrase = (passphrase) => {
-  if (passphrase.trim().length === 0) {
-    return [{ code: 'empty_value', message: 'Invalid Passphrase' }];
-  }
-
-  return Lisk.passphrase.validation.getPassphraseValidationErrors(passphrase);
+  if (passphrase.trim().length === 0) return [{ code: 'empty_value', message: 'Invalid Passphrase' }];
+  const numberOfWords = Math.ceil(passphrase.trim().split(' ').length / 3) * 3;
+  const validPassLength = Math.max(Math.min(numberOfWords, 24), 12);
+  return Lisk.passphrase.validation
+    .getPassphraseValidationErrors(passphrase, undefined, validPassLength);
 };
 
 /**
@@ -109,9 +110,9 @@ export const assembleWordOptions = (passphraseWords, missingWords) => {
     do {
       rand = Math.floor(Math.random() * 2048);
     }
-    while (passphraseWords.includes(fillWordsList[rand]));
+    while (passphraseWords.includes(fullWordsList[rand]));
 
-    return fillWordsList[rand];
+    return fullWordsList[rand];
   };
 
   const mixWithMissingWords = (options) => {

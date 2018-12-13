@@ -30,6 +30,7 @@ class Result extends React.Component {
     this.props.navigation.setParams({
       title: 'Sent',
       showButtonLeft: false,
+      action: this.props.reset,
     });
     this.startDate = new Date();
     this.play('created');
@@ -41,10 +42,11 @@ class Result extends React.Component {
   }
 
   componentWillUpdate(nextProp) {
+    const { sharedData } = this.props;
     const nowPending = this.props.transactions.pending.filter(tx =>
-      tx.id === this.props.txId).length > 0;
+      tx.id === sharedData.txId).length > 0;
     const nextConfirmed = nextProp.transactions.confirmed.filter(tx =>
-      tx.id === this.props.txId).length > 0;
+      tx.id === sharedData.txId).length > 0;
 
     if (nowPending && nextConfirmed) {
       this.play('confirmed');
@@ -77,7 +79,7 @@ class Result extends React.Component {
       <View style={[styles.container, styles.theme.container]}>
         <P style={styles.theme.subtitle}>
           Thank you. Your transaction is being processed.
-          It may take up to 15 minutes to be secured in the blockchain.
+          It may take up to 15 minutes to be secured on the blockchain.
         </P>
         <View style={styles.illustration}>
           {this.state.step === 0 ? <LottieView

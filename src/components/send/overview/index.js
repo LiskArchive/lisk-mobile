@@ -5,7 +5,7 @@ import reg from '../../../constants/regex';
 import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import FormattedNumber from '../../formattedNumber';
-import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
+import { toRawLsk, fromRawLsk, includeFee } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
@@ -23,7 +23,7 @@ const messages = {
   },
   send: {
     title: 'Ready to Send',
-    subtitle: 'You are about to send LSK tokens to another address.',
+    subtitle: 'You are about to send LSK tokens to the following address.',
     button: 'Send now',
   },
 };
@@ -64,9 +64,7 @@ class Overview extends React.Component {
       secondPassphrase,
       data: reference || null,
     }, nextStep, (err) => {
-      const errorMessage = (err && /Status\s409/.test(err.message)) ?
-        'Your balance is insufficient.' : 'An error happened. Please try later.';
-      this.setState({ errorMessage });
+      this.setState({ errorMessage: err.message || 'An error happened. Please try later.' });
     });
   }
 
@@ -152,11 +150,11 @@ class Overview extends React.Component {
               color={colors[this.props.theme].gray2} />
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
-                {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK )'}
+                {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK)'}
               </P>
               <B style={[styles.text, styles.theme.text]}>
                 <FormattedNumber>
-                  {fromRawLsk(toRawLsk(amount) + fee)}
+                  {includeFee(amount, fee)}
                 </FormattedNumber>
               </B>
             </View>

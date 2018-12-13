@@ -12,6 +12,7 @@ export default () => ({
       margin: boxes.boxPadding,
     },
     balanceContainer: {
+      marginTop: 20,
       flexDirection: 'row',
       padding: boxes.boxPadding,
       marginBottom: 5,
@@ -28,9 +29,8 @@ export default () => ({
       fontSize: 14,
     },
     balanceIncognito: {
-      width: 94,
-      height: 37,
-      marginLeft: -10,
+      width: 80,
+      height: 20,
     },
     form: {
       marginTop: 5,

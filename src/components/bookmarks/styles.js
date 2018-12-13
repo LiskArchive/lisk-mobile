@@ -132,6 +132,9 @@ export default () => ({
     },
   },
   [themes.light]: {
+    title: {
+      color: colors.dark.gray2,
+    },
     itemContainer: {
       borderBottomColor: colors.light.gray5,
     },
