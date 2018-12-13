@@ -1,17 +1,18 @@
 import React from 'react';
-import { View, Linking } from 'react-native';
+import { View, Linking, ScrollView } from 'react-native';
 import connect from 'redux-connect-decorator';
 import reg from '../../../constants/regex';
 import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import FormattedNumber from '../../formattedNumber';
-import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
+import { toRawLsk, fromRawLsk, includeFee } from '../../../utilities/conversions';
 import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
-import { H1, B, P, A, Small } from '../../toolBox/typography';
+import { H1, H4, B, P, A, Small } from '../../toolBox/typography';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import { colors } from '../../../constants/styleGuide';
 
 const messages = {
   initialize: {
@@ -22,13 +23,13 @@ const messages = {
   },
   send: {
     title: 'Ready to Send',
-    subtitle: 'You are about to send LSK tokens to another address.',
+    subtitle: 'You are about to send LSK tokens to the following address.',
     button: 'Send now',
   },
 };
 
 @connect(state => ({
-  account: state.accounts.active,
+  accounts: state.accounts,
 }), {
   transactionAdded: transactionAddedAction,
 })
@@ -41,34 +42,34 @@ class Overview extends React.Component {
 
   validator = {
     amount: (str) => {
-      const { account } = this.props;
+      const { active } = this.props.accounts;
       return (reg.amount.test(str) &&
-        account && account.balance > transactions.send.fee &&
-        parseFloat(str) <= fromRawLsk(account.balance - transactions.send.fee)) ? 0 : 1;
+      active && active.balance > transactions.send.fee &&
+        parseFloat(str) <= fromRawLsk(active.balance - transactions.send.fee)) ? 0 : 1;
     },
   };
 
   send = () => {
     const {
-      account, nextStep, transactionAdded,
-      amount, address, reference, secondPassphrase,
+      accounts, nextStep, transactionAdded,
+      sharedData: {
+        amount, address, reference, secondPassphrase,
+      },
     } = this.props;
 
     transactionAdded({
       recipientId: address,
       amount: toRawLsk(amount),
-      passphrase: account.passphrase,
+      passphrase: accounts.active.passphrase,
       secondPassphrase,
       data: reference || null,
     }, nextStep, (err) => {
-      const errorMessage = (err && /Status\s409/.test(err.message)) ?
-        'Your balance is insufficient.' : 'An error happened. Please try later.';
-      this.setState({ errorMessage });
+      this.setState({ errorMessage: err.message || 'An error happened. Please try later.' });
     });
   }
 
   back = () => {
-    const to = this.props.account.secondPublicKey ? -1 : -2;
+    const to = this.props.accounts.active.secondPublicKey ? -1 : -2;
     return this.props.prevStep(to);
   }
 
@@ -89,14 +90,15 @@ class Overview extends React.Component {
     }
 
     this.props.navigation.setParams({
-      showButtonLeft: true,
+      showButtonLeft: !this.props.navigation.state.params.initialize,
       action: back,
       initialize: false,
     });
   }
 
   componentDidUpdate(nextProps) {
-    if (this.props.account && nextProps.account.balance !== this.props.account.balance) {
+    const { accounts } = this.props;
+    if (accounts.active && nextProps.accounts.active.balance !== accounts.active.balance) {
       this.setState({
         amountValidity: this.validator.amount(this.props.amount),
       });
@@ -106,13 +108,20 @@ class Overview extends React.Component {
   render() {
     const actionType = this.props.navigation.state.params.initialize || this.state.initialize ?
       'initialize' : 'send';
+
     const {
-      styles, address, amount, reference,
+      styles, accounts: { followed }, sharedData: { address, amount, reference },
     } = this.props;
 
-    return (<View style={[styles.container, styles.theme.container]}>
-      <View style={styles.innerContainer}>
-        <View style={styles.titleContainer}>
+    const bookmark = followed.filter(item => item.address === address);
+    const fee = actionType === 'initialize' ? 0 : 1e7;
+
+    return (
+      <ScrollView
+        style={[styles.container, styles.theme.container]}
+        contentContainerStyle={styles.innerContainer}
+      >
+        <View>
           <H1 style={[styles.headerTitle, styles.theme.headerTitle]}>
             { messages[actionType].title }
           </H1>
@@ -123,25 +132,39 @@ class Overview extends React.Component {
               <A style={[styles.link, styles.theme.link]} onPress={this.openAcademy}> Read more</A> : ''
             }
           </P>
-        </View>
-        <View>
-          <View style={styles.row}>
-            <P style={[styles.label, styles.theme.label]}>Address</P>
-            <View style={styles.addressContainer}>
-              <Avatar address={address || ''} style={styles.avatar} size={35}/>
-              <B style={[styles.address, styles.text, styles.theme.text]}>{address}</B>
+          <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
+            <Avatar address={address || ''} style={styles.avatar} size={50}/>
+            {
+              bookmark.length === 1 ?
+                <H4 style={styles.theme.text}>{bookmark[0].label}</H4> : null
+            }
+            <P style={[styles.address, styles.text, styles.theme.text]}>{address}</P>
+          </View>
+          <View style={[styles.row, styles.theme.row]}>
+            <Icon name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
+              style={styles.icon} size={20}
+              color={colors[this.props.theme].gray2} />
+            <View style={styles.rowContent}>
+              <P style={[styles.label, styles.theme.label]}>
+                {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK)'}
+              </P>
+              <B style={[styles.text, styles.theme.text]}>
+                <FormattedNumber>
+                  {includeFee(amount, fee)}
+                </FormattedNumber>
+              </B>
             </View>
           </View>
-          <View style={styles.row}>
-            <P style={[styles.label, styles.theme.label]}>Amount (including 0.1 Ⱡ fee)</P>
-            <B style={[styles.text, styles.theme.text]}>
-              <FormattedNumber>{fromRawLsk(toRawLsk(amount) + 1e7)}</FormattedNumber>
-            </B>
-          </View>
-          {reference ? <View style={styles.row}>
-            <P style={[styles.label, styles.theme.label]}>Reference</P>
-            <B style={[styles.text, styles.theme.text]}>{reference}</B>
-          </View> : null}
+          {
+            reference ?
+              <View style={[styles.row, styles.theme.row]}>
+                <Icon name='reference' style={styles.icon} size={20} color={colors[this.props.theme].gray2} />
+                <View style={styles.rowContent}>
+                  <P style={[styles.label, styles.theme.label]}>Reference</P>
+                  <B style={[styles.text, styles.theme.text]}>{reference}</B>
+                </View>
+              </View> : null
+          }
         </View>
         <View>
           <View style={[styles.errorContainer, this.state.errorMessage ? styles.visible : null]}>
@@ -154,8 +177,8 @@ class Overview extends React.Component {
             onClick={this.send}
             title={ messages[actionType].button } />
         </View>
-      </View>
-    </View>);
+      </ScrollView>
+    );
   }
 }
 

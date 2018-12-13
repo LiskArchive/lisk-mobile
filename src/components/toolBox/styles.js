@@ -120,6 +120,7 @@ const styles = {
     borderTopWidth: 1,
     marginLeft: -1,
     marginRight: -1,
+    height: 47,
   },
   hasTabBar: {
     ...Platform.select({

@@ -4,6 +4,8 @@ export default () => ({
   common: {
     container: {
       flex: 1,
+    },
+    innerContainer: {
       padding: 20,
       paddingTop: 36,
       paddingBottom: 60,

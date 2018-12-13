@@ -22,7 +22,7 @@ describe('Deep Link Handler', () => {
       },
     };
 
-    expect(deepLinkMapper(url)).toMatchObject(expectedResult);
+    expect(deepLinkMapper(url)).toEqual(expectedResult);
   });
 
   it('handles urls starting with wallet', () => {
@@ -38,6 +38,6 @@ describe('Deep Link Handler', () => {
       },
     };
 
-    expect(deepLinkMapper(url)).toMatchObject(expectedResult);
+    expect(deepLinkMapper(url)).toEqual(expectedResult);
   });
 });

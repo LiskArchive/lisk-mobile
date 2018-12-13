@@ -11,7 +11,7 @@ const styles = {
   },
   container: {
     height: '100%',
-    paddingTop: height <= 640 ? 70 : 170,
+    paddingTop: height <= 640 ? 110 : 170,
   },
   innerContainer: {
     flexDirection: 'column',
@@ -54,6 +54,7 @@ const styles = {
     textAlign: 'center',
     color: colors.light.gray2,
     fontSize: fonts.size.base,
+    opacity: height <= 640 ? 0 : 1,
   },
   button: {
     marginRight: boxes.boxPadding,
@@ -152,7 +153,7 @@ const styles = {
   },
   splashStatic: {
     zIndex: 2,
-    top: height <= 640 ? 10 : 100,
+    top: height <= 640 ? 40 : 100,
   },
   splashAnimating: {
     zIndex: 1,
@@ -223,6 +224,14 @@ const styles = {
     borderTopColor: 'rgba(57, 68, 81, 0.85)',
     borderTopWidth: (Platform.OS === 'ios' &&
       DeviceInfo.isIPhoneX_deprecated) ? 34 : 10,
+  },
+  christmasHatContainer: {
+    position: 'absolute',
+    left: -12,
+  },
+  christmasHat: {
+    width: 58,
+    height: 43,
   },
 };
 

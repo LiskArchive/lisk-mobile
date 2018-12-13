@@ -21,12 +21,12 @@ const light = {
   gray5: '#eaf1f4',
   gray6: '#f9fbfd',
   incomingBg: '#E4F5F1',
+  boxBg: '#F5FBFE',
+  sendBalanceBg: '#EFF4F9',
 };
 
 const dark = {
   ...common,
-  tabBarBgNavy: '#00152D',
-  screenBgNavy: '#01071E',
   blue: '#49ACFF',
   green: '#49C4A4',
   yellow: '#FFBA40',
@@ -37,7 +37,11 @@ const dark = {
   gray4: '#DDEAF4',
   // @TODO: switch gray5 and gray1 after dark mode is implemented for all screens
   gray5: '#373E4F',
+  tabBarBgNavy: '#00152D',
+  screenBgNavy: '#01071E',
   incomingBg: '#0B2131',
+  boxBg: '#011832',
+  sendBalanceBg: '#011832',
 };
 
 export default {

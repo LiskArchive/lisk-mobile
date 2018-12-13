@@ -27,7 +27,10 @@ class Result extends React.Component {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: false });
+    this.props.navigation.setParams({
+      showButtonLeft: false,
+      action: this.props.reset,
+    });
     this.startDate = new Date();
     this.play('created');
   }
@@ -38,10 +41,11 @@ class Result extends React.Component {
   }
 
   componentWillUpdate(nextProp) {
+    const { sharedData } = this.props;
     const nowPending = this.props.transactions.pending.filter(tx =>
-      tx.id === this.props.txId).length > 0;
+      tx.id === sharedData.txId).length > 0;
     const nextConfirmed = nextProp.transactions.confirmed.filter(tx =>
-      tx.id === this.props.txId).length > 0;
+      tx.id === sharedData.txId).length > 0;
 
     if (nowPending && nextConfirmed) {
       this.play('confirmed');
@@ -75,7 +79,7 @@ class Result extends React.Component {
           <H1 style={[styles.title, styles.theme.title]}>Sent</H1>
           <P style={[styles.subtitle, styles.theme.subtitle]}>
             Thank you. Your transaction is being processed.
-            It may take up to 15 minutes to be secured in the blockchain.
+            It may take up to 15 minutes to be secured on the blockchain.
           </P>
         </View>
         <View style={styles.illustration}>

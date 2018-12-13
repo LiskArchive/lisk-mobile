@@ -10,6 +10,7 @@ class Success extends React.Component {
     this.props.hideNav();
     this.props.navigation.setParams({ action: false });
   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -32,10 +33,12 @@ class Success extends React.Component {
         <View>
           <SecondaryButton
             style={styles.button}
-            onClick={() => this.props.navigation.navigate('SignIn', { signOut: true })}
-            title='Sign in now' />
+            onClick={this.props.navigation.pop}
+            title='Sign in now'
+          />
         </View>
-      </View>);
+      </View>
+    );
   }
 }
 

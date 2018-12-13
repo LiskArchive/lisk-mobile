@@ -1,7 +1,7 @@
 import actionTypes from '../../constants/actions';
 import { storeSettings } from '../../utilities/storage';
 
-const accountsMiddleware = store => next => (action) => {
+const settingsMiddleware = store => next => (action) => {
   next(action);
   const { settings } = store.getState();
 
@@ -13,4 +13,4 @@ const accountsMiddleware = store => next => (action) => {
   }
 };
 
-export default accountsMiddleware;
+export default settingsMiddleware;

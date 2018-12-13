@@ -1,4 +1,4 @@
-import Lisk from 'lisk-elements';
+import Lisk from '@liskhq/lisk-client';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import {
@@ -99,7 +99,6 @@ describe('Action: Accounts', () => {
     transactionsUtility.getTransactions = jest.fn();
   });
 
-
   it('should returns an accountUnFollowed action object', () => {
     const expectedValue = {
       type: actionTypes.accountUnFollowed,
@@ -166,6 +165,7 @@ describe('Action: Accounts', () => {
   });
 
   it('should dispatch accountSignedIn action when it receives data of user', async () => {
+    storageUtility.retrieveAccounts = jest.fn();
     const store = mockStore({ peers: { activePeer } });
     // const cb = jest.fn();
     const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
@@ -173,8 +173,10 @@ describe('Action: Accounts', () => {
       { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
       { type: actionTypes.accountSignedIn, data: { ...account, passphrase } },
       { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
+      { type: actionTypes.accountsRetrieved, data: [account] },
     ];
     accountUtility.getAccount.mockResolvedValue(account);
+    storageUtility.retrieveAccounts.mockResolvedValue([account]);
     await store.dispatch(accountSignedIn({ passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
   });

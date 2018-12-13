@@ -1,4 +1,5 @@
 import { themes, colors, fonts } from '../../constants/styleGuide';
+import { viewportHeight } from '../../utilities/device';
 
 export default () => ({
   common: {
@@ -48,12 +49,20 @@ export default () => ({
     avatar: {
       borderWidth: 1,
     },
+    loadingState: {
+      width: '100%',
+      display: 'flex',
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     emptyState: {
       width: '100%',
       display: 'flex',
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      marginTop: viewportHeight() / 7.5,
     },
     noActivity: {
       width: '100%',
@@ -121,11 +130,17 @@ export default () => ({
     emptyState: {
       backgroundColor: colors.light.white,
     },
+    address: {
+      color: colors.light.black,
+    },
     date: {
       color: colors.light.gray1,
     },
     avatar: {
       borderColor: colors.light.white,
+    },
+    outgoing: {
+      color: colors.light.black,
     },
     incoming: {
       color: colors.light.green,
@@ -160,11 +175,11 @@ export default () => ({
     date: {
       color: colors.dark.gray4,
     },
-    amount: {
-      color: colors.dark.white,
-    },
     avatar: {
       borderColor: colors.dark.gray5,
+    },
+    outgoing: {
+      color: colors.dark.white,
     },
     incoming: {
       color: colors.dark.green,

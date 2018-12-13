@@ -7,18 +7,19 @@ import { SecondaryButton } from '../../toolBox/button';
 import image from '../../../assets/images/registrationProcess/passphrase3x.png';
 
 class SafeKeeping extends React.Component {
-  state = {
-    passphrase: '',
-  }
   componentDidMount() {
     this.props.navigation.setParams({ action: this.props.prevStep });
   }
-  confirm = (status) => {
-    this.setState({
-      buttonStatus: !status,
+
+  forward = () => {
+    this.props.nextStep({
+      passphrase: this.props.sharedData.passphrase,
     });
   }
+
   render() {
+    const { passphrase } = this.props.sharedData;
+
     return (
       <View style={styles.container}>
         <View>
@@ -31,7 +32,7 @@ class SafeKeeping extends React.Component {
           <View style={styles.passphraseContainer}>
             <P style={styles.passphraseTitle}>This is your passphrase:</P>
             <B style={styles.passphrase}>
-              {this.props.passphrase}
+              {passphrase}
             </B>
           </View>
           <View style={styles.copyContainer}>
@@ -42,7 +43,7 @@ class SafeKeeping extends React.Component {
               label='Copy to clipboard'
               showIcon={true}
               iconSize={14}
-              value={this.props.passphrase}
+              value={passphrase}
               type={P}/>
           </View>
         </View>
@@ -57,11 +58,7 @@ class SafeKeeping extends React.Component {
           <SecondaryButton
             style={styles.button}
             noTheme={true}
-            onClick={() => {
-              this.props.nextStep({
-                passphrase: this.props.passphrase,
-              });
-            }}
+            onClick={this.forward}
             title='I wrote it down' />
         </View>
       </View>);

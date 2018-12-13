@@ -5,7 +5,8 @@
     "plugin:react/recommended"
   ],
   "env": {
-    "browser": true
+    "browser": true,
+    "jest": true
   },
   "plugins": [
     "react",
@@ -14,12 +15,6 @@
     "jest"
   ],
   "globals": {
-    "jest": true,
-    "describe": true,
-    "it": true,
-    "expect": true,
-    "beforeEach": true,
-    "afterEach": true,
     "PRODUCTION": true,
     "TEST": true
   },

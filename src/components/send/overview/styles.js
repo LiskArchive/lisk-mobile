@@ -3,10 +3,9 @@ import { themes, boxes, colors, fonts } from '../../../constants/styleGuide';
 export default () => ({
   common: {
     container: {
-      height: '100%',
     },
     innerContainer: {
-      flex: 1,
+      flexGrow: 1,
       flexDirection: 'column',
       justifyContent: 'space-between',
       marginRight: boxes.boxPadding,
@@ -14,21 +13,21 @@ export default () => ({
       paddingTop: 36,
       paddingBottom: 35,
     },
-    verticalAligner: {
-      padding: 20,
-    },
-    centerAlign: {
-      textAlign: 'center',
-    },
-    leftAlign: {
-      textAlign: 'left',
-    },
     heading: {
       fontSize: 24,
-      paddingBottom: 80,
+      paddingBottom: 28,
     },
     row: {
-      marginBottom: 4,
+      paddingBottom: 14,
+      borderBottomWidth: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+    },
+    icon: {
+      marginTop: 25,
+    },
+    rowContent: {
+      paddingLeft: 13,
     },
     title: {
       fontSize: 12,
@@ -38,7 +37,8 @@ export default () => ({
       paddingBottom: 15,
     },
     address: {
-      paddingBottom: 15,
+      paddingBottom: 0,
+      paddingTop: 5,
     },
     button: {
       borderRadius: 0,
@@ -46,23 +46,29 @@ export default () => ({
       marginTop: 20,
     },
     label: {
-      marginTop: 15,
-      marginBottom: 7,
+      marginTop: 14,
+      marginBottom: 2,
       color: colors.light.gray1,
       fontFamily: fonts.family.contextLight,
       fontSize: fonts.size.input,
       fontWeight: '400',
     },
+    text: {
+      flexWrap: 'wrap',
+      flex: 1,
+      paddingRight: 20,
+    },
     subtitle: {
       marginTop: 7,
     },
     addressContainer: {
-      flexDirection: 'row',
+      flexDirection: 'column',
       alignItems: 'center',
+      textAlign: 'center',
+      marginTop: 15,
     },
     avatar: {
-      paddingBottom: 0,
-      marginRight: 20,
+      paddingBottom: 10,
     },
     errorContainer: {
       flexDirection: 'row',
@@ -85,6 +91,9 @@ export default () => ({
   [themes.light]: {
     container: {
       backgroundColor: colors.light.white,
+    },
+    row: {
+      borderBottomColor: colors.light.gray5,
     },
     text: {
       color: colors.light.black,
@@ -111,6 +120,9 @@ export default () => ({
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.screenBgNavy,
+    },
+    row: {
+      borderBottomColor: colors.dark.gray5,
     },
     text: {
       color: colors.dark.white,

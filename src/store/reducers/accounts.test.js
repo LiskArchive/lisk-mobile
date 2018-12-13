@@ -3,8 +3,8 @@ import actionTypes from '../../constants/actions';
 
 describe('Reducers: Accounts', () => {
   const followed = [
-    { address: '1234567890L' },
-    { address: '1234567891L' },
+    { address: '1234567890L', label: 'label1' },
+    { address: '1234567891L', label: 'label2' },
   ];
   const accountA = {
     address: '1234567890L',
@@ -62,6 +62,20 @@ describe('Reducers: Accounts', () => {
     const action = { type: actionTypes.accountUnFollowed, data: accountA.address };
     const changedState = accounts(currentState, action);
     expect(changedState.followed).toHaveLength(0);
+  });
+
+  it('should edit given account from state.followed array in case of accountEdited', () => {
+    const expectedValue = {
+      address: followed[1].address,
+      label: 'label3',
+    };
+    const currentState = { active: null, followed };
+    const action = {
+      type: actionTypes.accountEdited,
+      data: expectedValue,
+    };
+    const changedState = accounts(currentState, action);
+    expect(changedState.followed[1]).toEqual(expectedValue);
   });
 
   it('should update one of the followed accounts in case of accountsRetrieved', () => {

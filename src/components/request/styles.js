@@ -32,8 +32,17 @@ export default () => ({
     address: {
       marginBottom: 15,
     },
-    shareContainer: {
+    shareContent: {
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    shareTextContainer: {
       marginTop: 15,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    shareText: {
+      marginRight: 5,
     },
     fieldset: {
       height: 100,
@@ -56,7 +65,7 @@ export default () => ({
     address: {
       color: '#263344',
     },
-    share: {
+    shareText: {
       color: colors.light.blue,
     },
   },
@@ -77,7 +86,7 @@ export default () => ({
     address: {
       color: colors.dark.white,
     },
-    share: {
+    shareText: {
       color: colors.dark.blue,
     },
   },

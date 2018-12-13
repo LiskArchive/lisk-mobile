@@ -11,13 +11,13 @@ import secondPassphraseImageDark from '../../../assets/images/secondPassphrase3x
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { themes } from '../../../constants/styleGuide';
+import { deviceType } from '../../../utilities/device';
 
-/**
- * The container component containing sign in and create account functionality
- */
+const devDefaultSecondPass = process.env.secondPassphrase || '';
+const isAndroid = deviceType() === 'android';
+
 @connect(state => ({
   peers: state.peers,
-
   accounts: state.accounts,
 }), {})
 class Confirm extends React.Component {
@@ -25,15 +25,22 @@ class Confirm extends React.Component {
     super(props);
     this.state = {
       secondPassphrase: {
-        value: '',
-        validity: validatePassphrase(''),
+        value: devDefaultSecondPass,
+        validity: validatePassphrase(devDefaultSecondPass),
         buttonStyle: props.styles.button,
       },
     };
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ showButtonLeft: true, action: this.back });
+    this.props.navigation.setParams({
+      showButtonLeft: true,
+      action: () => this.props.prevStep(),
+    });
+
+    if (isAndroid) {
+      setTimeout(() => this.input.focus(), 250);
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -42,16 +49,11 @@ class Confirm extends React.Component {
   }
 
   forward = () => {
-    const { amount, address, reference } = this.props;
     this.props.nextStep({
-      amount,
-      address,
-      reference,
+      ...this.props.sharedData,
       secondPassphrase: this.state.secondPassphrase.value,
     });
   }
-
-  back = () => this.props.prevStep();
 
   validatePassphrase = (passphrase) => {
     const validity = validatePassphrase(passphrase);
@@ -116,11 +118,11 @@ class Confirm extends React.Component {
           </View>
           <Input
             label='Second Passphrase'
-            reference={(ref) => { this.SecondPassphraseInput = ref; }}
+            reference={(ref) => { this.input = ref; }}
             innerStyles={{ input: styles.input }}
             value={secondPassphrase.value}
             onChange={this.changeHandler}
-            autoFocus={true}
+            autoFocus={!isAndroid}
             autoCorrect={false}
             multiline={Platform.OS === 'ios'}
             secureTextEntry={Platform.OS !== 'ios'}

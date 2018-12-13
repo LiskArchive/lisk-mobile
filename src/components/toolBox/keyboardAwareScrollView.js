@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
+import { withNavigation } from 'react-navigation';
 import { SecondaryButton } from './button';
 import theme from './styles';
 
@@ -15,7 +16,8 @@ class ScrollAwareActionBar extends React.Component {
   }
 
   shrinkButton = (status) => {
-    const { button } = this.props;
+    const { button, onKeyboard } = this.props;
+    if (onKeyboard) onKeyboard(status);
     const inBoxButton = button && button.type === 'inBox';
     if (status && inBoxButton) {
       this.setState({ buttonStyle: theme.hiddenStickyButton });
@@ -24,12 +26,17 @@ class ScrollAwareActionBar extends React.Component {
     } else {
       this.setState({ buttonStyle: theme.keyboardStickyButton });
     }
+    if (Platform.OS === 'android') {
+      this.props.navigation.setParams({
+        tabBar: status,
+      });
+    }
   }
 
   render() {
     const {
       children, disabled, onSubmit, noTheme,
-      styles, button, hasTabBar, extras,
+      styles, button, hasTabBar, extras, onStickyButton,
     } = this.props;
     const { buttonStyle } = this.state;
 
@@ -47,13 +54,16 @@ class ScrollAwareActionBar extends React.Component {
           <View style={[theme.scrollViewInnerContainer, styles ? styles.innerContainer : null]}>
             { children }
             {
-              buttonStyle === theme.hiddenStickyButton ?
-              <SecondaryButton
-                noTheme={noTheme}
-                style={theme.offKeyboardButton}
-                disabled={disabled}
-                title={typeof button === 'string' ? button : button.title}
-                onClick={onSubmit} /> : null
+              !onStickyButton && buttonStyle === theme.hiddenStickyButton ?
+              <View>
+                { extras }
+                <SecondaryButton
+                  noTheme={noTheme}
+                  style={theme.offKeyboardButton}
+                  disabled={disabled}
+                  title={typeof button === 'string' ? button : button.title}
+                  onClick={onSubmit} />
+              </View> : null
             }
           </View>
         </KeyboardAwareScrollView>
@@ -77,4 +87,4 @@ class ScrollAwareActionBar extends React.Component {
   }
 }
 
-export default ScrollAwareActionBar;
+export default withNavigation(ScrollAwareActionBar);

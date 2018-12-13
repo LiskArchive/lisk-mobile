@@ -1,4 +1,4 @@
-import Lisk from 'lisk-elements';
+import Lisk from '@liskhq/lisk-client';
 
 /**
  * Returns a promise to fetch the details of a
@@ -9,21 +9,23 @@ import Lisk from 'lisk-elements';
  */
 export const getAccount = (activePeer, address) =>
   new Promise((resolve, reject) => {
-    activePeer.accounts.get({ address }).then((res) => {
-      if (res.data.length > 0) {
-        resolve({
-          ...res.data[0],
-          initialized: !!res.data[0].publicKey,
-        });
-      } else {
-        // when the account has no transactions yet (therefore is not saved on the blockchain)
-        // this endpoint returns { success: false }
-        resolve({
-          address,
-          balance: 0,
-        });
-      }
-    }).catch(reject);
+    activePeer.accounts.get({ address })
+      .then((res) => {
+        if (res.data.length > 0) {
+          resolve({
+            ...res.data[0],
+            initialized: !!res.data[0].publicKey,
+          });
+        } else {
+          // when the account has no transactions yet (therefore is not saved on the blockchain)
+          // this endpoint returns { success: false }
+          resolve({
+            address,
+            balance: 0,
+          });
+        }
+      })
+      .catch(reject);
   });
 
 /**
