@@ -79,7 +79,7 @@ class Result extends React.Component {
           <H1 style={[styles.title, styles.theme.title]}>Sent</H1>
           <P style={[styles.subtitle, styles.theme.subtitle]}>
             Thank you. Your transaction is being processed.
-            It may take up to 15 minutes to be secured in the blockchain.
+            It may take up to 15 minutes to be secured on the blockchain.
           </P>
         </View>
         <View style={styles.illustration}>
