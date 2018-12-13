@@ -88,7 +88,7 @@ class AddToBookmark extends React.Component {
                 Add to bookmark
               </H1>
               <P style={[styles.subHeader, styles.theme.subHeader]}>
-                Optional: Add a label to save the address for the future use.
+                Optional: add a label to save this address for the future.
               </P>
             </View>
             <View style={[styles.form, styles.theme.form]}>

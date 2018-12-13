@@ -23,7 +23,7 @@ const messages = {
   },
   send: {
     title: 'Ready to Send',
-    subtitle: 'You are about to send LSK tokens to another address.',
+    subtitle: 'You are about to send LSK tokens to the following address.',
     button: 'Send now',
   },
 };

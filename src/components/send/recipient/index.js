@@ -170,7 +170,7 @@ class Recipient extends React.Component {
             <View style={styles.headings}>
               <H1 style={[styles.title, styles.theme.title]}>Recipient</H1>
               <P style={[styles.subtitle, styles.theme.subtitle]}>
-              Insert address or search a bookmark.
+                Enter an address or search an existing one.
               </P>
             </View>
           </Animated.View>
