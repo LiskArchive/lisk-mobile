@@ -169,7 +169,7 @@ class Send extends React.Component {
       },
     ];
 
-    if (accounts.active.secondPublicKey) {
+    if ((accounts.active || {}).secondPublicKey) {
       steps.splice(4, 0, {
         component: Confirm,
         props: {
