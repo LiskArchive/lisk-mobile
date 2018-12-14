@@ -43,6 +43,7 @@ class AccountSummary extends React.Component {
       opacity: new Animated.Value(0),
       top: new Animated.Value(-20),
     },
+    followed: false,
   }
 
   toggleModal() {
@@ -76,25 +77,20 @@ class AccountSummary extends React.Component {
   componentDidMount() {
     this.screenWidth = Dimensions.get('window').width;
     this.initialFadeIn();
-    this.props.navigation.setParams({
-      title: {
-        placeHolder: 'Your wallet',
-        balance: fromRawLsk(this.props.account.balance),
-        address: this.props.account.address,
-        interpolate: this.interpolate,
-      },
-    });
   }
 
   render() {
     const {
-      styles, account, settings, priceTicker, type, theme,
+      styles, account, followedAccounts, settings, priceTicker, type, theme,
     } = this.props;
 
     const { interpolate } = this;
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
     const normalizedBalance = fromRawLsk(account.balance);
+    const height = type === 'home' ? 170 : 205;
+    const isFollowed = followedAccounts.filter(item =>
+      item.address === account.address).length === 1;
 
     let faitBalance = 0;
     if (normalizedBalance && priceTicker[settings.currency]) {
@@ -106,8 +102,8 @@ class AccountSummary extends React.Component {
     else if (normalizedBalance.length > 2) balanceSize = 'Medium';
 
     return (<View style={this.props.style}>
-      <Anim style={[styles.container, styles.theme[`${type}Container`], { opacity, top },
-        { marginTop: interpolate([0, 180], [0, -180]) }]}>
+      <Anim style={[styles.container, styles.theme[`${type}Container`], { opacity, top, height },
+        { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) }]}>
         {
           type === 'home' ?
           <Image style={[styles.bg, styles.theme.bg]} source={bg} /> : null
@@ -130,8 +126,8 @@ class AccountSummary extends React.Component {
         </Anim>
         <Anim style={[styles.balance, { opacity },
           {
-            opacity: this.interpolate([0, 50, 85], [1, 1, 0]),
-            top: this.interpolate([0, 100], [0, 50]),
+            opacity: this.interpolate([0, height - 120, height - 85], [1, 1, 0]),
+            top: this.interpolate([0, height - 50], [0, height - 120]),
           },
         ]}>
           <FormattedNumber
@@ -158,20 +154,20 @@ class AccountSummary extends React.Component {
           <View style={styles.actionBar}>
             <IconButton
               style={styles.bookmarkButton}
-              titleStyle={{}}
+              titleStyle={styles.bookmarkButtonTitle}
               title=''
-              icon='bookmark'
-              color={colors[theme].blue}
+              icon={isFollowed ? 'bookmark-full' : 'bookmark'}
+              color={isFollowed ? colors[theme].blue : colors[theme].gray1}
               iconSize={20}
               onClick={() => {}} />
             <IconButton
-              titleStyle={{}}
+              titleStyle={styles.sendButtonTitle}
               style={styles.sendButton}
               title='Send to this address'
               icon='send'
-              color={colors[theme].blue}
+              color={colors[theme].gray1}
               iconSize={20}
-              onClick={() => {}} />
+              onClick={() => this.props.navigation.navigate('Send', { query: { address: account.address } })} />
           </View> : null
         }
         </Anim>

@@ -4,7 +4,6 @@ export default () => ({
   common: {
     container: {
       width: '100%',
-      height: 170,
       overflow: 'hidden',
     },
     avatar: {
@@ -91,8 +90,9 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      height: 45,
+      height: 56,
       width: '100%',
+      paddingTop: 11,
       paddingHorizontal: 12,
     },
     bookmarkButton: {
@@ -100,18 +100,33 @@ export default () => ({
       minWidth: 45,
       height: 45,
       borderWidth: 1,
-      borderColor: colors.light.blue,
+      borderColor: colors.light.gray2,
       flexGrow: 1,
+      flexDirection: 'row',
       textAlign: 'center',
+      justifyContent: 'center',
+      paddingLeft: 0,
+      borderRadius: 2,
+    },
+    bookmarkButtonTitle: {
+      color: colors.light.gray1,
     },
     sendButton: {
       marginHorizontal: 8,
       minWidth: 200,
       height: 45,
       borderWidth: 1,
-      borderColor: colors.light.blue,
+      borderColor: colors.light.gray2,
       flexGrow: 1,
+      flexDirection: 'row',
       textAlign: 'center',
+      justifyContent: 'center',
+      paddingLeft: 0,
+      borderRadius: 2,
+    },
+    sendButtonTitle: {
+      paddingLeft: 10,
+      color: colors.light.gray1,
     },
   },
   [themes.light]: {
@@ -120,6 +135,8 @@ export default () => ({
     },
     walletContainer: {
       backgroundColor: colors.light.navigationBg,
+      borderBottomColor: colors.light.sendBalanceBg,
+      borderBottomWidth: 1,
     },
     bg: {
       opacity: 1,
