@@ -11,7 +11,7 @@ export default () => ({
     itemContainer: {
       width: '100%',
       height: 90,
-      paddingTop: 10,
+      paddingTop: 20,
       paddingBottom: 20,
       flexDirection: 'row',
       justifyContent: 'space-between',
