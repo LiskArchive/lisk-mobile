@@ -5,7 +5,7 @@ import withTheme from '../withTheme';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
-import { B, P, H1, H3 } from '../toolBox/typography';
+import { B, P, H1, H3, A } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import Avatar from '../avatar';
 import transactions from '../../constants/transactions';
@@ -88,8 +88,8 @@ const TxDetail = ({ navigation, styles, theme }) => {
         }
         </P>
         <View style={styles.addressContainer}>
-          <Share type={B} value={tx.senderId} icon={true}
-            style={[styles.value, styles.theme.value, styles.transactionId]} />
+          <A value={tx.senderId} onPress={() => navigation.navigate('Wallet', { address: tx.senderId })}
+            style={[styles.value, styles.theme.value, styles.transactionId]}>{tx.senderId}</A>
         </View>
       </View>
     </View>
@@ -101,8 +101,8 @@ const TxDetail = ({ navigation, styles, theme }) => {
         <View style={styles.rowContent}>
           <P style={[styles.label, styles.theme.label]}>Recipient</P>
           <View style={styles.addressContainer}>
-            <Share type={B} value={tx.recipientId} icon={true}
-              style={[styles.value, styles.theme.value, styles.transactionId]} />
+            <A value={tx.senderId} onPress={() => navigation.navigate('Wallet', { address: tx.recipientId })}
+              style={[styles.value, styles.theme.value, styles.transactionId]}>{tx.recipientId}</A>
           </View>
         </View>
       </View>

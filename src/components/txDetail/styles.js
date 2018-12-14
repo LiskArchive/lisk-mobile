@@ -23,6 +23,7 @@ export default () => ({
     value: {
       alignItems: 'center',
       fontFamily: fonts.family.context,
+      fontWeight: 'bold',
     },
     label: {
       fontSize: 13,

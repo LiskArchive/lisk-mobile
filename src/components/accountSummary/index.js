@@ -9,7 +9,8 @@ import Avatar from '../avatar';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
-import { H4, P, H2 } from '../toolBox/typography';
+import { P, H2 } from '../toolBox/typography';
+import { IconButton } from '../toolBox/button';
 import bg from '../../assets/images/bg.png';
 import easing from '../../utilities/easing';
 import withTheme from '../withTheme';
@@ -42,6 +43,7 @@ class AccountSummary extends React.Component {
       opacity: new Animated.Value(0),
       top: new Animated.Value(-20),
     },
+    followed: false,
   }
 
   toggleModal() {
@@ -72,37 +74,41 @@ class AccountSummary extends React.Component {
     }).start();
   }
 
-  componentDidMount() {
-    this.screenWidth = Dimensions.get('window').width;
-    this.initialFadeIn();
-    this.configureNavigation();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.account.balance !== this.props.account.balance) {
-      this.configureNavigation();
+  toggleBookmark = () => {
+    const {
+      followedAccounts, account, navigation, accountUnFollowed,
+    } = this.props;
+    const isFollowed = followedAccounts.some(item => item.address === account.address);
+    if (isFollowed) {
+      accountUnFollowed(account.address);
+    } else {
+      navigation.navigate({
+        routeName: 'AddBookmark',
+        params: {
+          account: account.address,
+          title: 'Add bookmark',
+        },
+      });
     }
   }
 
-  configureNavigation() {
-    this.props.navigation.setParams({
-      title: {
-        placeHolder: 'Your wallet',
-        balance: fromRawLsk(this.props.account.balance),
-        address: this.props.account.address,
-        interpolate: this.interpolate,
-      },
-    });
+  componentDidMount() {
+    this.screenWidth = Dimensions.get('window').width;
+    this.initialFadeIn();
   }
 
   render() {
     const {
-      styles, account, settings, priceTicker,
+      styles, account, followedAccounts, settings,
+      priceTicker, type, theme, navigation,
     } = this.props;
+
     const { interpolate } = this;
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
     const normalizedBalance = fromRawLsk(account.balance);
+    const height = type === 'home' ? 170 : 205;
+    const isFollowed = followedAccounts.some(item => item.address === account.address);
 
     let faitBalance = 0;
     if (normalizedBalance && priceTicker[settings.currency]) {
@@ -114,56 +120,76 @@ class AccountSummary extends React.Component {
     else if (normalizedBalance.length > 2) balanceSize = 'Medium';
 
     return (<View style={this.props.style}>
-      {
-        account && account.address ?
-        <Anim style={[styles.container, styles.theme.container, { opacity, top },
-          { marginTop: interpolate([0, 180], [0, -180]) }]}>
-          <Image style={[styles.bg, styles.theme.bg]} source={bg} />
-          <Anim style={[styles.avatar, { opacity },
-            { marginTop: interpolate([0, 100], [0, 100]) }]}>
-            <Avatar address={account.address} size={60} />
-          </Anim>
-          <Anim style={[styles.address, { opacity },
-            {
-              opacity: this.interpolate([0, 30], [1, 0]),
-              top: this.interpolate([0, 100], [0, 80]),
-            },
-          ]}>
-            <Share type={P}
-              style={[styles.addressP, styles.theme.addressP]}
-              iconColor={colors.light.gray5}
-              containerStyle={styles.addressContainer}
-              value={account.address} icon={true} />
-          </Anim>
-          <Anim style={[styles.balance, { opacity },
-            {
-              opacity: this.interpolate([0, 50, 85], [1, 1, 0]),
-              top: this.interpolate([0, 100], [0, 50]),
-            },
-          ]}>
-            <FormattedNumber
-              style={[styles.theme.balance, settings.incognito ? styles.invisibleTitle : null]}
-              type={H2}>{fromRawLsk(account.balance)}</FormattedNumber>
-            <Image source={blurs[`${settings.theme}${balanceSize}`]}
-              style={[styles.blur, styles[`blur${balanceSize}`],
-              settings.incognito ? styles.visibleBlur : null]} />
-          </Anim>
-          <Anim style={[styles.fiat, { opacity },
-            {
-              opacity: this.interpolate([0, 30], [1, 0]),
-              top: this.interpolate([0, 100], [0, 80]),
-            },
-          ]}>
+      <Anim style={[styles.container, styles.theme[`${type}Container`], { opacity, top, height },
+        { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) }]}>
+        {
+          type === 'home' ?
+          <Image style={[styles.bg, styles.theme.bg]} source={bg} /> : null
+        }
+        <Anim style={[styles.avatar, { opacity },
+          { marginTop: interpolate([0, 100], [0, 100]) }]}>
+          <Avatar address={account.address} size={60} />
+        </Anim>
+        <Anim style={[styles.address, { opacity },
           {
-            !settings.incognito ?
-              <P style={[styles.fiatValue, styles.theme.fiatValue]}>
-                {`~ ${faitBalance} ${settings.currency}`}
-              </P> : null
-          }
-          </Anim>
-        </Anim> :
-        <H4>Fetching account info</H4>
-      }
+            opacity: this.interpolate([0, 30], [1, 0]),
+            top: this.interpolate([0, 100], [0, 80]),
+          },
+        ]}>
+          <Share type={P}
+            style={[styles.addressP, styles.theme[`${type}Address`]]}
+            iconColor={theme === 'dark' ? colors[theme].gray2 : colors[theme][type === 'home' ? 'gray5' : 'gray1']}
+            containerStyle={styles.addressContainer}
+            value={account.address} icon={true} />
+        </Anim>
+        <Anim style={[styles.balance, { opacity },
+          {
+            opacity: this.interpolate([0, height - 120, height - 85], [1, 1, 0]),
+            top: this.interpolate([0, height - 50], [0, height - 120]),
+          },
+        ]}>
+          <FormattedNumber
+            style={[styles.theme[`${type}Balance`], settings.incognito ? styles.invisibleTitle : null]}
+            type={H2}>{fromRawLsk(account.balance)}</FormattedNumber>
+          <Image source={blurs[`${settings.theme}${balanceSize}`]}
+            style={[styles.blur, styles[`blur${balanceSize}`],
+            settings.incognito ? styles.visibleBlur : null]} />
+        </Anim>
+        <Anim style={[styles.fiat, { opacity },
+          {
+            opacity: this.interpolate([0, 30], [1, 0]),
+            top: this.interpolate([0, 100], [0, 80]),
+          },
+        ]}>
+        {
+          !settings.incognito && type === 'home' ?
+            <P style={[styles.fiatValue, styles.theme.fiatValue]}>
+              {`~ ${faitBalance} ${settings.currency}`}
+            </P> : null
+        }
+        {
+          type === 'wallet' ?
+          <View style={styles.actionBar}>
+            <IconButton
+              style={styles.bookmarkButton}
+              titleStyle={styles.bookmarkButtonTitle}
+              title=''
+              icon={isFollowed ? 'bookmark-full' : 'bookmark'}
+              color={isFollowed ? colors[theme].blue : colors[theme].gray1}
+              iconSize={20}
+              onClick={this.toggleBookmark} />
+            <IconButton
+              titleStyle={styles.sendButtonTitle}
+              style={styles.sendButton}
+              title='Send to this address'
+              icon='send'
+              color={colors[theme].gray1}
+              iconSize={20}
+              onClick={() => navigation.navigate('Send', { query: { address: account.address } })} />
+          </View> : null
+        }
+        </Anim>
+      </Anim>
     </View>);
   }
 }

@@ -4,7 +4,6 @@ export default () => ({
   common: {
     container: {
       width: '100%',
-      height: 170,
       overflow: 'hidden',
     },
     avatar: {
@@ -87,35 +86,95 @@ export default () => ({
       zIndex: 2,
     },
     fiatValue: {},
+    actionBar: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      height: 56,
+      width: '100%',
+      paddingTop: 11,
+      paddingHorizontal: 12,
+    },
+    bookmarkButton: {
+      marginHorizontal: 8,
+      minWidth: 45,
+      height: 45,
+      borderWidth: 1,
+      borderColor: colors.light.gray2,
+      flexGrow: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      paddingLeft: 0,
+      borderRadius: 2,
+    },
+    bookmarkButtonTitle: {
+      color: colors.light.gray1,
+    },
+    sendButton: {
+      marginHorizontal: 8,
+      minWidth: 200,
+      height: 45,
+      borderWidth: 1,
+      borderColor: colors.light.gray2,
+      flexGrow: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      paddingLeft: 0,
+      borderRadius: 2,
+    },
+    sendButtonTitle: {
+      paddingLeft: 10,
+      color: colors.light.gray1,
+    },
   },
   [themes.light]: {
-    container: {
+    homeContainer: {
       backgroundColor: colors.light.brandingBlue,
+    },
+    walletContainer: {
+      backgroundColor: colors.light.navigationBg,
+      borderBottomColor: colors.light.sendBalanceBg,
+      borderBottomWidth: 1,
     },
     bg: {
       opacity: 1,
     },
-    balance: {
+    homeBalance: {
       color: colors.light.white,
     },
-    addressP: {
+    walletBalance: {
+      color: colors.light.blue,
+    },
+    homeAddress: {
       color: colors.light.gray5,
+    },
+    walletAddress: {
+      color: colors.light.gray1,
     },
     fiatValue: {
       color: colors.light.gray5,
     },
   },
   [themes.dark]: {
-    container: {
+    homeContainer: {
+      backgroundColor: colors.dark.navigationBg,
+    },
+    walletContainer: {
       backgroundColor: colors.dark.navigationBg,
     },
     bg: {
       opacity: 0.6,
     },
-    addressP: {
+    homeAddress: {
       color: colors.dark.gray2,
     },
-    balance: {
+    walletAddress: {
+      color: colors.dark.gray2,
+    },
+    homeBalance: {
+      color: colors.dark.white,
+    },
+    walletBalance: {
       color: colors.dark.white,
     },
     fiatValue: {

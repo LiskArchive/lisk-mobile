@@ -69,13 +69,14 @@ class Transactions extends React.Component {
   render() {
     const {
       styles, transactions, navigate,
-      account, footer, incognito, theme, placeholderStyle,
-      refreshing,
+      account, footer, incognito, theme,
+      refreshing, type,
     } = this.props;
 
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
+    const height = type === 'home' ? 170 : 205;
 
     return (<Anim style={[styles.container, { opacity, top }]}>
       {
@@ -83,7 +84,7 @@ class Transactions extends React.Component {
           (transactions.confirmed.length === 0 && transactions.pending.length === 0)) ?
           <Fragment></Fragment> :
           <Fragment>
-            <View style={[styles.placeholder, placeholderStyle]}>
+            <View style={[styles.placeholder, { height }]}>
               {(Platform.OS === 'ios' && refreshing) ? <ActivityIndicator size="large" /> : null}
             </View>
             <View style={styles.innerContainer}>
@@ -98,7 +99,7 @@ class Transactions extends React.Component {
                 /> : null
               }
             </View>
-            {!account.initialized && balance >= 0.2 ?
+            {type === 'home' && !account.initialized && balance >= 0.2 ?
               <View style={[styles.initContainer, styles.theme.initContainer]}>
                 <Icon name='warning' color={colors[theme].red} size={18} />
                 <Small style={[styles.initText, styles.theme.initText]}>

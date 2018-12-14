@@ -43,6 +43,7 @@ class Home extends React.Component {
     const { params = {} } = navigation.state;
     return ({
       title: params.title || 'Your wallet',
+      type: 'home',
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',
@@ -52,12 +53,36 @@ class Home extends React.Component {
     });
   }
 
-  componentDidMount() {
-    const { transactionsLoaded, account, navigation } = this.props;
-    transactionsLoaded({
-      senderIdOrRecipientId: account.address,
-      offset: 0,
+  interpolate = (inputRange, outputRange) =>
+    this.scrollY.interpolate({
+      inputRange,
+      outputRange,
+      extrapolate: 'clamp',
     });
+
+  setHeader = () => {
+    this.props.navigation.setParams({
+      title: {
+        placeHolder: 'Your wallet',
+        type: 'home',
+        balance: this.props.account.balance,
+        address: this.props.account.address,
+        interpolate: this.interpolate,
+      },
+    });
+  }
+
+  componentDidMount() {
+    const {
+      transactionsLoaded, transactions, account, navigation,
+    } = this.props;
+
+    if (!transactions.loaded) {
+      transactionsLoaded({
+        senderIdOrRecipientId: account.address,
+        offset: 0,
+      });
+    }
     navigation.setParams({
       scrollToTop: () => {
         if (this.scrollView) {
@@ -66,10 +91,11 @@ class Home extends React.Component {
       },
     });
     this.initialAnimation();
+    this.setHeader();
   }
 
   componentDidUpdate(prevProps) {
-    const { transactions } = this.props;
+    const { transactions, account } = this.props;
 
     const prevTransactionCount = (
       prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
@@ -88,6 +114,10 @@ class Home extends React.Component {
       this.setState({
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount,
       });
+    }
+
+    if (prevProps.account.balance !== account.balance) {
+      this.setHeader();
     }
   }
 
@@ -156,6 +186,7 @@ class Home extends React.Component {
           render={refreshing => (
             transactions.count > 0 ? (
               <Transactions
+                type='home'
                 transactions={transactions}
                 footer={this.state.footer}
                 navigate={navigation.navigate}
@@ -171,13 +202,14 @@ class Home extends React.Component {
     return (
       <View style={[styles.container, styles.theme.container]}>
         {
-          account ? (
+          account && account.address ? (
             <AccountSummary
               navigation={navigation}
               scrollY={this.scrollY}
               account={account}
               priceTicker={priceTicker}
               style={styles.accountSummary}
+              type='home'
             />
           ) : null
         }
