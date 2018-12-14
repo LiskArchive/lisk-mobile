@@ -78,8 +78,7 @@ class AccountSummary extends React.Component {
     const {
       followedAccounts, account, navigation, accountUnFollowed,
     } = this.props;
-    const isFollowed = followedAccounts.filter(item =>
-      item.address === account.address).length === 1;
+    const isFollowed = followedAccounts.some(item => item.address === account.address);
     if (isFollowed) {
       accountUnFollowed(account.address);
     } else {
@@ -109,8 +108,7 @@ class AccountSummary extends React.Component {
     const { opacity, top } = this.state.initialAnimations;
     const normalizedBalance = fromRawLsk(account.balance);
     const height = type === 'home' ? 170 : 205;
-    const isFollowed = followedAccounts.filter(item =>
-      item.address === account.address).length === 1;
+    const isFollowed = followedAccounts.some(item => item.address === account.address);
 
     let faitBalance = 0;
     if (normalizedBalance && priceTicker[settings.currency]) {
