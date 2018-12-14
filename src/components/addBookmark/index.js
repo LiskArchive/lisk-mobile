@@ -7,7 +7,7 @@ import reg from '../../constants/regex';
 import Input from '../toolBox/input';
 import { colors } from '../../constants/styleGuide';
 import Avatar from '../avatar';
-import Scanner from '../send/recipient/scanner';
+import Scanner from '../scanner';
 import KeyboardAwareScrollView from '../toolBox/keyboardAwareScrollView';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -16,6 +16,7 @@ import {
   accountEdited as accountEditedAction,
 } from '../../actions/accounts';
 import { P, Small } from '../toolBox/typography';
+import { decodeAddress } from '../../utilities/qrCode';
 
 @connect(state => ({
   accounts: state.accounts.followed,
@@ -85,9 +86,10 @@ class AddToBookmark extends React.Component {
   }
 
   onQRCodeRead = (data) => {
-    this.setAddress(data.address);
-    this.scannedData = data;
-    this.input.focus();
+    const decodedData = decodeAddress(data);
+    this.setAddress(decodedData.address);
+    this.scannedData = decodedData;
+    this.addressRef.focus();
   }
 
   setAddress = (value) => {
@@ -169,7 +171,8 @@ class AddToBookmark extends React.Component {
         <Scanner
           ref={(el) => { this.scanner = el; }}
           navigation={navigation}
-          setValues={this.onQRCodeRead}
+          readFromCameraRoll={true}
+          onQRCodeRead={this.onQRCodeRead}
         />
         <KeyboardAwareScrollView
             onSubmit={this.submitForm}

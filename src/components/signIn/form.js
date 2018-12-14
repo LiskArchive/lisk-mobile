@@ -129,16 +129,16 @@ class Form extends React.Component {
     return (
       <View style={styles.container}>
         <Scanner
-          readFromCameraRoll={false}
-          closeScanner={this.toggleCamera}
+          ref={(el) => { this.scanner = el; }}
           containerStyles={{
-            scanner: styles.scanner,
             cameraRoll: styles.cameraRoll,
             cameraOverlay: styles.cameraOverlay,
           }}
-          ref={(el) => { this.scanner = el; }}
           navigation={this.props.navigation}
-          onQRCodeRead={this.onQRCodeRead} />
+          readFromCameraRoll={false}
+          closeScanner={this.toggleCamera}
+          onQRCodeRead={this.onQRCodeRead}
+        />
         <Animated.View
           style={[styles.titleContainer, styles.paddingBottom, { opacity }]}
         >

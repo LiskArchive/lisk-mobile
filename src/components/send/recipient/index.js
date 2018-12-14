@@ -7,9 +7,10 @@ import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
 import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
-import Scanner from './scanner';
+import Scanner from '../../scanner';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import { merge } from '../../../utilities/helpers';
+import { decodeAddress } from '../../../utilities/qrCode';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
@@ -57,8 +58,9 @@ class Recipient extends React.Component {
   }
 
   onQRCodeRead = (data) => {
-    this.setAddress(data.address);
-    this.scannedData = data;
+    const decodedData = decodeAddress(data);
+    this.setAddress(decodedData.address);
+    this.scannedData = decodedData;
     this.input.focus();
   }
 
@@ -153,7 +155,8 @@ class Recipient extends React.Component {
         <Scanner
           ref={(el) => { this.scanner = el; }}
           navigation={navigation}
-          setValues={this.onQRCodeRead}
+          readFromCameraRoll={true}
+          onQRCodeRead={this.onQRCodeRead}
         />
         <KeyboardAwareScrollView
             onKeyboard={this.onKeyboardOpen}

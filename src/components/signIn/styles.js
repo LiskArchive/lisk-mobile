@@ -212,8 +212,6 @@ const styles = {
     paddingLeft: 5,
     color: colors.light.blue,
   },
-  scanner: {
-  },
   cameraRoll: {
     borderTopColor: colors.light.white,
     borderTopWidth: (Platform.OS === 'ios' &&
