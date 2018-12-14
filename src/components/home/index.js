@@ -73,11 +73,16 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { transactionsLoaded, account, navigation } = this.props;
-    transactionsLoaded({
-      senderIdOrRecipientId: account.address,
-      offset: 0,
-    });
+    const {
+      transactionsLoaded, transactions, account, navigation,
+    } = this.props;
+
+    if (!transactions.loaded) {
+      transactionsLoaded({
+        senderIdOrRecipientId: account.address,
+        offset: 0,
+      });
+    }
     navigation.setParams({
       scrollToTop: () => {
         if (this.scrollView) {

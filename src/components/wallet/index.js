@@ -7,6 +7,7 @@ import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
 import Empty from '../transactions/empty';
+import Loading from '../transactions/loading';
 import {
   loadingStarted as loadingStartedAction,
   loadingFinished as loadingFinishedAction,
@@ -37,6 +38,7 @@ class Wallet extends React.Component {
     transactions: {
       confirmed: [],
       pending: [],
+      loaded: false,
     },
   }
 
@@ -64,7 +66,10 @@ class Wallet extends React.Component {
     })
       .then((res) => {
         this.props.loadingFinished();
-        return res.data;
+        return {
+          confirmed: res.data,
+          count: res.meta.count,
+        };
       })
       .catch((err) => {
         this.props.loadingFinished();
@@ -106,13 +111,15 @@ class Wallet extends React.Component {
 
   async fetchInitialData() {
     const account = await this.retrieveAccount();
-    const confirmed = await this.retrieveTransactions(0);
+    const tx = await this.retrieveTransactions(0);
 
     this.setState({
       account,
       transactions: {
-        confirmed,
+        confirmed: tx.confirmed,
         pending: [],
+        loaded: true,
+        count: tx.count,
       },
     }, () => {
       this.setHeader();
@@ -123,7 +130,8 @@ class Wallet extends React.Component {
     const { confirmed } = this.state.transactions;
     const account = await this.retrieveAccount();
     const transactions = await this.retrieveTransactions(0);
-    const newTransactions = transactions.filter(item => item.timestamp > confirmed[0].timestamp);
+    const newTransactions = transactions.confirmed.filter(item =>
+      item.timestamp > confirmed[0].timestamp);
 
     if (newTransactions.length > 0) {
       this.setState({
@@ -131,6 +139,7 @@ class Wallet extends React.Component {
         transactions: {
           confirmed: [...newTransactions, ...confirmed],
           pending: [],
+          count: transactions.count,
         },
       });
     }
@@ -180,26 +189,39 @@ class Wallet extends React.Component {
       priceTicker,
     } = this.props;
 
-    let content = <Empty />;
+    let content = null;
 
-    if (transactions.confirmed.length) {
-      content = (<InfiniteScrollView
-        ref={(el) => { this.scrollView = el; }}
-        scrollEventThrottle={8}
-        onScroll={this.onScroll.call(this)}
-        style={[styles.scrollView]}
-        refresh={this.refresh.bind(this)}
-        loadMore={this.loadMore}
-        list={transactions.confirmed}
-        count={transactions.confirmed.length}
-      >
-        <Transactions
-          type='wallet'
-          transactions={transactions}
-          navigate={navigation.navigate}
-          account={account}
+    if (!transactions.loaded) {
+      content = <Loading />;
+    } else {
+      const listElements = transactions.count > 0 ?
+        [...transactions.pending, ...transactions.confirmed] :
+        ['emptyState'];
+
+      content = (
+        <InfiniteScrollView
+          ref={(el) => { this.scrollView = el; }}
+          scrollEventThrottle={8}
+          onScroll={this.onScroll.call(this)}
+          style={[styles.scrollView]}
+          refresh={this.refresh.bind(this)}
+          loadMore={this.loadMore}
+          list={listElements}
+          count={transactions.count}
+          render={refreshing => (
+            transactions.count > 0 ? (
+              <Transactions
+                type='wallet'
+                transactions={transactions}
+                footer={this.state.footer}
+                navigate={navigation.navigate}
+                account={account}
+                refreshing={refreshing}
+              />
+            ) : <Empty refreshing={refreshing} />
+          )}
         />
-      </InfiniteScrollView>);
+      );
     }
 
     return (
