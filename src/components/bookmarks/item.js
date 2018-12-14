@@ -24,9 +24,10 @@ class draggableItem extends React.Component {
       styles, data, theme, navigate, accountUnFollowed, setRef,
     } = this.props;
 
-    return (<View
+    return (<TouchableOpacity
       style={[styles.itemContainer, styles.theme.itemContainer]}
-      onPress={this.showDetail}>
+      activeOpacity={1}
+      onPress={() => navigate('Wallet', { address: data.address })}>
       <View style={styles.draggableRow} pointerEvents='box-none'>
           <Animated.View style={
             [styles.editButton, styles.theme.editButton, {
@@ -110,7 +111,7 @@ class draggableItem extends React.Component {
             </View>
           </View>
         </Interactable.View>
-    </View>);
+    </TouchableOpacity>);
   }
 }
 

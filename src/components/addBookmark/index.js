@@ -18,7 +18,7 @@ import {
 import { P, Small } from '../toolBox/typography';
 
 @connect(state => ({
-  account: state.accounts.followed,
+  accounts: state.accounts.followed,
 }), {
   accountFollowed: accountFollowedAction,
   accountEdited: accountEditedAction,
@@ -46,6 +46,7 @@ class AddToBookmark extends React.Component {
 
   scannedData = {};
   state = {
+    editMode: false,
     header: true,
     address: {
       value: '',
@@ -59,14 +60,16 @@ class AddToBookmark extends React.Component {
   };
 
   componentDidMount() {
-    const { navigation } = this.props;
+    const { navigation, accounts } = this.props;
     const account = navigation.getParam('account', null);
     if (!account) {
       setTimeout(() => {
         this.addressRef.focus();
       }, 300);
     } else {
+      const editMode = accounts.filter(item => item.address === account.address).length > 0;
       this.setState({
+        editMode,
         label: { value: account.label },
         incomingData: account,
       });
@@ -110,11 +113,14 @@ class AddToBookmark extends React.Component {
 
   submitForm = () => {
     const { accountFollowed, navigation, accountEdited } = this.props;
-    const { address, label, incomingData } = this.state;
+    const {
+      address, label, incomingData, editMode,
+    } = this.state;
     const addressValidity = this.validator.address(address.value);
     const labelValidity = this.validator.label(label.value);
     if (incomingData && labelValidity === 0) {
-      accountEdited(
+      const action = editMode ? accountEdited : accountFollowed;
+      action(
         incomingData.address,
         this.state.label.value,
       );
@@ -139,7 +145,7 @@ class AddToBookmark extends React.Component {
       navigation, theme, styles,
     } = this.props;
     const {
-      address, avatarPreview, label, incomingData,
+      address, avatarPreview, label, incomingData, editMode,
     } = this.state;
 
     const errors = {
@@ -168,7 +174,7 @@ class AddToBookmark extends React.Component {
         <KeyboardAwareScrollView
             onSubmit={this.submitForm}
             button={{
-              title: incomingData ? 'Save changes' : 'Add to bookmarks',
+              title: editMode ? 'Save changes' : 'Add to bookmarks',
             }}
             styles={{ container: styles.container, innerContainer: styles.innerContainer }}
           >
