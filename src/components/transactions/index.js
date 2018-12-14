@@ -99,7 +99,7 @@ class Transactions extends React.Component {
                 /> : null
               }
             </View>
-            {!account.initialized && balance >= 0.2 ?
+            {type === 'home' && !account.initialized && balance >= 0.2 ?
               <View style={[styles.initContainer, styles.theme.initContainer]}>
                 <Icon name='warning' color={colors[theme].red} size={18} />
                 <Small style={[styles.initText, styles.theme.initText]}>
