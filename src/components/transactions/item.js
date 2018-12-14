@@ -83,7 +83,7 @@ class Item extends React.Component {
         {
           (tx.type === 0 && (tx.recipientId !== tx.senderId)) && !incognito ?
             <B style={[
-              styles.amount, styles.theme.amount,
+              styles.amount,
               styles[direction], styles.theme[direction],
             ]}>
               <FormattedNumber>{amount}</FormattedNumber>

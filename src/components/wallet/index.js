@@ -3,7 +3,6 @@ import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
 import { getAccount } from '../../utilities/api/account';
 import { getTransactions } from '../../utilities/api/transactions';
-import liskService from '../../utilities/api/liskService';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
@@ -27,6 +26,7 @@ import getStyles from './styles';
 @connect(state => ({
   activePeer: state.peers.activePeer,
   followedAccounts: state.accounts.followed,
+  priceTicker: state.liskService.priceTicker,
 }), {
   loadingStarted: loadingStartedAction,
   loadingFinished: loadingFinishedAction,
@@ -38,7 +38,6 @@ class Wallet extends React.Component {
       confirmed: [],
       pending: [],
     },
-    priceTicker: {},
   }
 
   scrollY = new Animated.Value(0);
@@ -55,13 +54,6 @@ class Wallet extends React.Component {
         elevation: 0,
       },
     });
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  async getPriceTicker() {
-    return liskService.getPriceTicker()
-      .then(res => res.tickers.LSK)
-      .catch(console.log); // eslint-disable-line no-console
   }
 
   async retrieveTransactions(offset) {
@@ -115,7 +107,6 @@ class Wallet extends React.Component {
   async fetchInitialData() {
     const account = await this.retrieveAccount();
     const confirmed = await this.retrieveTransactions(0);
-    const priceTicker = await this.getPriceTicker();
 
     this.setState({
       account,
@@ -123,7 +114,6 @@ class Wallet extends React.Component {
         confirmed,
         pending: [],
       },
-      priceTicker,
     }, () => {
       this.setHeader();
     });
@@ -182,11 +172,12 @@ class Wallet extends React.Component {
 
   render() {
     const {
-      priceTicker, transactions, account,
+      transactions, account,
     } = this.state;
     const {
       styles,
       navigation,
+      priceTicker,
     } = this.props;
 
     let content = <Empty />;

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, Platform, ActivityIndicator } from 'react-native';
 import connect from 'redux-connect-decorator';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {
@@ -68,8 +68,11 @@ class Transactions extends React.Component {
 
   render() {
     const {
-      styles, transactions, navigate, account, footer, incognito, theme, type,
+      styles, transactions, navigate,
+      account, footer, incognito, theme,
+      refreshing, type,
     } = this.props;
+
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
@@ -81,7 +84,9 @@ class Transactions extends React.Component {
           (transactions.confirmed.length === 0 && transactions.pending.length === 0)) ?
           <Fragment></Fragment> :
           <Fragment>
-            <View style={[styles.placeholder, { height }]}></View>
+            <View style={[styles.placeholder, { height }]}>
+              {(Platform.OS === 'ios' && refreshing) ? <ActivityIndicator size="large" /> : null}
+            </View>
             <View style={styles.innerContainer}>
               <H3 style={[styles.title, styles.theme.title]}>Activity</H3>
               {incognito ?

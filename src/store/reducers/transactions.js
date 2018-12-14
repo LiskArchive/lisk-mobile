@@ -1,6 +1,13 @@
 import actionTypes from '../../constants/actions';
 import { merge } from '../../utilities/helpers';
 
+export const INITIAL_STATE = {
+  loaded: false,
+  pending: [],
+  confirmed: [],
+  count: 0,
+};
+
 /**
  * The reducer of transactions.
  * this reducer implements the required logic to add, update and reset
@@ -14,7 +21,7 @@ import { merge } from '../../utilities/helpers';
  * @param {String} action.type
  * @param {Object} action.data
  */
-const transactions = (state = { pending: [], confirmed: [], count: null }, action = {}) => {
+const transactions = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case actionTypes.transactionsLoaded:
       return merge(state, {
@@ -22,13 +29,17 @@ const transactions = (state = { pending: [], confirmed: [], count: null }, actio
           ...state.confirmed,
           ...action.data.transactions,
         ],
+        count: action.data.count,
+        loaded: true,
       });
+
     case actionTypes.pendingTransactionAdded:
       return merge(state, {
         pending: [action.data, ...state.pending],
       });
+
     case actionTypes.transactionsUpdated:
-      return Object.assign({}, state, {
+      return merge(state, {
         // Filter any newly confirmed transaction from pending
         pending: state.pending.filter(pendingTransaction =>
           action.data.confirmed.filter(transaction =>
@@ -42,8 +53,10 @@ const transactions = (state = { pending: [], confirmed: [], count: null }, actio
         ],
         count: action.data.count,
       });
+
     case actionTypes.accountSignedOut:
-      return { pending: [], confirmed: [], count: null };
+      return INITIAL_STATE;
+
     default:
       return state;
   }

@@ -25,6 +25,8 @@ export default () => ({
     placeholder: {
       height: 170,
       width: '100%',
+      justifyContent: 'flex-end',
+      paddingBottom: 25,
     },
     title: {
       marginBottom: 15,
@@ -62,17 +64,14 @@ export default () => ({
       marginTop: 170,
     },
     emptyState: {
-      width: '100%',
-      display: 'flex',
-      flex: 1,
+      paddingTop: 35,
       alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: (viewportHeight() / 7.5) + 170,
+      justifyContent: 'space-between',
     },
     noActivity: {
       width: '100%',
       alignItems: 'center',
-      marginBottom: 10,
+      marginTop: (viewportHeight() / 6) - 35,
     },
     empty: {
       width: 222,
@@ -135,11 +134,17 @@ export default () => ({
     emptyState: {
       backgroundColor: colors.light.white,
     },
+    address: {
+      color: colors.light.black,
+    },
     date: {
       color: colors.light.gray1,
     },
     avatar: {
       borderColor: colors.light.white,
+    },
+    outgoing: {
+      color: colors.light.black,
     },
     incoming: {
       color: colors.light.green,
@@ -174,11 +179,11 @@ export default () => ({
     date: {
       color: colors.dark.gray4,
     },
-    amount: {
-      color: colors.dark.white,
-    },
     avatar: {
       borderColor: colors.dark.gray5,
+    },
+    outgoing: {
+      color: colors.dark.white,
     },
     incoming: {
       color: colors.dark.green,

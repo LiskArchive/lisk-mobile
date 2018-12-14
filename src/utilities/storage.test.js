@@ -82,11 +82,6 @@ describe('storeFollowedAccounts/retrieveFollowedAccounts', () => {
     expect(result).toMatchObject(blankAccounts);
   });
 
-  it('writes invalid accounts as validated format', async () => {
-    const result = await storeFollowedAccount([{ address: '1L', label: 'LABEL_LABEL_LABEL' }]);
-    expect(result).toMatchObject(blankAccounts);
-  });
-
   it('reads empty accounts from storage', async () => {
     const result = await retrieveAccounts();
     expect(result).toMatchObject(blankAccounts);

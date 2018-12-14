@@ -56,7 +56,6 @@ class Scanner extends React.Component {
     const { photo } = this.state;
 
     this.props.navigation.setParams({
-      tabBar: true,
       showButtonLeft: true,
       action: !photo.visible ? this.toggleGallery : this.toggleCamera,
       onBackPress: this.toggleGallery,

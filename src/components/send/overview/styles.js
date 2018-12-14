@@ -10,10 +10,6 @@ export default () => ({
       justifyContent: 'space-between',
       margin: boxes.boxPadding,
     },
-    heading: {
-      fontSize: 24,
-      paddingBottom: 28,
-    },
     row: {
       paddingBottom: 14,
       borderBottomWidth: 1,
@@ -49,6 +45,14 @@ export default () => ({
       fontFamily: fonts.family.contextLight,
       fontSize: fonts.size.input,
       fontWeight: '400',
+    },
+    text: {
+      flexWrap: 'wrap',
+      flex: 1,
+      paddingRight: 20,
+    },
+    subtitle: {
+      marginTop: 7,
     },
     addressContainer: {
       flexDirection: 'column',

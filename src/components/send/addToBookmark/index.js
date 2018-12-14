@@ -27,11 +27,10 @@ class AddToBookmark extends React.Component {
     },
   };
 
-  validator = str => (str.length > 30 ? 1 : 0)
+  validator = str => (str.length > 20 ? 1 : 0)
 
   componentDidMount() {
     this.props.navigation.setParams({
-      title: 'Add to bookmarks',
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
@@ -85,8 +84,8 @@ class AddToBookmark extends React.Component {
         >
           <View>
             <View style={styles.headerContainer}>
-              <P style={styles.theme.subHeader}>
-                Optional: Add a label to save the address for the future use.
+              <P style={[styles.subHeader, styles.theme.subHeader]}>
+                Optional: add a label to save this address for the future.
               </P>
             </View>
             <View>

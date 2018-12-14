@@ -88,9 +88,9 @@ export const accountUnFollowed = address => ({
  *
  * @returns {Object} - Pure action function
  */
-export const accountEdited = (address, updatedData) => ({
+export const accountEdited = (address, label) => ({
   type: actionTypes.accountEdited,
-  data: { address, updatedData },
+  data: { address, label },
 });
 
 /**
@@ -170,7 +170,10 @@ export const blockUpdated = () => (dispatch, getState) => {
     if (newTransactions.length) {
       dispatch({
         type: actionTypes.transactionsUpdated,
-        data: { confirmed: newTransactions },
+        data: {
+          confirmed: newTransactions,
+          count: response.meta.count,
+        },
       });
 
       getAccount(activePeer, address).then((account) => {

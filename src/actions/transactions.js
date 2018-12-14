@@ -13,6 +13,7 @@ export const transactionsLoaded = data =>
           type: actionTypes.transactionsLoaded,
           data: {
             transactions: response.data,
+            count: response.meta.count,
           },
         });
         dispatch(loadingFinished(actionTypes.transactionsLoaded));
@@ -23,7 +24,6 @@ export const transactionAdded = (data, success, error) =>
   (dispatch, getState) => {
     const { activePeer } = getState().peers;
     const account = getState().accounts.active;
-    dispatch(loadingStarted(actionTypes.transactionAdded));
     send(activePeer, data)
       .then(({ id }) => {
         dispatch({
@@ -41,10 +41,8 @@ export const transactionAdded = (data, success, error) =>
           },
           type: actionTypes.pendingTransactionAdded,
         });
-        dispatch(loadingFinished(actionTypes.transactionAdded));
         success({ txId: id });
       }).catch((err) => {
-        dispatch(loadingFinished(actionTypes.transactionAdded));
         error(err);
       });
   };

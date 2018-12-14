@@ -17,28 +17,39 @@ class Splash extends React.Component {
   }
 
   componentDidMount() {
-    // If animate is not true, set all the durations to zero (no-animation)
     const { animate } = this.props;
+
+    const bgOpacityDuration = animate ? 900 : 0;
+    const bgOpacityDelay = animate ? 450 : 0;
     Animated.timing(this.state.bgOpacity, {
       toValue: 0,
-      duration: animate ? 900 : 0,
-      delay: animate ? 450 : 0,
+      duration: bgOpacityDuration,
+      delay: bgOpacityDelay,
     }).start();
+
+    const topDuration = animate ? 600 : 0;
+    const topDelay = animate ? 450 : 0;
     Animated.timing(this.state.top, {
       toValue: deviceHeight() <= 640 ? 70 : 130,
-      duration: animate ? 600 : 0,
-      delay: animate ? 450 : 0,
+      duration: topDuration,
+      delay: topDelay,
       easing: easing.easeOutQuart,
     }).start();
+
+    const iconOpacityDuration = animate ? 300 : 0;
+    const iconOpacityDelay = animate ? (bgOpacityDuration + topDelay) : 0;
     Animated.timing(this.state.iconOpacity, {
       toValue: 1,
-      duration: animate ? 300 : 0,
-      delay: animate ? 1350 : 0,
+      duration: iconOpacityDuration,
+      delay: iconOpacityDelay,
     }).start();
+
+    const christmasHatDuration = animate ? 300 : 0;
+    const christmasHatDelay = animate ? (iconOpacityDelay + 200) : 0;
     Animated.timing(this.state.christmasHatContainerTop, {
       toValue: -16,
-      duration: animate ? 300 : 0,
-      delay: animate ? 1350 : 0,
+      duration: christmasHatDuration,
+      delay: christmasHatDelay,
     }).start();
   }
 

@@ -39,7 +39,16 @@ class draggableItem extends React.Component {
             },
           ]}>
             <TouchableOpacity
-              onPress={() => { this.ref.snapTo({ index: 0 }); }}
+              onPress={() => {
+                this.ref.snapTo({ index: 0 });
+                navigate({
+                  routeName: 'AddBookmark',
+                  params: {
+                    account: data,
+                    title: 'Edit bookmark',
+                  },
+                });
+              }}
               style={styles.button}>
               <Icon
                 name='edit-bookmark'
@@ -99,16 +108,6 @@ class draggableItem extends React.Component {
                 </Small>
               </View>
             </View>
-            {
-              navigate ? <View style={[styles.column, styles.amountWrapper]}>
-                <Icon
-                  name='forward'
-                  size={21}
-                  style={styles.icon}
-                  color={theme === themes.light ? colors.light.black : colors.dark.white}
-                />
-              </View> : null
-            }
           </View>
         </Interactable.View>
     </View>);

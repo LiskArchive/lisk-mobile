@@ -28,8 +28,8 @@ class InfiniteScrollView extends React.Component {
     }
   }
 
-  componentWillUpdate = (nextProps) => {
-    this.canLoadMore = (this.props.list.length !== nextProps.list.length) || this.state.refreshing;
+  componentDidUpdate() {
+    this.canLoadMore = this.props.list.length < this.props.count;
   }
 
   onScroll = (e) => {
@@ -67,7 +67,7 @@ class InfiniteScrollView extends React.Component {
         stickyHeaderIndices={this.props.stickyHeaderIndices}
         scrollEventThrottle={8}
       >
-        {this.props.children}
+        {this.props.render(this.state.refreshing)}
       </ScrollView>
     );
   }

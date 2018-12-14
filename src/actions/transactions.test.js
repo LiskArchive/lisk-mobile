@@ -1,4 +1,4 @@
-import Lisk from 'lisk-elements';
+import Lisk from '@liskhq/lisk-client';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import txConstants from '../constants/transactions';
@@ -65,6 +65,9 @@ describe('Action: Accounts', () => {
         },
       },
     ],
+    meta: {
+      count: 2,
+    },
   };
   transactionsUtility.send = jest.fn();
   transactionsUtility.getTransactions = jest.fn();
@@ -77,9 +80,21 @@ describe('Action: Accounts', () => {
         transactions: { confirmed: [] },
       });
       const expectedActions = [
-        { type: actionTypes.loadingStarted, data: actionTypes.transactionsLoaded },
-        { type: actionTypes.transactionsLoaded, data: { transactions: transactions.data } },
-        { type: actionTypes.loadingFinished, data: actionTypes.transactionsLoaded },
+        {
+          type: actionTypes.loadingStarted,
+          data: actionTypes.transactionsLoaded,
+        },
+        {
+          type: actionTypes.transactionsLoaded,
+          data: {
+            transactions: transactions.data,
+            count: transactions.meta.count,
+          },
+        },
+        {
+          type: actionTypes.loadingFinished,
+          data: actionTypes.transactionsLoaded,
+        },
       ];
       transactionsUtility.getTransactions.mockResolvedValue(transactions);
       await store.dispatch(transactionsLoaded({ offset: 0 }));
@@ -101,7 +116,6 @@ describe('Action: Accounts', () => {
         data: 'test ref',
       };
       const expectedActions = [
-        { type: actionTypes.loadingStarted, data: actionTypes.transactionsAdded },
         {
           type: actionTypes.pendingTransactionAdded,
           data: {
@@ -117,7 +131,6 @@ describe('Action: Accounts', () => {
             type: txConstants.send.type,
           },
         },
-        { type: actionTypes.loadingFinished, data: actionTypes.transactionsAdded },
       ];
       transactionsUtility.send.mockResolvedValue(transactions.data[0]);
       await store.dispatch(transactionAdded(inputData, cb));

@@ -145,7 +145,7 @@ class Settings extends React.Component {
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
-                icon='terms'
+                icon='currency-selector'
                 iconSize={20}
                 title='Currency'
                 target='CurrencySelection'

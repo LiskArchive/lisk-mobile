@@ -5,8 +5,8 @@ import reg from '../../../constants/regex';
 import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import FormattedNumber from '../../formattedNumber';
-import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
-import { PrimaryButton } from '../../toolBox/button';
+import { toRawLsk, fromRawLsk, includeFee } from '../../../utilities/conversions';
+import { SecondaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
 import { H4, B, P, A, Small } from '../../toolBox/typography';
@@ -23,7 +23,7 @@ const messages = {
   },
   send: {
     title: 'Ready to Send',
-    subtitle: 'You are about to send LSK tokens to another address.',
+    subtitle: 'You are about to send LSK tokens to the following address.',
     button: 'Send now',
   },
 };
@@ -64,15 +64,8 @@ class Overview extends React.Component {
       secondPassphrase,
       data: reference || null,
     }, nextStep, (err) => {
-      const errorMessage = (err && /Status\s409/.test(err.message)) ?
-        'Your balance is insufficient.' : 'An error happened. Please try later.';
-      this.setState({ errorMessage });
+      this.setState({ errorMessage: err.message || 'An error happened. Please try later.' });
     });
-  }
-
-  back = () => {
-    const to = this.props.accounts.active.secondPublicKey ? -1 : -2;
-    return this.props.prevStep(to);
   }
 
   openAcademy = () => {
@@ -84,7 +77,7 @@ class Overview extends React.Component {
   componentDidMount() {
     let nextNavigationParams = {
       title: messages.send.title,
-      action: this.back,
+      action: () => this.props.prevStep(),
       showButtonLeft: true,
     };
 
@@ -95,8 +88,8 @@ class Overview extends React.Component {
 
       nextNavigationParams = {
         title: messages.initialize.title,
-        showButtonLeft: false,
         action: this.props.navigation.back,
+        showButtonLeft: false,
       };
     }
 
@@ -113,6 +106,10 @@ class Overview extends React.Component {
         amountValidity: this.validator.amount(this.props.amount),
       });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.navigation.setParams({ title: 'Send' });
   }
 
   render() {
@@ -153,11 +150,11 @@ class Overview extends React.Component {
               color={colors[this.props.theme].gray2} />
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
-                {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK )'}
+                {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK)'}
               </P>
               <B style={[styles.text, styles.theme.text]}>
                 <FormattedNumber>
-                  {fromRawLsk(toRawLsk(amount) + fee)}
+                  {includeFee(amount, fee)}
                 </FormattedNumber>
               </B>
             </View>
@@ -178,11 +175,12 @@ class Overview extends React.Component {
             <Icon size={16} name='warning' style={styles.errorIcon} />
             <Small style={styles.error}>{this.state.errorMessage}</Small>
           </View>
-          <PrimaryButton
+          <SecondaryButton
             disabled={!this.state.amountValidity}
             style={styles.button}
             onClick={this.send}
-            title={ messages[actionType].button } />
+            title={messages[actionType].button}
+          />
         </View>
       </ScrollView>
     );

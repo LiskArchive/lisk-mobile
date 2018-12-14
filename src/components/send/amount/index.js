@@ -22,8 +22,6 @@ const isAndroid = deviceType() === 'android';
   priceTicker: state.liskService.priceTicker,
 }))
 class Amount extends React.Component {
-  maxLSKSupply = 125000000;
-  maxLength = 10
   state = {
     amount: {
       value: '',
@@ -33,7 +31,7 @@ class Amount extends React.Component {
   };
 
   validator = (str) => {
-    if (str === '' || str === '0') {
+    if (str === '' || parseFloat(str) === 0) {
       return 1;
     }
 
@@ -56,7 +54,6 @@ class Amount extends React.Component {
     }
 
     navigation.setParams({
-      title: 'Amount',
       showButtonLeft: true,
       action: () => this.props.move({
         to: status ? 0 : 1,
@@ -69,14 +66,6 @@ class Amount extends React.Component {
   }
 
   onChange = (value) => {
-    if (value && (
-      value > this.maxLSKSupply ||
-      value.length > this.maxLength ||
-      Number.isNaN(parseFloat(value))
-    )) {
-      return;
-    }
-
     const normalizedValue = value.replace(/[^0-9]/g, '.');
 
     this.setState({
@@ -113,8 +102,9 @@ class Amount extends React.Component {
 
     let valueInCurrency = 0;
 
-    if (value && priceTicker[currency]) {
+    if (value && this.validator(normalizedValue) === 0 && priceTicker[currency]) {
       valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
+      valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
 
     return (
@@ -160,19 +150,17 @@ class Amount extends React.Component {
               }
             </View>
 
-            <View>
-              <AmountInput
-                reference={(el) => { this.input = el; }}
-                autoFocus={!isAndroid}
-                label="Amount (LSK)"
-                value={value}
-                onChange={this.onChange}
-                keyboardType="numeric"
-                currency={currency}
-                valueInCurrency={valueInCurrency}
-                error={validity === 1 ? 'Invalid amount value' : ''}
-              />
-            </View>
+            <AmountInput
+              reference={(el) => { this.input = el; }}
+              autoFocus={!isAndroid}
+              label="Amount (LSK)"
+              value={value}
+              onChange={this.onChange}
+              keyboardType="numeric"
+              currency={currency}
+              valueInCurrency={valueInCurrency}
+              error={validity === 1 ? 'Invalid amount value' : ''}
+            />
            </View>
         </KeyboardAwareScrollView>
       </View>

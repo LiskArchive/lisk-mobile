@@ -43,7 +43,6 @@ class Recipient extends React.Component {
     }
 
     navigation.setParams({
-      title: 'Recipient',
       showButtonLeft: false,
       action: false,
     });
@@ -168,8 +167,8 @@ class Recipient extends React.Component {
             styles={{ container: styles.container, innerContainer: styles.innerContainer }}
           >
           <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-            <P style={styles.theme.subtitle}>
-              Insert address or search a bookmark.
+            <P style={[styles.subtitle, styles.theme.subtitle]}>
+              Enter an address or search an existing one.
             </P>
           </Animated.View>
           <View style={styles.form}>

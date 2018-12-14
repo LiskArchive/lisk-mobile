@@ -28,9 +28,8 @@ export default () => ({
       fontSize: 14,
     },
     balanceIncognito: {
-      width: 94,
-      height: 37,
-      marginLeft: -10,
+      width: 80,
+      height: 20,
     },
     form: {
       marginTop: 5,
