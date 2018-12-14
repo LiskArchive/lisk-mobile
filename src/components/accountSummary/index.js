@@ -85,7 +85,7 @@ class AccountSummary extends React.Component {
       navigation.navigate({
         routeName: 'AddBookmark',
         params: {
-          account: account.address,
+          account,
           title: 'Add bookmark',
         },
       });
