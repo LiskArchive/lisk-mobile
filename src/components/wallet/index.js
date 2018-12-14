@@ -7,6 +7,7 @@ import liskService from '../../utilities/api/liskService';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
+import Empty from '../transactions/empty';
 import {
   loadingStarted as loadingStartedAction,
   loadingFinished as loadingFinishedAction,
@@ -25,6 +26,7 @@ import getStyles from './styles';
  */
 @connect(state => ({
   activePeer: state.peers.activePeer,
+  followedAccounts: state.accounts.followed,
 }), {
   loadingStarted: loadingStartedAction,
   loadingFinished: loadingFinishedAction,
@@ -44,7 +46,8 @@ class Wallet extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return ({
-      title: params.title || 'Ali\'s account',
+      title: params.title || '',
+      type: 'wallet',
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',
@@ -89,6 +92,26 @@ class Wallet extends React.Component {
     }]);
   }
 
+  interpolate = (inputRange, outputRange) =>
+    this.scrollY.interpolate({
+      inputRange,
+      outputRange,
+      extrapolate: 'clamp',
+    });
+
+  setHeader = () => {
+    const storedAccount = this.props.followedAccounts.filter(item =>
+      item.address === this.state.account.address);
+    this.props.navigation.setParams({
+      title: {
+        placeHolder: storedAccount.length === 1 ? storedAccount[0].label : '',
+        balance: this.state.account.balance,
+        address: this.state.account.address,
+        interpolate: this.interpolate,
+      },
+    });
+  }
+
   async fetchInitialData() {
     const account = await this.retrieveAccount();
     const confirmed = await this.retrieveTransactions(0);
@@ -101,6 +124,8 @@ class Wallet extends React.Component {
         pending: [],
       },
       priceTicker,
+    }, () => {
+      this.setHeader();
     });
   }
 
@@ -143,6 +168,18 @@ class Wallet extends React.Component {
     this.fetchInitialData();
   }
 
+  componentDidUpdate(prevProps) {
+    const storedAccount = this.props.followedAccounts.filter(item =>
+      item.address === this.state.account.address);
+    const prevStoredAccount = prevProps.followedAccounts.filter(item =>
+      item.address === this.state.account.address);
+
+    if (storedAccount.length !== prevStoredAccount.length ||
+      (storedAccount.length && storedAccount[0].label !== prevStoredAccount[0].label)) {
+      this.setHeader();
+    }
+  }
+
   render() {
     const {
       priceTicker, transactions, account,
@@ -151,6 +188,28 @@ class Wallet extends React.Component {
       styles,
       navigation,
     } = this.props;
+
+    let content = <Empty />;
+
+    if (transactions.confirmed.length) {
+      content = (<InfiniteScrollView
+        ref={(el) => { this.scrollView = el; }}
+        scrollEventThrottle={8}
+        onScroll={this.onScroll.call(this)}
+        style={[styles.scrollView]}
+        refresh={this.refresh.bind(this)}
+        loadMore={this.loadMore}
+        list={transactions.confirmed}
+        count={transactions.confirmed.length}
+      >
+        <Transactions
+          type='wallet'
+          transactions={transactions}
+          navigate={navigation.navigate}
+          account={account}
+        />
+      </InfiniteScrollView>);
+    }
 
     return (
       <View style={[styles.container, styles.theme.container]}>
@@ -166,22 +225,7 @@ class Wallet extends React.Component {
             />
           ) : null
         }
-        <InfiniteScrollView
-          ref={(el) => { this.scrollView = el; }}
-          scrollEventThrottle={8}
-          onScroll={this.onScroll.call(this)}
-          style={[styles.scrollView]}
-          refresh={this.refresh.bind(this)}
-          loadMore={this.loadMore}
-          list={transactions.confirmed}
-          count={transactions.confirmed.length}
-        >
-          <Transactions
-            transactions={transactions}
-            navigate={navigation.navigate}
-            account={account}
-          />
-        </InfiniteScrollView>
+        {content}
       </View>
     );
   }
