@@ -59,22 +59,15 @@ class Wallet extends React.Component {
   }
 
   async retrieveTransactions(offset) {
-    this.props.loadingStarted();
     return getTransactions(this.props.activePeer, {
       senderIdOrRecipientId: this.address,
       offset,
     })
-      .then((res) => {
-        this.props.loadingFinished();
-        return {
-          confirmed: res.data,
-          count: res.meta.count,
-        };
-      })
-      .catch((err) => {
-        this.props.loadingFinished();
-        return console.log(err); // eslint-disable-line no-console
-      });
+      .then(res => ({
+        confirmed: res.data,
+        count: res.meta.count,
+      }))
+      .catch(console.log); // eslint-disable-line no-console
   }
 
   async retrieveAccount() {
@@ -110,8 +103,10 @@ class Wallet extends React.Component {
   }
 
   async fetchInitialData() {
+    this.props.loadingStarted();
     const account = await this.retrieveAccount();
     const tx = await this.retrieveTransactions(0);
+    this.props.loadingFinished();
 
     this.setState({
       account,
@@ -140,27 +135,33 @@ class Wallet extends React.Component {
           confirmed: [...newTransactions, ...confirmed],
           pending: [],
           count: transactions.count,
+          loaded: true,
         },
       });
     }
   }
 
   loadMore = () => {
+    this.props.loadingStarted();
     const { confirmed } = this.state.transactions;
     this.retrieveTransactions(confirmed.length)
-      .then((res) => {
-        const { data, meta } = res;
-        if (data.length > 0) {
+      .then((transactions) => {
+        this.props.loadingFinished();
+        if (transactions.confirmed.length > 0) {
           this.setState({
             transactions: {
-              confirmed: [...confirmed, ...data],
+              confirmed: [...confirmed, ...transactions.confirmed],
               pending: [],
-              count: meta.count,
+              count: transactions.count,
+              loaded: true,
             },
           });
         }
       })
-      .catch(console.log); // eslint-disable-line no-console
+      .catch((err) => {
+        this.props.loadingFinished();
+        console.log(err); // eslint-disable-line no-console
+      });
   }
 
   componentDidMount() {
@@ -168,14 +169,15 @@ class Wallet extends React.Component {
     this.fetchInitialData();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const storedAccount = this.props.followedAccounts.filter(item =>
       item.address === this.state.account.address);
     const prevStoredAccount = prevProps.followedAccounts.filter(item =>
       item.address === this.state.account.address);
 
     if (storedAccount.length !== prevStoredAccount.length ||
-      (storedAccount.length && storedAccount[0].label !== prevStoredAccount[0].label)) {
+      (storedAccount.length && storedAccount[0].label !== prevStoredAccount[0].label) ||
+      this.state.account.balance !== prevState.account.balance) {
       this.setHeader();
     }
   }

@@ -74,6 +74,25 @@ class AccountSummary extends React.Component {
     }).start();
   }
 
+  toggleBookmark = () => {
+    const {
+      followedAccounts, account, navigation, accountUnFollowed,
+    } = this.props;
+    const isFollowed = followedAccounts.filter(item =>
+      item.address === account.address).length === 1;
+    if (isFollowed) {
+      accountUnFollowed(account.address);
+    } else {
+      navigation.navigate({
+        routeName: 'AddBookmark',
+        params: {
+          account: account.address,
+          title: 'Add bookmark',
+        },
+      });
+    }
+  }
+
   componentDidMount() {
     this.screenWidth = Dimensions.get('window').width;
     this.initialFadeIn();
@@ -81,7 +100,8 @@ class AccountSummary extends React.Component {
 
   render() {
     const {
-      styles, account, followedAccounts, settings, priceTicker, type, theme,
+      styles, account, followedAccounts, settings,
+      priceTicker, type, theme, navigation,
     } = this.props;
 
     const { interpolate } = this;
@@ -159,7 +179,7 @@ class AccountSummary extends React.Component {
               icon={isFollowed ? 'bookmark-full' : 'bookmark'}
               color={isFollowed ? colors[theme].blue : colors[theme].gray1}
               iconSize={20}
-              onClick={() => {}} />
+              onClick={this.toggleBookmark} />
             <IconButton
               titleStyle={styles.sendButtonTitle}
               style={styles.sendButton}
@@ -167,7 +187,7 @@ class AccountSummary extends React.Component {
               icon='send'
               color={colors[theme].gray1}
               iconSize={20}
-              onClick={() => this.props.navigation.navigate('Send', { query: { address: account.address } })} />
+              onClick={() => navigation.navigate('Send', { query: { address: account.address } })} />
           </View> : null
         }
         </Anim>
