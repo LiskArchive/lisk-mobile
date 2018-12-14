@@ -10,10 +10,6 @@ export default () => ({
       justifyContent: 'space-between',
       margin: boxes.boxPadding,
     },
-    heading: {
-      fontSize: 24,
-      paddingBottom: 28,
-    },
     row: {
       paddingBottom: 14,
       borderBottomWidth: 1,

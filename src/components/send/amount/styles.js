@@ -12,7 +12,6 @@ export default () => ({
       margin: boxes.boxPadding,
     },
     balanceContainer: {
-      marginTop: 20,
       flexDirection: 'row',
       padding: boxes.boxPadding,
       marginBottom: 5,

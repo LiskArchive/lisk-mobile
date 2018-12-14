@@ -39,6 +39,7 @@ class Result extends React.Component {
   componentWillUnmount() {
     clearTimeout(this.timeouts.created);
     clearTimeout(this.timeouts.confirmed);
+    this.props.navigation.setParams({ title: 'Send' });
   }
 
   componentWillUpdate(nextProp) {

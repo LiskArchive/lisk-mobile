@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
-import liskService from '../../utilities/api/liskService';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
 import AccountSummary from '../accountSummary';
@@ -14,7 +13,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const itemHeight = 90;
-const summaryHeight = 250;
+const summaryHeight = 200;
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -28,16 +27,15 @@ const summaryHeight = 250;
 @connect(state => ({
   account: state.accounts.active || {},
   transactions: state.transactions,
+  priceTicker: state.liskService.priceTicker,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
 })
 class Home extends React.Component {
   state = {
-    theme: 'loading',
-    priceTicker: {},
-  };
-
+    footer: null,
+  }
   scrollY = new Animated.Value(0);
   scrollView = null;
 
@@ -55,38 +53,41 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { transactionsLoaded, account } = this.props;
+    const { transactionsLoaded, account, navigation } = this.props;
     transactionsLoaded({
       senderIdOrRecipientId: account.address,
       offset: 0,
     });
+    navigation.setParams({
+      scrollToTop: () => {
+        if (this.scrollView) {
+          this.scrollView.scrollTo(0);
+        }
+      },
+    });
     this.initialAnimation();
-    this.getPriceTicker();
   }
 
-  componentDidUpdate() {
-    let { theme } = this.state;
-    const { navigation, transactions: { pending, confirmed } } = this.props;
-    const transactionCount = pending.length + confirmed.length;
+  componentDidUpdate(prevProps) {
+    const { transactions } = this.props;
 
-    if ((theme === 'loading') || (theme === 'empty' && transactionCount > 0)) {
-      theme = transactionCount === 0 ? 'empty' : 'list';
+    const prevTransactionCount = (
+      prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
+    );
 
+    const transactionCount = (
+      transactions.pending.length + transactions.confirmed.length
+    );
+
+    const shouldUpdateState = (
+      (prevProps.transactions.loaded !== transactions.loaded) ||
+      (prevTransactionCount !== transactionCount)
+    );
+
+    if (shouldUpdateState) {
       this.setState({
-        theme,
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount,
       });
-
-      if (theme === 'list' && !navigation.getParam('scrollToTop', false)) {
-      headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
-        navigation.setParams({
-          scrollToTop: () => {
-            if (this.scrollView) {
-              this.scrollView.scrollTo(0);
-            }
-          },
-        });
-      }
     }
   }
 
@@ -123,41 +124,24 @@ class Home extends React.Component {
     }
   }
 
-  getPriceTicker = () => {
-    liskService.getPriceTicker()
-      .then(res => this.setState({ priceTicker: res.tickers.LSK }))
-      .catch(console.log); //eslint-disable-line
-  }
-
   render() {
-    const {
-      theme, footer, priceTicker,
-    } = this.state;
     const {
       styles,
       account,
       transactions,
       navigation,
       updateTransactions,
+      priceTicker,
     } = this.props;
 
     let content = null;
 
-    if (theme === 'loading') {
+    if (!transactions.loaded) {
       content = <Loading />;
     } else {
-      const listContent = theme === 'list' ? (
-        <Transactions
-          transactions={transactions}
-          footer={footer}
-          navigate={navigation.navigate}
-          account={account}
-        />
-      ) : <Empty />;
-
-      const listElements = theme === 'list' ? [
-        ...transactions.pending, ...transactions.confirmed,
-      ] : ['emptyState'];
+      const listElements = transactions.count > 0 ?
+        [...transactions.pending, ...transactions.confirmed] :
+        ['emptyState'];
 
       content = (
         <InfiniteScrollView
@@ -168,10 +152,19 @@ class Home extends React.Component {
           refresh={updateTransactions}
           loadMore={this.loadMore}
           list={listElements}
-          count={listElements.length}
-        >
-          {listContent}
-        </InfiniteScrollView>
+          count={transactions.count}
+          render={refreshing => (
+            transactions.count > 0 ? (
+              <Transactions
+                transactions={transactions}
+                footer={this.state.footer}
+                navigate={navigation.navigate}
+                account={account}
+                refreshing={refreshing}
+              />
+            ) : <Empty refreshing={refreshing} />
+          )}
+        />
       );
     }
 

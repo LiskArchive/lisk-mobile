@@ -29,9 +29,6 @@ class Request extends React.Component {
     amount: str => reg.amount.test(str),
   };
 
-  /**
-   * @param {Number} value - A valid amount in LSK
-   */
   changeHandler = (val) => {
     const { account: { address } } = this.props;
     let amountValidity = -1;
@@ -101,8 +98,8 @@ class Request extends React.Component {
             </View>
             <View style={styles.fieldset}>
               <Input
-                label='Amount in Ⱡ (Optional)'
-                reference={(input) => { this.amountInput = input; }}
+                innerStyles={{ input: styles.input }}
+                label='Amount in LSK (Optional)'
                 autoCorrect={false}
                 onChange={this.changeHandler}
                 value={amount.value}

@@ -6,7 +6,7 @@ import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import FormattedNumber from '../../formattedNumber';
 import { toRawLsk, fromRawLsk, includeFee } from '../../../utilities/conversions';
-import { PrimaryButton } from '../../toolBox/button';
+import { SecondaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
 import { H4, B, P, A, Small } from '../../toolBox/typography';
@@ -175,11 +175,12 @@ class Overview extends React.Component {
             <Icon size={16} name='warning' style={styles.errorIcon} />
             <Small style={styles.error}>{this.state.errorMessage}</Small>
           </View>
-          <PrimaryButton
+          <SecondaryButton
             disabled={!this.state.amountValidity}
             style={styles.button}
             onClick={this.send}
-            title={ messages[actionType].button } />
+            title={messages[actionType].button}
+          />
         </View>
       </ScrollView>
     );
