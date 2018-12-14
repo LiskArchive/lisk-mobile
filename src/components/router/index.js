@@ -142,13 +142,12 @@ export default StackNavigator(
     },
     Wallet: {
       screen: Wallet,
-      navigationOptions: () => ({
-        title: 'Wallet',
-        headerTitle: HeaderTitle,
+      navigationOptions: {
+        headerTitle: HomeHeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
-      }),
+      },
     },
     About: {
       screen: About,
