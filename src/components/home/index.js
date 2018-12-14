@@ -45,11 +45,31 @@ class Home extends React.Component {
     const { params = {} } = navigation.state;
     return ({
       title: params.title || 'Your wallet',
+      type: 'home',
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',
         borderBottomWidth: 0,
         elevation: 0,
+      },
+    });
+  }
+
+  interpolate = (inputRange, outputRange) =>
+    this.scrollY.interpolate({
+      inputRange,
+      outputRange,
+      extrapolate: 'clamp',
+    });
+
+  setHeader = () => {
+    this.props.navigation.setParams({
+      title: {
+        placeHolder: 'Your wallet',
+        type: 'home',
+        balance: this.props.account.balance,
+        address: this.props.account.address,
+        interpolate: this.interpolate,
       },
     });
   }
@@ -62,6 +82,7 @@ class Home extends React.Component {
     });
     this.initialAnimation();
     this.getPriceTicker();
+    this.setHeader();
   }
 
   componentDidUpdate() {
@@ -148,6 +169,7 @@ class Home extends React.Component {
     } else {
       const listContent = theme === 'list' ? (
         <Transactions
+          type='home'
           transactions={transactions}
           footer={footer}
           navigate={navigation.navigate}
