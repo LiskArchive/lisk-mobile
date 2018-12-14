@@ -29,12 +29,18 @@ export default () => ({
     },
   },
   [themes.light]: {
-    main: {
+    homeMain: {
       color: colors.light.white,
+    },
+    walletMain: {
+      color: colors.light.black,
     },
   },
   [themes.dark]: {
-    main: {
+    homeMain: {
+      color: colors.light.white,
+    },
+    walletMain: {
       color: colors.light.white,
     },
   },

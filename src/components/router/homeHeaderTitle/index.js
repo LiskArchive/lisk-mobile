@@ -1,5 +1,6 @@
 import React from 'react';
 import { Animated, Text, View } from 'react-native';
+import { fromRawLsk } from '../../../utilities/conversions';
 import Avatar from '../../avatar';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
@@ -14,7 +15,7 @@ const homeHeaderTitle = ({ styles, style, children }) => {
   }
 
   const {
-    interpolate, address, balance, placeHolder,
+    interpolate, address, balance, placeHolder, type,
   } = children;
 
   return (
@@ -23,7 +24,7 @@ const homeHeaderTitle = ({ styles, style, children }) => {
         numberOfLines={1}
         style={[
           styles.main,
-          styles.theme.main,
+          styles.theme[`${type}Main`],
           style,
           { opacity: interpolate([0, 100, 130], [1, 1, 0]) },
         ]}
@@ -39,7 +40,7 @@ const homeHeaderTitle = ({ styles, style, children }) => {
         },
       ]}>
         <Avatar address={address} size={30} style={styles.avatar} />
-        <Text style={[styles.main, styles.theme.main, style]}>{`${balance} LSK`}</Text>
+        <Text style={[styles.main, styles.theme[`${type}Main`], style]}>{`${fromRawLsk(balance)} LSK`}</Text>
       </Animated.View>
     </View>
   );
