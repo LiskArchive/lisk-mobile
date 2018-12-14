@@ -36,16 +36,25 @@ class Item extends React.Component {
 
   render() {
     const {
-      styles, theme, tx, account, incognito,
+      styles, theme, tx,
+      account, followedAccounts, incognito,
     } = this.props;
+
     let direction = 'incoming';
     let address = tx.senderId;
     let addressShortened = stringShortener(tx.senderId, 10, 3);
+
     if (account === tx.senderId && tx.type === 0) {
       direction = 'outgoing';
       address = tx.recipientId;
       addressShortened = stringShortener(tx.recipientId, 10, 3);
     }
+
+    const followedAccount = followedAccounts.find(fa => fa.address === address);
+    if (followedAccount) {
+      addressShortened = followedAccount.label;
+    }
+
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
 
     let image = null;
