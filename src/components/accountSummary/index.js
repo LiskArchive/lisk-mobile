@@ -21,7 +21,7 @@ import darkSmall from '../../assets/images/balanceBlur/darkSmall.png';
 import lightBig from '../../assets/images/balanceBlur/lightBig.png';
 import lightMedium from '../../assets/images/balanceBlur/lightMedium.png';
 import lightSmall from '../../assets/images/balanceBlur/lightSmall.png';
-import { colors } from '../../constants/styleGuide';
+import { colors, themes } from '../../constants/styleGuide';
 
 const blurs = {
   darkBig, darkMedium, darkSmall, lightBig, lightMedium, lightSmall,
@@ -128,6 +128,8 @@ class AccountSummary extends React.Component {
     if (normalizedBalance.length > 6) balanceSize = 'Big';
     else if (normalizedBalance.length > 2) balanceSize = 'Medium';
 
+    const followedAccountColor = theme === themes.light ? colors.light.blue : colors.dark.white;
+
     return (<View style={this.props.style}>
       <Anim style={[styles.container, styles.theme[`${type}Container`], { opacity, top, height },
         { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) }]}>
@@ -184,11 +186,11 @@ class AccountSummary extends React.Component {
               titleStyle={styles.bookmarkButtonTitle}
               title=''
               icon={isFollowed ? 'bookmark-full' : 'bookmark'}
-              color={isFollowed ? colors[theme].blue : colors[theme].gray1}
+              color={isFollowed ? followedAccountColor : colors[theme].gray1}
               iconSize={20}
               onClick={this.toggleBookmark} />
             <IconButton
-              titleStyle={styles.sendButtonTitle}
+              titleStyle={[styles.sendButtonTitle, styles.theme.sendButtonTitle]}
               style={styles.sendButton}
               title='Send to this address'
               icon='send'
