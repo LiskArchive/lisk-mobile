@@ -10,7 +10,7 @@ let wrapper = {
 if (Platform.OS === 'ios') {
   wrapper = {
     zIndex: 10,
-    top: DeviceInfo.isIPhoneX_deprecated ? Header.HEIGHT + 23 : Header.HEIGHT,
+    top: DeviceInfo.isIPhoneX_deprecated ? Header.HEIGHT + 24 : Header.HEIGHT + 1,
     left: 0,
     position: 'absolute',
   };
