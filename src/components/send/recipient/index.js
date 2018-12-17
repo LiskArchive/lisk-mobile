@@ -1,5 +1,4 @@
 import React from 'react';
-import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
 import { IconButton } from '../../toolBox/button';
 import { P } from '../../toolBox/typography';
