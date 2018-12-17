@@ -86,7 +86,7 @@ class Item extends React.Component {
               styles.amount,
               styles[direction], styles.theme[direction],
             ]}>
-              <FormattedNumber>{amount}</FormattedNumber>
+              <FormattedNumber trim={true}>{amount}</FormattedNumber>
             </B> : null
         }
         {
