@@ -23,8 +23,8 @@ class Bookmarks extends React.Component {
 
     const filterList = list.filter((item) => {
       if (query.length === 0) return true;
-      return (item.address.indexOf(query) >= 0 ||
-        item.label.indexOf(query) >= 0);
+      return (item.address.toLowerCase().indexOf(query) >= 0 ||
+        item.label.toLowerCase().indexOf(query) >= 0);
     });
     const Element = draggable ? DraggableItem : Item;
 
