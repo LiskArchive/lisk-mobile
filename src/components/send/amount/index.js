@@ -28,29 +28,28 @@ class Amount extends React.Component {
       normalizedValue: '',
       validity: {
         code: -1,
-        message: [],
+        message: '',
       },
     },
   };
 
   validator = (str) => {
     if (str === '' || parseFloat(str) === 0) {
-      return { code: -1, message: [] };
+      return { code: -1, message: '' };
     }
 
     const { accounts } = this.props;
-    const message = [];
+    let message = '';
 
     if (!reg.amount.test(str)) {
-      message.push('The amount value is invalid.');
-    }
-    if (accounts.active.balance < transactions.send.fee ||
+      message = ('The amount value is invalid.');
+    } else if (accounts.active.balance < transactions.send.fee ||
       parseFloat(str) > fromRawLsk(accounts.active.balance - transactions.send.fee)) {
-      message.push('Your balance is not sufficient.');
+      message = 'Your balance is not sufficient.';
     }
 
     return ({
-      code: message.length > 0 ? 1 : 0,
+      code: message ? 1 : 0,
       message,
     });
   };
@@ -170,7 +169,7 @@ class Amount extends React.Component {
               keyboardType="numeric"
               currency={currency}
               valueInCurrency={valueInCurrency}
-              error={validity.code === 1 ? validity.message : ''}
+              error={validity.message}
             />
            </View>
         </KeyboardAwareScrollView>
