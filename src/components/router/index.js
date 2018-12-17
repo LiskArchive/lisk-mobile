@@ -135,12 +135,15 @@ const MainStack = StackNavigator(
       screen: TxDetail,
       navigationOptions: {
         title: 'Transaction Details',
-        headerTitle: props => <HeaderTitle {...props} style={{ color: colors.light.white }} />, //eslint-disable-line
+        headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
-        headerLeft: props => <HeaderBackButton {...props} color={colors.light.white} />, //eslint-disable-line
-        headerBackground: <HeaderBackgroundImage />,
+        headerLeft: HeaderBackButton,
+        headerBackground: <HeaderBackground />,
         headerStyle: {
+          backgroundColor: 'transparent',
           overflow: 'hidden',
+          borderBottomWidth: 0,
+          elevation: 0,
         },
       },
     },
