@@ -55,7 +55,6 @@ export default () => ({
       flexDirection: 'column',
       alignItems: 'center',
       borderBottomWidth: 1,
-      borderTopWidth: 1,
     },
     row: {
       marginBottom: 14,
@@ -100,7 +99,7 @@ export default () => ({
       color: colors.light.black,
     },
     senderAndRecipient: {
-      backgroundColor: '#F8FCFF',
+      backgroundColor: colors.light.navigationBg,
       borderBottomColor: colors.light.gray5,
       borderTopColor: colors.light.gray5,
     },
