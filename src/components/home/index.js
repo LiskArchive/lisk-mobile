@@ -29,6 +29,7 @@ const summaryHeight = 200;
   followedAccounts: state.accounts.followed || [],
   transactions: state.transactions,
   priceTicker: state.liskService.priceTicker,
+  incognito: state.settings.incognito,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
@@ -69,6 +70,7 @@ class Home extends React.Component {
         balance: this.props.account.balance,
         address: this.props.account.address,
         interpolate: this.interpolate,
+        incognito: this.props.incognito,
       },
     });
   }
@@ -96,7 +98,7 @@ class Home extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { transactions, account } = this.props;
+    const { transactions, account, incognito } = this.props;
 
     const prevTransactionCount = (
       prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
@@ -117,7 +119,10 @@ class Home extends React.Component {
       });
     }
 
-    if (prevProps.account.balance !== account.balance) {
+    if (
+      (prevProps.account.balance !== account.balance) ||
+      (prevProps.incognito !== incognito)
+    ) {
       this.setHeader();
     }
   }
