@@ -71,9 +71,12 @@ class AddToBookmark extends React.Component {
       const editMode = accounts.filter(item => item.address === account.address).length > 0;
       this.setState({
         editMode,
-        label: { value: account.label },
+        label: { value: account.label || '' },
         incomingData: account,
       });
+      setTimeout(() => {
+        if (this.labelRef) this.labelRef.focus();
+      }, 300);
     }
   }
 
@@ -236,9 +239,10 @@ class AddToBookmark extends React.Component {
             }
             <Input
               label='Label'
+              reference={(input) => { this.labelRef = input; }}
               autoCorrect={false}
               innerStyles={{ input: styles.input }}
-              multiline={true}
+              multiline={false}
               onChange={this.setLabel}
               error={setError(label.validity, 'label')}
               value={label.value}
