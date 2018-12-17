@@ -36,8 +36,8 @@ const messages = {
 class Overview extends React.Component {
   state = {
     initialize: false,
-    amountValidity: true,
     errorMessage: null,
+    triggered: false,
   }
 
   validator = {
@@ -50,6 +50,9 @@ class Overview extends React.Component {
   };
 
   send = () => {
+    // disable the button to prevent further presses.
+    this.setState({ triggered: true });
+
     const {
       accounts, nextStep, transactionAdded,
       sharedData: {
@@ -97,15 +100,6 @@ class Overview extends React.Component {
       ...nextNavigationParams,
       initialize: false,
     });
-  }
-
-  componentDidUpdate(nextProps) {
-    const { accounts } = this.props;
-    if (accounts.active && nextProps.accounts.active.balance !== accounts.active.balance) {
-      this.setState({
-        amountValidity: this.validator.amount(this.props.amount),
-      });
-    }
   }
 
   componentWillUnmount() {
@@ -176,7 +170,7 @@ class Overview extends React.Component {
             <Small style={styles.error}>{this.state.errorMessage}</Small>
           </View>
           <SecondaryButton
-            disabled={!this.state.amountValidity}
+            disabled={this.state.triggered}
             style={styles.button}
             onClick={this.send}
             title={messages[actionType].button}

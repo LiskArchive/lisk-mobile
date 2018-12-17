@@ -47,6 +47,7 @@ export default () => ({
         },
         ios: {
           height: 48,
+          paddingBottom: 10,
           paddingLeft: 40,
         },
       }),
