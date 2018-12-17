@@ -24,7 +24,7 @@ class Confirm extends React.Component {
   state = {
     secondPassphrase: {
       value: devDefaultSecondPass,
-      validity: validatePassphrase(devDefaultSecondPass),
+      validity: devDefaultSecondPass ? validatePassphrase(devDefaultSecondPass) : [],
     },
   };
 
