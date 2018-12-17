@@ -116,6 +116,7 @@ describe('Action: Accounts', () => {
         data: 'test ref',
       };
       const expectedActions = [
+        { type: actionTypes.loadingStarted, data: actionTypes.transactionsAdded },
         {
           type: actionTypes.pendingTransactionAdded,
           data: {
@@ -131,6 +132,7 @@ describe('Action: Accounts', () => {
             type: txConstants.send.type,
           },
         },
+        { type: actionTypes.loadingFinished, data: actionTypes.transactionsAdded },
       ];
       transactionsUtility.send.mockResolvedValue(transactions.data[0]);
       await store.dispatch(transactionAdded(inputData, cb));
