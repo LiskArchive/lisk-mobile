@@ -109,6 +109,7 @@ class AddToBookmark extends React.Component {
     this.setState({
       label: {
         value,
+        validity: this.validator.label(value),
       },
     });
   }
