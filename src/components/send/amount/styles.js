@@ -18,8 +18,8 @@ export default () => ({
       alignItems: 'center',
     },
     balanceContainerIncognito: {
-      paddingTop: 9,
-      paddingBottom: 9,
+      paddingTop: boxes.boxPadding - 2,
+      paddingBottom: boxes.boxPadding - 2,
     },
     balanceText: {
       fontSize: 14,

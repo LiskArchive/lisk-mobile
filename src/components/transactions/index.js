@@ -70,7 +70,7 @@ class Transactions extends React.Component {
     const {
       styles, transactions, navigate,
       account, footer, incognito, theme,
-      refreshing, type,
+      followedAccounts, refreshing, type,
     } = this.props;
 
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
@@ -113,8 +113,10 @@ class Transactions extends React.Component {
               incognito={incognito}
               navigate={navigate}
               account={account ? account.address : ''}
+              followedAccounts={followedAccounts}
               pending={transactions.pending}
-              transactions={transactions.confirmed} />
+              transactions={transactions.confirmed}
+            />
             {
               footer ? <Footer /> : null
             }

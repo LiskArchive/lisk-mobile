@@ -26,7 +26,7 @@ import getStyles from './styles';
  */
 @connect(state => ({
   activePeer: state.peers.activePeer,
-  followedAccounts: state.accounts.followed,
+  followedAccounts: state.accounts.followed || [],
   priceTicker: state.liskService.priceTicker,
 }), {
   loadingStarted: loadingStartedAction,
@@ -186,10 +186,12 @@ class Wallet extends React.Component {
     const {
       transactions, account,
     } = this.state;
+
     const {
       styles,
       navigation,
       priceTicker,
+      followedAccounts,
     } = this.props;
 
     let content = null;
@@ -219,6 +221,7 @@ class Wallet extends React.Component {
                 footer={this.state.footer}
                 navigate={navigation.navigate}
                 account={account}
+                followedAccounts={followedAccounts}
                 refreshing={refreshing}
               />
             ) : <Empty refreshing={refreshing} />

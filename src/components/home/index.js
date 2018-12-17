@@ -26,6 +26,7 @@ const summaryHeight = 200;
  */
 @connect(state => ({
   account: state.accounts.active || {},
+  followedAccounts: state.accounts.followed || [],
   transactions: state.transactions,
   priceTicker: state.liskService.priceTicker,
 }), {
@@ -158,6 +159,7 @@ class Home extends React.Component {
     const {
       styles,
       account,
+      followedAccounts,
       transactions,
       navigation,
       updateTransactions,
@@ -191,6 +193,7 @@ class Home extends React.Component {
                 footer={this.state.footer}
                 navigate={navigation.navigate}
                 account={account}
+                followedAccounts={followedAccounts}
                 refreshing={refreshing}
               />
             ) : <Empty refreshing={refreshing} />
