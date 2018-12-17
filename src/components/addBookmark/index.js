@@ -16,7 +16,7 @@ import {
   accountEdited as accountEditedAction,
 } from '../../actions/accounts';
 import { P, Small } from '../toolBox/typography';
-import { decodeAddress } from '../../utilities/qrCode';
+import { decodeLaunchUrl } from '../../utilities/qrCode';
 
 @connect(state => ({
   accounts: state.accounts.followed,
@@ -86,7 +86,7 @@ class AddToBookmark extends React.Component {
   }
 
   onQRCodeRead = (data) => {
-    const decodedData = decodeAddress(data);
+    const decodedData = decodeLaunchUrl(data);
     this.setAddress(decodedData.address);
     this.scannedData = decodedData;
     this.addressRef.focus();

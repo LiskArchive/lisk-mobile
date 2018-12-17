@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export const decodeAddress = (data) => {
+export const decodeLaunchUrl = (data) => {
   const recipientReg = /recipient=\d{1,21}L/;
   const amountReg = /amount=(\d+)\.?(\d+)?/;
   const liskProtocolReg = /^[l|L]isk:\/\//;

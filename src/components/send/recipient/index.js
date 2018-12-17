@@ -10,7 +10,7 @@ import Avatar from '../../avatar';
 import Scanner from '../../scanner';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import { merge } from '../../../utilities/helpers';
-import { decodeAddress } from '../../../utilities/qrCode';
+import { decodeLaunchUrl } from '../../../utilities/qrCode';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
@@ -58,7 +58,7 @@ class Recipient extends React.Component {
   }
 
   onQRCodeRead = (data) => {
-    const decodedData = decodeAddress(data);
+    const decodedData = decodeLaunchUrl(data);
     this.setAddress(decodedData.address);
     this.scannedData = decodedData;
     this.input.focus();
