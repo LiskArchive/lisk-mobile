@@ -20,8 +20,18 @@ const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelega
 
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
+  account: state.accounts.active || {},
 }), {})
 class TransactionDetail extends React.Component {
+  navigate = (address) => {
+    const {
+      navigation, account,
+    } = this.props;
+    if (address !== account.address) {
+      navigation.navigate('Wallet', { address });
+    }
+  }
+
   render() {
     const {
       navigation, styles, theme, followedAccounts,
@@ -122,7 +132,7 @@ class TransactionDetail extends React.Component {
             <View style={styles.addressContainer}>
               <A
                 value={tx.senderId}
-                onPress={() => navigation.navigate('Wallet', { address: tx.senderId })}
+                onPress={() => this.navigate(tx.senderId)}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
               >
                 {getAccountLabel(tx.senderId)}
@@ -145,7 +155,7 @@ class TransactionDetail extends React.Component {
               <View style={styles.addressContainer}>
                 <A
                   value={tx.senderId}
-                  onPress={() => navigation.navigate('Wallet', { address: tx.recipientId })}
+                  onPress={() => this.navigate(tx.recipientId)}
                   style={[styles.value, styles.theme.value, styles.transactionId]}
                 >
                   {getAccountLabel(tx.recipientId)}
