@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Animated } from 'react-native';
+import { View, Alert, TouchableOpacity, Animated } from 'react-native';
 import Interactable from 'react-native-interactable';
 import connect from 'redux-connect-decorator';
 import {
@@ -12,16 +12,31 @@ import getStyles from './styles';
 import Icon from '../toolBox/icon';
 import { themes, colors } from '../../constants/styleGuide';
 
-
 @connect(state => ({}), {
   accountUnFollowed: accountUnFollowedAction,
 })
 class draggableItem extends React.Component {
   _deltaX = new Animated.Value(0);
 
+  onDelete = () => {
+    const { data, accountUnFollowed } = this.props;
+
+    Alert.alert('Are you sure?', '', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+        onPress: () => this.ref.changePosition({ x: 0, y: 0 }),
+      },
+      {
+        text: 'Confirm',
+        onPress: () => accountUnFollowed(data.address),
+      },
+    ], { cancelable: false });
+  }
+
   render() {
     const {
-      styles, data, theme, navigate, accountUnFollowed, setRef,
+      styles, data, theme, navigate, setRef,
     } = this.props;
 
     return (<TouchableOpacity
@@ -72,7 +87,10 @@ class draggableItem extends React.Component {
             },
             ]}>
             <TouchableOpacity
-              onPress={() => { setRef(this.ref); accountUnFollowed(data.address); }}
+              onPress={() => {
+                setRef(this.ref);
+                this.onDelete();
+              }}
               style={styles.button}>
               <Icon
                 name='delete-bookmark'
