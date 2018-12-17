@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Animated, Dimensions } from 'react-native';
+import { View, Alert, Image, Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
 import {
   accountFollowed as accountFollowedAction,
@@ -80,7 +80,16 @@ class AccountSummary extends React.Component {
     } = this.props;
     const isFollowed = followedAccounts.some(item => item.address === account.address);
     if (isFollowed) {
-      accountUnFollowed(account.address);
+      Alert.alert('Are you sure?', '', [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          onPress: () => accountUnFollowed(account.address),
+        },
+      ], { cancelable: false });
     } else {
       navigation.navigate({
         routeName: 'AddBookmark',
