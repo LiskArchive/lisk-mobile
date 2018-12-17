@@ -27,6 +27,21 @@ export default () => ({
     avatar: {
       marginRight: 12,
     },
+    blurBig: {
+      width: 100,
+      height: 30,
+      marginLeft: -15,
+    },
+    blurMedium: {
+      width: 77,
+      height: 30,
+      marginLeft: -10,
+    },
+    blurSmall: {
+      width: 60,
+      height: 30,
+      marginLeft: -5,
+    },
   },
   [themes.light]: {
     homeMain: {

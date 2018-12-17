@@ -112,6 +112,7 @@ class AccountSummary extends React.Component {
       priceTicker, type, theme, navigation,
     } = this.props;
 
+    const incognito = type === 'home' && settings.incognito;
     const { interpolate } = this;
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
@@ -160,11 +161,11 @@ class AccountSummary extends React.Component {
           },
         ]}>
           <FormattedNumber
-            style={[styles.theme[`${type}Balance`], settings.incognito ? styles.invisibleTitle : null]}
+            style={[styles.theme[`${type}Balance`], incognito ? styles.invisibleTitle : null]}
             type={H2}>{fromRawLsk(account.balance)}</FormattedNumber>
           <Image source={blurs[`${settings.theme}${balanceSize}`]}
             style={[styles.blur, styles[`blur${balanceSize}`],
-            settings.incognito ? styles.visibleBlur : null]} />
+            incognito ? styles.visibleBlur : null]} />
         </Anim>
         <Anim style={[styles.fiat, { opacity },
           {
@@ -173,7 +174,7 @@ class AccountSummary extends React.Component {
           },
         ]}>
         {
-          !settings.incognito && type === 'home' ?
+          !incognito && type === 'home' ?
             <P style={[styles.fiatValue, styles.theme.fiatValue]}>
               {`~ ${faitBalance} ${settings.currency}`}
             </P> : null

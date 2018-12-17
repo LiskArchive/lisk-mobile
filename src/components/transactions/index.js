@@ -24,7 +24,7 @@ import { IconButton } from '../toolBox/button';
  *
  */
 @connect(state => ({
-  incognito: state.settings.incognito,
+  incognitoMode: state.settings.incognito,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
@@ -62,17 +62,18 @@ class Transactions extends React.Component {
   toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
     this.props.settingsUpdated({
-      incognito: !this.props.incognito,
+      incognito: !this.props.incognitoMode,
     });
   }
 
   render() {
     const {
       styles, transactions, navigate,
-      account, footer, incognito, theme,
+      account, footer, theme, incognitoMode,
       followedAccounts, refreshing, type,
     } = this.props;
 
+    const incognito = type === 'home' && incognitoMode;
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;

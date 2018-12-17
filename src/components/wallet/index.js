@@ -94,6 +94,7 @@ class Wallet extends React.Component {
       item.address === this.state.account.address);
     this.props.navigation.setParams({
       title: {
+        type: 'wallet',
         placeHolder: storedAccount.length === 1 ? storedAccount[0].label : '',
         balance: this.state.account.balance,
         address: this.state.account.address,
