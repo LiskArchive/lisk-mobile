@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Animated, ScrollView, Keyboard } from 'react-native';
-import { B } from '../toolBox/typography';
+import { P } from '../toolBox/typography';
 import reg from '../../constants/regex';
 import Input from '../toolBox/input';
 import { IconButton } from '../toolBox/button';
@@ -144,9 +144,9 @@ class Bookmark extends React.Component {
         <ScrollView style={styles.container}>
           <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
             <View style={styles.headings}>
-              <B style={[styles.subtitle, styles.theme.subtitle]}>
+              <P style={[styles.subtitle, styles.theme.subtitle]}>
               Simply add, search, delete and edit addresses that are important to you.
-              </B>
+              </P>
             </View>
           </Animated.View>
           <View style={styles.form}>
