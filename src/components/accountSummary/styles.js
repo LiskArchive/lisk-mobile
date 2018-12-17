@@ -124,7 +124,6 @@ export default () => ({
     },
     sendButtonTitle: {
       paddingLeft: 10,
-      color: colors.light.gray1,
     },
   },
   [themes.light]: {
@@ -154,6 +153,9 @@ export default () => ({
     fiatValue: {
       color: colors.light.gray5,
     },
+    sendButtonTitle: {
+      color: colors.light.gray1,
+    },
   },
   [themes.dark]: {
     homeContainer: {
@@ -179,6 +181,9 @@ export default () => ({
     },
     fiatValue: {
       color: colors.dark.gray2,
+    },
+    sendButtonTitle: {
+      color: colors.dark.gray1,
     },
   },
 });
