@@ -69,9 +69,14 @@ class Transactions extends React.Component {
   render() {
     const {
       styles, transactions, navigate,
-      account, footer, incognito, theme,
+      account, footer, theme,
       followedAccounts, refreshing, type,
     } = this.props;
+
+    let { incognito } = this.props;
+    if (type === 'wallet') {
+      incognito = false;
+    }
 
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
