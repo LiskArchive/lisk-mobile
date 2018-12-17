@@ -29,7 +29,7 @@ export default () => ({
       paddingBottom: 25,
     },
     title: {
-      marginBottom: 15,
+      marginBottom: 8,
     },
     nativeList: {
       marginTop: 0,
