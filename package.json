@@ -48,7 +48,6 @@
     "@liskhq/lisk-client": "2.0.0",
     "lottie-react-native": "=2.5.9",
     "moment": "^2.22.0",
-    "numeral": "^2.0.6",
     "path-browserify": "0.0.0",
     "process": "^0.11.10",
     "prop-types": "^15.6.0",
