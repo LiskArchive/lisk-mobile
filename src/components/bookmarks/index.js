@@ -5,6 +5,7 @@ import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
 import { DraggableItem, Item } from './item';
+import reg from '../../constants/regex';
 import Empty from './empty';
 import withTheme from '../withTheme';
 import { Small } from '../toolBox/typography';
@@ -23,10 +24,16 @@ class Bookmarks extends React.Component {
 
     const filterList = list.filter((item) => {
       if (query.length === 0) return true;
-      return (item.address.toLowerCase().indexOf(query) >= 0 ||
-        item.label.toLowerCase().indexOf(query) >= 0);
+      return (item.address.indexOf(query) >= 0 ||
+        item.label.toLowerCase().indexOf(query.toLowerCase()) >= 0);
     });
     const Element = draggable ? DraggableItem : Item;
+    const titles = {
+      heading: filterList.length ? 'BOOKMARKS' : 'NO MATCHING BOOKMARK',
+      message: !filterList.length && reg.address.test(query) ?
+        'You can add this address to your bookmarks in the next step.' :
+        'The value entered is not in your bookmarks, nor it is a valid address.',
+    };
 
     return (<View style={styles.container}>
       {
@@ -36,16 +43,14 @@ class Bookmarks extends React.Component {
             {
               !draggable ?
               <View style={styles.innerContainer}>
-                <Small style={[styles.title, styles.theme.title]}>BOOKMARKS</Small>
+                <Small style={[styles.title, styles.theme.title]}>{titles.heading}</Small>
               </View> :
               null
             }
           {
             filterList.length === 0 ?
               <View style={styles.innerContainer}>
-                <Small style={[styles.noResult, styles.theme.noResult]}>
-                  This address is not part of your bookmarks, you can add it in the next step.
-                </Small>
+                <Small style={[styles.noResult, styles.theme.noResult]}>{titles.message}</Small>
               </View> :
               filterList.map(item =>
                 <Element setRef={setRef} navigate={navigate} key={item.address} data={item} />)
