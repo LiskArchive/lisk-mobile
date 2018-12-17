@@ -112,11 +112,7 @@ class AccountSummary extends React.Component {
       priceTicker, type, theme, navigation,
     } = this.props;
 
-    let { incognito } = settings;
-    if (type === 'wallet') {
-      incognito = false;
-    }
-
+    const incognito = type === 'home' && settings.incognito;
     const { interpolate } = this;
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
