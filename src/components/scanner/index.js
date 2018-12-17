@@ -55,9 +55,7 @@ class Scanner extends React.Component {
 
   toggleGallery = () => {
     const { photo } = this.state;
-
     this.props.navigation.setParams({
-      tabBar: true,
       showButtonLeft: true,
       action: !photo.visible ? this.toggleGallery : this.toggleCamera,
       onBackPress: this.toggleGallery,
@@ -74,7 +72,7 @@ class Scanner extends React.Component {
     this.setState({ photo, camera });
 
     this.props.navigation.setParams({
-      tabBar: photo.visible,
+      tabBar: !photo.visible,
       showButtonLeft: photo.visible,
     });
 
@@ -119,8 +117,9 @@ class Scanner extends React.Component {
                   <CameraOverlay
                     containerStyles={cameraOverlay}
                     toggleGallery={this.toggleGallery}
-                    photoPermission={photo.permission} /> :
-                  <ClosureOverlay close={closeScanner} />
+                    photoPermission={photo.permission}
+                  /> :
+                  <ClosureOverlay close={closeScanner || this.toggleCamera} />
               }
             </RNCamera>
           : null
@@ -129,7 +128,8 @@ class Scanner extends React.Component {
           containerStyles={cameraRoll}
           onSelect={this.readFromPhotoGallery}
           permission={photo.permission}
-          visible={photo.visible} />
+          visible={photo.visible}
+        />
       </Fragment>
     );
   }

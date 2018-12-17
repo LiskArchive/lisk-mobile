@@ -7,17 +7,17 @@ import getStyles from './styles';
 
 const CameraOverlay = ({
   styles, close, containerStyles, theme,
-}) =>
-  (<View style={[styles.cameraOverlay, containerStyles]}>
+}) => (
+  <View style={[styles.cameraOverlay, containerStyles]}>
     <IconButton
       icon='cross'
       title='Close'
-      onPress={() => {
-        close();
-      }}
+      onPress={() => close()}
       style={styles.closeButton}
       titleStyle={styles.theme.closeButton}
-      color={colors[theme].white}/>
-  </View>);
+      color={colors[theme].white}
+    />
+  </View>
+);
 
 export default withTheme(CameraOverlay, getStyles());
