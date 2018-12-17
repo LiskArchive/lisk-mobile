@@ -31,8 +31,8 @@ class Bookmarks extends React.Component {
     const titles = {
       heading: filterList.length ? 'BOOKMARKS' : 'NO MATCHING BOOKMARK',
       message: !filterList.length && reg.address.test(query) ?
-        'You can add this address to your bookmarks in the next step.' :
-        'The value entered is not in your bookmarks, nor it is a valid address.',
+        'You can add this address to your bookmarks in bookmarks page or through send process.' :
+        'Couldn\'t recognize the address or label. Please make sure it\'s correct.',
     };
 
     return (<View style={styles.container}>
