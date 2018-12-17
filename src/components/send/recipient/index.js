@@ -92,7 +92,7 @@ class Recipient extends React.Component {
   forward = (data) => {
     const accountHasAlreadyFollowed = (address) => {
       const { followed } = this.props.accounts;
-      return followed.filter(item => item.address === address).length > 0;
+      return followed.some(item => item.address === address);
     };
 
     const {
@@ -144,11 +144,16 @@ class Recipient extends React.Component {
 
   render() {
     const {
-      navigation, theme, styles,
+      navigation, theme, styles, accounts,
     } = this.props;
     const {
       address, avatarPreview,
     } = this.state;
+
+    const titles = {
+      heading: accounts.followed.length ? 'Enter an address or search an existing one.' : 'Enter a valid address.',
+      inputLabel: accounts.followed.length ? 'Address or label' : 'Address',
+    };
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -170,9 +175,7 @@ class Recipient extends React.Component {
             styles={{ container: styles.container, innerContainer: styles.innerContainer }}
           >
           <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-            <P style={[styles.subtitle, styles.theme.subtitle]}>
-              Enter an address or search an existing one.
-            </P>
+            <P style={[styles.subtitle, styles.theme.subtitle]}>{titles.heading}</P>
           </Animated.View>
           <View style={styles.form}>
             <View style={styles.addressContainer}>
@@ -200,7 +203,7 @@ class Recipient extends React.Component {
                   />
               }
               <Input
-                label='Address or label'
+                label={titles.inputLabel}
                 autoCorrect={false}
                 reference={(input) => { this.input = input; }}
                 innerStyles={{

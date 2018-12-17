@@ -26,22 +26,32 @@ class Amount extends React.Component {
     amount: {
       value: '',
       normalizedValue: '',
-      validity: -1,
+      validity: {
+        code: -1,
+        message: '',
+      },
     },
   };
 
   validator = (str) => {
     if (str === '' || parseFloat(str) === 0) {
-      return 1;
+      return { code: -1, message: '' };
     }
 
     const { accounts } = this.props;
+    let message = '';
 
-    return (
-      reg.amount.test(str) && accounts.active &&
-      accounts.active.balance > transactions.send.fee &&
-      parseFloat(str) <= fromRawLsk(accounts.active.balance - transactions.send.fee)
-    ) ? 0 : 1;
+    if (!reg.amount.test(str)) {
+      message = ('The amount value is invalid.');
+    } else if (accounts.active.balance < transactions.send.fee ||
+      parseFloat(str) > fromRawLsk(accounts.active.balance - transactions.send.fee)) {
+      message = 'Your balance is not sufficient.';
+    }
+
+    return ({
+      code: message ? 1 : 0,
+      message,
+    });
   };
 
   componentDidMount() {
@@ -81,7 +91,7 @@ class Amount extends React.Component {
     const { amount } = this.state;
     const validity = this.validator(amount.normalizedValue);
 
-    if (validity === 0) {
+    if (validity.code === 0) {
       this.props.nextStep(merge(this.props.sharedData, {
         amount: amount.normalizedValue,
       }));
@@ -159,7 +169,7 @@ class Amount extends React.Component {
               keyboardType="numeric"
               currency={currency}
               valueInCurrency={valueInCurrency}
-              error={validity === 1 ? 'Invalid amount value' : ''}
+              error={validity.message}
             />
            </View>
         </KeyboardAwareScrollView>
