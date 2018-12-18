@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Animated, ScrollView, Keyboard } from 'react-native';
 import { P } from '../toolBox/typography';
+import Icon from '../toolBox/icon';
 import reg from '../../constants/regex';
 import Input from '../toolBox/input';
 import { IconButton } from '../toolBox/button';
+import { colors } from '../../constants/styleGuide';
 import AddButton from './addButton';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -38,8 +40,8 @@ class Bookmark extends React.Component {
     avatarPreview: false,
   };
   animatedStyles = {
-    height: new Animated.Value(80),
-    paddingTop: new Animated.Value(24),
+    height: new Animated.Value(45),
+    paddingTop: new Animated.Value(20),
   }
 
   componentDidMount() {
@@ -78,14 +80,15 @@ class Bookmark extends React.Component {
   onKeyboardClose = () => {
     this.onKeyboardChanged(false);
   }
+
   closeCurrent() {
     if (this.current) this.current.snapTo({ index: 0 });
   }
 
-  onKeyboardChanged = (header) => {
+  onKeyboardChanged = (showHeader) => {
     const { height, paddingTop } = this.animatedStyles;
     this.closeCurrent();
-    if (header) {
+    if (showHeader) {
       Animated.parallel([
         Animated.timing(paddingTop, {
           toValue: 0,
@@ -101,19 +104,18 @@ class Bookmark extends React.Component {
     } else {
       Animated.parallel([
         Animated.timing(height, {
-          toValue: 80,
+          toValue: 45,
           duration: 400,
           delay: 0,
         }),
         Animated.timing(paddingTop, {
-          toValue: 24,
+          toValue: 20,
           duration: 400,
           delay: 0,
         }),
       ]).start();
     }
   }
-
 
   resetPrev(ref, next, address) {
     this.prev = ref;
@@ -134,7 +136,7 @@ class Bookmark extends React.Component {
   }
 
   render() {
-    const { styles, navigation } = this.props;
+    const { styles, navigation, theme } = this.props;
     const {
       address,
     } = this.state;
@@ -142,15 +144,20 @@ class Bookmark extends React.Component {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <ScrollView style={styles.container}>
-          <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-            <View style={styles.headings}>
+          <View style={styles.innerContainer}>
+            <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
               <P style={[styles.subtitle, styles.theme.subtitle]}>
-              Simply add, search, delete and edit addresses that are important to you.
+                Simply add or manage your bookmarks.
               </P>
-            </View>
-          </Animated.View>
-          <View style={styles.form}>
+            </Animated.View>
+            <View style={styles.form}>
             <View style={styles.addressContainer}>
+              <Icon
+                style={styles.searchIcon}
+                name='search'
+                size={18}
+                color={colors[theme].gray2}
+              />
               <Input
                 label='Search'
                 autoCorrect={false}
@@ -174,6 +181,7 @@ class Bookmark extends React.Component {
             <Bookmarks
               navigate={navigation.navigate}
               draggable={true} setRef={this.setRef} query={this.state.address.value} />
+          </View>
           </View>
         </ScrollView>
       </View>

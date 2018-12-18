@@ -4,6 +4,18 @@ import { themes, colors, boxes } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
+    wrapper: {
+      flex: 1,
+    },
+    innerContainer: {
+      flexDirection: 'column',
+      paddingBottom: 24,
+    },
+    titleContainer: {
+      overflow: 'hidden',
+      paddingRight: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+    },
     headerButton: {
       transform: [
         { rotate: '45deg' },
@@ -12,16 +24,8 @@ export default () => ({
       height: 40,
       marginTop: (Platform.OS === 'ios') ? 6 : 12,
     },
-    wrapper: {
-      flex: 1,
-    },
     subtitle: {
-      marginTop: 0,
-      height: 60,
       maxWidth: '100%',
-    },
-    titleContainer: {
-      overflow: 'hidden',
     },
     form: {
       paddingBottom: 10,
@@ -30,10 +34,23 @@ export default () => ({
       marginTop: 0,
       flexWrap: 'wrap',
       flex: 1,
+      ...Platform.select({
+        android: {
+          height: 48,
+          paddingLeft: 25,
+        },
+        ios: {
+          height: 48,
+          paddingBottom: 10,
+          paddingLeft: 25,
+        },
+      }),
     },
-    headings: {
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
+    searchIcon: {
+      position: 'absolute',
+      zIndex: 0,
+      left: 20,
+      top: 49,
     },
     addressContainer: {
       width: '100%',

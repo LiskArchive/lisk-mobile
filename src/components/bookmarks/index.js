@@ -28,29 +28,19 @@ class Bookmarks extends React.Component {
         item.label.toLowerCase().indexOf(query.toLowerCase()) >= 0);
     });
     const Element = draggable ? DraggableItem : Item;
-    const titles = {
-      heading: filterList.length ? 'BOOKMARKS' : 'NO MATCHING BOOKMARK',
-      message: !filterList.length && reg.address.test(query) ?
-        'You can add this address to your bookmarks in bookmarks page or through send process.' :
-        'Couldn\'t recognize the address or label. Please make sure it\'s correct.',
-    };
+    const description = !filterList.length && reg.address.test(query) ?
+      'You can add this address to your bookmarks in bookmarks page or through send process.' :
+      'Couldn\'t recognize the address or label. Please make sure it\'s correct.';
 
     return (<View style={styles.container}>
       {
         (list && list.length === 0 && query.length >= 0) ?
         <Empty /> :
         <Fragment>
-            {
-              !draggable ?
-              <View style={styles.innerContainer}>
-                <Small style={[styles.title, styles.theme.title]}>{titles.heading}</Small>
-              </View> :
-              null
-            }
           {
             filterList.length === 0 ?
               <View style={styles.innerContainer}>
-                <Small style={[styles.noResult, styles.theme.noResult]}>{titles.message}</Small>
+                <Small style={[styles.noResult, styles.theme.noResult]}>{description}</Small>
               </View> :
               filterList.map(item =>
                 <Element setRef={setRef} navigate={navigate} key={item.address} data={item} />)

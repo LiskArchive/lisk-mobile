@@ -11,6 +11,12 @@ export default () => ({
       overflow: 'hidden',
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
+      paddingTop: 0,
+    },
+    subtitle: {
+      maxWidth: '100%',
+      height: 40,
+      marginTop: 0,
     },
     form: {
       paddingBottom: boxes.boxPadding,
