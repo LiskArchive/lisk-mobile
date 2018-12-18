@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, StatusBar, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { withNavigationFocus } from 'react-navigation';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
 import AccountSummary from '../accountSummary';
@@ -11,6 +12,7 @@ import { viewportHeight } from '../../utilities/device';
 import InfiniteScrollView from '../infiniteScrollView';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import { themes } from '../../constants/styleGuide';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -169,6 +171,8 @@ class Home extends React.Component {
       navigation,
       updateTransactions,
       priceTicker,
+      theme,
+      isFocused,
     } = this.props;
 
     let content = null;
@@ -206,9 +210,14 @@ class Home extends React.Component {
         />
       );
     }
-
+    const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
     return (
       <View style={[styles.container, styles.theme.container]}>
+        {
+          Platform.OS !== 'ios' ?
+            <StatusBar barStyle='light-content' /> :
+            <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
+        }
         {
           account && account.address ? (
             <AccountSummary
@@ -227,4 +236,4 @@ class Home extends React.Component {
   }
 }
 
-export default withTheme(Home, getStyles());
+export default withNavigationFocus(withTheme(Home, getStyles()));
