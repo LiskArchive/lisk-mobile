@@ -25,6 +25,10 @@ export default () => ({
       fontFamily: fonts.family.context,
       fontWeight: 'bold',
     },
+    referenceValue: {
+      flexWrap: 'wrap',
+      paddingRight: 30,
+    },
     label: {
       fontSize: 13,
       marginBottom: 7,
