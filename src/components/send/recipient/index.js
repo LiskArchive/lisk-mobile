@@ -26,7 +26,7 @@ class Recipient extends React.Component {
     header: true,
     address: {
       value: '',
-      validity: -1,
+      validity: 0,
     },
     avatarPreview: false,
   };
@@ -155,6 +155,13 @@ class Recipient extends React.Component {
       inputLabel: accounts.followed.length ? 'Address or label' : 'Address',
     };
 
+    let errorMessage = '';
+    if (address.validity === 1) {
+      errorMessage = 'Invalid address.';
+    } else if (address.validity === -1) {
+      errorMessage = 'Please enter an address.';
+    }
+
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
@@ -216,10 +223,7 @@ class Recipient extends React.Component {
                 }}
                 onChange={this.setAddress}
                 value={address.value}
-                error={
-                  address.validity === 1 ?
-                    'Invalid address' : ''
-                }
+                error={errorMessage}
                 onFocus={() => { this.activeInputRef = 0; }}
               />
             </View>
