@@ -114,7 +114,7 @@ class Overview extends React.Component {
       styles, accounts: { followed }, sharedData: { address, amount, reference },
     } = this.props;
 
-    const bookmark = followed.filter(item => item.address === address);
+    const bookmark = followed.find(item => item.address === address);
     const fee = actionType === 'initialize' ? 0 : 1e7;
 
     return (
@@ -133,15 +133,16 @@ class Overview extends React.Component {
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
             <Avatar address={address || ''} style={styles.avatar} size={50}/>
             {
-              bookmark.length === 1 ?
-                <H4 style={styles.theme.text}>{bookmark[0].label}</H4> : null
+              bookmark ? <H4 style={styles.theme.text}>{bookmark.label}</H4> : null
             }
             <P style={[styles.address, styles.text, styles.theme.text]}>{address}</P>
           </View>
           <View style={[styles.row, styles.theme.row]}>
-            <Icon name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
+            <Icon
+              name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
               style={styles.icon} size={20}
-              color={colors[this.props.theme].gray2} />
+              color={colors[this.props.theme].gray2}
+            />
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
                 {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK)'}
