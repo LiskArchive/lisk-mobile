@@ -147,7 +147,7 @@ class Bookmark extends React.Component {
           <View style={styles.innerContainer}>
             <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
               <P style={[styles.subtitle, styles.theme.subtitle]}>
-                Simply add or manage your bookmarks.
+                Simply manage your bookmarks.
               </P>
             </Animated.View>
             <View style={styles.form}>
