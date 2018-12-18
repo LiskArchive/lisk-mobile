@@ -190,7 +190,9 @@ class TransactionDetail extends React.Component {
               />
               <View style={styles.rowContent}>
                 <P style={[styles.label, styles.theme.label]}>Reference</P>
-                <B style={[styles.value, styles.theme.value]}>{tx.asset.data}</B>
+                <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
+                  {tx.asset.data}
+                </B>
               </View>
             </View> : null
         }
