@@ -11,7 +11,8 @@ const FormattedNumber = ({
   const bigNum = new BigNumber(val || children);
   const formatedNumber = bigNum.toFormat();
   const matched = formatedNumber.match(reg2);
-  const normalizedVal = trim && matched ? matched[0].replace(/\.$/, '') : formatedNumber;
+  const normalizedVal = trim && matched && matched[0] !== '0.' && matched[0] !== '-0.' ?
+    matched[0].replace(/\.$/, '') : formatedNumber;
   return <Element style={style}>{normalizedVal} LSK</Element>;
 };
 
