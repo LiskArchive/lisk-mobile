@@ -176,7 +176,7 @@ class AccountSummary extends React.Component {
         {
           !incognito && type === 'home' ?
             <P style={[styles.fiatValue, styles.theme.fiatValue]}>
-              {`~ ${faitBalance} ${settings.currency}`}
+              {`${faitBalance} ${settings.currency}`}
             </P> : null
         }
         {
