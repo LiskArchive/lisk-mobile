@@ -112,7 +112,7 @@ class Amount extends React.Component {
 
     let valueInCurrency = 0;
 
-    if (value && this.validator(normalizedValue) === 0 && priceTicker[currency]) {
+    if (value && this.validator(normalizedValue).code === 0 && priceTicker[currency]) {
       valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
