@@ -81,7 +81,7 @@ class Item extends React.Component {
         </B>
         {
           typeof this.props.tx.timestamp !== 'number' ?
-          <Small style={styles.date}>Pending confirmation</Small> :
+          <Small style={[styles.date, styles.theme.date]}>Pending confirmation</Small> :
           <FormattedDate type={Small} style={[styles.date, styles.theme.date]}>
             { tx.timestamp }
           </FormattedDate>

@@ -41,12 +41,11 @@ export default () => ({
       ...Platform.select({
         android: {
           height: 48,
-          // paddingTop: 10,
-          // paddingBottom: 15,
           paddingLeft: 40,
         },
         ios: {
           height: 48,
+          paddingBottom: 10,
           paddingLeft: 40,
         },
       }),

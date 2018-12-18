@@ -49,6 +49,7 @@ export default () => ({
     text: {
       flexWrap: 'wrap',
       flex: 1,
+      paddingRight: 30,
     },
     subtitle: {
       marginTop: 7,
