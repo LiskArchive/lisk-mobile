@@ -31,7 +31,7 @@ class Recipient extends React.Component {
     avatarPreview: false,
   };
   animatedStyles = {
-    height: new Animated.Value(40),
+    height: new Animated.Value(45),
     paddingTop: new Animated.Value(20),
   }
 
@@ -129,7 +129,7 @@ class Recipient extends React.Component {
     } else {
       Animated.parallel([
         Animated.timing(height, {
-          toValue: 40,
+          toValue: 45,
           duration: 400,
           delay: 0,
         }),
@@ -151,7 +151,7 @@ class Recipient extends React.Component {
     } = this.state;
 
     const titles = {
-      heading: accounts.followed.length ? 'Enter an address or search an existing one.' : 'Enter a valid address.',
+      heading: accounts.followed.length ? 'Enter an address or search in bookmarks.' : 'Enter an address to send tokens to.',
       inputLabel: accounts.followed.length ? 'Address or label' : 'Address',
     };
 
