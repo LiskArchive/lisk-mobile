@@ -27,7 +27,7 @@ const homeHeaderTitle = ({
   }
 
   const {
-    interpolate, address, balance, placeHolder, type, incognito,
+    interpolate, address, balance = 0, placeHolder, type, incognito,
   } = children;
 
   let balanceSize = 'Small';
