@@ -27,7 +27,7 @@ class Amount extends React.Component {
       value: '',
       normalizedValue: '',
       validity: {
-        code: -1,
+        code: 0,
         message: '',
       },
     },
@@ -35,14 +35,17 @@ class Amount extends React.Component {
 
   validator = (str) => {
     if (str === '' || parseFloat(str) === 0) {
-      return { code: -1, message: '' };
+      return {
+        code: -1,
+        message: 'Please enter an amount.',
+      };
     }
 
     const { accounts } = this.props;
     let message = '';
 
     if (!reg.amount.test(str)) {
-      message = ('The amount value is invalid.');
+      message = 'The amount value is invalid.';
     } else if (accounts.active.balance < transactions.send.fee ||
       parseFloat(str) > fromRawLsk(accounts.active.balance - transactions.send.fee)) {
       message = 'Your balance is not sufficient.';
