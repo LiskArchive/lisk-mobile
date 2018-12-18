@@ -98,7 +98,7 @@ class AddToBookmark extends React.Component {
               </View>
               <Input
                 reference={(el) => { this.input = el; }}
-                label='Label'
+                label='Label (Optional)'
                 autoFocus={!isAndroid}
                 autoCorrect={false}
                 innerStyles={{ input: styles.input }}
