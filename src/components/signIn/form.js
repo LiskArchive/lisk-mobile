@@ -134,6 +134,7 @@ class Form extends React.Component {
             cameraRoll: styles.cameraRoll,
             cameraOverlay: styles.cameraOverlay,
           }}
+          fullScreen={true}
           navigation={this.props.navigation}
           readFromCameraRoll={false}
           closeScanner={this.toggleCamera}

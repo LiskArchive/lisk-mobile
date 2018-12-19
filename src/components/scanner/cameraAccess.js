@@ -6,14 +6,32 @@ import cameraPermissionIconLight from '../../assets/images/camera3xLight.png';
 import cameraPermissionIconDark from '../../assets/images/camera3xDark.png';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { themes } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
+import { IconButton } from '../toolBox/button';
 
-const CameraAccess = ({ theme, styles }) => (
+const CameraAccess = ({
+  theme, styles, close, fullScreen,
+}) => (
   <TouchableHighlight
     onPress={() => { OpenAppSettings.open(); }}
     underlayColor='transparent'
-    style={[styles.permissionRequestWrapper, styles.theme.permissionRequestWrapper]}>
+    style={[
+      styles.permissionRequestWrapper,
+      styles.theme.permissionRequestWrapper,
+      fullScreen ? styles.fillScreen : null,
+    ]}>
     <Fragment>
+      {
+        fullScreen ?
+          <IconButton
+            icon='back'
+            title=''
+            onPress={close}
+            style={styles.cameraAccessCloseButton}
+            titleStyle={styles.theme.closeButton}
+            color={colors[theme].gray2}
+          /> : null
+      }
       {
         theme === themes.light ?
           <Image
