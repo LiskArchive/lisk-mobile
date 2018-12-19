@@ -1,9 +1,10 @@
+import { StyleSheet } from 'react-native';
 import { themes, colors } from '../../../constants/styleGuide';
 
 export default () => ({
   common: {
     style: {
-      borderTopWidth: 1,
+      borderTopWidth: StyleSheet.hairlineWidth,
       zIndex: 99,
     },
   },
@@ -25,7 +26,7 @@ export default () => ({
   [themes.dark]: {
     style: {
       backgroundColor: colors.dark.navigationBg,
-      borderTopColor: colors.dark.navigationBg,
+      borderTopColor: colors.dark.gray5,
     },
     inactiveTint: {
       color: colors.dark.gray2,
