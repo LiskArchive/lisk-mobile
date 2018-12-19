@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
 import { themes, colors } from '../../constants/styleGuide';
-import { viewportHeight, headerHeight, deviceType } from '../../utilities/device';
+import { deviceHeight, deviceType } from '../../utilities/device';
 
 let buttonMarginTop = 0;
 if (deviceType() === 'iOS') buttonMarginTop = 18;
@@ -52,7 +52,7 @@ export default () => ({
     },
     permissionRequestWrapper: {
       position: 'absolute',
-      height: viewportHeight() + headerHeight(),
+      height: deviceHeight(),
       width: '100%',
       top: 0,
       left: 0,
@@ -80,6 +80,12 @@ export default () => ({
       justifyContent: 'flex-start',
       alignItems: 'center',
       paddingLeft: 0,
+    },
+    cameraAccessCloseButton: {
+      position: 'absolute',
+      zIndex: 2,
+      left: 0,
+      top: deviceType() === 'iOSx' ? 40 : 30,
     },
   },
   [themes.light]: {
