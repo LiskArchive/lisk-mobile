@@ -1,12 +1,16 @@
-import { Dimensions } from 'react-native';
 import { themes, colors } from '../../constants/styleGuide';
-import { deviceHeight, viewportHeight, headerHeight, deviceType } from '../../utilities/device';
+import {
+  deviceHeight, deviceWidth, viewportHeight, headerHeight, deviceType,
+} from '../../utilities/device';
 
 let buttonMarginTop = 0;
 if (deviceType() === 'iOS') buttonMarginTop = 18;
 if (deviceType() === 'iOSx') buttonMarginTop = 30;
 
-const { height, width } = Dimensions.get('window');
+const height = deviceHeight();
+const width = deviceWidth();
+const headFullAndroid = viewportHeight() + headerHeight() + 20;
+const headerFullIOS = viewportHeight() + headerHeight();
 export default () => ({
   common: {
     preview: {
@@ -14,7 +18,7 @@ export default () => ({
       top: 0,
       left: 0,
       flex: 1,
-      height,
+      height: deviceType() === 'android' ? height + 20 : height,
       width,
     },
     cameraPreview: {
@@ -52,7 +56,7 @@ export default () => ({
     },
     permissionRequestWrapper: {
       position: 'absolute',
-      height: viewportHeight() + headerHeight(),
+      height: deviceType() === 'android' ? headFullAndroid : headerFullIOS,
       width: '100%',
       top: 0,
       left: 0,
@@ -63,7 +67,7 @@ export default () => ({
       alignItems: 'center',
     },
     fillScreen: {
-      height: deviceHeight(),
+      height,
     },
     permissionIcon: {
       width: 80,
