@@ -1,3 +1,4 @@
+import { Platform, DeviceInfo } from 'react-native';
 import { themes, colors, fonts, boxes } from '../../constants/styleGuide';
 
 export default ({ logoSize }) => ({
@@ -7,6 +8,7 @@ export default ({ logoSize }) => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: boxes.boxPadding,
+      paddingBottom: boxes.boxPadding + ((Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 16 : 0),
     },
     footer: {
       width: '100%',
