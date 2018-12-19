@@ -15,7 +15,11 @@ const CameraAccess = ({
   <TouchableHighlight
     onPress={() => { OpenAppSettings.open(); }}
     underlayColor='transparent'
-    style={[styles.permissionRequestWrapper, styles.theme.permissionRequestWrapper]}>
+    style={[
+      styles.permissionRequestWrapper,
+      styles.theme.permissionRequestWrapper,
+      fullScreen ? styles.fillScreen : null,
+    ]}>
     <Fragment>
       {
         fullScreen ?

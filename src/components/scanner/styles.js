@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
 import { themes, colors } from '../../constants/styleGuide';
-import { deviceHeight, deviceType } from '../../utilities/device';
+import { deviceHeight, viewportHeight, headerHeight, deviceType } from '../../utilities/device';
 
 let buttonMarginTop = 0;
 if (deviceType() === 'iOS') buttonMarginTop = 18;
@@ -52,7 +52,7 @@ export default () => ({
     },
     permissionRequestWrapper: {
       position: 'absolute',
-      height: deviceHeight(),
+      height: viewportHeight() + headerHeight(),
       width: '100%',
       top: 0,
       left: 0,
@@ -61,6 +61,9 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    fillScreen: {
+      height: deviceHeight(),
     },
     permissionIcon: {
       width: 80,
