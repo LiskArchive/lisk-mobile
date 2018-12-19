@@ -28,6 +28,13 @@ import TabBarIcon from './tabBarIcon';
 import TabBarComponent from './tabBarComponent';
 import { colors } from '../../constants/styleGuide';
 
+const headerStyle = {
+  backgroundColor: 'transparent',
+  overflow: 'hidden',
+  elevation: 1,
+  borderBottomColor: colors.dark.gray5,
+};
+
 // eslint-disable-next-line new-cap
 const Tabs = TabNavigator({
   Home: {
@@ -55,6 +62,7 @@ const Tabs = TabNavigator({
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
+      headerStyle,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
@@ -64,12 +72,8 @@ const Tabs = TabNavigator({
       headerTitle: HeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
+      headerStyle,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='send' tintColor={tintColor} />, //eslint-disable-line
-      headerStyle: {
-        backgroundColor: 'transparent',
-        overflow: 'hidden',
-        elevation: 1,
-      },
     },
   },
   Bookmarks: {
@@ -79,6 +83,7 @@ const Tabs = TabNavigator({
       tabBarLabel: 'Bookmarks',
       headerTitle: HeaderTitle,
       headerBackground: <HeaderBackground />,
+      headerStyle,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='bookmark' tintColor={tintColor} />, //eslint-disable-line
     }),
   },
@@ -90,12 +95,8 @@ const Tabs = TabNavigator({
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
+      headerStyle,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='settings' tintColor={tintColor} />, //eslint-disable-line
-      headerStyle: {
-        backgroundColor: 'transparent',
-        overflow: 'hidden',
-        elevation: 1,
-      },
     },
   },
 }, {
@@ -164,6 +165,7 @@ const MainStack = StackNavigator(
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
+        headerStyle,
       },
     },
     Terms: {
@@ -174,6 +176,7 @@ const MainStack = StackNavigator(
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
+        headerStyle,
       },
     },
     CurrencySelection: {
@@ -184,6 +187,7 @@ const MainStack = StackNavigator(
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
+        headerStyle,
       },
     },
     EnableBioAuth: {
@@ -193,6 +197,7 @@ const MainStack = StackNavigator(
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
+        headerStyle,
       },
     },
     DisableBioAuth: {
@@ -202,6 +207,7 @@ const MainStack = StackNavigator(
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
+        headerStyle,
       },
     },
     PassphraseBackup: {
@@ -212,6 +218,7 @@ const MainStack = StackNavigator(
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
+        headerStyle,
       },
     },
     Intro: {

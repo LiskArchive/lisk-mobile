@@ -25,7 +25,7 @@ export default () => ({
   [themes.dark]: {
     style: {
       backgroundColor: colors.dark.navigationBg,
-      borderTopColor: colors.dark.navigationBg,
+      borderTopColor: colors.dark.gray5,
     },
     inactiveTint: {
       color: colors.dark.gray2,
