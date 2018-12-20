@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, Platform, ActivityIndicator } from 'react-native';
 import connect from 'redux-connect-decorator';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
@@ -23,7 +24,7 @@ import { IconButton } from '../toolBox/button';
  *
  */
 @connect(state => ({
-  incognito: state.settings.incognito,
+  incognitoMode: state.settings.incognito,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
@@ -59,18 +60,24 @@ class Transactions extends React.Component {
   }
 
   toggleIncognito = () => {
+    ReactNativeHapticFeedback.trigger('selection');
     this.props.settingsUpdated({
-      incognito: !this.props.incognito,
+      incognito: !this.props.incognitoMode,
     });
   }
 
   render() {
     const {
-      styles, transactions, navigate, account, footer, incognito, theme,
+      styles, transactions, navigate,
+      account, footer, theme, incognitoMode,
+      followedAccounts, refreshing, type,
     } = this.props;
+
+    const incognito = type === 'home' && incognitoMode;
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
+    const height = type === 'home' ? 170 : 205;
 
     return (<Anim style={[styles.container, { opacity, top }]}>
       {
@@ -78,6 +85,9 @@ class Transactions extends React.Component {
           (transactions.confirmed.length === 0 && transactions.pending.length === 0)) ?
           <Fragment></Fragment> :
           <Fragment>
+            <View style={[styles.placeholder, { height }]}>
+              {(Platform.OS === 'ios' && refreshing) ? <ActivityIndicator size="large" /> : null}
+            </View>
             <View style={styles.innerContainer}>
               <H3 style={[styles.title, styles.theme.title]}>Activity</H3>
               {incognito ?
@@ -90,7 +100,7 @@ class Transactions extends React.Component {
                 /> : null
               }
             </View>
-            {!account.initialized && balance >= 0.2 ?
+            {type === 'home' && !account.initialized && balance >= 0.2 ?
               <View style={[styles.initContainer, styles.theme.initContainer]}>
                 <Icon name='warning' color={colors[theme].red} size={18} />
                 <Small style={[styles.initText, styles.theme.initText]}>
@@ -104,8 +114,10 @@ class Transactions extends React.Component {
               incognito={incognito}
               navigate={navigate}
               account={account ? account.address : ''}
+              followedAccounts={followedAccounts}
               pending={transactions.pending}
-              transactions={transactions.confirmed} />
+              transactions={transactions.confirmed}
+            />
             {
               footer ? <Footer /> : null
             }

@@ -9,15 +9,15 @@ const CameraRoll = ({
 }) => {
   if (permission !== 'denied' && visible) {
     return (
-      <View style={[styles.preview,
-        styles.photoPreview,
-        containerStyles]}>
+      <View style={[styles.preview, styles.photoPreview, containerStyles]}>
         <CameraRollPicker
           selectSingleItem={true}
-          callback={onSelect} />
+          callback={onSelect}
+        />
       </View>
     );
   }
+
   return null;
 };
 

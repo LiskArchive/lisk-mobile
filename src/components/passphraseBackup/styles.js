@@ -1,5 +1,5 @@
 import { Platform, DeviceInfo } from 'react-native';
-import { themes, colors } from '../../constants/styleGuide';
+import { themes, colors, boxes } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -7,26 +7,17 @@ export default () => ({
       flex: 1,
     },
     container: {
-      padding: 20,
+      padding: boxes.boxPadding,
       paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 30 : 20,
     },
-    titleContainer: {
-    },
-    header: {
-      marginTop: 8,
-    },
     subHeader: {
-      marginTop: 8,
-      marginBottom: 25,
+      marginBottom: boxes.boxPadding,
     },
   },
 
   [themes.light]: {
     wrapper: {
       backgroundColor: colors.light.white,
-    },
-    header: {
-      color: colors.light.black,
     },
     subHeader: {
       color: colors.light.gray2,
@@ -36,9 +27,6 @@ export default () => ({
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    header: {
-      color: colors.dark.white,
     },
     subHeader: {
       color: colors.dark.gray1,

@@ -6,7 +6,7 @@ export default () => ({
     container: {
       paddingRight: 20,
       paddingLeft: 20,
-      paddingTop: 20,
+      paddingTop: 35,
     },
     itemContainer: {
       width: '100%',
@@ -22,8 +22,14 @@ export default () => ({
       flexDirection: 'row',
       justifyContent: 'flex-start',
     },
+    placeholder: {
+      height: 170,
+      width: '100%',
+      justifyContent: 'flex-end',
+      paddingBottom: 25,
+    },
     title: {
-      marginBottom: 15,
+      marginBottom: 8,
     },
     nativeList: {
       marginTop: 0,
@@ -55,19 +61,17 @@ export default () => ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      marginTop: 170,
     },
     emptyState: {
-      width: '100%',
-      display: 'flex',
-      flex: 1,
+      paddingTop: 35,
       alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: viewportHeight() / 7.5,
+      justifyContent: 'space-between',
     },
     noActivity: {
       width: '100%',
       alignItems: 'center',
-      marginBottom: 10,
+      marginTop: (viewportHeight() / 6) - 35,
     },
     empty: {
       width: 222,

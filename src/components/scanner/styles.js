@@ -1,12 +1,16 @@
-import { Dimensions } from 'react-native';
 import { themes, colors } from '../../constants/styleGuide';
-import { viewportHeight, headerHeight, deviceType } from '../../utilities/device';
+import {
+  deviceHeight, deviceWidth, viewportHeight, headerHeight, deviceType,
+} from '../../utilities/device';
 
 let buttonMarginTop = 0;
 if (deviceType() === 'iOS') buttonMarginTop = 18;
 if (deviceType() === 'iOSx') buttonMarginTop = 30;
 
-const { height, width } = Dimensions.get('window');
+const height = deviceHeight();
+const width = deviceWidth();
+const headFullAndroid = viewportHeight() + headerHeight() + 20;
+const headerFullIOS = viewportHeight() + headerHeight();
 export default () => ({
   common: {
     preview: {
@@ -14,7 +18,7 @@ export default () => ({
       top: 0,
       left: 0,
       flex: 1,
-      height,
+      height: deviceType() === 'android' ? height + 20 : height,
       width,
     },
     cameraPreview: {
@@ -52,7 +56,7 @@ export default () => ({
     },
     permissionRequestWrapper: {
       position: 'absolute',
-      height: viewportHeight() + headerHeight(),
+      height: deviceType() === 'android' ? headFullAndroid : headerFullIOS,
       width: '100%',
       top: 0,
       left: 0,
@@ -61,6 +65,9 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    fillScreen: {
+      height,
     },
     permissionIcon: {
       width: 80,
@@ -80,6 +87,12 @@ export default () => ({
       justifyContent: 'flex-start',
       alignItems: 'center',
       paddingLeft: 0,
+    },
+    cameraAccessCloseButton: {
+      position: 'absolute',
+      zIndex: 2,
+      left: 0,
+      top: deviceType() === 'iOSx' ? 40 : 30,
     },
   },
   [themes.light]: {

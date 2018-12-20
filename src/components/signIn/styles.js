@@ -33,7 +33,6 @@ const styles = {
     justifyContent: 'center',
     marginLeft: 20,
     paddingRight: 20,
-    opacity: 0,
     paddingBottom: 10,
   },
   connectionError: {
@@ -212,8 +211,6 @@ const styles = {
     width: 39,
     paddingLeft: 5,
     color: colors.light.blue,
-  },
-  scanner: {
   },
   cameraRoll: {
     borderTopColor: colors.light.white,

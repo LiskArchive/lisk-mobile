@@ -6,10 +6,10 @@ import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import FormattedNumber from '../../formattedNumber';
 import { toRawLsk, fromRawLsk, includeFee } from '../../../utilities/conversions';
-import { PrimaryButton } from '../../toolBox/button';
+import { SecondaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
-import { H1, H4, B, P, A, Small } from '../../toolBox/typography';
+import { H4, B, P, A, Small } from '../../toolBox/typography';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
@@ -36,8 +36,8 @@ const messages = {
 class Overview extends React.Component {
   state = {
     initialize: false,
-    amountValidity: true,
     errorMessage: null,
+    triggered: false,
   }
 
   validator = {
@@ -50,6 +50,9 @@ class Overview extends React.Component {
   };
 
   send = () => {
+    // disable the button to prevent further presses.
+    this.setState({ triggered: true });
+
     const {
       accounts, nextStep, transactionAdded,
       sharedData: {
@@ -68,11 +71,6 @@ class Overview extends React.Component {
     });
   }
 
-  back = () => {
-    const to = this.props.accounts.active.secondPublicKey ? -1 : -2;
-    return this.props.prevStep(to);
-  }
-
   openAcademy = () => {
     Linking.openURL('https://help.lisk.io/account-security/should-i-initialize-my-lisk-account')
       // eslint-disable-next-line no-console
@@ -80,29 +78,32 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    let { back } = this;
+    let nextNavigationParams = {
+      title: messages.send.title,
+      action: () => this.props.prevStep(),
+      showButtonLeft: true,
+    };
+
     if (this.props.navigation.state.params.initialize) {
       this.setState({
         initialize: true,
       });
 
-      back = this.props.navigation.goBack;
+      nextNavigationParams = {
+        title: messages.initialize.title,
+        action: this.props.navigation.back,
+        showButtonLeft: false,
+      };
     }
 
     this.props.navigation.setParams({
-      showButtonLeft: !this.props.navigation.state.params.initialize,
-      action: back,
+      ...nextNavigationParams,
       initialize: false,
     });
   }
 
-  componentDidUpdate(nextProps) {
-    const { accounts } = this.props;
-    if (accounts.active && nextProps.accounts.active.balance !== accounts.active.balance) {
-      this.setState({
-        amountValidity: this.validator.amount(this.props.amount),
-      });
-    }
+  componentWillUnmount() {
+    this.props.navigation.setParams({ title: 'Send' });
   }
 
   render() {
@@ -113,7 +114,7 @@ class Overview extends React.Component {
       styles, accounts: { followed }, sharedData: { address, amount, reference },
     } = this.props;
 
-    const bookmark = followed.filter(item => item.address === address);
+    const bookmark = followed.find(item => item.address === address);
     const fee = actionType === 'initialize' ? 0 : 1e7;
 
     return (
@@ -122,10 +123,7 @@ class Overview extends React.Component {
         contentContainerStyle={styles.innerContainer}
       >
         <View>
-          <H1 style={[styles.headerTitle, styles.theme.headerTitle]}>
-            { messages[actionType].title }
-          </H1>
-          <P style={[styles.subtitle, styles.theme.subtitle]}>
+          <P style={styles.theme.subtitle}>
             { messages[actionType].subtitle }
             {
               actionType === 'initialize' ?
@@ -135,15 +133,16 @@ class Overview extends React.Component {
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
             <Avatar address={address || ''} style={styles.avatar} size={50}/>
             {
-              bookmark.length === 1 ?
-                <H4 style={styles.theme.text}>{bookmark[0].label}</H4> : null
+              bookmark ? <H4 style={styles.theme.text}>{bookmark.label}</H4> : null
             }
             <P style={[styles.address, styles.text, styles.theme.text]}>{address}</P>
           </View>
           <View style={[styles.row, styles.theme.row]}>
-            <Icon name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
+            <Icon
+              name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
               style={styles.icon} size={20}
-              color={colors[this.props.theme].gray2} />
+              color={colors[this.props.theme].gray2}
+            />
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
                 {actionType === 'initialize' ? 'Transaction Fee' : 'Amount (including 0.1 LSK)'}
@@ -171,11 +170,12 @@ class Overview extends React.Component {
             <Icon size={16} name='warning' style={styles.errorIcon} />
             <Small style={styles.error}>{this.state.errorMessage}</Small>
           </View>
-          <PrimaryButton
-            disabled={!this.state.amountValidity}
+          <SecondaryButton
+            disabled={this.state.triggered}
             style={styles.button}
             onClick={this.send}
-            title={ messages[actionType].button } />
+            title={messages[actionType].button}
+          />
         </View>
       </ScrollView>
     );

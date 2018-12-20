@@ -10,9 +10,10 @@ import Overview from './overview';
 import Confirm from './confirm';
 import Result from './result';
 import { IconButton } from '../toolBox/button';
-import { colors } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import Progress from './progress';
 
 @connect(state => ({
   accounts: state.accounts,
@@ -21,15 +22,17 @@ import getStyles from './styles';
 class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
+
     return {
       tabBarVisible: params.tabBar,
+      title: params.title || 'Send',
       headerLeft: params.showButtonLeft ? (
         <IconButton
-          icon='back'
           title=''
+          icon='back'
           onPress={params.action}
           style={params.styles && params.styles.back}
-          color={colors.light.white}
+          color={params.theme === themes.light ? colors.light.black : colors.dark.white}
         />
       ) : (
         <IconButton
@@ -41,14 +44,16 @@ class Send extends React.Component {
   };
 
   componentDidMount() {
-    const { styles, navigation } = this.props;
+    const { navigation } = this.props;
 
     this.subs = [
       navigation.addListener('didFocus', this.didFocus),
       navigation.addListener('willBlur', this.willBlur),
     ];
 
-    navigation.setParams({ showButtonLeft: false, styles });
+    navigation.setParams({
+      showButtonLeft: false,
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -71,11 +76,16 @@ class Send extends React.Component {
   }
 
   didFocus = () => {
-    const { navigation, accounts } = this.props;
-    const accountInitialization = navigation.getParam('initialize', false);
-
+    const {
+      styles,
+      theme,
+      navigation,
+      accounts,
+    } = this.props;
+    navigation.setParams({ styles, theme });
     BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
 
+    const accountInitialization = navigation.getParam('initialize', false);
     if (accountInitialization) {
       this.nav.move({
         to: 5,
@@ -95,7 +105,7 @@ class Send extends React.Component {
   }
 
   finalCallback = () => {
-    this.props.navigation.navigate({ routeName: 'OwnWallet' });
+    this.props.navigation.navigate({ routeName: 'Home' });
   }
 
   onBackButtonPressedAndroid = () => {
@@ -117,35 +127,71 @@ class Send extends React.Component {
       settings,
     } = this.props;
 
+    const steps = [
+      {
+        component: Recipient,
+        props: {
+          title: 'form',
+          accounts,
+        },
+      },
+      {
+        component: AddToBookmark,
+        props: {
+          title: 'addToBookmark',
+        },
+      },
+      {
+        component: Amount,
+        props: {
+          title: 'amount',
+          settings,
+          accounts,
+        },
+      },
+      {
+        component: Reference,
+        props: {
+          title: 'reference',
+        },
+      },
+      {
+        component: Overview,
+        props: {
+          title: 'Overview',
+        },
+      },
+      {
+        component: Result,
+        props: {
+          title: 'result',
+        },
+      },
+    ];
+
+    if ((accounts.active || {}).secondPublicKey) {
+      steps.splice(4, 0, {
+        component: Confirm,
+        props: {
+          title: 'confirm',
+        },
+      });
+    }
+
     return (
       <MultiStep
         ref={(el) => { this.nav = el; }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         finalCallback={this.finalCallback}
+        Progress={Progress}
       >
-        <Recipient
-          title='form'
-          navigation={navigation}
-          accounts={accounts}
-        />
-        <AddToBookmark
-          title='addToBookmark'
-          navigation={navigation}
-        />
-        <Amount
-          title='amount'
-          navigation={navigation}
-          settings={settings}
-          accounts={accounts}
-        />
-        <Reference
-          title="reference"
-          navigation={navigation}
-          account={accounts.active}
-        />
-        <Confirm title='confirm' navigation={navigation} />
-        <Overview title='overview' navigation={navigation} />
-        <Result title='result' navigation={navigation} />
+        {steps.map(step => (
+          <step.component
+            key={step.props.title}
+            navigation={navigation}
+            {...step.props}
+          />
+        ))}
       </MultiStep>
     );
   }

@@ -1,4 +1,7 @@
+import { Dimensions } from 'react-native';
 import { themes, colors } from '../../constants/styleGuide';
+
+const Screen = Dimensions.get('window');
 
 export default () => ({
   common: {
@@ -8,14 +11,23 @@ export default () => ({
       paddingTop: 20,
     },
     itemContainer: {
+      flex: 1,
       width: '100%',
       height: 90,
       paddingTop: 20,
       paddingBottom: 20,
+      borderBottomWidth: 1,
+    },
+    linkedItem: {
+      flex: 1,
+      width: '100%',
+      height: 90,
+      paddingTop: 20,
+      paddingBottom: 20,
+      borderBottomWidth: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'stretch',
-      borderBottomWidth: 1,
     },
     innerContainer: {
       flexDirection: 'row',
@@ -65,8 +77,58 @@ export default () => ({
     icon: {
       marginTop: 15,
     },
+    iconButton: {
+      marginBottom: 10,
+      width: '100%',
+      textAlign: 'center',
+    },
+    buttonContent: {
+      width: '100%',
+      textAlign: 'center',
+      color: colors.light.white,
+    },
     noResult: {
       marginTop: 11,
+    },
+    button: {
+      flex: 1,
+      justifyContent: 'center',
+      flexDirection: 'column',
+      width: 60,
+    },
+    editButton: {
+      position: 'absolute',
+      top: 0,
+      left: Screen.width - 175,
+      width: Screen.width,
+      height: 90,
+      paddingLeft: 9,
+      backgroundColor: colors.light.sendBalanceBg,
+      justifyContent: 'center',
+    },
+    deleteButton: {
+      position: 'absolute',
+      top: 0,
+      left: Screen.width - 98,
+      width: Screen.width,
+      height: 90,
+      paddingLeft: 9,
+      justifyContent: 'center',
+    },
+    draggableRow: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      backgroundColor: 'transparent',
+      height: 75,
+      width: '100%',
+    },
+    row: {
+      left: 0,
+      right: 0,
+      height: 60,
+      width: '100%',
     },
   },
   [themes.light]: {
@@ -74,6 +136,9 @@ export default () => ({
       color: colors.dark.gray2,
     },
     itemContainer: {
+      borderBottomColor: colors.light.gray5,
+    },
+    linkedItem: {
       borderBottomColor: colors.light.gray5,
     },
     emptyState: {
@@ -91,12 +156,24 @@ export default () => ({
     noResult: {
       color: colors.light.gray2,
     },
+    deleteButton: {
+      backgroundColor: colors.light.actionRed,
+    },
+    editContent: {
+      color: colors.light.gray1,
+    },
+    editButton: {
+      backgroundColor: colors.light.sendBalanceBg,
+    },
   },
   [themes.dark]: {
     title: {
       color: colors.dark.white,
     },
     itemContainer: {
+      borderBottomColor: colors.dark.gray5,
+    },
+    linkedItem: {
       borderBottomColor: colors.dark.gray5,
     },
     emptyState: {
@@ -116,6 +193,15 @@ export default () => ({
     },
     noResult: {
       color: colors.dark.gray2,
+    },
+    deleteButton: {
+      backgroundColor: colors.dark.actionRed,
+    },
+    editContent: {
+      color: colors.dark.gray1,
+    },
+    editButton: {
+      backgroundColor: colors.dark.sendBalanceBg,
     },
   },
 });

@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import { IconButton } from '../../toolBox/button';
-import { P, H1 } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
 import reg from '../../../constants/regex';
 import Input from '../../toolBox/input';
 import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
-import Scanner from './scanner';
+import Scanner from '../../scanner';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import { merge } from '../../../utilities/helpers';
+import { decodeLaunchUrl } from '../../../utilities/qrCode';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
@@ -25,13 +26,13 @@ class Recipient extends React.Component {
     header: true,
     address: {
       value: '',
-      validity: -1,
+      validity: 0,
     },
     avatarPreview: false,
   };
   animatedStyles = {
-    height: new Animated.Value(100),
-    paddingTop: new Animated.Value(36),
+    height: new Animated.Value(45),
+    paddingTop: new Animated.Value(20),
   }
 
   componentDidMount() {
@@ -44,7 +45,7 @@ class Recipient extends React.Component {
 
     navigation.setParams({
       showButtonLeft: false,
-      action: null,
+      action: false,
     });
   }
 
@@ -57,8 +58,9 @@ class Recipient extends React.Component {
   }
 
   onQRCodeRead = (data) => {
-    this.setAddress(data.address);
-    this.scannedData = data;
+    const decodedData = decodeLaunchUrl(data);
+    this.setAddress(decodedData.address);
+    this.scannedData = decodedData;
     this.input.focus();
   }
 
@@ -90,7 +92,7 @@ class Recipient extends React.Component {
   forward = (data) => {
     const accountHasAlreadyFollowed = (address) => {
       const { followed } = this.props.accounts;
-      return followed.filter(item => item.address === address).length > 0;
+      return followed.some(item => item.address === address);
     };
 
     const {
@@ -127,12 +129,12 @@ class Recipient extends React.Component {
     } else {
       Animated.parallel([
         Animated.timing(height, {
-          toValue: 100,
+          toValue: 45,
           duration: 400,
           delay: 0,
         }),
         Animated.timing(paddingTop, {
-          toValue: 36,
+          toValue: 20,
           duration: 400,
           delay: 0,
         }),
@@ -142,18 +144,31 @@ class Recipient extends React.Component {
 
   render() {
     const {
-      navigation, theme, styles,
+      navigation, theme, styles, accounts,
     } = this.props;
     const {
       address, avatarPreview,
     } = this.state;
+
+    const titles = {
+      heading: accounts.followed.length ? 'Enter an address or search in bookmarks.' : 'Enter an address to send tokens to.',
+      inputLabel: accounts.followed.length ? 'Address or label' : 'Address',
+    };
+
+    let errorMessage = '';
+    if (address.validity === 1) {
+      errorMessage = 'Invalid address.';
+    } else if (address.validity === -1) {
+      errorMessage = 'Please enter an address.';
+    }
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
           ref={(el) => { this.scanner = el; }}
           navigation={navigation}
-          setValues={this.onQRCodeRead}
+          readFromCameraRoll={true}
+          onQRCodeRead={this.onQRCodeRead}
         />
         <KeyboardAwareScrollView
             onKeyboard={this.onKeyboardOpen}
@@ -167,12 +182,7 @@ class Recipient extends React.Component {
             styles={{ container: styles.container, innerContainer: styles.innerContainer }}
           >
           <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-            <View style={styles.headings}>
-              <H1 style={[styles.title, styles.theme.title]}>Recipient</H1>
-              <P style={[styles.subtitle, styles.theme.subtitle]}>
-                Enter an address or search an existing one.
-              </P>
-            </View>
+            <P style={[styles.subtitle, styles.theme.subtitle]}>{titles.heading}</P>
           </Animated.View>
           <View style={styles.form}>
             <View style={styles.addressContainer}>
@@ -200,7 +210,7 @@ class Recipient extends React.Component {
                   />
               }
               <Input
-                label='Address or label'
+                label={titles.inputLabel}
                 autoCorrect={false}
                 reference={(input) => { this.input = input; }}
                 innerStyles={{
@@ -213,10 +223,7 @@ class Recipient extends React.Component {
                 }}
                 onChange={this.setAddress}
                 value={address.value}
-                error={
-                  address.validity === 1 ?
-                    'Invalid address' : ''
-                }
+                error={errorMessage}
                 onFocus={() => { this.activeInputRef = 0; }}
               />
             </View>

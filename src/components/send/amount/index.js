@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Image } from 'react-native';
-import liskService from '../../../utilities/api/liskService';
+import { Image, View } from 'react-native';
+import connect from 'redux-connect-decorator';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import transactions from '../../../constants/transactions';
 import { fromRawLsk } from '../../../utilities/conversions';
-import { B, P, H1 } from '../../toolBox/typography';
+import { B, P } from '../../toolBox/typography';
 import FormattedNumber from '../../formattedNumber';
 import reg from '../../../constants/regex';
 import { merge } from '../../../utilities/helpers';
@@ -12,35 +12,49 @@ import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { deviceType } from '../../../utilities/device';
-import darkBig from '../../../assets/images/balanceBlur/darkBig.png';
-import lightBig from '../../../assets/images/balanceBlur/lightBig.png';
+import darkBlur from '../../../assets/images/amountFormBalanceBlur/dark.png';
+import lightBlur from '../../../assets/images/amountFormBalanceBlur/light.png';
 
-const blurs = { dark: darkBig, light: lightBig };
-
+const blurs = { dark: darkBlur, light: lightBlur };
 const isAndroid = deviceType() === 'android';
 
+@connect(state => ({
+  priceTicker: state.liskService.priceTicker,
+}))
 class Amount extends React.Component {
   state = {
     amount: {
       value: '',
       normalizedValue: '',
-      validity: -1,
+      validity: {
+        code: 0,
+        message: '',
+      },
     },
-    priceTicker: {},
   };
 
   validator = (str) => {
     if (str === '' || parseFloat(str) === 0) {
-      return 1;
+      return {
+        code: -1,
+        message: 'Please enter an amount.',
+      };
     }
 
     const { accounts } = this.props;
+    let message = '';
 
-    return (
-      reg.amount.test(str) && accounts.active &&
-      accounts.active.balance > transactions.send.fee &&
-      parseFloat(str) <= fromRawLsk(accounts.active.balance - transactions.send.fee)
-    ) ? 0 : 1;
+    if (!reg.amount.test(str)) {
+      message = 'The amount value is invalid.';
+    } else if (accounts.active.balance < transactions.send.fee ||
+      parseFloat(str) > fromRawLsk(accounts.active.balance - transactions.send.fee)) {
+      message = 'Your balance is not sufficient.';
+    }
+
+    return ({
+      code: message ? 1 : 0,
+      message,
+    });
   };
 
   componentDidMount() {
@@ -59,17 +73,9 @@ class Amount extends React.Component {
       }),
     });
 
-    this.getPriceTicker();
-
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
-  }
-
-  getPriceTicker = () => {
-    liskService.getPriceTicker()
-      .then(res => this.setState({ priceTicker: res.tickers.LSK }))
-      .catch(console.log); //eslint-disable-line
   }
 
   onChange = (value) => {
@@ -88,7 +94,7 @@ class Amount extends React.Component {
     const { amount } = this.state;
     const validity = this.validator(amount.normalizedValue);
 
-    if (validity === 0) {
+    if (validity.code === 0) {
       this.props.nextStep(merge(this.props.sharedData, {
         amount: amount.normalizedValue,
       }));
@@ -101,18 +107,15 @@ class Amount extends React.Component {
 
   render() {
     const {
-      theme,
+      theme, styles,
       settings: { currency, incognito },
-      styles, accounts,
+      accounts, priceTicker,
     } = this.props;
-    const {
-      amount: { value, normalizedValue, validity },
-      priceTicker,
-    } = this.state;
+    const { amount: { value, normalizedValue, validity } } = this.state;
 
     let valueInCurrency = 0;
 
-    if (value && this.validator(normalizedValue) === 0 && priceTicker[currency]) {
+    if (value && this.validator(normalizedValue).code === 0 && priceTicker[currency]) {
       valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
@@ -130,15 +133,18 @@ class Amount extends React.Component {
         >
           <View>
             <View style={styles.headerContainer}>
-              <H1 style={[styles.header, styles.theme.header]}>
-                Send Lisk
-              </H1>
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
+              <P style={styles.theme.subHeader}>
                 Enter the amount you want to send.
               </P>
             </View>
 
-            <View style={[styles.balanceContainer, styles.theme.balanceContainer]}>
+            <View
+              style={[
+                styles.balanceContainer,
+                styles.theme.balanceContainer,
+                (incognito ? styles.balanceContainerIncognito : {}),
+              ]}
+            >
               <B style={[styles.balanceText, styles.theme.balanceText]}>
                 {'You have '}
               </B>
@@ -157,19 +163,17 @@ class Amount extends React.Component {
               }
             </View>
 
-            <View style={styles.form}>
-              <AmountInput
-                reference={(el) => { this.input = el; }}
-                autoFocus={!isAndroid}
-                label="Amount (LSK)"
-                value={value}
-                onChange={this.onChange}
-                keyboardType="numeric"
-                currency={currency}
-                valueInCurrency={valueInCurrency}
-                error={validity === 1 ? 'Invalid amount value' : ''}
-              />
-            </View>
+            <AmountInput
+              reference={(el) => { this.input = el; }}
+              autoFocus={!isAndroid}
+              label="Amount (LSK)"
+              value={value}
+              onChange={this.onChange}
+              keyboardType="numeric"
+              currency={currency}
+              valueInCurrency={valueInCurrency}
+              error={validity.message}
+            />
            </View>
         </KeyboardAwareScrollView>
       </View>

@@ -91,6 +91,9 @@ describe('Action: Accounts', () => {
         },
       },
     ],
+    meta: {
+      count: 3,
+    },
   };
   const address = '7056261880661230236L';
 
@@ -133,8 +136,14 @@ describe('Action: Accounts', () => {
       transactions: { confirmed: [] },
     });
     const expectedActions = [
-      { type: actionTypes.transactionsUpdated, data: { confirmed: transactions.data } },
-      { type: actionTypes.accountUpdated, data: account },
+      {
+        type: actionTypes.transactionsUpdated,
+        data: { confirmed: transactions.data, count: transactions.meta.count },
+      },
+      {
+        type: actionTypes.accountUpdated,
+        data: account,
+      },
     ];
     accountUtility.getAccount.mockResolvedValue(account);
     transactionsUtility.getTransactions.mockResolvedValue(transactions);
@@ -182,14 +191,12 @@ describe('Action: Accounts', () => {
   });
 
   it('should returns an accountEdited action object', () => {
-    const updatedData = {
-      label: 'test2',
-    };
+    const updatedData = 'test2';
     const expectedValue = {
       type: actionTypes.accountEdited,
       data: {
         address,
-        updatedData,
+        label: updatedData,
       },
     };
     expect(accountEdited(address, updatedData)).toEqual(expectedValue);

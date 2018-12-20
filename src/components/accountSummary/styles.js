@@ -1,74 +1,27 @@
-import { Dimensions, DeviceInfo, Platform } from 'react-native';
-import { Header } from 'react-navigation';
-import { themes, colors, boxes } from '../../constants/styleGuide';
-
-const { width } = Dimensions.get('window');
-
-export const animationRanges = {
-  width,
-  container: {
-    marginTop: 6,
-    height: [185, 110],
-  },
-  bg: {
-    height: [116, 56],
-  },
-  box: {
-    height: [125, 100],
-    top: [50, 0],
-  },
-  avatar: {
-    left: [Math.floor(width / 2) - 40, 40, 40],
-    top: [0, 0, 20],
-    width: [80, 70, 60],
-    height: [80, 70, 60],
-  },
-  address: {
-    top: [83, 15],
-    left: [33, 110],
-  },
-  balance: {
-    top: [120, 45],
-    left: [33, 110],
-  },
-};
+import { themes, colors } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
     container: {
       width: '100%',
-      height: animationRanges.container.height[0],
-      marginTop: animationRanges.container.marginTop,
-      borderBottomWidth: 20,
-      borderBottomColor: 'transparent',
+      overflow: 'hidden',
     },
     avatar: {
       top: 0,
+      left: '50%',
+      marginLeft: -30,
       position: 'absolute',
       zIndex: 4,
       elevation: 4,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.2,
-      shadowRadius: 10,
-      borderRadius: 40,
       overflow: 'hidden',
     },
-    unit: {
-      fontSize: 23,
-      lineHeight: 25,
-      marginLeft: 5,
-      marginTop: -3,
-    },
-    value: {
-      lineHeight: 25,
-    },
     address: {
-      height: 45,
+      width: '100%',
       paddingTop: 10,
-      paddingBottom: 10,
-      position: 'absolute',
-      zIndex: 4,
-      elevation: 4,
+      paddingBottom: 3,
+      marginTop: 60,
+      textAlign: 'center',
+      zIndex: 2,
     },
     addressContainer: {
       justifyContent: 'center',
@@ -77,46 +30,22 @@ export default () => ({
       lineHeight: 25,
     },
     balance: {
-      height: 45,
-      flexDirection: 'row',
-      justifyContent: 'center',
+      height: 32,
+      width: '100%',
       alignItems: 'center',
-      alignSelf: 'flex-end',
-      position: 'absolute',
-      zIndex: 4,
-      elevation: 4,
-    },
-    lift: {
-      marginTop: -10,
+      zIndex: 2,
+      elevation: 2,
     },
     bg: {
       position: 'absolute',
       left: 0,
       top: 0,
-      zIndex: 0,
+      zIndex: 1,
+      height: 200,
       width: '100%',
       overflow: 'hidden',
     },
-    bgImage: {
-      position: 'absolute',
-      width: '100%',
-      left: 0,
-      top: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ?
-        -1 * (Header.HEIGHT + 24) : -1 * (Header.HEIGHT + 1),
-    },
-    box: {
-      width: width - (2 * boxes.boxPadding),
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.2,
-      shadowRadius: 10,
-      position: 'absolute',
-      left: boxes.boxPadding,
-      zIndex: 1,
-      borderRadius: boxes.boxBorderRadius,
-      elevation: 3,
-    },
     blurWrapper: {
-      backgroundColor: 'red',
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -126,7 +55,7 @@ export default () => ({
       position: 'absolute',
       left: '50%',
       top: '50%',
-      marginTop: -30,
+      marginTop: -18,
       zIndex: 2,
       opacity: 0,
     },
@@ -134,7 +63,7 @@ export default () => ({
       opacity: 1,
     },
     invisibleTitle: {
-      color: 'rgba(255, 255, 255, 0.02)',
+      color: 'transparent',
     },
     blurBig: {
       width: 150,
@@ -151,38 +80,110 @@ export default () => ({
       height: 45,
       marginLeft: -45,
     },
-  },
-  [themes.light]: {
-    avatar: {
-      shadowColor: colors.light.blue,
+    fiat: {
+      width: '100%',
+      alignItems: 'center',
+      zIndex: 2,
     },
-    unit: {
-      color: colors.light.blue,
+    fiatValue: {},
+    actionBar: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      height: 56,
+      width: '100%',
+      paddingTop: 11,
+      paddingHorizontal: 12,
     },
-    value: {
-      color: colors.light.blue,
+    bookmarkButton: {
+      marginHorizontal: 8,
+      minWidth: 45,
+      height: 45,
+      borderWidth: 1,
+      borderColor: colors.light.gray2,
+      flexGrow: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      paddingLeft: 0,
+      borderRadius: 2,
     },
-    addressP: {
+    bookmarkButtonTitle: {
       color: colors.light.gray1,
     },
-    box: {
-      shadowColor: colors.light.blue,
-      backgroundColor: colors.light.white,
+    sendButton: {
+      marginHorizontal: 8,
+      minWidth: 200,
+      height: 45,
+      borderWidth: 1,
+      borderColor: colors.light.gray2,
+      flexGrow: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      paddingLeft: 0,
+      borderRadius: 2,
+    },
+    sendButtonTitle: {
+      paddingLeft: 10,
+    },
+  },
+  [themes.light]: {
+    homeContainer: {
+      backgroundColor: colors.light.brandingBlue,
+    },
+    walletContainer: {
+      backgroundColor: colors.light.navigationBg,
+      borderBottomColor: colors.light.sendBalanceBg,
+      borderBottomWidth: 1,
+    },
+    bg: {
+      opacity: 1,
+    },
+    homeBalance: {
+      color: colors.light.white,
+    },
+    walletBalance: {
+      color: colors.light.blue,
+    },
+    homeAddress: {
+      color: colors.light.gray5,
+    },
+    walletAddress: {
+      color: colors.light.gray1,
+    },
+    fiatValue: {
+      color: colors.light.gray5,
+    },
+    sendButtonTitle: {
+      color: colors.light.gray1,
     },
   },
   [themes.dark]: {
-    addressP: {
+    homeContainer: {
+      backgroundColor: colors.dark.navigationBg,
+    },
+    walletContainer: {
+      backgroundColor: colors.dark.navigationBg,
+    },
+    bg: {
+      opacity: 0.6,
+    },
+    homeAddress: {
       color: colors.dark.gray2,
     },
-    value: {
+    walletAddress: {
+      color: colors.dark.gray2,
+    },
+    homeBalance: {
       color: colors.dark.white,
     },
-    unit: {
+    walletBalance: {
       color: colors.dark.white,
     },
-    box: {
-      shadowColor: colors.light.black,
-      backgroundColor: colors.dark.tabBarBgNavy,
+    fiatValue: {
+      color: colors.dark.gray2,
+    },
+    sendButtonTitle: {
+      color: colors.dark.gray1,
     },
   },
 });

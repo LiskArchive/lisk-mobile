@@ -58,7 +58,7 @@ export default () => ({
     },
     input: {
       color: colors.dark.white,
-      borderBottomColor: '#EFF4F9',
+      borderBottomColor: '#9EA8B4',
     },
     inputErrorStyle: {
       borderBottomColor: colors.dark.red,

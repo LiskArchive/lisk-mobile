@@ -1,13 +1,14 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { removePassphraseFromKeyChain } from '../../utilities/passphrase';
-import { IconButton } from '../toolBox/button';
-import { colors } from '../../constants/styleGuide';
-import withTheme from '../withTheme';
+import { removePassphraseFromKeyChain } from '../../../utilities/passphrase';
+import { IconButton } from '../../toolBox/button';
+import { colors } from '../../../constants/styleGuide';
+import withTheme from '../../withTheme';
 import getStyles from './styles';
 
 class SignOutButton extends React.Component {
-  onClick = () => {
+  onConfirm = () => {
     // clean active account
     this.props.signOut();
     removePassphraseFromKeyChain();
@@ -23,6 +24,26 @@ class SignOutButton extends React.Component {
           },
         })],
       }));
+  }
+
+  onClick = () => {
+    const { settings } = this.props;
+    let message;
+
+    if (settings.hasStoredPassphrase) {
+      message = `You can sign back in using your passphrase and enable ${settings.sensorType} at any time.`;
+    }
+
+    Alert.alert('Are you sure?', message, [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Confirm',
+        onPress: this.onConfirm,
+      },
+    ], { cancelable: false });
   }
 
   render() {

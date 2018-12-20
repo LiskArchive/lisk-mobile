@@ -11,11 +11,6 @@ export default () => ({
       margin: 20,
       marginBottom: 0,
     },
-    title: {
-      paddingTop: 35,
-      paddingLeft: 20,
-      paddingRight: 20,
-    },
     address: {
       fontSize: 24,
       paddingBottom: 15,
@@ -28,6 +23,11 @@ export default () => ({
     value: {
       alignItems: 'center',
       fontFamily: fonts.family.context,
+      fontWeight: 'bold',
+    },
+    referenceValue: {
+      flexWrap: 'wrap',
+      paddingRight: 30,
     },
     label: {
       fontSize: 13,
@@ -53,14 +53,12 @@ export default () => ({
       ],
     },
     senderAndRecipient: {
-      marginTop: 24,
       marginBottom: 10,
       paddingTop: 20,
       paddingBottom: 20,
       flexDirection: 'column',
       alignItems: 'center',
       borderBottomWidth: 1,
-      borderTopWidth: 1,
     },
     row: {
       marginBottom: 14,
@@ -98,9 +96,6 @@ export default () => ({
     container: {
       backgroundColor: colors.light.white,
     },
-    title: {
-      color: colors.light.black,
-    },
     date: {
       color: colors.light.gray2,
     },
@@ -108,7 +103,7 @@ export default () => ({
       color: colors.light.black,
     },
     senderAndRecipient: {
-      backgroundColor: '#F8FCFF',
+      backgroundColor: colors.light.navigationBg,
       borderBottomColor: colors.light.gray5,
       borderTopColor: colors.light.gray5,
     },
@@ -130,9 +125,6 @@ export default () => ({
     container: {
       backgroundColor: colors.dark.screenBgNavy,
     },
-    title: {
-      color: colors.dark.white,
-    },
     date: {
       color: colors.dark.gray2,
     },
@@ -140,7 +132,7 @@ export default () => ({
       color: colors.dark.white,
     },
     senderAndRecipient: {
-      backgroundColor: colors.dark.tabBarBgNavy,
+      backgroundColor: colors.dark.navigationBg,
       borderBottomColor: colors.dark.gray5,
       borderTopColor: colors.dark.gray5,
     },

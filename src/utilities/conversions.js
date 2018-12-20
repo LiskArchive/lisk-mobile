@@ -18,7 +18,8 @@ export const toRawLsk = (value) => {
 
 export const includeFee = (value, fee) => {
   const factor = new BigNumber(10).pow(8);
-  const rawValue = new BigNumber(value * factor);
+  const bigValue = new BigNumber(value);
+  const rawValue = bigValue.multipliedBy(factor);
   const bigFee = new BigNumber(fee);
   return fromRawLsk(rawValue.plus(bigFee));
 };

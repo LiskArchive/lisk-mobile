@@ -55,9 +55,7 @@ class Scanner extends React.Component {
 
   toggleGallery = () => {
     const { photo } = this.state;
-
     this.props.navigation.setParams({
-      tabBar: true,
       showButtonLeft: true,
       action: !photo.visible ? this.toggleGallery : this.toggleCamera,
       onBackPress: this.toggleGallery,
@@ -74,7 +72,7 @@ class Scanner extends React.Component {
     this.setState({ photo, camera });
 
     this.props.navigation.setParams({
-      tabBar: photo.visible,
+      tabBar: !photo.visible,
       showButtonLeft: photo.visible,
     });
 
@@ -95,7 +93,7 @@ class Scanner extends React.Component {
       styles,
       containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
       readFromCameraRoll,
-      closeScanner,
+      closeScanner, fullScreen,
     } = this.props;
     const { camera, photo } = this.state;
     return (
@@ -110,8 +108,8 @@ class Scanner extends React.Component {
               onBarCodeRead={this.readQRcode}
               barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
               type={RNCamera.Constants.Type.back}
-              notAuthorizedView={<CameraAccess />}
-              pendingAuthorizationView={<CameraAccess />}
+              notAuthorizedView={<CameraAccess close={this.toggleCamera} fullScreen={fullScreen} />}
+              pendingAuthorizationView={<CameraAccess close={this.toggleCamera} />}
               permissionDialogTitle={'Permission to use camera'}
               permissionDialogMessage={'Lisk needs to connect to your camera'} >
               {
@@ -119,8 +117,9 @@ class Scanner extends React.Component {
                   <CameraOverlay
                     containerStyles={cameraOverlay}
                     toggleGallery={this.toggleGallery}
-                    photoPermission={photo.permission} /> :
-                  <ClosureOverlay close={closeScanner} />
+                    photoPermission={photo.permission}
+                  /> :
+                  <ClosureOverlay close={closeScanner || this.toggleCamera} />
               }
             </RNCamera>
           : null
@@ -129,7 +128,8 @@ class Scanner extends React.Component {
           containerStyles={cameraRoll}
           onSelect={this.readFromPhotoGallery}
           permission={photo.permission}
-          visible={photo.visible} />
+          visible={photo.visible}
+        />
       </Fragment>
     );
   }

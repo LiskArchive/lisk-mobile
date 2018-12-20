@@ -2,10 +2,10 @@ import React from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { accountSignedOut as accountSignedOutAction } from '../../actions/accounts';
-import { H1, H4, P } from '../toolBox/typography';
+import { H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
-import SignOutButton from '../signOutButton';
+import SignOutButton from './signOutButton';
 import { colors, themes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import SwitchButton from './switchButton';
@@ -74,8 +74,6 @@ class Settings extends React.Component {
     return (
       <View style={[styles.container, styles.theme.container]}>
         <ScrollView style={styles.innerContainer}>
-          <H1 style={styles.theme.header}>Settings</H1>
-
           <View style={styles.group}>
             <H4 style={[styles.subHeader, styles.theme.subHeader]}>Security</H4>
             {
@@ -107,21 +105,21 @@ class Settings extends React.Component {
                 description="Hide balance and transaction amounts."
               />
             </View>
+            {
+              (settings.sensorType && settings.hasStoredPassphrase) ?
+                <View style={[styles.item, styles.theme.item]}>
+                  <ItemTitle
+                    navigation={navigation}
+                    target='PassphraseBackup'
+                    authenticate={true}
+                    showDialog={this.showDialog}
+                    hideDialog={this.hideDialog}
+                    setError={this.setError}
+                    icon='backup'
+                    title='Backup your passphrase' />
+                </View> : null
+            }
           </View>
-          {
-            (settings.sensorType && settings.hasStoredPassphrase) ?
-              <View style={[styles.item, styles.theme.item]}>
-                <ItemTitle
-                  navigation={navigation}
-                  target='PassphraseBackup'
-                  authenticate={true}
-                  showDialog={this.showDialog}
-                  hideDialog={this.hideDialog}
-                  setError={this.setError}
-                  icon='backup'
-                  title='Backup your passphrase'/>
-              </View> : null
-          }
 
           <View style={styles.group}>
             <H4 style={[styles.subHeader, styles.theme.subHeader]}>General</H4>
@@ -170,7 +168,11 @@ class Settings extends React.Component {
           <View style={[styles.group, styles.signOut]}>
             <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
             <View style={[styles.item, styles.theme.item]}>
-              <SignOutButton navigation={navigation} signOut={this.props.accountSignedOut} />
+              <SignOutButton
+                navigation={navigation}
+                signOut={this.props.accountSignedOut}
+                settings={settings}
+              />
             </View>
           </View>
         </ScrollView>

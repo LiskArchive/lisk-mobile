@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { TextEncoder } from 'text-encoding';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import { P, H1 } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import Input from '../../toolBox/input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
@@ -44,7 +44,7 @@ class Reference extends React.Component {
     this.setState({
       reference: {
         value,
-        validity: -1,
+        validity: this.validator(value),
       },
     });
   }
@@ -54,12 +54,9 @@ class Reference extends React.Component {
     const validity = this.validator(reference.value);
 
     if (validity === 0) {
-      this.props.move({
-        to: this.props.account.secondPublicKey ? 4 : 5,
-        data: merge(this.props.sharedData, {
-          reference: reference.value,
-        }),
-      });
+      this.props.nextStep(merge(this.props.sharedData, {
+        reference: reference.value,
+      }));
     } else {
       this.setState({
         reference: merge(reference, { validity }),
@@ -84,27 +81,22 @@ class Reference extends React.Component {
         >
           <View>
             <View style={styles.headerContainer}>
-              <H1 style={[styles.header, styles.theme.header]}>
-                Reference
-              </H1>
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
+              <P style={styles.theme.subHeader}>
                 Add a reference to this transaction.
               </P>
             </View>
 
-            <View style={styles.form}>
-              <Input
-                reference={(el) => { this.input = el; }}
-                label='Reference (Optional)'
-                autoFocus={!isAndroid}
-                autoCorrect={false}
-                innerStyles={{ input: styles.input }}
-                multiline={true}
-                onChange={this.onChange}
-                value={value}
-                error={validity === 1 ? 'Maximum length of 64 bytes is exceeded.' : ''}
-              />
-            </View>
+            <Input
+              reference={(el) => { this.input = el; }}
+              label='Reference (Optional)'
+              autoFocus={!isAndroid}
+              autoCorrect={false}
+              innerStyles={{ input: styles.input }}
+              multiline={true}
+              onChange={this.onChange}
+              value={value}
+              error={validity === 1 ? 'Maximum length of 64 bytes is exceeded.' : ''}
+            />
           </View>
         </KeyboardAwareScrollView>
       </View>

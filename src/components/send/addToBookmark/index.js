@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import { P, H1, Small } from '../../toolBox/typography';
+import { P, Small } from '../../toolBox/typography';
 import Input from '../../toolBox/input';
 import Avatar from '../../avatar';
 import withTheme from '../../withTheme';
@@ -27,7 +27,7 @@ class AddToBookmark extends React.Component {
     },
   };
 
-  validator = str => (str.length > 30 ? 1 : 0)
+  validator = str => (str.length > 20 ? 1 : 0)
 
   componentDidMount() {
     this.props.navigation.setParams({
@@ -84,14 +84,11 @@ class AddToBookmark extends React.Component {
         >
           <View>
             <View style={styles.headerContainer}>
-              <H1 style={[styles.header, styles.theme.header]}>
-                Add to bookmark
-              </H1>
               <P style={[styles.subHeader, styles.theme.subHeader]}>
                 Optional: add a label to save this address for the future.
               </P>
             </View>
-            <View style={[styles.form, styles.theme.form]}>
+            <View>
               <View style={styles.row}>
                 <P style={[styles.label, styles.theme.label]}>Address</P>
                 <View style={styles.addressContainer}>
@@ -101,7 +98,7 @@ class AddToBookmark extends React.Component {
               </View>
               <Input
                 reference={(el) => { this.input = el; }}
-                label='Label'
+                label='Label (Optional)'
                 autoFocus={!isAndroid}
                 autoCorrect={false}
                 innerStyles={{ input: styles.input }}
