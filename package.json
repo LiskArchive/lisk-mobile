@@ -11,8 +11,9 @@
     "build:ios": "react-native run-ios",
     "release:android": "cd android && ./gradlew assembleRelease",
     "link": "./node_modules/.bin/rn-nodeify --hack --install && node androidSdkFix.js",
-    "test": "jest --config ./jest.config.js --env=jsdom",
-    "test-live": "npm test -- --watch",
+    "test": "npm run test:format && npm run test:unit",
+    "test:unit": "jest --config ./jest.config.js --env=jsdom",
+    "test:live": "npm run test:unit -- --watch",
     "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "postinstall": "npm run link"
