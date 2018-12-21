@@ -45,8 +45,10 @@ pipeline {
 
       script {
         try {
-          withCredentials([string(credentialsId: 'lisk-mobile-coveralls-token', variable: 'COVERALLS_REPO_TOKEN')]) {
-            sh 'cat coverage/jest/lcov.info |./node_modules/.bin/coveralls'
+          nvm(getNodejsVersion()) {
+            withCredentials([string(credentialsId: 'lisk-mobile-coveralls-token', variable: 'COVERALLS_REPO_TOKEN')]) {
+              sh 'cat coverage/jest/lcov.info |./node_modules/.bin/coveralls'
+            }
           }
         } catch(err) {
           println "Could not report coverage statistics:\n${err}"
