@@ -49,7 +49,7 @@ pipeline {
             sh 'cat coverage/jest/lcov.info |coveralls'
           }
         } catch(err) {
-          println 'Could not report coverage statistics:\n${err}'
+          println "Could not report coverage statistics:\n${err}"
         }
       }
     }
