@@ -6,13 +6,15 @@
   ],
   "env": {
     "browser": true,
-    "jest": true
+    "jest": true,
+    "jasmine": true
   },
   "plugins": [
     "react",
     "import",
     "babel",
-    "jest"
+    "jest",
+    "detox"
   ],
   "globals": {
     "PRODUCTION": true,
@@ -21,20 +23,33 @@
   "rules": {
     "func-names": "off",
     "global-require": "off",
-    "new-cap": ["error", {
-      "newIsCapExceptions": ["mnemonic"]
-    }],
-    "no-unused-vars": ["error", { "varsIgnorePattern": "connect|[A|a]ction" }],
+    "new-cap": [
+      "error",
+      {
+        "newIsCapExceptions": [
+          "mnemonic"
+        ]
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "connect|[A|a]ction"
+      }
+    ],
     "react/prop-types": "off",
     "no-plusplus": "off",
     "no-underscore-dangle": "off",
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": [
-        "./src/**/*.test.js",
-        "./test/**/*.js",
-        "./src/**/stories.js",
-        "./src/tests.js",
-        "./src/i18n-scanner.js"
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "./src/**/*.test.js",
+          "./test/**/*.js",
+          "./src/**/stories.js",
+          "./src/tests.js",
+          "./src/i18n-scanner.js",
+          "./e2e/**/*.js"
         ]
       }
     ],
