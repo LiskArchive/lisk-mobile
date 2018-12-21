@@ -29,26 +29,28 @@ pipeline {
   post {
     always {
       junit 'coverage/jest/junit.xml'
-      
-      cobertura autoUpdateHealth: false,
-				  autoUpdateStability: false,
-				  coberturaReportFile: 'coverage/jest/cobertura-coverage.xml',
-				  conditionalCoverageTargets: '80, 0, 0',
-				  failUnhealthy: false,
-				  failUnstable: false,
-				  fileCoverageTargets: '80, 0, 0',
-				  lineCoverageTargets: '80, 0, 0',
-				  maxNumberOfBuilds: 0,
-				  methodCoverageTargets: '80, 0, 0',
-				  onlyStable: false,
-				  sourceEncoding: 'ASCII'
 
-      try {
-        withCredentials([string(credentialsId: 'lisk-mobile-coveralls-token', variable: 'COVERALLS_REPO_TOKEN')]) {
-          sh 'cat coverage/jest/lcov.info |coveralls'
+      cobertura autoUpdateHealth: false,
+        autoUpdateStability: false,
+        coberturaReportFile: 'coverage/jest/cobertura-coverage.xml',
+        conditionalCoverageTargets: '80, 0, 0',
+        failUnhealthy: false,
+        failUnstable: false,
+        fileCoverageTargets: '80, 0, 0',
+        lineCoverageTargets: '80, 0, 0',
+        maxNumberOfBuilds: 0,
+        methodCoverageTargets: '80, 0, 0',
+        onlyStable: false,
+        sourceEncoding: 'ASCII'
+
+      script {
+        try {
+          withCredentials([string(credentialsId: 'lisk-mobile-coveralls-token', variable: 'COVERALLS_REPO_TOKEN')]) {
+            sh 'cat coverage/jest/lcov.info |coveralls'
+          }
+        } catch(err) {
+          println 'Could not report coverage statistics:\n${err}'
         }
-      } catch(err) {
-        println 'Could not report coverage statistics:\n${err}'
       }
     }
     success {
