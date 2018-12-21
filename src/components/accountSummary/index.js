@@ -131,7 +131,7 @@ class AccountSummary extends React.Component {
 
     const followedAccountColor = theme === themes.light ? colors.light.blue : colors.dark.white;
 
-    return (<View style={this.props.style}>
+    return (<View style={this.props.style} testID="accountSummary">
       <Anim style={[styles.container, styles.theme[`${type}Container`], { opacity, top, height },
         { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) }]}>
         {

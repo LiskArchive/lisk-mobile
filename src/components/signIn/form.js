@@ -127,7 +127,10 @@ class Form extends React.Component {
     }
 
     return (
-      <View style={styles.container}>
+      <View
+        testID="signInForm"
+        style={styles.container}
+      >
         <Scanner
           ref={(el) => { this.scanner = el; }}
           containerStyles={{
@@ -148,6 +151,7 @@ class Form extends React.Component {
         </Animated.View>
         <Animated.View style={[{ opacity }]}>
           <Input
+            testID="signInPassphraseInput"
             noTheme={true}
             label='Passphrase'
             reference={(ref) => { this.passphraseInput = ref; }}
@@ -176,6 +180,7 @@ class Form extends React.Component {
         <KeyboardAwareScrollView
           noTheme={true}
           button='Sign in'
+          buttonTestID='signInButton'
           onSubmit={this.onFormSubmission}
           extras={
             <Extras
