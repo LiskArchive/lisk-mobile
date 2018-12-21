@@ -33,7 +33,7 @@
     "configurations": {
       "ios.sim.debug": {
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/Lisk.app",
-        "build": "xcodebuild -project ios/Lisk.xcodeproj -scheme Lisk -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "build": "xcodebuild -project ios/Lisk.xcodeproj -UseNewBuildSystem=NO -scheme Lisk -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "name": "iPhone X"
       }
