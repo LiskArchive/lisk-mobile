@@ -11,8 +11,8 @@
     "build:ios": "react-native run-ios",
     "release:android": "cd android && ./gradlew assembleRelease",
     "link": "./node_modules/.bin/rn-nodeify --hack --install && node androidSdkFix.js",
-    "test": "jest --env=jsdom --testURL=http://localhost/ --rootDir=./ --config=./jest/main-config.js --coverage",
-    "test:live": "jest --env=jsdom --testURL=http://localhost/ --rootDir=./ --config=./jest/main-config.js --watch --coverage",
+    "test": "jest --config ./jest.config.js --env=jsdom",
+    "test-live": "npm test -- --watch",
     "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "postinstall": "npm run link"
@@ -129,6 +129,7 @@
     "husky": "^1.0.0-rc.13",
     "jest": "^23.1.0",
     "jest-cli": "^22.4.2",
+    "jest-junit": "^5.2.0",
     "jest-runner-eslint": "^0.6.0",
     "jest-transform-stub": "^1.0.0",
     "metro-react-native-babel-preset": "^0.45.6",
