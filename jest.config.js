@@ -5,6 +5,7 @@ module.exports = {
   ],
   testPathIgnorePatterns: [
     'src/components/',
+    '/e2e/',
   ],
   verbose: true,
   cache: false,
