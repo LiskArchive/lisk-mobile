@@ -37,6 +37,7 @@ class ScrollAwareActionBar extends React.Component {
     const {
       children, disabled, onSubmit, noTheme,
       styles, button, hasTabBar, extras, onStickyButton,
+      buttonTestID,
     } = this.props;
     const { buttonStyle } = this.state;
 
@@ -50,7 +51,8 @@ class ScrollAwareActionBar extends React.Component {
           onKeyboardWillHide={() => this.shrinkButton(true)}
           onKeyboardDidHide={() => this.shrinkButton(true)}
           onKeyboardWillShow={() => this.shrinkButton(false)}
-          onKeyboardDidShow={() => this.shrinkButton(false)}>
+          onKeyboardDidShow={() => this.shrinkButton(false)}
+        >
           <View style={[theme.scrollViewInnerContainer, styles ? styles.innerContainer : null]}>
             { children }
             {
@@ -72,18 +74,23 @@ class ScrollAwareActionBar extends React.Component {
             theme.keyboard,
             buttonStyle === theme.keyboardStickyButton ? theme.overlay : null,
             buttonStyle === theme.offKeyboardButton ? theme.pullUp : null,
-            hasTabBar ? theme.hasTabBar : null]}
+            hasTabBar ? theme.hasTabBar : null,
+          ]}
           animationOn='none'
-          alwaysVisible={true}>
-          { extras }
+          alwaysVisible={true}
+        >
+          {extras}
           <SecondaryButton
+            testID={buttonTestID || ''}
             noTheme={noTheme}
             disabled={disabled}
             title={typeof button === 'string' ? button : button.title}
             onClick={onSubmit}
-            style={buttonStyle} />
+            style={buttonStyle}
+          />
         </KeyboardAccessoryView>
-      </Fragment>);
+      </Fragment>
+    );
   }
 }
 

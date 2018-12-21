@@ -41,12 +41,17 @@ const modifyProps = (props) => {
   return modifiedProps;
 };
 
-const Button = (props) => {
-  const modifiedProps = modifyProps(props);
-  return (<TouchableHighlight underlayColor='transparent' {...modifiedProps}>
-    <Text style={props.style}>{props.children || props.title}</Text>
-  </TouchableHighlight>);
-};
+const Button = props => (
+  <TouchableHighlight
+    testID={props.testID}
+    underlayColor='transparent'
+    {...modifyProps(props)}
+  >
+    <Text style={props.style}>
+      {props.children || props.title}
+    </Text>
+  </TouchableHighlight>
+);
 
 const PrimaryButton = (props) => {
   const {
