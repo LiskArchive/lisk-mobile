@@ -18,7 +18,7 @@ const Input = ({
   label, styles, theme, value, onChange, error,
   multiline, onFocus, autoFocus, onBlur, autoCorrect,
   keyboardType = 'default', secureTextEntry, keyboardAppearance,
-  placeholder = '',
+  placeholder = '', testID = '',
 }) => {
   const inputStyle = [
     styles.input,
@@ -42,6 +42,7 @@ const Input = ({
       }
 
       <TextInput
+        testID={testID}
         style={inputStyle}
         autoCapitalize='none'
         multiline={multiline}
