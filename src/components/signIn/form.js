@@ -137,7 +137,6 @@ class Form extends React.Component {
           fullScreen={true}
           navigation={this.props.navigation}
           readFromCameraRoll={false}
-          closeScanner={this.toggleCamera}
           onQRCodeRead={this.onQRCodeRead}
         />
         <Animated.View
