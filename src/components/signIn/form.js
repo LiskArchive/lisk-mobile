@@ -160,6 +160,7 @@ class Form extends React.Component {
             multiline={Platform.OS === 'ios'}
             secureTextEntry={Platform.OS !== 'ios'}
             error={errorMessage}
+            keyboardAppearance="light"
           />
           {
             passphrase.value === '' ?
