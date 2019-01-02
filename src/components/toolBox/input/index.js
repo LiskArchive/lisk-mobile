@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
+import { themes } from '../../../constants/styleGuide';
 import Icon from '../icon';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
@@ -14,9 +15,9 @@ import getStyles from './styles';
  */
 const Input = ({
   reference = () => {}, innerStyles = {},
-  label, styles, value, onChange, error,
+  label, styles, theme, value, onChange, error,
   multiline, onFocus, autoFocus, onBlur, autoCorrect,
-  keyboardType, secureTextEntry,
+  keyboardType = 'default', secureTextEntry, keyboardAppearance,
 }) => {
   const inputStyle = [
     styles.input,
@@ -25,6 +26,10 @@ const Input = ({
     (error ? styles.inputErrorStyle : {}),
     (error ? styles.theme.inputErrorStyle : {}),
   ];
+
+  if (!keyboardAppearance) {
+    keyboardAppearance = theme === themes.dark ? 'dark' : 'light';
+  }
 
   return (
     <View style={[styles.inputContainer, innerStyles.containerStyle]}>
@@ -38,7 +43,8 @@ const Input = ({
         multiline={multiline}
         ref={input => reference(input)}
         value={value}
-        keyboardType={keyboardType || 'default'}
+        keyboardType={keyboardType}
+        keyboardAppearance={keyboardAppearance}
         autoFocus={autoFocus}
         onChangeText={onChange}
         autoCorrect={autoCorrect}
