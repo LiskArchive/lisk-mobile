@@ -22,8 +22,12 @@ const Extras = ({ error, onPress, opacity }) => (
         </Small>
       </View> :
       <Animated.View style={[styles.linkWrapper, styles.row, { opacity }]}>
-        <P style={styles.question}>{"Don't have a Lisk ID? "}</P>
-        <A style={styles.link} onPress={onPress}>Create it now</A>
+        <P style={styles.question}>
+          {"Don't have a Lisk ID? "}
+        </P>
+        <A testID="signInToRegisterButton" style={styles.link} onPress={onPress}>
+          Create it now
+        </A>
       </Animated.View>
     }
   </View>

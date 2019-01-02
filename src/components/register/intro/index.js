@@ -75,6 +75,7 @@ class Intro extends React.Component {
           <View style={styles.actionBar}>
             <View style={styles.row}>
               <Switch
+                testID="registerIntroSwitch"
                 height={26}
                 width={43}
                 onSyncPress={this.confirm}
@@ -91,6 +92,7 @@ class Intro extends React.Component {
             </View>
             <View style={styles.buttonWrapper}>
               <SecondaryButton
+                testID="registerIntroButton"
                 disabled={this.state.buttonStatus}
                 noTheme={true}
                 style={styles.button}
@@ -100,7 +102,9 @@ class Intro extends React.Component {
             </View>
           </View>
         </View>
-      </ScrollView>);
+      </ScrollView>
+    );
   }
 }
+
 export default Intro;
