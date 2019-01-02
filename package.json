@@ -16,7 +16,9 @@
     "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "postinstall": "npm run link",
-    "i18n": "node ./scripts/scanner.config.js"
+    "i18n": "node ./scripts/scanner.config.js",
+    "test:e2e-build": "detox build",
+    "test:e2e": "detox test"
   },
   "rnpm": {
     "assets": [
