@@ -139,42 +139,57 @@ class Confirm extends React.Component {
     return this.state.missing.length > 0 ? passphrase.map((val, index) => {
       const optionIndex = this.state.missing.indexOf(index);
       const element = optionIndex >= 0 ?
-        this.generatePlaceholder(index, optionIndex) :
-        <B key={index} style={styles.word}>{val}</B>;
+        this.generatePlaceholder(index, optionIndex, val) :
+        <Element key={index} style={styles.word}>{val}</Element>;
       return element;
     }) : null;
   }
 
-  generatePlaceholder(index, optionIndex) {
-    const style = this.state.visibleOptions === optionIndex ? null : styles.deActivePlaceholder;
-    return <Button
-      key={index}
-      title={this.state.answers[optionIndex].value}
-      onClick={() => this.toggleOptions(optionIndex)}
-      style={[styles.placeholder, style, this.state.answers[optionIndex].style]} />;
+  generatePlaceholder(index, optionIndex, value) {
+    const style = this.state.visibleOptions === optionIndex ?
+      styles.placeholder : styles.deActivePlaceholder;
+
+    return (
+      <Button
+        testID={`passphrasePlaceholderFor-${value}`}
+        key={index}
+        title={this.state.answers[optionIndex].value}
+        onClick={() => this.toggleOptions(optionIndex)}
+        style={[style, this.state.answers[optionIndex].style]}
+      />
+    );
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View>
-          <View style={styles.horizontalPadding}>
-            <B style={styles.subHeader}>
-              Fill in the blanks.
-            </B>
-          </View>
-          <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
-            Choose the correct option for missing words:
+          <H1 style={styles.header}>
+            Verify your passphrase
+          </H1>
+          <P style={styles.subHeader}>
+            Please tap on the empty boxes and select the correct word from the options.
           </P>
-          <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
-            { this.renderPassphrase() }
+          <View style={styles.imageContainer} >
+            <Image
+              style={styles.image}
+              source={this.state.buttonStatus ? verifyImage : verifiedImage}
+            />
           </View>
-          <View style={[styles.optionsContainer, styles.horizontalPadding]}>
+          <View testID="passphraseContainer" style={styles.passphraseContainer}>
+            {this.renderPassphrase()}
+          </View>
+          <View testID="passphraseOptionsContainer" style={styles.optionsContainer}>
             {this.state.options[this.state.visibleOptions] ?
-              this.state.options[this.state.visibleOptions].map((val, idx) =>
-                <Button style={styles.option} key={idx}
-                  title={val} onClick={() => this.fillOption(val)} />)
-              : null
+              this.state.options[this.state.visibleOptions].map((value, idx) => (
+                <Button
+                  testID={`passphraseOptionFor-${value}`}
+                  key={idx}
+                  style={styles.option}
+                  title={value}
+                  onClick={() => this.fillOption(value)}
+                />
+              )) : null
             }
           </View>
           {
@@ -190,6 +205,7 @@ class Confirm extends React.Component {
         </View>
         <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
           <SecondaryButton
+            testID="registerConfirmButton"
             disabled={this.state.buttonStatus}
             noTheme={true}
             style={styles.button}
@@ -198,9 +214,11 @@ class Confirm extends React.Component {
                 passphrase: this.state.passphrase,
               });
             }}
-            title='Confirm' />
+            title='Confirm'
+          />
         </View>
-      </View>);
+      </View>
+    );
   }
 }
 
