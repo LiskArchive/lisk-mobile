@@ -34,8 +34,10 @@ pipeline {
     }
     stage ('Run e2e tests') {
       steps {
-        nvm(getNodejsVersion()) {
-          sh 'npm run test:e2e'
+        timeout(5) {
+          nvm(getNodejsVersion()) {
+            sh 'PATH="/usr/local/bin:$PATH" npm run test:e2e'
+          }
         }
       }
     }
