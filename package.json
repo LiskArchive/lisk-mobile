@@ -42,7 +42,7 @@
         "name": "iPhone X"
       },
       "ios.sim.release": {
-        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/Lisk.app",
+        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/Lisk.app",
         "build": "xcodebuild -project ios/Lisk.xcodeproj -UseNewBuildSystem=NO -scheme Lisk -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "name": "iPhone X"
