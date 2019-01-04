@@ -1,6 +1,6 @@
 @Library('lisk-jenkins') _
 pipeline {
-  agent { node { label 'lisk-mobile' } }
+  agent { node { label 'darwin' } }
   stages {
     stage ('Build dependencies') {
       steps {
@@ -22,6 +22,20 @@ pipeline {
       steps {
         nvm(getNodejsVersion()) {
           sh 'npm run test'
+        }
+      }
+    }
+    stage ('Build the app for e2e tests') {
+      steps {
+        nvm(getNodejsVersion()) {
+          sh 'npm run test:e2e-build'
+        }
+      }
+    }
+    stage ('Run e2e tests') {
+      steps {
+        nvm(getNodejsVersion()) {
+          sh 'npm run test:e2e'
         }
       }
     }
