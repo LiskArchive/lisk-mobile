@@ -44,14 +44,27 @@ class Form extends React.Component {
     },
   };
 
+  componentDidMount() {
+    this.showKeyboard();
+    this.animate();
+    this.sub = this.props.navigation.addListener('willBlur', this.willBlur);
+  }
+
+  componentWillUnmount() {
+    this.sub.remove();
+    clearTimeout(this.timeout);
+  }
+
   showKeyboard = () => {
     setTimeout(() => {
-      if (this.props.navigation &&
-        this.props.navigation.isFocused() &&
-        this.passphraseInput) {
+      if (this.props.navigation.isFocused() && this.passphraseInput) {
         this.passphraseInput.focus();
       }
     }, 500);
+  }
+
+  willBlur = () => {
+    this.passphraseInput.blur();
   }
 
   onInputChange = (value, cb) => {
@@ -66,7 +79,6 @@ class Form extends React.Component {
   }
 
   goToRegistration = () => {
-    this.passphraseInput.blur();
     this.props.navigation.navigate('Register');
   }
 
@@ -105,15 +117,6 @@ class Form extends React.Component {
   toggleCamera = () => {
     this.passphraseInput.blur();
     this.scanner.toggleCamera();
-  }
-
-  componentDidMount() {
-    this.showKeyboard();
-    this.animate();
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
   }
 
   render() {
@@ -162,7 +165,7 @@ class Form extends React.Component {
             innerStyles={{ input: styles.input }}
             value={passphrase.value}
             onChange={this.onInputChange}
-            autoFocus={true}
+            autoFocus={false}
             autoCorrect={false}
             multiline={Platform.OS === 'ios'}
             secureTextEntry={Platform.OS !== 'ios'}

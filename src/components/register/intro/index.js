@@ -16,7 +16,8 @@ class Intro extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ passphrase: generatePassphrase() });
+    const passphrase = this.props.navigation.getParam('passphrase', generatePassphrase());
+    this.setState({ passphrase });
 
     this.props.navigation.setParams({
       action: false,

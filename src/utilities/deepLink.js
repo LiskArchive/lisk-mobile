@@ -1,12 +1,17 @@
 import URL from 'url-parse';
 
+export function parseDeepLink(deepLinkURL) {
+  const { hostname, pathname, query } = new URL(deepLinkURL, true);
+  const path = hostname === 'main' ? `main${pathname}` : hostname;
+  return { path, query };
+}
+
 export default function deepLinkMapper(deepLinkURL) {
   if (!deepLinkURL) {
     return null;
   }
 
-  const { hostname, pathname, query } = new URL(deepLinkURL, true);
-  const path = hostname === 'main' ? `main${pathname}` : hostname;
+  const { path, query } = parseDeepLink(deepLinkURL);
 
   switch (path) {
     case 'wallet':
