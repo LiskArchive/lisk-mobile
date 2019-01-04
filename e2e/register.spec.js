@@ -1,17 +1,13 @@
 /* eslint-env detox/detox */
 
 describe('Register Flow', () => {
+  const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
+
   beforeAll(async () => {
-    await device.reloadReactNative();
-  });
-
-  it('(SignIn Screen) should have the register button', async () => {
-    const form = element(by.id('signInForm'));
-    await waitFor(form).toExist().withTimeout(3000);
-
-    const button = element(by.id('signInToRegisterButton'));
-    await expect(button).toExist();
-    await button.tap();
+    await device.relaunchApp({
+      url: `lisk://register?passphrase=${encodeURI(passphrase)}`,
+      sourceApp: 'com.apple.mobilesafari',
+    });
   });
 
   it('should have a tappable switch and continue button', async () => {

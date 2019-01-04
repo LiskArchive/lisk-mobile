@@ -1,11 +1,11 @@
 /* eslint-env detox/detox */
 
 describe('SignIn Flow', () => {
+  const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
+
   beforeAll(async () => {
     await device.reloadReactNative();
   });
-
-  const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 
   it('should have the form', async () => {
     const form = element(by.id('signInForm'));
