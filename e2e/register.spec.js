@@ -74,4 +74,12 @@ describe('Register Flow', () => {
       await continueButton.tap();
     });
   });
+
+  describe('Success', () => {
+    it('ends up in success step', async () => {
+      const container = element(by.id('registerSuccess'));
+      await waitFor(container).toExist().withTimeout(250);
+      await expect(container).toExist();
+    });
+  });
 });
