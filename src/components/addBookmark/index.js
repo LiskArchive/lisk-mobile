@@ -17,6 +17,7 @@ import {
 } from '../../actions/accounts';
 import { P, Small } from '../toolBox/typography';
 import { decodeLaunchUrl } from '../../utilities/qrCode';
+import HeaderBackButton from '../router/headerBackButton';
 
 @connect(state => ({
   accounts: state.accounts.followed,
@@ -26,12 +27,20 @@ import { decodeLaunchUrl } from '../../utilities/qrCode';
 })
 class AddToBookmark extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
+    const title = navigation.getParam('title', '');
+    const onBack = navigation.getParam('action', false);
 
     return {
-      title: params.title || '',
+      title,
+      headerLeft: props => (
+        <HeaderBackButton
+          {...props}
+          onPress={onBack || props.onPress}
+          icon={onBack ? 'back' : 'cross'}
+        />
+      ),
     };
-  };
+  }
 
   activeInputRef = null;
   validator = {
@@ -93,6 +102,12 @@ class AddToBookmark extends React.Component {
     this.setAddress(decodedData.address);
     this.scannedData = decodedData;
     this.addressRef.focus();
+  }
+
+  onCloseScanner = () => {
+    this.props.navigation.setParams({
+      action: false,
+    });
   }
 
   setAddress = (value) => {
@@ -177,6 +192,7 @@ class AddToBookmark extends React.Component {
           navigation={navigation}
           readFromCameraRoll={true}
           onQRCodeRead={this.onQRCodeRead}
+          onClose={this.onCloseScanner}
         />
         <KeyboardAwareScrollView
             onSubmit={this.submitForm}
