@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { BackHandler, View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { IconButton } from '../toolBox/button';
 import Icon from '../toolBox/icon';
@@ -36,7 +36,7 @@ class AddToBookmark extends React.Component {
         <HeaderBackButton
           {...props}
           onPress={onBack || props.onPress}
-          icon={onBack ? 'back' : 'cross'}
+          icon={onBack ? false : 'cross'}
         />
       ),
     };
@@ -72,6 +72,7 @@ class AddToBookmark extends React.Component {
   componentDidMount() {
     const { navigation, accounts } = this.props;
     const account = navigation.getParam('account', null);
+
     if (!account) {
       setTimeout(() => {
         this.addressRef.focus();
@@ -87,6 +88,23 @@ class AddToBookmark extends React.Component {
         if (this.labelRef) this.labelRef.focus();
       }, 300);
     }
+
+    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+  }
+
+  onBackButtonPressedAndroid = () => {
+    const action = this.props.navigation.getParam('action', false);
+
+    if (action && typeof action === 'function') {
+      action();
+      return true;
+    }
+
+    return false;
   }
 
   setAvatarPreviewTimeout = () => {
