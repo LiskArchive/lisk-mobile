@@ -6,6 +6,7 @@ import reg from '../../constants/regex';
 import Input from '../toolBox/input';
 import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
+import { SCREEN_HEIGHTS, deviceHeight } from '../../utilities/device';
 import AddButton from './addButton';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -145,43 +146,46 @@ class Bookmark extends React.Component {
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <ScrollView style={styles.container}>
           <View style={styles.innerContainer}>
-            <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-              <P style={[styles.subtitle, styles.theme.subtitle]}>
-                Simply manage your bookmarks.
-              </P>
-            </Animated.View>
+            {deviceHeight() > SCREEN_HEIGHTS.SM ? (
+              <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
+                <P style={[styles.subtitle, styles.theme.subtitle]}>
+                  Simply manage your bookmarks.
+                </P>
+              </Animated.View>
+            ) : null}
             <View style={styles.form}>
-            <View style={styles.addressContainer}>
-              <Icon
-                style={styles.searchIcon}
-                name='search'
-                size={18}
-                color={colors[theme].gray2}
-              />
-              <Input
-                label='Search'
-                autoCorrect={false}
-                reference={(input) => { this.input = input; }}
-                innerStyles={{
-                  errorMessage: styles.errorMessage,
-                  input: [
-                    styles.input,
-                    styles.addressInput,
-                  ],
-                  containerStyle: styles.addressInputContainer,
-                }}
-                onChange={this.setAddress}
-                value={address.value}
-                error={
-                  address.validity === 1 ?
-                    'Invalid address' : ''
-                }
+              <View style={styles.addressContainer}>
+                <Icon
+                  style={styles.searchIcon}
+                  name='search'
+                  size={18}
+                  color={colors[theme].gray2}
+                />
+                <Input
+                  label='Search'
+                  autoCorrect={false}
+                  reference={(input) => { this.input = input; }}
+                  innerStyles={{
+                    errorMessage: styles.errorMessage,
+                    input: [
+                      styles.input,
+                      styles.addressInput,
+                    ],
+                    containerStyle: styles.addressInputContainer,
+                  }}
+                  onChange={this.setAddress}
+                  value={address.value}
+                  error={
+                    address.validity === 1 ?
+                      'Invalid address' : ''
+                  }
+                />
+              </View>
+              <Bookmarks
+                navigate={navigation.navigate}
+                draggable={true} setRef={this.setRef} query={this.state.address.value}
               />
             </View>
-            <Bookmarks
-              navigate={navigation.navigate}
-              draggable={true} setRef={this.setRef} query={this.state.address.value} />
-          </View>
           </View>
         </ScrollView>
       </View>

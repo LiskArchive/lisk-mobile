@@ -248,6 +248,7 @@ class AddToBookmark extends React.Component {
                 <Input
                   label='Address'
                   reference={(input) => { this.addressRef = input; }}
+                  autoCorrect={false}
                   innerStyles={{
                     errorMessage: styles.errorMessage,
                     input: [
