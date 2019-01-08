@@ -7,19 +7,26 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
 
-const EmptyState = ({ theme, styles }) =>
+const EmptyState = ({ theme, styles }) => (
   <View style={styles.emptyState}>
     <View style={styles.noActivity}>
       {
         theme === themes.light ?
-          <Image style={styles.empty} source={noActivityLight} /> :
-          <Image style={styles.empty} source={noActivityDark} />
+          <Image
+            style={styles.emptyImage}
+            source={noActivityLight}
+          /> :
+          <Image
+            style={styles.emptyImage}
+            source={noActivityDark}
+          />
       }
     </View>
     <P style={[styles.emptyTitle, styles.theme.emptyTitle]}>
       You don’t have any bookmarks.
       Start adding them by tapping the + button on the top right.
     </P>
-  </View>;
+  </View>
+);
 
 export default withTheme(EmptyState, getStyles());

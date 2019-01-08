@@ -1,14 +1,16 @@
 import { Dimensions } from 'react-native';
-import { themes, colors } from '../../constants/styleGuide';
+import { themes, colors, fonts } from '../../constants/styleGuide';
+import { SCREEN_HEIGHTS, deviceHeight } from '../../utilities/device';
 
 const Screen = Dimensions.get('window');
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default () => ({
   common: {
     container: {
       paddingRight: 20,
       paddingLeft: 20,
-      paddingTop: 20,
+      paddingTop: isSmallScreen ? 10 : 20,
     },
     itemContainer: {
       flex: 1,
@@ -64,15 +66,16 @@ export default () => ({
       alignItems: 'center',
       marginBottom: 10,
     },
-    empty: {
-      width: 80,
-      height: 80,
+    emptyImage: {
+      width: isSmallScreen ? 50 : 80,
+      height: isSmallScreen ? 50 : 80,
     },
     emptyTitle: {
-      paddingTop: 10,
+      paddingTop: isSmallScreen ? 0 : 10,
       textAlign: 'center',
       paddingRight: 40,
       paddingLeft: 40,
+      fontSize: isSmallScreen ? fonts.size.small : fonts.size.base,
     },
     icon: {
       marginTop: 15,
