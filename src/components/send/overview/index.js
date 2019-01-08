@@ -13,7 +13,9 @@ import { H4, B, P, A, Small } from '../../toolBox/typography';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
+import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const messages = {
   initialize: {
     title: 'Initialize your account',
@@ -22,7 +24,7 @@ const messages = {
     reference: 'Account initialization',
   },
   send: {
-    title: 'Ready to Send',
+    title: 'Ready to send',
     subtitle: 'You are about to send LSK tokens to the following address.',
     button: 'Send now',
   },
@@ -123,13 +125,16 @@ class Overview extends React.Component {
         contentContainerStyle={styles.innerContainer}
       >
         <View>
-          <P style={styles.theme.subtitle}>
-            { messages[actionType].subtitle }
-            {
-              actionType === 'initialize' ?
-              <A style={[styles.link, styles.theme.link]} onPress={this.openAcademy}> Read more</A> : ''
-            }
-          </P>
+          {!isSmallScreen ? (
+            <P style={styles.theme.subtitle}>
+              {messages[actionType].subtitle}
+              {actionType === 'initialize' ? (
+                <A style={[styles.link, styles.theme.link]} onPress={this.openAcademy}>
+                  {' Read more'}
+                </A>
+              ) : ''}
+            </P>
+          ) : null}
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
             <Avatar address={address || ''} style={styles.avatar} size={50}/>
             {
