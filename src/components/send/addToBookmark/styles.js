@@ -7,9 +7,11 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       paddingBottom: (deviceType() === 'android' ? tabBarHeight() : 0) + 24,
+      paddingTop: boxes.boxPadding,
     },
     headerContainer: {
       margin: boxes.boxPadding,
+      marginTop: 0,
     },
     input: {
       marginTop: 0,
