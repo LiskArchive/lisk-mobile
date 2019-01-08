@@ -14,6 +14,9 @@ import { decodeLaunchUrl } from '../../../utilities/qrCode';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
+import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 class Recipient extends React.Component {
   activeInputRef = null;
@@ -44,6 +47,7 @@ class Recipient extends React.Component {
     }
 
     navigation.setParams({
+      title: isSmallScreen ? 'Recipient' : 'Send',
       showButtonLeft: false,
       action: false,
     });
@@ -171,19 +175,21 @@ class Recipient extends React.Component {
           onQRCodeRead={this.onQRCodeRead}
         />
         <KeyboardAwareScrollView
-            onKeyboard={this.onKeyboardOpen}
-            onSubmit={this.submitForm}
-            hasTabBar={true}
-            onStickyButton={true}
-            button={{
-              title: 'Continue',
-              type: 'inBox',
-            }}
-            styles={{ container: styles.container, innerContainer: styles.innerContainer }}
-          >
-          <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-            <P style={[styles.subtitle, styles.theme.subtitle]}>{titles.heading}</P>
-          </Animated.View>
+          onKeyboard={this.onKeyboardOpen}
+          onSubmit={this.submitForm}
+          hasTabBar={true}
+          onStickyButton={true}
+          button={{
+            title: 'Continue',
+            type: 'inBox',
+          }}
+          styles={{ container: styles.container, innerContainer: styles.innerContainer }}
+        >
+          {!isSmallScreen ? (
+            <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
+              <P style={[styles.subtitle, styles.theme.subtitle]}>{titles.heading}</P>
+            </Animated.View>
+          ) : null}
           <View style={styles.form}>
             <View style={styles.addressContainer}>
               <IconButton
