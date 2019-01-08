@@ -138,15 +138,14 @@ class Bookmark extends React.Component {
 
   render() {
     const { styles, navigation, theme } = this.props;
-    const {
-      address,
-    } = this.state;
+    const { address } = this.state;
+    const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <ScrollView style={styles.container}>
           <View style={styles.innerContainer}>
-            {deviceHeight() > SCREEN_HEIGHTS.SM ? (
+            {!isSmallScreen ? (
               <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
                 <P style={[styles.subtitle, styles.theme.subtitle]}>
                   Simply manage your bookmarks.
@@ -162,7 +161,8 @@ class Bookmark extends React.Component {
                   color={colors[theme].gray2}
                 />
                 <Input
-                  label='Search'
+                  label={isSmallScreen ? '' : 'Search'}
+                  placeholder={isSmallScreen ? 'Search for a bookmark' : ''}
                   autoCorrect={false}
                   reference={(input) => { this.input = input; }}
                   innerStyles={{
