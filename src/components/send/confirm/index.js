@@ -12,10 +12,11 @@ import secondPassphraseImageDark from '../../../assets/images/secondPassphrase3x
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../../constants/styleGuide';
-import { deviceType } from '../../../utilities/device';
+import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import Scanner from '../../scanner';
 
 const devDefaultSecondPass = process.env.secondPassphrase || '';
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const isAndroid = deviceType() === 'android';
 
 @connect(state => ({
@@ -32,6 +33,7 @@ class Confirm extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
+      title: isSmallScreen ? 'Second passphrase' : 'Send',
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
@@ -141,18 +143,20 @@ class Confirm extends React.Component {
             type: 'inBox',
           }}>
           <View>
-            <View style={styles.titleContainer}>
-              <P style={[styles.subtitle, styles.theme.subtitle]}>
-                Enter you second passphrase to continue to transaction overview page.
-              </P>
-              <View style={styles.illustrationWrapper}>
-                {
-                  theme === themes.light ?
-                    <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
-                    <Image style={styles.illustration} source={secondPassphraseImageDark} />
-                }
+            {!isSmallScreen ? (
+              <View style={styles.titleContainer}>
+                <P style={[styles.subtitle, styles.theme.subtitle]}>
+                  Enter your second passphrase to continue to transaction overview page.
+                </P>
+                <View style={styles.illustrationWrapper}>
+                  {
+                    theme === themes.light ?
+                      <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
+                      <Image style={styles.illustration} source={secondPassphraseImageDark} />
+                  }
+                </View>
               </View>
-            </View>
+            ) : null}
 
             <View>
               <Input
