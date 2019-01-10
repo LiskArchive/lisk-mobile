@@ -24,9 +24,34 @@ export default () => ({
     input: {
       borderRightWidth: boxes.boxPadding,
       borderRightColor: 'transparent',
-      fontSize: 13,
-      letterSpacing: 1,
       fontFamily: fonts.family.passphrase,
+      textAlign: 'justify',
+      paddingTop: 10,
+      paddingBottom: 10,
+      minHeight: 40,
+    },
+    scanButton: {
+      position: 'absolute',
+      right: 6,
+      zIndex: 99,
+      top: 46,
+      paddingRight: 15,
+      paddingLeft: 10,
+      paddingBottom: 10,
+      width: 80,
+      height: 30,
+    },
+    scanButtonTitle: {
+      fontSize: 14,
+      width: 39,
+      paddingLeft: 5,
+      color: colors.light.blue,
+    },
+    cameraRoll: {
+      opacity: 0,
+    },
+    cameraOverlay: {
+      opacity: 0,
     },
   },
   [themes.light]: {

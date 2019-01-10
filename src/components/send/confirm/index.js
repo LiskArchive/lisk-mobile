@@ -5,13 +5,15 @@ import { validatePassphrase } from '../../../utilities/passphrase';
 import { extractPublicKey } from '../../../utilities/api/account';
 import Input from '../../toolBox/input';
 import { P } from '../../toolBox/typography';
+import { IconButton } from '../../toolBox/button';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import secondPassphraseImageLight from '../../../assets/images/secondPassphrase3xLight.png';
 import secondPassphraseImageDark from '../../../assets/images/secondPassphrase3xDark.png';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
-import { themes } from '../../../constants/styleGuide';
+import { colors, themes } from '../../../constants/styleGuide';
 import { deviceType } from '../../../utilities/device';
+import Scanner from '../../scanner';
 
 const devDefaultSecondPass = process.env.secondPassphrase || '';
 const isAndroid = deviceType() === 'android';
@@ -55,13 +57,33 @@ class Confirm extends React.Component {
     return validity;
   }
 
-  changeHandler = (value) => {
+  changeHandler = (value, cb) => {
     this.setState({
       secondPassphrase: {
         value,
         validity: [],
       },
+    }, () => {
+      if (typeof cb === 'function') {
+        cb();
+      }
     });
+  }
+
+  onOpenCamera = () => {
+    this.input.blur();
+    this.scanner.toggleCamera();
+  }
+
+  onCloseCamera = () => {
+    this.props.navigation.setParams({
+      showButtonLeft: true,
+      action: () => this.props.prevStep(),
+    });
+  }
+
+  onQRCodeRead = (value) => {
+    this.changeHandler(value, this.onSubmit);
   }
 
   onSubmit = () => {
@@ -84,7 +106,7 @@ class Confirm extends React.Component {
   }
 
   render() {
-    const { styles, theme } = this.props;
+    const { navigation, styles, theme } = this.props;
     const { secondPassphrase } = this.state;
 
     let errorMessage = '';
@@ -98,6 +120,18 @@ class Confirm extends React.Component {
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
+        <Scanner
+          ref={(el) => { this.scanner = el; }}
+          containerStyles={{
+            cameraRoll: styles.cameraRoll,
+            cameraOverlay: styles.cameraOverlay,
+          }}
+          navigation={navigation}
+          readFromCameraRoll={false}
+          onQRCodeRead={this.onQRCodeRead}
+          onClose={this.onCloseCamera}
+        />
+
         <KeyboardAwareScrollView
           onSubmit={this.onSubmit}
           hasTabBar={true}
@@ -120,18 +154,31 @@ class Confirm extends React.Component {
               </View>
             </View>
 
-            <Input
-              label='Second Passphrase'
-              reference={(ref) => { this.input = ref; }}
-              innerStyles={{ input: styles.input }}
-              value={secondPassphrase.value}
-              onChange={this.changeHandler}
-              autoFocus={!isAndroid}
-              autoCorrect={false}
-              multiline={Platform.OS === 'ios'}
-              secureTextEntry={Platform.OS !== 'ios'}
-              error={errorMessage}
-            />
+            <View>
+              <Input
+                label='Second Passphrase'
+                reference={(ref) => { this.input = ref; }}
+                innerStyles={{ input: styles.input }}
+                value={secondPassphrase.value}
+                onChange={this.changeHandler}
+                autoFocus={!isAndroid}
+                autoCorrect={false}
+                multiline={Platform.OS === 'ios'}
+                secureTextEntry={Platform.OS !== 'ios'}
+                error={errorMessage}
+              />
+              {
+                secondPassphrase.value === '' ?
+                  <IconButton
+                    onPress={this.onOpenCamera}
+                    titleStyle={styles.scanButtonTitle}
+                    style={styles.scanButton}
+                    title='Scan'
+                    icon='scanner'
+                    iconSize={18}
+                    color={colors.light.blue} /> : null
+              }
+            </View>
           </View>
         </KeyboardAwareScrollView>
       </View>
