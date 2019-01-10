@@ -1,0 +1,21 @@
+fastlane_version '2.113.0'
+
+before_all do
+  # ensure_git_branch
+  # ensure_git_status_clean
+end
+
+platform :ios do
+  desc 'Fetch certificates and provisioning profiles'
+  lane :certificates do
+    match(app_identifier: 'io.lisk.mobile', type: 'development')
+    match(app_identifier: 'io.lisk.mobile', type: 'appstore')
+  end
+
+  lane :build do
+    certificates
+  end
+end
+
+platform :android do
+end
