@@ -51,6 +51,10 @@ class Scanner extends React.Component {
 
     camera.visible = !camera.visible;
     this.setState({ camera });
+
+    if (!camera.visible && typeof this.props.onClose === 'function') {
+      this.props.onClose();
+    }
   };
 
   toggleGallery = () => {
@@ -90,10 +94,8 @@ class Scanner extends React.Component {
 
   render() {
     const {
-      styles,
-      containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
-      readFromCameraRoll,
-      closeScanner, fullScreen,
+      styles, containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
+      readFromCameraRoll, fullScreen,
     } = this.props;
     const { camera, photo } = this.state;
     return (
@@ -119,7 +121,10 @@ class Scanner extends React.Component {
                     toggleGallery={this.toggleGallery}
                     photoPermission={photo.permission}
                   /> :
-                  <ClosureOverlay close={closeScanner || this.toggleCamera} />
+                  <ClosureOverlay
+                    close={this.toggleCamera}
+                    containerStyles={cameraOverlay}
+                  />
               }
             </RNCamera>
           : null

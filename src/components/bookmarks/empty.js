@@ -18,7 +18,7 @@ const EmptyState = ({ theme, styles }) =>
     </View>
     <P style={[styles.emptyTitle, styles.theme.emptyTitle]}>
       You don’t have any bookmarks.
-      Start adding them through the sending process.
+      Start adding them by tapping the + button on the top right.
     </P>
   </View>;
 

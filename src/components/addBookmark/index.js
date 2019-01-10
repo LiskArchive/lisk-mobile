@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { BackHandler, View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { IconButton } from '../toolBox/button';
 import Icon from '../toolBox/icon';
@@ -17,6 +17,7 @@ import {
 } from '../../actions/accounts';
 import { P, Small } from '../toolBox/typography';
 import { decodeLaunchUrl } from '../../utilities/qrCode';
+import HeaderBackButton from '../router/headerBackButton';
 
 @connect(state => ({
   accounts: state.accounts.followed,
@@ -26,12 +27,20 @@ import { decodeLaunchUrl } from '../../utilities/qrCode';
 })
 class AddToBookmark extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
+    const title = navigation.getParam('title', '');
+    const onBack = navigation.getParam('action', false);
 
     return {
-      title: params.title || '',
+      title,
+      headerLeft: props => (
+        <HeaderBackButton
+          {...props}
+          onPress={onBack || props.onPress}
+          icon={onBack ? false : 'cross'}
+        />
+      ),
     };
-  };
+  }
 
   activeInputRef = null;
   validator = {
@@ -63,6 +72,7 @@ class AddToBookmark extends React.Component {
   componentDidMount() {
     const { navigation, accounts } = this.props;
     const account = navigation.getParam('account', null);
+
     if (!account) {
       setTimeout(() => {
         this.addressRef.focus();
@@ -78,6 +88,23 @@ class AddToBookmark extends React.Component {
         if (this.labelRef) this.labelRef.focus();
       }, 300);
     }
+
+    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+  }
+
+  onBackButtonPressedAndroid = () => {
+    const action = this.props.navigation.getParam('action', false);
+
+    if (action && typeof action === 'function') {
+      action();
+      return true;
+    }
+
+    return false;
   }
 
   setAvatarPreviewTimeout = () => {
@@ -93,6 +120,12 @@ class AddToBookmark extends React.Component {
     this.setAddress(decodedData.address);
     this.scannedData = decodedData;
     this.addressRef.focus();
+  }
+
+  onCloseScanner = () => {
+    this.props.navigation.setParams({
+      action: false,
+    });
   }
 
   setAddress = (value) => {
@@ -177,6 +210,7 @@ class AddToBookmark extends React.Component {
           navigation={navigation}
           readFromCameraRoll={true}
           onQRCodeRead={this.onQRCodeRead}
+          onClose={this.onCloseScanner}
         />
         <KeyboardAwareScrollView
             onSubmit={this.submitForm}

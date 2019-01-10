@@ -258,7 +258,7 @@ export default StackNavigator({ //eslint-disable-line
     navigationOptions: {
       headerTitle: props => <HeaderTitle {...props} />, //eslint-disable-line
       headerRight: HeaderPlaceholderButton,
-      headerLeft: props => <HeaderBackButton {...props} icon='cross' />, //eslint-disable-line
+      // headerLeft: props => <HeaderBackButton {...props} icon='cross' />, //eslint-disable-line
       headerBackground: <HeaderBackground />,
       headerStyle: {
         overflow: 'hidden',
