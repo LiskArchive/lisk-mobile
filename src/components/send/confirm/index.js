@@ -129,7 +129,7 @@ class Confirm extends React.Component {
           navigation={navigation}
           readFromCameraRoll={false}
           onQRCodeRead={this.onQRCodeRead}
-          onCloseCamera={this.onCloseCamera}
+          onClose={this.onCloseCamera}
         />
 
         <KeyboardAwareScrollView
