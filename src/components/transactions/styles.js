@@ -63,15 +63,20 @@ export default () => ({
       justifyContent: 'center',
       marginTop: 170,
     },
+    emptyStateActivityIndicator: {
+      position: 'absolute',
+      top: 0,
+    },
     emptyState: {
-      paddingTop: 35,
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
+      flex: 1,
+      height: viewportHeight() - 170,
+      marginTop: 170,
     },
     noActivity: {
       width: '100%',
       alignItems: 'center',
-      marginTop: (viewportHeight() / 6) - 35,
     },
     empty: {
       width: 222,
@@ -82,7 +87,7 @@ export default () => ({
       height: 220,
     },
     noTxTitle: {
-      paddingTop: 10,
+      paddingTop: 12,
     },
     pendingIcon: {
       width: 18,

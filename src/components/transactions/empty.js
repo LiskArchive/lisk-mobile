@@ -7,20 +7,23 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
 
-const EmptyState = ({ theme, styles, refreshing }) =>
+const EmptyState = ({ theme, styles, refreshing }) => (
   <View style={styles.emptyState}>
-    <View style={styles.placeholder}>
+    <View style={styles.emptyStateActivityIndicator}>
       {(Platform.OS === 'ios' && refreshing) ? <ActivityIndicator size="large" /> : null}
     </View>
 
     <View style={styles.noActivity}>
-      {
-        theme === themes.light ?
-          <Image style={styles.empty} source={noActivityLight} /> :
-          <Image style={styles.empty} source={noActivityDark} />
+      {theme === themes.light ?
+        <Image style={styles.empty} source={noActivityLight} /> :
+        <Image style={styles.empty} source={noActivityDark} />
       }
+
+      <P style={[styles.noTxTitle, styles.theme.noTxTitle]}>
+        You do not have any recent activity.
+      </P>
     </View>
-    <P style={[styles.noTxTitle, styles.theme.noTxTitle]}>You do not have any recent activity.</P>
-  </View>;
+  </View>
+);
 
 export default withTheme(EmptyState, getStyles());
