@@ -6,12 +6,11 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
 
-const LoadingState = ({ theme, styles }) => (
-  <View style={styles.loadingState}>
-    {
-      theme === themes.light ?
-        <Image source={noActivityLight} style={styles.loading} /> :
-        <Image source={noActivityDark} style={styles.loading} />
+const LoadingState = ({ theme, styles, style = {} }) => (
+  <View style={[styles.loadingState, style]}>
+    {theme === themes.light ?
+      <Image source={noActivityLight} style={styles.loading} /> :
+      <Image source={noActivityDark} style={styles.loading} />
     }
   </View>);
 
