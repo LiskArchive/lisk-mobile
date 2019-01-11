@@ -12,6 +12,7 @@ const LoadingState = ({ theme, styles, style = {} }) => (
       <Image source={noActivityLight} style={styles.loading} /> :
       <Image source={noActivityDark} style={styles.loading} />
     }
-  </View>);
+  </View>
+);
 
 export default withTheme(LoadingState, getStyles());

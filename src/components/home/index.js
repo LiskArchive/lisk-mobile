@@ -178,7 +178,7 @@ class Home extends React.Component {
     let content = null;
 
     if (!transactions.loaded) {
-      content = <Loading />;
+      content = <Loading style={styles.loadingState} />;
     } else {
       const listElements = transactions.count > 0 ?
         [...transactions.pending, ...transactions.confirmed] :

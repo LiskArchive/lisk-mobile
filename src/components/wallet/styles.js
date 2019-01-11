@@ -17,9 +17,6 @@ export default () => ({
       top: 0,
       width: '100%',
     },
-    loadingState: {
-      marginTop: 0,
-    },
   },
   [themes.light]: {
     container: {
