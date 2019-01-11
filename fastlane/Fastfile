@@ -7,13 +7,22 @@ end
 
 platform :ios do
   desc 'Fetch certificates and provisioning profiles'
-  lane :certificates do
+  lane :fetch_certificates do
     match(app_identifier: 'io.lisk.mobile', type: 'development')
     match(app_identifier: 'io.lisk.mobile', type: 'appstore')
   end
 
+  desc 'Build the app'
   lane :build do
-    certificates
+    fetch_certificates
+    increment_build_number(xcodeproj: './ios/Lisk.xcodeproj')
+    gym(scheme: 'Lisk', project: './ios/Lisk.xcodeproj')
+  end
+
+  desc 'Build the app and ship to Testflight'
+  lane :beta do
+    build
+    pilot
   end
 end
 
