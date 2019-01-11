@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ScrollView, View, Image } from 'react-native';
+import { ScrollView, View, Image, RefreshControl } from 'react-native';
 import connect from 'redux-connect-decorator';
 import FormattedDate from '../formattedDate';
 import withTheme from '../withTheme';
@@ -28,23 +28,32 @@ const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelega
 class TransactionDetail extends React.Component {
   state = {
     tx: null,
+    loading: false,
   }
 
   componentDidMount() {
     const { navigation } = this.props;
+    const tx = navigation.getParam('tx', null);
 
-    if (!navigation.getParam('tx', null)) {
+    if (tx) {
+      this.setState({ tx });
+    } else {
       this.retrieveTransaction(navigation.getParam('txId', false));
     }
   }
 
-  async retrieveTransaction(id) {
+  async retrieveTransaction(id, delay = 0) {
+    this.setState({ loading: true });
     try {
       const { data } = await getTransactions(this.props.activePeer, { id });
-      this.setState({ tx: data[0] });
+      setTimeout(() => this.setState({ tx: data[0], loading: false }), delay);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
     }
+  }
+
+  onRefresh = () => {
+    this.retrieveTransaction(this.state.tx.id, 1500);
   }
 
   navigate = (address) => {
@@ -64,7 +73,7 @@ class TransactionDetail extends React.Component {
 
   render() {
     const { navigation, styles, theme } = this.props;
-    const tx = navigation.getParam('tx', this.state.tx);
+    const { tx, loading } = this.state;
 
     if (!tx) {
       return (
@@ -95,7 +104,15 @@ class TransactionDetail extends React.Component {
     const normalizedAmount = fromRawLsk(tx.amount);
 
     return (
-      <ScrollView style={[styles.container, styles.theme.container]}>
+      <ScrollView
+        style={[styles.container, styles.theme.container]}
+        refreshControl={(
+          <RefreshControl
+            refreshing={loading}
+            onRefresh={this.onRefresh}
+          />
+        )}
+      >
         <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
           <View style={styles.row}>
             {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
