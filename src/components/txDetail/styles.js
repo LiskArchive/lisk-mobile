@@ -7,9 +7,6 @@ export default () => ({
       paddingTop: 0,
       paddingBottom: 20,
     },
-    containerLoading: {
-      paddingTop: 20,
-    },
     divider: {
       margin: 20,
       marginBottom: 0,

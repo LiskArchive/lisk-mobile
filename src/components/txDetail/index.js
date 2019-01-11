@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ScrollView, View, Image, ActivityIndicator } from 'react-native';
+import { ScrollView, View, Image } from 'react-native';
 import connect from 'redux-connect-decorator';
 import FormattedDate from '../formattedDate';
 import withTheme from '../withTheme';
@@ -9,6 +9,7 @@ import Share from '../share';
 import { B, P, H1, H3, A } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import Avatar from '../avatar';
+import Loading from '../transactions/loading';
 import transactions from '../../constants/transactions';
 import { getTransactions } from '../../utilities/api/transactions';
 import Blur from '../transactions/blur';
@@ -67,9 +68,9 @@ class TransactionDetail extends React.Component {
 
     if (!tx) {
       return (
-        <ScrollView style={[styles.container, styles.containerLoading, styles.theme.container]}>
-          <ActivityIndicator size="large" />
-        </ScrollView>
+        <View style={[styles.container, styles.theme.container]}>
+          <Loading />
+        </View>
       );
     }
 
