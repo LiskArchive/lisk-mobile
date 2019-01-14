@@ -140,7 +140,9 @@ class Overview extends React.Component {
             {
               bookmark ? <H4 style={styles.theme.text}>{bookmark.label}</H4> : null
             }
-            <P style={[styles.address, styles.text, styles.theme.text]}>{address}</P>
+            <P style={[styles.text, styles.theme.text, styles.address]}>
+              {address}
+            </P>
           </View>
           <View style={[styles.row, styles.theme.row]}>
             <Icon
