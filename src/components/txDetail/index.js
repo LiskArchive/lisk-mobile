@@ -17,6 +17,7 @@ import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
 import { colors, themes } from '../../constants/styleGuide';
+import { merge } from '../../utilities/helpers';
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
@@ -45,10 +46,11 @@ class TransactionDetail extends React.Component {
   async retrieveTransaction(id, delay = 0) {
     try {
       const { data } = await getTransactions(this.props.activePeer, { id });
-      setTimeout(() => this.setState({
-        tx: data[0],
+      const tx = data[0] || {};
+      setTimeout(() => this.setState(prevState => ({
+        tx: merge(prevState.tx, tx),
         refreshing: false,
-      }), delay);
+      })), delay);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
     }
