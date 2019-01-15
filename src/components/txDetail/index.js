@@ -28,7 +28,7 @@ const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelega
 class TransactionDetail extends React.Component {
   state = {
     tx: null,
-    loading: false,
+    refreshing: false,
   }
 
   componentDidMount() {
@@ -36,24 +36,28 @@ class TransactionDetail extends React.Component {
     const tx = navigation.getParam('tx', null);
 
     if (tx) {
-      this.setState({ tx });
+      this.setState({ tx }, () => this.retrieveTransaction(tx.id));
     } else {
       this.retrieveTransaction(navigation.getParam('txId', false));
     }
   }
 
   async retrieveTransaction(id, delay = 0) {
-    this.setState({ loading: true });
     try {
       const { data } = await getTransactions(this.props.activePeer, { id });
-      setTimeout(() => this.setState({ tx: data[0], loading: false }), delay);
+      setTimeout(() => this.setState({
+        tx: data[0],
+        refreshing: false,
+      }), delay);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
     }
   }
 
   onRefresh = () => {
-    this.retrieveTransaction(this.state.tx.id, 1500);
+    this.setState({
+      refreshing: true,
+    }, () => this.retrieveTransaction(this.state.tx.id, 1500));
   }
 
   navigate = (address) => {
@@ -73,7 +77,7 @@ class TransactionDetail extends React.Component {
 
   render() {
     const { navigation, styles, theme } = this.props;
-    const { tx, loading } = this.state;
+    const { tx, refreshing } = this.state;
 
     if (!tx) {
       return (
@@ -108,7 +112,7 @@ class TransactionDetail extends React.Component {
         style={[styles.container, styles.theme.container]}
         refreshControl={(
           <RefreshControl
-            refreshing={loading}
+            refreshing={refreshing}
             onRefresh={this.onRefresh}
           />
         )}
