@@ -4,6 +4,7 @@ import Lisk from '@liskhq/lisk-client';
  * Gets the list of transactions for a given filtering config
  *
  * @param {Object} data
+ * @param {String?} data.id - A valid ID for specific transaction
  * @param {String?} data.senderId - A valid Lisk ID to filter the senderID
  * @param {String?} data.recipientId - A valid Lisk ID to filter the recipientId
  * @param {Number?} limit - defaults on 25

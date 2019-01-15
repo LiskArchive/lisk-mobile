@@ -61,7 +61,6 @@ export default () => ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: 170,
     },
     emptyStateActivityIndicator: {
       position: 'absolute',

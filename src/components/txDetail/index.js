@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ScrollView, View, Image } from 'react-native';
+import { ScrollView, View, Image, RefreshControl } from 'react-native';
 import connect from 'redux-connect-decorator';
 import FormattedDate from '../formattedDate';
 import withTheme from '../withTheme';
@@ -9,63 +9,116 @@ import Share from '../share';
 import { B, P, H1, H3, A } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import Avatar from '../avatar';
+import Loading from '../transactions/loading';
 import transactions from '../../constants/transactions';
+import { getTransactions } from '../../utilities/api/transactions';
 import Blur from '../transactions/blur';
 import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
 import { colors, themes } from '../../constants/styleGuide';
+import { merge } from '../../utilities/helpers';
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 @connect(state => ({
+  activePeer: state.peers.activePeer,
   followedAccounts: state.accounts.followed || [],
   account: state.accounts.active || {},
 }), {})
 class TransactionDetail extends React.Component {
+  state = {
+    tx: null,
+    refreshing: false,
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    const tx = navigation.getParam('tx', null);
+
+    if (tx) {
+      this.setState({ tx }, () => this.retrieveTransaction(tx.id));
+    } else {
+      this.retrieveTransaction(navigation.getParam('txId', false));
+    }
+  }
+
+  async retrieveTransaction(id, delay = 0) {
+    try {
+      const { data } = await getTransactions(this.props.activePeer, { id });
+      const tx = data[0] || {};
+      setTimeout(() => this.setState(prevState => ({
+        tx: merge(prevState.tx, tx),
+        refreshing: false,
+      })), delay);
+    } catch (error) {
+      console.log(error); // eslint-disable-line no-console
+    }
+  }
+
+  onRefresh = () => {
+    this.setState({
+      refreshing: true,
+    }, () => this.retrieveTransaction(this.state.tx.id, 1500));
+  }
+
   navigate = (address) => {
-    const {
-      navigation, account,
-    } = this.props;
+    const { navigation, account } = this.props;
     if (address !== account.address) {
       navigation.navigate('Wallet', { address });
     }
   }
 
-  render() {
-    const {
-      navigation, styles, theme, followedAccounts,
-    } = this.props;
+  getAccountLabel = (accountId) => {
+    const followedAccount = this.props.followedAccounts.find(a => a.address === accountId);
+    if (followedAccount) {
+      return followedAccount.label;
+    }
+    return accountId;
+  };
 
-    const tx = navigation.getParam('tx', null);
-    const account = navigation.getParam('account', null);
+  render() {
+    const { navigation, styles, theme } = this.props;
+    const { tx, refreshing } = this.state;
+
+    if (!tx) {
+      return (
+        <View style={[styles.container, styles.theme.container]}>
+          <Loading />
+        </View>
+      );
+    }
+
+    const walletAccountId = navigation.getParam('account', '');
     const incognito = navigation.getParam('incognito', null);
     let arrowStyle;
     let amountStyle = [styles.outgoing, styles.theme.outgoing];
+    let firstAddress = tx.senderId;
     let secondAddress = tx.recipientId;
     let amountSign = '-';
     let direction = 'outgoing';
 
-    if ((account !== tx.senderId) && tx.type === 0) {
+    if ((walletAccountId !== tx.senderId) && tx.type === 0) {
       arrowStyle = styles.reverseArrow;
       amountStyle = [styles.incoming, styles.theme.incoming];
+      firstAddress = tx.recipientId;
       secondAddress = tx.senderId;
       amountSign = '';
       direction = 'incoming';
     }
 
     const normalizedAmount = fromRawLsk(tx.amount);
-    const getAccountLabel = (accountId) => {
-      const followedAccount = followedAccounts.find(a => a.address === accountId);
-      if (followedAccount) {
-        return followedAccount.label;
-      }
-
-      return accountId;
-    };
 
     return (
-      <ScrollView style={[styles.container, styles.theme.container]}>
+      <ScrollView
+        style={[styles.container, styles.theme.container]}
+        refreshControl={(
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={this.onRefresh}
+          />
+        )}
+      >
         <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
           <View style={styles.row}>
             {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
@@ -74,7 +127,7 @@ class TransactionDetail extends React.Component {
                 source={transactions[txTypes[tx.type]].image(theme)}
               /> :
               <Fragment>
-                <Avatar address={account} size={50} />
+                <Avatar address={firstAddress} size={50} />
                 {
                   theme === themes.light ?
                     <Image source={arrowLight} style={[styles.arrow, arrowStyle]} /> :
@@ -135,7 +188,7 @@ class TransactionDetail extends React.Component {
                 onPress={() => this.navigate(tx.senderId)}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
               >
-                {getAccountLabel(tx.senderId)}
+                {this.getAccountLabel(tx.senderId)}
               </A>
             </View>
           </View>
@@ -158,7 +211,7 @@ class TransactionDetail extends React.Component {
                   onPress={() => this.navigate(tx.recipientId)}
                   style={[styles.value, styles.theme.value, styles.transactionId]}
                 >
-                  {getAccountLabel(tx.recipientId)}
+                  {this.getAccountLabel(tx.recipientId)}
                 </A>
               </View>
             </View>
