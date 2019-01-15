@@ -2,9 +2,7 @@ import { themes, colors, boxes } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {
-      flex: 1,
-    },
+    wrapper: {},
     container: {
       height: '100%',
     },
@@ -12,27 +10,28 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       flex: 1,
-      paddingBottom: 60,
     },
     subHeader: {
       margin: boxes.boxPadding,
+      marginBottom: 0,
     },
     main: {
       flexDirection: 'column',
       justifyContent: 'space-around',
       alignItems: 'center',
+      paddingTop: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
     },
     address: {
-      marginBottom: 15,
+      marginBottom: 16,
     },
     shareContent: {
       flexDirection: 'column',
       alignItems: 'center',
     },
     shareTextContainer: {
-      marginTop: 15,
+      marginTop: 16,
       flexDirection: 'row',
       alignItems: 'center',
     },

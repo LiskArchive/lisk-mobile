@@ -47,5 +47,11 @@ export const tabBarHeight = () => 49;
 /**
  * @returns {Number} - The height of the view under the header and above the tabs bar
  */
-export const viewportHeight = () =>
-  deviceHeight() - headerHeight() - 56 - (deviceType() === 'iOSx' ? 24 : 0);
+export const viewportHeight = () => deviceHeight() - headerHeight() - 56 - (deviceType() === 'iOSx' ? 24 : 0);
+
+
+export const SCREEN_HEIGHTS = {
+  SM: 640, // 640
+  MD: 960, // 960
+  LG: 1200, // Rest
+};

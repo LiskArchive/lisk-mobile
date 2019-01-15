@@ -7,9 +7,11 @@ import Input from '../../toolBox/input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { merge } from '../../../utilities/helpers';
-import { deviceType } from '../../../utilities/device';
+import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const isAndroid = deviceType() === 'android';
+
 class Reference extends React.Component {
   state = {
     reference: {
@@ -31,6 +33,7 @@ class Reference extends React.Component {
     }
 
     navigation.setParams({
+      title: isSmallScreen ? 'Add a reference' : 'Send',
       showButtonLeft: true,
       action: () => prevStep(),
     });
@@ -80,11 +83,13 @@ class Reference extends React.Component {
           }}
         >
           <View>
-            <View style={styles.headerContainer}>
-              <P style={styles.theme.subHeader}>
-                Add a reference to this transaction.
-              </P>
-            </View>
+            {!isSmallScreen ? (
+              <View style={styles.headerContainer}>
+                <P style={styles.theme.subHeader}>
+                  Add a reference to this transaction.
+                </P>
+              </View>
+            ) : null}
 
             <Input
               reference={(el) => { this.input = el; }}

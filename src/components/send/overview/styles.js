@@ -30,8 +30,9 @@ export default () => ({
       paddingBottom: 15,
     },
     address: {
-      paddingBottom: 0,
       paddingTop: 5,
+      paddingRight: 0,
+      paddingBottom: 0,
     },
     button: {
       borderRadius: 0,

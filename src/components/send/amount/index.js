@@ -11,12 +11,13 @@ import { merge } from '../../../utilities/helpers';
 import AmountInput from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
-import { deviceType } from '../../../utilities/device';
+import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import darkBlur from '../../../assets/images/amountFormBalanceBlur/dark.png';
 import lightBlur from '../../../assets/images/amountFormBalanceBlur/light.png';
 
 const blurs = { dark: darkBlur, light: lightBlur };
 const isAndroid = deviceType() === 'android';
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 @connect(state => ({
   priceTicker: state.liskService.priceTicker,
@@ -67,6 +68,7 @@ class Amount extends React.Component {
     }
 
     navigation.setParams({
+      title: isSmallScreen ? 'Amount' : 'Send',
       showButtonLeft: true,
       action: () => this.props.move({
         to: status ? 0 : 1,
@@ -132,12 +134,13 @@ class Amount extends React.Component {
           }}
         >
           <View>
-            <View style={styles.headerContainer}>
-              <P style={styles.theme.subHeader}>
-                Enter the amount you want to send.
-              </P>
-            </View>
-
+            {!isSmallScreen ? (
+              <View style={styles.headerContainer}>
+                <P style={styles.theme.subHeader}>
+                  Enter the amount you want to send.
+                </P>
+              </View>
+            ) : null}
             <View
               style={[
                 styles.balanceContainer,

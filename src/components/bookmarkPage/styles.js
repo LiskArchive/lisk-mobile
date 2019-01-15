@@ -50,7 +50,7 @@ export default () => ({
       position: 'absolute',
       zIndex: 0,
       left: 20,
-      top: 49,
+      bottom: 18,
     },
     addressContainer: {
       width: '100%',

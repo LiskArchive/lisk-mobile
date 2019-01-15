@@ -18,6 +18,7 @@ const Input = ({
   label, styles, theme, value, onChange, error,
   multiline, onFocus, autoFocus, onBlur, autoCorrect,
   keyboardType = 'default', secureTextEntry, keyboardAppearance,
+  placeholder = '',
 }) => {
   const inputStyle = [
     styles.input,
@@ -33,9 +34,12 @@ const Input = ({
 
   return (
     <View style={[styles.inputContainer, innerStyles.containerStyle]}>
-      <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
-        {label}
-      </Text>
+      {label ? (
+        <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
+          {label}
+        </Text>
+        ) : null
+      }
 
       <TextInput
         style={inputStyle}
@@ -52,6 +56,7 @@ const Input = ({
         allowFontScaling={false}
         secureTextEntry={secureTextEntry}
         onBlur={onBlur}
+        placeholder={placeholder}
       />
 
       {error ? (

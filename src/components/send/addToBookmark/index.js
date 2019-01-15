@@ -10,9 +10,11 @@ import getStyles from './styles';
 import {
   accountFollowed as accountFollowedAction,
 } from '../../../actions/accounts';
-import { deviceType } from '../../../utilities/device';
+import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 
 const isAndroid = deviceType() === 'android';
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
+
 @connect(state => ({
   account: state.accounts.followed,
 }), {
@@ -31,6 +33,7 @@ class AddToBookmark extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
+      title: isSmallScreen ? 'Add to bookmarks' : 'Send',
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
@@ -68,9 +71,9 @@ class AddToBookmark extends React.Component {
   }
 
   render() {
-    const { styles } = this.props;
+    const { styles, sharedData: { address } } = this.props;
     const { label } = this.state;
-    const { address } = this.props.sharedData;
+
     return (
       <View style={styles.theme.wrapper}>
         <KeyboardAwareScrollView
@@ -83,11 +86,13 @@ class AddToBookmark extends React.Component {
           }}
         >
           <View>
-            <View style={styles.headerContainer}>
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
-                Optional: add a label to save this address for the future.
-              </P>
-            </View>
+            {!isSmallScreen ? (
+              <View style={styles.headerContainer}>
+                <P style={[styles.subHeader, styles.theme.subHeader]}>
+                  Optional: add a label to save this address for the future.
+                </P>
+              </View>
+            ) : null}
             <View>
               <View style={styles.row}>
                 <P style={[styles.label, styles.theme.label]}>Address</P>

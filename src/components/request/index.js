@@ -4,7 +4,7 @@ import { View, Platform, TouchableWithoutFeedback } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Share from '../share';
-import { viewportHeight, deviceWidth } from '../../utilities/device';
+import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from '../../utilities/device';
 import Input from '../toolBox/input';
 import { P, B } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
@@ -13,8 +13,8 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes, colors } from '../../constants/styleGuide';
 
-const pageHeight = viewportHeight();
-const qrCodeSize = Math.min(pageHeight - 355, Math.floor(deviceWidth() * 0.8));
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
+const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.8);
 
 @connect(state => ({
   account: state.accounts.active,
@@ -61,9 +61,11 @@ class Request extends React.Component {
           contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}
         >
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-            <P style={[styles.subHeader, styles.theme.subHeader]}>
-              Request LSK tokens from other accounts.
-            </P>
+            {!isSmallScreen ? (
+              <P style={[styles.subHeader, styles.theme.subHeader]}>
+                Request LSK tokens from other accounts.
+              </P>
+            ) : null}
             <View style={styles.main}>
               <B style={[styles.address, styles.theme.address]}>
                 {address}
