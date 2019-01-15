@@ -33,7 +33,7 @@ class Confirm extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({
-      title: isSmallScreen ? 'Second passphrase' : 'Send',
+      title: isSmallScreen ? 'Confirm' : 'Send',
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
