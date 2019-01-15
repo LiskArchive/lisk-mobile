@@ -1,7 +1,8 @@
-import { Dimensions, Platform, DeviceInfo } from 'react-native';
+import { Platform, DeviceInfo } from 'react-native';
+import { deviceHeight, SCREEN_HEIGHTS } from '../../utilities/device';
 import { themes, colors, boxes } from '../../constants/styleGuide';
 
-const { height } = Dimensions.get('window');
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default () => ({
   common: {
@@ -21,8 +22,8 @@ export default () => ({
     row: {
       flexDirection: 'row',
       paddingRight: 50,
-      marginBottom: height > 640 ? 10 : 3,
-      paddingBottom: height > 640 ? 14 : 3,
+      marginBottom: isSmallScreen ? 8 : 10,
+      paddingBottom: isSmallScreen ? 12 : 14,
     },
     separator: {
       borderBottomWidth: 1,
