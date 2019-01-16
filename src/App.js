@@ -1,12 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
+import { I18nextProvider } from 'react-i18next';
 import connect from 'redux-connect-decorator';
 import Router from './components/router';
 import Loading from './components/loading';
 import store from './store/index';
 import ThemeContext from './contexts/theme';
 import { themes } from './constants/styleGuide';
+import i18n from '../locales';
 
 @connect(state => ({
   settings: state.settings,
@@ -17,11 +19,11 @@ class ThemedApp extends React.Component {
 
     return (
       <ThemeContext.Provider value={theme}>
-        <Fragment>
+        <I18nextProvider i18n={ i18n }>
           <StatusBar barStyle={theme === themes.light ? 'dark-content' : 'light-content'} />
           <Loading />
           <Router />
-        </Fragment>
+        </I18nextProvider>
       </ThemeContext.Provider>
     );
   }
