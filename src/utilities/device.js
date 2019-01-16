@@ -1,4 +1,4 @@
-import { Platform, DeviceInfo, Dimensions } from 'react-native';
+import { Platform, DeviceInfo, Dimensions, NativeModules } from 'react-native';
 import { Header } from 'react-navigation';
 
 const { width, height } = Dimensions.get('window');
@@ -54,4 +54,11 @@ export const SCREEN_HEIGHTS = {
   SM: 640, // 640
   MD: 960, // 960
   LG: 1200, // Rest
+};
+
+export const deviceLocale = () => {
+  if (Platform.OS === 'ios') {
+    return NativeModules.SettingsManager.settings.AppleLocale.substr(0, 2);
+  }
+  return NativeModules.I18nManager.localeIdentifier.substr(0, 2);
 };

@@ -1,15 +1,13 @@
-import { NativeModules } from 'react-native';
 import actionTypes from '../../constants/actions';
 import { storeSettings } from '../../utilities/storage';
+import { deviceLocale } from '../../utilities/device';
 import i18n from '../../../locales';
-
-const deviceLocale = NativeModules.SettingsManager.settings.AppleLocale;
 
 const settingsMiddleware = store => next => (action) => {
   switch (action.type) {
     case actionTypes.settingsRetrieved:
       if (!action.data.language) {
-        action.data.language = deviceLocale.substr(0, 2);
+        action.data.language = deviceLocale();
       }
 
       if (action.data.language !== 'en') {
