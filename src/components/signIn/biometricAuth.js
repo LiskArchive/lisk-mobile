@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
+import { withNamespaces } from 'react-i18next';
 import LottieView from 'lottie-react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { bioMetricAuthentication } from '../../utilities/passphrase';
@@ -49,14 +50,15 @@ class BiometricAuth extends React.Component {
   }
 
   render() {
+    const { t, sensorType, toggleView } = this.props;
     const { opacity, tried } = this.state;
 
     return (<View style={styles.container}>
       <View style={styles.titleContainer}>
         <Animated.Text style={[styles.title, { opacity }]}>
-          { this.props.sensorType === 'Face ID' ?
-            'Look at the front camera to authenticate.' :
-            'Place your finger over the touch sensor to authenticate.'
+          { sensorType === 'Face ID' ?
+            t('Look at the front camera to authenticate.') :
+            t('Place your finger over the touch sensor to authenticate.')
           }
         </Animated.Text>
       </View>
@@ -76,7 +78,7 @@ class BiometricAuth extends React.Component {
         }
         <Animated.View style={{ opacity }}>
           <Icon size={40} color={colors.light.white}
-            name={ this.props.sensorType === 'Face ID' ? 'face-id-full' : 'touch-id-full'}
+            name={ sensorType === 'Face ID' ? 'face-id-full' : 'touch-id-full'}
             style={styles.authTypeIcon} />
         </Animated.View>
       </View>
@@ -86,15 +88,15 @@ class BiometricAuth extends React.Component {
         </P>
         <P style={[styles.question, styles.fillWidth]}>
           {
-            `Don't want to use ${this.props.sensorType}?`
+            t(`Don't want to use ${sensorType}?`)
           }
         </P>
         <A
           style={[styles.link, styles.fillWidth]}
-          onPress={() => this.props.toggleView({ view: 'form' })}>Sign in manually</A>
+          onPress={() => toggleView({ view: 'form' })}>Sign in manually</A>
       </Animated.View>
     </View>);
   }
 }
 
-export default BiometricAuth;
+export default withNamespaces()(BiometricAuth);
