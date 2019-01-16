@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
-import { withNamespaces } from 'react-i18next';
+import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { bioMetricAuthentication } from '../../utilities/passphrase';
@@ -93,10 +93,10 @@ class BiometricAuth extends React.Component {
         </P>
         <A
           style={[styles.link, styles.fillWidth]}
-          onPress={() => toggleView({ view: 'form' })}>Sign in manually</A>
+          onPress={() => toggleView({ view: 'form' })}>{t('Sign in manually')}</A>
       </Animated.View>
     </View>);
   }
 }
 
-export default withNamespaces()(BiometricAuth);
+export default translate()(BiometricAuth);
