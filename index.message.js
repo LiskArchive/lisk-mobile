@@ -56,7 +56,14 @@ class LiskMessageExtension extends Component {
 
   onComposeTestMessage = () => {
     MessagesManager
-      .composeMessage(`Test ${Date.now()}`)
+      .composeMessage({
+        summaryText: 'Summary Text',
+        url: '?address=1L&amount=50&state=TEST',
+        layout: {
+          imageTitle: 'imageTitle',
+          caption: 'caption',
+        },
+      })
       .then(MessagesManager.requestPresentationStyle('compact'))
       .catch(console.log);
   }

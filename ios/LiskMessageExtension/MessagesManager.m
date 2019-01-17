@@ -15,14 +15,14 @@
 RCT_EXTERN_METHOD(getActiveConversation: (RCTResponseSenderBlock)callback)
 
 RCT_EXTERN_METHOD(composeMessage:
-                  (NSString *)messageText
+                  (NSDictionary *)messageData
                   resolver: (RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject
                   )
 
 RCT_EXTERN_METHOD(getPresentationStyle: (RCTResponseSenderBlock)callback)
 
-RCT_EXTERN_METHOD(requestPresentationStyle:
+RCT_EXTERN_METHOD(updatePresentationStyle:
                   (NSString *)style
                   resolver: (RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject

@@ -69,7 +69,9 @@
 		ACFD52F521EF79A500A39ABE /* MessagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ACFD52F421EF79A500A39ABE /* MessagesManager.m */; };
 		ACFD52F721EF857E00A39ABE /* RNModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD52F621EF857E00A39ABE /* RNModuleInitialiser.swift */; };
 		ACFD533C21F0833A00A39ABE /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		ACFD537E21F089C900A39ABE /* Mappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD537D21F089C900A39ABE /* Mappers.swift */; };
+		ACFD537E21F089C900A39ABE /* MessagesManagerMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD537D21F089C900A39ABE /* MessagesManagerMappers.swift */; };
+		ACFD538021F0A8FD00A39ABE /* MessagesManagerEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */; };
+		ACFD538221F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B6441690216B3DB2001E51B9 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B644168F216B3B3C001E51B9 /* libSplashScreen.a */; };
 		B647FAA6210720D700EFF1B7 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B647FA4F2107204B00EFF1B7 /* Lottie.framework */; };
@@ -670,7 +672,9 @@
 		ACFD52F221EF78B400A39ABE /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
 		ACFD52F421EF79A500A39ABE /* MessagesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesManager.m; sourceTree = "<group>"; };
 		ACFD52F621EF857E00A39ABE /* RNModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNModuleInitialiser.swift; sourceTree = "<group>"; };
-		ACFD537D21F089C900A39ABE /* Mappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mappers.swift; sourceTree = "<group>"; };
+		ACFD537D21F089C900A39ABE /* MessagesManagerMappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManagerMappers.swift; sourceTree = "<group>"; };
+		ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManagerEvents.swift; sourceTree = "<group>"; };
+		ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessagesManager+MessagesViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B50438F35FD6440883A86E60 /* libLottieReactNative.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libLottieReactNative.a; sourceTree = "<group>"; };
 		B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
@@ -1153,10 +1157,12 @@
 			children = (
 				AC6D417221EF4C6D00B276BD /* LiskMessageExtension-Bridging-Header.h */,
 				AC7A832521EF4BDB004502E4 /* MessagesViewController.swift */,
-				ACFD52F221EF78B400A39ABE /* MessagesManager.swift */,
 				ACFD52F421EF79A500A39ABE /* MessagesManager.m */,
+				ACFD52F221EF78B400A39ABE /* MessagesManager.swift */,
+				ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */,
+				ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */,
+				ACFD537D21F089C900A39ABE /* MessagesManagerMappers.swift */,
 				ACFD52F621EF857E00A39ABE /* RNModuleInitialiser.swift */,
-				ACFD537D21F089C900A39ABE /* Mappers.swift */,
 				AC7A832721EF4BDB004502E4 /* MainInterface.storyboard */,
 				AC7A832A21EF4BDC004502E4 /* Assets.xcassets */,
 				AC7A832C21EF4BDC004502E4 /* Info.plist */,
@@ -2033,11 +2039,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACFD537E21F089C900A39ABE /* Mappers.swift in Sources */,
+				ACFD537E21F089C900A39ABE /* MessagesManagerMappers.swift in Sources */,
 				ACFD52F521EF79A500A39ABE /* MessagesManager.m in Sources */,
+				ACFD538021F0A8FD00A39ABE /* MessagesManagerEvents.swift in Sources */,
 				AC7A832621EF4BDB004502E4 /* MessagesViewController.swift in Sources */,
 				ACFD52F321EF78B400A39ABE /* MessagesManager.swift in Sources */,
 				ACFD52F721EF857E00A39ABE /* RNModuleInitialiser.swift in Sources */,
+				ACFD538221F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
