@@ -52,18 +52,36 @@ class MessagesViewController: MSMessagesAppViewController {
     self.delegate?.didTransition(to: presentationStyle)
   }
 
-  func presentReactNativeView() {
+  private func removeAllChildViewControllers() {
+    for child in self.children {
+      child.willMove(toParent: nil)
+      child.view.removeFromSuperview()
+      child.removeFromParent()
+    }
+  }
+
+  private func presentReactNativeView() {
+    self.removeAllChildViewControllers()
     self.moduleInitialiser = RNModuleInitialiser(messagesVC: self)
     self.bridge = RCTBridge(delegate: moduleInitialiser, launchOptions: nil)
-    let rootView = RCTRootView(bridge: bridge, moduleName: "LiskMessageExtension", initialProperties: nil)
 
+    let rootView = RCTRootView(bridge: bridge, moduleName: "LiskMessageExtension", initialProperties: nil)
     let rootViewController = UIViewController()
     rootViewController.view = rootView
 
     self.addChild(rootViewController)
+
     rootViewController.view.frame = self.view.bounds
+    rootViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
     self.view.addSubview(rootViewController.view)
-    self.didMove(toParent: rootViewController)
+    NSLayoutConstraint.activate([
+      rootViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+      rootViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+      rootViewController.view.topAnchor.constraint(equalTo: self.view.topAnchor),
+      rootViewController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+      ])
+
+    self.didMove(toParent: self)
   }
 }

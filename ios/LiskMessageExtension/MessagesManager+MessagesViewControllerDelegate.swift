@@ -11,9 +11,11 @@ import Messages
 
 extension MessagesManager: MessagesViewControllerDelegate {
   func didBecomeActive(with conversation: MSConversation) {
+    /*
     self.sendEvent(withName: Events.DID_BECOME_ACTIVE.rawValue, body: [
       "conversation": Mappers.conversationToObject(conversation: conversation)
       ])
+    */
   }
 
   func didSelect(message: MSMessage, conversation: MSConversation) {
