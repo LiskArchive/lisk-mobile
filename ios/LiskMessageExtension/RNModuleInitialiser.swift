@@ -16,9 +16,9 @@ class RNModuleInitialiser: NSObject {
 }
 
 extension RNModuleInitialiser: RCTBridgeDelegate {
-
   func sourceURL(for bridge: RCTBridge!) -> URL! {
-    return RCTBundleURLProvider.sharedSettings()?.jsBundleURL(forBundleRoot: "index.message", fallbackResource: nil)
+    let url = RCTBundleURLProvider.sharedSettings()?.jsBundleURL(forBundleRoot: "index.message", fallbackResource: nil)
+    return url
   }
 
   func extraModules(for bridge: RCTBridge!) -> [RCTBridgeModule]! {

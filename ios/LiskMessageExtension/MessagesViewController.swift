@@ -20,10 +20,12 @@ protocol MessagesViewControllerDelegate {
 
 class MessagesViewController: MSMessagesAppViewController {
   var delegate: MessagesViewControllerDelegate?
+  var moduleInitialiser: RNModuleInitialiser?
+  var bridge: RCTBridge?
 
   override func willBecomeActive(with conversation: MSConversation) {
     super.willBecomeActive(with: conversation)
-    self.presentReactNativeView(conversation: conversation)
+    self.presentReactNativeView()
   }
 
   override func didBecomeActive(with conversation: MSConversation) {
@@ -50,9 +52,9 @@ class MessagesViewController: MSMessagesAppViewController {
     self.delegate?.didTransition(to: presentationStyle)
   }
 
-  func presentReactNativeView(conversation: MSConversation) {
-    let moduleInitialiser = RNModuleInitialiser(messagesVC: self)
-    let bridge = RCTBridge(delegate: moduleInitialiser, launchOptions: nil)
+  func presentReactNativeView() {
+    self.moduleInitialiser = RNModuleInitialiser(messagesVC: self)
+    self.bridge = RCTBridge(delegate: moduleInitialiser, launchOptions: nil)
     let rootView = RCTRootView(bridge: bridge, moduleName: "LiskMessageExtension", initialProperties: nil)
 
     let rootViewController = UIViewController()
