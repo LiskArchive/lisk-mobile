@@ -8,7 +8,24 @@
 
 #import <Foundation/Foundation.h>
 #import "React/RCTBridgeModule.h"
+#import "React/RCTEventEmitter.h"
 
-@interface RCT_EXTERN_MODULE(MessagesManager, NSObject)
-RCT_EXTERN_METHOD(sayHello)
+@interface RCT_EXTERN_MODULE(MessagesManager, RCTEventEmitter)
+
+RCT_EXTERN_METHOD(getActiveConversation: (RCTResponseSenderBlock)callback)
+
+RCT_EXTERN_METHOD(composeMessage:
+                  (NSString *)messageText
+                  resolver: (RCTPromiseResolveBlock)resolve
+                  rejecter: (RCTPromiseRejectBlock)reject
+                  )
+
+RCT_EXTERN_METHOD(getPresentationStyle: (RCTResponseSenderBlock)callback)
+
+RCT_EXTERN_METHOD(requestPresentationStyle:
+                  (NSString *)style
+                  resolver: (RCTPromiseResolveBlock)resolve
+                  rejecter: (RCTPromiseRejectBlock)reject
+                  )
+
 @end

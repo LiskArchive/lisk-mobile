@@ -25,8 +25,8 @@ extension RNModuleInitialiser: RCTBridgeDelegate {
     var extraModules = [RCTBridgeModule]()
 
     let messagesManager = MessagesManager(messagesVC: self.messagesVC)
+    self.messagesVC.delegate = messagesManager
     extraModules.append(messagesManager)
-
     return extraModules
   }
 }
