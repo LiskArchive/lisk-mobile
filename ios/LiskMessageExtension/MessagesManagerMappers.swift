@@ -10,9 +10,9 @@ import Foundation
 import Messages
 
 class Mappers {
-  static func messageToObject(message: MSMessage) -> [String: Any?] {
+  static func messageToObject(message: MSMessage, withParticipiantIdentifier: Bool = true) -> [String: Any?] {
     return [
-      "senderParticipantIdentifier": message.senderParticipantIdentifier.uuidString,
+      "senderParticipantIdentifier": withParticipiantIdentifier ? message.senderParticipantIdentifier.uuidString : "",
       "summaryText": message.summaryText,
       "url": message.url?.absoluteString,
       "shouldExpire": message.shouldExpire,

@@ -50,8 +50,15 @@ class MessagesManager: RCTEventEmitter {
     resolve(style)
   }
 
-  @objc func getActiveConversation(_ callback: RCTResponseSenderBlock) {
-    callback([self.messagesVC.activeConversation as Any])
+  @objc func getActiveConversation(_ callback: @escaping RCTResponseSenderBlock) {
+    guard let conversation = self.messagesVC.activeConversation else {
+      return callback([])
+    }
+
+    callback([
+      Mappers.conversationToObject(conversation: conversation),
+      conversation.selectedMessage != nil ? Mappers.messageToObject(message: conversation.selectedMessage!) : []
+      ])
   }
 
   private func createLayout(_ layoutData: [String: String]) -> MSMessageLayout {
@@ -83,7 +90,7 @@ class MessagesManager: RCTEventEmitter {
         return reject("ERROR", "ERROR", error)
       }
 
-      return resolve(Mappers.messageToObject(message: message))
+      return resolve(Mappers.messageToObject(message: message, withParticipiantIdentifier: false))
     }
   }
 }

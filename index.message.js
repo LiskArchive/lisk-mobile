@@ -38,16 +38,16 @@ class LiskMessageExtension extends Component {
 
   componentDidMount() {
     MessagesManager
+      .getActiveConversation((conversation, message) => this.setState({ conversation, message }));
+
+    MessagesManager
       .getPresentationStyle(presentationStyle => this.setState({ presentationStyle }));
 
     MessagesEvents
       .addListener('onPresentationStyleChanged', ({ presentationStyle }) => this.setState({ presentationStyle }));
 
     MessagesEvents
-      .addListener('didBecomeActive', ({ conversation }) => this.setState({ conversation }));
-
-    MessagesEvents
-      .addListener('didSelectMessage', ({ message, conversation }) => this.setState({ message, conversation }));
+      .addListener('didSelectMessage', ({ conversation, message }) => this.setState({ conversation, message }));
   }
 
   onReload = () => {
@@ -61,16 +61,16 @@ class LiskMessageExtension extends Component {
         url: '?address=1L&amount=50&state=TEST',
         layout: {
           imageTitle: 'imageTitle',
-          caption: 'caption',
+          caption: `caption ${Date.now()}`,
         },
       })
-      .then(MessagesManager.requestPresentationStyle('compact'))
+      .then(MessagesManager.updatePresentationStyle('compact'))
       .catch(console.log);
   }
 
   onTogglePresentationStyle = () => {
     MessagesManager
-      .requestPresentationStyle(this.state.presentationStyle === 'expanded' ? 'compact' : 'expanded')
+      .updatePresentationStyle(this.state.presentationStyle === 'expanded' ? 'compact' : 'expanded')
       .then(presentationStyle => this.setState({ presentationStyle }))
       .catch(console.log);
   }
@@ -81,7 +81,7 @@ class LiskMessageExtension extends Component {
         <Button
           style={styles.button}
           onPress={this.onReload}
-          title="Reload (buggy)"
+          title="Reload"
         />
 
         <Text style={styles.text}>
