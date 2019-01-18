@@ -6,7 +6,7 @@ import { colors } from '../../constants/styleGuide';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F7FBFE',
   },
   welcome: {
     fontSize: 20,
@@ -28,10 +28,25 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   pickers: {
-    height: 100,
-    width: 60,
+    height: 120,
+    width: 50,
     justifyContent: 'center',
     overflow: 'hidden',
+  },
+  pickerItem: {
+    fontFamily: 'Gilroy',
+    fontSize: 33,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  pickerPoint: {
+    position: 'absolute',
+    top: 29,
+    fontFamily: 'Gilroy',
+    fontSize: 43,
+    fontWeight: 'bold',
+    width: '100%',
+    textAlign: 'center',
   },
   addressContainer: {
     width: '100%',
@@ -48,13 +63,13 @@ export default StyleSheet.create({
     position: 'absolute',
     zIndex: 0,
     left: 20,
-    top: 41,
+    top: 21,
   },
   iconButton: {
     position: 'absolute',
     zIndex: 0,
     right: 20,
-    top: 41,
+    top: 21,
     width: 34,
     height: 34,
     backgroundColor: colors.light.actionBlue,

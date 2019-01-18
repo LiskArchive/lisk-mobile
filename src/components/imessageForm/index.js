@@ -47,7 +47,7 @@ class LiskMessageExtension extends Component {
       validity: -1,
     },
     avatarPreview: false,
-    num: [0, 2, 3, 0],
+    num: [0, 0, 0, 0],
     presentationStyle: '',
     message: '',
     conversation: '',
@@ -85,13 +85,14 @@ class LiskMessageExtension extends Component {
 
   componentDidMount = () => {
     getPassphraseFromKeyChain().then((account) => {
-      this.setState({
-        address: {
-          value: account.username,
-        },
-
-        avatarPreview: true,
-      });
+      if (account) {
+        this.setState({
+          address: {
+            value: account.username,
+          },
+          avatarPreview: true,
+        });
+      }
     });
     MessagesManager.getActiveConversation((conversation, message) =>
       this.setState({ conversation, message }));
@@ -120,6 +121,7 @@ class LiskMessageExtension extends Component {
     if (address.validity !== 1) {
       const url = `?address=${address.value}&amount=${amount}&state=TEST'`;
       // this.setState({ url });
+      MessagesManager.updatePresentationStyle('compact');
       MessagesManager.composeMessage({
         summaryText: 'Summary Text',
         url,
@@ -129,7 +131,7 @@ class LiskMessageExtension extends Component {
           subcaption: `by ${address.value}`,
         },
       })
-        .then(() => MessagesManager.updatePresentationStyle('compact'))
+        .then(() => true)
         .catch(console.log);
     }
   };
@@ -168,11 +170,14 @@ class LiskMessageExtension extends Component {
           </Text>
           <View style={styles.rowContainer}>
             <View style={styles.innerContainer}>
-              {num.map((item, index) => (
+              <Text style={styles.pickerPoint}>.</Text>
+              {num.map((val, index) => (
                 <Picker
                   key={index}
                   selectedValue={num[index]}
                   style={styles.pickers}
+                  itemStyle={styles.pickerItem}
+                  itemTextStyle={{ fontSize: 18, color: 'blue' }}
                   onValueChange={itemValue =>
                     this.changePicker(itemValue, index)
                   }
@@ -182,6 +187,7 @@ class LiskMessageExtension extends Component {
                       key={item}
                       label={item.toString()}
                       value={item}
+                      color={num[index] == item ? '#000' : 'rgba(0, 0, 0, 0.3)'}
                     />
                   ))}
                 </Picker>
@@ -204,8 +210,8 @@ class LiskMessageExtension extends Component {
                 />
             }
             <Input
-              label={'address'}
               autoCorrect={false}
+              placeholder='Enter a address'
               reference={(input) => {
                 this.input = input;
               }}
