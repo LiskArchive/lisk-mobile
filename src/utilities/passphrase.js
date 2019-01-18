@@ -27,11 +27,16 @@ const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
  *  {String} message - A descriptive message for what went wrong
  */
 export const validatePassphrase = (passphrase) => {
-  if (passphrase.trim().length === 0) return [{ code: 'empty_value', message: 'Invalid Passphrase' }];
+  if (passphrase.trim().length === 0) {
+    return [{ code: 'empty_value', message: 'Invalid Passphrase' }];
+  }
   const numberOfWords = Math.ceil(passphrase.trim().split(' ').length / 3) * 3;
   const validPassLength = Math.max(Math.min(numberOfWords, 24), 12);
-  return Lisk.passphrase.validation
-    .getPassphraseValidationErrors(passphrase, undefined, validPassLength);
+  return Lisk.passphrase.validation.getPassphraseValidationErrors(
+    passphrase,
+    undefined,
+    validPassLength,
+  );
 };
 
 /**
@@ -50,14 +55,18 @@ export const generatePassphrase = () => {
  */
 export const storePassphraseInKeyChain = (passphrase) => {
   const address = extractAddress(passphrase);
-  Keychain.setGenericPassword(address, passphrase);
+  Keychain.setGenericPassword(address, passphrase, {
+    accessGroup: '58UK9RE9TP.org.lisk.mobile',
+    service: 'org.lisk.mobile',
+  });
 };
 
 /**
  * Removes the passphrase and address on the keychain of the device
  */
 export const removePassphraseFromKeyChain = async (
-  successCallback, errorCallback = err => err,
+  successCallback,
+  errorCallback = err => err,
 ) => {
   try {
     await Keychain.resetGenericPassword();
@@ -67,7 +76,8 @@ export const removePassphraseFromKeyChain = async (
   }
 };
 
-export const getPassphraseFromKeyChain = () => Keychain.getGenericPassword();
+export const getPassphraseFromKeyChain = () =>
+  Keychain.getGenericPassword({ service: 'org.lisk.mobile' });
 
 /**
  * @param {function} successCallback
@@ -77,18 +87,23 @@ export const getPassphraseFromKeyChain = () => Keychain.getGenericPassword();
  * first check bio metric Sensor availability after that authenticate a user base on that
  */
 export const bioMetricAuthentication = async ({
-  successCallback, errorCallback = err => err, description, androidError,
+  successCallback,
+  errorCallback = err => err,
+  description,
+  androidError,
 }) => {
-  const authConfig = Platform.OS === 'ios' ?
-    {
-      description: description || 'Scan your fingerprint on the device scanner to sign in',
-    } :
-    { onAttempt: androidError };
+  const authConfig =
+    Platform.OS === 'ios'
+      ? {
+        description:
+            description ||
+            'Scan your fingerprint on the device scanner to sign in',
+      }
+      : { onAttempt: androidError };
   try {
     await FingerprintScanner.isSensorAvailable();
     try {
-      await FingerprintScanner
-        .authenticate(authConfig);
+      await FingerprintScanner.authenticate(authConfig);
       successCallback();
     } catch (error) {
       errorCallback(error);
@@ -109,8 +124,7 @@ export const assembleWordOptions = (passphraseWords, missingWords) => {
 
     do {
       rand = Math.floor(Math.random() * 2048);
-    }
-    while (passphraseWords.includes(fullWordsList[rand]));
+    } while (passphraseWords.includes(fullWordsList[rand]));
 
     return fullWordsList[rand];
   };
