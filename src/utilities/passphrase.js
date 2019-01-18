@@ -69,7 +69,7 @@ export const removePassphraseFromKeyChain = async (
   errorCallback = err => err,
 ) => {
   try {
-    await Keychain.resetGenericPassword();
+    await Keychain.resetGenericPassword({ service: 'org.lisk.mobile' });
     successCallback();
   } catch (error) {
     errorCallback(error);
@@ -96,8 +96,8 @@ export const bioMetricAuthentication = async ({
     Platform.OS === 'ios'
       ? {
         description:
-            description ||
-            'Scan your fingerprint on the device scanner to sign in',
+          description ||
+          'Scan your fingerprint on the device scanner to sign in',
       }
       : { onAttempt: androidError };
   try {
