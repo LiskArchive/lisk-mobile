@@ -10,12 +10,13 @@
     "build:android": "react-native run-android",
     "build:ios": "react-native run-ios",
     "release:android": "cd android && ./gradlew assembleRelease",
-    "link": "./node_modules/.bin/rn-nodeify --hack --install && node androidSdkFix.js",
+    "link": "./node_modules/.bin/rn-nodeify --hack --install && node ./scripts/androidSdkFix.js",
     "test": "jest --config ./jest.config.js --env=jsdom",
     "test:live": "npm test -- --watch",
     "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
-    "postinstall": "npm run link"
+    "postinstall": "npm run link",
+    "i18n": "node ./scripts/scanner.config.js"
   },
   "rnpm": {
     "assets": [
@@ -29,6 +30,7 @@
     }
   },
   "dependencies": {
+    "@liskhq/lisk-client": "2.0.0",
     "@remobile/react-native-qrcode-local-image": "github:yasharAyari/react-native-qrcode-local-image#support-import-from-cameraroll",
     "@tradle/react-native-http": "^2.0.1",
     "assert": "^1.4.1",
@@ -45,7 +47,7 @@
     "history": "^4.7.2",
     "hoist-non-react-statics": "^3.1.0",
     "https-browserify": "0.0.1",
-    "@liskhq/lisk-client": "2.0.0",
+    "i18next": "^13.1.2",
     "lottie-react-native": "=2.5.9",
     "moment": "^2.22.0",
     "path-browserify": "0.0.0",
@@ -54,6 +56,7 @@
     "punycode": "^1.4.1",
     "querystring-es3": "^0.2.1",
     "react": "16.5.0",
+    "react-i18next": "^9.0.2",
     "react-native": "0.57.1",
     "react-native-app-settings": "github:KrazyLabs/react-native-app-settings",
     "react-native-background-timer": "^2.1.0-alpha.6",
@@ -127,7 +130,9 @@
     "eslint-plugin-jest": "=21.22.0",
     "eslint-plugin-react": "=7.4.0",
     "findit": "^2.0.0",
+    "glob": "^7.1.3",
     "husky": "^1.0.0-rc.13",
+    "i18next-scanner": "^2.9.1",
     "jest": "^23.1.0",
     "jest-cli": "^22.4.2",
     "jest-junit": "^5.2.0",
