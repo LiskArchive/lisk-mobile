@@ -32,6 +32,21 @@
 		3354AC9E212EB8660045554F /* libRCTQRCodeLocalImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3354AC79212EB8540045554F /* libRCTQRCodeLocalImage.a */; };
 		3354ACA5212EBA0C0045554F /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3354ACA4212EB9FD0045554F /* libRCTCameraRoll.a */; };
 		336CC48A212D98600058C7E3 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 336CC489212D98480058C7E3 /* libRNCamera.a */; };
+		3394A82321F1DFC0009CF136 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB865073FACB4AEEB229A6FF /* icomoon.ttf */; };
+		3394A82421F1F8C8009CF136 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E2532F5FF444CF99E16AA7B /* OpenSans-Light.ttf */; };
+		3394A82521F1F8CE009CF136 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
+		3394A82621F1F8D5009CF136 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */; };
+		3394A82721F1F8E0009CF136 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */; };
+		33C3306A21F1CE0B003C62F1 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD26D020CFC01C0061FC18 /* libRNSVG.a */; };
+		33C330AE21F1CE13003C62F1 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 330DE27521523A8400B584E3 /* libRNKeychain.a */; };
+		33C330AF21F1CE31003C62F1 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD264420CFBC570061FC18 /* libRNRandomBytes.a */; };
+		33C330B021F1CE3F003C62F1 /* libTcpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD264B20CFBC570061FC18 /* libTcpSockets.a */; };
+		33C330B121F1CE46003C62F1 /* libReactNativeFingerprintScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 330DE2E021523FA000B584E3 /* libReactNativeFingerprintScanner.a */; };
+		33C330B221F1CE4F003C62F1 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD262E20CFBC560061FC18 /* libRNVectorIcons.a */; };
+		33C330B321F1CE7A003C62F1 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD263720CFBC570061FC18 /* libBVLinearGradient.a */; };
+		33C330B421F1CE91003C62F1 /* libRNOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD263E20CFBC570061FC18 /* libRNOS.a */; };
+		33C330B521F1CEB9003C62F1 /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD263120CFBC560061FC18 /* libUdpSockets.a */; };
+		33C330B621F1CEBF003C62F1 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 333E0AA020F901530000C1BF /* libRNBackgroundTimer.a */; };
 		387C045E47964DDF83344920 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAB38B06D754CD8910C2257 /* libBVLinearGradient.a */; };
 		3F03C28FB8B746BA83061EF0 /* libLottieReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B50438F35FD6440883A86E60 /* libLottieReactNative.a */; };
 		426CF278ABDA4231AE32D163 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */; };
@@ -54,6 +69,23 @@
 		89136C304F664565A87459B8 /* libTcpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FCBA23F6D147ACB28C9A76 /* libTcpSockets.a */; };
 		A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
 		AB26AF2FCACA4365AEB39C6B /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B1551D3FD749578DBD4F02 /* libRNReactNativeHapticFeedback.a */; };
+		AC6D413B21EF4C1D00B276BD /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		AC6D416E21EF4C2B00B276BD /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
+		AC6D416F21EF4C2B00B276BD /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
+		AC6D417021EF4C2B00B276BD /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		AC6D417121EF4C2B00B276BD /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
+		AC7A832321EF4BDB004502E4 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC7A832221EF4BDB004502E4 /* Messages.framework */; };
+		AC7A832621EF4BDB004502E4 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7A832521EF4BDB004502E4 /* MessagesViewController.swift */; };
+		AC7A832921EF4BDB004502E4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC7A832721EF4BDB004502E4 /* MainInterface.storyboard */; };
+		AC7A832B21EF4BDC004502E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC7A832A21EF4BDC004502E4 /* Assets.xcassets */; };
+		AC7A832F21EF4BDC004502E4 /* LiskMessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		ACFD52F321EF78B400A39ABE /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD52F221EF78B400A39ABE /* MessagesManager.swift */; };
+		ACFD52F521EF79A500A39ABE /* MessagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ACFD52F421EF79A500A39ABE /* MessagesManager.m */; };
+		ACFD52F721EF857E00A39ABE /* RNModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD52F621EF857E00A39ABE /* RNModuleInitialiser.swift */; };
+		ACFD533C21F0833A00A39ABE /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		ACFD537E21F089C900A39ABE /* MessagesManagerMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD537D21F089C900A39ABE /* MessagesManagerMappers.swift */; };
+		ACFD538021F0A8FD00A39ABE /* MessagesManagerEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */; };
+		ACFD538221F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B6441690216B3DB2001E51B9 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B644168F216B3B3C001E51B9 /* libSplashScreen.a */; };
 		B647FAA6210720D700EFF1B7 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B647FA4F2107204B00EFF1B7 /* Lottie.framework */; };
@@ -291,6 +323,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = SajjadBlurOverlay;
 		};
+		33C3308521F1CE0B003C62F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33C32F0721EDF087003C62F1;
+			remoteInfo = lisk;
+		};
 		33DD262D20CFBC560061FC18 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3F921B75E2A44CB2AF90E226 /* RNVectorIcons.xcodeproj */;
@@ -487,6 +526,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNReactNativeHapticFeedback;
 		};
+		AC7A832D21EF4BDC004502E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC7A832021EF4BDB004502E4;
+			remoteInfo = LiskMessageExtension;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -553,6 +599,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		AC7A837521EF4BDC004502E4 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AC7A832F21EF4BDC004502E4 /* LiskMessageExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B647FAAA210720D700EFF1B7 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -605,6 +662,7 @@
 		3354AC62212EB8540045554F /* RCTQRCodeLocalImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTQRCodeLocalImage.xcodeproj; path = "../node_modules/@remobile/react-native-qrcode-local-image/ios/RCTQRCodeLocalImage.xcodeproj"; sourceTree = "<group>"; };
 		3354AC9F212EB9FD0045554F /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		336CC484212D98480058C7E3 /* RNCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; };
+		33C330B721F1CF26003C62F1 /* LiskMessageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiskMessageExtension.entitlements; sourceTree = "<group>"; };
 		3C4BBF0DB7044654ABCFF9ED /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		3F921B75E2A44CB2AF90E226 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		4046B39F8D0642458314AA32 /* libRNOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNOS.a; sourceTree = "<group>"; };
@@ -626,6 +684,19 @@
 		93B1551D3FD749578DBD4F02 /* libRNReactNativeHapticFeedback.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReactNativeHapticFeedback.a; sourceTree = "<group>"; };
 		9F87DBCE083E405AA4F56F21 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		A1807D09C9484DB7B0CA80BC /* libInteractable.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInteractable.a; sourceTree = "<group>"; };
+		AC6D417221EF4C6D00B276BD /* LiskMessageExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiskMessageExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiskMessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC7A832221EF4BDB004502E4 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		AC7A832521EF4BDB004502E4 /* MessagesViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		AC7A832821EF4BDB004502E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		AC7A832A21EF4BDC004502E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC7A832C21EF4BDC004502E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACFD52F221EF78B400A39ABE /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
+		ACFD52F421EF79A500A39ABE /* MessagesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesManager.m; sourceTree = "<group>"; };
+		ACFD52F621EF857E00A39ABE /* RNModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNModuleInitialiser.swift; sourceTree = "<group>"; };
+		ACFD537D21F089C900A39ABE /* MessagesManagerMappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManagerMappers.swift; sourceTree = "<group>"; };
+		ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManagerEvents.swift; sourceTree = "<group>"; };
+		ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessagesManager+MessagesViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B50438F35FD6440883A86E60 /* libLottieReactNative.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libLottieReactNative.a; sourceTree = "<group>"; };
 		B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
@@ -697,6 +768,30 @@
 				EF44A06F7F1445B7BCE47C7E /* libSajjadBlurOverlay.a in Frameworks */,
 				AB26AF2FCACA4365AEB39C6B /* libRNReactNativeHapticFeedback.a in Frameworks */,
 				4C48D9A2E9E540E29F3B86BD /* libInteractable.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC7A831E21EF4BDB004502E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33C330B621F1CEBF003C62F1 /* libRNBackgroundTimer.a in Frameworks */,
+				33C330B521F1CEB9003C62F1 /* libUdpSockets.a in Frameworks */,
+				33C330B421F1CE91003C62F1 /* libRNOS.a in Frameworks */,
+				33C330B321F1CE7A003C62F1 /* libBVLinearGradient.a in Frameworks */,
+				33C330B221F1CE4F003C62F1 /* libRNVectorIcons.a in Frameworks */,
+				33C330B121F1CE46003C62F1 /* libReactNativeFingerprintScanner.a in Frameworks */,
+				33C330B021F1CE3F003C62F1 /* libTcpSockets.a in Frameworks */,
+				33C330AF21F1CE31003C62F1 /* libRNRandomBytes.a in Frameworks */,
+				33C330AE21F1CE13003C62F1 /* libRNKeychain.a in Frameworks */,
+				33C3306A21F1CE0B003C62F1 /* libRNSVG.a in Frameworks */,
+				ACFD533C21F0833A00A39ABE /* libRCTAnimation.a in Frameworks */,
+				AC6D416E21EF4C2B00B276BD /* libRCTImage.a in Frameworks */,
+				AC6D416F21EF4C2B00B276BD /* libRCTNetwork.a in Frameworks */,
+				AC6D417021EF4C2B00B276BD /* libRCTText.a in Frameworks */,
+				AC6D417121EF4C2B00B276BD /* libRCTWebSocket.a in Frameworks */,
+				AC6D413B21EF4C1D00B276BD /* libReact.a in Frameworks */,
+				AC7A832321EF4BDB004502E4 /* Messages.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,6 +919,7 @@
 			isa = PBXGroup;
 			children = (
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				AC7A832221EF4BDB004502E4 /* Messages.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1049,6 +1145,7 @@
 			children = (
 				832341B51AAA6A8300B99B32 /* libRCTText.a */,
 				3DAD3E941DF850E9000B6D8A /* libRCTText-tvOS.a */,
+				33C3308621F1CE0B003C62F1 /* lisk.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1059,6 +1156,7 @@
 				13B07FAE1A68108700A75B9A /* Lisk */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* LiskTests */,
+				AC7A832421EF4BDB004502E4 /* LiskMessageExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BA225343D84043FE8C726631 /* Resources */,
@@ -1074,6 +1172,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Lisk.app */,
 				00E356EE1AD99517003FC87E /* LiskTests.xctest */,
+				AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1084,6 +1183,25 @@
 				AC1EA59B21B90ABD0086B121 /* libRNReactNativeHapticFeedback.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AC7A832421EF4BDB004502E4 /* LiskMessageExtension */ = {
+			isa = PBXGroup;
+			children = (
+				33C330B721F1CF26003C62F1 /* LiskMessageExtension.entitlements */,
+				AC6D417221EF4C6D00B276BD /* LiskMessageExtension-Bridging-Header.h */,
+				AC7A832521EF4BDB004502E4 /* MessagesViewController.swift */,
+				ACFD52F421EF79A500A39ABE /* MessagesManager.m */,
+				ACFD52F221EF78B400A39ABE /* MessagesManager.swift */,
+				ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */,
+				ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */,
+				ACFD537D21F089C900A39ABE /* MessagesManagerMappers.swift */,
+				ACFD52F621EF857E00A39ABE /* RNModuleInitialiser.swift */,
+				AC7A832721EF4BDB004502E4 /* MainInterface.storyboard */,
+				AC7A832A21EF4BDC004502E4 /* Assets.xcassets */,
+				AC7A832C21EF4BDC004502E4 /* Info.plist */,
+			);
+			path = LiskMessageExtension;
 			sourceTree = "<group>";
 		};
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
@@ -1184,16 +1302,36 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				B647FAAA210720D700EFF1B7 /* Embed Frameworks */,
+				AC7A837521EF4BDC004502E4 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				B647FAA9210720D700EFF1B7 /* PBXTargetDependency */,
+				AC7A832E21EF4BDC004502E4 /* PBXTargetDependency */,
 			);
 			name = Lisk;
 			productName = "Hello World";
 			productReference = 13B07F961A680F5B00A75B9A /* Lisk.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AC7A832021EF4BDB004502E4 /* LiskMessageExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC7A837421EF4BDC004502E4 /* Build configuration list for PBXNativeTarget "LiskMessageExtension" */;
+			buildPhases = (
+				AC7A831D21EF4BDB004502E4 /* Sources */,
+				AC7A831E21EF4BDB004502E4 /* Frameworks */,
+				AC7A831F21EF4BDB004502E4 /* Resources */,
+				ACFD538321F0C93F00A39ABE /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LiskMessageExtension;
+			productName = LiskMessageExtension;
+			productReference = AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */;
+			productType = "com.apple.product-type.app-extension.messages";
 		};
 /* End PBXNativeTarget section */
 
@@ -1201,6 +1339,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
@@ -1211,6 +1350,17 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 58UK9RE9TP;
+						LastSwiftMigration = 1010;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+					AC7A832021EF4BDB004502E4 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 58UK9RE9TP;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -1368,6 +1518,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* Lisk */,
 				00E356ED1AD99517003FC87E /* LiskTests */,
+				AC7A832021EF4BDB004502E4 /* LiskMessageExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1588,6 +1739,13 @@
 			fileType = archive.ar;
 			path = libSajjadBlurOverlay.a;
 			remoteRef = 338348B921762DA2004E2E7A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		33C3308621F1CE0B003C62F1 /* lisk.appex */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.app-extension";
+			path = lisk.appex;
+			remoteRef = 33C3308521F1CE0B003C62F1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		33DD262E20CFBC560061FC18 /* libRNVectorIcons.a */ = {
@@ -1878,6 +2036,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AC7A831F21EF4BDB004502E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3394A82721F1F8E0009CF136 /* OpenSans-Bold.ttf in Resources */,
+				3394A82621F1F8D5009CF136 /* Gilroy-Bold.ttf in Resources */,
+				3394A82521F1F8CE009CF136 /* OpenSans-Regular.ttf in Resources */,
+				3394A82421F1F8C8009CF136 /* OpenSans-Light.ttf in Resources */,
+				3394A82321F1DFC0009CF136 /* icomoon.ttf in Resources */,
+				AC7A832B21EF4BDC004502E4 /* Assets.xcassets in Resources */,
+				AC7A832921EF4BDB004502E4 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1889,6 +2061,23 @@
 			inputPaths = (
 			);
 			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		ACFD538321F0C93F00A39ABE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1915,6 +2104,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AC7A831D21EF4BDB004502E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACFD537E21F089C900A39ABE /* MessagesManagerMappers.swift in Sources */,
+				ACFD52F521EF79A500A39ABE /* MessagesManager.m in Sources */,
+				ACFD538021F0A8FD00A39ABE /* MessagesManagerEvents.swift in Sources */,
+				AC7A832621EF4BDB004502E4 /* MessagesViewController.swift in Sources */,
+				ACFD52F321EF78B400A39ABE /* MessagesManager.swift in Sources */,
+				ACFD52F721EF857E00A39ABE /* RNModuleInitialiser.swift in Sources */,
+				ACFD538221F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1922,6 +2125,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* Lisk */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		AC7A832E21EF4BDC004502E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC7A832021EF4BDB004502E4 /* LiskMessageExtension */;
+			targetProxy = AC7A832D21EF4BDC004502E4 /* PBXContainerItemProxy */;
 		};
 		B647FAA9210720D700EFF1B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1938,6 +2146,14 @@
 			);
 			name = LaunchScreen.xib;
 			path = Lisk;
+			sourceTree = "<group>";
+		};
+		AC7A832721EF4BDB004502E4 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC7A832821EF4BDB004502E4 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2041,8 +2257,11 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
@@ -2076,6 +2295,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile;
 				PRODUCT_NAME = Lisk;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2083,8 +2305,11 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				HEADER_SEARCH_PATHS = (
@@ -2116,6 +2341,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile;
 				PRODUCT_NAME = Lisk;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2196,6 +2423,102 @@
 			};
 			name = Release;
 		};
+		AC7A833021EF4BDC004502E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LiskMessageExtension/LiskMessageExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 58UK9RE9TP;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = LiskMessageExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.LiskMessageExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "LiskMessageExtension/LiskMessageExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AC7A833121EF4BDC004502E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LiskMessageExtension/LiskMessageExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 58UK9RE9TP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = LiskMessageExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.LiskMessageExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LiskMessageExtension/LiskMessageExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2222,6 +2545,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC7A837421EF4BDC004502E4 /* Build configuration list for PBXNativeTarget "LiskMessageExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC7A833021EF4BDC004502E4 /* Debug */,
+				AC7A833121EF4BDC004502E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
