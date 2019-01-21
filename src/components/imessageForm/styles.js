@@ -7,6 +7,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F7FBFE',
+    flexDirection: 'column',
   },
   welcome: {
     fontSize: 20,
