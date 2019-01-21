@@ -187,7 +187,7 @@ class LiskMessageExtension extends Component {
                       key={item}
                       label={item.toString()}
                       value={item}
-                      color={num[index] == item ? '#000' : 'rgba(0, 0, 0, 0.3)'}
+                      color={num[index] === item ? '#000' : 'rgba(0, 0, 0, 0.3)'}
                     />
                   ))}
                 </Picker>
