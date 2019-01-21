@@ -28,6 +28,11 @@ class MessagesViewController: MSMessagesAppViewController {
     self.presentReactNativeView()
   }
 
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    self.removeAllChildViewControllers()
+  }
+
   override func didBecomeActive(with conversation: MSConversation) {
     self.delegate?.didBecomeActive(with: conversation)
   }
@@ -68,6 +73,14 @@ class MessagesViewController: MSMessagesAppViewController {
     let rootView = RCTRootView(bridge: bridge, moduleName: "LiskMessageExtension", initialProperties: nil)
     let rootViewController = UIViewController()
     rootViewController.view = rootView
+
+    let loadingView = Bundle.main.loadNibNamed("Loading", owner: nil, options: nil)![0] as! UIView
+    loadingView.frame = self.view.bounds
+
+
+    rootView?.loadingView = loadingView
+    rootView?.loadingViewFadeDelay = 0
+    rootView?.loadingViewFadeDuration = 0
 
     self.addChild(rootViewController)
 
