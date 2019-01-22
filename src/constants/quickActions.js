@@ -7,4 +7,12 @@ export default [
       url: 'lisk://request',
     },
   },
+  {
+    type: 'Send',
+    title: 'Send tokens',
+    icon: 'Send',
+    userInfo: {
+      url: 'lisk://wallet',
+    },
+  },
 ];
