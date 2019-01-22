@@ -41,7 +41,7 @@ Will be invoked when the user sent a message object.
 ### didCancelSendingMessage --> { conversation: Conversation, message: Message }
 Will be invoked when the user deletes a message object from the Messages app’s input field.
 
-### onPresentationStyleChanged --> { presentationStyle: PresentationStyle } 
+### onPresentationStyleChanged --> { presentationStyle: PresentationStyle }
 Will be called when presentation style is changed by system or native UI controllers.
 
 ## Models
@@ -88,7 +88,7 @@ Used to construct the message content and layout on the iOS side.
 <img src="https://docs-assets.developer.apple.com/published/af521ba258/MSMessageTemplateLayout_2x_93d9e9b7-b99c-4def-a8e1-2df50a710a52.png" width="320" />
 
 ### Presentation Style: String
-Used to describ the presentation style
+Used to describe the presentation style
 
 ```
 compact || expanded
