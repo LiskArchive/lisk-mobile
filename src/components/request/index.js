@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Platform, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Share from '../share';
@@ -58,7 +58,7 @@ class Request extends React.Component {
         <KeyboardAwareScrollView
           enableOnAndroid={true}
           enableResetScrollToCoords={false}
-          contentContainerStyle={Platform.OS === 'ios' ? styles.container : null}
+          contentContainerStyle={styles.container}
         >
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
             {!isSmallScreen ? (
