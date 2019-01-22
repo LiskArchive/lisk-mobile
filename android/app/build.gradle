@@ -112,14 +112,14 @@ def getPassword(String keyChain) {
       stdout.toString().trim()
 }
 def pass = getPassword("android_keystore")
- 
+
 android {
     compileSdkVersion 26
     buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "io.lisk.mobile"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 16
         versionName "0.8.0"
