@@ -220,13 +220,7 @@ class SignIn extends React.Component {
     }
   }
 
-  componentWillMount() {
-    this.props.peerSet();
-  }
-
-  componentDidMount() {
-    this.props.settingsRetrieved();
-
+  setupDeepLinking() {
     // After sign out, there's no need to consume the launch URL for further sign-ins.
     if (!this.props.navigation.getParam('signOut')) {
       Linking.getInitialURL()
@@ -237,6 +231,15 @@ class SignIn extends React.Component {
 
     Linking.removeAllListeners('url');
     Linking.addEventListener('url', this.onDeepLinkRequested);
+  }
+
+  componentWillMount() {
+    this.props.peerSet();
+  }
+
+  componentDidMount() {
+    this.props.settingsRetrieved();
+    this.setupDeepLinking();
   }
 
   componentDidUpdate() {
