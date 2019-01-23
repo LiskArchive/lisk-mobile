@@ -29,8 +29,9 @@ class Confirm extends Component {
       amount: toRawLsk(amount),
       passphrase,
     };
-    send(activePeer, data).then(() => {
+    send(activePeer, data).then(({ id }) => {
       composeMessage({
+        id,
         address: { value: extractAddress(passphrase), validity: 0 },
         amount,
         state: 'transferred',
