@@ -2,7 +2,7 @@ export default [
   {
     type: 'Request',
     title: 'Request tokens',
-    icon: 'Request',
+    icon: 'quick_action_request',
     userInfo: {
       url: 'lisk://request',
     },
@@ -10,7 +10,7 @@ export default [
   {
     type: 'Send',
     title: 'Send tokens',
-    icon: 'Send',
+    icon: 'quick_action_send',
     userInfo: {
       url: 'lisk://wallet',
     },
