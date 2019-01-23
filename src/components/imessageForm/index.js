@@ -1,48 +1,30 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   ScrollView,
   NativeModules,
   NativeEventEmitter,
-  View,
-  Picker,
 } from 'react-native';
 import Lisk from '@liskhq/lisk-client';
-import { getAccount } from '../../utilities/api/account';
-import { SecondaryButton, IconButton } from '../toolBox/button';
-import Icon from '../toolBox/icon';
-import reg from '../../constants/regex';
 import { getPassphraseFromKeyChain } from '../../utilities/passphrase';
-import { colors } from '../../constants/styleGuide';
 import ThemeContext from '../../contexts/theme';
-import Input from '../toolBox/input';
-import Avatar from '../avatar/index';
-import styles from './styles';
-import Confirm from './imessageCofirm';
+// import styles from './styles';
+import Confirm from './imessageConfirm';
+import TxDetail from './txDetail';
+import Form from './form';
 
 const config = {
   nodes: ['https://testnet.lisk.io'],
   nethash: 'net',
 };
 
-let ActivePeer;
-const liskAPIClient = new Lisk.APIClient(config.nodes, {
-  nethash: config.nethash,
-});
-liskAPIClient.node.getConstants().then((response) => {
-  // loadingFinished('getConstants');
-  config.nethash = response.data.nethash;
-  ActivePeer = new Lisk.APIClient(config.nodes, {
-    nethash: config.nethash,
-  });
-});
 
 const { MessagesManager } = NativeModules;
 const MessagesEvents = new NativeEventEmitter(MessagesManager);
 
 class LiskMessageExtension extends Component {
   state = {
-    account: 'yashar',
+    account: '',
     address: {
       value: '',
       validity: -1,
@@ -52,39 +34,25 @@ class LiskMessageExtension extends Component {
     presentationStyle: '',
     message: {},
     conversation: '',
-  };
-
-  validator = {
-    address: (str) => {
-      if (str === '') return 2;
-      return reg.address.test(str) ? 0 : 1;
-    },
-  };
-
-  setAddress = (value) => {
-    clearTimeout(this.avatarPreviewTimeout);
-    const validity = this.validator.address(value);
-    if (validity === 0) {
-      this.setAvatarPreviewTimeout();
-    }
-    this.setState({
-      address: {
-        value,
-        validity,
-      },
-      avatarPreview: false,
-    });
-  };
-
-  getBalance = () => {
-    getAccount(ActivePeer, this.state.address.value).then((res) => {
-      this.setState({
-        balance: res.balance,
-      });
-    });
+    activePeer: null,
   };
 
   componentDidMount = () => {
+    const liskAPIClient = new Lisk.APIClient(config.nodes, {
+      nethash: config.nethash,
+    });
+    liskAPIClient.node.getConstants().then((response) => {
+      // loadingFinished('getConstants');
+      config.nethash = response.data.nethash;
+      this.setState({
+        activePeer: new Lisk.APIClient(config.nodes, {
+          nethash: config.nethash,
+        }),
+      });
+    });
+
+
+    NativeModules.DevSettings.setIsDebuggingRemotely(true);
     getPassphraseFromKeyChain().then((account) => {
       if (account) {
         this.userData = {
@@ -95,6 +63,7 @@ class LiskMessageExtension extends Component {
           passphrase: account.password,
           address: {
             value: account.username,
+            validity: -1,
           },
           avatarPreview: true,
         });
@@ -130,7 +99,6 @@ class LiskMessageExtension extends Component {
         conversation,
         message: {},
         avatarPreview: !!this.userData.address,
-        num: [0, 0, 0, 0],
         address: {
           value: this.userData.address || '',
           validity: -1,
@@ -143,9 +111,12 @@ class LiskMessageExtension extends Component {
     MessagesManager.updatePresentationStyle('expanded');
   }
 
-  composeMessage = ({ address, amount, state = 'requested' }) => {
+  composeMessage = ({
+    address, amount, state = 'requested', id,
+  }) => {
     if (address.validity !== 1) {
-      const url = `?address=${address.value}&amount=${amount}&state=${state}`;
+      const txID = id ? `&txID=${id}` : '';
+      const url = `?address=${address.value}&amount=${amount}&state=${state}${txID}`;
       // this.setState({ url });
       MessagesManager.updatePresentationStyle('compact');
       MessagesManager.composeMessage({
@@ -168,22 +139,6 @@ class LiskMessageExtension extends Component {
       .catch(console.log);
   };
 
-  changePicker = (itemValue, itemIndex) => {
-    this.setState({
-      num: this.state.num.map((item, index) =>
-        (index === itemIndex ? itemValue : item)),
-    });
-  };
-
-  setAvatarPreviewTimeout = () => {
-    this.avatarPreviewTimeout = setTimeout(() => {
-      this.setState({
-        avatarPreview: true,
-      });
-    }, 300);
-  };
-
-
   parseUrl = (url) => {
     const parsedData = url.substring(1).replace(/&/g, '","').replace(/=/g, '":"');
     return JSON
@@ -195,115 +150,50 @@ class LiskMessageExtension extends Component {
 
   render() {
     const {
-      address, avatarPreview, num, presentationStyle, message, parsedData,
-      passphrase,
+      address, message, parsedData, avatarPreview,
+      passphrase, activePeer, presentationStyle,
     } = this.state;
 
-    const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const send = () => this.composeMessage({
-      address,
-      amount: `${num[0]}${num[1]}.${num[2]}${num[3]}`,
-    });
+    const Element = () => {
+      if (message.url && activePeer) {
+        switch (parsedData.state) {
+          case 'rejected':
+            return <Text> this request has been rejected</Text>;
+          case 'transferred':
+            return <TxDetail
+              account={{ address: address.value }}
+              activePeer={activePeer}
+              txID={parsedData.txID} />;
+          default:
+            return <Confirm
+              sharedData={parsedData}
+              passphrase={passphrase}
+              activePeer={activePeer}
+              composeMessage={this.composeMessage} />;
+        }
+      }
+      return null;
+    };
+
+
     return (
-      <ThemeContext.Provider value="light">
-        <ScrollView style={styles.container}>
+      <ThemeContext.Provider value='light'>
+        <ScrollView>
           <Text onPress={() => NativeModules.DevMenu.reload()}>
             reload
           </Text>
 
-          {message.url ?
-            <Fragment>{
-              (parsedData.state === 'rejected') ?
-                <Text> this request has been rejected</Text> :
-                <Confirm
-                  sharedData={parsedData}
-                  passphrase={passphrase}
-                  activePeer={ActivePeer}
-                  composeMessage={this.composeMessage} />
-            }</Fragment> :
-            <Fragment>
-              <View style={styles.rowContainer}>
-                <View style={styles.innerContainer}>
-                  <Text style={styles.pickerPoint}>.</Text>
-                  {num.map((val, index) => (
-                    <Picker
-                      key={index}
-                      selectedValue={num[index]}
-                      style={styles.pickers}
-                      itemStyle={styles.pickerItem}
-                      itemTextStyle={{ fontSize: 18, color: 'blue' }}
-                      onValueChange={itemValue =>
-                        this.changePicker(itemValue, index)
-                      }
-                    >
-                      {data.map(item => (
-                        <Picker.Item
-                          key={item}
-                          label={item.toString()}
-                          value={item}
-                          color={num[index] === item ? '#000' : 'rgba(0, 0, 0, 0.3)'}
-                        />
-                      ))}
-                    </Picker>
-                  ))}
-                </View>
-              </View>
-              <View style={styles.addressContainer}>
-                {
-                  avatarPreview ?
-                    <Avatar
-                      style={styles.avatar}
-                      address={address.value}
-                      size={34}
-                    /> :
-                    <Icon
-                      style={styles.avatar}
-                      name='avatar-placeholder'
-                      size={34}
-                      color={colors.light.gray5}
-                    />
-                }
-                <Input
-                  autoCorrect={false}
-                  placeholder='Enter a address'
-                  reference={(input) => {
-                    this.input = input;
-                  }}
-                  onChange={this.setAddress}
-                  onFocus={this.keyBoardFocused}
-                  value={address.value}
-                  error={address.validity === 1 ? 'Invalid address' : ''}
-
-                  innerStyles={{
-                    errorMessage: styles.errorMessage,
-                    input: [
-                      styles.input,
-                      styles.addressInput,
-                    ],
-                    containerStyle: styles.addressInputContainer,
-                  }}
-                />
-                {
-                  presentationStyle === 'compact' ?
-                    <IconButton
-                      style={styles.iconButton}
-                      title=''
-                      icon={'forward'}
-                      color={colors.light.white}
-                      iconSize={20}
-                      onClick={send} /> : null
-                }
-              </View>
-              {
-                presentationStyle === 'expanded' ?
-                  <SecondaryButton
-                    style={{ marginTop: 20, marginLeft: 20, marginRight: 20 }}
-                    title="Request"
-                    onClick={send}
-                  /> : null
-              }
-
-            </Fragment>}
+          {
+            message.url ?
+              <Element /> :
+              <Form
+                MessagesEvents={MessagesEvents}
+                avatarPreview={avatarPreview}
+                presentationStyle={presentationStyle}
+                keyBoardFocused={this.keyBoardFocused}
+                inputAddress={address}
+                composeMessage={this.composeMessage} />
+          }
         </ScrollView>
       </ThemeContext.Provider>
     );
