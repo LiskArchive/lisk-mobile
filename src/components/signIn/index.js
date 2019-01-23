@@ -242,6 +242,10 @@ class SignIn extends React.Component {
   }
 
   onQuickActionRequested = (action) => {
+    if (!action || !action.userInfo) {
+      return;
+    }
+
     const { userInfo: { url } } = action;
     const isSignedIn = !!this.props.accounts.active;
 
@@ -256,7 +260,11 @@ class SignIn extends React.Component {
     if (!this.props.navigation.getParam('signOut')) {
       QuickActions.setShortcutItems(quickActions);
       QuickActions.popInitialAction()
-        .then(action => this.setState({ deepLinkURL: action.userInfo.url }))
+        .then((action) => {
+          if (action && action.userInfo) {
+            this.setState({ deepLinkURL: action.userInfo.url });
+          }
+        })
         // eslint-disable-next-line no-console
         .catch(error => console.log('An error occurred while getting initial quick action', error));
     }
