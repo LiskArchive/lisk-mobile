@@ -12,6 +12,7 @@ import ThemeContext from '../../contexts/theme';
 import Confirm from './imessageConfirm';
 import TxDetail from './txDetail';
 import Form from './form';
+import DevSettings from './devSettings';
 
 const config = {
   nodes: ['https://testnet.lisk.io'],
@@ -177,11 +178,9 @@ class LiskMessageExtension extends Component {
 
 
     return (
-      <ThemeContext.Provider value='light'>
+      <ThemeContext.Provider value="light">
         <ScrollView>
-          <Text onPress={() => NativeModules.DevMenu.reload()}>
-            reload
-          </Text>
+          {process.env.NODE_ENV === 'development' && <DevSettings />}
 
           {
             message.url ?

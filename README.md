@@ -30,7 +30,7 @@ The next section details the prerequisites to install Lisk Mobile from source us
    - Install using npm
 
 ### iOS
-You'll need the xCode installed in your machine to run the app in simulator.
+You'll need the Xcode installed in your machine to run the app in simulator.
 
 ### Android
  - Install [Android Studio](https://developer.android.com/studio/index.html), which sould have these options checked installed:
@@ -55,17 +55,21 @@ npm run start
 ```
 
 ### Development environment
-You can run the project in xCode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
+You can run the project in Xcode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
 
 #### Using environment variables
 You can fill out `env.json` with those variables:
 ```
-  network     -> Lisk network's name.
-  address     -> Lisk network's url.
-  passphrase  -> Your LSK account passphrase, to be filled out automatically on login.
+network          -> Lisk network's name.
+address          -> Lisk network's url.
+passphrase       -> Passphrase of your LSK account, to be filled out automatically on login.
+secondPassphrase -> Second passphrase of your LSK account, to be filled out automatically on send process.
 ```
 
 In order to avoid commiting that file you can use [this approach](https://stackoverflow.com/a/3320183).
+
+#### iMessage Extension
+Please check out [iMessage extension docs](ios/LiskMessageExtension/README.md) for more information.
 
 ### Run
 ```
