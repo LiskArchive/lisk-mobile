@@ -81,7 +81,7 @@ class LiskMessageExtension extends Component {
 
     const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     const send = () => composeMessage({
-      address,
+      address: address.value.length === 0 ? inputAddress : address,
       amount: `${num[0]}${num[1]}.${num[2]}${num[3]}`,
     });
 
