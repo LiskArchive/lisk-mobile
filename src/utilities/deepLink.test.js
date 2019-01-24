@@ -40,4 +40,18 @@ describe('Deep Link Handler', () => {
 
     expect(deepLinkMapper(url)).toEqual(expectedResult);
   });
+
+  it('handles urls with transactions path', () => {
+    const url = 'lisk://transactions?id=1';
+    const expectedResult = {
+      name: 'TxDetail',
+      params: {
+        query: {
+          txID: '1',
+        },
+      },
+    };
+
+    expect(deepLinkMapper(url)).toEqual(expectedResult);
+  });
 });
