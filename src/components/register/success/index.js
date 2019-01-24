@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import styles from './styles';
-import { H1, P } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import { SecondaryButton } from '../../toolBox/button';
 import image from '../../../assets/images/registrationProcess/success3x.png';
 
 class Success extends React.Component {
   componentDidMount() {
     this.props.hideNav();
-    this.props.navigation.setParams({ action: false });
+    this.props.navigation.setParams({
+      action: false,
+      title: 'Perfect! You’re all set',
+    });
   }
 
   render() {
@@ -16,11 +19,8 @@ class Success extends React.Component {
       <View style={styles.container}>
         <View>
           <View style={styles.titleContainer}>
-            <H1 style={styles.header}>Perfect! You’re all set.</H1>
             <P style={styles.subTitle}>
-              All the steps needed for creating an ID are{'\n'}
-              complete. You can now start sending and{'\n'}
-              receiving LSK tokens.
+              Great! now you can use your passphrase to sign in to your account.
             </P>
           </View>
           <View style={styles.imageContainer} >

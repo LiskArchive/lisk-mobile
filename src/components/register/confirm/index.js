@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import styles from './styles';
-import { H1, H4, P, B } from '../../toolBox/typography';
+import { B, P } from '../../toolBox/typography';
 import { SecondaryButton, Button } from '../../toolBox/button';
 import verifyImage from '../../../assets/images/registrationProcess/verify3x.png';
 import verifiedImage from '../../../assets/images/registrationProcess/verified3x.png';
+import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import { assembleWordOptions } from '../../../utilities/passphrase';
-import { viewportHeight } from '../../../utilities/device';
 
 /**
  * Returns a random index which doesn't exist in list
@@ -58,7 +58,10 @@ class Confirm extends React.Component {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ action: this.props.prevStep });
+    this.props.navigation.setParams({
+      action: this.props.prevStep,
+      title: deviceHeight() >= SCREEN_HEIGHTS.SM ? 'Passphrase verification' : 'Verification',
+    });
     this.generateTest();
   }
 
@@ -132,45 +135,41 @@ class Confirm extends React.Component {
   }
 
   renderPassphrase = () => {
-    const Element = viewportHeight() < 640 ? B : H4;
     const passphrase = this.props.sharedData.passphrase.split(' ');
     return this.state.missing.length > 0 ? passphrase.map((val, index) => {
       const optionIndex = this.state.missing.indexOf(index);
       const element = optionIndex >= 0 ?
         this.generatePlaceholder(index, optionIndex) :
-        <Element key={index} style={styles.word}>{val}</Element>;
+        <B key={index} style={styles.word}>{val}</B>;
       return element;
     }) : null;
   }
 
   generatePlaceholder(index, optionIndex) {
-    const style = this.state.visibleOptions === optionIndex ?
-      styles.placeholder : styles.deActivePlaceholder;
+    const style = this.state.visibleOptions === optionIndex ? null : styles.deActivePlaceholder;
     return <Button
       key={index}
       title={this.state.answers[optionIndex].value}
       onClick={() => this.toggleOptions(optionIndex)}
-      style={[style, this.state.answers[optionIndex].style]} />;
+      style={[styles.placeholder, style, this.state.answers[optionIndex].style]} />;
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View>
-          <H1 style={styles.header}>Verify your passphrase</H1>
-          <P style={styles.subHeader}>
-            Please tap on the empty boxes and select the correct word from the options.
-          </P>
-          <View style={styles.imageContainer} >
-            <Image
-              style={styles.image}
-              source={this.state.buttonStatus ? verifyImage : verifiedImage}
-            />
+          <View style={styles.horizontalPadding}>
+            <B style={styles.subHeader}>
+              Fill in the blanks.
+            </B>
           </View>
-          <View style={styles.passphraseContainer}>
+          <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
+            Choose the correct option for missing words:
+          </P>
+          <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
             { this.renderPassphrase() }
           </View>
-          <View style={styles.optionsContainer}>
+          <View style={[styles.optionsContainer, styles.horizontalPadding]}>
             {this.state.options[this.state.visibleOptions] ?
               this.state.options[this.state.visibleOptions].map((val, idx) =>
                 <Button style={styles.option} key={idx}
@@ -178,8 +177,18 @@ class Confirm extends React.Component {
               : null
             }
           </View>
+          {
+            deviceHeight() >= SCREEN_HEIGHTS.SM ?
+              <View style={styles.imageContainer}>
+                <Image
+                  style={styles.image}
+                  source={this.state.buttonStatus ? verifyImage : verifiedImage}
+                />
+                <P style={styles.caption}>Keep it safe!</P>
+              </View> : null
+          }
         </View>
-        <View>
+        <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
           <SecondaryButton
             disabled={this.state.buttonStatus}
             noTheme={true}
