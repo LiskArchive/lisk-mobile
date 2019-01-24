@@ -25,8 +25,7 @@ const EmptyState = ({ theme, styles, usedIn }) => (
     <P style={[styles.emptyTitle, styles.theme.emptyTitle]}>
       {
         usedIn === 'bookmarks' ?
-        `You don’t have any bookmarks.
-        Start adding them by tapping the + button on the top right.` :
+        'You don’t have any bookmarks. Start adding them by tapping the + button on the top right.' :
         'Start adding them through the sending process.'
       }
     </P>
