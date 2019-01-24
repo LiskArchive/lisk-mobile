@@ -9,6 +9,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     padding: 2,
+    flexDirection: 'row',
   },
   button: {
     alignItems: 'center',

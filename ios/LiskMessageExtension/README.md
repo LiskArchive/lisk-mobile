@@ -28,6 +28,9 @@ This method can be used to update the presentation style. Returns updated style 
 ### composeMessage(message: MessageData) -> Promise
 Can be used to compose and insert a message object to the conversation. Returns a promise instance.
 
+### openURL(url: String) -> Promise
+Can be used to open a URL. Recommended for opening the host app. Returns a promise instance.
+
 ## Events
 ### didSelectMessage --> { conversation: Conversation, message: Message }
 Will be called when the user selects a message.
