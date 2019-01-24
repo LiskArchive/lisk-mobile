@@ -11,6 +11,7 @@ import Icon from '../toolBox/icon';
 import { IconButton } from '../toolBox/button';
 import Avatar from '../avatar';
 import Loading from '../transactions/loading';
+import EmptyState from '../transactions/empty';
 import transactions from '../../constants/transactions';
 import { getTransactions } from '../../utilities/api/transactions';
 import Blur from '../transactions/blur';
@@ -67,8 +68,9 @@ class TransactionDetail extends React.Component {
   }
 
   async retrieveTransaction(id, delay = 0) {
+    const { tx: currentTx } = this.state;
+
     try {
-      const { tx: currentTx } = this.state;
       const { data } = await getTransactions(this.props.activePeer, { id });
       const tx = data[0] || {};
 
@@ -76,7 +78,7 @@ class TransactionDetail extends React.Component {
       // and couldn't find any with the id (example: navigating from a deep link)
       if (!tx.id && !currentTx) {
         this.setState({
-          error: true,
+          error: 'Transaction not found',
         });
       } else {
         setTimeout(() => this.setState(prevState => ({
@@ -85,7 +87,11 @@ class TransactionDetail extends React.Component {
         })), delay);
       }
     } catch (error) {
-      console.log(error); // eslint-disable-line no-console
+      if (!currentTx) {
+        this.setState({
+          error: 'An error occurred, please try again.',
+        });
+      }
     }
   }
 
@@ -117,7 +123,7 @@ class TransactionDetail extends React.Component {
     if (error) {
       return (
         <View style={[styles.container, styles.theme.container]}>
-          <P>EROL</P>
+          <EmptyState message={error} style={styles.empty} />
         </View>
       );
     }
