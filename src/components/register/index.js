@@ -3,6 +3,7 @@ import { View, Text, BackHandler } from 'react-native';
 import MultiStep from '../multiStep';
 import Confirm from './confirm';
 import Success from './success';
+import Initialization from './initialization';
 import SafeKeeping from './safeKeeping';
 import Intro from './intro';
 import { Small } from '../toolBox/typography';
@@ -17,6 +18,7 @@ class Register extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
+      title: params.title || 'Creating your Lisk account',
       headerStyle: {
         backgroundColor: '#F9FDFF',
         borderBottomWidth: 0,
@@ -84,7 +86,8 @@ class Register extends React.Component {
           <Intro title='create' group='1. Creating your account' navigation={navigation}></Intro>
           <SafeKeeping title='safekeeping' group='2. Saving your passphrase' navigation={navigation}></SafeKeeping>
           <Confirm title='verify' group='3. Verifying your passphrase' navigation={navigation}></Confirm>
-          <Success title='success' group='3. Verifying your passphrase'
+          <Initialization title='initialization' group='4. Security reminder' navigation={navigation} />
+          <Success title='success' group='4. Security reminder'
             hideNav={this.hideNav}
             navigation={navigation}></Success>
         </MultiStep>
