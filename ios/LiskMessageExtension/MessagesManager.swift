@@ -65,7 +65,11 @@ class MessagesManager: RCTEventEmitter {
     let layout = MSMessageTemplateLayout()
 
     if let imageName = layoutData["imageName"] {
-      layout.image = UIImage(named: imageName)
+      if let image = UIImage(named: imageName) {
+        layout.image = image
+      } else {
+        layout.image = UIImage(named: "requested")
+      }
     }
 
     layout.imageTitle = layoutData["imageTitle"]
