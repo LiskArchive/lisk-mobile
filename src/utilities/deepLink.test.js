@@ -46,9 +46,7 @@ describe('Deep Link Handler', () => {
     const expectedResult = {
       name: 'TxDetail',
       params: {
-        query: {
-          txID: '1',
-        },
+        txId: '1',
       },
     };
 
