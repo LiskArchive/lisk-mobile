@@ -139,7 +139,6 @@ const MainStack = StackNavigator(
         title: 'Transaction Details',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
-        headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle: {
           backgroundColor: 'transparent',
