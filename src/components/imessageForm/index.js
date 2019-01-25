@@ -153,6 +153,7 @@ class LiskMessageExtension extends Component {
         summaryText: 'Summary Text',
         url,
         layout: {
+          imageName: state,
           imageTitle: '',
           caption: `${amount}LSK is ${state}`,
           subcaption: `by ${address.value}`,

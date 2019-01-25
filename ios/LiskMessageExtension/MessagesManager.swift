@@ -63,7 +63,15 @@ class MessagesManager: RCTEventEmitter {
 
   private func createLayout(_ layoutData: [String: String]) -> MSMessageLayout {
     let layout = MSMessageTemplateLayout()
-    layout.image = UIImage(named: "test") // @TODO: Replace with ImageType implementation
+
+    if let imageName = layoutData["imageName"] {
+      if let image = UIImage(named: imageName) {
+        layout.image = image
+      } else {
+        layout.image = UIImage(named: "requested")
+      }
+    }
+
     layout.imageTitle = layoutData["imageTitle"]
     layout.imageSubtitle = layoutData["imageSubtitle"]
     layout.caption = layoutData["caption"]
