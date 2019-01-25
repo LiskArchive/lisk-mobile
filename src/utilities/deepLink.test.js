@@ -40,7 +40,7 @@ describe('Deep Link Handler', () => {
 
     expect(deepLinkMapper(url)).toEqual(expectedResult);
   });
- 
+
   it('handles urls for request page', () => {
     const url = 'lisk://request';
     const expectedResult = {
