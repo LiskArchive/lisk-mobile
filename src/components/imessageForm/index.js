@@ -19,6 +19,7 @@ import Input from '../toolBox/input';
 import Avatar from '../avatar/index';
 import styles from './styles';
 import Confirm from './imessageCofirm';
+import DevSettings from './devSettings';
 
 const config = {
   nodes: ['https://testnet.lisk.io'],
@@ -152,6 +153,7 @@ class LiskMessageExtension extends Component {
         summaryText: 'Summary Text',
         url,
         layout: {
+          imageName: state,
           imageTitle: '',
           caption: `${amount}LSK is ${state}`,
           subcaption: `by ${address.value}`,
@@ -207,9 +209,7 @@ class LiskMessageExtension extends Component {
     return (
       <ThemeContext.Provider value="light">
         <ScrollView style={styles.container}>
-          <Text onPress={() => NativeModules.DevMenu.reload()}>
-            reload
-          </Text>
+          {process.env.NODE_ENV === 'development' && <DevSettings />}
 
           {message.url ?
             <Fragment>{

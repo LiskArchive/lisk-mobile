@@ -28,6 +28,9 @@ This method can be used to update the presentation style. Returns updated style 
 ### composeMessage(message: MessageData) -> Promise
 Can be used to compose and insert a message object to the conversation. Returns a promise instance.
 
+### openURL(url: String) -> Promise
+Can be used to open a URL. Recommended for opening the host app. Returns a promise instance.
+
 ## Events
 ### didSelectMessage --> { conversation: Conversation, message: Message }
 Will be called when the user selects a message.
@@ -41,7 +44,7 @@ Will be invoked when the user sent a message object.
 ### didCancelSendingMessage --> { conversation: Conversation, message: Message }
 Will be invoked when the user deletes a message object from the Messages app’s input field.
 
-### onPresentationStyleChanged --> { presentationStyle: PresentationStyle } 
+### onPresentationStyleChanged --> { presentationStyle: PresentationStyle }
 Will be called when presentation style is changed by system or native UI controllers.
 
 ## Models
@@ -75,6 +78,7 @@ Used to construct the message content and layout on the iOS side.
   url: String,
   summaryText: String?,
   layout: {
+    imageName: String?, // image name to match from XCode assets
     imageTitle: String?,
     imageSubtitle: String?,
     caption: String,
@@ -88,7 +92,7 @@ Used to construct the message content and layout on the iOS side.
 <img src="https://docs-assets.developer.apple.com/published/af521ba258/MSMessageTemplateLayout_2x_93d9e9b7-b99c-4def-a8e1-2df50a710a52.png" width="320" />
 
 ### Presentation Style: String
-Used to describ the presentation style
+Used to describe the presentation style
 
 ```
 compact || expanded

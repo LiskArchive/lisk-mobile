@@ -6,11 +6,11 @@ export default function deepLinkMapper(deepLinkURL) {
   }
 
   const { hostname, pathname, query } = new URL(deepLinkURL, true);
-  const path = hostname === 'main' ? pathname : hostname;
+  const path = hostname === 'main' ? `main${pathname}` : hostname;
 
   switch (path) {
     case 'wallet':
-    case '/transactions/send':
+    case 'main/transactions/send':
       return {
         name: 'Send',
         params: {
@@ -26,6 +26,14 @@ export default function deepLinkMapper(deepLinkURL) {
       return {
         name: 'Request',
         params: {},
+      };
+
+    case 'transactions':
+      return {
+        name: 'TxDetail',
+        params: {
+          txId: query.id,
+        },
       };
 
     default:

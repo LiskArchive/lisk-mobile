@@ -63,7 +63,15 @@ class MessagesManager: RCTEventEmitter {
 
   private func createLayout(_ layoutData: [String: String]) -> MSMessageLayout {
     let layout = MSMessageTemplateLayout()
-    layout.image = UIImage(named: "test") // @TODO: Replace with ImageType implementation
+
+    if let imageName = layoutData["imageName"] {
+      if let image = UIImage(named: imageName) {
+        layout.image = image
+      } else {
+        layout.image = UIImage(named: "requested")
+      }
+    }
+
     layout.imageTitle = layoutData["imageTitle"]
     layout.imageSubtitle = layoutData["imageSubtitle"]
     layout.caption = layoutData["caption"]
@@ -75,7 +83,7 @@ class MessagesManager: RCTEventEmitter {
 
   @objc func composeMessage(_ messageData: [String: Any], resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
     guard let conversation = self.messagesVC.activeConversation else {
-      fatalError("There's no conversation")
+      return reject("ERROR", "There's no conversation", nil)
     }
 
     let session = conversation.selectedMessage?.session ?? MSSession()
@@ -87,10 +95,24 @@ class MessagesManager: RCTEventEmitter {
 
     conversation.insert(message) { (error) in
       if error != nil {
-        return reject("ERROR", "ERROR", error)
+        return reject("ERROR", "Unable to insert message", error)
       }
 
       return resolve(Mappers.messageToObject(message: message, withParticipiantIdentifier: false))
     }
+  }
+
+  @objc func openURL(_ urlString: String, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+    guard let url = URL(string: urlString) else {
+      return reject("ERROR", "Unable to construct url", nil)
+    }
+
+    self.messagesVC.extensionContext?.open(url, completionHandler: { (success) in
+      guard success == true else {
+        return reject("ERROR", "Unable to navigate to url", nil)
+      }
+
+      return resolve(url)
+    })
   }
 }

@@ -8,8 +8,10 @@ import FormattedNumber from '../formattedNumber';
 import Share from '../share';
 import { B, P, H1, H3, A } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
+import { IconButton } from '../toolBox/button';
 import Avatar from '../avatar';
 import Loading from '../transactions/loading';
+import EmptyState from '../transactions/empty';
 import transactions from '../../constants/transactions';
 import { getTransactions } from '../../utilities/api/transactions';
 import Blur from '../transactions/blur';
@@ -27,32 +29,69 @@ const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelega
   account: state.accounts.active || {},
 }), {})
 class TransactionDetail extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+
+    return {
+      headerLeft: (
+        <IconButton
+          title=''
+          icon='back'
+          onPress={params.action}
+          color={params.theme === themes.light ? colors.light.black : colors.dark.white}
+        />
+      ),
+    };
+  };
+
   state = {
     tx: null,
     refreshing: false,
   }
 
   componentDidMount() {
-    const { navigation } = this.props;
+    const { theme, navigation } = this.props;
     const tx = navigation.getParam('tx', null);
+    let backAction = () => navigation.pop();
 
     if (tx) {
       this.setState({ tx }, () => this.retrieveTransaction(tx.id));
     } else {
       this.retrieveTransaction(navigation.getParam('txId', false));
+      backAction = () => navigation.navigate('Home');
     }
+
+    navigation.setParams({
+      theme,
+      action: backAction,
+    });
   }
 
   async retrieveTransaction(id, delay = 0) {
+    const { tx: currentTx } = this.state;
+
     try {
       const { data } = await getTransactions(this.props.activePeer, { id });
       const tx = data[0] || {};
-      setTimeout(() => this.setState(prevState => ({
-        tx: merge(prevState.tx, tx),
-        refreshing: false,
-      })), delay);
+
+      // don't have any transaction passed from the navigation
+      // and couldn't find any with the id (example: navigating from a deep link)
+      if (!tx.id && !currentTx) {
+        this.setState({
+          error: 'Transaction not found',
+        });
+      } else {
+        setTimeout(() => this.setState(prevState => ({
+          tx: merge(prevState.tx, tx),
+          refreshing: false,
+        })), delay);
+      }
     } catch (error) {
-      console.log(error); // eslint-disable-line no-console
+      if (!currentTx) {
+        this.setState({
+          error: 'An error occurred, please try again.',
+        });
+      }
     }
   }
 
@@ -79,7 +118,15 @@ class TransactionDetail extends React.Component {
 
   render() {
     const { navigation, styles, theme } = this.props;
-    const { tx, refreshing } = this.state;
+    const { tx, error, refreshing } = this.state;
+
+    if (error) {
+      return (
+        <View style={[styles.container, styles.theme.container]}>
+          <EmptyState message={error} style={styles.empty} />
+        </View>
+      );
+    }
 
     if (!tx) {
       return (
