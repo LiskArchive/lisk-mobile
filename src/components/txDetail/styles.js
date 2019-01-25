@@ -90,6 +90,10 @@ export default () => ({
       textAlign: 'center',
       flexDirection: 'row',
     },
+    empty: {
+      height: '100%',
+      marginTop: 0,
+    },
   },
 
   [themes.light]: {

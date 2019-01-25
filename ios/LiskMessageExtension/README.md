@@ -78,6 +78,7 @@ Used to construct the message content and layout on the iOS side.
   url: String,
   summaryText: String?,
   layout: {
+    imageName: String?, // image name to match from XCode assets
     imageTitle: String?,
     imageSubtitle: String?,
     caption: String,
