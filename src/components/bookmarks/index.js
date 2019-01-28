@@ -35,7 +35,7 @@ class Bookmarks extends React.Component {
     return (<View style={styles.container}>
       {
         (list && list.length === 0 && query.length >= 0) ?
-        <Empty /> :
+        <Empty usedIn={draggable ? 'bookmarks' : 'send'} /> :
         <Fragment>
           {
             filterList.length === 0 ?
