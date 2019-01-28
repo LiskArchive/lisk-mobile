@@ -12,6 +12,7 @@ import Messages
 @objc(MessagesManager)
 class MessagesManager: RCTEventEmitter {
   let messagesVC: MessagesViewController
+  var hasListeners: Bool = false
 
   override static func moduleName() -> String! {
     return "MessagesManager"
@@ -19,6 +20,14 @@ class MessagesManager: RCTEventEmitter {
 
   override static func requiresMainQueueSetup() -> Bool {
     return false
+  }
+
+  override func startObserving() {
+    self.hasListeners = true
+  }
+
+  override func stopObserving() {
+    self.hasListeners = false
   }
 
   override func supportedEvents() -> [String]! {
