@@ -90,6 +90,10 @@ export default () => ({
       textAlign: 'center',
       flexDirection: 'row',
     },
+    link: {
+      textAlign: 'center',
+      marginTop: 20,
+    },
   },
 
   [themes.light]: {
@@ -118,6 +122,9 @@ export default () => ({
     },
     detailRow: {
       borderBottomColor: colors.light.gray5,
+    },
+    link: {
+      color: colors.light.blue,
     },
   },
 });

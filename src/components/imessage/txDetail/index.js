@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import {
   ScrollView, View, Image,
-  RefreshControl,
+  RefreshControl, NativeModules,
 } from 'react-native';
 import FormattedDate from '../../formattedDate';
 import withTheme from '../../withTheme';
@@ -56,6 +56,12 @@ class TransactionDetail extends React.Component {
       refreshing: true,
     }, () => this.retrieveTransaction(this.state.tx.id, 1500));
   }
+
+  onOpenDeepLink = () => {
+    NativeModules.MessagesManager.openURL(`lisk://transactions?id=${this.state.tx.id}`)
+      .then(console.log)
+      .catch(console.log);
+  };
 
 
   render() {
@@ -212,6 +218,12 @@ class TransactionDetail extends React.Component {
             <B style={[styles.value, styles.theme.value]}>{tx.confirmations || 'Not confirmed yet.'}</B>
           </View>
         </View>
+        <A
+          style={[styles.link, styles.theme.link]}
+          onPress={this.onOpenDeepLink}
+        >
+          Read about this transaction
+        </A>
       </ScrollView>
     );
   }
