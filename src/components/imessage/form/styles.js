@@ -1,7 +1,7 @@
 import {
   StyleSheet,
 } from "react-native"; // eslint-disable-line
-import { colors } from '../../constants/styleGuide';
+import { colors } from '../../../constants/styleGuide';
 
 export default StyleSheet.create({
   container: {
@@ -27,6 +27,7 @@ export default StyleSheet.create({
   innerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 20,
   },
   pickers: {
     height: 120,
