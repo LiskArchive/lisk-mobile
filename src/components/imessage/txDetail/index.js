@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import {
   ScrollView, View, Image,
-  RefreshControl, NativeModules,
+  NativeModules,
 } from 'react-native';
 import FormattedDate from '../../formattedDate';
 import withTheme from '../../withTheme';
@@ -23,38 +23,16 @@ const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelega
 class TransactionDetail extends React.Component {
   state = {
     tx: null,
-    refreshing: false,
   }
 
   componentDidMount() {
     const { txID, activePeer } = this.props;
 
     if (txID) {
-      console.log('tx detail :', txID);
-      // this.setState({ tx: { id: txID } });
       getTransactions(activePeer, { id: txID }).then(({ data }) => {
-        const tx = data[0] || {};
-        this.setState({
-          tx,
-          refreshing: false,
-        });
+        this.setState({ tx: data[0] || {} });
       });
     }
-  }
-
-  // async retrieveTransaction(id) {
-  //   try {
-  //     const { data } = await getTransactions(this.props.activePeer, { id });
-
-  //   } catch (error) {
-  //     console.log(error); // eslint-disable-line no-console
-  //   }
-  // }
-
-  onRefresh = () => {
-    this.setState({
-      refreshing: true,
-    }, () => this.retrieveTransaction(this.state.tx.id, 1500));
   }
 
   onOpenDeepLink = () => {
@@ -65,10 +43,8 @@ class TransactionDetail extends React.Component {
 
 
   render() {
-    const {
-      styles, theme, account,
-    } = this.props;
-    const { tx, refreshing } = this.state;
+    const { styles, theme, account } = this.props;
+    const { tx } = this.state;
 
     if (!tx) {
       return (
@@ -94,15 +70,7 @@ class TransactionDetail extends React.Component {
     }
 
     return (
-      <ScrollView
-        style={[styles.container, styles.theme.container]}
-        refreshControl={(
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={this.onRefresh}
-          />
-        )}
-      >
+      <ScrollView style={[styles.container, styles.theme.container]}>
         <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
           <View style={styles.row}>
             {
@@ -157,7 +125,6 @@ class TransactionDetail extends React.Component {
             <View style={styles.addressContainer}>
               <A
                 value={tx.senderId}
-                onPress={() => this.navigate(tx.senderId)}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
               >
                 {tx.senderId}
@@ -180,7 +147,6 @@ class TransactionDetail extends React.Component {
               <View style={styles.addressContainer}>
                 <A
                   value={tx.senderId}
-                  onPress={() => this.navigate(tx.recipientId)}
                   style={[styles.value, styles.theme.value, styles.transactionId]}
                 >
                   {tx.recipientId}
