@@ -27,6 +27,7 @@ export default StyleSheet.create({
   innerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 20,
   },
   pickers: {
     height: 120,
