@@ -14,7 +14,6 @@ import styles from './styles';
 
 class LiskMessageExtension extends Component {
   state = {
-    account: 'yashar',
     address: {
       value: '',
       validity: -1,
