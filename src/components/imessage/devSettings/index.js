@@ -5,10 +5,21 @@ import styles from './styles';
 class DevSettings extends React.Component {
   state = {
     liveReloadEnabled: false,
+    remoteDebuggingEnabled: false,
   }
 
   componentDidMount() {
     this.onToggleLiveReload();
+  }
+
+  onToggleRemoteDebugging = () => {
+    const remoteDebuggingEnabled = !this.state.remoteDebuggingEnabled;
+
+    NativeModules.DevSettings.setIsDebuggingRemotely(remoteDebuggingEnabled);
+
+    this.setState({
+      remoteDebuggingEnabled,
+    });
   }
 
   onToggleLiveReload = () => {
@@ -28,10 +39,16 @@ class DevSettings extends React.Component {
   }
 
   render() {
-    const { liveReloadEnabled } = this.state;
+    const { liveReloadEnabled, remoteDebuggingEnabled } = this.state;
 
     return (
       <View style={styles.wrapper}>
+        <TouchableHighlight style={styles.button} onPress={this.onToggleRemoteDebugging}>
+          <Text style={styles.buttonText}>
+            {remoteDebuggingEnabled ? 'Disable' : 'Enable'} Remote Debugging
+          </Text>
+        </TouchableHighlight>
+
         <TouchableHighlight style={styles.button} onPress={this.onToggleLiveReload}>
           <Text style={styles.buttonText}>
             {liveReloadEnabled ? 'Disable' : 'Enable'} Live Reload
@@ -40,7 +57,7 @@ class DevSettings extends React.Component {
 
         <TouchableHighlight style={styles.button} onPress={this.onOpenDeepLink}>
           <Text style={styles.buttonText}>
-            Open Lisk App
+            Open Lisk
           </Text>
         </TouchableHighlight>
       </View>

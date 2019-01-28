@@ -52,8 +52,6 @@ class LiskMessageExtension extends Component {
       });
     });
 
-
-    NativeModules.DevSettings.setIsDebuggingRemotely(true);
     getPassphraseFromKeyChain().then((account) => {
       if (account) {
         this.userData = {
