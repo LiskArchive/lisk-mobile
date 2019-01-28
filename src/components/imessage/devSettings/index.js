@@ -32,12 +32,6 @@ class DevSettings extends React.Component {
     });
   }
 
-  onOpenDeepLink = () => {
-    NativeModules.MessagesManager.openURL('lisk://wallet')
-      .then(console.log)
-      .catch(console.log);
-  }
-
   render() {
     const { liveReloadEnabled, remoteDebuggingEnabled } = this.state;
 
@@ -52,12 +46,6 @@ class DevSettings extends React.Component {
         <TouchableHighlight style={styles.button} onPress={this.onToggleLiveReload}>
           <Text style={styles.buttonText}>
             {liveReloadEnabled ? 'Disable' : 'Enable'} Live Reload
-          </Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight style={styles.button} onPress={this.onOpenDeepLink}>
-          <Text style={styles.buttonText}>
-            Open Lisk
           </Text>
         </TouchableHighlight>
       </View>
