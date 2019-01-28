@@ -3,6 +3,7 @@ package io.lisk.mobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactNativeQuickActions.AppShortcutsPackage;
 import com.mkuczera.RNReactNativeHapticFeedbackPackage;
 import com.wix.interactable.Interactable;
 import com.bluroverly.SajjadBlurOverlayPackage;
@@ -41,6 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new AppShortcutsPackage(),
         new RNReactNativeHapticFeedbackPackage(),
         new Interactable(),
         new SajjadBlurOverlayPackage(),

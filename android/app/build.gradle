@@ -112,14 +112,14 @@ def getPassword(String keyChain) {
       stdout.toString().trim()
 }
 def pass = getPassword("android_keystore")
- 
+
 android {
     compileSdkVersion 26
     buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "io.lisk.mobile"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 17
         versionName "0.9.0"
@@ -166,6 +166,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-quick-actions')
     compile project(':react-native-haptic-feedback')
     compile project(':react-native-interactable')
     implementation project(':react-native-blur-overlay')

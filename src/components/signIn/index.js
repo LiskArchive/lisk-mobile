@@ -1,9 +1,16 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { Linking, View, Alert, Platform } from 'react-native';
+import {
+  Linking,
+  View,
+  Alert,
+  Platform,
+  DeviceEventEmitter,
+} from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationActions } from 'react-navigation';
+import QuickActions from 'react-native-quick-actions'; // eslint-disable-line
 import FingerprintOverlay from '../fingerprintOverlay';
 import styles from './styles';
 import {
@@ -25,6 +32,7 @@ import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';
 import deepLinkMapper from '../../utilities/deepLink';
+import quickActions from '../../constants/quickActions';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 console.disableYellowBox = true; // eslint-disable-line
@@ -220,13 +228,7 @@ class SignIn extends React.Component {
     }
   }
 
-  componentWillMount() {
-    this.props.peerSet();
-  }
-
-  componentDidMount() {
-    this.props.settingsRetrieved();
-
+  setupDeepLinking() {
     // After sign out, there's no need to consume the launch URL for further sign-ins.
     if (!this.props.navigation.getParam('signOut')) {
       Linking.getInitialURL()
@@ -237,6 +239,48 @@ class SignIn extends React.Component {
 
     Linking.removeAllListeners('url');
     Linking.addEventListener('url', this.onDeepLinkRequested);
+  }
+
+  onQuickActionRequested = (action) => {
+    if (!action || !action.userInfo) {
+      return;
+    }
+
+    const { userInfo: { url } } = action;
+    const isSignedIn = !!this.props.accounts.active;
+
+    if (isSignedIn) {
+      this.navigateToDeepLink(url);
+    } else {
+      this.setState({ deepLinkURL: url });
+    }
+  }
+
+  setupQuickActions() {
+    if (!this.props.navigation.getParam('signOut')) {
+      QuickActions.setShortcutItems(quickActions);
+      QuickActions.popInitialAction()
+        .then((action) => {
+          if (action && action.userInfo) {
+            this.setState({ deepLinkURL: action.userInfo.url });
+          }
+        })
+        // eslint-disable-next-line no-console
+        .catch(error => console.log('An error occurred while getting initial quick action', error));
+    }
+
+    DeviceEventEmitter.removeAllListeners('quickActionShortcut');
+    DeviceEventEmitter.addListener('quickActionShortcut', this.onQuickActionRequested);
+  }
+
+  componentWillMount() {
+    this.props.peerSet();
+  }
+
+  componentDidMount() {
+    this.props.settingsRetrieved();
+    this.setupDeepLinking();
+    this.setupQuickActions();
   }
 
   componentDidUpdate() {

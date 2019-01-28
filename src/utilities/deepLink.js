@@ -22,6 +22,12 @@ export default function deepLinkMapper(deepLinkURL) {
         },
       };
 
+    case 'request':
+      return {
+        name: 'Request',
+        params: {},
+      };
+
     case 'transactions':
       return {
         name: 'TxDetail',

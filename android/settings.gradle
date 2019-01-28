@@ -1,4 +1,6 @@
 rootProject.name = 'Lisk'
+include ':react-native-quick-actions'
+project(':react-native-quick-actions').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-quick-actions/android')
 include ':react-native-haptic-feedback'
 project(':react-native-haptic-feedback').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-haptic-feedback/android')
 include ':react-native-interactable'
