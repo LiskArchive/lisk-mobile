@@ -3,8 +3,9 @@ import Switch from 'react-native-switch-pro';
 import { View, ScrollView } from 'react-native';
 import styles from './styles';
 import { generatePassphrase } from '../../../utilities/passphrase';
-import { H1, B, Small } from '../../toolBox/typography';
+import { B, Small } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
+import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import { SecondaryButton } from '../../toolBox/button';
 import colors from '../../../constants/styleGuide/colors';
 
@@ -16,7 +17,11 @@ class Intro extends React.Component {
 
   componentDidMount() {
     this.setState({ passphrase: generatePassphrase() });
-    this.props.navigation.setParams({ action: false });
+
+    this.props.navigation.setParams({
+      action: false,
+      title: 'Account creation',
+    });
   }
 
   confirm = (status) => {
@@ -36,7 +41,6 @@ class Intro extends React.Component {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
           <View>
-            <H1 style={styles.header}>You’re about to create{'\n'}your Lisk account.</H1>
             <B style={styles.subHeader}>Here’s what you will get:</B>
             <View style={[styles.row, styles.separator]}>
               <Icon name='passphrase' style={styles.icon} color={colors.light.blue} size={36}/>
@@ -68,7 +72,7 @@ class Intro extends React.Component {
               </View>
             </View>
           </View>
-          <View>
+          <View style={styles.actionBar}>
             <View style={styles.row}>
               <Switch
                 height={26}
@@ -78,16 +82,22 @@ class Intro extends React.Component {
                 backgroundInactive={colors.light.gray4}
               />
               <Small style={styles.label}>
-                I understand that it is my responsibility to keep my passphrase safe.
+                {
+                  deviceHeight() >= SCREEN_HEIGHTS.SM ?
+                  'I understand that its my responsibility to keep my passphrase safe.' :
+                  'It is my responsibility to keep my passphrase safe.'
+                }
               </Small>
             </View>
-            <SecondaryButton
-              disabled={this.state.buttonStatus}
-              noTheme={true}
-              style={styles.button}
-              onClick={this.forward}
-              title='Continue'
-            />
+            <View style={styles.buttonWrapper}>
+              <SecondaryButton
+                disabled={this.state.buttonStatus}
+                noTheme={true}
+                style={styles.button}
+                onClick={this.forward}
+                title='Continue'
+              />
+            </View>
           </View>
         </View>
       </ScrollView>);

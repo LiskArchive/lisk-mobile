@@ -22,7 +22,6 @@ import HeaderBackground from './headerBackground';
 import HeaderBackgroundImage from './headerBackgroundImage';
 import HeaderTitle from './headerTitle';
 import HomeHeaderTitle from './homeHeaderTitle';
-import HeaderLogo from './headerLogo';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
 import HeaderBackButton from './headerBackButton';
 import TabBarIcon from './tabBarIcon';
@@ -115,7 +114,7 @@ const MainStack = StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        title: <HeaderLogo color={colors.light.gray1} />,
+        headerTitle: HeaderTitle,
         headerTitleStyle: {
           textAlign: 'center',
           flex: 1,

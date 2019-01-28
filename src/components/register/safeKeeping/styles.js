@@ -1,16 +1,19 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts } from '../../../constants/styleGuide';
+import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
+import { colors, fonts, boxes } from '../../../constants/styleGuide';
 
 const styles = {
   container: {
     flexDirection: 'column',
-    marginRight: 20,
-    marginLeft: 20,
     flex: 1,
     justifyContent: 'space-between',
   },
   header: {
     marginTop: 8,
+  },
+  titleContainer: {
+    paddingLeft: boxes.boxPadding,
+    paddingRight: boxes.boxPadding,
   },
   subTitle: {
     color: colors.light.gray2,
@@ -24,16 +27,20 @@ const styles = {
     color: colors.light.gray2,
     marginLeft: 12,
   },
-  passphraseContainer: {
-    backgroundColor: colors.light.white,
-    padding: 20,
-    shadowColor: '#0279b6',
-    shadowOpacity: 0.1,
-    shadowRadius: 20,
-    marginTop: 10,
-  },
   passphraseTitle: {
     color: colors.light.gray2,
+    paddingLeft: boxes.boxPadding,
+    paddingRight: boxes.boxPadding,
+  },
+  passphraseContainer: {
+    marginTop: 10,
+    paddingLeft: boxes.boxPadding,
+    paddingRight: boxes.boxPadding,
+    backgroundColor: colors.light.navigationBg,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderTopColor: '#ebf1f4',
+    borderBottomColor: '#ebf1f4',
   },
   imageDescription: {
     color: colors.light.gray2,
@@ -41,8 +48,11 @@ const styles = {
     fontFamily: fonts.family.context,
   },
   passphrase: {
-    marginTop: 7,
+    marginTop: 2,
+    lineHeight: 40,
+    marginBottom: 5,
     color: colors.light.black,
+    fontFamily: fonts.family.heading,
   },
   copyContainer: {
     alignItems: 'center',
@@ -53,6 +63,7 @@ const styles = {
   },
   imageContainer: {
     alignItems: 'center',
+    marginTop: 60,
   },
   image: {
     width: 111,
@@ -61,6 +72,11 @@ const styles = {
   caption: {
     color: colors.light.gray2,
     marginTop: 15,
+  },
+  buttonWrapper: {
+    paddingLeft: boxes.boxPadding,
+    paddingRight: boxes.boxPadding,
+    marginBottom: deviceHeight() < SCREEN_HEIGHTS.SM ? 20 : 0,
   },
 };
 

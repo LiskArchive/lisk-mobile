@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import { colors } from '../../../constants/styleGuide';
 
 const { height } = Dimensions.get('window');
@@ -46,6 +47,9 @@ const styles = {
   label: {
     color: colors.light.gray2,
     marginLeft: 12,
+  },
+  actionBar: {
+    marginBottom: deviceHeight() < SCREEN_HEIGHTS.SM ? 20 : 0,
   },
 };
 

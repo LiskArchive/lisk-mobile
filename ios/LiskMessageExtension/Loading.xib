@@ -16,11 +16,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="XgP-wR-1Vy">
-                    <rect key="frame" x="177.5" y="333.5" width="20" height="20"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="XgP-wR-1Vy">
+                    <rect key="frame" x="169" y="325" width="37" height="37"/>
+                    <color key="color" red="0.14079311490058899" green="0.45754235982894897" blue="0.72568261623382568" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
             </subviews>
-            <color key="backgroundColor" red="0.14115375280380249" green="0.45909404754638672" blue="0.7242627739906311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <color key="tintColor" red="0.14115375280380249" green="0.45909404754638672" blue="0.7242627739906311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="XgP-wR-1Vy" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="36W-ES-gWs"/>

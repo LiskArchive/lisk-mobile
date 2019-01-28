@@ -30,7 +30,7 @@ class Bookmarks extends React.Component {
     const Element = draggable ? DraggableItem : Item;
     const description = !filterList.length && reg.address.test(query) ?
       'You can add this address to your bookmarks in bookmarks page or through send process.' :
-      'Couldn\'t recognize the address or label. Please make sure it\'s correct.';
+      'Couldn’t recognize the address or label. Please make sure it’s correct.';
 
     return (<View style={styles.container}>
       {
