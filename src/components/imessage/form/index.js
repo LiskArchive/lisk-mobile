@@ -10,12 +10,16 @@ import reg from '../../../constants/regex';
 import { colors } from '../../../constants/styleGuide';
 import Input from '../../toolBox/input';
 import Avatar from '../../avatar/index';
+import { Small } from '../../toolBox/typography';
 import styles from './styles';
 
 class LiskMessageExtension extends Component {
   state = {
     address: {
       value: '',
+      validity: -1,
+    },
+    amount: {
       validity: -1,
     },
     avatarPreview: false,
@@ -46,6 +50,7 @@ class LiskMessageExtension extends Component {
 
   changePicker = (itemValue, itemIndex) => {
     this.setState({
+      amount: { validity: -1 },
       num: this.state.num.map((item, index) =>
         (index === itemIndex ? itemValue : item)),
     });
@@ -69,27 +74,45 @@ class LiskMessageExtension extends Component {
     );
   }
 
+  send = () => {
+    const {
+      composeMessage, inputAddress,
+    } = this.props;
+
+    const { num, address } = this.state;
+
+    const amount = `${num[0]}${num[1]}.${num[2]}${num[3]}`;
+    if (parseFloat(amount) > 0) {
+      composeMessage({
+        address: address.value.length === 0 ? inputAddress : address,
+        amount,
+      });
+    } else {
+      this.setState({
+        amount: {
+          validity: 0,
+        },
+      });
+    }
+  };
+
   render() {
     const {
-      address, avatarPreview, num,
+      address, avatarPreview, num, amount,
     } = this.state;
 
     const {
-      composeMessage, inputAddress, keyBoardFocused, presentationStyle,
+      inputAddress, keyBoardFocused, presentationStyle,
     } = this.props;
 
     const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const send = () => composeMessage({
-      address: address.value.length === 0 ? inputAddress : address,
-      amount: `${num[0]}${num[1]}.${num[2]}${num[3]}`,
-    });
-
+    const pickerActiveColor = amount.validity === -1 ? colors.light.black : colors.light.actionRed;
 
     return (
       <Fragment>
         <View style={styles.rowContainer}>
           <View style={styles.innerContainer}>
-            <Text style={styles.pickerPoint}>.</Text>
+            <Text style={[styles.pickerPoint, { color: pickerActiveColor }]}>.</Text>
             {num.map((val, index) => (
               <Picker
                 key={index}
@@ -106,12 +129,19 @@ class LiskMessageExtension extends Component {
                     key={item}
                     label={item.toString()}
                     value={item}
-                    color={num[index] === item ? '#000' : 'rgba(0, 0, 0, 0.3)'}
+                    color={num[index] === item ? pickerActiveColor : 'rgba(0, 0, 0, 0.3)'}
                   />
                 ))}
               </Picker>
             ))}
           </View>
+        </View>
+        <View style={styles.errorContainer}>
+          <Small style={styles.pickerError}>
+            {
+              amount.validity === -1 ? '' : 'amount should be greater than 0'
+            }
+          </Small>
         </View>
         <View style={styles.addressContainer}>
           {
@@ -156,7 +186,7 @@ class LiskMessageExtension extends Component {
                 icon={'forward'}
                 color={colors.light.white}
                 iconSize={20}
-                onClick={send} /> : null
+                onClick={this.send} /> : null
           }
         </View>
         {
@@ -164,7 +194,7 @@ class LiskMessageExtension extends Component {
             <SecondaryButton
               style={{ marginTop: 20, marginLeft: 20, marginRight: 20 }}
               title="Request"
-              onClick={send}
+              onClick={this.send}
             /> : null
         }
 

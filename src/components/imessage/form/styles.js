@@ -27,7 +27,7 @@ export default StyleSheet.create({
   innerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   pickers: {
     height: 120,
@@ -52,6 +52,8 @@ export default StyleSheet.create({
   },
   addressContainer: {
     width: '100%',
+    marginTop: -15,
+    // backgroundColor: '#0ff',
   },
   addressInput: {
     height: 48,
@@ -82,5 +84,12 @@ export default StyleSheet.create({
   address: {
     fontWeight: 'bold',
     marginLeft: 10,
+  },
+  errorContainer: {
+    height: 17,
+  },
+  pickerError: {
+    textAlign: 'center',
+    color: colors.light.gray1,
   },
 });

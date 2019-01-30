@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Text,
   ScrollView,
   NativeModules,
   NativeEventEmitter,
@@ -12,6 +11,7 @@ import ThemeContext from '../../contexts/theme';
 import Confirm from './imessageConfirm';
 import TxDetail from './txDetail';
 import Form from './form';
+import Rejected from './rejected';
 import DevSettings from './devSettings';
 
 const config = {
@@ -158,7 +158,7 @@ class LiskMessageExtension extends Component {
       if (message.url && activePeer) {
         switch (parsedData.state) {
           case 'rejected':
-            return <Text> this request has been rejected</Text>;
+            return <Rejected sharedData={parsedData} />;
           case 'transferred':
             return <TxDetail
               account={{ address: address.value }}
@@ -180,7 +180,6 @@ class LiskMessageExtension extends Component {
       <ThemeContext.Provider value="light">
         <ScrollView>
           {process.env.NODE_ENV === 'development' && <DevSettings />}
-
           {
             message.url ?
               <Element /> :
