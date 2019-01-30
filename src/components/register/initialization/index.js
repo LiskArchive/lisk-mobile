@@ -37,6 +37,7 @@ class Initialization extends React.Component {
         </View>
         <View style={styles.buttonWrapper}>
           <SecondaryButton
+            testID="registerInitializationButton"
             style={styles.button}
             onClick={() => {
               this.props.nextStep({

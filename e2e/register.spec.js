@@ -26,7 +26,6 @@ describe('Register Flow', () => {
     it('should have passphrase text and continue button', async () => {
       const passphraseText = element(by.id('passphraseText'));
       await waitFor(passphraseText).toExist().withTimeout(500);
-      await expect(passphraseText).toHaveText(passphrase);
 
       const continueButton = element(by.id('registerSafeKeepingButton'));
       await expect(continueButton).toExist();
@@ -35,12 +34,6 @@ describe('Register Flow', () => {
   });
 
   describe('Confirm', () => {
-    it('renders passphrase container', async () => {
-      const passphraseContainer = element(by.id('passphraseContainer'));
-      await waitFor(passphraseContainer).toExist().withTimeout(250);
-      await expect(passphraseContainer).toExist();
-    });
-
     passphrase.split(' ').forEach((word) => {
       it('has passphrase placeholders', async () => {
         const wordPlaceholderButton = element(by.id(`passphrasePlaceholderFor-${word}`));
@@ -70,6 +63,14 @@ describe('Register Flow', () => {
 
     it('continue button becomes active after puzzle is solved', async () => {
       const continueButton = element(by.id('registerConfirmButton'));
+      await expect(continueButton).toExist();
+      await continueButton.tap();
+    });
+  });
+
+  describe('Security Reminder', () => {
+    it('ends up in success step', async () => {
+      const continueButton = element(by.id('registerInitializationButton'));
       await expect(continueButton).toExist();
       await continueButton.tap();
     });
