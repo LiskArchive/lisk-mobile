@@ -36,6 +36,7 @@ class LiskMessageExtension extends Component {
     message: {},
     conversation: '',
     activePeer: null,
+    state: 'requested',
   };
 
   componentDidMount = () => {
@@ -97,6 +98,7 @@ class LiskMessageExtension extends Component {
       ({ conversation }) => this.setState({
         conversation,
         message: {},
+        state: 'requested',
         avatarPreview: !!this.userData.address,
         address: {
           value: this.userData.address || '',
@@ -118,6 +120,7 @@ class LiskMessageExtension extends Component {
       const url = `?address=${address.value}&amount=${amount}&state=${state}${txID}`;
       // this.setState({ url });
       MessagesManager.updatePresentationStyle('compact');
+      this.setState({ state });
       MessagesManager.composeMessage({
         summaryText: 'Summary Text',
         url,
@@ -150,15 +153,15 @@ class LiskMessageExtension extends Component {
 
   render() {
     const {
-      address, message, parsedData, avatarPreview,
-      passphrase, activePeer, presentationStyle,
+      address, message, parsedData, avatarPreview, state,
+      passphrase, activePeer, presentationStyle, conversation,
     } = this.state;
 
     const Element = () => {
       if (message.url && activePeer) {
         switch (parsedData.state) {
           case 'rejected':
-            return <Rejected sharedData={parsedData} />;
+            return <Rejected status='rejected' sharedData={parsedData} />;
           case 'transferred':
             return <TxDetail
               account={{ address: address.value }}
@@ -166,6 +169,9 @@ class LiskMessageExtension extends Component {
               txID={parsedData.txID} />;
           default:
             return <Confirm
+              state={state}
+              message={message}
+              conversation={conversation}
               sharedData={parsedData}
               passphrase={passphrase}
               activePeer={activePeer}
@@ -175,10 +181,11 @@ class LiskMessageExtension extends Component {
       return null;
     };
 
-
     return (
       <ThemeContext.Provider value="light">
-        <ScrollView>
+        <ScrollView contentContainerStyle={{
+          flex: 1,
+        }}>
           {process.env.NODE_ENV === 'development' && <DevSettings />}
           {
             message.url ?
