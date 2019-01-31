@@ -14,6 +14,7 @@ class Rejected extends Component {
   render() {
     const {
       sharedData: { amount },
+      status,
     } = this.props;
 
     return (
@@ -21,9 +22,9 @@ class Rejected extends Component {
         style={styles.container}
       >
         <View style={styles.innerContainer}>
-          <Image source={{ uri: 'rejected' }} style={{ width: 250, height: 250 }} />
+          <Image source={{ uri: status }} style={{ width: 250, height: 250 }} />
           <B style={styles.description}>
-            Your request of {amount} LSK has been rejected.
+            Your request of {amount} LSK has been {status}.
           </B>
         </View>
       </View>
