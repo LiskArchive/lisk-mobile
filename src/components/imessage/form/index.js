@@ -110,7 +110,13 @@ class LiskMessageExtension extends Component {
 
     return (
       <Fragment>
+        <View>
+          <Small style={styles.title}>You are requesting</Small>
+        </View>
         <View style={styles.rowContainer}>
+          <Small style={styles.pickerCurrency}>
+            LSK
+        </Small>
           <View style={styles.innerContainer}>
             <Text style={[styles.pickerPoint, { color: pickerActiveColor }]}>.</Text>
             {num.map((val, index) => (
