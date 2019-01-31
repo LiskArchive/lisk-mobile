@@ -73,7 +73,7 @@ class LiskMessageExtension extends Component {
       this.setState({
         conversation,
         message,
-        parsedData: this.parseUrl(message.url),
+        parsedData: message.url ? this.parseUrl(message.url) : {},
       }));
 
     MessagesManager.getPresentationStyle(presentationStyle =>
