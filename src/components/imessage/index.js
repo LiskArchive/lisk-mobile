@@ -122,7 +122,7 @@ class LiskMessageExtension extends Component {
       MessagesManager.updatePresentationStyle('compact');
       this.setState({ state });
       MessagesManager.composeMessage({
-        summaryText: 'Summary Text',
+        summaryText: `${amount}LSK is ${state}`,
         url,
         layout: {
           imageName: state,
