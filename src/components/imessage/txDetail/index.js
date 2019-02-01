@@ -22,7 +22,7 @@ const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelega
 
 class TransactionDetail extends React.Component {
   state = {
-    tx: null,
+    tx: {},
   }
 
   componentDidMount() {
@@ -30,8 +30,18 @@ class TransactionDetail extends React.Component {
 
     if (txID) {
       getTransactions(activePeer, { id: txID }).then(({ data }) => {
-        this.setState({ tx: data[0] || {} });
-      });
+        const { sharedData } = this.props;
+        this.setState({
+          tx: data[0] || {
+            type: 0,
+            recipientId: sharedData.recipientAddress,
+            senderId: sharedData.address,
+            amount: sharedData.amount,
+            notRawLisk: true,
+          },
+        });
+      })
+        .catch(err => console.log(err));
     }
   }
 
@@ -43,10 +53,12 @@ class TransactionDetail extends React.Component {
 
 
   render() {
-    const { styles, theme, account } = this.props;
+    const {
+      styles, theme, account,
+    } = this.props;
     const { tx } = this.state;
 
-    if (!tx) {
+    if (!tx.senderId) {
       return (
         <View style={[styles.container, styles.theme.container]}>
           <Loading />
@@ -85,7 +97,7 @@ class TransactionDetail extends React.Component {
               </Fragment>
             }
           </View>
-          {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
+          {(tx.type && tx.type !== 0) || (tx.recipientId === tx.senderId) ?
             <H3 style={amountStyle}>{transactions[txTypes[tx.type]].title}</H3> : null
           }
           {
@@ -93,7 +105,7 @@ class TransactionDetail extends React.Component {
               <H1 style={amountStyle}>
                 {amountSign}
                 <FormattedNumber>
-                  {fromRawLsk(tx.amount)}
+                  {tx.notRawLisk ? tx.amount : fromRawLsk(tx.amount)}
                 </FormattedNumber>
               </H1> : null
           }
