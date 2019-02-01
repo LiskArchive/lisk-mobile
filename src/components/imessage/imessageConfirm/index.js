@@ -35,6 +35,7 @@ class Confirm extends Component {
         address: { value: extractAddress(passphrase), validity: 0 },
         amount,
         state: 'transferred',
+        recipientAddress: address,
       });
     });
   }
