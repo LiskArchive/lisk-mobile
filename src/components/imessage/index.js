@@ -119,11 +119,10 @@ class LiskMessageExtension extends Component {
       const recipient = `&recipientAddress=${recipientAddress}`;
       const txID = id ? `&txID=${id}` : '';
       const url = `?address=${address.value}&amount=${amount}&state=${state}${txID}${recipient}`;
-      // this.setState({ url });
       MessagesManager.updatePresentationStyle('compact');
       this.setState({ state });
       MessagesManager.composeMessage({
-        summaryText: `${state} ${amount} LSK`,
+        summaryText: state === 'requested' ? `${state} ${amount} LSK` : '',
         url,
         layout: {
           imageName: state,
