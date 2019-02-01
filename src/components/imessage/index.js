@@ -113,16 +113,17 @@ class LiskMessageExtension extends Component {
   }
 
   composeMessage = ({
-    address, amount, state = 'requested', id,
+    address, amount, state = 'requested', id, recipientAddress,
   }) => {
     if (address.validity !== 1) {
+      const recipient = `&recipientAddress=${recipientAddress}`;
       const txID = id ? `&txID=${id}` : '';
-      const url = `?address=${address.value}&amount=${amount}&state=${state}${txID}`;
+      const url = `?address=${address.value}&amount=${amount}&state=${state}${txID}${recipient}`;
       // this.setState({ url });
       MessagesManager.updatePresentationStyle('compact');
       this.setState({ state });
       MessagesManager.composeMessage({
-        summaryText: `${amount} LSK is ${state}`,
+        summaryText: `${state} ${amount} LSK`,
         url,
         layout: {
           imageName: state,
@@ -165,6 +166,7 @@ class LiskMessageExtension extends Component {
           case 'transferred':
             return <TxDetail
               account={{ address: address.value }}
+              sharedData={parsedData}
               activePeer={activePeer}
               txID={parsedData.txID} />;
           default:
