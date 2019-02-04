@@ -14,7 +14,7 @@ extension MessagesManager: MessagesViewControllerDelegate {
   }
 
   func didSelect(message: MSMessage, conversation: MSConversation) {
-    guard self.hasListeners else { return }
+    guard self.hasListeners && self.didSelectEventLock == false else { return }
 
     self.sendEvent(withName: Events.DID_SELECT_MESSAGE.rawValue, body: [
       "message": Mappers.messageToObject(message: message),
@@ -34,6 +34,7 @@ extension MessagesManager: MessagesViewControllerDelegate {
   func didStartSending(message: MSMessage, conversation: MSConversation) {
     guard self.hasListeners else { return }
 
+    self.didSelectEventLock = false
     self.sendEvent(withName: Events.DID_START_SENDING_MESSAGE.rawValue, body: [
       "message": Mappers.messageToObject(message: message),
       "conversation": Mappers.conversationToObject(conversation: conversation)
@@ -43,6 +44,7 @@ extension MessagesManager: MessagesViewControllerDelegate {
   func didCancelSending(message: MSMessage, conversation: MSConversation) {
     guard self.hasListeners else { return }
 
+    self.didSelectEventLock = false
     self.sendEvent(withName: Events.DID_CANCEL_SENDING_MESSAGE.rawValue, body: [
       "message": Mappers.messageToObject(message: message),
       "conversation": Mappers.conversationToObject(conversation: conversation)

@@ -36,6 +36,7 @@ class LiskMessageExtension extends Component {
     message: {},
     conversation: '',
     activePeer: null,
+    state: 'requested',
   };
 
   componentDidMount = () => {
@@ -72,7 +73,7 @@ class LiskMessageExtension extends Component {
       this.setState({
         conversation,
         message,
-        parsedData: this.parseUrl(message.url),
+        parsedData: message.url ? this.parseUrl(message.url) : {},
       }));
 
     MessagesManager.getPresentationStyle(presentationStyle =>
@@ -97,6 +98,7 @@ class LiskMessageExtension extends Component {
       ({ conversation }) => this.setState({
         conversation,
         message: {},
+        state: 'requested',
         avatarPreview: !!this.userData.address,
         address: {
           value: this.userData.address || '',
@@ -111,20 +113,21 @@ class LiskMessageExtension extends Component {
   }
 
   composeMessage = ({
-    address, amount, state = 'requested', id,
+    address, amount, state = 'requested', id, recipientAddress,
   }) => {
     if (address.validity !== 1) {
+      const recipient = `&recipientAddress=${recipientAddress}`;
       const txID = id ? `&txID=${id}` : '';
-      const url = `?address=${address.value}&amount=${amount}&state=${state}${txID}`;
-      // this.setState({ url });
+      const url = `?address=${address.value}&amount=${amount}&state=${state}${txID}${recipient}`;
       MessagesManager.updatePresentationStyle('compact');
+      this.setState({ state });
       MessagesManager.composeMessage({
-        summaryText: 'Summary Text',
+        summaryText: state === 'requested' ? `${state} ${amount} LSK` : '',
         url,
         layout: {
           imageName: state,
           imageTitle: '',
-          caption: `${amount}LSK is ${state}`,
+          caption: `${amount} LSK is ${state}`,
           subcaption: `by ${address.value}`,
         },
       })
@@ -150,22 +153,26 @@ class LiskMessageExtension extends Component {
 
   render() {
     const {
-      address, message, parsedData, avatarPreview,
-      passphrase, activePeer, presentationStyle,
+      address, message, parsedData, avatarPreview, state,
+      passphrase, activePeer, presentationStyle, conversation,
     } = this.state;
 
     const Element = () => {
       if (message.url && activePeer) {
         switch (parsedData.state) {
           case 'rejected':
-            return <Rejected sharedData={parsedData} />;
+            return <Rejected status='rejected' sharedData={parsedData} />;
           case 'transferred':
             return <TxDetail
               account={{ address: address.value }}
+              sharedData={parsedData}
               activePeer={activePeer}
               txID={parsedData.txID} />;
           default:
             return <Confirm
+              state={state}
+              message={message}
+              conversation={conversation}
               sharedData={parsedData}
               passphrase={passphrase}
               activePeer={activePeer}
@@ -175,10 +182,11 @@ class LiskMessageExtension extends Component {
       return null;
     };
 
-
     return (
       <ThemeContext.Provider value="light">
-        <ScrollView>
+        <ScrollView contentContainerStyle={{
+          flex: 1,
+        }}>
           {process.env.NODE_ENV === 'development' && <DevSettings />}
           {
             message.url ?

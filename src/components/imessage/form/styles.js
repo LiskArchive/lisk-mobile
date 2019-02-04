@@ -8,11 +8,20 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#F7FBFE',
     flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+  },
+  title: {
+    textAlign: 'center',
+    marginTop: 8,
+    marginBottom: 3,
+    // paddingLeft: 20,
+    fontWeight: 'bold',
+    color: colors.light.gray1,
   },
   instructions: {
     textAlign: 'center',
@@ -27,7 +36,6 @@ export default StyleSheet.create({
   innerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
   },
   pickers: {
     height: 120,
@@ -37,7 +45,7 @@ export default StyleSheet.create({
   },
   pickerItem: {
     fontFamily: 'Gilroy',
-    fontSize: 33,
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#000',
   },
@@ -50,14 +58,23 @@ export default StyleSheet.create({
     width: '100%',
     textAlign: 'center',
   },
+  pickerCurrency: {
+    position: 'absolute',
+    top: 50,
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    fontWeight: 'bold',
+    width: '100%',
+    textAlign: 'center',
+    paddingLeft: 240,
+  },
   addressContainer: {
     width: '100%',
     marginTop: -15,
-    // backgroundColor: '#0ff',
   },
   addressInput: {
     height: 48,
-    paddingBottom: 10,
+    paddingBottom: 11,
     paddingLeft: 40,
   },
   addressInputContainer: {

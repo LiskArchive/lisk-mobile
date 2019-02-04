@@ -25,18 +25,21 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "ipad",
       "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "iPad Settings 29x29@2x.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "ipad",
       "size" : "67x50",
+      "idiom" : "ipad",
+      "filename" : "iPad-67x50@2x.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "ipad",
       "size" : "74x55",
+      "idiom" : "ipad",
+      "filename" : "iPad-74x55@2x.png",
       "scale" : "2x"
     },
     {

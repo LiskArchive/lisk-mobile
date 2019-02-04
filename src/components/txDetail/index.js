@@ -117,7 +117,9 @@ class TransactionDetail extends React.Component {
   };
 
   render() {
-    const { navigation, styles, theme } = this.props;
+    const {
+      navigation, styles, theme, account,
+    } = this.props;
     const { tx, error, refreshing } = this.state;
 
     if (error) {
@@ -136,7 +138,7 @@ class TransactionDetail extends React.Component {
       );
     }
 
-    const walletAccountId = navigation.getParam('account', '');
+    const walletAccountId = navigation.getParam('account', account.address);
     const incognito = navigation.getParam('incognito', null);
     let arrowStyle;
     let amountStyle = [styles.outgoing, styles.theme.outgoing];

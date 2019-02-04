@@ -77,7 +77,6 @@ class MessagesViewController: MSMessagesAppViewController {
     let loadingView = Bundle.main.loadNibNamed("Loading", owner: nil, options: nil)![0] as! UIView
     loadingView.frame = self.view.bounds
 
-
     rootView?.loadingView = loadingView
     rootView?.loadingViewFadeDelay = 0
     rootView?.loadingViewFadeDuration = 0
