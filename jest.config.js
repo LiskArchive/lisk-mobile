@@ -17,6 +17,7 @@ module.exports = {
   ],
   coveragePathIgnorePatterns: [
     '/node_modules/',
+    '/fastlane/',
     'src/components/',
     'src/App.js',
     'src/constants/',
