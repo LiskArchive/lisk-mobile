@@ -75,18 +75,8 @@ class MessagesViewController: MSMessagesAppViewController {
     let rootViewController = UIViewController()
     rootViewController.view = rootView
 
-<<<<<<< HEAD
-    let loadingView = Bundle.main.loadNibNamed("Loading", owner: nil, options: nil)![0] as! UIView
-    loadingView.frame = self.view.bounds
-
-
-    rootView?.loadingView = loadingView
-    rootView?.loadingViewFadeDelay = 0
-    rootView?.loadingViewFadeDuration = 0
-=======
     self.launchScreenView = Bundle.main.loadNibNamed("LaunchScreen", owner: nil, options: nil)![0] as? UIView
     self.launchScreenView?.frame = self.view.bounds
->>>>>>> 2baf491... Update iMessageExtension bridge to provide launchScreen methods
 
     self.addChild(rootViewController)
     rootViewController.view.frame = self.view.bounds

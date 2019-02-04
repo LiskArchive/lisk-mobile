@@ -42,6 +42,9 @@ class LiskMessageExtension extends Component {
     const liskAPIClient = new Lisk.APIClient(config.nodes, {
       nethash: config.nethash,
     });
+
+    MessagesManager.hideLaunchScreen();
+
     liskAPIClient.node.getConstants().then((response) => {
       // loadingFinished('getConstants');
       config.nethash = response.data.nethash;
@@ -68,6 +71,7 @@ class LiskMessageExtension extends Component {
         });
       }
     });
+
     MessagesManager.getActiveConversation((conversation, message) =>
       this.setState({
         conversation,
