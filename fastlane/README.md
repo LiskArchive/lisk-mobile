@@ -21,11 +21,6 @@ or alternatively using `brew cask install fastlane`
 fastlane ios fetch_certificates
 ```
 Fetch certificates and provisioning profiles
-### ios bump
-```
-fastlane ios bump
-```
-Increment build number
 ### ios build
 ```
 fastlane ios build
