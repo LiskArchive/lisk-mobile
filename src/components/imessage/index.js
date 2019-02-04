@@ -12,6 +12,7 @@ import Confirm from './imessageConfirm';
 import TxDetail from './txDetail';
 import Form from './form';
 import Rejected from './rejected';
+import SignOut from './signOut';
 import DevSettings from './devSettings';
 
 const config = {
@@ -44,7 +45,6 @@ class LiskMessageExtension extends Component {
       nethash: config.nethash,
     });
 
-    MessagesManager.hideLaunchScreen();
 
     liskAPIClient.node.getConstants().then((response) => {
       // loadingFinished('getConstants');
@@ -69,7 +69,9 @@ class LiskMessageExtension extends Component {
             validity: -1,
           },
           avatarPreview: true,
-        });
+        }, () => setTimeout(() => MessagesManager.hideLaunchScreen(), 100));
+      } else {
+        MessagesManager.hideLaunchScreen();
       }
     });
 
@@ -186,6 +188,16 @@ class LiskMessageExtension extends Component {
       return null;
     };
 
+    const CheckSignInState = () => (passphrase ?
+      <Form
+        MessagesEvents={MessagesEvents}
+        avatarPreview={avatarPreview}
+        presentationStyle={presentationStyle}
+        keyBoardFocused={this.keyBoardFocused}
+        inputAddress={address}
+        composeMessage={this.composeMessage} /> :
+      <SignOut />);
+
     return (
       <ThemeContext.Provider value="light">
         <ScrollView contentContainerStyle={{
@@ -195,13 +207,7 @@ class LiskMessageExtension extends Component {
           {
             message.url ?
               <Element /> :
-              <Form
-                MessagesEvents={MessagesEvents}
-                avatarPreview={avatarPreview}
-                presentationStyle={presentationStyle}
-                keyBoardFocused={this.keyBoardFocused}
-                inputAddress={address}
-                composeMessage={this.composeMessage} />
+              <CheckSignInState />
           }
         </ScrollView>
       </ThemeContext.Provider>
