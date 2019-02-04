@@ -34,4 +34,7 @@ RCT_EXTERN_METHOD(openURL:
                   rejecter: (RCTPromiseRejectBlock)reject
                   )
 
+RCT_EXTERN_METHOD(showLaunchScreen)
+RCT_EXTERN_METHOD(hideLaunchScreen)
+
 @end
