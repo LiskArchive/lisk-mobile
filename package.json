@@ -23,9 +23,12 @@
       "./src/assets/fonts/"
     ]
   },
+  "lint-staged": {
+    "*.js": "eslint"
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test:format",
+      "pre-commit": "lint-staged",
       "pre-push": "npm test"
     }
   },
@@ -139,6 +142,7 @@
     "jest-junit": "^5.2.0",
     "jest-runner-eslint": "^0.6.0",
     "jest-transform-stub": "^1.0.0",
+    "lint-staged": "^8.1.3",
     "metro-react-native-babel-preset": "^0.45.6",
     "moxios": "^0.4.0",
     "react-test-renderer": "16.2.0",
