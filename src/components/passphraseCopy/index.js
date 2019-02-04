@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { deviceHeight } from '../../utilities/device';
+import { translate } from 'react-i18next';
+import { deviceHeight, SCREEN_HEIGHTS } from '../../utilities/device';
 import { B, P } from '../toolBox/typography';
 import CopyToClipboard from '../copyToClipboard';
 import { themes } from '../../constants/styleGuide';
@@ -13,14 +14,16 @@ const height = deviceHeight();
 
 class PassphraseCopy extends React.Component {
   render() {
-    const { theme, styles, passphrase } = this.props;
+    const {
+      theme, styles, passphrase, t,
+    } = this.props;
 
     return (
       <View style={styles.wrapper}>
         <View style={styles.textContainer}>
           <View style={[styles.passphraseContainer, styles.theme.passphraseContainer]}>
             <P style={styles.theme.passphraseTitle}>
-              Store your passphrase:
+              {t('Store your passphrase:')}
             </P>
             <B style={[styles.passphrase, styles.theme.passphrase]}>
               {passphrase}
@@ -31,7 +34,7 @@ class PassphraseCopy extends React.Component {
               style={styles.copyContainer}
               labelStyle={styles.theme.copy}
               iconStyle={styles.theme.copy}
-              label='Copy to clipboard'
+              label={t('Copy to clipboard')}
               showIcon={true}
               iconSize={14}
               value={passphrase}
@@ -40,7 +43,7 @@ class PassphraseCopy extends React.Component {
           </View>
         </View>
         {
-          height > 640 &&
+          height > SCREEN_HEIGHTS &&
           <View style={styles.imageContainer}>
             {
               theme === themes.light ?
@@ -48,7 +51,7 @@ class PassphraseCopy extends React.Component {
               <Image style={styles.image} source={passphraseImgDark} />
             }
             <P style={[styles.caption, styles.theme.caption]}>
-              Keep it safe!
+              {t('Keep it safe!')}
             </P>
           </View>
         }
@@ -57,4 +60,4 @@ class PassphraseCopy extends React.Component {
   }
 }
 
-export default withTheme(PassphraseCopy, getStyles({ height }));
+export default withTheme(translate()(PassphraseCopy), getStyles({ height }));

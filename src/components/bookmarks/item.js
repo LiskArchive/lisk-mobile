@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Alert, TouchableOpacity, Animated } from 'react-native';
 import Interactable from 'react-native-interactable';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import {
   accountUnFollowed as accountUnFollowedAction,
 } from '../../actions/accounts';
@@ -19,16 +20,16 @@ class draggableItem extends React.Component {
   _deltaX = new Animated.Value(0);
 
   onDelete = () => {
-    const { data, accountUnFollowed } = this.props;
+    const { data, accountUnFollowed, t } = this.props;
 
-    Alert.alert('Are you sure?', '', [
+    Alert.alert(t('Are you sure?'), '', [
       {
-        text: 'Cancel',
+        text: t('Cancel'),
         style: 'cancel',
         onPress: () => this.ref.changePosition({ x: 0, y: 0 }),
       },
       {
-        text: 'Confirm',
+        text: t('Confirm'),
         onPress: () => accountUnFollowed(data.address),
       },
     ], { cancelable: false });
@@ -36,7 +37,7 @@ class draggableItem extends React.Component {
 
   render() {
     const {
-      styles, data, theme, navigate, setRef,
+      styles, data, theme, navigate, setRef, t,
     } = this.props;
 
     return (<TouchableOpacity
@@ -61,7 +62,7 @@ class draggableItem extends React.Component {
                   routeName: 'AddBookmark',
                   params: {
                     account: data,
-                    title: 'Edit bookmark',
+                    title: t('Edit bookmark'),
                   },
                 });
               }}
@@ -175,8 +176,8 @@ class Item extends React.Component {
   }
 }
 
-const themedDraggableItem = withTheme(draggableItem, getStyles());
-const themedItem = withTheme(Item, getStyles());
+const themedDraggableItem = withTheme(translate()(draggableItem), getStyles());
+const themedItem = withTheme(translate()(Item), getStyles());
 
 export {
   themedDraggableItem as DraggableItem,

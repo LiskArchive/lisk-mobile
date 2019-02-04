@@ -1,6 +1,7 @@
 import React from 'react';
 import { BackHandler, View } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import { IconButton } from '../toolBox/button';
 import Icon from '../toolBox/icon';
 import reg from '../../constants/regex';
@@ -181,15 +182,15 @@ class AddToBookmark extends React.Component {
 
   render() {
     const {
-      navigation, theme, styles,
+      navigation, theme, styles, t,
     } = this.props;
     const {
       address, avatarPreview, label, incomingData, editMode,
     } = this.state;
 
     const errors = {
-      label: 'The label must be shorter than 20 characters.',
-      address: 'Invalid address',
+      label: t('The label must be shorter than 20 characters.'),
+      address: t('Invalid address'),
     };
 
     const setError = (validity, fieldName) => {
@@ -197,7 +198,7 @@ class AddToBookmark extends React.Component {
         case 1:
           return errors[fieldName];
         case 2:
-          return `${fieldName} is required`;
+          return t(`${fieldName} is required`);
         default:
           return '';
       }
@@ -215,7 +216,7 @@ class AddToBookmark extends React.Component {
         <KeyboardAwareScrollView
             onSubmit={this.submitForm}
             button={{
-              title: editMode ? 'Save changes' : 'Add to bookmarks',
+              title: editMode ? t('Save changes') : t('Add to bookmarks'),
             }}
             styles={{ container: styles.container, innerContainer: styles.innerContainer }}
           >
@@ -226,7 +227,7 @@ class AddToBookmark extends React.Component {
                   onPress={() => this.scanner.toggleCamera()}
                   titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
                   style={styles.scanButton}
-                  title='Scan'
+                  title={t('Scan')}
                   icon='scanner'
                   iconSize={18}
                   color={colors.light.blue}
@@ -246,7 +247,7 @@ class AddToBookmark extends React.Component {
                     />
                 }
                 <Input
-                  label='Address'
+                  label={t('Address')}
                   reference={(input) => { this.addressRef = input; }}
                   autoCorrect={false}
                   innerStyles={{
@@ -274,7 +275,7 @@ class AddToBookmark extends React.Component {
               </View>
             }
             <Input
-              label='Label'
+              label={t('Label')}
               reference={(input) => { this.labelRef = input; }}
               autoCorrect={false}
               innerStyles={{ input: styles.input }}
@@ -290,4 +291,4 @@ class AddToBookmark extends React.Component {
   }
 }
 
-export default withTheme(AddToBookmark, getStyles());
+export default withTheme(translate()(AddToBookmark), getStyles());

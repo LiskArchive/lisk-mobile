@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, View, Animated } from 'react-native';
+import { translate } from 'react-i18next';
 import styles from './styles';
 import Input from '../toolBox/input';
 import { validatePassphrase } from '../../utilities/passphrase';
@@ -114,6 +115,7 @@ class Form extends React.Component {
 
   render() {
     const { passphrase, animation: { opacity } } = this.state;
+    const { t, navigation, connectionError } = this.props;
 
     let errorMessage = '';
 
@@ -135,7 +137,7 @@ class Form extends React.Component {
             cameraOverlay: styles.cameraOverlay,
           }}
           fullScreen={true}
-          navigation={this.props.navigation}
+          navigation={navigation}
           readFromCameraRoll={false}
           onQRCodeRead={this.onQRCodeRead}
         />
@@ -143,13 +145,13 @@ class Form extends React.Component {
           style={[styles.titleContainer, styles.paddingBottom, { opacity }]}
         >
           <P style={styles.title}>
-            The official Lisk mobile wallet.
+            { t('The official Lisk mobile wallet.') }
           </P>
         </Animated.View>
         <Animated.View style={[{ opacity }]}>
           <Input
             noTheme={true}
-            label='Passphrase'
+            label={t('Passphrase')}
             reference={(ref) => { this.passphraseInput = ref; }}
             innerStyles={{ input: styles.input }}
             value={passphrase.value}
@@ -167,7 +169,7 @@ class Form extends React.Component {
                 onPress={this.toggleCamera}
                 titleStyle={styles.scanButtonTitle}
                 style={styles.scanButton}
-                title='Scan'
+                title={t('Scan')}
                 icon='scanner'
                 iconSize={18}
                 color={colors.light.blue} /> : null
@@ -175,11 +177,11 @@ class Form extends React.Component {
         </Animated.View>
         <KeyboardAwareScrollView
           noTheme={true}
-          button='Sign in'
+          button={t('Sign in')}
           onSubmit={this.onFormSubmission}
           extras={
             <Extras
-              error={this.props.connectionError}
+              error={connectionError}
               onPress={this.goToRegistration}
               opacity={opacity}
             />
@@ -190,4 +192,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default translate()(Form);

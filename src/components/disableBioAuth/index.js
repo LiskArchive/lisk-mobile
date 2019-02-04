@@ -1,6 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
+import { translate } from 'react-i18next';
 import {
   removePassphraseFromKeyChain,
 } from '../../utilities/passphrase';
@@ -21,6 +22,7 @@ import PassphraseCopy from '../passphraseCopy';
 class DisableBioAuth extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const title = navigation.getParam('title', 'Bio Auth');
+    // Todo translate here
     return {
       title: `Disable ${title}`,
     };
@@ -33,7 +35,9 @@ class DisableBioAuth extends React.Component {
   }
 
   render() {
-    const { styles, navigation, account: { passphrase } } = this.props;
+    const {
+      t, styles, navigation, account: { passphrase },
+    } = this.props;
     const title = navigation.getParam('title', 'Bio Auth');
 
     return (
@@ -41,7 +45,7 @@ class DisableBioAuth extends React.Component {
         <View style={styles.container}>
           <View>
             <P style={[styles.subHeader, styles.theme.subHeader]}>
-              Passphrase will be the only option to access your account.
+              {t('Passphrase will be the only option to access your account.')}
             </P>
             <PassphraseCopy passphrase={passphrase} />
           </View>
@@ -49,7 +53,7 @@ class DisableBioAuth extends React.Component {
           <View>
             <SecondaryButton
               onClick={this.confirm}
-              title={`Disable ${title}`}
+              title={t(`Disable ${title}`)}
             />
           </View>
         </View>
@@ -58,4 +62,4 @@ class DisableBioAuth extends React.Component {
   }
 }
 
-export default withTheme(DisableBioAuth, getStyles());
+export default withTheme(translate()(DisableBioAuth), getStyles());

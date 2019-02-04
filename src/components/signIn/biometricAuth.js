@@ -84,7 +84,7 @@ class BiometricAuth extends React.Component {
       </View>
       <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
         <P style={[styles.question, styles.fillWidth, tried ? styles.error : styles.invisible]}>
-          Unauthorized! Please try again.
+          { t('Unauthorized! Please try again.') }
         </P>
         <P style={[styles.question, styles.fillWidth]}>
           {

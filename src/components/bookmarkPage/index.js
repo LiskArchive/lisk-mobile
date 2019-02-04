@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Animated, ScrollView, Keyboard } from 'react-native';
+import { translate } from 'react-i18next';
 import { P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import reg from '../../constants/regex';
@@ -46,13 +47,15 @@ class Bookmark extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation, styles, theme } = this.props;
+    const {
+      navigation, styles, theme, t,
+    } = this.props;
     navigation.setParams({
       styles,
       theme,
       action: () => {
         navigation.navigate('AddBookmark', {
-          title: 'New bookmark',
+          title: t('New bookmark'),
         });
       },
     });
@@ -137,7 +140,9 @@ class Bookmark extends React.Component {
   }
 
   render() {
-    const { styles, navigation, theme } = this.props;
+    const {
+      styles, navigation, theme, t,
+    } = this.props;
     const { address } = this.state;
     const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
@@ -161,8 +166,8 @@ class Bookmark extends React.Component {
                   color={colors[theme].gray2}
                 />
                 <Input
-                  label={isSmallScreen ? '' : 'Search'}
-                  placeholder={isSmallScreen ? 'Search for a bookmark' : ''}
+                  label={isSmallScreen ? '' : t('Search')}
+                  placeholder={isSmallScreen ? t('Search for a bookmark') : ''}
                   autoCorrect={false}
                   reference={(input) => { this.input = input; }}
                   innerStyles={{
@@ -177,7 +182,7 @@ class Bookmark extends React.Component {
                   value={address.value}
                   error={
                     address.validity === 1 ?
-                      'Invalid address' : ''
+                      t('Invalid address') : ''
                   }
                 />
               </View>
@@ -193,4 +198,4 @@ class Bookmark extends React.Component {
   }
 }
 
-export default withTheme(Bookmark, getStyles());
+export default withTheme(translate()(Bookmark), getStyles());
