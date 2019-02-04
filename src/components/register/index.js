@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, BackHandler } from 'react-native';
+import { translate } from 'react-i18next';
 import MultiStep from '../multiStep';
 import Confirm from './confirm';
 import Success from './success';
@@ -71,7 +72,7 @@ class Register extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, t } = this.props;
     const noNavStyle = this.state.showNav ? {} : { paddingBottom: 0 };
     return (
       <View style={[styles.container, noNavStyle]}>
@@ -83,11 +84,11 @@ class Register extends React.Component {
           groupButton={NavButton}
           activeTitle={ActiveTitle}
           backButtonTitle='Back'>
-          <Intro title='create' group='1. Creating your account' navigation={navigation}></Intro>
-          <SafeKeeping title='safekeeping' group='2. Saving your passphrase' navigation={navigation}></SafeKeeping>
-          <Confirm title='verify' group='3. Verifying your passphrase' navigation={navigation}></Confirm>
-          <Initialization title='initialization' group='4. Security reminder' navigation={navigation} />
-          <Success title='success' group='4. Security reminder'
+          <Intro title='create' group={t('1. Creating your account')} navigation={navigation}></Intro>
+          <SafeKeeping title='safekeeping' group={t('2. Saving your passphrase')} navigation={navigation}></SafeKeeping>
+          <Confirm title='verify' group={t('3. Verifying your passphrase')} navigation={navigation}></Confirm>
+          <Initialization title='initialization' group={t('4. Security reminder')} navigation={navigation} />
+          <Success title='success' group={t('4. Security reminder')}
             hideNav={this.hideNav}
             navigation={navigation}></Success>
         </MultiStep>
@@ -96,4 +97,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default translate()(Register);

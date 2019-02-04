@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
+import { translate } from 'react-i18next';
 import styles from './styles';
 import { B, P } from '../../toolBox/typography';
 import CopyToClipboard from '../../copyToClipboard';
@@ -9,9 +10,10 @@ import image from '../../../assets/images/registrationProcess/passphrase3x.png';
 
 class SafeKeeping extends React.Component {
   componentDidMount() {
-    this.props.navigation.setParams({
-      action: this.props.prevStep,
-      title: 'Your passphrase',
+    const { t, prevStep, navigation: { setParams } } = this.props;
+    setParams({
+      action: prevStep,
+      title: t('Your passphrase'),
     });
   }
 
@@ -22,17 +24,17 @@ class SafeKeeping extends React.Component {
   }
 
   render() {
-    const { passphrase } = this.props.sharedData;
+    const { t, sharedData: { passphrase } } = this.props;
 
     return (
       <View style={styles.container}>
         <View>
           <View style={styles.titleContainer}>
             <B style={styles.subHeader}>
-              The only way to access your account.
+              {t('The only way to access your account.')}
             </B>
           </View>
-          <P style={styles.passphraseTitle}>This is your passphrase:</P>
+          <P style={styles.passphraseTitle}>{t('This is your passphrase:')}</P>
           <View style={styles.passphraseContainer}>
             <B style={styles.passphrase}>
               {passphrase.replace(/\s+/g, '    ')}
@@ -43,7 +45,7 @@ class SafeKeeping extends React.Component {
               style={styles.copyContainer}
               labelStyle={styles.copy}
               iconStyle={styles.copy}
-              label='Copy to clipboard'
+              label={t('Copy to clipboard')}
               showIcon={true}
               iconSize={14}
               value={passphrase}
@@ -56,7 +58,7 @@ class SafeKeeping extends React.Component {
                   style={styles.image}
                   source={image}
                 />
-                <P style={styles.caption}>Keep it safe!</P>
+                <P style={styles.caption}>{t('Keep it safe!')}</P>
               </View> : null
           }
         </View>
@@ -65,10 +67,10 @@ class SafeKeeping extends React.Component {
             style={styles.button}
             noTheme={true}
             onClick={this.forward}
-            title='I wrote it down' />
+            title={t('I wrote it down')} />
         </View>
       </View>);
   }
 }
 
-export default SafeKeeping;
+export default translate()(SafeKeeping);
