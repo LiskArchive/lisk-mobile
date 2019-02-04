@@ -16,16 +16,26 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios certificates
+### ios fetch_certificates
 ```
-fastlane ios certificates
+fastlane ios fetch_certificates
 ```
 Fetch certificates and provisioning profiles
+### ios bump
+```
+fastlane ios bump
+```
+Increment build number
 ### ios build
 ```
 fastlane ios build
 ```
-
+Build the app
+### ios beta
+```
+fastlane ios beta
+```
+Build the app and ship to Testflight
 
 ----
 

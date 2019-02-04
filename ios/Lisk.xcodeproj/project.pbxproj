@@ -1368,6 +1368,7 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 58UK9RE9TP;
 						LastSwiftMigration = 1010;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -1377,7 +1378,7 @@
 					AC7A832021EF4BDB004502E4 = {
 						CreatedOnToolsVersion = 10.1;
 						DevelopmentTeam = 58UK9RE9TP;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -2289,7 +2290,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				HEADER_SEARCH_PATHS = (
@@ -2323,6 +2325,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile;
 				PRODUCT_NAME = Lisk;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development io.lisk.mobile 1549288925";
 				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -2338,7 +2341,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2370,6 +2374,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile;
 				PRODUCT_NAME = Lisk;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development io.lisk.mobile 1549288925";
 				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2474,7 +2479,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = LiskMessageExtension/LiskMessageExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				ENABLE_TESTABILITY = YES;
@@ -2498,8 +2503,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.LiskMessageExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.message;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development io.lisk.mobile.message";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "LiskMessageExtension/LiskMessageExtension-Bridging-Header.h";
@@ -2531,7 +2537,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = LiskMessageExtension/LiskMessageExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
@@ -2554,8 +2560,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.LiskMessageExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.message;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development io.lisk.mobile.message";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LiskMessageExtension/LiskMessageExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

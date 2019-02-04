@@ -10,6 +10,8 @@ platform :ios do
   lane :fetch_certificates do
     match(app_identifier: 'io.lisk.mobile', type: 'development')
     match(app_identifier: 'io.lisk.mobile', type: 'appstore')
+    match(app_identifier: 'io.lisk.mobile.message', type: 'development')
+    match(app_identifier: 'io.lisk.mobile.message', type: 'appstore')
   end
 
   desc 'Build the app'
