@@ -1,4 +1,4 @@
-git_url("git@github.com:aydieneue/lisk-mobile-certificates.git")
+git_url("git@github.com:LiskHQ/lisk-mobile-licenses.git")
 
 storage_mode("git")
 
