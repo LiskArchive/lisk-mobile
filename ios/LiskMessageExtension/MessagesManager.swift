@@ -13,6 +13,7 @@ import Messages
 class MessagesManager: RCTEventEmitter {
   let messagesVC: MessagesViewController
   var hasListeners: Bool = false
+  var didSelectEventLock: Bool = false
 
   override static func moduleName() -> String! {
     return "MessagesManager"
@@ -107,6 +108,7 @@ class MessagesManager: RCTEventEmitter {
         return reject("ERROR", "Unable to insert message", error)
       }
 
+      self.didSelectEventLock = true
       return resolve(Mappers.messageToObject(message: message, withParticipiantIdentifier: false))
     }
   }

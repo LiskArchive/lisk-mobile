@@ -80,8 +80,9 @@ class LiskMessageExtension extends Component {
     } = this.props;
 
     const { num, address } = this.state;
+    const firstDigit = (parseInt(num[0], 10) > 0) ? num[0] : '';
 
-    const amount = `${num[0]}${num[1]}.${num[2]}${num[3]}`;
+    const amount = `${firstDigit}${num[1]}.${num[2]}${num[3]}`;
     if (parseFloat(amount) > 0) {
       composeMessage({
         address: address.value.length === 0 ? inputAddress : address,
@@ -110,7 +111,13 @@ class LiskMessageExtension extends Component {
 
     return (
       <Fragment>
+        <View>
+          <Small style={styles.title}>You are requesting</Small>
+        </View>
         <View style={styles.rowContainer}>
+          <Small style={styles.pickerCurrency}>
+            LSK
+        </Small>
           <View style={styles.innerContainer}>
             <Text style={[styles.pickerPoint, { color: pickerActiveColor }]}>.</Text>
             {num.map((val, index) => (

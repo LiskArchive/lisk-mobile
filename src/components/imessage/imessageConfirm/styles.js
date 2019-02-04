@@ -9,7 +9,6 @@ export default StyleSheet.create({
     flex: 1,
   },
   innerContainer: {
-    flexGrow: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
     flex: 1,
@@ -29,8 +28,7 @@ export default StyleSheet.create({
     paddingLeft: 13,
   },
   title: {
-    fontSize: 12,
-    paddingBottom: 10,
+    marginBottom: 20,
   },
   amount: {
     paddingBottom: 15,
@@ -42,8 +40,8 @@ export default StyleSheet.create({
   },
   button: {
     borderRadius: 2,
-    marginBottom: 0,
-    marginTop: 20,
+    marginBottom: 10,
+    marginTop: 15,
   },
   label: {
     marginTop: 14,
@@ -55,12 +53,8 @@ export default StyleSheet.create({
   },
   text: {
     flexWrap: 'wrap',
-    flex: 1,
     paddingRight: 30,
     color: colors.light.black,
-  },
-  subtitle: {
-    marginTop: 7,
   },
   addressContainer: {
     flexDirection: 'column',
@@ -115,5 +109,17 @@ export default StyleSheet.create({
     fontSize: fonts.size.base,
     fontFamily: fonts.family.context,
     paddingTop: 10,
+  },
+  confirmContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    marginTop: -3 * boxes.boxPadding,
+    marginBottom: 0,
+    justifyContent: 'space-around',
+  },
+  confirmMessage: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: colors.light.gray1,
   },
 });
