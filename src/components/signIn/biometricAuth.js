@@ -88,7 +88,7 @@ class BiometricAuth extends React.Component {
         </P>
         <P style={[styles.question, styles.fillWidth]}>
           {
-            t(`Don't want to use ${sensorType}?`)
+            t(`Don’t want to use ${sensorType}?`)
           }
         </P>
         <A

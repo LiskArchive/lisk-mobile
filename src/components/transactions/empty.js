@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, View, Image, ActivityIndicator } from 'react-native';
+import { translate } from 'react-i18next';
 import noActivityLight from '../../assets/images/noActivity/noActivity3xLight.png';
 import noActivityDark from '../../assets/images/noActivity/noActivity3xDark.png';
 import { P } from '../toolBox/typography';
@@ -11,7 +12,8 @@ const EmptyState = ({
   theme,
   styles,
   refreshing,
-  message = 'You do not have any recent activity.',
+  t,
+  message,
   style = {},
 }) => (
   <View style={[styles.emptyState, style]}>
@@ -26,10 +28,10 @@ const EmptyState = ({
       }
 
       <P style={[styles.noTxTitle, styles.theme.noTxTitle]}>
-        {message}
+        {message || t('You do not have any recent activity.')}
       </P>
     </View>
   </View>
 );
 
-export default withTheme(EmptyState, getStyles());
+export default withTheme(translate()(EmptyState), getStyles());

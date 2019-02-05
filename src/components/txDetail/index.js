@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { ScrollView, View, Image, RefreshControl } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import FormattedDate from '../formattedDate';
 import withTheme from '../withTheme';
 import { fromRawLsk } from '../../utilities/conversions';
@@ -69,6 +70,7 @@ class TransactionDetail extends React.Component {
 
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
+    const { t, activePeer } = this.props;
 
     try {
       const { data } = await getTransactions(this.props.activePeer, { id });
@@ -78,7 +80,7 @@ class TransactionDetail extends React.Component {
       // and couldn't find any with the id (example: navigating from a deep link)
       if (!tx.id && !currentTx) {
         this.setState({
-          error: 'Transaction not found',
+          error: t('Transaction not found'),
         });
       } else {
         setTimeout(() => this.setState(prevState => ({
@@ -89,7 +91,7 @@ class TransactionDetail extends React.Component {
     } catch (error) {
       if (!currentTx) {
         this.setState({
-          error: 'An error occurred, please try again.',
+          error: t('An error occurred, please try again.'),
         });
       }
     }
@@ -118,7 +120,7 @@ class TransactionDetail extends React.Component {
 
   render() {
     const {
-      navigation, styles, theme, account,
+      navigation, styles, theme, account, t,
     } = this.props;
     const { tx, error, refreshing } = this.state;
 
@@ -187,7 +189,7 @@ class TransactionDetail extends React.Component {
             }
           </View>
           {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
-            <H3 style={amountStyle}>{transactions[txTypes[tx.type]].title}</H3> : null
+            <H3 style={amountStyle}>{t(transactions[txTypes[tx.type]].title)}</H3> : null
           }
           {
             tx.type === 0 && (tx.recipientId !== tx.senderId) && !incognito ?
@@ -227,8 +229,8 @@ class TransactionDetail extends React.Component {
           <View style={styles.rowContent}>
             <P style={[styles.label, styles.theme.label]}>
               {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
-                <Fragment>Account address</Fragment> :
-                <Fragment>Sender</Fragment>
+                <Fragment>{t('Account address')}</Fragment> :
+                <Fragment>{t('Sender')}</Fragment>
               }
             </P>
             <View style={styles.addressContainer}>
@@ -253,7 +255,7 @@ class TransactionDetail extends React.Component {
               color={colors[theme].gray2}
             />
             <View style={styles.rowContent}>
-              <P style={[styles.label, styles.theme.label]}>Recipient</P>
+              <P style={[styles.label, styles.theme.label]}>{t('Recipient')}</P>
               <View style={styles.addressContainer}>
                 <A
                   value={tx.senderId}
@@ -275,7 +277,7 @@ class TransactionDetail extends React.Component {
             color={colors[theme].gray2}
           />
           <View style={styles.rowContent}>
-            <P style={[styles.label, styles.theme.label]}>Transaction Fee</P>
+            <P style={[styles.label, styles.theme.label]}>{t('Transaction Fee')}</P>
             <B style={[styles.value, styles.theme.value]}>
               <FormattedNumber>{fromRawLsk(transactions[txTypes[tx.type]].fee)}</FormattedNumber>
             </B>
@@ -291,7 +293,7 @@ class TransactionDetail extends React.Component {
                 color={colors[theme].gray2}
               />
               <View style={styles.rowContent}>
-                <P style={[styles.label, styles.theme.label]}>Reference</P>
+                <P style={[styles.label, styles.theme.label]}>{t('Reference')}</P>
                 <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
                   {tx.asset.data}
                 </B>
@@ -306,8 +308,8 @@ class TransactionDetail extends React.Component {
             color={colors[theme].gray2}
           />
           <View style={styles.rowContent}>
-            <P style={[styles.label, styles.theme.label]}>Confirmations</P>
-            <B style={[styles.value, styles.theme.value]}>{tx.confirmations || 'Not confirmed yet.'}</B>
+            <P style={[styles.label, styles.theme.label]}>{t('Confirmations')}</P>
+            <B style={[styles.value, styles.theme.value]}>{tx.confirmations || t('Not confirmed yet.')}</B>
           </View>
         </View>
         <View style={[styles.detailRow, styles.theme.detailRow]}>
@@ -318,7 +320,7 @@ class TransactionDetail extends React.Component {
             color={colors[theme].gray2}
           />
           <View style={styles.rowContent}>
-            <P style={[styles.label, styles.theme.label]}>Transaction ID</P>
+            <P style={[styles.label, styles.theme.label]}>{t('Transaction ID')}</P>
             <View style={styles.addressContainer}>
               <Share
                 type={B}
@@ -334,4 +336,4 @@ class TransactionDetail extends React.Component {
   }
 }
 
-export default withTheme(TransactionDetail, getStyles());
+export default withTheme(translate()(TransactionDetail), getStyles());

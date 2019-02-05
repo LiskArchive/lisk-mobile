@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { View, Animated, Platform, ActivityIndicator } from 'react-native';
 import connect from 'redux-connect-decorator';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import { translate } from 'react-i18next';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
@@ -70,7 +71,7 @@ class Transactions extends React.Component {
     const {
       styles, transactions, navigate,
       account, footer, theme, incognitoMode,
-      followedAccounts, refreshing, type,
+      followedAccounts, refreshing, type, t,
     } = this.props;
 
     const incognito = type === 'home' && incognitoMode;
@@ -89,7 +90,7 @@ class Transactions extends React.Component {
               {(Platform.OS === 'ios' && refreshing) ? <ActivityIndicator size="large" /> : null}
             </View>
             <View style={styles.innerContainer}>
-              <H3 style={[styles.title, styles.theme.title]}>Activity</H3>
+              <H3 style={[styles.title, styles.theme.title]}>{t('Activity')}</H3>
               {incognito ?
                 <IconButton
                   title=''
@@ -104,9 +105,9 @@ class Transactions extends React.Component {
               <View style={[styles.initContainer, styles.theme.initContainer]}>
                 <Icon name='warning' color={colors[theme].red} size={18} />
                 <Small style={[styles.initText, styles.theme.initText]}>
-                  Your account is not initialized.
+                  {t('Your account is not initialized.')}
                   <A style={[styles.link, styles.theme.link]}
-                    onPress={this.onPress}> Initialize it now</A>
+                    onPress={this.onPress}> {t('Initialize it now')}</A>
                 </Small>
               </View> : null
             }
@@ -126,4 +127,4 @@ class Transactions extends React.Component {
     </Anim>);
   }
 }
-export default withTheme(Transactions, getStyles());
+export default withTheme(translate()(Transactions), getStyles());

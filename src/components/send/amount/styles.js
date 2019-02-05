@@ -23,6 +23,7 @@ export default () => ({
     },
     balanceText: {
       fontSize: 14,
+      paddingRight: 4,
     },
     balanceNumber: {
       fontSize: 14,

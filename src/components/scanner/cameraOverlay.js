@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableHighlight, Platform } from 'react-native';
 import OpenAppSettings from 'react-native-app-settings';
+import { translate } from 'react-i18next';
 import Icon from '../toolBox/icon';
 import { P } from '../toolBox/typography';
 import { colors } from '../../constants/styleGuide';
@@ -8,14 +9,14 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const CameraOverlay = ({
-  styles, photoPermission, toggleGallery, containerStyles,
+  styles, photoPermission, toggleGallery, containerStyles, t,
 }) =>
   (<View style={[styles.cameraOverlay, containerStyles]}>
     <P style={styles.galleryDescription}>
       {
         photoPermission === 'authorized' ?
-        'Scan a QR code or upload from your camera roll.' :
-        'Scan a QR code or grant access to the camera roll.'
+        t('Scan a QR code or upload from your camera roll.') :
+        t('Scan a QR code or grant access to the camera roll.')
       }
     </P>
     <TouchableHighlight
@@ -36,4 +37,4 @@ const CameraOverlay = ({
     </TouchableHighlight>
   </View>);
 
-export default withTheme(CameraOverlay, getStyles());
+export default withTheme(translate()(CameraOverlay), getStyles());

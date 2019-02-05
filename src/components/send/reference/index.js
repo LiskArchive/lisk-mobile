@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { TextEncoder } from 'text-encoding';
+import { translate } from 'react-i18next';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import { P } from '../../toolBox/typography';
 import Input from '../../toolBox/input';
@@ -26,14 +27,16 @@ class Reference extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation, prevStep, sharedData } = this.props;
+    const {
+      navigation: { setParams }, prevStep, sharedData, t,
+    } = this.props;
 
     if (sharedData.reference) {
       this.onChange(sharedData.reference);
     }
 
-    navigation.setParams({
-      title: isSmallScreen ? 'Add a reference' : 'Send',
+    setParams({
+      title: isSmallScreen ? t('Add a reference') : t('Send'),
       showButtonLeft: true,
       action: () => prevStep(),
     });
@@ -68,7 +71,7 @@ class Reference extends React.Component {
   }
 
   render() {
-    const { styles } = this.props;
+    const { styles, t } = this.props;
     const { reference: { value, validity } } = this.state;
 
     return (
@@ -78,7 +81,7 @@ class Reference extends React.Component {
           styles={{ innerContainer: styles.innerContainer }}
           hasTabBar={true}
           button={{
-            title: 'Continue',
+            title: t('Continue'),
             type: 'inBox',
           }}
         >
@@ -86,21 +89,21 @@ class Reference extends React.Component {
             {!isSmallScreen ? (
               <View style={styles.headerContainer}>
                 <P style={styles.theme.subHeader}>
-                  Add a reference to this transaction.
+                  {t('Add a reference to this transaction.')}
                 </P>
               </View>
             ) : null}
 
             <Input
               reference={(el) => { this.input = el; }}
-              label='Reference (Optional)'
+              label={t('Reference (optional)')}
               autoFocus={!isAndroid}
               autoCorrect={false}
               innerStyles={{ input: styles.input }}
               multiline={true}
               onChange={this.onChange}
               value={value}
-              error={validity === 1 ? 'Maximum length of 64 bytes is exceeded.' : ''}
+              error={validity === 1 ? t('Maximum length of 64 bytes is exceeded.') : ''}
             />
           </View>
         </KeyboardAwareScrollView>
@@ -109,4 +112,4 @@ class Reference extends React.Component {
   }
 }
 
-export default withTheme(Reference, getStyles());
+export default withTheme(translate()(Reference), getStyles());

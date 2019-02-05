@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Image, TouchableHighlight } from 'react-native';
 import OpenAppSettings from 'react-native-app-settings';
+import { translate } from 'react-i18next';
 import { P, H4 } from '../toolBox/typography';
 import cameraPermissionIconLight from '../../assets/images/camera3xLight.png';
 import cameraPermissionIconDark from '../../assets/images/camera3xDark.png';
@@ -10,7 +11,7 @@ import { themes, colors } from '../../constants/styleGuide';
 import { IconButton } from '../toolBox/button';
 
 const CameraAccess = ({
-  theme, styles, close, fullScreen,
+  theme, styles, close, fullScreen, t,
 }) => (
   <TouchableHighlight
     onPress={() => { OpenAppSettings.open(); }}
@@ -42,13 +43,12 @@ const CameraAccess = ({
             source={cameraPermissionIconDark} />
       }
       <H4 style={[styles.permissionTitle, styles.theme.permissionTitle]}>
-        Allow camera access
+        {t('Allow camera access')}
       </H4>
       <P style={[styles.permissionDescription, styles.theme.permissionDescription]}>
-        Lisk needs to access your camera for scanning QR codes.
-        Tap on the icon above to go to settings.
+        {t('Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.')}
       </P>
     </Fragment>
   </TouchableHighlight>);
 
-export default withTheme(CameraAccess, getStyles());
+export default withTheme(translate()(CameraAccess), getStyles());
