@@ -6,6 +6,7 @@ describe('QR Code Helper', () => {
     expect(qrCode.decodeLaunchUrl(data)).toEqual({
       address: '1L',
       amount: '1',
+      reference: 'test',
     });
   });
 
