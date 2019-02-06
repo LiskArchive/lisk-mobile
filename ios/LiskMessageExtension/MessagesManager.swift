@@ -126,4 +126,18 @@ class MessagesManager: RCTEventEmitter {
       return resolve(url)
     })
   }
+
+  @objc
+  func showLaunchScreen() {
+    DispatchQueue.main.async {
+      self.messagesVC.launchScreenView?.isHidden = false
+    }
+  }
+
+  @objc
+  func hideLaunchScreen() {
+    DispatchQueue.main.async {
+      self.messagesVC.launchScreenView?.isHidden = true
+    }
+  }
 }

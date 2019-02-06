@@ -22,6 +22,7 @@ class MessagesViewController: MSMessagesAppViewController {
   var delegate: MessagesViewControllerDelegate?
   var moduleInitialiser: RNModuleInitialiser?
   var bridge: RCTBridge?
+  var launchScreenView: UIView?
 
   override func willBecomeActive(with conversation: MSConversation) {
     super.willBecomeActive(with: conversation)
@@ -74,19 +75,16 @@ class MessagesViewController: MSMessagesAppViewController {
     let rootViewController = UIViewController()
     rootViewController.view = rootView
 
-    let loadingView = Bundle.main.loadNibNamed("Loading", owner: nil, options: nil)![0] as! UIView
-    loadingView.frame = self.view.bounds
-
-    rootView?.loadingView = loadingView
-    rootView?.loadingViewFadeDelay = 0
-    rootView?.loadingViewFadeDuration = 0
+    self.launchScreenView = Bundle.main.loadNibNamed("LaunchScreen", owner: nil, options: nil)![0] as? UIView
+    self.launchScreenView?.frame = self.view.bounds
 
     self.addChild(rootViewController)
-
     rootViewController.view.frame = self.view.bounds
     rootViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
     self.view.addSubview(rootViewController.view)
+    self.view.addSubview(self.launchScreenView!)
+
     NSLayoutConstraint.activate([
       rootViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
       rootViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor),

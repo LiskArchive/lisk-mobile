@@ -16,6 +16,12 @@ const MessagesEvents = new NativeEventEmitter(MessagesManager);
 ```
 
 ## Methods
+### showLaunchScreen()
+Shows launch screen, which is shown by default.
+
+### hideLaunchScreen()
+Hides launch screen.
+
 ### getActiveConversation(cb(conversation: Conversion, message: Message))
 Returns the active conversation and selected message. You can call this on `componentDidMount` to initialize your flow.
 

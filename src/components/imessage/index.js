@@ -4,7 +4,6 @@ import {
   NativeModules,
   NativeEventEmitter,
 } from 'react-native';
-import Lisk from '@liskhq/lisk-client';
 import { getPassphraseFromKeyChain } from '../../utilities/passphrase';
 import ThemeContext from '../../contexts/theme';
 // import styles from './styles';
@@ -12,12 +11,9 @@ import Confirm from './imessageConfirm';
 import TxDetail from './txDetail';
 import Form from './form';
 import Rejected from './rejected';
+import SignOut from './signOut';
 import DevSettings from './devSettings';
-
-const config = {
-  nodes: ['https://testnet.lisk.io'],
-  nethash: 'net',
-};
+import setActivePeer from './setPeer';
 
 
 const { MessagesManager } = NativeModules;
@@ -40,18 +36,7 @@ class LiskMessageExtension extends Component {
   };
 
   componentDidMount = () => {
-    const liskAPIClient = new Lisk.APIClient(config.nodes, {
-      nethash: config.nethash,
-    });
-    liskAPIClient.node.getConstants().then((response) => {
-      // loadingFinished('getConstants');
-      config.nethash = response.data.nethash;
-      this.setState({
-        activePeer: new Lisk.APIClient(config.nodes, {
-          nethash: config.nethash,
-        }),
-      });
-    });
+    setActivePeer.then(activePeer => this.setState({ activePeer }));
 
     getPassphraseFromKeyChain().then((account) => {
       if (account) {
@@ -66,9 +51,12 @@ class LiskMessageExtension extends Component {
             validity: -1,
           },
           avatarPreview: true,
-        });
+        }, () => setTimeout(() => MessagesManager.hideLaunchScreen(), 100));
+      } else {
+        MessagesManager.hideLaunchScreen();
       }
     });
+
     MessagesManager.getActiveConversation((conversation, message) =>
       this.setState({
         conversation,
@@ -182,6 +170,16 @@ class LiskMessageExtension extends Component {
       return null;
     };
 
+    const CheckSignInState = () => (passphrase ?
+      <Form
+        MessagesEvents={MessagesEvents}
+        avatarPreview={avatarPreview}
+        presentationStyle={presentationStyle}
+        keyBoardFocused={this.keyBoardFocused}
+        inputAddress={address}
+        composeMessage={this.composeMessage} /> :
+      <SignOut />);
+
     return (
       <ThemeContext.Provider value="light">
         <ScrollView contentContainerStyle={{
@@ -191,13 +189,7 @@ class LiskMessageExtension extends Component {
           {
             message.url ?
               <Element /> :
-              <Form
-                MessagesEvents={MessagesEvents}
-                avatarPreview={avatarPreview}
-                presentationStyle={presentationStyle}
-                keyBoardFocused={this.keyBoardFocused}
-                inputAddress={address}
-                composeMessage={this.composeMessage} />
+              <CheckSignInState />
           }
         </ScrollView>
       </ThemeContext.Provider>
