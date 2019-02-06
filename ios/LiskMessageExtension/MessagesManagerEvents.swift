@@ -2,9 +2,6 @@
 //  MessagesManagerEvents.swift
 //  LiskMessageExtension
 //
-//  Created by Altay Aydemir on 17.01.19.
-//  Copyright © 2019 Facebook. All rights reserved.
-//
 
 import Foundation
 
