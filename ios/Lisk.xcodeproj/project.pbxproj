@@ -2498,7 +2498,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.LiskMessageExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.message;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -2554,7 +2554,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.LiskMessageExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.message;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LiskMessageExtension/LiskMessageExtension-Bridging-Header.h";
