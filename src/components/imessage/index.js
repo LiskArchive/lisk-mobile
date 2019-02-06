@@ -119,15 +119,15 @@ class LiskMessageExtension extends Component {
           subcaption: `by ${address.value}`,
         },
       })
-        .then(() => true)
-        .catch(console.log);
+        // eslint-disable-next-line no-console
+        .then(() => true).catch(console.log);
     }
   };
 
   onTogglePresentationStyle = () => {
     MessagesManager.updatePresentationStyle(this.state.presentationStyle === 'expanded' ? 'compact' : 'expanded')
-      .then(presentationStyle => this.setState({ presentationStyle }))
-      .catch(console.log);
+      // eslint-disable-next-line no-console
+      .then(presentationStyle => this.setState({ presentationStyle })).catch(console.log);
   };
 
   parseUrl = (url) => {
