@@ -7,8 +7,8 @@ export const decodeLaunchUrl = (data) => {
 
   if (liskProtocolReg.test(data) && recipientReg.test(data)) {
     const address = data.match(recipientReg)[0].replace('recipient=', '') || '';
-    const amount = data.match(amountReg)[0].replace('amount=', '') || '';
-    const reference = data.match(referenceReg)[0].replace('reference=', '') || '';
+    const amount = data.match(amountReg) ? data.match(amountReg)[0].replace('amount=', '') : '';
+    const reference = data.match(referenceReg) ? data.match(referenceReg)[0].replace('reference=', '') : '';
 
     return ({ address, amount, reference });
   }
