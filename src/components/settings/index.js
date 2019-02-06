@@ -12,7 +12,6 @@ import SwitchButton from './switchButton';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
-// import { languageMap } from '../../constants/languages';
 import getStyles from './styles';
 
 @connect(state => ({
