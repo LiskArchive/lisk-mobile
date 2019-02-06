@@ -17,10 +17,11 @@ class SignOut extends Component {
     try {
       sensorType = await FingerprintScanner.isSensorAvailable();
     } catch (error) {
-      sensorType = '';
+      sensorType = 'biometric authentication';
     }
     this.setState({ sensorType });
   }
+
   render() {
     return (
       <View
