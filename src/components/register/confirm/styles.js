@@ -67,8 +67,8 @@ const styles = {
     marginTop: 20,
   },
   image: {
-    width: isSmallDevice ? 130 : 198,
-    height: isSmallDevice ? 130 : 198,
+    width: isSmallDevice ? 65 : 99,
+    height: isSmallDevice ? 79 : 120,
   },
   caption: {
     color: colors.light.gray2,
