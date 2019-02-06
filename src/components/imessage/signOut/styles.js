@@ -1,7 +1,7 @@
 import {
   StyleSheet,
 } from "react-native"; // eslint-disable-line
-import { boxes, colors } from '../../../constants/styleGuide';
+import { boxes, colors, fonts } from '../../../constants/styleGuide';
 
 export default StyleSheet.create({
   container: {
@@ -19,8 +19,10 @@ export default StyleSheet.create({
   },
   title: {
     textAlign: 'center',
+    fontFamily: fonts.family.heading,
   },
   link: {
+    fontWeight: '600',
     fontSize: 13,
     color: colors.light.blue,
   },
