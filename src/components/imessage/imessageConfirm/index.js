@@ -14,7 +14,7 @@ import { extractAddress } from '../../../utilities/api/account';
 class Confirm extends Component {
   state = {
     errorMessage: false,
-    triggered: false,
+    busy: false,
   }
 
   send = () => {
@@ -24,20 +24,28 @@ class Confirm extends Component {
       passphrase,
       sharedData: { address, amount },
     } = this.props;
+
     const data = {
       recipientId: address,
       amount: toRawLsk(amount),
       passphrase,
     };
-    send(activePeer, data).then(({ id }) => {
-      composeMessage({
-        id,
-        address: { value: extractAddress(passphrase), validity: 0 },
-        amount,
-        state: 'transferred',
-        recipientAddress: address,
-      });
-    });
+
+    this.setState({ busy: true });
+
+    send(activePeer, data)
+      .then(({ id }) => {
+        this.setState({ busy: false });
+
+        composeMessage({
+          id,
+          address: { value: extractAddress(passphrase), validity: 0 },
+          amount,
+          state: 'transferred',
+          recipientAddress: address,
+        });
+      })
+      .catch(() => this.setState({ busy: false }));
   }
 
   render() {
@@ -113,16 +121,16 @@ class Confirm extends Component {
                       <Small style={styles.error}>{this.state.errorMessage}</Small>
                     </View>
                     <Button
-                      disabled={this.state.triggered}
+                      disabled={this.state.busy}
                       style={styles.rejectButton}
                       onClick={rejectMessage}
                       title='Reject'
                     />
                     <SecondaryButton
-                      disabled={this.state.triggered}
+                      disabled={this.state.busy}
                       style={styles.button}
                       onClick={this.send}
-                      title='Accept'
+                      title={this.state.busy ? 'Transferring...' : 'Accept'}
                     />
                   </View>
               }

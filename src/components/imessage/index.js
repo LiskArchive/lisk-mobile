@@ -170,15 +170,19 @@ class LiskMessageExtension extends Component {
       return null;
     };
 
-    const CheckSignInState = () => (passphrase ?
-      <Form
-        MessagesEvents={MessagesEvents}
-        avatarPreview={avatarPreview}
-        presentationStyle={presentationStyle}
-        keyBoardFocused={this.keyBoardFocused}
-        inputAddress={address}
-        composeMessage={this.composeMessage} /> :
-      <SignOut />);
+    let content = <SignOut />;
+
+    if (passphrase) {
+      content = message.url ? <Element /> : (
+        <Form
+          MessagesEvents={MessagesEvents}
+          avatarPreview={avatarPreview}
+          presentationStyle={presentationStyle}
+          keyBoardFocused={this.keyBoardFocused}
+          inputAddress={address}
+          composeMessage={this.composeMessage} />
+      );
+    }
 
     return (
       <ThemeContext.Provider value="light">
@@ -186,11 +190,7 @@ class LiskMessageExtension extends Component {
           flex: 1,
         }}>
           {process.env.NODE_ENV === 'development' && <DevSettings />}
-          {
-            message.url ?
-              <Element /> :
-              <CheckSignInState />
-          }
+          {content}
         </ScrollView>
       </ThemeContext.Provider>
     );
