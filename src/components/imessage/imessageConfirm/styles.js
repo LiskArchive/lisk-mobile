@@ -43,6 +43,9 @@ export default StyleSheet.create({
     marginBottom: 10,
     marginTop: 15,
   },
+  buttonBusy: {
+    opacity: 0.75,
+  },
   label: {
     marginTop: 14,
     marginBottom: 2,
