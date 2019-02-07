@@ -18,6 +18,10 @@ class Confirm extends Component {
   }
 
   send = () => {
+    if (this.state.busy) {
+      return;
+    }
+
     const {
       activePeer,
       composeMessage,
@@ -127,8 +131,7 @@ class Confirm extends Component {
                       title='Reject'
                     />
                     <SecondaryButton
-                      disabled={this.state.busy}
-                      style={styles.button}
+                      style={[styles.button, this.state.busy ? styles.buttonBusy : {}]}
                       onClick={this.send}
                       title={this.state.busy ? 'Transferring...' : 'Accept'}
                     />
