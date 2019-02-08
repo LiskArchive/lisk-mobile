@@ -26,29 +26,39 @@ class TransactionDetail extends React.Component {
   }
 
   componentDidMount() {
-    const { txID, activePeer } = this.props;
+    const { txID, activePeer, sharedData } = this.props;
 
     if (txID) {
-      getTransactions(activePeer, { id: txID }).then(({ data }) => {
-        const { sharedData } = this.props;
-        this.setState({
-          tx: data[0] || {
-            type: 0,
-            recipientId: sharedData.recipientAddress,
-            senderId: sharedData.address,
-            amount: sharedData.amount,
-            notRawLisk: true,
-          },
+      getTransactions(activePeer, { id: txID })
+        .then(({ data }) => {
+          this.setState({
+            tx: data[0] || {
+              type: 0,
+              recipientId: sharedData.recipientAddress,
+              senderId: sharedData.address,
+              amount: sharedData.amount,
+              notRawLisk: true,
+            },
+          });
+        })
+        .catch(() => {
+          this.setState({
+            tx: {
+              type: 0,
+              recipientId: sharedData.recipientAddress,
+              senderId: sharedData.address,
+              amount: sharedData.amount,
+              notRawLisk: true,
+            },
+          });
         });
-      })
-        .catch(err => console.log(err));
     }
   }
 
   onOpenDeepLink = () => {
     NativeModules.MessagesManager.openURL(`lisk://transactions?id=${this.state.tx.id}`)
-      .then(console.log)
-      .catch(console.log);
+      // eslint-disable-next-line no-console
+      .then(console.log).catch(console.log);
   };
 
 

@@ -12,7 +12,6 @@ import SwitchButton from './switchButton';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
-import { languageMap } from '../../constants/languages';
 import getStyles from './styles';
 
 @connect(state => ({
@@ -153,20 +152,6 @@ class Settings extends React.Component {
                 targetStateLabel={
                   <P style={{ color: colors[theme].gray1 }}>
                     {settings.currency}
-                  </P>
-                }
-              />
-            </View>
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                navigation={navigation}
-                icon='language'
-                iconSize={20}
-                title='Language'
-                target='LanguageSelection'
-                targetStateLabel={
-                  <P style={{ color: colors[theme].gray1 }}>
-                    {languageMap[settings.language].label}
                   </P>
                 }
               />

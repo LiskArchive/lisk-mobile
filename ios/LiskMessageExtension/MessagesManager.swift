@@ -2,9 +2,6 @@
 //  MessagesManager.swift
 //  LiskMessageExtension
 //
-//  Created by Altay Aydemir on 16.01.19.
-//  Copyright © 2019 Facebook. All rights reserved.
-//
 
 import Foundation
 import Messages
@@ -125,5 +122,19 @@ class MessagesManager: RCTEventEmitter {
 
       return resolve(url)
     })
+  }
+
+  @objc
+  func showLaunchScreen() {
+    DispatchQueue.main.async {
+      self.messagesVC.launchScreenView?.isHidden = false
+    }
+  }
+
+  @objc
+  func hideLaunchScreen() {
+    DispatchQueue.main.async {
+      self.messagesVC.launchScreenView?.isHidden = true
+    }
   }
 }
