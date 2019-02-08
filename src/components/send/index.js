@@ -88,7 +88,7 @@ class Send extends React.Component {
     const accountInitialization = navigation.getParam('initialize', false);
     if (accountInitialization) {
       this.nav.move({
-        to: 5,
+        to: 4,
         data: {
           address: accounts.active.address,
           amount: 0.1,
