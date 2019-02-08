@@ -1,6 +1,4 @@
-import {
-  StyleSheet,
-} from "react-native"; // eslint-disable-line
+import { StyleSheet } from 'react-native';
 import { boxes, colors, fonts } from '../../../constants/styleGuide';
 
 export default StyleSheet.create({
@@ -72,6 +70,7 @@ export default StyleSheet.create({
   errorContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     marginLeft: 20,
     paddingRight: 20,
     opacity: 0,
@@ -82,7 +81,7 @@ export default StyleSheet.create({
     color: colors.light.gray1,
   },
   errorIcon: {
-    marginRight: 5,
+    marginRight: 6,
     color: colors.light.red,
   },
   visible: {
