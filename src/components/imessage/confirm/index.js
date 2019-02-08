@@ -35,7 +35,7 @@ class Confirm extends Component {
       passphrase,
     };
 
-    this.setState({ busy: true });
+    this.setState({ busy: true, errorMessage: '' });
 
     send(activePeer, data)
       .then(({ id }) => {
@@ -49,7 +49,10 @@ class Confirm extends Component {
           recipientAddress: address,
         });
       })
-      .catch(() => this.setState({ busy: false }));
+      .catch(error => this.setState({
+        busy: false,
+        errorMessage: error.message || 'An error happened. Please try later.',
+      }));
   }
 
   render() {
@@ -60,6 +63,8 @@ class Confirm extends Component {
       state,
       sharedData: { address, amount },
     } = this.props;
+
+    const { busy, errorMessage } = this.state;
 
     const isSender = (
       conversation.localParticipiantIdentifier === message.senderParticipantIdentifier
@@ -116,24 +121,20 @@ class Confirm extends Component {
                 isSender ?
                   null :
                   <View>
-                    <View
-                      style={[
-                        styles.errorContainer, this.state.errorMessage ? styles.visible : null,
-                      ]}
-                    >
+                    <View style={[styles.errorContainer, errorMessage ? styles.visible : null]}>
                       <Icon size={16} name='warning' style={styles.errorIcon} />
-                      <Small style={styles.error}>{this.state.errorMessage}</Small>
+                      <Small style={styles.error}>{errorMessage}</Small>
                     </View>
                     <Button
-                      disabled={this.state.busy}
+                      disabled={busy}
                       style={styles.rejectButton}
                       onClick={rejectMessage}
                       title='Reject'
                     />
                     <SecondaryButton
-                      style={[styles.button, this.state.busy ? styles.buttonBusy : {}]}
+                      style={[styles.button, busy ? styles.buttonBusy : {}]}
                       onClick={this.send}
-                      title={this.state.busy ? 'Transferring...' : 'Accept'}
+                      title={busy ? 'Transferring...' : 'Accept'}
                     />
                   </View>
               }
@@ -145,7 +146,6 @@ class Confirm extends Component {
               </B>
             </View>
         }
-
       </View>
     );
   }

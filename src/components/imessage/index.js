@@ -6,15 +6,13 @@ import {
 } from 'react-native';
 import { getPassphraseFromKeyChain } from '../../utilities/passphrase';
 import ThemeContext from '../../contexts/theme';
-// import styles from './styles';
-import Confirm from './imessageConfirm';
+import Confirm from './confirm';
 import TxDetail from './txDetail';
 import Form from './form';
 import Rejected from './rejected';
-import SignOut from './signOut';
+import SignInWarning from './signInWarning';
 import DevSettings from './devSettings';
 import setActivePeer from './setPeer';
-
 
 const { MessagesManager } = NativeModules;
 const MessagesEvents = new NativeEventEmitter(MessagesManager);
@@ -170,7 +168,7 @@ class LiskMessageExtension extends Component {
       return null;
     };
 
-    let content = <SignOut />;
+    let content = <SignInWarning />;
 
     if (passphrase) {
       content = message.url ? <Element /> : (
@@ -186,9 +184,7 @@ class LiskMessageExtension extends Component {
 
     return (
       <ThemeContext.Provider value="light">
-        <ScrollView contentContainerStyle={{
-          flex: 1,
-        }}>
+        <ScrollView contentContainerStyle={{ flex: 1 }}>
           {process.env.NODE_ENV === 'development' && <DevSettings />}
           {content}
         </ScrollView>
