@@ -69,10 +69,7 @@ export default StyleSheet.create({
   },
   errorContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 20,
-    paddingRight: 20,
     opacity: 0,
   },
   error: {
