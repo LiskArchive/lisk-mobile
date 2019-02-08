@@ -1,6 +1,4 @@
-import {
-  StyleSheet,
-} from "react-native"; // eslint-disable-line
+import { StyleSheet } from 'react-native';
 import { boxes, colors, fonts } from '../../../constants/styleGuide';
 
 export default StyleSheet.create({
