@@ -7,18 +7,20 @@ import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { B, Small, A } from '../../toolBox/typography';
 import styles from './styles';
 
-class SignOut extends Component {
+class SignInWarning extends Component {
   state = {
     sensorType: '',
   }
 
   async componentDidMount() {
     let sensorType;
+
     try {
       sensorType = await FingerprintScanner.isSensorAvailable();
     } catch (error) {
       sensorType = 'biometric authentication';
     }
+
     this.setState({ sensorType });
   }
 
@@ -45,4 +47,4 @@ class SignOut extends Component {
   }
 }
 
-export default SignOut;
+export default SignInWarning;
