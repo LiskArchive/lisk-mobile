@@ -1,7 +1,7 @@
 import BackgroundTimer from 'react-native-background-timer';
 import actionTypes from '../../constants/actions';
 import { blockUpdated } from '../../actions/accounts';
-import { getAccount } from '../../utilities/api/account';
+import { getAccount } from '../../utilities/api/lisk/account';
 
 /** To-Do We have to disable socket connection because of
  * Lisk core problem. we will enable socket connection

@@ -13,8 +13,8 @@ import {
 } from './accounts';
 import actionTypes from '../constants/actions';
 import * as storageUtility from '../utilities/storage';
-import * as accountUtility from '../utilities/api/account';
-import * as transactionsUtility from '../utilities/api/transactions';
+import * as accountUtility from '../utilities/api/lisk/account';
+import * as transactionsUtility from '../utilities/api/lisk/transactions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

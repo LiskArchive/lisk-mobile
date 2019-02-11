@@ -7,7 +7,7 @@ import {
   transactionAdded,
 } from './transactions';
 import actionTypes from '../constants/actions';
-import * as transactionsUtility from '../utilities/api/transactions';
+import * as transactionsUtility from '../utilities/api/lisk/transactions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

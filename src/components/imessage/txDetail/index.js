@@ -12,7 +12,7 @@ import Icon from '../../toolBox/icon';
 import Avatar from '../../avatar';
 import Loading from '../../transactions/loading';
 import transactions from '../../../constants/transactions';
-import { getTransactions } from '../../../utilities/api/transactions';
+import { getTransactions } from '../../../utilities/api/lisk/transactions';
 import arrowLight from '../../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';

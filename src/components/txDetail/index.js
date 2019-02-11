@@ -13,7 +13,7 @@ import Avatar from '../avatar';
 import Loading from '../transactions/loading';
 import EmptyState from '../transactions/empty';
 import transactions from '../../constants/transactions';
-import { getTransactions } from '../../utilities/api/transactions';
+import { getTransactions } from '../../utilities/api/lisk/transactions';
 import Blur from '../transactions/blur';
 import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';

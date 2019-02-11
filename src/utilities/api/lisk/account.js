@@ -14,7 +14,7 @@ export const getAccount = (activePeer, address) =>
         if (res.data.length > 0) {
           resolve({
             ...res.data[0],
-            initialized: !!res.data[0].publicKey,
+            initialized: !!res.data[0].publicKey, // @TODO: move this logic away from the utility
           });
         } else {
           // when the account has no transactions yet (therefore is not saved on the blockchain)

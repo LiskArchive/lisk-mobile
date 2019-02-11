@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actions';
 import txConstants from '../constants/transactions';
-import { getTransactions, send } from '../utilities/api/transactions';
+import { getTransactions, send } from '../utilities/api/lisk/transactions';
 import { loadingStarted, loadingFinished } from './loading';
 
 export const transactionsLoaded = data =>

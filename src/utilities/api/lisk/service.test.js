@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock';
-import liskService from './liskService';
+import liskService from './service';
 
-describe('api/liskService', () => {
+describe('api/lisk/service', () => {
   describe('getPriceTicker method', () => {
     beforeEach(() => fetchMock.reset());
 

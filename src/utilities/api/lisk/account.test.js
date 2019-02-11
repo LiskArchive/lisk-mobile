@@ -16,7 +16,7 @@ const account = {
   initialized: true,
 };
 
-describe('api/accounts', () => {
+describe('api/lisk/account', () => {
   describe('extractAddress', () => {
     it('extracts address from passphrase', () => {
       expect(extractAddress(passphrase)).toBe(account.address);

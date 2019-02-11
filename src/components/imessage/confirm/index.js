@@ -8,8 +8,8 @@ import Icon from '../../toolBox/icon';
 import { B, P, Small } from '../../toolBox/typography';
 import { colors } from '../../../constants/styleGuide';
 import styles from './styles';
-import { send } from '../../../utilities/api/transactions';
-import { extractAddress } from '../../../utilities/api/account';
+import { send } from '../../../utilities/api/lisk/transactions';
+import { extractAddress } from '../../../utilities/api/lisk/account';
 
 class Confirm extends Component {
   state = {

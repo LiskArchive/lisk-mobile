@@ -1,8 +1,8 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
-import { getAccount, extractAddress } from '../utilities/api/account';
+import { getAccount, extractAddress } from '../utilities/api/lisk/account';
 import { loadingStarted, loadingFinished } from './loading';
-import { getTransactions } from '../utilities/api/transactions';
+import { getTransactions } from '../utilities/api/lisk/transactions';
 
 /**
  * Stores the given accounts data in AsyncStorage
