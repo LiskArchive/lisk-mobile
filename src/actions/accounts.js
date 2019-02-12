@@ -129,33 +129,6 @@ export const accountSignedOut = () =>
     type: actionTypes.accountSignedOut,
   });
 
-// export const blockUpdated = ({ transactions }) => (dispatch, getState) => {
-//   if (transactions) {
-//     const accountAddress = getState().accounts.active.address;
-//     const blockContainsRelevantTransaction = transactions.filter((transaction) => {
-//       const sender = transaction ? transaction.senderId : null;
-//       const recipient = transaction ? transaction.recipientId : null;
-//       return accountAddress === recipient || accountAddress === sender;
-//     }).length > 0;
-//     if (blockContainsRelevantTransaction) {
-//       setTimeout(() => {
-//         const { activePeer } = getState().peers;
-//         getAccount(activePeer, accountAddress)
-//           .then((account) => {
-//             dispatch({
-//               type: actionTypes.accountUpdated,
-//               data: account,
-//             });
-//           });
-//         dispatch({
-//           type: actionTypes.transactionsUpdated,
-//           data: { confirmed: transactions },
-//         });
-//       }, 5000);
-//     }
-//   }
-// };
-
 export const blockUpdated = () => (dispatch, getState) => {
   const { address } = getState().accounts.active;
   const { activePeer } = getState().peers;

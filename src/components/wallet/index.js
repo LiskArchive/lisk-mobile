@@ -59,7 +59,7 @@ class Wallet extends React.Component {
   }
 
   async retrieveTransactions(offset) {
-    return getTransactions(this.props.activePeer, {
+    return getTransactions({
       senderIdOrRecipientId: this.address,
       offset,
     })

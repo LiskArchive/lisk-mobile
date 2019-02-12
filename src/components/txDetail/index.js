@@ -71,11 +71,11 @@ class TransactionDetail extends React.Component {
     const { tx: currentTx } = this.state;
 
     try {
-      const { data } = await getTransactions(this.props.activePeer, { id });
+      const { data } = await getTransactions({ id });
       const tx = data[0] || {};
 
-      // don't have any transaction passed from the navigation
-      // and couldn't find any with the id (example: navigating from a deep link)
+      // don't have any transaction passed from the navigation and couldn't find any with the id
+      // example: navigating from a deep link
       if (!tx.id && !currentTx) {
         this.setState({
           error: 'Transaction not found',

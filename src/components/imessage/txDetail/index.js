@@ -26,10 +26,10 @@ class TransactionDetail extends React.Component {
   }
 
   componentDidMount() {
-    const { txID, activePeer, sharedData } = this.props;
+    const { txID, sharedData } = this.props;
 
     if (txID) {
-      getTransactions(activePeer, { id: txID })
+      getTransactions({ id: txID })
         .then(({ data }) => {
           this.setState({
             tx: data[0] || {

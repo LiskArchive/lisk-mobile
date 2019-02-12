@@ -23,7 +23,6 @@ class Confirm extends Component {
     }
 
     const {
-      activePeer,
       composeMessage,
       passphrase,
       sharedData: { address, amount },
@@ -37,7 +36,7 @@ class Confirm extends Component {
 
     this.setState({ busy: true, errorMessage: '' });
 
-    send(activePeer, data)
+    send(data)
       .then(({ id }) => {
         this.setState({ busy: false });
 

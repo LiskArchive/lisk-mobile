@@ -30,13 +30,13 @@ describe('api/lisk/account', () => {
   });
 
   describe('getAccount', () => {
-    it('calls activePeer.accounts.get method correctly', async () => {
+    it('calls accounts.get method correctly', async () => {
       LiskAPIClient.accounts.get.mockResolvedValueOnce({ data: [account] });
       const result = await getAccount(account.address);
       expect(result).toEqual(account);
     });
 
-    it('handles empty results coming from activePeer.accounts.get method', async () => {
+    it('handles empty results coming from accounts.get method', async () => {
       LiskAPIClient.accounts.get.mockResolvedValueOnce({ data: [], success: false });
       const result = await getAccount(account.address);
       expect(result).toEqual({
