@@ -60,8 +60,7 @@ You can run the project in Xcode and use iOS simulators or alternatively use And
 #### Using environment variables
 You can fill out `env.json` with those variables:
 ```
-network          -> Lisk network's name.
-address          -> Lisk network's url.
+network          -> Lisk network's name, can be mainnet or testnet.
 passphrase       -> Passphrase of your LSK account, to be filled out automatically on login.
 secondPassphrase -> Second passphrase of your LSK account, to be filled out automatically on send process.
 ```
