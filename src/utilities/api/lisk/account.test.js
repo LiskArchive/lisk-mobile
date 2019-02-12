@@ -1,13 +1,9 @@
 import { getAccount, extractAddress, extractPublicKey } from './account';
+import LiskAPIClient from './apiClient';
 
-const activePeer = {
-  accounts: {
-    get: jest.fn(),
-  },
-};
+LiskAPIClient.accounts.get = jest.fn();
 
 const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
-
 const account = {
   address: '5092448154042807473L',
   balance: '10000',
@@ -35,14 +31,14 @@ describe('api/lisk/account', () => {
 
   describe('getAccount', () => {
     it('calls activePeer.accounts.get method correctly', async () => {
-      activePeer.accounts.get.mockResolvedValueOnce({ data: [account] });
-      const result = await getAccount(activePeer, account.address);
+      LiskAPIClient.accounts.get.mockResolvedValueOnce({ data: [account] });
+      const result = await getAccount(account.address);
       expect(result).toEqual(account);
     });
 
     it('handles empty results coming from activePeer.accounts.get method', async () => {
-      activePeer.accounts.get.mockResolvedValueOnce({ data: [], success: false });
-      const result = await getAccount(activePeer, account.address);
+      LiskAPIClient.accounts.get.mockResolvedValueOnce({ data: [], success: false });
+      const result = await getAccount(account.address);
       expect(result).toEqual({
         address: account.address,
         balance: 0,
@@ -51,10 +47,10 @@ describe('api/lisk/account', () => {
 
     it('handles rejections', async () => {
       const errorMessage = { message: 'Error!' };
-      activePeer.accounts.get.mockRejectedValueOnce(errorMessage);
+      LiskAPIClient.accounts.get.mockRejectedValueOnce(errorMessage);
 
       try {
-        await getAccount(activePeer, account.address);
+        await getAccount(account.address);
       } catch (error) {
         expect(error).toBe(errorMessage);
       }

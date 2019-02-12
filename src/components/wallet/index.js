@@ -70,12 +70,6 @@ class Wallet extends React.Component {
       .catch(console.log); // eslint-disable-line no-console
   }
 
-  async retrieveAccount() {
-    return getAccount(this.props.activePeer, this.props.navigation.state.params.address)
-      .then(account => account)
-      .catch(console.log); // eslint-disable-line no-console
-  }
-
   onScroll() {
     return Animated.event([{
       nativeEvent: { contentOffset: { y: this.scrollY } },
@@ -105,7 +99,7 @@ class Wallet extends React.Component {
 
   async fetchInitialData() {
     this.props.loadingStarted();
-    const account = await this.retrieveAccount();
+    const account = await getAccount(this.props.navigation.state.params.address);
     const tx = await this.retrieveTransactions(0);
     this.props.loadingFinished();
 
@@ -124,7 +118,7 @@ class Wallet extends React.Component {
 
   async refresh() {
     const { confirmed } = this.state.transactions;
-    const account = await this.retrieveAccount();
+    const account = await getAccount(this.props.navigation.state.params.address);
     const transactions = await this.retrieveTransactions(0);
     const newTransactions = transactions.confirmed.filter(item =>
       item.timestamp > confirmed[0].timestamp);

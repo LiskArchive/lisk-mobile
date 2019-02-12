@@ -13,9 +13,8 @@ const closeConnection = () => {
 };
 
 export const checkBalance = (store) => {
-  const { activePeer } = store.getState().peers;
   const { address, balance } = store.getState().accounts.active;
-  return getAccount(activePeer, address).then((res) => {
+  return getAccount(address).then((res) => {
     if (res.balance !== balance) {
       store.dispatch(blockUpdated());
     }

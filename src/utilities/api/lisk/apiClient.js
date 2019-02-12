@@ -1,6 +1,6 @@
 import { APIClient } from '@liskhq/lisk-client';
 
-const LiskAPIClient = (network = process.env.network) => {
+const createLiskAPIClient = (network = process.env.network) => {
   if (network === 'testnet') {
     return APIClient.createTestnetAPIClient({ node: 'https://testnet.lisk.io' });
   }
@@ -8,4 +8,4 @@ const LiskAPIClient = (network = process.env.network) => {
   return APIClient.createMainnetAPIClient();
 };
 
-export default new LiskAPIClient();
+export default createLiskAPIClient();

@@ -103,23 +103,22 @@ export const accountEdited = (address, label) => ({
  * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
-export const accountSignedIn = ({ passphrase }, cb) =>
-  (dispatch, getState) => {
-    const { activePeer } = getState().peers;
-    dispatch(loadingStarted(actionTypes.accountSignedIn));
-    return getAccount(activePeer, extractAddress(passphrase))
-      .then((account) => {
-        dispatch({
-          type: actionTypes.accountSignedIn,
-          data: { ...account, passphrase },
-        });
-        dispatch(accountsRetrieved());
-        dispatch(loadingFinished(actionTypes.accountSignedIn));
-      }).catch((err) => {
-        dispatch(loadingFinished(actionTypes.accountSignedIn));
-        cb(err);
+export const accountSignedIn = ({ passphrase }, cb) => (dispatch) => {
+  dispatch(loadingStarted(actionTypes.accountSignedIn));
+  return getAccount(extractAddress(passphrase))
+    .then((account) => {
+      dispatch({
+        type: actionTypes.accountSignedIn,
+        data: { ...account, passphrase },
       });
-  };
+      dispatch(accountsRetrieved());
+      dispatch(loadingFinished(actionTypes.accountSignedIn));
+    }).catch((err) => {
+      dispatch(loadingFinished(actionTypes.accountSignedIn));
+      cb(err);
+    });
+};
+
 /**
  * Returns action object with no Api calls.
  *
