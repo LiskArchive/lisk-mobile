@@ -43,7 +43,6 @@ const dark = {
   boxBg: '#011832',
   sendBalanceBg: '#011832',
   navigationBg: '#00152D',
-  btc: '',
 };
 
 export default {
