@@ -1,4 +1,4 @@
-import liskService from '../utilities/api/liskService';
+import liskService from '../utilities/api/lisk/service';
 import actionTypes from '../constants/actions';
 
 // eslint-disable-next-line import/prefer-default-export

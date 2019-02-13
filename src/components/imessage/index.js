@@ -12,7 +12,6 @@ import Form from './form';
 import Rejected from './rejected';
 import SignInWarning from './signInWarning';
 import DevSettings from './devSettings';
-import setActivePeer from './setPeer';
 
 const { MessagesManager } = NativeModules;
 const MessagesEvents = new NativeEventEmitter(MessagesManager);
@@ -29,13 +28,10 @@ class LiskMessageExtension extends Component {
     presentationStyle: '',
     message: {},
     conversation: '',
-    activePeer: null,
     state: 'requested',
   };
 
   componentDidMount = () => {
-    setActivePeer.then(activePeer => this.setState({ activePeer }));
-
     getPassphraseFromKeyChain().then((account) => {
       if (account) {
         this.userData = {
@@ -140,29 +136,33 @@ class LiskMessageExtension extends Component {
   render() {
     const {
       address, message, parsedData, avatarPreview, state,
-      passphrase, activePeer, presentationStyle, conversation,
+      passphrase, presentationStyle, conversation,
     } = this.state;
 
     const Element = () => {
-      if (message.url && activePeer) {
+      if (message.url) {
         switch (parsedData.state) {
           case 'rejected':
             return <Rejected status='rejected' sharedData={parsedData} />;
           case 'transferred':
-            return <TxDetail
-              account={{ address: address.value }}
-              sharedData={parsedData}
-              activePeer={activePeer}
-              txID={parsedData.txID} />;
+            return (
+              <TxDetail
+                account={{ address: address.value }}
+                sharedData={parsedData}
+                txID={parsedData.txID}
+              />
+            );
           default:
-            return <Confirm
-              state={state}
-              message={message}
-              conversation={conversation}
-              sharedData={parsedData}
-              passphrase={passphrase}
-              activePeer={activePeer}
-              composeMessage={this.composeMessage} />;
+            return (
+              <Confirm
+                state={state}
+                message={message}
+                conversation={conversation}
+                sharedData={parsedData}
+                passphrase={passphrase}
+                composeMessage={this.composeMessage}
+              />
+            );
         }
       }
       return null;
@@ -178,7 +178,8 @@ class LiskMessageExtension extends Component {
           presentationStyle={presentationStyle}
           keyBoardFocused={this.keyBoardFocused}
           inputAddress={address}
-          composeMessage={this.composeMessage} />
+          composeMessage={this.composeMessage}
+        />
       );
     }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
-import { getAccount } from '../../utilities/api/account';
-import { getTransactions } from '../../utilities/api/transactions';
+import { getAccount } from '../../utilities/api/lisk/account';
+import { getTransactions } from '../../utilities/api/lisk/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
@@ -25,7 +25,6 @@ import getStyles from './styles';
  * about any unforeseen issue/change
  */
 @connect(state => ({
-  activePeer: state.peers.activePeer,
   followedAccounts: state.accounts.followed || [],
   priceTicker: state.liskService.priceTicker,
 }), {
@@ -59,7 +58,7 @@ class Wallet extends React.Component {
   }
 
   async retrieveTransactions(offset) {
-    return getTransactions(this.props.activePeer, {
+    return getTransactions({
       senderIdOrRecipientId: this.address,
       offset,
     })
@@ -67,12 +66,6 @@ class Wallet extends React.Component {
         confirmed: res.data,
         count: res.meta.count,
       }))
-      .catch(console.log); // eslint-disable-line no-console
-  }
-
-  async retrieveAccount() {
-    return getAccount(this.props.activePeer, this.props.navigation.state.params.address)
-      .then(account => account)
       .catch(console.log); // eslint-disable-line no-console
   }
 
@@ -105,7 +98,7 @@ class Wallet extends React.Component {
 
   async fetchInitialData() {
     this.props.loadingStarted();
-    const account = await this.retrieveAccount();
+    const account = await getAccount(this.props.navigation.state.params.address);
     const tx = await this.retrieveTransactions(0);
     this.props.loadingFinished();
 
@@ -124,7 +117,7 @@ class Wallet extends React.Component {
 
   async refresh() {
     const { confirmed } = this.state.transactions;
-    const account = await this.retrieveAccount();
+    const account = await getAccount(this.props.navigation.state.params.address);
     const transactions = await this.retrieveTransactions(0);
     const newTransactions = transactions.confirmed.filter(item =>
       item.timestamp > confirmed[0].timestamp);

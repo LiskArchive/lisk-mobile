@@ -1,8 +1,8 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
-import { getAccount, extractAddress } from '../utilities/api/account';
+import { getAccount, extractAddress } from '../utilities/api/lisk/account';
 import { loadingStarted, loadingFinished } from './loading';
-import { getTransactions } from '../utilities/api/transactions';
+import { getTransactions } from '../utilities/api/lisk/transactions';
 
 /**
  * Stores the given accounts data in AsyncStorage
@@ -103,66 +103,31 @@ export const accountEdited = (address, label) => ({
  * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
-export const accountSignedIn = ({ passphrase }, cb) =>
-  (dispatch, getState) => {
-    const { activePeer } = getState().peers;
-    dispatch(loadingStarted(actionTypes.accountSignedIn));
-    return getAccount(activePeer, extractAddress(passphrase))
-      .then((account) => {
-        dispatch({
-          type: actionTypes.accountSignedIn,
-          data: { ...account, passphrase },
-        });
-        dispatch(accountsRetrieved());
-        dispatch(loadingFinished(actionTypes.accountSignedIn));
-      }).catch((err) => {
-        dispatch(loadingFinished(actionTypes.accountSignedIn));
-        cb(err);
+export const accountSignedIn = ({ passphrase }, cb) => (dispatch) => {
+  dispatch(loadingStarted(actionTypes.accountSignedIn));
+  return getAccount(extractAddress(passphrase))
+    .then((account) => {
+      dispatch({
+        type: actionTypes.accountSignedIn,
+        data: { ...account, passphrase },
       });
-  };
-/**
- * Returns action object with no Api calls.
- *
- * @returns {Object} Action object including action type
- */
-export const accountSignedOut = () =>
-  ({
-    type: actionTypes.accountSignedOut,
-  });
+      dispatch(accountsRetrieved());
+      dispatch(loadingFinished(actionTypes.accountSignedIn));
+    }).catch((err) => {
+      dispatch(loadingFinished(actionTypes.accountSignedIn));
+      cb(err);
+    });
+};
 
-// export const blockUpdated = ({ transactions }) => (dispatch, getState) => {
-//   if (transactions) {
-//     const accountAddress = getState().accounts.active.address;
-//     const blockContainsRelevantTransaction = transactions.filter((transaction) => {
-//       const sender = transaction ? transaction.senderId : null;
-//       const recipient = transaction ? transaction.recipientId : null;
-//       return accountAddress === recipient || accountAddress === sender;
-//     }).length > 0;
-//     if (blockContainsRelevantTransaction) {
-//       setTimeout(() => {
-//         const { activePeer } = getState().peers;
-//         getAccount(activePeer, accountAddress)
-//           .then((account) => {
-//             dispatch({
-//               type: actionTypes.accountUpdated,
-//               data: account,
-//             });
-//           });
-//         dispatch({
-//           type: actionTypes.transactionsUpdated,
-//           data: { confirmed: transactions },
-//         });
-//       }, 5000);
-//     }
-//   }
-// };
+export const accountSignedOut = () => ({
+  type: actionTypes.accountSignedOut,
+});
 
 export const blockUpdated = () => (dispatch, getState) => {
   const { address } = getState().accounts.active;
-  const { activePeer } = getState().peers;
   const { confirmed } = getState().transactions;
   const lastTx = confirmed.length > 0 ? confirmed[0] : { timestamp: 0 };
-  return getTransactions(activePeer, {
+  return getTransactions({
     senderIdOrRecipientId: address,
     offset: 0,
   }).then((response) => {
@@ -176,7 +141,7 @@ export const blockUpdated = () => (dispatch, getState) => {
         },
       });
 
-      getAccount(activePeer, address).then((account) => {
+      getAccount(address).then((account) => {
         dispatch({
           type: actionTypes.accountUpdated,
           data: account,

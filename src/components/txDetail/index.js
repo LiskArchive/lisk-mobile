@@ -13,7 +13,7 @@ import Avatar from '../avatar';
 import Loading from '../transactions/loading';
 import EmptyState from '../transactions/empty';
 import transactions from '../../constants/transactions';
-import { getTransactions } from '../../utilities/api/transactions';
+import { getTransactions } from '../../utilities/api/lisk/transactions';
 import Blur from '../transactions/blur';
 import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
@@ -24,7 +24,6 @@ import { merge } from '../../utilities/helpers';
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 @connect(state => ({
-  activePeer: state.peers.activePeer,
   followedAccounts: state.accounts.followed || [],
   account: state.accounts.active || {},
 }), {})
@@ -71,11 +70,11 @@ class TransactionDetail extends React.Component {
     const { tx: currentTx } = this.state;
 
     try {
-      const { data } = await getTransactions(this.props.activePeer, { id });
+      const { data } = await getTransactions({ id });
       const tx = data[0] || {};
 
-      // don't have any transaction passed from the navigation
-      // and couldn't find any with the id (example: navigating from a deep link)
+      // don't have any transaction passed from the navigation and couldn't find any with the id
+      // example: navigating from a deep link
       if (!tx.id && !currentTx) {
         this.setState({
           error: 'Transaction not found',

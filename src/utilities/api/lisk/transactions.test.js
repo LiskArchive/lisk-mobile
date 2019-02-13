@@ -1,11 +1,8 @@
 import { getTransactions, send } from './transactions';
+import LiskAPIClient from './apiClient';
 
-const activePeer = {
-  transactions: {
-    get: jest.fn(),
-    broadcast: jest.fn(),
-  },
-};
+LiskAPIClient.transactions.get = jest.fn();
+LiskAPIClient.transactions.broadcast = jest.fn();
 
 const transactions = [{
   id: '13746538517771550559',
@@ -28,23 +25,23 @@ const transactions = [{
 }];
 
 describe('api/transactions', () => {
-  it('calls activePeer.transactions.get method correctly', () => {
-    getTransactions(activePeer, { offset: 0 });
-    expect(activePeer.transactions.get).toBeCalledWith({ offset: 0, sort: 'timestamp:desc' });
+  it('calls transactions.get method correctly', () => {
+    getTransactions({ offset: 0 });
+    expect(LiskAPIClient.transactions.get).toBeCalledWith({ offset: 0, sort: 'timestamp:desc' });
   });
 
-  it('calls activePeers.transactions.broadcast method correctly', async () => {
-    activePeer.transactions.broadcast.mockResolvedValueOnce(transactions[0]);
-    await send(activePeer, transactions[0]);
-    expect(activePeer.transactions.broadcast).toBeCalled();
+  it('calls transactions.broadcast method correctly', async () => {
+    LiskAPIClient.transactions.broadcast.mockResolvedValueOnce(transactions[0]);
+    await send(transactions[0]);
+    expect(LiskAPIClient.transactions.broadcast).toBeCalled();
   });
 
-  it('handles rejections from activePeers.transactions.broadcast method', async () => {
+  it('handles rejections from transactions.broadcast method', async () => {
     const errorMessage = { message: 'Error!' };
-    activePeer.transactions.broadcast.mockRejectedValueOnce(errorMessage);
+    LiskAPIClient.transactions.broadcast.mockRejectedValueOnce(errorMessage);
 
     try {
-      await send(activePeer, transactions[0]);
+      await send(transactions[0]);
     } catch (error) {
       expect(error).toEqual(errorMessage);
     }

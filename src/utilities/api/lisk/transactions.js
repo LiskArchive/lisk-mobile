@@ -1,4 +1,5 @@
 import Lisk from '@liskhq/lisk-client';
+import LiskAPIClient from './apiClient';
 
 /**
  * Gets the list of transactions for a given filtering config
@@ -14,9 +15,9 @@ import Lisk from '@liskhq/lisk-client';
  * @returns {Promise} The HTTP call promise
  * @todo some properties need default values
  */
-export const getTransactions = (activePeer, data) => {
+export const getTransactions = (data) => {
   data.sort = 'timestamp:desc';
-  return activePeer.transactions.get(data);
+  return LiskAPIClient.transactions.get(data);
 };
 
 /**
@@ -30,13 +31,12 @@ export const getTransactions = (activePeer, data) => {
  *
  * @returns {Promise} The HTTP call promise
  */
-export const send = (activePeer, data) =>
-  new Promise((resolve, reject) => {
-    const transaction = Lisk.transaction.transfer(data);
+export const send = data => new Promise((resolve, reject) => {
+  const transaction = Lisk.transaction.transfer(data);
 
-    setTimeout(() => {
-      activePeer.transactions.broadcast(transaction)
-        .then(() => resolve(transaction))
-        .catch(error => reject(error));
-    }, 1001);
-  });
+  setTimeout(() => {
+    LiskAPIClient.transactions.broadcast(transaction)
+      .then(() => resolve(transaction))
+      .catch(error => reject(error));
+  }, 1001);
+});

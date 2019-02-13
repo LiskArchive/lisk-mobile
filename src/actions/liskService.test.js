@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import liskService from '../utilities/api/liskService';
+import liskService from '../utilities/api/lisk/service';
 import { pricesRetrieved } from './liskService';
 import actionTypes from '../constants/actions';
 

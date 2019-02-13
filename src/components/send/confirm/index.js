@@ -2,7 +2,7 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Image, Platform } from 'react-native';
 import { validatePassphrase } from '../../../utilities/passphrase';
-import { extractPublicKey } from '../../../utilities/api/account';
+import { extractPublicKey } from '../../../utilities/api/lisk/account';
 import Input from '../../toolBox/input';
 import { P } from '../../toolBox/typography';
 import { IconButton } from '../../toolBox/button';
@@ -20,7 +20,6 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const isAndroid = deviceType() === 'android';
 
 @connect(state => ({
-  peers: state.peers,
   accounts: state.accounts,
 }), {})
 class Confirm extends React.Component {
