@@ -1,4 +1,4 @@
-import { getAccount, extractAddress, extractPublicKey } from './account';
+import { getSummary, extractAddress, extractPublicKey } from './account';
 import LiskAPIClient from './apiClient';
 
 LiskAPIClient.accounts.get = jest.fn();
@@ -25,19 +25,20 @@ describe('api/lisk/account', () => {
     });
   });
 
-  describe('getAccount', () => {
+  describe('getSummary', () => {
     it('calls accounts.get method correctly', async () => {
       LiskAPIClient.accounts.get.mockResolvedValueOnce({ data: [account] });
-      const result = await getAccount(account.address);
+      const result = await getSummary(account.address);
       expect(result).toEqual(account);
     });
 
     it('handles empty results coming from accounts.get method', async () => {
       LiskAPIClient.accounts.get.mockResolvedValueOnce({ data: [], success: false });
-      const result = await getAccount(account.address);
+      const result = await getSummary(account.address);
       expect(result).toEqual({
         address: account.address,
         balance: 0,
+        initialized: false,
       });
     });
 
@@ -46,7 +47,7 @@ describe('api/lisk/account', () => {
       LiskAPIClient.accounts.get.mockRejectedValueOnce(errorMessage);
 
       try {
-        await getAccount(account.address);
+        await getSummary(account.address);
       } catch (error) {
         expect(error).toBe(errorMessage);
       }

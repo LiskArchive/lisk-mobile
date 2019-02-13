@@ -4,7 +4,7 @@ import Lisk from '@liskhq/lisk-client';
 import bip32 from 'bip32';
 import config from './config';
 
-export const getAccount = address => new Promise(async (resolve, reject) => {
+export const getSummary = address => new Promise(async (resolve, reject) => {
   try {
     const response = await fetch(`${config.url}/balance?active=${address}`, config.requestOptions);
     const json = await response.json();
@@ -13,6 +13,7 @@ export const getAccount = address => new Promise(async (resolve, reject) => {
       resolve({
         address,
         balance: json[address].final_balance,
+        initialized: true,
       });
     } else {
       reject(json);

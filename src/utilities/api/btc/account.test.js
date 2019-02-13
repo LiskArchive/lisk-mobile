@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock';
-import { getAccount, extractAddress } from './account';
+import { getSummary, extractAddress } from './account';
 
 const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 const account = {
@@ -13,7 +13,7 @@ describe('api/btc/account', () => {
     });
   });
 
-  describe('getAccount', () => {
+  describe('getSummary', () => {
     beforeEach(() => fetchMock.reset());
 
     it('resolves correctly', async () => {
@@ -24,10 +24,11 @@ describe('api/btc/account', () => {
       };
 
       fetchMock.once('*', response);
-      const result = await getAccount(account.address);
+      const result = await getSummary(account.address);
       expect(result).toEqual({
         address: account.address,
         balance: response[account.address].final_balance,
+        initialized: true,
       });
     });
 
@@ -36,7 +37,7 @@ describe('api/btc/account', () => {
       fetchMock.once('*', { status: 400, body: response });
 
       try {
-        await getAccount(account.address);
+        await getSummary(account.address);
       } catch (error) {
         expect(error).toEqual(response);
       }
@@ -46,7 +47,7 @@ describe('api/btc/account', () => {
       fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
 
       try {
-        await getAccount(account.address);
+        await getSummary(account.address);
       } catch (error) {
         expect(error).toBeTruthy();
       }

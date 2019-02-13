@@ -1,12 +1,12 @@
 import BackgroundTimer from 'react-native-background-timer';
 import socketMiddleware, { checkBalance } from './socket';
 import actionTypes from '../../constants/actions';
-import * as accountUtility from '../../utilities/api/lisk/account';
+import { account as accountAPI } from '../../utilities/api';
 import { merge } from '../../utilities/helpers';
 
 describe('Middleware: Accounts', () => {
   beforeEach(() => {
-    accountUtility.getAccount = jest.fn();
+    accountAPI.getSummary = jest.fn();
   });
 
   const account = {
@@ -44,14 +44,14 @@ describe('Middleware: Accounts', () => {
 
     describe('checkBalance function', () => {
       it('should not dispatch blockUpdated if the account has the same balance', async () => {
-        accountUtility.getAccount.mockResolvedValue(account);
+        accountAPI.getSummary.mockResolvedValue(account);
         socketMiddleware(store)(next)(action);
         await checkBalance(store);
         expect(store.dispatch).not.toBeCalled();
       });
 
       it('should dispatch blockUpdated if the account has not the same balance', async () => {
-        accountUtility.getAccount.mockResolvedValue(merge(account, { balance: 0 }));
+        accountAPI.getSummary.mockResolvedValue(merge(account, { balance: 0 }));
         socketMiddleware(store)(next)(action);
         await checkBalance(store);
         expect(store.dispatch).toBeCalled();

@@ -12,7 +12,7 @@ import {
 } from './accounts';
 import actionTypes from '../constants/actions';
 import * as storageUtility from '../utilities/storage';
-import * as accountUtility from '../utilities/api/lisk/account';
+import { account as accountAPI } from '../utilities/api';
 import * as transactionsUtility from '../utilities/api/lisk/transactions';
 
 const middlewares = [thunk];
@@ -93,7 +93,7 @@ describe('Action: Accounts', () => {
   const address = '7056261880661230236L';
 
   beforeEach(() => {
-    accountUtility.getAccount = jest.fn();
+    accountAPI.getSummary = jest.fn();
     transactionsUtility.getTransactions = jest.fn();
   });
 
@@ -139,7 +139,7 @@ describe('Action: Accounts', () => {
         data: account,
       },
     ];
-    accountUtility.getAccount.mockResolvedValue(account);
+    accountAPI.getSummary.mockResolvedValue(account);
     transactionsUtility.getTransactions.mockResolvedValue(transactions);
     await store.dispatch(blockUpdated());
     expect(store.getActions()).toEqual(expectedActions);
@@ -177,7 +177,7 @@ describe('Action: Accounts', () => {
       { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
       { type: actionTypes.accountsRetrieved, data: [account] },
     ];
-    accountUtility.getAccount.mockResolvedValue(account);
+    accountAPI.getSummary.mockResolvedValue(account);
     storageUtility.retrieveAccounts.mockResolvedValue([account]);
     await store.dispatch(accountSignedIn({ passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
@@ -192,7 +192,7 @@ describe('Action: Accounts', () => {
       { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
       { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
     ];
-    accountUtility.getAccount.mockRejectedValue({ error: true });
+    accountAPI.getSummary.mockRejectedValue({ error: true });
     await store.dispatch(accountSignedIn({ passphrase }, cb));
     expect(store.getActions()).toEqual(expectedActions);
     expect(cb).toBeCalled();
