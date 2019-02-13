@@ -1,24 +1,33 @@
 import fetchMock from 'fetch-mock';
-import { getAccount } from './account';
+import { getAccount, extractAddress } from './account';
 
-const ADDRESS = '1Ma2DrB78K7jmAwaomqZNRMCvgQrNjE2QC';
+const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
+const account = {
+  address: '13myAau1kxz8HKPhbe3psnpahbgozPi6Az',
+};
 
 describe('api/btc/account', () => {
-  describe('getAccount method', () => {
+  describe('extractAddress', () => {
+    it('extracts address from passphrase', () => {
+      expect(extractAddress(passphrase)).toBe(account.address);
+    });
+  });
+
+  describe('getAccount', () => {
     beforeEach(() => fetchMock.reset());
 
     it('resolves correctly', async () => {
       const response = {
-        [ADDRESS]: {
+        [account.address]: {
           final_balance: 1000,
         },
       };
 
       fetchMock.once('*', response);
-      const result = await getAccount(ADDRESS);
+      const result = await getAccount(account.address);
       expect(result).toEqual({
-        address: ADDRESS,
-        balance: response[ADDRESS].final_balance,
+        address: account.address,
+        balance: response[account.address].final_balance,
       });
     });
 
@@ -27,7 +36,7 @@ describe('api/btc/account', () => {
       fetchMock.once('*', { status: 400, body: response });
 
       try {
-        await getAccount(ADDRESS);
+        await getAccount(account.address);
       } catch (error) {
         expect(error).toEqual(response);
       }
@@ -37,7 +46,7 @@ describe('api/btc/account', () => {
       fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
 
       try {
-        await getAccount(ADDRESS);
+        await getAccount(account.address);
       } catch (error) {
         expect(error).toBeTruthy();
       }
