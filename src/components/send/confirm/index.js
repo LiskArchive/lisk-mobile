@@ -20,7 +20,6 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const isAndroid = deviceType() === 'android';
 
 @connect(state => ({
-  peers: state.peers,
   accounts: state.accounts,
 }), {})
 class Confirm extends React.Component {

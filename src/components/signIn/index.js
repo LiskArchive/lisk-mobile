@@ -18,7 +18,6 @@ import {
   storePassphraseInKeyChain,
   bioMetricAuthentication,
 } from '../../utilities/passphrase';
-import { activePeerSet as activePeerSetAction } from '../../actions/peers';
 import {
   accountSignedIn as accountSignedInAction,
   accountsRetrieved as accountsRetrievedAction,
@@ -41,12 +40,10 @@ console.disableYellowBox = true; // eslint-disable-line
  * The settings state is passed through the landing component
  */
 @connect(state => ({
-  peers: state.peers,
   accounts: state.accounts,
   settings: state.settings,
 }), {
   accountSignedIn: accountSignedInAction,
-  peerSet: activePeerSetAction,
   accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
   settingsRetrieved: settingsRetrievedAction,
@@ -271,10 +268,6 @@ class SignIn extends React.Component {
 
     DeviceEventEmitter.removeAllListeners('quickActionShortcut');
     DeviceEventEmitter.addListener('quickActionShortcut', this.onQuickActionRequested);
-  }
-
-  componentWillMount() {
-    this.props.peerSet();
   }
 
   componentDidMount() {
