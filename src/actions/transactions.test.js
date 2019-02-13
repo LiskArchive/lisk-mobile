@@ -139,5 +139,28 @@ describe('Action: Accounts', () => {
       expect(store.getActions()).toEqual(expectedActions);
       expect(cb.mock.calls).toHaveLength(1);
     });
+
+    it('should go to error flow', async () => {
+      const store = mockStore({
+        peers: { activePeer },
+        accounts: { active: account },
+        transactions: { confirmed: [], pending: [] },
+      });
+      const cb = jest.fn();
+      const errorCallback = jest.fn();
+      const inputData = {
+        amount: 1000,
+        recipientId: 'recipientId',
+        data: 'test ref',
+      };
+      const expectedActions = [
+        { type: actionTypes.loadingStarted, data: actionTypes.transactionsAdded },
+        { type: actionTypes.loadingFinished, data: actionTypes.transactionsAdded },
+      ];
+      transactionsUtility.send.mockRejectedValue({ error: true });
+      await store.dispatch(transactionAdded(inputData, cb, errorCallback));
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(errorCallback.mock.calls).toHaveLength(1);
+    });
   });
 });

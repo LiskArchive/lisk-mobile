@@ -190,6 +190,21 @@ describe('Action: Accounts', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
+  it('should handle error flow on accountSignedIn action', async () => {
+    storageUtility.retrieveAccounts = jest.fn();
+    const store = mockStore({ peers: { activePeer } });
+    const cb = jest.fn();
+    const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
+    const expectedActions = [
+      { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
+      { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
+    ];
+    accountUtility.getAccount.mockRejectedValue({ error: true });
+    await store.dispatch(accountSignedIn({ passphrase }, cb));
+    expect(store.getActions()).toEqual(expectedActions);
+    expect(cb).toBeCalled();
+  });
+
   it('should returns an accountEdited action object', () => {
     const updatedData = 'test2';
     const expectedValue = {
