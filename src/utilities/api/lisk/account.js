@@ -21,11 +21,6 @@ export const getAccount = address => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export const extractAddress = (data) => {
-  if (data.indexOf(' ') < 0) {
-    return Lisk.cryptography.getAddressFromPublicKey(data);
-  }
-  return Lisk.cryptography.getAddressFromPassphrase(data);
-};
+export const extractAddress = passphrase => Lisk.cryptography.getAddressFromPassphrase(passphrase);
 
 export const extractPublicKey = passphrase => Lisk.cryptography.getKeys(passphrase).publicKey;

@@ -2,7 +2,7 @@
 
 ## Account
 
-### getAccount(tokenType: String, address: String)
+### getAccount(tokenType: String, address: String) -> Promise
 
 Retrieves account summary for related token from Node API.
 
@@ -12,3 +12,11 @@ Retrieves account summary for related token from Node API.
   balance: Integer,
 }
 ```
+
+### extractAddress(tokenType: String, passphrase: String) -> String
+
+Extracts wallet address from passphrase for given token.
+
+### extractPublicKey(tokenType: String, passphrase: String) -> String)
+
+Extracts public key from passphrase for given token.

@@ -17,10 +17,6 @@ describe('api/lisk/account', () => {
     it('extracts address from passphrase', () => {
       expect(extractAddress(passphrase)).toBe(account.address);
     });
-
-    it('extracts address from public key', () => {
-      expect(extractAddress(account.publicKey)).toBe(account.address);
-    });
   });
 
   describe('extractPublicKey', () => {
