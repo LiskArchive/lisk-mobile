@@ -25,7 +25,6 @@ import getStyles from './styles';
  * about any unforeseen issue/change
  */
 @connect(state => ({
-  activePeer: state.peers.activePeer,
   followedAccounts: state.accounts.followed || [],
   priceTicker: state.liskService.priceTicker,
 }), {

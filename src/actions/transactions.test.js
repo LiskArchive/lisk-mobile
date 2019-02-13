@@ -1,4 +1,3 @@
-import Lisk from '@liskhq/lisk-client';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import txConstants from '../constants/transactions';
@@ -13,10 +12,6 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('Action: Accounts', () => {
-  const activePeer = new Lisk.APIClient(
-    Lisk.APIClient.constants.TESTNET_NODES,
-    { nethash: Lisk.APIClient.constants.TESTNET_NETHASH },
-  );
   const account = {
     address: '5092448154042807473L',
     balance: '10000',
@@ -75,7 +70,6 @@ describe('Action: Accounts', () => {
   describe('transactionsLoaded', () => {
     it('should load more transactions', async () => {
       const store = mockStore({
-        peers: { activePeer },
         accounts: { active: account },
         transactions: { confirmed: [] },
       });
@@ -105,7 +99,6 @@ describe('Action: Accounts', () => {
   describe('transactionsAdded', () => {
     it('should call pendingTransactionAdded when send request is successful', async () => {
       const store = mockStore({
-        peers: { activePeer },
         accounts: { active: account },
         transactions: { confirmed: [], pending: [] },
       });
@@ -142,7 +135,6 @@ describe('Action: Accounts', () => {
 
     it('should go to error flow', async () => {
       const store = mockStore({
-        peers: { activePeer },
         accounts: { active: account },
         transactions: { confirmed: [], pending: [] },
       });

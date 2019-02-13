@@ -15,13 +15,9 @@ describe('Middleware: Accounts', () => {
     balance: 10000000,
   };
   const next = jest.fn();
-  const activePeer = {};
   const store = {
     dispatch: jest.fn(),
     getState: () => ({
-      peers: {
-        activePeer,
-      },
       accounts: {
         active: account,
         followed: [],

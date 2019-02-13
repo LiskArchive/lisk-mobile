@@ -1,4 +1,3 @@
-import Lisk from '@liskhq/lisk-client';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import {
@@ -20,10 +19,6 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('Action: Accounts', () => {
-  const activePeer = new Lisk.APIClient(
-    Lisk.APIClient.constants.TESTNET_NODES,
-    { nethash: Lisk.APIClient.constants.TESTNET_NETHASH },
-  );
   const account = {
     address: '5092448154042807473L',
     balance: '10000',
@@ -131,7 +126,6 @@ describe('Action: Accounts', () => {
 
   it('should update user data when block is updated', async () => {
     const store = mockStore({
-      peers: { activePeer },
       accounts: { active: account },
       transactions: { confirmed: [] },
     });
@@ -175,8 +169,7 @@ describe('Action: Accounts', () => {
 
   it('should dispatch accountSignedIn action when it receives data of user', async () => {
     storageUtility.retrieveAccounts = jest.fn();
-    const store = mockStore({ peers: { activePeer } });
-    // const cb = jest.fn();
+    const store = mockStore({});
     const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
     const expectedActions = [
       { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
@@ -192,7 +185,7 @@ describe('Action: Accounts', () => {
 
   it('should handle error flow on accountSignedIn action', async () => {
     storageUtility.retrieveAccounts = jest.fn();
-    const store = mockStore({ peers: { activePeer } });
+    const store = mockStore({});
     const cb = jest.fn();
     const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
     const expectedActions = [

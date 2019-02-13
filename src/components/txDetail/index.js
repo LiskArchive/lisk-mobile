@@ -24,7 +24,6 @@ import { merge } from '../../utilities/helpers';
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 @connect(state => ({
-  activePeer: state.peers.activePeer,
   followedAccounts: state.accounts.followed || [],
   account: state.accounts.active || {},
 }), {})
