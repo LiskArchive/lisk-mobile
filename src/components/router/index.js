@@ -11,6 +11,7 @@ import Home from '../home';
 import Settings from '../settings';
 import About from '../about';
 import CurrencySelection from '../currencySelection';
+import ManageAssets from '../manageAssets';
 import LanguageSelection from '../languageSelection';
 import Terms from '../terms';
 import EnableBioAuth from '../enableBioAuth';
@@ -182,6 +183,17 @@ const MainStack = StackNavigator(
       screen: CurrencySelection,
       navigationOptions: {
         title: 'Select your currency',
+        headerTitle: HeaderTitle,
+        headerRight: HeaderPlaceholderButton,
+        headerLeft: HeaderBackButton,
+        headerBackground: <HeaderBackground />,
+        headerStyle,
+      },
+    },
+    ManageAssets: {
+      screen: ManageAssets,
+      navigationOptions: {
+        title: 'Manage assets',
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,

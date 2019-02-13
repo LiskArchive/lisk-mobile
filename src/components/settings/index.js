@@ -8,7 +8,7 @@ import ItemTitle from './itemTitle';
 import SignOutButton from './signOutButton';
 import { colors, themes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
-import SwitchButton from './switchButton';
+import SwitchButton from '../toolBox/switchButton';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
@@ -17,9 +17,9 @@ import getStyles from './styles';
 @connect(state => ({
   settings: state.settings,
 }), {
-  accountSignedOut: accountSignedOutAction,
-  settingsUpdated: settingsUpdatedAction,
-})
+    accountSignedOut: accountSignedOutAction,
+    settingsUpdated: settingsUpdatedAction,
+  })
 class Settings extends React.Component {
   state = {
     error: null,
@@ -89,7 +89,7 @@ class Settings extends React.Component {
                     targetStateLabel={sensorStatus}
                     icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
                     iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
-                    title={settings.sensorType}/>
+                    title={settings.sensorType} />
                 </View> : null
             }
             <View style={[styles.item, styles.theme.item]}>
@@ -128,7 +128,7 @@ class Settings extends React.Component {
                 navigation={navigation}
                 target='About'
                 icon='about'
-                title='About Lisk'/>
+                title='About Lisk' />
             </View>
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
@@ -140,7 +140,7 @@ class Settings extends React.Component {
                     theme={theme}
                     onSyncPress={this.switchTheme} />
                 }
-                title='Dark mode'/>
+                title='Dark mode' />
             </View>
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
@@ -159,9 +159,18 @@ class Settings extends React.Component {
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
+                icon='currency-selector'
+                iconSize={20}
+                title='Manage assets'
+                target='ManageAssets'
+              />
+            </View>
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
                 icon='terms'
                 target='Terms'
-                title='Terms of use'/>
+                title='Terms of use' />
             </View>
           </View>
 
