@@ -6,6 +6,7 @@ const common = {
   actionBlueAccent: '#3C7FB4',
   actionRed: '#C80039',
   actionRedAccent: '#ff6236',
+  btc: '#EC8D08',
 };
 
 const light = {
