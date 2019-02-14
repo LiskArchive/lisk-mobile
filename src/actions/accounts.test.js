@@ -14,6 +14,7 @@ import actionTypes from '../constants/actions';
 import * as storageUtility from '../utilities/storage';
 import { account as accountAPI } from '../utilities/api';
 import * as transactionsUtility from '../utilities/api/lisk/transactions';
+import { INITIAL_STATE as settings } from '../store/reducers/settings';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -91,6 +92,7 @@ describe('Action: Accounts', () => {
     },
   };
   const address = '7056261880661230236L';
+  const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 
   beforeEach(() => {
     accountAPI.getSummary = jest.fn();
@@ -128,6 +130,7 @@ describe('Action: Accounts', () => {
     const store = mockStore({
       accounts: { active: account },
       transactions: { confirmed: [] },
+      settings,
     });
     const expectedActions = [
       {
@@ -169,8 +172,7 @@ describe('Action: Accounts', () => {
 
   it('should dispatch accountSignedIn action when it receives data of user', async () => {
     storageUtility.retrieveAccounts = jest.fn();
-    const store = mockStore({});
-    const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
+    const store = mockStore({ settings });
     const expectedActions = [
       { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
       { type: actionTypes.accountSignedIn, data: { ...account, passphrase } },
@@ -185,9 +187,8 @@ describe('Action: Accounts', () => {
 
   it('should handle error flow on accountSignedIn action', async () => {
     storageUtility.retrieveAccounts = jest.fn();
-    const store = mockStore({});
+    const store = mockStore({ settings });
     const cb = jest.fn();
-    const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
     const expectedActions = [
       { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
       { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },

@@ -27,6 +27,7 @@ import getStyles from './styles';
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
   priceTicker: state.liskService.priceTicker,
+  activeToken: state.settings.token.active,
 }), {
   loadingStarted: loadingStartedAction,
   loadingFinished: loadingFinishedAction,
@@ -97,9 +98,15 @@ class Wallet extends React.Component {
   }
 
   async fetchInitialData() {
-    const { navigation, loadingStarted, loadingFinished } = this.props;
+    const {
+      navigation,
+      loadingStarted,
+      loadingFinished,
+      activeToken,
+    } = this.props;
+
     loadingStarted();
-    const account = await accountAPI.getSummary('LSK', navigation.state.params.address);
+    const account = await accountAPI.getSummary(activeToken, navigation.state.params.address);
     const tx = await this.retrieveTransactions(0);
     loadingFinished();
 
@@ -117,9 +124,9 @@ class Wallet extends React.Component {
   }
 
   async refresh() {
-    const { navigation } = this.props;
+    const { navigation, activeToken } = this.props;
     const { confirmed } = this.state.transactions;
-    const account = await accountAPI.getSummary('LSK', navigation.state.params.address);
+    const account = await accountAPI.getSummary(activeToken, navigation.state.params.address);
     const transactions = await this.retrieveTransactions(0);
     const newTransactions = transactions.confirmed.filter(item =>
       item.timestamp > confirmed[0].timestamp);

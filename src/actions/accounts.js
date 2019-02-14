@@ -103,10 +103,11 @@ export const accountEdited = (address, label) => ({
  * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
-export const accountSignedIn = ({ passphrase }, cb) => (dispatch) => {
+export const accountSignedIn = ({ passphrase }, cb) => (dispatch, getState) => {
   dispatch(loadingStarted(actionTypes.accountSignedIn));
-  const address = accountAPI.extractAddress('LSK', passphrase);
-  return accountAPI.getSummary('LSK', address)
+  const activeToken = getState().settings.token.active;
+  const address = accountAPI.extractAddress(activeToken, passphrase);
+  return accountAPI.getSummary(activeToken, address)
     .then((account) => {
       dispatch({
         type: actionTypes.accountSignedIn,
