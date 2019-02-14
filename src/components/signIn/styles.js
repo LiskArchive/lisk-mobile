@@ -102,6 +102,7 @@ const styles = {
   question: {
     color: colors.light.gray2,
     textAlign: 'center',
+    marginRight: 4,
   },
   link: {
     color: colors.light.blue,

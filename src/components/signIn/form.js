@@ -13,18 +13,20 @@ import { colors } from '../../constants/styleGuide';
 
 const devDefaultPass = process.env.passphrase || '';
 
-const Extras = ({ error, onPress, opacity }) => (
+const Extras = ({
+  error, onPress, opacity, t,
+}) => (
   <View>
     {error ?
       <View style={styles.connectionErrorContainer}>
         <Icon size={16} name='error' style={styles.connectionErrorIcon} />
         <Small style={styles.connectionError}>
-          Could not connect to the blockchain, try later!
+          {t('Could not connect to the blockchain, try later!')}
         </Small>
       </View> :
       <Animated.View style={[styles.linkWrapper, styles.row, { opacity }]}>
-        <P style={styles.question}>{"Don't have a Lisk ID? "}</P>
-        <A style={styles.link} onPress={onPress}>Create it now</A>
+        <P style={styles.question}>{t('Don’t have a Lisk ID?')}</P>
+        <A style={styles.link} onPress={onPress}>{t('Create it now')}</A>
       </Animated.View>
     }
   </View>
@@ -181,6 +183,7 @@ class Form extends React.Component {
           onSubmit={this.onFormSubmission}
           extras={
             <Extras
+              t={t}
               error={connectionError}
               onPress={this.goToRegistration}
               opacity={opacity}
