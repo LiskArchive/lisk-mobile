@@ -17,9 +17,9 @@ import getStyles from './styles';
 @connect(state => ({
   settings: state.settings,
 }), {
-    accountSignedOut: accountSignedOutAction,
-    settingsUpdated: settingsUpdatedAction,
-  })
+  accountSignedOut: accountSignedOutAction,
+  settingsUpdated: settingsUpdatedAction,
+})
 class Settings extends React.Component {
   state = {
     error: null,

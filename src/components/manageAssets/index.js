@@ -9,18 +9,19 @@ import { colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import SwitchButton from '../toolBox/switchButton';
+import { merge } from '../../utilities/helpers';
 
 @connect(state => ({
   settings: state.settings,
 }), {
-    settingsUpdated: settingsUpdatedAction,
-  })
+  settingsUpdated: settingsUpdatedAction,
+})
 class ManageAssets extends React.Component {
   onSelect = (value, key) => {
     const { settings: { token } } = this.props;
     this.props.settingsUpdated({
-      token: Object.assign({}, token, {
-        list: Object.assign({}, token.list, { [key]: value }),
+      token: merge(token, {
+        list: merge(token.list, { [key]: value }),
       }),
     });
   }

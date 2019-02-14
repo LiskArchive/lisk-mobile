@@ -9,6 +9,7 @@ const createDefaultTokenList = () => {
   tokenKeys.forEach((item) => { list[item] = false; });
   return list;
 };
+
 export const INITIAL_STATE = {
   theme: themes.light,
   currency: currencyKeys[0],
