@@ -1,15 +1,15 @@
 import fetchMock from 'fetch-mock';
 import { getSummary, extractAddress } from './account';
 
-const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
-const account = {
+const data = {
+  passphrase: 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together',
   address: '13myAau1kxz8HKPhbe3psnpahbgozPi6Az',
 };
 
 describe('api/btc/account', () => {
   describe('extractAddress', () => {
     it('extracts address from passphrase', () => {
-      expect(extractAddress(passphrase)).toBe(account.address);
+      expect(extractAddress(data.passphrase)).toBe(data.address);
     });
   });
 
@@ -18,16 +18,16 @@ describe('api/btc/account', () => {
 
     it('resolves correctly', async () => {
       const response = {
-        [account.address]: {
+        [data.address]: {
           final_balance: 1000,
         },
       };
 
       fetchMock.once('*', response);
-      const result = await getSummary(account.address);
+      const result = await getSummary(data.address);
       expect(result).toEqual({
-        address: account.address,
-        balance: response[account.address].final_balance,
+        address: data.address,
+        balance: response[data.address].final_balance,
         initialized: true,
       });
     });
@@ -37,7 +37,7 @@ describe('api/btc/account', () => {
       fetchMock.once('*', { status: 400, body: response });
 
       try {
-        await getSummary(account.address);
+        await getSummary(data.address);
       } catch (error) {
         expect(error).toEqual(response);
       }
@@ -47,7 +47,7 @@ describe('api/btc/account', () => {
       fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
 
       try {
-        await getSummary(account.address);
+        await getSummary(data.address);
       } catch (error) {
         expect(error).toBeTruthy();
       }

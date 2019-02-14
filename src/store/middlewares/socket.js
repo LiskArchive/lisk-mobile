@@ -1,7 +1,7 @@
 import BackgroundTimer from 'react-native-background-timer';
 import actionTypes from '../../constants/actions';
 import { blockUpdated } from '../../actions/accounts';
-import { tokenTypes, account as accountAPI } from '../../utilities/api';
+import { account as accountAPI } from '../../utilities/api';
 
 /** To-Do We have to disable socket connection because of
  * Lisk core problem. we will enable socket connection
@@ -14,7 +14,7 @@ const closeConnection = () => {
 
 export const checkBalance = (store) => {
   const { address, balance } = store.getState().accounts.active;
-  return accountAPI.getSummary(tokenTypes.LSK, address).then((res) => {
+  return accountAPI.getSummary('LSK', address).then((res) => {
     if (res.balance !== balance) {
       store.dispatch(blockUpdated());
     }

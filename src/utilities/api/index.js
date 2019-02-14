@@ -1,16 +1,12 @@
+import { tokenMap } from '../../constants/tokens';
 import * as liskAccount from './lisk/account';
 import * as btcAccount from './btc/account';
 
-export const tokenTypes = {
-  LSK: 'LSK',
-  BTC: 'BTC',
-};
-
-const mapper = {
-  [tokenTypes.LSK]: {
+const resourceMap = {
+  [tokenMap.LSK.key]: {
     account: liskAccount,
   },
-  [tokenTypes.BTC]: {
+  [tokenMap.BTC.key]: {
     account: btcAccount,
   },
 };
@@ -19,7 +15,7 @@ export const getMappedFunction = (tokenType, map) => {
   const [resource, method] = map.split('.');
 
   try {
-    const fn = mapper[tokenType][resource][method];
+    const fn = resourceMap[tokenType][resource][method];
 
     if (typeof fn === 'function') {
       return fn;

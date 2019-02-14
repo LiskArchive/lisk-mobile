@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
-import { tokenTypes, account as accountAPI } from '../../utilities/api';
+import { account as accountAPI } from '../../utilities/api';
 import { getTransactions } from '../../utilities/api/lisk/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
@@ -99,7 +99,7 @@ class Wallet extends React.Component {
   async fetchInitialData() {
     const { navigation, loadingStarted, loadingFinished } = this.props;
     loadingStarted();
-    const account = await accountAPI.getSummary(tokenTypes.LSK, navigation.state.params.address);
+    const account = await accountAPI.getSummary('LSK', navigation.state.params.address);
     const tx = await this.retrieveTransactions(0);
     loadingFinished();
 
@@ -119,7 +119,7 @@ class Wallet extends React.Component {
   async refresh() {
     const { navigation } = this.props;
     const { confirmed } = this.state.transactions;
-    const account = await accountAPI.getSummary(tokenTypes.LSK, navigation.state.params.address);
+    const account = await accountAPI.getSummary('LSK', navigation.state.params.address);
     const transactions = await this.retrieveTransactions(0);
     const newTransactions = transactions.confirmed.filter(item =>
       item.timestamp > confirmed[0].timestamp);

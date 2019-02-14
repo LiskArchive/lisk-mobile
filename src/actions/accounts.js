@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
-import { tokenTypes, account as accountAPI } from '../utilities/api';
+import { account as accountAPI } from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
 import { getTransactions } from '../utilities/api/lisk/transactions';
 
@@ -105,8 +105,8 @@ export const accountEdited = (address, label) => ({
  */
 export const accountSignedIn = ({ passphrase }, cb) => (dispatch) => {
   dispatch(loadingStarted(actionTypes.accountSignedIn));
-  const address = accountAPI.extractAddress(tokenTypes.LSK, passphrase);
-  return accountAPI.getSummary(tokenTypes.LSK, address)
+  const address = accountAPI.extractAddress('LSK', passphrase);
+  return accountAPI.getSummary('LSK', address)
     .then((account) => {
       dispatch({
         type: actionTypes.accountSignedIn,

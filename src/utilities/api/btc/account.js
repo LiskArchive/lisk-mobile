@@ -1,4 +1,3 @@
-
 import bitcoin from 'bitcoinjs-lib';
 import Lisk from '@liskhq/lisk-client';
 import bip32 from 'bip32';
