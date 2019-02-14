@@ -23,7 +23,7 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 })
 class AddToBookmark extends React.Component {
   state = {
-    buttonTitle: 'Continue',
+    buttonTitle: '',
     label: {
       value: '',
       validity: -1,
@@ -86,7 +86,7 @@ class AddToBookmark extends React.Component {
           styles={{ innerContainer: styles.innerContainer }}
           hasTabBar={true}
           button={{
-            title: this.state.buttonTitle,
+            title: this.state.buttonTitle || t('Continue'),
             type: 'inBox',
           }}
         >

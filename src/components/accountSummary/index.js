@@ -77,17 +77,17 @@ class AccountSummary extends React.Component {
 
   toggleBookmark = () => {
     const {
-      followedAccounts, account, navigation, accountUnFollowed,
+      followedAccounts, account, navigation, accountUnFollowed, t,
     } = this.props;
     const isFollowed = followedAccounts.some(item => item.address === account.address);
     if (isFollowed) {
-      Alert.alert('Are you sure?', '', [
+      Alert.alert(t('Are you sure?'), '', [
         {
-          text: 'Cancel',
+          text: t('Cancel'),
           style: 'cancel',
         },
         {
-          text: 'Confirm',
+          text: t('Confirm'),
           onPress: () => accountUnFollowed(account.address),
         },
       ], { cancelable: false });
@@ -96,7 +96,7 @@ class AccountSummary extends React.Component {
         routeName: 'AddBookmark',
         params: {
           account,
-          title: 'Add bookmark',
+          title: t('Add bookmark'),
         },
       });
     }

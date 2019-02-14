@@ -163,5 +163,7 @@
   "Transaction Details": "Transaktionsdetails",
   "Could not connect to the blockchain, try later!": "",
   "Create it now": "Jetzt erstellen",
-  "Don’t have a Lisk ID?": "Noch keine Lisk ID?"
+  "Don’t have a Lisk ID?": "Noch keine Lisk ID?",
+  "This field is required.": "Dieses Feld wird benötigt.",
+  "Add bookmark": "Zu Lesezeichen hinzufügen"
 }

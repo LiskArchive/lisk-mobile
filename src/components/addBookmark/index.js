@@ -198,7 +198,7 @@ class AddToBookmark extends React.Component {
         case 1:
           return errors[fieldName];
         case 2:
-          return t(`${fieldName} is required`);
+          return t('This field is required.');
         default:
           return '';
       }
