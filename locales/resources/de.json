@@ -1,5 +1,5 @@
 {
-  "Don't want to use {{sensorType}}?": "Möchtest du {{sensorType}} nicht benutzen?",
+  "Don’t want to use {{sensorType}}?": "Möchtest du {{sensorType}} nicht benutzen?",
   "Look at the front camera to authenticate.": "Schau bitte in die Kamera um dich anzumelden",
   "Place your finger over the touch sensor to authenticate.": "Platziere deinen Finger auf den Touchsensor um dich anzumelden.",
   "Sign in manually": "Manuell einloggen",
@@ -74,7 +74,7 @@
   "Passphrase verification": "Passphrase bestätigen",
   "Passphrase will be the only option to access your account.": "Deine Passphrase ist unerlässlich um auf dein Account zuzugreifen",
   "Pending confirmation": "Bevorstehende Bestätigung",
-  "Perfect! You’re all set": "Perfekt! Du hast Alles eingerichtet",
+  "Perfect! You’re all set": "Perfekt!",
   "Permission to use camera": "Erlaubniss die Kamera zu benutzen",
   "Please enter an address.": "Bitte Adresse eingeben",
   "Please enter an amount.": "Bitte Betrag eingeben.",
@@ -112,7 +112,7 @@
   "The address is unique and can’t be changed. It’s yours. Find it in your home page.": "Die Adresse ist einzigartig und kann nicht verändert werden. Du kannst deine Adresse auf dem Homescreen der App finden.",
   "The amount value is invalid.": "Der Betrag ist ungültig.",
   "The label must be shorter than 20 characters.": "Die Bezeichnung muss kürzer als 20 Zeichen sein.",
-  "The official Lisk mobile wallet.": "Das offizielle Lisk Mobile Wallet",
+  "The official Lisk mobile wallet.": "Das offizielle Lisk Mobile Wallet.",
   "The only way to access your account.": "Der einzige Weg auf Ihr Konto zuzugreifen",
   "This is not your second passphrase.": "Das ist nicht deine zweite Passphrase.",
   "This is your passphrase:": "Das ist deine Passphrase.",
@@ -160,5 +160,8 @@
   "Select your currency": "Wähle deine Währung",
   "Select your language": "Wähle deine Sprache",
   "Settings": "Einstellungen",
-  "Transaction Details": "Transaktionsdetails"
+  "Transaction Details": "Transaktionsdetails",
+  "Could not connect to the blockchain, try later!": "",
+  "Create it now": "Jetzt erstellen",
+  "Don’t have a Lisk ID?": "Noch keine Lisk ID?"
 }
