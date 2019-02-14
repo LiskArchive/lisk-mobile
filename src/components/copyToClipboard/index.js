@@ -32,7 +32,7 @@ class CopyToClipBoard extends React.Component {
       <Element
         style={labelStyle}
         onPress={this.copy}>
-          {this.state.copied ? t('copied to clipboard') : text }
+          {this.state.copied ? t('Copied to clipboard') : text }
       </Element>
       {(showIcon && !this.state.copied) ?
         <Icon
