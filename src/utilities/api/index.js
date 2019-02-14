@@ -1,10 +1,12 @@
 import { tokenMap } from '../../constants/tokens';
 import * as liskAccount from './lisk/account';
+import * as liskTransactions from './lisk/transactions';
 import * as btcAccount from './btc/account';
 
 const resourceMap = {
   [tokenMap.LSK.key]: {
     account: liskAccount,
+    transactions: liskTransactions,
   },
   [tokenMap.BTC.key]: {
     account: btcAccount,
@@ -64,4 +66,7 @@ export const account = {
 };
 
 export const transactions = {
+  get: (tokenType, ...rest) => getMappedFunction(tokenType, 'transactions.get')(...rest),
+  create: (tokenType, ...rest) => getMappedFunction(tokenType, 'transactions.create')(...rest),
+  broadcast: (tokenType, ...rest) => getMappedFunction(tokenType, 'transactions.broadcast')(...rest),
 };
