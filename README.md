@@ -55,7 +55,8 @@ npm run start
 ```
 
 ### Development environment
-You can run the project in Xcode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
+You can run the project in Xcode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. Please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
+Three is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read  [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
 
 #### Using environment variables
 You can fill out `env.json` with those variables:
