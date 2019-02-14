@@ -73,7 +73,7 @@ class draggableItem extends React.Component {
                 style={[styles.iconButton, styles.theme.editContent]}
                 color={colors[theme].sendBalanceBg}
               />
-              <P style={[styles.buttonContent, styles.theme.editContent]}>Edit</P>
+              <P style={[styles.buttonContent, styles.theme.editContent]}>{t('Edit')}</P>
             </TouchableOpacity>
           </Animated.View>
 
@@ -99,7 +99,7 @@ class draggableItem extends React.Component {
                 style={styles.iconButton}
                 color={colors.light.white}
               />
-              <P style={styles.buttonContent}>Delete</P>
+              <P style={styles.buttonContent}>{t('Delete')}</P>
             </TouchableOpacity>
           </Animated.View>
         </View>
