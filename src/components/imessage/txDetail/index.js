@@ -12,7 +12,8 @@ import Icon from '../../toolBox/icon';
 import Avatar from '../../avatar';
 import Loading from '../../transactions/loading';
 import transactions from '../../../constants/transactions';
-import { getTransactions } from '../../../utilities/api/lisk/transactions';
+import { tokenMap } from '../../../constants/tokens';
+import { transactions as transactionsAPI } from '../../../utilities/api';
 import arrowLight from '../../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
@@ -29,7 +30,7 @@ class TransactionDetail extends React.Component {
     const { txID, sharedData } = this.props;
 
     if (txID) {
-      getTransactions({ id: txID })
+      transactionsAPI.get(tokenMap.LSK.key, ({ id: txID }))
         .then(({ data }) => {
           this.setState({
             tx: data[0] || {
@@ -63,9 +64,7 @@ class TransactionDetail extends React.Component {
 
 
   render() {
-    const {
-      styles, theme, account,
-    } = this.props;
+    const { styles, theme, account } = this.props;
     const { tx } = this.state;
 
     if (!tx.senderId) {

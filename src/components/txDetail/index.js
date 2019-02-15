@@ -13,7 +13,7 @@ import Avatar from '../avatar';
 import Loading from '../transactions/loading';
 import EmptyState from '../transactions/empty';
 import transactions from '../../constants/transactions';
-import { getTransactions } from '../../utilities/api/lisk/transactions';
+import { transactions as transactionsAPI } from '../../utilities/api';
 import Blur from '../transactions/blur';
 import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
@@ -26,6 +26,7 @@ const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelega
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
   account: state.accounts.active || {},
+  activeToken: state.settings.token.active,
 }), {})
 class TransactionDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -70,7 +71,7 @@ class TransactionDetail extends React.Component {
     const { tx: currentTx } = this.state;
 
     try {
-      const { data } = await getTransactions({ id });
+      const { data } = await transactionsAPI.get(this.props.activeToken, { id });
       const tx = data[0] || {};
 
       // don't have any transaction passed from the navigation and couldn't find any with the id
