@@ -64,7 +64,7 @@ class Overview extends React.Component {
     } = this.props;
 
     transactionAdded({
-      recipientId: address,
+      recipientAddress: address,
       amount: toRawLsk(amount),
       passphrase: accounts.passphrase,
       secondPassphrase,

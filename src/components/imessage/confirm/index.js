@@ -8,7 +8,7 @@ import Icon from '../../toolBox/icon';
 import { B, P, Small } from '../../toolBox/typography';
 import { colors } from '../../../constants/styleGuide';
 import styles from './styles';
-import { send } from '../../../utilities/api/lisk/transactions';
+import * as transactionsAPI from '../../../utilities/api/lisk/transactions';
 import { extractAddress } from '../../../utilities/api/lisk/account';
 
 class Confirm extends Component {
@@ -17,7 +17,7 @@ class Confirm extends Component {
     busy: false,
   }
 
-  send = () => {
+  send = async () => {
     if (this.state.busy) {
       return;
     }
@@ -29,29 +29,32 @@ class Confirm extends Component {
     } = this.props;
 
     const data = {
-      recipientId: address,
+      recipientAddress: address,
       amount: toRawLsk(amount),
       passphrase,
     };
 
     this.setState({ busy: true, errorMessage: '' });
 
-    send(data)
-      .then(({ id }) => {
-        this.setState({ busy: false });
+    try {
+      this.setState({ busy: false });
 
-        composeMessage({
-          id,
-          address: { value: extractAddress(passphrase), validity: 0 },
-          amount,
-          state: 'transferred',
-          recipientAddress: address,
-        });
-      })
-      .catch(error => this.setState({
+      const tx = await transactionsAPI.create(data);
+      const { id } = await transactionsAPI.broadcast(tx);
+
+      composeMessage({
+        id,
+        address: { value: extractAddress(passphrase), validity: 0 },
+        amount,
+        state: 'transferred',
+        recipientAddress: address,
+      });
+    } catch (error) {
+      this.setState({
         busy: false,
         errorMessage: error.message || 'An error happened. Please try later.',
-      }));
+      });
+    }
   }
 
   render() {

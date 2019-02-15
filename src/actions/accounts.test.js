@@ -14,7 +14,6 @@ import actionTypes from '../constants/actions';
 import * as storageUtility from '../utilities/storage';
 import { account as accountAPI, transactions as transactionsAPI } from '../utilities/api';
 import { INITIAL_STATE as accounts } from '../store/reducers/accounts';
-
 import { INITIAL_STATE as settings } from '../store/reducers/settings';
 import { tokenMap } from '../constants/tokens';
 
@@ -99,7 +98,7 @@ const data = {
 };
 
 describe('Action: Accounts', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     accountAPI.getSummary = jest.fn();
     transactionsAPI.get = jest.fn();
   });
@@ -132,22 +131,14 @@ describe('Action: Accounts', () => {
   });
 
   describe('blockUpdated action', () => {
-    const store = mockStore({
-      accounts,
-      transactions: { confirmed: [] },
-      settings,
-    });
+    let store;
 
-    it('should not update if there is no new transaction', async () => {
-      transactionsAPI.get.mockResolvedValueOnce({ data: [] });
-      await store.dispatch(blockUpdated());
-      expect(store.getActions()).toEqual([]);
-    });
-
-    it('should handle rejections', async () => {
-      transactionsAPI.get.mockRejectedValueOnce('Error!');
-      await store.dispatch(blockUpdated());
-      expect(store.getActions()).toEqual([]);
+    beforeEach(() => {
+      store = mockStore({
+        accounts,
+        transactions: { confirmed: [] },
+        settings,
+      });
     });
 
     it('should update user and transactions', async () => {
@@ -173,6 +164,18 @@ describe('Action: Accounts', () => {
 
       await store.dispatch(blockUpdated());
       expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should not update if there is no new transaction', async () => {
+      transactionsAPI.get.mockResolvedValueOnce({ data: [] });
+      await store.dispatch(blockUpdated());
+      expect(store.getActions()).toEqual([]);
+    });
+
+    it('should handle rejections', async () => {
+      transactionsAPI.get.mockRejectedValueOnce('Error!');
+      await store.dispatch(blockUpdated());
+      expect(store.getActions()).toEqual([]);
     });
   });
 

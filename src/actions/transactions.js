@@ -1,48 +1,58 @@
 import actionTypes from '../constants/actions';
 import txConstants from '../constants/transactions';
-import { getTransactions, send } from '../utilities/api/lisk/transactions';
+import { transactions as transactionsAPI } from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
 
-export const transactionsLoaded = data => (dispatch) => {
+export const transactionsLoaded = data => async (dispatch, getState) => {
   dispatch(loadingStarted(actionTypes.transactionsLoaded));
-  getTransactions(data)
-    .then((response) => {
-      dispatch({
-        type: actionTypes.transactionsLoaded,
-        data: {
-          transactions: response.data,
-          count: response.meta.count,
-        },
-      });
-      dispatch(loadingFinished(actionTypes.transactionsLoaded));
+
+  try {
+    const response = await transactionsAPI.get(getState().settings.token.active, data);
+
+    dispatch({
+      type: actionTypes.transactionsLoaded,
+      data: {
+        transactions: response.data,
+        count: response.meta.count,
+      },
     });
+
+    dispatch(loadingFinished(actionTypes.transactionsLoaded));
+  } catch (error) {
+    dispatch(loadingFinished(actionTypes.transactionsLoaded));
+  }
 };
 
-export const transactionAdded = (data, success, error) => (dispatch, getState) => {
-  const { accounts, settings: { token } } = getState();
-  const account = accounts.info[token.active];
+export const transactionAdded = (data, successCb, errorCb) => async (dispatch, getState) => {
   dispatch(loadingStarted(actionTypes.transactionAdded));
-  send(data)
-    .then(({ id }) => {
-      dispatch({
-        data: {
-          id,
-          senderPublicKey: account.publicKey,
-          senderId: account.address,
-          recipientId: data.recipientId,
-          amount: data.amount,
-          asset: {
-            data: data.data,
-          },
-          fee: txConstants.send.fee,
-          type: txConstants.send.type,
+
+  const activeToken = getState().settings.token.active;
+  const account = getState().accounts.info[activeToken];
+
+  try {
+    const tx = await transactionsAPI.create(activeToken, data);
+    const { id } = await transactionsAPI.broadcast(activeToken, tx);
+
+    dispatch({
+      type: actionTypes.pendingTransactionAdded,
+      data: {
+        id,
+        senderPublicKey: account.publicKey,
+        senderId: account.address,
+        recipientId: data.recipientAddress,
+        amount: data.amount,
+        asset: {
+          data: data.data,
         },
-        type: actionTypes.pendingTransactionAdded,
-      });
-      dispatch(loadingFinished(actionTypes.transactionAdded));
-      success({ txId: id });
-    }).catch((err) => {
-      dispatch(loadingFinished(actionTypes.transactionAdded));
-      error(err);
+        fee: txConstants.send.fee,
+        type: txConstants.send.type,
+      },
     });
+
+    dispatch(loadingFinished(actionTypes.transactionAdded));
+    successCb({ txId: id });
+  } catch (error) {
+    dispatch(loadingFinished(actionTypes.transactionAdded));
+    errorCb(error);
+  }
 };
