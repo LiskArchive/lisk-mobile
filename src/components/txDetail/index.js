@@ -14,7 +14,7 @@ import Avatar from '../avatar';
 import Loading from '../transactions/loading';
 import EmptyState from '../transactions/empty';
 import transactions from '../../constants/transactions';
-import { getTransactions } from '../../utilities/api/lisk/transactions';
+import { transactions as transactionsAPI } from '../../utilities/api';
 import Blur from '../transactions/blur';
 import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
@@ -69,12 +69,11 @@ class TransactionDetail extends React.Component {
   }
 
   async retrieveTransaction(id, delay = 0) {
+    const { t, activeToken } = this.props;
     const { tx: currentTx } = this.state;
-    const { t } = this.props;
 
     try {
-      const { data } = await getTransactions({ id });
-
+      const { data } = await transactionsAPI.get(activeToken, { id });
       const tx = data[0] || {};
 
       // don't have any transaction passed from the navigation and couldn't find any with the id

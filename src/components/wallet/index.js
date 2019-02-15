@@ -1,8 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
-import { account as accountAPI } from '../../utilities/api';
-import { getTransactions } from '../../utilities/api/lisk/transactions';
+import { account as accountAPI, transactions as transactionsAPI } from '../../utilities/api';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
@@ -59,8 +58,8 @@ class Wallet extends React.Component {
   }
 
   async retrieveTransactions(offset) {
-    return getTransactions({
-      senderIdOrRecipientId: this.address,
+    return transactionsAPI.get(this.props.activeToken, {
+      senderIdOrRecipientAddress: this.address,
       offset,
     })
       .then(res => ({
