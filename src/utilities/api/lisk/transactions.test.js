@@ -2,10 +2,6 @@ import Lisk from '@liskhq/lisk-client';
 import LiskAPIClient from './apiClient';
 import * as transactions from './transactions';
 
-Lisk.transaction.transfer = jest.fn();
-LiskAPIClient.transactions.get = jest.fn();
-LiskAPIClient.transactions.broadcast = jest.fn();
-
 const data = [{
   id: '13746538517771550559',
   senderPublicKey: 'b550ede5ee0373d2930525016a45aadb50ab6f776068eef3874fa813a26c78d8',
@@ -16,6 +12,12 @@ const data = [{
 }];
 
 describe('api/transactions', () => {
+  beforeAll(() => {
+    Lisk.transaction.transfer = jest.fn();
+    LiskAPIClient.transactions.get = jest.fn();
+    LiskAPIClient.transactions.broadcast = jest.fn();
+  });
+
   it('calls transactions.get method correctly', () => {
     transactions.get({ id: data[0].id });
     expect(LiskAPIClient.transactions.get).toBeCalledWith({ id: data[0].id, sort: 'timestamp:desc' });

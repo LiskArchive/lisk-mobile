@@ -1,8 +1,6 @@
 import { getSummary, extractAddress, extractPublicKey } from './account';
 import LiskAPIClient from './apiClient';
 
-LiskAPIClient.accounts.get = jest.fn();
-
 const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 const account = {
   address: '5092448154042807473L',
@@ -13,6 +11,10 @@ const account = {
 };
 
 describe('api/lisk/account', () => {
+  beforeAll(() => {
+    LiskAPIClient.accounts.get = jest.fn();
+  });
+
   describe('extractAddress', () => {
     it('extracts address from passphrase', () => {
       expect(extractAddress(passphrase)).toBe(account.address);

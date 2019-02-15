@@ -1,23 +1,24 @@
 import Lisk from '@liskhq/lisk-client';
 import LiskAPIClient from './apiClient';
+import { removeUndefinedKeys } from '../../helpers';
 
 export const get = ({
   id,
   senderAddress,
   recipientAddress,
-  senderOrRecipientAddress,
+  senderAddressOrRecipientAddress,
   limit,
   offset,
 }) => {
-  const data = {
+  const data = removeUndefinedKeys({
     id,
     senderId: senderAddress,
     recipientId: recipientAddress,
-    senderOrRecipientId: senderOrRecipientAddress,
+    senderIdOrRecipientId: senderAddressOrRecipientAddress,
     sort: 'timestamp:desc',
     limit,
     offset,
-  };
+  });
 
   return LiskAPIClient.transactions.get(data);
 };
@@ -27,13 +28,15 @@ export const create = ({
   recipientAddress,
   amount,
   secondPassphrase,
+  data,
 }) => new Promise((resolve) => {
-  const transaction = Lisk.transaction.transfer({
+  const transaction = Lisk.transaction.transfer(removeUndefinedKeys({
     passphrase,
     secondPassphrase,
     recipientId: recipientAddress,
     amount,
-  });
+    data,
+  }));
 
   resolve(transaction);
 });

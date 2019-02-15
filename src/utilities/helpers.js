@@ -58,3 +58,13 @@ export const stringShortener = (str, leftPadd = 10, rightPadd = 0) => {
   }
   return str;
 };
+
+export const removeUndefinedKeys = obj => Object.keys(obj).reduce((acc, key) => {
+  const item = obj[key];
+
+  if (typeof item !== 'undefined') {
+    acc[key] = item;
+  }
+
+  return acc;
+}, {});
