@@ -12,8 +12,7 @@ import {
 } from './accounts';
 import actionTypes from '../constants/actions';
 import * as storageUtility from '../utilities/storage';
-import { account as accountAPI } from '../utilities/api';
-import * as transactionsUtility from '../utilities/api/lisk/transactions';
+import { account as accountAPI, transactions as transactionsAPI } from '../utilities/api';
 import { INITIAL_STATE as settings } from '../store/reducers/settings';
 
 const middlewares = [thunk];
@@ -96,10 +95,10 @@ describe('Action: Accounts', () => {
 
   beforeEach(() => {
     accountAPI.getSummary = jest.fn();
-    transactionsUtility.getTransactions = jest.fn();
+    transactionsAPI.get = jest.fn();
   });
 
-  it('should returns an accountUnFollowed action object', () => {
+  it('should return an accountUnFollowed action object', () => {
     const expectedValue = {
       type: actionTypes.accountUnFollowed,
       data: address,
@@ -107,14 +106,14 @@ describe('Action: Accounts', () => {
     expect(accountUnFollowed(address)).toEqual(expectedValue);
   });
 
-  it('should returns an accountSignedOut action object', () => {
+  it('should return an accountSignedOut action object', () => {
     const expectedValue = {
       type: actionTypes.accountSignedOut,
     };
     expect(accountSignedOut()).toEqual(expectedValue);
   });
 
-  it('should returns an accountFollowed action object', () => {
+  it('should return an accountFollowed action object', () => {
     const label = 'test';
     const expectedValue = {
       type: actionTypes.accountFollowed,
@@ -126,26 +125,44 @@ describe('Action: Accounts', () => {
     expect(accountFollowed(address, label)).toEqual(expectedValue);
   });
 
-  it('should update user data when block is updated', async () => {
+  describe('blockUpdated action', () => {
     const store = mockStore({
       accounts: { active: account },
       transactions: { confirmed: [] },
       settings,
     });
-    const expectedActions = [
-      {
-        type: actionTypes.transactionsUpdated,
-        data: { confirmed: transactions.data, count: transactions.meta.count },
-      },
-      {
-        type: actionTypes.accountUpdated,
-        data: account,
-      },
-    ];
-    accountAPI.getSummary.mockResolvedValue(account);
-    transactionsUtility.getTransactions.mockResolvedValue(transactions);
-    await store.dispatch(blockUpdated());
-    expect(store.getActions()).toEqual(expectedActions);
+
+    it('should not update if there is no new transaction', async () => {
+      transactionsAPI.get.mockResolvedValueOnce({ data: [] });
+      await store.dispatch(blockUpdated());
+      expect(store.getActions()).toEqual([]);
+    });
+
+    it('should handle rejections', async () => {
+      transactionsAPI.get.mockRejectedValueOnce('Error!');
+      await store.dispatch(blockUpdated());
+      expect(store.getActions()).toEqual([]);
+    });
+
+    it('should update user and transactions', async () => {
+      const expectedActions = [
+        {
+          type: actionTypes.transactionsUpdated,
+          data: { confirmed: transactions.data, count: transactions.meta.count },
+        },
+        {
+          type: actionTypes.accountUpdated,
+          data: account,
+        },
+      ];
+
+      transactionsAPI.get.mockResolvedValueOnce(transactions);
+      accountAPI.getSummary.mockResolvedValueOnce(account);
+
+      await store.dispatch(blockUpdated());
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should dispatch accountsStored action when the data is written in the storage', async () => {
@@ -179,8 +196,8 @@ describe('Action: Accounts', () => {
       { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
       { type: actionTypes.accountsRetrieved, data: [account] },
     ];
-    accountAPI.getSummary.mockResolvedValue(account);
-    storageUtility.retrieveAccounts.mockResolvedValue([account]);
+    accountAPI.getSummary.mockResolvedValueOnce(account);
+    storageUtility.retrieveAccounts.mockResolvedValueOnce([account]);
     await store.dispatch(accountSignedIn({ passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
   });

@@ -1,8 +1,7 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
-import { account as accountAPI } from '../utilities/api';
+import { account as accountAPI, transactions as transactionsAPI } from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
-import { getTransactions } from '../utilities/api/lisk/transactions';
 
 /**
  * Stores the given accounts data in AsyncStorage
@@ -125,16 +124,20 @@ export const accountSignedOut = () => ({
   type: actionTypes.accountSignedOut,
 });
 
-export const blockUpdated = () => (dispatch, getState) => {
-  const activeToken = getState().settings.token.active;
+export const blockUpdated = () => async (dispatch, getState) => {
   const { address } = getState().accounts.active;
   const { confirmed } = getState().transactions;
+  const activeToken = getState().settings.token.active;
   const lastTx = confirmed.length > 0 ? confirmed[0] : { timestamp: 0 };
-  return getTransactions({
-    senderIdOrRecipientId: address,
-    offset: 0,
-  }).then((response) => {
+
+  try {
+    const response = await transactionsAPI.get(activeToken, {
+      senderOrRecipientAddress: address,
+      offset: 0,
+    });
+
     const newTransactions = response.data.filter(tx => tx.timestamp > lastTx.timestamp);
+
     if (newTransactions.length) {
       dispatch({
         type: actionTypes.transactionsUpdated,
@@ -144,12 +147,15 @@ export const blockUpdated = () => (dispatch, getState) => {
         },
       });
 
-      accountAPI.getSummary(activeToken, address).then((account) => {
-        dispatch({
-          type: actionTypes.accountUpdated,
-          data: account,
-        });
+      const account = await accountAPI.getSummary(activeToken, address);
+
+      dispatch({
+        type: actionTypes.accountUpdated,
+        data: account,
       });
     }
-  });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
+  }
 };
