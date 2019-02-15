@@ -126,6 +126,7 @@ export const accountSignedOut = () => ({
 });
 
 export const blockUpdated = () => (dispatch, getState) => {
+  const activeToken = getState().settings.token.active;
   const { address } = getState().accounts.active;
   const { confirmed } = getState().transactions;
   const lastTx = confirmed.length > 0 ? confirmed[0] : { timestamp: 0 };
@@ -143,7 +144,7 @@ export const blockUpdated = () => (dispatch, getState) => {
         },
       });
 
-      accountAPI.getSummary(address).then((account) => {
+      accountAPI.getSummary(activeToken, address).then((account) => {
         dispatch({
           type: actionTypes.accountUpdated,
           data: account,
