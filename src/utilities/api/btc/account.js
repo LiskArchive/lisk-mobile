@@ -1,7 +1,7 @@
 import bitcoin from 'bitcoinjs-lib';
 import Lisk from '@liskhq/lisk-client';
 import bip32 from 'bip32';
-import config from './config';
+import config from '../../../../btc.config';
 
 export const getSummary = address => new Promise(async (resolve, reject) => {
   try {
