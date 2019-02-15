@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
-import { getAccount, extractAddress } from '../utilities/api/lisk/account';
+import { account as accountAPI } from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
 import { getTransactions } from '../utilities/api/lisk/transactions';
 
@@ -103,9 +103,11 @@ export const accountEdited = (address, label) => ({
  * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
-export const accountSignedIn = ({ passphrase }, cb) => (dispatch) => {
+export const accountSignedIn = ({ passphrase }, cb) => (dispatch, getState) => {
   dispatch(loadingStarted(actionTypes.accountSignedIn));
-  return getAccount(extractAddress(passphrase))
+  const activeToken = getState().settings.token.active;
+  const address = accountAPI.extractAddress(activeToken, passphrase);
+  return accountAPI.getSummary(activeToken, address)
     .then((account) => {
       dispatch({
         type: actionTypes.accountSignedIn,
@@ -124,6 +126,7 @@ export const accountSignedOut = () => ({
 });
 
 export const blockUpdated = () => (dispatch, getState) => {
+  const activeToken = getState().settings.token.active;
   const { address } = getState().accounts.active;
   const { confirmed } = getState().transactions;
   const lastTx = confirmed.length > 0 ? confirmed[0] : { timestamp: 0 };
@@ -141,7 +144,7 @@ export const blockUpdated = () => (dispatch, getState) => {
         },
       });
 
-      getAccount(address).then((account) => {
+      accountAPI.getSummary(activeToken, address).then((account) => {
         dispatch({
           type: actionTypes.accountUpdated,
           data: account,

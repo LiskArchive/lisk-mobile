@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
-import { getAccount } from '../../utilities/api/lisk/account';
+import { account as accountAPI } from '../../utilities/api';
 import { getTransactions } from '../../utilities/api/lisk/transactions';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
@@ -27,6 +27,7 @@ import getStyles from './styles';
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
   priceTicker: state.liskService.priceTicker,
+  activeToken: state.settings.token.active,
 }), {
   loadingStarted: loadingStartedAction,
   loadingFinished: loadingFinishedAction,
@@ -97,10 +98,17 @@ class Wallet extends React.Component {
   }
 
   async fetchInitialData() {
-    this.props.loadingStarted();
-    const account = await getAccount(this.props.navigation.state.params.address);
+    const {
+      navigation,
+      loadingStarted,
+      loadingFinished,
+      activeToken,
+    } = this.props;
+
+    loadingStarted();
+    const account = await accountAPI.getSummary(activeToken, navigation.state.params.address);
     const tx = await this.retrieveTransactions(0);
-    this.props.loadingFinished();
+    loadingFinished();
 
     this.setState({
       account,
@@ -116,8 +124,9 @@ class Wallet extends React.Component {
   }
 
   async refresh() {
+    const { navigation, activeToken } = this.props;
     const { confirmed } = this.state.transactions;
-    const account = await getAccount(this.props.navigation.state.params.address);
+    const account = await accountAPI.getSummary(activeToken, navigation.state.params.address);
     const transactions = await this.retrieveTransactions(0);
     const newTransactions = transactions.confirmed.filter(item =>
       item.timestamp > confirmed[0].timestamp);
