@@ -84,7 +84,7 @@ class Home extends React.Component {
 
     if (!transactions.loaded) {
       transactionsLoaded({
-        senderAddressOrRecipientAddress: account.address,
+        address: account.address,
         offset: 0,
       });
     }
@@ -156,7 +156,7 @@ class Home extends React.Component {
   loadMore = () => {
     if (this.props.account) {
       this.props.transactionsLoaded({
-        senderAddressOrRecipientAddress: this.props.account.address,
+        address: this.props.account.address,
         offset: this.props.transactions.confirmed.length,
       });
     }

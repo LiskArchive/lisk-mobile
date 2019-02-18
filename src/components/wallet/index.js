@@ -59,7 +59,7 @@ class Wallet extends React.Component {
 
   async retrieveTransactions(offset) {
     return transactionsAPI.get(this.props.activeToken, {
-      senderAddressOrRecipientAddress: this.address,
+      address: this.address,
       offset,
     })
       .then(res => ({

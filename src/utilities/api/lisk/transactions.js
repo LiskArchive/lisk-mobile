@@ -4,17 +4,13 @@ import { removeUndefinedKeys } from '../../helpers';
 
 export const get = ({
   id,
-  senderAddress,
-  recipientAddress,
-  senderAddressOrRecipientAddress,
+  address,
   limit,
   offset,
 }) => {
   const data = removeUndefinedKeys({
     id,
-    senderId: senderAddress,
-    recipientId: recipientAddress,
-    senderIdOrRecipientId: senderAddressOrRecipientAddress,
+    senderIdOrRecipientId: address,
     sort: 'timestamp:desc',
     limit,
     offset,
