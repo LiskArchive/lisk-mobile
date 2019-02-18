@@ -132,7 +132,7 @@ export const blockUpdated = () => async (dispatch, getState) => {
 
   try {
     const response = await transactionsAPI.get(activeToken, {
-      senderOrRecipientAddress: address,
+      address,
       offset: 0,
     });
 

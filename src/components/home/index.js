@@ -183,6 +183,7 @@ class Home extends React.Component {
       transactionsLoaded({
         address: account[activeToken].address,
         offset: transactions.confirmed.length,
+
       });
     }
   }
