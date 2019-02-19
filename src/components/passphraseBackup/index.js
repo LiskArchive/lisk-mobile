@@ -8,7 +8,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 @connect(state => ({
-  account: state.accounts.active,
+  account: state.accounts,
 }), {})
 class PassphraseBackup extends React.Component {
   render() {
