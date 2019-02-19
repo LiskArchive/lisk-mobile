@@ -41,13 +41,13 @@ class Item extends React.Component {
     } = this.props;
 
     let direction = 'incoming';
-    let address = tx.senderId;
-    let addressShortened = stringShortener(tx.senderId, 10, 3);
+    let address = tx.senderAddress;
+    let addressShortened = stringShortener(tx.senderAddress, 10, 3);
 
-    if (account === tx.senderId && tx.type === 0) {
+    if (account === tx.senderAddress && tx.type === 0) {
       direction = 'outgoing';
-      address = tx.recipientId;
-      addressShortened = stringShortener(tx.recipientId, 10, 3);
+      address = tx.recipientAddress;
+      addressShortened = stringShortener(tx.recipientAddress, 10, 3);
     }
 
     const followedAccount = followedAccounts.find(fa => fa.address === address);
@@ -58,12 +58,18 @@ class Item extends React.Component {
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
 
     let image = null;
-    if (tx.type === 0 && (tx.recipientId !== tx.senderId)) {
+    if (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) {
       image = <Avatar address={address} size={50} style={styles.theme.avatar} />;
     } else {
       image = (theme === themes.light ?
-        <Image source={transactions[txTypes[tx.type]].image(themes.light)} style={styles.image} /> :
-        <Image source={transactions[txTypes[tx.type]].image(themes.dark)} style={styles.image} />
+        <Image
+          source={transactions[txTypes[tx.type]].image(themes.light)}
+          style={styles.image}
+        /> :
+        <Image
+          source={transactions[txTypes[tx.type]].image(themes.dark)}
+          style={styles.image}
+        />
       );
     }
 
@@ -76,21 +82,21 @@ class Item extends React.Component {
       </View>
       <View style={styles.column}>
         <B style={[styles.address, styles.theme.address]}>
-          {(tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
+          {(tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) ?
             addressShortened : transactions[txTypes[tx.type]].title}
         </B>
         {
           typeof this.props.tx.timestamp !== 'number' ?
           <Small style={[styles.date, styles.theme.date]}>Pending confirmation</Small> :
           <FormattedDate type={Small} style={[styles.date, styles.theme.date]}>
-            { tx.timestamp }
+            {tx.timestamp}
           </FormattedDate>
         }
       </View>
       </View>
       <View style={[styles.column, styles.amountWrapper]}>
         {
-          (tx.type === 0 && (tx.recipientId !== tx.senderId)) && !incognito ?
+          (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) && !incognito ?
             <B style={[
               styles.amount,
               styles[direction], styles.theme[direction],
@@ -99,11 +105,11 @@ class Item extends React.Component {
             </B> : null
         }
         {
-          (tx.type === 0 && (tx.recipientId !== tx.senderId)) && incognito ?
+          (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) && incognito ?
             <Blur value={amount} direction={direction} /> : null
         }
         {
-          typeof this.props.tx.timestamp !== 'number' ?
+          typeof tx.timestamp !== 'number' ?
             <View style={styles.pendingIcon}>
               <LottieView
                 source={loadingAnimation}
