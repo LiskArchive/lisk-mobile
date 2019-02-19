@@ -19,6 +19,8 @@ import getMappedFunction from './functionMapper';
  * @property {Array.<Transaction>} data
  * @property {Object} meta
  * @property {Number} meta.count total number of transactions available on the API.
+ * @property {Number} meta.offset
+ * @property {Number} meta.limit
  */
 
 /**
