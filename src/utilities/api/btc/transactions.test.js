@@ -176,6 +176,8 @@ describe('api/btc/transactions', () => {
             senderAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
             recipientAddress: '3AoZ4rm7qZWcCzNHMDhh41zJE5LNfr7Gx2',
             amount: 401723000,
+            data: '',
+            type: 0,
           },
         ],
         meta: {
