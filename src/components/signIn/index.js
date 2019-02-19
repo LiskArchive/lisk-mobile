@@ -291,7 +291,7 @@ class SignIn extends React.Component {
       this.setState({ destinationDefined: true });
     }
 
-    if (accounts.active && navigation && navigation.isFocused()) {
+    if (accounts.info[settings.token.active].address && navigation && navigation.isFocused()) {
       this.onSignInCompleted();
     }
   }
