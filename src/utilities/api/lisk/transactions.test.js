@@ -66,10 +66,8 @@ describe('api/transactions', () => {
             confirmations: 99170,
             amount: '1000000',
             fee: '10000000',
-            extra: {
-              type: 0,
-              data: '',
-            },
+            type: 0,
+            data: '',
           },
           {
             id: '17545660133359630206',
@@ -79,10 +77,8 @@ describe('api/transactions', () => {
             confirmations: 32436,
             amount: '10000000',
             fee: '10000000',
-            extra: {
-              type: 0,
-              data: 'test',
-            },
+            type: 0,
+            data: 'test',
           },
         ],
         meta: response.meta,

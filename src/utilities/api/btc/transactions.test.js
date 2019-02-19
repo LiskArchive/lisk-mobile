@@ -198,6 +198,8 @@ describe('api/btc/transactions', () => {
             senderAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
             recipientAddress: '3AoZ4rm7qZWcCzNHMDhh41zJE5LNfr7Gx2',
             amount: 401723000,
+            type: 0,
+            data: '',
           },
           {
             id: 'e85812a1ce720f9bcda387465a7bd2c2bbfa8b62ce5220f2df1a3017cbda70e4',
@@ -207,6 +209,8 @@ describe('api/btc/transactions', () => {
             senderAddress: '1BrQvwTsDntfBAowYrqKq98MYY3dUNjnU3',
             recipientAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
             amount: 401724600,
+            type: 0,
+            data: '',
           },
         ],
         meta: {
