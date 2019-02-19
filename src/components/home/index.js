@@ -28,12 +28,13 @@ const summaryHeight = 200;
  * about any unforeseen issue/change
  */
 @connect(state => ({
-  account: state.accounts.active || {},
+  account: state.accounts.info || {},
   followedAccounts: state.accounts.followed || [],
   transactions: state.transactions,
   priceTicker: state.liskService.priceTicker,
   incognito: state.settings.incognito,
   language: state.settings.language,
+  activeToken: state.settings.token.active,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
@@ -67,27 +68,33 @@ class Home extends React.Component {
     });
 
   setHeader = () => {
-    const { navigation: { setParams }, t } = this.props;
+    const {
+      activeToken, navigation: { setParams }, t, account, incognito,
+    } = this.props;
+
     setParams({
       title: {
         placeHolder: t('Your wallet'),
         type: 'home',
-        balance: this.props.account.balance,
-        address: this.props.account.address,
+        balance: account[activeToken].balance,
+        address: account[activeToken].address,
         interpolate: this.interpolate,
-        incognito: this.props.incognito,
+        incognito,
       },
     });
   }
 
   componentDidMount() {
     const {
-      transactionsLoaded, transactions, account, navigation,
+      transactionsLoaded, transactions,
+      account,
+      navigation,
+      activeToken,
     } = this.props;
 
     if (!transactions.loaded) {
       transactionsLoaded({
-        senderIdOrRecipientId: account.address,
+        senderIdOrRecipientId: account[activeToken].address,
         offset: 0,
       });
     }
@@ -104,7 +111,7 @@ class Home extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
-      transactions, account, incognito,
+      transactions, account, incognito, activeToken,
       navigation: { setParams }, t, lng,
     } = this.props;
 
@@ -134,7 +141,7 @@ class Home extends React.Component {
     }
 
     if (
-      (prevProps.account.balance !== account.balance) ||
+      (prevProps.account[activeToken].balance !== account[activeToken].balance) ||
       (prevProps.incognito !== incognito)
     ) {
       this.setHeader();
@@ -166,10 +173,13 @@ class Home extends React.Component {
   }
 
   loadMore = () => {
-    if (this.props.account) {
-      this.props.transactionsLoaded({
-        senderIdOrRecipientId: this.props.account.address,
-        offset: this.props.transactions.confirmed.length,
+    const {
+      activeToken, account, transactionsLoaded, transactions,
+    } = this.props;
+    if (account[activeToken]) {
+      transactionsLoaded({
+        senderIdOrRecipientId: account[activeToken].address,
+        offset: transactions.confirmed.length,
       });
     }
   }
@@ -185,6 +195,7 @@ class Home extends React.Component {
       priceTicker,
       theme,
       isFocused,
+      activeToken,
     } = this.props;
 
     let content = null;
@@ -231,18 +242,21 @@ class Home extends React.Component {
             <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
         }
         {
-          account && account.address ? (
+          account[activeToken] && account[activeToken].address ? (
             <AccountSummary
               navigation={navigation}
               scrollY={this.scrollY}
-              account={account}
+              account={account[activeToken]}
               priceTicker={priceTicker}
               style={styles.accountSummary}
               type='home'
             />
           ) : null
         }
-        {content}
+
+        {
+          content
+        }
       </View>
     );
   }
