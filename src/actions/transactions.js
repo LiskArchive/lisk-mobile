@@ -37,15 +37,12 @@ export const transactionAdded = (data, successCb, errorCb) => async (dispatch, g
       type: actionTypes.pendingTransactionAdded,
       data: {
         id,
-        senderPublicKey: account.publicKey,
-        senderId: account.address,
-        recipientId: data.recipientAddress,
+        senderAddress: account.address,
+        recipientAddress: data.recipientAddress,
         amount: data.amount,
-        asset: {
-          data: data.data,
-        },
         fee: txConstants.send.fee,
         type: txConstants.send.type,
+        data: data.data,
       },
     });
 
