@@ -15,7 +15,7 @@ import getStyles from './styles';
 import PassphraseCopy from '../passphraseCopy';
 
 @connect(state => ({
-  account: state.accounts.active,
+  account: state.accounts,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
