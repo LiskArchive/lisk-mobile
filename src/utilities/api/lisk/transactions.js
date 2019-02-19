@@ -10,10 +10,8 @@ const normalizeTransactionsResponse = list => list.map(tx => ({
   fee: tx.fee,
   timestamp: tx.timestamp,
   confirmations: tx.confirmations,
-  extra: {
-    type: tx.type,
-    data: tx.asset.data || '',
-  },
+  type: tx.type,
+  data: tx.asset.data || '',
 }));
 
 export const get = ({

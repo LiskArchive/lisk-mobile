@@ -2,6 +2,7 @@ import { tokenMap } from '../../constants/tokens';
 import * as liskAccount from './lisk/account';
 import * as liskTransactions from './lisk/transactions';
 import * as btcAccount from './btc/account';
+import * as btcTransactions from './btc/transactions';
 
 /**
  * Resource oriented mapping from token type to utility functions.
@@ -13,6 +14,7 @@ const resourceMap = {
   },
   [tokenMap.BTC.key]: {
     account: btcAccount,
+    transactions: btcTransactions,
   },
 };
 

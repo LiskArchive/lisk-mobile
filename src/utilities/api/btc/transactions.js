@@ -16,6 +16,8 @@ const normalizeTransactionsResponse = ({
     id: tx.hash,
     timestamp: Number(tx.time),
     confirmations: blockHeight > 0 ? (blockHeight - tx.block_height) + 1 : tx.block_height,
+    type: 0,
+    data: '',
   };
 
   const totalInput = tx.inputs.reduce((total, t) => total + t.prev_out.value, 0);

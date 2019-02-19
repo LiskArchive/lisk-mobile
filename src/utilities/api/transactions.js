@@ -9,9 +9,8 @@ import getMappedFunction from './functionMapper';
  * @property {String} fee
  * @property {Number} timestamp
  * @property {Number} confirmations
- * @property {Object} extra additional or uncommon properties.
- * @property {Number} extra.type transaction type for LSK.
- * @property {String} extra.data transaction data field for LSK.
+ * @property {Number} type transaction type for LSK (0 for BTC)
+ * @property {String} data transaction data field for LSK (empty string for BTC)
  */
 
 /**
