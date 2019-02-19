@@ -154,14 +154,11 @@ describe('Action: Accounts', () => {
           type: actionTypes.pendingTransactionAdded,
           data: {
             id: transactions.data[0].id,
-            senderPublicKey: account.publicKey,
-            senderId: account.address,
-            amount: inputData.amount,
-            recipientId: inputData.recipientAddress,
+            senderAddress: account.address,
+            recipientAddress: inputData.recipientAddress,
             fee: txConstants.send.fee,
-            asset: {
-              data: inputData.data,
-            },
+            amount: inputData.amount,
+            data: inputData.data,
             type: txConstants.send.type,
           },
         },
