@@ -2,13 +2,27 @@ import Lisk from '@liskhq/lisk-client';
 import LiskAPIClient from './apiClient';
 import { removeUndefinedKeys } from '../../helpers';
 
+const normalizeTransactionsResponse = list => list.map(tx => ({
+  id: tx.id,
+  senderAddress: tx.senderId,
+  recipientAddress: tx.recipientId,
+  amount: tx.amount,
+  fee: tx.fee,
+  timestamp: tx.timestamp,
+  confirmations: tx.confirmations,
+  extra: {
+    type: tx.type,
+    data: tx.asset.data || '',
+  },
+}));
+
 export const get = ({
   id,
   address,
   limit,
   offset,
-}) => {
-  const data = removeUndefinedKeys({
+}) => new Promise(async (resolve, reject) => {
+  const parameters = removeUndefinedKeys({
     id,
     senderIdOrRecipientId: address,
     sort: 'timestamp:desc',
@@ -16,8 +30,16 @@ export const get = ({
     offset,
   });
 
-  return LiskAPIClient.transactions.get(data);
-};
+  try {
+    const { data, meta } = await LiskAPIClient.transactions.get(parameters);
+    resolve({
+      data: normalizeTransactionsResponse(data),
+      meta,
+    });
+  } catch (error) {
+    reject(error);
+  }
+});
 
 export const create = ({
   passphrase,
