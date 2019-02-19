@@ -16,7 +16,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 @connect(state => ({
-  account: state.accounts.active,
+  account: state.accounts,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
