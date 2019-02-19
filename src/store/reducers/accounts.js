@@ -1,6 +1,9 @@
 import actionTypes from '../../constants/actions';
 import { merge } from '../../utilities/helpers';
+import { tokenKeys } from '../../constants/tokens';
 
+const info = {};
+tokenKeys.forEach((item) => { info[item] = {}; });
 /**
  * This reducer is designed to define the required logics to
  * store and retrieve the data related to:
@@ -13,14 +16,26 @@ import { merge } from '../../utilities/helpers';
  *
  * @returns {Object} The latest state
  */
-const accounts = (state = { active: null, followed: [] }, action = {}) => {
+const accounts = (state = { passphrase: null, info, followed: [] }, action = {}) => {
   switch (action.type) {
     case actionTypes.accountUpdated:
-      return merge(state, { active: merge(state.active, action.data) });
+      return merge(state, {
+        passphrase: state.passphrase,
+        info: {
+          ...state.info,
+          [action.data.activeToken]: action.data.account,
+        },
+      });
     case actionTypes.accountSignedOut:
-      return merge(state, { active: null });
+      return merge(state, { info, passphrase: null });
     case actionTypes.accountSignedIn:
-      return merge(state, { active: action.data });
+      return merge(state, {
+        passphrase: action.data.passphrase,
+        info: {
+          ...state.info,
+          [action.data.activeToken]: action.data.account,
+        },
+      });
     case actionTypes.accountEdited:
       return merge(state, {
         followed: state.followed.map((item) => {
