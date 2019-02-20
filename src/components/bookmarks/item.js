@@ -49,8 +49,8 @@ class draggableItem extends React.Component {
             [styles.editButton, styles.theme.editButton, {
               transform: [{
                 translateX: this._deltaX.interpolate({
-                  inputRange: [-155, 0],
-                  outputRange: [0, 155],
+                  inputRange: [-240, 0],
+                  outputRange: [0, 240],
                 }),
               }],
             },
@@ -81,8 +81,8 @@ class draggableItem extends React.Component {
             [styles.deleteButton, styles.theme.deleteButton, {
               transform: [{
                 translateX: this._deltaX.interpolate({
-                  inputRange: [-155, 0],
-                  outputRange: [0, 78],
+                  inputRange: [-240, 0],
+                  outputRange: [0, 130],
                 }),
               }],
             },
@@ -110,7 +110,7 @@ class draggableItem extends React.Component {
           boundaries={{ right: 0 }}
           snapPoints={[
             { x: 0, damping: -0.7, tension: 300 },
-            { x: -155, damping: -0.7, tension: 300 },
+            { x: -240, damping: -0.7, tension: 300 },
           ]}
           onDrag={() => setRef(this.ref, data.address)}
           animatedValueX={this._deltaX}>
