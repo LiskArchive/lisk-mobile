@@ -149,7 +149,7 @@ class Recipient extends React.Component {
 
   render() {
     const {
-      navigation, theme, styles, accounts, t,
+      navigation, theme, styles, accounts, t, lng,
     } = this.props;
     const {
       address, avatarPreview,
@@ -196,7 +196,7 @@ class Recipient extends React.Component {
               <IconButton
                 onPress={() => this.scanner.toggleCamera()}
                 titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                style={styles.scanButton}
+                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                 title={t('Scan')}
                 icon='scanner'
                 iconSize={18}

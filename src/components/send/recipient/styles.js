@@ -28,19 +28,20 @@ export default () => ({
     },
     scanButton: {
       position: 'absolute',
-      right: 10,
+      right: 20,
       zIndex: 99,
       top: 47,
       paddingRight: 15,
-      paddingLeft: 10,
       paddingBottom: 10,
-      width: 80,
+      width: 67,
       height: 30,
     },
     scanButtonTitle: {
       fontSize: 14,
-      width: 39,
       paddingLeft: 5,
+    },
+    longTitle: {
+      width: 87,
     },
     addressContainer: {
       width: '100%',

@@ -113,7 +113,7 @@ class Confirm extends React.Component {
 
   render() {
     const {
-      navigation, styles, theme, t,
+      navigation, styles, theme, t, lng,
     } = this.props;
     const { secondPassphrase } = this.state;
 
@@ -182,7 +182,7 @@ class Confirm extends React.Component {
                   <IconButton
                     onPress={this.onOpenCamera}
                     titleStyle={styles.scanButtonTitle}
-                    style={styles.scanButton}
+                    style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                     title={t('Scan')}
                     icon='scanner'
                     iconSize={18}

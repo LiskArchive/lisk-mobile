@@ -182,11 +182,13 @@ class AddToBookmark extends React.Component {
 
   render() {
     const {
-      navigation, theme, styles, t,
+      navigation, theme, styles, t, lng,
     } = this.props;
     const {
       address, avatarPreview, label, incomingData, editMode,
     } = this.state;
+
+    console.log('>>', lng);
 
     const errors = {
       label: t('The label must be shorter than 20 characters.'),
@@ -226,7 +228,7 @@ class AddToBookmark extends React.Component {
                 <IconButton
                   onPress={() => this.scanner.toggleCamera()}
                   titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                  style={styles.scanButton}
+                  style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                   title={t('Scan')}
                   icon='scanner'
                   iconSize={18}

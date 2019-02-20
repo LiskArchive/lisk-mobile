@@ -117,7 +117,9 @@ class Form extends React.Component {
 
   render() {
     const { passphrase, animation: { opacity } } = this.state;
-    const { t, navigation, connectionError } = this.props;
+    const {
+      t, navigation, connectionError, lng,
+    } = this.props;
 
     let errorMessage = '';
 
@@ -170,7 +172,7 @@ class Form extends React.Component {
               <IconButton
                 onPress={this.toggleCamera}
                 titleStyle={styles.scanButtonTitle}
-                style={styles.scanButton}
+                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                 title={t('Scan')}
                 icon='scanner'
                 iconSize={18}
