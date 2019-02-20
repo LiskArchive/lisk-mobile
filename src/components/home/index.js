@@ -33,6 +33,7 @@ const summaryHeight = 200;
   transactions: state.transactions,
   priceTicker: state.liskService.priceTicker,
   incognito: state.settings.incognito,
+  language: state.settings.language,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
@@ -102,7 +103,9 @@ class Home extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { transactions, account, incognito } = this.props;
+    const {
+      transactions, account, incognito,
+    } = this.props;
 
     const prevTransactionCount = (
       prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
@@ -121,6 +124,10 @@ class Home extends React.Component {
       this.setState({
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount,
       });
+    }
+
+    if (prevProps.language !== this.props.language) {
+      this.setHeader();
     }
 
     if (
