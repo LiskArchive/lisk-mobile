@@ -1,6 +1,7 @@
 import bitcoin from 'bitcoinjs-lib';
 import config from '../../../../btc.config';
 import { extractAddress, getDerivedPathFromSeed } from './account';
+import { merge } from '../../helpers';
 
 /**
  * Normalizes transaction data retrieved from Blockchain.info API
@@ -236,6 +237,26 @@ export const create = ({
     }
 
     resolve(txb.build().toHex());
+  } catch (error) {
+    reject(error);
+  }
+});
+
+export const broadcast = transaction => new Promise(async (resolve, reject) => {
+  try {
+    const body = new FormData();
+    body.append('tx', transaction);
+
+    const response = await fetch(`${config.url}/pushtx`, merge(config.requestOptions, {
+      method: 'POST',
+      body,
+    }));
+
+    if (response.ok) {
+      resolve(response.body);
+    } else {
+      reject(response.body);
+    }
   } catch (error) {
     reject(error);
   }
