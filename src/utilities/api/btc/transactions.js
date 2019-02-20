@@ -1,10 +1,12 @@
+import bitcoin from 'bitcoinjs-lib';
 import config from '../../../../btc.config';
+import { extractAddress, getDerivedPathFromSeed } from './account';
 
 /**
  * Normalizes transaction data retrieved from Blockchain.info API
  * @param {Object} data
  * @param {String} data.address Base address to use for formatting transactions
- * @param {Array} data.list Transaction list
+ * @param {Array} data.list Transaction list retrieved from API
  * @param {Number} data.blockHeight Latest block height for calculating confirmation count
  */
 const normalizeTransactionsResponse = ({
@@ -92,6 +94,148 @@ export const get = ({
     } else {
       reject(json);
     }
+  } catch (error) {
+    reject(error);
+  }
+});
+
+/**
+ * @typedef {Object} MinerFees
+ * @property {Number} low
+ * @property {Number} medium
+ * @property {Number} high
+ */
+/**
+ * Retrieves miner fees from API in satoshi/byte format.
+ * @returns {Promise<MinerFees>}
+ */
+export const getMinerFees = () => new Promise(async (resolve, reject) => {
+  try {
+    const response = await fetch(config.minerFeesURL);
+    const json = await response.json();
+
+    if (response.ok) {
+      resolve({
+        low: json.hourFee,
+        medium: json.halfHourFee,
+        high: json.fastestFee,
+      });
+    } else {
+      reject(json);
+    }
+  } catch (error) {
+    reject(error);
+  }
+});
+
+/**
+ * Normalizes transaction data retrieved from Blockchain.info API
+ * @param {Object} data
+ * @param {Number} data.inputCount
+ * @param {Number} data.outputCount
+ * @param {Number} data.minerFeeByte selected minerFee option, in satoshis/byte.
+ */
+const calculateTransactionFee = ({
+  inputCount,
+  outputCount,
+  minerFeePerByte,
+}) => ((inputCount * 180) + (outputCount * 34) + 10 + inputCount) * minerFeePerByte;
+
+/**
+ * Retrieves unspent tx outputs of a BTC address from Blockchain.info API
+ * @param {String} address
+ * @returns {Promise<Array>}
+ */
+export const getUnspentOuts = address => new Promise(async (resolve, reject) => {
+  try {
+    const response = await fetch(`${config.url}/unspent?active=${address}`);
+    const json = await response.json();
+
+    if (response.ok) {
+      resolve(json.unspent_outputs);
+    } else {
+      reject(json);
+    }
+  } catch (error) {
+    reject(error);
+  }
+});
+
+export const create = ({
+  passphrase,
+  recipientAddress,
+  amount,
+}) => new Promise(async (resolve, reject) => {
+  try {
+    const senderAddress = extractAddress(passphrase);
+    const unspentTxOuts = await exports.getUnspentOuts(senderAddress);
+    const minerFees = await exports.getMinerFees();
+    const minerFeePerByte = minerFees.medium;
+
+    // Estimate total cost (currently estimates max cost by assuming the worst case)
+    const estimatedMinerFee = calculateTransactionFee({
+      inputCount: unspentTxOuts.length,
+      outputCount: 2,
+      minerFeePerByte,
+    });
+
+    const estimatedTotal = amount + estimatedMinerFee;
+
+    // Check if balance is sufficient
+    const unspentTxOutsTotal = unspentTxOuts.reduce((total, tx) => {
+      total += tx.value;
+      return total;
+    }, 0);
+
+    if (unspentTxOutsTotal < estimatedTotal) {
+      reject(new Error('Insufficient (estimated) balance'));
+    }
+
+    // Find unspent txOuts to spend for this tx
+    let txOutIndex = 0;
+    let sumOfConsumedOutputs = 0;
+    const txOutsToConsume = [];
+
+    while (sumOfConsumedOutputs <= estimatedTotal) {
+      const tx = unspentTxOuts[txOutIndex];
+      txOutsToConsume.push(tx);
+      txOutIndex += 1;
+      sumOfConsumedOutputs += tx.value;
+    }
+
+    const txb = new bitcoin.TransactionBuilder(config.network);
+
+    // Add inputs from unspent txOuts
+    // eslint-disable-next-line
+    for (const tx of txOutsToConsume) {
+      txb.addInput(tx.tx_hash_big_endian, tx.tx_output_n);
+    }
+
+    // Output to Recipient
+    txb.addOutput(recipientAddress, amount);
+
+    // Calculate final fee
+    const calculatedMinerFee = calculateTransactionFee({
+      inputCount: txOutsToConsume.length,
+      outputCount: 2,
+      minerFeePerByte,
+    });
+
+    // Calculate total
+    const calculatedTotal = amount + calculatedMinerFee;
+
+    // Output to Change Address
+    const change = sumOfConsumedOutputs - calculatedTotal;
+    txb.addOutput(senderAddress, change);
+
+    // Sign inputs
+    const derivedPath = getDerivedPathFromSeed(passphrase);
+    const keyPair = bitcoin.ECPair.fromWIF(derivedPath.toWIF(), config.network);
+    for (let i = 0; i < txOutsToConsume.length; i++) {
+      txb.sign(i, keyPair);
+    }
+
+    resolve(txb.build().toHex());
   } catch (error) {
     reject(error);
   }
