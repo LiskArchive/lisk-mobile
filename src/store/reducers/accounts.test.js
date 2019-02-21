@@ -1,106 +1,122 @@
-import accounts from './accounts';
+import accounts, { INITIAL_STATE } from './accounts';
 import actionTypes from '../../constants/actions';
+import { tokenMap } from '../../constants/tokens';
+import { merge } from '../../utilities/helpers';
 
-describe('Reducers: Accounts', () => {
-  const followed = [
+const data = {
+  activeToken: tokenMap.LSK.key,
+  passphrase: 'test',
+  followed: [
     { address: '1234567890L', label: 'label1' },
     { address: '1234567891L', label: 'label2' },
-  ];
-  const accountA = {
+  ],
+  accountA: {
     address: '1234567890L',
     publicKey: 'sample_key_A',
     balance: 1200000000,
-  };
-  const accountB = {
+  },
+  accountB: {
     address: '1234567891L',
     publicKey: 'sample_key_B',
     balance: 2100000000,
-  };
+  },
+};
 
-  it.skip('should create the empty state initially', () => {
-    const createdState = accounts();
-    const emptyState = { active: null, followed: [] };
-    expect(createdState).toEqual(emptyState);
+describe('Reducers: Accounts', () => {
+  let state;
+
+  beforeEach(() => {
+    state = INITIAL_STATE;
   });
 
-  it.skip('should retain the state in case of accountUpdated', () => {
-    const currentState = { active: accountA, followed };
-    const action = { type: actionTypes.accountUpdated, data: {} };
-    const changedState = accounts(currentState, action);
-    expect(changedState).toEqual(currentState);
+  it('should create the empty state initially', () => {
+    expect(accounts()).toEqual(state);
   });
 
-  it.skip('should empty accounts.active in case of accountSignedOut', () => {
-    const currentState = { active: accountA, followed };
-    const action = { type: actionTypes.accountSignedOut };
-    const changedState = accounts(currentState, action);
-    expect(changedState.active).toBeNull();
-  });
-
-  it.skip('should set accounts.active in case of accountSignedIn', () => {
-    const currentState = { active: null, followed };
+  it('should set accounts.active in case of accountSignedIn', () => {
     const action = {
       type: actionTypes.accountSignedIn,
-      data: accountA,
+      data: {
+        passphrase: data.passphrase,
+        activeToken: data.activeToken,
+        account: data.accountA,
+      },
     };
-    const changedState = accounts(currentState, action);
-    expect(changedState).toEqual({
-      active: accountA,
-      followed,
+
+    expect(accounts(state, action)).toEqual(merge(state, {
+      passphrase: data.passphrase,
+      info: merge(state.info, {
+        [data.activeToken]: data.accountA,
+      }),
+    }));
+  });
+
+  it('should retain the state in case of accountUpdated', () => {
+    const action = {
+      type: actionTypes.accountUpdated,
+      data: {
+        account: data.accountB,
+        activeToken: data.activeToken,
+      },
+    };
+
+    expect(accounts(state, action)).toEqual(merge(state, {
+      info: merge(state.info, {
+        [data.activeToken]: data.accountB,
+      }),
+    }));
+  });
+
+  it('should empty accounts.active in case of accountSignedOut', () => {
+    state = merge(state, {
+      passphrase: data.passphrase,
+      info: {
+        [data.activeToken]: data.accountA,
+      },
     });
+
+    const action = { type: actionTypes.accountSignedOut };
+
+    expect(accounts(state, action)).toEqual(INITIAL_STATE);
   });
 
   it('should add data to state.followed array in case of accountFollowed', () => {
-    const currentState = { active: null, followed: [accountA] };
-    const action = { type: actionTypes.accountFollowed, data: accountB };
-    const changedState = accounts(currentState, action);
-    expect(changedState.followed).toEqual([accountA, accountB]);
+    state = merge(state, { followed: [data.accountA] });
+    const action = { type: actionTypes.accountFollowed, data: data.accountB };
+    const changedState = accounts(state, action);
+    expect(changedState.followed).toEqual([data.accountA, data.accountB]);
   });
 
   it('should remove given account from state.followed array in case of accountUnFollowed', () => {
-    const currentState = { active: null, followed: [accountA] };
-    const action = { type: actionTypes.accountUnFollowed, data: accountA.address };
-    const changedState = accounts(currentState, action);
+    state = merge(state, { followed: [data.accountA] });
+    const action = { type: actionTypes.accountUnFollowed, data: data.accountA.address };
+    const changedState = accounts(state, action);
     expect(changedState.followed).toHaveLength(0);
   });
 
   it('should edit given account from state.followed array in case of accountEdited', () => {
+    state = merge(state, { followed: data.followed });
     const expectedValue = {
-      address: followed[1].address,
+      address: data.followed[1].address,
       label: 'label3',
     };
-    const currentState = { active: null, followed };
     const action = {
       type: actionTypes.accountEdited,
       data: expectedValue,
     };
-    const changedState = accounts(currentState, action);
+    const changedState = accounts(state, action);
     expect(changedState.followed[1]).toEqual(expectedValue);
   });
 
   it('should update one of the followed accounts in case of accountsRetrieved', () => {
-    const currentState = { active: null, followed: [] };
-    const action = { type: actionTypes.accountsRetrieved, data: [accountA, accountB] };
-    const changedState = accounts(currentState, action);
+    const action = { type: actionTypes.accountsRetrieved, data: [data.accountA, data.accountB] };
+    const changedState = accounts(state, action);
     expect(changedState.followed).toHaveLength(2);
   });
 
   it('should make no change in case of accountsStored', () => {
-    const currentState = { active: null, followed: [] };
-    const action = { type: actionTypes.accountsStored, data: [accountA] };
-    const changedState = accounts(currentState, action);
-    expect(changedState.active).toBeNull();
+    const action = { type: actionTypes.accountsStored, data: [data.accountA] };
+    const changedState = accounts(state, action);
     expect(changedState.followed).toHaveLength(0);
-  });
-
-  it('should leave the state untouched if no case matched', () => {
-    const currentState = { active: accountA, followed };
-    const action1 = { data: accountB };
-    const changedState1 = accounts(currentState, action1);
-    expect(changedState1).toEqual(currentState);
-
-    const action2 = { data: [accountB] };
-    const changedState2 = accounts(currentState, action2);
-    expect(changedState2).toEqual(currentState);
   });
 });
