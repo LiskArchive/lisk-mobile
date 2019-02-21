@@ -7,7 +7,12 @@ export const getPriceTicker = () => new Promise(async (resolve, reject) => {
     const json = await response.json();
 
     if (response.ok) {
-      resolve(json.tickers.LSK);
+      const { tickers: { LSK } } = json;
+
+      resolve({
+        EUR: String(LSK.EUR),
+        USD: String(LSK.USD),
+      });
     } else {
       reject(json);
     }
