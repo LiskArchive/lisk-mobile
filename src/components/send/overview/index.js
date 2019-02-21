@@ -122,7 +122,7 @@ class Overview extends React.Component {
 
     const bookmark = followed.find(item => item.address === address);
     const fee = actionType === 'initialize' ? 0 : 1e7;
-    const translatedMessaged = messages(this.props.t);
+    const translatedMessages = messages(this.props.t);
 
     return (
       <ScrollView
@@ -132,7 +132,7 @@ class Overview extends React.Component {
         <View>
           {!isSmallScreen ? (
             <P style={styles.theme.subtitle}>
-              {translatedMessaged[actionType].subtitle}
+              {translatedMessages[actionType].subtitle}
               {actionType === 'initialize' ? (
                 <A style={[styles.link, styles.theme.link]} onPress={this.openAcademy}>
                   {t('Read more')}
@@ -186,7 +186,7 @@ class Overview extends React.Component {
             disabled={this.state.triggered}
             style={styles.button}
             onClick={this.send}
-            title={translatedMessaged[actionType].button}
+            title={translatedMessages[actionType].button}
           />
         </View>
       </ScrollView>
