@@ -188,8 +188,6 @@ class AddToBookmark extends React.Component {
       address, avatarPreview, label, incomingData, editMode,
     } = this.state;
 
-    console.log('>>', lng);
-
     const errors = {
       label: t('The label must be shorter than 20 characters.'),
       address: t('Invalid address'),
