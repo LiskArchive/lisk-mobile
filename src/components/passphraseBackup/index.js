@@ -8,11 +8,11 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 @connect(state => ({
-  account: state.accounts,
+  passphrase: state.accounts.passphrase,
 }), {})
 class PassphraseBackup extends React.Component {
   render() {
-    const { styles, t, account: { passphrase } } = this.props;
+    const { styles, t, passphrase } = this.props;
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
