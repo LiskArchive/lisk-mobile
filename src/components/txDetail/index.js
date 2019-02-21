@@ -68,11 +68,11 @@ class TransactionDetail extends React.Component {
   }
 
   async retrieveTransaction(id, delay = 0) {
-    const { navigation, account } = this.props;
+    const { navigation, account, activeToken } = this.props;
     const { tx: currentTx } = this.state;
 
     try {
-      const { data } = await transactionsAPI.get(this.props.activeToken, {
+      const { data } = await transactionsAPI.get(activeToken, {
         address: navigation.getParam('account', account.address),
         id,
       });
