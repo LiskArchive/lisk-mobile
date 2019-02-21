@@ -147,7 +147,7 @@ async function i18nScanner() {
   const config = {
     translationFunctionNames: ['i18next.t', 'props.t', 'this.props.t', 't'],
     outputPath: './locales/resources',
-    files: ['./src/components/**/*.js'],
+    files: ['./src/components/**/*.js', './src/constants/**/*.js'],
     lng: ['en', 'de'],
     defaultLng: 'en',
   };
