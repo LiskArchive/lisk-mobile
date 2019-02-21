@@ -59,6 +59,11 @@ export const stringShortener = (str, leftPadd = 10, rightPadd = 0) => {
   return str;
 };
 
+/**
+ * Removes undefined keys from an object.
+ * @param {Object} obj - Source object
+ * @returns {Object} - Simplified object
+ */
 export const removeUndefinedKeys = obj => Object.keys(obj).reduce((acc, key) => {
   const item = obj[key];
 
