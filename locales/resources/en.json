@@ -160,7 +160,7 @@
   "Select your language": "Select your language",
   "Settings": "Settings",
   "Transaction Details": "Transaction Details",
-  "Could not connect to the blockchain, try later!": "Could not connect to the blockchain, try later!",
+  "Connection error, try later!": "Connection error, try later!",
   "Create it now": "Create it now",
   "Don’t have a Lisk ID?": "Don’t have a Lisk ID?",
   "This field is required.": "This field is required.",
@@ -170,5 +170,8 @@
   "Transfer": "Transfer",
   "Vote": "Vote",
   "Don’t want to use bioAuth?": "Don't want to use {{sensorType}}?",
-  "Disable bioAuth": "Disable {{title}}"
+  "Disable bioAuth": "Disable {{title}}",
+  "Do you want to use Biometric Authentication?": "Do you want to use Biometric Authentication?",
+  "For ease of sign in": "For ease of sign in",
+  "OK": "OK"
 }

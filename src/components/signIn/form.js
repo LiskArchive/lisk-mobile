@@ -21,7 +21,7 @@ const Extras = ({
       <View style={styles.connectionErrorContainer}>
         <Icon size={16} name='error' style={styles.connectionErrorIcon} />
         <Small style={styles.connectionError}>
-          {t('Could not connect to the blockchain, try later!')}
+          {t('Connection error, try later!')}
         </Small>
       </View> :
       <Animated.View style={[styles.linkWrapper, styles.row, { opacity }]}>
