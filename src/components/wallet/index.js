@@ -57,18 +57,6 @@ class Wallet extends React.Component {
     });
   }
 
-  async retrieveTransactions(offset) {
-    return transactionsAPI.get(this.props.activeToken, {
-      address: this.address,
-      offset,
-    })
-      .then(res => ({
-        confirmed: res.data,
-        count: res.meta.count,
-      }))
-      .catch(console.log); // eslint-disable-line no-console
-  }
-
   onScroll() {
     return Animated.event([{
       nativeEvent: { contentOffset: { y: this.scrollY } },
@@ -106,16 +94,16 @@ class Wallet extends React.Component {
 
     loadingStarted();
     const account = await accountAPI.getSummary(activeToken, navigation.state.params.address);
-    const tx = await this.retrieveTransactions(0);
+    const tx = await transactionsAPI.get(activeToken, { address: this.address });
     loadingFinished();
 
     this.setState({
       account,
       transactions: {
-        confirmed: tx.confirmed,
+        confirmed: tx.data,
         pending: [],
         loaded: true,
-        count: tx.count,
+        count: tx.meta.count,
       },
     }, () => {
       this.setHeader();
@@ -126,9 +114,8 @@ class Wallet extends React.Component {
     const { navigation, activeToken } = this.props;
     const { confirmed } = this.state.transactions;
     const account = await accountAPI.getSummary(activeToken, navigation.state.params.address);
-    const transactions = await this.retrieveTransactions(0);
-    const newTransactions = transactions.confirmed.filter(item =>
-      item.timestamp > confirmed[0].timestamp);
+    const transactions = await transactionsAPI.get(activeToken, { address: this.address });
+    const newTransactions = transactions.data.filter(t => t.timestamp > confirmed[0].timestamp);
 
     if (newTransactions.length > 0) {
       this.setState({
@@ -136,34 +123,38 @@ class Wallet extends React.Component {
         transactions: {
           confirmed: [...newTransactions, ...confirmed],
           pending: [],
-          count: transactions.count,
+          count: transactions.meta.count,
           loaded: true,
         },
       });
     }
   }
 
-  loadMore = () => {
-    this.props.loadingStarted();
+  loadMore = async () => {
     const { confirmed } = this.state.transactions;
-    this.retrieveTransactions(confirmed.length)
-      .then((transactions) => {
-        this.props.loadingFinished();
-        if (transactions.confirmed.length > 0) {
-          this.setState({
-            transactions: {
-              confirmed: [...confirmed, ...transactions.confirmed],
-              pending: [],
-              count: transactions.count,
-              loaded: true,
-            },
-          });
-        }
-      })
-      .catch((err) => {
-        this.props.loadingFinished();
-        console.log(err); // eslint-disable-line no-console
+    this.props.loadingStarted();
+
+    try {
+      const transactions = await transactionsAPI.get(this.props.activeToken, {
+        address: this.address,
+        offset: confirmed.length,
       });
+
+      this.props.loadingFinished();
+
+      if (transactions.data.length > 0) {
+        this.setState({
+          transactions: {
+            confirmed: [...confirmed, ...transactions.data.length],
+            pending: [],
+            count: transactions.meta.count,
+            loaded: true,
+          },
+        });
+      }
+    } catch (error) {
+      this.props.loadingFinished();
+    }
   }
 
   componentDidMount() {
