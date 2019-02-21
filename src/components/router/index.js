@@ -35,6 +35,16 @@ const headerStyle = {
   borderBottomColor: colors.dark.gray5,
 };
 
+/**
+ * Since react-navigation doesn't support i18n
+ * I've created this dummy function to help i18n scanner
+ * understand about these titles.
+ * We can remove this as soon as react-navigation supports i18n or
+ * we change the router to another lib with i18n support.
+ *
+ * @param {String} str
+ * @returns {String} same as the input string
+ */
 const t = str => str;
 
 // eslint-disable-next-line new-cap
