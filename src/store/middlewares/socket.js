@@ -16,8 +16,6 @@ export const checkBalance = (store) => {
   const activeToken = store.getState().settings.token.active;
   const { address, balance } = store.getState().accounts.info[activeToken];
   return accountAPI.getSummary(activeToken, address).then((res) => {
-    console.log('balance is :', balance);
-    console.log('res.balance is :', res.balance);
     if (res.balance !== balance) {
       store.dispatch(blockUpdated());
     }
