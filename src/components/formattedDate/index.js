@@ -3,31 +3,29 @@ import { Text } from 'react-native';
 import moment from 'moment';
 
 /**
- * Convert Lisk timestamp to Valid JS Date object
- *
- * @param {Date} value - Javascript Date object
- * @return {Date} - Native Js Date object
- */
-const fromLiskTimestamp = value =>
-  new Date((((Date.UTC(2016, 4, 24, 17, 0, 0, 0) / 1000) + value) * 1000));
-
-/**
- * Converts the given Lisk timestamp to moment prettified time
- * and wraps the value in Text component
+ * Converts the timestamp to moment prettified time and wraps the value in a component
  *
  * @param {Object} params
  * @param {Object} params.children - React native children passed to Component
  * @param {Object} params.style - The style rules passed from parent
+ * @param {Object} params.type - Type of the React Component
+ * @param {String} params.format - Date format
  *
  * @returns {Object} React native Text component
  */
 const FormattedDate = ({
-  children, style, type, format,
+  children,
+  style,
+  type,
+  format = 'MMM D, YYYY',
 }) => {
-  const dateFormat = format || 'MMM D, YYYY';
   const Element = type || Text;
-  const absoluteDate = fromLiskTimestamp(children);
-  return <Element style={style}>{ moment(absoluteDate).format(dateFormat) }</Element>;
+
+  return (
+    <Element style={style}>
+      {moment(children).format(format)}
+    </Element>
+  );
 };
 
 export default FormattedDate;
