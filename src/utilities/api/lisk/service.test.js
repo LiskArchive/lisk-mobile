@@ -1,15 +1,15 @@
 import fetchMock from 'fetch-mock';
-import liskService from './service';
+import { getPriceTicker } from './service';
 
 describe('api/lisk/service', () => {
   describe('getPriceTicker method', () => {
     beforeEach(() => fetchMock.reset());
 
     it('resolves correctly', async () => {
-      const response = { tickers: {} };
+      const response = { tickers: { LSK: { EUR: 1 } } };
       fetchMock.once('*', response);
-      const result = await liskService.getPriceTicker();
-      expect(result).toEqual(response);
+      const result = await getPriceTicker();
+      expect(result).toEqual(response.tickers.LSK);
     });
 
     it('handles non-500 errors', async () => {
@@ -17,7 +17,7 @@ describe('api/lisk/service', () => {
       fetchMock.once('*', { status: 400, body: response });
 
       try {
-        await liskService.getPriceTicker();
+        await getPriceTicker();
       } catch (error) {
         expect(error).toEqual(response);
       }
@@ -27,7 +27,7 @@ describe('api/lisk/service', () => {
       fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
 
       try {
-        await liskService.getPriceTicker();
+        await getPriceTicker();
       } catch (error) {
         expect(error).toBeTruthy();
       }

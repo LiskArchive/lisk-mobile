@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import liskService from '../utilities/api/lisk/service';
+import * as liskService from '../utilities/api/lisk/service';
 import { pricesRetrieved } from './liskService';
 import actionTypes from '../constants/actions';
 
@@ -17,14 +17,14 @@ describe('actions: liskService', () => {
     });
 
     it('should dispatch pricesRetrieved action with given data', async () => {
-      const tickers = { LSK: {} };
-      liskService.getPriceTicker.mockResolvedValue({ tickers });
+      const tickers = { EUR: 1, USD: 1 };
+      liskService.getPriceTicker.mockResolvedValue(tickers);
 
       await store.dispatch(pricesRetrieved());
 
       expect(store.getActions()).toEqual([{
         type: actionTypes.pricesRetrieved,
-        priceTicker: tickers.LSK,
+        priceTicker: tickers,
       }]);
     });
   });
