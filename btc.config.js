@@ -3,6 +3,7 @@ import bitcoin from 'bitcoinjs-lib';
 const isTestnet = process.env.network === 'testnet';
 
 export default {
+  isTestnet,
   url: isTestnet ? 'https://testnet.blockchain.info' : 'https://blockchain.info',
   minerFeesURL: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',
   network: isTestnet ? bitcoin.networks.testnet : bitcoin.networks.bitcoin,
