@@ -43,7 +43,7 @@ class PassphraseCopy extends React.Component {
           </View>
         </View>
         {
-          height > SCREEN_HEIGHTS &&
+          height > SCREEN_HEIGHTS.SM &&
           <View style={styles.imageContainer}>
             {
               theme === themes.light ?

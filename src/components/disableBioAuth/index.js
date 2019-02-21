@@ -20,13 +20,9 @@ import PassphraseCopy from '../passphraseCopy';
   settingsUpdated: settingsUpdatedAction,
 })
 class DisableBioAuth extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const title = navigation.getParam('title', 'Bio Auth');
-    // Todo translate here
-    return {
-      title: `Disable ${title}`,
-    };
-  }
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam('title', 'Bio Auth'),
+  })
 
   confirm = () => {
     removePassphraseFromKeyChain();
@@ -36,9 +32,9 @@ class DisableBioAuth extends React.Component {
 
   render() {
     const {
-      t, styles, navigation, account: { passphrase },
+      t, styles, navigation: { getParam }, account: { passphrase },
     } = this.props;
-    const title = navigation.getParam('title', 'Bio Auth');
+    const title = getParam('title');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -53,7 +49,7 @@ class DisableBioAuth extends React.Component {
           <View>
             <SecondaryButton
               onClick={this.confirm}
-              title={t(`Disable ${title}`)}
+              title={t('Disable bioAuth', { title })}
             />
           </View>
         </View>

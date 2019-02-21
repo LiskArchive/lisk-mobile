@@ -1,5 +1,4 @@
 {
-  "Don’t want to use {{sensorType}}?": "Don't want to use {{sensorType}}?",
   "Look at the front camera to authenticate.": "Look at the front camera to authenticate.",
   "Place your finger over the touch sensor to authenticate.": "Place your finger over the touch sensor to authenticate.",
   "Sign in manually": "Sign in manually",
@@ -169,5 +168,7 @@
   "Delegate registration": "Delegate registration",
   "Second passphrase registration": "Second passphrase registration",
   "Transfer": "Transfer",
-  "Vote": "Vote"
+  "Vote": "Vote",
+  "Don’t want to use bioAuth?": "Don't want to use {{sensorType}}?",
+  "Disable bioAuth": "Disable {{title}}"
 }
