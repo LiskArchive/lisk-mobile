@@ -26,10 +26,15 @@ const response = {
       },
     },
   },
+  getDynamicFees: {
+    hourFee: 20,
+    halfHourFee: 40,
+    fastestFee: 80,
+  },
 };
 
 describe('api/btc/service', () => {
-  describe('getPriceTicker method', () => {
+  describe('getPriceTicker', () => {
     beforeEach(() => fetchMock.reset());
 
     it('resolves correctly', async () => {
@@ -57,6 +62,41 @@ describe('api/btc/service', () => {
 
       try {
         await service.getPriceTicker();
+      } catch (error) {
+        expect(error).toBeTruthy();
+      }
+    });
+  });
+
+  describe('getDynamicFees', () => {
+    beforeEach(() => fetchMock.reset());
+
+    it('resolves correctly', async () => {
+      fetchMock.once('*', response.getDynamicFees);
+      const result = await service.getDynamicFees();
+      expect(result).toEqual({
+        low: 20,
+        medium: 40,
+        high: 80,
+      });
+    });
+
+    it('handles non-500 errors', async () => {
+      const errorResponse = { message: 'Error' };
+      fetchMock.once('*', { status: 400, body: errorResponse });
+
+      try {
+        await service.getDynamicFees();
+      } catch (error) {
+        expect(error).toEqual(errorResponse);
+      }
+    });
+
+    it('handles errors', async () => {
+      fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
+
+      try {
+        await service.getDynamicFees();
       } catch (error) {
         expect(error).toBeTruthy();
       }
