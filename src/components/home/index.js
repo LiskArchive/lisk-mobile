@@ -224,7 +224,7 @@ class Home extends React.Component {
                 transactions={transactions}
                 footer={this.state.footer}
                 navigate={navigation.navigate}
-                account={account}
+                account={account[activeToken]}
                 followedAccounts={followedAccounts}
                 refreshing={refreshing}
               />
