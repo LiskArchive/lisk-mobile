@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import { accountSignedOut as accountSignedOutAction } from '../../actions/accounts';
 import { H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
@@ -9,6 +10,7 @@ import SignOutButton from './signOutButton';
 import { colors, themes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import SwitchButton from './switchButton';
+import { languageMap } from '../../constants/languages';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
@@ -52,15 +54,15 @@ class Settings extends React.Component {
 
   render() {
     const {
-      styles, theme, navigation, settings,
+      styles, theme, navigation, settings, t,
     } = this.props;
 
     let target = 'EnableBioAuth';
 
-    let targetStateLabel = ['Disabled', colors[theme].gray2];
+    let targetStateLabel = [t('Disabled'), colors[theme].gray2];
     if (settings.sensorType && settings.hasStoredPassphrase) {
       targetStateLabel = [
-        'Enabled',
+        t('Enabled'),
         theme === themes.light ? colors.light.black : colors.dark.white,
       ];
       target = 'DisableBioAuth';
@@ -75,7 +77,7 @@ class Settings extends React.Component {
       <View style={[styles.container, styles.theme.container]}>
         <ScrollView style={styles.innerContainer}>
           <View style={styles.group}>
-            <H4 style={[styles.subHeader, styles.theme.subHeader]}>Security</H4>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Security')}</H4>
             {
               settings.sensorType ?
                 <View style={[styles.item, styles.theme.item]}>
@@ -101,8 +103,8 @@ class Settings extends React.Component {
                     theme={theme}
                     onSyncPress={this.toggleIncognito} />
                 }
-                title='Discreet mode'
-                description="Hide balance and transaction amounts."
+                title={t('Discreet mode')}
+                description={t('Hide balance and transaction amounts.')}
               />
             </View>
             {
@@ -116,19 +118,19 @@ class Settings extends React.Component {
                     hideDialog={this.hideDialog}
                     setError={this.setError}
                     icon='backup'
-                    title='Backup your passphrase' />
+                    title={t('Backup your passphrase')} />
                 </View> : null
             }
           </View>
 
           <View style={styles.group}>
-            <H4 style={[styles.subHeader, styles.theme.subHeader]}>General</H4>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('General')}</H4>
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
                 target='About'
                 icon='about'
-                title='About Lisk'/>
+                title={t('About Lisk')}/>
             </View>
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
@@ -140,14 +142,14 @@ class Settings extends React.Component {
                     theme={theme}
                     onSyncPress={this.switchTheme} />
                 }
-                title='Dark mode'/>
+                title={t('Dark mode')}/>
             </View>
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
                 icon='currency-selector'
                 iconSize={20}
-                title='Currency'
+                title={t('Currency')}
                 target='CurrencySelection'
                 targetStateLabel={
                   <P style={{ color: colors[theme].gray1 }}>
@@ -159,9 +161,23 @@ class Settings extends React.Component {
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
+                icon='language'
+                iconSize={20}
+                title={t('Language')}
+                target='LanguageSelection'
+                targetStateLabel={
+                  <P style={{ color: colors[theme].gray1 }}>
+                    {languageMap[settings.language].label}
+                  </P>
+                }
+              />
+            </View>
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
                 icon='terms'
                 target='Terms'
-                title='Terms of use'/>
+                title={t('Terms of use')}/>
             </View>
           </View>
 
@@ -185,4 +201,4 @@ class Settings extends React.Component {
   }
 }
 
-export default withTheme(Settings, getStyles());
+export default withTheme(translate()(Settings), getStyles());

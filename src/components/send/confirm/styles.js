@@ -32,18 +32,19 @@ export default () => ({
     },
     scanButton: {
       position: 'absolute',
-      right: 6,
+      right: 21,
       zIndex: 99,
       top: 46,
-      paddingRight: 15,
       paddingLeft: 10,
       paddingBottom: 10,
-      width: 80,
+      width: 67,
       height: 30,
+    },
+    longTitle: {
+      width: 87,
     },
     scanButtonTitle: {
       fontSize: 14,
-      width: 39,
       paddingLeft: 5,
       color: colors.light.blue,
     },

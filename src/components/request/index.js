@@ -3,6 +3,7 @@ import connect from 'redux-connect-decorator';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { translate } from 'react-i18next';
 import Share from '../share';
 import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from '../../utilities/device';
 import Input from '../toolBox/input';
@@ -49,7 +50,9 @@ class Request extends React.Component {
   }
 
   render() {
-    const { styles, theme, account } = this.props;
+    const {
+      styles, theme, account, t,
+    } = this.props;
     const { amount, url } = this.state;
     const { address } = (account || {});
 
@@ -63,7 +66,7 @@ class Request extends React.Component {
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
             {!isSmallScreen ? (
               <P style={[styles.subHeader, styles.theme.subHeader]}>
-                Request LSK tokens from other accounts.
+                {t('Request LSK tokens from other accounts.')}
               </P>
             ) : null}
             <View style={styles.main}>
@@ -86,7 +89,7 @@ class Request extends React.Component {
 
                   <View style={styles.shareTextContainer}>
                     <P style={[styles.shareText, styles.theme.shareText]}>
-                      Share
+                      {t('Share')}
                     </P>
 
                     <Icon
@@ -101,12 +104,12 @@ class Request extends React.Component {
             <View style={styles.fieldset}>
               <Input
                 innerStyles={{ input: styles.input }}
-                label='Amount in LSK (Optional)'
+                label={t('Amount in LSK (Optional)')}
                 autoCorrect={false}
                 onChange={this.changeHandler}
                 value={amount.value}
                 keyboardType='numeric'
-                error={amount.validity === 1 ? 'Invalid amount' : ''}
+                error={amount.validity === 1 ? t('Invalid amount') : ''}
               />
             </View>
           </View>
@@ -116,4 +119,4 @@ class Request extends React.Component {
   }
 }
 
-export default withTheme(Request, getStyles());
+export default withTheme(translate()(Request), getStyles());

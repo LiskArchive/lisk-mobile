@@ -3,6 +3,7 @@ import { AppState } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
+import { translate } from 'react-i18next';
 import CameraAccess from './cameraAccess';
 import CameraOverlay from './cameraOverlay';
 import CameraRoll from './cameraRoll';
@@ -95,7 +96,7 @@ class Scanner extends React.Component {
   render() {
     const {
       styles, containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
-      readFromCameraRoll, fullScreen,
+      readFromCameraRoll, fullScreen, t,
     } = this.props;
     const { camera, photo } = this.state;
     return (
@@ -112,8 +113,8 @@ class Scanner extends React.Component {
               type={RNCamera.Constants.Type.back}
               notAuthorizedView={<CameraAccess close={this.toggleCamera} fullScreen={fullScreen} />}
               pendingAuthorizationView={<CameraAccess close={this.toggleCamera} />}
-              permissionDialogTitle={'Permission to use camera'}
-              permissionDialogMessage={'Lisk needs to connect to your camera'} >
+              permissionDialogTitle={t('Permission to use camera')}
+              permissionDialogMessage={t('Lisk needs to connect to your camera')} >
               {
                 readFromCameraRoll ?
                   <CameraOverlay
@@ -140,4 +141,4 @@ class Scanner extends React.Component {
   }
 }
 
-export default withTheme(Scanner, getStyles(), true);
+export default withTheme(translate()(Scanner), getStyles(), true);

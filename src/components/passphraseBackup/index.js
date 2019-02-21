@@ -1,6 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
+import { translate } from 'react-i18next';
 import { P } from '../toolBox/typography';
 import PassphraseCopy from '../passphraseCopy';
 import withTheme from '../withTheme';
@@ -11,13 +12,13 @@ import getStyles from './styles';
 }), {})
 class PassphraseBackup extends React.Component {
   render() {
-    const { styles, account: { passphrase } } = this.props;
+    const { styles, t, account: { passphrase } } = this.props;
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={styles.container}>
           <P style={[styles.subHeader, styles.theme.subHeader]}>
-            Carefully write it down or copy to the clipboard.
+            {t('Carefully write it down or copy to the clipboard.')}
           </P>
           <PassphraseCopy passphrase={passphrase} />
         </View>
@@ -26,4 +27,4 @@ class PassphraseBackup extends React.Component {
   }
 }
 
-export default withTheme(PassphraseBackup, getStyles());
+export default withTheme(translate()(PassphraseBackup), getStyles());

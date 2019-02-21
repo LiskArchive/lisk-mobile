@@ -1,6 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Image, Platform } from 'react-native';
+import { translate } from 'react-i18next';
 import { validatePassphrase } from '../../../utilities/passphrase';
 import { extractPublicKey } from '../../../utilities/api/account';
 import Input from '../../toolBox/input';
@@ -32,10 +33,12 @@ class Confirm extends React.Component {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({
-      title: isSmallScreen ? 'Confirm' : 'Send',
+    const { prevStep, navigation: { setParams }, t } = this.props;
+
+    setParams({
+      title: isSmallScreen ? t('Confirm') : t('Send'),
       showButtonLeft: true,
-      action: () => this.props.prevStep(),
+      action: () => prevStep(),
     });
 
     if (isAndroid) {
@@ -45,14 +48,15 @@ class Confirm extends React.Component {
 
   validator = (passphrase) => {
     const validity = validatePassphrase(passphrase);
+    const { accounts: { active }, t } = this.props;
 
     if (
       validity.length === 0 &&
-      (extractPublicKey(passphrase) !== this.props.accounts.active.secondPublicKey)
+      (extractPublicKey(passphrase) !== active.secondPublicKey)
     ) {
       validity.push({
         code: 'dose_not_belong',
-        message: 'This is not your second passphrase.',
+        message: t('This is not your second passphrase.'),
       });
     }
 
@@ -108,7 +112,9 @@ class Confirm extends React.Component {
   }
 
   render() {
-    const { navigation, styles, theme } = this.props;
+    const {
+      navigation, styles, theme, t, lng,
+    } = this.props;
     const { secondPassphrase } = this.state;
 
     let errorMessage = '';
@@ -139,14 +145,14 @@ class Confirm extends React.Component {
           hasTabBar={true}
           styles={{ innerContainer: styles.innerContainer }}
           button={{
-            title: 'Continue',
+            title: t('Continue'),
             type: 'inBox',
           }}>
           <View>
             {!isSmallScreen ? (
               <View style={styles.titleContainer}>
                 <P style={[styles.subtitle, styles.theme.subtitle]}>
-                  Enter your second passphrase to continue to transaction overview page.
+                  {t('Enter your second passphrase to continue to transaction overview page.')}
                 </P>
                 <View style={styles.illustrationWrapper}>
                   {
@@ -160,7 +166,7 @@ class Confirm extends React.Component {
 
             <View>
               <Input
-                label='Second Passphrase'
+                label={t('Second Passphrase')}
                 reference={(ref) => { this.input = ref; }}
                 innerStyles={{ input: styles.input }}
                 value={secondPassphrase.value}
@@ -176,8 +182,8 @@ class Confirm extends React.Component {
                   <IconButton
                     onPress={this.onOpenCamera}
                     titleStyle={styles.scanButtonTitle}
-                    style={styles.scanButton}
-                    title='Scan'
+                    style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                    title={t('Scan')}
                     icon='scanner'
                     iconSize={18}
                     color={colors.light.blue} /> : null
@@ -190,4 +196,4 @@ class Confirm extends React.Component {
   }
 }
 
-export default withTheme(Confirm, getStyles());
+export default withTheme(translate()(Confirm), getStyles());

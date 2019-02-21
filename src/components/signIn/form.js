@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, View, Animated } from 'react-native';
+import { translate } from 'react-i18next';
 import styles from './styles';
 import Input from '../toolBox/input';
 import { validatePassphrase } from '../../utilities/passphrase';
@@ -12,18 +13,20 @@ import { colors } from '../../constants/styleGuide';
 
 const devDefaultPass = process.env.passphrase || '';
 
-const Extras = ({ error, onPress, opacity }) => (
+const Extras = ({
+  error, onPress, opacity, t,
+}) => (
   <View>
     {error ?
       <View style={styles.connectionErrorContainer}>
         <Icon size={16} name='error' style={styles.connectionErrorIcon} />
         <Small style={styles.connectionError}>
-          Could not connect to the blockchain, try later!
+          {t('Connection error, try later!')}
         </Small>
       </View> :
       <Animated.View style={[styles.linkWrapper, styles.row, { opacity }]}>
-        <P style={styles.question}>{"Don't have a Lisk ID? "}</P>
-        <A style={styles.link} onPress={onPress}>Create it now</A>
+        <P style={styles.question}>{t('Don’t have a Lisk ID?')}</P>
+        <A style={styles.link} onPress={onPress}>{t('Create it now')}</A>
       </Animated.View>
     }
   </View>
@@ -114,6 +117,9 @@ class Form extends React.Component {
 
   render() {
     const { passphrase, animation: { opacity } } = this.state;
+    const {
+      t, navigation, connectionError, lng,
+    } = this.props;
 
     let errorMessage = '';
 
@@ -135,7 +141,7 @@ class Form extends React.Component {
             cameraOverlay: styles.cameraOverlay,
           }}
           fullScreen={true}
-          navigation={this.props.navigation}
+          navigation={navigation}
           readFromCameraRoll={false}
           onQRCodeRead={this.onQRCodeRead}
         />
@@ -143,13 +149,13 @@ class Form extends React.Component {
           style={[styles.titleContainer, styles.paddingBottom, { opacity }]}
         >
           <P style={styles.title}>
-            The official Lisk mobile wallet.
+            { t('The official Lisk mobile wallet.') }
           </P>
         </Animated.View>
         <Animated.View style={[{ opacity }]}>
           <Input
             noTheme={true}
-            label='Passphrase'
+            label={t('Passphrase')}
             reference={(ref) => { this.passphraseInput = ref; }}
             innerStyles={{ input: styles.input }}
             value={passphrase.value}
@@ -166,8 +172,8 @@ class Form extends React.Component {
               <IconButton
                 onPress={this.toggleCamera}
                 titleStyle={styles.scanButtonTitle}
-                style={styles.scanButton}
-                title='Scan'
+                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                title={t('Scan')}
                 icon='scanner'
                 iconSize={18}
                 color={colors.light.blue} /> : null
@@ -175,11 +181,12 @@ class Form extends React.Component {
         </Animated.View>
         <KeyboardAwareScrollView
           noTheme={true}
-          button='Sign in'
+          button={t('Sign in')}
           onSubmit={this.onFormSubmission}
           extras={
             <Extras
-              error={this.props.connectionError}
+              t={t}
+              error={connectionError}
               onPress={this.goToRegistration}
               opacity={opacity}
             />
@@ -190,4 +197,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default translate()(Form);

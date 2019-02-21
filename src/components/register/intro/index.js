@@ -1,6 +1,7 @@
 import React from 'react';
 import Switch from 'react-native-switch-pro';
 import { View, ScrollView } from 'react-native';
+import { translate } from 'react-i18next';
 import styles from './styles';
 import { generatePassphrase } from '../../../utilities/passphrase';
 import { B, Small } from '../../toolBox/typography';
@@ -16,11 +17,12 @@ class Intro extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ passphrase: generatePassphrase() });
+    const { t, navigation: { setParams } } = this.props;
 
-    this.props.navigation.setParams({
+    this.setState({ passphrase: generatePassphrase() });
+    setParams({
       action: false,
-      title: 'Account creation',
+      title: t('Account creation'),
     });
   }
 
@@ -37,37 +39,36 @@ class Intro extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
           <View>
-            <B style={styles.subHeader}>Here’s what you will get:</B>
+            <B style={styles.subHeader}>{t('Here’s what you will get:')}</B>
             <View style={[styles.row, styles.separator]}>
               <Icon name='passphrase' style={styles.icon} color={colors.light.blue} size={36}/>
               <View style={styles.textWrapper}>
-                <B style={styles.rowTitle}>A secure passphrase</B>
+                <B style={styles.rowTitle}>{t('A secure passphrase')}</B>
                 <Small style={styles.description}>
-                  Your passphrase is used to access your account.
-                  No one can reset it, not even Lisk.
+                  {t('Your passphrase is used to access your account. No one can reset it, not even Lisk.')}
                 </Small>
               </View>
             </View>
             <View style={[styles.row, styles.separator]}>
               <Icon name='address' style={styles.icon} color={colors.light.gray1} size={36}/>
               <View style={styles.textWrapper}>
-                <B style={styles.rowTitle}>Your Lisk address</B>
+                <B style={styles.rowTitle}>{t('Your Lisk address')}</B>
                 <Small style={styles.description}>
-                  The address is unique and can’t be changed. It’s yours.
-                  Find it in your home page.
+                  {t('The address is unique and can’t be changed. It’s yours. Find it in your home page.')}
                 </Small>
               </View>
             </View>
             <View style={[styles.row, styles.separator]}>
               <Icon name='avatar' style={styles.icon} color={colors.light.yellow} size={36}/>
               <View style={styles.textWrapper}>
-                <B style={styles.rowTitle}>A unique avatar</B>
+                <B style={styles.rowTitle}>{t('A unique avatar')}</B>
                 <Small style={styles.description}>
-                  The Avatar represents the address, making it easy to recognize.
+                  {t('The Avatar represents the address, making it easy to recognize.')}
                 </Small>
               </View>
             </View>
@@ -84,8 +85,8 @@ class Intro extends React.Component {
               <Small style={styles.label}>
                 {
                   deviceHeight() >= SCREEN_HEIGHTS.SM ?
-                  'I understand that its my responsibility to keep my passphrase safe.' :
-                  'It is my responsibility to keep my passphrase safe.'
+                  t('I understand that its my responsibility to keep my passphrase safe.') :
+                  t('It is my responsibility to keep my passphrase safe.')
                 }
               </Small>
             </View>
@@ -95,7 +96,7 @@ class Intro extends React.Component {
                 noTheme={true}
                 style={styles.button}
                 onClick={this.forward}
-                title='Continue'
+                title={t('Continue')}
               />
             </View>
           </View>
@@ -103,4 +104,5 @@ class Intro extends React.Component {
       </ScrollView>);
   }
 }
-export default Intro;
+
+export default translate()(Intro);

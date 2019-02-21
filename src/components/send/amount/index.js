@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import transactions from '../../../constants/transactions';
 import { fromRawLsk } from '../../../utilities/conversions';
@@ -35,21 +36,22 @@ class Amount extends React.Component {
   };
 
   validator = (str) => {
+    const { accounts, t } = this.props;
+
     if (str === '' || parseFloat(str) === 0) {
       return {
         code: -1,
-        message: 'Please enter an amount.',
+        message: t('Please enter an amount.'),
       };
     }
 
-    const { accounts } = this.props;
     let message = '';
 
     if (!reg.amount.test(str)) {
-      message = 'The amount value is invalid.';
+      message = t('The amount value is invalid.');
     } else if (accounts.active.balance < transactions.send.fee ||
       parseFloat(str) > fromRawLsk(accounts.active.balance - transactions.send.fee)) {
-      message = 'Your balance is not sufficient.';
+      message = t('Your balance is not sufficient.');
     }
 
     return ({
@@ -59,7 +61,9 @@ class Amount extends React.Component {
   };
 
   componentDidMount() {
-    const { sharedData, accounts, navigation } = this.props;
+    const {
+      sharedData, accounts, navigation: { setParams }, t, move,
+    } = this.props;
     const status = accounts.followed
       .filter(item => item.address === (sharedData.address)).length > 0;
 
@@ -67,10 +71,10 @@ class Amount extends React.Component {
       this.onChange(sharedData.amount);
     }
 
-    navigation.setParams({
-      title: isSmallScreen ? 'Amount' : 'Send',
+    setParams({
+      title: isSmallScreen ? t('Amount') : t('Send'),
       showButtonLeft: true,
-      action: () => this.props.move({
+      action: () => move({
         to: status ? 0 : 1,
       }),
     });
@@ -109,7 +113,7 @@ class Amount extends React.Component {
 
   render() {
     const {
-      theme, styles,
+      theme, styles, t,
       settings: { currency, incognito },
       accounts, priceTicker,
     } = this.props;
@@ -129,7 +133,7 @@ class Amount extends React.Component {
           styles={{ innerContainer: styles.innerContainer }}
           hasTabBar={true}
           button={{
-            title: 'Continue',
+            title: t('Continue'),
             type: 'inBox',
           }}
         >
@@ -137,7 +141,7 @@ class Amount extends React.Component {
             {!isSmallScreen ? (
               <View style={styles.headerContainer}>
                 <P style={styles.theme.subHeader}>
-                  Enter the amount you want to send.
+                  {t('Enter the amount you want to send.')}
                 </P>
               </View>
             ) : null}
@@ -149,7 +153,7 @@ class Amount extends React.Component {
               ]}
             >
               <B style={[styles.balanceText, styles.theme.balanceText]}>
-                {'You have '}
+                {t('You have')}
               </B>
 
               {incognito ?
@@ -169,10 +173,10 @@ class Amount extends React.Component {
             <AmountInput
               reference={(el) => { this.input = el; }}
               autoFocus={!isAndroid}
-              label="Amount (LSK)"
+              label={t('Amount (LSK)')}
               value={value}
               onChange={this.onChange}
-              keyboardType="numeric"
+              keyboardType='numeric'
               currency={currency}
               valueInCurrency={valueInCurrency}
               error={validity.message}
@@ -184,4 +188,4 @@ class Amount extends React.Component {
   }
 }
 
-export default withTheme(Amount, getStyles());
+export default withTheme(translate()(Amount), getStyles());

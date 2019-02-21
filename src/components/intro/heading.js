@@ -1,6 +1,7 @@
 import React from 'react';
 import { Animated, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
+import { translate } from 'react-i18next';
 import Icon from '../toolBox/icon';
 import { H2, P } from '../toolBox/typography';
 import { LabelButton, SecondaryButton } from '../toolBox/button';
@@ -77,6 +78,7 @@ class Heading extends React.Component {
       bgOpacity, logoOpacity, index, frameOpacity,
       activityOpacity, transactionsOpacity, bioAuthOpacity,
     } = this.state;
+    const { t, skip } = this.props;
 
     return (<Animated.View style={[styles.headingContainer, { opacity: bgOpacity }]}>
       <Animated.View style={[styles.headingTopBar, { opacity: logoOpacity }]}>
@@ -88,7 +90,7 @@ class Heading extends React.Component {
           index !== 2 ?
           <LabelButton
             style={[styles.headingSkipButton, { color: colors.light.gray1 }]}
-            onClick={this.props.skip}>Skip</LabelButton> :
+            onClick={skip}>Skip</LabelButton> :
             <Icon name='back' size={30} color='transparent' style={styles.headingSkipButton}/>
         }
       </Animated.View>
@@ -105,7 +107,7 @@ class Heading extends React.Component {
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Activity history</H2>
               <P style={[styles.centralized, styles.descriptionP]}>
-                Get a full overview of your current{'\n'}balance, transaction history{'\n'}and much more.
+                {t("Get a full overview of your current{'\n'}balance, transaction history{'\n'}and much more.")}
               </P>
             </View>
           </View>
@@ -113,7 +115,7 @@ class Heading extends React.Component {
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Token transfer</H2>
               <P style={[styles.centralized, styles.descriptionP]}>
-                Transfer your LSK tokens easily to{'\n'}other accounts by simply scanning{'\n'}their QR code.
+                {t("Transfer your LSK tokens easily to{'\n'}other accounts by simply scanning{'\n'}their QR code.")}
               </P>
             </View>
           </View>
@@ -121,7 +123,7 @@ class Heading extends React.Component {
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Secure authentication</H2>
               <P style={[styles.centralized, styles.descriptionP]}>
-                Access all functions of the app{'\n'}quickly and securely via advanced{'\n'}biometric authentication.
+                {t("Access all functions of the app{'\n'}quickly and securely via advanced{'\n'}biometric authentication.")}
               </P>
             </View>
           </View>
@@ -146,11 +148,11 @@ class Heading extends React.Component {
       <Animated.View style={[styles.navigateButton, { opacity: bioAuthOpacity }]}>
         <SecondaryButton
           style={styles.startButton}
-          onClick={this.props.skip}
+          onClick={skip}
           title='Start' />
       </Animated.View>
     </Animated.View>);
   }
 }
 
-export default Heading;
+export default translate()(Heading);

@@ -82,6 +82,9 @@ export default () => ({
     visible: {
       opacity: 1,
     },
+    link: {
+      paddingLeft: 4,
+    },
   },
   [themes.light]: {
     container: {

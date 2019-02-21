@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import { translate } from 'react-i18next';
 import { removePassphraseFromKeyChain } from '../../../utilities/passphrase';
 import { IconButton } from '../../toolBox/button';
 import { colors } from '../../../constants/styleGuide';
@@ -27,33 +28,33 @@ class SignOutButton extends React.Component {
   }
 
   onClick = () => {
-    const { settings } = this.props;
+    const { settings, t } = this.props;
     let message;
 
     if (settings.hasStoredPassphrase) {
-      message = `You can sign back in using your passphrase and enable ${settings.sensorType} at any time.`;
+      message = t(`You can sign back in using your passphrase and enable ${settings.sensorType} at any time.`);
     }
 
-    Alert.alert('Are you sure?', message, [
+    Alert.alert(t('Are you sure?'), message, [
       {
-        text: 'Cancel',
+        text: t('Cancel'),
         style: 'cancel',
       },
       {
-        text: 'Confirm',
+        text: t('Confirm'),
         onPress: this.onConfirm,
       },
     ], { cancelable: false });
   }
 
   render() {
-    const { theme, styles } = this.props;
+    const { theme, styles, t } = this.props;
 
     return (
       <IconButton
         icon='logout'
         iconSize={18}
-        title='Sign out'
+        title={t('Sign out')}
         color={colors[theme].blue}
         onClick={this.onClick}
         titleStyle={[styles.title, styles.theme.title]}
@@ -63,4 +64,4 @@ class SignOutButton extends React.Component {
   }
 }
 
-export default withTheme(SignOutButton, getStyles());
+export default withTheme(translate()(SignOutButton), getStyles());

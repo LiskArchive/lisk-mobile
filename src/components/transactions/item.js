@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
+import { translate } from 'react-i18next';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import Avatar from '../avatar';
@@ -36,7 +37,7 @@ class Item extends React.Component {
 
   render() {
     const {
-      styles, theme, tx,
+      styles, theme, tx, t,
       account, followedAccounts, incognito,
     } = this.props;
 
@@ -77,11 +78,11 @@ class Item extends React.Component {
       <View style={styles.column}>
         <B style={[styles.address, styles.theme.address]}>
           {(tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
-            addressShortened : transactions[txTypes[tx.type]].title}
+            addressShortened : t(transactions[txTypes[tx.type]].title)}
         </B>
         {
           typeof this.props.tx.timestamp !== 'number' ?
-          <Small style={[styles.date, styles.theme.date]}>Pending confirmation</Small> :
+          <Small style={[styles.date, styles.theme.date]}>{t('Pending confirmation')}</Small> :
           <FormattedDate type={Small} style={[styles.date, styles.theme.date]}>
             { tx.timestamp }
           </FormattedDate>
@@ -116,4 +117,4 @@ class Item extends React.Component {
   }
 }
 
-export default withTheme(Item, getStyles());
+export default withTheme(translate()(Item), getStyles());

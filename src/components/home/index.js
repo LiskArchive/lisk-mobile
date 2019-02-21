@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Animated, StatusBar, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from 'react-navigation';
+import { translate } from 'react-i18next';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
 import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
 import AccountSummary from '../accountSummary';
@@ -32,6 +33,7 @@ const summaryHeight = 200;
   transactions: state.transactions,
   priceTicker: state.liskService.priceTicker,
   incognito: state.settings.incognito,
+  language: state.settings.language,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
@@ -65,9 +67,10 @@ class Home extends React.Component {
     });
 
   setHeader = () => {
-    this.props.navigation.setParams({
+    const { navigation: { setParams }, t } = this.props;
+    setParams({
       title: {
-        placeHolder: 'Your wallet',
+        placeHolder: t('Your wallet'),
         type: 'home',
         balance: this.props.account.balance,
         address: this.props.account.address,
@@ -100,7 +103,9 @@ class Home extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { transactions, account, incognito } = this.props;
+    const {
+      transactions, account, incognito,
+    } = this.props;
 
     const prevTransactionCount = (
       prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
@@ -119,6 +124,10 @@ class Home extends React.Component {
       this.setState({
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount,
       });
+    }
+
+    if (prevProps.language !== this.props.language) {
+      this.setHeader();
     }
 
     if (
@@ -236,4 +245,4 @@ class Home extends React.Component {
   }
 }
 
-export default withNavigationFocus(withTheme(Home, getStyles()));
+export default withNavigationFocus(withTheme(translate()(Home), getStyles()));

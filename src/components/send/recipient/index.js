@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
+import { translate } from 'react-i18next';
 import { IconButton } from '../../toolBox/button';
 import { P } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
@@ -39,15 +40,15 @@ class Recipient extends React.Component {
   }
 
   componentDidMount() {
-    const { sharedData, navigation } = this.props;
+    const { sharedData, navigation: { setParams }, t } = this.props;
 
     if (sharedData.address) {
       this.setAddress(sharedData.address);
       setTimeout(() => this.input.focus(), 250);
     }
 
-    navigation.setParams({
-      title: isSmallScreen ? 'Recipient' : 'Send',
+    setParams({
+      title: isSmallScreen ? t('Recipient') : t('Send'),
       showButtonLeft: false,
       action: false,
     });
@@ -148,22 +149,22 @@ class Recipient extends React.Component {
 
   render() {
     const {
-      navigation, theme, styles, accounts,
+      navigation, theme, styles, accounts, t, lng,
     } = this.props;
     const {
       address, avatarPreview,
     } = this.state;
 
     const titles = {
-      heading: accounts.followed.length ? 'Enter an address or search in bookmarks.' : 'Enter an address to send tokens to.',
-      inputLabel: accounts.followed.length ? 'Address or label' : 'Address',
+      heading: accounts.followed.length ? t('Enter an address or search in bookmarks.') : t('Enter an address to send tokens to.'),
+      inputLabel: accounts.followed.length ? t('Address or label') : t('Address'),
     };
 
     let errorMessage = '';
     if (address.validity === 1) {
-      errorMessage = 'Invalid address.';
+      errorMessage = t('Invalid address.');
     } else if (address.validity === -1) {
-      errorMessage = 'Please enter an address.';
+      errorMessage = t('Please enter an address.');
     }
 
     return (
@@ -180,7 +181,7 @@ class Recipient extends React.Component {
           hasTabBar={true}
           onStickyButton={true}
           button={{
-            title: 'Continue',
+            title: t('Continue'),
             type: 'inBox',
           }}
           styles={{ container: styles.container, innerContainer: styles.innerContainer }}
@@ -195,8 +196,8 @@ class Recipient extends React.Component {
               <IconButton
                 onPress={() => this.scanner.toggleCamera()}
                 titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                style={styles.scanButton}
-                title='Scan'
+                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                title={t('Scan')}
                 icon='scanner'
                 iconSize={18}
                 color={colors.light.blue}
@@ -241,4 +242,4 @@ class Recipient extends React.Component {
   }
 }
 
-export default withTheme(Recipient, getStyles());
+export default withTheme(translate()(Recipient), getStyles());

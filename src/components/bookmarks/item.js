@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Alert, TouchableOpacity, Animated } from 'react-native';
 import Interactable from 'react-native-interactable';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import {
   accountUnFollowed as accountUnFollowedAction,
 } from '../../actions/accounts';
@@ -19,16 +20,16 @@ class draggableItem extends React.Component {
   _deltaX = new Animated.Value(0);
 
   onDelete = () => {
-    const { data, accountUnFollowed } = this.props;
+    const { data, accountUnFollowed, t } = this.props;
 
-    Alert.alert('Are you sure?', '', [
+    Alert.alert(t('Are you sure?'), '', [
       {
-        text: 'Cancel',
+        text: t('Cancel'),
         style: 'cancel',
         onPress: () => this.ref.changePosition({ x: 0, y: 0 }),
       },
       {
-        text: 'Confirm',
+        text: t('Confirm'),
         onPress: () => accountUnFollowed(data.address),
       },
     ], { cancelable: false });
@@ -36,7 +37,7 @@ class draggableItem extends React.Component {
 
   render() {
     const {
-      styles, data, theme, navigate, setRef,
+      styles, data, theme, navigate, setRef, t,
     } = this.props;
 
     return (<TouchableOpacity
@@ -48,8 +49,8 @@ class draggableItem extends React.Component {
             [styles.editButton, styles.theme.editButton, {
               transform: [{
                 translateX: this._deltaX.interpolate({
-                  inputRange: [-155, 0],
-                  outputRange: [0, 155],
+                  inputRange: [-240, 0],
+                  outputRange: [0, 240],
                 }),
               }],
             },
@@ -61,7 +62,7 @@ class draggableItem extends React.Component {
                   routeName: 'AddBookmark',
                   params: {
                     account: data,
-                    title: 'Edit bookmark',
+                    title: t('Edit bookmark'),
                   },
                 });
               }}
@@ -72,7 +73,7 @@ class draggableItem extends React.Component {
                 style={[styles.iconButton, styles.theme.editContent]}
                 color={colors[theme].sendBalanceBg}
               />
-              <P style={[styles.buttonContent, styles.theme.editContent]}>Edit</P>
+              <P style={[styles.buttonContent, styles.theme.editContent]}>{t('Edit')}</P>
             </TouchableOpacity>
           </Animated.View>
 
@@ -80,8 +81,8 @@ class draggableItem extends React.Component {
             [styles.deleteButton, styles.theme.deleteButton, {
               transform: [{
                 translateX: this._deltaX.interpolate({
-                  inputRange: [-155, 0],
-                  outputRange: [0, 78],
+                  inputRange: [-240, 0],
+                  outputRange: [0, 130],
                 }),
               }],
             },
@@ -98,7 +99,7 @@ class draggableItem extends React.Component {
                 style={styles.iconButton}
                 color={colors.light.white}
               />
-              <P style={styles.buttonContent}>Delete</P>
+              <P style={styles.buttonContent}>{t('Delete')}</P>
             </TouchableOpacity>
           </Animated.View>
         </View>
@@ -109,7 +110,7 @@ class draggableItem extends React.Component {
           boundaries={{ right: 0 }}
           snapPoints={[
             { x: 0, damping: -0.7, tension: 300 },
-            { x: -155, damping: -0.7, tension: 300 },
+            { x: -240, damping: -0.7, tension: 300 },
           ]}
           onDrag={() => setRef(this.ref, data.address)}
           animatedValueX={this._deltaX}>
@@ -175,8 +176,8 @@ class Item extends React.Component {
   }
 }
 
-const themedDraggableItem = withTheme(draggableItem, getStyles());
-const themedItem = withTheme(Item, getStyles());
+const themedDraggableItem = withTheme(translate()(draggableItem), getStyles());
+const themedItem = withTheme(translate()(Item), getStyles());
 
 export {
   themedDraggableItem as DraggableItem,

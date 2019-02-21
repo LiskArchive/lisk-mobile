@@ -35,6 +35,18 @@ const headerStyle = {
   borderBottomColor: colors.dark.gray5,
 };
 
+/**
+ * Since react-navigation doesn't support i18n
+ * I've created this dummy function to help i18n scanner
+ * understand about these titles.
+ * We can remove this as soon as react-navigation supports i18n or
+ * we change the router to another lib with i18n support.
+ *
+ * @param {String} str
+ * @returns {String} same as the input string
+ */
+const t = str => str;
+
 // eslint-disable-next-line new-cap
 const Tabs = TabNavigator({
   Home: {
@@ -57,7 +69,7 @@ const Tabs = TabNavigator({
   Request: {
     screen: Request,
     navigationOptions: () => ({
-      title: 'Request',
+      title: t('Request'),
       headerTitle: HeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
@@ -79,7 +91,7 @@ const Tabs = TabNavigator({
   Bookmarks: {
     screen: Bookmark,
     navigationOptions: () => ({
-      title: 'Bookmarks',
+      title: t('Bookmarks'),
       tabBarLabel: 'Bookmarks',
       headerTitle: HeaderTitle,
       headerBackground: <HeaderBackground />,
@@ -90,7 +102,7 @@ const Tabs = TabNavigator({
   Settings: {
     screen: Settings,
     navigationOptions: {
-      title: 'Settings',
+      title: t('Settings'),
       headerTitle: HeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
@@ -135,7 +147,7 @@ const MainStack = StackNavigator(
     TxDetail: {
       screen: TxDetail,
       navigationOptions: {
-        title: 'Transaction Details',
+        title: t('Transaction Details'),
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerBackground: <HeaderBackground />,
@@ -159,7 +171,7 @@ const MainStack = StackNavigator(
     About: {
       screen: About,
       navigationOptions: {
-        title: 'About Lisk',
+        title: t('About Lisk'),
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
@@ -170,7 +182,7 @@ const MainStack = StackNavigator(
     Terms: {
       screen: Terms,
       navigationOptions: {
-        title: 'Terms of use',
+        title: t('Terms of use'),
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
@@ -181,7 +193,7 @@ const MainStack = StackNavigator(
     CurrencySelection: {
       screen: CurrencySelection,
       navigationOptions: {
-        title: 'Select your currency',
+        title: t('Select your currency'),
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
@@ -192,7 +204,7 @@ const MainStack = StackNavigator(
     LanguageSelection: {
       screen: LanguageSelection,
       navigationOptions: {
-        title: 'Select your language',
+        title: t('Select your language'),
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
@@ -223,7 +235,7 @@ const MainStack = StackNavigator(
     PassphraseBackup: {
       screen: PassphraseBackup,
       navigationOptions: {
-        title: 'Passphrase backup',
+        title: t('Passphrase backup'),
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,

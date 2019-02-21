@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Alert, Image, Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import {
   accountFollowed as accountFollowedAction,
   accountUnFollowed as accountUnFollowedAction,
@@ -76,17 +77,17 @@ class AccountSummary extends React.Component {
 
   toggleBookmark = () => {
     const {
-      followedAccounts, account, navigation, accountUnFollowed,
+      followedAccounts, account, navigation, accountUnFollowed, t,
     } = this.props;
     const isFollowed = followedAccounts.some(item => item.address === account.address);
     if (isFollowed) {
-      Alert.alert('Are you sure?', '', [
+      Alert.alert(t('Are you sure?'), '', [
         {
-          text: 'Cancel',
+          text: t('Cancel'),
           style: 'cancel',
         },
         {
-          text: 'Confirm',
+          text: t('Confirm'),
           onPress: () => accountUnFollowed(account.address),
         },
       ], { cancelable: false });
@@ -95,7 +96,7 @@ class AccountSummary extends React.Component {
         routeName: 'AddBookmark',
         params: {
           account,
-          title: 'Add bookmark',
+          title: t('Add bookmark'),
         },
       });
     }
@@ -109,7 +110,7 @@ class AccountSummary extends React.Component {
   render() {
     const {
       styles, account, followedAccounts, settings,
-      priceTicker, type, theme, navigation,
+      priceTicker, type, theme, navigation, t,
     } = this.props;
 
     const incognito = type === 'home' && settings.incognito;
@@ -193,7 +194,7 @@ class AccountSummary extends React.Component {
             <IconButton
               titleStyle={[styles.sendButtonTitle, styles.theme.sendButtonTitle]}
               style={styles.sendButton}
-              title='Send to this address'
+              title={t('Send to this address')}
               icon='send'
               color={colors[theme].gray1}
               iconSize={20}
@@ -206,4 +207,4 @@ class AccountSummary extends React.Component {
   }
 }
 
-export default withTheme(AccountSummary, getStyles());
+export default withTheme(translate()(AccountSummary), getStyles());

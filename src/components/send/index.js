@@ -1,6 +1,7 @@
 import React from 'react';
 import { BackHandler } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import MultiStep from '../multiStep';
 import Recipient from './recipient';
 import AddToBookmark from './addToBookmark';
@@ -43,6 +44,13 @@ class Send extends React.Component {
     };
   };
 
+  setHeader = () => {
+    const { navigation: { setParams }, t, params } = this.props;
+    setParams({
+      title: params && params.title ? params.title : t('Send'),
+    });
+  }
+
   componentDidMount() {
     const { navigation } = this.props;
 
@@ -58,6 +66,10 @@ class Send extends React.Component {
 
   componentDidUpdate(prevProps) {
     this.checkQuery(prevProps.navigation.getParam('query', {}));
+
+    if (prevProps.settings.language !== this.props.settings.language) {
+      this.setHeader();
+    }
   }
 
   componentWillUnmount() {
@@ -81,6 +93,7 @@ class Send extends React.Component {
       theme,
       navigation,
       accounts,
+      t,
     } = this.props;
     navigation.setParams({ styles, theme });
     BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
@@ -92,7 +105,7 @@ class Send extends React.Component {
         data: {
           address: accounts.active.address,
           amount: 0.1,
-          reference: 'Account initialization',
+          reference: t('Account initialization'),
         },
       });
     } else {
@@ -197,4 +210,4 @@ class Send extends React.Component {
   }
 }
 
-export default withTheme(Send, getStyles());
+export default withTheme(translate()(Send), getStyles());
