@@ -1,6 +1,7 @@
 import bitcoin from 'bitcoinjs-lib';
 import config from '../../../../btc.config';
 import { extractAddress, getDerivedPathFromSeed } from './account';
+import { getDynamicFees } from './service';
 import { merge } from '../../helpers';
 
 /**
@@ -101,35 +102,6 @@ export const get = ({
 });
 
 /**
- * @typedef {Object} MinerFees
- * @property {Number} low
- * @property {Number} medium
- * @property {Number} high
- */
-/**
- * Retrieves miner fees from API in satoshi/byte format.
- * @returns {Promise<MinerFees>}
- */
-export const getMinerFees = () => new Promise(async (resolve, reject) => {
-  try {
-    const response = await fetch(config.minerFeesURL);
-    const json = await response.json();
-
-    if (response.ok) {
-      resolve({
-        low: json.hourFee,
-        medium: json.halfHourFee,
-        high: json.fastestFee,
-      });
-    } else {
-      reject(json);
-    }
-  } catch (error) {
-    reject(error);
-  }
-});
-
-/**
  * Normalizes transaction data retrieved from Blockchain.info API
  * @param {Object} data
  * @param {Number} data.inputCount
@@ -170,7 +142,7 @@ export const create = ({
   try {
     const senderAddress = extractAddress(passphrase);
     const unspentTxOuts = await exports.getUnspentOuts(senderAddress);
-    const minerFees = await exports.getMinerFees();
+    const minerFees = await getDynamicFees();
     const minerFeePerByte = minerFees.medium;
 
     // Estimate total cost (currently estimates max cost by assuming the worst case)
