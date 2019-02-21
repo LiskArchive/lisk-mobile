@@ -2,13 +2,24 @@ import Lisk from '@liskhq/lisk-client';
 import LiskAPIClient from './apiClient';
 import { removeUndefinedKeys } from '../../helpers';
 
+/**
+ * Converts Lisk timestamp to absolute timestamp
+ * @param {Number} value Timestamp from API response
+ * @returns {Number}
+ */
+const normalizeTimestamp = value => ((Date.UTC(2016, 4, 24, 17, 0, 0, 0) / 1000) + value) * 1000;
+
+/**
+ * Normalizes transaction data retrieved from Lisk Core API
+ * https://lisk.io/documentation/lisk-core/user-guide/api#/Transactions/getTransactions
+ */
 const normalizeTransactionsResponse = list => list.map(tx => ({
   id: tx.id,
   senderAddress: tx.senderId,
   recipientAddress: tx.recipientId,
   amount: tx.amount,
   fee: tx.fee,
-  timestamp: tx.timestamp,
+  timestamp: normalizeTimestamp(tx.timestamp),
   confirmations: tx.confirmations,
   type: tx.type,
   data: tx.asset.data || '',
