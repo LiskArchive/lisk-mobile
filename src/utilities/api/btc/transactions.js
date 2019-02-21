@@ -14,7 +14,7 @@ const normalizeTransactionsResponse = ({
 }) => list.map((tx) => {
   const data = {
     id: tx.hash,
-    timestamp: Number(tx.time),
+    timestamp: Number(tx.time) * 1000,
     confirmations: blockHeight > 0 ? (blockHeight - tx.block_height) + 1 : tx.block_height,
     type: 0,
     data: '',
