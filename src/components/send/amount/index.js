@@ -36,7 +36,7 @@ class Amount extends React.Component {
   };
 
   validator = (str) => {
-    const { accounts, t } = this.props;
+    const { t, accounts, settings: { token } } = this.props;
 
     if (str === '' || parseFloat(str) === 0) {
       return {
@@ -49,8 +49,8 @@ class Amount extends React.Component {
 
     if (!reg.amount.test(str)) {
       message = t('The amount value is invalid.');
-    } else if (accounts.active.balance < transactions.send.fee ||
-      parseFloat(str) > fromRawLsk(accounts.active.balance - transactions.send.fee)) {
+    } else if (accounts.info[token.active].balance < transactions.send.fee ||
+      parseFloat(str) > fromRawLsk(accounts.info[token.active].balance - transactions.send.fee)) {
       message = t('Your balance is not sufficient.');
     }
 
@@ -125,7 +125,7 @@ class Amount extends React.Component {
   render() {
     const {
       theme, styles, t,
-      settings: { currency, incognito },
+      settings: { currency, incognito, token },
       accounts, priceTicker,
     } = this.props;
     const { amount: { value, normalizedValue, validity } } = this.state;
@@ -176,7 +176,7 @@ class Amount extends React.Component {
                   type={B}
                   style={[styles.balanceNumber, styles.theme.balanceNumber]}
                 >
-                  {fromRawLsk(accounts.active.balance || 0)}
+                  {fromRawLsk(accounts.info[token.active].balance || 0)}
                 </FormattedNumber>
               }
             </View>
