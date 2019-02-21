@@ -73,7 +73,7 @@ class TransactionDetail extends React.Component {
     const { t, activePeer } = this.props;
 
     try {
-      const { data } = await getTransactions(this.props.activePeer, { id });
+      const { data } = await getTransactions(activePeer, { id });
       const tx = data[0] || {};
 
       // don't have any transaction passed from the navigation

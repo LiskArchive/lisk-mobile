@@ -78,7 +78,7 @@ class Item extends React.Component {
       <View style={styles.column}>
         <B style={[styles.address, styles.theme.address]}>
           {(tx.type === 0 && (tx.recipientId !== tx.senderId)) ?
-            addressShortened : transactions[txTypes[tx.type]].title}
+            addressShortened : t(transactions[txTypes[tx.type]].title)}
         </B>
         {
           typeof this.props.tx.timestamp !== 'number' ?

@@ -165,5 +165,9 @@
   "Create it now": "Create it now",
   "Don’t have a Lisk ID?": "Don’t have a Lisk ID?",
   "This field is required.": "This field is required.",
-  "Add bookmark": "Add bookmark"
+  "Add bookmark": "Add bookmark",
+  "Delegate registration": "Delegate registration",
+  "Second passphrase registration": "Second passphrase registration",
+  "Transfer": "Transfer",
+  "Vote": "Vote"
 }

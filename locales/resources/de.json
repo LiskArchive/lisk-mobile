@@ -165,5 +165,9 @@
   "Create it now": "Jetzt erstellen",
   "Don’t have a Lisk ID?": "Noch keine Lisk ID?",
   "This field is required.": "Dieses Feld wird benötigt.",
-  "Add bookmark": "Zu Lesezeichen hinzufügen"
+  "Add bookmark": "Zu Lesezeichen hinzufügen",
+  "Delegate registration": "Delegiertenregistrierung",
+  "Second passphrase registration": "Registrierung einer zweiten Passphrase",
+  "Transfer": "Senden",
+  "Vote": "Abstimmen"
 }
