@@ -36,13 +36,22 @@ class Reference extends React.Component {
     }
 
     setParams({
-      title: isSmallScreen ? t('Add a reference') : t('Send'),
+      title: t('Add a reference'),
       showButtonLeft: true,
       action: () => prevStep(),
     });
 
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.lng !== this.props.lng) {
+      const { navigation: { setParams }, t } = this.props;
+      setParams({
+        title: t('Add a reference'),
+      });
     }
   }
 

@@ -48,10 +48,19 @@ class Recipient extends React.Component {
     }
 
     setParams({
-      title: isSmallScreen ? t('Recipient') : t('Send'),
+      title: t('Recipient'),
       showButtonLeft: false,
       action: false,
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.lng !== this.props.lng) {
+      const { navigation: { setParams }, t } = this.props;
+      setParams({
+        title: t('Recipient'),
+      });
+    }
   }
 
   setAvatarPreviewTimeout = () => {

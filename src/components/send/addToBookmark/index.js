@@ -35,13 +35,24 @@ class AddToBookmark extends React.Component {
   componentDidMount() {
     const { prevStep, navigation: { setParams }, t } = this.props;
     setParams({
-      title: isSmallScreen ? t('Add to bookmarks') : t('Send'),
+      title: t('Add to bookmarks'),
       showButtonLeft: true,
       action: () => prevStep(),
     });
 
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.lng !== this.props.lng) {
+      const {
+        navigation: { setParams }, t,
+      } = this.props;
+      setParams({
+        title: t('Add to bookmarks'),
+      });
     }
   }
 

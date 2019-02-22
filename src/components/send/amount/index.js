@@ -72,7 +72,7 @@ class Amount extends React.Component {
     }
 
     setParams({
-      title: isSmallScreen ? t('Amount') : t('Send'),
+      title: t('Amount'),
       showButtonLeft: true,
       action: () => move({
         to: status ? 0 : 1,
@@ -81,6 +81,17 @@ class Amount extends React.Component {
 
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.lng !== this.props.lng) {
+      const {
+        navigation: { setParams }, t,
+      } = this.props;
+      setParams({
+        title: t('Amount'),
+      });
     }
   }
 
