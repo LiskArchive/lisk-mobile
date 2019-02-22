@@ -62,7 +62,7 @@ class Amount extends React.Component {
 
   componentDidMount() {
     const {
-      sharedData, accounts, navigation: { setParams }, t, move,
+      sharedData, accounts, navigation: { setParams }, move,
     } = this.props;
     const status = accounts.followed
       .filter(item => item.address === (sharedData.address)).length > 0;
@@ -72,7 +72,7 @@ class Amount extends React.Component {
     }
 
     setParams({
-      title: t('Amount'),
+      title: isSmallScreen ? 'Send' : 'Amount',
       showButtonLeft: true,
       action: () => move({
         to: status ? 0 : 1,
@@ -87,10 +87,10 @@ class Amount extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
       const {
-        navigation: { setParams }, t,
+        navigation: { setParams },
       } = this.props;
       setParams({
-        title: t('Amount'),
+        title: isSmallScreen ? 'Send' : 'Amount',
       });
     }
   }

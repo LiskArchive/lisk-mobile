@@ -33,10 +33,10 @@ class Confirm extends React.Component {
   };
 
   componentDidMount() {
-    const { prevStep, navigation: { setParams }, t } = this.props;
+    const { prevStep, navigation: { setParams } } = this.props;
 
     setParams({
-      title: t('Confirm'),
+      title: isSmallScreen ? 'Send' : 'Confirm',
       showButtonLeft: true,
       action: () => prevStep(),
     });
@@ -48,9 +48,9 @@ class Confirm extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
-      const { navigation: { setParams }, t } = this.props;
+      const { navigation: { setParams } } = this.props;
       setParams({
-        title: t('Confirm'),
+        title: isSmallScreen ? 'Send' : 'Confirm',
       });
     }
   }

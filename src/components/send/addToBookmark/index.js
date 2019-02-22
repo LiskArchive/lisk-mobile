@@ -33,9 +33,9 @@ class AddToBookmark extends React.Component {
   validator = str => (str.length > 20 ? 1 : 0)
 
   componentDidMount() {
-    const { prevStep, navigation: { setParams }, t } = this.props;
+    const { prevStep, navigation: { setParams } } = this.props;
     setParams({
-      title: t('Add to bookmarks'),
+      title: isSmallScreen ? 'Send' : 'Add to bookmarks',
       showButtonLeft: true,
       action: () => prevStep(),
     });
@@ -48,10 +48,10 @@ class AddToBookmark extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
       const {
-        navigation: { setParams }, t,
+        navigation: { setParams },
       } = this.props;
       setParams({
-        title: t('Add to bookmarks'),
+        title: isSmallScreen ? 'Send' : 'Add to bookmarks',
       });
     }
   }

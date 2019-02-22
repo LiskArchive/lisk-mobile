@@ -40,7 +40,7 @@ class Recipient extends React.Component {
   }
 
   componentDidMount() {
-    const { sharedData, navigation: { setParams }, t } = this.props;
+    const { sharedData, navigation: { setParams } } = this.props;
 
     if (sharedData.address) {
       this.setAddress(sharedData.address);
@@ -48,7 +48,7 @@ class Recipient extends React.Component {
     }
 
     setParams({
-      title: t('Recipient'),
+      title: isSmallScreen ? 'Send' : 'Recipient',
       showButtonLeft: false,
       action: false,
     });
@@ -56,9 +56,9 @@ class Recipient extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
-      const { navigation: { setParams }, t } = this.props;
+      const { navigation: { setParams } } = this.props;
       setParams({
-        title: t('Recipient'),
+        title: isSmallScreen ? 'Send' : 'Recipient',
       });
     }
   }

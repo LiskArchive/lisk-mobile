@@ -28,7 +28,7 @@ class Reference extends React.Component {
 
   componentDidMount() {
     const {
-      navigation: { setParams }, prevStep, sharedData, t,
+      navigation: { setParams }, prevStep, sharedData,
     } = this.props;
 
     if (sharedData.reference) {
@@ -36,7 +36,7 @@ class Reference extends React.Component {
     }
 
     setParams({
-      title: t('Add a reference'),
+      title: isSmallScreen ? 'Send' : 'Add a reference',
       showButtonLeft: true,
       action: () => prevStep(),
     });
@@ -48,9 +48,9 @@ class Reference extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
-      const { navigation: { setParams }, t } = this.props;
+      const { navigation: { setParams } } = this.props;
       setParams({
-        title: t('Add a reference'),
+        title: isSmallScreen ? 'Send' : 'Add a reference',
       });
     }
   }
