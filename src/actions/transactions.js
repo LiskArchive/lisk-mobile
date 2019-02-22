@@ -19,7 +19,7 @@ export const transactionsLoaded = data => (dispatch) => {
 };
 
 export const transactionAdded = (data, success, error) => (dispatch, getState) => {
-  const account = getState().accounts.active;
+  const account = getState().accounts.info;
   dispatch(loadingStarted(actionTypes.transactionAdded));
   send(data)
     .then(({ id }) => {
