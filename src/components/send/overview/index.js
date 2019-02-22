@@ -106,6 +106,16 @@ class Overview extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.lng !== this.props.lng) {
+      const translatedMessages = messages(this.props.t);
+      const { navigation: { setParams, state: { params } } } = this.props;
+      setParams({
+        title: params.initialize ? translatedMessages.initialize : translatedMessages.send,
+      });
+    }
+  }
+
   componentWillUnmount() {
     const { t, navigation: { setParams } } = this.props;
     setParams({ title: t('Send') });

@@ -44,13 +44,6 @@ class Send extends React.Component {
     };
   };
 
-  setHeader = () => {
-    const { navigation: { setParams }, t, params } = this.props;
-    setParams({
-      title: params && params.title ? params.title : t('Send'),
-    });
-  }
-
   componentDidMount() {
     const { navigation } = this.props;
 
@@ -66,10 +59,6 @@ class Send extends React.Component {
 
   componentDidUpdate(prevProps) {
     this.checkQuery(prevProps.navigation.getParam('query', {}));
-
-    if (prevProps.settings.language !== this.props.settings.language) {
-      this.setHeader();
-    }
   }
 
   componentWillUnmount() {

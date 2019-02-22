@@ -40,7 +40,7 @@ class Recipient extends React.Component {
   }
 
   componentDidMount() {
-    const { sharedData, navigation: { setParams }, t } = this.props;
+    const { sharedData, navigation: { setParams } } = this.props;
 
     if (sharedData.address) {
       this.setAddress(sharedData.address);
@@ -48,10 +48,19 @@ class Recipient extends React.Component {
     }
 
     setParams({
-      title: isSmallScreen ? t('Recipient') : t('Send'),
+      title: isSmallScreen ? 'Send' : 'Recipient',
       showButtonLeft: false,
       action: false,
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.lng !== this.props.lng) {
+      const { navigation: { setParams } } = this.props;
+      setParams({
+        title: isSmallScreen ? 'Send' : 'Recipient',
+      });
+    }
   }
 
   setAvatarPreviewTimeout = () => {

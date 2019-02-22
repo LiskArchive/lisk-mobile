@@ -28,9 +28,9 @@ class Result extends React.Component {
   };
 
   componentDidMount() {
-    const { t, reset, navigation: { setParams } } = this.props;
+    const { reset, navigation: { setParams } } = this.props;
     setParams({
-      title: t('Sent'),
+      title: 'Sent',
       showButtonLeft: false,
       action: reset,
     });
@@ -39,10 +39,10 @@ class Result extends React.Component {
   }
 
   componentWillUnmount() {
-    const { t, navigation: { setParams } } = this.props;
+    const { navigation: { setParams } } = this.props;
     clearTimeout(this.timeouts.created);
     clearTimeout(this.timeouts.confirmed);
-    setParams({ title: t('Send') });
+    setParams({ title: 'Send' });
   }
 
   componentWillUpdate(nextProp) {

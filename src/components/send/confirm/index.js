@@ -33,16 +33,25 @@ class Confirm extends React.Component {
   };
 
   componentDidMount() {
-    const { prevStep, navigation: { setParams }, t } = this.props;
+    const { prevStep, navigation: { setParams } } = this.props;
 
     setParams({
-      title: isSmallScreen ? t('Confirm') : t('Send'),
+      title: isSmallScreen ? 'Send' : 'Confirm',
       showButtonLeft: true,
       action: () => prevStep(),
     });
 
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.lng !== this.props.lng) {
+      const { navigation: { setParams } } = this.props;
+      setParams({
+        title: isSmallScreen ? 'Send' : 'Confirm',
+      });
     }
   }
 

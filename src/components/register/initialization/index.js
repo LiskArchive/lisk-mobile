@@ -27,9 +27,6 @@ class Initialization extends React.Component {
             <P style={styles.subTitle}>
               {t('Initialize your account immediately after you received tokens for the first time.')}
             </P>
-            <P style={styles.subTitle}>
-              {t('You will be on-boarded about this when you received tokens.')}
-            </P>
           </View>
           <View style={styles.imageContainer}>
             <Image
