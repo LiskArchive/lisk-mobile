@@ -105,6 +105,7 @@ class Home extends React.Component {
   componentDidUpdate(prevProps) {
     const {
       transactions, account, incognito,
+      navigation: { setParams }, t, lng,
     } = this.props;
 
     const prevTransactionCount = (
@@ -126,8 +127,10 @@ class Home extends React.Component {
       });
     }
 
-    if (prevProps.language !== this.props.language) {
-      this.setHeader();
+    if (prevProps.lng !== lng) {
+      setParams({
+        title: t('Your wallet'),
+      });
     }
 
     if (
