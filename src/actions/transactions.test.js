@@ -99,7 +99,7 @@ describe('Action: Accounts', () => {
   describe('transactionsAdded', () => {
     it('should call pendingTransactionAdded when send request is successful', async () => {
       const store = mockStore({
-        accounts: { active: account },
+        accounts: { info: account },
         transactions: { confirmed: [], pending: [] },
       });
       const cb = jest.fn();
