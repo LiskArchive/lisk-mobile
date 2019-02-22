@@ -64,13 +64,24 @@ describe('Action: Accounts', () => {
       count: 2,
     },
   };
+  const settings = {
+    token: {
+      active: 'LSK',
+      list: ['LSK', 'BTC'],
+    },
+  };
   transactionsUtility.send = jest.fn();
   transactionsUtility.getTransactions = jest.fn();
 
   describe('transactionsLoaded', () => {
     it('should load more transactions', async () => {
       const store = mockStore({
-        accounts: { active: account },
+        accounts: {
+          info: {
+            LSK: account,
+            BTC: {},
+          },
+        },
         transactions: { confirmed: [] },
       });
       const expectedActions = [
@@ -99,7 +110,13 @@ describe('Action: Accounts', () => {
   describe('transactionsAdded', () => {
     it('should call pendingTransactionAdded when send request is successful', async () => {
       const store = mockStore({
-        accounts: { info: account },
+        accounts: {
+          info: {
+            LSK: account,
+            BTC: {},
+          },
+        },
+        settings,
         transactions: { confirmed: [], pending: [] },
       });
       const cb = jest.fn();
@@ -135,7 +152,13 @@ describe('Action: Accounts', () => {
 
     it('should go to error flow', async () => {
       const store = mockStore({
-        accounts: { active: account },
+        accounts: {
+          info: {
+            LSK: account,
+            BTC: {},
+          },
+        },
+        settings,
         transactions: { confirmed: [], pending: [] },
       });
       const cb = jest.fn();
