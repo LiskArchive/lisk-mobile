@@ -12,10 +12,10 @@ export default () => ({
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
       paddingTop: 0,
+      minHeight: 70,
+      maxWidth: '100%',
     },
     subtitle: {
-      maxWidth: '100%',
-      height: 40,
       marginTop: 0,
     },
     form: {
@@ -30,7 +30,7 @@ export default () => ({
       position: 'absolute',
       right: 20,
       zIndex: 99,
-      top: 47,
+      top: 30,
       paddingRight: 15,
       paddingBottom: 10,
       width: 67,
@@ -45,6 +45,7 @@ export default () => ({
     },
     addressContainer: {
       width: '100%',
+      paddingTop: 0,
     },
     addressInput: {
       ...Platform.select({
@@ -60,6 +61,7 @@ export default () => ({
       }),
     },
     addressInputContainer: {
+      paddingTop: 0,
       ...Platform.select({
         android: {
           minHeight: 58,
@@ -73,7 +75,7 @@ export default () => ({
       position: 'absolute',
       zIndex: 0,
       left: 20,
-      top: 41,
+      top: 22,
     },
   },
   [themes.light]: {
