@@ -160,7 +160,7 @@ describe('Action: Accounts', () => {
       ];
 
       accountAPI.getSummary.mockResolvedValue(data.account);
-      transactionsAPI.getTransactions.mockResolvedValue(data.transactions);
+      transactionsAPI.get.mockResolvedValue(data.transactions);
 
       await store.dispatch(blockUpdated());
       expect(store.getActions()).toEqual(expectedActions);
@@ -221,7 +221,7 @@ describe('Action: Accounts', () => {
 
     accountAPI.getSummary.mockResolvedValueOnce(data.account);
     storageUtility.retrieveAccounts.mockResolvedValueOnce([data.account]);
-    await store.dispatch(accountSignedIn({ passphrase: data.account }));
+    await store.dispatch(accountSignedIn({ passphrase: data.passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
