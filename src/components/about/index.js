@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, Linking } from 'react-native';
+import { translate } from 'react-i18next';
 import { H4, P, A } from '../toolBox/typography';
 import Logo from '../../assets/images/lisk-logo.png';
 import packageJson from '../../../package.json';
@@ -14,7 +15,7 @@ const openLiskWebsite = () => {
     .catch(err => console.error('An error occurred', err));
 };
 
-const About = ({ styles }) => (
+const About = ({ styles, t }) => (
   <View style={[styles.container, styles.theme.container]}>
       <View style={styles.centerAligned}>
         <View style={styles.logo}>
@@ -23,15 +24,15 @@ const About = ({ styles }) => (
         <H4 style={[styles.appTitle, styles.theme.appTitle]}>Lisk</H4>
         <P style={[styles.version, styles.theme.version]}>{`Version ${packageJson.version}`}</P>
         <A onPress={openLiskWebsite} style={[styles.link, styles.theme.link]}>
-          Read more on the Lisk&reg; website
+          {t('Read more on the Lisk&reg; website')}
         </A>
       </View>
       <View style={styles.footer}>
         <P style={[styles.copy, styles.theme.copy]}>
-          Copyright &copy; {(new Date()).getFullYear()} Lisk Stiftung
+          {t('Copyright')} &copy; {(new Date()).getFullYear()} {t('Lisk Stiftung')}
         </P>
       </View>
   </View>
 );
 
-export default withTheme(About, getStyles({ logoSize }));
+export default withTheme(translate()(About), getStyles({ logoSize }));

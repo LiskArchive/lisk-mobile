@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
+import { translate } from 'react-i18next';
 import styles from './styles';
 import { B, P } from '../../toolBox/typography';
 import { SecondaryButton } from '../../toolBox/button';
@@ -7,25 +8,24 @@ import image from '../../../assets/images/registrationProcess/initialize3x.png';
 
 class Initialization extends React.Component {
   componentDidMount() {
-    this.props.navigation.setParams({
-      action: this.props.prevStep,
-      title: 'Security reminder!',
+    const { t, prevStep, navigation: { setParams } } = this.props;
+    setParams({
+      action: prevStep,
+      title: t('Security reminder!'),
     });
   }
 
   render() {
+    const { t, nextStep, sharedData: { passphrase } } = this.props;
     return (
       <View style={styles.container}>
         <View>
           <View style={styles.titleContainer}>
             <B style={styles.subHeader}>
-              It’s extremely important!
+              {t('It’s extremely important!')}
             </B>
             <P style={styles.subTitle}>
-              Initialize your account immediately after you received tokens for the first time.
-            </P>
-            <P style={styles.subTitle}>
-              You will be on-boarded about this when you received tokens.
+              {t('Initialize your account immediately after you received tokens for the first time.')}
             </P>
           </View>
           <View style={styles.imageContainer}>
@@ -39,11 +39,9 @@ class Initialization extends React.Component {
           <SecondaryButton
             style={styles.button}
             onClick={() => {
-              this.props.nextStep({
-                passphrase: this.props.sharedData.passphrase,
-              });
+              nextStep({ passphrase });
             }}
-            title='Continue'
+            title={t('Continue')}
           />
         </View>
       </View>
@@ -51,4 +49,4 @@ class Initialization extends React.Component {
   }
 }
 
-export default Initialization;
+export default translate()(Initialization);

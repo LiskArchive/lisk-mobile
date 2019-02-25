@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
+import { translate } from 'react-i18next';
 import styles from './styles';
 import { P } from '../../toolBox/typography';
 import { SecondaryButton } from '../../toolBox/button';
@@ -7,20 +8,24 @@ import image from '../../../assets/images/registrationProcess/success3x.png';
 
 class Success extends React.Component {
   componentDidMount() {
-    this.props.hideNav();
-    this.props.navigation.setParams({
+    const { t, hideNav, navigation: { setParams } } = this.props;
+
+    hideNav();
+    setParams({
       action: false,
-      title: 'Perfect! You’re all set',
+      title: t('Perfect! You’re all set'),
     });
   }
 
   render() {
+    const { t, navigation: { pop } } = this.props;
+
     return (
       <View style={styles.container}>
         <View>
           <View style={styles.titleContainer}>
             <P style={styles.subTitle}>
-              Great! now you can use your passphrase to sign in to your account.
+              {t('Great! now you can use your passphrase to sign in to your account.')}
             </P>
           </View>
           <View style={styles.imageContainer} >
@@ -33,8 +38,8 @@ class Success extends React.Component {
         <View>
           <SecondaryButton
             style={styles.button}
-            onClick={this.props.navigation.pop}
-            title='Sign in now'
+            onClick={pop}
+            title={t('Sign in now')}
           />
         </View>
       </View>
@@ -42,4 +47,4 @@ class Success extends React.Component {
   }
 }
 
-export default Success;
+export default translate()(Success);

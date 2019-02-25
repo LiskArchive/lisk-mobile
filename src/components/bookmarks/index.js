@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { View } from 'react-native';
+import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
 import {
   settingsUpdated as settingsUpdatedAction,
@@ -19,7 +20,8 @@ import getStyles from './styles';
 class Bookmarks extends React.Component {
   render() {
     const {
-      styles, list, navigate, query, setRef, draggable,
+      styles, list, navigate, query,
+      setRef, draggable, t,
     } = this.props;
 
     const filterList = list.filter((item) => {
@@ -29,8 +31,8 @@ class Bookmarks extends React.Component {
     });
     const Element = draggable ? DraggableItem : Item;
     const description = !filterList.length && reg.address.test(query) ?
-      'You can add this address to your bookmarks in bookmarks page or through send process.' :
-      'Couldn’t recognize the address or label. Please make sure it’s correct.';
+      t('You can add this address to your bookmarks in bookmarks page or through send process.') :
+      t('Couldn’t recognize the address or label. Please make sure it’s correct.');
 
     return (<View style={styles.container}>
       {
@@ -50,4 +52,4 @@ class Bookmarks extends React.Component {
     </View>);
   }
 }
-export default withTheme(Bookmarks, getStyles());
+export default withTheme(translate()(Bookmarks), getStyles());

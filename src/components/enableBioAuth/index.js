@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import {
   storePassphraseInKeyChain,
 } from '../../utilities/passphrase';
@@ -34,7 +35,9 @@ class EnableBioAuth extends React.Component {
   }
 
   render() {
-    const { theme, styles, navigation } = this.props;
+    const {
+      theme, styles, navigation, t,
+    } = this.props;
     const title = navigation.getParam('title', 'Bio Auth');
 
     return (
@@ -42,7 +45,7 @@ class EnableBioAuth extends React.Component {
         <View style={styles.container}>
           <View>
             <B style={[styles.subHeader, styles.theme.subHeader]}>
-              Here’s what you need to know:
+              {t('Here’s what you need to know:')}
             </B>
             <View style={[styles.row, styles.separator, styles.theme.separator]}>
               <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
@@ -54,11 +57,11 @@ class EnableBioAuth extends React.Component {
               </View>
               <View style={styles.textWrapper}>
                 <B style={[styles.rowTitle, styles.theme.rowTitle]}>
-                  Your passphrase is still needed
+                  {t('Your passphrase is still needed')}
                 </B>
                 <Small style={[styles.description, styles.theme.description]}>
-                  You always need to keep your passphrase safe.
-                  It will still be required for some actions.
+                  {t('You always need to keep your passphrase safe.')}
+                  {t('It will still be required for some actions.')}
                 </Small>
               </View>
             </View>
@@ -72,10 +75,10 @@ class EnableBioAuth extends React.Component {
               </View>
               <View style={styles.textWrapper}>
                 <B style={[styles.rowTitle, styles.theme.rowTitle]}>
-                  You can always turn it off
+                {t('You can always turn it off')}
                 </B>
                 <Small style={[styles.description, styles.theme.description]}>
-                  {`You can disable ${title} at anytime in Settings page then authenticate with passphrase.`}
+                  {t(`You can disable ${title} at anytime in Settings page then authenticate with passphrase.`)}
                 </Small>
               </View>
             </View>
@@ -92,7 +95,7 @@ class EnableBioAuth extends React.Component {
                   Fast and secure
                 </B>
                 <Small style={[styles.description, styles.theme.description]}>
-                  {`${title} offers a secure and faster way to access the Lisk app.`}
+                  {t(`${title} offers a secure and faster way to access the Lisk app.`)}
                 </Small>
               </View>
             </View>
@@ -100,7 +103,7 @@ class EnableBioAuth extends React.Component {
           <SecondaryButton
             style={styles.button}
             onClick={this.confirm}
-            title={`Enable ${title}`}
+            title={t(`Enable ${title}`)}
           />
         </View>
       </View>
@@ -108,4 +111,4 @@ class EnableBioAuth extends React.Component {
   }
 }
 
-export default withTheme(EnableBioAuth, getStyles());
+export default withTheme(translate()(EnableBioAuth), getStyles());

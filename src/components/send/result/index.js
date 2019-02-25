@@ -1,6 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
+import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
 import { SecondaryButton } from '../../toolBox/button';
 import { P } from '../../toolBox/typography';
@@ -27,19 +28,21 @@ class Result extends React.Component {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({
+    const { reset, navigation: { setParams } } = this.props;
+    setParams({
       title: 'Sent',
       showButtonLeft: false,
-      action: this.props.reset,
+      action: reset,
     });
     this.startDate = new Date();
     this.play('created');
   }
 
   componentWillUnmount() {
+    const { navigation: { setParams } } = this.props;
     clearTimeout(this.timeouts.created);
     clearTimeout(this.timeouts.confirmed);
-    this.props.navigation.setParams({ title: 'Send' });
+    setParams({ title: 'Send' });
   }
 
   componentWillUpdate(nextProp) {
@@ -74,13 +77,14 @@ class Result extends React.Component {
   }
 
   render() {
-    const { styles } = this.props;
+    const {
+      t, styles, finalCallback, reset,
+    } = this.props;
 
     return (
       <View style={[styles.container, styles.theme.container]}>
         <P style={styles.theme.subtitle}>
-          Thank you. Your transaction is being processed.
-          It may take up to 15 minutes to be secured on the blockchain.
+          {t('Thank you. Your transaction is being processed. It may take up to 15 minutes to be secured on the blockchain.')}
         </P>
         <View style={styles.illustration}>
           {this.state.step === 0 ? <LottieView
@@ -105,14 +109,14 @@ class Result extends React.Component {
         <SecondaryButton
           style={styles.button}
           onClick={() => {
-            this.props.finalCallback();
-            this.props.reset();
+            finalCallback();
+            reset();
           }}
-          title='Return to home'
+          title={t('Return to home')}
         />
       </View>
     );
   }
 }
 
-export default withTheme(Result, getStyles());
+export default withTheme(translate()(Result), getStyles());

@@ -1,5 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import {
   Linking,
   View,
@@ -114,28 +115,29 @@ class SignIn extends React.Component {
   }
 
   promptBioAuth = (passphrase, cb) => {
-    this.props.settingsUpdated({
+    const { settingsUpdated, t } = this.props;
+    settingsUpdated({
       bioAuthRecommended: true,
     });
 
     Alert.alert(
-      'For ease of sign in',
-      'Do you want to use Biometric Authentication?',
+      t('For ease of sign in'),
+      t('Do you want to use Biometric Authentication?'),
       [
         {
-          text: 'Cancel',
+          text: t('Cancel'),
           onPress: () => cb(passphrase),
           style: 'cancel',
         },
         {
-          text: 'OK',
+          text: t('OK'),
           onPress: () => {
             bioMetricAuthentication({
-              description: 'Do you want to use Biometric Authentication?',
+              description: t('Do you want to use Biometric Authentication?'),
               successCallback: () => {
                 this.hideDialog(() => {
                   storePassphraseInKeyChain(passphrase);
-                  this.props.settingsUpdated({
+                  settingsUpdated({
                     hasStoredPassphrase: true,
                   });
                   cb(passphrase);
@@ -335,4 +337,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default translate()(SignIn);

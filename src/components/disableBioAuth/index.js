@@ -1,6 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
+import { translate } from 'react-i18next';
 import {
   removePassphraseFromKeyChain,
 } from '../../utilities/passphrase';
@@ -19,12 +20,9 @@ import PassphraseCopy from '../passphraseCopy';
   settingsUpdated: settingsUpdatedAction,
 })
 class DisableBioAuth extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const title = navigation.getParam('title', 'Bio Auth');
-    return {
-      title: `Disable ${title}`,
-    };
-  }
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam('title', 'Bio Auth'),
+  })
 
   confirm = () => {
     removePassphraseFromKeyChain();
@@ -33,15 +31,17 @@ class DisableBioAuth extends React.Component {
   }
 
   render() {
-    const { styles, navigation, account: { passphrase } } = this.props;
-    const title = navigation.getParam('title', 'Bio Auth');
+    const {
+      t, styles, navigation: { getParam }, account: { passphrase },
+    } = this.props;
+    const title = getParam('title');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={styles.container}>
           <View>
             <P style={[styles.subHeader, styles.theme.subHeader]}>
-              Passphrase will be the only option to access your account.
+              {t('Passphrase will be the only option to access your account.')}
             </P>
             <PassphraseCopy passphrase={passphrase} />
           </View>
@@ -49,7 +49,7 @@ class DisableBioAuth extends React.Component {
           <View>
             <SecondaryButton
               onClick={this.confirm}
-              title={`Disable ${title}`}
+              title={t('Disable bioAuth', { title })}
             />
           </View>
         </View>
@@ -58,4 +58,4 @@ class DisableBioAuth extends React.Component {
   }
 }
 
-export default withTheme(DisableBioAuth, getStyles());
+export default withTheme(translate()(DisableBioAuth), getStyles());

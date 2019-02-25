@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
+import { translate } from 'react-i18next';
 import styles from './styles';
 import { B, P } from '../../toolBox/typography';
 import { SecondaryButton, Button } from '../../toolBox/button';
@@ -58,9 +59,10 @@ class Confirm extends React.Component {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({
-      action: this.props.prevStep,
-      title: deviceHeight() >= SCREEN_HEIGHTS.SM ? 'Passphrase verification' : 'Verification',
+    const { t, prevStep, navigation: { setParams } } = this.props;
+    setParams({
+      action: prevStep,
+      title: deviceHeight() >= SCREEN_HEIGHTS.SM ? t('Passphrase verification') : t('Verification'),
     });
     this.generateTest();
   }
@@ -155,16 +157,17 @@ class Confirm extends React.Component {
   }
 
   render() {
+    const { t, nextStep } = this.props;
     return (
       <View style={styles.container}>
         <View>
           <View style={styles.horizontalPadding}>
             <B style={styles.subHeader}>
-              Fill in the blanks.
+              {t('Fill in the blanks.')}
             </B>
           </View>
           <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
-            Choose the correct option for missing words:
+            {t('Choose the correct option for missing words:')}
           </P>
           <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
             { this.renderPassphrase() }
@@ -184,7 +187,7 @@ class Confirm extends React.Component {
                   style={styles.image}
                   source={this.state.buttonStatus ? verifyImage : verifiedImage}
                 />
-                <P style={styles.caption}>Keep it safe!</P>
+                <P style={styles.caption}>{t('Keep it safe!')}</P>
               </View> : null
           }
         </View>
@@ -194,14 +197,14 @@ class Confirm extends React.Component {
             noTheme={true}
             style={styles.button}
             onClick={() => {
-              this.props.nextStep({
+              nextStep({
                 passphrase: this.state.passphrase,
               });
             }}
-            title='Confirm' />
+            title={t('Confirm')} />
         </View>
       </View>);
   }
 }
 
-export default Confirm;
+export default translate()(Confirm);

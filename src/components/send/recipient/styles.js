@@ -12,10 +12,10 @@ export default () => ({
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
       paddingTop: 0,
+      minHeight: 70,
+      maxWidth: '100%',
     },
     subtitle: {
-      maxWidth: '100%',
-      height: 40,
       marginTop: 0,
     },
     form: {
@@ -28,22 +28,24 @@ export default () => ({
     },
     scanButton: {
       position: 'absolute',
-      right: 10,
+      right: 20,
       zIndex: 99,
-      top: 47,
+      top: 30,
       paddingRight: 15,
-      paddingLeft: 10,
       paddingBottom: 10,
-      width: 80,
+      width: 67,
       height: 30,
     },
     scanButtonTitle: {
       fontSize: 14,
-      width: 39,
       paddingLeft: 5,
+    },
+    longTitle: {
+      width: 87,
     },
     addressContainer: {
       width: '100%',
+      paddingTop: 0,
     },
     addressInput: {
       ...Platform.select({
@@ -59,6 +61,7 @@ export default () => ({
       }),
     },
     addressInputContainer: {
+      paddingTop: 0,
       ...Platform.select({
         android: {
           minHeight: 58,
@@ -72,7 +75,7 @@ export default () => ({
       position: 'absolute',
       zIndex: 0,
       left: 20,
-      top: 41,
+      top: 22,
     },
   },
   [themes.light]: {

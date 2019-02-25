@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import BlurOverlay from 'react-native-blur-overlay';
+import { translate } from 'react-i18next';
 import Icon from '../toolBox/icon';
 import { H4, P } from '../toolBox/typography';
 import { colors } from '../../constants/styleGuide';
@@ -24,10 +25,10 @@ class FingerprintOverlay extends React.Component {
   }
 
   render() {
-    const { styles, error } = this.props;
+    const { styles, error, t } = this.props;
     const iconColor = error ? colors.light.red : colors.light.blue;
-    const message = error ? 'Unauthorized! Please try again.' :
-      'Scan your fingerprint on the\ndevice scanner to continue';
+    const message = error ? t('Unauthorized! Please try again.') :
+      t('Scan your fingerprint on the\ndevice scanner to continue');
     return (<BlurOverlay
       ref={(ref) => { this.ref = ref; }}
       radius={24}
@@ -49,4 +50,4 @@ class FingerprintOverlay extends React.Component {
     </BlurOverlay>);
   }
 }
-export default withTheme(FingerprintOverlay, getStyles());
+export default withTheme(translate()(FingerprintOverlay), getStyles());

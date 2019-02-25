@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import { P, Small } from '../../toolBox/typography';
 import Input from '../../toolBox/input';
@@ -22,7 +23,7 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 })
 class AddToBookmark extends React.Component {
   state = {
-    buttonTitle: 'Continue',
+    buttonTitle: '',
     label: {
       value: '',
       validity: -1,
@@ -32,10 +33,11 @@ class AddToBookmark extends React.Component {
   validator = str => (str.length > 20 ? 1 : 0)
 
   componentDidMount() {
-    this.props.navigation.setParams({
-      title: isSmallScreen ? 'Add to bookmarks' : 'Send',
+    const { prevStep, navigation: { setParams } } = this.props;
+    setParams({
+      title: isSmallScreen ? 'Send' : 'Add to bookmarks',
       showButtonLeft: true,
-      action: () => this.props.prevStep(),
+      action: () => prevStep(),
     });
 
     if (isAndroid) {
@@ -43,9 +45,21 @@ class AddToBookmark extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.lng !== this.props.lng) {
+      const {
+        navigation: { setParams },
+      } = this.props;
+      setParams({
+        title: isSmallScreen ? 'Send' : 'Add to bookmarks',
+      });
+    }
+  }
+
   onChange = (value) => {
+    const { t } = this.props;
     this.setState({
-      buttonTitle: (value.length > 0) ? 'Save and continue' : 'Continue',
+      buttonTitle: (value.length > 0) ? t('Save and continue') : t('Continue'),
       label: {
         value,
         validity: this.validator(value),
@@ -71,7 +85,9 @@ class AddToBookmark extends React.Component {
   }
 
   render() {
-    const { styles, sharedData: { address } } = this.props;
+    const {
+      styles, sharedData: { address }, t,
+    } = this.props;
     const { label } = this.state;
 
     return (
@@ -81,7 +97,7 @@ class AddToBookmark extends React.Component {
           styles={{ innerContainer: styles.innerContainer }}
           hasTabBar={true}
           button={{
-            title: this.state.buttonTitle,
+            title: this.state.buttonTitle || t('Continue'),
             type: 'inBox',
           }}
         >
@@ -89,13 +105,13 @@ class AddToBookmark extends React.Component {
             {!isSmallScreen ? (
               <View style={styles.headerContainer}>
                 <P style={[styles.subHeader, styles.theme.subHeader]}>
-                  Optional: add a label to save this address for the future.
+                  {t('Optional: add a label to save this address for the future.')}
                 </P>
               </View>
             ) : null}
             <View>
               <View style={styles.row}>
-                <P style={[styles.label, styles.theme.label]}>Address</P>
+                <P style={[styles.label, styles.theme.label]}>{t('Address')}</P>
                 <View style={styles.addressContainer}>
                   <Avatar address={address || ''} style={styles.avatar} size={35}/>
                   <Small style={[styles.address, styles.text, styles.theme.text]}>{address}</Small>
@@ -103,7 +119,7 @@ class AddToBookmark extends React.Component {
               </View>
               <Input
                 reference={(el) => { this.input = el; }}
-                label='Label (Optional)'
+                label={t('Label (optional)')}
                 autoFocus={!isAndroid}
                 autoCorrect={false}
                 innerStyles={{ input: styles.input }}
@@ -111,7 +127,7 @@ class AddToBookmark extends React.Component {
                 onChange={this.onChange}
                 error={
                   label.validity === 1 ?
-                    'The label must be shorter than 20 characters.' : ''
+                    t('The label must be shorter than 20 characters.') : ''
                 }
                 value={label.value}
               />
@@ -123,4 +139,4 @@ class AddToBookmark extends React.Component {
   }
 }
 
-export default withTheme(AddToBookmark, getStyles());
+export default withTheme(translate()(AddToBookmark), getStyles());
