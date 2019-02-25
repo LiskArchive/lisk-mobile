@@ -19,7 +19,8 @@ export const transactionsLoaded = data => (dispatch) => {
 };
 
 export const transactionAdded = (data, success, error) => (dispatch, getState) => {
-  const account = getState().accounts.active;
+  const { accounts, settings: { token } } = getState();
+  const account = accounts.info[token.active];
   dispatch(loadingStarted(actionTypes.transactionAdded));
   send(data)
     .then(({ id }) => {

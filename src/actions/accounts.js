@@ -111,7 +111,7 @@ export const accountSignedIn = ({ passphrase }, cb) => (dispatch, getState) => {
     .then((account) => {
       dispatch({
         type: actionTypes.accountSignedIn,
-        data: { ...account, passphrase },
+        data: { account, passphrase, activeToken },
       });
       dispatch(accountsRetrieved());
       dispatch(loadingFinished(actionTypes.accountSignedIn));
@@ -127,7 +127,7 @@ export const accountSignedOut = () => ({
 
 export const blockUpdated = () => (dispatch, getState) => {
   const activeToken = getState().settings.token.active;
-  const { address } = getState().accounts.active;
+  const { address } = getState().accounts.info[activeToken];
   const { confirmed } = getState().transactions;
   const lastTx = confirmed.length > 0 ? confirmed[0] : { timestamp: 0 };
   return getTransactions({
@@ -147,7 +147,7 @@ export const blockUpdated = () => (dispatch, getState) => {
       accountAPI.getSummary(activeToken, address).then((account) => {
         dispatch({
           type: actionTypes.accountUpdated,
-          data: account,
+          data: { account, activeToken },
         });
       });
     }

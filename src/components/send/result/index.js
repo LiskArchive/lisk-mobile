@@ -14,8 +14,9 @@ import getStyles from './styles';
 const createdAnimDuration = 4340;
 
 @connect(state => ({
-  account: state.accounts.active,
+  account: state.accounts.info,
   transactions: state.transactions,
+  activeToken: state.settings.active,
 }), {})
 class Result extends React.Component {
   state = {

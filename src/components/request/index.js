@@ -18,7 +18,8 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.8);
 
 @connect(state => ({
-  account: state.accounts.active,
+  account: state.accounts.info,
+  activeToken: state.settings.token.active,
 }))
 class Request extends React.Component {
   state = {
@@ -31,7 +32,8 @@ class Request extends React.Component {
   };
 
   changeHandler = (val) => {
-    const { account: { address } } = this.props;
+    const { account, activeToken } = this.props;
+    const { address } = account[activeToken];
     let amountValidity = -1;
     let amount = val;
     if (val !== '') {
@@ -51,10 +53,10 @@ class Request extends React.Component {
 
   render() {
     const {
-      styles, theme, account, t,
+      styles, theme, account, t, activeToken,
     } = this.props;
     const { amount, url } = this.state;
-    const { address } = (account || {});
+    const { address } = account[activeToken] || {};
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>

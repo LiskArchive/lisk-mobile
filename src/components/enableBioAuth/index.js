@@ -2,12 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import {
-  storePassphraseInKeyChain,
-} from '../../utilities/passphrase';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../actions/settings';
+import { storePassphraseInKeyChain } from '../../utilities/passphrase';
+import { settingsUpdated as settingsUpdatedAction } from '../../actions/settings';
 import { B, Small } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { SecondaryButton } from '../toolBox/button';
@@ -16,7 +12,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 @connect(state => ({
-  account: state.accounts.active,
+  passphrase: state.accounts.passphrase,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
@@ -29,7 +25,7 @@ class EnableBioAuth extends React.Component {
   }
 
   confirm = () => {
-    storePassphraseInKeyChain(this.props.account.passphrase);
+    storePassphraseInKeyChain(this.props.passphrase);
     this.props.settingsUpdated({ hasStoredPassphrase: true });
     this.props.navigation.pop();
   }

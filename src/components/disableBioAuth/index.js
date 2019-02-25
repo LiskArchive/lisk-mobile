@@ -2,12 +2,8 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import {
-  removePassphraseFromKeyChain,
-} from '../../utilities/passphrase';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../actions/settings';
+import { removePassphraseFromKeyChain } from '../../utilities/passphrase';
+import { settingsUpdated as settingsUpdatedAction } from '../../actions/settings';
 import { P } from '../toolBox/typography';
 import { SecondaryButton } from '../toolBox/button';
 import withTheme from '../withTheme';
@@ -15,7 +11,7 @@ import getStyles from './styles';
 import PassphraseCopy from '../passphraseCopy';
 
 @connect(state => ({
-  account: state.accounts.active,
+  passphrase: state.accounts.passphrase,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
@@ -32,9 +28,9 @@ class DisableBioAuth extends React.Component {
 
   render() {
     const {
-      t, styles, navigation: { getParam }, account: { passphrase },
+      t, styles, navigation, passphrase,
     } = this.props;
-    const title = getParam('title');
+    const title = navigation.getParam('title', 'Bio Auth');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>

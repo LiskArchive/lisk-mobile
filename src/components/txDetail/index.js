@@ -26,7 +26,8 @@ const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelega
 
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
-  account: state.accounts.active || {},
+  account: state.accounts.info || {},
+  activeToken: state.settings.token.active,
 }), {})
 class TransactionDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -104,8 +105,8 @@ class TransactionDetail extends React.Component {
   }
 
   navigate = (address) => {
-    const { navigation, account } = this.props;
-    if (address !== account.address) {
+    const { navigation, account, activeToken } = this.props;
+    if (address !== account[activeToken].address) {
       navigation.navigate('Wallet', { address });
     }
   }
@@ -120,7 +121,7 @@ class TransactionDetail extends React.Component {
 
   render() {
     const {
-      navigation, styles, theme, account, t,
+      navigation, styles, theme, account, t, activeToken,
     } = this.props;
     const { tx, error, refreshing } = this.state;
 
@@ -140,7 +141,7 @@ class TransactionDetail extends React.Component {
       );
     }
 
-    const walletAccountId = navigation.getParam('account', account.address);
+    const walletAccountId = navigation.getParam('account', account[activeToken].address);
     const incognito = navigation.getParam('incognito', null);
     let arrowStyle;
     let amountStyle = [styles.outgoing, styles.theme.outgoing];

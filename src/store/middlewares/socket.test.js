@@ -4,6 +4,7 @@ import actionTypes from '../../constants/actions';
 import { account as accountAPI } from '../../utilities/api';
 import { merge } from '../../utilities/helpers';
 import { INITIAL_STATE as settings } from '../../store/reducers/settings';
+import { tokenKeys } from '../../constants/tokens';
 
 describe('Middleware: Accounts', () => {
   beforeEach(() => {
@@ -20,7 +21,7 @@ describe('Middleware: Accounts', () => {
     dispatch: jest.fn(),
     getState: () => ({
       accounts: {
-        active: account,
+        info: { [tokenKeys[0]]: account },
         followed: [],
       },
       settings,

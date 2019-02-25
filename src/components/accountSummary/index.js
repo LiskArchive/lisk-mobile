@@ -162,6 +162,7 @@ class AccountSummary extends React.Component {
           },
         ]}>
           <FormattedNumber
+            tokenType={settings.token.active}
             style={[styles.theme[`${type}Balance`], incognito ? styles.invisibleTitle : null]}
             type={H2}>{fromRawLsk(account.balance)}</FormattedNumber>
           <Image source={blurs[`${settings.theme}${balanceSize}`]}
