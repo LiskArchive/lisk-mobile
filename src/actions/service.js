@@ -1,11 +1,24 @@
-import * as liskService from '../utilities/api/lisk/service';
+import { service as serviceAPI } from '../utilities/api';
 import actionTypes from '../constants/actions';
 
-// eslint-disable-next-line import/prefer-default-export
-export const pricesRetrieved = () => dispatch =>
-  liskService.getPriceTicker()
-    .then(res => dispatch({
+export const pricesRetrieved = () => (dispatch, getState) => {
+  const { settings: { token } } = getState();
+
+  serviceAPI.getPriceTicker(token)
+    .then(priceTicker => dispatch({
       type: actionTypes.pricesRetrieved,
-      priceTicker: res,
+      priceTicker,
     }))
-    .catch(console.log); // eslint-disable-line
+    .catch(err => console.log(err)); // @TODO: DISCUSS & HANDLE THIS!
+};
+
+export const dynamicFeesRetrieved = () => (dispatch, getState) => {
+  const { settings: { token } } = getState();
+
+  serviceAPI.getDynamicFees(token)
+    .then(dynamicFees => dispatch({
+      type: actionTypes.dynamicFeesRetrieved,
+      dynamicFees,
+    }))
+    .catch(err => console.log(err)); // @TODO: DISCUSS & HANDLE THIS!
+};
