@@ -25,7 +25,7 @@ import getStyles from './styles';
  */
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
-  priceTicker: state.liskService.priceTicker,
+  priceTicker: state.service.priceTicker,
   activeToken: state.settings.token.active,
 }), {
   loadingStarted: loadingStartedAction,

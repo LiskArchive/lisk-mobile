@@ -1,7 +1,7 @@
-import liskService, { INITIAL_STATE } from './liskService';
+import service, { INITIAL_STATE } from './service';
 import actionTypes from '../../constants/actions';
 
-describe('reducers: liskService', () => {
+describe('reducers: service', () => {
   let state;
 
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('reducers: liskService', () => {
   });
 
   it('should create the empty state initially', () => {
-    const createdState = liskService();
+    const createdState = service();
     expect(createdState).toEqual(INITIAL_STATE);
   });
 
@@ -19,7 +19,7 @@ describe('reducers: liskService', () => {
       priceTicker: { USD: 1, EUR: 1 },
     };
 
-    expect(liskService(state, action)).toEqual({
+    expect(service(state, action)).toEqual({
       priceTicker: action.priceTicker,
     });
   });

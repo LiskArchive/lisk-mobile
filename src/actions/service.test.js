@@ -1,13 +1,13 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as liskService from '../utilities/api/lisk/service';
-import { pricesRetrieved } from './liskService';
+import { pricesRetrieved } from './service';
 import actionTypes from '../constants/actions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('actions: liskService', () => {
+describe('actions: service', () => {
   describe('pricesRetrieved', () => {
     let store;
 
