@@ -170,7 +170,7 @@ describe('api/btc/transactions', () => {
         data: [
           {
             id: 'a146763b49a6181e3fbc611def63af13ac2c08a0d97c80e64c93e8e083110aa9',
-            timestamp: 1548876059,
+            timestamp: 1548876059000,
             confirmations: (600000 - 560808) + 1,
             fee: 1600,
             senderAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
@@ -194,7 +194,7 @@ describe('api/btc/transactions', () => {
         data: [
           {
             id: 'a146763b49a6181e3fbc611def63af13ac2c08a0d97c80e64c93e8e083110aa9',
-            timestamp: 1548876059,
+            timestamp: 1548876059000,
             confirmations: 560808,
             fee: 1600,
             senderAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
@@ -205,7 +205,7 @@ describe('api/btc/transactions', () => {
           },
           {
             id: 'e85812a1ce720f9bcda387465a7bd2c2bbfa8b62ce5220f2df1a3017cbda70e4',
-            timestamp: 1548345462,
+            timestamp: 1548345462000,
             confirmations: 559919,
             fee: 2260,
             senderAddress: '1BrQvwTsDntfBAowYrqKq98MYY3dUNjnU3',
