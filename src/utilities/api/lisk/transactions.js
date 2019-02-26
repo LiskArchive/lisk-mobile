@@ -1,42 +1,69 @@
 import Lisk from '@liskhq/lisk-client';
 import LiskAPIClient from './apiClient';
+import { removeUndefinedKeys } from '../../helpers';
 
-/**
- * Gets the list of transactions for a given filtering config
- *
- * @param {Object} data
- * @param {String?} data.id - A valid ID for specific transaction
- * @param {String?} data.senderId - A valid Lisk ID to filter the senderID
- * @param {String?} data.recipientId - A valid Lisk ID to filter the recipientId
- * @param {Number?} limit - defaults on 25
- * @param {Number?} offset - defaults on 0
- * @param {String?} orderBy - defaults on timestamp:desc
- *
- * @returns {Promise} The HTTP call promise
- * @todo some properties need default values
- */
-export const getTransactions = (data) => {
-  data.sort = 'timestamp:desc';
-  return LiskAPIClient.transactions.get(data);
-};
+const normalizeTransactionsResponse = list => list.map(tx => ({
+  id: tx.id,
+  senderAddress: tx.senderId,
+  recipientAddress: tx.recipientId,
+  amount: tx.amount,
+  fee: tx.fee,
+  timestamp: tx.timestamp,
+  confirmations: tx.confirmations,
+  type: tx.type,
+  data: tx.asset.data || '',
+}));
 
-/**
- * Creates a new transactions
- *
- * @param {Object} data
- * @param {String} data.recipientId - A valid Lisk ID
- * @param {Object} data.amount - Amount of lisk multiplied by 10^8
- * @param {Object} data.passphrase - Primary passphrase (Valid mnemonic)
- * @param {Object} data.secondPassphrase - Secondary passphrase (Valid mnemonic)
- *
- * @returns {Promise} The HTTP call promise
- */
-export const send = data => new Promise((resolve, reject) => {
-  const transaction = Lisk.transaction.transfer(data);
+export const get = ({
+  id,
+  address,
+  limit,
+  offset,
+}) => new Promise(async (resolve, reject) => {
+  const parameters = removeUndefinedKeys({
+    id,
+    senderIdOrRecipientId: address,
+    sort: 'timestamp:desc',
+    limit,
+    offset,
+  });
 
-  setTimeout(() => {
-    LiskAPIClient.transactions.broadcast(transaction)
-      .then(() => resolve(transaction))
-      .catch(error => reject(error));
+  try {
+    const { data, meta } = await LiskAPIClient.transactions.get(parameters);
+    resolve({
+      data: normalizeTransactionsResponse(data),
+      meta,
+    });
+  } catch (error) {
+    reject(error);
+  }
+});
+
+export const create = ({
+  passphrase,
+  recipientAddress,
+  amount,
+  secondPassphrase,
+  data,
+}) => new Promise((resolve) => {
+  const transaction = Lisk.transaction.transfer(removeUndefinedKeys({
+    passphrase,
+    secondPassphrase,
+    recipientId: recipientAddress,
+    amount,
+    data,
+  }));
+
+  resolve(transaction);
+});
+
+export const broadcast = transaction => new Promise((resolve, reject) => {
+  setTimeout(async () => {
+    try {
+      await LiskAPIClient.transactions.broadcast(transaction);
+      resolve(transaction);
+    } catch (error) {
+      reject(error);
+    }
   }, 1001);
 });

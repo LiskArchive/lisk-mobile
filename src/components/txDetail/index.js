@@ -14,7 +14,7 @@ import Avatar from '../avatar';
 import Loading from '../transactions/loading';
 import EmptyState from '../transactions/empty';
 import transactions from '../../constants/transactions';
-import { getTransactions } from '../../utilities/api/lisk/transactions';
+import { transactions as transactionsAPI } from '../../utilities/api';
 import Blur from '../transactions/blur';
 import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
@@ -70,10 +70,15 @@ class TransactionDetail extends React.Component {
 
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
-    const { t } = this.props;
+    const {
+      t, activeToken, navigation, account,
+    } = this.props;
 
     try {
-      const { data } = await getTransactions({ id });
+      const { data } = await transactionsAPI.get(activeToken, {
+        address: navigation.getParam('account', account[activeToken].address),
+        id,
+      });
 
       const tx = data[0] || {};
 
@@ -141,20 +146,20 @@ class TransactionDetail extends React.Component {
       );
     }
 
-    const walletAccountId = navigation.getParam('account', account[activeToken].address);
+    const walletAccountAddress = navigation.getParam('account', account[activeToken].address);
     const incognito = navigation.getParam('incognito', null);
     let arrowStyle;
     let amountStyle = [styles.outgoing, styles.theme.outgoing];
-    let firstAddress = tx.senderId;
-    let secondAddress = tx.recipientId;
+    let firstAddress = tx.senderAddress;
+    let secondAddress = tx.recipientAddress;
     let amountSign = '-';
     let direction = 'outgoing';
 
-    if ((walletAccountId !== tx.senderId) && tx.type === 0) {
+    if ((walletAccountAddress !== tx.senderAddress) && tx.type === 0) {
       arrowStyle = styles.reverseArrow;
       amountStyle = [styles.incoming, styles.theme.incoming];
-      firstAddress = tx.recipientId;
-      secondAddress = tx.senderId;
+      firstAddress = tx.recipientAddress;
+      secondAddress = tx.senderAddress;
       amountSign = '';
       direction = 'incoming';
     }
@@ -173,7 +178,7 @@ class TransactionDetail extends React.Component {
       >
         <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
           <View style={styles.row}>
-            {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
+            {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
               <Image
                 style={{ width: 50, height: 50 }}
                 source={transactions[txTypes[tx.type]].image(theme)}
@@ -189,11 +194,12 @@ class TransactionDetail extends React.Component {
               </Fragment>
             }
           </View>
-          {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
-            <H3 style={amountStyle}>{t(transactions[txTypes[tx.type]].title)}</H3> : null
+          {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
+            <H3 style={amountStyle}>{t(transactions[txTypes[tx.type]].title)}</H3> :
+            null
           }
           {
-            tx.type === 0 && (tx.recipientId !== tx.senderId) && !incognito ?
+            tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) && !incognito ?
               <H1 style={amountStyle}>
                 {amountSign}
                 <FormattedNumber>
@@ -202,7 +208,7 @@ class TransactionDetail extends React.Component {
               </H1> : null
           }
           {
-            tx.type === 0 && (tx.recipientId !== tx.senderId) && incognito ?
+            tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) && incognito ?
               <Blur
                 value={normalizedAmount}
                 direction={direction}
@@ -229,24 +235,24 @@ class TransactionDetail extends React.Component {
           />
           <View style={styles.rowContent}>
             <P style={[styles.label, styles.theme.label]}>
-              {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
+              {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
                 <Fragment>{t('Account address')}</Fragment> :
                 <Fragment>{t('Sender')}</Fragment>
               }
             </P>
             <View style={styles.addressContainer}>
               <A
-                value={tx.senderId}
-                onPress={() => this.navigate(tx.senderId)}
+                value={tx.senderAddress}
+                onPress={() => this.navigate(tx.senderAddress)}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
               >
-                {this.getAccountLabel(tx.senderId)}
+                {this.getAccountLabel(tx.senderAddress)}
               </A>
             </View>
           </View>
         </View>
 
-        {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
+        {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
           null :
           <View style={[styles.detailRow, styles.theme.detailRow]}>
             <Icon
@@ -259,11 +265,11 @@ class TransactionDetail extends React.Component {
               <P style={[styles.label, styles.theme.label]}>{t('Recipient')}</P>
               <View style={styles.addressContainer}>
                 <A
-                  value={tx.senderId}
-                  onPress={() => this.navigate(tx.recipientId)}
+                  value={tx.senderAddress}
+                  onPress={() => this.navigate(tx.recipientAddress)}
                   style={[styles.value, styles.theme.value, styles.transactionId]}
                 >
-                  {this.getAccountLabel(tx.recipientId)}
+                  {this.getAccountLabel(tx.recipientAddress)}
                 </A>
               </View>
             </View>
@@ -280,12 +286,12 @@ class TransactionDetail extends React.Component {
           <View style={styles.rowContent}>
             <P style={[styles.label, styles.theme.label]}>{t('Transaction Fee')}</P>
             <B style={[styles.value, styles.theme.value]}>
-              <FormattedNumber>{fromRawLsk(transactions[txTypes[tx.type]].fee)}</FormattedNumber>
+              <FormattedNumber>{fromRawLsk(tx.fee)}</FormattedNumber>
             </B>
           </View>
         </View>
         {
-          (tx.asset && tx.asset.data) ?
+          (tx.data) ?
             <View style={[styles.detailRow, styles.theme.detailRow]}>
               <Icon
                 name='reference'
@@ -296,7 +302,7 @@ class TransactionDetail extends React.Component {
               <View style={styles.rowContent}>
                 <P style={[styles.label, styles.theme.label]}>{t('Reference')}</P>
                 <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
-                  {tx.asset.data}
+                  {tx.data}
                 </B>
               </View>
             </View> : null

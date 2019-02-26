@@ -12,7 +12,8 @@ import Icon from '../../toolBox/icon';
 import Avatar from '../../avatar';
 import Loading from '../../transactions/loading';
 import transactions from '../../../constants/transactions';
-import { getTransactions } from '../../../utilities/api/lisk/transactions';
+import { tokenMap } from '../../../constants/tokens';
+import { transactions as transactionsAPI } from '../../../utilities/api';
 import arrowLight from '../../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
@@ -29,13 +30,13 @@ class TransactionDetail extends React.Component {
     const { txID, sharedData } = this.props;
 
     if (txID) {
-      getTransactions({ id: txID })
+      transactionsAPI.get(tokenMap.LSK.key, ({ id: txID }))
         .then(({ data }) => {
           this.setState({
             tx: data[0] || {
               type: 0,
-              recipientId: sharedData.recipientAddress,
-              senderId: sharedData.address,
+              recipientAddress: sharedData.recipientAddress,
+              senderAddress: sharedData.address,
               amount: sharedData.amount,
               notRawLisk: true,
             },
@@ -45,8 +46,8 @@ class TransactionDetail extends React.Component {
           this.setState({
             tx: {
               type: 0,
-              recipientId: sharedData.recipientAddress,
-              senderId: sharedData.address,
+              recipientAddress: sharedData.recipientAddress,
+              senderAddress: sharedData.address,
               amount: sharedData.amount,
               notRawLisk: true,
             },
@@ -63,12 +64,10 @@ class TransactionDetail extends React.Component {
 
 
   render() {
-    const {
-      styles, theme, account,
-    } = this.props;
+    const { styles, theme, account } = this.props;
     const { tx } = this.state;
 
-    if (!tx.senderId) {
+    if (!tx.senderAddress) {
       return (
         <View style={[styles.container, styles.theme.container]}>
           <Loading />
@@ -79,15 +78,15 @@ class TransactionDetail extends React.Component {
     const walletAccountId = account.address;
     let arrowStyle;
     let amountStyle = [styles.outgoing, styles.theme.outgoing];
-    let firstAddress = tx.senderId;
-    let secondAddress = tx.recipientId;
+    let firstAddress = tx.senderAddress;
+    let secondAddress = tx.recipientAddress;
     let amountSign = '-';
 
-    if ((walletAccountId !== tx.senderId) && tx.type === 0) {
+    if ((walletAccountId !== tx.senderAddress) && tx.type === 0) {
       arrowStyle = styles.reverseArrow;
       amountStyle = [styles.incoming, styles.theme.incoming];
-      firstAddress = tx.recipientId;
-      secondAddress = tx.senderId;
+      firstAddress = tx.recipientAddress;
+      secondAddress = tx.senderAddress;
       amountSign = '';
     }
 
@@ -107,11 +106,11 @@ class TransactionDetail extends React.Component {
               </Fragment>
             }
           </View>
-          {(tx.type && tx.type !== 0) || (tx.recipientId === tx.senderId) ?
+          {(tx.type && tx.type !== 0) || (tx.recipientAddress === tx.senderAddress) ?
             <H3 style={amountStyle}>{transactions[txTypes[tx.type]].title}</H3> : null
           }
           {
-            tx.type === 0 && (tx.recipientId !== tx.senderId) ?
+            tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) ?
               <H1 style={amountStyle}>
                 {amountSign}
                 <FormattedNumber>
@@ -139,23 +138,23 @@ class TransactionDetail extends React.Component {
           />
           <View style={styles.rowContent}>
             <P style={[styles.label, styles.theme.label]}>
-              {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
+              {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
                 <Fragment>Account address</Fragment> :
                 <Fragment>Sender</Fragment>
               }
             </P>
             <View style={styles.addressContainer}>
               <A
-                value={tx.senderId}
+                value={tx.senderAddress}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
               >
-                {tx.senderId}
+                {tx.senderAddress}
               </A>
             </View>
           </View>
         </View>
 
-        {tx.type !== 0 || (tx.recipientId === tx.senderId) ?
+        {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
           null :
           <View style={[styles.detailRow, styles.theme.detailRow]}>
             <Icon
@@ -168,10 +167,10 @@ class TransactionDetail extends React.Component {
               <P style={[styles.label, styles.theme.label]}>Recipient</P>
               <View style={styles.addressContainer}>
                 <A
-                  value={tx.senderId}
+                  value={tx.senderAddress}
                   style={[styles.value, styles.theme.value, styles.transactionId]}
                 >
-                  {tx.recipientId}
+                  {tx.recipientAddress}
                 </A>
               </View>
             </View>

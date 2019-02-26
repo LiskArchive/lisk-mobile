@@ -94,10 +94,11 @@ class Home extends React.Component {
 
     if (!transactions.loaded) {
       transactionsLoaded({
-        senderIdOrRecipientId: account[activeToken].address,
+        address: account[activeToken].address,
         offset: 0,
       });
     }
+
     navigation.setParams({
       scrollToTop: () => {
         if (this.scrollView) {
@@ -105,6 +106,7 @@ class Home extends React.Component {
         }
       },
     });
+
     this.initialAnimation();
     this.setHeader();
   }
@@ -176,10 +178,12 @@ class Home extends React.Component {
     const {
       activeToken, account, transactionsLoaded, transactions,
     } = this.props;
+
     if (account[activeToken]) {
       transactionsLoaded({
-        senderIdOrRecipientId: account[activeToken].address,
+        address: account[activeToken].address,
         offset: transactions.confirmed.length,
+
       });
     }
   }

@@ -12,8 +12,7 @@ import {
 } from './accounts';
 import actionTypes from '../constants/actions';
 import * as storageUtility from '../utilities/storage';
-import { account as accountAPI } from '../utilities/api';
-import * as transactionsUtility from '../utilities/api/lisk/transactions';
+import { account as accountAPI, transactions as transactionsAPI } from '../utilities/api';
 import { INITIAL_STATE as accounts } from '../store/reducers/accounts';
 import { INITIAL_STATE as settings } from '../store/reducers/settings';
 import { tokenMap } from '../constants/tokens';
@@ -99,9 +98,9 @@ const data = {
 };
 
 describe('Action: Accounts', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     accountAPI.getSummary = jest.fn();
-    transactionsUtility.getTransactions = jest.fn();
+    transactionsAPI.get = jest.fn();
   });
 
   it('should return an accountUnFollowed action object', () => {
@@ -131,35 +130,53 @@ describe('Action: Accounts', () => {
     expect(accountFollowed(data.address, label)).toEqual(expectedValue);
   });
 
-  it('should update user data when block is updated', async () => {
-    const store = mockStore({
-      accounts,
-      transactions: { confirmed: [] },
-      settings,
+  describe('blockUpdated action', () => {
+    let store;
+
+    beforeEach(() => {
+      store = mockStore({
+        accounts,
+        transactions: { confirmed: [] },
+        settings,
+      });
     });
 
-    const expectedActions = [
-      {
-        type: actionTypes.transactionsUpdated,
-        data: {
-          confirmed: data.transactions.data,
-          count: data.transactions.meta.count,
+    it('should update user and transactions', async () => {
+      const expectedActions = [
+        {
+          type: actionTypes.transactionsUpdated,
+          data: {
+            confirmed: data.transactions.data,
+            count: data.transactions.meta.count,
+          },
         },
-      },
-      {
-        type: actionTypes.accountUpdated,
-        data: {
-          account: data.account,
-          activeToken: data.activeToken,
+        {
+          type: actionTypes.accountUpdated,
+          data: {
+            account: data.account,
+            activeToken: data.activeToken,
+          },
         },
-      },
-    ];
+      ];
 
-    accountAPI.getSummary.mockResolvedValue(data.account);
-    transactionsUtility.getTransactions.mockResolvedValue(data.transactions);
+      accountAPI.getSummary.mockResolvedValue(data.account);
+      transactionsAPI.get.mockResolvedValue(data.transactions);
 
-    await store.dispatch(blockUpdated());
-    expect(store.getActions()).toEqual(expectedActions);
+      await store.dispatch(blockUpdated());
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('should not update if there is no new transaction', async () => {
+      transactionsAPI.get.mockResolvedValueOnce({ data: [] });
+      await store.dispatch(blockUpdated());
+      expect(store.getActions()).toEqual([]);
+    });
+
+    it('should handle rejections', async () => {
+      transactionsAPI.get.mockRejectedValueOnce('Error!');
+      await store.dispatch(blockUpdated());
+      expect(store.getActions()).toEqual([]);
+    });
   });
 
   it('should dispatch accountsStored action when the data is written in the storage', async () => {
@@ -202,9 +219,8 @@ describe('Action: Accounts', () => {
       { type: actionTypes.accountsRetrieved, data: [data.account] },
     ];
 
-    accountAPI.getSummary.mockResolvedValue(data.account);
-    storageUtility.retrieveAccounts.mockResolvedValue([data.account]);
-
+    accountAPI.getSummary.mockResolvedValueOnce(data.account);
+    storageUtility.retrieveAccounts.mockResolvedValueOnce([data.account]);
     await store.dispatch(accountSignedIn({ passphrase: data.passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
   });
