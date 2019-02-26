@@ -25,6 +25,7 @@ import HeaderTitle from './headerTitle';
 import HomeHeaderTitle from './homeHeaderTitle';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
 import HeaderBackButton from './headerBackButton';
+import TokenSwitcher from './tokenSwitcher';
 import TabBarIcon from './tabBarIcon';
 import TabBarComponent from './tabBarComponent';
 import { colors } from '../../constants/styleGuide';
@@ -72,7 +73,7 @@ const Tabs = TabNavigator({
     navigationOptions: () => ({
       title: t('Request'),
       headerTitle: HeaderTitle,
-      headerRight: HeaderPlaceholderButton,
+      headerRight: <TokenSwitcher />,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       headerStyle,
@@ -83,7 +84,7 @@ const Tabs = TabNavigator({
     screen: Send,
     navigationOptions: {
       headerTitle: HeaderTitle,
-      headerRight: HeaderPlaceholderButton,
+      headerRight: <TokenSwitcher />,
       headerBackground: <HeaderBackground />,
       headerStyle,
       tabBarIcon: ({ tintColor }) => <TabBarIcon name='send' tintColor={tintColor} />, //eslint-disable-line
@@ -105,7 +106,7 @@ const Tabs = TabNavigator({
     navigationOptions: {
       title: t('Settings'),
       headerTitle: HeaderTitle,
-      headerRight: HeaderPlaceholderButton,
+      headerRight: <TokenSwitcher />,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       headerStyle,
@@ -150,7 +151,7 @@ const MainStack = StackNavigator(
       navigationOptions: {
         title: t('Transaction Details'),
         headerTitle: HeaderTitle,
-        headerRight: HeaderPlaceholderButton,
+        headerRight: <TokenSwitcher />,
         headerBackground: <HeaderBackground />,
         headerStyle: {
           backgroundColor: 'transparent',
@@ -164,7 +165,7 @@ const MainStack = StackNavigator(
       screen: Wallet,
       navigationOptions: {
         headerTitle: HomeHeaderTitle,
-        headerRight: HeaderPlaceholderButton,
+        headerRight: <TokenSwitcher />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
       },
@@ -174,7 +175,7 @@ const MainStack = StackNavigator(
       navigationOptions: {
         title: t('About Lisk'),
         headerTitle: HeaderTitle,
-        headerRight: HeaderPlaceholderButton,
+        headerRight: <TokenSwitcher />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
@@ -185,7 +186,7 @@ const MainStack = StackNavigator(
       navigationOptions: {
         title: t('Terms of use'),
         headerTitle: HeaderTitle,
-        headerRight: HeaderPlaceholderButton,
+        headerRight: <TokenSwitcher />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
@@ -207,7 +208,7 @@ const MainStack = StackNavigator(
       navigationOptions: {
         title: 'Manage assets',
         headerTitle: HeaderTitle,
-        headerRight: HeaderPlaceholderButton,
+        headerRight: <TokenSwitcher />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
@@ -218,7 +219,7 @@ const MainStack = StackNavigator(
       navigationOptions: {
         title: t('Select your language'),
         headerTitle: HeaderTitle,
-        headerRight: HeaderPlaceholderButton,
+        headerRight: <TokenSwitcher />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
@@ -228,7 +229,7 @@ const MainStack = StackNavigator(
       screen: EnableBioAuth,
       navigationOptions: {
         headerTitle: HeaderTitle,
-        headerRight: HeaderPlaceholderButton,
+        headerRight: <TokenSwitcher />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
@@ -238,7 +239,7 @@ const MainStack = StackNavigator(
       screen: DisableBioAuth,
       navigationOptions: {
         headerTitle: HeaderTitle,
-        headerRight: HeaderPlaceholderButton,
+        headerRight: <TokenSwitcher />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
@@ -249,7 +250,7 @@ const MainStack = StackNavigator(
       navigationOptions: {
         title: t('Passphrase backup'),
         headerTitle: HeaderTitle,
-        headerRight: HeaderPlaceholderButton,
+        headerRight: <TokenSwitcher />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
@@ -291,7 +292,7 @@ export default StackNavigator({ //eslint-disable-line
     screen: AddBookmark,
     navigationOptions: {
       headerTitle: props => <HeaderTitle {...props} />, //eslint-disable-line
-      headerRight: HeaderPlaceholderButton,
+      headerRight: <TokenSwitcher />,
       // headerLeft: props => <HeaderBackButton {...props} icon='cross' />, //eslint-disable-line
       headerBackground: <HeaderBackground />,
       headerStyle: {
