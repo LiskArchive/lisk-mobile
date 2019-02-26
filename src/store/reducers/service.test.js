@@ -23,4 +23,15 @@ describe('reducers: service', () => {
       priceTicker: action.priceTicker,
     });
   });
+
+  it('should return updated state in case of actionTypes.dynamicFeesRetrieved', () => {
+    const action = {
+      type: actionTypes.dynamicFeesRetrieved,
+      dynamicFees: { low: 1, medium: 10, high: 100 },
+    };
+
+    expect(service(state, action)).toEqual({
+      dynamicFees: action.dynamicFees,
+    });
+  });
 });
