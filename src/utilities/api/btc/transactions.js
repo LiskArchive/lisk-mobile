@@ -101,46 +101,17 @@ export const get = ({
 });
 
 /**
- * @typedef {Object} MinerFees
- * @property {Number} low
- * @property {Number} medium
- * @property {Number} high
- */
-/**
- * Retrieves miner fees from API in satoshi/byte format.
- * @returns {Promise<MinerFees>}
- */
-export const getMinerFees = () => new Promise(async (resolve, reject) => {
-  try {
-    const response = await fetch(config.minerFeesURL);
-    const json = await response.json();
-
-    if (response.ok) {
-      resolve({
-        low: json.hourFee,
-        medium: json.halfHourFee,
-        high: json.fastestFee,
-      });
-    } else {
-      reject(json);
-    }
-  } catch (error) {
-    reject(error);
-  }
-});
-
-/**
  * Normalizes transaction data retrieved from Blockchain.info API
  * @param {Object} data
  * @param {Number} data.inputCount
  * @param {Number} data.outputCount
- * @param {Number} data.minerFeeByte selected minerFee option, in satoshis/byte.
+ * @param {Number} data.dynamicFeePerByte - in satoshis/byte.
  */
 const calculateTransactionFee = ({
   inputCount,
   outputCount,
-  minerFeePerByte,
-}) => ((inputCount * 180) + (outputCount * 34) + 10 + inputCount) * minerFeePerByte;
+  dynamicFeePerByte,
+}) => ((inputCount * 180) + (outputCount * 34) + 10 + inputCount) * dynamicFeePerByte;
 
 /**
  * Retrieves unspent tx outputs of a BTC address from Blockchain.info API
@@ -166,18 +137,17 @@ export const create = ({
   passphrase,
   recipientAddress,
   amount,
+  dynamicFeePerByte,
 }) => new Promise(async (resolve, reject) => {
   try {
     const senderAddress = extractAddress(passphrase);
     const unspentTxOuts = await exports.getUnspentOuts(senderAddress);
-    const minerFees = await exports.getMinerFees();
-    const minerFeePerByte = minerFees.medium;
 
     // Estimate total cost (currently estimates max cost by assuming the worst case)
     const estimatedMinerFee = calculateTransactionFee({
       inputCount: unspentTxOuts.length,
       outputCount: 2,
-      minerFeePerByte,
+      dynamicFeePerByte,
     });
 
     const estimatedTotal = amount + estimatedMinerFee;
@@ -219,7 +189,7 @@ export const create = ({
     const calculatedMinerFee = calculateTransactionFee({
       inputCount: txOutsToConsume.length,
       outputCount: 2,
-      minerFeePerByte,
+      dynamicFeePerByte,
     });
 
     // Calculate total

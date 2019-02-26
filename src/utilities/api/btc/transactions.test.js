@@ -154,20 +154,8 @@ const response = {
       },
     ],
   },
-  getMinerFees: {
-    hourFee: 20,
-    halfHourFee: 40,
-    fastestFee: 80,
-  },
 };
 
-const normalizedData = {
-  minerFees: {
-    low: 20,
-    medium: 40,
-    high: 80,
-  },
-};
 
 describe('api/btc/transactions', () => {
   describe('getLatestBlockHeight', () => {
@@ -282,37 +270,6 @@ describe('api/btc/transactions', () => {
     });
   });
 
-  describe('getMinerFees', () => {
-    beforeEach(() => fetchMock.reset());
-
-    it('resolves correctly', async () => {
-      fetchMock.once('*', response.getMinerFees);
-      const result = await transactions.getMinerFees();
-      expect(result).toEqual(normalizedData.minerFees);
-    });
-
-    it('handles non-500 errors', async () => {
-      const errorResponse = { message: 'Error' };
-      fetchMock.once('*', { status: 400, body: errorResponse });
-
-      try {
-        await transactions.getMinerFees();
-      } catch (error) {
-        expect(error).toEqual(errorResponse);
-      }
-    });
-
-    it('handles errors', async () => {
-      fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
-
-      try {
-        await transactions.getMinerFees();
-      } catch (error) {
-        expect(error).toBeTruthy();
-      }
-    });
-  });
-
   describe('getUnspentOuts', () => {
     beforeEach(() => fetchMock.reset());
 
@@ -348,9 +305,6 @@ describe('api/btc/transactions', () => {
     beforeAll(() => {
       config.network = bitcoin.networks.testnet;
 
-      transactions.getMinerFees = jest.fn();
-      transactions.getMinerFees.mockResolvedValue(normalizedData.minerFees);
-
       transactions.getUnspentOuts = jest.fn();
       transactions.getUnspentOuts.mockResolvedValue(response.getUnspentOuts.unspent_outputs);
     });
@@ -361,6 +315,7 @@ describe('api/btc/transactions', () => {
           passphrase,
           recipientAddress: address.testnetRecipient,
           amount: 1000000000,
+          dynamicFeePerByte: 40,
         });
       } catch (error) {
         expect(error.message).toBe('Insufficient (estimated) balance');
@@ -372,6 +327,7 @@ describe('api/btc/transactions', () => {
         passphrase,
         recipientAddress: address.testnetRecipient,
         amount: 1000000,
+        dynamicFeePerByte: 40,
       });
 
       expect(tx).toBeTruthy();

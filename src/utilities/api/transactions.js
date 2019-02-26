@@ -41,8 +41,9 @@ const get = (tokenType, data) => getMappedFunction(tokenType, 'transactions.get'
  * @param {String} data.passphrase
  * @param {String} data.recipientAddress
  * @param {String} data.amount
- * @param {String} data.secondPassphrase required if registered, only used for LSK.
- * @param {String} data.data custom data field, only used for LSK.
+ * @param {String} data.secondPassphrase - required if registered, only used for LSK.
+ * @param {String} data.data - custom data field, only used for LSK.
+ * @param {Number} data.dynamicFeePerByte - rate of miner/dynamic fee per byte, only used for BTC.
  * @returns {Promise}
  */
 const create = (tokenType, data) => getMappedFunction(tokenType, 'transactions.create')(data);
