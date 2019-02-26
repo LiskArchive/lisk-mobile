@@ -183,6 +183,8 @@ class Recipient extends React.Component {
           navigation={navigation}
           readFromCameraRoll={true}
           onQRCodeRead={this.onQRCodeRead}
+          permissionDialogTitle={t('Permission to use camera')}
+          permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
         <KeyboardAwareScrollView
           onKeyboard={this.onKeyboardOpen}
