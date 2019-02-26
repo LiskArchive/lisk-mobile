@@ -4,7 +4,7 @@ import { removeUndefinedKeys } from '../../helpers';
 
 /**
  * Converts Lisk timestamp to absolute timestamp
- * @param {Number} value Timestamp from API response
+ * @param {Number} value Timestamp retrieved from Lisk Core API
  * @returns {Number}
  */
 const normalizeTimestamp = value => ((Date.UTC(2016, 4, 24, 17, 0, 0, 0) / 1000) + value) * 1000;
