@@ -226,7 +226,7 @@ describe('api/btc/transactions', () => {
       fetchMock.once('*', { status: 400, body: errorResponse });
 
       try {
-        await transactions.get({ address });
+        await transactions.get({ address, limit: 10, offset: 0 });
       } catch (error) {
         expect(error).toEqual(errorResponse);
       }
@@ -236,7 +236,7 @@ describe('api/btc/transactions', () => {
       fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
 
       try {
-        await transactions.get({ address });
+        await transactions.get({ address, limit: 10, offset: 0 });
       } catch (error) {
         expect(error).toBeTruthy();
       }
