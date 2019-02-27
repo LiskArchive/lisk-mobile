@@ -27,10 +27,7 @@
 		1A930F3080A942CDACBBEDC7 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F87DBCE083E405AA4F56F21 /* Entypo.ttf */; };
 		1FE4CB9322D741F88E99DB6F /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32A83BEBB1A84D3CAC07B5A5 /* Octicons.ttf */; };
 		236EB17ACA20457E9A595388 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2DBFE87FDD0441CA831FDD3 /* Foundation.ttf */; };
-		2679CC74A27C495F8B59518D /* libRNOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4046B39F8D0642458314AA32 /* libRNOS.a */; };
 		277B68A1FDB140D7899BC683 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8F29EB0B554DEEAD461802 /* EvilIcons.ttf */; };
-		2C29FA23341940F7946FBD49 /* libRNQuickAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AA60972ACCA4DA9A44CD0D0 /* libRNQuickAction.a */; };
-		330DE28121523ABA00B584E3 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 330DE27521523A8400B584E3 /* libRNKeychain.a */; };
 		3354AC9E212EB8660045554F /* libRCTQRCodeLocalImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3354AC79212EB8540045554F /* libRCTQRCodeLocalImage.a */; };
 		3354ACA5212EBA0C0045554F /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3354ACA4212EB9FD0045554F /* libRCTCameraRoll.a */; };
 		336CC48A212D98600058C7E3 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 336CC489212D98480058C7E3 /* libRNCamera.a */; };
@@ -40,7 +37,6 @@
 		3394A82621F1F8D5009CF136 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */; };
 		3394A82721F1F8E0009CF136 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */; };
 		33C3306A21F1CE0B003C62F1 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD26D020CFC01C0061FC18 /* libRNSVG.a */; };
-		33C330AE21F1CE13003C62F1 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 330DE27521523A8400B584E3 /* libRNKeychain.a */; };
 		33C330AF21F1CE31003C62F1 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD264420CFBC570061FC18 /* libRNRandomBytes.a */; };
 		33C330B021F1CE3F003C62F1 /* libTcpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD264B20CFBC570061FC18 /* libTcpSockets.a */; };
 		33C330B121F1CE46003C62F1 /* libReactNativeFingerprintScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 330DE2E021523FA000B584E3 /* libReactNativeFingerprintScanner.a */; };
@@ -49,28 +45,18 @@
 		33C330B421F1CE91003C62F1 /* libRNOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD263E20CFBC570061FC18 /* libRNOS.a */; };
 		33C330B521F1CEB9003C62F1 /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD263120CFBC560061FC18 /* libUdpSockets.a */; };
 		33C330B621F1CEBF003C62F1 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 333E0AA020F901530000C1BF /* libRNBackgroundTimer.a */; };
-		387C045E47964DDF83344920 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAB38B06D754CD8910C2257 /* libBVLinearGradient.a */; };
-		3F03C28FB8B746BA83061EF0 /* libLottieReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B50438F35FD6440883A86E60 /* libLottieReactNative.a */; };
 		426CF278ABDA4231AE32D163 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */; };
 		47933BD974AE4A1E9F26A848 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CD4A0E456D843B18B84FB4B /* MaterialIcons.ttf */; };
-		4A21D0120D4E4A66AB2BC412 /* libReactNativeFingerprintScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BF315E7838440F7A4020FB7 /* libReactNativeFingerprintScanner.a */; };
-		4C48D9A2E9E540E29F3B86BD /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1807D09C9484DB7B0CA80BC /* libInteractable.a */; };
 		50B9A7346E754E71988A0B2B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF1D9E33CBFA4D5D8AEB57C1 /* FontAwesome.ttf */; };
-		5647972E3AD04C358FF5DB68 /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE423D8CAD64E2487B31F74 /* libUdpSockets.a */; };
-		580B2BDB00664D70BCAECAEA /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 115B4EA1C36C4B8DA2672CB3 /* libRNRandomBytes.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		5EC57C141DD54FAA8903D789 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4090FA5D05A243A9B97A8497 /* Ionicons.ttf */; };
 		64557564FBF847EFA457371C /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E2532F5FF444CF99E16AA7B /* OpenSans-Light.ttf */; };
 		67F85493DA334DA29746BB43 /* dots.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27277C15D3E440E1BE87FC93 /* dots.ttf */; };
-		68A5B5B4132249F0ABC69837 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58CAE2B8D6914A1EAE566E95 /* libReactNativePermissions.a */; };
-		6EA6B3C33B2D4AA986336ABB /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF26AFCF2554480B782FBB3 /* libRNSVG.a */; };
 		7FBFE3D07A8E4244A5B3A4E9 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */; };
-		8189A043D83E44EE9D5C1B06 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C7A484EF4F74574930C1F26 /* libRNBackgroundTimer.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		86B72D090B5F4362B8AFC372 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 928A6CDBC51B4EDB99C06F39 /* Feather.ttf */; };
-		89136C304F664565A87459B8 /* libTcpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7FCBA23F6D147ACB28C9A76 /* libTcpSockets.a */; };
 		A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
-		AB26AF2FCACA4365AEB39C6B /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B1551D3FD749578DBD4F02 /* libRNReactNativeHapticFeedback.a */; };
+		AC2943B72226A03C009DAFD3 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6221A8022269DA700E90115 /* libRNKeychain.a */; };
 		AC4B3F8B21F602A000BDDF7B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC4B3F8A21F602A000BDDF7B /* LaunchScreen.xib */; };
 		AC6D413B21EF4C1D00B276BD /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		AC6D416E21EF4C2B00B276BD /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
@@ -90,14 +76,29 @@
 		ACFD538021F0A8FD00A39ABE /* MessagesManagerEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */; };
 		ACFD538221F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		B6221A2B22269B5C00E90115 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD263720CFBC570061FC18 /* libBVLinearGradient.a */; };
+		B6221A6B22269B7200E90115 /* libRNOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD263E20CFBC570061FC18 /* libRNOS.a */; };
+		B6221A6C22269C0100E90115 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD264420CFBC570061FC18 /* libRNRandomBytes.a */; };
+		B6221A6D22269C0F00E90115 /* libTcpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD264B20CFBC570061FC18 /* libTcpSockets.a */; };
+		B6221A6E22269C3000E90115 /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD263120CFBC560061FC18 /* libUdpSockets.a */; };
+		B6221A6F22269C3800E90115 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD262E20CFBC560061FC18 /* libRNVectorIcons.a */; };
+		B6221A7022269C4600E90115 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD26D020CFC01C0061FC18 /* libRNSVG.a */; };
+		B6221A7122269C5000E90115 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 333E0AA020F901530000C1BF /* libRNBackgroundTimer.a */; };
+		B6221A7222269C5E00E90115 /* libLottie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B647FA552107204B00EFF1B7 /* libLottie.a */; };
+		B6221A7322269C5E00E90115 /* libLottieReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 336BABB7210B45A1007C4B68 /* libLottieReactNative.a */; };
+		B6221A7422269C7500E90115 /* libReactNativeFingerprintScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 330DE2E021523FA000B584E3 /* libReactNativeFingerprintScanner.a */; };
+		B6221A7522269C7500E90115 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CA8823213D813100A73A25 /* libReactNativePermissions.a */; };
+		B6221A7622269C7E00E90115 /* libRNOpenAppSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CA891D213FDAFA00A73A25 /* libRNOpenAppSettings.a */; };
+		B6221A7722269C9600E90115 /* libSajjadBlurOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 338348BA21762DA2004E2E7A /* libSajjadBlurOverlay.a */; };
+		B6221A7822269CA400E90115 /* libRNReactNativeHapticFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1EA59B21B90ABD0086B121 /* libRNReactNativeHapticFeedback.a */; };
+		B6221A7922269CB300E90115 /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 334E99B021B69A5B00CF5891 /* libInteractable.a */; };
+		B6221A8322269DB100E90115 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6221A8022269DA700E90115 /* libRNKeychain.a */; };
+		B6221A8422269DF000E90115 /* libthird-party.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF0FFE32056DD460020B375 /* libthird-party.a */; };
 		B6441690216B3DB2001E51B9 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B644168F216B3B3C001E51B9 /* libSplashScreen.a */; };
 		B647FAA6210720D700EFF1B7 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B647FA4F2107204B00EFF1B7 /* Lottie.framework */; };
 		B647FAA7210720D700EFF1B7 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B647FA4F2107204B00EFF1B7 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B96E288684794B8C97F129D9 /* libLottie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D26BB38DDE374F04BC18879A /* libLottie.a */; };
-		BB6F346AB4A648A1BA54C57F /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5CB4BFCA24479DB6C41EDB /* libRNVectorIcons.a */; };
-		C1620BBB71794A2AA0AB390C /* libRNOpenAppSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A6FCB41158F4F90B94BED40 /* libRNOpenAppSettings.a */; };
+		B6BDFA4B22269915004FCE28 /* libRNQuickAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC06C76521F7236A0049690E /* libRNQuickAction.a */; };
 		D9D8E419A51C48EAA7460255 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 754CCB7535514702A07EE289 /* MaterialCommunityIcons.ttf */; };
-		EF44A06F7F1445B7BCE47C7E /* libSajjadBlurOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 912D99BBCCD84D1597505EA1 /* libSajjadBlurOverlay.a */; };
 		FD4CC47CB98340EAAA23C121 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C4BBF0DB7044654ABCFF9ED /* SimpleLineIcons.ttf */; };
 /* End PBXBuildFile section */
 
@@ -241,20 +242,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
 			remoteInfo = "privatedata-tvOS";
-		};
-		330DE27421523A8400B584E3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 330DE23E21523A8400B584E3 /* RNKeychain.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5D82366F1B0CE05B005A9EF3;
-			remoteInfo = RNKeychain;
-		};
-		330DE27621523A8400B584E3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 330DE23E21523A8400B584E3 /* RNKeychain.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6478985F1F38BF9100DA1C12;
-			remoteInfo = "RNKeychain-tvOS";
 		};
 		330DE2DF21523FA000B584E3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -543,6 +530,20 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		B6221A7F22269DA700E90115 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6221A7A22269DA600E90115 /* RNKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D82366F1B0CE05B005A9EF3;
+			remoteInfo = RNKeychain;
+		};
+		B6221A8122269DA700E90115 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6221A7A22269DA600E90115 /* RNKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6478985F1F38BF9100DA1C12;
+			remoteInfo = "RNKeychain-tvOS";
+		};
 		B644168E216B3B3C001E51B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */;
@@ -641,7 +642,6 @@
 		0941725FDF4F4CFB9767EFA1 /* UdpSockets.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = UdpSockets.xcodeproj; path = "../node_modules/react-native-udp/ios/UdpSockets.xcodeproj"; sourceTree = "<group>"; };
 		10331CBE3B784A1095359F88 /* Interactable.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
 		109B3565256044F39CA5B582 /* RNBackgroundTimer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundTimer.xcodeproj; path = "../node_modules/react-native-background-timer/ios/RNBackgroundTimer.xcodeproj"; sourceTree = "<group>"; };
-		115B4EA1C36C4B8DA2672CB3 /* libRNRandomBytes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRandomBytes.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Lisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -653,15 +653,11 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Lisk/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1C8F29EB0B554DEEAD461802 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		1DF26AFCF2554480B782FBB3 /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		2557061E886D48CBB762AC44 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		27277C15D3E440E1BE87FC93 /* dots.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dots.ttf; path = ../src/assets/fonts/passphrase/dots.ttf; sourceTree = "<group>"; };
-		2A6FCB41158F4F90B94BED40 /* libRNOpenAppSettings.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNOpenAppSettings.a; sourceTree = "<group>"; };
-		2AA60972ACCA4DA9A44CD0D0 /* libRNQuickAction.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNQuickAction.a; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A83BEBB1A84D3CAC07B5A5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		32C7C6B8C8044E0980B34F23 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
-		330DE23E21523A8400B584E3 /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		330DE28221523AE200B584E3 /* Lisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Lisk.entitlements; path = Lisk/Lisk.entitlements; sourceTree = "<group>"; };
 		3354AC62212EB8540045554F /* RCTQRCodeLocalImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTQRCodeLocalImage.xcodeproj; path = "../node_modules/@remobile/react-native-qrcode-local-image/ios/RCTQRCodeLocalImage.xcodeproj"; sourceTree = "<group>"; };
 		3354AC9F212EB9FD0045554F /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
@@ -669,12 +665,8 @@
 		33C330B721F1CF26003C62F1 /* LiskMessageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiskMessageExtension.entitlements; sourceTree = "<group>"; };
 		3C4BBF0DB7044654ABCFF9ED /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		3F921B75E2A44CB2AF90E226 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
-		4046B39F8D0642458314AA32 /* libRNOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNOS.a; sourceTree = "<group>"; };
 		4090FA5D05A243A9B97A8497 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		4E2532F5FF444CF99E16AA7B /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
-		58CAE2B8D6914A1EAE566E95 /* libReactNativePermissions.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativePermissions.a; sourceTree = "<group>"; };
-		5BF315E7838440F7A4020FB7 /* libReactNativeFingerprintScanner.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeFingerprintScanner.a; sourceTree = "<group>"; };
-		5C7A484EF4F74574930C1F26 /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundTimer.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		64706DEA34884121AA397B0B /* ReactNativeFingerprintScanner.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeFingerprintScanner.xcodeproj; path = "../node_modules/react-native-fingerprint-scanner/ios/ReactNativeFingerprintScanner.xcodeproj"; sourceTree = "<group>"; };
 		654F84AE40A946A284F01FE9 /* RNReactNativeHapticFeedback.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeHapticFeedback.xcodeproj; path = "../node_modules/react-native-haptic-feedback/ios/RNReactNativeHapticFeedback.xcodeproj"; sourceTree = "<group>"; };
@@ -683,11 +675,8 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8CD4A0E456D843B18B84FB4B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		912D99BBCCD84D1597505EA1 /* libSajjadBlurOverlay.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSajjadBlurOverlay.a; sourceTree = "<group>"; };
 		928A6CDBC51B4EDB99C06F39 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		93B1551D3FD749578DBD4F02 /* libRNReactNativeHapticFeedback.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReactNativeHapticFeedback.a; sourceTree = "<group>"; };
 		9F87DBCE083E405AA4F56F21 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		A1807D09C9484DB7B0CA80BC /* libInteractable.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInteractable.a; sourceTree = "<group>"; };
 		AC4B3F8A21F602A000BDDF7B /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		AC6D417221EF4C6D00B276BD /* LiskMessageExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiskMessageExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiskMessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -703,26 +692,20 @@
 		ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManagerEvents.swift; sourceTree = "<group>"; };
 		ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessagesManager+MessagesViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-		B50438F35FD6440883A86E60 /* libLottieReactNative.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libLottieReactNative.a; sourceTree = "<group>"; };
+		B6221A7A22269DA600E90115 /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
-		B7FCBA23F6D147ACB28C9A76 /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
 		B94922FA7F744DF8BA1C4815 /* TcpSockets.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = TcpSockets.xcodeproj; path = "../node_modules/react-native-tcp/ios/TcpSockets.xcodeproj"; sourceTree = "<group>"; };
 		BB865073FACB4AEEB229A6FF /* icomoon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoon.ttf; path = ../src/assets/fonts/icons/icomoon.ttf; sourceTree = "<group>"; };
 		BF9E32DC1F024D12A35BF73D /* RNOS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNOS.xcodeproj; path = "../node_modules/react-native-os/ios/RNOS.xcodeproj"; sourceTree = "<group>"; };
 		C01809A59F8E4744858E8946 /* Lottie.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Lottie.xcodeproj; path = "../node_modules/lottie-ios/Lottie.xcodeproj"; sourceTree = "<group>"; };
 		CBE25F1D98994394A6391170 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		CEABDB7540DE4FE3821473BA /* RNOpenAppSettings.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNOpenAppSettings.xcodeproj; path = "../node_modules/react-native-app-settings/ios/RNOpenAppSettings.xcodeproj"; sourceTree = "<group>"; };
-		D26BB38DDE374F04BC18879A /* libLottie.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libLottie.a; sourceTree = "<group>"; };
 		DA465F64021242CFAA591222 /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNRandomBytes.xcodeproj; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; };
 		DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		DB9A3976A69343E4965A15B5 /* libRNRandomBytes-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNRandomBytes-tvOS.a"; sourceTree = "<group>"; };
-		DDE423D8CAD64E2487B31F74 /* libUdpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libUdpSockets.a; sourceTree = "<group>"; };
-		DEAB38B06D754CD8910C2257 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		E2DBFE87FDD0441CA831FDD3 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		EBBAA1342DFE4B42AB7AC197 /* RNQuickAction.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNQuickAction.xcodeproj; path = "../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction.xcodeproj"; sourceTree = "<group>"; };
 		FBF884305BC34B819528F026 /* SajjadBlurOverlay.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SajjadBlurOverlay.xcodeproj; path = "../node_modules/react-native-blur-overlay/ios/SajjadBlurOverlay.xcodeproj"; sourceTree = "<group>"; };
-		FE5CB4BFCA24479DB6C41EDB /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		FF1D9E33CBFA4D5D8AEB57C1 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -739,7 +722,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				330DE28121523ABA00B584E3 /* libRNKeychain.a in Frameworks */,
+				B6221A8422269DF000E90115 /* libthird-party.a in Frameworks */,
+				B6221A8322269DB100E90115 /* libRNKeychain.a in Frameworks */,
+				B6221A7922269CB300E90115 /* libInteractable.a in Frameworks */,
+				B6221A7822269CA400E90115 /* libRNReactNativeHapticFeedback.a in Frameworks */,
+				B6221A7722269C9600E90115 /* libSajjadBlurOverlay.a in Frameworks */,
+				B6221A7622269C7E00E90115 /* libRNOpenAppSettings.a in Frameworks */,
+				B6221A7422269C7500E90115 /* libReactNativeFingerprintScanner.a in Frameworks */,
+				B6221A7522269C7500E90115 /* libReactNativePermissions.a in Frameworks */,
+				B6221A7222269C5E00E90115 /* libLottie.a in Frameworks */,
+				B6221A7322269C5E00E90115 /* libLottieReactNative.a in Frameworks */,
+				B6221A7122269C5000E90115 /* libRNBackgroundTimer.a in Frameworks */,
+				B6221A7022269C4600E90115 /* libRNSVG.a in Frameworks */,
+				B6221A6F22269C3800E90115 /* libRNVectorIcons.a in Frameworks */,
+				B6221A6E22269C3000E90115 /* libUdpSockets.a in Frameworks */,
+				B6221A6D22269C0F00E90115 /* libTcpSockets.a in Frameworks */,
+				B6221A6C22269C0100E90115 /* libRNRandomBytes.a in Frameworks */,
+				B6221A6B22269B7200E90115 /* libRNOS.a in Frameworks */,
+				B6221A2B22269B5C00E90115 /* libBVLinearGradient.a in Frameworks */,
+				B6BDFA4B22269915004FCE28 /* libRNQuickAction.a in Frameworks */,
 				B6441690216B3DB2001E51B9 /* libSplashScreen.a in Frameworks */,
 				3354ACA5212EBA0C0045554F /* libRCTCameraRoll.a in Frameworks */,
 				3354AC9E212EB8660045554F /* libRCTQRCodeLocalImage.a in Frameworks */,
@@ -758,23 +759,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				387C045E47964DDF83344920 /* libBVLinearGradient.a in Frameworks */,
-				2679CC74A27C495F8B59518D /* libRNOS.a in Frameworks */,
-				580B2BDB00664D70BCAECAEA /* libRNRandomBytes.a in Frameworks */,
-				89136C304F664565A87459B8 /* libTcpSockets.a in Frameworks */,
-				5647972E3AD04C358FF5DB68 /* libUdpSockets.a in Frameworks */,
-				BB6F346AB4A648A1BA54C57F /* libRNVectorIcons.a in Frameworks */,
-				6EA6B3C33B2D4AA986336ABB /* libRNSVG.a in Frameworks */,
-				8189A043D83E44EE9D5C1B06 /* libRNBackgroundTimer.a in Frameworks */,
-				B96E288684794B8C97F129D9 /* libLottie.a in Frameworks */,
-				3F03C28FB8B746BA83061EF0 /* libLottieReactNative.a in Frameworks */,
-				68A5B5B4132249F0ABC69837 /* libReactNativePermissions.a in Frameworks */,
-				C1620BBB71794A2AA0AB390C /* libRNOpenAppSettings.a in Frameworks */,
-				4A21D0120D4E4A66AB2BC412 /* libReactNativeFingerprintScanner.a in Frameworks */,
-				EF44A06F7F1445B7BCE47C7E /* libSajjadBlurOverlay.a in Frameworks */,
-				AB26AF2FCACA4365AEB39C6B /* libRNReactNativeHapticFeedback.a in Frameworks */,
-				4C48D9A2E9E540E29F3B86BD /* libInteractable.a in Frameworks */,
-				2C29FA23341940F7946FBD49 /* libRNQuickAction.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +766,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC2943B72226A03C009DAFD3 /* libRNKeychain.a in Frameworks */,
 				33C330B621F1CEBF003C62F1 /* libRNBackgroundTimer.a in Frameworks */,
 				33C330B521F1CEB9003C62F1 /* libUdpSockets.a in Frameworks */,
 				33C330B421F1CE91003C62F1 /* libRNOS.a in Frameworks */,
@@ -790,7 +775,6 @@
 				33C330B121F1CE46003C62F1 /* libReactNativeFingerprintScanner.a in Frameworks */,
 				33C330B021F1CE3F003C62F1 /* libTcpSockets.a in Frameworks */,
 				33C330AF21F1CE31003C62F1 /* libRNRandomBytes.a in Frameworks */,
-				33C330AE21F1CE13003C62F1 /* libRNKeychain.a in Frameworks */,
 				33C3306A21F1CE0B003C62F1 /* libRNSVG.a in Frameworks */,
 				ACFD533C21F0833A00A39ABE /* libRCTAnimation.a in Frameworks */,
 				AC6D416E21EF4C2B00B276BD /* libRCTImage.a in Frameworks */,
@@ -931,15 +915,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		330DE23F21523A8400B584E3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				330DE27521523A8400B584E3 /* libRNKeychain.a */,
-				330DE27721523A8400B584E3 /* libRNKeychain.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		330DE2DC21523FA000B584E3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1008,24 +983,6 @@
 		33DD260220CFBC550061FC18 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				DEAB38B06D754CD8910C2257 /* libBVLinearGradient.a */,
-				4046B39F8D0642458314AA32 /* libRNOS.a */,
-				115B4EA1C36C4B8DA2672CB3 /* libRNRandomBytes.a */,
-				DB9A3976A69343E4965A15B5 /* libRNRandomBytes-tvOS.a */,
-				B7FCBA23F6D147ACB28C9A76 /* libTcpSockets.a */,
-				DDE423D8CAD64E2487B31F74 /* libUdpSockets.a */,
-				FE5CB4BFCA24479DB6C41EDB /* libRNVectorIcons.a */,
-				1DF26AFCF2554480B782FBB3 /* libRNSVG.a */,
-				5C7A484EF4F74574930C1F26 /* libRNBackgroundTimer.a */,
-				D26BB38DDE374F04BC18879A /* libLottie.a */,
-				B50438F35FD6440883A86E60 /* libLottieReactNative.a */,
-				58CAE2B8D6914A1EAE566E95 /* libReactNativePermissions.a */,
-				2A6FCB41158F4F90B94BED40 /* libRNOpenAppSettings.a */,
-				5BF315E7838440F7A4020FB7 /* libReactNativeFingerprintScanner.a */,
-				912D99BBCCD84D1597505EA1 /* libSajjadBlurOverlay.a */,
-				93B1551D3FD749578DBD4F02 /* libRNReactNativeHapticFeedback.a */,
-				A1807D09C9484DB7B0CA80BC /* libInteractable.a */,
-				2AA60972ACCA4DA9A44CD0D0 /* libRNQuickAction.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1111,7 +1068,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				330DE23E21523A8400B584E3 /* RNKeychain.xcodeproj */,
+				B6221A7A22269DA600E90115 /* RNKeychain.xcodeproj */,
 				B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */,
 				3354AC9F212EB9FD0045554F /* RCTCameraRoll.xcodeproj */,
 				3354AC62212EB8540045554F /* RCTQRCodeLocalImage.xcodeproj */,
@@ -1226,6 +1183,15 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B6221A7B22269DA600E90115 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B6221A8022269DA700E90115 /* libRNKeychain.a */,
+				B6221A8222269DA700E90115 /* libRNKeychain.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1487,8 +1453,8 @@
 					ProjectRef = 336CC484212D98480058C7E3 /* RNCamera.xcodeproj */;
 				},
 				{
-					ProductGroup = 330DE23F21523A8400B584E3 /* Products */;
-					ProjectRef = 330DE23E21523A8400B584E3 /* RNKeychain.xcodeproj */;
+					ProductGroup = B6221A7B22269DA600E90115 /* Products */;
+					ProjectRef = B6221A7A22269DA600E90115 /* RNKeychain.xcodeproj */;
 				},
 				{
 					ProductGroup = B6CA8919213FDAFA00A73A25 /* Products */;
@@ -1676,20 +1642,6 @@
 			fileType = archive.ar;
 			path = "libprivatedata-tvOS.a";
 			remoteRef = 2DF0FFEC2056DD460020B375 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		330DE27521523A8400B584E3 /* libRNKeychain.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNKeychain.a;
-			remoteRef = 330DE27421523A8400B584E3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		330DE27721523A8400B584E3 /* libRNKeychain.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNKeychain.a;
-			remoteRef = 330DE27621523A8400B584E3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		330DE2E021523FA000B584E3 /* libReactNativeFingerprintScanner.a */ = {
@@ -1970,6 +1922,20 @@
 			fileType = archive.ar;
 			path = libRCTBlob.a;
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B6221A8022269DA700E90115 /* libRNKeychain.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNKeychain.a;
+			remoteRef = B6221A7F22269DA700E90115 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B6221A8222269DA700E90115 /* libRNKeychain.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNKeychain.a;
+			remoteRef = B6221A8122269DA700E90115 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B644168F216B3B3C001E51B9 /* libSplashScreen.a */ = {
