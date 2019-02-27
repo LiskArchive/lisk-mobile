@@ -13,6 +13,12 @@ const styles = {
     height: '100%',
     paddingTop: height <= 640 ? 110 : 170,
   },
+  row: {
+    flex: 1,
+    paddingLeft: boxes.boxPadding,
+    paddingRight: boxes.boxPadding,
+    flexDirection: 'row',
+  },
   innerContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -56,8 +62,6 @@ const styles = {
     opacity: height <= 640 ? 0 : 1,
   },
   button: {
-    marginRight: boxes.boxPadding,
-    marginLeft: boxes.boxPadding,
     marginBottom: 60,
   },
   errorMessage: {
@@ -92,9 +96,6 @@ const styles = {
     width: '100%',
     justifyContent: 'center',
     paddingBottom: 20,
-  },
-  row: {
-    flexDirection: 'row',
   },
   column: {
     flexDirection: 'column',
