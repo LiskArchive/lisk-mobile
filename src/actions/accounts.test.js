@@ -206,37 +206,20 @@ describe('Action: Accounts', () => {
 
     const store = mockStore({ accounts, settings });
     const expectedActions = [
-      { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
       {
         type: actionTypes.accountSignedIn,
         data: {
           passphrase: data.passphrase,
           activeToken: data.activeToken,
-          account: data.account,
+          account: { address: data.account.address },
         },
       },
-      { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
-      { type: actionTypes.accountsRetrieved, data: [data.account] },
     ];
 
     accountAPI.getSummary.mockResolvedValueOnce(data.account);
     storageUtility.retrieveAccounts.mockResolvedValueOnce([data.account]);
     await store.dispatch(accountSignedIn({ passphrase: data.passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
-  });
-
-  it('should handle error flow on accountSignedIn action', async () => {
-    storageUtility.retrieveAccounts = jest.fn();
-    const store = mockStore({ settings });
-    const cb = jest.fn();
-    const expectedActions = [
-      { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
-      { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
-    ];
-    accountAPI.getSummary.mockRejectedValue({ error: true });
-    await store.dispatch(accountSignedIn({ passphrase: data.passphrase }, cb));
-    expect(store.getActions()).toEqual(expectedActions);
-    expect(cb).toBeCalled();
   });
 
   it('should returns an accountEdited action object', () => {
