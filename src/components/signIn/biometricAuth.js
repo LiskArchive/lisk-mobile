@@ -7,8 +7,8 @@ import { bioMetricAuthentication } from '../../utilities/passphrase';
 import Icon from '../toolBox/icon';
 import styles from './styles';
 import { colors } from '../../constants/styleGuide';
-import { P, A } from '../toolBox/typography';
-import { SecondaryButton } from '../toolBox/button';
+import { P } from '../toolBox/typography';
+import { SecondaryButton, Button } from '../toolBox/button';
 import waves from '../../assets/animations/waves.json';
 import wavesError from '../../assets/animations/waves-error.json';
 
@@ -19,35 +19,29 @@ class BiometricAuth extends React.Component {
     tried: false,
   }
 
-  startUpAnimation = (callback) => {
-    this.startUpAnimEl.play();
-    Animated.timing(this.state.opacity, {
-      toValue: 1,
-      duration: this.props.animate ? 300 : 0,
-    }).start();
-    this.timeout = setTimeout(() => {
-      callback();
-    }, 1500);
-  }
-
   unauthorizedAnimation = () => {
     this.setState({ tried: true }, () => {
       this.unAuthAnimEl.play();
     });
   }
 
-  componentDidMount() {
-    this.startUpAnimation(() => {
-      bioMetricAuthentication({
-        successCallback: () => this.props.signIn(this.props.passphrase, 'biometricAuth'),
-        androidError: this.unauthorizedAnimation,
-      });
+  onClick = () => {
+    bioMetricAuthentication({
+      successCallback: () => this.props.signIn(this.props.passphrase, 'biometricAuth'),
+      androidError: this.unauthorizedAnimation,
     });
+  }
+
+  componentDidMount() {
+    this.startUpAnimEl.play();
+    Animated.timing(this.state.opacity, {
+      toValue: 1,
+      duration: this.props.animate ? 300 : 0,
+    }).start();
   }
 
   componentWillUnmount() { // eslint-disable-line
     FingerprintScanner.release();
-    clearTimeout(this.timeout);
   }
 
   render() {
@@ -87,19 +81,15 @@ class BiometricAuth extends React.Component {
         <P style={[styles.question, styles.fillWidth, tried ? styles.error : styles.invisible]}>
           { t('Unauthorized! Please try again.') }
         </P>
-        <P style={[styles.question, styles.fillWidth]}>
-          {
-            t('Don’t want to use bioAuth?', { sensorType })
-          }
-        </P>
-        <A
-          style={[styles.link, styles.fillWidth]}
-          onPress={() => toggleView({ view: 'form' })}>{t('Sign in manually')}</A>
-        <View style={styles.row}>
+        <View style={styles.column}>
           <SecondaryButton
             style={styles.button}
-            title='Sign in using Face ID'
-            onClick={() => {}} />
+            title={t('Sign in using bioAuth', { sensorType })}
+            onClick={this.onClick} />
+          <Button
+            style={styles.outlineButton}
+            title={t('Sign in manually')}
+            onClick={toggleView} />
         </View>
       </Animated.View>
     </View>);
