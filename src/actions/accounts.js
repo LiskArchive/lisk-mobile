@@ -1,7 +1,7 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
 import { account as accountAPI, transactions as transactionsAPI } from '../utilities/api';
-import { loadingStarted, loadingFinished } from './loading';
+import { loadingStarted } from './loading';
 
 /**
  * Stores the given accounts data in AsyncStorage
@@ -102,22 +102,14 @@ export const accountEdited = (address, label) => ({
  * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
-export const accountSignedIn = ({ passphrase }, cb) => (dispatch, getState) => {
+export const accountSignedIn = ({ passphrase }) => (dispatch, getState) => {
   dispatch(loadingStarted(actionTypes.accountSignedIn));
   const activeToken = getState().settings.token.active;
   const address = accountAPI.extractAddress(activeToken, passphrase);
-  return accountAPI.getSummary(activeToken, address)
-    .then((account) => {
-      dispatch({
-        type: actionTypes.accountSignedIn,
-        data: { account, passphrase, activeToken },
-      });
-      dispatch(accountsRetrieved());
-      dispatch(loadingFinished(actionTypes.accountSignedIn));
-    }).catch((err) => {
-      dispatch(loadingFinished(actionTypes.accountSignedIn));
-      cb(err);
-    });
+  dispatch({
+    type: actionTypes.accountSignedIn,
+    data: { account: { address }, passphrase, activeToken },
+  });
 };
 
 export const accountSignedOut = () => ({
