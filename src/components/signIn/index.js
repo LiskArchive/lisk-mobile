@@ -79,8 +79,10 @@ class SignIn extends React.Component {
     this.setState({ androidDialog }, cb);
   }
 
-  changeHandler = (data) => {
-    this.setState(data);
+  toggleView = () => {
+    this.setState({
+      view: this.state.view === 'form' ? 'biometricAuth' : 'form',
+    });
   }
 
   async defineDefaultAuthMethod() {
@@ -102,12 +104,12 @@ class SignIn extends React.Component {
     // Update the component state
     this.timeout = setTimeout(() => {
       if (password && sensorType) {
-        this.changeHandler({
+        this.setState({
           view: 'biometricAuth',
           storedPassphrase: password,
         });
       } else {
-        this.changeHandler({
+        this.setState({
           view: 'form',
         });
       }
@@ -164,11 +166,18 @@ class SignIn extends React.Component {
   signIn = (passphrase) => {
     this.props.accountSignedIn({
       passphrase,
-    }, () => {
-      this.setState({
-        connectionError: true,
-      });
     });
+
+    this.props.pricesRetrieved();
+
+    if (this.state.deepLinkURL) {
+      this.navigateToDeepLink(this.state.deepLinkURL);
+    } else {
+      this.props.navigation.dispatch(NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Main' })],
+      }));
+    }
   }
 
   /**
@@ -182,7 +191,6 @@ class SignIn extends React.Component {
     const { settings } = this.props;
 
     this.setState({
-      connectionError: false,
       passphrase,
     });
 
@@ -190,19 +198,6 @@ class SignIn extends React.Component {
       this.promptBioAuth(passphrase, this.signIn);
     } else {
       this.signIn(passphrase);
-    }
-  }
-
-  onSignInCompleted = () => {
-    this.props.pricesRetrieved();
-
-    if (this.state.deepLinkURL) {
-      this.navigateToDeepLink(this.state.deepLinkURL);
-    } else {
-      this.props.navigation.dispatch(NavigationActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: 'Main' })],
-      }));
     }
   }
 
@@ -279,7 +274,7 @@ class SignIn extends React.Component {
   }
 
   componentDidUpdate() {
-    const { settings, navigation, accounts } = this.props;
+    const { settings, navigation } = this.props;
     const { destinationDefined } = this.state;
 
     if (settings.validated && !destinationDefined) {
@@ -289,10 +284,6 @@ class SignIn extends React.Component {
         navigation.navigate('Intro');
       }
       this.setState({ destinationDefined: true });
-    }
-
-    if (accounts.info[settings.token.active].address && navigation && navigation.isFocused()) {
-      this.onSignInCompleted();
     }
   }
 
@@ -311,7 +302,7 @@ class SignIn extends React.Component {
         view === 'biometricAuth' ?
           <BiometricAuth
             animate={!signOut}
-            toggleView={this.changeHandler}
+            toggleView={this.toggleView}
             sensorType={sensorType}
             passphrase={storedPassphrase}
             signIn={this.onFormSubmission} /> : null
@@ -321,17 +312,16 @@ class SignIn extends React.Component {
           <Form
             animate={!signOut}
             navigation={this.props.navigation}
-            toggleView={this.changeHandler}
+            toggleView={this.toggleView}
             signIn={this.onFormSubmission}
-            connectionError={this.state.connectionError}
           /> : null
       }
       {
         Platform.OS === 'android' ?
-        <FingerprintOverlay
-          onModalClosed={() => this.signIn(this.state.passphrase)}
-          error={androidDialog.error}
-          show={androidDialog.show} /> : null
+          <FingerprintOverlay
+            onModalClosed={() => this.signIn(this.state.passphrase)}
+            error={androidDialog.error}
+            show={androidDialog.show} /> : null
       }
     </View>);
   }

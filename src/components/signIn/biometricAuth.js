@@ -8,6 +8,7 @@ import Icon from '../toolBox/icon';
 import styles from './styles';
 import { colors } from '../../constants/styleGuide';
 import { P, A } from '../toolBox/typography';
+import { SecondaryButton } from '../toolBox/button';
 import waves from '../../assets/animations/waves.json';
 import wavesError from '../../assets/animations/waves-error.json';
 
@@ -94,6 +95,12 @@ class BiometricAuth extends React.Component {
         <A
           style={[styles.link, styles.fillWidth]}
           onPress={() => toggleView({ view: 'form' })}>{t('Sign in manually')}</A>
+        <View style={styles.row}>
+          <SecondaryButton
+            style={styles.button}
+            title='Sign in using Face ID'
+            onClick={() => {}} />
+        </View>
       </Animated.View>
     </View>);
   }
