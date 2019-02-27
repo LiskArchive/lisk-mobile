@@ -1,6 +1,6 @@
-import { StyleSheet, Platform, DeviceInfo } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors, fonts, boxes } from '../../constants/styleGuide';
-import { deviceHeight } from '../../utilities/device';
+import { deviceHeight, deviceType } from '../../utilities/device';
 
 const height = deviceHeight();
 
@@ -14,9 +14,6 @@ const styles = {
     paddingTop: height <= 640 ? 110 : 170,
   },
   row: {
-    flex: 1,
-    paddingLeft: boxes.boxPadding,
-    paddingRight: boxes.boxPadding,
     flexDirection: 'row',
   },
   column: {
@@ -232,13 +229,11 @@ const styles = {
   },
   cameraRoll: {
     borderTopColor: colors.light.white,
-    borderTopWidth: (Platform.OS === 'ios' &&
-      DeviceInfo.isIPhoneX_deprecated) ? 74 : 50,
+    borderTopWidth: deviceType() === 'iOSx' ? 74 : 50,
   },
   cameraOverlay: {
     borderTopColor: 'rgba(57, 68, 81, 0.85)',
-    borderTopWidth: (Platform.OS === 'ios' &&
-      DeviceInfo.isIPhoneX_deprecated) ? 34 : 10,
+    borderTopWidth: deviceType() === 'iOSx' ? 34 : 10,
   },
   christmasHatContainer: {
     position: 'absolute',
@@ -247,6 +242,16 @@ const styles = {
   christmasHat: {
     width: 58,
     height: 43,
+  },
+  backButton: {
+    position: 'absolute',
+    width: 130,
+    height: 32,
+    left: 3,
+    top: deviceType() === 'iOSx' ? 48 : 24,
+  },
+  backButtonTitle: {
+    color: colors.light.blue,
   },
 };
 

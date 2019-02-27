@@ -313,6 +313,7 @@ class SignIn extends React.Component {
             animate={!signOut}
             navigation={this.props.navigation}
             toggleView={this.toggleView}
+            sensorType={sensorType}
             signIn={this.onFormSubmission}
           /> : null
       }

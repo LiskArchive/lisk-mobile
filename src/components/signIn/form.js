@@ -23,6 +23,19 @@ const Extras = ({
   </View>
 );
 
+const BackButton = ({
+  toggleView, sensorType, t,
+}) => (
+  <IconButton
+    onPress={toggleView}
+    titleStyle={styles.backButtonTitle}
+    style={styles.backButton}
+    title={t('Use bioAuth', { sensorType })}
+    icon='back'
+    iconSize={20}
+    color={colors.light.blue} />
+);
+
 class Form extends React.Component {
   state = {
     passphrase: {
@@ -109,7 +122,7 @@ class Form extends React.Component {
   render() {
     const { passphrase, animation: { opacity } } = this.state;
     const {
-      t, navigation, lng,
+      t, navigation, lng, toggleView, sensorType,
     } = this.props;
 
     let errorMessage = '';
@@ -125,6 +138,10 @@ class Form extends React.Component {
 
     return (
       <View style={styles.container}>
+        <BackButton
+          toggleView={toggleView}
+          sensorType={sensorType}
+          t={t} />
         <Scanner
           ref={(el) => { this.scanner = el; }}
           containerStyles={{

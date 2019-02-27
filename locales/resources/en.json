@@ -173,5 +173,6 @@
   "Do you want to use Biometric Authentication?": "Do you want to use Biometric Authentication?",
   "For ease of sign in": "For ease of sign in",
   "OK": "OK",
-  "Sign in using bioAuth": "Sign in using {{sensorType}}"
+  "Sign in using bioAuth": "Sign in using {{sensorType}}",
+  "Use bioAuth": "Use {{sensorType}}"
 }

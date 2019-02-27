@@ -173,6 +173,7 @@
   "Do you want to use Biometric Authentication?": "Möchtest du biometrische Authentifizierung benutzen?",
   "For ease of sign in": "Für einfache Anmeldung",
   "OK": "OK",
+  "Sign in using bioAuth": "Melde dich mit {{sensorType}} an",
   "You don't have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
-  "Sign in using bioAuth": "Melde dich mit {{sensorType}} an"
+  "Use bioAuth": "{{sensorType}} benutzen"
 }
