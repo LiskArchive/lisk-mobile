@@ -19,6 +19,10 @@ const styles = {
     paddingRight: boxes.boxPadding,
     flexDirection: 'row',
   },
+  column: {
+    flex: 1,
+    flexDirection: 'column',
+  },
   innerContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -62,7 +66,21 @@ const styles = {
     opacity: height <= 640 ? 0 : 1,
   },
   button: {
-    marginBottom: 60,
+    height: 47,
+    marginHorizontal: boxes.boxPadding,
+  },
+  outlineButton: {
+    height: 45,
+    borderWidth: 1,
+    borderColor: colors.light.gray1,
+    color: colors.light.gray1,
+    borderRadius: 2,
+    marginHorizontal: boxes.boxPadding,
+    marginTop: 12,
+    textAlign: 'center',
+    lineHeight: 45,
+    fontSize: fonts.size.base,
+    fontFamily: fonts.family.context,
   },
   errorMessage: {
     fontSize: 14,
@@ -96,9 +114,6 @@ const styles = {
     width: '100%',
     justifyContent: 'center',
     paddingBottom: 20,
-  },
-  column: {
-    flexDirection: 'column',
   },
   question: {
     color: colors.light.gray2,
@@ -169,8 +184,8 @@ const styles = {
     width: '100%',
     height: '100%',
     borderBottomColor: 'transparent',
-    borderBottomWidth: 125,
-    marginBottom: -125,
+    borderBottomWidth: 165,
+    marginBottom: -165,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
