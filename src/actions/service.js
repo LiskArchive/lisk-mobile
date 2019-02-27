@@ -4,7 +4,7 @@ import actionTypes from '../constants/actions';
 export const pricesRetrieved = () => (dispatch, getState) => {
   const { settings: { token } } = getState();
 
-  serviceAPI.getPriceTicker(token)
+  serviceAPI.getPriceTicker(token.active)
     .then(priceTicker => dispatch({
       type: actionTypes.pricesRetrieved,
       priceTicker,
@@ -15,7 +15,7 @@ export const pricesRetrieved = () => (dispatch, getState) => {
 export const dynamicFeesRetrieved = () => (dispatch, getState) => {
   const { settings: { token } } = getState();
 
-  serviceAPI.getDynamicFees(token)
+  serviceAPI.getDynamicFees(token.active)
     .then(dynamicFees => dispatch({
       type: actionTypes.dynamicFeesRetrieved,
       dynamicFees,
