@@ -138,10 +138,13 @@ class Form extends React.Component {
 
     return (
       <View style={styles.container}>
-        <BackButton
-          toggleView={toggleView}
-          sensorType={sensorType}
-          t={t} />
+        {
+          sensorType ?
+            <BackButton
+              toggleView={toggleView}
+              sensorType={sensorType}
+              t={t} /> : null
+        }
         <Scanner
           ref={(el) => { this.scanner = el; }}
           containerStyles={{
