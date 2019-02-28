@@ -21,7 +21,6 @@ import {
 } from '../../utilities/passphrase';
 import {
   accountSignedIn as accountSignedInAction,
-  accountsRetrieved as accountsRetrievedAction,
 } from '../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
@@ -37,15 +36,11 @@ import quickActions from '../../constants/quickActions';
 // there is a warning in RNOS module. remove this then that warning is fixed
 console.disableYellowBox = true; // eslint-disable-line
 
-/**
- * The settings state is passed through the landing component
- */
 @connect(state => ({
   accounts: state.accounts,
   settings: state.settings,
 }), {
   accountSignedIn: accountSignedInAction,
-  accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
   settingsRetrieved: settingsRetrievedAction,
   pricesRetrieved: pricesRetrievedAction,
@@ -182,7 +177,8 @@ class SignIn extends React.Component {
 
   /**
    * Will be called when sign in form is submitted
-   * fires the activePeerSet action
+   * determines to show the bioAuth recommendation
+   * and also sets the account basic (offline) info
    *
    * @param {String} passphrase - valid mnemonic passphrase
    * @param {String} submissionType - 'form' or 'biometricAuth'
@@ -202,7 +198,7 @@ class SignIn extends React.Component {
   }
 
   onDeepLinkRequested = (event) => {
-    const isSignedIn = !!this.props.accounts.active;
+    const isSignedIn = !!this.props.accounts.passphrase;
 
     if (isSignedIn) {
       this.navigateToDeepLink(event.url);
