@@ -9,7 +9,7 @@ import {
   blockUpdated,
   accountSignedOut,
   accountsStored,
-  accountsRetrieved,
+  followedAccountsRetrieved,
 } from './accounts';
 import actionTypes from '../constants/actions';
 import * as storageUtility from '../utilities/storage';
@@ -191,14 +191,14 @@ describe('Action: Accounts', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should dispatch accountsRetrieved action when the data is read from the storage', async () => {
+  it('should dispatch followedAccountsRetrieved action when the data is read from the storage', async () => {
     storageUtility.retrieveAccounts = jest.fn();
     const store = mockStore({});
     const expectedActions = [
-      { type: actionTypes.accountsRetrieved, data: [data.account] },
+      { type: actionTypes.followedAccountsRetrieved, data: [data.account] },
     ];
     storageUtility.retrieveAccounts.mockResolvedValue([data.account]);
-    await store.dispatch(accountsRetrieved());
+    await store.dispatch(followedAccountsRetrieved());
     expect(store.getActions()).toEqual(expectedActions);
   });
 

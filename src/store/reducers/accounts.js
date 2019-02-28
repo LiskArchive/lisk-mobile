@@ -41,7 +41,7 @@ const accounts = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.accountSignedOut:
       return merge(state, { info: INITIAL_STATE.info, passphrase: null });
 
-    case actionTypes.accountsRetrieved:
+    case actionTypes.followedAccountsRetrieved:
       return merge(state, { followed: action.data });
 
     case actionTypes.accountEdited:

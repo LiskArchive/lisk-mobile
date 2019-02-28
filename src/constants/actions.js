@@ -7,7 +7,7 @@ const actionTypes = {
   accountFollowed: 'ACCOUNT_FOLLOWED',
   accountEdited: 'ACCOUNT_EDITED',
   accountUnFollowed: 'ACCOUNT_UN_FOLLOWED',
-  accountsRetrieved: 'ACCOUNTS_RETRIEVED',
+  followedAccountsRetrieved: 'FOLLOWED_ACCOUNTS_RETRIEVED',
   accountsStored: 'ACCOUNTS_STORED',
   // Peers
   activePeerSet: 'ACTIVE_PEER_SET',

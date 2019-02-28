@@ -35,12 +35,12 @@ export const accountsStored = data =>
  *
  * @returns {Function} Thunk action function
  */
-export const accountsRetrieved = () =>
+export const followedAccountsRetrieved = () =>
   (dispatch) => {
     retrieveAccounts()
       .then((accounts) => {
         dispatch({
-          type: actionTypes.accountsRetrieved,
+          type: actionTypes.followedAccountsRetrieved,
           data: accounts,
         });
       });
@@ -129,7 +129,7 @@ export const accountFetched = () => (dispatch, getState) => {
           activeToken,
         },
       });
-      dispatch(accountsRetrieved());
+      dispatch(followedAccountsRetrieved());
       dispatch(loadingFinished(actionTypes.accountFetched));
     }).catch(() => {
       dispatch(loadingFinished(actionTypes.accountFetched));
