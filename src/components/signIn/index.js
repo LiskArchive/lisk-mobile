@@ -27,7 +27,7 @@ import {
   settingsUpdated as settingsUpdatedAction,
   settingsRetrieved as settingsRetrievedAction,
 } from '../../actions/settings';
-import { pricesRetrieved as pricesRetrievedAction } from '../../actions/liskService';
+import { pricesRetrieved as pricesRetrievedAction } from '../../actions/service';
 import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';

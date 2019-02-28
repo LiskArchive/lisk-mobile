@@ -31,7 +31,7 @@ const summaryHeight = 200;
   account: state.accounts.info || {},
   followedAccounts: state.accounts.followed || [],
   transactions: state.transactions,
-  priceTicker: state.liskService.priceTicker,
+  priceTicker: state.service.priceTicker,
   incognito: state.settings.incognito,
   language: state.settings.language,
   activeToken: state.settings.token.active,

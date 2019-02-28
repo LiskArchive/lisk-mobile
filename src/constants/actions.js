@@ -21,8 +21,9 @@ const actionTypes = {
   // Settings
   settingsUpdated: 'SETTINGS_UPDATED',
   settingsRetrieved: 'SETTINGS_RETRIEVED',
-  // LiskService
+  // Service
   pricesRetrieved: 'PRICES_RETRIEVED',
+  dynamicFeesRetrieved: 'DYNAMIC_FEES_RETRIEVED',
 };
 
 export default actionTypes;

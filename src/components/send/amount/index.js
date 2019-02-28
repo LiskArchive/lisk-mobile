@@ -21,7 +21,7 @@ const isAndroid = deviceType() === 'android';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 @connect(state => ({
-  priceTicker: state.liskService.priceTicker,
+  priceTicker: state.service.priceTicker,
 }))
 class Amount extends React.Component {
   state = {
