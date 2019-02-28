@@ -99,9 +99,11 @@ const data = {
 };
 
 describe('Action: Accounts', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     accountAPI.getSummary = jest.fn();
     transactionsAPI.get = jest.fn();
+    storageUtility.storeAccounts = jest.fn();
+    storageUtility.retrieveAccounts = jest.fn();
   });
 
   it('should return an accountUnFollowed action object', () => {
@@ -160,8 +162,8 @@ describe('Action: Accounts', () => {
         },
       ];
 
-      accountAPI.getSummary.mockResolvedValue(data.account);
-      transactionsAPI.get.mockResolvedValue(data.transactions);
+      accountAPI.getSummary.mockResolvedValueOnce(data.account);
+      transactionsAPI.get.mockResolvedValueOnce(data.transactions);
 
       await store.dispatch(blockUpdated());
       expect(store.getActions()).toEqual(expectedActions);
@@ -181,7 +183,6 @@ describe('Action: Accounts', () => {
   });
 
   it('should dispatch accountsStored action when the data is written in the storage', async () => {
-    storageUtility.storeAccounts = jest.fn();
     const store = mockStore({});
     const expectedActions = [
       { type: actionTypes.accountsStored },
@@ -192,7 +193,6 @@ describe('Action: Accounts', () => {
   });
 
   it('should dispatch followedAccountsRetrieved action when the data is read from the storage', async () => {
-    storageUtility.retrieveAccounts = jest.fn();
     const store = mockStore({});
     const expectedActions = [
       { type: actionTypes.followedAccountsRetrieved, data: [data.account] },
@@ -203,8 +203,6 @@ describe('Action: Accounts', () => {
   });
 
   it('should dispatch accountSignedIn action when it receives data of user', async () => {
-    storageUtility.retrieveAccounts = jest.fn();
-
     const store = mockStore({ accounts, settings });
     const expectedActions = [
       {
@@ -224,29 +222,15 @@ describe('Action: Accounts', () => {
   });
 
   it('should handle error flow on accountFetched action', async () => {
-    storageUtility.retrieveAccounts = jest.fn();
     const store = mockStore({
       settings,
       accounts,
     });
     const expectedActions = [
       { type: actionTypes.loadingStarted, data: actionTypes.accountFetched },
-      {
-        data: {
-          account: {
-            address: '5092448154042807473L',
-            balance: '10000',
-            initialized: true,
-            publicKey: 'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
-            unconfirmedBalance: '10000',
-          },
-          activeToken: 'LSK',
-        },
-        type: 'ACCOUNT_UPDATED',
-      },
       { type: actionTypes.loadingFinished, data: actionTypes.accountFetched },
     ];
-    accountAPI.getSummary.mockRejectedValue({ error: true });
+    accountAPI.getSummary.mockRejectedValueOnce({ error: true });
     await store.dispatch(accountFetched());
     expect(store.getActions()).toEqual(expectedActions);
   });
