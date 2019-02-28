@@ -5,6 +5,7 @@ import {
   accountUnFollowed,
   accountEdited,
   accountSignedIn,
+  accountFetched,
   blockUpdated,
   accountSignedOut,
   accountsStored,
@@ -219,6 +220,34 @@ describe('Action: Accounts', () => {
     accountAPI.getSummary.mockResolvedValueOnce(data.account);
     storageUtility.retrieveAccounts.mockResolvedValueOnce([data.account]);
     await store.dispatch(accountSignedIn({ passphrase: data.passphrase }));
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should handle error flow on accountFetched action', async () => {
+    storageUtility.retrieveAccounts = jest.fn();
+    const store = mockStore({
+      settings,
+      accounts,
+    });
+    const expectedActions = [
+      { type: actionTypes.loadingStarted, data: actionTypes.accountFetched },
+      {
+        data: {
+          account: {
+            address: '5092448154042807473L',
+            balance: '10000',
+            initialized: true,
+            publicKey: 'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
+            unconfirmedBalance: '10000',
+          },
+          activeToken: 'LSK',
+        },
+        type: 'ACCOUNT_UPDATED',
+      },
+      { type: actionTypes.loadingFinished, data: actionTypes.accountFetched },
+    ];
+    accountAPI.getSummary.mockRejectedValue({ error: true });
+    await store.dispatch(accountFetched());
     expect(store.getActions()).toEqual(expectedActions);
   });
 

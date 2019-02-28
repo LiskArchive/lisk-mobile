@@ -1,6 +1,7 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
 import { account as accountAPI, transactions as transactionsAPI } from '../utilities/api';
+import { loadingStarted, loadingFinished } from './loading';
 
 /**
  * Stores the given accounts data in AsyncStorage
@@ -113,6 +114,27 @@ export const accountSignedIn = ({ passphrase }) => (dispatch, getState) => {
 export const accountSignedOut = () => ({
   type: actionTypes.accountSignedOut,
 });
+
+export const accountFetched = () => (dispatch, getState) => {
+  const activeToken = getState().settings.token.active;
+  const { address } = getState().accounts.info[activeToken];
+
+  dispatch(loadingStarted(actionTypes.accountFetched));
+  return accountAPI.getSummary(activeToken, address)
+    .then((account) => {
+      dispatch({
+        type: actionTypes.accountUpdated,
+        data: {
+          account,
+          activeToken,
+        },
+      });
+      dispatch(accountsRetrieved());
+      dispatch(loadingFinished(actionTypes.accountFetched));
+    }).catch(() => {
+      dispatch(loadingFinished(actionTypes.accountFetched));
+    });
+};
 
 export const blockUpdated = () => async (dispatch, getState) => {
   const activeToken = getState().settings.token.active;
