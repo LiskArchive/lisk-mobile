@@ -212,6 +212,8 @@ class AddToBookmark extends React.Component {
           readFromCameraRoll={true}
           onQRCodeRead={this.onQRCodeRead}
           onClose={this.onCloseScanner}
+          permissionDialogTitle={t('Permission to use camera')}
+          permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
         <KeyboardAwareScrollView
             onSubmit={this.submitForm}

@@ -147,8 +147,9 @@ class Confirm extends React.Component {
           readFromCameraRoll={false}
           onQRCodeRead={this.onQRCodeRead}
           onClose={this.onCloseCamera}
+          permissionDialogTitle={t('Permission to use camera')}
+          permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
-
         <KeyboardAwareScrollView
           onSubmit={this.onSubmit}
           hasTabBar={true}

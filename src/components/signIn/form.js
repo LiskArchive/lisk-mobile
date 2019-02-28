@@ -144,6 +144,8 @@ class Form extends React.Component {
           navigation={navigation}
           readFromCameraRoll={false}
           onQRCodeRead={this.onQRCodeRead}
+          permissionDialogTitle={t('Permission to use camera')}
+          permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
         <Animated.View
           style={[styles.titleContainer, styles.paddingBottom, { opacity }]}
