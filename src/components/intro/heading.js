@@ -107,7 +107,7 @@ class Heading extends React.Component {
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Activity history</H2>
               <P style={[styles.centralized, styles.descriptionP]}>
-                {t("Get a full overview of your current{'\n'}balance, transaction history{'\n'}and much more.")}
+                {t('Get a full overview of your current balance, transaction history and much more.')}
               </P>
             </View>
           </View>
@@ -115,7 +115,7 @@ class Heading extends React.Component {
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Token transfer</H2>
               <P style={[styles.centralized, styles.descriptionP]}>
-                {t("Transfer your LSK tokens easily to{'\n'}other accounts by simply scanning{'\n'}their QR code.")}
+                {t('Transfer your LSK tokens easily to other accounts by simply scanning their QR code.')}
               </P>
             </View>
           </View>
@@ -123,7 +123,7 @@ class Heading extends React.Component {
             <View style={styles.itemWrapper}>
               <H2 style={styles.centralized}>Secure authentication</H2>
               <P style={[styles.centralized, styles.descriptionP]}>
-                {t("Access all functions of the app{'\n'}quickly and securely via advanced{'\n'}biometric authentication.")}
+                {t('Access all functions of the app quickly and securely via advanced biometric authentication.')}
               </P>
             </View>
           </View>
