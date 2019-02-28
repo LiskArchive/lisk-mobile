@@ -4,7 +4,10 @@ import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from 'react-navigation';
 import { translate } from 'react-i18next';
 import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
-import { blockUpdated as blockUpdatedAction } from '../../actions/accounts';
+import {
+  blockUpdated as blockUpdatedAction,
+  accountFetched as accountFetchedAction,
+} from '../../actions/accounts';
 import AccountSummary from '../accountSummary';
 import Transactions from '../transactions';
 import Empty from '../transactions/empty';
@@ -38,6 +41,7 @@ const summaryHeight = 200;
 }), {
   transactionsLoaded: transactionsLoadedAction,
   updateTransactions: blockUpdatedAction,
+  accountFetched: accountFetchedAction,
 })
 class Home extends React.Component {
   state = {
@@ -90,7 +94,10 @@ class Home extends React.Component {
       account,
       navigation,
       activeToken,
+      accountFetched,
     } = this.props;
+
+    accountFetched();
 
     if (!transactions.loaded) {
       transactionsLoaded({
