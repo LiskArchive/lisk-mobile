@@ -237,7 +237,7 @@ class SignIn extends React.Component {
     }
 
     const { userInfo: { url } } = action;
-    const isSignedIn = !!this.props.accounts.active;
+    const isSignedIn = !!this.props.accounts.passphrase;
 
     if (isSignedIn) {
       this.navigateToDeepLink(url);
