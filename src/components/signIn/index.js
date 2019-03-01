@@ -289,7 +289,7 @@ class SignIn extends React.Component {
 
   render() {
     const { view, storedPassphrase, androidDialog } = this.state;
-    const { sensorType } = this.props.settings;
+    const { sensorType, hasStoredPassphrase } = this.props.settings;
     const signOut = this.props.navigation.getParam('signOut');
 
     return (<View style={styles.wrapper}>
@@ -310,6 +310,7 @@ class SignIn extends React.Component {
             navigation={this.props.navigation}
             toggleView={this.toggleView}
             sensorType={sensorType}
+            showBackButton={hasStoredPassphrase && sensorType}
             signIn={this.onFormSubmission}
           /> : null
       }

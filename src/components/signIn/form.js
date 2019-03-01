@@ -122,7 +122,7 @@ class Form extends React.Component {
   render() {
     const { passphrase, animation: { opacity } } = this.state;
     const {
-      t, navigation, lng, toggleView, sensorType,
+      t, navigation, lng, toggleView, sensorType, showBackButton,
     } = this.props;
 
     let errorMessage = '';
@@ -139,7 +139,7 @@ class Form extends React.Component {
     return (
       <View style={styles.container}>
         {
-          sensorType ?
+          showBackButton ?
             <BackButton
               toggleView={toggleView}
               sensorType={sensorType}
