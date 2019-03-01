@@ -1,6 +1,6 @@
 import bitcoin from 'bitcoinjs-lib';
 import config from '../../../../btc.config';
-import { extractAddress, getDerivedPathFromSeed } from './account';
+import { extractAddress, getDerivedPathFromPassphrase } from './account';
 import { merge } from '../../helpers';
 
 /**
@@ -200,7 +200,7 @@ export const create = ({
     txb.addOutput(senderAddress, change);
 
     // Sign inputs
-    const derivedPath = getDerivedPathFromSeed(passphrase);
+    const derivedPath = getDerivedPathFromPassphrase(passphrase);
     const keyPair = bitcoin.ECPair.fromWIF(derivedPath.toWIF(), config.network);
     for (let i = 0; i < txOutsToConsume.length; i++) {
       txb.sign(i, keyPair);
