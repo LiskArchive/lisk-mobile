@@ -129,7 +129,6 @@ export const accountFetched = () => (dispatch, getState) => {
           activeToken,
         },
       });
-      dispatch(followedAccountsRetrieved());
       dispatch(loadingFinished(actionTypes.accountFetched));
     }).catch(() => {
       dispatch(loadingFinished(actionTypes.accountFetched));

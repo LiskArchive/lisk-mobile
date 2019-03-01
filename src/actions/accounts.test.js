@@ -215,7 +215,6 @@ describe('Action: Accounts', () => {
       },
     ];
 
-    accountAPI.getSummary.mockResolvedValueOnce(data.account);
     storageUtility.retrieveAccounts.mockResolvedValueOnce([data.account]);
     await store.dispatch(accountSignedIn({ passphrase: data.passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
@@ -231,6 +230,27 @@ describe('Action: Accounts', () => {
       { type: actionTypes.loadingFinished, data: actionTypes.accountFetched },
     ];
     accountAPI.getSummary.mockRejectedValueOnce({ error: true });
+    await store.dispatch(accountFetched());
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should update the account info by accountFetched action', async () => {
+    const store = mockStore({
+      settings,
+      accounts,
+    });
+    const expectedActions = [
+      { type: actionTypes.loadingStarted, data: actionTypes.accountFetched },
+      {
+        type: actionTypes.accountUpdated,
+        data: {
+          account: data.account,
+          activeToken: data.activeToken,
+        },
+      },
+      { type: actionTypes.loadingFinished, data: actionTypes.accountFetched },
+    ];
+    accountAPI.getSummary.mockResolvedValueOnce(data.account);
     await store.dispatch(accountFetched());
     expect(store.getActions()).toEqual(expectedActions);
   });
