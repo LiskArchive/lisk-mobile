@@ -5,10 +5,11 @@ import {
   accountUnFollowed,
   accountEdited,
   accountSignedIn,
+  accountFetched,
   blockUpdated,
   accountSignedOut,
   accountsStored,
-  accountsRetrieved,
+  followedAccountsRetrieved,
 } from './accounts';
 import actionTypes from '../constants/actions';
 import * as storageUtility from '../utilities/storage';
@@ -98,9 +99,11 @@ const data = {
 };
 
 describe('Action: Accounts', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     accountAPI.getSummary = jest.fn();
     transactionsAPI.get = jest.fn();
+    storageUtility.storeAccounts = jest.fn();
+    storageUtility.retrieveAccounts = jest.fn();
   });
 
   it('should return an accountUnFollowed action object', () => {
@@ -159,8 +162,8 @@ describe('Action: Accounts', () => {
         },
       ];
 
-      accountAPI.getSummary.mockResolvedValue(data.account);
-      transactionsAPI.get.mockResolvedValue(data.transactions);
+      accountAPI.getSummary.mockResolvedValueOnce(data.account);
+      transactionsAPI.get.mockResolvedValueOnce(data.transactions);
 
       await store.dispatch(blockUpdated());
       expect(store.getActions()).toEqual(expectedActions);
@@ -180,7 +183,6 @@ describe('Action: Accounts', () => {
   });
 
   it('should dispatch accountsStored action when the data is written in the storage', async () => {
-    storageUtility.storeAccounts = jest.fn();
     const store = mockStore({});
     const expectedActions = [
       { type: actionTypes.accountsStored },
@@ -190,53 +192,67 @@ describe('Action: Accounts', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should dispatch accountsRetrieved action when the data is read from the storage', async () => {
-    storageUtility.retrieveAccounts = jest.fn();
+  it('should dispatch followedAccountsRetrieved action when the data is read from the storage', async () => {
     const store = mockStore({});
     const expectedActions = [
-      { type: actionTypes.accountsRetrieved, data: [data.account] },
+      { type: actionTypes.followedAccountsRetrieved, data: [data.account] },
     ];
     storageUtility.retrieveAccounts.mockResolvedValue([data.account]);
-    await store.dispatch(accountsRetrieved());
+    await store.dispatch(followedAccountsRetrieved());
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should dispatch accountSignedIn action when it receives data of user', async () => {
-    storageUtility.retrieveAccounts = jest.fn();
-
     const store = mockStore({ accounts, settings });
     const expectedActions = [
-      { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
       {
         type: actionTypes.accountSignedIn,
         data: {
           passphrase: data.passphrase,
           activeToken: data.activeToken,
-          account: data.account,
+          account: { address: data.account.address },
         },
       },
-      { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
-      { type: actionTypes.accountsRetrieved, data: [data.account] },
     ];
 
-    accountAPI.getSummary.mockResolvedValueOnce(data.account);
     storageUtility.retrieveAccounts.mockResolvedValueOnce([data.account]);
     await store.dispatch(accountSignedIn({ passphrase: data.passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should handle error flow on accountSignedIn action', async () => {
-    storageUtility.retrieveAccounts = jest.fn();
-    const store = mockStore({ settings });
-    const cb = jest.fn();
+  it('should handle error flow on accountFetched action', async () => {
+    const store = mockStore({
+      settings,
+      accounts,
+    });
     const expectedActions = [
-      { type: actionTypes.loadingStarted, data: actionTypes.accountSignedIn },
-      { type: actionTypes.loadingFinished, data: actionTypes.accountSignedIn },
+      { type: actionTypes.loadingStarted, data: actionTypes.accountFetched },
+      { type: actionTypes.loadingFinished, data: actionTypes.accountFetched },
     ];
-    accountAPI.getSummary.mockRejectedValue({ error: true });
-    await store.dispatch(accountSignedIn({ passphrase: data.passphrase }, cb));
+    accountAPI.getSummary.mockRejectedValueOnce({ error: true });
+    await store.dispatch(accountFetched());
     expect(store.getActions()).toEqual(expectedActions);
-    expect(cb).toBeCalled();
+  });
+
+  it('should update the account info by accountFetched action', async () => {
+    const store = mockStore({
+      settings,
+      accounts,
+    });
+    const expectedActions = [
+      { type: actionTypes.loadingStarted, data: actionTypes.accountFetched },
+      {
+        type: actionTypes.accountUpdated,
+        data: {
+          account: data.account,
+          activeToken: data.activeToken,
+        },
+      },
+      { type: actionTypes.loadingFinished, data: actionTypes.accountFetched },
+    ];
+    accountAPI.getSummary.mockResolvedValueOnce(data.account);
+    await store.dispatch(accountFetched());
+    expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should returns an accountEdited action object', () => {

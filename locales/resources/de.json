@@ -1,7 +1,7 @@
 {
   "Look at the front camera to authenticate.": "Schau bitte in die Kamera um dich anzumelden.",
   "Place your finger over the touch sensor to authenticate.": "Platziere deinen Finger auf den Touchsensor um dich anzumelden.",
-  "Sign in manually": "Manuell einloggen",
+  "Sign in manually": "Manuell anmelden",
   "1. Creating your account": "1. Konto wird erstellt",
   "2. Saving your passphrase": "2. Passphrase wird gespeichert",
   "3. Verifying your passphrase": "3. Passphrase wird bestätigt",
@@ -124,7 +124,7 @@
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Wilkommen bei Lisk. Jetzt kannst du LSK Tokens unterwegs senden und empfangen.",
   "You always need to keep your passphrase safe.": "Du musst deine Passphrase immer sicher aufbewahren.",
   "You are about to send LSK tokens to the following address.": "Du bist dabei LSK Tokens an die folgende Adresse zu senden.",
-  "You don't have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
+  "You can add this address to your bookmarks in bookmarks page or through send process.": "",
   "You can always turn it off": "Du kannst es immer ausschalten",
   "You do not have any recent activity.": "Du hast keine kürzlichen Aktivitäten.",
   "You don’t have any bookmarks. Start adding them by tapping the + button on the top right.": "Du hast noch keine Lesezeichen. Füge sie hinzu, indem du auf das + oben rechts tippst.",
@@ -172,5 +172,8 @@
   "Disable bioAuth": "{{title}} deaktivieren",
   "Do you want to use Biometric Authentication?": "Möchtest du biometrische Authentifizierung benutzen?",
   "For ease of sign in": "Für einfache Anmeldung",
-  "OK": "OK"
+  "OK": "OK",
+  "Sign in using bioAuth": "Melde dich mit {{sensorType}} an",
+  "You don't have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
+  "Use bioAuth": "{{sensorType}} benutzen"
 }

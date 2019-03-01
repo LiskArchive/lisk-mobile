@@ -4,8 +4,7 @@ import { translate } from 'react-i18next';
 import styles from './styles';
 import Input from '../toolBox/input';
 import { validatePassphrase } from '../../utilities/passphrase';
-import { Small, P, A } from '../toolBox/typography';
-import Icon from '../toolBox/icon';
+import { P, A } from '../toolBox/typography';
 import KeyboardAwareScrollView from '../toolBox/keyboardAwareScrollView';
 import Scanner from '../scanner';
 import { IconButton } from '../toolBox/button';
@@ -14,22 +13,27 @@ import { colors } from '../../constants/styleGuide';
 const devDefaultPass = process.env.passphrase || '';
 
 const Extras = ({
-  error, onPress, opacity, t,
+  onPress, opacity, t,
 }) => (
   <View>
-    {error ?
-      <View style={styles.connectionErrorContainer}>
-        <Icon size={16} name='error' style={styles.connectionErrorIcon} />
-        <Small style={styles.connectionError}>
-          {t('Connection error, try later!')}
-        </Small>
-      </View> :
-      <Animated.View style={[styles.linkWrapper, styles.row, { opacity }]}>
-        <P style={styles.question}>{t('Don’t have a Lisk ID?')}</P>
-        <A style={styles.link} onPress={onPress}>{t('Create it now')}</A>
-      </Animated.View>
-    }
+    <Animated.View style={[styles.linkWrapper, styles.row, { opacity }]}>
+      <P style={styles.question}>{t('Don’t have a Lisk ID?')}</P>
+      <A style={styles.link} onPress={onPress}>{t('Create it now')}</A>
+    </Animated.View>
   </View>
+);
+
+const BackButton = ({
+  toggleView, sensorType, t,
+}) => (
+  <IconButton
+    onPress={toggleView}
+    titleStyle={styles.backButtonTitle}
+    style={styles.backButton}
+    title={t('Use bioAuth', { sensorType })}
+    icon='back'
+    iconSize={20}
+    color={colors.light.blue} />
 );
 
 class Form extends React.Component {
@@ -118,7 +122,7 @@ class Form extends React.Component {
   render() {
     const { passphrase, animation: { opacity } } = this.state;
     const {
-      t, navigation, connectionError, lng,
+      t, navigation, lng, toggleView, sensorType, showBackButton,
     } = this.props;
 
     let errorMessage = '';
@@ -134,6 +138,13 @@ class Form extends React.Component {
 
     return (
       <View style={styles.container}>
+        {
+          showBackButton ?
+            <BackButton
+              toggleView={toggleView}
+              sensorType={sensorType}
+              t={t} /> : null
+        }
         <Scanner
           ref={(el) => { this.scanner = el; }}
           containerStyles={{
@@ -188,7 +199,6 @@ class Form extends React.Component {
           extras={
             <Extras
               t={t}
-              error={connectionError}
               onPress={this.goToRegistration}
               opacity={opacity}
             />

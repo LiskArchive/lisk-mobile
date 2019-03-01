@@ -21,7 +21,6 @@ import {
 } from '../../utilities/passphrase';
 import {
   accountSignedIn as accountSignedInAction,
-  accountsRetrieved as accountsRetrievedAction,
 } from '../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
@@ -37,15 +36,11 @@ import quickActions from '../../constants/quickActions';
 // there is a warning in RNOS module. remove this then that warning is fixed
 console.disableYellowBox = true; // eslint-disable-line
 
-/**
- * The settings state is passed through the landing component
- */
 @connect(state => ({
   accounts: state.accounts,
   settings: state.settings,
 }), {
   accountSignedIn: accountSignedInAction,
-  accountsRetrieved: accountsRetrievedAction,
   settingsUpdated: settingsUpdatedAction,
   settingsRetrieved: settingsRetrievedAction,
   pricesRetrieved: pricesRetrievedAction,
@@ -79,8 +74,10 @@ class SignIn extends React.Component {
     this.setState({ androidDialog }, cb);
   }
 
-  changeHandler = (data) => {
-    this.setState(data);
+  toggleView = () => {
+    this.setState({
+      view: this.state.view === 'form' ? 'biometricAuth' : 'form',
+    });
   }
 
   async defineDefaultAuthMethod() {
@@ -102,12 +99,12 @@ class SignIn extends React.Component {
     // Update the component state
     this.timeout = setTimeout(() => {
       if (password && sensorType) {
-        this.changeHandler({
+        this.setState({
           view: 'biometricAuth',
           storedPassphrase: password,
         });
       } else {
-        this.changeHandler({
+        this.setState({
           view: 'form',
         });
       }
@@ -164,36 +161,8 @@ class SignIn extends React.Component {
   signIn = (passphrase) => {
     this.props.accountSignedIn({
       passphrase,
-    }, () => {
-      this.setState({
-        connectionError: true,
-      });
-    });
-  }
-
-  /**
-   * Will be called when sign in form is submitted
-   * fires the activePeerSet action
-   *
-   * @param {String} passphrase - valid mnemonic passphrase
-   * @param {String} submissionType - 'form' or 'biometricAuth'
-   */
-  onFormSubmission = (passphrase, submissionType) => {
-    const { settings } = this.props;
-
-    this.setState({
-      connectionError: false,
-      passphrase,
     });
 
-    if (settings.sensorType && !settings.bioAuthRecommended && submissionType === 'form') {
-      this.promptBioAuth(passphrase, this.signIn);
-    } else {
-      this.signIn(passphrase);
-    }
-  }
-
-  onSignInCompleted = () => {
     this.props.pricesRetrieved();
 
     if (this.state.deepLinkURL) {
@@ -206,8 +175,30 @@ class SignIn extends React.Component {
     }
   }
 
+  /**
+   * Will be called when sign in form is submitted
+   * determines to show the bioAuth recommendation
+   * and also sets the account basic (offline) info
+   *
+   * @param {String} passphrase - valid mnemonic passphrase
+   * @param {String} submissionType - 'form' or 'biometricAuth'
+   */
+  onFormSubmission = (passphrase, submissionType) => {
+    const { settings } = this.props;
+
+    this.setState({
+      passphrase,
+    });
+
+    if (settings.sensorType && !settings.bioAuthRecommended && submissionType === 'form') {
+      this.promptBioAuth(passphrase, this.signIn);
+    } else {
+      this.signIn(passphrase);
+    }
+  }
+
   onDeepLinkRequested = (event) => {
-    const isSignedIn = !!this.props.accounts.active;
+    const isSignedIn = !!this.props.accounts.passphrase;
 
     if (isSignedIn) {
       this.navigateToDeepLink(event.url);
@@ -246,7 +237,7 @@ class SignIn extends React.Component {
     }
 
     const { userInfo: { url } } = action;
-    const isSignedIn = !!this.props.accounts.active;
+    const isSignedIn = !!this.props.accounts.passphrase;
 
     if (isSignedIn) {
       this.navigateToDeepLink(url);
@@ -279,7 +270,7 @@ class SignIn extends React.Component {
   }
 
   componentDidUpdate() {
-    const { settings, navigation, accounts } = this.props;
+    const { settings, navigation } = this.props;
     const { destinationDefined } = this.state;
 
     if (settings.validated && !destinationDefined) {
@@ -290,10 +281,6 @@ class SignIn extends React.Component {
       }
       this.setState({ destinationDefined: true });
     }
-
-    if (accounts.info[settings.token.active].address && navigation && navigation.isFocused()) {
-      this.onSignInCompleted();
-    }
   }
 
   componentWillUnmount() {
@@ -302,7 +289,7 @@ class SignIn extends React.Component {
 
   render() {
     const { view, storedPassphrase, androidDialog } = this.state;
-    const { sensorType } = this.props.settings;
+    const { sensorType, hasStoredPassphrase } = this.props.settings;
     const signOut = this.props.navigation.getParam('signOut');
 
     return (<View style={styles.wrapper}>
@@ -311,7 +298,7 @@ class SignIn extends React.Component {
         view === 'biometricAuth' ?
           <BiometricAuth
             animate={!signOut}
-            toggleView={this.changeHandler}
+            toggleView={this.toggleView}
             sensorType={sensorType}
             passphrase={storedPassphrase}
             signIn={this.onFormSubmission} /> : null
@@ -321,17 +308,18 @@ class SignIn extends React.Component {
           <Form
             animate={!signOut}
             navigation={this.props.navigation}
-            toggleView={this.changeHandler}
+            toggleView={this.toggleView}
+            sensorType={sensorType}
+            showBackButton={hasStoredPassphrase && sensorType}
             signIn={this.onFormSubmission}
-            connectionError={this.state.connectionError}
           /> : null
       }
       {
         Platform.OS === 'android' ?
-        <FingerprintOverlay
-          onModalClosed={() => this.signIn(this.state.passphrase)}
-          error={androidDialog.error}
-          show={androidDialog.show} /> : null
+          <FingerprintOverlay
+            onModalClosed={() => this.signIn(this.state.passphrase)}
+            error={androidDialog.error}
+            show={androidDialog.show} /> : null
       }
     </View>);
   }

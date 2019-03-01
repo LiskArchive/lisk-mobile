@@ -108,8 +108,11 @@ describe('Reducers: Accounts', () => {
     expect(changedState.followed[1]).toEqual(expectedValue);
   });
 
-  it('should update one of the followed accounts in case of accountsRetrieved', () => {
-    const action = { type: actionTypes.accountsRetrieved, data: [data.accountA, data.accountB] };
+  it('should update one of the followed accounts in case of followedAccountsRetrieved', () => {
+    const action = {
+      type: actionTypes.followedAccountsRetrieved,
+      data: [data.accountA, data.accountB],
+    };
     const changedState = accounts(state, action);
     expect(changedState.followed).toHaveLength(2);
   });

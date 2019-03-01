@@ -35,12 +35,12 @@ export const accountsStored = data =>
  *
  * @returns {Function} Thunk action function
  */
-export const accountsRetrieved = () =>
+export const followedAccountsRetrieved = () =>
   (dispatch) => {
     retrieveAccounts()
       .then((accounts) => {
         dispatch({
-          type: actionTypes.accountsRetrieved,
+          type: actionTypes.followedAccountsRetrieved,
           data: accounts,
         });
       });
@@ -102,27 +102,38 @@ export const accountEdited = (address, label) => ({
  * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
-export const accountSignedIn = ({ passphrase }, cb) => (dispatch, getState) => {
-  dispatch(loadingStarted(actionTypes.accountSignedIn));
+export const accountSignedIn = ({ passphrase }) => (dispatch, getState) => {
   const activeToken = getState().settings.token.active;
   const address = accountAPI.extractAddress(activeToken, passphrase);
-  return accountAPI.getSummary(activeToken, address)
-    .then((account) => {
-      dispatch({
-        type: actionTypes.accountSignedIn,
-        data: { account, passphrase, activeToken },
-      });
-      dispatch(accountsRetrieved());
-      dispatch(loadingFinished(actionTypes.accountSignedIn));
-    }).catch((err) => {
-      dispatch(loadingFinished(actionTypes.accountSignedIn));
-      cb(err);
-    });
+  dispatch({
+    type: actionTypes.accountSignedIn,
+    data: { account: { address }, passphrase, activeToken },
+  });
 };
 
 export const accountSignedOut = () => ({
   type: actionTypes.accountSignedOut,
 });
+
+export const accountFetched = () => (dispatch, getState) => {
+  const activeToken = getState().settings.token.active;
+  const { address } = getState().accounts.info[activeToken];
+
+  dispatch(loadingStarted(actionTypes.accountFetched));
+  return accountAPI.getSummary(activeToken, address)
+    .then((account) => {
+      dispatch({
+        type: actionTypes.accountUpdated,
+        data: {
+          account,
+          activeToken,
+        },
+      });
+      dispatch(loadingFinished(actionTypes.accountFetched));
+    }).catch(() => {
+      dispatch(loadingFinished(actionTypes.accountFetched));
+    });
+};
 
 export const blockUpdated = () => async (dispatch, getState) => {
   const activeToken = getState().settings.token.active;

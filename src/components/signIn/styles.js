@@ -1,6 +1,6 @@
-import { StyleSheet, Platform, DeviceInfo } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors, fonts, boxes } from '../../constants/styleGuide';
-import { deviceHeight } from '../../utilities/device';
+import { deviceHeight, deviceType } from '../../utilities/device';
 
 const height = deviceHeight();
 
@@ -12,6 +12,13 @@ const styles = {
   container: {
     height: '100%',
     paddingTop: height <= 640 ? 110 : 170,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  column: {
+    flex: 1,
+    flexDirection: 'column',
   },
   innerContainer: {
     flexDirection: 'column',
@@ -56,9 +63,21 @@ const styles = {
     opacity: height <= 640 ? 0 : 1,
   },
   button: {
-    marginRight: boxes.boxPadding,
-    marginLeft: boxes.boxPadding,
-    marginBottom: 60,
+    height: 47,
+    marginHorizontal: boxes.boxPadding,
+  },
+  outlineButton: {
+    height: 45,
+    borderWidth: 1,
+    borderColor: colors.light.gray1,
+    color: colors.light.gray1,
+    borderRadius: 2,
+    marginHorizontal: boxes.boxPadding,
+    marginTop: 12,
+    textAlign: 'center',
+    lineHeight: 45,
+    fontSize: fonts.size.base,
+    fontFamily: fonts.family.context,
   },
   errorMessage: {
     fontSize: 14,
@@ -92,12 +111,6 @@ const styles = {
     width: '100%',
     justifyContent: 'center',
     paddingBottom: 20,
-  },
-  row: {
-    flexDirection: 'row',
-  },
-  column: {
-    flexDirection: 'column',
   },
   question: {
     color: colors.light.gray2,
@@ -168,8 +181,8 @@ const styles = {
     width: '100%',
     height: '100%',
     borderBottomColor: 'transparent',
-    borderBottomWidth: 125,
-    marginBottom: -125,
+    borderBottomWidth: 190,
+    marginBottom: -190,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -216,13 +229,11 @@ const styles = {
   },
   cameraRoll: {
     borderTopColor: colors.light.white,
-    borderTopWidth: (Platform.OS === 'ios' &&
-      DeviceInfo.isIPhoneX_deprecated) ? 74 : 50,
+    borderTopWidth: deviceType() === 'iOSx' ? 74 : 50,
   },
   cameraOverlay: {
     borderTopColor: 'rgba(57, 68, 81, 0.85)',
-    borderTopWidth: (Platform.OS === 'ios' &&
-      DeviceInfo.isIPhoneX_deprecated) ? 34 : 10,
+    borderTopWidth: deviceType() === 'iOSx' ? 34 : 10,
   },
   christmasHatContainer: {
     position: 'absolute',
@@ -231,6 +242,16 @@ const styles = {
   christmasHat: {
     width: 58,
     height: 43,
+  },
+  backButton: {
+    position: 'absolute',
+    width: 130,
+    height: 32,
+    left: 3,
+    top: deviceType() === 'iOSx' ? 48 : 24,
+  },
+  backButtonTitle: {
+    color: colors.light.blue,
   },
 };
 
