@@ -118,7 +118,7 @@ const calculateTransactionFee = ({
  * @param {String} address
  * @returns {Promise<Array>}
  */
-export const getUnspentOuts = address => new Promise(async (resolve, reject) => {
+export const getUnspentTransactionOutputs = address => new Promise(async (resolve, reject) => {
   try {
     const response = await fetch(`${config.url}/unspent?active=${address}`);
     const json = await response.json();
@@ -141,7 +141,7 @@ export const create = ({
 }) => new Promise(async (resolve, reject) => {
   try {
     const senderAddress = extractAddress(passphrase);
-    const unspentTxOuts = await exports.getUnspentOuts(senderAddress);
+    const unspentTxOuts = await exports.getUnspentTransactionOutputs(senderAddress);
 
     // Estimate total cost (currently estimates max cost by assuming the worst case)
     const estimatedMinerFee = calculateTransactionFee({

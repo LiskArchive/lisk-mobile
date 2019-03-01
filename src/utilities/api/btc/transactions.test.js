@@ -140,7 +140,7 @@ const response = {
       },
     ],
   },
-  getUnspentOuts: {
+  getUnspentTransactionOutputs: {
     unspent_outputs: [
       {
         tx_hash: 'c156742387e44c7906091bc08d382951bfe1c9dc703856010e08ef803f90dafe',
@@ -270,13 +270,13 @@ describe('api/btc/transactions', () => {
     });
   });
 
-  describe('getUnspentOuts', () => {
+  describe('getUnspentTransactionOutputs', () => {
     beforeEach(() => fetchMock.reset());
 
     it('resolves correctly', async () => {
-      fetchMock.once('*', response.getUnspentOuts);
-      const result = await transactions.getUnspentOuts(address.mainnet);
-      expect(result).toEqual(response.getUnspentOuts.unspent_outputs);
+      fetchMock.once('*', response.getUnspentTransactionOutputs);
+      const result = await transactions.getUnspentTransactionOutputs(address.mainnet);
+      expect(result).toEqual(response.getUnspentTransactionOutputs.unspent_outputs);
     });
 
     it('handles non-500 errors', async () => {
@@ -284,7 +284,7 @@ describe('api/btc/transactions', () => {
       fetchMock.once('*', { status: 400, body: errorResponse });
 
       try {
-        await transactions.getUnspentOuts(address.mainnet);
+        await transactions.getUnspentTransactionOutputs(address.mainnet);
       } catch (error) {
         expect(error).toEqual(errorResponse);
       }
@@ -294,7 +294,7 @@ describe('api/btc/transactions', () => {
       fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
 
       try {
-        await transactions.getUnspentOuts(address.mainnet);
+        await transactions.getUnspentTransactionOutputs(address.mainnet);
       } catch (error) {
         expect(error).toBeTruthy();
       }
@@ -305,8 +305,9 @@ describe('api/btc/transactions', () => {
     beforeAll(() => {
       config.network = bitcoin.networks.testnet;
 
-      transactions.getUnspentOuts = jest.fn();
-      transactions.getUnspentOuts.mockResolvedValue(response.getUnspentOuts.unspent_outputs);
+      transactions.getUnspentTransactionOutputs = jest.fn();
+      transactions.getUnspentTransactionOutputs
+        .mockResolvedValue(response.getUnspentTransactionOutputs.unspent_outputs);
     });
 
     it('throws error for insufficient balance', async () => {
