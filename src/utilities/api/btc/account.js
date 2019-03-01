@@ -22,12 +22,12 @@ export const getSummary = address => new Promise(async (resolve, reject) => {
   }
 });
 
-const getDerivedPathFromSeed = (passphrase) => {
+export const getDerivedPathFromPassphrase = (passphrase) => {
   const seed = Lisk.passphrase.Mnemonic.mnemonicToSeed(passphrase);
   return bip32.fromSeed(seed, config.network).derivePath(config.derivationPath);
 };
 
-export const extractPublicKey = passphrase => getDerivedPathFromSeed(passphrase).publicKey;
+export const extractPublicKey = passphrase => getDerivedPathFromPassphrase(passphrase).publicKey;
 
 export const extractAddress = (passphrase) => {
   const publicKey = extractPublicKey(passphrase);

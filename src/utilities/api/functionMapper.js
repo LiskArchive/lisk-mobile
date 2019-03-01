@@ -25,22 +25,21 @@ const resourceMap = {
 /**
  * Extracts related account API utility for given tokenType and map address.
  * @param {String} tokenType
- * @param {String} mapAddress Valid key path for a utility function, eg: account.getSummary
+ * @param {String} resourceName - key path for the resource, eg: account
+ * @param {String} functionName - key path for the utility function, eg: getSummary
  * @returns {Function}
  */
-const getMappedFunction = (tokenType, mapAddress) => {
-  const [resource, method] = mapAddress.split('.');
-
+const getMappedFunction = (tokenType, resourceName, functionName) => {
   try {
-    const fn = resourceMap[tokenType][resource][method];
+    const fn = resourceMap[tokenType][resourceName][functionName];
 
     if (typeof fn === 'function') {
       return fn;
     }
 
-    throw new Error(`${tokenType} doesn't match a function for ${mapAddress}.`);
+    throw new Error(`${tokenType} doesn't match a function for ${resourceName}.${functionName}.`);
   } catch (error) {
-    throw new Error(`Invalid mapper path for ${tokenType} - ${mapAddress}.`);
+    throw new Error(`Invalid mapper path for ${tokenType} - ${resourceName}.${functionName}.`);
   }
 };
 

@@ -32,7 +32,7 @@ import getMappedFunction from './functionMapper';
  * @param {Number} data.offset
  * @returns {Promise<TransactionsResponse>}
  */
-const get = (tokenType, data) => getMappedFunction(tokenType, 'transactions.get')(data);
+const get = (tokenType, data) => getMappedFunction(tokenType, 'transactions', 'get')(data);
 
 /**
  * Creates a raw, ready-to-broadcast transaction data with given payload.
@@ -41,11 +41,12 @@ const get = (tokenType, data) => getMappedFunction(tokenType, 'transactions.get'
  * @param {String} data.passphrase
  * @param {String} data.recipientAddress
  * @param {String} data.amount
- * @param {String} data.secondPassphrase required if registered, only used for LSK.
- * @param {String} data.data custom data field, only used for LSK.
+ * @param {String} data.secondPassphrase - required if registered, only used for LSK.
+ * @param {String} data.data - custom data field, only used for LSK.
+ * @param {Number} data.dynamicFeePerByte - rate of miner/dynamic fee per byte, only used for BTC.
  * @returns {Promise}
  */
-const create = (tokenType, data) => getMappedFunction(tokenType, 'transactions.create')(data);
+const create = (tokenType, data) => getMappedFunction(tokenType, 'transactions', 'create')(data);
 
 /**
  * Broadcasts a transaction to the specified token's blockchain.
@@ -53,7 +54,7 @@ const create = (tokenType, data) => getMappedFunction(tokenType, 'transactions.c
  * @param {Object} transaction
  * @returns {Promise}
  */
-const broadcast = (tokenType, transaction) => getMappedFunction(tokenType, 'transactions.broadcast')(transaction);
+const broadcast = (tokenType, transaction) => getMappedFunction(tokenType, 'transactions', 'broadcast')(transaction);
 
 export default {
   get,
