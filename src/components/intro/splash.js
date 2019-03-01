@@ -59,7 +59,7 @@ class Splash extends React.Component {
       </Animated.View>
       <Animated.View style={[styles.splashDescription, { opacity: txtOpacity }]}>
         <P style={styles.splashDescriptionP}>
-          { t("Welcome to Lisk. Now you can send{'\n'} and request LSK token on the go.")}
+          { t('Welcome to Lisk. Now you can send and request LSK token on the go.')}
         </P>
       </Animated.View>
     </View>);
