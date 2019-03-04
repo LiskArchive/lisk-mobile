@@ -23,10 +23,7 @@ const accounts = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.accountSignedIn:
       return merge(state, {
         passphrase: action.data.passphrase,
-        info: {
-          ...state.info,
-          [action.data.activeToken]: action.data.account,
-        },
+        info: action.data.info,
       });
 
     case actionTypes.accountUpdated:

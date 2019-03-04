@@ -202,20 +202,21 @@ describe('Action: Accounts', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should dispatch accountSignedIn action when it receives data of user', async () => {
+  it('should dispatch accountSignedIn with passphrase and accounts addresses', async () => {
     const store = mockStore({ accounts, settings });
     const expectedActions = [
       {
         type: actionTypes.accountSignedIn,
         data: {
           passphrase: data.passphrase,
-          activeToken: data.activeToken,
-          account: { address: data.account.address },
+          info: {
+            LSK: { address: data.account.address },
+            BTC: { address: '1PA2gjCNsjsNEMSfAk6QhY8SEEs1GsPRk6' },
+          },
         },
       },
     ];
 
-    storageUtility.retrieveAccounts.mockResolvedValueOnce([data.account]);
     await store.dispatch(accountSignedIn({ passphrase: data.passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
   });
