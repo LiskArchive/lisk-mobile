@@ -8,17 +8,14 @@ import Input from '../../toolBox/input';
 import Avatar from '../../avatar';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
-import {
-  accountFollowed as accountFollowedAction,
-} from '../../../actions/accounts';
+import { tokenMap } from '../../../constants/tokens';
+import { accountFollowed as accountFollowedAction } from '../../../actions/accounts';
 import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 
 const isAndroid = deviceType() === 'android';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
-@connect(state => ({
-  account: state.accounts.followed,
-}), {
+@connect(null, {
   accountFollowed: accountFollowedAction,
 })
 class AddToBookmark extends React.Component {
@@ -34,6 +31,7 @@ class AddToBookmark extends React.Component {
 
   componentDidMount() {
     const { prevStep, navigation: { setParams } } = this.props;
+
     setParams({
       title: isSmallScreen ? 'Send' : 'Add to bookmarks',
       showButtonLeft: true,
@@ -86,9 +84,10 @@ class AddToBookmark extends React.Component {
 
   render() {
     const {
-      styles, sharedData: { address }, t,
+      settings, styles, sharedData: { address }, t,
     } = this.props;
     const { label } = this.state;
+    const shouldDisplayAvatar = settings.token.active === tokenMap.LSK.key;
 
     return (
       <View style={styles.theme.wrapper}>
@@ -109,27 +108,38 @@ class AddToBookmark extends React.Component {
                 </P>
               </View>
             ) : null}
+
             <View>
               <View style={styles.row}>
-                <P style={[styles.label, styles.theme.label]}>{t('Address')}</P>
+                <P style={[styles.label, styles.theme.label]}>
+                  {t('Address')}
+                </P>
+
                 <View style={styles.addressContainer}>
-                  <Avatar address={address || ''} style={styles.avatar} size={35}/>
-                  <Small style={[styles.address, styles.text, styles.theme.text]}>{address}</Small>
+                  {shouldDisplayAvatar ?
+                    <Avatar
+                      address={address || ''}
+                      style={styles.avatar}
+                      size={35}
+                    /> : null
+                  }
+
+                  <Small style={[styles.address, styles.text, styles.theme.text]}>
+                    {address}
+                  </Small>
                 </View>
               </View>
+
               <Input
                 reference={(el) => { this.input = el; }}
                 label={t('Label (optional)')}
+                value={label.value}
                 autoFocus={!isAndroid}
                 autoCorrect={false}
                 innerStyles={{ input: styles.input }}
                 multiline={true}
                 onChange={this.onChange}
-                error={
-                  label.validity === 1 ?
-                    t('The label must be shorter than 20 characters.') : ''
-                }
-                value={label.value}
+                error={label.validity === 1 ? t('The label must be shorter than 20 characters.') : ''}
               />
             </View>
           </View>
