@@ -27,20 +27,18 @@ export default () => ({
     },
     scanButton: {
       position: 'absolute',
-      right: 20,
       zIndex: 99,
-      top: 30,
-      paddingRight: 15,
-      paddingBottom: 10,
-      width: 67,
-      height: 30,
+      top: 0,
+      right: boxes.boxPadding + 5,
+      width: 60,
     },
     scanButtonTitle: {
-      fontSize: 14,
-      paddingLeft: 5,
+      fontSize: 13,
+      paddingLeft: 6,
     },
     longTitle: {
-      width: 87,
+      right: boxes.boxPadding - 5,
+      width: 90,
     },
     addressContainer: {
       width: '100%',
@@ -50,14 +48,15 @@ export default () => ({
       ...Platform.select({
         android: {
           height: 48,
-          paddingLeft: 40,
         },
         ios: {
           height: 48,
           paddingBottom: 10,
-          paddingLeft: 40,
         },
       }),
+    },
+    addressInputWithAvatar: {
+      paddingLeft: 40,
     },
     addressInputContainer: {
       paddingTop: 0,
