@@ -107,7 +107,7 @@ export const get = ({
  * @param {Number} data.outputCount
  * @param {Number} data.dynamicFeePerByte - in satoshis/byte.
  */
-const calculateTransactionFee = ({
+export const calculateTransactionFee = ({
   inputCount,
   outputCount,
   dynamicFeePerByte,
