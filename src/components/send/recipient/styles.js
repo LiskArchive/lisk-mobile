@@ -11,14 +11,13 @@ export default () => ({
       overflow: 'hidden',
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
-      paddingTop: 0,
-      minHeight: 70,
       maxWidth: '100%',
     },
     subtitle: {
       marginTop: 0,
     },
     form: {
+      paddingTop: boxes.boxPadding,
       paddingBottom: boxes.boxPadding,
     },
     input: {

@@ -21,11 +21,14 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 class Recipient extends React.Component {
   activeInputRef = null;
+
   validator = (str) => {
     if (str === '') return -1;
     return reg.address.test(str) ? 0 : 1;
   };
+
   scannedData = {};
+
   state = {
     header: true,
     address: {
@@ -34,8 +37,9 @@ class Recipient extends React.Component {
     },
     avatarPreview: false,
   };
+
   animatedStyles = {
-    height: new Animated.Value(45),
+    height: new Animated.Value(40),
     paddingTop: new Animated.Value(20),
   }
 
@@ -143,7 +147,7 @@ class Recipient extends React.Component {
     } else {
       Animated.parallel([
         Animated.timing(height, {
-          toValue: 45,
+          toValue: 40,
           duration: 400,
           delay: 0,
         }),
