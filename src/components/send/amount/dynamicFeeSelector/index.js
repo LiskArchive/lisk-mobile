@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
+import { translate } from 'react-i18next';
 import FormattedNumber from '../../../formattedNumber';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import { calculateTransactionFee } from '../../../../utilities/api/btc/transactions';
@@ -12,10 +13,11 @@ const DynamicFeeSelector = ({
   onChange,
   tokenType,
   styles,
+  t,
 }) => (
   <View style={styles.wrapper}>
     <Text style={[styles.label, styles.theme.label]}>
-      Processing Speed
+      {t('Processing Speed')}
     </Text>
 
     <View style={[styles.container, styles.theme.container]}>
@@ -62,4 +64,4 @@ const DynamicFeeSelector = ({
   </View>
 );
 
-export default withTheme(DynamicFeeSelector, getStyles());
+export default withTheme(translate()(DynamicFeeSelector), getStyles());

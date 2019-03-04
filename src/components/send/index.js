@@ -15,6 +15,7 @@ import { themes, colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import Progress from './progress';
+import { tokenMap } from '../../constants/tokens';
 
 @connect(state => ({
   accounts: state.accounts,
@@ -130,7 +131,7 @@ class Send extends React.Component {
       settings,
     } = this.props;
 
-    const steps = [
+    let steps = [
       {
         component: Recipient,
         title: 'form',
@@ -162,6 +163,10 @@ class Send extends React.Component {
         component: SecondPassphrase,
         title: 'secondPassphrase',
       });
+    }
+
+    if (settings.token.active !== tokenMap.LSK.key) {
+      steps = steps.filter(s => s.title !== 'reference');
     }
 
     return (
