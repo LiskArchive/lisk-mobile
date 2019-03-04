@@ -133,52 +133,34 @@ class Send extends React.Component {
     const steps = [
       {
         component: Recipient,
-        props: {
-          title: 'form',
-          accounts,
-          settings,
-        },
+        title: 'form',
       },
       {
         component: AddToBookmark,
-        props: {
-          title: 'addToBookmark',
-        },
+        title: 'addToBookmark',
       },
       {
         component: Amount,
-        props: {
-          title: 'amount',
-          accounts,
-          settings,
-        },
+        title: 'amount',
       },
       {
         component: Reference,
-        props: {
-          title: 'reference',
-        },
+        title: 'reference',
       },
       {
         component: Overview,
-        props: {
-          title: 'Overview',
-        },
+        title: 'Overview',
       },
       {
         component: Result,
-        props: {
-          title: 'result',
-        },
+        title: 'result',
       },
     ];
 
     if (accounts.info[settings.token.active].secondPublicKey) {
       steps.splice(4, 0, {
         component: SecondPassphrase,
-        props: {
-          title: 'secondPassphrase',
-        },
+        title: 'secondPassphrase',
       });
     }
 
@@ -191,9 +173,10 @@ class Send extends React.Component {
       >
         {steps.map(step => (
           <step.component
-            key={step.props.title}
+            key={step.title}
             navigation={navigation}
-            {...step.props}
+            accounts={accounts}
+            settings={settings}
           />
         ))}
       </MultiStep>
