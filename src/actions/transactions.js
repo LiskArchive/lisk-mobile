@@ -3,7 +3,7 @@ import txConstants from '../constants/transactions';
 import { transactions as transactionsAPI } from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
 
-export const transactionsLoaded = data => async (dispatch, getState) => {
+const fetchTransactions = async (dispatch, getState, data) => {
   dispatch(loadingStarted(actionTypes.transactionsLoaded));
 
   try {
@@ -21,6 +21,15 @@ export const transactionsLoaded = data => async (dispatch, getState) => {
   } catch (error) {
     dispatch(loadingFinished(actionTypes.transactionsLoaded));
   }
+};
+
+export const transactionsReset = data => async (dispatch, getState) => {
+  dispatch({ type: actionTypes.transactionsReset });
+  fetchTransactions(dispatch, getState, data);
+};
+
+export const transactionsLoaded = data => async (dispatch, getState) => {
+  fetchTransactions(dispatch, getState, data);
 };
 
 export const transactionAdded = (data, successCb, errorCb) => async (dispatch, getState) => {

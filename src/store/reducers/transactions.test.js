@@ -48,6 +48,13 @@ describe('Reducers: Transactions', () => {
     expect(changedState).toEqual(expectedState);
   });
 
+  it('should revert to empty state in case of actionTypes.transactionsReset', () => {
+    const state = { pending: [], confirmed: [transaction1, transaction2], count: 10 };
+    const action = { type: actionTypes.transactionsReset };
+    const changedState = transactions(state, action);
+    expect(changedState).toEqual(emptyState);
+  });
+
   it('should revert to empty state in case of actionTypes.accountSignedOut', () => {
     const state = { pending: [], confirmed: [transaction1, transaction2], count: 10 };
     const action = { type: actionTypes.accountSignedOut };
