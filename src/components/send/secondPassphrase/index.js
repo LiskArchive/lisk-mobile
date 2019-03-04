@@ -23,7 +23,7 @@ const isAndroid = deviceType() === 'android';
 @connect(state => ({
   accounts: state.accounts,
 }), {})
-class Confirm extends React.Component {
+class SecondPassphrase extends React.Component {
   state = {
     secondPassphrase: {
       value: devDefaultSecondPass,
@@ -205,4 +205,4 @@ class Confirm extends React.Component {
   }
 }
 
-export default withTheme(translate()(Confirm), getStyles());
+export default withTheme(translate()(SecondPassphrase), getStyles());

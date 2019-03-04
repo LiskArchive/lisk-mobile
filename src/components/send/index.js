@@ -8,7 +8,7 @@ import AddToBookmark from './addToBookmark';
 import Amount from './amount';
 import Reference from './reference';
 import Overview from './overview';
-import Confirm from './confirm';
+import SecondPassphrase from './secondPassphrase';
 import Result from './result';
 import { IconButton } from '../toolBox/button';
 import { themes, colors } from '../../constants/styleGuide';
@@ -174,9 +174,9 @@ class Send extends React.Component {
 
     if (accounts.info[settings.token.active].secondPublicKey) {
       steps.splice(4, 0, {
-        component: Confirm,
+        component: SecondPassphrase,
         props: {
-          title: 'confirm',
+          title: 'secondPassphrase',
         },
       });
     }
