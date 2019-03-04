@@ -28,9 +28,9 @@ export const getDynamicFees = () => new Promise(async (resolve, reject) => {
 
     if (response.ok) {
       resolve({
-        low: json.hourFee,
-        medium: json.halfHourFee,
-        high: json.fastestFee,
+        Low: json.hourFee,
+        Medium: json.halfHourFee,
+        High: json.fastestFee,
       });
     } else {
       reject(json);

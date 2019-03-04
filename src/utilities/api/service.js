@@ -17,9 +17,9 @@ const getPriceTicker = tokenType => getMappedFunction(tokenType, 'service', 'get
  * Contains dynamic fee rates for a token to indicate processing speed on the blockchain.
  * Properties are formatted as satoshis/byte for BTC.
  * @typedef {Object} DynamicFees
- * @property {Number} low
- * @property {Number} medium
- * @property {Number} high
+ * @property {Number} Low
+ * @property {Number} Medium
+ * @property {Number} High
  */
 /**
  * Retrieves dynamic fees for given token from the related service.

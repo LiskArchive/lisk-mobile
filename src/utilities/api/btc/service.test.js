@@ -75,9 +75,9 @@ describe('api/btc/service', () => {
       fetchMock.once('*', response.getDynamicFees);
       const result = await service.getDynamicFees();
       expect(result).toEqual({
-        low: 20,
-        medium: 40,
-        high: 80,
+        Low: 20,
+        Medium: 40,
+        High: 80,
       });
     });
 
