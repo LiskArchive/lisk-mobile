@@ -82,17 +82,18 @@ class Send extends React.Component {
       theme,
       navigation,
       accounts,
+      settings,
       t,
     } = this.props;
+
     navigation.setParams({ styles, theme });
     BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
 
-    const accountInitialization = navigation.getParam('initialize', false);
-    if (accountInitialization) {
+    if (navigation.getParam('initialize', false)) {
       this.nav.move({
         to: 4,
         data: {
-          address: accounts.active.address,
+          address: accounts.info[settings.token.active],
           amount: 0.1,
           reference: t('Account initialization'),
         },
@@ -171,7 +172,7 @@ class Send extends React.Component {
       },
     ];
 
-    if ((accounts.active || {}).secondPublicKey) {
+    if (accounts.info[settings.token.active].secondPublicKey) {
       steps.splice(4, 0, {
         component: Confirm,
         props: {
