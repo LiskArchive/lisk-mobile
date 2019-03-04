@@ -136,6 +136,7 @@ class Send extends React.Component {
         props: {
           title: 'form',
           accounts,
+          settings,
         },
       },
       {
@@ -148,8 +149,8 @@ class Send extends React.Component {
         component: Amount,
         props: {
           title: 'amount',
-          settings,
           accounts,
+          settings,
         },
       },
       {
