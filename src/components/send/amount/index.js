@@ -35,7 +35,7 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 })
 class Amount extends React.Component {
   state = {
-    fee: 0,
+    dynamicFee: 0,
     amount: {
       value: '',
       normalizedValue: '',
@@ -90,10 +90,6 @@ class Amount extends React.Component {
 
     if (settings.token.active === tokenMap.BTC.key) {
       dynamicFeesRetrieved();
-    } else {
-      this.setState({
-        fee: transactions.send.fee,
-      });
     }
 
     if (sharedData.amount) {
@@ -124,7 +120,7 @@ class Amount extends React.Component {
 
     if (prevProps.dynamicFees !== dynamicFees) {
       this.setState({
-        fee: dynamicFees.Low,
+        dynamicFee: dynamicFees.Low,
       });
     }
   }
@@ -142,7 +138,7 @@ class Amount extends React.Component {
   }
 
   onChangeDynamicFee = (value) => {
-    this.setState({ fee: value });
+    this.setState({ dynamicFee: value });
   }
 
   onSubmit = () => {
@@ -171,7 +167,7 @@ class Amount extends React.Component {
 
     const {
       amount: { value, normalizedValue, validity },
-      fee,
+      dynamicFee,
     } = this.state;
 
     let valueInCurrency = 0;
@@ -241,7 +237,7 @@ class Amount extends React.Component {
 
             {Object.keys(dynamicFees).length ?
               <DynamicFeeSelector
-                value={fee}
+                value={dynamicFee}
                 amount={value}
                 data={dynamicFees}
                 onChange={this.onChangeDynamicFee}
