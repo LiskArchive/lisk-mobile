@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { themes, colors, boxes } from '../../../constants/styleGuide';
+import { themes, colors, boxes, fonts } from '../../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -33,7 +33,7 @@ export default () => ({
       width: 60,
     },
     scanButtonTitle: {
-      fontSize: 13,
+      fontSize: fonts.size.small,
       paddingLeft: 6,
     },
     longTitle: {
