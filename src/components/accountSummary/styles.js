@@ -6,6 +6,10 @@ export default () => ({
       width: '100%',
       overflow: 'hidden',
     },
+    homeContainer: {
+      paddingBottom: 15,
+      overflow: 'hidden',
+    },
     avatar: {
       top: 0,
       left: '50%',
@@ -40,7 +44,7 @@ export default () => ({
       position: 'absolute',
       left: 0,
       top: 0,
-      zIndex: 1,
+      zIndex: 0,
       height: 200,
       width: '100%',
       overflow: 'hidden',
@@ -124,6 +128,23 @@ export default () => ({
     },
     sendButtonTitle: {
       paddingLeft: 10,
+    },
+    pagination: {
+      backgroundColor: 'transparent',
+      paddingVertical: 0,
+    },
+    dot: {
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      borderWidth: 2,
+      borderColor: colors.light.white,
+      backgroundColor: colors.light.white,
+      marginHorizontal: 0,
+    },
+    inactiveDot: {
+      borderColor: colors.light.white,
+      backgroundColor: 'transparent',
     },
   },
   [themes.light]: {
