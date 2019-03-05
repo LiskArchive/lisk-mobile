@@ -1,5 +1,7 @@
 import { themes, colors, fonts, boxes } from '../../../../constants/styleGuide';
 
+const itemBorderRadius = 2;
+
 export default () => ({
   common: {
     wrapper: {
@@ -18,7 +20,7 @@ export default () => ({
       marginTop: 12,
       flexDirection: 'row',
       borderWidth: 1,
-      borderRadius: 2,
+      borderRadius: itemBorderRadius,
       alignItems: 'center',
       justifyContent: 'space-between',
     },
@@ -28,6 +30,16 @@ export default () => ({
       paddingBottom: 10,
       alignItems: 'center',
       position: 'relative',
+    },
+
+    itemFirst: {
+      borderBottomLeftRadius: itemBorderRadius,
+      borderTopLeftRadius: itemBorderRadius,
+    },
+
+    itemLast: {
+      borderBottomRightRadius: itemBorderRadius,
+      borderTopRightRadius: itemBorderRadius,
     },
 
     selectedItem: {

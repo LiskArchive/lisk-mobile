@@ -1,29 +1,16 @@
 import React from 'react';
-import { Image, View } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { translate } from 'react-i18next';
-import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import { fromRawLsk } from '../../../utilities/conversions';
-import { B, P } from '../../toolBox/typography';
-import FormattedNumber from '../../formattedNumber';
-// import reg from '../../../constants/regex';
-import transactions from '../../../constants/transactions';
-import { merge } from '../../../utilities/helpers';
-import AmountInput from './input';
-import DynamicFeeSelector from './dynamicFeeSelector';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
-import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import {
   pricesRetrieved as pricesRetrievedAction,
   dynamicFeesRetrieved as dynamicFeesRetrievedAction,
 } from '../../../actions/service';
-import darkBlur from '../../../assets/images/amountFormBalanceBlur/dark.png';
-import lightBlur from '../../../assets/images/amountFormBalanceBlur/light.png';
 import { tokenMap } from '../../../constants/tokens';
+import AmountLSK from './lsk';
+import AmountBTC from './btc';
 
-const blurs = { dark: darkBlur, light: lightBlur };
-const isAndroid = deviceType() === 'android';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 @connect(state => ({
@@ -34,221 +21,40 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
   dynamicFeesRetrieved: dynamicFeesRetrievedAction,
 })
 class Amount extends React.Component {
-  state = {
-    dynamicFee: 0,
-    amount: {
-      value: '',
-      normalizedValue: '',
-      validity: {
-        code: 0,
-        message: '',
-      },
-    },
-  };
-
-  // @TODO: should be updated in https://github.com/LiskHQ/lisk-mobile/issues/587
-  validator = () => ({
-    code: 0,
-    message: '',
-  })
-  /*
-  validator = (str) => {
-    const { t, accounts, settings: { token } } = this.props;
-
-    if (str === '' || parseFloat(str) === 0) {
-      return {
-        code: -1,
-        message: t('Please enter an amount.'),
-      };
-    }
-
-    let message = '';
-
-    if (!reg.amount.test(str)) {
-      message = t('The amount value is invalid.');
-    } else if (
-      accounts.info[token.active].balance < transactions.send.fee ||
-      parseFloat(str) > fromRawLsk(accounts.info[token.active].balance - transactions.send.fee)
-    ) {
-      message = t('Your balance is not sufficient.');
-    }
-
-    return ({
-      code: message ? 1 : 0,
-      message,
-    });
-  };
-  */
-
   componentDidMount() {
     const {
-      sharedData, accounts, navigation: { setParams }, move,
-      settings, pricesRetrieved, dynamicFeesRetrieved,
+      navigation, accounts, sharedData, move,
     } = this.props;
 
-    pricesRetrieved();
-
-    if (settings.token.active === tokenMap.BTC.key) {
-      dynamicFeesRetrieved();
-    }
-
-    if (sharedData.amount) {
-      this.onChange(sharedData.amount);
-    }
-
-    setParams({
+    navigation.setParams({
       title: isSmallScreen ? 'Send' : 'Amount',
       showButtonLeft: true,
       action: () => move({
         to: accounts.followed.some(item => item.address === sharedData.address) ? 0 : 1,
       }),
     });
-
-    if (isAndroid) {
-      setTimeout(() => this.input.focus(), 250);
-    }
   }
 
   componentDidUpdate(prevProps) {
-    const { lng, navigation: { setParams }, dynamicFees } = this.props;
+    const { lng, navigation } = this.props;
 
     if (prevProps.lng !== lng) {
-      setParams({
+      navigation.setParams({
         title: isSmallScreen ? 'Send' : 'Amount',
-      });
-    }
-
-    if (prevProps.dynamicFees !== dynamicFees) {
-      this.setState({
-        dynamicFee: dynamicFees.Low,
-      });
-    }
-  }
-
-  onChange = (value) => {
-    const normalizedValue = value.replace(/[^0-9]/g, '.');
-
-    this.setState({
-      amount: {
-        value,
-        normalizedValue,
-        validity: -1,
-      },
-    });
-  }
-
-  onChangeDynamicFee = (value) => {
-    this.setState({ dynamicFee: value });
-  }
-
-  onSubmit = () => {
-    const { amount, fee } = this.state;
-    const validity = this.validator(amount.normalizedValue);
-
-    if (validity.code === 0) {
-      this.props.nextStep(merge(this.props.sharedData, {
-        amount: amount.normalizedValue,
-        fee,
-      }));
-    } else {
-      this.setState({
-        amount: merge(amount, { validity }),
-        fee,
       });
     }
   }
 
   render() {
-    const {
-      theme, styles, t,
-      settings: { currency, incognito, token },
-      accounts, priceTicker, dynamicFees,
-    } = this.props;
+    switch (this.props.settings.token.active) {
+      case tokenMap.LSK.key:
+      default:
+        return <AmountLSK {...this.props} />;
 
-    const {
-      amount: { value, normalizedValue, validity },
-      dynamicFee,
-    } = this.state;
-
-    let valueInCurrency = 0;
-
-    if (value && this.validator(normalizedValue).code === 0 && priceTicker[currency]) {
-      valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
-      valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
+      case tokenMap.BTC.key:
+        return <AmountBTC {...this.props} />;
     }
-
-    return (
-      <View style={styles.theme.wrapper}>
-        <KeyboardAwareScrollView
-          onSubmit={this.onSubmit}
-          styles={{ innerContainer: styles.innerContainer }}
-          hasTabBar={true}
-          button={{
-            title: t('Continue'),
-            type: 'inBox',
-          }}
-        >
-          <View>
-            {!isSmallScreen ? (
-              <View style={styles.headerContainer}>
-                <P style={styles.theme.subHeader}>
-                  {t('Enter the amount you want to send.')}
-                </P>
-              </View>
-            ) : null}
-
-            <View
-              style={[
-                styles.balanceContainer,
-                styles.theme.balanceContainer,
-                (incognito ? styles.balanceContainerIncognito : {}),
-              ]}
-            >
-              <B style={[styles.balanceText, styles.theme.balanceText]}>
-                {t('You have')}
-              </B>
-
-              {incognito ?
-                <Image
-                  source={blurs[theme]}
-                  style={styles.balanceIncognito}
-                /> :
-                <FormattedNumber
-                  type={B}
-                  style={[styles.balanceNumber, styles.theme.balanceNumber]}
-                  tokenType={token.active}
-                >
-                  {fromRawLsk(accounts.info[token.active].balance || 0)}
-                </FormattedNumber>
-              }
-            </View>
-
-            <AmountInput
-              reference={(el) => { this.input = el; }}
-              autoFocus={!isAndroid}
-              label={t(`Amount (${token.active})`)}
-              value={value}
-              onChange={this.onChange}
-              keyboardType='numeric'
-              currency={currency}
-              valueInCurrency={valueInCurrency}
-              error={validity.message}
-            />
-
-            {Object.keys(dynamicFees).length ?
-              <DynamicFeeSelector
-                value={dynamicFee}
-                amount={value}
-                data={dynamicFees}
-                onChange={this.onChangeDynamicFee}
-                tokenType={token.active}
-              /> : null
-            }
-          </View>
-        </KeyboardAwareScrollView>
-      </View>
-    );
   }
 }
 
-export default withTheme(translate()(Amount), getStyles());
+export default withTheme(Amount, getStyles());

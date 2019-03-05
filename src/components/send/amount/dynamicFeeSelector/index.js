@@ -3,7 +3,6 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { translate } from 'react-i18next';
 import FormattedNumber from '../../../formattedNumber';
 import { fromRawLsk } from '../../../../utilities/conversions';
-import { calculateTransactionFee } from '../../../../utilities/api/btc/transactions';
 import withTheme from '../../../withTheme';
 import getStyles from './styles';
 
@@ -13,6 +12,7 @@ const DynamicFeeSelector = ({
   onChange,
   tokenType,
   styles,
+  feeCalculator,
   t,
 }) => (
   <View style={styles.wrapper}>
@@ -21,45 +21,49 @@ const DynamicFeeSelector = ({
     </Text>
 
     <View style={[styles.container, styles.theme.container]}>
-      {Object.keys(data).map(key => (
-        <TouchableOpacity
-          key={key}
-          onPress={() => onChange(data[key])}
-          style={[
-            styles.item,
-            data[key] === value ? styles.selectedItem : {},
-            {
-              width: `${100 / Object.keys(data).length}%`,
-            },
-          ]}
-        >
-          <Text style={[
-            styles.itemLabel,
-            styles.theme.itemLabel,
-            data[key] === value ? styles.selectedItemLabel : {},
-          ]}>
-            {key}
-          </Text>
+      {Object.keys(data).map((key, index) => {
+        const isSelected = key === value;
+        const isFirst = index === 0;
+        const isLast = index === Object.keys(data).length - 1;
 
-          <FormattedNumber
-            type={Text}
-            tokenType={tokenType}
+        return (
+          <TouchableOpacity
+            key={key}
+            onPress={() => onChange(key)}
             style={[
-              styles.itemValue,
-              styles.theme.itemValue,
-              data[key] === value ? styles.selectedItemValue : {},
+              styles.item,
+              isFirst ? styles.itemFirst : {},
+              isLast ? styles.itemLast : {},
+              isSelected ? styles.selectedItem : {},
+              {
+                width: `${100 / Object.keys(data).length}%`,
+              },
             ]}
           >
-            {fromRawLsk(calculateTransactionFee({
-              inputCount: 4,
-              outputCount: 2,
-              dynamicFeePerByte: data[key],
-            }))}
-          </FormattedNumber>
+            <Text style={[
+              styles.itemLabel,
+              styles.theme.itemLabel,
+              isSelected ? styles.selectedItemLabel : {},
+            ]}>
+              {key}
+            </Text>
 
-          <View style={[styles.separator, styles.theme.separator]} />
-        </TouchableOpacity>
-      ))}
+            <FormattedNumber
+              type={Text}
+              tokenType={tokenType}
+              style={[
+                styles.itemValue,
+                styles.theme.itemValue,
+                isSelected ? styles.selectedItemValue : {},
+              ]}
+            >
+              {fromRawLsk(feeCalculator(data[key]))}
+            </FormattedNumber>
+
+            <View style={[styles.separator, styles.theme.separator]} />
+          </TouchableOpacity>
+        );
+      })}
     </View>
   </View>
 );
