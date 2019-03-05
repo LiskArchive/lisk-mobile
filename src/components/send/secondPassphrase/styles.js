@@ -21,6 +21,9 @@ export default () => ({
       width: 85,
       height: 85,
     },
+    inputContainer: {
+      paddingTop: 0,
+    },
     input: {
       borderRightWidth: boxes.boxPadding,
       borderRightColor: 'transparent',
@@ -32,21 +35,18 @@ export default () => ({
     },
     scanButton: {
       position: 'absolute',
-      right: 21,
       zIndex: 99,
-      top: 46,
-      paddingLeft: 10,
-      paddingBottom: 10,
-      width: 67,
-      height: 30,
-    },
-    longTitle: {
-      width: 87,
+      top: -5,
+      right: boxes.boxPadding + 5,
+      width: 60,
     },
     scanButtonTitle: {
-      fontSize: 14,
-      paddingLeft: 5,
-      color: colors.light.blue,
+      fontSize: fonts.size.small,
+      paddingLeft: 6,
+    },
+    longTitle: {
+      right: boxes.boxPadding - 5,
+      width: 90,
     },
     cameraRoll: {
       opacity: 0,

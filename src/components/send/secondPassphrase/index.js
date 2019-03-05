@@ -1,5 +1,4 @@
 import React from 'react';
-import connect from 'redux-connect-decorator';
 import { View, Image, Platform } from 'react-native';
 import { translate } from 'react-i18next';
 import { validatePassphrase } from '../../../utilities/passphrase';
@@ -20,9 +19,6 @@ const devDefaultSecondPass = process.env.secondPassphrase || '';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const isAndroid = deviceType() === 'android';
 
-@connect(state => ({
-  accounts: state.accounts,
-}), {})
 class SecondPassphrase extends React.Component {
   state = {
     secondPassphrase: {
@@ -56,11 +52,11 @@ class SecondPassphrase extends React.Component {
 
   validator = (passphrase) => {
     const validity = validatePassphrase(passphrase);
-    const { accounts: { active }, t } = this.props;
+    const { accounts, settings, t } = this.props;
 
     if (
       validity.length === 0 &&
-      (extractPublicKey(passphrase) !== active.secondPublicKey)
+      (extractPublicKey(passphrase) !== accounts.info[settings.token.active].secondPublicKey)
     ) {
       validity.push({
         code: 'dose_not_belong',
@@ -156,18 +152,19 @@ class SecondPassphrase extends React.Component {
           button={{
             title: t('Continue'),
             type: 'inBox',
-          }}>
+          }}
+        >
           <View>
             {!isSmallScreen ? (
               <View style={styles.titleContainer}>
                 <P style={[styles.subtitle, styles.theme.subtitle]}>
                   {t('Enter your second passphrase to continue to transaction overview page.')}
                 </P>
+
                 <View style={styles.illustrationWrapper}>
-                  {
-                    theme === themes.light ?
-                      <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
-                      <Image style={styles.illustration} source={secondPassphraseImageDark} />
+                  {theme === themes.light ?
+                    <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
+                    <Image style={styles.illustration} source={secondPassphraseImageDark} />
                   }
                 </View>
               </View>
@@ -177,7 +174,10 @@ class SecondPassphrase extends React.Component {
               <Input
                 label={t('Second Passphrase')}
                 reference={(ref) => { this.input = ref; }}
-                innerStyles={{ input: styles.input }}
+                innerStyles={{
+                  input: styles.input,
+                  containerStyle: styles.inputContainer,
+                }}
                 value={secondPassphrase.value}
                 onChange={this.changeHandler}
                 autoFocus={!isAndroid}
@@ -186,16 +186,17 @@ class SecondPassphrase extends React.Component {
                 secureTextEntry={Platform.OS !== 'ios'}
                 error={errorMessage}
               />
-              {
-                secondPassphrase.value === '' ?
-                  <IconButton
-                    onPress={this.onOpenCamera}
-                    titleStyle={styles.scanButtonTitle}
-                    style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-                    title={t('Scan')}
-                    icon='scanner'
-                    iconSize={18}
-                    color={colors.light.blue} /> : null
+
+              {secondPassphrase.value === '' ?
+                <IconButton
+                  onPress={this.onOpenCamera}
+                  titleStyle={styles.scanButtonTitle}
+                  style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                  title={t('Scan')}
+                  icon='scanner'
+                  iconSize={18}
+                  color={colors.light.blue}
+                /> : null
               }
             </View>
           </View>
