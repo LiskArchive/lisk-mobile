@@ -4,7 +4,7 @@ import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import FormattedNumber from '../../formattedNumber';
-import { toRawLsk, fromRawLsk, includeFee } from '../../../utilities/conversions';
+import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { SecondaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
@@ -15,7 +15,7 @@ import { colors } from '../../../constants/styleGuide';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
-const messages = t => ({
+const getTranslatedMessages = t => ({
   initialize: {
     title: t('Initialize your account'),
     subtitle: t('By initializing your account, you are taking an additional step towards securing your account.'),
@@ -36,26 +36,72 @@ class Overview extends React.Component {
   state = {
     initialize: false,
     errorMessage: null,
-    triggered: false,
+    busy: false,
   }
 
+  componentDidMount() {
+    const { t, prevStep, navigation } = this.props;
+    const { send, initialize } = getTranslatedMessages(t);
+
+    let nextNavigationParams = {
+      title: send.title,
+      action: () => prevStep(),
+      showButtonLeft: true,
+    };
+
+    if (navigation.state.params.initialize) {
+      this.setState({
+        initialize: true,
+      });
+
+      nextNavigationParams = {
+        title: initialize.title,
+        action: navigation.back,
+        showButtonLeft: false,
+      };
+    }
+
+    navigation.setParams({
+      ...nextNavigationParams,
+      initialize: false,
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, lng, navigation } = this.props;
+
+    if (prevProps.lng !== lng) {
+      const { initialize, send } = getTranslatedMessages(t);
+
+      navigation.setParams({
+        title: navigation.state.params.initialize ? initialize : send,
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    const { t, navigation: { setParams } } = this.props;
+    setParams({ title: t('Send') });
+  }
+
+
   send = () => {
-    // disable the button to prevent further presses.
-    this.setState({ triggered: true });
+    this.setState({ busy: true });
 
     const {
       accounts, nextStep, transactionAdded, t,
       sharedData: {
-        amount, address, reference, secondPassphrase,
+        amount, address, reference, secondPassphrase, fee,
       },
     } = this.props;
 
     transactionAdded({
       recipientAddress: address,
       amount: toRawLsk(amount),
+      fee,
       passphrase: accounts.passphrase,
       secondPassphrase,
-      data: reference || null,
+      reference,
     }, nextStep, (err) => {
       this.setState({ errorMessage: err.message || t('An error happened. Please try later.') });
     });
@@ -65,47 +111,6 @@ class Overview extends React.Component {
     Linking.openURL('https://help.lisk.io/account-security/should-i-initialize-my-lisk-account')
       // eslint-disable-next-line no-console
       .catch(err => console.error('An error occurred', err));
-  }
-
-  componentDidMount() {
-    const { send, initialize } = messages(this.props.t);
-    let nextNavigationParams = {
-      title: send.title,
-      action: () => this.props.prevStep(),
-      showButtonLeft: true,
-    };
-
-    if (this.props.navigation.state.params.initialize) {
-      this.setState({
-        initialize: true,
-      });
-
-      nextNavigationParams = {
-        title: initialize.title,
-        action: this.props.navigation.back,
-        showButtonLeft: false,
-      };
-    }
-
-    this.props.navigation.setParams({
-      ...nextNavigationParams,
-      initialize: false,
-    });
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.lng !== this.props.lng) {
-      const translatedMessages = messages(this.props.t);
-      const { navigation: { setParams, state: { params } } } = this.props;
-      setParams({
-        title: params.initialize ? translatedMessages.initialize : translatedMessages.send,
-      });
-    }
-  }
-
-  componentWillUnmount() {
-    const { t, navigation: { setParams } } = this.props;
-    setParams({ title: t('Send') });
   }
 
   render() {
@@ -123,8 +128,7 @@ class Overview extends React.Component {
     const actionType = navigation.state.params.initialize || this.state.initialize ?
       'initialize' : 'send';
 
-    const transactionFee = actionType === 'initialize' ? 0 : fee;
-    const translatedMessages = messages(this.props.t);
+    const translatedMessages = getTranslatedMessages(t);
     const bookmark = followed.find(item => item.address === address);
 
     return (
@@ -136,6 +140,7 @@ class Overview extends React.Component {
           {!isSmallScreen ? (
             <P style={styles.theme.subtitle}>
               {translatedMessages[actionType].subtitle}
+
               {actionType === 'initialize' ? (
                 <A style={[styles.link, styles.theme.link]} onPress={this.openAcademy}>
                   {t('Read more')}
@@ -145,10 +150,14 @@ class Overview extends React.Component {
           ) : null}
 
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
-            <Avatar address={address || ''} style={styles.avatar} size={50}/>
-            {
-              bookmark ? <H4 style={styles.theme.text}>{bookmark.label}</H4> : null
-            }
+            <Avatar address={address || ''} style={styles.avatar} size={50} />
+
+            {bookmark ? (
+              <H4 style={styles.theme.text}>
+                {bookmark.label}
+              </H4>
+            ) : null}
+
             <P style={[styles.text, styles.theme.text, styles.address]}>
               {address}
             </P>
@@ -157,47 +166,85 @@ class Overview extends React.Component {
           <View style={[styles.row, styles.theme.row]}>
             <Icon
               name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
-              style={styles.icon} size={20}
+              style={styles.icon}
+              size={20}
               color={colors[this.props.theme].gray2}
             />
+
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
-                {
-                  actionType === 'initialize' ?
-                  t('Transaction Fee') :
-                  `Amount (including ${fromRawLsk(transactionFee)} ${settings.token.active})`
-                }
+                {actionType === 'initialize' ? t('Transaction Fee') : t('Amount')}
               </P>
               <B style={[styles.text, styles.theme.text]}>
-                <FormattedNumber>
-                  {includeFee(amount, transactionFee)}
+                <FormattedNumber
+                  tokenType={settings.token.active}
+                >
+                  {amount}
                 </FormattedNumber>
               </B>
             </View>
           </View>
 
-          {
-            reference ?
-              <View style={[styles.row, styles.theme.row]}>
-                <Icon name='reference' style={styles.icon} size={20} color={colors[this.props.theme].gray2} />
-                <View style={styles.rowContent}>
-                  <P style={[styles.label, styles.theme.label]}>{t('Reference')}</P>
-                  <B style={[styles.text, styles.theme.text]}>{reference}</B>
-                </View>
-              </View> : null
-          }
+          {actionType !== 'initialize' ? (
+            <View style={[styles.row, styles.theme.row]}>
+              <Icon
+                name='tx-fee'
+                style={styles.icon}
+                size={20}
+                color={colors[this.props.theme].gray2}
+              />
+
+              <View style={styles.rowContent}>
+                <P style={[styles.label, styles.theme.label]}>
+                  {t('Transaction Fee')}
+                </P>
+                <B style={[styles.text, styles.theme.text]}>
+                  <FormattedNumber
+                    tokenType={settings.token.active}
+                  >
+                    {fromRawLsk(fee)}
+                  </FormattedNumber>
+                </B>
+              </View>
+            </View>
+          ) : null}
+
+          {reference ? (
+            <View style={[styles.row, styles.theme.row]}>
+              <Icon
+                name='reference'
+                style={styles.icon}
+                size={20}
+                color={colors[this.props.theme].gray2}
+              />
+
+              <View style={styles.rowContent}>
+                <P style={[styles.label, styles.theme.label]}>
+                  {t('Reference')}
+                </P>
+                <B style={[styles.text, styles.theme.text]}>
+                  {reference}
+                </B>
+              </View>
+            </View>
+          ) : null}
         </View>
 
         <View>
           <View style={[styles.errorContainer, this.state.errorMessage ? styles.visible : null]}>
-            <Icon size={16} name='warning' style={styles.errorIcon} />
+            <Icon
+              size={16}
+              name='warning'
+              style={styles.errorIcon}
+            />
+
             <Small style={styles.error}>
               {this.state.errorMessage}
             </Small>
           </View>
 
           <SecondaryButton
-            disabled={this.state.triggered}
+            disabled={this.state.busy}
             style={styles.button}
             onClick={this.send}
             title={translatedMessages[actionType].button}
