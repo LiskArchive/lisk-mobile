@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Linking, ScrollView } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import reg from '../../../constants/regex';
-import transactions from '../../../constants/transactions';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import FormattedNumber from '../../formattedNumber';
 import { toRawLsk, fromRawLsk, includeFee } from '../../../utilities/conversions';
@@ -31,9 +29,7 @@ const messages = t => ({
   },
 });
 
-@connect(state => ({
-  accounts: state.accounts,
-}), {
+@connect(null, {
   transactionAdded: transactionAddedAction,
 })
 class Overview extends React.Component {
@@ -42,15 +38,6 @@ class Overview extends React.Component {
     errorMessage: null,
     triggered: false,
   }
-
-  validator = {
-    amount: (str) => {
-      const { active } = this.props.accounts;
-      return (reg.amount.test(str) &&
-      active && active.balance > transactions.send.fee &&
-        parseFloat(str) <= fromRawLsk(active.balance - transactions.send.fee)) ? 0 : 1;
-    },
-  };
 
   send = () => {
     // disable the button to prevent further presses.
@@ -122,17 +109,23 @@ class Overview extends React.Component {
   }
 
   render() {
-    const actionType = this.props.navigation.state.params.initialize || this.state.initialize ?
-      'initialize' : 'send';
-
     const {
-      styles, accounts: { followed }, t,
-      sharedData: { address, amount, reference },
+      t,
+      styles,
+      navigation,
+      settings,
+      accounts: { followed },
+      sharedData: {
+        address, amount, reference, fee,
+      },
     } = this.props;
 
-    const bookmark = followed.find(item => item.address === address);
-    const fee = actionType === 'initialize' ? 0 : 1e7;
+    const actionType = navigation.state.params.initialize || this.state.initialize ?
+      'initialize' : 'send';
+
+    const transactionFee = actionType === 'initialize' ? 0 : fee;
     const translatedMessages = messages(this.props.t);
+    const bookmark = followed.find(item => item.address === address);
 
     return (
       <ScrollView
@@ -150,6 +143,7 @@ class Overview extends React.Component {
               ) : ''}
             </P>
           ) : null}
+
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
             <Avatar address={address || ''} style={styles.avatar} size={50}/>
             {
@@ -159,6 +153,7 @@ class Overview extends React.Component {
               {address}
             </P>
           </View>
+
           <View style={[styles.row, styles.theme.row]}>
             <Icon
               name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
@@ -167,15 +162,20 @@ class Overview extends React.Component {
             />
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
-                {actionType === 'initialize' ? t('Transaction Fee') : t('Amount (including 0.1 LSK)')}
+                {
+                  actionType === 'initialize' ?
+                  t('Transaction Fee') :
+                  `Amount (including ${fromRawLsk(transactionFee)} ${settings.token.active})`
+                }
               </P>
               <B style={[styles.text, styles.theme.text]}>
                 <FormattedNumber>
-                  {includeFee(amount, fee)}
+                  {includeFee(amount, transactionFee)}
                 </FormattedNumber>
               </B>
             </View>
           </View>
+
           {
             reference ?
               <View style={[styles.row, styles.theme.row]}>
@@ -187,11 +187,15 @@ class Overview extends React.Component {
               </View> : null
           }
         </View>
+
         <View>
           <View style={[styles.errorContainer, this.state.errorMessage ? styles.visible : null]}>
             <Icon size={16} name='warning' style={styles.errorIcon} />
-            <Small style={styles.error}>{this.state.errorMessage}</Small>
+            <Small style={styles.error}>
+              {this.state.errorMessage}
+            </Small>
           </View>
+
           <SecondaryButton
             disabled={this.state.triggered}
             style={styles.button}
