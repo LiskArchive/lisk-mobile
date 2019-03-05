@@ -3,12 +3,15 @@ import { View, Animated, StatusBar, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from 'react-navigation';
 import { translate } from 'react-i18next';
-import { transactionsLoaded as transactionsLoadedAction } from '../../actions/transactions';
+import {
+  transactionsReset as transactionsResetAction,
+  transactionsLoaded as transactionsLoadedAction,
+} from '../../actions/transactions';
 import {
   blockUpdated as blockUpdatedAction,
   accountFetched as accountFetchedAction,
 } from '../../actions/accounts';
-import AccountSummary from '../accountSummary';
+import AccountSummary from '../accountSummary/home';
 import Transactions from '../transactions';
 import Empty from '../transactions/empty';
 import Loading from '../transactions/loading';
@@ -40,6 +43,7 @@ const summaryHeight = 200;
   activeToken: state.settings.token.active,
 }), {
   transactionsLoaded: transactionsLoadedAction,
+  transactionsReset: transactionsResetAction,
   updateTransactions: blockUpdatedAction,
   accountFetched: accountFetchedAction,
 })
@@ -88,33 +92,83 @@ class Home extends React.Component {
     });
   }
 
-  componentDidMount() {
-    const {
-      transactionsLoaded, transactions,
-      account,
-      navigation,
-      activeToken,
-      accountFetched,
-    } = this.props;
-
-    accountFetched();
-
-    if (!transactions.loaded) {
-      transactionsLoaded({
-        address: account[activeToken].address,
-        offset: 0,
-      });
-    }
-
-    navigation.setParams({
+  bindInfiniteScroll = () => {
+    this.props.navigation.setParams({
       scrollToTop: () => {
         if (this.scrollView) {
           this.scrollView.scrollTo(0);
         }
       },
     });
+  }
 
-    this.initialAnimation();
+  initialTxFetch = (reset) => {
+    const {
+      transactionsReset,
+      transactionsLoaded,
+      account,
+      activeToken,
+      transactions,
+    } = this.props;
+
+    if (!transactions.loaded) {
+      transactionsLoaded({
+        address: account[activeToken].address,
+        offset: 0,
+      });
+
+      // @todo this might not be the best place
+      this.initialAnimation();
+    }
+
+    if (reset) {
+      transactionsReset({
+        address: account[activeToken].address,
+        offset: 0,
+      });
+
+      // @todo this might not be the best place
+      this.initialAnimation();
+    }
+  }
+
+  onScroll() {
+    return Animated.event([{
+      nativeEvent: { contentOffset: { y: this.scrollY } },
+    }]);
+  }
+
+  // @todo this timeouts might not be needed anymore
+  initialAnimation = () => {
+    this.timeout1 = setTimeout(() => {
+      if (this.scrollView) {
+        this.scrollView.scrollTo(1);
+      }
+    }, 100);
+    this.timeout2 = setTimeout(() => {
+      if (this.scrollView) {
+        this.scrollView.scrollTo(-1);
+      }
+    }, 120);
+  }
+
+  loadMore = () => {
+    const {
+      activeToken, account, transactionsLoaded, transactions,
+    } = this.props;
+
+    if (account[activeToken]) {
+      transactionsLoaded({
+        address: account[activeToken].address,
+        offset: transactions.confirmed.length,
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.props.accountFetched();
+    this.initialTxFetch();
+    this.bindInfiniteScroll();
     this.setHeader();
   }
 
@@ -155,44 +209,16 @@ class Home extends React.Component {
     ) {
       this.setHeader();
     }
+
+    if (prevProps.activeToken !== activeToken) {
+      this.initialTxFetch(true);
+      this.props.accountFetched();
+    }
   }
 
   componentWillUnmount() {
     clearTimeout(this.timeout1);
     clearTimeout(this.timeout2);
-  }
-
-  onScroll() {
-    return Animated.event([{
-      nativeEvent: { contentOffset: { y: this.scrollY } },
-    }]);
-  }
-
-  initialAnimation = () => {
-    this.timeout1 = setTimeout(() => {
-      if (this.scrollView) {
-        this.scrollView.scrollTo(1);
-      }
-    }, 100);
-    this.timeout2 = setTimeout(() => {
-      if (this.scrollView) {
-        this.scrollView.scrollTo(-1);
-      }
-    }, 120);
-  }
-
-  loadMore = () => {
-    const {
-      activeToken, account, transactionsLoaded, transactions,
-    } = this.props;
-
-    if (account[activeToken]) {
-      transactionsLoaded({
-        address: account[activeToken].address,
-        offset: transactions.confirmed.length,
-
-      });
-    }
   }
 
   render() {
@@ -253,14 +279,13 @@ class Home extends React.Component {
             <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
         }
         {
-          account[activeToken] && account[activeToken].address ? (
+          account[activeToken] && account[activeToken].balance !== undefined ? (
             <AccountSummary
               navigation={navigation}
               scrollY={this.scrollY}
               account={account[activeToken]}
               priceTicker={priceTicker}
               style={styles.accountSummary}
-              type='home'
             />
           ) : null
         }
