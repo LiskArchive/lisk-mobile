@@ -33,7 +33,7 @@ export default () => ({
       color: colors.light.gray2,
     },
     balanceNumber: {
-      color: colors.light.blue,
+      color: colors.light.black,
     },
   },
 
@@ -42,10 +42,10 @@ export default () => ({
       backgroundColor: colors.dark.sendBalanceBg,
     },
     balanceText: {
-      color: colors.dark.white,
+      color: colors.dark.gray4,
     },
     balanceNumber: {
-      color: colors.dark.blue,
+      color: colors.dark.white,
     },
   },
 });

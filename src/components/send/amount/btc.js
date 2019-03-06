@@ -19,7 +19,6 @@ class AmountBTC extends React.Component {
   state = {
     fee: 0,
     unspentTransactionOutputs: [],
-    unspentTransactionOutputCountToConsume: 0,
     dynamicFeeType: 'Low', // ['Low', 'Medium', 'High']
     amount: {
       value: '',
@@ -39,7 +38,7 @@ class AmountBTC extends React.Component {
     this.retrieveUnspentTransactionOutputs();
 
     if (sharedData.amount) {
-      this.onChange(sharedData.amount);
+      this.onChangeAmount(sharedData.amount);
     }
 
     if (sharedData.dynamicFeeType) {
@@ -54,8 +53,9 @@ class AmountBTC extends React.Component {
   retrieveUnspentTransactionOutputs() {
     const { accounts, settings: { token } } = this.props;
 
-    btcTransactionsAPI.getUnspentTransactionOutputs(accounts.info[token.active].address)
-      .then(res => this.setState({ unspentTransactionOutputs: res }))
+    btcTransactionsAPI
+      .getUnspentTransactionOutputs(accounts.info[token.active].address)
+      .then(data => this.setState({ unspentTransactionOutputs: data }))
       .catch(() => this.setState({ unspentTransactionOutputs: [] }));
   }
 
@@ -64,23 +64,8 @@ class AmountBTC extends React.Component {
     message: '',
   })
 
-  onChange = (value) => {
+  onChangeAmount = (value) => {
     const normalizedValue = value.replace(/[^0-9]/g, '.');
-    const validity = this.validator(normalizedValue);
-    let unspentTransactionOutputCountToConsume = 0;
-
-    if (validity.code === 0) {
-      const [count] = this.state.unspentTransactionOutputs.reduce((result, output) => {
-        if (value > result[1]) {
-          result[0] += 1;
-          result[1] += output.value / (10 ** 8);
-        }
-
-        return result;
-      }, [0, 0]);
-
-      unspentTransactionOutputCountToConsume = count;
-    }
 
     this.setState({
       amount: {
@@ -88,7 +73,6 @@ class AmountBTC extends React.Component {
         normalizedValue,
         validity: -1,
       },
-      unspentTransactionOutputCountToConsume,
     });
   }
 
@@ -119,6 +103,27 @@ class AmountBTC extends React.Component {
     });
   }
 
+  getUnspentTransactionOutputCountToConsume() {
+    const { amount: { value, normalizedValue } } = this.state;
+    const validity = this.validator(normalizedValue);
+    let unspentTransactionOutputCountToConsume = 0;
+
+    if (validity.code === 0) {
+      const [count] = this.state.unspentTransactionOutputs.reduce((result, output) => {
+        if (value > result[1]) {
+          result[0] += 1;
+          result[1] += output.value / (10 ** 8);
+        }
+
+        return result;
+      }, [0, 0]);
+
+      unspentTransactionOutputCountToConsume = count;
+    }
+
+    return unspentTransactionOutputCountToConsume;
+  }
+
   getValueInCurrency() {
     const { priceTicker, settings: { currency } } = this.props;
     const { amount: { value, normalizedValue } } = this.state;
@@ -134,10 +139,8 @@ class AmountBTC extends React.Component {
   }
 
   calculateDynamicFee = (dynamicFeePerByte) => {
-    const { unspentTransactionOutputCountToConsume } = this.state;
-
     const feeInSatoshis = btcTransactionsAPI.calculateTransactionFee({
-      inputCount: unspentTransactionOutputCountToConsume,
+      inputCount: this.getUnspentTransactionOutputCountToConsume(),
       outputCount: 2,
       dynamicFeePerByte,
     });
@@ -153,11 +156,8 @@ class AmountBTC extends React.Component {
 
     const {
       amount: { value, validity },
-      dynamicFeeType,
+      dynamicFeeType, unspentTransactionOutputs,
     } = this.state;
-
-    const valueInCurrency = this.getValueInCurrency();
-    const dynamicFeesResolved = Object.keys(dynamicFees).length > 0;
 
     return (
       <View style={styles.theme.wrapper}>
@@ -184,21 +184,20 @@ class AmountBTC extends React.Component {
               autoFocus={!isAndroid}
               label={t('Amount (BTC)')}
               value={value}
-              onChange={this.onChange}
+              onChange={this.onChangeAmount}
               keyboardType='numeric'
               currency={settings.currency}
-              valueInCurrency={valueInCurrency}
+              valueInCurrency={this.getValueInCurrency()}
               error={validity.message}
             />
 
-            {dynamicFeesResolved ?
+            {Object.keys(dynamicFees).length > 0 && unspentTransactionOutputs.length > 0 ?
               <DynamicFeeSelector
-                value={dynamicFeeType}
-                amount={value}
+                value={this.calculateDynamicFee(dynamicFees[dynamicFeeType])}
                 data={dynamicFees}
+                selected={dynamicFeeType}
                 onChange={this.onChangeDynamicFee}
                 tokenType={settings.token.active}
-                feeCalculator={this.calculateDynamicFee}
               /> : null
             }
           </View>

@@ -9,11 +9,20 @@ export default () => ({
       padding: boxes.boxPadding,
     },
 
+    labelContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+
     label: {
       color: colors.light.gray1,
       fontFamily: fonts.family.contextLight,
       fontSize: fonts.size.input,
       fontWeight: '400',
+    },
+
+    value: {
+      fontSize: fonts.size.small,
     },
 
     container: {
@@ -26,10 +35,13 @@ export default () => ({
     },
 
     item: {
-      paddingTop: 10,
-      paddingBottom: 10,
+      paddingTop: 12,
+      paddingBottom: 12,
       alignItems: 'center',
-      position: 'relative',
+    },
+
+    selectedItem: {
+      backgroundColor: colors.light.btc,
     },
 
     itemFirst: {
@@ -42,66 +54,45 @@ export default () => ({
       borderTopRightRadius: itemBorderRadius,
     },
 
-    selectedItem: {
-      backgroundColor: colors.light.btc,
-    },
-
     itemLabel: {
       fontFamily: fonts.family.contextSemiBold,
       fontSize: fonts.size.small,
-      paddingBottom: 3,
     },
 
     selectedItemLabel: {
       color: colors.light.white,
     },
-
-    itemValue: {
-      fontSize: fonts.size.small - 2,
-    },
-
-    selectedItemValue: {
-      color: colors.light.white,
-    },
-
-    separator: {
-      position: 'absolute',
-      right: -1,
-      top: 14,
-      width: 1,
-      height: 26,
-    },
   },
 
   [themes.light]: {
     container: {
-      borderColor: colors.light.gray5,
+      borderColor: colors.light.sendBalanceBg,
     },
 
-    separator: {
-      backgroundColor: colors.light.gray5,
+    value: {
+      color: colors.light.black,
+    },
+
+    itemLabel: {
+      color: colors.light.gray1,
     },
   },
 
   [themes.dark]: {
+    container: {
+      borderColor: colors.dark.sendBalanceBg,
+    },
+
     label: {
       color: colors.dark.gray4,
     },
 
-    container: {
-      borderColor: colors.dark.gray5,
+    value: {
+      color: colors.dark.white,
     },
 
     itemLabel: {
-      color: colors.dark.white,
-    },
-
-    itemValue: {
-      color: colors.dark.white,
-    },
-
-    separator: {
-      backgroundColor: colors.dark.gray5,
+      color: colors.dark.gray1,
     },
   },
 });
