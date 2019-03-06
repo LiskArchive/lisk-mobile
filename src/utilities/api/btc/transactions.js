@@ -140,6 +140,9 @@ export const create = ({
   dynamicFeePerByte,
 }) => new Promise(async (resolve, reject) => {
   try {
+    amount = Number(amount);
+    dynamicFeePerByte = Number(dynamicFeePerByte);
+
     const senderAddress = extractAddress(passphrase);
     const unspentTxOuts = await exports.getUnspentTransactionOutputs(senderAddress);
 

@@ -84,14 +84,14 @@ class Overview extends React.Component {
     setParams({ title: t('Send') });
   }
 
-
   send = () => {
     this.setState({ busy: true });
 
     const {
       accounts, nextStep, transactionAdded, t,
       sharedData: {
-        amount, address, reference, secondPassphrase, fee,
+        amount, address, reference, secondPassphrase,
+        fee, dynamicFeePerByte,
       },
     } = this.props;
 
@@ -102,8 +102,12 @@ class Overview extends React.Component {
       passphrase: accounts.passphrase,
       secondPassphrase,
       reference,
-    }, nextStep, (err) => {
-      this.setState({ errorMessage: err.message || t('An error happened. Please try later.') });
+      dynamicFeePerByte,
+    }, nextStep, (error = {}) => {
+      this.setState({
+        errorMessage: error.message || t('An error happened. Please try later.'),
+        busy: false,
+      });
     });
   }
 

@@ -104,10 +104,13 @@ class AmountBTC extends React.Component {
     const validity = this.validator(amount.normalizedValue);
 
     if (validity.code === 0) {
+      const dynamicFeePerByte = dynamicFees[dynamicFeeType];
+
       return nextStep(merge(sharedData, {
         amount: amount.normalizedValue,
-        fee: this.calculateDynamicFee(dynamicFees[dynamicFeeType]),
+        fee: this.calculateDynamicFee(dynamicFeePerByte),
         dynamicFeeType,
+        dynamicFeePerByte,
       }));
     }
 
