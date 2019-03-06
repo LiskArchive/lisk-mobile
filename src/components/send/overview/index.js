@@ -12,10 +12,11 @@ import { H4, B, P, A, Small } from '../../toolBox/typography';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
+import { tokenMap } from '../../../constants/tokens';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
-const getTranslatedMessages = t => ({
+const getTranslatedMessages = (t, activeToken = tokenMap.LSK.key) => ({
   initialize: {
     title: t('Initialize your account'),
     subtitle: t('By initializing your account, you are taking an additional step towards securing your account.'),
@@ -24,7 +25,7 @@ const getTranslatedMessages = t => ({
   },
   send: {
     title: t('Ready to send'),
-    subtitle: t('You are about to send LSK tokens to the following address.'),
+    subtitle: t(`You are about to send ${activeToken} tokens to the following address.`),
     button: t('Send now'),
   },
 });
@@ -121,6 +122,7 @@ class Overview extends React.Component {
     const {
       t,
       styles,
+      theme,
       navigation,
       settings,
       accounts: { followed },
@@ -132,7 +134,7 @@ class Overview extends React.Component {
     const actionType = navigation.state.params.initialize || this.state.initialize ?
       'initialize' : 'send';
 
-    const translatedMessages = getTranslatedMessages(t);
+    const translatedMessages = getTranslatedMessages(t, settings.token.active);
     const bookmark = followed.find(item => item.address === address);
 
     return (
@@ -154,7 +156,22 @@ class Overview extends React.Component {
           ) : null}
 
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
-            <Avatar address={address || ''} style={styles.avatar} size={50} />
+            {settings.token.active === tokenMap.LSK.key ? (
+              <Avatar
+                address={address || ''}
+                style={styles.avatar}
+                size={50}
+              />
+            ) : (
+              <View style={[styles.addressIconContainer, styles.theme.addressIconContainer]}>
+                <Icon
+                  name='tx-id'
+                  style={styles.addressIcon}
+                  color={colors[theme].gray2}
+                  size={20}
+                />
+              </View>
+            )}
 
             {bookmark ? (
               <H4 style={styles.theme.text}>
@@ -172,7 +189,7 @@ class Overview extends React.Component {
               name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
               style={styles.icon}
               size={20}
-              color={colors[this.props.theme].gray2}
+              color={colors[theme].gray2}
             />
 
             <View style={styles.rowContent}>
@@ -195,7 +212,7 @@ class Overview extends React.Component {
                 name='tx-fee'
                 style={styles.icon}
                 size={20}
-                color={colors[this.props.theme].gray2}
+                color={colors[theme].gray2}
               />
 
               <View style={styles.rowContent}>
@@ -219,7 +236,7 @@ class Overview extends React.Component {
                 name='reference'
                 style={styles.icon}
                 size={20}
-                color={colors[this.props.theme].gray2}
+                color={colors[theme].gray2}
               />
 
               <View style={styles.rowContent}>
@@ -239,10 +256,10 @@ class Overview extends React.Component {
             <Icon
               size={16}
               name='warning'
-              style={styles.errorIcon}
+              style={[styles.errorIcon, styles.theme.errorIcon]}
             />
 
-            <Small style={styles.error}>
+            <Small style={[styles.error, styles.theme.error]}>
               {this.state.errorMessage}
             </Small>
           </View>

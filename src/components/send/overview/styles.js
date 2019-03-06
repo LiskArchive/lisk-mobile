@@ -62,8 +62,18 @@ export default () => ({
       paddingTop: boxes.boxPadding,
       paddingBottom: boxes.boxPadding,
     },
+    addressIconContainer: {
+      width: 50,
+      height: 50,
+      borderRadius: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 10,
+    },
+    addressIcon: {
+    },
     avatar: {
-      paddingBottom: 10,
+      marginBottom: 10,
     },
     errorContainer: {
       flexDirection: 'row',
@@ -86,9 +96,13 @@ export default () => ({
       paddingLeft: 4,
     },
   },
+
   [themes.light]: {
     container: {
       backgroundColor: colors.light.white,
+    },
+    addressIconContainer: {
+      backgroundColor: colors.light.sendBalanceBg,
     },
     row: {
       borderBottomColor: colors.light.gray5,
@@ -112,9 +126,13 @@ export default () => ({
       color: colors.light.red,
     },
   },
+
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.screenBgNavy,
+    },
+    addressIconContainer: {
+      backgroundColor: colors.dark.sendBalanceBg,
     },
     row: {
       borderBottomColor: colors.dark.gray5,
