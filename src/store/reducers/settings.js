@@ -24,8 +24,14 @@ export const INITIAL_STATE = {
 const settings = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case actionTypes.settingsUpdated:
-    case actionTypes.settingsRetrieved:
       return merge(state, action.data);
+    case actionTypes.settingsRetrieved:
+      return merge(state, action.data, {
+        token: {
+          active: tokenKeys[0],
+          list: action.data.token ? action.data.token.list : INITIAL_STATE.token.list,
+        },
+      });
     default:
       return state;
   }
