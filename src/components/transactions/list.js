@@ -5,7 +5,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const List = ({
-  styles, theme, transactions, account,
+  styles, theme, transactions, account, activeToken,
   followedAccounts, navigate, pending, incognito,
 }) =>
   (<View style={styles.nativeList}>
@@ -16,6 +16,7 @@ const List = ({
           navigate={navigate}
           incognito={incognito}
           account={account}
+          activeToken={activeToken}
           followedAccounts={followedAccounts}
           tx={tx}
           theme={theme}
@@ -29,6 +30,7 @@ const List = ({
           navigate={navigate}
           incognito={incognito}
           account={account}
+          activeToken={activeToken}
           followedAccounts={followedAccounts}
           tx={tx}
           theme={theme}

@@ -37,7 +37,7 @@ class Item extends React.Component {
 
   render() {
     const {
-      styles, theme, tx, t,
+      styles, theme, tx, t, activeToken,
       account, followedAccounts, incognito,
     } = this.props;
 
@@ -80,7 +80,8 @@ class Item extends React.Component {
         onPress={this.showDetail}>
         <View style={styles.innerContainer}>
         <View style={[styles.itemColumn, styles.avatarContainer]}>
-          {image}
+          {
+            activeToken === 'LSK' ? image : null}
         </View>
         <View style={styles.column}>
           <B style={[styles.address, styles.theme.address]}>

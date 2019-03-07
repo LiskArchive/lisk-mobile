@@ -23,7 +23,7 @@ export default () => ({
       justifyContent: 'flex-start',
     },
     placeholder: {
-      height: 170,
+      height: 180,
       width: '100%',
       justifyContent: 'flex-end',
       paddingBottom: 25,

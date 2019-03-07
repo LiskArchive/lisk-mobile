@@ -26,6 +26,7 @@ import { IconButton } from '../toolBox/button';
  */
 @connect(state => ({
   incognitoMode: state.settings.incognito,
+  activeToken: state.settings.token.active,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
@@ -69,7 +70,7 @@ class Transactions extends React.Component {
 
   render() {
     const {
-      styles, transactions, navigate,
+      styles, transactions, navigate, activeToken,
       account, footer, theme, incognitoMode,
       followedAccounts, refreshing, type, t,
     } = this.props;
@@ -78,7 +79,7 @@ class Transactions extends React.Component {
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
-    const height = type === 'home' ? 170 : 205;
+    const height = type === 'home' ? 180 : 205;
 
     return (<Anim style={[styles.container, { opacity, top }]}>
       {
@@ -91,14 +92,15 @@ class Transactions extends React.Component {
             </View>
             <View style={styles.innerContainer}>
               <H3 style={[styles.title, styles.theme.title]}>{t('Activity')}</H3>
-              {incognito ?
-                <IconButton
-                  title=''
-                  icon={'disable-incognito'}
-                  color={colors.dark.gray2}
-                  iconSize={20}
-                  onClick={this.toggleIncognito}
-                /> : null
+              {
+                type === 'home' ?
+                  <IconButton
+                    title=''
+                    icon={incognito ? 'disable-incognito' : 'enable-incognito'}
+                    color={colors.dark.gray2}
+                    iconSize={20}
+                    onClick={this.toggleIncognito}
+                  /> : null
               }
             </View>
             {type === 'home' && !account.initialized && balance >= 0.2 ?
@@ -117,6 +119,7 @@ class Transactions extends React.Component {
               account={account ? account.address : ''}
               followedAccounts={followedAccounts}
               pending={transactions.pending}
+              activeToken={activeToken}
               transactions={transactions.confirmed}
             />
             {
