@@ -9,7 +9,7 @@ export const INITIAL_STATE = {
   currency: currencyKeys[0],
   token: {
     active: tokenKeys[0],
-    list: tokenKeys.reduce((acc, key) => { acc[key] = false; return acc; }, {}),
+    list: tokenKeys.reduce((acc, key) => { acc[key] = true; return acc; }, {}),
   },
 };
 
