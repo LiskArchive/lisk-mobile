@@ -150,12 +150,21 @@ class Settings extends React.Component {
                 icon='currency'
                 iconSize={20}
                 title={t('Currency')}
-                target='ManageAssets'
+                target='CurrencySelection'
                 targetStateLabel={
                   <P style={{ color: colors[theme].gray1 }}>
                     {settings.currency}
                   </P>
                 }
+              />
+            </View>
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
+                icon='manage-assets'
+                iconSize={20}
+                title={t('Manage assets')}
+                target='ManageAssets'
               />
             </View>
             <View style={[styles.item, styles.theme.item]}>

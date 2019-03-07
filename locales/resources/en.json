@@ -174,5 +174,6 @@
   "For ease of sign in": "For ease of sign in",
   "OK": "OK",
   "Sign in using bioAuth": "Sign in using {{sensorType}}",
-  "Use bioAuth": "Use {{sensorType}}"
+  "Use bioAuth": "Use {{sensorType}}",
+  "Manage assets": "Manage assets"
 }

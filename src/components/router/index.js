@@ -206,7 +206,7 @@ const MainStack = StackNavigator(
     ManageAssets: {
       screen: ManageAssets,
       navigationOptions: {
-        title: 'Manage assets',
+        title: t('Manage assets'),
         headerTitle: HeaderTitle,
         headerRight: <TokenSwitcher />,
         headerLeft: HeaderBackButton,
