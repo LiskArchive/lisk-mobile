@@ -8,7 +8,6 @@ import Share from '../share';
 import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from '../../utilities/device';
 import Input from '../toolBox/input';
 import { P, B } from '../toolBox/typography';
-import Icon from '../toolBox/icon';
 import reg from '../../constants/regex';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -16,7 +15,7 @@ import { themes, colors } from '../../constants/styleGuide';
 import { tokenMap } from '../../constants/tokens';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
-const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.8);
+const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
 @connect(state => ({
   account: state.accounts.info,
@@ -82,6 +81,10 @@ class Request extends React.Component {
             ) : null}
 
             <View style={styles.main}>
+              <B style={[styles.addressLabel, styles.theme.addressLabel]}>
+                {t(`Your ${tokenMap[activeToken].label} address`)}
+              </B>
+
               <B style={[styles.address, styles.theme.address]}>
                 {address}
               </B>
@@ -94,7 +97,9 @@ class Request extends React.Component {
                   <QRCode
                     value={url || address}
                     size={qrCodeSize}
-                    color={theme === themes.light ? '#263344' : colors.dark.gray4}
+                    color={
+                      theme === themes.light ? colors.light.black : colors.dark.white
+                    }
                     backgroundColor={
                       theme === themes.light ? colors.light.white : colors.dark.screenBgNavy
                     }
@@ -102,20 +107,14 @@ class Request extends React.Component {
 
                   <View style={styles.shareTextContainer}>
                     <P style={[styles.shareText, styles.theme.shareText]}>
-                      {t('Share')}
+                      {t('Tap on the QR Code to share it.')}
                     </P>
-
-                    <Icon
-                      name='share'
-                      size={14}
-                      color={colors[theme].blue}
-                    />
                   </View>
                 </View>
               </Share>
             </View>
 
-            <View style={styles.fieldset}>
+            <View style={styles.inputContainer}>
               {activeToken === tokenMap.LSK.key ? (
                 <Input
                   innerStyles={{ input: styles.input }}

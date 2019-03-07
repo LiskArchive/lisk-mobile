@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from '../../constants/styleGuide';
+import { themes, colors, boxes, fonts } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -23,8 +23,13 @@ export default () => ({
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
     },
+    addressLabel: {
+      fontSize: fonts.size.base,
+      marginBottom: 8,
+    },
     address: {
-      marginBottom: 16,
+      marginBottom: 24,
+      fontSize: fonts.size.small,
     },
     shareContent: {
       flexDirection: 'column',
@@ -36,9 +41,9 @@ export default () => ({
       alignItems: 'center',
     },
     shareText: {
-      marginRight: 5,
+      fontSize: fonts.size.small,
     },
-    fieldset: {
+    inputContainer: {
       height: 100,
     },
     input: {
@@ -56,11 +61,14 @@ export default () => ({
     subHeader: {
       color: colors.light.gray2,
     },
+    addressLabel: {
+      color: colors.light.gray1,
+    },
     address: {
-      color: '#263344',
+      color: colors.light.black,
     },
     shareText: {
-      color: colors.light.blue,
+      color: colors.light.gray1,
     },
   },
 
@@ -74,11 +82,14 @@ export default () => ({
     subHeader: {
       color: colors.dark.gray4,
     },
+    addressLabel: {
+      color: colors.dark.gray1,
+    },
     address: {
       color: colors.dark.white,
     },
     shareText: {
-      color: colors.dark.blue,
+      color: colors.dark.gray1,
     },
   },
 });
