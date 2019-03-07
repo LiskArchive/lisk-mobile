@@ -81,9 +81,9 @@ class Request extends React.Component {
             ) : null}
 
             <View style={styles.main}>
-              <B style={[styles.addressLabel, styles.theme.addressLabel]}>
+              <P style={[styles.addressLabel, styles.theme.addressLabel]}>
                 {t(`Your ${tokenMap[activeToken].label} address`)}
-              </B>
+              </P>
 
               <B style={[styles.address, styles.theme.address]}>
                 {address}
