@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Animated, StatusBar, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from 'react-navigation';
-import { translate } from 'react-i18next';
 import {
   transactionsReset as transactionsResetAction,
   transactionsLoaded as transactionsLoadedAction,
@@ -17,6 +16,7 @@ import Empty from '../transactions/empty';
 import Loading from '../transactions/loading';
 import { viewportHeight } from '../../utilities/device';
 import InfiniteScrollView from '../infiniteScrollView';
+import { tokenMap } from '../../constants/tokens';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
@@ -28,7 +28,6 @@ const summaryHeight = 200;
  * This component would be mounted first and would be used to config and redirect
  * the application to referer page or Sign In
  *
- * @todo Implement saved language detection
  * @todo Implement release notification
  * @todo Implement custom message: this can be used in case we need to notify the user
  * about any unforeseen issue/change
@@ -57,7 +56,7 @@ class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return ({
-      title: params.title || 'Your wallet',
+      title: params.title || 'Lisk wallet',
       type: 'home',
       headerStyle: {
         backgroundColor: 'transparent',
@@ -77,13 +76,14 @@ class Home extends React.Component {
 
   setHeader = () => {
     const {
-      activeToken, navigation: { setParams }, t, account, incognito,
+      activeToken, navigation: { setParams }, account, incognito,
     } = this.props;
 
     setParams({
       title: {
-        placeHolder: t('Your wallet'),
+        placeHolder: `${tokenMap[activeToken].label} Wallet`,
         type: 'home',
+        token: activeToken,
         balance: account[activeToken].balance,
         address: account[activeToken].address,
         interpolate: this.interpolate,
@@ -175,7 +175,6 @@ class Home extends React.Component {
   componentDidUpdate(prevProps) {
     const {
       transactions, account, incognito, activeToken,
-      navigation: { setParams }, t, lng,
     } = this.props;
 
     const prevTransactionCount = (
@@ -197,13 +196,8 @@ class Home extends React.Component {
       });
     }
 
-    if (prevProps.lng !== lng) {
-      setParams({
-        title: t('Your wallet'),
-      });
-    }
-
     if (
+      (prevProps.activeToken !== activeToken) ||
       (prevProps.account[activeToken].balance !== account[activeToken].balance) ||
       (prevProps.incognito !== incognito)
     ) {
@@ -278,24 +272,15 @@ class Home extends React.Component {
             <StatusBar barStyle='light-content' /> :
             <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
         }
-        {
-          account[activeToken] && account[activeToken].balance !== undefined ? (
-            <AccountSummary
-              navigation={navigation}
-              scrollY={this.scrollY}
-              account={account[activeToken]}
-              priceTicker={priceTicker}
-              style={styles.accountSummary}
-            />
-          ) : null
-        }
-
-        {
-          content
-        }
+        <AccountSummary
+          navigation={navigation}
+          scrollY={this.scrollY}
+          priceTicker={priceTicker}
+          style={styles.accountSummary} />
+        { content }
       </View>
     );
   }
 }
 
-export default withNavigationFocus(withTheme(translate()(Home), getStyles()));
+export default withNavigationFocus(withTheme(Home, getStyles()));
