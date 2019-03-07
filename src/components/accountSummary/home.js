@@ -1,11 +1,7 @@
 import React from 'react';
-import { View, Alert, Image, Animated, Dimensions } from 'react-native';
+import { View, Image, Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import {
-  accountFollowed as accountFollowedAction,
-  accountUnFollowed as accountUnFollowedAction,
-} from '../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
@@ -22,27 +18,17 @@ const width = deviceWidth();
   settings: state.settings,
   accounts: state.accounts,
 }), {
-  accountFollowed: accountFollowedAction,
-  accountUnFollowed: accountUnFollowedAction,
   settingsUpdated: settingsUpdatedAction,
 })
 class AccountSummary extends React.Component {
   state = {
-    modalVisible: false,
     balanceWidth: 0,
     addressWidth: 0,
     initialAnimations: {
       opacity: new Animated.Value(0),
       top: new Animated.Value(-20),
     },
-    followed: false,
     activeSlide: 0,
-  }
-
-  toggleModal() {
-    this.setState({
-      modalVisible: !this.state.modalVisible,
-    });
   }
 
   interpolate = (inputRange, outputRange) =>
@@ -79,40 +65,16 @@ class AccountSummary extends React.Component {
     });
   }
 
-  toggleBookmark = () => {
-    const {
-      accounts: { followed }, account, navigation, accountUnFollowed, t,
-    } = this.props;
-    const isFollowed = followed.some(item => item.address === account.address);
-    if (isFollowed) {
-      Alert.alert(t('Are you sure?'), '', [
-        {
-          text: t('Cancel'),
-          style: 'cancel',
-        },
-        {
-          text: t('Confirm'),
-          onPress: () => accountUnFollowed(account.address),
-        },
-      ], { cancelable: false });
-    } else {
-      navigation.navigate({
-        routeName: 'AddBookmark',
-        params: {
-          account,
-          title: t('Add bookmark'),
-        },
-      });
-    }
-  }
-
   renderProfile = (data) => {
     const { settings, priceTicker } = this.props;
 
     const { opacity, top } = this.state.initialAnimations;
     const height = 165;
+    const token = Object.keys(settings.token.list)[data.index];
 
     return (<Profile
+      key={token}
+      token={token}
       priceTicker={priceTicker}
       account={data.item}
       settings={settings}
@@ -144,13 +106,13 @@ class AccountSummary extends React.Component {
 
   render() {
     const { accounts: { info }, styles } = this.props;
-
     const profiles = Object.keys(info).map(key => info[key]);
 
     return (<View style={[styles.homeContainer, this.props.style]}>
       <Image style={[styles.bg, styles.theme.bg]} source={bg} />
       <Carousel
         ref={(el) => { this.carousel = el; }}
+        firstItem={0}
         data={profiles}
         renderItem={this.renderProfile.bind(this)}
         sliderWidth={width}
