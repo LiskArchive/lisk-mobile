@@ -1,10 +1,10 @@
 import React from 'react';
 import Icon from '../../toolBox/icon';
 
-const TabBarIcon = ({ name, tintColor }) => (
+const TabBarIcon = ({ name, tintColor, focused }) => (
   <Icon
-    name={name}
     size={20}
+    name={focused ? `${name}-filled` : name}
     color={tintColor}
   />
 );
