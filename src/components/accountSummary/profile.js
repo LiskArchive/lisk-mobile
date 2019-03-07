@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Animated } from 'react-native';
+import { Image, Animated, View } from 'react-native';
 import Avatar from '../avatar';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
@@ -7,6 +7,7 @@ import Share from '../share';
 import { P, H2 } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import Icon from '../toolBox/icon';
 import darkBig from '../../assets/images/balanceBlur/darkBig.png';
 import darkMedium from '../../assets/images/balanceBlur/darkMedium.png';
 import darkSmall from '../../assets/images/balanceBlur/darkSmall.png';
@@ -29,13 +30,16 @@ const Profile = ({
   settings,
   opacity,
   top,
+  token,
 }) => {
   const AView = Animated.View;
   let balanceSize = 'Small';
+
   const normalizedBalance = fromRawLsk(account.balance);
   if (normalizedBalance.length > 6) balanceSize = 'Big';
   else if (normalizedBalance.length > 2) balanceSize = 'Medium';
 
+  // @todo Use the corresponding fiat exchange ratio
   let faitBalance = 0;
   if (normalizedBalance && priceTicker[settings.currency]) {
     faitBalance = (normalizedBalance * priceTicker[settings.currency]).toFixed(2);
@@ -46,7 +50,19 @@ const Profile = ({
       { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) }]}>
       <AView style={[styles.avatar, { opacity },
         { marginTop: interpolate([0, 100], [0, 100]) }]}>
-        <Avatar address={account.address} size={60} />
+        {
+          token === 'LSK' ?
+          <Avatar address={account.address} size={60} /> :
+          <View style={{
+            backgroundColor: 'white',
+            padding: 10,
+            borderRadius: 30,
+            width: 60,
+            height: 60,
+          }}>
+            <Icon name='language' size={40} color={'orange'} />
+          </View>
+        }
       </AView>
       <AView style={[styles.address, { opacity },
         {
@@ -67,9 +83,9 @@ const Profile = ({
         },
       ]}>
         <FormattedNumber
-          tokenType={settings.token.active}
+          tokenType={token}
           style={[styles.theme.homeBalance, settings.incognito ? styles.invisibleTitle : null]}
-          type={H2}>{fromRawLsk(account.balance)}</FormattedNumber>
+          type={H2}>{normalizedBalance}</FormattedNumber>
         <Image source={blurs[`${settings.theme}${balanceSize}`]}
           style={[styles.blur, styles[`blur${balanceSize}`],
           settings.incognito ? styles.visibleBlur : null]} />
