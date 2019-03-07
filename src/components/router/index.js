@@ -58,7 +58,7 @@ const Tabs = TabNavigator({
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackgroundImage />,
-      tabBarIcon: ({ tintColor }) => <TabBarIcon name='home' tintColor={tintColor} />, //eslint-disable-line
+      tabBarIcon: props => <TabBarIcon name='home' {...props} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, scene }) => {
         if (scene.focused && scene.route.params && scene.route.params.scrollToTop) {
           scene.route.params.scrollToTop();
@@ -77,7 +77,7 @@ const Tabs = TabNavigator({
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       headerStyle,
-      tabBarIcon: ({ tintColor }) => <TabBarIcon name='request' tintColor={tintColor} />, //eslint-disable-line
+      tabBarIcon: props => <TabBarIcon name='request' {...props} />, //eslint-disable-line
     }),
   },
   Send: {
@@ -87,7 +87,7 @@ const Tabs = TabNavigator({
       headerRight: <TokenSwitcher />,
       headerBackground: <HeaderBackground />,
       headerStyle,
-      tabBarIcon: ({ tintColor }) => <TabBarIcon name='send' tintColor={tintColor} />, //eslint-disable-line
+      tabBarIcon: props => <TabBarIcon name='send' {...props} />, //eslint-disable-line
     },
   },
   Bookmarks: {
@@ -98,7 +98,7 @@ const Tabs = TabNavigator({
       headerTitle: HeaderTitle,
       headerBackground: <HeaderBackground />,
       headerStyle,
-      tabBarIcon: ({ tintColor }) => <TabBarIcon name='bookmark' tintColor={tintColor} />, //eslint-disable-line
+      tabBarIcon: props => <TabBarIcon name='bookmark' {...props} />, //eslint-disable-line
     }),
   },
   Settings: {
@@ -110,7 +110,7 @@ const Tabs = TabNavigator({
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       headerStyle,
-      tabBarIcon: ({ tintColor }) => <TabBarIcon name='settings' tintColor={tintColor} />, //eslint-disable-line
+      tabBarIcon: props => <TabBarIcon name='settings' {...props} />, //eslint-disable-line
     },
   },
 }, {
