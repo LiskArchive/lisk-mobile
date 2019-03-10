@@ -21,6 +21,12 @@ export default () => ({
       elevation: 4,
       overflow: 'hidden',
     },
+    tokenLogo: {
+      padding: 10,
+      borderRadius: 30,
+      width: 60,
+      height: 60,
+    },
     address: {
       width: '100%',
       paddingTop: 10,
@@ -179,6 +185,9 @@ export default () => ({
     sendButtonTitle: {
       color: colors.light.gray1,
     },
+    tokenLogo: {
+      backgroundColor: colors.light.white,
+    },
   },
   [themes.dark]: {
     homeContainer: {
@@ -207,6 +216,9 @@ export default () => ({
     },
     sendButtonTitle: {
       color: colors.dark.gray1,
+    },
+    tokenLogo: {
+      backgroundColor: colors.dark.white,
     },
   },
 });

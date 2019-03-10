@@ -8,6 +8,7 @@ import { P, H2 } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import Icon from '../toolBox/icon';
+import { tokenMap } from '../../constants/tokens';
 import darkBig from '../../assets/images/balanceBlur/darkBig.png';
 import darkMedium from '../../assets/images/balanceBlur/darkMedium.png';
 import darkSmall from '../../assets/images/balanceBlur/darkSmall.png';
@@ -53,14 +54,8 @@ const Profile = ({
         {
           token === 'LSK' ?
           <Avatar address={account.address} size={60} /> :
-          <View style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 30,
-            width: 60,
-            height: 60,
-          }}>
-            <Icon name='language' size={40} color={'orange'} />
+          <View style={[styles.tokenLogo, styles.theme.tokenLogo]}>
+            <Icon name={tokenMap[token].icon} size={40} color={colors[theme][token]} />
           </View>
         }
       </AView>
