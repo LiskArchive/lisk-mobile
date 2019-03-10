@@ -10,6 +10,8 @@ export default () => ({
       paddingBottom: 15,
       overflow: 'hidden',
     },
+    walletContainer: {
+    },
     avatar: {
       top: 0,
       left: '50%',

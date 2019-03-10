@@ -71,11 +71,16 @@ class Wallet extends React.Component {
     });
 
   setHeader = () => {
-    const storedAccount = this.props.followedAccounts.filter(item =>
+    const {
+      activeToken, navigation: { setParams }, followedAccounts,
+    } = this.props;
+    const storedAccount = followedAccounts.filter(item =>
       item.address === this.state.account.address);
-    this.props.navigation.setParams({
+
+    setParams({
       title: {
         type: 'wallet',
+        token: activeToken,
         placeHolder: storedAccount.length === 1 ? storedAccount[0].label : '',
         balance: this.state.account.balance,
         address: this.state.account.address,
@@ -233,7 +238,6 @@ class Wallet extends React.Component {
               account={account}
               priceTicker={priceTicker}
               style={styles.accountSummary}
-              type='wallet'
             />
           ) : null
         }
