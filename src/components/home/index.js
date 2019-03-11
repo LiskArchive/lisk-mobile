@@ -117,7 +117,6 @@ class Home extends React.Component {
         offset: 0,
       });
 
-      // @todo this might not be the best place
       this.initialAnimation();
     }
 
@@ -127,7 +126,6 @@ class Home extends React.Component {
         offset: 0,
       });
 
-      // @todo this might not be the best place
       this.initialAnimation();
     }
   }
@@ -138,7 +136,6 @@ class Home extends React.Component {
     }]);
   }
 
-  // @todo this timeouts might not be needed anymore
   initialAnimation = () => {
     this.timeout1 = setTimeout(() => {
       if (this.scrollView) {
