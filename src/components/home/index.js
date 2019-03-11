@@ -205,14 +205,17 @@ class Home extends React.Component {
     }
 
     if (prevProps.activeToken !== activeToken) {
-      this.initialTxFetch(true);
-      this.props.accountFetched();
+      this.apiFetchTimeout = setTimeout(() => {
+        this.initialTxFetch(true);
+        this.props.accountFetched();
+      }, 150);
     }
   }
 
   componentWillUnmount() {
     clearTimeout(this.timeout1);
     clearTimeout(this.timeout2);
+    clearTimeout(this.apiFetchTimeout);
   }
 
   render() {
