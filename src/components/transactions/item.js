@@ -76,9 +76,10 @@ class Item extends React.Component {
         <View style={styles.column}>
           <B style={[styles.address, styles.theme.address]}>
             {
-              (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) ?
-              addressShortened :
-              t(transactions[txTypes[tx.type]].title)
+              (activeToken === 'LSK' &&
+              (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)) ?
+              t(transactions[txTypes[tx.type]].title) :
+              addressShortened
             }
           </B>
           {
@@ -94,11 +95,11 @@ class Item extends React.Component {
         </View>
         <View style={[styles.column, styles.amountWrapper]}>
           {
-            (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) && !incognito ?
+            (activeToken === 'LSK' && tx.recipientAddress === tx.senderAddress) || incognito ?
+              null :
               <B style={[styles.amount, styles[direction], styles.theme[direction]]}>
                 <FormattedNumber trim={true}>{amount}</FormattedNumber>
-              </B> :
-              null
+              </B>
           }
           {
             (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) && incognito ?

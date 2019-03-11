@@ -60,7 +60,7 @@ export default () => ({
       height: 50,
       borderRadius: 25,
       overflow: 'hidden',
-      padding: 16,
+      padding: 17,
     },
     loadingState: {
       width: '100%',
