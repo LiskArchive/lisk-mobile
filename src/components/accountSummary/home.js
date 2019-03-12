@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Animated, Dimensions } from 'react-native';
+import { Image, Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import {
@@ -68,8 +68,6 @@ class AccountSummary extends React.Component {
 
   renderProfile = (data) => {
     const { settings, priceTicker } = this.props;
-
-    const { opacity, top } = this.state.initialAnimations;
     const height = 165;
     const token = Object.keys(settings.token.list)[data.index];
 
@@ -80,9 +78,8 @@ class AccountSummary extends React.Component {
       account={data.item}
       settings={settings}
       interpolate={this.interpolate.bind(this)}
-      opacity={opacity}
-      top={top}
-      height={height} />);
+      height={height}
+       />);
   }
 
   pagination = () => {
@@ -107,21 +104,33 @@ class AccountSummary extends React.Component {
 
   render() {
     const { accounts: { info }, styles } = this.props;
+    const { opacity, top } = this.state.initialAnimations;
     const profiles = Object.keys(info).map(key => info[key]);
 
-    return (<View style={[styles.homeContainer, this.props.style]}>
-      <Image style={[styles.bg, styles.theme.bg]} source={bg} />
-      <Carousel
-        ref={(el) => { this.carousel = el; }}
-        firstItem={0}
-        data={profiles}
-        renderItem={this.renderProfile.bind(this)}
-        sliderWidth={width}
-        itemWidth={width}
-        onSnapToItem={this.changeToken}
-      />
-      { this.pagination() }
-    </View>);
+    return (
+      <Animated.View style={[
+        styles.homeContainer,
+        this.props.style,
+        { top, opacity, paddingBottom: this.interpolate([0, 100], [15, 0]) },
+      ]}>
+        <Image style={[styles.bg, styles.theme.bg]} source={bg} />
+        <Carousel
+          ref={(el) => { this.carousel = el; }}
+          firstItem={0}
+          data={profiles}
+          renderItem={this.renderProfile.bind(this)}
+          sliderWidth={width}
+          itemWidth={width}
+          onSnapToItem={this.changeToken}
+        />
+        <Animated.View style={[
+          styles.paginationWrapper,
+          { opacity: this.interpolate([0, 20], [1, 0]) },
+        ]}>
+          { this.pagination() }
+        </Animated.View>
+      </Animated.View>
+    );
   }
 }
 

@@ -92,32 +92,41 @@ class Home extends React.Component {
     });
   }
 
-  initialTxFetch = (reset) => {
+  resetTxAndFetch = () => {
     const {
       transactionsReset,
       transactionsLoaded,
       account,
       activeToken,
-      transactions,
     } = this.props;
 
-    if (!transactions.loaded) {
+    transactionsReset();
+
+    // giving some time for the transition animations to settle
+    this.initialFetchTimeout = setTimeout(() => {
       transactionsLoaded({
         address: account[activeToken].address,
         offset: 0,
       });
+    }, 200);
+  }
 
-      this.initialAnimation();
-    }
+  initialDataFetch = () => {
+    const {
+      accountFetched,
+      transactionsLoaded,
+      account,
+      activeToken,
+    } = this.props;
 
-    if (reset) {
-      transactionsReset({
+    // giving some time for the transition animations to settle
+    this.initialFetchTimeout = setTimeout(() => {
+      accountFetched();
+      transactionsLoaded({
         address: account[activeToken].address,
         offset: 0,
       });
-
-      this.initialAnimation();
-    }
+    }, 400);
   }
 
   onScroll() {
@@ -178,29 +187,23 @@ class Home extends React.Component {
       this.setHeader();
     }
 
-    if (prevProps.activeToken !== activeToken) {
-      this.apiFetchTimeout = setTimeout(() => {
-        this.initialTxFetch(true);
-        this.props.accountFetched();
-      }, 150);
+    if (prevProps.activeToken !== activeToken && isFocused) {
+      this.resetTxAndFetch();
+      accountFetched();
     }
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timeout1);
-    clearTimeout(this.timeout2);
-    clearTimeout(this.apiFetchTimeout);
+    clearTimeout(this.initialFetchTimeout);
   }
 
   render() {
     const {
       styles,
       account,
-      followedAccounts,
       transactions,
       navigation,
       updateTransactions,
-      priceTicker,
       theme,
       isFocused,
       activeToken,

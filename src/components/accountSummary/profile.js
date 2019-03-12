@@ -29,8 +29,6 @@ const Profile = ({
   height,
   account,
   settings,
-  opacity,
-  top,
   token,
 }) => {
   const AView = Animated.View;
@@ -46,20 +44,27 @@ const Profile = ({
     faitBalance = (normalizedBalance * priceTicker[settings.currency]).toFixed(2);
   }
 
+  // console.log('>> Profile', token, account.address);
+
   return (
-    <AView style={[styles.container, { opacity, top, height },
+    <AView style={[styles.container, { height },
       { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) }]}>
-      <AView style={[styles.avatar, { opacity },
+      <AView style={[styles.avatar,
         { marginTop: interpolate([0, 100], [0, 100]) }]}>
         {
           token === 'LSK' ?
           <Avatar address={account.address} size={60} /> :
-          <View style={[styles.tokenLogo, styles.theme.tokenLogo]}>
-            <Icon name={tokenMap[token].icon} size={40} color={colors[theme][token]} />
+          <View style={[styles.tokenLogoWrapper, styles.theme.tokenLogoWrapper]}>
+            <Icon
+              style={styles.tokenLogo}
+              name={tokenMap[token].icon}
+              size={40}
+              color={colors[theme][token]}
+            />
           </View>
         }
       </AView>
-      <AView style={[styles.address, { opacity },
+      <AView style={[styles.address,
         {
           opacity: interpolate([0, 30], [1, 0]),
           top: interpolate([0, 100], [0, 80]),
@@ -71,7 +76,7 @@ const Profile = ({
           containerStyle={styles.addressContainer}
           value={account.address} icon={true} />
       </AView>
-      <AView style={[styles.balance, { opacity },
+      <AView style={[styles.balance,
         {
           opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
           top: interpolate([0, height - 50], [0, height - 120]),
@@ -85,7 +90,7 @@ const Profile = ({
           style={[styles.blur, styles[`blur${balanceSize}`],
           settings.incognito ? styles.visibleBlur : null]} />
       </AView>
-      <AView style={[styles.fiat, { opacity },
+      <AView style={[styles.fiat,
         {
           opacity: interpolate([0, 30], [1, 0]),
           top: interpolate([0, 100], [0, 80]),

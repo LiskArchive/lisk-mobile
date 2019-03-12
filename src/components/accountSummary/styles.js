@@ -7,7 +7,6 @@ export default () => ({
       overflow: 'hidden',
     },
     homeContainer: {
-      paddingBottom: 15,
       overflow: 'hidden',
     },
     walletContainer: {
@@ -21,11 +20,15 @@ export default () => ({
       elevation: 4,
       overflow: 'hidden',
     },
-    tokenLogo: {
+    tokenLogoWrapper: {
       padding: 10,
       borderRadius: 30,
       width: 60,
       height: 60,
+      textAlign: 'center',
+    },
+    tokenLogo: {
+      textAlign: 'center',
     },
     address: {
       width: '100%',
@@ -137,6 +140,12 @@ export default () => ({
     sendButtonTitle: {
       paddingLeft: 10,
     },
+    paginationWrapper: {
+      position: 'absolute',
+      width: '100%',
+      left: 0,
+      bottom: 10,
+    },
     pagination: {
       backgroundColor: 'transparent',
       paddingVertical: 0,
@@ -185,7 +194,7 @@ export default () => ({
     sendButtonTitle: {
       color: colors.light.gray1,
     },
-    tokenLogo: {
+    tokenLogoWrapper: {
       backgroundColor: colors.light.white,
     },
   },
@@ -217,8 +226,8 @@ export default () => ({
     sendButtonTitle: {
       color: colors.dark.gray1,
     },
-    tokenLogo: {
-      backgroundColor: colors.dark.white,
+    tokenLogoWrapper: {
+      backgroundColor: colors.dark.sendBalanceBg,
     },
   },
 });
