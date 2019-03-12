@@ -49,6 +49,7 @@ class Home extends React.Component {
   }
   scrollY = new Animated.Value(0);
   scrollView = null;
+  lastActiveToken = null;
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -148,16 +149,30 @@ class Home extends React.Component {
     }
   }
 
+  refreshAccountAndTx = () => {
+    this.lastActiveToken = this.props.activeToken;
+    this.resetTxAndFetch();
+    this.props.accountFetched();
+  }
+
+  screenWillFocus = () => {
+    if (this.lastActiveToken === null) {
+      this.bindInfiniteScroll();
+      this.setHeader();
+    }
+    if (this.lastActiveToken !== this.props.activeToken) {
+      this.refreshAccountAndTx();
+    }
+  }
+
   componentDidMount() {
-    this.initialDataFetch();
-    this.bindInfiniteScroll();
-    this.setHeader();
+    this.props.navigation.addListener('willFocus', this.screenWillFocus);
   }
 
   componentDidUpdate(prevProps) {
     const {
       transactions, account, incognito,
-      activeToken, accountFetched, isFocused,
+      activeToken, isFocused,
     } = this.props;
 
     const prevTransactionCount = (
@@ -188,8 +203,7 @@ class Home extends React.Component {
     }
 
     if (prevProps.activeToken !== activeToken && isFocused) {
-      this.resetTxAndFetch();
-      accountFetched();
+      this.refreshAccountAndTx();
     }
   }
 
@@ -254,6 +268,7 @@ class Home extends React.Component {
         <AccountSummary
           navigation={navigation}
           scrollY={this.scrollY}
+          isFocused={isFocused}
           style={styles.accountSummary} />
         { content }
       </View>
