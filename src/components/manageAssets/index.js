@@ -45,7 +45,7 @@ class ManageAssets extends React.Component {
                 <View style={{ flexDirection: 'row' }}>
                   <View style={styles[`${item}Container`]}>
                     <Icon
-                      color='#fff'
+                      color={colors.light.white}
                       name={tokenMap[item].icon}
                       size={25}
                       style={{ textAlign: 'center' }}
