@@ -23,10 +23,9 @@ const fetchTransactions = async (dispatch, getState, data) => {
   }
 };
 
-export const transactionsReset = data => async (dispatch, getState) => {
-  dispatch({ type: actionTypes.transactionsReset });
-  fetchTransactions(dispatch, getState, data);
-};
+export const transactionsReset = () => ({
+  type: actionTypes.transactionsReset,
+});
 
 export const transactionsLoaded = data => async (dispatch, getState) => {
   fetchTransactions(dispatch, getState, data);
