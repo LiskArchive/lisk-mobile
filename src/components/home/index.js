@@ -34,11 +34,8 @@ const summaryHeight = 200;
  */
 @connect(state => ({
   account: state.accounts.info || {},
-  followedAccounts: state.accounts.followed || [],
   transactions: state.transactions,
-  priceTicker: state.service.priceTicker,
   incognito: state.settings.incognito,
-  language: state.settings.language,
   activeToken: state.settings.token.active,
 }), {
   transactionsLoaded: transactionsLoadedAction,
@@ -67,13 +64,6 @@ class Home extends React.Component {
     });
   }
 
-  interpolate = (inputRange, outputRange) =>
-    this.scrollY.interpolate({
-      inputRange,
-      outputRange,
-      extrapolate: 'clamp',
-    });
-
   setHeader = () => {
     const {
       activeToken, navigation: { setParams }, account, incognito,
@@ -86,7 +76,7 @@ class Home extends React.Component {
         token: activeToken,
         balance: account[activeToken].balance,
         address: account[activeToken].address,
-        interpolate: this.interpolate,
+        scrollY: this.scrollY,
         incognito,
       },
     });
@@ -136,19 +126,6 @@ class Home extends React.Component {
     }]);
   }
 
-  initialAnimation = () => {
-    this.timeout1 = setTimeout(() => {
-      if (this.scrollView) {
-        this.scrollView.scrollTo(1);
-      }
-    }, 100);
-    this.timeout2 = setTimeout(() => {
-      if (this.scrollView) {
-        this.scrollView.scrollTo(-1);
-      }
-    }, 120);
-  }
-
   loadMore = () => {
     const {
       activeToken, account, transactionsLoaded, transactions,
@@ -163,15 +140,15 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    this.props.accountFetched();
-    this.initialTxFetch();
+    this.initialDataFetch();
     this.bindInfiniteScroll();
     this.setHeader();
   }
 
   componentDidUpdate(prevProps) {
     const {
-      transactions, account, incognito, activeToken,
+      transactions, account, incognito,
+      activeToken, accountFetched, isFocused,
     } = this.props;
 
     const prevTransactionCount = (
@@ -256,7 +233,6 @@ class Home extends React.Component {
                 footer={this.state.footer}
                 navigate={navigation.navigate}
                 account={account[activeToken]}
-                followedAccounts={followedAccounts}
                 refreshing={refreshing}
               />
             ) : <Empty refreshing={refreshing} />
@@ -275,7 +251,6 @@ class Home extends React.Component {
         <AccountSummary
           navigation={navigation}
           scrollY={this.scrollY}
-          priceTicker={priceTicker}
           style={styles.accountSummary} />
         { content }
       </View>

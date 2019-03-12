@@ -17,6 +17,7 @@ const width = deviceWidth();
 @connect(state => ({
   settings: state.settings,
   accounts: state.accounts,
+  priceTicker: state.service.priceTicker,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })

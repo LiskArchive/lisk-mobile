@@ -27,6 +27,7 @@ import { IconButton } from '../toolBox/button';
 @connect(state => ({
   incognitoMode: state.settings.incognito,
   activeToken: state.settings.token.active,
+  followedAccounts: state.accounts.followed || [],
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
