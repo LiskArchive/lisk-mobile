@@ -9,6 +9,7 @@ import Profile from './profile';
 import { deviceWidth } from '../../utilities/device';
 import bg from '../../assets/images/bg.png';
 import easing from '../../utilities/easing';
+import { tokenKeys } from '../../constants/tokens';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -77,7 +78,7 @@ class AccountSummary extends React.Component {
       priceTicker={priceTicker}
       account={data.item}
       settings={settings}
-      interpolate={this.interpolate.bind(this)}
+      interpolate={this.interpolate}
       height={height}
        />);
   }
@@ -94,7 +95,9 @@ class AccountSummary extends React.Component {
         inactiveDotStyle={styles.inactiveDot}
         inactiveDotScale={1}
         inactiveDotOpacity={1}
-      />);
+        carouselRef={this.carousel}
+      />
+    );
   }
 
   componentDidMount() {
@@ -102,10 +105,29 @@ class AccountSummary extends React.Component {
     this.initialFadeIn();
   }
 
+  componentDidUpdate(prevProps) {
+    const { settings: { token: newToken }, accounts: { info: newInfo } } = this.props;
+    const { settings: { token: oldToken }, accounts: { info: oldInfo } } = prevProps;
+    // This is a hack that fixes a known rendering issue of Carousel.
+    if (!prevProps.isFocused && this.props.isFocused) {
+      setTimeout(() => {
+        this.carousel.triggerRenderingHack();
+      }, 50);
+    }
+
+    // reset the carousel navigation
+    const newCount = tokenKeys.filter(key => newToken.list[key]).map(key => newInfo[key]).length;
+    const oldCount = tokenKeys.filter(key => oldToken.list[key]).map(key => oldInfo[key]).length;
+
+    if (oldCount === 1 && newCount > 1) {
+      this.setState({ activeSlide: 0 });
+    }
+  }
+
   render() {
-    const { accounts: { info }, styles } = this.props;
+    const { accounts: { info }, settings: { token }, styles } = this.props;
     const { opacity, top } = this.state.initialAnimations;
-    const profiles = Object.keys(info).map(key => info[key]);
+    const profiles = tokenKeys.filter(key => token.list[key]).map(key => info[key]);
 
     return (
       <Animated.View style={[
@@ -114,21 +136,28 @@ class AccountSummary extends React.Component {
         { top, opacity, paddingBottom: this.interpolate([0, 100], [15, 0]) },
       ]}>
         <Image style={[styles.bg, styles.theme.bg]} source={bg} />
-        <Carousel
-          ref={(el) => { this.carousel = el; }}
-          firstItem={0}
-          data={profiles}
-          renderItem={this.renderProfile.bind(this)}
-          sliderWidth={width}
-          itemWidth={width}
-          onSnapToItem={this.changeToken}
-        />
-        <Animated.View style={[
-          styles.paginationWrapper,
-          { opacity: this.interpolate([0, 20], [1, 0]) },
-        ]}>
-          { this.pagination() }
-        </Animated.View>
+        {
+          profiles.length > 1 ?
+            <Carousel
+              ref={(el) => { this.carousel = el; }}
+              firstItem={0}
+              data={profiles}
+              renderItem={this.renderProfile}
+              sliderWidth={width}
+              itemWidth={width}
+              onSnapToItem={this.changeToken}
+            /> :
+          this.renderProfile({ item: profiles[0], index: 0 })
+        }
+        {
+          profiles.length > 1 ?
+            <Animated.View style={[
+              styles.paginationWrapper,
+              { opacity: this.interpolate([0, 20], [1, 0]) },
+            ]}>
+              { this.pagination() }
+            </Animated.View> : null
+        }
       </Animated.View>
     );
   }
