@@ -175,5 +175,6 @@
   "OK": "OK",
   "Sign in using bioAuth": "Melde dich mit {{sensorType}} an",
   "You don't have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
-  "Use bioAuth": "{{sensorType}} benutzen"
+  "Use bioAuth": "{{sensorType}} benutzen",
+  "Manage assets": ""
 }
