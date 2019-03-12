@@ -316,4 +316,16 @@ export default StackNavigator({ //eslint-disable-line
     backgroundColor: 'transparent',
     opacity: 1,
   },
+  navigationOptions: {
+    gesturesEnabled: false,
+  },
+  transitionConfig: ({ scene }) => (scene.route.routeName === 'Modal' ? ({
+    transitionSpec: {
+      duration: 150,
+    },
+  }) : ({
+    transitionSpec: {
+      duration: 350,
+    },
+  })),
 });
