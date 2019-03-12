@@ -11,13 +11,26 @@ import darkSmall from '../../../assets/images/balanceBlur/darkSmall.png';
 import lightBig from '../../../assets/images/balanceBlur/lightBig.png';
 import lightMedium from '../../../assets/images/balanceBlur/lightMedium.png';
 import lightSmall from '../../../assets/images/balanceBlur/lightSmall.png';
+import { tokenMap } from '../../../constants/tokens';
+import { colors } from '../../../constants/styleGuide';
 
 const blurs = {
   darkBig, darkMedium, darkSmall, lightBig, lightMedium, lightSmall,
 };
 
+const interpolate = (scrollY, inputRange, outputRange) => {
+  if (scrollY && typeof scrollY.interpolate === 'function') {
+    return scrollY.interpolate({
+      inputRange,
+      outputRange,
+      extrapolate: 'clamp',
+    });
+  }
+  return 1;
+};
+
 const ExtendedTitle = ({
-  balance, theme, styles, interpolate = () => 1, address, incognito, type, token,
+  balance, theme, styles, address, incognito, type, token, scrollY,
 }) => {
   let balanceSize = 'Small';
   if (balance > 6) balanceSize = 'Big';
@@ -27,14 +40,21 @@ const ExtendedTitle = ({
     <Animated.View style={[
       styles.wrapper,
       {
-        opacity: interpolate([0, 90, 130], [0, 0, 1]),
-        transform: [{ translateY: interpolate([0, 100, 210], [100, 100, 0]) }],
+        opacity: interpolate(scrollY, [0, 90, 130], [0, 0, 1]),
+        transform: [{ translateY: interpolate(scrollY, [0, 100, 210], [100, 100, 0]) }],
       },
     ]}>
       {
         token === 'LSK' ?
           <Avatar address={address} size={30} style={styles.avatar} /> :
-          <Icon name='language' size={40} color={'orange'} />
+          <View style={[styles.tokenLogoWrapper, styles.theme.tokenLogoWrapper]}>
+            <Icon
+              style={styles.tokenLogo}
+              name={tokenMap[token].icon}
+              size={18}
+              color={colors[theme][token]}
+            />
+          </View>
       }
       {incognito ?
         <Image
@@ -50,14 +70,14 @@ const ExtendedTitle = ({
 };
 
 const SimpleHeader = ({
-  styles, type, interpolate = () => 1, title,
+  styles, type, title, scrollY,
 }) => (
   <Animated.Text
     numberOfLines={1}
     style={[
       styles.main,
       styles.theme[`${type}Main`],
-      { opacity: interpolate([0, 100, 130], [1, 1, 0]) },
+      { opacity: interpolate(scrollY, [0, 100, 130], [1, 1, 0]) },
     ]}
     accessibilityTraits="header"
     allowFontScaling={false}>
@@ -73,7 +93,7 @@ const HomeHeaderTitle = ({
       styles={styles}
       type={typeof data === 'string' ? 'home' : data.type}
       title={typeof data === 'string' ? data : data.placeHolder}
-      interpolate={typeof data === 'string' ? () => 1 : data.interpolate}
+      scrollY={data.scrollY}
       />
     {
       typeof data !== 'string' ?
@@ -82,7 +102,7 @@ const HomeHeaderTitle = ({
         theme={theme}
         token={data.token}
         styles={styles}
-        interpolate={data.interpolate}
+        scrollY={data.scrollY}
         address={data.address}
         incognito={data.incognito}
         type={data.type}
