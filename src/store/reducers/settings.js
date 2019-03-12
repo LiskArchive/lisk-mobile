@@ -28,7 +28,7 @@ const settings = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.settingsRetrieved:
       return merge(state, action.data, {
         token: {
-          active: tokenKeys[0],
+          active: !action.data.token.list[state.active] ? tokenKeys[0] : state.active,
           list: action.data.token ? action.data.token.list : INITIAL_STATE.token.list,
         },
       });
