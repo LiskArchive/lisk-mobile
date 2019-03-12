@@ -68,7 +68,7 @@ export default () => ({
       color: colors.light.black,
     },
     shareText: {
-      color: colors.light.gray1,
+      color: colors.light.gray2,
     },
   },
 
@@ -89,7 +89,7 @@ export default () => ({
       color: colors.dark.white,
     },
     shareText: {
-      color: colors.dark.gray1,
+      color: colors.dark.gray4,
     },
   },
 });
