@@ -4,38 +4,81 @@ export default () => ({
   common: {
     wrapper: {
       flex: 1,
-      backgroundColor: 'rgba(0,0,0,0.35)',
-      // flexFlow: 'row wrap',
+      backgroundColor: 'transparent',
       justifyContent: 'flex-end',
     },
     container: {
-      // position: 'absolute',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      padding: boxes.boxPadding,
-      backgroundColor: '#fff',
+      // backgroundColor: '#fff',
       width: '100%',
       bottom: 0,
-      // flex: 1,
       left: 0,
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
+      overflow: 'hidden',
+    },
+    titleContainer: {
+      borderBottomWidth: 1,
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: 50,
+      zIndex: 2,
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
+
+    },
+    title: {
+      paddingTop: 15,
+      paddingBottom: 15,
+      width: '100%',
+      textAlign: 'center',
+    },
+    closeButton: {
+      position: 'absolute',
+      left: 0,
+      top: 8,
+      zIndex: 2,
+    },
+    contentContainer: {
+      padding: boxes.boxPadding,
+      paddingTop: boxes.boxPadding + 50,
     },
   },
-
   [themes.light]: {
     wrapper: {
-      // backgroundColor: colors.light.white,
+      backgroundColor: 'rgba(0,0,0,0.35)',
     },
-    subHeader: {
-      color: colors.light.gray2,
+    container: {
+      backgroundColor: colors.light.white,
+    },
+
+    titleContainer: {
+      borderBottomColor: colors.light.gray5,
+    },
+    title: {
+      backgroundColor: colors.light.navigationBg,
+      color: colors.light.black,
     },
   },
-
   [themes.dark]: {
-    // wrapper: {
-    //   backgroundColor: colors.dark.screenBgNavy,
-    // },
+    wrapper: {
+      backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    container: {
+      backgroundColor: colors.dark.screenBgNavy,
+    },
     subHeader: {
       color: colors.dark.gray1,
+    },
+    titleContainer: {
+      borderBottomColor: colors.dark.gray5,
+    },
+    title: {
+      backgroundColor: colors.dark.navigationBg,
+      color: colors.dark.white,
     },
   },
 });
