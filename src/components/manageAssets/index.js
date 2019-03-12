@@ -44,17 +44,31 @@ class ManageAssets extends React.Component {
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
                 <View style={{ flexDirection: 'row' }}>
                   <View style={styles[`${item}Container`]}>
-                    <Icon color='#fff' name={tokenMap[item].icon} size={25} style={{ textAlign: 'center' }} />
+                    <Icon
+                      color='#fff'
+                      name={tokenMap[item].icon}
+                      size={25}
+                      style={{ textAlign: 'center' }}
+                    />
                   </View>
+
                   <B style={[styles.itemLabel, styles.theme.itemLabel]}>
                     {tokenMap[item].label}
                   </B>
                 </View>
-                <View style={styles.switch}>
-                  <SwitchButton
-                    value={token.list[tokenMap[item].key]}
-                    theme={theme}
-                    onSyncPress={(value) => { this.onSelect(value, tokenMap[item].key); }} />
+
+                <View>
+                  {item === tokenMap.LSK.key ? (
+                    <P style={styles.theme.description}>
+                      Primary
+                    </P>
+                  ) : (
+                    <SwitchButton
+                      value={token.list[tokenMap[item].key]}
+                      theme={theme}
+                      onSyncPress={(value) => { this.onSelect(value, tokenMap[item].key); }}
+                    />
+                  )}
                 </View>
               </View>
             </View>
