@@ -7,6 +7,14 @@ export default () => ({
       backgroundColor: 'transparent',
       justifyContent: 'flex-end',
     },
+    overlay: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      opacity: 0,
+    },
     container: {
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -48,8 +56,8 @@ export default () => ({
     },
   },
   [themes.light]: {
-    wrapper: {
-      backgroundColor: 'rgba(0,0,0,0.35)',
+    overlay: {
+      backgroundColor: 'rgba(0,0,0,1)',
     },
     container: {
       backgroundColor: colors.light.white,
@@ -64,8 +72,8 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    wrapper: {
-      backgroundColor: 'rgba(0,0,0,0.5)',
+    overlay: {
+      backgroundColor: 'rgba(0,0,0,1)',
     },
     container: {
       backgroundColor: colors.dark.screenBgNavy,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Animated, TouchableHighlight } from 'react-native';
 import { translate } from 'react-i18next';
 import { B } from '../toolBox/typography';
 import { boxes } from '../../constants/styleGuide';
@@ -13,7 +13,16 @@ class Modal extends React.Component {
     headerStyle: {},
     contentStyle: {},
   }
+
+  animatedStyles = {
+    opacity: new Animated.Value(0),
+  }
   closeModal = () => {
+    Animated.timing(this.animatedStyles.opacity, {
+      toValue: 0,
+      duration: 1,
+      delay: 0,
+    }).start();
     this.props.navigation.pop();
   }
   setHeaderHeight = ({ nativeEvent }) => {
@@ -21,6 +30,14 @@ class Modal extends React.Component {
     const headerStyle = { height: headerHeight() };
     const contentStyle = { paddingTop: headerHeight() + boxes.boxPadding };
     if (viewHeight >= deviceHeight()) this.setState({ headerStyle, contentStyle });
+    // const { height, paddingTop } = this.animatedStyles;
+  }
+  componentDidMount() {
+    Animated.timing(this.animatedStyles.opacity, {
+      toValue: 0.35,
+      duration: 200,
+      delay: 200,
+    }).start();
   }
   // this.props.navigation.navigate('Modal', { title: 'yashar', component: About });
   render() {
@@ -33,6 +50,15 @@ class Modal extends React.Component {
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
+        <Animated.View style={[styles.overlay, styles.theme.overlay, this.animatedStyles]} >
+          <TouchableHighlight
+            onPress={this.closeModal}
+            underlayColor='transparent'
+            style={[styles.overlay]}
+          >
+            <View></View>
+          </TouchableHighlight>
+        </Animated.View>
         <View
           style={[styles.container, styles.theme.container]}
           onLayout={this.setHeaderHeight}
