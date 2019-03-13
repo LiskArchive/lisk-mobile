@@ -82,4 +82,4 @@ class ManageAssets extends React.Component {
   }
 }
 
-export default withTheme(translate(ManageAssets), getStyles());
+export default withTheme(translate()(ManageAssets), getStyles());
