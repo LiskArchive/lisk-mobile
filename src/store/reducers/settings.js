@@ -35,7 +35,7 @@ const defineActiveToken = (actionToken, stateToken) => {
  * This reducer is designed to store and retrieve the saved data
  * for app general settings.
  *
- * @param {objec} state, initial state
+ * @param {Object} state, initial state
  *
  * @returns {Object} The latest state
  */
@@ -45,7 +45,7 @@ const settings = (state = INITIAL_STATE, action = {}) => {
       return merge(state, action.data, {
         token: {
           active: defineActiveToken(action.data.token, state.token),
-          list: action.data.token ? action.data.token.list : INITIAL_STATE.token.list,
+          list: action.data.token ? action.data.token.list : state.token.list,
         },
       });
     case actionTypes.settingsRetrieved:
