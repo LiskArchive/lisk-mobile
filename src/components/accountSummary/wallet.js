@@ -10,6 +10,7 @@ import Avatar from '../avatar';
 import Icon from '../toolBox/icon';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
+import { tokenMap } from '../../constants/tokens';
 import Share from '../share';
 import { P, H2 } from '../toolBox/typography';
 import { IconButton } from '../toolBox/button';
@@ -106,27 +107,31 @@ class AccountSummary extends React.Component {
     const AView = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
     const normalizedBalance = fromRawLsk(account.balance);
-    const height = 205;
+    const height = 203;
     const isFollowed = followedAccounts.some(item => item.address === account.address);
 
     const followedAccountColor = theme === themes.light ? colors.light.blue : colors.dark.white;
 
-    return (<View style={[styles.walletContainer, styles.theme.walletContainer, this.props.style]}>
-      <AView style={[styles.container, { opacity, top, height },
-        { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) }]}>
+    return (
+      <AView style={[
+        styles.walletContainer,
+        styles.theme.walletContainer,
+        this.props.style,
+        { opacity, top, height },
+        { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) },
+      ]}>
         <AView style={[styles.avatar, { opacity },
           { marginTop: interpolate([0, 100], [0, 100]) }]}>
           {
             token.active === 'LSK' ?
             <Avatar address={account.address} size={60} /> :
-            <View style={{
-              backgroundColor: 'white',
-              padding: 10,
-              borderRadius: 30,
-              width: 60,
-              height: 60,
-            }}>
-              <Icon name='language' size={40} color={'orange'} />
+            <View style={[styles.tokenLogoWrapper, styles.theme.tokenLogoWrapper]}>
+              <Icon
+                style={styles.tokenLogo}
+                name={tokenMap[token.active].icon}
+                size={40}
+                color={colors[theme][token.active]}
+              />
             </View>
           }
         </AView>
@@ -153,33 +158,31 @@ class AccountSummary extends React.Component {
             style={styles.theme.walletBalance}
             type={H2}>{normalizedBalance}</FormattedNumber>
         </AView>
-        <AView style={[styles.fiat, { opacity },
+        <AView style={[styles.actionBar, { opacity },
           {
             opacity: this.interpolate([0, 30], [1, 0]),
             top: this.interpolate([0, 100], [0, 80]),
           },
         ]}>
+          <IconButton
+            style={styles.bookmarkButton}
+            titleStyle={styles.bookmarkButtonTitle}
+            title=''
+            icon={isFollowed ? 'bookmark-full' : 'bookmark'}
+            color={isFollowed ? followedAccountColor : colors[theme].gray1}
+            iconSize={20}
+            onClick={this.toggleBookmark} />
+          <IconButton
+            titleStyle={[styles.sendButtonTitle, styles.theme.sendButtonTitle]}
+            style={styles.sendButton}
+            title={t('Send to this address')}
+            icon='send'
+            color={colors[theme].gray1}
+            iconSize={20}
+            onClick={() => navigation.navigate('Send', { query: { address: account.address } })} />
         </AView>
       </AView>
-      <View style={styles.actionBar}>
-        <IconButton
-          style={styles.bookmarkButton}
-          titleStyle={styles.bookmarkButtonTitle}
-          title=''
-          icon={isFollowed ? 'bookmark-full' : 'bookmark'}
-          color={isFollowed ? followedAccountColor : colors[theme].gray1}
-          iconSize={20}
-          onClick={this.toggleBookmark} />
-        <IconButton
-          titleStyle={[styles.sendButtonTitle, styles.theme.sendButtonTitle]}
-          style={styles.sendButton}
-          title={t('Send to this address')}
-          icon='send'
-          color={colors[theme].gray1}
-          iconSize={20}
-          onClick={() => navigation.navigate('Send', { query: { address: account.address } })} />
-      </View>
-    </View>);
+    );
   }
 }
 

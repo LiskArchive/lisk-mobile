@@ -25,7 +25,6 @@ import getStyles from './styles';
  */
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
-  priceTicker: state.service.priceTicker,
   activeToken: state.settings.token.active,
 }), {
   loadingStarted: loadingStartedAction,
@@ -79,11 +78,12 @@ class Wallet extends React.Component {
 
     setParams({
       title: {
+        placeHolder: storedAccount.length === 1 ? storedAccount[0].label : '',
         type: 'wallet',
         token: activeToken,
-        placeHolder: storedAccount.length === 1 ? storedAccount[0].label : '',
         balance: this.state.account.balance,
         address: this.state.account.address,
+        scrollY: this.scrollY,
         interpolate: this.interpolate,
       },
     });
@@ -188,8 +188,6 @@ class Wallet extends React.Component {
     const {
       styles,
       navigation,
-      priceTicker,
-      followedAccounts,
     } = this.props;
 
     let content = null;
@@ -219,7 +217,6 @@ class Wallet extends React.Component {
                 footer={this.state.footer}
                 navigate={navigation.navigate}
                 account={account}
-                followedAccounts={followedAccounts}
                 refreshing={refreshing}
               />
             ) : <Empty refreshing={refreshing} />
@@ -236,7 +233,6 @@ class Wallet extends React.Component {
               navigation={navigation}
               scrollY={this.scrollY}
               account={account}
-              priceTicker={priceTicker}
               style={styles.accountSummary}
             />
           ) : null

@@ -10,6 +10,7 @@ export default () => ({
       overflow: 'hidden',
     },
     walletContainer: {
+      overflow: 'hidden',
     },
     avatar: {
       top: 0,
