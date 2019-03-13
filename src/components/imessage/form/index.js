@@ -33,12 +33,27 @@ class LiskMessageExtension extends Component {
     },
   };
 
+
+  componentDidMount() {
+    const { MessagesEvents, inputAddress } = this.props;
+    MessagesEvents.addListener('didStartSendingMessage', this.onStartSendingMessage);
+    this.setAddress(inputAddress.value);
+  }
+
+  onStartSendingMessage = () => {
+    this.setState({
+      num: [0, 0, 0, 0],
+    }, () => this.setAddress(this.props.inputAddress.value));
+  }
+
   setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
     const validity = this.validator.address(value);
+
     if (validity === 0) {
       this.setAvatarPreviewTimeout();
     }
+
     this.setState({
       address: {
         value,
@@ -64,21 +79,8 @@ class LiskMessageExtension extends Component {
     }, 300);
   };
 
-  componentDidMount() {
-    this.props.MessagesEvents.addListener(
-      'didStartSendingMessage',
-      () => this.setState({
-        num: [0, 0, 0, 0],
-        address: this.props.inputAddress,
-      }),
-    );
-  }
-
   send = () => {
-    const {
-      composeMessage, inputAddress,
-    } = this.props;
-
+    const { composeMessage, inputAddress } = this.props;
     const { num, address } = this.state;
     const firstDigit = (parseInt(num[0], 10) > 0) ? num[0] : '';
 
@@ -152,7 +154,7 @@ class LiskMessageExtension extends Component {
         </View>
         <View style={styles.addressContainer}>
           {
-            avatarPreview || this.props.avatarPreview ?
+            avatarPreview && this.props.avatarPreview ?
               <Avatar
                 style={styles.avatar}
                 address={address.value || inputAddress.value}
