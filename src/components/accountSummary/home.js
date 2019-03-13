@@ -108,18 +108,18 @@ class AccountSummary extends React.Component {
   componentDidUpdate(prevProps) {
     const { settings: { token: newToken }, accounts: { info: newInfo } } = this.props;
     const { settings: { token: oldToken }, accounts: { info: oldInfo } } = prevProps;
+    // reset the carousel navigation
+    const newCount = tokenKeys.filter(key => newToken.list[key]).map(key => newInfo[key]).length;
+    const oldCount = tokenKeys.filter(key => oldToken.list[key]).map(key => oldInfo[key]).length;
+
     // This is a hack that fixes a known rendering issue of Carousel.
-    if (!prevProps.isFocused && this.props.isFocused) {
+    if (!prevProps.isFocused && this.props.isFocused && newCount > 1) {
       setTimeout(() => {
         const newIndex = tokenKeys.filter(key => newToken.list[key]).indexOf(newToken.active);
         this.carousel.triggerRenderingHack();
         this.carousel.snapToItem(newIndex, false);
       }, 50);
     }
-
-    // reset the carousel navigation
-    const newCount = tokenKeys.filter(key => newToken.list[key]).map(key => newInfo[key]).length;
-    const oldCount = tokenKeys.filter(key => oldToken.list[key]).map(key => oldInfo[key]).length;
 
     if (oldCount === 1 && newCount > 1) {
       this.setState({ activeSlide: 0 });

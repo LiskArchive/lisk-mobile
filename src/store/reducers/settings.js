@@ -44,7 +44,7 @@ const settings = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.settingsUpdated:
       return merge(state, action.data, {
         token: {
-          active: defineActiveToken(action.data.token && state.token),
+          active: defineActiveToken(action.data.token, state.token),
           list: action.data.token ? action.data.token.list : INITIAL_STATE.token.list,
         },
       });
