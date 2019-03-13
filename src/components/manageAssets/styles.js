@@ -36,7 +36,7 @@ export default () => ({
     BTCContainer: {
       width: 50,
       height: 50,
-      backgroundColor: colors.light.btc,
+      backgroundColor: colors.light.BTC,
       borderRadius: 50,
       marginRight: 12,
       justifyContent: 'center',
