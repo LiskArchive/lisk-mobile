@@ -111,7 +111,9 @@ class AccountSummary extends React.Component {
     // This is a hack that fixes a known rendering issue of Carousel.
     if (!prevProps.isFocused && this.props.isFocused) {
       setTimeout(() => {
+        const newIndex = tokenKeys.filter(key => newToken.list[key]).indexOf(newToken.active);
         this.carousel.triggerRenderingHack();
+        this.carousel.snapToItem(newIndex, false);
       }, 50);
     }
 
