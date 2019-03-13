@@ -174,7 +174,9 @@
   "For ease of sign in": "Für einfache Anmeldung",
   "OK": "OK",
   "Sign in using bioAuth": "Melde dich mit {{sensorType}} an",
-  "You don't have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
   "Use bioAuth": "{{sensorType}} benutzen",
-  "Manage assets": ""
+  "Manage assets": "",
+  "You don't have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
+  "Here you will be able to manage your assets, in order to use them in the app.": "",
+  "Primary": ""
 }
