@@ -1,37 +1,25 @@
-import React, { Fragment } from 'react';
-import { View, Image } from 'react-native';
-import { translate } from 'react-i18next';
+import React from 'react';
+import { View } from 'react-native';
 import FormattedDate from '../formattedDate';
 import withTheme from '../withTheme';
 import { fromRawLsk } from '../../utilities/conversions';
+import Icon from '../toolBox/icon';
 import FormattedNumber from '../formattedNumber';
-import { P, H1, H3 } from '../toolBox/typography';
-import Avatar from '../avatar';
-import transactions from '../../constants/transactions';
+import { P, H1 } from '../toolBox/typography';
 import Blur from '../transactions/blur';
-import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
-import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
-import { themes } from '../../constants/styleGuide';
+import { colors } from '../../constants/styleGuide';
 
-const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
-
-const LSKSummary = ({
-  styles, theme, t, tx, accountAddress, incognito,
+const BtcSummary = ({
+  styles, theme, tx, accountAddress, incognito,
 }) => {
   const amount = fromRawLsk(tx.amount);
-  let arrowStyle;
   let amountStyle = [styles.outgoing, styles.theme.outgoing];
-  let firstAddress = tx.senderAddress;
-  let secondAddress = tx.recipientAddress;
   let amountSign = '-';
   let direction = 'outgoing';
 
   if ((accountAddress !== tx.senderAddress) && tx.type === 0) {
-    arrowStyle = styles.reverseArrow;
     amountStyle = [styles.incoming, styles.theme.incoming];
-    firstAddress = tx.recipientAddress;
-    secondAddress = tx.senderAddress;
     amountSign = '';
     direction = 'incoming';
   }
@@ -39,42 +27,26 @@ const LSKSummary = ({
   return (
     <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
       <View style={styles.row}>
-        {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-          <Image
-            style={{ width: 50, height: 50 }}
-            source={transactions[txTypes[tx.type]].image(theme)}
-          /> :
-          <Fragment>
-            <Avatar address={firstAddress} size={50} />
-            {
-              theme === themes.light ?
-                <Image source={arrowLight} style={[styles.arrow, arrowStyle]} /> :
-                <Image source={arrowDark} style={[styles.arrow, arrowStyle]} />
-            }
-            <Avatar address={secondAddress} size={50} />
-          </Fragment>
-        }
+        <View style={[styles.transactionIcon, styles.theme[`${direction}Symbol`]]}>
+          <Icon
+            name={direction}
+            size={16}
+            color={direction === 'outgoing' ? colors[theme].gray1 : colors[theme].green} />
+        </View>
       </View>
       {
-        tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-        <H3 style={amountStyle}>{t(transactions[txTypes[tx.type]].title)}</H3> : null
-      }
-      {
-        tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) && !incognito ?
+        !incognito ?
           <H1 style={amountStyle}>
             {amountSign}
-            <FormattedNumber>
+            <FormattedNumber tokenType='BTC'>
               {fromRawLsk(tx.amount)}
             </FormattedNumber>
-          </H1> : null
-      }
-      {
-        tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) && incognito ?
+          </H1> :
           <Blur
             value={amount}
             direction={direction}
             style={styles.amountBlur}
-          /> : null
+          />
       }
       {
         tx.timestamp ?
@@ -90,4 +62,4 @@ const LSKSummary = ({
   );
 };
 
-export default withTheme(translate()(LSKSummary), getStyles());
+export default withTheme(BtcSummary, getStyles());

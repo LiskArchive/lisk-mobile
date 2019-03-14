@@ -94,6 +94,13 @@ export default () => ({
       height: '100%',
       marginTop: 0,
     },
+    transactionIcon: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      overflow: 'hidden',
+      padding: 17,
+    },
   },
 
   [themes.light]: {
@@ -123,6 +130,12 @@ export default () => ({
     detailRow: {
       borderBottomColor: colors.light.gray5,
     },
+    outgoingSymbol: {
+      backgroundColor: colors.light.sendBalanceBg,
+    },
+    incomingSymbol: {
+      backgroundColor: colors.light.incomingBg,
+    },
   },
 
   [themes.dark]: {
@@ -151,6 +164,12 @@ export default () => ({
     },
     detailRow: {
       borderBottomColor: '#373E4F',
+    },
+    outgoingSymbol: {
+      backgroundColor: colors.dark.sendBalanceBg,
+    },
+    incomingSymbol: {
+      backgroundColor: colors.dark.incomingBg,
     },
   },
 });
