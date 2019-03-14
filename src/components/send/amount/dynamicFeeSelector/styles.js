@@ -41,7 +41,7 @@ export default () => ({
     },
 
     selectedItem: {
-      backgroundColor: colors.light.btc,
+      backgroundColor: colors.light.BTC,
     },
 
     itemFirst: {
