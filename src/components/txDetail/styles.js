@@ -109,6 +109,9 @@ export default () => ({
       overflow: 'hidden',
       padding: 17,
     },
+    explorerLink: {
+      fontWeight: 'bold',
+    },
   },
 
   [themes.light]: {
@@ -144,6 +147,9 @@ export default () => ({
     incomingSymbol: {
       backgroundColor: colors.light.incomingBg,
     },
+    explorerLink: {
+      color: colors.light.blue,
+    },
   },
 
   [themes.dark]: {
@@ -178,6 +184,9 @@ export default () => ({
     },
     incomingSymbol: {
       backgroundColor: colors.dark.incomingBg,
+    },
+    explorerLink: {
+      color: colors.light.blue,
     },
   },
 });

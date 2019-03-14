@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, RefreshControl } from 'react-native';
+import { ScrollView, View, RefreshControl, Linking } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import withTheme from '../withTheme';
@@ -118,6 +118,12 @@ class TransactionDetail extends React.Component {
     return accountId;
   };
 
+  openExplorer = () => {
+    Linking.openURL(`https://www.blockchain.com/btc/tx/${this.state.id}`)
+      // eslint-disable-next-line no-console
+      .catch(err => console.error('An error occurred', err));
+  };
+
   render() {
     const {
       navigation, styles, account, t, activeToken,
@@ -191,7 +197,7 @@ class TransactionDetail extends React.Component {
         }
         <Row icon='tx-fee' title='Transaction Fee'>
           <B style={[styles.value, styles.theme.value]}>
-            <FormattedNumber>{fromRawLsk(tx.fee)}</FormattedNumber>
+            <FormattedNumber tokenType={activeToken}>{fromRawLsk(tx.fee)}</FormattedNumber>
           </B>
         </Row>
         {
@@ -206,12 +212,18 @@ class TransactionDetail extends React.Component {
           <B style={[styles.value, styles.theme.value]}>{tx.confirmations || t('Not confirmed yet.')}</B>
         </Row>
         <Row icon='tx-id' title='Transaction ID'>
-          <Share
-            type={B}
-            value={tx.id}
-            icon={true}
-            style={[styles.value, styles.theme.value, styles.transactionId]}
-          />
+          {
+            activeToken === 'LSK' ?
+            <Share
+              type={B}
+              value={tx.id}
+              icon={true}
+              style={[styles.value, styles.theme.value, styles.transactionId]}
+            /> :
+            <A style={[styles.explorerLink, styles.theme.explorerLink]} onPress={this.openExplorer}>
+              {t('View more on Blockchain.info')}
+            </A>
+          }
         </Row>
       </ScrollView>
     );
