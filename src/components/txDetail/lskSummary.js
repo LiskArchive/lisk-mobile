@@ -16,7 +16,7 @@ import { themes } from '../../constants/styleGuide';
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
-const LSKSummary = ({
+const LskSummary = ({
   styles, theme, t, tx, accountAddress, incognito,
 }) => {
   const amount = fromRawLsk(tx.amount);
@@ -90,4 +90,4 @@ const LSKSummary = ({
   );
 };
 
-export default withTheme(translate()(LSKSummary), getStyles());
+export default withTheme(translate()(LskSummary), getStyles());
