@@ -1,12 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import withTheme from '../withTheme';
 import { P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
-import transactions from '../../constants/transactions';
-import { transactions as transactionsAPI } from '../../utilities/api';
 import getStyles from './styles';
 import { colors } from '../../constants/styleGuide';
 
