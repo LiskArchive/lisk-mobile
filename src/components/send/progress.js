@@ -26,7 +26,7 @@ class Progress extends React.Component {
 
   setProgress(duration) {
     Animated.timing(this.state.progressRatio, {
-      toValue: this.props.current / this.props.total,
+      toValue: this.props.current / (this.props.total - 1),
       duration,
     }).start();
   }
@@ -53,7 +53,7 @@ class Progress extends React.Component {
             backgroundColor: color,
             width: progressRatio.interpolate({
               inputRange: [0, 1],
-              outputRange: ['0%', '120%'],
+              outputRange: ['0%', '100%'],
             }),
           }]}
         />
