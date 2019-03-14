@@ -14,11 +14,11 @@ export default () => ({
       top: 0,
       bottom: 0,
       opacity: 0,
+      backgroundColor: colors.light.black,
     },
     container: {
       flexDirection: 'column',
       justifyContent: 'space-between',
-      // backgroundColor: '#fff',
       width: '100%',
       bottom: 0,
       left: 0,
@@ -56,9 +56,6 @@ export default () => ({
     },
   },
   [themes.light]: {
-    overlay: {
-      backgroundColor: 'rgba(0,0,0,1)',
-    },
     container: {
       backgroundColor: colors.light.white,
     },
@@ -72,9 +69,6 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    overlay: {
-      backgroundColor: 'rgba(0,0,0,1)',
-    },
     container: {
       backgroundColor: colors.dark.screenBgNavy,
     },

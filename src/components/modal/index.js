@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, Animated, TouchableHighlight } from 'react-native';
 import { translate } from 'react-i18next';
 import { B } from '../toolBox/typography';
-import { boxes } from '../../constants/styleGuide';
+import { boxes, themes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import HeaderBackButton from '../router/headerBackButton';
 import { deviceHeight, headerHeight } from '../../utilities/device';
@@ -30,16 +30,14 @@ class Modal extends React.Component {
     const headerStyle = { height: headerHeight() };
     const contentStyle = { paddingTop: headerHeight() + boxes.boxPadding };
     if (viewHeight >= deviceHeight()) this.setState({ headerStyle, contentStyle });
-    // const { height, paddingTop } = this.animatedStyles;
   }
   componentDidMount() {
     Animated.timing(this.animatedStyles.opacity, {
-      toValue: 0.35,
+      toValue: this.props.theme === themes.light ? 0.35 : 0.55,
       duration: 200,
       delay: 200,
     }).start();
   }
-  // this.props.navigation.navigate('Modal', { title: 'yashar', component: About });
   render() {
     const {
       styles, navigation,
@@ -75,7 +73,7 @@ class Modal extends React.Component {
           </View>
           <ScrollView>
             <View style={[styles.contentContainer, contentStyle]}>
-              <Component close={this.closeModal} />
+              <Component navigation={navigation} close={this.closeModal} />
             </View>
           </ScrollView>
         </View>
