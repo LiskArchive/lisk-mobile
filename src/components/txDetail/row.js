@@ -11,15 +11,17 @@ const Row = ({
   styles, theme, t, icon, title, children,
 }) => (
   <View style={[styles.detailRow, styles.theme.detailRow]}>
-    <Icon
-      name={icon}
-      size={22}
-      style={styles.rowIcon}
-      color={colors[theme].gray2}
-    />
+    <View style={styles.rowIconWrapper}>
+      <Icon
+        name={icon}
+        size={22}
+        style={styles.rowIcon}
+        color={colors[theme].gray2}
+      />
+    </View>
     <View style={styles.rowContent}>
       <P style={[styles.label, styles.theme.label]}>{t(title)}</P>
-      <View style={styles.addressContainer}>
+      <View style={styles.valueContainer}>
         {children}
       </View>
     </View>
