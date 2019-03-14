@@ -54,6 +54,7 @@ const transactions = (state = INITIAL_STATE, action = {}) => {
         count: action.data.count,
       });
 
+    case actionTypes.transactionsReset:
     case actionTypes.accountSignedOut:
       return INITIAL_STATE;
 

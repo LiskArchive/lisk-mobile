@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { translate } from 'react-i18next';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
-import Avatar from '../avatar';
+import Symbol from './symbol';
 import FormattedDate from '../formattedDate';
 import { B, Small } from '../toolBox/typography';
 import { stringShortener } from '../../utilities/helpers';
 import loadingAnimation from '../../assets/animations/loading-dots.json';
 import transactions from '../../constants/transactions';
-import { themes } from '../../constants/styleGuide';
 import Blur from './blur';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -37,7 +36,7 @@ class Item extends React.Component {
 
   render() {
     const {
-      styles, theme, tx, t,
+      styles, theme, tx, t, activeToken,
       account, followedAccounts, incognito,
     } = this.props;
 
@@ -58,36 +57,29 @@ class Item extends React.Component {
 
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
 
-    let image = null;
-    if (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) {
-      image = <Avatar address={address} size={50} style={styles.theme.avatar} />;
-    } else {
-      image = (theme === themes.light ?
-        <Image
-          source={transactions[txTypes[tx.type]].image(themes.light)}
-          style={styles.image}
-        /> :
-        <Image
-          source={transactions[txTypes[tx.type]].image(themes.dark)}
-          style={styles.image}
-        />
-      );
-    }
-
     return (
       <TouchableOpacity
         style={[styles.itemContainer, styles.theme.itemContainer]}
         onPress={this.showDetail}>
         <View style={styles.innerContainer}>
         <View style={[styles.itemColumn, styles.avatarContainer]}>
-          {image}
+          <Symbol
+            token={activeToken}
+            theme={theme}
+            type={tx.type}
+            direction={direction}
+            sender={tx.senderAddress}
+            recipient={tx.recipientAddress}
+            address={address}
+            />
         </View>
         <View style={styles.column}>
           <B style={[styles.address, styles.theme.address]}>
             {
-              (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) ?
-              addressShortened :
-              t(transactions[txTypes[tx.type]].title)
+              (activeToken === 'LSK' &&
+              (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)) ?
+              t(transactions[txTypes[tx.type]].title) :
+              addressShortened
             }
           </B>
           {
@@ -103,11 +95,11 @@ class Item extends React.Component {
         </View>
         <View style={[styles.column, styles.amountWrapper]}>
           {
-            (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) && !incognito ?
+            (activeToken === 'LSK' && tx.recipientAddress === tx.senderAddress) || incognito ?
+              null :
               <B style={[styles.amount, styles[direction], styles.theme[direction]]}>
                 <FormattedNumber trim={true}>{amount}</FormattedNumber>
-              </B> :
-              null
+              </B>
           }
           {
             (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) && incognito ?

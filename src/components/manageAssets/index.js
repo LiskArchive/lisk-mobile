@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
+import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
 import { B, P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
@@ -27,11 +28,13 @@ class ManageAssets extends React.Component {
   }
 
   render() {
-    const { styles, theme, settings: { token } } = this.props;
+    const {
+      styles, theme, settings: { token }, t,
+    } = this.props;
     return (
       <View style={[styles.container, styles.theme.container]}>
         <P style={[styles.description, styles.theme.description]}>
-          Here you will be able to manage your assets, in order to use them in the app.
+          {t('Here you will be able to manage your assets, in order to use them in the app.')}
         </P>
         <FlatList
           extraData={token.active}
@@ -45,7 +48,7 @@ class ManageAssets extends React.Component {
                 <View style={{ flexDirection: 'row' }}>
                   <View style={styles[`${item}Container`]}>
                     <Icon
-                      color='#fff'
+                      color={colors.light.white}
                       name={tokenMap[item].icon}
                       size={25}
                       style={{ textAlign: 'center' }}
@@ -60,7 +63,7 @@ class ManageAssets extends React.Component {
                 <View>
                   {item === tokenMap.LSK.key ? (
                     <P style={styles.theme.description}>
-                      Primary
+                      {t('Primary')}
                     </P>
                   ) : (
                     <SwitchButton
@@ -79,4 +82,4 @@ class ManageAssets extends React.Component {
   }
 }
 
-export default withTheme(ManageAssets, getStyles());
+export default withTheme(translate()(ManageAssets), getStyles());

@@ -42,6 +42,16 @@ export default () => ({
       height: 30,
       marginLeft: -5,
     },
+    tokenLogoWrapper: {
+      padding: 6,
+      borderRadius: 15,
+      width: 30,
+      height: 30,
+      marginRight: 5,
+    },
+    tokenLogo: {
+      textAlign: 'center',
+    },
   },
   [themes.light]: {
     homeMain: {
@@ -50,6 +60,9 @@ export default () => ({
     walletMain: {
       color: colors.light.black,
     },
+    tokenLogoWrapper: {
+      backgroundColor: colors.light.white,
+    },
   },
   [themes.dark]: {
     homeMain: {
@@ -57,6 +70,9 @@ export default () => ({
     },
     walletMain: {
       color: colors.light.white,
+    },
+    tokenLogoWrapper: {
+      backgroundColor: colors.dark.sendBalanceBg,
     },
   },
 });

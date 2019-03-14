@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import txConstants from '../constants/transactions';
 import actionTypes from '../constants/actions';
-import { transactionsLoaded, transactionAdded } from './transactions';
+import { transactionsLoaded, transactionAdded, transactionsReset } from './transactions';
 import { transactions as transactionsAPI } from '../utilities/api';
 import { INITIAL_STATE as settings } from '../store/reducers/settings';
 
@@ -190,6 +190,17 @@ describe('Action: Accounts', () => {
 
       expect(store.getActions()).toEqual(expectedActions);
       expect(errorCallback.mock.calls).toHaveLength(1);
+    });
+  });
+
+  describe('transactionsReset', () => {
+    it('should dispatch a pure action object', () => {
+      const store = mockStore({});
+      const expectedActions = [
+        { type: actionTypes.transactionsReset },
+      ];
+      store.dispatch(transactionsReset());
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });

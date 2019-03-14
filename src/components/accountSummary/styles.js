@@ -6,6 +6,12 @@ export default () => ({
       width: '100%',
       overflow: 'hidden',
     },
+    homeContainer: {
+      overflow: 'hidden',
+    },
+    walletContainer: {
+      overflow: 'hidden',
+    },
     avatar: {
       top: 0,
       left: '50%',
@@ -14,6 +20,16 @@ export default () => ({
       zIndex: 4,
       elevation: 4,
       overflow: 'hidden',
+    },
+    tokenLogoWrapper: {
+      padding: 10,
+      borderRadius: 30,
+      width: 60,
+      height: 60,
+      textAlign: 'center',
+    },
+    tokenLogo: {
+      textAlign: 'center',
     },
     address: {
       width: '100%',
@@ -40,7 +56,7 @@ export default () => ({
       position: 'absolute',
       left: 0,
       top: 0,
-      zIndex: 1,
+      zIndex: 0,
       height: 200,
       width: '100%',
       overflow: 'hidden',
@@ -125,6 +141,29 @@ export default () => ({
     sendButtonTitle: {
       paddingLeft: 10,
     },
+    paginationWrapper: {
+      position: 'absolute',
+      width: '100%',
+      left: 0,
+      bottom: 10,
+    },
+    pagination: {
+      backgroundColor: 'transparent',
+      paddingVertical: 0,
+    },
+    dot: {
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      borderWidth: 2,
+      borderColor: colors.light.white,
+      backgroundColor: colors.light.white,
+      marginHorizontal: 0,
+    },
+    inactiveDot: {
+      borderColor: colors.light.white,
+      backgroundColor: 'transparent',
+    },
   },
   [themes.light]: {
     homeContainer: {
@@ -156,6 +195,9 @@ export default () => ({
     sendButtonTitle: {
       color: colors.light.gray1,
     },
+    tokenLogoWrapper: {
+      backgroundColor: colors.light.white,
+    },
   },
   [themes.dark]: {
     homeContainer: {
@@ -184,6 +226,9 @@ export default () => ({
     },
     sendButtonTitle: {
       color: colors.dark.gray1,
+    },
+    tokenLogoWrapper: {
+      backgroundColor: colors.dark.sendBalanceBg,
     },
   },
 });

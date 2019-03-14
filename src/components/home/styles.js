@@ -18,7 +18,7 @@ export default () => ({
       width: '100%',
     },
     loadingState: {
-      marginTop: 170,
+      marginTop: 180,
     },
   },
   [themes.light]: {

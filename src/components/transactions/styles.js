@@ -23,7 +23,7 @@ export default () => ({
       justifyContent: 'flex-start',
     },
     placeholder: {
-      height: 170,
+      height: 180,
       width: '100%',
       justifyContent: 'flex-end',
       paddingBottom: 25,
@@ -54,6 +54,13 @@ export default () => ({
     },
     avatar: {
       borderWidth: 1,
+    },
+    transactionIcon: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      overflow: 'hidden',
+      padding: 17,
     },
     loadingState: {
       width: '100%',
@@ -154,6 +161,12 @@ export default () => ({
       color: colors.light.green,
       backgroundColor: colors.light.incomingBg,
     },
+    outgoingSymbol: {
+      backgroundColor: colors.light.sendBalanceBg,
+    },
+    incomingSymbol: {
+      backgroundColor: colors.light.incomingBg,
+    },
     noTxTitle: {
       color: colors.light.gray2,
     },
@@ -191,6 +204,12 @@ export default () => ({
     },
     incoming: {
       color: colors.dark.green,
+      backgroundColor: colors.dark.incomingBg,
+    },
+    outgoingSymbol: {
+      backgroundColor: colors.dark.sendBalanceBg,
+    },
+    incomingSymbol: {
       backgroundColor: colors.dark.incomingBg,
     },
     noTxTitle: {

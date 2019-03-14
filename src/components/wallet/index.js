@@ -2,7 +2,7 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
 import { account as accountAPI, transactions as transactionsAPI } from '../../utilities/api';
-import AccountSummary from '../accountSummary';
+import AccountSummary from '../accountSummary/wallet';
 import Transactions from '../transactions';
 import InfiniteScrollView from '../infiniteScrollView';
 import Empty from '../transactions/empty';
@@ -25,7 +25,6 @@ import getStyles from './styles';
  */
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
-  priceTicker: state.service.priceTicker,
   activeToken: state.settings.token.active,
 }), {
   loadingStarted: loadingStartedAction,
@@ -71,14 +70,20 @@ class Wallet extends React.Component {
     });
 
   setHeader = () => {
-    const storedAccount = this.props.followedAccounts.filter(item =>
+    const {
+      activeToken, navigation: { setParams }, followedAccounts,
+    } = this.props;
+    const storedAccount = followedAccounts.filter(item =>
       item.address === this.state.account.address);
-    this.props.navigation.setParams({
+
+    setParams({
       title: {
-        type: 'wallet',
         placeHolder: storedAccount.length === 1 ? storedAccount[0].label : '',
+        type: 'wallet',
+        token: activeToken,
         balance: this.state.account.balance,
         address: this.state.account.address,
+        scrollY: this.scrollY,
         interpolate: this.interpolate,
       },
     });
@@ -183,8 +188,6 @@ class Wallet extends React.Component {
     const {
       styles,
       navigation,
-      priceTicker,
-      followedAccounts,
     } = this.props;
 
     let content = null;
@@ -214,7 +217,6 @@ class Wallet extends React.Component {
                 footer={this.state.footer}
                 navigate={navigation.navigate}
                 account={account}
-                followedAccounts={followedAccounts}
                 refreshing={refreshing}
               />
             ) : <Empty refreshing={refreshing} />
@@ -231,9 +233,7 @@ class Wallet extends React.Component {
               navigation={navigation}
               scrollY={this.scrollY}
               account={account}
-              priceTicker={priceTicker}
               style={styles.accountSummary}
-              type='wallet'
             />
           ) : null
         }

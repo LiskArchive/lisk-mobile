@@ -33,21 +33,18 @@ describe('Reducers: Accounts', () => {
     expect(accounts()).toEqual(state);
   });
 
-  it('should set accounts.active in case of accountSignedIn', () => {
+  it('should set accounts info and passphrase in case of accountSignedIn', () => {
     const action = {
       type: actionTypes.accountSignedIn,
       data: {
         passphrase: data.passphrase,
-        activeToken: data.activeToken,
-        account: data.accountA,
+        info: { LSK: data.accountA.address },
       },
     };
 
     expect(accounts(state, action)).toEqual(merge(state, {
       passphrase: data.passphrase,
-      info: merge(state.info, {
-        [data.activeToken]: data.accountA,
-      }),
+      info: { LSK: data.accountA.address },
     }));
   });
 

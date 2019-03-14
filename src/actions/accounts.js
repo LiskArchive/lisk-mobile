@@ -93,21 +93,31 @@ export const accountEdited = (address, label) => ({
 });
 
 /**
- * Uses Http call to fetch Account and delegate info of a given
- * passphrase and dispatches accountSignedIn action
- *
- * @todo Implement delegate Api call
+ * Extracts the addresses for all enabled tokens from
+ * the given passphrase and stores them in account info dictionary
+ * Also stores the passphrase ein accounts.
  *
  * @param {Object} data
  * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
 export const accountSignedIn = ({ passphrase }) => (dispatch, getState) => {
-  const activeToken = getState().settings.token.active;
-  const address = accountAPI.extractAddress(activeToken, passphrase);
+  const tokens = getState().settings.token.list;
+  const info = Object.keys(tokens).reduce((accounts, token) => {
+    // only if the token is enabled
+    if (tokens[token]) {
+      const address1 = accountAPI.extractAddress(token, passphrase);
+      accounts[token] = { address: address1 };
+    }
+    return accounts;
+  }, {});
+
   dispatch({
     type: actionTypes.accountSignedIn,
-    data: { account: { address }, passphrase, activeToken },
+    data: {
+      info,
+      passphrase,
+    },
   });
 };
 
