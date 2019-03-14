@@ -8,14 +8,14 @@ import Share from '../share';
 import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from '../../utilities/device';
 import Input from '../toolBox/input';
 import { P, B } from '../toolBox/typography';
-import Icon from '../toolBox/icon';
 import reg from '../../constants/regex';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes, colors } from '../../constants/styleGuide';
+import { tokenMap } from '../../constants/tokens';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
-const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.8);
+const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
 @connect(state => ({
   account: state.accounts.info,
@@ -27,27 +27,35 @@ class Request extends React.Component {
     url: '',
   }
 
-  validator = {
-    amount: str => reg.amount.test(str),
-  };
+  componentDidUpdate(prevProps) {
+    if (prevProps.activeToken !== this.props.activeToken) {
+      this.setState({
+        amount: { value: '', validity: -1 },
+        url: '',
+      });
+    }
+  }
+
+  validator = str => reg.amount.test(str)
 
   changeHandler = (val) => {
     const { account, activeToken } = this.props;
     const { address } = account[activeToken];
+
     let amountValidity = -1;
     let amount = val;
+
     if (val !== '') {
-      amountValidity = this.validator.amount(val) ? 0 : 1;
+      amountValidity = this.validator(val) ? 0 : 1;
       amount = {
         value: val,
         validity: amountValidity,
       };
     }
-    const url = amountValidity === 0 ? `lisk://wallet?recipient=${address}&amount=${val}` : address;
 
     this.setState({
       amount,
-      url,
+      url: amountValidity === 0 ? `lisk://wallet?recipient=${address}&amount=${val}` : address,
     });
   }
 
@@ -56,7 +64,7 @@ class Request extends React.Component {
       styles, theme, account, t, activeToken,
     } = this.props;
     const { amount, url } = this.state;
-    const { address } = account[activeToken] || {};
+    const { address } = account[activeToken];
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -68,13 +76,19 @@ class Request extends React.Component {
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
             {!isSmallScreen ? (
               <P style={[styles.subHeader, styles.theme.subHeader]}>
-                {t('Request LSK tokens from other accounts.')}
+                {t(`Request ${activeToken} tokens from other accounts.`)}
               </P>
             ) : null}
+
             <View style={styles.main}>
+              <P style={[styles.addressLabel, styles.theme.addressLabel]}>
+                {t(`Your ${tokenMap[activeToken].label} address`)}
+              </P>
+
               <B style={[styles.address, styles.theme.address]}>
                 {address}
               </B>
+
               <Share
                 type={TouchableWithoutFeedback}
                 value={url || address}
@@ -83,7 +97,9 @@ class Request extends React.Component {
                   <QRCode
                     value={url || address}
                     size={qrCodeSize}
-                    color={theme === themes.light ? '#263344' : colors.dark.gray4}
+                    color={
+                      theme === themes.light ? colors.light.black : colors.dark.white
+                    }
                     backgroundColor={
                       theme === themes.light ? colors.light.white : colors.dark.screenBgNavy
                     }
@@ -91,28 +107,25 @@ class Request extends React.Component {
 
                   <View style={styles.shareTextContainer}>
                     <P style={[styles.shareText, styles.theme.shareText]}>
-                      {t('Share')}
+                      {t('Tap on the QR Code to share it.')}
                     </P>
-
-                    <Icon
-                      name='share'
-                      size={14}
-                      color={colors[theme].blue}
-                    />
                   </View>
                 </View>
               </Share>
             </View>
-            <View style={styles.fieldset}>
-              <Input
-                innerStyles={{ input: styles.input }}
-                label={t('Amount in LSK (Optional)')}
-                autoCorrect={false}
-                onChange={this.changeHandler}
-                value={amount.value}
-                keyboardType='numeric'
-                error={amount.validity === 1 ? t('Invalid amount') : ''}
-              />
+
+            <View style={styles.inputContainer}>
+              {activeToken === tokenMap.LSK.key ? (
+                <Input
+                  innerStyles={{ input: styles.input }}
+                  label={t('Amount in LSK (Optional)')}
+                  autoCorrect={false}
+                  onChange={this.changeHandler}
+                  value={amount.value}
+                  keyboardType='numeric'
+                  error={amount.validity === 1 ? t('Invalid amount') : ''}
+                />
+              ) : null}
             </View>
           </View>
         </KeyboardAwareScrollView>
