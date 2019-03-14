@@ -9,6 +9,7 @@ import store from './store/index';
 import ThemeContext from './contexts/theme';
 import { themes } from './constants/styleGuide';
 import i18n from '../locales';
+import Alert from './components/alert';
 
 @connect(state => ({
   settings: state.settings,
@@ -23,6 +24,7 @@ class ThemedApp extends React.Component {
           <StatusBar barStyle={theme === themes.light ? 'dark-content' : 'light-content'} />
           <Loading />
           <Router />
+          <Alert />
         </I18nextProvider>
       </ThemeContext.Provider>
     );
