@@ -18,15 +18,15 @@ export const validateAddress = (tokenType, address) => {
   switch (tokenType) {
     case tokenMap.LSK.key:
     default:
-      return reg.test(address) ? 0 : 1;
+      return reg.address.test(address) ? 0 : 1;
 
-    // For reference: https://github.com/bitcoinjs/bitcoinjs-lib/issues/890
+    // Reference: https://github.com/bitcoinjs/bitcoinjs-lib/issues/890
     case tokenMap.BTC.key:
       try {
         bitcoin.address.toOutputScript(address, btcConfig.network);
         return 0;
       } catch (e) {
-        return -1;
+        return 1;
       }
   }
 };
