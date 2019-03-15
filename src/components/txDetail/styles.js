@@ -29,13 +29,33 @@ export default () => ({
       flexWrap: 'wrap',
       paddingRight: 30,
     },
+    detailRow: {
+      flexDirection: 'row',
+      flex: 1,
+      alignItems: 'center',
+      paddingBottom: 16,
+      paddingTop: 16,
+      borderBottomWidth: 1,
+      marginLeft: 20,
+      marginRight: 20,
+    },
+    rowIconWrapper: {
+      width: 36,
+    },
+    rowIcon: {
+      marginRight: 11,
+    },
+    rowContent: {
+      flex: 1,
+    },
     label: {
       fontSize: 13,
       marginBottom: 7,
     },
-    addressContainer: {
+    valueContainer: {
       flexDirection: 'row',
       alignItems: 'center',
+      paddingRight: 18,
     },
     avatar: {
       paddingBottom: 0,
@@ -73,18 +93,6 @@ export default () => ({
     transactionId: {
       marginBottom: 0,
     },
-    detailRow: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingBottom: 16,
-      paddingTop: 16,
-      borderBottomWidth: 1,
-      marginLeft: 20,
-      marginRight: 20,
-    },
-    rowIcon: {
-      marginRight: 11,
-    },
     amountBlur: {
       justifyContent: 'center',
       textAlign: 'center',
@@ -93,6 +101,16 @@ export default () => ({
     empty: {
       height: '100%',
       marginTop: 0,
+    },
+    transactionIcon: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      overflow: 'hidden',
+      padding: 17,
+    },
+    explorerLink: {
+      fontWeight: 'bold',
     },
   },
 
@@ -123,6 +141,15 @@ export default () => ({
     detailRow: {
       borderBottomColor: colors.light.gray5,
     },
+    outgoingSymbol: {
+      backgroundColor: colors.light.sendBalanceBg,
+    },
+    incomingSymbol: {
+      backgroundColor: colors.light.incomingBg,
+    },
+    explorerLink: {
+      color: colors.light.blue,
+    },
   },
 
   [themes.dark]: {
@@ -151,6 +178,15 @@ export default () => ({
     },
     detailRow: {
       borderBottomColor: '#373E4F',
+    },
+    outgoingSymbol: {
+      backgroundColor: colors.dark.sendBalanceBg,
+    },
+    incomingSymbol: {
+      backgroundColor: colors.dark.incomingBg,
+    },
+    explorerLink: {
+      color: colors.light.blue,
     },
   },
 });

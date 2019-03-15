@@ -1,28 +1,22 @@
-import React, { Fragment } from 'react';
-import { ScrollView, View, Image, RefreshControl } from 'react-native';
+import React from 'react';
+import { ScrollView, View, RefreshControl, Linking } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import FormattedDate from '../formattedDate';
 import withTheme from '../withTheme';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
-import { B, P, H1, H3, A } from '../toolBox/typography';
-import Icon from '../toolBox/icon';
+import { B, A } from '../toolBox/typography';
 import { IconButton } from '../toolBox/button';
-import Avatar from '../avatar';
 import Loading from '../transactions/loading';
 import EmptyState from '../transactions/empty';
-import transactions from '../../constants/transactions';
+import LskSummary from './lskSummary';
+import BtcSummary from './btcSummary';
+import Row from './row';
 import { transactions as transactionsAPI } from '../../utilities/api';
-import Blur from '../transactions/blur';
-import arrowLight from '../../assets/images/txDetail/arrow-light2x.png';
-import arrowDark from '../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
 import { colors, themes } from '../../constants/styleGuide';
 import { merge } from '../../utilities/helpers';
-
-const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
@@ -124,9 +118,15 @@ class TransactionDetail extends React.Component {
     return accountId;
   };
 
+  openExplorer = () => {
+    Linking.openURL(`https://www.blockchain.com/btc/tx/${this.state.id}`)
+      // eslint-disable-next-line no-console
+      .catch(err => console.error('An error occurred', err));
+  };
+
   render() {
     const {
-      navigation, styles, theme, account, t, activeToken,
+      navigation, styles, account, t, activeToken,
     } = this.props;
     const { tx, error, refreshing } = this.state;
 
@@ -148,23 +148,6 @@ class TransactionDetail extends React.Component {
 
     const walletAccountAddress = navigation.getParam('account', account[activeToken].address);
     const incognito = navigation.getParam('incognito', null);
-    let arrowStyle;
-    let amountStyle = [styles.outgoing, styles.theme.outgoing];
-    let firstAddress = tx.senderAddress;
-    let secondAddress = tx.recipientAddress;
-    let amountSign = '-';
-    let direction = 'outgoing';
-
-    if ((walletAccountAddress !== tx.senderAddress) && tx.type === 0) {
-      arrowStyle = styles.reverseArrow;
-      amountStyle = [styles.incoming, styles.theme.incoming];
-      firstAddress = tx.recipientAddress;
-      secondAddress = tx.senderAddress;
-      amountSign = '';
-      direction = 'incoming';
-    }
-
-    const normalizedAmount = fromRawLsk(tx.amount);
 
     return (
       <ScrollView
@@ -174,170 +157,74 @@ class TransactionDetail extends React.Component {
             refreshing={refreshing}
             onRefresh={this.onRefresh}
           />
-        )}
-      >
-        <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
-          <View style={styles.row}>
-            {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-              <Image
-                style={{ width: 50, height: 50 }}
-                source={transactions[txTypes[tx.type]].image(theme)}
-              /> :
-              <Fragment>
-                <Avatar address={firstAddress} size={50} />
-                {
-                  theme === themes.light ?
-                    <Image source={arrowLight} style={[styles.arrow, arrowStyle]} /> :
-                    <Image source={arrowDark} style={[styles.arrow, arrowStyle]} />
-                }
-                <Avatar address={secondAddress} size={50} />
-              </Fragment>
-            }
-          </View>
-          {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-            <H3 style={amountStyle}>{t(transactions[txTypes[tx.type]].title)}</H3> :
-            null
-          }
-          {
-            tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) && !incognito ?
-              <H1 style={amountStyle}>
-                {amountSign}
-                <FormattedNumber>
-                  {fromRawLsk(tx.amount)}
-                </FormattedNumber>
-              </H1> : null
-          }
-          {
-            tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) && incognito ?
-              <Blur
-                value={normalizedAmount}
-                direction={direction}
-                style={styles.amountBlur}
-              /> : null
-          }
-          {
-            tx.timestamp ?
-              <FormattedDate
-                format='MMM D, YYYY LTS'
-                type={P}
-                style={[styles.date, styles.theme.date]}
-              >
-                {tx.timestamp}
-              </FormattedDate> : null
-          }
-        </View>
-        <View style={[styles.detailRow, styles.theme.detailRow]}>
-          <Icon
-            name='send'
-            size={22}
-            style={styles.rowIcon}
-            color={colors[theme].gray2}
-          />
-          <View style={styles.rowContent}>
-            <P style={[styles.label, styles.theme.label]}>
-              {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-                <Fragment>{t('Account address')}</Fragment> :
-                <Fragment>{t('Sender')}</Fragment>
-              }
-            </P>
-            <View style={styles.addressContainer}>
-              <A
-                value={tx.senderAddress}
-                onPress={() => this.navigate(tx.senderAddress)}
-                style={[styles.value, styles.theme.value, styles.transactionId]}
-              >
-                {this.getAccountLabel(tx.senderAddress)}
-              </A>
-            </View>
-          </View>
-        </View>
+        )} >
+        {
+          activeToken === 'LSK' ?
+          <LskSummary
+            incognito={incognito}
+            accountAddress={walletAccountAddress}
+            tx={tx} /> :
+          <BtcSummary
+            incognito={incognito}
+            accountAddress={walletAccountAddress}
+            tx={tx} />
+        }
 
-        {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-          null :
-          <View style={[styles.detailRow, styles.theme.detailRow]}>
-            <Icon
-              name='recipient'
-              size={22}
-              style={styles.rowIcon}
-              color={colors[theme].gray2}
-            />
-            <View style={styles.rowContent}>
-              <P style={[styles.label, styles.theme.label]}>{t('Recipient')}</P>
+        <Row icon='sender' title={tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
+          'Account address' : 'Sender'}>
+          <View style={styles.addressContainer}>
+            <A
+              value={tx.senderAddress}
+              onPress={() => this.navigate(tx.senderAddress)}
+              style={[styles.value, styles.theme.value, styles.transactionId]}
+            >
+              {this.getAccountLabel(tx.senderAddress)}
+            </A>
+          </View>
+        </Row>
+        {
+          tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ? null :
+            <Row icon='recipient' title='Recipient'>
               <View style={styles.addressContainer}>
                 <A
                   value={tx.senderAddress}
                   onPress={() => this.navigate(tx.recipientAddress)}
-                  style={[styles.value, styles.theme.value, styles.transactionId]}
-                >
+                  style={[styles.value, styles.theme.value, styles.transactionId]} >
                   {this.getAccountLabel(tx.recipientAddress)}
                 </A>
               </View>
-            </View>
-          </View>
+            </Row>
         }
-
-        <View style={[styles.detailRow, styles.theme.detailRow]}>
-          <Icon
-            name='tx-fee'
-            size={22}
-            style={styles.rowIcon}
-            color={colors[theme].gray2}
-          />
-          <View style={styles.rowContent}>
-            <P style={[styles.label, styles.theme.label]}>{t('Transaction Fee')}</P>
-            <B style={[styles.value, styles.theme.value]}>
-              <FormattedNumber>{fromRawLsk(tx.fee)}</FormattedNumber>
-            </B>
-          </View>
-        </View>
+        <Row icon='tx-fee' title='Transaction Fee'>
+          <B style={[styles.value, styles.theme.value]}>
+            <FormattedNumber tokenType={activeToken}>{fromRawLsk(tx.fee)}</FormattedNumber>
+          </B>
+        </Row>
         {
           (tx.data) ?
-            <View style={[styles.detailRow, styles.theme.detailRow]}>
-              <Icon
-                name='reference'
-                size={22}
-                style={styles.rowIcon}
-                color={colors[theme].gray2}
-              />
-              <View style={styles.rowContent}>
-                <P style={[styles.label, styles.theme.label]}>{t('Reference')}</P>
-                <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
-                  {tx.data}
-                </B>
-              </View>
-            </View> : null
+            <Row icon='reference' title='Reference'>
+              <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
+                {tx.data}
+              </B>
+            </Row> : null
         }
-        <View style={[styles.detailRow, styles.theme.detailRow]}>
-          <Icon
-            name='confirmation'
-            size={22}
-            style={styles.rowIcon}
-            color={colors[theme].gray2}
-          />
-          <View style={styles.rowContent}>
-            <P style={[styles.label, styles.theme.label]}>{t('Confirmations')}</P>
-            <B style={[styles.value, styles.theme.value]}>{tx.confirmations || t('Not confirmed yet.')}</B>
-          </View>
-        </View>
-        <View style={[styles.detailRow, styles.theme.detailRow]}>
-          <Icon
-            name='tx-id'
-            size={22}
-            style={styles.rowIcon}
-            color={colors[theme].gray2}
-          />
-          <View style={styles.rowContent}>
-            <P style={[styles.label, styles.theme.label]}>{t('Transaction ID')}</P>
-            <View style={styles.addressContainer}>
-              <Share
-                type={B}
-                value={tx.id}
-                icon={true}
-                style={[styles.value, styles.theme.value, styles.transactionId]}
-              />
-            </View>
-          </View>
-        </View>
+        <Row icon='confirmation' title='Confirmations'>
+          <B style={[styles.value, styles.theme.value]}>{tx.confirmations || t('Not confirmed yet.')}</B>
+        </Row>
+        <Row icon='tx-id' title='Transaction ID'>
+          {
+            activeToken === 'LSK' ?
+            <Share
+              type={B}
+              value={tx.id}
+              icon={true}
+              style={[styles.value, styles.theme.value, styles.transactionId]}
+            /> :
+            <A style={[styles.explorerLink, styles.theme.explorerLink]} onPress={this.openExplorer}>
+              {t('View more on Blockchain.info')}
+            </A>
+          }
+        </Row>
       </ScrollView>
     );
   }
