@@ -4,7 +4,9 @@ import getMappedFunction from './functionMapper';
  * @typedef {Object} AccountSummary
  * @property {String} address
  * @property {Number} balance
- * @property {Boolean} initialized
+ * @property {Boolean} initialized - Account initialization status, valid for LSK
+ * @property {String} publicKey - Public key of the account, only present for LSK
+ * @property {String} secondPublicKey - Second public key of the account, only present for LSK
  */
 /**
  * Retrieves account summary for related token from Node API.

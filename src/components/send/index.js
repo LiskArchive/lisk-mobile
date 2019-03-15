@@ -8,13 +8,14 @@ import AddToBookmark from './addToBookmark';
 import Amount from './amount';
 import Reference from './reference';
 import Overview from './overview';
-import Confirm from './confirm';
+import SecondPassphrase from './secondPassphrase';
 import Result from './result';
 import { IconButton } from '../toolBox/button';
 import { themes, colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import Progress from './progress';
+import { tokenMap } from '../../constants/tokens';
 
 @connect(state => ({
   accounts: state.accounts,
@@ -82,17 +83,18 @@ class Send extends React.Component {
       theme,
       navigation,
       accounts,
+      settings,
       t,
     } = this.props;
+
     navigation.setParams({ styles, theme });
     BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
 
-    const accountInitialization = navigation.getParam('initialize', false);
-    if (accountInitialization) {
+    if (navigation.getParam('initialize', false)) {
       this.nav.move({
         to: 4,
         data: {
-          address: accounts.active.address,
+          address: accounts.info[settings.token.active],
           amount: 0.1,
           reference: t('Account initialization'),
         },
@@ -129,55 +131,42 @@ class Send extends React.Component {
       settings,
     } = this.props;
 
-    const steps = [
+    let steps = [
       {
         component: Recipient,
-        props: {
-          title: 'form',
-          accounts,
-        },
+        title: 'form',
       },
       {
         component: AddToBookmark,
-        props: {
-          title: 'addToBookmark',
-        },
+        title: 'addToBookmark',
       },
       {
         component: Amount,
-        props: {
-          title: 'amount',
-          settings,
-          accounts,
-        },
+        title: 'amount',
       },
       {
         component: Reference,
-        props: {
-          title: 'reference',
-        },
+        title: 'reference',
       },
       {
         component: Overview,
-        props: {
-          title: 'Overview',
-        },
+        title: 'Overview',
       },
       {
         component: Result,
-        props: {
-          title: 'result',
-        },
+        title: 'result',
       },
     ];
 
-    if ((accounts.active || {}).secondPublicKey) {
+    if (accounts.info[settings.token.active].secondPublicKey) {
       steps.splice(4, 0, {
-        component: Confirm,
-        props: {
-          title: 'confirm',
-        },
+        component: SecondPassphrase,
+        title: 'secondPassphrase',
       });
+    }
+
+    if (settings.token.active !== tokenMap.LSK.key) {
+      steps = steps.filter(s => s.title !== 'reference');
     }
 
     return (
@@ -189,9 +178,10 @@ class Send extends React.Component {
       >
         {steps.map(step => (
           <step.component
-            key={step.props.title}
+            key={step.title}
             navigation={navigation}
-            {...step.props}
+            accounts={accounts}
+            settings={settings}
           />
         ))}
       </MultiStep>

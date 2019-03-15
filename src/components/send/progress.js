@@ -1,8 +1,14 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
+import connect from 'redux-connect-decorator';
+import { tokenMap } from '../../constants/tokens';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import { colors } from '../../constants/styleGuide';
 
+@connect(state => ({
+  activeToken: state.settings.token.active,
+}))
 class Progress extends React.Component {
   state = {
     progressRatio: new Animated.Value(0),
@@ -20,14 +26,21 @@ class Progress extends React.Component {
 
   setProgress(duration) {
     Animated.timing(this.state.progressRatio, {
-      toValue: this.props.current / this.props.total,
+      toValue: this.props.current / (this.props.total - 1),
       duration,
     }).start();
   }
 
   render() {
-    const { styles, current, total } = this.props;
+    const {
+      styles, current, total, activeToken,
+    } = this.props;
     const { progressRatio } = this.state;
+
+    let color = colors.light.blue;
+    if (activeToken === tokenMap.BTC.key) {
+      color = colors.light.btc;
+    }
 
     return (
       <View style={[
@@ -36,10 +49,11 @@ class Progress extends React.Component {
         { opacity: current === total ? 0 : 1 },
       ]}>
         <Animated.View
-          style={[styles.progress, styles.theme.progress, {
+          style={[styles.progress, {
+            backgroundColor: color,
             width: progressRatio.interpolate({
               inputRange: [0, 1],
-              outputRange: ['0%', '120%'],
+              outputRange: ['0%', '100%'],
             }),
           }]}
         />

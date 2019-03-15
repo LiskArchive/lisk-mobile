@@ -4,7 +4,8 @@ import { translate } from 'react-i18next';
 import { IconButton } from '../../toolBox/button';
 import { P } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
-import reg from '../../../constants/regex';
+// import reg from '../../../constants/regex';
+import { tokenMap } from '../../../constants/tokens';
 import Input from '../../toolBox/input';
 import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../avatar';
@@ -20,22 +21,27 @@ import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 class Recipient extends React.Component {
-  activeInputRef = null;
+  // @TODO: should be updated in https://github.com/LiskHQ/lisk-mobile/issues/587
+  validator = () => 0;
+  /*
   validator = (str) => {
     if (str === '') return -1;
     return reg.address.test(str) ? 0 : 1;
   };
+  */
+
   scannedData = {};
+
   state = {
-    header: true,
     address: {
       value: '',
       validity: 0,
     },
     avatarPreview: false,
   };
+
   animatedStyles = {
-    height: new Animated.Value(45),
+    height: new Animated.Value(40),
     paddingTop: new Animated.Value(20),
   }
 
@@ -104,23 +110,17 @@ class Recipient extends React.Component {
   }
 
   forward = (data) => {
-    const accountHasAlreadyFollowed = (address) => {
-      const { followed } = this.props.accounts;
-      return followed.some(item => item.address === address);
-    };
+    const { accounts: { followed }, sharedData, move } = this.props;
+    const isFollowedAccount = address => followed.some(item => item.address === address);
 
-    const {
-      sharedData,
-      move,
-    } = this.props;
-    const nextData = data ?
-      merge(sharedData, data) :
-      merge(sharedData, this.scannedData, {
+    const nextData = data
+      ? merge(sharedData, data)
+      : merge(sharedData, this.scannedData, {
         address: this.state.address.value,
       });
 
     move({
-      to: accountHasAlreadyFollowed(nextData.address) ? 2 : 1,
+      to: isFollowedAccount(nextData.address) ? 2 : 1,
       data: nextData,
     });
   }
@@ -143,7 +143,7 @@ class Recipient extends React.Component {
     } else {
       Animated.parallel([
         Animated.timing(height, {
-          toValue: 45,
+          toValue: 40,
           duration: 400,
           delay: 0,
         }),
@@ -158,11 +158,11 @@ class Recipient extends React.Component {
 
   render() {
     const {
-      navigation, theme, styles, accounts, t, lng,
+      settings, navigation, theme, styles, accounts, t, lng,
     } = this.props;
-    const {
-      address, avatarPreview,
-    } = this.state;
+    const { address, avatarPreview } = this.state;
+
+    const shouldDisplayAvatar = settings.token.active === tokenMap.LSK.key;
 
     const titles = {
       heading: accounts.followed.length ? t('Enter an address or search in bookmarks.') : t('Enter an address to send tokens to.'),
@@ -186,22 +186,27 @@ class Recipient extends React.Component {
           permissionDialogTitle={t('Permission to use camera')}
           permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
+
         <KeyboardAwareScrollView
           onKeyboard={this.onKeyboardOpen}
           onSubmit={this.submitForm}
           hasTabBar={true}
           onStickyButton={true}
+          styles={{
+            container: styles.container,
+            innerContainer: styles.innerContainer,
+          }}
           button={{
             title: t('Continue'),
             type: 'inBox',
           }}
-          styles={{ container: styles.container, innerContainer: styles.innerContainer }}
         >
           {!isSmallScreen ? (
             <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
               <P style={[styles.subtitle, styles.theme.subtitle]}>{titles.heading}</P>
             </Animated.View>
           ) : null}
+
           <View style={styles.form}>
             <View style={styles.addressContainer}>
               <IconButton
@@ -210,10 +215,11 @@ class Recipient extends React.Component {
                 style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                 title={t('Scan')}
                 icon='scanner'
-                iconSize={18}
+                iconSize={16}
                 color={colors.light.blue}
               />
-              {
+
+              {shouldDisplayAvatar && (
                 avatarPreview ?
                   <Avatar
                     style={styles.avatar}
@@ -226,26 +232,31 @@ class Recipient extends React.Component {
                     size={34}
                     color={colors[theme].gray5}
                   />
-              }
+              )}
+
               <Input
+                reference={(input) => { this.input = input; }}
                 label={titles.inputLabel}
                 autoCorrect={false}
-                reference={(input) => { this.input = input; }}
+                onChange={this.setAddress}
+                value={address.value}
+                error={errorMessage}
                 innerStyles={{
                   errorMessage: styles.errorMessage,
                   input: [
                     styles.input,
                     styles.addressInput,
+                    (shouldDisplayAvatar ? styles.addressInputWithAvatar : {}),
                   ],
                   containerStyle: styles.addressInputContainer,
                 }}
-                onChange={this.setAddress}
-                value={address.value}
-                error={errorMessage}
-                onFocus={() => { this.activeInputRef = 0; }}
               />
             </View>
-            <Bookmarks navigate={this.forward} query={this.state.address.value} />
+
+            <Bookmarks
+              navigate={this.forward}
+              query={this.state.address.value}
+            />
           </View>
         </KeyboardAwareScrollView>
       </View>

@@ -142,7 +142,8 @@ describe('Action: Accounts', () => {
     const inputData = {
       amount: 1000,
       recipientAddress: 'recipientAddress',
-      data: 'test ref',
+      reference: 'test ref',
+      fee: txConstants.send.fee,
     };
 
     it('should call pendingTransactionAdded when send request is successful', async () => {
@@ -156,9 +157,9 @@ describe('Action: Accounts', () => {
             id: transactions.data[0].id,
             senderAddress: account.address,
             recipientAddress: inputData.recipientAddress,
-            fee: txConstants.send.fee,
+            fee: inputData.fee,
             amount: inputData.amount,
-            data: inputData.data,
+            data: inputData.reference,
             type: txConstants.send.type,
           },
         },

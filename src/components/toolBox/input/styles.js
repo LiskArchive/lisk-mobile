@@ -20,7 +20,7 @@ export default () => ({
       fontFamily: fonts.family.contextSemiBold,
       minHeight: 30,
       width: '100%',
-      borderBottomColor: colors.light.gray1,
+      borderBottomColor: colors.light.inputBorder,
       paddingBottom: 5,
       borderBottomWidth: 1,
       paddingTop: 5,
@@ -58,7 +58,7 @@ export default () => ({
     },
     input: {
       color: colors.dark.white,
-      borderBottomColor: '#9EA8B4',
+      borderBottomColor: colors.dark.inputBorder,
     },
     inputErrorStyle: {
       borderBottomColor: colors.dark.red,

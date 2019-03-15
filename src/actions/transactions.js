@@ -31,6 +31,18 @@ export const transactionsLoaded = data => async (dispatch, getState) => {
   fetchTransactions(dispatch, getState, data);
 };
 
+/**
+ * Calls transactionAPI.create and transactionAPI.broadcast methods to make a transaction.
+ * @param {Object} data
+ * @param {String} data.recipientAddress
+ * @param {Number} data.amount - In raw format (satoshis, beddows)
+ * @param {Number} data.fee - In raw format, used for updating the TX List.
+ * @param {Number} data.dynamicFeePerByte - In raw format, used for creating BTC transaction.
+ * @param {Number} data.reference - Data field for LSK transactions
+ * @param {String} data.secondPassphrase - Second passphrase for LSK transactions
+ * @param {Function} successCb - success callback
+ * @param {Function} errorCb - error callback
+ */
 export const transactionAdded = (data, successCb, errorCb) => async (dispatch, getState) => {
   dispatch(loadingStarted(actionTypes.transactionAdded));
 
@@ -48,9 +60,9 @@ export const transactionAdded = (data, successCb, errorCb) => async (dispatch, g
         senderAddress: account.address,
         recipientAddress: data.recipientAddress,
         amount: data.amount,
-        fee: txConstants.send.fee,
+        fee: data.fee,
         type: txConstants.send.type,
-        data: data.data,
+        data: data.reference,
       },
     });
 

@@ -107,7 +107,7 @@ export const get = ({
  * @param {Number} data.outputCount
  * @param {Number} data.dynamicFeePerByte - in satoshis/byte.
  */
-const calculateTransactionFee = ({
+export const calculateTransactionFee = ({
   inputCount,
   outputCount,
   dynamicFeePerByte,
@@ -140,6 +140,9 @@ export const create = ({
   dynamicFeePerByte,
 }) => new Promise(async (resolve, reject) => {
   try {
+    amount = Number(amount);
+    dynamicFeePerByte = Number(dynamicFeePerByte);
+
     const senderAddress = extractAddress(passphrase);
     const unspentTxOuts = await exports.getUnspentTransactionOutputs(senderAddress);
 

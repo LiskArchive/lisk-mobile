@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { themes, colors, boxes } from '../../../constants/styleGuide';
+import { themes, colors, boxes, fonts } from '../../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -11,14 +11,13 @@ export default () => ({
       overflow: 'hidden',
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
-      paddingTop: 0,
-      minHeight: 70,
       maxWidth: '100%',
     },
     subtitle: {
       marginTop: 0,
     },
     form: {
+      paddingTop: boxes.boxPadding,
       paddingBottom: boxes.boxPadding,
     },
     input: {
@@ -28,20 +27,18 @@ export default () => ({
     },
     scanButton: {
       position: 'absolute',
-      right: 20,
       zIndex: 99,
-      top: 30,
-      paddingRight: 15,
-      paddingBottom: 10,
-      width: 67,
-      height: 30,
+      top: 0,
+      right: boxes.boxPadding + 5,
+      width: 60,
     },
     scanButtonTitle: {
-      fontSize: 14,
-      paddingLeft: 5,
+      fontSize: fonts.size.small,
+      paddingLeft: 6,
     },
     longTitle: {
-      width: 87,
+      right: boxes.boxPadding - 5,
+      width: 90,
     },
     addressContainer: {
       width: '100%',
@@ -51,14 +48,15 @@ export default () => ({
       ...Platform.select({
         android: {
           height: 48,
-          paddingLeft: 40,
         },
         ios: {
           height: 48,
           paddingBottom: 10,
-          paddingLeft: 40,
         },
       }),
+    },
+    addressInputWithAvatar: {
+      paddingLeft: 40,
     },
     addressInputContainer: {
       paddingTop: 0,

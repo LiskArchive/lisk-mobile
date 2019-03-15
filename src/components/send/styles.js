@@ -24,20 +24,16 @@ export default () => ({
       height: '100%',
     },
   },
+
   [themes.light]: {
     progressContainer: {
       backgroundColor: colors.light.white,
     },
-    progress: {
-      backgroundColor: colors.light.blue,
-    },
   },
+
   [themes.dark]: {
     progressContainer: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    progress: {
-      backgroundColor: colors.dark.white,
     },
   },
 });
