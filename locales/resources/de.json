@@ -179,7 +179,8 @@
   "Sign in using bioAuth": "Melde dich mit {{sensorType}} an",
   "Use bioAuth": "{{sensorType}} benutzen",
   "Manage assets": "",
-  "You don't have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
   "Here you will be able to manage your assets, in order to use them in the app.": "",
-  "Primary": ""
+  "Primary": "",
+  "You don't have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
+  "Error": "Fehler"
 }

@@ -76,18 +76,19 @@ class Form extends React.Component {
 
   onFormSubmission = () => {
     const { passphrase } = this.state;
+    const { t, signIn } = this.props;
     const validity = validatePassphrase(passphrase.value);
 
     if (!validity.length) {
       DropDownHolder.closeAlert();
       this.passphraseInput.blur();
-      this.props.signIn(passphrase.value, 'form');
+      signIn(passphrase.value, 'form');
     } else {
       const errors = validity
         .filter(item => item.code !== 'INVALID_MNEMONIC' || validity.length === 1);
       if (errors.length && errors[0].message && errors[0].message.length) {
         const errorMessage = errors[0].message.replace(' Please check the passphrase.', '');
-        DropDownHolder.error('Error', errorMessage);
+        DropDownHolder.error(t('Error'), errorMessage);
       }
 
       this.setState({
