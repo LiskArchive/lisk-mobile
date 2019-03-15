@@ -4,7 +4,6 @@ import { translate } from 'react-i18next';
 import { IconButton } from '../../toolBox/button';
 import { P } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
-// import reg from '../../../constants/regex';
 import { tokenMap } from '../../../constants/tokens';
 import Input from '../../toolBox/input';
 import { colors } from '../../../constants/styleGuide';
@@ -17,19 +16,11 @@ import withTheme from '../../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+import { validateAddress } from '../../../utilities/validators';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 class Recipient extends React.Component {
-  // @TODO: should be updated in https://github.com/LiskHQ/lisk-mobile/issues/587
-  validator = () => 0;
-  /*
-  validator = (str) => {
-    if (str === '') return -1;
-    return reg.address.test(str) ? 0 : 1;
-  };
-  */
-
   scannedData = {};
 
   state = {
@@ -86,9 +77,11 @@ class Recipient extends React.Component {
 
   setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
-    if (this.validator(value) === 0) {
+
+    if (validateAddress(this.props.settings.token.active, value) === 0) {
       this.setAvatarPreviewTimeout();
     }
+
     this.setState({
       address: {
         value,
@@ -99,14 +92,18 @@ class Recipient extends React.Component {
 
   submitForm = () => {
     const { value } = this.state.address;
-    const validity = this.validator(value);
+    const validity = validateAddress(this.props.settings.token.active, value);
+
     if (validity === 0) {
-      this.forward();
-    } else {
-      this.setState({
-        address: { value, validity },
-      });
+      return this.forward();
     }
+
+    return this.setState({
+      address: {
+        value,
+        validity,
+      },
+    });
   }
 
   forward = (data) => {
