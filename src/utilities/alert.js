@@ -1,4 +1,4 @@
-export default class dropDownHolder {
+export default class DropDownHolder {
   static dropDown
 
   static initialize(dropDown) {
@@ -15,4 +15,3 @@ export default class dropDownHolder {
     this.dropDown.alertWithType('error', title, message);
   }
 }
-
