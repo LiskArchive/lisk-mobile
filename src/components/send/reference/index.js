@@ -9,6 +9,7 @@ import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { merge } from '../../../utilities/helpers';
 import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+import DropDownHolder from '../../../utilities/alert';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const isAndroid = deviceType() === 'android';
@@ -65,23 +66,28 @@ class Reference extends React.Component {
   }
 
   onSubmit = () => {
+    const { t, sharedData, nextStep } = this.props;
     const { reference } = this.state;
     const validity = this.validator(reference.value);
 
     if (validity === 0) {
-      this.props.nextStep(merge(this.props.sharedData, {
+      DropDownHolder.closeAlert();
+
+      return nextStep(merge(sharedData, {
         reference: reference.value,
       }));
-    } else {
-      this.setState({
-        reference: merge(reference, { validity }),
-      });
     }
+
+    DropDownHolder.error(t('Error'), t('Maximum length of 64 bytes is exceeded.'));
+
+    return this.setState({
+      reference: merge(reference, { validity }),
+    });
   }
 
   render() {
     const { styles, t } = this.props;
-    const { reference: { value, validity } } = this.state;
+    const { reference: { value } } = this.state;
 
     return (
       <View style={styles.theme.wrapper}>
@@ -112,7 +118,6 @@ class Reference extends React.Component {
               multiline={true}
               onChange={this.onChange}
               value={value}
-              error={validity === 1 ? t('Maximum length of 64 bytes is exceeded.') : ''}
             />
           </View>
         </KeyboardAwareScrollView>
