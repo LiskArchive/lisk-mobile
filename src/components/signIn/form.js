@@ -9,6 +9,7 @@ import KeyboardAwareScrollView from '../toolBox/keyboardAwareScrollView';
 import Scanner from '../scanner';
 import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
+import DropDownHolder from '../../utilities/alert';
 
 const devDefaultPass = process.env.passphrase || '';
 
@@ -75,12 +76,21 @@ class Form extends React.Component {
 
   onFormSubmission = () => {
     const { passphrase } = this.state;
+    const { t, signIn } = this.props;
     const validity = validatePassphrase(passphrase.value);
 
     if (!validity.length) {
+      DropDownHolder.closeAlert();
       this.passphraseInput.blur();
-      this.props.signIn(passphrase.value, 'form');
+      signIn(passphrase.value, 'form');
     } else {
+      const errors = validity
+        .filter(item => item.code !== 'INVALID_MNEMONIC' || validity.length === 1);
+      if (errors.length && errors[0].message && errors[0].message.length) {
+        const errorMessage = errors[0].message.replace(' Please check the passphrase.', '');
+        DropDownHolder.error(t('Error'), errorMessage);
+      }
+
       this.setState({
         passphrase: {
           value: passphrase.value,
@@ -125,17 +135,6 @@ class Form extends React.Component {
       t, navigation, lng, toggleView, sensorType, showBackButton,
     } = this.props;
 
-    let errorMessage = '';
-
-    if (passphrase.validity.length) {
-      const errors = passphrase.validity
-        .filter(item => item.code !== 'INVALID_MNEMONIC' || passphrase.validity.length === 1);
-
-      if (errors.length && errors[0].message && errors[0].message.length) {
-        errorMessage = errors[0].message.replace(' Please check the passphrase.', '');
-      }
-    }
-
     return (
       <View style={styles.container}>
         {
@@ -177,7 +176,6 @@ class Form extends React.Component {
             autoCorrect={false}
             multiline={Platform.OS === 'ios'}
             secureTextEntry={Platform.OS !== 'ios'}
-            error={errorMessage}
             keyboardAppearance="light"
           />
           {
