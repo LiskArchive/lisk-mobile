@@ -153,7 +153,7 @@
     "react-test-renderer": "16.2.0",
     "redux-connect-decorator": "^0.2.0",
     "redux-mock-store": "^1.5.3",
-    "rn-nodeify": "github:mvayngrib/rn-nodeify",
+    "rn-nodeify": "github:tradle/rn-nodeify",
     "schedule": "^0.4.0"
   },
   "react-native": {
@@ -164,7 +164,7 @@
     "dns": "dns.js",
     "net": "react-native-tcp",
     "domain": "domain-browser",
-    "http": "react-native-http",
+    "http": "@tradle/react-native-http",
     "https": "https-browserify",
     "os": "react-native-os",
     "path": "path-browserify",
@@ -190,7 +190,7 @@
     "dns": "dns.js",
     "net": "react-native-tcp",
     "domain": "domain-browser",
-    "http": "react-native-http",
+    "http": "@tradle/react-native-http",
     "https": "https-browserify",
     "os": "react-native-os",
     "path": "path-browserify",
