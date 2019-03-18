@@ -17,6 +17,7 @@ import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import { validateAddress } from '../../../utilities/validators';
+import DropDownHolder from '../../../utilities/alert';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
@@ -91,12 +92,24 @@ class Recipient extends React.Component {
   }
 
   submitForm = () => {
+    const { t, settings } = this.props;
     const { value } = this.state.address;
-    const validity = validateAddress(this.props.settings.token.active, value);
+    const validity = validateAddress(settings.token.active, value);
 
     if (validity === 0) {
+      DropDownHolder.closeAlert();
       return this.forward();
     }
+
+    let errorMessage = '';
+
+    if (validity === 1) {
+      errorMessage = t('Invalid address.');
+    } else if (validity === -1) {
+      errorMessage = t('Please enter an address.');
+    }
+
+    DropDownHolder.error(t('Error'), errorMessage);
 
     return this.setState({
       address: {
@@ -166,13 +179,6 @@ class Recipient extends React.Component {
       inputLabel: accounts.followed.length ? t('Address or label') : t('Address'),
     };
 
-    let errorMessage = '';
-    if (address.validity === 1) {
-      errorMessage = t('Invalid address.');
-    } else if (address.validity === -1) {
-      errorMessage = t('Please enter an address.');
-    }
-
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
@@ -237,9 +243,7 @@ class Recipient extends React.Component {
                 autoCorrect={false}
                 onChange={this.setAddress}
                 value={address.value}
-                error={errorMessage}
                 innerStyles={{
-                  errorMessage: styles.errorMessage,
                   input: [
                     styles.input,
                     styles.addressInput,
