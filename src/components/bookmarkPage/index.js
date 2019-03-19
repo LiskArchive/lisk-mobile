@@ -121,6 +121,10 @@ class Bookmark extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    this.current = null;
+  }
+
   resetPrev(ref, next, address) {
     this.prev = ref;
     this.prev.snapTo({ index: 0 });
