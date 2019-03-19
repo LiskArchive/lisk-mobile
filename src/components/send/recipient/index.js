@@ -25,10 +25,7 @@ class Recipient extends React.Component {
   scannedData = {};
 
   state = {
-    address: {
-      value: '',
-      validity: 0,
-    },
+    address: { value: '' },
     avatarPreview: false,
   };
 
@@ -84,9 +81,7 @@ class Recipient extends React.Component {
     }
 
     this.setState({
-      address: {
-        value,
-      },
+      address: { value },
       avatarPreview: false,
     });
   }
@@ -110,13 +105,7 @@ class Recipient extends React.Component {
     }
 
     DropDownHolder.error(t('Error'), errorMessage);
-
-    return this.setState({
-      address: {
-        value,
-        validity,
-      },
-    });
+    return this.setState({ address: { value } });
   }
 
   forward = (data) => {
