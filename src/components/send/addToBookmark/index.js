@@ -11,6 +11,7 @@ import getStyles from './styles';
 import { tokenMap } from '../../../constants/tokens';
 import { accountFollowed as accountFollowedAction } from '../../../actions/accounts';
 import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+import DropDownHolder from '../../../utilities/alert';
 
 const isAndroid = deviceType() === 'android';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
@@ -72,13 +73,20 @@ class AddToBookmark extends React.Component {
   }
 
   saveAndContinue = () => {
+    const { t } = this.props;
     const { value, validity } = this.state.label;
+
     if (validity !== 1) {
+      DropDownHolder.closeAlert();
+
       if (value.length > 0) {
         const { accountFollowed, sharedData } = this.props;
         accountFollowed(sharedData.address, value);
       }
+
       this.forward();
+    } else {
+      DropDownHolder.error(t('Error'), t('The label must be shorter than 20 characters.'));
     }
   }
 
@@ -139,7 +147,6 @@ class AddToBookmark extends React.Component {
                 innerStyles={{ input: styles.input }}
                 multiline={true}
                 onChange={this.onChange}
-                error={label.validity === 1 ? t('The label must be shorter than 20 characters.') : ''}
               />
             </View>
           </View>
