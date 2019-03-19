@@ -22,6 +22,7 @@ import HeaderBackButton from '../router/headerBackButton';
 
 @connect(state => ({
   accounts: state.accounts.followed,
+  activeToken: state.settings.token.active,
 }), {
   accountFollowed: accountFollowedAction,
   accountEdited: accountEditedAction,
@@ -71,7 +72,7 @@ class AddToBookmark extends React.Component {
   };
 
   componentDidMount() {
-    const { navigation, accounts } = this.props;
+    const { navigation, accounts, activeToken } = this.props;
     const account = navigation.getParam('account', null);
 
     if (!account) {
@@ -79,7 +80,8 @@ class AddToBookmark extends React.Component {
         this.addressRef.focus();
       }, 300);
     } else {
-      const editMode = accounts.filter(item => item.address === account.address).length > 0;
+      const editMode = accounts[activeToken]
+        .filter(item => item.address === account.address).length > 0;
       this.setState({
         editMode,
         label: { value: account.label || '' },
