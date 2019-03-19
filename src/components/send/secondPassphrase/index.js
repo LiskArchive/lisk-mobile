@@ -14,6 +14,7 @@ import getStyles from './styles';
 import { colors, themes } from '../../../constants/styleGuide';
 import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import Scanner from '../../scanner';
+import DropDownHolder from '../../../utilities/alert';
 
 const devDefaultSecondPass = process.env.secondPassphrase || '';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
@@ -97,22 +98,37 @@ class SecondPassphrase extends React.Component {
   }
 
   onSubmit = () => {
+    const { t, nextStep, sharedData } = this.props;
     const { secondPassphrase } = this.state;
     const validity = this.validator(secondPassphrase.value);
 
     if (validity.length) {
-      this.setState({
+      let errorMessage = '';
+
+      const error = validity.filter(item => item.code !== 'INVALID_MNEMONIC' || validity.length === 1);
+
+      if (error.length) {
+        errorMessage = (error[0].message && error[0].message.length > 0) ?
+          error[0].message.replace(' Please check the passphrase.', '') :
+          '';
+      }
+
+      DropDownHolder.error(t('Error'), errorMessage);
+
+      return this.setState({
         secondPassphrase: {
           value: secondPassphrase.value,
           validity,
         },
       });
-    } else {
-      this.props.nextStep({
-        ...this.props.sharedData,
-        secondPassphrase: this.state.secondPassphrase.value,
-      });
     }
+
+    DropDownHolder.closeAlert();
+
+    return nextStep({
+      ...sharedData,
+      secondPassphrase: secondPassphrase.value,
+    });
   }
 
   render() {
@@ -120,15 +136,6 @@ class SecondPassphrase extends React.Component {
       navigation, styles, theme, t, lng,
     } = this.props;
     const { secondPassphrase } = this.state;
-
-    let errorMessage = '';
-    const error = secondPassphrase.validity
-      .filter(item => item.code !== 'INVALID_MNEMONIC' || secondPassphrase.validity.length === 1);
-    if (error.length) {
-      errorMessage = (error[0].message && error[0].message.length > 0) ?
-        error[0].message.replace(' Please check the passphrase.', '') :
-        '';
-    }
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -184,7 +191,6 @@ class SecondPassphrase extends React.Component {
                 autoCorrect={false}
                 multiline={Platform.OS === 'ios'}
                 secureTextEntry={Platform.OS !== 'ios'}
-                error={errorMessage}
               />
 
               {secondPassphrase.value === '' ?
