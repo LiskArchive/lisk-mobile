@@ -23,10 +23,6 @@ class AmountBTC extends React.Component {
     amount: {
       value: '',
       normalizedValue: '',
-      validity: {
-        code: 0,
-        message: '',
-      },
     },
   };
 
@@ -71,7 +67,6 @@ class AmountBTC extends React.Component {
       amount: {
         value,
         normalizedValue,
-        validity: -1,
       },
     });
   }
@@ -154,10 +149,7 @@ class AmountBTC extends React.Component {
       settings, dynamicFees,
     } = this.props;
 
-    const {
-      amount: { value, validity },
-      dynamicFeeType, unspentTransactionOutputs,
-    } = this.state;
+    const { amount, dynamicFeeType, unspentTransactionOutputs } = this.state;
 
     return (
       <View style={styles.theme.wrapper}>
@@ -183,12 +175,11 @@ class AmountBTC extends React.Component {
               reference={(el) => { this.input = el; }}
               autoFocus={!isAndroid}
               label={t('Amount (BTC)')}
-              value={value}
+              value={amount.value}
               onChange={this.onChangeAmount}
               keyboardType='numeric'
               currency={settings.currency}
               valueInCurrency={this.getValueInCurrency()}
-              error={validity.message}
             />
 
             {Object.keys(dynamicFees).length > 0 && unspentTransactionOutputs.length > 0 ?
