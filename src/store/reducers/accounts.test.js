@@ -6,10 +6,12 @@ import { merge } from '../../utilities/helpers';
 const data = {
   activeToken: tokenMap.LSK.key,
   passphrase: 'test',
-  followed: [
-    { address: '1234567890L', label: 'label1' },
-    { address: '1234567891L', label: 'label2' },
-  ],
+  followed: {
+    LSK: [
+      { address: '1234567890L', label: 'label1' },
+      { address: '1234567891L', label: 'label2' },
+    ],
+  },
   accountA: {
     address: '1234567890L',
     publicKey: 'sample_key_A',
@@ -78,31 +80,44 @@ describe('Reducers: Accounts', () => {
   });
 
   it('should add data to state.followed array in case of accountFollowed', () => {
-    state = merge(state, { followed: [data.accountA] });
-    const action = { type: actionTypes.accountFollowed, data: data.accountB };
+    state = merge(state, { followed: { LSK: [data.accountA] } });
+    const action = {
+      type: actionTypes.accountFollowed,
+      data: {
+        account: data.accountB,
+        activeToken: data.activeToken,
+      },
+    };
     const changedState = accounts(state, action);
-    expect(changedState.followed).toEqual([data.accountA, data.accountB]);
+    const expectedData = { BTC: undefined, LSK: [data.accountA, data.accountB] };
+    expect(changedState.followed).toEqual(expectedData);
   });
 
   it('should remove given account from state.followed array in case of accountUnFollowed', () => {
-    state = merge(state, { followed: [data.accountA] });
-    const action = { type: actionTypes.accountUnFollowed, data: data.accountA.address };
+    state = merge(state, { followed: { LSK: [data.accountA] } });
+    const action = {
+      type: actionTypes.accountUnFollowed,
+      data: { address: data.accountA.address, activeToken: data.activeToken },
+    };
     const changedState = accounts(state, action);
-    expect(changedState.followed).toHaveLength(0);
+    expect(changedState.followed[data.activeToken]).toHaveLength(0);
   });
 
   it('should edit given account from state.followed array in case of accountEdited', () => {
     state = merge(state, { followed: data.followed });
     const expectedValue = {
-      address: data.followed[1].address,
-      label: 'label3',
+      activeToken: data.activeToken,
+      account: {
+        address: data.followed.LSK[1].address,
+        label: 'label3',
+      },
     };
     const action = {
       type: actionTypes.accountEdited,
       data: expectedValue,
     };
     const changedState = accounts(state, action);
-    expect(changedState.followed[1]).toEqual(expectedValue);
+    expect(changedState.followed[data.activeToken][1]).toEqual(expectedValue.account);
   });
 
   it('should update one of the followed accounts in case of followedAccountsRetrieved', () => {
@@ -115,8 +130,8 @@ describe('Reducers: Accounts', () => {
   });
 
   it('should make no change in case of accountsStored', () => {
-    const action = { type: actionTypes.accountsStored, data: [data.accountA] };
+    const action = { type: actionTypes.accountsStored, data: { LSK: [data.accountA] } };
     const changedState = accounts(state, action);
-    expect(changedState.followed).toHaveLength(0);
+    expect(changedState.followed.LSK).toHaveLength(0);
   });
 });

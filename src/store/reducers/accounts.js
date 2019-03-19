@@ -4,7 +4,9 @@ import { tokenKeys } from '../../constants/tokens';
 
 export const INITIAL_STATE = {
   passphrase: null,
-  followed: [],
+  followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
+    [tokenKey]: [],
+  }), {}),
   info: tokenKeys.reduce((info, tokenKey) => merge(info, {
     [tokenKey]: {},
   }), {}),
@@ -41,20 +43,40 @@ const accounts = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.followedAccountsRetrieved:
       return merge(state, { followed: action.data });
 
-    case actionTypes.accountEdited:
+    case actionTypes.accountEdited: {
+      const { account, activeToken } = action.data;
       return merge(state, {
-        followed: state.followed.map(i => (i.address === action.data.address ? action.data : i)),
+        followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
+          [tokenKey]: tokenKey === activeToken ?
+            [
+              ...state.followed[tokenKey]
+                .map(i => (i.address === account.address ? account : i)),
+            ] :
+            state.followed[tokenKey],
+        }), {}),
       });
+    }
 
-    case actionTypes.accountFollowed:
+    case actionTypes.accountFollowed: {
+      const { account, activeToken } = action.data;
       return merge(state, {
-        followed: [...state.followed.filter(item =>
-          item.address !== action.data.address), action.data],
+        followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
+          [tokenKey]: tokenKey === activeToken ?
+            [
+              ...state.followed[tokenKey]
+                .filter(item => item.address !== account.address), account] :
+            state.followed[tokenKey],
+        }), {}),
       });
+    }
 
     case actionTypes.accountUnFollowed:
       return merge(state, {
-        followed: [...state.followed.filter(item => item.address !== action.data)],
+        followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
+          [tokenKey]: tokenKey === action.data.activeToken ?
+            [...state.followed[tokenKey].filter(item => item.address !== action.data.address)] :
+            state.followed[tokenKey],
+        }), {}),
       });
 
     default:
