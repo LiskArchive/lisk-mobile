@@ -37,7 +37,7 @@ class draggableItem extends React.Component {
 
   render() {
     const {
-      styles, data, theme, navigate, setRef, t,
+      styles, data, theme, navigate, setRef, t, avatar,
     } = this.props;
 
     return (<TouchableOpacity
@@ -116,9 +116,12 @@ class draggableItem extends React.Component {
           animatedValueX={this._deltaX}>
           <View style={styles.row}>
             <View style={styles.innerContainer}>
-              <View style={[styles.itemColumn, styles.avatarContainer]}>
-                <Avatar address={data.address} size={50} style={styles.theme.avatar} />
-              </View>
+              {
+                avatar ?
+                <View style={[styles.itemColumn, styles.avatarContainer]}>
+                  <Avatar address={data.address} size={50} style={styles.theme.avatar} />
+                </View> : null
+              }
               <View style={styles.column}>
                 <B style={[styles.address, styles.theme.address]}>
                   {data.label}
