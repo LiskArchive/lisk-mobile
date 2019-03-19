@@ -111,7 +111,8 @@ class TransactionDetail extends React.Component {
   }
 
   getAccountLabel = (accountId) => {
-    const followedAccount = this.props.followedAccounts.find(a => a.address === accountId);
+    const followedAccount = this.props.followedAccounts[this.props.activeToken]
+      .find(a => a.address === accountId);
     if (followedAccount) {
       return followedAccount.label;
     }
