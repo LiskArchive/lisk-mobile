@@ -107,11 +107,16 @@ describe('Action: Accounts', () => {
   });
 
   it('should return an accountUnFollowed action object', () => {
+    const store = mockStore({ accounts, settings });
     const expectedValue = {
       type: actionTypes.accountUnFollowed,
-      data: data.address,
+      data: {
+        address: data.address,
+        activeToken: data.activeToken,
+      },
     };
-    expect(accountUnFollowed(data.address)).toEqual(expectedValue);
+    store.dispatch(accountUnFollowed(data.address));
+    expect(store.getActions()[0]).toEqual(expectedValue);
   });
 
   it('should return an accountSignedOut action object', () => {
@@ -122,15 +127,17 @@ describe('Action: Accounts', () => {
   });
 
   it('should return an accountFollowed action object', () => {
+    const store = mockStore({ accounts, settings });
     const label = 'test';
     const expectedValue = {
       type: actionTypes.accountFollowed,
       data: {
-        address: data.address,
-        label,
+        account: { address: data.address, label },
+        activeToken: data.activeToken,
       },
     };
-    expect(accountFollowed(data.address, label)).toEqual(expectedValue);
+    store.dispatch(accountFollowed(data.address, label));
+    expect(store.getActions()[0]).toEqual(expectedValue);
   });
 
   describe('blockUpdated action', () => {
@@ -195,7 +202,7 @@ describe('Action: Accounts', () => {
   it('should dispatch followedAccountsRetrieved action when the data is read from the storage', async () => {
     const store = mockStore({});
     const expectedActions = [
-      { type: actionTypes.followedAccountsRetrieved, data: [data.account] },
+      { type: actionTypes.followedAccountsRetrieved, data: { BTC: [], LSK: [data.account] } },
     ];
     storageUtility.retrieveAccounts.mockResolvedValue([data.account]);
     await store.dispatch(followedAccountsRetrieved());
@@ -215,8 +222,9 @@ describe('Action: Accounts', () => {
           },
         },
       },
+      { type: actionTypes.followedAccountsRetrieved, data: { BTC: [], LSK: [data.account] } },
     ];
-
+    storageUtility.retrieveAccounts.mockResolvedValue([data.account]);
     await store.dispatch(accountSignedIn({ passphrase: data.passphrase }));
     expect(store.getActions()).toEqual(expectedActions);
   });
@@ -257,14 +265,22 @@ describe('Action: Accounts', () => {
   });
 
   it('should returns an accountEdited action object', () => {
-    const updatedData = 'test2';
-    const expectedValue = {
+    const store = mockStore({
+      settings,
+      accounts,
+    });
+    const label = 'test2';
+    const expectedValue = [{
       type: actionTypes.accountEdited,
       data: {
-        address: data.address,
-        label: updatedData,
+        activeToken: data.activeToken,
+        account: {
+          address: data.address,
+          label,
+        },
       },
-    };
-    expect(accountEdited(data.address, updatedData)).toEqual(expectedValue);
+    }];
+    store.dispatch(accountEdited(data.address, label));
+    expect(store.getActions()).toEqual(expectedValue);
   });
 });
