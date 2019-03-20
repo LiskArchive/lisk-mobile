@@ -39,7 +39,7 @@ class Progress extends React.Component {
 
     let color = colors.light.blue;
     if (activeToken === tokenMap.BTC.key) {
-      color = colors.light.btc;
+      color = colors.light.BTC;
     }
 
     return (
