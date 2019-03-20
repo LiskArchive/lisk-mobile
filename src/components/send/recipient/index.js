@@ -155,13 +155,35 @@ class Recipient extends React.Component {
     }
   }
 
-  render() {
-    const {
-      settings, navigation, theme, styles, accounts, t, lng,
-    } = this.props;
+  renderAvatar() {
+    const { theme, styles, settings: { token } } = this.props;
     const { address, avatarPreview } = this.state;
 
-    const shouldDisplayAvatar = settings.token.active === tokenMap.LSK.key;
+    if (token.active === tokenMap.LSK.key && avatarPreview) {
+      return (
+        <Avatar
+          style={styles.avatar}
+          address={address.value}
+          size={34}
+        />
+      );
+    }
+
+    return (
+      <Icon
+        style={styles.avatar}
+        name='avatar-placeholder'
+        size={34}
+        color={colors[theme].gray5}
+      />
+    );
+  }
+
+  render() {
+    const {
+      settings: { token }, navigation, styles, accounts, t, lng,
+    } = this.props;
+    const { address } = this.state;
 
     const titles = {
       heading: accounts.followed.length ? t('Enter an address or search in bookmarks.') : t('Enter an address to send tokens to.'),
@@ -211,20 +233,7 @@ class Recipient extends React.Component {
                 color={colors.light.blue}
               />
 
-              {shouldDisplayAvatar && (
-                avatarPreview ?
-                  <Avatar
-                    style={styles.avatar}
-                    address={address.value}
-                    size={34}
-                  /> :
-                  <Icon
-                    style={styles.avatar}
-                    name='avatar-placeholder'
-                    size={34}
-                    color={colors[theme].gray5}
-                  />
-              )}
+              {this.renderAvatar()}
 
               <Input
                 reference={(input) => { this.input = input; }}
@@ -236,7 +245,7 @@ class Recipient extends React.Component {
                   input: [
                     styles.input,
                     styles.addressInput,
-                    (shouldDisplayAvatar ? styles.addressInputWithAvatar : {}),
+                    token.active === tokenMap.LSK.key ? styles.addressInputWithAvatar : null,
                   ],
                   containerStyle: styles.addressInputContainer,
                 }}
