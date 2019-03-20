@@ -155,40 +155,34 @@ class Recipient extends React.Component {
     }
   }
 
-  renderAvatar() {
-    const { theme, styles, settings: { token } } = this.props;
-    const { address, avatarPreview } = this.state;
-
-    if (token.active === tokenMap.LSK.key && avatarPreview) {
-      return (
-        <Avatar
-          style={styles.avatar}
-          address={address.value}
-          size={34}
-        />
-      );
-    }
-
-    return (
-      <Icon
-        style={styles.avatar}
-        name='avatar-placeholder'
-        size={34}
-        color={colors[theme].gray5}
-      />
-    );
-  }
-
   render() {
     const {
-      settings: { token }, navigation, styles, accounts, t, lng,
+      settings: { token }, navigation, styles, accounts, t, lng, theme,
     } = this.props;
-    const { address } = this.state;
+    const { address, avatarPreview } = this.state;
 
     const titles = {
       heading: accounts.followed.length ? t('Enter an address or search in bookmarks.') : t('Enter an address to send tokens to.'),
       inputLabel: accounts.followed.length ? t('Address or label') : t('Address'),
     };
+
+    let avatar = null;
+    if (token.active === tokenMap.LSK.key) {
+      avatar = avatarPreview ? (
+        <Avatar
+          style={styles.avatar}
+          address={address.value}
+          size={34}
+        />
+      ) : (
+        <Icon
+          style={styles.avatar}
+          name='avatar-placeholder'
+          size={34}
+          color={colors[theme].gray5}
+        />
+      );
+    }
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -233,7 +227,7 @@ class Recipient extends React.Component {
                 color={colors.light.blue}
               />
 
-              {this.renderAvatar()}
+              {avatar}
 
               <Input
                 reference={(input) => { this.input = input; }}
