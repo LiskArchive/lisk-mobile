@@ -4,7 +4,7 @@ import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { IconButton } from '../toolBox/button';
 import Icon from '../toolBox/icon';
-import reg from '../../constants/regex';
+// import reg from '../../constants/regex';
 import Input from '../toolBox/input';
 import { colors } from '../../constants/styleGuide';
 import Avatar from '../avatar';
@@ -18,6 +18,7 @@ import {
 } from '../../actions/accounts';
 import { P, Small } from '../toolBox/typography';
 import { decodeLaunchUrl } from '../../utilities/qrCode';
+import { tokenMap } from '../../constants/tokens';
 import HeaderBackButton from '../router/headerBackButton';
 
 @connect(state => ({
@@ -46,10 +47,12 @@ class AddToBookmark extends React.Component {
 
   activeInputRef = null;
   validator = {
-    address: (str) => {
-      if (str === '') return 2;
-      return reg.address.test(str) ? 0 : 1;
-    },
+    // @TODO: should be updated in https://github.com/LiskHQ/lisk-mobile/issues/587
+    address: () => 0,
+    // address: (str) => {
+    //   if (str === '') return 2;
+    //   return reg.address.test(str) ? 0 : 1;
+    // },
     label: (str) => {
       if (str === '') return 2;
       return (str.length > 20 ? 1 : 0);
@@ -184,11 +187,26 @@ class AddToBookmark extends React.Component {
 
   render() {
     const {
-      navigation, theme, styles, t, lng,
+      navigation, theme, styles, t, lng, activeToken,
     } = this.props;
     const {
       address, avatarPreview, label, incomingData, editMode,
     } = this.state;
+
+    const shouldDisplayAvatar = activeToken === tokenMap.LSK.key;
+
+    const renderAvatar = () => (avatarPreview ?
+      <Avatar
+        style={styles.avatar}
+        address={address.value}
+        size={34}
+      /> :
+      <Icon
+        style={styles.avatar}
+        name='avatar-placeholder'
+        size={34}
+        color={colors[theme].gray5}
+      />);
 
     const errors = {
       label: t('The label must be shorter than 20 characters.'),
@@ -236,20 +254,7 @@ class AddToBookmark extends React.Component {
                   iconSize={18}
                   color={colors.light.blue}
                 />
-                {
-                  avatarPreview ?
-                    <Avatar
-                      style={styles.avatar}
-                      address={address.value}
-                      size={34}
-                    /> :
-                    <Icon
-                      style={styles.avatar}
-                      name='avatar-placeholder'
-                      size={34}
-                      color={colors[theme].gray5}
-                    />
-                }
+                { shouldDisplayAvatar ? renderAvatar() : null }
                 <Input
                   label={t('Address')}
                   reference={(input) => { this.addressRef = input; }}
@@ -259,6 +264,7 @@ class AddToBookmark extends React.Component {
                     input: [
                       styles.input,
                       styles.addressInput,
+                      (shouldDisplayAvatar ? styles.addressInputWithAvatar : {}),
                     ],
                     containerStyle: styles.addressInputContainer,
                   }}
@@ -271,7 +277,11 @@ class AddToBookmark extends React.Component {
               <View style={styles.row}>
                 <P style={[styles.label, styles.theme.label]}>Address</P>
                 <View style={styles.staticAddressContainer}>
-                  <Avatar address={incomingData.address || ''} style={styles.staticA} size={35}/>
+                  {
+                    shouldDisplayAvatar ?
+                      <Avatar address={incomingData.address || ''} style={styles.staticAvatar} size={35}/> :
+                      null
+                  }
                   <Small style={[styles.address, styles.theme.address]}>
                     {incomingData.address}
                   </Small>
