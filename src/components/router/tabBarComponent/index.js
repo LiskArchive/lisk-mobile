@@ -30,7 +30,7 @@ class TabBar extends React.Component {
 
     let activeTintColor = styles.theme.tint.color;
     if (settings.token.active === tokenMap.BTC.key) {
-      activeTintColor = colors.light.btc;
+      activeTintColor = colors.light.BTC;
     }
 
     return (
