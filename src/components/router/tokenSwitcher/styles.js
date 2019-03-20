@@ -1,5 +1,3 @@
-import { themes, colors } from '../../../constants/styleGuide';
-
 export default () => ({
   common: {
     title: {
@@ -7,16 +5,12 @@ export default () => ({
     },
     button: {
       margin: 0,
-    },
-  },
-  [themes.light]: {
-    title: {
-      color: colors.light.blue,
-    },
-  },
-  [themes.dark]: {
-    title: {
-      color: colors.dark.blue,
+      width: 24,
+      height: 24,
+      borderRadius: 25,
+      marginRight: 15,
+      marginTop: 7,
+      paddingLeft: 6,
     },
   },
 });

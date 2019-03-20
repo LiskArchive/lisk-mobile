@@ -5,9 +5,12 @@ import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../../actions/settings';
 import withTheme from '../../withTheme';
-import { LabelButton } from '../../toolBox/button';
+import { IconButton } from '../../toolBox/button';
 import getStyles from './styles';
 import AssetSelection from '../../assetSelection';
+import { tokenKeys, tokenMap } from '../../../constants/tokens';
+import { colors } from '../../../constants/styleGuide';
+
 
 @connect(state => ({
   settings: state.settings,
@@ -20,13 +23,19 @@ class TokenSwitcher extends React.Component {
   }
 
   render() {
-    const { styles, settings: { token } } = this.props;
+    const { styles, settings: { token }, theme } = this.props;
+    const style = token.active === tokenKeys[0] ?
+      { backgroundColor: colors[theme].blue } :
+      { backgroundColor: colors[theme].BTC };
 
     return (
-      <LabelButton
-        title={token.active}
+      <IconButton
+        color={colors[theme].white }
+        iconSize={13}
+        title=''
+        icon={tokenMap[token.active].icon}
         onClick={this.onClick}
-        style={styles.button}
+        style={[styles.button, style]}
       />
     );
   }
