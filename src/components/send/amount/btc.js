@@ -1,8 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
+import { BigNumber } from 'bignumber.js';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import { fromRawLsk } from '../../../utilities/conversions';
+import { includeFee, fromRawLsk } from '../../../utilities/conversions';
 import { merge } from '../../../utilities/helpers';
 import Header from './header';
 import Balance from './balance';
@@ -12,6 +13,8 @@ import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { deviceType } from '../../../utilities/device';
 import * as btcTransactionsAPI from '../../../utilities/api/btc/transactions';
+import reg from '../../../constants/regex';
+import DropDownHolder from '../../../utilities/alert';
 
 const isAndroid = deviceType() === 'android';
 
@@ -55,10 +58,47 @@ class AmountBTC extends React.Component {
       .catch(() => this.setState({ unspentTransactionOutputs: [] }));
   }
 
-  validator = () => ({
-    code: 0,
-    message: '',
-  })
+  validateAmount = (amount) => {
+    const { t } = this.props;
+    const { normalizedValue } = amount;
+
+    if (normalizedValue === '' || parseFloat(normalizedValue) === 0) {
+      return {
+        code: -1,
+        message: t('Please enter an amount.'),
+      };
+    }
+
+    if (!reg.amount.test(normalizedValue)) {
+      return {
+        code: 1,
+        message: t('The amount value is invalid.'),
+      };
+    }
+
+    return { code: 0 };
+  }
+
+  validateBalance = (amount, fee) => {
+    const amountValidation = this.validateAmount(amount);
+
+    if (amountValidation.code !== 0) {
+      return amountValidation;
+    }
+
+    const { t, accounts, settings: { token } } = this.props;
+    const balance = new BigNumber(accounts.info[token.active].balance);
+    const total = includeFee(amount.value, fee, true);
+
+    if (balance.isLessThan(total)) {
+      return {
+        code: 1,
+        message: t('Your balance is not sufficient.'),
+      };
+    }
+
+    return { code: 0 };
+  }
 
   onChangeAmount = (value) => {
     const normalizedValue = value.replace(/[^0-9]/g, '.');
@@ -72,70 +112,70 @@ class AmountBTC extends React.Component {
   }
 
   onChangeDynamicFee = (type) => {
-    this.setState({
-      dynamicFeeType: type,
-    });
+    this.setState({ dynamicFeeType: type });
   }
 
   onSubmit = () => {
-    const { nextStep, sharedData, dynamicFees } = this.props;
+    const {
+      t, nextStep, sharedData, dynamicFees,
+    } = this.props;
     const { amount, dynamicFeeType } = this.state;
-    const validity = this.validator(amount.normalizedValue);
 
-    if (validity.code === 0) {
-      const dynamicFeePerByte = dynamicFees[dynamicFeeType];
+    const dynamicFeePerByte = dynamicFees[dynamicFeeType];
+    const fee = this.calculateDynamicFee(dynamicFeePerByte);
+    const balanceValidity = this.validateBalance(amount, fee);
+
+    if (balanceValidity.code === 0) {
+      DropDownHolder.closeAlert();
 
       return nextStep(merge(sharedData, {
         amount: amount.normalizedValue,
-        fee: this.calculateDynamicFee(dynamicFeePerByte),
+        fee,
         dynamicFeeType,
         dynamicFeePerByte,
       }));
     }
 
-    return this.setState({
-      amount: merge(amount, { validity }),
-    });
-  }
-
-  getUnspentTransactionOutputCountToConsume() {
-    const { amount: { value, normalizedValue } } = this.state;
-    const validity = this.validator(normalizedValue);
-    let unspentTransactionOutputCountToConsume = 0;
-
-    if (validity.code === 0) {
-      const [count] = this.state.unspentTransactionOutputs.reduce((result, output) => {
-        if (value > result[1]) {
-          result[0] += 1;
-          result[1] += output.value / (10 ** 8);
-        }
-
-        return result;
-      }, [0, 0]);
-
-      unspentTransactionOutputCountToConsume = count;
-    }
-
-    return unspentTransactionOutputCountToConsume;
+    return DropDownHolder.error(t('Error'), balanceValidity.message);
   }
 
   getValueInCurrency() {
     const { priceTicker, settings: { currency } } = this.props;
-    const { amount: { value, normalizedValue } } = this.state;
+    const { amount } = this.state;
+    const amountValidity = this.validateAmount(amount);
 
     let valueInCurrency = 0;
 
-    if (value && this.validator(normalizedValue).code === 0 && priceTicker[currency]) {
-      valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
+    if (amount.value && amountValidity.code === 0 && priceTicker[currency]) {
+      valueInCurrency = (amount.normalizedValue * priceTicker[currency]).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
 
     return valueInCurrency;
   }
 
+  calculateUnspentTransactionOutputCountToConsume() {
+    const { unspentTransactionOutputs, amount: { value } } = this.state;
+
+    const [count] = unspentTransactionOutputs.reduce((result, output) => {
+      if (value > result[1]) {
+        result[0] += 1;
+        result[1] += output.value / (10 ** 8);
+      }
+
+      return result;
+    }, [0, 0]);
+
+    return count;
+  }
+
   calculateDynamicFee = (dynamicFeePerByte) => {
+    if (this.validateAmount(this.state.amount).code !== 0) {
+      return 0;
+    }
+
     const feeInSatoshis = btcTransactionsAPI.calculateTransactionFee({
-      inputCount: this.getUnspentTransactionOutputCountToConsume(),
+      inputCount: this.calculateUnspentTransactionOutputCountToConsume(),
       outputCount: 2,
       dynamicFeePerByte,
     });
@@ -145,10 +185,8 @@ class AmountBTC extends React.Component {
 
   render() {
     const {
-      accounts, styles, t,
-      settings, dynamicFees,
+      accounts, styles, t, settings, dynamicFees,
     } = this.props;
-
     const { amount, dynamicFeeType, unspentTransactionOutputs } = this.state;
 
     return (
