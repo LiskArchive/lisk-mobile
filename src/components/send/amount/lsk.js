@@ -21,10 +21,6 @@ class AmountLSK extends React.Component {
     amount: {
       value: '',
       normalizedValue: '',
-      validity: {
-        code: 0,
-        message: '',
-      },
     },
   };
 
@@ -76,7 +72,6 @@ class AmountLSK extends React.Component {
       amount: {
         value,
         normalizedValue,
-        validity: -1,
       },
     });
   }
@@ -95,11 +90,7 @@ class AmountLSK extends React.Component {
       }));
     }
 
-    DropDownHolder.error(t('Error'), validity.message);
-
-    return this.setState({
-      amount: merge(amount, { validity }),
-    });
+    return DropDownHolder.error(t('Error'), validity.message);
   }
 
   getValueInCurrency() {
@@ -121,7 +112,6 @@ class AmountLSK extends React.Component {
       accounts, styles, t, settings,
     } = this.props;
     const { amount } = this.state;
-    const valueInCurrency = this.getValueInCurrency();
 
     return (
       <View style={styles.theme.wrapper}>
@@ -151,7 +141,7 @@ class AmountLSK extends React.Component {
               onChange={this.onChange}
               keyboardType='numeric'
               currency={settings.currency}
-              valueInCurrency={valueInCurrency}
+              valueInCurrency={this.getValueInCurrency()}
             />
           </View>
         </KeyboardAwareScrollView>
