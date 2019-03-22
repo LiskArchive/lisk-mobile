@@ -75,20 +75,6 @@ export default () => ({
     avatar: {
       marginBottom: 10,
     },
-    errorContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      marginLeft: 20,
-      paddingRight: 20,
-      opacity: 0,
-    },
-    error: {
-      fontFamily: fonts.family.context,
-      fontSize: fonts.size.input,
-    },
-    errorIcon: {
-      marginRight: 5,
-    },
     visible: {
       opacity: 1,
     },
@@ -119,12 +105,6 @@ export default () => ({
     link: {
       color: colors.light.blue,
     },
-    error: {
-      color: colors.light.gray1,
-    },
-    errorIcon: {
-      color: colors.light.red,
-    },
   },
 
   [themes.dark]: {
@@ -148,12 +128,6 @@ export default () => ({
     },
     link: {
       color: colors.dark.blue,
-    },
-    error: {
-      color: colors.dark.gray4,
-    },
-    errorIcon: {
-      color: colors.dark.red,
     },
   },
 });
