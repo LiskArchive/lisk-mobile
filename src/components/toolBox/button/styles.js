@@ -43,21 +43,13 @@ export default () => ({
 
   [themes.light]: {
     disabledButtonColor: {
-      color: colors.light.gray4,
-    },
-    disabledButtonBg: {
-      backgroundColor: colors.light.white,
-      borderColor: colors.light.gray4,
+      color: colors.light.buttonDisabledText,
     },
   },
 
   [themes.dark]: {
     disabledButtonColor: {
-      color: colors.dark.gray4,
-    },
-    disabledButtonBg: {
-      backgroundColor: colors.dark.screenBgNavy,
-      borderColor: colors.dark.gray4,
+      color: colors.dark.buttonDisabledText,
     },
   },
 });
