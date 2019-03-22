@@ -73,12 +73,12 @@ class Wallet extends React.Component {
     const {
       activeToken, navigation: { setParams }, followedAccounts,
     } = this.props;
-    const storedAccount = followedAccounts[activeToken].filter(item =>
+    const storedAccount = followedAccounts[activeToken].find(item =>
       item.address === this.state.account.address);
 
     setParams({
       title: {
-        placeHolder: storedAccount.length === 1 ? storedAccount[0].label : '',
+        placeHolder: storedAccount ? storedAccount.label : '',
         type: 'wallet',
         token: activeToken,
         balance: this.state.account.balance,
