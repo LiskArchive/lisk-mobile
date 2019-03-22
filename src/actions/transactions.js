@@ -44,8 +44,6 @@ export const transactionsLoaded = data => async (dispatch, getState) => {
  * @param {Function} errorCb - error callback
  */
 export const transactionAdded = (data, successCb, errorCb) => async (dispatch, getState) => {
-  dispatch(loadingStarted(actionTypes.transactionAdded));
-
   const activeToken = getState().settings.token.active;
   const account = getState().accounts.info[activeToken];
 
@@ -66,10 +64,8 @@ export const transactionAdded = (data, successCb, errorCb) => async (dispatch, g
       },
     });
 
-    dispatch(loadingFinished(actionTypes.transactionAdded));
     successCb({ txId: id });
   } catch (error) {
-    dispatch(loadingFinished(actionTypes.transactionAdded));
     errorCb(error);
   }
 };

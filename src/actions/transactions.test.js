@@ -150,7 +150,6 @@ describe('Action: Accounts', () => {
       const successCallback = jest.fn();
 
       const expectedActions = [
-        { type: actionTypes.loadingStarted, data: actionTypes.transactionsAdded },
         {
           type: actionTypes.pendingTransactionAdded,
           data: {
@@ -163,7 +162,6 @@ describe('Action: Accounts', () => {
             type: txConstants.send.type,
           },
         },
-        { type: actionTypes.loadingFinished, data: actionTypes.transactionsAdded },
       ];
 
       transactionsAPI.create.mockResolvedValueOnce('');
@@ -179,17 +177,11 @@ describe('Action: Accounts', () => {
       const successCallback = jest.fn();
       const errorCallback = jest.fn();
 
-      const expectedActions = [
-        { type: actionTypes.loadingStarted, data: actionTypes.transactionsAdded },
-        { type: actionTypes.loadingFinished, data: actionTypes.transactionsAdded },
-      ];
-
       transactionsAPI.create.mockResolvedValueOnce('');
       transactionsAPI.broadcast.mockRejectedValueOnce('Error');
 
       await store.dispatch(transactionAdded(inputData, successCallback, errorCallback));
 
-      expect(store.getActions()).toEqual(expectedActions);
       expect(errorCallback.mock.calls).toHaveLength(1);
     });
   });
