@@ -48,10 +48,8 @@ const accounts = (state = INITIAL_STATE, action = {}) => {
       return merge(state, {
         followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
           [tokenKey]: tokenKey === activeToken ?
-            [
-              ...state.followed[tokenKey]
-                .map(i => (i.address === account.address ? account : i)),
-            ] :
+            state.followed[tokenKey]
+              .map(i => (i.address === account.address ? account : i)) :
             state.followed[tokenKey],
         }), {}),
       });
@@ -74,7 +72,7 @@ const accounts = (state = INITIAL_STATE, action = {}) => {
       return merge(state, {
         followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
           [tokenKey]: tokenKey === action.data.activeToken ?
-            [...state.followed[tokenKey].filter(item => item.address !== action.data.address)] :
+            state.followed[tokenKey].filter(item => item.address !== action.data.address) :
             state.followed[tokenKey],
         }), {}),
       });
