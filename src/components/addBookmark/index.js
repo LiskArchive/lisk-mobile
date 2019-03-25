@@ -195,7 +195,7 @@ class AddToBookmark extends React.Component {
 
     const shouldDisplayAvatar = activeToken === tokenMap.LSK.key;
 
-    const renderAvatar = () => (avatarPreview ?
+    const avatar = (avatarPreview ?
       <Avatar
         style={styles.avatar}
         address={address.value}
@@ -254,7 +254,7 @@ class AddToBookmark extends React.Component {
                   iconSize={18}
                   color={colors.light.blue}
                 />
-                { shouldDisplayAvatar ? renderAvatar() : null }
+                { shouldDisplayAvatar ? avatar : null }
                 <Input
                   label={t('Address')}
                   reference={(input) => { this.addressRef = input; }}
