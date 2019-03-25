@@ -24,7 +24,6 @@ class SecondPassphrase extends React.Component {
   state = {
     secondPassphrase: {
       value: devDefaultSecondPass,
-      validity: devDefaultSecondPass ? validatePassphrase(devDefaultSecondPass) : [],
     },
   };
 
@@ -70,10 +69,7 @@ class SecondPassphrase extends React.Component {
 
   changeHandler = (value, cb) => {
     this.setState({
-      secondPassphrase: {
-        value,
-        validity: [],
-      },
+      secondPassphrase: { value },
     }, () => {
       if (typeof cb === 'function') {
         cb();
@@ -118,7 +114,6 @@ class SecondPassphrase extends React.Component {
       return this.setState({
         secondPassphrase: {
           value: secondPassphrase.value,
-          validity,
         },
       });
     }
