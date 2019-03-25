@@ -10,10 +10,12 @@ import reg from '../../constants/regex';
 import Empty from './empty';
 import withTheme from '../withTheme';
 import { Small } from '../toolBox/typography';
+import { tokenKeys } from '../../constants/tokens';
 import getStyles from './styles';
 
 @connect(state => ({
   list: state.accounts.followed,
+  activeToken: state.settings.token.active,
 }), {
   settingsUpdated: settingsUpdatedAction,
 })
@@ -21,10 +23,11 @@ class Bookmarks extends React.Component {
   render() {
     const {
       styles, list, navigate, query,
-      setRef, draggable, t,
+      setRef, draggable, t, activeToken,
     } = this.props;
+    const showAvatar = activeToken === tokenKeys[0];
 
-    const filterList = list.filter((item) => {
+    const filterList = list[activeToken].filter((item) => {
       if (query.length === 0) return true;
       return (item.address.indexOf(query) >= 0 ||
         item.label.toLowerCase().indexOf(query.toLowerCase()) >= 0);
@@ -44,8 +47,12 @@ class Bookmarks extends React.Component {
               <View style={styles.innerContainer}>
                 <Small style={[styles.noResult, styles.theme.noResult]}>{description}</Small>
               </View> :
-              filterList.map(item =>
-                <Element setRef={setRef} navigate={navigate} key={item.address} data={item} />)
+              filterList.map(item => <Element
+                avatar={showAvatar}
+                setRef={setRef}
+                navigate={navigate}
+                key={`${activeToken}-${item.address}`}
+                data={item} />)
           }
         </Fragment>
       }

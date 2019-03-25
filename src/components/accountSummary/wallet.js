@@ -22,6 +22,7 @@ import { colors, themes } from '../../constants/styleGuide';
 @connect(state => ({
   followedAccounts: state.accounts.followed,
   settings: state.settings,
+  activeToken: state.settings.token.active,
 }), {
   accountFollowed: accountFollowedAction,
   accountUnFollowed: accountUnFollowedAction,
@@ -67,9 +68,9 @@ class AccountSummary extends React.Component {
 
   toggleBookmark = () => {
     const {
-      followedAccounts, account, navigation, accountUnFollowed, t,
+      followedAccounts, account, navigation, accountUnFollowed, t, activeToken,
     } = this.props;
-    const isFollowed = followedAccounts.some(item => item.address === account.address);
+    const isFollowed = followedAccounts[activeToken].some(item => item.address === account.address);
     if (isFollowed) {
       Alert.alert(t('Are you sure?'), '', [
         {
@@ -99,7 +100,7 @@ class AccountSummary extends React.Component {
 
   render() {
     const {
-      styles, account, followedAccounts,
+      styles, account, followedAccounts, activeToken,
       settings: { token }, theme, navigation, t,
     } = this.props;
 
@@ -108,7 +109,7 @@ class AccountSummary extends React.Component {
     const { opacity, top } = this.state.initialAnimations;
     const normalizedBalance = fromRawLsk(account.balance);
     const height = 203;
-    const isFollowed = followedAccounts.some(item => item.address === account.address);
+    const isFollowed = followedAccounts[activeToken].some(item => item.address === account.address);
 
     const followedAccountColor = theme === themes.light ? colors.light.blue : colors.dark.white;
 
@@ -168,7 +169,7 @@ class AccountSummary extends React.Component {
             style={styles.bookmarkButton}
             titleStyle={styles.bookmarkButtonTitle}
             title=''
-            icon={isFollowed ? 'bookmark-full' : 'bookmark'}
+            icon={isFollowed ? 'bookmark-filled' : 'bookmark'}
             color={isFollowed ? followedAccountColor : colors[theme].gray1}
             iconSize={20}
             onClick={this.toggleBookmark} />

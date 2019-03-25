@@ -9,14 +9,12 @@ export const blankSettings = {
 const validateAccounts = (data) => {
   try {
     const parsedData = Array.isArray(data) ? data : JSON.parse(data);
-
     if (
       !parsedData ||
-      !Array.isArray(parsedData)
+      typeof parsedData !== 'object'
     ) {
       return blankAccounts;
     }
-
     return parsedData;
   } catch (error) {
     return blankAccounts;

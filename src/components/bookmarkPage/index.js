@@ -5,7 +5,6 @@ import { P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import reg from '../../constants/regex';
 import Input from '../toolBox/input';
-import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../utilities/device';
 import AddButton from './addButton';
@@ -18,13 +17,7 @@ class Bookmark extends React.Component {
     const { params = {} } = navigation.state;
     return {
       tabBarVisible: params.tabBar,
-      headerRight: <AddButton onPress={params.action} style={params.styles} />,
-      headerLeft: (
-        <IconButton
-          color='transparent'
-          icon='back'
-        />
-      ),
+      headerLeft: <AddButton onPress={params.action} style={params.styles} />,
     };
   };
   activeInputRef = null;
@@ -119,6 +112,10 @@ class Bookmark extends React.Component {
         }),
       ]).start();
     }
+  }
+
+  componentDidUpdate() {
+    this.current = null;
   }
 
   resetPrev(ref, next, address) {

@@ -39,10 +39,17 @@ export const followedAccountsRetrieved = () =>
   (dispatch) => {
     retrieveAccounts()
       .then((accounts) => {
-        dispatch({
-          type: actionTypes.followedAccountsRetrieved,
-          data: accounts,
-        });
+        if (accounts.LSK) {
+          dispatch({
+            type: actionTypes.followedAccountsRetrieved,
+            data: accounts,
+          });
+        } else {
+          dispatch({
+            type: actionTypes.followedAccountsRetrieved,
+            data: { LSK: accounts, BTC: [] },
+          });
+        }
       });
   };
 
@@ -55,13 +62,16 @@ export const followedAccountsRetrieved = () =>
  *
  * @returns {Object} - Pure action function
  */
-export const accountFollowed = (address, label) => ({
-  type: actionTypes.accountFollowed,
-  data: {
-    address,
-    label,
-  },
-});
+export const accountFollowed = (address, label) => (dispatch, getState) => {
+  const activeToken = getState().settings.token.active;
+  dispatch({
+    type: actionTypes.accountFollowed,
+    data: {
+      account: { address, label },
+      activeToken,
+    },
+  });
+};
 
 /**
  * Returns a pure action object to remove the given account
@@ -71,10 +81,13 @@ export const accountFollowed = (address, label) => ({
  *
  * @returns {Object} - Pure action function
  */
-export const accountUnFollowed = address => ({
-  type: actionTypes.accountUnFollowed,
-  data: address,
-});
+export const accountUnFollowed = address => (dispatch, getState) => {
+  const activeToken = getState().settings.token.active;
+  dispatch({
+    type: actionTypes.accountUnFollowed,
+    data: { address, activeToken },
+  });
+};
 
 /**
  * Returns a pure action object to edit/update the values of
@@ -87,10 +100,16 @@ export const accountUnFollowed = address => ({
  *
  * @returns {Object} - Pure action function
  */
-export const accountEdited = (address, label) => ({
-  type: actionTypes.accountEdited,
-  data: { address, label },
-});
+export const accountEdited = (address, label) => (dispatch, getState) => {
+  const activeToken = getState().settings.token.active;
+  dispatch({
+    type: actionTypes.accountEdited,
+    data: {
+      account: { address, label },
+      activeToken,
+    },
+  });
+};
 
 /**
  * Extracts the addresses for all enabled tokens from
@@ -119,6 +138,7 @@ export const accountSignedIn = ({ passphrase }) => (dispatch, getState) => {
       passphrase,
     },
   });
+  dispatch(followedAccountsRetrieved());
 };
 
 export const accountSignedOut = () => ({

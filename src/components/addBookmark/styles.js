@@ -22,7 +22,7 @@ export default () => ({
       position: 'absolute',
       right: 20,
       zIndex: 99,
-      top: 47,
+      top: 24,
       paddingLeft: 10,
       paddingBottom: 10,
       width: 67,
@@ -42,14 +42,15 @@ export default () => ({
       ...Platform.select({
         android: {
           height: 48,
-          paddingLeft: 40,
         },
         ios: {
           height: 48,
           paddingBottom: 10,
-          paddingLeft: 40,
         },
       }),
+    },
+    addressInputWithAvatar: {
+      paddingLeft: 40,
     },
     addressInputContainer: {
       ...Platform.select({
@@ -69,14 +70,15 @@ export default () => ({
     },
     address: {
       fontWeight: 'bold',
-      marginLeft: 10,
+      // marginLeft: 10,
     },
     staticAddressContainer: {
       flexDirection: 'row',
       alignItems: 'center',
     },
     staticAvatar: {
-      paddingBottom: 0,
+      // paddingBottom: 0,
+      marginRight: 10,
     },
     row: {
       marginTop: 25,

@@ -97,6 +97,7 @@ const Tabs = TabNavigator({
       title: t('Bookmarks'),
       tabBarLabel: 'Bookmarks',
       headerTitle: HeaderTitle,
+      headerRight: <TokenSwitcher />,
       headerBackground: <HeaderBackground />,
       headerStyle,
       tabBarIcon: props => <TabBarIcon name='bookmark' {...props} />, //eslint-disable-line
@@ -301,8 +302,7 @@ export default StackNavigator({ //eslint-disable-line
     screen: AddBookmark,
     navigationOptions: {
       headerTitle: props => <HeaderTitle {...props} />, //eslint-disable-line
-      headerRight: <TokenSwitcher />,
-      // headerLeft: props => <HeaderBackButton {...props} icon='cross' />, //eslint-disable-line
+      headerRight: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       headerStyle: {
         overflow: 'hidden',

@@ -50,7 +50,7 @@ class Item extends React.Component {
       addressShortened = stringShortener(tx.recipientAddress, 10, 3);
     }
 
-    const followedAccount = followedAccounts.find(fa => fa.address === address);
+    const followedAccount = followedAccounts[activeToken].find(fa => fa.address === address);
     if (followedAccount) {
       addressShortened = followedAccount.label;
     }
