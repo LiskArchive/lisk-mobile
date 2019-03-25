@@ -91,21 +91,22 @@ class Recipient extends React.Component {
     const { value } = this.state.address;
     const validity = validateAddress(settings.token.active, value);
 
-    if (validity === 0) {
-      DropDownHolder.closeAlert();
-      return this.forward();
+    switch (validity) {
+      default:
+        DropDownHolder.closeAlert();
+        this.forward();
+        break;
+
+      case 1:
+        DropDownHolder.error(t('Error'), t('Invalid address.'));
+        this.setState({ address: { value } });
+        break;
+
+      case -1:
+        DropDownHolder.error(t('Error'), t('Please enter an address.'));
+        this.setState({ address: { value } });
+        break;
     }
-
-    let errorMessage = '';
-
-    if (validity === 1) {
-      errorMessage = t('Invalid address.');
-    } else if (validity === -1) {
-      errorMessage = t('Please enter an address.');
-    }
-
-    DropDownHolder.error(t('Error'), errorMessage);
-    return this.setState({ address: { value } });
   }
 
   forward = (data) => {
