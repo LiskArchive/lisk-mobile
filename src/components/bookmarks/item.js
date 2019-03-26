@@ -37,7 +37,7 @@ class draggableItem extends React.Component {
 
   render() {
     const {
-      styles, data, theme, navigate, setRef, t, avatar,
+      styles, data, theme, navigate, setRef, t, showAvatar,
     } = this.props;
 
     return (<TouchableOpacity
@@ -117,7 +117,7 @@ class draggableItem extends React.Component {
           <View style={styles.row}>
             <View style={styles.innerContainer}>
               {
-                avatar ?
+                showAvatar ?
                 <View style={[styles.itemColumn, styles.avatarContainer]}>
                   <Avatar address={data.address} size={50} style={styles.theme.avatar} />
                 </View> : null
@@ -148,7 +148,7 @@ class Item extends React.Component {
 
   render() {
     const {
-      styles, data, theme, avatar,
+      styles, data, theme, showAvatar,
     } = this.props;
 
     return (<TouchableOpacity
@@ -156,7 +156,7 @@ class Item extends React.Component {
       onPress={this.showDetail}>
       <View style={styles.innerContainer}>
         {
-          avatar ?
+          showAvatar ?
           <View style={[styles.itemColumn, styles.avatarContainer]}>
             <Avatar address={data.address} size={50} style={styles.theme.avatar} />
           </View> : null
