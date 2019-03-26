@@ -8,12 +8,13 @@ import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
 import { SecondaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
-import { H4, B, P, A, Small } from '../../toolBox/typography';
+import { H4, B, P, A } from '../../toolBox/typography';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
 import { tokenMap } from '../../../constants/tokens';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+import DropDownHolder from '../../../utilities/alert';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const getTranslatedMessages = (t, activeToken = tokenMap.LSK.key) => ({
@@ -27,6 +28,7 @@ const getTranslatedMessages = (t, activeToken = tokenMap.LSK.key) => ({
     title: t('Ready to send'),
     subtitle: t(`You are about to send ${activeToken} tokens to the following address.`),
     button: t('Send now'),
+    buttonBusy: t('Sending'),
   },
 });
 
@@ -36,7 +38,6 @@ const getTranslatedMessages = (t, activeToken = tokenMap.LSK.key) => ({
 class Overview extends React.Component {
   state = {
     initialize: false,
-    errorMessage: null,
     busy: false,
   }
 
@@ -86,29 +87,29 @@ class Overview extends React.Component {
   }
 
   send = () => {
-    this.setState({ busy: true });
-
     const {
-      accounts, nextStep, transactionAdded, t,
+      nextStep, transactionAdded, t,
+      accounts: { passphrase },
       sharedData: {
         amount, address, reference, secondPassphrase,
         fee, dynamicFeePerByte,
       },
     } = this.props;
 
+    this.setState({ busy: true });
+    DropDownHolder.closeAlert();
+
     transactionAdded({
       recipientAddress: address,
       amount: toRawLsk(amount),
       fee,
-      passphrase: accounts.passphrase,
+      passphrase,
       secondPassphrase,
       reference,
       dynamicFeePerByte,
     }, nextStep, (error = {}) => {
-      this.setState({
-        errorMessage: error.message || t('An error happened. Please try later.'),
-        busy: false,
-      });
+      this.setState({ busy: false });
+      DropDownHolder.error(t('Error'), error.message || t('An error happened. Please try later.'));
     });
   }
 
@@ -120,11 +121,7 @@ class Overview extends React.Component {
 
   render() {
     const {
-      t,
-      styles,
-      theme,
-      navigation,
-      settings,
+      t, styles, theme, navigation, settings,
       accounts: { followed },
       sharedData: {
         address, amount, reference, fee,
@@ -252,23 +249,14 @@ class Overview extends React.Component {
         </View>
 
         <View>
-          <View style={[styles.errorContainer, this.state.errorMessage ? styles.visible : null]}>
-            <Icon
-              size={16}
-              name='warning'
-              style={[styles.errorIcon, styles.theme.errorIcon]}
-            />
-
-            <Small style={[styles.error, styles.theme.error]}>
-              {this.state.errorMessage}
-            </Small>
-          </View>
-
           <SecondaryButton
             disabled={this.state.busy}
             style={styles.button}
             onClick={this.send}
-            title={translatedMessages[actionType].button}
+            title={this.state.busy ?
+              translatedMessages[actionType].buttonBusy :
+              translatedMessages[actionType].button
+            }
           />
         </View>
       </ScrollView>
