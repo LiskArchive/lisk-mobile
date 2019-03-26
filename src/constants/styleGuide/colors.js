@@ -26,7 +26,6 @@ const light = {
   sendBalanceBg: '#EFF4F9',
   navigationBg: '#FAFCFE',
   inputBorder: '#9EA8B4',
-  buttonDisabledText: '#7A8DA9',
 };
 
 const dark = {
@@ -46,7 +45,6 @@ const dark = {
   sendBalanceBg: '#011832',
   navigationBg: '#00152D',
   inputBorder: '#9EA8B4',
-  buttonDisabledText: '#74869B',
 };
 
 export default {
