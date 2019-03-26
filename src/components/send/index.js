@@ -59,21 +59,30 @@ class Send extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    this.checkQuery(prevProps.navigation.getParam('query', {}));
+    // Reset the progress if active token has changed
+    if (prevProps.settings.token.active !== this.props.settings.token.active) {
+      this.resetMultiStep();
+    } else {
+      this.checkQuery(prevProps.navigation.getParam('query', {}));
+    }
   }
 
   componentWillUnmount() {
     this.subs.forEach(sub => sub.remove());
   }
 
+  resetMultiStep = (query = {}) => {
+    this.nav.reset(query);
+    this.props.navigation.setParams({
+      query: {},
+    });
+  }
+
   checkQuery = (prevQuery = {}) => {
     const query = this.props.navigation.getParam('query', {});
 
     if ((prevQuery !== query) && query && (Object.keys(query).length)) {
-      this.nav.reset(query);
-      this.props.navigation.setParams({
-        query: {},
-      });
+      this.resetMultiStep(query);
     }
   }
 
