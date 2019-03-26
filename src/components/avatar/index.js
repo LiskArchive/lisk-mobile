@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
-import Svg from 'react-native-svg';
+import Svg, { G } from 'react-native-svg';
 import { Gradients, gradientSchemes } from './gradients';
 import {
   getShape, getBackgroundCircle, pickTwo, getHashChunks,
@@ -22,7 +22,9 @@ class Avatar extends React.Component {
     const {
       styles, address, size, scale, translate,
     } = this.props;
+
     let Wrapper = View;
+
     const scaleAttr = {};
     if (scale) {
       Wrapper = Animated.View;
@@ -67,9 +69,11 @@ class Avatar extends React.Component {
             borderRadius: size / 2,
             }]}>
           <Gradients scheme={gradientsSchemesUrlsHashed}/>
-          {shapes.map((shape, i) => (
-            <shape.component {...shape.props} key={`${i}-${shape.component.displayName}-${Math.random()}`}/>
-          ))}
+          <G>
+            {shapes.map((shape, i) => (
+              <shape.component {...shape.props} key={`${i}-${shape.component.displayName}-${Math.random()}`}/>
+            ))}
+          </G>
         </Svg>
       </Wrapper>
     );
