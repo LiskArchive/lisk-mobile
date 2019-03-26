@@ -50,48 +50,55 @@ const Button = (props) => {
 
 const PrimaryButton = (props) => {
   const {
-    theme, disabled, styles, noTheme,
+    theme, disabled, styles, noTheme, style,
   } = props;
+
   const disableColor = (noTheme || theme === themes.light) ?
-    colors.light.white : colors.dark.screenBgNavy;
-  const disabledStyle = disabled ?
-    [styles.disabledButtonBg, styles.theme.disabledButtonBg] : [];
-  return (<LinearGradient
-    start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-    colors={props.disabled ?
-      [disableColor, disableColor] :
-      [colors.light.actionRedAccent, colors.light.actionRed]}
-    style={[
-      styles.buttonWrapper,
-      ...disabledStyle,
-      props.style,
-    ]}>
-    <Button {...props} style={primaryStyle(props)} />
-  </LinearGradient>);
+    colors.light.gray5 : colors.dark.navigationBg;
+
+  return (
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      colors={disabled ?
+        [disableColor, disableColor] :
+        [colors.light.actionRedAccent, colors.light.actionRed]
+      }
+      style={[
+        styles.buttonWrapper,
+        style,
+      ]}
+    >
+      <Button {...props} style={primaryStyle(props)} />
+    </LinearGradient>
+  );
 };
 
 const SecondaryButton = (props) => {
   const {
-    theme, disabled, styles, noTheme,
+    theme, disabled, styles, noTheme, style,
   } = props;
-  const disableColor = (noTheme || theme === themes.light) ?
-    colors.light.white : colors.dark.screenBgNavy;
-  const disabledStyle = disabled ?
-    [styles.disabledButtonBg, styles.theme.disabledButtonBg] : [];
-  return (<LinearGradient
-    start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-    colors={disabled ?
-      [disableColor, disableColor] :
-      [colors.light.actionBlueAccent, colors.light.actionBlue]}
-    style={[
-      styles.buttonWrapper,
-      ...disabledStyle,
-      props.style,
-    ]}>
-    <Button {...props} style={primaryStyle(props)} />
-  </LinearGradient>);
-};
 
+  const disableColor = (noTheme || theme === themes.light) ?
+    colors.light.gray5 : colors.dark.navigationBg;
+
+  return (
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      colors={disabled ?
+        [disableColor, disableColor] :
+        [colors.light.actionBlueAccent, colors.light.actionBlue]
+      }
+      style={[
+        styles.buttonWrapper,
+        style,
+      ]}
+    >
+      <Button {...props} style={primaryStyle(props)} />
+    </LinearGradient>
+  );
+};
 
 const LabelButton = props =>
   <Button {...props} style={labelStyle(props)} />;
