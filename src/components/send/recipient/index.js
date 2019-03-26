@@ -4,7 +4,6 @@ import { translate } from 'react-i18next';
 import { IconButton } from '../../toolBox/button';
 import { P } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
-// import reg from '../../../constants/regex';
 import { tokenMap } from '../../../constants/tokens';
 import Input from '../../toolBox/input';
 import { colors } from '../../../constants/styleGuide';
@@ -17,26 +16,16 @@ import withTheme from '../../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+import { validateAddress } from '../../../utilities/validators';
+import DropDownHolder from '../../../utilities/alert';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 class Recipient extends React.Component {
-  // @TODO: should be updated in https://github.com/LiskHQ/lisk-mobile/issues/587
-  validator = () => 0;
-  /*
-  validator = (str) => {
-    if (str === '') return -1;
-    return reg.address.test(str) ? 0 : 1;
-  };
-  */
-
   scannedData = {};
 
   state = {
-    address: {
-      value: '',
-      validity: 0,
-    },
+    address: { value: '' },
     avatarPreview: false,
   };
 
@@ -86,26 +75,37 @@ class Recipient extends React.Component {
 
   setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
-    if (this.validator(value) === 0) {
+
+    if (validateAddress(this.props.settings.token.active, value) === 0) {
       this.setAvatarPreviewTimeout();
     }
+
     this.setState({
-      address: {
-        value,
-      },
+      address: { value },
       avatarPreview: false,
     });
   }
 
   submitForm = () => {
+    const { t, settings } = this.props;
     const { value } = this.state.address;
-    const validity = this.validator(value);
-    if (validity === 0) {
-      this.forward();
-    } else {
-      this.setState({
-        address: { value, validity },
-      });
+    const validity = validateAddress(settings.token.active, value);
+
+    switch (validity) {
+      default:
+        DropDownHolder.closeAlert();
+        this.forward();
+        break;
+
+      case 1:
+        DropDownHolder.error(t('Error'), t('Invalid address.'));
+        this.setState({ address: { value } });
+        break;
+
+      case -1:
+        DropDownHolder.error(t('Error'), t('Please enter an address.'));
+        this.setState({ address: { value } });
+        break;
     }
   }
 
@@ -158,22 +158,31 @@ class Recipient extends React.Component {
 
   render() {
     const {
-      settings, navigation, theme, styles, accounts, t, lng,
+      settings: { token }, navigation, styles, accounts, t, lng, theme,
     } = this.props;
     const { address, avatarPreview } = this.state;
-
-    const shouldDisplayAvatar = settings.token.active === tokenMap.LSK.key;
 
     const titles = {
       heading: accounts.followed.length ? t('Enter an address or search in bookmarks.') : t('Enter an address to send tokens to.'),
       inputLabel: accounts.followed.length ? t('Address or label') : t('Address'),
     };
 
-    let errorMessage = '';
-    if (address.validity === 1) {
-      errorMessage = t('Invalid address.');
-    } else if (address.validity === -1) {
-      errorMessage = t('Please enter an address.');
+    let avatar = null;
+    if (token.active === tokenMap.LSK.key) {
+      avatar = avatarPreview ? (
+        <Avatar
+          style={styles.avatar}
+          address={address.value}
+          size={34}
+        />
+      ) : (
+        <Icon
+          style={styles.avatar}
+          name='avatar-placeholder'
+          size={34}
+          color={colors[theme].gray5}
+        />
+      );
     }
 
     return (
@@ -219,20 +228,7 @@ class Recipient extends React.Component {
                 color={colors.light.blue}
               />
 
-              {shouldDisplayAvatar && (
-                avatarPreview ?
-                  <Avatar
-                    style={styles.avatar}
-                    address={address.value}
-                    size={34}
-                  /> :
-                  <Icon
-                    style={styles.avatar}
-                    name='avatar-placeholder'
-                    size={34}
-                    color={colors[theme].gray5}
-                  />
-              )}
+              {avatar}
 
               <Input
                 reference={(input) => { this.input = input; }}
@@ -240,13 +236,11 @@ class Recipient extends React.Component {
                 autoCorrect={false}
                 onChange={this.setAddress}
                 value={address.value}
-                error={errorMessage}
                 innerStyles={{
-                  errorMessage: styles.errorMessage,
                   input: [
                     styles.input,
                     styles.addressInput,
-                    (shouldDisplayAvatar ? styles.addressInputWithAvatar : {}),
+                    token.active === tokenMap.LSK.key ? styles.addressInputWithAvatar : null,
                   ],
                   containerStyle: styles.addressInputContainer,
                 }}
