@@ -148,16 +148,19 @@ class Item extends React.Component {
 
   render() {
     const {
-      styles, data, theme,
+      styles, data, theme, avatar,
     } = this.props;
 
     return (<TouchableOpacity
       style={[styles.linkedItem, styles.theme.linkedItem]}
       onPress={this.showDetail}>
       <View style={styles.innerContainer}>
-        <View style={[styles.itemColumn, styles.avatarContainer]}>
-          <Avatar address={data.address} size={50} style={styles.theme.avatar} />
-        </View>
+        {
+          avatar ?
+          <View style={[styles.itemColumn, styles.avatarContainer]}>
+            <Avatar address={data.address} size={50} style={styles.theme.avatar} />
+          </View> : null
+        }
         <View style={styles.column}>
           <B style={[styles.address, styles.theme.address]}>
             {data.label}
