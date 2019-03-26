@@ -110,8 +110,12 @@ class Recipient extends React.Component {
   }
 
   forward = (data) => {
-    const { accounts: { followed }, sharedData, move } = this.props;
-    const isFollowedAccount = address => followed.some(item => item.address === address);
+    const {
+      accounts: { followed }, sharedData, move, settings,
+    } = this.props;
+    const activeToken = settings.token.active;
+    const isFollowedAccount = address => followed[activeToken]
+      .some(item => item.address === address);
 
     const nextData = data
       ? merge(sharedData, data)

@@ -16,6 +16,7 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 @connect(state => ({
   priceTicker: state.service.priceTicker,
   dynamicFees: state.service.dynamicFees,
+  activeToken: state.settings.token.active,
 }), {
   pricesRetrieved: pricesRetrievedAction,
   dynamicFeesRetrieved: dynamicFeesRetrievedAction,
@@ -23,14 +24,15 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 class Amount extends React.Component {
   componentDidMount() {
     const {
-      navigation, accounts, sharedData, move,
+      navigation, accounts, sharedData, move, activeToken,
     } = this.props;
 
     navigation.setParams({
       title: isSmallScreen ? 'Send' : 'Amount',
       showButtonLeft: true,
       action: () => move({
-        to: accounts.followed.some(item => item.address === sharedData.address) ? 0 : 1,
+        to: accounts.followed[activeToken]
+          .some(item => item.address === sharedData.address) ? 0 : 1,
       }),
     });
   }
