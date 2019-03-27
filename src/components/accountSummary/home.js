@@ -23,14 +23,24 @@ const width = deviceWidth();
   settingsUpdated: settingsUpdatedAction,
 })
 class AccountSummary extends React.Component {
-  state = {
-    balanceWidth: 0,
-    addressWidth: 0,
-    initialAnimations: {
-      opacity: new Animated.Value(0),
-      top: new Animated.Value(-20),
-    },
-    activeSlide: 0,
+  constructor(props) {
+    super(props);
+    const { settings: { token } } = props;
+    this.activeTokenIndex = tokenKeys.filter(key => token.list[key]).indexOf(token.active);
+    this.state = {
+      balanceWidth: 0,
+      addressWidth: 0,
+      initialAnimations: {
+        opacity: new Animated.Value(0),
+        top: new Animated.Value(-20),
+      },
+      activeSlide: this.activeTokenIndex,
+    };
+  }
+
+  componentDidMount() {
+    this.screenWidth = Dimensions.get('window').width;
+    this.initialFadeIn();
   }
 
   interpolate = (inputRange, outputRange) =>
@@ -100,11 +110,6 @@ class AccountSummary extends React.Component {
     );
   }
 
-  componentDidMount() {
-    this.screenWidth = Dimensions.get('window').width;
-    this.initialFadeIn();
-  }
-
   componentDidUpdate(prevProps) {
     const { settings: { token: newToken }, accounts: { info: newInfo } } = this.props;
     const { settings: { token: oldToken }, accounts: { info: oldInfo } } = prevProps;
@@ -143,7 +148,7 @@ class AccountSummary extends React.Component {
           profiles.length > 1 ?
             <Carousel
               ref={(el) => { this.carousel = el; }}
-              firstItem={0}
+              firstItem={this.activeTokenIndex}
               data={profiles}
               renderItem={this.renderProfile}
               sliderWidth={width}
