@@ -26,7 +26,6 @@ class AccountSummary extends React.Component {
   constructor(props) {
     super(props);
     const { settings: { token } } = props;
-    this.activeTokenIndex = tokenKeys.filter(key => token.list[key]).indexOf(token.active);
     this.state = {
       balanceWidth: 0,
       addressWidth: 0,
@@ -34,7 +33,7 @@ class AccountSummary extends React.Component {
         opacity: new Animated.Value(0),
         top: new Animated.Value(-20),
       },
-      activeSlide: this.activeTokenIndex,
+      activeSlide: tokenKeys.filter(key => token.list[key]).indexOf(token.active),
     };
   }
 
@@ -148,7 +147,7 @@ class AccountSummary extends React.Component {
           profiles.length > 1 ?
             <Carousel
               ref={(el) => { this.carousel = el; }}
-              firstItem={this.activeTokenIndex}
+              firstItem={this.state.activeSlide}
               data={profiles}
               renderItem={this.renderProfile}
               sliderWidth={width}
