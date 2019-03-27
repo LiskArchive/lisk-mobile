@@ -100,7 +100,7 @@ class AmountBTC extends React.Component {
     return { code: 0 };
   }
 
-  onChangeAmount = (value) => {
+  onAmountChange = (value) => {
     const normalizedValue = value.replace(/[^0-9]/g, '.');
 
     this.setState({
@@ -111,7 +111,7 @@ class AmountBTC extends React.Component {
     });
   }
 
-  onChangeDynamicFee = (type) => {
+  onDynamicFeeChange = (type) => {
     this.setState({ dynamicFeeType: type });
   }
 
@@ -146,7 +146,7 @@ class AmountBTC extends React.Component {
 
     let valueInCurrency = 0;
 
-    if (amount.value && amountValidity.code === 0 && priceTicker[currency]) {
+    if (amountValidity.code === 0 && priceTicker[currency]) {
       valueInCurrency = (amount.normalizedValue * priceTicker[currency]).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
@@ -154,7 +154,7 @@ class AmountBTC extends React.Component {
     return valueInCurrency;
   }
 
-  calculateUnspentTransactionOutputCountToConsume() {
+  getUnspentTransactionOutputCountToConsume() {
     const { unspentTransactionOutputs, amount: { value } } = this.state;
 
     const [count] = unspentTransactionOutputs.reduce((result, output) => {
@@ -169,13 +169,13 @@ class AmountBTC extends React.Component {
     return count;
   }
 
-  calculateDynamicFee = (dynamicFeePerByte) => {
+  getCalculatedDynamicFee = (dynamicFeePerByte) => {
     if (this.validateAmount(this.state.amount).code !== 0) {
       return 0;
     }
 
     const feeInSatoshis = btcTransactionsAPI.calculateTransactionFee({
-      inputCount: this.calculateUnspentTransactionOutputCountToConsume(),
+      inputCount: this.getUnspentTransactionOutputCountToConsume(),
       outputCount: 2,
       dynamicFeePerByte,
     });
@@ -214,7 +214,7 @@ class AmountBTC extends React.Component {
               autoFocus={!isAndroid}
               label={t('Amount (BTC)')}
               value={amount.value}
-              onChange={this.onChangeAmount}
+              onChange={this.onAmountChange}
               keyboardType='numeric'
               currency={settings.currency}
               valueInCurrency={this.getValueInCurrency()}
@@ -222,10 +222,10 @@ class AmountBTC extends React.Component {
 
             {Object.keys(dynamicFees).length > 0 && unspentTransactionOutputs.length > 0 ?
               <DynamicFeeSelector
-                value={this.calculateDynamicFee(dynamicFees[dynamicFeeType])}
+                value={this.getCalculatedDynamicFee(dynamicFees[dynamicFeeType])}
                 data={dynamicFees}
                 selected={dynamicFeeType}
-                onChange={this.onChangeDynamicFee}
+                onChange={this.onDynamicFeeChange}
                 tokenType={settings.token.active}
               /> : null
             }
