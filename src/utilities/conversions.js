@@ -16,10 +16,11 @@ export const toRawLsk = (value) => {
   return bgRaw.toFixed(0);
 };
 
-export const includeFee = (value, fee) => {
+export const includeFee = (value, fee, asRawLsk = false) => {
   const factor = new BigNumber(10).pow(8);
   const bigValue = new BigNumber(value);
   const rawValue = bigValue.multipliedBy(factor);
   const bigFee = new BigNumber(fee);
-  return fromRawLsk(rawValue.plus(bigFee));
+  const result = rawValue.plus(bigFee);
+  return asRawLsk ? result : fromRawLsk(result);
 };

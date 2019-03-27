@@ -48,7 +48,7 @@ class Bookmarks extends React.Component {
                 <Small style={[styles.noResult, styles.theme.noResult]}>{description}</Small>
               </View> :
               filterList.map(item => <Element
-                avatar={showAvatar}
+                showAvatar={showAvatar}
                 setRef={setRef}
                 navigate={navigate}
                 key={`${activeToken}-${item.address}`}

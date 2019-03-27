@@ -126,13 +126,14 @@ class Overview extends React.Component {
       sharedData: {
         address, amount, reference, fee,
       },
+      settings: { token },
     } = this.props;
 
     const actionType = navigation.state.params.initialize || this.state.initialize ?
       'initialize' : 'send';
 
     const translatedMessages = getTranslatedMessages(t, settings.token.active);
-    const bookmark = followed.find(item => item.address === address);
+    const bookmark = followed[token.active].find(item => item.address === address);
 
     return (
       <ScrollView

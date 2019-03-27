@@ -12,6 +12,7 @@ import Input from './input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { deviceType } from '../../../utilities/device';
+import DropDownHolder from '../../../utilities/alert';
 
 const isAndroid = deviceType() === 'android';
 
@@ -20,10 +21,6 @@ class AmountLSK extends React.Component {
     amount: {
       value: '',
       normalizedValue: '',
-      validity: {
-        code: 0,
-        message: '',
-      },
     },
   };
 
@@ -75,26 +72,25 @@ class AmountLSK extends React.Component {
       amount: {
         value,
         normalizedValue,
-        validity: -1,
       },
     });
   }
 
   onSubmit = () => {
-    const { nextStep, sharedData } = this.props;
+    const { t, nextStep, sharedData } = this.props;
     const { amount } = this.state;
     const validity = this.validator(amount.normalizedValue);
 
     if (validity.code === 0) {
+      DropDownHolder.closeAlert();
+
       return nextStep(merge(sharedData, {
         amount: amount.normalizedValue,
         fee: transactions.send.fee,
       }));
     }
 
-    return this.setState({
-      amount: merge(amount, { validity }),
-    });
+    return DropDownHolder.error(t('Error'), validity.message);
   }
 
   getValueInCurrency() {
@@ -113,11 +109,9 @@ class AmountLSK extends React.Component {
 
   render() {
     const {
-      accounts, styles, t,
-      settings,
+      accounts, styles, t, settings,
     } = this.props;
-    const { amount: { value, validity } } = this.state;
-    const valueInCurrency = this.getValueInCurrency();
+    const { amount } = this.state;
 
     return (
       <View style={styles.theme.wrapper}>
@@ -143,12 +137,11 @@ class AmountLSK extends React.Component {
               reference={(el) => { this.input = el; }}
               autoFocus={!isAndroid}
               label={t('Amount (LSK)')}
-              value={value}
+              value={amount.value}
               onChange={this.onChange}
               keyboardType='numeric'
               currency={settings.currency}
-              valueInCurrency={valueInCurrency}
-              error={validity.message}
+              valueInCurrency={this.getValueInCurrency()}
             />
           </View>
         </KeyboardAwareScrollView>
