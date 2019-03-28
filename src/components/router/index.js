@@ -153,7 +153,7 @@ const MainStack = StackNavigator(
       navigationOptions: {
         title: t('Transaction Details'),
         headerTitle: HeaderTitle,
-        headerRight: <TokenSwitcher />,
+        headerRight: HeaderPlaceholderButton,
         headerBackground: <HeaderBackground />,
         headerStyle: {
           backgroundColor: 'transparent',
@@ -167,7 +167,7 @@ const MainStack = StackNavigator(
       screen: Wallet,
       navigationOptions: {
         headerTitle: HomeHeaderTitle,
-        headerRight: <TokenSwitcher />,
+        headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
       },
