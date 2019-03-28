@@ -28,7 +28,7 @@ const DynamicFeeSelector = ({
         <FormattedNumber
           type={B}
           tokenType={tokenType}
-          style={styles.value}
+          style={[styles.value, styles.theme.value]}
         >
           {fromRawLsk(value)}
         </FormattedNumber>
