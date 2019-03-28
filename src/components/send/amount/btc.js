@@ -37,11 +37,11 @@ class AmountBTC extends React.Component {
     this.retrieveUnspentTransactionOutputs();
 
     if (sharedData.amount) {
-      this.onChangeAmount(sharedData.amount);
+      this.onAmountChange(sharedData.amount);
     }
 
     if (sharedData.dynamicFeeType) {
-      this.onChangeDynamicFee(sharedData.dynamicFeeType);
+      this.onDynamicFeeChange(sharedData.dynamicFeeType);
     }
 
     if (isAndroid) {
@@ -122,7 +122,7 @@ class AmountBTC extends React.Component {
     const { amount, dynamicFeeType } = this.state;
 
     const dynamicFeePerByte = dynamicFees[dynamicFeeType];
-    const fee = this.calculateDynamicFee(dynamicFeePerByte);
+    const fee = this.getCalculatedDynamicFee(dynamicFeePerByte);
     const balanceValidity = this.validateBalance(amount, fee);
 
     if (balanceValidity.code === 0) {
