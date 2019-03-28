@@ -6,6 +6,9 @@ import {
   getShape, getBackgroundCircle, pickTwo, getHashChunks,
   randomId, replaceUrlByHashOnScheme,
 } from './utils';
+import { validateAddress } from '../../utilities/validators';
+import Icon from '../toolBox/icon';
+import { colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -20,7 +23,7 @@ class Avatar extends React.Component {
 
   render() {
     const {
-      styles, address, size, scale, translate,
+      styles, address, size, scale, translate, theme,
     } = this.props;
 
     let Wrapper = View;
@@ -34,6 +37,23 @@ class Avatar extends React.Component {
         { translateY: translate },
         { translateX: translate },
       ];
+    }
+    if (validateAddress('LSK', address) !== 0) {
+      return (
+        <Wrapper style={[styles.figure, this.props.style,
+          { width: size, borderRadius: size / 2 }, scaleAttr,
+        ]}>
+          <Icon
+            style={[
+              styles.avatar,
+              { width: '100%', height: '100%' },
+            ]}
+            name='avatar-placeholder'
+            size={size}
+            color={colors[theme].gray5}
+          />
+        </Wrapper>
+      );
     }
     const canvasSize = 200;
 

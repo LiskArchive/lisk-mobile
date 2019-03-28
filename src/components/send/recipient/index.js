@@ -3,7 +3,6 @@ import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import { IconButton } from '../../toolBox/button';
 import { P } from '../../toolBox/typography';
-import Icon from '../../toolBox/icon';
 import { tokenMap } from '../../../constants/tokens';
 import Input from '../../toolBox/input';
 import { colors } from '../../../constants/styleGuide';
@@ -162,32 +161,14 @@ class Recipient extends React.Component {
 
   render() {
     const {
-      settings: { token }, navigation, styles, accounts, t, lng, theme,
+      settings: { token }, navigation, styles, accounts, t, lng,
     } = this.props;
-    const { address, avatarPreview } = this.state;
+    const { address } = this.state;
 
     const titles = {
       heading: accounts.followed.length ? t('Enter an address or search in bookmarks.') : t('Enter an address to send tokens to.'),
       inputLabel: accounts.followed.length ? t('Address or label') : t('Address'),
     };
-
-    let avatar = null;
-    if (token.active === tokenMap.LSK.key) {
-      avatar = avatarPreview ? (
-        <Avatar
-          style={styles.avatar}
-          address={address.value}
-          size={34}
-        />
-      ) : (
-        <Icon
-          style={styles.avatar}
-          name='avatar-placeholder'
-          size={34}
-          color={colors[theme].gray5}
-        />
-      );
-    }
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -232,7 +213,14 @@ class Recipient extends React.Component {
                 color={colors.light.blue}
               />
 
-              {avatar}
+              {
+                token.active === tokenMap.LSK.key ?
+                  <Avatar
+                    style={styles.avatar}
+                    address={address.value}
+                    size={34}
+                  /> : null
+              }
 
               <Input
                 reference={(input) => { this.input = input; }}
