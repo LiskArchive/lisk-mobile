@@ -27,16 +27,18 @@ class TokenSwitcher extends React.Component {
     const style = token.active === tokenKeys[0] ?
       { backgroundColor: colors[theme].blue } :
       { backgroundColor: colors[theme].BTC };
+    const profiles = tokenKeys.filter(key => token.list[key]);
 
     return (
-      <IconButton
-        color={colors[theme].white }
-        iconSize={13}
-        title=''
-        icon={tokenMap[token.active].icon}
-        onClick={this.onClick}
-        style={[styles.button, style]}
-      />
+      profiles.length > 1 ?
+        <IconButton
+          color={colors[theme].white }
+          iconSize={13}
+          title=''
+          icon={tokenMap[token.active].icon}
+          onClick={this.onClick}
+          style={[styles.button, style]}
+        /> : null
     );
   }
 }
