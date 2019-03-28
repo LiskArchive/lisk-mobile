@@ -7,7 +7,7 @@ import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import Share from '../share';
 import { B, A } from '../toolBox/typography';
-import { IconButton } from '../toolBox/button';
+import IconButton from '../router/headerBackButton';
 import Loading from '../transactions/loading';
 import EmptyState from '../transactions/empty';
 import LskSummary from './lskSummary';
@@ -15,7 +15,6 @@ import BtcSummary from './btcSummary';
 import Row from './row';
 import { transactions as transactionsAPI } from '../../utilities/api';
 import getStyles from './styles';
-import { colors, themes } from '../../constants/styleGuide';
 import { merge } from '../../utilities/helpers';
 
 @connect(state => ({
@@ -33,7 +32,6 @@ class TransactionDetail extends React.Component {
           title=''
           icon='back'
           onPress={params.action}
-          color={params.theme === themes.light ? colors.light.black : colors.dark.white}
         />
       ),
     };
