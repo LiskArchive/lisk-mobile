@@ -73,3 +73,17 @@ export const removeUndefinedKeys = obj => Object.keys(obj).reduce((acc, key) => 
 
   return acc;
 }, {});
+
+
+/**
+ * Checks if the given collection is empty.
+ * @param {Object|Array} collection
+ * @returns {Boolean}
+ */
+export const isEmpty = (collection) => {
+  if (Array.isArray(collection)) {
+    return collection.length === 0;
+  }
+
+  return Object.keys(collection).length === 0;
+};
