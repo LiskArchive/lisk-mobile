@@ -34,6 +34,30 @@ export default () => ({
       justifyContent: 'space-between',
     },
 
+    loadingContainer: {
+      width: '100%',
+    },
+
+    loadingDots: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      marginBottom: 3,
+    },
+
+    loadingDot: {
+      backgroundColor: colors.light.BTC,
+      borderRadius: 50,
+      width: 6,
+      height: 6,
+      margin: 2,
+    },
+
+    loadingText: {
+      textAlign: 'center',
+      fontFamily: fonts.family.context,
+      fontSize: fonts.size.small,
+    },
+
     item: {
       paddingTop: 12,
       paddingBottom: 12,
@@ -69,6 +93,10 @@ export default () => ({
       borderColor: colors.light.sendBalanceBg,
     },
 
+    loadingText: {
+      color: colors.light.gray2,
+    },
+
     value: {
       color: colors.light.black,
     },
@@ -81,6 +109,10 @@ export default () => ({
   [themes.dark]: {
     container: {
       borderColor: colors.dark.sendBalanceBg,
+    },
+
+    loadingText: {
+      color: colors.dark.gray2,
     },
 
     label: {

@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import { BigNumber } from 'bignumber.js';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import { includeFee, fromRawLsk } from '../../../utilities/conversions';
-import { merge } from '../../../utilities/helpers';
+import { merge, isEmpty } from '../../../utilities/helpers';
 import Header from './header';
 import Balance from './balance';
 import Input from './input';
@@ -220,15 +220,14 @@ class AmountBTC extends React.Component {
               valueInCurrency={this.getValueInCurrency()}
             />
 
-            {Object.keys(dynamicFees).length > 0 && unspentTransactionOutputs.length > 0 ?
-              <DynamicFeeSelector
-                value={this.getCalculatedDynamicFee(dynamicFees[dynamicFeeType])}
-                data={dynamicFees}
-                selected={dynamicFeeType}
-                onChange={this.onDynamicFeeChange}
-                tokenType={settings.token.active}
-              /> : null
-            }
+            <DynamicFeeSelector
+              isLoading={isEmpty(dynamicFees) || isEmpty(unspentTransactionOutputs)}
+              value={this.getCalculatedDynamicFee(dynamicFees[dynamicFeeType])}
+              data={dynamicFees}
+              selected={dynamicFeeType}
+              onChange={this.onDynamicFeeChange}
+              tokenType={settings.token.active}
+            />
           </View>
         </KeyboardAwareScrollView>
       </View>

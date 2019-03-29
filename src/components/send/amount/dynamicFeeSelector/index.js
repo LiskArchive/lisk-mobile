@@ -8,33 +8,30 @@ import withTheme from '../../../withTheme';
 import getStyles from './styles';
 
 const DynamicFeeSelector = ({
-  value,
-  data,
-  selected,
-  tokenType,
-  onChange,
-  styles,
-  t,
+  value, data, selected, isLoading,
+  tokenType, onChange, styles, t,
 }) => {
-  const itemsToShow = Object.keys(data).filter(key => key !== 'Medium');
+  let content;
 
-  return (
-    <View style={styles.wrapper}>
-      <View style={styles.labelContainer}>
-        <Text style={[styles.label, styles.theme.label]}>
-          {t('Processing speed')}
+  if (isLoading) {
+    content = (
+      <View style={[styles.loadingContainer, styles.item]}>
+        <View style={[styles.loadingDots]}>
+          <View style={styles.loadingDot} />
+          <View style={styles.loadingDot} />
+          <View style={styles.loadingDot} />
+        </View>
+
+        <Text style={[styles.loadingText, styles.theme.loadingText]}>
+          {t('Looking for processing speed options...')}
         </Text>
-
-        <FormattedNumber
-          type={B}
-          tokenType={tokenType}
-          style={[styles.value, styles.theme.value]}
-        >
-          {fromRawLsk(value)}
-        </FormattedNumber>
       </View>
+    );
+  } else {
+    const itemsToShow = Object.keys(data).filter(key => key !== 'Medium');
 
-      <View style={[styles.container, styles.theme.container]}>
+    content = (
+      <React.Fragment>
         {itemsToShow.map((key, index) => (
           <TouchableOpacity
             key={key}
@@ -58,6 +55,30 @@ const DynamicFeeSelector = ({
             </Text>
           </TouchableOpacity>
         ))}
+      </React.Fragment>
+    );
+  }
+
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.labelContainer}>
+        <Text style={[styles.label, styles.theme.label]}>
+          {t('Processing speed')}
+        </Text>
+
+        {isLoading ? null : (
+          <FormattedNumber
+            type={B}
+            tokenType={tokenType}
+            style={[styles.value, styles.theme.value]}
+          >
+            {fromRawLsk(value)}
+          </FormattedNumber>
+        )}
+      </View>
+
+      <View style={[styles.container, styles.theme.container]}>
+        {content}
       </View>
     </View>
   );
