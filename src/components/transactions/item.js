@@ -17,6 +17,12 @@ import getStyles from './styles';
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
 class Item extends React.Component {
+  componentDidMount() {
+    if (typeof this.props.tx.timestamp !== 'number') {
+      this.animation.play();
+    }
+  }
+
   showDetail = () => {
     const {
       navigate, tx, account, incognito,
@@ -28,10 +34,14 @@ class Item extends React.Component {
     });
   }
 
-  componentDidMount() {
-    if (typeof this.props.tx.timestamp !== 'number') {
-      this.animation.play();
+  getAddressText = (address) => {
+    const { t } = this.props;
+
+    if (address === 'Unparsed Address') {
+      return t('Unparsed Address');
     }
+
+    return stringShortener(address, 10, 3);
   }
 
   render() {
@@ -42,17 +52,17 @@ class Item extends React.Component {
 
     let direction = 'incoming';
     let address = tx.senderAddress;
-    let addressShortened = stringShortener(tx.senderAddress, 10, 3);
 
     if (account === tx.senderAddress && tx.type === 0) {
       direction = 'outgoing';
       address = tx.recipientAddress;
-      addressShortened = stringShortener(tx.recipientAddress, 10, 3);
     }
+
+    let addressText = this.getAddressText(address);
 
     const followedAccount = followedAccounts[activeToken].find(fa => fa.address === address);
     if (followedAccount) {
-      addressShortened = followedAccount.label;
+      addressText = followedAccount.label;
     }
 
     const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
@@ -79,7 +89,7 @@ class Item extends React.Component {
               (activeToken === 'LSK' &&
               (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)) ?
               t(transactions[txTypes[tx.type]].title) :
-              addressShortened
+              addressText
             }
           </B>
           {
