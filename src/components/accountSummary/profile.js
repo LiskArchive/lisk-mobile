@@ -8,7 +8,8 @@ import { P, H2 } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import Icon from '../toolBox/icon';
-import { tokenMap } from '../../constants/tokens';
+import { tokenMap, tokenKeys } from '../../constants/tokens';
+import { stringShortener } from '../../utilities/helpers';
 import darkBig from '../../assets/images/balanceBlur/darkBig.png';
 import darkMedium from '../../assets/images/balanceBlur/darkMedium.png';
 import darkSmall from '../../assets/images/balanceBlur/darkSmall.png';
@@ -33,6 +34,8 @@ const Profile = ({
 }) => {
   const AView = Animated.View;
   let balanceSize = 'Small';
+  const address = token === tokenKeys[1] ?
+    stringShortener(account.address, 10, 10) : account.address;
 
   const normalizedBalance = fromRawLsk(account.balance);
   if (normalizedBalance.length > 6) balanceSize = 'Big';
@@ -74,7 +77,8 @@ const Profile = ({
           style={[styles.addressP, styles.theme.homeAddress]}
           iconColor={theme === 'dark' ? colors[theme].gray2 : colors[theme].gray5}
           containerStyle={styles.addressContainer}
-          value={account.address} icon={true} />
+          sharedValue={account.address}
+          value={address} icon={true} />
       </AView>
       <AView style={[styles.balance,
         {
