@@ -103,18 +103,25 @@ class TransactionDetail extends React.Component {
 
   navigate = (address) => {
     const { navigation, account, activeToken } = this.props;
-    if (address !== account[activeToken].address) {
+
+    if (address !== account[activeToken].address && address !== 'Unparsed Address') {
       navigation.navigate('Wallet', { address });
     }
   }
 
-  getAccountLabel = (accountId) => {
-    const followedAccount = this.props.followedAccounts[this.props.activeToken]
-      .find(a => a.address === accountId);
+  getAccountLabel = (address) => {
+    const { t, followedAccounts, activeToken } = this.props;
+
+    if (address === 'Unparsed Address') {
+      return t('Unparsed Address');
+    }
+
+    const followedAccount = followedAccounts[activeToken].find(a => a.address === address);
     if (followedAccount) {
       return followedAccount.label;
     }
-    return accountId;
+
+    return address;
   };
 
   openExplorer = () => {
