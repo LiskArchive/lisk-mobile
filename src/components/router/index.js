@@ -71,10 +71,10 @@ const Tabs = TabNavigator({
   },
   Request: {
     screen: Request,
-    navigationOptions: () => ({
+    navigationOptions: ({ navigation }) => ({
       title: t('Request'),
       headerTitle: HeaderTitle,
-      headerRight: <TokenSwitcher />,
+      headerRight: <TokenSwitcher navigation={navigation} />,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       headerStyle,
@@ -83,21 +83,21 @@ const Tabs = TabNavigator({
   },
   Send: {
     screen: Send,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       headerTitle: HeaderTitle,
-      headerRight: <TokenSwitcher />,
+      headerRight: <TokenSwitcher navigation={navigation} />,
       headerBackground: <HeaderBackground />,
       headerStyle,
       tabBarIcon: props => <TabBarIcon name='send' {...props} />, //eslint-disable-line
-    },
+    }),
   },
   Bookmarks: {
     screen: Bookmark,
-    navigationOptions: () => ({
+    navigationOptions: ({ navigation }) => ({
       title: t('Bookmarks'),
       tabBarLabel: 'Bookmarks',
       headerTitle: HeaderTitle,
-      headerRight: <TokenSwitcher />,
+      headerRight: <TokenSwitcher navigation={navigation} />,
       headerBackground: <HeaderBackground />,
       headerStyle,
       tabBarIcon: props => <TabBarIcon name='bookmark' {...props} />, //eslint-disable-line
@@ -105,15 +105,15 @@ const Tabs = TabNavigator({
   },
   Settings: {
     screen: Settings,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       title: t('Settings'),
       headerTitle: HeaderTitle,
-      headerRight: <TokenSwitcher />,
+      headerRight: <TokenSwitcher navigation={navigation} />,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       headerStyle,
       tabBarIcon: props => <TabBarIcon name='settings' {...props} />, //eslint-disable-line
-    },
+    }),
   },
 }, {
   tabBarComponent: TabBarComponent,
@@ -174,25 +174,25 @@ const MainStack = StackNavigator(
     },
     About: {
       screen: About,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         title: t('About Lisk'),
         headerTitle: HeaderTitle,
-        headerRight: <TokenSwitcher />,
+        headerRight: <TokenSwitcher navigation={navigation} />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
-      },
+      }),
     },
     Terms: {
       screen: Terms,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         title: t('Terms of use'),
         headerTitle: HeaderTitle,
-        headerRight: <TokenSwitcher />,
+        headerRight: <TokenSwitcher navigation={navigation} />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
-      },
+      }),
     },
     CurrencySelection: {
       screen: CurrencySelection,
@@ -207,56 +207,56 @@ const MainStack = StackNavigator(
     },
     ManageAssets: {
       screen: ManageAssets,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         title: t('Manage assets'),
         headerTitle: HeaderTitle,
-        headerRight: <TokenSwitcher />,
+        headerRight: <TokenSwitcher navigation={navigation} />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
-      },
+      }),
     },
     LanguageSelection: {
       screen: LanguageSelection,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         title: t('Select your language'),
         headerTitle: HeaderTitle,
-        headerRight: <TokenSwitcher />,
+        headerRight: <TokenSwitcher navigation={navigation} />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
-      },
+      }),
     },
     EnableBioAuth: {
       screen: EnableBioAuth,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         headerTitle: HeaderTitle,
-        headerRight: <TokenSwitcher />,
+        headerRight: <TokenSwitcher navigation={navigation} />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
-      },
+      }),
     },
     DisableBioAuth: {
       screen: DisableBioAuth,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         headerTitle: HeaderTitle,
-        headerRight: <TokenSwitcher />,
+        headerRight: <TokenSwitcher navigation={navigation} />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
-      },
+      }),
     },
     PassphraseBackup: {
       screen: PassphraseBackup,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         title: t('Passphrase backup'),
         headerTitle: HeaderTitle,
-        headerRight: <TokenSwitcher />,
+        headerRight: <TokenSwitcher navigation={navigation} />,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
         headerStyle,
-      },
+      }),
     },
     Intro: {
       screen: Intro,

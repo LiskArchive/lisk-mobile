@@ -1,6 +1,5 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { withNavigation } from 'react-navigation';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../../actions/settings';
@@ -43,4 +42,4 @@ class TokenSwitcher extends React.Component {
   }
 }
 
-export default withTheme(withNavigation(TokenSwitcher), getStyles());
+export default withTheme(TokenSwitcher, getStyles());
