@@ -16,6 +16,7 @@ import Row from './row';
 import { transactions as transactionsAPI } from '../../utilities/api';
 import getStyles from './styles';
 import { merge } from '../../utilities/helpers';
+import btcConfig from '../../../btc.config';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
@@ -125,7 +126,7 @@ class TransactionDetail extends React.Component {
   };
 
   openExplorer = () => {
-    Linking.openURL(`https://www.blockchain.com/btc/tx/${this.state.id}`)
+    Linking.openURL(btcConfig.getTransactionExplorerURL(this.state.tx.id))
       // eslint-disable-next-line no-console
       .catch(err => console.error('An error occurred', err));
   };

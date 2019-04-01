@@ -8,6 +8,7 @@ export default {
   minerFeesURL: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',
   network: isTestnet ? bitcoin.networks.testnet : bitcoin.networks.bitcoin,
   derivationPath: isTestnet ? "m/44'/1'/0'/0/0" : "m/44'/0'/0'/0/0",
+  getTransactionExplorerURL: id => `https://www.blockchain.com/${isTestnet ? 'btctest' : 'btc'}/tx/${id}`,
   requestOptions: {
     method: 'GET',
     headers: {
