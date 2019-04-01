@@ -34,12 +34,12 @@ const normalizeTransactionsResponse = ({
   if (ownedInput) {
     data.senderAddress = address;
     const extractedAddress = tx.out[0].addr;
-    data.recipientAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : '';
+    data.recipientAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : 'Unparsed Address';
     data.amount = tx.out[0].value;
   } else {
     const output = tx.out.find(out => out.addr === address);
     const extractedAddress = tx.inputs[0].prev_out.addr;
-    data.senderAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : '';
+    data.senderAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : 'Unparsed Address';
     data.recipientAddress = address;
     data.amount = output.value;
   }
