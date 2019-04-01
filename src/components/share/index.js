@@ -6,7 +6,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const Share = ({
-  styles, icon, value, style, type, children, containerStyle, iconColor, theme, sharedValue,
+  styles, icon, value, style, type, children, containerStyle, iconColor, theme, title,
 }) => {
   const Element = type || Text;
 
@@ -15,16 +15,16 @@ const Share = ({
       <Element
         style={style}
         onPress={() => ShareAPI.share({
-          message: sharedValue || value || children,
+          message: value || children,
           url: '',
-        })}>{children || value}</Element>
+        })}>{children || title}</Element>
       {
         icon ? <Icon
                 style={styles.icon}
                 name='share'
                 size={14}
                 onPress={() => ShareAPI.share({
-                  message: sharedValue || value || children,
+                  message: value || children,
                   url: '',
                 })}
                 color={iconColor || colors[theme].gray2} /> : null
