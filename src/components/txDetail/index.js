@@ -223,6 +223,7 @@ class TransactionDetail extends React.Component {
             <Share
               type={B}
               value={tx.id}
+              title={tx.id}
               icon={true}
               style={[styles.value, styles.theme.value, styles.transactionId]}
             /> :

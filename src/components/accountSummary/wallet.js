@@ -149,8 +149,8 @@ class AccountSummary extends React.Component {
             style={[styles.addressP, styles.theme.walletAddress]}
             iconColor={theme === 'dark' ? colors[theme].gray2 : colors[theme].gray1}
             containerStyle={styles.addressContainer}
-            sharedValue={account.address}
-            value={address}
+            value={account.address}
+            title={address}
             icon={true} />
         </AView>
         <AView style={[styles.balance, { opacity },

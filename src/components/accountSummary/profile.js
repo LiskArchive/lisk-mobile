@@ -77,8 +77,8 @@ const Profile = ({
           style={[styles.addressP, styles.theme.homeAddress]}
           iconColor={theme === 'dark' ? colors[theme].gray2 : colors[theme].gray5}
           containerStyle={styles.addressContainer}
-          sharedValue={account.address}
-          value={address} icon={true} />
+          value={account.address}
+          title={address} icon={true} />
       </AView>
       <AView style={[styles.balance,
         {
