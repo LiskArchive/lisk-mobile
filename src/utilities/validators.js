@@ -23,6 +23,7 @@ export const validateAddress = (tokenType, address) => {
     // Reference: https://github.com/bitcoinjs/bitcoinjs-lib/issues/890
     case tokenMap.BTC.key:
       try {
+        bitcoin.address.fromBase58Check(address); // eliminates segwit addresses
         bitcoin.address.toOutputScript(address, btcConfig.network);
         return 0;
       } catch (e) {

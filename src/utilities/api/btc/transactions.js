@@ -2,6 +2,8 @@ import bitcoin from 'bitcoinjs-lib';
 import config from '../../../../btc.config';
 import { extractAddress, getDerivedPathFromPassphrase } from './account';
 import { merge } from '../../helpers';
+import { validateAddress } from '../../validators';
+import { tokenMap } from '../../../constants/tokens';
 
 /**
  * Normalizes transaction data retrieved from Blockchain.info API
@@ -31,11 +33,13 @@ const normalizeTransactionsResponse = ({
 
   if (ownedInput) {
     data.senderAddress = address;
-    data.recipientAddress = tx.out[0].addr;
+    const extractedAddress = tx.out[0].addr;
+    data.recipientAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : 'Unparsed Address';
     data.amount = tx.out[0].value;
   } else {
     const output = tx.out.find(out => out.addr === address);
-    data.senderAddress = tx.inputs[0].prev_out.addr;
+    const extractedAddress = tx.inputs[0].prev_out.addr;
+    data.senderAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : 'Unparsed Address';
     data.recipientAddress = address;
     data.amount = output.value;
   }

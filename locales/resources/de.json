@@ -183,5 +183,6 @@
   "Here you will be able to manage your assets, in order to use them in the app.": "",
   "Primary": "",
   "You don't have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
-  "Error": "Fehler"
+  "Error": "Fehler",
+  "Unparsed Address": "Unparsed Address"
 }
