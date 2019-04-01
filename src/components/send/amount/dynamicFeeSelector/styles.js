@@ -17,8 +17,6 @@ export default () => ({
     label: {
       color: colors.light.gray1,
       fontFamily: fonts.family.contextLight,
-      fontSize: fonts.size.input,
-      fontWeight: '400',
     },
 
     value: {
@@ -54,8 +52,6 @@ export default () => ({
 
     loadingText: {
       textAlign: 'center',
-      fontFamily: fonts.family.context,
-      fontSize: fonts.size.small,
     },
 
     item: {
@@ -80,7 +76,6 @@ export default () => ({
 
     itemLabel: {
       fontFamily: fonts.family.contextSemiBold,
-      fontSize: fonts.size.small,
     },
 
     selectedItemLabel: {

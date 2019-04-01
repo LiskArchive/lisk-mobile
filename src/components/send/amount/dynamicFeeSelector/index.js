@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 import FormattedNumber from '../../../formattedNumber';
 import { fromRawLsk } from '../../../../utilities/conversions';
-import { B } from '../../../toolBox/typography';
+import { B, Small } from '../../../toolBox/typography';
 import withTheme from '../../../withTheme';
 import getStyles from './styles';
 
@@ -22,9 +22,9 @@ const DynamicFeeSelector = ({
           <View style={styles.loadingDot} />
         </View>
 
-        <Text style={[styles.loadingText, styles.theme.loadingText]}>
+        <Small style={[styles.loadingText, styles.theme.loadingText]}>
           {t('Looking for processing speed options...')}
-        </Text>
+        </Small>
       </View>
     );
   } else {
@@ -46,13 +46,13 @@ const DynamicFeeSelector = ({
               },
             ]}
           >
-            <Text style={[
+            <Small style={[
               styles.itemLabel,
               styles.theme.itemLabel,
               key === selected ? styles.selectedItemLabel : null,
             ]}>
               {key}
-            </Text>
+            </Small>
           </TouchableOpacity>
         ))}
       </React.Fragment>
@@ -62,9 +62,9 @@ const DynamicFeeSelector = ({
   return (
     <View style={styles.wrapper}>
       <View style={styles.labelContainer}>
-        <Text style={[styles.label, styles.theme.label]}>
+        <Small style={[styles.label, styles.theme.label]}>
           {t('Processing speed')}
-        </Text>
+        </Small>
 
         {isLoading ? null : (
           <FormattedNumber
