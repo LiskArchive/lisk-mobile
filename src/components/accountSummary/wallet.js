@@ -10,11 +10,12 @@ import Avatar from '../avatar';
 import Icon from '../toolBox/icon';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
-import { tokenMap } from '../../constants/tokens';
+import { tokenMap, tokenKeys } from '../../constants/tokens';
 import Share from '../share';
 import { P, H2 } from '../toolBox/typography';
 import { IconButton } from '../toolBox/button';
 import easing from '../../utilities/easing';
+import { stringShortener } from '../../utilities/helpers';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../constants/styleGuide';
@@ -103,6 +104,8 @@ class AccountSummary extends React.Component {
       styles, account, followedAccounts, activeToken,
       settings: { token }, theme, navigation, t,
     } = this.props;
+    const address = token.active === tokenKeys[1] ?
+      stringShortener(account.address, 10, 10) : account.address;
 
     const { interpolate } = this;
     const AView = Animated.View;
@@ -146,7 +149,9 @@ class AccountSummary extends React.Component {
             style={[styles.addressP, styles.theme.walletAddress]}
             iconColor={theme === 'dark' ? colors[theme].gray2 : colors[theme].gray1}
             containerStyle={styles.addressContainer}
-            value={account.address} icon={true} />
+            value={account.address}
+            title={address}
+            icon={true} />
         </AView>
         <AView style={[styles.balance, { opacity },
           {

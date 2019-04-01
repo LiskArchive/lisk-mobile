@@ -92,6 +92,7 @@ class Request extends React.Component {
               <Share
                 type={TouchableWithoutFeedback}
                 value={url || address}
+                title={url || address}
               >
                 <View style={styles.shareContent}>
                   <QRCode
