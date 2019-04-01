@@ -17,8 +17,6 @@ export default () => ({
     label: {
       color: colors.light.gray1,
       fontFamily: fonts.family.contextLight,
-      fontSize: fonts.size.input,
-      fontWeight: '400',
     },
 
     value: {
@@ -32,6 +30,28 @@ export default () => ({
       borderRadius: itemBorderRadius,
       alignItems: 'center',
       justifyContent: 'space-between',
+    },
+
+    loadingContainer: {
+      width: '100%',
+    },
+
+    loadingDots: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      marginBottom: 3,
+    },
+
+    loadingDot: {
+      backgroundColor: colors.light.BTC,
+      borderRadius: 50,
+      width: 6,
+      height: 6,
+      margin: 2,
+    },
+
+    loadingText: {
+      textAlign: 'center',
     },
 
     item: {
@@ -56,7 +76,6 @@ export default () => ({
 
     itemLabel: {
       fontFamily: fonts.family.contextSemiBold,
-      fontSize: fonts.size.small,
     },
 
     selectedItemLabel: {
@@ -67,6 +86,10 @@ export default () => ({
   [themes.light]: {
     container: {
       borderColor: colors.light.sendBalanceBg,
+    },
+
+    loadingText: {
+      color: colors.light.gray2,
     },
 
     value: {
@@ -81,6 +104,10 @@ export default () => ({
   [themes.dark]: {
     container: {
       borderColor: colors.dark.sendBalanceBg,
+    },
+
+    loadingText: {
+      color: colors.dark.gray2,
     },
 
     label: {

@@ -1,40 +1,37 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 import FormattedNumber from '../../../formattedNumber';
 import { fromRawLsk } from '../../../../utilities/conversions';
-import { B } from '../../../toolBox/typography';
+import { B, Small } from '../../../toolBox/typography';
 import withTheme from '../../../withTheme';
 import getStyles from './styles';
 
 const DynamicFeeSelector = ({
-  value,
-  data,
-  selected,
-  tokenType,
-  onChange,
-  styles,
-  t,
+  value, data, selected, isLoading,
+  tokenType, onChange, styles, t,
 }) => {
-  const itemsToShow = Object.keys(data).filter(key => key !== 'Medium');
+  let content;
 
-  return (
-    <View style={styles.wrapper}>
-      <View style={styles.labelContainer}>
-        <Text style={[styles.label, styles.theme.label]}>
-          {t('Processing speed')}
-        </Text>
+  if (isLoading) {
+    content = (
+      <View style={[styles.loadingContainer, styles.item]}>
+        <View style={[styles.loadingDots]}>
+          <View style={styles.loadingDot} />
+          <View style={styles.loadingDot} />
+          <View style={styles.loadingDot} />
+        </View>
 
-        <FormattedNumber
-          type={B}
-          tokenType={tokenType}
-          style={[styles.value, styles.theme.value]}
-        >
-          {fromRawLsk(value)}
-        </FormattedNumber>
+        <Small style={[styles.loadingText, styles.theme.loadingText]}>
+          {t('Looking for processing speed options...')}
+        </Small>
       </View>
+    );
+  } else {
+    const itemsToShow = Object.keys(data).filter(key => key !== 'Medium');
 
-      <View style={[styles.container, styles.theme.container]}>
+    content = (
+      <React.Fragment>
         {itemsToShow.map((key, index) => (
           <TouchableOpacity
             key={key}
@@ -49,15 +46,39 @@ const DynamicFeeSelector = ({
               },
             ]}
           >
-            <Text style={[
+            <Small style={[
               styles.itemLabel,
               styles.theme.itemLabel,
               key === selected ? styles.selectedItemLabel : null,
             ]}>
               {key}
-            </Text>
+            </Small>
           </TouchableOpacity>
         ))}
+      </React.Fragment>
+    );
+  }
+
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.labelContainer}>
+        <Small style={[styles.label, styles.theme.label]}>
+          {t('Processing speed')}
+        </Small>
+
+        {isLoading ? null : (
+          <FormattedNumber
+            type={B}
+            tokenType={tokenType}
+            style={[styles.value, styles.theme.value]}
+          >
+            {fromRawLsk(value)}
+          </FormattedNumber>
+        )}
+      </View>
+
+      <View style={[styles.container, styles.theme.container]}>
+        {content}
       </View>
     </View>
   );

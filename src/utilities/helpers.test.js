@@ -3,6 +3,7 @@ import {
   merge,
   stringShortener,
   removeUndefinedKeys,
+  isEmpty,
 } from './helpers';
 
 import { themes } from '../constants/styleGuide';
@@ -124,6 +125,16 @@ describe('helpers', () => {
     it('removes undefined keys from the source object', () => {
       const source = { a: undefined, b: 'b', c: 0 };
       expect(removeUndefinedKeys(source)).toEqual({ b: 'b', c: 0 });
+    });
+  });
+
+  describe('isEmpty', () => {
+    it('works properly with arrays', () => {
+      expect(isEmpty([])).toBe(true);
+    });
+
+    it('works properly with objects', () => {
+      expect(isEmpty({ test: 'test' })).toBe(false);
     });
   });
 });
