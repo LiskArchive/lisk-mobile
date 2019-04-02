@@ -238,3 +238,11 @@ export const broadcast = transaction => new Promise(async (resolve, reject) => {
     reject(error);
   }
 });
+
+/**
+ * Generates a Transaction Explorer URL for given transaction id
+ * based on the configured network type
+ * @param {String} - Transaction ID
+ * @returns {String} - URL
+ */
+export const getTransactionExplorerURL = id => `https://www.blockchain.com/${config.isTestnet ? 'btctest' : 'btc'}/tx/${id}`;
