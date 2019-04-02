@@ -29,7 +29,10 @@ describe('actions: service', () => {
 
       expect(store.getActions()).toEqual([{
         type: actionTypes.pricesRetrieved,
-        priceTicker: tickers,
+        data: {
+          priceTicker: tickers,
+          activeToken: settings.token.active,
+        },
       }]);
     });
 
