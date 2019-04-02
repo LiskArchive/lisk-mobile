@@ -17,6 +17,7 @@ class BiometricAuth extends React.Component {
   state = {
     opacity: new Animated.Value(0),
     tried: false,
+    busy: false,
   }
 
   unauthorizedAnimation = () => {
@@ -26,9 +27,17 @@ class BiometricAuth extends React.Component {
   }
 
   onClick = () => {
-    bioMetricAuthentication({
-      successCallback: () => this.props.signIn(this.props.passphrase, 'biometricAuth'),
-      androidError: this.unauthorizedAnimation,
+    this.setState({ busy: true }, () => {
+      bioMetricAuthentication({
+        successCallback: () => {
+          this.setState({ busy: false });
+          this.props.signIn(this.props.passphrase, 'biometricAuth');
+        },
+        errorCallback: () => {
+          this.setState({ busy: false });
+        },
+        androidError: this.unauthorizedAnimation,
+      });
     });
   }
 
@@ -46,7 +55,7 @@ class BiometricAuth extends React.Component {
 
   render() {
     const { t, sensorType, toggleView } = this.props;
-    const { opacity, tried } = this.state;
+    const { opacity, tried, busy } = this.state;
 
     return (<View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -77,19 +86,25 @@ class BiometricAuth extends React.Component {
             style={styles.authTypeIcon} />
         </Animated.View>
       </View>
+
       <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
         <P style={[styles.question, styles.fillWidth, tried ? styles.error : styles.invisible]}>
-          { t('Unauthorized! Please try again.') }
+          {t('Unauthorized! Please try again.')}
         </P>
+
         <View style={styles.column}>
           <SecondaryButton
             style={styles.button}
-            title={t('Sign in using bioAuth', { sensorType })}
-            onClick={this.onClick} />
+            title={busy ? t('Signing in...') : t('Sign in using bioAuth', { sensorType })}
+            onClick={this.onClick}
+            disabled={busy}
+          />
+
           <Button
             style={styles.outlineButton}
             title={t('Sign in manually')}
-            onClick={toggleView} />
+            onClick={toggleView}
+          />
         </View>
       </Animated.View>
     </View>);
