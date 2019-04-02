@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Animated } from 'react-native';
+import { Platform, View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
@@ -20,23 +20,30 @@ class BiometricAuth extends React.Component {
     busy: false,
   }
 
-  unauthorizedAnimation = () => {
+  playUnAuthorizedAnimation = () => {
     this.setState({ tried: true }, () => {
-      this.unAuthAnimEl.play();
+      this.props.hideDialog(() => {
+        this.unAuthAnimEl.play();
+      });
     });
   }
 
   onClick = () => {
     this.setState({ busy: true }, () => {
+      if (Platform.OS === 'android') {
+        this.props.showDialog();
+      }
+
       bioMetricAuthentication({
         successCallback: () => {
-          this.setState({ busy: false });
-          this.props.signIn(this.props.passphrase, 'biometricAuth');
+          this.props.hideDialog(() => {
+            this.props.signIn(this.props.passphrase, 'biometricAuth');
+          });
         },
         errorCallback: () => {
           this.setState({ busy: false });
         },
-        androidError: this.unauthorizedAnimation,
+        androidError: this.playUnAuthorizedAnimation,
       });
     });
   }

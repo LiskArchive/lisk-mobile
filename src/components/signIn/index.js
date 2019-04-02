@@ -301,7 +301,10 @@ class SignIn extends React.Component {
             toggleView={this.toggleView}
             sensorType={sensorType}
             passphrase={storedPassphrase}
-            signIn={this.onFormSubmission} /> : null
+            signIn={this.onFormSubmission}
+            showDialog={this.showDialog}
+            hideDialog={this.hideDialog}
+          /> : null
       }
       {
         view === 'form' ?
