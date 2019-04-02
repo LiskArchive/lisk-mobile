@@ -253,6 +253,9 @@ const styles = {
   backButtonTitle: {
     color: colors.light.blue,
   },
+  bioAuthError: {
+    marginBottom: 8,
+  },
 };
 
 export default StyleSheet.create(styles);

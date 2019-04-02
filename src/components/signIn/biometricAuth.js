@@ -21,7 +21,7 @@ class BiometricAuth extends React.Component {
   }
 
   playUnAuthorizedAnimation = () => {
-    this.setState({ tried: true }, () => {
+    this.setState({ tried: true, busy: false }, () => {
       this.props.hideDialog(() => {
         this.unAuthAnimEl.play();
       });
@@ -40,9 +40,7 @@ class BiometricAuth extends React.Component {
             this.props.signIn(this.props.passphrase, 'biometricAuth');
           });
         },
-        errorCallback: () => {
-          this.setState({ busy: false });
-        },
+        errorCallback: this.playUnAuthorizedAnimation,
         androidError: this.playUnAuthorizedAnimation,
       });
     });
@@ -95,7 +93,12 @@ class BiometricAuth extends React.Component {
       </View>
 
       <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
-        <P style={[styles.question, styles.fillWidth, tried ? styles.error : styles.invisible]}>
+        <P style={[
+          styles.bioAuthError,
+          styles.question,
+          styles.fillWidth,
+          tried ? styles.error : styles.invisible,
+        ]}>
           {t('Unauthorized! Please try again.')}
         </P>
 
