@@ -52,7 +52,7 @@ const response = {
             spent: false,
             tx_index: 411031256,
             type: 0,
-            addr: '3AoZ4rm7qZWcCzNHMDhh41zJE5LNfr7Gx2',
+            addr: 'bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4',
             value: 401723000,
             n: 0,
             script: 'a91463f59fff9f9f13075e445d1ee6f864d0f375f91f87',
@@ -201,7 +201,7 @@ describe('api/btc/transactions', () => {
             confirmations: (600000 - 560808) + 1,
             fee: 1600,
             senderAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
-            recipientAddress: '3AoZ4rm7qZWcCzNHMDhh41zJE5LNfr7Gx2',
+            recipientAddress: 'Unparsed Address',
             amount: 401723000,
             data: '',
             type: 0,
@@ -225,7 +225,7 @@ describe('api/btc/transactions', () => {
             confirmations: 560808,
             fee: 1600,
             senderAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
-            recipientAddress: '3AoZ4rm7qZWcCzNHMDhh41zJE5LNfr7Gx2',
+            recipientAddress: 'Unparsed Address',
             amount: 401723000,
             type: 0,
             data: '',
@@ -365,6 +365,18 @@ describe('api/btc/transactions', () => {
       } catch (error) {
         expect(error).toBeTruthy();
       }
+    });
+  });
+
+  describe('getTransactionExplorerURL method', () => {
+    it('works properly for testnet', () => {
+      config.transactionExplorerURL = 'https://www.blockchain.com/btctest/tx';
+      expect(transactions.getTransactionExplorerURL('1')).toBe('https://www.blockchain.com/btctest/tx/1');
+    });
+
+    it('works properly for mainnet', () => {
+      config.transactionExplorerURL = 'https://www.blockchain.com/btc/tx';
+      expect(transactions.getTransactionExplorerURL('1')).toBe('https://www.blockchain.com/btc/tx/1');
     });
   });
 });

@@ -14,6 +14,7 @@ import LskSummary from './lskSummary';
 import BtcSummary from './btcSummary';
 import Row from './row';
 import { transactions as transactionsAPI } from '../../utilities/api';
+import { getTransactionExplorerURL } from '../../utilities/api/btc/transactions';
 import getStyles from './styles';
 import { merge } from '../../utilities/helpers';
 
@@ -125,7 +126,7 @@ class TransactionDetail extends React.Component {
   };
 
   openExplorer = () => {
-    Linking.openURL(`https://www.blockchain.com/btc/tx/${this.state.id}`)
+    Linking.openURL(getTransactionExplorerURL(this.state.tx.id))
       // eslint-disable-next-line no-console
       .catch(err => console.error('An error occurred', err));
   };
