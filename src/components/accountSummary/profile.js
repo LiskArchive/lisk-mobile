@@ -34,7 +34,7 @@ const Profile = ({
 }) => {
   const AView = Animated.View;
   let balanceSize = 'Small';
-  const address = token === tokenKeys[1] ?
+  const address = (account.address && token === tokenKeys[1]) ?
     stringShortener(account.address, 10, 10) : account.address;
 
   const normalizedBalance = fromRawLsk(account.balance);
