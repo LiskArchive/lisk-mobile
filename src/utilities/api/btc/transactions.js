@@ -245,4 +245,4 @@ export const broadcast = transaction => new Promise(async (resolve, reject) => {
  * @param {String} - Transaction ID
  * @returns {String} - URL
  */
-export const getTransactionExplorerURL = id => `https://www.blockchain.com/${config.isTestnet ? 'btctest' : 'btc'}/tx/${id}`;
+export const getTransactionExplorerURL = id => `${config.transactionExplorerURL}/${id}`;

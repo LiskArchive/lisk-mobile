@@ -370,12 +370,12 @@ describe('api/btc/transactions', () => {
 
   describe('getTransactionExplorerURL method', () => {
     it('works properly for testnet', () => {
-      config.isTestnet = true;
+      config.transactionExplorerURL = 'https://www.blockchain.com/btctest/tx';
       expect(transactions.getTransactionExplorerURL('1')).toBe('https://www.blockchain.com/btctest/tx/1');
     });
 
     it('works properly for mainnet', () => {
-      config.isTestnet = false;
+      config.transactionExplorerURL = 'https://www.blockchain.com/btc/tx';
       expect(transactions.getTransactionExplorerURL('1')).toBe('https://www.blockchain.com/btc/tx/1');
     });
   });
