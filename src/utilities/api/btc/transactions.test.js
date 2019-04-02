@@ -367,4 +367,16 @@ describe('api/btc/transactions', () => {
       }
     });
   });
+
+  describe('getTransactionExplorerURL method', () => {
+    it('works properly for testnet', () => {
+      config.isTestnet = true;
+      expect(transactions.getTransactionExplorerURL('1')).toBe('https://www.blockchain.com/btctest/tx/1');
+    });
+
+    it('works properly for mainnet', () => {
+      config.isTestnet = false;
+      expect(transactions.getTransactionExplorerURL('1')).toBe('https://www.blockchain.com/btc/tx/1');
+    });
+  });
 });
