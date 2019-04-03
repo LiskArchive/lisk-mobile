@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import { BigNumber } from 'bignumber.js';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import { includeFee, fromRawLsk } from '../../../utilities/conversions';
-import { merge, isEmpty } from '../../../utilities/helpers';
+import { merge } from '../../../utilities/helpers';
 import Header from './header';
 import Balance from './balance';
 import Input from './input';
@@ -155,16 +155,17 @@ class AmountBTC extends React.Component {
   }
 
   getUnspentTransactionOutputCountToConsume() {
-    const { unspentTransactionOutputs, amount: { value } } = this.state;
+    const { unspentTransactionOutputs, amount: { normalizedValue } } = this.state;
 
+    const amount = new BigNumber(normalizedValue);
     const [count] = unspentTransactionOutputs.reduce((result, output) => {
-      if (value > result[1]) {
+      if (amount.isGreaterThan(result[1])) {
         result[0] += 1;
-        result[1] += output.value / (10 ** 8);
+        result[1] = result[1].plus(fromRawLsk(output.value));
       }
 
       return result;
-    }, [0, 0]);
+    }, [0, new BigNumber(0)]);
 
     return count;
   }
@@ -187,7 +188,8 @@ class AmountBTC extends React.Component {
     const {
       accounts, styles, t, settings, dynamicFees,
     } = this.props;
-    const { amount, dynamicFeeType, unspentTransactionOutputs } = this.state;
+    const { amount, dynamicFeeType } = this.state;
+    const balance = fromRawLsk(accounts.info[settings.token.active].balance);
 
     return (
       <View style={styles.theme.wrapper}>
@@ -204,7 +206,7 @@ class AmountBTC extends React.Component {
             <Header />
 
             <Balance
-              value={fromRawLsk(accounts.info[settings.token.active].balance)}
+              value={balance}
               tokenType={settings.token.active}
               incognito={settings.incognito}
             />
@@ -220,14 +222,15 @@ class AmountBTC extends React.Component {
               valueInCurrency={this.getValueInCurrency()}
             />
 
-            <DynamicFeeSelector
-              isLoading={isEmpty(dynamicFees) || isEmpty(unspentTransactionOutputs)}
-              value={this.getCalculatedDynamicFee(dynamicFees[dynamicFeeType])}
-              data={dynamicFees}
-              selected={dynamicFeeType}
-              onChange={this.onDynamicFeeChange}
-              tokenType={settings.token.active}
-            />
+            {balance > 0 &&
+              <DynamicFeeSelector
+                value={this.getCalculatedDynamicFee(dynamicFees[dynamicFeeType])}
+                data={dynamicFees}
+                selected={dynamicFeeType}
+                onChange={this.onDynamicFeeChange}
+                tokenType={settings.token.active}
+              />
+            }
           </View>
         </KeyboardAwareScrollView>
       </View>
