@@ -19,19 +19,34 @@ class BiometricAuth extends React.Component {
     tried: false,
     busy: false,
   }
+  progress = new Animated.Value(0);
+  animationLoop = true;
+
+  runAnimation() {
+    const value = this.progress._value;
+    Animated.timing(this.progress, {
+      toValue: value === 0 ? 1 : 0,
+      duration: 1500,
+    }).start(() => {
+      if (this.animationLoop) {
+        this.runAnimation();
+      }
+    });
+  }
 
   playUnAuthorizedAnimation = () => {
-    this.setState({ tried: true, busy: false }, () => {
-      this.props.hideDialog(() => {
-        this.unAuthAnimEl.play();
-      });
+    this.animationLoop = 0;
+    this.progress.setValue(1);
+    this.setState({ tried: true }, () => {
+      this.animationLoop = false;
+      this.unAuthAnimEl.play();
     });
   }
 
   onClick = () => {
     this.setState({ busy: true }, () => {
       if (Platform.OS === 'android') {
-        this.props.showDialog();
+        this.runAnimation();
       }
 
       bioMetricAuthentication({
@@ -40,7 +55,6 @@ class BiometricAuth extends React.Component {
             this.props.signIn(this.props.passphrase, 'biometricAuth');
           });
         },
-        errorCallback: this.playUnAuthorizedAnimation,
         androidError: this.playUnAuthorizedAnimation,
       });
     });
@@ -51,6 +65,10 @@ class BiometricAuth extends React.Component {
     Animated.timing(this.state.opacity, {
       toValue: 1,
       duration: this.props.animate ? 300 : 0,
+    }).start();
+    Animated.timing(this.progress, {
+      toValue: 1,
+      duration: 2000,
     }).start();
   }
 
@@ -83,6 +101,7 @@ class BiometricAuth extends React.Component {
             source={waves}
             loop={false}
             style={{}}
+            progress={this.progress}
             ref={(el) => { this.startUpAnimEl = el; }}/>
         }
         <Animated.View style={{ opacity }}>
@@ -93,14 +112,28 @@ class BiometricAuth extends React.Component {
       </View>
 
       <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
-        <P style={[
-          styles.bioAuthError,
-          styles.question,
-          styles.fillWidth,
-          tried ? styles.error : styles.invisible,
-        ]}>
-          {t('Unauthorized! Please try again.')}
-        </P>
+        {
+          tried ?
+            <P style={[
+            styles.bioAuthError,
+            styles.question,
+            styles.fillWidth,
+            styles.error,
+          ]}>
+            {t('Unauthorized! Please try again.')}
+          </P> :
+          null
+        }
+        {
+          (Platform.OS === 'android' && busy && !tried) ?
+          <P style={[
+            styles.bioAuthError,
+            styles.question,
+            styles.fillWidth,
+          ]}>
+            {t('Scan your fingerprint on the\ndevice scanner to continue')}
+          </P> : null
+        }
 
         <View style={styles.column}>
           <SecondaryButton
