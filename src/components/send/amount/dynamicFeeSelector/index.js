@@ -6,14 +6,14 @@ import { fromRawLsk } from '../../../../utilities/conversions';
 import { B, Small } from '../../../toolBox/typography';
 import withTheme from '../../../withTheme';
 import getStyles from './styles';
+import { isEmpty } from '../../../../utilities/helpers';
 
 const DynamicFeeSelector = ({
-  value, data, selected, isLoading,
-  tokenType, onChange, styles, t,
+  value, data, selected, tokenType, onChange, styles, t,
 }) => {
   let content;
 
-  if (isLoading) {
+  if (isEmpty(data)) {
     content = (
       <View style={[styles.loadingContainer, styles.item]}>
         <View style={[styles.loadingDots]}>
@@ -66,7 +66,7 @@ const DynamicFeeSelector = ({
           {t('Processing speed')}
         </Small>
 
-        {isLoading ? null : (
+        {isEmpty(data) ? null : (
           <FormattedNumber
             type={B}
             tokenType={tokenType}
