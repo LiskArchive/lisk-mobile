@@ -108,6 +108,7 @@ class BiometricAuth extends React.Component {
             title={busy ? t('Signing in...') : t('Sign in using bioAuth', { sensorType })}
             onClick={this.onClick}
             disabled={busy}
+            noTheme={true}
           />
 
           <Button
