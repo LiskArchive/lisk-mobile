@@ -26,7 +26,7 @@ class BiometricAuth extends React.Component {
     const value = this.progress._value;
     Animated.timing(this.progress, {
       toValue: value === 0 ? 1 : 0,
-      duration: 1500,
+      duration: 2000,
     }).start(() => {
       if (this.animationLoop) {
         this.runAnimation();
@@ -68,7 +68,7 @@ class BiometricAuth extends React.Component {
     }).start();
     Animated.timing(this.progress, {
       toValue: 1,
-      duration: 2000,
+      duration: 2500,
     }).start();
   }
 
@@ -112,29 +112,9 @@ class BiometricAuth extends React.Component {
       </View>
 
       <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
-        {
-          tried ?
-            <P style={[
-            styles.bioAuthError,
-            styles.question,
-            styles.fillWidth,
-            styles.error,
-          ]}>
-            {t('Unauthorized! Please try again.')}
-          </P> :
-          null
-        }
-        {
-          (Platform.OS === 'android' && busy && !tried) ?
-          <P style={[
-            styles.bioAuthError,
-            styles.question,
-            styles.fillWidth,
-          ]}>
-            {t('Scan your fingerprint on the\ndevice scanner to continue')}
-          </P> : null
-        }
-
+        <P style={[styles.question, styles.fillWidth, tried ? styles.error : styles.invisible]}>
+          { t('Unauthorized! Please try again.') }
+        </P>
         <View style={styles.column}>
           <SecondaryButton
             style={styles.button}
