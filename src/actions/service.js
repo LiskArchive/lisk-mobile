@@ -7,7 +7,10 @@ export const pricesRetrieved = () => (dispatch, getState) => {
   serviceAPI.getPriceTicker(token.active)
     .then(priceTicker => dispatch({
       type: actionTypes.pricesRetrieved,
-      priceTicker,
+      data: {
+        priceTicker,
+        activeToken: token.active,
+      },
     }))
     .catch(err => console.log(err)); // @TODO: DISCUSS & HANDLE THIS!
 };

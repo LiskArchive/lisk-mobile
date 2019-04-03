@@ -43,8 +43,8 @@ const Profile = ({
 
   // @todo Use the corresponding fiat exchange ratio
   let faitBalance = 0;
-  if (normalizedBalance && priceTicker[settings.currency]) {
-    faitBalance = (normalizedBalance * priceTicker[settings.currency]).toFixed(2);
+  if (normalizedBalance && priceTicker[token][settings.currency]) {
+    faitBalance = (normalizedBalance * priceTicker[token][settings.currency]).toFixed(2);
   }
 
   // console.log('>> Profile', token, account.address);
