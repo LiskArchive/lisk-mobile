@@ -114,7 +114,6 @@ class Home extends React.Component {
 
   initialDataFetch = () => {
     const {
-      accountFetched,
       transactionsLoaded,
       account,
       activeToken,
@@ -122,7 +121,6 @@ class Home extends React.Component {
 
     // giving some time for the transition animations to settle
     this.initialFetchTimeout = setTimeout(() => {
-      accountFetched();
       transactionsLoaded({
         address: account[activeToken].address,
         offset: 0,
