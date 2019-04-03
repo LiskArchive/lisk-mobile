@@ -4,7 +4,6 @@ import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { IconButton } from '../toolBox/button';
 import Icon from '../toolBox/icon';
-// import reg from '../../constants/regex';
 import Input from '../toolBox/input';
 import { colors } from '../../constants/styleGuide';
 import Avatar from '../avatar';
@@ -20,6 +19,7 @@ import { P, Small } from '../toolBox/typography';
 import { decodeLaunchUrl } from '../../utilities/qrCode';
 import { tokenMap } from '../../constants/tokens';
 import HeaderBackButton from '../router/headerBackButton';
+import { validateAddress } from '../../utilities/validators';
 
 @connect(state => ({
   accounts: state.accounts.followed,
@@ -46,18 +46,14 @@ class AddToBookmark extends React.Component {
   }
 
   activeInputRef = null;
-  validator = {
-    // @TODO: should be updated in https://github.com/LiskHQ/lisk-mobile/issues/587
-    address: () => 0,
-    // address: (str) => {
-    //   if (str === '') return 2;
-    //   return reg.address.test(str) ? 0 : 1;
-    // },
-    label: (str) => {
-      if (str === '') return 2;
-      return (str.length > 20 ? 1 : 0);
-    },
-  };
+
+  validateLabel = (str) => {
+    if (str === '') {
+      return -1;
+    }
+
+    return (str.length > 20 ? 1 : 0);
+  }
 
   scannedData = {};
   state = {
@@ -65,11 +61,11 @@ class AddToBookmark extends React.Component {
     header: true,
     address: {
       value: '',
-      validity: -1,
+      validity: 0,
     },
     label: {
       value: '',
-      validity: -1,
+      validity: 0,
     },
     avatarPreview: false,
   };
@@ -136,13 +132,13 @@ class AddToBookmark extends React.Component {
 
   setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
-    if (this.validator.address(value) === 0) {
+
+    if (validateAddress(this.props.activeToken, value) === 0) {
       this.setAvatarPreviewTimeout();
     }
+
     this.setState({
-      address: {
-        value,
-      },
+      address: { value },
       avatarPreview: false,
     });
   }
@@ -151,18 +147,23 @@ class AddToBookmark extends React.Component {
     this.setState({
       label: {
         value,
-        validity: this.validator.label(value),
+        validity: this.validateLabel(value),
       },
     });
   }
 
   submitForm = () => {
-    const { accountFollowed, navigation, accountEdited } = this.props;
+    const {
+      accountFollowed, navigation, accountEdited, activeToken,
+    } = this.props;
+
     const {
       address, label, incomingData, editMode,
     } = this.state;
-    const addressValidity = this.validator.address(address.value);
-    const labelValidity = this.validator.label(label.value);
+
+    const addressValidity = validateAddress(activeToken, address.value);
+    const labelValidity = this.validateLabel(label.value);
+
     if (incomingData && labelValidity === 0) {
       const action = editMode ? accountEdited : accountFollowed;
       action(
@@ -217,7 +218,7 @@ class AddToBookmark extends React.Component {
       switch (validity) {
         case 1:
           return errors[fieldName];
-        case 2:
+        case -1:
           return t('This field is required.');
         default:
           return '';
