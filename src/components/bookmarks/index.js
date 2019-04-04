@@ -5,8 +5,8 @@ import connect from 'redux-connect-decorator';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
-import { DraggableItem, Item } from './item';
-import reg from '../../constants/regex';
+import { validateAddress } from '../../utilities/validators';
+import List from './list';
 import Empty from './empty';
 import withTheme from '../withTheme';
 import { Small } from '../toolBox/typography';
@@ -32,27 +32,26 @@ class Bookmarks extends React.Component {
       return (item.address.indexOf(query) >= 0 ||
         item.label.toLowerCase().indexOf(query.toLowerCase()) >= 0);
     });
-    const Element = draggable ? DraggableItem : Item;
-    const description = !filterList.length && reg.address.test(query) ?
-      t('You can add this address to your bookmarks in bookmarks page or through send process.') :
-      t('Couldn’t recognize the address or label. Please make sure it’s correct.');
 
     return (<View style={styles.container}>
       {
-        (list && list.length === 0 && query.length >= 0) ?
+        (list && list[activeToken].length === 0 && validateAddress(activeToken, query) !== 1) ?
         <Empty usedIn={draggable ? 'bookmarks' : 'send'} /> :
         <Fragment>
           {
-            filterList.length === 0 ?
+            validateAddress(activeToken, query) === 1 ?
               <View style={styles.innerContainer}>
-                <Small style={[styles.noResult, styles.theme.noResult]}>{description}</Small>
+                <Small style={[styles.noResult, styles.theme.noResult]}>
+                  {t('Couldn’t recognize the address or label. Please make sure it’s correct.')}
+                </Small>
               </View> :
-              filterList.map(item => <Element
+              <List
+                draggable={draggable}
+                list={filterList}
                 showAvatar={showAvatar}
                 setRef={setRef}
                 navigate={navigate}
-                key={`${activeToken}-${item.address}`}
-                data={item} />)
+              />
           }
         </Fragment>
       }

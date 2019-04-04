@@ -150,7 +150,7 @@ class Bookmark extends React.Component {
             {!isSmallScreen ? (
               <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
                 <P style={[styles.subtitle, styles.theme.subtitle]}>
-                  {t('Simply manage your bookmarks.')}
+                  {t('Manage your bookmarks.')}
                 </P>
               </Animated.View>
             ) : null}
