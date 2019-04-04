@@ -2,6 +2,7 @@ import actionTypes from '../constants/actions';
 import txConstants from '../constants/transactions';
 import { transactions as transactionsAPI } from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
+import { tokenMap } from '../constants/tokens';
 
 const fetchTransactions = async (dispatch, getState, data) => {
   dispatch(loadingStarted(actionTypes.transactionsLoaded));
@@ -49,22 +50,29 @@ export const transactionAdded = (data, successCb, errorCb) => async (dispatch, g
 
   try {
     const tx = await transactionsAPI.create(activeToken, data);
-    const { id } = await transactionsAPI.broadcast(activeToken, tx);
 
-    dispatch({
-      type: actionTypes.pendingTransactionAdded,
-      data: {
-        id,
-        senderAddress: account.address,
-        recipientAddress: data.recipientAddress,
-        amount: data.amount,
-        fee: data.fee,
-        type: txConstants.send.type,
-        data: data.reference,
-      },
-    });
+    if (activeToken === tokenMap.LSK.key) {
+      const { id } = await transactionsAPI.broadcast(activeToken, tx);
 
-    successCb({ txId: id });
+      dispatch({
+        type: actionTypes.pendingTransactionAdded,
+        data: {
+          id,
+          senderAddress: account.address,
+          recipientAddress: data.recipientAddress,
+          amount: data.amount,
+          fee: data.fee,
+          type: txConstants.send.type,
+          data: data.reference,
+        },
+      });
+
+      successCb({ txId: id });
+    } else {
+      await transactionsAPI.broadcast(activeToken, tx);
+      dispatch(transactionsLoaded());
+      successCb();
+    }
   } catch (error) {
     errorCb(error);
   }
