@@ -71,7 +71,7 @@ class EnableBioAuth extends React.Component {
               </View>
               <View style={styles.textWrapper}>
                 <B style={[styles.rowTitle, styles.theme.rowTitle]}>
-                {t('You can always turn it off')}
+                {t('You can always deactivate it')}
                 </B>
                 <Small style={[styles.description, styles.theme.description]}>
                   {t(`You can disable ${title} at anytime in Settings page then authenticate with passphrase.`)}

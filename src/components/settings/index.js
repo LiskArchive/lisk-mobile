@@ -163,7 +163,7 @@ class Settings extends React.Component {
                 navigation={navigation}
                 icon='manage-assets'
                 iconSize={20}
-                title={t('Manage assets')}
+                title={t('Manage tokens')}
                 target='ManageAssets'
               />
             </View>
