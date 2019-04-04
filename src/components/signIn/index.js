@@ -21,6 +21,7 @@ import {
 } from '../../utilities/passphrase';
 import {
   accountSignedIn as accountSignedInAction,
+  accountFetched as accountFetchedAction,
 } from '../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
@@ -41,6 +42,7 @@ console.disableYellowBox = true; // eslint-disable-line
   settings: state.settings,
 }), {
   accountSignedIn: accountSignedInAction,
+  accountFetched: accountFetchedAction,
   settingsUpdated: settingsUpdatedAction,
   settingsRetrieved: settingsRetrievedAction,
   pricesRetrieved: pricesRetrievedAction,
@@ -159,10 +161,8 @@ class SignIn extends React.Component {
   }
 
   signIn = (passphrase) => {
-    this.props.accountSignedIn({
-      passphrase,
-    });
-
+    this.props.accountSignedIn({ passphrase });
+    this.props.accountFetched();
     this.props.pricesRetrieved();
 
     if (this.state.deepLinkURL) {
@@ -301,7 +301,10 @@ class SignIn extends React.Component {
             toggleView={this.toggleView}
             sensorType={sensorType}
             passphrase={storedPassphrase}
-            signIn={this.onFormSubmission} /> : null
+            signIn={this.onFormSubmission}
+            showDialog={this.showDialog}
+            hideDialog={this.hideDialog}
+          /> : null
       }
       {
         view === 'form' ?

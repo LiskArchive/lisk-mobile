@@ -116,6 +116,7 @@ const styles = {
     color: colors.light.gray2,
     textAlign: 'center',
     marginRight: 4,
+    marginBottom: 5,
   },
   link: {
     color: colors.light.blue,
@@ -252,6 +253,9 @@ const styles = {
   },
   backButtonTitle: {
     color: colors.light.blue,
+  },
+  bioAuthError: {
+    marginBottom: 8,
   },
 };
 
