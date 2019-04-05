@@ -94,13 +94,14 @@ class AmountLSK extends React.Component {
   }
 
   getValueInCurrency() {
-    const { priceTicker, settings: { currency } } = this.props;
+    const { priceTicker, settings: { currency, token } } = this.props;
     const { amount: { value, normalizedValue } } = this.state;
 
     let valueInCurrency = 0;
 
-    if (value && this.validator(normalizedValue).code === 0 && priceTicker[currency]) {
-      valueInCurrency = (normalizedValue * priceTicker[currency]).toFixed(2);
+    if (value && this.validator(normalizedValue).code === 0 &&
+      priceTicker[token.active][currency]) {
+      valueInCurrency = (normalizedValue * priceTicker[token.active][currency]).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
 
