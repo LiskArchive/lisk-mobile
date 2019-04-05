@@ -1,4 +1,5 @@
 import deepLinkMapper from './deepLink';
+import { tokenMap } from '../constants/tokens';
 
 describe('Deep Link Handler', () => {
   it('returns null if given url is falsy', () => {
@@ -14,6 +15,7 @@ describe('Deep Link Handler', () => {
     const expectedResult = {
       name: 'Send',
       params: {
+        activeToken: tokenMap.LSK.key,
         query: {
           address: '1L',
           amount: '1',
@@ -30,6 +32,7 @@ describe('Deep Link Handler', () => {
     const expectedResult = {
       name: 'Send',
       params: {
+        activeToken: tokenMap.LSK.key,
         query: {
           address: '1L',
           amount: '1',
@@ -45,7 +48,9 @@ describe('Deep Link Handler', () => {
     const url = 'lisk://request';
     const expectedResult = {
       name: 'Request',
-      params: {},
+      params: {
+        activeToken: tokenMap.LSK.key,
+      },
     };
 
     expect(deepLinkMapper(url)).toEqual(expectedResult);
@@ -56,6 +61,7 @@ describe('Deep Link Handler', () => {
     const expectedResult = {
       name: 'TxDetail',
       params: {
+        activeToken: tokenMap.LSK.key,
         txId: '1',
       },
     };
