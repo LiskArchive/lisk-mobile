@@ -140,14 +140,14 @@ class AmountBTC extends React.Component {
   }
 
   getValueInCurrency() {
-    const { priceTicker, settings: { currency } } = this.props;
+    const { priceTicker, settings: { currency, token } } = this.props;
     const { amount } = this.state;
     const amountValidity = this.validateAmount(amount);
 
     let valueInCurrency = 0;
 
-    if (amountValidity.code === 0 && priceTicker[currency]) {
-      valueInCurrency = (amount.normalizedValue * priceTicker[currency]).toFixed(2);
+    if (amountValidity.code === 0 && priceTicker[token.active][currency]) {
+      valueInCurrency = (amount.normalizedValue * priceTicker[token.active][currency]).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
 
