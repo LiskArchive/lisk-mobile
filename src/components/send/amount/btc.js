@@ -214,7 +214,7 @@ class AmountBTC extends React.Component {
             <Input
               reference={(el) => { this.input = el; }}
               autoFocus={!isAndroid}
-              label={t('Amount (BTC)')}
+              label={t('Amount (LSK)', { tokenType: 'BTC' })}
               value={amount.value}
               onChange={this.onAmountChange}
               keyboardType='numeric'

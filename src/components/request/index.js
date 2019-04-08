@@ -76,7 +76,7 @@ class Request extends React.Component {
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
             {!isSmallScreen ? (
               <P style={[styles.subHeader, styles.theme.subHeader]}>
-                {t(`Request ${activeToken} tokens from other accounts.`)}
+                {t('Request LSK tokens from other accounts.', { tokenType: activeToken })}
               </P>
             ) : null}
 

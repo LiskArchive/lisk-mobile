@@ -26,7 +26,7 @@ const getTranslatedMessages = (t, activeToken = tokenMap.LSK.key) => ({
   },
   send: {
     title: t('Ready to send'),
-    subtitle: t(`You are about to send ${activeToken} tokens to the following address.`),
+    subtitle: t('You are about to send LSK tokens to the following address.', { tokenType: activeToken }),
     button: t('Send now'),
     buttonBusy: t('Sending'),
   },
