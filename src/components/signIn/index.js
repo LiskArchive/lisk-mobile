@@ -212,7 +212,7 @@ class SignIn extends React.Component {
     const linkedScreen = deepLinkMapper(url);
 
     if (linkedScreen) {
-      if (linkedScreen.params.activeToken) {
+      if (linkedScreen.params && linkedScreen.params.activeToken) {
         settingsUpdated({
           token: {
             list: settings.token.list,
