@@ -48,9 +48,6 @@ describe('Deep Link Handler', () => {
     const url = 'lisk://request';
     const expectedResult = {
       name: 'Request',
-      params: {
-        activeToken: tokenMap.LSK.key,
-      },
     };
 
     expect(deepLinkMapper(url)).toEqual(expectedResult);
