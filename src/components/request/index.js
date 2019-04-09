@@ -76,7 +76,7 @@ class Request extends React.Component {
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
             {!isSmallScreen ? (
               <P style={[styles.subHeader, styles.theme.subHeader]}>
-                {t(`Request ${activeToken} tokens from other accounts.`)}
+                {t('Request LSK tokens from other accounts.', { tokenType: activeToken })}
               </P>
             ) : null}
 
@@ -119,7 +119,7 @@ class Request extends React.Component {
               {activeToken === tokenMap.LSK.key ? (
                 <Input
                   innerStyles={{ input: styles.input }}
-                  label={t('Amount in LSK (Optional)')}
+                  label={t('Amount in LSK (optional)')}
                   autoCorrect={false}
                   onChange={this.changeHandler}
                   value={amount.value}

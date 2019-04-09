@@ -208,7 +208,7 @@ const MainStack = StackNavigator(
     ManageAssets: {
       screen: ManageAssets,
       navigationOptions: ({ navigation }) => ({
-        title: t('Manage assets'),
+        title: t('Manage tokens'),
         headerTitle: HeaderTitle,
         headerRight: <TokenSwitcher navigation={navigation} />,
         headerLeft: HeaderBackButton,

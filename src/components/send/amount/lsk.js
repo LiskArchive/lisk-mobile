@@ -137,7 +137,7 @@ class AmountLSK extends React.Component {
             <Input
               reference={(el) => { this.input = el; }}
               autoFocus={!isAndroid}
-              label={t('Amount (LSK)')}
+              label={t('Amount (LSK)', { tokenType: 'LSK' })}
               value={amount.value}
               onChange={this.onChange}
               keyboardType='numeric'

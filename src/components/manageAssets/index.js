@@ -34,7 +34,7 @@ class ManageAssets extends React.Component {
     return (
       <View style={[styles.container, styles.theme.container]}>
         <P style={[styles.description, styles.theme.description]}>
-          {t('Here you will be able to manage your assets, in order to use them in the app.')}
+          {t('Here you can manage your tokens, in order to use them in the app.')}
         </P>
         <FlatList
           extraData={token.active}

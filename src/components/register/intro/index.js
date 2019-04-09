@@ -85,7 +85,7 @@ class Intro extends React.Component {
               <Small style={styles.label}>
                 {
                   deviceHeight() >= SCREEN_HEIGHTS.SM ?
-                  t('I understand that its my responsibility to keep my passphrase safe.') :
+                  t('I understand that it’s my responsibility to keep my passphrase safe.') :
                   t('It is my responsibility to keep my passphrase safe.')
                 }
               </Small>
