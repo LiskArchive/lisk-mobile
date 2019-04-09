@@ -1,4 +1,5 @@
 import URL from 'url-parse';
+import { tokenMap } from '../constants/tokens';
 
 export default function deepLinkMapper(deepLinkURL) {
   if (!deepLinkURL) {
@@ -14,6 +15,7 @@ export default function deepLinkMapper(deepLinkURL) {
       return {
         name: 'Send',
         params: {
+          activeToken: tokenMap.LSK.key,
           query: {
             address: query.recipient,
             amount: query.amount,
@@ -25,13 +27,13 @@ export default function deepLinkMapper(deepLinkURL) {
     case 'request':
       return {
         name: 'Request',
-        params: {},
       };
 
     case 'transactions':
       return {
         name: 'TxDetail',
         params: {
+          activeToken: tokenMap.LSK.key,
           txId: query.id,
         },
       };

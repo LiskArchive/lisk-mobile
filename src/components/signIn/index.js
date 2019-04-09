@@ -208,13 +208,23 @@ class SignIn extends React.Component {
   }
 
   navigateToDeepLink = (url) => {
+    const { navigation, settings, settingsUpdated } = this.props;
     const linkedScreen = deepLinkMapper(url);
 
     if (linkedScreen) {
-      this.props.navigation.navigate(linkedScreen.name, linkedScreen.params);
+      if (linkedScreen.params && linkedScreen.params.activeToken) {
+        settingsUpdated({
+          token: {
+            list: settings.token.list,
+            active: linkedScreen.params.activeToken,
+          },
+        });
+      }
+
+      navigation.navigate(linkedScreen.name, linkedScreen.params);
     } else {
       // @TODO: Navigate to different page or display an error message for unmapped deep links.
-      this.props.navigation.navigate('Home');
+      navigation.navigate('Home');
     }
   }
 
