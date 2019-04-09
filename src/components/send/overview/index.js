@@ -96,20 +96,21 @@ class Overview extends React.Component {
       },
     } = this.props;
 
-    this.setState({ busy: true });
     DropDownHolder.closeAlert();
 
-    transactionAdded({
-      recipientAddress: address,
-      amount: toRawLsk(amount),
-      fee,
-      passphrase,
-      secondPassphrase,
-      reference,
-      dynamicFeePerByte,
-    }, nextStep, (error = {}) => {
-      this.setState({ busy: false });
-      DropDownHolder.error(t('Error'), error.message || t('An error happened. Please try later.'));
+    this.setState({ busy: true }, () => {
+      transactionAdded({
+        recipientAddress: address,
+        amount: toRawLsk(amount),
+        fee,
+        passphrase,
+        secondPassphrase,
+        reference,
+        dynamicFeePerByte,
+      }, nextStep, (error = {}) => {
+        this.setState({ busy: false });
+        DropDownHolder.error(t('Error'), error.message || t('An error happened. Please try later.'));
+      });
     });
   }
 
