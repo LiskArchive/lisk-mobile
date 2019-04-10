@@ -11,8 +11,11 @@ class Success extends React.Component {
     const { t, hideNav, navigation: { setParams } } = this.props;
 
     hideNav();
+
     setParams({
       action: false,
+      showButtonLeft: true,
+      backButtonTitle: t('Sign In'),
       title: t('Perfect! You’re all set'),
     });
   }
