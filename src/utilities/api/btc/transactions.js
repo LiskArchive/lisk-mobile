@@ -16,32 +16,32 @@ const normalizeTransactionsResponse = ({
   address,
   list,
   blockHeight,
-}) => list.map((tx) => {
+}) => list.map(({
+  feeSatoshi, height, tx, timestamp,
+}) => {
   const data = {
-    id: tx.tx_hash,
-    timestamp: Number(tx.block.timestamp) * 1000,
-    confirmations: blockHeight > 0 ? (blockHeight - tx.block_height) + 1 : tx.block_height,
+    id: tx.txid,
+    timestamp: Number(timestamp) * 1000,
+    confirmations: blockHeight > 0 ? (blockHeight - height) + 1 : height,
     type: 0,
     data: '',
   };
 
-  const totalInput = tx.inputs.reduce((total, t) => total + t.prev_out.value, 0);
-  const totalOutput = tx.outputs.reduce((total, t) => total + t.satoshi, 0);
-  data.fee = totalInput - totalOutput;
+  data.fee = feeSatoshi;
 
-  const ownedInput = tx.inputs.find(i => i.prev_out.addr === address);
+  const ownedInput = tx.inputs.find(i => i.txDetail.scriptPubKey.addresses.includes(address));
 
   if (ownedInput) {
     data.senderAddress = address;
-    const extractedAddress = tx.out[0].addr;
+    const extractedAddress = tx.outputs[0].scriptPubKey.addresses[0];
     data.recipientAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : 'Unparsed Address';
-    data.amount = tx.out[0].value;
+    data.amount = tx.outputs[0].satoshi;
   } else {
-    const output = tx.out.find(out => out.addr === address);
-    const extractedAddress = tx.inputs[0].prev_out.addr;
+    const output = tx.outputs.find(o => o.scriptPubKey.addresses.includes(address));
+    const extractedAddress = tx.inputs[0].txDetail.scriptPubKey.addresses[0];
     data.senderAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : 'Unparsed Address';
     data.recipientAddress = address;
-    data.amount = output.value;
+    data.amount = output.satoshi;
   }
 
   return data;
@@ -86,14 +86,16 @@ export const get = ({
     if (response.ok) {
       const blockHeight = await exports.getLatestBlockHeight();
 
+      const data = normalizeTransactionsResponse({
+        address,
+        list: id ? [json] : json.data,
+        blockHeight,
+      });
+
       resolve({
-        data: normalizeTransactionsResponse({
-          address,
-          list: id ? json.data : json.txs,
-          blockHeight,
-        }),
+        data,
         meta: {
-          count: id ? 1 : json.n_tx,
+          count: id ? 1 : json.data.length,
         },
       });
     } else {
