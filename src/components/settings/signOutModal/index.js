@@ -32,24 +32,38 @@ class SignOutModal extends React.Component {
   render() {
     const { settings, t } = this.props;
 
-    return (
-      <View>
-        <P>{t('Are you sure?')}</P>
+    let content = (
+      <P>{t('Are you sure?')}</P>
+    );
 
-        {settings.hasStoredPassphrase && (
+    if (settings.hasStoredPassphrase) {
+      content = (
+        <React.Fragment>
           <P>
             {t(`You can sign back in using your passphrase and enable ${settings.sensorType} at any time.`)}
           </P>
-        )}
 
-        <A onPress={this.onCancel}>
-          {t('Cancel')}
-        </A>
+          <P>
+            {t(`You can sign back in using your passphrase and enable ${settings.sensorType} at any time.`)}
+          </P>
+        </React.Fragment>
+      );
+    }
+
+    return (
+      <View>
+        <View>
+          {content}
+        </View>
 
         <SecondaryButton
           onClick={this.onConfirm}
           title={t('Confirm')}
         />
+
+        <A onPress={this.onCancel}>
+          {t('Cancel')}
+        </A>
       </View>
     );
   }
