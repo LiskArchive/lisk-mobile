@@ -88,7 +88,7 @@ export const get = ({
 
       const data = normalizeTransactionsResponse({
         address,
-        list: id ? [json] : json.data,
+        list: id ? [json.data] : json.data,
         blockHeight,
       });
 
