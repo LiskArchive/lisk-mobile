@@ -3,6 +3,7 @@ import { View, Animated, Platform, ActivityIndicator } from 'react-native';
 import connect from 'redux-connect-decorator';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { translate } from 'react-i18next';
+import RNShake from 'react-native-shake';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
@@ -40,7 +41,17 @@ class Transactions extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.type === 'home') {
+      RNShake.addEventListener('ShakeEvent', () => {
+        this.props.settingsUpdated({
+          incognito: !this.props.incognitoMode,
+        });
+      });
+    }
     this.initialFadeIn();
+  }
+  componentWillUnmount() {//eslint-disable-line
+    RNShake.removeEventListener('ShakeEvent');
   }
 
   initialFadeIn = () => {
