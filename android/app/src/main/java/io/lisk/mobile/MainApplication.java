@@ -3,6 +3,7 @@ package io.lisk.mobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.clipsub.RNShake.RNShakeEventPackage;
 import com.reactNativeQuickActions.AppShortcutsPackage;
 import com.mkuczera.RNReactNativeHapticFeedbackPackage;
 import com.wix.interactable.Interactable;
@@ -42,6 +43,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new RNShakeEventPackage(),
             new AppShortcutsPackage(),
         new RNReactNativeHapticFeedbackPackage(),
         new Interactable(),
