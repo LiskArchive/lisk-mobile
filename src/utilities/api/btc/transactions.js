@@ -94,9 +94,7 @@ export const get = ({
 
       resolve({
         data,
-        meta: {
-          count: id ? 1 : json.data.length,
-        },
+        meta: json.meta || {},
       });
     } else {
       reject(json);
