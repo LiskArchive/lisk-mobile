@@ -341,14 +341,14 @@ describe('api/btc/transactions', () => {
     beforeEach(() => fetchMock.reset());
 
     it('resolves correctly', async () => {
-      const successResponse = 'Transaction Submitted';
+      const successResponse = { message: 'Transaction Submitted' };
       fetchMock.once('*', successResponse);
       const result = await transactions.broadcast(txHex);
       expect(result).toEqual(successResponse);
     });
 
     it('handles non-500 errors', async () => {
-      const errorResponse = 'Transaction already exists';
+      const errorResponse = { message: 'Transaction already exists' };
       fetchMock.once('*', { status: 400, body: errorResponse });
 
       try {

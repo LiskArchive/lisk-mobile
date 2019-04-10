@@ -221,20 +221,19 @@ export const create = ({
   }
 });
 
-export const broadcast = transaction => new Promise(async (resolve, reject) => {
+export const broadcast = transactionHex => new Promise(async (resolve, reject) => {
   try {
-    const body = new FormData();
-    body.append('tx', transaction);
-
-    const response = await fetch(`${config.url}/pushtx`, merge(config.requestOptions, {
+    const response = await fetch(`${config.apiURL}/transaction`, merge(config.requestOptions, {
       method: 'POST',
-      body,
+      body: JSON.stringify({ tx: transactionHex }),
     }));
 
+    const json = await response.json();
+
     if (response.ok) {
-      resolve(response.body);
+      resolve(json);
     } else {
-      reject(response.body);
+      reject(json);
     }
   } catch (error) {
     reject(error);
