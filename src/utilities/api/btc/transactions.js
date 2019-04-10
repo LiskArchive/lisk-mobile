@@ -221,7 +221,7 @@ export const create = ({
 
 export const broadcast = transactionHex => new Promise(async (resolve, reject) => {
   try {
-    const response = await fetch(`${config.apiURL}/transaction`, merge(config.requestOptions, {
+    const response = await fetch(`${config.url}/transaction`, merge(config.requestOptions, {
       method: 'POST',
       body: JSON.stringify({ tx: transactionHex }),
     }));
