@@ -8,6 +8,7 @@ const Terms = () => (
       style={{
         marginTop: -100,
       }}
+      startInLoadingState={true}
     />
   </View>
 );
