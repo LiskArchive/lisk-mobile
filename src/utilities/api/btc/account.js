@@ -5,13 +5,12 @@ import config from '../../../../btc.config';
 
 export const getSummary = address => new Promise(async (resolve, reject) => {
   try {
-    const response = await fetch(`${config.url}/balance?active=${address}`, config.requestOptions);
+    const response = await fetch(`${config.url}/account/${address}`, config.requestOptions);
     const json = await response.json();
-
     if (response.ok) {
       resolve({
         address,
-        balance: json[address].final_balance,
+        balance: json.data.confirmed_balance,
         initialized: true,
       });
     } else {
