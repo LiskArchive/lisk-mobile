@@ -2,11 +2,11 @@ import React from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import { accountSignedOut as accountSignedOutAction } from '../../actions/accounts';
 import { H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
 import SignOutButton from './signOutButton';
+import SignOutModal from './signOutModal';
 import { colors, themes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import SwitchButton from '../toolBox/switchButton';
@@ -19,7 +19,6 @@ import getStyles from './styles';
 @connect(state => ({
   settings: state.settings,
 }), {
-  accountSignedOut: accountSignedOutAction,
   settingsUpdated: settingsUpdatedAction,
 })
 class Settings extends React.Component {
@@ -194,9 +193,7 @@ class Settings extends React.Component {
             <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
             <View style={[styles.item, styles.theme.item]}>
               <SignOutButton
-                navigation={navigation}
-                signOut={this.props.accountSignedOut}
-                settings={settings}
+                onClick={() => navigation.navigate('Modal', { title: 'Signing out', component: SignOutModal })}
               />
             </View>
           </View>
