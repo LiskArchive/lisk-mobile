@@ -18,15 +18,15 @@ const normalizeTransactionsResponse = ({
   blockHeight,
 }) => list.map((tx) => {
   const data = {
-    id: tx.hash,
-    timestamp: Number(tx.time) * 1000,
+    id: tx.tx_hash,
+    timestamp: Number(tx.block.timestamp) * 1000,
     confirmations: blockHeight > 0 ? (blockHeight - tx.block_height) + 1 : tx.block_height,
     type: 0,
     data: '',
   };
 
   const totalInput = tx.inputs.reduce((total, t) => total + t.prev_out.value, 0);
-  const totalOutput = tx.out.reduce((total, t) => total + t.value, 0);
+  const totalOutput = tx.outputs.reduce((total, t) => total + t.satoshi, 0);
   data.fee = totalInput - totalOutput;
 
   const ownedInput = tx.inputs.find(i => i.prev_out.addr === address);
@@ -76,9 +76,9 @@ export const get = ({
     let response;
 
     if (id) {
-      response = await fetch(`${config.url}/rawtx/${id}`, config.requestOptions);
+      response = await fetch(`${config.url}/transaction/${id}`, config.requestOptions);
     } else {
-      response = await fetch(`${config.url}/rawaddr/${address}?limit=${limit}&offset=${offset}`, config.requestOptions);
+      response = await fetch(`${config.url}/transactions/${address}?limit=${limit}&offset=${offset}`, config.requestOptions);
     }
 
     const json = await response.json();
@@ -89,7 +89,7 @@ export const get = ({
       resolve({
         data: normalizeTransactionsResponse({
           address,
-          list: id ? [json] : json.txs,
+          list: id ? json.data : json.txs,
           blockHeight,
         }),
         meta: {

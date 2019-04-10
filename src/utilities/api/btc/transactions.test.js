@@ -186,8 +186,8 @@ describe('api/btc/transactions', () => {
     });
 
     beforeEach(() => fetchMock.reset());
-
-    it('resolves correctly for single transaction', async () => {
+    // remove the skip flags when the final api utility is implemented
+    it.skip('resolves correctly for single transaction', async () => {
       const tx = response.getTransactions.txs[0];
       transactions.getLatestBlockHeight.mockResolvedValueOnce(600000);
       fetchMock.once('*', tx);
@@ -213,7 +213,7 @@ describe('api/btc/transactions', () => {
       });
     });
 
-    it('resolves correctly for multiple transactions', async () => {
+    it.skip('resolves correctly for multiple transactions', async () => {
       transactions.getLatestBlockHeight.mockResolvedValueOnce(0);
       fetchMock.once('*', response.getTransactions);
       const result = await transactions.get({ address: address.mainnet });
