@@ -20,7 +20,9 @@ class Intro extends React.Component {
     const { t, navigation: { setParams } } = this.props;
 
     this.setState({ passphrase: generatePassphrase() });
+
     setParams({
+      showButtonLeft: true,
       action: false,
       title: t('Account creation'),
     });

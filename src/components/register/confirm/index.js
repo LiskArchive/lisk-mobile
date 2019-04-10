@@ -41,7 +41,6 @@ const chooseRandomWords = (qty, words) => {
 
 class Confirm extends React.Component {
   state = {
-    passphrase: '',
     buttonStatus: true,
     missing: [],
     options: [],
@@ -157,7 +156,7 @@ class Confirm extends React.Component {
   }
 
   render() {
-    const { t, nextStep } = this.props;
+    const { t, nextStep, sharedData: { passphrase } } = this.props;
     return (
       <View style={styles.container}>
         <View>
@@ -196,12 +195,9 @@ class Confirm extends React.Component {
             disabled={this.state.buttonStatus}
             noTheme={true}
             style={styles.button}
-            onClick={() => {
-              nextStep({
-                passphrase: this.state.passphrase,
-              });
-            }}
-            title={t('Confirm')} />
+            onClick={() => nextStep({ passphrase })}
+            title={t('Confirm')}
+          />
         </View>
       </View>);
   }
