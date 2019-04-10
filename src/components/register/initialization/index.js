@@ -8,9 +8,11 @@ import image from '../../../assets/images/registrationProcess/initialize3x.png';
 
 class Initialization extends React.Component {
   componentDidMount() {
-    const { t, prevStep, navigation: { setParams } } = this.props;
+    const { t, navigation: { setParams } } = this.props;
+
     setParams({
-      action: prevStep,
+      showButtonLeft: false,
+      action: false,
       title: t('Security reminder!'),
     });
   }
