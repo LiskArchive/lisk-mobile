@@ -124,11 +124,11 @@ export const calculateTransactionFee = ({
  */
 export const getUnspentTransactionOutputs = address => new Promise(async (resolve, reject) => {
   try {
-    const response = await fetch(`${config.url}/unspent?active=${address}`);
+    const response = await fetch(`${config.url}/utxo/${address}`);
     const json = await response.json();
 
     if (response.ok) {
-      resolve(json.unspent_outputs);
+      resolve(json.data);
     } else {
       reject(json);
     }
@@ -186,7 +186,7 @@ export const create = ({
     // Add inputs from unspent txOuts
     // eslint-disable-next-line
     for (const tx of txOutsToConsume) {
-      txb.addInput(tx.tx_hash_big_endian, tx.tx_output_n);
+      txb.addInput(tx.tx_hash, tx.tx_pos);
     }
 
     // Output to Recipient
