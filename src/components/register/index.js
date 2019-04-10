@@ -29,13 +29,18 @@ class Register extends React.Component {
         textAlign: 'center',
         flex: 1,
       },
-      headerLeft: (
+      headerLeft: params.showButtonLeft ? (
         <IconButton
           icon='back'
-          title=''
+          title={params.backButtonTitle || ''}
           onPress={() => (params.action ? params.action() : navigation.pop())}
           style={styles.backButton}
           color={colors.light.gray1}
+        />
+      ) : (
+        <IconButton
+          color='transparent'
+          icon='back'
         />
       ),
       headerRight: <IconButton color='transparent' icon='back'/>,
