@@ -13,7 +13,12 @@ class DeleteBookmarkModal extends React.Component {
   }
 
   onCancel = () => {
-    this.props.navigation.getParam('onCancel')();
+    const onCancel = this.props.navigation.getParam('onCancel', false);
+
+    if (typeof onCancel === 'function') {
+      onCancel();
+    }
+
     this.props.close();
   }
 

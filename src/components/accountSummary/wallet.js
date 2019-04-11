@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Alert, Animated, Dimensions } from 'react-native';
+import { View, Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import {
@@ -19,6 +19,7 @@ import { stringShortener } from '../../utilities/helpers';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../constants/styleGuide';
+import DeleteBookmarkModal from '../bookmarks/deleteBookmarkModal';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -71,18 +72,18 @@ class AccountSummary extends React.Component {
     const {
       followedAccounts, account, navigation, accountUnFollowed, t, activeToken,
     } = this.props;
+
     const isFollowed = followedAccounts[activeToken].some(item => item.address === account.address);
+
     if (isFollowed) {
-      Alert.alert(t('Are you sure?'), '', [
-        {
-          text: t('Cancel'),
-          style: 'cancel',
+      navigation.navigate({
+        routeName: 'Modal',
+        params: {
+          title: 'Delete bookmark',
+          component: DeleteBookmarkModal,
+          onConfirm: () => accountUnFollowed(account.address),
         },
-        {
-          text: t('Confirm'),
-          onPress: () => accountUnFollowed(account.address),
-        },
-      ], { cancelable: false });
+      });
     } else {
       navigation.navigate({
         routeName: 'AddBookmark',
