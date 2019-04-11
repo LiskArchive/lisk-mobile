@@ -39,13 +39,18 @@ class Transactions extends React.Component {
       top: new Animated.Value(20),
     },
   }
-
   componentDidMount() {
+    let timeout = null;
     if (this.props.type === 'home') {
       RNShake.addEventListener('ShakeEvent', () => {
-        this.props.settingsUpdated({
-          incognito: !this.props.incognitoMode,
-        });
+        if (!timeout) {
+          this.props.settingsUpdated({
+            incognito: !this.props.incognitoMode,
+          });
+          timeout = setTimeout(() => {
+            timeout = false;
+          }, 1000);
+        }
       });
     }
     this.initialFadeIn();
