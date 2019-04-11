@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Alert, TouchableOpacity, Animated } from 'react-native';
+import { View, TouchableOpacity, Animated } from 'react-native';
 import Interactable from 'react-native-interactable';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
@@ -12,6 +12,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import Icon from '../toolBox/icon';
 import { themes, colors } from '../../constants/styleGuide';
+import DeleteBookmarkModal from './deleteBookmarkModal';
 
 @connect(state => ({}), {
   accountUnFollowed: accountUnFollowedAction,
@@ -20,19 +21,14 @@ class draggableItem extends React.Component {
   _deltaX = new Animated.Value(0);
 
   onDelete = () => {
-    const { data, accountUnFollowed, t } = this.props;
+    const { data, accountUnFollowed, navigate } = this.props;
 
-    Alert.alert(t('Are you sure?'), '', [
-      {
-        text: t('Cancel'),
-        style: 'cancel',
-        onPress: () => this.ref.changePosition({ x: 0, y: 0 }),
-      },
-      {
-        text: t('Confirm'),
-        onPress: () => accountUnFollowed(data.address),
-      },
-    ], { cancelable: false });
+    navigate('Modal', {
+      title: 'Delete bookmark',
+      component: DeleteBookmarkModal,
+      onConfirm: () => accountUnFollowed(data.address),
+      onCancel: () => this.ref.changePosition({ x: 0, y: 0 }),
+    });
   }
 
   render() {
