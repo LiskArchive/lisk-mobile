@@ -36,6 +36,7 @@ class AccountSummary extends React.Component {
       activeSlide: tokenKeys.filter(key => token.list[key]).indexOf(token.active),
     };
   }
+  height = 165;
 
   componentDidMount() {
     this.screenWidth = Dimensions.get('window').width;
@@ -78,7 +79,6 @@ class AccountSummary extends React.Component {
 
   renderProfile = (data) => {
     const { settings, priceTicker } = this.props;
-    const height = 165;
     const token = Object.keys(settings.token.list)[data.index];
 
     return (<Profile
@@ -88,7 +88,7 @@ class AccountSummary extends React.Component {
       account={data.item}
       settings={settings}
       interpolate={this.interpolate}
-      height={height}
+      height={this.height}
        />);
   }
 
@@ -143,19 +143,23 @@ class AccountSummary extends React.Component {
         { top, opacity, paddingBottom: this.interpolate([0, 100], [15, 0]) },
       ]}>
         <Image style={[styles.bg, styles.theme.bg]} source={bg} />
-        {
-          profiles.length > 1 ?
-            <Carousel
-              ref={(el) => { this.carousel = el; }}
-              firstItem={this.state.activeSlide}
-              data={profiles}
-              renderItem={this.renderProfile}
-              sliderWidth={width}
-              itemWidth={width}
-              onSnapToItem={this.changeToken}
-            /> :
-          this.renderProfile({ item: profiles[0], index: 0 })
-        }
+
+        <Animated.View style={[styles.container, { height: this.height },
+          { marginTop: this.interpolate([0, this.height + 10], [0, -1 * (this.height - 1)]) }]}>
+          {
+            profiles.length > 1 ?
+              <Carousel
+                ref={(el) => { this.carousel = el; }}
+                firstItem={this.state.activeSlide}
+                data={profiles}
+                renderItem={this.renderProfile}
+                sliderWidth={width}
+                itemWidth={width}
+                onSnapToItem={this.changeToken}
+              /> :
+            this.renderProfile({ item: profiles[0], index: 0 })
+          }
+        </Animated.View>
         {
           profiles.length > 1 ?
             <Animated.View style={[

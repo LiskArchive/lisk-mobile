@@ -49,9 +49,7 @@ const Profile = ({
 
   // console.log('>> Profile', token, account.address);
 
-  return (
-    <AView style={[styles.container, { height },
-      { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) }]}>
+  return (<View>
       <AView style={[styles.avatar,
         { marginTop: interpolate([0, 100], [0, 100]) }]}>
         {
@@ -107,7 +105,7 @@ const Profile = ({
           </P> : null
       }
       </AView>
-    </AView>
+    </View>
   );
 };
 
