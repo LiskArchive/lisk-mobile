@@ -221,18 +221,25 @@ const response = {
     },
   },
   getUnspentTransactionOutputs: {
-    unspent_outputs: [
+    data: [
       {
-        tx_hash: 'c156742387e44c7906091bc08d382951bfe1c9dc703856010e08ef803f90dafe',
-        tx_hash_big_endian: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1',
-        tx_index: 289209213,
-        tx_output_n: 0,
-        script: '76a914f201b8d17483229dc8198e6baf05ddff9421323888ac',
-        value: 1580000,
-        value_hex: '181be0',
-        confirmations: 1044,
+        tx_hash: '32c7d28320f9533f73e47f715b096020ae2c695c34ee7380401d03c96216f9ed',
+        tx_pos: 1,
+        height: 1488479,
+        value: 7327314,
+      },
+      {
+        tx_hash: '9daad153096f6907e611cba946a5681c727d7a1342388e12afd47de4efbc4002',
+        tx_pos: 1,
+        height: 1488489,
+        value: 871923,
       },
     ],
+    meta: {
+      total: 2,
+      offset: 0,
+      limit: 10,
+    },
   },
 };
 
@@ -350,11 +357,10 @@ describe('api/btc/transactions', () => {
   describe('getUnspentTransactionOutputs', () => {
     beforeEach(() => fetchMock.reset());
 
-    // @TODO: Fix before merge.
-    it.skip('resolves correctly', async () => {
+    it('resolves correctly', async () => {
       fetchMock.once('*', response.getUnspentTransactionOutputs);
-      const result = await transactions.getUnspentTransactionOutputs(address.mainnet);
-      expect(result).toEqual(response.getUnspentTransactionOutputs.unspent_outputs);
+      const result = await transactions.getUnspentTransactionOutputs(address.testnet);
+      expect(result).toEqual(response.getUnspentTransactionOutputs.data);
     });
 
     it('handles non-500 errors', async () => {
@@ -385,7 +391,7 @@ describe('api/btc/transactions', () => {
 
       transactions.getUnspentTransactionOutputs = jest.fn();
       transactions.getUnspentTransactionOutputs
-        .mockResolvedValue(response.getUnspentTransactionOutputs.unspent_outputs);
+        .mockResolvedValue(response.getUnspentTransactionOutputs.data);
     });
 
     it('throws error for insufficient balance', async () => {
@@ -401,8 +407,7 @@ describe('api/btc/transactions', () => {
       }
     });
 
-    // @TODO: Fix before merge.
-    it.skip('creates a valid transaction', async () => {
+    it('creates a valid transaction', async () => {
       const tx = await transactions.create({
         passphrase,
         recipientAddress: address.testnetRecipient,
