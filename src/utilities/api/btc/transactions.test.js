@@ -12,133 +12,213 @@ const address = {
 };
 
 const response = {
-  getTransactions: {
-    hash160: '4f6a9f245359d3b3441fcd22117c78466039caba',
-    address: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
-    n_tx: 2,
-    total_received: 401724600,
-    total_sent: 401724600,
-    final_balance: 0,
-    txs: [
-      {
-        ver: 1,
+  getTransaction: {
+    data: {
+      tx_raw: '02000000010701c2516a8374c0ef5e04154868949951115c33b99a127ca7948ec038b0b486010000006a47304402206ef553185610d6fb57ab7e841b64094c93443dd017a90c62d4526f3c6675b52e02204a508443ec4bad8c62aaf34a6605a1795dd11b96e3c90d0b30f79651e34f440701210288a7e893e8fa0c0ff0c83c4137ae331f0216a93cb3eecb79a5274aa0964d67e6ffffffff02e01b1800000000001976a914f201b8d17483229dc8198e6baf05ddff9421323888ac90400c00000000001976a914c57eaf552742752e4d3887a7a341714df670667388ac00000000',
+      tx: {
+        txid: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1',
+        version: 2,
+        locktime: 0,
         inputs: [
           {
+            txid: '86b4b038c08e94a77c129ab9335c11519994684815045eefc074836a51c20107',
+            n: 1,
+            script: '304402206ef553185610d6fb57ab7e841b64094c93443dd017a90c62d4526f3c6675b52e02204a508443ec4bad8c62aaf34a6605a1795dd11b96e3c90d0b30f79651e34f440701 0288a7e893e8fa0c0ff0c83c4137ae331f0216a93cb3eecb79a5274aa0964d67e6',
             sequence: 4294967295,
-            witness: '',
-            prev_out: {
-              spent: true,
-              spending_outpoints: [
-                {
-                  tx_index: 411031256,
-                  n: 0,
-                },
-              ],
-              tx_index: 409136088,
-              type: 0,
-              addr: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
-              value: 401724600,
+            txDetail: {
+              satoshi: 2383996,
+              value: '0.02383996',
               n: 1,
-              script: '76a9144f6a9f245359d3b3441fcd22117c78466039caba88ac',
+              scriptPubKey: {
+                asm: 'OP_DUP OP_HASH160 c57eaf552742752e4d3887a7a341714df6706673 OP_EQUALVERIFY OP_CHECKSIG',
+                hex: '76a914c57eaf552742752e4d3887a7a341714df670667388ac',
+                addresses: [
+                  'myXDB4jvDaLqStdeSBKJwhVbVHWuynQiY5',
+                ],
+              },
             },
-            script: '473044022078ca6d574cb3272fa7dfb28fd31a1acd9099dd521c1d4e7accb2086f60ad484202207b4131d72f6caf3a2c7758771b03e1b071cf0d8ee43f719bae2673ca79a2b7d701210305dbc31667a16d565c6f37da58ec37230f241eacd5950137df7b5a08996e6730',
           },
         ],
-        weight: 756,
-        block_height: 560808,
-        relayed_by: '0.0.0.0',
-        out: [
+        outputs: [
           {
-            spent: false,
-            tx_index: 411031256,
-            type: 0,
-            addr: 'bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4',
-            value: 401723000,
+            satoshi: 1580000,
+            value: '0.01580000',
             n: 0,
-            script: 'a91463f59fff9f9f13075e445d1ee6f864d0f375f91f87',
+            scriptPubKey: {
+              asm: 'OP_DUP OP_HASH160 f201b8d17483229dc8198e6baf05ddff94213238 OP_EQUALVERIFY OP_CHECKSIG',
+              hex: '76a914f201b8d17483229dc8198e6baf05ddff9421323888ac',
+              addresses: [
+                'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
+              ],
+            },
+          },
+          {
+            satoshi: 802960,
+            value: '0.00802960',
+            n: 1,
+            scriptPubKey: {
+              asm: 'OP_DUP OP_HASH160 c57eaf552742752e4d3887a7a341714df6706673 OP_EQUALVERIFY OP_CHECKSIG',
+              hex: '76a914c57eaf552742752e4d3887a7a341714df670667388ac',
+              addresses: [
+                'myXDB4jvDaLqStdeSBKJwhVbVHWuynQiY5',
+              ],
+            },
           },
         ],
-        lock_time: 0,
-        result: 0,
-        size: 189,
-        block_index: 1748075,
-        time: 1548876059,
-        tx_index: 411031256,
-        vin_sz: 1,
-        hash: 'a146763b49a6181e3fbc611def63af13ac2c08a0d97c80e64c93e8e083110aa9',
-        vout_sz: 1,
+      },
+      timestamp: 1550570887,
+      confirmations: 10611,
+      feeSatoshi: 1036,
+      inputTotalSatoshi: 2383996,
+      outputTotalSatoshi: 2382960,
+    },
+  },
+  getTransactions: {
+    data: [
+      {
+        tx_raw: '02000000010701c2516a8374c0ef5e04154868949951115c33b99a127ca7948ec038b0b486010000006a47304402206ef553185610d6fb57ab7e841b64094c93443dd017a90c62d4526f3c6675b52e02204a508443ec4bad8c62aaf34a6605a1795dd11b96e3c90d0b30f79651e34f440701210288a7e893e8fa0c0ff0c83c4137ae331f0216a93cb3eecb79a5274aa0964d67e6ffffffff02e01b1800000000001976a914f201b8d17483229dc8198e6baf05ddff9421323888ac90400c00000000001976a914c57eaf552742752e4d3887a7a341714df670667388ac00000000',
+        tx: {
+          txid: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1',
+          version: 2,
+          locktime: 0,
+          inputs: [
+            {
+              txid: '86b4b038c08e94a77c129ab9335c11519994684815045eefc074836a51c20107',
+              n: 1,
+              script: '304402206ef553185610d6fb57ab7e841b64094c93443dd017a90c62d4526f3c6675b52e02204a508443ec4bad8c62aaf34a6605a1795dd11b96e3c90d0b30f79651e34f440701 0288a7e893e8fa0c0ff0c83c4137ae331f0216a93cb3eecb79a5274aa0964d67e6',
+              sequence: 4294967295,
+              txDetail: {
+                satoshi: 2383996,
+                value: '0.02383996',
+                n: 1,
+                scriptPubKey: {
+                  asm: 'OP_DUP OP_HASH160 c57eaf552742752e4d3887a7a341714df6706673 OP_EQUALVERIFY OP_CHECKSIG',
+                  hex: '76a914c57eaf552742752e4d3887a7a341714df670667388ac',
+                  addresses: [
+                    'myXDB4jvDaLqStdeSBKJwhVbVHWuynQiY5',
+                  ],
+                },
+              },
+            },
+          ],
+          outputs: [
+            {
+              satoshi: 1580000,
+              value: '0.01580000',
+              n: 0,
+              scriptPubKey: {
+                asm: 'OP_DUP OP_HASH160 f201b8d17483229dc8198e6baf05ddff94213238 OP_EQUALVERIFY OP_CHECKSIG',
+                hex: '76a914f201b8d17483229dc8198e6baf05ddff9421323888ac',
+                addresses: [
+                  'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
+                ],
+              },
+            },
+            {
+              satoshi: 802960,
+              value: '0.00802960',
+              n: 1,
+              scriptPubKey: {
+                asm: 'OP_DUP OP_HASH160 c57eaf552742752e4d3887a7a341714df6706673 OP_EQUALVERIFY OP_CHECKSIG',
+                hex: '76a914c57eaf552742752e4d3887a7a341714df670667388ac',
+                addresses: [
+                  'myXDB4jvDaLqStdeSBKJwhVbVHWuynQiY5',
+                ],
+              },
+            },
+          ],
+        },
+        timestamp: 1550570887,
+        confirmations: 10609,
+        height: 1478119,
+        block: {
+          version: 536870912,
+          prev_block_hash: '00000000000007a4def048fff841cb1826e6fadfc46992b2eed4d1b4ee56a9d5',
+          merkle_root: '904f8d2a7b48493deb0265a18199ed56f6ab04301be9c9bbda728a30641e79c8',
+          timestamp: 1550570887,
+          bits: 437239872,
+          nonce: 237766340,
+          block_height: 1478119,
+        },
+        feeSatoshi: 1036,
+        inputTotalSatoshi: 2383996,
+        outputTotalSatoshi: 2382960,
       },
       {
-        ver: 1,
-        inputs: [
-          {
-            sequence: 4294967293,
-            witness: '',
-            prev_out: {
-              spent: true,
-              spending_outpoints: [
-                {
-                  tx_index: 409136088,
-                  n: 0,
-                },
-              ],
-              tx_index: 409075879,
-              type: 0,
-              addr: '1BrQvwTsDntfBAowYrqKq98MYY3dUNjnU3',
-              value: 774865158,
-              n: 1,
-              script: '76a91477099d9f2157a80c403dcb4c87f20b29f04506f088ac',
-            },
-            script: '483045022100e06322de8e7fc608084a2b7f83da88b6474cd4b7ef52b8cf53258adc7cb8814b022032dba7068cab1cc7bbb561ca17c61335642627d98bae7798283f75920fe03204012102a9059f4e87767f7e0ea5efceb33fc4cb8f6139a8c251bf8798e873d96105bef2',
-          },
-        ],
-        weight: 904,
-        block_height: 559919,
-        relayed_by: '0.0.0.0',
-        out: [
-          {
-            spent: true,
-            spending_outpoints: [
-              {
-                tx_index: 411616078,
-                n: 1,
-              },
-            ],
-            tx_index: 409136088,
-            type: 0,
-            addr: '14k18ngzkYcPnriyTNMaSnNgQBCRsKunYM',
-            value: 373138298,
-            n: 0,
-            script: '76a914290a6033f096917b3609621b9407aed043d01c1e88ac',
-          },
-          {
-            spent: true,
-            spending_outpoints: [
-              {
-                tx_index: 411031256,
+        tx_raw: '0200000001c156742387e44c7906091bc08d382951bfe1c9dc703856010e08ef803f90dafe000000006b483045022100d1dde0fe78b5e20d570348eca954336ccdfd8b25cb150203977e690b3dbc71eb02205f45fde27ded53dec38ca96530722f11bd4c0da96acd698e3d826395a57cfcac012102cd9e67acba4950837bb773b6d05f54ba0594aa4863b9dcb0dfe0bb94d14c56c2ffffffff029e000000000000001976a914f201b8d17483229dc8198e6baf05ddff9421323888ac180d1800000000001976a914f201b8d17483229dc8198e6baf05ddff9421323888ac00000000',
+        tx: {
+          txid: 'd12774214858c1332b5c263700cb792ce5a814cb4596661c418644eff03cc007',
+          version: 2,
+          locktime: 0,
+          inputs: [
+            {
+              txid: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1',
+              n: 0,
+              script: '3045022100d1dde0fe78b5e20d570348eca954336ccdfd8b25cb150203977e690b3dbc71eb02205f45fde27ded53dec38ca96530722f11bd4c0da96acd698e3d826395a57cfcac01 02cd9e67acba4950837bb773b6d05f54ba0594aa4863b9dcb0dfe0bb94d14c56c2',
+              sequence: 4294967295,
+              txDetail: {
+                satoshi: 1580000,
+                value: '0.01580000',
                 n: 0,
+                scriptPubKey: {
+                  asm: 'OP_DUP OP_HASH160 f201b8d17483229dc8198e6baf05ddff94213238 OP_EQUALVERIFY OP_CHECKSIG',
+                  hex: '76a914f201b8d17483229dc8198e6baf05ddff9421323888ac',
+                  addresses: [
+                    'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
+                  ],
+                },
               },
-            ],
-            tx_index: 409136088,
-            type: 0,
-            addr: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
-            value: 401724600,
-            n: 1,
-            script: '76a9144f6a9f245359d3b3441fcd22117c78466039caba88ac',
-          },
-        ],
-        lock_time: 559918,
-        result: -401724600,
-        size: 226,
-        rbf: true,
-        block_index: 1745627,
-        time: 1548345462,
-        tx_index: 409136088,
-        vin_sz: 1,
-        hash: 'e85812a1ce720f9bcda387465a7bd2c2bbfa8b62ce5220f2df1a3017cbda70e4',
-        vout_sz: 2,
+            },
+          ],
+          outputs: [
+            {
+              satoshi: 158,
+              value: '0.00000158',
+              n: 0,
+              scriptPubKey: {
+                asm: 'OP_DUP OP_HASH160 f201b8d17483229dc8198e6baf05ddff94213238 OP_EQUALVERIFY OP_CHECKSIG',
+                hex: '76a914f201b8d17483229dc8198e6baf05ddff9421323888ac',
+                addresses: [
+                  'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
+                ],
+              },
+            },
+            {
+              satoshi: 1576216,
+              value: '0.01576216',
+              n: 1,
+              scriptPubKey: {
+                asm: 'OP_DUP OP_HASH160 f201b8d17483229dc8198e6baf05ddff94213238 OP_EQUALVERIFY OP_CHECKSIG',
+                hex: '76a914f201b8d17483229dc8198e6baf05ddff9421323888ac',
+                addresses: [
+                  'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
+                ],
+              },
+            },
+          ],
+        },
+        timestamp: 1550653562,
+        confirmations: 9499,
+        height: 1479229,
+        block: {
+          version: 536870912,
+          prev_block_hash: '0000000000000abed1641f96f7b32b4829b2baf259ded5acc4c0dd88ab1dd3d3',
+          merkle_root: '0284ed79690dcaac5bed6adde65fe865aa6c4bd8553039219e76d52b96b531a0',
+          timestamp: 1550653562,
+          bits: 437239872,
+          nonce: 1618048865,
+          block_height: 1479229,
+        },
+        feeSatoshi: 3626,
+        inputTotalSatoshi: 1580000,
+        outputTotalSatoshi: 1576374,
       },
     ],
+    meta: {
+      count: 2,
+      offset: 0,
+      total: 45,
+    },
   },
   getUnspentTransactionOutputs: {
     unspent_outputs: [
@@ -186,30 +266,25 @@ describe('api/btc/transactions', () => {
 
     beforeEach(() => fetchMock.reset());
 
-    // @TODO: Fix before merge.
-    it.skip('resolves correctly for single transaction', async () => {
-      const tx = response.getTransactions.txs[0];
+    it('resolves correctly for single transaction', async () => {
       transactions.getLatestBlockHeight.mockResolvedValueOnce(600000);
-      fetchMock.once('*', tx);
-      const id = tx.hash;
-      const result = await transactions.get({ address: address.mainnet, id });
+      fetchMock.once('*', response.getTransaction);
+      const result = await transactions.get({ address: address.testnet, id: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1' });
       expect(result).toEqual({
         data: [
           {
-            id: 'a146763b49a6181e3fbc611def63af13ac2c08a0d97c80e64c93e8e083110aa9',
-            timestamp: 1548876059000,
-            confirmations: (600000 - 560808) + 1,
-            fee: 1600,
-            senderAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
-            recipientAddress: 'Unparsed Address',
-            amount: 401723000,
+            id: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1',
+            timestamp: 1550570887000,
+            confirmations: NaN, // @TODO: fix this after bitcoin-bridge implements confirmations
+            fee: 1036,
+            recipientAddress: 'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
+            senderAddress: 'Unparsed Address',
+            amount: 1580000,
             data: '',
             type: 0,
           },
         ],
-        meta: {
-          count: 1,
-        },
+        meta: {},
       });
     });
 
