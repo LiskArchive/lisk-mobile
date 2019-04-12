@@ -15,14 +15,13 @@ import { tokenMap } from '../../../constants/tokens';
 const normalizeTransactionsResponse = ({
   address,
   list,
-  blockHeight,
 }) => list.map(({
-  feeSatoshi, height, tx, timestamp,
+  tx, feeSatoshi, confirmations, timestamp,
 }) => {
   const data = {
     id: tx.txid,
     timestamp: Number(timestamp) * 1000,
-    confirmations: blockHeight > 0 ? (blockHeight - height) + 1 : height,
+    confirmations,
     type: 0,
     data: '',
   };
@@ -47,25 +46,6 @@ const normalizeTransactionsResponse = ({
   return data;
 });
 
-/**
- * Retrieves latest block from the Blockchain.info API and returns the height.
- * @returns {Promise<Number>}
- */
-export const getLatestBlockHeight = () => new Promise(async (resolve) => {
-  try {
-    const response = await fetch(`${config.url}/latestblock`);
-    const json = await response.json();
-
-    if (response.ok) {
-      resolve(json.height);
-    } else {
-      resolve(0);
-    }
-  } catch (error) {
-    resolve(0);
-  }
-});
-
 export const get = ({
   id,
   address,
@@ -78,18 +58,15 @@ export const get = ({
     if (id) {
       response = await fetch(`${config.url}/transaction/${id}`, config.requestOptions);
     } else {
-      response = await fetch(`${config.url}/transactions/${address}?limit=${limit}&offset=${offset}`, config.requestOptions);
+      response = await fetch(`${config.url}/transactions/${address}?limit=${limit}&offset=${offset}&sort=height:desc`, config.requestOptions);
     }
 
     const json = await response.json();
 
     if (response.ok) {
-      const blockHeight = await exports.getLatestBlockHeight();
-
       const data = normalizeTransactionsResponse({
         address,
         list: id ? [json.data] : json.data,
-        blockHeight,
       });
 
       resolve({

@@ -244,37 +244,10 @@ const response = {
 };
 
 describe('api/btc/transactions', () => {
-  describe('getLatestBlockHeight', () => {
-    beforeEach(() => fetchMock.reset());
-
-    it('resolves correctly', async () => {
-      fetchMock.once('*', { height: 1 });
-      const result = await transactions.getLatestBlockHeight();
-      expect(result).toEqual(1);
-    });
-
-    it('handles non-500 errors and resolves 0', async () => {
-      fetchMock.once('*', { status: 400, body: { message: 'error' } });
-      const result = await transactions.getLatestBlockHeight();
-      expect(result).toEqual(0);
-    });
-
-    it('handles errors and resolves 0', async () => {
-      fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
-      const result = await transactions.getLatestBlockHeight();
-      expect(result).toEqual(0);
-    });
-  });
-
   describe('get', () => {
-    beforeAll(() => {
-      transactions.getLatestBlockHeight = jest.fn();
-    });
-
     beforeEach(() => fetchMock.reset());
 
     it('resolves correctly for single transaction', async () => {
-      transactions.getLatestBlockHeight.mockResolvedValueOnce(600000);
       fetchMock.once('*', response.getTransaction);
       const result = await transactions.get({ address: address.testnet, id: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1' });
       expect(result).toEqual({
@@ -282,7 +255,7 @@ describe('api/btc/transactions', () => {
           {
             id: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1',
             timestamp: 1550570887000,
-            confirmations: NaN, // @TODO: fix this after bitcoin-bridge implements confirmations
+            confirmations: 10611,
             fee: 1036,
             recipientAddress: 'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
             senderAddress: 'Unparsed Address',
@@ -296,7 +269,6 @@ describe('api/btc/transactions', () => {
     });
 
     it('resolves correctly for multiple transactions', async () => {
-      transactions.getLatestBlockHeight.mockResolvedValueOnce(0);
       fetchMock.once('*', response.getTransactions);
       const result = await transactions.get({ address: address.testnet });
       expect(result).toEqual({
@@ -304,7 +276,7 @@ describe('api/btc/transactions', () => {
           {
             id: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1',
             timestamp: 1550570887000,
-            confirmations: 1478119,
+            confirmations: 10609,
             fee: 1036,
             senderAddress: 'Unparsed Address',
             recipientAddress: 'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
@@ -315,7 +287,7 @@ describe('api/btc/transactions', () => {
           {
             id: 'd12774214858c1332b5c263700cb792ce5a814cb4596661c418644eff03cc007',
             timestamp: 1550653562000,
-            confirmations: 1479229,
+            confirmations: 9499,
             fee: 3626,
             senderAddress: 'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
             recipientAddress: 'Unparsed Address',
