@@ -288,38 +288,39 @@ describe('api/btc/transactions', () => {
       });
     });
 
-    // @TODO: Fix before merge.
-    it.skip('resolves correctly for multiple transactions', async () => {
+    it('resolves correctly for multiple transactions', async () => {
       transactions.getLatestBlockHeight.mockResolvedValueOnce(0);
       fetchMock.once('*', response.getTransactions);
-      const result = await transactions.get({ address: address.mainnet });
+      const result = await transactions.get({ address: address.testnet });
       expect(result).toEqual({
         data: [
           {
-            id: 'a146763b49a6181e3fbc611def63af13ac2c08a0d97c80e64c93e8e083110aa9',
-            timestamp: 1548876059000,
-            confirmations: 560808,
-            fee: 1600,
-            senderAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
-            recipientAddress: 'Unparsed Address',
-            amount: 401723000,
+            id: 'feda903f80ef080e01563870dcc9e1bf5129388dc01b0906794ce487237456c1',
+            timestamp: 1550570887000,
+            confirmations: 1478119,
+            fee: 1036,
+            senderAddress: 'Unparsed Address',
+            recipientAddress: 'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
+            amount: 1580000,
             type: 0,
             data: '',
           },
           {
-            id: 'e85812a1ce720f9bcda387465a7bd2c2bbfa8b62ce5220f2df1a3017cbda70e4',
-            timestamp: 1548345462000,
-            confirmations: 559919,
-            fee: 2260,
-            senderAddress: '1BrQvwTsDntfBAowYrqKq98MYY3dUNjnU3',
-            recipientAddress: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
-            amount: 401724600,
+            id: 'd12774214858c1332b5c263700cb792ce5a814cb4596661c418644eff03cc007',
+            timestamp: 1550653562000,
+            confirmations: 1479229,
+            fee: 3626,
+            senderAddress: 'n3aZt7uZhnBeC9quq6btKyC8qXvskEiE1B',
+            recipientAddress: 'Unparsed Address',
+            amount: 158,
             type: 0,
             data: '',
           },
         ],
         meta: {
           count: 2,
+          offset: 0,
+          total: 45,
         },
       });
     });
