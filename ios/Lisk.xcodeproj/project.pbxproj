@@ -56,6 +56,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		86B72D090B5F4362B8AFC372 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 928A6CDBC51B4EDB99C06F39 /* Feather.ttf */; };
 		A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
+		A614F654C71047B3AF131C27 /* libRNShakeEvent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3C84F25D024703B97337E4 /* libRNShakeEvent.a */; };
 		AC2943B72226A03C009DAFD3 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6221A8022269DA700E90115 /* libRNKeychain.a */; };
 		AC4B3F8B21F602A000BDDF7B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC4B3F8A21F602A000BDDF7B /* LaunchScreen.xib */; };
 		AC6D413B21EF4C1D00B276BD /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -312,6 +313,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = SajjadBlurOverlay;
+		};
+		33ABDF85225DF346001FBBC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A86EA63B85C141F79F6C5365 /* RNShakeEvent.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNShakeEvent;
 		};
 		33DD262D20CFBC560061FC18 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -670,6 +678,7 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		64706DEA34884121AA397B0B /* ReactNativeFingerprintScanner.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeFingerprintScanner.xcodeproj; path = "../node_modules/react-native-fingerprint-scanner/ios/ReactNativeFingerprintScanner.xcodeproj"; sourceTree = "<group>"; };
 		654F84AE40A946A284F01FE9 /* RNReactNativeHapticFeedback.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeHapticFeedback.xcodeproj; path = "../node_modules/react-native-haptic-feedback/ios/RNReactNativeHapticFeedback.xcodeproj"; sourceTree = "<group>"; };
+		6F3C84F25D024703B97337E4 /* libRNShakeEvent.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShakeEvent.a; sourceTree = "<group>"; };
 		73630C6DAD5547B6BB1A155F /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		754CCB7535514702A07EE289 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -677,6 +686,7 @@
 		8CD4A0E456D843B18B84FB4B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		928A6CDBC51B4EDB99C06F39 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		9F87DBCE083E405AA4F56F21 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		A86EA63B85C141F79F6C5365 /* RNShakeEvent.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShakeEvent.xcodeproj; path = "../node_modules/react-native-shake/ios/RNShakeEvent.xcodeproj"; sourceTree = "<group>"; };
 		AC4B3F8A21F602A000BDDF7B /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		AC6D417221EF4C6D00B276BD /* LiskMessageExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiskMessageExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiskMessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -759,6 +769,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				A614F654C71047B3AF131C27 /* libRNShakeEvent.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,9 +991,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		33ABDF82225DF346001FBBC1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33ABDF86225DF346001FBBC1 /* libRNShakeEvent.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		33DD260220CFBC550061FC18 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
+				6F3C84F25D024703B97337E4 /* libRNShakeEvent.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1102,6 +1122,7 @@
 				654F84AE40A946A284F01FE9 /* RNReactNativeHapticFeedback.xcodeproj */,
 				10331CBE3B784A1095359F88 /* Interactable.xcodeproj */,
 				EBBAA1342DFE4B42AB7AC197 /* RNQuickAction.xcodeproj */,
+				A86EA63B85C141F79F6C5365 /* RNShakeEvent.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1357,6 +1378,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1475,6 +1497,10 @@
 				{
 					ProductGroup = AC1EA59721B90ABD0086B121 /* Products */;
 					ProjectRef = 654F84AE40A946A284F01FE9 /* RNReactNativeHapticFeedback.xcodeproj */;
+				},
+				{
+					ProductGroup = 33ABDF82225DF346001FBBC1 /* Products */;
+					ProjectRef = A86EA63B85C141F79F6C5365 /* RNShakeEvent.xcodeproj */;
 				},
 				{
 					ProductGroup = 33DD26CB20CFC01C0061FC18 /* Products */;
@@ -1712,6 +1738,13 @@
 			fileType = archive.ar;
 			path = libSajjadBlurOverlay.a;
 			remoteRef = 338348B921762DA2004E2E7A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		33ABDF86225DF346001FBBC1 /* libRNShakeEvent.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNShakeEvent.a;
+			remoteRef = 33ABDF85225DF346001FBBC1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		33DD262E20CFBC560061FC18 /* libRNVectorIcons.a */ = {
@@ -2176,12 +2209,14 @@
 					"$(SRCROOT)/../node_modules/react-native-haptic-feedback/ios",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
 					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
+					"$(SRCROOT)/../node_modules/react-native-shake/ios",
 				);
 				INFOPLIST_FILE = LiskTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2224,12 +2259,14 @@
 					"$(SRCROOT)/../node_modules/react-native-haptic-feedback/ios",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
 					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
+					"$(SRCROOT)/../node_modules/react-native-shake/ios",
 				);
 				INFOPLIST_FILE = LiskTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2279,6 +2316,7 @@
 					"$(SRCROOT)/../node_modules/react-native-haptic-feedback/ios",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
 					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
+					"$(SRCROOT)/../node_modules/react-native-shake/ios",
 				);
 				INFOPLIST_FILE = Lisk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2326,6 +2364,7 @@
 					"$(SRCROOT)/../node_modules/react-native-haptic-feedback/ios",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
 					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
+					"$(SRCROOT)/../node_modules/react-native-shake/ios",
 				);
 				INFOPLIST_FILE = Lisk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2449,12 +2488,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
+					"$(SRCROOT)/../node_modules/react-native-shake/ios",
 				);
 				INFOPLIST_FILE = LiskMessageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -2506,12 +2547,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
+					"$(SRCROOT)/../node_modules/react-native-shake/ios",
 				);
 				INFOPLIST_FILE = LiskMessageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				MTL_FAST_MATH = YES;
