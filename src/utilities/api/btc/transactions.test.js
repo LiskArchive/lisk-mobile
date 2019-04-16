@@ -297,9 +297,7 @@ describe('api/btc/transactions', () => {
           },
         ],
         meta: {
-          count: 2,
-          offset: 0,
-          total: 45,
+          count: 45,
         },
       });
     });
