@@ -20,7 +20,7 @@ const normalizeTransactionsResponse = ({
 }) => {
   const data = {
     id: tx.txid,
-    timestamp: Number(timestamp) * 1000,
+    timestamp: timestamp ? Number(timestamp) * 1000 : null,
     confirmations,
     type: 0,
     data: '',
@@ -49,7 +49,7 @@ const normalizeTransactionsResponse = ({
 export const get = ({
   id,
   address,
-  limit = 50,
+  limit = 20,
   offset = 0,
 }) => new Promise(async (resolve, reject) => {
   try {
@@ -68,10 +68,9 @@ export const get = ({
         address,
         list: id ? [json.data] : json.data,
       });
-
       resolve({
         data,
-        meta: json.meta || {},
+        meta: json.meta ? { count: json.meta.total } : {},
       });
     } else {
       reject(json);
