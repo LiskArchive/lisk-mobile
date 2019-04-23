@@ -21,7 +21,7 @@ const normalizeTransactionsResponse = ({
   const data = {
     id: tx.txid,
     timestamp: timestamp ? Number(timestamp) * 1000 : null,
-    confirmations,
+    confirmations: confirmations || 0,
     type: 0,
     data: '',
   };
@@ -68,6 +68,7 @@ export const get = ({
         address,
         list: id ? [json.data] : json.data,
       });
+
       resolve({
         data,
         meta: json.meta ? { count: json.meta.total } : {},
