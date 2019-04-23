@@ -169,7 +169,7 @@ export const blockUpdated = () => async (dispatch, getState) => {
   const activeToken = getState().settings.token.active;
   const { address } = getState().accounts.info[activeToken];
   const { confirmed } = getState().transactions;
-  const lastTx = confirmed.length > 0 ? confirmed[0] : { timestamp: 0 };
+  const lastTx = confirmed.length > 0 ? confirmed[0] : null;
 
   try {
     const response = await transactionsAPI.get(activeToken, {
@@ -177,7 +177,9 @@ export const blockUpdated = () => async (dispatch, getState) => {
       offset: 0,
     });
 
-    const newTransactions = response.data.filter(tx => tx.timestamp > lastTx.timestamp);
+    const newTransactions = lastTx ?
+      response.data.filter(tx => tx.confirmations <= lastTx.confirmations) :
+      response.data;
 
     if (newTransactions.length) {
       dispatch({
