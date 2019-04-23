@@ -176,6 +176,41 @@ describe('Action: Accounts', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
 
+    it('should update user and transactions when store is not empty', async () => {
+      store = mockStore({
+        accounts,
+        transactions: {
+          confirmed: [{
+            timestamp: 0,
+          }],
+        },
+        settings,
+      });
+
+      const expectedActions = [
+        {
+          type: actionTypes.transactionsUpdated,
+          data: {
+            confirmed: data.transactions.data,
+            count: data.transactions.meta.count,
+          },
+        },
+        {
+          type: actionTypes.accountUpdated,
+          data: {
+            account: data.account,
+            activeToken: data.activeToken,
+          },
+        },
+      ];
+
+      accountAPI.getSummary.mockResolvedValueOnce(data.account);
+      transactionsAPI.get.mockResolvedValueOnce(data.transactions);
+
+      await store.dispatch(blockUpdated());
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
     it('should not update if there is no new transaction', async () => {
       transactionsAPI.get.mockResolvedValueOnce({ data: [] });
       await store.dispatch(blockUpdated());
