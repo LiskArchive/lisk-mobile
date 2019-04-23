@@ -10,7 +10,6 @@ import { tokenMap } from '../../../constants/tokens';
  * @param {Object} data
  * @param {String} data.address Base address to use for formatting transactions
  * @param {Array} data.list Transaction list retrieved from API
- * @param {Number} data.blockHeight Latest block height for calculating confirmation count
  */
 const normalizeTransactionsResponse = ({
   address,
@@ -21,7 +20,7 @@ const normalizeTransactionsResponse = ({
   const data = {
     id: tx.txid,
     timestamp: timestamp ? Number(timestamp) * 1000 : null,
-    confirmations,
+    confirmations: confirmations || 0,
     type: 0,
     data: '',
   };
@@ -68,6 +67,7 @@ export const get = ({
         address,
         list: id ? [json.data] : json.data,
       });
+
       resolve({
         data,
         meta: json.meta ? { count: json.meta.total } : {},
