@@ -13,7 +13,7 @@ export default () => ({
     },
     currencyText: {
       fontSize: fonts.size.input,
-      fontFamily: fonts.family.contextLight,
+      fontFamily: fonts.family.context,
     },
   },
 
