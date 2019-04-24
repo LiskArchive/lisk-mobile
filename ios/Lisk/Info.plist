@@ -36,7 +36,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>9</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -60,6 +60,8 @@
 	<string>Lisk uses  your comera to scan QRcodes</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>$(PRODUCT_NAME) Authentication</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSMotionUsageDescription</key>
@@ -69,8 +71,6 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Lisk uses your photo library to access your stored qr codes.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>UIAppFonts</key>
 	<array>
