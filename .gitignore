@@ -65,3 +65,8 @@ reports
 ## Commercial fonts
 src/assets/fonts/basierCircle/*
 src/assets/fonts/gilroy/*
+
+android/app/src/main/assets/fonts/BasierCircle-Regular.otf
+android/app/src/main/assets/fonts/BasierCircle-Bold.otf
+android/app/src/main/assets/fonts/BasierCircle-SemiBold.otf
+android/app/src/main/assets/fonts/Gilroy-Bold.ttf
