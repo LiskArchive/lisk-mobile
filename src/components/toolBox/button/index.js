@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 import { TouchableHighlight, Text } from 'react-native';
 import getStyles from './styles';
-import { colors, themes } from '../../../constants/styleGuide';
 import Icon from '../icon';
 import withTheme from '../../withTheme';
 
@@ -19,19 +17,6 @@ const labelStyle = ({
   return mergestyle;
 };
 
-const primaryStyle = ({ styles, disabled }) => {
-  const mergestyle = [
-    styles.button,
-    styles.primaryButton,
-  ];
-
-  if (disabled) {
-    mergestyle.push(styles.disabledButtonColor);
-    mergestyle.push(styles.theme.disabledButtonColor);
-  }
-  return mergestyle;
-};
-
 const modifyProps = (props) => {
   const modifiedProps = Object.keys(props)
     .filter(key => !(/onClick|children|style/.test(key)))
@@ -41,68 +26,58 @@ const modifyProps = (props) => {
   return modifiedProps;
 };
 
-const Button = (props) => {
-  const modifiedProps = modifyProps(props);
-  return (<TouchableHighlight underlayColor='transparent' {...modifiedProps}>
-    <Text style={props.style}>{props.children || props.title}</Text>
-  </TouchableHighlight>);
-};
-
-const PrimaryButton = (props) => {
+/**
+ * Button Component
+ */
+const BaseButton = (props) => {
   const {
-    theme, disabled, styles, noTheme, style,
+    styles, textStyle, children, title, disabled,
   } = props;
 
-  const disableColor = (noTheme || theme === themes.light) ?
-    colors.light.gray5 : colors.dark.navigationBg;
-
   return (
-    <LinearGradient
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 0 }}
-      colors={disabled ?
-        [disableColor, disableColor] :
-        [colors.light.actionRedAccent, colors.light.actionRed]
-      }
+    <TouchableHighlight
+      {...modifyProps(props)}
+      underlayColor='transparent'
       style={[
-        styles.buttonWrapper,
-        style,
+        styles.buttonContainer,
+        props.style,
+        disabled ? styles.disabledButtonContainer : null,
       ]}
     >
-      <Button {...props} style={primaryStyle(props)} />
-    </LinearGradient>
+      <Text style={[styles.buttonText, textStyle]}>
+        {children || title}
+      </Text>
+    </TouchableHighlight>
   );
 };
 
-const SecondaryButton = (props) => {
-  const {
-    theme, disabled, styles, noTheme, style,
-  } = props;
+export const Button = withTheme(BaseButton, getStyles());
 
-  const disableColor = (noTheme || theme === themes.light) ?
-    colors.light.gray5 : colors.dark.navigationBg;
+/**
+ * Primary Button Component
+ */
+const BasePrimaryButton = (props) => {
+  const { styles, noTheme } = props;
 
   return (
-    <LinearGradient
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 0 }}
-      colors={disabled ?
-        [disableColor, disableColor] :
-        [colors.light.actionBlueAccent, colors.light.actionBlue]
-      }
+    <Button
+      {...props}
       style={[
-        styles.buttonWrapper,
-        style,
+        styles.primaryButtonContainer,
+        noTheme ? null : styles.theme.primaryButtonContainer,
+        props.style,
       ]}
-    >
-      <Button {...props} style={primaryStyle(props)} />
-    </LinearGradient>
+      textStyle={[
+        styles.primaryButtonText,
+        noTheme ? null : styles.theme.primaryButtonText,
+      ]}
+    />
   );
 };
 
-const LabelButton = props =>
-  <Button {...props} style={labelStyle(props)} />;
+export const PrimaryButton = withTheme(BasePrimaryButton, getStyles());
 
+const LabelButton = props => <Button {...props} style={labelStyle(props)} />;
 
 /**
  * Creates a button with and icon on the side. direction of the icon and title
@@ -137,16 +112,11 @@ const IconButton = (props) => {
   </TouchableHighlight>);
 };
 
-const ThemedPrimaryButton = withTheme(PrimaryButton, getStyles());
-const ThemedSecondaryButton = withTheme(SecondaryButton, getStyles());
 const ThemedLabelButton = withTheme(LabelButton, getStyles());
 const ThemedIconButton = withTheme(IconButton, getStyles());
-const ThemedButton = withTheme(Button, getStyles());
 
 export {
-  ThemedPrimaryButton as PrimaryButton,
-  ThemedSecondaryButton as SecondaryButton,
+  PrimaryButton as SecondaryButton,
   ThemedLabelButton as LabelButton,
   ThemedIconButton as IconButton,
-  ThemedButton as Button,
 };

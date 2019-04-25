@@ -7,10 +7,6 @@ export default () => ({
       fontFamily: fonts.family.context,
       textAlign: 'center',
     },
-    primaryButton: {
-      color: colors.light.white,
-      lineHeight: boxes.buttonHeight,
-    },
     buttonWrapper: {
       borderRadius: 3,
       borderWidth: 1,
@@ -28,9 +24,6 @@ export default () => ({
       color: colors.light.actionBlue,
       lineHeight: 18,
     },
-    disabledButtonBg: {
-      borderWidth: 1,
-    },
     labelButton: {
       backgroundColor: 'transparent',
       color: colors.light.actionBlueAccent,
@@ -39,17 +32,34 @@ export default () => ({
       borderColor: colors.light.actionBlueAccent,
       fontFamily: fonts.family.context,
     },
-  },
-
-  [themes.light]: {
-    disabledButtonColor: {
-      color: colors.light.gray2,
+    buttonContainer: {
+      borderColor: colors.light.ghost,
+      borderWidth: 1,
+      borderRadius: 2,
+    },
+    buttonText: {
+      color: colors.light.maastrichtBlue,
+      lineHeight: boxes.buttonHeight,
+      fontFamily: fonts.family.contextSemiBold,
+      fontSize: fonts.size.base,
+      textAlign: 'center',
+    },
+    primaryButtonContainer: {
+      borderColor: 'transparent',
+      backgroundColor: colors.light.ultramarineBlue,
+    },
+    primaryButtonText: {
+      color: colors.light.white,
+    },
+    disabledButtonContainer: {
+      opacity: 0.75,
     },
   },
+
+  [themes.light]: {},
 
   [themes.dark]: {
-    disabledButtonColor: {
-      color: colors.dark.gray2,
-    },
+    primaryButtonContainer: {},
+    primaryButtonText: {},
   },
 });
