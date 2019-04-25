@@ -179,17 +179,16 @@ class Form extends React.Component {
             secureTextEntry={Platform.OS !== 'ios'}
             keyboardAppearance="light"
           />
-          {
-            passphrase.value === '' ?
-              <IconButton
-                onPress={this.toggleCamera}
-                titleStyle={styles.scanButtonTitle}
-                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-                title={t('Scan')}
-                icon='scanner'
-                iconSize={18}
-                color={colors.light.blue} /> : null
-          }
+
+          <IconButton
+            onPress={this.toggleCamera}
+            titleStyle={styles.scanButtonTitle}
+            style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+            title={t('Scan')}
+            icon='scanner'
+            iconSize={16}
+            color={colors.light.ultramarineBlue}
+          />
         </Animated.View>
 
         <KeyboardAwareScrollView
