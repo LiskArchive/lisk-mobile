@@ -74,13 +74,8 @@ const styles = {
     height: 42,
   },
   input: {
-    borderRightColor: 'transparent',
-    color: 'black',
     fontFamily: fonts.family.passphrase,
     textAlign: 'justify',
-    paddingTop: 10,
-    paddingBottom: 10,
-    minHeight: 40,
   },
   allWhite: {
     borderTopColor: colors.light.white,
