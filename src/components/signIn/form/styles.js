@@ -36,13 +36,13 @@ const styles = {
     paddingBottom: 20,
   },
   question: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     textAlign: 'center',
     marginRight: 4,
     marginBottom: 5,
   },
   link: {
-    color: colors.light.blue,
+    color: colors.light.ultramarineBlue,
     fontWeight: 'bold',
     textAlign: 'center',
   },
@@ -85,7 +85,7 @@ const styles = {
     top: deviceType() === 'iOSx' ? 48 : 24,
   },
   backButtonTitle: {
-    color: colors.light.blue,
+    color: colors.light.ultramarineBlue,
   },
 };
 
