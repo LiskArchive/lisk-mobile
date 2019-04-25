@@ -4,7 +4,7 @@ import Swiper from 'react-native-swiper';
 import { translate } from 'react-i18next';
 import Icon from '../toolBox/icon';
 import { H2, P } from '../toolBox/typography';
-import { LabelButton, SecondaryButton } from '../toolBox/button';
+import { LabelButton, PrimaryButton } from '../toolBox/button';
 import styles from './styles';
 import { colors } from '../../constants/styleGuide';
 import frame from '../../assets/images/frame3x.png';
@@ -146,7 +146,7 @@ class Heading extends React.Component {
         </Animated.View>
       </View>
       <Animated.View style={[styles.navigateButton, { opacity: bioAuthOpacity }]}>
-        <SecondaryButton
+        <PrimaryButton
           style={styles.startButton}
           onClick={skip}
           title='Start' />

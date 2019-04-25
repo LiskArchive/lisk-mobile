@@ -6,7 +6,7 @@ import { storePassphraseInKeyChain } from '../../utilities/passphrase';
 import { settingsUpdated as settingsUpdatedAction } from '../../actions/settings';
 import { B, Small } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
-import { SecondaryButton } from '../toolBox/button';
+import { PrimaryButton } from '../toolBox/button';
 import { themes, colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -96,7 +96,7 @@ class EnableBioAuth extends React.Component {
               </View>
             </View>
           </View>
-          <SecondaryButton
+          <PrimaryButton
             style={styles.button}
             onClick={this.confirm}
             title={t(`Enable ${title}`)}

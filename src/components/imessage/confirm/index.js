@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import FormattedNumber from '../../formattedNumber';
 import { toRawLsk, includeFee } from '../../../utilities/conversions';
-import { SecondaryButton, Button } from '../../toolBox/button';
+import { PrimaryButton, Button } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
 import { B, P, Small } from '../../toolBox/typography';
@@ -133,7 +133,7 @@ class Confirm extends Component {
                       onClick={rejectMessage}
                       title='Reject'
                     />
-                    <SecondaryButton
+                    <PrimaryButton
                       style={[styles.button, busy ? styles.buttonBusy : {}]}
                       onClick={this.send}
                       title={busy ? 'Transferring...' : 'Accept'}

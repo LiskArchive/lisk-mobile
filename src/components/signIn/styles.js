@@ -66,18 +66,8 @@ const styles = {
     height: 47,
     marginHorizontal: boxes.boxPadding,
   },
-  outlineButton: {
-    height: 45,
-    borderWidth: 1,
-    borderColor: colors.light.gray1,
-    color: colors.light.gray1,
-    borderRadius: 2,
-    marginHorizontal: boxes.boxPadding,
-    marginTop: 12,
-    textAlign: 'center',
-    lineHeight: 45,
-    fontSize: fonts.size.base,
-    fontFamily: fonts.family.context,
+  buttonManualSignIn: {
+    marginTop: 16,
   },
   errorMessage: {
     fontSize: 14,

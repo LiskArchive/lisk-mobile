@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 import { transactionAdded as transactionAddedAction } from '../../../actions/transactions';
 import FormattedNumber from '../../formattedNumber';
 import { toRawLsk, fromRawLsk } from '../../../utilities/conversions';
-import { SecondaryButton } from '../../toolBox/button';
+import { PrimaryButton } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
 import { H4, B, P, A } from '../../toolBox/typography';
@@ -251,7 +251,7 @@ class Overview extends React.Component {
         </View>
 
         <View>
-          <SecondaryButton
+          <PrimaryButton
             disabled={this.state.busy}
             style={styles.button}
             onClick={this.send}

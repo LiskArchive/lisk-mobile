@@ -8,7 +8,7 @@ import Icon from '../toolBox/icon';
 import styles from './styles';
 import { colors } from '../../constants/styleGuide';
 import { P } from '../toolBox/typography';
-import { SecondaryButton, Button } from '../toolBox/button';
+import { PrimaryButton, Button } from '../toolBox/button';
 import waves from '../../assets/animations/waves.json';
 import wavesError from '../../assets/animations/waves-error.json';
 
@@ -116,7 +116,7 @@ class BiometricAuth extends React.Component {
           { t('Unauthorized! Please try again.') }
         </P>
         <View style={styles.column}>
-          <SecondaryButton
+          <PrimaryButton
             style={styles.button}
             title={busy ? t('Signing in...') : t('Sign in using bioAuth', { sensorType })}
             onClick={this.onClick}
@@ -125,9 +125,10 @@ class BiometricAuth extends React.Component {
           />
 
           <Button
-            style={styles.outlineButton}
+            style={[styles.button, styles.buttonManualSignIn]}
             title={t('Sign in manually')}
             onClick={toggleView}
+            noTheme={true}
           />
         </View>
       </Animated.View>

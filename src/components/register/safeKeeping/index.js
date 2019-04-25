@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import styles from './styles';
 import { B, P } from '../../toolBox/typography';
 import CopyToClipboard from '../../copyToClipboard';
-import { SecondaryButton } from '../../toolBox/button';
+import { PrimaryButton } from '../../toolBox/button';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import image from '../../../assets/images/registrationProcess/passphrase3x.png';
 
@@ -63,7 +63,7 @@ class SafeKeeping extends React.Component {
           }
         </View>
         <View style={styles.buttonWrapper}>
-          <SecondaryButton
+          <PrimaryButton
             style={styles.button}
             noTheme={true}
             onClick={this.forward}

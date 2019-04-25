@@ -3,7 +3,7 @@ import { View, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { withNavigation } from 'react-navigation';
-import { SecondaryButton } from './button';
+import { PrimaryButton } from './button';
 import theme from './styles';
 
 class ScrollAwareActionBar extends React.Component {
@@ -57,12 +57,14 @@ class ScrollAwareActionBar extends React.Component {
               !onStickyButton && buttonStyle === theme.hiddenStickyButton ?
               <View>
                 { extras }
-                <SecondaryButton
+
+                <PrimaryButton
                   noTheme={noTheme}
                   style={theme.offKeyboardButton}
                   disabled={disabled}
                   title={typeof button === 'string' ? button : button.title}
-                  onClick={onSubmit} />
+                  onClick={onSubmit}
+                />
               </View> : null
             }
           </View>
@@ -76,12 +78,13 @@ class ScrollAwareActionBar extends React.Component {
           animationOn='none'
           alwaysVisible={true}>
           { extras }
-          <SecondaryButton
+          <PrimaryButton
             noTheme={noTheme}
             disabled={disabled}
             title={typeof button === 'string' ? button : button.title}
             onClick={onSubmit}
-            style={buttonStyle} />
+            style={buttonStyle}
+          />
         </KeyboardAccessoryView>
       </Fragment>);
   }

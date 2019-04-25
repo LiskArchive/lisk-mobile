@@ -115,7 +115,6 @@ const ThemedLabelButton = withTheme(LabelButton, getStyles());
 const ThemedIconButton = withTheme(IconButton, getStyles());
 
 export {
-  PrimaryButton as SecondaryButton,
   ThemedLabelButton as LabelButton,
   ThemedIconButton as IconButton,
 };

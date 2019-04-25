@@ -7,7 +7,7 @@ import { generatePassphrase } from '../../../utilities/passphrase';
 import { B, Small } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
-import { SecondaryButton } from '../../toolBox/button';
+import { PrimaryButton } from '../../toolBox/button';
 import colors from '../../../constants/styleGuide/colors';
 
 class Intro extends React.Component {
@@ -93,7 +93,7 @@ class Intro extends React.Component {
               </Small>
             </View>
             <View style={styles.buttonWrapper}>
-              <SecondaryButton
+              <PrimaryButton
                 disabled={this.state.buttonStatus}
                 noTheme={true}
                 style={styles.button}
