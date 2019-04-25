@@ -7,11 +7,6 @@ export default () => ({
       fontFamily: fonts.family.context,
       textAlign: 'center',
     },
-    buttonWrapper: {
-      borderRadius: 3,
-      borderWidth: 1,
-      borderColor: 'transparent',
-    },
     iconButton: {
       width: 40,
       height: 30,

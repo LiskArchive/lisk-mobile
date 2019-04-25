@@ -4,19 +4,6 @@ import getStyles from './styles';
 import Icon from '../icon';
 import withTheme from '../../withTheme';
 
-const labelStyle = ({
-  propsStyle, disabled, styles, style,
-}) => {
-  const mergestyle = [styles.button, styles.labelButton];
-
-  const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
-  propStylesArr.forEach(element => mergestyle.push(element));
-
-  if (disabled) mergestyle.push(styles.disabledButtonColor);
-  mergestyle.push(style);
-  return mergestyle;
-};
-
 const modifyProps = (props) => {
   const modifiedProps = Object.keys(props)
     .filter(key => !(/onClick|children|style/.test(key)))
@@ -76,7 +63,22 @@ const BasePrimaryButton = (props) => {
 
 export const PrimaryButton = withTheme(BasePrimaryButton, getStyles());
 
-const LabelButton = props => <Button {...props} style={labelStyle(props)} />;
+const LabelButton = (props) => {
+  const labelStyle = ({
+    propsStyle, disabled, styles, style,
+  }) => {
+    const mergestyle = [styles.button, styles.labelButton];
+
+    const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
+    propStylesArr.forEach(element => mergestyle.push(element));
+
+    if (disabled) mergestyle.push(styles.disabledButtonColor);
+    mergestyle.push(style);
+    return mergestyle;
+  };
+
+  return <Button {...props} style={labelStyle(props)} />;
+};
 
 /**
  * Creates a button with and icon on the side. direction of the icon and title
