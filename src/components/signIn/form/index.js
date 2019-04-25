@@ -39,6 +39,7 @@ const BackButton = ({
 
 class Form extends React.Component {
   state = {
+    revealPassphrase: false,
     passphrase: {
       value: devDefaultPass,
       validity: [],
@@ -115,6 +116,12 @@ class Form extends React.Component {
     }).start();
   }
 
+  onTogglePassphraseReveal = () => {
+    this.setState(prevState => ({
+      revealPassphrase: !prevState.revealPassphrase,
+    }));
+  }
+
   toggleCamera = () => {
     this.passphraseInput.blur();
     this.scanner.toggleCamera();
@@ -130,7 +137,10 @@ class Form extends React.Component {
   }
 
   render() {
-    const { passphrase, animation: { opacity } } = this.state;
+    const {
+      revealPassphrase, passphrase, animation: { opacity },
+    } = this.state;
+
     const {
       t, navigation, lng, toggleView, sensorType, showBackButton,
     } = this.props;
@@ -170,7 +180,7 @@ class Form extends React.Component {
             noTheme={true}
             label={t('Passphrase')}
             reference={(ref) => { this.passphraseInput = ref; }}
-            innerStyles={{ input: styles.input }}
+            innerStyles={{ input: [styles.input, revealPassphrase ? styles.inputRevealed : null] }}
             value={passphrase.value}
             onChange={this.onInputChange}
             autoFocus={true}
@@ -178,6 +188,14 @@ class Form extends React.Component {
             multiline={Platform.OS === 'ios'}
             secureTextEntry={Platform.OS !== 'ios'}
             keyboardAppearance="light"
+          />
+
+          <IconButton
+            onPress={this.onTogglePassphraseReveal}
+            icon={revealPassphrase ? 'eye-crossed' : 'eye'}
+            iconSize={16}
+            color={colors.light.ultramarineBlue}
+            style={styles.passphraseRevealButton}
           />
 
           <IconButton

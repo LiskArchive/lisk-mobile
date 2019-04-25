@@ -27,6 +27,9 @@ const styles = {
     fontFamily: fonts.family.passphrase,
     textAlign: 'justify',
   },
+  inputRevealed: {
+    fontFamily: fonts.family.contextBold,
+  },
   linkWrapper: {
     width: '100%',
     justifyContent: 'center',
@@ -43,13 +46,18 @@ const styles = {
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  passphraseRevealButton: {
+    position: 'absolute',
+    zIndex: 99,
+    left: 85,
+    top: 15,
+  },
   scanButton: {
     position: 'absolute',
     right: 21,
     zIndex: 99,
-    top: 21,
+    top: 15,
     paddingLeft: 10,
-    paddingBottom: 10,
     width: 67,
     height: 30,
   },
