@@ -2,14 +2,14 @@ import React from 'react';
 import { Platform, View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
-import Input from '../toolBox/input';
-import { validatePassphrase } from '../../utilities/passphrase';
-import { P, A } from '../toolBox/typography';
-import KeyboardAwareScrollView from '../toolBox/keyboardAwareScrollView';
-import Scanner from '../scanner';
-import { IconButton } from '../toolBox/button';
-import { colors } from '../../constants/styleGuide';
-import DropDownHolder from '../../utilities/alert';
+import Input from '../../toolBox/input';
+import { validatePassphrase } from '../../../utilities/passphrase';
+import { P, A } from '../../toolBox/typography';
+import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
+import Scanner from '../../scanner';
+import { IconButton } from '../../toolBox/button';
+import { colors } from '../../../constants/styleGuide';
+import DropDownHolder from '../../../utilities/alert';
 
 const devDefaultPass = process.env.passphrase || '';
 
@@ -144,6 +144,7 @@ class Form extends React.Component {
               sensorType={sensorType}
               t={t} /> : null
         }
+
         <Scanner
           ref={(el) => { this.scanner = el; }}
           containerStyles={{
@@ -157,13 +158,13 @@ class Form extends React.Component {
           permissionDialogTitle={t('Permission to use camera')}
           permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
-        <Animated.View
-          style={[styles.titleContainer, styles.paddingBottom, { opacity }]}
-        >
+
+        <Animated.View style={[styles.paddingBottom, { opacity }]}>
           <P style={styles.title}>
             { t('The official Lisk mobile wallet.') }
           </P>
         </Animated.View>
+
         <Animated.View style={[{ opacity }]}>
           <Input
             noTheme={true}
@@ -190,6 +191,7 @@ class Form extends React.Component {
                 color={colors.light.blue} /> : null
           }
         </Animated.View>
+
         <KeyboardAwareScrollView
           noTheme={true}
           button={t('Sign in')}
