@@ -28,7 +28,7 @@ const styles = {
     textAlign: 'justify',
   },
   inputRevealed: {
-    fontFamily: fonts.family.contextBold,
+    fontFamily: fonts.family.passphraseText,
   },
   linkWrapper: {
     width: '100%',
