@@ -44,8 +44,6 @@ class Input extends React.Component {
       styles.input,
       styles.theme.input,
       innerStyles.input,
-      (error ? styles.inputErrorStyle : null),
-      (error ? styles.theme.inputErrorStyle : null),
     ];
 
     if (this.state.isFocused) {
@@ -53,6 +51,14 @@ class Input extends React.Component {
         ...inputStyle,
         styles.inputFocused,
         styles.theme.inputFocused,
+      ];
+    }
+
+    if (error) {
+      inputStyle = [
+        ...inputStyle,
+        styles.inputErrorStyle,
+        styles.theme.inputErrorStyle,
       ];
     }
 
