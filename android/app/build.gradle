@@ -191,7 +191,6 @@ dependencies {
     implementation project(':react-native-tcp')
     implementation project(':react-native-randombytes')
     implementation project(':react-native-os')
-    implementation project(':react-native-linear-gradient')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':react-native-qrcode-local-image')
     implementation "com.android.support:appcompat-v7:23.0.1"
