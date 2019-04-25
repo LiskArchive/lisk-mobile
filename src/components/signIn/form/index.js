@@ -186,7 +186,7 @@ class Form extends React.Component {
             autoFocus={true}
             autoCorrect={false}
             multiline={Platform.OS === 'ios'}
-            secureTextEntry={Platform.OS !== 'ios'}
+            secureTextEntry={Platform.OS !== 'ios' && !revealPassphrase}
             keyboardAppearance="light"
           />
 
