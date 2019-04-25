@@ -97,6 +97,7 @@
 		<string>BasierCircle-SemiBold.otf</string>
 		<string>OpenSans-Semibold.ttf</string>
 		<string>PTMono.ttf</string>
+		<string>Gilroy-Bold.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
