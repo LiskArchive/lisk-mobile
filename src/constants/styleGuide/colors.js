@@ -11,6 +11,22 @@ const common = {
 
 const light = {
   ...common,
+  ultramarineBlue: '#4070F4',
+  maastrichtBlue: '#0C142D',
+  slateGray: '#71778B',
+  blueGray: '#8A8CA2',
+  ghost: '#BEC1CD',
+  platinum: '#E1E3EA',
+  mystic: '#EDF0F5',
+  whiteSmoke: '#F5F7FA',
+  burntSieanna: '#EC6968',
+  ufoGreen: '#2AD67C',
+
+  /*
+   * @TODO
+   * keeping existing colors for the back-compatiblity and
+   * not to break existing dynamic accesses like `colors[theme].blue`
+   */
   blue: '#2475b9',
   green: '#2DB390',
   yellow: '#FFB533',
@@ -26,6 +42,7 @@ const light = {
   sendBalanceBg: '#EFF4F9',
   navigationBg: '#FAFCFE',
   inputBorder: '#9EA8B4',
+  /* /@TODO */
 };
 
 const dark = {
