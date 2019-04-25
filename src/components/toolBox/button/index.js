@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { TouchableHighlight, Text } from 'react-native';
+import { TouchableHighlight, TouchableOpacity, Text } from 'react-native';
 import getStyles from './styles';
 import Icon from '../icon';
 import withTheme from '../../withTheme';
@@ -35,9 +35,8 @@ const BaseButton = (props) => {
   } = props;
 
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       {...modifyProps(props)}
-      underlayColor='transparent'
       style={[
         styles.buttonContainer,
         props.style,
@@ -47,7 +46,7 @@ const BaseButton = (props) => {
       <Text style={[styles.buttonText, textStyle]}>
         {children || title}
       </Text>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 
