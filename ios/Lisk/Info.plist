@@ -92,6 +92,7 @@
 		<string>icons.woff</string>
 		<string>icomoon.ttf</string>
 		<string>dots.ttf</string>
+		<string>OpenSans-Semibold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

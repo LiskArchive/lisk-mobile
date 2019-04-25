@@ -90,7 +90,7 @@ export default () => ({
       marginTop: 5,
       marginBottom: 7,
       color: colors.light.gray1,
-      fontFamily: fonts.family.contextLight,
+      fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
       fontWeight: '400',
     },

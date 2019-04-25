@@ -9,7 +9,7 @@ export default () => ({
     },
     inputLabel: {
       color: colors.light.gray1,
-      fontFamily: fonts.family.contextLight,
+      fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
       fontWeight: '400',
     },
