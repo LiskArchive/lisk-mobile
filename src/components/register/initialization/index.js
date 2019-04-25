@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
 import { B, P } from '../../toolBox/typography';
-import { SecondaryButton } from '../../toolBox/button';
+import { PrimaryButton } from '../../toolBox/button';
 import image from '../../../assets/images/registrationProcess/initialize3x.png';
 
 class Initialization extends React.Component {
@@ -38,7 +38,7 @@ class Initialization extends React.Component {
           </View>
         </View>
         <View style={styles.buttonWrapper}>
-          <SecondaryButton
+          <PrimaryButton
             style={styles.button}
             onClick={() => {
               nextStep({ passphrase });

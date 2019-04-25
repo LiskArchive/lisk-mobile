@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
 import { B, P } from '../../toolBox/typography';
-import { SecondaryButton, Button } from '../../toolBox/button';
+import { PrimaryButton, Button } from '../../toolBox/button';
 import verifyImage from '../../../assets/images/registrationProcess/verify3x.png';
 import verifiedImage from '../../../assets/images/registrationProcess/verified3x.png';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
@@ -191,7 +191,7 @@ class Confirm extends React.Component {
           }
         </View>
         <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
-          <SecondaryButton
+          <PrimaryButton
             disabled={this.state.buttonStatus}
             noTheme={true}
             style={styles.button}

@@ -20,7 +20,6 @@ import com.tradle.react.UdpSocketsModule;
 import com.peel.react.TcpSocketsModule;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.peel.react.rnos.RNOSModule;
-import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -61,8 +60,7 @@ public class MainApplication extends Application implements ReactApplication {
         new TcpSocketsModule(),
         new RandomBytesPackage(),
         new RNOSModule(),
-        new RNCameraPackage(),
-        new LinearGradientPackage()
+        new RNCameraPackage()
       );
     }
 

@@ -8,25 +8,27 @@ export default () => ({
       paddingTop: 20,
     },
     inputLabel: {
-      color: colors.light.gray1,
+      color: colors.light.maastrichtBlue,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
-      fontWeight: '400',
+      marginBottom: 10,
     },
     input: {
-      fontWeight: 'bold',
-      color: colors.light.black,
-      fontSize: fonts.size.input,
-      fontFamily: fonts.family.contextSemiBold,
-      minHeight: 30,
+      color: colors.light.maastrichtBlue,
+      fontSize: fonts.size.base,
+      fontFamily: fonts.family.contextBold,
       width: '100%',
-      borderBottomColor: colors.light.inputBorder,
-      paddingBottom: 5,
-      borderBottomWidth: 1,
-      paddingTop: 5,
+      borderColor: colors.light.platinum,
+      borderWidth: 1,
+      paddingTop: 13,
+      padding: 13,
+      borderRadius: 2,
+    },
+    inputFocused: {
+      borderColor: colors.light.ultramarineBlue,
     },
     inputErrorStyle: {
-      borderBottomColor: colors.light.red,
+      borderColor: colors.light.red,
     },
     errorMessageContainer: {
       marginTop: 10,
@@ -58,10 +60,10 @@ export default () => ({
     },
     input: {
       color: colors.dark.white,
-      borderBottomColor: colors.dark.inputBorder,
+      borderColor: colors.dark.inputBorder,
     },
     inputErrorStyle: {
-      borderBottomColor: colors.dark.red,
+      borderColor: colors.dark.red,
     },
     errorIcon: {
       color: colors.dark.red,

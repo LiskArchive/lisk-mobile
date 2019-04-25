@@ -3,7 +3,7 @@ import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
-import { SecondaryButton } from '../../toolBox/button';
+import { PrimaryButton } from '../../toolBox/button';
 import { P } from '../../toolBox/typography';
 import txCreatedAnim from '../../../assets/animations/tx-created.json';
 import txPendingAnim from '../../../assets/animations/tx-pending.json';
@@ -107,7 +107,7 @@ class Result extends React.Component {
             ref={(el) => { this.animation[2] = el; }} />
             : null}
         </View>
-        <SecondaryButton
+        <PrimaryButton
           style={styles.button}
           onClick={() => {
             finalCallback();

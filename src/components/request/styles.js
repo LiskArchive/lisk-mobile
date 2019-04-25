@@ -46,9 +46,6 @@ export default () => ({
     inputContainer: {
       height: 100,
     },
-    input: {
-      flex: 1,
-    },
   },
 
   [themes.light]: {

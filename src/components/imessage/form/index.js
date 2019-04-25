@@ -4,7 +4,7 @@ import {
   View,
   Picker,
 } from 'react-native';
-import { SecondaryButton, IconButton } from '../../toolBox/button';
+import { PrimaryButton, IconButton } from '../../toolBox/button';
 import Icon from '../../toolBox/icon';
 import reg from '../../../constants/regex';
 import { colors } from '../../../constants/styleGuide';
@@ -200,7 +200,7 @@ class LiskMessageExtension extends Component {
         </View>
         {
           presentationStyle === 'expanded' ?
-            <SecondaryButton
+            <PrimaryButton
               style={{ marginTop: 20, marginLeft: 20, marginRight: 20 }}
               title="Request"
               onClick={this.send}

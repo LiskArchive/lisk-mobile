@@ -5,74 +5,112 @@ import Icon from '../icon';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 
-/**
- * This is thematic wrapper over Icon component of react native elements
- *
- * @param {Object} props
- * @param {String} props.tintColor - A valid Hex color code
- * @param {String} props.name - An icon name existing in our icons list
- * @param {Number} props.size - THe size of the icon in pixels, defaults to 35
- */
-const Input = ({
-  reference = () => {}, innerStyles = {},
-  label, styles, theme, value, onChange, error,
-  multiline, onFocus, autoFocus, onBlur, autoCorrect,
-  keyboardType = 'default', secureTextEntry, keyboardAppearance,
-  placeholder = '',
-}) => {
-  const inputStyle = [
-    styles.input,
-    styles.theme.input,
-    innerStyles.input,
-    (error ? styles.inputErrorStyle : {}),
-    (error ? styles.theme.inputErrorStyle : {}),
-  ];
-
-  if (!keyboardAppearance) {
-    keyboardAppearance = theme === themes.dark ? 'dark' : 'light';
+class Input extends React.Component {
+  state = {
+    isFocused: false,
   }
 
-  return (
-    <View style={[styles.inputContainer, innerStyles.containerStyle]}>
-      {label ? (
-        <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
-          {label}
-        </Text>
-        ) : null
-      }
+  onFocus = (e) => {
+    this.setState({ isFocused: true });
 
-      <TextInput
-        style={inputStyle}
-        autoCapitalize='none'
-        multiline={multiline}
-        ref={input => reference(input)}
-        value={value}
-        keyboardType={keyboardType}
-        keyboardAppearance={keyboardAppearance}
-        autoFocus={autoFocus}
-        onChangeText={onChange}
-        autoCorrect={autoCorrect}
-        onFocus={onFocus}
-        allowFontScaling={false}
-        secureTextEntry={secureTextEntry}
-        onBlur={onBlur}
-        placeholder={placeholder}
-      />
+    if (typeof this.props.onFocus === 'function') {
+      this.props.onFocus(e);
+    }
+  }
 
-      {error ? (
-        <View style={[styles.errorMessageContainer, innerStyles.errorMessage]}>
-          <Icon
-            size={16}
-            name='error'
-            style={[styles.errorIcon, styles.theme.errorIcon]}
-          />
-          <Text style={[styles.errorMessage, styles.theme.errorMessage]}>
-            {error}
+  onBlur = (e) => {
+    this.setState({ isFocused: false });
+
+    if (typeof this.props.onBlur === 'function') {
+      this.props.onBlur(e);
+    }
+  }
+
+  render() {
+    const {
+      reference, innerStyles,
+      label, styles, theme, value, onChange, error,
+      multiline, autoFocus, autoCorrect,
+      keyboardType, secureTextEntry,
+      placeholder,
+    } = this.props;
+
+    let { keyboardAppearance } = this.props;
+    if (!keyboardAppearance) {
+      keyboardAppearance = theme === themes.dark ? 'dark' : 'light';
+    }
+
+    let inputStyle = [
+      styles.input,
+      styles.theme.input,
+      innerStyles.input,
+    ];
+
+    if (this.state.isFocused) {
+      inputStyle = [
+        ...inputStyle,
+        styles.inputFocused,
+        styles.theme.inputFocused,
+      ];
+    }
+
+    if (error) {
+      inputStyle = [
+        ...inputStyle,
+        styles.inputErrorStyle,
+        styles.theme.inputErrorStyle,
+      ];
+    }
+
+    return (
+      <View style={[styles.inputContainer, innerStyles.containerStyle]}>
+        {label ? (
+          <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
+            {label}
           </Text>
-        </View>
-      ) : null}
-    </View>
-  );
+          ) : null
+        }
+
+        <TextInput
+          style={inputStyle}
+          autoCapitalize='none'
+          multiline={multiline}
+          ref={input => reference(input)}
+          value={value}
+          keyboardType={keyboardType}
+          keyboardAppearance={keyboardAppearance}
+          autoFocus={autoFocus}
+          onChangeText={onChange}
+          autoCorrect={autoCorrect}
+          onFocus={this.onFocus}
+          allowFontScaling={false}
+          secureTextEntry={secureTextEntry}
+          onBlur={this.onBlur}
+          placeholder={placeholder}
+        />
+
+        {error ? (
+          <View style={[styles.errorMessageContainer, innerStyles.errorMessage]}>
+            <Icon
+              size={16}
+              name='error'
+              style={[styles.errorIcon, styles.theme.errorIcon]}
+            />
+            <Text style={[styles.errorMessage, styles.theme.errorMessage]}>
+              {error}
+            </Text>
+          </View>
+        ) : null}
+      </View>
+    );
+  }
+}
+
+Input.defaultProps = {
+  reference: () => {},
+  innerStyles: {},
+  keyboardType: 'default',
+  placeholder: '',
 };
 
 export default withTheme(Input, getStyles());

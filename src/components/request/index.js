@@ -118,7 +118,6 @@ class Request extends React.Component {
             <View style={styles.inputContainer}>
               {activeToken === tokenMap.LSK.key ? (
                 <Input
-                  innerStyles={{ input: styles.input }}
                   label={t('Amount in LSK (optional)')}
                   autoCorrect={false}
                   onChange={this.changeHandler}

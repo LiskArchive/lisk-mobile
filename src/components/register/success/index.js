@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
 import { P } from '../../toolBox/typography';
-import { SecondaryButton } from '../../toolBox/button';
+import { PrimaryButton } from '../../toolBox/button';
 import image from '../../../assets/images/registrationProcess/success3x.png';
 
 class Success extends React.Component {
@@ -39,7 +39,7 @@ class Success extends React.Component {
           </View>
         </View>
         <View>
-          <SecondaryButton
+          <PrimaryButton
             style={styles.button}
             onClick={pop}
             title={t('Sign in now')}
