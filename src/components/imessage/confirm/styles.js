@@ -47,7 +47,7 @@ export default StyleSheet.create({
   label: {
     marginTop: 14,
     marginBottom: 2,
-    fontFamily: fonts.family.contextLight,
+    fontFamily: fonts.family.context,
     fontSize: fonts.size.input,
     fontWeight: '400',
     color: colors.light.gray1,
