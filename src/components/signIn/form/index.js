@@ -4,25 +4,15 @@ import { translate } from 'react-i18next';
 import styles from './styles';
 import Input from '../../toolBox/input';
 import { validatePassphrase } from '../../../utilities/passphrase';
-import { P, A } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import Scanner from '../../scanner';
 import { IconButton } from '../../toolBox/button';
 import { colors } from '../../../constants/styleGuide';
 import DropDownHolder from '../../../utilities/alert';
+import CreateAccount from '../createAccount';
 
 const devDefaultPass = process.env.passphrase || '';
-
-const Extras = ({
-  onPress, opacity, t,
-}) => (
-  <View>
-    <Animated.View style={[styles.linkWrapper, styles.row, { opacity }]}>
-      <P style={styles.question}>{t('Don’t have a Lisk ID?')}</P>
-      <A style={styles.link} onPress={onPress}>{t('Create it now')}</A>
-    </Animated.View>
-  </View>
-);
 
 const BackButton = ({
   toggleView, sensorType, t,
@@ -213,12 +203,12 @@ class Form extends React.Component {
           button={t('Sign in')}
           onSubmit={this.onFormSubmission}
           extras={
-            <Extras
-              t={t}
+            <CreateAccount
+              style={styles.createAccountWrapper}
               onPress={this.goToRegistration}
               opacity={opacity}
             />
-          }
+         }
         />
       </View>
     );
