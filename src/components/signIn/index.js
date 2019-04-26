@@ -314,6 +314,7 @@ class SignIn extends React.Component {
             signIn={this.onFormSubmission}
             showDialog={this.showDialog}
             hideDialog={this.hideDialog}
+            navigation={this.props.navigation}
           /> : null
       }
       {

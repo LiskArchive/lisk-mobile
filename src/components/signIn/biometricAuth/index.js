@@ -11,6 +11,7 @@ import { P } from '../../toolBox/typography';
 import { PrimaryButton, Button } from '../../toolBox/button';
 import waves from '../../../assets/animations/waves.json';
 import wavesError from '../../../assets/animations/waves-error.json';
+import CreateAccount from '../createAccount';
 
 class BiometricAuth extends React.Component {
   state = {
@@ -57,6 +58,10 @@ class BiometricAuth extends React.Component {
         androidError: this.playUnAuthorizedAnimation,
       });
     });
+  }
+
+  onCreateAccount = () => {
+    this.props.navigation.navigate('Register');
   }
 
   componentDidMount() {
@@ -138,6 +143,11 @@ class BiometricAuth extends React.Component {
               title={t('Sign in manually')}
               onClick={toggleView}
               noTheme={true}
+            />
+
+            <CreateAccount
+              onPress={this.onCreateAccount}
+              opacity={opacity}
             />
           </View>
         </Animated.View>

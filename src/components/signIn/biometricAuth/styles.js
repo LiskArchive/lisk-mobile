@@ -21,8 +21,8 @@ const styles = {
     width: '100%',
     height: '100%',
     borderBottomColor: 'transparent',
-    borderBottomWidth: 190,
-    marginBottom: -190,
+    borderBottomWidth: 240,
+    marginBottom: -240,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -59,7 +59,7 @@ const styles = {
     marginHorizontal: boxes.boxPadding,
   },
   buttonManualSignIn: {
-    marginTop: 16,
+    margin: boxes.boxPadding - 4,
   },
 };
 
