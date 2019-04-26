@@ -5,7 +5,6 @@ import easing from '../../../utilities/easing';
 import { deviceHeight } from '../../../utilities/device';
 import styles from './styles';
 import { colors } from '../../../constants/styleGuide';
-import topBubbles from '../../../assets/images/topBubbles3x.png';
 import christmasHat from '../../../assets/images/christmasHat.png';
 
 class Splash extends React.Component {
@@ -66,10 +65,6 @@ class Splash extends React.Component {
     return (
       <View style={styles.splashContainer}>
         <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]} />
-
-        <Animated.View style={[styles.splashTopButtons]}>
-          <Image source={topBubbles} style={styles.topBubbles} />
-        </Animated.View>
 
         <Animated.View style={[styles.splashFigure, styles.splashStatic, { opacity: iconOpacity }]}>
           <Icon
