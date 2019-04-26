@@ -91,7 +91,8 @@ class Settings extends React.Component {
                     targetStateLabel={sensorStatus}
                     icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
                     iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
-                    title={settings.sensorType} />
+                    title={settings.sensorType}
+                  />
                 </View> : null
             }
             <View style={[styles.item, styles.theme.item]}>
@@ -101,7 +102,8 @@ class Settings extends React.Component {
                   <SwitchButton
                     value={settings.incognito}
                     theme={theme}
-                    onSyncPress={this.toggleIncognito} />
+                    onSyncPress={this.toggleIncognito}
+                  />
                 }
                 title={t('Discreet mode')}
                 description={t('Hide balance and transaction amounts.')}
@@ -118,7 +120,8 @@ class Settings extends React.Component {
                     hideDialog={this.hideDialog}
                     setError={this.setError}
                     icon='backup'
-                    title={t('Backup your passphrase')} />
+                    title={t('Backup your passphrase')}
+                  />
                 </View> : null
             }
           </View>
@@ -130,52 +133,55 @@ class Settings extends React.Component {
                 navigation={navigation}
                 target='About'
                 icon='about'
-                title={t('About Lisk')} />
+                title={t('About Lisk')}
+              />
             </View>
+
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 icon='dark-mode'
-                iconSize={20}
                 targetStateLabel={
                   <SwitchButton
                     value={settings.theme === themes.dark}
                     theme={theme}
-                    onSyncPress={this.switchTheme} />
+                    onSyncPress={this.switchTheme}
+                  />
                 }
-                title={t('Dark mode')} />
+                title={t('Dark mode')}
+              />
             </View>
+
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
                 icon='currency'
-                iconSize={20}
                 title={t('Currency')}
                 target='CurrencySelection'
                 targetStateLabel={
-                  <P style={{ color: colors[theme].gray1 }}>
+                  <P style={styles.theme.targetStateLabel}>
                     {settings.currency}
                   </P>
                 }
               />
             </View>
+
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
                 icon='manage-assets'
-                iconSize={20}
                 title={t('Manage tokens')}
                 target='ManageAssets'
               />
             </View>
+
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
                 icon='language'
-                iconSize={20}
                 title={t('Language')}
                 target='LanguageSelection'
                 targetStateLabel={
-                  <P style={{ color: colors[theme].gray1 }}>
+                  <P style={styles.theme.targetStateLabel}>
                     {languageMap[settings.language].label}
                   </P>
                 }
@@ -186,7 +192,8 @@ class Settings extends React.Component {
                 navigation={navigation}
                 icon='terms'
                 target='Terms'
-                title={t('Terms of use')} />
+                title={t('Terms of use')}
+              />
             </View>
           </View>
 
