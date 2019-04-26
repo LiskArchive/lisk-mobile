@@ -65,12 +65,20 @@ class Splash extends React.Component {
 
     return (
       <View style={styles.splashContainer}>
-        <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]}></Animated.View>
+        <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]} />
+
         <Animated.View style={[styles.splashTopButtons]}>
           <Image source={topBubbles} style={styles.topBubbles} />
         </Animated.View>
+
         <Animated.View style={[styles.splashFigure, styles.splashStatic, { opacity: iconOpacity }]}>
-          <Icon name='lisk-full' size={60} color={colors.light.actionBlue} style={styles.splashLogo} />
+          <Icon
+            name='lisk-full'
+            size={60}
+            color={colors.light.ultramarineBlue}
+            style={styles.splashLogo}
+          />
+
           {shouldShowChristmasHat ? (
             <Animated.View
               style={[styles.christmasHatContainer, { top: christmasHatContainerTop }]}
@@ -79,8 +87,14 @@ class Splash extends React.Component {
             </Animated.View>
           ) : null}
         </Animated.View>
+
         <Animated.View style={[styles.splashFigure, styles.splashAnimating, { top }]}>
-          <Icon name='lisk-full' size={60} color={colors.light.white} style={styles.splashLogo} />
+          <Icon
+            name='lisk-full'
+            size={60}
+            color={colors.light.white}
+            style={styles.splashLogo}
+          />
         </Animated.View>
       </View>
     );
