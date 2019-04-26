@@ -18,7 +18,7 @@ export default () => ({
 
   [themes.light]: {
     title: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
 
