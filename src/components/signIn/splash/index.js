@@ -1,12 +1,12 @@
 import React from 'react';
 import { Animated, View, Image } from 'react-native';
-import Icon from '../toolBox/icon';
-import easing from '../../utilities/easing';
-import { deviceHeight } from '../../utilities/device';
+import Icon from '../../toolBox/icon';
+import easing from '../../../utilities/easing';
+import { deviceHeight } from '../../../utilities/device';
 import styles from './styles';
-import { colors } from '../../constants/styleGuide';
-import topBubbles from '../../assets/images/topBubbles3x.png';
-import christmasHat from '../../assets/images/christmasHat.png';
+import { colors } from '../../../constants/styleGuide';
+import topBubbles from '../../../assets/images/topBubbles3x.png';
+import christmasHat from '../../../assets/images/christmasHat.png';
 
 class Splash extends React.Component {
   state = {
