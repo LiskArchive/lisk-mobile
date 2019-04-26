@@ -1,18 +1,16 @@
 import React from 'react';
-import { Animated, View, Image } from 'react-native';
+import { Animated, View } from 'react-native';
 import Icon from '../../toolBox/icon';
 import easing from '../../../utilities/easing';
 import { deviceHeight } from '../../../utilities/device';
 import styles from './styles';
 import { colors } from '../../../constants/styleGuide';
-import christmasHat from '../../../assets/images/christmasHat.png';
 
 class Splash extends React.Component {
   state = {
     bgOpacity: new Animated.Value(1),
     iconOpacity: new Animated.Value(0),
     top: new Animated.Value((deviceHeight() / 2) - 18),
-    christmasHatContainerTop: new Animated.Value(-36),
   }
 
   componentDidMount() {
@@ -42,25 +40,10 @@ class Splash extends React.Component {
       duration: iconOpacityDuration,
       delay: iconOpacityDelay,
     }).start();
-
-    const christmasHatDuration = animate ? 300 : 0;
-    const christmasHatDelay = animate ? (iconOpacityDelay + 200) : 0;
-    Animated.timing(this.state.christmasHatContainerTop, {
-      toValue: -16,
-      duration: christmasHatDuration,
-      delay: christmasHatDelay,
-    }).start();
   }
 
   render() {
-    const {
-      top,
-      bgOpacity,
-      iconOpacity,
-      christmasHatContainerTop,
-    } = this.state;
-
-    const shouldShowChristmasHat = (new Date()).getFullYear() !== 2019;
+    const { top, bgOpacity, iconOpacity } = this.state;
 
     return (
       <View style={styles.splashContainer}>
@@ -73,14 +56,6 @@ class Splash extends React.Component {
             color={colors.light.ultramarineBlue}
             style={styles.splashLogo}
           />
-
-          {shouldShowChristmasHat ? (
-            <Animated.View
-              style={[styles.christmasHatContainer, { top: christmasHatContainerTop }]}
-            >
-              <Image source={christmasHat} style={styles.christmasHat} />
-            </Animated.View>
-          ) : null}
         </Animated.View>
 
         <Animated.View style={[styles.splashFigure, styles.splashAnimating, { top }]}>

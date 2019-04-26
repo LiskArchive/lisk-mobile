@@ -44,14 +44,6 @@ const styles = {
     height: 60,
     width: 153,
   },
-  christmasHatContainer: {
-    position: 'absolute',
-    left: -12,
-  },
-  christmasHat: {
-    width: 58,
-    height: 43,
-  },
 };
 
 export default StyleSheet.create(styles);
