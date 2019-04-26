@@ -11,7 +11,7 @@ export default () => ({
       color: colors.light.maastrichtBlue,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
-      marginBottom: 10,
+      marginBottom: 13,
     },
     input: {
       color: colors.light.maastrichtBlue,
