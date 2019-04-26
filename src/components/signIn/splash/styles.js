@@ -24,19 +24,6 @@ const styles = {
     height: '100%',
     opacity: 0.3,
   },
-  splashTopButtons: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: 375,
-    height: 97,
-    zIndex: 3,
-  },
-  topBubbles: {
-    width: '100%',
-    height: '100%',
-    top: 0,
-  },
   splashFigure: {
     height: 60,
     width: 153,
