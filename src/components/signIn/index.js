@@ -302,10 +302,11 @@ class SignIn extends React.Component {
     const { sensorType, hasStoredPassphrase } = this.props.settings;
     const signOut = this.props.navigation.getParam('signOut');
 
-    return (<View style={styles.wrapper}>
-      <Splash animate={!signOut} />
-      {
-        view === 'biometricAuth' ?
+    return (
+      <View style={styles.wrapper}>
+        <Splash animate={!signOut} />
+
+        {view === 'biometricAuth' ?
           <BiometricAuth
             animate={!signOut}
             toggleView={this.toggleView}
@@ -316,9 +317,9 @@ class SignIn extends React.Component {
             hideDialog={this.hideDialog}
             navigation={this.props.navigation}
           /> : null
-      }
-      {
-        view === 'form' ?
+        }
+
+        {view === 'form' ?
           <Form
             animate={!signOut}
             navigation={this.props.navigation}
@@ -327,15 +328,17 @@ class SignIn extends React.Component {
             showBackButton={hasStoredPassphrase && sensorType}
             signIn={this.onFormSubmission}
           /> : null
-      }
-      {
-        Platform.OS === 'android' ?
+        }
+
+        {Platform.OS === 'android' ?
           <FingerprintOverlay
             onModalClosed={() => this.signIn(this.state.passphrase)}
             error={androidDialog.error}
-            show={androidDialog.show} /> : null
-      }
-    </View>);
+            show={androidDialog.show}
+          /> : null
+        }
+      </View>
+    );
   }
 }
 
