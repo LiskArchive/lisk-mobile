@@ -12,14 +12,6 @@ const styles = {
   paddingBottom: {
     paddingBottom: height <= 640 ? 0 : 40,
   },
-  title: {
-    paddingLeft: boxes.boxPadding,
-    paddingRight: boxes.boxPadding,
-    textAlign: 'center',
-    color: colors.light.gray2,
-    fontSize: fonts.size.base,
-    opacity: height <= 640 ? 0 : 1,
-  },
   input: {
     fontFamily: fonts.family.passphrase,
     textAlign: 'justify',
