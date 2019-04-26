@@ -12,6 +12,7 @@ import { PrimaryButton, Button } from '../../toolBox/button';
 import waves from '../../../assets/animations/waves.json';
 import wavesError from '../../../assets/animations/waves-error.json';
 import CreateAccount from '../createAccount';
+import Title from '../title';
 
 class BiometricAuth extends React.Component {
   state = {
@@ -89,11 +90,9 @@ class BiometricAuth extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View>
-          <Animated.Text style={[styles.title, { opacity }]}>
-            {t('Choose an authenticated method')}
-          </Animated.Text>
-        </View>
+        <Title opacity={opacity}>
+          {t('Choose an authenticated method')}
+        </Title>
 
         <View style={styles.waves}>
           {tried ?
