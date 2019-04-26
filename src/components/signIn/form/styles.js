@@ -69,7 +69,7 @@ const styles = {
     color: colors.light.ultramarineBlue,
   },
   createAccountWrapper: {
-    marginBottom: boxes.boxPadding,
+    marginBottom: height <= 640 ? 0 : boxes.boxPadding,
   },
 };
 
