@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View, Animated } from 'react-native';
+import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
 import Input from '../../toolBox/input';
@@ -185,8 +185,7 @@ class Form extends React.Component {
             onChange={this.onInputChange}
             autoFocus={true}
             autoCorrect={false}
-            multiline={Platform.OS === 'ios'}
-            secureTextEntry={Platform.OS !== 'ios' && !revealPassphrase}
+            multiline={true}
             keyboardAppearance="light"
           />
 
