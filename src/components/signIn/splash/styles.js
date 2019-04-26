@@ -25,11 +25,9 @@ const styles = {
     opacity: 0.3,
   },
   splashFigure: {
-    height: 60,
-    width: 153,
-    left: '50%',
-    marginLeft: -76,
+    width: '100%',
     position: 'absolute',
+    alignItems: 'center',
   },
   splashStatic: {
     zIndex: 2,
