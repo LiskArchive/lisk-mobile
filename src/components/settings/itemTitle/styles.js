@@ -1,4 +1,4 @@
-import { themes, colors } from '../../../constants/styleGuide';
+import { themes, colors, fonts } from '../../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -17,23 +17,26 @@ export default () => ({
     subtitle: {
       paddingTop: 4,
       paddingBottom: 2,
-      fontSize: 13,
+      fontSize: fonts.size.small,
     },
     icon: {
       width: 25,
     },
     arrow: {
       flexDirection: 'row',
-      justifyContent: 'flex-end',
+      alignItems: 'center',
+    },
+    arrowIcon: {
+      marginLeft: 5,
     },
   },
 
   [themes.light]: {
     title: {
-      color: colors.light.gray1,
+      color: colors.light.maastrichtBlue,
     },
     subtitle: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
   },
 
