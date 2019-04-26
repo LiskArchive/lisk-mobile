@@ -4,7 +4,8 @@ export default {
     context: 'OpenSans-Regular',
     contextBold: 'OpenSans-Bold',
     contextSemiBold: 'OpenSans-SemiBold',
-    passphrase: 'Dots',
+    passphrase: 'Dots-Regular',
+    passphraseText: 'PTMono-Regular',
   },
   size: {
     h1: 26,

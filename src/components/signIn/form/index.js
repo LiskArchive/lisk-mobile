@@ -1,15 +1,15 @@
 import React from 'react';
-import { Platform, View, Animated } from 'react-native';
+import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
-import Input from '../toolBox/input';
-import { validatePassphrase } from '../../utilities/passphrase';
-import { P, A } from '../toolBox/typography';
-import KeyboardAwareScrollView from '../toolBox/keyboardAwareScrollView';
-import Scanner from '../scanner';
-import { IconButton } from '../toolBox/button';
-import { colors } from '../../constants/styleGuide';
-import DropDownHolder from '../../utilities/alert';
+import Input from '../../toolBox/input';
+import { validatePassphrase } from '../../../utilities/passphrase';
+import { P, A } from '../../toolBox/typography';
+import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
+import Scanner from '../../scanner';
+import { IconButton } from '../../toolBox/button';
+import { colors } from '../../../constants/styleGuide';
+import DropDownHolder from '../../../utilities/alert';
 
 const devDefaultPass = process.env.passphrase || '';
 
@@ -39,6 +39,7 @@ const BackButton = ({
 
 class Form extends React.Component {
   state = {
+    revealPassphrase: false,
     passphrase: {
       value: devDefaultPass,
       validity: [],
@@ -115,6 +116,12 @@ class Form extends React.Component {
     }).start();
   }
 
+  onTogglePassphraseReveal = () => {
+    this.setState(prevState => ({
+      revealPassphrase: !prevState.revealPassphrase,
+    }));
+  }
+
   toggleCamera = () => {
     this.passphraseInput.blur();
     this.scanner.toggleCamera();
@@ -130,7 +137,10 @@ class Form extends React.Component {
   }
 
   render() {
-    const { passphrase, animation: { opacity } } = this.state;
+    const {
+      revealPassphrase, passphrase, animation: { opacity },
+    } = this.state;
+
     const {
       t, navigation, lng, toggleView, sensorType, showBackButton,
     } = this.props;
@@ -144,6 +154,7 @@ class Form extends React.Component {
               sensorType={sensorType}
               t={t} /> : null
         }
+
         <Scanner
           ref={(el) => { this.scanner = el; }}
           containerStyles={{
@@ -157,39 +168,46 @@ class Form extends React.Component {
           permissionDialogTitle={t('Permission to use camera')}
           permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
-        <Animated.View
-          style={[styles.titleContainer, styles.paddingBottom, { opacity }]}
-        >
+
+        <Animated.View style={[styles.paddingBottom, { opacity }]}>
           <P style={styles.title}>
             { t('The official Lisk mobile wallet.') }
           </P>
         </Animated.View>
+
         <Animated.View style={[{ opacity }]}>
           <Input
             noTheme={true}
             label={t('Passphrase')}
             reference={(ref) => { this.passphraseInput = ref; }}
-            innerStyles={{ input: styles.input }}
+            innerStyles={{ input: [styles.input, revealPassphrase ? styles.inputRevealed : null] }}
             value={passphrase.value}
             onChange={this.onInputChange}
             autoFocus={true}
             autoCorrect={false}
-            multiline={Platform.OS === 'ios'}
-            secureTextEntry={Platform.OS !== 'ios'}
+            multiline={true}
             keyboardAppearance="light"
           />
-          {
-            passphrase.value === '' ?
-              <IconButton
-                onPress={this.toggleCamera}
-                titleStyle={styles.scanButtonTitle}
-                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-                title={t('Scan')}
-                icon='scanner'
-                iconSize={18}
-                color={colors.light.blue} /> : null
-          }
+
+          <IconButton
+            onPress={this.onTogglePassphraseReveal}
+            icon={revealPassphrase ? 'eye-crossed' : 'eye'}
+            iconSize={16}
+            color={colors.light.ultramarineBlue}
+            style={styles.passphraseRevealButton}
+          />
+
+          <IconButton
+            onPress={this.toggleCamera}
+            titleStyle={styles.scanButtonTitle}
+            style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+            title={t('Scan')}
+            icon='scanner'
+            iconSize={16}
+            color={colors.light.ultramarineBlue}
+          />
         </Animated.View>
+
         <KeyboardAwareScrollView
           noTheme={true}
           button={t('Sign in')}
