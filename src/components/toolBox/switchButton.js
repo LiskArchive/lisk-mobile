@@ -18,8 +18,8 @@ const switchButton = ({
       style={style}
       width={43}
       onSyncPress={onPress}
-      backgroundActive={theme === themes.light ? colors.light.blue : colors.dark.blue}
-      backgroundInactive={colors.dark.gray3}
+      backgroundActive={theme === themes.light ? colors.light.ultramarineBlue : colors.dark.blue}
+      backgroundInactive={theme === themes.light ? colors.light.platinum : colors.dark.gray3}
     />
   );
 };
