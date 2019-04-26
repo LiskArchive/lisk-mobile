@@ -42,7 +42,7 @@ class ItemTitle extends React.Component {
 
   render() {
     const {
-      theme, styles, icon, iconSize = 20, title, target,
+      theme, styles, icon, iconSize = 16, title, target,
       navigation, targetStateLabel, authenticate,
       description,
     } = this.props;
@@ -76,7 +76,7 @@ class ItemTitle extends React.Component {
           <Icon
             name={icon}
             size={iconSize}
-            color={theme === themes.light ? colors.light.gray3 : colors.dark.gray2}
+            color={theme === themes.light ? colors.light.blueGray : colors.dark.gray2}
             style={styles.icon}
           />
 
@@ -98,8 +98,9 @@ class ItemTitle extends React.Component {
                   {targetStateLabel}
                   <Icon
                     name='forward'
-                    size={21}
-                    color={theme === themes.light ? colors.light.black : colors.dark.white}
+                    size={16}
+                    style={styles.arrowIcon}
+                    color={theme === themes.light ? colors.light.maastrichtBlue : colors.dark.white}
                   />
                 </Fragment> :
                 <Fragment>{targetStateLabel}</Fragment>
