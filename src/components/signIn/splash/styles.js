@@ -15,7 +15,7 @@ const styles = {
     height: '100%',
   },
   splashBg: {
-    backgroundColor: colors.light.actionBlue,
+    backgroundColor: colors.light.ultramarineBlue,
     position: 'absolute',
     left: 0,
     top: 0,
