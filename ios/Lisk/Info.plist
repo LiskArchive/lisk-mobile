@@ -94,6 +94,8 @@
 		<string>dots.ttf</string>
 		<string>OpenSans-Semibold.ttf</string>
 		<string>PTMono-Regular.ttf</string>
+		<string>Dots.ttf</string>
+		<string>Dots-Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
