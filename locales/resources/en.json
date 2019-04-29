@@ -185,5 +185,6 @@
   "Primary": "Primary",
   "You don’t have any bookmarks. Start adding then through the sending process.": "You don’t have any bookmarks. Start adding then through the sending process.",
   "Error": "Error",
-  "Unparsed Address": "Unparsed Address"
+  "Unparsed Address": "Unparsed Address",
+  "Choose an authenticated method": "Choose an authenticated method"
 }

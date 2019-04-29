@@ -9,9 +9,6 @@ const styles = {
     height: '100%',
     paddingTop: height <= 640 ? 110 : 170,
   },
-  row: {
-    flexDirection: 'row',
-  },
   paddingBottom: {
     paddingBottom: height <= 640 ? 0 : 40,
   },
@@ -29,22 +26,6 @@ const styles = {
   },
   inputRevealed: {
     fontFamily: fonts.family.passphraseText,
-  },
-  linkWrapper: {
-    width: '100%',
-    justifyContent: 'center',
-    paddingBottom: 20,
-  },
-  question: {
-    color: colors.light.slateGray,
-    textAlign: 'center',
-    marginRight: 4,
-    marginBottom: 5,
-  },
-  link: {
-    color: colors.light.ultramarineBlue,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
   passphraseRevealButton: {
     position: 'absolute',
@@ -86,6 +67,9 @@ const styles = {
   },
   backButtonTitle: {
     color: colors.light.ultramarineBlue,
+  },
+  createAccountWrapper: {
+    marginBottom: height <= 640 ? 0 : boxes.boxPadding,
   },
 };
 

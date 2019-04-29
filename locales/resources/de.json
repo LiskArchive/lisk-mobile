@@ -185,5 +185,6 @@
   "Primary": "Primär",
   "You don’t have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
   "Error": "Fehler",
-  "Unparsed Address": "Unbekannte Adresse"
+  "Unparsed Address": "Unbekannte Adresse",
+  "Choose an authenticated method": ""
 }
