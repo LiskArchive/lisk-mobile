@@ -88,10 +88,17 @@ class BiometricAuth extends React.Component {
     const { t, sensorType, toggleView } = this.props;
     const { opacity, tried, busy } = this.state;
 
+    let pageTitle = t('Choose an authenticated method');
+    if (busy) {
+      pageTitle = sensorType === 'Face ID' ?
+        t('Look at the front camera to authenticate.') :
+        t('Place your finger over the touch sensor to authenticate.');
+    }
+
     return (
       <View style={styles.container}>
         <Title opacity={opacity}>
-          {t('Choose an authenticated method')}
+          {pageTitle}
         </Title>
 
         <View style={styles.waves}>
