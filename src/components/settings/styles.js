@@ -20,6 +20,9 @@ export default () => ({
       paddingBottom: 14,
       minHeight: 36,
     },
+    itemNoBorder: {
+      borderBottomColor: 'transparent',
+    },
     signOut: {
       marginBottom: 40,
     },
