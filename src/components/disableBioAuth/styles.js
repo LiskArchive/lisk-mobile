@@ -5,16 +5,13 @@ export default () => ({
   common: {
     wrapper: {
       flex: 1,
+      padding: boxes.boxPadding,
+      paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? boxes.boxPadding * 2 : boxes.boxPadding,
     },
     container: {
       flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      padding: boxes.boxPadding,
-      paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 30 : 20,
-    },
-    subHeader: {
-      marginBottom: boxes.boxPadding,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   },
 
@@ -22,17 +19,11 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    subHeader: {
-      color: colors.light.gray2,
-    },
   },
 
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    subHeader: {
-      color: colors.dark.gray1,
     },
   },
 });
