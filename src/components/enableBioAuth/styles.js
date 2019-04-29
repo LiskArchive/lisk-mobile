@@ -1,6 +1,6 @@
 import { Platform, DeviceInfo } from 'react-native';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../utilities/device';
-import { themes, colors, boxes } from '../../constants/styleGuide';
+import { themes, colors, boxes, fonts } from '../../constants/styleGuide';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
@@ -18,6 +18,7 @@ export default () => ({
     },
     subHeader: {
       marginBottom: boxes.boxPadding,
+      fontFamily: fonts.family.contextSemiBold,
     },
     row: {
       flexDirection: 'row',
@@ -50,16 +51,16 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     subHeader: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     separator: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     rowTitle: {
-      color: colors.light.black,
+      color: colors.light.maastrichtBlue,
     },
     description: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
   },
 
