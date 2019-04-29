@@ -37,7 +37,7 @@ class BiometricAuth extends React.Component {
   playUnAuthorizedAnimation = () => {
     this.animationLoop = 0;
     this.progress.setValue(1);
-    this.setState({ tried: true }, () => {
+    this.setState({ tried: true, busy: false }, () => {
       this.animationLoop = false;
       this.unAuthAnimEl.play();
     });
