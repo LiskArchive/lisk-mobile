@@ -110,6 +110,7 @@ class Settings extends React.Component {
                     setError={this.setError}
                     icon='backup'
                     title={t('Backup your passphrase')}
+                    iconSize={22}
                   />
                 </View> : null
             }

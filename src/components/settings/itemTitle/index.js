@@ -42,7 +42,7 @@ class ItemTitle extends React.Component {
 
   render() {
     const {
-      theme, styles, icon, iconSize = 16, title, target,
+      theme, styles, icon, iconSize = 20, title, target,
       navigation, targetStateLabel, authenticate,
       description,
     } = this.props;
