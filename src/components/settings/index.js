@@ -136,12 +136,17 @@ class Settings extends React.Component {
               {t('General')}
             </H4>
 
-            <View style={[styles.item, styles.theme.item]}>
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
                 navigation={navigation}
-                target='About'
-                icon='about'
-                title={t('About Lisk')}
+                icon='language'
+                title={t('Language')}
+                target='LanguageSelection'
+                targetStateLabel={
+                  <P style={styles.theme.targetStateLabel}>
+                    {languageMap[settings.language].label}
+                  </P>
+                }
               />
             </View>
 
@@ -179,20 +184,6 @@ class Settings extends React.Component {
                 icon='manage-assets'
                 title={t('Manage tokens')}
                 target='ManageAssets'
-              />
-            </View>
-
-            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
-              <ItemTitle
-                navigation={navigation}
-                icon='language'
-                title={t('Language')}
-                target='LanguageSelection'
-                targetStateLabel={
-                  <P style={styles.theme.targetStateLabel}>
-                    {languageMap[settings.language].label}
-                  </P>
-                }
               />
             </View>
           </View>
