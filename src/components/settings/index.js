@@ -77,7 +77,9 @@ class Settings extends React.Component {
       <View style={[styles.container, styles.theme.container]}>
         <ScrollView style={styles.innerContainer}>
           <View style={styles.group}>
-            <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Security')}</H4>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+              {t('Security')}
+            </H4>
             {
               settings.sensorType ?
                 <View style={[styles.item, styles.theme.item]}>
@@ -95,20 +97,7 @@ class Settings extends React.Component {
                   />
                 </View> : null
             }
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                icon='enable-incognito'
-                targetStateLabel={
-                  <SwitchButton
-                    value={settings.incognito}
-                    theme={theme}
-                    onSyncPress={this.toggleIncognito}
-                  />
-                }
-                title={t('Discreet mode')}
-                description={t('Hide balance and transaction amounts.')}
-              />
-            </View>
+
             {
               (settings.sensorType && settings.hasStoredPassphrase) ?
                 <View style={[styles.item, styles.theme.item]}>
@@ -124,10 +113,28 @@ class Settings extends React.Component {
                   />
                 </View> : null
             }
+
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+              <ItemTitle
+                icon='enable-incognito'
+                targetStateLabel={
+                  <SwitchButton
+                    value={settings.incognito}
+                    theme={theme}
+                    onSyncPress={this.toggleIncognito}
+                  />
+                }
+                title={t('Discreet mode')}
+                description={t('Hide balance and transaction amounts.')}
+              />
+            </View>
           </View>
 
           <View style={styles.group}>
-            <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('General')}</H4>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+              {t('General')}
+            </H4>
+
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
@@ -174,7 +181,7 @@ class Settings extends React.Component {
               />
             </View>
 
-            <View style={[styles.item, styles.theme.item]}>
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
                 navigation={navigation}
                 icon='language'
@@ -187,7 +194,23 @@ class Settings extends React.Component {
                 }
               />
             </View>
+          </View>
+
+          <View style={styles.group}>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+              {t('Info')}
+            </H4>
+
             <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
+                target='About'
+                icon='about'
+                title={t('About Lisk')}
+              />
+            </View>
+
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
                 navigation={navigation}
                 icon='terms'
@@ -198,8 +221,7 @@ class Settings extends React.Component {
           </View>
 
           <View style={[styles.group, styles.signOut]}>
-            <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
-            <View style={[styles.item, styles.theme.item]}>
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <SignOutButton
                 navigation={navigation}
                 signOut={this.props.accountSignedOut}
