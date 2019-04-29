@@ -1,60 +1,44 @@
-import { Platform, DeviceInfo } from 'react-native';
-import { themes, colors } from '../../constants/styleGuide';
+import { themes, colors, boxes, fonts } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {},
-    textContainer: {
-      paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 30 : 20,
-    },
-    passphraseContainer: {
-      padding: 20,
-      shadowOpacity: 0.1,
-      shadowRadius: 20,
-      elevation: 1,
-      shadowColor: '#0279b6',
+    wrapper: {
+      alignItems: 'center',
+      padding: boxes.boxPadding,
     },
     passphrase: {
-      marginTop: 8,
+      marginTop: 30,
+      marginBottom: 30,
+      fontFamily: fonts.family.passphraseText,
+      fontSize: 18,
+      lineHeight: 32,
+      textAlign: 'justify',
     },
     copyContainer: {
       alignItems: 'center',
-      marginTop: 8,
     },
-    imageContainer: {
-      alignItems: 'center',
-    },
-    image: {
-      width: 111,
-      height: 111,
-    },
-    caption: {
-      marginTop: 15,
+    copy: {
+      fontFamily: fonts.family.contextBold,
     },
   },
 
   [themes.light]: {
-    passphraseContainer: {
-      backgroundColor: colors.light.white,
+    wrapper: {
+      borderWidth: 1,
+      borderColor: colors.light.mystic,
     },
     passphraseTitle: {
-      color: colors.light.gray2,
+      color: colors.light.blueGray,
     },
     passphrase: {
-      color: colors.light.black,
+      color: colors.light.maastrichtBlue,
     },
     copy: {
-      color: colors.light.blue,
-    },
-    caption: {
-      color: colors.light.gray2,
+      color: colors.light.ultramarineBlue,
     },
   },
 
   [themes.dark]: {
-    passphraseContainer: {
-      backgroundColor: '#011730',
-    },
     passphraseTitle: {
       color: colors.dark.gray4,
     },
@@ -63,9 +47,6 @@ export default () => ({
     },
     copy: {
       color: colors.dark.blue,
-    },
-    caption: {
-      color: colors.dark.gray4,
     },
   },
 });
