@@ -1,4 +1,3 @@
-import { Platform, DeviceInfo } from 'react-native';
 import { themes, colors, fonts, boxes } from '../../constants/styleGuide';
 
 export default ({ logoSize }) => ({
@@ -6,22 +5,8 @@ export default ({ logoSize }) => ({
     container: {
       flex: 1,
       flexDirection: 'column',
-      justifyContent: 'space-between',
-      padding: boxes.boxPadding,
-      paddingBottom: boxes.boxPadding + ((Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 16 : 0),
-    },
-    footer: {
-      width: '100%',
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
-    copy: {
-      width: 'auto',
-    },
-    centerAligned: {
-      flexDirection: 'column',
-      justifyContent: 'center',
       alignItems: 'center',
+      padding: boxes.boxPadding,
     },
     logo: {
       overflow: 'hidden',
@@ -34,14 +19,15 @@ export default ({ logoSize }) => ({
       height: logoSize,
     },
     appTitle: {
-      marginTop: 18,
-      marginBottom: 6,
-    },
-    link: {
-      marginTop: 10,
+      marginTop: 6,
+      marginBottom: 18,
     },
     version: {
       fontFamily: fonts.family.context,
+    },
+    link: {
+      marginTop: 10,
+      fontFamily: fonts.family.contextBold,
     },
   },
 
@@ -49,30 +35,20 @@ export default ({ logoSize }) => ({
     container: {
       backgroundColor: colors.light.white,
     },
-    header: {
-      color: colors.light.black,
-    },
     appTitle: {
-      color: colors.light.black,
+      color: colors.light.maastrichtBlue,
     },
     version: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     link: {
-      color: colors.light.blue,
-    },
-    copy: {
-      color: colors.light.gray2,
-      fontSize: 15,
+      color: colors.light.ultramarineBlue,
     },
   },
 
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    header: {
-      color: colors.dark.white,
     },
     appTitle: {
       color: colors.dark.white,
@@ -82,9 +58,6 @@ export default ({ logoSize }) => ({
     },
     link: {
       color: colors.dark.blue,
-    },
-    copy: {
-      color: colors.dark.gray1,
     },
   },
 });
