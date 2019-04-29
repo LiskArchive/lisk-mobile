@@ -53,7 +53,7 @@ class SignOutButton extends React.Component {
     return (
       <IconButton
         icon='logout'
-        iconSize={16}
+        iconSize={20}
         title={t('Sign out')}
         color={theme === themes.light ? colors.light.ultramarineBlue : colors.dark.blue}
         onClick={this.onClick}
