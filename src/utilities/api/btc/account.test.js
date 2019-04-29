@@ -18,8 +18,8 @@ describe('api/btc/account', () => {
 
     it('resolves correctly', async () => {
       const response = {
-        [data.address]: {
-          final_balance: 1000,
+        data: {
+          confirmed_balance: 1000,
         },
       };
 
@@ -27,7 +27,7 @@ describe('api/btc/account', () => {
       const result = await getSummary(data.address);
       expect(result).toEqual({
         address: data.address,
-        balance: response[data.address].final_balance,
+        balance: response.data.confirmed_balance,
         initialized: true,
       });
     });

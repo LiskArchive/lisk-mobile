@@ -10,91 +10,67 @@ import { tokenMap } from '../../../constants/tokens';
  * @param {Object} data
  * @param {String} data.address Base address to use for formatting transactions
  * @param {Array} data.list Transaction list retrieved from API
- * @param {Number} data.blockHeight Latest block height for calculating confirmation count
  */
 const normalizeTransactionsResponse = ({
   address,
   list,
-  blockHeight,
-}) => list.map((tx) => {
+}) => list.map(({
+  tx, feeSatoshi, confirmations, timestamp,
+}) => {
   const data = {
-    id: tx.hash,
-    timestamp: Number(tx.time) * 1000,
-    confirmations: blockHeight > 0 ? (blockHeight - tx.block_height) + 1 : tx.block_height,
+    id: tx.txid,
+    timestamp: timestamp ? Number(timestamp) * 1000 : null,
+    confirmations: confirmations || 0,
     type: 0,
     data: '',
   };
 
-  const totalInput = tx.inputs.reduce((total, t) => total + t.prev_out.value, 0);
-  const totalOutput = tx.out.reduce((total, t) => total + t.value, 0);
-  data.fee = totalInput - totalOutput;
+  data.fee = feeSatoshi;
 
-  const ownedInput = tx.inputs.find(i => i.prev_out.addr === address);
+  const ownedInput = tx.inputs.find(i => i.txDetail.scriptPubKey.addresses.includes(address));
 
   if (ownedInput) {
     data.senderAddress = address;
-    const extractedAddress = tx.out[0].addr;
+    const extractedAddress = tx.outputs[0].scriptPubKey.addresses[0];
     data.recipientAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : 'Unparsed Address';
-    data.amount = tx.out[0].value;
+    data.amount = tx.outputs[0].satoshi;
   } else {
-    const output = tx.out.find(out => out.addr === address);
-    const extractedAddress = tx.inputs[0].prev_out.addr;
+    const output = tx.outputs.find(o => o.scriptPubKey.addresses.includes(address));
+    const extractedAddress = tx.inputs[0].txDetail.scriptPubKey.addresses[0];
     data.senderAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0 ? extractedAddress : 'Unparsed Address';
     data.recipientAddress = address;
-    data.amount = output.value;
+    data.amount = output.satoshi;
   }
 
   return data;
 });
 
-/**
- * Retrieves latest block from the Blockchain.info API and returns the height.
- * @returns {Promise<Number>}
- */
-export const getLatestBlockHeight = () => new Promise(async (resolve) => {
-  try {
-    const response = await fetch(`${config.url}/latestblock`);
-    const json = await response.json();
-
-    if (response.ok) {
-      resolve(json.height);
-    } else {
-      resolve(0);
-    }
-  } catch (error) {
-    resolve(0);
-  }
-});
-
 export const get = ({
   id,
   address,
-  limit = 50,
+  limit = 20,
   offset = 0,
 }) => new Promise(async (resolve, reject) => {
   try {
     let response;
 
     if (id) {
-      response = await fetch(`${config.url}/rawtx/${id}`, config.requestOptions);
+      response = await fetch(`${config.url}/transaction/${id}`, config.requestOptions);
     } else {
-      response = await fetch(`${config.url}/rawaddr/${address}?limit=${limit}&offset=${offset}`, config.requestOptions);
+      response = await fetch(`${config.url}/transactions/${address}?limit=${limit}&offset=${offset}&sort=height:desc`, config.requestOptions);
     }
 
     const json = await response.json();
 
     if (response.ok) {
-      const blockHeight = await exports.getLatestBlockHeight();
+      const data = normalizeTransactionsResponse({
+        address,
+        list: id ? [json.data] : json.data,
+      });
 
       resolve({
-        data: normalizeTransactionsResponse({
-          address,
-          list: id ? [json] : json.txs,
-          blockHeight,
-        }),
-        meta: {
-          count: id ? 1 : json.n_tx,
-        },
+        data,
+        meta: json.meta ? { count: json.meta.total } : {},
       });
     } else {
       reject(json);
@@ -124,11 +100,11 @@ export const calculateTransactionFee = ({
  */
 export const getUnspentTransactionOutputs = address => new Promise(async (resolve, reject) => {
   try {
-    const response = await fetch(`${config.url}/unspent?active=${address}`);
+    const response = await fetch(`${config.url}/utxo/${address}`);
     const json = await response.json();
 
     if (response.ok) {
-      resolve(json.unspent_outputs);
+      resolve(json.data);
     } else {
       reject(json);
     }
@@ -186,7 +162,7 @@ export const create = ({
     // Add inputs from unspent txOuts
     // eslint-disable-next-line
     for (const tx of txOutsToConsume) {
-      txb.addInput(tx.tx_hash_big_endian, tx.tx_output_n);
+      txb.addInput(tx.tx_hash, tx.tx_pos);
     }
 
     // Output to Recipient
@@ -219,20 +195,19 @@ export const create = ({
   }
 });
 
-export const broadcast = transaction => new Promise(async (resolve, reject) => {
+export const broadcast = transactionHex => new Promise(async (resolve, reject) => {
   try {
-    const body = new FormData();
-    body.append('tx', transaction);
-
-    const response = await fetch(`${config.url}/pushtx`, merge(config.requestOptions, {
+    const response = await fetch(`${config.url}/transaction`, merge(config.requestOptions, {
       method: 'POST',
-      body,
+      body: JSON.stringify({ tx: transactionHex }),
     }));
 
+    const json = await response.json();
+
     if (response.ok) {
-      resolve(response.body);
+      resolve(json);
     } else {
-      reject(response.body);
+      reject(json);
     }
   } catch (error) {
     reject(error);

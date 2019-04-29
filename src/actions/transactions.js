@@ -70,7 +70,10 @@ export const transactionAdded = (data, successCb, errorCb) => async (dispatch, g
       successCb({ txId: id });
     } else {
       await transactionsAPI.broadcast(activeToken, tx);
-      dispatch(transactionsLoaded());
+
+      dispatch(transactionsReset());
+      dispatch(transactionsLoaded({ address: account.address }));
+
       successCb();
     }
   } catch (error) {

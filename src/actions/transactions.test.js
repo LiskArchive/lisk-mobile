@@ -173,6 +173,44 @@ describe('Action: Accounts', () => {
       expect(successCallback.mock.calls).toHaveLength(1);
     });
 
+    it('should handle flow for non-LSK tokens', async () => {
+      const successCallback = jest.fn();
+
+      settings.token.active = 'BTC';
+      store = mockStore({
+        accounts: {
+          info: {
+            LSK: account,
+            BTC: {},
+          },
+        },
+        transactions: { confirmed: [], pending: [] },
+        settings,
+      });
+
+      const expectedActions = [
+        {
+          type: actionTypes.transactionsReset,
+        },
+        {
+          type: 'LOADING_STARTED',
+          data: actionTypes.transactionsLoaded,
+        },
+        {
+          type: 'LOADING_FINISHED',
+          data: actionTypes.transactionsLoaded,
+        },
+      ];
+
+      transactionsAPI.create.mockResolvedValueOnce('');
+      transactionsAPI.broadcast.mockResolvedValueOnce(transactions.data[0]);
+
+      await store.dispatch(transactionAdded(inputData, successCallback));
+
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(successCallback.mock.calls).toHaveLength(1);
+    });
+
     it('should go to error flow', async () => {
       const successCallback = jest.fn();
       const errorCallback = jest.fn();
