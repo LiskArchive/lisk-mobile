@@ -1,9 +1,22 @@
+const commercialFontFamily = {
+  heading: 'Gilroy-Bold',
+  context: 'BasierCircle-Regular',
+  contextBold: 'BasierCircle-Bold',
+  contextSemiBold: 'BasierCircle-SemiBold',
+  contextLight: 'BasierCircle-Regular',
+};
+
+const freeFontFamily = {
+  heading: 'OpenSans-Bold',
+  context: 'OpenSans-Regular',
+  contextBold: 'OpenSans-Bold',
+  contextSemiBold: 'OpenSans-SemiBold',
+  contextLight: 'OpenSans-Regular',
+};
+
 export default {
   family: {
-    heading: 'Gilroy-Bold',
-    context: 'OpenSans-Regular',
-    contextBold: 'OpenSans-Bold',
-    contextSemiBold: 'OpenSans-SemiBold',
+    ...(process.env.useCommercialFonts ? commercialFontFamily : freeFontFamily),
     passphrase: 'Dots-Regular',
     passphraseText: 'PTMono-Regular',
   },
