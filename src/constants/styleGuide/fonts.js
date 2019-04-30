@@ -3,7 +3,6 @@ const commercialFontFamily = {
   context: 'BasierCircle-Regular',
   contextBold: 'BasierCircle-Bold',
   contextSemiBold: 'BasierCircle-SemiBold',
-  contextLight: 'BasierCircle-Regular',
 };
 
 const freeFontFamily = {
@@ -11,7 +10,6 @@ const freeFontFamily = {
   context: 'OpenSans-Regular',
   contextBold: 'OpenSans-Bold',
   contextSemiBold: 'OpenSans-SemiBold',
-  contextLight: 'OpenSans-Regular',
 };
 
 export default {
