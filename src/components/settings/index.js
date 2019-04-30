@@ -77,7 +77,9 @@ class Settings extends React.Component {
       <View style={[styles.container, styles.theme.container]}>
         <ScrollView style={styles.innerContainer}>
           <View style={styles.group}>
-            <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Security')}</H4>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+              {t('Security')}
+            </H4>
             {
               settings.sensorType ?
                 <View style={[styles.item, styles.theme.item]}>
@@ -91,22 +93,11 @@ class Settings extends React.Component {
                     targetStateLabel={sensorStatus}
                     icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
                     iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
-                    title={settings.sensorType} />
+                    title={settings.sensorType}
+                  />
                 </View> : null
             }
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                icon='enable-incognito'
-                targetStateLabel={
-                  <SwitchButton
-                    value={settings.incognito}
-                    theme={theme}
-                    onSyncPress={this.toggleIncognito} />
-                }
-                title={t('Discreet mode')}
-                description={t('Hide balance and transaction amounts.')}
-              />
-            </View>
+
             {
               (settings.sensorType && settings.hasStoredPassphrase) ?
                 <View style={[styles.item, styles.theme.item]}>
@@ -118,81 +109,111 @@ class Settings extends React.Component {
                     hideDialog={this.hideDialog}
                     setError={this.setError}
                     icon='backup'
-                    title={t('Backup your passphrase')} />
+                    title={t('Backup your passphrase')}
+                    iconSize={22}
+                  />
                 </View> : null
             }
+
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+              <ItemTitle
+                icon='enable-incognito'
+                targetStateLabel={
+                  <SwitchButton
+                    value={settings.incognito}
+                    theme={theme}
+                    onSyncPress={this.toggleIncognito}
+                  />
+                }
+                title={t('Discreet mode')}
+                description={t('Hide balance and transaction amounts.')}
+              />
+            </View>
           </View>
 
           <View style={styles.group}>
-            <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('General')}</H4>
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                navigation={navigation}
-                target='About'
-                icon='about'
-                title={t('About Lisk')} />
-            </View>
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                icon='dark-mode'
-                iconSize={20}
-                targetStateLabel={
-                  <SwitchButton
-                    value={settings.theme === themes.dark}
-                    theme={theme}
-                    onSyncPress={this.switchTheme} />
-                }
-                title={t('Dark mode')} />
-            </View>
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                navigation={navigation}
-                icon='currency'
-                iconSize={20}
-                title={t('Currency')}
-                target='CurrencySelection'
-                targetStateLabel={
-                  <P style={{ color: colors[theme].gray1 }}>
-                    {settings.currency}
-                  </P>
-                }
-              />
-            </View>
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                navigation={navigation}
-                icon='manage-assets'
-                iconSize={20}
-                title={t('Manage tokens')}
-                target='ManageAssets'
-              />
-            </View>
-            <View style={[styles.item, styles.theme.item]}>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+              {t('General')}
+            </H4>
+
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
                 navigation={navigation}
                 icon='language'
-                iconSize={20}
                 title={t('Language')}
                 target='LanguageSelection'
                 targetStateLabel={
-                  <P style={{ color: colors[theme].gray1 }}>
+                  <P style={styles.theme.targetStateLabel}>
                     {languageMap[settings.language].label}
                   </P>
                 }
               />
             </View>
+
             <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                icon='dark-mode'
+                targetStateLabel={
+                  <SwitchButton
+                    value={settings.theme === themes.dark}
+                    theme={theme}
+                    onSyncPress={this.switchTheme}
+                  />
+                }
+                title={t('Dark mode')}
+              />
+            </View>
+
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
+                icon='currency'
+                title={t('Currency')}
+                target='CurrencySelection'
+                targetStateLabel={
+                  <P style={styles.theme.targetStateLabel}>
+                    {settings.currency}
+                  </P>
+                }
+              />
+            </View>
+
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
+                icon='manage-assets'
+                title={t('Manage tokens')}
+                target='ManageAssets'
+              />
+            </View>
+          </View>
+
+          <View style={styles.group}>
+            <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+              {t('Info')}
+            </H4>
+
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
+                target='About'
+                icon='about'
+                title={t('About Lisk')}
+              />
+            </View>
+
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
                 navigation={navigation}
                 icon='terms'
                 target='Terms'
-                title={t('Terms of use')} />
+                title={t('Terms of use')}
+              />
             </View>
           </View>
 
           <View style={[styles.group, styles.signOut]}>
-            <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
-            <View style={[styles.item, styles.theme.item]}>
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <SignOutButton
                 navigation={navigation}
                 signOut={this.props.accountSignedOut}

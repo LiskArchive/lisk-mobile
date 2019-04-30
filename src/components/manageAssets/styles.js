@@ -48,26 +48,20 @@ export default () => ({
     container: {
       backgroundColor: colors.light.white,
     },
-    header: {
-      color: colors.light.black,
-    },
     itemContainer: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     itemLabel: {
-      color: colors.light.black,
+      color: colors.light.maastrichtBlue,
     },
     description: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
   },
 
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    header: {
-      color: colors.dark.white,
     },
     itemContainer: {
       borderBottomColor: colors.dark.gray5,

@@ -20,6 +20,9 @@ export default () => ({
       paddingBottom: 14,
       minHeight: 36,
     },
+    itemNoBorder: {
+      borderBottomColor: 'transparent',
+    },
     signOut: {
       marginBottom: 40,
     },
@@ -30,10 +33,13 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     subHeader: {
-      color: colors.light.black,
+      color: colors.light.maastrichtBlue,
     },
     item: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
+    },
+    targetStateLabel: {
+      color: colors.light.slateGray,
     },
   },
 
@@ -46,6 +52,9 @@ export default () => ({
     },
     item: {
       borderBottomColor: colors.dark.gray5,
+    },
+    targetStateLabel: {
+      color: colors.dark.gray1,
     },
   },
 });

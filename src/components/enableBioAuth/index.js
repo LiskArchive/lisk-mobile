@@ -4,7 +4,7 @@ import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { storePassphraseInKeyChain } from '../../utilities/passphrase';
 import { settingsUpdated as settingsUpdatedAction } from '../../actions/settings';
-import { B, Small } from '../toolBox/typography';
+import { B, P, Small } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import { PrimaryButton } from '../toolBox/button';
 import { themes, colors } from '../../constants/styleGuide';
@@ -34,20 +34,21 @@ class EnableBioAuth extends React.Component {
     const {
       theme, styles, navigation, t,
     } = this.props;
+
     const title = navigation.getParam('title', 'Bio Auth');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={styles.container}>
           <View>
-            <B style={[styles.subHeader, styles.theme.subHeader]}>
+            <P style={[styles.subHeader, styles.theme.subHeader]}>
               {t('Here’s what you need to know:')}
-            </B>
+            </P>
             <View style={[styles.row, styles.separator, styles.theme.separator]}>
               <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
                 <Icon
                   name='passphrase'
-                  color={colors[theme].blue}
+                  color={theme === themes.light ? colors.light.ultramarineBlue : colors.dark.blue}
                   size={36}
                 />
               </View>
@@ -65,13 +66,13 @@ class EnableBioAuth extends React.Component {
               <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
                 <Icon
                   name='settings-bg'
-                  color={colors[theme].yellow}
+                  color={theme === themes.light ? colors.light.ultramarineBlue : colors.dark.blue}
                   size={36}
                 />
               </View>
               <View style={styles.textWrapper}>
                 <B style={[styles.rowTitle, styles.theme.rowTitle]}>
-                {t('You can always deactivate it')}
+                  {t('You can always deactivate it')}
                 </B>
                 <Small style={[styles.description, styles.theme.description]}>
                   {t(`You can disable ${title} at anytime in Settings page then authenticate with passphrase.`)}
@@ -82,7 +83,7 @@ class EnableBioAuth extends React.Component {
               <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
                 <Icon
                   name='secure'
-                  color={theme === themes.light ? colors.light.gray1 : colors.dark.gray2}
+                  color={theme === themes.light ? colors.light.ultramarineBlue : colors.dark.blue}
                   size={36}
                 />
               </View>

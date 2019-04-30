@@ -17,21 +17,21 @@ const openLiskWebsite = () => {
 
 const About = ({ styles, t }) => (
   <View style={[styles.container, styles.theme.container]}>
-      <View style={styles.centerAligned}>
-        <View style={styles.logo}>
-          <Image source={Logo} style={styles.logoImage} width={logoSize} height={logoSize} />
-        </View>
-        <H4 style={[styles.appTitle, styles.theme.appTitle]}>Lisk</H4>
-        <P style={[styles.version, styles.theme.version]}>{`Version ${packageJson.version}`}</P>
-        <A onPress={openLiskWebsite} style={[styles.link, styles.theme.link]}>
-          {t('Read more on the Lisk&reg; website')}
-        </A>
-      </View>
-      <View style={styles.footer}>
-        <P style={[styles.copy, styles.theme.copy]}>
-          {t('Copyright')} &copy; {(new Date()).getFullYear()} {t('Lisk Stiftung')}
-        </P>
-      </View>
+    <View style={styles.logo}>
+      <Image source={Logo} style={styles.logoImage} width={logoSize} height={logoSize} />
+    </View>
+
+    <H4 style={[styles.appTitle, styles.theme.appTitle]}>
+      Lisk
+    </H4>
+
+    <P style={[styles.version, styles.theme.version]}>
+      {`Version ${packageJson.version}`}
+    </P>
+
+    <A onPress={openLiskWebsite} style={[styles.link, styles.theme.link]}>
+      {t('Read more on the Lisk&reg; website')}
+    </A>
   </View>
 );
 
