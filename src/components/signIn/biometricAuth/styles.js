@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts, boxes } from '../../../constants/styleGuide';
+import { colors, boxes } from '../../../constants/styleGuide';
 import { deviceHeight } from '../../../utilities/device';
 
 const height = deviceHeight();
@@ -9,20 +9,12 @@ const styles = {
     height: '100%',
     paddingTop: height <= 640 ? 110 : 170,
   },
-  title: {
-    paddingLeft: boxes.boxPadding,
-    paddingRight: boxes.boxPadding,
-    textAlign: 'center',
-    color: colors.light.gray2,
-    fontSize: fonts.size.base,
-    opacity: height <= 640 ? 0 : 1,
-  },
   waves: {
     width: '100%',
     height: '100%',
     borderBottomColor: 'transparent',
-    borderBottomWidth: 240,
-    marginBottom: -240,
+    borderBottomWidth: 260,
+    marginBottom: -260,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',

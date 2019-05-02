@@ -12,6 +12,7 @@ import { PrimaryButton, Button } from '../../toolBox/button';
 import waves from '../../../assets/animations/waves.json';
 import wavesError from '../../../assets/animations/waves-error.json';
 import CreateAccount from '../createAccount';
+import Title from '../title';
 
 class BiometricAuth extends React.Component {
   state = {
@@ -37,7 +38,7 @@ class BiometricAuth extends React.Component {
   playUnAuthorizedAnimation = () => {
     this.animationLoop = 0;
     this.progress.setValue(1);
-    this.setState({ tried: true }, () => {
+    this.setState({ tried: true, busy: false }, () => {
       this.animationLoop = false;
       this.unAuthAnimEl.play();
     });
@@ -87,13 +88,18 @@ class BiometricAuth extends React.Component {
     const { t, sensorType, toggleView } = this.props;
     const { opacity, tried, busy } = this.state;
 
+    let pageTitle = t('Choose an authenticated method');
+    if (busy) {
+      pageTitle = sensorType === 'Face ID' ?
+        t('Look at the front camera to authenticate.') :
+        t('Place your finger over the touch sensor to authenticate.');
+    }
+
     return (
       <View style={styles.container}>
-        <View>
-          <Animated.Text style={[styles.title, { opacity }]}>
-            {t('Choose an authenticated method')}
-          </Animated.Text>
-        </View>
+        <Title opacity={opacity}>
+          {pageTitle}
+        </Title>
 
         <View style={styles.waves}>
           {tried ?

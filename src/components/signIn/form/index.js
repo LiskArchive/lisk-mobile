@@ -4,13 +4,13 @@ import { translate } from 'react-i18next';
 import styles from './styles';
 import Input from '../../toolBox/input';
 import { validatePassphrase } from '../../../utilities/passphrase';
-import { P } from '../../toolBox/typography';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import Scanner from '../../scanner';
 import { IconButton } from '../../toolBox/button';
 import { colors } from '../../../constants/styleGuide';
 import DropDownHolder from '../../../utilities/alert';
 import CreateAccount from '../createAccount';
+import Title from '../title';
 
 const devDefaultPass = process.env.passphrase || '';
 
@@ -159,11 +159,9 @@ class Form extends React.Component {
           permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
 
-        <Animated.View style={[styles.paddingBottom, { opacity }]}>
-          <P style={styles.title}>
-            { t('The official Lisk mobile wallet.') }
-          </P>
-        </Animated.View>
+        <Title opacity={opacity}>
+          {t('The official Lisk mobile wallet.')}
+        </Title>
 
         <Animated.View style={[{ opacity }]}>
           <Input
