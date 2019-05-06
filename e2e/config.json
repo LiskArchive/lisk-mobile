@@ -1,6 +1,4 @@
 {
-    "setupFilesAfterEnv": [
-        "./init.js"
-    ],
+    "setupTestFrameworkScriptFile": "./init.js",
     "testEnvironment": "node"
 }
