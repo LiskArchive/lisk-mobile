@@ -16,7 +16,11 @@
     "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "postinstall": "npm run link",
-    "i18n": "node ./scripts/scanner.config.js"
+    "i18n": "node ./scripts/scanner.config.js",
+    "test:e2e-build": "detox build --configuration ios.sim.release",
+    "test:e2e": "detox test --configuration ios.sim.release --cleanup",
+    "test:e2e-build-debug": "detox build --configuration ios.sim.debug",
+    "test:e2e-debug": "detox test --configuration ios.sim.debug"
   },
   "rnpm": {
     "assets": [
