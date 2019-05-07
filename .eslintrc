@@ -12,7 +12,8 @@
     "react",
     "import",
     "babel",
-    "jest"
+    "jest",
+    "detox"
   ],
   "globals": {
     "PRODUCTION": true,
