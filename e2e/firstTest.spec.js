@@ -4,7 +4,9 @@ describe('Example', () => {
     await device.reloadReactNative();
   });
 
-  it('should have welcome screen', async () => {
-    await expect(element(by.id('welcome'))).toBeVisible();
+  it('should have the form', async () => {
+    const form = element(by.id('signInForm'));
+    await waitFor(form).toExist().withTimeout(3000);
+    await expect(form).toExist();
   });
 });
