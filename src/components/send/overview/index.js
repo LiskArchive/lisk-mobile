@@ -193,7 +193,7 @@ class Overview extends React.Component {
 
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
-                {actionType === 'initialize' ? t('Transaction Fee') : t('Amount')}
+                {actionType === 'initialize' ? t('Transaction fee') : t('Amount')}
               </P>
               <B style={[styles.text, styles.theme.text]}>
                 <FormattedNumber
@@ -216,7 +216,7 @@ class Overview extends React.Component {
 
               <View style={styles.rowContent}>
                 <P style={[styles.label, styles.theme.label]}>
-                  {t('Transaction Fee')}
+                  {t('Transaction fee')}
                 </P>
                 <B style={[styles.text, styles.theme.text]}>
                   <FormattedNumber
@@ -240,7 +240,7 @@ class Overview extends React.Component {
 
               <View style={styles.rowContent}>
                 <P style={[styles.label, styles.theme.label]}>
-                  {t('Reference')}
+                  {t('Message')}
                 </P>
                 <B style={[styles.text, styles.theme.text]}>
                   {reference}
