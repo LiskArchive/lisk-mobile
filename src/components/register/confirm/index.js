@@ -140,15 +140,16 @@ class Confirm extends React.Component {
     return this.state.missing.length > 0 ? passphrase.map((val, index) => {
       const optionIndex = this.state.missing.indexOf(index);
       const element = optionIndex >= 0 ?
-        this.generatePlaceholder(index, optionIndex) :
+        this.generatePlaceholder(index, optionIndex, val) :
         <B key={index} style={styles.word}>{val}</B>;
       return element;
     }) : null;
   }
 
-  generatePlaceholder(index, optionIndex) {
+  generatePlaceholder(index, optionIndex, value) {
     const style = this.state.visibleOptions === optionIndex ? null : styles.deActivePlaceholder;
     return <Button
+      testID={`passphrasePlaceholderFor-${value}`}
       key={index}
       title={this.state.answers[optionIndex].value}
       onClick={() => this.toggleOptions(optionIndex)}
@@ -168,14 +169,22 @@ class Confirm extends React.Component {
           <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
             {t('Choose the correct option for missing words:')}
           </P>
-          <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
+          <View
+            testID="passphraseOptionsContainer"
+            style={[styles.passphraseContainer, styles.horizontalPadding]}
+          >
             { this.renderPassphrase() }
           </View>
           <View style={[styles.optionsContainer, styles.horizontalPadding]}>
             {this.state.options[this.state.visibleOptions] ?
-              this.state.options[this.state.visibleOptions].map((val, idx) =>
-                <Button style={styles.option} key={idx}
-                  title={val} onClick={() => this.fillOption(val)} />)
+              this.state.options[this.state.visibleOptions].map((value, idx) =>
+                <Button
+                  testID={`passphraseOptionFor-${value}`}
+                  style={styles.option}
+                  key={idx}
+                  title={value}
+                  onClick={() => this.fillOption(value)}
+                />)
               : null
             }
           </View>
@@ -192,6 +201,7 @@ class Confirm extends React.Component {
         </View>
         <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
           <PrimaryButton
+            testID="registerConfirmButton"
             disabled={this.state.buttonStatus}
             noTheme={true}
             style={styles.button}

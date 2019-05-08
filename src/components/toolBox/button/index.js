@@ -18,12 +18,13 @@ const modifyProps = (props) => {
  */
 const BaseButton = (props) => {
   const {
-    styles, textStyle, children, title, disabled,
+    styles, textStyle, children, title, disabled, testID,
   } = props;
 
   return (
     <TouchableOpacity
       {...modifyProps(props)}
+      testID={testID}
       style={[
         styles.buttonContainer,
         props.style,

@@ -136,7 +136,10 @@ class Form extends React.Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View
+        style={styles.container}
+        testID="signInForm"
+      >
         {
           showBackButton ?
             <BackButton
@@ -165,6 +168,7 @@ class Form extends React.Component {
 
         <Animated.View style={[{ opacity }]}>
           <Input
+            testID="signInPassphraseInput"
             noTheme={true}
             label={t('Passphrase')}
             reference={(ref) => { this.passphraseInput = ref; }}
@@ -199,6 +203,7 @@ class Form extends React.Component {
         <KeyboardAwareScrollView
           noTheme={true}
           button={t('Sign in')}
+          buttonTestID='signInButton'
           onSubmit={this.onFormSubmission}
           extras={
             <CreateAccount

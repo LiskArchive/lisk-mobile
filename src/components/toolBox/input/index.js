@@ -32,7 +32,7 @@ class Input extends React.Component {
       label, styles, theme, value, onChange, error,
       multiline, autoFocus, autoCorrect,
       keyboardType, secureTextEntry,
-      placeholder,
+      placeholder, testID,
     } = this.props;
 
     let { keyboardAppearance } = this.props;
@@ -72,6 +72,7 @@ class Input extends React.Component {
         }
 
         <TextInput
+          testID={testID}
           style={inputStyle}
           autoCapitalize='none'
           multiline={multiline}

@@ -24,7 +24,7 @@ class Success extends React.Component {
     const { t, navigation: { pop } } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View testID="registerSuccess" style={styles.container}>
         <View>
           <View style={styles.titleContainer}>
             <P style={styles.subTitle}>
