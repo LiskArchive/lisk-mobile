@@ -114,7 +114,8 @@
     "url": "^0.10.3",
     "url-parse": "^1.4.4",
     "util": "^0.10.4",
-    "vm-browserify": "0.0.4"
+    "vm-browserify": "0.0.4",
+    "react-native-modalbox": "=1.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
