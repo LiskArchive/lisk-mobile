@@ -16,7 +16,7 @@ const AmountInput = ({
     {valueInCurrency ?
       <View style={styles.currencyContainer}>
         <Text style={[styles.currencyText, styles.theme.currencyText]}>
-          {`${valueInCurrency} ${currency}`}
+        {`~ ${valueInCurrency} ${currency}`}
         </Text>
       </View> : null
     }
