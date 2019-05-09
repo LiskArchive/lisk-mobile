@@ -3,25 +3,14 @@ import { themes, colors, boxes } from '../../constants/styleGuide';
 export default () => ({
   common: {
     wrapper: {
-      flex: 1,
+      // flex: 1,
       backgroundColor: 'transparent',
       justifyContent: 'flex-end',
-    },
-    overlay: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
-      opacity: 0,
-      backgroundColor: colors.light.black,
     },
     container: {
       flexDirection: 'column',
       justifyContent: 'space-between',
       width: '100%',
-      bottom: 0,
-      left: 0,
       borderTopLeftRadius: 5,
       borderTopRightRadius: 5,
       overflow: 'hidden',
