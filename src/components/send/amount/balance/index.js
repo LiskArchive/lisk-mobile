@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
-import { B } from '../../../toolBox/typography';
+import { B, P } from '../../../toolBox/typography';
 import FormattedNumber from '../../../formattedNumber';
 import withTheme from '../../../withTheme';
 import getStyles from './styles';
@@ -25,9 +25,9 @@ const AmountBalance = ({
       (incognito ? styles.balanceContainerIncognito : {}),
     ]}
   >
-    <B style={[styles.balanceText, styles.theme.balanceText]}>
-      {t('You have')}
-    </B>
+    <P style={[styles.balanceText, styles.theme.balanceText]}>
+      {t('Your Balance')}
+    </P>
 
     {incognito ?
       <Image
