@@ -3,7 +3,7 @@ import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import { PrimaryButton } from '../../toolBox/button';
-import { P } from '../../toolBox/typography';
+import { A, P } from '../../toolBox/typography';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 
@@ -38,14 +38,17 @@ class Result extends React.Component {
         <P style={styles.theme.subtitle}>
           {t('Thank you. Your transaction is being processed. It may take up to 15 minutes to be secured on the blockchain.')}
         </P>
-        <PrimaryButton
-          style={styles.button}
-          onClick={() => {
-            finalCallback();
-            reset();
-          }}
-          title={t('Return to home')}
-        />
+        <View style={styles.footer}>
+          <A style={styles.anchor}>{t('Add address to bookmarks')}</A>
+          <PrimaryButton
+            style={styles.button}
+            onClick={() => {
+              finalCallback();
+              reset();
+            }}
+            title={t('Return to home')}
+          />
+        </View>
       </View>
     );
   }
