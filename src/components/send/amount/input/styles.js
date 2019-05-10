@@ -9,7 +9,7 @@ export default () => ({
       position: 'absolute',
       zIndex: 99,
       right: 20,
-      top: 57,
+      top: 20,
     },
     currencyText: {
       fontSize: fonts.size.input,
