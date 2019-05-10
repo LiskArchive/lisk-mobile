@@ -178,7 +178,7 @@ class Overview extends React.Component {
               </H4>
             ) : null}
 
-            <P style={[styles.text, styles.theme.text, styles.address]}>
+            <P style={[styles.text, styles.theme.address, styles.address]}>
               {address}
             </P>
           </View>
