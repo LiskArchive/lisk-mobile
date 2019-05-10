@@ -3,7 +3,7 @@ import { themes, colors, fonts } from '../../../../constants/styleGuide';
 export default () => ({
   common: {
     input: {
-      fontSize: fonts.size.h1,
+      fontSize: 18,
     },
     currencyContainer: {
       position: 'absolute',
