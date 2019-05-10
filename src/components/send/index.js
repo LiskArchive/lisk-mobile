@@ -4,7 +4,6 @@ import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import MultiStep from '../multiStep';
 import Recipient from './recipient';
-import AddToBookmark from './addToBookmark';
 import Amount from './amount';
 import Reference from './reference';
 import Overview from './overview';
@@ -144,10 +143,6 @@ class Send extends React.Component {
       {
         component: Recipient,
         title: 'form',
-      },
-      {
-        component: AddToBookmark,
-        title: 'addToBookmark',
       },
       {
         component: Amount,
