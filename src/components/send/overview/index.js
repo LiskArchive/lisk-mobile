@@ -17,7 +17,7 @@ import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import DropDownHolder from '../../../utilities/alert';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
-const getTranslatedMessages = (t, activeToken = tokenMap.LSK.key) => ({
+const getTranslatedMessages = t => ({
   initialize: {
     title: t('Initialize your account'),
     subtitle: t('By initializing your account, you are taking an additional step towards securing your account.'),
@@ -26,7 +26,6 @@ const getTranslatedMessages = (t, activeToken = tokenMap.LSK.key) => ({
   },
   send: {
     title: t('Ready to send'),
-    subtitle: t('You are about to send LSK tokens to the following address.', { tokenType: activeToken }),
     button: t('Send now'),
     buttonBusy: t('Sending'),
   },
@@ -142,15 +141,13 @@ class Overview extends React.Component {
         contentContainerStyle={styles.innerContainer}
       >
         <View>
-          {!isSmallScreen ? (
+          {!isSmallScreen && actionType !== 'send' ? (
             <P style={styles.theme.subtitle}>
               {translatedMessages[actionType].subtitle}
 
-              {actionType === 'initialize' ? (
-                <A style={[styles.link, styles.theme.link]} onPress={this.openAcademy}>
-                  {t('Read more')}
-                </A>
-              ) : ''}
+              <A style={[styles.link, styles.theme.link]} onPress={this.openAcademy}>
+                {t('Read more')}
+              </A>
             </P>
           ) : null}
 
@@ -178,7 +175,7 @@ class Overview extends React.Component {
               </H4>
             ) : null}
 
-            <P style={[styles.text, styles.theme.text, styles.address]}>
+            <P style={[styles.text, styles.theme.address, styles.address]}>
               {address}
             </P>
           </View>
@@ -193,7 +190,7 @@ class Overview extends React.Component {
 
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
-                {actionType === 'initialize' ? t('Transaction Fee') : t('Amount')}
+                {actionType === 'initialize' ? t('Transaction fee') : t('Amount')}
               </P>
               <B style={[styles.text, styles.theme.text]}>
                 <FormattedNumber
@@ -216,7 +213,7 @@ class Overview extends React.Component {
 
               <View style={styles.rowContent}>
                 <P style={[styles.label, styles.theme.label]}>
-                  {t('Transaction Fee')}
+                  {t('Transaction fee')}
                 </P>
                 <B style={[styles.text, styles.theme.text]}>
                   <FormattedNumber
@@ -240,7 +237,7 @@ class Overview extends React.Component {
 
               <View style={styles.rowContent}>
                 <P style={[styles.label, styles.theme.label]}>
-                  {t('Reference')}
+                  {t('Message')}
                 </P>
                 <B style={[styles.text, styles.theme.text]}>
                   {reference}

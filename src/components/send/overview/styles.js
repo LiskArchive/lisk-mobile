@@ -96,6 +96,9 @@ export default () => ({
     text: {
       color: colors.light.black,
     },
+    address: {
+      color: colors.light.slateGray,
+    },
     label: {
       color: colors.light.gray1,
     },
@@ -119,6 +122,9 @@ export default () => ({
     },
     text: {
       color: colors.dark.white,
+    },
+    address: {
+      color: colors.light.platinum,
     },
     label: {
       color: colors.dark.gray4,

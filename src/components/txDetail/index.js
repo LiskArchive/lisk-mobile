@@ -202,14 +202,14 @@ class TransactionDetail extends React.Component {
               </View>
             </Row>
         }
-        <Row icon='tx-fee' title='Transaction Fee'>
+        <Row icon='tx-fee' title='Transaction fee'>
           <B style={[styles.value, styles.theme.value]}>
             <FormattedNumber tokenType={activeToken}>{fromRawLsk(tx.fee)}</FormattedNumber>
           </B>
         </Row>
         {
           (tx.data) ?
-            <Row icon='reference' title='Reference'>
+            <Row icon='reference' title='Message'>
               <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
                 {tx.data}
               </B>
