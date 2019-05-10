@@ -6,7 +6,6 @@ import { fromRawLsk } from '../../../utilities/conversions';
 import reg from '../../../constants/regex';
 import transactions from '../../../constants/transactions';
 import { merge } from '../../../utilities/helpers';
-import Header from './header';
 import Balance from './balance';
 import Input from './input';
 import withTheme from '../../withTheme';
@@ -126,7 +125,6 @@ class AmountLSK extends React.Component {
           }}
         >
           <View>
-            <Header />
 
             <Balance
               value={fromRawLsk(accounts.info[settings.token.active].balance)}

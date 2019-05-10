@@ -5,7 +5,6 @@ import { BigNumber } from 'bignumber.js';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import { includeFee, fromRawLsk } from '../../../utilities/conversions';
 import { merge } from '../../../utilities/helpers';
-import Header from './header';
 import Balance from './balance';
 import Input from './input';
 import DynamicFeeSelector from './dynamicFeeSelector';
@@ -203,7 +202,6 @@ class AmountBTC extends React.Component {
           }}
         >
           <View>
-            <Header />
 
             <Balance
               value={balance}
