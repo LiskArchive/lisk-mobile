@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
+import { NavigationActions } from 'react-navigation';
 import { H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
@@ -14,12 +15,15 @@ import { languageMap } from '../../constants/languages';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../actions/settings';
+import ModalHolder from '../../utilities/modal';
+import { accountSignedOut as accountSignedOutAction } from '../../actions/accounts';
 import getStyles from './styles';
 
 @connect(state => ({
   settings: state.settings,
 }), {
   settingsUpdated: settingsUpdatedAction,
+  accountSignedOut: accountSignedOutAction,
 })
 class Settings extends React.Component {
   state = {
@@ -49,6 +53,16 @@ class Settings extends React.Component {
     this.props.settingsUpdated({
       incognito: !this.props.settings.incognito,
     });
+  }
+
+  signOut = () => {
+    this.props.accountSignedOut();
+    this.props.navigation.dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'SignIn', params: { signOut: true } }),
+      ],
+    }));
   }
 
   render() {
@@ -193,7 +207,11 @@ class Settings extends React.Component {
             <H4 style={[styles.subHeader, styles.theme.subHeader]}>{''}</H4>
             <View style={[styles.item, styles.theme.item]}>
               <SignOutButton
-                onClick={() => navigation.navigate('Modal', { title: 'Signing out', component: SignOutModal })}
+                onClick={() => ModalHolder.open({
+                  title: 'Signing out',
+                  component: SignOutModal,
+                  callback: this.signOut,
+                })}
               />
             </View>
           </View>

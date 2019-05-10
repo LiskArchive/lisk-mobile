@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
-import { NavigationActions } from 'react-navigation';
 import { A, Small } from '../../toolBox/typography';
 import { SecondaryButton } from '../../toolBox/button';
 import { accountSignedOut as accountSignedOutAction } from '../../../actions/accounts';
@@ -18,13 +17,8 @@ import getStyles from './styles';
 class SignOutModal extends React.Component {
   onConfirm = () => {
     removePassphraseFromKeyChain();
-    this.props.accountSignedOut();
-    this.props.navigation.dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Home', params: { signOut: true } }),
-      ],
-    }));
+    this.props.modalCallback();
+    this.props.close();
   }
 
   onCancel = () => {
