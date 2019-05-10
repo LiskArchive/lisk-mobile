@@ -46,7 +46,7 @@ class Result extends React.Component {
               finalCallback();
               reset();
             }}
-            title={t('Return to home')}
+            title={t('Continue')}
           />
         </View>
       </View>
