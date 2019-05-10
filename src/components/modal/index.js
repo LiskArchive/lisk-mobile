@@ -42,8 +42,10 @@ class Modal extends React.Component {
     const { title, Component } = this.state;
 
     return (<ModalBox position={'bottom'}
+      style={styles.modal}
       ref={ref => ModalHolder.initialize(ref, this.updateModal)}
     >
+    <View style={styles.wrapper}>
         <View
           style={[styles.container, styles.theme.container]}
           onLayout={this.setHeaderHeight}
@@ -63,6 +65,7 @@ class Modal extends React.Component {
               <Component navigation={navigation} close={this.closeModal} />
             </View>
           </ScrollView>
+        </View>
         </View>
     </ModalBox>
     );
