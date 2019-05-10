@@ -124,7 +124,7 @@ export default () => ({
       color: colors.dark.white,
     },
     address: {
-      color: colors.light.platinum,
+      color: colors.dark.white,
     },
     label: {
       color: colors.dark.gray4,
