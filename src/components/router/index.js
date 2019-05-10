@@ -19,7 +19,6 @@ import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
 import AddBookmark from '../addBookmark';
-import Modal from '../modal';
 import HeaderBackground from './headerBackground';
 import HeaderBackgroundImage from './headerBackgroundImage';
 import HeaderTitle from './headerTitle';
@@ -290,14 +289,6 @@ export default StackNavigator({ //eslint-disable-line
       },
     },
   },
-  Modal: {
-    screen: Modal,
-    navigationOptions: {
-      headerStyle: {
-        display: 'none',
-      },
-    },
-  },
   AddBookmark: {
     screen: AddBookmark,
     navigationOptions: {
@@ -319,13 +310,4 @@ export default StackNavigator({ //eslint-disable-line
   navigationOptions: {
     gesturesEnabled: false,
   },
-  transitionConfig: ({ scene }) => (scene.route.routeName === 'Modal' ? ({
-    transitionSpec: {
-      duration: 150,
-    },
-  }) : ({
-    transitionSpec: {
-      duration: 350,
-    },
-  })),
 });

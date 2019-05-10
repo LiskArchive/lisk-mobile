@@ -10,6 +10,7 @@ import withTheme from '../withTheme';
 import FormatedNumber from '../formattedNumber';
 import { fromRawLsk } from '../../utilities/conversions';
 import getStyles from './styles';
+import ModalHolder from '../../utilities/modal';
 
 @connect(state => ({
   settings: state.settings,
@@ -19,7 +20,7 @@ import getStyles from './styles';
 })
 class AssetSelection extends React.Component {
   onSelect = (value) => {
-    const { settings: { token }, settingsUpdated, close } = this.props;
+    const { settings: { token }, settingsUpdated } = this.props;
     const updatedTokens = {
       list: token.list,
       active: value,
@@ -27,7 +28,7 @@ class AssetSelection extends React.Component {
     settingsUpdated({
       token: updatedTokens,
     });
-    close();
+    ModalHolder.close();
   }
 
   render() {

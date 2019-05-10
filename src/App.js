@@ -10,6 +10,7 @@ import ThemeContext from './contexts/theme';
 import { themes } from './constants/styleGuide';
 import i18n from '../locales';
 import Alert from './components/alert';
+import Modal from './components/modal';
 
 @connect(state => ({
   settings: state.settings,
@@ -17,7 +18,6 @@ import Alert from './components/alert';
 class ThemedApp extends React.Component {
   render() {
     const { theme } = this.props.settings;
-
     return (
       <ThemeContext.Provider value={theme}>
         <I18nextProvider i18n={ i18n }>
@@ -25,6 +25,7 @@ class ThemedApp extends React.Component {
           <Loading />
           <Router />
           <Alert />
+          <Modal />
         </I18nextProvider>
       </ThemeContext.Provider>
     );
