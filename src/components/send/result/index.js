@@ -11,6 +11,7 @@ import getStyles from './styles';
   account: state.accounts.info,
   transactions: state.transactions,
   activeToken: state.settings.active,
+  followedAccounts: state.accounts.followed,
 }), {})
 class Result extends React.Component {
   componentDidMount() {
@@ -30,8 +31,11 @@ class Result extends React.Component {
 
   render() {
     const {
-      t, styles, finalCallback, reset,
+      t, styles, finalCallback, reset, navigation,
+      followedAccounts, settings: { token }, sharedData: { address },
     } = this.props;
+
+    const isNotFollowed = !followedAccounts[token.active].some(item => item.address === address);
 
     return (
       <View style={[styles.container, styles.theme.container]}>
@@ -39,7 +43,9 @@ class Result extends React.Component {
           {t('Thank you. Your transaction is being processed. It may take up to 15 minutes to be secured on the blockchain.')}
         </P>
         <View style={styles.footer}>
-          <A style={styles.anchor}>{t('Add address to bookmarks')}</A>
+          {isNotFollowed && (
+            <A onPress={() => navigation.navigate('AddBookmark', { title: t('New bookmark'), account: { address } })} style={styles.anchor}>{t('Add address to bookmarks')}</A>
+          )}
           <PrimaryButton
             style={styles.button}
             onClick={() => {

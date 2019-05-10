@@ -67,7 +67,7 @@ export const transactionAdded = (data, successCb, errorCb) => async (dispatch, g
         },
       });
 
-      successCb({ txId: id });
+      successCb({ txId: id, address: data.recipientAddress });
     } else {
       await transactionsAPI.broadcast(activeToken, tx);
 
