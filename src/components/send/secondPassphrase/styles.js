@@ -8,19 +8,6 @@ export default () => ({
       justifyContent: 'space-between',
       paddingBottom: (deviceType() === 'android' ? tabBarHeight() : 0) + 24,
     },
-    titleContainer: {
-      margin: boxes.boxPadding,
-    },
-    illustrationWrapper: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      paddingTop: 36,
-      paddingBottom: 8,
-    },
-    illustration: {
-      width: 85,
-      height: 85,
-    },
     inputContainer: {
       paddingTop: 0,
     },
@@ -59,16 +46,10 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    subtitle: {
-      color: colors.light.gray2,
-    },
   },
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    subtitle: {
-      color: colors.dark.gray4,
     },
   },
 });

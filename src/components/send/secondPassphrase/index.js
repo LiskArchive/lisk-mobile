@@ -1,17 +1,14 @@
 import React from 'react';
-import { View, Image, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import { translate } from 'react-i18next';
 import { validatePassphrase } from '../../../utilities/passphrase';
 import { extractPublicKey } from '../../../utilities/api/lisk/account';
 import Input from '../../toolBox/input';
-import { P } from '../../toolBox/typography';
 import { IconButton } from '../../toolBox/button';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import secondPassphraseImageLight from '../../../assets/images/secondPassphrase3xLight.png';
-import secondPassphraseImageDark from '../../../assets/images/secondPassphrase3xDark.png';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
-import { colors, themes } from '../../../constants/styleGuide';
+import { colors } from '../../../constants/styleGuide';
 import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import Scanner from '../../scanner';
 import DropDownHolder from '../../../utilities/alert';
@@ -128,7 +125,7 @@ class SecondPassphrase extends React.Component {
 
   render() {
     const {
-      navigation, styles, theme, t, lng,
+      navigation, styles, t, lng,
     } = this.props;
     const { secondPassphrase } = this.state;
 
@@ -157,21 +154,6 @@ class SecondPassphrase extends React.Component {
           }}
         >
           <View>
-            {!isSmallScreen ? (
-              <View style={styles.titleContainer}>
-                <P style={[styles.subtitle, styles.theme.subtitle]}>
-                  {t('Enter your second passphrase to continue to transaction overview page.')}
-                </P>
-
-                <View style={styles.illustrationWrapper}>
-                  {theme === themes.light ?
-                    <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
-                    <Image style={styles.illustration} source={secondPassphraseImageDark} />
-                  }
-                </View>
-              </View>
-            ) : null}
-
             <View>
               <Input
                 label={t('Second Passphrase')}
