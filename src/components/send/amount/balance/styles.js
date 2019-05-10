@@ -3,21 +3,23 @@ import { themes, colors, boxes } from '../../../../constants/styleGuide';
 export default () => ({
   common: {
     balanceContainer: {
-      flexDirection: 'row',
-      padding: boxes.boxPadding,
+      flexDirection: 'column',
+      paddingTop: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
       marginBottom: 5,
-      alignItems: 'center',
     },
     balanceContainerIncognito: {
       paddingTop: boxes.boxPadding - 2,
       paddingBottom: boxes.boxPadding - 2,
     },
     balanceText: {
-      fontSize: 14,
+      fontSize: 13,
       paddingRight: 4,
     },
     balanceNumber: {
-      fontSize: 14,
+      fontSize: 16,
+      color: colors.light.ultramarineBlue,
     },
     balanceIncognito: {
       width: 80,
@@ -26,26 +28,14 @@ export default () => ({
   },
 
   [themes.light]: {
-    balanceContainer: {
-      backgroundColor: colors.light.sendBalanceBg,
-    },
     balanceText: {
       color: colors.light.gray2,
-    },
-    balanceNumber: {
-      color: colors.light.black,
     },
   },
 
   [themes.dark]: {
-    balanceContainer: {
-      backgroundColor: colors.dark.sendBalanceBg,
-    },
     balanceText: {
       color: colors.dark.gray4,
-    },
-    balanceNumber: {
-      color: colors.dark.white,
     },
   },
 });
