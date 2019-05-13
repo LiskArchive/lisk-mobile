@@ -209,7 +209,7 @@ class Recipient extends React.Component {
                   <Avatar
                     style={styles.avatar}
                     address={address.value}
-                    size={34}
+                    size={24.6}
                   /> : null
               }
 
