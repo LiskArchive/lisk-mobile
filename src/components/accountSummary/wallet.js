@@ -20,6 +20,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../constants/styleGuide';
 import DeleteBookmarkModal from '../bookmarks/deleteBookmarkModal';
+import modalHolder from '../../utilities/modal';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,
@@ -76,13 +77,10 @@ class AccountSummary extends React.Component {
     const isFollowed = followedAccounts[activeToken].some(item => item.address === account.address);
 
     if (isFollowed) {
-      navigation.navigate({
-        routeName: 'Modal',
-        params: {
-          title: 'Delete bookmark',
-          component: DeleteBookmarkModal,
-          onConfirm: () => accountUnFollowed(account.address),
-        },
+      modalHolder.open({
+        title: 'Delete bookmark',
+        component: DeleteBookmarkModal,
+        callback: () => accountUnFollowed(account.address),
       });
     } else {
       navigation.navigate({
