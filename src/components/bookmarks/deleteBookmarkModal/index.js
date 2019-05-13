@@ -8,22 +8,12 @@ import getStyles from './styles';
 
 class DeleteBookmarkModal extends React.Component {
   onConfirm = () => {
-    this.props.navigation.getParam('onConfirm')();
-    this.props.close();
-  }
-
-  onCancel = () => {
-    const onCancel = this.props.navigation.getParam('onCancel', false);
-
-    if (typeof onCancel === 'function') {
-      onCancel();
-    }
-
+    this.props.modalCallback();
     this.props.close();
   }
 
   render() {
-    const { styles, t } = this.props;
+    const { styles, t, close } = this.props;
 
     return (
       <View style={styles.container}>
@@ -42,7 +32,7 @@ class DeleteBookmarkModal extends React.Component {
         />
 
         <A
-          onPress={this.onCancel}
+          onPress={close}
           style={styles.theme.cancelButton}
         >
           {t('Cancel')}
