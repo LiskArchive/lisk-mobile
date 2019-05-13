@@ -75,7 +75,7 @@ export default () => ({
     },
 
     itemLabel: {
-      fontFamily: fonts.family.contextSemiBold,
+      fontFamily: fonts.family.contextBold,
     },
 
     selectedItemLabel: {
@@ -92,8 +92,12 @@ export default () => ({
       color: colors.light.gray2,
     },
 
+    label: {
+      color: colors.light.maastrichtBlue,
+    },
+
     value: {
-      color: colors.light.black,
+      color: colors.light.gray1,
     },
 
     itemLabel: {
@@ -103,7 +107,7 @@ export default () => ({
 
   [themes.dark]: {
     container: {
-      borderColor: colors.dark.sendBalanceBg,
+      borderColor: colors.light.slateGray,
     },
 
     loadingText: {
@@ -111,11 +115,11 @@ export default () => ({
     },
 
     label: {
-      color: colors.dark.gray4,
+      color: colors.light.ghost,
     },
 
     value: {
-      color: colors.dark.white,
+      color: colors.light.blueGray,
     },
 
     itemLabel: {
