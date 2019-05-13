@@ -16,12 +16,14 @@ class Modal extends React.Component {
     contentStyle: {},
     Component: null,
     title: '',
+    modalCallback: () => true,
   }
 
   updateModal = (config) => {
     this.setState({
       title: config.title,
       Component: config.component || null,
+      modalCallback: config.callback,
     });
   }
 
@@ -36,10 +38,10 @@ class Modal extends React.Component {
   }
   render() {
     const {
-      styles, navigation,
+      styles,
     } = this.props;
     const { contentStyle, headerStyle } = this.state;
-    const { title, Component } = this.state;
+    const { title, Component, modalCallback } = this.state;
 
     return (<ModalBox position={'bottom'}
       style={styles.modal}
@@ -62,7 +64,7 @@ class Modal extends React.Component {
           </View>
           <ScrollView>
             <View style={[styles.contentContainer, contentStyle]}>
-              <Component navigation={navigation} close={this.closeModal} />
+              <Component modalCallback={modalCallback} close={this.closeModal} />
             </View>
           </ScrollView>
         </View>

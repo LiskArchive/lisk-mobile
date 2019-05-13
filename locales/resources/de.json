@@ -185,5 +185,8 @@
   "Primary": "Primär",
   "You don’t have any bookmarks. Start adding then through the sending process.": "Du hast noch keine Lesezeichen. Im Sendevorgang kannst du sie hinzufügen.",
   "Error": "Fehler",
-  "Unparsed Address": "Unbekannte Adresse"
+  "Unparsed Address": "Unbekannte Adresse",
+  "Are you sure you want to sign out?": "Are you sure you want to sign out?",
+  "Signing out will disable bioAuth for the Lisk App.": "Signing out will disable {{sensorType}} for the Lisk App.",
+  "You can enable it after singing back in with your passphrase.": "You can enable it after singing back in with your passphrase."
 }
