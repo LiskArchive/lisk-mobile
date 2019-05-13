@@ -7,15 +7,6 @@ export default () => ({
       flexDirection: 'column',
       paddingBottom: 24,
     },
-    titleContainer: {
-      overflow: 'hidden',
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
-      maxWidth: '100%',
-    },
-    subtitle: {
-      marginTop: 0,
-    },
     form: {
       paddingTop: boxes.boxPadding,
       paddingBottom: boxes.boxPadding,
@@ -80,9 +71,6 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    subtitle: {
-      color: colors.light.gray2,
-    },
     scanButtonTitle: {
       color: colors.light.blue,
     },
@@ -90,9 +78,6 @@ export default () => ({
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    subtitle: {
-      color: colors.dark.gray4,
     },
     scanButtonTitle: {
       color: colors.dark.blue,
