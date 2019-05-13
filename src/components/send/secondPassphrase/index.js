@@ -184,10 +184,10 @@ class SecondPassphrase extends React.Component {
                 /> : null
               }
             <View style={styles.imageContainer}>
-              { theme === themes.light ?
-                <Image source={SecondPassPhraseLightImg} style={styles.illustration} /> :
-                <Image source={SecondPassPhraseDarkImg} style={styles.illustration} />
-              }
+              <Image
+                source={theme === themes.light ? SecondPassPhraseLightImg : SecondPassPhraseDarkImg}
+                style={styles.illustration}
+              />
             </View>
           </View>
         </KeyboardAwareScrollView>
