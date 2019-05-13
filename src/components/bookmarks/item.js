@@ -13,6 +13,7 @@ import getStyles from './styles';
 import Icon from '../toolBox/icon';
 import { themes, colors } from '../../constants/styleGuide';
 import DeleteBookmarkModal from './deleteBookmarkModal';
+import ModalHolder from '../../utilities/modal';
 
 @connect(state => ({}), {
   accountUnFollowed: accountUnFollowedAction,
@@ -21,13 +22,12 @@ class draggableItem extends React.Component {
   _deltaX = new Animated.Value(0);
 
   onDelete = () => {
-    const { data, accountUnFollowed, navigate } = this.props;
-
-    navigate('Modal', {
+    const { data, accountUnFollowed } = this.props;
+    this.ref.changePosition({ x: 0, y: 0 });
+    ModalHolder.open({
       title: 'Delete bookmark',
       component: DeleteBookmarkModal,
-      onConfirm: () => accountUnFollowed(data.address),
-      onCancel: () => this.ref.changePosition({ x: 0, y: 0 }),
+      callback: () => accountUnFollowed(data.address),
     });
   }
 
