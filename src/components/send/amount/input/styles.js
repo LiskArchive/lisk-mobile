@@ -19,13 +19,19 @@ export default () => ({
 
   [themes.light]: {
     currencyText: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
+    },
+    label: {
+      color: colors.light.maastrichtBlue,
     },
   },
 
   [themes.dark]: {
     currencyText: {
-      color: colors.dark.gray4,
+      color: colors.light.blueGray,
+    },
+    label: {
+      color: colors.light.platinum,
     },
   },
 });

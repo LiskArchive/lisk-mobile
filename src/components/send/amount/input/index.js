@@ -10,7 +10,7 @@ const AmountInput = ({
   <View>
     <Input
       {...rest}
-      innerStyles={{ input: styles.input }}
+      innerStyles={{ input: styles.input, inputLabel: styles.theme.label }}
     />
 
     {valueInCurrency ?
