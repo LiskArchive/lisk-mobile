@@ -31,7 +31,7 @@ import { pricesRetrieved as pricesRetrievedAction } from '../../actions/service'
 import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';
-import deepLinkMapper from '../../utilities/deepLink';
+import deepLinkMapper, { parseDeepLink } from '../../utilities/deepLink';
 import quickActions from '../../constants/quickActions';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
@@ -48,11 +48,11 @@ console.disableYellowBox = true; // eslint-disable-line
   pricesRetrieved: pricesRetrievedAction,
 })
 class SignIn extends React.Component {
+  deeplinkURL = '';
   state = {
     destinationDefined: false,
     storedPassphrase: null,
     view: 'splash',
-    deepLinkURL: '',
     androidDialog: {
       error: null,
       show: false,
@@ -166,7 +166,7 @@ class SignIn extends React.Component {
     this.props.pricesRetrieved();
 
     if (this.state.deepLinkURL) {
-      this.navigateToDeepLink(this.state.deepLinkURL);
+      this.navigateToDeepLink(this.deepLinkURL);
     } else {
       this.props.navigation.dispatch(NavigationActions.reset({
         index: 0,
@@ -203,7 +203,7 @@ class SignIn extends React.Component {
     if (isSignedIn) {
       this.navigateToDeepLink(event.url);
     } else {
-      this.setState({ deepLinkURL: event.url });
+      this.deeplinkURL = event.url;
     }
   }
 
@@ -226,13 +226,23 @@ class SignIn extends React.Component {
       // @TODO: Navigate to different page or display an error message for unmapped deep links.
       navigation.navigate('Home');
     }
-  }
+  };
 
   setupDeepLinking() {
     // After sign out, there's no need to consume the launch URL for further sign-ins.
     if (!this.props.navigation.getParam('signOut')) {
       Linking.getInitialURL()
-        .then(url => this.setState({ deepLinkURL: url }))
+        .then((url) => {
+          if (url) {
+            const { path, query } = parseDeepLink(url);
+            if (path === 'register') {
+              // this.passphraseInput.blur();
+              this.props.navigation.navigate('Register', query);
+            } else {
+              this.deepLinkURL = url;
+            }
+          }
+        })
         // eslint-disable-next-line no-console
         .catch(error => console.log('An error occurred while getting initial url', error));
     }
@@ -252,9 +262,9 @@ class SignIn extends React.Component {
     if (isSignedIn) {
       this.navigateToDeepLink(url);
     } else {
-      this.setState({ deepLinkURL: url });
+      this.deeplinkURL = url;
     }
-  }
+  };
 
   setupQuickActions() {
     if (!this.props.navigation.getParam('signOut')) {
@@ -262,7 +272,7 @@ class SignIn extends React.Component {
       QuickActions.popInitialAction()
         .then((action) => {
           if (action && action.userInfo) {
-            this.setState({ deepLinkURL: action.userInfo.url });
+            this.deepLinkURL = action.userInfo.url;
           }
         })
         // eslint-disable-next-line no-console

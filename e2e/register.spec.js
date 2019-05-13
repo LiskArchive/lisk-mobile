@@ -1,86 +1,32 @@
 /* eslint-env detox/detox */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 
-describe.skip('Register Flow', () => {
+describe('Register Flow', () => {
   const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 
   beforeAll(async () => {
-    await device.relaunchApp({
+    await device.launchApp({
       url: `lisk://register?passphrase=${encodeURI(passphrase)}`,
-      sourceApp: 'com.apple.mobilesafari',
+      newInstance: true,
     });
   });
 
-  describe('Intro', () => {
-    it('should have a tappable switch and continue button', async () => {
-      const switchButton = element(by.id('registerIntroSwitch'));
-      await waitFor(switchButton).toExist().withTimeout(500);
-      await switchButton.tap();
-
-      const continueButton = element(by.id('registerIntroButton'));
-      await expect(continueButton).toExist();
-      await continueButton.tap();
-    });
-  });
-
-  describe('SafeKeeping', () => {
-    it('should have passphrase text and continue button', async () => {
-      const passphraseText = element(by.id('passphraseText'));
-      await waitFor(passphraseText).toExist().withTimeout(500);
-
-      const continueButton = element(by.id('registerSafeKeepingButton'));
-      await expect(continueButton).toExist();
-      await continueButton.tap();
-    });
-  });
-
-  describe('Confirm', () => {
-    passphrase.split(' ').forEach((word) => {
-      it('has passphrase placeholders', async () => {
-        const wordPlaceholderButton = element(by.id(`passphrasePlaceholderFor-${word}`));
-        await waitFor(wordPlaceholderButton).toExist().withTimeout(0);
-
-        try {
-          await wordPlaceholderButton.tap();
-        } catch (error) {} // eslint-disable-line no-empty
-
-        const passphraseOptionsContainer = element(by.id('pasphraseOptionsContainer'));
-        await waitFor(passphraseOptionsContainer).toBeVisible().withTimeout(0);
-
-        try {
-          await expect(passphraseOptionsContainer).toBeVisible();
-        } catch (error) {} // eslint-disable-line no-empty
-
-        const wordOptionButton = element(by.id(`passphraseOptionFor-${word}`));
-        await waitFor(wordOptionButton).toBeVisible().withTimeout(0);
-
-        try {
-          await wordOptionButton.tap();
-        } catch (error) {} // eslint-disable-line no-empty
-
-        await expect(passphraseOptionsContainer).toBeNotVisible();
-      });
-    });
-
-    it('continue button becomes active after puzzle is solved', async () => {
-      const continueButton = element(by.id('registerConfirmButton'));
-      await expect(continueButton).toExist();
-      await continueButton.tap();
-    });
-  });
-
-  describe('Security Reminder', () => {
-    it('ends up in success step', async () => {
-      const continueButton = element(by.id('registerInitializationButton'));
-      await expect(continueButton).toExist();
-      await continueButton.tap();
-    });
-  });
-
-  describe('Success', () => {
-    it('ends up in success step', async () => {
-      const container = element(by.id('registerSuccess'));
-      await waitFor(container).toExist().withTimeout(250);
-      await expect(container).toExist();
-    });
+  it('successful registration', async () => {
+    await element(by.id('registerIntroSwitch')).tap();
+    await element(by.id('registerIntroContinueButton')).tap();
+    await expect(element(by.id('passphraseText'))).toExist();
+    await element(by.id('registerSafeKeepingButton')).tap();
+    for (const word of passphrase.split(' ')) {
+      try {
+        await element(by.id(`passphrasePlaceholderFor-${word}`)).tap();
+        await element(by.id(`passphraseOptionFor-${word}`)).tap();
+      } catch (error) {
+        // } // eslint-disable-line no-empty
+      }
+    }
+    await element(by.id('registerConfirmButton')).tap();
+    await element(by.id('registerInitializationButton')).tap();
+    await expect(element(by.id('registerSuccess'))).toExist();
   });
 });

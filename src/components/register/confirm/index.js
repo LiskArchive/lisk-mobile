@@ -170,12 +170,13 @@ class Confirm extends React.Component {
             {t('Choose the correct option for missing words:')}
           </P>
           <View
-            testID="passphraseOptionsContainer"
             style={[styles.passphraseContainer, styles.horizontalPadding]}
           >
             { this.renderPassphrase() }
           </View>
-          <View style={[styles.optionsContainer, styles.horizontalPadding]}>
+          <View
+            testID="passphraseOptionsContainer"
+            style={[styles.optionsContainer, styles.horizontalPadding]}>
             {this.state.options[this.state.visibleOptions] ?
               this.state.options[this.state.visibleOptions].map((value, idx) =>
                 <Button

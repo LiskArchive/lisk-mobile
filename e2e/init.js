@@ -1,5 +1,4 @@
 /* eslint no-undef: 0 */
-/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 const detox = require('detox');
 const config = require('../package.json').detox;
 const adapter = require('detox/runners/jest/adapter');

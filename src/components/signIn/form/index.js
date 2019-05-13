@@ -41,9 +41,7 @@ class Form extends React.Component {
 
   showKeyboard = () => {
     setTimeout(() => {
-      if (this.props.navigation &&
-        this.props.navigation.isFocused() &&
-        this.passphraseInput) {
+      if (this.props.navigation.isFocused() && this.passphraseInput) {
         this.passphraseInput.focus();
       }
     }, 500);
@@ -175,7 +173,7 @@ class Form extends React.Component {
             innerStyles={{ input: [styles.input, revealPassphrase ? styles.inputRevealed : null] }}
             value={passphrase.value}
             onChange={this.onInputChange}
-            autoFocus={true}
+            autoFocus={false}
             autoCorrect={false}
             multiline={true}
             keyboardAppearance="light"
