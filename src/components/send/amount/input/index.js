@@ -10,12 +10,13 @@ const AmountInput = ({
   <View>
     <Input
       {...rest}
-      innerStyles={{ input: styles.input }}
+      innerStyles={{ input: styles.input, inputLabel: styles.theme.label }}
     />
 
     {valueInCurrency ?
       <View style={styles.currencyContainer}>
         <Text style={[styles.currencyText, styles.theme.currencyText]}>
+          <Text style={styles.currencyPrefix}>~&nbsp;</Text>
           {`${valueInCurrency} ${currency}`}
         </Text>
       </View> : null

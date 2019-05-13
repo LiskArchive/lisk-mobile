@@ -3,29 +3,38 @@ import { themes, colors, fonts } from '../../../../constants/styleGuide';
 export default () => ({
   common: {
     input: {
-      fontSize: fonts.size.h1,
+      fontSize: 18,
     },
     currencyContainer: {
       position: 'absolute',
       zIndex: 99,
       right: 20,
-      top: 57,
+      top: 20,
     },
     currencyText: {
       fontSize: fonts.size.input,
       fontFamily: fonts.family.context,
     },
+    currencyPrefix: {
+      fontSize: 16,
+    },
   },
 
   [themes.light]: {
     currencyText: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
+    },
+    label: {
+      color: colors.light.maastrichtBlue,
     },
   },
 
   [themes.dark]: {
     currencyText: {
-      color: colors.dark.gray4,
+      color: colors.light.blueGray,
+    },
+    label: {
+      color: colors.light.platinum,
     },
   },
 });

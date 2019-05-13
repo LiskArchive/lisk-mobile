@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 import FormattedNumber from '../../../formattedNumber';
 import { fromRawLsk } from '../../../../utilities/conversions';
-import { B, Small } from '../../../toolBox/typography';
+import { P, Small } from '../../../toolBox/typography';
 import withTheme from '../../../withTheme';
 import getStyles from './styles';
 import { isEmpty } from '../../../../utilities/helpers';
@@ -63,12 +63,12 @@ const DynamicFeeSelector = ({
     <View style={styles.wrapper}>
       <View style={styles.labelContainer}>
         <Small style={[styles.label, styles.theme.label]}>
-          {t('Processing speed')}
+          {t('Processing fee')}
         </Small>
 
         {isEmpty(data) ? null : (
           <FormattedNumber
-            type={B}
+            type={P}
             tokenType={tokenType}
             style={[styles.value, styles.theme.value]}
           >
