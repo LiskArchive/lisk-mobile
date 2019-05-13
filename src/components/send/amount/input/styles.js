@@ -15,6 +15,9 @@ export default () => ({
       fontSize: fonts.size.input,
       fontFamily: fonts.family.context,
     },
+    currencyPrefix: {
+      fontSize: 16,
+    },
   },
 
   [themes.light]: {
