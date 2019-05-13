@@ -12,8 +12,6 @@ export default () => ({
       paddingTop: 0,
     },
     input: {
-      borderRightWidth: boxes.boxPadding,
-      borderRightColor: 'transparent',
       fontFamily: fonts.family.passphrase,
       textAlign: 'justify',
       paddingTop: 10,
@@ -23,7 +21,7 @@ export default () => ({
     scanButton: {
       position: 'absolute',
       zIndex: 99,
-      top: -5,
+      top: 15,
       right: boxes.boxPadding + 5,
       width: 60,
     },
@@ -41,15 +39,30 @@ export default () => ({
     cameraOverlay: {
       opacity: 0,
     },
+    container: {
+      paddingVertical: boxes.boxPadding,
+    },
   },
   [themes.light]: {
     wrapper: {
       backgroundColor: colors.light.white,
     },
+    scanButtonTitle: {
+      color: colors.light.maastrichtBlue,
+    },
+    label: {
+      color: colors.light.maastrichtBlue,
+    },
   },
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
+    },
+    scanButtonTitle: {
+      color: colors.light.platinum,
+    },
+    label: {
+      color: colors.light.platinum,
     },
   },
 });

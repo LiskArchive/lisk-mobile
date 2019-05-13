@@ -153,14 +153,14 @@ class SecondPassphrase extends React.Component {
             type: 'inBox',
           }}
         >
-          <View>
-            <View>
+          <View style={styles.container}>
               <Input
                 label={t('Second Passphrase')}
                 reference={(ref) => { this.input = ref; }}
                 innerStyles={{
                   input: styles.input,
                   containerStyle: styles.inputContainer,
+                  inputLabel: styles.theme.label,
                 }}
                 value={secondPassphrase.value}
                 onChange={this.changeHandler}
@@ -173,15 +173,14 @@ class SecondPassphrase extends React.Component {
               {secondPassphrase.value === '' ?
                 <IconButton
                   onPress={this.onOpenCamera}
-                  titleStyle={styles.scanButtonTitle}
+                  titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
                   style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                   title={t('Scan')}
                   icon='scanner'
-                  iconSize={18}
-                  color={colors.light.blue}
+                  iconSize={19.5}
+                  color={colors.light.ultramarineBlue}
                 /> : null
               }
-            </View>
           </View>
         </KeyboardAwareScrollView>
       </View>
