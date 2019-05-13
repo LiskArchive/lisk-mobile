@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
 import { PrimaryButton } from '../../toolBox/button';
-import { P } from '../../toolBox/typography';
+import { A, P } from '../../toolBox/typography';
 import txCreatedAnim from '../../../assets/animations/tx-created.json';
 import txPendingAnim from '../../../assets/animations/tx-pending.json';
 import txConfirmedAnim from '../../../assets/animations/tx-confirmed.json';
@@ -17,6 +17,7 @@ const createdAnimDuration = 4340;
   account: state.accounts.info,
   transactions: state.transactions,
   activeToken: state.settings.active,
+  followedAccounts: state.accounts.followed,
 }), {})
 class Result extends React.Component {
   state = {
@@ -77,10 +78,14 @@ class Result extends React.Component {
     }
   }
 
+
   render() {
     const {
-      t, styles, finalCallback, reset,
+      t, styles, finalCallback, reset, navigation,
+      followedAccounts, settings: { token }, sharedData: { address },
     } = this.props;
+
+    const isNotFollowed = !followedAccounts[token.active].some(item => item.address === address);
 
     return (
       <View style={[styles.container, styles.theme.container]}>
@@ -107,14 +112,19 @@ class Result extends React.Component {
             ref={(el) => { this.animation[2] = el; }} />
             : null}
         </View>
-        <PrimaryButton
-          style={styles.button}
-          onClick={() => {
-            finalCallback();
-            reset();
-          }}
-          title={t('Return to home')}
-        />
+        <View style={styles.footer}>
+          {isNotFollowed && (
+            <A onPress={() => navigation.navigate('AddBookmark', { title: t('New bookmark'), account: { address } })} style={styles.anchor}>{t('Add address to bookmarks')}</A>
+          )}
+          <PrimaryButton
+            style={styles.button}
+            onClick={() => {
+              finalCallback();
+              reset();
+            }}
+            title={t('Continue')}
+          />
+        </View>
       </View>
     );
   }

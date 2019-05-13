@@ -19,6 +19,11 @@ export default () => ({
     button: {
       marginTop: 20,
     },
+    anchor: {
+      color: colors.light.ultramarineBlue,
+      fontWeight: '600',
+      alignSelf: 'center',
+    },
   },
   [themes.light]: {
     container: {

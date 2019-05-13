@@ -24,15 +24,14 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 class Amount extends React.Component {
   componentDidMount() {
     const {
-      navigation, accounts, sharedData, move, activeToken,
+      navigation, move,
     } = this.props;
 
     navigation.setParams({
       title: isSmallScreen ? 'Send' : 'Amount',
       showButtonLeft: true,
       action: () => move({
-        to: accounts.followed[activeToken]
-          .some(item => item.address === sharedData.address) ? 0 : 1,
+        to: 0,
       }),
     });
   }
