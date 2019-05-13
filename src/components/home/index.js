@@ -156,10 +156,10 @@ class Home extends React.Component {
   screenWillFocus = () => {
     if (this.lastActiveToken === null) {
       this.bindInfiniteScroll();
-      this.setHeader();
     }
     if (this.lastActiveToken !== this.props.activeToken) {
       this.refreshAccountAndTx();
+      this.setHeader();
     }
   }
 
@@ -193,7 +193,6 @@ class Home extends React.Component {
     }
 
     if (
-      (prevProps.activeToken !== activeToken) ||
       (prevProps.account[activeToken].balance !== account[activeToken].balance) ||
       (prevProps.incognito !== incognito)
     ) {
@@ -202,6 +201,7 @@ class Home extends React.Component {
 
     if (prevProps.activeToken !== activeToken && isFocused) {
       this.refreshAccountAndTx();
+      this.setHeader();
     }
   }
 
