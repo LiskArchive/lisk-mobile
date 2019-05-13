@@ -200,8 +200,8 @@ class Recipient extends React.Component {
                 style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                 title={t('Scan')}
                 icon='scanner'
-                iconSize={16}
-                color={colors.light.blue}
+                iconSize={19.5}
+                color={colors.light.ultramarineBlue}
               />
 
               {
@@ -226,6 +226,7 @@ class Recipient extends React.Component {
                     token.active === tokenMap.LSK.key ? styles.addressInputWithAvatar : null,
                   ],
                   containerStyle: styles.addressInputContainer,
+                  inputLabel: styles.theme.inputLabel,
                 }}
               />
             </View>
