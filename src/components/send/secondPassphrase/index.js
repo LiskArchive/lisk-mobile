@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform, Image } from 'react-native';
 import { translate } from 'react-i18next';
 import { validatePassphrase } from '../../../utilities/passphrase';
 import { extractPublicKey } from '../../../utilities/api/lisk/account';
@@ -8,10 +8,12 @@ import { IconButton } from '../../toolBox/button';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
-import { colors } from '../../../constants/styleGuide';
+import { colors, themes } from '../../../constants/styleGuide';
 import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import Scanner from '../../scanner';
 import DropDownHolder from '../../../utilities/alert';
+import SecondPassPhraseDarkImg from '../../../assets/images/send/secondPassphrase3xDark.png';
+import SecondPassPhraseLightImg from '../../../assets/images/send/secondPassphrase3xLight.png';
 
 const devDefaultSecondPass = process.env.secondPassphrase || '';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
@@ -125,7 +127,7 @@ class SecondPassphrase extends React.Component {
 
   render() {
     const {
-      navigation, styles, t, lng,
+      navigation, styles, t, lng, theme,
     } = this.props;
     const { secondPassphrase } = this.state;
 
@@ -181,6 +183,12 @@ class SecondPassphrase extends React.Component {
                   color={colors.light.ultramarineBlue}
                 /> : null
               }
+            <View style={styles.imageContainer}>
+              { theme === themes.light ?
+                <Image source={SecondPassPhraseLightImg} style={styles.illustration} /> :
+                <Image source={SecondPassPhraseDarkImg} style={styles.illustration} />
+              }
+            </View>
           </View>
         </KeyboardAwareScrollView>
       </View>

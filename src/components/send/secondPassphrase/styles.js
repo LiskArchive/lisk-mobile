@@ -42,6 +42,15 @@ export default () => ({
     container: {
       paddingVertical: boxes.boxPadding,
     },
+    imageContainer: {
+      marginTop: 55,
+      width: '100%',
+      alignItems: 'center',
+    },
+    illustration: {
+      width: 210,
+      height: 134,
+    },
   },
   [themes.light]: {
     wrapper: {
