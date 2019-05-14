@@ -11,10 +11,6 @@ export default () => ({
       justifyContent: 'space-between',
       flex: 1,
     },
-    subHeader: {
-      margin: boxes.boxPadding,
-      marginBottom: 0,
-    },
     main: {
       flexDirection: 'column',
       justifyContent: 'space-around',
@@ -55,9 +51,6 @@ export default () => ({
     innerContainer: {
       backgroundColor: colors.light.white,
     },
-    subHeader: {
-      color: colors.light.gray2,
-    },
     addressLabel: {
       color: colors.light.gray1,
     },
@@ -75,9 +68,6 @@ export default () => ({
     },
     innerContainer: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    subHeader: {
-      color: colors.dark.gray4,
     },
     addressLabel: {
       color: colors.dark.gray1,

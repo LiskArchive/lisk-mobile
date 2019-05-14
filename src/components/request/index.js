@@ -74,11 +74,6 @@ class Request extends React.Component {
           contentContainerStyle={styles.container}
         >
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-            {!isSmallScreen ? (
-              <P style={[styles.subHeader, styles.theme.subHeader]}>
-                {t('Request LSK tokens from other accounts.', { tokenType: activeToken })}
-              </P>
-            ) : null}
 
             <View style={styles.main}>
               <P style={[styles.addressLabel, styles.theme.addressLabel]}>
