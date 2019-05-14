@@ -188,5 +188,10 @@
   "Unparsed Address": "Unbekannte Adresse",
   "Are you sure you want to sign out?": "Are you sure you want to sign out?",
   "Signing out will disable bioAuth for the Lisk App.": "Signing out will disable {{sensorType}} for the Lisk App.",
-  "You can enable it after singing back in with your passphrase.": "You can enable it after singing back in with your passphrase."
+  "You can enable it after singing back in with your passphrase.": "You can enable it after singing back in with your passphrase.",
+  "Are you sure about deleting this bookmark?": "",
+  "Delete this bookmark": "",
+  "Sign In": "",
+  "View more on Blockchain.info": "",
+  "You will be able to add it again anytime.": ""
 }
