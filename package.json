@@ -18,9 +18,9 @@
     "postinstall": "npm run link",
     "i18n": "node ./scripts/scanner.config.js",
     "test:e2e-build": "detox build --configuration ios.sim.release",
-    "test:e2e": "detox test --configuration ios.sim.release --cleanup",
+    "test:e2e": "env configuration='ios.sim.release' node ./node_modules/cucumber/bin/cucumber-js e2e",
     "test:e2e-build-debug": "detox build --configuration ios.sim.debug",
-    "test:e2e-debug": "detox test --configuration ios.sim.debug"
+    "test:e2e-debug": "env configuration='ios.sim.debug' node ./node_modules/cucumber/bin/cucumber-js e2e"
   },
   "rnpm": {
     "assets": [
