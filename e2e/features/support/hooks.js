@@ -9,7 +9,7 @@ BeforeAll(async () => {
 });
 
 Before({ timeout: 120 * 1000 }, async () => {
-  await device.launchApp({ reuse: true });
+  await device.launchApp({ newInstance: true });
 });
 
 AfterAll(async () => {
