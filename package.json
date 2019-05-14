@@ -137,6 +137,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "coveralls": "^3.0.2",
+    "cucumber": "5.1.0",
     "detox": "12.6.2",
     "eslint": "=4.9.0",
     "eslint-config-airbnb": "=15.1.0",
