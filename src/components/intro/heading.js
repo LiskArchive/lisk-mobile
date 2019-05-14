@@ -89,8 +89,10 @@ class Heading extends React.Component {
         {
           index !== 2 ?
           <LabelButton
+            testID='skipIntroButton'
             style={[styles.headingSkipButton, { color: colors.light.gray1 }]}
-            onClick={skip}>Skip</LabelButton> :
+            onClick={skip}>Skip
+          </LabelButton> :
             <Icon name='back' size={30} color='transparent' style={styles.headingSkipButton}/>
         }
       </Animated.View>

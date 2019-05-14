@@ -1,11 +1,17 @@
-const { Before, AfterAll } = require('cucumber');
+/* eslint-disable */
+const { Before, BeforeAll, AfterAll } = require('cucumber');
 const detox = require('detox');
 const config = require('../../../package').detox;
-// eslint-disable-line new-cap
-Before({ timeout: 120 * 1000 }, async () => { // eslint-disable-line new-cap
-  await detox.init(config, { reuse: true });
+
+BeforeAll(async () => {
+  await detox.init(config, { launchApp: true });
+  await element(by.id('skipIntroButton')).tap();
 });
 
-AfterAll(async () => { // eslint-disable-line new-cap
+Before({ timeout: 120 * 1000 }, async () => {
+  await device.launchApp({ reuse: true });
+});
+
+AfterAll(async () => {
   await detox.cleanup();
 });
