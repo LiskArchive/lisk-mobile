@@ -10,6 +10,9 @@ import {
   blockUpdated as blockUpdatedAction,
   accountFetched as accountFetchedAction,
 } from '../../actions/accounts';
+import {
+  settingsUpdated as settingsUpdatedAction,
+} from '../../actions/settings';
 import ModalHolder from '../../utilities/modal';
 import AccountSummary from '../accountSummary/home';
 import Transactions from '../transactions';
@@ -45,6 +48,7 @@ const summaryHeight = 200;
   transactionsReset: transactionsResetAction,
   updateTransactions: blockUpdatedAction,
   accountFetched: accountFetchedAction,
+  settingsUpdated: settingsUpdatedAction,
 })
 class Home extends React.Component {
   state = {
@@ -163,6 +167,7 @@ class Home extends React.Component {
           title: 'We’ve got a good news!',
           component: IntroModal,
         });
+        this.props.settingsUpdated({ btcIntroShown: true });
       }, 1200);
     }
   }
