@@ -18,17 +18,17 @@ class DeleteBookmarkModal extends React.Component {
     return (
       <View style={styles.container}>
         <Small style={[styles.text, styles.theme.text]}>
-          Are you sure about deleting this bookmark?
+        {t('Are you sure about deleting this bookmark?')}
         </Small>
 
         <Small style={[styles.text, styles.theme.text]}>
-          You will be able to add it again anytime.
+          {t('You will be able to add it again anytime.')}
         </Small>
 
         <Button
           style={[styles.actionButton, styles.theme.actionButton]}
           onClick={this.onConfirm}
-          title="Delete this bookmark"
+          title={t('Delete this bookmark')}
         />
 
         <A
