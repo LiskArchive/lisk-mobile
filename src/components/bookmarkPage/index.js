@@ -179,7 +179,7 @@ class Bookmark extends React.Component {
                   value={address.value}
                   error={
                     address.validity === 1 ?
-                      t('Invalid address') : ''
+                      t('Invalid address.') : ''
                   }
                 />
               </View>

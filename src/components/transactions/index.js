@@ -126,7 +126,7 @@ class Transactions extends React.Component {
                 <Small style={[styles.initText, styles.theme.initText]}>
                   {t('Your account is not initialized.')}
                   <A style={[styles.link, styles.theme.link]}
-                    onPress={this.onPress}> {t('Initialize it now')}</A>
+                    onPress={this.onPress}> {t('Initialize now')}</A>
                 </Small>
               </View> : null
             }
