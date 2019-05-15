@@ -83,7 +83,7 @@ class Request extends React.Component {
         >
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
 
-            <View style={styles.subheader}>
+            <View style={styles.subHeader}>
               <P style={[styles.addressLabel, styles.theme.addressLabel]}>
                 {t(`Your ${tokenMap[activeToken].label} address`)}
               </P>

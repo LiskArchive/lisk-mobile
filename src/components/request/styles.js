@@ -11,7 +11,7 @@ export default () => ({
       justifyContent: 'space-between',
       flex: 1,
     },
-    subheader: {
+    subHeader: {
       flexDirection: 'column',
       paddingTop: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
