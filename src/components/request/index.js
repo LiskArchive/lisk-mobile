@@ -83,7 +83,7 @@ class Request extends React.Component {
         >
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
 
-            <View style={styles.main}>
+            <View style={styles.subheader}>
               <P style={[styles.addressLabel, styles.theme.addressLabel]}>
                 {t(`Your ${tokenMap[activeToken].label} address`)}
               </P>
@@ -100,44 +100,48 @@ class Request extends React.Component {
                   size={18}
                 />
               </View>
-
-              <Share
-                type={TouchableWithoutFeedback}
-                value={url || address}
-                title={url || address}
-              >
-                <View style={styles.shareContent}>
-                  <QRCode
-                    value={url || address}
-                    size={qrCodeSize}
-                    color={
-                      theme === themes.light ? colors.light.black : colors.dark.white
-                    }
-                    backgroundColor={
-                      theme === themes.light ? colors.light.white : colors.dark.screenBgNavy
-                    }
-                  />
-
-                  <View style={styles.shareTextContainer}>
-                    <P style={[styles.shareText, styles.theme.shareText]}>
-                      {t('Tap on the QR Code to share it.')}
-                    </P>
-                  </View>
-                </View>
-              </Share>
             </View>
 
-            <View style={styles.inputContainer}>
-              {activeToken === tokenMap.LSK.key ? (
-                <Input
-                  label={t('Amount in LSK (optional)')}
-                  autoCorrect={false}
-                  onChange={this.changeHandler}
-                  value={amount.value}
-                  keyboardType='numeric'
-                  error={amount.validity === 1 ? t('Invalid amount') : ''}
-                />
-              ) : null}
+            <View style={styles.body}>
+              <View style={styles.shareContainer}>
+                <Share
+                  type={TouchableWithoutFeedback}
+                  value={url || address}
+                  title={url || address}
+                >
+                  <View style={styles.shareContent}>
+                    <QRCode
+                      value={url || address}
+                      size={qrCodeSize}
+                      color={
+                        theme === themes.light ? colors.light.black : colors.dark.white
+                      }
+                      backgroundColor={
+                        theme === themes.light ? colors.light.white : colors.dark.screenBgNavy
+                      }
+                    />
+
+                    <View style={styles.shareTextContainer}>
+                      <P style={[styles.shareText, styles.theme.shareText]}>
+                        {t('Tap on the QR Code to share it.')}
+                      </P>
+                    </View>
+                  </View>
+                </Share>
+              </View>
+
+              <View style={styles.inputContainer}>
+                {activeToken === tokenMap.LSK.key ? (
+                  <Input
+                    label={t('Amount in LSK (optional)')}
+                    autoCorrect={false}
+                    onChange={this.changeHandler}
+                    value={amount.value}
+                    keyboardType='numeric'
+                    error={amount.validity === 1 ? t('Invalid amount') : ''}
+                  />
+                ) : null}
+              </View>
             </View>
           </View>
         </KeyboardAwareScrollView>

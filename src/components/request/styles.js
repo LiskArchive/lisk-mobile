@@ -11,7 +11,7 @@ export default () => ({
       justifyContent: 'space-between',
       flex: 1,
     },
-    main: {
+    subheader: {
       flexDirection: 'column',
       paddingTop: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
@@ -29,6 +29,15 @@ export default () => ({
       fontSize: fonts.size.base,
       marginLeft: 10,
       marginRight: 4,
+    },
+    body: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
+    shareContainer: {
+      alignItems: 'center',
+      marginBottom: 10,
     },
     shareContent: {
       flexDirection: 'column',
