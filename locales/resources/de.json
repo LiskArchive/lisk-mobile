@@ -189,10 +189,10 @@
   "Are you sure you want to sign out?": "Are you sure you want to sign out?",
   "Signing out will disable bioAuth for the Lisk App.": "Signing out will disable {{sensorType}} for the Lisk App.",
   "You can enable it after singing back in with your passphrase.": "You can enable it after singing back in with your passphrase.",
-  "Are you sure about deleting this bookmark?": "",
-  "Delete this bookmark": "",
-  "You will be able to add it again anytime.": "",
-  "Got it!": "",
-  "Lisk Mobile now supports Bitcoin (BTC).": "",
-  "View more on Blockchain.info": ""
+  "Are you sure about deleting this bookmark?": "Bist du sicher, dass du dieses Lesezeichen löschen willst?",
+  "Delete this bookmark": "Dieses Lesezeichen löschen",
+  "You will be able to add it again anytime.": "Du kannst es jederzeit wieder hinzufügen.",
+  "Got it!": "Verstanden!",
+  "Lisk Mobile now supports Bitcoin (BTC).": "Lisk Mobile unterstützt jetzt Bitcoin (BTC).",
+  "View more on Blockchain.info": "Mehr dazu auf Blockchain.info"
 }
