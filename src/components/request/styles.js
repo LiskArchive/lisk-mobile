@@ -13,19 +13,22 @@ export default () => ({
     },
     main: {
       flexDirection: 'column',
-      justifyContent: 'space-around',
-      alignItems: 'center',
       paddingTop: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
     },
     addressLabel: {
-      fontSize: fonts.size.base,
+      fontSize: fonts.size.small,
       marginBottom: 8,
     },
+    addressContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
     address: {
-      marginBottom: 24,
-      fontSize: fonts.size.small,
+      fontSize: fonts.size.base,
+      marginLeft: 10,
+      marginRight: 4,
     },
     shareContent: {
       flexDirection: 'column',
@@ -52,10 +55,10 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     addressLabel: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     address: {
-      color: colors.light.black,
+      color: colors.light.maastrichtBlue,
     },
     shareText: {
       color: colors.light.gray2,
@@ -70,7 +73,7 @@ export default () => ({
       backgroundColor: colors.dark.screenBgNavy,
     },
     addressLabel: {
-      color: colors.dark.gray1,
+      color: colors.light.platinum,
     },
     address: {
       color: colors.dark.white,

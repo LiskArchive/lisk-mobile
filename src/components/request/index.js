@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableWithoutFeedback, Clipboard } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { translate } from 'react-i18next';
@@ -13,6 +13,8 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes, colors } from '../../constants/styleGuide';
 import { tokenMap } from '../../constants/tokens';
+import Avatar from '../avatar';
+import Icon from '../toolBox/icon';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
@@ -59,6 +61,12 @@ class Request extends React.Component {
     });
   }
 
+  copyToClipboard = () => {
+    const { address } = this.props.account[this.props.activeToken];
+
+    Clipboard.setString(address);
+  }
+
   render() {
     const {
       styles, theme, account, t, activeToken,
@@ -80,9 +88,18 @@ class Request extends React.Component {
                 {t(`Your ${tokenMap[activeToken].label} address`)}
               </P>
 
-              <B style={[styles.address, styles.theme.address]}>
-                {address}
-              </B>
+              <View style={styles.addressContainer}>
+                <Avatar address={address} size={24} />
+                <B style={[styles.address, styles.theme.address]}>
+                  {address}
+                </B>
+                <Icon
+                  onPress={this.copyToClipboard}
+                  name='copy'
+                  color={colors.light.blueGray}
+                  size={18}
+                />
+              </View>
 
               <Share
                 type={TouchableWithoutFeedback}
