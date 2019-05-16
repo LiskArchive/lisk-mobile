@@ -29,7 +29,7 @@ const EmptyState = ({
       {
         usedIn === 'bookmarks' ?
         t('You don’t have any bookmarks. Start adding them by tapping the + button on the top left.') :
-        t('You don’t have any bookmarks. Start adding then through the sending process.')
+        t('You don’t have any bookmarks. Start adding them through the sending process.')
       }
     </P>
   </View>
