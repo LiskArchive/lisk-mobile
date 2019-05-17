@@ -177,7 +177,7 @@ class TransactionDetail extends React.Component {
             tx={tx} />
         }
 
-        <Row icon='sender' title={tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
+        <Row icon='send' title={tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
           'Account address' : 'Sender'}>
           <View style={styles.addressContainer}>
             <A

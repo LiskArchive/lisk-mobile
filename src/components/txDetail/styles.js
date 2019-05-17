@@ -50,7 +50,7 @@ export default () => ({
     },
     label: {
       fontSize: 13,
-      marginBottom: 7,
+      marginBottom: 4.5,
     },
     valueContainer: {
       flexDirection: 'row',
