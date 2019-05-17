@@ -3,7 +3,6 @@ import { View, Animated, ScrollView, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
 import { P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
-import reg from '../../constants/regex';
 import Input from '../toolBox/input';
 import { colors } from '../../constants/styleGuide';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../utilities/device';
@@ -21,18 +20,10 @@ class Bookmark extends React.Component {
     };
   };
   activeInputRef = null;
-  validator = (str) => {
-    if (str === '') return -1;
-    return reg.address.test(str) ? 0 : 1;
-  };
   scannedData = {};
   state = {
     header: true,
-    address: {
-      value: '',
-      validity: -1,
-    },
-    avatarPreview: false,
+    query: '',
   };
   animatedStyles = {
     height: new Animated.Value(45),
@@ -61,12 +52,9 @@ class Bookmark extends React.Component {
     this.keyboardDidHideListener.remove();
   }
 
-  setAddress = (value) => {
+  setQuery = (query) => {
     this.setState({
-      address: {
-        value,
-      },
-      avatarPreview: false,
+      query,
     });
   }
 
@@ -82,7 +70,7 @@ class Bookmark extends React.Component {
     if (this.current) this.current.snapTo({ index: 0 });
   }
 
-  onKeyboardChanged = (showHeader) => {
+  hideHeadingElements = (showHeader) => {
     const { height, paddingTop } = this.animatedStyles;
     this.closeCurrent();
     if (showHeader) {
@@ -114,6 +102,10 @@ class Bookmark extends React.Component {
     }
   }
 
+  onKeyboardChanged = (showHeader) => {
+    this.hideHeadingElements(showHeader);
+  }
+
   componentDidUpdate() {
     this.current = null;
   }
@@ -140,7 +132,7 @@ class Bookmark extends React.Component {
     const {
       styles, navigation, theme, t,
     } = this.props;
-    const { address } = this.state;
+    const { query } = this.state;
     const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
     return (
@@ -175,17 +167,13 @@ class Bookmark extends React.Component {
                     ],
                     containerStyle: styles.addressInputContainer,
                   }}
-                  onChange={this.setAddress}
-                  value={address.value}
-                  error={
-                    address.validity === 1 ?
-                      t('Invalid address.') : ''
-                  }
+                  onChange={this.setQuery}
+                  value={query}
                 />
               </View>
               <Bookmarks
                 navigate={navigation.navigate}
-                draggable={true} setRef={this.setRef} query={this.state.address.value}
+                draggable={true} setRef={this.setRef} query={query}
               />
             </View>
           </View>

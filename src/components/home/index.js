@@ -164,7 +164,7 @@ class Home extends React.Component {
     if (!this.props.btcIntroShown) {
       this.modalTimeout = setTimeout(() => {
         ModalHolder.open({
-          title: 'We’ve got a good news!',
+          title: 'We’ve got good news!',
           component: IntroModal,
         });
         this.props.settingsUpdated({ btcIntroShown: true });
