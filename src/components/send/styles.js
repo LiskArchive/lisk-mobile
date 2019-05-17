@@ -17,22 +17,25 @@ export default () => ({
       top: 0,
       left: 0,
       width: '100%',
-      height: 4,
+      height: 2,
       backgroundColor: 'transparent',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
-    progress: {
+    progressStep: {
       height: '100%',
+      backgroundColor: colors.light.ultramarineBlue,
     },
   },
 
   [themes.light]: {
-    progressContainer: {
-      backgroundColor: colors.light.white,
+    progressStepContainer: {
+      backgroundColor: colors.light.ghost,
     },
   },
 
   [themes.dark]: {
-    progressContainer: {
+    progressStepContainer: {
       backgroundColor: colors.dark.screenBgNavy,
     },
   },

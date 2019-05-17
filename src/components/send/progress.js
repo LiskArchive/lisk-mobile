@@ -1,46 +1,26 @@
 import React from 'react';
-import { View, Animated } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { tokenMap } from '../../constants/tokens';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { colors } from '../../constants/styleGuide';
 
 @connect(state => ({
   activeToken: state.settings.token.active,
 }))
 class Progress extends React.Component {
-  state = {
-    progressRatio: new Animated.Value(0),
-  }
-
-  componentDidMount() {
-    this.setProgress(0);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.current !== this.props.current) {
-      this.setProgress(300);
-    }
-  }
-
-  setProgress(duration) {
-    Animated.timing(this.state.progressRatio, {
-      toValue: this.props.current / (this.props.total - 1),
-      duration,
-    }).start();
-  }
-
   render() {
     const {
-      styles, current, total, activeToken,
+      styles, current, total,
     } = this.props;
-    const { progressRatio } = this.state;
 
-    let color = colors.light.blue;
-    if (activeToken === tokenMap.BTC.key) {
-      color = colors.light.BTC;
+    const steps = [];
+    for (let i = 0; i < (total - 1); i++) {
+      steps.push(i + 1);
     }
+
+    const deviceWidth = Dimensions.get('window').width;
+    const marginBetweenSteps = 3;
+    const stepWidth = (deviceWidth / (total - 1)) - marginBetweenSteps;
 
     return (
       <View style={[
@@ -48,15 +28,19 @@ class Progress extends React.Component {
         styles.theme.progressContainer,
         { opacity: current === total ? 0 : 1 },
       ]}>
-        <Animated.View
-          style={[styles.progress, {
-            backgroundColor: color,
-            width: progressRatio.interpolate({
-              inputRange: [0, 1],
-              outputRange: ['0%', '100%'],
-            }),
-          }]}
-        />
+        {steps.map(step => (
+          <View
+            key={step}
+            style={[
+              styles.theme.progressStepContainer,
+              { width: stepWidth },
+          ]}>
+            <View style={[
+              styles.progressStep,
+              { width: step <= current ? '100%' : 0 },
+            ]} />
+          </View>
+        ))}
       </View>
     );
   }
