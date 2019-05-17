@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Animated, StatusBar, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from 'react-navigation';
-import { translate } from 'react-i18next';
 import {
   transactionsReset as transactionsResetAction,
   transactionsLoaded as transactionsLoadedAction,
@@ -162,12 +161,10 @@ class Home extends React.Component {
   }
 
   showIntroModal = () => {
-    const { t } = this.props;
-
     if (!this.props.btcIntroShown) {
       this.modalTimeout = setTimeout(() => {
         ModalHolder.open({
-          title: t('We’ve got good news!'),
+          title: 'We’ve got good news!',
           component: IntroModal,
         });
         this.props.settingsUpdated({ btcIntroShown: true });
@@ -299,4 +296,4 @@ class Home extends React.Component {
   }
 }
 
-export default withNavigationFocus(withTheme(translate()(Home), getStyles()));
+export default withNavigationFocus(withTheme(Home, getStyles()));
