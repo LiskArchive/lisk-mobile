@@ -64,8 +64,8 @@ export default () => ({
     arrow: {
       marginRight: 20,
       marginLeft: 20,
-      width: 99,
-      height: 16,
+      width: 17,
+      height: 11,
     },
     reverseArrow: {
       transform: [
@@ -103,11 +103,11 @@ export default () => ({
       marginTop: 0,
     },
     transactionIcon: {
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
       borderRadius: 25,
-      overflow: 'hidden',
-      padding: 17,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     explorerLink: {
       fontWeight: 'bold',
