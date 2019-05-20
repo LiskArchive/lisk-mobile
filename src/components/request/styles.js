@@ -2,13 +2,11 @@ import { themes, colors, boxes, fonts } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {},
-    container: {
+    wrapper: {
       height: '100%',
     },
     innerContainer: {
       flexDirection: 'column',
-      justifyContent: 'space-between',
       flex: 1,
     },
     subHeader: {
@@ -16,6 +14,7 @@ export default () => ({
       paddingTop: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
+      paddingBottom: 40,
     },
     addressLabel: {
       fontSize: fonts.size.small,
@@ -37,6 +36,7 @@ export default () => ({
       flex: 1,
       flexDirection: 'column',
       justifyContent: 'center',
+      paddingBottom: boxes.boxPadding,
     },
     shareContainer: {
       alignItems: 'center',
