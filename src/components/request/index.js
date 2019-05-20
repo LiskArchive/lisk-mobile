@@ -89,7 +89,9 @@ class Request extends React.Component {
               </P>
 
               <View style={styles.addressContainer}>
-                <Avatar address={address} size={24} />
+                { activeToken === tokenMap.LSK.key && (
+                  <Avatar style={styles.avatar} address={address} size={24} />
+                )}
                 <B style={[styles.address, styles.theme.address]}>
                   {address}
                 </B>
@@ -130,18 +132,18 @@ class Request extends React.Component {
                 </Share>
               </View>
 
-              <View style={styles.inputContainer}>
                 {activeToken === tokenMap.LSK.key ? (
-                  <Input
-                    label={t('Amount in LSK (optional)')}
-                    autoCorrect={false}
-                    onChange={this.changeHandler}
-                    value={amount.value}
-                    keyboardType='numeric'
-                    error={amount.validity === 1 ? t('Invalid amount') : ''}
-                  />
+                  <View style={styles.inputContainer}>
+                    <Input
+                      label={t('Amount in LSK (optional)')}
+                      autoCorrect={false}
+                      onChange={this.changeHandler}
+                      value={amount.value}
+                      keyboardType='numeric'
+                      error={amount.validity === 1 ? t('Invalid amount') : ''}
+                    />
+                  </View>
                 ) : null}
-              </View>
             </View>
           </View>
         </KeyboardAwareScrollView>

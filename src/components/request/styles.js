@@ -25,10 +25,13 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center',
     },
+    avatar: {
+      marginRight: 10,
+    },
     address: {
       fontSize: fonts.size.base,
-      marginLeft: 10,
-      marginRight: 4,
+      marginRight: 6,
+      maxWidth: '90%',
     },
     body: {
       flex: 1,
