@@ -14,7 +14,7 @@ import getStyles from './styles';
 import { themes, colors } from '../../constants/styleGuide';
 import { tokenMap } from '../../constants/tokens';
 import Avatar from '../avatar';
-import Icon from '../toolBox/icon';
+import CopyToClipboard from '../copyToClipboard';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
@@ -93,14 +93,14 @@ class Request extends React.Component {
                 { activeToken === tokenMap.LSK.key && (
                   <Avatar style={styles.avatar} address={address} size={24} />
                 )}
-                <B style={[styles.address, styles.theme.address]}>
-                  {address}
-                </B>
-                <Icon
-                  onPress={this.copyToClipboard}
-                  name='copy'
-                  color={colors.light.blueGray}
-                  size={18}
+                <CopyToClipboard
+                  style={styles.copyContainer}
+                  labelStyle={[styles.address, styles.theme.address]}
+                  showIcon={true}
+                  iconSize={18}
+                  iconStyle={styles.copyIcon}
+                  value={address}
+                  type={B}
                 />
               </View>
             </View>

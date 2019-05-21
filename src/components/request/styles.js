@@ -32,6 +32,12 @@ export default () => ({
       marginRight: 6,
       maxWidth: '90%',
     },
+    copyContainer: {
+      alignItems: 'center',
+    },
+    copyIcon: {
+      color: colors.light.blueGray,
+    },
     body: {
       flex: 1,
       flexDirection: 'column',
