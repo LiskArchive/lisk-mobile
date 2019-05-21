@@ -14,7 +14,7 @@ const Row = ({
     <View style={styles.rowIconWrapper}>
       <Icon
         name={icon}
-        size={22}
+        size={20}
         style={styles.rowIcon}
         color={colors[theme].gray2}
       />

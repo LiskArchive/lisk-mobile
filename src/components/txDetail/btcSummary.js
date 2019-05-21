@@ -5,7 +5,7 @@ import withTheme from '../withTheme';
 import { fromRawLsk } from '../../utilities/conversions';
 import Icon from '../toolBox/icon';
 import FormattedNumber from '../formattedNumber';
-import { P, H1 } from '../toolBox/typography';
+import { P, H3 } from '../toolBox/typography';
 import Blur from '../transactions/blur';
 import getStyles from './styles';
 import { colors } from '../../constants/styleGuide';
@@ -30,18 +30,18 @@ const BtcSummary = ({
         <View style={[styles.transactionIcon, styles.theme[`${direction}Symbol`]]}>
           <Icon
             name={direction}
-            size={16}
+            size={14}
             color={direction === 'outgoing' ? colors[theme].gray1 : colors[theme].green} />
         </View>
       </View>
       {
         !incognito ?
-          <H1 style={amountStyle}>
+          <H3 style={amountStyle}>
             {amountSign}
             <FormattedNumber tokenType='BTC'>
               {fromRawLsk(tx.amount)}
             </FormattedNumber>
-          </H1> :
+          </H3> :
           <Blur
             value={amount}
             direction={direction}
