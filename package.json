@@ -20,7 +20,7 @@
     "test:e2e-build": "detox build --configuration ios.sim.release",
     "test:e2e": "env configuration='ios.sim.release' node ./node_modules/cucumber/bin/cucumber-js e2e",
     "test:e2e-build-debug": "detox build --configuration ios.sim.debug",
-    "test:e2e-debug": "env configuration='ios.sim.debug' node ./node_modules/cucumber/bin/cucumber-js e2e"
+    "test:e2e-debug": "env configuration='ios.sim.debug' node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty"
   },
   "rnpm": {
     "assets": [
@@ -138,6 +138,7 @@
     "babel-preset-react": "^6.24.1",
     "coveralls": "^3.0.2",
     "cucumber": "5.1.0",
+    "cucumber-pretty": "1.5.0",
     "detox": "12.6.2",
     "eslint": "=4.9.0",
     "eslint-config-airbnb": "=15.1.0",
