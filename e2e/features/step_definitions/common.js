@@ -1,5 +1,9 @@
 /* eslint-disable */
-const { When, Then } = require('cucumber');
+const { When, Then, Given } = require('cucumber');
+
+Given(/^I open the app$/, async function () {
+  await device.launchApp({ newInstance: true });
+});
 
 Then(/^the following text is visible:$/, async function (table) {
   for (const [text] of table.raw()) {
