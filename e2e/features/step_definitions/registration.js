@@ -1,8 +1,9 @@
 /* eslint-disable */
 const { When, Then, Given } = require('cucumber');
+
 const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 
-Given(/^I open the registration screen using deeplink with predefined passphrase$/, async function () {
+Given(/The app is opened at the registration screen with predefined passphrase/, async function () {
   await device.launchApp({
     url: `lisk://register?passphrase=${encodeURI(passphrase)}`,
     newInstance: true,

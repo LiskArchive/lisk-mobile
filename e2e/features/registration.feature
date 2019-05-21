@@ -1,7 +1,7 @@
 Feature: Registration
 
   Scenario: Successful registration
-    Given I open the registration screen using deeplink with predefined passphrase
+    Given The app is opened at the registration screen with predefined passphrase
     When I tap element by id 'registerIntroSwitch'
     And I tap element by id 'registerIntroContinueButton'
     And I tap element by id 'registerSafeKeepingButton'

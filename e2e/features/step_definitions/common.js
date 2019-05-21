@@ -1,8 +1,16 @@
 /* eslint-disable */
 const { When, Then, Given } = require('cucumber');
 
-Given(/^I open the app$/, async function () {
+const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
+
+Given(/The app is opened/, async function () {
   await device.launchApp({ newInstance: true });
+});
+
+Given(/I am signed in/, async function () {
+  await element(by.id('signInPassphraseInput')).atIndex(0).tap();
+  await element(by.id('signInPassphraseInput')).atIndex(0).typeText(passphrase);
+  await element(by.id('signInButton')).tap();
 });
 
 Then(/^the following text is visible:$/, async function (table) {
