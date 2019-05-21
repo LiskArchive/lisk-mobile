@@ -6,8 +6,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const Share = ({
-  styles, icon, value, style, type, children, containerStyle,
-  iconColor, theme, title, iconName, iconSize,
+  styles, icon, value, style, type, children, containerStyle, iconColor, theme, title,
 }) => {
   const Element = type || Text;
 
@@ -22,8 +21,8 @@ const Share = ({
       {
         icon ? <Icon
                 style={styles.icon}
-                name={iconName || 'share'}
-                size={iconSize || 14}
+                name='share'
+                size={14}
                 onPress={() => ShareAPI.share({
                   message: value || children,
                   url: '',

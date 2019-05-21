@@ -226,8 +226,6 @@ class TransactionDetail extends React.Component {
               value={tx.id}
               title={tx.id}
               icon={true}
-              iconName={'copy'}
-              iconSize={20}
               style={[styles.value, styles.theme.value, styles.transactionId]}
             /> :
             <A style={[styles.explorerLink, styles.theme.explorerLink]} onPress={this.openExplorer}>
