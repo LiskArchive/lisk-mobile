@@ -25,8 +25,5 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
     },
-    subHeader: {
-      color: colors.dark.gray4,
-    },
   },
 });
