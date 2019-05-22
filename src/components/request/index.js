@@ -1,11 +1,11 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, TouchableWithoutFeedback, Platform } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { translate } from 'react-i18next';
 import Share from '../share';
-import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from '../../utilities/device';
+import { deviceWidth, deviceHeight, deviceType, SCREEN_HEIGHTS } from '../../utilities/device';
 import Input from '../toolBox/input';
 import { P, B } from '../toolBox/typography';
 import reg from '../../constants/regex';
@@ -67,14 +67,14 @@ class Request extends React.Component {
     } = this.props;
     const { amount, url } = this.state;
     const { address } = account[activeToken];
-    const isAndroid = Platform.OS === 'android';
+    const extraHeight = deviceType() === 'android' ? 170 : 0;
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <KeyboardAwareScrollView
           enableOnAndroid={true}
           enableResetScrollToCoords={false}
-          extraHeight={isAndroid && 170}
+          extraHeight={extraHeight}
         >
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
 
