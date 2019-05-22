@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import { TextEncoder } from 'text-encoding';
 import { translate } from 'react-i18next';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import { P } from '../../toolBox/typography';
 import Input from '../../toolBox/input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
@@ -95,14 +94,6 @@ class Reference extends React.Component {
           }}
         >
           <View>
-            {!isSmallScreen ? (
-              <View style={styles.headerContainer}>
-                <P style={styles.theme.subHeader}>
-                  {t('Add a reference to this transaction.')}
-                </P>
-              </View>
-            ) : null}
-
             <Input
               reference={(el) => { this.input = el; }}
               label={t('Reference (optional)')}

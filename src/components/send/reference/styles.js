@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from '../../../constants/styleGuide';
+import { themes, colors } from '../../../constants/styleGuide';
 import { deviceType, tabBarHeight } from '../../../utilities/device';
 
 export default () => ({
@@ -7,10 +7,6 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       paddingBottom: (deviceType() === 'android' ? tabBarHeight() : 0) + 24,
-    },
-    headerContainer: {
-      margin: boxes.boxPadding,
-      marginBottom: 0,
     },
     input: {
       marginTop: 0,
@@ -22,9 +18,6 @@ export default () => ({
   [themes.light]: {
     wrapper: {
       backgroundColor: colors.light.white,
-    },
-    subHeader: {
-      color: colors.light.gray2,
     },
   },
 
