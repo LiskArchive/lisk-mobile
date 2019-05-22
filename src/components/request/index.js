@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, TouchableWithoutFeedback, Clipboard, Platform } from 'react-native';
+import { View, TouchableWithoutFeedback, Platform } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { translate } from 'react-i18next';
@@ -59,12 +59,6 @@ class Request extends React.Component {
       amount,
       url: amountValidity === 0 ? `lisk://wallet?recipient=${address}&amount=${val}` : address,
     });
-  }
-
-  copyToClipboard = () => {
-    const { address } = this.props.account[this.props.activeToken];
-
-    Clipboard.setString(address);
   }
 
   render() {
