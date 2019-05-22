@@ -2,34 +2,53 @@ import { themes, colors, boxes, fonts } from '../../constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {},
-    container: {
+    wrapper: {
       height: '100%',
     },
     innerContainer: {
       flexDirection: 'column',
-      justifyContent: 'space-between',
       flex: 1,
     },
     subHeader: {
-      margin: boxes.boxPadding,
-      marginBottom: 0,
-    },
-    main: {
       flexDirection: 'column',
-      justifyContent: 'space-around',
-      alignItems: 'center',
       paddingTop: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
+      paddingBottom: 40,
     },
     addressLabel: {
-      fontSize: fonts.size.base,
+      fontSize: fonts.size.small,
       marginBottom: 8,
     },
+    addressContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    avatar: {
+      marginRight: 10,
+    },
     address: {
-      marginBottom: 24,
-      fontSize: fonts.size.small,
+      fontSize: fonts.size.base,
+      marginRight: 6,
+      maxWidth: '90%',
+    },
+    copyContainer: {
+      alignItems: 'center',
+      width: '100%',
+    },
+    copyIcon: {
+      color: colors.light.blueGray,
+    },
+    body: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      paddingBottom: boxes.boxPadding,
+    },
+    shareContainer: {
+      alignItems: 'center',
+      marginBottom: 10,
     },
     shareContent: {
       flexDirection: 'column',
@@ -55,14 +74,11 @@ export default () => ({
     innerContainer: {
       backgroundColor: colors.light.white,
     },
-    subHeader: {
-      color: colors.light.gray2,
-    },
     addressLabel: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     address: {
-      color: colors.light.black,
+      color: colors.light.maastrichtBlue,
     },
     shareText: {
       color: colors.light.gray2,
@@ -76,11 +92,8 @@ export default () => ({
     innerContainer: {
       backgroundColor: colors.dark.screenBgNavy,
     },
-    subHeader: {
-      color: colors.dark.gray4,
-    },
     addressLabel: {
-      color: colors.dark.gray1,
+      color: colors.light.platinum,
     },
     address: {
       color: colors.dark.white,
