@@ -9,7 +9,7 @@ import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
 
 const EmptyState = ({
-  theme, styles, usedIn, t,
+  theme, styles, t,
 }) => (
   <View style={styles.emptyState}>
     <View style={styles.imageContainer}>
@@ -19,11 +19,7 @@ const EmptyState = ({
       />
     </View>
     <P style={styles.emptyTitle}>
-      {
-        usedIn === 'bookmarks' ?
-        t('You don’t have any bookmarks. Start adding them by tapping the + button on the top left.') :
-        t('You have no bookmarks yet.')
-      }
+      {t('You don’t have any bookmarks.')}
     </P>
   </View>
 );

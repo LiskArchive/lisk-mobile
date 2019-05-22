@@ -90,7 +90,7 @@ class Result extends React.Component {
     return (
       <View style={[styles.container, styles.theme.container]}>
         <P style={styles.theme.subtitle}>
-          {t('Thank you. Your transaction is being processed. It may take up to 15 minutes to be secured on the blockchain.')}
+          {t('Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.')}
         </P>
         <View style={styles.illustration}>
           {this.state.step === 0 ? <LottieView
