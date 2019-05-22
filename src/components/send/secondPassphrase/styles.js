@@ -8,25 +8,10 @@ export default () => ({
       justifyContent: 'space-between',
       paddingBottom: (deviceType() === 'android' ? tabBarHeight() : 0) + 24,
     },
-    titleContainer: {
-      margin: boxes.boxPadding,
-    },
-    illustrationWrapper: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      paddingTop: 36,
-      paddingBottom: 8,
-    },
-    illustration: {
-      width: 85,
-      height: 85,
-    },
     inputContainer: {
       paddingTop: 0,
     },
     input: {
-      borderRightWidth: boxes.boxPadding,
-      borderRightColor: 'transparent',
       fontFamily: fonts.family.passphrase,
       textAlign: 'justify',
       paddingTop: 10,
@@ -36,7 +21,7 @@ export default () => ({
     scanButton: {
       position: 'absolute',
       zIndex: 99,
-      top: -5,
+      top: 15,
       right: boxes.boxPadding + 5,
       width: 60,
     },
@@ -54,21 +39,39 @@ export default () => ({
     cameraOverlay: {
       opacity: 0,
     },
+    container: {
+      paddingVertical: boxes.boxPadding,
+    },
+    imageContainer: {
+      marginTop: 55,
+      width: '100%',
+      alignItems: 'center',
+    },
+    illustration: {
+      width: 210,
+      height: 134,
+    },
   },
   [themes.light]: {
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    subtitle: {
-      color: colors.light.gray2,
+    scanButtonTitle: {
+      color: colors.light.maastrichtBlue,
+    },
+    label: {
+      color: colors.light.maastrichtBlue,
     },
   },
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
     },
-    subtitle: {
-      color: colors.dark.gray4,
+    scanButtonTitle: {
+      color: colors.light.platinum,
+    },
+    label: {
+      color: colors.light.platinum,
     },
   },
 });
