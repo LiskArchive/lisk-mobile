@@ -9,6 +9,7 @@ import getStyles from './styles';
 import AssetSelection from '../../assetSelection';
 import { tokenKeys, tokenMap } from '../../../constants/tokens';
 import { colors } from '../../../constants/styleGuide';
+import ModalHolder from '../../../utilities/modal';
 
 
 @connect(state => ({
@@ -18,7 +19,7 @@ import { colors } from '../../../constants/styleGuide';
 })
 class TokenSwitcher extends React.Component {
   onClick = () => {
-    this.props.navigation.navigate('Modal', { title: 'Your assets', component: AssetSelection });
+    ModalHolder.open({ title: 'Your assets', component: AssetSelection });
   }
 
   render() {

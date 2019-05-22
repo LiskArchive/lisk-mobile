@@ -55,14 +55,14 @@ export const create = ({
   recipientAddress,
   amount,
   secondPassphrase,
-  data,
+  reference,
 }) => new Promise((resolve) => {
   const transaction = Lisk.transaction.transfer(removeUndefinedKeys({
     passphrase,
     secondPassphrase,
     recipientId: recipientAddress,
     amount,
-    data,
+    data: reference,
   }));
 
   resolve(transaction);

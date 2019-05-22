@@ -176,7 +176,7 @@ class LiskMessageExtension extends Component {
             onChange={this.setAddress}
             onFocus={keyBoardFocused}
             value={address.value || inputAddress.value}
-            error={address.validity === 1 ? 'Invalid address' : ''}
+            error={address.validity === 1 ? 'Invalid address.' : ''}
 
             innerStyles={{
               errorMessage: styles.errorMessage,

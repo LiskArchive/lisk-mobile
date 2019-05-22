@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import { IconButton } from '../../toolBox/button';
-import { P } from '../../toolBox/typography';
 import { tokenMap } from '../../../constants/tokens';
 import Input from '../../toolBox/input';
 import { colors } from '../../../constants/styleGuide';
@@ -112,7 +111,6 @@ class Recipient extends React.Component {
     const {
       sharedData, move,
     } = this.props;
-
     const nextData = data
       ? merge(sharedData, data)
       : merge(sharedData, this.scannedData, {
@@ -162,10 +160,7 @@ class Recipient extends React.Component {
     } = this.props;
     const { address } = this.state;
 
-    const titles = {
-      heading: accounts.followed.length ? t('Enter an address or search in bookmarks.') : t('Enter an address to send tokens to.'),
-      inputLabel: accounts.followed.length ? t('Address or label') : t('Address'),
-    };
+    const inputLabel = accounts.followed.length ? t('Address or label') : t('Address');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -192,11 +187,6 @@ class Recipient extends React.Component {
             type: 'inBox',
           }}
         >
-          {!isSmallScreen ? (
-            <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-              <P style={[styles.subtitle, styles.theme.subtitle]}>{titles.heading}</P>
-            </Animated.View>
-          ) : null}
 
           <View style={styles.form}>
             <View style={styles.addressContainer}>
@@ -206,8 +196,8 @@ class Recipient extends React.Component {
                 style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                 title={t('Scan')}
                 icon='scanner'
-                iconSize={16}
-                color={colors.light.blue}
+                iconSize={19.5}
+                color={colors.light.ultramarineBlue}
               />
 
               {
@@ -215,13 +205,13 @@ class Recipient extends React.Component {
                   <Avatar
                     style={styles.avatar}
                     address={address.value}
-                    size={34}
+                    size={24.6}
                   /> : null
               }
 
               <Input
                 reference={(input) => { this.input = input; }}
-                label={titles.inputLabel}
+                label={inputLabel}
                 autoCorrect={false}
                 onChange={this.setAddress}
                 value={address.value}
@@ -232,6 +222,7 @@ class Recipient extends React.Component {
                     token.active === tokenMap.LSK.key ? styles.addressInputWithAvatar : null,
                   ],
                   containerStyle: styles.addressInputContainer,
+                  inputLabel: styles.theme.inputLabel,
                 }}
               />
             </View>

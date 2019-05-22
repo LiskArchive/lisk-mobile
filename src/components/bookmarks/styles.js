@@ -61,14 +61,14 @@ export default () => ({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    noActivity: {
+    imageContainer: {
       width: '100%',
       alignItems: 'center',
       marginBottom: 10,
     },
-    emptyImage: {
-      width: isSmallScreen ? 50 : 80,
-      height: isSmallScreen ? 50 : 80,
+    noBookmarkImage: {
+      width: 264,
+      height: 100,
     },
     emptyTitle: {
       paddingTop: isSmallScreen ? 0 : 10,
@@ -76,6 +76,7 @@ export default () => ({
       paddingRight: 40,
       paddingLeft: 40,
       fontSize: isSmallScreen ? fonts.size.small : fonts.size.base,
+      color: colors.light.blueGray,
     },
     icon: {
       marginTop: 15,
@@ -154,9 +155,6 @@ export default () => ({
     avatar: {
       borderColor: colors.light.white,
     },
-    emptyTitle: {
-      color: colors.light.gray2,
-    },
     noResult: {
       color: colors.light.gray2,
     },
@@ -191,9 +189,6 @@ export default () => ({
     },
     avatar: {
       borderColor: colors.dark.gray5,
-    },
-    emptyTitle: {
-      color: colors.dark.gray2,
     },
     noResult: {
       color: colors.dark.gray2,

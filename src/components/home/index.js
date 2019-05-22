@@ -10,10 +10,15 @@ import {
   blockUpdated as blockUpdatedAction,
   accountFetched as accountFetchedAction,
 } from '../../actions/accounts';
+import {
+  settingsUpdated as settingsUpdatedAction,
+} from '../../actions/settings';
+import ModalHolder from '../../utilities/modal';
 import AccountSummary from '../accountSummary/home';
 import Transactions from '../transactions';
 import Empty from '../transactions/empty';
 import Loading from '../transactions/loading';
+import IntroModal from './introModal';
 import { viewportHeight } from '../../utilities/device';
 import InfiniteScrollView from '../infiniteScrollView';
 import { tokenMap } from '../../constants/tokens';
@@ -37,11 +42,13 @@ const summaryHeight = 200;
   transactions: state.transactions,
   incognito: state.settings.incognito,
   activeToken: state.settings.token.active,
+  btcIntroShown: state.settings.btcIntroShown,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   transactionsReset: transactionsResetAction,
   updateTransactions: blockUpdatedAction,
   accountFetched: accountFetchedAction,
+  settingsUpdated: settingsUpdatedAction,
 })
 class Home extends React.Component {
   state = {
@@ -153,13 +160,27 @@ class Home extends React.Component {
     this.props.accountFetched();
   }
 
+  showIntroModal = () => {
+    if (!this.props.btcIntroShown) {
+      this.modalTimeout = setTimeout(() => {
+        ModalHolder.open({
+          title: 'We’ve got good news!',
+          component: IntroModal,
+        });
+        this.props.settingsUpdated({ btcIntroShown: true });
+      }, 1200);
+    }
+  }
+
   screenWillFocus = () => {
     if (this.lastActiveToken === null) {
       this.bindInfiniteScroll();
       this.setHeader();
+      this.showIntroModal();
     }
     if (this.lastActiveToken !== this.props.activeToken) {
       this.refreshAccountAndTx();
+      this.setHeader();
     }
   }
 
@@ -193,7 +214,6 @@ class Home extends React.Component {
     }
 
     if (
-      (prevProps.activeToken !== activeToken) ||
       (prevProps.account[activeToken].balance !== account[activeToken].balance) ||
       (prevProps.incognito !== incognito)
     ) {
@@ -202,11 +222,13 @@ class Home extends React.Component {
 
     if (prevProps.activeToken !== activeToken && isFocused) {
       this.refreshAccountAndTx();
+      this.setHeader();
     }
   }
 
   componentWillUnmount() {
     clearTimeout(this.initialFetchTimeout);
+    clearTimeout(this.modalTimeout);
   }
 
   render() {

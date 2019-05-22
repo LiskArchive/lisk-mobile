@@ -7,15 +7,6 @@ export default () => ({
       flexDirection: 'column',
       paddingBottom: 24,
     },
-    titleContainer: {
-      overflow: 'hidden',
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
-      maxWidth: '100%',
-    },
-    subtitle: {
-      marginTop: 0,
-    },
     form: {
       paddingTop: boxes.boxPadding,
       paddingBottom: boxes.boxPadding,
@@ -28,7 +19,7 @@ export default () => ({
     scanButton: {
       position: 'absolute',
       zIndex: 99,
-      top: 0,
+      top: -5,
       right: boxes.boxPadding + 5,
       width: 60,
     },
@@ -56,7 +47,7 @@ export default () => ({
       }),
     },
     addressInputWithAvatar: {
-      paddingLeft: 40,
+      paddingLeft: 48.5,
     },
     addressInputContainer: {
       paddingTop: 0,
@@ -72,30 +63,30 @@ export default () => ({
     avatar: {
       position: 'absolute',
       zIndex: 0,
-      left: 20,
-      top: 22,
+      left: 32.5,
+      top: 43,
     },
   },
   [themes.light]: {
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    subtitle: {
-      color: colors.light.gray2,
-    },
     scanButtonTitle: {
-      color: colors.light.blue,
+      color: colors.light.maastrichtBlue,
+    },
+    inputLabel: {
+      color: colors.light.maastrichtBlue,
     },
   },
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
     },
-    subtitle: {
-      color: colors.dark.gray4,
-    },
     scanButtonTitle: {
-      color: colors.dark.blue,
+      color: colors.light.platinum,
+    },
+    inputLabel: {
+      color: colors.light.platinum,
     },
   },
 });

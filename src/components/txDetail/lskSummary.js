@@ -5,7 +5,7 @@ import FormattedDate from '../formattedDate';
 import withTheme from '../withTheme';
 import { fromRawLsk } from '../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
-import { P, H1, H3 } from '../toolBox/typography';
+import { P, H3 } from '../toolBox/typography';
 import Avatar from '../avatar';
 import transactions from '../../constants/transactions';
 import Blur from '../transactions/blur';
@@ -41,17 +41,17 @@ const LskSummary = ({
       <View style={styles.row}>
         {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
           <Image
-            style={{ width: 50, height: 50 }}
+            style={{ width: 40, height: 40 }}
             source={transactions[txTypes[tx.type]].image(theme)}
           /> :
           <Fragment>
-            <Avatar address={firstAddress} size={50} />
+            <Avatar address={firstAddress} size={40} />
             {
               theme === themes.light ?
                 <Image source={arrowLight} style={[styles.arrow, arrowStyle]} /> :
                 <Image source={arrowDark} style={[styles.arrow, arrowStyle]} />
             }
-            <Avatar address={secondAddress} size={50} />
+            <Avatar address={secondAddress} size={40} />
           </Fragment>
         }
       </View>
@@ -61,12 +61,12 @@ const LskSummary = ({
       }
       {
         tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) && !incognito ?
-          <H1 style={amountStyle}>
+          <H3 style={amountStyle}>
             {amountSign}
             <FormattedNumber>
               {fromRawLsk(tx.amount)}
             </FormattedNumber>
-          </H1> : null
+          </H3> : null
       }
       {
         tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) && incognito ?

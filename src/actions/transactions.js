@@ -45,14 +45,14 @@ export const transactionsLoaded = data => async (dispatch, getState) => {
  * @param {Function} errorCb - error callback
  */
 export const transactionAdded = (data, successCb, errorCb) => async (dispatch, getState) => {
-  const activeToken = getState().settings.token.active;
-  const account = getState().accounts.info[activeToken];
+  const { settings: { token }, accounts } = getState();
+  const account = accounts.info[token.active];
 
   try {
-    const tx = await transactionsAPI.create(activeToken, data);
+    const tx = await transactionsAPI.create(token.active, data);
 
-    if (activeToken === tokenMap.LSK.key) {
-      const { id } = await transactionsAPI.broadcast(activeToken, tx);
+    if (token.active === tokenMap.LSK.key) {
+      const { id } = await transactionsAPI.broadcast(token.active, tx);
 
       dispatch({
         type: actionTypes.pendingTransactionAdded,
@@ -69,7 +69,7 @@ export const transactionAdded = (data, successCb, errorCb) => async (dispatch, g
 
       successCb({ txId: id, address: data.recipientAddress });
     } else {
-      await transactionsAPI.broadcast(activeToken, tx);
+      await transactionsAPI.broadcast(token.active, tx);
 
       dispatch(transactionsReset());
       dispatch(transactionsLoaded({ address: account.address }));

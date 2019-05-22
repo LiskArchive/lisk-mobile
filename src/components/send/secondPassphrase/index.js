@@ -1,20 +1,19 @@
 import React from 'react';
-import { View, Image, Platform } from 'react-native';
+import { View, Platform, Image } from 'react-native';
 import { translate } from 'react-i18next';
 import { validatePassphrase } from '../../../utilities/passphrase';
 import { extractPublicKey } from '../../../utilities/api/lisk/account';
 import Input from '../../toolBox/input';
-import { P } from '../../toolBox/typography';
 import { IconButton } from '../../toolBox/button';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import secondPassphraseImageLight from '../../../assets/images/secondPassphrase3xLight.png';
-import secondPassphraseImageDark from '../../../assets/images/secondPassphrase3xDark.png';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../../constants/styleGuide';
 import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import Scanner from '../../scanner';
 import DropDownHolder from '../../../utilities/alert';
+import SecondPassPhraseDarkImg from '../../../assets/images/send/secondPassphrase3xDark.png';
+import SecondPassPhraseLightImg from '../../../assets/images/send/secondPassphrase3xLight.png';
 
 const devDefaultSecondPass = process.env.secondPassphrase || '';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
@@ -128,7 +127,7 @@ class SecondPassphrase extends React.Component {
 
   render() {
     const {
-      navigation, styles, theme, t, lng,
+      navigation, styles, t, lng, theme,
     } = this.props;
     const { secondPassphrase } = this.state;
 
@@ -156,29 +155,14 @@ class SecondPassphrase extends React.Component {
             type: 'inBox',
           }}
         >
-          <View>
-            {!isSmallScreen ? (
-              <View style={styles.titleContainer}>
-                <P style={[styles.subtitle, styles.theme.subtitle]}>
-                  {t('Enter your second passphrase to continue to transaction overview page.')}
-                </P>
-
-                <View style={styles.illustrationWrapper}>
-                  {theme === themes.light ?
-                    <Image style={styles.illustration} source={secondPassphraseImageLight} /> :
-                    <Image style={styles.illustration} source={secondPassphraseImageDark} />
-                  }
-                </View>
-              </View>
-            ) : null}
-
-            <View>
+          <View style={styles.container}>
               <Input
                 label={t('Second Passphrase')}
                 reference={(ref) => { this.input = ref; }}
                 innerStyles={{
                   input: styles.input,
                   containerStyle: styles.inputContainer,
+                  inputLabel: styles.theme.label,
                 }}
                 value={secondPassphrase.value}
                 onChange={this.changeHandler}
@@ -191,14 +175,19 @@ class SecondPassphrase extends React.Component {
               {secondPassphrase.value === '' ?
                 <IconButton
                   onPress={this.onOpenCamera}
-                  titleStyle={styles.scanButtonTitle}
+                  titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
                   style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                   title={t('Scan')}
                   icon='scanner'
-                  iconSize={18}
-                  color={colors.light.blue}
+                  iconSize={19.5}
+                  color={colors.light.ultramarineBlue}
                 /> : null
               }
+            <View style={styles.imageContainer}>
+              <Image
+                source={theme === themes.light ? SecondPassPhraseLightImg : SecondPassPhraseDarkImg}
+                style={styles.illustration}
+              />
             </View>
           </View>
         </KeyboardAwareScrollView>
