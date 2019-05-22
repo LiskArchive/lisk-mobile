@@ -96,7 +96,7 @@ class Reference extends React.Component {
           <View>
             <Input
               reference={(el) => { this.input = el; }}
-              label={t('Reference (optional)')}
+              label={t('Message (optional)')}
               autoFocus={!isAndroid}
               autoCorrect={false}
               innerStyles={{ input: styles.input }}
