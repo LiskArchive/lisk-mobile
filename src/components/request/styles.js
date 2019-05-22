@@ -21,6 +21,7 @@ export default () => ({
       marginBottom: 8,
     },
     addressContainer: {
+      width: '100%',
       flexDirection: 'row',
       alignItems: 'center',
     },
@@ -34,6 +35,7 @@ export default () => ({
     },
     copyContainer: {
       alignItems: 'center',
+      width: '100%',
     },
     copyIcon: {
       color: colors.light.blueGray,
