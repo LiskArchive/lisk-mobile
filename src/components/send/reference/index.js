@@ -99,7 +99,7 @@ class Reference extends React.Component {
               label={t('Message (optional)')}
               autoFocus={!isAndroid}
               autoCorrect={false}
-              innerStyles={{ input: styles.input }}
+              innerStyles={{ input: styles.input, inputLabel: styles.theme.label }}
               multiline={true}
               onChange={this.onChange}
               value={value}

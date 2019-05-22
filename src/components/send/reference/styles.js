@@ -19,6 +19,9 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
+    label: {
+      color: colors.light.gray1,
+    },
   },
 
   [themes.dark]: {
