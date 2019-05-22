@@ -12,6 +12,17 @@ export default () => ({
       marginTop: 0,
       flexWrap: 'wrap',
       flex: 1,
+      paddingRight: 35,
+    },
+    inputContainer: {
+      position: 'relative',
+    },
+    circularProgress: {
+      position: 'absolute',
+      top: 66,
+      right: 30,
+      width: 20,
+      height: 20,
     },
   },
 

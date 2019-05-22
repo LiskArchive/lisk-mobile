@@ -8,6 +8,7 @@ import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { merge } from '../../../utilities/helpers';
 import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+import CircularProgress from './circularProgress';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const isAndroid = deviceType() === 'android';
@@ -81,6 +82,7 @@ class Reference extends React.Component {
   render() {
     const { styles, t } = this.props;
     const { reference: { value, validity } } = this.state;
+    const byteCount = encodeURI(value).split(/%..|./).length - 1;
 
     return (
       <View style={styles.theme.wrapper}>
@@ -93,7 +95,7 @@ class Reference extends React.Component {
             type: 'inBox',
           }}
         >
-          <View>
+          <View style={styles.inputContainer}>
             <Input
               reference={(el) => { this.input = el; }}
               label={t('Message (optional)')}
@@ -104,6 +106,11 @@ class Reference extends React.Component {
               onChange={this.onChange}
               value={value}
               error={validity === 1 ? t('Maximum length of 64 bytes is exceeded.') : ''}
+            />
+            <CircularProgress
+              style={styles.circularProgress}
+              max={64}
+              value={byteCount}
             />
           </View>
         </KeyboardAwareScrollView>
