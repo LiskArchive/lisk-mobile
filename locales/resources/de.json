@@ -80,7 +80,7 @@
   "Ready to send": "Bereit zu senden",
   "Recipient": "Empfänger",
   "Reference": "Nachricht",
-  "Reference (optional)": "Nachricht (optional)",
+  "Message (optional)": "Nachricht (optional)",
   "Request LSK tokens from other accounts.": "{{tokenType}} Tokens von einem Konto anfragen",
   "Return to home": "Zurück zur Startseite",
   "Save and continue": "Speichern und weiter",

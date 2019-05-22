@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from '../../../constants/styleGuide';
+import { themes, colors } from '../../../constants/styleGuide';
 import { deviceType, tabBarHeight } from '../../../utilities/device';
 
 export default () => ({
@@ -8,14 +8,21 @@ export default () => ({
       justifyContent: 'space-between',
       paddingBottom: (deviceType() === 'android' ? tabBarHeight() : 0) + 24,
     },
-    headerContainer: {
-      margin: boxes.boxPadding,
-      marginBottom: 0,
-    },
     input: {
       marginTop: 0,
       flexWrap: 'wrap',
       flex: 1,
+      paddingRight: 35,
+    },
+    inputContainer: {
+      position: 'relative',
+    },
+    circularProgress: {
+      position: 'absolute',
+      top: 66,
+      right: 30,
+      width: 20,
+      height: 20,
     },
   },
 
@@ -23,17 +30,14 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    subHeader: {
-      color: colors.light.gray2,
+    label: {
+      color: colors.light.gray1,
     },
   },
 
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.screenBgNavy,
-    },
-    subHeader: {
-      color: colors.dark.gray4,
     },
   },
 });

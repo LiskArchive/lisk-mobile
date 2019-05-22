@@ -3,12 +3,12 @@ import { View } from 'react-native';
 import { TextEncoder } from 'text-encoding';
 import { translate } from 'react-i18next';
 import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import { P } from '../../toolBox/typography';
 import Input from '../../toolBox/input';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { merge } from '../../../utilities/helpers';
 import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+import CircularProgress from './circularProgress';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const isAndroid = deviceType() === 'android';
@@ -82,6 +82,7 @@ class Reference extends React.Component {
   render() {
     const { styles, t } = this.props;
     const { reference: { value, validity } } = this.state;
+    const byteCount = encodeURI(value).split(/%..|./).length - 1;
 
     return (
       <View style={styles.theme.wrapper}>
@@ -94,25 +95,22 @@ class Reference extends React.Component {
             type: 'inBox',
           }}
         >
-          <View>
-            {!isSmallScreen ? (
-              <View style={styles.headerContainer}>
-                <P style={styles.theme.subHeader}>
-                  {t('Add a reference to this transaction.')}
-                </P>
-              </View>
-            ) : null}
-
+          <View style={styles.inputContainer}>
             <Input
               reference={(el) => { this.input = el; }}
-              label={t('Reference (optional)')}
+              label={t('Message (optional)')}
               autoFocus={!isAndroid}
               autoCorrect={false}
-              innerStyles={{ input: styles.input }}
+              innerStyles={{ input: styles.input, inputLabel: styles.theme.label }}
               multiline={true}
               onChange={this.onChange}
               value={value}
               error={validity === 1 ? t('Maximum length of 64 bytes is exceeded.') : ''}
+            />
+            <CircularProgress
+              style={styles.circularProgress}
+              max={64}
+              value={byteCount}
             />
           </View>
         </KeyboardAwareScrollView>
