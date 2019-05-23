@@ -3,14 +3,12 @@ import { Animated, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { translate } from 'react-i18next';
 import { H2, P } from '../toolBox/typography';
-import { PrimaryButton } from '../toolBox/button';
 import styles from './styles';
 import { colors } from '../../constants/styleGuide';
-import frame from '../../assets/images/frame3x.png';
-import activityScreen from '../../assets/images/activityScreen3x.png';
-import transferScreen from '../../assets/images/transferScreen3x.png';
-import faceIdIllustration from '../../assets/images/faceIdIllustration3x.png';
-import touchIdIllustration from '../../assets/images/touchIdIllustration3x.png';
+import activityHistoryImg from '../../assets/images/intro/activityHistory3x.png';
+import tokensTransferImg from '../../assets/images/intro/tokensTransfer3x.png';
+import secureAuthenticationImg from '../../assets/images/intro/secureAuthentication3x.png';
+import easyAccessImg from '../../assets/images/intro/easyAccess3x.png';
 
 class Heading extends React.Component {
   state = {
@@ -55,90 +53,62 @@ class Heading extends React.Component {
     }).start();
   };
 
-  componentDidMount() {
-    const {
-      bgOpacity, logoOpacity,
-    } = this.state;
-
-    Animated.timing(bgOpacity, {
-      toValue: 1,
-      duration: 300,
-      delay: 950,
-    }).start();
-    Animated.timing(logoOpacity, {
-      toValue: 1,
-      duration: 400,
-      delay: 950,
-    }).start();
-  }
-
   render() {
-    const {
-      bgOpacity, frameOpacity, activityOpacity, transactionsOpacity, bioAuthOpacity,
-    } = this.state;
-    const { t, skip } = this.props;
+    const { t } = this.props;
+
+    const descriptionContent = [
+      {
+        title: 'Activity history',
+        description:
+          'Get a full overview of your current balance, transaction history and much more.',
+        imageSrc: activityHistoryImg,
+        imageStyle: styles.activityHistoryImg,
+      },
+      {
+        title: 'Token transfer',
+        description: 'Transfer your tokens easily to other accounts, by simply scanning QR Codes.',
+        imageSrc: tokensTransferImg,
+        imageStyle: styles.tokensTransferImg,
+      },
+      {
+        title: 'Secure authentication',
+        description: 'Access all functions via advanced biometric authentication.',
+        imageSrc: secureAuthenticationImg,
+        imageStyle: styles.secureAuthenticationImg,
+      },
+      {
+        title: 'Easy access',
+        description:
+          'Create an account with one passphrase to access your LSK and BTC cryptocurrencies',
+        imageSrc: easyAccessImg,
+        imageStyle: styles.easyAccessImg,
+      },
+    ];
 
     return (
-      <Animated.View style={[styles.headingContainer, { opacity: bgOpacity }]}>
-        <View style={styles.descriptionsWrapper}>
+      <Animated.View style={styles.headingContainer}>
           <Swiper
-            style={styles.headingDescription}
-            containerStyle={styles.headingDescriptionCntr}
             loop={false}
             onIndexChanged={this.onIndexChanged}
             dotColor={colors.light.white}
             dotStyle={styles.dot}
             activeDotColor={colors.light.ultramarineBlue}
-            paginationStyle={styles.headingPagination}>
-            <View style={styles.headingDescriptionItem}>
-              <View style={styles.itemWrapper}>
-                <H2 style={styles.centralized}>Activity history</H2>
-                <P style={[styles.centralized, styles.descriptionP]}>
-                  {t('Get a full overview of your current balance, transaction history and much more.')}
-                </P>
+          paginationStyle={styles.headingPagination}
+        >
+          {descriptionContent.map((item, index) => (
+            <View key={index}>
+              <View style={styles.descriptionWrapper}>
+                <H2 style={[styles.centralized, styles.descriptionH]}>{t(item.title)}</H2>
+                <P style={[styles.centralized, styles.descriptionP]}>{t(item.description)}</P>
+            </View>
+              <View style={styles.illustrationWrapper}>
+                <Image resizeMethod={'scale'} source={item.imageSrc} style={styles.illustration} />
               </View>
             </View>
-            <View style={styles.headingDescriptionItem}>
-              <View style={styles.itemWrapper}>
-                <H2 style={styles.centralized}>Token transfer</H2>
-                <P style={[styles.centralized, styles.descriptionP]}>
-                  {t('Transfer your LSK tokens easily to other accounts by simply scanning their QR code.')}
-                </P>
-              </View>
-            </View>
-            <View style={styles.headingDescriptionItem}>
-              <View style={styles.itemWrapper}>
-                <H2 style={styles.centralized}>Secure authentication</H2>
-                <P style={[styles.centralized, styles.descriptionP]}>
-                  {t('Access all functions of the app quickly and securely via advanced biometric authentication.')}
-                </P>
-              </View>
-            </View>
+          ))}
           </Swiper>
-        </View>
-
-        <View style={styles.illustrations}>
-          <Animated.View style={[styles.frame, { opacity: frameOpacity }]}>
-            <Image source={frame} style={styles.deviceFrame} />
-          </Animated.View>
-          <Animated.View style={[styles.screens, { opacity: activityOpacity }]}>
-            <Image source={activityScreen} style={styles.activityIllustration} />
-          </Animated.View>
-          <Animated.View style={[styles.screens, { opacity: transactionsOpacity }]}>
-            <Image source={transferScreen} style={styles.transferIllustration} />
-          </Animated.View>
-          <Animated.View style={[styles.screens, styles.bioAuth, { opacity: bioAuthOpacity }]}>
-            <Image source={faceIdIllustration} style={styles.faceIdIllustration} />
-            <Image source={touchIdIllustration} style={styles.touchIdIllustration} />
-          </Animated.View>
-        </View>
-        <Animated.View style={[styles.navigateButton, { opacity: bioAuthOpacity }]}>
-          <PrimaryButton
-            style={styles.startButton}
-            onClick={skip}
-            title='Start' />
         </Animated.View>
-      </Animated.View>);
+    );
   }
 }
 

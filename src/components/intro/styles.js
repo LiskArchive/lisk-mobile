@@ -6,6 +6,7 @@ const styles = {
   wrapper: {
     backgroundColor: colors.light.white,
     height: '100%',
+    paddingTop: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 25 : 0,
   },
   splashContainer: {
     backgroundColor: colors.light.white,
@@ -67,44 +68,13 @@ const styles = {
   },
   headingContainer: {
     backgroundColor: colors.light.white,
-    position: 'absolute',
-    left: 0,
-    top: 20,
-    zIndex: 1,
-    width: '100%',
-    height: '100%',
-  },
-  descriptionsWrapper: {
-    width: '100%',
-    height: '100%',
-    overflow: 'hidden',
     flex: 1,
-    justifyContent: 'flex-start',
-    zIndex: 3,
-    elevation: 3,
   },
-  headingDescription: {
-    padding: 0,
-  },
-  headingDescriptionCntr: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-  },
-  headingDescriptionItem: {
-    padding: 0,
-    // flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    height: 190,
-  },
-  itemWrapper: {
-    height: 160,
+  descriptionWrapper: {
     paddingTop: 30,
     paddingBottom: boxes.boxPadding,
     paddingHorizontal: boxes.boxPadding,
-    textAlign: 'center',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    minHeight: 155,
   },
   centralized: {
     width: '100%',
@@ -117,6 +87,18 @@ const styles = {
   descriptionH: {
     color: colors.light.maastrichtBlue,
   },
+  illustrationWrapper: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+    bottom: 100,
+  },
+  illustration: {
+    flex: 1,
+    resizeMode: 'contain',
+    width: '100%',
+    height: null,
+  },
   dot: {
     borderWidth: 1,
     borderColor: colors.light.ghost,
@@ -125,79 +107,6 @@ const styles = {
     top: 140,
     position: 'absolute',
     height: 13,
-  },
-  illustrations: {
-    width: 320,
-    height: 523,
-    position: 'absolute',
-    top: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 275 : 260,
-    left: '50%',
-    marginLeft: -160,
-    zIndex: 1,
-  },
-  frame: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 0,
-  },
-  screens: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 1,
-  },
-  deviceFrame: {
-    width: '100%',
-    height: '100%',
-  },
-  activityIllustration: {
-    width: 367,
-    height: 429,
-    top: 67,
-    marginLeft: -23,
-  },
-  transferIllustration: {
-    width: 282,
-    height: 321,
-    top: 120,
-    marginLeft: 19,
-  },
-  bioAuth: {
-    height: deviceHeight() - 300,
-  },
-  faceIdIllustration: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginLeft: -170,
-    marginTop: -220,
-    width: 250,
-    height: 250,
-  },
-  touchIdIllustration: {
-    position: 'absolute',
-    bottom: '50%',
-    right: '50%',
-    marginRight: -170,
-    marginBottom: -120,
-    width: 250,
-    height: 250,
-  },
-  startButton: {
-    width: '100%',
-  },
-  navigateButton: {
-    width: '100%',
-    bottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 60 : 40,
-    borderRightWidth: 20,
-    borderLeftWidth: 20,
-    borderColor: 'transparent',
-    zIndex: 10,
   },
 };
 
