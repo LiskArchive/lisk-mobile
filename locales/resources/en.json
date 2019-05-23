@@ -9,7 +9,7 @@
   "4. Security reminder": "4. Security reminder",
   "A secure passphrase": "A secure passphrase",
   "A unique avatar": "A unique avatar",
-  "Access all functions of the app quickly and securely via advanced biometric authentication.": "Access all functions of the app quickly and securely via advanced biometric authentication.",
+  "Access all functions via advanced biometric authentication.": "Access all functions via advanced biometric authentication.",
   "Account address": "Account address",
   "Account creation": "Account creation",
   "Account initialization": "Account initialization",
@@ -119,7 +119,7 @@
   "Transaction Fee": "Transaction Fee",
   "Transaction ID": "Transaction ID",
   "Transaction not found": "Transaction not found",
-  "Transfer your LSK tokens easily to other accounts by simply scanning their QR code.": "Transfer your LSK tokens easily to other accounts by simply scanning their QR code.",
+  "Transfer your tokens easily to other accounts, by simply scanning QR Codes.": "Transfer your tokens easily to other accounts, by simply scanning QR Codes.",
   "Unauthorized! Please try again.": "Unauthorized! Please try again.",
   "Verification": "Verification",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Welcome to Lisk. Now you can send and request LSK token on the go.",
@@ -185,5 +185,11 @@
   "Unparsed Address": "Unparsed Address",
   "Choose an authenticated method": "Choose an authenticated method",
   "Info": "Info",
-  "Your tokens": "Your tokens"
+  "Your tokens": "Your tokens",
+  "Add address to bookmarks": "Add address to bookmarks",
+  "Activity history": "Activity history",
+  "Token transfer": "Token transfer",
+  "Secure authentication": "Secure authentication",
+  "Easy access": "Easy access",
+  "Create an account with one passphrase to access your LSK and BTC cryptocurrencies": "Create an account with one passphrase to access your LSK and BTC cryptocurrencies"
 }
