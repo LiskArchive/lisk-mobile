@@ -74,23 +74,6 @@ const styles = {
     width: '100%',
     height: '100%',
   },
-  headingTopBar: {
-    height: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 79 : 59,
-    width: '100%',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    paddingTop: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 25 : 0,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 24 : 29,
-  },
-  headingSkipButton: {
-    lineHeight: 30,
-    height: 30,
-    width: 60,
-    borderWidth: 0,
-    textAlign: 'right',
-  },
   descriptionsWrapper: {
     width: '100%',
     height: '100%',
