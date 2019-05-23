@@ -86,8 +86,9 @@ class Heading extends React.Component {
             containerStyle={styles.headingDescriptionCntr}
             loop={false}
             onIndexChanged={this.onIndexChanged}
-            dotColor={colors.light.gray5}
-            activeDotColor={colors.light.actionBlue}
+            dotColor={colors.light.white}
+            dotStyle={styles.dot}
+            activeDotColor={colors.light.ultramarineBlue}
             paginationStyle={styles.headingPagination}>
             <View style={styles.headingDescriptionItem}>
               <View style={styles.itemWrapper}>

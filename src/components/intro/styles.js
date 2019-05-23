@@ -1,5 +1,5 @@
 import { StyleSheet, Platform, DeviceInfo } from 'react-native';
-import { colors } from '../../constants/styleGuide';
+import { colors, boxes } from '../../constants/styleGuide';
 import { deviceHeight } from '../../utilities/device';
 
 const styles = {
@@ -99,6 +99,9 @@ const styles = {
   },
   itemWrapper: {
     height: 160,
+    paddingTop: 30,
+    paddingBottom: boxes.boxPadding,
+    paddingHorizontal: boxes.boxPadding,
     textAlign: 'center',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -108,8 +111,15 @@ const styles = {
     textAlign: 'center',
   },
   descriptionP: {
-    color: colors.grayScale2,
-    paddingTop: 20,
+    color: colors.light.blueGray,
+    paddingTop: 10,
+  },
+  descriptionH: {
+    color: colors.light.maastrichtBlue,
+  },
+  dot: {
+    borderWidth: 1,
+    borderColor: colors.light.ghost,
   },
   headingPagination: {
     top: 140,
