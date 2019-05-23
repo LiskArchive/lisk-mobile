@@ -36,7 +36,7 @@ class SafeKeeping extends React.Component {
           </View>
           <P style={styles.passphraseTitle}>{t('This is your passphrase:')}</P>
           <View style={styles.passphraseContainer}>
-            <B style={styles.passphrase}>
+            <B style={styles.passphrase} testID="passphraseText">
               {passphrase.replace(/\s+/g, '    ')}
             </B>
           </View>
@@ -64,6 +64,7 @@ class SafeKeeping extends React.Component {
         </View>
         <View style={styles.buttonWrapper}>
           <PrimaryButton
+            testID="registerSafeKeepingButton"
             style={styles.button}
             noTheme={true}
             onClick={this.forward}

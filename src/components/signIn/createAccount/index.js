@@ -12,7 +12,11 @@ const CreateAccount = ({
       {t('Don’t have a Lisk ID?')}
     </P>
 
-    <A style={styles.link} onPress={onPress}>
+    <A
+      testID='createAccountButton'
+      style={styles.link}
+      onPress={onPress}
+    >
       {t('Create it now')}
     </A>
   </Animated.View>

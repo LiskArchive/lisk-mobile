@@ -41,9 +41,7 @@ class Form extends React.Component {
 
   showKeyboard = () => {
     setTimeout(() => {
-      if (this.props.navigation &&
-        this.props.navigation.isFocused() &&
-        this.passphraseInput) {
+      if (this.props.navigation.isFocused() && this.passphraseInput) {
         this.passphraseInput.focus();
       }
     }, 500);
@@ -136,7 +134,10 @@ class Form extends React.Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View
+        style={styles.container}
+        testID="signInForm"
+      >
         {
           showBackButton ?
             <BackButton
@@ -165,13 +166,14 @@ class Form extends React.Component {
 
         <Animated.View style={[{ opacity }]}>
           <Input
+            testID="signInPassphraseInput"
             noTheme={true}
             label={t('Passphrase')}
             reference={(ref) => { this.passphraseInput = ref; }}
             innerStyles={{ input: [styles.input, revealPassphrase ? styles.inputRevealed : null] }}
             value={passphrase.value}
             onChange={this.onInputChange}
-            autoFocus={true}
+            autoFocus={false}
             autoCorrect={false}
             multiline={true}
             keyboardAppearance="light"
@@ -199,6 +201,7 @@ class Form extends React.Component {
         <KeyboardAwareScrollView
           noTheme={true}
           button={t('Sign in')}
+          buttonTestID='signInButton'
           onSubmit={this.onFormSubmission}
           extras={
             <CreateAccount

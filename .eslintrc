@@ -12,7 +12,8 @@
     "react",
     "import",
     "babel",
-    "jest"
+    "jest",
+    "detox"
   ],
   "globals": {
     "PRODUCTION": true,
@@ -34,7 +35,8 @@
         "./test/**/*.js",
         "./src/**/stories.js",
         "./src/tests.js",
-        "./src/i18n-scanner.js"
+        "./src/i18n-scanner.js",
+        "./e2e/**/*.js"
         ]
       }
     ],

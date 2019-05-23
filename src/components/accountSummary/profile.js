@@ -49,9 +49,10 @@ const Profile = ({
 
   // console.log('>> Profile', token, account.address);
 
-  return (<View>
+  return (<View testID='accountSummary'>
       <AView style={[styles.avatar,
-        { marginTop: interpolate([0, 100], [0, 100]) }]}>
+        { marginTop: interpolate([0, 100], [0, 100]) }]}
+      >
         {
           token === 'LSK' ?
           <Avatar address={account.address} size={60} /> :
