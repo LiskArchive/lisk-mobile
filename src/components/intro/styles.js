@@ -1,12 +1,12 @@
-import { StyleSheet, Platform, DeviceInfo } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { colors, boxes } from '../../constants/styleGuide';
-import { deviceHeight } from '../../utilities/device';
+import { deviceHeight, deviceType } from '../../utilities/device';
 
 const styles = {
   wrapper: {
     backgroundColor: colors.light.white,
     height: '100%',
-    paddingTop: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 25 : 0,
+    paddingTop: (Platform.OS === 'ios' && deviceType() === 'iOSx') ? 25 : 0,
   },
   splashContainer: {
     backgroundColor: colors.light.white,
@@ -91,7 +91,7 @@ const styles = {
     width: '100%',
     height: '100%',
     position: 'relative',
-    bottom: 100,
+    bottom: 140,
   },
   illustration: {
     flex: 1,
@@ -107,6 +107,16 @@ const styles = {
     top: 140,
     position: 'absolute',
     height: 13,
+  },
+  buttonContainer: {
+    width: '100%',
+    alignItems: 'stretch',
+    position: 'absolute',
+    bottom: deviceType() === 'iOSx' ? 200 : 180,
+  },
+  button: {
+    marginHorizontal: 20,
+    marginRight: 20,
   },
 };
 
