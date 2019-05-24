@@ -51,16 +51,17 @@ export default () => ({
     },
     avatarContainer: {
       paddingRight: 15,
+      justifyContent: 'center',
     },
     avatar: {
       borderWidth: 1,
     },
     transactionIcon: {
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
       borderRadius: 25,
-      overflow: 'hidden',
-      padding: 17,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     loadingState: {
       width: '100%',
