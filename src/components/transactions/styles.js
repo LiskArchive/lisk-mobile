@@ -86,8 +86,8 @@ export default () => ({
       alignItems: 'center',
     },
     empty: {
-      width: 222,
-      height: 109,
+      width: 260,
+      height: 129,
     },
     loading: {
       width: 237,
