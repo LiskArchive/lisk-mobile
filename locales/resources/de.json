@@ -47,6 +47,7 @@
   "Here’s what you will get:": "Das wirst du erhalten:",
   "I understand that it’s my responsibility to keep my passphrase safe.": "Ich verstehe, dass es in meiner Verantwortung liegt, die Passphrase sicher aufzubewahren.",
   "I wrote it down": "Ich habe sie aufgeschrieben",
+  "Initialize it now": "",
   "Initialize now": "Jetzt initialisieren",
   "Initialize your account": "Dein Konto initialisieren",
   "Initialize your account immediately after you received tokens for the first time.": "Initialisiere dein Konto sofort nachdem du deine ersten Tokens erhalten hast.",
@@ -88,6 +89,7 @@
   "Scan": "scannen",
   "Scan a QR code or grant access to the camera roll.": "Scanne einen QR code oder erlaube Zugriff auf deine Fotos.",
   "Scan a QR code or upload from your camera roll.": "Scanne einen QR code oder lade ein Foto hoch.",
+  "Scan your fingerprint on the\ndevice scanner to continue": "Scan your fingerprint on the\ndevice scanner to continue",
   "Search": "Suchen",
   "Search for a bookmark": "Lesezeichen suchen",
   "Second Passphrase": "Zweite Passphrase",
@@ -125,6 +127,7 @@
   "You can add this address to your bookmarks in bookmarks page or through send process.": "Du kannst diese Adresse deinen Lesezeichen auf der Lesezeichen-Seite oder im Sendevorgang hinzufügen.",
   "You can always deactivate it": "Du kannst es immer deaktivieren",
   "You do not have any recent activity.": "Du hast keine kürzlichen Aktivitäten.",
+  "You don’t have any bookmarks. Start adding them by tapping the + button on the top left.": "",
   "You have": "Du hast",
   "Your Lisk address": "Deine Lisk-Adresse",
   "Your Bitcoin address": "Deine Bitcoin-Adresse",
@@ -176,7 +179,7 @@
   "Manage tokens": "Tokens verwalten",
   "Here you can manage your tokens, in order to use them in the app.": "Hier kannst du deine Tokens verwalten, um sie in der App zu nutzen",
   "Primary": "Primär",
-  "You don’t have any bookmarks.": "Du hast noch keine Lesezeichen.",
+  "You have no bookmarks yet.": "",
   "Error": "Fehler",
   "Unparsed Address": "Unbekannte Adresse",
   "Are you sure you want to sign out?": "Are you sure you want to sign out?",
@@ -188,5 +191,8 @@
   "Got it!": "Verstanden!",
   "Lisk Mobile now supports Bitcoin (BTC).": "Lisk Mobile unterstützt jetzt Bitcoin (BTC).",
   "View more on Blockchain.info": "Mehr dazu auf Blockchain.info",
-  "We’ve got good news!": "Gute Neuigkeiten für dich!"
+  "We’ve got good news!": "Gute Neuigkeiten für dich!",
+  "Choose an authenticated method": "Choose an authenticated method",
+  "Info": "Info",
+  "Your tokens": "Your tokens"
 }
