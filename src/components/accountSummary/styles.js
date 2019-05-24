@@ -12,30 +12,24 @@ export default () => ({
     walletContainer: {
       overflow: 'hidden',
     },
-    avatar: {
-      top: 0,
-      left: '50%',
-      marginLeft: -30,
-      position: 'absolute',
-      zIndex: 4,
+    avatarContainer: {
       elevation: 4,
-      overflow: 'hidden',
+      alignItems: 'center',
+      paddingBottom: 12,
     },
     tokenLogoWrapper: {
       padding: 10,
       borderRadius: 30,
-      width: 60,
-      height: 60,
-      textAlign: 'center',
+      width: 50,
+      height: 50,
+      alignItems: 'center',
+      backgroundColor: colors.light.whiteSmoke,
     },
     tokenLogo: {
       textAlign: 'center',
     },
     address: {
       width: '100%',
-      paddingTop: 10,
-      paddingBottom: 3,
-      marginTop: 60,
       textAlign: 'center',
       zIndex: 2,
     },
@@ -51,15 +45,6 @@ export default () => ({
       alignItems: 'center',
       zIndex: 2,
       elevation: 2,
-    },
-    bg: {
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      zIndex: 0,
-      height: 200,
-      width: '100%',
-      overflow: 'hidden',
     },
     blurWrapper: {
       flex: 1,
@@ -145,7 +130,7 @@ export default () => ({
       position: 'absolute',
       width: '100%',
       left: 0,
-      bottom: 10,
+      bottom: 17,
     },
     pagination: {
       backgroundColor: 'transparent',
@@ -158,7 +143,7 @@ export default () => ({
       borderWidth: 2,
       borderColor: colors.light.white,
       backgroundColor: colors.light.white,
-      marginHorizontal: 0,
+      marginHorizontal: -4,
     },
     inactiveDot: {
       borderColor: colors.light.white,
@@ -167,15 +152,12 @@ export default () => ({
   },
   [themes.light]: {
     homeContainer: {
-      backgroundColor: colors.light.brandingBlue,
+      backgroundColor: colors.light.ultramarineBlue,
     },
     walletContainer: {
       backgroundColor: colors.light.navigationBg,
       borderBottomColor: colors.light.sendBalanceBg,
       borderBottomWidth: 1,
-    },
-    bg: {
-      opacity: 1,
     },
     homeBalance: {
       color: colors.light.white,
@@ -190,24 +172,18 @@ export default () => ({
       color: colors.light.gray1,
     },
     fiatValue: {
-      color: colors.light.gray5,
+      color: colors.light.whiteSmoke,
     },
     sendButtonTitle: {
       color: colors.light.gray1,
     },
-    tokenLogoWrapper: {
-      backgroundColor: colors.light.white,
-    },
   },
   [themes.dark]: {
     homeContainer: {
-      backgroundColor: colors.dark.navigationBg,
+      backgroundColor: colors.dark.brandingBlueHeader,
     },
     walletContainer: {
       backgroundColor: colors.dark.navigationBg,
-    },
-    bg: {
-      opacity: 0.6,
     },
     homeAddress: {
       color: colors.dark.gray2,
@@ -222,13 +198,10 @@ export default () => ({
       color: colors.dark.white,
     },
     fiatValue: {
-      color: colors.dark.gray2,
+      color: colors.light.whiteSmoke,
     },
     sendButtonTitle: {
       color: colors.dark.gray1,
-    },
-    tokenLogoWrapper: {
-      backgroundColor: colors.dark.sendBalanceBg,
     },
   },
 });
