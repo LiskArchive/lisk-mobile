@@ -31,7 +31,7 @@ class LiskMessageExtension extends Component {
     state: 'requested',
   };
 
-  componentDidMount = () => {
+  setAccount = () => {
     getPassphraseFromKeyChain().then((account) => {
       if (account) {
         this.userData = {
@@ -50,22 +50,30 @@ class LiskMessageExtension extends Component {
         MessagesManager.hideLaunchScreen();
       }
     });
+  }
 
+  getMessageExcerpt = () => {
     MessagesManager.getActiveConversation((conversation, message) =>
       this.setState({
         conversation,
         message,
         parsedData: message.url ? this.parseUrl(message.url) : {},
       }));
+  }
 
+  setPresentationStyle = () => {
     MessagesManager.getPresentationStyle(presentationStyle =>
       this.setState({ presentationStyle }));
+  }
 
+  bindPresentationStyleChanged = () => {
     MessagesEvents.addListener(
       'onPresentationStyleChanged',
       ({ presentationStyle }) => this.setState({ presentationStyle }),
     );
+  }
 
+  bindMessageSelected = () => {
     MessagesEvents.addListener(
       'didSelectMessage',
       ({ conversation, message }) => this.setState({
@@ -74,7 +82,9 @@ class LiskMessageExtension extends Component {
         parsedData: this.parseUrl(message.url),
       }),
     );
+  }
 
+  bindStartedSendingMessage = () => {
     MessagesEvents.addListener(
       'didStartSendingMessage',
       ({ conversation }) => this.setState({
@@ -90,9 +100,18 @@ class LiskMessageExtension extends Component {
     );
   };
 
-  keyBoardFocused = () => {
+  bindKeyBoardFocused = () => {
     MessagesManager.updatePresentationStyle('expanded');
   }
+
+  componentDidMount = () => {
+    this.setAccount();
+    this.getMessageExcerpt();
+    this.setPresentationStyle();
+    this.bindPresentationStyleChanged();
+    this.bindMessageSelected();
+    this.bindStartedSendingMessage();
+  };
 
   composeMessage = ({
     address, amount, state = 'requested', id, recipientAddress,
@@ -176,7 +195,7 @@ class LiskMessageExtension extends Component {
           MessagesEvents={MessagesEvents}
           avatarPreview={avatarPreview}
           presentationStyle={presentationStyle}
-          keyBoardFocused={this.keyBoardFocused}
+          keyBoardFocused={this.bindKeyBoardFocused}
           inputAddress={address}
           composeMessage={this.composeMessage}
         />
@@ -185,7 +204,7 @@ class LiskMessageExtension extends Component {
 
     return (
       <ThemeContext.Provider value="light">
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#F5F7FA' }}>
           {process.env.NODE_ENV === 'development' && <DevSettings />}
           {content}
         </ScrollView>
