@@ -88,6 +88,7 @@ export default StyleSheet.create({
     color: colors.light.slateGray,
     fontFamily: fonts.family.contextSemiBold,
     marginTop: 15,
+    maxWidth: '80%',
   },
   rejectButton: {
     marginHorizontal: 8,
@@ -107,7 +108,6 @@ export default StyleSheet.create({
     marginRight: 0,
     fontSize: fonts.size.base,
     fontFamily: fonts.family.context,
-    paddingTop: 10,
   },
   confirmContainer: {
     flex: 1,
