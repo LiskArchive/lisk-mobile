@@ -150,7 +150,7 @@ class Wallet extends React.Component {
       if (transactions.data.length > 0) {
         this.setState({
           transactions: {
-            confirmed: [...confirmed, ...transactions.data.length],
+            confirmed: [...confirmed, ...transactions.data],
             pending: [],
             count: transactions.meta.count,
             loaded: true,
