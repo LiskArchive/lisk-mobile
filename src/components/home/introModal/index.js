@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import { Small } from '../../toolBox/typography';
-import { SecondaryButton } from '../../toolBox/button';
+import { PrimaryButton } from '../../toolBox/button';
 import Icon from '../../toolBox/icon';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
@@ -24,7 +24,7 @@ const IntroModal = ({
     <Small style={[styles.text, styles.theme.text]}>
       {t('Lisk Mobile now supports Bitcoin (BTC).')}
     </Small>
-    <SecondaryButton
+    <PrimaryButton
       style={styles.actionButton}
       onClick={close}
       title={t('Got it!')}

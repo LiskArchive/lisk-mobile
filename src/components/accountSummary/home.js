@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Animated, Dimensions } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import {
@@ -7,7 +7,6 @@ import {
 } from '../../actions/settings';
 import Profile from './profile';
 import { deviceWidth } from '../../utilities/device';
-import bg from '../../assets/images/bg.png';
 import easing from '../../utilities/easing';
 import { tokenKeys } from '../../constants/tokens';
 import withTheme from '../withTheme';
@@ -36,7 +35,7 @@ class AccountSummary extends React.Component {
       activeSlide: tokenKeys.filter(key => token.list[key]).indexOf(token.active),
     };
   }
-  height = 165;
+  height = 140;
 
   componentDidMount() {
     this.screenWidth = Dimensions.get('window').width;
@@ -142,8 +141,6 @@ class AccountSummary extends React.Component {
         this.props.style,
         { top, opacity, paddingBottom: this.interpolate([0, 100], [15, 0]) },
       ]}>
-        <Image style={[styles.bg, styles.theme.bg]} source={bg} />
-
         <Animated.View style={[styles.container, { height: this.height },
           { marginTop: this.interpolate([0, this.height + 10], [0, -1 * (this.height - 1)]) }]}>
           {

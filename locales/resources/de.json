@@ -126,7 +126,6 @@
   "You are about to send LSK tokens to the following address.": "Du bist dabei {{tokenType}} Tokens an die folgende Adresse zu senden.",
   "You can add this address to your bookmarks in bookmarks page or through send process.": "Du kannst diese Adresse deinen Lesezeichen auf der Lesezeichen-Seite oder im Sendevorgang hinzufügen.",
   "You can always deactivate it": "Du kannst es immer deaktivieren",
-  "You do not have any recent activity.": "Du hast keine kürzlichen Aktivitäten.",
   "You don’t have any bookmarks. Start adding them by tapping the + button on the top left.": "",
   "You have": "Du hast",
   "Your Lisk address": "Deine Lisk-Adresse",
@@ -192,6 +191,7 @@
   "Lisk Mobile now supports Bitcoin (BTC).": "Lisk Mobile unterstützt jetzt Bitcoin (BTC).",
   "View more on Blockchain.info": "Mehr dazu auf Blockchain.info",
   "We’ve got good news!": "Gute Neuigkeiten für dich!",
+  "You have no transactions yet.": "",
   "Choose an authenticated method": "Choose an authenticated method",
   "Info": "Info",
   "Your tokens": "Your tokens"

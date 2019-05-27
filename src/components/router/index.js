@@ -20,7 +20,6 @@ import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
 import AddBookmark from '../addBookmark';
 import HeaderBackground from './headerBackground';
-import HeaderBackgroundImage from './headerBackgroundImage';
 import HeaderTitle from './headerTitle';
 import HomeHeaderTitle from './homeHeaderTitle';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
@@ -57,7 +56,9 @@ const Tabs = TabNavigator({
       headerTitle: HomeHeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
-      headerBackground: <HeaderBackgroundImage />,
+      headerBackground: <HeaderBackground bgColor={{
+        light: colors.light.ultramarineBlue, dark: colors.light.brandingBlueHeader,
+      }} />,
       tabBarIcon: props => <TabBarIcon name='home' {...props} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, scene }) => {
         if (scene.focused && scene.route.params && scene.route.params.scrollToTop) {

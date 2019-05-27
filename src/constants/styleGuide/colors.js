@@ -2,6 +2,7 @@ const common = {
   black: '#000',
   white: '#fff',
   brandingBlue: '#013165',
+  brandingBlueHeader: '#1C316A',
   actionBlue: '#17499B',
   actionBlueAccent: '#3C7FB4',
   actionRed: '#C80039',

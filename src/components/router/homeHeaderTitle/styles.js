@@ -17,7 +17,7 @@ export default () => ({
       alignItems: 'center',
     },
     main: {
-      fontSize: 16,
+      fontSize: 18,
       textAlign: 'center',
       fontFamily: fonts.family.heading,
       lineHeight: 30,

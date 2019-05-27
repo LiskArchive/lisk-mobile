@@ -126,7 +126,6 @@
   "You are about to send LSK tokens to the following address.": "You are about to send {{tokenType}} tokens to the following address.",
   "You can add this address to your bookmarks in bookmarks page or through send process.": "You can add this address to your bookmarks in bookmarks page or through send process.",
   "You can always deactivate it": "You can always deactivate it",
-  "You do not have any recent activity.": "You do not have any recent activity.",
   "You don’t have any bookmarks. Start adding them by tapping the + button on the top left.": "You don’t have any bookmarks. Start adding them by tapping the + button on the top left.",
   "You have": "You have",
   "Your Lisk address": "Your Lisk address",
@@ -194,5 +193,6 @@
   "We’ve got good news!": "We’ve got good news!",
   "Choose an authenticated method": "Choose an authenticated method",
   "Info": "Info",
-  "Your tokens": "Your tokens"
+  "Your tokens": "Your tokens",
+  "You have no transactions yet.": "You have no transactions yet."
 }

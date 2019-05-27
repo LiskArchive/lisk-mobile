@@ -6,7 +6,6 @@ export default () => ({
     container: {
       paddingRight: 20,
       paddingLeft: 20,
-      paddingTop: 35,
     },
     itemContainer: {
       width: '100%',
@@ -51,16 +50,17 @@ export default () => ({
     },
     avatarContainer: {
       paddingRight: 15,
+      justifyContent: 'center',
     },
     avatar: {
       borderWidth: 1,
     },
     transactionIcon: {
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
       borderRadius: 25,
-      overflow: 'hidden',
-      padding: 17,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     loadingState: {
       width: '100%',
@@ -85,8 +85,8 @@ export default () => ({
       alignItems: 'center',
     },
     empty: {
-      width: 222,
-      height: 109,
+      width: 260,
+      height: 129,
     },
     loading: {
       width: 237,

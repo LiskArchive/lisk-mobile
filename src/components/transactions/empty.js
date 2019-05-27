@@ -1,8 +1,8 @@
 import React from 'react';
 import { Platform, View, Image, ActivityIndicator } from 'react-native';
 import { translate } from 'react-i18next';
-import noActivityLight from '../../assets/images/noActivity/noActivity3xLight.png';
-import noActivityDark from '../../assets/images/noActivity/noActivity3xDark.png';
+import emptyHomeLight from '../../assets/images/home/emptyHomeLight3x.png';
+import emptyHomeDark from '../../assets/images/home/emptyHomeDark3x.png';
 import { P } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -22,13 +22,12 @@ const EmptyState = ({
     </View>
 
     <View style={styles.noActivity}>
-      {theme === themes.light ?
-        <Image style={styles.empty} source={noActivityLight} /> :
-        <Image style={styles.empty} source={noActivityDark} />
-      }
-
+      <Image
+        style={styles.empty}
+        source={theme === themes.light ? emptyHomeLight : emptyHomeDark}
+      />
       <P style={[styles.noTxTitle, styles.theme.noTxTitle]}>
-        {message || t('You do not have any recent activity.')}
+        {message || t('You have no transactions yet.')}
       </P>
     </View>
   </View>
