@@ -13,7 +13,7 @@ export default () => ({
     },
     illustration: {
       width: '100%',
-      height: height <= 640 ? 200 : 300,
+      height: height <= 640 ? 250 : 350,
       paddingBottom: 50,
     },
     button: {
