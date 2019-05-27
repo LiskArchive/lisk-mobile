@@ -8,16 +8,13 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import Icon from '../toolBox/icon';
 import { tokenMap } from '../../constants/tokens';
-import darkBig from '../../assets/images/balanceBlur/darkBig.png';
-import darkMedium from '../../assets/images/balanceBlur/darkMedium.png';
-import darkSmall from '../../assets/images/balanceBlur/darkSmall.png';
-import lightBig from '../../assets/images/balanceBlur/lightBig.png';
-import lightMedium from '../../assets/images/balanceBlur/lightMedium.png';
-import lightSmall from '../../assets/images/balanceBlur/lightSmall.png';
+import blurBig from '../../assets/images/balanceBlur/darkBig.png';
+import blurMedium from '../../assets/images/balanceBlur/darkMedium.png';
+import blurSmall from '../../assets/images/balanceBlur/darkSmall.png';
 import { colors, themes } from '../../constants/styleGuide';
 
 const blurs = {
-  darkBig, darkMedium, darkSmall, lightBig, lightMedium, lightSmall,
+  blurBig, blurMedium, blurSmall,
 };
 
 const Profile = ({
@@ -76,7 +73,7 @@ const Profile = ({
           tokenType={token}
           style={[styles.theme.homeBalance, settings.incognito ? styles.invisibleTitle : null]}
           type={H3}>{normalizedBalance}</FormattedNumber>
-        <Image source={blurs[`${settings.theme}${balanceSize}`]}
+        <Image source={blurs[`blur${balanceSize}`]}
           style={[styles.blur, styles[`blur${balanceSize}`],
           settings.incognito ? styles.visibleBlur : null]} />
       </AView>
