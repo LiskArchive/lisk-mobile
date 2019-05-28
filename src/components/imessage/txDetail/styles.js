@@ -115,7 +115,7 @@ export default () => ({
       color: colors.light.gray1,
     },
     incoming: {
-      color: colors.light.green,
+      color: colors.light.ufoGreen,
     },
     outgoing: {
       color: colors.light.black,
@@ -124,7 +124,7 @@ export default () => ({
       borderBottomColor: colors.light.gray5,
     },
     link: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
 });

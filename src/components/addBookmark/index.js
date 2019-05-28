@@ -253,7 +253,7 @@ class AddToBookmark extends React.Component {
                   title={t('Scan')}
                   icon='scanner'
                   iconSize={18}
-                  color={colors.light.blue}
+                  color={colors.light.ultramarineBlue}
                 />
                 { shouldDisplayAvatar ? avatar : null }
                 <Input

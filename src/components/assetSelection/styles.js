@@ -30,7 +30,7 @@ export default () => ({
     LSKContainer: {
       width: 50,
       height: 50,
-      backgroundColor: colors.light.blue,
+      backgroundColor: colors.light.ultramarineBlue,
       borderRadius: 50,
       marginRight: 12,
       justifyContent: 'center',
@@ -85,7 +85,7 @@ export default () => ({
       color: colors.dark.white,
     },
     balance: {
-      color: colors.dark.gray1,
+      color: colors.dark.ghost,
     },
   },
 });

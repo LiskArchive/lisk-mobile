@@ -28,7 +28,7 @@ export default () => ({
       borderColor: colors.light.ultramarineBlue,
     },
     inputErrorStyle: {
-      borderColor: colors.light.red,
+      borderColor: colors.light.burntSieanna,
     },
     errorMessageContainer: {
       marginTop: 10,
@@ -37,7 +37,7 @@ export default () => ({
       alignItems: 'flex-start',
     },
     errorIcon: {
-      color: colors.light.red,
+      color: colors.light.burntSieanna,
     },
     errorMessage: {
       color: colors.light.gray1,
@@ -63,10 +63,10 @@ export default () => ({
       borderColor: colors.dark.inputBorder,
     },
     inputErrorStyle: {
-      borderColor: colors.dark.red,
+      borderColor: colors.dark.burntSieanna,
     },
     errorIcon: {
-      color: colors.dark.red,
+      color: colors.dark.burntSieanna,
     },
     errorMessage: {
       color: colors.dark.gray4,

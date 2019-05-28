@@ -57,7 +57,7 @@ export default ({ logoSize }) => ({
       color: colors.dark.gray3,
     },
     link: {
-      color: colors.dark.blue,
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

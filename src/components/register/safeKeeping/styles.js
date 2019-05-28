@@ -59,7 +59,7 @@ const styles = {
     marginTop: 5,
   },
   copy: {
-    color: colors.light.blue,
+    color: colors.light.ultramarineBlue,
   },
   imageContainer: {
     alignItems: 'center',

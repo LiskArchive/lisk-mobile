@@ -158,7 +158,7 @@ export default () => ({
       color: colors.light.black,
     },
     incoming: {
-      color: colors.light.green,
+      color: colors.light.ufoGreen,
       backgroundColor: colors.light.incomingBg,
     },
     outgoingSymbol: {
@@ -177,7 +177,7 @@ export default () => ({
       color: colors.light.black,
     },
     link: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
   [themes.dark]: {
@@ -203,7 +203,7 @@ export default () => ({
       color: colors.dark.white,
     },
     incoming: {
-      color: colors.dark.green,
+      color: colors.dark.ufoGreen,
       backgroundColor: colors.dark.incomingBg,
     },
     outgoingSymbol: {
@@ -222,7 +222,7 @@ export default () => ({
       color: colors.dark.white,
     },
     link: {
-      color: colors.dark.blue,
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

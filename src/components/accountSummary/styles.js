@@ -163,7 +163,7 @@ export default () => ({
       color: colors.light.white,
     },
     walletBalance: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
     homeAddress: {
       color: colors.light.gray5,
@@ -201,7 +201,7 @@ export default () => ({
       color: colors.light.whiteSmoke,
     },
     sendButtonTitle: {
-      color: colors.dark.gray1,
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

@@ -43,7 +43,7 @@ const styles = {
   },
   placeholder: {
     borderWidth: 1,
-    borderColor: colors.light.blue,
+    borderColor: colors.light.ultramarineBlue,
     backgroundColor: colors.light.white,
     height: 28,
     lineHeight: 26,
@@ -74,12 +74,12 @@ const styles = {
     color: colors.light.gray2,
   },
   successButton: {
-    borderColor: colors.light.green,
-    backgroundColor: colors.light.green,
+    borderColor: colors.light.ufoGreen,
+    backgroundColor: colors.light.ufoGreen,
   },
   errorButton: {
-    borderColor: colors.light.red,
-    backgroundColor: colors.light.red,
+    borderColor: colors.light.burntSieanna,
+    backgroundColor: colors.light.burntSieanna,
   },
   selectedPlaceholder: {
     borderColor: colors.light.gray4,

@@ -45,7 +45,7 @@ export default () => ({
       justifyContent: 'center',
     },
     galleryEnabled: {
-      backgroundColor: colors.light.blue,
+      backgroundColor: colors.light.ultramarineBlue,
     },
     galleryDisabled: {
       backgroundColor: colors.light.gray2,

@@ -49,7 +49,7 @@ class Intro extends React.Component {
           <View>
             <B style={styles.subHeader}>{t('Here’s what you will get:')}</B>
             <View style={[styles.row, styles.separator]}>
-              <Icon name='passphrase' style={styles.icon} color={colors.light.blue} size={36}/>
+              <Icon name='passphrase' style={styles.icon} color={colors.light.ultramarineBlue} size={36}/>
               <View style={styles.textWrapper}>
                 <B style={styles.rowTitle}>{t('A secure passphrase')}</B>
                 <Small style={styles.description}>
@@ -67,7 +67,7 @@ class Intro extends React.Component {
               </View>
             </View>
             <View style={[styles.row, styles.separator]}>
-              <Icon name='avatar' style={styles.icon} color={colors.light.yellow} size={36}/>
+              <Icon name='avatar' style={styles.icon} color={colors.light.ultramarineBlue} size={36}/>
               <View style={styles.textWrapper}>
                 <B style={styles.rowTitle}>{t('A unique avatar')}</B>
                 <Small style={styles.description}>
@@ -83,7 +83,7 @@ class Intro extends React.Component {
                 height={26}
                 width={43}
                 onSyncPress={this.confirm}
-                backgroundActive={colors.light.blue}
+                backgroundActive={colors.light.ultramarineBlue}
                 backgroundInactive={colors.light.gray4}
               />
               <Small style={styles.label}>

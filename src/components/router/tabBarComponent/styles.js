@@ -17,7 +17,7 @@ export default () => ({
       color: colors.dark.gray2,
     },
     tint: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
     indicatorStyle: {
       backgroundColor: colors.light.white,
@@ -32,7 +32,7 @@ export default () => ({
       color: colors.dark.gray2,
     },
     tint: {
-      color: colors.dark.blue,
+      color: colors.dark.ultramarineBlue,
     },
     indicatorStyle: {
       backgroundColor: colors.dark.navigationBg,

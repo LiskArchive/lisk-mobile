@@ -79,7 +79,7 @@ export default StyleSheet.create({
   },
   errorIcon: {
     marginRight: 6,
-    color: colors.light.red,
+    color: colors.light.burntSieanna,
   },
   visible: {
     opacity: 1,

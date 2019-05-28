@@ -24,7 +24,7 @@ export default () => ({
 
   [themes.dark]: {
     title: {
-      color: colors.dark.blue,
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

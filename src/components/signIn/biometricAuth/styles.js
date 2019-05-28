@@ -41,7 +41,7 @@ const styles = {
     width: '100%',
   },
   error: {
-    color: colors.light.red,
+    color: colors.light.burntSieanna,
   },
   invisible: {
     color: 'transparent',

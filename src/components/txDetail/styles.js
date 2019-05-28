@@ -133,7 +133,7 @@ export default () => ({
       color: colors.light.gray1,
     },
     incoming: {
-      color: colors.light.green,
+      color: colors.light.ufoGreen,
     },
     outgoing: {
       color: colors.light.black,
@@ -148,7 +148,7 @@ export default () => ({
       backgroundColor: colors.light.incomingBg,
     },
     explorerLink: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
 
@@ -171,7 +171,7 @@ export default () => ({
       color: colors.dark.gray4,
     },
     incoming: {
-      color: colors.dark.green,
+      color: colors.dark.ufoGreen,
     },
     outgoing: {
       color: colors.dark.white,
@@ -186,7 +186,7 @@ export default () => ({
       backgroundColor: colors.dark.incomingBg,
     },
     explorerLink: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
 });

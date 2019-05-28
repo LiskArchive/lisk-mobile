@@ -106,7 +106,7 @@ export default () => ({
       color: colors.light.gray2,
     },
     link: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
 
@@ -133,7 +133,7 @@ export default () => ({
       color: colors.dark.gray4,
     },
     link: {
-      color: colors.dark.blue,
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

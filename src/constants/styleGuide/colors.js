@@ -28,10 +28,6 @@ const light = {
    * keeping existing colors for the back-compatiblity and
    * not to break existing dynamic accesses like `colors[theme].blue`
    */
-  blue: '#2475b9',
-  green: '#2DB390',
-  yellow: '#FFB533',
-  red: '#C80039',
   gray1: '#3c5068',
   gray2: '#74869b',
   gray3: '#8399aa',
@@ -48,10 +44,6 @@ const light = {
 
 const dark = {
   ...common,
-  blue: '#49ACFF',
-  green: '#49C4A4',
-  yellow: '#FFBA40',
-  red: '#ED1313',
   gray1: '#74869B',
   gray2: '#9EA8B4',
   gray3: '#D9E7F1',

@@ -30,8 +30,8 @@ export default () => ({
       color: colors.light.gray2,
     },
     actionButton: {
-      borderColor: colors.light.red,
-      backgroundColor: colors.light.red,
+      borderColor: colors.light.burntSieanna,
+      backgroundColor: colors.light.burntSieanna,
       color: colors.light.white,
     },
     cancelButton: {
@@ -44,8 +44,8 @@ export default () => ({
       color: colors.dark.gray2,
     },
     actionButton: {
-      borderColor: colors.dark.red,
-      backgroundColor: colors.dark.red,
+      borderColor: colors.dark.burntSieanna,
+      backgroundColor: colors.dark.burntSieanna,
       color: colors.dark.white,
     },
     cancelButton: {

@@ -46,7 +46,7 @@ export default () => ({
       color: colors.dark.white,
     },
     copy: {
-      color: colors.dark.blue,
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

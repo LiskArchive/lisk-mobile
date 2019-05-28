@@ -27,7 +27,7 @@ export default () => ({
     LSKContainer: {
       width: 50,
       height: 50,
-      backgroundColor: colors.light.blue,
+      backgroundColor: colors.light.ultramarineBlue,
       borderRadius: 50,
       marginRight: 12,
       justifyContent: 'center',
