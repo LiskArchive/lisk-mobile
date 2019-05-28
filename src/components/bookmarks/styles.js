@@ -11,12 +11,11 @@ export default () => ({
     container: {
       paddingRight: 20,
       paddingLeft: 20,
-      paddingTop: isSmallScreen ? 10 : 20,
     },
     itemContainer: {
       flex: 1,
       width: '100%',
-      height: 90,
+      height: 80,
       paddingTop: 20,
       paddingBottom: 20,
       borderBottomWidth: 1,
@@ -45,7 +44,7 @@ export default () => ({
       borderTopWidth: 0,
     },
     address: {
-      paddingTop: 4,
+      marginTop: -2,
       paddingBottom: 4,
     },
     avatarContainer: {
@@ -55,7 +54,7 @@ export default () => ({
       borderWidth: 1,
     },
     emptyState: {
-      marginTop: 20,
+      marginTop: 0,
       width: '100%',
       display: 'flex',
       flex: 1,
@@ -66,6 +65,7 @@ export default () => ({
       width: '100%',
       alignItems: 'center',
       marginBottom: 10,
+      marginTop: 40,
     },
     noBookmarkImage: {
       width: 264,
@@ -99,23 +99,23 @@ export default () => ({
       flex: 1,
       justifyContent: 'center',
       flexDirection: 'column',
-      width: 110,
+      width: 90,
     },
     editButton: {
       position: 'absolute',
       top: 0,
-      left: Screen.width - 240,
+      left: Screen.width - 200,
       width: Screen.width,
-      height: 90,
       backgroundColor: colors.light.mystic,
+      height: 80,
       justifyContent: 'center',
     },
     deleteButton: {
       position: 'absolute',
       top: 0,
-      left: Screen.width - 130,
+      left: Screen.width - 110,
       width: Screen.width,
-      height: 90,
+      height: 80,
       justifyContent: 'center',
     },
     longTitle: {
