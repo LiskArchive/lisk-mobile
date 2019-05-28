@@ -1,10 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
 import withTheme from '../../withTheme';
-import getStyles from './styles';
+import { colors } from '../../../constants/styleGuide';
 
-const HeaderBackground = ({ styles }) => (
-  <View style={[styles.main, styles.theme.main]}></View>
+const HeaderBackground = ({ theme, bgColor }) => (
+  <View style={{
+    flex: 1, backgroundColor: bgColor ? bgColor[theme] : colors[theme].navigationBg,
+  }}>
+  </View>
 );
 
-export default withTheme(HeaderBackground, getStyles());
+export default withTheme(HeaderBackground, {});

@@ -17,13 +17,13 @@ const Symbol = ({
       <View style={[styles.transactionIcon, styles.theme[`${direction}Symbol`]]}>
         <Icon
           name={direction}
-          size={16}
+          size={14}
           color={direction === 'outgoing' ? colors[theme].gray1 : colors[theme].green} />
       </View>
     );
   }
   if (type === 0 && sender !== recipient) {
-    return (<Avatar address={address} size={50} style={styles.theme.avatar} />);
+    return (<Avatar address={address} size={40} style={styles.theme.avatar} />);
   }
   return (
     <Image

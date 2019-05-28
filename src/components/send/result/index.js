@@ -11,7 +11,7 @@ import txConfirmedAnim from '../../../assets/animations/tx-confirmed.json';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 
-const createdAnimDuration = 4340;
+const createdAnimDuration = 6200;
 
 @connect(state => ({
   account: state.accounts.info,
@@ -96,19 +96,16 @@ class Result extends React.Component {
           {this.state.step === 0 ? <LottieView
             source={txCreatedAnim}
             loop={false}
-            style={{}}
             ref={(el) => { this.animation[0] = el; }} />
             : null}
           {this.state.step === 1 ? <LottieView
             source={txPendingAnim}
             loop={true}
-            style={{}}
             ref={(el) => { this.animation[1] = el; }} />
             : null}
           {this.state.step === 2 ? <LottieView
             source={txConfirmedAnim}
             loop={false}
-            style={{}}
             ref={(el) => { this.animation[2] = el; }} />
             : null}
         </View>
