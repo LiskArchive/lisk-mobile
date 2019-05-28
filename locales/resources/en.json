@@ -200,5 +200,12 @@
   "Easy access": "Easy access",
   "Create an account with one passphrase to access your LSK and BTC cryptocurrencies": "Create an account with one passphrase to access your LSK and BTC cryptocurrencies",
   "You have no transactions yet.": "You have no transactions yet.",
-  "Store your passphrase carefully": "Store your passphrase carefully"
+  "Store your passphrase carefully": "Store your passphrase carefully",
+  "Add a new bookmark": "Add a new bookmark",
+  "Message": "Message",
+  "Processing fee": "Processing fee",
+  "Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.": "Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.",
+  "Transaction fee": "Transaction fee",
+  "You don’t have any bookmarks.": "You don’t have any bookmarks.",
+  "Your Balance": "Your Balance"
 }
