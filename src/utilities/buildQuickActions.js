@@ -1,4 +1,6 @@
-export default [
+import { settingsUpdated } from '../actions/settings';
+
+export default async () => [
   {
     type: 'Request',
     title: 'Request tokens',
@@ -13,6 +15,15 @@ export default [
     icon: 'quick_action_send',
     userInfo: {
       url: 'lisk://wallet',
+    },
+  },
+  {
+    type: 'Discreet',
+    title: 'Open discreetly',
+    icon: 'quick_action_send',
+    userInfo: {
+      action: settingsUpdated({ incognito: true }),
+      requireSignIn: false,
     },
   },
 ];
