@@ -1,6 +1,7 @@
 
 import { Platform } from 'react-native';
-import { themes, colors, boxes } from '../../constants/styleGuide';
+import { themes, colors, boxes, fonts } from '../../constants/styleGuide';
+import { setColorOpacity } from '../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -24,8 +25,11 @@ export default () => ({
       height: 40,
       marginTop: (Platform.OS === 'ios') ? 6 : 12,
     },
-    subtitle: {
+    addButtonText: {
       maxWidth: '100%',
+      fontFamily: fonts.family.heading,
+      fontWeight: 'bold',
+      fontSize: fonts.size.base,
     },
     form: {
       paddingBottom: 10,
@@ -34,42 +38,70 @@ export default () => ({
       marginTop: 0,
       flexWrap: 'wrap',
       flex: 1,
+      paddingLeft: 35,
       ...Platform.select({
         android: {
           height: 48,
-          paddingLeft: 25,
         },
         ios: {
           height: 48,
           paddingBottom: 10,
-          paddingLeft: 25,
         },
       }),
     },
     searchIcon: {
       position: 'absolute',
       zIndex: 0,
-      left: 20,
-      bottom: 18,
+      left: 30,
+      bottom: 16,
     },
     addressContainer: {
       width: '100%',
+    },
+    addButton: {
+      width: '100%',
+      borderBottomWidth: 1,
+      paddingBottom: 20,
+      height: 55,
+    },
+    addButtonIcon: {
+      marginLeft: -10,
+      transform: [{ rotate: '45deg' }],
+      width: 43,
+      height: 43,
+      marginRight: 15,
+      borderRadius: 21,
+      overflow: 'hidden',
+      paddingTop: 11,
+      textAlign: 'center',
     },
   },
   [themes.light]: {
     wrapper: {
       backgroundColor: colors.light.white,
     },
-    subtitle: {
-      color: colors.light.slateGray,
+    addButtonText: {
+      color: colors.light.ultramarineBlue,
+    },
+    addButton: {
+      borderBottomColor: colors.light.mystic,
+    },
+    addButtonIcon: {
+      backgroundColor: colors.light.ultramarineBlue,
     },
   },
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.maastrichtBlue,
     },
-    subtitle: {
-      color: colors.dark.ghost,
+    addButtonText: {
+      color: colors.dark.ultramarineBlue,
+    },
+    addButton: {
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15),
+    },
+    addButtonIcon: {
+      backgroundColor: colors.dark.ultramarineBlue,
     },
   },
 });
