@@ -18,7 +18,7 @@ import easing from '../../utilities/easing';
 import { stringShortener } from '../../utilities/helpers';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { colors, themes } from '../../constants/styleGuide';
+import { colors } from '../../constants/styleGuide';
 import DeleteBookmarkModal from '../bookmarks/deleteBookmarkModal';
 import modalHolder from '../../utilities/modal';
 
@@ -101,7 +101,7 @@ class AccountSummary extends React.Component {
   render() {
     const {
       styles, account, followedAccounts, activeToken,
-      settings: { token }, theme, navigation, t,
+      settings: { token }, theme, navigation,
     } = this.props;
     const address = token.active === tokenKeys[1] ?
       stringShortener(account.address, 10, 10) : account.address;
@@ -112,8 +112,6 @@ class AccountSummary extends React.Component {
     const normalizedBalance = fromRawLsk(account.balance);
     const height = 203;
     const isFollowed = followedAccounts[activeToken].some(item => item.address === account.address);
-
-    const followedAccountColor = theme === themes.light ? colors.light.blue : colors.dark.white;
 
     return (
       <AView style={[
@@ -127,8 +125,8 @@ class AccountSummary extends React.Component {
           { marginTop: interpolate([0, 100], [0, 100]) }]}>
           {
             token.active === 'LSK' ?
-            <Avatar address={account.address} size={60} /> :
-            <View style={[styles.tokenLogoWrapperDetails, styles.theme.tokenLogoWrapper]}>
+            <Avatar address={account.address} size={51} /> :
+            <View style={[styles.tokenLogoWrapper, styles.walletTokenLogoWrapper]}>
               <Icon
                 style={styles.tokenLogo}
                 name={tokenMap[token.active].icon}
@@ -170,19 +168,17 @@ class AccountSummary extends React.Component {
           },
         ]}>
           <IconButton
-            style={styles.bookmarkButton}
-            titleStyle={styles.bookmarkButtonTitle}
+            style={[styles.sendButton, styles.theme.sendButton]}
             title=''
             icon={isFollowed ? 'bookmark-filled' : 'bookmark'}
-            color={isFollowed ? followedAccountColor : colors[theme].gray1}
+            color={colors[theme].blue}
             iconSize={20}
             onClick={this.toggleBookmark} />
           <IconButton
-            titleStyle={[styles.sendButtonTitle, styles.theme.sendButtonTitle]}
-            style={styles.sendButton}
-            title={t('Send to this address')}
+            style={[styles.sendButton, styles.theme.sendButton]}
+            title=''
             icon='send'
-            color={colors[theme].gray1}
+            color={colors[theme].blue}
             iconSize={20}
             onClick={() => navigation.navigate('Send', { query: { address: account.address } })} />
         </AView>

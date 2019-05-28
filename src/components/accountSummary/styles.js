@@ -17,6 +17,7 @@ export default () => ({
       elevation: 4,
       alignItems: 'center',
       paddingBottom: 12,
+      width: '100%',
     },
     tokenLogoWrapper: {
       borderRadius: 30,
@@ -99,7 +100,7 @@ export default () => ({
     actionBar: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       height: 56,
       width: '100%',
       paddingTop: 11,
@@ -121,19 +122,16 @@ export default () => ({
       color: colors.light.slateGray,
     },
     sendButton: {
-      marginHorizontal: 8,
-      minWidth: 200,
-      height: 45,
+      marginHorizontal: 12,
+      width: 50,
+      height: 50,
       borderWidth: 1,
       borderColor: colors.light.slateGray,
       flexGrow: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       paddingLeft: 0,
-      borderRadius: 2,
-    },
-    sendButtonTitle: {
-      paddingLeft: 10,
+      borderRadius: 25,
     },
     paginationWrapper: {
       position: 'absolute',
@@ -183,8 +181,9 @@ export default () => ({
     fiatValue: {
       color: colors.light.whiteSmoke,
     },
-    sendButtonTitle: {
-      color: colors.light.slateGray,
+    sendButton: {
+      backgroundColor: colors.light.slateGray,
+      borderColor: colors.light.ghost,
     },
   },
   [themes.dark]: {
@@ -209,8 +208,8 @@ export default () => ({
     fiatValue: {
       color: colors.light.whiteSmoke,
     },
-    sendButtonTitle: {
-      color: colors.dark.ultramarineBlue,
+    sendButton: {
+      backgroundColor: colors.dark.navigationBg,
     },
   },
 });
