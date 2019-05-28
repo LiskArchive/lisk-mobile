@@ -200,12 +200,12 @@ class AddToBookmark extends React.Component {
       <Avatar
         style={styles.avatar}
         address={address.value}
-        size={34}
+        size={24}
       /> :
       <Icon
         style={styles.avatar}
         name='avatar-placeholder'
-        size={34}
+        size={24}
         color={colors[theme].mystic}
       />);
 

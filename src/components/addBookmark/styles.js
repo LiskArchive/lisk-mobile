@@ -65,8 +65,8 @@ export default () => ({
     avatar: {
       position: 'absolute',
       zIndex: 0,
-      left: 20,
-      top: 41,
+      left: 30,
+      top: 63,
     },
     address: {
       fontWeight: 'bold',
