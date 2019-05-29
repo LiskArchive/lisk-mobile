@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
 import { B, P } from '../../toolBox/typography';
 import CopyToClipboard from '../../copyToClipboard';
 import { PrimaryButton } from '../../toolBox/button';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
-import image from '../../../assets/images/registrationProcess/passphrase3x.png';
 
 class SafeKeeping extends React.Component {
   componentDidMount() {
@@ -28,19 +26,12 @@ class SafeKeeping extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View>
-          <View style={styles.titleContainer}>
-            <B style={styles.subHeader}>
-              {t('The only way to access your account.')}
-            </B>
-          </View>
-          <P style={styles.passphraseTitle}>{t('This is your passphrase:')}</P>
+        <View style={styles.wrapper}>
           <View style={styles.passphraseContainer}>
+            <P style={styles.passphraseTitle}>{t('Store your passphrase carefully')}</P>
             <B style={styles.passphrase} testID="passphraseText">
               {passphrase.replace(/\s+/g, '    ')}
             </B>
-          </View>
-          <View style={styles.copyContainer}>
             <CopyToClipboard
               style={styles.copyContainer}
               labelStyle={styles.copy}
@@ -49,18 +40,9 @@ class SafeKeeping extends React.Component {
               showIcon={true}
               iconSize={14}
               value={passphrase}
-              type={P}/>
+              type={B}
+            />
           </View>
-          {
-            deviceHeight() >= SCREEN_HEIGHTS.SM ?
-              <View style={styles.imageContainer} >
-                <Image
-                  style={styles.image}
-                  source={image}
-                />
-                <P style={styles.caption}>{t('Keep it safe!')}</P>
-              </View> : null
-          }
         </View>
         <View style={styles.buttonWrapper}>
           <PrimaryButton
