@@ -8,25 +8,6 @@ const styles = {
     flex: 1,
     justifyContent: 'space-between',
   },
-  header: {
-    marginTop: 8,
-  },
-  titleContainer: {
-    paddingLeft: boxes.boxPadding,
-    paddingRight: boxes.boxPadding,
-  },
-  subTitle: {
-    color: colors.light.gray2,
-  },
-  subHeader: {
-    marginTop: 8,
-    marginBottom: 25,
-    color: colors.light.gray2,
-  },
-  label: {
-    color: colors.light.gray2,
-    marginLeft: 12,
-  },
   wrapper: {
     flex: 1,
     justifyContent: 'center',
@@ -43,11 +24,6 @@ const styles = {
     padding: boxes.boxPadding,
     alignItems: 'center',
   },
-  imageDescription: {
-    color: colors.light.gray2,
-    marginTop: 16,
-    fontFamily: fonts.family.context,
-  },
   passphrase: {
     marginBottom: 30,
     lineHeight: 33,
@@ -63,21 +39,22 @@ const styles = {
     color: colors.light.ultramarineBlue,
     fontSize: 16,
   },
-  imageContainer: {
+  footer: {
+    padding: boxes.boxPadding,
+  },
+  switchContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 60,
+    marginBottom: 20,
   },
-  image: {
-    width: 111,
-    height: 111,
-  },
-  caption: {
-    color: colors.light.gray2,
-    marginTop: 15,
+  confirmText: {
+    flex: 1,
+    flexWrap: 'wrap',
+    marginLeft: 13.5,
+    color: colors.light.blueGray,
+    fontSize: 13,
   },
   buttonWrapper: {
-    paddingLeft: boxes.boxPadding,
-    paddingRight: boxes.boxPadding,
     marginBottom: deviceHeight() < SCREEN_HEIGHTS.SM ? 20 : 0,
   },
 };
