@@ -88,7 +88,7 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     addressIconContainer: {
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: colors.light.BTC,
     },
     row: {
       borderBottomColor: colors.light.gray5,
@@ -115,7 +115,7 @@ export default () => ({
       backgroundColor: colors.dark.maastrichtBlue,
     },
     addressIconContainer: {
-      backgroundColor: colors.dark.sendBalanceBg,
+      backgroundColor: colors.dark.BTC,
     },
     row: {
       borderBottomColor: colors.dark.gray5,

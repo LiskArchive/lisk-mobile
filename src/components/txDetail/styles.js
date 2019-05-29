@@ -143,7 +143,7 @@ export default () => ({
       borderBottomColor: colors.light.gray5,
     },
     outgoingSymbol: {
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: setColorOpacity(colors.light.black, 0.15),
     },
     incomingSymbol: {
       backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
@@ -181,7 +181,7 @@ export default () => ({
       borderBottomColor: '#373E4F',
     },
     outgoingSymbol: {
-      backgroundColor: colors.dark.sendBalanceBg,
+      backgroundColor: setColorOpacity(colors.light.white, 0.15),
     },
     incomingSymbol: {
       backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),

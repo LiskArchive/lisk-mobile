@@ -26,8 +26,6 @@ const light = {
    */
   gray5: '#eaf1f4',
   gray6: '#f9fbfd',
-  boxBg: '#F5FBFE',
-  sendBalanceBg: '#EFF4F9',
   navigationBg: '#FAFCFE',
   inputBorder: '#9EA8B4',
 };
@@ -38,8 +36,6 @@ const dark = {
 
   gray4: '#DDEAF4',
   gray5: '#373E4F',
-  boxBg: '#011832',
-  sendBalanceBg: '#011832',
   navigationBg: '#00152D',
   inputBorder: '#9EA8B4',
 };

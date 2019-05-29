@@ -28,7 +28,7 @@ class LanguageSelection extends React.Component {
           renderItem={({ item }) => (
             <TouchableHighlight
               onPress={() => this.onSelect(item)}
-              underlayColor={colors[theme].boxBg}
+              underlayColor='transparent'
             >
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
                 <P style={styles.theme.itemLabel}>
