@@ -108,8 +108,8 @@ export default () => ({
     },
     senderAndRecipient: {
       backgroundColor: colors.light.navigationBg,
-      borderBottomColor: colors.light.gray5,
-      borderTopColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
+      borderTopColor: colors.light.mystic,
     },
     label: {
       color: colors.light.slateGray,
@@ -121,7 +121,7 @@ export default () => ({
       color: colors.light.black,
     },
     detailRow: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     link: {
       color: colors.light.ultramarineBlue,

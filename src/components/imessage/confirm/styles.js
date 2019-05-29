@@ -17,7 +17,7 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    borderBottomColor: colors.light.gray5,
+    borderBottomColor: colors.light.mystic,
   },
   icon: {
     marginTop: 25,

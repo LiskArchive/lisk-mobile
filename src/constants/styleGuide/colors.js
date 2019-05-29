@@ -16,7 +16,6 @@ const common = {
 
 const light = {
   ...common,
-
   outgoingArrow: common.maastrichtBlue,
 
   /*

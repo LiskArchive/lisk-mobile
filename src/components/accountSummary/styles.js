@@ -165,9 +165,6 @@ export default () => ({
     walletBalance: {
       color: colors.light.ultramarineBlue,
     },
-    homeAddress: {
-      color: colors.light.gray5,
-    },
     walletAddress: {
       color: colors.light.slateGray,
     },
@@ -184,9 +181,6 @@ export default () => ({
     },
     walletContainer: {
       backgroundColor: colors.dark.navigationBg,
-    },
-    homeAddress: {
-      color: colors.dark.slateGray,
     },
     walletAddress: {
       color: colors.dark.slateGray,

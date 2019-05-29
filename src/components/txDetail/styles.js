@@ -126,9 +126,9 @@ export default () => ({
       color: colors.light.black,
     },
     senderAndRecipient: {
-      backgroundColor: colors.light.navigationBg,
-      borderBottomColor: colors.light.gray5,
-      borderTopColor: colors.light.gray5,
+      backgroundColor: colors.light.whiteSmoke,
+      borderBottomColor: colors.light.mystic,
+      borderTopColor: colors.light.mystic,
     },
     label: {
       color: colors.light.slateGray,
@@ -140,7 +140,7 @@ export default () => ({
       color: colors.light.black,
     },
     detailRow: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     outgoingSymbol: {
       backgroundColor: setColorOpacity(colors.light.black, 0.15),
@@ -164,9 +164,9 @@ export default () => ({
       color: colors.dark.white,
     },
     senderAndRecipient: {
-      backgroundColor: colors.dark.navigationBg,
-      borderBottomColor: colors.dark.gray5,
-      borderTopColor: colors.dark.gray5,
+      backgroundColor: colors.dark.maastrichtBlue,
+      borderBottomColor: setColorOpacity(colors.light.white, 0.24),
+      borderTopColor: setColorOpacity(colors.light.white, 0.24),
     },
     label: {
       color: colors.dark.gray4,
@@ -178,7 +178,7 @@ export default () => ({
       color: colors.dark.white,
     },
     detailRow: {
-      borderBottomColor: '#373E4F',
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15),
     },
     outgoingSymbol: {
       backgroundColor: setColorOpacity(colors.light.white, 0.15),

@@ -141,7 +141,7 @@ export default () => ({
   },
   [themes.light]: {
     itemContainer: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     emptyState: {
       backgroundColor: colors.light.white,
@@ -186,7 +186,7 @@ export default () => ({
       color: colors.dark.white,
     },
     itemContainer: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: setColorOpacity(colors.light.white, 0.24),
     },
     emptyState: {
       backgroundColor: colors.dark.maastrichtBlue,

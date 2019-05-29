@@ -206,7 +206,7 @@ class AddToBookmark extends React.Component {
         style={styles.avatar}
         name='avatar-placeholder'
         size={34}
-        color={colors[theme].gray5}
+        color={colors[theme].mystic}
       />);
 
     const errors = {
