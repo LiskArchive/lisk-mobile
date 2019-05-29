@@ -144,12 +144,12 @@ describe('helpers', () => {
       expect(setColorOpacity('#000', 0.15)).toBe('rgba(0, 0, 0, 0.15)');
     });
 
-    it('Should turn #ff00ff into rgba(256, 0, 256, 0.15) with alpha 0.15', () => {
-      expect(setColorOpacity('#ff00ff', 0.15)).toBe('rgba(0, 0, 0, 0.15)');
+    it('Should turn #ff00ff into rgba(255, 0, 255, 0.15) with alpha 0.15', () => {
+      expect(setColorOpacity('#ff00ff', 0.15)).toBe('rgba(255, 0, 255, 0.15)');
     });
 
-    it('Should turn #0000ff into rgba(0, 0, 256, 1) with no alpha passed', () => {
-      expect(setColorOpacity('#0000ff', 0.15)).toBe('rgba(0, 0, 256, 1)');
+    it('Should turn #0000ff into rgba(0, 0, 255, 1) with no alpha passed', () => {
+      expect(setColorOpacity('#0000ff')).toBe('rgba(0, 0, 255, 1)');
     });
   });
 });
