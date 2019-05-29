@@ -84,7 +84,7 @@ pipeline {
             stage('Build e2e tests') {
               steps {
                 nvm(getNodejsVersion()) {
-                  sh 'npm run test:e2e-build-debug'
+                  sh 'npm run test:build-e2e-release'
                 }
               }
             }
@@ -92,15 +92,7 @@ pipeline {
               options { timeout(time: 10, unit: 'MINUTES') }
               steps {
                 nvm(getNodejsVersion()) {
-                  sh '''
-                  npm run start 2>&1 >app.log &
-                  PATH=/usr/local/bin:$PATH npm run test:e2e-debug
-                  '''
-                }
-              }
-              post {
-                failure {
-                  sh 'cat app.log'
+                  sh 'PATH=/usr/local/bin:$PATH npm run test:e2e-release'
                 }
               }
             }
