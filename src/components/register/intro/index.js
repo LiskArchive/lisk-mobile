@@ -58,7 +58,7 @@ class Intro extends React.Component {
               </View>
             </View>
             <View style={[styles.row, styles.separator]}>
-              <Icon name='address' style={styles.icon} color={colors.light.gray1} size={36}/>
+              <Icon name='address' style={styles.icon} color={colors.light.slateGray} size={36}/>
               <View style={styles.textWrapper}>
                 <B style={styles.rowTitle}>{t('Your Lisk address')}</B>
                 <Small style={styles.description}>
@@ -84,7 +84,7 @@ class Intro extends React.Component {
                 width={43}
                 onSyncPress={this.confirm}
                 backgroundActive={colors.light.ultramarineBlue}
-                backgroundInactive={colors.light.gray4}
+                backgroundInactive={colors.light.slateGray}
               />
               <Small style={styles.label}>
                 {

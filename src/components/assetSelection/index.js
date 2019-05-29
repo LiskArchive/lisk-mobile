@@ -65,7 +65,7 @@ class AssetSelection extends React.Component {
                 <View style={styles.switch}>
                 {
                   item === token.active ?
-                    <Icon color={colors[theme].blue} name='checkmark' size={20} style={{ textAlign: 'center' }} /> :
+                    <Icon color={colors[theme].ultramarineBlue} name='checkmark' size={20} style={{ textAlign: 'center' }} /> :
                     null
                 }
                 </View>

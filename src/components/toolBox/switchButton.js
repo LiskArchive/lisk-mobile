@@ -21,7 +21,7 @@ const switchButton = ({
       backgroundActive={theme === themes.light ?
         colors.light.ultramarineBlue : colors.dark.ultramarineBlue}
       backgroundInactive={theme === themes.light ?
-        colors.light.platinum : colors.dark.gray3}
+        colors.light.platinum : colors.dark.slateGray}
     />
   );
 };

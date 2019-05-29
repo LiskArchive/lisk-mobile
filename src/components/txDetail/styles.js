@@ -1,4 +1,5 @@
 import { themes, colors, fonts } from '../../constants/styleGuide';
+import { setColorOpacity } from '../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -119,7 +120,7 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     date: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     value: {
       color: colors.light.black,
@@ -130,7 +131,7 @@ export default () => ({
       borderTopColor: colors.light.gray5,
     },
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     incoming: {
       color: colors.light.ufoGreen,
@@ -145,7 +146,7 @@ export default () => ({
       backgroundColor: colors.light.sendBalanceBg,
     },
     incomingSymbol: {
-      backgroundColor: colors.light.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     explorerLink: {
       color: colors.light.ultramarineBlue,
@@ -154,10 +155,10 @@ export default () => ({
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     date: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     value: {
       color: colors.dark.white,
@@ -183,7 +184,7 @@ export default () => ({
       backgroundColor: colors.dark.sendBalanceBg,
     },
     incomingSymbol: {
-      backgroundColor: colors.dark.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     explorerLink: {
       color: colors.light.ultramarineBlue,

@@ -14,7 +14,7 @@ export default () => ({
       borderTopColor: colors.light.gray5,
     },
     inactiveTint: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     tint: {
       color: colors.light.ultramarineBlue,
@@ -29,7 +29,7 @@ export default () => ({
       borderTopColor: colors.dark.gray5,
     },
     inactiveTint: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     tint: {
       color: colors.dark.ultramarineBlue,

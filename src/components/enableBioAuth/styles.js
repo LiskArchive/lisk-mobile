@@ -66,10 +66,10 @@ export default () => ({
 
   [themes.dark]: {
     wrapper: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     subHeader: {
-      color: colors.dark.gray1,
+      color: colors.dark.slateGray,
     },
     separator: {
       borderBottomColor: colors.dark.gray5,

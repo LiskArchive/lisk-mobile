@@ -65,7 +65,7 @@ export default () => ({
   },
   [themes.dark]: {
     wrapper: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     scanButtonTitle: {
       color: colors.light.platinum,

@@ -32,7 +32,7 @@ const styles = {
     flexDirection: 'column',
   },
   question: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     textAlign: 'center',
     marginRight: 4,
     marginBottom: 5,

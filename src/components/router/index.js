@@ -57,7 +57,7 @@ const Tabs = TabNavigator({
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground bgColor={{
-        light: colors.light.ultramarineBlue, dark: colors.light.brandingBlueHeader,
+        light: colors.light.ultramarineBlue, dark: colors.light.ultramarineBlue,
       }} />,
       tabBarIcon: props => <TabBarIcon name='home' {...props} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, scene }) => {

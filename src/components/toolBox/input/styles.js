@@ -40,7 +40,7 @@ export default () => ({
       color: colors.light.burntSieanna,
     },
     errorMessage: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
       fontFamily: fonts.family.context,
       marginBottom: 20,
       paddingTop: 0,

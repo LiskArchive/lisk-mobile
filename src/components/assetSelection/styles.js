@@ -67,13 +67,13 @@ export default () => ({
       color: colors.light.black,
     },
     balance: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
   },
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     header: {
       color: colors.dark.white,

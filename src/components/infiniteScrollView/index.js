@@ -59,7 +59,8 @@ class InfiniteScrollView extends React.Component {
             progressViewOffset={170}
             onRefresh={this.onRefresh}
             refreshing={this.state.refreshing}
-            tintColor={this.props.theme === themes.light ? colors.light.gray4 : colors.dark.gray4}
+            tintColor={this.props.theme === themes.light ?
+              colors.light.slateGray : colors.dark.gray4}
           />
         }
         ref={((el) => { this.scrollView = el; })}

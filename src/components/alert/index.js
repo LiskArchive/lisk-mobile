@@ -7,10 +7,10 @@ import DropDownHolder from '../../utilities/alert';
 
 const Alert = ({ styles }) =>
   <DropdownAlert
-    wrapperStyle={{ padding: 0, paddingLeft: 10, backgroundColor: colors.light.actionRed }}
+    wrapperStyle={{ padding: 0, paddingLeft: 10, backgroundColor: colors.light.burntSieanna }}
     titleStyle={styles.titleStyle}
     messageStyle={styles.messageStyle}
-    errorColor={colors.light.actionRed}
+    errorColor={colors.light.burntSieanna}
     ref={ref => DropDownHolder.initialize(ref)}
     closeInterval={6000}/>;
 

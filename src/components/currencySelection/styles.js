@@ -40,7 +40,7 @@ export default () => ({
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     header: {
       color: colors.dark.white,

@@ -18,10 +18,10 @@ const styles = {
   subHeader: {
     marginTop: 8,
     marginBottom: 25,
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
   },
   passphraseTitle: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
   },
   passphraseContainer: {
     marginTop: 10,
@@ -71,7 +71,7 @@ const styles = {
     height: isSmallDevice ? 79 : 120,
   },
   caption: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
   },
   successButton: {
     borderColor: colors.light.ufoGreen,
@@ -82,8 +82,8 @@ const styles = {
     backgroundColor: colors.light.burntSieanna,
   },
   selectedPlaceholder: {
-    borderColor: colors.light.gray4,
-    backgroundColor: colors.light.gray4,
+    borderColor: colors.light.slateGray,
+    backgroundColor: colors.light.slateGray,
   },
   optionsContainer: {
     marginTop: isSmallDevice ? 5 : 25,

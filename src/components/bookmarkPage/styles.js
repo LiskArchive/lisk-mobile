@@ -61,12 +61,12 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     subtitle: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
   },
   [themes.dark]: {
     wrapper: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     subtitle: {
       color: colors.dark.gray4,

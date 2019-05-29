@@ -27,6 +27,6 @@ export default StyleSheet.create({
   description: {
     marginTop: 7,
     textAlign: 'center',
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
   },
 });

@@ -1,5 +1,6 @@
 import { themes, colors, fonts } from '../../constants/styleGuide';
 import { viewportHeight } from '../../utilities/device';
+import { setColorOpacity } from '../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -149,7 +150,7 @@ export default () => ({
       color: colors.light.black,
     },
     date: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     avatar: {
       borderColor: colors.light.white,
@@ -159,16 +160,16 @@ export default () => ({
     },
     incoming: {
       color: colors.light.ufoGreen,
-      backgroundColor: colors.light.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     outgoingSymbol: {
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: setColorOpacity(colors.dark.black, 0.15),
     },
     incomingSymbol: {
-      backgroundColor: colors.light.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     noTxTitle: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     initContainer: {
       borderBottomColor: colors.light.gray5,
@@ -188,13 +189,13 @@ export default () => ({
       borderBottomColor: colors.dark.gray5,
     },
     emptyState: {
-      backgroundColor: colors.dark.gray5,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     address: {
       color: colors.dark.white,
     },
     date: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
     avatar: {
       borderColor: colors.dark.gray5,
@@ -204,16 +205,16 @@ export default () => ({
     },
     incoming: {
       color: colors.dark.ufoGreen,
-      backgroundColor: colors.dark.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     outgoingSymbol: {
-      backgroundColor: colors.dark.sendBalanceBg,
+      backgroundColor: setColorOpacity(colors.dark.white, 0.15),
     },
     incomingSymbol: {
-      backgroundColor: colors.dark.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     noTxTitle: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     initContainer: {
       borderBottomColor: colors.dark.gray5,

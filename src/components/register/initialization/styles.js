@@ -18,10 +18,10 @@ const styles = {
   subHeader: {
     marginTop: 8,
     marginBottom: 25,
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
   },
   subTitle: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
   },
   imageContainer: {
     marginTop: 52,

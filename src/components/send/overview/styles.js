@@ -42,7 +42,7 @@ export default () => ({
     label: {
       marginTop: 14,
       marginBottom: 2,
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
       fontWeight: '400',
@@ -100,10 +100,10 @@ export default () => ({
       color: colors.light.slateGray,
     },
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     subtitle: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     link: {
       color: colors.light.ultramarineBlue,
@@ -112,7 +112,7 @@ export default () => ({
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     addressIconContainer: {
       backgroundColor: colors.dark.sendBalanceBg,

@@ -1,17 +1,7 @@
 const common = {
   black: '#000',
   white: '#fff',
-  brandingBlue: '#013165',
-  brandingBlueHeader: '#1C316A',
-  actionBlue: '#17499B',
-  actionBlueAccent: '#3C7FB4',
-  actionRed: '#C80039',
-  actionRedAccent: '#ff6236',
   BTC: '#EC8D08',
-};
-
-const light = {
-  ...common,
   ultramarineBlue: '#4070F4',
   maastrichtBlue: '#0C142D',
   slateGray: '#71778B',
@@ -22,35 +12,32 @@ const light = {
   whiteSmoke: '#F5F7FA',
   burntSieanna: '#EC6968',
   ufoGreen: '#2AD67C',
+};
+
+const light = {
+  ...common,
+
+  outgoingArrow: common.maastrichtBlue,
 
   /*
    * @TODO
    * keeping existing colors for the back-compatiblity and
    * not to break existing dynamic accesses like `colors[theme].blue`
    */
-  gray1: '#3c5068',
-  gray2: '#74869b',
-  gray3: '#8399aa',
-  gray4: '#94a2ab',
   gray5: '#eaf1f4',
   gray6: '#f9fbfd',
-  incomingBg: '#E4F5F1',
   boxBg: '#F5FBFE',
   sendBalanceBg: '#EFF4F9',
   navigationBg: '#FAFCFE',
   inputBorder: '#9EA8B4',
-  /* /@TODO */
 };
 
 const dark = {
   ...common,
-  gray1: '#74869B',
-  gray2: '#9EA8B4',
-  gray3: '#D9E7F1',
+  outgoingArrow: common.platinum,
+
   gray4: '#DDEAF4',
   gray5: '#373E4F',
-  screenBgNavy: '#01071E',
-  incomingBg: '#0B2131',
   boxBg: '#011832',
   sendBalanceBg: '#011832',
   navigationBg: '#00152D',

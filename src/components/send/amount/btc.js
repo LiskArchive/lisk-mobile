@@ -220,15 +220,13 @@ class AmountBTC extends React.Component {
               valueInCurrency={this.getValueInCurrency()}
             />
 
-            {balance > 0 &&
-              <DynamicFeeSelector
-                value={this.getCalculatedDynamicFee(dynamicFees[dynamicFeeType])}
-                data={dynamicFees}
-                selected={dynamicFeeType}
-                onChange={this.onDynamicFeeChange}
-                tokenType={settings.token.active}
-              />
-            }
+            <DynamicFeeSelector
+              value={this.getCalculatedDynamicFee(dynamicFees[dynamicFeeType])}
+              data={dynamicFees}
+              selected={dynamicFeeType}
+              onChange={this.onDynamicFeeChange}
+              tokenType={settings.token.active}
+            />
           </View>
         </KeyboardAwareScrollView>
       </View>

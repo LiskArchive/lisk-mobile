@@ -101,7 +101,7 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     date: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     value: {
       color: colors.light.black,
@@ -112,7 +112,7 @@ export default () => ({
       borderTopColor: colors.light.gray5,
     },
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     incoming: {
       color: colors.light.ufoGreen,

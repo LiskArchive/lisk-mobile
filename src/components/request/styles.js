@@ -81,16 +81,16 @@ export default () => ({
       color: colors.light.maastrichtBlue,
     },
     shareText: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
   },
 
   [themes.dark]: {
     wrapper: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     innerContainer: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     addressLabel: {
       color: colors.light.platinum,

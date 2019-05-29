@@ -64,10 +64,10 @@ export default () => ({
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     subHeader: {
-      color: colors.dark.gray1,
+      color: colors.dark.slateGray,
     },
     titleContainer: {
       borderBottomColor: colors.dark.gray5,

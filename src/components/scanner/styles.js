@@ -48,7 +48,7 @@ export default () => ({
       backgroundColor: colors.light.ultramarineBlue,
     },
     galleryDisabled: {
-      backgroundColor: colors.light.gray2,
+      backgroundColor: colors.light.slateGray,
     },
     galleryDescription: {
       color: colors.light.white,
@@ -78,7 +78,7 @@ export default () => ({
       marginTop: 2,
       maxWidth: '80%',
       textAlign: 'center',
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     closeButton: {
       marginTop: buttonMarginTop,
@@ -100,7 +100,7 @@ export default () => ({
       backgroundColor: colors.light.gray6,
     },
     permissionDescription: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     closeButton: {
       color: colors.light.white,
@@ -108,7 +108,7 @@ export default () => ({
   },
   [themes.dark]: {
     permissionRequestWrapper: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     permissionTitle: {
       color: colors.dark.white,

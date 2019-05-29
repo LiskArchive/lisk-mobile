@@ -27,7 +27,7 @@ export default () => ({
 
   [themes.light]: {
     text: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     actionButton: {
       borderColor: colors.light.burntSieanna,
@@ -35,13 +35,13 @@ export default () => ({
       color: colors.light.white,
     },
     cancelButton: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
   },
 
   [themes.dark]: {
     text: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     actionButton: {
       borderColor: colors.dark.burntSieanna,
@@ -49,7 +49,7 @@ export default () => ({
       color: colors.dark.white,
     },
     cancelButton: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
   },
 });

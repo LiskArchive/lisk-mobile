@@ -81,7 +81,7 @@ class Settings extends React.Component {
       target = 'DisableBioAuth';
     }
     const sensorStatus = (
-      <P style={{ color: targetStateLabel[1] || colors[theme].gray1 }}>
+      <P style={{ color: targetStateLabel[1] || colors[theme].platinum }}>
         {targetStateLabel[0]}
       </P>
     );

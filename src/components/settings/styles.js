@@ -45,7 +45,7 @@ export default () => ({
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     subHeader: {
       color: colors.dark.white,
@@ -54,7 +54,7 @@ export default () => ({
       borderBottomColor: colors.dark.gray5,
     },
     targetStateLabel: {
-      color: colors.dark.gray1,
+      color: colors.dark.slateGray,
     },
   },
 });

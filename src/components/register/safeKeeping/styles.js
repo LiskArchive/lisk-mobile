@@ -16,19 +16,19 @@ const styles = {
     paddingRight: boxes.boxPadding,
   },
   subTitle: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
   },
   subHeader: {
     marginTop: 8,
     marginBottom: 25,
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
   },
   label: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     marginLeft: 12,
   },
   passphraseTitle: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     paddingLeft: boxes.boxPadding,
     paddingRight: boxes.boxPadding,
   },
@@ -43,7 +43,7 @@ const styles = {
     borderBottomColor: '#ebf1f4',
   },
   imageDescription: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     marginTop: 16,
     fontFamily: fonts.family.context,
   },
@@ -70,7 +70,7 @@ const styles = {
     height: 111,
   },
   caption: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     marginTop: 15,
   },
   buttonWrapper: {

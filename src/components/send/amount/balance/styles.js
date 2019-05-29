@@ -29,7 +29,7 @@ export default () => ({
 
   [themes.light]: {
     balanceText: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
   },
 

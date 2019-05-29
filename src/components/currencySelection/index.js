@@ -39,7 +39,7 @@ class CurrencySelection extends React.Component {
                   {currency === item ? (
                     <Icon
                       name="checkmark"
-                      color={colors[theme].blue}
+                      color={colors[theme].ultramarineBlue}
                       size={20}
                       style={{
                         width: 26,

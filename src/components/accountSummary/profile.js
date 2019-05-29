@@ -57,7 +57,7 @@ const Profile = ({
               size={30}
               color={theme === themes.light ?
                 colors.light.ultramarineBlue :
-                colors.light.brandingBlueHeader}
+                colors.light.ultramarineBlue}
             />
           </View>
         }

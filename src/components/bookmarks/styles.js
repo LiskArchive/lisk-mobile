@@ -106,7 +106,7 @@ export default () => ({
       left: Screen.width - 240,
       width: Screen.width,
       height: 90,
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: colors.light.mystic,
       justifyContent: 'center',
     },
     deleteButton: {
@@ -138,34 +138,34 @@ export default () => ({
   },
   [themes.light]: {
     title: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     itemContainer: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.ghost,
     },
     linkedItem: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.ghost,
     },
     emptyState: {
       backgroundColor: colors.light.white,
     },
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     avatar: {
-      borderColor: colors.light.white,
+      borderColor: colors.light.ghost,
     },
     noResult: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     deleteButton: {
-      backgroundColor: colors.light.actionRed,
+      backgroundColor: colors.light.burntSieanna,
     },
     editContent: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     editButton: {
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: colors.light.mystic,
     },
   },
   [themes.dark]: {
@@ -173,13 +173,13 @@ export default () => ({
       color: colors.dark.white,
     },
     itemContainer: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: colors.dark.ghost,
     },
     linkedItem: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: colors.dark.ghost,
     },
     emptyState: {
-      backgroundColor: colors.dark.gray5,
+      backgroundColor: colors.dark.ghost,
     },
     address: {
       color: colors.dark.white,
@@ -188,19 +188,19 @@ export default () => ({
       color: colors.dark.gray4,
     },
     avatar: {
-      borderColor: colors.dark.gray5,
+      borderColor: colors.dark.ghost,
     },
     noResult: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     deleteButton: {
-      backgroundColor: colors.dark.actionRed,
+      backgroundColor: colors.dark.burntSieanna,
     },
     editContent: {
-      color: colors.dark.gray1,
+      color: colors.dark.slateGray,
     },
     editButton: {
-      backgroundColor: colors.dark.sendBalanceBg,
+      backgroundColor: colors.dark.mystic,
     },
   },
 });

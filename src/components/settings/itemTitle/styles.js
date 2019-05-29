@@ -42,10 +42,10 @@ export default () => ({
 
   [themes.dark]: {
     title: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
     subtitle: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
   },
 });

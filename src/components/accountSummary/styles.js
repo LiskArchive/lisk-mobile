@@ -101,7 +101,7 @@ export default () => ({
       minWidth: 45,
       height: 45,
       borderWidth: 1,
-      borderColor: colors.light.gray2,
+      borderColor: colors.light.slateGray,
       flexGrow: 1,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -109,14 +109,14 @@ export default () => ({
       borderRadius: 2,
     },
     bookmarkButtonTitle: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     sendButton: {
       marginHorizontal: 8,
       minWidth: 200,
       height: 45,
       borderWidth: 1,
-      borderColor: colors.light.gray2,
+      borderColor: colors.light.slateGray,
       flexGrow: 1,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -156,7 +156,7 @@ export default () => ({
     },
     walletContainer: {
       backgroundColor: colors.light.navigationBg,
-      borderBottomColor: colors.light.sendBalanceBg,
+      borderBottomColor: colors.light.whiteSmoke,
       borderBottomWidth: 1,
     },
     homeBalance: {
@@ -169,27 +169,27 @@ export default () => ({
       color: colors.light.gray5,
     },
     walletAddress: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     fiatValue: {
       color: colors.light.whiteSmoke,
     },
     sendButtonTitle: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
   },
   [themes.dark]: {
     homeContainer: {
-      backgroundColor: colors.dark.brandingBlueHeader,
+      backgroundColor: colors.dark.ultramarineBlue,
     },
     walletContainer: {
       backgroundColor: colors.dark.navigationBg,
     },
     homeAddress: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     walletAddress: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     homeBalance: {
       color: colors.dark.white,
