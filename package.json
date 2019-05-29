@@ -17,9 +17,9 @@
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "postinstall": "npm run link",
     "i18n": "node ./scripts/scanner.config.js",
-    "test:e2e-build": "detox build --configuration ios.sim.release",
-    "test:e2e": "env configuration='ios.sim.release' node ./node_modules/cucumber/bin/cucumber-js e2e",
-    "test:e2e-build-debug": "detox build --configuration ios.sim.debug",
+    "test:build-e2e-release": "detox build --configuration ios.sim.release",
+    "test:build-e2e-debug": "detox build --configuration ios.sim.debug",
+    "test:e2e-release": "env configuration='ios.sim.release' node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty",
     "test:e2e-debug": "env configuration='ios.sim.debug' node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty"
   },
   "rnpm": {
