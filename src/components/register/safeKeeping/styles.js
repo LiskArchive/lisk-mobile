@@ -27,6 +27,7 @@ const styles = {
   passphrase: {
     marginBottom: 30,
     lineHeight: 33,
+    fontSize: 18,
     color: colors.light.black,
     fontFamily: fonts.family.passphraseText,
     textAlign: 'center',

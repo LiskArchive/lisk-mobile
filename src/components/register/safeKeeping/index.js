@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { translate } from 'react-i18next';
 import Switch from 'react-native-switch-pro';
 import styles from './styles';
@@ -41,9 +41,9 @@ class SafeKeeping extends React.Component {
         <View style={styles.wrapper}>
           <View style={styles.passphraseContainer}>
             <P style={styles.passphraseTitle}>{t('Store your passphrase carefully')}</P>
-            <B style={styles.passphrase} testID="passphraseText">
-              {passphrase.replace(/\s+/g, '    ')}
-            </B>
+            <Text style={styles.passphrase} testID="passphraseText">
+              {passphrase.replace(/\s+/g, '  ')}
+            </Text>
             <CopyToClipboard
               style={styles.copyContainer}
               labelStyle={styles.copy}
