@@ -4,6 +4,7 @@ import {
   stringShortener,
   removeUndefinedKeys,
   isEmpty,
+  setColorOpacity,
 } from './helpers';
 
 import { themes } from '../constants/styleGuide';
@@ -135,6 +136,20 @@ describe('helpers', () => {
 
     it('works properly with objects', () => {
       expect(isEmpty({ test: 'test' })).toBe(false);
+    });
+  });
+
+  describe('setColorOpacity', () => {
+    it('Should turn #000 into rgba(0, 0, 0, 0.15) with alpha 0.15', () => {
+      expect(setColorOpacity('#000', 0.15)).toBe('rgba(0, 0, 0, 0.15)');
+    });
+
+    it('Should turn #ff00ff into rgba(256, 0, 256, 0.15) with alpha 0.15', () => {
+      expect(setColorOpacity('#ff00ff', 0.15)).toBe('rgba(0, 0, 0, 0.15)');
+    });
+
+    it('Should turn #0000ff into rgba(0, 0, 256, 1) with no alpha passed', () => {
+      expect(setColorOpacity('#0000ff', 0.15)).toBe('rgba(0, 0, 256, 1)');
     });
   });
 });
