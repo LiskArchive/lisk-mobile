@@ -12,7 +12,7 @@ import lightBig from '../../../assets/images/balanceBlur/lightBig.png';
 import lightMedium from '../../../assets/images/balanceBlur/lightMedium.png';
 import lightSmall from '../../../assets/images/balanceBlur/lightSmall.png';
 import { tokenMap } from '../../../constants/tokens';
-import { colors } from '../../../constants/styleGuide';
+import { colors, themes } from '../../../constants/styleGuide';
 
 const blurs = {
   darkBig, darkMedium, darkSmall, lightBig, lightMedium, lightSmall,
@@ -52,7 +52,9 @@ const ExtendedTitle = ({
               style={styles.tokenLogo}
               name={tokenMap[token].icon}
               size={18}
-              color={colors[theme][token]}
+              color={theme === themes.light ?
+                colors.light.ultramarineBlue :
+                colors.dark.homeHeaderBg}
             />
           </View>
       }
@@ -79,7 +81,7 @@ const SimpleHeader = ({
       styles.theme[`${type}Main`],
       { opacity: interpolate(scrollY, [0, 100, 130], [1, 1, 0]) },
     ]}
-    accessibilityTraits="header"
+    accessibilityTraits='header'
     allowFontScaling={false}>
     {title}
   </Animated.Text>

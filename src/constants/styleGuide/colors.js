@@ -24,6 +24,7 @@ const dark = {
   ...common,
   outgoingArrow: common.platinum,
   headerBg: common.maastrichtBlue,
+  homeHeaderBg: '#1b316a',
 };
 
 export default {

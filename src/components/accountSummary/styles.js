@@ -1,4 +1,5 @@
 import { themes, colors } from '../../constants/styleGuide';
+import { setColorOpacity } from '../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -177,7 +178,7 @@ export default () => ({
   },
   [themes.dark]: {
     homeContainer: {
-      backgroundColor: colors.dark.ultramarineBlue,
+      backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
     },
     walletContainer: {
       backgroundColor: colors.dark.maastrichtBlue,
