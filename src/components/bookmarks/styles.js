@@ -1,6 +1,7 @@
 import { Dimensions } from 'react-native';
 import { themes, colors, fonts } from '../../constants/styleGuide';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../utilities/device';
+import { setColorOpacity } from '../../utilities/helpers';
 
 const Screen = Dimensions.get('window');
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
@@ -141,13 +142,10 @@ export default () => ({
       color: colors.dark.slateGray,
     },
     itemContainer: {
-      borderBottomColor: colors.light.ghost,
+      borderBottomColor: colors.light.mystic,
     },
     linkedItem: {
-      borderBottomColor: colors.light.ghost,
-    },
-    emptyState: {
-      backgroundColor: colors.light.white,
+      borderBottomColor: colors.light.mystic,
     },
     label: {
       color: colors.light.slateGray,
@@ -173,13 +171,10 @@ export default () => ({
       color: colors.dark.white,
     },
     itemContainer: {
-      borderBottomColor: colors.dark.ghost,
+      borderBottomColor: setColorOpacity(colors.dark.white, 0.24),
     },
     linkedItem: {
-      borderBottomColor: colors.dark.ghost,
-    },
-    emptyState: {
-      backgroundColor: colors.dark.ghost,
+      borderBottomColor: setColorOpacity(colors.dark.white, 0.24),
     },
     address: {
       color: colors.dark.white,

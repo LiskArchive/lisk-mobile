@@ -149,7 +149,7 @@ class Settings extends React.Component {
               {t('General')}
             </H4>
 
-            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+            <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
                 icon='language'
@@ -191,7 +191,7 @@ class Settings extends React.Component {
               />
             </View>
 
-            <View style={[styles.item, styles.theme.item]}>
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
                 navigation={navigation}
                 icon='manage-assets'

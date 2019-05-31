@@ -48,7 +48,12 @@ class AssetSelection extends React.Component {
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
                 <View style={styles.row}>
                   <View style={styles[`${item}Container`]}>
-                    <Icon color='#fff' name={tokenMap[item].icon} size={25} style={styles.icon} />
+                    <Icon
+                      color={colors[theme].white}
+                      name={tokenMap[item].icon}
+                      size={25}
+                      style={styles.icon}
+                    />
                   </View>
                   <View>
                     <B style={[styles.itemLabel, styles.theme.itemLabel]}>
@@ -65,7 +70,12 @@ class AssetSelection extends React.Component {
                 <View style={styles.switch}>
                 {
                   item === token.active ?
-                    <Icon color={colors[theme].ultramarineBlue} name='checkmark' size={20} style={{ textAlign: 'center' }} /> :
+                    <Icon
+                      color={colors[theme].ultramarineBlue}
+                      name='checkmark'
+                      size={20}
+                      style={{ textAlign: 'center' }}
+                    /> :
                     null
                 }
                 </View>
