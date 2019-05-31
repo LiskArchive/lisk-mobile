@@ -76,7 +76,7 @@ class ItemTitle extends React.Component {
           <Icon
             name={icon}
             size={iconSize}
-            color={theme === themes.light ? colors.light.blueGray : colors.dark.gray2}
+            color={theme === themes.light ? colors.light.blueGray : colors.dark.slateGray}
             style={styles.icon}
           />
 

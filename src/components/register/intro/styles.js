@@ -21,7 +21,7 @@ const styles = {
   subHeader: {
     marginTop: 14,
     marginBottom: 25,
-    color: colors.light.gray1,
+    color: colors.light.slateGray,
   },
   row: {
     flexDirection: 'row',
@@ -41,11 +41,11 @@ const styles = {
     marginTop: 10,
   },
   description: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     marginTop: 5,
   },
   label: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     marginLeft: 12,
   },
   actionBar: {

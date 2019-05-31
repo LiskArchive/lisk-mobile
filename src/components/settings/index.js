@@ -81,7 +81,7 @@ class Settings extends React.Component {
       target = 'DisableBioAuth';
     }
     const sensorStatus = (
-      <P style={{ color: targetStateLabel[1] || colors[theme].gray1 }}>
+      <P style={{ color: targetStateLabel[1] || colors[theme].platinum }}>
         {targetStateLabel[0]}
       </P>
     );
@@ -149,7 +149,7 @@ class Settings extends React.Component {
               {t('General')}
             </H4>
 
-            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+            <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
                 icon='language'
@@ -191,7 +191,7 @@ class Settings extends React.Component {
               />
             </View>
 
-            <View style={[styles.item, styles.theme.item]}>
+            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
                 navigation={navigation}
                 icon='manage-assets'

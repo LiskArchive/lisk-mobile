@@ -18,7 +18,7 @@ const Symbol = ({
         <Icon
           name={direction}
           size={14}
-          color={direction === 'outgoing' ? colors[theme].gray1 : colors[theme].green} />
+          color={direction === 'outgoing' ? colors[theme].outgoingArrow : colors[theme].ufoGreen} />
       </View>
     );
   }

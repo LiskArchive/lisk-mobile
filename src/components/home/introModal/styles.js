@@ -32,7 +32,7 @@ export default () => ({
 
   [themes.light]: {
     text: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     tokenLogoWrapper: {
       backgroundColor: colors.light.BTC,
@@ -41,7 +41,7 @@ export default () => ({
 
   [themes.dark]: {
     text: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     tokenLogoWrapper: {
       backgroundColor: colors.dark.BTC,

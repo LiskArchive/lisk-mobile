@@ -17,7 +17,7 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    borderBottomColor: colors.light.gray5,
+    borderBottomColor: colors.light.mystic,
   },
   icon: {
     marginTop: 25,
@@ -50,7 +50,7 @@ export default StyleSheet.create({
     fontFamily: fonts.family.context,
     fontSize: fonts.size.input,
     fontWeight: '400',
-    color: colors.light.gray1,
+    color: colors.light.slateGray,
   },
   text: {
     flexWrap: 'wrap',
@@ -75,17 +75,17 @@ export default StyleSheet.create({
   error: {
     fontFamily: fonts.family.context,
     fontSize: fonts.size.input,
-    color: colors.light.gray1,
+    color: colors.light.slateGray,
   },
   errorIcon: {
     marginRight: 6,
-    color: colors.light.red,
+    color: colors.light.burntSieanna,
   },
   visible: {
     opacity: 1,
   },
   description: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     fontFamily: fonts.family.contextSemiBold,
     marginTop: 15,
   },
@@ -94,8 +94,8 @@ export default StyleSheet.create({
     minWidth: 45,
     height: 45,
     borderWidth: 1,
-    borderColor: colors.light.gray2,
-    color: colors.light.gray2,
+    borderColor: colors.light.slateGray,
+    color: colors.light.slateGray,
     flexGrow: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -119,6 +119,6 @@ export default StyleSheet.create({
   confirmMessage: {
     textAlign: 'center',
     fontSize: 14,
-    color: colors.light.gray1,
+    color: colors.light.slateGray,
   },
 });

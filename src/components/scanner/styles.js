@@ -45,10 +45,10 @@ export default () => ({
       justifyContent: 'center',
     },
     galleryEnabled: {
-      backgroundColor: colors.light.blue,
+      backgroundColor: colors.light.ultramarineBlue,
     },
     galleryDisabled: {
-      backgroundColor: colors.light.gray2,
+      backgroundColor: colors.light.slateGray,
     },
     galleryDescription: {
       color: colors.light.white,
@@ -60,7 +60,7 @@ export default () => ({
       width: '100%',
       top: 0,
       left: 0,
-      backgroundColor: colors.light.gray6,
+      backgroundColor: colors.light.whiteSmoke,
       zIndex: 10,
       flexDirection: 'column',
       justifyContent: 'center',
@@ -78,7 +78,7 @@ export default () => ({
       marginTop: 2,
       maxWidth: '80%',
       textAlign: 'center',
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     closeButton: {
       marginTop: buttonMarginTop,
@@ -97,10 +97,10 @@ export default () => ({
   },
   [themes.light]: {
     permissionRequestWrapper: {
-      backgroundColor: colors.light.gray6,
+      backgroundColor: colors.light.whiteSmoke,
     },
     permissionDescription: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     closeButton: {
       color: colors.light.white,
@@ -108,13 +108,13 @@ export default () => ({
   },
   [themes.dark]: {
     permissionRequestWrapper: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     permissionTitle: {
       color: colors.dark.white,
     },
     permissionDescription: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
     closeButton: {
       color: colors.dark.white,

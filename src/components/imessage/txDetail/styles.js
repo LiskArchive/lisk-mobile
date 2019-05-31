@@ -101,30 +101,30 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     date: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     value: {
       color: colors.light.black,
     },
     senderAndRecipient: {
-      backgroundColor: colors.light.navigationBg,
-      borderBottomColor: colors.light.gray5,
-      borderTopColor: colors.light.gray5,
+      backgroundColor: colors.light.whiteSmoke,
+      borderBottomColor: colors.light.mystic,
+      borderTopColor: colors.light.mystic,
     },
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     incoming: {
-      color: colors.light.green,
+      color: colors.light.ufoGreen,
     },
     outgoing: {
       color: colors.light.black,
     },
     detailRow: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     link: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
 });

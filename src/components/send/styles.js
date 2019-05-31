@@ -36,7 +36,7 @@ export default () => ({
 
   [themes.dark]: {
     progressStepContainer: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
   },
 });

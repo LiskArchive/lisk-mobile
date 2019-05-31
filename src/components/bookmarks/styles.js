@@ -1,6 +1,7 @@
 import { Dimensions } from 'react-native';
 import { themes, colors, fonts } from '../../constants/styleGuide';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../utilities/device';
+import { setColorOpacity } from '../../utilities/helpers';
 
 const Screen = Dimensions.get('window');
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
@@ -106,7 +107,7 @@ export default () => ({
       left: Screen.width - 240,
       width: Screen.width,
       height: 90,
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: colors.light.mystic,
       justifyContent: 'center',
     },
     deleteButton: {
@@ -138,34 +139,31 @@ export default () => ({
   },
   [themes.light]: {
     title: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     itemContainer: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     linkedItem: {
-      borderBottomColor: colors.light.gray5,
-    },
-    emptyState: {
-      backgroundColor: colors.light.white,
+      borderBottomColor: colors.light.mystic,
     },
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     avatar: {
-      borderColor: colors.light.white,
+      borderColor: colors.light.ghost,
     },
     noResult: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     deleteButton: {
-      backgroundColor: colors.light.actionRed,
+      backgroundColor: colors.light.burntSieanna,
     },
     editContent: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     editButton: {
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: colors.light.mystic,
     },
   },
   [themes.dark]: {
@@ -173,34 +171,31 @@ export default () => ({
       color: colors.dark.white,
     },
     itemContainer: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: setColorOpacity(colors.dark.white, 0.24),
     },
     linkedItem: {
-      borderBottomColor: colors.dark.gray5,
-    },
-    emptyState: {
-      backgroundColor: colors.dark.gray5,
+      borderBottomColor: setColorOpacity(colors.dark.white, 0.24),
     },
     address: {
       color: colors.dark.white,
     },
     label: {
-      color: colors.dark.gray4,
+      color: colors.dark.slateGray,
     },
     avatar: {
-      borderColor: colors.dark.gray5,
+      borderColor: colors.dark.ghost,
     },
     noResult: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     deleteButton: {
-      backgroundColor: colors.dark.actionRed,
+      backgroundColor: colors.dark.burntSieanna,
     },
     editContent: {
-      color: colors.dark.gray1,
+      color: colors.dark.slateGray,
     },
     editButton: {
-      backgroundColor: colors.dark.sendBalanceBg,
+      backgroundColor: colors.dark.mystic,
     },
   },
 });

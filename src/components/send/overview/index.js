@@ -161,9 +161,9 @@ class Overview extends React.Component {
             ) : (
               <View style={[styles.addressIconContainer, styles.theme.addressIconContainer]}>
                 <Icon
-                  name='tx-id'
+                  name='btc'
                   style={styles.addressIcon}
-                  color={colors[theme].gray2}
+                  color={colors[theme].white}
                   size={20}
                 />
               </View>

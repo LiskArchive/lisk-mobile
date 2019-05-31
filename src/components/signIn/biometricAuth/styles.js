@@ -32,7 +32,7 @@ const styles = {
     flexDirection: 'column',
   },
   question: {
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
     textAlign: 'center',
     marginRight: 4,
     marginBottom: 5,
@@ -41,7 +41,7 @@ const styles = {
     width: '100%',
   },
   error: {
-    color: colors.light.red,
+    color: colors.light.burntSieanna,
   },
   invisible: {
     color: 'transparent',

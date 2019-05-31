@@ -131,7 +131,10 @@ class AccountSummary extends React.Component {
 
   render() {
     const { accounts: { info }, settings: { token }, styles } = this.props;
-    const { opacity, top } = this.state.initialAnimations;
+    const {
+      initialAnimations: { opacity, top },
+      activeSlide,
+    } = this.state;
     const profiles = tokenKeys.filter(key => token.list[key]).map(key => info[key]);
 
     return (
@@ -147,7 +150,7 @@ class AccountSummary extends React.Component {
             profiles.length > 1 ?
               <Carousel
                 ref={(el) => { this.carousel = el; }}
-                firstItem={this.state.activeSlide}
+                firstItem={activeSlide}
                 data={profiles}
                 renderItem={this.renderProfile}
                 sliderWidth={width}

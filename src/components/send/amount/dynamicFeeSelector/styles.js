@@ -15,7 +15,7 @@ export default () => ({
     },
 
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
       fontFamily: fonts.family.context,
     },
 
@@ -85,11 +85,11 @@ export default () => ({
 
   [themes.light]: {
     container: {
-      borderColor: colors.light.sendBalanceBg,
+      borderColor: colors.light.whiteSmoke,
     },
 
     loadingText: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
 
     label: {
@@ -97,11 +97,11 @@ export default () => ({
     },
 
     value: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
 
     itemLabel: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
   },
 
@@ -111,7 +111,7 @@ export default () => ({
     },
 
     loadingText: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
 
     label: {
@@ -123,7 +123,7 @@ export default () => ({
     },
 
     itemLabel: {
-      color: colors.dark.gray1,
+      color: colors.dark.slateGray,
     },
   },
 });
