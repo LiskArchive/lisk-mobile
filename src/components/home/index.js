@@ -189,9 +189,11 @@ class Home extends React.Component {
 
     setTimeout(() => {
       const { activeToken, accountFetched } = this.props;
-      const inactiveToken = activeToken === tokenMap.LSK.key ? tokenMap.BTC.key : tokenMap.LSK.key;
+      const inactiveTokens = Object.keys(tokenMap).filter(token => token !== activeToken);
 
-      accountFetched(inactiveToken);
+      inactiveTokens.forEach((token) => {
+        accountFetched(token);
+      });
     }, 1000);
   }
 
