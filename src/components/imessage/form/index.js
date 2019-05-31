@@ -165,7 +165,7 @@ class LiskMessageExtension extends Component {
                 style={styles.avatar}
                 name='avatar-placeholder'
                 size={34}
-                color={colors.light.gray5}
+                color={colors.light.mystic}
               />
           }
           <Input

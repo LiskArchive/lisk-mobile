@@ -99,7 +99,7 @@ export default () => ({
       color: colors.dark.white,
     },
     shareText: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
   },
 });

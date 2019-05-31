@@ -69,7 +69,7 @@ export default () => ({
       backgroundColor: colors.dark.maastrichtBlue,
     },
     subtitle: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
   },
 });

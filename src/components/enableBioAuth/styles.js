@@ -79,7 +79,7 @@ export default () => ({
       color: colors.dark.white,
     },
     description: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
     iconWrapper: {
       backgroundColor: colors.dark.white,

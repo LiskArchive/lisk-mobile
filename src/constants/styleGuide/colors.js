@@ -17,26 +17,13 @@ const common = {
 const light = {
   ...common,
   outgoingArrow: common.maastrichtBlue,
-
-  /*
-   * @TODO
-   * keeping existing colors for the back-compatiblity and
-   * not to break existing dynamic accesses like `colors[theme].blue`
-   */
-  gray5: '#eaf1f4',
-  gray6: '#f9fbfd',
-  navigationBg: '#FAFCFE',
-  inputBorder: '#9EA8B4',
+  headerBg: common.whiteSmoke,
 };
 
 const dark = {
   ...common,
   outgoingArrow: common.platinum,
-
-  gray4: '#DDEAF4',
-  gray5: '#373E4F',
-  navigationBg: '#00152D',
-  inputBorder: '#9EA8B4',
+  headerBg: common.maastrichtBlue,
 };
 
 export default {

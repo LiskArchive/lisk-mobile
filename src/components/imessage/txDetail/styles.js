@@ -107,7 +107,7 @@ export default () => ({
       color: colors.light.black,
     },
     senderAndRecipient: {
-      backgroundColor: colors.light.navigationBg,
+      backgroundColor: colors.light.whiteSmoke,
       borderBottomColor: colors.light.mystic,
       borderTopColor: colors.light.mystic,
     },

@@ -33,7 +33,7 @@ const headerStyle = {
   backgroundColor: 'transparent',
   overflow: 'hidden',
   elevation: 1,
-  borderBottomColor: colors.dark.gray5,
+  borderBottomColor: colors.light.whiteSmoke, // @todo dark mode is not correct
 };
 
 /**

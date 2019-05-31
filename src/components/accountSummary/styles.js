@@ -155,7 +155,7 @@ export default () => ({
       backgroundColor: colors.light.ultramarineBlue,
     },
     walletContainer: {
-      backgroundColor: colors.light.navigationBg,
+      backgroundColor: colors.light.whiteSmoke,
       borderBottomColor: colors.light.whiteSmoke,
       borderBottomWidth: 1,
     },
@@ -180,7 +180,7 @@ export default () => ({
       backgroundColor: colors.dark.ultramarineBlue,
     },
     walletContainer: {
-      backgroundColor: colors.dark.navigationBg,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     walletAddress: {
       color: colors.dark.slateGray,

@@ -1,4 +1,5 @@
 import { themes, boxes, colors, fonts } from '../../../constants/styleGuide';
+import { setColorOpacity } from '../../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -91,7 +92,7 @@ export default () => ({
       backgroundColor: colors.light.BTC,
     },
     row: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     text: {
       color: colors.light.black,
@@ -118,7 +119,7 @@ export default () => ({
       backgroundColor: colors.dark.BTC,
     },
     row: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15),
     },
     text: {
       color: colors.dark.white,
@@ -127,10 +128,10 @@ export default () => ({
       color: colors.light.platinum,
     },
     label: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
     subtitle: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
     link: {
       color: colors.dark.ultramarineBlue,

@@ -60,7 +60,7 @@ class InfiniteScrollView extends React.Component {
             onRefresh={this.onRefresh}
             refreshing={this.state.refreshing}
             tintColor={this.props.theme === themes.light ?
-              colors.light.slateGray : colors.dark.gray4}
+              colors.light.slateGray : colors.dark.platinum}
           />
         }
         ref={((el) => { this.scrollView = el; })}

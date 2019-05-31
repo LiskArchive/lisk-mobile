@@ -9,9 +9,7 @@ import {
 } from '../../actions/settings';
 import List from './list';
 import Footer from './footer';
-import { H3, Small, A } from '../toolBox/typography';
-import { fromRawLsk } from '../../utilities/conversions';
-import Icon from '../toolBox/icon';
+import { H3 } from '../toolBox/typography';
 import colors from '../../constants/styleGuide/colors';
 import easing from '../../utilities/easing';
 import withTheme from '../withTheme';
@@ -23,7 +21,6 @@ import { IconButton } from '../toolBox/button';
  * Loading, Empty (No transactions) or the List view.
  *
  * It performs the initial animation after the user logged in.
- *
  */
 @connect(state => ({
   incognitoMode: state.settings.incognito,
@@ -74,10 +71,6 @@ class Transactions extends React.Component {
     }).start();
   }
 
-  onPress = () => {
-    this.props.navigate('Send', { initialize: true });
-  }
-
   toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
     this.props.settingsUpdated({
@@ -88,12 +81,11 @@ class Transactions extends React.Component {
   render() {
     const {
       styles, transactions, navigate, activeToken,
-      account, footer, theme, incognitoMode,
+      account, footer, incognitoMode,
       followedAccounts, refreshing, type, t,
     } = this.props;
 
     const incognito = type === 'home' && incognitoMode;
-    const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
     const height = type === 'home' ? 180 : 205;
@@ -120,16 +112,6 @@ class Transactions extends React.Component {
                   /> : null
               }
             </View>
-            {type === 'home' && !account.initialized && balance >= 0.2 ?
-              <View style={[styles.initContainer, styles.theme.initContainer]}>
-                <Icon name='warning' color={colors[theme].red} size={18} />
-                <Small style={[styles.initText, styles.theme.initText]}>
-                  {t('Your account is not initialized.')}
-                  <A style={[styles.link, styles.theme.link]}
-                    onPress={this.onPress}> {t('Initialize now')}</A>
-                </Small>
-              </View> : null
-            }
             <List
               incognito={incognito}
               navigate={navigate}

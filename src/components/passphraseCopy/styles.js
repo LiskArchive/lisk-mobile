@@ -40,7 +40,7 @@ export default () => ({
 
   [themes.dark]: {
     passphraseTitle: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
     passphrase: {
       color: colors.dark.white,

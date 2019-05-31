@@ -35,7 +35,7 @@ export default () => ({
 
   [themes.dark]: {
     balanceText: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
   },
 });

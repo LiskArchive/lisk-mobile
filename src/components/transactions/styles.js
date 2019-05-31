@@ -1,4 +1,4 @@
-import { themes, colors, fonts } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
 import { viewportHeight } from '../../utilities/device';
 import { setColorOpacity } from '../../utilities/helpers';
 
@@ -100,17 +100,6 @@ export default () => ({
       width: 18,
       height: 18,
     },
-    initContainer: {
-      flexDirection: 'row',
-      paddingBottom: 22,
-      borderBottomWidth: 1,
-    },
-    initText: {
-      marginLeft: 7,
-    },
-    link: {
-      fontSize: fonts.size.small,
-    },
     footer: {
       height: 90,
       width: '100%',
@@ -153,7 +142,7 @@ export default () => ({
       color: colors.light.slateGray,
     },
     avatar: {
-      borderColor: colors.light.white,
+      borderColor: colors.light.ghost,
     },
     outgoing: {
       color: colors.light.black,
@@ -170,15 +159,6 @@ export default () => ({
     },
     noTxTitle: {
       color: colors.light.slateGray,
-    },
-    initContainer: {
-      borderBottomColor: colors.light.gray5,
-    },
-    initText: {
-      color: colors.light.black,
-    },
-    link: {
-      color: colors.light.ultramarineBlue,
     },
   },
   [themes.dark]: {
@@ -198,7 +178,7 @@ export default () => ({
       color: colors.dark.ghost,
     },
     avatar: {
-      borderColor: colors.dark.gray5,
+      borderColor: colors.dark.ghost,
     },
     outgoing: {
       color: colors.dark.white,
@@ -215,15 +195,6 @@ export default () => ({
     },
     noTxTitle: {
       color: colors.dark.slateGray,
-    },
-    initContainer: {
-      borderBottomColor: colors.dark.gray5,
-    },
-    initText: {
-      color: colors.dark.white,
-    },
-    link: {
-      color: colors.dark.ultramarineBlue,
     },
   },
 });

@@ -185,7 +185,7 @@ export default () => ({
       color: colors.dark.white,
     },
     label: {
-      color: colors.dark.gray4,
+      color: colors.dark.slateGray,
     },
     avatar: {
       borderColor: colors.dark.ghost,

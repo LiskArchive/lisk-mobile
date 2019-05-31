@@ -169,7 +169,7 @@ export default () => ({
       borderTopColor: setColorOpacity(colors.light.white, 0.24),
     },
     label: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
     incoming: {
       color: colors.dark.ufoGreen,

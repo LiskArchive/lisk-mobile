@@ -89,7 +89,6 @@ export default () => ({
     label: {
       marginTop: 5,
       marginBottom: 7,
-      color: colors.light.slateGray,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
       fontWeight: '400',
@@ -117,7 +116,7 @@ export default () => ({
       color: colors.dark.ultramarineBlue,
     },
     label: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
     address: {
       color: colors.dark.white,

@@ -60,7 +60,7 @@ export default () => ({
       width: '100%',
       top: 0,
       left: 0,
-      backgroundColor: colors.light.gray6,
+      backgroundColor: colors.light.whiteSmoke,
       zIndex: 10,
       flexDirection: 'column',
       justifyContent: 'center',
@@ -97,7 +97,7 @@ export default () => ({
   },
   [themes.light]: {
     permissionRequestWrapper: {
-      backgroundColor: colors.light.gray6,
+      backgroundColor: colors.light.whiteSmoke,
     },
     permissionDescription: {
       color: colors.light.slateGray,
@@ -114,7 +114,7 @@ export default () => ({
       color: colors.dark.white,
     },
     permissionDescription: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
     closeButton: {
       color: colors.dark.white,

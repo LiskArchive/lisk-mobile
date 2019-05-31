@@ -1,5 +1,6 @@
 import { Platform } from 'react-native';
 import { themes, colors, boxes } from '../../constants/styleGuide';
+import { setColorOpacity } from '../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -21,7 +22,6 @@ export default () => ({
       overflow: 'hidden',
     },
     titleContainer: {
-      borderBottomWidth: 1,
       position: 'absolute',
       top: 0,
       left: 0,
@@ -53,13 +53,11 @@ export default () => ({
     container: {
       backgroundColor: colors.light.white,
     },
-
     titleContainer: {
-      borderBottomColor: colors.light.gray5,
-      backgroundColor: colors.light.navigationBg,
+      backgroundColor: colors.light.whiteSmoke,
     },
     title: {
-      color: colors.light.black,
+      color: colors.light.maastrichtBlue,
     },
   },
   [themes.dark]: {
@@ -70,8 +68,8 @@ export default () => ({
       color: colors.dark.slateGray,
     },
     titleContainer: {
-      borderBottomColor: colors.dark.gray5,
-      backgroundColor: colors.dark.navigationBg,
+      backgroundColor: colors.dark.maastrichtBlue,
+      borderBottomColor: setColorOpacity(colors.dark.white, 0.24),
     },
     title: {
       color: colors.dark.white,
