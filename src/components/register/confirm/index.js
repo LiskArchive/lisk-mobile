@@ -1,11 +1,9 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
 import { B, P } from '../../toolBox/typography';
 import { PrimaryButton, Button } from '../../toolBox/button';
-import verifyImage from '../../../assets/images/registrationProcess/verify3x.png';
-import verifiedImage from '../../../assets/images/registrationProcess/verified3x.png';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import { assembleWordOptions } from '../../../utilities/passphrase';
 
@@ -184,16 +182,6 @@ class Confirm extends React.Component {
               : null
             }
           </View>
-          {
-            deviceHeight() >= SCREEN_HEIGHTS.SM ?
-              <View style={styles.imageContainer}>
-                <Image
-                  style={styles.image}
-                  source={this.state.buttonStatus ? verifyImage : verifiedImage}
-                />
-                <P style={styles.caption}>{t('Keep it safe!')}</P>
-              </View> : null
-          }
         </View>
         <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
           <PrimaryButton
