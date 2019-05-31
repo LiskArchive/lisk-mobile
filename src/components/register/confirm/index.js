@@ -161,11 +161,6 @@ class Confirm extends React.Component {
     return (
       <View style={styles.container}>
         <View>
-          <View style={styles.horizontalPadding}>
-            <B style={styles.subHeader}>
-              {t('Fill in the blanks.')}
-            </B>
-          </View>
           <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
             {t('Choose the correct option for missing words:')}
           </P>
