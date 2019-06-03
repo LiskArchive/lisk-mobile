@@ -123,17 +123,17 @@ class AccountSummary extends React.Component {
         { opacity, top, height },
         { marginTop: interpolate([0, height + 10], [0, -1 * (height - 1)]) },
       ]}>
-        <AView style={[styles.avatar, { opacity },
+        <AView style={[styles.avatarContainer, { opacity },
           { marginTop: interpolate([0, 100], [0, 100]) }]}>
           {
             token.active === 'LSK' ?
             <Avatar address={account.address} size={60} /> :
-            <View style={[styles.tokenLogoWrapper, styles.theme.tokenLogoWrapper]}>
+            <View style={[styles.tokenLogoWrapperDetails, styles.theme.tokenLogoWrapper]}>
               <Icon
                 style={styles.tokenLogo}
                 name={tokenMap[token.active].icon}
-                size={40}
-                color={colors[theme][token.active]}
+                size={30}
+                color={colors.light.whiteSmoke}
               />
             </View>
           }

@@ -19,12 +19,20 @@ export default () => ({
       paddingBottom: 12,
     },
     tokenLogoWrapper: {
-      padding: 10,
       borderRadius: 30,
       width: 50,
       height: 50,
       alignItems: 'center',
+      justifyContent: 'center',
       backgroundColor: colors.light.whiteSmoke,
+    },
+    tokenLogoWrapperDetails: {
+      borderRadius: 30,
+      width: 50,
+      height: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.light.BTC,
     },
     tokenLogo: {
       textAlign: 'center',
