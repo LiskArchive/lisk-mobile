@@ -140,7 +140,7 @@ class AccountSummary extends React.Component {
     return (
       <Animated.View style={[
         styles.homeContainer,
-        styles.theme.homeContainer,
+        styles.theme[`homeContainer${token.active}`],
         this.props.style,
         { top, opacity, paddingBottom: this.interpolate([0, 100], [15, 0]) },
       ]}>

@@ -152,8 +152,11 @@ export default () => ({
     },
   },
   [themes.light]: {
-    homeContainer: {
+    homeContainerLSK: {
       backgroundColor: colors.light.ultramarineBlue,
+    },
+    homeContainerBTC: {
+      backgroundColor: colors.light.BTC,
     },
     walletContainer: {
       backgroundColor: colors.light.whiteSmoke,
@@ -177,8 +180,11 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    homeContainer: {
+    homeContainerLSK: {
       backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
+    },
+    homeContainerBTC: {
+      backgroundColor: colors.light.BTC,
     },
     walletContainer: {
       backgroundColor: colors.dark.maastrichtBlue,
