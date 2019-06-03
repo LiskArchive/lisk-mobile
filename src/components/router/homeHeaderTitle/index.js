@@ -12,7 +12,7 @@ import lightBig from '../../../assets/images/balanceBlur/lightBig.png';
 import lightMedium from '../../../assets/images/balanceBlur/lightMedium.png';
 import lightSmall from '../../../assets/images/balanceBlur/lightSmall.png';
 import { tokenMap } from '../../../constants/tokens';
-import { colors, themes } from '../../../constants/styleGuide';
+import { colors } from '../../../constants/styleGuide';
 
 const blurs = {
   darkBig, darkMedium, darkSmall, lightBig, lightMedium, lightSmall,
@@ -52,9 +52,7 @@ const ExtendedTitle = ({
               style={styles.tokenLogo}
               name={tokenMap[token].icon}
               size={18}
-              color={theme === themes.light ?
-                colors.light.ultramarineBlue :
-                colors.dark.homeHeaderBg}
+              color={colors.light.BTC}
             />
           </View>
       }
