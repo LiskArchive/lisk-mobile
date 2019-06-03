@@ -1,4 +1,5 @@
 import { themes, colors } from '../../constants/styleGuide';
+import { setColorOpacity } from '../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -30,7 +31,7 @@ export default () => ({
     LSKContainer: {
       width: 50,
       height: 50,
-      backgroundColor: colors.light.blue,
+      backgroundColor: colors.light.ultramarineBlue,
       borderRadius: 50,
       marginRight: 12,
       justifyContent: 'center',
@@ -61,31 +62,31 @@ export default () => ({
       color: colors.light.black,
     },
     itemContainer: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     itemLabel: {
       color: colors.light.black,
     },
     balance: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
   },
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     header: {
       color: colors.dark.white,
     },
     itemContainer: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: setColorOpacity(colors.dark.white, 0.24),
     },
     itemLabel: {
       color: colors.dark.white,
     },
     balance: {
-      color: colors.dark.gray1,
+      color: colors.dark.ghost,
     },
   },
 });

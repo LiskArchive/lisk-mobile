@@ -1,6 +1,7 @@
 import { Platform, DeviceInfo } from 'react-native';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../utilities/device';
 import { themes, colors, boxes, fonts } from '../../constants/styleGuide';
+import { setColorOpacity } from '../../utilities/helpers';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
@@ -66,19 +67,19 @@ export default () => ({
 
   [themes.dark]: {
     wrapper: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     subHeader: {
-      color: colors.dark.gray1,
+      color: colors.dark.slateGray,
     },
     separator: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: setColorOpacity(colors.dark.white, 0.24),
     },
     rowTitle: {
       color: colors.dark.white,
     },
     description: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
     iconWrapper: {
       backgroundColor: colors.dark.white,

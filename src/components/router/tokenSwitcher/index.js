@@ -25,7 +25,7 @@ class TokenSwitcher extends React.Component {
   render() {
     const { styles, settings: { token }, theme } = this.props;
     const style = token.active === tokenKeys[0] ?
-      { backgroundColor: colors[theme].blue } :
+      { backgroundColor: colors[theme].ultramarineBlue } :
       { backgroundColor: colors[theme].BTC };
     const profiles = tokenKeys.filter(key => token.list[key]);
 

@@ -186,6 +186,15 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.props.navigation.addListener('willFocus', this.screenWillFocus);
+
+    setTimeout(() => {
+      const { activeToken, accountFetched } = this.props;
+      const inactiveTokens = Object.keys(tokenMap).filter(token => token !== activeToken);
+
+      inactiveTokens.forEach((token) => {
+        accountFetched(token);
+      });
+    }, 1000);
   }
 
   componentDidUpdate(prevProps) {

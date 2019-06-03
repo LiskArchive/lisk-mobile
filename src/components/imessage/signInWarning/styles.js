@@ -22,11 +22,11 @@ export default StyleSheet.create({
   link: {
     fontWeight: '600',
     fontSize: 13,
-    color: colors.light.blue,
+    color: colors.light.ultramarineBlue,
   },
   description: {
     marginTop: 7,
     textAlign: 'center',
-    color: colors.light.gray2,
+    color: colors.light.slateGray,
   },
 });

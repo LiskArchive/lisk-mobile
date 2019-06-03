@@ -33,7 +33,7 @@ const headerStyle = {
   backgroundColor: 'transparent',
   overflow: 'hidden',
   elevation: 1,
-  borderBottomColor: colors.dark.gray5,
+  borderBottomColor: colors.light.whiteSmoke, // @todo dark mode is not correct
 };
 
 /**
@@ -57,7 +57,8 @@ const Tabs = TabNavigator({
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground bgColor={{
-        light: colors.light.ultramarineBlue, dark: colors.light.brandingBlueHeader,
+        light: colors.light.ultramarineBlue,
+        dark: colors.dark.homeHeaderBg,
       }} />,
       tabBarIcon: props => <TabBarIcon name='home' {...props} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, scene }) => {

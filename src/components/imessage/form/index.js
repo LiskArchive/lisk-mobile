@@ -109,7 +109,8 @@ class LiskMessageExtension extends Component {
     } = this.props;
 
     const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const pickerActiveColor = amount.validity === -1 ? colors.light.black : colors.light.actionRed;
+    const pickerActiveColor = amount.validity === -1 ?
+      colors.light.black : colors.light.burntSieanna;
 
     return (
       <Fragment>
@@ -164,7 +165,7 @@ class LiskMessageExtension extends Component {
                 style={styles.avatar}
                 name='avatar-placeholder'
                 size={34}
-                color={colors.light.gray5}
+                color={colors.light.mystic}
               />
           }
           <Input

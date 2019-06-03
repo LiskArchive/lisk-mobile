@@ -39,7 +39,7 @@ class ManageAssets extends React.Component {
           renderItem={({ item }) => (
             <View
               onPress={() => this.onSelect(item)}
-              underlayColor={colors[theme].boxBg}
+              underlayColor='transparent'
             >
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
                 <View style={{ flexDirection: 'row' }}>

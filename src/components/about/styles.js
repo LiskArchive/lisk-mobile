@@ -48,16 +48,16 @@ export default ({ logoSize }) => ({
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     appTitle: {
       color: colors.dark.white,
     },
     version: {
-      color: colors.dark.gray3,
+      color: colors.dark.slateGray,
     },
     link: {
-      color: colors.dark.blue,
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

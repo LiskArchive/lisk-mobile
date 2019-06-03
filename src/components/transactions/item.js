@@ -107,14 +107,14 @@ class Item extends React.Component {
           {
             (activeToken === 'LSK' && tx.recipientAddress === tx.senderAddress) || incognito ?
               null :
-              <B style={[styles.amount, styles[direction], styles.theme[direction]]}>
-                <FormattedNumber
-                  trim={true}
-                  tokenType={activeToken}
-                >
-                  {amount}
-                </FormattedNumber>
-              </B>
+              <FormattedNumber
+                trim={true}
+                tokenType={activeToken}
+                type={B}
+                style={[styles.amount, styles[direction], styles.theme[direction]]}
+              >
+                {amount}
+              </FormattedNumber>
           }
           {
             (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) && incognito ?

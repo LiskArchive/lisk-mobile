@@ -6,11 +6,11 @@ export default () => ({
       color: colors.light.black,
     },
     input: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     button: {
       marginTop: 20,
-      backgroundColor: colors.light.actionRed4,
+      backgroundColor: colors.light.burntSieanna,
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
     },

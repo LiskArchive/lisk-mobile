@@ -1,4 +1,5 @@
 import { themes, boxes, colors, fonts } from '../../../constants/styleGuide';
+import { setColorOpacity } from '../../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -42,7 +43,7 @@ export default () => ({
     label: {
       marginTop: 14,
       marginBottom: 2,
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
       fontWeight: '400',
@@ -88,10 +89,10 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     addressIconContainer: {
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: colors.light.BTC,
     },
     row: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     text: {
       color: colors.light.black,
@@ -100,25 +101,25 @@ export default () => ({
       color: colors.light.slateGray,
     },
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     subtitle: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     link: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     addressIconContainer: {
-      backgroundColor: colors.dark.sendBalanceBg,
+      backgroundColor: colors.dark.BTC,
     },
     row: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15),
     },
     text: {
       color: colors.dark.white,
@@ -127,13 +128,13 @@ export default () => ({
       color: colors.light.platinum,
     },
     label: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
     subtitle: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
     link: {
-      color: colors.dark.blue,
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

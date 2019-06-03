@@ -102,7 +102,7 @@ class Confirm extends Component {
                   <Icon
                     name='amount'
                     style={styles.icon} size={20}
-                    color={colors.light.gray2}
+                    color={colors.light.slateGray}
                   />
                   <View style={styles.rowContent}>
                     <P style={styles.label}>

@@ -31,13 +31,13 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
   },
 
   [themes.dark]: {
     wrapper: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
   },
 });

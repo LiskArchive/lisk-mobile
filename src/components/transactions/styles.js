@@ -1,5 +1,6 @@
-import { themes, colors, fonts } from '../../constants/styleGuide';
+import { themes, colors } from '../../constants/styleGuide';
 import { viewportHeight } from '../../utilities/device';
+import { setColorOpacity } from '../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -99,17 +100,6 @@ export default () => ({
       width: 18,
       height: 18,
     },
-    initContainer: {
-      flexDirection: 'row',
-      paddingBottom: 22,
-      borderBottomWidth: 1,
-    },
-    initText: {
-      marginLeft: 7,
-    },
-    link: {
-      fontSize: fonts.size.small,
-    },
     footer: {
       height: 90,
       width: '100%',
@@ -140,7 +130,7 @@ export default () => ({
   },
   [themes.light]: {
     itemContainer: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     emptyState: {
       backgroundColor: colors.light.white,
@@ -149,35 +139,26 @@ export default () => ({
       color: colors.light.black,
     },
     date: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     avatar: {
-      borderColor: colors.light.white,
+      borderColor: colors.light.ghost,
     },
     outgoing: {
       color: colors.light.black,
     },
     incoming: {
-      color: colors.light.green,
-      backgroundColor: colors.light.incomingBg,
+      color: colors.light.ufoGreen,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     outgoingSymbol: {
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: setColorOpacity(colors.dark.black, 0.15),
     },
     incomingSymbol: {
-      backgroundColor: colors.light.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     noTxTitle: {
-      color: colors.light.gray2,
-    },
-    initContainer: {
-      borderBottomColor: colors.light.gray5,
-    },
-    initText: {
-      color: colors.light.black,
-    },
-    link: {
-      color: colors.light.blue,
+      color: colors.light.slateGray,
     },
   },
   [themes.dark]: {
@@ -185,44 +166,35 @@ export default () => ({
       color: colors.dark.white,
     },
     itemContainer: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: setColorOpacity(colors.light.white, 0.24),
     },
     emptyState: {
-      backgroundColor: colors.dark.gray5,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     address: {
       color: colors.dark.white,
     },
     date: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
     avatar: {
-      borderColor: colors.dark.gray5,
+      borderColor: colors.dark.ghost,
     },
     outgoing: {
       color: colors.dark.white,
     },
     incoming: {
-      color: colors.dark.green,
-      backgroundColor: colors.dark.incomingBg,
+      color: colors.dark.ufoGreen,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     outgoingSymbol: {
-      backgroundColor: colors.dark.sendBalanceBg,
+      backgroundColor: setColorOpacity(colors.dark.white, 0.15),
     },
     incomingSymbol: {
-      backgroundColor: colors.dark.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     noTxTitle: {
-      color: colors.dark.gray2,
-    },
-    initContainer: {
-      borderBottomColor: colors.dark.gray5,
-    },
-    initText: {
-      color: colors.dark.white,
-    },
-    link: {
-      color: colors.dark.blue,
+      color: colors.dark.slateGray,
     },
   },
 });
