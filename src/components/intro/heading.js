@@ -6,48 +6,14 @@ import { H2, P } from '../toolBox/typography';
 import styles from './styles';
 import { colors } from '../../constants/styleGuide';
 import { PrimaryButton } from '../toolBox/button';
-import activityHistoryImg from '../../assets/images/intro/activityHistory3x.png';
-import tokensTransferImg from '../../assets/images/intro/tokensTransfer3x.png';
-import secureAuthenticationImg from '../../assets/images/intro/secureAuthentication3x.png';
-import easyAccessImg from '../../assets/images/intro/easyAccess3x.png';
+import { headerHeight } from '../../utilities/device';
 
 class Heading extends React.Component {
   render() {
-    const { t, skip } = this.props;
-
-    const descriptionContent = [
-      {
-        step: 1,
-        title: 'Activity history',
-        description:
-          'Get a full overview of your current balance, transaction history and much more.',
-        imageSrc: activityHistoryImg,
-        imageStyle: styles.activityHistoryImg,
-      },
-      {
-        step: 2,
-        title: 'Token transfer',
-        description: 'Transfer your tokens easily to other accounts, by simply scanning QR Codes.',
-        imageSrc: tokensTransferImg,
-        imageStyle: styles.tokensTransferImg,
-      },
-      {
-        step: 3,
-        title: 'Secure authentication',
-        description: 'Access all functions via advanced biometric authentication.',
-        imageSrc: secureAuthenticationImg,
-        imageStyle: styles.secureAuthenticationImg,
-      },
-      {
-        step: 4,
-        title: 'Easy access',
-        description:
-          'Create an account with one passphrase to access your LSK and BTC cryptocurrencies',
-        imageSrc: easyAccessImg,
-        imageStyle: styles.easyAccessImg,
-      },
-    ];
-
+    const {
+      t, skip, descriptionContent, hasHeader,
+    } = this.props;
+    const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {};
     return (
       <View style={styles.headingContainer}>
         <Swiper
@@ -59,16 +25,14 @@ class Heading extends React.Component {
           paginationStyle={styles.headingPagination}
         >
           {descriptionContent.map(item => (
-            <View key={item.step}>
+            <View key={item.step} style={styles.step}>
               <View style={styles.descriptionWrapper}>
                 <H2 style={[styles.centralized, styles.descriptionH]}>{t(item.title)}</H2>
                 <P style={[styles.centralized, styles.descriptionP]}>{t(item.description)}</P>
               </View>
-              <View style={styles.illustrationWrapper}>
-                <Image resizeMethod={'scale'} source={item.imageSrc} style={styles.illustration} />
-              </View>
-              {item.step === 4 && (
-                <View style={styles.buttonContainer}>
+                <Image resizeMethod={'scale'} source={item.imageSrc} style={item.imageStyle} />
+              {item.step === descriptionContent.length && (
+                <View style={[styles.buttonContainer, buttonStyle]}>
                   <PrimaryButton
                     style={styles.button}
                     onClick={skip}

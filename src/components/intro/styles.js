@@ -7,6 +7,7 @@ const styles = {
     backgroundColor: colors.light.white,
     height: '100%',
     paddingTop: (Platform.OS === 'ios' && deviceType() === 'iOSx') ? 25 : 0,
+    // zIndex: 99,
   },
   splashContainer: {
     backgroundColor: colors.light.white,
@@ -67,7 +68,6 @@ const styles = {
     textAlign: 'center',
   },
   headingContainer: {
-    backgroundColor: colors.light.white,
     flex: 1,
   },
   descriptionWrapper: {
@@ -75,6 +75,7 @@ const styles = {
     paddingBottom: boxes.boxPadding,
     paddingHorizontal: boxes.boxPadding,
     minHeight: 155,
+    width: '100%',
   },
   centralized: {
     width: '100%',
@@ -86,6 +87,15 @@ const styles = {
   },
   descriptionH: {
     color: colors.light.maastrichtBlue,
+  },
+  step: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    height: 300,
+    width: '100%',
+    backgroundColor: colors.light.white,
+
   },
   illustrationWrapper: {
     width: '100%',
@@ -112,7 +122,8 @@ const styles = {
     width: '100%',
     alignItems: 'stretch',
     position: 'absolute',
-    bottom: deviceType() === 'iOSx' ? 200 : 180,
+    bottom: deviceType() === 'iOSx' ? 40 : 20,
+    // marginBottom: headerHeight(),
   },
   button: {
     marginHorizontal: 20,
