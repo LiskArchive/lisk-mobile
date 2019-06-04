@@ -8,51 +8,29 @@ const styles = {
     flex: 1,
     justifyContent: 'space-between',
   },
-  header: {
-    marginTop: 8,
-  },
-  titleContainer: {
-    paddingLeft: boxes.boxPadding,
-    paddingRight: boxes.boxPadding,
-  },
-  subTitle: {
-    color: colors.light.slateGray,
-  },
-  subHeader: {
-    marginTop: 8,
-    marginBottom: 25,
-    color: colors.light.slateGray,
-  },
-  label: {
-    color: colors.light.slateGray,
-    marginLeft: 12,
+  wrapper: {
+    flex: 1,
+    justifyContent: 'center',
   },
   passphraseTitle: {
-    color: colors.light.slateGray,
-    paddingLeft: boxes.boxPadding,
-    paddingRight: boxes.boxPadding,
+    color: colors.light.blueGray,
+    fontSize: 16,
+    marginBottom: 30,
   },
   passphraseContainer: {
-    marginTop: 10,
-    paddingLeft: boxes.boxPadding,
-    paddingRight: boxes.boxPadding,
-    backgroundColor: colors.light.navigationBg,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderTopColor: '#ebf1f4',
-    borderBottomColor: '#ebf1f4',
-  },
-  imageDescription: {
-    color: colors.light.slateGray,
-    marginTop: 16,
-    fontFamily: fonts.family.context,
+    borderWidth: 1,
+    borderColor: colors.light.mystic,
+    marginHorizontal: 20,
+    padding: boxes.boxPadding,
+    alignItems: 'center',
   },
   passphrase: {
-    marginTop: 2,
-    lineHeight: 40,
-    marginBottom: 5,
+    marginBottom: 30,
+    lineHeight: 33,
+    fontSize: 18,
     color: colors.light.black,
-    fontFamily: fonts.family.heading,
+    fontFamily: fonts.family.passphraseText,
+    textAlign: 'center',
   },
   copyContainer: {
     alignItems: 'center',
@@ -60,22 +38,24 @@ const styles = {
   },
   copy: {
     color: colors.light.ultramarineBlue,
+    fontSize: 16,
   },
-  imageContainer: {
+  footer: {
+    padding: boxes.boxPadding,
+  },
+  switchContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 60,
+    marginBottom: 20,
   },
-  image: {
-    width: 111,
-    height: 111,
-  },
-  caption: {
-    color: colors.light.slateGray,
-    marginTop: 15,
+  confirmText: {
+    flex: 1,
+    flexWrap: 'wrap',
+    marginLeft: 13.5,
+    color: colors.light.blueGray,
+    fontSize: 13,
   },
   buttonWrapper: {
-    paddingLeft: boxes.boxPadding,
-    paddingRight: boxes.boxPadding,
     marginBottom: deviceHeight() < SCREEN_HEIGHTS.SM ? 20 : 0,
   },
 };

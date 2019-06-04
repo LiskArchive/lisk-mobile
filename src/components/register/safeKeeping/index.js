@@ -1,14 +1,18 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { translate } from 'react-i18next';
+import Switch from 'react-native-switch-pro';
 import styles from './styles';
 import { B, P } from '../../toolBox/typography';
 import CopyToClipboard from '../../copyToClipboard';
 import { PrimaryButton } from '../../toolBox/button';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
-import image from '../../../assets/images/registrationProcess/passphrase3x.png';
+import { colors } from '../../../constants/styleGuide';
 
 class SafeKeeping extends React.Component {
+  state = {
+    confirmed: false,
+  }
+
   componentDidMount() {
     const { t, prevStep, navigation: { setParams } } = this.props;
     setParams({
@@ -23,24 +27,23 @@ class SafeKeeping extends React.Component {
     });
   }
 
+  confirm = (status) => {
+    this.setState({
+      confirmed: status,
+    });
+  }
+
   render() {
     const { t, sharedData: { passphrase } } = this.props;
 
     return (
       <View style={styles.container}>
-        <View>
-          <View style={styles.titleContainer}>
-            <B style={styles.subHeader}>
-              {t('The only way to access your account.')}
-            </B>
-          </View>
-          <P style={styles.passphraseTitle}>{t('This is your passphrase:')}</P>
+        <View style={styles.wrapper}>
           <View style={styles.passphraseContainer}>
-            <B style={styles.passphrase} testID="passphraseText">
-              {passphrase.replace(/\s+/g, '    ')}
-            </B>
-          </View>
-          <View style={styles.copyContainer}>
+            <P style={styles.passphraseTitle}>{t('Store your passphrase carefully')}</P>
+            <Text style={styles.passphrase} testID="passphraseText">
+              {passphrase.replace(/\s+/g, '  ')}
+            </Text>
             <CopyToClipboard
               style={styles.copyContainer}
               labelStyle={styles.copy}
@@ -49,26 +52,30 @@ class SafeKeeping extends React.Component {
               showIcon={true}
               iconSize={14}
               value={passphrase}
-              type={P}/>
+              type={B}
+            />
           </View>
-          {
-            deviceHeight() >= SCREEN_HEIGHTS.SM ?
-              <View style={styles.imageContainer} >
-                <Image
-                  style={styles.image}
-                  source={image}
-                />
-                <P style={styles.caption}>{t('Keep it safe!')}</P>
-              </View> : null
-          }
         </View>
-        <View style={styles.buttonWrapper}>
-          <PrimaryButton
-            testID="registerSafeKeepingButton"
-            style={styles.button}
-            noTheme={true}
-            onClick={this.forward}
-            title={t('I wrote it down')} />
+        <View style={styles.footer}>
+          <View style={styles.switchContainer}>
+            <Switch
+              height={26}
+              width={43}
+              onSyncPress={this.confirm}
+              backgroundActive={colors.light.ultramarineBlue}
+              backgroundInactive={colors.light.platinum}
+            />
+            <P style={styles.confirmText}>{t('I understand that it’s my responsibility to keep my passphrase safe.')}</P>
+          </View>
+          <View style={styles.buttonWrapper}>
+            <PrimaryButton
+              disabled={!this.state.confirmed}
+              testID="registerSafeKeepingButton"
+              style={styles.button}
+              noTheme={true}
+              onClick={this.forward}
+              title={t('I wrote it down')} />
+          </View>
         </View>
       </View>);
   }

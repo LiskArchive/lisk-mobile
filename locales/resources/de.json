@@ -112,7 +112,6 @@
   "The amount value is invalid.": "Der Betrag ist ungültig.",
   "The label must be shorter than 20 characters.": "Die Bezeichnung muss kürzer als 20 Zeichen sein.",
   "The official Lisk mobile wallet.": "Das offizielle Lisk Mobile Wallet.",
-  "The only way to access your account.": "Der einzige Weg auf Ihr Konto zuzugreifen.",
   "This is not your second passphrase.": "Das ist nicht deine zweite Passphrase.",
   "This is your passphrase:": "Das ist deine Passphrase:",
   "Transaction Fee": "Transaktionsgebühr",
@@ -200,5 +199,6 @@
   "Secure authentication": "",
   "Easy access": "",
   "Create an account with one passphrase to access your LSK and BTC cryptocurrencies": "",
-  "You have no transactions yet.": ""
+  "You have no transactions yet.": "",
+  "Store your passphrase carefully": ""
 }
