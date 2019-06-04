@@ -11,7 +11,7 @@ import { tokenMap } from '../../constants/tokens';
 import blurBig from '../../assets/images/balanceBlur/darkBig.png';
 import blurMedium from '../../assets/images/balanceBlur/darkMedium.png';
 import blurSmall from '../../assets/images/balanceBlur/darkSmall.png';
-import { colors, themes } from '../../constants/styleGuide';
+import { colors } from '../../constants/styleGuide';
 
 const blurs = {
   blurBig, blurMedium, blurSmall,
@@ -19,7 +19,6 @@ const blurs = {
 
 const Profile = ({
   styles,
-  theme,
   priceTicker,
   interpolate,
   height,
@@ -55,9 +54,7 @@ const Profile = ({
               style={styles.tokenLogo}
               name={tokenMap[token].icon}
               size={30}
-              color={theme === themes.light ?
-                colors.light.ultramarineBlue :
-                colors.dark.homeHeaderBg}
+              color={colors.light.BTC}
             />
           </View>
         }

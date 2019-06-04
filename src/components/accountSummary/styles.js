@@ -19,12 +19,20 @@ export default () => ({
       paddingBottom: 12,
     },
     tokenLogoWrapper: {
-      padding: 10,
       borderRadius: 30,
       width: 50,
       height: 50,
       alignItems: 'center',
+      justifyContent: 'center',
       backgroundColor: colors.light.whiteSmoke,
+    },
+    tokenLogoWrapperDetails: {
+      borderRadius: 30,
+      width: 50,
+      height: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.light.BTC,
     },
     tokenLogo: {
       textAlign: 'center',
@@ -152,8 +160,11 @@ export default () => ({
     },
   },
   [themes.light]: {
-    homeContainer: {
+    homeContainerLSK: {
       backgroundColor: colors.light.ultramarineBlue,
+    },
+    homeContainerBTC: {
+      backgroundColor: colors.light.BTC,
     },
     walletContainer: {
       backgroundColor: colors.light.whiteSmoke,
@@ -177,8 +188,11 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    homeContainer: {
+    homeContainerLSK: {
       backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
+    },
+    homeContainerBTC: {
+      backgroundColor: colors.light.BTC,
     },
     walletContainer: {
       backgroundColor: colors.dark.maastrichtBlue,

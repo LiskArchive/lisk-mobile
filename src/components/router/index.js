@@ -28,6 +28,7 @@ import TokenSwitcher from './tokenSwitcher';
 import TabBarIcon from './tabBarIcon';
 import TabBarComponent from './tabBarComponent';
 import { colors } from '../../constants/styleGuide';
+import DynamicHeaderBackground from './dynamicHeaderBackground';
 
 const headerStyle = {
   backgroundColor: 'transparent',
@@ -56,10 +57,7 @@ const Tabs = TabNavigator({
       headerTitle: HomeHeaderTitle,
       headerRight: HeaderPlaceholderButton,
       headerLeft: HeaderPlaceholderButton,
-      headerBackground: <HeaderBackground bgColor={{
-        light: colors.light.ultramarineBlue,
-        dark: colors.dark.homeHeaderBg,
-      }} />,
+      headerBackground: <DynamicHeaderBackground />,
       tabBarIcon: props => <TabBarIcon name='home' {...props} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, scene }) => {
         if (scene.focused && scene.route.params && scene.route.params.scrollToTop) {
