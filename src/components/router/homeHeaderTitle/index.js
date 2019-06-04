@@ -52,7 +52,7 @@ const ExtendedTitle = ({
               style={styles.tokenLogo}
               name={tokenMap[token].icon}
               size={18}
-              color={colors[theme][token]}
+              color={colors.light.BTC}
             />
           </View>
       }
@@ -79,7 +79,7 @@ const SimpleHeader = ({
       styles.theme[`${type}Main`],
       { opacity: interpolate(scrollY, [0, 100, 130], [1, 1, 0]) },
     ]}
-    accessibilityTraits="header"
+    accessibilityTraits='header'
     allowFontScaling={false}>
     {title}
   </Animated.Text>

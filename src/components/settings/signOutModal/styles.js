@@ -18,19 +18,19 @@ export default () => ({
 
   [themes.light]: {
     text: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     cancelButton: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
   },
 
   [themes.dark]: {
     text: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     cancelButton: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
   },
 });

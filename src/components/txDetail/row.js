@@ -16,7 +16,7 @@ const Row = ({
         name={icon}
         size={20}
         style={styles.rowIcon}
-        color={colors[theme].gray2}
+        color={colors[theme].blueGray}
       />
     </View>
     <View style={styles.rowContent}>

@@ -24,7 +24,7 @@ const BackButton = ({
     title={t('Use bioAuth', { sensorType })}
     icon='back'
     iconSize={20}
-    color={colors.light.blue} />
+    color={colors.light.ultramarineBlue} />
 );
 
 class Form extends React.Component {

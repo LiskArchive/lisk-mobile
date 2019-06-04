@@ -19,7 +19,7 @@ export default StyleSheet.create({
     marginBottom: 3,
     // paddingLeft: 20,
     fontWeight: 'bold',
-    color: colors.light.gray1,
+    color: colors.light.slateGray,
   },
   instructions: {
     textAlign: 'center',
@@ -91,7 +91,7 @@ export default StyleSheet.create({
     top: 21,
     width: 34,
     height: 34,
-    backgroundColor: colors.light.actionBlue,
+    backgroundColor: colors.light.ultramarineBlue,
     borderRadius: 50,
     flexDirection: 'row',
     paddingLeft: 7,
@@ -105,6 +105,6 @@ export default StyleSheet.create({
   },
   pickerError: {
     textAlign: 'center',
-    color: colors.light.gray1,
+    color: colors.light.slateGray,
   },
 });

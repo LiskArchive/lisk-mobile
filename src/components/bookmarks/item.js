@@ -67,7 +67,7 @@ class draggableItem extends React.Component {
                 name='edit-bookmark'
                 size={21}
                 style={[styles.iconButton, styles.theme.editContent]}
-                color={colors[theme].sendBalanceBg}
+                color={colors[theme].mystic}
               />
               <P style={[styles.buttonContent, styles.theme.editContent]}>{t('Edit')}</P>
             </TouchableOpacity>

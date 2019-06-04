@@ -1,4 +1,5 @@
 import { themes, colors, fonts } from '../../constants/styleGuide';
+import { setColorOpacity } from '../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -119,74 +120,74 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     date: {
-      color: colors.light.gray2,
+      color: colors.light.slateGray,
     },
     value: {
       color: colors.light.black,
     },
     senderAndRecipient: {
-      backgroundColor: colors.light.navigationBg,
-      borderBottomColor: colors.light.gray5,
-      borderTopColor: colors.light.gray5,
+      backgroundColor: colors.light.whiteSmoke,
+      borderBottomColor: colors.light.mystic,
+      borderTopColor: colors.light.mystic,
     },
     label: {
-      color: colors.light.gray1,
+      color: colors.light.slateGray,
     },
     incoming: {
-      color: colors.light.green,
+      color: colors.light.ufoGreen,
     },
     outgoing: {
       color: colors.light.black,
     },
     detailRow: {
-      borderBottomColor: colors.light.gray5,
+      borderBottomColor: colors.light.mystic,
     },
     outgoingSymbol: {
-      backgroundColor: colors.light.sendBalanceBg,
+      backgroundColor: setColorOpacity(colors.light.black, 0.15),
     },
     incomingSymbol: {
-      backgroundColor: colors.light.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     explorerLink: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     date: {
-      color: colors.dark.gray2,
+      color: colors.dark.slateGray,
     },
     value: {
       color: colors.dark.white,
     },
     senderAndRecipient: {
-      backgroundColor: colors.dark.navigationBg,
-      borderBottomColor: colors.dark.gray5,
-      borderTopColor: colors.dark.gray5,
+      backgroundColor: colors.dark.maastrichtBlue,
+      borderBottomColor: setColorOpacity(colors.light.white, 0.24),
+      borderTopColor: setColorOpacity(colors.light.white, 0.24),
     },
     label: {
-      color: colors.dark.gray4,
+      color: colors.dark.ghost,
     },
     incoming: {
-      color: colors.dark.green,
+      color: colors.dark.ufoGreen,
     },
     outgoing: {
       color: colors.dark.white,
     },
     detailRow: {
-      borderBottomColor: '#373E4F',
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15),
     },
     outgoingSymbol: {
-      backgroundColor: colors.dark.sendBalanceBg,
+      backgroundColor: setColorOpacity(colors.light.white, 0.15),
     },
     incomingSymbol: {
-      backgroundColor: colors.dark.incomingBg,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     explorerLink: {
-      color: colors.light.blue,
+      color: colors.light.ultramarineBlue,
     },
   },
 });

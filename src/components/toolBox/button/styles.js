@@ -16,15 +16,15 @@ export default () => ({
       alignItems: 'center',
     },
     iconButtonTitle: {
-      color: colors.light.actionBlue,
+      color: colors.light.ultramarineBlue,
       lineHeight: 18,
     },
     labelButton: {
       backgroundColor: 'transparent',
-      color: colors.light.actionBlueAccent,
+      color: colors.light.ultramarineBlue,
       fontSize: fonts.size.base,
       borderWidth: 2,
-      borderColor: colors.light.actionBlueAccent,
+      borderColor: 'transparent',
       fontFamily: fonts.family.context,
     },
     buttonContainer: {

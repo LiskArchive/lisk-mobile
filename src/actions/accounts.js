@@ -145,18 +145,18 @@ export const accountSignedOut = () => ({
   type: actionTypes.accountSignedOut,
 });
 
-export const accountFetched = () => (dispatch, getState) => {
-  const activeToken = getState().settings.token.active;
-  const { address } = getState().accounts.info[activeToken];
+export const accountFetched = givenToken => (dispatch, getState) => {
+  const selectedToken = givenToken || getState().settings.token.active;
+  const { address } = getState().accounts.info[selectedToken];
 
   dispatch(loadingStarted(actionTypes.accountFetched));
-  return accountAPI.getSummary(activeToken, address)
+  return accountAPI.getSummary(selectedToken, address)
     .then((account) => {
       dispatch({
         type: actionTypes.accountUpdated,
         data: {
           account,
-          activeToken,
+          activeToken: selectedToken,
         },
       });
       dispatch(loadingFinished(actionTypes.accountFetched));

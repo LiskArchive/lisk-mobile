@@ -57,7 +57,6 @@ class Input extends React.Component {
     if (error) {
       inputStyle = [
         ...inputStyle,
-        styles.inputErrorStyle,
         styles.theme.inputErrorStyle,
       ];
     }
@@ -95,7 +94,7 @@ class Input extends React.Component {
             <Icon
               size={16}
               name='error'
-              style={[styles.errorIcon, styles.theme.errorIcon]}
+              style={[styles.theme.errorIcon]}
             />
             <Text style={[styles.errorMessage, styles.theme.errorMessage]}>
               {error}

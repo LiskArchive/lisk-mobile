@@ -72,7 +72,7 @@ export default () => ({
       color: colors.light.white,
     },
     tokenLogoWrapper: {
-      backgroundColor: colors.dark.sendBalanceBg,
+      backgroundColor: colors.dark.white,
     },
   },
 });

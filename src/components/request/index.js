@@ -114,7 +114,7 @@ class Request extends React.Component {
                         theme === themes.light ? colors.light.black : colors.dark.white
                       }
                       backgroundColor={
-                        theme === themes.light ? colors.light.white : colors.dark.screenBgNavy
+                        theme === themes.light ? colors.light.white : colors.dark.maastrichtBlue
                       }
                     />
 

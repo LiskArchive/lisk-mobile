@@ -4,7 +4,7 @@ import { colors } from '../../constants/styleGuide';
 import { merge } from '../../utilities/helpers';
 
 let wrapper = {
-  backgroundColor: colors.light.brandingBlue,
+  backgroundColor: colors.light.ultramarineBlue,
 };
 
 if (Platform.OS === 'ios') {

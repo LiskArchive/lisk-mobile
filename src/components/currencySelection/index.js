@@ -28,7 +28,7 @@ class CurrencySelection extends React.Component {
           renderItem={({ item }) => (
             <TouchableHighlight
               onPress={() => this.onSelect(item)}
-              underlayColor={colors[theme].boxBg}
+              underlayColor='transparent'
             >
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
                 <P style={styles.theme.itemLabel}>
@@ -39,7 +39,7 @@ class CurrencySelection extends React.Component {
                   {currency === item ? (
                     <Icon
                       name="checkmark"
-                      color={colors[theme].blue}
+                      color={colors[theme].ultramarineBlue}
                       size={20}
                       style={{
                         width: 26,

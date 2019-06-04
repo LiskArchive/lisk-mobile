@@ -36,7 +36,7 @@ const CircularProgress = ({ style, value, max }) => {
           origin="50"
           strokeDasharray={circunference}
           strokeDashoffset={offset}
-          stroke={error ? colors.light.red : colors.light.ultramarineBlue}
+          stroke={error ? colors.light.burntSieanna : colors.light.ultramarineBlue}
           strokeWidth="4"
           fill="transparent"
         />

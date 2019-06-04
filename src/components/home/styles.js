@@ -5,7 +5,6 @@ export default () => ({
     container: {
       flex: 1,
       alignContent: 'space-around',
-      backgroundColor: colors.light.white,
     },
     scrollView: {
       marginTop: -10,
@@ -28,7 +27,7 @@ export default () => ({
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
   },
 });

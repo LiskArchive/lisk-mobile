@@ -1,4 +1,5 @@
 import { themes, colors, boxes } from '../../constants/styleGuide';
+import { setColorOpacity } from '../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -45,16 +46,16 @@ export default () => ({
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.screenBgNavy,
+      backgroundColor: colors.dark.maastrichtBlue,
     },
     subHeader: {
       color: colors.dark.white,
     },
     item: {
-      borderBottomColor: colors.dark.gray5,
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15),
     },
     targetStateLabel: {
-      color: colors.dark.gray1,
+      color: colors.dark.slateGray,
     },
   },
 });

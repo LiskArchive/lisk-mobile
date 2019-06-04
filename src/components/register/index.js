@@ -35,7 +35,7 @@ class Register extends React.Component {
           title={params.backButtonTitle || ''}
           onPress={() => (params.action ? params.action() : navigation.pop())}
           style={styles.backButton}
-          color={colors.light.gray1}
+          color={colors.light.slateGray}
         />
       ) : (
         <IconButton

@@ -1,4 +1,5 @@
 import { themes, fonts, colors } from '../../../constants/styleGuide';
+import { setColorOpacity } from '../../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -8,17 +9,14 @@ export default () => ({
       paddingTop: 20,
     },
     inputLabel: {
-      color: colors.light.maastrichtBlue,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
       marginBottom: 13,
     },
     input: {
-      color: colors.light.maastrichtBlue,
       fontSize: fonts.size.base,
       fontFamily: fonts.family.contextBold,
       width: '100%',
-      borderColor: colors.light.platinum,
       borderWidth: 1,
       paddingTop: 13,
       padding: 13,
@@ -27,20 +25,13 @@ export default () => ({
     inputFocused: {
       borderColor: colors.light.ultramarineBlue,
     },
-    inputErrorStyle: {
-      borderColor: colors.light.red,
-    },
     errorMessageContainer: {
       marginTop: 10,
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'flex-start',
     },
-    errorIcon: {
-      color: colors.light.red,
-    },
     errorMessage: {
-      color: colors.light.gray1,
       fontFamily: fonts.family.context,
       marginBottom: 20,
       paddingTop: 0,
@@ -52,24 +43,40 @@ export default () => ({
   },
 
   [themes.light]: {
+    inputLabel: {
+      color: colors.light.maastrichtBlue,
+    },
+    input: {
+      color: colors.light.maastrichtBlue,
+      borderColor: colors.light.platinum,
+    },
+    inputErrorStyle: {
+      borderColor: colors.light.burntSieanna,
+    },
+    errorIcon: {
+      color: colors.light.burntSieanna,
+    },
+    errorMessage: {
+      color: colors.light.slateGray,
+    },
   },
 
   [themes.dark]: {
     inputLabel: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
     input: {
       color: colors.dark.white,
-      borderColor: colors.dark.inputBorder,
+      borderColor: setColorOpacity(colors.dark.white, 0.24),
     },
     inputErrorStyle: {
-      borderColor: colors.dark.red,
+      borderColor: colors.dark.burntSieanna,
     },
     errorIcon: {
-      color: colors.dark.red,
+      color: colors.dark.burntSieanna,
     },
     errorMessage: {
-      color: colors.dark.gray4,
+      color: colors.dark.platinum,
     },
   },
 });
