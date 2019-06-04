@@ -7,7 +7,6 @@ const styles = {
     backgroundColor: colors.light.white,
     height: '100%',
     paddingTop: (Platform.OS === 'ios' && deviceType() === 'iOSx') ? 25 : 0,
-    // zIndex: 99,
   },
   splashContainer: {
     backgroundColor: colors.light.white,
@@ -123,7 +122,6 @@ const styles = {
     alignItems: 'stretch',
     position: 'absolute',
     bottom: deviceType() === 'iOSx' ? 40 : 20,
-    // marginBottom: headerHeight(),
   },
   button: {
     marginHorizontal: 20,
