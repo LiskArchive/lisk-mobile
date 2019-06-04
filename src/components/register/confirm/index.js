@@ -128,7 +128,7 @@ class Confirm extends React.Component {
       const finalAnswers = answers.map(item => (
         {
           value: item.value,
-          style: isCorrect ? styles.successButton : styles.errorButton,
+          style: styles.noBorderBottom,
           textStyle: isCorrect ? styles.labelCorrect : styles.labelIncorrect,
         }
       ));

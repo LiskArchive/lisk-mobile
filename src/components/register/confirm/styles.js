@@ -53,12 +53,7 @@ const styles = {
   deActivePlaceholder: {
     borderBottomColor: colors.light.ghost,
   },
-  successButton: {
-    color: colors.light.green,
-    borderBottomWidth: 0,
-  },
-  errorButton: {
-    color: colors.light.red,
+  noBorderBottom: {
     borderBottomWidth: 0,
   },
   selectedPlaceholder: {
@@ -90,7 +85,7 @@ const styles = {
     color: colors.light.ufoGreen,
   },
   labelIncorrect: {
-    color: colors.light.red,
+    color: colors.light.burntSieanna,
   },
   labelOption: {
     color: colors.light.ultramarineBlue,
