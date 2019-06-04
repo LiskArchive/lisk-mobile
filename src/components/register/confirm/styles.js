@@ -98,6 +98,7 @@ const styles = {
     paddingRight: boxes.boxPadding,
   },
   buttonWrapper: {
+    padding: boxes.boxPadding,
     marginBottom: deviceType() === 'iOSx' ? 20 : 0,
   },
 };

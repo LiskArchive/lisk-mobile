@@ -9,7 +9,6 @@ const styles = {
     height: '100%',
     width: '100%',
     backgroundColor: colors.light.white,
-    paddingBottom: height > 640 ? navigatorHeight : 0,
   },
   back: {
     color: 'black',
@@ -43,6 +42,7 @@ const styles = {
     marginRight: 10,
     marginLeft: 10,
     backgroundColor: colors.light.gray5,
+    zIndex: 5,
   },
   disabledNavButton: {
     backgroundColor: colors.light.black,
