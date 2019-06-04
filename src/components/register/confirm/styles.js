@@ -34,7 +34,7 @@ const styles = {
     justifyContent: 'center',
   },
   word: {
-    marginRight: 14,
+    marginHorizontal: 7,
     lineHeight: 33,
     color: colors.light.black,
     fontFamily: fonts.family.passphraseText,
@@ -42,7 +42,7 @@ const styles = {
   placeholder: {
     borderBottomWidth: 1.5,
     height: 33,
-    marginRight: 4,
+    marginHorizontal: 5,
     minWidth: 75,
     textAlign: 'center',
     justifyContent: 'center',
@@ -74,6 +74,9 @@ const styles = {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
+  },
+  optionPlaceholder: {
+    height: 33,
   },
   label: {
     fontFamily: fonts.family.passphraseText,

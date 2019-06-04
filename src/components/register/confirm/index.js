@@ -193,7 +193,7 @@ class Confirm extends React.Component {
                       onClick={() => this.fillOption(value)}
                     />
                   ))
-                : null}
+                : <View style={styles.optionPlaceholder} />}
             </View>
           </View>
         </View>
