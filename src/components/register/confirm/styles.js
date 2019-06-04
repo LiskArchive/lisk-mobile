@@ -1,8 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
+import { deviceType } from '../../../utilities/device';
 import { colors, fonts, boxes } from '../../../constants/styleGuide';
-
-const isSmallDevice = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 const styles = {
   container: {
@@ -100,7 +98,7 @@ const styles = {
     paddingRight: boxes.boxPadding,
   },
   buttonWrapper: {
-    paddingBottom: isSmallDevice ? 20 : 0,
+    marginBottom: deviceType() === 'iOSx' ? 20 : 0,
   },
 };
 
