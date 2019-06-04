@@ -13,7 +13,6 @@ import { IconButton } from '../toolBox/button';
 import { themes, colors } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import Progress from './progress';
 import { tokenMap } from '../../constants/tokens';
 
 @connect(state => ({
@@ -178,7 +177,7 @@ class Send extends React.Component {
         ref={(el) => { this.nav = el; }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         finalCallback={this.finalCallback}
-        Progress={Progress}
+        showProgressBar
       >
         {steps.map(step => (
           <step.component
