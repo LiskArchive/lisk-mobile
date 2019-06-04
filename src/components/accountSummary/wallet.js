@@ -171,14 +171,14 @@ class AccountSummary extends React.Component {
             style={[styles.sendButton, styles.theme.sendButton]}
             title=''
             icon={isFollowed ? 'bookmark-filled' : 'bookmark'}
-            color={colors[theme].blue}
+            color={colors[theme].ultramarineBlue}
             iconSize={20}
             onClick={this.toggleBookmark} />
           <IconButton
             style={[styles.sendButton, styles.theme.sendButton]}
             title=''
             icon='send'
-            color={colors[theme].blue}
+            color={colors[theme].ultramarineBlue}
             iconSize={20}
             onClick={() => navigation.navigate('Send', { query: { address: account.address } })} />
         </AView>

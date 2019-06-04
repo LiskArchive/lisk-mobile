@@ -127,7 +127,6 @@ export default () => ({
       height: 50,
       borderWidth: 1,
       borderColor: colors.light.slateGray,
-      flexGrow: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       paddingLeft: 0,
@@ -173,7 +172,7 @@ export default () => ({
       color: colors.light.white,
     },
     walletBalance: {
-      color: colors.light.ultramarineBlue,
+      color: colors.light.black,
     },
     walletAddress: {
       color: colors.light.slateGray,
@@ -182,7 +181,7 @@ export default () => ({
       color: colors.light.whiteSmoke,
     },
     sendButton: {
-      backgroundColor: colors.light.slateGray,
+      backgroundColor: colors.light.white,
       borderColor: colors.light.ghost,
     },
   },
@@ -194,7 +193,10 @@ export default () => ({
       backgroundColor: colors.light.BTC,
     },
     walletContainer: {
+      borderBottomWidth: 1,
       backgroundColor: colors.dark.maastrichtBlue,
+      borderBottomColor: setColorOpacity(colors.light.white, 0.24),
+      borderTopColor: setColorOpacity(colors.light.white, 0.24),
     },
     walletAddress: {
       color: colors.dark.slateGray,
