@@ -162,7 +162,7 @@ class Send extends React.Component {
     ];
 
     if (accounts.info[settings.token.active].secondPublicKey) {
-      steps.splice(4, 0, {
+      steps.splice(3, 0, {
         component: SecondPassphrase,
         title: 'secondPassphrase',
       });
