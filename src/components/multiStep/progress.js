@@ -1,12 +1,8 @@
 import React from 'react';
 import { View, Dimensions } from 'react-native';
-import connect from 'redux-connect-decorator';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
-@connect(state => ({
-  activeToken: state.settings.token.active,
-}))
 class Progress extends React.Component {
   render() {
     const {
