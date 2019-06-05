@@ -15,14 +15,16 @@ const styles = {
   },
   subTitle: {
     color: colors.light.slateGray,
+    textAlign: 'center',
+    marginTop: 30,
   },
   imageContainer: {
     marginTop: 52,
     alignItems: 'center',
   },
   image: {
-    width: 198,
-    height: 198,
+    width: 305,
+    height: 340,
   },
   button: {
     marginBottom: DeviceInfo.isIPhoneX_deprecated ? 35 : 25,
