@@ -33,8 +33,7 @@ class TokenSwitcher extends React.Component {
       profiles.length > 1 ?
         <IconButton
           color={colors[theme].white }
-          iconSize={13}
-          title=''
+          iconSize={14}
           icon={tokenMap[token.active].icon}
           onClick={this.onClick}
           style={[styles.button, style]}
