@@ -27,6 +27,9 @@ export default () => ({
       justifyContent: 'center',
       backgroundColor: colors.light.whiteSmoke,
     },
+    walletTokenLogoWrapper: {
+      backgroundColor: colors.light.BTC,
+    },
     tokenLogoWrapperDetails: {
       borderRadius: 30,
       width: 50,
