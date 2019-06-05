@@ -1,11 +1,14 @@
-import { themes, colors, fonts } from '../../../constants/styleGuide';
+import { themes, colors, fonts, boxes } from '../../../constants/styleGuide';
 
 export default () => ({
   common: {
     container: {
       flex: 1,
+      paddingHorizontal: boxes.boxPadding,
       paddingTop: 0,
-      paddingBottom: 20,
+      paddingBottom: 40,
+      flexDirection: 'column',
+      justifyContent: 'space-between',
     },
     divider: {
       margin: 20,
@@ -44,8 +47,8 @@ export default () => ({
     arrow: {
       marginRight: 20,
       marginLeft: 20,
-      width: 99,
-      height: 16,
+      width: 17,
+      height: 11,
     },
     reverseArrow: {
       transform: [
@@ -79,8 +82,6 @@ export default () => ({
       paddingBottom: 16,
       paddingTop: 16,
       borderBottomWidth: 1,
-      marginLeft: 20,
-      marginRight: 20,
     },
     rowIcon: {
       marginRight: 11,
@@ -89,10 +90,6 @@ export default () => ({
       justifyContent: 'center',
       textAlign: 'center',
       flexDirection: 'row',
-    },
-    link: {
-      textAlign: 'center',
-      marginTop: 20,
     },
   },
 
@@ -107,7 +104,6 @@ export default () => ({
       color: colors.light.black,
     },
     senderAndRecipient: {
-      backgroundColor: colors.light.whiteSmoke,
       borderBottomColor: colors.light.mystic,
       borderTopColor: colors.light.mystic,
     },

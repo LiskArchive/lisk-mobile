@@ -18,6 +18,7 @@ import arrowLight from '../../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
 import { colors, themes } from '../../../constants/styleGuide';
+import { PrimaryButton } from '../../toolBox/button';
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
@@ -91,126 +92,127 @@ class TransactionDetail extends React.Component {
     }
 
     return (
-      <ScrollView style={[styles.container, styles.theme.container]}>
-        <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
-          <View style={styles.row}>
+      <ScrollView contentContainerStyle={[styles.container, styles.theme.container]}>
+        <View style={styles.innerContainer}>
+          <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
+            <View style={styles.row}>
+              {
+                <Fragment>
+                  <Avatar address={firstAddress} size={50} />
+                  {
+                    theme === themes.light ?
+                      <Image source={arrowLight} style={[styles.arrow, arrowStyle]} /> :
+                      <Image source={arrowDark} style={[styles.arrow, arrowStyle]} />
+                  }
+                  <Avatar address={secondAddress} size={50} />
+                </Fragment>
+              }
+            </View>
+            {(tx.type && tx.type !== 0) || (tx.recipientAddress === tx.senderAddress) ?
+              <H3 style={amountStyle}>{transactions[txTypes[tx.type]].title}</H3> : null
+            }
             {
-              <Fragment>
-                <Avatar address={firstAddress} size={50} />
-                {
-                  theme === themes.light ?
-                    <Image source={arrowLight} style={[styles.arrow, arrowStyle]} /> :
-                    <Image source={arrowDark} style={[styles.arrow, arrowStyle]} />
-                }
-                <Avatar address={secondAddress} size={50} />
-              </Fragment>
+              tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) ?
+                <H1 style={amountStyle}>
+                  {amountSign}
+                  <FormattedNumber>
+                    {tx.notRawLisk ? tx.amount : fromRawLsk(tx.amount)}
+                  </FormattedNumber>
+                </H1> : null
+            }
+            {
+              tx.timestamp ?
+                <FormattedDate
+                  format='MMM D, YYYY LTS'
+                  type={P}
+                  style={[styles.date, styles.theme.date]}
+                >
+                  {tx.timestamp}
+                </FormattedDate> : null
             }
           </View>
-          {(tx.type && tx.type !== 0) || (tx.recipientAddress === tx.senderAddress) ?
-            <H3 style={amountStyle}>{transactions[txTypes[tx.type]].title}</H3> : null
-          }
-          {
-            tx.type === 0 && (tx.recipientAddress !== tx.senderAddress) ?
-              <H1 style={amountStyle}>
-                {amountSign}
-                <FormattedNumber>
-                  {tx.notRawLisk ? tx.amount : fromRawLsk(tx.amount)}
-                </FormattedNumber>
-              </H1> : null
-          }
-          {
-            tx.timestamp ?
-              <FormattedDate
-                format='MMM D, YYYY LTS'
-                type={P}
-                style={[styles.date, styles.theme.date]}
-              >
-                {tx.timestamp}
-              </FormattedDate> : null
-          }
-        </View>
-        <View style={[styles.detailRow, styles.theme.detailRow]}>
-          <Icon
-            name='send'
-            size={22}
-            style={styles.rowIcon}
-            color={colors[theme].gray2}
-          />
-          <View style={styles.rowContent}>
-            <P style={[styles.label, styles.theme.label]}>
-              {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-                <Fragment>Account address</Fragment> :
-                <Fragment>Sender</Fragment>
-              }
-            </P>
-            <View style={styles.addressContainer}>
-              <A
-                value={tx.senderAddress}
-                style={[styles.value, styles.theme.value, styles.transactionId]}
-              >
-                {tx.senderAddress}
-              </A>
-            </View>
-          </View>
-        </View>
-
-        {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-          null :
           <View style={[styles.detailRow, styles.theme.detailRow]}>
             <Icon
-              name='recipient'
+              name='send'
               size={22}
               style={styles.rowIcon}
               color={colors[theme].gray2}
             />
             <View style={styles.rowContent}>
-              <P style={[styles.label, styles.theme.label]}>Recipient</P>
+              <P style={[styles.label, styles.theme.label]}>
+                {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
+                  <Fragment>Account address</Fragment> :
+                  <Fragment>Sender</Fragment>
+                }
+              </P>
               <View style={styles.addressContainer}>
                 <A
                   value={tx.senderAddress}
                   style={[styles.value, styles.theme.value, styles.transactionId]}
                 >
-                  {tx.recipientAddress}
+                  {tx.senderAddress}
                 </A>
               </View>
             </View>
           </View>
-        }
-        {
-          (tx.asset && tx.asset.data) ?
+
+          {tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
+            null :
             <View style={[styles.detailRow, styles.theme.detailRow]}>
               <Icon
-                name='reference'
+                name='recipient'
                 size={22}
                 style={styles.rowIcon}
                 color={colors[theme].gray2}
               />
               <View style={styles.rowContent}>
-                <P style={[styles.label, styles.theme.label]}>Reference</P>
-                <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
-                  {tx.asset.data}
-                </B>
+                <P style={[styles.label, styles.theme.label]}>Recipient</P>
+                <View style={styles.addressContainer}>
+                  <A
+                    value={tx.senderAddress}
+                    style={[styles.value, styles.theme.value, styles.transactionId]}
+                  >
+                    {tx.recipientAddress}
+                  </A>
+                </View>
               </View>
-            </View> : null
-        }
-        <View style={[styles.detailRow, styles.theme.detailRow]}>
-          <Icon
-            name='confirmation'
-            size={22}
-            style={styles.rowIcon}
-            color={colors[theme].gray2}
-          />
-          <View style={styles.rowContent}>
-            <P style={[styles.label, styles.theme.label]}>Confirmations</P>
-            <B style={[styles.value, styles.theme.value]}>{tx.confirmations || 'Not confirmed yet.'}</B>
+            </View>
+          }
+          {
+            (tx.asset && tx.asset.data) ?
+              <View style={[styles.detailRow, styles.theme.detailRow]}>
+                <Icon
+                  name='reference'
+                  size={22}
+                  style={styles.rowIcon}
+                  color={colors[theme].gray2}
+                />
+                <View style={styles.rowContent}>
+                  <P style={[styles.label, styles.theme.label]}>Reference</P>
+                  <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
+                    {tx.asset.data}
+                  </B>
+                </View>
+              </View> : null
+          }
+          <View style={[styles.detailRow, styles.theme.detailRow]}>
+            <Icon
+              name='confirmation'
+              size={22}
+              style={styles.rowIcon}
+              color={colors[theme].gray2}
+            />
+            <View style={styles.rowContent}>
+              <P style={[styles.label, styles.theme.label]}>Confirmations</P>
+              <B style={[styles.value, styles.theme.value]}>{tx.confirmations || 'Not confirmed yet.'}</B>
+            </View>
           </View>
         </View>
-        <A
-          style={[styles.link, styles.theme.link]}
-          onPress={this.onOpenDeepLink}
-        >
-          Read about this transaction
-        </A>
+        <PrimaryButton
+          style={styles.button}
+          onClick={this.onOpenDeepLink}
+          title='Open in Lisk application'
+        />
       </ScrollView>
     );
   }

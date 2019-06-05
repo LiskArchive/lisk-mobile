@@ -75,7 +75,7 @@ class Confirm extends Component {
     const totalAmount = isSender ? amount : includeFee(amount, fee);
     const description = isSender ?
       `Your request of ${totalAmount} LSK is pending response.` :
-      `By accepting this request, you'll send ${totalAmount} LSK (including transaction fee) from your account.`;
+      `By accepting this request, you will send ${totalAmount} LSK (including transaction fee) from your account.`;
 
     const rejectMessage = () => {
       composeMessage({
@@ -122,7 +122,7 @@ class Confirm extends Component {
                         color={colors.light.gray2}
                       />
                       <View style={styles.rowContent}>
-                        <P style={styles.label}>Fee</P>
+                        <P style={styles.label}>Transaction fee</P>
                         <B style={[styles.text]}>
                           <FormattedNumber>
                             {0.1}
@@ -131,9 +131,9 @@ class Confirm extends Component {
                       </View>
                     </View> : null
                 }
-                <B style={styles.description}>
+                <P style={styles.description}>
                   {description}
-                </B>
+                </P>
               </View>
               {
                 isSender ?

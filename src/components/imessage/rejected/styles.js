@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { boxes, colors } from '../../../constants/styleGuide';
+import { boxes, colors, fonts } from '../../../constants/styleGuide';
 
 export default StyleSheet.create({
   container: {
@@ -7,16 +7,21 @@ export default StyleSheet.create({
     flex: 1,
   },
   innerContainer: {
-    marginTop: -30,
     flexGrow: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
     margin: boxes.boxPadding,
   },
+  image: {
+    width: 250,
+    height: 250,
+    marginTop: -60,
+    marginBottom: -50,
+  },
   description: {
-    marginTop: -45,
     textAlign: 'center',
+    color: colors.light.maastrichtBlue,
+    fontSize: fonts.size.base,
+    fontWeight: 'normal',
   },
 });
