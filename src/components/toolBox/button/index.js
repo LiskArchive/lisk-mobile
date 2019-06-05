@@ -98,7 +98,7 @@ const LabelButton = (props) => {
  */
 const IconButton = (props) => {
   const {
-    titleStyle, style, title, icon, color, iconSize, onClick,
+    titleStyle, style, title, icon, color, iconSize, onClick, iconStyle,
   } = props;
   const viewProps = Object.keys(props)
     .filter(key => !(/titleStyle|style|title|icon|color/.test(key)))
@@ -108,7 +108,7 @@ const IconButton = (props) => {
     underlayColor='transparent' {...viewProps}
     style={[props.styles.iconButton, style]}>
     <Fragment>
-      <Icon name={icon} size={iconSize || 30} color={color || '#000'} />
+      <Icon style={iconStyle} name={icon} size={iconSize || 30} color={color || '#000'} />
       <Text style={[props.styles.iconButtonTitle, titleStyle]}>{ title || '' }</Text>
     </Fragment>
   </TouchableHighlight>);

@@ -1,24 +1,16 @@
 import React from 'react';
 import { View, Animated, ScrollView, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
-import { P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import Input from '../toolBox/input';
+import { IconButton } from '../toolBox/button';
 import { colors } from '../../constants/styleGuide';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../utilities/device';
-import AddButton from './addButton';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import Bookmarks from '../bookmarks';
 
 class Bookmark extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      tabBarVisible: params.tabBar,
-      headerLeft: <AddButton onPress={params.action} style={params.styles} />,
-    };
-  };
   activeInputRef = null;
   scannedData = {};
   state = {
@@ -26,23 +18,11 @@ class Bookmark extends React.Component {
     query: '',
   };
   animatedStyles = {
-    height: new Animated.Value(45),
+    height: new Animated.Value(75),
     paddingTop: new Animated.Value(20),
   }
 
   componentDidMount() {
-    const {
-      navigation, styles, theme, t,
-    } = this.props;
-    navigation.setParams({
-      styles,
-      theme,
-      action: () => {
-        navigation.navigate('AddBookmark', {
-          title: t('New bookmark'),
-        });
-      },
-    });
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.onKeyboardOpen);
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.onKeyboardClose);
   }
@@ -89,7 +69,7 @@ class Bookmark extends React.Component {
     } else {
       Animated.parallel([
         Animated.timing(height, {
-          toValue: 45,
+          toValue: 75,
           duration: 400,
           delay: 0,
         }),
@@ -139,13 +119,6 @@ class Bookmark extends React.Component {
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <ScrollView style={styles.container}>
           <View style={styles.innerContainer}>
-            {!isSmallScreen ? (
-              <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-                <P style={[styles.subtitle, styles.theme.subtitle]}>
-                  {t('Manage your bookmarks.')}
-                </P>
-              </Animated.View>
-            ) : null}
             <View style={styles.form}>
               <View style={styles.addressContainer}>
                 <Icon
@@ -171,6 +144,22 @@ class Bookmark extends React.Component {
                   value={query}
                 />
               </View>
+              {!isSmallScreen ? (
+                <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
+                  <IconButton
+                    style={[styles.addButton, styles.theme.addButton]}
+                    iconStyle={[styles.addButtonIcon, styles.theme.addButtonIcon]}
+                    titleStyle={[styles.addButtonText, styles.theme.addButtonText]}
+                    title={t('Add a new bookmark')}
+                    icon='cross'
+                    color={colors[theme].white}
+                    iconSize={21}
+                    onClick={() => navigation.navigate('AddBookmark', {
+                        title: t('New bookmark'),
+                      })
+                    } />
+                </Animated.View>
+              ) : null}
               <Bookmarks
                 navigate={navigation.navigate}
                 draggable={true} setRef={this.setRef} query={query}

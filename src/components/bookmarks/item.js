@@ -115,7 +115,7 @@ class draggableItem extends React.Component {
               {
                 showAvatar ?
                 <View style={[styles.itemColumn, styles.avatarContainer]}>
-                  <Avatar address={data.address} size={50} style={styles.theme.avatar} />
+                  <Avatar address={data.address} size={43} style={styles.theme.avatar} />
                 </View> : null
               }
               <View style={styles.column}>
@@ -154,7 +154,7 @@ class Item extends React.Component {
         {
           showAvatar ?
           <View style={[styles.itemColumn, styles.avatarContainer]}>
-            <Avatar address={data.address} size={50} style={styles.theme.avatar} />
+            <Avatar address={data.address} size={43} style={styles.theme.avatar} />
           </View> : null
         }
         <View style={styles.column}>
