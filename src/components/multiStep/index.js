@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './navigator';
 import { Element } from './element';
 import { getStyles } from './utils';
+import Progress from './progress';
 
 /**
  *
@@ -79,7 +80,7 @@ class MultiStep extends React.Component {
   render() {
     const {
       children, finalCallback, backButtonTitle,
-      showNav, navStyles, Progress,
+      showNav, navStyles, showProgressBar,
       interactive, backButton, prevPage, hideGroups, hideSteps,
       activeTitle, navigatorButton, groupButton, stepButton,
     } = this.props;
@@ -124,7 +125,7 @@ class MultiStep extends React.Component {
             /> : null
         }
         {
-          Progress ? <Progress current={current + 1} total={children.length} /> : null
+          showProgressBar ? <Progress current={current + 1} total={children.length} /> : null
         }
         {
           React.cloneElement(children[current], extraProps)

@@ -18,7 +18,7 @@ const modifyProps = (props) => {
  */
 const BaseButton = (props) => {
   const {
-    styles, textStyle, children, title, disabled, testID,
+    styles, textStyle, children, title, disabled, testID, noPredefinedStyle,
   } = props;
 
   return (
@@ -26,12 +26,12 @@ const BaseButton = (props) => {
       {...modifyProps(props)}
       testID={testID}
       style={[
-        styles.buttonContainer,
+        noPredefinedStyle ? null : styles.buttonContainer,
         props.style,
         disabled ? styles.disabledButtonContainer : null,
       ]}
     >
-      <Text style={[styles.buttonText, textStyle]}>
+      <Text style={[noPredefinedStyle ? null : styles.buttonText, textStyle]}>
         {children || title}
       </Text>
     </TouchableOpacity>

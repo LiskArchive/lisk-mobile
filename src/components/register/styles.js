@@ -8,7 +8,7 @@ const styles = {
   container: {
     height: '100%',
     width: '100%',
-    backgroundColor: colors.light.gray6,
+    backgroundColor: colors.light.white,
   },
   back: {
     color: 'black',

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
+import { deviceType } from '../../../utilities/device';
 import { colors, fonts, boxes } from '../../../constants/styleGuide';
 
 const styles = {
@@ -56,7 +56,7 @@ const styles = {
     fontSize: 13,
   },
   buttonWrapper: {
-    marginBottom: deviceHeight() < SCREEN_HEIGHTS.SM ? 20 : 0,
+    marginBottom: deviceType() === 'iOSx' ? 20 : 0,
   },
 };
 
