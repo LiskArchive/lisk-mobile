@@ -98,6 +98,38 @@
 		<string>PTMono-Regular.ttf</string>
 		<string>Dots.ttf</string>
 		<string>Dots-Regular.ttf</string>
+		<string>BasierCircle-Bold.otf</string>
+		<string>BasierCircle-BoldItalic.otf</string>
+		<string>BasierCircle-Medium.otf</string>
+		<string>BasierCircle-MediumItalic.otf</string>
+		<string>BasierCircle-Regular.otf</string>
+		<string>BasierCircle-RegularItalic.otf</string>
+		<string>BasierCircle-SemiBold.otf</string>
+		<string>BasierCircle-SemiBoldItalic.otf</string>
+		<string>Gilroy-Black.otf</string>
+		<string>Gilroy-BlackItalic.otf</string>
+		<string>Gilroy-Bold.otf</string>
+		<string>Gilroy-BoldItalic.otf</string>
+		<string>Gilroy-ExtraBold.otf</string>
+		<string>Gilroy-ExtraBoldItalic.otf</string>
+		<string>Gilroy-Heavy.otf</string>
+		<string>Gilroy-HeavyItalic.otf</string>
+		<string>Gilroy-Light.otf</string>
+		<string>Gilroy-LightItalic.otf</string>
+		<string>Gilroy-Medium.otf</string>
+		<string>Gilroy-MediumItalic.otf</string>
+		<string>Gilroy-Regular.otf</string>
+		<string>Gilroy-RegularItalic.otf</string>
+		<string>Gilroy-SemiBold.otf</string>
+		<string>Gilroy-SemiBoldItalic.otf</string>
+		<string>Gilroy-Thin.otf</string>
+		<string>Gilroy-ThinItalic.otf</string>
+		<string>Gilroy-UltraLight.otf</string>
+		<string>Gilroy-UltraLightItalic.otf</string>
+		<string>AntDesign.ttf</string>
+		<string>FontAwesome5_Brands.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

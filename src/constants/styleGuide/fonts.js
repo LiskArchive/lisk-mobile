@@ -1,9 +1,9 @@
 export default {
   family: {
     heading: 'Gilroy-Bold',
-    context: 'OpenSans-Regular',
-    contextBold: 'OpenSans-Bold',
-    contextSemiBold: 'OpenSans-SemiBold',
+    context: 'BasierCircle-Regular',
+    contextBold: 'BasierCircle-Bold',
+    contextSemiBold: 'BasierCircle-SemiBold',
     passphrase: 'Dots-Regular',
     passphraseText: 'PTMono-Regular',
   },
