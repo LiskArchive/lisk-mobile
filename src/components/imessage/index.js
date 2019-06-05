@@ -8,6 +8,7 @@ import { getPassphraseFromKeyChain } from '../../utilities/passphrase';
 import ThemeContext from '../../contexts/theme';
 import Confirm from './confirm';
 import TxDetail from './txDetail';
+import Pending from './pending';
 import Form from './form';
 import Rejected from './rejected';
 import SignInWarning from './signInWarning';
@@ -158,6 +159,10 @@ class LiskMessageExtension extends Component {
       passphrase, presentationStyle, conversation,
     } = this.state;
 
+    const isSender = (
+      conversation.localParticipiantIdentifier === message.senderParticipantIdentifier
+    );
+
     const Element = () => {
       if (message.url) {
         switch (parsedData.state) {
@@ -172,7 +177,9 @@ class LiskMessageExtension extends Component {
               />
             );
           default:
-            return (
+            return isSender ? (
+              <Pending sharedData={parsedData} />
+            ) : (
               <Confirm
                 state={state}
                 message={message}
