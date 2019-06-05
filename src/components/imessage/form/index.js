@@ -10,7 +10,7 @@ import reg from '../../../constants/regex';
 import { colors } from '../../../constants/styleGuide';
 import Input from '../../toolBox/input';
 import Avatar from '../../avatar/index';
-import { Small } from '../../toolBox/typography';
+import { P, Small } from '../../toolBox/typography';
 import styles from './styles';
 
 class LiskMessageExtension extends Component {
@@ -115,7 +115,7 @@ class LiskMessageExtension extends Component {
     return (
       <Fragment>
         <View>
-          <Small style={styles.title}>You are requesting</Small>
+          <P style={styles.title}>Request LSK</P>
         </View>
         <View style={styles.rowContainer}>
           <Small style={styles.pickerCurrency}>
@@ -159,7 +159,7 @@ class LiskMessageExtension extends Component {
               <Avatar
                 style={styles.avatar}
                 address={address.value || inputAddress.value}
-                size={34}
+                size={30}
               /> :
               <Icon
                 style={styles.avatar}

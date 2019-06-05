@@ -75,7 +75,7 @@ class Confirm extends Component {
     const totalAmount = isSender ? amount : includeFee(amount, fee);
     const description = isSender ?
       `Your request of ${totalAmount} LSK is pending response.` :
-      `By accepting this request, you'll send ${totalAmount} LSK (including transaction fee) from your account.`;
+      `By accepting this request, you will send ${totalAmount} LSK (including transaction fee) from your account.`;
 
     const rejectMessage = () => {
       composeMessage({
@@ -105,19 +105,35 @@ class Confirm extends Component {
                     color={colors.light.slateGray}
                   />
                   <View style={styles.rowContent}>
-                    <P style={styles.label}>
-                      Amount {isSender ? '' : '(including 0.1 LSK)'}
-                    </P>
+                    <P style={styles.label}>Amount</P>
                     <B style={[styles.text]}>
                       <FormattedNumber>
-                        {totalAmount}
+                        {amount}
                       </FormattedNumber>
                     </B>
                   </View>
                 </View>
-                <B style={styles.description}>
+                {
+                  !isSender ?
+                    <View style={styles.row}>
+                      <Icon
+                        name='tx-fee'
+                        style={styles.icon} size={20}
+                        color={colors.light.gray2}
+                      />
+                      <View style={styles.rowContent}>
+                        <P style={styles.label}>Transaction fee</P>
+                        <B style={[styles.text]}>
+                          <FormattedNumber>
+                            {0.1}
+                          </FormattedNumber>
+                        </B>
+                      </View>
+                    </View> : null
+                }
+                <P style={styles.description}>
                   {description}
-                </B>
+                </P>
               </View>
               {
                 isSender ?
@@ -127,16 +143,16 @@ class Confirm extends Component {
                       <Icon size={16} name='warning' style={styles.errorIcon} />
                       <Small style={styles.error}>{errorMessage}</Small>
                     </View>
+                    <PrimaryButton
+                      style={[styles.button, busy ? styles.buttonBusy : {}]}
+                      onClick={this.send}
+                      title={busy ? 'Transferring...' : 'Accept'}
+                    />
                     <Button
                       disabled={busy}
                       style={styles.rejectButton}
                       onClick={rejectMessage}
                       title='Reject'
-                    />
-                    <PrimaryButton
-                      style={[styles.button, busy ? styles.buttonBusy : {}]}
-                      onClick={this.send}
-                      title={busy ? 'Transferring...' : 'Accept'}
                     />
                   </View>
               }
