@@ -30,7 +30,7 @@ const interpolate = (scrollY, inputRange, outputRange) => {
 };
 
 const ExtendedTitle = ({
-  balance, theme, styles, address, incognito, type, token, scrollY,
+  balance, theme, styles, address, incognito, type, token, scrollY, wallet,
 }) => {
   let balanceSize = 'Small';
   if (balance > 6) balanceSize = 'Big';
@@ -47,12 +47,15 @@ const ExtendedTitle = ({
       {
         token === 'LSK' ?
           <Avatar address={address} size={30} style={styles.avatar} /> :
-          <View style={[styles.tokenLogoWrapper, styles.theme.tokenLogoWrapper]}>
+          <View style={[
+            styles.tokenLogoWrapper,
+            wallet ? styles.walletTokenLogoWrapper : null,
+          ]}>
             <Icon
               style={styles.tokenLogo}
               name={tokenMap[token].icon}
               size={18}
-              color={colors.light.BTC}
+              color={wallet ? colors.light.white : colors.light.BTC}
             />
           </View>
       }
@@ -86,7 +89,7 @@ const SimpleHeader = ({
 );
 
 const HomeHeaderTitle = ({
-  styles, theme, children: data,
+  styles, theme, children: data, wallet,
 }) => (
   <View style={styles.container}>
     <SimpleHeader
@@ -106,6 +109,7 @@ const HomeHeaderTitle = ({
         address={data.address}
         incognito={data.incognito}
         type={data.type}
+        wallet={wallet}
         /> : null
     }
   </View>
