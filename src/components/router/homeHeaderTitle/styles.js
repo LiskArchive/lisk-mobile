@@ -48,6 +48,10 @@ export default () => ({
       width: 30,
       height: 30,
       marginRight: 5,
+      backgroundColor: colors.light.white,
+    },
+    walletTokenLogoWrapper: {
+      backgroundColor: colors.light.BTC,
     },
     tokenLogo: {
       textAlign: 'center',
@@ -60,9 +64,6 @@ export default () => ({
     walletMain: {
       color: colors.light.black,
     },
-    tokenLogoWrapper: {
-      backgroundColor: colors.light.white,
-    },
   },
   [themes.dark]: {
     homeMain: {
@@ -70,9 +71,6 @@ export default () => ({
     },
     walletMain: {
       color: colors.light.white,
-    },
-    tokenLogoWrapper: {
-      backgroundColor: colors.dark.white,
     },
   },
 });

@@ -165,7 +165,7 @@ const MainStack = StackNavigator(
     Wallet: {
       screen: Wallet,
       navigationOptions: {
-        headerTitle: HomeHeaderTitle,
+        headerTitle: props => <HomeHeaderTitle {...props} wallet={true} />,  //eslint-disable-line
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground />,
