@@ -119,7 +119,7 @@ class Confirm extends Component {
                       <Icon
                         name='tx-fee'
                         style={styles.icon} size={20}
-                        color={colors.light.gray2}
+                        color={colors.light.slateGray}
                       />
                       <View style={styles.rowContent}>
                         <P style={styles.label}>Transaction fee</P>

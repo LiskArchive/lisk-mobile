@@ -30,7 +30,7 @@ const CameraAccess = ({
             onPress={close}
             style={styles.cameraAccessCloseButton}
             titleStyle={styles.theme.closeButton}
-            color={colors[theme].gray2}
+            color={colors.light.blueGray}
           /> : null
       }
       {
