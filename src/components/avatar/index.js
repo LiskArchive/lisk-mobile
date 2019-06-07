@@ -8,7 +8,7 @@ import {
 } from './utils';
 import { validateAddress } from '../../utilities/validators';
 import Icon from '../toolBox/icon';
-import { colors } from '../../constants/styleGuide';
+import { colors, themes } from '../../constants/styleGuide';
 import { setColorOpacity } from '../../utilities/helpers';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -51,7 +51,9 @@ class Avatar extends React.Component {
             ]}
             name='avatar-placeholder'
             size={size}
-            color={setColorOpacity(colors[theme].white, 0.24)}
+            color={theme === themes.light
+              ? colors.light.platinum
+              : setColorOpacity(colors[theme].white, 0.24)}
           />
         </Wrapper>
       );
