@@ -4,7 +4,7 @@ export default () => ({
   common: {
     container: {
       alignItems: 'center',
-      paddingBottom: boxes.boxPadding,
+      paddingVertical: boxes.boxPadding,
     },
     text: {
       textAlign: 'center',

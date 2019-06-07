@@ -46,7 +46,7 @@ export default () => ({
     },
     contentContainer: {
       padding: boxes.boxPadding,
-      paddingTop: boxes.boxPadding + 50,
+      paddingTop: boxes.boxPadding + 35,
     },
   },
   [themes.light]: {
