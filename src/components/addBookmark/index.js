@@ -3,7 +3,6 @@ import { BackHandler, View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { IconButton } from '../toolBox/button';
-import Icon from '../toolBox/icon';
 import Input from '../toolBox/input';
 import { colors } from '../../constants/styleGuide';
 import Avatar from '../avatar';
@@ -188,26 +187,13 @@ class AddToBookmark extends React.Component {
 
   render() {
     const {
-      navigation, theme, styles, t, lng, activeToken,
+      navigation, styles, t, lng, activeToken,
     } = this.props;
     const {
-      address, avatarPreview, label, incomingData, editMode,
+      address, label, incomingData, editMode,
     } = this.state;
 
     const shouldDisplayAvatar = activeToken === tokenMap.LSK.key;
-
-    const avatar = (avatarPreview ?
-      <Avatar
-        style={styles.avatar}
-        address={address.value}
-        size={24}
-      /> :
-      <Icon
-        style={styles.avatar}
-        name='avatar-placeholder'
-        size={24}
-        color={colors[theme].mystic}
-      />);
 
     const errors = {
       label: t('The label must be shorter than 20 characters.'),
@@ -255,7 +241,12 @@ class AddToBookmark extends React.Component {
                   iconSize={18}
                   color={colors.light.ultramarineBlue}
                 />
-                { shouldDisplayAvatar ? avatar : null }
+                { shouldDisplayAvatar ?
+                  <Avatar
+                    style={styles.avatar}
+                    address={address.value}
+                    size={24}
+                  /> : null }
                 <Input
                   label={t('Address')}
                   reference={(input) => { this.addressRef = input; }}
