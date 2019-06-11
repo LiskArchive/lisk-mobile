@@ -29,6 +29,7 @@ import TabBarIcon from './tabBarIcon';
 import TabBarComponent from './tabBarComponent';
 import { colors } from '../../constants/styleGuide';
 import DynamicHeaderBackground from './dynamicHeaderBackground';
+import registerHeaderTitle from './registerHeaderTitle';
 
 const headerStyle = {
   backgroundColor: 'transparent',
@@ -129,10 +130,11 @@ const MainStack = StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        headerTitle: HeaderTitle,
+        headerTitle: registerHeaderTitle,
         headerTitleStyle: {
           textAlign: 'center',
           flex: 1,
+          color: colors.light.black,
         },
       },
     },
