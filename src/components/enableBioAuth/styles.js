@@ -15,7 +15,7 @@ export default () => ({
       flex: 1,
       padding: boxes.boxPadding,
       justifyContent: 'space-between',
-      paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 30 : 20,
+      paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 50 : 20,
     },
     subHeader: {
       marginBottom: boxes.boxPadding,
