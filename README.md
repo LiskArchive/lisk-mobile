@@ -12,6 +12,7 @@ Lisk Mobile is a cross-platform application written in React Native and primaril
 
 ## For Contributors
 Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for more information.
+
 ## Development
 
 ### Pre-Installation
@@ -20,7 +21,7 @@ The next section details the prerequisites to install Lisk Mobile from source us
 
  - Git
    - `brew install git`
- - NodeJS (recommended 8.3.0)
+ - NodeJS (recommended 8.14.0)
    - `brew install node`
  - npm (recommended 5.3.0)
    - npm is shipped with NodeJS. but to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
@@ -43,60 +44,66 @@ You'll need the Xcode installed in your machine to run the app in simulator.
   - buildToolsVersion: 27.0.3
 
 
-
-
 ### Installation
-
-```
-git clone https://github.com/LiskHQ/lisk-mobile.git
-cd lisk-mobile
-npm install
-npm run start
+```bash
+$ git clone https://github.com/LiskHQ/lisk-mobile.git
+$ cd lisk-mobile
+$ npm install
+$ npm run start
 ```
 
 ### Development environment
 You can run the project in Xcode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. Please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
+
 Three is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read  [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
 
-#### Using environment variables
+#### Environment variables
 You can fill out `env.json` with those variables:
 ```
-network          -> Lisk network's name, can be mainnet or testnet.
-passphrase       -> Passphrase of your LSK account, to be filled out automatically on login.
-secondPassphrase -> Second passphrase of your LSK account, to be filled out automatically on send process.
+network             -> Lisk network's name, can be mainnet or testnet.
+passphrase          -> Passphrase of your LSK account, to be filled out automatically on login.
+secondPassphrase    -> Second passphrase of your LSK account, to be filled out automatically on send process.
+useCommercialFonts  -> Tells styleGuide/fonts.js file to load commercial fonts instead of Open Sans.
 ```
 
-In order to avoid commiting that file you can use [this approach](https://stackoverflow.com/a/3320183).
+In order to avoid commiting that file you can follow [this approach](https://stackoverflow.com/a/3320183) as following
+```bash
+$ git update-index --assume-unchanged env.json
+```
 
-#### iMessage Extension
+#### Using Commercial Fonts
+Since some of the fonts used in the production version are commercial, this repository only contains open source fonts and uses `Open Sans` as a replacement for the commercial ones.
+
+If you have licensed copies of `Basier Circle` and `Gilroy`, you can add them to [fonts folder](./src/assets/fonts) with the naming convention stated in [`styleGuide/fonts.js`](./src/constants/styleGuide/fonts.js) file and make sure all the fonts are linked.
+
+```bash
+$ react-native link ./src/assets/fonts
+```
+
+#### Run
+```bash
+$ npm start
+```
+
+#### Build - iOS
+```bash
+$ npm run build:ios
+```
+
+#### Build - Android
+```bash
+$ npm run build:android
+```
+
+### Unit Tests
+
+#### Single run
+```bash
+$ npm run test
+```
+
+## iMessage Extension
 Please check out [iMessage extension docs](ios/LiskMessageExtension/README.md) for more information.
-
-### Run
-```
-npm start
-```
-
-### Build
-For iOS
-
-```
-npm run build:ios
-```
-
-
-For Android
-
-```
-npm run build:android
-```
-
-## Run unit tests
-
-### Single run
-```
-npm run test
-```
-
 
 ## Contributors
 See [contributors section](https://github.com/LiskHQ/lisk-mobile/graphs/contributors).
