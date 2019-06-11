@@ -3,18 +3,20 @@ import { View } from 'react-native';
 import withTheme from '../../withTheme';
 import { colors, themes } from '../../../constants/styleGuide';
 import { setColorOpacity } from '../../../utilities/helpers';
+import getStyles from './styles';
 
-const HeaderBackground = ({ theme }) => (
+const HeaderBackground = ({ theme, styles }) => (
   <View
-    style={{
-      flex: 1,
-      backgroundColor: colors[theme].headerBg,
-      borderBottomWidth: 1,
-      borderBottomColor: theme === themes.light
-        ? colors.light.whiteSmoke
-        : setColorOpacity(colors.light.white, 0.24),
-    }}
+    style={[
+      styles,
+      {
+        backgroundColor: colors[theme].headerBg,
+        borderBottomColor: theme === themes.light
+          ? colors.light.whiteSmoke
+          : setColorOpacity(colors.light.white, 0.24),
+      },
+    ]}
   />
 );
 
-export default withTheme(HeaderBackground, {});
+export default withTheme(HeaderBackground, getStyles());
