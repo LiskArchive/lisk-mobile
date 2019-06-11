@@ -18,7 +18,7 @@ export default () => ({
       fontFamily: fonts.family.contextBold,
       width: '100%',
       borderWidth: 1,
-      paddingTop: 13,
+      paddingTop: 11.5,
       padding: 13,
       borderRadius: 2,
     },
