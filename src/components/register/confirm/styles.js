@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { deviceType } from '../../../utilities/device';
+import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import { colors, fonts, boxes } from '../../../constants/styleGuide';
+
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 const styles = {
   container: {
@@ -17,15 +19,15 @@ const styles = {
     borderColor: colors.light.mystic,
     marginHorizontal: 20,
     padding: boxes.boxPadding,
+    justifyContent: 'space-between',
     alignItems: 'center',
+    height: isSmallScreen ? 290 : 320,
   },
   passphraseTitle: {
     color: colors.light.blueGray,
-    fontSize: 16,
-    marginBottom: 30,
+    fontSize: isSmallScreen ? 14 : 16,
   },
   passphraseContainer: {
-    marginTop: 10,
     flexDirection: 'row',
     width: '100%',
     flexWrap: 'wrap',
@@ -33,6 +35,7 @@ const styles = {
   },
   word: {
     marginHorizontal: 7,
+    fontSize: isSmallScreen ? 16 : 18,
     lineHeight: 33,
     color: colors.light.black,
     fontFamily: fonts.family.passphraseText,
@@ -46,7 +49,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     fontFamily: fonts.family.passphraseText,
-    fontSize: fonts.size.base,
+    fontSize: isSmallScreen ? 14 : 16,
   },
   deActivePlaceholder: {
     borderBottomColor: colors.light.ghost,
@@ -63,7 +66,6 @@ const styles = {
     borderBottomWidth: 0,
   },
   optionsContainer: {
-    marginTop: 35,
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
@@ -73,7 +75,7 @@ const styles = {
   },
   label: {
     fontFamily: fonts.family.passphraseText,
-    fontSize: 18,
+    fontSize: isSmallScreen ? 16 : 18,
     lineHeight: 33,
   },
   labelUnchecked: {

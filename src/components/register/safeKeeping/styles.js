@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { deviceType } from '../../../utilities/device';
+import { deviceType, SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import { colors, fonts, boxes } from '../../../constants/styleGuide';
+
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 const styles = {
   container: {
@@ -14,10 +16,11 @@ const styles = {
   },
   passphraseTitle: {
     color: colors.light.blueGray,
-    fontSize: 16,
-    marginBottom: 30,
+    fontSize: isSmallScreen ? 14 : 16,
   },
   passphraseContainer: {
+    justifyContent: 'space-between',
+    height: isSmallScreen ? 290 : 320,
     borderWidth: 1,
     borderColor: colors.light.mystic,
     marginHorizontal: 20,
@@ -25,9 +28,8 @@ const styles = {
     alignItems: 'center',
   },
   passphrase: {
-    marginBottom: 30,
     lineHeight: 33,
-    fontSize: 18,
+    fontSize: isSmallScreen ? 16 : 18,
     color: colors.light.black,
     fontFamily: fonts.family.passphraseText,
     textAlign: 'center',
@@ -38,22 +40,24 @@ const styles = {
   },
   copy: {
     color: colors.light.ultramarineBlue,
-    fontSize: 16,
+    fontSize: isSmallScreen ? 14 : 16,
   },
   footer: {
     padding: boxes.boxPadding,
   },
   switchContainer: {
+    position: 'absolute',
+    bottom: deviceType() === 'iOSx' ? 108 : 88,
+    left: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
   },
   confirmText: {
     flex: 1,
     flexWrap: 'wrap',
     marginLeft: 13.5,
     color: colors.light.blueGray,
-    fontSize: 13,
+    fontSize: isSmallScreen ? 11 : 13,
   },
   buttonWrapper: {
     marginBottom: deviceType() === 'iOSx' ? 20 : 0,
