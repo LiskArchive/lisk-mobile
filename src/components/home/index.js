@@ -25,6 +25,8 @@ import { tokenMap } from '../../constants/tokens';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
+import { fromRawLsk } from '../../utilities/conversions';
+import InitializationModal from './initializationModal';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -172,15 +174,33 @@ class Home extends React.Component {
     }
   }
 
+  showInitializationModal = () => {
+    setTimeout(() => {
+      ModalHolder.open({
+        title: 'Initialize your account',
+        component: InitializationModal,
+        callback: () => this.props.navigation.navigate('Send', { initialize: true }),
+      });
+    }, 1200);
+  }
+
   screenWillFocus = () => {
+    const { account } = this.props;
+    const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
+
     if (this.lastActiveToken === null) {
       this.bindInfiniteScroll();
       this.setHeader();
       this.showIntroModal();
     }
+
     if (this.lastActiveToken !== this.props.activeToken) {
       this.refreshAccountAndTx();
       this.setHeader();
+    }
+
+    if (!account.initialized && balance >= 0.2) {
+      this.showInitializationModal();
     }
   }
 
@@ -294,6 +314,9 @@ class Home extends React.Component {
             <StatusBar barStyle='light-content' /> :
             <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
         }
+{/*         {!account.initialized && balance >= 0.2 && (
+
+        )} */}
         <AccountSummary
           navigation={navigation}
           scrollY={this.scrollY}
