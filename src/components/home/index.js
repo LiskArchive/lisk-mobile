@@ -185,7 +185,7 @@ class Home extends React.Component {
   }
 
   screenWillFocus = () => {
-    const { account } = this.props;
+    const { account, activeToken } = this.props;
     const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
 
     if (this.lastActiveToken === null) {
@@ -199,7 +199,7 @@ class Home extends React.Component {
       this.setHeader();
     }
 
-    if (!account.initialized && balance >= 0.2) {
+    if (!account[activeToken].initialized && balance >= 0.2) {
       this.showInitializationModal();
     }
   }
@@ -314,9 +314,6 @@ class Home extends React.Component {
             <StatusBar barStyle='light-content' /> :
             <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
         }
-{/*         {!account.initialized && balance >= 0.2 && (
-
-        )} */}
         <AccountSummary
           navigation={navigation}
           scrollY={this.scrollY}
