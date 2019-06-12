@@ -19,8 +19,8 @@
     "i18n": "node ./scripts/scanner.config.js",
     "test:build-e2e-release": "detox build --configuration ios.sim.release",
     "test:build-e2e-debug": "detox build --configuration ios.sim.debug",
-    "test:e2e-release": "env configuration='ios.sim.release' node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty",
-    "test:e2e-debug": "env configuration='ios.sim.debug' node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty"
+    "test:e2e-release": "node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty --configuration ios.sim.release",
+    "test:e2e-debug": "node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty --configuration=ios.sim.debug"
   },
   "rnpm": {
     "assets": [
