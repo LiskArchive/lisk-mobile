@@ -175,19 +175,19 @@ class Home extends React.Component {
   }
 
   showInitializationModal = () => {
-    setTimeout(() => {
+    const { account, activeToken } = this.props;
+    const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
+
+    if (!account[activeToken].initialized && balance >= 0.2) {
       ModalHolder.open({
         title: 'Initialize your account',
         component: InitializationModal,
         callback: () => this.props.navigation.navigate('Send', { initialize: true }),
       });
-    }, 1200);
+    }
   }
 
   screenWillFocus = () => {
-    const { account, activeToken } = this.props;
-    const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
-
     if (this.lastActiveToken === null) {
       this.bindInfiniteScroll();
       this.setHeader();
@@ -199,9 +199,7 @@ class Home extends React.Component {
       this.setHeader();
     }
 
-    if (!account[activeToken].initialized && balance >= 0.2) {
-      this.showInitializationModal();
-    }
+    setTimeout(() => { this.showInitializationModal(); }, 1200);
   }
 
   componentDidMount() {
