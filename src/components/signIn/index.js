@@ -257,7 +257,6 @@ class SignIn extends React.Component {
       return;
     }
     const { userInfo: { url } } = quickAction;
-    // here you need to add discreet mode query
     this.onDeepLinkRequested({ url });
   };
 
