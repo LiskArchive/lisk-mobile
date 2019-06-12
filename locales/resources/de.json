@@ -204,5 +204,7 @@
   "Processing fee": "",
   "Transaction fee": "",
   "You don’t have any bookmarks.": "",
-  "Your Balance": ""
+  "Your Balance": "",
+  "Make sure to initialize your account with an outgoing transaction, to improve even further the security of your account": "",
+  "Remind me later": "Remind me later"
 }
