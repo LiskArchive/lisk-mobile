@@ -1,6 +1,4 @@
-import { settingsUpdated } from '../actions/settings';
-
-export default async () => [
+export default [
   {
     type: 'Request',
     title: 'Request tokens',
@@ -22,8 +20,7 @@ export default async () => [
     title: 'Open discreetly',
     icon: 'quick_action_send',
     userInfo: {
-      action: settingsUpdated({ incognito: true }),
-      requireSignIn: false,
+      url: 'lisk://home?discreet=true',
     },
   },
 ];
