@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -55,6 +56,9 @@
 		9F623AB73FF646D1911425A5 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C51D72C0FAD40BFA9898B8F /* PTMono-Regular.ttf */; };
 		A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
 		A614F654C71047B3AF131C27 /* libRNShakeEvent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3C84F25D024703B97337E4 /* libRNShakeEvent.a */; };
+		AC016ADD22783FB200E61127 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */; };
+		AC016ADE22783FB200E61127 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F757DDBDDE3E44FF90CA5133 /* BasierCircle-Regular.otf */; };
+		AC016ADF22783FB200E61127 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */; };
 		AC2943B72226A03C009DAFD3 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6221A8022269DA700E90115 /* libRNKeychain.a */; };
 		AC4B3F8B21F602A000BDDF7B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC4B3F8A21F602A000BDDF7B /* LaunchScreen.xib */; };
 		AC6D413B21EF4C1D00B276BD /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -76,6 +80,7 @@
 		ACFD538021F0A8FD00A39ABE /* MessagesManagerEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */; };
 		ACFD538221F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		B5BC131897364E8D86D1F42A /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F757DDBDDE3E44FF90CA5133 /* BasierCircle-Regular.otf */; };
 		B6221A6B22269B7200E90115 /* libRNOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD263E20CFBC570061FC18 /* libRNOS.a */; };
 		B6221A6C22269C0100E90115 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD264420CFBC570061FC18 /* libRNRandomBytes.a */; };
 		B6221A6D22269C0F00E90115 /* libTcpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD264B20CFBC570061FC18 /* libTcpSockets.a */; };
@@ -97,6 +102,8 @@
 		B647FAA6210720D700EFF1B7 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B647FA4F2107204B00EFF1B7 /* Lottie.framework */; };
 		B647FAA7210720D700EFF1B7 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B647FA4F2107204B00EFF1B7 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B6BDFA4B22269915004FCE28 /* libRNQuickAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC06C76521F7236A0049690E /* libRNQuickAction.a */; };
+		C04DF4E469D84CC1A062C1F8 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */; };
+		D899C1D561774F7C96BB1191 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */; };
 		D9D8E419A51C48EAA7460255 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 754CCB7535514702A07EE289 /* MaterialCommunityIcons.ttf */; };
 		FD4CC47CB98340EAAA23C121 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C4BBF0DB7044654ABCFF9ED /* SimpleLineIcons.ttf */; };
 /* End PBXBuildFile section */
@@ -645,6 +652,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Lisk/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1C8F29EB0B554DEEAD461802 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierCircle-Bold.otf"; path = "../src/assets/fonts/basierCircle/BasierCircle-Bold.otf"; sourceTree = "<group>"; };
 		2557061E886D48CBB762AC44 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A83BEBB1A84D3CAC07B5A5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -660,6 +668,7 @@
 		4C51D72C0FAD40BFA9898B8F /* PTMono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PTMono-Regular.ttf"; path = "../src/assets/fonts/passphrase/PTMono-Regular.ttf"; sourceTree = "<group>"; };
 		4E1B4DCBCC0842B2986B9E14 /* Dots-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Dots-Regular.ttf"; path = "../src/assets/fonts/passphrase/Dots-Regular.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierCircle-SemiBold.otf"; path = "../src/assets/fonts/basierCircle/BasierCircle-SemiBold.otf"; sourceTree = "<group>"; };
 		64706DEA34884121AA397B0B /* ReactNativeFingerprintScanner.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeFingerprintScanner.xcodeproj; path = "../node_modules/react-native-fingerprint-scanner/ios/ReactNativeFingerprintScanner.xcodeproj"; sourceTree = "<group>"; };
 		654F84AE40A946A284F01FE9 /* RNReactNativeHapticFeedback.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeHapticFeedback.xcodeproj; path = "../node_modules/react-native-haptic-feedback/ios/RNReactNativeHapticFeedback.xcodeproj"; sourceTree = "<group>"; };
 		6F3C84F25D024703B97337E4 /* libRNShakeEvent.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShakeEvent.a; sourceTree = "<group>"; };
@@ -700,6 +709,7 @@
 		DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		E2DBFE87FDD0441CA831FDD3 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		EBBAA1342DFE4B42AB7AC197 /* RNQuickAction.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNQuickAction.xcodeproj; path = "../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction.xcodeproj"; sourceTree = "<group>"; };
+		F757DDBDDE3E44FF90CA5133 /* BasierCircle-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierCircle-Regular.otf"; path = "../src/assets/fonts/basierCircle/BasierCircle-Regular.otf"; sourceTree = "<group>"; };
 		FBF884305BC34B819528F026 /* SajjadBlurOverlay.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SajjadBlurOverlay.xcodeproj; path = "../node_modules/react-native-blur-overlay/ios/SajjadBlurOverlay.xcodeproj"; sourceTree = "<group>"; };
 		FF1D9E33CBFA4D5D8AEB57C1 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1246,6 +1256,9 @@
 				914CE4F17323482BB575BEB0 /* OpenSans-Semibold.ttf */,
 				4C51D72C0FAD40BFA9898B8F /* PTMono-Regular.ttf */,
 				4E1B4DCBCC0842B2986B9E14 /* Dots-Regular.ttf */,
+				1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */,
+				F757DDBDDE3E44FF90CA5133 /* BasierCircle-Regular.otf */,
+				5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2003,13 +2016,16 @@
 				1FE4CB9322D741F88E99DB6F /* Octicons.ttf in Resources */,
 				FD4CC47CB98340EAAA23C121 /* SimpleLineIcons.ttf in Resources */,
 				155C47E8CAA84BBCBA0E4A02 /* Zocial.ttf in Resources */,
-				A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */,
-				426CF278ABDA4231AE32D163 /* Gilroy-Bold.ttf in Resources */,
-				7FBFE3D07A8E4244A5B3A4E9 /* OpenSans-Bold.ttf in Resources */,
 				0E83377E0F2F4D33BB3CE949 /* icomoon.ttf in Resources */,
-				24923F5215CC4CEEA6FD5173 /* OpenSans-Semibold.ttf in Resources */,
 				9F623AB73FF646D1911425A5 /* PTMono-Regular.ttf in Resources */,
 				4F7FDDEC2B3F43659A347587 /* Dots-Regular.ttf in Resources */,
+				7FBFE3D07A8E4244A5B3A4E9 /* OpenSans-Bold.ttf in Resources */,
+				24923F5215CC4CEEA6FD5173 /* OpenSans-Semibold.ttf in Resources */,
+				A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */,
+				426CF278ABDA4231AE32D163 /* Gilroy-Bold.ttf in Resources */,
+				C04DF4E469D84CC1A062C1F8 /* BasierCircle-Bold.otf in Resources */,
+				D899C1D561774F7C96BB1191 /* BasierCircle-SemiBold.otf in Resources */,
+				B5BC131897364E8D86D1F42A /* BasierCircle-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2017,12 +2033,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC8EAD8C2271A48F00C0B5D2 /* OpenSans-Semibold.ttf in Resources */,
-				3394A82721F1F8E0009CF136 /* OpenSans-Bold.ttf in Resources */,
-				3394A82621F1F8D5009CF136 /* Gilroy-Bold.ttf in Resources */,
 				AC4B3F8B21F602A000BDDF7B /* LaunchScreen.xib in Resources */,
-				3394A82521F1F8CE009CF136 /* OpenSans-Regular.ttf in Resources */,
 				3394A82321F1DFC0009CF136 /* icomoon.ttf in Resources */,
+				3394A82721F1F8E0009CF136 /* OpenSans-Bold.ttf in Resources */,
+				AC8EAD8C2271A48F00C0B5D2 /* OpenSans-Semibold.ttf in Resources */,
+				3394A82521F1F8CE009CF136 /* OpenSans-Regular.ttf in Resources */,
+				3394A82621F1F8D5009CF136 /* Gilroy-Bold.ttf in Resources */,
+				AC016ADD22783FB200E61127 /* BasierCircle-Bold.otf in Resources */,
+				AC016ADF22783FB200E61127 /* BasierCircle-SemiBold.otf in Resources */,
+				AC016ADE22783FB200E61127 /* BasierCircle-Regular.otf in Resources */,
 				AC7A832B21EF4BDC004502E4 /* Assets.xcassets in Resources */,
 				AC7A832921EF4BDB004502E4 /* MainInterface.storyboard in Resources */,
 			);

@@ -32,7 +32,7 @@ import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';
 import deepLinkMapper, { parseDeepLink } from '../../utilities/deepLink';
-import buildQuickActions from '../../utilities/buildQuickActions';
+import quickActionsList from '../../constants/quickActions';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 console.disableYellowBox = true; // eslint-disable-line
@@ -41,7 +41,6 @@ console.disableYellowBox = true; // eslint-disable-line
   accounts: state.accounts,
   settings: state.settings,
 }), {
-  dispatch: action => dispatch =>dispatch(action),
   accountSignedIn: accountSignedInAction,
   accountFetched: accountFetchedAction,
   settingsUpdated: settingsUpdatedAction,
@@ -50,7 +49,6 @@ console.disableYellowBox = true; // eslint-disable-line
 })
 class SignIn extends React.Component {
   deeplinkURL = '';
-  quickAction = null;
   state = {
     destinationDefined: false,
     storedPassphrase: null,
@@ -167,11 +165,7 @@ class SignIn extends React.Component {
     this.props.accountFetched();
     this.props.pricesRetrieved();
 
-    if (this.quickAction) {
-      this.props.dispatch(this.quickAction);
-    }
-
-    if (this.state.deepLinkURL) {
+    if (this.deepLinkURL) {
       this.navigateToDeepLink(this.deepLinkURL);
     } else {
       this.props.navigation.dispatch(NavigationActions.reset({
@@ -216,6 +210,7 @@ class SignIn extends React.Component {
   navigateToDeepLink = (url) => {
     const { navigation, settings, settingsUpdated } = this.props;
     const linkedScreen = deepLinkMapper(url);
+    console.log('in sign in', url, linkedScreen);
 
     if (linkedScreen) {
       if (linkedScreen.params && linkedScreen.params.activeToken) {
@@ -261,42 +256,21 @@ class SignIn extends React.Component {
     if (!quickAction || !quickAction.userInfo) {
       return;
     }
-
-    const isSignedIn = !!this.props.accounts.passphrase;
-    const { userInfo: { url, action, requireSignIn } } = quickAction;
-
-    if (isSignedIn) {
-      if (action) {
-        this.props.dispatch(action);
-      }
-
-      if (url) {
-        this.navigateToDeepLink(url);
-      }
-    } else {
-      if (action && !requireSignIn) {
-        this.props.dispatch(action);
-      }
-
-      this.deeplinkURL = url;
-      this.quickAction = action;
-    }
+    const { userInfo: { url } } = quickAction;
+    this.onDeepLinkRequested({ url });
   };
 
   setupQuickActions() {
-    // eslint-disable-next-line no-console
-    const logError = error => console.log('An error occurred while getting initial quick action', error);
-
     if (!this.props.navigation.getParam('signOut')) {
-      buildQuickActions().then((items) => {
-        QuickActions.setShortcutItems(items);
-        QuickActions.popInitialAction()
-          .then((action) => {
-            if (action && action.userInfo) {
-              this.deepLinkURL = action.userInfo.url;
-            }
-          }).catch(logError);
-      }).catch(logError);
+      QuickActions.setShortcutItems(quickActionsList);
+      QuickActions.popInitialAction()
+        .then((action) => {
+          if (action && action.userInfo) {
+            this.deepLinkURL = action.userInfo.url;
+          }
+        })
+        // eslint-disable-next-line no-console
+        .catch(error => console.log('An error occurred while getting initial quick action', error));
     }
 
     DeviceEventEmitter.removeAllListeners('quickActionShortcut');
