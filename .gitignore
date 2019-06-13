@@ -61,3 +61,14 @@ buck-out/
 .vscode
 .idea
 reports
+
+## Commercial fonts
+src/assets/fonts/basierCircle/BasierCircle-Regular.otf
+src/assets/fonts/basierCircle/BasierCircle-Bold.otf
+src/assets/fonts/basierCircle/BasierCircle-SemiBold.otf
+src/assets/fonts/gilroy/Gilroy-Bold.ttf
+
+android/app/src/main/assets/fonts/BasierCircle-Regular.otf
+android/app/src/main/assets/fonts/BasierCircle-Bold.otf
+android/app/src/main/assets/fonts/BasierCircle-SemiBold.otf
+android/app/src/main/assets/fonts/Gilroy-Bold.ttf

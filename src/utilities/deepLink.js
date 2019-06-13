@@ -43,6 +43,14 @@ export default function deepLinkMapper(deepLinkURL) {
         },
       };
 
+    case 'home':
+      return {
+        name: 'Home',
+        params: {
+          discreet: query.discreet,
+        },
+      };
+
     default:
       return null;
   }

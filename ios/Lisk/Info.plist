@@ -98,6 +98,9 @@
 		<string>PTMono-Regular.ttf</string>
 		<string>Dots.ttf</string>
 		<string>Dots-Regular.ttf</string>
+		<string>BasierCircle-Bold.otf</string>
+		<string>BasierCircle-Regular.otf</string>
+		<string>BasierCircle-SemiBold.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
