@@ -12,7 +12,7 @@ export default () => ({
       fontFamily: fonts.family.passphraseText,
       fontSize: 18,
       lineHeight: 32,
-      textAlign: 'justify',
+      textAlign: 'center',
     },
     copyContainer: {
       alignItems: 'center',
