@@ -18,7 +18,7 @@ export default [
   {
     type: 'Discreet',
     title: 'Open discreetly',
-    icon: 'quick_action_send',
+    icon: 'quick_action_discreet',
     userInfo: {
       url: 'lisk://home?discreet=true',
     },
