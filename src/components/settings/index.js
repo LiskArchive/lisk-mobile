@@ -72,11 +72,11 @@ class Settings extends React.Component {
 
     let target = 'EnableBioAuth';
 
-    let targetStateLabel = [t('Disabled'), colors[theme].gray2];
+    let targetStateLabel = [t('Disabled'), colors.light.blueGray];
     if (settings.sensorType && settings.hasStoredPassphrase) {
       targetStateLabel = [
         t('Enabled'),
-        theme === themes.light ? colors.light.black : colors.dark.white,
+        theme === themes.light ? colors.light.maastrichtBlue : colors.dark.platinum,
       ];
       target = 'DisableBioAuth';
     }

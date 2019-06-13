@@ -185,7 +185,7 @@ class Overview extends React.Component {
               name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
               style={styles.icon}
               size={20}
-              color={colors[theme].gray2}
+              color={colors.light.blueGray}
             />
 
             <View style={styles.rowContent}>
@@ -208,7 +208,7 @@ class Overview extends React.Component {
                 name='tx-fee'
                 style={styles.icon}
                 size={20}
-                color={colors[theme].gray2}
+                color={colors.light.blueGray}
               />
 
               <View style={styles.rowContent}>
@@ -232,7 +232,7 @@ class Overview extends React.Component {
                 name='reference'
                 style={styles.icon}
                 size={20}
-                color={colors[theme].gray2}
+                color={colors.light.blueGray}
               />
 
               <View style={styles.rowContent}>

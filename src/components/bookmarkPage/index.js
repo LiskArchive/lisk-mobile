@@ -125,7 +125,7 @@ class Bookmark extends React.Component {
                   style={styles.searchIcon}
                   name='search'
                   size={18}
-                  color={colors[theme].gray2}
+                  color={colors.light.blueGray}
                 />
                 <Input
                   label={isSmallScreen ? '' : t('Search')}
