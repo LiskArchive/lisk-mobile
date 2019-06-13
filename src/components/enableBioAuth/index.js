@@ -50,7 +50,7 @@ class EnableBioAuth extends React.Component {
                   name='passphrase'
                   color={theme === themes.light ?
                     colors.light.ultramarineBlue : colors.dark.ultramarineBlue}
-                  size={26}
+                  size={30}
                 />
               </View>
               <View style={styles.textWrapper}>
@@ -69,7 +69,7 @@ class EnableBioAuth extends React.Component {
                   name='settings-bg'
                   color={theme === themes.light ?
                     colors.light.ultramarineBlue : colors.dark.ultramarineBlue}
-                  size={26}
+                  size={30}
                 />
               </View>
               <View style={styles.textWrapper}>
@@ -87,7 +87,7 @@ class EnableBioAuth extends React.Component {
                   name='secure'
                   color={theme === themes.light ?
                     colors.light.ultramarineBlue : colors.dark.ultramarineBlue}
-                  size={13}
+                  size={30}
                 />
               </View>
               <View style={styles.textWrapper}>

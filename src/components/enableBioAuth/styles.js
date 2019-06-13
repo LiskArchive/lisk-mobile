@@ -22,6 +22,7 @@ export default () => ({
       fontFamily: fonts.family.contextSemiBold,
     },
     row: {
+      alignItems: 'center',
       flexDirection: 'row',
       paddingRight: 50,
       marginBottom: isSmallScreen ? 8 : 10,
