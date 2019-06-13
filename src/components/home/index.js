@@ -188,7 +188,7 @@ class Home extends React.Component {
     const { navigation: { addListener, state }, settingsUpdated } = this.props;
     addListener('willFocus', this.screenWillFocus);
 
-    if (state.params.discreet) {
+    if (state.params && state.params.discreet) {
       settingsUpdated({ incognito: true });
     }
 
