@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
-import { B, P } from '../../toolBox/typography';
+import { P } from '../../toolBox/typography';
 import { PrimaryButton, Button } from '../../toolBox/button';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import { assembleWordOptions } from '../../../utilities/passphrase';
@@ -145,7 +145,7 @@ class Confirm extends React.Component {
       const optionIndex = this.state.missing.indexOf(index);
       const element = optionIndex >= 0 ?
         this.generatePlaceholder(index, optionIndex, val) :
-        <B key={index} style={styles.word}>{val}</B>;
+        <P key={index} style={styles.word}>{val}</P>;
       return element;
     }) : null;
   }
