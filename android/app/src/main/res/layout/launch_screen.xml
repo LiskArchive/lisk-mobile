@@ -8,7 +8,7 @@
   android:background="@color/blue">
   <ImageView
     android:id="@+id/myimg"
-    android:layout_width="153dip"
+    android:layout_width="224dip"
     android:layout_height="60dip"
     android:background="@mipmap/lunch_screen_icon" />
 </LinearLayout>
