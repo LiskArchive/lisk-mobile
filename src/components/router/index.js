@@ -29,6 +29,7 @@ import TabBarIcon from './tabBarIcon';
 import TabBarComponent from './tabBarComponent';
 import DynamicHeaderBackground from './dynamicHeaderBackground';
 import registerHeaderTitle from './registerHeaderTitle';
+import { colors } from '../../constants/styleGuide';
 
 const headerStyle = {
   backgroundColor: 'transparent',
