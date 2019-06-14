@@ -6,7 +6,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const Share = ({
-  styles, icon, value, style, type, children, containerStyle, iconColor, theme, title,
+  styles, icon, value, style, type, children, containerStyle, iconColor, title,
 }) => {
   const Element = type || Text;
 
@@ -27,7 +27,7 @@ const Share = ({
                   message: value || children,
                   url: '',
                 })}
-                color={iconColor || colors[theme].gray2} /> : null
+                color={iconColor || colors.light.blueGray} /> : null
       }
     </View>
   );

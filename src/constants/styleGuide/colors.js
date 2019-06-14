@@ -24,7 +24,9 @@ const light = {
 const dark = {
   ...common,
   outgoingArrow: common.platinum,
-  headerBg: common.maastrichtBlue,
+  // dark mode's header color is not on the style guide
+  headerBg: '#00152D',
+  // homeHeaderBg is ultramarineBlue with 30% opacity
   homeHeaderBg: '#1b316a',
   ufoGreenTx: '#DFF9EB',
 };

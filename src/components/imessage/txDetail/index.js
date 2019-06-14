@@ -136,7 +136,7 @@ class TransactionDetail extends React.Component {
               name='send'
               size={22}
               style={styles.rowIcon}
-              color={colors[theme].gray2}
+              color={colors.light.slateGray}
             />
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
@@ -163,7 +163,7 @@ class TransactionDetail extends React.Component {
                 name='recipient'
                 size={22}
                 style={styles.rowIcon}
-                color={colors[theme].gray2}
+                color={colors.light.slateGray}
               />
               <View style={styles.rowContent}>
                 <P style={[styles.label, styles.theme.label]}>Recipient</P>
@@ -185,7 +185,7 @@ class TransactionDetail extends React.Component {
                   name='reference'
                   size={22}
                   style={styles.rowIcon}
-                  color={colors[theme].gray2}
+                  color={colors.light.slateGray}
                 />
                 <View style={styles.rowContent}>
                   <P style={[styles.label, styles.theme.label]}>Reference</P>
@@ -200,7 +200,7 @@ class TransactionDetail extends React.Component {
               name='confirmation'
               size={22}
               style={styles.rowIcon}
-              color={colors[theme].gray2}
+              color={colors.light.slateGray}
             />
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>Confirmations</P>

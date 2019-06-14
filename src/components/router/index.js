@@ -27,7 +27,6 @@ import HeaderBackButton from './headerBackButton';
 import TokenSwitcher from './tokenSwitcher';
 import TabBarIcon from './tabBarIcon';
 import TabBarComponent from './tabBarComponent';
-import { colors } from '../../constants/styleGuide';
 import DynamicHeaderBackground from './dynamicHeaderBackground';
 import registerHeaderTitle from './registerHeaderTitle';
 
@@ -35,7 +34,7 @@ const headerStyle = {
   backgroundColor: 'transparent',
   overflow: 'hidden',
   elevation: 1,
-  borderBottomColor: colors.light.whiteSmoke, // @todo dark mode is not correct
+  borderBottomWidth: 0,
 };
 
 /**

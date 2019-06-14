@@ -144,7 +144,7 @@ class AccountSummary extends React.Component {
         ]}>
           <Share type={P}
             style={[styles.addressP, styles.theme.walletAddress]}
-            iconColor={theme === 'dark' ? colors[theme].gray2 : colors[theme].gray1}
+            iconColor={colors.light.blueGray}
             containerStyle={styles.addressContainer}
             value={account.address}
             title={address}
