@@ -175,10 +175,15 @@ class Home extends React.Component {
   }
 
   showInitializationModal = () => {
-    const { account, activeToken } = this.props;
-    const balance = account ? parseFloat(fromRawLsk(account.balance)) : '';
+    const { account, activeToken, transactions } = this.props;
+    const balance = parseFloat(fromRawLsk(account[tokenMap.LSK.key].balance));
 
-    if (!account[activeToken].initialized && balance >= 0.2) {
+
+    if (
+      !account[activeToken].initialized &&
+      (!transactions || transactions.pending.length < 1) &&
+      balance >= 0.2
+    ) {
       ModalHolder.open({
         title: 'Initialize your account',
         component: InitializationModal,
@@ -206,7 +211,7 @@ class Home extends React.Component {
     const { navigation: { addListener, state }, settingsUpdated } = this.props;
     addListener('willFocus', this.screenWillFocus);
 
-    if (state.params.discreet) {
+    if (state.params && state.params.discreet) {
       settingsUpdated({ incognito: true });
     }
 
