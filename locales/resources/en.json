@@ -204,5 +204,7 @@
   "Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.": "Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.",
   "Transaction fee": "Transaction fee",
   "You don’t have any bookmarks.": "You don’t have any bookmarks.",
-  "Your Balance": "Your Balance"
+  "Your Balance": "Your Balance",
+  "Make sure to initialize your account with an outgoing transaction, to improve even further the security of your account": "Make sure to initialize your account with an outgoing transaction, to improve even further the security of your account",
+  "Remind me later": "Remind me later"
 }

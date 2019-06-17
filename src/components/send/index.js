@@ -99,9 +99,9 @@ class Send extends React.Component {
 
     if (navigation.getParam('initialize', false)) {
       this.nav.move({
-        to: 4,
+        to: 3,
         data: {
-          address: accounts.info[settings.token.active],
+          address: accounts.info[settings.token.active].address,
           amount: 0.1,
           reference: t('Account initialization'),
         },

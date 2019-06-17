@@ -25,6 +25,8 @@ import { tokenMap } from '../../constants/tokens';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
+import { fromRawLsk } from '../../utilities/conversions';
+import InitializationModal from './initializationModal';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -172,23 +174,44 @@ class Home extends React.Component {
     }
   }
 
+  showInitializationModal = () => {
+    const { account, activeToken, transactions } = this.props;
+    const balance = parseFloat(fromRawLsk(account[tokenMap.LSK.key].balance));
+
+
+    if (
+      !account[activeToken].initialized &&
+      (!transactions || transactions.pending.length < 1) &&
+      balance >= 0.2
+    ) {
+      ModalHolder.open({
+        title: 'Initialize your account',
+        component: InitializationModal,
+        callback: () => this.props.navigation.navigate('Send', { initialize: true }),
+      });
+    }
+  }
+
   screenWillFocus = () => {
     if (this.lastActiveToken === null) {
       this.bindInfiniteScroll();
       this.setHeader();
       this.showIntroModal();
     }
+
     if (this.lastActiveToken !== this.props.activeToken) {
       this.refreshAccountAndTx();
       this.setHeader();
     }
+
+    setTimeout(() => { this.showInitializationModal(); }, 1200);
   }
 
   componentDidMount() {
     const { navigation: { addListener, state }, settingsUpdated } = this.props;
     addListener('willFocus', this.screenWillFocus);
 
-    if (state.params.discreet) {
+    if (state.params && state.params.discreet) {
       settingsUpdated({ incognito: true });
     }
 
