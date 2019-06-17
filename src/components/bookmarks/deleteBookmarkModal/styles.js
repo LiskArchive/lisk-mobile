@@ -19,6 +19,8 @@ export default () => ({
       borderRadius: boxes.buttonBorderRadius,
       margin: boxes.boxPadding,
       textAlign: 'center',
+    },
+    buttonText: {
       lineHeight: boxes.buttonHeight,
       fontSize: fonts.size.base,
       fontFamily: fonts.family.context,
@@ -32,6 +34,8 @@ export default () => ({
     actionButton: {
       borderColor: colors.light.burntSieanna,
       backgroundColor: colors.light.burntSieanna,
+    },
+    buttonText: {
       color: colors.light.white,
     },
     cancelButton: {
@@ -46,6 +50,8 @@ export default () => ({
     actionButton: {
       borderColor: colors.dark.burntSieanna,
       backgroundColor: colors.dark.burntSieanna,
+    },
+    buttonText: {
       color: colors.dark.white,
     },
     cancelButton: {
