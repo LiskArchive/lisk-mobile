@@ -34,6 +34,7 @@ export default () => ({
     addressContainer: {
       width: '100%',
       paddingTop: 0,
+      marginBottom: 20,
     },
     addressInput: {
       ...Platform.select({

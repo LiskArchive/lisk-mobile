@@ -154,6 +154,10 @@ class Recipient extends React.Component {
     }
   }
 
+  isCameraOpen = (data) => {
+    this.props.isCameraOpen(data);
+  }
+
   render() {
     const {
       settings: { token }, navigation, styles, accounts, t, lng,
@@ -165,6 +169,7 @@ class Recipient extends React.Component {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
+          isCameraOpen={this.isCameraOpen}
           ref={(el) => { this.scanner = el; }}
           navigation={navigation}
           readFromCameraRoll={true}

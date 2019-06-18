@@ -50,6 +50,7 @@ class Scanner extends React.Component {
     });
 
     camera.visible = !camera.visible;
+    this.props.isCameraOpen(camera.visible);
     this.setState({ camera });
 
     if (!camera.visible && typeof this.props.onClose === 'function') {

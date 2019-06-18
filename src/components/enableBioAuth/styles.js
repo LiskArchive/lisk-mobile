@@ -15,13 +15,14 @@ export default () => ({
       flex: 1,
       padding: boxes.boxPadding,
       justifyContent: 'space-between',
-      paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 30 : 20,
+      paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 50 : 20,
     },
     subHeader: {
       marginBottom: boxes.boxPadding,
       fontFamily: fonts.family.contextSemiBold,
     },
     row: {
+      alignItems: 'center',
       flexDirection: 'row',
       paddingRight: 50,
       marginBottom: isSmallScreen ? 8 : 10,
@@ -80,9 +81,6 @@ export default () => ({
     },
     description: {
       color: colors.dark.platinum,
-    },
-    iconWrapper: {
-      backgroundColor: colors.dark.white,
     },
   },
 });

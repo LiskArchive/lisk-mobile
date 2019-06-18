@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { B, P } from '../toolBox/typography';
+import { P } from '../toolBox/typography';
 import CopyToClipboard from '../copyToClipboard';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -12,9 +12,9 @@ const PassphraseCopy = ({ styles, passphrase, t }) => (
       {t('Store your passphrase:')}
     </P>
 
-    <B style={[styles.passphrase, styles.theme.passphrase]}>
+    <P style={[styles.passphrase, styles.theme.passphrase]}>
       {passphrase}
-    </B>
+    </P>
 
     <CopyToClipboard
       style={styles.copyContainer}

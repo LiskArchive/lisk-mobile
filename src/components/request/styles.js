@@ -30,7 +30,6 @@ export default () => ({
     },
     address: {
       fontSize: fonts.size.base,
-      marginRight: 6,
       maxWidth: '90%',
     },
     copyContainer: {

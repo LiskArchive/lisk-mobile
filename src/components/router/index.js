@@ -28,6 +28,8 @@ import TokenSwitcher from './tokenSwitcher';
 import TabBarIcon from './tabBarIcon';
 import TabBarComponent from './tabBarComponent';
 import DynamicHeaderBackground from './dynamicHeaderBackground';
+import registerHeaderTitle from './registerHeaderTitle';
+import { colors } from '../../constants/styleGuide';
 
 const headerStyle = {
   backgroundColor: 'transparent',
@@ -128,10 +130,11 @@ const MainStack = StackNavigator(
     Register: {
       screen: Register,
       navigationOptions: {
-        headerTitle: HeaderTitle,
+        headerTitle: registerHeaderTitle,
         headerTitleStyle: {
           textAlign: 'center',
           flex: 1,
+          color: colors.light.black,
         },
       },
     },
@@ -152,7 +155,7 @@ const MainStack = StackNavigator(
         title: t('Transaction Details'),
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
-        headerBackground: <HeaderBackground />,
+        headerBackground: <HeaderBackground noBorder={true} />,
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
@@ -167,7 +170,7 @@ const MainStack = StackNavigator(
         headerTitle: props => <HomeHeaderTitle {...props} wallet={true} />,  //eslint-disable-line
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
-        headerBackground: <HeaderBackground />,
+        headerBackground: <HeaderBackground noBorder={true} />,
       },
     },
     About: {

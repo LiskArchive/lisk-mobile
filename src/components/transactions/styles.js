@@ -149,7 +149,7 @@ export default () => ({
     },
     incoming: {
       color: colors.light.ufoGreen,
-      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
+      backgroundColor: colors.light.ufoGreenTx,
     },
     outgoingSymbol: {
       backgroundColor: setColorOpacity(colors.dark.black, 0.15),
@@ -185,7 +185,7 @@ export default () => ({
     },
     incoming: {
       color: colors.dark.ufoGreen,
-      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
+      backgroundColor: colors.dark.ufoGreenTx,
     },
     outgoingSymbol: {
       backgroundColor: setColorOpacity(colors.dark.white, 0.15),

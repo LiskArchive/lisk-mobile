@@ -27,6 +27,7 @@ class DeleteBookmarkModal extends React.Component {
 
         <Button
           style={[styles.actionButton, styles.theme.actionButton]}
+          textStyle={[styles.buttonText, styles.theme.buttonText]}
           onClick={this.onConfirm}
           title={t('Delete this bookmark')}
         />

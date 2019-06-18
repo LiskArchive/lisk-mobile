@@ -43,6 +43,10 @@ class Send extends React.Component {
     };
   };
 
+  state = {
+    showProgressBar: true,
+  }
+
   componentDidMount() {
     const { navigation } = this.props;
 
@@ -119,6 +123,10 @@ class Send extends React.Component {
     this.props.navigation.navigate({ routeName: 'Home' });
   }
 
+  hideProgressBar = (data) => {
+    this.setState({ showProgressBar: !data });
+  }
+
   onBackButtonPressedAndroid = () => {
     const action = this.props.navigation.getParam('action', false);
 
@@ -177,10 +185,11 @@ class Send extends React.Component {
         ref={(el) => { this.nav = el; }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         finalCallback={this.finalCallback}
-        showProgressBar
+        showProgressBar={this.state.showProgressBar}
       >
         {steps.map(step => (
           <step.component
+            isCameraOpen={this.hideProgressBar}
             key={step.title}
             navigation={navigation}
             accounts={accounts}

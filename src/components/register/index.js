@@ -18,7 +18,7 @@ class Register extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
-      title: params.title || 'Creating your Lisk account',
+      title: params.title,
       headerStyle: {
         backgroundColor: '#F9FDFF',
         borderBottomWidth: 0,

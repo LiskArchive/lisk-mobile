@@ -18,6 +18,7 @@ const light = {
   ...common,
   outgoingArrow: common.maastrichtBlue,
   headerBg: common.whiteSmoke,
+  ufoGreenTx: '#DFF9EB', // ufoGreen with 0.15 opacity - using setColorOpacity helper makes the color overlap itelf
 };
 
 const dark = {
@@ -27,6 +28,7 @@ const dark = {
   headerBg: '#00152D',
   // homeHeaderBg is ultramarineBlue with 30% opacity
   homeHeaderBg: '#1b316a',
+  ufoGreenTx: '#DFF9EB',
 };
 
 export default {

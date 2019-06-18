@@ -210,6 +210,7 @@ class SignIn extends React.Component {
   navigateToDeepLink = (url) => {
     const { navigation, settings, settingsUpdated } = this.props;
     const linkedScreen = deepLinkMapper(url);
+    // eslint-disable-next-line no-console
     console.log('in sign in', url, linkedScreen);
 
     if (linkedScreen) {
