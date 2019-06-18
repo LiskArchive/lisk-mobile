@@ -148,8 +148,10 @@ export default () => ({
       color: colors.light.black,
     },
     incoming: {
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
+    },
+    amount: {
       color: colors.light.ufoGreen,
-      backgroundColor: colors.light.ufoGreenTx,
     },
     outgoingSymbol: {
       backgroundColor: setColorOpacity(colors.dark.black, 0.15),
@@ -184,8 +186,10 @@ export default () => ({
       color: colors.dark.white,
     },
     incoming: {
+      backgroundColor: setColorOpacity(colors.dark.ufoGreen, 0.15),
+    },
+    amount: {
       color: colors.dark.ufoGreen,
-      backgroundColor: colors.dark.ufoGreenTx,
     },
     outgoingSymbol: {
       backgroundColor: setColorOpacity(colors.dark.white, 0.15),
