@@ -5,11 +5,15 @@ import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
 import { PrimaryButton } from '../../toolBox/button';
 import { A, P } from '../../toolBox/typography';
-import txCreatedAnim from '../../../assets/animations/tx-created.json';
-import txPendingAnim from '../../../assets/animations/tx-pending.json';
-import txConfirmedAnim from '../../../assets/animations/tx-confirmed.json';
+import txCreatedAnimLight from '../../../assets/animations/tx-created-light.json';
+import txPendingAnimLight from '../../../assets/animations/tx-pending-light.json';
+import txConfirmedAnimLight from '../../../assets/animations/tx-confirmed-light.json';
+import txCreatedAnimDark from '../../../assets/animations/tx-created-dark.json';
+import txPendingAnimDark from '../../../assets/animations/tx-pending-dark.json';
+import txConfirmedAnimDark from '../../../assets/animations/tx-confirmed-dark.json';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import { themes } from '../../../constants/styleGuide';
 
 const createdAnimDuration = 6200;
 
@@ -81,11 +85,16 @@ class Result extends React.Component {
 
   render() {
     const {
-      t, styles, finalCallback, reset, navigation,
+      t, styles, finalCallback, reset, navigation, theme,
       followedAccounts, settings: { token }, sharedData: { address },
     } = this.props;
 
     const isNotFollowed = !followedAccounts[token.active].some(item => item.address === address);
+
+    const [txCreatedAnim, txPendingAnim, txConfirmedAnim] =
+      theme === themes.light
+        ? [txCreatedAnimLight, txPendingAnimLight, txConfirmedAnimLight]
+        : [txCreatedAnimDark, txPendingAnimDark, txConfirmedAnimDark];
 
     return (
       <View style={[styles.container, styles.theme.container]}>
