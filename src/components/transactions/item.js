@@ -112,7 +112,7 @@ class Item extends React.Component {
                   trim={true}
                   tokenType={activeToken}
                   type={B}
-                  style={[styles.amount, styles.theme.amount]}
+                  style={[styles[`${direction}Amount`], styles.theme[`${direction}Amount`]]}
                 >
                   {amount}
                 </FormattedNumber>
