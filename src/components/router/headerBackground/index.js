@@ -9,7 +9,6 @@ const HeaderBackground = ({ styles, noBorder }) => {
     <View
       style={[
         styles.wrapper,
-        styles.theme.wrapper,
         styles.theme[borderType],
       ]}
     />
