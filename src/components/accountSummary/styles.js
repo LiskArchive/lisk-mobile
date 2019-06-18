@@ -193,7 +193,7 @@ export default () => ({
       backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
     },
     homeContainerBTC: {
-      backgroundColor: colors.light.BTC,
+      backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
     },
     walletContainer: {
       borderBottomWidth: 1,
