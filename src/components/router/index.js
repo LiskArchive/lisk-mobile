@@ -155,7 +155,7 @@ const MainStack = StackNavigator(
         title: t('Transaction Details'),
         headerTitle: HeaderTitle,
         headerRight: HeaderPlaceholderButton,
-        headerBackground: <HeaderBackground />,
+        headerBackground: <HeaderBackground noBorder={true} />,
         headerStyle: {
           backgroundColor: 'transparent',
           overflow: 'hidden',
@@ -170,7 +170,7 @@ const MainStack = StackNavigator(
         headerTitle: props => <HomeHeaderTitle {...props} wallet={true} />,  //eslint-disable-line
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
-        headerBackground: <HeaderBackground />,
+        headerBackground: <HeaderBackground noBorder={true} />,
       },
     },
     About: {
