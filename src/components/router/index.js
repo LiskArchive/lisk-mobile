@@ -98,6 +98,7 @@ const Tabs = TabNavigator({
       tabBarLabel: 'Bookmarks',
       headerTitle: HeaderTitle,
       headerRight: <TokenSwitcher navigation={navigation} />,
+      headerLeft: HeaderPlaceholderButton,
       headerBackground: <HeaderBackground />,
       headerStyle,
       tabBarIcon: props => <TabBarIcon name='bookmark' {...props} />, //eslint-disable-line
