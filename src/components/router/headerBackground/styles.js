@@ -9,25 +9,23 @@ export default () => ({
     },
   },
   [themes.light]: {
-    wrapper: {
-      backgroundColor: colors.light.headerBg,
-    },
     bordered: {
       borderBottomColor: colors.light.whiteSmoke,
+      backgroundColor: colors.light.headerBg,
     },
     nonBordered: {
       borderBottomColor: colors.light.whiteSmoke,
+      backgroundColor: colors.light.headerBg,
     },
   },
   [themes.dark]: {
-    wrapper: {
-      backgroundColor: colors.dark.headerBg,
-    },
     bordered: {
       borderBottomColor: setColorOpacity(colors.light.white, 0.24),
+      backgroundColor: colors.dark.headerBg,
     },
     nonBordered: {
       borderBottomColor: 'transparent',
+      backgroundColor: colors.dark.maastrichtBlue,
     },
   },
 });

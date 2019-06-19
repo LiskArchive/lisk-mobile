@@ -16,7 +16,7 @@ export default () => ({
   },
   [themes.dark]: {
     BTC: {
-      backgroundColor: colors.light.BTC,
+      backgroundColor: colors.dark.homeHeaderBg,
     },
     LSK: {
       backgroundColor: colors.dark.homeHeaderBg,

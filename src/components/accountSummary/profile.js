@@ -11,7 +11,7 @@ import { tokenMap } from '../../constants/tokens';
 import blurBig from '../../assets/images/balanceBlur/darkBig.png';
 import blurMedium from '../../assets/images/balanceBlur/darkMedium.png';
 import blurSmall from '../../assets/images/balanceBlur/darkSmall.png';
-import { colors } from '../../constants/styleGuide';
+import { colors, themes } from '../../constants/styleGuide';
 
 const blurs = {
   blurBig, blurMedium, blurSmall,
@@ -25,6 +25,7 @@ const Profile = ({
   account,
   settings,
   token,
+  theme,
 }) => {
   const AView = Animated.View;
   let balanceSize = 'Small';
@@ -54,7 +55,7 @@ const Profile = ({
               style={styles.tokenLogo}
               name={tokenMap[token].icon}
               size={30}
-              color={colors.light.BTC}
+              color={theme === themes.light ? colors.light.BTC : colors.dark.homeHeaderBg}
             />
           </View>
         }

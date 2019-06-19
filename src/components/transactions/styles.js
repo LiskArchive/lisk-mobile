@@ -144,12 +144,14 @@ export default () => ({
     avatar: {
       borderColor: colors.light.ghost,
     },
-    outgoing: {
+    incomingAmount: {
+      color: colors.light.ufoGreen,
+    },
+    outgoingAmount: {
       color: colors.light.black,
     },
     incoming: {
-      color: colors.light.ufoGreen,
-      backgroundColor: colors.light.ufoGreenTx,
+      backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
     outgoingSymbol: {
       backgroundColor: setColorOpacity(colors.dark.black, 0.15),
@@ -180,12 +182,14 @@ export default () => ({
     avatar: {
       borderColor: colors.dark.ghost,
     },
-    outgoing: {
+    incomingAmount: {
+      color: colors.dark.ufoGreen,
+    },
+    outgoingAmount: {
       color: colors.dark.white,
     },
     incoming: {
-      color: colors.dark.ufoGreen,
-      backgroundColor: colors.dark.ufoGreenTx,
+      backgroundColor: setColorOpacity(colors.dark.ufoGreen, 0.15),
     },
     outgoingSymbol: {
       backgroundColor: setColorOpacity(colors.dark.white, 0.15),
