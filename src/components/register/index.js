@@ -20,7 +20,7 @@ class Register extends React.Component {
     return {
       title: params.title,
       headerStyle: {
-        backgroundColor: '#F9FDFF',
+        backgroundColor: colors.light.headerBg,
         borderBottomWidth: 0,
         elevation: 0,
       },
