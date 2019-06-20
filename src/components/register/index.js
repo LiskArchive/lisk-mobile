@@ -88,6 +88,7 @@ class Register extends React.Component {
           groupButton={NavButton}
           activeTitle={ActiveTitle}
           showProgressBar
+          progressStepContainerStyle={styles.progressStepContainer}
           backButtonTitle='Back'>
           <Intro title='create' group={t('1. Creating your account')} navigation={navigation}></Intro>
           <SafeKeeping title='safekeeping' group={t('2. Saving your passphrase')} navigation={navigation}></SafeKeeping>

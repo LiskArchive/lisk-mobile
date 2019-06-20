@@ -6,7 +6,7 @@ import getStyles from './styles';
 class Progress extends React.Component {
   render() {
     const {
-      styles, current, total,
+      styles, current, total, progressStepContainerStyle,
     } = this.props;
 
     const steps = [];
@@ -28,7 +28,7 @@ class Progress extends React.Component {
           <View
             key={step}
             style={[
-              styles.theme.progressStepContainer,
+              progressStepContainerStyle || styles.theme.progressStepContainer,
               { width: stepWidth },
           ]}>
             <View style={[
