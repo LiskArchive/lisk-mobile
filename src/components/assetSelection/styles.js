@@ -15,8 +15,10 @@ export default () => ({
       paddingBottom: 12,
       paddingLeft: 3,
       paddingRight: 3,
-      borderBottomWidth: 1,
       justifyContent: 'space-between',
+    },
+    borderBottom: {
+      borderBottomWidth: 1,
     },
     selection: {
       marginLeft: 'auto',

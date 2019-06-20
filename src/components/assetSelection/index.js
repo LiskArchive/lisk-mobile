@@ -40,12 +40,18 @@ class AssetSelection extends React.Component {
         <FlatList
           extraData={token.active}
           data={tokenKeys}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <TouchableHighlight
               onPress={() => this.onSelect(item)}
               underlayColor='transparent'
             >
-              <View style={[styles.itemContainer, styles.theme.itemContainer]}>
+              <View
+                style={[
+                  styles.itemContainer,
+                  index !== tokenKeys.length - 1 ? styles.borderBottom : null,
+                  styles.theme.itemContainer,
+                ]}
+              >
                 <View style={styles.row}>
                   <View style={styles[`${item}Container`]}>
                     <Icon
