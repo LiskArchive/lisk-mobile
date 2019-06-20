@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import { themes, colors, boxes } from '../../constants/styleGuide';
 import { setColorOpacity } from '../../utilities/helpers';
+import { deviceType } from '../../utilities/device';
 
 export default () => ({
   common: {
@@ -30,7 +31,6 @@ export default () => ({
       zIndex: 2,
       flexDirection: 'column',
       justifyContent: 'flex-end',
-
     },
     title: {
       paddingTop: 15,
@@ -45,8 +45,10 @@ export default () => ({
       zIndex: 2,
     },
     contentContainer: {
-      padding: boxes.boxPadding,
-      paddingTop: boxes.boxPadding + 35,
+      paddingHorizontal: boxes.boxPadding,
+      paddingTop: boxes.boxPadding + 55,
+      // TODO: Replace with SafeAreaView
+      paddingBottom: deviceType() === 'iOSx' ? boxes.boxPadding + 20 : boxes.boxPadding,
     },
   },
   [themes.light]: {
@@ -68,8 +70,9 @@ export default () => ({
       color: colors.dark.slateGray,
     },
     titleContainer: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.headerBg,
       borderBottomColor: setColorOpacity(colors.dark.white, 0.24),
+      borderBottomWidth: 1,
     },
     title: {
       color: colors.dark.white,

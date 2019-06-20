@@ -5,6 +5,8 @@ export default () => ({
   common: {
     container: {
       flex: 1,
+      marginTop: -20,
+      marginBottom: -5,
     },
     itemContainer: {
       flexDirection: 'row',
