@@ -1,16 +1,16 @@
 import { themes } from './styleGuide';
 
-import accountInitializationLight from '../assets/images/txDetail/accountInitialization3xLight.png';
-import accountInitializationDark from '../assets/images/txDetail/accountInitialization3xDark.png';
+import accountInitializationLight from '../assets/images/txDetail/account-initialization-light.png';
+import accountInitializationDark from '../assets/images/txDetail/account-initialization-dark.png';
 
-import setSecondPassphraseLight from '../assets/images/txDetail/setSecondPassphrase3xLight.png';
-import setSecondPassphraseDark from '../assets/images/txDetail/setSecondPassphrase3xDark.png';
+import setSecondPassphraseLight from '../assets/images/txDetail/second-passphrase-light.png';
+import setSecondPassphraseDark from '../assets/images/txDetail/second-passphrase-dark.png';
 
-import registerDelegateLight from '../assets/images/txDetail/registerDelegate3xLight.png';
-import registerDelegateDark from '../assets/images/txDetail/registerDelegate3xDark.png';
+import registerDelegateLight from '../assets/images/txDetail/delegate-registration-light.png';
+import registerDelegateDark from '../assets/images/txDetail/delegate-registration-dark.png';
 
-import voteLight from '../assets/images/txDetail/vote3xLight.png';
-import voteDark from '../assets/images/txDetail/vote3xDark.png';
+import voteLight from '../assets/images/txDetail/vote-light.png';
+import voteDark from '../assets/images/txDetail/vote-dark.png';
 
 /**
  * Since react-navigation doesn't support i18n
