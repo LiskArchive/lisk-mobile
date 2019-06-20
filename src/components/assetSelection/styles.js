@@ -25,7 +25,6 @@ export default () => ({
     },
     itemLabel: {
       marginLeft: 'auto',
-      // paddingTop: 12,
       textAlign: 'left',
       width: '100%',
     },
