@@ -26,6 +26,7 @@ const createdAnimDuration = 6200;
 class Result extends React.Component {
   state = {
     step: 0,
+    txConfirmed: false,
   };
   animation = [];
   timeouts = {
@@ -59,7 +60,7 @@ class Result extends React.Component {
       tx.id === sharedData.txId).length > 0;
 
     if (nowPending && nextConfirmed) {
-      this.play('confirmed');
+      this.setState({ txConfirmed: true });
     }
   }
 
@@ -82,12 +83,16 @@ class Result extends React.Component {
     }
   }
 
+  isTxConfirmed() {
+    if (this.state.txConfirmed) this.play('confirmed');
+  }
 
   render() {
     const {
       t, styles, finalCallback, reset, navigation, theme,
       followedAccounts, settings: { token }, sharedData: { address },
     } = this.props;
+    const { step } = this.state;
 
     const isNotFollowed = !followedAccounts[token.active].some(item => item.address === address);
 
@@ -102,17 +107,18 @@ class Result extends React.Component {
           {t('Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.')}
         </P>
         <View style={styles.illustration}>
-          {this.state.step === 0 ? <LottieView
+          {step === 0 ? <LottieView
             source={txCreatedAnim}
             loop={false}
             ref={(el) => { this.animation[0] = el; }} />
             : null}
-          {this.state.step === 1 ? <LottieView
+          {step === 1 ? <LottieView
             source={txPendingAnim}
             loop={true}
+            onAnimationFinish={this.isTxConfirmed()}
             ref={(el) => { this.animation[1] = el; }} />
             : null}
-          {this.state.step === 2 ? <LottieView
+          {step === 2 ? <LottieView
             source={txConfirmedAnim}
             loop={false}
             ref={(el) => { this.animation[2] = el; }} />
