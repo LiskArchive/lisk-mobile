@@ -103,38 +103,40 @@ class Item extends React.Component {
           }
         </View>
         </View>
-        <View style={[styles.column, styles.amountWrapper]}>
-          {
-            (activeToken === 'LSK' && tx.recipientAddress === tx.senderAddress) || incognito ?
-              null :
-              <View style={[styles[direction], styles.theme[direction]]}>
-                <FormattedNumber
-                  trim={true}
-                  tokenType={activeToken}
-                  type={B}
-                  style={[styles[`${direction}Amount`], styles.theme[`${direction}Amount`]]}
-                >
-                  {amount}
-                </FormattedNumber>
-              </View>
-          }
-          {
-            (tx.type === 0 && (tx.recipientAddress !== tx.senderAddress)) && incognito ?
-              <Blur value={amount} direction={direction} /> :
-              null
-          }
-          {
-            typeof tx.timestamp !== 'number' ?
-              <View style={styles.pendingIcon}>
-                <LottieView
-                  source={loadingAnimation}
-                  ref={(el) => { this.animation = el; }}
-                  style={{}}
-                />
-              </View> :
-              null
-          }
-        </View>
+        {tx.type === 0 && (
+          <View style={[styles.column, styles.amountWrapper]}>
+            {
+              (activeToken === 'LSK' && tx.recipientAddress === tx.senderAddress) || incognito ?
+                null :
+                <View style={[styles[direction], styles.theme[direction]]}>
+                  <FormattedNumber
+                    trim={true}
+                    tokenType={activeToken}
+                    type={B}
+                    style={[styles[`${direction}Amount`], styles.theme[`${direction}Amount`]]}
+                  >
+                    {amount}
+                  </FormattedNumber>
+                </View>
+            }
+            {
+              tx.recipientAddress !== tx.senderAddress && incognito ?
+                <Blur value={amount} direction={direction} /> :
+                null
+            }
+            {
+              typeof tx.timestamp !== 'number' ?
+                <View style={styles.pendingIcon}>
+                  <LottieView
+                    source={loadingAnimation}
+                    ref={(el) => { this.animation = el; }}
+                    style={{}}
+                  />
+                </View> :
+                null
+            }
+          </View>
+        )}
       </TouchableOpacity>
     );
   }
