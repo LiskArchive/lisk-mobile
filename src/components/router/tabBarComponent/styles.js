@@ -27,7 +27,7 @@ export default () => ({
   [themes.dark]: {
     style: {
       backgroundColor: colors.dark.headerBg,
-      borderTopColor: setColorOpacity(colors.dark.black, 0.15),
+      borderTopColor: setColorOpacity(colors.dark.white, 0.15),
     },
     inactiveTint: {
       color: colors.dark.slateGray,
