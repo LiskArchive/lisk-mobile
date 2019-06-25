@@ -99,7 +99,7 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     scanButtonTitle: {
-      color: colors.light.ultramarineBlue,
+      color: colors.light.maastrichtBlue,
     },
     label: {
       color: colors.light.slateGray,
@@ -113,7 +113,7 @@ export default () => ({
       backgroundColor: colors.dark.maastrichtBlue,
     },
     scanButtonTitle: {
-      color: colors.dark.ultramarineBlue,
+      color: colors.dark.platinum,
     },
     label: {
       color: colors.dark.platinum,

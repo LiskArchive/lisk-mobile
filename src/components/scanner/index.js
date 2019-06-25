@@ -42,6 +42,8 @@ class Scanner extends React.Component {
 
   toggleCamera = () => {
     const { camera } = this.state;
+    const { isCameraOpen } = this.props;
+
     this.props.navigation.setParams({
       tabBar: camera.visible,
       showButtonLeft: !camera.visible,
@@ -50,7 +52,7 @@ class Scanner extends React.Component {
     });
 
     camera.visible = !camera.visible;
-    this.props.isCameraOpen(camera.visible);
+    if (isCameraOpen) isCameraOpen(camera.visible);
     this.setState({ camera });
 
     if (!camera.visible && typeof this.props.onClose === 'function') {

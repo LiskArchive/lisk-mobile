@@ -86,7 +86,7 @@ const Tabs = TabNavigator({
     navigationOptions: ({ navigation }) => ({
       headerTitle: HeaderTitle,
       headerRight: <TokenSwitcher navigation={navigation} />,
-      headerBackground: <HeaderBackground />,
+      headerBackground: <HeaderBackground noBorder={true} />,
       headerStyle,
       tabBarIcon: props => <TabBarIcon name='send' {...props} />, //eslint-disable-line
     }),

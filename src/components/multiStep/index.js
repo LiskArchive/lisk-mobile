@@ -80,7 +80,7 @@ class MultiStep extends React.Component {
   render() {
     const {
       children, finalCallback, backButtonTitle,
-      showNav, navStyles, showProgressBar,
+      showNav, navStyles, showProgressBar, progressStepContainerStyle,
       interactive, backButton, prevPage, hideGroups, hideSteps,
       activeTitle, navigatorButton, groupButton, stepButton,
     } = this.props;
@@ -125,7 +125,12 @@ class MultiStep extends React.Component {
             /> : null
         }
         {
-          showProgressBar ? <Progress current={current + 1} total={children.length} /> : null
+          showProgressBar ?
+            <Progress
+              progressStepContainerStyle={progressStepContainerStyle}
+              current={current + 1}
+              total={children.length}
+            /> : null
         }
         {
           React.cloneElement(children[current], extraProps)

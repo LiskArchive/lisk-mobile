@@ -6,7 +6,6 @@ export default () => ({
     container: {
       flex: 1,
       alignItems: 'center',
-      paddingBottom: boxes.boxPadding,
     },
     text: {
       textAlign: 'center',

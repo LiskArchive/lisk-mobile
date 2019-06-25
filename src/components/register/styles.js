@@ -61,6 +61,9 @@ const styles = {
     lineHeight: 40,
     top: -11,
   },
+  progressStepContainer: {
+    backgroundColor: colors.light.ghost,
+  },
 };
 
 export default StyleSheet.create(styles);

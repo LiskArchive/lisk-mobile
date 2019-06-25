@@ -5,6 +5,8 @@ export default () => ({
   common: {
     container: {
       flex: 1,
+      marginTop: -15,
+      marginBottom: -5,
     },
     itemContainer: {
       flexDirection: 'row',
@@ -13,15 +15,16 @@ export default () => ({
       paddingBottom: 12,
       paddingLeft: 3,
       paddingRight: 3,
-      borderBottomWidth: 1,
       justifyContent: 'space-between',
+    },
+    borderBottom: {
+      borderBottomWidth: 1,
     },
     selection: {
       marginLeft: 'auto',
     },
     itemLabel: {
       marginLeft: 'auto',
-      // paddingTop: 12,
       textAlign: 'left',
       width: '100%',
     },
