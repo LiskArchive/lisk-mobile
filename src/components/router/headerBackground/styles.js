@@ -20,7 +20,7 @@ export default () => ({
   },
   [themes.dark]: {
     bordered: {
-      borderBottomColor: setColorOpacity(colors.light.white, 0.24),
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15),
       backgroundColor: colors.dark.headerBg,
     },
     nonBordered: {
