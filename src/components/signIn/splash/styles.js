@@ -42,6 +42,10 @@ const styles = {
     height: 60,
     width: 153,
   },
+  splashLogo: {
+    position: 'relative',
+    top: 20,
+  },
 };
 
 export default StyleSheet.create(styles);
