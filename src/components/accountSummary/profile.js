@@ -34,13 +34,11 @@ const Profile = ({
   if (normalizedBalance.length > 6) balanceSize = 'Big';
   else if (normalizedBalance.length > 2) balanceSize = 'Medium';
 
-  // @todo Use the corresponding fiat exchange ratio
   let faitBalance = 0;
-  if (normalizedBalance && priceTicker[token][settings.currency]) {
-    faitBalance = (normalizedBalance * priceTicker[token][settings.currency]).toFixed(2);
+  const ratio = priceTicker[token][settings.currency];
+  if (normalizedBalance && ratio) {
+    faitBalance = (normalizedBalance * ratio).toFixed(2);
   }
-
-  // console.log('>> Profile', token, account.address);
 
   return (<View testID='accountSummary'>
       <AView style={[
@@ -82,7 +80,7 @@ const Profile = ({
         },
       ]}>
       {
-        !settings.incognito ?
+        !(settings.incognito || Number.isNaN(faitBalance)) ?
           <P style={[styles.fiatValue, styles.theme.fiatValue]}>
             {`~ ${faitBalance} ${settings.currency}`}
           </P> : null
