@@ -1,16 +1,19 @@
 import { StyleSheet } from 'react-native';
-import { deviceType, SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
+import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import { colors, fonts, boxes } from '../../../constants/styleGuide';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 const styles = {
+  wrapper: {
+    flex: 1,
+  },
   container: {
     flexDirection: 'column',
     flex: 1,
     justifyContent: 'space-between',
   },
-  wrapper: {
+  body: {
     flex: 1,
     justifyContent: 'center',
   },
@@ -47,7 +50,7 @@ const styles = {
   },
   switchContainer: {
     position: 'absolute',
-    bottom: deviceType() === 'iOSx' ? 108 : 88,
+    bottom: 88,
     left: 20,
     flexDirection: 'row',
     alignItems: 'center',
@@ -58,9 +61,6 @@ const styles = {
     marginLeft: 13.5,
     color: colors.light.blueGray,
     fontSize: isSmallScreen ? 11 : 13,
-  },
-  buttonWrapper: {
-    marginBottom: deviceType() === 'iOSx' ? 20 : 0,
   },
 };
 

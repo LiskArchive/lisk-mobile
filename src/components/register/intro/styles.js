@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { deviceType } from '../../../utilities/device';
 
 const styles = {
-  scrollContainer: {
+  wrapper: {
     flexGrow: 1,
   },
   sliderImage: {

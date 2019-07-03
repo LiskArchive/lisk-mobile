@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-navigation';
 import styles from './styles';
 import { P } from '../../toolBox/typography';
 import { PrimaryButton, Button } from '../../toolBox/button';
@@ -168,46 +169,48 @@ class Confirm extends React.Component {
   render() {
     const { t, nextStep, sharedData: { passphrase } } = this.props;
     return (
-      <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <View style={styles.box}>
-            <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
-              {t('Tap and fill in the blanks:')}
-            </P>
-            <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
-              {this.renderPassphrase()}
-            </View>
-            <View
-              testID="passphraseOptionsContainer"
-              style={[styles.optionsContainer, styles.horizontalPadding]}
-            >
-              {this.state.options[this.state.visibleOptions]
-                ? this.state.options[this.state.visibleOptions].map((value, idx) => (
-                    <Button
-                      noPredefinedStyle
-                      testID={`passphraseOptionFor-${value}`}
-                      style={styles.option}
-                      textStyle={[styles.label, styles.labelOption]}
-                      key={idx}
-                      title={value}
-                      onClick={() => this.fillOption(value)}
-                    />
-                  ))
-                : <View style={styles.optionPlaceholder} />}
+      <SafeAreaView style={styles.wrapper}>
+        <View style={styles.container}>
+          <View style={styles.body}>
+            <View style={styles.box}>
+              <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
+                {t('Tap and fill in the blanks:')}
+              </P>
+              <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
+                {this.renderPassphrase()}
+              </View>
+              <View
+                testID="passphraseOptionsContainer"
+                style={[styles.optionsContainer, styles.horizontalPadding]}
+              >
+                {this.state.options[this.state.visibleOptions]
+                  ? this.state.options[this.state.visibleOptions].map((value, idx) => (
+                      <Button
+                        noPredefinedStyle
+                        testID={`passphraseOptionFor-${value}`}
+                        style={styles.option}
+                        textStyle={[styles.label, styles.labelOption]}
+                        key={idx}
+                        title={value}
+                        onClick={() => this.fillOption(value)}
+                      />
+                    ))
+                  : <View style={styles.optionPlaceholder} />}
+              </View>
             </View>
           </View>
+          <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
+            <PrimaryButton
+              testID="registerConfirmButton"
+              disabled={this.state.buttonStatus}
+              noTheme={true}
+              style={styles.button}
+              onClick={() => nextStep({ passphrase })}
+              title={t('Confirm')}
+            />
+          </View>
         </View>
-        <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
-          <PrimaryButton
-            testID="registerConfirmButton"
-            disabled={this.state.buttonStatus}
-            noTheme={true}
-            style={styles.button}
-            onClick={() => nextStep({ passphrase })}
-            title={t('Confirm')}
-          />
-        </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

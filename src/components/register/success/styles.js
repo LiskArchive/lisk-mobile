@@ -1,7 +1,10 @@
-import { StyleSheet, DeviceInfo } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors } from '../../../constants/styleGuide';
 
 const styles = {
+  wrapper: {
+    flex: 1,
+  },
   container: {
     flexDirection: 'column',
     marginRight: 20,
@@ -27,7 +30,7 @@ const styles = {
     height: 340,
   },
   button: {
-    marginBottom: DeviceInfo.isIPhoneX_deprecated ? 35 : 25,
+    marginBottom: 20,
   },
 };
 
