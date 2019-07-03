@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
 import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-navigation';
 import styles from './styles';
 import { generatePassphrase } from '../../../utilities/passphrase';
 import Slider from '../../intro/heading';
@@ -69,15 +69,15 @@ class Intro extends React.Component {
 
 
     return (
-      <View style={styles.scrollContainer}>
+      <SafeAreaView style={styles.wrapper}>
         <Slider
           descriptionContent={descriptionContent}
           skip={this.forward}
-          t={t}
           testID='accountCreation'
-        >
+          t={t}>
         </Slider>
-      </View>);
+      </SafeAreaView>
+    );
   }
 }
 
