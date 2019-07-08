@@ -144,22 +144,20 @@ class Bookmark extends React.Component {
                   value={query}
                 />
               </View>
-              {!isSmallScreen ? (
-                <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-                  <IconButton
-                    style={[styles.addButton, styles.theme.addButton]}
-                    iconStyle={[styles.addButtonIcon, styles.theme.addButtonIcon]}
-                    titleStyle={[styles.addButtonText, styles.theme.addButtonText]}
-                    title={t('Add a new bookmark')}
-                    icon='cross'
-                    color={colors[theme].white}
-                    iconSize={21}
-                    onClick={() => navigation.navigate('AddBookmark', {
-                        title: t('New bookmark'),
-                      })
-                    } />
+              <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
+                <IconButton
+                  style={[styles.addButton, styles.theme.addButton]}
+                  iconStyle={[styles.addButtonIcon, styles.theme.addButtonIcon]}
+                  titleStyle={[styles.addButtonText, styles.theme.addButtonText]}
+                  title={t('Add a new bookmark')}
+                  icon='cross'
+                  color={colors[theme].white}
+                  iconSize={21}
+                  onClick={() => navigation.navigate('AddBookmark', {
+                      title: t('New bookmark'),
+                    })
+                  } />
                 </Animated.View>
-              ) : null}
               <Bookmarks
                 navigate={navigation.navigate}
                 draggable={true} setRef={this.setRef} query={query}
