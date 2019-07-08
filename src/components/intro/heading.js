@@ -11,7 +11,7 @@ import { headerHeight } from '../../utilities/device';
 class Heading extends React.Component {
   render() {
     const {
-      t, skip, descriptionContent, hasHeader, testID
+      t, skip, descriptionContent, hasHeader, testID,
     } = this.props;
     const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {};
     return (
