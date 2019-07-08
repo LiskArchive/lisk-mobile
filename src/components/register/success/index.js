@@ -24,7 +24,7 @@ class Success extends React.Component {
     const { t, navigation: { pop } } = this.props;
 
     return (
-      <View testID="registerSuccess" style={styles.container}>
+      <View style={styles.container}>
         <View>
           <View style={styles.titleContainer}>
             <P style={styles.subTitle}>
@@ -40,6 +40,7 @@ class Success extends React.Component {
         </View>
         <View>
           <PrimaryButton
+            testID='registerSuccess'
             style={styles.button}
             onClick={pop}
             title={t('Sign in now')}

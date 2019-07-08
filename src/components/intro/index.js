@@ -69,7 +69,7 @@ class Intro extends React.Component {
     ];
     return (<View style={styles.wrapper}>
       <Splash />
-      <Heading skip={this.skip.bind(this)} descriptionContent={descriptionContent} />
+      <Heading skip={this.skip.bind(this)} descriptionContent={descriptionContent} testID="intro"/>
     </View>);
   }
 }
