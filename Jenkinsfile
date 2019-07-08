@@ -78,6 +78,11 @@ pipeline {
           stages {
             stage('Build dependencies') {
               steps {
+                sh '''
+                if stat /Library/Fonts/BasierCircle-* > /dev/null ; then
+                  cp /Library/Fonts/BasierCircle-* src/assets/fonts/basierCircle/
+                fi
+                '''
                 npm_ci()
               }
             }
