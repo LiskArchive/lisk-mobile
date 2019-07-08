@@ -82,6 +82,9 @@ pipeline {
                 if stat /Library/Fonts/BasierCircle-* > /dev/null ; then
                   cp /Library/Fonts/BasierCircle-* src/assets/fonts/basierCircle/
                 fi
+                if stat /Library/Fonts/Gilroy-* > /dev/null ; then
+                  cp /Library/Fonts/Gilroy-* src/assets/fonts/gilroy/
+                fi
                 '''
                 npm_ci()
               }
