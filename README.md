@@ -40,7 +40,7 @@ You'll need the Xcode installed in your machine to run the app in simulator.
    - Performance (Intel ® HAXM)
    - Android Virtual Device
  - Install the Android SDK. Consider these configurations:
-  - compileSdkVersion: 26
+  - compileSdkVersion: 28
   - buildToolsVersion: 27.0.3
 
 
