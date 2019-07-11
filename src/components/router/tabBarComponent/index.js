@@ -1,13 +1,11 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { TabNavigator } from 'react-navigation';
+import { BottomTabBar } from 'react-navigation-tabs';
 import { Platform, DeviceInfo } from 'react-native';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../constants/tokens';
 import { colors } from '../../../constants/styleGuide';
-
-const DefaultTabBar = TabNavigator.Presets.Default.tabBarComponent;
 
 @connect(state => ({
   settings: state.settings,
@@ -34,8 +32,11 @@ class TabBar extends React.Component {
     }
 
     return (
-      <DefaultTabBar
+      <BottomTabBar
         {...rest}
+        // fix for https://github.com/react-navigation/react-navigation-tabs/issues/116
+        getAccessibilityRole={() => 'button'}
+        getAccessibilityStates={({ focused }) => (focused ? ['selected'] : [])}
         activeTintColor={activeTintColor}
         indicatorStyle={styles.theme.indicatorStyle}
         inactiveTintColor={styles.theme.inactiveTint.color}

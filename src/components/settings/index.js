@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { H4, P } from '../toolBox/typography';
 import FingerprintOverlay from '../fingerprintOverlay';
 import ItemTitle from './itemTitle';
@@ -56,13 +56,14 @@ class Settings extends React.Component {
   }
 
   signOut = () => {
-    this.props.accountSignedOut();
-    this.props.navigation.dispatch(NavigationActions.reset({
+    const resetAction = StackActions.reset({
       index: 0,
       actions: [
         NavigationActions.navigate({ routeName: 'SignIn', params: { signOut: true } }),
       ],
-    }));
+    });
+    this.props.accountSignedOut();
+    this.props.navigation.dispatch(resetAction);
   }
 
   render() {

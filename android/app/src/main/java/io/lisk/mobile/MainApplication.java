@@ -3,6 +3,8 @@ package io.lisk.mobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
 import com.clipsub.RNShake.RNShakeEventPackage;
 import com.reactNativeQuickActions.AppShortcutsPackage;
 import com.mkuczera.RNReactNativeHapticFeedbackPackage;
@@ -42,6 +44,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new RNGestureHandlerPackage(),
+            new ReanimatedPackage(),
             new RNShakeEventPackage(),
             new AppShortcutsPackage(),
         new RNReactNativeHapticFeedbackPackage(),
