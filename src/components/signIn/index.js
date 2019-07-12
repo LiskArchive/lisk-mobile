@@ -294,7 +294,7 @@ class SignIn extends React.Component {
       if (settings.showedIntro) {
         this.init();
       } else {
-        navigation.navigate('Intro');
+        navigation.push('Intro');
       }
       this.setState({ destinationDefined: true });
     }
