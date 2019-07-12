@@ -5,7 +5,7 @@ import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootVie
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
 public class MainActivity extends ReactActivity {
     @Override
