@@ -216,12 +216,14 @@ class Home extends React.Component {
     }
 
     setTimeout(() => {
-      const { activeToken, accountFetched } = this.props;
-      const inactiveTokens = Object.keys(tokenMap).filter(token => token !== activeToken);
+      const { activeToken, accountFetched, account } = this.props;
+      const inactiveTokens = Object.keys(account).filter(token => token !== activeToken);
 
-      inactiveTokens.forEach((token) => {
-        accountFetched(token);
-      });
+      if (inactiveTokens.length > 0) {
+        inactiveTokens.forEach((token) => {
+          accountFetched(token);
+        });
+      }
     }, 1000);
   }
 
