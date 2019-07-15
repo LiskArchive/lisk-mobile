@@ -46,7 +46,6 @@ export default () => ({
       justifyContent: 'flex-end',
     },
     address: {
-      paddingTop: 4,
       paddingBottom: 4,
     },
     avatarContainer: {
