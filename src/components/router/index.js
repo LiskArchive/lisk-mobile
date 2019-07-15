@@ -27,7 +27,7 @@ import HeaderBackButton from './headerBackButton';
 import TokenSwitcher from './tokenSwitcher';
 import TabBarIcon from './tabBarIcon';
 import TabBarComponent from './tabBarComponent';
-import DynamicHeaderBackground from './dynamicHeaderBackground';
+// import DynamicHeaderBackground from './dynamicHeaderBackground';
 import registerHeaderTitle from './registerHeaderTitle';
 import { colors } from '../../constants/styleGuide';
 
@@ -50,15 +50,23 @@ const headerStyle = {
  */
 const t = str => str;
 
+const SendStack = createStackNavigator({
+  Send: {
+    screen: Send,
+  },
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerBackground: <HeaderBackground />,
+    headerTitle: HeaderTitle,
+    headerRight: <TokenSwitcher navigation={navigation} />,
+  }),
+});
+
 // eslint-disable-next-line new-cap
 const Tabs = createBottomTabNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      headerTitle: HomeHeaderTitle,
-      headerRight: HeaderPlaceholderButton,
-      headerLeft: HeaderPlaceholderButton,
-      headerBackground: <DynamicHeaderBackground />,
       tabBarIcon: props => <TabBarIcon name='home' {...props} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, navigation }) => {
         if (navigation.isFocused() && navigation.getParam('scrollToTop')) {
@@ -72,12 +80,11 @@ const Tabs = createBottomTabNavigator({
   Request: {
     screen: Request,
     navigationOptions: {
-      title: t('Request'),
       tabBarIcon: props => <TabBarIcon name='request' {...props} />, //eslint-disable-line
     },
   },
   Send: {
-    screen: Send,
+    screen: SendStack,
     navigationOptions: {
       tabBarIcon: props => <TabBarIcon name='send' {...props} />, //eslint-disable-line
     },
@@ -137,18 +144,10 @@ const MainStack = createStackNavigator(
     Main: {
       screen: Tabs,
       navigationOptions: ({ navigation }) => {
-        const isHome = navigation.state.routes[navigation.state.index].routeName === 'Home';
         const title = navigation.state.routes[navigation.state.index].routeName;
-        const rest = isHome ?
-          {
-            headerBackground: <DynamicHeaderBackground />,
-            headerTitle: HomeHeaderTitle,
-            headerRight: HeaderPlaceholderButton,
-          } : {
-            headerBackground: <HeaderBackground />,
-            headerTitle: HeaderTitle,
-            headerRight: <TokenSwitcher navigation={navigation} />,
-          };
+        const rest = {
+          header: null,
+        };
 
         return {
           title,
