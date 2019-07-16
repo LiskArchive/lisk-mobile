@@ -27,6 +27,7 @@ import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
 import { fromRawLsk } from '../../utilities/conversions';
 import InitializationModal from './initializationModal';
+import HomeHeaderTitle from '../router/homeHeaderTitle';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -63,8 +64,7 @@ class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return ({
-      title: params.title || 'Lisk wallet',
-      type: 'home',
+      headerTitle: <HomeHeaderTitle data={params.title} />,
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',

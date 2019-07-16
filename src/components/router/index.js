@@ -21,13 +21,12 @@ import Intro from '../intro';
 import AddBookmark from '../addBookmark';
 import HeaderBackground from './headerBackground';
 import HeaderTitle from './headerTitle';
-import HomeHeaderTitle from './homeHeaderTitle';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
 import HeaderBackButton from './headerBackButton';
 import TokenSwitcher from './tokenSwitcher';
 import TabBarIcon from './tabBarIcon';
 import TabBarComponent from './tabBarComponent';
-// import DynamicHeaderBackground from './dynamicHeaderBackground';
+import DynamicHeaderBackground from './dynamicHeaderBackground';
 import registerHeaderTitle from './registerHeaderTitle';
 import { colors } from '../../constants/styleGuide';
 
@@ -62,10 +61,20 @@ const SendStack = createStackNavigator({
   }),
 });
 
+const HomeStack = createStackNavigator({
+  Home: {
+    screen: Home,
+  },
+}, {
+  navigationOptions: {
+    headerBackground: <DynamicHeaderBackground />,
+  },
+});
+
 // eslint-disable-next-line new-cap
 const Tabs = createBottomTabNavigator({
   Home: {
-    screen: Home,
+    screen: HomeStack,
     navigationOptions: {
       tabBarIcon: props => <TabBarIcon name='home' {...props} />, //eslint-disable-line
       tabBarOnPress: ({ defaultHandler, navigation }) => {
@@ -145,15 +154,20 @@ const MainStack = createStackNavigator(
       screen: Tabs,
       navigationOptions: ({ navigation }) => {
         const title = navigation.state.routes[navigation.state.index].routeName;
-        const rest = {
-          header: null,
-        };
+        // Do not render header on tabs that have their own stack navigator nested
+        const shouldRenderHeader = !('routes' in navigation.state.routes[navigation.state.index]);
+        const headerConfig = shouldRenderHeader ?
+          {
+            headerTitle: HeaderTitle,
+            headerRight: <TokenSwitcher navigation={navigation} />,
+            headerBackground: <HeaderBackground noBorder={true} />,
+            headerStyle,
+            title,
+          } : {
+            header: null,
+          };
 
-        return {
-          title,
-          headerStyle,
-          ...rest,
-        };
+        return headerConfig;
       },
     },
     TxDetail: {
@@ -174,8 +188,6 @@ const MainStack = createStackNavigator(
     Wallet: {
       screen: Wallet,
       navigationOptions: {
-        title: '',
-        headerTitle: props => <HomeHeaderTitle {...props} wallet={true} />,  //eslint-disable-line
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground noBorder={true} />,
