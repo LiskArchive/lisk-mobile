@@ -93,7 +93,8 @@ class Home extends React.Component {
   }
 
   bindInfiniteScroll = () => {
-    this.props.navigation.setParams({
+    // set param on tab navigator (parent of stack navigator)
+    this.props.navigation.dangerouslyGetParent().setParams({
       scrollToTop: () => {
         if (this.scrollView) {
           this.scrollView.scrollTo(0);
