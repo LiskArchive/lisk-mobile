@@ -20,7 +20,7 @@ export default [
     title: 'Open discreetly',
     icon: 'quick_action_discreet',
     userInfo: {
-      url: 'lisk://home',
+      url: 'lisk://home?discreet=true',
     },
   },
 ];
