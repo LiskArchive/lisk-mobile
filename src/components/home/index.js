@@ -208,12 +208,8 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation: { addListener, state }, settingsUpdated } = this.props;
+    const { navigation: { addListener } } = this.props;
     addListener('willFocus', this.screenWillFocus);
-
-    if (state.params && state.params.discreet) {
-      settingsUpdated({ incognito: true });
-    }
 
     setTimeout(() => {
       const { activeToken, accountFetched } = this.props;
