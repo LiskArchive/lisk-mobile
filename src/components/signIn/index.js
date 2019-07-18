@@ -200,13 +200,13 @@ class SignIn extends React.Component {
   onDeepLinkRequested = (event) => {
     const isSignedIn = !!this.props.accounts.passphrase;
 
-    if (event.type === 'Discreet') {
+    if (event.type && event.type === 'Discreet') {
       this.props.settingsUpdated({ incognito: true });
     }
 
     if (isSignedIn) {
       this.navigateToDeepLink(event.url);
-    } else if (!isSignedIn && event.type === 'Discreet') {
+    } else if (!isSignedIn && event.type && event.type === 'Discreet') {
       this.props.navigation.popToTop();
     } else {
       this.deepLinkURL = event.url;
