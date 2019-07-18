@@ -110,7 +110,7 @@
     "react-navigation-tabs": "^2.2.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
-    "react-test-renderer": "16.2.0",
+    "react-test-renderer": "16.8.3",
     "readable-stream": "^1.0.33",
     "redux": "^3.7.2",
     "redux-connect-decorator": "^0.2.0",
