@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import connect from 'redux-connect-decorator';
-import Router from './components/router';
+import Router from './components/screens/router';
 import Loading from './components/loading';
 import store from './store/index';
 import ThemeContext from './contexts/theme';
