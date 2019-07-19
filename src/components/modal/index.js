@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 import { B } from '../toolBox/typography';
 import { boxes } from '../../constants/styleGuide';
 import withTheme from '../withTheme';
-import HeaderBackButton from '../router/headerBackButton';
+import HeaderBackButton from '../screens/router/headerBackButton';
 import { deviceHeight, headerHeight } from '../../utilities/device';
 import getStyles from './styles';
 import ModalHolder from '../../utilities/modal';
