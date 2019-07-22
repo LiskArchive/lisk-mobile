@@ -14,7 +14,7 @@ import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../../../actions/settings';
 import ModalHolder from '../../../../utilities/modal';
-import AccountSummary from '../../../accountSummary/home';
+import AccountSummary from './accountSummary/home';
 import Transactions from '../../../transactions';
 import Empty from '../../../transactions/empty';
 import Loading from '../../../transactions/loading';

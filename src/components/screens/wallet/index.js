@@ -2,7 +2,7 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
 import { account as accountAPI, transactions as transactionsAPI } from '../../../utilities/api';
-import AccountSummary from '../../accountSummary/wallet';
+import AccountSummary from './accountSummary';
 import Transactions from '../../transactions';
 import InfiniteScrollView from '../../infiniteScrollView';
 import Empty from '../../transactions/empty';
