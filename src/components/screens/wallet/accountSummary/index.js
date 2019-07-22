@@ -5,22 +5,22 @@ import { translate } from 'react-i18next';
 import {
   accountFollowed as accountFollowedAction,
   accountUnFollowed as accountUnFollowedAction,
-} from '../../actions/accounts';
-import Avatar from '../avatar';
-import Icon from '../toolBox/icon';
-import { fromRawLsk } from '../../utilities/conversions';
-import FormattedNumber from '../formattedNumber';
-import { tokenMap, tokenKeys } from '../../constants/tokens';
-import Share from '../share';
-import { P, H2 } from '../toolBox/typography';
-import { IconButton } from '../toolBox/button';
-import easing from '../../utilities/easing';
-import { stringShortener } from '../../utilities/helpers';
-import withTheme from '../withTheme';
+} from '../../../../actions/accounts';
+import Avatar from '../../../avatar';
+import Icon from '../../../toolBox/icon';
+import { fromRawLsk } from '../../../../utilities/conversions';
+import FormattedNumber from '../../../formattedNumber';
+import { tokenMap, tokenKeys } from '../../../../constants/tokens';
+import Share from '../../../share';
+import { P, H2 } from '../../../toolBox/typography';
+import { IconButton } from '../../../toolBox/button';
+import easing from '../../../../utilities/easing';
+import { stringShortener } from '../../../../utilities/helpers';
+import withTheme from '../../../withTheme';
 import getStyles from './styles';
-import { colors } from '../../constants/styleGuide';
-import DeleteBookmarkModal from '../bookmarks/deleteBookmarkModal';
-import modalHolder from '../../utilities/modal';
+import { colors } from '../../../../constants/styleGuide';
+import DeleteBookmarkModal from '../../../bookmarks/deleteBookmarkModal';
+import modalHolder from '../../../../utilities/modal';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed,

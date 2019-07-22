@@ -1,5 +1,5 @@
-import { themes, colors } from '../../constants/styleGuide';
-import { setColorOpacity } from '../../utilities/helpers';
+import { themes, colors } from '../../../../../constants/styleGuide';
+import { setColorOpacity } from '../../../../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -8,9 +8,6 @@ export default () => ({
       overflow: 'hidden',
     },
     homeContainer: {
-      overflow: 'hidden',
-    },
-    walletContainer: {
       overflow: 'hidden',
     },
     avatarContainer: {
@@ -27,9 +24,6 @@ export default () => ({
       justifyContent: 'center',
       backgroundColor: colors.light.whiteSmoke,
     },
-    walletTokenLogoWrapper: {
-      backgroundColor: colors.light.BTC,
-    },
     tokenLogoWrapperDetails: {
       borderRadius: 30,
       width: 50,
@@ -40,17 +34,6 @@ export default () => ({
     },
     tokenLogo: {
       textAlign: 'center',
-    },
-    address: {
-      width: '100%',
-      textAlign: 'center',
-      zIndex: 2,
-    },
-    addressContainer: {
-      justifyContent: 'center',
-    },
-    addressP: {
-      lineHeight: 25,
     },
     balance: {
       height: 32,
@@ -100,15 +83,6 @@ export default () => ({
       zIndex: 2,
     },
     fiatValue: {},
-    actionBar: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 56,
-      width: '100%',
-      paddingTop: 11,
-      paddingHorizontal: 12,
-    },
     bookmarkButton: {
       marginHorizontal: 8,
       minWidth: 45,
@@ -123,17 +97,6 @@ export default () => ({
     },
     bookmarkButtonTitle: {
       color: colors.light.slateGray,
-    },
-    sendButton: {
-      marginHorizontal: 12,
-      width: 50,
-      height: 50,
-      borderWidth: 1,
-      borderColor: colors.light.slateGray,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      paddingLeft: 0,
-      borderRadius: 25,
     },
     paginationWrapper: {
       position: 'absolute',
@@ -166,26 +129,11 @@ export default () => ({
     homeContainerBTC: {
       backgroundColor: colors.light.BTC,
     },
-    walletContainer: {
-      backgroundColor: colors.light.whiteSmoke,
-      borderBottomColor: colors.light.whiteSmoke,
-      borderBottomWidth: 1,
-    },
     homeBalance: {
       color: colors.light.white,
     },
-    walletBalance: {
-      color: colors.light.black,
-    },
-    walletAddress: {
-      color: colors.light.slateGray,
-    },
     fiatValue: {
       color: colors.light.whiteSmoke,
-    },
-    sendButton: {
-      backgroundColor: colors.light.white,
-      borderColor: colors.light.ghost,
     },
   },
   [themes.dark]: {
@@ -195,26 +143,11 @@ export default () => ({
     homeContainerBTC: {
       backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
     },
-    walletContainer: {
-      borderBottomWidth: 1,
-      backgroundColor: colors.dark.maastrichtBlue,
-      borderBottomColor: setColorOpacity(colors.light.white, 0.24),
-      borderTopColor: setColorOpacity(colors.light.white, 0.24),
-    },
-    walletAddress: {
-      color: colors.dark.slateGray,
-    },
     homeBalance: {
-      color: colors.dark.white,
-    },
-    walletBalance: {
       color: colors.dark.white,
     },
     fiatValue: {
       color: colors.light.whiteSmoke,
-    },
-    sendButton: {
-      backgroundColor: colors.dark.navigationBg,
     },
   },
 });

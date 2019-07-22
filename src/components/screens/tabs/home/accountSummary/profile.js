@@ -1,17 +1,17 @@
 import React from 'react';
 import { Image, Animated, View } from 'react-native';
-import Avatar from '../avatar';
-import { fromRawLsk } from '../../utilities/conversions';
-import FormattedNumber from '../formattedNumber';
-import { P, H3 } from '../toolBox/typography';
-import withTheme from '../withTheme';
+import Avatar from '../../../../avatar';
+import { fromRawLsk } from '../../../../../utilities/conversions';
+import FormattedNumber from '../../../../formattedNumber';
+import { P, H3 } from '../../../../toolBox/typography';
+import withTheme from '../../../../withTheme';
 import getStyles from './styles';
-import Icon from '../toolBox/icon';
-import { tokenMap } from '../../constants/tokens';
-import blurBig from '../../assets/images/balanceBlur/darkBig.png';
-import blurMedium from '../../assets/images/balanceBlur/darkMedium.png';
-import blurSmall from '../../assets/images/balanceBlur/darkSmall.png';
-import { colors, themes } from '../../constants/styleGuide';
+import Icon from '../../../../toolBox/icon';
+import { tokenMap } from '../../../../../constants/tokens';
+import blurBig from '../../../../../assets/images/balanceBlur/darkBig.png';
+import blurMedium from '../../../../../assets/images/balanceBlur/darkMedium.png';
+import blurSmall from '../../../../../assets/images/balanceBlur/darkSmall.png';
+import { colors, themes } from '../../../../../constants/styleGuide';
 
 const blurs = {
   blurBig, blurMedium, blurSmall,

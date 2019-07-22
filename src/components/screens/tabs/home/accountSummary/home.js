@@ -4,12 +4,12 @@ import connect from 'redux-connect-decorator';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import {
   settingsUpdated as settingsUpdatedAction,
-} from '../../actions/settings';
+} from '../../../../../actions/settings';
 import Profile from './profile';
-import { deviceWidth } from '../../utilities/device';
-import easing from '../../utilities/easing';
-import { tokenKeys } from '../../constants/tokens';
-import withTheme from '../withTheme';
+import { deviceWidth } from '../../../../../utilities/device';
+import easing from '../../../../../utilities/easing';
+import { tokenKeys } from '../../../../../constants/tokens';
+import withTheme from '../../../../withTheme';
 import getStyles from './styles';
 
 const width = deviceWidth();
