@@ -208,8 +208,9 @@ class SignIn extends React.Component {
 
     if (isSignedIn) {
       this.navigateToDeepLink(event.url);
-    } else {
+    } else if (!isSignedIn && event.type && event.type === 'Discreet') {
       this.props.navigation.popToTop();
+    } else {
       this.deepLinkURL = event.url;
     }
   }
