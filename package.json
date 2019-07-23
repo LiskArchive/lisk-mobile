@@ -15,7 +15,6 @@
     "test:live": "npm test -- --watch",
     "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
-    "postinstall": "npm run link",
     "i18n": "node ./scripts/scanner.config.js",
     "test:build-e2e-release": "detox build --configuration ios.sim.release",
     "test:build-e2e-debug": "detox build --configuration ios.sim.debug",
