@@ -208,21 +208,23 @@ class Home extends React.Component {
   componentDidUpdate(prevProps) {
     const {
       transactions, account, incognito,
-      activeToken, isFocused,
+      activeToken, isFocused, settings: { token: { list } },
     } = this.props;
-
+    const prevTokenList = prevProps.settings.token.list;
     const prevTransactionCount = (
       prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
     );
-
     const transactionCount = (
       transactions.pending.length + transactions.confirmed.length
     );
-
     const shouldUpdateState = (
       (prevProps.transactions.loaded !== transactions.loaded) ||
       (prevTransactionCount !== transactionCount)
     );
+
+    if (this.shouldFetchAccounts(prevTokenList, list)) {
+      this.fetchInactiveTokensAccounts();
+    }
 
     if (shouldUpdateState) {
       this.setState({
@@ -248,6 +250,9 @@ class Home extends React.Component {
     clearTimeout(this.modalTimeout);
     clearTimeout(this.accountFetchTimeout);
   }
+
+  shouldFetchAccounts = (prevList, newList) => Object.keys(prevList).some(token =>
+    newList[token] !== prevList[token]);
 
   fetchInactiveTokensAccounts() {
     const { activeToken, accountFetched, settings } = this.props;
