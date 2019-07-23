@@ -21,7 +21,7 @@ import Loading from '../../../transactions/loading';
 import IntroModal from './introModal';
 import { viewportHeight } from '../../../../utilities/device';
 import InfiniteScrollView from '../../../infiniteScrollView';
-import { tokenMap } from '../../../../constants/tokens';
+import { tokenMap, tokenKeys } from '../../../../constants/tokens';
 import withTheme from '../../../withTheme';
 import getStyles from './styles';
 import { themes } from '../../../../constants/styleGuide';
