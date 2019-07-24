@@ -166,6 +166,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-device-info')
     compile project(':react-native-shake')
     compile project(':react-native-quick-actions')
     compile project(':react-native-haptic-feedback')
