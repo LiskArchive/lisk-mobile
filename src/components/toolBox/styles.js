@@ -1,8 +1,8 @@
-import { StyleSheet, DeviceInfo, Platform } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { fonts, colors, boxes } from '../../constants/styleGuide';
-import { viewportHeight } from '../../utilities/device';
+import { viewportHeight, deviceType } from '../../utilities/device';
 
-const bottomOffset = DeviceInfo.isIPhoneX_deprecated ? 30 : 0;
+const bottomOffset = deviceType() === 'iOSx' ? 30 : 0;
 
 const styles = {
   h1: {
@@ -74,7 +74,7 @@ const styles = {
         top: -50,
       },
       ios: {
-        marginBottom: DeviceInfo.isIPhoneX_deprecated ? -41 : -12,
+        marginBottom: deviceType() === 'iOSx' ? -41 : -12,
       },
     }),
   },
