@@ -123,11 +123,8 @@ export const accountEdited = (address, label) => (dispatch, getState) => {
 export const accountSignedIn = ({ passphrase }) => (dispatch, getState) => {
   const tokens = getState().settings.token.list;
   const info = Object.keys(tokens).reduce((accounts, token) => {
-    // only if the token is enabled
-    if (tokens[token]) {
-      const address1 = accountAPI.extractAddress(token, passphrase);
-      accounts[token] = { address: address1 };
-    }
+    const address1 = accountAPI.extractAddress(token, passphrase);
+    accounts[token] = { address: address1 };
     return accounts;
   }, {});
 

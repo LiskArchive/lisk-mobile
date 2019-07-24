@@ -73,7 +73,9 @@ class Intro extends React.Component {
       <Slider
         descriptionContent={descriptionContent}
         skip={this.forward}
-        t={t}>
+        t={t}
+        testID='accountCreation'
+        >
       </Slider>
     </SafeAreaView>
     );

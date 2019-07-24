@@ -11,7 +11,7 @@ import { headerHeight } from '../../utilities/device';
 class Heading extends React.Component {
   render() {
     const {
-      t, skip, descriptionContent, hasHeader,
+      t, skip, descriptionContent, hasHeader, testID,
     } = this.props;
     const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {};
     return (
@@ -25,7 +25,7 @@ class Heading extends React.Component {
           paginationStyle={styles.headingPagination}
         >
           {descriptionContent.map(item => (
-            <View key={item.step} style={styles.step}>
+            <View key={item.step} style={styles.step} testID={`${testID}-${item.step}`}>
               <View style={styles.descriptionWrapper}>
                 <H2 style={[styles.centralized, styles.descriptionH]}>{t(item.title)}</H2>
                 <P style={[styles.centralized, styles.descriptionP]}>{t(item.description)}</P>
@@ -37,6 +37,7 @@ class Heading extends React.Component {
                     style={styles.button}
                     onClick={skip}
                     title='Continue'
+                    testID='sliderButton'
                   />
                 </View>
               )}

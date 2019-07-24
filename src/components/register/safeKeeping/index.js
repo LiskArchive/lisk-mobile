@@ -61,6 +61,7 @@ class SafeKeeping extends React.Component {
           <View style={styles.footer}>
             <View style={styles.switchContainer}>
               <Switch
+                testID="understandResponsibilitySwitch"
                 height={26}
                 width={43}
                 onSyncPress={this.confirm}

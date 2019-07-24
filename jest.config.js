@@ -4,8 +4,8 @@ module.exports = {
     '<rootDir>/src/**/*.test.js',
   ],
   testPathIgnorePatterns: [
-    'src/components/',
-    'e2e',
+    '<rootDir>/src/components/',
+    '<rootDir>/e2e/',
   ],
   verbose: true,
   cache: false,
