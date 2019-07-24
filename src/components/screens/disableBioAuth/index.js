@@ -4,10 +4,10 @@ import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import { removePassphraseFromKeyChain } from '../../../utilities/passphrase';
 import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
-import { PrimaryButton } from '../../toolBox/button';
-import withTheme from '../../withTheme';
+import { PrimaryButton } from '../../shared/toolBox/button';
+import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
-import PassphraseCopy from '../../passphraseCopy';
+import PassphraseCopy from '../../shared/passphraseCopy';
 
 @connect(state => ({
   passphrase: state.accounts.passphrase,

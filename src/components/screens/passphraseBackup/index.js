@@ -1,8 +1,8 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
-import PassphraseCopy from '../../passphraseCopy';
-import withTheme from '../../withTheme';
+import PassphraseCopy from '../../shared/passphraseCopy';
+import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
 @connect(state => ({

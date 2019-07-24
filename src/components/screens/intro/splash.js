@@ -1,10 +1,10 @@
 import React from 'react';
 import { Animated, View } from 'react-native';
 import { translate } from 'react-i18next';
-import Icon from '../../toolBox/icon';
+import Icon from '../../shared/toolBox/icon';
 import easing from '../../../utilities/easing';
 import { deviceHeight } from '../../../utilities/device';
-import { P } from '../../toolBox/typography';
+import { P } from '../../shared/toolBox/typography';
 import styles from './styles';
 import { colors } from '../../../constants/styleGuide';
 

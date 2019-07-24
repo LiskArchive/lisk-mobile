@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { translate } from 'react-i18next';
-import { H2, P } from '../../toolBox/typography';
+import { H2, P } from '../../shared/toolBox/typography';
 import styles from './styles';
 import { colors } from '../../../constants/styleGuide';
-import { PrimaryButton } from '../../toolBox/button';
+import { PrimaryButton } from '../../shared/toolBox/button';
 import { headerHeight } from '../../../utilities/device';
 
 class Heading extends React.Component {

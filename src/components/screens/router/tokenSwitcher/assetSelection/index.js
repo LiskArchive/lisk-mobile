@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, FlatList, TouchableHighlight } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { B, Small } from '../../../../toolBox/typography';
-import Icon from '../../../../toolBox/icon';
+import { B, Small } from '../../../../shared/toolBox/typography';
+import Icon from '../../../../shared/toolBox/icon';
 import { tokenMap, tokenKeys } from '../../../../../constants/tokens';
 import { settingsUpdated as settingsUpdatedAction } from '../../../../../actions/settings';
 import { colors } from '../../../../../constants/styleGuide';
-import withTheme from '../../../../withTheme';
-import FormatedNumber from '../../../../formattedNumber';
+import withTheme from '../../../../shared/withTheme';
+import FormatedNumber from '../../../../shared/formattedNumber';
 import { fromRawLsk } from '../../../../../utilities/conversions';
 import getStyles from './styles';
 import ModalHolder from '../../../../../utilities/modal';

@@ -3,9 +3,9 @@ import { View, Text } from 'react-native';
 import { translate } from 'react-i18next';
 import Switch from 'react-native-switch-pro';
 import styles from './styles';
-import { B, P } from '../../../toolBox/typography';
-import CopyToClipboard from '../../../copyToClipboard';
-import { PrimaryButton } from '../../../toolBox/button';
+import { B, P } from '../../../shared/toolBox/typography';
+import CopyToClipboard from '../../../shared/copyToClipboard';
+import { PrimaryButton } from '../../../shared/toolBox/button';
 import { colors } from '../../../../constants/styleGuide';
 
 class SafeKeeping extends React.Component {

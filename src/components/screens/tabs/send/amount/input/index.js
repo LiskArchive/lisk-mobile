@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import Input from '../../../../../toolBox/input';
-import withTheme from '../../../../../withTheme';
+import Input from '../../../../../shared/toolBox/input';
+import withTheme from '../../../../../shared/withTheme';
 import getStyles from './styles';
 
 const AmountInput = ({

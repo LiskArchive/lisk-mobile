@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, TouchableHighlight, FlatList } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { P } from '../../toolBox/typography';
-import Icon from '../../toolBox/icon';
+import { P } from '../../shared/toolBox/typography';
+import Icon from '../../shared/toolBox/icon';
 import { currencyMap, currencyKeys } from '../../../constants/currencies';
 import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
 import { colors } from '../../../constants/styleGuide';
-import withTheme from '../../withTheme';
+import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
 @connect(state => ({

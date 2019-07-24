@@ -1,7 +1,7 @@
 import React from 'react';
-import { IconButton } from '../../../toolBox/button';
+import { IconButton } from '../../../shared/toolBox/button';
 import { colors, themes } from '../../../../constants/styleGuide';
-import withTheme from '../../../withTheme';
+import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 
 const HeaderBackButton = ({

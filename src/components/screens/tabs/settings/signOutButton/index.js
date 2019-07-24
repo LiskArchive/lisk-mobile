@@ -1,8 +1,8 @@
 import React from 'react';
 import { translate } from 'react-i18next';
-import { IconButton } from '../../../../toolBox/button';
+import { IconButton } from '../../../../shared/toolBox/button';
 import { colors } from '../../../../../constants/styleGuide';
-import withTheme from '../../../../withTheme';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 
 const SignOutButton = ({

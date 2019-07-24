@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
 import styles from './styles';
-import { P } from '../../../toolBox/typography';
-import { PrimaryButton } from '../../../toolBox/button';
+import { P } from '../../../shared/toolBox/typography';
+import { PrimaryButton } from '../../../shared/toolBox/button';
 import image from '../../../../assets/images/registrationProcess/success3x.png';
 
 class Success extends React.Component {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import withTheme from '../../withTheme';
-import { P } from '../../toolBox/typography';
-import Icon from '../../toolBox/icon';
+import withTheme from '../../shared/withTheme';
+import { P } from '../../shared/toolBox/typography';
+import Icon from '../../shared/toolBox/icon';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
 

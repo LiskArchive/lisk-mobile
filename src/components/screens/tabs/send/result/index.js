@@ -3,15 +3,15 @@ import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
-import { PrimaryButton } from '../../../../toolBox/button';
-import { A, P } from '../../../../toolBox/typography';
+import { PrimaryButton } from '../../../../shared/toolBox/button';
+import { A, P } from '../../../../shared/toolBox/typography';
 import txCreatedAnimLight from '../../../../../assets/animations/tx-created-light.json';
 import txPendingAnimLight from '../../../../../assets/animations/tx-pending-light.json';
 import txConfirmedAnimLight from '../../../../../assets/animations/tx-confirmed-light.json';
 import txCreatedAnimDark from '../../../../../assets/animations/tx-created-dark.json';
 import txPendingAnimDark from '../../../../../assets/animations/tx-pending-dark.json';
 import txConfirmedAnimDark from '../../../../../assets/animations/tx-confirmed-dark.json';
-import withTheme from '../../../../withTheme';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { themes } from '../../../../../constants/styleGuide';
 

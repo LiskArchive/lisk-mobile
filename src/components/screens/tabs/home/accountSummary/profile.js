@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image, Animated, View } from 'react-native';
-import Avatar from '../../../../avatar';
+import Avatar from '../../../../shared/avatar';
 import { fromRawLsk } from '../../../../../utilities/conversions';
-import FormattedNumber from '../../../../formattedNumber';
-import { P, H3 } from '../../../../toolBox/typography';
-import withTheme from '../../../../withTheme';
+import FormattedNumber from '../../../../shared/formattedNumber';
+import { P, H3 } from '../../../../shared/toolBox/typography';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
-import Icon from '../../../../toolBox/icon';
+import Icon from '../../../../shared/toolBox/icon';
 import { tokenMap } from '../../../../../constants/tokens';
 import blurBig from '../../../../../assets/images/balanceBlur/darkBig.png';
 import blurMedium from '../../../../../assets/images/balanceBlur/darkMedium.png';

@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
-import { A, Small } from '../../../../toolBox/typography';
-import { PrimaryButton } from '../../../../toolBox/button';
+import { A, Small } from '../../../../shared/toolBox/typography';
+import { PrimaryButton } from '../../../../shared/toolBox/button';
 import { removePassphraseFromKeyChain } from '../../../../../utilities/passphrase';
-import withTheme from '../../../../withTheme';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 
 @connect(state => ({

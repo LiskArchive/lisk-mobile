@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from '../../../toolBox/icon';
+import Icon from '../../../shared/toolBox/icon';
 import { colors } from '../../../../constants/styleGuide';
 
 const HeaderLogo = ({ color }) => (

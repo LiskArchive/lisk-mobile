@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { DraggableItem, Item } from './item';
-import withTheme from '../withTheme';
+import withTheme from '../shared/withTheme';
 import getStyles from './styles';
 
 const List = ({

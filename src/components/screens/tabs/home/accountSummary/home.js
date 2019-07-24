@@ -9,7 +9,7 @@ import Profile from './profile';
 import { deviceWidth } from '../../../../../utilities/device';
 import easing from '../../../../../utilities/easing';
 import { tokenKeys } from '../../../../../constants/tokens';
-import withTheme from '../../../../withTheme';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 
 const width = deviceWidth();

@@ -3,14 +3,14 @@ import { ScrollView, View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { NavigationActions } from 'react-navigation';
-import { H4, P } from '../../../toolBox/typography';
-import FingerprintOverlay from '../../../fingerprintOverlay';
+import { H4, P } from '../../../shared/toolBox/typography';
+import FingerprintOverlay from '../../../shared/fingerprintOverlay';
 import ItemTitle from './itemTitle';
 import SignOutButton from './signOutButton';
 import SignOutModal from './signOutModal';
 import { colors, themes } from '../../../../constants/styleGuide';
-import withTheme from '../../../withTheme';
-import SwitchButton from '../../../toolBox/switchButton';
+import withTheme from '../../../shared/withTheme';
+import SwitchButton from '../../../shared/toolBox/switchButton';
 import { languageMap } from '../../../../constants/languages';
 import {
   settingsUpdated as settingsUpdatedAction,

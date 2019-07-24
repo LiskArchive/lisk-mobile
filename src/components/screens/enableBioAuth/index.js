@@ -4,11 +4,11 @@ import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { storePassphraseInKeyChain } from '../../../utilities/passphrase';
 import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
-import { B, P, Small } from '../../toolBox/typography';
-import Icon from '../../toolBox/icon';
-import { PrimaryButton } from '../../toolBox/button';
+import { B, P, Small } from '../../shared/toolBox/typography';
+import Icon from '../../shared/toolBox/icon';
+import { PrimaryButton } from '../../shared/toolBox/button';
 import { themes, colors } from '../../../constants/styleGuide';
-import withTheme from '../../withTheme';
+import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
 @connect(state => ({

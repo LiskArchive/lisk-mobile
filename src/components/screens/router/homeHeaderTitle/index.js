@@ -1,9 +1,9 @@
 import React from 'react';
 import { Animated, Text, View, Image } from 'react-native';
 import { fromRawLsk } from '../../../../utilities/conversions';
-import Avatar from '../../../avatar';
-import Icon from '../../../toolBox/icon';
-import withTheme from '../../../withTheme';
+import Avatar from '../../../shared/avatar';
+import Icon from '../../../shared/toolBox/icon';
+import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import darkBig from '../../../../assets/images/balanceBlur/darkBig.png';
 import darkMedium from '../../../../assets/images/balanceBlur/darkMedium.png';

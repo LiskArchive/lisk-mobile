@@ -2,14 +2,14 @@ import React from 'react';
 import { View, FlatList } from 'react-native';
 import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
-import { B, P } from '../../toolBox/typography';
-import Icon from '../../toolBox/icon';
+import { B, P } from '../../shared/toolBox/typography';
+import Icon from '../../shared/toolBox/icon';
 import { tokenMap, tokenKeys } from '../../../constants/tokens';
 import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
 import { colors } from '../../../constants/styleGuide';
-import withTheme from '../../withTheme';
+import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
-import SwitchButton from '../../toolBox/switchButton';
+import SwitchButton from '../../shared/toolBox/switchButton';
 import { merge } from '../../../utilities/helpers';
 
 @connect(state => ({

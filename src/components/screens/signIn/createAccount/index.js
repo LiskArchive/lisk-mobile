@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated } from 'react-native';
 import { translate } from 'react-i18next';
-import { P, A } from '../../../toolBox/typography';
+import { P, A } from '../../../shared/toolBox/typography';
 import styles from './styles';
 
 const CreateAccount = ({

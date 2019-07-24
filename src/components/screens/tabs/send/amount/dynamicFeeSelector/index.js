@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
-import FormattedNumber from '../../../../../formattedNumber';
+import FormattedNumber from '../../../../../shared/formattedNumber';
 import { fromRawLsk } from '../../../../../../utilities/conversions';
-import { P, Small } from '../../../../../toolBox/typography';
-import withTheme from '../../../../../withTheme';
+import { P, Small } from '../../../../../shared/toolBox/typography';
+import withTheme from '../../../../../shared/withTheme';
 import getStyles from './styles';
 import { isEmpty } from '../../../../../../utilities/helpers';
 

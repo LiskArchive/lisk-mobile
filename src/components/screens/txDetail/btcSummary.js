@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import FormattedDate from '../../formattedDate';
-import withTheme from '../../withTheme';
+import FormattedDate from '../../shared/formattedDate';
+import withTheme from '../../shared/withTheme';
 import { fromRawLsk } from '../../../utilities/conversions';
-import Icon from '../../toolBox/icon';
-import FormattedNumber from '../../formattedNumber';
-import { P, H3 } from '../../toolBox/typography';
-import Blur from '../../transactions/blur';
+import Icon from '../../shared/toolBox/icon';
+import FormattedNumber from '../../shared/formattedNumber';
+import { P, H3 } from '../../shared/toolBox/typography';
+import Blur from '../../shared/transactions/blur';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
 

@@ -3,8 +3,8 @@ import connect from 'redux-connect-decorator';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../../../actions/settings';
-import withTheme from '../../../withTheme';
-import { IconButton } from '../../../toolBox/button';
+import withTheme from '../../../shared/withTheme';
+import { IconButton } from '../../../shared/toolBox/button';
 import getStyles from './styles';
 import AssetSelection from './assetSelection';
 import { tokenKeys, tokenMap } from '../../../../constants/tokens';

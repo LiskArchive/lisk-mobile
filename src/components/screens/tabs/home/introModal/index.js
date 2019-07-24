@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { Small } from '../../../../toolBox/typography';
-import { PrimaryButton } from '../../../../toolBox/button';
-import Icon from '../../../../toolBox/icon';
-import withTheme from '../../../../withTheme';
+import { Small } from '../../../../shared/toolBox/typography';
+import { PrimaryButton } from '../../../../shared/toolBox/button';
+import Icon from '../../../../shared/toolBox/icon';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../../../constants/tokens';
 import { colors } from '../../../../../constants/styleGuide';

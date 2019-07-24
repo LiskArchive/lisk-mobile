@@ -1,14 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import KeyboardAwareScrollView from '../../../../toolBox/keyboardAwareScrollView';
+import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import { fromRawLsk } from '../../../../../utilities/conversions';
 import reg from '../../../../../constants/regex';
 import transactions from '../../../../../constants/transactions';
 import { merge } from '../../../../../utilities/helpers';
 import Balance from './balance';
 import Input from './input';
-import withTheme from '../../../../withTheme';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { deviceType } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';

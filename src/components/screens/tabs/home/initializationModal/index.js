@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { Small, A } from '../../../../toolBox/typography';
-import { PrimaryButton } from '../../../../toolBox/button';
-import withTheme from '../../../../withTheme';
+import { Small, A } from '../../../../shared/toolBox/typography';
+import { PrimaryButton } from '../../../../shared/toolBox/button';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 
 class IntroModal extends React.Component {
