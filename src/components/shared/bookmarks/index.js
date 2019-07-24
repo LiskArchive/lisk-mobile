@@ -4,11 +4,11 @@ import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
 import {
   settingsUpdated as settingsUpdatedAction,
-} from '../../actions/settings';
+} from '../../../actions/settings';
 import List from './list';
 import Empty from './empty';
-import withTheme from '../shared/withTheme';
-import { tokenKeys } from '../../constants/tokens';
+import withTheme from '../withTheme';
+import { tokenKeys } from '../../../constants/tokens';
 import getStyles from './styles';
 
 @connect(state => ({

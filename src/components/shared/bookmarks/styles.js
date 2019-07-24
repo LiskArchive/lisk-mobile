@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native';
-import { themes, colors, fonts } from '../../constants/styleGuide';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../utilities/device';
-import { setColorOpacity } from '../../utilities/helpers';
+import { themes, colors, fonts } from '../../../constants/styleGuide';
+import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
+import { setColorOpacity } from '../../../utilities/helpers';
 
 const Screen = Dimensions.get('window');
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;

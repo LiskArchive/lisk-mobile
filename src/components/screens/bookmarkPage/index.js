@@ -8,7 +8,7 @@ import { colors } from '../../../constants/styleGuide';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
-import Bookmarks from '../../bookmarks';
+import Bookmarks from '../../shared/bookmarks';
 
 class Bookmark extends React.Component {
   activeInputRef = null;
