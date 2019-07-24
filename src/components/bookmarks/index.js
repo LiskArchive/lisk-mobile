@@ -7,7 +7,7 @@ import {
 } from '../../actions/settings';
 import List from './list';
 import Empty from './empty';
-import withTheme from '../withTheme';
+import withTheme from '../shared/withTheme';
 import { tokenKeys } from '../../constants/tokens';
 import getStyles from './styles';
 

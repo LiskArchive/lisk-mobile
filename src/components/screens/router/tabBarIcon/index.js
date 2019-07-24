@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from '../../../toolBox/icon';
+import Icon from '../../../shared/toolBox/icon';
 
 const TabBarIcon = ({ name, tintColor, focused }) => (
   <Icon

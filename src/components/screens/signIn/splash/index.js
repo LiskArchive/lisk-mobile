@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, View } from 'react-native';
-import Icon from '../../../toolBox/icon';
+import Icon from '../../../shared/toolBox/icon';
 import easing from '../../../../utilities/easing';
 import { deviceHeight } from '../../../../utilities/device';
 import styles from './styles';

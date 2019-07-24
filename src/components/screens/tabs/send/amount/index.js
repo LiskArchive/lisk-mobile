@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import withTheme from '../../../../withTheme';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import {

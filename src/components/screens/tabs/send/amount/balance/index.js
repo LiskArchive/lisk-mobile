@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
-import { B, P } from '../../../../../toolBox/typography';
-import FormattedNumber from '../../../../../formattedNumber';
-import withTheme from '../../../../../withTheme';
+import { B, P } from '../../../../../shared/toolBox/typography';
+import FormattedNumber from '../../../../../shared/formattedNumber';
+import withTheme from '../../../../../shared/withTheme';
 import getStyles from './styles';
 import darkBlur from '../../../../../../assets/images/amountFormBalanceBlur/dark.png';
 import lightBlur from '../../../../../../assets/images/amountFormBalanceBlur/light.png';

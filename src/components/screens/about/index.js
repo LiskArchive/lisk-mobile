@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Image, Linking } from 'react-native';
 import { translate } from 'react-i18next';
-import { H4, P, A } from '../../toolBox/typography';
+import { H4, P, A } from '../../shared/toolBox/typography';
 import Logo from '../../../assets/images/lisk-logo.png';
 import packageJson from '../../../../package.json';
-import withTheme from '../../withTheme';
+import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
 const logoSize = 83;

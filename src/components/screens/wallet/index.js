@@ -3,15 +3,15 @@ import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
 import { account as accountAPI, transactions as transactionsAPI } from '../../../utilities/api';
 import AccountSummary from './accountSummary';
-import Transactions from '../../transactions';
-import InfiniteScrollView from '../../infiniteScrollView';
-import Empty from '../../transactions/empty';
-import Loading from '../../transactions/loading';
+import Transactions from '../../shared/transactions';
+import InfiniteScrollView from '../../shared/infiniteScrollView';
+import Empty from '../../shared/transactions/empty';
+import Loading from '../../shared/transactions/loading';
 import {
   loadingStarted as loadingStartedAction,
   loadingFinished as loadingFinishedAction,
 } from '../../../actions/loading';
-import withTheme from '../../withTheme';
+import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import HomeHeaderTitle from '../router/homeHeaderTitle';
 

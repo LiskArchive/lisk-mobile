@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-navigation';
 import styles from './styles';
-import { P } from '../../../toolBox/typography';
-import { PrimaryButton, Button } from '../../../toolBox/button';
+import { P } from '../../../shared/toolBox/typography';
+import { PrimaryButton, Button } from '../../../shared/toolBox/button';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../../utilities/device';
 import { assembleWordOptions } from '../../../../utilities/passphrase';
 

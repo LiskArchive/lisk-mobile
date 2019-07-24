@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import Icon from '../toolBox/icon';
+import Icon from '../shared/toolBox/icon';
 import { colors } from '../../constants/styleGuide';
-import withTheme from '../withTheme';
+import withTheme from '../shared/withTheme';
 import getStyles from './styles';
 
 const Logo = ({

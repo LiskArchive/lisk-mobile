@@ -6,17 +6,17 @@ import {
   accountFollowed as accountFollowedAction,
   accountUnFollowed as accountUnFollowedAction,
 } from '../../../../actions/accounts';
-import Avatar from '../../../avatar';
-import Icon from '../../../toolBox/icon';
+import Avatar from '../../../shared/avatar';
+import Icon from '../../../shared/toolBox/icon';
 import { fromRawLsk } from '../../../../utilities/conversions';
-import FormattedNumber from '../../../formattedNumber';
+import FormattedNumber from '../../../shared/formattedNumber';
 import { tokenMap, tokenKeys } from '../../../../constants/tokens';
-import Share from '../../../share';
-import { P, H2 } from '../../../toolBox/typography';
-import { IconButton } from '../../../toolBox/button';
+import Share from '../../../shared/share';
+import { P, H2 } from '../../../shared/toolBox/typography';
+import { IconButton } from '../../../shared/toolBox/button';
 import easing from '../../../../utilities/easing';
 import { stringShortener } from '../../../../utilities/helpers';
-import withTheme from '../../../withTheme';
+import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { colors } from '../../../../constants/styleGuide';
 import DeleteBookmarkModal from '../../../bookmarks/deleteBookmarkModal';

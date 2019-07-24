@@ -12,7 +12,7 @@ import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationActions, StackActions } from 'react-navigation';
 import QuickActions from 'react-native-quick-actions'; // eslint-disable-line
-import FingerprintOverlay from '../../fingerprintOverlay';
+import FingerprintOverlay from '../../shared/fingerprintOverlay';
 import styles from './styles';
 import {
   getPassphraseFromKeyChain,

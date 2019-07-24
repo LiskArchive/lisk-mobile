@@ -1,6 +1,6 @@
 import React from 'react';
 import DropdownAlert from 'react-native-dropdownalert';
-import withTheme from '../withTheme';
+import withTheme from '../shared/withTheme';
 import getStyles from './styles';
 import { colors } from '../../constants/styleGuide';
 import DropDownHolder from '../../utilities/alert';

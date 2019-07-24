@@ -3,7 +3,7 @@ import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import progressBar from '../../assets/animations/progressBar.json';
-import withTheme from '../withTheme';
+import withTheme from '../shared/withTheme';
 import getStyles from './styles';
 
 @connect(state => ({

@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, BackHandler } from 'react-native';
 import { translate } from 'react-i18next';
-import MultiStep from '../../multiStep';
+import MultiStep from '../../shared/multiStep';
 import Confirm from './confirm';
 import Success from './success';
 import SafeKeeping from './safeKeeping';
 import Intro from './intro';
-import { Small } from '../../toolBox/typography';
+import { Small } from '../../shared/toolBox/typography';
 import styles from './styles';
-import { IconButton } from '../../toolBox/button';
+import { IconButton } from '../../shared/toolBox/button';
 import { colors } from '../../../constants/styleGuide';
 
 const NavButton = props =>

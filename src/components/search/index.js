@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import reg from '../../constants/regex';
-import { PrimaryButton } from '../toolBox/button';
-import Input from '../toolBox/input';
-import withTheme from '../withTheme';
+import { PrimaryButton } from '../shared/toolBox/button';
+import Input from '../shared/toolBox/input';
+import withTheme from '../shared/withTheme';
 import getStyles from './styles';
 
 class Search extends React.Component {

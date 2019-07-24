@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { View, TouchableHighlight, Platform } from 'react-native';
-import { P } from '../../../../toolBox/typography';
-import Icon from '../../../../toolBox/icon';
+import { P } from '../../../../shared/toolBox/typography';
+import Icon from '../../../../shared/toolBox/icon';
 import { themes, colors } from '../../../../../constants/styleGuide';
 import {
   bioMetricAuthentication,
 } from '../../../../../utilities/passphrase';
-import withTheme from '../../../../withTheme';
+import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 
 /**

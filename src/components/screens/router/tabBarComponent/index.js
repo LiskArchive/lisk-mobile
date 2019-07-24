@@ -2,7 +2,7 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { BottomTabBar } from 'react-navigation-tabs';
 import { Platform, DeviceInfo } from 'react-native';
-import withTheme from '../../../withTheme';
+import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../../constants/tokens';
 import { colors } from '../../../../constants/styleGuide';

@@ -2,19 +2,19 @@ import React from 'react';
 import { BackHandler, View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import { IconButton } from '../../toolBox/button';
-import Input from '../../toolBox/input';
+import { IconButton } from '../../shared/toolBox/button';
+import Input from '../../shared/toolBox/input';
 import { colors } from '../../../constants/styleGuide';
-import Avatar from '../../avatar';
-import Scanner from '../../scanner';
-import KeyboardAwareScrollView from '../../toolBox/keyboardAwareScrollView';
-import withTheme from '../../withTheme';
+import Avatar from '../../shared/avatar';
+import Scanner from '../../shared/scanner';
+import KeyboardAwareScrollView from '../../shared/toolBox/keyboardAwareScrollView';
+import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import {
   accountFollowed as accountFollowedAction,
   accountEdited as accountEditedAction,
 } from '../../../actions/accounts';
-import { P, Small } from '../../toolBox/typography';
+import { P, Small } from '../../shared/toolBox/typography';
 import { decodeLaunchUrl } from '../../../utilities/qrCode';
 import { tokenMap } from '../../../constants/tokens';
 import HeaderBackButton from '../../screens/router/headerBackButton';

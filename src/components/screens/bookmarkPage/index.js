@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Animated, ScrollView, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
-import Icon from '../../toolBox/icon';
-import Input from '../../toolBox/input';
-import { IconButton } from '../../toolBox/button';
+import Icon from '../../shared/toolBox/icon';
+import Input from '../../shared/toolBox/input';
+import { IconButton } from '../../shared/toolBox/button';
 import { colors } from '../../../constants/styleGuide';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
-import withTheme from '../../withTheme';
+import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../bookmarks';
 
