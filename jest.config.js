@@ -43,6 +43,9 @@ module.exports = {
     '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
     '.+\\.(css|png|jpg|ttf)$': 'jest-transform-stub',
   },
+  setupFiles: [
+    './testenv.js',
+  ],
   testURL: 'http://localhost',
   globals: {
     PRODUCTION: true,
