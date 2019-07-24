@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { A, Small } from '../../shared/toolBox/typography';
-import { Button } from '../../shared/toolBox/button';
-import withTheme from '../../shared/withTheme';
+import { A, Small } from '../../toolBox/typography';
+import { Button } from '../../toolBox/button';
+import withTheme from '../../withTheme';
 import getStyles from './styles';
 
 class DeleteBookmarkModal extends React.Component {

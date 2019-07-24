@@ -5,15 +5,15 @@ import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import {
   accountUnFollowed as accountUnFollowedAction,
-} from '../../actions/accounts';
-import Avatar from '../shared/avatar';
-import { B, Small, P } from '../shared/toolBox/typography';
-import withTheme from '../shared/withTheme';
+} from '../../../actions/accounts';
+import Avatar from '../avatar';
+import { B, Small, P } from '../toolBox/typography';
+import withTheme from '../withTheme';
 import getStyles from './styles';
-import Icon from '../shared/toolBox/icon';
-import { themes, colors } from '../../constants/styleGuide';
+import Icon from '../toolBox/icon';
+import { themes, colors } from '../../../constants/styleGuide';
 import DeleteBookmarkModal from './deleteBookmarkModal';
-import ModalHolder from '../../utilities/modal';
+import ModalHolder from '../../../utilities/modal';
 
 @connect(state => ({}), {
   accountUnFollowed: accountUnFollowedAction,

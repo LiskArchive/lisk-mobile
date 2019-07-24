@@ -1,7 +1,7 @@
 import { DeviceInfo, Platform, Dimensions } from 'react-native';
 import { Header } from 'react-navigation';
-import { colors } from '../../constants/styleGuide';
-import { merge } from '../../utilities/helpers';
+import { colors } from '../../../constants/styleGuide';
+import { merge } from '../../../utilities/helpers';
 
 let wrapper = {
   backgroundColor: colors.light.ultramarineBlue,

@@ -12,7 +12,7 @@ import { merge } from '../../../../../utilities/helpers';
 import { decodeLaunchUrl } from '../../../../../utilities/qrCode';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
-import Bookmarks from '../../../../bookmarks';
+import Bookmarks from '../../../../shared/bookmarks';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import { validateAddress } from '../../../../../utilities/validators';
 import DropDownHolder from '../../../../../utilities/alert';

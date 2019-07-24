@@ -19,7 +19,7 @@ import { stringShortener } from '../../../../utilities/helpers';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { colors } from '../../../../constants/styleGuide';
-import DeleteBookmarkModal from '../../../bookmarks/deleteBookmarkModal';
+import DeleteBookmarkModal from '../../../shared/bookmarks/deleteBookmarkModal';
 import modalHolder from '../../../../utilities/modal';
 
 @connect(state => ({
