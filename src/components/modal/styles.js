@@ -47,7 +47,6 @@ export default () => ({
     contentContainer: {
       paddingHorizontal: boxes.boxPadding,
       paddingTop: boxes.boxPadding + 50,
-      // TODO: Replace with SafeAreaView
       paddingBottom: deviceType() === 'iOSx' ? boxes.boxPadding + 20 : boxes.boxPadding,
     },
   },
