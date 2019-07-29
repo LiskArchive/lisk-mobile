@@ -73,7 +73,7 @@ class SafeKeeping extends React.Component {
             <View>
               <PrimaryButton
                 disabled={!this.state.confirmed}
-                testID="registerSafeKeepingButton"
+                testID="safeKeepingButton"
                 style={styles.button}
                 noTheme={true}
                 onClick={this.forward}
