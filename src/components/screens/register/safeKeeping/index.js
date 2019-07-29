@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-navigation';
 import Switch from 'react-native-switch-pro';
 import styles from './styles';
 import { B, P } from '../../../shared/toolBox/typography';
@@ -37,48 +38,51 @@ class SafeKeeping extends React.Component {
     const { t, sharedData: { passphrase } } = this.props;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <View style={styles.passphraseContainer}>
-            <P style={styles.passphraseTitle}>{t('Store your passphrase carefully')}</P>
-            <Text style={styles.passphrase} testID="passphraseText">
-              {passphrase.replace(/\s+/g, '  ')}
-            </Text>
-            <CopyToClipboard
-              style={styles.copyContainer}
-              labelStyle={styles.copy}
-              iconStyle={styles.copy}
-              label={t('Copy to clipboard')}
-              showIcon={true}
-              iconSize={14}
-              value={passphrase}
-              type={B}
-            />
+      <SafeAreaView style={styles.wrapper}>
+        <View style={styles.container}>
+          <View style={styles.body}>
+            <View style={styles.passphraseContainer}>
+              <P style={styles.passphraseTitle}>{t('Store your passphrase carefully')}</P>
+              <Text style={styles.passphrase} testID="passphraseText">
+                {passphrase.replace(/\s+/g, '  ')}
+              </Text>
+              <CopyToClipboard
+                style={styles.copyContainer}
+                labelStyle={styles.copy}
+                iconStyle={styles.copy}
+                label={t('Copy to clipboard')}
+                showIcon={true}
+                iconSize={14}
+                value={passphrase}
+                type={B}
+              />
+            </View>
+          </View>
+          <View style={styles.footer}>
+            <View style={styles.switchContainer}>
+              <Switch
+                testID="understandResponsibilitySwitch"
+                height={26}
+                width={43}
+                onSyncPress={this.confirm}
+                backgroundActive={colors.light.ultramarineBlue}
+                backgroundInactive={colors.light.platinum}
+              />
+              <P style={styles.confirmText}>{t('I understand that it’s my responsibility to keep my passphrase safe.')}</P>
+            </View>
+            <View>
+              <PrimaryButton
+                disabled={!this.state.confirmed}
+                testID="safeKeepingButton"
+                style={styles.button}
+                noTheme={true}
+                onClick={this.forward}
+                title={t('I wrote it down')} />
+            </View>
           </View>
         </View>
-        <View style={styles.footer}>
-          <View style={styles.switchContainer}>
-            <Switch
-              testID="understandResponsibilitySwitch"
-              height={26}
-              width={43}
-              onSyncPress={this.confirm}
-              backgroundActive={colors.light.ultramarineBlue}
-              backgroundInactive={colors.light.platinum}
-            />
-            <P style={styles.confirmText}>{t('I understand that it’s my responsibility to keep my passphrase safe.')}</P>
-          </View>
-          <View style={styles.buttonWrapper}>
-            <PrimaryButton
-              disabled={!this.state.confirmed}
-              testID="safeKeepingButton"
-              style={styles.button}
-              noTheme={true}
-              onClick={this.forward}
-              title={t('I wrote it down')} />
-          </View>
-        </View>
-      </View>);
+      </SafeAreaView>
+    );
   }
 }
 

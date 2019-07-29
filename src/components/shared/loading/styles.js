@@ -1,7 +1,8 @@
-import { DeviceInfo, Platform, Dimensions } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
 import { Header } from 'react-navigation';
 import { colors } from '../../../constants/styleGuide';
 import { merge } from '../../../utilities/helpers';
+import { deviceType } from '../../../utilities/device';
 
 let wrapper = {
   backgroundColor: colors.light.ultramarineBlue,
@@ -10,7 +11,7 @@ let wrapper = {
 if (Platform.OS === 'ios') {
   wrapper = {
     zIndex: 10,
-    top: DeviceInfo.isIPhoneX_deprecated ? Header.HEIGHT + 24 : Header.HEIGHT + 1,
+    top: deviceType() === 'iOSx' ? Header.HEIGHT + 24 : Header.HEIGHT + 1,
     left: 0,
     position: 'absolute',
   };

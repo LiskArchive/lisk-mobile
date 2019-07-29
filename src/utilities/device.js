@@ -1,5 +1,6 @@
-import { Platform, DeviceInfo, Dimensions, NativeModules } from 'react-native';
+import { Platform, Dimensions, NativeModules } from 'react-native';
 import { Header } from 'react-navigation';
+import DeviceInfo from 'react-native-device-info';
 
 const { width, height } = Dimensions.get('window');
 
@@ -9,10 +10,26 @@ const { width, height } = Dimensions.get('window');
  * @returns {String} - iOSx for iPhoneX, iOS for the rest of iPhones
  *  and android for all the android phones
  */
+
+/**
+ * List of Apple's mobile device codes types
+ * https://gist.github.com/adamawolf/3048717
+ */
+const iPhoneXOrSuperiorIDs = [
+  'iPhone10,3', // iPhone X Global
+  'iPhone10,6', // iPhone X GSM
+  'iPhone11,2', // iPhone Xs
+  'iPhone11,4', // iPhone Xs Max
+  'iPhone11,6', // iPhone Xs Max Global
+  'iPhone11,8', // iPhone Xr
+];
+
+const isIphoneXOrSuperior = () => iPhoneXOrSuperiorIDs.includes(DeviceInfo.getDeviceId());
+
 export const deviceType = () => {
-  if (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) {
+  if (Platform.OS === 'ios' && isIphoneXOrSuperior()) {
     return 'iOSx';
-  } else if (Platform.OS === 'ios' && !DeviceInfo.isIPhoneX_deprecated) {
+  } else if (Platform.OS === 'ios' && !isIphoneXOrSuperior()) {
     return 'iOS';
   }
   return 'android';
@@ -32,7 +49,7 @@ export const deviceHeight = () => height;
  * @returns {Number} - The height of the header
  */
 export const headerHeight = () => {
-  if (DeviceInfo.isIPhoneX_deprecated) {
+  if (isIphoneXOrSuperior()) {
     return Header.HEIGHT + 23;
   }
   return Header.HEIGHT;

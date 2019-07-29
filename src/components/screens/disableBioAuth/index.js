@@ -2,6 +2,7 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-navigation';
 import { removePassphraseFromKeyChain } from '../../../utilities/passphrase';
 import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
 import { PrimaryButton } from '../../shared/toolBox/button';
@@ -33,16 +34,18 @@ class DisableBioAuth extends React.Component {
     const title = navigation.getParam('title', 'Bio Auth');
 
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <View style={styles.container}>
-          <PassphraseCopy passphrase={passphrase} />
-        </View>
+      <SafeAreaView style={styles.wrapper}>
+        <View style={[styles.container, styles.theme.container]}>
+          <View style={styles.passphraseContainer}>
+            <PassphraseCopy passphrase={passphrase} />
+          </View>
 
-        <PrimaryButton
-          onClick={this.confirm}
-          title={t('Disable bioAuth', { title })}
-        />
-      </View>
+          <PrimaryButton
+            onClick={this.confirm}
+            title={t('Disable bioAuth', { title })}
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 }

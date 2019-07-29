@@ -1,4 +1,3 @@
-import { Platform, DeviceInfo } from 'react-native';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
 import { themes, colors, boxes, fonts } from '../../../constants/styleGuide';
 import { setColorOpacity } from '../../../utilities/helpers';
@@ -9,13 +8,14 @@ export default () => ({
   common: {
     wrapper: {
       flex: 1,
+      backgroundColor: colors.light.white,
     },
     container: {
       flexDirection: 'column',
       flex: 1,
       padding: boxes.boxPadding,
       justifyContent: 'space-between',
-      paddingBottom: (Platform.OS === 'ios' && DeviceInfo.isIPhoneX_deprecated) ? 50 : 20,
+      paddingBottom: 20,
     },
     subHeader: {
       marginBottom: boxes.boxPadding,
@@ -49,7 +49,7 @@ export default () => ({
   },
 
   [themes.light]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.light.white,
     },
     subHeader: {
@@ -67,7 +67,7 @@ export default () => ({
   },
 
   [themes.dark]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.maastrichtBlue,
     },
     subHeader: {

@@ -1,6 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 import PassphraseCopy from '../../shared/passphraseCopy';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
@@ -13,9 +14,11 @@ class PassphraseBackup extends React.Component {
     const { styles, passphrase } = this.props;
 
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <PassphraseCopy passphrase={passphrase} />
-      </View>
+      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+        <View style={styles.container}>
+          <PassphraseCopy passphrase={passphrase} />
+        </View>
+      </SafeAreaView>
     );
   }
 }

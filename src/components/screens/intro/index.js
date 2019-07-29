@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import SplashScreen from 'react-native-splash-screen';
+import { SafeAreaView } from 'react-navigation';
 import Splash from './splash';
 import Heading from './heading';
 import {
@@ -67,10 +68,14 @@ class Intro extends React.Component {
         imageStyle: styles.illustration,
       },
     ];
-    return (<View style={styles.wrapper}>
-      <Splash />
-      <Heading skip={this.skip.bind(this)} descriptionContent={descriptionContent} testID="intro"/>
-    </View>);
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.wrapper}>
+          <Splash />
+          <Heading skip={this.skip.bind(this)} descriptionContent={descriptionContent} testID="intro"/>
+        </View>
+      </SafeAreaView>
+    );
   }
 }
 
