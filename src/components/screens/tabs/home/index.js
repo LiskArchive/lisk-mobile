@@ -21,13 +21,13 @@ import Loading from '../../../shared/transactions/loading';
 import IntroModal from './introModal';
 import { viewportHeight } from '../../../../utilities/device';
 import InfiniteScrollView from '../../../shared/infiniteScrollView';
-import { tokenMap, tokenKeys } from '../../../../constants/tokens';
+import { tokenMap } from '../../../../constants/tokens';
 import withTheme from '../../../shared/withTheme';
-
 import getStyles from './styles';
 import { themes } from '../../../../constants/styleGuide';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import InitializationModal from './initializationModal';
+import HomeHeaderTitle from '../../router/homeHeaderTitle';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -46,7 +46,6 @@ const summaryHeight = 200;
   incognito: state.settings.incognito,
   activeToken: state.settings.token.active,
   btcIntroShown: state.settings.btcIntroShown,
-  settings: state.settings,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   transactionsReset: transactionsResetAction,
@@ -65,8 +64,7 @@ class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return ({
-      title: params.title || 'Lisk wallet',
-      type: 'home',
+      headerTitle: <HomeHeaderTitle data={params.title} />,
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',
@@ -95,7 +93,8 @@ class Home extends React.Component {
   }
 
   bindInfiniteScroll = () => {
-    this.props.navigation.setParams({
+    // set param on tab navigator (parent of stack navigator)
+    this.props.navigation.dangerouslyGetParent().setParams({
       scrollToTop: () => {
         if (this.scrollView) {
           this.scrollView.scrollTo(0);
@@ -121,6 +120,22 @@ class Home extends React.Component {
         offset: 0,
       });
     }, 200);
+  }
+
+  initialDataFetch = () => {
+    const {
+      transactionsLoaded,
+      account,
+      activeToken,
+    } = this.props;
+
+    // giving some time for the transition animations to settle
+    this.initialFetchTimeout = setTimeout(() => {
+      transactionsLoaded({
+        address: account[activeToken].address,
+        offset: 0,
+      });
+    }, 400);
   }
 
   onScroll() {
@@ -194,38 +209,41 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation: { addListener, state }, settingsUpdated, incognito } = this.props;
+    const { navigation: { addListener, state }, settingsUpdated } = this.props;
     addListener('willFocus', this.screenWillFocus);
 
-    if (state.params && state.params.discreet && !incognito) {
+    if (state.params && state.params.discreet) {
       settingsUpdated({ incognito: true });
     }
 
-    this.accountFetchTimeout = setTimeout(() => {
-      this.fetchInactiveTokensAccounts();
+    setTimeout(() => {
+      const { activeToken, accountFetched } = this.props;
+      const inactiveTokens = Object.keys(tokenMap).filter(token => token !== activeToken);
+
+      inactiveTokens.forEach((token) => {
+        accountFetched(token);
+      });
     }, 1000);
   }
 
   componentDidUpdate(prevProps) {
     const {
       transactions, account, incognito,
-      activeToken, isFocused, settings: { token: { list } },
+      activeToken, isFocused,
     } = this.props;
-    const prevTokenList = prevProps.settings.token.list;
+
     const prevTransactionCount = (
       prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
     );
+
     const transactionCount = (
       transactions.pending.length + transactions.confirmed.length
     );
+
     const shouldUpdateState = (
       (prevProps.transactions.loaded !== transactions.loaded) ||
       (prevTransactionCount !== transactionCount)
     );
-
-    if (this.shouldFetchAccounts(prevTokenList, list)) {
-      this.fetchInactiveTokensAccounts();
-    }
 
     if (shouldUpdateState) {
       this.setState({
@@ -249,21 +267,6 @@ class Home extends React.Component {
   componentWillUnmount() {
     clearTimeout(this.initialFetchTimeout);
     clearTimeout(this.modalTimeout);
-    clearTimeout(this.accountFetchTimeout);
-  }
-
-  shouldFetchAccounts = (prevList, newList) => Object.keys(prevList).some(token =>
-    newList[token] !== prevList[token]);
-
-  fetchInactiveTokensAccounts() {
-    const { activeToken, accountFetched, settings } = this.props;
-    const inactiveTokens = tokenKeys.filter(key => settings.token.list[key] && key !== activeToken);
-
-    if (inactiveTokens.length > 0) {
-      inactiveTokens.forEach((token) => {
-        accountFetched(token);
-      });
-    }
   }
 
   render() {

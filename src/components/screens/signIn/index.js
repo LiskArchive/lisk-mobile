@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, StackActions } from 'react-navigation';
 import QuickActions from 'react-native-quick-actions'; // eslint-disable-line
 import FingerprintOverlay from '../../shared/fingerprintOverlay';
 import styles from './styles';
@@ -48,7 +48,7 @@ console.disableYellowBox = true; // eslint-disable-line
   pricesRetrieved: pricesRetrievedAction,
 })
 class SignIn extends React.Component {
-  deepLinkURL = '';
+  deeplinkURL = '';
   state = {
     destinationDefined: false,
     storedPassphrase: null,
@@ -161,6 +161,11 @@ class SignIn extends React.Component {
   }
 
   signIn = (passphrase) => {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'Main' })],
+    });
+
     this.props.accountSignedIn({ passphrase });
     this.props.accountFetched();
     this.props.pricesRetrieved();
@@ -168,10 +173,7 @@ class SignIn extends React.Component {
     if (this.deepLinkURL) {
       this.navigateToDeepLink(this.deepLinkURL);
     } else {
-      this.props.navigation.dispatch(NavigationActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: 'Main' })],
-      }));
+      this.props.navigation.dispatch(resetAction);
     }
   }
 
@@ -200,16 +202,10 @@ class SignIn extends React.Component {
   onDeepLinkRequested = (event) => {
     const isSignedIn = !!this.props.accounts.passphrase;
 
-    if (event.type && event.type === 'Discreet') {
-      this.props.settingsUpdated({ incognito: true });
-    }
-
     if (isSignedIn) {
       this.navigateToDeepLink(event.url);
-    } else if (!isSignedIn && event.type && event.type === 'Discreet') {
-      this.props.navigation.popToTop();
     } else {
-      this.deepLinkURL = event.url;
+      this.deeplinkURL = event.url;
     }
   }
 
@@ -263,8 +259,8 @@ class SignIn extends React.Component {
     if (!quickAction || !quickAction.userInfo) {
       return;
     }
-    const { userInfo: { url }, type } = quickAction;
-    this.onDeepLinkRequested({ url, type });
+    const { userInfo: { url } } = quickAction;
+    this.onDeepLinkRequested({ url });
   };
 
   setupQuickActions() {
@@ -298,7 +294,7 @@ class SignIn extends React.Component {
       if (settings.showedIntro) {
         this.init();
       } else {
-        navigation.navigate('Intro');
+        navigation.push('Intro');
       }
       this.setState({ destinationDefined: true });
     }
