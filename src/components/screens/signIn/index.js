@@ -48,7 +48,7 @@ console.disableYellowBox = true; // eslint-disable-line
   pricesRetrieved: pricesRetrievedAction,
 })
 class SignIn extends React.Component {
-  deepLinkURL = '';
+  deeplinkURL = '';
   state = {
     destinationDefined: false,
     storedPassphrase: null,
@@ -202,16 +202,10 @@ class SignIn extends React.Component {
   onDeepLinkRequested = (event) => {
     const isSignedIn = !!this.props.accounts.passphrase;
 
-    if (event.type && event.type === 'Discreet') {
-      this.props.settingsUpdated({ incognito: true });
-    }
-
     if (isSignedIn) {
       this.navigateToDeepLink(event.url);
-    } else if (!isSignedIn && event.type && event.type === 'Discreet') {
-      this.props.navigation.popToTop();
     } else {
-      this.deepLinkURL = event.url;
+      this.deeplinkURL = event.url;
     }
   }
 
@@ -265,8 +259,8 @@ class SignIn extends React.Component {
     if (!quickAction || !quickAction.userInfo) {
       return;
     }
-    const { userInfo: { url }, type } = quickAction;
-    this.onDeepLinkRequested({ url, type });
+    const { userInfo: { url } } = quickAction;
+    this.onDeepLinkRequested({ url });
   };
 
   setupQuickActions() {
