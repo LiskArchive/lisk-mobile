@@ -30,6 +30,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.remobile.qrcodeLocalImage.RCTQRCodeLocalImagePackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.wix.reactnativekeyboardinput.KeyboardInputPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,6 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
         new RNDeviceInfo(),
         new RNShakeEventPackage(),
         new AppShortcutsPackage(),
+        new KeyboardInputPackage(this.getApplication()),
         new RNReactNativeHapticFeedbackPackage(),
         new Interactable(),
         new SajjadBlurOverlayPackage(),

@@ -177,6 +177,7 @@ dependencies {
     implementation project(':react-native-quick-actions')
     implementation project(':react-native-haptic-feedback')
     implementation project(':react-native-interactable')
+    implementation project(":reactnativekeyboardinput")
     implementation project(':react-native-blur-overlay')
     implementation project(':react-native-fingerprint-scanner')
     implementation project(':react-native-keychain')
