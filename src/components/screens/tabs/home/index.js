@@ -21,7 +21,7 @@ import Loading from '../../../shared/transactions/loading';
 import IntroModal from './introModal';
 import { viewportHeight } from '../../../../utilities/device';
 import InfiniteScrollView from '../../../shared/infiniteScrollView';
-import { tokenMap } from '../../../../constants/tokens';
+import { tokenMap, tokenKeys } from '../../../../constants/tokens';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { themes } from '../../../../constants/styleGuide';
@@ -46,6 +46,7 @@ const summaryHeight = 200;
   incognito: state.settings.incognito,
   activeToken: state.settings.token.active,
   btcIntroShown: state.settings.btcIntroShown,
+  settings: state.settings,
 }), {
   transactionsLoaded: transactionsLoadedAction,
   transactionsReset: transactionsResetAction,
@@ -209,28 +210,24 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation: { addListener, state }, settingsUpdated } = this.props;
+    const { navigation: { addListener, state }, settingsUpdated, incognito } = this.props;
     addListener('willFocus', this.screenWillFocus);
 
-    if (state.params && state.params.discreet) {
+    if (state.params && state.params.discreet && !incognito) {
       settingsUpdated({ incognito: true });
     }
 
-    setTimeout(() => {
-      const { activeToken, accountFetched } = this.props;
-      const inactiveTokens = Object.keys(tokenMap).filter(token => token !== activeToken);
-
-      inactiveTokens.forEach((token) => {
-        accountFetched(token);
-      });
+    this.accountFetchTimeout = setTimeout(() => {
+      this.fetchInactiveTokensAccounts();
     }, 1000);
   }
 
   componentDidUpdate(prevProps) {
     const {
       transactions, account, incognito,
-      activeToken, isFocused,
+      activeToken, isFocused, settings: { token: { list } },
     } = this.props;
+    const prevTokenList = prevProps.settings.token.list;
 
     const prevTransactionCount = (
       prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
@@ -251,6 +248,10 @@ class Home extends React.Component {
       });
     }
 
+    if (this.shouldFetchAccounts(prevTokenList, list)) {
+      this.fetchInactiveTokensAccounts();
+    }
+
     if (
       (prevProps.account[activeToken].balance !== account[activeToken].balance) ||
       (prevProps.incognito !== incognito)
@@ -267,6 +268,21 @@ class Home extends React.Component {
   componentWillUnmount() {
     clearTimeout(this.initialFetchTimeout);
     clearTimeout(this.modalTimeout);
+    clearTimeout(this.accountFetchTimeout);
+  }
+
+  shouldFetchAccounts = (prevList, newList) => Object.keys(prevList).some(token =>
+    newList[token] !== prevList[token]);
+
+  fetchInactiveTokensAccounts() {
+    const { activeToken, accountFetched, settings } = this.props;
+    const inactiveTokens = tokenKeys.filter(key => settings.token.list[key] && key !== activeToken);
+
+    if (inactiveTokens.length > 0) {
+      inactiveTokens.forEach((token) => {
+        accountFetched(token);
+      });
+    }
   }
 
   render() {
