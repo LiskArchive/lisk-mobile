@@ -121,8 +121,8 @@ android {
         applicationId "io.lisk.mobile"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 28
-        versionName "1.2.0"
+        versionCode 29
+        versionName "1.2.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
