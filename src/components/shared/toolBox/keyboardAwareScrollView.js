@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { withNavigation } from 'react-navigation';
@@ -25,11 +25,6 @@ class ScrollAwareActionBar extends React.Component {
       this.setState({ buttonStyle: theme.offKeyboardButton });
     } else {
       this.setState({ buttonStyle: theme.keyboardStickyButton });
-    }
-    if (Platform.OS === 'android') {
-      this.props.navigation.setParams({
-        tabBar: status,
-      });
     }
   }
 

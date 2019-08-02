@@ -89,29 +89,30 @@ const SimpleHeader = ({
 );
 
 const HomeHeaderTitle = ({
-  styles, theme, children: data, wallet,
+  styles, theme, wallet, data,
 }) => (
   <View style={styles.container}>
-    <SimpleHeader
-      styles={styles}
-      type={typeof data === 'string' ? 'home' : data.type}
-      title={typeof data === 'string' ? data : data.placeHolder}
-      scrollY={data.scrollY}
-      />
-    {
-      typeof data !== 'string' ?
-      <ExtendedTitle
-        balance={data.balance !== undefined ? fromRawLsk(data.balance) : '0'}
-        theme={theme}
-        token={data.token}
-        styles={styles}
-        scrollY={data.scrollY}
-        address={data.address}
-        incognito={data.incognito}
-        type={data.type}
-        wallet={wallet}
-        /> : null
-    }
+    {data && (
+      <View>
+        <SimpleHeader
+          styles={styles}
+          type={data.type}
+          title={data.placeHolder}
+          scrollY={data.scrollY}
+        />
+        <ExtendedTitle
+          balance={data.balance !== undefined ? fromRawLsk(data.balance) : '0'}
+          theme={theme}
+          token={data.token}
+          styles={styles}
+          scrollY={data.scrollY}
+          address={data.address}
+          incognito={data.incognito}
+          type={data.type}
+          wallet={wallet}
+        />
+      </View>
+    )}
   </View>
 );
 

@@ -23,11 +23,11 @@ import { viewportHeight } from '../../../../utilities/device';
 import InfiniteScrollView from '../../../shared/infiniteScrollView';
 import { tokenMap, tokenKeys } from '../../../../constants/tokens';
 import withTheme from '../../../shared/withTheme';
-
 import getStyles from './styles';
 import { themes } from '../../../../constants/styleGuide';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import InitializationModal from './initializationModal';
+import HomeHeaderTitle from '../../router/homeHeaderTitle';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -65,8 +65,7 @@ class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return ({
-      title: params.title || 'Lisk wallet',
-      type: 'home',
+      headerTitle: <HomeHeaderTitle data={params.title} />,
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',
@@ -95,7 +94,8 @@ class Home extends React.Component {
   }
 
   bindInfiniteScroll = () => {
-    this.props.navigation.setParams({
+    // set param on tab navigator (parent of stack navigator)
+    this.props.navigation.dangerouslyGetParent().setParams({
       scrollToTop: () => {
         if (this.scrollView) {
           this.scrollView.scrollTo(0);
@@ -212,25 +212,28 @@ class Home extends React.Component {
       activeToken, isFocused, settings: { token: { list } },
     } = this.props;
     const prevTokenList = prevProps.settings.token.list;
+
     const prevTransactionCount = (
       prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
     );
+
     const transactionCount = (
       transactions.pending.length + transactions.confirmed.length
     );
+
     const shouldUpdateState = (
       (prevProps.transactions.loaded !== transactions.loaded) ||
       (prevTransactionCount !== transactionCount)
     );
 
-    if (this.shouldFetchAccounts(prevTokenList, list)) {
-      this.fetchInactiveTokensAccounts();
-    }
-
     if (shouldUpdateState) {
       this.setState({
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount,
       });
+    }
+
+    if (this.shouldFetchAccounts(prevTokenList, list)) {
+      this.fetchInactiveTokensAccounts();
     }
 
     if (
