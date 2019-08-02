@@ -191,13 +191,12 @@ class AmountBTC extends React.Component {
     const balance = fromRawLsk(accounts.info[settings.token.active].balance);
 
     return (
-      <View style={styles.theme.wrapper}>
+      <View style={[styles.theme.wrapper, styles.wrapper]}>
         <KeyboardAwareScrollView
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
           button={{
             title: t('Continue'),
-            type: 'inBox',
           }}
         >
           <View>
