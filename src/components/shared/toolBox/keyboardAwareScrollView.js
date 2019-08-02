@@ -30,15 +30,14 @@ class ScrollAwareActionBar extends React.Component {
     return (
       <Fragment>
         <KeyboardAwareScrollView
-          style={{ overflow: 'hidden' }}
           enableOnAndroid={true}
-          contentContainerStyle={styles ? styles.container : null}
+          contentContainerStyle={[styles ? styles.container : null, theme.scrollViewContainer]}
           onKeyboardWillHide={() => this.toggleButtonView(true)}
           onKeyboardDidHide={() => this.toggleButtonView(true)}
           onKeyboardWillShow={() => this.toggleButtonView(false)}
           onKeyboardDidShow={() => this.toggleButtonView(false)}
         >
-          <View style={styles ? styles.innerContainer : null}>
+          <View style={[styles ? styles.innerContainer : null, theme.scrollViewInnerContainer]}>
             { children }
             {
               !onStickyButton && buttonStyle === theme.hiddenStickyButton ?
