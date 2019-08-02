@@ -114,14 +114,12 @@ class AmountLSK extends React.Component {
     const { amount } = this.state;
 
     return (
-      <View style={styles.theme.wrapper}>
+      <View style={[styles.theme.wrapper, styles.wrapper]}>
         <KeyboardAwareScrollView
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
-          hasTabBar={true}
           button={{
             title: t('Continue'),
-            type: 'inBox',
           }}
         >
           <View>
