@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
 import { BigNumber } from 'bignumber.js';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
@@ -46,6 +46,20 @@ class AmountBTC extends React.Component {
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
+
+    // Workaround for padding inconsistency on iPhone X
+    if (deviceType() === 'iOSx') {
+      this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+    }
+  }
+
+  keyboardWillShow = () => {
+    this.setState({ wrapperStyle: { } });
+  }
+
+  keyboardWillHide = () => {
+    this.setState({ wrapperStyle: { marginBottom: -35 } });
   }
 
   retrieveUnspentTransactionOutputs() {
@@ -191,7 +205,7 @@ class AmountBTC extends React.Component {
     const balance = fromRawLsk(accounts.info[settings.token.active].balance);
 
     return (
-      <View style={[styles.theme.wrapper, styles.wrapper]}>
+      <View style={[styles.theme.wrapper, styles.wrapper, this.state.wrapperStyle]}>
         <KeyboardAwareScrollView
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
