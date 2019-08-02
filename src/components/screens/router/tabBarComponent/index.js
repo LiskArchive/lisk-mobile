@@ -1,11 +1,12 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { BottomTabBar } from 'react-navigation-tabs';
-import { Platform, DeviceInfo } from 'react-native';
+import { Platform } from 'react-native';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../../constants/tokens';
 import { colors } from '../../../../constants/styleGuide';
+import { deviceType } from '../../../../utilities/device';
 
 @connect(state => ({
   settings: state.settings,
@@ -16,7 +17,7 @@ class TabBar extends React.Component {
 
     const platformStyle = {};
     if (Platform.OS === 'ios') {
-      if (DeviceInfo.isIPhoneX_deprecated) {
+      if (deviceType() === 'iOSx') {
         platformStyle.height = 55;
       } else {
         platformStyle.height = 60;
