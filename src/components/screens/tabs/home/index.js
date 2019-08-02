@@ -123,22 +123,6 @@ class Home extends React.Component {
     }, 200);
   }
 
-  initialDataFetch = () => {
-    const {
-      transactionsLoaded,
-      account,
-      activeToken,
-    } = this.props;
-
-    // giving some time for the transition animations to settle
-    this.initialFetchTimeout = setTimeout(() => {
-      transactionsLoaded({
-        address: account[activeToken].address,
-        offset: 0,
-      });
-    }, 400);
-  }
-
   onScroll() {
     return Animated.event([{
       nativeEvent: { contentOffset: { y: this.scrollY } },
