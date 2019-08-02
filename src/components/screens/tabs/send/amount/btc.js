@@ -195,7 +195,6 @@ class AmountBTC extends React.Component {
         <KeyboardAwareScrollView
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
-          hasTabBar={true}
           button={{
             title: t('Continue'),
             type: 'inBox',

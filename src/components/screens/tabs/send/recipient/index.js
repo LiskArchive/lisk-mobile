@@ -123,37 +123,6 @@ class Recipient extends React.Component {
     });
   }
 
-  onKeyboardOpen = (header) => {
-    const { height, paddingTop } = this.animatedStyles;
-    if (!header) {
-      Animated.parallel([
-        Animated.timing(paddingTop, {
-          toValue: 0,
-          duration: 400,
-          delay: 0,
-        }),
-        Animated.timing(height, {
-          toValue: 0,
-          duration: 400,
-          delay: 0,
-        }),
-      ]).start();
-    } else {
-      Animated.parallel([
-        Animated.timing(height, {
-          toValue: 40,
-          duration: 400,
-          delay: 0,
-        }),
-        Animated.timing(paddingTop, {
-          toValue: 20,
-          duration: 400,
-          delay: 0,
-        }),
-      ]).start();
-    }
-  }
-
   isCameraOpen = (data) => {
     this.props.isCameraOpen(data);
   }
@@ -179,9 +148,7 @@ class Recipient extends React.Component {
         />
 
         <KeyboardAwareScrollView
-          onKeyboard={this.onKeyboardOpen}
           onSubmit={this.submitForm}
-          hasTabBar={true}
           onStickyButton={true}
           styles={{
             container: styles.container,

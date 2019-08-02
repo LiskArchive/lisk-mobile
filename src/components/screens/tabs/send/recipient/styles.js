@@ -3,6 +3,9 @@ import { themes, colors, boxes, fonts } from '../../../../../constants/styleGuid
 
 export default () => ({
   common: {
+    wrapper: {
+      flex: 1,
+    },
     innerContainer: {
       flexDirection: 'column',
       paddingBottom: 24,
