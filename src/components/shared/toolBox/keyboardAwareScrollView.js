@@ -32,7 +32,7 @@ class ScrollAwareActionBar extends React.Component {
         <KeyboardAwareScrollView
           style={{ overflow: 'hidden' }}
           enableOnAndroid={true}
-          contentContainerStyle={styles ? [styles.container, { backgroundColor: 'red' }] : null}
+          contentContainerStyle={styles ? styles.container : null}
           onKeyboardWillHide={() => this.toggleButtonView(true)}
           onKeyboardDidHide={() => this.toggleButtonView(true)}
           onKeyboardWillShow={() => this.toggleButtonView(false)}
@@ -48,9 +48,7 @@ class ScrollAwareActionBar extends React.Component {
             }
           </View>
         </KeyboardAwareScrollView>
-        <KeyboardTrackingView
-          style={{ backgroundColor: 'red' }}
-        >
+        <KeyboardTrackingView>
           <PrimaryButton
             testID={buttonTestID}
             noTheme={noTheme}
