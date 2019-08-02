@@ -86,7 +86,6 @@
     "react-native-haptic-feedback": "^1.4.2",
     "react-native-http": "github:tradle/react-native-http#834492d",
     "react-native-interactable": "1.0.0",
-    "react-native-keyboard-accessory": "0.1.5",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-keyboard-input": "^5.3.1",
     "react-native-keyboard-tracking-view": "^5.5.0",
