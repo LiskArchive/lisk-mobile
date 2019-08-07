@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
 import { IconButton } from '../../../../shared/toolBox/button';
 import { tokenMap } from '../../../../../constants/tokens';
@@ -13,7 +13,7 @@ import { decodeLaunchUrl } from '../../../../../utilities/qrCode';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../../../shared/bookmarks';
-import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
+import { deviceHeight, SCREEN_HEIGHTS, deviceType } from '../../../../../utilities/device';
 import { validateAddress } from '../../../../../utilities/validators';
 import DropDownHolder from '../../../../../utilities/alert';
 
@@ -25,6 +25,7 @@ class Recipient extends React.Component {
   state = {
     address: { value: '' },
     avatarPreview: false,
+    wrapperStyle: {},
   };
 
   animatedStyles = {
@@ -45,6 +46,20 @@ class Recipient extends React.Component {
       showButtonLeft: false,
       action: false,
     });
+
+    // Workaround for padding inconsistency on iPhone X
+    if (deviceType() === 'iOSx') {
+      this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+    }
+  }
+
+  keyboardWillShow = () => {
+    this.setState({ wrapperStyle: { } });
+  }
+
+  keyboardWillHide = () => {
+    this.setState({ wrapperStyle: { marginBottom: -35 } });
   }
 
   componentDidUpdate(prevProps) {
@@ -123,37 +138,6 @@ class Recipient extends React.Component {
     });
   }
 
-  onKeyboardOpen = (header) => {
-    const { height, paddingTop } = this.animatedStyles;
-    if (!header) {
-      Animated.parallel([
-        Animated.timing(paddingTop, {
-          toValue: 0,
-          duration: 400,
-          delay: 0,
-        }),
-        Animated.timing(height, {
-          toValue: 0,
-          duration: 400,
-          delay: 0,
-        }),
-      ]).start();
-    } else {
-      Animated.parallel([
-        Animated.timing(height, {
-          toValue: 40,
-          duration: 400,
-          delay: 0,
-        }),
-        Animated.timing(paddingTop, {
-          toValue: 20,
-          duration: 400,
-          delay: 0,
-        }),
-      ]).start();
-    }
-  }
-
   isCameraOpen = (data) => {
     this.props.isCameraOpen(data);
   }
@@ -167,7 +151,7 @@ class Recipient extends React.Component {
     const inputLabel = accounts.followed.length ? t('Address or label') : t('Address');
 
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
+      <View style={[styles.wrapper, styles.theme.wrapper, this.state.wrapperStyle]}>
         <Scanner
           isCameraOpen={this.isCameraOpen}
           ref={(el) => { this.scanner = el; }}
@@ -179,9 +163,7 @@ class Recipient extends React.Component {
         />
 
         <KeyboardAwareScrollView
-          onKeyboard={this.onKeyboardOpen}
           onSubmit={this.submitForm}
-          hasTabBar={true}
           onStickyButton={true}
           styles={{
             container: styles.container,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import { fromRawLsk } from '../../../../../utilities/conversions';
@@ -35,6 +35,20 @@ class AmountLSK extends React.Component {
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
+
+    // Workaround for padding inconsistency on iPhone X
+    if (deviceType() === 'iOSx') {
+      this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+    }
+  }
+
+  keyboardWillShow = () => {
+    this.setState({ wrapperStyle: { } });
+  }
+
+  keyboardWillHide = () => {
+    this.setState({ wrapperStyle: { marginBottom: -35 } });
   }
 
   validator = (str) => {
@@ -114,14 +128,12 @@ class AmountLSK extends React.Component {
     const { amount } = this.state;
 
     return (
-      <View style={styles.theme.wrapper}>
+      <View style={[styles.theme.wrapper, styles.wrapper, this.state.wrapperStyle]}>
         <KeyboardAwareScrollView
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
-          hasTabBar={true}
           button={{
             title: t('Continue'),
-            type: 'inBox',
           }}
         >
           <View>

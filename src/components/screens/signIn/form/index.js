@@ -203,7 +203,7 @@ class Form extends React.Component {
           button={t('Sign in')}
           buttonTestID='signInButton'
           onSubmit={this.onFormSubmission}
-          extras={
+          footerContent={
             <CreateAccount
               style={styles.createAccountWrapper}
               onPress={this.goToRegistration}

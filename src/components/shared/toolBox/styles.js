@@ -1,6 +1,6 @@
 import { StyleSheet, Platform } from 'react-native';
 import { fonts, colors, boxes } from '../../../constants/styleGuide';
-import { viewportHeight, deviceType } from '../../../utilities/device';
+import { deviceType } from '../../../utilities/device';
 
 const bottomOffset = deviceType() === 'iOSx' ? 30 : 0;
 
@@ -50,15 +50,8 @@ const styles = {
     fontSize: fonts.size.base,
     fontFamily: fonts.family.context,
   },
-  scrollViewContainer: {
-    minHeight: viewportHeight(),
-  },
-  scrollViewInnerContainer: {
-    height: '100%',
-  },
-  offKeyboardButton: {
-    marginRight: boxes.boxPadding,
-    marginLeft: boxes.boxPadding,
+  footerButton: {
+    margin: boxes.boxPadding,
   },
   keyboardStickyButton: {
     borderRadius: 0,
@@ -67,21 +60,6 @@ const styles = {
     marginLeft: -1,
     marginRight: -1,
     height: 47,
-  },
-  hasTabBar: {
-    ...Platform.select({
-      android: {
-        top: -50,
-      },
-      ios: {
-        marginBottom: deviceType() === 'iOSx' ? -41 : -12,
-      },
-    }),
-  },
-  hiddenStickyButton: {
-    bottom: -100,
-    marginRight: boxes.boxPadding,
-    marginLeft: boxes.boxPadding,
   },
   pullUp: {
     ...Platform.select({

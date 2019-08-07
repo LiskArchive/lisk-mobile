@@ -1,28 +1,19 @@
 import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
+import { KeyboardTrackingView } from 'react-native-keyboard-tracking-view';
 import { withNavigation } from 'react-navigation';
 import { PrimaryButton } from './button';
 import theme from './styles';
 
 class ScrollAwareActionBar extends React.Component {
   state = {
-    buttonStyle: theme.keyboardStickyButton,
+    buttonStyle: theme.footerButton,
   }
 
-  componentDidMount() {
-    this.shrinkButton(true);
-  }
-
-  shrinkButton = (status) => {
-    const { button, onKeyboard } = this.props;
-    if (onKeyboard) onKeyboard(status);
-    const inBoxButton = button && button.type === 'inBox';
-    if (status && inBoxButton) {
-      this.setState({ buttonStyle: theme.hiddenStickyButton });
-    } else if (status && !inBoxButton) {
-      this.setState({ buttonStyle: theme.offKeyboardButton });
+  toggleButtonView = (status) => {
+    if (status) {
+      this.setState({ buttonStyle: theme.footerButton });
     } else {
       this.setState({ buttonStyle: theme.keyboardStickyButton });
     }
@@ -31,7 +22,7 @@ class ScrollAwareActionBar extends React.Component {
   render() {
     const {
       children, disabled, onSubmit, noTheme,
-      styles, button, hasTabBar, extras, onStickyButton,
+      styles, button, footerContent, onStickyButton,
       buttonTestID,
     } = this.props;
     const { buttonStyle } = this.state;
@@ -39,50 +30,33 @@ class ScrollAwareActionBar extends React.Component {
     return (
       <Fragment>
         <KeyboardAwareScrollView
-          automaticallyAdjustContentInsets={false}
           enableOnAndroid={true}
-          enableResetScrollToCoords={false}
-          contentContainerStyle={[theme.scrollViewContainer, styles ? styles.container : null]}
-          onKeyboardWillHide={() => this.shrinkButton(true)}
-          onKeyboardDidHide={() => this.shrinkButton(true)}
-          onKeyboardWillShow={() => this.shrinkButton(false)}
-          onKeyboardDidShow={() => this.shrinkButton(false)}>
-          <View style={[theme.scrollViewInnerContainer, styles ? styles.innerContainer : null]}>
+          contentContainerStyle={[styles ? styles.container : null, theme.scrollViewContainer]}
+          onKeyboardWillHide={() => this.toggleButtonView(true)}
+          onKeyboardDidHide={() => this.toggleButtonView(true)}
+          onKeyboardWillShow={() => this.toggleButtonView(false)}
+          onKeyboardDidShow={() => this.toggleButtonView(false)}
+        >
+          <View style={[styles ? styles.innerContainer : null, theme.scrollViewInnerContainer]}>
             { children }
             {
               !onStickyButton && buttonStyle === theme.hiddenStickyButton ?
               <View>
-                { extras }
-
-                <PrimaryButton
-                  noTheme={noTheme}
-                  style={theme.offKeyboardButton}
-                  disabled={disabled}
-                  title={typeof button === 'string' ? button : button.title}
-                  onClick={onSubmit}
-                />
+                { footerContent }
               </View> : null
             }
           </View>
         </KeyboardAwareScrollView>
-        <KeyboardAccessoryView
-          style={[
-            theme.keyboard,
-            buttonStyle === theme.keyboardStickyButton ? theme.overlay : null,
-            buttonStyle === theme.offKeyboardButton ? theme.pullUp : null,
-            hasTabBar ? theme.hasTabBar : null]}
-          animationOn='none'
-          alwaysVisible={true}>
-          { extras }
+        <KeyboardTrackingView>
           <PrimaryButton
             testID={buttonTestID}
             noTheme={noTheme}
             disabled={disabled}
             title={typeof button === 'string' ? button : button.title}
             onClick={onSubmit}
-            style={buttonStyle}
+            style={[buttonStyle]}
           />
-        </KeyboardAccessoryView>
+        </KeyboardTrackingView>
       </Fragment>);
   }
 }

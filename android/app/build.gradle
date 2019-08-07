@@ -165,6 +165,7 @@ android {
 }
 
 dependencies {
+    compile project(":reactnativekeyboardinput")
     compile project(':react-native-gesture-handler')
     compile project(':react-native-reanimated')
     compile project(':react-native-device-info')
