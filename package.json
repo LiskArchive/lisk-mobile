@@ -16,7 +16,7 @@
     "test:format": "./node_modules/.bin/eslint ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "i18n": "node ./scripts/scanner.config.js",
-    "test:build-e2e-release": "detox build --configuration ios.sim.release",
+    "test:build-e2e-release": "detox clean-framework-cache && detox build-framework-cache",
     "test:build-e2e-debug": "detox build --configuration ios.sim.debug",
     "test:e2e-release": "node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty --configuration ios.sim.release",
     "test:e2e-debug": "node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty --configuration=ios.sim.debug"
@@ -147,7 +147,7 @@
     "coveralls": "^3.0.2",
     "cucumber": "5.1.0",
     "cucumber-pretty": "1.5.0",
-    "detox": "12.6.2",
+    "detox": "14.0.0",
     "eslint": "=4.9.0",
     "eslint-config-airbnb": "=15.1.0",
     "eslint-config-airbnb-base": "=12.1.0",
