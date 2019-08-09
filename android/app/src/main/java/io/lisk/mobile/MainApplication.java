@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.clipsub.RNShake.RNShakeEventPackage;
 import com.reactNativeQuickActions.AppShortcutsPackage;
@@ -45,6 +46,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
             new RNGestureHandlerPackage(),
+            new ReanimatedPackage(),
             new AsyncStoragePackage(),
             new RNShakeEventPackage(),
             new AppShortcutsPackage(),

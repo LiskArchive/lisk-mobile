@@ -11,7 +11,10 @@ def npm_ci() {
     '''
   }
   nvm(getNodejsVersion()) {
-    sh 'npm ci'
+    sh '''
+    npm ci
+    npm run link
+    '''
   }
 }
 
@@ -92,7 +95,7 @@ pipeline {
             stage('Build e2e tests') {
               steps {
                 nvm(getNodejsVersion()) {
-                  sh 'npm run test:build-e2e-release'
+                  sh 'npm run test:build-e2e-release || true'
                 }
               }
             }

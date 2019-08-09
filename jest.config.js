@@ -55,6 +55,7 @@ module.exports = {
     'lcov',
     'cobertura',
   ],
+  transformIgnorePatterns: ['node_modules/(?!(@react-native-community|react-native)/)'],
   reporters: [
     'default',
     ['jest-junit', { suiteName: 'jest tests', outputDirectory: '<rootDir>/coverage/jest' }],

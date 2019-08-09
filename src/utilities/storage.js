@@ -28,7 +28,6 @@ const validateSettings = (data) => {
     if (!parsedData || typeof parsedData !== 'object') {
       return blankSettings;
     }
-
     return merge(parsedData, blankSettings);
   } catch (error) {
     return blankSettings;
