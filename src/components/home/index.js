@@ -306,7 +306,7 @@ class Home extends React.Component {
                 type='home'
                 transactions={transactions}
                 footer={this.state.footer}
-                navigate={navigation.navigate}
+                navigate={navigation.push}
                 account={account[activeToken]}
                 refreshing={refreshing}
               />
