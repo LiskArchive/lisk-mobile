@@ -28,10 +28,7 @@ class Item extends React.Component {
       navigate, tx, account, incognito,
     } = this.props;
 
-    navigate({
-      routeName: 'TxDetail',
-      params: { tx, account, incognito },
-    });
+    navigate('TxDetail', { tx, account, incognito });
   }
 
   getAddressText = (address) => {

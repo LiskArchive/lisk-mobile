@@ -56,14 +56,10 @@ class Settings extends React.Component {
   }
 
   signOut = () => {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'SignIn', params: { signOut: true } }),
-      ],
-    });
     this.props.accountSignedOut();
-    this.props.navigation.dispatch(resetAction);
+    this.props.navigation.reset([
+      NavigationActions.navigate({ routeName: 'SignIn', params: { signOut: true } }),
+    ], 0);
   }
 
   render() {

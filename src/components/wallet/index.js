@@ -217,7 +217,7 @@ class Wallet extends React.Component {
                 type='wallet'
                 transactions={transactions}
                 footer={this.state.footer}
-                navigate={navigation.navigate}
+                navigate={navigation.push}
                 account={account}
                 refreshing={refreshing}
               />
