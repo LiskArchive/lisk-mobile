@@ -138,8 +138,8 @@ class AccountSummary extends React.Component {
         </AView>
         <AView style={[styles.address, { opacity },
           {
-            opacity: this.interpolate([0, 30], [1, 0]),
-            top: this.interpolate([0, 100], [0, 80]),
+            opacity: this.interpolate([0, 45], [1, 0]),
+            top: this.interpolate([0, 115], [0, 80]),
           },
         ]}>
           <Share type={P}
@@ -152,8 +152,8 @@ class AccountSummary extends React.Component {
         </AView>
         <AView style={[styles.balance, { opacity },
           {
-            opacity: this.interpolate([0, height - 120, height - 85], [1, 1, 0]),
-            top: this.interpolate([0, height - 50], [0, height - 120]),
+            opacity: this.interpolate([0, 30], [1, 0]),
+            top: this.interpolate([0, 100], [0, 80]),
           },
         ]}>
           <FormattedNumber
@@ -163,8 +163,8 @@ class AccountSummary extends React.Component {
         </AView>
         <AView style={[styles.actionBar, { opacity },
           {
-            opacity: this.interpolate([0, 30], [1, 0]),
-            top: this.interpolate([0, 100], [0, 80]),
+            opacity: this.interpolate([0, 15], [1, 0]),
+            top: this.interpolate([0, 85], [0, 80]),
           },
         ]}>
           <IconButton

@@ -4,8 +4,8 @@ module.exports = {
     '<rootDir>/src/**/*.test.js',
   ],
   testPathIgnorePatterns: [
-    'src/components/',
-    'e2e',
+    '<rootDir>/src/components/',
+    '<rootDir>/e2e/',
   ],
   verbose: true,
   cache: false,
@@ -43,18 +43,19 @@ module.exports = {
     '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
     '.+\\.(css|png|jpg|ttf)$': 'jest-transform-stub',
   },
-  preset: 'react-native',
   testURL: 'http://localhost',
   globals: {
     PRODUCTION: true,
     TEST: true,
   },
+  preset: 'react-native',
   coverageReporters: [
     'text',
     'html',
     'lcov',
     'cobertura',
   ],
+  transformIgnorePatterns: ['node_modules/(?!(@react-native-community|react-native)/)'],
   reporters: [
     'default',
     ['jest-junit', { suiteName: 'jest tests', outputDirectory: '<rootDir>/coverage/jest' }],

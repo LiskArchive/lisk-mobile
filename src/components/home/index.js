@@ -27,6 +27,7 @@ import getStyles from './styles';
 import { themes } from '../../constants/styleGuide';
 import { fromRawLsk } from '../../utilities/conversions';
 import InitializationModal from './initializationModal';
+import HomeHeaderTitle from '../router/homeHeaderTitle';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -64,8 +65,7 @@ class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return ({
-      title: params.title || 'Lisk wallet',
-      type: 'home',
+      headerTitle: <HomeHeaderTitle data={params.title} />,
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',
@@ -94,7 +94,8 @@ class Home extends React.Component {
   }
 
   bindInfiniteScroll = () => {
-    this.props.navigation.setParams({
+    // set param on tab navigator (parent of stack navigator)
+    this.props.navigation.dangerouslyGetParent().setParams({
       scrollToTop: () => {
         if (this.scrollView) {
           this.scrollView.scrollTo(0);
@@ -302,7 +303,7 @@ class Home extends React.Component {
                 type='home'
                 transactions={transactions}
                 footer={this.state.footer}
-                navigate={navigation.navigate}
+                navigate={navigation.push}
                 account={account[activeToken]}
                 refreshing={refreshing}
               />

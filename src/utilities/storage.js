@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { merge } from './helpers';
 
 export const blankAccounts = [];
@@ -28,7 +28,6 @@ const validateSettings = (data) => {
     if (!parsedData || typeof parsedData !== 'object') {
       return blankSettings;
     }
-
     return merge(parsedData, blankSettings);
   } catch (error) {
     return blankSettings;

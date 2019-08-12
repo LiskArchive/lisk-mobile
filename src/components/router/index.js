@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import SignIn from '../signIn';
 import TxDetail from '../txDetail';
 import Send from '../send';
@@ -21,7 +21,6 @@ import Intro from '../intro';
 import AddBookmark from '../addBookmark';
 import HeaderBackground from './headerBackground';
 import HeaderTitle from './headerTitle';
-import HomeHeaderTitle from './homeHeaderTitle';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
 import HeaderBackButton from './headerBackButton';
 import TokenSwitcher from './tokenSwitcher';
@@ -50,19 +49,37 @@ const headerStyle = {
  */
 const t = str => str;
 
-// eslint-disable-next-line new-cap
-const Tabs = TabNavigator({
+const SendStack = createStackNavigator({
+  Send: {
+    screen: Send,
+  },
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerBackground: <HeaderBackground />,
+    headerTitle: HeaderTitle,
+    headerRight: <TokenSwitcher navigation={navigation} />,
+  }),
+});
+
+const HomeStack = createStackNavigator({
   Home: {
     screen: Home,
+  },
+}, {
+  navigationOptions: {
+    headerBackground: <DynamicHeaderBackground />,
+  },
+});
+
+// eslint-disable-next-line new-cap
+const Tabs = createBottomTabNavigator({
+  Home: {
+    screen: HomeStack,
     navigationOptions: {
-      headerTitle: HomeHeaderTitle,
-      headerRight: HeaderPlaceholderButton,
-      headerLeft: HeaderPlaceholderButton,
-      headerBackground: <DynamicHeaderBackground />,
       tabBarIcon: props => <TabBarIcon name='home' {...props} />, //eslint-disable-line
-      tabBarOnPress: ({ defaultHandler, scene }) => {
-        if (scene.focused && scene.route.params && scene.route.params.scrollToTop) {
-          scene.route.params.scrollToTop();
+      tabBarOnPress: ({ defaultHandler, navigation }) => {
+        if (navigation.isFocused() && navigation.getParam('scrollToTop')) {
+          navigation.state.params.scrollToTop();
         } else {
           defaultHandler(0);
         }
@@ -71,62 +88,50 @@ const Tabs = TabNavigator({
   },
   Request: {
     screen: Request,
-    navigationOptions: ({ navigation }) => ({
-      title: t('Request'),
-      headerTitle: HeaderTitle,
-      headerRight: <TokenSwitcher navigation={navigation} />,
-      headerLeft: HeaderPlaceholderButton,
-      headerBackground: <HeaderBackground />,
-      headerStyle,
+    navigationOptions: {
       tabBarIcon: props => <TabBarIcon name='request' {...props} />, //eslint-disable-line
-    }),
+    },
   },
   Send: {
-    screen: Send,
-    navigationOptions: ({ navigation }) => ({
-      headerTitle: HeaderTitle,
-      headerRight: <TokenSwitcher navigation={navigation} />,
-      headerBackground: <HeaderBackground noBorder={true} />,
-      headerStyle,
+    screen: SendStack,
+    navigationOptions: {
       tabBarIcon: props => <TabBarIcon name='send' {...props} />, //eslint-disable-line
-    }),
+    },
   },
   Bookmarks: {
     screen: Bookmark,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       title: t('Bookmarks'),
       tabBarLabel: 'Bookmarks',
-      headerTitle: HeaderTitle,
-      headerRight: <TokenSwitcher navigation={navigation} />,
-      headerLeft: HeaderPlaceholderButton,
-      headerBackground: <HeaderBackground />,
-      headerStyle,
       tabBarIcon: props => <TabBarIcon name='bookmark' {...props} />, //eslint-disable-line
-    }),
+    },
   },
   Settings: {
     screen: Settings,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       title: t('Settings'),
-      headerTitle: HeaderTitle,
-      headerRight: <TokenSwitcher navigation={navigation} />,
-      headerLeft: HeaderPlaceholderButton,
-      headerBackground: <HeaderBackground />,
-      headerStyle,
       tabBarIcon: props => <TabBarIcon name='settings' {...props} />, //eslint-disable-line
-    }),
+    },
   },
 }, {
   tabBarComponent: TabBarComponent,
-  tabBarPosition: 'bottom',
   initialRouteName: 'Home',
   headerMode: 'screen',
   swipeEnabled: false,
+  tabBarOptions: {
+    activeTintColor: undefined,
+    indicatorStyle: undefined,
+    inactiveTintColor: undefined,
+    showIcon: true,
+    showLabel: false,
+    upperCaseLabel: false,
+    allowFontScaling: false,
+  },
 });
 
 
 // eslint-disable-next-line new-cap
-const MainStack = StackNavigator(
+const MainStack = createStackNavigator(
   {
     Register: {
       screen: Register,
@@ -147,7 +152,22 @@ const MainStack = StackNavigator(
     },
     Main: {
       screen: Tabs,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => {
+        const title = navigation.state.routes[navigation.state.index].routeName;
+        // Do not render header on tabs that have their own stack navigator nested
+        const shouldRenderHeader = !('routes' in navigation.state.routes[navigation.state.index]);
+        const headerConfig = shouldRenderHeader ?
+          {
+            headerTitle: HeaderTitle,
+            headerRight: <TokenSwitcher navigation={navigation} />,
+            headerBackground: <HeaderBackground noBorder={true} />,
+            headerStyle,
+            title,
+          } : {
+            header: null,
+          };
+
+        return headerConfig;
       },
     },
     TxDetail: {
@@ -168,7 +188,6 @@ const MainStack = StackNavigator(
     Wallet: {
       screen: Wallet,
       navigationOptions: {
-        headerTitle: props => <HomeHeaderTitle {...props} wallet={true} />,  //eslint-disable-line
         headerRight: HeaderPlaceholderButton,
         headerLeft: HeaderBackButton,
         headerBackground: <HeaderBackground noBorder={true} />,
@@ -283,7 +302,7 @@ const MainStack = StackNavigator(
 );
 
 
-export default StackNavigator({ //eslint-disable-line
+export default createStackNavigator({ //eslint-disable-line
   Home: {
     screen: MainStack,
     navigationOptions: {

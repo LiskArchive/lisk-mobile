@@ -20,7 +20,7 @@ import styles from './styles';
 })
 class Intro extends React.Component {
   skip() {
-    this.props.navigation.navigate('SignIn', { signOut: true });
+    this.props.navigation.push('SignIn', { signOut: true });
   }
 
   componentDidMount() {
@@ -69,7 +69,7 @@ class Intro extends React.Component {
     ];
     return (<View style={styles.wrapper}>
       <Splash />
-      <Heading skip={this.skip.bind(this)} descriptionContent={descriptionContent} />
+      <Heading skip={this.skip.bind(this)} descriptionContent={descriptionContent} testID="intro"/>
     </View>);
   }
 }

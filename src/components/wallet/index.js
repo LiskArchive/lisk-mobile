@@ -13,6 +13,7 @@ import {
 } from '../../actions/loading';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import HomeHeaderTitle from '../router/homeHeaderTitle';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -46,7 +47,7 @@ class Wallet extends React.Component {
     const { params = {} } = navigation.state;
     return ({
       title: params.title || '',
-      type: 'wallet',
+      headerTitle: <HomeHeaderTitle data={params.title} />,
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',
@@ -216,7 +217,7 @@ class Wallet extends React.Component {
                 type='wallet'
                 transactions={transactions}
                 footer={this.state.footer}
-                navigate={navigation.navigate}
+                navigate={navigation.push}
                 account={account}
                 refreshing={refreshing}
               />
