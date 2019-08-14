@@ -42,6 +42,8 @@ yarn.lock
 buck-out/
 \.buckd/
 *.keystore
+*.pem
+pepk.jar
 
 # fastlane
 #
