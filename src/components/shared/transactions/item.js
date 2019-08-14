@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { translate } from 'react-i18next';
+import connect from 'redux-connect-decorator';
 import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../formattedNumber';
 import Symbol from './symbol';
@@ -16,6 +17,9 @@ import getStyles from './styles';
 
 const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
 
+@connect(state => ({
+  language: state.settings.language
+}))
 class Item extends React.Component {
   componentDidMount() {
     if (typeof this.props.tx.timestamp !== 'number') {
@@ -47,7 +51,7 @@ class Item extends React.Component {
   render() {
     const {
       styles, theme, tx, t, activeToken,
-      account, followedAccounts, incognito,
+      account, followedAccounts, incognito, language,
     } = this.props;
 
     let direction = 'incoming';
@@ -97,7 +101,7 @@ class Item extends React.Component {
             <Small style={[styles.date, styles.theme.date]}>
               {t('Pending confirmation')}
             </Small> :
-            <FormattedDate type={Small} style={[styles.date, styles.theme.date]}>
+            <FormattedDate locale={language} type={Small} style={[styles.date, styles.theme.date]}>
               {tx.timestamp}
             </FormattedDate>
           }
