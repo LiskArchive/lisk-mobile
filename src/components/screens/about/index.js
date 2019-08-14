@@ -10,7 +10,7 @@ import getStyles from './styles';
 const logoSize = 83;
 
 const openLiskWebsite = () => {
-  Linking.openURL('https://lisk.io/products')
+  Linking.openURL('https://lisk.io/')
     // eslint-disable-next-line no-console
     .catch(err => console.error('An error occurred', err));
 };
