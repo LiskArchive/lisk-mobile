@@ -15,6 +15,7 @@ import { colors } from '../../../../../constants/styleGuide';
 import { tokenMap } from '../../../../../constants/tokens';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';
+import URLs from '../../../../../constants/URLs';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const getTranslatedMessages = t => ({
@@ -114,7 +115,7 @@ class Overview extends React.Component {
   }
 
   openAcademy = () => {
-    Linking.openURL('https://help.lisk.io/account-security/should-i-initialize-my-lisk-account')
+    Linking.openURL(URLs.liskGettingStarted)
       // eslint-disable-next-line no-console
       .catch(err => console.error('An error occurred', err));
   }

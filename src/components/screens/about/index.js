@@ -6,11 +6,12 @@ import Logo from '../../../assets/images/lisk-logo.png';
 import packageJson from '../../../../package.json';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
+import URLs from '../../../constants/URLs';
 
 const logoSize = 83;
 
 const openLiskWebsite = () => {
-  Linking.openURL('https://lisk.io/')
+  Linking.openURL(URLs.liskHomepage)
     // eslint-disable-next-line no-console
     .catch(err => console.error('An error occurred', err));
 };

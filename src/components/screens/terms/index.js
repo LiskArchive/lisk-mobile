@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, WebView } from 'react-native';
+import URLs from '../../../constants/URLs';
 
 const Terms = () => (
   <View style={{ flex: 1, overflow: 'hidden' }}>
     <WebView
-      source={{ uri: 'https://lisk.io/terms-conditions' }}
+      source={{ uri: URLs.liskTermsAndConditions }}
       style={{
         marginTop: -100,
       }}
