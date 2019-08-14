@@ -1,6 +1,6 @@
 {
   "name": "Lisk",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "description": "The Lisk official mobile wallet",
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
@@ -10,6 +10,7 @@
     "build:android": "react-native run-android",
     "build:ios": "react-native run-ios",
     "release:android": "cd android && ./gradlew assembleRelease",
+    "release:android-bundle": "cd android && ./gradlew bundleRelease",
     "link": "./node_modules/.bin/rn-nodeify --hack --install && node ./scripts/androidSdkFix.js",
     "test": "jest --config ./jest.config.js --env=jsdom",
     "test:live": "npm test -- --watch",

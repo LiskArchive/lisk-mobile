@@ -5,12 +5,12 @@ import withTheme from '../../withTheme';
 import getStyles from './styles';
 
 const HeaderTitle = ({
-  styles, style, t, children, ...rest
+  styles, t, children, ...rest
 }) => (
   <Animated.Text
     {...rest}
     numberOfLines={1}
-    style={[styles.main, styles.theme.main, style]}
+    style={[styles.main, styles.theme.main]}
     accessibilityTraits="header"
     allowFontScaling={false}>
     {t(children)}
