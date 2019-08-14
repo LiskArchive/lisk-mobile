@@ -3,8 +3,8 @@ const fs = require('fs');
 
 const finder = find('./node_modules');
 
-const sdkVersion = 'compileSdkVersion 27';
-const buildToolsVersion = 'buildToolsVersion "27.0.3"';
+const sdkVersion = 'compileSdkVersion 28';
+const buildToolsVersion = 'buildToolsVersion "28.0.3"';
 
 const RNOScompileSdkVersion = "compileSdkVersion safeExtGet('compileSdkVersion', 23)";
 const RNOSbuildToolsVersion = "buildToolsVersion safeExtGet('buildToolsVersion', 23)";
