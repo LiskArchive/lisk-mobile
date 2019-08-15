@@ -61,12 +61,12 @@ class SafeKeeping extends React.Component {
           <View style={styles.footer}>
             <View style={styles.switchContainer}>
               <Switch
+                testID="understandResponsibilitySwitch"
                 height={26}
                 width={43}
                 onSyncPress={this.confirm}
                 backgroundActive={colors.light.ultramarineBlue}
                 backgroundInactive={colors.light.platinum}
-                testID="understandResponsibilitySwitch"
               />
               <P style={styles.confirmText}>{t('I understand that it’s my responsibility to keep my passphrase safe.')}</P>
             </View>

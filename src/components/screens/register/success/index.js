@@ -42,10 +42,10 @@ class Success extends React.Component {
           </View>
           <View>
             <PrimaryButton
+              testID='registerSuccess'
               style={styles.button}
               onClick={pop}
               title={t('Sign in now')}
-              testID='registerSuccess'
             />
           </View>
         </View>
