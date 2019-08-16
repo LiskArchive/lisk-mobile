@@ -26,7 +26,7 @@ class Success extends React.Component {
 
     return (
       <SafeAreaView style={styles.wrapper}>
-        <View testID="registerSuccess" style={styles.container}>
+        <View style={styles.container}>
           <View>
             <View style={styles.titleContainer}>
               <P style={styles.subTitle}>
