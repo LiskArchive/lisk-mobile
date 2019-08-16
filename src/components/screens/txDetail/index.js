@@ -13,7 +13,7 @@ import EmptyState from '../../shared/transactions/empty';
 import LskSummary from './lskSummary';
 import BtcSummary from './btcSummary';
 import Row from './row';
-import { transactions as transactionsAPI } from '../../../utilities/api';
+import { transactions as transactionsAPI, account as accountAPI } from '../../../utilities/api';
 import { getTransactionExplorerURL } from '../../../utilities/api/btc/transactions';
 import getStyles from './styles';
 import { merge } from '../../../utilities/helpers';
@@ -41,6 +41,7 @@ class TransactionDetail extends React.Component {
   state = {
     tx: null,
     refreshing: false,
+    votes: [],
   }
 
   componentDidMount() {
@@ -59,6 +60,26 @@ class TransactionDetail extends React.Component {
       theme,
       action: backAction,
     });
+  }
+
+  async fetchExtraData() {
+    const { tx } = this.state;
+    const { activeToken } = this.props;
+    const votesWithUsernames = [];
+    if (tx.votes.length) {
+      tx.votes.forEach(async (vote, index) => {
+        const prefix = vote.substring(0, 1);
+        const publicKey = vote.substring(1, vote.length);
+        const accountSummary = await accountAPI.getSummary(activeToken, { publicKey });
+        const username = prefix + accountSummary.delegate.username;
+        votesWithUsernames.splice(index, 0, username);
+
+        if (votesWithUsernames.length === tx.votes.length) {
+          this.setState({ votes: votesWithUsernames });
+          // console.log(this.state);
+        }
+      });
+    }
   }
 
   async retrieveTransaction(id, delay = 0) {
@@ -86,6 +107,7 @@ class TransactionDetail extends React.Component {
           tx: merge(prevState.tx, tx),
           refreshing: false,
         })), delay);
+        this.fetchExtraData();
       }
     } catch (error) {
       if (!currentTx) {
