@@ -68,6 +68,7 @@ describe('api/transactions', () => {
             fee: '10000000',
             type: 0,
             data: '',
+            votes: [],
           },
           {
             id: '17545660133359630206',
@@ -79,6 +80,7 @@ describe('api/transactions', () => {
             fee: '10000000',
             type: 0,
             data: 'test',
+            votes: [],
           },
         ],
         meta: response.meta,
