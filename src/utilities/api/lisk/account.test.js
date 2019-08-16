@@ -30,13 +30,13 @@ describe('api/lisk/account', () => {
   describe('getSummary', () => {
     it('calls accounts.get method correctly', async () => {
       LiskAPIClient.accounts.get.mockResolvedValueOnce({ data: [account] });
-      const result = await getSummary(account.address);
+      const result = await getSummary({ address: account.address });
       expect(result).toEqual(account);
     });
 
     it('handles empty results coming from accounts.get method', async () => {
       LiskAPIClient.accounts.get.mockResolvedValueOnce({ data: [], success: false });
-      const result = await getSummary(account.address);
+      const result = await getSummary({ address: account.address });
       expect(result).toEqual({
         address: account.address,
         balance: 0,
@@ -49,7 +49,7 @@ describe('api/lisk/account', () => {
       LiskAPIClient.accounts.get.mockRejectedValueOnce(errorMessage);
 
       try {
-        await getSummary(account.address);
+        await getSummary({ address: account.address });
       } catch (error) {
         expect(error).toBe(errorMessage);
       }

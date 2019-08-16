@@ -147,7 +147,7 @@ export const accountFetched = givenToken => (dispatch, getState) => {
   const { address } = getState().accounts.info[selectedToken];
 
   dispatch(loadingStarted(actionTypes.accountFetched));
-  return accountAPI.getSummary(selectedToken, address)
+  return accountAPI.getSummary(selectedToken, { address })
     .then((account) => {
       dispatch({
         type: actionTypes.accountUpdated,
