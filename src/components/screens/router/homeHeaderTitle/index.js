@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Text, View, Image } from 'react-native';
+import { Animated, Text, Image, View, TouchableWithoutFeedback } from 'react-native';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import Avatar from '../../../shared/avatar';
 import Icon from '../../../shared/toolBox/icon';
@@ -38,11 +38,11 @@ const ExtendedTitle = ({
 
   return (
     <Animated.View style={[
-      styles.wrapper,
-      {
-        opacity: interpolate(scrollY, [0, 90, 130], [0, 0, 1]),
-        transform: [{ translateY: interpolate(scrollY, [0, 100, 210], [100, 100, 0]) }],
-      },
+        styles.wrapper,
+        {
+          opacity: interpolate(scrollY, [0, 90, 130], [0, 0, 1]),
+          transform: [{ translateY: interpolate(scrollY, [0, 100, 210], [100, 100, 0]) }],
+        },
     ]}>
       {
         token === 'LSK' ?
@@ -89,29 +89,31 @@ const SimpleHeader = ({
 );
 
 const HomeHeaderTitle = ({
-  styles, theme, wallet, data,
+  styles, theme, wallet, data, scrollToTop,
 }) => (
   <View style={styles.container}>
     {data && (
-      <View>
-        <SimpleHeader
-          styles={styles}
-          type={data.type}
-          title={data.placeHolder}
-          scrollY={data.scrollY}
-        />
-        <ExtendedTitle
-          balance={data.balance !== undefined ? fromRawLsk(data.balance) : '0'}
-          theme={theme}
-          token={data.token}
-          styles={styles}
-          scrollY={data.scrollY}
-          address={data.address}
-          incognito={data.incognito}
-          type={data.type}
-          wallet={wallet}
-        />
-      </View>
+      <TouchableWithoutFeedback onPress={() => scrollToTop()}>
+        <View>
+          <SimpleHeader
+            styles={styles}
+            type={data.type}
+            title={data.placeHolder}
+            scrollY={data.scrollY}
+          />
+          <ExtendedTitle
+            balance={data.balance !== undefined ? fromRawLsk(data.balance) : '0'}
+            theme={theme}
+            token={data.token}
+            styles={styles}
+            scrollY={data.scrollY}
+            address={data.address}
+            incognito={data.incognito}
+            type={data.type}
+            wallet={wallet}
+          />
+        </View>
+      </TouchableWithoutFeedback>
     )}
   </View>
 );

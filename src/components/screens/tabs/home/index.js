@@ -65,7 +65,7 @@ class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return ({
-      headerTitle: <HomeHeaderTitle data={params.title} />,
+      headerTitle: <HomeHeaderTitle scrollToTop={params.scrollToTop} data={params.title} />,
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',
@@ -93,14 +93,16 @@ class Home extends React.Component {
     });
   }
 
+  scrollToTop = () => {
+    if (this.scrollView) {
+      this.scrollView.scrollTo(0);
+    }
+  }
+
   bindInfiniteScroll = () => {
     // set param on tab navigator (parent of stack navigator)
     this.props.navigation.dangerouslyGetParent().setParams({
-      scrollToTop: () => {
-        if (this.scrollView) {
-          this.scrollView.scrollTo(0);
-        }
-      },
+      scrollToTop: () => this.scrollToTop(),
     });
   }
 
@@ -194,12 +196,16 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { navigation: { addListener, state }, settingsUpdated, incognito } = this.props;
+    const {
+      navigation: { addListener, state }, navigation, settingsUpdated, incognito,
+    } = this.props;
     addListener('willFocus', this.screenWillFocus);
 
     if (state.params && state.params.discreet && !incognito) {
       settingsUpdated({ incognito: true });
     }
+
+    navigation.setParams({ scrollToTop: this.scrollToTop });
 
     this.accountFetchTimeout = setTimeout(() => {
       this.fetchInactiveTokensAccounts();
