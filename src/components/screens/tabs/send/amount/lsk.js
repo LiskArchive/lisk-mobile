@@ -80,6 +80,7 @@ class AmountLSK extends React.Component {
 
   onChange = (value) => {
     const normalizedValue = value.replace(/[^0-9]/g, '.');
+    value = value.replace(/,/g, '.');
 
     this.setState({
       amount: {

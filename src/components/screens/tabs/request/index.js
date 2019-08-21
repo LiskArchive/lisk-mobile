@@ -44,6 +44,8 @@ class Request extends React.Component {
     const { account, activeToken } = this.props;
     const { address } = account[activeToken];
 
+    val = val.replace(/,/g, '.');
+
     let amountValidity = -1;
     let amount = val;
 
