@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts, boxes } from '../../../../constants/styleGuide';
+import { colors, fonts } from '../../../../constants/styleGuide';
 import { deviceHeight, deviceType } from '../../../../utilities/device';
 
 const height = deviceHeight();
@@ -60,8 +60,14 @@ const styles = {
   backButtonTitle: {
     color: colors.light.ultramarineBlue,
   },
-  createAccountWrapper: {
-    marginBottom: height <= 640 ? 0 : boxes.boxPadding,
+  innerContainer: {
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+  },
+  outerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'center',
   },
 };
 

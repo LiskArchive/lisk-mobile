@@ -22,7 +22,7 @@ class ScrollAwareActionBar extends React.Component {
   render() {
     const {
       children, disabled, onSubmit, noTheme,
-      styles, button, footerContent, onStickyButton,
+      styles, button, footerContent,
       buttonTestID,
     } = this.props;
     const { buttonStyle } = this.state;
@@ -37,13 +37,12 @@ class ScrollAwareActionBar extends React.Component {
           onKeyboardWillShow={() => this.toggleButtonView(false)}
           onKeyboardDidShow={() => this.toggleButtonView(false)}
         >
-          <View style={[styles ? styles.innerContainer : null, theme.scrollViewInnerContainer]}>
+          <View style={[styles ? styles.innerContainer : null]}>
             { children }
             {
-              !onStickyButton && buttonStyle === theme.hiddenStickyButton ?
               <View>
                 { footerContent }
-              </View> : null
+              </View>
             }
           </View>
         </KeyboardAwareScrollView>

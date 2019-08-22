@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
-import { NavigationActions, StackActions } from 'react-navigation';
+import { NavigationActions, StackActions, SafeAreaView } from 'react-navigation';
 import QuickActions from 'react-native-quick-actions'; // eslint-disable-line
 import FingerprintOverlay from '../../shared/fingerprintOverlay';
 import styles from './styles';
@@ -319,37 +319,40 @@ class SignIn extends React.Component {
       <View style={styles.wrapper}>
         <Splash animate={!signOut} />
 
-        {view === 'biometricAuth' ?
-          <BiometricAuth
-            animate={!signOut}
-            toggleView={this.toggleView}
-            sensorType={sensorType}
-            passphrase={storedPassphrase}
-            signIn={this.onFormSubmission}
-            showDialog={this.showDialog}
-            hideDialog={this.hideDialog}
-            navigation={this.props.navigation}
-          /> : null
-        }
+        <SafeAreaView style={{ flex: 1 }}>
 
-        {view === 'form' ?
-          <Form
-            animate={!signOut}
-            navigation={this.props.navigation}
-            toggleView={this.toggleView}
-            sensorType={sensorType}
-            showBackButton={hasStoredPassphrase && sensorType}
-            signIn={this.onFormSubmission}
-          /> : null
-        }
+          {view === 'biometricAuth' ?
+            <BiometricAuth
+              animate={!signOut}
+              toggleView={this.toggleView}
+              sensorType={sensorType}
+              passphrase={storedPassphrase}
+              signIn={this.onFormSubmission}
+              showDialog={this.showDialog}
+              hideDialog={this.hideDialog}
+              navigation={this.props.navigation}
+            /> : null
+          }
 
-        {Platform.OS === 'android' ?
-          <FingerprintOverlay
-            onModalClosed={() => this.signIn(this.state.passphrase)}
-            error={androidDialog.error}
-            show={androidDialog.show}
-          /> : null
-        }
+          {view === 'form' ?
+            <Form
+              animate={!signOut}
+              navigation={this.props.navigation}
+              toggleView={this.toggleView}
+              sensorType={sensorType}
+              showBackButton={hasStoredPassphrase && sensorType}
+              signIn={this.onFormSubmission}
+            /> : null
+          }
+
+          {Platform.OS === 'android' ?
+            <FingerprintOverlay
+              onModalClosed={() => this.signIn(this.state.passphrase)}
+              error={androidDialog.error}
+              show={androidDialog.show}
+            /> : null
+          }
+        </SafeAreaView>
       </View>
     );
   }
