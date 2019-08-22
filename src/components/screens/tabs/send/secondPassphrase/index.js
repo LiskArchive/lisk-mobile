@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform, Image } from 'react-native';
+import { View, Platform, Image, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
 import { validatePassphrase } from '../../../../../utilities/passphrase';
 import { extractPublicKey } from '../../../../../utilities/api/lisk/account';
@@ -38,6 +38,20 @@ class SecondPassphrase extends React.Component {
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
+
+    // Workaround for padding inconsistency on iPhone X
+    if (deviceType() === 'iOSx') {
+      this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+    }
+  }
+
+  keyboardWillShow = () => {
+    this.setState({ wrapperStyle: { } });
+  }
+
+  keyboardWillHide = () => {
+    this.setState({ wrapperStyle: { marginBottom: -35 } });
   }
 
   componentDidUpdate(prevProps) {
@@ -132,7 +146,7 @@ class SecondPassphrase extends React.Component {
     const { secondPassphrase } = this.state;
 
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
+      <View style={[styles.wrapper, styles.theme.wrapper, this.state.wrapperStyle]}>
         <Scanner
           ref={(el) => { this.scanner = el; }}
           containerStyles={{
