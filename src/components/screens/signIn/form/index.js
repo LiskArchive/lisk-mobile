@@ -66,7 +66,7 @@ class Form extends React.Component {
   onFormSubmission = () => {
     const { passphrase } = this.state;
     const { t, signIn } = this.props;
-    const validity = validatePassphrase(passphrase.value);
+    const validity = validatePassphrase(passphrase.value.trim());
 
     if (!validity.length) {
       DropDownHolder.closeAlert();
