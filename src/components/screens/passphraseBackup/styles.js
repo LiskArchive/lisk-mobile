@@ -8,7 +8,7 @@ export default () => ({
     container: {
       flex: 1,
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-around',
       paddingHorizontal: boxes.boxPadding,
       paddingBottom: 2 * boxes.boxPadding,
     },
