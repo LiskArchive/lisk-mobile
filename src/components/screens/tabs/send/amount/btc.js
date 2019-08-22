@@ -208,6 +208,7 @@ class AmountBTC extends React.Component {
     return (
       <View style={[styles.theme.wrapper, styles.wrapper, this.state.wrapperStyle]}>
         <KeyboardAwareScrollView
+          viewIsInsideTab
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
           button={{

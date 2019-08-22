@@ -93,6 +93,9 @@ const styles = {
       },
     }),
   },
+  iPhoneXOptimization: {
+    marginBottom: -35,
+  },
 };
 
 export default StyleSheet.create(styles);

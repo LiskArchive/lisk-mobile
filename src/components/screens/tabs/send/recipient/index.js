@@ -165,6 +165,7 @@ class Recipient extends React.Component {
         <KeyboardAwareScrollView
           onSubmit={this.submitForm}
           onStickyButton={true}
+          viewIsInsideTab
           styles={{
             container: styles.container,
             innerContainer: styles.innerContainer,

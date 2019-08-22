@@ -147,8 +147,8 @@ class SecondPassphrase extends React.Component {
           permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
         <KeyboardAwareScrollView
+          viewIsInsideTab
           onSubmit={this.onSubmit}
-          hasTabBar={true}
           styles={{ innerContainer: styles.innerContainer }}
           button={{
             title: t('Continue'),
