@@ -2,6 +2,7 @@ import React from 'react';
 import { BackHandler, View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-navigation';
 import { IconButton } from '../../shared/toolBox/button';
 import Input from '../../shared/toolBox/input';
 import { colors } from '../../../constants/styleGuide';
@@ -212,87 +213,89 @@ class AddToBookmark extends React.Component {
     };
 
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <Scanner
-          ref={(el) => { this.scanner = el; }}
-          navigation={navigation}
-          readFromCameraRoll={true}
-          onQRCodeRead={this.onQRCodeRead}
-          onClose={this.onCloseScanner}
-          permissionDialogTitle={t('Permission to use camera')}
-          permissionDialogMessage={t('Lisk needs to connect to your camera')}
-        />
-        <KeyboardAwareScrollView
-            onSubmit={this.submitForm}
-            button={{
-              title: editMode ? t('Save changes') : t('Add to bookmarks'),
-            }}
-            styles={{ container: styles.container, innerContainer: styles.innerContainer }}
-          >
-          <View style={styles.form}>
-            {
-              !incomingData ? <View style={styles.addressContainer}>
-                <IconButton
-                  onPress={() => this.scanner.toggleCamera()}
-                  titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                  style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-                  title={t('Scan')}
-                  icon='scanner'
-                  iconSize={18}
-                  color={colors.light.ultramarineBlue}
-                />
-                { shouldDisplayAvatar ?
-                  <Avatar
-                    style={styles.avatar}
-                    address={address.value}
-                    size={24}
-                  /> : null }
-                <Input
-                  label={t('Address')}
-                  reference={(input) => { this.addressRef = input; }}
-                  autoCorrect={false}
-                  innerStyles={{
-                    errorMessage: styles.errorMessage,
-                    input: [
-                      styles.input,
-                      styles.addressInput,
-                      (shouldDisplayAvatar ? styles.addressInputWithAvatar : {}),
-                    ],
-                    containerStyle: styles.addressInputContainer,
-                  }}
-                  onChange={this.setAddress}
-                  value={address.value}
-                  error={setError(address.validity, 'address')}
-                  onFocus={() => { this.activeInputRef = 0; }}
-                />
-              </View> :
-              <View style={styles.row}>
-                <P style={[styles.label, styles.theme.label]}>Address</P>
-                <View style={styles.staticAddressContainer}>
-                  {
-                    shouldDisplayAvatar ?
-                      <Avatar address={incomingData.address || ''} style={styles.staticAvatar} size={35}/> :
-                      null
-                  }
-                  <Small style={[styles.address, styles.theme.address]}>
-                    {incomingData.address}
-                  </Small>
+      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+        <View style={[styles.wrapper, styles.theme.wrapper]}>
+          <Scanner
+            ref={(el) => { this.scanner = el; }}
+            navigation={navigation}
+            readFromCameraRoll={true}
+            onQRCodeRead={this.onQRCodeRead}
+            onClose={this.onCloseScanner}
+            permissionDialogTitle={t('Permission to use camera')}
+            permissionDialogMessage={t('Lisk needs to connect to your camera')}
+          />
+            <KeyboardAwareScrollView
+              onSubmit={this.submitForm}
+              button={{
+                title: editMode ? t('Save changes') : t('Add to bookmarks'),
+              }}
+              styles={{ container: styles.container, innerContainer: styles.innerContainer }}
+            >
+            <View style={styles.form}>
+              {
+                !incomingData ? <View style={styles.addressContainer}>
+                  <IconButton
+                    onPress={() => this.scanner.toggleCamera()}
+                    titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
+                    style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                    title={t('Scan')}
+                    icon='scanner'
+                    iconSize={18}
+                    color={colors.light.ultramarineBlue}
+                  />
+                  { shouldDisplayAvatar ?
+                    <Avatar
+                      style={styles.avatar}
+                      address={address.value}
+                      size={24}
+                    /> : null }
+                  <Input
+                    label={t('Address')}
+                    reference={(input) => { this.addressRef = input; }}
+                    autoCorrect={false}
+                    innerStyles={{
+                      errorMessage: styles.errorMessage,
+                      input: [
+                        styles.input,
+                        styles.addressInput,
+                        (shouldDisplayAvatar ? styles.addressInputWithAvatar : {}),
+                      ],
+                      containerStyle: styles.addressInputContainer,
+                    }}
+                    onChange={this.setAddress}
+                    value={address.value}
+                    error={setError(address.validity, 'address')}
+                    onFocus={() => { this.activeInputRef = 0; }}
+                  />
+                </View> :
+                <View style={styles.row}>
+                  <P style={[styles.label, styles.theme.label]}>Address</P>
+                  <View style={styles.staticAddressContainer}>
+                    {
+                      shouldDisplayAvatar ?
+                        <Avatar address={incomingData.address || ''} style={styles.staticAvatar} size={35}/> :
+                        null
+                    }
+                    <Small style={[styles.address, styles.theme.address]}>
+                      {incomingData.address}
+                    </Small>
+                  </View>
                 </View>
-              </View>
-            }
-            <Input
-              label={t('Label')}
-              reference={(input) => { this.labelRef = input; }}
-              autoCorrect={false}
-              innerStyles={{ input: styles.input }}
-              multiline={false}
-              onChange={this.setLabel}
-              error={setError(label.validity, 'label')}
-              value={label.value}
-            />
-          </View>
-        </KeyboardAwareScrollView>
-      </View>
+              }
+              <Input
+                label={t('Label')}
+                reference={(input) => { this.labelRef = input; }}
+                autoCorrect={false}
+                innerStyles={{ input: styles.input }}
+                multiline={false}
+                onChange={this.setLabel}
+                error={setError(label.validity, 'label')}
+                value={label.value}
+              />
+            </View>
+          </KeyboardAwareScrollView>
+        </View>
+      </SafeAreaView>
     );
   }
 }
