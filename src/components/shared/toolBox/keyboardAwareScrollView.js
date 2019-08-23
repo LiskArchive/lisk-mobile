@@ -5,6 +5,7 @@ import { KeyboardTrackingView } from 'react-native-keyboard-tracking-view';
 import { withNavigation } from 'react-navigation';
 import { PrimaryButton } from './button';
 import theme from './styles';
+import { deviceType } from '../../../utilities/device';
 
 class ScrollAwareActionBar extends React.Component {
   state = {
@@ -19,13 +20,37 @@ class ScrollAwareActionBar extends React.Component {
     }
   }
 
+  renderButton = (style) => {
+    const {
+      buttonTestID, noTheme, disabled, onSubmit, button,
+    } = this.props;
+
+    return (
+      <PrimaryButton
+        testID={buttonTestID}
+        noTheme={noTheme}
+        disabled={disabled}
+        title={typeof button === 'string' ? button : button.title}
+        onClick={onSubmit}
+        style={style}
+      />
+    );
+  }
+
   render() {
     const {
-      children, disabled, onSubmit, noTheme,
-      styles, button, footerContent, onStickyButton,
-      buttonTestID,
+      children, styles, footerContent, viewIsInsideTab,
     } = this.props;
     const { buttonStyle } = this.state;
+
+    /*
+     * KeyboardTrackingView library is not optimized for iPhone X and
+     * is not compatible with SafeAreaView, so screens outside the
+     * tab router need to add marginBottom in order to render
+     * the correct botton's height. The following workaround fixes
+     * this issue until the library supports SafeAreaView
+     */
+    const shouldBeOptimizedForIphoneX = !viewIsInsideTab && deviceType() === 'iOSx';
 
     return (
       <Fragment>
@@ -39,24 +64,22 @@ class ScrollAwareActionBar extends React.Component {
         >
           <View style={[styles ? styles.innerContainer : null, theme.scrollViewInnerContainer]}>
             { children }
-            {
-              !onStickyButton && buttonStyle === theme.hiddenStickyButton ?
-              <View>
-                { footerContent }
-              </View> : null
-            }
+            { footerContent }
+            <View
+              style={[
+                theme.footerButtonContainer,
+                shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
+              ]}
+            >
+              {this.renderButton(theme.footerButton)}
+            </View>
           </View>
         </KeyboardAwareScrollView>
-        <KeyboardTrackingView>
-          <PrimaryButton
-            testID={buttonTestID}
-            noTheme={noTheme}
-            disabled={disabled}
-            title={typeof button === 'string' ? button : button.title}
-            onClick={onSubmit}
-            style={[buttonStyle]}
-          />
-        </KeyboardTrackingView>
+        {buttonStyle === theme.keyboardStickyButton && (
+          <KeyboardTrackingView>
+            {this.renderButton(theme.keyboardStickyButton)}
+          </KeyboardTrackingView>
+        )}
       </Fragment>);
   }
 }
