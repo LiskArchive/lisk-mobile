@@ -66,12 +66,13 @@ class Form extends React.Component {
   onFormSubmission = () => {
     const { passphrase } = this.state;
     const { t, signIn } = this.props;
-    const validity = validatePassphrase(passphrase.value);
+    const normalizedPassphrase = passphrase.value.trim();
+    const validity = validatePassphrase(normalizedPassphrase);
 
     if (!validity.length) {
       DropDownHolder.closeAlert();
       this.passphraseInput.blur();
-      signIn(passphrase.value, 'form');
+      signIn(normalizedPassphrase, 'form');
     } else {
       const errors = validity
         .filter(item => item.code !== 'INVALID_MNEMONIC' || validity.length === 1);
@@ -82,7 +83,7 @@ class Form extends React.Component {
 
       this.setState({
         passphrase: {
-          value: passphrase.value,
+          value: normalizedPassphrase,
           validity,
         },
       });
