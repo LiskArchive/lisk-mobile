@@ -318,6 +318,7 @@ class SignIn extends React.Component {
     return (
       <View style={styles.wrapper}>
         <Splash animate={!signOut} />
+        <View style={styles.container}>
 
         {view === 'biometricAuth' ?
           <BiometricAuth
@@ -350,6 +351,7 @@ class SignIn extends React.Component {
             show={androidDialog.show}
           /> : null
         }
+        </View>
       </View>
     );
   }

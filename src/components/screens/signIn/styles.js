@@ -6,6 +6,9 @@ const styles = {
     backgroundColor: colors.light.white,
     flex: 1,
   },
+  container: {
+    flex: 1,
+  },
 };
 
 export default StyleSheet.create(styles);
