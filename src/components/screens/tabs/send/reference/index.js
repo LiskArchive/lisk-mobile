@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Keyboard } from 'react-native';
+import { View } from 'react-native';
 import { TextEncoder } from 'text-encoding';
 import { translate } from 'react-i18next';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
@@ -45,20 +45,6 @@ class Reference extends React.Component {
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
-
-    // Workaround for padding inconsistency on iPhone X
-    if (deviceType() === 'iOSx') {
-      this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-      this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
-    }
-  }
-
-  keyboardWillShow = () => {
-    this.setState({ wrapperStyle: { } });
-  }
-
-  keyboardWillHide = () => {
-    this.setState({ wrapperStyle: { marginBottom: -35 } });
   }
 
   componentDidUpdate(prevProps) {
@@ -100,8 +86,9 @@ class Reference extends React.Component {
     const byteCount = encodeURI(value).split(/%..|./).length - 1;
 
     return (
-      <View style={[styles.theme.wrapper, styles.wrapper, this.state.wrapperStyle]}>
+      <View style={[styles.theme.wrapper, styles.wrapper]}>
         <KeyboardAwareScrollView
+          viewIsInsideTab
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
           button={{

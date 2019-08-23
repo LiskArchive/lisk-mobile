@@ -45,6 +45,7 @@ export default () => ({
           height: 48,
         },
         ios: {
+          minHeight: 48,
           height: 48,
           paddingBottom: 10,
         },
