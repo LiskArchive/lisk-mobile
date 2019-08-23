@@ -49,11 +49,9 @@ class ScrollAwareActionBar extends React.Component {
         >
           <View style={[styles ? styles.innerContainer : null]}>
             { children }
-            {
-              <View>
-                { footerContent }
-              </View>
-            }
+            <View>
+              { footerContent }
+            </View>
           </View>
         </KeyboardAwareScrollView>
         <KeyboardTrackingView>
