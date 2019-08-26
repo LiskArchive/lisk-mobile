@@ -39,7 +39,7 @@ class ScrollAwareActionBar extends React.Component {
 
   render() {
     const {
-      children, styles, footerContent, viewIsInsideTab,
+      children, styles, viewIsInsideTab,
     } = this.props;
     const { buttonStyle } = this.state;
 
@@ -64,7 +64,6 @@ class ScrollAwareActionBar extends React.Component {
         >
           <View style={[styles ? styles.innerContainer : null, theme.scrollViewInnerContainer]}>
             { children }
-            { footerContent }
             <View
               style={[
                 theme.footerButtonContainer,

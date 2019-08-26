@@ -94,7 +94,7 @@ const styles = {
     }),
   },
   scrollViewContainer: {
-    flex: 1,
+    flexGrow: 1,
   },
   scrollViewInnerContainer: {
     flex: 1,

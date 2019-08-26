@@ -200,18 +200,18 @@ class Form extends React.Component {
         </Animated.View>
 
         <KeyboardAwareScrollView
+          styles={{ innerContainer: styles.footerContent }}
           noTheme={true}
           button={t('Sign in')}
           buttonTestID='signInButton'
           onSubmit={this.onFormSubmission}
-          footerContent={
+          >
             <CreateAccount
               style={styles.createAccountWrapper}
               onPress={this.goToRegistration}
               opacity={opacity}
             />
-         }
-        />
+          </KeyboardAwareScrollView>
       </View>
     );
   }

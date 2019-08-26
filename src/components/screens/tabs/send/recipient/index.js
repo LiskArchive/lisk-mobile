@@ -153,7 +153,6 @@ class Recipient extends React.Component {
           onSubmit={this.submitForm}
           onStickyButton={true}
           styles={{
-            container: styles.container,
             innerContainer: styles.innerContainer,
           }}
           button={{

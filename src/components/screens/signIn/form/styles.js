@@ -63,6 +63,10 @@ const styles = {
   createAccountWrapper: {
     marginBottom: height <= 640 ? 0 : boxes.boxPadding,
   },
+  footerContent: {
+    paddingBottom: 100,
+    justifyContent: 'flex-end',
+  },
 };
 
 export default StyleSheet.create(styles);
