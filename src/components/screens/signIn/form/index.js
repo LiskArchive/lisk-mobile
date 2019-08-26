@@ -200,7 +200,6 @@ class Form extends React.Component {
         </Animated.View>
 
         <KeyboardAwareScrollView
-          styles={{ innerContainer: styles.footerContent }}
           noTheme={true}
           button={t('Sign in')}
           buttonTestID='signInButton'

@@ -1,14 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts, boxes } from '../../../../constants/styleGuide';
+import { colors, fonts } from '../../../../constants/styleGuide';
 import { deviceHeight, deviceType } from '../../../../utilities/device';
 
 const height = deviceHeight();
 const isSmallDevice = height <= 640;
-const calculatePaddingBottom = () => {
-  if (isSmallDevice) return 75;
-  else if (deviceType() === 'iOSx') return 95;
-  return 65;
-};
 
 const styles = {
   container: {
@@ -67,11 +62,8 @@ const styles = {
     color: colors.light.ultramarineBlue,
   },
   createAccountWrapper: {
-    marginBottom: isSmallDevice ? 0 : boxes.boxPadding,
-  },
-  footerContent: {
-    paddingBottom: calculatePaddingBottom(),
-    justifyContent: 'flex-end',
+    position: 'absolute',
+    bottom: deviceType() === 'iOSx' ? 105 : 70,
   },
 };
 

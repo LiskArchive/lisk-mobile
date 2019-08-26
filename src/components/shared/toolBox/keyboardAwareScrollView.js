@@ -63,15 +63,17 @@ class ScrollAwareActionBar extends React.Component {
           onKeyboardDidShow={() => this.toggleButtonView(false)}
         >
           <View style={[styles ? styles.innerContainer : null, theme.scrollViewInnerContainer]}>
-            { children }
-            <View
-              style={[
-                theme.footerButtonContainer,
-                shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
-              ]}
-            >
-              {this.renderButton(theme.footerButton)}
-            </View>
+            {children}
+            {buttonStyle === theme.footerButton && (
+                <View
+                  style={[
+                    theme.footerButtonContainer,
+                    shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
+                  ]}
+                >
+                  {this.renderButton(theme.footerButton)}
+                </View>
+            )}
           </View>
         </KeyboardAwareScrollView>
         {buttonStyle === theme.keyboardStickyButton && (
