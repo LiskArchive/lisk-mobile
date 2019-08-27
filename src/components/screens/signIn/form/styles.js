@@ -1,16 +1,17 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts, boxes } from '../../../../constants/styleGuide';
+import { colors, fonts } from '../../../../constants/styleGuide';
 import { deviceHeight, deviceType } from '../../../../utilities/device';
 
 const height = deviceHeight();
+const isSmallDevice = height <= 640;
 
 const styles = {
   container: {
     height: '100%',
-    paddingTop: height <= 640 ? 110 : 170,
+    paddingTop: isSmallDevice ? 110 : 170,
   },
   paddingBottom: {
-    paddingBottom: height <= 640 ? 0 : 40,
+    paddingBottom: isSmallDevice ? 0 : 40,
   },
   input: {
     fontFamily: fonts.family.passphrase,
@@ -61,7 +62,8 @@ const styles = {
     color: colors.light.ultramarineBlue,
   },
   createAccountWrapper: {
-    marginBottom: height <= 640 ? 0 : boxes.boxPadding,
+    position: 'absolute',
+    bottom: deviceType() === 'iOSx' ? 105 : 70,
   },
 };
 

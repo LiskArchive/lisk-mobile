@@ -3,6 +3,9 @@ import { deviceType, tabBarHeight } from '../../../../../utilities/device';
 
 export default () => ({
   common: {
+    wrapper: {
+      flex: 1,
+    },
     innerContainer: {
       flexDirection: 'column',
       justifyContent: 'space-between',

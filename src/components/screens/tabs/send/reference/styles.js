@@ -16,6 +16,7 @@ export default () => ({
       flexWrap: 'wrap',
       flex: 1,
       paddingRight: 35,
+      height: 48,
     },
     inputContainer: {
       position: 'relative',

@@ -74,6 +74,7 @@ class Request extends React.Component {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <KeyboardAwareScrollView
+          viewIsInsideTab
           enableOnAndroid={true}
           enableResetScrollToCoords={false}
           extraHeight={extraHeight}

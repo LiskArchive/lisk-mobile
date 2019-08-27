@@ -51,7 +51,7 @@ const styles = {
     fontFamily: fonts.family.context,
   },
   footerButton: {
-    margin: boxes.boxPadding,
+    width: '100%',
   },
   keyboardStickyButton: {
     borderRadius: 0,
@@ -92,6 +92,21 @@ const styles = {
         borderRadius: 0,
       },
     }),
+  },
+  scrollViewContainer: {
+    flexGrow: 1,
+  },
+  scrollViewInnerContainer: {
+    flex: 1,
+  },
+  footerButtonContainer: {
+    width: '100%',
+    position: 'absolute',
+    padding: boxes.boxPadding,
+    bottom: 0,
+  },
+  iPhoneXMargin: {
+    marginBottom: 35,
   },
 };
 
