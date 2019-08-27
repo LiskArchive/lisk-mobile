@@ -6,11 +6,16 @@ export default () => ({
       flex: 1,
     },
     container: {
-      flex: 1,
       alignItems: 'center',
-      justifyContent: 'space-around',
       paddingHorizontal: boxes.boxPadding,
-      paddingBottom: 2 * boxes.boxPadding,
+      paddingVertical: 2 * boxes.boxPadding,
+    },
+    qrCodeContainer: {
+      marginTop: boxes.boxPadding,
+      alignItems: 'center',
+    },
+    text: {
+      marginBottom: 28,
     },
   },
 
@@ -18,11 +23,17 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
+    text: {
+      color: colors.dark.blueGray,
+    },
   },
 
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.maastrichtBlue,
+    },
+    text: {
+      color: colors.dark.ghost,
     },
   },
 });
