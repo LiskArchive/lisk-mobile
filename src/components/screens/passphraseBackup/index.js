@@ -9,7 +9,6 @@ import { themes, colors } from '../../../constants/styleGuide';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
-import { P } from '../../shared/toolBox/typography';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
@@ -20,7 +19,7 @@ const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 class PassphraseBackup extends React.Component {
   render() {
     const {
-      styles, passphrase, theme, t,
+      styles, passphrase, theme,
     } = this.props;
 
     return (
@@ -28,7 +27,6 @@ class PassphraseBackup extends React.Component {
         <ScrollView contentContainerStyle={styles.container}>
           <PassphraseCopy passphrase={passphrase} />
           <View style={styles.qrCodeContainer}>
-            <P style={[styles.theme.text, styles.text]}>{t('Easy access? Show your QR code')}</P>
             <QRCode
               value={passphrase}
               size={qrCodeSize}
