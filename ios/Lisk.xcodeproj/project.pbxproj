@@ -52,7 +52,7 @@
 		47933BD974AE4A1E9F26A848 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CD4A0E456D843B18B84FB4B /* MaterialIcons.ttf */; };
 		4F7FDDEC2B3F43659A347587 /* Dots-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E1B4DCBCC0842B2986B9E14 /* Dots-Regular.ttf */; };
 		50B9A7346E754E71988A0B2B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF1D9E33CBFA4D5D8AEB57C1 /* FontAwesome.ttf */; };
-		5338FBFED7A445A8A9812352 /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A163DCB238C456687DF772D /* libInteractable.a */; };
+		55DD6FACE5134DFCA1C19FDB /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C412C59AD4645C280A0E1B9 /* libInteractable.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		5EC57C141DD54FAA8903D789 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4090FA5D05A243A9B97A8497 /* Ionicons.ttf */; };
 		632EBBB640EF4C19BB075A1E /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A436A259FE604084816F035A /* libRNCAsyncStorage.a */; };
@@ -66,6 +66,7 @@
 		90D566EA22D22DC000C61DCE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90363AD122CB8AC6006A5D94 /* JavaScriptCore.framework */; };
 		90ED3342095E48799E476934 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A9524863110446F87484CF6 /* FontAwesome5_Regular.ttf */; };
 		97F4A316E73B402D92151F2A /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5D1C421CB12400787006D8F /* FontAwesome5_Brands.ttf */; };
+		9A502CE89B2D46489021D075 /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4735A61E525F40548A6AD278 /* libInteractable.a */; };
 		9F623AB73FF646D1911425A5 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C51D72C0FAD40BFA9898B8F /* PTMono-Regular.ttf */; };
 		A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
 		A614F654C71047B3AF131C27 /* libRNShakeEvent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3C84F25D024703B97337E4 /* libRNShakeEvent.a */; };
@@ -521,19 +522,12 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNCAsyncStorage;
 		};
-		90228C43231555D700BCFFEE /* PBXContainerItemProxy */ = {
+		90228B6E2315230A00BCFFEE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 90E6F84A82194CAD90A83E40 /* Interactable.xcodeproj */;
+			containerPortal = 408827C1D57A40CABE002E6C /* Interactable.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CC0127971E3ACC3900B23C9F;
 			remoteInfo = Interactable;
-		};
-		90228C46231555D700BCFFEE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A7B1E37D72F4DBDAAA71A0F /* RCTCustomInputController.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 39DF4FE71E00394E00F5B4B2;
-			remoteInfo = RCTCustomInputController;
 		};
 		90363AFE22CB8AC6006A5D94 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -759,7 +753,9 @@
 		3CFF4425FA784E9C9BA504AE /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		3E07FF1ABDA24EBF851B4EA2 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		3F921B75E2A44CB2AF90E226 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		408827C1D57A40CABE002E6C /* Interactable.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/lib/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
 		4090FA5D05A243A9B97A8497 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		4735A61E525F40548A6AD278 /* libInteractable.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInteractable.a; sourceTree = "<group>"; };
 		4A9524863110446F87484CF6 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		4B3CD568314C40F799A5781E /* Interactable.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/lib/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
 		4C51D72C0FAD40BFA9898B8F /* PTMono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PTMono-Regular.ttf"; path = "../src/assets/fonts/passphrase/PTMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -776,7 +772,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		87DE9DE1D833458F857D0C90 /* RCTCustomInputController.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCustomInputController.xcodeproj; path = "../node_modules/react-native-keyboard-input/lib/ios/RCTCustomInputController.xcodeproj"; sourceTree = "<group>"; };
-		8BA55BAD4B984A0C81F684CF /* libRCTCustomInputController.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCustomInputController.a; sourceTree = "<group>"; };
+		8C412C59AD4645C280A0E1B9 /* libInteractable.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInteractable.a; sourceTree = "<group>"; };
 		8CD4A0E456D843B18B84FB4B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		90363AD122CB8AC6006A5D94 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		90E6F84A82194CAD90A83E40 /* Interactable.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/lib/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
@@ -801,6 +797,7 @@
 		ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManagerEvents.swift; sourceTree = "<group>"; };
 		ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessagesManager+MessagesViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		AE643B24F7FE4E7787E95AE6 /* Interactable.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/lib/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
 		B6221A7A22269DA600E90115 /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		B644168A216B3B3C001E51B9 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		B94922FA7F744DF8BA1C4815 /* TcpSockets.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = TcpSockets.xcodeproj; path = "../node_modules/react-native-tcp/ios/TcpSockets.xcodeproj"; sourceTree = "<group>"; };
@@ -877,8 +874,7 @@
 				632EBBB640EF4C19BB075A1E /* libRNCAsyncStorage.a in Frameworks */,
 				349664F1815B416F94BA7037 /* libRNGestureHandler.a in Frameworks */,
 				67C9DA27600A4E56B460210C /* libRNReanimated.a in Frameworks */,
-				5338FBFED7A445A8A9812352 /* libInteractable.a in Frameworks */,
-				7572CF17FC654D5580A77782 /* libRCTCustomInputController.a in Frameworks */,
+				9A502CE89B2D46489021D075 /* libInteractable.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1142,8 +1138,7 @@
 				A436A259FE604084816F035A /* libRNCAsyncStorage.a */,
 				F8A1F0630C064091A007BE3F /* libRNGestureHandler.a */,
 				5151B3598A4C4363814407E6 /* libRNReanimated.a */,
-				5A163DCB238C456687DF772D /* libInteractable.a */,
-				8BA55BAD4B984A0C81F684CF /* libRCTCustomInputController.a */,
+				4735A61E525F40548A6AD278 /* libInteractable.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1258,8 +1253,7 @@
 				A6A1222FDF79405381D3A38C /* RNCAsyncStorage.xcodeproj */,
 				3E07FF1ABDA24EBF851B4EA2 /* RNGestureHandler.xcodeproj */,
 				0E03641A1DBA4D0D86E5D861 /* RNReanimated.xcodeproj */,
-				90E6F84A82194CAD90A83E40 /* Interactable.xcodeproj */,
-				3A7B1E37D72F4DBDAAA71A0F /* RCTCustomInputController.xcodeproj */,
+				408827C1D57A40CABE002E6C /* Interactable.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1308,18 +1302,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		90228C3E231555D700BCFFEE /* Products */ = {
+		90228B6B2315230900BCFFEE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				90228C44231555D700BCFFEE /* libInteractable.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		90228C40231555D700BCFFEE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				90228C47231555D700BCFFEE /* libRCTCustomInputController.a */,
+				90228B6F2315230A00BCFFEE /* libInteractable.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1575,8 +1561,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 90228C3E231555D700BCFFEE /* Products */;
-					ProjectRef = 90E6F84A82194CAD90A83E40 /* Interactable.xcodeproj */;
+					ProductGroup = 90228B6B2315230900BCFFEE /* Products */;
+					ProjectRef = 408827C1D57A40CABE002E6C /* Interactable.xcodeproj */;
 				},
 				{
 					ProductGroup = 339AC00523057975009A4B94 /* Products */;
@@ -2145,18 +2131,11 @@
 			remoteRef = 900B8F0A22CB8EE1000AB34C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		90228C44231555D700BCFFEE /* libInteractable.a */ = {
+		90228B6F2315230A00BCFFEE /* libInteractable.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libInteractable.a;
-			remoteRef = 90228C43231555D700BCFFEE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		90228C47231555D700BCFFEE /* libRCTCustomInputController.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTCustomInputController.a;
-			remoteRef = 90228C46231555D700BCFFEE /* PBXContainerItemProxy */;
+			remoteRef = 90228B6E2315230A00BCFFEE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		90363AFF22CB8AC6006A5D94 /* libjsi.a */ = {
@@ -2503,14 +2482,12 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
 				);
 				INFOPLIST_FILE = LiskTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2561,14 +2538,12 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
 				);
 				INFOPLIST_FILE = LiskTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2626,7 +2601,6 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
 				);
 				INFOPLIST_FILE = Lisk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2678,7 +2652,6 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
 				);
 				INFOPLIST_FILE = Lisk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2808,14 +2781,12 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
 				);
 				INFOPLIST_FILE = LiskMessageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2877,14 +2848,12 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
 				);
 				INFOPLIST_FILE = LiskMessageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

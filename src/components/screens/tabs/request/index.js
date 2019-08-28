@@ -44,6 +44,8 @@ class Request extends React.Component {
     const { account, activeToken } = this.props;
     const { address } = account[activeToken];
 
+    val = val.replace(/,/g, '.');
+
     let amountValidity = -1;
     let amount = val;
 
@@ -72,6 +74,7 @@ class Request extends React.Component {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <KeyboardAwareScrollView
+          viewIsInsideTab
           enableOnAndroid={true}
           enableResetScrollToCoords={false}
           extraHeight={extraHeight}

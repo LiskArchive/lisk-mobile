@@ -10,23 +10,23 @@ const Share = ({
 }) => {
   const Element = type || Text;
 
+  const shareContent = async () => {
+    await ShareAPI.share({
+      message: value || children,
+    });
+  };
+
   return (
     <View style={[styles.container, containerStyle]}>
       <Element
         style={style}
-        onPress={() => ShareAPI.share({
-          message: value || children,
-          url: '',
-        })}>{children || title}</Element>
+        onPress={shareContent}>{children || title}</Element>
       {
         icon ? <Icon
                 style={styles.icon}
                 name='share'
                 size={14}
-                onPress={() => ShareAPI.share({
-                  message: value || children,
-                  url: '',
-                })}
+                onPress={shareContent}
                 color={iconColor || colors.light.blueGray} /> : null
       }
     </View>
