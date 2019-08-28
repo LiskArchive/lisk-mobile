@@ -41,7 +41,8 @@ class TransactionDetail extends React.Component {
   state = {
     tx: null,
     refreshing: false,
-    votes: [],
+    downvotes: [],
+    upvotes: [],
   }
 
   componentDidMount() {
@@ -65,18 +66,19 @@ class TransactionDetail extends React.Component {
   async fetchExtraData() {
     const { tx } = this.state;
     const { activeToken } = this.props;
-    const votesWithUsernames = [];
+    const upvotes = [];
+    const downvotes = [];
     if (tx.votes.length) {
       tx.votes.forEach(async (vote, index) => {
         const prefix = vote.substring(0, 1);
         const publicKey = vote.substring(1, vote.length);
         const accountSummary = await accountAPI.getSummary(activeToken, { publicKey });
-        const username = prefix + accountSummary.delegate.username;
-        votesWithUsernames.splice(index, 0, username);
+        const { username } = accountSummary.delegate;
+        if (prefix === '-') downvotes.splice(index, 0, username);
+        if (prefix === '+') upvotes.splice(index, 0, username);
 
-        if (votesWithUsernames.length === tx.votes.length) {
-          this.setState({ votes: votesWithUsernames });
-          // console.log(this.state);
+        if (downvotes.length + upvotes.length === tx.votes.length) {
+          this.setState({ upvotes, downvotes });
         }
       });
     }
@@ -153,11 +155,32 @@ class TransactionDetail extends React.Component {
       .catch(err => console.error('An error occurred', err));
   };
 
+  getAccountTitle = (tx) => {
+    if (tx.type === 3) return 'Voter';
+    else if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress) return 'Account address';
+    return 'sender';
+  }
+
+  listVotes = (vote) => {
+    const { styles } = this.props;
+
+    return (
+      <View style={[styles.votesContainer, styles.theme.votesContainer]}>
+        <View style={[styles.voteNumberContainer, styles.theme.voteNumberContainer]}>
+          <B style={[styles.voteNumber, styles.theme.voteNumber]}>#123</B>
+        </View>
+        <B style={[styles.vote, styles.theme.vote]}>{vote}</B>
+      </View>
+    );
+  }
+
   render() {
     const {
       navigation, styles, account, t, activeToken,
     } = this.props;
-    const { tx, error, refreshing } = this.state;
+    const {
+      tx, error, refreshing, upvotes, downvotes,
+    } = this.state;
 
     if (error) {
       return (
@@ -177,6 +200,7 @@ class TransactionDetail extends React.Component {
 
     const walletAccountAddress = navigation.getParam('account', account[activeToken].address);
     const incognito = navigation.getParam('incognito', null);
+    const isVote = tx.type === 3;
 
     return (
       <ScrollView
@@ -199,8 +223,19 @@ class TransactionDetail extends React.Component {
             tx={tx} />
         }
 
-        <Row icon='send' title={tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-          'Account address' : 'Sender'}>
+        {isVote && upvotes.length ? (
+          <Row style={styles.votesRow} icon='plus-vote' title={t('Added votes')}>
+            {upvotes.map(this.listVotes)}
+          </Row>
+        ) : null}
+
+        {isVote && downvotes.length ? (
+          <Row style={styles.votesRow} icon='minus-vote' title={t('Removed votes')}>
+            {downvotes.map(this.listVotes)}
+          </Row>
+        ) : null}
+
+        <Row icon={isVote ? 'user' : 'send'} title={this.getAccountTitle(tx)}>
           <View style={styles.addressContainer}>
             <A
               value={tx.senderAddress}
@@ -237,7 +272,7 @@ class TransactionDetail extends React.Component {
               </B>
             </Row> : null
         }
-        <Row icon='confirmation' title='Confirmations'>
+        <Row icon='confirmations' title='Confirmations'>
           <B style={[styles.value, styles.theme.value]}>{tx.confirmations || t('Not confirmed yet.')}</B>
         </Row>
         <Row icon='tx-id' title='Transaction ID'>
