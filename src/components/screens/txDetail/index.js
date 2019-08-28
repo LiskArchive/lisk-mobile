@@ -73,9 +73,12 @@ class TransactionDetail extends React.Component {
         const prefix = vote.substring(0, 1);
         const publicKey = vote.substring(1, vote.length);
         const accountSummary = await accountAPI.getSummary(activeToken, { publicKey });
-        const { username } = accountSummary.delegate;
-        if (prefix === '-') downvotes.splice(index, 0, username);
-        if (prefix === '+') upvotes.splice(index, 0, username);
+        const voteData = {
+          username: accountSummary.delegate.username,
+          rank: accountSummary.delegate.rank,
+        };
+        if (prefix === '-') downvotes.splice(index, 0, voteData);
+        if (prefix === '+') upvotes.splice(index, 0, voteData);
 
         if (downvotes.length + upvotes.length === tx.votes.length) {
           this.setState({ upvotes, downvotes });
@@ -166,11 +169,11 @@ class TransactionDetail extends React.Component {
     const { styles } = this.props;
 
     return (
-      <View style={[styles.votesContainer, styles.theme.votesContainer]}>
+      <View key={vote.username} style={[styles.votesContainer, styles.theme.votesContainer]}>
         <View style={[styles.voteNumberContainer, styles.theme.voteNumberContainer]}>
-          <B style={[styles.voteNumber, styles.theme.voteNumber]}>#123</B>
+          <B style={[styles.voteNumber, styles.theme.voteNumber]}>#{vote.rank}</B>
         </View>
-        <B style={[styles.vote, styles.theme.vote]}>{vote}</B>
+        <B style={[styles.vote, styles.theme.vote]}>{vote.username}</B>
       </View>
     );
   }
