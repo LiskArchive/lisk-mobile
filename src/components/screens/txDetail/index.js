@@ -157,6 +157,7 @@ class TransactionDetail extends React.Component {
 
   getAccountTitle = (tx) => {
     if (tx.type === 3) return 'Voter';
+    else if (tx.type === 2) return 'Registrant';
     else if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress) return 'Account address';
     return 'sender';
   }
@@ -200,6 +201,7 @@ class TransactionDetail extends React.Component {
 
     const walletAccountAddress = navigation.getParam('account', account[activeToken].address);
     const incognito = navigation.getParam('incognito', null);
+    const isDelegateRegistration = tx.type === 2;
     const isVote = tx.type === 3;
 
     return (
@@ -223,6 +225,14 @@ class TransactionDetail extends React.Component {
             tx={tx} />
         }
 
+        {isDelegateRegistration && (
+          <Row icon={'delegate'} title={'Delegate username'}>
+            <View>
+              <B style={[styles.value, styles.theme.value]}>{tx.delegate.username}</B>
+            </View>
+          </Row>
+        )}
+
         {isVote && upvotes.length ? (
           <Row style={styles.votesRow} icon='plus-vote' title={t('Added votes')}>
             {upvotes.map(this.listVotes)}
@@ -235,7 +245,7 @@ class TransactionDetail extends React.Component {
           </Row>
         ) : null}
 
-        <Row icon={isVote ? 'user' : 'send'} title={this.getAccountTitle(tx)}>
+        <Row icon={isVote || isDelegateRegistration ? 'user' : 'send'} title={this.getAccountTitle(tx)}>
           <View style={styles.addressContainer}>
             <A
               value={tx.senderAddress}

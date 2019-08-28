@@ -24,6 +24,7 @@ const normalizeTransactionsResponse = list => list.map(tx => ({
   type: tx.type,
   data: tx.asset.data || '',
   votes: tx.asset.votes || [],
+  delegate: tx.asset.delegate || '',
 }));
 
 export const get = ({

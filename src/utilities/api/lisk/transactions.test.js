@@ -69,6 +69,7 @@ describe('api/transactions', () => {
             type: 0,
             data: '',
             votes: [],
+            delegate: '',
           },
           {
             id: '17545660133359630206',
@@ -81,6 +82,7 @@ describe('api/transactions', () => {
             type: 0,
             data: 'test',
             votes: [],
+            delegate: '',
           },
         ],
         meta: response.meta,
