@@ -100,7 +100,7 @@ class Wallet extends React.Component {
 
     loadingStarted();
     const { address } = navigation.state.params;
-    const account = await accountAPI.getSummary(activeToken, { ...address });
+    const account = await accountAPI.getSummary(activeToken, { address });
     const tx = await transactionsAPI.get(activeToken, { address: this.address });
     loadingFinished();
 
