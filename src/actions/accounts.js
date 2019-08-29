@@ -147,7 +147,7 @@ export const accountFetched = givenToken => (dispatch, getState) => {
   const { address } = getState().accounts.info[selectedToken];
 
   dispatch(loadingStarted(actionTypes.accountFetched));
-  return accountAPI.getSummary(selectedToken, address)
+  return accountAPI.getSummary(selectedToken, { address })
     .then((account) => {
       dispatch({
         type: actionTypes.accountUpdated,
@@ -187,7 +187,7 @@ export const blockUpdated = () => async (dispatch, getState) => {
         },
       });
 
-      const account = await accountAPI.getSummary(activeToken, address);
+      const account = await accountAPI.getSummary(activeToken, { address });
 
       dispatch({
         type: actionTypes.accountUpdated,

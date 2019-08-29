@@ -1,9 +1,9 @@
 import Lisk from '@liskhq/lisk-client';
 import LiskAPIClient from './apiClient';
 
-export const getSummary = address => new Promise((resolve, reject) => {
+export const getSummary = params => new Promise((resolve, reject) => {
   LiskAPIClient
-    .accounts.get({ address })
+    .accounts.get({ ...params })
     .then((res) => {
       if (res.data.length > 0) {
         resolve({
@@ -13,7 +13,7 @@ export const getSummary = address => new Promise((resolve, reject) => {
       } else {
         // account has no transactions yet, therefore is not saved on the blockchain.
         resolve({
-          address,
+          ...params,
           balance: 0,
           initialized: false,
         });

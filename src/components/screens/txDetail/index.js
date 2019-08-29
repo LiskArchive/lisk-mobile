@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, View, RefreshControl, Linking } from 'react-native';
 import connect from 'redux-connect-decorator';
+import LottieView from 'lottie-react-native';
 import { translate } from 'react-i18next';
 import withTheme from '../../shared/withTheme';
 import { fromRawLsk } from '../../../utilities/conversions';
@@ -13,10 +14,12 @@ import EmptyState from '../../shared/transactions/empty';
 import LskSummary from './lskSummary';
 import BtcSummary from './btcSummary';
 import Row from './row';
-import { transactions as transactionsAPI } from '../../../utilities/api';
+import { transactions as transactionsAPI, account as accountAPI } from '../../../utilities/api';
 import { getTransactionExplorerURL } from '../../../utilities/api/btc/transactions';
 import getStyles from './styles';
+import loadingAnimation from '../../../assets/animations/loading-dots.json';
 import { merge } from '../../../utilities/helpers';
+import { tokenMap } from '../../../constants/tokens';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
@@ -41,6 +44,8 @@ class TransactionDetail extends React.Component {
   state = {
     tx: null,
     refreshing: false,
+    downvotes: [],
+    upvotes: [],
   }
 
   componentDidMount() {
@@ -59,6 +64,32 @@ class TransactionDetail extends React.Component {
       theme,
       action: backAction,
     });
+  }
+
+  async fetchExtraData() {
+    const { tx } = this.state;
+    const { activeToken } = this.props;
+    let upvotes = [];
+    let downvotes = [];
+    if (tx.votes.length) {
+      tx.votes.forEach(async (vote, index) => {
+        const prefix = vote.substring(0, 1);
+        const publicKey = vote.substring(1, vote.length);
+        const accountSummary = await accountAPI.getSummary(activeToken, { publicKey });
+        const voteData = {
+          username: accountSummary.delegate.username,
+          rank: accountSummary.delegate.rank,
+        };
+        if (prefix === '-') downvotes.splice(index, 0, voteData);
+        if (prefix === '+') upvotes.splice(index, 0, voteData);
+
+        if (downvotes.length + upvotes.length === tx.votes.length) {
+          if (!upvotes.length) upvotes = null;
+          if (!downvotes.length) downvotes = null;
+          this.setState({ upvotes, downvotes });
+        }
+      });
+    }
   }
 
   async retrieveTransaction(id, delay = 0) {
@@ -86,6 +117,7 @@ class TransactionDetail extends React.Component {
           tx: merge(prevState.tx, tx),
           refreshing: false,
         })), delay);
+        if (this.props.activeToken === tokenMap.LSK.key) this.fetchExtraData();
       }
     } catch (error) {
       if (!currentTx) {
@@ -131,11 +163,42 @@ class TransactionDetail extends React.Component {
       .catch(err => console.error('An error occurred', err));
   };
 
+  getAccountTitle = (tx) => {
+    if (tx.type === 3) return 'Voter';
+    else if (tx.type === 2) return 'Registrant';
+    else if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress) return 'Account address';
+    return 'sender';
+  }
+
+  listVotes = (vote) => {
+    const { styles } = this.props;
+
+    return (
+      <View key={vote.username} style={[styles.votesContainer, styles.theme.votesContainer]}>
+        <View style={[styles.voteNumberContainer, styles.theme.voteNumberContainer]}>
+          <B style={[styles.voteNumber, styles.theme.voteNumber]}>#{vote.rank}</B>
+        </View>
+        <B style={[styles.vote, styles.theme.vote]}>{vote.username}</B>
+      </View>
+    );
+  }
+
+  renderLoader = () => {
+    const { styles } = this.props;
+    return (
+      <View style={styles.pendingIcon}>
+        <LottieView source={loadingAnimation} autoPlay />
+      </View>
+    );
+  }
+
   render() {
     const {
       navigation, styles, account, t, activeToken,
     } = this.props;
-    const { tx, error, refreshing } = this.state;
+    const {
+      tx, error, refreshing, upvotes, downvotes,
+    } = this.state;
 
     if (error) {
       return (
@@ -155,6 +218,8 @@ class TransactionDetail extends React.Component {
 
     const walletAccountAddress = navigation.getParam('account', account[activeToken].address);
     const incognito = navigation.getParam('incognito', null);
+    const isDelegateRegistration = tx.type === 2;
+    const isVote = tx.type === 3;
 
     return (
       <ScrollView
@@ -177,8 +242,15 @@ class TransactionDetail extends React.Component {
             tx={tx} />
         }
 
-        <Row icon='send' title={tx.type !== 0 || (tx.recipientAddress === tx.senderAddress) ?
-          'Account address' : 'Sender'}>
+        {isDelegateRegistration && (
+          <Row icon={'delegate'} title={'Delegate username'}>
+            <View>
+              <B style={[styles.value, styles.theme.value]}>{tx.delegate.username}</B>
+            </View>
+          </Row>
+        )}
+
+        <Row icon={isVote || isDelegateRegistration ? 'user' : 'send'} title={this.getAccountTitle(tx)}>
           <View style={styles.addressContainer}>
             <A
               value={tx.senderAddress}
@@ -215,7 +287,7 @@ class TransactionDetail extends React.Component {
               </B>
             </Row> : null
         }
-        <Row icon='confirmation' title='Confirmations'>
+        <Row icon='confirmations' title='Confirmations'>
           <B style={[styles.value, styles.theme.value]}>{tx.confirmations || t('Not confirmed yet.')}</B>
         </Row>
         <Row icon='tx-id' title='Transaction ID'>
@@ -233,6 +305,19 @@ class TransactionDetail extends React.Component {
             </A>
           }
         </Row>
+
+        {isVote && upvotes && (
+          <Row style={styles.votesRow} icon='plus-vote' title={t('Added votes')}>
+            {upvotes.length ? upvotes.map(this.listVotes) : this.renderLoader()}
+          </Row>
+        )}
+
+        {isVote && downvotes && (
+          <Row style={styles.votesRow} icon='minus-vote' title={t('Removed votes')}>
+            {downvotes.length ? downvotes.map(this.listVotes) : this.renderLoader()}
+          </Row>
+        )}
+
       </ScrollView>
     );
   }

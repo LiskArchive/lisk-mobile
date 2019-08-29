@@ -113,6 +113,36 @@ export default () => ({
     explorerLink: {
       fontWeight: 'bold',
     },
+    votesRow: {
+      flexWrap: 'wrap',
+    },
+    voteNumberContainer: {
+      borderRadius: 4,
+      marginRight: 8,
+      fontSize: fonts.size.small,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 3,
+    },
+    votesContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderWidth: 0.5,
+      borderRadius: 3,
+      padding: 5,
+      marginRight: 5,
+      marginVertical: 2.5,
+    },
+    voteNumber: {
+      fontSize: fonts.size.small,
+    },
+    vote: {
+      fontSize: fonts.size.small,
+    },
+    pendingIcon: {
+      height: 18,
+      width: 18,
+    },
   },
 
   [themes.light]: {
@@ -151,6 +181,18 @@ export default () => ({
     explorerLink: {
       color: colors.light.ultramarineBlue,
     },
+    votesContainer: {
+      borderColor: setColorOpacity(colors.light.black, 0.2),
+    },
+    voteNumberContainer: {
+      backgroundColor: colors.light.slateGray,
+    },
+    voteNumber: {
+      color: colors.light.white,
+    },
+    dot: {
+      backgroundColor: setColorOpacity(colors.light.black, 0.2),
+    },
   },
 
   [themes.dark]: {
@@ -188,6 +230,21 @@ export default () => ({
     },
     explorerLink: {
       color: colors.light.ultramarineBlue,
+    },
+    votesContainer: {
+      borderColor: colors.dark.ghost,
+    },
+    voteNumberContainer: {
+      backgroundColor: colors.dark.slateGray,
+    },
+    voteNumber: {
+      color: colors.dark.white,
+    },
+    vote: {
+      color: colors.dark.white,
+    },
+    dot: {
+      backgroundColor: colors.dark.ghost,
     },
   },
 });

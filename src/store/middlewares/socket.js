@@ -15,7 +15,7 @@ const closeConnection = () => {
 export const checkBalance = (store) => {
   const activeToken = store.getState().settings.token.active;
   const { address, balance } = store.getState().accounts.info[activeToken];
-  return accountAPI.getSummary(activeToken, address).then((res) => {
+  return accountAPI.getSummary(activeToken, { address }).then((res) => {
     if (res.balance !== balance) {
       store.dispatch(blockUpdated());
     }

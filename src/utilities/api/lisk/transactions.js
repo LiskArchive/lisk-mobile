@@ -23,6 +23,8 @@ const normalizeTransactionsResponse = list => list.map(tx => ({
   confirmations: tx.confirmations,
   type: tx.type,
   data: tx.asset.data || '',
+  votes: tx.asset.votes || [],
+  delegate: tx.asset.delegate || '',
 }));
 
 export const get = ({

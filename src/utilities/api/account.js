@@ -14,7 +14,7 @@ import getMappedFunction from './functionMapper';
  * @param {String} address
  * @returns {Promise<AccountSummary>}
  */
-const getSummary = (tokenType, address) => getMappedFunction(tokenType, 'account', 'getSummary')(address);
+const getSummary = (tokenType, params) => getMappedFunction(tokenType, 'account', 'getSummary')({ ...params });
 
 /**
  * Extracts public key from passphrase for given token.

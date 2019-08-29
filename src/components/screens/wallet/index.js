@@ -99,7 +99,8 @@ class Wallet extends React.Component {
     } = this.props;
 
     loadingStarted();
-    const account = await accountAPI.getSummary(activeToken, navigation.state.params.address);
+    const { address } = navigation.state.params;
+    const account = await accountAPI.getSummary(activeToken, { address });
     const tx = await transactionsAPI.get(activeToken, { address: this.address });
     loadingFinished();
 
@@ -119,7 +120,8 @@ class Wallet extends React.Component {
   async refresh() {
     const { navigation, activeToken } = this.props;
     const { confirmed } = this.state.transactions;
-    const account = await accountAPI.getSummary(activeToken, navigation.state.params.address);
+    const { address } = navigation.state.params;
+    const account = await accountAPI.getSummary(activeToken, { address });
     const transactions = await transactionsAPI.get(activeToken, { address: this.address });
     const newTransactions = transactions.data.filter(t => t.timestamp > confirmed[0].timestamp);
 
