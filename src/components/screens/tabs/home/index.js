@@ -168,6 +168,7 @@ class Home extends React.Component {
 
 
     if (
+      activeToken === tokenMap.LSK.key &&
       !account[activeToken].initialized &&
       (!transactions || transactions.pending.length < 1) &&
       balance >= 0.2

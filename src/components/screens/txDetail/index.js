@@ -19,6 +19,7 @@ import { getTransactionExplorerURL } from '../../../utilities/api/btc/transactio
 import getStyles from './styles';
 import loadingAnimation from '../../../assets/animations/loading-dots.json';
 import { merge } from '../../../utilities/helpers';
+import { tokenMap } from '../../../constants/tokens';
 
 @connect(state => ({
   followedAccounts: state.accounts.followed || [],
@@ -116,7 +117,7 @@ class TransactionDetail extends React.Component {
           tx: merge(prevState.tx, tx),
           refreshing: false,
         })), delay);
-        this.fetchExtraData();
+        if (this.props.activeToken === tokenMap.LSK.key) this.fetchExtraData();
       }
     } catch (error) {
       if (!currentTx) {
