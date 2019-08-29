@@ -139,6 +139,10 @@ export default () => ({
     vote: {
       fontSize: fonts.size.small,
     },
+    pendingIcon: {
+      height: 18,
+      width: 18,
+    },
   },
 
   [themes.light]: {
@@ -185,6 +189,9 @@ export default () => ({
     },
     voteNumber: {
       color: colors.light.white,
+    },
+    dot: {
+      backgroundColor: setColorOpacity(colors.light.black, 0.2),
     },
   },
 
@@ -235,6 +242,9 @@ export default () => ({
     },
     vote: {
       color: colors.dark.white,
+    },
+    dot: {
+      backgroundColor: colors.dark.ghost,
     },
   },
 });

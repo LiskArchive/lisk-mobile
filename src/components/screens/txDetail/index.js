@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, View, RefreshControl, Linking } from 'react-native';
 import connect from 'redux-connect-decorator';
+import LottieView from 'lottie-react-native';
 import { translate } from 'react-i18next';
 import withTheme from '../../shared/withTheme';
 import { fromRawLsk } from '../../../utilities/conversions';
@@ -16,6 +17,7 @@ import Row from './row';
 import { transactions as transactionsAPI, account as accountAPI } from '../../../utilities/api';
 import { getTransactionExplorerURL } from '../../../utilities/api/btc/transactions';
 import getStyles from './styles';
+import loadingAnimation from '../../../assets/animations/loading-dots.json';
 import { merge } from '../../../utilities/helpers';
 
 @connect(state => ({
@@ -66,8 +68,8 @@ class TransactionDetail extends React.Component {
   async fetchExtraData() {
     const { tx } = this.state;
     const { activeToken } = this.props;
-    const upvotes = [];
-    const downvotes = [];
+    let upvotes = [];
+    let downvotes = [];
     if (tx.votes.length) {
       tx.votes.forEach(async (vote, index) => {
         const prefix = vote.substring(0, 1);
@@ -81,6 +83,8 @@ class TransactionDetail extends React.Component {
         if (prefix === '+') upvotes.splice(index, 0, voteData);
 
         if (downvotes.length + upvotes.length === tx.votes.length) {
+          if (!upvotes.length) upvotes = null;
+          if (!downvotes.length) downvotes = null;
           this.setState({ upvotes, downvotes });
         }
       });
@@ -178,6 +182,15 @@ class TransactionDetail extends React.Component {
     );
   }
 
+  renderLoader = () => {
+    const { styles } = this.props;
+    return (
+      <View style={styles.pendingIcon}>
+        <LottieView source={loadingAnimation} autoPlay />
+      </View>
+    );
+  }
+
   render() {
     const {
       navigation, styles, account, t, activeToken,
@@ -236,18 +249,6 @@ class TransactionDetail extends React.Component {
           </Row>
         )}
 
-        {isVote && upvotes.length ? (
-          <Row style={styles.votesRow} icon='plus-vote' title={t('Added votes')}>
-            {upvotes.map(this.listVotes)}
-          </Row>
-        ) : null}
-
-        {isVote && downvotes.length ? (
-          <Row style={styles.votesRow} icon='minus-vote' title={t('Removed votes')}>
-            {downvotes.map(this.listVotes)}
-          </Row>
-        ) : null}
-
         <Row icon={isVote || isDelegateRegistration ? 'user' : 'send'} title={this.getAccountTitle(tx)}>
           <View style={styles.addressContainer}>
             <A
@@ -303,6 +304,19 @@ class TransactionDetail extends React.Component {
             </A>
           }
         </Row>
+
+        {isVote && upvotes && (
+          <Row style={styles.votesRow} icon='plus-vote' title={t('Added votes')}>
+            {upvotes.length ? upvotes.map(this.listVotes) : this.renderLoader()}
+          </Row>
+        )}
+
+        {isVote && downvotes && (
+          <Row style={styles.votesRow} icon='minus-vote' title={t('Removed votes')}>
+            {downvotes.length ? downvotes.map(this.listVotes) : this.renderLoader()}
+          </Row>
+        )}
+
       </ScrollView>
     );
   }
