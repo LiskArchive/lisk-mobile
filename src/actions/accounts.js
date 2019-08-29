@@ -187,7 +187,7 @@ export const blockUpdated = () => async (dispatch, getState) => {
         },
       });
 
-      const account = await accountAPI.getSummary(activeToken, address);
+      const account = await accountAPI.getSummary(activeToken, { address });
 
       dispatch({
         type: actionTypes.accountUpdated,
