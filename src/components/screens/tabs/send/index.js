@@ -65,7 +65,7 @@ class Send extends React.Component {
     if (prevProps.settings.token.active !== this.props.settings.token.active) {
       this.resetMultiStep();
     } else {
-      this.checkQuery(prevProps.navigation.getParam('query', {}));
+      this.checkQuery(this.props.navigation.dangerouslyGetParent().getParam('query', {}));
     }
   }
 
@@ -81,7 +81,7 @@ class Send extends React.Component {
   }
 
   checkQuery = (prevQuery = {}) => {
-    const query = this.props.navigation.getParam('query', {});
+    const query = this.props.navigation.dangerouslyGetParent().getParam('query', {});
 
     if ((prevQuery !== query) && query && (Object.keys(query).length)) {
       this.resetMultiStep(query);
