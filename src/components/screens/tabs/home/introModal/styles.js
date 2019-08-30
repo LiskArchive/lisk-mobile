@@ -2,9 +2,6 @@ import { themes, colors, boxes } from '../../../../../constants/styleGuide';
 
 export default () => ({
   common: {
-    container: {
-      alignItems: 'center',
-    },
     text: {
       textAlign: 'center',
       lineHeight: 55,
@@ -16,6 +13,7 @@ export default () => ({
       marginLeft: boxes.boxPadding,
     },
     tokenLogoWrapper: {
+      alignSelf: 'center',
       paddingTop: 10,
       borderRadius: 25,
       width: 50,

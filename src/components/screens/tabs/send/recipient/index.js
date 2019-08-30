@@ -163,15 +163,17 @@ class Recipient extends React.Component {
 
           <View style={styles.form}>
             <View style={styles.addressContainer}>
-              <IconButton
-                onPress={() => this.scanner.toggleCamera()}
-                titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-                title={t('Scan')}
-                icon='scanner'
-                iconSize={19.5}
-                color={colors.light.ultramarineBlue}
-              />
+              <View style={styles.scanButtonContainer}>
+                <IconButton
+                  onPress={() => this.scanner.toggleCamera()}
+                  titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
+                  style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                  title={t('Scan')}
+                  icon='scanner'
+                  iconSize={19.5}
+                  color={colors.light.ultramarineBlue}
+                />
+              </View>
 
               {
                 token.active === tokenMap.LSK.key ?
