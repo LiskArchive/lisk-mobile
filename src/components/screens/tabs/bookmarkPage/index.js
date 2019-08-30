@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Animated, ScrollView, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
-import Icon from '../../shared/toolBox/icon';
-import Input from '../../shared/toolBox/input';
-import { IconButton } from '../../shared/toolBox/button';
-import { colors } from '../../../constants/styleGuide';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
-import withTheme from '../../shared/withTheme';
+import Icon from '../../../shared/toolBox/icon';
+import Input from '../../../shared/toolBox/input';
+import { IconButton } from '../../../shared/toolBox/button';
+import { colors } from '../../../../constants/styleGuide';
+import { SCREEN_HEIGHTS, deviceHeight } from '../../../../utilities/device';
+import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
-import Bookmarks from '../../shared/bookmarks';
+import Bookmarks from '../../../shared/bookmarks';
 
 class Bookmark extends React.Component {
   activeInputRef = null;
@@ -157,7 +157,7 @@ class Bookmark extends React.Component {
                       title: t('New bookmark'),
                     })
                   } />
-                </Animated.View>
+              </Animated.View>
               <Bookmarks
                 navigate={navigation.navigate}
                 draggable={true} setRef={this.setRef} query={query}
