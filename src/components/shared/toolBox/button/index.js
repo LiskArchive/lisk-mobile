@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { TouchableHighlight, TouchableOpacity, Text } from 'react-native';
+import { Text } from 'react-native';
+import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
 import getStyles from './styles';
 import Icon from '../icon';
 import withTheme from '../../../shared/withTheme';
@@ -98,20 +99,22 @@ const LabelButton = (props) => {
  */
 const IconButton = (props) => {
   const {
-    titleStyle, style, title, icon, color, iconSize, onClick, iconStyle,
+    titleStyle, style, title, icon, color, iconSize, onClick, iconStyle, styles,
   } = props;
   const viewProps = Object.keys(props)
     .filter(key => !(/titleStyle|style|title|icon|color/.test(key)))
     .reduce((acc, key) => { acc[key] = props[key]; return acc; }, {});
-  return (<TouchableHighlight
-    onPress={onClick}
-    underlayColor='transparent' {...viewProps}
-    style={[props.styles.iconButton, style]}>
-    <Fragment>
-      <Icon style={iconStyle} name={icon} size={iconSize || 30} color={color || '#000'} />
-      <Text style={[props.styles.iconButtonTitle, titleStyle]}>{ title || '' }</Text>
-    </Fragment>
-  </TouchableHighlight>);
+  return (
+    <TouchableHighlight
+      onPress={onClick}
+      underlayColor='transparent' {...viewProps}
+      style={[props.styles.iconButton, style]}>
+      <Fragment>
+        <Icon style={iconStyle} name={icon} size={iconSize || 30} color={color || '#000'} />
+        <Text style={[styles.iconButtonTitle, titleStyle]}>{ title || '' }</Text>
+      </Fragment>
+    </TouchableHighlight>
+  );
 };
 
 const ThemedLabelButton = withTheme(LabelButton, getStyles());
