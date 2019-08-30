@@ -1,7 +1,7 @@
 
 import { Platform } from 'react-native';
-import { themes, colors, boxes, fonts } from '../../../constants/styleGuide';
-import { setColorOpacity } from '../../../utilities/helpers';
+import { themes, colors, boxes, fonts } from '../../../../constants/styleGuide';
+import { setColorOpacity } from '../../../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -13,9 +13,9 @@ export default () => ({
       paddingBottom: 24,
     },
     titleContainer: {
-      overflow: 'hidden',
       paddingRight: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
+      justifyContent: 'center',
     },
     headerButton: {
       transform: [
@@ -61,8 +61,9 @@ export default () => ({
     addButton: {
       width: '100%',
       borderBottomWidth: 1,
-      paddingBottom: 20,
-      height: 55,
+      height: 65,
+      paddingTop: 5,
+      paddingBottom: 18,
     },
     addButtonIcon: {
       marginLeft: -10,

@@ -7,7 +7,7 @@ import {
 import SignIn from '../signIn';
 import TxDetail from '../txDetail';
 import Send from '../tabs/send';
-import Bookmark from '../bookmarkPage';
+import Bookmark from '../tabs/bookmarkPage';
 import Register from '../register';
 import Wallet from '../wallet';
 import Request from '../tabs/request';
