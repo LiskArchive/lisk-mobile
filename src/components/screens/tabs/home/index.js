@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Animated, StatusBar, Platform } from 'react-native';
+import { View, Animated, StatusBar, Platform, NetInfo } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import { withNavigationFocus } from 'react-navigation';
 import {
   transactionsReset as transactionsResetAction,
@@ -28,6 +29,7 @@ import { themes } from '../../../../constants/styleGuide';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import InitializationModal from './initializationModal';
 import HomeHeaderTitle from '../../router/homeHeaderTitle';
+import DropDownHolder from '../../../../utilities/alert';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -211,6 +213,8 @@ class Home extends React.Component {
     this.accountFetchTimeout = setTimeout(() => {
       this.fetchInactiveTokensAccounts();
     }, 1000);
+
+    this.connectionChangeListener = NetInfo.addEventListener('connectionChange', this.handleConnectivityChange);
   }
 
   componentDidUpdate(prevProps) {
@@ -260,6 +264,16 @@ class Home extends React.Component {
     clearTimeout(this.initialFetchTimeout);
     clearTimeout(this.modalTimeout);
     clearTimeout(this.accountFetchTimeout);
+  }
+
+  handleConnectivityChange = (connectionInfo) => {
+    const { t } = this.props;
+    if (connectionInfo.type === 'wifi' || connectionInfo.type === 'cellular') {
+      this.refreshAccountAndTx();
+      DropDownHolder.closeAlert();
+    } else if (connectionInfo.type === 'none') {
+      DropDownHolder.error(t('No internet connection!'), t('Your connection seems to be down, try again later.'));
+    }
   }
 
   shouldFetchAccounts = (prevList, newList) => Object.keys(prevList).some(token =>
@@ -341,4 +355,4 @@ class Home extends React.Component {
   }
 }
 
-export default withNavigationFocus(withTheme(Home, getStyles()));
+export default withNavigationFocus(withTheme(translate()(Home), getStyles()));
