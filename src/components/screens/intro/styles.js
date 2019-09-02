@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { colors, boxes } from '../../../constants/styleGuide';
-import { deviceHeight } from '../../../utilities/device';
+import { deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 const styles = {
   container: {
@@ -119,7 +121,21 @@ const styles = {
     position: 'absolute',
     height: 13,
   },
+  switchContainer: {
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  confirmationText: {
+    marginLeft: 13.5,
+    marginBottom: 13.5,
+    flex: 1,
+    color: colors.light.blueGray,
+    flexWrap: 'wrap',
+    fontSize: isSmallScreen ? 11 : 13,
+  },
   buttonContainer: {
+    zIndex: 10,
     width: '100%',
     alignItems: 'stretch',
     position: 'absolute',

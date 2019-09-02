@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
+import Switch from 'react-native-switch-pro';
 import { translate } from 'react-i18next';
 import { H2, P } from '../../shared/toolBox/typography';
 import styles from './styles';
@@ -9,6 +10,16 @@ import { PrimaryButton } from '../../shared/toolBox/button';
 import { headerHeight } from '../../../utilities/device';
 
 class Heading extends React.Component {
+  state = {
+    confirmed: false,
+  }
+
+  confirm = (status) => {
+    this.setState({
+      confirmed: status,
+    });
+  }
+
   render() {
     const {
       t, skip, descriptionContent, hasHeader, testID,
@@ -33,7 +44,18 @@ class Heading extends React.Component {
                 <Image resizeMethod={'scale'} source={item.imageSrc} style={item.imageStyle} />
               {item.step === descriptionContent.length && (
                 <View style={[styles.buttonContainer, buttonStyle]}>
+                  <View style={styles.switchContainer}>
+                    <Switch
+                      height={26}
+                      width={43}
+                      onSyncPress={this.confirm}
+                      backgroundActive={colors.light.ultramarineBlue}
+                      backgroundInactive={colors.light.platinum}
+                    />
+                    <P style={styles.confirmationText}>{t('I understand that it’s my responsibility to keep my passphrase safe.')}</P>
+                  </View>
                   <PrimaryButton
+                    disabled={!this.state.confirmed}
                     style={styles.button}
                     onClick={skip}
                     title='Continue'
