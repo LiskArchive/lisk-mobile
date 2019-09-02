@@ -1,5 +1,9 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+  createAppContainer,
+} from 'react-navigation';
 import SignIn from '../signIn';
 import TxDetail from '../txDetail';
 import Send from '../tabs/send';
@@ -66,7 +70,7 @@ const HomeStack = createStackNavigator({
     screen: Home,
   },
 }, {
-  navigationOptions: {
+  defaultNavigationOptions: {
     headerBackground: <DynamicHeaderBackground />,
   },
 });
@@ -301,8 +305,7 @@ const MainStack = createStackNavigator(
   },
 );
 
-
-export default createStackNavigator({ //eslint-disable-line
+const MainNavigator = createStackNavigator({ //eslint-disable-line
   Home: {
     screen: MainStack,
     navigationOptions: {
@@ -333,3 +336,5 @@ export default createStackNavigator({ //eslint-disable-line
     gesturesEnabled: false,
   },
 });
+
+export default createAppContainer(MainNavigator);

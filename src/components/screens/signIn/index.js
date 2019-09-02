@@ -161,11 +161,6 @@ class SignIn extends React.Component {
   }
 
   signIn = (passphrase) => {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'Main' })],
-    });
-
     this.props.accountSignedIn({ passphrase });
     this.props.accountFetched();
     this.props.pricesRetrieved();
@@ -173,7 +168,9 @@ class SignIn extends React.Component {
     if (this.deepLinkURL) {
       this.navigateToDeepLink(this.deepLinkURL);
     } else {
-      this.props.navigation.dispatch(resetAction);
+      this.props.navigation.reset([
+        NavigationActions.navigate({ routeName: 'Main' }),
+      ], 0);
     }
   }
 
