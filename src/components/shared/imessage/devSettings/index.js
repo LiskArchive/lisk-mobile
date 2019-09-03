@@ -6,7 +6,7 @@ class DevSettings extends React.Component {
   state = {
     liveReloadEnabled: false,
     remoteDebuggingEnabled: false,
-  }
+  };
 
   componentDidMount() {
     this.onToggleLiveReload();
@@ -20,7 +20,7 @@ class DevSettings extends React.Component {
     this.setState({
       remoteDebuggingEnabled,
     });
-  }
+  };
 
   onToggleLiveReload = () => {
     const liveReloadEnabled = !this.state.liveReloadEnabled;
@@ -30,20 +30,26 @@ class DevSettings extends React.Component {
     this.setState({
       liveReloadEnabled,
     });
-  }
+  };
 
   render() {
     const { liveReloadEnabled, remoteDebuggingEnabled } = this.state;
 
     return (
       <View style={styles.wrapper}>
-        <TouchableHighlight style={styles.button} onPress={this.onToggleRemoteDebugging}>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.onToggleRemoteDebugging}
+        >
           <Text style={styles.buttonText}>
             {remoteDebuggingEnabled ? 'Disable' : 'Enable'} Remote Debugging
           </Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.button} onPress={this.onToggleLiveReload}>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.onToggleLiveReload}
+        >
           <Text style={styles.buttonText}>
             {liveReloadEnabled ? 'Disable' : 'Enable'} Live Reload
           </Text>

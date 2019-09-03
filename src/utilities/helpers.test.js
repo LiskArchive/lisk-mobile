@@ -118,7 +118,9 @@ describe('helpers', () => {
     });
 
     it('generates correct output with given params', () => {
-      expect(stringShortener('test_test_test_test', 10, 5)).toBe('test_test_..._test');
+      expect(stringShortener('test_test_test_test', 10, 5)).toBe(
+        'test_test_..._test'
+      );
     });
   });
 

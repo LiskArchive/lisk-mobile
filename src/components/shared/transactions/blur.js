@@ -26,14 +26,16 @@ const blurs = {
   },
 };
 
-const Blur = ({
-  styles, direction, theme, value, style,
-}) => {
+const Blur = ({ styles, direction, theme, value, style }) => {
   const valueSize = value.length > 2 ? 'Medium' : 'Small';
-  return (<View style={[styles.amount, style]}>
-    <Image style={styles[`blur${valueSize}`]}
-      source={blurs[direction][`${theme}${valueSize}`]} />
-  </View>);
+  return (
+    <View style={[styles.amount, style]}>
+      <Image
+        style={styles[`blur${valueSize}`]}
+        source={blurs[direction][`${theme}${valueSize}`]}
+      />
+    </View>
+  );
 };
 
 export default withTheme(Blur, getStyles());

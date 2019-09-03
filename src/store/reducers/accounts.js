@@ -4,12 +4,20 @@ import { tokenKeys } from '../../constants/tokens';
 
 export const INITIAL_STATE = {
   passphrase: null,
-  followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
-    [tokenKey]: [],
-  }), {}),
-  info: tokenKeys.reduce((info, tokenKey) => merge(info, {
-    [tokenKey]: {},
-  }), {}),
+  followed: tokenKeys.reduce(
+    (info, tokenKey) =>
+      merge(info, {
+        [tokenKey]: [],
+      }),
+    {}
+  ),
+  info: tokenKeys.reduce(
+    (info, tokenKey) =>
+      merge(info, {
+        [tokenKey]: {},
+      }),
+    {}
+  ),
 };
 
 /**
@@ -46,35 +54,56 @@ const accounts = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.accountEdited: {
       const { account, activeToken } = action.data;
       return merge(state, {
-        followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
-          [tokenKey]: tokenKey === activeToken ?
-            state.followed[tokenKey]
-              .map(i => (i.address === account.address ? account : i)) :
-            state.followed[tokenKey],
-        }), {}),
+        followed: tokenKeys.reduce(
+          (info, tokenKey) =>
+            merge(info, {
+              [tokenKey]:
+                tokenKey === activeToken
+                  ? state.followed[tokenKey].map(i =>
+                      i.address === account.address ? account : i
+                    )
+                  : state.followed[tokenKey],
+            }),
+          {}
+        ),
       });
     }
 
     case actionTypes.accountFollowed: {
       const { account, activeToken } = action.data;
       return merge(state, {
-        followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
-          [tokenKey]: tokenKey === activeToken ?
-            [
-              ...state.followed[tokenKey]
-                .filter(item => item.address !== account.address), account] :
-            state.followed[tokenKey],
-        }), {}),
+        followed: tokenKeys.reduce(
+          (info, tokenKey) =>
+            merge(info, {
+              [tokenKey]:
+                tokenKey === activeToken
+                  ? [
+                      ...state.followed[tokenKey].filter(
+                        item => item.address !== account.address
+                      ),
+                      account,
+                    ]
+                  : state.followed[tokenKey],
+            }),
+          {}
+        ),
       });
     }
 
     case actionTypes.accountUnFollowed:
       return merge(state, {
-        followed: tokenKeys.reduce((info, tokenKey) => merge(info, {
-          [tokenKey]: tokenKey === action.data.activeToken ?
-            state.followed[tokenKey].filter(item => item.address !== action.data.address) :
-            state.followed[tokenKey],
-        }), {}),
+        followed: tokenKeys.reduce(
+          (info, tokenKey) =>
+            merge(info, {
+              [tokenKey]:
+                tokenKey === action.data.activeToken
+                  ? state.followed[tokenKey].filter(
+                      item => item.address !== action.data.address
+                    )
+                  : state.followed[tokenKey],
+            }),
+          {}
+        ),
       });
 
     default:

@@ -32,7 +32,9 @@ async function readFiles(config) {
   const translations = {};
   async function read() {
     const i = Object.keys(translations).length;
-    translations[config.lng[i]] = await readFile(`${config.outputPath}/${config.lng[i]}.json`);
+    translations[config.lng[i]] = await readFile(
+      `${config.outputPath}/${config.lng[i]}.json`
+    );
     if (i < config.lng.length - 1) await read();
   }
   await read();
@@ -48,7 +50,7 @@ async function readFiles(config) {
  * @param {String} key - The extracted translation key
  * @param {String} options - parse options
  */
-const customHandler = function (parser, oldTranslations, key, options) {
+const customHandler = function(parser, oldTranslations, key, options) {
   const value = oldTranslations[key] || key;
   if (options.context) {
     key += `_${options.context}`;
@@ -73,14 +75,15 @@ function parse(config, oldTranslations) {
     nsSeparator: '|',
   });
 
-  config.files.map(filePattern => glob.sync(filePattern, {}))
-    .reduce(((accumulator, files) => [...accumulator, ...files]), [])
-    .forEach((file) => {
+  config.files
+    .map(filePattern => glob.sync(filePattern, {}))
+    .reduce((accumulator, files) => [...accumulator, ...files], [])
+    .forEach(file => {
       const content = fs.readFileSync(file, 'utf-8');
       parser.parseFuncFromString(
         content,
         { list: config.translationFunctionNames },
-        (key, options) => customHandler(parser, oldTranslations, key, options),
+        (key, options) => customHandler(parser, oldTranslations, key, options)
       );
     });
 
@@ -108,9 +111,19 @@ function parse(config, oldTranslations) {
  * @param {Object} newKeys - New translation keys parsed from the jsx files
  */
 async function writeFile(config, language, resources, rawOldKeys, newKeys) {
-  const additionalKeys = language === config.defaultLng ?
-    Object.keys(newKeys).reduce((acc, key) => { acc[key] = key; return acc; }, {}) : newKeys;
-  const updatedTranslations = Object.assign({}, rawOldKeys, resources, additionalKeys);
+  const additionalKeys =
+    language === config.defaultLng
+      ? Object.keys(newKeys).reduce((acc, key) => {
+          acc[key] = key;
+          return acc;
+        }, {})
+      : newKeys;
+  const updatedTranslations = Object.assign(
+    {},
+    rawOldKeys,
+    resources,
+    additionalKeys
+  );
   const outputJSON = `${JSON.stringify(updatedTranslations, null, 2)}\n`;
   fs.writeFileSync(`${config.outputPath}/${language}.json`, outputJSON);
 }
@@ -124,7 +137,13 @@ async function writeFile(config, language, resources, rawOldKeys, newKeys) {
  */
 async function writeFiles(config, resources, newKeys) {
   const count = Object.keys(newKeys).length;
-  const rawOldKeys = Object.keys(resources[config.defaultLng]).reduce((acc, key) => { acc[key] = ''; return acc; }, {});
+  const rawOldKeys = Object.keys(resources[config.defaultLng]).reduce(
+    (acc, key) => {
+      acc[key] = '';
+      return acc;
+    },
+    {}
+  );
   let i = 0;
   async function write() {
     const lng = config.lng[i];
@@ -136,7 +155,9 @@ async function writeFiles(config, resources, newKeys) {
   if (count > 0) {
     await write();
     // eslint-disable-next-line no-console
-    console.log(`i18nScanner: ${count} translation keys parsed and written to '${config.outputPath}'\n`);
+    console.log(
+      `i18nScanner: ${count} translation keys parsed and written to '${config.outputPath}'\n`
+    );
   } else {
     // eslint-disable-next-line no-console
     console.log('i18nScanner: No new translations.');

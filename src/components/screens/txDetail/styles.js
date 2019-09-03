@@ -69,9 +69,7 @@ export default () => ({
       height: 11,
     },
     reverseArrow: {
-      transform: [
-        { rotateY: '180deg' },
-      ],
+      transform: [{ rotateY: '180deg' }],
     },
     senderAndRecipient: {
       marginBottom: 10,

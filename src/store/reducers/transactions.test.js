@@ -32,14 +32,25 @@ describe('Reducers: Transactions', () => {
   });
 
   it('should unshift new transactions to pending list in case of actionTypes.transactionAdded', () => {
-    const action = { type: actionTypes.pendingTransactionAdded, data: transaction1 };
+    const action = {
+      type: actionTypes.pendingTransactionAdded,
+      data: transaction1,
+    };
     const changedState = transactions(emptyState, action);
     expect(changedState.pending).toEqual([transaction1]);
   });
 
   it('should remove pending transaction if already confirmed in case of actionTypes.transactionsUpdated', () => {
-    const currentState = { pending: [transaction2], confirmed: [transaction1], count: 2 };
-    const expectedState = { pending: [], confirmed: [transaction1, transaction2], count: 3 };
+    const currentState = {
+      pending: [transaction2],
+      confirmed: [transaction1],
+      count: 2,
+    };
+    const expectedState = {
+      pending: [],
+      confirmed: [transaction1, transaction2],
+      count: 3,
+    };
     const action = {
       type: actionTypes.transactionsUpdated,
       data: { confirmed: [transaction1, transaction2], count: 3 },
@@ -49,14 +60,22 @@ describe('Reducers: Transactions', () => {
   });
 
   it('should revert to empty state in case of actionTypes.transactionsReset', () => {
-    const state = { pending: [], confirmed: [transaction1, transaction2], count: 10 };
+    const state = {
+      pending: [],
+      confirmed: [transaction1, transaction2],
+      count: 10,
+    };
     const action = { type: actionTypes.transactionsReset };
     const changedState = transactions(state, action);
     expect(changedState).toEqual(emptyState);
   });
 
   it('should revert to empty state in case of actionTypes.accountSignedOut', () => {
-    const state = { pending: [], confirmed: [transaction1, transaction2], count: 10 };
+    const state = {
+      pending: [],
+      confirmed: [transaction1, transaction2],
+      count: 10,
+    };
     const action = { type: actionTypes.accountSignedOut };
     const changedState = transactions(state, action);
     expect(changedState).toEqual(emptyState);

@@ -16,11 +16,11 @@ class SignOutModal extends React.Component {
     removePassphraseFromKeyChain();
     this.props.modalCallback();
     this.props.close();
-  }
+  };
 
   onCancel = () => {
     this.props.close();
-  }
+  };
 
   render() {
     const { styles, settings, t } = this.props;
@@ -35,7 +35,9 @@ class SignOutModal extends React.Component {
       content = (
         <Fragment>
           <Small style={[styles.text, styles.theme.text]}>
-            {t('Signing out will disable bioAuth for the Lisk App.', { sensorType: settings.sensorType })}
+            {t('Signing out will disable bioAuth for the Lisk App.', {
+              sensorType: settings.sensorType,
+            })}
           </Small>
 
           <Small style={[styles.text, styles.theme.text]}>
@@ -55,10 +57,7 @@ class SignOutModal extends React.Component {
           title={t('Confirm')}
         />
 
-        <A
-          onPress={this.onCancel}
-          style={styles.theme.cancelButton}
-        >
+        <A onPress={this.onCancel} style={styles.theme.cancelButton}>
           {t('Cancel')}
         </A>
       </View>

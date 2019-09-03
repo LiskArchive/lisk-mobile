@@ -10,9 +10,7 @@ import {
   blockUpdated as blockUpdatedAction,
   accountFetched as accountFetchedAction,
 } from '../../../../actions/accounts';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../../../actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from '../../../../actions/settings';
 import ModalHolder from '../../../../utilities/modal';
 import AccountSummary from './accountSummary/home';
 import Transactions from '../../../shared/transactions';
@@ -40,44 +38,52 @@ const summaryHeight = 200;
  * @todo Implement custom message: this can be used in case we need to notify the user
  * about any unforeseen issue/change
  */
-@connect(state => ({
-  account: state.accounts.info || {},
-  transactions: state.transactions,
-  incognito: state.settings.incognito,
-  activeToken: state.settings.token.active,
-  btcIntroShown: state.settings.btcIntroShown,
-  settings: state.settings,
-}), {
-  transactionsLoaded: transactionsLoadedAction,
-  transactionsReset: transactionsResetAction,
-  updateTransactions: blockUpdatedAction,
-  accountFetched: accountFetchedAction,
-  settingsUpdated: settingsUpdatedAction,
-})
+@connect(
+  state => ({
+    account: state.accounts.info || {},
+    transactions: state.transactions,
+    incognito: state.settings.incognito,
+    activeToken: state.settings.token.active,
+    btcIntroShown: state.settings.btcIntroShown,
+    settings: state.settings,
+  }),
+  {
+    transactionsLoaded: transactionsLoadedAction,
+    transactionsReset: transactionsResetAction,
+    updateTransactions: blockUpdatedAction,
+    accountFetched: accountFetchedAction,
+    settingsUpdated: settingsUpdatedAction,
+  }
+)
 class Home extends React.Component {
   state = {
     footer: null,
-  }
+  };
   scrollY = new Animated.Value(0);
   scrollView = null;
   lastActiveToken = null;
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
-    return ({
-      headerTitle: <HomeHeaderTitle scrollToTop={params.scrollToTop} data={params.title} />,
+    return {
+      headerTitle: (
+        <HomeHeaderTitle scrollToTop={params.scrollToTop} data={params.title} />
+      ),
       headerStyle: {
         backgroundColor: 'transparent',
         overflow: 'hidden',
         borderBottomWidth: 0,
         elevation: 0,
       },
-    });
-  }
+    };
+  };
 
   setHeader = () => {
     const {
-      activeToken, navigation: { setParams }, account, incognito,
+      activeToken,
+      navigation: { setParams },
+      account,
+      incognito,
     } = this.props;
 
     setParams({
@@ -91,20 +97,20 @@ class Home extends React.Component {
         incognito,
       },
     });
-  }
+  };
 
   scrollToTop = () => {
     if (this.scrollView) {
       this.scrollView.scrollTo(0);
     }
-  }
+  };
 
   bindInfiniteScroll = () => {
     // set param on tab navigator (parent of stack navigator)
     this.props.navigation.dangerouslyGetParent().setParams({
       scrollToTop: () => this.scrollToTop(),
     });
-  }
+  };
 
   resetTxAndFetch = () => {
     const {
@@ -123,17 +129,22 @@ class Home extends React.Component {
         offset: 0,
       });
     }, 200);
-  }
+  };
 
   onScroll() {
-    return Animated.event([{
-      nativeEvent: { contentOffset: { y: this.scrollY } },
-    }]);
+    return Animated.event([
+      {
+        nativeEvent: { contentOffset: { y: this.scrollY } },
+      },
+    ]);
   }
 
   loadMore = () => {
     const {
-      activeToken, account, transactionsLoaded, transactions,
+      activeToken,
+      account,
+      transactionsLoaded,
+      transactions,
     } = this.props;
 
     if (account[activeToken]) {
@@ -142,13 +153,13 @@ class Home extends React.Component {
         offset: transactions.confirmed.length,
       });
     }
-  }
+  };
 
   refreshAccountAndTx = () => {
     this.lastActiveToken = this.props.activeToken;
     this.resetTxAndFetch();
     this.props.accountFetched();
-  }
+  };
 
   showIntroModal = () => {
     if (!this.props.btcIntroShown) {
@@ -160,12 +171,11 @@ class Home extends React.Component {
         this.props.settingsUpdated({ btcIntroShown: true });
       }, 1200);
     }
-  }
+  };
 
   showInitializationModal = () => {
     const { account, activeToken, transactions } = this.props;
     const balance = parseFloat(fromRawLsk(account[tokenMap.LSK.key].balance));
-
 
     if (
       activeToken === tokenMap.LSK.key &&
@@ -176,10 +186,11 @@ class Home extends React.Component {
       ModalHolder.open({
         title: 'Initialize your account',
         component: InitializationModal,
-        callback: () => this.props.navigation.navigate('Send', { initialize: true }),
+        callback: () =>
+          this.props.navigation.navigate('Send', { initialize: true }),
       });
     }
-  }
+  };
 
   screenWillFocus = () => {
     if (this.lastActiveToken === null) {
@@ -193,12 +204,17 @@ class Home extends React.Component {
       this.setHeader();
     }
 
-    setTimeout(() => { this.showInitializationModal(); }, 1200);
-  }
+    setTimeout(() => {
+      this.showInitializationModal();
+    }, 1200);
+  };
 
   componentDidMount() {
     const {
-      navigation: { addListener, state }, navigation, settingsUpdated, incognito,
+      navigation: { addListener, state },
+      navigation,
+      settingsUpdated,
+      incognito,
     } = this.props;
     addListener('willFocus', this.screenWillFocus);
 
@@ -215,27 +231,33 @@ class Home extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
-      transactions, account, incognito,
-      activeToken, isFocused, settings: { token: { list } },
+      transactions,
+      account,
+      incognito,
+      activeToken,
+      isFocused,
+      settings: {
+        token: { list },
+      },
     } = this.props;
     const prevTokenList = prevProps.settings.token.list;
 
-    const prevTransactionCount = (
-      prevProps.transactions.pending.length + prevProps.transactions.confirmed.length
-    );
+    const prevTransactionCount =
+      prevProps.transactions.pending.length +
+      prevProps.transactions.confirmed.length;
 
-    const transactionCount = (
-      transactions.pending.length + transactions.confirmed.length
-    );
+    const transactionCount =
+      transactions.pending.length + transactions.confirmed.length;
 
-    const shouldUpdateState = (
-      (prevProps.transactions.loaded !== transactions.loaded) ||
-      (prevTransactionCount !== transactionCount)
-    );
+    const shouldUpdateState =
+      prevProps.transactions.loaded !== transactions.loaded ||
+      prevTransactionCount !== transactionCount;
 
     if (shouldUpdateState) {
       this.setState({
-        footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount,
+        footer:
+          Math.floor((viewportHeight() - summaryHeight) / itemHeight) <
+          transactionCount,
       });
     }
 
@@ -244,8 +266,8 @@ class Home extends React.Component {
     }
 
     if (
-      (prevProps.account[activeToken].balance !== account[activeToken].balance) ||
-      (prevProps.incognito !== incognito)
+      prevProps.account[activeToken].balance !== account[activeToken].balance ||
+      prevProps.incognito !== incognito
     ) {
       this.setHeader();
     }
@@ -262,15 +284,17 @@ class Home extends React.Component {
     clearTimeout(this.accountFetchTimeout);
   }
 
-  shouldFetchAccounts = (prevList, newList) => Object.keys(prevList).some(token =>
-    newList[token] !== prevList[token]);
+  shouldFetchAccounts = (prevList, newList) =>
+    Object.keys(prevList).some(token => newList[token] !== prevList[token]);
 
   fetchInactiveTokensAccounts() {
     const { activeToken, accountFetched, settings } = this.props;
-    const inactiveTokens = tokenKeys.filter(key => settings.token.list[key] && key !== activeToken);
+    const inactiveTokens = tokenKeys.filter(
+      key => settings.token.list[key] && key !== activeToken
+    );
 
     if (inactiveTokens.length > 0) {
-      inactiveTokens.forEach((token) => {
+      inactiveTokens.forEach(token => {
         accountFetched(token);
       });
     }
@@ -293,13 +317,16 @@ class Home extends React.Component {
     if (!transactions.loaded) {
       content = <Loading style={styles.loadingState} />;
     } else {
-      const listElements = transactions.count > 0 ?
-        [...transactions.pending, ...transactions.confirmed] :
-        ['emptyState'];
+      const listElements =
+        transactions.count > 0
+          ? [...transactions.pending, ...transactions.confirmed]
+          : ['emptyState'];
 
       content = (
         <InfiniteScrollView
-          ref={(el) => { this.scrollView = el; }}
+          ref={el => {
+            this.scrollView = el;
+          }}
           scrollEventThrottle={8}
           onScroll={this.onScroll.call(this)}
           style={[styles.scrollView]}
@@ -307,35 +334,41 @@ class Home extends React.Component {
           loadMore={this.loadMore}
           list={listElements}
           count={transactions.count}
-          render={refreshing => (
+          render={refreshing =>
             transactions.count > 0 ? (
               <Transactions
-                type='home'
+                type="home"
                 transactions={transactions}
                 footer={this.state.footer}
                 navigate={navigation.push}
                 account={account[activeToken]}
                 refreshing={refreshing}
               />
-            ) : <Empty refreshing={refreshing} />
-          )}
+            ) : (
+              <Empty refreshing={refreshing} />
+            )
+          }
         />
       );
     }
-    const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
+    const otherPageStatusBar =
+      theme === themes.light ? 'dark-content' : 'light-content';
     return (
       <View style={[styles.container, styles.theme.container]}>
-        {
-          Platform.OS !== 'ios' ?
-            <StatusBar barStyle='light-content' /> :
-            <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
-        }
+        {Platform.OS !== 'ios' ? (
+          <StatusBar barStyle="light-content" />
+        ) : (
+          <StatusBar
+            barStyle={isFocused ? 'light-content' : otherPageStatusBar}
+          />
+        )}
         <AccountSummary
           navigation={navigation}
           scrollY={this.scrollY}
           isFocused={isFocused}
-          style={styles.accountSummary} />
-        { content }
+          style={styles.accountSummary}
+        />
+        {content}
       </View>
     );
   }

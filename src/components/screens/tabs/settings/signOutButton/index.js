@@ -5,11 +5,9 @@ import { colors } from '../../../../../constants/styleGuide';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 
-const SignOutButton = ({
-  onClick, theme, styles, t,
-}) => (
+const SignOutButton = ({ onClick, theme, styles, t }) => (
   <IconButton
-    icon='logout'
+    icon="logout"
     iconSize={18}
     title={t('Sign out')}
     color={colors[theme].ultramarineBlue}

@@ -37,9 +37,13 @@ const getMappedFunction = (tokenType, resourceName, functionName) => {
       return fn;
     }
 
-    throw new Error(`${tokenType} doesn't match a function for ${resourceName}.${functionName}.`);
+    throw new Error(
+      `${tokenType} doesn't match a function for ${resourceName}.${functionName}.`
+    );
   } catch (error) {
-    throw new Error(`Invalid mapper path for ${tokenType} - ${resourceName}.${functionName}.`);
+    throw new Error(
+      `Invalid mapper path for ${tokenType} - ${resourceName}.${functionName}.`
+    );
   }
 };
 

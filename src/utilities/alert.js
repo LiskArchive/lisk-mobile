@@ -1,5 +1,5 @@
 export default class DropDownHolder {
-  static dropDown
+  static dropDown;
 
   static initialize(dropDown) {
     this.dropDown = dropDown;

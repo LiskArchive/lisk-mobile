@@ -18,8 +18,8 @@ class BiometricAuth extends React.Component {
   state = {
     opacity: new Animated.Value(0),
     tried: false,
-    busy: false,
-  }
+    busy: false
+  };
   progress = new Animated.Value(0);
   animationLoop = true;
 
@@ -27,7 +27,7 @@ class BiometricAuth extends React.Component {
     const value = this.progress._value;
     Animated.timing(this.progress, {
       toValue: value === 0 ? 1 : 0,
-      duration: 2000,
+      duration: 2000
     }).start(() => {
       if (this.animationLoop) {
         this.runAnimation();
@@ -42,7 +42,7 @@ class BiometricAuth extends React.Component {
       this.animationLoop = false;
       this.unAuthAnimEl.play();
     });
-  }
+  };
 
   onClick = () => {
     this.setState({ busy: true }, () => {
@@ -57,30 +57,31 @@ class BiometricAuth extends React.Component {
           });
         },
         errorCallback: () => this.setState({ busy: false }),
-        androidError: this.playUnAuthorizedAnimation,
+        androidError: this.playUnAuthorizedAnimation
       });
     });
-  }
+  };
 
   onCreateAccount = () => {
     this.props.navigation.navigate('Register');
-  }
+  };
 
   componentDidMount() {
     this.startUpAnimEl.play();
 
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: this.props.animate ? 300 : 0,
+      duration: this.props.animate ? 300 : 0
     }).start();
 
     Animated.timing(this.progress, {
       toValue: 1,
-      duration: 2500,
+      duration: 2500
     }).start();
   }
 
-  componentWillUnmount() { // eslint-disable-line
+  // eslint-disable-next-line class-methods-use-this
+  componentWillUnmount() {
     FingerprintScanner.release();
   }
 
@@ -90,33 +91,37 @@ class BiometricAuth extends React.Component {
 
     let pageTitle = t('Choose an authentication method.');
     if (busy) {
-      pageTitle = sensorType === 'Face ID' ?
-        t('Look at the front camera to authenticate.') :
-        t('Place your finger over the touch sensor to authenticate.');
+      pageTitle =
+        sensorType === 'Face ID'
+          ? t('Look at the front camera to authenticate.')
+          : t('Place your finger over the touch sensor to authenticate.');
     }
 
     return (
       <View style={styles.container}>
-        <Title opacity={opacity}>
-          {pageTitle}
-        </Title>
+        <Title opacity={opacity}>{pageTitle}</Title>
 
         <View style={styles.waves}>
-          {tried ?
+          {tried ? (
             <LottieView
               source={wavesError}
               loop={false}
               style={{}}
-              ref={(el) => { this.unAuthAnimEl = el; }}
-            /> :
+              ref={el => {
+                this.unAuthAnimEl = el;
+              }}
+            />
+          ) : (
             <LottieView
               source={waves}
               loop={false}
               style={{}}
               progress={this.progress}
-              ref={(el) => { this.startUpAnimEl = el; }}
+              ref={el => {
+                this.startUpAnimEl = el;
+              }}
             />
-          }
+          )}
 
           <Animated.View style={{ opacity }}>
             <Icon
@@ -129,14 +134,24 @@ class BiometricAuth extends React.Component {
         </View>
 
         <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
-          <P style={[styles.question, styles.fillWidth, tried ? styles.error : styles.invisible]}>
+          <P
+            style={[
+              styles.question,
+              styles.fillWidth,
+              tried ? styles.error : styles.invisible
+            ]}
+          >
             {t('Unauthorized! Please try again.')}
           </P>
 
           <View style={styles.column}>
             <PrimaryButton
               style={styles.button}
-              title={busy ? t('Signing in...') : t('Sign in using bioAuth', { sensorType })}
+              title={
+                busy
+                  ? t('Signing in...')
+                  : t('Sign in using bioAuth', { sensorType })
+              }
               onClick={this.onClick}
               disabled={busy}
               noTheme={true}
@@ -149,10 +164,7 @@ class BiometricAuth extends React.Component {
               noTheme={true}
             />
 
-            <CreateAccount
-              onPress={this.onCreateAccount}
-              opacity={opacity}
-            />
+            <CreateAccount onPress={this.onCreateAccount} opacity={opacity} />
           </View>
         </Animated.View>
       </View>

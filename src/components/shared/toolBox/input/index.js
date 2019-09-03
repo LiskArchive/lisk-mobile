@@ -8,31 +8,41 @@ import getStyles from './styles';
 class Input extends React.Component {
   state = {
     isFocused: false,
-  }
+  };
 
-  onFocus = (e) => {
+  onFocus = e => {
     this.setState({ isFocused: true });
 
     if (typeof this.props.onFocus === 'function') {
       this.props.onFocus(e);
     }
-  }
+  };
 
-  onBlur = (e) => {
+  onBlur = e => {
     this.setState({ isFocused: false });
 
     if (typeof this.props.onBlur === 'function') {
       this.props.onBlur(e);
     }
-  }
+  };
 
   render() {
     const {
-      reference, innerStyles,
-      label, styles, theme, value, onChange, error,
-      multiline, autoFocus, autoCorrect,
-      keyboardType, secureTextEntry,
-      placeholder, testID,
+      reference,
+      innerStyles,
+      label,
+      styles,
+      theme,
+      value,
+      onChange,
+      error,
+      multiline,
+      autoFocus,
+      autoCorrect,
+      keyboardType,
+      secureTextEntry,
+      placeholder,
+      testID,
     } = this.props;
 
     let { keyboardAppearance } = this.props;
@@ -40,11 +50,7 @@ class Input extends React.Component {
       keyboardAppearance = theme === themes.dark ? 'dark' : 'light';
     }
 
-    let inputStyle = [
-      styles.input,
-      styles.theme.input,
-      innerStyles.input,
-    ];
+    let inputStyle = [styles.input, styles.theme.input, innerStyles.input];
 
     if (this.state.isFocused) {
       inputStyle = [
@@ -55,25 +61,27 @@ class Input extends React.Component {
     }
 
     if (error) {
-      inputStyle = [
-        ...inputStyle,
-        styles.theme.inputErrorStyle,
-      ];
+      inputStyle = [...inputStyle, styles.theme.inputErrorStyle];
     }
 
     return (
       <View style={[styles.inputContainer, innerStyles.containerStyle]}>
         {label ? (
-          <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
+          <Text
+            style={[
+              styles.inputLabel,
+              styles.theme.inputLabel,
+              innerStyles.inputLabel,
+            ]}
+          >
             {label}
           </Text>
-          ) : null
-        }
+        ) : null}
 
         <TextInput
           testID={testID}
           style={inputStyle}
-          autoCapitalize='none'
+          autoCapitalize="none"
           multiline={multiline}
           ref={input => reference(input)}
           value={value}
@@ -90,12 +98,10 @@ class Input extends React.Component {
         />
 
         {error ? (
-          <View style={[styles.errorMessageContainer, innerStyles.errorMessage]}>
-            <Icon
-              size={16}
-              name='error'
-              style={[styles.theme.errorIcon]}
-            />
+          <View
+            style={[styles.errorMessageContainer, innerStyles.errorMessage]}
+          >
+            <Icon size={16} name="error" style={[styles.theme.errorIcon]} />
             <Text style={[styles.errorMessage, styles.theme.errorMessage]}>
               {error}
             </Text>

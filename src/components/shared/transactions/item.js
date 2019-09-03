@@ -15,10 +15,15 @@ import Blur from './blur';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
-const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
+const txTypes = [
+  'accountInitialization',
+  'setSecondPassphrase',
+  'registerDelegate',
+  'vote',
+];
 
 @connect(state => ({
-  language: state.settings.language
+  language: state.settings.language,
 }))
 class Item extends React.Component {
   componentDidMount() {
@@ -28,14 +33,12 @@ class Item extends React.Component {
   }
 
   showDetail = () => {
-    const {
-      navigate, tx, account, incognito,
-    } = this.props;
+    const { navigate, tx, account, incognito } = this.props;
 
     navigate('TxDetail', { tx, account, incognito });
-  }
+  };
 
-  getAddressText = (address) => {
+  getAddressText = address => {
     const { t } = this.props;
 
     if (address === 'Unparsed Address') {
@@ -43,12 +46,19 @@ class Item extends React.Component {
     }
 
     return stringShortener(address, 10, 3);
-  }
+  };
 
   render() {
     const {
-      styles, theme, tx, t, activeToken,
-      account, followedAccounts, incognito, language,
+      styles,
+      theme,
+      tx,
+      t,
+      activeToken,
+      account,
+      followedAccounts,
+      incognito,
+      language,
     } = this.props;
 
     let direction = 'incoming';
@@ -61,81 +71,90 @@ class Item extends React.Component {
 
     let addressText = this.getAddressText(address);
 
-    const followedAccount = followedAccounts[activeToken].find(fa => fa.address === address);
+    const followedAccount = followedAccounts[activeToken].find(
+      fa => fa.address === address
+    );
     if (followedAccount) {
       addressText = followedAccount.label;
     }
 
-    const amount = direction === 'incoming' ? fromRawLsk(tx.amount) : `-${fromRawLsk(tx.amount)}`;
+    const amount =
+      direction === 'incoming'
+        ? fromRawLsk(tx.amount)
+        : `-${fromRawLsk(tx.amount)}`;
 
     return (
       <TouchableOpacity
         style={[styles.itemContainer, styles.theme.itemContainer]}
-        onPress={this.showDetail}>
+        onPress={this.showDetail}
+      >
         <View style={styles.innerContainer}>
-        <View style={[styles.itemColumn, styles.avatarContainer]}>
-          <Symbol
-            token={activeToken}
-            theme={theme}
-            type={tx.type}
-            direction={direction}
-            sender={tx.senderAddress}
-            recipient={tx.recipientAddress}
-            address={address}
+          <View style={[styles.itemColumn, styles.avatarContainer]}>
+            <Symbol
+              token={activeToken}
+              theme={theme}
+              type={tx.type}
+              direction={direction}
+              sender={tx.senderAddress}
+              recipient={tx.recipientAddress}
+              address={address}
             />
-        </View>
-        <View style={styles.column}>
-          <B style={[styles.address, styles.theme.address]}>
-            {
-              (activeToken === 'LSK' &&
-              (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)) ?
-              t(transactions[txTypes[tx.type]].title) :
-              addressText
-            }
-          </B>
-          {
-            typeof this.props.tx.timestamp !== 'number' ?
-            <Small style={[styles.date, styles.theme.date]}>
-              {t('Pending confirmation')}
-            </Small> :
-            <FormattedDate locale={language} type={Small} style={[styles.date, styles.theme.date]}>
-              {tx.timestamp}
-            </FormattedDate>
-          }
-        </View>
+          </View>
+          <View style={styles.column}>
+            <B style={[styles.address, styles.theme.address]}>
+              {activeToken === 'LSK' &&
+              (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)
+                ? t(transactions[txTypes[tx.type]].title)
+                : addressText}
+            </B>
+            {typeof this.props.tx.timestamp !== 'number' ? (
+              <Small style={[styles.date, styles.theme.date]}>
+                {t('Pending confirmation')}
+              </Small>
+            ) : (
+              <FormattedDate
+                locale={language}
+                type={Small}
+                style={[styles.date, styles.theme.date]}
+              >
+                {tx.timestamp}
+              </FormattedDate>
+            )}
+          </View>
         </View>
         {tx.type === 0 && (
           <View style={[styles.column, styles.amountWrapper]}>
-            {
-              (activeToken === 'LSK' && tx.recipientAddress === tx.senderAddress) || incognito ?
-                null :
-                <View style={[styles[direction], styles.theme[direction]]}>
-                  <FormattedNumber
-                    trim={true}
-                    tokenType={activeToken}
-                    type={B}
-                    style={[styles[`${direction}Amount`], styles.theme[`${direction}Amount`]]}
-                  >
-                    {amount}
-                  </FormattedNumber>
-                </View>
-            }
-            {
-              tx.recipientAddress !== tx.senderAddress && incognito ?
-                <Blur value={amount} direction={direction} /> :
-                null
-            }
-            {
-              typeof tx.timestamp !== 'number' ?
-                <View style={styles.pendingIcon}>
-                  <LottieView
-                    source={loadingAnimation}
-                    ref={(el) => { this.animation = el; }}
-                    style={{}}
-                  />
-                </View> :
-                null
-            }
+            {(activeToken === 'LSK' &&
+              tx.recipientAddress === tx.senderAddress) ||
+            incognito ? null : (
+              <View style={[styles[direction], styles.theme[direction]]}>
+                <FormattedNumber
+                  trim={true}
+                  tokenType={activeToken}
+                  type={B}
+                  style={[
+                    styles[`${direction}Amount`],
+                    styles.theme[`${direction}Amount`],
+                  ]}
+                >
+                  {amount}
+                </FormattedNumber>
+              </View>
+            )}
+            {tx.recipientAddress !== tx.senderAddress && incognito ? (
+              <Blur value={amount} direction={direction} />
+            ) : null}
+            {typeof tx.timestamp !== 'number' ? (
+              <View style={styles.pendingIcon}>
+                <LottieView
+                  source={loadingAnimation}
+                  ref={el => {
+                    this.animation = el;
+                  }}
+                  style={{}}
+                />
+              </View>
+            ) : null}
           </View>
         )}
       </TouchableOpacity>

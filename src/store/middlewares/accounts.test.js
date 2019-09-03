@@ -37,6 +37,9 @@ describe('Middleware: Accounts', () => {
     storageUtility.storeFollowedAccount = jest.fn();
 
     accountsMiddleware(store)(next)(action);
-    expect(storageUtility.storeFollowedAccount).toBeCalledWith([accountA, accountB]);
+    expect(storageUtility.storeFollowedAccount).toBeCalledWith([
+      accountA,
+      accountB,
+    ]);
   });
 });

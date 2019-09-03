@@ -6,10 +6,12 @@ const finder = find('./node_modules');
 const sdkVersion = 'compileSdkVersion 28';
 const buildToolsVersion = 'buildToolsVersion "28.0.3"';
 
-const RNOScompileSdkVersion = "compileSdkVersion safeExtGet('compileSdkVersion', 23)";
-const RNOSbuildToolsVersion = "buildToolsVersion safeExtGet('buildToolsVersion', 23)";
+const RNOScompileSdkVersion =
+  "compileSdkVersion safeExtGet('compileSdkVersion', 23)";
+const RNOSbuildToolsVersion =
+  "buildToolsVersion safeExtGet('buildToolsVersion', 23)";
 
-finder.on('file', (file) => {
+finder.on('file', file => {
   if (file.match(/.build.gradle/)) {
     fs.readFile(file, 'utf8', (err, data) => {
       if (err) throw err;

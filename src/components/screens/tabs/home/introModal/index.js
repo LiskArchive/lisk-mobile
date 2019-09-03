@@ -9,9 +9,7 @@ import getStyles from './styles';
 import { tokenMap } from '../../../../../constants/tokens';
 import { colors } from '../../../../../constants/styleGuide';
 
-const IntroModal = ({
-  close, styles, t, theme,
-}) => (
+const IntroModal = ({ close, styles, t, theme }) => (
   <View style={styles.container}>
     <View style={[styles.tokenLogoWrapper, styles.theme.tokenLogoWrapper]}>
       <Icon

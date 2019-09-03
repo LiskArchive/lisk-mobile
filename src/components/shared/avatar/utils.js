@@ -33,63 +33,69 @@ import crypto from 'crypto';
  * the first option has 4/10 chance and each of other two has 3/10 chance.
  */
 
-const computeTriangle = props => (
-  {
-    points: [{
+const computeTriangle = props => ({
+  points: [
+    {
       x: props.x,
       y: props.y,
-    }, {
+    },
+    {
       x: props.x + props.size,
-      y: props.y + (props.size / 4),
-    }, {
-      x: props.x + (props.size / 4),
+      y: props.y + props.size / 4,
+    },
+    {
+      x: props.x + props.size / 4,
       y: props.y + props.size,
     },
-    ].map(({ x, y }) => (`${x},${y}`)).join(' '),
-  }
-);
+  ]
+    .map(({ x, y }) => `${x},${y}`)
+    .join(' '),
+});
 
-const computePentagon = props => (
-  {
-    points: [{
-      x: props.x + (props.size / 2),
+const computePentagon = props => ({
+  points: [
+    {
+      x: props.x + props.size / 2,
       y: props.y,
-    }, {
-      x: props.x + props.size,
-      y: props.y + (props.size / 2.5),
-    }, {
-      x: props.x + (props.size - (props.size / 5)),
-      y: props.y + props.size,
-    }, {
-      x: props.x + (props.size / 5),
-      y: props.y + props.size,
-    }, {
-      x: props.x,
-      y: props.y + (props.size / 2.5),
     },
-    ].map(({ x, y }) => (`${x},${y}`)).join(' '),
-  }
-);
+    {
+      x: props.x + props.size,
+      y: props.y + props.size / 2.5,
+    },
+    {
+      x: props.x + (props.size - props.size / 5),
+      y: props.y + props.size,
+    },
+    {
+      x: props.x + props.size / 5,
+      y: props.y + props.size,
+    },
+    {
+      x: props.x,
+      y: props.y + props.size / 2.5,
+    },
+  ]
+    .map(({ x, y }) => `${x},${y}`)
+    .join(' '),
+});
 
 export const getShape = (chunk, size, gradient, sizeScale = 1) => {
-  const shapeNames = [
-    'circle', 'triangle', 'square',
-  ];
+  const shapeNames = ['circle', 'triangle', 'square'];
 
-  const sizes = [
-    1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1,
-  ].map(x => x * size * sizeScale);
+  const sizes = [1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1].map(
+    x => x * size * sizeScale
+  );
 
-  const coordinates = [
-    5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-  ].map(x => x * (size / 40));
+  const coordinates = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(
+    x => x * (size / 40)
+  );
 
   const shapes = {
     circle: {
       component: Circle,
       props: {
-        cx: coordinates[chunk[1]] + (sizes[chunk[3]] / 2),
-        cy: coordinates[chunk[2]] + (sizes[chunk[3]] / 2),
+        cx: coordinates[chunk[1]] + sizes[chunk[3]] / 2,
+        cy: coordinates[chunk[2]] + sizes[chunk[3]] / 2,
         r: sizes[chunk[3]] / 2,
       },
     },
@@ -130,7 +136,8 @@ export const getShape = (chunk, size, gradient, sizeScale = 1) => {
   };
 
   return {
-    component: shapes[shapeNames[chunk.substr(0, 2) % shapeNames.length]].component,
+    component:
+      shapes[shapeNames[chunk.substr(0, 2) % shapeNames.length]].component,
     props: {
       ...shapes[shapeNames[chunk.substr(0, 2) % shapeNames.length]].props,
       fill: gradient.url,
@@ -143,27 +150,31 @@ export const getShape = (chunk, size, gradient, sizeScale = 1) => {
 export const getBackgroundCircle = (size, gradient) => ({
   component: Circle,
   props: {
-    cx: (size / 2),
-    cy: (size / 2),
-    r: (size / 2),
+    cx: size / 2,
+    cy: size / 2,
+    r: size / 2,
     fill: gradient.url,
   },
 });
 
-export const pickTwo = (chunk, options) => ([
+export const pickTwo = (chunk, options) => [
   options[chunk.substr(0, 2) % options.length],
-  options[(
-    (chunk.substr(0, 2) - 0) + 1 + (chunk.substr(2, 2) % (options.length - 1))
-  ) % options.length],
-]);
+  options[
+    (chunk.substr(0, 2) - 0 + 1 + (chunk.substr(2, 2) % (options.length - 1))) %
+      options.length
+  ],
+];
 
-export const getHashChunks = (address) => {
+export const getHashChunks = address => {
   const hash = crypto.createHash('sha256');
-  const addressHash = new BigNumber(`0x${hash.update(address).digest('hex')}`).toString().substr(3);
+  const addressHash = new BigNumber(`0x${hash.update(address).digest('hex')}`)
+    .toString()
+    .substr(3);
   return addressHash.match(/\d{5}/g);
 };
 
-export const randomId = () => `avatar-${[1, 2, 3, 4].map(() => Math.random() * 100).join('')}`;
+export const randomId = () =>
+  `avatar-${[1, 2, 3, 4].map(() => Math.random() * 100).join('')}`;
 
 export const replaceUrlByHashOnScheme = (uniqueSvgUrlHash, gradientScheme) => ({
   ...gradientScheme,

@@ -8,10 +8,11 @@ import { themes } from '../../../constants/styleGuide';
 
 const LoadingState = ({ theme, styles, style = {} }) => (
   <View style={[styles.loadingState, style]}>
-    {theme === themes.light ?
-      <Image source={noActivityLight} style={styles.loading} /> :
+    {theme === themes.light ? (
+      <Image source={noActivityLight} style={styles.loading} />
+    ) : (
       <Image source={noActivityDark} style={styles.loading} />
-    }
+    )}
   </View>
 );
 

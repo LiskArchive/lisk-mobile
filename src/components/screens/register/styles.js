@@ -56,7 +56,7 @@ const styles = {
   backButton: {
     width: 60,
     height: 40,
-    marginTop: (Platform.OS === 'ios') ? -4 : 8,
+    marginTop: Platform.OS === 'ios' ? -4 : 8,
   },
   logo: {
     lineHeight: 40,

@@ -12,23 +12,23 @@ const closeConnection = () => {
   BackgroundTimer.stopBackgroundTimer();
 };
 
-export const checkBalance = (store) => {
+export const checkBalance = store => {
   const activeToken = store.getState().settings.token.active;
   const { address, balance } = store.getState().accounts.info[activeToken];
-  return accountAPI.getSummary(activeToken, { address }).then((res) => {
+  return accountAPI.getSummary(activeToken, { address }).then(res => {
     if (res.balance !== balance) {
       store.dispatch(blockUpdated());
     }
   });
 };
 
-const socketSetup = (store) => {
+const socketSetup = store => {
   BackgroundTimer.runBackgroundTimer(() => {
     checkBalance(store);
   }, 30000);
 };
 
-const socketMiddleware = store => next => (action) => {
+const socketMiddleware = store => next => action => {
   next(action);
   switch (action.type) {
     case actionTypes.accountSignedIn:
@@ -37,7 +37,8 @@ const socketMiddleware = store => next => (action) => {
     case actionTypes.accountSignedOut:
       closeConnection();
       break;
-    default: break;
+    default:
+      break;
   }
 };
 

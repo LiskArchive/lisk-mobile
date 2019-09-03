@@ -8,7 +8,11 @@ import PassphraseCopy from '../../shared/passphraseCopy';
 import { themes, colors } from '../../../constants/styleGuide';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
-import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from '../../../utilities/device';
+import {
+  deviceWidth,
+  deviceHeight,
+  SCREEN_HEIGHTS,
+} from '../../../utilities/device';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
@@ -18,9 +22,7 @@ const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 }))
 class PassphraseBackup extends React.Component {
   render() {
-    const {
-      styles, passphrase, theme,
-    } = this.props;
+    const { styles, passphrase, theme } = this.props;
 
     return (
       <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
@@ -34,7 +36,9 @@ class PassphraseBackup extends React.Component {
                 theme === themes.light ? colors.light.black : colors.dark.white
               }
               backgroundColor={
-                theme === themes.light ? colors.light.white : colors.dark.maastrichtBlue
+                theme === themes.light
+                  ? colors.light.white
+                  : colors.dark.maastrichtBlue
               }
             />
           </View>

@@ -6,7 +6,7 @@ import {
   View,
   Alert,
   Platform,
-  DeviceEventEmitter,
+  DeviceEventEmitter
 } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
@@ -17,15 +17,15 @@ import styles from './styles';
 import {
   getPassphraseFromKeyChain,
   storePassphraseInKeyChain,
-  bioMetricAuthentication,
+  bioMetricAuthentication
 } from '../../../utilities/passphrase';
 import {
   accountSignedIn as accountSignedInAction,
-  accountFetched as accountFetchedAction,
+  accountFetched as accountFetchedAction
 } from '../../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
-  settingsRetrieved as settingsRetrievedAction,
+  settingsRetrieved as settingsRetrievedAction
 } from '../../../actions/settings';
 import { pricesRetrieved as pricesRetrievedAction } from '../../../actions/service';
 import Splash from './splash';
@@ -37,16 +37,19 @@ import quickActionsList from '../../../constants/quickActions';
 // there is a warning in RNOS module. remove this then that warning is fixed
 console.disableYellowBox = true; // eslint-disable-line
 
-@connect(state => ({
-  accounts: state.accounts,
-  settings: state.settings,
-}), {
-  accountSignedIn: accountSignedInAction,
-  accountFetched: accountFetchedAction,
-  settingsUpdated: settingsUpdatedAction,
-  settingsRetrieved: settingsRetrievedAction,
-  pricesRetrieved: pricesRetrievedAction,
-})
+@connect(
+  state => ({
+    accounts: state.accounts,
+    settings: state.settings
+  }),
+  {
+    accountSignedIn: accountSignedInAction,
+    accountFetched: accountFetchedAction,
+    settingsUpdated: settingsUpdatedAction,
+    settingsRetrieved: settingsRetrievedAction,
+    pricesRetrieved: pricesRetrievedAction
+  }
+)
 class SignIn extends React.Component {
   deepLinkURL = '';
   state = {
@@ -55,32 +58,32 @@ class SignIn extends React.Component {
     view: 'splash',
     androidDialog: {
       error: null,
-      show: false,
-    },
-  }
+      show: false
+    }
+  };
 
   init = () => {
     this.defineDefaultAuthMethod();
     SplashScreen.hide();
-  }
+  };
 
   showDialog = () => {
     const { androidDialog } = this.state;
     androidDialog.show = true;
     this.setState({ androidDialog });
-  }
+  };
 
-  hideDialog = (cb) => {
+  hideDialog = cb => {
     const { androidDialog } = this.state;
     androidDialog.show = false;
     this.setState({ androidDialog }, cb);
-  }
+  };
 
   toggleView = () => {
     this.setState({
-      view: this.state.view === 'form' ? 'biometricAuth' : 'form',
+      view: this.state.view === 'form' ? 'biometricAuth' : 'form'
     });
-  }
+  };
 
   async defineDefaultAuthMethod() {
     const { password } = await getPassphraseFromKeyChain();
@@ -96,18 +99,18 @@ class SignIn extends React.Component {
     // Update the store
     this.props.settingsUpdated({
       sensorType,
-      hasStoredPassphrase: !!password,
+      hasStoredPassphrase: !!password
     });
     // Update the component state
     this.timeout = setTimeout(() => {
       if (password && sensorType) {
         this.setState({
           view: 'biometricAuth',
-          storedPassphrase: password,
+          storedPassphrase: password
         });
       } else {
         this.setState({
-          view: 'form',
+          view: 'form'
         });
       }
     }, delay);
@@ -116,7 +119,7 @@ class SignIn extends React.Component {
   promptBioAuth = (passphrase, cb) => {
     const { settingsUpdated, t } = this.props;
     settingsUpdated({
-      bioAuthRecommended: true,
+      bioAuthRecommended: true
     });
 
     Alert.alert(
@@ -126,7 +129,7 @@ class SignIn extends React.Component {
         {
           text: t('Cancel'),
           onPress: () => cb(passphrase),
-          style: 'cancel',
+          style: 'cancel'
         },
         {
           text: t('OK'),
@@ -137,30 +140,30 @@ class SignIn extends React.Component {
                 this.hideDialog(() => {
                   storePassphraseInKeyChain(passphrase);
                   settingsUpdated({
-                    hasStoredPassphrase: true,
+                    hasStoredPassphrase: true
                   });
                   cb(passphrase);
                 });
               },
               errorCallback: () => {},
-              androidError: (error) => {
+              androidError: error => {
                 const { androidDialog } = this.state;
                 androidDialog.error = error;
                 this.setState({ androidDialog });
-              },
+              }
             });
 
             if (Platform.OS === 'android') {
               this.showDialog();
             }
-          },
-        },
+          }
+        }
       ],
-      { cancelable: false },
+      { cancelable: false }
     );
-  }
+  };
 
-  signIn = (passphrase) => {
+  signIn = passphrase => {
     this.props.accountSignedIn({ passphrase });
     this.props.accountFetched();
     this.props.pricesRetrieved();
@@ -168,11 +171,12 @@ class SignIn extends React.Component {
     if (this.deepLinkURL) {
       this.navigateToDeepLink(this.deepLinkURL);
     } else {
-      this.props.navigation.reset([
-        NavigationActions.navigate({ routeName: 'Main' }),
-      ], 0);
+      this.props.navigation.reset(
+        [NavigationActions.navigate({ routeName: 'Main' })],
+        0
+      );
     }
-  }
+  };
 
   /**
    * Will be called when sign in form is submitted
@@ -186,17 +190,21 @@ class SignIn extends React.Component {
     const { settings } = this.props;
 
     this.setState({
-      passphrase,
+      passphrase
     });
 
-    if (settings.sensorType && !settings.bioAuthRecommended && submissionType === 'form') {
+    if (
+      settings.sensorType &&
+      !settings.bioAuthRecommended &&
+      submissionType === 'form'
+    ) {
       this.promptBioAuth(passphrase, this.signIn);
     } else {
       this.signIn(passphrase);
     }
-  }
+  };
 
-  onDeepLinkRequested = (event) => {
+  onDeepLinkRequested = event => {
     const isSignedIn = !!this.props.accounts.passphrase;
 
     if (event.type && event.type === 'Discreet') {
@@ -210,9 +218,9 @@ class SignIn extends React.Component {
     } else {
       this.deepLinkURL = event.url;
     }
-  }
+  };
 
-  navigateToDeepLink = (url) => {
+  navigateToDeepLink = url => {
     const { navigation, settings, settingsUpdated } = this.props;
     const linkedScreen = deepLinkMapper(url);
     // eslint-disable-next-line no-console
@@ -223,8 +231,8 @@ class SignIn extends React.Component {
         settingsUpdated({
           token: {
             list: settings.token.list,
-            active: linkedScreen.params.activeToken,
-          },
+            active: linkedScreen.params.activeToken
+          }
         });
       }
 
@@ -239,7 +247,7 @@ class SignIn extends React.Component {
     // After sign out, there's no need to consume the launch URL for further sign-ins.
     if (!this.props.navigation.getParam('signOut')) {
       Linking.getInitialURL()
-        .then((url) => {
+        .then(url => {
           if (url) {
             const { path, query } = parseDeepLink(url);
             if (path === 'register') {
@@ -250,19 +258,24 @@ class SignIn extends React.Component {
             }
           }
         })
-        // eslint-disable-next-line no-console
-        .catch(error => console.log('An error occurred while getting initial url', error));
+        .catch(error =>
+          // eslint-disable-next-line no-console
+          console.log('An error occurred while getting initial url', error)
+        );
     }
 
     Linking.removeAllListeners('url');
     Linking.addEventListener('url', this.onDeepLinkRequested);
   }
 
-  onQuickActionRequested = (quickAction) => {
+  onQuickActionRequested = quickAction => {
     if (!quickAction || !quickAction.userInfo) {
       return;
     }
-    const { userInfo: { url }, type } = quickAction;
+    const {
+      userInfo: { url },
+      type
+    } = quickAction;
     this.onDeepLinkRequested({ url, type });
   };
 
@@ -270,17 +283,25 @@ class SignIn extends React.Component {
     if (!this.props.navigation.getParam('signOut')) {
       QuickActions.setShortcutItems(quickActionsList);
       QuickActions.popInitialAction()
-        .then((action) => {
+        .then(action => {
           if (action && action.userInfo) {
             this.deepLinkURL = action.userInfo.url;
           }
         })
-        // eslint-disable-next-line no-console
-        .catch(error => console.log('An error occurred while getting initial quick action', error));
+        .catch(error =>
+          // eslint-disable-next-line no-console
+          console.log(
+            'An error occurred while getting initial quick action',
+            error
+          )
+        );
     }
 
     DeviceEventEmitter.removeAllListeners('quickActionShortcut');
-    DeviceEventEmitter.addListener('quickActionShortcut', this.onQuickActionRequested);
+    DeviceEventEmitter.addListener(
+      'quickActionShortcut',
+      this.onQuickActionRequested
+    );
   }
 
   componentDidMount() {
@@ -316,38 +337,37 @@ class SignIn extends React.Component {
       <View style={styles.wrapper}>
         <Splash animate={!signOut} />
         <View style={styles.container}>
+          {view === 'biometricAuth' ? (
+            <BiometricAuth
+              animate={!signOut}
+              toggleView={this.toggleView}
+              sensorType={sensorType}
+              passphrase={storedPassphrase}
+              signIn={this.onFormSubmission}
+              showDialog={this.showDialog}
+              hideDialog={this.hideDialog}
+              navigation={this.props.navigation}
+            />
+          ) : null}
 
-        {view === 'biometricAuth' ?
-          <BiometricAuth
-            animate={!signOut}
-            toggleView={this.toggleView}
-            sensorType={sensorType}
-            passphrase={storedPassphrase}
-            signIn={this.onFormSubmission}
-            showDialog={this.showDialog}
-            hideDialog={this.hideDialog}
-            navigation={this.props.navigation}
-          /> : null
-        }
+          {view === 'form' ? (
+            <Form
+              animate={!signOut}
+              navigation={this.props.navigation}
+              toggleView={this.toggleView}
+              sensorType={sensorType}
+              showBackButton={hasStoredPassphrase && sensorType}
+              signIn={this.onFormSubmission}
+            />
+          ) : null}
 
-        {view === 'form' ?
-          <Form
-            animate={!signOut}
-            navigation={this.props.navigation}
-            toggleView={this.toggleView}
-            sensorType={sensorType}
-            showBackButton={hasStoredPassphrase && sensorType}
-            signIn={this.onFormSubmission}
-          /> : null
-        }
-
-        {Platform.OS === 'android' ?
-          <FingerprintOverlay
-            onModalClosed={() => this.signIn(this.state.passphrase)}
-            error={androidDialog.error}
-            show={androidDialog.show}
-          /> : null
-        }
+          {Platform.OS === 'android' ? (
+            <FingerprintOverlay
+              onModalClosed={() => this.signIn(this.state.passphrase)}
+              error={androidDialog.error}
+              show={androidDialog.show}
+            />
+          ) : null}
         </View>
       </View>
     );
