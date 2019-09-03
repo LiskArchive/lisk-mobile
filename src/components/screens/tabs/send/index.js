@@ -65,7 +65,7 @@ class Send extends React.Component {
     if (prevProps.settings.token.active !== this.props.settings.token.active) {
       this.resetMultiStep();
     } else {
-      this.checkQuery(this.props.navigation.dangerouslyGetParent().getParam('query', {}));
+      this.checkQuery(prevProps.navigation.dangerouslyGetParent().getParam('query', {}));
     }
   }
 
