@@ -19,12 +19,17 @@ export default () => ({
       flexWrap: 'wrap',
       flex: 1,
     },
-    scanButton: {
+    scanButtonContainer: {
       position: 'absolute',
       zIndex: 99,
-      top: -5,
-      right: boxes.boxPadding + 5,
+      right: 17,
+      width: 80,
+      marginRight: -18,
+    },
+    scanButton: {
       width: 60,
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     scanButtonTitle: {
       fontSize: fonts.size.small,

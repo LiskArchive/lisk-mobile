@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Animated } from 'react-native';
+import React, { Fragment } from 'react';
+import { View, Animated, Text } from 'react-native';
 import { translate } from 'react-i18next';
-import { IconButton } from '../../../../shared/toolBox/button';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 import { tokenMap } from '../../../../../constants/tokens';
 import Input from '../../../../shared/toolBox/input';
 import { colors } from '../../../../../constants/styleGuide';
@@ -16,6 +16,7 @@ import Bookmarks from '../../../../shared/bookmarks';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import { validateAddress } from '../../../../../utilities/validators';
 import DropDownHolder from '../../../../../utilities/alert';
+import Icon from '../../../../shared/toolBox/icon';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
@@ -163,15 +164,24 @@ class Recipient extends React.Component {
 
           <View style={styles.form}>
             <View style={styles.addressContainer}>
-              <IconButton
-                onPress={() => this.scanner.toggleCamera()}
-                titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-                title={t('Scan')}
-                icon='scanner'
-                iconSize={19.5}
-                color={colors.light.ultramarineBlue}
-              />
+              <View style={styles.scanButtonContainer}>
+                <TouchableHighlight
+                  underlayColor='transparent'
+                  onPress={() => this.scanner.toggleCamera()}
+                  style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                >
+                  <Fragment>
+                    <Icon
+                      name='scanner'
+                      size={19.5}
+                      color={colors.light.ultramarineBlue}
+                    />
+                    <Text
+                      style={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
+                    >{t('Scan')}</Text>
+                  </Fragment>
+                </TouchableHighlight>
+              </View>
 
               {
                 token.active === tokenMap.LSK.key ?
