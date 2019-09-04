@@ -29,8 +29,8 @@ const styles = {
   scanButton: {
     position: 'absolute',
     right: 21,
-    top: 15,
     zIndex: 99,
+    top: 15,
     paddingLeft: 10,
     width: 67,
     height: 30,
