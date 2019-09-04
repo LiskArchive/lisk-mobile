@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-import { themes, colors, fonts } from '../../../constants/styleGuide';
+import { themes, colors, fonts, boxes } from '../../../constants/styleGuide';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import { setColorOpacity } from '../../../utilities/helpers';
 
@@ -22,7 +22,8 @@ export default () => ({
     },
     linkedItem: {
       flex: 1,
-      width: '100%',
+      width: Screen.width - (boxes.boxPadding * 2),
+      marginHorizontal: boxes.boxPadding,
       height: 90,
       paddingTop: 20,
       paddingBottom: 20,

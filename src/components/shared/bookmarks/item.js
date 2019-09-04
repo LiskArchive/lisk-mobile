@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Animated } from 'react-native';
+import { TouchableOpacity as RNGHTouchableOpacity } from 'react-native-gesture-handler';
 import Interactable from 'react-native-interactable';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
@@ -147,34 +148,32 @@ class Item extends React.Component {
       styles, data, theme, showAvatar,
     } = this.props;
 
-    return (<TouchableOpacity
+    return (<RNGHTouchableOpacity
       style={[styles.linkedItem, styles.theme.linkedItem]}
       onPress={this.showDetail}>
       <View style={styles.innerContainer}>
         {
           showAvatar ?
-          <View style={[styles.itemColumn, styles.avatarContainer]}>
+          <View style={styles.avatarContainer}>
             <Avatar address={data.address} size={43} style={styles.theme.avatar} />
           </View> : null
         }
-        <View style={styles.column}>
+        <View>
           <B style={[styles.address, styles.theme.address]}>
             {data.label}
           </B>
-          <Small style={[styles.label, styles.theme.label]}>
+          <Small style={styles.theme.label}>
             {data.address}
           </Small>
         </View>
       </View>
-      <View style={[styles.column, styles.amountWrapper]}>
-        <Icon
-          name='forward'
-          size={21}
-          style={styles.icon}
-          color={theme === themes.light ? colors.light.black : colors.dark.white}
-        />
-      </View>
-    </TouchableOpacity>);
+      <Icon
+        name='forward'
+        size={21}
+        style={styles.icon}
+        color={theme === themes.light ? colors.light.black : colors.dark.white}
+      />
+    </RNGHTouchableOpacity>);
   }
 }
 
