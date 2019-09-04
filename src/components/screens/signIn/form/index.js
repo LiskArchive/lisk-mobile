@@ -188,17 +188,15 @@ class Form extends React.Component {
             style={styles.passphraseRevealButton}
           />
 
-          <View style={styles.scanButtonContainer}>
-            <IconButton
-              onPress={this.toggleCamera}
-              titleStyle={styles.scanButtonTitle}
-              style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-              title={t('Scan')}
-              icon='scanner'
-              iconSize={16}
-              color={colors.light.ultramarineBlue}
-            />
-          </View>
+          <IconButton
+            onPress={this.toggleCamera}
+            titleStyle={styles.scanButtonTitle}
+            style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+            title={t('Scan')}
+            icon='scanner'
+            iconSize={16}
+            color={colors.light.ultramarineBlue}
+          />
         </Animated.View>
 
         <KeyboardAwareScrollView

@@ -12,7 +12,7 @@ import { colors } from '../../../../../constants/styleGuide';
 const IntroModal = ({
   close, styles, t, theme,
 }) => (
-  <View>
+  <View style={styles.container}>
     <View style={[styles.tokenLogoWrapper, styles.theme.tokenLogoWrapper]}>
       <Icon
         style={styles.logo}

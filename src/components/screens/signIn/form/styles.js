@@ -26,13 +26,11 @@ const styles = {
     left: 85,
     top: 15,
   },
-  scanButtonContainer: {
+  scanButton: {
     position: 'absolute',
-    right: 16,
+    right: 21,
     top: 15,
     zIndex: 99,
-  },
-  scanButton: {
     paddingLeft: 10,
     width: 67,
     height: 30,

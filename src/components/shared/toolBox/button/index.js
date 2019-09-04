@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { Text } from 'react-native';
-import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, TouchableHighlight, TouchableOpacity } from 'react-native';
 import getStyles from './styles';
 import Icon from '../icon';
 import withTheme from '../../../shared/withTheme';
