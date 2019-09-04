@@ -13,9 +13,9 @@ export default () => ({
       paddingBottom: 24,
     },
     titleContainer: {
+      overflow: 'hidden',
       paddingRight: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
-      justifyContent: 'center',
     },
     headerButton: {
       transform: [
