@@ -1,7 +1,10 @@
 import BackgroundTimer from 'react-native-background-timer';
+import { NetInfo } from 'react-native';
 import actionTypes from '../../constants/actions';
 import { blockUpdated } from '../../actions/accounts';
 import { account as accountAPI } from '../../utilities/api';
+import DropDownHolder from '../../utilities/alert';
+import i18n from '../../../locales';
 
 /** To-Do We have to disable socket connection because of
  * Lisk core problem. we will enable socket connection
@@ -28,14 +31,27 @@ const socketSetup = (store) => {
   }, 30000);
 };
 
+const handleConnectivityChange = (connectionInfo) => {
+  if (connectionInfo.type === 'wifi' || connectionInfo.type === 'cellular') {
+    DropDownHolder.closeAlert();
+  } else if (connectionInfo.type === 'none') {
+    DropDownHolder.error(
+      i18n.t('No internet connection!'),
+      i18n.t('Your connection seems to be down, try again later.'),
+    );
+  }
+};
+
 const socketMiddleware = store => next => (action) => {
   next(action);
   switch (action.type) {
     case actionTypes.accountSignedIn:
       socketSetup(store);
+      NetInfo.addEventListener('connectionChange', handleConnectivityChange);
       break;
     case actionTypes.accountSignedOut:
       closeConnection();
+      NetInfo.removeEventListener('connectionChange', handleConnectivityChange);
       break;
     default: break;
   }
