@@ -1,5 +1,5 @@
 import BackgroundTimer from 'react-native-background-timer';
-import { NetInfo } from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
 import actionTypes from '../../constants/actions';
 import { blockUpdated } from '../../actions/accounts';
 import { account as accountAPI } from '../../utilities/api';
@@ -32,9 +32,9 @@ const socketSetup = (store) => {
 };
 
 const handleConnectivityChange = (connectionInfo) => {
-  if (connectionInfo.type === 'wifi' || connectionInfo.type === 'cellular') {
+  if (connectionInfo.isConnected) {
     DropDownHolder.closeAlert();
-  } else if (connectionInfo.type === 'none') {
+  } else if (!connectionInfo.isConnected) {
     DropDownHolder.error(
       i18n.t('No internet connection!'),
       i18n.t('Your connection seems to be down, try again later.'),
@@ -47,11 +47,11 @@ const socketMiddleware = store => next => (action) => {
   switch (action.type) {
     case actionTypes.accountSignedIn:
       socketSetup(store);
-      NetInfo.addEventListener('connectionChange', handleConnectivityChange);
+      NetInfo.addEventListener(handleConnectivityChange);
       break;
     case actionTypes.accountSignedOut:
       closeConnection();
-      NetInfo.removeEventListener('connectionChange', handleConnectivityChange);
+      NetInfo.removeEventListener(handleConnectivityChange);
       break;
     default: break;
   }
