@@ -12,13 +12,13 @@ import { headerHeight } from '../../../utilities/device';
 class Heading extends React.Component {
   state = {
     confirmed: false,
-  }
+  };
 
   confirm = (status) => {
     this.setState({
       confirmed: status,
     });
-  }
+  };
 
   render() {
     const {
@@ -41,7 +41,7 @@ class Heading extends React.Component {
                 <H2 style={[styles.centralized, styles.descriptionH]}>{t(item.title)}</H2>
                 <P style={[styles.centralized, styles.descriptionP]}>{t(item.description)}</P>
               </View>
-                <Image resizeMethod={'scale'} source={item.imageSrc} style={item.imageStyle} />
+              <Image resizeMethod={'scale'} source={item.imageSrc} style={item.imageStyle} />
               {item.step === descriptionContent.length && (
                 <View style={[styles.buttonContainer, buttonStyle]}>
                   <View style={styles.switchContainer}>
@@ -51,15 +51,18 @@ class Heading extends React.Component {
                       onSyncPress={this.confirm}
                       backgroundActive={colors.light.ultramarineBlue}
                       backgroundInactive={colors.light.platinum}
+                      testID="onboardingSliderButton"
                     />
-                    <P style={styles.confirmationText}>{t('I have read and agreed with the terms and conditions')}</P>
+                    <P style={styles.confirmationText}>
+                      {t('I have read and agreed with the terms and conditions')}
+                    </P>
                   </View>
                   <PrimaryButton
                     disabled={!this.state.confirmed}
                     style={styles.button}
                     onClick={skip}
-                    title='Continue'
-                    testID='sliderButton'
+                    title="Continue"
+                    testID="continueButton"
                   />
                 </View>
               )}
