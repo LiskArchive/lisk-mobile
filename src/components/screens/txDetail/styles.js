@@ -130,7 +130,7 @@ export default () => ({
       borderWidth: 0.5,
       borderRadius: 3,
       padding: 5,
-      marginRight: 5,
+      marginRight: 8,
       marginVertical: 2.5,
     },
     voteNumber: {
@@ -232,10 +232,10 @@ export default () => ({
       color: colors.light.ultramarineBlue,
     },
     votesContainer: {
-      borderColor: colors.dark.ghost,
+      borderColor: colors.dark.blueGray,
     },
     voteNumberContainer: {
-      backgroundColor: colors.dark.slateGray,
+      backgroundColor: colors.dark.blueGray,
     },
     voteNumber: {
       color: colors.dark.white,
