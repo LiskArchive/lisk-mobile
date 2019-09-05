@@ -52,7 +52,7 @@ class Heading extends React.Component {
                       backgroundActive={colors.light.ultramarineBlue}
                       backgroundInactive={colors.light.platinum}
                     />
-                    <P style={styles.confirmationText}>{t('I understand that it’s my responsibility to keep my passphrase safe.')}</P>
+                    <P style={styles.confirmationText}>{t('I have read and agreed with the terms and conditions')}</P>
                   </View>
                   <PrimaryButton
                     disabled={!this.state.confirmed}
