@@ -24,18 +24,18 @@ import { IconButton } from '../toolBox/button';
   state => ({
     incognitoMode: state.settings.incognito,
     activeToken: state.settings.token.active,
-    followedAccounts: state.accounts.followed || []
+    followedAccounts: state.accounts.followed || [],
   }),
   {
-    settingsUpdated: settingsUpdatedAction
+    settingsUpdated: settingsUpdatedAction,
   }
 )
 class Transactions extends React.Component {
   state = {
     initialAnimations: {
       opacity: new Animated.Value(0),
-      top: new Animated.Value(20)
-    }
+      top: new Animated.Value(20),
+    },
   };
   componentDidMount() {
     let timeout = null;
@@ -43,7 +43,7 @@ class Transactions extends React.Component {
       RNShake.addEventListener('ShakeEvent', () => {
         if (!timeout) {
           this.props.settingsUpdated({
-            incognito: !this.props.incognitoMode
+            incognito: !this.props.incognitoMode,
           });
           timeout = setTimeout(() => {
             timeout = false;
@@ -63,20 +63,20 @@ class Transactions extends React.Component {
     Animated.timing(opacity, {
       toValue: 1,
       duration: 400,
-      delay: 100
+      delay: 100,
     }).start();
     Animated.timing(top, {
       toValue: 0,
       duration: 400,
       delay: 100,
-      easing: easing.easeInOutQuart
+      easing: easing.easeInOutQuart,
     }).start();
   };
 
   toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
     this.props.settingsUpdated({
-      incognito: !this.props.incognitoMode
+      incognito: !this.props.incognitoMode,
     });
   };
 
@@ -92,7 +92,7 @@ class Transactions extends React.Component {
       followedAccounts,
       refreshing,
       type,
-      t
+      t,
     } = this.props;
 
     const incognito = type === 'home' && incognitoMode;
@@ -105,7 +105,7 @@ class Transactions extends React.Component {
         {!transactions ||
         (transactions.confirmed.length === 0 &&
           transactions.pending.length === 0) ? (
-          <Fragment></Fragment>
+          <Fragment />
         ) : (
           <Fragment>
             <View style={[styles.placeholder, { height }]}>

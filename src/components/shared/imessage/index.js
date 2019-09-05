@@ -18,14 +18,14 @@ class LiskMessageExtension extends Component {
     account: '',
     address: {
       value: '',
-      validity: -1
+      validity: -1,
     },
     avatarPreview: false,
     num: [0, 0, 0, 0],
     presentationStyle: '',
     message: {},
     conversation: '',
-    state: 'requested'
+    state: 'requested',
   };
 
   setAccount = () => {
@@ -33,16 +33,16 @@ class LiskMessageExtension extends Component {
       if (account) {
         this.userData = {
           passphrase: account.password,
-          address: account.username
+          address: account.username,
         };
         this.setState(
           {
             passphrase: account.password,
             address: {
               value: account.username,
-              validity: -1
+              validity: -1,
             },
-            avatarPreview: true
+            avatarPreview: true,
           },
           () => setTimeout(() => MessagesManager.hideLaunchScreen(), 100)
         );
@@ -57,7 +57,7 @@ class LiskMessageExtension extends Component {
       this.setState({
         conversation,
         message,
-        parsedData: message.url ? this.parseUrl(message.url) : {}
+        parsedData: message.url ? this.parseUrl(message.url) : {},
       })
     );
   };
@@ -82,7 +82,7 @@ class LiskMessageExtension extends Component {
         this.setState({
           conversation,
           message,
-          parsedData: this.parseUrl(message.url)
+          parsedData: this.parseUrl(message.url),
         })
     );
   };
@@ -96,8 +96,8 @@ class LiskMessageExtension extends Component {
         avatarPreview: !!this.userData.address,
         address: {
           value: this.userData.address || '',
-          validity: -1
-        }
+          validity: -1,
+        },
       })
     );
   };
@@ -120,7 +120,7 @@ class LiskMessageExtension extends Component {
     amount,
     state = 'requested',
     id,
-    recipientAddress
+    recipientAddress,
   }) => {
     if (address.validity !== 1) {
       const recipient = `&recipientAddress=${recipientAddress}`;
@@ -135,8 +135,8 @@ class LiskMessageExtension extends Component {
           imageName: state,
           imageTitle: '',
           caption: `${amount} LSK is ${state}`,
-          subcaption: `by ${address.value}`
-        }
+          subcaption: `by ${address.value}`,
+        },
       })
         .then(() => true)
         // eslint-disable-next-line no-console
@@ -172,7 +172,7 @@ class LiskMessageExtension extends Component {
       state,
       passphrase,
       presentationStyle,
-      conversation
+      conversation,
     } = this.state;
 
     const isSender =

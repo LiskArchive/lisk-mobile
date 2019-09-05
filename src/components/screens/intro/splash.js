@@ -13,7 +13,7 @@ class Splash extends React.Component {
     bgOpacity: new Animated.Value(1),
     txtOpacity: new Animated.Value(0),
     iconOpacity: new Animated.Value(0),
-    top: new Animated.Value(deviceHeight() / 2 + 16)
+    top: new Animated.Value(deviceHeight() / 2 + 16),
   };
 
   componentDidMount() {
@@ -22,23 +22,23 @@ class Splash extends React.Component {
     Animated.timing(bgOpacity, {
       toValue: 0,
       duration: 900,
-      delay: 50
+      delay: 50,
     }).start();
     Animated.timing(txtOpacity, {
       toValue: 1,
       duration: 900,
-      delay: 650
+      delay: 650,
     }).start();
     Animated.timing(top, {
       toValue: deviceHeight() / 2 - 50,
       duration: 600,
       delay: 50,
-      easing: easing.easeOutQuart
+      easing: easing.easeOutQuart,
     }).start();
     Animated.timing(iconOpacity, {
       toValue: 1,
       duration: 300,
-      delay: 650
+      delay: 650,
     }).start();
   }
 
@@ -52,7 +52,7 @@ class Splash extends React.Component {
           style={[
             styles.splashFigure,
             styles.splashStatic,
-            { opacity: iconOpacity }
+            { opacity: iconOpacity },
           ]}
         >
           <Icon

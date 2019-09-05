@@ -21,12 +21,12 @@ const txTypes = [
   'accountInitialization',
   'setSecondPassphrase',
   'registerDelegate',
-  'vote'
+  'vote',
 ];
 
 class TransactionDetail extends React.Component {
   state = {
-    tx: {}
+    tx: {},
   };
 
   componentDidMount() {
@@ -42,8 +42,8 @@ class TransactionDetail extends React.Component {
               recipientAddress: sharedData.recipientAddress,
               senderAddress: sharedData.address,
               amount: sharedData.amount,
-              notRawLisk: true
-            }
+              notRawLisk: true,
+            },
           });
         })
         .catch(() => {
@@ -53,8 +53,8 @@ class TransactionDetail extends React.Component {
               recipientAddress: sharedData.recipientAddress,
               senderAddress: sharedData.address,
               amount: sharedData.amount,
-              notRawLisk: true
-            }
+              notRawLisk: true,
+            },
           });
         });
     }
@@ -169,7 +169,7 @@ class TransactionDetail extends React.Component {
                   style={[
                     styles.value,
                     styles.theme.value,
-                    styles.transactionId
+                    styles.transactionId,
                   ]}
                 >
                   {tx.senderAddress}
@@ -194,7 +194,7 @@ class TransactionDetail extends React.Component {
                     style={[
                       styles.value,
                       styles.theme.value,
-                      styles.transactionId
+                      styles.transactionId,
                     ]}
                   >
                     {tx.recipientAddress}
@@ -217,7 +217,7 @@ class TransactionDetail extends React.Component {
                   style={[
                     styles.value,
                     styles.theme.value,
-                    styles.referenceValue
+                    styles.referenceValue,
                   ]}
                 >
                   {tx.asset.data}

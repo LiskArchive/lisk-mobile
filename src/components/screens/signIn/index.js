@@ -6,7 +6,7 @@ import {
   View,
   Alert,
   Platform,
-  DeviceEventEmitter
+  DeviceEventEmitter,
 } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
@@ -17,15 +17,15 @@ import styles from './styles';
 import {
   getPassphraseFromKeyChain,
   storePassphraseInKeyChain,
-  bioMetricAuthentication
+  bioMetricAuthentication,
 } from '../../../utilities/passphrase';
 import {
   accountSignedIn as accountSignedInAction,
-  accountFetched as accountFetchedAction
+  accountFetched as accountFetchedAction,
 } from '../../../actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
-  settingsRetrieved as settingsRetrievedAction
+  settingsRetrieved as settingsRetrievedAction,
 } from '../../../actions/settings';
 import { pricesRetrieved as pricesRetrievedAction } from '../../../actions/service';
 import Splash from './splash';
@@ -40,14 +40,14 @@ console.disableYellowBox = true; // eslint-disable-line
 @connect(
   state => ({
     accounts: state.accounts,
-    settings: state.settings
+    settings: state.settings,
   }),
   {
     accountSignedIn: accountSignedInAction,
     accountFetched: accountFetchedAction,
     settingsUpdated: settingsUpdatedAction,
     settingsRetrieved: settingsRetrievedAction,
-    pricesRetrieved: pricesRetrievedAction
+    pricesRetrieved: pricesRetrievedAction,
   }
 )
 class SignIn extends React.Component {
@@ -58,8 +58,8 @@ class SignIn extends React.Component {
     view: 'splash',
     androidDialog: {
       error: null,
-      show: false
-    }
+      show: false,
+    },
   };
 
   init = () => {
@@ -81,7 +81,7 @@ class SignIn extends React.Component {
 
   toggleView = () => {
     this.setState({
-      view: this.state.view === 'form' ? 'biometricAuth' : 'form'
+      view: this.state.view === 'form' ? 'biometricAuth' : 'form',
     });
   };
 
@@ -99,18 +99,18 @@ class SignIn extends React.Component {
     // Update the store
     this.props.settingsUpdated({
       sensorType,
-      hasStoredPassphrase: !!password
+      hasStoredPassphrase: !!password,
     });
     // Update the component state
     this.timeout = setTimeout(() => {
       if (password && sensorType) {
         this.setState({
           view: 'biometricAuth',
-          storedPassphrase: password
+          storedPassphrase: password,
         });
       } else {
         this.setState({
-          view: 'form'
+          view: 'form',
         });
       }
     }, delay);
@@ -119,7 +119,7 @@ class SignIn extends React.Component {
   promptBioAuth = (passphrase, cb) => {
     const { settingsUpdated, t } = this.props;
     settingsUpdated({
-      bioAuthRecommended: true
+      bioAuthRecommended: true,
     });
 
     Alert.alert(
@@ -129,7 +129,7 @@ class SignIn extends React.Component {
         {
           text: t('Cancel'),
           onPress: () => cb(passphrase),
-          style: 'cancel'
+          style: 'cancel',
         },
         {
           text: t('OK'),
@@ -140,7 +140,7 @@ class SignIn extends React.Component {
                 this.hideDialog(() => {
                   storePassphraseInKeyChain(passphrase);
                   settingsUpdated({
-                    hasStoredPassphrase: true
+                    hasStoredPassphrase: true,
                   });
                   cb(passphrase);
                 });
@@ -150,14 +150,14 @@ class SignIn extends React.Component {
                 const { androidDialog } = this.state;
                 androidDialog.error = error;
                 this.setState({ androidDialog });
-              }
+              },
             });
 
             if (Platform.OS === 'android') {
               this.showDialog();
             }
-          }
-        }
+          },
+        },
       ],
       { cancelable: false }
     );
@@ -190,7 +190,7 @@ class SignIn extends React.Component {
     const { settings } = this.props;
 
     this.setState({
-      passphrase
+      passphrase,
     });
 
     if (
@@ -231,8 +231,8 @@ class SignIn extends React.Component {
         settingsUpdated({
           token: {
             list: settings.token.list,
-            active: linkedScreen.params.activeToken
-          }
+            active: linkedScreen.params.activeToken,
+          },
         });
       }
 
@@ -274,7 +274,7 @@ class SignIn extends React.Component {
     }
     const {
       userInfo: { url },
-      type
+      type,
     } = quickAction;
     this.onDeepLinkRequested({ url, type });
   };

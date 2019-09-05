@@ -18,7 +18,7 @@ class BiometricAuth extends React.Component {
   state = {
     opacity: new Animated.Value(0),
     tried: false,
-    busy: false
+    busy: false,
   };
   progress = new Animated.Value(0);
   animationLoop = true;
@@ -27,7 +27,7 @@ class BiometricAuth extends React.Component {
     const value = this.progress._value;
     Animated.timing(this.progress, {
       toValue: value === 0 ? 1 : 0,
-      duration: 2000
+      duration: 2000,
     }).start(() => {
       if (this.animationLoop) {
         this.runAnimation();
@@ -57,7 +57,7 @@ class BiometricAuth extends React.Component {
           });
         },
         errorCallback: () => this.setState({ busy: false }),
-        androidError: this.playUnAuthorizedAnimation
+        androidError: this.playUnAuthorizedAnimation,
       });
     });
   };
@@ -71,12 +71,12 @@ class BiometricAuth extends React.Component {
 
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: this.props.animate ? 300 : 0
+      duration: this.props.animate ? 300 : 0,
     }).start();
 
     Animated.timing(this.progress, {
       toValue: 1,
-      duration: 2500
+      duration: 2500,
     }).start();
   }
 
@@ -138,7 +138,7 @@ class BiometricAuth extends React.Component {
             style={[
               styles.question,
               styles.fillWidth,
-              tried ? styles.error : styles.invisible
+              tried ? styles.error : styles.invisible,
             ]}
           >
             {t('Unauthorized! Please try again.')}

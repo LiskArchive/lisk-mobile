@@ -3,7 +3,7 @@ import actionTypes from '../constants/actions';
 
 export const pricesRetrieved = () => (dispatch, getState) => {
   const {
-    settings: { token }
+    settings: { token },
   } = getState();
 
   serviceAPI
@@ -13,8 +13,8 @@ export const pricesRetrieved = () => (dispatch, getState) => {
         type: actionTypes.pricesRetrieved,
         data: {
           priceTicker,
-          activeToken: token.active
-        }
+          activeToken: token.active,
+        },
       })
     )
     // eslint-disable-next-line no-console
@@ -23,7 +23,7 @@ export const pricesRetrieved = () => (dispatch, getState) => {
 
 export const dynamicFeesRetrieved = () => (dispatch, getState) => {
   const {
-    settings: { token }
+    settings: { token },
   } = getState();
 
   serviceAPI
@@ -31,7 +31,7 @@ export const dynamicFeesRetrieved = () => (dispatch, getState) => {
     .then(dynamicFees =>
       dispatch({
         type: actionTypes.dynamicFeesRetrieved,
-        dynamicFees
+        dynamicFees,
       })
     )
     // eslint-disable-next-line no-console
