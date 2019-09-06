@@ -5,20 +5,21 @@ import SplashScreen from 'react-native-splash-screen';
 import { SafeAreaView } from 'react-navigation';
 import Splash from './splash';
 import Heading from './heading';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../../actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
 import activityHistoryImg from '../../../assets/images/intro/activityHistory3x.png';
 import tokensTransferImg from '../../../assets/images/intro/tokensTransfer3x.png';
 import secureAuthenticationImg from '../../../assets/images/intro/secureAuthentication3x.png';
 import easyAccessImg from '../../../assets/images/intro/easyAccess3x.png';
 import styles from './styles';
 
-@connect(state => ({
-  settings: state.settings,
-}), {
-  settingsUpdated: settingsUpdatedAction,
-})
+@connect(
+  state => ({
+    settings: state.settings,
+  }),
+  {
+    settingsUpdated: settingsUpdatedAction,
+  }
+)
 class Intro extends React.Component {
   skip() {
     this.props.navigation.push('SignIn', { signOut: true });
@@ -47,14 +48,16 @@ class Intro extends React.Component {
       {
         step: 2,
         title: 'Token transfer',
-        description: 'Transfer your tokens easily to other accounts, by simply scanning QR Codes.',
+        description:
+          'Transfer your tokens easily to other accounts, by simply scanning QR Codes.',
         imageSrc: tokensTransferImg,
         imageStyle: styles.illustration,
       },
       {
         step: 3,
         title: 'Secure authentication',
-        description: 'Access all functions via advanced biometric authentication.',
+        description:
+          'Access all functions via advanced biometric authentication.',
         imageSrc: secureAuthenticationImg,
         imageStyle: styles.illustration,
       },
@@ -72,7 +75,11 @@ class Intro extends React.Component {
       <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
           <Splash />
-          <Heading skip={this.skip.bind(this)} descriptionContent={descriptionContent} testID="intro"/>
+          <Heading
+            skip={this.skip.bind(this)}
+            descriptionContent={descriptionContent}
+            testID="intro"
+          />
         </View>
       </SafeAreaView>
     );

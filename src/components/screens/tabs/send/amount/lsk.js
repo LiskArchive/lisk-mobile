@@ -37,8 +37,12 @@ class AmountLSK extends React.Component {
     }
   }
 
-  validator = (str) => {
-    const { t, accounts, settings: { token } } = this.props;
+  validator = str => {
+    const {
+      t,
+      accounts,
+      settings: { token },
+    } = this.props;
 
     if (str === '' || parseFloat(str) === 0) {
       return {
@@ -53,18 +57,19 @@ class AmountLSK extends React.Component {
       message = t('The amount value is invalid.');
     } else if (
       accounts.info[token.active].balance < transactions.send.fee ||
-      parseFloat(str) > fromRawLsk(accounts.info[token.active].balance - transactions.send.fee)
+      parseFloat(str) >
+        fromRawLsk(accounts.info[token.active].balance - transactions.send.fee)
     ) {
       message = t('Your balance is not sufficient.');
     }
 
-    return ({
+    return {
       code: message ? 1 : 0,
       message,
-    });
+    };
   };
 
-  onChange = (value) => {
+  onChange = value => {
     const normalizedValue = value.replace(/[^0-9]/g, '.');
     value = value.replace(/,/g, '.');
 
@@ -74,7 +79,7 @@ class AmountLSK extends React.Component {
         normalizedValue,
       },
     });
-  }
+  };
 
   onSubmit = () => {
     const { t, nextStep, sharedData } = this.props;
@@ -84,24 +89,36 @@ class AmountLSK extends React.Component {
     if (validity.code === 0) {
       DropDownHolder.closeAlert();
 
-      return nextStep(merge(sharedData, {
-        amount: amount.normalizedValue,
-        fee: transactions.send.fee,
-      }));
+      return nextStep(
+        merge(sharedData, {
+          amount: amount.normalizedValue,
+          fee: transactions.send.fee,
+        })
+      );
     }
 
     return DropDownHolder.error(t('Error'), validity.message);
-  }
+  };
 
   getValueInCurrency() {
-    const { priceTicker, settings: { currency, token } } = this.props;
-    const { amount: { value, normalizedValue } } = this.state;
+    const {
+      priceTicker,
+      settings: { currency, token },
+    } = this.props;
+    const {
+      amount: { value, normalizedValue },
+    } = this.state;
 
     let valueInCurrency = 0;
 
-    if (value && this.validator(normalizedValue).code === 0 &&
-      priceTicker[token.active][currency]) {
-      valueInCurrency = (normalizedValue * priceTicker[token.active][currency]).toFixed(2);
+    if (
+      value &&
+      this.validator(normalizedValue).code === 0 &&
+      priceTicker[token.active][currency]
+    ) {
+      valueInCurrency = (
+        normalizedValue * priceTicker[token.active][currency]
+      ).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
 
@@ -109,9 +126,7 @@ class AmountLSK extends React.Component {
   }
 
   render() {
-    const {
-      accounts, styles, t, settings,
-    } = this.props;
+    const { accounts, styles, t, settings } = this.props;
     const { amount } = this.state;
 
     return (
@@ -125,7 +140,6 @@ class AmountLSK extends React.Component {
           }}
         >
           <View>
-
             <Balance
               value={fromRawLsk(accounts.info[settings.token.active].balance)}
               tokenType={settings.token.active}
@@ -133,12 +147,14 @@ class AmountLSK extends React.Component {
             />
 
             <Input
-              reference={(el) => { this.input = el; }}
+              reference={el => {
+                this.input = el;
+              }}
               autoFocus={!isAndroid}
               label={t('Amount (LSK)', { tokenType: 'LSK' })}
               value={amount.value}
               onChange={this.onChange}
-              keyboardType='numeric'
+              keyboardType="numeric"
               currency={settings.currency}
               valueInCurrency={this.getValueInCurrency()}
             />

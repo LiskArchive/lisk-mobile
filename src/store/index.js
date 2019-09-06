@@ -4,6 +4,9 @@ import * as reducers from './reducers';
 import middleWares from './middlewares';
 
 const App = combineReducers(reducers);
-const store = createStore(App, composeWithDevTools(applyMiddleware(...middleWares)));
+const store = createStore(
+  App,
+  composeWithDevTools(applyMiddleware(...middleWares))
+);
 
 export default store;

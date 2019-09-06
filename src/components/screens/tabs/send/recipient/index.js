@@ -31,10 +31,13 @@ class Recipient extends React.Component {
   animatedStyles = {
     height: new Animated.Value(40),
     paddingTop: new Animated.Value(20),
-  }
+  };
 
   componentDidMount() {
-    const { sharedData, navigation: { setParams } } = this.props;
+    const {
+      sharedData,
+      navigation: { setParams },
+    } = this.props;
 
     if (sharedData.address) {
       this.setAddress(sharedData.address);
@@ -50,7 +53,9 @@ class Recipient extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
-      const { navigation: { setParams } } = this.props;
+      const {
+        navigation: { setParams },
+      } = this.props;
       setParams({
         title: isSmallScreen ? 'Send' : 'Recipient',
       });
@@ -63,16 +68,16 @@ class Recipient extends React.Component {
         avatarPreview: true,
       });
     }, 300);
-  }
+  };
 
-  onQRCodeRead = (data) => {
+  onQRCodeRead = data => {
     const decodedData = decodeLaunchUrl(data);
     this.setAddress(decodedData.address);
     this.scannedData = decodedData;
     this.input.focus();
-  }
+  };
 
-  setAddress = (value) => {
+  setAddress = value => {
     clearTimeout(this.avatarPreviewTimeout);
 
     if (validateAddress(this.props.settings.token.active, value) === 0) {
@@ -83,7 +88,7 @@ class Recipient extends React.Component {
       address: { value },
       avatarPreview: false,
     });
-  }
+  };
 
   submitForm = () => {
     const { t, settings } = this.props;
@@ -106,41 +111,48 @@ class Recipient extends React.Component {
         this.setState({ address: { value } });
         break;
     }
-  }
+  };
 
-  forward = (data) => {
-    const {
-      sharedData, move,
-    } = this.props;
+  forward = data => {
+    const { sharedData, move } = this.props;
     const nextData = data
       ? merge(sharedData, data)
       : merge(sharedData, this.scannedData, {
-        address: this.state.address.value,
-      });
+          address: this.state.address.value,
+        });
 
     move({
       to: 1,
       data: nextData,
     });
-  }
+  };
 
-  isCameraOpen = (data) => {
+  isCameraOpen = data => {
     this.props.isCameraOpen(data);
-  }
+  };
 
   render() {
     const {
-      settings: { token }, navigation, styles, accounts, t, lng,
+      settings: { token },
+      navigation,
+      styles,
+      accounts,
+      t,
+      lng,
     } = this.props;
     const { address } = this.state;
 
-    const inputLabel = accounts.followed.length ? t('Address or label') : t('Address');
+    const inputLabel = accounts.followed.length
+      ? t('Address or label')
+      : t('Address');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
           isCameraOpen={this.isCameraOpen}
-          ref={(el) => { this.scanner = el; }}
+          ref={el => {
+            this.scanner = el;
+          }}
           navigation={navigation}
           readFromCameraRoll={true}
           onQRCodeRead={this.onQRCodeRead}
@@ -160,30 +172,36 @@ class Recipient extends React.Component {
             type: 'inBox',
           }}
         >
-
           <View style={styles.form}>
             <View style={styles.addressContainer}>
               <IconButton
                 onPress={() => this.scanner.toggleCamera()}
-                titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                titleStyle={[
+                  styles.scanButtonTitle,
+                  styles.theme.scanButtonTitle,
+                ]}
+                style={[
+                  styles.scanButton,
+                  lng === 'de' ? styles.longTitle : null,
+                ]}
                 title={t('Scan')}
-                icon='scanner'
+                icon="scanner"
                 iconSize={19.5}
                 color={colors.light.ultramarineBlue}
               />
 
-              {
-                token.active === tokenMap.LSK.key ?
-                  <Avatar
-                    style={styles.avatar}
-                    address={address.value}
-                    size={24.6}
-                  /> : null
-              }
+              {token.active === tokenMap.LSK.key ? (
+                <Avatar
+                  style={styles.avatar}
+                  address={address.value}
+                  size={24.6}
+                />
+              ) : null}
 
               <Input
-                reference={(input) => { this.input = input; }}
+                reference={input => {
+                  this.input = input;
+                }}
                 label={inputLabel}
                 autoCorrect={false}
                 onChange={this.setAddress}
@@ -192,7 +210,9 @@ class Recipient extends React.Component {
                   input: [
                     styles.input,
                     styles.addressInput,
-                    token.active === tokenMap.LSK.key ? styles.addressInputWithAvatar : null,
+                    token.active === tokenMap.LSK.key
+                      ? styles.addressInputWithAvatar
+                      : null,
                   ],
                   containerStyle: styles.addressInputContainer,
                   inputLabel: styles.theme.inputLabel,

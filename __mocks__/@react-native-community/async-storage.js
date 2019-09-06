@@ -3,36 +3,40 @@ class MockAsyncStorage {
     this.cache = {};
   }
 
-  getItem = key => new Promise((resolve, reject) => {
-    if (typeof key !== 'string') {
-      return reject(new Error('Invalid key'));
-    }
+  getItem = key =>
+    new Promise((resolve, reject) => {
+      if (typeof key !== 'string') {
+        return reject(new Error('Invalid key'));
+      }
 
-    return resolve(this.cache[key]);
-  })
+      return resolve(this.cache[key]);
+    });
 
-  setItem = (key, data) => new Promise((resolve, reject) => {
-    if (typeof key !== 'string') {
-      return reject(new Error('Invalid key'));
-    }
+  setItem = (key, data) =>
+    new Promise((resolve, reject) => {
+      if (typeof key !== 'string') {
+        return reject(new Error('Invalid key'));
+      }
 
-    this.cache[key] = data;
-    return resolve();
-  })
+      this.cache[key] = data;
+      return resolve();
+    });
 
-  removeItem = key => new Promise((resolve, reject) => {
-    if (typeof key !== 'string') {
-      return reject(new Error('Invalid key'));
-    }
+  removeItem = key =>
+    new Promise((resolve, reject) => {
+      if (typeof key !== 'string') {
+        return reject(new Error('Invalid key'));
+      }
 
-    delete this.cache[key];
-    return resolve();
-  })
+      delete this.cache[key];
+      return resolve();
+    });
 
-  clear = () => new Promise((resolve) => {
-    this.cache = {};
-    return resolve();
-  })
+  clear = () =>
+    new Promise(resolve => {
+      this.cache = {};
+      return resolve();
+    });
 }
 
 module.exports = new MockAsyncStorage();

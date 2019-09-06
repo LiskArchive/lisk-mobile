@@ -24,13 +24,11 @@ export const settingsUpdated = data => ({
  *
  * @returns {Function} Thunk action function
  */
-export const settingsRetrieved = () =>
-  (dispatch) => {
-    getSettings()
-      .then((data) => {
-        dispatch({
-          type: actionTypes.settingsRetrieved,
-          data,
-        });
-      });
-  };
+export const settingsRetrieved = () => dispatch => {
+  getSettings().then(data => {
+    dispatch({
+      type: actionTypes.settingsRetrieved,
+      data,
+    });
+  });
+};

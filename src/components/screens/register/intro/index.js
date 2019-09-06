@@ -12,12 +12,18 @@ class Intro extends React.Component {
   state = {
     passphrase: '',
     buttonStatus: true,
-  }
+  };
 
   componentDidMount() {
-    const { t, navigation: { setParams } } = this.props;
+    const {
+      t,
+      navigation: { setParams },
+    } = this.props;
 
-    const passphrase = this.props.navigation.getParam('passphrase', generatePassphrase());
+    const passphrase = this.props.navigation.getParam(
+      'passphrase',
+      generatePassphrase()
+    );
     this.setState({ passphrase });
 
     setParams({
@@ -27,55 +33,56 @@ class Intro extends React.Component {
     });
   }
 
-  confirm = (status) => {
+  confirm = status => {
     this.setState({
       buttonStatus: !status,
     });
-  }
+  };
 
   forward = () => {
     this.props.nextStep({
       passphrase: this.state.passphrase,
     });
-  }
+  };
 
   render() {
     const { t } = this.props;
-
 
     const descriptionContent = [
       {
         step: 1,
         title: 'Your Lisk address',
-        description: 'The address is unique and can’t be changed. It’s yours. Find it in your home page.',
+        description:
+          'The address is unique and can’t be changed. It’s yours. Find it in your home page.',
         imageSrc: addressImg,
         imageStyle: styles.sliderImage,
       },
       {
         step: 2,
         title: 'A unique avatar',
-        description: 'The Avatar represents the address, making it easy to recognize.',
+        description:
+          'The Avatar represents the address, making it easy to recognize.',
         imageSrc: uniqueAvatarImg,
         imageStyle: styles.sliderImage,
       },
       {
         step: 3,
         title: 'A secure passphrase',
-        description: 'Your passphrase is used to access your account. No one can reset it, not even Lisk.',
+        description:
+          'Your passphrase is used to access your account. No one can reset it, not even Lisk.',
         imageSrc: securePassphraseImg,
         imageStyle: styles.sliderImage,
       },
     ];
-
 
     return (
       <SafeAreaView style={styles.wrapper}>
         <Slider
           descriptionContent={descriptionContent}
           skip={this.forward}
-          testID='accountCreation'
-          t={t}>
-        </Slider>
+          testID="accountCreation"
+          t={t}
+        ></Slider>
       </SafeAreaView>
     );
   }

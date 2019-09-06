@@ -47,7 +47,7 @@ const styles = {
   },
   splashStatic: {
     zIndex: 2,
-    top: (deviceHeight() / 2) - 80,
+    top: deviceHeight() / 2 - 80,
   },
   splashAnimating: {
     zIndex: 1,
@@ -62,7 +62,7 @@ const styles = {
     height: 60,
     width: '80%',
     left: '10%',
-    top: (deviceHeight() / 2) + 20,
+    top: deviceHeight() / 2 + 20,
     position: 'absolute',
     textAlign: 'center',
   },
@@ -98,7 +98,6 @@ const styles = {
     height: 300,
     width: '100%',
     backgroundColor: colors.light.white,
-
   },
   illustrationWrapper: {
     width: '100%',

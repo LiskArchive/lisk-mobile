@@ -2,19 +2,16 @@
   "parser": "babel-eslint",
   "extends": [
     "airbnb-base",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "prettier/react"
   ],
   "env": {
     "browser": true,
     "jest": true
   },
-  "plugins": [
-    "react",
-    "import",
-    "babel",
-    "jest",
-    "detox"
-  ],
+  "plugins": ["react", "import", "babel", "jest", "detox", "prettier"],
   "globals": {
     "PRODUCTION": true,
     "TEST": true
@@ -22,21 +19,26 @@
   "rules": {
     "func-names": "off",
     "global-require": "off",
-    "new-cap": ["error", {
-      "newIsCapExceptions": ["mnemonic"]
-    }],
+    "new-cap": [
+      "error",
+      {
+        "newIsCapExceptions": ["mnemonic"]
+      }
+    ],
     "no-unused-vars": ["error", { "varsIgnorePattern": "connect|[A|a]ction" }],
     "react/prop-types": "off",
     "no-plusplus": "off",
     "no-underscore-dangle": "off",
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": [
-        "./src/**/*.test.js",
-        "./test/**/*.js",
-        "./src/**/stories.js",
-        "./src/tests.js",
-        "./src/i18n-scanner.js",
-        "./e2e/**/*.js"
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "./src/**/*.test.js",
+          "./test/**/*.js",
+          "./src/**/stories.js",
+          "./src/tests.js",
+          "./src/i18n-scanner.js",
+          "./e2e/**/*.js"
         ]
       }
     ],
@@ -54,8 +56,6 @@
     "jest/prefer-to-have-length": "error"
   },
   "settings": {
-    "mocha/additionalTestFunctions": [
-      "describeModule"
-    ]
+    "mocha/additionalTestFunctions": ["describeModule"]
   }
 }

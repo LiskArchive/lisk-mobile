@@ -18,8 +18,7 @@ const randomIndex = (list, words) => {
   let index;
   do {
     index = Math.floor(Math.random() * words.length);
-  }
-  while (list.includes(index));
+  } while (list.includes(index));
   return index;
 };
 
@@ -57,10 +56,17 @@ class Confirm extends React.Component {
   };
 
   componentDidMount() {
-    const { t, prevStep, navigation: { setParams } } = this.props;
+    const {
+      t,
+      prevStep,
+      navigation: { setParams },
+    } = this.props;
     setParams({
       action: prevStep,
-      title: deviceHeight() >= SCREEN_HEIGHTS.SM ? t('Passphrase verification') : t('Verification'),
+      title:
+        deviceHeight() >= SCREEN_HEIGHTS.SM
+          ? t('Passphrase verification')
+          : t('Verification'),
     });
     this.generateTest();
   }
@@ -86,13 +92,13 @@ class Confirm extends React.Component {
         },
       ],
     });
-  }
+  };
 
-  confirm = (status) => {
+  confirm = status => {
     this.setState({
       buttonStatus: !status,
     });
-  }
+  };
   toggleOptions(index) {
     const temp = this.state.answers;
     temp[index].value = undefined;
@@ -103,22 +109,25 @@ class Confirm extends React.Component {
     });
   }
 
-  fillOption = (item) => {
+  fillOption = item => {
     const temp = this.state.answers;
     temp[this.state.visibleOptions] = {
-      value: item, style: styles.filledOutPlaceholder, textStyle: styles.labelUnchecked,
+      value: item,
+      style: styles.filledOutPlaceholder,
+      textStyle: styles.labelUnchecked,
     };
     this.setState({
       answers: temp,
       visibleOptions: false,
     });
     this.checkAnswers(temp);
-  }
+  };
 
-  checkAnswers = (answers) => {
+  checkAnswers = answers => {
     const passphrase = this.props.sharedData.passphrase.split(' ');
     const start = answers.filter(item => item.value).length;
-    const result = answers.filter(item => passphrase.includes(item.value)).length;
+    const result = answers.filter(item => passphrase.includes(item.value))
+      .length;
     const isCorrect = result === 2;
     if (start === 2) {
       if (!isCorrect) {
@@ -126,33 +135,41 @@ class Confirm extends React.Component {
           this.generateTest();
         }, 1000);
       }
-      const finalAnswers = answers.map(item => (
-        {
-          value: item.value,
-          style: styles.noBorderBottom,
-          textStyle: isCorrect ? styles.labelCorrect : styles.labelIncorrect,
-        }
-      ));
+      const finalAnswers = answers.map(item => ({
+        value: item.value,
+        style: styles.noBorderBottom,
+        textStyle: isCorrect ? styles.labelCorrect : styles.labelIncorrect,
+      }));
       this.setState({
         answers: finalAnswers,
-        buttonStatus: (!isCorrect),
+        buttonStatus: !isCorrect,
       });
     }
-  }
+  };
 
   renderPassphrase = () => {
     const passphrase = this.props.sharedData.passphrase.split(' ');
-    return this.state.missing.length > 0 ? passphrase.map((val, index) => {
-      const optionIndex = this.state.missing.indexOf(index);
-      const element = optionIndex >= 0 ?
-        this.generatePlaceholder(index, optionIndex, val) :
-        <P key={index} style={styles.word}>{val}</P>;
-      return element;
-    }) : null;
-  }
+    return this.state.missing.length > 0
+      ? passphrase.map((val, index) => {
+          const optionIndex = this.state.missing.indexOf(index);
+          const element =
+            optionIndex >= 0 ? (
+              this.generatePlaceholder(index, optionIndex, val)
+            ) : (
+              <P key={index} style={styles.word}>
+                {val}
+              </P>
+            );
+          return element;
+        })
+      : null;
+  };
 
   generatePlaceholder(index, optionIndex, value) {
-    const style = this.state.visibleOptions === optionIndex ? null : styles.deActivePlaceholder;
+    const style =
+      this.state.visibleOptions === optionIndex
+        ? null
+        : styles.deActivePlaceholder;
     return (
       <Button
         noPredefinedStyle
@@ -161,13 +178,21 @@ class Confirm extends React.Component {
         title={this.state.answers[optionIndex].value}
         onClick={() => this.toggleOptions(optionIndex)}
         textStyle={[styles.label, this.state.answers[optionIndex].textStyle]}
-        style={[styles.placeholder, style, this.state.answers[optionIndex].style]}
+        style={[
+          styles.placeholder,
+          style,
+          this.state.answers[optionIndex].style,
+        ]}
       />
     );
   }
 
   render() {
-    const { t, nextStep, sharedData: { passphrase } } = this.props;
+    const {
+      t,
+      nextStep,
+      sharedData: { passphrase },
+    } = this.props;
     return (
       <SafeAreaView style={styles.wrapper}>
         <View style={styles.container}>
@@ -176,15 +201,18 @@ class Confirm extends React.Component {
               <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
                 {t('Tap and fill in the blanks:')}
               </P>
-              <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
+              <View
+                style={[styles.passphraseContainer, styles.horizontalPadding]}
+              >
                 {this.renderPassphrase()}
               </View>
               <View
                 testID="passphraseOptionsContainer"
                 style={[styles.optionsContainer, styles.horizontalPadding]}
               >
-                {this.state.options[this.state.visibleOptions]
-                  ? this.state.options[this.state.visibleOptions].map((value, idx) => (
+                {this.state.options[this.state.visibleOptions] ? (
+                  this.state.options[this.state.visibleOptions].map(
+                    (value, idx) => (
                       <Button
                         noPredefinedStyle
                         testID={`passphraseOptionFor-${value}`}
@@ -194,8 +222,11 @@ class Confirm extends React.Component {
                         title={value}
                         onClick={() => this.fillOption(value)}
                       />
-                    ))
-                  : <View style={styles.optionPlaceholder} />}
+                    )
+                  )
+                ) : (
+                  <View style={styles.optionPlaceholder} />
+                )}
               </View>
             </View>
           </View>

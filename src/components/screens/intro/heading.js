@@ -9,20 +9,21 @@ import styles from './styles';
 import { colors } from '../../../constants/styleGuide';
 import { PrimaryButton } from '../../shared/toolBox/button';
 import { headerHeight } from '../../../utilities/device';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../../actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
 import URLs from '../../../constants/URLs';
 
-@connect(() => ({}), {
-  settingsUpdated: settingsUpdatedAction,
-})
+@connect(
+  () => ({}),
+  {
+    settingsUpdated: settingsUpdatedAction,
+  }
+)
 class Heading extends React.Component {
   state = {
     confirmed: false,
   };
 
-  confirm = (status) => {
+  confirm = status => {
     this.setState({
       confirmed: status,
     });
@@ -30,19 +31,17 @@ class Heading extends React.Component {
 
   openTermsAndConditions = () => {
     Linking.openURL(URLs.liskTermsAndConditions);
-  }
+  };
 
-  onPress = (slideContent) => {
+  onPress = slideContent => {
     if (slideContent.acceptTermsSwitch) {
       this.props.settingsUpdated({ showedIntro: true });
     }
     this.props.skip();
-  }
+  };
 
   render() {
-    const {
-      t, descriptionContent, hasHeader, testID,
-    } = this.props;
+    const { t, descriptionContent, hasHeader, testID } = this.props;
     const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {};
     return (
       <View style={styles.headingContainer}>
@@ -55,12 +54,24 @@ class Heading extends React.Component {
           paginationStyle={styles.headingPagination}
         >
           {descriptionContent.map(item => (
-            <View key={item.step} style={styles.step} testID={`${testID}-${item.step}`}>
+            <View
+              key={item.step}
+              style={styles.step}
+              testID={`${testID}-${item.step}`}
+            >
               <View style={styles.descriptionWrapper}>
-                <H2 style={[styles.centralized, styles.descriptionH]}>{t(item.title)}</H2>
-                <P style={[styles.centralized, styles.descriptionP]}>{t(item.description)}</P>
+                <H2 style={[styles.centralized, styles.descriptionH]}>
+                  {t(item.title)}
+                </H2>
+                <P style={[styles.centralized, styles.descriptionP]}>
+                  {t(item.description)}
+                </P>
               </View>
-              <Image resizeMethod={'scale'} source={item.imageSrc} style={item.imageStyle} />
+              <Image
+                resizeMethod={'scale'}
+                source={item.imageSrc}
+                style={item.imageStyle}
+              />
               {item.step === descriptionContent.length && (
                 <View style={[styles.buttonContainer, buttonStyle]}>
                   {item.acceptTermsSwitch && (
@@ -75,7 +86,12 @@ class Heading extends React.Component {
                       />
                       <P style={styles.confirmationText}>
                         {t('I have read and agreed with the')}
-                        <A onPress ={this.openTermsAndConditions} style={styles.link}>&nbsp;{t('terms and conditions.')}</A>
+                        <A
+                          onPress={this.openTermsAndConditions}
+                          style={styles.link}
+                        >
+                          &nbsp;{t('terms and conditions.')}
+                        </A>
                       </P>
                     </View>
                   )}

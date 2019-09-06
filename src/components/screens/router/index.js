@@ -53,86 +53,94 @@ const headerStyle = {
  */
 const t = str => str;
 
-const SendStack = createStackNavigator({
-  Send: {
-    screen: Send,
+const SendStack = createStackNavigator(
+  {
+    Send: {
+      screen: Send,
+    },
   },
-}, {
-  navigationOptions: ({ navigation }) => ({
-    headerBackground: <HeaderBackground />,
-    headerTitle: HeaderTitle,
-    headerRight: <TokenSwitcher navigation={navigation} />,
-  }),
-});
+  {
+    navigationOptions: ({ navigation }) => ({
+      headerBackground: <HeaderBackground />,
+      headerTitle: HeaderTitle,
+      headerRight: <TokenSwitcher navigation={navigation} />,
+    }),
+  }
+);
 
-const HomeStack = createStackNavigator({
-  Home: {
-    screen: Home,
+const HomeStack = createStackNavigator(
+  {
+    Home: {
+      screen: Home,
+    },
   },
-}, {
-  defaultNavigationOptions: {
-    headerBackground: <DynamicHeaderBackground />,
-  },
-});
+  {
+    defaultNavigationOptions: {
+      headerBackground: <DynamicHeaderBackground />,
+    },
+  }
+);
 
 // eslint-disable-next-line new-cap
-const Tabs = createBottomTabNavigator({
-  Home: {
-    screen: HomeStack,
-    navigationOptions: {
-      tabBarIcon: props => <TabBarIcon name='home' {...props} />, //eslint-disable-line
-      tabBarOnPress: ({ defaultHandler, navigation }) => {
-        if (navigation.isFocused() && navigation.getParam('scrollToTop')) {
-          navigation.state.params.scrollToTop();
-        } else {
-          defaultHandler(0);
-        }
+const Tabs = createBottomTabNavigator(
+  {
+    Home: {
+      screen: HomeStack,
+      navigationOptions: {
+        tabBarIcon: props => <TabBarIcon name="home" {...props} />, //eslint-disable-line
+        tabBarOnPress: ({ defaultHandler, navigation }) => {
+          if (navigation.isFocused() && navigation.getParam('scrollToTop')) {
+            navigation.state.params.scrollToTop();
+          } else {
+            defaultHandler(0);
+          }
+        },
+      },
+    },
+    Request: {
+      screen: Request,
+      navigationOptions: {
+        tabBarIcon: props => <TabBarIcon name="request" {...props} />, //eslint-disable-line
+      },
+    },
+    Send: {
+      screen: SendStack,
+      navigationOptions: {
+        tabBarIcon: props => <TabBarIcon name="send" {...props} />, //eslint-disable-line
+      },
+    },
+    Bookmarks: {
+      screen: Bookmark,
+      navigationOptions: {
+        title: t('Bookmarks'),
+        tabBarLabel: 'Bookmarks',
+        tabBarIcon: props => <TabBarIcon name="bookmark" {...props} />, //eslint-disable-line
+      },
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions: {
+        title: t('Settings'),
+        tabBarIcon: props => <TabBarIcon name="settings" {...props} />, //eslint-disable-line
       },
     },
   },
-  Request: {
-    screen: Request,
-    navigationOptions: {
-      tabBarIcon: props => <TabBarIcon name='request' {...props} />, //eslint-disable-line
+  {
+    tabBarComponent: TabBarComponent,
+    initialRouteName: 'Home',
+    headerMode: 'screen',
+    swipeEnabled: false,
+    tabBarOptions: {
+      activeTintColor: undefined,
+      indicatorStyle: undefined,
+      inactiveTintColor: undefined,
+      showIcon: true,
+      showLabel: false,
+      upperCaseLabel: false,
+      allowFontScaling: false,
     },
-  },
-  Send: {
-    screen: SendStack,
-    navigationOptions: {
-      tabBarIcon: props => <TabBarIcon name='send' {...props} />, //eslint-disable-line
-    },
-  },
-  Bookmarks: {
-    screen: Bookmark,
-    navigationOptions: {
-      title: t('Bookmarks'),
-      tabBarLabel: 'Bookmarks',
-      tabBarIcon: props => <TabBarIcon name='bookmark' {...props} />, //eslint-disable-line
-    },
-  },
-  Settings: {
-    screen: Settings,
-    navigationOptions: {
-      title: t('Settings'),
-      tabBarIcon: props => <TabBarIcon name='settings' {...props} />, //eslint-disable-line
-    },
-  },
-}, {
-  tabBarComponent: TabBarComponent,
-  initialRouteName: 'Home',
-  headerMode: 'screen',
-  swipeEnabled: false,
-  tabBarOptions: {
-    activeTintColor: undefined,
-    indicatorStyle: undefined,
-    inactiveTintColor: undefined,
-    showIcon: true,
-    showLabel: false,
-    upperCaseLabel: false,
-    allowFontScaling: false,
-  },
-});
-
+  }
+);
 
 // eslint-disable-next-line new-cap
 const MainStack = createStackNavigator(
@@ -159,17 +167,20 @@ const MainStack = createStackNavigator(
       navigationOptions: ({ navigation }) => {
         const title = navigation.state.routes[navigation.state.index].routeName;
         // Do not render header on tabs that have their own stack navigator nested
-        const shouldRenderHeader = !('routes' in navigation.state.routes[navigation.state.index]);
-        const headerConfig = shouldRenderHeader ?
-          {
-            headerTitle: HeaderTitle,
-            headerRight: <TokenSwitcher navigation={navigation} />,
-            headerBackground: <HeaderBackground noBorder={true} />,
-            headerStyle,
-            title,
-          } : {
-            header: null,
-          };
+        const shouldRenderHeader = !(
+          'routes' in navigation.state.routes[navigation.state.index]
+        );
+        const headerConfig = shouldRenderHeader
+          ? {
+              headerTitle: HeaderTitle,
+              headerRight: <TokenSwitcher navigation={navigation} />,
+              headerBackground: <HeaderBackground noBorder={true} />,
+              headerStyle,
+              title,
+            }
+          : {
+              header: null,
+            };
 
         return headerConfig;
       },
@@ -293,48 +304,55 @@ const MainStack = createStackNavigator(
   {
     initialRouteName: 'SignIn',
     headerLayoutPreset: 'center',
-    transitionConfig: ({ scene }) => (scene.routeName === 'SignIn' ? ({
-      transitionSpec: {
-        duration: 0,
-      },
-    }) : ({
-      transitionSpec: {
-        duration: 300,
-      },
-    })),
-  },
+    transitionConfig: ({ scene }) =>
+      scene.routeName === 'SignIn'
+        ? {
+            transitionSpec: {
+              duration: 0,
+            },
+          }
+        : {
+            transitionSpec: {
+              duration: 300,
+            },
+          },
+  }
 );
 
-const MainNavigator = createStackNavigator({ //eslint-disable-line
-  Home: {
-    screen: MainStack,
-    navigationOptions: {
-      headerStyle: {
-        display: 'none',
+const MainNavigator = createStackNavigator(
+  {
+    //eslint-disable-line
+    Home: {
+      screen: MainStack,
+      navigationOptions: {
+        headerStyle: {
+          display: 'none',
+        },
+      },
+    },
+    AddBookmark: {
+      screen: AddBookmark,
+      navigationOptions: {
+        headerTitle: props => <HeaderTitle {...props} />, //eslint-disable-line
+        headerRight: HeaderPlaceholderButton,
+        headerBackground: <HeaderBackground />,
+        headerStyle: {
+          overflow: 'hidden',
+          elevation: 0,
+        },
       },
     },
   },
-  AddBookmark: {
-    screen: AddBookmark,
-    navigationOptions: {
-      headerTitle: props => <HeaderTitle {...props} />, //eslint-disable-line
-      headerRight: HeaderPlaceholderButton,
-      headerBackground: <HeaderBackground />,
-      headerStyle: {
-        overflow: 'hidden',
-        elevation: 0,
-      },
+  {
+    mode: 'modal',
+    cardStyle: {
+      backgroundColor: 'transparent',
+      opacity: 1,
     },
-  },
-}, {
-  mode: 'modal',
-  cardStyle: {
-    backgroundColor: 'transparent',
-    opacity: 1,
-  },
-  navigationOptions: {
-    gesturesEnabled: false,
-  },
-});
+    navigationOptions: {
+      gesturesEnabled: false,
+    },
+  }
+);
 
 export default createAppContainer(MainNavigator);

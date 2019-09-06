@@ -9,7 +9,11 @@ import image from '../../../../assets/images/registrationProcess/success3x.png';
 
 class Success extends React.Component {
   componentDidMount() {
-    const { t, hideNav, navigation: { setParams } } = this.props;
+    const {
+      t,
+      hideNav,
+      navigation: { setParams },
+    } = this.props;
 
     hideNav();
 
@@ -22,7 +26,10 @@ class Success extends React.Component {
   }
 
   render() {
-    const { t, navigation: { pop } } = this.props;
+    const {
+      t,
+      navigation: { pop },
+    } = this.props;
 
     return (
       <SafeAreaView style={styles.wrapper}>
@@ -30,19 +37,18 @@ class Success extends React.Component {
           <View>
             <View style={styles.titleContainer}>
               <P style={styles.subTitle}>
-                {t('Great! now you can use your passphrase to sign in to your account.')}
+                {t(
+                  'Great! now you can use your passphrase to sign in to your account.'
+                )}
               </P>
             </View>
-            <View style={styles.imageContainer} >
-              <Image
-                style={styles.image}
-                source={image}
-              />
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={image} />
             </View>
           </View>
           <View>
             <PrimaryButton
-              testID='registerSuccess'
+              testID="registerSuccess"
               style={styles.button}
               onClick={pop}
               title={t('Sign in now')}

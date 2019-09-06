@@ -30,9 +30,9 @@ class MultiStep extends React.Component {
     origin: 0,
   };
 
-  next = (data) => {
+  next = data => {
     this.move({ moves: 1, data });
-  }
+  };
 
   /**
    *
@@ -46,25 +46,23 @@ class MultiStep extends React.Component {
    */
   prev = (moves = -1) => {
     this.move({ moves });
-  }
+  };
 
   reset = (data = {}) => {
     this.move({ to: 0, data, reset: true });
-  }
+  };
 
   // eslint-disable-next-line class-methods-use-this
   keepTargetInRange(target, moves, current, totalSteps) {
     if (typeof target === 'number') {
       return Math.max(Math.min(target, totalSteps - 1), 0);
     }
-    return (moves > 0) ?
-      Math.min(current + moves, totalSteps - 1) :
-      Math.max(0, current + moves);
+    return moves > 0
+      ? Math.min(current + moves, totalSteps - 1)
+      : Math.max(0, current + moves);
   }
 
-  move = ({
-    moves, to, data, reset = false,
-  }) => {
+  move = ({ moves, to, data, reset = false }) => {
     const { key, current } = this.state;
     const { children } = this.props;
     const next = this.keepTargetInRange(to, moves, current, children.length);
@@ -75,14 +73,26 @@ class MultiStep extends React.Component {
       origin: current,
       key: reset ? key + 1 : key, // re-mounts child component.
     });
-  }
+  };
 
   render() {
     const {
-      children, finalCallback, backButtonTitle,
-      showNav, navStyles, showProgressBar, progressStepContainerStyle,
-      interactive, backButton, prevPage, hideGroups, hideSteps,
-      activeTitle, navigatorButton, groupButton, stepButton,
+      children,
+      finalCallback,
+      backButtonTitle,
+      showNav,
+      navStyles,
+      showProgressBar,
+      progressStepContainerStyle,
+      interactive,
+      backButton,
+      prevPage,
+      hideGroups,
+      hideSteps,
+      activeTitle,
+      navigatorButton,
+      groupButton,
+      stepButton,
     } = this.props;
 
     const { key, data, current } = this.state;
@@ -93,7 +103,7 @@ class MultiStep extends React.Component {
       sharedData: data,
     };
 
-    if (current === (children.length - 1)) {
+    if (current === children.length - 1) {
       if (typeof finalCallback === 'function') {
         extraProps.finalCallback = finalCallback;
       }
@@ -104,37 +114,33 @@ class MultiStep extends React.Component {
 
     return (
       <Element key={key} {...normalizedStyles.multiStepWrapper}>
-        {
-          showNav ?
-            <Nav
-              normalizedStyles={normalizedStyles}
-              hideGroups={hideGroups}
-              hideSteps={hideSteps}
-              steps={children}
-              groupButton={groupButton}
-              stepButton={stepButton}
-              interactive={interactive}
-              current={current}
-              activeTitle={activeTitle}
-              navigatorButton={navigatorButton}
-              backButton={backButton}
-              backButtonTitle={backButtonTitle}
-              prevPage={prevPage}
-              prevStep={this.prev}
-              move={this.move}
-            /> : null
-        }
-        {
-          showProgressBar ?
-            <Progress
-              progressStepContainerStyle={progressStepContainerStyle}
-              current={current + 1}
-              total={children.length}
-            /> : null
-        }
-        {
-          React.cloneElement(children[current], extraProps)
-        }
+        {showNav ? (
+          <Nav
+            normalizedStyles={normalizedStyles}
+            hideGroups={hideGroups}
+            hideSteps={hideSteps}
+            steps={children}
+            groupButton={groupButton}
+            stepButton={stepButton}
+            interactive={interactive}
+            current={current}
+            activeTitle={activeTitle}
+            navigatorButton={navigatorButton}
+            backButton={backButton}
+            backButtonTitle={backButtonTitle}
+            prevPage={prevPage}
+            prevStep={this.prev}
+            move={this.move}
+          />
+        ) : null}
+        {showProgressBar ? (
+          <Progress
+            progressStepContainerStyle={progressStepContainerStyle}
+            current={current + 1}
+            total={children.length}
+          />
+        ) : null}
+        {React.cloneElement(children[current], extraProps)}
       </Element>
     );
   }

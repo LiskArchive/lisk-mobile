@@ -20,7 +20,7 @@ class Scanner extends React.Component {
       permission: 'undetermined',
       visible: false,
     },
-  }
+  };
 
   componentDidMount() {
     this.checkPermissions();
@@ -28,17 +28,17 @@ class Scanner extends React.Component {
   }
 
   checkPermissions = () => {
-    Permissions.checkMultiple(['camera', 'photo']).then((response) => {
+    Permissions.checkMultiple(['camera', 'photo']).then(response => {
       this.setPermissions(response);
     });
-  }
+  };
 
-  setPermissions = (permissions) => {
+  setPermissions = permissions => {
     const { camera, photo } = this.state;
     camera.permission = permissions.camera;
     photo.permission = permissions.photo;
     this.setState({ camera, photo });
-  }
+  };
 
   toggleCamera = () => {
     const { camera } = this.state;
@@ -70,9 +70,9 @@ class Scanner extends React.Component {
 
     photo.visible = !photo.visible;
     this.setState({ photo });
-  }
+  };
 
-  readFromPhotoGallery = (items) => {
+  readFromPhotoGallery = items => {
     const { photo, camera } = this.state;
     photo.visible = false;
     camera.visible = false;
@@ -88,51 +88,57 @@ class Scanner extends React.Component {
         this.props.onQRCodeRead(result);
       });
     }
-  }
+  };
 
-  readQRcode = (event) => {
+  readQRcode = event => {
     this.toggleCamera();
     this.props.onQRCodeRead(event.data);
-  }
+  };
 
   render() {
     const {
-      styles, containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
-      readFromCameraRoll, fullScreen, permissionDialogTitle, permissionDialogMessage,
+      styles,
+      containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
+      readFromCameraRoll,
+      fullScreen,
+      permissionDialogTitle,
+      permissionDialogMessage,
     } = this.props;
     const { camera, photo } = this.state;
     return (
       <Fragment>
-        {
-          camera.visible ?
-            <RNCamera
-              ref={(ref) => {
-                this.camera = ref;
-              }}
-              style = {[styles.preview, styles.cameraPreview, scanner]}
-              onBarCodeRead={this.readQRcode}
-              barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-              type={RNCamera.Constants.Type.back}
-              notAuthorizedView={<CameraAccess close={this.toggleCamera} fullScreen={fullScreen} />}
-              pendingAuthorizationView={<CameraAccess close={this.toggleCamera} />}
-              permissionDialogTitle={permissionDialogTitle}
-              permissionDialogMessage={permissionDialogMessage}
-            >
-              {
-                readFromCameraRoll ?
-                  <CameraOverlay
-                    containerStyles={cameraOverlay}
-                    toggleGallery={this.toggleGallery}
-                    photoPermission={photo.permission}
-                  /> :
-                  <ClosureOverlay
-                    close={this.toggleCamera}
-                    containerStyles={cameraOverlay}
-                  />
-              }
-            </RNCamera>
-          : null
-        }
+        {camera.visible ? (
+          <RNCamera
+            ref={ref => {
+              this.camera = ref;
+            }}
+            style={[styles.preview, styles.cameraPreview, scanner]}
+            onBarCodeRead={this.readQRcode}
+            barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+            type={RNCamera.Constants.Type.back}
+            notAuthorizedView={
+              <CameraAccess close={this.toggleCamera} fullScreen={fullScreen} />
+            }
+            pendingAuthorizationView={
+              <CameraAccess close={this.toggleCamera} />
+            }
+            permissionDialogTitle={permissionDialogTitle}
+            permissionDialogMessage={permissionDialogMessage}
+          >
+            {readFromCameraRoll ? (
+              <CameraOverlay
+                containerStyles={cameraOverlay}
+                toggleGallery={this.toggleGallery}
+                photoPermission={photo.permission}
+              />
+            ) : (
+              <ClosureOverlay
+                close={this.toggleCamera}
+                containerStyles={cameraOverlay}
+              />
+            )}
+          </RNCamera>
+        ) : null}
         <CameraRoll
           containerStyles={cameraRoll}
           onSelect={this.readFromPhotoGallery}

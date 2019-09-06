@@ -10,8 +10,8 @@ class Splash extends React.Component {
   state = {
     bgOpacity: new Animated.Value(1),
     iconOpacity: new Animated.Value(0),
-    top: new Animated.Value((deviceHeight() / 2) - 18),
-  }
+    top: new Animated.Value(deviceHeight() / 2 - 18),
+  };
 
   componentDidMount() {
     const { animate } = this.props;
@@ -34,7 +34,7 @@ class Splash extends React.Component {
     }).start();
 
     const iconOpacityDuration = animate ? 300 : 0;
-    const iconOpacityDelay = animate ? (bgOpacityDuration + topDelay) : 0;
+    const iconOpacityDelay = animate ? bgOpacityDuration + topDelay : 0;
     Animated.timing(this.state.iconOpacity, {
       toValue: 1,
       duration: iconOpacityDuration,
@@ -49,17 +49,25 @@ class Splash extends React.Component {
       <View style={styles.splashContainer}>
         <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]} />
 
-        <Animated.View style={[styles.splashFigure, styles.splashStatic, { opacity: iconOpacity }]}>
+        <Animated.View
+          style={[
+            styles.splashFigure,
+            styles.splashStatic,
+            { opacity: iconOpacity },
+          ]}
+        >
           <Icon
-            name='lisk-full'
+            name="lisk-full"
             size={55}
             color={colors.light.ultramarineBlue}
           />
         </Animated.View>
 
-        <Animated.View style={[styles.splashFigure, styles.splashAnimating, { top }]}>
+        <Animated.View
+          style={[styles.splashFigure, styles.splashAnimating, { top }]}
+        >
           <Icon
-            name='lisk-full'
+            name="lisk-full"
             size={55}
             color={colors.light.white}
             style={styles.splashLogo}

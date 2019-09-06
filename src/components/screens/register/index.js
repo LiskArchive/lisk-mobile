@@ -11,9 +11,15 @@ import styles from './styles';
 import { IconButton } from '../../shared/toolBox/button';
 import { colors } from '../../../constants/styleGuide';
 
-const NavButton = props =>
-  <Text {...props} style={[styles.navButton, props.disabled ? styles.disabledNavButton : null]} />;
-const ActiveTitle = props => <Small style={styles.activeGroupTitle} {...props} />;
+const NavButton = props => (
+  <Text
+    {...props}
+    style={[styles.navButton, props.disabled ? styles.disabledNavButton : null]}
+  />
+);
+const ActiveTitle = props => (
+  <Small style={styles.activeGroupTitle} {...props} />
+);
 class Register extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -30,19 +36,16 @@ class Register extends React.Component {
       },
       headerLeft: params.showButtonLeft ? (
         <IconButton
-          icon='back'
+          icon="back"
           title={params.backButtonTitle || ''}
           onPress={() => (params.action ? params.action() : navigation.pop())}
           style={styles.backButton}
           color={colors.light.slateGray}
         />
       ) : (
-        <IconButton
-          color='transparent'
-          icon='back'
-        />
+        <IconButton color="transparent" icon="back" />
       ),
-      headerRight: <IconButton color='transparent' icon='back'/>,
+      headerRight: <IconButton color="transparent" icon="back" />,
     };
   };
 
@@ -51,11 +54,17 @@ class Register extends React.Component {
   };
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.onBackButtonPressedAndroid
+    );
   }
 
   componentWillUnmount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.onBackButtonPressedAndroid
+    );
   }
 
   onBackButtonPressedAndroid = () => {
@@ -67,13 +76,13 @@ class Register extends React.Component {
     }
 
     return false;
-  }
+  };
 
   hideNav = () => {
     this.setState({
       showNav: false,
     });
-  }
+  };
 
   render() {
     const { navigation, t } = this.props;
@@ -81,7 +90,9 @@ class Register extends React.Component {
     return (
       <View style={[styles.container, noNavStyle]}>
         <MultiStep
-          ref={(el) => { this.nav = el; }}
+          ref={el => {
+            this.nav = el;
+          }}
           showNav={this.state.showNav}
           navStyles={styles}
           hideSteps={true}
@@ -89,13 +100,29 @@ class Register extends React.Component {
           activeTitle={ActiveTitle}
           showProgressBar
           progressStepContainerStyle={styles.progressStepContainer}
-          backButtonTitle='Back'>
-          <Intro title='create' group={t('1. Creating your account')} navigation={navigation}></Intro>
-          <SafeKeeping title='safekeeping' group={t('2. Saving your passphrase')} navigation={navigation}></SafeKeeping>
-          <Confirm title='verify' group={t('3. Verifying your passphrase')} navigation={navigation}></Confirm>
-          <Success title='success' group={t('4. Security reminder')}
+          backButtonTitle="Back"
+        >
+          <Intro
+            title="create"
+            group={t('1. Creating your account')}
+            navigation={navigation}
+          ></Intro>
+          <SafeKeeping
+            title="safekeeping"
+            group={t('2. Saving your passphrase')}
+            navigation={navigation}
+          ></SafeKeeping>
+          <Confirm
+            title="verify"
+            group={t('3. Verifying your passphrase')}
+            navigation={navigation}
+          ></Confirm>
+          <Success
+            title="success"
+            group={t('4. Security reminder')}
             hideNav={this.hideNav}
-            navigation={navigation}></Success>
+            navigation={navigation}
+          ></Success>
         </MultiStep>
       </View>
     );

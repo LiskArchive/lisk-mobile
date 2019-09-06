@@ -25,11 +25,7 @@ const FormattedDate = ({
 
   moment.locale(locale);
 
-  return (
-    <Element style={style}>
-      {moment(children).format(format)}
-    </Element>
-  );
+  return <Element style={style}>{moment(children).format(format)}</Element>;
 };
 
 export default FormattedDate;

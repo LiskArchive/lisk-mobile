@@ -9,7 +9,13 @@ import getStyles from './styles';
 import { isEmpty } from '../../../../../../utilities/helpers';
 
 const DynamicFeeSelector = ({
-  value, data, selected, tokenType, onChange, styles, t,
+  value,
+  data,
+  selected,
+  tokenType,
+  onChange,
+  styles,
+  t,
 }) => {
   let content;
 
@@ -46,11 +52,13 @@ const DynamicFeeSelector = ({
               },
             ]}
           >
-            <Small style={[
-              styles.itemLabel,
-              styles.theme.itemLabel,
-              key === selected ? styles.selectedItemLabel : null,
-            ]}>
+            <Small
+              style={[
+                styles.itemLabel,
+                styles.theme.itemLabel,
+                key === selected ? styles.selectedItemLabel : null,
+              ]}
+            >
               {key}
             </Small>
           </TouchableOpacity>
@@ -77,9 +85,7 @@ const DynamicFeeSelector = ({
         )}
       </View>
 
-      <View style={[styles.container, styles.theme.container]}>
-        {content}
-      </View>
+      <View style={[styles.container, styles.theme.container]}>{content}</View>
     </View>
   );
 };

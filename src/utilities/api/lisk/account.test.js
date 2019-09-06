@@ -1,7 +1,8 @@
 import { getSummary, extractAddress, extractPublicKey } from './account';
 import LiskAPIClient from './apiClient';
 
-const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
+const passphrase =
+  'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 const account = {
   address: '5092448154042807473L',
   balance: '10000',
@@ -35,7 +36,10 @@ describe('api/lisk/account', () => {
     });
 
     it('handles empty results coming from accounts.get method', async () => {
-      LiskAPIClient.accounts.get.mockResolvedValueOnce({ data: [], success: false });
+      LiskAPIClient.accounts.get.mockResolvedValueOnce({
+        data: [],
+        success: false,
+      });
       const result = await getSummary({ address: account.address });
       expect(result).toEqual({
         address: account.address,

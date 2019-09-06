@@ -4,14 +4,13 @@ import { translate } from 'react-i18next';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 
-const HeaderTitle = ({
-  styles, t, children,
-}) => (
+const HeaderTitle = ({ styles, t, children }) => (
   <Animated.Text
     numberOfLines={1}
     style={styles.main}
     accessibilityTraits="header"
-    allowFontScaling={false}>
+    allowFontScaling={false}
+  >
     {t(children)}
   </Animated.Text>
 );

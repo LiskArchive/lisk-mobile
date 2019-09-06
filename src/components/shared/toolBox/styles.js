@@ -67,7 +67,7 @@ const styles = {
         top: -20,
       },
       ios: {
-        marginBottom: (20 + bottomOffset),
+        marginBottom: 20 + bottomOffset,
       },
     }),
   },
