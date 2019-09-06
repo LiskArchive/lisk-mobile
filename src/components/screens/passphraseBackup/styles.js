@@ -17,6 +17,15 @@ export default () => ({
     text: {
       marginBottom: 28,
     },
+    QRText: {
+      marginTop: 26,
+      marginBottom: 8,
+      textAlign: 'center',
+    },
+    button: {
+      color: colors.light.ultramarineBlue,
+      fontWeight: 'bold',
+    },
   },
 
   [themes.light]: {
@@ -24,7 +33,7 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     text: {
-      color: colors.dark.blueGray,
+      color: colors.light.blueGray,
     },
   },
 

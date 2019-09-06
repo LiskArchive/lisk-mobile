@@ -102,7 +102,8 @@ const styles = {
   footerButtonContainer: {
     width: '100%',
     position: 'absolute',
-    padding: boxes.boxPadding,
+    paddingBottom: boxes.boxPadding,
+    paddingHorizontal: boxes.boxPadding,
     bottom: 0,
   },
   iPhoneXMargin: {
