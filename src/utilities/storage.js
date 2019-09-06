@@ -6,13 +6,10 @@ export const blankSettings = {
   validated: true,
 };
 
-const validateAccounts = (data) => {
+const validateAccounts = data => {
   try {
     const parsedData = Array.isArray(data) ? data : JSON.parse(data);
-    if (
-      !parsedData ||
-      typeof parsedData !== 'object'
-    ) {
+    if (!parsedData || typeof parsedData !== 'object') {
       return blankAccounts;
     }
     return parsedData;
@@ -21,7 +18,7 @@ const validateAccounts = (data) => {
   }
 };
 
-const validateSettings = (data) => {
+const validateSettings = data => {
   try {
     const parsedData = typeof data === 'object' ? data : JSON.parse(data);
 

@@ -2,7 +2,8 @@ import fetchMock from 'fetch-mock';
 import { getSummary, extractAddress } from './account';
 
 const data = {
-  passphrase: 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together',
+  passphrase:
+    'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together',
   address: '1PA2gjCNsjsNEMSfAk6QhY8SEEs1GsPRk6',
 };
 

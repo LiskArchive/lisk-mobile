@@ -9,11 +9,12 @@ import getStyles from './styles';
 }))
 class DynamicHeaderBackground extends React.Component {
   render() {
-    const { settings: { token }, styles } = this.props;
+    const {
+      settings: { token },
+      styles,
+    } = this.props;
 
-    return (
-      <View style={[styles.header, styles.theme[token.active]]} />
-    );
+    return <View style={[styles.header, styles.theme[token.active]]} />;
   }
 }
 

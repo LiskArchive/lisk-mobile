@@ -10,7 +10,7 @@ class DeleteBookmarkModal extends React.Component {
   onConfirm = () => {
     this.props.modalCallback();
     this.props.close();
-  }
+  };
 
   render() {
     const { styles, t, close } = this.props;
@@ -18,7 +18,7 @@ class DeleteBookmarkModal extends React.Component {
     return (
       <View style={styles.container}>
         <Small style={[styles.text, styles.theme.text]}>
-        {t('Are you sure about deleting this bookmark?')}
+          {t('Are you sure about deleting this bookmark?')}
         </Small>
 
         <Small style={[styles.text, styles.theme.text]}>
@@ -32,10 +32,7 @@ class DeleteBookmarkModal extends React.Component {
           title={t('Delete this bookmark')}
         />
 
-        <A
-          onPress={close}
-          style={styles.theme.cancelButton}
-        >
+        <A onPress={close} style={styles.theme.cancelButton}>
           {t('Cancel')}
         </A>
       </View>

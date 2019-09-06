@@ -1,21 +1,14 @@
 module.exports = {
   modulePaths: ['src/'],
-  testMatch: [
-    '<rootDir>/src/**/*.test.js',
-  ],
-  testPathIgnorePatterns: [
-    '<rootDir>/src/components/',
-    '<rootDir>/e2e/',
-  ],
+  testMatch: ['<rootDir>/src/**/*.test.js'],
+  testPathIgnorePatterns: ['<rootDir>/src/components/', '<rootDir>/e2e/'],
   verbose: true,
   cache: false,
   moduleFileExtensions: ['js'],
   moduleDirectories: ['node_modules'],
   collectCoverage: true,
   coverageDirectory: '<rootDir>/coverage/jest',
-  collectCoverageFrom: [
-    'src/**/*.js',
-  ],
+  collectCoverageFrom: ['src/**/*.js'],
   coveragePathIgnorePatterns: [
     '/node_modules/',
     'src/components/',
@@ -55,15 +48,15 @@ module.exports = {
     TEST: true,
   },
   preset: 'react-native',
-  coverageReporters: [
-    'text',
-    'html',
-    'lcov',
-    'cobertura',
+  coverageReporters: ['text', 'html', 'lcov', 'cobertura'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(@react-native-community|react-native)/)',
   ],
-  transformIgnorePatterns: ['node_modules/(?!(@react-native-community|react-native)/)'],
   reporters: [
     'default',
-    ['jest-junit', { suiteName: 'jest tests', outputDirectory: '<rootDir>/coverage/jest' }],
+    [
+      'jest-junit',
+      { suiteName: 'jest tests', outputDirectory: '<rootDir>/coverage/jest' },
+    ],
   ],
 };

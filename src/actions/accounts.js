@@ -1,6 +1,9 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts, storeAccounts } from '../utilities/storage';
-import { account as accountAPI, transactions as transactionsAPI } from '../utilities/api';
+import {
+  account as accountAPI,
+  transactions as transactionsAPI,
+} from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
 
 /**
@@ -13,15 +16,13 @@ import { loadingStarted, loadingFinished } from './loading';
  * @param {Object} data - The accounts data to get stored in asyncStorage
  * @returns {Function} Thunk action function
  */
-export const accountsStored = data =>
-  (dispatch) => {
-    storeAccounts(data)
-      .then(() => {
-        dispatch({
-          type: actionTypes.accountsStored,
-        });
-      });
-  };
+export const accountsStored = data => dispatch => {
+  storeAccounts(data).then(() => {
+    dispatch({
+      type: actionTypes.accountsStored,
+    });
+  });
+};
 
 /**
  * Retrieves the stored accounts and then
@@ -35,23 +36,21 @@ export const accountsStored = data =>
  *
  * @returns {Function} Thunk action function
  */
-export const followedAccountsRetrieved = () =>
-  (dispatch) => {
-    retrieveAccounts()
-      .then((accounts) => {
-        if (accounts.LSK) {
-          dispatch({
-            type: actionTypes.followedAccountsRetrieved,
-            data: accounts,
-          });
-        } else {
-          dispatch({
-            type: actionTypes.followedAccountsRetrieved,
-            data: { LSK: accounts, BTC: [] },
-          });
-        }
+export const followedAccountsRetrieved = () => dispatch => {
+  retrieveAccounts().then(accounts => {
+    if (accounts.LSK) {
+      dispatch({
+        type: actionTypes.followedAccountsRetrieved,
+        data: accounts,
       });
-  };
+    } else {
+      dispatch({
+        type: actionTypes.followedAccountsRetrieved,
+        data: { LSK: accounts, BTC: [] },
+      });
+    }
+  });
+};
 
 /**
  * Returns a pure action object to store the given account
@@ -147,8 +146,9 @@ export const accountFetched = givenToken => (dispatch, getState) => {
   const { address } = getState().accounts.info[selectedToken];
 
   dispatch(loadingStarted(actionTypes.accountFetched));
-  return accountAPI.getSummary(selectedToken, { address })
-    .then((account) => {
+  return accountAPI
+    .getSummary(selectedToken, { address })
+    .then(account => {
       dispatch({
         type: actionTypes.accountUpdated,
         data: {
@@ -157,7 +157,8 @@ export const accountFetched = givenToken => (dispatch, getState) => {
         },
       });
       dispatch(loadingFinished(actionTypes.accountFetched));
-    }).catch(() => {
+    })
+    .catch(() => {
       dispatch(loadingFinished(actionTypes.accountFetched));
     });
 };
@@ -174,9 +175,11 @@ export const blockUpdated = () => async (dispatch, getState) => {
       offset: 0,
     });
 
-    const newTransactions = lastTx ?
-      response.data.filter(tx => tx.confirmations === 0 || tx.timestamp > lastTx.timestamp) :
-      response.data;
+    const newTransactions = lastTx
+      ? response.data.filter(
+          tx => tx.confirmations === 0 || tx.timestamp > lastTx.timestamp
+        )
+      : response.data;
 
     if (newTransactions.length) {
       dispatch({

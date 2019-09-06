@@ -1,7 +1,7 @@
 import actionTypes from '../../constants/actions';
 import { storeFollowedAccount } from '../../utilities/storage';
 
-const accountsMiddleware = store => next => (action) => {
+const accountsMiddleware = store => next => action => {
   next(action);
   const { accounts } = store.getState();
 
@@ -11,7 +11,8 @@ const accountsMiddleware = store => next => (action) => {
     case actionTypes.accountUnFollowed:
       storeFollowedAccount(accounts.followed);
       break;
-    default: break;
+    default:
+      break;
   }
 };
 

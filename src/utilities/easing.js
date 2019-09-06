@@ -11,27 +11,28 @@ const easing = {
   // accelerating from zero velocity
   easeInQuad: t => pow(t, 2),
   // decelerating to zero velocity
-  easeOutQuad: t => (t * (2 - t)),
+  easeOutQuad: t => t * (2 - t),
   // acceleration until halfway, then deceleration
-  easeInOutQuad: t => (t < 0.5 ? 2 * pow(t, 2) : -1 + ((4 - (2 * t)) * t)),
+  easeInOutQuad: t => (t < 0.5 ? 2 * pow(t, 2) : -1 + (4 - 2 * t) * t),
   // accelerating from zero velocity
   easeInCubic: t => pow(t, 3),
   // decelerating to zero velocity
-  easeOutCubic: t => (((--t) * pow(t, 2)) + 1),
+  easeOutCubic: t => --t * pow(t, 2) + 1,
   // acceleration until halfway, then deceleration
-  easeInOutCubic: t => (t < 0.5 ? 4 * pow(t, 3) : ((t - 1) * ((2 * t) - 2) * ((2 * t) - 2)) + 1),
+  easeInOutCubic: t =>
+    t < 0.5 ? 4 * pow(t, 3) : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
   // accelerating from zero velocity
   easeInQuart: t => pow(t, 4),
   // decelerating to zero velocity
-  easeOutQuart: t => (1 - ((--t) * pow(t, 3))),
+  easeOutQuart: t => 1 - --t * pow(t, 3),
   // acceleration until halfway, then deceleration
-  easeInOutQuart: t => (t < 0.5 ? 8 * pow(t, 4) : 1 - (8 * (--t) * pow(t, 3))),
+  easeInOutQuart: t => (t < 0.5 ? 8 * pow(t, 4) : 1 - 8 * --t * pow(t, 3)),
   // accelerating from zero velocity
   easeInQuint: t => pow(t, 5),
   // decelerating to zero velocity
-  easeOutQuint: t => (1 + ((--t) * pow(t, 4))),
+  easeOutQuint: t => 1 + --t * pow(t, 4),
   // acceleration until halfway, then deceleration
-  easeInOutQuint: t => (t < 0.5 ? 16 * pow(t, 5) : 1 + (16 * (--t) * pow(t, 4))),
+  easeInOutQuint: t => (t < 0.5 ? 16 * pow(t, 5) : 1 + 16 * --t * pow(t, 4)),
 };
 
 export default easing;

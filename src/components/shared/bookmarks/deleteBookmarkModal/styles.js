@@ -12,7 +12,7 @@ export default () => ({
       lineHeight: 22,
     },
     actionButton: {
-      width: deviceWidth() - (boxes.boxPadding * 2),
+      width: deviceWidth() - boxes.boxPadding * 2,
       height: boxes.buttonHeight,
       borderWidth: 1,
       borderRadius: boxes.buttonBorderRadius,

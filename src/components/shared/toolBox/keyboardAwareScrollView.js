@@ -10,20 +10,18 @@ import { deviceType } from '../../../utilities/device';
 class ScrollAwareActionBar extends React.Component {
   state = {
     buttonStyle: theme.footerButton,
-  }
+  };
 
-  toggleButtonView = (status) => {
+  toggleButtonView = status => {
     if (status) {
       this.setState({ buttonStyle: theme.footerButton });
     } else {
       this.setState({ buttonStyle: theme.keyboardStickyButton });
     }
-  }
+  };
 
-  renderButton = (style) => {
-    const {
-      buttonTestID, noTheme, disabled, onSubmit, button,
-    } = this.props;
+  renderButton = style => {
+    const { buttonTestID, noTheme, disabled, onSubmit, button } = this.props;
 
     return (
       <PrimaryButton
@@ -35,12 +33,10 @@ class ScrollAwareActionBar extends React.Component {
         style={style}
       />
     );
-  }
+  };
 
   render() {
-    const {
-      children, styles, viewIsInsideTab,
-    } = this.props;
+    const { children, styles, viewIsInsideTab } = this.props;
     const { buttonStyle } = this.state;
 
     /*
@@ -50,29 +46,38 @@ class ScrollAwareActionBar extends React.Component {
      * the correct botton's height. The following workaround fixes
      * this issue until the library supports SafeAreaView
      */
-    const shouldBeOptimizedForIphoneX = !viewIsInsideTab && deviceType() === 'iOSx';
+    const shouldBeOptimizedForIphoneX =
+      !viewIsInsideTab && deviceType() === 'iOSx';
 
     return (
       <Fragment>
         <KeyboardAwareScrollView
           enableOnAndroid={true}
-          contentContainerStyle={[styles ? styles.container : null, theme.scrollViewContainer]}
+          contentContainerStyle={[
+            styles ? styles.container : null,
+            theme.scrollViewContainer,
+          ]}
           onKeyboardWillHide={() => this.toggleButtonView(true)}
           onKeyboardDidHide={() => this.toggleButtonView(true)}
           onKeyboardWillShow={() => this.toggleButtonView(false)}
           onKeyboardDidShow={() => this.toggleButtonView(false)}
         >
-          <View style={[styles ? styles.innerContainer : null, theme.scrollViewInnerContainer]}>
+          <View
+            style={[
+              styles ? styles.innerContainer : null,
+              theme.scrollViewInnerContainer,
+            ]}
+          >
             {children}
             {buttonStyle === theme.footerButton && (
-                <View
-                  style={[
-                    theme.footerButtonContainer,
-                    shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
-                  ]}
-                >
-                  {this.renderButton(theme.footerButton)}
-                </View>
+              <View
+                style={[
+                  theme.footerButtonContainer,
+                  shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
+                ]}
+              >
+                {this.renderButton(theme.footerButton)}
+              </View>
             )}
           </View>
         </KeyboardAwareScrollView>
@@ -81,7 +86,8 @@ class ScrollAwareActionBar extends React.Component {
             {this.renderButton(theme.keyboardStickyButton)}
           </KeyboardTrackingView>
         )}
-      </Fragment>);
+      </Fragment>
+    );
   }
 }
 

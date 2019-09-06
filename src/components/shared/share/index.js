@@ -6,7 +6,15 @@ import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
 const Share = ({
-  styles, icon, value, style, type, children, containerStyle, iconColor, title,
+  styles,
+  icon,
+  value,
+  style,
+  type,
+  children,
+  containerStyle,
+  iconColor,
+  title,
 }) => {
   const Element = type || Text;
 
@@ -18,17 +26,18 @@ const Share = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <Element
-        style={style}
-        onPress={shareContent}>{children || title}</Element>
-      {
-        icon ? <Icon
-                style={styles.icon}
-                name='share'
-                size={14}
-                onPress={shareContent}
-                color={iconColor || colors.light.blueGray} /> : null
-      }
+      <Element style={style} onPress={shareContent}>
+        {children || title}
+      </Element>
+      {icon ? (
+        <Icon
+          style={styles.icon}
+          name="share"
+          size={14}
+          onPress={shareContent}
+          color={iconColor || colors.light.blueGray}
+        />
+      ) : null}
     </View>
   );
 };

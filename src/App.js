@@ -12,16 +12,21 @@ import i18n from '../locales';
 import Alert from './components/shared/alert';
 import Modal from './components/shared/modal';
 
-@connect(state => ({
-  settings: state.settings,
-}), {})
+@connect(
+  state => ({
+    settings: state.settings,
+  }),
+  {}
+)
 class ThemedApp extends React.Component {
   render() {
     const { theme } = this.props.settings;
     return (
       <ThemeContext.Provider value={theme}>
-        <I18nextProvider i18n={ i18n }>
-          <StatusBar barStyle={theme === themes.light ? 'dark-content' : 'light-content'} />
+        <I18nextProvider i18n={i18n}>
+          <StatusBar
+            barStyle={theme === themes.light ? 'dark-content' : 'light-content'}
+          />
           <Loading />
           <Router />
           <Alert />

@@ -1,4 +1,9 @@
-import { themes, colors, boxes, fonts } from '../../../../../constants/styleGuide';
+import {
+  themes,
+  colors,
+  boxes,
+  fonts,
+} from '../../../../../constants/styleGuide';
 import { deviceType, tabBarHeight } from '../../../../../utilities/device';
 
 export default () => ({

@@ -17,12 +17,15 @@ import { themes } from '../../../../../constants/styleGuide';
 
 const createdAnimDuration = 6200;
 
-@connect(state => ({
-  account: state.accounts.info,
-  transactions: state.transactions,
-  activeToken: state.settings.active,
-  followedAccounts: state.accounts.followed,
-}), {})
+@connect(
+  state => ({
+    account: state.accounts.info,
+    transactions: state.transactions,
+    activeToken: state.settings.active,
+    followedAccounts: state.accounts.followed,
+  }),
+  {}
+)
 class Result extends React.Component {
   state = {
     step: 0,
@@ -35,7 +38,10 @@ class Result extends React.Component {
   };
 
   componentDidMount() {
-    const { reset, navigation: { setParams } } = this.props;
+    const {
+      reset,
+      navigation: { setParams },
+    } = this.props;
     setParams({
       title: 'Sent',
       showButtonLeft: false,
@@ -46,7 +52,9 @@ class Result extends React.Component {
   }
 
   componentWillUnmount() {
-    const { navigation: { setParams } } = this.props;
+    const {
+      navigation: { setParams },
+    } = this.props;
     clearTimeout(this.timeouts.created);
     clearTimeout(this.timeouts.confirmed);
     setParams({ title: 'Send' });
@@ -54,10 +62,12 @@ class Result extends React.Component {
 
   componentWillUpdate(nextProp) {
     const { sharedData } = this.props;
-    const nowPending = this.props.transactions.pending.filter(tx =>
-      tx.id === sharedData.txId).length > 0;
-    const nextConfirmed = nextProp.transactions.confirmed.filter(tx =>
-      tx.id === sharedData.txId).length > 0;
+    const nowPending =
+      this.props.transactions.pending.filter(tx => tx.id === sharedData.txId)
+        .length > 0;
+    const nextConfirmed =
+      nextProp.transactions.confirmed.filter(tx => tx.id === sharedData.txId)
+        .length > 0;
 
     if (nowPending && nextConfirmed) {
       this.setState({ txConfirmed: true });
@@ -68,18 +78,24 @@ class Result extends React.Component {
     if (stage === 'created') {
       this.animation[0].play();
       this.timeouts.created = setTimeout(() => {
-        this.setState({
-          step: 1,
-        }, () => {
-          this.animation[1].play();
-        });
+        this.setState(
+          {
+            step: 1,
+          },
+          () => {
+            this.animation[1].play();
+          }
+        );
       }, createdAnimDuration);
     } else if (stage === 'confirmed') {
-      this.setState({
-        step: 2,
-      }, () => {
-        this.animation[2].play();
-      });
+      this.setState(
+        {
+          step: 2,
+        },
+        () => {
+          this.animation[2].play();
+        }
+      );
     }
   }
 
@@ -89,12 +105,21 @@ class Result extends React.Component {
 
   render() {
     const {
-      t, styles, finalCallback, reset, navigation, theme,
-      followedAccounts, settings: { token }, sharedData: { address },
+      t,
+      styles,
+      finalCallback,
+      reset,
+      navigation,
+      theme,
+      followedAccounts,
+      settings: { token },
+      sharedData: { address },
     } = this.props;
     const { step } = this.state;
 
-    const isNotFollowed = !followedAccounts[token.active].some(item => item.address === address);
+    const isNotFollowed = !followedAccounts[token.active].some(
+      item => item.address === address
+    );
 
     const [txCreatedAnim, txPendingAnim, txConfirmedAnim] =
       theme === themes.light
@@ -104,29 +129,53 @@ class Result extends React.Component {
     return (
       <View style={[styles.container, styles.theme.container]}>
         <P style={styles.theme.subtitle}>
-          {t('Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.')}
+          {t(
+            'Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.'
+          )}
         </P>
         <View style={styles.illustration}>
-          {step === 0 ? <LottieView
-            source={txCreatedAnim}
-            loop={false}
-            ref={(el) => { this.animation[0] = el; }} />
-            : null}
-          {step === 1 ? <LottieView
-            source={txPendingAnim}
-            loop={true}
-            onAnimationFinish={this.isTxConfirmed()}
-            ref={(el) => { this.animation[1] = el; }} />
-            : null}
-          {step === 2 ? <LottieView
-            source={txConfirmedAnim}
-            loop={false}
-            ref={(el) => { this.animation[2] = el; }} />
-            : null}
+          {step === 0 ? (
+            <LottieView
+              source={txCreatedAnim}
+              loop={false}
+              ref={el => {
+                this.animation[0] = el;
+              }}
+            />
+          ) : null}
+          {step === 1 ? (
+            <LottieView
+              source={txPendingAnim}
+              loop={true}
+              onAnimationFinish={this.isTxConfirmed()}
+              ref={el => {
+                this.animation[1] = el;
+              }}
+            />
+          ) : null}
+          {step === 2 ? (
+            <LottieView
+              source={txConfirmedAnim}
+              loop={false}
+              ref={el => {
+                this.animation[2] = el;
+              }}
+            />
+          ) : null}
         </View>
         <View style={styles.footer}>
           {isNotFollowed && (
-            <A onPress={() => navigation.navigate('AddBookmark', { title: t('New bookmark'), account: { address } })} style={styles.anchor}>{t('Add address to bookmarks')}</A>
+            <A
+              onPress={() =>
+                navigation.navigate('AddBookmark', {
+                  title: t('New bookmark'),
+                  account: { address },
+                })
+              }
+              style={styles.anchor}
+            >
+              {t('Add address to bookmarks')}
+            </A>
           )}
           <PrimaryButton
             style={styles.button}

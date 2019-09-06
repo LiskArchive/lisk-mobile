@@ -12,10 +12,14 @@ import { colors } from '../../../../constants/styleGuide';
 class SafeKeeping extends React.Component {
   state = {
     confirmed: false,
-  }
+  };
 
   componentDidMount() {
-    const { t, prevStep, navigation: { setParams } } = this.props;
+    const {
+      t,
+      prevStep,
+      navigation: { setParams },
+    } = this.props;
     setParams({
       action: prevStep,
       title: t('Your passphrase'),
@@ -26,23 +30,28 @@ class SafeKeeping extends React.Component {
     this.props.nextStep({
       passphrase: this.props.sharedData.passphrase,
     });
-  }
+  };
 
-  confirm = (status) => {
+  confirm = status => {
     this.setState({
       confirmed: status,
     });
-  }
+  };
 
   render() {
-    const { t, sharedData: { passphrase } } = this.props;
+    const {
+      t,
+      sharedData: { passphrase },
+    } = this.props;
 
     return (
       <SafeAreaView style={styles.wrapper}>
         <View style={styles.container}>
           <View style={styles.body}>
             <View style={styles.passphraseContainer}>
-              <P style={styles.passphraseTitle}>{t('Store your passphrase carefully')}</P>
+              <P style={styles.passphraseTitle}>
+                {t('Store your passphrase carefully')}
+              </P>
               <Text style={styles.passphrase} testID="passphraseText">
                 {passphrase.replace(/\s+/g, '  ')}
               </Text>
@@ -68,7 +77,11 @@ class SafeKeeping extends React.Component {
                 backgroundActive={colors.light.ultramarineBlue}
                 backgroundInactive={colors.light.platinum}
               />
-              <P style={styles.confirmText}>{t('I understand that it’s my responsibility to keep my passphrase safe.')}</P>
+              <P style={styles.confirmText}>
+                {t(
+                  'I understand that it’s my responsibility to keep my passphrase safe.'
+                )}
+              </P>
             </View>
             <View>
               <PrimaryButton
@@ -77,7 +90,8 @@ class SafeKeeping extends React.Component {
                 style={styles.button}
                 noTheme={true}
                 onClick={this.forward}
-                title={t('I wrote it down')} />
+                title={t('I wrote it down')}
+              />
             </View>
           </View>
         </View>

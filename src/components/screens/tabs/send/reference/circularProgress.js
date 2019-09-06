@@ -16,7 +16,12 @@ const CircularProgress = ({ style, value, max }) => {
   };
 
   return (
-    <View style={[style, (!style || (!style.width && !style.height)) && defaultDimensions]}>
+    <View
+      style={[
+        style,
+        (!style || (!style.width && !style.height)) && defaultDimensions,
+      ]}
+    >
       <Svg height="100%" width="100%" viewBox="0 0 100 100">
         <Circle
           cx="50"
@@ -36,7 +41,9 @@ const CircularProgress = ({ style, value, max }) => {
           origin="50"
           strokeDasharray={circunference}
           strokeDashoffset={offset}
-          stroke={error ? colors.light.burntSieanna : colors.light.ultramarineBlue}
+          stroke={
+            error ? colors.light.burntSieanna : colors.light.ultramarineBlue
+          }
           strokeWidth="4"
           fill="transparent"
         />

@@ -44,10 +44,12 @@ describe('Reducers: Accounts', () => {
       },
     };
 
-    expect(accounts(state, action)).toEqual(merge(state, {
-      passphrase: data.passphrase,
-      info: { LSK: data.accountA.address },
-    }));
+    expect(accounts(state, action)).toEqual(
+      merge(state, {
+        passphrase: data.passphrase,
+        info: { LSK: data.accountA.address },
+      })
+    );
   });
 
   it('should retain the state in case of accountUpdated', () => {
@@ -59,11 +61,13 @@ describe('Reducers: Accounts', () => {
       },
     };
 
-    expect(accounts(state, action)).toEqual(merge(state, {
-      info: merge(state.info, {
-        [data.activeToken]: data.accountB,
-      }),
-    }));
+    expect(accounts(state, action)).toEqual(
+      merge(state, {
+        info: merge(state.info, {
+          [data.activeToken]: data.accountB,
+        }),
+      })
+    );
   });
 
   it('should empty accounts.active in case of accountSignedOut', () => {
@@ -89,7 +93,10 @@ describe('Reducers: Accounts', () => {
       },
     };
     const changedState = accounts(state, action);
-    const expectedData = { BTC: undefined, LSK: [data.accountA, data.accountB] };
+    const expectedData = {
+      BTC: undefined,
+      LSK: [data.accountA, data.accountB],
+    };
     expect(changedState.followed).toEqual(expectedData);
   });
 
@@ -117,7 +124,9 @@ describe('Reducers: Accounts', () => {
       data: expectedValue,
     };
     const changedState = accounts(state, action);
-    expect(changedState.followed[data.activeToken][1]).toEqual(expectedValue.account);
+    expect(changedState.followed[data.activeToken][1]).toEqual(
+      expectedValue.account
+    );
   });
 
   it('should update one of the followed accounts in case of followedAccountsRetrieved', () => {
@@ -130,7 +139,10 @@ describe('Reducers: Accounts', () => {
   });
 
   it('should make no change in case of accountsStored', () => {
-    const action = { type: actionTypes.accountsStored, data: { LSK: [data.accountA] } };
+    const action = {
+      type: actionTypes.accountsStored,
+      data: { LSK: [data.accountA] },
+    };
     const changedState = accounts(state, action);
     expect(changedState.followed.LSK).toHaveLength(0);
   });

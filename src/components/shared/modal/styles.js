@@ -47,7 +47,8 @@ export default () => ({
     contentContainer: {
       paddingHorizontal: boxes.boxPadding,
       paddingTop: boxes.boxPadding + 50,
-      paddingBottom: deviceType() === 'iOSx' ? boxes.boxPadding + 20 : boxes.boxPadding,
+      paddingBottom:
+        deviceType() === 'iOSx' ? boxes.boxPadding + 20 : boxes.boxPadding,
     },
   },
   [themes.light]: {

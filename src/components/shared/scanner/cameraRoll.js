@@ -5,15 +5,16 @@ import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
 const CameraRoll = ({
-  styles, permission, visible, onSelect, containerStyles,
+  styles,
+  permission,
+  visible,
+  onSelect,
+  containerStyles,
 }) => {
   if (permission !== 'denied' && visible) {
     return (
       <View style={[styles.preview, styles.photoPreview, containerStyles]}>
-        <CameraRollPicker
-          selectSingleItem={true}
-          callback={onSelect}
-        />
+        <CameraRollPicker selectSingleItem={true} callback={onSelect} />
       </View>
     );
   }

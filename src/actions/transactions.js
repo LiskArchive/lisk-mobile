@@ -8,7 +8,10 @@ const fetchTransactions = async (dispatch, getState, data) => {
   dispatch(loadingStarted(actionTypes.transactionsLoaded));
 
   try {
-    const response = await transactionsAPI.get(getState().settings.token.active, data);
+    const response = await transactionsAPI.get(
+      getState().settings.token.active,
+      data
+    );
 
     dispatch({
       type: actionTypes.transactionsLoaded,
@@ -44,8 +47,14 @@ export const transactionsLoaded = data => async (dispatch, getState) => {
  * @param {Function} successCb - success callback
  * @param {Function} errorCb - error callback
  */
-export const transactionAdded = (data, successCb, errorCb) => async (dispatch, getState) => {
-  const { settings: { token }, accounts } = getState();
+export const transactionAdded = (data, successCb, errorCb) => async (
+  dispatch,
+  getState
+) => {
+  const {
+    settings: { token },
+    accounts,
+  } = getState();
   const account = accounts.info[token.active];
 
   try {

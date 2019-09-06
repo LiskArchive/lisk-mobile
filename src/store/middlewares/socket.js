@@ -15,34 +15,34 @@ const closeConnection = () => {
   BackgroundTimer.stopBackgroundTimer();
 };
 
-export const checkBalance = (store) => {
+export const checkBalance = store => {
   const activeToken = store.getState().settings.token.active;
   const { address, balance } = store.getState().accounts.info[activeToken];
-  return accountAPI.getSummary(activeToken, { address }).then((res) => {
+  return accountAPI.getSummary(activeToken, { address }).then(res => {
     if (res.balance !== balance) {
       store.dispatch(blockUpdated());
     }
   });
 };
 
-const socketSetup = (store) => {
+const socketSetup = store => {
   BackgroundTimer.runBackgroundTimer(() => {
     checkBalance(store);
   }, 30000);
 };
 
-const handleConnectivityChange = (connectionInfo) => {
+const handleConnectivityChange = connectionInfo => {
   if (connectionInfo.isConnected) {
     DropDownHolder.closeAlert();
   } else if (!connectionInfo.isConnected) {
     DropDownHolder.error(
       i18n.t('No internet connection!'),
-      i18n.t('Your connection seems to be down, try again later.'),
+      i18n.t('Your connection seems to be down, try again later.')
     );
   }
 };
 
-const socketMiddleware = store => next => (action) => {
+const socketMiddleware = store => next => action => {
   next(action);
   switch (action.type) {
     case actionTypes.accountSignedIn:
@@ -53,7 +53,8 @@ const socketMiddleware = store => next => (action) => {
       closeConnection();
       NetInfo.removeEventListener(handleConnectivityChange);
       break;
-    default: break;
+    default:
+      break;
   }
 };
 

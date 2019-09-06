@@ -7,9 +7,7 @@ import Icon from '../../shared/toolBox/icon';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
 
-const Row = ({
-  styles, theme, t, icon, title, children, style,
-}) => (
+const Row = ({ styles, theme, t, icon, title, children, style }) => (
   <View style={[styles.detailRow, styles.theme.detailRow]}>
     <View style={styles.rowIconWrapper}>
       <Icon
@@ -21,9 +19,7 @@ const Row = ({
     </View>
     <View style={styles.rowContent}>
       <P style={[styles.label, styles.theme.label]}>{t(title)}</P>
-      <View style={[styles.valueContainer, style]}>
-        {children}
-      </View>
+      <View style={[styles.valueContainer, style]}>{children}</View>
     </View>
   </View>
 );

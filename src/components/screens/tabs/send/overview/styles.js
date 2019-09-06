@@ -1,10 +1,14 @@
-import { themes, boxes, colors, fonts } from '../../../../../constants/styleGuide';
+import {
+  themes,
+  boxes,
+  colors,
+  fonts,
+} from '../../../../../constants/styleGuide';
 import { setColorOpacity } from '../../../../../utilities/helpers';
 
 export default () => ({
   common: {
-    container: {
-    },
+    container: {},
     innerContainer: {
       flexGrow: 1,
       flexDirection: 'column',
@@ -71,8 +75,7 @@ export default () => ({
       justifyContent: 'center',
       marginBottom: 10,
     },
-    addressIcon: {
-    },
+    addressIcon: {},
     avatar: {
       marginBottom: 10,
     },

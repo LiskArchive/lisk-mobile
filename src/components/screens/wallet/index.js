@@ -1,7 +1,10 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, Animated } from 'react-native';
-import { account as accountAPI, transactions as transactionsAPI } from '../../../utilities/api';
+import {
+  account as accountAPI,
+  transactions as transactionsAPI,
+} from '../../../utilities/api';
 import AccountSummary from './accountSummary';
 import Transactions from '../../shared/transactions';
 import InfiniteScrollView from '../../shared/infiniteScrollView';
@@ -24,13 +27,16 @@ import HomeHeaderTitle from '../router/homeHeaderTitle';
  * @todo Implement custom message: this can be used in case we need to notify the user
  * about any unforeseen issue/change
  */
-@connect(state => ({
-  followedAccounts: state.accounts.followed || [],
-  activeToken: state.settings.token.active,
-}), {
-  loadingStarted: loadingStartedAction,
-  loadingFinished: loadingFinishedAction,
-})
+@connect(
+  state => ({
+    followedAccounts: state.accounts.followed || [],
+    activeToken: state.settings.token.active,
+  }),
+  {
+    loadingStarted: loadingStartedAction,
+    loadingFinished: loadingFinishedAction,
+  }
+)
 class Wallet extends React.Component {
   state = {
     account: {},
@@ -39,13 +45,13 @@ class Wallet extends React.Component {
       pending: [],
       loaded: false,
     },
-  }
+  };
 
   scrollY = new Animated.Value(0);
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
-    return ({
+    return {
       title: params.title || '',
       headerTitle: <HomeHeaderTitle data={params.title} />,
       headerStyle: {
@@ -54,13 +60,15 @@ class Wallet extends React.Component {
         borderBottomWidth: 0,
         elevation: 0,
       },
-    });
-  }
+    };
+  };
 
   onScroll() {
-    return Animated.event([{
-      nativeEvent: { contentOffset: { y: this.scrollY } },
-    }]);
+    return Animated.event([
+      {
+        nativeEvent: { contentOffset: { y: this.scrollY } },
+      },
+    ]);
   }
 
   interpolate = (inputRange, outputRange) =>
@@ -72,10 +80,13 @@ class Wallet extends React.Component {
 
   setHeader = () => {
     const {
-      activeToken, navigation: { setParams }, followedAccounts,
+      activeToken,
+      navigation: { setParams },
+      followedAccounts,
     } = this.props;
-    const storedAccount = followedAccounts[activeToken].find(item =>
-      item.address === this.state.account.address);
+    const storedAccount = followedAccounts[activeToken].find(
+      item => item.address === this.state.account.address
+    );
 
     setParams({
       title: {
@@ -88,7 +99,7 @@ class Wallet extends React.Component {
         interpolate: this.interpolate,
       },
     });
-  }
+  };
 
   async fetchInitialData() {
     const {
@@ -101,20 +112,25 @@ class Wallet extends React.Component {
     loadingStarted();
     const { address } = navigation.state.params;
     const account = await accountAPI.getSummary(activeToken, { address });
-    const tx = await transactionsAPI.get(activeToken, { address: this.address });
+    const tx = await transactionsAPI.get(activeToken, {
+      address: this.address,
+    });
     loadingFinished();
 
-    this.setState({
-      account,
-      transactions: {
-        confirmed: tx.data,
-        pending: [],
-        loaded: true,
-        count: tx.meta.count,
+    this.setState(
+      {
+        account,
+        transactions: {
+          confirmed: tx.data,
+          pending: [],
+          loaded: true,
+          count: tx.meta.count,
+        },
       },
-    }, () => {
-      this.setHeader();
-    });
+      () => {
+        this.setHeader();
+      }
+    );
   }
 
   async refresh() {
@@ -122,8 +138,12 @@ class Wallet extends React.Component {
     const { confirmed } = this.state.transactions;
     const { address } = navigation.state.params;
     const account = await accountAPI.getSummary(activeToken, { address });
-    const transactions = await transactionsAPI.get(activeToken, { address: this.address });
-    const newTransactions = transactions.data.filter(t => t.timestamp > confirmed[0].timestamp);
+    const transactions = await transactionsAPI.get(activeToken, {
+      address: this.address,
+    });
+    const newTransactions = transactions.data.filter(
+      t => t.timestamp > confirmed[0].timestamp
+    );
 
     if (newTransactions.length > 0) {
       this.setState({
@@ -163,7 +183,7 @@ class Wallet extends React.Component {
     } catch (error) {
       this.props.loadingFinished();
     }
-  }
+  };
 
   componentDidMount() {
     this.address = this.props.navigation.state.params.address;
@@ -172,40 +192,43 @@ class Wallet extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { activeToken, followedAccounts } = this.props;
-    const storedAccount = followedAccounts[activeToken].filter(item =>
-      item.address === this.state.account.address);
-    const prevStoredAccount = prevProps.followedAccounts[activeToken].filter(item =>
-      item.address === this.state.account.address);
+    const storedAccount = followedAccounts[activeToken].filter(
+      item => item.address === this.state.account.address
+    );
+    const prevStoredAccount = prevProps.followedAccounts[activeToken].filter(
+      item => item.address === this.state.account.address
+    );
 
-    if (storedAccount.length !== prevStoredAccount.length ||
-      (storedAccount.length && storedAccount[0].label !== prevStoredAccount[0].label) ||
-      this.state.account.balance !== prevState.account.balance) {
+    if (
+      storedAccount.length !== prevStoredAccount.length ||
+      (storedAccount.length &&
+        storedAccount[0].label !== prevStoredAccount[0].label) ||
+      this.state.account.balance !== prevState.account.balance
+    ) {
       this.setHeader();
     }
   }
 
   render() {
-    const {
-      transactions, account,
-    } = this.state;
+    const { transactions, account } = this.state;
 
-    const {
-      styles,
-      navigation,
-    } = this.props;
+    const { styles, navigation } = this.props;
 
     let content = null;
 
     if (!transactions.loaded) {
       content = <Loading />;
     } else {
-      const listElements = transactions.count > 0 ?
-        [...transactions.pending, ...transactions.confirmed] :
-        ['emptyState'];
+      const listElements =
+        transactions.count > 0
+          ? [...transactions.pending, ...transactions.confirmed]
+          : ['emptyState'];
 
       content = (
         <InfiniteScrollView
-          ref={(el) => { this.scrollView = el; }}
+          ref={el => {
+            this.scrollView = el;
+          }}
           scrollEventThrottle={8}
           onScroll={this.onScroll.call(this)}
           style={[styles.scrollView]}
@@ -213,34 +236,34 @@ class Wallet extends React.Component {
           loadMore={this.loadMore}
           list={listElements}
           count={transactions.count}
-          render={refreshing => (
+          render={refreshing =>
             transactions.count > 0 ? (
               <Transactions
-                type='wallet'
+                type="wallet"
                 transactions={transactions}
                 footer={this.state.footer}
                 navigate={navigation.push}
                 account={account}
                 refreshing={refreshing}
               />
-            ) : <Empty refreshing={refreshing} />
-          )}
+            ) : (
+              <Empty refreshing={refreshing} />
+            )
+          }
         />
       );
     }
 
     return (
       <View style={[styles.container, styles.theme.container]}>
-        {
-          account && account.address ? (
-            <AccountSummary
-              navigation={navigation}
-              scrollY={this.scrollY}
-              account={account}
-              style={styles.accountSummary}
-            />
-          ) : null
-        }
+        {account && account.address ? (
+          <AccountSummary
+            navigation={navigation}
+            scrollY={this.scrollY}
+            account={account}
+            style={styles.accountSummary}
+          />
+        ) : null}
         {content}
       </View>
     );

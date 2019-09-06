@@ -6,9 +6,12 @@ import progressBar from '../../../assets/animations/progressBar.json';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
-@connect(state => ({
-  loading: state.loading,
-}), {})
+@connect(
+  state => ({
+    loading: state.loading,
+  }),
+  {}
+)
 class Loading extends React.Component {
   constructor() {
     super();
@@ -30,7 +33,10 @@ class Loading extends React.Component {
     if (nextProps.loading) {
       if (nextProps.loading.length > 0 && this.props.loading.length === 0) {
         this.show();
-      } else if (nextProps.loading.length === 0 && this.props.loading.length > 0) {
+      } else if (
+        nextProps.loading.length === 0 &&
+        this.props.loading.length > 0
+      ) {
         this.hide();
       }
     }
@@ -39,13 +45,18 @@ class Loading extends React.Component {
   render() {
     const { styles } = this.props;
 
-    return <View style={styles.wrapper}>
-      <LottieView
-        style={styles.animation}
-        source={progressBar}
-        loop={this.state.loop}
-        ref={(el) => { this.animation = el; }}/>
-    </View>;
+    return (
+      <View style={styles.wrapper}>
+        <LottieView
+          style={styles.animation}
+          source={progressBar}
+          loop={this.state.loop}
+          ref={el => {
+            this.animation = el;
+          }}
+        />
+      </View>
+    );
   }
 }
 

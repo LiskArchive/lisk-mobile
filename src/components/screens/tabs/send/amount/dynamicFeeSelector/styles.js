@@ -1,4 +1,9 @@
-import { themes, colors, fonts, boxes } from '../../../../../../constants/styleGuide';
+import {
+  themes,
+  colors,
+  fonts,
+  boxes,
+} from '../../../../../../constants/styleGuide';
 
 const itemBorderRadius = 2;
 

@@ -27,8 +27,8 @@ for (var p in env) {
 process.browser = false;
 global.Buffer = Buffer;
 global.Buffer.prototype.reverse = function() {
-  return require('buffer-reverse')(this , arguments);
-}
+  return require('buffer-reverse')(this, arguments);
+};
 
 const isDev = typeof __DEV__ === 'boolean' && __DEV__;
 process.env['NODE_ENV'] = isDev ? 'development' : 'production';
@@ -39,10 +39,11 @@ if (typeof localStorage !== 'undefined') {
 if (global.navigator && global.navigator.product === 'ReactNative') {
   global.navigator.mimeTypes = '';
   try {
-      global.navigator.userAgent = 'ReactNative';
-  }
-  catch (e) {
-      console.log('Tried to fake useragent, but failed. This is normal on some devices, you may ignore this error: ' + e.message);
+    global.navigator.userAgent = 'ReactNative';
+  } catch (e) {
+    console.log(
+      'Tried to fake useragent, but failed. This is normal on some devices, you may ignore this error: ' +
+        e.message
+    );
   }
 }
-

@@ -9,16 +9,23 @@ import { colors } from '../../../constants/styleGuide';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
-@connect(state => ({
-  settings: state.settings,
-}), {
-  settingsUpdated: settingsUpdatedAction,
-})
+@connect(
+  state => ({
+    settings: state.settings,
+  }),
+  {
+    settingsUpdated: settingsUpdatedAction,
+  }
+)
 class LanguageSelection extends React.Component {
-  onSelect = language => this.props.settingsUpdated({ language })
+  onSelect = language => this.props.settingsUpdated({ language });
 
   render() {
-    const { styles, theme, settings: { language } } = this.props;
+    const {
+      styles,
+      theme,
+      settings: { language },
+    } = this.props;
 
     return (
       <View style={[styles.container, styles.theme.container]}>
@@ -28,12 +35,10 @@ class LanguageSelection extends React.Component {
           renderItem={({ item }) => (
             <TouchableHighlight
               onPress={() => this.onSelect(item)}
-              underlayColor='transparent'
+              underlayColor="transparent"
             >
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
-                <P style={styles.theme.itemLabel}>
-                  {languageMap[item].label}
-                </P>
+                <P style={styles.theme.itemLabel}>{languageMap[item].label}</P>
 
                 <View style={styles.itemSelection}>
                   {language === item ? (

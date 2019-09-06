@@ -5,14 +5,17 @@ import i18n from '../../../locales';
 import { languageKeys } from '../../constants/languages';
 import { pricesRetrieved } from '../../actions/service';
 
-const settingsMiddleware = store => next => (action) => {
+const settingsMiddleware = store => next => action => {
   switch (action.type) {
     case actionTypes.settingsRetrieved:
       if (!action.data.language) {
         action.data.language = deviceLocale();
       }
 
-      if (action.data.language !== 'en' && languageKeys.includes(action.data.language)) {
+      if (
+        action.data.language !== 'en' &&
+        languageKeys.includes(action.data.language)
+      ) {
         i18n.changeLanguage(action.data.language);
       } else {
         action.data.language = 'en';

@@ -15,10 +15,13 @@ import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../../constants/tokens';
 
-@connect(state => ({
-  accounts: state.accounts,
-  settings: state.settings,
-}), {})
+@connect(
+  state => ({
+    accounts: state.accounts,
+    settings: state.settings,
+  }),
+  {}
+)
 class Send extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -28,24 +31,25 @@ class Send extends React.Component {
       title: params.title || 'Send',
       headerLeft: params.showButtonLeft ? (
         <IconButton
-          title=''
-          icon='back'
+          title=""
+          icon="back"
           onPress={params.action}
           style={params.styles && params.styles.back}
-          color={params.theme === themes.light ? colors.light.black : colors.dark.white}
+          color={
+            params.theme === themes.light
+              ? colors.light.black
+              : colors.dark.white
+          }
         />
       ) : (
-        <IconButton
-          color='transparent'
-          icon='back'
-        />
+        <IconButton color="transparent" icon="back" />
       ),
     };
   };
 
   state = {
     showProgressBar: true,
-  }
+  };
 
   componentDidMount() {
     const { navigation } = this.props;
@@ -65,7 +69,9 @@ class Send extends React.Component {
     if (prevProps.settings.token.active !== this.props.settings.token.active) {
       this.resetMultiStep();
     } else {
-      this.checkQuery(prevProps.navigation.dangerouslyGetParent().getParam('query', {}));
+      this.checkQuery(
+        prevProps.navigation.dangerouslyGetParent().getParam('query', {})
+      );
     }
   }
 
@@ -78,28 +84,26 @@ class Send extends React.Component {
     this.props.navigation.setParams({
       query: {},
     });
-  }
+  };
 
   checkQuery = (prevQuery = {}) => {
-    const query = this.props.navigation.dangerouslyGetParent().getParam('query', {});
+    const query = this.props.navigation
+      .dangerouslyGetParent()
+      .getParam('query', {});
 
-    if ((prevQuery !== query) && query && (Object.keys(query).length)) {
+    if (prevQuery !== query && query && Object.keys(query).length) {
       this.resetMultiStep(query);
     }
-  }
+  };
 
   didFocus = () => {
-    const {
-      styles,
-      theme,
-      navigation,
-      accounts,
-      settings,
-      t,
-    } = this.props;
+    const { styles, theme, navigation, accounts, settings, t } = this.props;
 
     navigation.setParams({ styles, theme });
-    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.onBackButtonPressedAndroid
+    );
 
     if (navigation.getParam('initialize', false)) {
       this.nav.move({
@@ -113,19 +117,22 @@ class Send extends React.Component {
     } else {
       this.checkQuery();
     }
-  }
+  };
 
   willBlur = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
-  }
+    BackHandler.removeEventListener(
+      'hardwareBackPress',
+      this.onBackButtonPressedAndroid
+    );
+  };
 
   finalCallback = () => {
     this.props.navigation.navigate({ routeName: 'Home' });
-  }
+  };
 
-  hideProgressBar = (data) => {
+  hideProgressBar = data => {
     this.setState({ showProgressBar: !data });
-  }
+  };
 
   onBackButtonPressedAndroid = () => {
     const action = this.props.navigation.getParam('action', false);
@@ -136,15 +143,10 @@ class Send extends React.Component {
     }
 
     return false;
-  }
+  };
 
   render() {
-    const {
-      styles,
-      accounts,
-      navigation,
-      settings,
-    } = this.props;
+    const { styles, accounts, navigation, settings } = this.props;
 
     let steps = [
       {
@@ -182,7 +184,9 @@ class Send extends React.Component {
 
     return (
       <MultiStep
-        ref={(el) => { this.nav = el; }}
+        ref={el => {
+          this.nav = el;
+        }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         finalCallback={this.finalCallback}
         showProgressBar={this.state.showProgressBar}
