@@ -125,10 +125,10 @@ const styles = {
     paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 13.5,
   },
   confirmationText: {
     marginLeft: 13.5,
-    marginBottom: 13.5,
     flex: 1,
     color: colors.light.blueGray,
     flexWrap: 'wrap',
