@@ -22,7 +22,7 @@ export default () => ({
     },
     linkedItem: {
       flex: 1,
-      width: Screen.width - (boxes.boxPadding * 2),
+      width: Screen.width - boxes.boxPadding * 2,
       marginHorizontal: boxes.boxPadding,
       height: 90,
       paddingTop: 20,
