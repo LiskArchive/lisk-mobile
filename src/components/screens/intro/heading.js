@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
+import connect from 'redux-connect-decorator';
 import Swiper from 'react-native-swiper';
 import Switch from 'react-native-switch-pro';
 import { translate } from 'react-i18next';
@@ -8,7 +9,13 @@ import styles from './styles';
 import { colors } from '../../../constants/styleGuide';
 import { PrimaryButton } from '../../shared/toolBox/button';
 import { headerHeight } from '../../../utilities/device';
+import {
+  settingsUpdated as settingsUpdatedAction,
+} from '../../../actions/settings';
 
+@connect(() => ({}), {
+  settingsUpdated: settingsUpdatedAction,
+})
 class Heading extends React.Component {
   state = {
     confirmed: false,
@@ -20,9 +27,14 @@ class Heading extends React.Component {
     });
   };
 
+  onPress = () => {
+    this.props.settingsUpdated({ showedIntro: true });
+    this.props.skip();
+  }
+
   render() {
     const {
-      t, skip, descriptionContent, hasHeader, testID,
+      t, descriptionContent, hasHeader, testID,
     } = this.props;
     const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {};
     return (
@@ -60,7 +72,7 @@ class Heading extends React.Component {
                   <PrimaryButton
                     disabled={!this.state.confirmed}
                     style={styles.button}
-                    onClick={skip}
+                    onClick={this.onPress}
                     title="Continue"
                     testID="continueButton"
                   />

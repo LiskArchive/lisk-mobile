@@ -25,7 +25,6 @@ class Intro extends React.Component {
   }
 
   componentDidMount() {
-    this.props.settingsUpdated({ showedIntro: true });
     this.timeout = setTimeout(() => {
       SplashScreen.hide();
     }, 400);
