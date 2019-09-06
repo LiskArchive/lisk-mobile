@@ -72,7 +72,7 @@ class Heading extends React.Component {
                     />
                     <P style={styles.confirmationText}>
                       {t('I have read and agreed with the')}
-                      <A onPress ={this.openTermsAndConditions} style={styles.link}>&nbsp;{t('terms and conditions')}</A>
+                      <A onPress ={this.openTermsAndConditions} style={styles.link}>&nbsp;{t('terms and conditions.')}</A>
                     </P>
                   </View>
                   <PrimaryButton
