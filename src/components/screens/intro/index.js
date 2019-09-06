@@ -65,6 +65,7 @@ class Intro extends React.Component {
           'Create an account with one passphrase to access your LSK and BTC cryptocurrencies',
         imageSrc: easyAccessImg,
         imageStyle: styles.illustration,
+        acceptTermsSwitch: true,
       },
     ];
     return (

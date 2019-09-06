@@ -24,7 +24,7 @@ Then(/^I fill in placeholders for the predefined passphrase$/, async function ()
 Then(/I swipe account creation screens$/, async function () {
   await element(by.id('accountCreation-1')).atIndex(0).swipe('left');
   await element(by.id('accountCreation-2')).atIndex(0).swipe('left');
-  await element(by.id('sliderButton')).atIndex(0).tap();
+  await element(by.id('continueButton')).atIndex(0).tap();
 });
 
 

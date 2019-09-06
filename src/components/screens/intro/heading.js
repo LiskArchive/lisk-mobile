@@ -32,8 +32,10 @@ class Heading extends React.Component {
     Linking.openURL(URLs.liskTermsAndConditions);
   }
 
-  onPress = () => {
-    this.props.settingsUpdated({ showedIntro: true });
+  onPress = (slideContent) => {
+    if (slideContent.acceptTermsSwitch) {
+      this.props.settingsUpdated({ showedIntro: true });
+    }
     this.props.skip();
   }
 
@@ -61,24 +63,26 @@ class Heading extends React.Component {
               <Image resizeMethod={'scale'} source={item.imageSrc} style={item.imageStyle} />
               {item.step === descriptionContent.length && (
                 <View style={[styles.buttonContainer, buttonStyle]}>
-                  <View style={styles.switchContainer}>
-                    <Switch
-                      height={26}
-                      width={43}
-                      onSyncPress={this.confirm}
-                      backgroundActive={colors.light.ultramarineBlue}
-                      backgroundInactive={colors.light.platinum}
-                      testID="onboardingSliderButton"
-                    />
-                    <P style={styles.confirmationText}>
-                      {t('I have read and agreed with the')}
-                      <A onPress ={this.openTermsAndConditions} style={styles.link}>&nbsp;{t('terms and conditions.')}</A>
-                    </P>
-                  </View>
+                  {item.acceptTermsSwitch && (
+                    <View style={styles.switchContainer}>
+                      <Switch
+                        height={26}
+                        width={43}
+                        onSyncPress={this.confirm}
+                        backgroundActive={colors.light.ultramarineBlue}
+                        backgroundInactive={colors.light.platinum}
+                        testID="sliderButton"
+                      />
+                      <P style={styles.confirmationText}>
+                        {t('I have read and agreed with the')}
+                        <A onPress ={this.openTermsAndConditions} style={styles.link}>&nbsp;{t('terms and conditions.')}</A>
+                      </P>
+                    </View>
+                  )}
                   <PrimaryButton
-                    disabled={!this.state.confirmed}
+                    disabled={item.acceptTermsSwitch && !this.state.confirmed}
                     style={styles.button}
-                    onClick={this.onPress}
+                    onClick={() => this.onPress(item)}
                     title="Continue"
                     testID="continueButton"
                   />

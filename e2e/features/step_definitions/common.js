@@ -76,7 +76,7 @@ Then(/I swipe intro screens$/, async function() {
   await element(by.id('intro-3'))
     .atIndex(0)
     .swipe('left');
-  await element(by.id('onboardingSliderButton'))
+  await element(by.id('sliderButton'))
     .atIndex(0)
     .tap();
   await element(by.id('continueButton'))
