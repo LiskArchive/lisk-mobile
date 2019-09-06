@@ -5,7 +5,12 @@ import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { translate } from 'react-i18next';
 import Share from '../../../shared/share';
-import { deviceWidth, deviceHeight, deviceType, SCREEN_HEIGHTS } from '../../../../utilities/device';
+import {
+  deviceWidth,
+  deviceHeight,
+  deviceType,
+  SCREEN_HEIGHTS,
+} from '../../../../utilities/device';
 import Input from '../../../shared/toolBox/input';
 import { P, B } from '../../../shared/toolBox/typography';
 import reg from '../../../../constants/regex';
@@ -27,7 +32,7 @@ class Request extends React.Component {
   state = {
     amount: { value: '', validity: -1 },
     url: '',
-  }
+  };
 
   componentDidUpdate(prevProps) {
     if (prevProps.activeToken !== this.props.activeToken) {
@@ -38,9 +43,9 @@ class Request extends React.Component {
     }
   }
 
-  validator = str => reg.amount.test(str)
+  validator = str => reg.amount.test(str);
 
-  changeHandler = (val) => {
+  changeHandler = val => {
     const { account, activeToken } = this.props;
     const { address } = account[activeToken];
 
@@ -59,14 +64,15 @@ class Request extends React.Component {
 
     this.setState({
       amount,
-      url: amountValidity === 0 ? `lisk://wallet?recipient=${address}&amount=${val}` : address,
+      url:
+        amountValidity === 0
+          ? `lisk://wallet?recipient=${address}&amount=${val}`
+          : address,
     });
-  }
+  };
 
   render() {
-    const {
-      styles, theme, account, t, activeToken,
-    } = this.props;
+    const { styles, theme, account, t, activeToken } = this.props;
     const { amount, url } = this.state;
     const { address } = account[activeToken];
     const extraHeight = deviceType() === 'android' ? 170 : 0;
@@ -80,14 +86,13 @@ class Request extends React.Component {
           extraHeight={extraHeight}
         >
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-
             <View style={styles.subHeader}>
               <P style={[styles.addressLabel, styles.theme.addressLabel]}>
                 {t(`Your ${tokenMap[activeToken].label} address`)}
               </P>
 
               <View style={styles.addressContainer}>
-                { activeToken === tokenMap.LSK.key && (
+                {activeToken === tokenMap.LSK.key && (
                   <Avatar style={styles.avatar} address={address} size={24} />
                 )}
                 <CopyToClipboard
@@ -114,10 +119,14 @@ class Request extends React.Component {
                       value={url || address}
                       size={qrCodeSize}
                       color={
-                        theme === themes.light ? colors.light.black : colors.dark.white
+                        theme === themes.light
+                          ? colors.light.black
+                          : colors.dark.white
                       }
                       backgroundColor={
-                        theme === themes.light ? colors.light.white : colors.dark.maastrichtBlue
+                        theme === themes.light
+                          ? colors.light.white
+                          : colors.dark.maastrichtBlue
                       }
                     />
 
@@ -130,18 +139,18 @@ class Request extends React.Component {
                 </Share>
               </View>
 
-                {activeToken === tokenMap.LSK.key ? (
-                  <View style={styles.inputContainer}>
-                    <Input
-                      label={t('Amount in LSK (optional)')}
-                      autoCorrect={false}
-                      onChange={this.changeHandler}
-                      value={amount.value}
-                      keyboardType='numeric'
-                      error={amount.validity === 1 ? t('Invalid amount') : ''}
-                    />
-                  </View>
-                ) : null}
+              {activeToken === tokenMap.LSK.key ? (
+                <View style={styles.inputContainer}>
+                  <Input
+                    label={t('Amount in LSK (optional)')}
+                    autoCorrect={false}
+                    onChange={this.changeHandler}
+                    value={amount.value}
+                    keyboardType="numeric"
+                    error={amount.validity === 1 ? t('Invalid amount') : ''}
+                  />
+                </View>
+              ) : null}
             </View>
           </View>
         </KeyboardAwareScrollView>

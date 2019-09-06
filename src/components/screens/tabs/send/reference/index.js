@@ -7,7 +7,11 @@ import Input from '../../../../shared/toolBox/input';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { merge } from '../../../../../utilities/helpers';
-import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
+import {
+  deviceType,
+  deviceHeight,
+  SCREEN_HEIGHTS,
+} from '../../../../../utilities/device';
 import CircularProgress from './circularProgress';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
@@ -22,14 +26,16 @@ class Reference extends React.Component {
     },
   };
 
-  validator = (str) => {
+  validator = str => {
     const uint8array = new TextEncoder().encode(str);
     return uint8array.length > 64 ? 1 : 0;
-  }
+  };
 
   componentDidMount() {
     const {
-      navigation: { setParams }, prevStep, sharedData,
+      navigation: { setParams },
+      prevStep,
+      sharedData,
     } = this.props;
 
     if (sharedData.reference) {
@@ -49,40 +55,46 @@ class Reference extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
-      const { navigation: { setParams } } = this.props;
+      const {
+        navigation: { setParams },
+      } = this.props;
       setParams({
         title: isSmallScreen ? 'Send' : 'Add a reference',
       });
     }
   }
 
-  onChange = (value) => {
+  onChange = value => {
     this.setState({
       reference: {
         value,
         validity: this.validator(value),
       },
     });
-  }
+  };
 
   onSubmit = () => {
     const { reference } = this.state;
     const validity = this.validator(reference.value);
 
     if (validity === 0) {
-      this.props.nextStep(merge(this.props.sharedData, {
-        reference: reference.value,
-      }));
+      this.props.nextStep(
+        merge(this.props.sharedData, {
+          reference: reference.value,
+        })
+      );
     } else {
       this.setState({
         reference: merge(reference, { validity }),
       });
     }
-  }
+  };
 
   render() {
     const { styles, t } = this.props;
-    const { reference: { value, validity } } = this.state;
+    const {
+      reference: { value, validity },
+    } = this.state;
     const byteCount = encodeURI(value).split(/%..|./).length - 1;
 
     return (
@@ -98,15 +110,24 @@ class Reference extends React.Component {
         >
           <View style={styles.inputContainer}>
             <Input
-              reference={(el) => { this.input = el; }}
+              reference={el => {
+                this.input = el;
+              }}
               label={t('Message (optional)')}
               autoFocus={!isAndroid}
               autoCorrect={false}
-              innerStyles={{ input: styles.input, inputLabel: styles.theme.label }}
+              innerStyles={{
+                input: styles.input,
+                inputLabel: styles.theme.label,
+              }}
               multiline={true}
               onChange={this.onChange}
               value={value}
-              error={validity === 1 ? t('Maximum length of 64 bytes is exceeded.') : ''}
+              error={
+                validity === 1
+                  ? t('Maximum length of 64 bytes is exceeded.')
+                  : ''
+              }
             />
             <CircularProgress
               style={styles.circularProgress}

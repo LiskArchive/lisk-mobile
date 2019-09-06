@@ -3,7 +3,8 @@ import { themes, colors, boxes } from '../../../constants/styleGuide';
 export default () => ({
   common: {
     wrapper: {
-      flex: 1, backgroundColor: colors.light.white,
+      flex: 1,
+      backgroundColor: colors.light.white,
     },
     container: {
       flex: 1,

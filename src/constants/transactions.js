@@ -35,23 +35,26 @@ export default {
     type: 0,
     fee: 1e7,
     title: t('Account initialization'),
-    image: theme => (
-      theme === themes.light ?
-        accountInitializationLight :
-        accountInitializationDark
-    ),
+    image: theme =>
+      theme === themes.light
+        ? accountInitializationLight
+        : accountInitializationDark,
   },
   setSecondPassphrase: {
     type: 1,
     fee: 5e8,
     title: t('Second passphrase registration'),
-    image: theme => (theme === themes.light ? setSecondPassphraseLight : setSecondPassphraseDark),
+    image: theme =>
+      theme === themes.light
+        ? setSecondPassphraseLight
+        : setSecondPassphraseDark,
   },
   registerDelegate: {
     type: 2,
     fee: 25e8,
     title: t('Delegate registration'),
-    image: theme => (theme === themes.light ? registerDelegateLight : registerDelegateDark),
+    image: theme =>
+      theme === themes.light ? registerDelegateLight : registerDelegateDark,
   },
   vote: {
     type: 3,

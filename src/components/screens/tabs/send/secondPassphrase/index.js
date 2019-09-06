@@ -9,7 +9,11 @@ import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScr
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../../../../constants/styleGuide';
-import { deviceType, deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
+import {
+  deviceType,
+  deviceHeight,
+  SCREEN_HEIGHTS,
+} from '../../../../../utilities/device';
 import Scanner from '../../../../shared/scanner';
 import DropDownHolder from '../../../../../utilities/alert';
 import SecondPassPhraseDarkImg from '../../../../../assets/images/send/secondPassphrase3xDark.png';
@@ -27,7 +31,10 @@ class SecondPassphrase extends React.Component {
   };
 
   componentDidMount() {
-    const { prevStep, navigation: { setParams } } = this.props;
+    const {
+      prevStep,
+      navigation: { setParams },
+    } = this.props;
 
     setParams({
       title: isSmallScreen ? 'Send' : 'Confirm',
@@ -42,20 +49,23 @@ class SecondPassphrase extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
-      const { navigation: { setParams } } = this.props;
+      const {
+        navigation: { setParams },
+      } = this.props;
       setParams({
         title: isSmallScreen ? 'Send' : 'Confirm',
       });
     }
   }
 
-  validator = (passphrase) => {
+  validator = passphrase => {
     const validity = validatePassphrase(passphrase);
     const { accounts, settings, t } = this.props;
 
     if (
       validity.length === 0 &&
-      (extractPublicKey(passphrase) !== accounts.info[settings.token.active].secondPublicKey)
+      extractPublicKey(passphrase) !==
+        accounts.info[settings.token.active].secondPublicKey
     ) {
       validity.push({
         code: 'dose_not_belong',
@@ -64,33 +74,36 @@ class SecondPassphrase extends React.Component {
     }
 
     return validity;
-  }
+  };
 
   changeHandler = (value, cb) => {
-    this.setState({
-      secondPassphrase: { value },
-    }, () => {
-      if (typeof cb === 'function') {
-        cb();
+    this.setState(
+      {
+        secondPassphrase: { value },
+      },
+      () => {
+        if (typeof cb === 'function') {
+          cb();
+        }
       }
-    });
-  }
+    );
+  };
 
   onOpenCamera = () => {
     this.input.blur();
     this.scanner.toggleCamera();
-  }
+  };
 
   onCloseCamera = () => {
     this.props.navigation.setParams({
       showButtonLeft: true,
       action: () => this.props.prevStep(),
     });
-  }
+  };
 
-  onQRCodeRead = (value) => {
+  onQRCodeRead = value => {
     this.changeHandler(value, this.onSubmit);
-  }
+  };
 
   onSubmit = () => {
     const { t, nextStep, sharedData } = this.props;
@@ -100,12 +113,15 @@ class SecondPassphrase extends React.Component {
     if (validity.length) {
       let errorMessage = '';
 
-      const error = validity.filter(item => item.code !== 'INVALID_MNEMONIC' || validity.length === 1);
+      const error = validity.filter(
+        item => item.code !== 'INVALID_MNEMONIC' || validity.length === 1
+      );
 
       if (error.length) {
-        errorMessage = (error[0].message && error[0].message.length > 0) ?
-          error[0].message.replace(' Please check the passphrase.', '') :
-          '';
+        errorMessage =
+          error[0].message && error[0].message.length > 0
+            ? error[0].message.replace(' Please check the passphrase.', '')
+            : '';
       }
 
       DropDownHolder.error(t('Error'), errorMessage);
@@ -123,18 +139,18 @@ class SecondPassphrase extends React.Component {
       ...sharedData,
       secondPassphrase: secondPassphrase.value,
     });
-  }
+  };
 
   render() {
-    const {
-      navigation, styles, t, lng, theme,
-    } = this.props;
+    const { navigation, styles, t, lng, theme } = this.props;
     const { secondPassphrase } = this.state;
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
-          ref={(el) => { this.scanner = el; }}
+          ref={el => {
+            this.scanner = el;
+          }}
           containerStyles={{
             cameraRoll: styles.cameraRoll,
             cameraOverlay: styles.cameraOverlay,
@@ -157,36 +173,48 @@ class SecondPassphrase extends React.Component {
           }}
         >
           <View style={styles.container}>
-              <Input
-                label={t('Second Passphrase')}
-                reference={(ref) => { this.input = ref; }}
-                innerStyles={{
-                  input: styles.input,
-                  containerStyle: styles.inputContainer,
-                  inputLabel: styles.theme.label,
-                }}
-                value={secondPassphrase.value}
-                onChange={this.changeHandler}
-                autoFocus={!isAndroid}
-                autoCorrect={false}
-                multiline={Platform.OS === 'ios'}
-                secureTextEntry={Platform.OS !== 'ios'}
-              />
+            <Input
+              label={t('Second Passphrase')}
+              reference={ref => {
+                this.input = ref;
+              }}
+              innerStyles={{
+                input: styles.input,
+                containerStyle: styles.inputContainer,
+                inputLabel: styles.theme.label,
+              }}
+              value={secondPassphrase.value}
+              onChange={this.changeHandler}
+              autoFocus={!isAndroid}
+              autoCorrect={false}
+              multiline={Platform.OS === 'ios'}
+              secureTextEntry={Platform.OS !== 'ios'}
+            />
 
-              {secondPassphrase.value === '' ?
-                <IconButton
-                  onPress={this.onOpenCamera}
-                  titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                  style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-                  title={t('Scan')}
-                  icon='scanner'
-                  iconSize={19.5}
-                  color={colors.light.ultramarineBlue}
-                /> : null
-              }
+            {secondPassphrase.value === '' ? (
+              <IconButton
+                onPress={this.onOpenCamera}
+                titleStyle={[
+                  styles.scanButtonTitle,
+                  styles.theme.scanButtonTitle,
+                ]}
+                style={[
+                  styles.scanButton,
+                  lng === 'de' ? styles.longTitle : null,
+                ]}
+                title={t('Scan')}
+                icon="scanner"
+                iconSize={19.5}
+                color={colors.light.ultramarineBlue}
+              />
+            ) : null}
             <View style={styles.imageContainer}>
               <Image
-                source={theme === themes.light ? SecondPassPhraseLightImg : SecondPassPhraseDarkImg}
+                source={
+                  theme === themes.light
+                    ? SecondPassPhraseLightImg
+                    : SecondPassPhraseDarkImg
+                }
                 style={styles.illustration}
               />
             </View>

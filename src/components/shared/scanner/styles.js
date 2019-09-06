@@ -1,6 +1,10 @@
 import { themes, colors } from '../../../constants/styleGuide';
 import {
-  deviceHeight, deviceWidth, viewportHeight, headerHeight, deviceType,
+  deviceHeight,
+  deviceWidth,
+  viewportHeight,
+  headerHeight,
+  deviceType,
 } from '../../../utilities/device';
 
 let buttonMarginTop = 0;

@@ -49,7 +49,10 @@ class AmountBTC extends React.Component {
   }
 
   retrieveUnspentTransactionOutputs() {
-    const { accounts, settings: { token } } = this.props;
+    const {
+      accounts,
+      settings: { token },
+    } = this.props;
 
     btcTransactionsAPI
       .getUnspentTransactionOutputs(accounts.info[token.active].address)
@@ -57,7 +60,7 @@ class AmountBTC extends React.Component {
       .catch(() => this.setState({ unspentTransactionOutputs: [] }));
   }
 
-  validateAmount = (amount) => {
+  validateAmount = amount => {
     const { t } = this.props;
     const { normalizedValue } = amount;
 
@@ -76,7 +79,7 @@ class AmountBTC extends React.Component {
     }
 
     return { code: 0 };
-  }
+  };
 
   validateBalance = (amount, fee) => {
     const amountValidation = this.validateAmount(amount);
@@ -85,7 +88,11 @@ class AmountBTC extends React.Component {
       return amountValidation;
     }
 
-    const { t, accounts, settings: { token } } = this.props;
+    const {
+      t,
+      accounts,
+      settings: { token },
+    } = this.props;
     const balance = new BigNumber(accounts.info[token.active].balance);
     const total = includeFee(amount.value, fee, true);
 
@@ -97,9 +104,9 @@ class AmountBTC extends React.Component {
     }
 
     return { code: 0 };
-  }
+  };
 
-  onAmountChange = (value) => {
+  onAmountChange = value => {
     const normalizedValue = value.replace(/[^0-9]/g, '.');
     value = value.replace(/,/g, '.');
 
@@ -109,16 +116,14 @@ class AmountBTC extends React.Component {
         normalizedValue,
       },
     });
-  }
+  };
 
-  onDynamicFeeChange = (type) => {
+  onDynamicFeeChange = type => {
     this.setState({ dynamicFeeType: type });
-  }
+  };
 
   onSubmit = () => {
-    const {
-      t, nextStep, sharedData, dynamicFees,
-    } = this.props;
+    const { t, nextStep, sharedData, dynamicFees } = this.props;
     const { amount, dynamicFeeType } = this.state;
 
     const dynamicFeePerByte = dynamicFees[dynamicFeeType];
@@ -128,26 +133,33 @@ class AmountBTC extends React.Component {
     if (balanceValidity.code === 0) {
       DropDownHolder.closeAlert();
 
-      return nextStep(merge(sharedData, {
-        amount: amount.normalizedValue,
-        fee,
-        dynamicFeeType,
-        dynamicFeePerByte,
-      }));
+      return nextStep(
+        merge(sharedData, {
+          amount: amount.normalizedValue,
+          fee,
+          dynamicFeeType,
+          dynamicFeePerByte,
+        })
+      );
     }
 
     return DropDownHolder.error(t('Error'), balanceValidity.message);
-  }
+  };
 
   getValueInCurrency() {
-    const { priceTicker, settings: { currency, token } } = this.props;
+    const {
+      priceTicker,
+      settings: { currency, token },
+    } = this.props;
     const { amount } = this.state;
     const amountValidity = this.validateAmount(amount);
 
     let valueInCurrency = 0;
 
     if (amountValidity.code === 0 && priceTicker[token.active][currency]) {
-      valueInCurrency = (amount.normalizedValue * priceTicker[token.active][currency]).toFixed(2);
+      valueInCurrency = (
+        amount.normalizedValue * priceTicker[token.active][currency]
+      ).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
 
@@ -155,22 +167,28 @@ class AmountBTC extends React.Component {
   }
 
   getUnspentTransactionOutputCountToConsume() {
-    const { unspentTransactionOutputs, amount: { normalizedValue } } = this.state;
+    const {
+      unspentTransactionOutputs,
+      amount: { normalizedValue },
+    } = this.state;
 
     const amount = new BigNumber(normalizedValue);
-    const [count] = unspentTransactionOutputs.reduce((result, output) => {
-      if (amount.isGreaterThan(result[1])) {
-        result[0] += 1;
-        result[1] = result[1].plus(fromRawLsk(output.value));
-      }
+    const [count] = unspentTransactionOutputs.reduce(
+      (result, output) => {
+        if (amount.isGreaterThan(result[1])) {
+          result[0] += 1;
+          result[1] = result[1].plus(fromRawLsk(output.value));
+        }
 
-      return result;
-    }, [0, new BigNumber(0)]);
+        return result;
+      },
+      [0, new BigNumber(0)]
+    );
 
     return count;
   }
 
-  getCalculatedDynamicFee = (dynamicFeePerByte) => {
+  getCalculatedDynamicFee = dynamicFeePerByte => {
     if (this.validateAmount(this.state.amount).code !== 0) {
       return 0;
     }
@@ -182,12 +200,10 @@ class AmountBTC extends React.Component {
     });
 
     return feeInSatoshis;
-  }
+  };
 
   render() {
-    const {
-      accounts, styles, t, settings, dynamicFees,
-    } = this.props;
+    const { accounts, styles, t, settings, dynamicFees } = this.props;
     const { amount, dynamicFeeType } = this.state;
     const balance = fromRawLsk(accounts.info[settings.token.active].balance);
 
@@ -202,7 +218,6 @@ class AmountBTC extends React.Component {
           }}
         >
           <View>
-
             <Balance
               value={balance}
               tokenType={settings.token.active}
@@ -210,12 +225,14 @@ class AmountBTC extends React.Component {
             />
 
             <Input
-              reference={(el) => { this.input = el; }}
+              reference={el => {
+                this.input = el;
+              }}
               autoFocus={!isAndroid}
               label={t('Amount (LSK)', { tokenType: 'BTC' })}
               value={amount.value}
               onChange={this.onAmountChange}
-              keyboardType='numeric'
+              keyboardType="numeric"
               currency={settings.currency}
               valueInCurrency={this.getValueInCurrency()}
             />

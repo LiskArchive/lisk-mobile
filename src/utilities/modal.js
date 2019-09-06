@@ -1,7 +1,7 @@
 import { Keyboard } from 'react-native';
 
 export default class ModalHolder {
-  static modal
+  static modal;
 
   static initialize(modal, update) {
     this.modal = modal;

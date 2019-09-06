@@ -25,10 +25,7 @@ const transactions = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case actionTypes.transactionsLoaded:
       return merge(state, {
-        confirmed: [
-          ...state.confirmed,
-          ...action.data.transactions,
-        ],
+        confirmed: [...state.confirmed, ...action.data.transactions],
         count: action.data.count,
         loaded: true,
       });
@@ -41,15 +38,21 @@ const transactions = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.transactionsUpdated:
       return merge(state, {
         // Filter any newly confirmed transaction from pending
-        pending: state.pending.filter(pendingTransaction =>
-          action.data.confirmed.filter(transaction =>
-            transaction.id === pendingTransaction.id).length === 0),
+        pending: state.pending.filter(
+          pendingTransaction =>
+            action.data.confirmed.filter(
+              transaction => transaction.id === pendingTransaction.id
+            ).length === 0
+        ),
         // Add any newly confirmed transaction to confirmed
         confirmed: [
           ...action.data.confirmed,
-          ...state.confirmed.filter(confirmedTransaction =>
-            action.data.confirmed.filter(transaction =>
-              transaction.id === confirmedTransaction.id).length === 0),
+          ...state.confirmed.filter(
+            confirmedTransaction =>
+              action.data.confirmed.filter(
+                transaction => transaction.id === confirmedTransaction.id
+              ).length === 0
+          ),
         ],
         count: action.data.count,
       });

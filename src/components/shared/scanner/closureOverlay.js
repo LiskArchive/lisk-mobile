@@ -6,12 +6,10 @@ import { colors } from '../../../constants/styleGuide';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
-const CameraOverlay = ({
-  styles, close, containerStyles, theme, t,
-}) => (
+const CameraOverlay = ({ styles, close, containerStyles, theme, t }) => (
   <View style={[styles.cameraOverlay, containerStyles]}>
     <IconButton
-      icon='cross'
+      icon="cross"
       title={t('Close')}
       onPress={() => close()}
       style={styles.closeButton}

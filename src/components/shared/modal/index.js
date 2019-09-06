@@ -17,31 +17,30 @@ class Modal extends React.Component {
     Component: View,
     title: '',
     modalCallback: () => true,
-  }
+  };
 
-  updateModal = (config) => {
+  updateModal = config => {
     this.setState({
       title: this.props.t(config.title),
       Component: config.component || null,
       modalCallback: config.callback,
     });
-  }
+  };
 
   closeModal = () => {
     ModalHolder.close();
-  }
+  };
 
   setHeaderHeight = ({ nativeEvent }) => {
     const viewHeight = nativeEvent.layout.height;
     const headerStyle = { height: headerHeight() };
     const contentStyle = { paddingTop: headerHeight() + boxes.boxPadding };
-    if (viewHeight >= deviceHeight()) this.setState({ headerStyle, contentStyle });
-  }
+    if (viewHeight >= deviceHeight())
+      this.setState({ headerStyle, contentStyle });
+  };
 
   render() {
-    const {
-      styles,
-    } = this.props;
+    const { styles } = this.props;
     const { contentStyle, headerStyle } = this.state;
     const { title, Component, modalCallback } = this.state;
 
@@ -56,11 +55,17 @@ class Modal extends React.Component {
             style={[styles.container, styles.theme.container]}
             onLayout={this.setHeaderHeight}
           >
-            <View style={[styles.titleContainer, styles.theme.titleContainer, headerStyle]}>
+            <View
+              style={[
+                styles.titleContainer,
+                styles.theme.titleContainer,
+                headerStyle,
+              ]}
+            >
               <View style={{ flexDirection: 'row' }}>
                 <HeaderBackButton
                   onPress={this.closeModal}
-                  icon='cross'
+                  icon="cross"
                   style={styles.closeButton}
                 />
                 <B style={[styles.title, styles.theme.title]}>{title}</B>
@@ -68,7 +73,10 @@ class Modal extends React.Component {
             </View>
             <ScrollView>
               <View style={[styles.contentContainer, contentStyle]}>
-                <Component modalCallback={modalCallback} close={this.closeModal} />
+                <Component
+                  modalCallback={modalCallback}
+                  close={this.closeModal}
+                />
               </View>
             </ScrollView>
           </View>

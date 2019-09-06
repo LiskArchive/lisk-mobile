@@ -34,12 +34,15 @@ export const backButtonFn = (current, prevPage, prevStep) => {
  * @param {Array} steps - An array of React elements.
  * @returns {Object} - The grouped object of React elements with the above specifications.
  */
-export const groupSteps = (steps) => {
-  const allGroupsValid = steps.reduce((prevGroupsWereValid, step) =>
-    typeof step.props.group === 'string' && prevGroupsWereValid, true);
+export const groupSteps = steps => {
+  const allGroupsValid = steps.reduce(
+    (prevGroupsWereValid, step) =>
+      typeof step.props.group === 'string' && prevGroupsWereValid,
+    true
+  );
 
   return steps.reduce((grouped, step, index) => {
-    const g = grouped.filter(group => (group.title === step.props.group));
+    const g = grouped.filter(group => group.title === step.props.group);
     if (g.length) g[0].steps.push({ index, component: step });
     else {
       grouped[index] = {
@@ -50,7 +53,6 @@ export const groupSteps = (steps) => {
     return grouped;
   }, []);
 };
-
 
 /**
  * In React for web we use the "className" property to define
@@ -64,7 +66,9 @@ export const groupSteps = (steps) => {
  */
 export const getStyles = styles =>
   Object.keys(styles).reduce((acc, key) => {
-    acc[key] = (typeof document !== 'undefined') ?
-      { className: styles[key] } : { style: styles[key] };
+    acc[key] =
+      typeof document !== 'undefined'
+        ? { className: styles[key] }
+        : { style: styles[key] };
     return acc;
   }, {});

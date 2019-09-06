@@ -5,7 +5,7 @@ export default () => ({
     back: {
       width: 60,
       height: 40,
-      marginTop: (Platform.OS === 'ios') ? 0 : 6,
+      marginTop: Platform.OS === 'ios' ? 0 : 6,
     },
     multiStepWrapper: {
       height: '100%',

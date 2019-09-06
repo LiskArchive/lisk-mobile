@@ -22,32 +22,42 @@ class FingerprintOverlay extends React.Component {
     if (typeof this.props.onModalClosed === 'function') {
       this.props.onModalClosed();
     }
-  }
+  };
 
   render() {
     const { styles, error, t } = this.props;
     const iconColor = error ? colors.light.burntSieanna : colors.light.blue;
-    const message = error ? t('Unauthorized! Please try again.') :
-      t('Place your finger over the touch sensor to authenticate.');
-    return (<BlurOverlay
-      ref={(ref) => { this.ref = ref; }}
-      radius={24}
-      brightness={-50}
-      onPress={this.closeModal}
-      customStyles={styles.blurContainer}
-      blurStyle='light'
-      show={this.props.show}
-    >
-      <View style={styles.container}>
-        <H4 style={styles.title}>Fingerprint Verification</H4>
-        <View style={styles.innerContainer}>
-          <View style={styles.iconWrapper}>
-            <Icon name='touch-id-full' size={60} color={iconColor} style={styles.icon} />
+    const message = error
+      ? t('Unauthorized! Please try again.')
+      : t('Place your finger over the touch sensor to authenticate.');
+    return (
+      <BlurOverlay
+        ref={ref => {
+          this.ref = ref;
+        }}
+        radius={24}
+        brightness={-50}
+        onPress={this.closeModal}
+        customStyles={styles.blurContainer}
+        blurStyle="light"
+        show={this.props.show}
+      >
+        <View style={styles.container}>
+          <H4 style={styles.title}>Fingerprint Verification</H4>
+          <View style={styles.innerContainer}>
+            <View style={styles.iconWrapper}>
+              <Icon
+                name="touch-id-full"
+                size={60}
+                color={iconColor}
+                style={styles.icon}
+              />
+            </View>
+            <P style={styles.description}>{message}</P>
           </View>
-          <P style={styles.description}>{message}</P>
         </View>
-      </View>
-    </BlurOverlay>);
+      </BlurOverlay>
+    );
   }
 }
 export default withTheme(translate()(FingerprintOverlay), getStyles());

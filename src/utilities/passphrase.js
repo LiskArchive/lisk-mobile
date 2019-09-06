@@ -26,7 +26,7 @@ const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
  *  {String} code - specified the possible codes in the description above
  *  {String} message - A descriptive message for what went wrong
  */
-export const validatePassphrase = (passphrase) => {
+export const validatePassphrase = passphrase => {
   if (passphrase.trim().length === 0) {
     return [{ code: 'empty_value', message: 'Invalid Passphrase' }];
   }
@@ -35,7 +35,7 @@ export const validatePassphrase = (passphrase) => {
   return Lisk.passphrase.validation.getPassphraseValidationErrors(
     passphrase,
     undefined,
-    validPassLength,
+    validPassLength
   );
 };
 
@@ -53,7 +53,7 @@ export const generatePassphrase = () => {
  * @param {string} passphrase
  * Store the passphrase and address on the keychain of the device
  */
-export const storePassphraseInKeyChain = (passphrase) => {
+export const storePassphraseInKeyChain = passphrase => {
   const address = extractAddress(passphrase);
   Keychain.setGenericPassword(address, passphrase, {
     accessGroup: '58UK9RE9TP.org.lisk.mobile',
@@ -66,7 +66,7 @@ export const storePassphraseInKeyChain = (passphrase) => {
  */
 export const removePassphraseFromKeyChain = async (
   successCallback,
-  errorCallback = err => err,
+  errorCallback = err => err
 ) => {
   try {
     await Keychain.resetGenericPassword({ service: 'org.lisk.mobile' });
@@ -95,10 +95,10 @@ export const bioMetricAuthentication = async ({
   const authConfig =
     Platform.OS === 'ios'
       ? {
-        description:
-          description ||
-          'Scan your fingerprint on the device scanner to sign in',
-      }
+          description:
+            description ||
+            'Scan your fingerprint on the device scanner to sign in',
+        }
       : { onAttempt: androidError };
   try {
     await FingerprintScanner.isSensorAvailable();
@@ -129,7 +129,7 @@ export const assembleWordOptions = (passphraseWords, missingWords) => {
     return fullWordsList[rand];
   };
 
-  const mixWithMissingWords = (options) => {
+  const mixWithMissingWords = options => {
     options.forEach((list, listIndex) => {
       const rand = Math.floor(Math.random() * 0.99 * list.length);
       list[rand] = passphraseWords[missingWords[listIndex]];

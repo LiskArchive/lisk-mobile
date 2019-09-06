@@ -1,7 +1,6 @@
 import loading from './loading';
 import actionTypes from '../../constants/actions';
 
-
 describe('Reducers: Loading', () => {
   let state;
 
@@ -33,4 +32,3 @@ describe('Reducers: Loading', () => {
     expect(changedState).toEqual(['loading_2']);
   });
 });
-
