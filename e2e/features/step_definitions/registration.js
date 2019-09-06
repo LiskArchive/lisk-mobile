@@ -35,7 +35,7 @@ Then(/I swipe account creation screens$/, async function() {
   await element(by.id('accountCreation-2'))
     .atIndex(0)
     .swipe('left');
-  await element(by.id('sliderButton'))
+  await element(by.id('continueButton'))
     .atIndex(0)
     .tap();
 });

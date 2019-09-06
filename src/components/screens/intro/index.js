@@ -26,7 +26,6 @@ class Intro extends React.Component {
   }
 
   componentDidMount() {
-    this.props.settingsUpdated({ showedIntro: true });
     this.timeout = setTimeout(() => {
       SplashScreen.hide();
     }, 400);
@@ -69,6 +68,7 @@ class Intro extends React.Component {
           'Create an account with one passphrase to access your LSK and BTC cryptocurrencies',
         imageSrc: easyAccessImg,
         imageStyle: styles.illustration,
+        acceptTermsSwitch: true,
       },
     ];
     return (

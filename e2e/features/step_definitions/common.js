@@ -79,4 +79,7 @@ Then(/I swipe intro screens$/, async function() {
   await element(by.id('sliderButton'))
     .atIndex(0)
     .tap();
+  await element(by.id('continueButton'))
+    .atIndex(0)
+    .tap();
 });

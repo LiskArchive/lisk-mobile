@@ -1,16 +1,47 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Linking } from 'react-native';
+import connect from 'redux-connect-decorator';
 import Swiper from 'react-native-swiper';
+import Switch from 'react-native-switch-pro';
 import { translate } from 'react-i18next';
-import { H2, P } from '../../shared/toolBox/typography';
+import { H2, P, A } from '../../shared/toolBox/typography';
 import styles from './styles';
 import { colors } from '../../../constants/styleGuide';
 import { PrimaryButton } from '../../shared/toolBox/button';
 import { headerHeight } from '../../../utilities/device';
+import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
+import URLs from '../../../constants/URLs';
 
+@connect(
+  () => ({}),
+  {
+    settingsUpdated: settingsUpdatedAction,
+  }
+)
 class Heading extends React.Component {
+  state = {
+    confirmed: false,
+  };
+
+  confirm = status => {
+    this.setState({
+      confirmed: status,
+    });
+  };
+
+  openTermsAndConditions = () => {
+    Linking.openURL(URLs.liskTermsAndConditions);
+  };
+
+  onPress = slideContent => {
+    if (slideContent.acceptTermsSwitch) {
+      this.props.settingsUpdated({ showedIntro: true });
+    }
+    this.props.skip();
+  };
+
   render() {
-    const { t, skip, descriptionContent, hasHeader, testID } = this.props;
+    const { t, descriptionContent, hasHeader, testID } = this.props;
     const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {};
     return (
       <View style={styles.headingContainer}>
@@ -43,11 +74,33 @@ class Heading extends React.Component {
               />
               {item.step === descriptionContent.length && (
                 <View style={[styles.buttonContainer, buttonStyle]}>
+                  {item.acceptTermsSwitch && (
+                    <View style={styles.switchContainer}>
+                      <Switch
+                        height={26}
+                        width={43}
+                        onSyncPress={this.confirm}
+                        backgroundActive={colors.light.ultramarineBlue}
+                        backgroundInactive={colors.light.platinum}
+                        testID="sliderButton"
+                      />
+                      <P style={styles.confirmationText}>
+                        {t('I have read and agreed with the')}
+                        <A
+                          onPress={this.openTermsAndConditions}
+                          style={styles.link}
+                        >
+                          &nbsp;{t('terms and conditions.')}
+                        </A>
+                      </P>
+                    </View>
+                  )}
                   <PrimaryButton
+                    disabled={item.acceptTermsSwitch && !this.state.confirmed}
                     style={styles.button}
-                    onClick={skip}
+                    onClick={() => this.onPress(item)}
                     title="Continue"
-                    testID="sliderButton"
+                    testID="continueButton"
                   />
                 </View>
               )}
