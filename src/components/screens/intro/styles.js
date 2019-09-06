@@ -134,6 +134,10 @@ const styles = {
     flexWrap: 'wrap',
     fontSize: isSmallScreen ? 11 : 13,
   },
+  link: {
+    color: colors.light.ultramarineBlue,
+    fontSize: isSmallScreen ? 11 : 13,
+  },
   buttonContainer: {
     zIndex: 10,
     width: '100%',

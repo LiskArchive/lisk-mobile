@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Linking } from 'react-native';
 import connect from 'redux-connect-decorator';
 import Swiper from 'react-native-swiper';
 import Switch from 'react-native-switch-pro';
 import { translate } from 'react-i18next';
-import { H2, P } from '../../shared/toolBox/typography';
+import { H2, P, A } from '../../shared/toolBox/typography';
 import styles from './styles';
 import { colors } from '../../../constants/styleGuide';
 import { PrimaryButton } from '../../shared/toolBox/button';
@@ -12,6 +12,7 @@ import { headerHeight } from '../../../utilities/device';
 import {
   settingsUpdated as settingsUpdatedAction,
 } from '../../../actions/settings';
+import URLs from '../../../constants/URLs';
 
 @connect(() => ({}), {
   settingsUpdated: settingsUpdatedAction,
@@ -26,6 +27,10 @@ class Heading extends React.Component {
       confirmed: status,
     });
   };
+
+  openTermsAndConditions = () => {
+    Linking.openURL(URLs.liskTermsAndConditions);
+  }
 
   onPress = () => {
     this.props.settingsUpdated({ showedIntro: true });
@@ -66,7 +71,8 @@ class Heading extends React.Component {
                       testID="onboardingSliderButton"
                     />
                     <P style={styles.confirmationText}>
-                      {t('I have read and agreed with the terms and conditions')}
+                      {t('I have read and agreed with the')}
+                      <A onPress ={this.openTermsAndConditions} style={styles.link}>&nbsp;{t('terms and conditions')}</A>
                     </P>
                   </View>
                   <PrimaryButton
