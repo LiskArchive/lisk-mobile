@@ -1,9 +1,5 @@
 import actionTypes from '../constants/actions';
-import {
-  loadingStarted,
-  loadingFinished,
-} from './loading';
-
+import { loadingStarted, loadingFinished } from './loading';
 
 describe('actions: loading', () => {
   describe('loadingStarted', () => {

@@ -10,26 +10,27 @@ import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import PassphraseCopy from '../../shared/passphraseCopy';
 
-@connect(state => ({
-  passphrase: state.accounts.passphrase,
-}), {
-  settingsUpdated: settingsUpdatedAction,
-})
+@connect(
+  state => ({
+    passphrase: state.accounts.passphrase,
+  }),
+  {
+    settingsUpdated: settingsUpdatedAction,
+  }
+)
 class DisableBioAuth extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('title', 'Bio Auth'),
-  })
+  });
 
   confirm = () => {
     removePassphraseFromKeyChain();
     this.props.settingsUpdated({ hasStoredPassphrase: false });
     this.props.navigation.pop();
-  }
+  };
 
   render() {
-    const {
-      t, styles, navigation, passphrase,
-    } = this.props;
+    const { t, styles, navigation, passphrase } = this.props;
 
     const title = navigation.getParam('title', 'Bio Auth');
 

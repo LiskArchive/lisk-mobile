@@ -12,8 +12,7 @@ export default () => ({
       marginLeft: 5,
       marginRight: 5,
     },
-    title: {
-    },
+    title: {},
     subtitle: {
       paddingTop: 4,
       paddingBottom: 2,

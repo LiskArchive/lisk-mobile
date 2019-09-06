@@ -8,9 +8,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../../constants/styleGuide';
 
-const EmptyState = ({
-  theme, styles, t,
-}) => (
+const EmptyState = ({ theme, styles, t }) => (
   <View style={styles.emptyState}>
     <View style={styles.imageContainer}>
       <Image
@@ -18,9 +16,7 @@ const EmptyState = ({
         source={theme === themes.light ? noBookmarkLightImg : noBookmarkDarkImg}
       />
     </View>
-    <P style={styles.emptyTitle}>
-      {t('You don’t have any bookmarks.')}
-    </P>
+    <P style={styles.emptyTitle}>{t('You don’t have any bookmarks.')}</P>
   </View>
 );
 

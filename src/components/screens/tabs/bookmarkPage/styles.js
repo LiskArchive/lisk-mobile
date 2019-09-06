@@ -1,4 +1,3 @@
-
 import { Platform } from 'react-native';
 import { themes, colors, boxes, fonts } from '../../../../constants/styleGuide';
 import { setColorOpacity } from '../../../../utilities/helpers';
@@ -18,12 +17,10 @@ export default () => ({
       paddingLeft: boxes.boxPadding,
     },
     headerButton: {
-      transform: [
-        { rotate: '45deg' },
-      ],
+      transform: [{ rotate: '45deg' }],
       width: 60,
       height: 40,
-      marginTop: (Platform.OS === 'ios') ? 6 : 12,
+      marginTop: Platform.OS === 'ios' ? 6 : 12,
     },
     addButtonText: {
       maxWidth: '100%',

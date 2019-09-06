@@ -22,18 +22,16 @@ const AmountBalance = ({
     style={[
       styles.balanceContainer,
       styles.theme.balanceContainer,
-      (incognito ? styles.balanceContainerIncognito : {}),
+      incognito ? styles.balanceContainerIncognito : {},
     ]}
   >
     <P style={[styles.balanceText, styles.theme.balanceText]}>
       {t('Your Balance')}
     </P>
 
-    {incognito ?
-      <Image
-        source={blurs[theme]}
-        style={styles.balanceIncognito}
-      /> :
+    {incognito ? (
+      <Image source={blurs[theme]} style={styles.balanceIncognito} />
+    ) : (
       <FormattedNumber
         type={B}
         style={[styles.balanceNumber, styles.theme.balanceNumber]}
@@ -41,7 +39,7 @@ const AmountBalance = ({
       >
         {value}
       </FormattedNumber>
-    }
+    )}
   </View>
 );
 

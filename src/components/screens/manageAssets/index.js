@@ -12,24 +12,32 @@ import getStyles from './styles';
 import SwitchButton from '../../shared/toolBox/switchButton';
 import { merge } from '../../../utilities/helpers';
 
-@connect(state => ({
-  settings: state.settings,
-}), {
-  settingsUpdated: settingsUpdatedAction,
-})
+@connect(
+  state => ({
+    settings: state.settings,
+  }),
+  {
+    settingsUpdated: settingsUpdatedAction,
+  }
+)
 class ManageAssets extends React.Component {
   onSelect = (value, key) => {
-    const { settings: { token } } = this.props;
+    const {
+      settings: { token },
+    } = this.props;
     this.props.settingsUpdated({
       token: merge(token, {
         list: merge(token.list, { [key]: value }),
       }),
     });
-  }
+  };
 
   render() {
     const {
-      styles, theme, settings: { token }, t,
+      styles,
+      theme,
+      settings: { token },
+      t,
     } = this.props;
     return (
       <View style={[styles.container, styles.theme.container]}>
@@ -39,7 +47,7 @@ class ManageAssets extends React.Component {
           renderItem={({ item }) => (
             <View
               onPress={() => this.onSelect(item)}
-              underlayColor='transparent'
+              underlayColor="transparent"
             >
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
                 <View style={{ flexDirection: 'row' }}>
@@ -59,14 +67,14 @@ class ManageAssets extends React.Component {
 
                 <View>
                   {item === tokenMap.LSK.key ? (
-                    <P style={styles.theme.description}>
-                      {t('Primary')}
-                    </P>
+                    <P style={styles.theme.description}>{t('Primary')}</P>
                   ) : (
                     <SwitchButton
                       value={token.list[tokenMap[item].key]}
                       theme={theme}
-                      onSyncPress={(value) => { this.onSelect(value, tokenMap[item].key); }}
+                      onSyncPress={value => {
+                        this.onSelect(value, tokenMap[item].key);
+                      }}
                     />
                   )}
                 </View>

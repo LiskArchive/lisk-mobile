@@ -22,11 +22,14 @@ const height = Math.floor((16 / 523) * width);
 
 export default () => ({
   common: {
-    wrapper: merge({
-      width: '100%',
-      height: 4,
-      overflow: 'hidden',
-    }, wrapper),
+    wrapper: merge(
+      {
+        width: '100%',
+        height: 4,
+        overflow: 'hidden',
+      },
+      wrapper
+    ),
     animation: {
       width,
       height,

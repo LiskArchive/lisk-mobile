@@ -7,23 +7,42 @@ import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../../constants/styleGuide';
 
-const txTypes = ['accountInitialization', 'setSecondPassphrase', 'registerDelegate', 'vote'];
+const txTypes = [
+  'accountInitialization',
+  'setSecondPassphrase',
+  'registerDelegate',
+  'vote',
+];
 
 const Symbol = ({
-  token, theme, direction, sender, recipient, address, styles, type,
+  token,
+  theme,
+  direction,
+  sender,
+  recipient,
+  address,
+  styles,
+  type,
 }) => {
   if (token !== 'LSK') {
     return (
-      <View style={[styles.transactionIcon, styles.theme[`${direction}Symbol`]]}>
+      <View
+        style={[styles.transactionIcon, styles.theme[`${direction}Symbol`]]}
+      >
         <Icon
           name={direction}
           size={14}
-          color={direction === 'outgoing' ? colors[theme].outgoingArrow : colors[theme].ufoGreen} />
+          color={
+            direction === 'outgoing'
+              ? colors[theme].outgoingArrow
+              : colors[theme].ufoGreen
+          }
+        />
       </View>
     );
   }
   if (type === 0 && sender !== recipient) {
-    return (<Avatar address={address} size={40} style={styles.theme.avatar} />);
+    return <Avatar address={address} size={40} style={styles.theme.avatar} />;
   }
   return (
     <Image

@@ -20,11 +20,17 @@ class Bookmark extends React.Component {
   animatedStyles = {
     height: new Animated.Value(75),
     paddingTop: new Animated.Value(20),
-  }
+  };
 
   componentDidMount() {
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.onKeyboardOpen);
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.onKeyboardClose);
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this.onKeyboardOpen
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this.onKeyboardClose
+    );
   }
 
   componentWillUnmount() {
@@ -32,25 +38,25 @@ class Bookmark extends React.Component {
     this.keyboardDidHideListener.remove();
   }
 
-  setQuery = (query) => {
+  setQuery = query => {
     this.setState({
       query,
     });
-  }
+  };
 
   onKeyboardOpen = () => {
     this.onKeyboardChanged(true);
-  }
+  };
 
   onKeyboardClose = () => {
     this.onKeyboardChanged(false);
-  }
+  };
 
   closeCurrent() {
     if (this.current) this.current.snapTo({ index: 0 });
   }
 
-  hideHeadingElements = (showHeader) => {
+  hideHeadingElements = showHeader => {
     const { height, paddingTop } = this.animatedStyles;
     this.closeCurrent();
     if (showHeader) {
@@ -80,11 +86,11 @@ class Bookmark extends React.Component {
         }),
       ]).start();
     }
-  }
+  };
 
-  onKeyboardChanged = (showHeader) => {
+  onKeyboardChanged = showHeader => {
     this.hideHeadingElements(showHeader);
-  }
+  };
 
   componentDidUpdate() {
     this.current = null;
@@ -106,12 +112,10 @@ class Bookmark extends React.Component {
     } else if (address !== this.address) {
       this.resetPrev(this.current, ref, address);
     }
-  }
+  };
 
   render() {
-    const {
-      styles, navigation, theme, t,
-    } = this.props;
+    const { styles, navigation, theme, t } = this.props;
     const { query } = this.state;
     const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
@@ -123,7 +127,7 @@ class Bookmark extends React.Component {
               <View style={styles.addressContainer}>
                 <Icon
                   style={styles.searchIcon}
-                  name='search'
+                  name="search"
                   size={18}
                   color={colors.light.blueGray}
                 />
@@ -131,36 +135,44 @@ class Bookmark extends React.Component {
                   label={isSmallScreen ? '' : t('Search')}
                   placeholder={isSmallScreen ? t('Search for a bookmark') : ''}
                   autoCorrect={false}
-                  reference={(input) => { this.input = input; }}
+                  reference={input => {
+                    this.input = input;
+                  }}
                   innerStyles={{
                     errorMessage: styles.errorMessage,
-                    input: [
-                      styles.input,
-                      styles.addressInput,
-                    ],
+                    input: [styles.input, styles.addressInput],
                     containerStyle: styles.addressInputContainer,
                   }}
                   onChange={this.setQuery}
                   value={query}
                 />
               </View>
-              <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
+              <Animated.View
+                style={[styles.titleContainer, this.animatedStyles]}
+              >
                 <IconButton
                   style={[styles.addButton, styles.theme.addButton]}
                   iconStyle={[styles.addButtonIcon, styles.theme.addButtonIcon]}
-                  titleStyle={[styles.addButtonText, styles.theme.addButtonText]}
+                  titleStyle={[
+                    styles.addButtonText,
+                    styles.theme.addButtonText,
+                  ]}
                   title={t('Add a new bookmark')}
-                  icon='cross'
+                  icon="cross"
                   color={colors[theme].white}
                   iconSize={21}
-                  onClick={() => navigation.navigate('AddBookmark', {
+                  onClick={() =>
+                    navigation.navigate('AddBookmark', {
                       title: t('New bookmark'),
                     })
-                  } />
+                  }
+                />
               </Animated.View>
               <Bookmarks
                 navigate={navigation.navigate}
-                draggable={true} setRef={this.setRef} query={query}
+                draggable={true}
+                setRef={this.setRef}
+                query={query}
               />
             </View>
           </View>

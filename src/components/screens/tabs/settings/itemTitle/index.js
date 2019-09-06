@@ -3,9 +3,7 @@ import { View, TouchableHighlight, Platform } from 'react-native';
 import { P } from '../../../../shared/toolBox/typography';
 import Icon from '../../../../shared/toolBox/icon';
 import { themes, colors } from '../../../../../constants/styleGuide';
-import {
-  bioMetricAuthentication,
-} from '../../../../../utilities/passphrase';
+import { bioMetricAuthentication } from '../../../../../utilities/passphrase';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 
@@ -22,13 +20,13 @@ import getStyles from './styles';
  *  we need this to ba able to navigate.
  */
 class ItemTitle extends React.Component {
-  authenticate = (cb) => {
+  authenticate = cb => {
     bioMetricAuthentication({
       successCallback: () => {
         this.props.hideDialog();
         cb();
       },
-      errorCallback: () => { },
+      errorCallback: () => {},
       androidError: error => this.props.setError(error),
     });
 
@@ -38,12 +36,19 @@ class ItemTitle extends React.Component {
       });
       this.props.showDialog();
     }
-  }
+  };
 
   render() {
     const {
-      theme, styles, icon, iconSize = 20, title, target,
-      navigation, targetStateLabel, authenticate,
+      theme,
+      styles,
+      icon,
+      iconSize = 20,
+      title,
+      target,
+      navigation,
+      targetStateLabel,
+      authenticate,
       description,
     } = this.props;
 
@@ -76,14 +81,16 @@ class ItemTitle extends React.Component {
           <Icon
             name={icon}
             size={iconSize}
-            color={theme === themes.light ? colors.light.blueGray : colors.dark.slateGray}
+            color={
+              theme === themes.light
+                ? colors.light.blueGray
+                : colors.dark.slateGray
+            }
             style={styles.icon}
           />
 
           <View style={styles.titleContainer}>
-            <P style={[styles.title, styles.theme.title]}>
-              {title}
-            </P>
+            <P style={[styles.title, styles.theme.title]}>{title}</P>
             {description ? (
               <P style={[styles.subtitle, styles.theme.subtitle]}>
                 {description}
@@ -92,19 +99,23 @@ class ItemTitle extends React.Component {
           </View>
 
           <View style={styles.arrow}>
-            {
-              target ?
-                <Fragment>
-                  {targetStateLabel}
-                  <Icon
-                    name='forward'
-                    size={16}
-                    style={styles.arrowIcon}
-                    color={theme === themes.light ? colors.light.maastrichtBlue : colors.dark.white}
-                  />
-                </Fragment> :
-                <Fragment>{targetStateLabel}</Fragment>
-            }
+            {target ? (
+              <Fragment>
+                {targetStateLabel}
+                <Icon
+                  name="forward"
+                  size={16}
+                  style={styles.arrowIcon}
+                  color={
+                    theme === themes.light
+                      ? colors.light.maastrichtBlue
+                      : colors.dark.white
+                  }
+                />
+              </Fragment>
+            ) : (
+              <Fragment>{targetStateLabel}</Fragment>
+            )}
           </View>
         </Fragment>
       </TouchableHighlight>

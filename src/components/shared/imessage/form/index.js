@@ -1,9 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {
-  Text,
-  View,
-  Picker,
-} from 'react-native';
+import { Text, View, Picker } from 'react-native';
 import { PrimaryButton, IconButton } from '../../toolBox/button';
 import Icon from '../../toolBox/icon';
 import reg from '../../../../constants/regex';
@@ -27,26 +23,31 @@ class LiskMessageExtension extends Component {
   };
 
   validator = {
-    address: (str) => {
+    address: str => {
       if (str === '') return 2;
       return reg.address.test(str) ? 0 : 1;
     },
   };
 
-
   componentDidMount() {
     const { MessagesEvents, inputAddress } = this.props;
-    MessagesEvents.addListener('didStartSendingMessage', this.onStartSendingMessage);
+    MessagesEvents.addListener(
+      'didStartSendingMessage',
+      this.onStartSendingMessage
+    );
     this.setAddress(inputAddress.value);
   }
 
   onStartSendingMessage = () => {
-    this.setState({
-      num: [0, 0, 0, 0],
-    }, () => this.setAddress(this.props.inputAddress.value));
-  }
+    this.setState(
+      {
+        num: [0, 0, 0, 0],
+      },
+      () => this.setAddress(this.props.inputAddress.value)
+    );
+  };
 
-  setAddress = (value) => {
+  setAddress = value => {
     clearTimeout(this.avatarPreviewTimeout);
     const validity = this.validator.address(value);
 
@@ -67,7 +68,8 @@ class LiskMessageExtension extends Component {
     this.setState({
       amount: { validity: -1 },
       num: this.state.num.map((item, index) =>
-        (index === itemIndex ? itemValue : item)),
+        index === itemIndex ? itemValue : item
+      ),
     });
   };
 
@@ -82,7 +84,7 @@ class LiskMessageExtension extends Component {
   send = () => {
     const { composeMessage, inputAddress } = this.props;
     const { num, address } = this.state;
-    const firstDigit = (parseInt(num[0], 10) > 0) ? num[0] : '';
+    const firstDigit = parseInt(num[0], 10) > 0 ? num[0] : '';
 
     const amount = `${firstDigit}${num[1]}.${num[2]}${num[3]}`;
     if (parseFloat(amount) > 0) {
@@ -100,17 +102,13 @@ class LiskMessageExtension extends Component {
   };
 
   render() {
-    const {
-      address, avatarPreview, num, amount,
-    } = this.state;
+    const { address, avatarPreview, num, amount } = this.state;
 
-    const {
-      inputAddress, keyBoardFocused, presentationStyle,
-    } = this.props;
+    const { inputAddress, keyBoardFocused, presentationStyle } = this.props;
 
     const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const pickerActiveColor = amount.validity === -1 ?
-      colors.light.black : colors.light.burntSieanna;
+    const pickerActiveColor =
+      amount.validity === -1 ? colors.light.black : colors.light.burntSieanna;
 
     return (
       <Fragment>
@@ -118,11 +116,11 @@ class LiskMessageExtension extends Component {
           <P style={styles.title}>Request LSK</P>
         </View>
         <View style={styles.rowContainer}>
-          <Small style={styles.pickerCurrency}>
-            LSK
-        </Small>
+          <Small style={styles.pickerCurrency}>LSK</Small>
           <View style={styles.innerContainer}>
-            <Text style={[styles.pickerPoint, { color: pickerActiveColor }]}>.</Text>
+            <Text style={[styles.pickerPoint, { color: pickerActiveColor }]}>
+              .
+            </Text>
             {num.map((val, index) => (
               <Picker
                 key={index}
@@ -130,16 +128,18 @@ class LiskMessageExtension extends Component {
                 style={styles.pickers}
                 itemStyle={styles.pickerItem}
                 itemTextStyle={{ fontSize: 18, color: 'blue' }}
-                onValueChange={itemValue =>
-                  this.changePicker(itemValue, index)
-                }
+                onValueChange={itemValue => this.changePicker(itemValue, index)}
               >
                 {data.map(item => (
                   <Picker.Item
                     key={item}
                     label={item.toString()}
                     value={item}
-                    color={num[index] === item ? pickerActiveColor : 'rgba(0, 0, 0, 0.3)'}
+                    color={
+                      num[index] === item
+                        ? pickerActiveColor
+                        : 'rgba(0, 0, 0, 0.3)'
+                    }
                   />
                 ))}
               </Picker>
@@ -148,66 +148,58 @@ class LiskMessageExtension extends Component {
         </View>
         <View style={styles.errorContainer}>
           <Small style={styles.pickerError}>
-            {
-              amount.validity === -1 ? '' : 'amount should be greater than 0'
-            }
+            {amount.validity === -1 ? '' : 'amount should be greater than 0'}
           </Small>
         </View>
         <View style={styles.addressContainer}>
-          {
-            avatarPreview && this.props.avatarPreview ?
-              <Avatar
-                style={styles.avatar}
-                address={address.value || inputAddress.value}
-                size={30}
-              /> :
-              <Icon
-                style={styles.avatar}
-                name='avatar-placeholder'
-                size={34}
-                color={colors.light.mystic}
-              />
-          }
+          {avatarPreview && this.props.avatarPreview ? (
+            <Avatar
+              style={styles.avatar}
+              address={address.value || inputAddress.value}
+              size={30}
+            />
+          ) : (
+            <Icon
+              style={styles.avatar}
+              name="avatar-placeholder"
+              size={34}
+              color={colors.light.mystic}
+            />
+          )}
           <Input
             autoCorrect={false}
-            placeholder='Enter a address'
-            reference={(input) => {
+            placeholder="Enter a address"
+            reference={input => {
               this.input = input;
             }}
             onChange={this.setAddress}
             onFocus={keyBoardFocused}
             value={address.value || inputAddress.value}
             error={address.validity === 1 ? 'Invalid address.' : ''}
-
             innerStyles={{
               errorMessage: styles.errorMessage,
-              input: [
-                styles.input,
-                styles.addressInput,
-              ],
+              input: [styles.input, styles.addressInput],
               containerStyle: styles.addressInputContainer,
             }}
           />
-          {
-            presentationStyle === 'compact' ?
-              <IconButton
-                style={styles.iconButton}
-                title=''
-                icon={'forward'}
-                color={colors.light.white}
-                iconSize={20}
-                onClick={this.send} /> : null
-          }
-        </View>
-        {
-          presentationStyle === 'expanded' ?
-            <PrimaryButton
-              style={{ marginTop: 20, marginLeft: 20, marginRight: 20 }}
-              title="Request"
+          {presentationStyle === 'compact' ? (
+            <IconButton
+              style={styles.iconButton}
+              title=""
+              icon={'forward'}
+              color={colors.light.white}
+              iconSize={20}
               onClick={this.send}
-            /> : null
-        }
-
+            />
+          ) : null}
+        </View>
+        {presentationStyle === 'expanded' ? (
+          <PrimaryButton
+            style={{ marginTop: 20, marginLeft: 20, marginRight: 20 }}
+            title="Request"
+            onClick={this.send}
+          />
+        ) : null}
       </Fragment>
     );
   }

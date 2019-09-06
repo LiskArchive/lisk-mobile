@@ -4,7 +4,7 @@ import { colors } from '../../../../constants/styleGuide';
 
 const HeaderLogo = ({ color }) => (
   <Icon
-    name='lisk'
+    name="lisk"
     size={30}
     color={color || colors.light.white}
     style={{

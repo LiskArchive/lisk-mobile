@@ -11,7 +11,8 @@ import getMappedFunction from './functionMapper';
  * @param {String} tokenType
  * @returns {Promise<PriceTicker>}
  */
-const getPriceTicker = tokenType => getMappedFunction(tokenType, 'service', 'getPriceTicker')();
+const getPriceTicker = tokenType =>
+  getMappedFunction(tokenType, 'service', 'getPriceTicker')();
 
 /**
  * Contains dynamic fee rates for a token to indicate processing speed on the blockchain.
@@ -26,7 +27,8 @@ const getPriceTicker = tokenType => getMappedFunction(tokenType, 'service', 'get
  * @param {String} tokenType
  * @returns {Promise<DynamicFees>}
  */
-const getDynamicFees = tokenType => getMappedFunction(tokenType, 'service', 'getDynamicFees')();
+const getDynamicFees = tokenType =>
+  getMappedFunction(tokenType, 'service', 'getDynamicFees')();
 
 export default {
   getPriceTicker,

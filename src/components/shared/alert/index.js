@@ -5,14 +5,19 @@ import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
 import DropDownHolder from '../../../utilities/alert';
 
-const Alert = ({ styles }) =>
+const Alert = ({ styles }) => (
   <DropdownAlert
-    wrapperStyle={{ padding: 0, paddingLeft: 10, backgroundColor: colors.light.burntSieanna }}
+    wrapperStyle={{
+      padding: 0,
+      paddingLeft: 10,
+      backgroundColor: colors.light.burntSieanna,
+    }}
     titleStyle={styles.titleStyle}
     messageStyle={styles.messageStyle}
     errorColor={colors.light.burntSieanna}
     ref={ref => DropDownHolder.initialize(ref)}
-    closeInterval={6000}/>;
+    closeInterval={6000}
+  />
+);
 
 export default withTheme(Alert, getStyles());
-

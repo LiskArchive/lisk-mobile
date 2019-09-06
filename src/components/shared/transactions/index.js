@@ -4,9 +4,7 @@ import connect from 'redux-connect-decorator';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { translate } from 'react-i18next';
 import RNShake from 'react-native-shake';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../../actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
 import List from './list';
 import Footer from './footer';
 import { H3 } from '../toolBox/typography';
@@ -22,20 +20,23 @@ import { IconButton } from '../toolBox/button';
  *
  * It performs the initial animation after the user logged in.
  */
-@connect(state => ({
-  incognitoMode: state.settings.incognito,
-  activeToken: state.settings.token.active,
-  followedAccounts: state.accounts.followed || [],
-}), {
-  settingsUpdated: settingsUpdatedAction,
-})
+@connect(
+  state => ({
+    incognitoMode: state.settings.incognito,
+    activeToken: state.settings.token.active,
+    followedAccounts: state.accounts.followed || [],
+  }),
+  {
+    settingsUpdated: settingsUpdatedAction,
+  }
+)
 class Transactions extends React.Component {
   state = {
     initialAnimations: {
       opacity: new Animated.Value(0),
       top: new Animated.Value(20),
     },
-  }
+  };
   componentDidMount() {
     let timeout = null;
     if (this.props.type === 'home') {
@@ -52,7 +53,8 @@ class Transactions extends React.Component {
     }
     this.initialFadeIn();
   }
-  componentWillUnmount() {//eslint-disable-line
+  // eslint-disable-next-line class-methods-use-this
+  componentWillUnmount() {
     RNShake.removeEventListener('ShakeEvent');
   }
 
@@ -69,20 +71,28 @@ class Transactions extends React.Component {
       delay: 100,
       easing: easing.easeInOutQuart,
     }).start();
-  }
+  };
 
   toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
     this.props.settingsUpdated({
       incognito: !this.props.incognitoMode,
     });
-  }
+  };
 
   render() {
     const {
-      styles, transactions, navigate, activeToken,
-      account, footer, incognitoMode,
-      followedAccounts, refreshing, type, t,
+      styles,
+      transactions,
+      navigate,
+      activeToken,
+      account,
+      footer,
+      incognitoMode,
+      followedAccounts,
+      refreshing,
+      type,
+      t,
     } = this.props;
 
     const incognito = type === 'home' && incognitoMode;
@@ -90,27 +100,32 @@ class Transactions extends React.Component {
     const { opacity, top } = this.state.initialAnimations;
     const height = type === 'home' ? 180 : 205;
 
-    return (<Anim style={[styles.container, { opacity, top }]}>
-      {
-        (!transactions ||
-          (transactions.confirmed.length === 0 && transactions.pending.length === 0)) ?
-          <Fragment></Fragment> :
+    return (
+      <Anim style={[styles.container, { opacity, top }]}>
+        {!transactions ||
+        (transactions.confirmed.length === 0 &&
+          transactions.pending.length === 0) ? (
+          <Fragment />
+        ) : (
           <Fragment>
             <View style={[styles.placeholder, { height }]}>
-              {(Platform.OS === 'ios' && refreshing) ? <ActivityIndicator size="large" /> : null}
+              {Platform.OS === 'ios' && refreshing ? (
+                <ActivityIndicator size="large" />
+              ) : null}
             </View>
             <View style={styles.innerContainer}>
-              <H3 style={[styles.title, styles.theme.title]}>{t('Activity')}</H3>
-              {
-                type === 'home' ?
-                  <IconButton
-                    title=''
-                    icon={incognito ? 'disable-incognito' : 'enable-incognito'}
-                    color={colors.dark.slateGray}
-                    iconSize={20}
-                    onClick={this.toggleIncognito}
-                  /> : null
-              }
+              <H3 style={[styles.title, styles.theme.title]}>
+                {t('Activity')}
+              </H3>
+              {type === 'home' ? (
+                <IconButton
+                  title=""
+                  icon={incognito ? 'disable-incognito' : 'enable-incognito'}
+                  color={colors.dark.slateGray}
+                  iconSize={20}
+                  onClick={this.toggleIncognito}
+                />
+              ) : null}
             </View>
             <List
               incognito={incognito}
@@ -121,12 +136,11 @@ class Transactions extends React.Component {
               activeToken={activeToken}
               transactions={transactions.confirmed}
             />
-            {
-              footer ? <Footer /> : null
-            }
+            {footer ? <Footer /> : null}
           </Fragment>
-      }
-    </Anim>);
+        )}
+      </Anim>
+    );
   }
 }
 export default withTheme(translate()(Transactions), getStyles());

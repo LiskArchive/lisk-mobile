@@ -27,13 +27,15 @@ describe('actions: service', () => {
 
       await store.dispatch(pricesRetrieved());
 
-      expect(store.getActions()).toEqual([{
-        type: actionTypes.pricesRetrieved,
-        data: {
-          priceTicker: tickers,
-          activeToken: settings.token.active,
+      expect(store.getActions()).toEqual([
+        {
+          type: actionTypes.pricesRetrieved,
+          data: {
+            priceTicker: tickers,
+            activeToken: settings.token.active,
+          },
         },
-      }]);
+      ]);
     });
 
     it('should handle rejections', async () => {
@@ -50,10 +52,12 @@ describe('actions: service', () => {
 
       await store.dispatch(dynamicFeesRetrieved());
 
-      expect(store.getActions()).toEqual([{
-        type: actionTypes.dynamicFeesRetrieved,
-        dynamicFees: fees,
-      }]);
+      expect(store.getActions()).toEqual([
+        {
+          type: actionTypes.dynamicFeesRetrieved,
+          dynamicFees: fees,
+        },
+      ]);
     });
 
     it('should handle rejections', async () => {

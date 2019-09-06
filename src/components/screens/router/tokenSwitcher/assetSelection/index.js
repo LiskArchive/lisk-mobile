@@ -12,15 +12,21 @@ import { fromRawLsk } from '../../../../../utilities/conversions';
 import getStyles from './styles';
 import ModalHolder from '../../../../../utilities/modal';
 
-@connect(state => ({
-  settings: state.settings,
-  accounts: state.accounts.info,
-}), {
-  settingsUpdated: settingsUpdatedAction,
-})
+@connect(
+  state => ({
+    settings: state.settings,
+    accounts: state.accounts.info,
+  }),
+  {
+    settingsUpdated: settingsUpdatedAction,
+  }
+)
 class AssetSelection extends React.Component {
-  onSelect = (value) => {
-    const { settings: { token }, settingsUpdated } = this.props;
+  onSelect = value => {
+    const {
+      settings: { token },
+      settingsUpdated,
+    } = this.props;
     const updatedTokens = {
       list: token.list,
       active: value,
@@ -29,11 +35,14 @@ class AssetSelection extends React.Component {
       token: updatedTokens,
     });
     ModalHolder.close();
-  }
+  };
 
   render() {
     const {
-      styles, theme, settings: { token }, accounts,
+      styles,
+      theme,
+      settings: { token },
+      accounts,
     } = this.props;
     return (
       <View style={[styles.container, styles.theme.container]}>
@@ -43,7 +52,7 @@ class AssetSelection extends React.Component {
           renderItem={({ item, index }) => (
             <TouchableHighlight
               onPress={() => this.onSelect(item)}
-              underlayColor='transparent'
+              underlayColor="transparent"
             >
               <View
                 style={[
@@ -65,25 +74,23 @@ class AssetSelection extends React.Component {
                     <B style={[styles.itemLabel, styles.theme.itemLabel]}>
                       {tokenMap[item].label}
                     </B>
-                      <FormatedNumber
-                        type={Small}
-                        style={[styles.balance, styles.theme.balance]}
-                        tokenType={item}
-                        val={fromRawLsk(accounts[item].balance || 0)}
-                      />
+                    <FormatedNumber
+                      type={Small}
+                      style={[styles.balance, styles.theme.balance]}
+                      tokenType={item}
+                      val={fromRawLsk(accounts[item].balance || 0)}
+                    />
                   </View>
                 </View>
                 <View style={styles.switch}>
-                {
-                  item === token.active ?
+                  {item === token.active ? (
                     <Icon
                       color={colors[theme].ultramarineBlue}
-                      name='checkmark'
+                      name="checkmark"
                       size={20}
                       style={{ textAlign: 'center' }}
-                    /> :
-                    null
-                }
+                    />
+                  ) : null}
                 </View>
               </View>
             </TouchableHighlight>

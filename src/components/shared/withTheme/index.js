@@ -29,7 +29,6 @@ export default (WrappedComponent, styles, forwardRefs = false) => {
         props.ref = this.props.forwardedRef;
       }
 
-
       return (
         <ThemeContext.Consumer>
           {theme => (
@@ -47,7 +46,9 @@ export default (WrappedComponent, styles, forwardRefs = false) => {
   WithTheme.displayName = `withTheme(${getDisplayName(WrappedComponent)}`;
   const HoistedWithTheme = hoistNonReactStatics(WithTheme, WrappedComponent);
 
-  return forwardRefs ?
-    React.forwardRef((props, ref) => <HoistedWithTheme {...props} forwardedRef={ref} />) :
-    HoistedWithTheme;
+  return forwardRefs
+    ? React.forwardRef((props, ref) => (
+        <HoistedWithTheme {...props} forwardedRef={ref} />
+      ))
+    : HoistedWithTheme;
 };

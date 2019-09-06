@@ -14,7 +14,7 @@ class CopyToClipBoard extends React.Component {
     this.Timeout = setTimeout(() => {
       this.setState({ copied: !this.state.copied });
     }, 4000);
-  }
+  };
 
   componentWillUnmount() {
     clearTimeout(this.Timeout);
@@ -22,26 +22,37 @@ class CopyToClipBoard extends React.Component {
 
   render() {
     const {
-      showIcon, value, type, label, iconColor, iconSize,
-      styles, style, iconStyle, labelStyle, t,
+      showIcon,
+      value,
+      type,
+      label,
+      iconColor,
+      iconSize,
+      styles,
+      style,
+      iconStyle,
+      labelStyle,
+      t,
     } = this.props;
     const Element = type || Text;
     const text = label || value;
 
-    return (<View style={[styles.container, style]}>
-      <Element
-        style={labelStyle}
-        onPress={this.copy}>
-          {this.state.copied ? t('Copied to clipboard') : text }
-      </Element>
-      {(showIcon && !this.state.copied) ?
-        <Icon
-          onPress={this.copy}
-          name='copy'
-          color={iconColor || colors.light.white}
-          size={iconSize || 16}
-          style={[styles.icon, iconStyle]}/> : null }
-      </View>);
+    return (
+      <View style={[styles.container, style]}>
+        <Element style={labelStyle} onPress={this.copy}>
+          {this.state.copied ? t('Copied to clipboard') : text}
+        </Element>
+        {showIcon && !this.state.copied ? (
+          <Icon
+            onPress={this.copy}
+            name="copy"
+            color={iconColor || colors.light.white}
+            size={iconSize || 16}
+            style={[styles.icon, iconStyle]}
+          />
+        ) : null}
+      </View>
+    );
   }
 }
 

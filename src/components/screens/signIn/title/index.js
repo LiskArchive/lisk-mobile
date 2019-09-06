@@ -11,9 +11,7 @@ const Title = ({ children, opacity = 1 }) => {
 
   return (
     <Animated.View style={[styles.container, { opacity }]}>
-      <P style={styles.text}>
-        {children}
-      </P>
+      <P style={styles.text}>{children}</P>
     </Animated.View>
   );
 };

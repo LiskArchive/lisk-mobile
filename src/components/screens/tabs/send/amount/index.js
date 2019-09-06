@@ -13,26 +13,28 @@ import AmountBTC from './btc';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
-@connect(state => ({
-  priceTicker: state.service.priceTicker,
-  dynamicFees: state.service.dynamicFees,
-  activeToken: state.settings.token.active,
-}), {
-  pricesRetrieved: pricesRetrievedAction,
-  dynamicFeesRetrieved: dynamicFeesRetrievedAction,
-})
+@connect(
+  state => ({
+    priceTicker: state.service.priceTicker,
+    dynamicFees: state.service.dynamicFees,
+    activeToken: state.settings.token.active,
+  }),
+  {
+    pricesRetrieved: pricesRetrievedAction,
+    dynamicFeesRetrieved: dynamicFeesRetrievedAction,
+  }
+)
 class Amount extends React.Component {
   componentDidMount() {
-    const {
-      navigation, move,
-    } = this.props;
+    const { navigation, move } = this.props;
 
     navigation.setParams({
       title: isSmallScreen ? 'Send' : 'Amount',
       showButtonLeft: true,
-      action: () => move({
-        to: 0,
-      }),
+      action: () =>
+        move({
+          to: 0,
+        }),
     });
   }
 

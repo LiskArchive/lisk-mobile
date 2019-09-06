@@ -4,10 +4,13 @@ import getStyles from './styles';
 import Icon from '../icon';
 import withTheme from '../../../shared/withTheme';
 
-const modifyProps = (props) => {
+const modifyProps = props => {
   const modifiedProps = Object.keys(props)
-    .filter(key => !(/onClick|children|style/.test(key)))
-    .reduce((acc, key) => { acc[key] = props[key]; return acc; }, {});
+    .filter(key => !/onClick|children|style/.test(key))
+    .reduce((acc, key) => {
+      acc[key] = props[key];
+      return acc;
+    }, {});
   modifiedProps.onPress = () => props.onClick();
 
   return modifiedProps;
@@ -16,9 +19,15 @@ const modifyProps = (props) => {
 /**
  * Button Component
  */
-const BaseButton = (props) => {
+const BaseButton = props => {
   const {
-    styles, textStyle, children, title, disabled, testID, noPredefinedStyle,
+    styles,
+    textStyle,
+    children,
+    title,
+    disabled,
+    testID,
+    noPredefinedStyle,
   } = props;
 
   return (
@@ -43,7 +52,7 @@ export const Button = withTheme(BaseButton, getStyles());
 /**
  * Primary Button Component
  */
-const BasePrimaryButton = (props) => {
+const BasePrimaryButton = props => {
   const { styles, noTheme } = props;
 
   return (
@@ -64,13 +73,12 @@ const BasePrimaryButton = (props) => {
 
 export const PrimaryButton = withTheme(BasePrimaryButton, getStyles());
 
-const LabelButton = (props) => {
-  const labelStyle = ({
-    propsStyle, disabled, styles, style,
-  }) => {
+const LabelButton = props => {
+  const labelStyle = ({ propsStyle, disabled, styles, style }) => {
     const mergestyle = [styles.button, styles.labelButton];
 
-    const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
+    const propStylesArr =
+      propsStyle instanceof Array ? propsStyle : [propsStyle];
     propStylesArr.forEach(element => mergestyle.push(element));
 
     if (disabled) mergestyle.push(styles.disabledButtonColor);
@@ -96,28 +104,46 @@ const LabelButton = (props) => {
  * @param {String?} props.color The icon color. define the title color in titleStyle. default: #000
  * @param {Number?} props.iconSize The size of the icon in pixels
  */
-const IconButton = (props) => {
+const IconButton = props => {
   const {
-    titleStyle, style, title, icon, color, iconSize, onClick, iconStyle,
+    titleStyle,
+    style,
+    title,
+    icon,
+    color,
+    iconSize,
+    onClick,
+    iconStyle,
   } = props;
   const viewProps = Object.keys(props)
-    .filter(key => !(/titleStyle|style|title|icon|color/.test(key)))
-    .reduce((acc, key) => { acc[key] = props[key]; return acc; }, {});
-  return (<TouchableHighlight
+    .filter(key => !/titleStyle|style|title|icon|color/.test(key))
+    .reduce((acc, key) => {
+      acc[key] = props[key];
+      return acc;
+    }, {});
+  return (
+    <TouchableHighlight
       onPress={onClick}
-      underlayColor='transparent' {...viewProps}
-      style={[props.styles.iconButton, style]}>
+      underlayColor="transparent"
+      {...viewProps}
+      style={[props.styles.iconButton, style]}
+    >
       <Fragment>
-        <Icon style={iconStyle} name={icon} size={iconSize || 30} color={color || '#000'} />
-        <Text style={[props.styles.iconButtonTitle, titleStyle]}>{ title || '' }</Text>
+        <Icon
+          style={iconStyle}
+          name={icon}
+          size={iconSize || 30}
+          color={color || '#000'}
+        />
+        <Text style={[props.styles.iconButtonTitle, titleStyle]}>
+          {title || ''}
+        </Text>
       </Fragment>
-    </TouchableHighlight>);
+    </TouchableHighlight>
+  );
 };
 
 const ThemedLabelButton = withTheme(LabelButton, getStyles());
 const ThemedIconButton = withTheme(IconButton, getStyles());
 
-export {
-  ThemedLabelButton as LabelButton,
-  ThemedIconButton as IconButton,
-};
+export { ThemedLabelButton as LabelButton, ThemedIconButton as IconButton };

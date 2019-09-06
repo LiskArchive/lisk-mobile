@@ -12,60 +12,66 @@ import { colors, themes } from '../../../../constants/styleGuide';
 import withTheme from '../../../shared/withTheme';
 import SwitchButton from '../../../shared/toolBox/switchButton';
 import { languageMap } from '../../../../constants/languages';
-import {
-  settingsUpdated as settingsUpdatedAction,
-} from '../../../../actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from '../../../../actions/settings';
 import ModalHolder from '../../../../utilities/modal';
 import { accountSignedOut as accountSignedOutAction } from '../../../../actions/accounts';
 import getStyles from './styles';
 
-@connect(state => ({
-  settings: state.settings,
-}), {
-  settingsUpdated: settingsUpdatedAction,
-  accountSignedOut: accountSignedOutAction,
-})
+@connect(
+  state => ({
+    settings: state.settings,
+  }),
+  {
+    settingsUpdated: settingsUpdatedAction,
+    accountSignedOut: accountSignedOutAction,
+  }
+)
 class Settings extends React.Component {
   state = {
     error: null,
     show: false,
-  }
+  };
 
-  setError = (error) => {
+  setError = error => {
     this.setState({ error: error.message });
-  }
+  };
 
   showDialog = () => {
     this.setState({ error: null, show: true });
-  }
+  };
 
   hideDialog = () => {
     this.setState({ show: false });
-  }
+  };
 
   switchTheme = () => {
     this.props.settingsUpdated({
-      theme: this.props.settings.theme === themes.dark ? themes.light : themes.dark,
+      theme:
+        this.props.settings.theme === themes.dark ? themes.light : themes.dark,
     });
-  }
+  };
 
   toggleIncognito = () => {
     this.props.settingsUpdated({
       incognito: !this.props.settings.incognito,
     });
-  }
+  };
 
   signOut = () => {
     this.props.accountSignedOut();
-    this.props.navigation.reset([
-      NavigationActions.navigate({ routeName: 'SignIn', params: { signOut: true } }),
-    ], 0);
-  }
+    this.props.navigation.reset(
+      [
+        NavigationActions.navigate({
+          routeName: 'SignIn',
+          params: { signOut: true },
+        }),
+      ],
+      0
+    );
+  };
 
   render() {
-    const {
-      styles, theme, navigation, settings, t,
-    } = this.props;
+    const { styles, theme, navigation, settings, t } = this.props;
 
     let target = 'EnableBioAuth';
 
@@ -73,7 +79,9 @@ class Settings extends React.Component {
     if (settings.sensorType && settings.hasStoredPassphrase) {
       targetStateLabel = [
         t('Enabled'),
-        theme === themes.light ? colors.light.maastrichtBlue : colors.dark.platinum,
+        theme === themes.light
+          ? colors.light.maastrichtBlue
+          : colors.dark.platinum,
       ];
       target = 'DisableBioAuth';
     }
@@ -90,44 +98,46 @@ class Settings extends React.Component {
             <H4 style={[styles.subHeader, styles.theme.subHeader]}>
               {t('Security')}
             </H4>
-            {
-              settings.sensorType ?
-                <View style={[styles.item, styles.theme.item]}>
-                  <ItemTitle
-                    navigation={navigation}
-                    showDialog={this.showDialog}
-                    hideDialog={this.hideDialog}
-                    setError={this.setError}
-                    target={target}
-                    authenticate={true}
-                    targetStateLabel={sensorStatus}
-                    icon={settings.sensorType === 'Face ID' ? 'face-id-small' : 'touch-id-small'}
-                    iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
-                    title={settings.sensorType}
-                  />
-                </View> : null
-            }
+            {settings.sensorType ? (
+              <View style={[styles.item, styles.theme.item]}>
+                <ItemTitle
+                  navigation={navigation}
+                  showDialog={this.showDialog}
+                  hideDialog={this.hideDialog}
+                  setError={this.setError}
+                  target={target}
+                  authenticate={true}
+                  targetStateLabel={sensorStatus}
+                  icon={
+                    settings.sensorType === 'Face ID'
+                      ? 'face-id-small'
+                      : 'touch-id-small'
+                  }
+                  iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
+                  title={settings.sensorType}
+                />
+              </View>
+            ) : null}
 
-            {
-              (settings.sensorType && settings.hasStoredPassphrase) ?
-                <View style={[styles.item, styles.theme.item]}>
-                  <ItemTitle
-                    navigation={navigation}
-                    target='PassphraseBackup'
-                    authenticate={true}
-                    showDialog={this.showDialog}
-                    hideDialog={this.hideDialog}
-                    setError={this.setError}
-                    icon='backup'
-                    title={t('Backup your passphrase')}
-                    iconSize={22}
-                  />
-                </View> : null
-            }
+            {settings.sensorType && settings.hasStoredPassphrase ? (
+              <View style={[styles.item, styles.theme.item]}>
+                <ItemTitle
+                  navigation={navigation}
+                  target="PassphraseBackup"
+                  authenticate={true}
+                  showDialog={this.showDialog}
+                  hideDialog={this.hideDialog}
+                  setError={this.setError}
+                  icon="backup"
+                  title={t('Backup your passphrase')}
+                  iconSize={22}
+                />
+              </View>
+            ) : null}
 
             <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
-                icon='enable-incognito'
+                icon="enable-incognito"
                 targetStateLabel={
                   <SwitchButton
                     value={settings.incognito}
@@ -149,9 +159,9 @@ class Settings extends React.Component {
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
-                icon='language'
+                icon="language"
                 title={t('Language')}
-                target='LanguageSelection'
+                target="LanguageSelection"
                 targetStateLabel={
                   <P style={styles.theme.targetStateLabel}>
                     {languageMap[settings.language].label}
@@ -162,7 +172,7 @@ class Settings extends React.Component {
 
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
-                icon='dark-mode'
+                icon="dark-mode"
                 targetStateLabel={
                   <SwitchButton
                     value={settings.theme === themes.dark}
@@ -177,9 +187,9 @@ class Settings extends React.Component {
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
-                icon='currency'
+                icon="currency"
                 title={t('Currency')}
-                target='CurrencySelection'
+                target="CurrencySelection"
                 targetStateLabel={
                   <P style={styles.theme.targetStateLabel}>
                     {settings.currency}
@@ -191,9 +201,9 @@ class Settings extends React.Component {
             <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
                 navigation={navigation}
-                icon='manage-assets'
+                icon="manage-assets"
                 title={t('Manage tokens')}
-                target='ManageAssets'
+                target="ManageAssets"
               />
             </View>
           </View>
@@ -206,8 +216,8 @@ class Settings extends React.Component {
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
-                target='About'
-                icon='about'
+                target="About"
+                icon="about"
                 title={t('About Lisk')}
               />
             </View>
@@ -215,8 +225,8 @@ class Settings extends React.Component {
             <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <ItemTitle
                 navigation={navigation}
-                icon='terms'
-                target='Terms'
+                icon="terms"
+                target="Terms"
                 title={t('Terms of use')}
               />
             </View>
@@ -225,19 +235,20 @@ class Settings extends React.Component {
           <View style={[styles.group, styles.signOut]}>
             <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
               <SignOutButton
-                onClick={() => ModalHolder.open({
-                  title: 'Signing out',
-                  component: SignOutModal,
-                  callback: this.signOut,
-                })}
+                onClick={() =>
+                  ModalHolder.open({
+                    title: 'Signing out',
+                    component: SignOutModal,
+                    callback: this.signOut,
+                  })
+                }
               />
             </View>
           </View>
         </ScrollView>
-        {
-          Platform.OS === 'android' ?
-            <FingerprintOverlay error={this.state.error} show={this.state.show} /> : null
-        }
+        {Platform.OS === 'android' ? (
+          <FingerprintOverlay error={this.state.error} show={this.state.show} />
+        ) : null}
       </View>
     );
   }

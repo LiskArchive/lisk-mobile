@@ -19,7 +19,7 @@ class BiometricAuth extends React.Component {
     opacity: new Animated.Value(0),
     tried: false,
     busy: false,
-  }
+  };
   progress = new Animated.Value(0);
   animationLoop = true;
 
@@ -42,7 +42,7 @@ class BiometricAuth extends React.Component {
       this.animationLoop = false;
       this.unAuthAnimEl.play();
     });
-  }
+  };
 
   onClick = () => {
     this.setState({ busy: true }, () => {
@@ -60,11 +60,11 @@ class BiometricAuth extends React.Component {
         androidError: this.playUnAuthorizedAnimation,
       });
     });
-  }
+  };
 
   onCreateAccount = () => {
     this.props.navigation.navigate('Register');
-  }
+  };
 
   componentDidMount() {
     this.startUpAnimEl.play();
@@ -80,7 +80,8 @@ class BiometricAuth extends React.Component {
     }).start();
   }
 
-  componentWillUnmount() { // eslint-disable-line
+  // eslint-disable-next-line class-methods-use-this
+  componentWillUnmount() {
     FingerprintScanner.release();
   }
 
@@ -90,33 +91,37 @@ class BiometricAuth extends React.Component {
 
     let pageTitle = t('Choose an authentication method.');
     if (busy) {
-      pageTitle = sensorType === 'Face ID' ?
-        t('Look at the front camera to authenticate.') :
-        t('Place your finger over the touch sensor to authenticate.');
+      pageTitle =
+        sensorType === 'Face ID'
+          ? t('Look at the front camera to authenticate.')
+          : t('Place your finger over the touch sensor to authenticate.');
     }
 
     return (
       <View style={styles.container}>
-        <Title opacity={opacity}>
-          {pageTitle}
-        </Title>
+        <Title opacity={opacity}>{pageTitle}</Title>
 
         <View style={styles.waves}>
-          {tried ?
+          {tried ? (
             <LottieView
               source={wavesError}
               loop={false}
               style={{}}
-              ref={(el) => { this.unAuthAnimEl = el; }}
-            /> :
+              ref={el => {
+                this.unAuthAnimEl = el;
+              }}
+            />
+          ) : (
             <LottieView
               source={waves}
               loop={false}
               style={{}}
               progress={this.progress}
-              ref={(el) => { this.startUpAnimEl = el; }}
+              ref={el => {
+                this.startUpAnimEl = el;
+              }}
             />
-          }
+          )}
 
           <Animated.View style={{ opacity }}>
             <Icon
@@ -129,14 +134,24 @@ class BiometricAuth extends React.Component {
         </View>
 
         <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
-          <P style={[styles.question, styles.fillWidth, tried ? styles.error : styles.invisible]}>
+          <P
+            style={[
+              styles.question,
+              styles.fillWidth,
+              tried ? styles.error : styles.invisible,
+            ]}
+          >
             {t('Unauthorized! Please try again.')}
           </P>
 
           <View style={styles.column}>
             <PrimaryButton
               style={styles.button}
-              title={busy ? t('Signing in...') : t('Sign in using bioAuth', { sensorType })}
+              title={
+                busy
+                  ? t('Signing in...')
+                  : t('Sign in using bioAuth', { sensorType })
+              }
               onClick={this.onClick}
               disabled={busy}
               noTheme={true}
@@ -149,10 +164,7 @@ class BiometricAuth extends React.Component {
               noTheme={true}
             />
 
-            <CreateAccount
-              onPress={this.onCreateAccount}
-              opacity={opacity}
-            />
+            <CreateAccount onPress={this.onCreateAccount} opacity={opacity} />
           </View>
         </Animated.View>
       </View>

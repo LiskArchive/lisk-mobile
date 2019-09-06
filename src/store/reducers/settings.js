@@ -9,7 +9,10 @@ export const INITIAL_STATE = {
   currency: currencyKeys[0],
   token: {
     active: tokenKeys[0],
-    list: tokenKeys.reduce((acc, key) => { acc[key] = true; return acc; }, {}),
+    list: tokenKeys.reduce((acc, key) => {
+      acc[key] = true;
+      return acc;
+    }, {}),
   },
 };
 
@@ -24,11 +27,15 @@ export const INITIAL_STATE = {
 const defineActiveToken = (actionToken, stateToken) => {
   if (!actionToken) return stateToken.active;
   if (actionToken.active && !actionToken.list) {
-    return stateToken.list[actionToken.active] === true ? actionToken.active : stateToken.active;
+    return stateToken.list[actionToken.active] === true
+      ? actionToken.active
+      : stateToken.active;
   }
 
   const lastActiveToken = actionToken.active || stateToken.active;
-  return actionToken.list[lastActiveToken] === false ? tokenKeys[0] : lastActiveToken;
+  return actionToken.list[lastActiveToken] === false
+    ? tokenKeys[0]
+    : lastActiveToken;
 };
 
 /**

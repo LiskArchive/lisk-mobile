@@ -10,15 +10,13 @@ import Blur from '../../shared/transactions/blur';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
 
-const BtcSummary = ({
-  styles, theme, tx, accountAddress, incognito,
-}) => {
+const BtcSummary = ({ styles, theme, tx, accountAddress, incognito }) => {
   const amount = fromRawLsk(tx.amount);
   let amountStyle = [styles.outgoing, styles.theme.outgoing];
   let amountSign = '-';
   let direction = 'outgoing';
 
-  if ((accountAddress !== tx.senderAddress) && tx.type === 0) {
+  if (accountAddress !== tx.senderAddress && tx.type === 0) {
     amountStyle = [styles.incoming, styles.theme.incoming];
     amountSign = '';
     direction = 'incoming';
@@ -27,37 +25,39 @@ const BtcSummary = ({
   return (
     <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
       <View style={styles.row}>
-        <View style={[styles.transactionIcon, styles.theme[`${direction}Symbol`]]}>
+        <View
+          style={[styles.transactionIcon, styles.theme[`${direction}Symbol`]]}
+        >
           <Icon
             name={direction}
             size={14}
-            color={direction === 'outgoing' ? colors[theme].outgoingArrow : colors[theme].ufoGreen} />
+            color={
+              direction === 'outgoing'
+                ? colors[theme].outgoingArrow
+                : colors[theme].ufoGreen
+            }
+          />
         </View>
       </View>
-      {
-        !incognito ?
-          <H3 style={amountStyle}>
-            {amountSign}
-            <FormattedNumber tokenType='BTC'>
-              {fromRawLsk(tx.amount)}
-            </FormattedNumber>
-          </H3> :
-          <Blur
-            value={amount}
-            direction={direction}
-            style={styles.amountBlur}
-          />
-      }
-      {
-        tx.timestamp ?
-          <FormattedDate
-            format='MMM D, YYYY LTS'
-            type={P}
-            style={[styles.date, styles.theme.date]}
-          >
-            {tx.timestamp}
-          </FormattedDate> : null
-      }
+      {!incognito ? (
+        <H3 style={amountStyle}>
+          {amountSign}
+          <FormattedNumber tokenType="BTC">
+            {fromRawLsk(tx.amount)}
+          </FormattedNumber>
+        </H3>
+      ) : (
+        <Blur value={amount} direction={direction} style={styles.amountBlur} />
+      )}
+      {tx.timestamp ? (
+        <FormattedDate
+          format="MMM D, YYYY LTS"
+          type={P}
+          style={[styles.date, styles.theme.date]}
+        >
+          {tx.timestamp}
+        </FormattedDate>
+      ) : null}
     </View>
   );
 };
