@@ -25,7 +25,7 @@ describe('api/btc/account', () => {
       };
 
       fetchMock.once('*', response);
-      const result = await getSummary(data.address);
+      const result = await getSummary({ address: data.address });
       expect(result).toEqual({
         address: data.address,
         balance: response.data.confirmed_balance,
