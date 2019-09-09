@@ -27,13 +27,15 @@ export default () => ({
     scanButtonContainer: {
       position: 'absolute',
       zIndex: 99,
-      right: 17,
-      width: 80,
+      right: 6,
+      width: 110,
       marginRight: -18,
     },
     scanButton: {
-      width: 60,
+      width: 200,
       flexDirection: 'row',
+      justifyContent: 'flex-start',
+      paddingLeft: 20,
       alignItems: 'center',
     },
     scanButtonTitle: {

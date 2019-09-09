@@ -187,7 +187,7 @@ class Recipient extends React.Component {
                   <Fragment>
                     <Icon
                       name="scanner"
-                      size={19.5}
+                      size={18}
                       color={colors.light.ultramarineBlue}
                     />
                     <Text
