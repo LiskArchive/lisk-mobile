@@ -60,10 +60,8 @@ const SendStack = createStackNavigator(
     },
   },
   {
-    navigationOptions: ({ navigation }) => ({
-      headerBackground: <HeaderBackground />,
+    navigationOptions: () => ({
       headerTitle: HeaderTitle,
-      headerRight: <TokenSwitcher navigation={navigation} />,
     }),
   }
 );
