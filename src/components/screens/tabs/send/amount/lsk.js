@@ -13,6 +13,7 @@ import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { deviceType } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';
+import { languageMap } from '../../../../../constants/languages';
 
 const isAndroid = deviceType() === 'android';
 
@@ -74,8 +75,13 @@ class AmountLSK extends React.Component {
   };
 
   onChange = value => {
+    const { language } = this.props;
     const normalizedValue = value.replace(/[^0-9]/g, '.');
-    value = this.localizeAmount(value);
+    if (language === languageMap.en.code) {
+      value = value.replace(/,/g, '.');
+    } else {
+      value = value.replace(/\./g, ',');
+    }
 
     this.setState({
       amount: {

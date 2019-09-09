@@ -15,6 +15,7 @@ import { deviceType } from '../../../../../utilities/device';
 import * as btcTransactionsAPI from '../../../../../utilities/api/btc/transactions';
 import reg from '../../../../../constants/regex';
 import DropDownHolder from '../../../../../utilities/alert';
+import { languageMap } from '../../../../../constants/languages';
 
 const isAndroid = deviceType() === 'android';
 
@@ -121,8 +122,13 @@ class AmountBTC extends React.Component {
   };
 
   onAmountChange = value => {
+    const { language } = this.props;
     const normalizedValue = value.replace(/[^0-9]/g, '.');
-    value = this.localizeAmount(value);
+    if (language === languageMap.en.code) {
+      value = value.replace(/,/g, '.');
+    } else {
+      value = value.replace(/\./g, ',');
+    }
 
     this.setState({
       amount: {
