@@ -112,9 +112,12 @@ class AmountBTC extends React.Component {
 
   localizeAmount = amount => {
     const { language } = this.props;
-    return amount.toLocaleString(`${language}-${language.toUpperCase()}`, {
-      maximumFractionDigits: 20,
-    });
+    return Number(amount).toLocaleString(
+      `${language}-${language.toUpperCase()}`,
+      {
+        maximumFractionDigits: 20,
+      }
+    );
   };
 
   onAmountChange = value => {
