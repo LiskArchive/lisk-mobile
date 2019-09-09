@@ -3,17 +3,17 @@ import Lisk from '@liskhq/lisk-client';
 import bip32 from 'bip32';
 import config from '../../../../btc.config';
 
-export const getSummary = address =>
+export const getSummary = params =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(
-        `${config.url}/account/${address}`,
+        `${config.url}/account/${params.address}`,
         config.requestOptions
       );
       const json = await response.json();
       if (response.ok) {
         resolve({
-          address,
+          ...params,
           balance: json.data.confirmed_balance,
           initialized: true,
         });
