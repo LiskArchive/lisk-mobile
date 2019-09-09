@@ -36,7 +36,12 @@ module.exports = {
     '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
     '.+\\.(css|png|jpg|ttf)$': 'jest-transform-stub',
   },
-  setupFiles: ['./testenv.js'],
+  setupFiles: [
+    './testenv.js',
+    // necessary file for react-native-netinfo
+    // src: https://github.com/react-native-community/react-native-netinfo#errors-while-running-jest-tests
+    './jest.setup.js',
+  ],
   testURL: 'http://localhost',
   globals: {
     PRODUCTION: true,

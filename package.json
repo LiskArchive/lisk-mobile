@@ -41,9 +41,10 @@
   },
   "dependencies": {
     "@liskhq/lisk-client": "2.0.0",
+    "@react-native-community/async-storage": "^1.5.0",
+    "@react-native-community/netinfo": "3.2.1",
     "@react-navigation/core": "^3.4.2",
     "@react-navigation/native": "^3.5.0",
-    "@react-native-community/async-storage": "^1.5.0",
     "@remobile/react-native-qrcode-local-image": "github:yasharAyari/react-native-qrcode-local-image#support-import-from-cameraroll",
     "@tradle/react-native-http": "^2.0.1",
     "assert": "^1.4.1",
