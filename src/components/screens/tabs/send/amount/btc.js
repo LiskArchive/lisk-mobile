@@ -15,7 +15,6 @@ import { deviceType } from '../../../../../utilities/device';
 import * as btcTransactionsAPI from '../../../../../utilities/api/btc/transactions';
 import reg from '../../../../../constants/regex';
 import DropDownHolder from '../../../../../utilities/alert';
-import { languageMap } from '../../../../../constants/languages';
 
 const isAndroid = deviceType() === 'android';
 
@@ -113,11 +112,9 @@ class AmountBTC extends React.Component {
 
   localizeAmount = amount => {
     const { language } = this.props;
-    let value = amount.toString();
-    if (language === languageMap.en.code) value = value.replace(/,/g, '.');
-    if (language === languageMap.de.code) value = value.replace(/\./g, ',');
-
-    return value;
+    return amount.toLocaleString(`${language}-${language.toUpperCase()}`, {
+      maximumFractionDigits: 20,
+    });
   };
 
   onAmountChange = value => {
