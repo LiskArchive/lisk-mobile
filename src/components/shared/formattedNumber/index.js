@@ -27,7 +27,8 @@ class FormattedNumber extends React.Component {
       trim && matched && matched[0] !== '0.' && matched[0] !== '-0.'
         ? matched[0].replace(/\.$/, '')
         : formatedNumber;
-    const localizedVal = Number(normalizedVal).toLocaleString(
+    const valueWithoutSeparators = normalizedVal.replace(/,/g, '');
+    const localizedVal = Number(valueWithoutSeparators).toLocaleString(
       `${language}-${language.toUpperCase()}`,
       { maximumFractionDigits: 20 }
     );
