@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import { BigNumber } from 'bignumber.js';
+import connect from 'redux-connect-decorator';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import { includeFee, fromRawLsk } from '../../../../../utilities/conversions';
 import { merge } from '../../../../../utilities/helpers';
@@ -14,9 +15,13 @@ import { deviceType } from '../../../../../utilities/device';
 import * as btcTransactionsAPI from '../../../../../utilities/api/btc/transactions';
 import reg from '../../../../../constants/regex';
 import DropDownHolder from '../../../../../utilities/alert';
+import { languageMap } from '../../../../../constants/languages';
 
 const isAndroid = deviceType() === 'android';
 
+@connect(state => ({
+  language: state.settings.language,
+}))
 class AmountBTC extends React.Component {
   state = {
     fee: 0,
@@ -106,9 +111,24 @@ class AmountBTC extends React.Component {
     return { code: 0 };
   };
 
+  localizeAmount = amount => {
+    const { language } = this.props;
+    return Number(amount).toLocaleString(
+      `${language}-${language.toUpperCase()}`,
+      {
+        maximumFractionDigits: 20,
+      }
+    );
+  };
+
   onAmountChange = value => {
+    const { language } = this.props;
     const normalizedValue = value.replace(/[^0-9]/g, '.');
-    value = value.replace(/,/g, '.');
+    if (language === languageMap.en.code) {
+      value = value.replace(/,/g, '.');
+    } else {
+      value = value.replace(/\./g, ',');
+    }
 
     this.setState({
       amount: {
@@ -163,7 +183,7 @@ class AmountBTC extends React.Component {
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
 
-    return valueInCurrency;
+    return this.localizeAmount(valueInCurrency);
   }
 
   getUnspentTransactionOutputCountToConsume() {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
+import connect from 'redux-connect-decorator';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import { fromRawLsk } from '../../../../../utilities/conversions';
 import reg from '../../../../../constants/regex';
@@ -12,9 +13,13 @@ import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { deviceType } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';
+import { languageMap } from '../../../../../constants/languages';
 
 const isAndroid = deviceType() === 'android';
 
+@connect(state => ({
+  language: state.settings.language,
+}))
 class AmountLSK extends React.Component {
   state = {
     amount: {
@@ -70,8 +75,13 @@ class AmountLSK extends React.Component {
   };
 
   onChange = value => {
+    const { language } = this.props;
     const normalizedValue = value.replace(/[^0-9]/g, '.');
-    value = value.replace(/,/g, '.');
+    if (language === languageMap.en.code) {
+      value = value.replace(/,/g, '.');
+    } else {
+      value = value.replace(/\./g, ',');
+    }
 
     this.setState({
       amount: {
@@ -100,6 +110,16 @@ class AmountLSK extends React.Component {
     return DropDownHolder.error(t('Error'), validity.message);
   };
 
+  localizeAmount = amount => {
+    const { language } = this.props;
+    return Number(amount).toLocaleString(
+      `${language}-${language.toUpperCase()}`,
+      {
+        maximumFractionDigits: 20,
+      }
+    );
+  };
+
   getValueInCurrency() {
     const {
       priceTicker,
@@ -122,7 +142,7 @@ class AmountLSK extends React.Component {
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
 
-    return valueInCurrency;
+    return this.localizeAmount(valueInCurrency);
   }
 
   render() {

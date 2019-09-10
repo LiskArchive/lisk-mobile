@@ -20,6 +20,7 @@ import { themes, colors } from '../../../../constants/styleGuide';
 import { tokenMap } from '../../../../constants/tokens';
 import Avatar from '../../../shared/avatar';
 import CopyToClipboard from '../../../shared/copyToClipboard';
+import { languageMap } from '../../../../constants/languages';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
@@ -27,6 +28,7 @@ const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 @connect(state => ({
   account: state.accounts.info,
   activeToken: state.settings.token.active,
+  language: state.settings.language,
 }))
 class Request extends React.Component {
   state = {
@@ -46,10 +48,14 @@ class Request extends React.Component {
   validator = str => reg.amount.test(str);
 
   changeHandler = val => {
-    const { account, activeToken } = this.props;
+    const { account, activeToken, language } = this.props;
     const { address } = account[activeToken];
 
-    val = val.replace(/,/g, '.');
+    if (language === languageMap.en.code) {
+      val = val.replace(/,/g, '.');
+    } else {
+      val = val.replace(/\./g, ',');
+    }
 
     let amountValidity = -1;
     let amount = val;
