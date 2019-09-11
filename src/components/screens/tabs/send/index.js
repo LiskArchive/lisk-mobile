@@ -14,6 +14,7 @@ import { themes, colors } from '../../../../constants/styleGuide';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../../constants/tokens';
+import TokenSwitcher from '../../router/tokenSwitcher';
 
 @connect(
   state => ({
@@ -44,6 +45,7 @@ class Send extends React.Component {
       ) : (
         <IconButton color="transparent" icon="back" />
       ),
+      headerRight: <TokenSwitcher navigation={navigation} />,
     };
   };
 
