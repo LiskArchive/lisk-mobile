@@ -19,8 +19,7 @@ class Success extends React.Component {
 
     setParams({
       action: false,
-      showButtonLeft: true,
-      backButtonTitle: t('Sign in'),
+      showButtonLeft: false,
       title: t('Perfect! You’re all set'),
     });
   }
