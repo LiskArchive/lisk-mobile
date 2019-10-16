@@ -14,6 +14,7 @@ const response = {
         RUB: 78.17433000000001,
         JPY: 133.30835668,
         CNY: 13.638946716302977,
+        CHF: 0.7833845341,
       },
       BTC: {
         GBP: '2984.57450371',
@@ -23,6 +24,7 @@ const response = {
         RUB: '253500',
         JPY: 432286,
         CNY: 44227.727856226,
+        CHF: 8159.81825053,
       },
     },
   },
@@ -38,6 +40,7 @@ describe('api/lisk/service', () => {
       expect(result).toEqual({
         USD: String(response.getPriceTicker.tickers.LSK.USD),
         EUR: String(response.getPriceTicker.tickers.LSK.EUR),
+        CHF: String(response.getPriceTicker.tickers.LSK.CHF),
       });
     });
 
