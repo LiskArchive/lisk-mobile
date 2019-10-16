@@ -154,7 +154,7 @@
     "coveralls": "^3.0.2",
     "cucumber": "5.1.0",
     "cucumber-pretty": "1.5.0",
-    "detox": "14.0.0",
+    "detox": "14.5.0",
     "eslint": "=4.9.0",
     "eslint-config-airbnb": "=15.1.0",
     "eslint-config-airbnb-base": "=12.1.0",
@@ -242,13 +242,13 @@
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/Lisk.app",
         "build": "xcodebuild -UseModernBuildSystem=NO -project ios/Lisk.xcodeproj -scheme Lisk -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
-        "name": "iPhone X"
+        "name": "iPhone 11"
       },
       "ios.sim.release": {
         "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/Lisk.app",
         "build": "xcodebuild -UseModernBuildSystem=NO -project ios/Lisk.xcodeproj -scheme Lisk -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
-        "name": "iPhone X"
+        "name": "iPhone 11"
       }
     }
   }

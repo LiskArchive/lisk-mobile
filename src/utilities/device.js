@@ -76,7 +76,11 @@ export const SCREEN_HEIGHTS = {
 
 export const deviceLocale = () => {
   if (Platform.OS === 'ios') {
-    return NativeModules.SettingsManager.settings.AppleLocale.substr(0, 2);
+    const locale =
+      parseInt(Platform.Version, 10) > 12
+        ? NativeModules.SettingsManager.settings.AppleLanguages[0]
+        : NativeModules.SettingsManager.settings.AppleLocale; // "fr_FR"
+    return locale.substr(0, 2);
   }
   return NativeModules.I18nManager.localeIdentifier.substr(0, 2);
 };
