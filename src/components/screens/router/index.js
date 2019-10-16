@@ -57,13 +57,14 @@ const SendStack = createStackNavigator(
   {
     Send: {
       screen: Send,
+      navigationOptions: () => ({
+        headerTitle: HeaderTitle,
+        headerStyle,
+        headerBackground: <HeaderBackground />,
+      }),
     },
   },
-  {
-    navigationOptions: () => ({
-      headerTitle: HeaderTitle,
-    }),
-  }
+  {}
 );
 
 const HomeStack = createStackNavigator(
