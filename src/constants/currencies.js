@@ -7,6 +7,10 @@ export const currencyMap = {
     symbol: '$',
     label: 'USD',
   },
+  CHF: {
+    symbol: 'CHF',
+    label: 'CHF',
+  },
 };
 
 export const currencyKeys = Object.keys(currencyMap);
