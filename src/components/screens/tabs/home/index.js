@@ -203,10 +203,6 @@ class Home extends React.Component {
       this.refreshAccountAndTx();
       this.setHeader();
     }
-
-    setTimeout(() => {
-      this.showInitializationModal();
-    }, 1200);
   };
 
   componentDidMount() {
@@ -227,6 +223,10 @@ class Home extends React.Component {
     this.accountFetchTimeout = setTimeout(() => {
       this.fetchInactiveTokensAccounts();
     }, 1000);
+
+    setTimeout(() => {
+      this.showInitializationModal();
+    }, 1200);
   }
 
   componentDidUpdate(prevProps) {
