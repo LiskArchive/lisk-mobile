@@ -188,6 +188,10 @@ class Wallet extends React.Component {
     }
   };
 
+  componentDidMount() {
+    this.fetchInitialData();
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { activeToken, followedAccounts } = this.props;
     const storedAccount = followedAccounts[activeToken].filter(
