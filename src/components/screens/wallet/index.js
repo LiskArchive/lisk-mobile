@@ -108,29 +108,32 @@ class Wallet extends React.Component {
       loadingFinished,
       activeToken,
     } = this.props;
-
-    loadingStarted();
     const { address } = navigation.state.params;
-    const account = await accountAPI.getSummary(activeToken, { address });
-    const tx = await transactionsAPI.get(activeToken, {
-      address: this.address,
-    });
-    loadingFinished();
 
-    this.setState(
-      {
-        account,
-        transactions: {
-          confirmed: tx.data,
-          pending: [],
-          loaded: true,
-          count: tx.meta.count,
+    if (!this.address || this.address !== address) {
+      loadingStarted();
+      this.address = address;
+      const account = await accountAPI.getSummary(activeToken, { address });
+      const tx = await transactionsAPI.get(activeToken, {
+        address,
+      });
+      loadingFinished();
+
+      this.setState(
+        {
+          account,
+          transactions: {
+            confirmed: tx.data,
+            pending: [],
+            loaded: true,
+            count: tx.meta.count,
+          },
         },
-      },
-      () => {
-        this.setHeader();
-      }
-    );
+        () => {
+          this.setHeader();
+        }
+      );
+    }
   }
 
   async refresh() {
@@ -186,7 +189,6 @@ class Wallet extends React.Component {
   };
 
   componentDidMount() {
-    this.address = this.props.navigation.state.params.address;
     this.fetchInitialData();
   }
 
@@ -207,6 +209,7 @@ class Wallet extends React.Component {
     ) {
       this.setHeader();
     }
+    this.fetchInitialData();
   }
 
   render() {
