@@ -16,6 +16,7 @@ export const getPriceTicker = () =>
         } = json;
 
         resolve({
+          CHF: String(LSK.CHF),
           EUR: String(LSK.EUR),
           USD: String(LSK.USD),
         });

@@ -14,7 +14,7 @@ describe('reducers: service', () => {
   });
 
   it('should return updated state in case of actionTypes.pricesRetrieved', () => {
-    const priceTicker = { USD: 1, EUR: 1 };
+    const priceTicker = { USD: 1, EUR: 1, CHF: 1 };
     const action = {
       type: actionTypes.pricesRetrieved,
       data: {
@@ -25,7 +25,7 @@ describe('reducers: service', () => {
 
     expect(service(INITIAL_STATE, action)).toEqual({
       dynamicFees: {},
-      priceTicker: { BTC: {}, LSK: { EUR: 1, USD: 1 } },
+      priceTicker: { BTC: {}, LSK: { EUR: 1, USD: 1, CHF: 1 } },
     });
   });
 

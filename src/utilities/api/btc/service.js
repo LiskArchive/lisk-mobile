@@ -16,6 +16,7 @@ export const getPriceTicker = () =>
         } = json;
 
         resolve({
+          CHF: String(BTC.CHF),
           EUR: String(BTC.EUR),
           USD: String(BTC.USD),
         });
