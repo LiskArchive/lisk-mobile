@@ -121,8 +121,5 @@ export default () => ({
     address: {
       color: colors.dark.white,
     },
-    input: {
-      backgroundColor: colors.dark.textInputBg,
-    },
   },
 });

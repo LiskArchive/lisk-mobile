@@ -100,8 +100,5 @@ export default () => ({
     addButtonIcon: {
       backgroundColor: colors.dark.ultramarineBlue,
     },
-    input: {
-      backgroundColor: colors.dark.textInputBg,
-    },
   },
 });
