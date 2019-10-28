@@ -112,7 +112,7 @@ export default () => ({
   },
   [themes.dark]: {
     permissionRequestWrapper: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
     permissionTitle: {
       color: colors.dark.white,

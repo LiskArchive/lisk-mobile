@@ -116,7 +116,7 @@ export default () => ({
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
     addressIconContainer: {
       backgroundColor: colors.dark.BTC,

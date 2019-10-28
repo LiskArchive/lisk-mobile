@@ -25,7 +25,7 @@ export default () => ({
     },
     nonBordered: {
       borderBottomColor: 'transparent',
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.headerBg,
     },
   },
 });

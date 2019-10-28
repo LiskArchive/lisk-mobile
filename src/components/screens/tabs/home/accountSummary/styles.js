@@ -138,10 +138,10 @@ export default () => ({
   },
   [themes.dark]: {
     homeContainerLSK: {
-      backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
+      backgroundColor: setColorOpacity(colors.dark.homeHeaderBg),
     },
     homeContainerBTC: {
-      backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
+      backgroundColor: setColorOpacity(colors.dark.homeHeaderBg),
     },
     homeBalance: {
       color: colors.dark.white,

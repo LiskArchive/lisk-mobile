@@ -195,7 +195,7 @@ export default () => ({
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
     date: {
       color: colors.dark.slateGray,
@@ -204,7 +204,7 @@ export default () => ({
       color: colors.dark.white,
     },
     senderAndRecipient: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.headerBg,
       borderBottomColor: setColorOpacity(colors.light.white, 0.24),
       borderTopColor: setColorOpacity(colors.light.white, 0.24),
     },

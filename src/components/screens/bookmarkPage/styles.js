@@ -89,7 +89,7 @@ export default () => ({
   },
   [themes.dark]: {
     wrapper: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
     addButtonText: {
       color: colors.dark.ultramarineBlue,
@@ -99,6 +99,9 @@ export default () => ({
     },
     addButtonIcon: {
       backgroundColor: colors.dark.ultramarineBlue,
+    },
+    input: {
+      backgroundColor: colors.dark.textInputBg,
     },
   },
 });

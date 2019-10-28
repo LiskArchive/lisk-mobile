@@ -64,7 +64,7 @@ export default () => ({
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
     subHeader: {
       color: colors.dark.slateGray,

@@ -23,10 +23,13 @@ export default () => ({
     indicatorStyle: {
       backgroundColor: colors.light.white,
     },
+    activeTint: {
+      color: colors.light.BTC,
+    },
   },
   [themes.dark]: {
     style: {
-      backgroundColor: colors.dark.headerBg,
+      backgroundColor: colors.dark.footerBg,
       borderTopColor: setColorOpacity(colors.dark.white, 0.15),
     },
     inactiveTint: {
@@ -37,6 +40,9 @@ export default () => ({
     },
     indicatorStyle: {
       backgroundColor: colors.dark.headerBg,
+    },
+    activeTint: {
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

@@ -85,7 +85,7 @@ export default () => ({
   [themes.dark]: {
     walletContainer: {
       borderBottomWidth: 1,
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.headerBg,
       borderBottomColor: setColorOpacity(colors.light.white, 0.24),
       borderTopColor: setColorOpacity(colors.light.white, 0.24),
     },

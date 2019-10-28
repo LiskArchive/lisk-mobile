@@ -12,6 +12,9 @@ const common = {
   whiteSmoke: '#F5F7FA',
   burntSieanna: '#EC6968',
   ufoGreen: '#2AD67C',
+  russianBlack: '#1C1C1E',
+  neroBlack: '#1C1C1C',
+  sapphireBlue: '#1C316A',
 };
 
 const light = {
@@ -23,10 +26,11 @@ const light = {
 const dark = {
   ...common,
   outgoingArrow: common.platinum,
-  // dark mode's header color is not on the style guide
-  headerBg: '#00152D',
-  // homeHeaderBg is ultramarineBlue with 30% opacity
-  homeHeaderBg: '#1b316a',
+  headerBg: common.russianBlack,
+  homeHeaderBg: common.sapphireBlue,
+  mainBg: common.black,
+  footerBg: common.neroBlack,
+  textInputBg: common.russianBlack,
 };
 
 export default {

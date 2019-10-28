@@ -1,5 +1,4 @@
 import { themes, fonts, colors } from '../../../../constants/styleGuide';
-import { setColorOpacity } from '../../../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -66,8 +65,9 @@ export default () => ({
       color: colors.dark.platinum,
     },
     input: {
+      backgroundColor: colors.dark.textInputBg,
       color: colors.dark.white,
-      borderColor: setColorOpacity(colors.dark.white, 0.24),
+      borderColor: colors.dark.mainBg,
     },
     inputErrorStyle: {
       borderColor: colors.dark.burntSieanna,

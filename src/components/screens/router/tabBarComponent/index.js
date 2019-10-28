@@ -5,7 +5,6 @@ import { Platform } from 'react-native';
 import withTheme from '../../../shared/withTheme';
 import { tokenMap } from '../../../../constants/tokens';
 import getStyles from './styles';
-import { colors } from '../../../../constants/styleGuide';
 import { deviceType } from '../../../../utilities/device';
 
 @connect(state => ({
@@ -29,7 +28,7 @@ class TabBar extends React.Component {
 
     let activeTintColor = styles.theme.tint.color;
     if (settings.token.active === tokenMap.BTC.key) {
-      activeTintColor = colors.light.BTC;
+      activeTintColor = styles.theme.activeTint.color;
     }
 
     return (

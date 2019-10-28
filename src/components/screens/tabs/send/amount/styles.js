@@ -29,7 +29,7 @@ export default () => ({
 
   [themes.dark]: {
     wrapper: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
   },
 });
