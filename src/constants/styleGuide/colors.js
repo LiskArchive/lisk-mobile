@@ -12,9 +12,6 @@ const common = {
   whiteSmoke: '#F5F7FA',
   burntSieanna: '#EC6968',
   ufoGreen: '#2AD67C',
-  russianBlack: '#1C1C1E',
-  neroBlack: '#1C1C1C',
-  sapphireBlue: '#1C316A',
 };
 
 const light = {
@@ -26,11 +23,11 @@ const light = {
 const dark = {
   ...common,
   outgoingArrow: common.platinum,
-  headerBg: common.russianBlack,
-  homeHeaderBg: common.sapphireBlue,
+  headerBg: '#1C1C1E',
+  homeHeaderBg: '#1C316A',
   mainBg: common.black,
-  footerBg: common.neroBlack,
-  textInputBg: common.russianBlack,
+  footerBg: '#1C1C1C',
+  textInputBg: '#1C1C1E',
 };
 
 export default {
