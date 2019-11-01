@@ -5,3 +5,7 @@ NativeModules.RNCNetInfo = {
   addListener: jest.fn(),
   removeListeners: jest.fn(),
 };
+
+jest.mock('react-native-appearance', () => ({
+  Appearance: { getColorScheme: jest.fn() },
+}));
