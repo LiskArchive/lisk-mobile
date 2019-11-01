@@ -2,7 +2,6 @@ import React from 'react';
 import Nav from './navigator';
 import { Element } from './element';
 import { getStyles } from './utils';
-import Progress from './progress';
 
 /**
  *
@@ -45,7 +44,9 @@ class MultiStep extends React.Component {
    *
    */
   prev = (moves = -1) => {
-    this.move({ moves });
+    // On Lisk Desktop this function is not passed a number by default
+    const stepsBack = typeof moves === 'number' ? moves : -1;
+    this.move({ moves: stepsBack });
   };
 
   reset = (data = {}) => {
@@ -82,8 +83,6 @@ class MultiStep extends React.Component {
       backButtonTitle,
       showNav,
       navStyles,
-      showProgressBar,
-      progressStepContainerStyle,
       interactive,
       backButton,
       prevPage,
@@ -93,6 +92,7 @@ class MultiStep extends React.Component {
       navigatorButton,
       groupButton,
       stepButton,
+      progressBar,
     } = this.props;
 
     const { key, data, current } = this.state;
@@ -103,17 +103,21 @@ class MultiStep extends React.Component {
       sharedData: data,
     };
 
-    if (current === children.length - 1) {
+    if (current === children.length - 2) {
       if (typeof finalCallback === 'function') {
         extraProps.finalCallback = finalCallback;
       }
       extraProps.reset = this.reset;
     }
 
-    const normalizedStyles = getStyles(navStyles);
+    const normalizedStyles = navStyles && getStyles(navStyles);
+    const ProgressBar = progressBar;
 
     return (
-      <Element key={key} {...normalizedStyles.multiStepWrapper}>
+      <Element
+        {...(normalizedStyles && normalizedStyles.multiStepWrapper)}
+        key={key}
+      >
         {showNav ? (
           <Nav
             normalizedStyles={normalizedStyles}
@@ -133,13 +137,9 @@ class MultiStep extends React.Component {
             move={this.move}
           />
         ) : null}
-        {showProgressBar ? (
-          <Progress
-            progressStepContainerStyle={progressStepContainerStyle}
-            current={current + 1}
-            total={children.length}
-          />
-        ) : null}
+        {ProgressBar && (
+          <ProgressBar current={current} total={children.length} />
+        )}
         {React.cloneElement(children[current], extraProps)}
       </Element>
     );

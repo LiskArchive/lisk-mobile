@@ -15,6 +15,7 @@ import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../../constants/tokens';
 import TokenSwitcher from '../../router/tokenSwitcher';
+import progressBar from '../../../shared/progressBar';
 
 @connect(
   state => ({
@@ -186,6 +187,7 @@ class Send extends React.Component {
 
     return (
       <MultiStep
+        progressBar={progressBar}
         ref={el => {
           this.nav = el;
         }}
