@@ -79,8 +79,10 @@ class Recipient extends React.Component {
 
   setAddress = value => {
     clearTimeout(this.avatarPreviewTimeout);
+    const { t } = this.props;
+    const validity = validateAddress(this.props.activeToken, value);
 
-    if (validateAddress(this.props.settings.token.active, value) === 0) {
+    if (validity === 0) {
       this.setAvatarPreviewTimeout();
     }
 
@@ -88,6 +90,11 @@ class Recipient extends React.Component {
       address: { value },
       avatarPreview: false,
     });
+
+    if (validity === -1) {
+      DropDownHolder.error(t('Error'), t('Please enter an address.'));
+      this.setState({ address: { value } });
+    }
   };
 
   submitForm = () => {

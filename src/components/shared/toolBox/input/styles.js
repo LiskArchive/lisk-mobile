@@ -30,15 +30,17 @@ export default () => ({
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'flex-start',
+      marginBottom: 8,
     },
     errorMessage: {
       fontFamily: fonts.family.context,
-      marginBottom: 20,
-      paddingTop: 0,
-      marginLeft: 5,
+      marginLeft: 0,
       marginRight: 0,
       marginTop: 0,
       fontSize: fonts.size.input,
+      backgroundColor: colors.light.burntSieanna,
+      paddingHorizontal: 16,
+      paddingVertical: 8,
     },
   },
 
@@ -57,7 +59,8 @@ export default () => ({
       color: colors.light.burntSieanna,
     },
     errorMessage: {
-      color: colors.light.slateGray,
+      color: colors.light.white,
+      backgroundColor: colors.light.burntSieanna,
     },
   },
 
@@ -76,7 +79,8 @@ export default () => ({
       color: colors.dark.burntSieanna,
     },
     errorMessage: {
-      color: colors.dark.platinum,
+      color: colors.dark.white,
+      backgroundColor: colors.light.burntSieanna,
     },
   },
 });

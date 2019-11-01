@@ -141,8 +141,9 @@ class AddToBookmark extends React.Component {
 
   setAddress = value => {
     clearTimeout(this.avatarPreviewTimeout);
+    const validity = validateAddress(this.props.activeToken, value);
 
-    if (validateAddress(this.props.activeToken, value) === 0) {
+    if (validity === 0) {
       this.setAvatarPreviewTimeout();
     }
 
@@ -150,6 +151,13 @@ class AddToBookmark extends React.Component {
       address: { value },
       avatarPreview: false,
     });
+
+    if (validity === -1) {
+      this.setState({
+        address: { validity, value },
+        avatarPreview: false,
+      });
+    }
   };
 
   setLabel = value => {
