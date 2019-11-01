@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { themes, colors } from '../../../../constants/styleGuide';
-import { setColorOpacity } from '../../../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -30,7 +29,7 @@ export default () => ({
   [themes.dark]: {
     style: {
       backgroundColor: colors.dark.footerBg,
-      borderTopColor: setColorOpacity(colors.dark.white, 0.15),
+      borderTopColor: colors.dark.slateGray,
     },
     inactiveTint: {
       color: colors.dark.slateGray,
