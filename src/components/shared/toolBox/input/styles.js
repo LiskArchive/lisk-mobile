@@ -60,7 +60,6 @@ export default () => ({
     },
     errorMessage: {
       color: colors.light.white,
-      backgroundColor: colors.light.burntSieanna,
     },
   },
 
@@ -80,7 +79,6 @@ export default () => ({
     },
     errorMessage: {
       color: colors.dark.white,
-      backgroundColor: colors.light.burntSieanna,
     },
   },
 });
