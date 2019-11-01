@@ -10,6 +10,7 @@ import { Small } from '../../shared/toolBox/typography';
 import styles from './styles';
 import { IconButton } from '../../shared/toolBox/button';
 import { colors } from '../../../constants/styleGuide';
+import progressBar from '../../shared/progressBar';
 
 const NavButton = props => (
   <Text
@@ -90,6 +91,7 @@ class Register extends React.Component {
     return (
       <View style={[styles.container, noNavStyle]}>
         <MultiStep
+          progressBar={progressBar}
           ref={el => {
             this.nav = el;
           }}
