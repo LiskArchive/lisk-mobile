@@ -1,6 +1,8 @@
 import { Platform, Dimensions, NativeModules } from 'react-native';
 import { Header } from 'react-navigation';
 import DeviceInfo from 'react-native-device-info';
+// eslint-disable-next-line
+import { Appearance } from 'react-native-appearance';
 
 const { width, height } = Dimensions.get('window');
 
@@ -83,4 +85,8 @@ export const deviceLocale = () => {
     return locale.substr(0, 2);
   }
   return NativeModules.I18nManager.localeIdentifier.substr(0, 2);
+};
+
+export const deviceTheme = () => {
+  return Appearance.getColorScheme();
 };
