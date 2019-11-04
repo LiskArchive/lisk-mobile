@@ -36,7 +36,13 @@ class ScrollAwareActionBar extends React.Component {
   };
 
   render() {
-    const { children, styles, viewIsInsideTab, noFooterButton } = this.props;
+    const {
+      children,
+      styles,
+      viewIsInsideTab,
+      noFooterButton,
+      extraContent,
+    } = this.props;
     const { buttonStyle } = this.state;
 
     /*
@@ -76,6 +82,7 @@ class ScrollAwareActionBar extends React.Component {
                   shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
                 ]}
               >
+                {extraContent}
                 {this.renderButton(theme.footerButton)}
               </View>
             )}
@@ -83,6 +90,7 @@ class ScrollAwareActionBar extends React.Component {
         </KeyboardAwareScrollView>
         {buttonStyle === theme.keyboardStickyButton && (
           <KeyboardTrackingView>
+            {extraContent}
             {this.renderButton(theme.keyboardStickyButton)}
           </KeyboardTrackingView>
         )}

@@ -62,8 +62,7 @@ const styles = {
     color: colors.light.ultramarineBlue,
   },
   createAccountWrapper: {
-    position: 'absolute',
-    bottom: deviceType() === 'iOSx' ? 105 : 70,
+    marginBottom: deviceType() === 'iOSx' ? 35 : 10,
   },
 };
 
