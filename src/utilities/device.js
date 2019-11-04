@@ -88,5 +88,8 @@ export const deviceLocale = () => {
 };
 
 export const deviceTheme = () => {
-  return Appearance.getColorScheme();
+  if (Platform.OS === 'ios' && Platform.Version >= 13) {
+    return Appearance.getColorScheme();
+  }
+  return 'light';
 };
