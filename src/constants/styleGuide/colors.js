@@ -10,7 +10,7 @@ const common = {
   platinum: '#E1E3EA',
   mystic: '#EDF0F5',
   whiteSmoke: '#F5F7FA',
-  burntSieanna: '#EC6968',
+  burntSieanna: '#EC6868',
   ufoGreen: '#2AD67C',
 };
 
