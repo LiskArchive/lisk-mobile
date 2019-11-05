@@ -170,7 +170,7 @@ export default () => ({
       borderBottomColor: setColorOpacity(colors.light.white, 0.24),
     },
     emptyState: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
     address: {
       color: colors.dark.white,

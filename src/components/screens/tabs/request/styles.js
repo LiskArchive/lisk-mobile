@@ -86,10 +86,10 @@ export default () => ({
 
   [themes.dark]: {
     wrapper: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
     innerContainer: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
     addressLabel: {
       color: colors.light.platinum,

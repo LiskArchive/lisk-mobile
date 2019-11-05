@@ -48,7 +48,7 @@ export default ({ logoSize }) => ({
 
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.maastrichtBlue,
+      backgroundColor: colors.dark.mainBg,
     },
     appTitle: {
       color: colors.dark.white,

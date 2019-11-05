@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { themes, colors } from '../../../../constants/styleGuide';
-import { setColorOpacity } from '../../../../utilities/helpers';
 
 export default () => ({
   common: {
@@ -23,11 +22,14 @@ export default () => ({
     indicatorStyle: {
       backgroundColor: colors.light.white,
     },
+    activeTint: {
+      color: colors.light.BTC,
+    },
   },
   [themes.dark]: {
     style: {
-      backgroundColor: colors.dark.headerBg,
-      borderTopColor: setColorOpacity(colors.dark.white, 0.15),
+      backgroundColor: colors.dark.footerBg,
+      borderTopColor: colors.dark.slateGray,
     },
     inactiveTint: {
       color: colors.dark.slateGray,
@@ -37,6 +39,9 @@ export default () => ({
     },
     indicatorStyle: {
       backgroundColor: colors.dark.headerBg,
+    },
+    activeTint: {
+      color: colors.dark.ultramarineBlue,
     },
   },
 });

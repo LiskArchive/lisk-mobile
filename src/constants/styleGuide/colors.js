@@ -23,10 +23,11 @@ const light = {
 const dark = {
   ...common,
   outgoingArrow: common.platinum,
-  // dark mode's header color is not on the style guide
-  headerBg: '#00152D',
-  // homeHeaderBg is ultramarineBlue with 30% opacity
-  homeHeaderBg: '#1b316a',
+  headerBg: '#1C1C1E',
+  homeHeaderBg: '#1C316A',
+  mainBg: common.black,
+  footerBg: '#1C1C1C',
+  textInputBg: '#1C1C1E',
 };
 
 export default {
