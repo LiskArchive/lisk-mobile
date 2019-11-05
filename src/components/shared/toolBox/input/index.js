@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { themes } from '../../../../constants/styleGuide';
-import Icon from '../icon';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 
@@ -98,10 +97,7 @@ class Input extends React.Component {
         />
 
         {error ? (
-          <View
-            style={[styles.errorMessageContainer, innerStyles.errorMessage]}
-          >
-            <Icon size={16} name="error" style={[styles.theme.errorIcon]} />
+          <View style={styles.errorMessageContainer}>
             <Text style={[styles.errorMessage, styles.theme.errorMessage]}>
               {error}
             </Text>
