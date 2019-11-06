@@ -155,7 +155,7 @@
     "cucumber": "5.1.0",
     "cucumber-pretty": "1.5.0",
     "detox": "14.5.0",
-    "eslint": "=4.9.0",
+    "eslint": "=4.18.2",
     "eslint-config-airbnb": "=15.1.0",
     "eslint-config-airbnb-base": "=12.1.0",
     "eslint-config-prettier": "^6.1.0",
