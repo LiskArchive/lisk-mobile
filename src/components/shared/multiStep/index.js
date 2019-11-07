@@ -103,7 +103,7 @@ class MultiStep extends React.Component {
       sharedData: data,
     };
 
-    if (current === children.length - 2) {
+    if (current === children.length - 1) {
       if (typeof finalCallback === 'function') {
         extraProps.finalCallback = finalCallback;
       }
@@ -137,9 +137,9 @@ class MultiStep extends React.Component {
             move={this.move}
           />
         ) : null}
-        {ProgressBar && (
+        {ProgressBar ? (
           <ProgressBar current={current} total={children.length} />
-        )}
+        ) : null}
         {React.cloneElement(children[current], extraProps)}
       </Element>
     );
