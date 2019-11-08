@@ -1,8 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
-// eslint-disable-next-line
-import { AppearanceProvider } from 'react-native-appearance';
 import { I18nextProvider } from 'react-i18next';
 import connect from 'redux-connect-decorator';
 import Router from './components/screens/router';
@@ -24,21 +22,17 @@ class ThemedApp extends React.Component {
   render() {
     const { theme } = this.props.settings;
     return (
-      <AppearanceProvider>
-        <ThemeContext.Provider value={theme}>
-          <I18nextProvider i18n={i18n}>
-            <StatusBar
-              barStyle={
-                theme === themes.light ? 'dark-content' : 'light-content'
-              }
-            />
-            <Loading />
-            <Router />
-            <Alert />
-            <Modal />
-          </I18nextProvider>
-        </ThemeContext.Provider>
-      </AppearanceProvider>
+      <ThemeContext.Provider value={theme}>
+        <I18nextProvider i18n={i18n}>
+          <StatusBar
+            barStyle={theme === themes.light ? 'dark-content' : 'light-content'}
+          />
+          <Loading />
+          <Router />
+          <Alert />
+          <Modal />
+        </I18nextProvider>
+      </ThemeContext.Provider>
     );
   }
 }
