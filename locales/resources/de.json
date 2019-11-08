@@ -215,11 +215,11 @@
   "Transaction fee": "Transaktionsgebühr",
   "You have no transactions yet.": "Du hast keine kürzlichen Aktivitäten.",
   "Your Balance": "Dein Kontobetrag",
-  "Activity history": "Activity history",
-  "Token transfer": "Token transfer",
-  "Transfer your tokens easily to other accounts, by simply scanning QR Codes.": "Transfer your tokens easily to other accounts, by simply scanning QR Codes.",
-  "Secure authentication": "Secure authentication",
-  "Access all functions via advanced biometric authentication.": "Access all functions via advanced biometric authentication.",
-  "Easy access": "Easy access",
-  "Create an account with one passphrase to access your LSK and BTC cryptocurrencies.": "Create an account with one passphrase to access your LSK and BTC cryptocurrencies."
+  "Activity history": "Aktivitäts Historie",
+  "Token transfer": "Token Transfer",
+  "Transfer your tokens easily to other accounts, by simply scanning QR Codes.": "Um deine Tokens zu anderen Accounts zu senden, scanne einfach den QR Code.",
+  "Secure authentication": "Sichere Authentifizierung",
+  "Access all functions via advanced biometric authentication.": "Greife auf alle Funktionen via biometrischer Authentifizierung zu.",
+  "Easy access": "Einfacher Zugriff",
+  "Create an account with one passphrase to access your LSK and BTC cryptocurrencies.": "Erstelle einen Account mit einer Passphrase um auf deine LSK und BTC Tokens zusammen zuzugreifen."
 }
