@@ -217,13 +217,14 @@ class Form extends React.Component {
           button={t('Sign in')}
           buttonTestID="signInButton"
           onSubmit={this.onFormSubmission}
-        >
-          <CreateAccount
-            style={styles.createAccountWrapper}
-            onPress={this.goToRegistration}
-            opacity={opacity}
-          />
-        </KeyboardAwareScrollView>
+          extraContent={
+            <CreateAccount
+              style={styles.createAccountWrapper}
+              onPress={this.goToRegistration}
+              opacity={opacity}
+            />
+          }
+        />
       </View>
     );
   }
