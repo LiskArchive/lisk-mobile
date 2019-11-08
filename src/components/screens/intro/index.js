@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import SplashScreen from 'react-native-splash-screen';
 import { SafeAreaView } from 'react-navigation';
+import { translate } from 'react-i18next';
 import Splash from './splash';
 import Heading from './heading';
 import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
@@ -36,36 +37,41 @@ class Intro extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     const descriptionContent = [
       {
         step: 1,
-        title: 'Activity history',
-        description:
-          'Get a full overview of your current balance, transaction history and much more.',
+        title: t('Activity history'),
+        description: t(
+          'Get a full overview of your current balance, transaction history and much more.'
+        ),
         imageSrc: activityHistoryImg,
         imageStyle: styles.illustration,
       },
       {
         step: 2,
-        title: 'Token transfer',
-        description:
-          'Transfer your tokens easily to other accounts, by simply scanning QR Codes.',
+        title: t('Token transfer'),
+        description: t(
+          'Transfer your tokens easily to other accounts, by simply scanning QR Codes.'
+        ),
         imageSrc: tokensTransferImg,
         imageStyle: styles.illustration,
       },
       {
         step: 3,
-        title: 'Secure authentication',
-        description:
-          'Access all functions via advanced biometric authentication.',
+        title: t('Secure authentication'),
+        description: t(
+          'Access all functions via advanced biometric authentication.'
+        ),
         imageSrc: secureAuthenticationImg,
         imageStyle: styles.illustration,
       },
       {
         step: 4,
-        title: 'Easy access',
-        description:
-          'Create an account with one passphrase to access your LSK and BTC cryptocurrencies',
+        title: t('Easy access'),
+        description: t(
+          'Create an account with one passphrase to access your LSK and BTC cryptocurrencies.'
+        ),
         imageSrc: easyAccessImg,
         imageStyle: styles.illustration,
         acceptTermsSwitch: true,
@@ -86,4 +92,4 @@ class Intro extends React.Component {
   }
 }
 
-export default Intro;
+export default translate()(Intro);

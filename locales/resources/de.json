@@ -88,7 +88,7 @@
   "Reference": "Nachricht",
   "Reference (optional)": "Nachricht (optional)",
   "Registrant": "Registrierender(in)",
-  "Removed votes": "Entfernte Stimmen", 
+  "Removed votes": "Entfernte Stimmen",
   "Request LSK tokens from other accounts.": "{{tokenType}} Tokens von einem Konto anfragen",
   "Return to home": "Zurück zur Startseite",
   "Reveal QR code": "Zeige QR Code",
@@ -214,5 +214,12 @@
   "Tap and fill in the blanks:": "Tippe, um die Lücken zu füllen:",
   "Transaction fee": "Transaktionsgebühr",
   "You have no transactions yet.": "Du hast keine kürzlichen Aktivitäten.",
-  "Your Balance": "Dein Kontobetrag"
+  "Your Balance": "Dein Kontobetrag",
+  "Activity history": "Activity history",
+  "Token transfer": "Token transfer",
+  "Transfer your tokens easily to other accounts, by simply scanning QR Codes.": "Transfer your tokens easily to other accounts, by simply scanning QR Codes.",
+  "Secure authentication": "Secure authentication",
+  "Access all functions via advanced biometric authentication.": "Access all functions via advanced biometric authentication.",
+  "Easy access": "Easy access",
+  "Create an account with one passphrase to access your LSK and BTC cryptocurrencies.": "Create an account with one passphrase to access your LSK and BTC cryptocurrencies."
 }
