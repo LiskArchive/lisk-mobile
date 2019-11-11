@@ -99,7 +99,7 @@ class Heading extends React.Component {
                     disabled={item.acceptTermsSwitch && !this.state.confirmed}
                     style={styles.button}
                     onClick={() => this.onPress(item)}
-                    title="Continue"
+                    title={t('Continue')}
                     testID="continueButton"
                   />
                 </View>
