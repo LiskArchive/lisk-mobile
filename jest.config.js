@@ -4,7 +4,7 @@ module.exports = {
   testPathIgnorePatterns: ['<rootDir>/src/components/', '<rootDir>/e2e/'],
   verbose: true,
   cache: false,
-  moduleFileExtensions: ['js'],
+  moduleFileExtensions: ['js', 'tsx'],
   moduleDirectories: ['node_modules'],
   collectCoverage: true,
   coverageDirectory: '<rootDir>/coverage/jest',
