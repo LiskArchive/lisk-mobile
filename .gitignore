@@ -21,7 +21,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
 
 # Android/IntelliJ
 #
@@ -44,6 +43,8 @@ buck-out/
 *.keystore
 *.pem
 pepk.jar
+!debug.keystore
+
 
 # fastlane
 #
@@ -58,6 +59,9 @@ pepk.jar
 
 # Bundle artifact
 *.jsbundle
+
+# CocoaPods
+/ios/Pods/
 
 # Editors
 .vscode

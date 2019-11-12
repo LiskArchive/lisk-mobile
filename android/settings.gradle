@@ -1,4 +1,5 @@
 rootProject.name = 'Lisk'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':@react-native-community_netinfo'
 project(':@react-native-community_netinfo').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/netinfo/android')
 include ':react-native-gesture-handler'
@@ -49,7 +50,5 @@ include ':react-native-os'
 project(':react-native-os').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-os/android')
 include ':react-native-splash-screen'
 project(':react-native-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-splash-screen/android')
-include ':reactnativekeyboardinput'
-project(':reactnativekeyboardinput').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-keyboard-input/lib/android')
 
 include ':app'
