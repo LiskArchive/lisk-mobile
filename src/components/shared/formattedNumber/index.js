@@ -1,13 +1,14 @@
 import React from 'react';
 import { BigNumber } from 'bignumber.js';
 import { Text } from 'react-native';
+import { languageMap } from '../../../constants/languages';
 
 const reg2 = /-?([0-9,]+\.(([0]{0,2})[1-9]{1,2})?)|-?(0\.([0]+)?[1-9]{1,2})/g;
 
 class FormattedNumber extends React.Component {
   render() {
     const { val, children, type, style, trim, tokenType } = this.props;
-    const language = 'en';
+    const language = languageMap.en.code;
     const Element = type || Text;
     const bigNum = new BigNumber(val || children);
     const formatedNumber = bigNum.toFormat();
