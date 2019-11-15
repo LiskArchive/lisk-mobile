@@ -71,7 +71,7 @@ class TransactionDetail extends React.Component {
   };
 
   render() {
-    const { styles, theme, account } = this.props;
+    const { styles, theme, account, language } = this.props;
     const { tx } = this.state;
 
     if (!tx.senderAddress) {
@@ -133,7 +133,7 @@ class TransactionDetail extends React.Component {
             {tx.type === 0 && tx.recipientAddress !== tx.senderAddress ? (
               <H1 style={amountStyle}>
                 {amountSign}
-                <FormattedNumber>
+                <FormattedNumber language={language}>
                   {tx.notRawLisk ? tx.amount : fromRawLsk(tx.amount)}
                 </FormattedNumber>
               </H1>

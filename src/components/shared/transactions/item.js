@@ -136,6 +136,7 @@ class Item extends React.Component {
                     styles[`${direction}Amount`],
                     styles.theme[`${direction}Amount`],
                   ]}
+                  language={language}
                 >
                   {amount}
                 </FormattedNumber>

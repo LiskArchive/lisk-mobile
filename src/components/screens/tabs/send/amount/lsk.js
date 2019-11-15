@@ -146,7 +146,7 @@ class AmountLSK extends React.Component {
   }
 
   render() {
-    const { accounts, styles, t, settings } = this.props;
+    const { accounts, styles, t, settings, language } = this.props;
     const { amount } = this.state;
 
     return (
@@ -164,6 +164,7 @@ class AmountLSK extends React.Component {
               value={fromRawLsk(accounts.info[settings.token.active].balance)}
               tokenType={settings.token.active}
               incognito={settings.incognito}
+              language={language}
             />
 
             <Input
