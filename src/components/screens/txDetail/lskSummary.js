@@ -21,7 +21,15 @@ const txTypes = [
   'vote',
 ];
 
-const LskSummary = ({ styles, theme, t, tx, accountAddress, incognito }) => {
+const LskSummary = ({
+  styles,
+  theme,
+  t,
+  tx,
+  accountAddress,
+  incognito,
+  language,
+}) => {
   const amount = fromRawLsk(tx.amount);
   let arrowStyle;
   let amountStyle = [styles.outgoing, styles.theme.outgoing];
@@ -67,7 +75,9 @@ const LskSummary = ({ styles, theme, t, tx, accountAddress, incognito }) => {
       !incognito ? (
         <H3 style={amountStyle}>
           {amountSign}
-          <FormattedNumber>{fromRawLsk(tx.amount)}</FormattedNumber>
+          <FormattedNumber language={language}>
+            {fromRawLsk(tx.amount)}
+          </FormattedNumber>
         </H3>
       ) : null}
       {tx.type === 0 &&

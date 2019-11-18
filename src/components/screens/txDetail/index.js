@@ -29,6 +29,7 @@ import { tokenMap } from '../../../constants/tokens';
     followedAccounts: state.accounts.followed || [],
     account: state.accounts.info || {},
     activeToken: state.settings.token.active,
+    language: state.settings.language,
   }),
   {}
 )
@@ -213,7 +214,14 @@ class TransactionDetail extends React.Component {
   };
 
   render() {
-    const { navigation, styles, account, t, activeToken } = this.props;
+    const {
+      navigation,
+      styles,
+      account,
+      t,
+      activeToken,
+      language,
+    } = this.props;
     const { tx, error, refreshing, upvotes, downvotes } = this.state;
 
     if (error) {
@@ -252,12 +260,14 @@ class TransactionDetail extends React.Component {
             incognito={incognito}
             accountAddress={walletAccountAddress}
             tx={tx}
+            language={language}
           />
         ) : (
           <BtcSummary
             incognito={incognito}
             accountAddress={walletAccountAddress}
             tx={tx}
+            language={language}
           />
         )}
 
@@ -300,7 +310,7 @@ class TransactionDetail extends React.Component {
         )}
         <Row icon="tx-fee" title="Transaction fee">
           <B style={[styles.value, styles.theme.value]}>
-            <FormattedNumber tokenType={activeToken}>
+            <FormattedNumber tokenType={activeToken} language={language}>
               {fromRawLsk(tx.fee)}
             </FormattedNumber>
           </B>

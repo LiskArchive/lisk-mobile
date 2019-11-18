@@ -10,7 +10,14 @@ import Blur from '../../shared/transactions/blur';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
 
-const BtcSummary = ({ styles, theme, tx, accountAddress, incognito }) => {
+const BtcSummary = ({
+  styles,
+  theme,
+  tx,
+  accountAddress,
+  incognito,
+  language,
+}) => {
   const amount = fromRawLsk(tx.amount);
   let amountStyle = [styles.outgoing, styles.theme.outgoing];
   let amountSign = '-';
@@ -42,7 +49,7 @@ const BtcSummary = ({ styles, theme, tx, accountAddress, incognito }) => {
       {!incognito ? (
         <H3 style={amountStyle}>
           {amountSign}
-          <FormattedNumber tokenType="BTC">
+          <FormattedNumber tokenType="BTC" language={language}>
             {fromRawLsk(tx.amount)}
           </FormattedNumber>
         </H3>

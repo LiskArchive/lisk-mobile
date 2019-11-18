@@ -27,6 +27,7 @@ import modalHolder from '../../../../utilities/modal';
     followedAccounts: state.accounts.followed,
     settings: state.settings,
     activeToken: state.settings.token.active,
+    language: state.settings.language,
   }),
   {
     accountFollowed: accountFollowedAction,
@@ -117,6 +118,7 @@ class AccountSummary extends React.Component {
       settings: { token },
       theme,
       navigation,
+      language,
     } = this.props;
     const address =
       token.active === tokenKeys[1]
@@ -198,6 +200,7 @@ class AccountSummary extends React.Component {
             tokenType={token.active}
             style={styles.theme.walletBalance}
             type={H2}
+            language={language}
           >
             {normalizedBalance}
           </FormattedNumber>

@@ -9,6 +9,7 @@ import Form from './form';
 import Rejected from './rejected';
 import SignInWarning from './signInWarning';
 import DevSettings from './devSettings';
+import { languageMap } from '../../../constants/languages';
 
 const { MessagesManager } = NativeModules;
 const MessagesEvents = new NativeEventEmitter(MessagesManager);
@@ -174,6 +175,7 @@ class LiskMessageExtension extends Component {
       presentationStyle,
       conversation,
     } = this.state;
+    const language = languageMap.en.code;
 
     const isSender =
       conversation.localParticipiantIdentifier ===
@@ -190,6 +192,7 @@ class LiskMessageExtension extends Component {
                 account={{ address: address.value }}
                 sharedData={parsedData}
                 txID={parsedData.txID}
+                language={language}
               />
             );
           default:
@@ -203,6 +206,7 @@ class LiskMessageExtension extends Component {
                 sharedData={parsedData}
                 passphrase={passphrase}
                 composeMessage={this.composeMessage}
+                language={language}
               />
             );
         }

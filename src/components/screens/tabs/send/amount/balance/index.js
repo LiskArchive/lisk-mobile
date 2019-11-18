@@ -17,6 +17,7 @@ const AmountBalance = ({
   incognito,
   value = 0,
   tokenType,
+  language,
 }) => (
   <View
     style={[
@@ -36,6 +37,7 @@ const AmountBalance = ({
         type={B}
         style={[styles.balanceNumber, styles.theme.balanceNumber]}
         tokenType={tokenType}
+        language={language}
       >
         {value}
       </FormattedNumber>

@@ -1,13 +1,9 @@
 import React from 'react';
 import { BigNumber } from 'bignumber.js';
 import { Text } from 'react-native';
-import connect from 'redux-connect-decorator';
 
 const reg2 = /-?([0-9,]+\.(([0]{0,2})[1-9]{1,2})?)|-?(0\.([0]+)?[1-9]{1,2})/g;
 
-@connect(state => ({
-  language: state.settings.language,
-}))
 class FormattedNumber extends React.Component {
   render() {
     const {
