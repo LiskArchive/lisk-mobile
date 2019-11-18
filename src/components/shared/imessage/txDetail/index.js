@@ -227,7 +227,7 @@ class TransactionDetail extends React.Component {
           ) : null}
           <View style={[styles.detailRow, styles.theme.detailRow]}>
             <Icon
-              name="confirmation"
+              name="confirmations"
               size={22}
               style={styles.rowIcon}
               color={colors.light.slateGray}
