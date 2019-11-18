@@ -27,7 +27,7 @@ import modalHolder from '../../../../utilities/modal';
     followedAccounts: state.accounts.followed,
     settings: state.settings,
     activeToken: state.settings.token.active,
-    language: state.settings.language
+    language: state.settings.language,
   }),
   {
     accountFollowed: accountFollowedAction,

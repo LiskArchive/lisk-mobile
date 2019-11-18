@@ -110,7 +110,9 @@ class Confirm extends Component {
                 <View style={styles.rowContent}>
                   <P style={styles.label}>Amount</P>
                   <B style={[styles.text]}>
-                    <FormattedNumber language={language}>{amount}</FormattedNumber>
+                    <FormattedNumber language={language}>
+                      {amount}
+                    </FormattedNumber>
                   </B>
                 </View>
               </View>
@@ -125,7 +127,7 @@ class Confirm extends Component {
                   <View style={styles.rowContent}>
                     <P style={styles.label}>Transaction fee</P>
                     <B style={[styles.text]}>
-                      <FormattedNumber language={language}>{0.1}</FormattedNumber>
+                      <FormattedNumber language={language}>0.1</FormattedNumber>
                     </B>
                   </View>
                 </View>
