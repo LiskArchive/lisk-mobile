@@ -151,9 +151,7 @@ class Form extends React.Component {
     return (
       <View
         style={
-          showSimplifiedView
-            ? styles.containerSimplified
-            : styles.container
+          showSimplifiedView ? styles.containerSimplified : styles.container
         }
         testID="signInForm"
       >
