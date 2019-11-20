@@ -145,10 +145,18 @@ class Form extends React.Component {
       toggleView,
       sensorType,
       showBackButton,
+      showSimplifiedView,
     } = this.props;
 
     return (
-      <View style={styles.container} testID="signInForm">
+      <View
+        style={
+          showSimplifiedView
+            ? styles.containerSimplified
+            : styles.container
+        }
+        testID="signInForm"
+      >
         {showBackButton ? (
           <BackButton toggleView={toggleView} sensorType={sensorType} t={t} />
         ) : null}
@@ -169,7 +177,11 @@ class Form extends React.Component {
           permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
 
-        <Title opacity={opacity}>{t('The official Lisk mobile wallet.')}</Title>
+        {showSimplifiedView ? null : (
+          <Title opacity={opacity}>
+            {t('The official Lisk mobile wallet.')}
+          </Title>
+        )}
 
         <Animated.View style={[{ opacity }]}>
           <Input

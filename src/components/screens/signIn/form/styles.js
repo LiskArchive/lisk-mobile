@@ -10,6 +10,10 @@ const styles = {
     height: '100%',
     paddingTop: isSmallDevice ? 110 : 170,
   },
+  containerSimplified: {
+    height: '100%',
+    paddingTop: isSmallDevice ? 50 : 100,
+  },
   paddingBottom: {
     paddingBottom: isSmallDevice ? 0 : 40,
   },
