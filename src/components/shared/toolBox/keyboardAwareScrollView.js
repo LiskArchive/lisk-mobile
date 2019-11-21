@@ -89,7 +89,14 @@ class ScrollAwareActionBar extends React.Component {
           </View>
         </KeyboardAwareScrollView>
         {buttonStyle === theme.keyboardStickyButton && (
-          <KeyboardTrackingView>
+          <KeyboardTrackingView
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: '100%',
+            }}
+          >
             {extraContent}
             {this.renderButton(theme.keyboardStickyButton)}
           </KeyboardTrackingView>

@@ -33,6 +33,10 @@ const styles = {
     zIndex: 2,
     top: height <= 640 ? 40 : 100,
   },
+  splashStaticSimplified: {
+    zIndex: 2,
+    top: height <= 640 ? 40 : 24,
+  },
   splashAnimating: {
     zIndex: 1,
     top: '50%',

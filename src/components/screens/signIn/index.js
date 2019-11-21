@@ -6,6 +6,7 @@ import {
   View,
   Alert,
   Platform,
+  Keyboard,
   DeviceEventEmitter,
 } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
@@ -33,6 +34,7 @@ import Form from './form';
 import BiometricAuth from './biometricAuth';
 import deepLinkMapper, { parseDeepLink } from '../../../utilities/deepLink';
 import quickActionsList from '../../../constants/quickActions';
+import { deviceHeight } from '../../../utilities/device';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 console.disableYellowBox = true; // eslint-disable-line
@@ -60,6 +62,8 @@ class SignIn extends React.Component {
       error: null,
       show: false,
     },
+    keyboardIsOpen: false,
+    keyboardHeight: '',
   };
 
   init = () => {
@@ -304,10 +308,29 @@ class SignIn extends React.Component {
     );
   }
 
+  showSimplifiedView() {
+    if (Platform.OS === 'android') {
+      return (
+        this.state.keyboardHeight / deviceHeight() > 0.35 &&
+        this.state.keyboardIsOpen
+      );
+    }
+    return false;
+  }
+
   componentDidMount() {
     this.props.settingsRetrieved();
     this.setupDeepLinking();
     this.setupQuickActions();
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', e =>
+      this.setState({
+        keyboardIsOpen: true,
+        keyboardHeight: e.endCoordinates.height,
+      })
+    );
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () =>
+      this.setState({ keyboardIsOpen: false })
+    );
   }
 
   componentDidUpdate() {
@@ -326,6 +349,8 @@ class SignIn extends React.Component {
 
   componentWillUnmount() {
     clearTimeout(this.timeout);
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
   }
 
   render() {
@@ -335,7 +360,10 @@ class SignIn extends React.Component {
 
     return (
       <View style={styles.wrapper}>
-        <Splash animate={!signOut} />
+        <Splash
+          animate={!signOut}
+          showSimplifiedView={this.showSimplifiedView()}
+        />
         <View style={styles.container}>
           {view === 'biometricAuth' ? (
             <BiometricAuth
@@ -358,6 +386,7 @@ class SignIn extends React.Component {
               sensorType={sensorType}
               showBackButton={hasStoredPassphrase && sensorType}
               signIn={this.onFormSubmission}
+              showSimplifiedView={this.showSimplifiedView()}
             />
           ) : null}
 

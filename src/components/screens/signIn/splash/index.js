@@ -44,17 +44,26 @@ class Splash extends React.Component {
 
   render() {
     const { top, bgOpacity, iconOpacity } = this.state;
+    const { showSimplifiedView } = this.props;
 
     return (
       <View style={styles.splashContainer}>
         <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]} />
 
         <Animated.View
-          style={[
-            styles.splashFigure,
-            styles.splashStatic,
-            { opacity: iconOpacity },
-          ]}
+          style={
+            showSimplifiedView
+              ? [
+                  styles.splashFigure,
+                  styles.splashStaticSimplified,
+                  { opacity: iconOpacity },
+                ]
+              : [
+                  styles.splashFigure,
+                  styles.splashStatic,
+                  { opacity: iconOpacity },
+                ]
+          }
         >
           <Icon
             name="lisk-full"
