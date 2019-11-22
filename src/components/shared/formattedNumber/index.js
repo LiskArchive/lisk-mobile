@@ -13,7 +13,7 @@ class FormattedNumber extends React.Component {
       style,
       trim,
       tokenType,
-      language,
+      language = 'en',
     } = this.props;
     const Element = type || Text;
     const bigNum = new BigNumber(val || children);
