@@ -68,7 +68,7 @@ class MessagesViewController: MSMessagesAppViewController {
     self.moduleInitialiser = RNModuleInitialiser(messagesVC: self)
     self.bridge = RCTBridge(delegate: moduleInitialiser, launchOptions: nil)
 
-    let rootView = RCTRootView(bridge: bridge, moduleName: "LiskMessageExtension", initialProperties: nil)
+    let rootView = RCTRootView(bridge: bridge!, moduleName: "LiskMessageExtension", initialProperties: nil)
     let rootViewController = UIViewController()
     rootViewController.view = rootView
 

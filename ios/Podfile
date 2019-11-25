@@ -21,7 +21,6 @@ target 'Lisk' do
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
   pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
   pod 'React-Core/RCTWebSocket', :path => '../node_modules/react-native/'
-
   pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
   pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
   pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
@@ -29,26 +28,10 @@ target 'Lisk' do
   pod 'ReactCommon/jscallinvoker', :path => "../node_modules/react-native/ReactCommon"
   pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
   pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
-  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
-
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-
-
-  pod 'RNKeychain', :path => '../node_modules/react-native-keychain'
-
-  pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
-
-  pod 'react-native-udp', :path => '../node_modules/react-native-udp'
-
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
-  pod 'react-native-fingerprint-scanner', :path => '../node_modules/react-native-fingerprint-scanner'
-
-  pod 'react-native-randombytes', :path => '../node_modules/react-native-randombytes'
-
-  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+  pod 'TcpSockets', :path => '../node_modules/react-native-tcp'
 
   target 'LiskTests' do
     inherit! :search_paths
@@ -58,12 +41,48 @@ target 'Lisk' do
   use_native_modules!
 end
 
-target 'Lisk-tvOS' do
-  # Pods for Lisk-tvOS
 
-  target 'Lisk-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
+
+target 'LiskMessageExtension' do
+    pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
+    pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
+    pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
+    pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
+    pod 'React', :path => '../node_modules/react-native/'
+    pod 'React-Core', :path => '../node_modules/react-native/'
+    pod 'React-CoreModules', :path => '../node_modules/react-native/React/CoreModules'
+    pod 'React-Core/DevSupport', :path => '../node_modules/react-native/'
+    pod 'React-RCTActionSheet', :path => '../node_modules/react-native/Libraries/ActionSheetIOS'
+    pod 'React-RCTAnimation', :path => '../node_modules/react-native/Libraries/NativeAnimation'
+    pod 'React-RCTBlob', :path => '../node_modules/react-native/Libraries/Blob'
+    pod 'React-RCTImage', :path => '../node_modules/react-native/Libraries/Image'
+    pod 'React-RCTLinking', :path => '../node_modules/react-native/Libraries/LinkingIOS'
+    pod 'React-RCTNetwork', :path => '../node_modules/react-native/Libraries/Network'
+    pod 'React-RCTSettings', :path => '../node_modules/react-native/Libraries/Settings'
+    pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
+    pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
+    pod 'React-Core/RCTWebSocket', :path => '../node_modules/react-native/'
+    pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
+    pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
+    pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
+    pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
+    pod 'ReactCommon/jscallinvoker', :path => "../node_modules/react-native/ReactCommon"
+    pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
+    pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+    pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+    pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+    pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+    pod 'TcpSockets', :path => '../node_modules/react-native-tcp'
+    pod 'Interactable', :path => '../node_modules/react-native-interactable'
+
+    use_native_modules!
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
+    end
   end
-
 end
