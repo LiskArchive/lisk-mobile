@@ -39,11 +39,13 @@ class Profile extends React.Component {
     const AView = Animated.View;
     let balanceSize = 'Small';
 
-    const normalizedBalance = fromRawLsk(account.balance);
+    const normalizedBalance = account.balance
+      ? fromRawLsk(account.balance)
+      : -1;
     if (normalizedBalance.length > 6) balanceSize = 'Big';
     else if (normalizedBalance.length > 2) balanceSize = 'Medium';
 
-    let fiatBalance = 0;
+    let fiatBalance;
     const ratio = priceTicker[token][settings.currency];
     if (normalizedBalance && ratio) {
       fiatBalance = (normalizedBalance * ratio).toLocaleString(
@@ -91,7 +93,7 @@ class Profile extends React.Component {
             tokenType={token}
             style={[
               styles.theme.homeBalance,
-              settings.incognito ? styles.invisibleTitle : null,
+              settings.incognito || !fiatBalance ? styles.invisibleTitle : null,
             ]}
             type={H3}
           >
@@ -102,7 +104,7 @@ class Profile extends React.Component {
             style={[
               styles.blur,
               styles[`blur${balanceSize}`],
-              settings.incognito ? styles.visibleBlur : null,
+              settings.incognito || !fiatBalance ? styles.visibleBlur : null,
             ]}
           />
         </AView>
@@ -115,7 +117,11 @@ class Profile extends React.Component {
             },
           ]}
         >
-          {!(settings.incognito || Number.isNaN(fiatBalance)) ? (
+          {!(
+            settings.incognito ||
+            Number.isNaN(fiatBalance) ||
+            !fiatBalance
+          ) ? (
             <P style={[styles.fiatValue, styles.theme.fiatValue]}>
               {`~ ${fiatBalance} ${settings.currency}`}
             </P>
