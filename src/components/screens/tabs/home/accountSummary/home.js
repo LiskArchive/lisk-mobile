@@ -146,7 +146,7 @@ class AccountSummary extends React.Component {
           .indexOf(newToken.active);
         this.carousel.triggerRenderingHack();
         this.carousel.snapToItem(newIndex, false);
-      }, 50);
+      }, 0);
     }
 
     if (oldCount === 1 && newCount > 1) {
