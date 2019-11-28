@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Animated, View } from 'react-native';
+import { Image, Animated, View, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
 import Avatar from '../../../../shared/avatar';
 import { fromRawLsk } from '../../../../../utilities/conversions';
@@ -39,13 +39,11 @@ class Profile extends React.Component {
     const AView = Animated.View;
     let balanceSize = 'Small';
 
-    const normalizedBalance = account.balance
-      ? fromRawLsk(account.balance)
-      : -1;
+    const normalizedBalance = fromRawLsk(account.balance);
     if (normalizedBalance.length > 6) balanceSize = 'Big';
     else if (normalizedBalance.length > 2) balanceSize = 'Medium';
 
-    let fiatBalance;
+    let fiatBalance = 0;
     const ratio = priceTicker[token][settings.currency];
     if (normalizedBalance && ratio) {
       fiatBalance = (normalizedBalance * ratio).toLocaleString(
