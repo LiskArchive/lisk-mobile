@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Animated, View, Dimensions } from 'react-native';
+import { Image, Animated, View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import Avatar from '../../../../shared/avatar';
 import { fromRawLsk } from '../../../../../utilities/conversions';
