@@ -20,14 +20,15 @@
 		3394A82521F1F8CE009CF136 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
 		3394A82621F1F8D5009CF136 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */; };
 		3394A82721F1F8E0009CF136 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */; };
+		3FD2CB83300B164930E0C820 /* libPods-LiskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B71D26FE1D06B225F7741C8A /* libPods-LiskTests.a */; };
 		426CF278ABDA4231AE32D163 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */; };
 		474690CB9297461BA9AF4391 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E994AF5C6347C8AFFF3A11 /* Feather.ttf */; };
-		4859A8A9FF130F01849DF0AE /* libPods-LiskMessageExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB04ED44ACCE3B2A576C41C /* libPods-LiskMessageExtension.a */; };
 		4F7FDDEC2B3F43659A347587 /* Dots-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E1B4DCBCC0842B2986B9E14 /* Dots-Regular.ttf */; };
 		5672998E723E4F16A05B486C /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B83957AC84BD8A022D183 /* Ionicons.ttf */; };
 		5A4C25F4C2A844C6AC782A1F /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E6B1A96CADF4A1CA06AB334 /* Zocial.ttf */; };
 		6E912A36988046498BA5920C /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42C51533876A4213B5C6DF3A /* FontAwesome5_Regular.ttf */; };
 		7FBFE3D07A8E4244A5B3A4E9 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */; };
+		84BF445D176FBFD7144F859F /* libPods-LiskMessageExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB818802963E61B0C3540B2 /* libPods-LiskMessageExtension.a */; };
 		921411B12387F305006D77B4 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921411B02387F305006D77B4 /* Bridge.swift */; };
 		921411B32387F305006D77B4 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921411B02387F305006D77B4 /* Bridge.swift */; };
 		921411D623882D18006D77B4 /* LiskMessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -54,11 +55,10 @@
 		B91F9C95B3D44ED7A2694A25 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81C8D641E161464D9F3E7B31 /* MaterialIcons.ttf */; };
 		BAF3ECA7F1E7437A8515352D /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 039AEE296EDF466587675136 /* EvilIcons.ttf */; };
 		C04DF4E469D84CC1A062C1F8 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */; };
-		CB73F2905EB3A6C36BCA9AE7 /* libPods-LiskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A895E6D444A3DB2E2288591 /* libPods-LiskTests.a */; };
+		C824DEC039957E7BB02D7A9C /* libPods-Lisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62FD5FB74667B384CAFFABF2 /* libPods-Lisk.a */; };
 		D55C275441D14A72ACAA6E1A /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 314B276C7E0945BAB39A90F9 /* Fontisto.ttf */; };
 		D899C1D561774F7C96BB1191 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */; };
 		DED1B5E0ED604C06B2A8DA08 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81062941E7DD4CE3B4966E8A /* SimpleLineIcons.ttf */; };
-		E4154D040C075BA2B5A45082 /* libPods-Lisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23161821652A4BB0F547068B /* libPods-Lisk.a */; };
 		EF685C51F2AC4749BBCF2518 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75A6A44A950E4762AB7D68BF /* Entypo.ttf */; };
 		FCF4B1346828485FBB6AB71E /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA47589248E346BC855D96D8 /* AntDesign.ttf */; };
 		FD19C169B103472B95C711F1 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B369F5C29FAA4B78ABFD9108 /* Octicons.ttf */; };
@@ -139,6 +139,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* LiskTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiskTests.m; sourceTree = "<group>"; };
 		01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Bold.ttf"; path = "../src/assets/fonts/gilroy/Gilroy-Bold.ttf"; sourceTree = "<group>"; };
+		02D785E0EA7BA0D28B7D3903 /* Pods-Lisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk.release.xcconfig"; path = "Target Support Files/Pods-Lisk/Pods-Lisk.release.xcconfig"; sourceTree = "<group>"; };
 		039AEE296EDF466587675136 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Lisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Lisk/AppDelegate.h; sourceTree = "<group>"; };
@@ -149,27 +150,24 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Lisk/main.m; sourceTree = "<group>"; };
 		1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierCircle-Bold.otf"; path = "../src/assets/fonts/basierCircle/BasierCircle-Bold.otf"; sourceTree = "<group>"; };
 		2094B260978C4B609B27CDB1 /* libRNCNetInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCNetInfo.a; sourceTree = "<group>"; };
-		23161821652A4BB0F547068B /* libPods-Lisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		242FC871E9BB4CA1859D9380 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		2637EF9ACC5C3DEB37A29EA1 /* Pods-LiskMessageExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskMessageExtension.release.xcconfig"; path = "Target Support Files/Pods-LiskMessageExtension/Pods-LiskMessageExtension.release.xcconfig"; sourceTree = "<group>"; };
 		314B276C7E0945BAB39A90F9 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		330DE28221523AE200B584E3 /* Lisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Lisk.entitlements; path = Lisk/Lisk.entitlements; sourceTree = "<group>"; };
 		33C330B721F1CF26003C62F1 /* LiskMessageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiskMessageExtension.entitlements; sourceTree = "<group>"; };
 		33E994AF5C6347C8AFFF3A11 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		37F6ED6053CADD6712468F90 /* Pods-LiskMessageExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskMessageExtension.debug.xcconfig"; path = "Target Support Files/Pods-LiskMessageExtension/Pods-LiskMessageExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		387854827CDD03191B4E8784 /* Pods-Lisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk.release.xcconfig"; path = "Target Support Files/Pods-Lisk/Pods-Lisk.release.xcconfig"; sourceTree = "<group>"; };
 		3A7B1E37D72F4DBDAAA71A0F /* RCTCustomInputController.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCustomInputController.xcodeproj; path = "../node_modules/react-native-keyboard-input/lib/ios/RCTCustomInputController.xcodeproj"; sourceTree = "<group>"; };
 		42C51533876A4213B5C6DF3A /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		4735A61E525F40548A6AD278 /* libInteractable.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInteractable.a; sourceTree = "<group>"; };
-		4A895E6D444A3DB2E2288591 /* libPods-LiskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		486D5130841AFA1D04AF2D32 /* Pods-Lisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk.debug.xcconfig"; path = "Target Support Files/Pods-Lisk/Pods-Lisk.debug.xcconfig"; sourceTree = "<group>"; };
 		4B3CD568314C40F799A5781E /* Interactable.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/lib/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
 		4C51D72C0FAD40BFA9898B8F /* PTMono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PTMono-Regular.ttf"; path = "../src/assets/fonts/passphrase/PTMono-Regular.ttf"; sourceTree = "<group>"; };
+		4C7CB733A924801FB28DCF8F /* Pods-LiskMessageExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskMessageExtension.release.xcconfig"; path = "Target Support Files/Pods-LiskMessageExtension/Pods-LiskMessageExtension.release.xcconfig"; sourceTree = "<group>"; };
 		4E1B4DCBCC0842B2986B9E14 /* Dots-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Dots-Regular.ttf"; path = "../src/assets/fonts/passphrase/Dots-Regular.ttf"; sourceTree = "<group>"; };
 		4E6B1A96CADF4A1CA06AB334 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		5151B3598A4C4363814407E6 /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReanimated.a; sourceTree = "<group>"; };
+		56D0D8CE27086820C016DE17 /* Pods-LiskMessageExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskMessageExtension.debug.xcconfig"; path = "Target Support Files/Pods-LiskMessageExtension/Pods-LiskMessageExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierCircle-SemiBold.otf"; path = "../src/assets/fonts/basierCircle/BasierCircle-SemiBold.otf"; sourceTree = "<group>"; };
-		676D54EAF0E526B3CFF938E0 /* Pods-LiskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskTests.release.xcconfig"; path = "Target Support Files/Pods-LiskTests/Pods-LiskTests.release.xcconfig"; sourceTree = "<group>"; };
-		6AB04ED44ACCE3B2A576C41C /* libPods-LiskMessageExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskMessageExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		62FD5FB74667B384CAFFABF2 /* libPods-Lisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EAAD94B7A054F84BC1CEE31 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		6F3C84F25D024703B97337E4 /* libRNShakeEvent.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShakeEvent.a; sourceTree = "<group>"; };
 		75A6A44A950E4762AB7D68BF /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -183,6 +181,7 @@
 		921411AF2387F305006D77B4 /* LiskTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiskTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		921411B02387F305006D77B4 /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		92ED43B2238BD5210053F88A /* Lisk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lisk-Bridging-Header.h"; sourceTree = "<group>"; };
+		9CB818802963E61B0C3540B2 /* libPods-LiskMessageExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskMessageExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DB7E33846642C19C14DDDC /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
 		A1C06B518E05471CBA1B127C /* libRNOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNOS.a; sourceTree = "<group>"; };
 		A436A259FE604084816F035A /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = "<group>"; };
@@ -204,13 +203,14 @@
 		B16B20564A054422B6292600 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		B369F5C29FAA4B78ABFD9108 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		B54A22A4DB0646D39BD06D1D /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		B71D26FE1D06B225F7741C8A /* libPods-LiskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB865073FACB4AEEB229A6FF /* icomoon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoon.ttf; path = ../src/assets/fonts/icons/icomoon.ttf; sourceTree = "<group>"; };
 		C62366C4392B46A9A731A5F1 /* RNOS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNOS.xcodeproj; path = "../node_modules/react-native-os/ios/RNOS.xcodeproj"; sourceTree = "<group>"; };
+		C81F26CFD66C4EC1AE3FB076 /* Pods-LiskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskTests.debug.xcconfig"; path = "Target Support Files/Pods-LiskTests/Pods-LiskTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C89A6B0B3FDDCD4A48249968 /* Pods-LiskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskTests.release.xcconfig"; path = "Target Support Files/Pods-LiskTests/Pods-LiskTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA47589248E346BC855D96D8 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		EDBE79985607217186285C00 /* Pods-LiskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskTests.debug.xcconfig"; path = "Target Support Files/Pods-LiskTests/Pods-LiskTests.debug.xcconfig"; sourceTree = "<group>"; };
-		EF089329D9BFDB200FE22C33 /* Pods-Lisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk.debug.xcconfig"; path = "Target Support Files/Pods-Lisk/Pods-Lisk.debug.xcconfig"; sourceTree = "<group>"; };
 		F757DDBDDE3E44FF90CA5133 /* BasierCircle-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierCircle-Regular.otf"; path = "../src/assets/fonts/basierCircle/BasierCircle-Regular.otf"; sourceTree = "<group>"; };
 		F8A1F0630C064091A007BE3F /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -220,7 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB73F2905EB3A6C36BCA9AE7 /* libPods-LiskTests.a in Frameworks */,
+				3FD2CB83300B164930E0C820 /* libPods-LiskTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4154D040C075BA2B5A45082 /* libPods-Lisk.a in Frameworks */,
+				C824DEC039957E7BB02D7A9C /* libPods-Lisk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4859A8A9FF130F01849DF0AE /* libPods-LiskMessageExtension.a in Frameworks */,
+				84BF445D176FBFD7144F859F /* libPods-LiskMessageExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,9 +283,9 @@
 			children = (
 				90363AD122CB8AC6006A5D94 /* JavaScriptCore.framework */,
 				AC7A832221EF4BDB004502E4 /* Messages.framework */,
-				23161821652A4BB0F547068B /* libPods-Lisk.a */,
-				6AB04ED44ACCE3B2A576C41C /* libPods-LiskMessageExtension.a */,
-				4A895E6D444A3DB2E2288591 /* libPods-LiskTests.a */,
+				62FD5FB74667B384CAFFABF2 /* libPods-Lisk.a */,
+				9CB818802963E61B0C3540B2 /* libPods-LiskMessageExtension.a */,
+				B71D26FE1D06B225F7741C8A /* libPods-LiskTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -325,12 +325,12 @@
 		5B953057FC13598F9D6F7CBD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EF089329D9BFDB200FE22C33 /* Pods-Lisk.debug.xcconfig */,
-				387854827CDD03191B4E8784 /* Pods-Lisk.release.xcconfig */,
-				37F6ED6053CADD6712468F90 /* Pods-LiskMessageExtension.debug.xcconfig */,
-				2637EF9ACC5C3DEB37A29EA1 /* Pods-LiskMessageExtension.release.xcconfig */,
-				EDBE79985607217186285C00 /* Pods-LiskTests.debug.xcconfig */,
-				676D54EAF0E526B3CFF938E0 /* Pods-LiskTests.release.xcconfig */,
+				486D5130841AFA1D04AF2D32 /* Pods-Lisk.debug.xcconfig */,
+				02D785E0EA7BA0D28B7D3903 /* Pods-Lisk.release.xcconfig */,
+				56D0D8CE27086820C016DE17 /* Pods-LiskMessageExtension.debug.xcconfig */,
+				4C7CB733A924801FB28DCF8F /* Pods-LiskMessageExtension.release.xcconfig */,
+				C81F26CFD66C4EC1AE3FB076 /* Pods-LiskTests.debug.xcconfig */,
+				C89A6B0B3FDDCD4A48249968 /* Pods-LiskTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -447,7 +447,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "LiskTests" */;
 			buildPhases = (
-				6076DA379C01D152A098B8CF /* [CP] Check Pods Manifest.lock */,
+				70B5D1CFAD63BA86A405C0E3 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -466,14 +466,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Lisk" */;
 			buildPhases = (
-				7DC9C7D315718FAE025D8F3D /* [CP] Check Pods Manifest.lock */,
+				64C53286F0D6AB6E8432A9B2 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				B647FAAA210720D700EFF1B7 /* Embed Frameworks */,
 				AC7A837521EF4BDC004502E4 /* Embed App Extensions */,
-				5B900FE3EADE6ADFEFEA2E46 /* [CP] Copy Pods Resources */,
+				65911161A2F9B934167C42EF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -489,12 +489,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC7A837421EF4BDC004502E4 /* Build configuration list for PBXNativeTarget "LiskMessageExtension" */;
 			buildPhases = (
-				A139DB62E6A740A0B4FD05E2 /* [CP] Check Pods Manifest.lock */,
+				91F14FCA441DDBB49C5E24F2 /* [CP] Check Pods Manifest.lock */,
 				AC7A831D21EF4BDB004502E4 /* Sources */,
 				AC7A831E21EF4BDB004502E4 /* Frameworks */,
 				AC7A831F21EF4BDB004502E4 /* Resources */,
 				AC759F2222034E4B00B5EDB1 /* Run Script */,
-				1F58D08CC552AB004F0F54A8 /* [CP] Copy Pods Resources */,
+				F8521718A9C6FC3372EC1E52 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -690,7 +690,107 @@
 			shellPath = /bin/sh;
 			shellScript = "export DEVELOPMENT_BUILD_CONFIGURATIONS=\"+(StagingQA|Debug)\"\n";
 		};
-		1F58D08CC552AB004F0F54A8 /* [CP] Copy Pods Resources */ = {
+		64C53286F0D6AB6E8432A9B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lisk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65911161A2F9B934167C42EF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lisk/Pods-Lisk-resources.sh",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lisk/Pods-Lisk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		70B5D1CFAD63BA86A405C0E3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LiskTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91F14FCA441DDBB49C5E24F2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LiskMessageExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC759F2222034E4B00B5EDB1 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=$(command -v node)\n../node_modules/react-native/scripts/react-native-xcode.sh index.message.js\n";
+		};
+		F8521718A9C6FC3372EC1E52 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -737,106 +837,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiskMessageExtension/Pods-LiskMessageExtension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		5B900FE3EADE6ADFEFEA2E46 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lisk/Pods-Lisk-resources.sh",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lisk/Pods-Lisk-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6076DA379C01D152A098B8CF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LiskTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7DC9C7D315718FAE025D8F3D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Lisk-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A139DB62E6A740A0B4FD05E2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LiskMessageExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AC759F2222034E4B00B5EDB1 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=$(command -v node)\n../node_modules/react-native/scripts/react-native-xcode.sh index.message.js\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -912,7 +912,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EDBE79985607217186285C00 /* Pods-LiskTests.debug.xcconfig */;
+			baseConfigurationReference = C81F26CFD66C4EC1AE3FB076 /* Pods-LiskTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -963,7 +963,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 676D54EAF0E526B3CFF938E0 /* Pods-LiskTests.release.xcconfig */;
+			baseConfigurationReference = C89A6B0B3FDDCD4A48249968 /* Pods-LiskTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1010,7 +1010,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF089329D9BFDB200FE22C33 /* Pods-Lisk.debug.xcconfig */;
+			baseConfigurationReference = 486D5130841AFA1D04AF2D32 /* Pods-Lisk.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1064,7 +1064,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 387854827CDD03191B4E8784 /* Pods-Lisk.release.xcconfig */;
+			baseConfigurationReference = 02D785E0EA7BA0D28B7D3903 /* Pods-Lisk.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1197,7 +1197,7 @@
 		};
 		AC7A833021EF4BDC004502E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37F6ED6053CADD6712468F90 /* Pods-LiskMessageExtension.debug.xcconfig */;
+			baseConfigurationReference = 56D0D8CE27086820C016DE17 /* Pods-LiskMessageExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1268,7 +1268,7 @@
 		};
 		AC7A833121EF4BDC004502E4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2637EF9ACC5C3DEB37A29EA1 /* Pods-LiskMessageExtension.release.xcconfig */;
+			baseConfigurationReference = 4C7CB733A924801FB28DCF8F /* Pods-LiskMessageExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CLANG_ANALYZER_NONNULL = YES;
