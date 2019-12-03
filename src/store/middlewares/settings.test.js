@@ -11,7 +11,7 @@ describe('Middleware: Settings', () => {
     }),
   };
 
-  jest.mock('NativeModules');
+  // jest.mock('NativeModules');
 
   it('should pass the action', () => {
     const action = { type: 'ANY_ACTION' };
