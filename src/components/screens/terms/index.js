@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, WebView } from 'react-native';
+import { View } from 'react-native';
+import { WebView } from 'react-native-webview';
 import URLs from '../../../constants/URLs';
 
 const Terms = () => (

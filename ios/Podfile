@@ -31,7 +31,7 @@ target 'Lisk' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-  pod 'TcpSockets', :path => '../node_modules/react-native-tcp'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'LiskTests' do
     inherit! :search_paths
@@ -72,8 +72,7 @@ target 'LiskMessageExtension' do
     pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
     pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
     pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-
-    pod 'TcpSockets', :path => '../node_modules/react-native-tcp'
+    pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
     pod 'Interactable', :path => '../node_modules/react-native-interactable'
 
     use_native_modules!
