@@ -1,6 +1,7 @@
 {
   "parser": "babel-eslint",
   "extends": [
+    "@react-native-community",
     "airbnb-base",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
