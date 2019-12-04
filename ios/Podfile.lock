@@ -204,7 +204,7 @@ PODS:
     - React
   - react-native-fingerprint-scanner (3.0.2):
     - React
-  - react-native-netinfo (3.2.1):
+  - react-native-netinfo (4.6.1):
     - React
   - react-native-randombytes (3.5.3):
     - React
@@ -475,7 +475,7 @@ SPEC CHECKSUMS:
   react-native-camera: 96a3c81f27da57b816fbb6808dde20dc96d1431e
   react-native-cameraroll: ad20f5a93c25cb83a76455df57a2c62fbb63aaed
   react-native-fingerprint-scanner: 3e5e508bde8edd284a3f1b47b77a4355a5aa1493
-  react-native-netinfo: 27d908bc7ee7b9f29400c02938a0b2a27a1015be
+  react-native-netinfo: 16c6408c311572f17f9ffc3fa12614489307b6cf
   react-native-randombytes: 991545e6eaaf700b4ee384c291ef3d572e0b2ca8
   react-native-shake: 1dfc728d7208be26032c0c2d745e994facbf6a70
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
