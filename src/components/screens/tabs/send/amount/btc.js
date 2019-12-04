@@ -223,7 +223,7 @@ class AmountBTC extends React.Component {
   };
 
   render() {
-    const { accounts, styles, t, settings, dynamicFees } = this.props;
+    const { accounts, styles, t, settings, dynamicFees, language } = this.props;
     const { amount, dynamicFeeType } = this.state;
     const balance = fromRawLsk(accounts.info[settings.token.active].balance);
 
@@ -242,6 +242,7 @@ class AmountBTC extends React.Component {
               value={balance}
               tokenType={settings.token.active}
               incognito={settings.incognito}
+              language={language}
             />
 
             <Input
@@ -263,6 +264,7 @@ class AmountBTC extends React.Component {
               selected={dynamicFeeType}
               onChange={this.onDynamicFeeChange}
               tokenType={settings.token.active}
+              language={language}
             />
           </View>
         </KeyboardAwareScrollView>

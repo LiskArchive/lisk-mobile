@@ -35,7 +35,9 @@ const getTranslatedMessages = t => ({
 });
 
 @connect(
-  null,
+  state => ({
+    language: state.settings.language,
+  }),
   {
     transactionAdded: transactionAddedAction,
   }
@@ -151,6 +153,7 @@ class Overview extends React.Component {
       accounts: { followed },
       sharedData: { address, amount, reference, fee },
       settings: { token },
+      language,
     } = this.props;
 
     const actionType =
@@ -225,7 +228,10 @@ class Overview extends React.Component {
                   : t('Amount')}
               </P>
               <B style={[styles.text, styles.theme.text]}>
-                <FormattedNumber tokenType={settings.token.active}>
+                <FormattedNumber
+                  tokenType={settings.token.active}
+                  language={language}
+                >
                   {amount}
                 </FormattedNumber>
               </B>
@@ -246,7 +252,10 @@ class Overview extends React.Component {
                   {t('Transaction fee')}
                 </P>
                 <B style={[styles.text, styles.theme.text]}>
-                  <FormattedNumber tokenType={settings.token.active}>
+                  <FormattedNumber
+                    tokenType={settings.token.active}
+                    language={language}
+                  >
                     {fromRawLsk(fee)}
                   </FormattedNumber>
                 </B>

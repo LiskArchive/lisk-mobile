@@ -15,6 +15,7 @@ const DynamicFeeSelector = ({
   tokenType,
   onChange,
   styles,
+  language,
   t,
 }) => {
   let content;
@@ -79,6 +80,7 @@ const DynamicFeeSelector = ({
             type={P}
             tokenType={tokenType}
             style={[styles.value, styles.theme.value]}
+            language={language}
           >
             {fromRawLsk(value)}
           </FormattedNumber>

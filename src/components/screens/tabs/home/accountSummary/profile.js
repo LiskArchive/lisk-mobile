@@ -94,6 +94,7 @@ class Profile extends React.Component {
               settings.incognito || !fiatBalance ? styles.invisibleTitle : null,
             ]}
             type={H3}
+            language={language}
           >
             {normalizedBalance}
           </FormattedNumber>
