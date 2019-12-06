@@ -90,6 +90,9 @@ pipeline {
                 fi
                 '''
                 npm_ci()
+                dir('ios') {
+                    sh 'pod install'
+                }
               }
             }
             stage('Build e2e tests') {
