@@ -248,7 +248,7 @@
         "build": "xcodebuild -UseModernBuildSystem=NO -workspace ios/Lisk.xcworkspace -scheme Lisk -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "device": {
-          "name": "iPhone 11"
+          "type": "iPhone 11"
         }
       },
       "ios.sim.release": {
@@ -256,7 +256,7 @@
         "build": "xcodebuild -UseModernBuildSystem=NO -workspace ios/Lisk.xcworkspace -scheme Lisk -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "device": {
-          "name": "iPhone 11"
+          "type": "iPhone 11"
         }
       }
     }
