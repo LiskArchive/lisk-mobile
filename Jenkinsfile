@@ -91,7 +91,12 @@ pipeline {
                 '''
                 npm_ci()
                 dir('ios') {
-                    sh 'pod install'
+                    nvm(getNodejsVersion()) {
+                       sh '''
+                       export LANG=en_US.UTF-8
+                       pod install
+                       '''
+                     }
                 }
               }
             }
