@@ -1,32 +1,40 @@
-<!---
-Hints for a successful PR:
-1. Please open an issue before starting to fix a bug or implementing a feature, in order to make sure your changes in aligned with the project goals. This way, you'll also find out if anyone else is working on a similar change.
-2. Please do open a PR introducing big chunks of changes in a lot of files. instead, please consider breaking the issue into multiple smaller issues.
-3. Please fill out the template below for ease of review.
--->
+<!--- Provide a general summary of your changes in the Title above -->
 
-# What was the bug or feature?
-Please describe the bug you fixed or the feature you introduced. If the bug or feature is explained properly in the issue associated to this PR, only link the issue number.
+### What issue have I solved?
+<!--- Complementary description if needed -->
+Resolves #INSERT_ISSUE_NUMBER
 
-### How did I fix it?
-Please provide a short description of your changes.
-
-## Type of change
-Please choose one of the options:
-
-- Bug fix (a non-breaking change which fixes an issue)
-- Enhancement (a non-breaking change which adds functionality)
-- Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- Documentation Fix
-
-### How to test it?
-You can recommend a scenario by which reviewers can make sure your changes fulfil your goal(s).
+### How have I implemented/fixed it?
+<!--- Describe your technical implementation -->
 
 
-# Checklist:
-- My code follows the style guidelines of this project
-- I have performed a self-review of my own code
-- I have commented my code, particularly in hard-to-understand areas
-- I have made corresponding changes to the documentation
-- I have added tests that prove my fix is effective or that my feature works
-- New and existing unit tests pass locally with my changes
+### How has this been tested?
+<!--- Please describe how you tested your changes. -->
+
+
+### Definition of Done
+- [ ] Coding done as per the guidelines
+- [ ] Complete unit testing
+- [ ] Issue/story should support English and German language 
+- [ ] Complete functional testing
+- [ ] Complete integration testing
+- [ ] End to End testing (if applicable)
+- [ ] Complete code review 
+- [ ] No major bugs pending
+- [ ] UX review done and approved(if applicable)
+- [ ] Documents updated (if any)
+- [ ] Acceptance test by lead and approved
+- [ ] Pull request merged in the respective repository
+
+### Reviewer checklist
+- [ ] Does the code work? Does it perform its intended function and the logic is correct?
+- [ ] Is the code easily understandable?
+- [ ] Verify the design is implemented as per the design requirements
+- [ ] Verify the agreed ([CSS guide](/LiskHQ/lisk-desktop/blob/development/docs/CSS_GUIDE.md) ) coding conventions are followed
+- [ ] Verify the names used in the programs/methods/functions convey the intent and all functions commented
+- [ ] Verify logging or debugging code is added/removed?
+- [ ] Verify the  unit tests ([Test guide](/LiskHQ/lisk-desktop/blob/development/docs/TEST_GUIDE.md)) are testing the code to perform the intended functionality
+- [ ] Verify relevant functional tests ([Test guide](/LiskHQ/lisk-desktop/blob/development/docs/TEST_GUIDE.md)) are added and are they comprehensive
+- [ ] Verify relevant integration tests ([Test guide](/LiskHQ/lisk-desktop/blob/development/docs/TEST_GUIDE.md)) are added and are they comprehensive
+- [ ] Verify the tests(unit/functional/Integration) cover the positive and negative scenarios
+- [ ] Verify documentation has been added/updated
