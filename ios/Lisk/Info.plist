@@ -52,12 +52,16 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Lisk uses  your comera to scan QRcodes</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>$(PRODUCT_NAME) Authentication</string>
 	<key>NSLocationAlwaysUsageDescription</key>
