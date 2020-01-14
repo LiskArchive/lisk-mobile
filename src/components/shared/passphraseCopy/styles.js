@@ -1,10 +1,12 @@
 import { themes, colors, boxes, fonts } from '../../../constants/styleGuide';
+import { setColorOpacity } from '../../../utilities/helpers';
 
 export default () => ({
   common: {
     wrapper: {
       alignItems: 'center',
       padding: boxes.boxPadding,
+      borderWidth: 1,
     },
     passphrase: {
       marginTop: 30,
@@ -24,7 +26,6 @@ export default () => ({
 
   [themes.light]: {
     wrapper: {
-      borderWidth: 1,
       borderColor: colors.light.mystic,
     },
     passphraseTitle: {
@@ -39,6 +40,9 @@ export default () => ({
   },
 
   [themes.dark]: {
+    wrapper: {
+      borderColor: setColorOpacity(colors.light.white, 0.15),
+    },
     passphraseTitle: {
       color: colors.dark.platinum,
     },
