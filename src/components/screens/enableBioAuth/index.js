@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import { SafeAreaView } from 'react-navigation';
 import { storePassphraseInKeyChain } from '../../../utilities/passphrase';
 import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
 import { B, P, Small } from '../../shared/toolBox/typography';
@@ -40,7 +39,7 @@ class EnableBioAuth extends React.Component {
     const title = navigation.getParam('title', 'Bio Auth');
 
     return (
-      <SafeAreaView style={styles.wrapper}>
+      <View style={styles.wrapper}>
         <View style={[styles.container, styles.theme.container]}>
           <View>
             <P style={[styles.subHeader, styles.theme.subHeader]}>
@@ -127,7 +126,7 @@ class EnableBioAuth extends React.Component {
             title={t(`Enable ${title}`)}
           />
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 }
