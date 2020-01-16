@@ -195,7 +195,7 @@ export default () => ({
       color: colors.dark.slateGray,
     },
     editButton: {
-      backgroundColor: colors.dark.mystic,
+      backgroundColor: colors.dark.textInputBg,
     },
   },
 });
