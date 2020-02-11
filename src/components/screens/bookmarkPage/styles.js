@@ -48,7 +48,7 @@ export default () => ({
     },
     searchIcon: {
       position: 'absolute',
-      zIndex: 0,
+      zIndex: 1,
       left: 30,
       bottom: 16,
     },
