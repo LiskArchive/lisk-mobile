@@ -247,7 +247,10 @@ class Settings extends React.Component {
           </View>
         </ScrollView>
         {Platform.OS === 'android' ? (
-          <FingerprintOverlay error={this.state.error} show={this.state.show} />
+          <FingerprintOverlay
+            onModalClosed={this.hideDialog}
+            error={this.state.error}
+            show={this.state.show} />
         ) : null}
       </View>
     );
