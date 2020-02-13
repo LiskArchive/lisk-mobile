@@ -51,7 +51,6 @@ class Overview extends React.Component {
   componentDidMount() {
     const { t, prevStep, navigation } = this.props;
     const { send, initialize } = getTranslatedMessages(t);
-
     let nextNavigationParams = {
       title: send.title,
       action: () => prevStep(),
