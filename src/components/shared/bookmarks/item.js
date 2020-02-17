@@ -36,10 +36,8 @@ class draggableItem extends React.Component {
     const { styles, data, theme, navigate, setRef, t, showAvatar } = this.props;
 
     return (
-      <TouchableOpacity
+      <View
         style={[styles.itemContainer, styles.theme.itemContainer]}
-        activeOpacity={1}
-        onPress={() => navigate('Wallet', { address: data.address })}
       >
         <View style={styles.draggableRow} pointerEvents="box-none">
           <Animated.View
@@ -130,7 +128,11 @@ class draggableItem extends React.Component {
           onDrag={() => setRef(this.ref, data.address)}
           animatedValueX={this._deltaX}
         >
-          <View style={styles.row}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => navigate('Wallet', { address: data.address })}
+            style={styles.row}
+          >
             <View style={styles.innerContainer}>
               {showAvatar ? (
                 <View style={[styles.itemColumn, styles.avatarContainer]}>
@@ -150,9 +152,9 @@ class draggableItem extends React.Component {
                 </Small>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </Interactable.View>
-      </TouchableOpacity>
+      </View>
     );
   }
 }
