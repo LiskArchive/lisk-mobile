@@ -36,7 +36,7 @@ Go to [issues tab](https://github.com/LiskHQ/lisk-mobile/issues) and look for
  * Provide OS and browser version
 
 ##### Example
-![Alt text](./docs/assets/issue.png?raw=true "Perfect Issue")
+![Alt text](/.github/issue.png?raw=true "Perfect Issue")
 
 :heavy_exclamation_mark: Issues created that are not relevant to this project will be closed immediately.
 
@@ -62,7 +62,6 @@ ex. `git checkout -b 15-create-documentation`
 
 ##### Before creating PR make use that:
  - All conflicts are resolved
- - The PR follows our [Test guide](/LiskHQ/lisk-mobile/blob/development/docs/TEST_GUIDE.md)
 
 When you're done, submit a pull request and for one of the maintainers to check it out. We would let you know if there is any problem or any changes that should be considered.
 ## Pull Requests
@@ -89,7 +88,7 @@ When you're done, submit a pull request and for one of the maintainers to check 
  * Make sure that Jenkins build passes
  * Remember to delete branch after successfully merging the PR.
 ##### Example
-![Alt text](./docs/assets/pr.png?raw=true "Perfect PR")
+![Alt text](/.github/pr.png?raw=true "Perfect PR")
 
 ### Creating branch
 We use naming convention `[issue number]-[what-the-ticket-is-about]`.
