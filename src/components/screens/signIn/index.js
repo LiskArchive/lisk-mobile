@@ -99,7 +99,6 @@ class SignIn extends React.Component {
     }
     const signOut = this.props.navigation.getParam('signOut');
     const delay = this.state.view === 'splash' && !signOut ? 1100 : 0;
-
     // Update the store
     this.props.settingsUpdated({
       sensorType,
@@ -171,7 +170,6 @@ class SignIn extends React.Component {
     this.props.accountSignedIn({ passphrase });
     this.props.accountFetched();
     this.props.pricesRetrieved();
-
     if (this.deepLinkURL) {
       this.navigateToDeepLink(this.deepLinkURL);
     } else {
@@ -192,11 +190,9 @@ class SignIn extends React.Component {
    */
   onFormSubmission = (passphrase, submissionType) => {
     const { settings } = this.props;
-
     this.setState({
       passphrase,
     });
-
     if (
       settings.sensorType &&
       !settings.bioAuthRecommended &&
@@ -210,11 +206,9 @@ class SignIn extends React.Component {
 
   onDeepLinkRequested = event => {
     const isSignedIn = !!this.props.accounts.passphrase;
-
     if (event.type && event.type === 'Discreet') {
       this.props.settingsUpdated({ incognito: true });
     }
-
     if (isSignedIn) {
       this.navigateToDeepLink(event.url);
     } else if (!isSignedIn && event.type && event.type === 'Discreet') {
@@ -229,7 +223,6 @@ class SignIn extends React.Component {
     const linkedScreen = deepLinkMapper(url);
     // eslint-disable-next-line no-console
     console.log('in sign in', url, linkedScreen);
-
     if (linkedScreen) {
       if (linkedScreen.params && linkedScreen.params.activeToken) {
         settingsUpdated({
@@ -267,7 +260,6 @@ class SignIn extends React.Component {
           console.log('An error occurred while getting initial url', error)
         );
     }
-
     Linking.removeAllListeners('url');
     Linking.addEventListener('url', this.onDeepLinkRequested);
   }
@@ -357,7 +349,6 @@ class SignIn extends React.Component {
     const { view, storedPassphrase, androidDialog } = this.state;
     const { sensorType, hasStoredPassphrase } = this.props.settings;
     const signOut = this.props.navigation.getParam('signOut');
-
     return (
       <View style={styles.wrapper}>
         <Splash
@@ -377,7 +368,6 @@ class SignIn extends React.Component {
               navigation={this.props.navigation}
             />
           ) : null}
-
           {view === 'form' ? (
             <Form
               animate={!signOut}
@@ -389,7 +379,6 @@ class SignIn extends React.Component {
               showSimplifiedView={this.showSimplifiedView()}
             />
           ) : null}
-
           {Platform.OS === 'android' ? (
             <FingerprintOverlay
               onModalClosed={() => this.signIn(this.state.passphrase)}
