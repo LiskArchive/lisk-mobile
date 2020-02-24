@@ -11,7 +11,6 @@ import SignOutModal from './signOutModal';
 import { colors, themes } from '../../../../constants/styleGuide';
 import withTheme from '../../../shared/withTheme';
 import SwitchButton from '../../../shared/toolBox/switchButton';
-import { languageMap } from '../../../../constants/languages';
 import { settingsUpdated as settingsUpdatedAction } from '../../../../actions/settings';
 import ModalHolder from '../../../../utilities/modal';
 import { accountSignedOut as accountSignedOutAction } from '../../../../actions/accounts';
@@ -155,21 +154,6 @@ class Settings extends React.Component {
             <H4 style={[styles.subHeader, styles.theme.subHeader]}>
               {t('General')}
             </H4>
-
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                navigation={navigation}
-                icon="language"
-                title={t('Language')}
-                target="LanguageSelection"
-                targetStateLabel={
-                  <P style={styles.theme.targetStateLabel}>
-                    {languageMap[settings.language].label}
-                  </P>
-                }
-              />
-            </View>
-
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 icon="dark-mode"
@@ -247,7 +231,10 @@ class Settings extends React.Component {
           </View>
         </ScrollView>
         {Platform.OS === 'android' ? (
-          <FingerprintOverlay error={this.state.error} show={this.state.show} />
+          <FingerprintOverlay
+            onModalClosed={this.hideDialog}
+            error={this.state.error}
+            show={this.state.show} />
         ) : null}
       </View>
     );

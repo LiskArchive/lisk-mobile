@@ -181,7 +181,7 @@ class TransactionDetail extends React.Component {
     else if (tx.type === 2) return 'Registrant';
     else if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)
       return 'Account address';
-    return 'sender';
+    return 'Sender';
   };
 
   listVotes = vote => {

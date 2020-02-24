@@ -64,7 +64,7 @@ export default () => ({
     },
     avatar: {
       position: 'absolute',
-      zIndex: 0,
+      zIndex: 1,
       left: 30,
       top: 63,
     },

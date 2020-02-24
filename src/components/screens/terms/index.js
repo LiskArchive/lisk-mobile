@@ -8,7 +8,7 @@ const Terms = () => (
     <WebView
       source={{ uri: URLs.liskTermsAndConditions }}
       style={{
-        marginTop: -100,
+        marginTop: -20,
       }}
       startInLoadingState={true}
     />

@@ -1,5 +1,6 @@
 import './shim';
 import { AppRegistry, Text } from 'react-native'; // eslint-disable-line
+import 'react-native-gesture-handler'; // eslint-disable-line
 import App from './src/App';
 
 if (Text.defaultProps == null) Text.defaultProps = {};
