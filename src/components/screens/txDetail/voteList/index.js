@@ -38,7 +38,7 @@ const VoteList = ({ upvotes, downvotes, styles, t }) => {
       >
         {
           upvotes.length
-            ? upvotes.map(vote => listVotes(vote, styles))
+            ? upvotes.map(vote => listVotes(vote))
             : loader
         }
       </Row>
@@ -50,7 +50,7 @@ const VoteList = ({ upvotes, downvotes, styles, t }) => {
         title={t('Removed votes')}
       >
         {downvotes.length
-          ? downvotes.map(vote => listVotes(vote, styles))
+          ? downvotes.map(vote => listVotes(vote))
           : loader}
       </Row>
     )}
