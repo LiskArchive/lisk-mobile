@@ -14,7 +14,7 @@
     "link": "./node_modules/.bin/rn-nodeify --hack --install && node ./scripts/androidSdkFix.js",
     "test": "jest --config ./jest.config.js --env=jsdom",
     "test:live": "npm test -- --watch",
-    "test:format": "./node_modules/.bin/eslint ./",
+    "test:format": "./node_modules/.bin/eslint --quiet ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "i18n": "node ./scripts/scanner.config.js",
     "test:build-e2e-release": "detox build --configuration ios.sim.release",

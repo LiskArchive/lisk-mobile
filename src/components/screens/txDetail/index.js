@@ -1,7 +1,6 @@
 import React from 'react';
-import { ScrollView, View, RefreshControl, Linking } from 'react-native';
+import { ScrollView, View, RefreshControl } from 'react-native';
 import connect from 'redux-connect-decorator';
-import LottieView from 'lottie-react-native';
 import { translate } from 'react-i18next';
 import withTheme from '../../shared/withTheme';
 import { fromRawLsk } from '../../../utilities/conversions';
@@ -18,11 +17,11 @@ import {
   transactions as transactionsAPI,
   account as accountAPI,
 } from '../../../utilities/api';
-import { getTransactionExplorerURL } from '../../../utilities/api/btc/transactions';
 import getStyles from './styles';
-import loadingAnimation from '../../../assets/animations/loading-dots.json';
+import VoteList from './voteList';
 import { merge } from '../../../utilities/helpers';
 import { tokenMap } from '../../../constants/tokens';
+import { goToWallet, getAccountLabel, getAccountTitle, openExplorer } from './utils';
 
 @connect(
   state => ({
@@ -36,7 +35,6 @@ import { tokenMap } from '../../../constants/tokens';
 class TransactionDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
-
     return {
       headerLeft: <IconButton title="" icon="back" onPress={params.action} />,
     };
@@ -60,7 +58,6 @@ class TransactionDetail extends React.Component {
       this.retrieveTransaction(navigation.getParam('txId', false));
       backAction = () => navigation.navigate('Home');
     }
-
     navigation.setParams({
       theme,
       action: backAction,
@@ -98,13 +95,11 @@ class TransactionDetail extends React.Component {
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
     const { t, activeToken, navigation, account } = this.props;
-
     try {
       const { data } = await transactionsAPI.get(activeToken, {
         address: navigation.getParam('account', account[activeToken].address),
         id,
       });
-
       const tx = data[0] || {};
 
       // don't have any transaction passed from the navigation and couldn't find any with the id
@@ -139,77 +134,6 @@ class TransactionDetail extends React.Component {
         refreshing: true,
       },
       () => this.retrieveTransaction(this.state.tx.id, 1500)
-    );
-  };
-
-  navigate = address => {
-    const { navigation, account, activeToken } = this.props;
-
-    if (
-      address !== account[activeToken].address &&
-      address !== 'Unparsed Address'
-    ) {
-      navigation.navigate('Wallet', { address });
-    }
-  };
-
-  getAccountLabel = address => {
-    const { t, followedAccounts, activeToken } = this.props;
-
-    if (address === 'Unparsed Address') {
-      return t('Unparsed Address');
-    }
-
-    const followedAccount = followedAccounts[activeToken].find(
-      a => a.address === address
-    );
-    if (followedAccount) {
-      return followedAccount.label;
-    }
-
-    return address;
-  };
-
-  openExplorer = () => {
-    Linking.openURL(getTransactionExplorerURL(this.state.tx.id))
-      // eslint-disable-next-line no-console
-      .catch(err => console.error('An error occurred', err));
-  };
-
-  getAccountTitle = tx => {
-    if (tx.type === 3) return 'Voter';
-    else if (tx.type === 2) return 'Registrant';
-    else if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)
-      return 'Account address';
-    return 'Sender';
-  };
-
-  listVotes = vote => {
-    const { styles } = this.props;
-
-    return (
-      <View
-        key={vote.username}
-        style={[styles.votesContainer, styles.theme.votesContainer]}
-      >
-        <View
-          style={[styles.voteNumberContainer, styles.theme.voteNumberContainer]}
-        >
-          <B style={[styles.voteNumber, styles.theme.voteNumber]}>
-            #{vote.rank}
-          </B>
-        </View>
-        <B style={[styles.vote, styles.theme.vote]}>{vote.username}</B>
-      </View>
-    );
-  };
-
-  renderLoader = () => {
-    const { styles } = this.props;
-    return (
-      <View style={styles.pendingIcon}>
-        <LottieView source={loadingAnimation} autoPlay />
-      </View>
     );
   };
 
@@ -283,15 +207,15 @@ class TransactionDetail extends React.Component {
 
         <Row
           icon={isVote || isDelegateRegistration ? 'user' : 'send'}
-          title={this.getAccountTitle(tx)}
+          title={getAccountTitle(tx)}
         >
           <View style={styles.addressContainer}>
             <A
               value={tx.senderAddress}
-              onPress={() => this.navigate(tx.senderAddress)}
+              onPress={() => goToWallet(tx.senderAddress, this.props)}
               style={[styles.value, styles.theme.value, styles.transactionId]}
             >
-              {this.getAccountLabel(tx.senderAddress)}
+              {getAccountLabel(tx.senderAddress, this.props)}
             </A>
           </View>
         </Row>
@@ -300,10 +224,10 @@ class TransactionDetail extends React.Component {
             <View style={styles.addressContainer}>
               <A
                 value={tx.senderAddress}
-                onPress={() => this.navigate(tx.recipientAddress)}
+                onPress={() => goToWallet(tx.recipientAddress, this.props)}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
               >
-                {this.getAccountLabel(tx.recipientAddress)}
+                {getAccountLabel(tx.recipientAddress, this.props)}
               </A>
             </View>
           </Row>
@@ -341,34 +265,17 @@ class TransactionDetail extends React.Component {
           ) : (
             <A
               style={[styles.explorerLink, styles.theme.explorerLink]}
-              onPress={this.openExplorer}
+              onPress={() => openExplorer(tx.id)}
             >
               {t('View more on Blockchain.info')}
             </A>
           )}
         </Row>
-
-        {isVote && upvotes && (
-          <Row
-            style={styles.votesRow}
-            icon="plus-vote"
-            title={t('Added votes')}
-          >
-            {upvotes.length ? upvotes.map(this.listVotes) : this.renderLoader()}
-          </Row>
-        )}
-
-        {isVote && downvotes && (
-          <Row
-            style={styles.votesRow}
-            icon="minus-vote"
-            title={t('Removed votes')}
-          >
-            {downvotes.length
-              ? downvotes.map(this.listVotes)
-              : this.renderLoader()}
-          </Row>
-        )}
+        {
+          isVote
+            ? <VoteList upvotes={upvotes} downvotes={downvotes} />
+            : null
+        }
       </ScrollView>
     );
   }

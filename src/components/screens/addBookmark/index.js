@@ -21,20 +21,13 @@ import HeaderBackButton from '../../screens/router/headerBackButton';
 import { validateAddress } from '../../../utilities/validators';
 
 @connect(
-  state => ({
-    accounts: state.accounts.followed,
-    activeToken: state.settings.token.active,
-  }),
-  {
-    accountFollowed: accountFollowedAction,
-    accountEdited: accountEditedAction,
-  }
+  state => ({ accounts: state.accounts.followed, activeToken: state.settings.token.active }),
+  { accountFollowed: accountFollowedAction, accountEdited: accountEditedAction }
 )
 class AddToBookmark extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const title = navigation.getParam('title', '');
     const onBack = navigation.getParam('action', false);
-
     return {
       title,
       headerLeft: props => (
@@ -48,15 +41,12 @@ class AddToBookmark extends React.Component {
   };
 
   activeInputRef = null;
-
   validateLabel = str => {
     if (str === '') {
       return -1;
     }
-
     return str.length > 20 ? 1 : 0;
   };
-
   scannedData = {};
   state = {
     editMode: false,
@@ -75,15 +65,12 @@ class AddToBookmark extends React.Component {
   componentDidMount() {
     const { navigation, accounts, activeToken } = this.props;
     const account = navigation.getParam('account', null);
-
     if (!account) {
       setTimeout(() => {
         this.addressRef.focus();
       }, 300);
     } else {
-      const editMode =
-        accounts[activeToken].filter(item => item.address === account.address)
-          .length > 0;
+      const editMode = accounts[activeToken].filter(item => item.address === account.address).length > 0;
       this.setState({
         editMode,
         label: { value: account.label || '' },
@@ -94,27 +81,19 @@ class AddToBookmark extends React.Component {
       }, 300);
     }
 
-    BackHandler.addEventListener(
-      'hardwareBackPress',
-      this.onBackButtonPressedAndroid
-    );
+    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener(
-      'hardwareBackPress',
-      this.onBackButtonPressedAndroid
-    );
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
   }
 
   onBackButtonPressedAndroid = () => {
     const action = this.props.navigation.getParam('action', false);
-
     if (action && typeof action === 'function') {
       action();
       return true;
     }
-
     return false;
   };
 
@@ -141,11 +120,9 @@ class AddToBookmark extends React.Component {
 
   setAddress = value => {
     clearTimeout(this.avatarPreviewTimeout);
-
     if (validateAddress(this.props.activeToken, value) === 0) {
       this.setAvatarPreviewTimeout();
     }
-
     this.setState({
       address: { value },
       avatarPreview: false,
@@ -168,12 +145,9 @@ class AddToBookmark extends React.Component {
       accountEdited,
       activeToken,
     } = this.props;
-
     const { address, label, incomingData, editMode } = this.state;
-
     const addressValidity = validateAddress(activeToken, address.value);
     const labelValidity = this.validateLabel(label.value);
-
     if (incomingData && labelValidity === 0) {
       const action = editMode ? accountEdited : accountFollowed;
       action(incomingData.address, this.state.label.value);
@@ -198,14 +172,11 @@ class AddToBookmark extends React.Component {
   render() {
     const { navigation, styles, t, lng, activeToken } = this.props;
     const { address, label, incomingData, editMode } = this.state;
-
     const shouldDisplayAvatar = activeToken === tokenMap.LSK.key;
-
     const errors = {
       label: t('The label must be shorter than 20 characters.'),
       address: t('Invalid address.'),
     };
-
     const setError = (validity, fieldName) => {
       switch (validity) {
         case 1:
