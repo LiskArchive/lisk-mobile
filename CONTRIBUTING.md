@@ -21,12 +21,12 @@ Before you start, read the **[README.md](/README.md)** file for info on the proj
 ## Finding first issue
 Go to [issues tab](https://github.com/LiskHQ/lisk-mobile/issues) and look for 
 
-*`good first issue`* - it is a label for tasks that are perfect for people who want to start with lisk-mobile.
+*✏️ `good first issue`* - it is a label for tasks that are perfect for people who want to start with lisk-mobile.
 
 ## Reporting issues
 
  1. Check if problem already exist in [issues tab](https://github.com/LiskHQ/lisk-mobile/issues)
- 2. If not, create a new [issue](https://github.com/LiskHQ/lisk-mobile/issues/new)
+ 2. If not, create a new [issue](https://github.com/LiskHQ/lisk-mobile/issues/new/choose)
  3. Fill our [template](/.github/issue_template.md)
  4. Click `Submit new issue`
 ##### Guidance
@@ -34,6 +34,9 @@ Go to [issues tab](https://github.com/LiskHQ/lisk-mobile/issues) and look for
  * Include screenshots or animated GIF
  * Use a clear and descriptive title
  * Provide OS and browser version
+
+##### Example
+![Alt text](/.github/issue.png?raw=true "Perfect Issue")
 
 :heavy_exclamation_mark: Issues created that are not relevant to this project will be closed immediately.
 
@@ -59,7 +62,6 @@ ex. `git checkout -b 15-create-documentation`
 
 ##### Before creating PR make use that:
  - All conflicts are resolved
- - The PR follows our [Test guide](/LiskHQ/lisk-mobile/blob/development/docs/TEST_GUIDE.md)
 
 When you're done, submit a pull request and for one of the maintainers to check it out. We would let you know if there is any problem or any changes that should be considered.
 ## Pull Requests
@@ -85,6 +87,8 @@ When you're done, submit a pull request and for one of the maintainers to check 
  * Please use `rebase` instead of `merge` for resolving conflicts
  * Make sure that Jenkins build passes
  * Remember to delete branch after successfully merging the PR.
+##### Example
+![Alt text](/.github/pr.png?raw=true "Perfect PR")
 
 ### Creating branch
 We use naming convention `[issue number]-[what-the-ticket-is-about]`.
