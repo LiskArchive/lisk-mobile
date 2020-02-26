@@ -8,7 +8,6 @@ import {
   accountFetched,
   blockUpdated,
   accountSignedOut,
-  accountsStored,
   followedAccountsRetrieved,
 } from './accounts';
 import actionTypes from '../constants/actions';
@@ -28,7 +27,6 @@ describe('Action: Accounts', () => {
   beforeEach(() => {
     accountAPI.getSummary = jest.fn();
     transactionsAPI.get = jest.fn();
-    storageUtility.storeAccounts = jest.fn();
     storageUtility.retrieveAccounts = jest.fn();
   });
 
@@ -150,14 +148,6 @@ describe('Action: Accounts', () => {
       await store.dispatch(blockUpdated());
       expect(store.getActions()).toEqual([]);
     });
-  });
-
-  it('should dispatch accountsStored action when the data is written in the storage', async () => {
-    const store = mockStore({});
-    const expectedActions = [{ type: actionTypes.accountsStored }];
-    storageUtility.storeAccounts.mockResolvedValue({});
-    await store.dispatch(accountsStored({ address: data.address }));
-    expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should dispatch followedAccountsRetrieved action when the data is read from the storage', async () => {
