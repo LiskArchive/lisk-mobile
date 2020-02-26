@@ -41,7 +41,7 @@ class Bookmarks extends React.Component {
 
     return (
       <View style={styles.container}>
-        {list && list[activeToken].length === 0 ? (
+        {list[activeToken].length === 0 ? (
           <Empty />
         ) : (
           <List
