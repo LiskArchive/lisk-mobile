@@ -118,7 +118,7 @@ class Profile extends React.Component {
         >
           {!(
             settings.incognito ||
-            Number.isNaN(fiatBalance) ||
+            fiatBalance === 'NaN' ||
             !fiatBalance
           ) ? (
             <P style={[styles.fiatValue, styles.theme.fiatValue]}>
