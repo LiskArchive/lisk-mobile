@@ -56,6 +56,6 @@ export const getNetwork = code => {
     if (networks[key].code === code) {
       network = networks[key];
     }
-  }, this);
+  });
   return network;
 };

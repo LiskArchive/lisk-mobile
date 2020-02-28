@@ -77,7 +77,7 @@ describe('persistData/fetchData', () => {
 
   it('throws error while reading from invalid keys', async () => {
     try {
-      await fetchData(INVALID_KEY, DATA);
+      await fetchData(INVALID_KEY);
     } catch (error) {
       expect(error.message).toBe('Error retrieving data');
     }

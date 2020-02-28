@@ -63,14 +63,6 @@ class Wallet extends React.Component {
     };
   };
 
-  onScroll() {
-    return Animated.event([
-      {
-        nativeEvent: { contentOffset: { y: this.scrollY } },
-      },
-    ]);
-  }
-
   interpolate = (inputRange, outputRange) =>
     this.scrollY.interpolate({
       inputRange,
@@ -226,14 +218,18 @@ class Wallet extends React.Component {
         transactions.count > 0
           ? [...transactions.pending, ...transactions.confirmed]
           : ['emptyState'];
-
+      const onScroll = Animated.event([
+        {
+          nativeEvent: { contentOffset: { y: this.scrollY } },
+        },
+      ]);
       content = (
         <InfiniteScrollView
           ref={el => {
             this.scrollView = el;
           }}
           scrollEventThrottle={8}
-          onScroll={this.onScroll.call(this)}
+          onScroll={onScroll}
           style={[styles.scrollView]}
           refresh={this.refresh.bind(this)}
           loadMore={this.loadMore}

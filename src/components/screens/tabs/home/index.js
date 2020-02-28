@@ -107,14 +107,6 @@ class Home extends React.Component {
     });
   };
 
-  onScroll() {
-    return Animated.event([
-      {
-        nativeEvent: { contentOffset: { y: this.scrollY } },
-      },
-    ]);
-  }
-
   refreshAccountAndTx = () => {
     this.lastActiveToken = this.props.activeToken;
     this.initialFetchTimeout = setTimeout(() => { resetTxAndFetch(this.props) }, 200);
@@ -236,13 +228,18 @@ class Home extends React.Component {
         transactions.count > 0
           ? [...transactions.pending, ...transactions.confirmed]
           : ['emptyState'];
+      const onScroll = Animated.event([
+        {
+          nativeEvent: { contentOffset: { y: this.scrollY } },
+        },
+      ]);
       content = (
         <InfiniteScrollView
           ref={el => {
             this.scrollView = el;
           }}
           scrollEventThrottle={8}
-          onScroll={this.onScroll.call(this)}
+          onScroll={onScroll}
           style={[styles.scrollView]}
           refresh={updateTransactions}
           loadMore={() => { loadMore(this.props); }}

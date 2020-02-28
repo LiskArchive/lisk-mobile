@@ -70,7 +70,7 @@ class Result extends React.Component {
         .length > 0;
 
     if (nowPending && nextConfirmed) {
-      this.setState({ txConfirmed: true });
+      this.setState({ txConfirmed: true }, () => { this.play('confirmed') });
     }
   }
 
@@ -97,10 +97,6 @@ class Result extends React.Component {
         }
       );
     }
-  }
-
-  isTxConfirmed() {
-    if (this.state.txConfirmed) this.play('confirmed');
   }
 
   render() {
@@ -147,7 +143,6 @@ class Result extends React.Component {
             <LottieView
               source={txPendingAnim}
               loop={true}
-              onAnimationFinish={this.isTxConfirmed()}
               ref={el => {
                 this.animation[1] = el;
               }}

@@ -160,7 +160,7 @@ class Overview extends React.Component {
         ? 'initialize'
         : 'send';
 
-    const translatedMessages = getTranslatedMessages(t, settings.token.active);
+    const translatedMessages = getTranslatedMessages(t);
     const bookmark = followed[token.active].find(
       item => item.address === address
     );
