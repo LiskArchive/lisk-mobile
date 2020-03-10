@@ -1,18 +1,14 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "@react-native-community",
     "airbnb-base",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "prettier",
-    "prettier/react"
+    "plugin:react/recommended"
   ],
   "env": {
     "browser": true,
     "jest": true
   },
-  "plugins": ["react", "import", "babel", "jest", "detox", "prettier"],
+  "plugins": ["react", "import", "babel", "jest", "detox"],
   "globals": {
     "PRODUCTION": true,
     "TEST": true
@@ -55,7 +51,8 @@
     "jest/prefer-to-be-null": "error",
     "jest/prefer-to-be-undefined": "error",
     "jest/prefer-to-have-length": "error",
-    "max-lines": ["error", 400]
+    "max-lines": ["error", 400],
+    "arrow-body-style": ["error", "always"],
   },
   "settings": {
     "mocha/additionalTestFunctions": ["describeModule"]
