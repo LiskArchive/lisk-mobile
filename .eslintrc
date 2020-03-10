@@ -52,7 +52,13 @@
     "jest/prefer-to-be-undefined": "error",
     "jest/prefer-to-have-length": "error",
     "max-lines": ["error", 400],
-    "arrow-body-style": ["error", "always"],
+    "arrow-body-style": "off",
+    "no-mixed-operators": "off",
+    "arrow-parens": "off",
+    "comma-dangle": "off",
+    "function-paren-newline": ["error", "consistent"],
+    "no-confusing-arrow": "off",
+    "key-spacing": ["error", { "beforeColon": false }]
   },
   "settings": {
     "mocha/additionalTestFunctions": ["describeModule"]
