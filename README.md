@@ -3,8 +3,10 @@
 [![Build Status](https://jenkins.lisk.io/buildStatus/icon?job=lisk-mobile/development)](https://jenkins.lisk.io/job/lisk-mobile/job/development)
 [![Coverage Status](https://coveralls.io/repos/github/LiskHQ/lisk-mobile/badge.svg?branch=development)](https://coveralls.io/github/LiskHQ/lisk-mobile?branch=development)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![Join the chat at https://gitter.im/LiskHQ/lisk](https://badges.gitter.im/LiskHQ/lisk.svg)](https://gitter.im/LiskHQ/lisk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
+![GitHub package.json version](https://img.shields.io/github/package-json/v/LiskHQ/lisk-mobile)
+[![DeepScan grade](https://deepscan.io/api/teams/6759/projects/8872/branches/113512/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=6759&pid=8872&bid=113512)
+[![dependencies Status](https://david-dm.org/liskHQ/lisk-mobile/status.svg)](https://david-dm.org/liskHQ/lisk-mobile)
+[![devDependencies Status](https://david-dm.org/liskHQ/lisk-mobile/dev-status.svg)](https://david-dm.org/liskHQ/lisk-mobile?type=dev)
 
 Lisk Mobile is a cross-platform application written in React Native and primarily build for iOS and Android. It provides the users with all the functionality they need to send and receive LSK tokens, as well as reviewing the activity history of their or any other account in the Lisk blockchain.
 
