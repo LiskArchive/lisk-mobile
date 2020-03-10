@@ -12,7 +12,9 @@ import { tokenMap } from '../../../constants/tokens';
  * @param {Array} data.list Transaction list retrieved from API
  */
 const normalizeTransactionsResponse = ({ address, list }) =>
-  list.map(({ tx, feeSatoshi, confirmations, timestamp }) => {
+  list.map(({
+    tx, feeSatoshi, confirmations, timestamp
+  }) => {
     const data = {
       id: tx.txid,
       timestamp: timestamp ? Number(timestamp) * 1000 : null,
@@ -24,8 +26,7 @@ const normalizeTransactionsResponse = ({ address, list }) =>
     data.fee = feeSatoshi;
 
     const ownedInput = tx.inputs.find(i =>
-      i.txDetail.scriptPubKey.addresses.includes(address)
-    );
+      i.txDetail.scriptPubKey.addresses.includes(address));
 
     if (ownedInput) {
       data.senderAddress = address;
@@ -37,8 +38,7 @@ const normalizeTransactionsResponse = ({ address, list }) =>
       data.amount = tx.outputs[0].satoshi;
     } else {
       const output = tx.outputs.find(o =>
-        o.scriptPubKey.addresses.includes(address)
-      );
+        o.scriptPubKey.addresses.includes(address));
       const extractedAddress = tx.inputs[0].txDetail.scriptPubKey.addresses[0];
       data.senderAddress =
         validateAddress(tokenMap.BTC.key, extractedAddress) === 0
@@ -51,7 +51,9 @@ const normalizeTransactionsResponse = ({ address, list }) =>
     return data;
   });
 
-export const get = ({ id, address, limit = 20, offset = 0 }) =>
+export const get = ({
+  id, address, limit = 20, offset = 0
+}) =>
   new Promise(async (resolve, reject) => {
     try {
       let response;

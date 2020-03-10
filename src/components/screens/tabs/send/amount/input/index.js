@@ -4,7 +4,9 @@ import Input from '../../../../../shared/toolBox/input';
 import withTheme from '../../../../../shared/withTheme';
 import getStyles from './styles';
 
-const AmountInput = ({ currency, valueInCurrency, styles, ...rest }) => (
+const AmountInput = ({
+  currency, valueInCurrency, styles, ...rest
+}) => (
   <View>
     <Input
       {...rest}

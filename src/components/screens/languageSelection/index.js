@@ -12,9 +12,9 @@ import getStyles from './styles';
 @connect(
   state => ({
     settings: state.settings,
-  }),
+    }),
   {
-    settingsUpdated: settingsUpdatedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class LanguageSelection extends React.Component {

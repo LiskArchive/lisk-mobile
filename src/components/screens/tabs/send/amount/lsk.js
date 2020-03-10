@@ -19,7 +19,7 @@ const isAndroid = deviceType() === 'android';
 
 @connect(state => ({
   language: state.settings.language,
-}))
+  }))
 class AmountLSK extends React.Component {
   state = {
     amount: {
@@ -146,7 +146,9 @@ class AmountLSK extends React.Component {
   }
 
   render() {
-    const { accounts, styles, t, settings, language } = this.props;
+    const {
+      accounts, styles, t, settings, language
+    } = this.props;
     const { amount } = this.state;
 
     return (

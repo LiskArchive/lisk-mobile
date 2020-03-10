@@ -15,8 +15,7 @@ export const pricesRetrieved = () => (dispatch, getState) => {
           priceTicker,
           activeToken: token.active,
         },
-      })
-    )
+      }))
     // eslint-disable-next-line no-console
     .catch(err => console.log(err)); // @TODO: DISCUSS & HANDLE THIS!
 };
@@ -32,8 +31,7 @@ export const dynamicFeesRetrieved = () => (dispatch, getState) => {
       dispatch({
         type: actionTypes.dynamicFeesRetrieved,
         dynamicFees,
-      })
-    )
+      }))
     // eslint-disable-next-line no-console
     .catch(err => console.log(err)); // @TODO: DISCUSS & HANDLE THIS!
 };

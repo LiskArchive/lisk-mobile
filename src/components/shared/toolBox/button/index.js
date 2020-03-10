@@ -74,7 +74,9 @@ const BasePrimaryButton = props => {
 export const PrimaryButton = withTheme(BasePrimaryButton, getStyles());
 
 const LabelButton = props => {
-  const labelStyle = ({ propsStyle, disabled, styles, style }) => {
+  const labelStyle = ({
+    propsStyle, disabled, styles, style
+  }) => {
     const mergestyle = [styles.button, styles.labelButton];
 
     const propStylesArr =

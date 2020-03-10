@@ -16,7 +16,7 @@ import ModalHolder from '../../../utilities/modal';
 @connect(
   state => ({}),
   {
-    accountUnFollowed: accountUnFollowedAction,
+  accountUnFollowed: accountUnFollowedAction,
   }
 )
 class draggableItem extends React.Component {
@@ -33,7 +33,9 @@ class draggableItem extends React.Component {
   };
 
   render() {
-    const { styles, data, theme, navigate, setRef, t, showAvatar } = this.props;
+    const {
+      styles, data, theme, navigate, setRef, t, showAvatar
+    } = this.props;
 
     return (
       <View
@@ -167,7 +169,9 @@ class Item extends React.Component {
   };
 
   render() {
-    const { styles, data, theme, showAvatar } = this.props;
+    const {
+      styles, data, theme, showAvatar
+    } = this.props;
 
     return (
       <TouchableOpacity

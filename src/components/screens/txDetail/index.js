@@ -29,7 +29,7 @@ import { goToWallet, getAccountLabel, getAccountTitle, openExplorer } from './ut
     account: state.accounts.info || {},
     activeToken: state.settings.token.active,
     language: state.settings.language,
-  }),
+    }),
   {}
 )
 class TransactionDetail extends React.Component {
@@ -94,7 +94,9 @@ class TransactionDetail extends React.Component {
 
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
-    const { t, activeToken, navigation, account } = this.props;
+    const {
+      t, activeToken, navigation, account
+    } = this.props;
     try {
       const { data } = await transactionsAPI.get(activeToken, {
         address: navigation.getParam('account', account[activeToken].address),
@@ -146,7 +148,9 @@ class TransactionDetail extends React.Component {
       activeToken,
       language,
     } = this.props;
-    const { tx, error, refreshing, upvotes, downvotes } = this.state;
+    const {
+      tx, error, refreshing, upvotes, downvotes
+    } = this.state;
 
     if (error) {
       return (

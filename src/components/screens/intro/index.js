@@ -16,9 +16,9 @@ import styles from './styles';
 @connect(
   state => ({
     settings: state.settings,
-  }),
+    }),
   {
-    settingsUpdated: settingsUpdatedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class Intro extends React.Component {

@@ -15,7 +15,7 @@ import Modal from './components/shared/modal';
 @connect(
   state => ({
     settings: state.settings,
-  }),
+    }),
   {}
 )
 class ThemedApp extends React.Component {

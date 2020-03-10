@@ -37,9 +37,9 @@ const getTranslatedMessages = t => ({
 @connect(
   state => ({
     language: state.settings.language,
-  }),
+    }),
   {
-    transactionAdded: transactionAddedAction,
+  transactionAdded: transactionAddedAction,
   }
 )
 class Overview extends React.Component {
@@ -150,7 +150,9 @@ class Overview extends React.Component {
       navigation,
       settings,
       accounts: { followed },
-      sharedData: { address, amount, reference, fee },
+      sharedData: {
+        address, amount, reference, fee
+      },
       settings: { token },
       language,
     } = this.props;

@@ -115,7 +115,9 @@ class Bookmark extends React.Component {
   };
 
   render() {
-    const { styles, navigation, theme, t } = this.props;
+    const {
+      styles, navigation, theme, t
+    } = this.props;
     const { query } = this.state;
     const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 

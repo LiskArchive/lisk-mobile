@@ -4,7 +4,9 @@ import { translate } from 'react-i18next';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 
-const HeaderTitle = ({ styles, t, children, ...rest }) => (
+const HeaderTitle = ({
+  styles, t, children, ...rest
+}) => (
   <Animated.Text
     {...rest}
     numberOfLines={1}

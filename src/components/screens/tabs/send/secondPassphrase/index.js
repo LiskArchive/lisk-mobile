@@ -142,7 +142,9 @@ class SecondPassphrase extends React.Component {
   };
 
   render() {
-    const { navigation, styles, t, lng, theme } = this.props;
+    const {
+      navigation, styles, t, lng, theme
+    } = this.props;
     const { secondPassphrase } = this.state;
 
     return (

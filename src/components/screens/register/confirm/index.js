@@ -151,8 +151,8 @@ class Confirm extends React.Component {
     const passphrase = this.props.sharedData.passphrase.split(' ');
     return this.state.missing.length > 0
       ? passphrase.map((val, index) => {
-          const optionIndex = this.state.missing.indexOf(index);
-          const element =
+        const optionIndex = this.state.missing.indexOf(index);
+        const element =
             optionIndex >= 0 ? (
               this.generatePlaceholder(index, optionIndex, val)
             ) : (
@@ -160,8 +160,8 @@ class Confirm extends React.Component {
                 {val}
               </P>
             );
-          return element;
-        })
+        return element;
+      })
       : null;
   };
 

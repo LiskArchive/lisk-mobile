@@ -21,7 +21,7 @@ const isAndroid = deviceType() === 'android';
 
 @connect(state => ({
   language: state.settings.language,
-}))
+  }))
 class AmountBTC extends React.Component {
   state = {
     fee: 0,
@@ -143,7 +143,9 @@ class AmountBTC extends React.Component {
   };
 
   onSubmit = () => {
-    const { t, nextStep, sharedData, dynamicFees } = this.props;
+    const {
+      t, nextStep, sharedData, dynamicFees
+    } = this.props;
     const { amount, dynamicFeeType } = this.state;
 
     const dynamicFeePerByte = dynamicFees[dynamicFeeType];
@@ -223,7 +225,9 @@ class AmountBTC extends React.Component {
   };
 
   render() {
-    const { accounts, styles, t, settings, dynamicFees, language } = this.props;
+    const {
+      accounts, styles, t, settings, dynamicFees, language
+    } = this.props;
     const { amount, dynamicFeeType } = this.state;
     const balance = fromRawLsk(accounts.info[settings.token.active].balance);
 

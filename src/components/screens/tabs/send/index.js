@@ -21,7 +21,7 @@ import progressBar from '../../../shared/progressBar';
   state => ({
     accounts: state.accounts,
     settings: state.settings,
-  }),
+    }),
   {}
 )
 class Send extends React.Component {
@@ -100,7 +100,9 @@ class Send extends React.Component {
   };
 
   didFocus = () => {
-    const { styles, theme, navigation, accounts, settings, t } = this.props;
+    const {
+      styles, theme, navigation, accounts, settings, t
+    } = this.props;
 
     navigation.setParams({ styles, theme });
     BackHandler.addEventListener(
@@ -149,7 +151,9 @@ class Send extends React.Component {
   };
 
   render() {
-    const { styles, accounts, navigation, settings } = this.props;
+    const {
+      styles, accounts, navigation, settings
+    } = this.props;
 
     let steps = [
       {

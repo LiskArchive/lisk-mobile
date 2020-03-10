@@ -71,7 +71,9 @@ class TransactionDetail extends React.Component {
   };
 
   render() {
-    const { styles, theme, account, language } = this.props;
+    const {
+      styles, theme, account, language
+    } = this.props;
     const { tx } = this.state;
 
     if (!tx.senderAddress) {

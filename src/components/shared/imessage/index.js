@@ -59,14 +59,12 @@ class LiskMessageExtension extends Component {
         conversation,
         message,
         parsedData: message.url ? this.parseUrl(message.url) : {},
-      })
-    );
+      }));
   };
 
   setPresentationStyle = () => {
     MessagesManager.getPresentationStyle(presentationStyle =>
-      this.setState({ presentationStyle })
-    );
+      this.setState({ presentationStyle }));
   };
 
   bindPresentationStyleChanged = () => {
@@ -99,8 +97,7 @@ class LiskMessageExtension extends Component {
           value: this.userData.address || '',
           validity: -1,
         },
-      })
-    );
+      }));
   };
 
   bindKeyBoardFocused = () => {
@@ -160,8 +157,7 @@ class LiskMessageExtension extends Component {
       .replace(/&/g, '","')
       .replace(/=/g, '":"');
     return JSON.parse(`{"${parsedData}"}`, (key, value) =>
-      key === '' ? value : decodeURIComponent(value)
-    );
+      key === '' ? value : decodeURIComponent(value));
   };
 
   render() {

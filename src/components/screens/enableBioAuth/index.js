@@ -14,9 +14,9 @@ import getStyles from './styles';
 @connect(
   state => ({
     passphrase: state.accounts.passphrase,
-  }),
+    }),
   {
-    settingsUpdated: settingsUpdatedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class EnableBioAuth extends React.Component {
@@ -34,7 +34,9 @@ class EnableBioAuth extends React.Component {
   };
 
   render() {
-    const { theme, styles, navigation, t } = this.props;
+    const {
+      theme, styles, navigation, t
+    } = this.props;
 
     const title = navigation.getParam('title', 'Bio Auth');
 

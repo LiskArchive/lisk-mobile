@@ -3,7 +3,9 @@ import Switch from 'react-native-switch-pro';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { colors, themes } from '../../../constants/styleGuide';
 
-const switchButton = ({ value, height, onSyncPress, style, theme }) => {
+const switchButton = ({
+  value, height, onSyncPress, style, theme
+}) => {
   const onPress = (...params) => {
     ReactNativeHapticFeedback.trigger('selection');
     onSyncPress(...params);

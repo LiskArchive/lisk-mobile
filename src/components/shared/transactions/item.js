@@ -24,7 +24,7 @@ const txTypes = [
 
 @connect(state => ({
   language: state.settings.language,
-}))
+  }))
 class Item extends React.Component {
   componentDidMount() {
     if (typeof this.props.tx.timestamp !== 'number') {
@@ -33,7 +33,9 @@ class Item extends React.Component {
   }
 
   showDetail = () => {
-    const { navigate, tx, account, incognito } = this.props;
+    const {
+      navigate, tx, account, incognito
+    } = this.props;
 
     navigate('TxDetail', { tx, account, incognito });
   };

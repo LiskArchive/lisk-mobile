@@ -8,11 +8,11 @@ import InitializationModal from './initializationModal';
 
 export const showIntroModal = ({ btcIntroShown, settingsUpdated }) => {
   if (!btcIntroShown) {
-      ModalHolder.open({
-        title: 'We’ve got good news!',
-        component: IntroModal,
-      });
-      settingsUpdated({ btcIntroShown: true });
+    ModalHolder.open({
+      title: 'We’ve got good news!',
+      component: IntroModal,
+    });
+    settingsUpdated({ btcIntroShown: true });
   }
 };
 
@@ -30,7 +30,9 @@ export const loadMore = ({
   }
 };
 
-export const showInitializationModal = ({ account, activeToken, transactions, navigation }) => {
+export const showInitializationModal = ({
+  account, activeToken, transactions, navigation
+}) => {
   const balance = parseFloat(fromRawLsk(account[tokenMap.LSK.key].balance));
 
   if (

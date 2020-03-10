@@ -18,10 +18,10 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
     priceTicker: state.service.priceTicker,
     dynamicFees: state.service.dynamicFees,
     activeToken: state.settings.token.active,
-  }),
+    }),
   {
-    pricesRetrieved: pricesRetrievedAction,
-    dynamicFeesRetrieved: dynamicFeesRetrievedAction,
+  pricesRetrieved: pricesRetrievedAction,
+  dynamicFeesRetrieved: dynamicFeesRetrievedAction,
   }
 )
 class Amount extends React.Component {

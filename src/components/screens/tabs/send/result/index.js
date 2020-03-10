@@ -23,7 +23,7 @@ const createdAnimDuration = 6200;
     transactions: state.transactions,
     activeToken: state.settings.active,
     followedAccounts: state.accounts.followed,
-  }),
+    }),
   {}
 )
 class Result extends React.Component {
@@ -70,7 +70,7 @@ class Result extends React.Component {
         .length > 0;
 
     if (nowPending && nextConfirmed) {
-      this.setState({ txConfirmed: true }, () => { this.play('confirmed') });
+      this.setState({ txConfirmed: true }, () => { this.play('confirmed'); });
     }
   }
 

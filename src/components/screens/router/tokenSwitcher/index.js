@@ -12,9 +12,9 @@ import ModalHolder from '../../../../utilities/modal';
 @connect(
   state => ({
     settings: state.settings,
-  }),
+    }),
   {
-    settingsUpdated: settingsUpdatedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class TokenSwitcher extends React.Component {

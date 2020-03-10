@@ -9,7 +9,7 @@ import { deviceType } from '../../../../utilities/device';
 
 @connect(state => ({
   settings: state.settings,
-}))
+  }))
 class TabBar extends React.Component {
   render() {
     const { settings, styles, ...rest } = this.props;

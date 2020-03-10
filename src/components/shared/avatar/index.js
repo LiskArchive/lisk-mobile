@@ -27,7 +27,9 @@ class Avatar extends React.Component {
   }
 
   render() {
-    const { styles, address, size, scale, translate, theme } = this.props;
+    const {
+      styles, address, size, scale, translate, theme
+    } = this.props;
 
     let Wrapper = View;
 
@@ -74,11 +76,9 @@ class Avatar extends React.Component {
 
     const gradientsSchemesUrlsHashed = {
       primary: gradientScheme.primary.map((...rest) =>
-        replaceUrlByHashOnScheme(this.uniqueSvgUrlHash, ...rest)
-      ),
+        replaceUrlByHashOnScheme(this.uniqueSvgUrlHash, ...rest)),
       secondary: gradientScheme.secondary.map((...rest) =>
-        replaceUrlByHashOnScheme(this.uniqueSvgUrlHash, ...rest)
-      ),
+        replaceUrlByHashOnScheme(this.uniqueSvgUrlHash, ...rest)),
     };
     const primaryGradients = pickTwo(
       addressHashChunks[1],

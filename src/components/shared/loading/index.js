@@ -9,7 +9,7 @@ import getStyles from './styles';
 @connect(
   state => ({
     loading: state.loading,
-  }),
+    }),
   {}
 )
 class Loading extends React.Component {

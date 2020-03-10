@@ -55,15 +55,15 @@ const MainStack = createStackNavigator(
         );
         const headerConfig = shouldRenderHeader
           ? {
-              headerTitle: HeaderTitle,
-              headerRight: <TokenSwitcher navigation={navigation} />,
-              headerBackground: <HeaderBackground noBorder={true} />,
-              headerStyle,
-              title,
-            }
+            headerTitle: HeaderTitle,
+            headerRight: <TokenSwitcher navigation={navigation} />,
+            headerBackground: <HeaderBackground noBorder={true} />,
+            headerStyle,
+            title,
+          }
           : {
-              header: null,
-            };
+            header: null,
+          };
 
         return headerConfig;
       },
@@ -190,15 +190,15 @@ const MainStack = createStackNavigator(
     transitionConfig: ({ scene }) =>
       scene.routeName === 'SignIn'
         ? {
-            transitionSpec: {
-              duration: 0,
-            },
-          }
-        : {
-            transitionSpec: {
-              duration: 300,
-            },
+          transitionSpec: {
+            duration: 0,
           },
+        }
+        : {
+          transitionSpec: {
+            duration: 300,
+          },
+        },
   }
 );
 

@@ -4,7 +4,9 @@ import { colors, themes } from '../../../../constants/styleGuide';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 
-const HeaderBackButton = ({ theme, styles, style, onPress, color, icon }) => {
+const HeaderBackButton = ({
+  theme, styles, style, onPress, color, icon
+}) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
   }

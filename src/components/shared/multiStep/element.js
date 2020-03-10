@@ -14,7 +14,9 @@ export const Element = ({ children, type, ...rest }) => {
   }
 };
 
-export const Button = ({ children, type, onClick, ...rest }) => {
+export const Button = ({
+  children, type, onClick, ...rest
+}) => {
   if (typeof document !== 'undefined') {
     return (
       <button {...rest} onClick={onClick}>

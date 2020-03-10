@@ -6,7 +6,7 @@ import getStyles from './styles';
 
 @connect(state => ({
   settings: state.settings,
-}))
+  }))
 class DynamicHeaderBackground extends React.Component {
   render() {
     const {

@@ -9,7 +9,9 @@ import Row from '../row';
 import getStyles from './styles';
 import loadingAnimation from '../../../../assets/animations/loading-dots.json';
 
-const VoteList = ({ upvotes, downvotes, styles, t }) => {
+const VoteList = ({
+  upvotes, downvotes, styles, t
+}) => {
   const loader = <View style={styles.pendingIcon}>
     <LottieView source={loadingAnimation} autoPlay />
   </View>;
@@ -54,7 +56,7 @@ const VoteList = ({ upvotes, downvotes, styles, t }) => {
           : loader}
       </Row>
     )}
-  </Fragment>
+  </Fragment>;
 };
 
 export default withTheme(translate()(VoteList), getStyles());

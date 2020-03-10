@@ -10,7 +10,9 @@ import getStyles from './styles';
 import { themes, colors } from '../../../constants/styleGuide';
 import { IconButton } from '../toolBox/button';
 
-const CameraAccess = ({ theme, styles, close, fullScreen, t }) => (
+const CameraAccess = ({
+  theme, styles, close, fullScreen, t
+}) => (
   <TouchableHighlight
     onPress={() => {
       OpenAppSettings.open();

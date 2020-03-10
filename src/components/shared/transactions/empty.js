@@ -8,7 +8,9 @@ import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import { themes } from '../../../constants/styleGuide';
 
-const EmptyState = ({ theme, styles, refreshing, t, message, style = {} }) => (
+const EmptyState = ({
+  theme, styles, refreshing, t, message, style = {}
+}) => (
   <View style={[styles.emptyState, style]}>
     <View style={styles.emptyStateActivityIndicator}>
       {Platform.OS === 'ios' && refreshing ? (

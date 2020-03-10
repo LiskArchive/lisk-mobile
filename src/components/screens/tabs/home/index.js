@@ -42,13 +42,13 @@ const summaryHeight = 200;
     activeToken: state.settings.token.active,
     btcIntroShown: state.settings.btcIntroShown,
     settings: state.settings,
-  }),
+    }),
   {
-    transactionsLoaded: transactionsLoadedAction,
-    transactionsReset: transactionsResetAction,
-    updateTransactions: blockUpdatedAction,
-    accountFetched: accountFetchedAction,
-    settingsUpdated: settingsUpdatedAction,
+  transactionsLoaded: transactionsLoadedAction,
+  transactionsReset: transactionsResetAction,
+  updateTransactions: blockUpdatedAction,
+  accountFetched: accountFetchedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class Home extends React.Component {
@@ -109,7 +109,7 @@ class Home extends React.Component {
 
   refreshAccountAndTx = () => {
     this.lastActiveToken = this.props.activeToken;
-    this.initialFetchTimeout = setTimeout(() => { resetTxAndFetch(this.props) }, 200);
+    this.initialFetchTimeout = setTimeout(() => { resetTxAndFetch(this.props); }, 200);
     this.props.accountFetched();
   };
 
@@ -117,7 +117,7 @@ class Home extends React.Component {
     if (this.lastActiveToken === null) {
       this.bindInfiniteScroll();
       this.setHeader();
-      this.modalTimeout = setTimeout(() => { showIntroModal(this.props) }, 1200);
+      this.modalTimeout = setTimeout(() => { showIntroModal(this.props); }, 1200);
     }
     if (this.lastActiveToken !== this.props.activeToken) {
       this.refreshAccountAndTx();
