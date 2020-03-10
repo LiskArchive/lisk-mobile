@@ -49,6 +49,6 @@ export default (WrappedComponent, styles, forwardRefs = false) => {
   return forwardRefs
     ? React.forwardRef((props, ref) => (
         <HoistedWithTheme {...props} forwardedRef={ref} />
-      ))
+    ))
     : HoistedWithTheme;
 };

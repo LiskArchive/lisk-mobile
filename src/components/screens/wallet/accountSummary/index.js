@@ -28,10 +28,10 @@ import modalHolder from '../../../../utilities/modal';
     settings: state.settings,
     activeToken: state.settings.token.active,
     language: state.settings.language,
-  }),
+    }),
   {
-    accountFollowed: accountFollowedAction,
-    accountUnFollowed: accountUnFollowedAction,
+  accountFollowed: accountFollowedAction,
+  accountUnFollowed: accountUnFollowedAction,
   }
 )
 class AccountSummary extends React.Component {

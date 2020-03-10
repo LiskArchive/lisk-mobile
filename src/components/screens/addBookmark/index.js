@@ -70,7 +70,8 @@ class AddToBookmark extends React.Component {
         this.addressRef.focus();
       }, 300);
     } else {
-      const editMode = accounts[activeToken].filter(item => item.address === account.address).length > 0;
+      const editMode = accounts[activeToken]
+        .filter(item => item.address === account.address).length > 0;
       this.setState({
         editMode,
         label: { value: account.label || '' },
@@ -145,7 +146,9 @@ class AddToBookmark extends React.Component {
       accountEdited,
       activeToken,
     } = this.props;
-    const { address, label, incomingData, editMode } = this.state;
+    const {
+      address, label, incomingData, editMode
+    } = this.state;
     const addressValidity = validateAddress(activeToken, address.value);
     const labelValidity = this.validateLabel(label.value);
     if (incomingData && labelValidity === 0) {
@@ -170,8 +173,12 @@ class AddToBookmark extends React.Component {
   };
 
   render() {
-    const { navigation, styles, t, lng, activeToken } = this.props;
-    const { address, label, incomingData, editMode } = this.state;
+    const {
+      navigation, styles, t, lng, activeToken
+    } = this.props;
+    const {
+      address, label, incomingData, editMode
+    } = this.state;
     const shouldDisplayAvatar = activeToken === tokenMap.LSK.key;
     const errors = {
       label: t('The label must be shorter than 20 characters.'),

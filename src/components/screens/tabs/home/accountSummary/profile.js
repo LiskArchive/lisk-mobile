@@ -22,7 +22,7 @@ const blurs = {
 
 @connect(state => ({
   language: state.settings.language,
-}))
+  }))
 class Profile extends React.Component {
   render() {
     const {

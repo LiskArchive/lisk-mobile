@@ -20,7 +20,7 @@ const settingsMiddleware = store => next => action => {
       // } else {
       //   action.data.language = 'en';
       // }
-      action.data.language = 'en'
+      action.data.language = 'en';
 
       if (!action.data.theme) {
         action.data.theme = deviceTheme();

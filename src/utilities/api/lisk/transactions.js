@@ -29,7 +29,9 @@ const normalizeTransactionsResponse = list =>
     delegate: tx.asset.delegate || '',
   }));
 
-export const get = ({ id, address, limit, offset }) =>
+export const get = ({
+  id, address, limit, offset
+}) =>
   new Promise(async (resolve, reject) => {
     const parameters = removeUndefinedKeys({
       id,

@@ -60,8 +60,7 @@ const accounts = (state = INITIAL_STATE, action = {}) => {
               [tokenKey]:
                 tokenKey === activeToken
                   ? state.followed[tokenKey].map(i =>
-                      i.address === account.address ? account : i
-                    )
+                    i.address === account.address ? account : i)
                   : state.followed[tokenKey],
             }),
           {}
@@ -78,11 +77,11 @@ const accounts = (state = INITIAL_STATE, action = {}) => {
               [tokenKey]:
                 tokenKey === activeToken
                   ? [
-                      ...state.followed[tokenKey].filter(
-                        item => item.address !== account.address
-                      ),
-                      account,
-                    ]
+                    ...state.followed[tokenKey].filter(
+                      item => item.address !== account.address
+                    ),
+                    account,
+                  ]
                   : state.followed[tokenKey],
             }),
           {}
@@ -98,8 +97,8 @@ const accounts = (state = INITIAL_STATE, action = {}) => {
               [tokenKey]:
                 tokenKey === action.data.activeToken
                   ? state.followed[tokenKey].filter(
-                      item => item.address !== action.data.address
-                    )
+                    item => item.address !== action.data.address
+                  )
                   : state.followed[tokenKey],
             }),
           {}

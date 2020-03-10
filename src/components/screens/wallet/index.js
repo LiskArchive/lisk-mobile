@@ -31,10 +31,10 @@ import HomeHeaderTitle from '../router/homeHeaderTitle';
   state => ({
     followedAccounts: state.accounts.followed || [],
     activeToken: state.settings.token.active,
-  }),
+    }),
   {
-    loadingStarted: loadingStartedAction,
-    loadingFinished: loadingFinishedAction,
+  loadingStarted: loadingStartedAction,
+  loadingFinished: loadingFinishedAction,
   }
 )
 class Wallet extends React.Component {

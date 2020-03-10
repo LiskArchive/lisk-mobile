@@ -13,9 +13,9 @@ import getStyles from './styles';
   state => ({
     list: state.accounts.followed,
     activeToken: state.settings.token.active,
-  }),
+    }),
   {
-    settingsUpdated: settingsUpdatedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class Bookmarks extends React.Component {

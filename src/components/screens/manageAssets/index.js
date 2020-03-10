@@ -15,9 +15,9 @@ import { merge } from '../../../utilities/helpers';
 @connect(
   state => ({
     settings: state.settings,
-  }),
+    }),
   {
-    settingsUpdated: settingsUpdatedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class ManageAssets extends React.Component {

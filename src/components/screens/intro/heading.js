@@ -15,7 +15,7 @@ import URLs from '../../../constants/URLs';
 @connect(
   () => ({}),
   {
-    settingsUpdated: settingsUpdatedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class Heading extends React.Component {
@@ -41,7 +41,9 @@ class Heading extends React.Component {
   };
 
   render() {
-    const { t, descriptionContent, hasHeader, testID } = this.props;
+    const {
+      t, descriptionContent, hasHeader, testID
+    } = this.props;
     const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {};
     return (
       <View style={styles.headingContainer}>

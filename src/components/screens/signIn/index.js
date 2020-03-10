@@ -43,13 +43,13 @@ console.disableYellowBox = true; // eslint-disable-line
   state => ({
     accounts: state.accounts,
     settings: state.settings,
-  }),
+    }),
   {
-    accountSignedIn: accountSignedInAction,
-    accountFetched: accountFetchedAction,
-    settingsUpdated: settingsUpdatedAction,
-    settingsRetrieved: settingsRetrievedAction,
-    pricesRetrieved: pricesRetrievedAction,
+  accountSignedIn: accountSignedInAction,
+  accountFetched: accountFetchedAction,
+  settingsUpdated: settingsUpdatedAction,
+  settingsRetrieved: settingsRetrievedAction,
+  pricesRetrieved: pricesRetrievedAction,
   }
 )
 class SignIn extends React.Component {
@@ -257,8 +257,7 @@ class SignIn extends React.Component {
         })
         .catch(error =>
           // eslint-disable-next-line no-console
-          console.log('An error occurred while getting initial url', error)
-        );
+          console.log('An error occurred while getting initial url', error));
     }
     Linking.removeAllListeners('url');
     Linking.addEventListener('url', this.onDeepLinkRequested);
@@ -289,8 +288,7 @@ class SignIn extends React.Component {
           console.log(
             'An error occurred while getting initial quick action',
             error
-          )
-        );
+          ));
     }
 
     DeviceEventEmitter.removeAllListeners('quickActionShortcut');
@@ -318,11 +316,9 @@ class SignIn extends React.Component {
       this.setState({
         keyboardIsOpen: true,
         keyboardHeight: e.endCoordinates.height,
-      })
-    );
+      }));
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () =>
-      this.setState({ keyboardIsOpen: false })
-    );
+      this.setState({ keyboardIsOpen: false }));
   }
 
   componentDidUpdate() {

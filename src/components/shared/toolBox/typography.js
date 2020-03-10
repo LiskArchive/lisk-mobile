@@ -32,7 +32,9 @@ export const P = ({ children, style, onPress }) => (
   </Text>
 );
 
-export const B = ({ children, style, onPress, testID }) => (
+export const B = ({
+  children, style, onPress, testID
+}) => (
   <Text testID={testID} style={[theme.b, style]} onPress={onPress}>
     {children}
   </Text>
@@ -50,7 +52,9 @@ export const Small = ({ children, style, onPress }) => (
   </Text>
 );
 
-export const A = ({ children, style, onPress, testID }) => (
+export const A = ({
+  children, style, onPress, testID
+}) => (
   <Text testID={testID} style={[theme.a, style]} onPress={onPress}>
     {children}
   </Text>

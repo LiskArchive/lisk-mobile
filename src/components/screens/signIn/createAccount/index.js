@@ -4,7 +4,9 @@ import { translate } from 'react-i18next';
 import { P, A } from '../../../shared/toolBox/typography';
 import styles from './styles';
 
-const CreateAccount = ({ t, onPress, style, opacity = 1 }) => (
+const CreateAccount = ({
+  t, onPress, style, opacity = 1
+}) => (
   <Animated.View style={[styles.linkWrapper, style, { opacity }]}>
     <P style={styles.question}>{t('Don’t have a Lisk ID?')}</P>
 

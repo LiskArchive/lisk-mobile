@@ -12,9 +12,9 @@ import PassphraseCopy from '../../shared/passphraseCopy';
 @connect(
   state => ({
     passphrase: state.accounts.passphrase,
-  }),
+    }),
   {
-    settingsUpdated: settingsUpdatedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class DisableBioAuth extends React.Component {
@@ -29,7 +29,9 @@ class DisableBioAuth extends React.Component {
   };
 
   render() {
-    const { t, styles, navigation, passphrase } = this.props;
+    const {
+      t, styles, navigation, passphrase
+    } = this.props;
 
     const title = navigation.getParam('title', 'Bio Auth');
 

@@ -35,8 +35,7 @@ class Modal extends React.Component {
     const viewHeight = nativeEvent.layout.height;
     const headerStyle = { height: headerHeight() };
     const contentStyle = { paddingTop: headerHeight() + boxes.boxPadding };
-    if (viewHeight >= deviceHeight())
-      this.setState({ headerStyle, contentStyle });
+    if (viewHeight >= deviceHeight()) { this.setState({ headerStyle, contentStyle }); }
   };
 
   render() {

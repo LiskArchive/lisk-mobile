@@ -5,7 +5,9 @@ import getStyles from './styles';
 
 class Progress extends React.Component {
   render() {
-    const { styles, current, total, progressStepContainerStyle } = this.props;
+    const {
+      styles, current, total, progressStepContainerStyle
+    } = this.props;
 
     const steps = [];
     for (let i = 0; i < total - 1; i++) {

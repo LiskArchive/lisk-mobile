@@ -25,9 +25,9 @@ import { IconButton } from '../toolBox/button';
     incognitoMode: state.settings.incognito,
     activeToken: state.settings.token.active,
     followedAccounts: state.accounts.followed || [],
-  }),
+    }),
   {
-    settingsUpdated: settingsUpdatedAction,
+  settingsUpdated: settingsUpdatedAction,
   }
 )
 class Transactions extends React.Component {

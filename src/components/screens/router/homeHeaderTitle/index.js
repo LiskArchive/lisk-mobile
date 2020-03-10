@@ -99,7 +99,9 @@ const ExtendedTitle = ({
   );
 };
 
-const SimpleHeader = ({ styles, type, title, scrollY }) => (
+const SimpleHeader = ({
+  styles, type, title, scrollY
+}) => (
   <Animated.Text
     numberOfLines={1}
     style={[
@@ -116,7 +118,7 @@ const SimpleHeader = ({ styles, type, title, scrollY }) => (
 
 @connect(state => ({
   language: state.settings.language,
-}))
+  }))
 class HomeHeaderTitle extends React.Component {
   normalizeBalance = balance => {
     const { language } = this.props;
@@ -130,7 +132,9 @@ class HomeHeaderTitle extends React.Component {
   };
 
   render() {
-    const { styles, theme, wallet, data, scrollToTop } = this.props;
+    const {
+      styles, theme, wallet, data, scrollToTop
+    } = this.props;
 
     return (
       <View style={styles.container}>

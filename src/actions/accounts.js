@@ -159,8 +159,8 @@ export const blockUpdated = () => async (dispatch, getState) => {
 
     const newTransactions = lastTx
       ? response.data.filter(
-          tx => tx.confirmations === 0 || tx.timestamp > lastTx.timestamp
-        )
+        tx => tx.confirmations === 0 || tx.timestamp > lastTx.timestamp
+      )
       : response.data;
 
     if (newTransactions.length) {

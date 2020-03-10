@@ -29,7 +29,7 @@ const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
   account: state.accounts.info,
   activeToken: state.settings.token.active,
   language: state.settings.language,
-}))
+  }))
 class Request extends React.Component {
   state = {
     amount: { value: '', validity: -1 },
@@ -78,7 +78,9 @@ class Request extends React.Component {
   };
 
   render() {
-    const { styles, theme, account, t, activeToken } = this.props;
+    const {
+      styles, theme, account, t, activeToken
+    } = this.props;
     const { amount, url } = this.state;
     const { address } = account[activeToken];
     const extraHeight = deviceType() === 'android' ? 170 : 0;

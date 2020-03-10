@@ -118,8 +118,8 @@ class Recipient extends React.Component {
     const nextData = data
       ? merge(sharedData, data)
       : merge(sharedData, this.scannedData, {
-          address: this.state.address.value,
-        });
+        address: this.state.address.value,
+      });
 
     move({
       to: 1,

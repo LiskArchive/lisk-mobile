@@ -63,7 +63,9 @@ class MultiStep extends React.Component {
       : Math.max(0, current + moves);
   }
 
-  move = ({ moves, to, data, reset = false }) => {
+  move = ({
+    moves, to, data, reset = false
+  }) => {
     const { key, current } = this.state;
     const { children } = this.props;
     const next = this.keepTargetInRange(to, moves, current, children.length);

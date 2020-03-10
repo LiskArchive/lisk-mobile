@@ -36,7 +36,6 @@ export const openExplorer = (id) => {
 export const getAccountTitle = tx => {
   if (tx.type === 3) return 'Voter';
   else if (tx.type === 2) return 'Registrant';
-  else if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)
-    return 'Account address';
+  else if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress) { return 'Account address'; }
   return 'Sender';
 };

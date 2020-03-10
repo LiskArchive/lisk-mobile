@@ -50,7 +50,7 @@ async function readFiles(config) {
  * @param {String} key - The extracted translation key
  * @param {String} options - parse options
  */
-const customHandler = function(parser, oldTranslations, key, options) {
+const customHandler = function (parser, oldTranslations, key, options) {
   const value = oldTranslations[key] || key;
   if (options.context) {
     key += `_${options.context}`;
@@ -114,9 +114,9 @@ async function writeFile(config, language, resources, rawOldKeys, newKeys) {
   const additionalKeys =
     language === config.defaultLng
       ? Object.keys(newKeys).reduce((acc, key) => {
-          acc[key] = key;
-          return acc;
-        }, {})
+        acc[key] = key;
+        return acc;
+      }, {})
       : newKeys;
   const updatedTranslations = Object.assign(
     {},

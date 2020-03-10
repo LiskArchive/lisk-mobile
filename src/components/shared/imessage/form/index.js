@@ -68,8 +68,7 @@ class LiskMessageExtension extends Component {
     this.setState({
       amount: { validity: -1 },
       num: this.state.num.map((item, index) =>
-        index === itemIndex ? itemValue : item
-      ),
+        index === itemIndex ? itemValue : item),
     });
   };
 
@@ -102,7 +101,9 @@ class LiskMessageExtension extends Component {
   };
 
   render() {
-    const { address, avatarPreview, num, amount } = this.state;
+    const {
+      address, avatarPreview, num, amount
+    } = this.state;
 
     const { inputAddress, keyBoardFocused, presentationStyle } = this.props;
 

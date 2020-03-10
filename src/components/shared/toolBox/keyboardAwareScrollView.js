@@ -21,7 +21,9 @@ class ScrollAwareActionBar extends React.Component {
   };
 
   renderButton = style => {
-    const { buttonTestID, noTheme, disabled, onSubmit, button } = this.props;
+    const {
+      buttonTestID, noTheme, disabled, onSubmit, button
+    } = this.props;
 
     return (
       <PrimaryButton

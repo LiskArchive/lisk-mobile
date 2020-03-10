@@ -7,7 +7,9 @@ import Icon from '../../shared/toolBox/icon';
 import getStyles from './styles';
 import { colors } from '../../../constants/styleGuide';
 
-const Row = ({ styles, theme, t, icon, title, children, style }) => (
+const Row = ({
+  styles, theme, t, icon, title, children, style
+}) => (
   <View style={[styles.detailRow, styles.theme.detailRow]}>
     <View style={styles.rowIconWrapper}>
       <Icon

@@ -20,7 +20,7 @@ const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
 @connect(state => ({
   passphrase: state.accounts.passphrase,
-}))
+  }))
 class PassphraseBackup extends React.Component {
   state = {
     passphraseRevealed: false,
@@ -31,7 +31,9 @@ class PassphraseBackup extends React.Component {
   };
 
   render() {
-    const { styles, passphrase, theme, t } = this.props;
+    const {
+      styles, passphrase, theme, t
+    } = this.props;
     const { passphraseRevealed } = this.state;
 
     return (

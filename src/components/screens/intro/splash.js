@@ -17,7 +17,9 @@ class Splash extends React.Component {
   };
 
   componentDidMount() {
-    const { top, bgOpacity, iconOpacity, txtOpacity } = this.state;
+    const {
+      top, bgOpacity, iconOpacity, txtOpacity
+    } = this.state;
 
     Animated.timing(bgOpacity, {
       toValue: 0,
@@ -43,7 +45,9 @@ class Splash extends React.Component {
   }
 
   render() {
-    const { top, bgOpacity, iconOpacity, txtOpacity } = this.state;
+    const {
+      top, bgOpacity, iconOpacity, txtOpacity
+    } = this.state;
     const { t } = this.props;
     return (
       <View style={styles.splashContainer}>
