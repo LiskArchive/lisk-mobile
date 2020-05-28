@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import { TextEncoder } from 'text-encoding';
 import { translate } from 'react-i18next';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import Input from '../../../../shared/toolBox/input';
@@ -26,10 +25,9 @@ class Reference extends React.Component {
     },
   };
 
-  validator = str => {
-    const uint8array = new TextEncoder().encode(str);
-    return uint8array.length > 64 ? 1 : 0;
-  };
+  validator = str => (
+    encodeURI(str).split(/%..|./).length - 1 > 64 ? 1 : 0
+  );
 
   componentDidMount() {
     const {
