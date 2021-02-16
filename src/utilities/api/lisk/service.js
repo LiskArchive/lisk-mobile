@@ -5,21 +5,21 @@ export const getPriceTicker = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(
-        `${config.serviceURL}/api/getPriceTicker`,
+        `${config.serviceURL}/api/v1/market/prices`,
         config.requestOptions
       );
       const json = await response.json();
 
       if (response.ok) {
-        const {
-          tickers: { LSK },
-        } = json;
+        const result = json.data.reduce((acc, item) => {
+          if (item.from === 'LSK') {
+            acc[item.to] = item.rate;
+          }
 
-        resolve({
-          CHF: String(LSK.CHF),
-          EUR: String(LSK.EUR),
-          USD: String(LSK.USD),
-        });
+          return acc;
+        }, {});
+
+        resolve(result);
       } else {
         reject(json);
       }

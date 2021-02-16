@@ -5,21 +5,21 @@ export const getPriceTicker = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(
-        `${liskConfig.serviceURL}/api/getPriceTicker`,
+        `${liskConfig.serviceURL}/api/v1/market/prices`,
         liskConfig.requestOptions
       );
       const json = await response.json();
 
       if (response.ok) {
-        const {
-          tickers: { BTC },
-        } = json;
+        const result = json.data.reduce((acc, item) => {
+          if (item.from === 'BTC') {
+            acc[item.to] = item.rate;
+          }
 
-        resolve({
-          CHF: String(BTC.CHF),
-          EUR: String(BTC.EUR),
-          USD: String(BTC.USD),
-        });
+          return acc;
+        }, {});
+
+        resolve(result);
       } else {
         reject(json);
       }
