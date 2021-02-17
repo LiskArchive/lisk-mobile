@@ -91,7 +91,7 @@ class Profile extends React.Component {
             tokenType={token}
             style={[
               styles.theme.homeBalance,
-              settings.incognito || !fiatBalance ? styles.invisibleTitle : null,
+              settings.incognito ? styles.invisibleTitle : null,
             ]}
             type={H3}
             language={language}
@@ -103,7 +103,7 @@ class Profile extends React.Component {
             style={[
               styles.blur,
               styles[`blur${balanceSize}`],
-              settings.incognito || !fiatBalance ? styles.visibleBlur : null,
+              settings.incognito ? styles.visibleBlur : null,
             ]}
           />
         </AView>
