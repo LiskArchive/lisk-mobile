@@ -8,7 +8,7 @@
     "browser": true,
     "jest": true
   },
-  "plugins": ["react", "import", "babel", "jest", "detox"],
+  "plugins": ["react", "import", "babel", "jest"],
   "globals": {
     "PRODUCTION": true,
     "TEST": true
@@ -34,8 +34,7 @@
           "./test/**/*.js",
           "./src/**/stories.js",
           "./src/tests.js",
-          "./src/i18n-scanner.js",
-          "./e2e/**/*.js"
+          "./src/i18n-scanner.js"
         ]
       }
     ],

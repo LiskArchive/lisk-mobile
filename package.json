@@ -1,7 +1,6 @@
 {
   "name": "Lisk",
   "version": "1.4.1-alpha.1",
-  "private": true,
   "description": "The Lisk official mobile wallet",
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
   "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",
@@ -17,11 +16,6 @@
     "test:format": "./node_modules/.bin/eslint --quiet ./",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "i18n": "node ./scripts/scanner.config.js",
-    "test:build-e2e-release": "detox build --configuration ios.sim.release",
-    "test:build-e2e-debug": "detox build --configuration ios.sim.debug",
-    "test:e2e-clean": "detox clean-framework-cache && detox build-framework-cache",
-    "test:e2e-release": "node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty --configuration ios.sim.release",
-    "test:e2e-debug": "node ./node_modules/cucumber/bin/cucumber-js e2e --format node_modules/cucumber-pretty --configuration=ios.sim.debug",
     "postinstall": "node ./scripts/removeExtraFonts.js"
   },
   "rnpm": {
@@ -149,12 +143,10 @@
     "coveralls": "^3.0.2",
     "cucumber": "5.1.0",
     "cucumber-pretty": "1.5.0",
-    "detox": "14.5.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "=15.1.0",
     "eslint-config-airbnb-base": "=12.1.0",
     "eslint-plugin-babel": "=4.1.2",
-    "eslint-plugin-detox": "1.0.0",
     "eslint-plugin-import": "=2.7.0",
     "eslint-plugin-jest": "=21.22.0",
     "eslint-plugin-react": "=7.4.0",
@@ -228,25 +220,5 @@
     "tty": "tty-browserify",
     "vm": "vm-browserify",
     "tls": false
-  },
-  "detox": {
-    "configurations": {
-      "ios.sim.debug": {
-        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/Lisk.app",
-        "build": "xcodebuild -UseModernBuildSystem=NO -workspace ios/Lisk.xcworkspace -scheme Lisk -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "device": {
-          "type": "iPhone 11"
-        }
-      },
-      "ios.sim.release": {
-        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/Lisk.app",
-        "build": "xcodebuild -UseModernBuildSystem=NO -workspace ios/Lisk.xcworkspace -scheme Lisk -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "device": {
-          "type": "iPhone 11"
-        }
-      }
-    }
   }
 }

@@ -1,7 +1,7 @@
 module.exports = {
   modulePaths: ['src/'],
   testMatch: ['<rootDir>/src/**/*.test.js'],
-  testPathIgnorePatterns: ['<rootDir>/src/components/', '<rootDir>/e2e/'],
+  testPathIgnorePatterns: ['<rootDir>/src/components/'],
   verbose: true,
   cache: false,
   moduleFileExtensions: ['js', 'tsx'],

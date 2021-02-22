@@ -100,21 +100,6 @@ pipeline {
                 }
               }
             }
-            stage('Build e2e tests') {
-              steps {
-                nvm(getNodejsVersion()) {
-                  sh 'npm run test:build-e2e-release || true'
-                }
-              }
-            }
-            stage('Run e2e tests') {
-              options { timeout(time: 10, unit: 'MINUTES') }
-              steps {
-                nvm(getNodejsVersion()) {
-                  sh 'PATH=/usr/local/bin:$PATH npm run test:e2e-release || true'
-                }
-              }
-            }
           }
         }
       }
