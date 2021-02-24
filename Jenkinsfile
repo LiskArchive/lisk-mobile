@@ -6,7 +6,10 @@ pipeline {
       steps {
         script{
           nvm(getNodejsVersion()) {
-            sh 'npm ci'
+            sh '''
+            npm ci
+            npm run link
+            '''
           }
         }
       }
