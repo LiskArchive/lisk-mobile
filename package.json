@@ -1,6 +1,6 @@
 {
   "name": "Lisk",
-  "version": "1.4.1-alpha.1",
+  "version": "1.4.1-alpha.2",
   "description": "The Lisk official mobile wallet",
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
   "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",
@@ -75,7 +75,7 @@
     "react-native-crypto": "^2.1.2",
     "react-native-device-info": "^4.0.1",
     "react-native-dropdownalert": "^3.9.2",
-    "react-native-fingerprint-scanner": "^3.0.2",
+    "react-native-fingerprint-scanner": "^4.1.0",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-haptic-feedback": "^1.4.2",
     "react-native-interactable": "github:wix/react-native-interactable",
