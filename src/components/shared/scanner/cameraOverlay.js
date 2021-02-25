@@ -1,27 +1,32 @@
 import React from 'react';
-import { View, TouchableHighlight, Platform } from 'react-native';
-import OpenAppSettings from 'react-native-app-settings';
+import {
+  View,
+  // TouchableHighlight,
+  // Platform,
+} from 'react-native';
+// import OpenAppSettings from 'react-native-app-settings';
 import { translate } from 'react-i18next';
-import Icon from '../toolBox/icon';
+// import Icon from '../toolBox/icon';
 import { P } from '../toolBox/typography';
-import { colors } from '../../../constants/styleGuide';
+// import { colors } from '../../../constants/styleGuide';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 
 const CameraOverlay = ({
   styles,
-  photoPermission,
-  toggleGallery,
+  // photoPermission,
+  // toggleGallery,
   containerStyles,
   t,
 }) => (
   <View style={[styles.cameraOverlay, containerStyles]}>
     <P style={styles.galleryDescription}>
-      {photoPermission === 'authorized'
+      {/* {photoPermission === 'authorized'
         ? t('Scan a QR code or upload from your camera roll.')
-        : t('Scan a QR code or grant access to the camera roll.')}
+        : t('Scan a QR code or grant access to the camera roll.')} */}
+      {t('Scan a QR code.')}
     </P>
-    <TouchableHighlight
+    {/* <TouchableHighlight
       underlayColor="transparent"
       onPress={() => {
         if (
@@ -39,7 +44,7 @@ const CameraOverlay = ({
       ]}
     >
       <Icon size={18} color={colors.light.white} name="gallery" />
-    </TouchableHighlight>
+    </TouchableHighlight> */}
   </View>
 );
 
