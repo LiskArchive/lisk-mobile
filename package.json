@@ -18,11 +18,6 @@
     "i18n": "node ./scripts/scanner.config.js",
     "postinstall": "node ./scripts/removeExtraFonts.js"
   },
-  "rnpm": {
-    "assets": [
-      "./src/assets/fonts/"
-    ]
-  },
   "lint-staged": {
     "*.js": "eslint"
   },
