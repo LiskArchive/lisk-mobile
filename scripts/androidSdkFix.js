@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const finder = find('./node_modules');
 
-const sdkVersion = 'compileSdkVersion 28';
+const sdkVersion = 'compileSdkVersion 30';
 const buildToolsVersion = 'buildToolsVersion "28.0.3"';
 
 finder.on('file', file => {
