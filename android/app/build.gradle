@@ -150,8 +150,8 @@ android {
         applicationId "io.lisk.mobile"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 41
-        versionName "1.4.1-alpha.2"
+        versionCode 42
+        versionName "1.4.1-alpha.3"
         multiDexEnabled true   
         ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
         missingDimensionStrategy 'react-native-camera', 'mlkit'
