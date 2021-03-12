@@ -7,15 +7,15 @@ global.setInterval = BackgroundTimer.setInterval.bind(BackgroundTimer);
 global.clearTimeout = BackgroundTimer.clearTimeout.bind(BackgroundTimer);
 global.clearInterval = BackgroundTimer.clearInterval.bind(BackgroundTimer);
 
-if (typeof __dirname === 'undefined') global.__dirname = '/';
-if (typeof __filename === 'undefined') global.__filename = '';
+if (typeof __dirname === 'undefined') global.__dirname = '/'
+if (typeof __filename === 'undefined') global.__filename = ''
 if (typeof process === 'undefined') {
-  global.process = require('process');
+  global.process = require('process')
 } else {
-  const bProcess = require('process');
+  const bProcess = require('process')
   for (var p in bProcess) {
     if (!(p in process)) {
-      process[p] = bProcess[p];
+      process[p] = bProcess[p]
     }
   }
 }
@@ -24,16 +24,17 @@ for (var p in env) {
   process.env[p] = env[p];
 }
 
-process.browser = false;
+process.browser = false
 global.Buffer = Buffer;
 global.Buffer.prototype.reverse = function() {
   return require('buffer-reverse')(this, arguments);
 };
 
-const isDev = typeof __DEV__ === 'boolean' && __DEV__;
-process.env['NODE_ENV'] = isDev ? 'development' : 'production';
+// global.location = global.location || { port: 80 }
+const isDev = typeof __DEV__ === 'boolean' && __DEV__
+process.env['NODE_ENV'] = isDev ? 'development' : 'production'
 if (typeof localStorage !== 'undefined') {
-  localStorage.debug = isDev ? '*' : '';
+  localStorage.debug = isDev ? '*' : ''
 }
 
 if (global.navigator && global.navigator.product === 'ReactNative') {
@@ -47,3 +48,7 @@ if (global.navigator && global.navigator.product === 'ReactNative') {
     );
   }
 }
+
+// If using the crypto shim, uncomment the following line to ensure
+// crypto is loaded first, so it can populate global.crypto
+// require('crypto')
