@@ -62,7 +62,7 @@ class Form extends React.Component {
 
   goToRegistration = () => {
     this.passphraseInput.blur();
-    this.props.navigation.navigate('Register');
+    this.props.navigation.navigate({ name: 'Register' });
   };
 
   onFormSubmission = () => {
