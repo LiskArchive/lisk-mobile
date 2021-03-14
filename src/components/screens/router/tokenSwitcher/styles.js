@@ -22,5 +22,8 @@ export default () => ({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    safeArea: {
+      marginTop: type === 'iOSx' ? 53 : 30,
+    },
   },
 });
