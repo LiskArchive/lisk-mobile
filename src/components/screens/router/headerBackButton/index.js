@@ -5,7 +5,7 @@ import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 
 const HeaderBackButton = ({
-  theme, styles, style, onPress, color, icon
+  theme, styles, style, onPress, color, icon, safeArea,
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
@@ -13,7 +13,7 @@ const HeaderBackButton = ({
 
   return (
     <IconButton
-      style={[styles.main, styles.theme.main, style]}
+      style={[styles.main, styles.theme.main, style, safeArea ? styles.safeArea : null]}
       icon={icon || 'back'}
       onPress={onPress}
       color={color}

@@ -13,5 +13,8 @@ export default () => ({
       height: 40,
       marginTop,
     },
+    safeArea: {
+      marginTop: type === 'iOSx' ? 50 : 20,
+    },
   },
 });
