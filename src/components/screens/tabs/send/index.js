@@ -2,6 +2,7 @@ import React from 'react';
 import { BackHandler } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
+
 import MultiStep from '../../../shared/multiStep';
 import Recipient from './recipient';
 import Amount from './amount';
@@ -25,31 +26,6 @@ import progressBar from '../../../shared/progressBar';
   {}
 )
 class Send extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-
-    return {
-      tabBarVisible: params.tabBar,
-      title: params.title || 'Send',
-      headerLeft: params.showButtonLeft ? (
-        <IconButton
-          title=""
-          icon="back"
-          onPress={params.action}
-          style={params.styles && params.styles.back}
-          color={
-            params.theme === themes.light
-              ? colors.light.black
-              : colors.dark.white
-          }
-        />
-      ) : (
-        <IconButton color="transparent" icon="back" />
-      ),
-      headerRight: <TokenSwitcher navigation={navigation} />,
-    };
-  };
-
   state = {
     showProgressBar: true,
   };
@@ -62,7 +38,7 @@ class Send extends React.Component {
       navigation.addListener('willBlur', this.willBlur),
     ];
 
-    navigation.setParams({
+    navigation.setOptions({
       showButtonLeft: false,
     });
   }
@@ -72,9 +48,9 @@ class Send extends React.Component {
     if (prevProps.settings.token.active !== this.props.settings.token.active) {
       this.resetMultiStep();
     } else {
-      this.checkQuery(
-        prevProps.navigation.dangerouslyGetParent().getParam('query', {})
-      );
+      // this.checkQuery(
+      //   prevProps.navigation.dangerouslyGetParent().getParam('query', {})
+      // );
     }
   }
 
@@ -101,16 +77,15 @@ class Send extends React.Component {
 
   didFocus = () => {
     const {
-      styles, theme, navigation, accounts, settings, t
+      route, accounts, settings, t
     } = this.props;
 
-    navigation.setParams({ styles, theme });
     BackHandler.addEventListener(
       'hardwareBackPress',
       this.onBackButtonPressedAndroid
     );
 
-    if (navigation.getParam('initialize', false)) {
+    if (route.params?.initialize ?? false) {
       this.nav.move({
         to: 3,
         data: {
@@ -132,7 +107,7 @@ class Send extends React.Component {
   };
 
   finalCallback = () => {
-    this.props.navigation.navigate({ routeName: 'Home' });
+    this.props.navigation.navigate({ name: 'Home' });
   };
 
   hideProgressBar = data => {
@@ -140,7 +115,8 @@ class Send extends React.Component {
   };
 
   onBackButtonPressedAndroid = () => {
-    const action = this.props.navigation.getParam('action', false);
+    // @todo Fix this on Android
+    const action = this.props.route.params?.action ?? false;
 
     if (action && typeof action === 'function') {
       action();
@@ -152,7 +128,7 @@ class Send extends React.Component {
 
   render() {
     const {
-      styles, accounts, navigation, settings
+      styles, accounts, navigation, route, settings
     } = this.props;
 
     let steps = [
@@ -204,6 +180,7 @@ class Send extends React.Component {
             isCameraOpen={this.hideProgressBar}
             key={step.title}
             navigation={navigation}
+            route={route}
             accounts={accounts}
             settings={settings}
           />
