@@ -31,7 +31,7 @@ class ItemTitle extends React.Component {
     });
 
     if (Platform.OS === 'android') {
-      this.props.navigation.setParams({
+      this.props.navigation.setOptions({
         headerVisible: false,
       });
       this.props.showDialog();
@@ -62,13 +62,13 @@ class ItemTitle extends React.Component {
         if (authenticate) {
           this.authenticate(() => {
             navigation.navigate({
-              routeName: target,
+              name: target,
               params: { title },
             });
           });
         } else {
           navigation.navigate({
-            routeName: target,
+            name: target,
             params: { title },
           });
         }
