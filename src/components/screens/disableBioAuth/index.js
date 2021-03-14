@@ -18,22 +18,24 @@ import PassphraseCopy from '../../shared/passphraseCopy';
   }
 )
 class DisableBioAuth extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('title', 'Bio Auth'),
-  });
-
   confirm = () => {
     removePassphraseFromKeyChain();
     this.props.settingsUpdated({ hasStoredPassphrase: false });
     this.props.navigation.pop();
   };
 
+  componentDidMount() {
+    this.props.navigation.setOptions({
+      title: this.props.route.params?.title ?? 'Bio Auth',
+    });
+  }
+
   render() {
     const {
-      t, styles, navigation, passphrase
+      t, styles, route, passphrase
     } = this.props;
 
-    const title = navigation.getParam('title', 'Bio Auth');
+    const title = route.params?.title ?? 'Bio Auth';
 
     return (
       <View style={styles.wrapper}>
