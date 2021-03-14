@@ -38,7 +38,7 @@ import quickActionsList from '../../../constants/quickActions';
 import { deviceHeight } from '../../../utilities/device';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
-console.disableYellowBox = true; // eslint-disable-line
+LogBox.ignoreAllLogs();
 
 @connect(
   state => ({
