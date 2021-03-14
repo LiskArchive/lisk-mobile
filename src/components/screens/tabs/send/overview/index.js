@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Linking, ScrollView } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
+
 import { transactionAdded as transactionAddedAction } from '../../../../../actions/transactions';
 import FormattedNumber from '../../../../shared/formattedNumber';
 import { toRawLsk, fromRawLsk } from '../../../../../utilities/conversions';
@@ -16,6 +17,7 @@ import { tokenMap } from '../../../../../constants/tokens';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';
 import URLs from '../../../../../constants/URLs';
+import HeaderBackButton from '../../../router/headerBackButton';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const getTranslatedMessages = t => ({
@@ -49,40 +51,36 @@ class Overview extends React.Component {
   };
 
   componentDidMount() {
-    const { t, prevStep, navigation } = this.props;
+    const { t, prevStep, navigation, route } = this.props;
     const { send, initialize } = getTranslatedMessages(t);
-    let nextNavigationParams = {
+    let options = {
       title: send.title,
-      action: () => prevStep(),
-      showButtonLeft: true,
+      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />,
     };
 
-    if (navigation.state.params.initialize) {
+    if (route.params?.initialize) {
       this.setState({
         initialize: true,
       });
 
-      nextNavigationParams = {
+      options = {
         title: initialize.title,
-        action: navigation.back,
-        showButtonLeft: false,
+        headerLeft: () => null,
       };
     }
 
-    navigation.setParams({
-      ...nextNavigationParams,
-      initialize: false,
-    });
+    navigation.setOptions(options);
+    navigation.setParams({ initialize: false });
   }
 
   componentDidUpdate(prevProps) {
-    const { t, lng, navigation } = this.props;
+    const { t, lng, navigation, route } = this.props;
 
     if (prevProps.lng !== lng) {
       const { initialize, send } = getTranslatedMessages(t);
 
-      navigation.setParams({
-        title: navigation.state.params.initialize ? initialize : send,
+      navigation.setOptions({
+        title: route.params?.initialize ? initialize : send,
       });
     }
   }
@@ -147,7 +145,7 @@ class Overview extends React.Component {
       t,
       styles,
       theme,
-      navigation,
+      route,
       settings,
       accounts: { followed },
       sharedData: {
@@ -158,7 +156,7 @@ class Overview extends React.Component {
     } = this.props;
 
     const actionType =
-      navigation.state.params.initialize || this.state.initialize
+      route.params?.initialize || this.state.initialize
         ? 'initialize'
         : 'send';
 

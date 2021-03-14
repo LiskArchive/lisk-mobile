@@ -1,5 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
+
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
@@ -10,6 +11,7 @@ import {
 import { tokenMap } from '../../../../../constants/tokens';
 import AmountLSK from './lsk';
 import AmountBTC from './btc';
+import HeaderBackButton from '../../../router/headerBackButton';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
@@ -18,34 +20,20 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
     priceTicker: state.service.priceTicker,
     dynamicFees: state.service.dynamicFees,
     activeToken: state.settings.token.active,
-    }),
+  }),
   {
-  pricesRetrieved: pricesRetrievedAction,
-  dynamicFeesRetrieved: dynamicFeesRetrievedAction,
-  }
+    pricesRetrieved: pricesRetrievedAction,
+    dynamicFeesRetrieved: dynamicFeesRetrievedAction,
+  },
 )
 class Amount extends React.Component {
   componentDidMount() {
-    const { navigation, move } = this.props;
+    const { navigation, prevStep } = this.props;
 
-    navigation.setParams({
+    navigation.setOptions({
       title: isSmallScreen ? 'Send' : 'Amount',
-      showButtonLeft: true,
-      action: () =>
-        move({
-          to: 0,
-        }),
+      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />,
     });
-  }
-
-  componentDidUpdate(prevProps) {
-    const { lng, navigation } = this.props;
-
-    if (prevProps.lng !== lng) {
-      navigation.setParams({
-        title: isSmallScreen ? 'Send' : 'Amount',
-      });
-    }
   }
 
   render() {

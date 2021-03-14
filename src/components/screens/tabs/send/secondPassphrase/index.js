@@ -18,6 +18,7 @@ import Scanner from '../../../../shared/scanner';
 import DropDownHolder from '../../../../../utilities/alert';
 import SecondPassPhraseDarkImg from '../../../../../assets/images/send/secondPassphrase3xDark.png';
 import SecondPassPhraseLightImg from '../../../../../assets/images/send/secondPassphrase3xLight.png';
+import HeaderBackButton from '../../../router/headerBackButton';
 
 const devDefaultSecondPass = process.env.secondPassphrase || '';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
@@ -33,13 +34,12 @@ class SecondPassphrase extends React.Component {
   componentDidMount() {
     const {
       prevStep,
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
 
-    setParams({
+    setOptions({
       title: isSmallScreen ? 'Send' : 'Confirm',
-      showButtonLeft: true,
-      action: () => prevStep(),
+      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />,
     });
 
     if (isAndroid) {
@@ -50,9 +50,9 @@ class SecondPassphrase extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
       const {
-        navigation: { setParams },
+        navigation: { setOptions },
       } = this.props;
-      setParams({
+      setOptions({
         title: isSmallScreen ? 'Send' : 'Confirm',
       });
     }
@@ -97,7 +97,7 @@ class SecondPassphrase extends React.Component {
   onCloseCamera = () => {
     this.props.navigation.setParams({
       showButtonLeft: true,
-      action: () => this.props.prevStep(),
+      headerLeft: props => <HeaderBackButton {...props} onPress={() => prevStep()} safeArea={true} />,
     });
   };
 

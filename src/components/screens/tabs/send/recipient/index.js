@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
+
 import { IconButton } from '../../../../shared/toolBox/button';
 import { tokenMap } from '../../../../../constants/tokens';
 import Input from '../../../../shared/toolBox/input';
@@ -36,7 +37,7 @@ class Recipient extends React.Component {
   componentDidMount() {
     const {
       sharedData,
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
 
     if (sharedData.address) {
@@ -44,19 +45,18 @@ class Recipient extends React.Component {
       setTimeout(() => this.input.focus(), 250);
     }
 
-    setParams({
+    setOptions({
       title: isSmallScreen ? 'Send' : 'Recipient',
-      showButtonLeft: false,
-      action: false,
+      headerLeft: () => null,
     });
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
       const {
-        navigation: { setParams },
+        navigation: { setOptions },
       } = this.props;
-      setParams({
+      setOptions({
         title: isSmallScreen ? 'Send' : 'Recipient',
       });
     }

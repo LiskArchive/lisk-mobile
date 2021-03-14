@@ -40,12 +40,11 @@ class Result extends React.Component {
   componentDidMount() {
     const {
       reset,
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
-    setParams({
+    setOptions({
       title: 'Sent',
-      showButtonLeft: false,
-      action: reset,
+      headerLeft: () => null,
     });
     this.startDate = new Date();
     this.play('created');
@@ -53,11 +52,11 @@ class Result extends React.Component {
 
   componentWillUnmount() {
     const {
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
     clearTimeout(this.timeouts.created);
     clearTimeout(this.timeouts.confirmed);
-    setParams({ title: 'Send' });
+    setOptions({ title: 'Send' });
   }
 
   componentWillUpdate(nextProp) {
@@ -162,10 +161,10 @@ class Result extends React.Component {
           {isNotFollowed && (
             <A
               onPress={() =>
-                navigation.navigate('AddBookmark', {
+                navigation.navigate({ name: 'AddBookmark', params: {
                   title: t('New bookmark'),
                   account: { address },
-                })
+                }})
               }
               style={styles.anchor}
             >
