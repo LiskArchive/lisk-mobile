@@ -6,7 +6,7 @@ import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
-import connect from 'redux-connect-decorator';
+import { useSelector } from 'react-redux';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import Avatar from '../../../shared/avatar';
 import Icon from '../../../shared/toolBox/icon';
@@ -59,7 +59,8 @@ const ExtendedTitle = ({
   return (
     <Animated.View
       style={[
-        styles.wrapper,
+        styles.extendedWrapper,
+        styles[`${type}Extended`],
         {
           opacity: interpolate(scrollY, [0, 90, 130], [0, 0, 1]),
           transform: [
@@ -91,7 +92,7 @@ const ExtendedTitle = ({
           style={styles[`blur${balanceSize}`]}
         />
       ) : (
-        <Text style={[styles.main, styles.theme[`${type}Main`]]}>
+        <Text style={[styles.title, styles.theme[`${type}Main`]]}>
           {`${balance} ${token}`}
         </Text>
       )}
@@ -105,7 +106,8 @@ const SimpleHeader = ({
   <Animated.Text
     numberOfLines={1}
     style={[
-      styles.main,
+      styles[`${type}Simple`],
+      styles.title,
       styles.theme[`${type}Main`],
       { opacity: interpolate(scrollY, [0, 100, 130], [1, 1, 0]) },
     ]}
@@ -116,58 +118,66 @@ const SimpleHeader = ({
   </Animated.Text>
 );
 
-@connect(state => ({
-  language: state.settings.language,
-  }))
-class HomeHeaderTitle extends React.Component {
-  normalizeBalance = balance => {
-    const { language } = this.props;
+const localizedBalance = balance => {
+  const language = 'en';
 
-    return Number(balance).toLocaleString(
-      `${language}-${language.toUpperCase()}`,
-      {
-        maximumFractionDigits: 20,
-      }
-    );
+  return Number(balance).toLocaleString(
+    `${language}-${language.toUpperCase()}`,
+    {
+      maximumFractionDigits: 20,
+    }
+  );
+};
+
+const HomeHeaderTitle = ({
+  styles, type, scrollY, address, balance, placeHolder
+}) => {
+  const { token: { active }, theme, incognito } = useSelector(state => state.settings);
+  const { info } = useSelector(state => state.accounts);
+  const wallet = false;
+
+  const data = {
+    type,
+    placeHolder: type === 'wallet' ? placeHolder : `${tokenMap[active].label} wallet`,
+    scrollY: scrollY || new Animated.Value(0),
+    theme,
+    incognito,
+    token: active,
+    address: type === 'wallet' ? address : info[active]?.address ?? '',
+    balance: type === 'wallet' ? balance : info[active]?.balance ?? 0,
   };
 
-  render() {
-    const {
-      styles, theme, wallet, data, scrollToTop
-    } = this.props;
-
-    return (
-      <View style={styles.container}>
-        {data && (
-          <TouchableWithoutFeedback onPress={() => scrollToTop()}>
-            <View>
-              <SimpleHeader
-                styles={styles}
-                type={data.type}
-                title={data.placeHolder}
-                scrollY={data.scrollY}
-              />
-              <ExtendedTitle
-                balance={
-                  data.balance
-                    ? this.normalizeBalance(fromRawLsk(data.balance))
-                    : '0'
-                }
-                theme={theme}
-                token={data.token}
-                styles={styles}
-                scrollY={data.scrollY}
-                address={data.address}
-                incognito={data.incognito}
-                type={data.type}
-                wallet={wallet}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-      </View>
-    );
-  }
+  return (
+    <View style={[styles.container, styles[`${type}Container`]]}>
+      {data && (
+        <TouchableWithoutFeedback onPress={() => scrollToTop()}>
+          <View>
+            <SimpleHeader
+              styles={styles}
+              type={data.type}
+              title={data.placeHolder}
+              scrollY={data.scrollY}
+            />
+            <ExtendedTitle
+              balance={
+                data.balance
+                  ? localizedBalance(fromRawLsk(data.balance))
+                  : '0'
+              }
+              theme={theme}
+              token={data.token}
+              styles={styles}
+              scrollY={data.scrollY}
+              address={data.address}
+              incognito={data.incognito}
+              type={data.type}
+              wallet={wallet}
+            />
+          </View>
+        </TouchableWithoutFeedback>
+      )}
+    </View>
+  );
 }
 
 export default withTheme(HomeHeaderTitle, getStyles());
