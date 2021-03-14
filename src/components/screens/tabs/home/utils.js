@@ -45,7 +45,7 @@ export const showInitializationModal = ({
       title: 'Initialize your account',
       component: InitializationModal,
       callback: () =>
-        navigation.navigate('Send', { initialize: true }),
+        navigation.navigate({ name: 'Send', params: { initialize: true } }),
     });
   }
 };
