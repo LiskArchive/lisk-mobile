@@ -1,7 +1,9 @@
 import React from 'react';
 import { BackHandler, View } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
+
 import { IconButton } from '../../shared/toolBox/button';
 import Input from '../../shared/toolBox/input';
 import { colors } from '../../../constants/styleGuide';
@@ -25,21 +27,6 @@ import { validateAddress } from '../../../utilities/validators';
   { accountFollowed: accountFollowedAction, accountEdited: accountEditedAction }
 )
 class AddToBookmark extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const title = navigation.getParam('title', '');
-    const onBack = navigation.getParam('action', false);
-    return {
-      title,
-      headerLeft: props => (
-        <HeaderBackButton
-          {...props}
-          onPress={onBack || props.onPress}
-          icon={onBack ? false : 'cross'}
-        />
-      ),
-    };
-  };
-
   activeInputRef = null;
   validateLabel = str => {
     if (str === '') {
@@ -63,8 +50,8 @@ class AddToBookmark extends React.Component {
   };
 
   componentDidMount() {
-    const { navigation, accounts, activeToken } = this.props;
-    const account = navigation.getParam('account', null);
+    const { accounts, activeToken, route } = this.props;
+    const account = route.params?.account ?? null;
     if (!account) {
       setTimeout(() => {
         this.addressRef.focus();
@@ -90,7 +77,7 @@ class AddToBookmark extends React.Component {
   }
 
   onBackButtonPressedAndroid = () => {
-    const action = this.props.navigation.getParam('action', false);
+    const action = this.props.route.params?.action ?? false;
     if (action && typeof action === 'function') {
       action();
       return true;
@@ -114,9 +101,9 @@ class AddToBookmark extends React.Component {
   };
 
   onCloseScanner = () => {
-    this.props.navigation.setParams({
-      action: false,
-    });
+    this.props.navigation.dispatch(
+      CommonActions.setParams({ action: false })
+    );
   };
 
   setAddress = value => {
@@ -154,10 +141,10 @@ class AddToBookmark extends React.Component {
     if (incomingData && labelValidity === 0) {
       const action = editMode ? accountEdited : accountFollowed;
       action(incomingData.address, this.state.label.value);
-      navigation.goBack();
+      navigation.dispatch(CommonActions.goBack());
     } else if (addressValidity === 0 && labelValidity === 0) {
       accountFollowed(address.value, label.value);
-      navigation.goBack();
+      navigation.dispatch(CommonActions.goBack());
     } else {
       this.setState({
         address: {
