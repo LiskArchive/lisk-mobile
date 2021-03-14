@@ -1,6 +1,6 @@
 import React from 'react';
 import { translate } from 'react-i18next';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { generatePassphrase } from '../../../../utilities/passphrase';
 import Slider from '../../intro/heading';
@@ -17,18 +17,13 @@ class Intro extends React.Component {
   componentDidMount() {
     const {
       t,
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
 
-    const passphrase = this.props.navigation.getParam(
-      'passphrase',
-      generatePassphrase()
-    );
+    const passphrase = this.props.route.params?.passphrase ?? generatePassphrase();
     this.setState({ passphrase });
 
-    setParams({
-      showButtonLeft: true,
-      action: false,
+    setOptions({
       title: t('Account creation'),
     });
   }
