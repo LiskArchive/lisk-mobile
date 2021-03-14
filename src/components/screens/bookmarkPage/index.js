@@ -164,9 +164,7 @@ class Bookmark extends React.Component {
                   color={colors[theme].white}
                   iconSize={21}
                   onClick={() =>
-                    navigation.navigate('AddBookmark', {
-                      title: t('New bookmark'),
-                    })
+                    navigation.navigate({ name: 'AddBookmark', params: { title: t('New bookmark') } })
                   }
                 />
               </Animated.View>
