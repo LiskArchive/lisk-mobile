@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { KeyboardTrackingView } from 'react-native-keyboard-tracking-view';
-import { withNavigation } from 'react-navigation';
+import { withNavigation } from '@react-navigation/compat';
 import { PrimaryButton } from './button';
 import theme from './styles';
 import { deviceType } from '../../../utilities/device';
