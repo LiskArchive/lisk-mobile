@@ -1,9 +1,10 @@
 import { Platform, Dimensions, NativeModules } from 'react-native';
-import { Header } from 'react-navigation';
+// import { Header } from 'react-navigation';
 import DeviceInfo from 'react-native-device-info';
 import { Appearance } from 'react-native-appearance/src/index.tsx';
 
 const { width, height } = Dimensions.get('window');
+const Header = { HEIGHT: 40 };
 
 /**
  * Returns a simple string defining the device type
@@ -11,27 +12,10 @@ const { width, height } = Dimensions.get('window');
  * @returns {String} - iOSx for iPhoneX, iOS for the rest of iPhones
  *  and android for all the android phones
  */
-
-/**
- * List of Apple's mobile device codes types
- * https://gist.github.com/adamawolf/3048717
- */
-const iPhoneXOrSuperiorIDs = [
-  'iPhone10,3', // iPhone X Global
-  'iPhone10,6', // iPhone X GSM
-  'iPhone11,2', // iPhone Xs
-  'iPhone11,4', // iPhone Xs Max
-  'iPhone11,6', // iPhone Xs Max Global
-  'iPhone11,8', // iPhone Xr
-];
-
-const isIphoneXOrSuperior = () =>
-  iPhoneXOrSuperiorIDs.includes(DeviceInfo.getDeviceId());
-
 export const deviceType = () => {
-  if (Platform.OS === 'ios' && isIphoneXOrSuperior()) {
+  if (Platform.OS === 'ios' && DeviceInfo.hasNotch()) {
     return 'iOSx';
-  } else if (Platform.OS === 'ios' && !isIphoneXOrSuperior()) {
+  } else if (Platform.OS === 'ios' && !DeviceInfo.hasNotch()) {
     return 'iOS';
   }
   return 'android';
@@ -51,7 +35,7 @@ export const deviceHeight = () => height;
  * @returns {Number} - The height of the header
  */
 export const headerHeight = () => {
-  if (isIphoneXOrSuperior()) {
+  if (Platform.OS === 'ios' && DeviceInfo.hasNotch()) {
     return Header.HEIGHT + 23;
   }
   return Header.HEIGHT;
@@ -67,7 +51,7 @@ export const tabBarHeight = () => 49;
  * @returns {Number} - The height of the view under the header and above the tabs bar
  */
 export const viewportHeight = () =>
-  deviceHeight() - headerHeight() - 56 - (deviceType() === 'iOSx' ? 24 : 0);
+  deviceHeight() - headerHeight() - 56 - (DeviceInfo.hasNotch() ? 24 : 0);
 
 export const SCREEN_HEIGHTS = {
   SM: 640, // 640
