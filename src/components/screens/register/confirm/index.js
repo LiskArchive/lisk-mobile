@@ -1,12 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { P } from '../../../shared/toolBox/typography';
 import { PrimaryButton, Button } from '../../../shared/toolBox/button';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../../utilities/device';
 import { assembleWordOptions } from '../../../../utilities/passphrase';
+import HeaderBackButton from '../../router/headerBackButton';
 
 /**
  * Returns a random index which doesn't exist in list
@@ -59,10 +60,10 @@ class Confirm extends React.Component {
     const {
       t,
       prevStep,
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
-    setParams({
-      action: prevStep,
+    setOptions({
+      headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
       title:
         deviceHeight() >= SCREEN_HEIGHTS.SM
           ? t('Passphrase verification')
@@ -94,11 +95,6 @@ class Confirm extends React.Component {
     });
   };
 
-  confirm = status => {
-    this.setState({
-      buttonStatus: !status,
-    });
-  };
   toggleOptions(index) {
     const temp = this.state.answers;
     temp[index].value = undefined;
