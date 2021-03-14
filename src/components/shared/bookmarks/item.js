@@ -21,6 +21,7 @@ import ModalHolder from '../../../utilities/modal';
 )
 class draggableItem extends React.Component {
   _deltaX = new Animated.Value(0);
+  _deltaY = new Animated.Value(0);
 
   onDelete = () => {
     const { data, accountUnFollowed } = this.props;
@@ -129,6 +130,7 @@ class draggableItem extends React.Component {
           ]}
           onDrag={() => setRef(this.ref, data.address)}
           animatedValueX={this._deltaX}
+          animatedValueY={this._deltaY}
         >
           <TouchableOpacity
             activeOpacity={1}
