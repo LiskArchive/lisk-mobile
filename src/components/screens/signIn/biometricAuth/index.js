@@ -63,7 +63,7 @@ class BiometricAuth extends React.Component {
   };
 
   onCreateAccount = () => {
-    this.props.navigation.navigate('Register');
+    this.props.navigation.navigate({ name: 'Register' });
   };
 
   componentDidMount() {
