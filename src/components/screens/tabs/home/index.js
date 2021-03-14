@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Animated, StatusBar, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
-import { withNavigationFocus } from 'react-navigation';
+import { withNavigationFocus } from '@react-navigation/compat';
 import {
   transactionsReset as transactionsResetAction,
   transactionsLoaded as transactionsLoadedAction,
@@ -59,38 +59,18 @@ class Home extends React.Component {
   scrollView = null;
   lastActiveToken = null;
 
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      headerTitle: (
-        <HomeHeaderTitle scrollToTop={params.scrollToTop} data={params.title} />
-      ),
-      headerStyle: {
-        backgroundColor: 'transparent',
-        overflow: 'hidden',
-        borderBottomWidth: 0,
-        elevation: 0,
-      },
-    };
-  };
-
   setHeader = () => {
     const {
-      activeToken,
-      navigation: { setParams },
-      account,
-      incognito,
+      navigation: { setOptions },
     } = this.props;
-    setParams({
-      title: {
-        placeHolder: `${tokenMap[activeToken].label} Wallet`,
-        type: 'home',
-        token: activeToken,
-        balance: account[activeToken].balance,
-        address: account[activeToken].address,
-        scrollY: this.scrollY,
-        incognito,
-      },
+    setOptions({
+      headerTitle: () => (
+        <HomeHeaderTitle
+          type="home"
+          scrollToTop={this.scrollToTop}
+          scrollY={this.scrollY}
+        />
+      ),
     });
   };
 
@@ -114,6 +94,7 @@ class Home extends React.Component {
   };
 
   screenWillFocus = () => {
+    console.log(' screenWillFocus screenWillFocus screenWillFocus');
     if (this.lastActiveToken === null) {
       this.bindInfiniteScroll();
       this.setHeader();
@@ -127,16 +108,15 @@ class Home extends React.Component {
 
   componentDidMount() {
     const {
-      navigation: { addListener, state },
-      navigation,
+      navigation: { addListener },
       settingsUpdated,
       incognito,
+      route,
     } = this.props;
     addListener('willFocus', this.screenWillFocus);
-    if (state.params && state.params.discreet && !incognito) {
+    if (route.params && route.params.discreet && !incognito) {
       settingsUpdated({ incognito: true });
     }
-    navigation.setParams({ scrollToTop: this.scrollToTop });
     this.accountFetchTimeout = setTimeout(() => {
       this.fetchInactiveTokensAccounts();
     }, 1000);
