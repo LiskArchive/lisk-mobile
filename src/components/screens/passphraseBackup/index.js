@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { translate } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 import PassphraseCopy from '../../shared/passphraseCopy';
