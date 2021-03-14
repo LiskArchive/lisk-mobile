@@ -48,15 +48,15 @@ class TransactionDetail extends React.Component {
   };
 
   componentDidMount() {
-    const { theme, navigation } = this.props;
-    const tx = navigation.getParam('tx', null);
+    const { theme, navigation, route } = this.props;
+    const tx = route.params?.tx ?? null;
     let backAction = () => navigation.pop();
 
     if (tx) {
       this.setState({ tx }, () => this.retrieveTransaction(tx.id));
     } else {
-      this.retrieveTransaction(navigation.getParam('txId', false));
-      backAction = () => navigation.navigate('Home');
+      this.retrieveTransaction(route.params?.txId ?? false);
+      backAction = () => navigation.navigate({ name: 'Home' });
     }
     navigation.setParams({
       theme,
@@ -95,11 +95,11 @@ class TransactionDetail extends React.Component {
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
     const {
-      t, activeToken, navigation, account
+      t, activeToken, account, route,
     } = this.props;
     try {
       const { data } = await transactionsAPI.get(activeToken, {
-        address: navigation.getParam('account', account[activeToken].address),
+        address: route.params?.account ?? account[activeToken].address,
         id,
       });
       const tx = data[0] || {};
@@ -141,12 +141,12 @@ class TransactionDetail extends React.Component {
 
   render() {
     const {
-      navigation,
       styles,
       account,
       t,
       activeToken,
       language,
+      route,
     } = this.props;
     const {
       tx, error, refreshing, upvotes, downvotes
@@ -168,11 +168,8 @@ class TransactionDetail extends React.Component {
       );
     }
 
-    const walletAccountAddress = navigation.getParam(
-      'account',
-      account[activeToken].address
-    );
-    const incognito = navigation.getParam('incognito', null);
+    const walletAccountAddress = route.params?.account ?? account[activeToken].address;
+    const incognito = route.params?.incognito ?? null;
     const isDelegateRegistration = tx.type === 2;
     const isVote = tx.type === 3;
 
