@@ -3,12 +3,14 @@ import { AppState } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
+
 import CameraAccess from './cameraAccess';
 import CameraOverlay from './cameraOverlay';
 import CameraRoll from './cameraRoll';
 import ClosureOverlay from './closureOverlay';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
+import HeaderBackButton from '../../screens/router/headerBackButton';
 
 class Scanner extends React.Component {
   state = {
@@ -44,11 +46,16 @@ class Scanner extends React.Component {
     const { camera } = this.state;
     const { isCameraOpen } = this.props;
 
-    this.props.navigation.setParams({
-      tabBar: camera.visible,
-      showButtonLeft: !camera.visible,
-      action: this.toggleCamera,
-      onBackPress: this.toggleCamera,
+    this.props.navigation.setOptions({
+      headerLeft: props => (
+        <HeaderBackButton
+          {...props}
+          onPress={(...rest) => {
+            props.onPress(...rest);
+            this.toggleCamera();
+          }}
+        />
+      ),
     });
 
     camera.visible = !camera.visible;
@@ -62,10 +69,17 @@ class Scanner extends React.Component {
 
   toggleGallery = () => {
     const { photo } = this.state;
-    this.props.navigation.setParams({
-      showButtonLeft: true,
-      action: !photo.visible ? this.toggleGallery : this.toggleCamera,
-      onBackPress: this.toggleGallery,
+    this.props.navigation.setOptions({
+      headerLeft: props => (
+        <HeaderBackButton
+          {...props}
+          onPress={(...rest) => {
+            props.onPress(...rest);
+            this.toggleGallery();
+          }}
+        />
+      ),
+      // action: !photo.visible ? this.toggleGallery : this.toggleCamera,
     });
 
     photo.visible = !photo.visible;
@@ -78,9 +92,9 @@ class Scanner extends React.Component {
     camera.visible = false;
     this.setState({ photo, camera });
 
-    this.props.navigation.setParams({
+    this.props.navigation.setOptions({
       tabBar: !photo.visible,
-      showButtonLeft: photo.visible,
+      headerLeft: true,
     });
 
     if (items.length > 0) {
