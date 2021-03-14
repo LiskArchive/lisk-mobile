@@ -1,4 +1,5 @@
 import React from 'react';
+import { LogBox } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import {
@@ -11,7 +12,7 @@ import {
 } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
-import { NavigationActions } from 'react-navigation';
+import { CommonActions } from '@react-navigation/native';
 import QuickActions from 'react-native-quick-actions'; // eslint-disable-line
 import FingerprintOverlay from '../../shared/fingerprintOverlay';
 import styles from './styles';
@@ -97,7 +98,7 @@ class SignIn extends React.Component {
     } catch (error) {
       sensorType = null;
     }
-    const signOut = this.props.navigation.getParam('signOut');
+    const signOut = this.props.route.params?.signOut;
     const delay = this.state.view === 'splash' && !signOut ? 1100 : 0;
     // Update the store
     this.props.settingsUpdated({
@@ -173,10 +174,10 @@ class SignIn extends React.Component {
     if (this.deepLinkURL) {
       this.navigateToDeepLink(this.deepLinkURL);
     } else {
-      this.props.navigation.reset(
-        [NavigationActions.navigate({ routeName: 'Main' })],
-        0
-      );
+      this.props.navigation.reset({
+        index: 0,
+        routes: [{ name: 'Main' }],
+      });
     }
   };
 
@@ -233,23 +234,23 @@ class SignIn extends React.Component {
         });
       }
 
-      navigation.navigate(linkedScreen.name, linkedScreen.params);
+      navigation.navigate({ name: linkedScreen.name, params: linkedScreen.params });
     } else {
       // @TODO: Navigate to different page or display an error message for unmapped deep links.
-      navigation.navigate('Home');
+      navigation.navigate({ name: 'Home' });
     }
   };
 
   setupDeepLinking() {
     // After sign out, there's no need to consume the launch URL for further sign-ins.
-    if (!this.props.navigation.getParam('signOut')) {
+    if (!this.props.route.params || !this.props.route.params.signOut) {
       Linking.getInitialURL()
         .then(url => {
           if (url) {
             const { path, query } = parseDeepLink(url);
             if (path === 'register') {
               // this.passphraseInput.blur();
-              this.props.navigation.navigate('Register', query);
+              this.props.navigation.navigate({ name: 'Register', params: query });
             } else {
               this.deepLinkURL = url;
             }
@@ -275,7 +276,7 @@ class SignIn extends React.Component {
   };
 
   setupQuickActions() {
-    if (!this.props.navigation.getParam('signOut')) {
+    if (!this.props.route.params || !this.props.route.params.signOut) {
       QuickActions.setShortcutItems(quickActionsList);
       QuickActions.popInitialAction()
         .then(action => {
@@ -344,7 +345,7 @@ class SignIn extends React.Component {
   render() {
     const { view, storedPassphrase, androidDialog } = this.state;
     const { sensorType, hasStoredPassphrase } = this.props.settings;
-    const signOut = this.props.navigation.getParam('signOut');
+    const signOut = this.props.route.params?.signOut;
     return (
       <View style={styles.wrapper}>
         <Splash
