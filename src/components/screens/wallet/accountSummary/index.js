@@ -95,7 +95,7 @@ class AccountSummary extends React.Component {
       });
     } else {
       navigation.navigate({
-        routeName: 'AddBookmark',
+        name: 'AddBookmark',
         params: {
           account,
           title: t('Add bookmark'),
@@ -230,9 +230,9 @@ class AccountSummary extends React.Component {
             color={colors[theme].ultramarineBlue}
             iconSize={20}
             onClick={() =>
-              navigation.navigate('Send', {
+              navigation.navigate({ name: 'Send', params: {
                 query: { address: account.address },
-              })
+              }})
             }
           />
         </AView>
