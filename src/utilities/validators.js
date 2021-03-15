@@ -1,4 +1,4 @@
-import bitcoin from 'bitcoinjs-lib';
+import { address as BTCAddress } from 'bitcoinjs-lib';
 import btcConfig from '../../btc.config';
 import reg from '../constants/regex';
 import { tokenMap } from '../constants/tokens';
@@ -23,8 +23,8 @@ export const validateAddress = (tokenType, address) => {
     // Reference: https://github.com/bitcoinjs/bitcoinjs-lib/issues/890
     case tokenMap.BTC.key:
       try {
-        bitcoin.address.fromBase58Check(address); // eliminates segwit addresses
-        bitcoin.address.toOutputScript(address, btcConfig.network);
+        BTCAddress.fromBase58Check(address); // eliminates segwit addresses
+        BTCAddress.toOutputScript(address, btcConfig.network);
         return 0;
       } catch (e) {
         return 1;
