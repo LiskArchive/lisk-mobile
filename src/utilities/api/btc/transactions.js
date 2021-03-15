@@ -1,4 +1,4 @@
-import bitcoin from 'bitcoinjs-lib';
+import { TransactionBuilder, ECPair } from 'bitcoinjs-lib';
 import config from '../../../../btc.config';
 import { extractAddress, getDerivedPathFromPassphrase } from './account';
 import { merge } from '../../helpers';
@@ -172,7 +172,7 @@ export const create = ({
         sumOfConsumedOutputs += tx.value;
       }
 
-      const txb = new bitcoin.TransactionBuilder(config.network);
+      const txb = new TransactionBuilder(config.network);
 
       // Add inputs from unspent txOuts
       // eslint-disable-next-line
@@ -199,7 +199,7 @@ export const create = ({
 
       // Sign inputs
       const derivedPath = getDerivedPathFromPassphrase(passphrase);
-      const keyPair = bitcoin.ECPair.fromWIF(
+      const keyPair = ECPair.fromWIF(
         derivedPath.toWIF(),
         config.network
       );
