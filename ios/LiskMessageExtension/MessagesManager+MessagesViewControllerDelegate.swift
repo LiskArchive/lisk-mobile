@@ -2,7 +2,6 @@
 //  MessagesManager+MessagesViewControllerDelegate.swift
 //  LiskMessageExtension
 //
-
 import Foundation
 import Messages
 

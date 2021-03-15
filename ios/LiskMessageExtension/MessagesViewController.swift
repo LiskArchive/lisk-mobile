@@ -2,7 +2,6 @@
 //  MessagesViewController.swift
 //  LiskMessageExtension
 //
-
 import UIKit
 import Messages
 

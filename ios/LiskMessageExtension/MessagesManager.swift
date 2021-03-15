@@ -2,7 +2,6 @@
 //  MessagesManager.swift
 //  LiskMessageExtension
 //
-
 import Foundation
 import Messages
 
