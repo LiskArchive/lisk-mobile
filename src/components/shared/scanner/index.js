@@ -7,10 +7,8 @@ import QRCode from '@remobile/react-native-qrcode-local-image';
 import CameraAccess from './cameraAccess';
 import CameraOverlay from './cameraOverlay';
 import CameraRoll from './cameraRoll';
-import ClosureOverlay from './closureOverlay';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
-import HeaderBackButton from '../../screens/router/headerBackButton';
 
 class Scanner extends React.Component {
   state = {
@@ -46,20 +44,10 @@ class Scanner extends React.Component {
     const { camera } = this.state;
     const { isCameraOpen } = this.props;
 
-    this.props.navigation.setOptions({
-      headerLeft: props => (
-        <HeaderBackButton
-          {...props}
-          onPress={(...rest) => {
-            props.onPress(...rest);
-            this.toggleCamera();
-          }}
-        />
-      ),
-    });
-
     camera.visible = !camera.visible;
-    if (isCameraOpen) isCameraOpen(camera.visible);
+    if (typeof isCameraOpen === 'function') {
+      isCameraOpen(camera.visible);
+    }
     this.setState({ camera });
 
     if (!camera.visible && typeof this.props.onClose === 'function') {
@@ -69,19 +57,6 @@ class Scanner extends React.Component {
 
   toggleGallery = () => {
     const { photo } = this.state;
-    this.props.navigation.setOptions({
-      headerLeft: props => (
-        <HeaderBackButton
-          {...props}
-          onPress={(...rest) => {
-            props.onPress(...rest);
-            this.toggleGallery();
-          }}
-        />
-      ),
-      // action: !photo.visible ? this.toggleGallery : this.toggleCamera,
-    });
-
     photo.visible = !photo.visible;
     this.setState({ photo });
   };
@@ -130,27 +105,26 @@ class Scanner extends React.Component {
             onBarCodeRead={this.readQRcode}
             barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
             type={RNCamera.Constants.Type.back}
+            captureAudio={false}
             notAuthorizedView={
               <CameraAccess close={this.toggleCamera} fullScreen={fullScreen} />
             }
             pendingAuthorizationView={
               <CameraAccess close={this.toggleCamera} />
             }
-            permissionDialogTitle={permissionDialogTitle}
-            permissionDialogMessage={permissionDialogMessage}
+            androidCameraPermissionOptions={{
+              title: permissionDialogTitle,
+              message: permissionDialogMessage,
+              buttonPositive: 'Ok',
+              buttonNegative: 'Cancel',
+            }}
           >
-            {readFromCameraRoll ? (
-              <CameraOverlay
-                containerStyles={cameraOverlay}
-                toggleGallery={this.toggleGallery}
-                photoPermission={photo.permission}
-              />
-            ) : (
-              <ClosureOverlay
-                close={this.toggleCamera}
-                containerStyles={cameraOverlay}
-              />
-            )}
+            <CameraOverlay
+              containerStyles={cameraOverlay}
+              toggleGallery={this.toggleGallery}
+              photoPermission={photo.permission}
+              close={this.toggleCamera}
+            />
           </RNCamera>
         ) : null}
         <CameraRoll
