@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
+import { CommonActions } from '@react-navigation/native';
 import { H4, P } from '../../../shared/toolBox/typography';
 import FingerprintOverlay from '../../../shared/fingerprintOverlay';
 import ItemTitle from './itemTitle';
