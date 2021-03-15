@@ -136,6 +136,7 @@ navigationOptions.PassphraseBackup = {
 
 navigationOptions.AddBookmark = {
   title: 'New bookmark',
+  headerLeft: props => <HeaderBackButton {...props} />,
 };
 
 navigationOptions.SignIn = {
