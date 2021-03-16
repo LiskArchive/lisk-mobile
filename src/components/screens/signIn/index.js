@@ -234,7 +234,10 @@ class SignIn extends React.Component {
         });
       }
 
-      navigation.navigate({ name: linkedScreen.name, params: linkedScreen.params });
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Main' , params: { screen: linkedScreen.name, params: linkedScreen.params }}],
+      });
     } else {
       // @TODO: Navigate to different page or display an error message for unmapped deep links.
       navigation.navigate({ name: 'Home' });
