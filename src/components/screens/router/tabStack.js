@@ -1,21 +1,14 @@
-import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute, CommonActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HeaderBackground from './headerBackground';
-import HeaderTitle from './headerTitle';
+
 import Send from '../tabs/send';
 import Bookmarks from '../bookmarkPage';
 import Request from '../tabs/request';
 import Settings from '../tabs/settings';
 import TabBarIcon from './tabBarIcon';
 import Home from '../tabs/home';
-// import TabBarComponent from './tabBarComponent';
-import DynamicHeaderBackground from './dynamicHeaderBackground';
-import HomeHeaderTitle from './homeHeaderTitle';
-import { t } from './helper';
-import colors from '../../../constants/styleGuide/colors';
 import navigationOptions from './navigationOptions';
 
 export const getHeaderOptions = ({ route, navigation }) => {
@@ -43,16 +36,14 @@ const SendNavigator = () => (
   </SendStack.Navigator>
 );
 
-const Tabs = ({ navigation, route }) => {
-  return (
-    <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen name="Home" component={HomeNavigator} options={getTabBarIcon('home')} />
-      <Tab.Screen name="Request" component={Request} options={getTabBarIcon('request')} />
-      <Tab.Screen name="Send" component={SendNavigator} options={getTabBarIcon('send')} />
-      <Tab.Screen name="Bookmarks" component={Bookmarks} options={getTabBarIcon('bookmark')} />
-      <Tab.Screen name="Settings" component={Settings} options={getTabBarIcon('settings')} />
-    </Tab.Navigator>
-  );
-};
+const Tabs = () => (
+  <Tab.Navigator initialRouteName="Home">
+    <Tab.Screen name="Home" component={HomeNavigator} options={getTabBarIcon('home')} />
+    <Tab.Screen name="Request" component={Request} options={getTabBarIcon('request')} />
+    <Tab.Screen name="Send" component={SendNavigator} options={getTabBarIcon('send')} />
+    <Tab.Screen name="Bookmarks" component={Bookmarks} options={getTabBarIcon('bookmark')} />
+    <Tab.Screen name="Settings" component={Settings} options={getTabBarIcon('settings')} />
+  </Tab.Navigator>
+);
 
 export default Tabs;
