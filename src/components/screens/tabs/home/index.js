@@ -94,7 +94,6 @@ class Home extends React.Component {
   };
 
   screenWillFocus = () => {
-    console.log(' screenWillFocus screenWillFocus screenWillFocus');
     if (this.lastActiveToken === null) {
       this.bindInfiniteScroll();
       this.setHeader();
@@ -119,6 +118,7 @@ class Home extends React.Component {
     }
     this.accountFetchTimeout = setTimeout(() => {
       this.fetchInactiveTokensAccounts();
+      resetTxAndFetch(this.props);
     }, 1000);
     setTimeout(() => {
       showInitializationModal(this.props);
