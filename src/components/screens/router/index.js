@@ -5,14 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 
 import AddBookmark from '../addBookmark';
-// import HeaderBackground from './headerBackground';
-// import HeaderTitle from './headerTitle';
-// import HeaderPlaceholderButton from './headerPlaceholderButton';
-// import MainStack from './mainStack';
-
-// import React from 'react';
-// import { createStackNavigator } from '@react-navigation/stack';
-// import { SafeAreaView } from 'react-native-safe-area-context';
 import SignIn from '../signIn';
 import TxDetail from '../txDetail';
 import Register from '../register';
@@ -20,21 +12,13 @@ import Wallet from '../wallet';
 import About from '../about';
 import CurrencySelection from '../currencySelection';
 import ManageAssets from '../manageAssets';
-// import LanguageSelection from '../languageSelection';
 import Terms from '../terms';
 import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
-// import HeaderBackground from './headerBackground';
-// import HeaderTitle from './headerTitle';
-// import HeaderPlaceholderButton from './headerPlaceholderButton';
-import HeaderBackButton from './headerBackButton';
-// import TokenSwitcher from './tokenSwitcher';
-// import registerHeaderTitle from './registerHeaderTitle';
 import Tabs from './tabStack';
 import {colors} from '../../../constants/styleGuide';
-// import { t, headerStyle } from './helper';
 import {getHeaderOptions} from './tabStack';
 import navigationOptions from './navigationOptions';
 
@@ -58,12 +42,14 @@ const lightTabs = {
   border: 'transparent',
 };
 
-const MainNavigator = () => {
+const MainNavigator = ({ route }) => {
   const { theme } = useSelector(state => state.settings);
   const themeColors = {
     dark: theme === 'light',
     colors: theme === 'light' ? darkTabs : lightTabs,
   };
+
+  console.log('MainNavigator', route?.params);
 
   return (
     <SafeAreaProvider>
