@@ -25,6 +25,18 @@ PODS:
   - lottie-react-native (3.5.0):
     - lottie-ios (~> 3.1.8)
     - React
+  - Permission-BluetoothPeripheral (3.0.1):
+    - RNPermissions
+  - Permission-Calendars (3.0.1):
+    - RNPermissions
+  - Permission-Camera (3.0.1):
+    - RNPermissions
+  - Permission-Contacts (3.0.1):
+    - RNPermissions
+  - Permission-FaceID (3.0.1):
+    - RNPermissions
+  - Permission-PhotoLibrary (3.0.1):
+    - RNPermissions
   - RCTRequired (0.63.4)
   - RCTTypeSafety (0.63.4):
     - FBLazyVector (= 0.63.4)
@@ -322,6 +334,12 @@ DEPENDENCIES:
   - Interactable (from `../node_modules/react-native-interactable`)
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
+  - Permission-BluetoothPeripheral (from `../node_modules/react-native-permissions/ios/BluetoothPeripheral`)
+  - Permission-Calendars (from `../node_modules/react-native-permissions/ios/Calendars`)
+  - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera`)
+  - Permission-Contacts (from `../node_modules/react-native-permissions/ios/Contacts`)
+  - Permission-FaceID (from `../node_modules/react-native-permissions/ios/FaceID`)
+  - Permission-PhotoLibrary (from `../node_modules/react-native-permissions/ios/PhotoLibrary`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -394,6 +412,18 @@ EXTERNAL SOURCES:
     :path: "../node_modules/lottie-ios"
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
+  Permission-BluetoothPeripheral:
+    :path: "../node_modules/react-native-permissions/ios/BluetoothPeripheral"
+  Permission-Calendars:
+    :path: "../node_modules/react-native-permissions/ios/Calendars"
+  Permission-Camera:
+    :path: "../node_modules/react-native-permissions/ios/Camera"
+  Permission-Contacts:
+    :path: "../node_modules/react-native-permissions/ios/Contacts"
+  Permission-FaceID:
+    :path: "../node_modules/react-native-permissions/ios/FaceID"
+  Permission-PhotoLibrary:
+    :path: "../node_modules/react-native-permissions/ios/PhotoLibrary"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -501,6 +531,12 @@ SPEC CHECKSUMS:
   Interactable: 334971ca372efcb6791bb47f81f3265963c47f3e
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   lottie-react-native: 1fb4ce21d6ad37dab8343eaff8719df76035bd93
+  Permission-BluetoothPeripheral: 5b9259419dc19ad903c5718c9822ae78583317f4
+  Permission-Calendars: 19c4fe30f4de76b62352d93c72456ed6c77cbac7
+  Permission-Camera: 0d2d15352e9c54c3ea8686c8c21fb1a9edf3431b
+  Permission-Contacts: ee9db81f22b95bb4d46925c68c16cdfc66591de0
+  Permission-FaceID: 2f7fd19556aad57344ef2b411b392da7331dce5d
+  Permission-PhotoLibrary: e5d0500209f22e2a5b281501cd3744a965747726
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b
   React: b0a957a2c44da4113b0c4c9853d8387f8e64e615
@@ -550,6 +586,6 @@ SPEC CHECKSUMS:
   TcpSockets: 8d839b9b14f6f344d98e4642ded13ab3112b462d
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 689891bb7bf65e88530a067a0106d275569078dc
+PODFILE CHECKSUM: be43261d6486c313e6af32eebf544380979a5766
 
 COCOAPODS: 1.10.1
