@@ -10,12 +10,9 @@ import Reference from './reference';
 import Overview from './overview';
 import SecondPassphrase from './secondPassphrase';
 import Result from './result';
-import { IconButton } from '../../../shared/toolBox/button';
-import { themes, colors } from '../../../../constants/styleGuide';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../../constants/tokens';
-import TokenSwitcher from '../../router/tokenSwitcher';
 import progressBar from '../../../shared/progressBar';
 
 @connect(
@@ -31,7 +28,7 @@ class Send extends React.Component {
   };
 
   componentDidMount() {
-    const { navigation } = this.props;
+    const { navigation, route } = this.props;
 
     this.subs = [
       navigation.addListener('didFocus', this.didFocus),
@@ -48,9 +45,10 @@ class Send extends React.Component {
     if (prevProps.settings.token.active !== this.props.settings.token.active) {
       this.resetMultiStep();
     } else {
-      // this.checkQuery(
-      //   prevProps.navigation.dangerouslyGetParent().getParam('query', {})
-      // );
+      this.checkQuery(
+        // prevProps.navigation.dangerouslyGetParent().getParam('query', {})
+        prevProps.route.params?.query,
+      );
     }
   }
 
@@ -66,9 +64,11 @@ class Send extends React.Component {
   };
 
   checkQuery = (prevQuery = {}) => {
-    const query = this.props.navigation
-      .dangerouslyGetParent()
-      .getParam('query', {});
+    // const parent = this.props.navigation
+    //   .dangerouslyGetParent()
+    //   .getParam('ali', 'no');
+
+    const query = this.props.route.params?.query ?? {};
 
     if (prevQuery !== query && query && Object.keys(query).length) {
       this.resetMultiStep(query);
