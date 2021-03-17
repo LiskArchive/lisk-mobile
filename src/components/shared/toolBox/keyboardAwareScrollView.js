@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+import { useHeaderHeight } from '@react-navigation/stack';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { KeyboardTrackingView } from 'react-native-keyboard-tracking-view';
@@ -7,24 +8,30 @@ import { PrimaryButton } from './button';
 import theme from './styles';
 import { deviceType } from '../../../utilities/device';
 
-class ScrollAwareActionBar extends React.Component {
-  state = {
-    buttonStyle: theme.footerButton,
-  };
+const ScrollAwareActionBar = ({
+  buttonTestID,
+  noTheme,
+  disabled,
+  onSubmit,
+  button,
+  children,
+  styles,
+  viewIsInsideTab,
+  noFooterButton,
+  extraContent,
+}) => {
+  const [buttonStyle, SetButtonStyle] = useState(theme.footerButton);
+  const headerHeight = useHeaderHeight();
 
-  toggleButtonView = status => {
+  const toggleButtonView = status => {
     if (status) {
-      this.setState({ buttonStyle: theme.footerButton });
+      SetButtonStyle(theme.footerButton);
     } else {
-      this.setState({ buttonStyle: theme.keyboardStickyButton });
+      SetButtonStyle(theme.keyboardStickyButton);
     }
   };
 
-  renderButton = style => {
-    const {
-      buttonTestID, noTheme, disabled, onSubmit, button
-    } = this.props;
-
+  const renderButton = style => {
     return (
       <PrimaryButton
         testID={buttonTestID}
@@ -37,75 +44,67 @@ class ScrollAwareActionBar extends React.Component {
     );
   };
 
-  render() {
-    const {
-      children,
-      styles,
-      viewIsInsideTab,
-      noFooterButton,
-      extraContent,
-    } = this.props;
-    const { buttonStyle } = this.state;
+  /*
+   * KeyboardTrackingView library is not optimized for iPhone X and
+   * is not compatible with SafeAreaView, so screens outside the
+   * tab router need to add marginBottom in order to render
+   * the correct botton's height. The following workaround fixes
+   * this issue until the library supports SafeAreaView
+   */
+  const shouldBeOptimizedForIphoneX =
+    !viewIsInsideTab && deviceType() === 'iOSx';
 
-    /*
-     * KeyboardTrackingView library is not optimized for iPhone X and
-     * is not compatible with SafeAreaView, so screens outside the
-     * tab router need to add marginBottom in order to render
-     * the correct botton's height. The following workaround fixes
-     * this issue until the library supports SafeAreaView
-     */
-    const shouldBeOptimizedForIphoneX =
-      !viewIsInsideTab && deviceType() === 'iOSx';
+  const stickyButtonOffset = deviceType() === 'iOSx' ? 10 : 14;
 
-    return (
-      <Fragment>
-        <KeyboardAwareScrollView
-          enableOnAndroid={true}
-          contentContainerStyle={[
-            styles ? styles.container : null,
-            theme.scrollViewContainer,
+  return (
+    <Fragment>
+      <KeyboardAwareScrollView
+        enableOnAndroid={true}
+        contentContainerStyle={[
+          styles ? styles.container : null,
+          theme.scrollViewContainer,
+        ]}
+        onKeyboardWillHide={() => toggleButtonView(true)}
+        onKeyboardDidHide={() => toggleButtonView(true)}
+        onKeyboardWillShow={() => toggleButtonView(false)}
+        onKeyboardDidShow={() => toggleButtonView(false)}
+      >
+        <View
+          style={[
+            styles ? styles.innerContainer : null,
+            theme.scrollViewInnerContainer,
           ]}
-          onKeyboardWillHide={() => this.toggleButtonView(true)}
-          onKeyboardDidHide={() => this.toggleButtonView(true)}
-          onKeyboardWillShow={() => this.toggleButtonView(false)}
-          onKeyboardDidShow={() => this.toggleButtonView(false)}
         >
-          <View
-            style={[
-              styles ? styles.innerContainer : null,
-              theme.scrollViewInnerContainer,
-            ]}
-          >
-            {children}
-            {!noFooterButton && buttonStyle === theme.footerButton && (
-              <View
-                style={[
-                  theme.footerButtonContainer,
-                  shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
-                ]}
-              >
-                {extraContent}
-                {this.renderButton(theme.footerButton)}
-              </View>
-            )}
-          </View>
-        </KeyboardAwareScrollView>
-        {buttonStyle === theme.keyboardStickyButton && (
-          <KeyboardTrackingView
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              width: '100%',
-            }}
-          >
-            {extraContent}
-            {this.renderButton(theme.keyboardStickyButton)}
-          </KeyboardTrackingView>
-        )}
-      </Fragment>
-    );
-  }
-}
+          {children}
+          {!noFooterButton && buttonStyle === theme.footerButton && (
+            <View
+              style={[
+                theme.footerButtonContainer,
+                shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
+              ]}
+            >
+              {extraContent}
+              {renderButton(theme.footerButton)}
+            </View>
+          )}
+        </View>
+      </KeyboardAwareScrollView>
+      {buttonStyle === theme.keyboardStickyButton && (
+        <KeyboardTrackingView
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            marginBottom: viewIsInsideTab ? -1 * (headerHeight - stickyButtonOffset) : 0,
+          }}
+        >
+          {extraContent}
+          {renderButton([theme.keyboardStickyButton])}
+        </KeyboardTrackingView>
+      )}
+    </Fragment>
+  );
+};
 
 export default withNavigation(ScrollAwareActionBar);
