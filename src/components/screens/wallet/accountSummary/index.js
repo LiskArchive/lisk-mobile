@@ -218,7 +218,7 @@ class AccountSummary extends React.Component {
           <IconButton
             style={[styles.sendButton, styles.theme.sendButton]}
             title=""
-            icon={isFollowed ? 'bookmark-filled' : 'bookmark'}
+            icon={isFollowed ? 'bookmarks-filled' : 'bookmarks'}
             color={colors[theme].ultramarineBlue}
             iconSize={20}
             onClick={this.toggleBookmark}
@@ -229,11 +229,17 @@ class AccountSummary extends React.Component {
             icon="send"
             color={colors[theme].ultramarineBlue}
             iconSize={20}
-            onClick={() =>
-              navigation.navigate({ name: 'Send', params: {
-                query: { address: account.address },
-              }})
-            }
+            onClick={() => {
+              navigation.navigate({
+                name: 'Main',
+                params: {
+                  screen: 'Send',
+                  params: {
+                    query: { address: account.address },
+                  },
+                },
+              });
+            }}
           />
         </AView>
       </AView>
