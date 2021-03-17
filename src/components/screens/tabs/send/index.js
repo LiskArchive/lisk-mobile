@@ -25,14 +25,15 @@ import progressBar from '../../../shared/progressBar';
 class Send extends React.Component {
   state = {
     showProgressBar: true,
+    query: {},
   };
 
   componentDidMount() {
-    const { navigation, route } = this.props;
+    const { navigation } = this.props;
 
     this.subs = [
-      navigation.addListener('didFocus', this.didFocus),
-      navigation.addListener('willBlur', this.willBlur),
+      navigation.addListener('focus', this.didFocus),
+      navigation.addListener('blur', this.willBlur),
     ];
 
     navigation.setOptions({
@@ -45,10 +46,7 @@ class Send extends React.Component {
     if (prevProps.settings.token.active !== this.props.settings.token.active) {
       this.resetMultiStep();
     } else {
-      this.checkQuery(
-        // prevProps.navigation.dangerouslyGetParent().getParam('query', {})
-        prevProps.route.params?.query,
-      );
+      this.checkQuery();
     }
   }
 
@@ -56,21 +54,16 @@ class Send extends React.Component {
     this.subs.forEach(sub => sub.remove());
   }
 
-  resetMultiStep = (query = {}) => {
+  resetMultiStep = () => {
+    const query = this.props.route.params?.query ?? {};
+    this.setState({ query });
     this.nav.reset(query);
-    this.props.navigation.setParams({
-      query: {},
-    });
   };
 
-  checkQuery = (prevQuery = {}) => {
-    // const parent = this.props.navigation
-    //   .dangerouslyGetParent()
-    //   .getParam('ali', 'no');
-
+  checkQuery = () => {
     const query = this.props.route.params?.query ?? {};
 
-    if (prevQuery !== query && query && Object.keys(query).length) {
+    if (this.state.query !== query && query && Object.keys(query).length) {
       this.resetMultiStep(query);
     }
   };
