@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { getFocusedRouteNameFromRoute, CommonActions } from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Send from '../tabs/send';
@@ -16,33 +16,50 @@ export const getHeaderOptions = ({ route, navigation }) => {
   return navigationOptions[routeName];
 };
 
-const getTabBarIcon = name => ({
-  tabBarIcon: props => <TabBarIcon name={name} {...props} />,
+const getIcon = ({ route }) => ({
+  tabBarIcon: props => (
+    <TabBarIcon name={route.name.toLowerCase()} {...props} />
+  ),
 });
 
 const Tab = createBottomTabNavigator();
 const SendStack = createStackNavigator();
 const HomeStack = createStackNavigator();
 
+/**
+ * We needed to wrap Home and Send screens in a dedicated navigator
+ * so they can modify to the header based on the component state.
+ *
+ * Components under Tabs navigator can't control the header of the Main navigator
+ */
 const HomeNavigator = () => (
   <HomeStack.Navigator initialRouteName="Home">
-    <HomeStack.Screen name="Home" component={Home} options={navigationOptions.HomeStack} />
+    <HomeStack.Screen
+      name="Home"
+      component={Home}
+      options={navigationOptions.HomeStack}
+    />
   </HomeStack.Navigator>
 );
 
-const SendNavigator = () => (
+const SendNavigator = ({ route }) => (
   <SendStack.Navigator initialRouteName="Send">
-    <SendStack.Screen name="Send" component={Send} options={navigationOptions.SendStack} />
+    <SendStack.Screen
+      name="Send"
+      component={Send}
+      options={navigationOptions.SendStack}
+      initialParams={route.params}
+    />
   </SendStack.Navigator>
 );
 
 const Tabs = () => (
   <Tab.Navigator initialRouteName="Home">
-    <Tab.Screen name="Home" component={HomeNavigator} options={getTabBarIcon('home')} />
-    <Tab.Screen name="Request" component={Request} options={getTabBarIcon('request')} />
-    <Tab.Screen name="Send" component={SendNavigator} options={getTabBarIcon('send')} />
-    <Tab.Screen name="Bookmarks" component={Bookmarks} options={getTabBarIcon('bookmark')} />
-    <Tab.Screen name="Settings" component={Settings} options={getTabBarIcon('settings')} />
+    <Tab.Screen name="Home" component={HomeNavigator} options={getIcon} />
+    <Tab.Screen name="Request" component={Request} options={getIcon} />
+    <Tab.Screen name="Send" component={SendNavigator} options={getIcon} />
+    <Tab.Screen name="Bookmarks" component={Bookmarks} options={getIcon} />
+    <Tab.Screen name="Settings" component={Settings} options={getIcon} />
   </Tab.Navigator>
 );
 
