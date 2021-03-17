@@ -1,63 +1,42 @@
-import React from 'react';
-import connect from 'redux-connect-decorator';
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { View } from 'react-native';
 import LottieView from 'lottie-react-native';
+
 import progressBar from '../../../assets/animations/progressBar.json';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import { deviceType } from '../../../utilities/device';
 
-@connect(
-  state => ({
-    loading: state.loading,
-    }),
-  {}
-)
-class Loading extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loop: true,
-    };
-  }
+const Loading = ({ styles }) => {
+  const [loop, setLoop] = useState(true);
+  const animation = useRef(null);
+  const loading = useSelector(state => state.loading);
+  const osType = deviceType();
 
-  show() {
-    this.setState({ loop: true });
-    this.animation.play();
-  }
-
-  hide() {
-    this.setState({ loop: false });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.loading) {
-      if (nextProps.loading.length > 0 && this.props.loading.length === 0) {
-        this.show();
-      } else if (
-        nextProps.loading.length === 0 &&
-        this.props.loading.length > 0
-      ) {
-        this.hide();
-      }
+  useEffect(() => {
+    if (!loop && loading.length) {
+      setLoop(true);
+      animation.current.play();
     }
-  }
 
-  render() {
-    const { styles } = this.props;
+    if (loop && !loading.length) {
+      setLoop(false);
+    }
+  }, [loading, loop]);
 
-    return (
-      <View style={styles.wrapper}>
-        <LottieView
-          style={styles.animation}
-          source={progressBar}
-          loop={this.state.loop}
-          ref={el => {
-            this.animation = el;
-          }}
-        />
-      </View>
-    );
-  }
-}
+  const visible = loop ? styles.visible : {};
+
+  return (
+    <View style={[styles.wrapper, styles[osType], visible]}>
+      <LottieView
+        style={styles.animation}
+        source={progressBar}
+        loop={loop}
+        ref={animation}
+      />
+    </View>
+  );
+};
 
 export default withTheme(Loading, getStyles());
