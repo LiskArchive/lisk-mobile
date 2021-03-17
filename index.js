@@ -1,6 +1,6 @@
 import './shim';
-import { AppRegistry, Text } from 'react-native'; // eslint-disable-line
-import 'react-native-gesture-handler'; // eslint-disable-line
+import { AppRegistry, Text } from 'react-native';
+import 'react-native-gesture-handler';
 import App from './src/App';
 import { name as appName } from './app.json';
 
