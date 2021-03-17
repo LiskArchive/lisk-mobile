@@ -49,8 +49,6 @@ const MainNavigator = ({ route }) => {
     colors: theme === 'light' ? darkTabs : lightTabs,
   };
 
-  console.log('MainNavigator', route?.params);
-
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={themeColors}>
