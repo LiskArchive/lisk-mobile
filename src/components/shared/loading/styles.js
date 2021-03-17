@@ -1,35 +1,37 @@
-import { Platform, Dimensions } from 'react-native';
-import { Header } from 'react-navigation';
+import { Dimensions } from 'react-native';
 import { colors } from '../../../constants/styleGuide';
-import { merge } from '../../../utilities/helpers';
-import { deviceType } from '../../../utilities/device';
-
-let wrapper = {
-  backgroundColor: colors.light.ultramarineBlue,
-};
-
-if (Platform.OS === 'ios') {
-  wrapper = {
-    zIndex: 10,
-    top: deviceType() === 'iOSx' ? Header.HEIGHT + 24 : Header.HEIGHT + 1,
-    left: 0,
-    position: 'absolute',
-  };
-}
 
 const { width } = Dimensions.get('window');
 const height = Math.floor((16 / 523) * width);
 
 export default () => ({
   common: {
-    wrapper: merge(
-      {
-        width: '100%',
-        height: 4,
-        overflow: 'hidden',
-      },
-      wrapper
-    ),
+    wrapper: {
+      width: '100%',
+      overflow: 'hidden',
+      backgroundColor: 'transparent',
+    },
+    iOSx: {
+      zIndex: 10,
+      height: 0,
+      top: 34,
+      left: 0,
+      position: 'absolute',
+    },
+    iOS: {
+      zIndex: 10,
+      top: 0,
+      height: 0,
+      left: 0,
+      position: 'absolute',
+    },
+    android: {
+      backgroundColor: colors.light.ultramarineBlue,
+      height: 4,
+    },
+    visible: {
+      height: 4,
+    },
     animation: {
       width,
       height,
