@@ -7,6 +7,13 @@ const { width, height } = Dimensions.get('window');
 const Header = { HEIGHT: 40 };
 
 /**
+ * Returns brand and model of the device
+ *
+ * @returns {String} Model id
+ */
+export const deviceModel = () => DeviceInfo.getDeviceId();
+
+/**
  * Returns a simple string defining the device type
  *
  * @returns {String} - iOSx for iPhoneX, iOS for the rest of iPhones
