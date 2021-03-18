@@ -19,7 +19,6 @@ import {
 import { P, Small } from '../../shared/toolBox/typography';
 import { decodeLaunchUrl } from '../../../utilities/qrCode';
 import { tokenMap } from '../../../constants/tokens';
-import HeaderBackButton from '../../screens/router/headerBackButton';
 import { validateAddress } from '../../../utilities/validators';
 
 @connect(
