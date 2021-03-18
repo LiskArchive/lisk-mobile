@@ -51,10 +51,28 @@ const ScrollAwareActionBar = ({
    * the correct botton's height. The following workaround fixes
    * this issue until the library supports SafeAreaView
    */
-  const shouldBeOptimizedForIphoneX =
-    !viewIsInsideTab && deviceType() === 'iOSx';
+  const osType = deviceType();
+  const shouldBeOptimizedForIphoneX = !viewIsInsideTab && osType === 'iOSx';
 
-  const stickyButtonOffset = deviceType() === 'iOSx' ? 10 : 14;
+  const trackerView = {
+    android: {
+      width: '100%',
+    },
+    iOS: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      marginBottom: viewIsInsideTab ? -1 * (headerHeight - 10) : 0,
+    },
+    iOSx: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      marginBottom: viewIsInsideTab ? -1 * (headerHeight - 14) : 0,
+    },
+  };
 
   return (
     <Fragment>
@@ -90,15 +108,7 @@ const ScrollAwareActionBar = ({
         </View>
       </KeyboardAwareScrollView>
       {buttonStyle === theme.keyboardStickyButton && (
-        <KeyboardTrackingView
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            width: '100%',
-            marginBottom: viewIsInsideTab ? -1 * (headerHeight - stickyButtonOffset) : 0,
-          }}
-        >
+        <KeyboardTrackingView style={trackerView[osType]}>
           {extraContent}
           {renderButton([theme.keyboardStickyButton])}
         </KeyboardTrackingView>
