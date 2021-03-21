@@ -29,7 +29,7 @@ export default () => ({
       marginTop: 30,
     },
     android: {
-      marginTop: 10,
+      marginTop: 4,
     },
   },
 });
