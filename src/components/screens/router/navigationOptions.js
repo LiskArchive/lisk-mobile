@@ -7,6 +7,7 @@ import HeaderBackButton from './headerBackButton';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
 import TokenSwitcher from './tokenSwitcher';
 import { deviceType } from '../../../utilities/device';
+import { fonts } from '../../../constants/styleGuide';
 
 const navigationOptions = {};
 
@@ -19,14 +20,25 @@ navigationOptions.Send = {
 };
 
 navigationOptions.SendStack = () => {
-  const type = deviceType();
+  const os = deviceType();
+  let headerStyle = {
+    height: os === 'iOSx' ? 90 : 64,
+  };
+  let headerTitleStyle = {
+    marginTop: os === 'iOSx' ? 48 : 18,
+  };
+  if (os === 'android') {
+    headerStyle = {
+      height: 56,
+    };
+    headerTitleStyle = {
+      marginTop: 0,
+      fontFamily: fonts.family.heading,
+    };
+  }
   return {
-    headerStyle: {
-      height: type === 'iOSx' ? 90 : 64,
-    },
-    headerTitleStyle: {
-      marginTop: type === 'iOSx' ? 48 : 18,
-    },
+    headerStyle,
+    headerTitleStyle,
     title: t('Recipient'),
     headerLeft: () => <HeaderPlaceholderButton />,
     headerRight: () => <TokenSwitcher safeArea={true} />,
@@ -38,7 +50,15 @@ navigationOptions.Home = {
 };
 
 navigationOptions.HomeStack = () => {
-  const type = deviceType();
+  const os = deviceType();
+  let headerStyle = {
+    height: os === 'iOSx' ? 90 : 64,
+  };
+  if (os === 'android') {
+    headerStyle = {
+      height: 56,
+    };
+  }
   // tabBarOnPress: ({ defaultHandler, navigation }) => {
   //   if (navigation.isFocused() && navigation.getParam('scrollToTop')) {
   //     navigation.state.params.scrollToTop();
@@ -49,9 +69,7 @@ navigationOptions.HomeStack = () => {
   return {
     headerTitle: () => <HomeHeaderTitle type="home" />,
     headerBackground: () => <DynamicHeaderBackground />,
-    headerStyle: {
-      height: type === 'iOSx' ? 90 : 64,
-    },
+    headerStyle,
   };
 };
 
