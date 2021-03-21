@@ -32,12 +32,13 @@ const HomeStack = createStackNavigator();
  *
  * Components under Tabs navigator can't control the header of the Main navigator
  */
-const HomeNavigator = () => (
+const HomeNavigator = ({ route }) => (
   <HomeStack.Navigator initialRouteName="Home">
     <HomeStack.Screen
       name="Home"
       component={Home}
       options={navigationOptions.HomeStack}
+      initialParams={route.params}
     />
   </HomeStack.Navigator>
 );
