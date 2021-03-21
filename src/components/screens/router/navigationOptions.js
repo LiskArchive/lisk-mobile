@@ -9,11 +9,20 @@ import TokenSwitcher from './tokenSwitcher';
 import { deviceType } from '../../../utilities/device';
 import { fonts } from '../../../constants/styleGuide';
 
+const noShadow = {
+  borderBottomWidth: 0,
+  elevation: 0,
+};
+
+const genericTitle = {
+  fontFamily: fonts.family.heading,
+  fontSize: 18,
+  textAlign: 'center',
+};
+
 const navigationOptions = {};
 
-navigationOptions.Main = {
-  // header: () => null,
-};
+navigationOptions.Main = {};
 
 navigationOptions.Send = {
   header: () => null,
@@ -34,6 +43,8 @@ navigationOptions.SendStack = () => {
     headerTitleStyle = {
       marginTop: 0,
       fontFamily: fonts.family.heading,
+      fontSize: 18,
+      textAlign: 'center',
     };
   }
   return {
@@ -87,17 +98,26 @@ navigationOptions.Wallet = () => {
 navigationOptions.Request = {
   title: t('Request'),
   headerRight: () => <TokenSwitcher />,
+  headerLeft: () => <HeaderPlaceholderButton />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.Bookmarks = {
   title: t('Bookmarks'),
   tabBarLabel: 'Bookmarks',
   headerRight: () => <TokenSwitcher />,
+  headerLeft: () => <HeaderPlaceholderButton />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.Settings = {
   title: t('Settings'),
   headerRight: () => <TokenSwitcher />,
+  headerLeft: () => <HeaderPlaceholderButton />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.Register = {
@@ -108,53 +128,72 @@ navigationOptions.Register = {
 navigationOptions.TxDetail = {
   title: 'Transaction details',
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerRight: () => <HeaderPlaceholderButton />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.ManageAssets = {
   title: 'Manage tokens',
   headerRight: () => <TokenSwitcher />,
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.CurrencySelection = {
   title: 'Select your currency',
   headerRight: () => <TokenSwitcher />,
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.About = {
   title: 'About Lisk',
   headerRight: () => <TokenSwitcher />,
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.Terms = {
   title: 'Terms of use',
   headerRight: () => <TokenSwitcher />,
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.EnableBioAuth = {
   title: 'Enable Bio Auth',
   headerRight: () => <TokenSwitcher />,
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.DisableBioAuth = {
   title: 'Btop Auth',
   headerRight: () => <TokenSwitcher />,
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.PassphraseBackup = {
   title: 'Passphrase backup',
   headerRight: () => <TokenSwitcher />,
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.AddBookmark = {
   title: 'New bookmark',
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.SignIn = {

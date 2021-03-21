@@ -20,7 +20,6 @@ const ActiveTitle = props => (
   <Small style={styles.activeGroupTitle} {...props} />
 );
 class Register extends React.Component {
-
   state = {
     showNav: true,
   };
