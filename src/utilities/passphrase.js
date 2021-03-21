@@ -92,14 +92,21 @@ export const bioMetricAuthentication = async ({
   description,
   androidError,
 }) => {
-  const authConfig =
-    Platform.OS === 'ios'
-      ? {
-        description:
-            description ||
-            'Scan your fingerprint on the device scanner to sign in',
-      }
-      : { onAttempt: androidError };
+  const defaultTitle = 'Scan your fingerprint on the device scanner';
+  let authConfig = {
+    description: description || defaultTitle,
+  };
+
+  if (Platform.OS === 'android' && Platform.Version < 23) {
+    authConfig = {
+      onAttempt: androidError,
+    };
+  } else if (Platform.OS === 'android' && Platform.Version >= 23) {
+    authConfig = {
+      title: description || defaultTitle,
+    };
+  }
+
   try {
     await FingerprintScanner.isSensorAvailable();
     try {
