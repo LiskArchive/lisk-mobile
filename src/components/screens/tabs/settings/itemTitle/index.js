@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { View, TouchableHighlight, Platform } from 'react-native';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { P } from '../../../../shared/toolBox/typography';
 import Icon from '../../../../shared/toolBox/icon';
 import { themes, colors } from '../../../../../constants/styleGuide';
@@ -19,108 +20,109 @@ import getStyles from './styles';
  * @param {Object} data.navigation - The Navigation object. if the target props is passed,
  *  we need this to ba able to navigate.
  */
-class ItemTitle extends React.Component {
-  authenticate = cb => {
+const ItemTitle = ({
+  showDialog,
+  hideDialog,
+  setError,
+  navigation,
+  theme,
+  styles,
+  icon,
+  iconSize = 20,
+  title,
+  target,
+  targetStateLabel,
+  authenticate,
+  description,
+}) => {
+  const authenticateFn = cb => {
     bioMetricAuthentication({
       successCallback: () => {
-        this.props.hideDialog();
+        hideDialog();
         cb();
       },
       errorCallback: () => {},
-      androidError: error => this.props.setError(error),
+      androidError: error => setError(error),
     });
 
     if (Platform.OS === 'android') {
-      this.props.navigation.setOptions({
+      navigation.setOptions({
         headerVisible: false,
       });
-      this.props.showDialog();
+      showDialog();
     }
   };
 
-  render() {
-    const {
-      theme,
-      styles,
-      icon,
-      iconSize = 20,
-      title,
-      target,
-      navigation,
-      targetStateLabel,
-      authenticate,
-      description,
-    } = this.props;
+  const props = {
+    style: styles.container,
+    underlayColor: 'transparent',
+  };
 
-    const props = {
-      style: styles.container,
-      underlayColor: 'transparent',
-    };
-
-    if (target) {
-      props.onPress = () => {
-        if (authenticate) {
-          this.authenticate(() => {
-            navigation.navigate({
-              name: target,
-              params: { title },
-            });
-          });
-        } else {
+  if (target) {
+    props.onPress = () => {
+      if (authenticate) {
+        authenticateFn(() => {
           navigation.navigate({
             name: target,
             params: { title },
           });
-        }
-      };
-    }
-
-    return (
-      <TouchableHighlight {...props}>
-        <Fragment>
-          <Icon
-            name={icon}
-            size={iconSize}
-            color={
-              theme === themes.light
-                ? colors.light.blueGray
-                : colors.dark.slateGray
-            }
-            style={styles.icon}
-          />
-
-          <View style={styles.titleContainer}>
-            <P style={[styles.title, styles.theme.title]}>{title}</P>
-            {description ? (
-              <P style={[styles.subtitle, styles.theme.subtitle]}>
-                {description}
-              </P>
-            ) : null}
-          </View>
-
-          <View style={styles.arrow}>
-            {target ? (
-              <Fragment>
-                {targetStateLabel}
-                <Icon
-                  name="forward"
-                  size={16}
-                  style={styles.arrowIcon}
-                  color={
-                    theme === themes.light
-                      ? colors.light.maastrichtBlue
-                      : colors.dark.white
-                  }
-                />
-              </Fragment>
-            ) : (
-              <Fragment>{targetStateLabel}</Fragment>
-            )}
-          </View>
-        </Fragment>
-      </TouchableHighlight>
-    );
+        });
+      } else {
+        navigation.navigate({
+          name: target,
+          params: { title },
+        });
+      }
+    };
   }
-}
+
+  useEffect(() => () => FingerprintScanner.release());
+
+  return (
+    <TouchableHighlight {...props}>
+      <Fragment>
+        <Icon
+          name={icon}
+          size={iconSize}
+          color={
+            theme === themes.light
+              ? colors.light.blueGray
+              : colors.dark.slateGray
+          }
+          style={styles.icon}
+        />
+
+        <View style={styles.titleContainer}>
+          <P style={[styles.title, styles.theme.title]}>{title}</P>
+          {description ? (
+            <P style={[styles.subtitle, styles.theme.subtitle]}>
+              {description}
+            </P>
+          ) : null}
+        </View>
+
+        <View style={styles.arrow}>
+          {target ? (
+            <Fragment>
+              {targetStateLabel}
+              <Icon
+                name="forward"
+                size={16}
+                style={styles.arrowIcon}
+                color={
+                  theme === themes.light
+                    ? colors.light.maastrichtBlue
+                    : colors.dark.white
+                }
+              />
+            </Fragment>
+          ) : (
+            <Fragment>{targetStateLabel}</Fragment>
+          )}
+        </View>
+      </Fragment>
+    </TouchableHighlight>
+  );
+};
 
 export default withTheme(ItemTitle, getStyles());
