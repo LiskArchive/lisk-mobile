@@ -42,7 +42,7 @@ const lightTabs = {
   border: 'transparent',
 };
 
-const MainNavigator = ({ route }) => {
+const MainNavigator = () => {
   const { theme } = useSelector(state => state.settings);
   const themeColors = {
     dark: theme === 'light',
