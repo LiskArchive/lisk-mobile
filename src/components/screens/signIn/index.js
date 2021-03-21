@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
-import { CommonActions } from '@react-navigation/native';
-import QuickActions from 'react-native-quick-actions'; // eslint-disable-line
+import QuickActions from 'react-native-quick-actions';
 import FingerprintOverlay from '../../shared/fingerprintOverlay';
 import styles from './styles';
 import {
@@ -223,7 +222,6 @@ class SignIn extends React.Component {
     const { navigation, settings, settingsUpdated } = this.props;
     const linkedScreen = deepLinkMapper(url);
     // eslint-disable-next-line no-console
-    console.log('in sign in', url, linkedScreen);
     if (linkedScreen) {
       if (linkedScreen.params && linkedScreen.params.activeToken) {
         settingsUpdated({

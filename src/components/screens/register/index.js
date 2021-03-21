@@ -8,8 +8,6 @@ import SafeKeeping from './safeKeeping';
 import Intro from './intro';
 import { Small } from '../../shared/toolBox/typography';
 import styles from './styles';
-import { IconButton } from '../../shared/toolBox/button';
-import { colors } from '../../../constants/styleGuide';
 import progressBar from '../../shared/progressBar';
 
 const NavButton = props => (
@@ -82,25 +80,25 @@ class Register extends React.Component {
             group={t('1. Creating your account')}
             navigation={navigation}
             route={route}
-          ></Intro>
+          />
           <SafeKeeping
             title="safekeeping"
             group={t('2. Saving your passphrase')}
             navigation={navigation}
             route={route}
-          ></SafeKeeping>
+          />
           <Confirm
             title="verify"
             group={t('3. Verifying your passphrase')}
             navigation={navigation}
             route={route}
-          ></Confirm>
+          />
           <Success
             title="success"
             group={t('4. Security reminder')}
             hideNav={this.hideNav}
             navigation={navigation}
-          ></Success>
+          />
         </MultiStep>
       </View>
     );
