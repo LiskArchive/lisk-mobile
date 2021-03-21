@@ -17,6 +17,7 @@ import Bookmarks from '../../../../shared/bookmarks';
 import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import { validateAddress } from '../../../../../utilities/validators';
 import DropDownHolder from '../../../../../utilities/alert';
+import HeaderPlaceholderButton from '../../../router/headerPlaceholderButton';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
@@ -47,7 +48,7 @@ class Recipient extends React.Component {
 
     setOptions({
       title: isSmallScreen ? 'Send' : 'Recipient',
-      headerLeft: () => null,
+      headerLeft: () => <HeaderPlaceholderButton />,
     });
   }
 
@@ -58,6 +59,7 @@ class Recipient extends React.Component {
       } = this.props;
       setOptions({
         title: isSmallScreen ? 'Send' : 'Recipient',
+        headerLeft: () => <HeaderPlaceholderButton />,
       });
     }
   }
