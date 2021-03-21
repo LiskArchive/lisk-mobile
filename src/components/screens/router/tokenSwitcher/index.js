@@ -7,6 +7,7 @@ import AssetSelection from './assetSelection';
 import { tokenKeys, tokenMap } from '../../../../constants/tokens';
 import { colors } from '../../../../constants/styleGuide';
 import ModalHolder from '../../../../utilities/modal';
+import { deviceType } from '../../../../utilities/device';
 
 const onClick = () => {
   ModalHolder.open({ title: 'Your assets', component: AssetSelection });
@@ -14,6 +15,7 @@ const onClick = () => {
 
 const TokenSwitcher = ({ styles, theme, safeArea }) => {
   const { token } = useSelector(state => state.settings);
+  const os = deviceType();
 
   const style =
     token.active === tokenKeys[0]
@@ -27,7 +29,7 @@ const TokenSwitcher = ({ styles, theme, safeArea }) => {
       iconSize={14}
       icon={tokenMap[token.active].icon}
       onClick={onClick}
-      style={[styles.button, style, safeArea ? styles.safeArea : null]}
+      style={[styles.button, style, safeArea ? styles[os] : null]}
     />
   ) : null;
 };
