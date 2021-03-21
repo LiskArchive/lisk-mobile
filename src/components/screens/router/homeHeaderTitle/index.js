@@ -20,6 +20,7 @@ import lightSmall from '../../../../assets/images/balanceBlur/lightSmall.png';
 import { tokenMap } from '../../../../constants/tokens';
 import { colors } from '../../../../constants/styleGuide';
 import { useSelector } from 'react-redux';
+import { deviceType } from '../../../../utilities/device';
 
 const blurs = {
   darkBig,
@@ -106,7 +107,7 @@ const SimpleHeader = ({
   <Animated.Text
     numberOfLines={1}
     style={[
-      styles[`${type}Simple`],
+      styles[`${deviceType()}${type}Simple`],
       styles.title,
       styles.theme[`${type}Main`],
       { opacity: interpolate(scrollY, [0, 100, 130], [1, 1, 0]) },
@@ -135,6 +136,7 @@ const HomeHeaderTitle = ({
   const { token: { active }, theme, incognito } = useSelector(state => state.settings);
   const { info } = useSelector(state => state.accounts);
   const wallet = false;
+  const os = deviceType();
 
   const data = {
     type,
@@ -148,7 +150,7 @@ const HomeHeaderTitle = ({
   };
 
   return (
-    <View style={[styles.container, styles[`${type}Container`]]}>
+    <View style={[styles.container, styles[`${os}${type}Container`]]}>
       {data && (
         <TouchableWithoutFeedback onPress={() => scrollToTop()}>
           <View>

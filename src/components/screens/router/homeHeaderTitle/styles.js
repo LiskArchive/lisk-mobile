@@ -1,16 +1,22 @@
 import { fonts, themes, colors } from '../../../../constants/styleGuide';
 
-import { deviceType } from '../../../../utilities/device';
-
 export default () => ({
   common: {
     container: {
       width: '100%',
       overflow: 'hidden',
     },
-    homeContainer: {
-      height: deviceType() === 'iOSx' ? 60 : 64,
-      marginTop: deviceType() === 'iOSx' ? 30 : 0,
+    iOSxhomeContainer: {
+      height: 60,
+      marginTop: 30,
+    },
+    iOShomeContainer: {
+      height: 64,
+      marginTop: 0,
+    },
+    androidhomeContainer: {
+      height: 56,
+      marginTop: 0,
     },
     walletContainer: {
       height: 44,
@@ -28,8 +34,14 @@ export default () => ({
     walletExtended: {
       marginTop: -29,
     },
-    homeSimple: {
-      marginTop: deviceType() === 'iOSx' ? 20 : 25,
+    iOSxhomeSimple: {
+      marginTop: 20,
+    },
+    iOShomeSimple: {
+      marginTop: 25,
+    },
+    androidhomeSimple: {
+      marginTop: 14,
     },
     walletSimple: {
       marginTop: 6,
