@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { themes } from '../../../../constants/styleGuide';
-import withTheme from '../../../shared/withTheme';
+import withTheme from '../../withTheme';
 import getStyles from './styles';
 
 class Input extends React.Component {

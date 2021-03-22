@@ -63,9 +63,9 @@ class SecondPassphrase extends React.Component {
     const { accounts, settings, t } = this.props;
 
     if (
-      validity.length === 0 &&
-      extractPublicKey(passphrase) !==
-        accounts.info[settings.token.active].secondPublicKey
+      validity.length === 0
+      && extractPublicKey(passphrase)
+        !== accounts.info[settings.token.active].secondPublicKey
     ) {
       validity.push({
         code: 'dose_not_belong',
@@ -118,10 +118,9 @@ class SecondPassphrase extends React.Component {
       );
 
       if (error.length) {
-        errorMessage =
-          error[0].message && error[0].message.length > 0
-            ? error[0].message.replace(' Please check the passphrase.', '')
-            : '';
+        errorMessage = error[0].message && error[0].message.length > 0
+          ? error[0].message.replace(' Please check the passphrase.', '')
+          : '';
       }
 
       DropDownHolder.error(t('Error'), errorMessage);

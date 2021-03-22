@@ -3,11 +3,12 @@ import { View, Text, Clipboard } from 'react-native';
 import { translate } from 'react-i18next';
 import Icon from '../toolBox/icon';
 import { colors } from '../../../constants/styleGuide';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 class CopyToClipBoard extends React.Component {
   state = { copied: false };
+
   copy = () => {
     this.setState({ copied: !this.state.copied });
     Clipboard.setString(this.props.value);

@@ -108,10 +108,9 @@ export const setColorOpacity = (hex, alpha = 1) => {
     return hex;
   }
 
-  const normalizedHex =
-    hex.length === 4
-      ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
-      : hex;
+  const normalizedHex = hex.length === 4
+    ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
+    : hex;
 
   const r = parseInt(normalizedHex.slice(1, 3), 16);
   const g = parseInt(normalizedHex.slice(3, 5), 16);

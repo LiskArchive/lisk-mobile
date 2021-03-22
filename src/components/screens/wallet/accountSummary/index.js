@@ -28,10 +28,10 @@ import modalHolder from '../../../../utilities/modal';
     settings: state.settings,
     activeToken: state.settings.token.active,
     language: state.settings.language,
-    }),
+  }),
   {
-  accountFollowed: accountFollowedAction,
-  accountUnFollowed: accountUnFollowedAction,
+    accountFollowed: accountFollowedAction,
+    accountUnFollowed: accountUnFollowedAction,
   }
 )
 class AccountSummary extends React.Component {
@@ -120,10 +120,9 @@ class AccountSummary extends React.Component {
       navigation,
       language,
     } = this.props;
-    const address =
-      token.active === tokenKeys[1]
-        ? stringShortener(account.address, 10, 10)
-        : account.address;
+    const address = token.active === tokenKeys[1]
+      ? stringShortener(account.address, 10, 10)
+      : account.address;
 
     const { interpolate } = this;
     const AView = Animated.View;

@@ -70,21 +70,21 @@ const LskSummary = ({
       {tx.type !== 0 || tx.recipientAddress === tx.senderAddress ? (
         <H3 style={amountStyle}>{t(transactions[txTypes[tx.type]].title)}</H3>
       ) : null}
-      {tx.type === 0 &&
-      tx.recipientAddress !== tx.senderAddress &&
-      !incognito ? (
+      {tx.type === 0
+      && tx.recipientAddress !== tx.senderAddress
+      && !incognito ? (
         <H3 style={amountStyle}>
           {amountSign}
           <FormattedNumber language={language}>
             {fromRawLsk(tx.amount)}
           </FormattedNumber>
         </H3>
-      ) : null}
-      {tx.type === 0 &&
-      tx.recipientAddress !== tx.senderAddress &&
-      incognito ? (
+        ) : null}
+      {tx.type === 0
+      && tx.recipientAddress !== tx.senderAddress
+      && incognito ? (
         <Blur value={amount} direction={direction} style={styles.amountBlur} />
-      ) : null}
+        ) : null}
       {tx.timestamp ? (
         <FormattedDate
           format="MMM D, YYYY LTS"

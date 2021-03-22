@@ -45,7 +45,7 @@ describe('helpers', () => {
     });
 
     it('fills common key with empty object if not present', () => {
-      const stylesWithoutCommonKey = Object.assign({}, styles);
+      const stylesWithoutCommonKey = { ...styles };
       delete stylesWithoutCommonKey.common;
 
       expect(createThemedStyles(themes.light, stylesWithoutCommonKey)).toEqual({
@@ -58,7 +58,7 @@ describe('helpers', () => {
     });
 
     it('fills requested theme key with empty object if not present', () => {
-      const stylesWithoutThemeKey = Object.assign({}, styles);
+      const stylesWithoutThemeKey = { ...styles };
       delete stylesWithoutThemeKey[themes.light];
       expect(createThemedStyles(themes.light, stylesWithoutThemeKey)).toEqual({
         wrapper: {

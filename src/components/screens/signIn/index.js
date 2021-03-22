@@ -1,8 +1,6 @@
 import React from 'react';
-import { LogBox } from 'react-native';
-import connect from 'redux-connect-decorator';
-import { translate } from 'react-i18next';
 import {
+  LogBox,
   Linking,
   View,
   Alert,
@@ -10,6 +8,9 @@ import {
   Keyboard,
   DeviceEventEmitter,
 } from 'react-native';
+import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
+
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 import QuickActions from 'react-native-quick-actions';
@@ -43,17 +44,18 @@ LogBox.ignoreAllLogs();
   state => ({
     accounts: state.accounts,
     settings: state.settings,
-    }),
+  }),
   {
-  accountSignedIn: accountSignedInAction,
-  accountFetched: accountFetchedAction,
-  settingsUpdated: settingsUpdatedAction,
-  settingsRetrieved: settingsRetrievedAction,
-  pricesRetrieved: pricesRetrievedAction,
+    accountSignedIn: accountSignedInAction,
+    accountFetched: accountFetchedAction,
+    settingsUpdated: settingsUpdatedAction,
+    settingsRetrieved: settingsRetrievedAction,
+    pricesRetrieved: pricesRetrievedAction,
   }
 )
 class SignIn extends React.Component {
   deepLinkURL = '';
+
   state = {
     destinationDefined: false,
     storedPassphrase: null,
@@ -194,9 +196,9 @@ class SignIn extends React.Component {
       passphrase,
     });
     if (
-      settings.sensorType &&
-      !settings.bioAuthRecommended &&
-      submissionType === 'form'
+      settings.sensorType
+      && !settings.bioAuthRecommended
+      && submissionType === 'form'
     ) {
       this.promptBioAuth(passphrase, this.signIn);
     } else {
@@ -234,7 +236,7 @@ class SignIn extends React.Component {
 
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Main' , params: { screen: linkedScreen.name, params: linkedScreen.params }}],
+        routes: [{ name: 'Main', params: { screen: linkedScreen.name, params: linkedScreen.params } }],
       });
     } else {
       // @TODO: Navigate to different page or display an error message for unmapped deep links.
@@ -303,8 +305,8 @@ class SignIn extends React.Component {
   showSimplifiedView() {
     if (Platform.OS === 'android') {
       return (
-        this.state.keyboardHeight / deviceHeight() > 0.35 &&
-        this.state.keyboardIsOpen
+        this.state.keyboardHeight / deviceHeight() > 0.35
+        && this.state.keyboardIsOpen
       );
     }
     return false;

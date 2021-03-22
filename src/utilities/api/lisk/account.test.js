@@ -1,8 +1,7 @@
 import { getSummary, extractAddress, extractPublicKey } from './account';
 import LiskAPIClient from './apiClient';
 
-const passphrase =
-  'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
+const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 const account = {
   address: '5092448154042807473L',
   balance: '10000',

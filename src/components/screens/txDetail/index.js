@@ -7,7 +7,7 @@ import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../../shared/formattedNumber';
 import Share from '../../shared/share';
 import { B, A } from '../../shared/toolBox/typography';
-import IconButton from '../../screens/router/headerBackButton';
+import IconButton from '../router/headerBackButton';
 import Loading from '../../shared/transactions/loading';
 import EmptyState from '../../shared/transactions/empty';
 import LskSummary from './lskSummary';
@@ -21,7 +21,9 @@ import getStyles from './styles';
 import VoteList from './voteList';
 import { merge } from '../../../utilities/helpers';
 import { tokenMap } from '../../../constants/tokens';
-import { goToWallet, getAccountLabel, getAccountTitle, openExplorer } from './utils';
+import {
+  goToWallet, getAccountLabel, getAccountTitle, openExplorer
+} from './utils';
 
 @connect(
   state => ({
@@ -29,7 +31,7 @@ import { goToWallet, getAccountLabel, getAccountTitle, openExplorer } from './ut
     account: state.accounts.info || {},
     activeToken: state.settings.token.active,
     language: state.settings.language,
-    }),
+  }),
   {}
 )
 class TransactionDetail extends React.Component {

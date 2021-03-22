@@ -17,9 +17,9 @@ const width = deviceWidth();
     settings: state.settings,
     accounts: state.accounts,
     priceTicker: state.service.priceTicker,
-    }),
+  }),
   {
-  settingsUpdated: settingsUpdatedAction,
+    settingsUpdated: settingsUpdatedAction,
   }
 )
 class AccountSummary extends React.Component {
@@ -40,6 +40,7 @@ class AccountSummary extends React.Component {
         .indexOf(token.active),
     };
   }
+
   height = 140;
 
   componentDidMount() {

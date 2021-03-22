@@ -18,10 +18,10 @@ import getStyles from './styles';
 @connect(
   state => ({
     settings: state.settings,
-    }),
+  }),
   {
-  settingsUpdated: settingsUpdatedAction,
-  accountSignedOut: accountSignedOutAction,
+    settingsUpdated: settingsUpdatedAction,
+    accountSignedOut: accountSignedOutAction,
   }
 )
 class Settings extends React.Component {

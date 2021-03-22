@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 import { P, H4 } from '../toolBox/typography';
 import cameraPermissionIconLight from '../../../assets/images/camera3xLight.png';
 import cameraPermissionIconDark from '../../../assets/images/camera3xDark.png';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes, colors } from '../../../constants/styleGuide';
 import { IconButton } from '../toolBox/button';

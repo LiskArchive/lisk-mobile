@@ -1,5 +1,3 @@
-
-
 /**
  * Since react-navigation doesn't support i18n
  * I've created this dummy function to help i18n scanner

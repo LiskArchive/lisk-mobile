@@ -16,11 +16,12 @@ import ModalHolder from '../../../utilities/modal';
 @connect(
   state => ({}),
   {
-  accountUnFollowed: accountUnFollowedAction,
+    accountUnFollowed: accountUnFollowedAction,
   }
 )
 class draggableItem extends React.Component {
   _deltaX = new Animated.Value(0);
+
   _deltaY = new Animated.Value(0);
 
   onDelete = () => {

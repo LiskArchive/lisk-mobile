@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Animated, StatusBar, Platform } from 'react-native';
+import {
+  View, Animated, StatusBar, Platform
+} from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from '@react-navigation/compat';
 import {
@@ -15,7 +17,9 @@ import AccountSummary from './accountSummary/home';
 import Transactions from '../../../shared/transactions';
 import Empty from '../../../shared/transactions/empty';
 import Loading from '../../../shared/transactions/loading';
-import { loadMore, resetTxAndFetch, showIntroModal, showInitializationModal } from './utils';
+import {
+  loadMore, resetTxAndFetch, showIntroModal, showInitializationModal
+} from './utils';
 import { viewportHeight } from '../../../../utilities/device';
 import InfiniteScrollView from '../../../shared/infiniteScrollView';
 import { tokenMap, tokenKeys } from '../../../../constants/tokens';
@@ -42,21 +46,24 @@ const summaryHeight = 200;
     activeToken: state.settings.token.active,
     btcIntroShown: state.settings.btcIntroShown,
     settings: state.settings,
-    }),
+  }),
   {
-  transactionsLoaded: transactionsLoadedAction,
-  transactionsReset: transactionsResetAction,
-  updateTransactions: blockUpdatedAction,
-  accountFetched: accountFetchedAction,
-  settingsUpdated: settingsUpdatedAction,
+    transactionsLoaded: transactionsLoadedAction,
+    transactionsReset: transactionsResetAction,
+    updateTransactions: blockUpdatedAction,
+    accountFetched: accountFetchedAction,
+    settingsUpdated: settingsUpdatedAction,
   }
 )
 class Home extends React.Component {
   state = {
     footer: null,
   };
+
   scrollY = new Animated.Value(0);
+
   scrollView = null;
+
   lastActiveToken = null;
 
   setHeader = () => {
@@ -137,28 +144,25 @@ class Home extends React.Component {
       },
     } = this.props;
     const prevTokenList = prevProps.settings.token.list;
-    const prevTransactionCount =
-      prevProps.transactions.pending.length +
-      prevProps.transactions.confirmed.length;
-    const transactionCount =
-      transactions.pending.length + transactions.confirmed.length;
-    const shouldUpdateState =
-      prevProps.transactions.loaded !== transactions.loaded ||
-      prevTransactionCount !== transactionCount;
+    const prevTransactionCount = prevProps.transactions.pending.length
+      + prevProps.transactions.confirmed.length;
+    const transactionCount = transactions.pending.length + transactions.confirmed.length;
+    const shouldUpdateState = prevProps.transactions.loaded !== transactions.loaded
+      || prevTransactionCount !== transactionCount;
 
     if (shouldUpdateState) {
       this.setState({
         footer:
-          Math.floor((viewportHeight() - summaryHeight) / itemHeight) <
-          transactionCount,
+          Math.floor((viewportHeight() - summaryHeight) / itemHeight)
+          < transactionCount,
       });
     }
     if (this.shouldFetchAccounts(prevTokenList, list)) {
       this.fetchInactiveTokensAccounts();
     }
     if (
-      prevProps.account[activeToken].balance !== account[activeToken].balance ||
-      prevProps.incognito !== incognito
+      prevProps.account[activeToken].balance !== account[activeToken].balance
+      || prevProps.incognito !== incognito
     ) {
       this.setHeader();
     }
@@ -204,10 +208,9 @@ class Home extends React.Component {
     if (!transactions.loaded) {
       content = <Loading style={styles.loadingState} />;
     } else {
-      const listElements =
-        transactions.count > 0
-          ? [...transactions.pending, ...transactions.confirmed]
-          : ['emptyState'];
+      const listElements = transactions.count > 0
+        ? [...transactions.pending, ...transactions.confirmed]
+        : ['emptyState'];
       const onScroll = Animated.event([
         {
           nativeEvent: { contentOffset: { y: this.scrollY } },
@@ -242,8 +245,7 @@ class Home extends React.Component {
         />
       );
     }
-    const otherPageStatusBar =
-      theme === themes.light ? 'dark-content' : 'light-content';
+    const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
     return (
       <View style={[styles.container, styles.theme.container]}>
         {Platform.OS !== 'ios' ? (

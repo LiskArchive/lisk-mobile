@@ -19,7 +19,7 @@ import progressBar from '../../../shared/progressBar';
   state => ({
     accounts: state.accounts,
     settings: state.settings,
-    }),
+  }),
   {}
 )
 class Send extends React.Component {

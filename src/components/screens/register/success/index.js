@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { P } from '../../../shared/toolBox/typography';
 import { PrimaryButton } from '../../../shared/toolBox/button';
-import HeaderPlaceholderButton from '../../../screens/router/headerPlaceholderButton';
+import HeaderPlaceholderButton from '../../router/headerPlaceholderButton';
 import image from '../../../../assets/images/registrationProcess/success3x.png';
 
 class Success extends React.Component {

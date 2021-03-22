@@ -10,7 +10,7 @@ import { translate } from 'react-i18next';
 import { IconButton } from '../toolBox/button';
 import { P } from '../toolBox/typography';
 import { colors } from '../../../constants/styleGuide';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const CameraOverlay = ({

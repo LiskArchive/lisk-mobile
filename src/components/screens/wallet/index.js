@@ -181,10 +181,10 @@ class Wallet extends React.Component {
     );
 
     if (
-      storedAccount.length !== prevStoredAccount.length ||
-      (storedAccount.length &&
-        storedAccount[0].label !== prevStoredAccount[0].label) ||
-      this.state.account.balance !== prevState.account.balance
+      storedAccount.length !== prevStoredAccount.length
+      || (storedAccount.length
+        && storedAccount[0].label !== prevStoredAccount[0].label)
+      || this.state.account.balance !== prevState.account.balance
     ) {
       this.setHeader();
     }
@@ -201,10 +201,9 @@ class Wallet extends React.Component {
     if (!transactions.loaded) {
       content = <Loading />;
     } else {
-      const listElements =
-        transactions.count > 0
-          ? [...transactions.pending, ...transactions.confirmed]
-          : ['emptyState'];
+      const listElements = transactions.count > 0
+        ? [...transactions.pending, ...transactions.confirmed]
+        : ['emptyState'];
       const onScroll = Animated.event([
         {
           nativeEvent: { contentOffset: { y: this.scrollY } },

@@ -27,13 +27,16 @@ import { validateAddress } from '../../../utilities/validators';
 )
 class AddToBookmark extends React.Component {
   activeInputRef = null;
+
   validateLabel = str => {
     if (str === '') {
       return -1;
     }
     return str.length > 20 ? 1 : 0;
   };
+
   scannedData = {};
+
   state = {
     editMode: false,
     header: true,

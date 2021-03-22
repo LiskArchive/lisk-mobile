@@ -1,5 +1,7 @@
 import React from 'react';
-import { NativeModules, View, TouchableHighlight, Text } from 'react-native';
+import {
+  NativeModules, View, TouchableHighlight, Text
+} from 'react-native';
 import styles from './styles';
 
 class DevSettings extends React.Component {

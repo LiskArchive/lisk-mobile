@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import CameraRollPicker from 'react-native-camera-roll-picker';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const CameraRoll = ({

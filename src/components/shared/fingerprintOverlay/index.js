@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 import Icon from '../toolBox/icon';
 import { H4, P } from '../toolBox/typography';
 import { colors } from '../../../constants/styleGuide';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 class FingerprintOverlay extends React.Component {

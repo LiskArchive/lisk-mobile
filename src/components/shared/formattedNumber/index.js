@@ -19,10 +19,9 @@ class FormattedNumber extends React.Component {
     const bigNum = new BigNumber(val || children);
     const formatedNumber = bigNum.toFormat();
     const matched = formatedNumber.match(reg2);
-    const normalizedVal =
-      trim && matched && matched[0] !== '0.' && matched[0] !== '-0.'
-        ? matched[0].replace(/\.$/, '')
-        : formatedNumber;
+    const normalizedVal = trim && matched && matched[0] !== '0.' && matched[0] !== '-0.'
+      ? matched[0].replace(/\.$/, '')
+      : formatedNumber;
     const valueWithoutSeparators = normalizedVal.replace(/,/g, '');
     const localizedVal = Number(valueWithoutSeparators).toLocaleString(
       `${language}-${language.toUpperCase()}`,

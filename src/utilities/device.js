@@ -22,7 +22,7 @@ export const deviceModel = () => DeviceInfo.getDeviceId();
 export const deviceType = () => {
   if (Platform.OS === 'ios' && DeviceInfo.hasNotch()) {
     return 'iOSx';
-  } else if (Platform.OS === 'ios' && !DeviceInfo.hasNotch()) {
+  } if (Platform.OS === 'ios' && !DeviceInfo.hasNotch()) {
     return 'iOS';
   }
   return 'android';
@@ -68,10 +68,9 @@ export const SCREEN_HEIGHTS = {
 
 export const deviceLocale = () => {
   if (Platform.OS === 'ios') {
-    const locale =
-      parseInt(Platform.Version, 10) > 12
-        ? NativeModules.SettingsManager.settings.AppleLanguages[0]
-        : NativeModules.SettingsManager.settings.AppleLocale; // "fr_FR"
+    const locale = parseInt(Platform.Version, 10) > 12
+      ? NativeModules.SettingsManager.settings.AppleLanguages[0]
+      : NativeModules.SettingsManager.settings.AppleLocale; // "fr_FR"
     return locale.substr(0, 2);
   }
   return NativeModules.I18nManager.localeIdentifier.substr(0, 2);

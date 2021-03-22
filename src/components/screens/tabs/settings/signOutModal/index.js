@@ -10,7 +10,7 @@ import getStyles from './styles';
 
 @connect(state => ({
   settings: state.settings,
-  }))
+}))
 class SignOutModal extends React.Component {
   onConfirm = () => {
     removePassphraseFromKeyChain();

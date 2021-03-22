@@ -12,6 +12,7 @@ import { themes, colors } from '../../../constants/styleGuide';
  */
 class InfiniteScrollView extends React.Component {
   canLoadMore = true;
+
   state = {
     refreshing: false,
   };
@@ -24,8 +25,8 @@ class InfiniteScrollView extends React.Component {
     }) => {
       const paddingToBottom = 20;
       return (
-        layoutMeasurement.height + contentOffset.y >=
-        contentSize.height - paddingToBottom
+        layoutMeasurement.height + contentOffset.y
+        >= contentSize.height - paddingToBottom
       );
     };
     if (isCloseToBottom(nativeEvent) && this.canLoadMore) {

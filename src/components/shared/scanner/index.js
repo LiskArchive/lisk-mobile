@@ -7,7 +7,7 @@ import QRCode from '@remobile/react-native-qrcode-local-image';
 import CameraAccess from './cameraAccess';
 import CameraOverlay from './cameraOverlay';
 import CameraRoll from './cameraRoll';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 class Scanner extends React.Component {

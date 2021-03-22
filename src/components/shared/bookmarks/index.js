@@ -13,9 +13,9 @@ import getStyles from './styles';
   state => ({
     list: state.accounts.followed,
     activeToken: state.settings.token.active,
-    }),
+  }),
   {
-  settingsUpdated: settingsUpdatedAction,
+    settingsUpdated: settingsUpdatedAction,
   }
 )
 class Bookmarks extends React.Component {
@@ -34,8 +34,8 @@ class Bookmarks extends React.Component {
     const filterList = list[activeToken].filter(item => {
       if (query.length === 0) return true;
       return (
-        item.address.indexOf(query) >= 0 ||
-        item.label.toLowerCase().indexOf(query.toLowerCase()) >= 0
+        item.address.indexOf(query) >= 0
+        || item.label.toLowerCase().indexOf(query.toLowerCase()) >= 0
       );
     });
 

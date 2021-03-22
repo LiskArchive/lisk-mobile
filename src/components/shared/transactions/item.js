@@ -12,7 +12,7 @@ import { stringShortener } from '../../../utilities/helpers';
 import loadingAnimation from '../../../assets/animations/loading-dots.json';
 import transactions from '../../../constants/transactions';
 import Blur from './blur';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const txTypes = [
@@ -24,7 +24,7 @@ const txTypes = [
 
 @connect(state => ({
   language: state.settings.language,
-  }))
+}))
 class Item extends React.Component {
   componentDidMount() {
     if (typeof this.props.tx.timestamp !== 'number') {
@@ -80,10 +80,9 @@ class Item extends React.Component {
       addressText = followedAccount.label;
     }
 
-    const amount =
-      direction === 'incoming'
-        ? fromRawLsk(tx.amount)
-        : `-${fromRawLsk(tx.amount)}`;
+    const amount = direction === 'incoming'
+      ? fromRawLsk(tx.amount)
+      : `-${fromRawLsk(tx.amount)}`;
 
     return (
       <TouchableOpacity
@@ -104,8 +103,8 @@ class Item extends React.Component {
           </View>
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>
-              {activeToken === 'LSK' &&
-              (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)
+              {activeToken === 'LSK'
+              && (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)
                 ? t(transactions[txTypes[tx.type]].title)
                 : addressText}
             </B>
@@ -126,9 +125,9 @@ class Item extends React.Component {
         </View>
         {tx.type === 0 && (
           <View style={[styles.column, styles.amountWrapper]}>
-            {(activeToken === 'LSK' &&
-              tx.recipientAddress === tx.senderAddress) ||
-            incognito ? null : (
+            {(activeToken === 'LSK'
+              && tx.recipientAddress === tx.senderAddress)
+            || incognito ? null : (
               <View style={[styles[direction], styles.theme[direction]]}>
                 <FormattedNumber
                   trim={true}
@@ -143,7 +142,7 @@ class Item extends React.Component {
                   {amount}
                 </FormattedNumber>
               </View>
-            )}
+              )}
             {tx.recipientAddress !== tx.senderAddress && incognito ? (
               <Blur value={amount} direction={direction} />
             ) : null}

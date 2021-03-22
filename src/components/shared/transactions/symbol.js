@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import Avatar from '../avatar';
 import Icon from '../toolBox/icon';
 import transactions from '../../../constants/transactions';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../../constants/styleGuide';
 

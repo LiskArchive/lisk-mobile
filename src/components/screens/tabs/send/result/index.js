@@ -23,7 +23,7 @@ const createdAnimDuration = 6200;
     transactions: state.transactions,
     activeToken: state.settings.active,
     followedAccounts: state.accounts.followed,
-    }),
+  }),
   {}
 )
 class Result extends React.Component {
@@ -31,7 +31,9 @@ class Result extends React.Component {
     step: 0,
     txConfirmed: false,
   };
+
   animation = [];
+
   timeouts = {
     created: null,
     confirmed: null,
@@ -61,12 +63,10 @@ class Result extends React.Component {
 
   componentWillUpdate(nextProp) {
     const { sharedData } = this.props;
-    const nowPending =
-      this.props.transactions.pending.filter(tx => tx.id === sharedData.txId)
-        .length > 0;
-    const nextConfirmed =
-      nextProp.transactions.confirmed.filter(tx => tx.id === sharedData.txId)
-        .length > 0;
+    const nowPending = this.props.transactions.pending.filter(tx => tx.id === sharedData.txId)
+      .length > 0;
+    const nextConfirmed = nextProp.transactions.confirmed.filter(tx => tx.id === sharedData.txId)
+      .length > 0;
 
     if (nowPending && nextConfirmed) {
       this.setState({ txConfirmed: true }, () => { this.play('confirmed'); });
@@ -116,10 +116,9 @@ class Result extends React.Component {
       item => item.address === address
     );
 
-    const [txCreatedAnim, txPendingAnim, txConfirmedAnim] =
-      theme === themes.light
-        ? [txCreatedAnimLight, txPendingAnimLight, txConfirmedAnimLight]
-        : [txCreatedAnimDark, txPendingAnimDark, txConfirmedAnimDark];
+    const [txCreatedAnim, txPendingAnim, txConfirmedAnim] = theme === themes.light
+      ? [txCreatedAnimLight, txPendingAnimLight, txConfirmedAnimLight]
+      : [txCreatedAnimDark, txPendingAnimDark, txConfirmedAnimDark];
 
     return (
       <View style={[styles.container, styles.theme.container]}>
@@ -161,10 +160,13 @@ class Result extends React.Component {
           {isNotFollowed && (
             <A
               onPress={() =>
-                navigation.navigate({ name: 'AddBookmark', params: {
-                  title: t('New bookmark'),
-                  account: { address },
-                }})
+                navigation.navigate({
+                  name: 'AddBookmark',
+                  params: {
+                    title: t('New bookmark'),
+                    account: { address },
+                  }
+                })
               }
               style={styles.anchor}
             >

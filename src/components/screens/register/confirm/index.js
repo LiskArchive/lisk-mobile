@@ -148,24 +148,22 @@ class Confirm extends React.Component {
     return this.state.missing.length > 0
       ? passphrase.map((val, index) => {
         const optionIndex = this.state.missing.indexOf(index);
-        const element =
-            optionIndex >= 0 ? (
-              this.generatePlaceholder(index, optionIndex, val)
-            ) : (
+        const element = optionIndex >= 0 ? (
+          this.generatePlaceholder(index, optionIndex, val)
+        ) : (
               <P key={index} style={styles.word}>
                 {val}
               </P>
-            );
+        );
         return element;
       })
       : null;
   };
 
   generatePlaceholder(index, optionIndex, value) {
-    const style =
-      this.state.visibleOptions === optionIndex
-        ? null
-        : styles.deActivePlaceholder;
+    const style = this.state.visibleOptions === optionIndex
+      ? null
+      : styles.deActivePlaceholder;
     return (
       <Button
         noPredefinedStyle

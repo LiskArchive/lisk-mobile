@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { TouchableHighlight, TouchableOpacity, Text } from 'react-native';
 import getStyles from './styles';
 import Icon from '../icon';
-import withTheme from '../../../shared/withTheme';
+import withTheme from '../../withTheme';
 
 const modifyProps = props => {
   const modifiedProps = Object.keys(props)
@@ -79,8 +79,7 @@ const LabelButton = props => {
   }) => {
     const mergestyle = [styles.button, styles.labelButton];
 
-    const propStylesArr =
-      propsStyle instanceof Array ? propsStyle : [propsStyle];
+    const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
     propStylesArr.forEach(element => mergestyle.push(element));
 
     if (disabled) mergestyle.push(styles.disabledButtonColor);

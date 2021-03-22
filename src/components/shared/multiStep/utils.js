@@ -66,9 +66,8 @@ export const groupSteps = steps => {
  */
 export const getStyles = styles =>
   Object.keys(styles).reduce((acc, key) => {
-    acc[key] =
-      typeof document !== 'undefined'
-        ? { className: styles[key] }
-        : { style: styles[key] };
+    acc[key] = typeof document !== 'undefined'
+      ? { className: styles[key] }
+      : { style: styles[key] };
     return acc;
   }, {});

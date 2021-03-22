@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const Footer = ({ styles }) => <View style={styles.footer}></View>;

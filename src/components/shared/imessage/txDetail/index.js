@@ -1,13 +1,17 @@
 import React, { Fragment } from 'react';
-import { ScrollView, View, Image, NativeModules } from 'react-native';
+import {
+  ScrollView, View, Image, NativeModules
+} from 'react-native';
 import FormattedDate from '../../formattedDate';
-import withTheme from '../../../shared/withTheme';
+import withTheme from '../../withTheme';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import FormattedNumber from '../../formattedNumber';
-import { B, P, H1, H3, A } from '../../toolBox/typography';
+import {
+  B, P, H1, H3, A
+} from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
-import Avatar from '../../../shared/avatar';
-import Loading from '../../../shared/transactions/loading';
+import Avatar from '../../avatar';
+import Loading from '../../transactions/loading';
 import transactions from '../../../../constants/transactions';
 import { tokenMap } from '../../../../constants/tokens';
 import { transactions as transactionsAPI } from '../../../../utilities/api';
@@ -126,12 +130,12 @@ class TransactionDetail extends React.Component {
                 </Fragment>
               }
             </View>
-            {(tx.type && tx.type !== 0) ||
-            tx.recipientAddress === tx.senderAddress ? (
+            {(tx.type && tx.type !== 0)
+            || tx.recipientAddress === tx.senderAddress ? (
               <H3 style={amountStyle}>
                 {transactions[txTypes[tx.type]].title}
               </H3>
-            ) : null}
+              ) : null}
             {tx.type === 0 && tx.recipientAddress !== tx.senderAddress ? (
               <H1 style={amountStyle}>
                 {amountSign}

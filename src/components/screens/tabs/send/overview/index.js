@@ -9,7 +9,9 @@ import { toRawLsk, fromRawLsk } from '../../../../../utilities/conversions';
 import { PrimaryButton } from '../../../../shared/toolBox/button';
 import Avatar from '../../../../shared/avatar';
 import Icon from '../../../../shared/toolBox/icon';
-import { H4, B, P, A } from '../../../../shared/toolBox/typography';
+import {
+  H4, B, P, A
+} from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { colors } from '../../../../../constants/styleGuide';
@@ -39,9 +41,9 @@ const getTranslatedMessages = t => ({
 @connect(
   state => ({
     language: state.settings.language,
-    }),
+  }),
   {
-  transactionAdded: transactionAddedAction,
+    transactionAdded: transactionAddedAction,
   }
 )
 class Overview extends React.Component {
@@ -51,7 +53,9 @@ class Overview extends React.Component {
   };
 
   componentDidMount() {
-    const { t, prevStep, navigation, route } = this.props;
+    const {
+      t, prevStep, navigation, route
+    } = this.props;
     const { send, initialize } = getTranslatedMessages(t);
     let options = {
       title: send.title,
@@ -74,7 +78,9 @@ class Overview extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { t, lng, navigation, route } = this.props;
+    const {
+      t, lng, navigation, route
+    } = this.props;
 
     if (prevProps.lng !== lng) {
       const { initialize, send } = getTranslatedMessages(t);
@@ -155,10 +161,9 @@ class Overview extends React.Component {
       language,
     } = this.props;
 
-    const actionType =
-      route.params?.initialize || this.state.initialize
-        ? 'initialize'
-        : 'send';
+    const actionType = route.params?.initialize || this.state.initialize
+      ? 'initialize'
+      : 'send';
 
     const translatedMessages = getTranslatedMessages(t);
     const bookmark = followed[token.active].find(

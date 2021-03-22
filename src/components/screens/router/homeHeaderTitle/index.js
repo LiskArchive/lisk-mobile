@@ -6,6 +6,7 @@ import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import Avatar from '../../../shared/avatar';
 import Icon from '../../../shared/toolBox/icon';
@@ -19,7 +20,6 @@ import lightMedium from '../../../../assets/images/balanceBlur/lightMedium.png';
 import lightSmall from '../../../../assets/images/balanceBlur/lightSmall.png';
 import { tokenMap } from '../../../../constants/tokens';
 import { colors } from '../../../../constants/styleGuide';
-import { useSelector } from 'react-redux';
 import { deviceType } from '../../../../utilities/device';
 
 const blurs = {
@@ -180,6 +180,6 @@ const HomeHeaderTitle = ({
       )}
     </View>
   );
-}
+};
 
 export default withTheme(HomeHeaderTitle, getStyles());

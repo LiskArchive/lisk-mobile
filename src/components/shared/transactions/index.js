@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
-import { View, Animated, Platform, ActivityIndicator } from 'react-native';
+import {
+  View, Animated, Platform, ActivityIndicator
+} from 'react-native';
 import connect from 'redux-connect-decorator';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { translate } from 'react-i18next';
@@ -10,7 +12,7 @@ import Footer from './footer';
 import { H3 } from '../toolBox/typography';
 import colors from '../../../constants/styleGuide/colors';
 import easing from '../../../utilities/easing';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 import { IconButton } from '../toolBox/button';
 
@@ -25,9 +27,9 @@ import { IconButton } from '../toolBox/button';
     incognitoMode: state.settings.incognito,
     activeToken: state.settings.token.active,
     followedAccounts: state.accounts.followed || [],
-    }),
+  }),
   {
-  settingsUpdated: settingsUpdatedAction,
+    settingsUpdated: settingsUpdatedAction,
   }
 )
 class Transactions extends React.Component {
@@ -37,6 +39,7 @@ class Transactions extends React.Component {
       top: new Animated.Value(20),
     },
   };
+
   componentDidMount() {
     let timeout = null;
     if (this.props.type === 'home') {
@@ -53,6 +56,7 @@ class Transactions extends React.Component {
     }
     this.initialFadeIn();
   }
+
   // eslint-disable-next-line class-methods-use-this
   componentWillUnmount() {
     RNShake.removeEventListener('ShakeEvent');
@@ -102,11 +106,11 @@ class Transactions extends React.Component {
 
     return (
       <Anim style={[styles.container, { opacity, top }]}>
-        {!transactions ||
-        (transactions.confirmed.length === 0 &&
-          transactions.pending.length === 0) ? (
+        {!transactions
+        || (transactions.confirmed.length === 0
+          && transactions.pending.length === 0) ? (
           <Fragment />
-        ) : (
+          ) : (
           <Fragment>
             <View style={[styles.placeholder, { height }]}>
               {Platform.OS === 'ios' && refreshing ? (
@@ -138,7 +142,7 @@ class Transactions extends React.Component {
             />
             {footer ? <Footer /> : null}
           </Fragment>
-        )}
+          )}
       </Anim>
     );
   }

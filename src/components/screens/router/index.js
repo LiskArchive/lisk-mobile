@@ -17,9 +17,9 @@ import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
-import Tabs from './tabStack';
-import {colors} from '../../../constants/styleGuide';
-import {getHeaderOptions} from './tabStack';
+import Tabs, { getHeaderOptions } from './tabStack';
+import { colors } from '../../../constants/styleGuide';
+
 import navigationOptions from './navigationOptions';
 
 const MainStack = createStackNavigator();

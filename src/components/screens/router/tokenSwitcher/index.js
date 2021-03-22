@@ -17,10 +17,9 @@ const TokenSwitcher = ({ styles, theme, safeArea }) => {
   const { token } = useSelector(state => state.settings);
   const os = deviceType();
 
-  const style =
-    token.active === tokenKeys[0]
-      ? { backgroundColor: colors[theme].ultramarineBlue }
-      : { backgroundColor: colors[theme].BTC };
+  const style = token.active === tokenKeys[0]
+    ? { backgroundColor: colors[theme].ultramarineBlue }
+    : { backgroundColor: colors[theme].BTC };
   const profiles = tokenKeys.filter(key => token.list[key]);
 
   return profiles.length > 1 ? (

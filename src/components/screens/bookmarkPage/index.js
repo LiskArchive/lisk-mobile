@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Animated, ScrollView, Keyboard } from 'react-native';
+import {
+  View, Animated, ScrollView, Keyboard
+} from 'react-native';
 import { translate } from 'react-i18next';
 import Icon from '../../shared/toolBox/icon';
 import Input from '../../shared/toolBox/input';
@@ -12,11 +14,14 @@ import Bookmarks from '../../shared/bookmarks';
 
 class Bookmark extends React.Component {
   activeInputRef = null;
+
   scannedData = {};
+
   state = {
     header: true,
     query: '',
   };
+
   animatedStyles = {
     height: new Animated.Value(75),
     paddingTop: new Animated.Value(20),

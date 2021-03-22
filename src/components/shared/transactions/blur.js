@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 import darkMediumOutgoing from '../../../assets/images/amountBlur/outgoing/darkMedium.png';
 import darkSmallOutgoing from '../../../assets/images/amountBlur/outgoing/darkSmall.png';

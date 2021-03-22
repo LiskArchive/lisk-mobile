@@ -22,7 +22,7 @@ const blurs = {
 
 @connect(state => ({
   language: state.settings.language,
-  }))
+}))
 class Profile extends React.Component {
   render() {
     const {
@@ -117,14 +117,14 @@ class Profile extends React.Component {
           ]}
         >
           {!(
-            settings.incognito ||
-            fiatBalance === 'NaN' ||
-            !fiatBalance
+            settings.incognito
+            || fiatBalance === 'NaN'
+            || !fiatBalance
           ) ? (
             <P style={[styles.fiatValue, styles.theme.fiatValue]}>
               {`~ ${fiatBalance} ${settings.currency}`}
             </P>
-          ) : null}
+            ) : null}
         </AView>
       </View>
     );

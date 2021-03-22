@@ -1,4 +1,4 @@
-import { tokenMap } from '../constants/tokens';
+import { tokenMap } from './tokens';
 
 const data = {
   activeToken: tokenMap.LSK.key,
