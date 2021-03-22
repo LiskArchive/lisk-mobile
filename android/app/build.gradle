@@ -84,7 +84,7 @@ project.ext.react = [
 apply from: "../../node_modules/react-native/react.gradle"
 
 project.ext.vectoricons = [
-    iconFontNames: [ 'icomoon.ttf' ]
+    iconFontNames: [ 'icomoon.ttf', 'Dots-Regular.ttf', 'PTMono-Regular.ttf' ]
 ]
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
@@ -118,7 +118,6 @@ def getPassword(String keyChain) {
 }
 def pass = getPassword("android_keystore")
 
-
 /**
  * The preferred build flavor of JavaScriptCore.
  *
@@ -131,6 +130,7 @@ def pass = getPassword("android_keystore")
  * this variant is about 6MiB larger per architecture than default.
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
+
 /**
  * Whether to enable the Hermes VM.
  *
@@ -139,8 +139,6 @@ def jscFlavor = 'org.webkit:android-jsc:+'
  * and the benefits of using Hermes will therefore be sharply reduced.
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
-
-
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -154,8 +152,8 @@ android {
         applicationId "io.lisk.mobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 40
-        versionName "1.4.1"
+        versionCode 44
+        versionName "1.4.1-alpha.4"
         missingDimensionStrategy 'react-native-camera', 'mlkit'
         multiDexEnabled true
     }
@@ -186,13 +184,13 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -204,6 +202,7 @@ android {
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
+
         }
     }
 }
@@ -212,7 +211,9 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
     implementation project(path: ":react-native-interactable") 
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
