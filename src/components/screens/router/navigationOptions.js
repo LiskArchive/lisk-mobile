@@ -123,6 +123,9 @@ navigationOptions.Settings = {
 navigationOptions.Register = {
   title: 'Account creation',
   headerLeft: props => <HeaderBackButton {...props} />,
+  headerRight: () => <HeaderPlaceholderButton />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.TxDetail = {
