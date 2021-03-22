@@ -63,7 +63,7 @@ class draggableItem extends React.Component {
               onPress={() => {
                 this.ref.snapTo({ index: 0 });
                 navigate({
-                  routeName: 'AddBookmark',
+                  name: 'AddBookmark',
                   params: {
                     account: data,
                     title: t('Edit bookmark'),
