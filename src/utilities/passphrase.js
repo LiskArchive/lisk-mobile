@@ -1,5 +1,9 @@
 import Lisk from '@liskhq/lisk-client';
-import * as Keychain from 'react-native-keychain';
+import {
+  setGenericPassword,
+  getGenericPassword,
+  resetGenericPassword,
+} from 'react-native-keychain';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
 import { extractAddress } from './api/lisk/account';
@@ -55,9 +59,9 @@ export const generatePassphrase = () => {
  */
 export const storePassphraseInKeyChain = passphrase => {
   const address = extractAddress(passphrase);
-  Keychain.setGenericPassword(address, passphrase, {
-    accessGroup: '58UK9RE9TP.org.lisk.mobile',
-    service: 'org.lisk.mobile',
+  setGenericPassword(address, passphrase, {
+    accessGroup: '58UK9RE9TP.io.lisk.mobile',
+    service: 'io.lisk.mobile',
   });
 };
 
@@ -69,7 +73,7 @@ export const removePassphraseFromKeyChain = async (
   errorCallback = err => err
 ) => {
   try {
-    await Keychain.resetGenericPassword({ service: 'org.lisk.mobile' });
+    await resetGenericPassword({ service: 'io.lisk.mobile' });
     successCallback();
   } catch (error) {
     errorCallback(error);
@@ -77,7 +81,7 @@ export const removePassphraseFromKeyChain = async (
 };
 
 export const getPassphraseFromKeyChain = () =>
-  Keychain.getGenericPassword({ service: 'org.lisk.mobile' });
+  getGenericPassword({ service: 'io.lisk.mobile' });
 
 /**
  * @param {function} successCallback
