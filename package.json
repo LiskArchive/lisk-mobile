@@ -5,9 +5,9 @@
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
   "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
+    "android": "npx react-native run-android",
+    "ios": "np xreact-native run-ios",
+    "start": "npx react-native start",
     "release:android": "cd android && ./gradlew bundleRelease",
     "test": "jest --config ./jest.config.js --env=jsdom",
     "test:live": "npm test -- --watch",
