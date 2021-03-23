@@ -111,19 +111,18 @@ function parse(config, oldTranslations) {
  * @param {Object} newKeys - New translation keys parsed from the jsx files
  */
 async function writeFile(config, language, resources, rawOldKeys, newKeys) {
-  const additionalKeys =
-    language === config.defaultLng
-      ? Object.keys(newKeys).reduce((acc, key) => {
-        acc[key] = key;
-        return acc;
-      }, {})
-      : newKeys;
-  const updatedTranslations = Object.assign(
-    {},
-    rawOldKeys,
-    resources,
-    additionalKeys
-  );
+  const additionalKeys = language === config.defaultLng
+    ? Object.keys(newKeys).reduce((acc, key) => {
+      acc[key] = key;
+      return acc;
+    }, {})
+    : newKeys;
+  const updatedTranslations = {
+
+    ...rawOldKeys,
+    ...resources,
+    ...additionalKeys
+  };
   const outputJSON = `${JSON.stringify(updatedTranslations, null, 2)}\n`;
   fs.writeFileSync(`${config.outputPath}/${language}.json`, outputJSON);
 }
