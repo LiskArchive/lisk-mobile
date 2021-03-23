@@ -1,7 +1,6 @@
 import { Platform, Dimensions, NativeModules } from 'react-native';
 // import { Header } from 'react-navigation';
 import DeviceInfo from 'react-native-device-info';
-import { Appearance } from 'react-native-appearance/src/index.tsx';
 
 const { width, height } = Dimensions.get('window');
 const Header = { HEIGHT: 40 };
@@ -74,11 +73,4 @@ export const deviceLocale = () => {
     return locale.substr(0, 2);
   }
   return NativeModules.I18nManager.localeIdentifier.substr(0, 2);
-};
-
-export const deviceTheme = () => {
-  if (Platform.OS === 'ios' && Platform.Version >= 13) {
-    return Appearance.getColorScheme();
-  }
-  return 'light';
 };

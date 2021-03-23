@@ -1,4 +1,4 @@
-import bitcoin from 'bitcoinjs-lib';
+import { networks } from 'bitcoinjs-lib';
 import fetchMock from 'fetch-mock';
 import * as transactions from './transactions';
 import config from '../../../../btc.config';
@@ -134,7 +134,7 @@ describe('api/btc/transactions', () => {
 
   describe('create', () => {
     beforeAll(() => {
-      config.network = bitcoin.networks.testnet;
+      config.network = networks.testnet;
 
       transactions.getUnspentTransactionOutputs = jest.fn();
       transactions.getUnspentTransactionOutputs.mockResolvedValue(

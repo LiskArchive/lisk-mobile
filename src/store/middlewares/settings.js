@@ -1,6 +1,6 @@
 import actionTypes from '../../constants/actions';
 import { storeSettings } from '../../utilities/storage';
-import { deviceLocale, deviceTheme } from '../../utilities/device';
+import { deviceLocale } from '../../utilities/device';
 import i18n from '../../../locales';
 // import { languageKeys } from '../../constants/languages';
 import { pricesRetrieved } from '../../actions/service';
@@ -22,9 +22,9 @@ const settingsMiddleware = store => next => action => {
       // }
       action.data.language = 'en';
 
-      if (!action.data.theme) {
-        action.data.theme = deviceTheme();
-      }
+      // if (!action.data.theme) {
+      //   action.data.theme = deviceTheme();
+      // }
 
       next(action);
       break;
@@ -38,7 +38,7 @@ const settingsMiddleware = store => next => action => {
       if (action.data.language) {
         i18n.changeLanguage(action.data.language);
       }
-      action.data.theme = deviceTheme();
+      // action.data.theme = deviceTheme();
       break;
     default:
       next(action);

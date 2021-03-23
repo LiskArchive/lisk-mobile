@@ -151,6 +151,7 @@ describe('Reducers: Settings', () => {
 
       const changedState = settings(state, action);
       expect(changedState).toEqual({
+        currency: 'EUR',
         sensorType: 'Face ID',
         token: defaultTokens,
       });
