@@ -4,6 +4,7 @@ import { fromSeed } from 'bip32';
 import config from '../../../../btc.config';
 
 export const getSummary = params =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(

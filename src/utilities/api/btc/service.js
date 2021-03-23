@@ -2,6 +2,7 @@ import config from '../../../../btc.config';
 import liskConfig from '../../../../lsk.config';
 
 export const getPriceTicker = () =>
+// eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(
@@ -29,6 +30,7 @@ export const getPriceTicker = () =>
   });
 
 export const getDynamicFees = () =>
+// eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(config.minerFeesURL);

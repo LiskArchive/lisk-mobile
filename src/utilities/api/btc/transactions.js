@@ -53,7 +53,7 @@ const normalizeTransactionsResponse = ({ address, list }) =>
 export const get = ({
   id, address, limit = 20, offset = 0
 }) =>
-  // eslint-disable-next-line max-statements
+  // eslint-disable-next-line
   new Promise(async (resolve, reject) => {
     try {
       let response;
@@ -110,6 +110,7 @@ export const calculateTransactionFee = ({
  * @returns {Promise<Array>}
  */
 export const getUnspentTransactionOutputs = address =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(`${config.url}/utxo/${address}`);
@@ -131,7 +132,7 @@ export const create = ({
   amount,
   dynamicFeePerByte,
 }) =>
-  // eslint-disable-next-line max-statements
+  // eslint-disable-next-line
   new Promise(async (resolve, reject) => {
     try {
       amount = Number(amount);
@@ -215,6 +216,7 @@ export const create = ({
   });
 
 export const broadcast = transactionHex =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(
