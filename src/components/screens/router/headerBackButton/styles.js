@@ -1,9 +1,12 @@
 import { deviceType } from '../../../../utilities/device';
 
 const type = deviceType();
-let marginTop = type === 'iOSx' ? -3 : 0;
+let normalMarginTop = type === 'iOSx' ? -3 : 0;
+let safeAreaMarginTop = type === 'iOSx' ? 50 : 20;
+
 if (type === 'android') {
-  marginTop = 6;
+  normalMarginTop = 0;
+  safeAreaMarginTop = 0;
 }
 
 export default () => ({
@@ -11,7 +14,10 @@ export default () => ({
     main: {
       width: 60,
       height: 40,
-      marginTop,
+      marginTop: normalMarginTop,
+    },
+    safeArea: {
+      marginTop: safeAreaMarginTop,
     },
   },
 });

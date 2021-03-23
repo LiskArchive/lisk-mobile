@@ -1,10 +1,12 @@
 import React from 'react';
-import { Platform, View, Image, ActivityIndicator } from 'react-native';
+import {
+  Platform, View, Image, ActivityIndicator
+} from 'react-native';
 import { translate } from 'react-i18next';
 import emptyHomeLight from '../../../assets/images/home/emptyHomeLight3x.png';
 import emptyHomeDark from '../../../assets/images/home/emptyHomeDark3x.png';
 import { P } from '../toolBox/typography';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../../constants/styleGuide';
 

@@ -16,9 +16,9 @@ import ModalHolder from '../../../../../utilities/modal';
   state => ({
     settings: state.settings,
     accounts: state.accounts.info,
-    }),
+  }),
   {
-  settingsUpdated: settingsUpdatedAction,
+    settingsUpdated: settingsUpdatedAction,
   }
 )
 class AssetSelection extends React.Component {

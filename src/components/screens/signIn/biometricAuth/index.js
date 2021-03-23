@@ -20,7 +20,9 @@ class BiometricAuth extends React.Component {
     tried: false,
     busy: false,
   };
+
   progress = new Animated.Value(0);
+
   animationLoop = true;
 
   runAnimation() {
@@ -63,7 +65,7 @@ class BiometricAuth extends React.Component {
   };
 
   onCreateAccount = () => {
-    this.props.navigation.navigate('Register');
+    this.props.navigation.navigate({ name: 'Register' });
   };
 
   componentDidMount() {
@@ -91,10 +93,9 @@ class BiometricAuth extends React.Component {
 
     let pageTitle = t('Choose an authentication method.');
     if (busy) {
-      pageTitle =
-        sensorType === 'Face ID'
-          ? t('Look at the front camera to authenticate.')
-          : t('Place your finger over the touch sensor to authenticate.');
+      pageTitle = sensorType === 'Face ID'
+        ? t('Look at the front camera to authenticate.')
+        : t('Place your finger over the touch sensor to authenticate.');
     }
 
     return (

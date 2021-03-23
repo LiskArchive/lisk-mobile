@@ -2,7 +2,6 @@ import React from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import { NavigationActions } from 'react-navigation';
 import { H4, P } from '../../../shared/toolBox/typography';
 import FingerprintOverlay from '../../../shared/fingerprintOverlay';
 import ItemTitle from './itemTitle';
@@ -19,10 +18,10 @@ import getStyles from './styles';
 @connect(
   state => ({
     settings: state.settings,
-    }),
+  }),
   {
-  settingsUpdated: settingsUpdatedAction,
-  accountSignedOut: accountSignedOutAction,
+    settingsUpdated: settingsUpdatedAction,
+    accountSignedOut: accountSignedOutAction,
   }
 )
 class Settings extends React.Component {
@@ -58,17 +57,13 @@ class Settings extends React.Component {
 
   signOut = () => {
     this.props.accountSignedOut();
-    this.props.navigation.reset(
-      [
-        NavigationActions.navigate({
-          routeName: 'SignIn',
-          params: { signOut: true },
-        }),
-      ],
-      0
-    );
+    this.props.navigation.reset({
+      index: 0,
+      routes: [{ name: 'SignIn', params: { signOut: true } }],
+    });
   };
 
+  // eslint-disable-next-line complexity
   render() {
     const {
       styles, theme, navigation, settings, t
@@ -232,7 +227,7 @@ class Settings extends React.Component {
             </View>
           </View>
         </ScrollView>
-        {Platform.OS === 'android' ? (
+        {Platform.OS === 'android' && Platform.Version < 23 ? (
           <FingerprintOverlay
             onModalClosed={this.hideDialog}
             error={this.state.error}

@@ -8,8 +8,6 @@ import SafeKeeping from './safeKeeping';
 import Intro from './intro';
 import { Small } from '../../shared/toolBox/typography';
 import styles from './styles';
-import { IconButton } from '../../shared/toolBox/button';
-import { colors } from '../../../constants/styleGuide';
 import progressBar from '../../shared/progressBar';
 
 const NavButton = props => (
@@ -22,34 +20,6 @@ const ActiveTitle = props => (
   <Small style={styles.activeGroupTitle} {...props} />
 );
 class Register extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      title: params.title,
-      headerStyle: {
-        backgroundColor: colors.light.headerBg,
-        borderBottomWidth: 0,
-        elevation: 0,
-      },
-      headerTitleStyle: {
-        textAlign: 'center',
-        flex: 1,
-      },
-      headerLeft: params.showButtonLeft ? (
-        <IconButton
-          icon="back"
-          title={params.backButtonTitle || ''}
-          onPress={() => (params.action ? params.action() : navigation.pop())}
-          style={styles.backButton}
-          color={colors.light.slateGray}
-        />
-      ) : (
-        <IconButton color="transparent" icon="back" />
-      ),
-      headerRight: <IconButton color="transparent" icon="back" />,
-    };
-  };
-
   state = {
     showNav: true,
   };
@@ -69,7 +39,7 @@ class Register extends React.Component {
   }
 
   onBackButtonPressedAndroid = () => {
-    const action = this.props.navigation.getParam('action', false);
+    const action = this.props.route.params?.action ?? false;
 
     if (action && typeof action === 'function') {
       action();
@@ -86,7 +56,7 @@ class Register extends React.Component {
   };
 
   render() {
-    const { navigation, t } = this.props;
+    const { navigation, route, t } = this.props;
     const noNavStyle = this.state.showNav ? {} : { paddingBottom: 0 };
     return (
       <View style={[styles.container, noNavStyle]}>
@@ -108,23 +78,26 @@ class Register extends React.Component {
             title="create"
             group={t('1. Creating your account')}
             navigation={navigation}
-          ></Intro>
+            route={route}
+          />
           <SafeKeeping
             title="safekeeping"
             group={t('2. Saving your passphrase')}
             navigation={navigation}
-          ></SafeKeeping>
+            route={route}
+          />
           <Confirm
             title="verify"
             group={t('3. Verifying your passphrase')}
             navigation={navigation}
-          ></Confirm>
+            route={route}
+          />
           <Success
             title="success"
             group={t('4. Security reminder')}
             hideNav={this.hideNav}
             navigation={navigation}
-          ></Success>
+          />
         </MultiStep>
       </View>
     );

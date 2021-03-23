@@ -42,16 +42,18 @@ const handleConnectivityChange = connectionInfo => {
   }
 };
 
+let unsubscribe;
+
 const socketMiddleware = store => next => action => {
   next(action);
   switch (action.type) {
     case actionTypes.accountSignedIn:
       socketSetup(store);
-      NetInfo.addEventListener(handleConnectivityChange);
+      unsubscribe = NetInfo.addEventListener(handleConnectivityChange);
       break;
     case actionTypes.accountSignedOut:
       closeConnection();
-      NetInfo.removeEventListener(handleConnectivityChange);
+      if (typeof unsubscribe === 'function') unsubscribe();
       break;
     default:
       break;

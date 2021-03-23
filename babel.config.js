@@ -4,5 +4,7 @@ module.exports = {
     '@babel/plugin-transform-react-jsx-source',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
     'transform-class-properties',
+    '@babel/plugin-proposal-optional-chaining',
+    '@babel/plugin-proposal-nullish-coalescing-operator',
   ],
 };

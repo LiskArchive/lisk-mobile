@@ -23,7 +23,7 @@ const createdAnimDuration = 6200;
     transactions: state.transactions,
     activeToken: state.settings.active,
     followedAccounts: state.accounts.followed,
-    }),
+  }),
   {}
 )
 class Result extends React.Component {
@@ -31,7 +31,9 @@ class Result extends React.Component {
     step: 0,
     txConfirmed: false,
   };
+
   animation = [];
+
   timeouts = {
     created: null,
     confirmed: null,
@@ -39,13 +41,11 @@ class Result extends React.Component {
 
   componentDidMount() {
     const {
-      reset,
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
-    setParams({
+    setOptions({
       title: 'Sent',
-      showButtonLeft: false,
-      action: reset,
+      headerLeft: () => null,
     });
     this.startDate = new Date();
     this.play('created');
@@ -53,21 +53,20 @@ class Result extends React.Component {
 
   componentWillUnmount() {
     const {
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
     clearTimeout(this.timeouts.created);
     clearTimeout(this.timeouts.confirmed);
-    setParams({ title: 'Send' });
+    setOptions({ title: 'Send' });
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillUpdate(nextProp) {
     const { sharedData } = this.props;
-    const nowPending =
-      this.props.transactions.pending.filter(tx => tx.id === sharedData.txId)
-        .length > 0;
-    const nextConfirmed =
-      nextProp.transactions.confirmed.filter(tx => tx.id === sharedData.txId)
-        .length > 0;
+    const nowPending = this.props.transactions.pending.filter(tx => tx.id === sharedData.txId)
+      .length > 0;
+    const nextConfirmed = nextProp.transactions.confirmed.filter(tx => tx.id === sharedData.txId)
+      .length > 0;
 
     if (nowPending && nextConfirmed) {
       this.setState({ txConfirmed: true }, () => { this.play('confirmed'); });
@@ -117,10 +116,9 @@ class Result extends React.Component {
       item => item.address === address
     );
 
-    const [txCreatedAnim, txPendingAnim, txConfirmedAnim] =
-      theme === themes.light
-        ? [txCreatedAnimLight, txPendingAnimLight, txConfirmedAnimLight]
-        : [txCreatedAnimDark, txPendingAnimDark, txConfirmedAnimDark];
+    const [txCreatedAnim, txPendingAnim, txConfirmedAnim] = theme === themes.light
+      ? [txCreatedAnimLight, txPendingAnimLight, txConfirmedAnimLight]
+      : [txCreatedAnimDark, txPendingAnimDark, txConfirmedAnimDark];
 
     return (
       <View style={[styles.container, styles.theme.container]}>
@@ -162,9 +160,12 @@ class Result extends React.Component {
           {isNotFollowed && (
             <A
               onPress={() =>
-                navigation.navigate('AddBookmark', {
-                  title: t('New bookmark'),
-                  account: { address },
+                navigation.navigate({
+                  name: 'AddBookmark',
+                  params: {
+                    title: t('New bookmark'),
+                    account: { address },
+                  }
                 })
               }
               style={styles.anchor}

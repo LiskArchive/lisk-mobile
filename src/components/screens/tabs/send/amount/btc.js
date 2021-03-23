@@ -21,7 +21,7 @@ const isAndroid = deviceType() === 'android';
 
 @connect(state => ({
   language: state.settings.language,
-  }))
+}))
 class AmountBTC extends React.Component {
   state = {
     fee: 0,

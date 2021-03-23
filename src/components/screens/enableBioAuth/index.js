@@ -14,31 +14,31 @@ import getStyles from './styles';
 @connect(
   state => ({
     passphrase: state.accounts.passphrase,
-    }),
+  }),
   {
-  settingsUpdated: settingsUpdatedAction,
+    settingsUpdated: settingsUpdatedAction,
   }
 )
 class EnableBioAuth extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const title = navigation.getParam('title', 'Bio Auth');
-    return {
-      title: `Enable ${title}`,
-    };
-  };
-
   confirm = () => {
     storePassphraseInKeyChain(this.props.passphrase);
     this.props.settingsUpdated({ hasStoredPassphrase: true });
     this.props.navigation.pop();
   };
 
+  componentDidMount() {
+    const title = this.props.route.params?.title ?? 'Bio Auth';
+    this.props.navigation.setOptions({
+      title: `Enable ${title}`,
+    });
+  }
+
   render() {
     const {
-      theme, styles, navigation, t
+      theme, styles, route, t
     } = this.props;
 
-    const title = navigation.getParam('title', 'Bio Auth');
+    const title = route.params?.title ?? 'Bio Auth';
 
     return (
       <View style={styles.wrapper}>

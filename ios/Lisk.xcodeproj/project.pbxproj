@@ -8,44 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* LiskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* LiskTests.m */; };
-		0E83377E0F2F4D33BB3CE949 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB865073FACB4AEEB229A6FF /* icomoon.ttf */; };
+		0A7023E0A655E3EF2DE9183F /* libPods-Lisk-LiskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E7B7CD3CF618B2F943B502 /* libPods-Lisk-LiskTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		24923F5215CC4CEEA6FD5173 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 914CE4F17323482BB575BEB0 /* OpenSans-Semibold.ttf */; };
-		3394A82321F1DFC0009CF136 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB865073FACB4AEEB229A6FF /* icomoon.ttf */; };
-		3394A82521F1F8CE009CF136 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
-		3394A82621F1F8D5009CF136 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */; };
-		3394A82721F1F8E0009CF136 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */; };
-		426CF278ABDA4231AE32D163 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */; };
-		4F7FDDEC2B3F43659A347587 /* Dots-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E1B4DCBCC0842B2986B9E14 /* Dots-Regular.ttf */; };
-		659EF7898465E30B648E2234 /* libPods-Lisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F350AE688EB24A2F11DAD627 /* libPods-Lisk.a */; };
-		6B0108587CF76FAF6B5B5E88 /* libPods-LiskMessageExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 811846D7B9E4285BE4739011 /* libPods-LiskMessageExtension.a */; };
-		7FBFE3D07A8E4244A5B3A4E9 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */; };
-		921411B12387F305006D77B4 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921411B02387F305006D77B4 /* Bridge.swift */; };
-		921411B32387F305006D77B4 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921411B02387F305006D77B4 /* Bridge.swift */; };
-		921411D623882D18006D77B4 /* LiskMessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9F623AB73FF646D1911425A5 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C51D72C0FAD40BFA9898B8F /* PTMono-Regular.ttf */; };
-		A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */; };
-		AC016ADD22783FB200E61127 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */; };
-		AC016ADE22783FB200E61127 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F757DDBDDE3E44FF90CA5133 /* BasierCircle-Regular.otf */; };
-		AC016ADF22783FB200E61127 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */; };
-		AC4B3F8B21F602A000BDDF7B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC4B3F8A21F602A000BDDF7B /* LaunchScreen.xib */; };
-		AC7A832621EF4BDB004502E4 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7A832521EF4BDB004502E4 /* MessagesViewController.swift */; };
-		AC7A832921EF4BDB004502E4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC7A832721EF4BDB004502E4 /* MainInterface.storyboard */; };
-		AC7A832B21EF4BDC004502E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC7A832A21EF4BDC004502E4 /* Assets.xcassets */; };
-		AC8EAD8C2271A48F00C0B5D2 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 914CE4F17323482BB575BEB0 /* OpenSans-Semibold.ttf */; };
-		ACFD52F321EF78B400A39ABE /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD52F221EF78B400A39ABE /* MessagesManager.swift */; };
-		ACFD52F521EF79A500A39ABE /* MessagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ACFD52F421EF79A500A39ABE /* MessagesManager.m */; };
-		ACFD52F721EF857E00A39ABE /* RNModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD52F621EF857E00A39ABE /* RNModuleInitialiser.swift */; };
-		ACFD537E21F089C900A39ABE /* MessagesManagerMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD537D21F089C900A39ABE /* MessagesManagerMappers.swift */; };
-		ACFD538021F0A8FD00A39ABE /* MessagesManagerEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */; };
-		ACFD538221F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */; };
-		B5BC131897364E8D86D1F42A /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F757DDBDDE3E44FF90CA5133 /* BasierCircle-Regular.otf */; };
-		C04DF4E469D84CC1A062C1F8 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */; };
-		C72ADEFA505BF99D2F274186 /* libPods-LiskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A1890705C01A70456C4DAC /* libPods-LiskTests.a */; };
-		D899C1D561774F7C96BB1191 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */; };
+		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* LiskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* LiskTests.m */; };
+		67A897A38F054B43DA7C6E37 /* libPods-Lisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B67B163AE982EA589FE2349 /* libPods-Lisk.a */; };
+		77C6CE885DC65E1F865A2FF6 /* libPods-Lisk-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E32A46ECFBC83B82EA6552 /* libPods-Lisk-tvOS.a */; };
+		7952112C25F765EA00CCF7F8 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */; };
+		7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */; };
+		7952112E25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */; };
+		7952113425F765F800CCF7F8 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */; };
+		7952113A25F7660200CCF7F8 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113925F7660200CCF7F8 /* icomoon.ttf */; };
+		7952114225F7660F00CCF7F8 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113F25F7660F00CCF7F8 /* OpenSans-Regular.ttf */; };
+		7952114325F7660F00CCF7F8 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114025F7660F00CCF7F8 /* OpenSans-Semibold.ttf */; };
+		7952114425F7660F00CCF7F8 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114125F7660F00CCF7F8 /* OpenSans-Bold.ttf */; };
+		7952114B25F7661900CCF7F8 /* Dots-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114925F7661900CCF7F8 /* Dots-Regular.ttf */; };
+		7952114C25F7661900CCF7F8 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114A25F7661900CCF7F8 /* PTMono-Regular.ttf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		FCAF818903D7BA0E8FA8D107 /* libPods-Lisk-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0587BE44208E810CB73ACCBB /* libPods-Lisk-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,63 +40,24 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = Lisk;
 		};
-		339AC00E23057E4D009A4B94 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4B3CD568314C40F799A5781E /* Interactable.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CC0127971E3ACC3900B23C9F;
-			remoteInfo = Interactable;
-		};
-		339AC01C23057E4D009A4B94 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 87DE9DE1D833458F857D0C90 /* RCTCustomInputController.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 39DF4FE71E00394E00F5B4B2;
-			remoteInfo = RCTCustomInputController;
-		};
-		9001FED823181F6E00DBC81D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A7B1E37D72F4DBDAAA71A0F /* RCTCustomInputController.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 39DF4FE71E00394E00F5B4B2;
-			remoteInfo = RCTCustomInputController;
-		};
-		921411D723882D27006D77B4 /* PBXContainerItemProxy */ = {
+		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AC7A832021EF4BDB004502E4;
-			remoteInfo = LiskMessageExtension;
-		};
-		B6D530BE25E5676C00E69E02 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B6D530B925E5676C00E69E02 /* RCTQRCodeLocalImage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 32D980DD1BE9F11C00FA27E5;
-			remoteInfo = RCTQRCodeLocalImage;
+			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
+			remoteInfo = "Lisk-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AC7A837521EF4BDC004502E4 /* Embed App Extensions */ = {
+		795216AB25FF3CA200CCF7F8 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				921411D623882D18006D77B4 /* LiskMessageExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B647FAAA210720D700EFF1B7 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -122,64 +67,48 @@
 		00E356EE1AD99517003FC87E /* LiskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* LiskTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiskTests.m; sourceTree = "<group>"; };
-		01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Bold.ttf"; path = "../src/assets/fonts/gilroy/Gilroy-Bold.ttf"; sourceTree = "<group>"; };
+		0587BE44208E810CB73ACCBB /* libPods-Lisk-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* Lisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Lisk/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Lisk/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Lisk/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Lisk/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Lisk/main.m; sourceTree = "<group>"; };
-		1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierCircle-Bold.otf"; path = "../src/assets/fonts/basierCircle/BasierCircle-Bold.otf"; sourceTree = "<group>"; };
-		2094B260978C4B609B27CDB1 /* libRNCNetInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCNetInfo.a; sourceTree = "<group>"; };
-		26EBAB238C54F950A570AA5E /* Pods-LiskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskTests.debug.xcconfig"; path = "Target Support Files/Pods-LiskTests/Pods-LiskTests.debug.xcconfig"; sourceTree = "<group>"; };
-		32BCF5F450D2803175BB32FC /* Pods-LiskMessageExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskMessageExtension.release.xcconfig"; path = "Target Support Files/Pods-LiskMessageExtension/Pods-LiskMessageExtension.release.xcconfig"; sourceTree = "<group>"; };
-		330DE28221523AE200B584E3 /* Lisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Lisk.entitlements; path = Lisk/Lisk.entitlements; sourceTree = "<group>"; };
-		33C330B721F1CF26003C62F1 /* LiskMessageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiskMessageExtension.entitlements; sourceTree = "<group>"; };
-		3A7B1E37D72F4DBDAAA71A0F /* RCTCustomInputController.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCustomInputController.xcodeproj; path = "../node_modules/react-native-keyboard-input/lib/ios/RCTCustomInputController.xcodeproj"; sourceTree = "<group>"; };
-		4735A61E525F40548A6AD278 /* libInteractable.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInteractable.a; sourceTree = "<group>"; };
-		4B3CD568314C40F799A5781E /* Interactable.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/lib/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
-		4C51D72C0FAD40BFA9898B8F /* PTMono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PTMono-Regular.ttf"; path = "../src/assets/fonts/passphrase/PTMono-Regular.ttf"; sourceTree = "<group>"; };
-		4E1B4DCBCC0842B2986B9E14 /* Dots-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Dots-Regular.ttf"; path = "../src/assets/fonts/passphrase/Dots-Regular.ttf"; sourceTree = "<group>"; };
-		5151B3598A4C4363814407E6 /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReanimated.a; sourceTree = "<group>"; };
-		5E0A61148EDE586E464F90BD /* Pods-Lisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk.release.xcconfig"; path = "Target Support Files/Pods-Lisk/Pods-Lisk.release.xcconfig"; sourceTree = "<group>"; };
-		5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierCircle-SemiBold.otf"; path = "../src/assets/fonts/basierCircle/BasierCircle-SemiBold.otf"; sourceTree = "<group>"; };
-		6F3C84F25D024703B97337E4 /* libRNShakeEvent.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShakeEvent.a; sourceTree = "<group>"; };
-		77720322F826EEECFB43C782 /* Pods-LiskMessageExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskMessageExtension.debug.xcconfig"; path = "Target Support Files/Pods-LiskMessageExtension/Pods-LiskMessageExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		7F025B043F18462784EC9F3D /* libRCTCustomInputController.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCustomInputController.a; sourceTree = "<group>"; };
-		811846D7B9E4285BE4739011 /* libPods-LiskMessageExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskMessageExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		87DE9DE1D833458F857D0C90 /* RCTCustomInputController.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCustomInputController.xcodeproj; path = "../node_modules/react-native-keyboard-input/lib/ios/RCTCustomInputController.xcodeproj"; sourceTree = "<group>"; };
-		90363AD122CB8AC6006A5D94 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		914CE4F17323482BB575BEB0 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Semibold.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
-		921411AF2387F305006D77B4 /* LiskTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiskTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		921411B02387F305006D77B4 /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
-		92ED43B2238BD5210053F88A /* Lisk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lisk-Bridging-Header.h"; sourceTree = "<group>"; };
-		A0DB7E33846642C19C14DDDC /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
-		A436A259FE604084816F035A /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = "<group>"; };
-		AC4B3F8A21F602A000BDDF7B /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		AC6D417221EF4C6D00B276BD /* LiskMessageExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiskMessageExtension-Bridging-Header.h"; sourceTree = "<group>"; };
-		AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiskMessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC7A832221EF4BDB004502E4 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
-		AC7A832521EF4BDB004502E4 /* MessagesViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
-		AC7A832821EF4BDB004502E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		AC7A832A21EF4BDC004502E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AC7A832C21EF4BDC004502E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ACFD52F221EF78B400A39ABE /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
-		ACFD52F421EF79A500A39ABE /* MessagesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesManager.m; sourceTree = "<group>"; };
-		ACFD52F621EF857E00A39ABE /* RNModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNModuleInitialiser.swift; sourceTree = "<group>"; };
-		ACFD537D21F089C900A39ABE /* MessagesManagerMappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManagerMappers.swift; sourceTree = "<group>"; };
-		ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManagerEvents.swift; sourceTree = "<group>"; };
-		ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessagesManager+MessagesViewControllerDelegate.swift"; sourceTree = "<group>"; };
-		B57963DA435842707681F12B /* Pods-LiskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskTests.release.xcconfig"; path = "Target Support Files/Pods-LiskTests/Pods-LiskTests.release.xcconfig"; sourceTree = "<group>"; };
-		B6D530B925E5676C00E69E02 /* RCTQRCodeLocalImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTQRCodeLocalImage.xcodeproj; path = "../node_modules/@remobile/react-native-qrcode-local-image/ios/RCTQRCodeLocalImage.xcodeproj"; sourceTree = "<group>"; };
-		BB865073FACB4AEEB229A6FF /* icomoon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoon.ttf; path = ../src/assets/fonts/icons/icomoon.ttf; sourceTree = "<group>"; };
-		DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		DEF2D8BDF3BB3248E2764C29 /* Pods-Lisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk.debug.xcconfig"; path = "Target Support Files/Pods-Lisk/Pods-Lisk.debug.xcconfig"; sourceTree = "<group>"; };
-		DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/openSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		F350AE688EB24A2F11DAD627 /* libPods-Lisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6A1890705C01A70456C4DAC /* libPods-LiskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F757DDBDDE3E44FF90CA5133 /* BasierCircle-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierCircle-Regular.otf"; path = "../src/assets/fonts/basierCircle/BasierCircle-Regular.otf"; sourceTree = "<group>"; };
-		F8A1F0630C064091A007BE3F /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
+		15F9BE9640B2F38D52446D09 /* Pods-Lisk-LiskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-LiskTests.release.xcconfig"; path = "Target Support Files/Pods-Lisk-LiskTests/Pods-Lisk-LiskTests.release.xcconfig"; sourceTree = "<group>"; };
+		185640FF3FDF41BF1756EA36 /* Pods-Lisk-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOS/Pods-Lisk-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		18FEA46B3BAE72E0E771FC60 /* Pods-Lisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk.release.xcconfig"; path = "Target Support Files/Pods-Lisk/Pods-Lisk.release.xcconfig"; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* Lisk-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lisk-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* Lisk-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lisk-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		31BFBB5A6C797E63A9F5C907 /* Pods-Lisk-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOS/Pods-Lisk-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		46B8A3CE85FAF9A97389B952 /* Pods-Lisk-LiskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-LiskTests.debug.xcconfig"; path = "Target Support Files/Pods-Lisk-LiskTests/Pods-Lisk-LiskTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5B67B163AE982EA589FE2349 /* libPods-Lisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C5CE3EAF90AC8564AC10328 /* Pods-Lisk-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOSTests/Pods-Lisk-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		76F258360A8A6EA543CB253D /* Pods-Lisk-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOSTests/Pods-Lisk-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BasierCircle-Bold.otf"; sourceTree = "<group>"; };
+		7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BasierCircle-Regular.otf"; sourceTree = "<group>"; };
+		7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BasierCircle-SemiBold.otf"; sourceTree = "<group>"; };
+		7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Bold.ttf"; sourceTree = "<group>"; };
+		7952113925F7660200CCF7F8 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
+		7952113F25F7660F00CCF7F8 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		7952114025F7660F00CCF7F8 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		7952114125F7660F00CCF7F8 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		7952114925F7661900CCF7F8 /* Dots-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dots-Regular.ttf"; sourceTree = "<group>"; };
+		7952114A25F7661900CCF7F8 /* PTMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTMono-Regular.ttf"; sourceTree = "<group>"; };
+		7952169E25FF3CA000CCF7F8 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		7952173025FF508D00CCF7F8 /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7952173225FF508D00CCF7F8 /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7952173425FF508D00CCF7F8 /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7952173625FF508D00CCF7F8 /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7952173825FF508D00CCF7F8 /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7952173A25FF508D00CCF7F8 /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7952173C25FF508D00CCF7F8 /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7952173E25FF508D00CCF7F8 /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Lisk/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E0E32A46ECFBC83B82EA6552 /* libPods-Lisk-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC328FF6A3F6EF7C94413A54 /* Pods-Lisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk.debug.xcconfig"; path = "Target Support Files/Pods-Lisk/Pods-Lisk.debug.xcconfig"; sourceTree = "<group>"; };
+		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F8E7B7CD3CF618B2F943B502 /* libPods-Lisk-LiskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk-LiskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,7 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C72ADEFA505BF99D2F274186 /* libPods-LiskTests.a in Frameworks */,
+				0A7023E0A655E3EF2DE9183F /* libPods-Lisk-LiskTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,15 +124,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				659EF7898465E30B648E2234 /* libPods-Lisk.a in Frameworks */,
+				67A897A38F054B43DA7C6E37 /* libPods-Lisk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AC7A831E21EF4BDB004502E4 /* Frameworks */ = {
+		2D02E4781E0B4A5D006451C7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B0108587CF76FAF6B5B5E88 /* libPods-LiskMessageExtension.a in Frameworks */,
+				77C6CE885DC65E1F865A2FF6 /* libPods-Lisk-tvOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48D1E0B4A5D006451C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCAF818903D7BA0E8FA8D107 /* libPods-Lisk-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,20 +164,31 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		04C51C328E79D6B0A7C0986E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EC328FF6A3F6EF7C94413A54 /* Pods-Lisk.debug.xcconfig */,
+				18FEA46B3BAE72E0E771FC60 /* Pods-Lisk.release.xcconfig */,
+				46B8A3CE85FAF9A97389B952 /* Pods-Lisk-LiskTests.debug.xcconfig */,
+				15F9BE9640B2F38D52446D09 /* Pods-Lisk-LiskTests.release.xcconfig */,
+				185640FF3FDF41BF1756EA36 /* Pods-Lisk-tvOS.debug.xcconfig */,
+				31BFBB5A6C797E63A9F5C907 /* Pods-Lisk-tvOS.release.xcconfig */,
+				76F258360A8A6EA543CB253D /* Pods-Lisk-tvOSTests.debug.xcconfig */,
+				6C5CE3EAF90AC8564AC10328 /* Pods-Lisk-tvOSTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* Lisk */ = {
 			isa = PBXGroup;
 			children = (
-				330DE28221523AE200B584E3 /* Lisk.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				921411B02387F305006D77B4 /* Bridge.swift */,
-				921411AF2387F305006D77B4 /* LiskTests-Bridging-Header.h */,
-				92ED43B2238BD5210053F88A /* Lisk-Bridging-Header.h */,
 			);
 			name = Lisk;
 			sourceTree = "<group>";
@@ -248,63 +196,45 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				90363AD122CB8AC6006A5D94 /* JavaScriptCore.framework */,
-				AC7A832221EF4BDB004502E4 /* Messages.framework */,
-				F350AE688EB24A2F11DAD627 /* libPods-Lisk.a */,
-				811846D7B9E4285BE4739011 /* libPods-LiskMessageExtension.a */,
-				F6A1890705C01A70456C4DAC /* libPods-LiskTests.a */,
+				7952173025FF508D00CCF7F8 /* libReact-RCTAnimation.a */,
+				7952173225FF508D00CCF7F8 /* libReact-RCTBlob.a */,
+				7952173425FF508D00CCF7F8 /* libReact-RCTImage.a */,
+				7952173625FF508D00CCF7F8 /* libReact-RCTLinking.a */,
+				7952173825FF508D00CCF7F8 /* libReact-RCTNetwork.a */,
+				7952173A25FF508D00CCF7F8 /* libReact-RCTSettings.a */,
+				7952173C25FF508D00CCF7F8 /* libReact-RCTText.a */,
+				7952173E25FF508D00CCF7F8 /* libReact-RCTVibration.a */,
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
+				7952169E25FF3CA000CCF7F8 /* Messages.framework */,
+				5B67B163AE982EA589FE2349 /* libPods-Lisk.a */,
+				F8E7B7CD3CF618B2F943B502 /* libPods-Lisk-LiskTests.a */,
+				E0E32A46ECFBC83B82EA6552 /* libPods-Lisk-tvOS.a */,
+				0587BE44208E810CB73ACCBB /* libPods-Lisk-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		339ABFE223057975009A4B94 /* Products */ = {
+		7952112825F765AD00CCF7F8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				339AC01D23057E4D009A4B94 /* libRCTCustomInputController.a */,
+				7952114925F7661900CCF7F8 /* Dots-Regular.ttf */,
+				7952114A25F7661900CCF7F8 /* PTMono-Regular.ttf */,
+				7952114125F7660F00CCF7F8 /* OpenSans-Bold.ttf */,
+				7952113F25F7660F00CCF7F8 /* OpenSans-Regular.ttf */,
+				7952114025F7660F00CCF7F8 /* OpenSans-Semibold.ttf */,
+				7952113925F7660200CCF7F8 /* icomoon.ttf */,
+				7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */,
+				7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */,
+				7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */,
+				7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */,
 			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		339AC00523057975009A4B94 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				339AC00F23057E4D009A4B94 /* libInteractable.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		33DD260220CFBC550061FC18 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				6F3C84F25D024703B97337E4 /* libRNShakeEvent.a */,
-				A436A259FE604084816F035A /* libRNCAsyncStorage.a */,
-				F8A1F0630C064091A007BE3F /* libRNGestureHandler.a */,
-				5151B3598A4C4363814407E6 /* libRNReanimated.a */,
-				4735A61E525F40548A6AD278 /* libInteractable.a */,
-				2094B260978C4B609B27CDB1 /* libRNCNetInfo.a */,
-				7F025B043F18462784EC9F3D /* libRCTCustomInputController.a */,
-				A0DB7E33846642C19C14DDDC /* libTcpSockets.a */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
-		5B953057FC13598F9D6F7CBD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DEF2D8BDF3BB3248E2764C29 /* Pods-Lisk.debug.xcconfig */,
-				5E0A61148EDE586E464F90BD /* Pods-Lisk.release.xcconfig */,
-				77720322F826EEECFB43C782 /* Pods-LiskMessageExtension.debug.xcconfig */,
-				32BCF5F450D2803175BB32FC /* Pods-LiskMessageExtension.release.xcconfig */,
-				26EBAB238C54F950A570AA5E /* Pods-LiskTests.debug.xcconfig */,
-				B57963DA435842707681F12B /* Pods-LiskTests.release.xcconfig */,
-			);
-			path = Pods;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				B6D530B925E5676C00E69E02 /* RCTQRCodeLocalImage.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -312,15 +242,13 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				7952112825F765AD00CCF7F8 /* Resources */,
 				13B07FAE1A68108700A75B9A /* Lisk */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* LiskTests */,
-				AC7A832421EF4BDB004502E4 /* LiskMessageExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				BA225343D84043FE8C726631 /* Resources */,
-				33DD260220CFBC550061FC18 /* Recovered References */,
-				5B953057FC13598F9D6F7CBD /* Pods */,
+				04C51C328E79D6B0A7C0986E /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -332,62 +260,10 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Lisk.app */,
 				00E356EE1AD99517003FC87E /* LiskTests.xctest */,
-				AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */,
+				2D02E47B1E0B4A5D006451C7 /* Lisk-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* Lisk-tvOSTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		9001FEAF23181F6C00DBC81D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9001FED923181F6E00DBC81D /* libRCTCustomInputController.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		AC7A832421EF4BDB004502E4 /* LiskMessageExtension */ = {
-			isa = PBXGroup;
-			children = (
-				33C330B721F1CF26003C62F1 /* LiskMessageExtension.entitlements */,
-				AC6D417221EF4C6D00B276BD /* LiskMessageExtension-Bridging-Header.h */,
-				AC7A832521EF4BDB004502E4 /* MessagesViewController.swift */,
-				ACFD52F421EF79A500A39ABE /* MessagesManager.m */,
-				ACFD52F221EF78B400A39ABE /* MessagesManager.swift */,
-				ACFD538121F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift */,
-				ACFD537F21F0A8FD00A39ABE /* MessagesManagerEvents.swift */,
-				ACFD537D21F089C900A39ABE /* MessagesManagerMappers.swift */,
-				ACFD52F621EF857E00A39ABE /* RNModuleInitialiser.swift */,
-				AC7A832721EF4BDB004502E4 /* MainInterface.storyboard */,
-				AC7A832A21EF4BDC004502E4 /* Assets.xcassets */,
-				AC7A832C21EF4BDC004502E4 /* Info.plist */,
-				AC4B3F8A21F602A000BDDF7B /* LaunchScreen.xib */,
-			);
-			path = LiskMessageExtension;
-			sourceTree = "<group>";
-		};
-		B6D530BA25E5676C00E69E02 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B6D530BF25E5676C00E69E02 /* libRCTQRCodeLocalImage.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		BA225343D84043FE8C726631 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DB0A706947854FE8A1F9096C /* OpenSans-Regular.ttf */,
-				01DC4E2DAFCC41C18565728D /* Gilroy-Bold.ttf */,
-				DF764AA4CD8E4399980B73AC /* OpenSans-Bold.ttf */,
-				BB865073FACB4AEEB229A6FF /* icomoon.ttf */,
-				914CE4F17323482BB575BEB0 /* OpenSans-Semibold.ttf */,
-				4C51D72C0FAD40BFA9898B8F /* PTMono-Regular.ttf */,
-				4E1B4DCBCC0842B2986B9E14 /* Dots-Regular.ttf */,
-				1F91E410A1784A80B3833C2F /* BasierCircle-Bold.otf */,
-				F757DDBDDE3E44FF90CA5133 /* BasierCircle-Regular.otf */,
-				5F1A340F00CE46A28CE69805 /* BasierCircle-SemiBold.otf */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,10 +273,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "LiskTests" */;
 			buildPhases = (
-				92471390328A7B47B5C0A0D3 /* [CP] Check Pods Manifest.lock */,
+				EC3CCDD47CFD536864174866 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				546BE6C1B3993829DC59C709 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -416,42 +293,62 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Lisk" */;
 			buildPhases = (
-				12C5A2F04CF4D123D699094A /* [CP] Check Pods Manifest.lock */,
+				CB8C7B58ACDD46D82CB04614 /* [CP] Check Pods Manifest.lock */,
+				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				B647FAAA210720D700EFF1B7 /* Embed Frameworks */,
-				AC7A837521EF4BDC004502E4 /* Embed App Extensions */,
+				795216AB25FF3CA200CCF7F8 /* Embed App Extensions */,
+				FAB600F6CA3004F0C3E77AD6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				921411D823882D27006D77B4 /* PBXTargetDependency */,
 			);
 			name = Lisk;
-			productName = "Hello World";
+			productName = Lisk;
 			productReference = 13B07F961A680F5B00A75B9A /* Lisk.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AC7A832021EF4BDB004502E4 /* LiskMessageExtension */ = {
+		2D02E47A1E0B4A5D006451C7 /* Lisk-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC7A837421EF4BDC004502E4 /* Build configuration list for PBXNativeTarget "LiskMessageExtension" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Lisk-tvOS" */;
 			buildPhases = (
-				213313F4A8CABA5BEFD7BB29 /* [CP] Check Pods Manifest.lock */,
-				AC7A831D21EF4BDB004502E4 /* Sources */,
-				AC7A831E21EF4BDB004502E4 /* Frameworks */,
-				AC7A831F21EF4BDB004502E4 /* Resources */,
-				AC759F2222034E4B00B5EDB1 /* Run Script */,
+				18804D02D409D9469045CBA2 /* [CP] Check Pods Manifest.lock */,
+				FD10A7F122414F3F0027D42C /* Start Packager */,
+				2D02E4771E0B4A5D006451C7 /* Sources */,
+				2D02E4781E0B4A5D006451C7 /* Frameworks */,
+				2D02E4791E0B4A5D006451C7 /* Resources */,
+				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = LiskMessageExtension;
-			productName = LiskMessageExtension;
-			productReference = AC7A832121EF4BDB004502E4 /* LiskMessageExtension.appex */;
-			productType = "com.apple.product-type.app-extension.messages";
+			name = "Lisk-tvOS";
+			productName = "Lisk-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* Lisk-tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2D02E48F1E0B4A5D006451C7 /* Lisk-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Lisk-tvOSTests" */;
+			buildPhases = (
+				2A26F46C8AD303F06BD79188 /* [CP] Check Pods Manifest.lock */,
+				2D02E48C1E0B4A5D006451C7 /* Sources */,
+				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
+				2D02E48E1E0B4A5D006451C7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
+			);
+			name = "Lisk-tvOSTests";
+			productName = "Lisk-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* Lisk-tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -459,106 +356,48 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 610;
-				ORGANIZATIONNAME = Facebook;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 58UK9RE9TP;
-						LastSwiftMigration = 1100;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 58UK9RE9TP;
-						LastSwiftMigration = 1010;
-						SystemCapabilities = {
-							com.apple.Keychain = {
-								enabled = 1;
-							};
-						};
+						LastSwiftMigration = 1120;
 					};
-					AC7A832021EF4BDB004502E4 = {
-						CreatedOnToolsVersion = 10.1;
-						DevelopmentTeam = 58UK9RE9TP;
+					2D02E47A1E0B4A5D006451C7 = {
+						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.Keychain = {
-								enabled = 1;
-							};
-						};
+					};
+					2D02E48F1E0B4A5D006451C7 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Lisk" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 339AC00523057975009A4B94 /* Products */;
-					ProjectRef = 4B3CD568314C40F799A5781E /* Interactable.xcodeproj */;
-				},
-				{
-					ProductGroup = 339ABFE223057975009A4B94 /* Products */;
-					ProjectRef = 87DE9DE1D833458F857D0C90 /* RCTCustomInputController.xcodeproj */;
-				},
-				{
-					ProductGroup = 9001FEAF23181F6C00DBC81D /* Products */;
-					ProjectRef = 3A7B1E37D72F4DBDAAA71A0F /* RCTCustomInputController.xcodeproj */;
-				},
-				{
-					ProductGroup = B6D530BA25E5676C00E69E02 /* Products */;
-					ProjectRef = B6D530B925E5676C00E69E02 /* RCTQRCodeLocalImage.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* Lisk */,
 				00E356ED1AD99517003FC87E /* LiskTests */,
-				AC7A832021EF4BDB004502E4 /* LiskMessageExtension */,
+				2D02E47A1E0B4A5D006451C7 /* Lisk-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* Lisk-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		339AC00F23057E4D009A4B94 /* libInteractable.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libInteractable.a;
-			remoteRef = 339AC00E23057E4D009A4B94 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		339AC01D23057E4D009A4B94 /* libRCTCustomInputController.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTCustomInputController.a;
-			remoteRef = 339AC01C23057E4D009A4B94 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9001FED923181F6E00DBC81D /* libRCTCustomInputController.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTCustomInputController.a;
-			remoteRef = 9001FED823181F6E00DBC81D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B6D530BF25E5676C00E69E02 /* libRCTQRCodeLocalImage.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTQRCodeLocalImage.a;
-			remoteRef = B6D530BE25E5676C00E69E02 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -572,36 +411,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7952112E25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf in Resources */,
+				7952113A25F7660200CCF7F8 /* icomoon.ttf in Resources */,
+				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				7952114325F7660F00CCF7F8 /* OpenSans-Semibold.ttf in Resources */,
+				7952112C25F765EA00CCF7F8 /* BasierCircle-Bold.otf in Resources */,
+				7952113425F765F800CCF7F8 /* Gilroy-Bold.ttf in Resources */,
+				7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */,
+				7952114225F7660F00CCF7F8 /* OpenSans-Regular.ttf in Resources */,
+				7952114425F7660F00CCF7F8 /* OpenSans-Bold.ttf in Resources */,
+				7952114B25F7661900CCF7F8 /* Dots-Regular.ttf in Resources */,
+				7952114C25F7661900CCF7F8 /* PTMono-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				0E83377E0F2F4D33BB3CE949 /* icomoon.ttf in Resources */,
-				9F623AB73FF646D1911425A5 /* PTMono-Regular.ttf in Resources */,
-				4F7FDDEC2B3F43659A347587 /* Dots-Regular.ttf in Resources */,
-				7FBFE3D07A8E4244A5B3A4E9 /* OpenSans-Bold.ttf in Resources */,
-				24923F5215CC4CEEA6FD5173 /* OpenSans-Semibold.ttf in Resources */,
-				A3888254AEAE473F866E4C71 /* OpenSans-Regular.ttf in Resources */,
-				426CF278ABDA4231AE32D163 /* Gilroy-Bold.ttf in Resources */,
-				C04DF4E469D84CC1A062C1F8 /* BasierCircle-Bold.otf in Resources */,
-				D899C1D561774F7C96BB1191 /* BasierCircle-SemiBold.otf in Resources */,
-				B5BC131897364E8D86D1F42A /* BasierCircle-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AC7A831F21EF4BDB004502E4 /* Resources */ = {
+		2D02E4791E0B4A5D006451C7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC4B3F8B21F602A000BDDF7B /* LaunchScreen.xib in Resources */,
-				3394A82321F1DFC0009CF136 /* icomoon.ttf in Resources */,
-				3394A82721F1F8E0009CF136 /* OpenSans-Bold.ttf in Resources */,
-				AC8EAD8C2271A48F00C0B5D2 /* OpenSans-Semibold.ttf in Resources */,
-				3394A82521F1F8CE009CF136 /* OpenSans-Regular.ttf in Resources */,
-				3394A82621F1F8D5009CF136 /* Gilroy-Bold.ttf in Resources */,
-				AC016ADD22783FB200E61127 /* BasierCircle-Bold.otf in Resources */,
-				AC016ADF22783FB200E61127 /* BasierCircle-SemiBold.otf in Resources */,
-				AC016ADE22783FB200E61127 /* BasierCircle-Regular.otf in Resources */,
-				AC7A832B21EF4BDC004502E4 /* Assets.xcassets in Resources */,
-				AC7A832921EF4BDB004502E4 /* MainInterface.storyboard in Resources */,
+				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,9 +456,117 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export DEVELOPMENT_BUILD_CONFIGURATIONS=\"+(StagingQA|Debug)\"\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		12C5A2F04CF4D123D699094A /* [CP] Check Pods Manifest.lock */ = {
+		18804D02D409D9469045CBA2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lisk-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2A26F46C8AD303F06BD79188 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lisk-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		546BE6C1B3993829DC59C709 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lisk-LiskTests/Pods-Lisk-LiskTests-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lisk-LiskTests/Pods-Lisk-LiskTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB8C7B58ACDD46D82CB04614 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -644,7 +588,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		213313F4A8CABA5BEFD7BB29 /* [CP] Check Pods Manifest.lock */ = {
+		EC3CCDD47CFD536864174866 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -659,14 +603,64 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LiskMessageExtension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Lisk-LiskTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		92471390328A7B47B5C0A0D3 /* [CP] Check Pods Manifest.lock */ = {
+		FAB600F6CA3004F0C3E77AD6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lisk/Pods-Lisk-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lisk/Pods-Lisk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -674,21 +668,18 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "Start Packager";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LiskTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AC759F2222034E4B00B5EDB1 /* Run Script */ = {
+		FD10A7F122414F3F0027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -697,14 +688,15 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = "Start Packager";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=$(command -v node)\n../node_modules/react-native/scripts/react-native-xcode.sh index.message.js\n";
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -723,22 +715,23 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				921411B12387F305006D77B4 /* Bridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AC7A831D21EF4BDB004502E4 /* Sources */ = {
+		2D02E4771E0B4A5D006451C7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACFD537E21F089C900A39ABE /* MessagesManagerMappers.swift in Sources */,
-				ACFD52F521EF79A500A39ABE /* MessagesManager.m in Sources */,
-				ACFD538021F0A8FD00A39ABE /* MessagesManagerEvents.swift in Sources */,
-				AC7A832621EF4BDB004502E4 /* MessagesViewController.swift in Sources */,
-				921411B32387F305006D77B4 /* Bridge.swift in Sources */,
-				ACFD52F321EF78B400A39ABE /* MessagesManager.swift in Sources */,
-				ACFD52F721EF857E00A39ABE /* RNModuleInitialiser.swift in Sources */,
-				ACFD538221F0B10500A39ABE /* MessagesManager+MessagesViewControllerDelegate.swift in Sources */,
+				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
+				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48C1E0B4A5D006451C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DCD954D1E0B4F2C00145EB5 /* LiskTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,164 +743,67 @@
 			target = 13B07F861A680F5B00A75B9A /* Lisk */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
-		921411D823882D27006D77B4 /* PBXTargetDependency */ = {
+		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AC7A832021EF4BDB004502E4 /* LiskMessageExtension */;
-			targetProxy = 921411D723882D27006D77B4 /* PBXContainerItemProxy */;
+			target = 2D02E47A1E0B4A5D006451C7 /* Lisk-tvOS */;
+			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = Lisk;
-			sourceTree = "<group>";
-		};
-		AC7A832721EF4BDB004502E4 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AC7A832821EF4BDB004502E4 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26EBAB238C54F950A570AA5E /* Pods-LiskTests.debug.xcconfig */;
+			baseConfigurationReference = 46B8A3CE85FAF9A97389B952 /* Pods-Lisk-LiskTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
-					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
-					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-app-settings/ios",
-					"$(SRCROOT)/../node_modules/react-native-blur-overlay/ios",
-					"$(SRCROOT)/../node_modules/react-native-haptic-feedback/ios",
-					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
-					"$(SRCROOT)/../node_modules/react-native-shake/ios",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-				);
 				INFOPLIST_FILE = LiskTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
-				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LiskTests-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lisk.app/Lisk";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B57963DA435842707681F12B /* Pods-LiskTests.release.xcconfig */;
+			baseConfigurationReference = 15F9BE9640B2F38D52446D09 /* Pods-Lisk-LiskTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 58UK9RE9TP;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
-					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
-					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-app-settings/ios",
-					"$(SRCROOT)/../node_modules/react-native-blur-overlay/ios",
-					"$(SRCROOT)/../node_modules/react-native-haptic-feedback/ios",
-					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
-					"$(SRCROOT)/../node_modules/react-native-shake/ios",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-				);
 				INFOPLIST_FILE = LiskTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
-				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LiskTests-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lisk.app/Lisk";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DEF2D8BDF3BB3248E2764C29 /* Pods-Lisk.debug.xcconfig */;
+			baseConfigurationReference = EC328FF6A3F6EF7C94413A54 /* Pods-Lisk.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 6;
-				DEAD_CODE_STRIPPING = NO;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
-					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
-					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-app-settings/ios",
-					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-blur-overlay/ios",
-					"$(SRCROOT)/../node_modules/react-native-haptic-feedback/ios",
-					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
-					"$(SRCROOT)/../node_modules/react-native-shake/ios",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native/React/Base/**",
-					"$(SRCROOT)/../node_modules/react-native/React/**",
-				);
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Lisk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.4.1;
 				OTHER_LDFLAGS = (
@@ -917,47 +813,21 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile;
 				PRODUCT_NAME = Lisk;
-				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E0A61148EDE586E464F90BD /* Pods-Lisk.release.xcconfig */;
+			baseConfigurationReference = 18FEA46B3BAE72E0E771FC60 /* Pods-Lisk.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
-					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
-					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-app-settings/ios",
-					"$(SRCROOT)/../node_modules/react-native-blur-overlay/ios",
-					"$(SRCROOT)/../node_modules/react-native-haptic-feedback/ios",
-					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
-					"$(SRCROOT)/../node_modules/react-native-shake/ios",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"$(SRCROOT)/../node_modules/react-native/React/Base/**",
-				);
 				INFOPLIST_FILE = Lisk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.4.1;
 				OTHER_LDFLAGS = (
@@ -967,36 +837,156 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile;
 				PRODUCT_NAME = Lisk;
-				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		2D02E4971E0B4A5E006451C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 185640FF3FDF41BF1756EA36 /* Pods-Lisk-tvOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Lisk-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Lisk-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		2D02E4981E0B4A5E006451C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31BFBB5A6C797E63A9F5C907 /* Pods-Lisk-tvOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Lisk-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Lisk-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		2D02E4991E0B4A5E006451C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76F258360A8A6EA543CB253D /* Pods-Lisk-tvOSTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Lisk-tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Lisk-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lisk-tvOS.app/Lisk-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		2D02E49A1E0B4A5E006451C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C5CE3EAF90AC8564AC10328 /* Pods-Lisk-tvOSTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Lisk-tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Lisk-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lisk-tvOS.app/Lisk-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1009,8 +999,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1020,20 +1015,29 @@
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1041,151 +1045,23 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		AC7A833021EF4BDC004502E4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 77720322F826EEECFB43C782 /* Pods-LiskMessageExtension.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LiskMessageExtension/LiskMessageExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 58UK9RE9TP;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
-					"$(SRCROOT)/../node_modules/react-native-shake/ios",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"$(SRCROOT)/../node_modules/react-native/React/Base/**",
-				);
-				INFOPLIST_FILE = LiskMessageExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.4.1;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.message;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "LiskMessageExtension/LiskMessageExtension-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		AC7A833121EF4BDC004502E4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32BCF5F450D2803175BB32FC /* Pods-LiskMessageExtension.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LiskMessageExtension/LiskMessageExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 58UK9RE9TP;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-quick-actions/RNQuickAction/RNQuickAction",
-					"$(SRCROOT)/../node_modules/react-native-shake/ios",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-interactable/lib/ios/Interactable",
-					"$(SRCROOT)/../node_modules/@react-native-community/netinfo/ios",
-					"$(SRCROOT)/../node_modules/react-native-keyboard-input/lib/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"$(SRCROOT)/../node_modules/react-native/React/Base/**",
-				);
-				INFOPLIST_FILE = LiskMessageExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.4.1;
-				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile.message;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "LiskMessageExtension/LiskMessageExtension-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1210,20 +1086,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Lisk-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D02E4971E0B4A5E006451C7 /* Debug */,
+				2D02E4981E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Lisk-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D02E4991E0B4A5E006451C7 /* Debug */,
+				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Lisk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AC7A837421EF4BDC004502E4 /* Build configuration list for PBXNativeTarget "LiskMessageExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AC7A833021EF4BDC004502E4 /* Debug */,
-				AC7A833121EF4BDC004502E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,5 +1,3 @@
-
-
 import ModalHolder from '../../../../utilities/modal';
 import IntroModal from './introModal';
 import { tokenMap } from '../../../../constants/tokens';
@@ -36,16 +34,16 @@ export const showInitializationModal = ({
   const balance = parseFloat(fromRawLsk(account[tokenMap.LSK.key].balance));
 
   if (
-    activeToken === tokenMap.LSK.key &&
-    !account[activeToken].initialized &&
-    (!transactions || transactions.pending.length < 1) &&
-    balance >= 0.2
+    activeToken === tokenMap.LSK.key
+    && !account[activeToken].initialized
+    && (!transactions || transactions.pending.length < 1)
+    && balance >= 0.2
   ) {
     ModalHolder.open({
       title: 'Initialize your account',
       component: InitializationModal,
       callback: () =>
-        navigation.navigate('Send', { initialize: true }),
+        navigation.navigate({ name: 'Send', params: { initialize: true } }),
     });
   }
 };

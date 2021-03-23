@@ -1,4 +1,6 @@
-import { themes, colors, fonts, boxes } from '../../../../constants/styleGuide';
+import {
+  themes, colors, fonts, boxes
+} from '../../../../constants/styleGuide';
 import { deviceWidth } from '../../../../utilities/device';
 
 export default () => ({

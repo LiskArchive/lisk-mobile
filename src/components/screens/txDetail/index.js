@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
 import connect from 'redux-connect-decorator';
@@ -7,7 +8,7 @@ import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../../shared/formattedNumber';
 import Share from '../../shared/share';
 import { B, A } from '../../shared/toolBox/typography';
-import IconButton from '../../screens/router/headerBackButton';
+import IconButton from '../router/headerBackButton';
 import Loading from '../../shared/transactions/loading';
 import EmptyState from '../../shared/transactions/empty';
 import LskSummary from './lskSummary';
@@ -21,7 +22,9 @@ import getStyles from './styles';
 import VoteList from './voteList';
 import { merge } from '../../../utilities/helpers';
 import { tokenMap } from '../../../constants/tokens';
-import { goToWallet, getAccountLabel, getAccountTitle, openExplorer } from './utils';
+import {
+  goToWallet, getAccountLabel, getAccountTitle, openExplorer
+} from './utils';
 
 @connect(
   state => ({
@@ -29,7 +32,7 @@ import { goToWallet, getAccountLabel, getAccountTitle, openExplorer } from './ut
     account: state.accounts.info || {},
     activeToken: state.settings.token.active,
     language: state.settings.language,
-    }),
+  }),
   {}
 )
 class TransactionDetail extends React.Component {
@@ -48,15 +51,15 @@ class TransactionDetail extends React.Component {
   };
 
   componentDidMount() {
-    const { theme, navigation } = this.props;
-    const tx = navigation.getParam('tx', null);
+    const { theme, navigation, route } = this.props;
+    const tx = route.params?.tx ?? null;
     let backAction = () => navigation.pop();
 
     if (tx) {
       this.setState({ tx }, () => this.retrieveTransaction(tx.id));
     } else {
-      this.retrieveTransaction(navigation.getParam('txId', false));
-      backAction = () => navigation.navigate('Home');
+      this.retrieveTransaction(route.params?.txId ?? false);
+      backAction = () => navigation.navigate({ name: 'Home' });
     }
     navigation.setParams({
       theme,
@@ -92,14 +95,15 @@ class TransactionDetail extends React.Component {
     }
   }
 
+  // eslint-disable-next-line max-statements
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
     const {
-      t, activeToken, navigation, account
+      t, activeToken, account, route,
     } = this.props;
     try {
       const { data } = await transactionsAPI.get(activeToken, {
-        address: navigation.getParam('account', account[activeToken].address),
+        address: route.params?.account ?? account[activeToken].address,
         id,
       });
       const tx = data[0] || {};
@@ -139,14 +143,15 @@ class TransactionDetail extends React.Component {
     );
   };
 
+  // eslint-disable-next-line complexity
   render() {
     const {
-      navigation,
       styles,
       account,
       t,
       activeToken,
       language,
+      route,
     } = this.props;
     const {
       tx, error, refreshing, upvotes, downvotes
@@ -168,11 +173,8 @@ class TransactionDetail extends React.Component {
       );
     }
 
-    const walletAccountAddress = navigation.getParam(
-      'account',
-      account[activeToken].address
-    );
-    const incognito = navigation.getParam('incognito', null);
+    const walletAccountAddress = route.params?.account ?? account[activeToken].address;
+    const incognito = route.params?.incognito ?? null;
     const isDelegateRegistration = tx.type === 2;
     const isVote = tx.type === 3;
 

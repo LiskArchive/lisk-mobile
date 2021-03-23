@@ -2,7 +2,6 @@
 //  MessagesManagerEvents.swift
 //  LiskMessageExtension
 //
-
 import Foundation
 
 enum Events: String {

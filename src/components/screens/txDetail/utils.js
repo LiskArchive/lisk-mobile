@@ -1,14 +1,12 @@
-
-
 import { Linking } from 'react-native';
 import { getTransactionExplorerURL } from '../../../utilities/api/btc/transactions';
 
 export const goToWallet = (address, { navigation, account, activeToken }) => {
   if (
-    address !== account[activeToken].address &&
-    address !== 'Unparsed Address'
+    address !== account[activeToken].address
+    && address !== 'Unparsed Address'
   ) {
-    navigation.navigate('Wallet', { address });
+    navigation.navigate({ name: 'Wallet', params: { address } });
   }
 };
 
@@ -35,7 +33,7 @@ export const openExplorer = (id) => {
 
 export const getAccountTitle = tx => {
   if (tx.type === 3) return 'Voter';
-  else if (tx.type === 2) return 'Registrant';
-  else if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress) { return 'Account address'; }
+  if (tx.type === 2) return 'Registrant';
+  if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress) { return 'Account address'; }
   return 'Sender';
 };

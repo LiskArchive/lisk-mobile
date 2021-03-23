@@ -1,11 +1,10 @@
-import bitcoin from 'bitcoinjs-lib';
+import { networks } from 'bitcoinjs-lib';
 import fetchMock from 'fetch-mock';
 import * as transactions from './transactions';
 import config from '../../../../btc.config';
 import response from '../../../constants/btcTransactionMock';
 
-const passphrase =
-  'say width dwarf confirm rule party pact iron edge dignity wish direct';
+const passphrase = 'say width dwarf confirm rule party pact iron edge dignity wish direct';
 
 const address = {
   mainnet: '18Ev7MgYe9qPrXy6CKSvphhoeyTg6m8Nve',
@@ -135,7 +134,7 @@ describe('api/btc/transactions', () => {
 
   describe('create', () => {
     beforeAll(() => {
-      config.network = bitcoin.networks.testnet;
+      config.network = networks.testnet;
 
       transactions.getUnspentTransactionOutputs = jest.fn();
       transactions.getUnspentTransactionOutputs.mockResolvedValue(
@@ -169,8 +168,7 @@ describe('api/btc/transactions', () => {
   });
 
   describe('broadcast', () => {
-    const txHex =
-      '0200000001c156742387e44c7906091bc08d382951bfe1c9dc703856010e08ef803f90dafe000000006b483045022100d1dde0fe78b5e20d570348eca954336ccdfd8b25cb150203977e690b3dbc71eb02205f45fde27ded53dec38ca96530722f11bd4c0da96acd698e3d826395a57cfcac012102cd9e67acba4950837bb773b6d05f54ba0594aa4863b9dcb0dfe0bb94d14c56c2ffffffff029e000000000000001976a914f201b8d17483229dc8198e6baf05ddff9421323888ac180d1800000000001976a914f201b8d17483229dc8198e6baf05ddff9421323888ac00000000';
+    const txHex = '0200000001c156742387e44c7906091bc08d382951bfe1c9dc703856010e08ef803f90dafe000000006b483045022100d1dde0fe78b5e20d570348eca954336ccdfd8b25cb150203977e690b3dbc71eb02205f45fde27ded53dec38ca96530722f11bd4c0da96acd698e3d826395a57cfcac012102cd9e67acba4950837bb773b6d05f54ba0594aa4863b9dcb0dfe0bb94d14c56c2ffffffff029e000000000000001976a914f201b8d17483229dc8198e6baf05ddff9421323888ac180d1800000000001976a914f201b8d17483229dc8198e6baf05ddff9421323888ac00000000';
     beforeEach(() => fetchMock.reset());
 
     it('resolves correctly', async () => {

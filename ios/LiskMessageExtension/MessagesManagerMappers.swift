@@ -2,7 +2,6 @@
 //  Mappers.swift
 //  LiskMessageExtension
 //
-
 import Foundation
 import Messages
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { P } from '../../../shared/toolBox/typography';
 import { PrimaryButton } from '../../../shared/toolBox/button';
+import HeaderPlaceholderButton from '../../router/headerPlaceholderButton';
 import image from '../../../../assets/images/registrationProcess/success3x.png';
 
 class Success extends React.Component {
@@ -12,14 +13,13 @@ class Success extends React.Component {
     const {
       t,
       hideNav,
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
 
     hideNav();
 
-    setParams({
-      action: false,
-      showButtonLeft: false,
+    setOptions({
+      headerLeft: () => <HeaderPlaceholderButton />,
       title: t('Perfect! You’re all set'),
     });
   }

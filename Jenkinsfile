@@ -17,7 +17,7 @@ pipeline {
     stage ('Run ESLint') {
       steps {
         nvm(getNodejsVersion()) {
-          sh 'npm run test:format'
+          sh 'npm run lint'
         }
       }
     }

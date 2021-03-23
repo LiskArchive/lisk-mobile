@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { translate } from 'react-i18next';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Switch from 'react-native-switch-pro';
 import styles from './styles';
 import { B, P } from '../../../shared/toolBox/typography';
 import CopyToClipboard from '../../../shared/copyToClipboard';
 import { PrimaryButton } from '../../../shared/toolBox/button';
 import { colors } from '../../../../constants/styleGuide';
+import HeaderBackButton from '../../router/headerBackButton';
 
 class SafeKeeping extends React.Component {
   state = {
@@ -18,10 +19,10 @@ class SafeKeeping extends React.Component {
     const {
       t,
       prevStep,
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
-    setParams({
-      action: prevStep,
+    setOptions({
+      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} />,
       title: t('Your passphrase'),
     });
   }

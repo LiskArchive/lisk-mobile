@@ -1,4 +1,4 @@
-import bitcoin from 'bitcoinjs-lib';
+import { TransactionBuilder, ECPair } from 'bitcoinjs-lib';
 import config from '../../../../btc.config';
 import { extractAddress, getDerivedPathFromPassphrase } from './account';
 import { merge } from '../../helpers';
@@ -12,6 +12,7 @@ import { tokenMap } from '../../../constants/tokens';
  * @param {Array} data.list Transaction list retrieved from API
  */
 const normalizeTransactionsResponse = ({ address, list }) =>
+  // eslint-disable-next-line max-statements
   list.map(({
     tx, feeSatoshi, confirmations, timestamp
   }) => {
@@ -31,19 +32,17 @@ const normalizeTransactionsResponse = ({ address, list }) =>
     if (ownedInput) {
       data.senderAddress = address;
       const extractedAddress = tx.outputs[0].scriptPubKey.addresses[0];
-      data.recipientAddress =
-        validateAddress(tokenMap.BTC.key, extractedAddress) === 0
-          ? extractedAddress
-          : 'Unparsed Address';
+      data.recipientAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0
+        ? extractedAddress
+        : 'Unparsed Address';
       data.amount = tx.outputs[0].satoshi;
     } else {
       const output = tx.outputs.find(o =>
         o.scriptPubKey.addresses.includes(address));
       const extractedAddress = tx.inputs[0].txDetail.scriptPubKey.addresses[0];
-      data.senderAddress =
-        validateAddress(tokenMap.BTC.key, extractedAddress) === 0
-          ? extractedAddress
-          : 'Unparsed Address';
+      data.senderAddress = validateAddress(tokenMap.BTC.key, extractedAddress) === 0
+        ? extractedAddress
+        : 'Unparsed Address';
       data.recipientAddress = address;
       data.amount = output.satoshi;
     }
@@ -54,6 +53,7 @@ const normalizeTransactionsResponse = ({ address, list }) =>
 export const get = ({
   id, address, limit = 20, offset = 0
 }) =>
+  // eslint-disable-next-line
   new Promise(async (resolve, reject) => {
     try {
       let response;
@@ -110,6 +110,7 @@ export const calculateTransactionFee = ({
  * @returns {Promise<Array>}
  */
 export const getUnspentTransactionOutputs = address =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(`${config.url}/utxo/${address}`);
@@ -131,6 +132,7 @@ export const create = ({
   amount,
   dynamicFeePerByte,
 }) =>
+  // eslint-disable-next-line
   new Promise(async (resolve, reject) => {
     try {
       amount = Number(amount);
@@ -158,6 +160,7 @@ export const create = ({
 
       if (unspentTxOutsTotal < estimatedTotal) {
         reject(new Error('Insufficient (estimated) balance'));
+        return false;
       }
 
       // Find unspent txOuts to spend for this tx
@@ -172,7 +175,7 @@ export const create = ({
         sumOfConsumedOutputs += tx.value;
       }
 
-      const txb = new bitcoin.TransactionBuilder(config.network);
+      const txb = new TransactionBuilder(config.network);
 
       // Add inputs from unspent txOuts
       // eslint-disable-next-line
@@ -199,7 +202,7 @@ export const create = ({
 
       // Sign inputs
       const derivedPath = getDerivedPathFromPassphrase(passphrase);
-      const keyPair = bitcoin.ECPair.fromWIF(
+      const keyPair = ECPair.fromWIF(
         derivedPath.toWIF(),
         config.network
       );
@@ -214,6 +217,7 @@ export const create = ({
   });
 
 export const broadcast = transactionHex =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(

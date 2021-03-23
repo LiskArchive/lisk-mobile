@@ -72,7 +72,7 @@ const MultiStepNav = ({
                   >
                     {step.component.props.title}
                   </NavigatorButton>
-                ))
+              ))
               : null}
           </Element>
         ))}

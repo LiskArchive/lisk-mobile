@@ -28,10 +28,10 @@ import modalHolder from '../../../../utilities/modal';
     settings: state.settings,
     activeToken: state.settings.token.active,
     language: state.settings.language,
-    }),
+  }),
   {
-  accountFollowed: accountFollowedAction,
-  accountUnFollowed: accountUnFollowedAction,
+    accountFollowed: accountFollowedAction,
+    accountUnFollowed: accountUnFollowedAction,
   }
 )
 class AccountSummary extends React.Component {
@@ -95,7 +95,7 @@ class AccountSummary extends React.Component {
       });
     } else {
       navigation.navigate({
-        routeName: 'AddBookmark',
+        name: 'AddBookmark',
         params: {
           account,
           title: t('Add bookmark'),
@@ -120,10 +120,9 @@ class AccountSummary extends React.Component {
       navigation,
       language,
     } = this.props;
-    const address =
-      token.active === tokenKeys[1]
-        ? stringShortener(account.address, 10, 10)
-        : account.address;
+    const address = token.active === tokenKeys[1]
+      ? stringShortener(account.address, 10, 10)
+      : account.address;
 
     const { interpolate } = this;
     const AView = Animated.View;
@@ -218,7 +217,7 @@ class AccountSummary extends React.Component {
           <IconButton
             style={[styles.sendButton, styles.theme.sendButton]}
             title=""
-            icon={isFollowed ? 'bookmark-filled' : 'bookmark'}
+            icon={isFollowed ? 'bookmarks-filled' : 'bookmarks'}
             color={colors[theme].ultramarineBlue}
             iconSize={20}
             onClick={this.toggleBookmark}
@@ -229,11 +228,17 @@ class AccountSummary extends React.Component {
             icon="send"
             color={colors[theme].ultramarineBlue}
             iconSize={20}
-            onClick={() =>
-              navigation.navigate('Send', {
-                query: { address: account.address },
-              })
-            }
+            onClick={() => {
+              navigation.navigate({
+                name: 'Main',
+                params: {
+                  screen: 'Send',
+                  params: {
+                    query: { address: account.address },
+                  },
+                },
+              });
+            }}
           />
         </AView>
       </AView>

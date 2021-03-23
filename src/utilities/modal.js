@@ -13,6 +13,7 @@ export default class ModalHolder {
     this.update(config);
     this.modal.open();
   }
+
   static close() {
     this.modal.close();
   }

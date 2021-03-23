@@ -12,7 +12,7 @@ import { stringShortener } from '../../../utilities/helpers';
 import loadingAnimation from '../../../assets/animations/loading-dots.json';
 import transactions from '../../../constants/transactions';
 import Blur from './blur';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const txTypes = [
@@ -22,9 +22,34 @@ const txTypes = [
   'vote',
 ];
 
+const TimeStamp = ({
+  styles,
+  language,
+  tx,
+  t,
+}) => {
+  if (typeof tx.timestamp !== 'number') {
+    return (
+      <Small style={[styles.date, styles.theme.date]}>
+        {t('Pending confirmation')}
+      </Small>
+    );
+  }
+
+  return (
+    <FormattedDate
+      locale={language}
+      type={Small}
+      style={[styles.date, styles.theme.date]}
+    >
+      {tx.timestamp}
+    </FormattedDate>
+  );
+};
+
 @connect(state => ({
   language: state.settings.language,
-  }))
+}))
 class Item extends React.Component {
   componentDidMount() {
     if (typeof this.props.tx.timestamp !== 'number') {
@@ -50,6 +75,7 @@ class Item extends React.Component {
     return stringShortener(address, 10, 3);
   };
 
+  // eslint-disable-next-line
   render() {
     const {
       styles,
@@ -80,10 +106,9 @@ class Item extends React.Component {
       addressText = followedAccount.label;
     }
 
-    const amount =
-      direction === 'incoming'
-        ? fromRawLsk(tx.amount)
-        : `-${fromRawLsk(tx.amount)}`;
+    const amount = direction === 'incoming'
+      ? fromRawLsk(tx.amount)
+      : `-${fromRawLsk(tx.amount)}`;
 
     return (
       <TouchableOpacity
@@ -104,31 +129,24 @@ class Item extends React.Component {
           </View>
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>
-              {activeToken === 'LSK' &&
-              (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)
+              {activeToken === 'LSK'
+              && (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)
                 ? t(transactions[txTypes[tx.type]].title)
                 : addressText}
             </B>
-            {typeof this.props.tx.timestamp !== 'number' ? (
-              <Small style={[styles.date, styles.theme.date]}>
-                {t('Pending confirmation')}
-              </Small>
-            ) : (
-              <FormattedDate
-                locale={language}
-                type={Small}
-                style={[styles.date, styles.theme.date]}
-              >
-                {tx.timestamp}
-              </FormattedDate>
-            )}
+            <TimeStamp
+              styles={styles}
+              language={language}
+              tx={tx}
+              t={t}
+            />
           </View>
         </View>
         {tx.type === 0 && (
           <View style={[styles.column, styles.amountWrapper]}>
-            {(activeToken === 'LSK' &&
-              tx.recipientAddress === tx.senderAddress) ||
-            incognito ? null : (
+            {(activeToken === 'LSK'
+              && tx.recipientAddress === tx.senderAddress)
+            || incognito ? null : (
               <View style={[styles[direction], styles.theme[direction]]}>
                 <FormattedNumber
                   trim={true}
@@ -143,21 +161,23 @@ class Item extends React.Component {
                   {amount}
                 </FormattedNumber>
               </View>
-            )}
+              )}
             {tx.recipientAddress !== tx.senderAddress && incognito ? (
               <Blur value={amount} direction={direction} />
             ) : null}
-            {typeof tx.timestamp !== 'number' ? (
-              <View style={styles.pendingIcon}>
-                <LottieView
-                  source={loadingAnimation}
-                  ref={el => {
-                    this.animation = el;
-                  }}
-                  style={{}}
-                />
-              </View>
-            ) : null}
+            {
+              (typeof tx.timestamp !== 'number') && (
+                <View style={styles.pendingIcon}>
+                  <LottieView
+                    source={loadingAnimation}
+                    ref={el => {
+                      this.animation = el;
+                    }}
+                    style={{}}
+                  />
+                </View>
+              )
+            }
           </View>
         )}
       </TouchableOpacity>

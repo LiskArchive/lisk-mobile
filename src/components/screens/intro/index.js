@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import SplashScreen from 'react-native-splash-screen';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { translate } from 'react-i18next';
 import Splash from './splash';
 import Heading from './heading';
@@ -16,9 +16,9 @@ import styles from './styles';
 @connect(
   state => ({
     settings: state.settings,
-    }),
+  }),
   {
-  settingsUpdated: settingsUpdatedAction,
+    settingsUpdated: settingsUpdatedAction,
   }
 )
 class Intro extends React.Component {

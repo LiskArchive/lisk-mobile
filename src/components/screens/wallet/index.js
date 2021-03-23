@@ -31,11 +31,11 @@ import HomeHeaderTitle from '../router/homeHeaderTitle';
   state => ({
     followedAccounts: state.accounts.followed || [],
     activeToken: state.settings.token.active,
-    }),
+  }),
   {
-  loadingStarted: loadingStartedAction,
-  loadingFinished: loadingFinishedAction,
-  }
+    loadingStarted: loadingStartedAction,
+    loadingFinished: loadingFinishedAction,
+  },
 )
 class Wallet extends React.Component {
   state = {
@@ -49,20 +49,6 @@ class Wallet extends React.Component {
 
   scrollY = new Animated.Value(0);
 
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      title: params.title || '',
-      headerTitle: <HomeHeaderTitle data={params.title} />,
-      headerStyle: {
-        backgroundColor: 'transparent',
-        overflow: 'hidden',
-        borderBottomWidth: 0,
-        elevation: 0,
-      },
-    };
-  };
-
   interpolate = (inputRange, outputRange) =>
     this.scrollY.interpolate({
       inputRange,
@@ -73,34 +59,35 @@ class Wallet extends React.Component {
   setHeader = () => {
     const {
       activeToken,
-      navigation: { setParams },
+      navigation: { setOptions },
       followedAccounts,
     } = this.props;
     const storedAccount = followedAccounts[activeToken].find(
       item => item.address === this.state.account.address
     );
 
-    setParams({
-      title: {
-        placeHolder: storedAccount ? storedAccount.label : '',
-        type: 'wallet',
-        token: activeToken,
-        balance: this.state.account.balance,
-        address: this.state.account.address,
-        scrollY: this.scrollY,
-        interpolate: this.interpolate,
-      },
+    setOptions({
+      headerTitle: () => (
+        <HomeHeaderTitle
+          type="wallet"
+          scrollToTop={this.scrollToTop}
+          scrollY={this.scrollY}
+          balance={this.state.account.balance}
+          address={this.state.account.address}
+          placeHolder={storedAccount ? storedAccount.label : ''}
+        />
+      ),
     });
   };
 
   async fetchInitialData() {
     const {
-      navigation,
+      route,
       loadingStarted,
       loadingFinished,
       activeToken,
     } = this.props;
-    const { address } = navigation.state.params;
+    const address = route.params?.address;
 
     if (!this.address || this.address !== address) {
       loadingStarted();
@@ -123,7 +110,7 @@ class Wallet extends React.Component {
         },
         () => {
           this.setHeader();
-        }
+        },
       );
     }
   }
@@ -194,10 +181,10 @@ class Wallet extends React.Component {
     );
 
     if (
-      storedAccount.length !== prevStoredAccount.length ||
-      (storedAccount.length &&
-        storedAccount[0].label !== prevStoredAccount[0].label) ||
-      this.state.account.balance !== prevState.account.balance
+      storedAccount.length !== prevStoredAccount.length
+      || (storedAccount.length
+        && storedAccount[0].label !== prevStoredAccount[0].label)
+      || this.state.account.balance !== prevState.account.balance
     ) {
       this.setHeader();
     }
@@ -214,10 +201,9 @@ class Wallet extends React.Component {
     if (!transactions.loaded) {
       content = <Loading />;
     } else {
-      const listElements =
-        transactions.count > 0
-          ? [...transactions.pending, ...transactions.confirmed]
-          : ['emptyState'];
+      const listElements = transactions.count > 0
+        ? [...transactions.pending, ...transactions.confirmed]
+        : ['emptyState'];
       const onScroll = Animated.event([
         {
           nativeEvent: { contentOffset: { y: this.scrollY } },

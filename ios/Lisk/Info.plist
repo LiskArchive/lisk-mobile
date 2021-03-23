@@ -20,27 +20,14 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleURLIconFile</key>
-			<string></string>
-			<key>CFBundleURLName</key>
-			<string>lisk</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>lisk</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>localhost</key>
@@ -78,19 +65,13 @@
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>OpenSans-Light.ttf</string>
-		<string>OpenSans-Regular.ttf</string>
-		<string>gilroyBold.ttf</string>
-		<string>Gilroy-Bold.ttf</string>
-		<string>OpenSans-Bold.ttf</string>
-		<string>icons.ttf</string>
-		<string>icons.woff</string>
-		<string>icomoon.ttf</string>
-		<string>dots.ttf</string>
-		<string>OpenSans-Semibold.ttf</string>
-		<string>PTMono-Regular.ttf</string>
-		<string>Dots.ttf</string>
 		<string>Dots-Regular.ttf</string>
+		<string>PTMono-Regular.ttf</string>
+		<string>OpenSans-Bold.ttf</string>
+		<string>OpenSans-Semibold.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>icomoon.ttf</string>
+		<string>Gilroy-Bold.ttf</string>
 		<string>BasierCircle-Bold.otf</string>
 		<string>BasierCircle-Regular.otf</string>
 		<string>BasierCircle-SemiBold.otf</string>

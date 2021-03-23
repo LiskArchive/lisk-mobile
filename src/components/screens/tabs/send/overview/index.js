@@ -1,23 +1,25 @@
 import React from 'react';
-import { View, Linking, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
+
 import { transactionAdded as transactionAddedAction } from '../../../../../actions/transactions';
 import FormattedNumber from '../../../../shared/formattedNumber';
 import { toRawLsk, fromRawLsk } from '../../../../../utilities/conversions';
 import { PrimaryButton } from '../../../../shared/toolBox/button';
 import Avatar from '../../../../shared/avatar';
 import Icon from '../../../../shared/toolBox/icon';
-import { H4, B, P, A } from '../../../../shared/toolBox/typography';
+import {
+  H4, B, P
+} from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { colors } from '../../../../../constants/styleGuide';
 import { tokenMap } from '../../../../../constants/tokens';
-import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';
-import URLs from '../../../../../constants/URLs';
+import HeaderBackButton from '../../../router/headerBackButton';
+import ReadMore from './readMore';
 
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const getTranslatedMessages = t => ({
   initialize: {
     title: t('Initialize your account'),
@@ -37,9 +39,9 @@ const getTranslatedMessages = t => ({
 @connect(
   state => ({
     language: state.settings.language,
-    }),
+  }),
   {
-  transactionAdded: transactionAddedAction,
+    transactionAdded: transactionAddedAction,
   }
 )
 class Overview extends React.Component {
@@ -49,40 +51,40 @@ class Overview extends React.Component {
   };
 
   componentDidMount() {
-    const { t, prevStep, navigation } = this.props;
+    const {
+      t, prevStep, navigation, route
+    } = this.props;
     const { send, initialize } = getTranslatedMessages(t);
-    let nextNavigationParams = {
+    let options = {
       title: send.title,
-      action: () => prevStep(),
-      showButtonLeft: true,
+      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />,
     };
 
-    if (navigation.state.params.initialize) {
+    if (route.params?.initialize) {
       this.setState({
         initialize: true,
       });
 
-      nextNavigationParams = {
+      options = {
         title: initialize.title,
-        action: navigation.back,
-        showButtonLeft: false,
+        headerLeft: () => null,
       };
     }
 
-    navigation.setParams({
-      ...nextNavigationParams,
-      initialize: false,
-    });
+    navigation.setOptions(options);
+    navigation.setParams({ initialize: false });
   }
 
   componentDidUpdate(prevProps) {
-    const { t, lng, navigation } = this.props;
+    const {
+      t, lng, navigation, route
+    } = this.props;
 
     if (prevProps.lng !== lng) {
       const { initialize, send } = getTranslatedMessages(t);
 
-      navigation.setParams({
-        title: navigation.state.params.initialize ? initialize : send,
+      navigation.setOptions({
+        title: route.params?.initialize ? initialize : send,
       });
     }
   }
@@ -136,18 +138,13 @@ class Overview extends React.Component {
     });
   };
 
-  openAcademy = () => {
-    Linking.openURL(URLs.liskGettingStarted)
-      // eslint-disable-next-line no-console
-      .catch(err => console.error('An error occurred', err));
-  };
-
+  // eslint-disable-next-line complexity
   render() {
     const {
       t,
       styles,
       theme,
-      navigation,
+      route,
       settings,
       accounts: { followed },
       sharedData: {
@@ -157,10 +154,9 @@ class Overview extends React.Component {
       language,
     } = this.props;
 
-    const actionType =
-      navigation.state.params.initialize || this.state.initialize
-        ? 'initialize'
-        : 'send';
+    const actionType = route.params?.initialize || this.state.initialize
+      ? 'initialize'
+      : 'send';
 
     const translatedMessages = getTranslatedMessages(t);
     const bookmark = followed[token.active].find(
@@ -173,18 +169,12 @@ class Overview extends React.Component {
         contentContainerStyle={styles.innerContainer}
       >
         <View>
-          {!isSmallScreen && actionType !== 'send' ? (
-            <P style={styles.theme.subtitle}>
-              {translatedMessages[actionType].subtitle}
-
-              <A
-                style={[styles.link, styles.theme.link]}
-                onPress={this.openAcademy}
-              >
-                {t('Read more')}
-              </A>
-            </P>
-          ) : null}
+          <ReadMore
+            actionType={actionType}
+            styles={styles}
+            messages={translatedMessages}
+            t={t}
+          />
 
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
             {settings.token.active === tokenMap.LSK.key ? (

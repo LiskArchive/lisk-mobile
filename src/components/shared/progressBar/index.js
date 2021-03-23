@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Dimensions } from 'react-native';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 class Progress extends React.Component {

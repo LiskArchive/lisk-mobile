@@ -62,9 +62,10 @@ class Form extends React.Component {
 
   goToRegistration = () => {
     this.passphraseInput.blur();
-    this.props.navigation.navigate('Register');
+    this.props.navigation.navigate({ name: 'Register' });
   };
 
+  // eslint-disable-next-line max-statements
   onFormSubmission = () => {
     const { passphrase } = this.state;
     const { t, signIn } = this.props;

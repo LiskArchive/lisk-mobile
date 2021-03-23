@@ -1,8 +1,5 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { fonts, colors, boxes } from '../../../constants/styleGuide';
-import { deviceType } from '../../../utilities/device';
-
-const bottomOffset = deviceType() === 'iOSx' ? 30 : 0;
 
 const styles = {
   h1: {
@@ -61,37 +58,8 @@ const styles = {
     marginRight: -1,
     height: 47,
   },
-  pullUp: {
-    ...Platform.select({
-      android: {
-        top: -20,
-      },
-      ios: {
-        marginBottom: 20 + bottomOffset,
-      },
-    }),
-  },
   overlay: {
     zIndex: 9999,
-  },
-  keyboard: {
-    ...Platform.select({
-      android: {
-        backgroundColor: 'transparent',
-        borderTopColor: 'transparent',
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        left: 0,
-        borderRadius: 0,
-      },
-      ios: {
-        backgroundColor: 'transparent',
-        borderTopColor: 'transparent',
-        height: 'auto',
-        borderRadius: 0,
-      },
-    }),
   },
   scrollViewContainer: {
     flexGrow: 1,

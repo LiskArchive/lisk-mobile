@@ -1,110 +1,67 @@
 import React from 'react';
-import {
-  createBottomTabNavigator,
-  createStackNavigator,
-} from 'react-navigation';
-import HeaderBackground from './headerBackground';
-import HeaderTitle from './headerTitle';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import Send from '../tabs/send';
-import Bookmark from '../bookmarkPage';
+import Bookmarks from '../bookmarkPage';
 import Request from '../tabs/request';
 import Settings from '../tabs/settings';
 import TabBarIcon from './tabBarIcon';
 import Home from '../tabs/home';
-import TabBarComponent from './tabBarComponent';
-import DynamicHeaderBackground from './dynamicHeaderBackground';
-import { t, headerStyle } from './helper';
+import navigationOptions from './navigationOptions';
 
-const SendStack = createStackNavigator(
-  {
-    Send: {
-      screen: Send,
-      navigationOptions: () => ({
-        headerTitle: HeaderTitle,
-        headerStyle,
-        headerBackground: <HeaderBackground />,
-      }),
-    },
-  },
-  {}
+export const getHeaderOptions = ({ route }) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
+  return navigationOptions[routeName];
+};
+
+const getIcon = ({ route }) => ({
+  tabBarIcon: props => (
+    <TabBarIcon name={route.name.toLowerCase()} {...props} />
+  ),
+});
+
+const Tab = createBottomTabNavigator();
+const SendStack = createStackNavigator();
+const HomeStack = createStackNavigator();
+
+/**
+ * We needed to wrap Home and Send screens in a dedicated navigator
+ * so they can modify to the header based on the component state.
+ *
+ * Components under Tabs navigator can't control the header of the Main navigator
+ */
+const HomeNavigator = ({ route }) => (
+  <HomeStack.Navigator initialRouteName="Home">
+    <HomeStack.Screen
+      name="Home"
+      component={Home}
+      options={navigationOptions.HomeStack}
+      initialParams={route.params}
+    />
+  </HomeStack.Navigator>
 );
 
-const HomeStack = createStackNavigator(
-  {
-    Home: {
-      screen: Home,
-    },
-  },
-  {
-    defaultNavigationOptions: {
-      headerBackground: <DynamicHeaderBackground />,
-    },
-  }
+const SendNavigator = ({ route }) => (
+  <SendStack.Navigator initialRouteName="Send">
+    <SendStack.Screen
+      name="Send"
+      component={Send}
+      options={navigationOptions.SendStack}
+      initialParams={route.params}
+    />
+  </SendStack.Navigator>
 );
 
-const Tabs = createBottomTabNavigator(
-  {
-    Home: {
-      screen: HomeStack,
-      navigationOptions: {
-        // eslint-disable-next-line react/display-name
-        tabBarIcon: props => <TabBarIcon name="home" {...props} />,
-        tabBarOnPress: ({ defaultHandler, navigation }) => {
-          if (navigation.isFocused() && navigation.getParam('scrollToTop')) {
-            navigation.state.params.scrollToTop();
-          } else {
-            defaultHandler(0);
-          }
-        },
-      },
-    },
-    Request: {
-      screen: Request,
-      navigationOptions: {
-        // eslint-disable-next-line react/display-name
-        tabBarIcon: props => <TabBarIcon name="request" {...props} />,
-      },
-    },
-    Send: {
-      screen: SendStack,
-      navigationOptions: {
-        // eslint-disable-next-line react/display-name
-        tabBarIcon: props => <TabBarIcon name="send" {...props} />,
-      },
-    },
-    Bookmarks: {
-      screen: Bookmark,
-      navigationOptions: {
-        title: t('Bookmarks'),
-        tabBarLabel: 'Bookmarks',
-        // eslint-disable-next-line react/display-name
-        tabBarIcon: props => <TabBarIcon name="bookmark" {...props} />,
-      },
-    },
-    Settings: {
-      screen: Settings,
-      navigationOptions: {
-        title: t('Settings'),
-        // eslint-disable-next-line react/display-name
-        tabBarIcon: props => <TabBarIcon name="settings" {...props} />,
-      },
-    },
-  },
-  {
-    tabBarComponent: TabBarComponent,
-    initialRouteName: 'Home',
-    headerMode: 'screen',
-    swipeEnabled: false,
-    tabBarOptions: {
-      activeTintColor: undefined,
-      indicatorStyle: undefined,
-      inactiveTintColor: undefined,
-      showIcon: true,
-      showLabel: false,
-      upperCaseLabel: false,
-      allowFontScaling: false,
-    },
-  }
+const Tabs = () => (
+  <Tab.Navigator initialRouteName="Home">
+    <Tab.Screen name="Home" component={HomeNavigator} options={getIcon} />
+    <Tab.Screen name="Request" component={Request} options={getIcon} />
+    <Tab.Screen name="Send" component={SendNavigator} options={getIcon} />
+    <Tab.Screen name="Bookmarks" component={Bookmarks} options={getIcon} />
+    <Tab.Screen name="Settings" component={Settings} options={getIcon} />
+  </Tab.Navigator>
 );
 
 export default Tabs;

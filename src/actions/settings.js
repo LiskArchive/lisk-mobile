@@ -25,6 +25,10 @@ export const settingsUpdated = data => ({
  * @returns {Function} Thunk action function
  */
 export const settingsRetrieved = () => dispatch => getSettings().then(data => {
+  if (!data.theme) {
+    data.theme = 'light';
+  }
+
   dispatch({
     type: actionTypes.settingsRetrieved,
     data,

@@ -54,15 +54,15 @@ class Splash extends React.Component {
           style={
             showSimplifiedView
               ? [
-                  styles.splashFigure,
-                  styles.splashStaticSimplified,
-                  { opacity: iconOpacity },
-                ]
+                styles.splashFigure,
+                styles.splashStaticSimplified,
+                { opacity: iconOpacity },
+              ]
               : [
-                  styles.splashFigure,
-                  styles.splashStatic,
-                  { opacity: iconOpacity },
-                ]
+                styles.splashFigure,
+                styles.splashStatic,
+                { opacity: iconOpacity },
+              ]
           }
         >
           <Icon

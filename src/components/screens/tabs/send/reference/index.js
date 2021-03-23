@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { TextEncoder } from 'text-encoding';
 import { translate } from 'react-i18next';
+
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import Input from '../../../../shared/toolBox/input';
 import withTheme from '../../../../shared/withTheme';
@@ -13,6 +14,7 @@ import {
   SCREEN_HEIGHTS,
 } from '../../../../../utilities/device';
 import CircularProgress from './circularProgress';
+import HeaderBackButton from '../../../router/headerBackButton';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const isAndroid = deviceType() === 'android';
@@ -33,7 +35,7 @@ class Reference extends React.Component {
 
   componentDidMount() {
     const {
-      navigation: { setParams },
+      navigation: { setOptions },
       prevStep,
       sharedData,
     } = this.props;
@@ -42,10 +44,9 @@ class Reference extends React.Component {
       this.onChange(sharedData.reference);
     }
 
-    setParams({
+    setOptions({
       title: isSmallScreen ? 'Send' : 'Add a reference',
-      showButtonLeft: true,
-      action: () => prevStep(),
+      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />,
     });
 
     if (isAndroid) {
@@ -56,9 +57,9 @@ class Reference extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
       const {
-        navigation: { setParams },
+        navigation: { setOptions },
       } = this.props;
-      setParams({
+      setOptions({
         title: isSmallScreen ? 'Send' : 'Add a reference',
       });
     }

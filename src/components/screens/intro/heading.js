@@ -15,7 +15,7 @@ import URLs from '../../../constants/URLs';
 @connect(
   () => ({}),
   {
-  settingsUpdated: settingsUpdatedAction,
+    settingsUpdated: settingsUpdatedAction,
   }
 )
 class Heading extends React.Component {

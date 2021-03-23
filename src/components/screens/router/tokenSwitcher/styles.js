@@ -22,5 +22,14 @@ export default () => ({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    iOSx: {
+      marginTop: 53,
+    },
+    iOS: {
+      marginTop: 30,
+    },
+    android: {
+      marginTop: 4,
+    },
   },
 });

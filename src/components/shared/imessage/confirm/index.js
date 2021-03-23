@@ -17,6 +17,7 @@ class Confirm extends Component {
     busy: false,
   };
 
+  // eslint-disable-next-line max-statements
   send = async () => {
     if (this.state.busy) {
       return;
@@ -69,9 +70,8 @@ class Confirm extends Component {
 
     const { busy, errorMessage } = this.state;
 
-    const isSender =
-      conversation.localParticipiantIdentifier ===
-      message.senderParticipantIdentifier;
+    const isSender = conversation.localParticipiantIdentifier
+      === message.senderParticipantIdentifier;
     const fee = 1e7;
     const totalAmount = isSender ? amount : includeFee(amount, fee);
     const description = isSender

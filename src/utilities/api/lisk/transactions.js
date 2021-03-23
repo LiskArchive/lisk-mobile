@@ -32,6 +32,7 @@ const normalizeTransactionsResponse = list =>
 export const get = ({
   id, address, limit, offset
 }) =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     const parameters = removeUndefinedKeys({
       id,

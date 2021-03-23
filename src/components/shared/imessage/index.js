@@ -173,9 +173,8 @@ class LiskMessageExtension extends Component {
     } = this.state;
     const language = languageMap.en.code;
 
-    const isSender =
-      conversation.localParticipiantIdentifier ===
-      message.senderParticipantIdentifier;
+    const isSender = conversation.localParticipiantIdentifier
+      === message.senderParticipantIdentifier;
 
     const Element = () => {
       if (message.url) {

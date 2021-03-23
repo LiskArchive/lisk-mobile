@@ -14,7 +14,7 @@ import { validateAddress } from '../../../utilities/validators';
 import Icon from '../toolBox/icon';
 import { colors, themes } from '../../../constants/styleGuide';
 import { setColorOpacity } from '../../../utilities/helpers';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 class Avatar extends React.Component {
@@ -22,10 +22,12 @@ class Avatar extends React.Component {
     return nextProps.address !== this.props.address;
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     this.uniqueSvgUrlHash = randomId();
   }
 
+  // eslint-disable-next-line max-statements
   render() {
     const {
       styles, address, size, scale, translate, theme
@@ -69,10 +71,9 @@ class Avatar extends React.Component {
     const canvasSize = 200;
 
     const addressHashChunks = getHashChunks(address);
-    const gradientScheme =
-      gradientSchemes[
-        addressHashChunks[0].substr(1, 2) % gradientSchemes.length
-      ];
+    const gradientScheme = gradientSchemes[
+      addressHashChunks[0].substr(1, 2) % gradientSchemes.length
+    ];
 
     const gradientsSchemesUrlsHashed = {
       primary: gradientScheme.primary.map((...rest) =>

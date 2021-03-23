@@ -3,11 +3,11 @@ import { AppState } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
+
 import CameraAccess from './cameraAccess';
 import CameraOverlay from './cameraOverlay';
 import CameraRoll from './cameraRoll';
-import ClosureOverlay from './closureOverlay';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 class Scanner extends React.Component {
@@ -44,15 +44,10 @@ class Scanner extends React.Component {
     const { camera } = this.state;
     const { isCameraOpen } = this.props;
 
-    this.props.navigation.setParams({
-      tabBar: camera.visible,
-      showButtonLeft: !camera.visible,
-      action: this.toggleCamera,
-      onBackPress: this.toggleCamera,
-    });
-
     camera.visible = !camera.visible;
-    if (isCameraOpen) isCameraOpen(camera.visible);
+    if (typeof isCameraOpen === 'function') {
+      isCameraOpen(camera.visible);
+    }
     this.setState({ camera });
 
     if (!camera.visible && typeof this.props.onClose === 'function') {
@@ -62,12 +57,6 @@ class Scanner extends React.Component {
 
   toggleGallery = () => {
     const { photo } = this.state;
-    this.props.navigation.setParams({
-      showButtonLeft: true,
-      action: !photo.visible ? this.toggleGallery : this.toggleCamera,
-      onBackPress: this.toggleGallery,
-    });
-
     photo.visible = !photo.visible;
     this.setState({ photo });
   };
@@ -78,9 +67,9 @@ class Scanner extends React.Component {
     camera.visible = false;
     this.setState({ photo, camera });
 
-    this.props.navigation.setParams({
+    this.props.navigation.setOptions({
       tabBar: !photo.visible,
-      showButtonLeft: photo.visible,
+      headerLeft: true,
     });
 
     if (items.length > 0) {
@@ -99,7 +88,7 @@ class Scanner extends React.Component {
     const {
       styles,
       containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
-      readFromCameraRoll,
+      // readFromCameraRoll,
       fullScreen,
       permissionDialogTitle,
       permissionDialogMessage,
@@ -116,27 +105,26 @@ class Scanner extends React.Component {
             onBarCodeRead={this.readQRcode}
             barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
             type={RNCamera.Constants.Type.back}
+            captureAudio={false}
             notAuthorizedView={
               <CameraAccess close={this.toggleCamera} fullScreen={fullScreen} />
             }
             pendingAuthorizationView={
               <CameraAccess close={this.toggleCamera} />
             }
-            permissionDialogTitle={permissionDialogTitle}
-            permissionDialogMessage={permissionDialogMessage}
+            androidCameraPermissionOptions={{
+              title: permissionDialogTitle,
+              message: permissionDialogMessage,
+              buttonPositive: 'Ok',
+              buttonNegative: 'Cancel',
+            }}
           >
-            {readFromCameraRoll ? (
-              <CameraOverlay
-                containerStyles={cameraOverlay}
-                toggleGallery={this.toggleGallery}
-                photoPermission={photo.permission}
-              />
-            ) : (
-              <ClosureOverlay
-                close={this.toggleCamera}
-                containerStyles={cameraOverlay}
-              />
-            )}
+            <CameraOverlay
+              containerStyles={cameraOverlay}
+              toggleGallery={this.toggleGallery}
+              photoPermission={photo.permission}
+              close={this.toggleCamera}
+            />
           </RNCamera>
         ) : null}
         <CameraRoll

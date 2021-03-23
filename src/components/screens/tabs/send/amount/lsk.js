@@ -19,7 +19,7 @@ const isAndroid = deviceType() === 'android';
 
 @connect(state => ({
   language: state.settings.language,
-  }))
+}))
 class AmountLSK extends React.Component {
   state = {
     amount: {
@@ -61,9 +61,9 @@ class AmountLSK extends React.Component {
     if (!reg.amount.test(str)) {
       message = t('The amount value is invalid.');
     } else if (
-      accounts.info[token.active].balance < transactions.send.fee ||
-      parseFloat(str) >
-        fromRawLsk(accounts.info[token.active].balance - transactions.send.fee)
+      accounts.info[token.active].balance < transactions.send.fee
+      || parseFloat(str)
+        > fromRawLsk(accounts.info[token.active].balance - transactions.send.fee)
     ) {
       message = t('Your balance is not sufficient.');
     }
@@ -132,9 +132,9 @@ class AmountLSK extends React.Component {
     let valueInCurrency = 0;
 
     if (
-      value &&
-      this.validator(normalizedValue).code === 0 &&
-      priceTicker[token.active][currency]
+      value
+      && this.validator(normalizedValue).code === 0
+      && priceTicker[token.active][currency]
     ) {
       valueInCurrency = (
         normalizedValue * priceTicker[token.active][currency]

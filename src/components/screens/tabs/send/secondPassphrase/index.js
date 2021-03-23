@@ -18,6 +18,7 @@ import Scanner from '../../../../shared/scanner';
 import DropDownHolder from '../../../../../utilities/alert';
 import SecondPassPhraseDarkImg from '../../../../../assets/images/send/secondPassphrase3xDark.png';
 import SecondPassPhraseLightImg from '../../../../../assets/images/send/secondPassphrase3xLight.png';
+import HeaderBackButton from '../../../router/headerBackButton';
 
 const devDefaultSecondPass = process.env.secondPassphrase || '';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
@@ -33,13 +34,12 @@ class SecondPassphrase extends React.Component {
   componentDidMount() {
     const {
       prevStep,
-      navigation: { setParams },
+      navigation: { setOptions },
     } = this.props;
 
-    setParams({
+    setOptions({
       title: isSmallScreen ? 'Send' : 'Confirm',
-      showButtonLeft: true,
-      action: () => prevStep(),
+      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />,
     });
 
     if (isAndroid) {
@@ -50,9 +50,9 @@ class SecondPassphrase extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.lng !== this.props.lng) {
       const {
-        navigation: { setParams },
+        navigation: { setOptions },
       } = this.props;
-      setParams({
+      setOptions({
         title: isSmallScreen ? 'Send' : 'Confirm',
       });
     }
@@ -63,9 +63,9 @@ class SecondPassphrase extends React.Component {
     const { accounts, settings, t } = this.props;
 
     if (
-      validity.length === 0 &&
-      extractPublicKey(passphrase) !==
-        accounts.info[settings.token.active].secondPublicKey
+      validity.length === 0
+      && extractPublicKey(passphrase)
+        !== accounts.info[settings.token.active].secondPublicKey
     ) {
       validity.push({
         code: 'dose_not_belong',
@@ -97,7 +97,8 @@ class SecondPassphrase extends React.Component {
   onCloseCamera = () => {
     this.props.navigation.setParams({
       showButtonLeft: true,
-      action: () => this.props.prevStep(),
+      headerLeft: props =>
+        <HeaderBackButton {...props} onPress={() => this.props.prevStep()} safeArea={true} />,
     });
   };
 
@@ -105,6 +106,7 @@ class SecondPassphrase extends React.Component {
     this.changeHandler(value, this.onSubmit);
   };
 
+  // eslint-disable-next-line max-statements
   onSubmit = () => {
     const { t, nextStep, sharedData } = this.props;
     const { secondPassphrase } = this.state;
@@ -118,10 +120,9 @@ class SecondPassphrase extends React.Component {
       );
 
       if (error.length) {
-        errorMessage =
-          error[0].message && error[0].message.length > 0
-            ? error[0].message.replace(' Please check the passphrase.', '')
-            : '';
+        errorMessage = error[0].message && error[0].message.length > 0
+          ? error[0].message.replace(' Please check the passphrase.', '')
+          : '';
       }
 
       DropDownHolder.error(t('Error'), errorMessage);

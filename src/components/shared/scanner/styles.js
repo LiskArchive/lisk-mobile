@@ -7,10 +7,6 @@ import {
   deviceType,
 } from '../../../utilities/device';
 
-let buttonMarginTop = 0;
-if (deviceType() === 'iOS') buttonMarginTop = 18;
-if (deviceType() === 'iOSx') buttonMarginTop = 30;
-
 const height = deviceHeight();
 const width = deviceWidth();
 const headFullAndroid = viewportHeight() + headerHeight() + 20;
@@ -57,6 +53,8 @@ export default () => ({
     galleryDescription: {
       color: colors.light.white,
       maxWidth: 230,
+      height: 30,
+      lineHeight: 30,
     },
     permissionRequestWrapper: {
       position: 'absolute',
@@ -84,9 +82,14 @@ export default () => ({
       textAlign: 'center',
       color: colors.light.slateGray,
     },
+    headerContainer: {
+      flex: 1,
+      alignItems: 'flex-end',
+      justifyContent: 'flex-start',
+      flexDirection: 'row',
+    },
     closeButton: {
-      marginTop: buttonMarginTop,
-      width: 80,
+      width: 50,
       flexDirection: 'row',
       justifyContent: 'flex-start',
       alignItems: 'center',

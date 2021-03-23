@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import { P } from '../toolBox/typography';
 import CopyToClipboard from '../copyToClipboard';
-import withTheme from '../../shared/withTheme';
+import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const PassphraseCopy = ({ styles, passphrase, t }) => (

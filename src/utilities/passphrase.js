@@ -1,5 +1,9 @@
 import Lisk from '@liskhq/lisk-client';
-import * as Keychain from 'react-native-keychain';
+import {
+  setGenericPassword,
+  getGenericPassword,
+  resetGenericPassword,
+} from 'react-native-keychain';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
 import { extractAddress } from './api/lisk/account';
@@ -55,9 +59,9 @@ export const generatePassphrase = () => {
  */
 export const storePassphraseInKeyChain = passphrase => {
   const address = extractAddress(passphrase);
-  Keychain.setGenericPassword(address, passphrase, {
-    accessGroup: '58UK9RE9TP.org.lisk.mobile',
-    service: 'org.lisk.mobile',
+  setGenericPassword(address, passphrase, {
+    accessGroup: '58UK9RE9TP.io.lisk.mobile',
+    service: 'io.lisk.mobile',
   });
 };
 
@@ -69,7 +73,7 @@ export const removePassphraseFromKeyChain = async (
   errorCallback = err => err
 ) => {
   try {
-    await Keychain.resetGenericPassword({ service: 'org.lisk.mobile' });
+    await resetGenericPassword({ service: 'io.lisk.mobile' });
     successCallback();
   } catch (error) {
     errorCallback(error);
@@ -77,7 +81,7 @@ export const removePassphraseFromKeyChain = async (
 };
 
 export const getPassphraseFromKeyChain = () =>
-  Keychain.getGenericPassword({ service: 'org.lisk.mobile' });
+  getGenericPassword({ service: 'io.lisk.mobile' });
 
 /**
  * @param {function} successCallback
@@ -86,20 +90,28 @@ export const getPassphraseFromKeyChain = () =>
  *  when a device request fingerprint
  * first check bio metric Sensor availability after that authenticate a user base on that
  */
+// eslint-disable-next-line max-statements
 export const bioMetricAuthentication = async ({
   successCallback,
   errorCallback = err => err,
   description,
   androidError,
 }) => {
-  const authConfig =
-    Platform.OS === 'ios'
-      ? {
-        description:
-            description ||
-            'Scan your fingerprint on the device scanner to sign in',
-      }
-      : { onAttempt: androidError };
+  const defaultTitle = 'Scan your fingerprint on the device scanner';
+  let authConfig = {
+    description: description || defaultTitle,
+  };
+
+  if (Platform.OS === 'android' && Platform.Version < 23) {
+    authConfig = {
+      onAttempt: androidError,
+    };
+  } else if (Platform.OS === 'android' && Platform.Version >= 23) {
+    authConfig = {
+      title: description || defaultTitle,
+    };
+  }
+
   try {
     await FingerprintScanner.isSensorAvailable();
     try {
