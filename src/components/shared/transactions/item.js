@@ -47,27 +47,6 @@ const TimeStamp = ({
   );
 };
 
-const PendingSpinner = ({
-  styles,
-  tx,
-}) => {
-  if (typeof tx.timestamp !== 'number') {
-    return (
-      <View style={styles.pendingIcon}>
-        <LottieView
-          source={loadingAnimation}
-          ref={el => {
-            this.animation = el;
-          }}
-          style={{}}
-        />
-      </View>
-    );
-  }
-
-  return null;
-};
-
 @connect(state => ({
   language: state.settings.language,
 }))
@@ -186,7 +165,19 @@ class Item extends React.Component {
             {tx.recipientAddress !== tx.senderAddress && incognito ? (
               <Blur value={amount} direction={direction} />
             ) : null}
-            <PendingSpinner styles={styles} tx={tx} />
+            {
+              (typeof tx.timestamp !== 'number') && (
+                <View style={styles.pendingIcon}>
+                  <LottieView
+                    source={loadingAnimation}
+                    ref={el => {
+                      this.animation = el;
+                    }}
+                    style={{}}
+                  />
+                </View>
+              )
+            }
           </View>
         )}
       </TouchableOpacity>
