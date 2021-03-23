@@ -96,6 +96,7 @@
     "react-redux": "^7.2.2",
     "readable-stream": "^1.1.14",
     "redux": "^4.0.5",
+    "redux-connect-decorator": "^0.2.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "socket.io-client": "^3.1.2",
@@ -151,7 +152,6 @@
     "metro-react-native-babel-preset": "^0.59.0",
     "moxios": "^0.4.0",
     "react-test-renderer": "^16.13.1",
-    "redux-connect-decorator": "^0.2.1",
     "redux-mock-store": "^1.5.4",
     "rn-nodeify": "github:tradle/rn-nodeify",
     "schedule": "^0.5.0"
