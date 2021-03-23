@@ -89,9 +89,12 @@ navigationOptions.Wallet = () => {
   return {
     headerTitle: () => <HomeHeaderTitle type="wallet" />,
     headerLeft: props => <HeaderBackButton {...props} />,
+    headerRight: () => <HeaderPlaceholderButton />,
     headerStyle: {
       height: type === 'iOSx' ? 90 : 64,
+      ...noShadow,
     },
+    headerTitleStyle: genericTitle,
   };
 };
 
