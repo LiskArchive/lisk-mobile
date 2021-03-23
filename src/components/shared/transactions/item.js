@@ -28,7 +28,7 @@ const TimeStamp = ({
   tx,
   t,
 }) => {
-  if (typeof this.props.tx.timestamp !== 'number') {
+  if (typeof tx.timestamp !== 'number') {
     return (
       <Small style={[styles.date, styles.theme.date]}>
         {t('Pending confirmation')}
