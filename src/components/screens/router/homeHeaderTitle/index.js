@@ -151,33 +151,31 @@ const HomeHeaderTitle = ({
 
   return (
     <View style={[styles.container, styles[`${os}${type}Container`]]}>
-      {data && (
-        <TouchableWithoutFeedback onPress={() => scrollToTop()}>
-          <View>
-            <SimpleHeader
-              styles={styles}
-              type={data.type}
-              title={data.placeHolder}
-              scrollY={data.scrollY}
-            />
-            <ExtendedTitle
-              balance={
-                data.balance
-                  ? localizedBalance(fromRawLsk(data.balance))
-                  : '0'
-              }
-              theme={theme}
-              token={data.token}
-              styles={styles}
-              scrollY={data.scrollY}
-              address={data.address}
-              incognito={data.incognito}
-              type={data.type}
-              wallet={wallet}
-            />
-          </View>
-        </TouchableWithoutFeedback>
-      )}
+      <TouchableWithoutFeedback onPress={() => scrollToTop()}>
+        <View>
+          <SimpleHeader
+            styles={styles}
+            type={data.type}
+            title={data.placeHolder}
+            scrollY={data.scrollY}
+          />
+          <ExtendedTitle
+            balance={
+              data.balance
+                ? localizedBalance(fromRawLsk(data.balance))
+                : '0'
+            }
+            theme={theme}
+            token={data.token}
+            styles={styles}
+            scrollY={data.scrollY}
+            address={data.address}
+            incognito={data.incognito}
+            type={data.type}
+            wallet={wallet}
+          />
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };

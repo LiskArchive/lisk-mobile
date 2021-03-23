@@ -48,7 +48,7 @@ const Profile = ({
 
   let fiatBalance = 0;
   const ratio = priceTicker[token][settings.currency];
-  if (normalizedBalance && ratio) {
+  if (ratio) {
     fiatBalance = (normalizedBalance * ratio).toLocaleString(
       `${language}-${language.toUpperCase()}`,
       { maximumFractionDigits: 2 }

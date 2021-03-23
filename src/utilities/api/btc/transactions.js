@@ -160,6 +160,7 @@ export const create = ({
 
       if (unspentTxOutsTotal < estimatedTotal) {
         reject(new Error('Insufficient (estimated) balance'));
+        return false;
       }
 
       // Find unspent txOuts to spend for this tx

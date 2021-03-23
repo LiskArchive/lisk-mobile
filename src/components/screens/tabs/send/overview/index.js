@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Linking, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 
@@ -17,7 +17,6 @@ import getStyles from './styles';
 import { colors } from '../../../../../constants/styleGuide';
 import { tokenMap } from '../../../../../constants/tokens';
 import DropDownHolder from '../../../../../utilities/alert';
-import URLs from '../../../../../constants/URLs';
 import HeaderBackButton from '../../../router/headerBackButton';
 import ReadMore from './readMore';
 
@@ -137,12 +136,6 @@ class Overview extends React.Component {
         }
       );
     });
-  };
-
-  openAcademy = () => {
-    Linking.openURL(URLs.liskGettingStarted)
-      // eslint-disable-next-line no-console
-      .catch(err => console.error('An error occurred', err));
   };
 
   // eslint-disable-next-line complexity
