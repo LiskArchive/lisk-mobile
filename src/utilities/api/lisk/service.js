@@ -2,6 +2,7 @@ import config from '../../../../lsk.config';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getPriceTicker = () =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(
