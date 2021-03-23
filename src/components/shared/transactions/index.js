@@ -84,6 +84,7 @@ class Transactions extends React.Component {
     });
   };
 
+  // eslint-disable-next-line complexity
   render() {
     const {
       styles,

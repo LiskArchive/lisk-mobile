@@ -41,7 +41,6 @@ class Result extends React.Component {
 
   componentDidMount() {
     const {
-      reset,
       navigation: { setOptions },
     } = this.props;
     setOptions({
@@ -61,6 +60,7 @@ class Result extends React.Component {
     setOptions({ title: 'Send' });
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillUpdate(nextProp) {
     const { sharedData } = this.props;
     const nowPending = this.props.transactions.pending.filter(tx => tx.id === sharedData.txId)

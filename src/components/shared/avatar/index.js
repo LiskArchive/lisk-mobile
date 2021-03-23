@@ -22,10 +22,12 @@ class Avatar extends React.Component {
     return nextProps.address !== this.props.address;
   }
 
-  componentWillMount() {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
     this.uniqueSvgUrlHash = randomId();
   }
 
+  // eslint-disable-next-line max-statements
   render() {
     const {
       styles, address, size, scale, translate, theme

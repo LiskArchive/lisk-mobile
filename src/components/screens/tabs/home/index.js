@@ -22,7 +22,7 @@ import {
 } from './utils';
 import { viewportHeight } from '../../../../utilities/device';
 import InfiniteScrollView from '../../../shared/infiniteScrollView';
-import { tokenMap, tokenKeys } from '../../../../constants/tokens';
+import { tokenKeys } from '../../../../constants/tokens';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { themes } from '../../../../constants/styleGuide';
@@ -132,6 +132,7 @@ class Home extends React.Component {
     }, 1200);
   }
 
+  // eslint-disable-next-line max-statements
   componentDidUpdate(prevProps) {
     const {
       transactions,

@@ -145,6 +145,7 @@ export const accountFetched = givenToken => (dispatch, getState) => {
     });
 };
 
+// eslint-disable-next-line max-statements
 export const blockUpdated = () => async (dispatch, getState) => {
   const activeToken = getState().settings.token.active;
   const { address } = getState().accounts.info[activeToken];

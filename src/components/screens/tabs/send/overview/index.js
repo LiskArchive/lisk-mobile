@@ -10,18 +10,17 @@ import { PrimaryButton } from '../../../../shared/toolBox/button';
 import Avatar from '../../../../shared/avatar';
 import Icon from '../../../../shared/toolBox/icon';
 import {
-  H4, B, P, A
+  H4, B, P
 } from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { colors } from '../../../../../constants/styleGuide';
 import { tokenMap } from '../../../../../constants/tokens';
-import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';
 import URLs from '../../../../../constants/URLs';
 import HeaderBackButton from '../../../router/headerBackButton';
+import ReadMore from './readMore';
 
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const getTranslatedMessages = t => ({
   initialize: {
     title: t('Initialize your account'),
@@ -146,6 +145,7 @@ class Overview extends React.Component {
       .catch(err => console.error('An error occurred', err));
   };
 
+  // eslint-disable-next-line complexity
   render() {
     const {
       t,
@@ -176,18 +176,12 @@ class Overview extends React.Component {
         contentContainerStyle={styles.innerContainer}
       >
         <View>
-          {!isSmallScreen && actionType !== 'send' ? (
-            <P style={styles.theme.subtitle}>
-              {translatedMessages[actionType].subtitle}
-
-              <A
-                style={[styles.link, styles.theme.link]}
-                onPress={this.openAcademy}
-              >
-                {t('Read more')}
-              </A>
-            </P>
-          ) : null}
+          <ReadMore
+            actionType={actionType}
+            styles={styles}
+            messages={translatedMessages}
+            t={t}
+          />
 
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
             {settings.token.active === tokenMap.LSK.key ? (

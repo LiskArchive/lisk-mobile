@@ -63,6 +63,7 @@ class Settings extends React.Component {
     });
   };
 
+  // eslint-disable-next-line complexity
   render() {
     const {
       styles, theme, navigation, settings, t

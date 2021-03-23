@@ -97,7 +97,8 @@ class SecondPassphrase extends React.Component {
   onCloseCamera = () => {
     this.props.navigation.setParams({
       showButtonLeft: true,
-      headerLeft: props => <HeaderBackButton {...props} onPress={() => prevStep()} safeArea={true} />,
+      headerLeft: props =>
+        <HeaderBackButton {...props} onPress={() => this.props.prevStep()} safeArea={true} />,
     });
   };
 
@@ -105,6 +106,7 @@ class SecondPassphrase extends React.Component {
     this.changeHandler(value, this.onSubmit);
   };
 
+  // eslint-disable-next-line max-statements
   onSubmit = () => {
     const { t, nextStep, sharedData } = this.props;
     const { secondPassphrase } = this.state;

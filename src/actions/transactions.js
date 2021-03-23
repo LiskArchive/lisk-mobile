@@ -47,6 +47,7 @@ export const transactionsLoaded = data => async (dispatch, getState) => {
  * @param {Function} successCb - success callback
  * @param {Function} errorCb - error callback
  */
+// eslint-disable-next-line max-statements
 export const transactionAdded = (data, successCb, errorCb) => async (
   dispatch,
   getState

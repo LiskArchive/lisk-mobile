@@ -17,6 +17,7 @@ class Confirm extends Component {
     busy: false,
   };
 
+  // eslint-disable-next-line max-statements
   send = async () => {
     if (this.state.busy) {
       return;

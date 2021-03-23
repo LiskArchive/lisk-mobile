@@ -128,6 +128,7 @@ class AddToBookmark extends React.Component {
     });
   };
 
+  // eslint-disable-next-line max-statements
   submitForm = () => {
     const {
       accountFollowed,

@@ -65,6 +65,7 @@ class Form extends React.Component {
     this.props.navigation.navigate({ name: 'Register' });
   };
 
+  // eslint-disable-next-line max-statements
   onFormSubmission = () => {
     const { passphrase } = this.state;
     const { t, signIn } = this.props;

@@ -12,6 +12,7 @@ import { tokenMap } from '../../../constants/tokens';
  * @param {Array} data.list Transaction list retrieved from API
  */
 const normalizeTransactionsResponse = ({ address, list }) =>
+  // eslint-disable-next-line max-statements
   list.map(({
     tx, feeSatoshi, confirmations, timestamp
   }) => {
@@ -52,6 +53,7 @@ const normalizeTransactionsResponse = ({ address, list }) =>
 export const get = ({
   id, address, limit = 20, offset = 0
 }) =>
+  // eslint-disable-next-line max-statements
   new Promise(async (resolve, reject) => {
     try {
       let response;
@@ -129,6 +131,7 @@ export const create = ({
   amount,
   dynamicFeePerByte,
 }) =>
+  // eslint-disable-next-line max-statements
   new Promise(async (resolve, reject) => {
     try {
       amount = Number(amount);

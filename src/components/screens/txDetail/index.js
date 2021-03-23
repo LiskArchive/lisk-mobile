@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
 import connect from 'redux-connect-decorator';
@@ -94,6 +95,7 @@ class TransactionDetail extends React.Component {
     }
   }
 
+  // eslint-disable-next-line max-statements
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
     const {
@@ -141,6 +143,7 @@ class TransactionDetail extends React.Component {
     );
   };
 
+  // eslint-disable-next-line complexity
   render() {
     const {
       styles,

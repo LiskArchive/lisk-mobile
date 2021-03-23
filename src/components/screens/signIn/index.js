@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import {
   LogBox,
@@ -13,6 +14,7 @@ import { translate } from 'react-i18next';
 
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
+// eslint-disable-next-line import/no-unresolved
 import QuickActions from 'react-native-quick-actions';
 import FingerprintOverlay from '../../shared/fingerprintOverlay';
 import styles from './styles';

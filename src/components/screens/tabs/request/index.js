@@ -47,6 +47,7 @@ class Request extends React.Component {
 
   validator = str => reg.amount.test(str);
 
+  // eslint-disable-next-line max-statements
   changeHandler = val => {
     const { account, activeToken, language } = this.props;
     const { address } = account[activeToken];

@@ -11,7 +11,7 @@ import TabBarIcon from './tabBarIcon';
 import Home from '../tabs/home';
 import navigationOptions from './navigationOptions';
 
-export const getHeaderOptions = ({ route, navigation }) => {
+export const getHeaderOptions = ({ route }) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
   return navigationOptions[routeName];
 };

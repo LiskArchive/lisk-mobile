@@ -108,7 +108,8 @@ class LiskMessageExtension extends Component {
     const { inputAddress, keyBoardFocused, presentationStyle } = this.props;
 
     const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const pickerActiveColor = amount.validity === -1 ? colors.light.black : colors.light.burntSieanna;
+    const pickerActiveColor = amount.validity === -1
+      ? colors.light.black : colors.light.burntSieanna;
 
     return (
       <Fragment>

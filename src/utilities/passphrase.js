@@ -90,6 +90,7 @@ export const getPassphraseFromKeyChain = () =>
  *  when a device request fingerprint
  * first check bio metric Sensor availability after that authenticate a user base on that
  */
+// eslint-disable-next-line max-statements
 export const bioMetricAuthentication = async ({
   successCallback,
   errorCallback = err => err,

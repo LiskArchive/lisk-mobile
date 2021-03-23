@@ -88,7 +88,7 @@ class Scanner extends React.Component {
     const {
       styles,
       containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
-      readFromCameraRoll,
+      // readFromCameraRoll,
       fullScreen,
       permissionDialogTitle,
       permissionDialogMessage,

@@ -30,6 +30,7 @@ const ThemedApp = () => {
   );
 };
 
+// eslint-disable-next-line no-undef
 const App: () => React$Node = () => {
   return (
     <Provider store={store}>

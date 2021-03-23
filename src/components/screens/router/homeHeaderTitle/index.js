@@ -131,7 +131,7 @@ const localizedBalance = balance => {
 };
 
 const HomeHeaderTitle = ({
-  styles, type, scrollY, address, balance, placeHolder
+  styles, type, scrollY, address, balance, placeHolder, scrollToTop
 }) => {
   const { token: { active }, theme, incognito } = useSelector(state => state.settings);
   const { info } = useSelector(state => state.accounts);

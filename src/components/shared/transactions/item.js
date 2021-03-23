@@ -22,6 +22,52 @@ const txTypes = [
   'vote',
 ];
 
+const TimeStamp = ({
+  styles,
+  language,
+  tx,
+  t,
+}) => {
+  if (typeof this.props.tx.timestamp !== 'number') {
+    return (
+      <Small style={[styles.date, styles.theme.date]}>
+        {t('Pending confirmation')}
+      </Small>
+    );
+  }
+
+  return (
+    <FormattedDate
+      locale={language}
+      type={Small}
+      style={[styles.date, styles.theme.date]}
+    >
+      {tx.timestamp}
+    </FormattedDate>
+  );
+};
+
+const PendingSpinner = ({
+  styles,
+  tx,
+}) => {
+  if (typeof tx.timestamp !== 'number') {
+    return (
+      <View style={styles.pendingIcon}>
+        <LottieView
+          source={loadingAnimation}
+          ref={el => {
+            this.animation = el;
+          }}
+          style={{}}
+        />
+      </View>
+    );
+  }
+
+  return null;
+};
+
 @connect(state => ({
   language: state.settings.language,
 }))
@@ -50,6 +96,7 @@ class Item extends React.Component {
     return stringShortener(address, 10, 3);
   };
 
+  // eslint-disable-next-line
   render() {
     const {
       styles,
@@ -108,19 +155,12 @@ class Item extends React.Component {
                 ? t(transactions[txTypes[tx.type]].title)
                 : addressText}
             </B>
-            {typeof this.props.tx.timestamp !== 'number' ? (
-              <Small style={[styles.date, styles.theme.date]}>
-                {t('Pending confirmation')}
-              </Small>
-            ) : (
-              <FormattedDate
-                locale={language}
-                type={Small}
-                style={[styles.date, styles.theme.date]}
-              >
-                {tx.timestamp}
-              </FormattedDate>
-            )}
+            <TimeStamp
+              styles={styles}
+              language={language}
+              tx={tx}
+              t={t}
+            />
           </View>
         </View>
         {tx.type === 0 && (
@@ -146,17 +186,7 @@ class Item extends React.Component {
             {tx.recipientAddress !== tx.senderAddress && incognito ? (
               <Blur value={amount} direction={direction} />
             ) : null}
-            {typeof tx.timestamp !== 'number' ? (
-              <View style={styles.pendingIcon}>
-                <LottieView
-                  source={loadingAnimation}
-                  ref={el => {
-                    this.animation = el;
-                  }}
-                  style={{}}
-                />
-              </View>
-            ) : null}
+            <PendingSpinner styles={styles} tx={tx} />
           </View>
         )}
       </TouchableOpacity>

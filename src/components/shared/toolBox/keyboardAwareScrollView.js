@@ -20,14 +20,14 @@ const ScrollAwareActionBar = ({
   noFooterButton,
   extraContent,
 }) => {
-  const [buttonStyle, SetButtonStyle] = useState(theme.footerButton);
+  const [buttonStyle, setButtonStyle] = useState(theme.footerButton);
   const headerHeight = useHeaderHeight();
 
   const toggleButtonView = status => {
     if (status) {
-      SetButtonStyle(theme.footerButton);
+      setButtonStyle(theme.footerButton);
     } else {
-      SetButtonStyle(theme.keyboardStickyButton);
+      setButtonStyle(theme.keyboardStickyButton);
     }
   };
 
