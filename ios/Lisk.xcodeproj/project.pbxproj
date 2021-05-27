@@ -18,9 +18,9 @@
 		41B0FB781C41C9ED638D6504 /* libPods-Lisk-LiskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD0FAFEDE58DEBFC3565C05 /* libPods-Lisk-LiskTests.a */; };
 		585C34B302D99F5593128505 /* libPods-Lisk-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB19C2CC2709B7103A8251B4 /* libPods-Lisk-tvOS.a */; };
 		7952112C25F765EA00CCF7F8 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */; };
-		7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */; };
-		7952112E25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */; };
-		7952113425F765F800CCF7F8 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */; };
+ 		7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */; };
+ 		7952112E25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */; };
+ 		7952113425F765F800CCF7F8 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */; };
 		7952113A25F7660200CCF7F8 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113925F7660200CCF7F8 /* icomoon.ttf */; };
 		7952114225F7660F00CCF7F8 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113F25F7660F00CCF7F8 /* OpenSans-Regular.ttf */; };
 		7952114325F7660F00CCF7F8 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114025F7660F00CCF7F8 /* OpenSans-Semibold.ttf */; };
@@ -80,9 +80,9 @@
 		4DD0FAFEDE58DEBFC3565C05 /* libPods-Lisk-LiskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk-LiskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6302721A9B9A20B78728746C /* Pods-Lisk-LiskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-LiskTests.release.xcconfig"; path = "Target Support Files/Pods-Lisk-LiskTests/Pods-Lisk-LiskTests.release.xcconfig"; sourceTree = "<group>"; };
 		7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierCircle-Bold.otf"; path = "../../src/assets/fonts/basierCircle/BasierCircle-Bold.otf"; sourceTree = "<group>"; };
-		7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierCircle-Regular.otf"; path = "../../src/assets/fonts/basierCircle/BasierCircle-Regular.otf"; sourceTree = "<group>"; };
-		7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierCircle-SemiBold.otf"; path = "../../src/assets/fonts/basierCircle/BasierCircle-SemiBold.otf"; sourceTree = "<group>"; };
-		7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gilroy-Bold.ttf"; path = "../../src/assets/fonts/gilroy/Gilroy-Bold.ttf"; sourceTree = "<group>"; };
+ 		7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierCircle-Regular.otf"; path = "../../src/assets/fonts/basierCircle/BasierCircle-Regular.otf"; sourceTree = "<group>"; };
+ 		7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierCircle-SemiBold.otf"; path = "../../src/assets/fonts/basierCircle/BasierCircle-SemiBold.otf"; sourceTree = "<group>"; };
+ 		7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gilroy-Bold.ttf"; path = "../../src/assets/fonts/gilroy/Gilroy-Bold.ttf"; sourceTree = "<group>"; };
 		7952113925F7660200CCF7F8 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
 		7952113F25F7660F00CCF7F8 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../src/assets/fonts/openSans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		7952114025F7660F00CCF7F8 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "../../src/assets/fonts/openSans/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
@@ -223,9 +223,9 @@
 				7952114025F7660F00CCF7F8 /* OpenSans-Semibold.ttf */,
 				7952113925F7660200CCF7F8 /* icomoon.ttf */,
 				7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */,
-				7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */,
-				7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */,
-				7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */,
+ 				7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */,
+ 				7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */,
+ 				7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -414,8 +414,8 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				7952114325F7660F00CCF7F8 /* OpenSans-Semibold.ttf in Resources */,
 				7952112C25F765EA00CCF7F8 /* BasierCircle-Bold.otf in Resources */,
-				7952113425F765F800CCF7F8 /* Gilroy-Bold.ttf in Resources */,
-				7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */,
+ 				7952113425F765F800CCF7F8 /* Gilroy-Bold.ttf in Resources */,
+ 				7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */,
 				7952114225F7660F00CCF7F8 /* OpenSans-Regular.ttf in Resources */,
 				7952114425F7660F00CCF7F8 /* OpenSans-Bold.ttf in Resources */,
 				7952114B25F7661900CCF7F8 /* Dots-Regular.ttf in Resources */,
@@ -801,6 +801,8 @@
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Lisk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.4.1;
@@ -825,6 +827,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Lisk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.4.1;
