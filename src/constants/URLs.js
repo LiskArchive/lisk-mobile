@@ -1,8 +1,8 @@
 export default {
-  liskHomepage: 'https://lisk.io/',
-  liskTermsAndConditions: 'https://lisk.io/privacy-policy-mobile',
+  liskHomepage: 'https://lisk.com/',
+  liskTermsAndConditions: 'https://lisk.com/privacy-policy-mobile',
   liskGettingStarted:
-    'https://lisk.io/academy/welcome-to-the-lisk-academy/getting-started-with-lisk',
+    'https://lisk.com/what-is-blockchain',
   BTCMinerFees: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',
   BTCTestnet: 'https://btc-test.lisk.io',
   BTCMainnet: 'https://btc.lisk.io',
