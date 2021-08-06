@@ -12,7 +12,7 @@ const normalizeTimestamp = value =>
 
 /**
  * Normalizes transaction data retrieved from Lisk Core API
- * https://lisk.io/documentation/lisk-core/user-guide/api#/Transactions/getTransactions
+ * https://lisk.com/documentation/lisk-core/reference/api.html#/Transactions/get_transactions__id_
  */
 const normalizeTransactionsResponse = list =>
   list.map(tx => ({
