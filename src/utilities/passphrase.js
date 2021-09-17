@@ -1,4 +1,4 @@
-import Lisk from '@liskhq/lisk-client';
+import * as Lisk from '@liskhq/lisk-client';
 import {
   setGenericPassword,
   getGenericPassword,

@@ -1,5 +1,5 @@
 import actionTypes from '../constants/actions';
-import txConstants from '../constants/transactions';
+import { transactions } from '../constants/transactions';
 import { transactions as transactionsAPI } from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
 import { tokenMap } from '../constants/tokens';
@@ -59,7 +59,7 @@ export const transactionAdded = (data, successCb, errorCb) => async (
   const account = accounts.info[token.active];
 
   try {
-    const tx = await transactionsAPI.create(token.active, data);
+    const tx = await transactionsAPI.create(token.active, { ...data, nonce: account.nonce });
 
     if (token.active === tokenMap.LSK.key) {
       const { id } = await transactionsAPI.broadcast(token.active, tx);
@@ -72,7 +72,7 @@ export const transactionAdded = (data, successCb, errorCb) => async (
           recipientAddress: data.recipientAddress,
           amount: data.amount,
           fee: data.fee,
-          type: txConstants.send.type,
+          moduleAssetId: transactions.send.moduleAssetId,
           data: data.reference,
         },
       });

@@ -2,17 +2,10 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import Avatar from '../avatar';
 import Icon from '../toolBox/icon';
-import transactions from '../../../constants/transactions';
+import { getTxConstant, transactions } from '../../../constants/transactions';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../../constants/styleGuide';
-
-const txTypes = [
-  'accountInitialization',
-  'setSecondPassphrase',
-  'registerDelegate',
-  'vote',
-];
 
 const Symbol = ({
   token,
@@ -22,7 +15,7 @@ const Symbol = ({
   recipient,
   address,
   styles,
-  type,
+  moduleAssetId,
 }) => {
   if (token !== 'LSK') {
     return (
@@ -41,12 +34,12 @@ const Symbol = ({
       </View>
     );
   }
-  if (type === 0 && sender !== recipient) {
+  if (moduleAssetId === transactions.send.moduleAssetId && sender !== recipient) {
     return <Avatar address={address} size={40} style={styles.theme.avatar} />;
   }
   return (
     <Image
-      source={transactions[txTypes[type]].image(themes[theme])}
+      source={getTxConstant({ moduleAssetId }).image(themes[theme])}
       style={styles.image}
     />
   );

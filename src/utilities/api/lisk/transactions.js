@@ -1,14 +1,7 @@
-import Lisk from '@liskhq/lisk-client';
-import LiskAPIClient from './apiClient';
-import { removeUndefinedKeys } from '../../helpers';
-
-/**
- * Converts Lisk timestamp to absolute timestamp
- * @param {Number} value Timestamp retrieved from Lisk Core API
- * @returns {Number}
- */
-const normalizeTimestamp = value =>
-  (Date.UTC(2016, 4, 24, 17, 0, 0, 0) / 1000 + value) * 1000;
+import * as Lisk from '@liskhq/lisk-client';
+import { apiClient } from './apiClient';
+import { isTransfer, transferAssetSchema } from '../../../constants/transactions';
+import config from '../../../../lsk.config';
 
 /**
  * Normalizes transaction data retrieved from Lisk Core API
@@ -17,71 +10,73 @@ const normalizeTimestamp = value =>
 const normalizeTransactionsResponse = list =>
   list.map(tx => ({
     id: tx.id,
-    senderAddress: tx.senderId,
-    recipientAddress: tx.recipientId,
-    amount: tx.amount,
+    senderAddress: tx.sender.address,
+    recipientAddress: isTransfer({ moduleAssetId: tx.moduleAssetId })
+      ? tx.asset.recipient.address : tx.sender.address,
+    amount: tx.moduleAssetName === 'token:transfer' ? tx.asset.amount : 0,
     fee: tx.fee,
-    timestamp: normalizeTimestamp(tx.timestamp),
-    confirmations: tx.confirmations,
-    type: tx.type,
-    data: tx.asset.data || '',
-    votes: tx.asset.votes || [],
-    delegate: tx.asset.delegate || '',
+    timestamp: tx.block.timestamp,
+    confirmations: tx.nonce,
+    nonce: tx.nonce,
+    type: tx.moduleAssetName,
+    moduleAssetId: tx.moduleAssetId,
+    moduleAssetName: tx.moduleAssetName,
+    data: tx.moduleAssetName === 'token:transfer' ? tx.asset.data : '',
+    votes: tx.moduleAssetName === 'dpos:voteDelegate' ? tx.asset.votes : [],
+    delegate: tx.moduleAssetName === 'dpos:registerDelegate' ? tx.asset.username : '',
   }));
 
-export const get = ({
+export const get = async ({
   id, address, limit, offset
-}) =>
-  // eslint-disable-next-line no-async-promise-executor
-  new Promise(async (resolve, reject) => {
-    const parameters = removeUndefinedKeys({
-      id,
-      senderIdOrRecipientId: address,
-      sort: 'timestamp:desc',
+}) => {
+  if (id !== undefined) {
+    const txs = await apiClient.getTransactions(id);
+    return { data: normalizeTransactionsResponse(txs), meta: {} };
+  }
+  const txs = await apiClient.getTransactions(address, limit, offset);
+  return {
+    data: normalizeTransactionsResponse(txs),
+    meta: {
       limit,
       offset,
-    });
+      count: txs.length,
+    },
+  };
+};
 
-    try {
-      const { data, meta } = await LiskAPIClient.transactions.get(parameters);
-      resolve({
-        data: normalizeTransactionsResponse(data),
-        meta,
-      });
-    } catch (error) {
-      reject(error);
-    }
-  });
-
-export const create = ({
+export const create = async ({
+  nonce,
   passphrase,
   recipientAddress,
   amount,
-  secondPassphrase,
+  fee,
   reference,
-}) =>
-  new Promise(resolve => {
-    const transaction = Lisk.transaction.transfer(
-      removeUndefinedKeys({
-        passphrase,
-        secondPassphrase,
-        recipientId: recipientAddress,
-        amount,
-        data: reference,
-      })
-    );
+}) => {
+  const {
+    publicKey: senderPublicKey,
+  } = Lisk.cryptography.getAddressAndPublicKeyFromPassphrase(passphrase);
+  const recipient = Lisk.cryptography.getAddressFromLisk32Address(recipientAddress);
+  const tx = {
+    moduleID: 2,
+    assetID: 0,
+    senderPublicKey,
+    // eslint-disable-next-line no-undef
+    fee: BigInt(fee),
+    // eslint-disable-next-line no-undef
+    nonce: BigInt(nonce),
+    asset: {
+      // eslint-disable-next-line no-undef
+      amount: BigInt(amount),
+      data: reference || '',
+      recipientAddress: recipient,
+    },
+    signatures: [],
+  };
+  const networkIdentifier = Buffer.from(config.isTestnet ? config.testnetNetworkID : config.networkID, 'hex');
+  return Lisk.transactions.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase);
+};
 
-    resolve(transaction);
-  });
-
-export const broadcast = transaction =>
-  new Promise((resolve, reject) => {
-    setTimeout(async () => {
-      try {
-        await LiskAPIClient.transactions.broadcast(transaction);
-        resolve(transaction);
-      } catch (error) {
-        reject(error);
-      }
-    }, 1001);
-  });
+export const broadcast = async transaction => {
+  const txBytes = Lisk.transactions.getBytes(transferAssetSchema, transaction).toString('hex');
+  return apiClient.sendTransaction({ transaction: txBytes });
+};

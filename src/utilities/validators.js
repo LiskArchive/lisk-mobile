@@ -1,6 +1,6 @@
 import { address as BTCAddress } from 'bitcoinjs-lib';
+import { cryptography } from '@liskhq/lisk-client';
 import btcConfig from '../../btc.config';
-import reg from '../constants/regex';
 import { tokenMap } from '../constants/tokens';
 
 /**
@@ -18,7 +18,12 @@ export const validateAddress = (tokenType, address) => {
   switch (tokenType) {
     case tokenMap.LSK.key:
     default:
-      return reg.address.test(address) ? 0 : 1;
+      try {
+        cryptography.validateLisk32Address(address);
+        return 0;
+      } catch (error) {
+        return 1;
+      }
 
     // Reference: https://github.com/bitcoinjs/bitcoinjs-lib/issues/890
     case tokenMap.BTC.key:
