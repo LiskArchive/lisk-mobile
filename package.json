@@ -14,7 +14,8 @@
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "lint": "npx eslint --quiet ./",
     "i18n": "node ./scripts/scanner.config.js",
-    "link": "./node_modules/.bin/rn-nodeify --hack --install"
+    "link": "./node_modules/.bin/rn-nodeify --hack --install",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@liskhq/lisk-client": "^2.0.0",
@@ -51,6 +52,7 @@
     "lottie-ios": "3.2.3",
     "lottie-react-native": "4.1.0",
     "moment": "^2.29.1",
+    "patch-package": "^6.4.7",
     "path-browserify": "^0.0.0",
     "process": "^0.11.10",
     "prop-types": "^15.7.2",
@@ -152,6 +154,7 @@
     "lint-staged": "^10.5.4",
     "metro-react-native-babel-preset": "^0.59.0",
     "moxios": "^0.4.0",
+    "react-native-codegen": "0.0.8",
     "react-test-renderer": "^16.13.1",
     "redux-mock-store": "^1.5.4",
     "rn-nodeify": "github:tradle/rn-nodeify",
