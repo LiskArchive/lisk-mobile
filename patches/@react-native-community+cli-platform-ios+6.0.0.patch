@@ -1,0 +1,20 @@
+diff --git a/node_modules/@react-native-community/cli-platform-ios/native_modules.rb b/node_modules/@react-native-community/cli-platform-ios/native_modules.rb
+index 1b6eece..18744c7 100644
+--- a/node_modules/@react-native-community/cli-platform-ios/native_modules.rb
++++ b/node_modules/@react-native-community/cli-platform-ios/native_modules.rb
+@@ -43,6 +43,15 @@ def use_native_modules!(config = nil)
+   found_pods = []
+ 
+   packages.each do |package_name, package|
++
++    # PATCH TO DISABLE CONFLICTING MODULES (duplicate symbols)
++    puts ">> package_name #{package_name}"
++
++    next if %w(
++      react-native-udp 
++      react-native-tcp 
++    ).include?(package_name)
++
+     next unless package_config = package["platforms"]["ios"]
+ 
+     podspec_path = package_config["podspecPath"]
