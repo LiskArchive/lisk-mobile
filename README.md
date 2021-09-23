@@ -23,14 +23,12 @@ The next section details the prerequisites to install Lisk Mobile from source us
 
  - Git
    - `brew install git`
- - NodeJS (recommended 8.14.0)
+ - NodeJS (recommended 12.4.0)
    - `brew install node`
- - npm (recommended 5.3.0)
+ - npm (recommended 6.9.0)
    - npm is shipped with NodeJS. but to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
  - watchman
    - `brew install watchman`
- - react-native-cli
-   - Install using npm
 
 ### iOS
 You'll need the Xcode installed in your machine to run the app in simulator.
@@ -42,8 +40,8 @@ You'll need the Xcode installed in your machine to run the app in simulator.
    - Performance (Intel ® HAXM)
    - Android Virtual Device
  - Install the Android SDK. Consider these configurations:
-  - compileSdkVersion: 28
-  - buildToolsVersion: 27.0.3
+  - compileSdkVersion: 30
+  - buildToolsVersion: 30.0.2
 
 
 ### Installation
@@ -51,6 +49,7 @@ You'll need the Xcode installed in your machine to run the app in simulator.
 $ git clone https://github.com/LiskHQ/lisk-mobile.git
 $ cd lisk-mobile
 $ npm install
+$ npm run link
 $ npm run start
 ```
 
@@ -58,6 +57,38 @@ $ npm run start
 You can run the project in Xcode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. Please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
 
 Three is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read  [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
+
+### Possible Errors
+#### lottie-ios/Lottie.modulemap
+```
+/Users/***/Library/Developer/Xcode/DerivedData/Lisk-***/Build/Products/Debug-iphonesimulator/lottie-ios/Lottie.modulemap
+```
+- Add the following to the end of your Podfile (especially M1 users)
+```
+use_flipper!()
+
+post_install do |installer|
+  react_native_post_install(installer)
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+          config.build_settings["ONLY_ACTIVE_ARCH"] = "NO"
+        end
+    end
+end
+```
+- Remove Pods folder and Podfile.lock ```rm -rf ios/Pods && rm -rf ios/Podfile.lock```
+- ```npx pod-install```
+
+
+#### Duplicate symbols for architecture x86_64
+```
+Products/Debug-iphonesimulator/react-native-udp/libreact-native-udp.a(GCDAsyncUdpSocket.o)
+ld: 144 duplicate symbols for architecture x86_64
+```
+- Run ```npx patch-package```
+- Remove Pods folder and Podfile.lock ```rm -rf ios/Pods && rm -rf ios/Podfile.lock```
+- ```npx pod-install```
+
 
 #### Environment variables
 You can fill out `env.json` with those variables:
