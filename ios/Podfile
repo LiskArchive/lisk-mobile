@@ -35,3 +35,5 @@ target 'Lisk-tvOS' do
     # Pods for testing
   end
 end
+
+use_flipper!()

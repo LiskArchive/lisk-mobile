@@ -19,7 +19,6 @@
 		41A689921EFA36A8D32F0086 /* libPods-Lisk-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041C9CBE86C2F2D2BF3BA78C /* libPods-Lisk-tvOS.a */; };
 		7952112C25F765EA00CCF7F8 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */; };
 		7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */; };
-		
 		7952112E25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */; };
 		7952113425F765F800CCF7F8 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */; };
 		7952113A25F7660200CCF7F8 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113925F7660200CCF7F8 /* icomoon.ttf */; };
@@ -29,7 +28,7 @@
 		7952114B25F7661900CCF7F8 /* Dots-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114925F7661900CCF7F8 /* Dots-Regular.ttf */; };
 		7952114C25F7661900CCF7F8 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114A25F7661900CCF7F8 /* PTMono-Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		CF02A0E307949DD139C89EB8 /* Pods_Lisk_LiskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86CEC783A6AB5703FE7D53EC /* Pods_Lisk_LiskTests.framework */; };
+		CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +101,8 @@
 		A28CCAA9A1C355C538C0F137 /* Pods-Lisk-LiskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-LiskTests.release.xcconfig"; path = "Target Support Files/Pods-Lisk-LiskTests/Pods-Lisk-LiskTests.release.xcconfig"; sourceTree = "<group>"; };
 		A79964B52A628AF048F736B7 /* libPods-Lisk-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA82A2E09394A9AAB9AE56B8 /* Pods-Lisk-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOSTests/Pods-Lisk-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CB9BAE4A26FF857E00EE1F48 /* Lisk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lisk-Bridging-Header.h"; sourceTree = "<group>"; };
+		CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		D1FBD00EBB5BF68B90C6ACFF /* Pods-Lisk-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOSTests/Pods-Lisk-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -113,7 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C9A5B2DC5588B4865D3C265 /* libPods-Lisk-LiskTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,7 +121,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC7111D0A48928CBB3BB770C /* libPods-Lisk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,8 +204,6 @@
 				7952169E25FF3CA000CCF7F8 /* Messages.framework */,
 				041C9CBE86C2F2D2BF3BA78C /* libPods-Lisk-tvOS.a */,
 				A79964B52A628AF048F736B7 /* libPods-Lisk-tvOSTests.a */,
-				E9BBF802BE0D4A9F507F42C8 /* libPods-Lisk.a */,
-				B9C72CE04095255D49D4A049 /* libPods-Lisk-LiskTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -238,6 +235,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */,
 				7952112825F765AD00CCF7F8 /* Resources */,
 				13B07FAE1A68108700A75B9A /* Lisk */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -245,6 +243,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				04C51C328E79D6B0A7C0986E /* Pods */,
+				CB9BAE4A26FF857E00EE1F48 /* Lisk-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -319,7 +318,6 @@
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
 				2D02E4791E0B4A5D006451C7 /* Resources */,
 				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
-				64CF87371AA6FBB4EDBAB21E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -364,7 +362,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 58UK9RE9TP;
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1300;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -754,6 +752,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,6 +793,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 91CDA88AD29799D66BFB0856 /* Pods-Lisk-LiskTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -817,6 +817,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A28CCAA9A1C355C538C0F137 /* Pods-Lisk-LiskTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = LiskTests/Info.plist;
@@ -917,6 +918,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile;
 				PRODUCT_NAME = Lisk;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1005,6 +1007,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.mobile;
 				PRODUCT_NAME = Lisk;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

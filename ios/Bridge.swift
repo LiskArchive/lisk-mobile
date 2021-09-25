@@ -2,8 +2,7 @@
 //  Bridge.swift
 //  Lisk
 //
-//  Created by Raquel Dias on 22.11.19.
-//  Copyright © 2019 Facebook. All rights reserved.
+//  Created by Daniel Ayomide on 25/09/2021.
 //
 
 import Foundation

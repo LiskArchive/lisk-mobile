@@ -24,14 +24,15 @@ The next section details the prerequisites to install Lisk Mobile from source us
  - Git
    - `brew install git`
  - NodeJS (recommended 12.4.0)
-   - `brew install node`
+   - `brew install nvm`
+   - `nvm install`
  - npm (recommended 6.9.0)
    - npm is shipped with NodeJS. but to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
  - watchman
    - `brew install watchman`
 
 ### iOS
-You'll need the Xcode installed in your machine to run the app in simulator.
+- Install the latest version of [Xcode](https://apps.apple.com/ng/app/xcode/id497799835?mt=12)
 
 ### Android
  - Install [Android Studio](https://developer.android.com/studio/index.html), which sould have these options checked installed:
@@ -48,25 +49,32 @@ You'll need the Xcode installed in your machine to run the app in simulator.
 ```bash
 $ git clone https://github.com/LiskHQ/lisk-mobile.git
 $ cd lisk-mobile
-$ npm install
+$ npm ci
 $ npm run link
+```
+For Mac Users, to run on ios, you have to install pods. Run:
+```
+$ npx pod-install
 $ npm run start
 ```
 
 ### Development environment
 You can run the project in Xcode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. Please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
 
-Three is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read  [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
+There is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read  [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
 
 ### Possible Errors
-#### lottie-ios/Lottie.modulemap
+#### `SDK location not found. `
+Create `android/local.properties` and add this line in the file:
+```
+sdk.dir=/Users/username/Library/Android/sdk
+```
+#### `lottie-ios/Lottie.modulemap`
 ```
 /Users/***/Library/Developer/Xcode/DerivedData/Lisk-***/Build/Products/Debug-iphonesimulator/lottie-ios/Lottie.modulemap
 ```
 - Add the following to the end of your Podfile (especially M1 users)
 ```
-use_flipper!()
-
 post_install do |installer|
   react_native_post_install(installer)
     installer.pods_project.targets.each do |target|
@@ -80,7 +88,7 @@ end
 - ```npx pod-install```
 
 
-#### Duplicate symbols for architecture x86_64
+#### `Duplicate symbols for architecture x86_64`
 ```
 Products/Debug-iphonesimulator/react-native-udp/libreact-native-udp.a(GCDAsyncUdpSocket.o)
 ld: 144 duplicate symbols for architecture x86_64
