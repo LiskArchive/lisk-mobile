@@ -14,7 +14,8 @@
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
     "lint": "npx eslint --quiet ./",
     "i18n": "node ./scripts/scanner.config.js",
-    "link": "./node_modules/.bin/rn-nodeify --hack --install"
+    "link": "./node_modules/.bin/rn-nodeify --hack --install",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@liskhq/lisk-client": "^5.1.3",
