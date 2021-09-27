@@ -25,7 +25,6 @@ The next section details the prerequisites to install Lisk Mobile from source us
    - `brew install git`
  - NodeJS (recommended 12.4.0)
    - `brew install nvm`
-   - `nvm install`
  - npm (recommended 6.9.0)
    - npm is shipped with NodeJS. but to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
  - watchman
@@ -46,12 +45,15 @@ The next section details the prerequisites to install Lisk Mobile from source us
 
 
 ### Installation
+
 ```bash
 $ git clone https://github.com/LiskHQ/lisk-mobile.git
 $ cd lisk-mobile
+$ nvm install
 $ npm ci
 $ npm run link
 ```
+
 For Mac Users, to run on ios, you have to install pods. Run:
 ```
 $ npx pod-install
@@ -107,7 +109,7 @@ secondPassphrase    -> Second passphrase of your LSK account, to be filled out a
 useCommercialFonts  -> Tells styleGuide/fonts.js file to load commercial fonts instead of Open Sans.
 ```
 
-In order to avoid commiting that file you can follow [this approach](https://stackoverflow.com/a/3320183) as following
+In order to avoid committing that file you can follow [this approach](https://stackoverflow.com/a/3320183) as following
 ```bash
 $ git update-index --assume-unchanged env.json
 ```
@@ -151,7 +153,7 @@ See [contributors section](https://github.com/LiskHQ/lisk-mobile/graphs/contribu
 
 ## License
 
-Copyright © 2016-2018 Lisk Foundation
+Copyright © 2016-2021 Lisk Foundation
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
