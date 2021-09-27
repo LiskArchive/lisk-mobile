@@ -55,7 +55,11 @@ $ npm run link
 For Mac Users, to run on ios, you have to install pods. Run:
 ```
 $ npx pod-install
-$ npm run start
+$ npm run ios
+```
+To run android:
+```
+$ npm run android
 ```
 
 ### Development environment
