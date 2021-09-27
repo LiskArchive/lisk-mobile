@@ -2,10 +2,10 @@ import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
+import { transactions } from '@liskhq/lisk-client';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import { fromRawLsk } from '../../../../../utilities/conversions';
 import reg from '../../../../../constants/regex';
-import transactions from '../../../../../constants/transactions';
 import { merge } from '../../../../../utilities/helpers';
 import Balance from './balance';
 import Input from './input';
@@ -14,14 +14,34 @@ import getStyles from './styles';
 import { deviceType } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';
 import { languageMap } from '../../../../../constants/languages';
+import { transferAssetSchema } from '../../../../../constants/transactions';
 
 const isAndroid = deviceType() === 'android';
+
+const getTransferBytesSize = (nonce, amount) =>
+  transactions.getBytes(transferAssetSchema, {
+    moduleID: 2,
+    assetID: 0,
+    // eslint-disable-next-line no-undef
+    fee: BigInt(0),
+    // eslint-disable-next-line no-undef
+    nonce: BigInt(nonce),
+    senderPublicKey: Buffer.alloc(64),
+    asset: {
+      // eslint-disable-next-line no-undef
+      amount: BigInt(amount),
+      recipientAddress: Buffer.alloc(20),
+      data: 'l'.repeat(64),
+    },
+    signatures: [Buffer.alloc(64)],
+  }).length;
 
 @connect(state => ({
   language: state.settings.language,
 }))
 class AmountLSK extends React.Component {
   state = {
+    fee: 0,
     amount: {
       value: '',
       normalizedValue: '',
@@ -29,9 +49,10 @@ class AmountLSK extends React.Component {
   };
 
   componentDidMount() {
-    const { sharedData, pricesRetrieved } = this.props;
+    const { sharedData, pricesRetrieved, dynamicFeesRetrieved } = this.props;
 
     pricesRetrieved();
+    dynamicFeesRetrieved();
 
     if (sharedData.amount) {
       this.onChange(sharedData.amount);
@@ -42,7 +63,7 @@ class AmountLSK extends React.Component {
     }
   }
 
-  validator = str => {
+  validator = (str, fee) => {
     const {
       t,
       accounts,
@@ -61,9 +82,9 @@ class AmountLSK extends React.Component {
     if (!reg.amount.test(str)) {
       message = t('The amount value is invalid.');
     } else if (
-      accounts.info[token.active].balance < transactions.send.fee
+      accounts.info[token.active].balance < fee
       || parseFloat(str)
-        > fromRawLsk(accounts.info[token.active].balance - transactions.send.fee)
+        > fromRawLsk(accounts.info[token.active].balance - fee)
     ) {
       message = t('Your balance is not sufficient.');
     }
@@ -91,10 +112,22 @@ class AmountLSK extends React.Component {
     });
   };
 
+  // eslint-disable-next-line max-statements
   onSubmit = () => {
-    const { t, nextStep, sharedData } = this.props;
+    const {
+      t,
+      nextStep,
+      sharedData,
+      dynamicFees,
+      accounts,
+      settings,
+    } = this.props;
     const { amount } = this.state;
-    const validity = this.validator(amount.normalizedValue);
+    const nonce = accounts.info[settings.token.active].nonce;
+    const size = getTransferBytesSize(nonce, amount.value);
+    const fee = size * 1000 + dynamicFees.Low * size;
+    this.setState({ fee });
+    const validity = this.validator(amount.normalizedValue, fee);
 
     if (validity.code === 0) {
       DropDownHolder.closeAlert();
@@ -102,7 +135,7 @@ class AmountLSK extends React.Component {
       return nextStep(
         merge(sharedData, {
           amount: amount.normalizedValue,
-          fee: transactions.send.fee,
+          fee,
         })
       );
     }
@@ -133,7 +166,7 @@ class AmountLSK extends React.Component {
 
     if (
       value
-      && this.validator(normalizedValue).code === 0
+      && this.validator(normalizedValue, 0).code === 0
       && priceTicker[token.active][currency]
     ) {
       valueInCurrency = (

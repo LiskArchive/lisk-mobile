@@ -10,17 +10,10 @@ import FormattedDate from '../formattedDate';
 import { B, Small } from '../toolBox/typography';
 import { stringShortener } from '../../../utilities/helpers';
 import loadingAnimation from '../../../assets/animations/loading-dots.json';
-import transactions from '../../../constants/transactions';
+import { getTxConstant, isTransfer } from '../../../constants/transactions';
 import Blur from './blur';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-
-const txTypes = [
-  'accountInitialization',
-  'setSecondPassphrase',
-  'registerDelegate',
-  'vote',
-];
 
 const TimeStamp = ({
   styles,
@@ -42,7 +35,7 @@ const TimeStamp = ({
       type={Small}
       style={[styles.date, styles.theme.date]}
     >
-      {tx.timestamp}
+      {tx.timestamp * 1000}
     </FormattedDate>
   );
 };
@@ -92,7 +85,7 @@ class Item extends React.Component {
     let direction = 'incoming';
     let address = tx.senderAddress;
 
-    if (account === tx.senderAddress && tx.type === 0) {
+    if (account === tx.senderAddress && isTransfer(tx)) {
       direction = 'outgoing';
       address = tx.recipientAddress;
     }
@@ -120,7 +113,7 @@ class Item extends React.Component {
             <Symbol
               token={activeToken}
               theme={theme}
-              type={tx.type}
+              moduleAssetId={tx.moduleAssetId}
               direction={direction}
               sender={tx.senderAddress}
               recipient={tx.recipientAddress}
@@ -130,8 +123,9 @@ class Item extends React.Component {
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>
               {activeToken === 'LSK'
-              && (tx.type !== 0 || tx.recipientAddress === tx.senderAddress)
-                ? t(transactions[txTypes[tx.type]].title)
+              && (!isTransfer(tx)
+                || tx.recipientAddress === tx.senderAddress)
+                ? t(getTxConstant(tx).title)
                 : addressText}
             </B>
             <TimeStamp
@@ -142,7 +136,7 @@ class Item extends React.Component {
             />
           </View>
         </View>
-        {tx.type === 0 && (
+        {isTransfer(tx) && (
           <View style={[styles.column, styles.amountWrapper]}>
             {(activeToken === 'LSK'
               && tx.recipientAddress === tx.senderAddress)

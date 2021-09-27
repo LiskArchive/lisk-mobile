@@ -1,5 +1,5 @@
 import { payments } from 'bitcoinjs-lib';
-import Lisk from '@liskhq/lisk-client';
+import * as Lisk from '@liskhq/lisk-client';
 import { fromSeed } from 'bip32';
 import config from '../../../../btc.config';
 
@@ -27,7 +27,7 @@ export const getSummary = params =>
   });
 
 export const getDerivedPathFromPassphrase = passphrase => {
-  const seed = Lisk.passphrase.Mnemonic.mnemonicToSeed(passphrase);
+  const seed = Lisk.passphrase.Mnemonic.mnemonicToSeedSync(passphrase);
   return fromSeed(seed, config.network).derivePath(config.derivationPath);
 };
 

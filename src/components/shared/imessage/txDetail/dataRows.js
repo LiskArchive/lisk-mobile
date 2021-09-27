@@ -8,17 +8,10 @@ import {
 } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
 import Avatar from '../../avatar';
-import transactions from '../../../../constants/transactions';
+import { isTransfer, getTxConstant } from '../../../../constants/transactions';
 import arrowLight from '../../../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../../../assets/images/txDetail/arrow-dark2x.png';
 import { colors, themes } from '../../../../constants/styleGuide';
-
-const txTypes = [
-  'accountInitialization',
-  'setSecondPassphrase',
-  'registerDelegate',
-  'vote',
-];
 
 export const TimeStamp = ({ timestamp, styles }) => {
   if (timestamp) {
@@ -41,7 +34,7 @@ export const TxAmount = ({
   tx,
   language,
 }) => {
-  if (tx.type === 0 && tx.recipientAddress !== tx.senderAddress) {
+  if (isTransfer(tx) && tx.recipientAddress !== tx.senderAddress) {
     return (
       <H1 style={config.amountStyle}>
         {config.amountSign}
@@ -182,10 +175,10 @@ export const TxTitle = ({
   tx,
   config,
 }) => {
-  if ((tx.type && tx.type !== 0) || tx.recipientAddress === tx.senderAddress) {
+  if (!isTransfer(tx) || tx.recipientAddress === tx.senderAddress) {
     return (
     <H3 style={config.amountStyle}>
-      {transactions[txTypes[tx.type]].title}
+      {getTxConstant(tx).title}
     </H3>
     );
   }

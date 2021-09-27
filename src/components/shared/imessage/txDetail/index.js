@@ -16,9 +16,10 @@ import {
   TxTitle,
   Confirmations,
 } from './dataRows';
+import { isTransfer } from '../../../../constants/transactions';
 
 const getConfig = (styles, account, tx) => {
-  if (account.address !== tx.senderAddress && tx.type === 0) {
+  if (account.address !== tx.senderAddress && isTransfer(tx)) {
     return {
       arrowStyle: styles.reverseArrow,
       amountStyle: [styles.incoming, styles.theme.incoming],
