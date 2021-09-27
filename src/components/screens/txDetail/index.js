@@ -25,6 +25,7 @@ import { tokenMap } from '../../../constants/tokens';
 import {
   goToWallet, getAccountLabel, getAccountTitle, openExplorer
 } from './utils';
+import { isRegistration, isTransfer, isVote } from '../../../constants/transactions';
 
 @connect(
   state => ({
@@ -175,8 +176,8 @@ class TransactionDetail extends React.Component {
 
     const walletAccountAddress = route.params?.account ?? account[activeToken].address;
     const incognito = route.params?.incognito ?? null;
-    const isDelegateRegistration = tx.type === 2;
-    const isVote = tx.type === 3;
+    const isDelegateRegistration = isRegistration(tx);
+    const isVoting = isVote(tx);
 
     return (
       <ScrollView
@@ -212,7 +213,7 @@ class TransactionDetail extends React.Component {
         )}
 
         <Row
-          icon={isVote || isDelegateRegistration ? 'user' : 'send'}
+          icon={isVoting || isDelegateRegistration ? 'user' : 'send'}
           title={getAccountTitle(tx)}
         >
           <View style={styles.addressContainer}>
@@ -225,7 +226,7 @@ class TransactionDetail extends React.Component {
             </A>
           </View>
         </Row>
-        {tx.type !== 0 || tx.recipientAddress === tx.senderAddress ? null : (
+        {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? null : (
           <Row icon="recipient" title="Recipient">
             <View style={styles.addressContainer}>
               <A
@@ -254,9 +255,9 @@ class TransactionDetail extends React.Component {
             </B>
           </Row>
         ) : null}
-        <Row icon="confirmations" title="Confirmations">
+        <Row icon="confirmations" title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
           <B style={[styles.value, styles.theme.value]}>
-            {tx.confirmations || t('Not confirmed yet.')}
+            {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
           </B>
         </Row>
         <Row icon="tx-id" title="Transaction ID">
@@ -278,7 +279,7 @@ class TransactionDetail extends React.Component {
           )}
         </Row>
         {
-          isVote
+          isVoting
             ? <VoteList upvotes={upvotes} downvotes={downvotes} />
             : null
         }

@@ -1,4 +1,5 @@
 import { Linking } from 'react-native';
+import { isRegistration, isTransfer, isVote } from '../../../constants/transactions';
 import { getTransactionExplorerURL } from '../../../utilities/api/btc/transactions';
 
 export const goToWallet = (address, { navigation, account, activeToken }) => {
@@ -32,8 +33,8 @@ export const openExplorer = (id) => {
 };
 
 export const getAccountTitle = tx => {
-  if (tx.type === 3) return 'Voter';
-  if (tx.type === 2) return 'Registrant';
-  if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress) { return 'Account address'; }
+  if (isVote(tx)) return 'Voter';
+  if (isRegistration(tx)) return 'Registrant';
+  if (!isTransfer(tx) || tx.recipientAddress === tx.senderAddress) { return 'Account address'; }
   return 'Sender';
 };

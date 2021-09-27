@@ -7,22 +7,15 @@ import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../../shared/formattedNumber';
 import { P, H3 } from '../../shared/toolBox/typography';
 import Avatar from '../../shared/avatar';
-import transactions from '../../../constants/transactions';
+import { getTxConstant, isTransfer } from '../../../constants/transactions';
 import Blur from '../../shared/transactions/blur';
 import arrowLight from '../../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
 import { themes } from '../../../constants/styleGuide';
 
-const txTypes = [
-  'accountInitialization',
-  'setSecondPassphrase',
-  'registerDelegate',
-  'vote',
-];
-
 const getConfig = (styles, tx, accountAddress) => {
-  if (accountAddress !== tx.senderAddress && tx.type === 0) {
+  if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
     return {
       arrowStyle: styles.reverseArrow,
       amountStyle: [styles.incoming, styles.theme.incoming],
@@ -49,10 +42,10 @@ const Graphics = ({
   config,
 }) => (
   <View style={styles.row}>
-    {tx.type !== 0 || tx.recipientAddress === tx.senderAddress ? (
+    {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
       <Image
         style={{ width: 40, height: 40 }}
-        source={transactions[txTypes[tx.type]].image(theme)}
+        source={getTxConstant(tx).image(theme)}
       />
     ) : (
       <Fragment>
@@ -79,7 +72,7 @@ const TimeStamp = ({
           type={P}
           style={[styles.date, styles.theme.date]}
         >
-        {timestamp}
+        {timestamp * 1000}
       </FormattedDate>
     );
   }
@@ -107,10 +100,10 @@ const LskSummary = ({
         theme={theme}
         config={config}
       />
-      {tx.type !== 0 || tx.recipientAddress === tx.senderAddress ? (
-        <H3 style={config.amountStyle}>{t(transactions[txTypes[tx.type]].title)}</H3>
+      {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
+        <H3 style={config.amountStyle}>{t(getTxConstant(tx).title)}</H3>
       ) : null}
-      {tx.type === 0
+      {isTransfer(tx)
       && tx.recipientAddress !== tx.senderAddress
       && !incognito ? (
         <H3 style={config.amountStyle}>
@@ -120,7 +113,7 @@ const LskSummary = ({
           </FormattedNumber>
         </H3>
         ) : null}
-      {tx.type === 0
+      {isTransfer(tx)
       && tx.recipientAddress !== tx.senderAddress
       && incognito ? (
         <Blur value={amount} direction={config.direction} style={styles.amountBlur} />

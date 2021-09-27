@@ -1,30 +1,11 @@
-import Lisk from '@liskhq/lisk-client';
-import LiskAPIClient from './apiClient';
+import * as Lisk from '@liskhq/lisk-client';
+import { apiClient } from './apiClient';
 
 export const getSummary = params =>
-  new Promise((resolve, reject) => {
-    LiskAPIClient.accounts
-      .get({ ...params })
-      .then(res => {
-        if (res.data.length > 0) {
-          resolve({
-            ...res.data[0],
-            initialized: !!res.data[0].publicKey,
-          });
-        } else {
-          // account has no transactions yet, therefore is not saved on the blockchain.
-          resolve({
-            ...params,
-            balance: 0,
-            initialized: false,
-          });
-        }
-      })
-      .catch(reject);
-  });
+  apiClient.getAccount(params.address);
 
 export const extractAddress = passphrase =>
-  Lisk.cryptography.getAddressFromPassphrase(passphrase);
+  Lisk.cryptography.getBase32AddressFromPassphrase(passphrase);
 
 export const extractPublicKey = passphrase =>
-  Lisk.cryptography.getKeys(passphrase).publicKey;
+  Lisk.cryptography.getKeys(passphrase).publicKey.toString('hex');

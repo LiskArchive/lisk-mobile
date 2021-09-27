@@ -1,33 +1,25 @@
 import config from '../../../../btc.config';
 import liskConfig from '../../../../lsk.config';
 
-export const getPriceTicker = () =>
-// eslint-disable-next-line no-async-promise-executor
-  new Promise(async (resolve, reject) => {
-    try {
-      const response = await fetch(
-        `${liskConfig.serviceURL}/api/v1/market/prices`,
-        liskConfig.requestOptions
-      );
-      const json = await response.json();
+export const getPriceTicker = async () => {
+  const response = await fetch(
+    `${config.isTestnet ? liskConfig.testnetURL : liskConfig.serviceURL}/v2/market/prices`,
+    config.requestOptions
+  );
+  const json = await response.json();
+  if (!response.ok) {
+    throw new Error(json);
+  }
 
-      if (response.ok) {
-        const result = json.data.reduce((acc, item) => {
-          if (item.from === 'BTC') {
-            acc[item.to] = item.rate;
-          }
-
-          return acc;
-        }, {});
-
-        resolve(result);
-      } else {
-        reject(json);
-      }
-    } catch (error) {
-      reject(error);
+  const result = json.data.reduce((acc, item) => {
+    if (item.from === 'BTC') {
+      acc[item.to] = item.rate;
     }
-  });
+
+    return acc;
+  }, {});
+  return result;
+};
 
 export const getDynamicFees = () =>
 // eslint-disable-next-line no-async-promise-executor
