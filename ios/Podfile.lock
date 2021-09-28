@@ -22,9 +22,9 @@ PODS:
   - Interactable (2.0.1):
     - React
   - lottie-ios (3.1.8)
-  - lottie-react-native (3.5.0):
+  - lottie-react-native (4.0.2):
     - lottie-ios (~> 3.1.8)
-    - React
+    - React-Core
   - Permission-BluetoothPeripheral (3.0.1):
     - RNPermissions
   - Permission-Calendars (3.0.1):
@@ -530,7 +530,7 @@ SPEC CHECKSUMS:
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   Interactable: 411887c89fa16ac41f8e7898aca06dcad55e5f22
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
-  lottie-react-native: 1fb4ce21d6ad37dab8343eaff8719df76035bd93
+  lottie-react-native: 4dff8fe8d10ddef9e7880e770080f4a56121397e
   Permission-BluetoothPeripheral: 9f0bd529583f759e49fdc60eaa1191b8be69f709
   Permission-Calendars: beecff003fc9fa36979f95e19cfcd54ba26a5ddf
   Permission-Camera: b2e50546c095139bb1264be9c34c796332340d32
@@ -588,4 +588,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: be43261d6486c313e6af32eebf544380979a5766
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
