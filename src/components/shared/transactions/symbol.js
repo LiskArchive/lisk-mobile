@@ -39,7 +39,7 @@ const Symbol = ({
   }
   return (
     <Image
-      source={getTxConstant({ moduleAssetId }).image(themes[theme])}
+      source={getTxConstant({ moduleAssetId })?.image?.(themes[theme])}
       style={styles.image}
     />
   );

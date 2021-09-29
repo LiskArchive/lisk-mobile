@@ -178,7 +178,7 @@ export const TxTitle = ({
   if (!isTransfer(tx) || tx.recipientAddress === tx.senderAddress) {
     return (
     <H3 style={config.amountStyle}>
-      {getTxConstant(tx).title}
+      {getTxConstant(tx)?.title}
     </H3>
     );
   }
