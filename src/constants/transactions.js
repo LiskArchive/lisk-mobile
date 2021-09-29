@@ -12,6 +12,9 @@ import registerDelegateDark from '../assets/images/txDetail/delegate-registratio
 import voteLight from '../assets/images/txDetail/vote-light.png';
 import voteDark from '../assets/images/txDetail/vote-dark.png';
 
+import txUnlockLight from '../assets/images/txDetail/tx-unlock.png';
+import txUnlockDark from '../assets/images/txDetail/tx-unlock-dark.png';
+
 /**
  * Since react-navigation doesn't support i18n
  * I've created this dummy function to help i18n scanner
@@ -86,6 +89,12 @@ export const transactions = {
     fee: 1e8,
     title: t('Vote'),
     image: theme => (theme === themes.light ? voteLight : voteDark),
+  },
+  unlock: {
+    moduleAssetId: '5:2',
+    fee: 1e8,
+    title: t('Unlock'),
+    image: theme => (theme === themes.light ? txUnlockLight : txUnlockDark),
   },
 };
 
