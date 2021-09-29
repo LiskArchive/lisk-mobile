@@ -24,6 +24,7 @@ The next section details the prerequisites to install Lisk Mobile from source us
  - Git
    - `brew install git`
  - NodeJS (recommended 12.4.0)
+   - `brew install node`
    - `brew install nvm`
  - npm (recommended 6.9.0)
    - npm is shipped with NodeJS. but to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
