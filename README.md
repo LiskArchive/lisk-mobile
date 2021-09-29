@@ -70,12 +70,7 @@ You can run the project in Xcode and use iOS simulators or alternatively use And
 
 There is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read  [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
 
-### Possible Errors
-#### `SDK location not found. `
-Create `android/local.properties` and add this line in the file:
-```
-sdk.dir=/Users/username/Library/Android/sdk
-```
+### Possible Errors for Mac Users
 #### `lottie-ios/Lottie.modulemap`
 ```
 /Users/***/Library/Developer/Xcode/DerivedData/Lisk-***/Build/Products/Debug-iphonesimulator/lottie-ios/Lottie.modulemap
@@ -94,7 +89,6 @@ end
 - Remove Pods folder and Podfile.lock ```rm -rf ios/Pods && rm -rf ios/Podfile.lock```
 - ```npx pod-install```
 
-
 #### `Duplicate symbols for architecture x86_64`
 ```
 Products/Debug-iphonesimulator/react-native-udp/libreact-native-udp.a(GCDAsyncUdpSocket.o)
@@ -103,6 +97,15 @@ ld: 144 duplicate symbols for architecture x86_64
 - Run ```npx patch-package```
 - Remove Pods folder and Podfile.lock ```rm -rf ios/Pods && rm -rf ios/Podfile.lock```
 - ```npx pod-install```
+
+### Other Possible Error
+#### `SDK location not found. `
+Create `android/local.properties` and add this line in the file for Mac Users:
+```
+sdk.dir=/Users/username/Library/Android/sdk
+```
+OR
+Set the environmental PATH to your sdk installation location.
 
 
 #### Environment variables
