@@ -169,7 +169,7 @@ describe('Action: Accounts', () => {
             fee: inputData.fee,
             amount: inputData.amount,
             data: inputData.reference,
-            type: txConstants.send.type,
+            moduleAssetId: txConstants.send.moduleAssetId,
           },
         },
       ];

@@ -50,7 +50,7 @@ module.exports = {
   preset: 'react-native',
   coverageReporters: ['text', 'html', 'lcov', 'cobertura'],
   transformIgnorePatterns: [
-    'node_modules/(?!(@react-native-community|react-native)/)',
+    'node_modules/(?!(@react-native|react-native)/)',
   ],
   reporters: [
     'default',

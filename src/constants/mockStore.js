@@ -6,7 +6,7 @@ const data = {
   passphrase:
     'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together',
   account: {
-    address: '5092448154042807473L',
+    address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw',
     balance: '10000',
     publicKey:
       'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
