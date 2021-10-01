@@ -1,8 +1,8 @@
-import { Platform, Dimensions, NativeModules } from 'react-native';
+import * as ReactNative from 'react-native';
 // import { Header } from 'react-navigation';
 import DeviceInfo from 'react-native-device-info';
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = ReactNative.Dimensions.get('window');
 const Header = { HEIGHT: 40 };
 
 /**
@@ -19,9 +19,9 @@ export const deviceModel = () => DeviceInfo.getDeviceId();
  *  and android for all the android phones
  */
 export const deviceType = () => {
-  if (Platform.OS === 'ios' && DeviceInfo.hasNotch()) {
+  if (ReactNative.Platform.OS === 'ios' && DeviceInfo.hasNotch()) {
     return 'iOSx';
-  } if (Platform.OS === 'ios' && !DeviceInfo.hasNotch()) {
+  } if (ReactNative.Platform.OS === 'ios' && !DeviceInfo.hasNotch()) {
     return 'iOS';
   }
   return 'android';
@@ -41,7 +41,7 @@ export const deviceHeight = () => height;
  * @returns {Number} - The height of the header
  */
 export const headerHeight = () => {
-  if (Platform.OS === 'ios' && DeviceInfo.hasNotch()) {
+  if (ReactNative.Platform.OS === 'ios' && DeviceInfo.hasNotch()) {
     return Header.HEIGHT + 23;
   }
   return Header.HEIGHT;
@@ -66,11 +66,11 @@ export const SCREEN_HEIGHTS = {
 };
 
 export const deviceLocale = () => {
-  if (Platform.OS === 'ios') {
-    const locale = parseInt(Platform.Version, 10) > 12
-      ? NativeModules.SettingsManager.settings.AppleLanguages[0]
-      : NativeModules.SettingsManager.settings.AppleLocale; // "fr_FR"
+  if (ReactNative.Platform.OS === 'ios') {
+    const locale = parseInt(ReactNative.Platform.Version, 10) > 12
+      ? ReactNative.NativeModules.SettingsManager.settings.AppleLanguages[0]
+      : ReactNative.NativeModules.SettingsManager.settings.AppleLocale; // "fr_FR"
     return locale.substr(0, 2);
   }
-  return NativeModules.I18nManager.localeIdentifier.substr(0, 2);
+  return ReactNative.NativeModules.I18nManager.localeIdentifier.substr(0, 2);
 };

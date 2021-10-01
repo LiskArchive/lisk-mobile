@@ -8,10 +8,9 @@ const data = {
   account: {
     address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw',
     balance: '10000',
-    publicKey:
-      'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
+    publicKey: 'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
     unconfirmedBalance: '10000',
-    initialized: true,
+    initialized: true
   },
   transactions: {
     data: [
@@ -21,12 +20,10 @@ const data = {
         blockId: '10687269197653491500',
         type: 0,
         timestamp: 72473846,
-        senderPublicKey:
-          'b550ede5ee0373d2930525016a45aadb50ab6f776068eef3874fa813a26c78d8',
+        senderPublicKey: 'b550ede5ee0373d2930525016a45aadb50ab6f776068eef3874fa813a26c78d8',
         senderId: '7056261880661230236L',
         recipientId: '4913610097661759129L',
-        recipientPublicKey:
-          'f6399b0251eb0e175e55fac0d6bd53f091c732931dbd816b4bfc42b158d5f04f',
+        recipientPublicKey: 'f6399b0251eb0e175e55fac0d6bd53f091c732931dbd816b4bfc42b158d5f04f',
         amount: '10000000000',
         fee: '10000000',
         signature:
@@ -34,8 +31,8 @@ const data = {
         signatures: [],
         confirmations: 15227,
         asset: {
-          data: 'manu',
-        },
+          data: 'manu'
+        }
       },
       {
         id: '1374653851777155012559',
@@ -43,12 +40,10 @@ const data = {
         blockId: '10687269197653491500',
         type: 0,
         timestamp: 72473846,
-        senderPublicKey:
-          'b550ede5ee0373d2930525016a45aadb50ab6f776068eef3874fa813a26c78d8',
+        senderPublicKey: 'b550ede5ee0373d2930525016a45aadb50ab6f776068eef3874fa813a26c78d8',
         senderId: '7056261880661230236L',
         recipientId: '4913610097661759129L',
-        recipientPublicKey:
-          'f6399b0251eb0e175e55fac0d6bd53f091c732931dbd816b4bfc42b158d5f04f',
+        recipientPublicKey: 'f6399b0251eb0e175e55fac0d6bd53f091c732931dbd816b4bfc42b158d5f04f',
         amount: '10000000000',
         fee: '10000000',
         signature:
@@ -56,8 +51,8 @@ const data = {
         signatures: [],
         confirmations: 15227,
         asset: {
-          data: 'manu',
-        },
+          data: 'manu'
+        }
       },
       {
         id: '137465385177715502559',
@@ -65,12 +60,10 @@ const data = {
         blockId: '10687269197653491500',
         type: 0,
         timestamp: 72473846,
-        senderPublicKey:
-          'b550ede5ee0373d2930525016a45aadb50ab6f776068eef3874fa813a26c78d8',
+        senderPublicKey: 'b550ede5ee0373d2930525016a45aadb50ab6f776068eef3874fa813a26c78d8',
         senderId: '7056261880661230236L',
         recipientId: '4913610097661759129L',
-        recipientPublicKey:
-          'f6399b0251eb0e175e55fac0d6bd53f091c732931dbd816b4bfc42b158d5f04f',
+        recipientPublicKey: 'f6399b0251eb0e175e55fac0d6bd53f091c732931dbd816b4bfc42b158d5f04f',
         amount: '10000000000',
         fee: '10000000',
         signature:
@@ -78,14 +71,14 @@ const data = {
         signatures: [],
         confirmations: 15227,
         asset: {
-          data: 'manu',
-        },
-      },
+          data: 'manu'
+        }
+      }
     ],
     meta: {
-      count: 3,
-    },
-  },
+      count: 3
+    }
+  }
 };
 
 export default data;
