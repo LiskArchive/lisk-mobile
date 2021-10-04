@@ -51,7 +51,7 @@ class Send extends React.Component {
   }
 
   componentWillUnmount() {
-    this.subs.forEach(sub => sub.remove());
+    this.subs.forEach(sub => sub?.remove?.());
   }
 
   resetMultiStep = () => {
