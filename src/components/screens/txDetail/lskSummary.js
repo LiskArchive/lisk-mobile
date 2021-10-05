@@ -22,7 +22,7 @@ const getConfig = (styles, tx, accountAddress) => {
       firstAddress: tx.recipientAddress,
       secondAddress: tx.senderAddress,
       amountSign: '',
-      direction: 'incoming',
+      direction: 'incoming'
     };
   }
   return {
@@ -31,22 +31,16 @@ const getConfig = (styles, tx, accountAddress) => {
     firstAddress: tx.senderAddress,
     secondAddress: tx.recipientAddress,
     amountSign: '-',
-    direction: 'outgoing',
+    direction: 'outgoing'
   };
 };
 
 const Graphics = ({
-  styles,
-  tx,
-  theme,
-  config,
+  styles, tx, theme, config
 }) => (
   <View style={styles.row}>
-    {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
-      <Image
-        style={{ width: 40, height: 40 }}
-        source={getTxConstant(tx)?.image?.(theme)}
-      />
+    {!isTransfer(tx) ? (
+      <Image style={{ width: 40, height: 40 }} source={getTxConstant(tx)?.image?.(theme)} />
     ) : (
       <Fragment>
         <Avatar address={config.firstAddress} size={40} />
@@ -61,17 +55,10 @@ const Graphics = ({
   </View>
 );
 
-const TimeStamp = ({
-  timestamp,
-  styles,
-}) => {
+const TimeStamp = ({ timestamp, styles }) => {
   if (timestamp) {
     return (
-      <FormattedDate
-          format="MMM D, YYYY LTS"
-          type={P}
-          style={[styles.date, styles.theme.date]}
-        >
+      <FormattedDate format="MMM D, YYYY LTS" type={P} style={[styles.date, styles.theme.date]}>
         {timestamp * 1000}
       </FormattedDate>
     );
@@ -81,47 +68,27 @@ const TimeStamp = ({
 };
 
 const LskSummary = ({
-  styles,
-  theme,
-  t,
-  tx,
-  accountAddress,
-  incognito,
-  language,
+  styles, theme, t, tx, accountAddress, incognito, language
 }) => {
   const amount = fromRawLsk(tx.amount);
   const config = getConfig(styles, tx, accountAddress);
 
   return (
     <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
-      <Graphics
-        styles={styles}
-        tx={tx}
-        theme={theme}
-        config={config}
-      />
+      <Graphics styles={styles} tx={tx} theme={theme} config={config} />
       {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
         <H3 style={config.amountStyle}>{t(getTxConstant(tx)?.title)}</H3>
       ) : null}
-      {isTransfer(tx)
-      && tx.recipientAddress !== tx.senderAddress
-      && !incognito ? (
+      {isTransfer(tx) && !incognito ? (
         <H3 style={config.amountStyle}>
           {config.amountSign}
-          <FormattedNumber language={language}>
-            {fromRawLsk(tx.amount)}
-          </FormattedNumber>
+          <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
         </H3>
-        ) : null}
-      {isTransfer(tx)
-      && tx.recipientAddress !== tx.senderAddress
-      && incognito ? (
+      ) : null}
+      {isTransfer(tx) && incognito ? (
         <Blur value={amount} direction={config.direction} style={styles.amountBlur} />
-        ) : null}
-      <TimeStamp
-        timestamp={tx.timestamp}
-        styles={styles}
-      />
+      ) : null}
+      <TimeStamp timestamp={tx.timestamp} styles={styles} />
     </View>
   );
 };

@@ -115,16 +115,13 @@ class Item extends React.Component {
               theme={theme}
               moduleAssetId={tx.moduleAssetId}
               direction={direction}
-              sender={tx.senderAddress}
-              recipient={tx.recipientAddress}
               address={address}
             />
           </View>
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>
               {activeToken === 'LSK'
-              && (!isTransfer(tx)
-                || tx.recipientAddress === tx.senderAddress)
+              && (!isTransfer(tx))
                 ? t(getTxConstant(tx)?.title)
                 : addressText}
             </B>
