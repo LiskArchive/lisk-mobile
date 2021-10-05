@@ -125,7 +125,7 @@ class Item extends React.Component {
               {activeToken === 'LSK'
               && (!isTransfer(tx)
                 || tx.recipientAddress === tx.senderAddress)
-                ? t(getTxConstant(tx).title)
+                ? t(getTxConstant(tx)?.title)
                 : addressText}
             </B>
             <TimeStamp
