@@ -1,4 +1,4 @@
-import { Platform, Dimensions, NativeModules } from 'react-native';
+import { Dimensions, Platform, NativeModules } from 'react-native';
 // import { Header } from 'react-navigation';
 import DeviceInfo from 'react-native-device-info';
 
