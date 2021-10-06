@@ -99,8 +99,8 @@ class TransactionDetail extends React.Component {
   // eslint-disable-next-line max-statements
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
-    const { 
-      t, activeToken, account, route
+    const {
+      t, activeToken, account, route,
     } = this.props;
     try {
       const { data } = await transactionsAPI.get(activeToken, {
@@ -147,7 +147,12 @@ class TransactionDetail extends React.Component {
   // eslint-disable-next-line complexity
   render() {
     const {
-      styles, account, t, activeToken, language, route
+      styles,
+      account,
+      t,
+      activeToken,
+      language,
+      route,
     } = this.props;
     const {
       tx, error, refreshing, upvotes, downvotes
@@ -169,8 +174,7 @@ class TransactionDetail extends React.Component {
       );
     }
 
-    const walletAccountAddress =
-      route.params?.account ?? account[activeToken].address;
+    const walletAccountAddress = route.params?.account ?? account[activeToken].address;
     const incognito = route.params?.incognito ?? null;
     const isDelegateRegistration = isRegistration(tx);
     const isVoting = isVote(tx);
@@ -253,9 +257,7 @@ class TransactionDetail extends React.Component {
         ) : null}
         <Row icon="confirmations" title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
           <B style={[styles.value, styles.theme.value]}>
-            {activeToken === 'LSK'
-              ? tx.nonce
-              : tx.confirmations || t('Not confirmed yet.')}
+            {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
           </B>
         </Row>
         <Row icon="tx-id" title="Transaction ID">
@@ -277,9 +279,10 @@ class TransactionDetail extends React.Component {
           )}
         </Row>
         {
-        isVoting
-          ? <VoteList upvotes={upvotes} downvotes={downvotes} />
-          : null}
+          isVoting
+            ? <VoteList upvotes={upvotes} downvotes={downvotes} />
+            : null
+        }
       </ScrollView>
     );
   }

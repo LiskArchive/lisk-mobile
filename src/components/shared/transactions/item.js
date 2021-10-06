@@ -16,7 +16,10 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const TimeStamp = ({
-  styles, language, tx, t
+  styles,
+  language,
+  tx,
+  t,
 }) => {
   if (typeof tx.timestamp !== 'number') {
     return (

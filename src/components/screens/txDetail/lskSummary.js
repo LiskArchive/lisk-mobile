@@ -36,7 +36,10 @@ const getConfig = (styles, tx, accountAddress) => {
 };
 
 const Graphics = ({
-  styles, tx, theme, config
+  styles,
+  tx,
+  theme,
+  config,
 }) => (
   <View style={styles.row}>
     {!isTransfer(tx) ? (
@@ -60,7 +63,8 @@ const Graphics = ({
 );
 
 const TimeStamp = ({
-  timestamp, styles
+  timestamp,
+  styles,
 }) => {
   if (timestamp) {
     return (
