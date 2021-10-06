@@ -14,22 +14,32 @@ import EmptyState from '../../shared/transactions/empty';
 import LskSummary from './lskSummary';
 import BtcSummary from './btcSummary';
 import Row from './row';
-import { transactions as transactionsAPI, account as accountAPI } from '../../../utilities/api';
+import {
+  transactions as transactionsAPI,
+  account as accountAPI,
+} from '../../../utilities/api';
 import getStyles from './styles';
 import VoteList from './voteList';
 import { merge } from '../../../utilities/helpers';
 import { tokenMap } from '../../../constants/tokens';
 import {
-  goToWallet, getAccountLabel, getAccountTitle, openExplorer
+  goToWallet,
+  getAccountLabel,
+  getAccountTitle,
+  openExplorer,
 } from './utils';
-import { isRegistration, isTransfer, isVote } from '../../../constants/transactions';
+import {
+  isRegistration,
+  isTransfer,
+  isVote,
+} from '../../../constants/transactions';
 
 @connect(
   (state) => ({
     followedAccounts: state.accounts.followed || [],
     account: state.accounts.info || {},
     activeToken: state.settings.token.active,
-    language: state.settings.language
+    language: state.settings.language,
   }),
   {}
 )
@@ -37,7 +47,7 @@ class TransactionDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
-      headerLeft: <IconButton title="" icon="back" onPress={params.action} />
+      headerLeft: <IconButton title="" icon="back" onPress={params.action} />,
     };
   };
 
@@ -45,7 +55,7 @@ class TransactionDetail extends React.Component {
     tx: null,
     refreshing: false,
     downvotes: [],
-    upvotes: []
+    upvotes: [],
   };
 
   componentDidMount() {
@@ -61,7 +71,7 @@ class TransactionDetail extends React.Component {
     }
     navigation.setParams({
       theme,
-      action: backAction
+      action: backAction,
     });
   }
 
@@ -75,11 +85,11 @@ class TransactionDetail extends React.Component {
         const prefix = vote.substring(0, 1);
         const publicKey = vote.substring(1, vote.length);
         const accountSummary = await accountAPI.getSummary(activeToken, {
-          publicKey
+          publicKey,
         });
         const voteData = {
           username: accountSummary.delegate.username,
-          rank: accountSummary.delegate.rank
+          rank: accountSummary.delegate.rank,
         };
         if (prefix === '-') downvotes.splice(index, 0, voteData);
         if (prefix === '+') upvotes.splice(index, 0, voteData);
@@ -96,13 +106,11 @@ class TransactionDetail extends React.Component {
   // eslint-disable-next-line max-statements
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
-    const {
-      t, activeToken, account, route
-    } = this.props;
+    const { t, activeToken, account, route } = this.props;
     try {
       const { data } = await transactionsAPI.get(activeToken, {
         address: route.params?.account ?? account[activeToken].address,
-        id
+        id,
       });
       const tx = data[0] || {};
 
@@ -110,14 +118,14 @@ class TransactionDetail extends React.Component {
       // example: navigating from a deep link
       if (!tx.id && !currentTx) {
         this.setState({
-          error: t('Transaction not found')
+          error: t('Transaction not found'),
         });
       } else {
         setTimeout(
           () =>
             this.setState((prevState) => ({
               tx: merge(prevState.tx, tx),
-              refreshing: false
+              refreshing: false,
             })),
           delay
         );
@@ -126,7 +134,7 @@ class TransactionDetail extends React.Component {
     } catch (error) {
       if (!currentTx) {
         this.setState({
-          error: t('An error occurred, please try again.')
+          error: t('An error occurred, please try again.'),
         });
       }
     }
@@ -135,7 +143,7 @@ class TransactionDetail extends React.Component {
   onRefresh = () => {
     this.setState(
       {
-        refreshing: true
+        refreshing: true,
       },
       () => this.retrieveTransaction(this.state.tx.id, 1500)
     );
@@ -143,12 +151,8 @@ class TransactionDetail extends React.Component {
 
   // eslint-disable-next-line complexity
   render() {
-    const {
-      styles, account, t, activeToken, language, route
-    } = this.props;
-    const {
-      tx, error, refreshing, upvotes, downvotes
-    } = this.state;
+    const { styles, account, t, activeToken, language, route } = this.props;
+    const { tx, error, refreshing, upvotes, downvotes } = this.state;
 
     if (error) {
       return (
@@ -166,7 +170,8 @@ class TransactionDetail extends React.Component {
       );
     }
 
-    const walletAccountAddress = route.params?.account ?? account[activeToken].address;
+    const walletAccountAddress =
+      route.params?.account ?? account[activeToken].address;
     const incognito = route.params?.incognito ?? null;
     const isDelegateRegistration = isRegistration(tx);
     const isVoting = isVote(tx);
@@ -174,7 +179,9 @@ class TransactionDetail extends React.Component {
     return (
       <ScrollView
         style={[styles.container, styles.theme.container]}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />
+        }
       >
         {activeToken === 'LSK' ? (
           <LskSummary
@@ -195,7 +202,9 @@ class TransactionDetail extends React.Component {
         {isDelegateRegistration && (
           <Row icon={'delegate'} title={'Delegate username'}>
             <View>
-              <B style={[styles.value, styles.theme.value]}>{tx.delegate.username}</B>
+              <B style={[styles.value, styles.theme.value]}>
+                {tx.delegate.username}
+              </B>
             </View>
           </Row>
         )}
@@ -236,12 +245,21 @@ class TransactionDetail extends React.Component {
         </Row>
         {tx.data ? (
           <Row icon="reference" title="Message">
-            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>{tx.data}</B>
+            <B
+              style={[styles.value, styles.theme.value, styles.referenceValue]}
+            >
+              {tx.data}
+            </B>
           </Row>
         ) : null}
-        <Row icon="confirmations" title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
+        <Row
+          icon="confirmations"
+          title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}
+        >
           <B style={[styles.value, styles.theme.value]}>
-            {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
+            {activeToken === 'LSK'
+              ? tx.nonce
+              : tx.confirmations || t('Not confirmed yet.')}
           </B>
         </Row>
         <Row icon="tx-id" title="Transaction ID">

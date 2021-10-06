@@ -22,7 +22,7 @@ const getConfig = (styles, tx, accountAddress) => {
       firstAddress: tx.recipientAddress,
       secondAddress: tx.senderAddress,
       amountSign: '',
-      direction: 'incoming'
+      direction: 'incoming',
     };
   }
   return {
@@ -31,21 +31,25 @@ const getConfig = (styles, tx, accountAddress) => {
     firstAddress: tx.senderAddress,
     secondAddress: tx.recipientAddress,
     amountSign: '-',
-    direction: 'outgoing'
+    direction: 'outgoing',
   };
 };
 
-const Graphics = ({
-  styles, tx, theme, config
-}) => (
+const Graphics = ({ styles, tx, theme, config }) => (
   <View style={styles.row}>
     {!isTransfer(tx) ? (
-      <Image style={{ width: 40, height: 40 }} source={getTxConstant(tx)?.image?.(theme)} />
+      <Image
+        style={{ width: 40, height: 40 }}
+        source={getTxConstant(tx)?.image?.(theme)}
+      />
     ) : (
       <Fragment>
         <Avatar address={config.firstAddress} size={40} />
         {theme === themes.light ? (
-          <Image source={arrowLight} style={[styles.arrow, config.arrowStyle]} />
+          <Image
+            source={arrowLight}
+            style={[styles.arrow, config.arrowStyle]}
+          />
         ) : (
           <Image source={arrowDark} style={[styles.arrow, config.arrowStyle]} />
         )}
@@ -58,7 +62,11 @@ const Graphics = ({
 const TimeStamp = ({ timestamp, styles }) => {
   if (timestamp) {
     return (
-      <FormattedDate format="MMM D, YYYY LTS" type={P} style={[styles.date, styles.theme.date]}>
+      <FormattedDate
+        format="MMM D, YYYY LTS"
+        type={P}
+        style={[styles.date, styles.theme.date]}
+      >
         {timestamp * 1000}
       </FormattedDate>
     );
@@ -68,7 +76,13 @@ const TimeStamp = ({ timestamp, styles }) => {
 };
 
 const LskSummary = ({
-  styles, theme, t, tx, accountAddress, incognito, language
+  styles,
+  theme,
+  t,
+  tx,
+  accountAddress,
+  incognito,
+  language,
 }) => {
   const amount = fromRawLsk(tx.amount);
   const config = getConfig(styles, tx, accountAddress);
@@ -82,11 +96,17 @@ const LskSummary = ({
       {isTransfer(tx) && !incognito ? (
         <H3 style={config.amountStyle}>
           {config.amountSign}
-          <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
+          <FormattedNumber language={language}>
+            {fromRawLsk(tx.amount)}
+          </FormattedNumber>
         </H3>
       ) : null}
       {isTransfer(tx) && incognito ? (
-        <Blur value={amount} direction={config.direction} style={styles.amountBlur} />
+        <Blur
+          value={amount}
+          direction={config.direction}
+          style={styles.amountBlur}
+        />
       ) : null}
       <TimeStamp timestamp={tx.timestamp} styles={styles} />
     </View>
