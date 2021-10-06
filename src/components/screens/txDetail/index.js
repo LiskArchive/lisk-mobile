@@ -33,7 +33,6 @@ import { isRegistration, isTransfer, isVote } from '../../../constants/transacti
   }),
   {}
 )
-
 class TransactionDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
