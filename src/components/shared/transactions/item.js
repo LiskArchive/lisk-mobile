@@ -15,7 +15,9 @@ import Blur from './blur';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
-const TimeStamp = ({ styles, language, tx, t }) => {
+const TimeStamp = ({
+  styles, language, tx, t
+}) => {
   if (typeof tx.timestamp !== 'number') {
     return (
       <Small style={[styles.date, styles.theme.date]}>
@@ -35,7 +37,7 @@ const TimeStamp = ({ styles, language, tx, t }) => {
   );
 };
 
-@connect((state) => ({
+@connect(state => ({
   language: state.settings.language,
 }))
 class Item extends React.Component {
@@ -46,12 +48,14 @@ class Item extends React.Component {
   }
 
   showDetail = () => {
-    const { navigate, tx, account, incognito } = this.props;
+    const {
+      navigate, tx, account, incognito
+    } = this.props;
 
     navigate('TxDetail', { tx, account, incognito });
   };
 
-  getAddressText = (address) => {
+  getAddressText = address => {
     const { t } = this.props;
 
     if (address === 'Unparsed Address') {
@@ -86,16 +90,15 @@ class Item extends React.Component {
     let addressText = this.getAddressText(address);
 
     const followedAccount = followedAccounts[activeToken].find(
-      (fa) => fa.address === address
+      fa => fa.address === address
     );
     if (followedAccount) {
       addressText = followedAccount.label;
     }
 
-    const amount =
-      direction === 'incoming'
-        ? fromRawLsk(tx.amount)
-        : `-${fromRawLsk(tx.amount)}`;
+    const amount = direction === 'incoming'
+      ? fromRawLsk(tx.amount)
+      : `-${fromRawLsk(tx.amount)}`;
 
     return (
       <TouchableOpacity
@@ -118,7 +121,12 @@ class Item extends React.Component {
                 ? t(getTxConstant(tx)?.title)
                 : addressText}
             </B>
-            <TimeStamp styles={styles} language={language} tx={tx} t={t} />
+            <TimeStamp
+              styles={styles}
+              language={language}
+              tx={tx}
+              t={t}
+            />
           </View>
         </View>
         {isTransfer(tx) && (
@@ -144,17 +152,19 @@ class Item extends React.Component {
             {tx.recipientAddress !== tx.senderAddress && incognito ? (
               <Blur value={amount} direction={direction} />
             ) : null}
-            {typeof tx.timestamp !== 'number' && (
-              <View style={styles.pendingIcon}>
-                <LottieView
-                  source={loadingAnimation}
-                  ref={(el) => {
-                    this.animation = el;
-                  }}
-                  style={{}}
-                />
-              </View>
-            )}
+            {
+              (typeof tx.timestamp !== 'number') && (
+                <View style={styles.pendingIcon}>
+                  <LottieView
+                    source={loadingAnimation}
+                    ref={(el) => {
+                      this.animation = el;
+                    }}
+                    style={{}}
+                  />
+                </View>
+              )
+            }
           </View>
         )}
       </TouchableOpacity>

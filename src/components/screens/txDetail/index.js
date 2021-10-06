@@ -23,19 +23,12 @@ import VoteList from './voteList';
 import { merge } from '../../../utilities/helpers';
 import { tokenMap } from '../../../constants/tokens';
 import {
-  goToWallet,
-  getAccountLabel,
-  getAccountTitle,
-  openExplorer,
+  goToWallet, getAccountLabel, getAccountTitle, openExplorer
 } from './utils';
-import {
-  isRegistration,
-  isTransfer,
-  isVote,
-} from '../../../constants/transactions';
+import { isRegistration, isTransfer, isVote } from '../../../constants/transactions';
 
 @connect(
-  (state) => ({
+  state => ({
     followedAccounts: state.accounts.followed || [],
     account: state.accounts.info || {},
     activeToken: state.settings.token.active,
@@ -106,7 +99,9 @@ class TransactionDetail extends React.Component {
   // eslint-disable-next-line max-statements
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
-    const { t, activeToken, account, route } = this.props;
+    const { 
+      t, activeToken, account, route
+    } = this.props;
     try {
       const { data } = await transactionsAPI.get(activeToken, {
         address: route.params?.account ?? account[activeToken].address,
@@ -123,7 +118,7 @@ class TransactionDetail extends React.Component {
       } else {
         setTimeout(
           () =>
-            this.setState((prevState) => ({
+            this.setState(prevState => ({
               tx: merge(prevState.tx, tx),
               refreshing: false,
             })),
@@ -151,8 +146,12 @@ class TransactionDetail extends React.Component {
 
   // eslint-disable-next-line complexity
   render() {
-    const { styles, account, t, activeToken, language, route } = this.props;
-    const { tx, error, refreshing, upvotes, downvotes } = this.state;
+    const {
+      styles, account, t, activeToken, language, route
+    } = this.props;
+    const {
+      tx, error, refreshing, upvotes, downvotes
+    } = this.state;
 
     if (error) {
       return (
@@ -252,10 +251,7 @@ class TransactionDetail extends React.Component {
             </B>
           </Row>
         ) : null}
-        <Row
-          icon="confirmations"
-          title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}
-        >
+        <Row icon="confirmations" title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
           <B style={[styles.value, styles.theme.value]}>
             {activeToken === 'LSK'
               ? tx.nonce
@@ -280,7 +276,10 @@ class TransactionDetail extends React.Component {
             </A>
           )}
         </Row>
-        {isVoting ? <VoteList upvotes={upvotes} downvotes={downvotes} /> : null}
+        {
+        isVoting
+          ? <VoteList upvotes={upvotes} downvotes={downvotes} />
+          : null}
       </ScrollView>
     );
   }

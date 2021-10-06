@@ -35,7 +35,9 @@ const getConfig = (styles, tx, accountAddress) => {
   };
 };
 
-const Graphics = ({ styles, tx, theme, config }) => (
+const Graphics = ({
+  styles, tx, theme, config
+}) => (
   <View style={styles.row}>
     {!isTransfer(tx) ? (
       <Image
@@ -46,9 +48,7 @@ const Graphics = ({ styles, tx, theme, config }) => (
       <Fragment>
         <Avatar address={config.firstAddress} size={40} />
         {theme === themes.light ? (
-          <Image
-            source={arrowLight}
-            style={[styles.arrow, config.arrowStyle]}
+          <Image source={arrowLight} style={[styles.arrow, config.arrowStyle]}
           />
         ) : (
           <Image source={arrowDark} style={[styles.arrow, config.arrowStyle]} />
@@ -59,7 +59,9 @@ const Graphics = ({ styles, tx, theme, config }) => (
   </View>
 );
 
-const TimeStamp = ({ timestamp, styles }) => {
+const TimeStamp = ({
+  timestamp, styles
+}) => {
   if (timestamp) {
     return (
       <FormattedDate
@@ -89,7 +91,12 @@ const LskSummary = ({
 
   return (
     <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
-      <Graphics styles={styles} tx={tx} theme={theme} config={config} />
+      <Graphics
+        styles={styles}
+        tx={tx}
+        theme={theme}
+        config={config}
+      />
       {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
         <H3 style={config.amountStyle}>{t(getTxConstant(tx)?.title)}</H3>
       ) : null}
