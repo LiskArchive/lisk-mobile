@@ -59,13 +59,12 @@ describe('api/btc/service', () => {
     });
 
     it('handles non-500 errors', async () => {
-      const errorResponse = { message: 'Error' };
-      fetchMock.once('*', { status: 400, body: errorResponse });
+      fetchMock.once('*', { status: 400 });
 
       try {
         await service.getPriceTicker();
       } catch (error) {
-        expect(error).toEqual(errorResponse);
+        expect(error).toMatchSnapshot();
       }
     });
 
