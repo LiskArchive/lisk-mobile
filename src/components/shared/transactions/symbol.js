@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import Avatar from '../avatar';
 import Icon from '../toolBox/icon';
-import { getTxConstant, transactions } from '../../../constants/transactions';
+import { getTxConstant, moduleAssetNameIdMap } from '../../../constants/transactions';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../../constants/styleGuide';
@@ -34,7 +34,7 @@ const Symbol = ({
       </View>
     );
   }
-  if (moduleAssetId === transactions.send.moduleAssetId && sender !== recipient) {
+  if (moduleAssetId === moduleAssetNameIdMap.transfer && sender !== recipient) {
     return <Avatar address={address} size={40} style={styles.theme.avatar} />;
   }
   return (

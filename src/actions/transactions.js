@@ -1,5 +1,5 @@
 import actionTypes from '../constants/actions';
-import { transactions } from '../constants/transactions';
+import { moduleAssetNameIdMap } from '../constants/transactions';
 import { transactions as transactionsAPI } from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
 import { tokenMap } from '../constants/tokens';
@@ -72,7 +72,7 @@ export const transactionAdded = (data, successCb, errorCb) => async (
           recipientAddress: data.recipientAddress,
           amount: data.amount,
           fee: data.fee,
-          moduleAssetId: transactions.send.moduleAssetId,
+          moduleAssetId: moduleAssetNameIdMap.transfer,
           data: data.reference,
         },
       });
