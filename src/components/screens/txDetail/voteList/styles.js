@@ -15,7 +15,7 @@ export default () => ({
       marginRight: 8,
       marginVertical: 2.5,
     },
-    voteNumberContainer: {
+    voteAddressContainer: {
       borderRadius: 4,
       marginRight: 8,
       fontSize: fonts.size.small,
@@ -23,7 +23,7 @@ export default () => ({
       justifyContent: 'center',
       padding: 3,
     },
-    voteNumber: {
+    voteAddress: {
       fontSize: fonts.size.small,
     },
     vote: {
@@ -38,20 +38,26 @@ export default () => ({
     votesContainer: {
       backgroundColor: colors.light.platinum,
     },
-    voteNumber: {
+    voteAddress: {
       color: colors.light.ultramarineBlue,
     },
+    amount: {
+      color: colors.light.black
+    }
   },
 
   [themes.dark]: {
     votesContainer: {
       backgroundColor: colors.dark.blueGray,
     },
-    voteNumber: {
-      color: colors.dark.white,
+    voteAddress: {
+      color: colors.dark.whiteSmoke,
     },
     vote: {
       color: colors.dark.white,
     },
+    amount: {
+      color: colors.light.whiteSmoke
+    }
   },
 });

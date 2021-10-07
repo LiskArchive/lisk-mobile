@@ -21,12 +21,12 @@ const VoteList = ({ votes, styles, t }) => {
     const amount = Number(vote.amount) < 0 ? `-${fromRawLsk(vote.amount * -1)}` : fromRawLsk(vote.amount * -1);
     return (
       <View key={vote.delegateAddress} style={[styles.votesContainer, styles.theme.votesContainer]}>
-        <View style={[styles.voteNumberContainer]}>
-          <P style={[styles.voteNumber, styles.theme.voteNumber]}>
+        <View style={[styles.voteAddressContainer]}>
+          <P style={[styles.voteAddress, styles.theme.voteAddress]}>
             {stringShortener(vote.delegateAddress, 5, 2)}
           </P>
         </View>
-        <FormattedNumber trim={true} type={B}>
+        <FormattedNumber trim={true} type={B} style={[styles.theme.amount]} >
           {amount}
         </FormattedNumber>
       </View>
