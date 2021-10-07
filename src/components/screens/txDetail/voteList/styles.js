@@ -10,13 +10,12 @@ export default () => ({
     votesContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      borderWidth: 0.5,
       borderRadius: 3,
       padding: 5,
       marginRight: 8,
       marginVertical: 2.5,
     },
-    voteNumberContainer: {
+    voteAddressContainer: {
       borderRadius: 4,
       marginRight: 8,
       fontSize: fonts.size.small,
@@ -24,7 +23,7 @@ export default () => ({
       justifyContent: 'center',
       padding: 3,
     },
-    voteNumber: {
+    voteAddress: {
       fontSize: fonts.size.small,
     },
     vote: {
@@ -37,28 +36,28 @@ export default () => ({
 
   [themes.light]: {
     votesContainer: {
-      borderColor: setColorOpacity(colors.light.black, 0.2),
+      backgroundColor: colors.light.platinum,
     },
-    voteNumberContainer: {
-      backgroundColor: colors.light.slateGray,
+    voteAddress: {
+      color: colors.light.ultramarineBlue,
     },
-    voteNumber: {
-      color: colors.light.white,
-    },
+    amount: {
+      color: colors.light.black
+    }
   },
 
   [themes.dark]: {
     votesContainer: {
-      borderColor: colors.dark.blueGray,
-    },
-    voteNumberContainer: {
       backgroundColor: colors.dark.blueGray,
     },
-    voteNumber: {
-      color: colors.dark.white,
+    voteAddress: {
+      color: colors.dark.whiteSmoke,
     },
     vote: {
       color: colors.dark.white,
     },
+    amount: {
+      color: colors.light.whiteSmoke
+    }
   },
 });
