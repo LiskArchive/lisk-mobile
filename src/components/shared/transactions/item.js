@@ -115,16 +115,12 @@ class Item extends React.Component {
               theme={theme}
               moduleAssetId={tx.moduleAssetId}
               direction={direction}
-              sender={tx.senderAddress}
-              recipient={tx.recipientAddress}
               address={address}
             />
           </View>
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>
-              {activeToken === 'LSK'
-              && (!isTransfer(tx)
-                || tx.recipientAddress === tx.senderAddress)
+              {activeToken === 'LSK' && !isTransfer(tx)
                 ? t(getTxConstant(tx)?.title)
                 : addressText}
             </B>
@@ -138,9 +134,9 @@ class Item extends React.Component {
         </View>
         {isTransfer(tx) && (
           <View style={[styles.column, styles.amountWrapper]}>
-            {(activeToken === 'LSK'
-              && tx.recipientAddress === tx.senderAddress)
-            || incognito ? null : (
+            {(activeToken === 'LSK' &&
+              tx.recipientAddress === tx.senderAddress) ||
+            incognito ? null : (
               <View style={[styles[direction], styles.theme[direction]]}>
                 <FormattedNumber
                   trim={true}
@@ -155,7 +151,7 @@ class Item extends React.Component {
                   {amount}
                 </FormattedNumber>
               </View>
-              )}
+            )}
             {tx.recipientAddress !== tx.senderAddress && incognito ? (
               <Blur value={amount} direction={direction} />
             ) : null}
@@ -164,7 +160,7 @@ class Item extends React.Component {
                 <View style={styles.pendingIcon}>
                   <LottieView
                     source={loadingAnimation}
-                    ref={el => {
+                    ref={(el) => {
                       this.animation = el;
                     }}
                     style={{}}

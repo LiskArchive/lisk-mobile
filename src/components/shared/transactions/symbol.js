@@ -11,8 +11,6 @@ const Symbol = ({
   token,
   theme,
   direction,
-  sender,
-  recipient,
   address,
   styles,
   moduleAssetId,
@@ -34,7 +32,7 @@ const Symbol = ({
       </View>
     );
   }
-  if (moduleAssetId === transactions.send.moduleAssetId && sender !== recipient) {
+  if (moduleAssetId === transactions.send.moduleAssetId) {
     return <Avatar address={address} size={40} style={styles.theme.avatar} />;
   }
   return (
