@@ -16,12 +16,10 @@ import BtcSummary from './btcSummary';
 import Row from './row';
 import {
   transactions as transactionsAPI,
-  account as accountAPI,
 } from '../../../utilities/api';
 import getStyles from './styles';
 import VoteList from './voteList';
 import { merge } from '../../../utilities/helpers';
-import { tokenMap } from '../../../constants/tokens';
 import {
   goToWallet, getAccountLabel, getAccountTitle, openExplorer
 } from './utils';
@@ -47,8 +45,7 @@ class TransactionDetail extends React.Component {
   state = {
     tx: null,
     refreshing: false,
-    downvotes: [],
-    upvotes: [],
+    votes: [],
   };
 
   componentDidMount() {
@@ -57,7 +54,7 @@ class TransactionDetail extends React.Component {
     let backAction = () => navigation.pop();
 
     if (tx) {
-      this.setState({ tx }, () => this.retrieveTransaction(tx.id));
+      this.setState({ tx, votes: tx.votes }, () => this.retrieveTransaction(tx.id));
     } else {
       this.retrieveTransaction(route.params?.txId ?? false);
       backAction = () => navigation.navigate({ name: 'Home' });
@@ -68,33 +65,6 @@ class TransactionDetail extends React.Component {
     });
   }
 
-  async fetchExtraData() {
-    const { tx } = this.state;
-    const { activeToken } = this.props;
-    let upvotes = [];
-    let downvotes = [];
-    if (tx.votes.length) {
-      tx.votes.forEach(async (vote, index) => {
-        const prefix = vote.substring(0, 1);
-        const publicKey = vote.substring(1, vote.length);
-        const accountSummary = await accountAPI.getSummary(activeToken, {
-          publicKey,
-        });
-        const voteData = {
-          username: accountSummary.delegate.username,
-          rank: accountSummary.delegate.rank,
-        };
-        if (prefix === '-') downvotes.splice(index, 0, voteData);
-        if (prefix === '+') upvotes.splice(index, 0, voteData);
-
-        if (downvotes.length + upvotes.length === tx.votes.length) {
-          if (!upvotes.length) upvotes = null;
-          if (!downvotes.length) downvotes = null;
-          this.setState({ upvotes, downvotes });
-        }
-      });
-    }
-  }
 
   // eslint-disable-next-line max-statements
   async retrieveTransaction(id, delay = 0) {
@@ -124,7 +94,6 @@ class TransactionDetail extends React.Component {
             })),
           delay
         );
-        if (this.props.activeToken === tokenMap.LSK.key) this.fetchExtraData();
       }
     } catch (error) {
       if (!currentTx) {
@@ -155,7 +124,7 @@ class TransactionDetail extends React.Component {
       route,
     } = this.props;
     const {
-      tx, error, refreshing, upvotes, downvotes
+      tx, error, refreshing, votes
     } = this.state;
 
     if (error) {
@@ -280,7 +249,7 @@ class TransactionDetail extends React.Component {
         </Row>
         {
           isVoting
-            ? <VoteList upvotes={upvotes} downvotes={downvotes} />
+            ? <VoteList votes={votes} />
             : null
         }
       </ScrollView>

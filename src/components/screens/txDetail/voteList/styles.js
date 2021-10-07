@@ -10,7 +10,6 @@ export default () => ({
     votesContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      borderWidth: 0.5,
       borderRadius: 3,
       padding: 5,
       marginRight: 8,
@@ -37,21 +36,15 @@ export default () => ({
 
   [themes.light]: {
     votesContainer: {
-      borderColor: setColorOpacity(colors.light.black, 0.2),
-    },
-    voteNumberContainer: {
-      backgroundColor: colors.light.slateGray,
+      backgroundColor: colors.light.platinum,
     },
     voteNumber: {
-      color: colors.light.white,
+      color: colors.light.ultramarineBlue,
     },
   },
 
   [themes.dark]: {
     votesContainer: {
-      borderColor: colors.dark.blueGray,
-    },
-    voteNumberContainer: {
       backgroundColor: colors.dark.blueGray,
     },
     voteNumber: {
