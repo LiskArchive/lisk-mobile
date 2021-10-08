@@ -42,7 +42,7 @@ const Graphics = ({
   config,
 }) => (
   <View style={styles.row}>
-    {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
+    {!isTransfer(tx) ? (
       <Image
         style={{ width: 40, height: 40 }}
         source={getTxConstant(tx)?.image?.(theme)}
@@ -51,7 +51,8 @@ const Graphics = ({
       <Fragment>
         <Avatar address={config.firstAddress} size={40} />
         {theme === themes.light ? (
-          <Image source={arrowLight} style={[styles.arrow, config.arrowStyle]} />
+          <Image source={arrowLight} style={[styles.arrow, config.arrowStyle]}
+          />
         ) : (
           <Image source={arrowDark} style={[styles.arrow, config.arrowStyle]} />
         )}
@@ -68,10 +69,10 @@ const TimeStamp = ({
   if (timestamp) {
     return (
       <FormattedDate
-          format="MMM D, YYYY LTS"
-          type={P}
-          style={[styles.date, styles.theme.date]}
-        >
+        format="MMM D, YYYY LTS"
+        type={P}
+        style={[styles.date, styles.theme.date]}
+      >
         {timestamp * 1000}
       </FormattedDate>
     );
@@ -103,25 +104,22 @@ const LskSummary = ({
       {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
         <H3 style={config.amountStyle}>{t(getTxConstant(tx)?.title)}</H3>
       ) : null}
-      {isTransfer(tx)
-      && tx.recipientAddress !== tx.senderAddress
-      && !incognito ? (
+      {isTransfer(tx) && !incognito ? (
         <H3 style={config.amountStyle}>
           {config.amountSign}
           <FormattedNumber language={language}>
             {fromRawLsk(tx.amount)}
           </FormattedNumber>
         </H3>
-        ) : null}
-      {isTransfer(tx)
-      && tx.recipientAddress !== tx.senderAddress
-      && incognito ? (
-        <Blur value={amount} direction={config.direction} style={styles.amountBlur} />
-        ) : null}
-      <TimeStamp
-        timestamp={tx.timestamp}
-        styles={styles}
-      />
+      ) : null}
+      {isTransfer(tx) && incognito ? (
+        <Blur
+          value={amount}
+          direction={config.direction}
+          style={styles.amountBlur}
+        />
+      ) : null}
+      <TimeStamp timestamp={tx.timestamp} styles={styles} />
     </View>
   );
 };
