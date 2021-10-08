@@ -22,22 +22,22 @@ export const networks = {
 };
 
 export const mainNetNodes = [
-  'hub21.lisk.io',
-  'hub22.lisk.io',
-  'hub23.lisk.io',
-  'hub24.lisk.io',
-  'hub25.lisk.io',
-  'hub26.lisk.io',
-  'hub27.lisk.io',
-  'hub28.lisk.io',
-  'hub31.lisk.io',
-  'hub32.lisk.io',
-  'hub33.lisk.io',
-  'hub34.lisk.io',
-  'hub35.lisk.io',
-  'hub36.lisk.io',
-  'hub37.lisk.io',
-  'hub38.lisk.io',
+  'hub21.lisk.com',
+  'hub22.lisk.com',
+  'hub23.lisk.com',
+  'hub24.lisk.com',
+  'hub25.lisk.com',
+  'hub26.lisk.com',
+  'hub27.lisk.com',
+  'hub28.lisk.com',
+  'hub31.lisk.com',
+  'hub32.lisk.com',
+  'hub33.lisk.com',
+  'hub34.lisk.com',
+  'hub35.lisk.com',
+  'hub36.lisk.com',
+  'hub37.lisk.com',
+  'hub38.lisk.com',
 ];
 
 export const netHash = {
