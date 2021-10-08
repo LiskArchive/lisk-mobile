@@ -121,7 +121,7 @@ class Item extends React.Component {
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>
               {activeToken === 'LSK' && !isTransfer(tx)
-                ? t(getTxConstant(tx)?.title)
+                ? t(getTxConstant(tx).title)
                 : addressText}
             </B>
             <TimeStamp

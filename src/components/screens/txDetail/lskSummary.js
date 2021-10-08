@@ -45,7 +45,7 @@ const Graphics = ({
     {!isTransfer(tx) ? (
       <Image
         style={{ width: 40, height: 40 }}
-        source={getTxConstant(tx)?.image?.(theme)}
+        source={getTxConstant(tx).image(theme)}
       />
     ) : (
       <Fragment>
@@ -102,7 +102,7 @@ const LskSummary = ({
         config={config}
       />
       {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
-        <H3 style={config.amountStyle}>{t(getTxConstant(tx)?.title)}</H3>
+        <H3 style={config.amountStyle}>{t(getTxConstant(tx).title)}</H3>
       ) : null}
       {isTransfer(tx) && !incognito ? (
         <H3 style={config.amountStyle}>
