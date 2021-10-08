@@ -12,12 +12,12 @@ const Row = ({
 }) => (
   <View style={[styles.detailRow, styles.theme.detailRow]}>
     <View style={styles.rowIconWrapper}>
-      <Icon
+      {icon && <Icon
         name={icon}
         size={20}
         style={styles.rowIcon}
         color={colors[theme].blueGray}
-      />
+      />}
     </View>
     <View style={styles.rowContent}>
       <P style={[styles.label, styles.theme.label]}>{t(title)}</P>
