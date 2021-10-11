@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import txConstants from '../constants/transactions';
+import txConstants, { moduleAssetNameIdMap } from '../constants/transactions';
 import actionTypes from '../constants/actions';
 import {
   transactionsLoaded,
@@ -153,7 +153,7 @@ describe('Action: Accounts', () => {
       amount: 1000,
       recipientAddress: 'recipientAddress',
       reference: 'test ref',
-      fee: txConstants.send.fee,
+      fee: txConstants[moduleAssetNameIdMap.transfer].fee
     };
 
     it('should call pendingTransactionAdded when send request is successful', async () => {
@@ -169,7 +169,7 @@ describe('Action: Accounts', () => {
             fee: inputData.fee,
             amount: inputData.amount,
             data: inputData.reference,
-            moduleAssetId: txConstants.send.moduleAssetId,
+            moduleAssetId: txConstants[moduleAssetNameIdMap.transfer].moduleAssetId,
           },
         },
       ];
