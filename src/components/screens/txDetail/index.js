@@ -175,7 +175,7 @@ class TransactionDetail extends React.Component {
           <Row icon={'delegate'} title={'Delegate username'}>
             <View>
               <B style={[styles.value, styles.theme.value]}>
-                {tx.delegate.username}
+                {tx.delegate}
               </B>
             </View>
           </Row>
