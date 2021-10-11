@@ -7,6 +7,7 @@ global.setInterval = BackgroundTimer.setInterval.bind(BackgroundTimer);
 global.clearTimeout = BackgroundTimer.clearTimeout.bind(BackgroundTimer);
 global.clearInterval = BackgroundTimer.clearInterval.bind(BackgroundTimer);
 
+if (typeof BigInt === 'undefined') global.BigInt = require('big-integer')
 if (typeof __dirname === 'undefined') global.__dirname = '/'
 if (typeof __filename === 'undefined') global.__filename = ''
 if (typeof process === 'undefined') {
