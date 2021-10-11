@@ -34,6 +34,7 @@ import { isRegistration, isTransfer, isVote } from '../../../constants/transacti
   }),
   {}
 )
+
 class TransactionDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -64,7 +65,6 @@ class TransactionDetail extends React.Component {
       action: backAction,
     });
   }
-
 
   // eslint-disable-next-line max-statements
   async retrieveTransaction(id, delay = 0) {
