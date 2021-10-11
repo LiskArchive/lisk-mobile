@@ -129,4 +129,6 @@ export const isRegistration = ({ moduleAssetId }) =>
 
 export const isVote = ({ moduleAssetId }) => moduleAssetId === moduleAssetNameIdMap.voteDelegate;
 
+export const isUnlock = ({ moduleAssetId }) => moduleAssetId === moduleAssetNameIdMap.unlockToken;
+
 export default transactions;
