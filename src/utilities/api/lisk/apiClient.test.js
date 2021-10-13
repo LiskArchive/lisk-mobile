@@ -1,6 +1,5 @@
 import { apiClient } from './apiClient';
 
-const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 const account = {
   address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw',
   balance: '10000',
