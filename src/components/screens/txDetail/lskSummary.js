@@ -7,7 +7,7 @@ import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../../shared/formattedNumber';
 import { P, H3 } from '../../shared/toolBox/typography';
 import Avatar from '../../shared/avatar';
-import { getTxConstant, isTransfer, isUnlock } from '../../../constants/transactions';
+import { getTxConstant, isTransfer } from '../../../constants/transactions';
 import Blur from '../../shared/transactions/blur';
 import arrowLight from '../../../assets/images/txDetail/arrow-light2x.png';
 import arrowDark from '../../../assets/images/txDetail/arrow-dark2x.png';
@@ -104,7 +104,7 @@ const LskSummary = ({
       {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
         <H3 style={config.amountStyle}>{t(getTxConstant(tx).title)}</H3>
       ) : null}
-      {(isTransfer(tx) || isUnlock(tx)) && !incognito ? (
+      {isTransfer(tx) && !incognito ? (
         <H3 style={config.amountStyle}>
           {config.amountSign}
           <FormattedNumber language={language}>
@@ -112,7 +112,7 @@ const LskSummary = ({
           </FormattedNumber>
         </H3>
       ) : null}
-      {(isTransfer(tx) || isUnlock(tx)) && incognito ? (
+      {isTransfer(tx) && incognito ? (
         <Blur
           value={amount}
           direction={config.direction}

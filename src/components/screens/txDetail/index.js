@@ -23,7 +23,9 @@ import { merge } from '../../../utilities/helpers';
 import {
   goToWallet, getAccountLabel, getAccountTitle, openExplorer
 } from './utils';
-import { isRegistration, isTransfer, isVote } from '../../../constants/transactions';
+import {
+  isRegistration, isTransfer, isVote, isUnlock,
+} from '../../../constants/transactions';
 
 @connect(
   state => ({
@@ -208,6 +210,17 @@ class TransactionDetail extends React.Component {
             </View>
           </Row>
         )}
+        {
+          !isUnlock(tx) ? null : (
+            <Row icon="amount" title="Amount">
+              <B style={[styles.value, styles.theme.value]}>
+                <FormattedNumber tokenType={activeToken} language={language}>
+                  {fromRawLsk(tx.amount)}
+                </FormattedNumber>
+              </B>
+            </Row>
+          )
+        }
         <Row icon="tx-fee" title="Transaction fee">
           <B style={[styles.value, styles.theme.value]}>
             <FormattedNumber tokenType={activeToken} language={language}>
