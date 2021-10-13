@@ -1,5 +1,10 @@
 import fetchMock from 'fetch-mock';
-import { getSummary, extractAddress } from './account';
+import {
+  getSummary,
+  extractAddress,
+  getDerivedPathFromPassphrase,
+  extractPublicKey,
+} from './account';
 
 const data = {
   passphrase:
@@ -52,6 +57,24 @@ describe('api/btc/account', () => {
       } catch (error) {
         expect(error).toBeTruthy();
       }
+    });
+  });
+
+  describe('getDerivedPathFromPassphrase', () => {
+    it('should return derivedPath object', () => {
+      const result = getDerivedPathFromPassphrase(data.passphrase);
+      const keys = Object.keys(result);
+      expect(keys).toContain('network');
+      expect(keys).toContain('chainCode');
+      expect(keys).toContain('lowR');
+      expect(Buffer.isBuffer(result.publicKey)).toEqual(true);
+    });
+  });
+
+  describe('extractPublicKey', () => {
+    it('should return a valid public key', () => {
+      const publicKey = extractPublicKey(data.passphrase);
+      expect(Buffer.isBuffer(publicKey)).toEqual(true);
     });
   });
 });

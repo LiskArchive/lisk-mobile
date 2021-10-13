@@ -134,9 +134,9 @@ class Item extends React.Component {
         </View>
         {isTransfer(tx) && (
           <View style={[styles.column, styles.amountWrapper]}>
-            {(activeToken === 'LSK' &&
-              tx.recipientAddress === tx.senderAddress) ||
-            incognito ? null : (
+            {(activeToken === 'LSK'
+              && tx.recipientAddress === tx.senderAddress)
+              || incognito ? null : (
               <View style={[styles[direction], styles.theme[direction]]}>
                 <FormattedNumber
                   trim={true}
@@ -151,7 +151,7 @@ class Item extends React.Component {
                   {amount}
                 </FormattedNumber>
               </View>
-            )}
+              )}
             {tx.recipientAddress !== tx.senderAddress && incognito ? (
               <Blur value={amount} direction={direction} />
             ) : null}
