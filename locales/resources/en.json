@@ -208,13 +208,14 @@
   "Make sure to initialize your account with an outgoing transaction, to improve even further the security of your account": "Make sure to initialize your account with an outgoing transaction, to improve even further the security of your account",
   "Message": "Message",
   "Message (optional)": "Message (optional)",
+  "Add Message (optional)": "Add Message (optional)",
   "Processing fee": "Processing fee",
   "Remind me later": "Remind me later",
   "Store your passphrase carefully": "Store your passphrase carefully",
   "Tap and fill in the blanks:": "Tap and fill in the blanks:",
   "Transaction fee": "Transaction fee",
   "You have no transactions yet.": "You have no transactions yet.",
-  "Your Balance": "Your Balance",
+  "Available Balance": "Available Balance",
   "Activity history": "Activity history",
   "Token transfer": "Token transfer",
   "Transfer your tokens easily to other accounts, by simply scanning QR Codes.": "Transfer your tokens easily to other accounts, by simply scanning QR Codes.",
@@ -222,6 +223,10 @@
   "Access all functions via advanced biometric authentication.": "Access all functions via advanced biometric authentication.",
   "Easy access": "Easy access",
   "Create an account with one passphrase to access your LSK and BTC cryptocurrencies.": "Create an account with one passphrase to access your LSK and BTC cryptocurrencies.",
-  "Votes": "Votes"
-
+  "Votes": "Votes",
+  "Send maximum amount": "Send maximum amount",
+  "Priority": "Priority",
+  "Low": "Low",
+  "Medium": "Medium",
+  "High": "High"
 }
