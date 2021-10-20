@@ -32,6 +32,7 @@
     "assert": "^2.0.0",
     "axios": "^0.21.1",
     "base-x": "^3.0.8",
+    "big-integer": "^1.6.49",
     "bignumber.js": "^9.0.1",
     "bip32": "^2.0.6",
     "bitcoinjs-lib": "^5.2.0",
