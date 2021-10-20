@@ -1,11 +1,10 @@
-/* eslint-disable max-lines */
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
 import { transactions } from '@liskhq/lisk-client';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
-import { fromRawLsk } from '../../../../../utilities/conversions';
+import { fromRawLsk, toRawLsk } from '../../../../../utilities/conversions';
 import reg from '../../../../../constants/regex';
 import { merge } from '../../../../../utilities/helpers';
 import * as apiClient from '../../../../../utilities/api';
@@ -19,9 +18,9 @@ import { languageMap } from '../../../../../constants/languages';
 import { transferAssetSchema } from '../../../../../constants/transactions';
 import Priority from './priority';
 import Message from './message';
-import { P } from '../../../../shared/toolBox/typography';
 
 const isAndroid = deviceType() === 'android';
+const DEFAULT_MIN_REMAINING_BALANCE = '5000000';
 
 const getTransferBytesSize = (nonce, amount) =>
   transactions.getBytes(transferAssetSchema, {
@@ -34,7 +33,7 @@ const getTransferBytesSize = (nonce, amount) =>
     senderPublicKey: Buffer.alloc(64),
     asset: {
       // eslint-disable-next-line no-undef
-      amount: BigInt(amount),
+      amount: BigInt(toRawLsk(Number(amount))),
       recipientAddress: Buffer.alloc(20),
       data: 'l'.repeat(64)
     },
@@ -58,19 +57,17 @@ class AmountLSK extends React.Component {
       wrapperStyle: {}
     },
     priority: null,
-    selectedPriority: 0
+    selectedPriority: 0,
+    isPriorityFetched: false
   };
 
   componentDidMount() {
     const { sharedData, pricesRetrieved, dynamicFeesRetrieved } = this.props;
-
     pricesRetrieved();
     dynamicFeesRetrieved();
-
     if (sharedData.amount) {
       this.onChange(sharedData.amount);
     }
-
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
@@ -79,27 +76,27 @@ class AmountLSK extends React.Component {
 
   getDynamicFees = async () => {
     const result = await apiClient.service.getDynamicFees('LSK');
-    if (result && result?.Low) {
+    if (result && result.Low) {
       this.setState({
         priority: [
           { title: 'Low', amount: result.Low },
           { title: 'Medium', amount: result.Medium },
           { title: 'High', amount: result.High }
-        ]
+        ],
+        isPriorityFetched: true
       });
     } else {
-      this.setState({ priority: null });
+      this.setState({ priority: null, isPriorityFetched: true });
     }
   };
 
-  onChangeMessage = (value) => {
+  onChangeMessage = (value) =>
     this.setState({
       reference: {
         value,
         validity: this.validator(value)
       }
     });
-  };
 
   validator = (str, fee) => {
     const {
@@ -107,16 +104,13 @@ class AmountLSK extends React.Component {
       accounts,
       settings: { token }
     } = this.props;
-
     if (str === '' || parseFloat(str) === 0) {
       return {
         code: -1,
         message: t('Please enter an amount.')
       };
     }
-
     let message = '';
-
     if (!reg.amount.test(str)) {
       message = t('The amount value is invalid.');
     } else if (
@@ -125,7 +119,6 @@ class AmountLSK extends React.Component {
     ) {
       message = t('Your balance is not sufficient.');
     }
-
     return {
       code: message ? 1 : 0,
       message
@@ -140,7 +133,6 @@ class AmountLSK extends React.Component {
     } else {
       value = value.replace(/\./g, ',');
     }
-
     this.setState({
       amount: {
         value,
@@ -149,41 +141,33 @@ class AmountLSK extends React.Component {
     });
   };
 
-  getFee = () => {
+  getFee = (amount) => {
     const { dynamicFees, accounts, settings } = this.props;
-    const { amount } = this.state;
-    const nonce = accounts.info[settings.token.active].nonce;
-    const size = getTransferBytesSize(nonce, amount.value);
+    const size = getTransferBytesSize(accounts.info[settings.token.active].nonce, amount.value);
     const fee = size * 1000 + dynamicFees.Low * size;
     return fee;
   };
 
-  // eslint-disable-next-line max-statements
   onSubmit = () => {
+    const { t, nextStep, sharedData } = this.props;
     const {
-      t, nextStep, sharedData, dynamicFees, accounts, settings
-    } = this.props;
-    const { amount } = this.state;
-    const nonce = accounts.info[settings.token.active].nonce;
-    const size = getTransferBytesSize(nonce, amount.value);
-    const fee = size * 1000 + dynamicFees.Low * size;
+      amount, selectedPriority, priority, reference
+    } = this.state;
+    const fee = priority ? priority[selectedPriority].amount : this.getFee(amount);
+    const transactionPriority = priority ? priority[selectedPriority] : null;
     const validity = this.validator(amount.normalizedValue, fee);
-
-    const { reference } = this.state;
     const messageValidity = this.messageValidator(reference.value);
-
     if (validity.code === 0 && messageValidity === 0) {
       DropDownHolder.closeAlert();
-
       return nextStep(
         merge(sharedData, {
           reference: reference.value,
           amount: amount.normalizedValue,
-          fee
+          fee,
+          priority: transactionPriority && transactionPriority.title
         })
       );
     }
-
     return DropDownHolder.error(t('Error'), validity.message);
   };
 
@@ -207,9 +191,7 @@ class AmountLSK extends React.Component {
     const {
       amount: { value, normalizedValue }
     } = this.state;
-
     let valueInCurrency = 0;
-
     if (
       value
       && this.validator(normalizedValue, 0).code === 0
@@ -218,7 +200,6 @@ class AmountLSK extends React.Component {
       valueInCurrency = (normalizedValue * priceTicker[token.active][currency]).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
-
     return this.localizeAmount(valueInCurrency);
   }
 
@@ -228,7 +209,6 @@ class AmountLSK extends React.Component {
     } = this.props;
     const token = settings?.token?.active;
     const ratio = priceTicker[token][settings?.currency];
-
     if (ratio) {
       return (fromRawLsk(accounts.info[settings?.token?.active]?.balance) * ratio).toLocaleString(
         `${language}-${language.toUpperCase()}`,
@@ -237,6 +217,17 @@ class AmountLSK extends React.Component {
     }
     return 0;
   }
+
+  sendMaximum = () => {
+    const { accounts, settings } = this.props;
+    const balance = accounts.info[settings.token.active].balance;
+    const maximumFee = this.getFee({
+      value: balance,
+      normalizedValue: balance.replace(/[^0-9]/g, '.')
+    });
+    const maximumBalance = balance - maximumFee - DEFAULT_MIN_REMAINING_BALANCE;
+    this.onChange(fromRawLsk(maximumBalance).toString());
+  };
 
   onChangePriority = (i) => {
     this.setState({ selectedPriority: i });
@@ -250,7 +241,8 @@ class AmountLSK extends React.Component {
       amount,
       reference: { validity, value },
       priority,
-      selectedPriority
+      selectedPriority,
+      isPriorityFetched
     } = this.state;
 
     const byteCount = encodeURI(value).split(/%..|./).length - 1;
@@ -264,6 +256,7 @@ class AmountLSK extends React.Component {
           button={{
             title: t('Continue')
           }}
+          disabled={!isPriorityFetched}
         >
           <View>
             <Balance
@@ -275,7 +268,6 @@ class AmountLSK extends React.Component {
               valueInCurrency={this.getBalanceInCurrency()}
               priceTicker={priceTicker}
             />
-
             <Input
               reference={(el) => {
                 this.input = el;
@@ -283,9 +275,7 @@ class AmountLSK extends React.Component {
               autoFocus={!isAndroid}
               label={t('Amount (LSK)', { tokenType: 'LSK' })}
               sendMaximumLabel={t('Send maximum amount')}
-              sendMaximum={() => {
-                console.log('pressed');
-              }}
+              sendMaximum={this.sendMaximum}
               value={amount.value}
               onChange={this.onChange}
               keyboardType="numeric"
@@ -293,10 +283,10 @@ class AmountLSK extends React.Component {
               valueInCurrency={this.getValueInCurrency()}
             />
             <Priority
-              fees={this.state.priority}
+              fees={priority}
               selected={selectedPriority}
               onChange={this.onChangePriority}
-              transactionFee={fromRawLsk(this.getFee())}
+              transactionFee={fromRawLsk(this.getFee(amount))}
             />
             <Message
               value={value}

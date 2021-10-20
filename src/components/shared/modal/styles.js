@@ -18,8 +18,8 @@ export default () => ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       width: '100%',
-      borderTopLeftRadius: 5,
-      borderTopRightRadius: 5,
+      borderTopLeftRadius: 15,
+      borderTopRightRadius: 15,
       overflow: 'hidden',
     },
     titleContainer: {

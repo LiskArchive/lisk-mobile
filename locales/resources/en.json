@@ -228,5 +228,8 @@
   "Priority": "Priority",
   "Low": "Low",
   "Medium": "Medium",
-  "High": "High"
+  "High": "High",
+  "The time taken to expedite the transaction is mainly dependent on the fee.": "The time taken to expedite the transaction is mainly dependent on the fee.",
+  "The higher the fee, the faster the transaction will be confirmed.": "The higher the fee, the faster the transaction will be confirmed.",
+  "Got it": "Got it"
 }

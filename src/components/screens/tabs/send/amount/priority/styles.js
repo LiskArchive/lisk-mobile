@@ -14,6 +14,10 @@ export default () => ({
       fontSize: 15,
       marginBottom: 5,
     },
+    modalText: {
+      fontSize: 15,
+      marginBottom: 10,
+    },
     infoButton: {
       paddingHorizontal: 10
     },
@@ -29,12 +33,25 @@ export default () => ({
     },
     feeText: {
       textAlign: 'center'
+    },
+    modalButton: {
+      paddingVertical: 10,
+    },
+    buttonText: {
+      fontSize: 16,
+      color: colors.light.ultramarineBlue,
     }
   },
 
   [themes.light]: {
     title: {
       color: colors.light.zodiacBlue
+    },
+    amount: {
+      color: colors.light.black
+    },
+    modalText: {
+      color: colors.light.black
     },
     feeText: {
       color: colors.dark.blueGray
@@ -44,11 +61,17 @@ export default () => ({
     },
     activeFee: {
       borderColor: colors.light.ultramarineBlue
-    }
+    },
   },
   [themes.dark]: {
     title: {
       color: colors.dark.whiteSmoke
+    },
+    amount: {
+      color: colors.light.whiteSmoke
+    },
+    modalText: {
+      color: colors.light.whiteSmoke
     },
     feeText: {
       color: colors.dark.blueGray

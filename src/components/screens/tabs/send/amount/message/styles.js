@@ -38,17 +38,28 @@ export default () => ({
     },
     actionButton: {
       paddingHorizontal: 10
-    }
+    },
+    modalText: {
+      fontSize: 15,
+      marginBottom: 10,
+    },
   },
   [themes.light]: {
     label: {
       color: colors.light.zodiacBlue
-    }
+    },
+    modalText: {
+      color: colors.light.black
+    },
   },
 
   [themes.dark]: {
     label: {
       color: colors.dark.whiteSmoke
-    }
+    },
+    modalText: {
+      color: colors.dark.whiteSmoke
+
+    },
   }
 });

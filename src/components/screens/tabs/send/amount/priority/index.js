@@ -9,8 +9,20 @@ import InfoSvg from '../../../../../../assets/svgs/InfoSvg';
 import { colors } from '../../../../../../constants/styleGuide';
 import FormattedNumber from '../../../../../shared/formattedNumber';
 import { fromRawLsk } from '../../../../../../utilities/conversions';
+import ModalHolder from '../../../../../../utilities/modal';
 
 const svgcolor = { dark: colors.light.whiteSmoke, light: colors.light.zodiacBlue };
+
+const PriorityInfo = ({ t, styles }) => (
+  <View>
+    <P style={[styles.modalText, styles.theme.modalText]}>
+      {t('The time taken to expedite the transaction is mainly dependent on the fee.')}
+    </P>
+    <P style={[styles.modalText, styles.theme.modalText]}>
+      {t('The higher the fee, the faster the transaction will be confirmed.')}
+    </P>
+  </View>
+);
 
 const PriorityFee = ({
   fee, styles, isSelected, onChange
@@ -31,32 +43,42 @@ const PriorityFee = ({
 
 const Priority = ({
   t, styles, theme, fees = [], selected, onChange, transactionFee
-}) => (
-  <View style={[styles.container]}>
-    <View style={styles.row}>
-      <P style={[styles.title, styles.theme.title]}>
-        {t(fees?.length ? 'Priority' : 'Transaction Fee')}
-      </P>
-      <TouchableOpacity style={styles.infoButton}>
-        <InfoSvg color={svgcolor[theme]} />
-      </TouchableOpacity>
+}) => {
+  const openInfoModal = () => {
+    ModalHolder.open({
+      component: () => <PriorityInfo t={t} styles={styles}/>,
+    });
+  };
+
+  return (
+    <View style={[styles.container]}>
+      <View style={styles.row}>
+        <P style={[styles.title, styles.theme.title]}>
+          {t(fees?.length ? 'Priority' : 'Transaction Fee')}
+        </P>
+        <TouchableOpacity style={styles.infoButton} onPress={openInfoModal}>
+          <InfoSvg color={svgcolor[theme]} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.row}>
+        {fees?.length ? (
+          fees.map((fee, i) => (
+            <PriorityFee
+              key={`${fee.amount}-${fee.title}`}
+              fee={fee}
+              styles={styles}
+              isSelected={selected === i}
+              onChange={() => onChange(i)}
+            />
+          ))
+        ) : (
+          <FormattedNumber type={B} style={[styles.theme.amount]}>
+            {transactionFee}
+          </FormattedNumber>
+        )}
+      </View>
     </View>
-    <View style={styles.row}>
-      {fees?.length ? (
-        fees.map((fee, i) => (
-          <PriorityFee
-            key={`${fee.amount}-${fee.title}`}
-            fee={fee}
-            styles={styles}
-            isSelected={selected === i}
-            onChange={() => onChange(i)}
-          />
-        ))
-      ) : (
-        <FormattedNumber type={B}>{transactionFee}</FormattedNumber>
-      )}
-    </View>
-  </View>
-);
+  );
+};
 
 export default withTheme(translate()(Priority), getStyles());
