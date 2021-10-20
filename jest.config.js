@@ -23,6 +23,7 @@ module.exports = {
     'src/utilities/easing.js',
     'src/utilities/networks.js',
     'src/utilities/passphrase.js',
+    'src/utilities/api/account.js',
   ],
   coverageThreshold: {
     global: {
