@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
+import { TextEncoder } from 'text-encoding';
 import connect from 'redux-connect-decorator';
 import { transactions } from '@liskhq/lisk-client';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
