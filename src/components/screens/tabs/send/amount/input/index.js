@@ -11,6 +11,7 @@ const AmountInput = ({
   styles,
   sendMaximumLabel,
   sendMaximum,
+  errorMessage,
   ...rest
 }) => (
   <View>
@@ -31,6 +32,7 @@ const AmountInput = ({
       </View>
     ) : null}
     <Input {...rest} innerStyles={{ input: styles.input }} label={undefined} />
+    <Text style={[styles.inputLabel, styles.theme.label]}>{errorMessage}</Text>
   </View>
 );
 

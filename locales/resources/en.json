@@ -231,5 +231,6 @@
   "High": "High",
   "The time taken to expedite the transaction is mainly dependent on the fee.": "The time taken to expedite the transaction is mainly dependent on the fee.",
   "The higher the fee, the faster the transaction will be confirmed.": "The higher the fee, the faster the transaction will be confirmed.",
-  "Got it": "Got it"
+  "Got it": "Got it",
+  "Provide a correct amount of LSK": "Provide a correct amount of LSK"
 }
