@@ -40,16 +40,7 @@ const Message = ({
     });
   return (
     <View>
-      {collapsed ? (
-        <TouchableOpacity onPress={() => setCollapsed(false)} style={[styles.addMessage]}>
-          <View style={styles.row}>
-            <TouchableOpacity style={styles.actionButton}>
-              <AddSvg color={colors.light.ultramarineBlue} />
-            </TouchableOpacity>
-            <P style={[styles.title, styles.theme.title]}>{t('Add Message (optional)')}</P>
-          </View>
-        </TouchableOpacity>
-      ) : (
+      {value || !collapsed ? (
         <FadeInView>
           <View style={styles.labelRow}>
             <View style={styles.row}>
@@ -83,6 +74,15 @@ const Message = ({
             />
           </View>
         </FadeInView>
+      ) : (
+        <TouchableOpacity onPress={() => setCollapsed(false)} style={[styles.addMessage]}>
+          <View style={styles.row}>
+            <TouchableOpacity style={styles.actionButton}>
+              <AddSvg color={colors.light.ultramarineBlue} />
+            </TouchableOpacity>
+            <P style={[styles.title, styles.theme.title]}>{t('Add Message (optional)')}</P>
+          </View>
+        </TouchableOpacity>
       )}
     </View>
   );

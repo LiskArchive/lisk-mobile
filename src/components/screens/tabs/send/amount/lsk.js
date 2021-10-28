@@ -72,6 +72,10 @@ class AmountLSK extends React.Component {
     if (sharedData.amount) {
       this.onChange(sharedData.amount);
     }
+    if (sharedData.reference) {
+      this.onChangeMessage(sharedData.reference)
+      this.setState()
+    }
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
