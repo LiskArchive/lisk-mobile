@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable no-undef */
 import React from 'react';
 import { View } from 'react-native';
@@ -7,8 +8,7 @@ import { TextEncoder } from 'text-encoding';
 import { transactions } from '@liskhq/lisk-client';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import { fromRawLsk, toRawLsk } from '../../../../../utilities/conversions';
-import reg from '../../../../../constants/regex';
-import { merge } from '../../../../../utilities/helpers';
+import { merge, validateAmount } from '../../../../../utilities/helpers';
 import * as apiClient from '../../../../../utilities/api';
 import Balance from './balance';
 import Input from './input';
@@ -84,6 +84,7 @@ class AmountLSK extends React.Component {
   };
 
   getFee = (amount) => {
+    if (!validateAmount(amount)) return 0;
     const rawTrx = this.getRawTransaction(amount, this.state.reference.value);
     const minFee = transactions.computeMinFee(transactionConstants.transferAssetSchema, rawTrx);
     return minFee;
@@ -92,7 +93,7 @@ class AmountLSK extends React.Component {
   getPriorityFee = (amount, priority, priorityFeePerByte) => {
     if (this.state.errorMessage !== '') return;
     const rawTrx = this.getRawTransaction(amount);
-    const minFee = this.getFee({ value: amount });
+    const minFee = this.getFee(amount);
     const size = transactions.getBytes(transactionConstants.transferAssetSchema, rawTrx).length;
     const moduleAssetId = `${rawTrx.moduleID}:${rawTrx.assetID}`;
     const maxAssetFee = transactionConstants.transactions[moduleAssetId].fee;
@@ -148,7 +149,7 @@ class AmountLSK extends React.Component {
       };
     }
     let message = '';
-    if (!reg.amount.test(str)) {
+    if (!validateAmount(str)) {
       message = t('The amount value is invalid.');
     } else if (
       accounts.info[token.active].balance < fee
@@ -164,9 +165,8 @@ class AmountLSK extends React.Component {
 
   onChange = (value) => {
     const { language, t } = this.props;
-    const validNumber = new RegExp(/^\d*\.?\d*$/);
     let errorMessage = '';
-    if (!validNumber.test(value)) {
+    if (value && !validateAmount(value)) {
       errorMessage = t('Provide a correct amount of LSK');
     }
     if (language === languageMap.en.code) {
@@ -191,15 +191,17 @@ class AmountLSK extends React.Component {
     const validity = this.validator(amount, fee);
     if (validity.code === 0 && this.messageValidator(reference.value) === 0) {
       DropDownHolder.closeAlert();
+      // eslint-disable-next-line consistent-return
       return nextStep(
         merge(sharedData, {
           reference: reference.value,
-          amount: amount,
+          amount,
           fee,
           priority: transactionPriority && transactionPriority.title
         })
       );
     }
+    // eslint-disable-next-line consistent-return
     return DropDownHolder.error(t('Error'), validity.message);
   };
 
@@ -220,9 +222,7 @@ class AmountLSK extends React.Component {
       priceTicker,
       settings: { currency, token }
     } = this.props;
-    const {
-      amount
-    } = this.state;
+    const { amount } = this.state;
     let valueInCurrency = 0;
     if (
       amount
@@ -253,10 +253,7 @@ class AmountLSK extends React.Component {
   sendMaximum = () => {
     const { accounts, settings } = this.props;
     const balance = accounts.info[settings.token.active].balance;
-    const maximumFee = this.getFee({
-      value: balance,
-      normalizedValue: balance.replace(/[^0-9]/g, '.')
-    });
+    const maximumFee = this.getFee(balance);
     const maximumBalance = BigInt(balance) - maximumFee - BigInt(DEFAULT_MIN_REMAINING_BALANCE);
     this.onChange(fromRawLsk(maximumBalance).toString());
   };
@@ -272,7 +269,6 @@ class AmountLSK extends React.Component {
     const {
       amount,
       reference: { validity, value },
-      priority,
       selectedPriority,
       isPriorityFetched
     } = this.state;
