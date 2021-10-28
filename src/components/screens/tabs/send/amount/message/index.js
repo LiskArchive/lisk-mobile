@@ -23,7 +23,9 @@ const MessageInfo = ({ t, styles }) => (
         'Lisk counts your message in bytes, so keep in mind that the length of your message may vary in different languages.'
       )}
     </P>
-    <P style={[styles.modalText, styles.theme.modalText]}>{t('Different characters may consume a varying amount of bytes.')}</P>
+    <P style={[styles.modalText, styles.theme.modalText]}>
+      {t('Different characters may consume a varying amount of bytes.')}
+    </P>
   </View>
 );
 
@@ -74,7 +76,11 @@ const Message = ({
               value={value}
               error={validity === 1 ? t('Maximum length of 64 bytes is exceeded.') : ''}
             />
-            <CircularProgress style={styles.circularProgress} max={64} value={byteCount} />
+            <CircularProgress
+              style={[styles.circularProgress, validity === 1 && styles.errorProgress]}
+              max={64}
+              value={byteCount}
+            />
           </View>
         </FadeInView>
       )}

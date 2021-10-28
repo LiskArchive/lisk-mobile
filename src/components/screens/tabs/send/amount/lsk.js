@@ -132,7 +132,7 @@ class AmountLSK extends React.Component {
     this.setState({
       reference: {
         value,
-        validity: this.validator(value)
+        validity: this.messageValidator(value)
       }
     });
 

@@ -26,6 +26,9 @@ export default () => ({
       width: 20,
       height: 20
     },
+    errorProgress: {
+      bottom: 68,
+    },
     labelRow: {
       paddingHorizontal: 20,
       paddingTop: 20,
