@@ -88,7 +88,7 @@ class AmountLSK extends React.Component {
   };
 
   getFee = (amount) => {
-    if (!validateAmount(amount)) return 0;
+    if (amount && !validateAmount(amount)) return 0;
     const rawTrx = this.getRawTransaction(amount, this.state.reference.value);
     const minFee = transactions.computeMinFee(transactionConstants.transferAssetSchema, rawTrx);
     return minFee;
