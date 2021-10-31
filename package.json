@@ -124,6 +124,8 @@
     "@babel/preset-stage-2": "^7.8.3",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@testing-library/jest-native": "^4.0.2",
+    "@testing-library/react-native": "^8.0.0",
     "asyncstorage-down": "^4.2.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
