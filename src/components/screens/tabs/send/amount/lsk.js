@@ -66,20 +66,25 @@ class AmountLSK extends React.Component {
   };
 
   componentDidMount() {
-    const { sharedData, pricesRetrieved, dynamicFeesRetrieved } = this.props;
+    const { pricesRetrieved, dynamicFeesRetrieved } = this.props;
     pricesRetrieved();
     dynamicFeesRetrieved();
-    if (sharedData.amount) {
-      this.onChange(sharedData.amount);
-    }
-    if (sharedData.reference) {
-      this.onChangeMessage(sharedData.reference)
-      this.setState()
-    }
+    this.loadInitialData();
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
     this.getDynamicFees();
+  }
+
+  loadInitialData() {
+    const { sharedData } = this.props;
+    if (sharedData.amount) {
+      this.onChange(sharedData.amount);
+    }
+    if (sharedData.reference) {
+      this.onChangeMessage(sharedData.reference);
+      this.setState();
+    }
   }
 
   getRawTransaction = (amount, message = '') => {
@@ -95,7 +100,7 @@ class AmountLSK extends React.Component {
   };
 
   getPriorityFee = (amount, priority, priorityFeePerByte) => {
-    if (this.state.errorMessage !== '') return;
+    if (amount && !validateAmount(amount)) return;
     const rawTrx = this.getRawTransaction(amount);
     const minFee = this.getFee(amount);
     const size = transactions.getBytes(transactionConstants.transferAssetSchema, rawTrx).length;
