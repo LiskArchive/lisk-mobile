@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Image, Text, ImageBackground } from 'react-native';
+import {
+  View, Image, Text, ImageBackground
+} from 'react-native';
 import { translate } from 'react-i18next';
 import { B, P } from '../../../../../shared/toolBox/typography';
 import FormattedNumber from '../../../../../shared/formattedNumber';
@@ -7,7 +9,7 @@ import withTheme from '../../../../../shared/withTheme';
 import getStyles from './styles';
 import darkBlur from '../../../../../../assets/images/amountFormBalanceBlur/dark.png';
 import lightBlur from '../../../../../../assets/images/amountFormBalanceBlur/light.png';
-import amountBg from '../../../../../../assets/images/amount-bg.png'
+import amountBg from '../../../../../../assets/images/amount-bg.png';
 
 const blurs = { dark: darkBlur, light: lightBlur };
 
