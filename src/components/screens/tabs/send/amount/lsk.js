@@ -105,6 +105,7 @@ class AmountLSK extends React.Component {
     const size = transactions.getBytes(transactionConstants.transferAssetSchema, rawTrx).length;
     const moduleAssetId = `${rawTrx.moduleID}:${rawTrx.assetID}`;
     const maxAssetFee = transactionConstants.transactions[moduleAssetId].fee;
+    // eslint-disable-next-line consistent-return
     return calculateDynamicFee(priority, priorityFeePerByte, size, minFee, maxAssetFee);
   };
 
