@@ -42,6 +42,7 @@ class Input extends React.Component {
       secureTextEntry,
       placeholder,
       testID,
+      accessibilityLabel
     } = this.props;
 
     let { keyboardAppearance } = this.props;
@@ -94,6 +95,7 @@ class Input extends React.Component {
           secureTextEntry={secureTextEntry}
           onBlur={this.onBlur}
           placeholder={placeholder}
+          accessibilityLabel={accessibilityLabel}
         />
 
         {error ? (

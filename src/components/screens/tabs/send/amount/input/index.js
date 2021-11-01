@@ -31,7 +31,7 @@ const AmountInput = ({
         </Text>
       </View>
     ) : null}
-    <Input {...rest} innerStyles={{ input: styles.input }} label={undefined} error={errorMessage} />
+    <Input {...rest} innerStyles={{ input: styles.input }} label={undefined} error={errorMessage} accessibilityLabel="amount-input" />
   </View>
 );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import SendLsk from '../lsk';
@@ -76,4 +76,38 @@ test('Renders correct balance of User LSK', () => {
   );
 
   expect(getAllByText('1 LSK')).toHaveLength(1);
+});
+
+test("Calculates transaction fee if there's no priority", () => {
+  const { getAllByText } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} />
+    </Provider>
+  );
+
+  expect(getAllByText('0.00138 LSK')).toHaveLength(1);
+});
+
+test('Re-Calculates transaction fee when the amount to send is changed', () => {
+  const { getAllByText, getByLabelText } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} />
+    </Provider>
+  );
+
+  const input = getByLabelText('amount-input');
+
+  fireEvent.changeText(input, '1');
+
+  expect(getAllByText('0.00141 LSK')).toHaveLength(1);
+});
+
+test('Re-Calculates transaction fee when message is added', () => {
+  const { getAllByText } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} sharedData={{ reference: 'Message' }} />
+    </Provider>
+  );
+
+  expect(getAllByText('0.00145 LSK')).toHaveLength(1);
 });

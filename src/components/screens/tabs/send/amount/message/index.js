@@ -45,7 +45,7 @@ const Message = ({
           <View style={styles.labelRow}>
             <View style={styles.row}>
               <P style={[styles.label, styles.theme.label]}>{t('Message (optional)')}</P>
-              <TouchableOpacity style={styles.actionButton} onPress={openModal}>
+              <TouchableOpacity style={styles.actionButton} onPress={openModal} >
                 <InfoSvg color={svgcolor[theme]} />
               </TouchableOpacity>
             </View>
@@ -66,6 +66,7 @@ const Message = ({
               onChange={onChange}
               value={value}
               error={validity === 1 ? t('Maximum length of 64 bytes is exceeded.') : ''}
+              accessibilityLabel="message-input"
             />
             <CircularProgress
               style={[styles.circularProgress, validity === 1 && styles.errorProgress]}
@@ -75,7 +76,7 @@ const Message = ({
           </View>
         </FadeInView>
       ) : (
-        <TouchableOpacity onPress={() => setCollapsed(false)} style={[styles.addMessage]}>
+        <TouchableOpacity onPress={() => setCollapsed(false)} style={[styles.addMessage]} accessibilityLabel="open-message">
           <View style={styles.row}>
             <TouchableOpacity style={styles.actionButton}>
               <AddSvg color={colors.light.ultramarineBlue} />
