@@ -83,7 +83,6 @@ class AmountLSK extends React.Component {
     }
     if (sharedData.reference) {
       this.onChangeMessage(sharedData.reference);
-      this.setState();
     }
   }
 
