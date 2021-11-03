@@ -84,7 +84,7 @@ class AmountLSK extends React.Component {
     }
   }
 
-  getRawTransaction = (amount, message = '') => {
+  getRawTransaction = (amount, message) => {
     const { accounts, settings } = this.props;
     return createTransactionObject(accounts.info[settings.token.active].nonce, amount, message);
   };
