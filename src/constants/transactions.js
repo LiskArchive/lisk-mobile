@@ -15,6 +15,9 @@ import txUnlockDark from '../assets/images/txDetail/tx-unlock-dark.png';
 import txUnknownLight from '../assets/images/txDetail/tx-unknown-light.png';
 import txUnknownDark from '../assets/images/txDetail/tx-unknown-dark.png';
 
+export const DEFAULT_MIN_REMAINING_BALANCE = '5000000';
+export const MIN_FEE_PER_BYTE = 1000;
+
 const modules = {
   token: 2,
   dpos: 5,

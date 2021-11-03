@@ -4,38 +4,63 @@ export default () => ({
   common: {
     balanceContainer: {
       flexDirection: 'column',
-      paddingTop: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
-      paddingLeft: boxes.boxPadding,
+      marginTop: boxes.boxPadding,
+      marginRight: boxes.boxPadding,
+      marginLeft: boxes.boxPadding,
+      padding: 10,
       marginBottom: 5,
+      borderRadius: 5,
+      shadowOffset: {
+        width: 0,
+        height: 1
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+      elevation: 3,
     },
     balanceContainerIncognito: {
       paddingTop: boxes.boxPadding - 2,
-      paddingBottom: boxes.boxPadding - 2,
+      paddingBottom: boxes.boxPadding - 2
     },
     balanceText: {
       fontSize: 13,
-      paddingRight: 4,
+      marginBottom: 5
     },
     balanceNumber: {
-      fontSize: 16,
-      color: colors.light.ultramarineBlue,
+      fontSize: 18,
+      color: colors.light.ultramarineBlue
     },
     balanceIncognito: {
       width: 80,
-      height: 20,
+      height: 20
     },
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-end'
+    },
+    translated: {
+      fontSize: 13,
+      color: colors.light.ultramarineBlue
+    }
   },
 
   [themes.light]: {
-    balanceText: {
-      color: colors.light.slateGray,
+    balanceContainer: {
+      backgroundColor: colors.light.white,
+      shadowColor: colors.light.black,
     },
+    balanceText: {
+      color: colors.light.inkBlue,
+    }
   },
-
   [themes.dark]: {
+    balanceContainer: {
+      backgroundColor: colors.light.black,
+      shadowColor: colors.light.whiteSmoke,
+    },
     balanceText: {
       color: colors.dark.platinum,
-    },
-  },
+    }
+  }
 });

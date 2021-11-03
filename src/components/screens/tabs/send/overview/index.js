@@ -9,9 +9,7 @@ import { toRawLsk, fromRawLsk } from '../../../../../utilities/conversions';
 import { PrimaryButton } from '../../../../shared/toolBox/button';
 import Avatar from '../../../../shared/avatar';
 import Icon from '../../../../shared/toolBox/icon';
-import {
-  H4, B, P
-} from '../../../../shared/toolBox/typography';
+import { H4, B, P } from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { colors } from '../../../../../constants/styleGuide';
@@ -20,34 +18,34 @@ import DropDownHolder from '../../../../../utilities/alert';
 import HeaderBackButton from '../../../router/headerBackButton';
 import ReadMore from './readMore';
 
-const getTranslatedMessages = t => ({
+const getTranslatedMessages = (t) => ({
   initialize: {
     title: t('Initialize your account'),
     subtitle: t(
       'By initializing your account, you are taking an additional step towards securing your account.'
     ),
     button: t('Initialize now'),
-    reference: t('Account initialization'),
+    reference: t('Account initialization')
   },
   send: {
     title: t('Ready to send'),
     button: t('Send now'),
-    buttonBusy: t('Sending'),
-  },
+    buttonBusy: t('Sending')
+  }
 });
 
 @connect(
-  state => ({
-    language: state.settings.language,
+  (state) => ({
+    language: state.settings.language
   }),
   {
-    transactionAdded: transactionAddedAction,
+    transactionAdded: transactionAddedAction
   }
 )
 class Overview extends React.Component {
   state = {
     initialize: false,
-    busy: false,
+    busy: false
   };
 
   componentDidMount() {
@@ -57,17 +55,17 @@ class Overview extends React.Component {
     const { send, initialize } = getTranslatedMessages(t);
     let options = {
       title: send.title,
-      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />,
+      headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />
     };
 
     if (route.params?.initialize) {
       this.setState({
-        initialize: true,
+        initialize: true
       });
 
       options = {
         title: initialize.title,
-        headerLeft: () => null,
+        headerLeft: () => null
       };
     }
 
@@ -84,7 +82,7 @@ class Overview extends React.Component {
       const { initialize, send } = getTranslatedMessages(t);
 
       navigation.setOptions({
-        title: route.params?.initialize ? initialize : send,
+        title: route.params?.initialize ? initialize : send
       });
     }
   }
@@ -92,7 +90,7 @@ class Overview extends React.Component {
   componentWillUnmount() {
     const {
       t,
-      navigation: { setParams },
+      navigation: { setParams }
     } = this.props;
     setParams({ title: t('Send') });
   }
@@ -104,13 +102,8 @@ class Overview extends React.Component {
       t,
       accounts: { passphrase },
       sharedData: {
-        amount,
-        address,
-        reference,
-        secondPassphrase,
-        fee,
-        dynamicFeePerByte,
-      },
+        amount, address, reference, secondPassphrase, fee, dynamicFeePerByte
+      }
     } = this.props;
 
     DropDownHolder.closeAlert();
@@ -124,7 +117,7 @@ class Overview extends React.Component {
           passphrase,
           secondPassphrase,
           reference,
-          dynamicFeePerByte,
+          dynamicFeePerByte
         },
         nextStep,
         (error = {}) => {
@@ -148,20 +141,16 @@ class Overview extends React.Component {
       settings,
       accounts: { followed },
       sharedData: {
-        address, amount, reference, fee
+        address, amount, reference, fee, priority
       },
       settings: { token },
-      language,
+      language
     } = this.props;
 
-    const actionType = route.params?.initialize || this.state.initialize
-      ? 'initialize'
-      : 'send';
+    const actionType = route.params?.initialize || this.state.initialize ? 'initialize' : 'send';
 
     const translatedMessages = getTranslatedMessages(t);
-    const bookmark = followed[token.active].find(
-      item => item.address === address
-    );
+    const bookmark = followed[token.active].find((item) => item.address === address);
 
     return (
       <ScrollView
@@ -169,39 +158,20 @@ class Overview extends React.Component {
         contentContainerStyle={styles.innerContainer}
       >
         <View>
-          <ReadMore
-            actionType={actionType}
-            styles={styles}
-            messages={translatedMessages}
-            t={t}
-          />
+          <ReadMore actionType={actionType} styles={styles} messages={translatedMessages} t={t} />
 
           <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
             {settings.token.active === tokenMap.LSK.key ? (
               <Avatar address={address || ''} style={styles.avatar} size={50} />
             ) : (
-              <View
-                style={[
-                  styles.addressIconContainer,
-                  styles.theme.addressIconContainer,
-                ]}
-              >
-                <Icon
-                  name="btc"
-                  style={styles.addressIcon}
-                  color={colors[theme].white}
-                  size={20}
-                />
+              <View style={[styles.addressIconContainer, styles.theme.addressIconContainer]}>
+                <Icon name="btc" style={styles.addressIcon} color={colors[theme].white} size={20} />
               </View>
             )}
 
-            {bookmark ? (
-              <H4 style={styles.theme.text}>{bookmark.label}</H4>
-            ) : null}
+            {bookmark ? <H4 style={styles.theme.text}>{bookmark.label}</H4> : null}
 
-            <P style={[styles.text, styles.theme.address, styles.address]}>
-              {address}
-            </P>
+            <P style={[styles.text, styles.theme.address, styles.address]}>{address}</P>
           </View>
 
           <View style={[styles.row, styles.theme.row]}>
@@ -214,39 +184,32 @@ class Overview extends React.Component {
 
             <View style={styles.rowContent}>
               <P style={[styles.label, styles.theme.label]}>
-                {actionType === 'initialize'
-                  ? t('Transaction fee')
-                  : t('Amount')}
+                {actionType === 'initialize' ? t('Transaction fee') : t('Amount')}
               </P>
               <B style={[styles.text, styles.theme.text]}>
-                <FormattedNumber
-                  tokenType={settings.token.active}
-                  language={language}
-                >
+                <FormattedNumber tokenType={settings.token.active} language={language}>
                   {amount}
                 </FormattedNumber>
               </B>
             </View>
           </View>
-
+          {priority && (
+            <View style={[styles.row, styles.theme.row]}>
+              <Icon name="priority" style={styles.icon} size={20} color={colors.light.blueGray} />
+              <View style={styles.rowContent}>
+                <P style={[styles.label, styles.theme.label]}>{t('Priority')}</P>
+                <B style={[styles.text, styles.theme.text]}>{priority}</B>
+              </View>
+            </View>
+          )}
           {actionType !== 'initialize' ? (
             <View style={[styles.row, styles.theme.row]}>
-              <Icon
-                name="tx-fee"
-                style={styles.icon}
-                size={20}
-                color={colors.light.blueGray}
-              />
+              <Icon name="tx-fee" style={styles.icon} size={20} color={colors.light.blueGray} />
 
               <View style={styles.rowContent}>
-                <P style={[styles.label, styles.theme.label]}>
-                  {t('Transaction fee')}
-                </P>
+                <P style={[styles.label, styles.theme.label]}>{t('Transaction fee')}</P>
                 <B style={[styles.text, styles.theme.text]}>
-                  <FormattedNumber
-                    tokenType={settings.token.active}
-                    language={language}
-                  >
+                  <FormattedNumber tokenType={settings.token.active} language={language}>
                     {fromRawLsk(fee)}
                   </FormattedNumber>
                 </B>
@@ -256,12 +219,7 @@ class Overview extends React.Component {
 
           {reference ? (
             <View style={[styles.row, styles.theme.row]}>
-              <Icon
-                name="reference"
-                style={styles.icon}
-                size={20}
-                color={colors.light.blueGray}
-              />
+              <Icon name="reference" style={styles.icon} size={20} color={colors.light.blueGray} />
 
               <View style={styles.rowContent}>
                 <P style={[styles.label, styles.theme.label]}>{t('Message')}</P>

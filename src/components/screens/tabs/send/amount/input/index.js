@@ -1,18 +1,28 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Input from '../../../../../shared/toolBox/input';
 import withTheme from '../../../../../shared/withTheme';
 import getStyles from './styles';
 
 const AmountInput = ({
-  currency, valueInCurrency, styles, ...rest
+  currency,
+  valueInCurrency,
+  styles,
+  sendMaximumLabel,
+  sendMaximum,
+  errorMessage,
+  ...rest
 }) => (
   <View>
-    <Input
-      {...rest}
-      innerStyles={{ input: styles.input, inputLabel: styles.theme.label }}
-    />
-
+    <View style={styles.row}>
+      <Text style={[styles.inputLabel, styles.theme.label]}>{rest.label}</Text>
+      <TouchableOpacity onPress={sendMaximum} style={styles.sendMaximumButton}>
+        <Text style={styles.sendMaximumText}>
+          {sendMaximumLabel}
+        </Text>
+      </TouchableOpacity>
+    </View>
     {valueInCurrency ? (
       <View style={styles.currencyContainer}>
         <Text style={[styles.currencyText, styles.theme.currencyText]}>
@@ -21,6 +31,7 @@ const AmountInput = ({
         </Text>
       </View>
     ) : null}
+    <Input {...rest} innerStyles={{ input: styles.input }} label={undefined} error={errorMessage} accessibilityLabel="amount-input" />
   </View>
 );
 

@@ -6,7 +6,6 @@ import { translate } from 'react-i18next';
 import MultiStep from '../../../shared/multiStep';
 import Recipient from './recipient';
 import Amount from './amount';
-import Reference from './reference';
 import Overview from './overview';
 import SecondPassphrase from './secondPassphrase';
 import Result from './result';
@@ -132,10 +131,6 @@ class Send extends React.Component {
       {
         component: Amount,
         title: 'amount',
-      },
-      {
-        component: Reference,
-        title: 'reference',
       },
       {
         component: Overview,

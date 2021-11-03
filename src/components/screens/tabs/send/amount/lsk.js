@@ -1,12 +1,15 @@
+/* eslint-disable max-lines */
+/* eslint-disable no-undef */
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
+import { TextEncoder } from 'text-encoding';
 import { transactions } from '@liskhq/lisk-client';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
-import { fromRawLsk } from '../../../../../utilities/conversions';
-import reg from '../../../../../constants/regex';
-import { merge } from '../../../../../utilities/helpers';
+import { fromRawLsk, toRawLsk } from '../../../../../utilities/conversions';
+import { merge, validateAmount } from '../../../../../utilities/helpers';
+import * as apiClient from '../../../../../utilities/api';
 import Balance from './balance';
 import Input from './input';
 import withTheme from '../../../../shared/withTheme';
@@ -14,175 +17,271 @@ import getStyles from './styles';
 import { deviceType } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';
 import { languageMap } from '../../../../../constants/languages';
-import { transferAssetSchema } from '../../../../../constants/transactions';
+import * as transactionConstants from '../../../../../constants/transactions';
+import Priority from './priority';
+import Message from './message';
 
 const isAndroid = deviceType() === 'android';
 
-const getTransferBytesSize = (nonce, amount) =>
-  transactions.getBytes(transferAssetSchema, {
-    moduleID: 2,
-    assetID: 0,
-    // eslint-disable-next-line no-undef
-    fee: BigInt(0),
-    // eslint-disable-next-line no-undef
-    nonce: BigInt(nonce),
-    senderPublicKey: Buffer.alloc(64),
-    asset: {
-      // eslint-disable-next-line no-undef
-      amount: BigInt(amount),
-      recipientAddress: Buffer.alloc(20),
-      data: 'l'.repeat(64),
-    },
-    signatures: [Buffer.alloc(64)],
-  }).length;
+const createTransactionObject = (nonce, amount = 0, message = '') => ({
+  moduleID: 2,
+  assetID: 0,
+  nonce: BigInt(nonce),
+  senderPublicKey: Buffer.alloc(32),
+  asset: {
+    amount: BigInt(toRawLsk(Number(amount))),
+    recipientAddress: Buffer.alloc(20),
+    data: message
+  },
+  signatures: []
+});
 
-@connect(state => ({
+const calculateDynamicFee = (priority, feePerByte, size, minFee, maxAssetFee) => {
+  // tie breaker is only meant for medium and high processing speeds
+  const tieBreaker = priority === 'Low' ? 0 : transactionConstants.MIN_FEE_PER_BYTE * feePerByte * Math.random();
+  const calculatedFee = Number(minFee) + size * feePerByte + tieBreaker;
+  const cappedFee = Math.min(calculatedFee, maxAssetFee);
+  return Number(cappedFee).toFixed(7).toString();
+};
+
+@connect((state) => ({
   language: state.settings.language,
+  priceTicker: state.service.priceTicker
 }))
 class AmountLSK extends React.Component {
   state = {
     fee: 0,
-    amount: {
+    amount: '',
+    errorMessage: '',
+    reference: {
       value: '',
-      normalizedValue: '',
+      validity: -1,
+      wrapperStyle: {}
     },
+    priority: null,
+    selectedPriority: 0,
+    isPriorityFetched: false
   };
 
   componentDidMount() {
-    const { sharedData, pricesRetrieved, dynamicFeesRetrieved } = this.props;
-
+    const { pricesRetrieved, dynamicFeesRetrieved } = this.props;
     pricesRetrieved();
     dynamicFeesRetrieved();
-
-    if (sharedData.amount) {
-      this.onChange(sharedData.amount);
-    }
-
+    this.loadInitialData();
     if (isAndroid) {
       setTimeout(() => this.input.focus(), 250);
     }
+    this.getDynamicFees();
   }
+
+  loadInitialData() {
+    const { sharedData } = this.props;
+    if (sharedData.amount) {
+      this.onChange(sharedData.amount);
+    }
+    if (sharedData.reference) {
+      this.onChangeMessage(sharedData.reference);
+    }
+  }
+
+  getRawTransaction = (amount, message) => {
+    const { accounts, settings } = this.props;
+    return createTransactionObject(accounts.info[settings.token.active].nonce, amount, message);
+  };
+
+  getFee = (amount) => {
+    if (amount && !validateAmount(amount)) return 0;
+    const rawTrx = this.getRawTransaction(amount, this.state.reference.value);
+    const minFee = transactions.computeMinFee(transactionConstants.transferAssetSchema, rawTrx);
+    return minFee;
+  };
+
+  getPriorityFee = (amount, priority, priorityFeePerByte) => {
+    if (amount && !validateAmount(amount)) return;
+    const rawTrx = this.getRawTransaction(amount);
+    const minFee = this.getFee(amount);
+    const size = transactions.getBytes(transactionConstants.transferAssetSchema, rawTrx).length;
+    const moduleAssetId = `${rawTrx.moduleID}:${rawTrx.assetID}`;
+    const maxAssetFee = transactionConstants.transactions[moduleAssetId].fee;
+    // eslint-disable-next-line consistent-return
+    return calculateDynamicFee(priority, priorityFeePerByte, size, minFee, maxAssetFee);
+  };
+
+  getDynamicFees = async () => {
+    const result = await apiClient.service.getDynamicFees('LSK');
+    if (result && result.Low) {
+      const priorityFees = [
+        { title: 'Low', amount: result.Low },
+        { title: 'Medium', amount: result.Medium },
+        { title: 'High', amount: result.High }
+      ];
+      this.setState({
+        priority: priorityFees,
+        isPriorityFetched: true
+      });
+    } else {
+      this.setState({ priority: null, isPriorityFetched: true });
+    }
+  };
+
+  getFeePriority = () => {
+    const { priority, amount } = this.state;
+    if (priority) {
+      return priority.map((p) => ({
+        ...p,
+        amount: this.getPriorityFee(amount, p.title, p.amount)
+      }));
+    }
+    return null;
+  };
+
+  onChangeMessage = (value) =>
+    this.setState({
+      reference: {
+        value,
+        validity: this.messageValidator(value)
+      }
+    });
 
   validator = (str, fee) => {
     const {
       t,
       accounts,
-      settings: { token },
+      settings: { token }
     } = this.props;
-
     if (str === '' || parseFloat(str) === 0) {
       return {
         code: -1,
-        message: t('Please enter an amount.'),
+        message: t('Please enter an amount.')
       };
     }
-
     let message = '';
-
-    if (!reg.amount.test(str)) {
+    if (!validateAmount(str)) {
       message = t('The amount value is invalid.');
     } else if (
       accounts.info[token.active].balance < fee
-      || parseFloat(str)
-        > fromRawLsk(accounts.info[token.active].balance - fee)
+      || parseFloat(str) > fromRawLsk(BigInt(accounts.info[token.active].balance) - fee)
     ) {
       message = t('Your balance is not sufficient.');
     }
-
     return {
       code: message ? 1 : 0,
-      message,
+      message
     };
   };
 
-  onChange = value => {
-    const { language } = this.props;
-    const normalizedValue = value.replace(/[^0-9]/g, '.');
+  onChange = (value) => {
+    const { language, t } = this.props;
+    let errorMessage = '';
+    if (value && !validateAmount(value)) {
+      errorMessage = t('Provide a correct amount of LSK');
+    }
     if (language === languageMap.en.code) {
       value = value.replace(/,/g, '.');
     } else {
       value = value.replace(/\./g, ',');
     }
-
     this.setState({
-      amount: {
-        value,
-        normalizedValue,
-      },
+      amount: value,
+      errorMessage
     });
   };
 
-  // eslint-disable-next-line max-statements
   onSubmit = () => {
+    const { t, nextStep, sharedData } = this.props;
     const {
-      t,
-      nextStep,
-      sharedData,
-      dynamicFees,
-      accounts,
-      settings,
-    } = this.props;
-    const { amount } = this.state;
-    const nonce = accounts.info[settings.token.active].nonce;
-    const size = getTransferBytesSize(nonce, amount.value);
-    const fee = size * 1000 + dynamicFees.Low * size;
-    this.setState({ fee });
-    const validity = this.validator(amount.normalizedValue, fee);
-
-    if (validity.code === 0) {
+      amount, selectedPriority, priority, reference, errorMessage
+    } = this.state;
+    if (errorMessage !== '') return;
+    const fee = priority ? priority[selectedPriority].amount : this.getFee(amount);
+    const transactionPriority = priority ? priority[selectedPriority] : null;
+    const validity = this.validator(amount, fee);
+    if (validity.code === 0 && this.messageValidator(reference.value) === 0) {
       DropDownHolder.closeAlert();
-
+      // eslint-disable-next-line consistent-return
       return nextStep(
         merge(sharedData, {
-          amount: amount.normalizedValue,
+          reference: reference.value,
+          amount,
           fee,
+          priority: transactionPriority && transactionPriority.title
         })
       );
     }
-
+    // eslint-disable-next-line consistent-return
     return DropDownHolder.error(t('Error'), validity.message);
   };
 
-  localizeAmount = amount => {
+  messageValidator = (str) => {
+    const uint8array = new TextEncoder().encode(str);
+    return uint8array.length > 64 ? 1 : 0;
+  };
+
+  localizeAmount = (amount) => {
     const { language } = this.props;
-    return Number(amount).toLocaleString(
-      `${language}-${language.toUpperCase()}`,
-      {
-        maximumFractionDigits: 20,
-      }
-    );
+    return Number(amount).toLocaleString(`${language}-${language.toUpperCase()}`, {
+      maximumFractionDigits: 20
+    });
   };
 
   getValueInCurrency() {
     const {
       priceTicker,
-      settings: { currency, token },
+      settings: { currency, token }
     } = this.props;
-    const {
-      amount: { value, normalizedValue },
-    } = this.state;
-
+    const { amount } = this.state;
     let valueInCurrency = 0;
-
     if (
-      value
-      && this.validator(normalizedValue, 0).code === 0
+      amount
+      && this.validator(amount, BigInt(0)).code === 0
       && priceTicker[token.active][currency]
     ) {
-      valueInCurrency = (
-        normalizedValue * priceTicker[token.active][currency]
-      ).toFixed(2);
+      valueInCurrency = (amount * priceTicker[token.active][currency]).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
-
     return this.localizeAmount(valueInCurrency);
   }
 
+  getBalanceInCurrency() {
+    const {
+      priceTicker, settings, accounts, language
+    } = this.props;
+    const token = settings?.token?.active;
+    const ratio = priceTicker[token][settings?.currency];
+    if (ratio) {
+      return (fromRawLsk(accounts.info[settings?.token?.active]?.balance) * ratio).toLocaleString(
+        `${language}-${language.toUpperCase()}`,
+        { maximumFractionDigits: 2 }
+      );
+    }
+    return 0;
+  }
+
+  sendMaximum = () => {
+    const { accounts, settings } = this.props;
+    const balance = accounts.info[settings.token.active].balance;
+    const maximumFee = this.getFee(balance);
+    const maximumBalance = BigInt(balance)
+      - maximumFee - BigInt(transactionConstants.DEFAULT_MIN_REMAINING_BALANCE);
+    this.onChange(fromRawLsk(maximumBalance).toString());
+  };
+
+  onChangePriority = (i) => {
+    this.setState({ selectedPriority: i });
+  };
+
   render() {
     const {
-      accounts, styles, t, settings, language
+      accounts, styles, t, settings, language, priceTicker
     } = this.props;
-    const { amount } = this.state;
+    const {
+      amount,
+      reference: { validity, value },
+      selectedPriority,
+      isPriorityFetched
+    } = this.state;
+
+    const byteCount = encodeURI(value).split(/%..|./).length - 1;
 
     return (
       <View style={[styles.theme.wrapper, styles.wrapper]}>
@@ -191,8 +290,9 @@ class AmountLSK extends React.Component {
           onSubmit={this.onSubmit}
           styles={{ innerContainer: styles.innerContainer }}
           button={{
-            title: t('Continue'),
+            title: t('Continue')
           }}
+          disabled={!isPriorityFetched || this.state.errorMessage}
         >
           <View>
             <Balance
@@ -200,19 +300,36 @@ class AmountLSK extends React.Component {
               tokenType={settings.token.active}
               incognito={settings.incognito}
               language={language}
+              currency={settings.currency}
+              valueInCurrency={this.getBalanceInCurrency()}
+              priceTicker={priceTicker}
             />
-
             <Input
-              reference={el => {
+              reference={(el) => {
                 this.input = el;
               }}
               autoFocus={!isAndroid}
               label={t('Amount (LSK)', { tokenType: 'LSK' })}
-              value={amount.value}
+              sendMaximumLabel={t('Send maximum amount')}
+              sendMaximum={this.sendMaximum}
+              value={amount}
               onChange={this.onChange}
               keyboardType="numeric"
               currency={settings.currency}
               valueInCurrency={this.getValueInCurrency()}
+              errorMessage={this.state.errorMessage}
+            />
+            <Priority
+              fees={this.getFeePriority()}
+              selected={selectedPriority}
+              onChange={this.onChangePriority}
+              transactionFee={fromRawLsk(this.getFee(amount))}
+            />
+            <Message
+              value={value}
+              onChange={this.onChangeMessage}
+              byteCount={byteCount}
+              validity={validity}
             />
           </View>
         </KeyboardAwareScrollView>
