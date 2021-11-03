@@ -38,7 +38,7 @@ const createTransactionObject = (nonce, amount = 0, message = '') => ({
 
 const calculateDynamicFee = (priority, feePerByte, size, minFee, maxAssetFee) => {
   // tie breaker is only meant for medium and high processing speeds
-  const tieBreaker = priority === 'Low' ? 0 : transactionConstants.minFeePerByte * feePerByte * Math.random();
+  const tieBreaker = priority === 'Low' ? 0 : transactionConstants.MIN_FEE_PER_BYTE * feePerByte * Math.random();
   const calculatedFee = Number(minFee) + size * feePerByte + tieBreaker;
   const cappedFee = Math.min(calculatedFee, maxAssetFee);
   return Number(cappedFee).toFixed(7).toString();
