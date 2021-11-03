@@ -22,8 +22,6 @@ import Priority from './priority';
 import Message from './message';
 
 const isAndroid = deviceType() === 'android';
-const DEFAULT_MIN_REMAINING_BALANCE = '5000000';
-const minFeePerByte = 1000;
 
 const createTransactionObject = (nonce, amount = 0, message = '') => ({
   moduleID: 2,
@@ -40,7 +38,7 @@ const createTransactionObject = (nonce, amount = 0, message = '') => ({
 
 const calculateDynamicFee = (priority, feePerByte, size, minFee, maxAssetFee) => {
   // tie breaker is only meant for medium and high processing speeds
-  const tieBreaker = priority === 'Low' ? 0 : minFeePerByte * feePerByte * Math.random();
+  const tieBreaker = priority === 'Low' ? 0 : transactionConstants.minFeePerByte * feePerByte * Math.random();
   const calculatedFee = Number(minFee) + size * feePerByte + tieBreaker;
   const cappedFee = Math.min(calculatedFee, maxAssetFee);
   return Number(cappedFee).toFixed(7).toString();
@@ -263,7 +261,8 @@ class AmountLSK extends React.Component {
     const { accounts, settings } = this.props;
     const balance = accounts.info[settings.token.active].balance;
     const maximumFee = this.getFee(balance);
-    const maximumBalance = BigInt(balance) - maximumFee - BigInt(DEFAULT_MIN_REMAINING_BALANCE);
+    const maximumBalance = BigInt(balance)
+      - maximumFee - BigInt(transactionConstants.DEFAULT_MIN_REMAINING_BALANCE);
     this.onChange(fromRawLsk(maximumBalance).toString());
   };
 

@@ -1,7 +1,6 @@
 module.exports = {
   modulePaths: ['src/'],
   testMatch: ['<rootDir>/src/**/*.test.js'],
-  // testPathIgnorePatterns: ['<rootDir>/src/components/'],
   verbose: true,
   cache: false,
   moduleFileExtensions: ['js', 'tsx'],
@@ -23,7 +22,7 @@ module.exports = {
     'src/utilities/easing.js',
     'src/utilities/networks.js',
     'src/utilities/passphrase.js',
-    'src/utilities/api/account.js'
+    'src/utilities/api/account.js',
   ],
   coverageThreshold: {
     global: {
