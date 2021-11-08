@@ -221,12 +221,14 @@ const AmountLSK = (props) => {
 
   const onSubmit = () => {
     const { t, nextStep, sharedData } = props;
-    const { amount, reference, errorMessage } = state;
+    const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
-    const fee = priority ? priority[selectedPriority].amount : getFee(amount);
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    const validity = validator(amount, fee);
-    if (validity.code === 0 && messageValidator(reference.value) === 0) {
+    if (amount > fromRawLsk(maxAmount.value)) {
+      // eslint-disable-next-line consistent-return
+      return DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
+    }
+    if (messageValidator(reference.value) === 0) {
       DropDownHolder.closeAlert();
       // eslint-disable-next-line consistent-return
       return nextStep(
