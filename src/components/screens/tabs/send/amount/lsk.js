@@ -182,7 +182,7 @@ const AmountLSK = (props) => {
   };
 
   const getFeePriority = () => {
-    const { priority, amount } = state;
+    const { amount } = state;
     if (priority) {
       return priority.map((p) => ({
         ...p,
@@ -343,4 +343,4 @@ const mapStateToProps = (state) => ({
   priceTicker: state.service.priceTicker
 });
 
-export default withTheme(translate()(connect(mapStateToProps)(AmountLSK)), getStyles());
+export default withTheme(connect(mapStateToProps)(translate()(AmountLSK)), getStyles());
