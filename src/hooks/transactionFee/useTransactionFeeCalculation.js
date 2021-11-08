@@ -11,6 +11,8 @@ export const createTransactionObject = (nonce, amount = 0, message = '') => ({
   assetID: 0,
   // eslint-disable-next-line no-undef
   nonce: BigInt(nonce),
+  // eslint-disable-next-line no-undef
+  fee: BigInt(0),
   senderPublicKey: Buffer.alloc(32),
   asset: {
     // eslint-disable-next-line no-undef
@@ -49,7 +51,7 @@ export const getTransactionFee = async ({
   const cappedFee = Math.min(calculatedFee, maxAssetFee);
   const feeInLsk = fromRawLsk(cappedFee.toString());
   const roundedValue = Number(feeInLsk).toFixed(7).toString();
-  
+
   const feedback = transaction.amount === '' ? '-' : `${roundedValue ? '' : 'Invalid amount'}`;
   return {
     value: roundedValue,

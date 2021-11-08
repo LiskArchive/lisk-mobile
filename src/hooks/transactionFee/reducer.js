@@ -3,7 +3,6 @@ import { DEFAULT_MIN_REMAINING_BALANCE } from '../../constants/transactions';
 import { toRawLsk } from '../../utilities/conversions';
 
 const calculateAvailableBalance = (balance) => {
-  console.log('balance', balance)
   return Math.max(balance - DEFAULT_MIN_REMAINING_BALANCE, 0);
 };
 

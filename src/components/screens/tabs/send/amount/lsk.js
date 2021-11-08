@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useEffect, useState, useRef } from 'react';
@@ -52,31 +53,27 @@ const AmountLSK = (props) => {
   const [state, setState] = useState({
     fee: 0,
     amount: '',
-    errorMessage: '',
-    reference: {
-      value: '',
-      validity: -1,
-      wrapperStyle: {}
-    },
-    priority: null,
-    selectedPriority: 0,
-    isPriorityFetched: false
+    errorMessage: ''
+  });
+  const [priority, setPriority] = useState(null);
+  const [selectedPriority, setSelectedPriority] = useState(0);
+  const [isPriorityFetched, setIsPriorityFetched] = useState(false);
+  const [reference, setReference] = useState({
+    value: '',
+    validity: -1
   });
 
   const {
     accounts, styles, t, settings, language, priceTicker
   } = props;
-  const {
-    amount,
-    reference: { validity, value },
-    selectedPriority,
-    isPriorityFetched
-  } = state;
+  const { amount } = state;
 
-  const priorityOptions = state.priority ? state.priority : transactionConstants.DEFAULT_PRIORITY;
+  const { validity, value } = reference;
 
-  const { fee, maxAmount, minFee } = useTransactionFeeCalculation({
-    selectedPriority: priorityOptions[state.selectedPriority],
+  const priorityOptions = priority || transactionConstants.DEFAULT_PRIORITY;
+
+  const { fee, maxAmount } = useTransactionFeeCalculation({
+    selectedPriority: priorityOptions[selectedPriority],
     token: 'LSK',
     account: accounts.info[settings.token.active],
     priorityOptions,
@@ -85,43 +82,42 @@ const AmountLSK = (props) => {
       amount: state.amount,
       nonce: accounts.info[settings.token.active].nonce,
       senderPublicKey: Buffer.alloc(32),
-      data: state.reference.value,
+      data: reference.value
     },
-    selectedPriorityIndex: state.selectedPriority
+    selectedPriorityIndex: selectedPriority
   });
-
-  console.log('fee.value', fee.value);
 
   const messageValidator = (str) => {
     const uint8array = new TextEncoder().encode(str);
     return uint8array.length > 64 ? 1 : 0;
   };
 
-  const onChangeMessage = (value) =>
-    setState((prevState) => ({
-      ...prevState,
-      reference: {
-        value,
-        validity: messageValidator(value)
-      }
-    }));
+  const onChangeMessage = (text) =>
+    setReference({
+      value: text,
+      validity: messageValidator(text)
+    });
 
-  const onChange = (value) => {
+  const onChange = (text) => {
     const { language, t } = props;
     let errorMessage = '';
-    if (value && !validateAmount(value)) {
+    if (value && !validateAmount(text)) {
       errorMessage = t('Provide a correct amount of LSK');
     }
     if (language === languageMap.en.code) {
-      value = value.replace(/,/g, '.');
+      text = text.replace(/,/g, '.');
     } else {
-      value = value.replace(/\./g, ',');
+      text = text.replace(/\./g, ',');
     }
     setState((prevState) => ({
       ...prevState,
-      amount: value,
+      amount: text,
       errorMessage
     }));
+  };
+
+  const setMaximumValue = () => {
+    onChange(fromRawLsk(maxAmount.value));
   };
 
   function loadInitialData() {
@@ -142,14 +138,11 @@ const AmountLSK = (props) => {
         { title: 'Medium', amount: result.Medium },
         { title: 'High', amount: result.High }
       ];
-      setState((prevState) => ({
-        ...prevState,
-        priority: priorityFees,
-        isPriorityFetched: true
-      }));
+      setPriority(priorityFees);
     } else {
-      setState((prevState) => ({ ...prevState, priority: null, isPriorityFetched: true }));
+      setPriority(null);
     }
+    setIsPriorityFetched(true);
   };
 
   useEffect(() => {
@@ -170,7 +163,7 @@ const AmountLSK = (props) => {
 
   const getFee = (amount) => {
     if (amount && !validateAmount(amount)) return 0;
-    const rawTrx = getRawTransaction(amount, state.reference.value);
+    const rawTrx = getRawTransaction(amount, reference.value);
     const minFee = transactions.computeMinFee(transactionConstants.transferAssetSchema, rawTrx, {
       baseFees: transactionConstants.BASE_FEES
     });
@@ -228,9 +221,7 @@ const AmountLSK = (props) => {
 
   const onSubmit = () => {
     const { t, nextStep, sharedData } = props;
-    const {
-      amount, selectedPriority, priority, reference, errorMessage
-    } = state;
+    const { amount, reference, errorMessage } = state;
     if (errorMessage !== '') return;
     const fee = priority ? priority[selectedPriority].amount : getFee(amount);
     const transactionPriority = priority ? priority[selectedPriority] : null;
@@ -288,20 +279,8 @@ const AmountLSK = (props) => {
     return 0;
   }
 
-  const sendMaximum = () => {
-    const { accounts, settings } = props;
-    const balance = accounts.info[settings.token.active].balance;
-    const maximumFee = getFee(balance);
-    // eslint-disable-next-line no-undef
-    const maximumBalance = BigInt(balance)
-      - maximumFee
-      // eslint-disable-next-line no-undef
-      - BigInt(transactionConstants.DEFAULT_MIN_REMAINING_BALANCE);
-    onChange(fromRawLsk(maximumBalance).toString());
-  };
-
   const onChangePriority = (i) => {
-    setState((prevState) => ({ ...prevState, selectedPriority: i }));
+    setSelectedPriority(i);
   };
 
   const byteCount = encodeURI(value).split(/%..|./).length - 1;
@@ -331,7 +310,7 @@ const AmountLSK = (props) => {
             autoFocus={!isAndroid}
             label={t('Amount (LSK)', { tokenType: 'LSK' })}
             sendMaximumLabel={t('Send maximum amount')}
-            sendMaximum={sendMaximum}
+            sendMaximum={setMaximumValue}
             value={amount}
             onChange={onChange}
             keyboardType="numeric"
@@ -343,7 +322,7 @@ const AmountLSK = (props) => {
             fees={getFeePriority()}
             selected={selectedPriority}
             onChange={onChangePriority}
-            transactionFee={fromRawLsk(getFee(amount))}
+            transactionFee={fee.value}
           />
           <Message
             value={value}
