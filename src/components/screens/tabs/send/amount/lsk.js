@@ -87,8 +87,6 @@ const AmountLSK = (props) => {
     selectedPriorityIndex: selectedPriority
   });
 
-  console.log(fee.value)
-
   const messageValidator = (str) => {
     const uint8array = new TextEncoder().encode(str);
     return uint8array.length > 64 ? 1 : 0;
