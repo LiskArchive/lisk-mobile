@@ -169,3 +169,61 @@ describe('api/transactions', () => {
     }
   });
 });
+
+describe('Get transaction detail for one transaction', () => {
+  beforeAll(() => {
+    apiClient.getTransactions = jest.fn();
+    apiClient.getTransactions.mockResolvedValue([
+      {
+        ...response.data[0],
+        moduleAssetId: '2:0',
+        asset: {
+          amount: '100000',
+          recipient: {
+            address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+          }
+        }
+      }
+    ]);
+  });
+
+  it('Calls get transaction with id to get one transaction detail', async () => {
+    await transactions.get({
+      id: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+    });
+    expect(apiClient.getTransactions).toBeCalledWith('lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw');
+  });
+
+  it('Extracts amount for transfer type', async () => {
+    const result = await transactions.get({
+      id: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+    });
+    expect(result.data[0].amount).toEqual('100000');
+  });
+});
+
+describe('Get amount from unlock token transaction type', () => {
+  beforeAll(() => {
+    apiClient.getTransactions = jest.fn();
+    apiClient.getTransactions.mockResolvedValue([
+      {
+        ...response.data[0],
+        moduleAssetId: '5:2',
+        asset: {
+          amount: '100000',
+          recipient: {
+            address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+          },
+          unlockObjects: [{ amount: 10 }, { amount: 11 }, { amount: 100 }, { amount: 98 }]
+        }
+      }
+    ]);
+  });
+
+  it('Extracts amount for transfer type', async () => {
+    const result = await transactions.get({
+      id: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+    });
+    expect(result.data[0].amount).toEqual('219');
+  });
+});
