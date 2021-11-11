@@ -27,7 +27,7 @@
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
     "@remobile/react-native-qrcode-local-image": "^1.0.4",
-    "@testing-library/react-hooks": "^7.0.2",
+    "@testing-library/react-hooks": "7.0.2",
     "@tradle/react-native-http": "^2.0.1",
     "acorn": "^8.0.5",
     "assert": "^2.0.0",

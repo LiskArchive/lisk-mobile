@@ -65,7 +65,7 @@ const mockProps = {
 jest.mock('../../../../../../utilities/api');
 jest.mock('../../../../../../utilities/api/lisk/service');
 
-test('Renders Send LSK correctly', () => {
+test('Should render Send LSK correctly', () => {
   const { getAllByText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -75,7 +75,7 @@ test('Renders Send LSK correctly', () => {
   expect(getAllByText('Available Balance')).toHaveLength(1);
 });
 
-test('Renders correct balance of User LSK', () => {
+test('Should render correct balance of User LSK', () => {
   const { getAllByText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -85,7 +85,7 @@ test('Renders correct balance of User LSK', () => {
   expect(getAllByText('1 LSK')).toHaveLength(1);
 });
 
-test("Calculates transaction fee if there's no priority", async (done) => {
+test("Should calculate transaction fee if there's no priority", async (done) => {
   const { getAllByText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -97,7 +97,7 @@ test("Calculates transaction fee if there's no priority", async (done) => {
   }, 100);
 });
 
-test('Re-Calculates transaction fee when the amount to send is changed', async (done) => {
+test('Should re-Calculate transaction fee when the amount to send is changed', async (done) => {
   const { getAllByText, getByLabelText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -114,7 +114,7 @@ test('Re-Calculates transaction fee when the amount to send is changed', async (
   });
 });
 
-test('Re-Calculates transaction fee when message is added', async (done) => {
+test('Should re-Calculate transaction fee when message is added', async (done) => {
   const { getAllByText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} sharedData={{ reference: 'Message' }} />
@@ -137,7 +137,7 @@ describe('Priority', () => {
     jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
   });
 
-  it('Shows priority selection field when priority is gotten', async (done) => {
+  it('Should show priority selection field when priority is gotten', async (done) => {
     const { getAllByText } = render(
       <Provider store={store}>
         <SendLsk {...mockProps} />
