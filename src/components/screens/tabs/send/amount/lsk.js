@@ -21,24 +21,11 @@ import { languageMap } from '../../../../../constants/languages';
 import * as transactionConstants from '../../../../../constants/transactions';
 import Priority from './priority';
 import Message from './message';
-import useTransactionFeeCalculation from '../../../../../hooks/transactionFee/useTransactionFeeCalculation';
+import useTransactionFeeCalculation, {
+  createTransactionObject
+} from '../../../../../hooks/transactionFee/useTransactionFeeCalculation';
 
 const isAndroid = deviceType() === 'android';
-
-const createTransactionObject = (nonce, amount = 0, message = '') => ({
-  moduleID: 2,
-  assetID: 0,
-  // eslint-disable-next-line no-undef
-  nonce: BigInt(nonce),
-  senderPublicKey: Buffer.alloc(32),
-  asset: {
-    // eslint-disable-next-line no-undef
-    amount: BigInt(toRawLsk(Number(amount))),
-    recipientAddress: Buffer.alloc(20),
-    data: message
-  },
-  signatures: []
-});
 
 const calculateDynamicFee = (priority, feePerByte, size, minFee, maxAssetFee) => {
   // tie breaker is only meant for medium and high processing speeds
@@ -58,6 +45,7 @@ const AmountLSK = (props) => {
   const [priority, setPriority] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState(0);
   const [isPriorityFetched, setIsPriorityFetched] = useState(false);
+  const [isMaximum, setIsMaximum] = useState(false);
   const [reference, setReference] = useState({
     value: '',
     validity: -1
@@ -98,9 +86,12 @@ const AmountLSK = (props) => {
       validity: messageValidator(text)
     });
 
-  const onChange = (text) => {
+  const onChange = (text, isMaximum) => {
     const { language, t } = props;
     let errorMessage = '';
+    if (!isMaximum) {
+      setIsMaximum(false);
+    }
     if (value && !validateAmount(text)) {
       errorMessage = t('Provide a correct amount of LSK');
     }
@@ -117,8 +108,15 @@ const AmountLSK = (props) => {
   };
 
   const setMaximumValue = () => {
-    onChange(fromRawLsk(maxAmount.value));
+    setIsMaximum(true);
+    onChange(fromRawLsk(maxAmount.value), true);
   };
+
+  useEffect(() => {
+    if (isMaximum) {
+      onChange(fromRawLsk(maxAmount.value), true);
+    }
+  }, [isMaximum, fee.value]);
 
   function loadInitialData() {
     const { sharedData } = props;
@@ -231,7 +229,7 @@ const AmountLSK = (props) => {
       }));
       return;
     }
-    if (Number(amount) > maxAmount.value) {
+    if (Number(amount) > Number(fromRawLsk(maxAmount.value))) {
       // eslint-disable-next-line consistent-return
       return DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
     }
