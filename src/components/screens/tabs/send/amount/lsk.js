@@ -235,7 +235,7 @@ const AmountLSK = (props) => {
         merge(sharedData, {
           reference: reference.value,
           amount,
-          fee,
+          fee: toRawLsk(fee.value),
           priority: transactionPriority && transactionPriority.title
         })
       );
