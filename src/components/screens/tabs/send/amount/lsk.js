@@ -224,7 +224,14 @@ const AmountLSK = (props) => {
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    if (amount > fromRawLsk(maxAmount.value)) {
+    if (!amount || !Number(amount)) {
+      setState((prevState) => ({
+        ...prevState,
+        errorMessage: t('Provide a correct amount of LSK')
+      }));
+      return;
+    }
+    if (Number(amount) > maxAmount.value) {
       // eslint-disable-next-line consistent-return
       return DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
     }
