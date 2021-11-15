@@ -8,7 +8,6 @@ import { tokenKeys } from '../../../../../constants/tokens';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 
-
 @connect(
   (state) => ({
     settings: state.settings,
@@ -22,9 +21,6 @@ import getStyles from './styles';
 class AccountSummary extends React.Component {
   constructor(props) {
     super(props);
-    const {
-      settings: { token }
-    } = props;
     this.state = {
       balanceWidth: 0,
       addressWidth: 0,
@@ -32,7 +28,6 @@ class AccountSummary extends React.Component {
         opacity: new Animated.Value(0),
         top: new Animated.Value(-20)
       },
-      activeSlide: tokenKeys.filter((key) => token.list[key]).indexOf(token.active)
     };
   }
 
@@ -65,21 +60,6 @@ class AccountSummary extends React.Component {
     }).start();
   };
 
-  changeToken = (index) => {
-    this.setState({ activeSlide: index }, () => {
-      const {
-        settings: { token },
-        settingsUpdated
-      } = this.props;
-      settingsUpdated({
-        token: {
-          active: Object.keys(token.list)[index],
-          list: token.list
-        }
-      });
-    });
-  };
-
   renderProfile = (data) => {
     const { settings, priceTicker } = this.props;
     const token = Object.keys(settings.token.list)[data.index];
@@ -96,37 +76,6 @@ class AccountSummary extends React.Component {
       />
     );
   };
-
-  componentDidUpdate(prevProps) {
-    const {
-      settings: { token: newToken },
-      accounts: { info: newInfo }
-    } = this.props;
-    const {
-      settings: { token: oldToken },
-      accounts: { info: oldInfo }
-    } = prevProps;
-    // reset the carousel navigation
-    const newCount = tokenKeys
-      .filter((key) => newToken.list[key])
-      .map((key) => newInfo[key]).length;
-    const oldCount = tokenKeys
-      .filter((key) => oldToken.list[key])
-      .map((key) => oldInfo[key]).length;
-
-    // This is a hack that fixes a known rendering issue of Carousel.
-    if (!prevProps.isFocused && this.props.isFocused && newCount > 1) {
-      setTimeout(() => {
-        const newIndex = tokenKeys.filter((key) => newToken.list[key]).indexOf(newToken.active);
-        this.carousel.triggerRenderingHack();
-        this.carousel.snapToItem(newIndex, false);
-      }, 0);
-    }
-
-    if (oldCount === 1 && newCount > 1) {
-      this.setState({ activeSlide: 0 });
-    }
-  }
 
   render() {
     const {
