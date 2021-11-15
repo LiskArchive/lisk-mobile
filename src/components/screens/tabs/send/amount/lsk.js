@@ -62,7 +62,7 @@ const AmountLSK = (props) => {
 
   const { fee, maxAmount } = useTransactionFeeCalculation({
     selectedPriority: priorityOptions[selectedPriority],
-    token: 'LSK',
+    token: settings.token.active,
     account: accounts.info[settings.token.active],
     priorityOptions,
     transaction: {
@@ -118,7 +118,7 @@ const AmountLSK = (props) => {
     }
   }, [isMaximum, fee.value]);
 
-  function loadInitialData() {
+  const loadInitialData = () => {
     const { sharedData } = props;
     if (sharedData.amount) {
       onChange(sharedData.amount);
@@ -126,11 +126,11 @@ const AmountLSK = (props) => {
     if (sharedData.reference) {
       onChangeMessage(sharedData.reference);
     }
-  }
+  };
 
   const getDynamicFees = async () => {
     const result = await apiClient.service.getDynamicFees('LSK');
-    if (result && result.Low) {
+    if (result && (result.Low || result.Medium || result.High)) {
       const priorityFees = [
         { title: 'Low', amount: result.Low },
         { title: 'Medium', amount: result.Medium },
@@ -149,6 +149,7 @@ const AmountLSK = (props) => {
     dynamicFeesRetrieved();
     loadInitialData();
     if (isAndroid) {
+      // Sometimes keyboard don't show up on android when screen mounts
       setTimeout(() => inputRef.current.focus(), 250);
     }
     getDynamicFees();
@@ -256,7 +257,7 @@ const AmountLSK = (props) => {
     });
   };
 
-  function getValueInCurrency() {
+  const getValueInCurrency = () => {
     const {
       priceTicker,
       settings: { currency, token }
@@ -269,9 +270,9 @@ const AmountLSK = (props) => {
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
     return localizeAmount(valueInCurrency);
-  }
+  };
 
-  function getBalanceInCurrency() {
+  const getBalanceInCurrency = () => {
     const {
       priceTicker, settings, accounts, language
     } = props;
@@ -284,7 +285,7 @@ const AmountLSK = (props) => {
       );
     }
     return 0;
-  }
+  };
 
   const onChangePriority = (i) => {
     setSelectedPriority(i);
