@@ -11,7 +11,6 @@ import Register from '../register';
 import Wallet from '../wallet';
 import About from '../about';
 import CurrencySelection from '../currencySelection';
-import ManageAssets from '../manageAssets';
 import Terms from '../terms';
 import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
@@ -60,7 +59,6 @@ const MainNavigator = () => {
           <MainStack.Screen name="AddBookmark" component={AddBookmark} options={navigationOptions.AddBookmark} />
           <MainStack.Screen name="About" component={About} options={navigationOptions.About} />
           <MainStack.Screen name="CurrencySelection" component={CurrencySelection} options={navigationOptions.CurrencySelection} />
-          <MainStack.Screen name="ManageAssets" component={ManageAssets} options={navigationOptions.ManageAssets} />
           <MainStack.Screen name="Terms" component={Terms} options={navigationOptions.Terms} />
           <MainStack.Screen name="TxDetail" component={TxDetail} options={navigationOptions.TxDetail} />
           <MainStack.Screen name="Wallet" component={Wallet} options={navigationOptions.Wallet} />

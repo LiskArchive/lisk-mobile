@@ -179,14 +179,6 @@ class Settings extends React.Component {
               />
             </View>
 
-            <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
-              <ItemTitle
-                navigation={navigation}
-                icon="manage-assets"
-                title={t('Manage tokens')}
-                target="ManageAssets"
-              />
-            </View>
           </View>
 
           <View style={styles.group}>
