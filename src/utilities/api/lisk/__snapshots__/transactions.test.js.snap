@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`api/transactions calls transactions.broadcast method correctly 1`] = `
+exports[`api/transactions Should call transactions.broadcast method correctly 1`] = `
 Object {
   "amount": "1000000",
   "asset": Object {},
@@ -29,7 +29,7 @@ Object {
 }
 `;
 
-exports[`api/transactions calls transactions.create method correctly 1`] = `
+exports[`api/transactions Should call transactions.create method correctly 1`] = `
 Object {
   "asset": Object {
     "amount": 1000000n,
@@ -212,4 +212,4 @@ Object {
 }
 `;
 
-exports[`api/transactions handles rejections from transactions.broadcast method 1`] = `[TypeError: Cannot mix BigInt and other types, use explicit conversions]`;
+exports[`api/transactions Should handle rejections from transactions.broadcast method 1`] = `[TypeError: Cannot mix BigInt and other types, use explicit conversions]`;

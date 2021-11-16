@@ -74,7 +74,7 @@ describe('api/transactions', () => {
   });
 
   describe('get', () => {
-    it('resolves correctly', async () => {
+    it('should resolve correctly', async () => {
       const result = await transactions.get({
         address: response.data[0].recipient.address
       });
@@ -122,7 +122,7 @@ describe('api/transactions', () => {
       });
     });
 
-    it('handles rejections', async () => {
+    it('Should handle rejections', async () => {
       const errorMessage = { message: 'Error!' };
       apiClient.getTransactions.mockRejectedValueOnce(errorMessage);
 
@@ -134,7 +134,7 @@ describe('api/transactions', () => {
     });
   });
 
-  it('calls transactions.create method correctly', async () => {
+  it('Should call transactions.create method correctly', async () => {
     const tx = await transactions.create({
       nonce: '5',
       passphrase: 'test',
@@ -145,7 +145,7 @@ describe('api/transactions', () => {
     expect(tx).toMatchSnapshot();
   });
 
-  it('calls transactions.broadcast method correctly', async () => {
+  it('Should call transactions.broadcast method correctly', async () => {
     apiClient.sendTransaction.mockResolvedValueOnce(response.data[0]);
     const tx = await transactions.create({
       nonce: '6',
@@ -158,7 +158,7 @@ describe('api/transactions', () => {
     expect(result).toMatchSnapshot();
   });
 
-  it('handles rejections from transactions.broadcast method', async () => {
+  it('Should handle rejections from transactions.broadcast method', async () => {
     const errorMessage = { message: 'Error!' };
     apiClient.sendTransaction.mockRejectedValueOnce(errorMessage);
 
@@ -167,5 +167,63 @@ describe('api/transactions', () => {
     } catch (error) {
       expect(error).toMatchSnapshot();
     }
+  });
+});
+
+describe('Should get transaction detail for one transaction', () => {
+  beforeAll(() => {
+    apiClient.getTransactions = jest.fn();
+    apiClient.getTransactions.mockResolvedValue([
+      {
+        ...response.data[0],
+        moduleAssetId: '2:0',
+        asset: {
+          amount: '100000',
+          recipient: {
+            address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+          }
+        }
+      }
+    ]);
+  });
+
+  it('Should call get transaction with id to get one transaction detail', async () => {
+    await transactions.get({
+      id: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+    });
+    expect(apiClient.getTransactions).toBeCalledWith('lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw');
+  });
+
+  it('Should extract amount for transfer type', async () => {
+    const result = await transactions.get({
+      id: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+    });
+    expect(result.data[0].amount).toEqual('100000');
+  });
+});
+
+describe('Should get amount from unlock token transaction type', () => {
+  beforeAll(() => {
+    apiClient.getTransactions = jest.fn();
+    apiClient.getTransactions.mockResolvedValue([
+      {
+        ...response.data[0],
+        moduleAssetId: '5:2',
+        asset: {
+          amount: '100000',
+          recipient: {
+            address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+          },
+          unlockObjects: [{ amount: 10 }, { amount: 11 }, { amount: 100 }, { amount: 98 }]
+        }
+      }
+    ]);
+  });
+
+  it('should extract amount for unlock token type', async () => {
+    const result = await transactions.get({
+      id: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
+    });
+    expect(result.data[0].amount).toEqual('219');
   });
 });

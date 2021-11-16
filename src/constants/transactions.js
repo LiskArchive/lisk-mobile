@@ -15,7 +15,7 @@ import txUnlockDark from '../assets/images/txDetail/tx-unlock-dark.png';
 import txUnknownLight from '../assets/images/txDetail/tx-unknown-light.png';
 import txUnknownDark from '../assets/images/txDetail/tx-unknown-dark.png';
 
-export const DEFAULT_MIN_REMAINING_BALANCE = '5000000';
+export const DEFAULT_MIN_REMAINING_BALANCE = 5000000;
 export const MIN_FEE_PER_BYTE = 1000;
 
 const modules = {
@@ -35,6 +35,20 @@ const assets = {
   reportDelegateMisbehavior: 3
 };
 
+export const BASE_FEES = [
+  Object.freeze({
+    moduleID: modules.dpos,
+    assetID: assets.registerDelegate,
+    baseFee: '1000000000'
+  })
+];
+
+export const DEFAULT_PRIORITY = [
+  { title: 'Low', amount: 0 },
+  { title: 'Medium', amount: 0 },
+  { title: 'High', amount: 0 }
+];
+
 export const moduleAssetNameIdMap = {
   transfer: `${modules.token}:${assets.transfer}`,
   unlockToken: `${modules.dpos}:${assets.unlockToken}`,
@@ -43,6 +57,37 @@ export const moduleAssetNameIdMap = {
   reportDelegateMisbehavior: `${modules.dpos}:${assets.reportDelegateMisbehavior}`,
   registerMultisignatureGroup: `${modules.multiSignature}:${assets.registerMultisignatureGroup}`,
   reclaimLSK: `${modules.legacyAccount}:${assets.reclaimLSK}`
+};
+
+export const moduleAssetMap = {
+  [moduleAssetNameIdMap.transfer]: {
+    maxFee: 1e7,
+    icon: 'txDefault'
+  },
+  [moduleAssetNameIdMap.unlockToken]: {
+    maxFee: 1e7,
+    icon: 'unlockToken'
+  },
+  [moduleAssetNameIdMap.voteDelegate]: {
+    maxFee: 1e8,
+    icon: 'vote'
+  },
+  [moduleAssetNameIdMap.registerDelegate]: {
+    maxFee: 25e8,
+    icon: 'registerDelegate'
+  },
+  [moduleAssetNameIdMap.reportDelegateMisbehavior]: {
+    maxFee: 1e7,
+    icon: 'reportDelegateMisbehavior'
+  },
+  [moduleAssetNameIdMap.registerMultisignatureGroup]: {
+    maxFee: 5e8,
+    icon: 'multisignatureTransaction'
+  },
+  [moduleAssetNameIdMap.reclaimLSK]: {
+    maxFee: 1e7,
+    icon: 'txDefault'
+  }
 };
 
 /**
@@ -86,7 +131,7 @@ export const transactions = {
   [moduleAssetNameIdMap.transfer]: {
     moduleAssetId: '2:0',
     fee: 1e7,
-    title: t('Transfer'),
+    title: t('Transfer')
   },
   [moduleAssetNameIdMap.registerMultisignatureGroup]: {
     moduleAssetId: '4:0',
