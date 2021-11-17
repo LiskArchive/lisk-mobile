@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React from 'react';
 import { Platform, View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
@@ -13,12 +14,14 @@ import waves from '../../../../assets/animations/waves.json';
 import wavesError from '../../../../assets/animations/waves-error.json';
 import CreateAccount from '../createAccount';
 import Title from '../title';
+import SignInSvg from '../../../../assets/svgs/SignInSvg';
 
 class BiometricAuth extends React.Component {
   state = {
     opacity: new Animated.Value(0),
     tried: false,
     busy: false,
+    biometricAuth: false
   };
 
   progress = new Animated.Value(0);
@@ -29,7 +32,7 @@ class BiometricAuth extends React.Component {
     const value = this.progress._value;
     Animated.timing(this.progress, {
       toValue: value === 0 ? 1 : 0,
-      duration: 2000,
+      duration: 2000
     }).start(() => {
       if (this.animationLoop) {
         this.runAnimation();
@@ -47,19 +50,18 @@ class BiometricAuth extends React.Component {
   };
 
   onClick = () => {
-    this.setState({ busy: true }, () => {
+    this.setState({ busy: true, biometricAuth: true }, () => {
       if (Platform.OS === 'android') {
         this.runAnimation();
       }
-
       bioMetricAuthentication({
         successCallback: () => {
           this.props.hideDialog(() => {
             this.props.signIn(this.props.passphrase, 'biometricAuth');
           });
         },
-        errorCallback: () => this.setState({ busy: false }),
-        androidError: this.playUnAuthorizedAnimation,
+        errorCallback: () => this.setState({ busy: false, biometricAuth: false }),
+        androidError: this.playUnAuthorizedAnimation
       });
     });
   };
@@ -68,17 +70,21 @@ class BiometricAuth extends React.Component {
     this.props.navigation.navigate({ name: 'Register' });
   };
 
-  componentDidMount() {
-    this.startUpAnimEl.play();
+  componentDidUpdate(_, prevState) {
+    if (prevState.biometricAuth !== this.state.biometricAuth && this.state.biometricAuth) {
+      this.startUpAnimEl.play();
+    }
+  }
 
+  componentDidMount() {
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: this.props.animate ? 300 : 0,
+      duration: this.props.animate ? 300 : 0
     }).start();
 
     Animated.timing(this.progress, {
       toValue: 1,
-      duration: 2500,
+      duration: 2500
     }).start();
   }
 
@@ -89,7 +95,9 @@ class BiometricAuth extends React.Component {
 
   render() {
     const { t, sensorType, toggleView } = this.props;
-    const { opacity, tried, busy } = this.state;
+    const {
+      opacity, tried, busy, biometricAuth
+    } = this.state;
 
     let pageTitle = t('Choose an authentication method.');
     if (busy) {
@@ -103,27 +111,28 @@ class BiometricAuth extends React.Component {
         <Title opacity={opacity}>{pageTitle}</Title>
 
         <View style={styles.waves}>
-          {tried ? (
+          {!biometricAuth ? <SignInSvg /> : null}
+          {biometricAuth && tried && (
             <LottieView
               source={wavesError}
               loop={false}
               style={{}}
-              ref={el => {
+              ref={(el) => {
                 this.unAuthAnimEl = el;
               }}
             />
-          ) : (
+          )}
+          {biometricAuth && !tried && (
             <LottieView
               source={waves}
               loop={false}
               style={{}}
               progress={this.progress}
-              ref={el => {
+              ref={(el) => {
                 this.startUpAnimEl = el;
               }}
             />
           )}
-
           <Animated.View style={{ opacity }}>
             <Icon
               size={40}
@@ -135,38 +144,30 @@ class BiometricAuth extends React.Component {
         </View>
 
         <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
-          <P
-            style={[
-              styles.question,
-              styles.fillWidth,
-              tried ? styles.error : styles.invisible,
-            ]}
-          >
+          <P style={[styles.question, styles.fillWidth, tried ? styles.error : styles.invisible]}>
             {t('Unauthorized! Please try again.')}
           </P>
 
-          <View style={styles.column}>
-            <PrimaryButton
-              style={styles.button}
-              title={
-                busy
-                  ? t('Signing in...')
-                  : t('Sign in using bioAuth', { sensorType })
-              }
-              onClick={this.onClick}
-              disabled={busy}
-              noTheme={true}
-            />
+          {!this.state.biometricAuth && (
+            <View style={styles.column}>
+              <PrimaryButton
+                style={styles.button}
+                title={busy ? t('Signing in...') : t('Sign in using bioAuth', { sensorType })}
+                onClick={this.onClick}
+                disabled={busy}
+                noTheme={true}
+              />
 
-            <Button
-              style={[styles.button, styles.buttonManualSignIn]}
-              title={t('Sign in manually')}
-              onClick={toggleView}
-              noTheme={true}
-            />
+              <Button
+                style={[styles.button, styles.buttonManualSignIn]}
+                title={t('Sign in manually')}
+                onClick={toggleView}
+                noTheme={true}
+              />
 
-            <CreateAccount onPress={this.onCreateAccount} opacity={opacity} />
-          </View>
+              <CreateAccount onPress={this.onCreateAccount} opacity={opacity} />
+            </View>
+          )}
         </Animated.View>
       </View>
     );
