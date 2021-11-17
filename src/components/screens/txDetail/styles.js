@@ -8,6 +8,10 @@ export default () => ({
       paddingTop: 0,
       paddingBottom: 20,
     },
+    transactionTitle: {
+      fontFamily: fonts.family.contextSemiBold,
+      fontSize: 20
+    },
     divider: {
       margin: 20,
       marginBottom: 0,
@@ -20,6 +24,7 @@ export default () => ({
       alignItems: 'center',
       fontFamily: fonts.family.context,
       marginTop: 5,
+      fontSize: 14,
     },
     value: {
       alignItems: 'center',
@@ -73,15 +78,20 @@ export default () => ({
     },
     senderAndRecipient: {
       marginBottom: 10,
-      paddingTop: 20,
+      padding: 20,
       paddingBottom: 20,
       flexDirection: 'column',
-      alignItems: 'center',
       borderBottomWidth: 1,
     },
     row: {
       marginBottom: 14,
       flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    },
+    titleContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       alignItems: 'center',
     },
     incoming: {},
@@ -128,7 +138,6 @@ export default () => ({
       color: colors.light.black,
     },
     senderAndRecipient: {
-      backgroundColor: colors.light.whiteSmoke,
       borderBottomColor: colors.light.mystic,
       borderTopColor: colors.light.mystic,
     },

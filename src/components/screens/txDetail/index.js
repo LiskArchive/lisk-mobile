@@ -174,7 +174,7 @@ class TransactionDetail extends React.Component {
         )}
 
         {isDelegateRegistration && (
-          <Row icon={'delegate'} title={'Delegate username'}>
+          <Row title={'Delegate username'}>
             <View>
               <B style={[styles.value, styles.theme.value]}>
                 {tx.delegate}
@@ -184,7 +184,6 @@ class TransactionDetail extends React.Component {
         )}
 
         <Row
-          icon={isVoting || isDelegateRegistration ? 'user' : 'send'}
           title={getAccountTitle(tx)}
         >
           <View style={styles.addressContainer}>
@@ -198,7 +197,7 @@ class TransactionDetail extends React.Component {
           </View>
         </Row>
         {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? null : (
-          <Row icon="recipient" title="Recipient">
+          <Row title="Recipient">
             <View style={styles.addressContainer}>
               <A
                 value={tx.senderAddress}
@@ -212,7 +211,7 @@ class TransactionDetail extends React.Component {
         )}
         {
           !isUnlock(tx) ? null : (
-            <Row icon="amount" title="Amount">
+            <Row title="Amount">
               <B style={[styles.value, styles.theme.value]}>
                 <FormattedNumber tokenType={activeToken} language={language}>
                   {fromRawLsk(tx.amount)}
@@ -221,7 +220,7 @@ class TransactionDetail extends React.Component {
             </Row>
           )
         }
-        <Row icon="tx-fee" title="Transaction fee">
+        <Row title="Transaction fee">
           <B style={[styles.value, styles.theme.value]}>
             <FormattedNumber tokenType={activeToken} language={language}>
               {fromRawLsk(tx.fee)}
@@ -229,7 +228,7 @@ class TransactionDetail extends React.Component {
           </B>
         </Row>
         {tx.data ? (
-          <Row icon="reference" title="Message">
+          <Row title="Message">
             <B
               style={[styles.value, styles.theme.value, styles.referenceValue]}
             >
@@ -237,12 +236,12 @@ class TransactionDetail extends React.Component {
             </B>
           </Row>
         ) : null}
-        <Row icon="confirmations" title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
+        <Row title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
           <B style={[styles.value, styles.theme.value]}>
             {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
           </B>
         </Row>
-        <Row icon="tx-id" title="Transaction ID">
+        <Row title="Transaction ID">
           {activeToken === 'LSK' ? (
             <Share
               type={B}

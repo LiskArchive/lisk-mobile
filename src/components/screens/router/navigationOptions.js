@@ -10,13 +10,16 @@ import { fonts } from '../../../constants/styleGuide';
 
 const noShadow = {
   borderBottomWidth: 0,
-  elevation: 0
+  elevation: 0,
 };
 
 const genericTitle = {
   fontFamily: fonts.family.heading,
-  fontSize: 18,
-  textAlign: 'center'
+  fontSize: 20,
+};
+
+const noTitle = {
+  opacity: 0
 };
 
 const navigationOptions = {};
@@ -129,10 +132,10 @@ navigationOptions.Register = {
 
 navigationOptions.TxDetail = {
   title: 'Transaction details',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  headerLeft: (props) => <HeaderBackButton {...props} title="Transaction details" />,
   headerRight: () => <HeaderPlaceholderButton />,
   headerStyle: noShadow,
-  headerTitleStyle: genericTitle
+  headerTitleStyle: noTitle
 };
 
 navigationOptions.CurrencySelection = {

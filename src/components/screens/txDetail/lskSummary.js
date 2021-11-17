@@ -22,7 +22,7 @@ const getConfig = (styles, tx, accountAddress) => {
       firstAddress: tx.recipientAddress,
       secondAddress: tx.senderAddress,
       amountSign: '',
-      direction: 'incoming',
+      direction: 'incoming'
     };
   }
   return {
@@ -31,48 +31,34 @@ const getConfig = (styles, tx, accountAddress) => {
     firstAddress: tx.senderAddress,
     secondAddress: tx.recipientAddress,
     amountSign: '-',
-    direction: 'outgoing',
+    direction: 'outgoing'
   };
 };
 
 const Graphics = ({
-  styles,
-  tx,
-  theme,
-  config,
+  styles, tx, theme, config
 }) => (
   <View style={styles.row}>
     {!isTransfer(tx) ? (
-      <Image
-        style={{ width: 40, height: 40 }}
-        source={getTxConstant(tx).image(theme)}
-      />
+      <Image style={{ width: 35, height: 35 }} source={getTxConstant(tx).image(theme)} />
     ) : (
       <Fragment>
-        <Avatar address={config.firstAddress} size={40} />
+        <Avatar address={config.firstAddress} size={35} />
         {theme === themes.light ? (
-          <Image source={arrowLight} style={[styles.arrow, config.arrowStyle]}
-          />
+          <Image source={arrowLight} style={[styles.arrow, config.arrowStyle]} />
         ) : (
           <Image source={arrowDark} style={[styles.arrow, config.arrowStyle]} />
         )}
-        <Avatar address={config.secondAddress} size={40} />
+        <Avatar address={config.secondAddress} size={35} />
       </Fragment>
     )}
   </View>
 );
 
-const TimeStamp = ({
-  timestamp,
-  styles,
-}) => {
+const TimeStamp = ({ timestamp, styles }) => {
   if (timestamp) {
     return (
-      <FormattedDate
-        format="MMM D, YYYY LTS"
-        type={P}
-        style={[styles.date, styles.theme.date]}
-      >
+      <FormattedDate format="MMM D, YYYY LTS" type={P} style={[styles.date, styles.theme.date]}>
         {timestamp * 1000}
       </FormattedDate>
     );
@@ -82,44 +68,31 @@ const TimeStamp = ({
 };
 
 const LskSummary = ({
-  styles,
-  theme,
-  t,
-  tx,
-  accountAddress,
-  incognito,
-  language,
+  styles, theme, t, tx, accountAddress, incognito, language
 }) => {
   const amount = fromRawLsk(tx.amount);
   const config = getConfig(styles, tx, accountAddress);
 
   return (
     <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
-      <Graphics
-        styles={styles}
-        tx={tx}
-        theme={theme}
-        config={config}
-      />
-      {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
-        <H3 style={config.amountStyle}>{t(getTxConstant(tx).title)}</H3>
-      ) : null}
-      {isTransfer(tx) && !incognito ? (
-        <H3 style={config.amountStyle}>
-          {config.amountSign}
-          <FormattedNumber language={language}>
-            {fromRawLsk(tx.amount)}
-          </FormattedNumber>
-        </H3>
-      ) : null}
-      {isTransfer(tx) && incognito ? (
-        <Blur
-          value={amount}
-          direction={config.direction}
-          style={styles.amountBlur}
-        />
-      ) : null}
-      <TimeStamp timestamp={tx.timestamp} styles={styles} />
+      <View style={styles.titleContainer}>
+        <View>
+          {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
+            <P style={[styles.transactionTitle]}>{t(getTxConstant(tx).title)}</P>
+          ) : null}
+          {isTransfer(tx) && !incognito ? (
+            <H3 style={config.amountStyle}>
+              {config.amountSign}
+              <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
+            </H3>
+          ) : null}
+          {isTransfer(tx) && incognito ? (
+            <Blur value={amount} direction={config.direction} style={styles.amountBlur} />
+          ) : null}
+          <TimeStamp timestamp={tx.timestamp} styles={styles} />
+        </View>
+        <Graphics styles={styles} tx={tx} theme={theme} config={config} />
+      </View>
     </View>
   );
 };
