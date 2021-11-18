@@ -54,8 +54,13 @@ class Overview extends React.Component {
     } = this.props;
     const { send, initialize } = getTranslatedMessages(t);
     let options = {
-      title: send.title,
-      headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />
+      title: null,
+      headerLeft: (props) => <HeaderBackButton
+        {...props}
+        onPress={prevStep}
+        safeArea={true}
+        title={send.title}
+      />
     };
 
     if (route.params?.initialize) {

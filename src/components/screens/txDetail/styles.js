@@ -5,8 +5,7 @@ export default () => ({
   common: {
     container: {
       flex: 1,
-      paddingTop: 0,
-      paddingBottom: 20,
+      padding: 20,
     },
     transactionTitle: {
       fontFamily: fonts.family.contextSemiBold,
@@ -39,11 +38,8 @@ export default () => ({
       flexDirection: 'row',
       flex: 1,
       alignItems: 'center',
-      paddingBottom: 16,
-      paddingTop: 16,
+      paddingVertical: 10,
       borderBottomWidth: 1,
-      marginLeft: 20,
-      marginRight: 20,
     },
     rowIconWrapper: {
       width: 36,
@@ -78,7 +74,6 @@ export default () => ({
     },
     senderAndRecipient: {
       marginBottom: 10,
-      padding: 20,
       paddingBottom: 20,
       flexDirection: 'column',
       borderBottomWidth: 1,
@@ -134,6 +129,9 @@ export default () => ({
     date: {
       color: colors.light.slateGray,
     },
+    transactionTitle: {
+      color: colors.dark.zodiacBlue,
+    },
     value: {
       color: colors.light.black,
     },
@@ -174,11 +172,13 @@ export default () => ({
     date: {
       color: colors.dark.slateGray,
     },
+    transactionTitle: {
+      color: colors.dark.white,
+    },
     value: {
       color: colors.dark.white,
     },
     senderAndRecipient: {
-      backgroundColor: colors.dark.headerBg,
       borderBottomColor: setColorOpacity(colors.light.white, 0.24),
       borderTopColor: setColorOpacity(colors.light.white, 0.24),
     },

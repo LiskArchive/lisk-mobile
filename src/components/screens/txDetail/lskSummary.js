@@ -1,18 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
 import FormattedDate from '../../shared/formattedDate';
 import withTheme from '../../shared/withTheme';
-import { fromRawLsk } from '../../../utilities/conversions';
-import FormattedNumber from '../../shared/formattedNumber';
-import { P, H3 } from '../../shared/toolBox/typography';
-import Avatar from '../../shared/avatar';
+import { P } from '../../shared/toolBox/typography';
 import { getTxConstant, isTransfer } from '../../../constants/transactions';
-import Blur from '../../shared/transactions/blur';
-import arrowLight from '../../../assets/images/txDetail/arrow-light2x.png';
-import arrowDark from '../../../assets/images/txDetail/arrow-dark2x.png';
 import getStyles from './styles';
-import { themes } from '../../../constants/styleGuide';
 
 const getConfig = (styles, tx, accountAddress) => {
   if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
@@ -35,24 +28,8 @@ const getConfig = (styles, tx, accountAddress) => {
   };
 };
 
-const Graphics = ({
-  styles, tx, theme, config
-}) => (
-  <View style={styles.row}>
-    {!isTransfer(tx) ? (
-      <Image style={{ width: 35, height: 35 }} source={getTxConstant(tx).image(theme)} />
-    ) : (
-      <Fragment>
-        <Avatar address={config.firstAddress} size={35} />
-        {theme === themes.light ? (
-          <Image source={arrowLight} style={[styles.arrow, config.arrowStyle]} />
-        ) : (
-          <Image source={arrowDark} style={[styles.arrow, config.arrowStyle]} />
-        )}
-        <Avatar address={config.secondAddress} size={35} />
-      </Fragment>
-    )}
-  </View>
+const Graphics = ({ tx, theme }) => (
+  <Image style={{ width: 35, height: 35 }} source={getTxConstant(tx).image(theme)} />
 );
 
 const TimeStamp = ({ timestamp, styles }) => {
@@ -68,27 +45,16 @@ const TimeStamp = ({ timestamp, styles }) => {
 };
 
 const LskSummary = ({
-  styles, theme, t, tx, accountAddress, incognito, language
+  styles, theme, t, tx, accountAddress
 }) => {
-  const amount = fromRawLsk(tx.amount);
   const config = getConfig(styles, tx, accountAddress);
-
   return (
     <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
       <View style={styles.titleContainer}>
         <View>
-          {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? (
-            <P style={[styles.transactionTitle]}>{t(getTxConstant(tx).title)}</P>
-          ) : null}
-          {isTransfer(tx) && !incognito ? (
-            <H3 style={config.amountStyle}>
-              {config.amountSign}
-              <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
-            </H3>
-          ) : null}
-          {isTransfer(tx) && incognito ? (
-            <Blur value={amount} direction={config.direction} style={styles.amountBlur} />
-          ) : null}
+          <P style={[styles.transactionTitle, styles.theme.transactionTitle]}>
+            {t(getTxConstant(tx).title)}
+          </P>
           <TimeStamp timestamp={tx.timestamp} styles={styles} />
         </View>
         <Graphics styles={styles} tx={tx} theme={theme} config={config} />

@@ -12,7 +12,6 @@ import Result from './result';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../../constants/tokens';
-import progressBar from '../../../shared/progressBar';
 
 @connect(
   state => ({
@@ -34,10 +33,6 @@ class Send extends React.Component {
       navigation.addListener('focus', this.didFocus),
       navigation.addListener('blur', this.willBlur),
     ];
-
-    navigation.setOptions({
-      showButtonLeft: false,
-    });
   }
 
   componentDidUpdate(prevProps) {
@@ -155,7 +150,6 @@ class Send extends React.Component {
 
     return (
       <MultiStep
-        progressBar={progressBar}
         ref={el => {
           this.nav = el;
         }}
@@ -165,7 +159,6 @@ class Send extends React.Component {
       >
         {steps.map(step => (
           <step.component
-            isCameraOpen={this.hideProgressBar}
             key={step.title}
             navigation={navigation}
             route={route}

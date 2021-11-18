@@ -14,12 +14,9 @@ import { decodeLaunchUrl } from '../../../../../utilities/qrCode';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../../../shared/bookmarks';
-import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import { validateAddress } from '../../../../../utilities/validators';
 import DropDownHolder from '../../../../../utilities/alert';
-import HeaderPlaceholderButton from '../../../router/headerPlaceholderButton';
-
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
+import HeaderBackButton from '../../../router/headerBackButton';
 
 class Recipient extends React.Component {
   scannedData = {};
@@ -47,21 +44,9 @@ class Recipient extends React.Component {
     }
 
     setOptions({
-      title: isSmallScreen ? 'Send' : 'Recipient',
-      headerLeft: () => <HeaderPlaceholderButton />,
+      title: null,
+      headerLeft: () => <HeaderBackButton title={'Send LSK'} safeArea={true} noIcon={true} />,
     });
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.lng !== this.props.lng) {
-      const {
-        navigation: { setOptions },
-      } = this.props;
-      setOptions({
-        title: isSmallScreen ? 'Send' : 'Recipient',
-        headerLeft: () => <HeaderPlaceholderButton />,
-      });
-    }
   }
 
   setAvatarPreviewTimeout = () => {

@@ -16,17 +16,20 @@ export default () => ({
       fontFamily: fonts.family.heading,
       fontSize: 20,
     },
+    paddingLeft: {
+      paddingLeft: 20,
+    },
     container: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginTop: normalMarginTop
+      marginTop: normalMarginTop,
     },
     main: {
       width: 50,
       height: 40,
     },
     safeArea: {
-      marginTop: safeAreaMarginTop
+      marginTop: safeAreaMarginTop,
     }
   }
 });

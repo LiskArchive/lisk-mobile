@@ -31,8 +31,12 @@ class Amount extends React.Component {
     const { navigation, prevStep } = this.props;
 
     navigation.setOptions({
-      title: isSmallScreen ? 'Send' : 'Amount',
-      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />,
+      title: null,
+      headerLeft: props => <HeaderBackButton
+        {...props}
+        onPress={prevStep}
+        safeArea={true}
+        title={'Amount'} />,
     });
   }
 
