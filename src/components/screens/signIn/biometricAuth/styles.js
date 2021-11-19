@@ -7,7 +7,7 @@ export default () => ({
   common: {
     container: {
       height: '100%',
-      paddingTop: height <= 640 ? 110 : 170,
+      paddingTop: height <= 640 ? 100 : 130,
     },
     waves: {
       width: '100%',

@@ -8,7 +8,7 @@ export default () => ({
   common: {
     container: {
       height: '100%',
-      paddingTop: isSmallDevice ? 110 : 170,
+      paddingTop: isSmallDevice ? 100 : 130,
     },
     containerSimplified: {
       height: '100%',
