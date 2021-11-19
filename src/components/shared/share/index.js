@@ -26,14 +26,14 @@ const Share = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <Element style={style} onPress={shareContent}>
+      <Element style={[style, styles.text]} onPress={shareContent}>
         {children || title}
       </Element>
       {icon ? (
         <Icon
           style={styles.icon}
           name="share"
-          size={14}
+          size={20}
           onPress={shareContent}
           color={iconColor || colors.light.blueGray}
         />

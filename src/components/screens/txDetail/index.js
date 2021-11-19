@@ -7,16 +7,14 @@ import withTheme from '../../shared/withTheme';
 import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../../shared/formattedNumber';
 import Share from '../../shared/share';
-import { B, A } from '../../shared/toolBox/typography';
+import { B, A, H4, } from '../../shared/toolBox/typography';
 import IconButton from '../router/headerBackButton';
 import Loading from '../../shared/transactions/loading';
 import EmptyState from '../../shared/transactions/empty';
 import LskSummary from './lskSummary';
 import BtcSummary from './btcSummary';
 import Row from './row';
-import {
-  transactions as transactionsAPI,
-} from '../../../utilities/api';
+import { transactions as transactionsAPI } from '../../../utilities/api';
 import getStyles from './styles';
 import VoteList from './voteList';
 import { merge } from '../../../utilities/helpers';
@@ -24,31 +22,56 @@ import {
   goToWallet, getAccountLabel, getAccountTitle, openExplorer
 } from './utils';
 import {
-  isRegistration, isTransfer, isVote, isUnlock,
+  isRegistration,
+  isTransfer,
+  isVote,
+  isUnlock,
 } from '../../../constants/transactions';
+import Avatar from '../../shared/avatar';
+import Blur from '../../shared/transactions/blur';
+
+const getConfig = (styles, tx, accountAddress) => {
+  if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
+    return {
+      arrowStyle: styles.reverseArrow,
+      amountStyle: [styles.incoming, styles.theme.incoming],
+      firstAddress: tx.recipientAddress,
+      secondAddress: tx.senderAddress,
+      amountSign: '',
+      direction: 'incoming'
+    };
+  }
+  return {
+    arrowStyle: null,
+    amountStyle: [styles.outgoing, styles.theme.outgoing],
+    firstAddress: tx.senderAddress,
+    secondAddress: tx.recipientAddress,
+    amountSign: '-',
+    direction: 'outgoing'
+  };
+};
 
 @connect(
-  state => ({
+  (state) => ({
     followedAccounts: state.accounts.followed || [],
     account: state.accounts.info || {},
     activeToken: state.settings.token.active,
-    language: state.settings.language,
+    language: state.settings.language
   }),
   {}
 )
-
 class TransactionDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
-      headerLeft: <IconButton title="" icon="back" onPress={params.action} />,
+      headerLeft: <IconButton title="" icon="back" onPress={params.action} />
     };
   };
 
   state = {
     tx: null,
     refreshing: false,
-    votes: [],
+    votes: []
   };
 
   componentDidMount() {
@@ -64,7 +87,7 @@ class TransactionDetail extends React.Component {
     }
     navigation.setParams({
       theme,
-      action: backAction,
+      action: backAction
     });
   }
 
@@ -72,12 +95,12 @@ class TransactionDetail extends React.Component {
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
     const {
-      t, activeToken, account, route,
+      t, activeToken, account, route
     } = this.props;
     try {
       const { data } = await transactionsAPI.get(activeToken, {
         address: route.params?.account ?? account[activeToken].address,
-        id,
+        id
       });
       const tx = data[0] || {};
 
@@ -85,14 +108,14 @@ class TransactionDetail extends React.Component {
       // example: navigating from a deep link
       if (!tx.id && !currentTx) {
         this.setState({
-          error: t('Transaction not found'),
+          error: t('Transaction not found')
         });
       } else {
         setTimeout(
           () =>
-            this.setState(prevState => ({
+            this.setState((prevState) => ({
               tx: merge(prevState.tx, tx),
-              refreshing: false,
+              refreshing: false
             })),
           delay
         );
@@ -100,7 +123,7 @@ class TransactionDetail extends React.Component {
     } catch (error) {
       if (!currentTx) {
         this.setState({
-          error: t('An error occurred, please try again.'),
+          error: t('An error occurred, please try again.')
         });
       }
     }
@@ -109,7 +132,7 @@ class TransactionDetail extends React.Component {
   onRefresh = () => {
     this.setState(
       {
-        refreshing: true,
+        refreshing: true
       },
       () => this.retrieveTransaction(this.state.tx.id, 1500)
     );
@@ -118,12 +141,7 @@ class TransactionDetail extends React.Component {
   // eslint-disable-next-line complexity
   render() {
     const {
-      styles,
-      account,
-      t,
-      activeToken,
-      language,
-      route,
+      styles, account, t, activeToken, language, route
     } = this.props;
     const {
       tx, error, refreshing, votes
@@ -149,13 +167,13 @@ class TransactionDetail extends React.Component {
     const incognito = route.params?.incognito ?? null;
     const isDelegateRegistration = isRegistration(tx);
     const isVoting = isVote(tx);
+    const config = getConfig(styles, tx, walletAccountAddress);
+    const amount = fromRawLsk(tx.amount);
 
     return (
       <ScrollView
         style={[styles.container, styles.theme.container]}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />
-        }
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />}
       >
         {activeToken === 'LSK' ? (
           <LskSummary
@@ -176,16 +194,12 @@ class TransactionDetail extends React.Component {
         {isDelegateRegistration && (
           <Row title={'Delegate username'}>
             <View>
-              <B style={[styles.value, styles.theme.value]}>
-                {tx.delegate}
-              </B>
+              <B style={[styles.value, styles.theme.value]}>{tx.delegate}</B>
             </View>
           </Row>
         )}
 
-        <Row
-          title={getAccountTitle(tx)}
-        >
+        <Row title={getAccountTitle(tx)}>
           <View style={styles.addressContainer}>
             <A
               value={tx.senderAddress}
@@ -195,6 +209,7 @@ class TransactionDetail extends React.Component {
               {getAccountLabel(tx.senderAddress, this.props)}
             </A>
           </View>
+          <Avatar address={config.firstAddress} size={40} />
         </Row>
         {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? null : (
           <Row title="Recipient">
@@ -207,19 +222,18 @@ class TransactionDetail extends React.Component {
                 {getAccountLabel(tx.recipientAddress, this.props)}
               </A>
             </View>
+            <Avatar address={config.secondAddress} size={40} />
           </Row>
         )}
-        {
-          !isUnlock(tx) ? null : (
-            <Row title="Amount">
-              <B style={[styles.value, styles.theme.value]}>
-                <FormattedNumber tokenType={activeToken} language={language}>
-                  {fromRawLsk(tx.amount)}
-                </FormattedNumber>
-              </B>
-            </Row>
-          )
-        }
+        {!isUnlock(tx) ? null : (
+          <Row title="Amount">
+            <B style={[styles.value, styles.theme.value]}>
+              <FormattedNumber tokenType={activeToken} language={language}>
+                {fromRawLsk(tx.amount)}
+              </FormattedNumber>
+            </B>
+          </Row>
+        )}
         <Row title="Transaction fee">
           <B style={[styles.value, styles.theme.value]}>
             <FormattedNumber tokenType={activeToken} language={language}>
@@ -229,11 +243,7 @@ class TransactionDetail extends React.Component {
         </Row>
         {tx.data ? (
           <Row title="Message">
-            <B
-              style={[styles.value, styles.theme.value, styles.referenceValue]}
-            >
-              {tx.data}
-            </B>
+            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>{tx.data}</B>
           </Row>
         ) : null}
         <Row title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
@@ -259,11 +269,18 @@ class TransactionDetail extends React.Component {
             </A>
           )}
         </Row>
-        {
-          isVoting
-            ? <VoteList votes={votes} />
-            : null
-        }
+        {isTransfer(tx) && <Row title={'Amount'}>
+          {!incognito ? (
+            <H4 style={config.amountStyle}>
+              {config.amountSign}
+              <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
+            </H4>
+          ) : null}
+          {incognito ? (
+            <Blur value={amount} direction={config.direction} style={styles.amountBlur} />
+          ) : null}
+        </Row>}
+        {isVoting ? <VoteList votes={votes} /> : null}
       </ScrollView>
     );
   }

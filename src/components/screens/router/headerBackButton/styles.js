@@ -14,7 +14,7 @@ export default () => ({
   common: {
     title: {
       fontFamily: fonts.family.heading,
-      fontSize: 20,
+      fontSize: 24,
     },
     paddingLeft: {
       paddingLeft: 20,

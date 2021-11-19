@@ -100,24 +100,23 @@ navigationOptions.Wallet = () => {
 };
 
 navigationOptions.Request = {
-  title: t('Request'),
-
-  headerLeft: () => <HeaderPlaceholderButton />,
+  title: null,
+  headerLeft: () => <HeaderBackButton title="Request" noIcon />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
 
 navigationOptions.Bookmarks = {
-  title: t('Bookmarks'),
   tabBarLabel: 'Bookmarks',
-  headerLeft: () => <HeaderPlaceholderButton />,
+  title: null,
+  headerLeft: () => <HeaderBackButton title="Bookmarks" noIcon />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
 
 navigationOptions.Settings = {
-  title: t('Settings'),
-  headerLeft: () => <HeaderPlaceholderButton />,
+  title: null,
+  headerLeft: () => <HeaderBackButton title="Settings" noIcon />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };

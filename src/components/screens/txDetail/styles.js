@@ -6,6 +6,12 @@ export default () => ({
     container: {
       flex: 1,
       padding: 20,
+      paddingTop: 30,
+    },
+    addressContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      flex: 1,
     },
     transactionTitle: {
       fontFamily: fonts.family.contextSemiBold,
@@ -88,6 +94,7 @@ export default () => ({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+      paddingRight: 20,
     },
     incoming: {},
     outgoing: {},
