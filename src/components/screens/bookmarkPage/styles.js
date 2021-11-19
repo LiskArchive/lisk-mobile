@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import {
-  themes, colors, boxes, fonts
+  themes, colors, fonts
 } from '../../../constants/styleGuide';
 import { setColorOpacity } from '../../../utilities/helpers';
 
@@ -14,9 +14,17 @@ export default () => ({
       paddingBottom: 24,
     },
     titleContainer: {
-      overflow: 'hidden',
-      paddingRight: boxes.boxPadding,
-      paddingLeft: boxes.boxPadding,
+      backgroundColor: colors.light.ultramarineBlue,
+      width: 43,
+      height: 43,
+      borderRadius: 22,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: 5,
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+      margin: 20,
     },
     headerButton: {
       transform: [{ rotate: '45deg' }],
@@ -64,15 +72,9 @@ export default () => ({
       height: 55,
     },
     addButtonIcon: {
-      marginLeft: -10,
       transform: [{ rotate: '45deg' }],
-      width: 43,
-      height: 43,
-      marginRight: 15,
-      borderRadius: 21,
-      overflow: 'hidden',
-      paddingTop: 11,
-      textAlign: 'center',
+      width: 40,
+      height: 40,
     },
   },
   [themes.light]: {
@@ -85,9 +87,6 @@ export default () => ({
     addButton: {
       borderBottomColor: colors.light.mystic,
     },
-    addButtonIcon: {
-      backgroundColor: colors.light.ultramarineBlue,
-    },
   },
   [themes.dark]: {
     wrapper: {
@@ -98,9 +97,6 @@ export default () => ({
     },
     addButton: {
       borderBottomColor: setColorOpacity(colors.light.white, 0.15),
-    },
-    addButtonIcon: {
-      backgroundColor: colors.dark.ultramarineBlue,
     },
   },
 });
