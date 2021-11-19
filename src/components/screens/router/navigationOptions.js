@@ -180,10 +180,10 @@ navigationOptions.PassphraseBackup = {
 };
 
 navigationOptions.AddBookmark = {
-  title: 'New bookmark',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  title: null,
+  headerLeft: (props) => <HeaderBackButton {...props} title='New bookmark' />,
   headerStyle: noShadow,
-  headerTitleStyle: genericTitle
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.SignIn = {
