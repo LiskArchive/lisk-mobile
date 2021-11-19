@@ -1,13 +1,13 @@
 /* eslint-disable complexity */
 import React from 'react';
-import { Platform, View, Animated } from 'react-native';
+import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { bioMetricAuthentication } from '../../../../utilities/passphrase';
 import Icon from '../../../shared/toolBox/icon';
-import styles from './styles';
-import { colors } from '../../../../constants/styleGuide';
+import getStyles from './styles';
+import { colors, themes } from '../../../../constants/styleGuide';
 import { P } from '../../../shared/toolBox/typography';
 import { PrimaryButton, Button } from '../../../shared/toolBox/button';
 import waves from '../../../../assets/animations/waves.json';
@@ -15,6 +15,7 @@ import wavesError from '../../../../assets/animations/waves-error.json';
 import CreateAccount from '../createAccount';
 import Title from '../title';
 import SignInSvg from '../../../../assets/svgs/SignInSvg';
+import withTheme from '../../../shared/withTheme';
 
 class BiometricAuth extends React.Component {
   state = {
@@ -51,17 +52,17 @@ class BiometricAuth extends React.Component {
 
   onClick = () => {
     this.setState({ busy: true, biometricAuth: true }, () => {
-      if (Platform.OS === 'android') {
-        this.runAnimation();
-      }
+      this.runAnimation();
       bioMetricAuthentication({
         successCallback: () => {
           this.props.hideDialog(() => {
             this.props.signIn(this.props.passphrase, 'biometricAuth');
           });
         },
-        errorCallback: () => this.setState({ busy: false, biometricAuth: false }),
-        androidError: this.playUnAuthorizedAnimation
+        errorCallback: () => {
+          this.setState({ busy: false, biometricAuth: false });
+          this.playUnAuthorizedAnimation();
+        },
       });
     });
   };
@@ -94,7 +95,9 @@ class BiometricAuth extends React.Component {
   }
 
   render() {
-    const { t, sensorType, toggleView } = this.props;
+    const {
+      t, sensorType, toggleView, styles, theme
+    } = this.props;
     const {
       opacity, tried, busy, biometricAuth
     } = this.state;
@@ -107,7 +110,7 @@ class BiometricAuth extends React.Component {
     }
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         <Title opacity={opacity}>{pageTitle}</Title>
 
         <View style={styles.waves}>
@@ -133,14 +136,14 @@ class BiometricAuth extends React.Component {
               }}
             />
           )}
-          <Animated.View style={{ opacity }}>
+          {biometricAuth && <Animated.View style={{ opacity }}>
             <Icon
               size={40}
               color={colors.light.white}
               name={sensorType === 'Face ID' ? 'face-id-full' : 'touch-id-full'}
               style={styles.authTypeIcon}
             />
-          </Animated.View>
+          </Animated.View>}
         </View>
 
         <Animated.View style={[styles.linkWrapper, styles.column, { opacity }]}>
@@ -160,6 +163,9 @@ class BiometricAuth extends React.Component {
 
               <Button
                 style={[styles.button, styles.buttonManualSignIn]}
+                textStyle={
+                  theme === themes.dark ? { color: colors.dark.white } : colors.light.zodiacBlue
+                }
                 title={t('Sign in manually')}
                 onClick={toggleView}
                 noTheme={true}
@@ -174,4 +180,4 @@ class BiometricAuth extends React.Component {
   }
 }
 
-export default translate()(BiometricAuth);
+export default withTheme(translate()(BiometricAuth), getStyles());

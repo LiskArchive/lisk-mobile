@@ -17,7 +17,8 @@ import SplashScreen from 'react-native-splash-screen';
 // eslint-disable-next-line import/no-unresolved
 import QuickActions from 'react-native-quick-actions';
 import FingerprintOverlay from '../../shared/fingerprintOverlay';
-import styles from './styles';
+import getStyles from './styles';
+import withTheme from '../../shared/withTheme';
 import {
   getPassphraseFromKeyChain,
   storePassphraseInKeyChain,
@@ -152,7 +153,7 @@ class SignIn extends React.Component {
                   cb(passphrase);
                 });
               },
-              errorCallback: () => {},
+              errorCallback: () => { },
               androidError: error => {
                 const { androidDialog } = this.state;
                 androidDialog.error = error;
@@ -349,15 +350,16 @@ class SignIn extends React.Component {
 
   render() {
     const { view, storedPassphrase, androidDialog } = this.state;
+    const { styles } = this.props;
     const { sensorType, hasStoredPassphrase } = this.props.settings;
     const signOut = this.props.route.params?.signOut;
     return (
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Splash
           animate={!signOut}
           showSimplifiedView={this.showSimplifiedView()}
         />
-        <View style={styles.container}>
+        <View style={[styles.container]}>
           {view === 'biometricAuth' ? (
             <BiometricAuth
               animate={!signOut}
@@ -394,4 +396,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default translate()(SignIn);
+export default withTheme(translate()(SignIn), getStyles());
