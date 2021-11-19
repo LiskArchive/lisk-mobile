@@ -11,7 +11,6 @@ export default () => ({
       top: 0,
       zIndex: 0,
       width: '100%',
-      height: '100%',
     },
     splashBg: {
       backgroundColor: colors.light.ultramarineBlue,
@@ -20,7 +19,6 @@ export default () => ({
       top: 0,
       zIndex: 0,
       width: '100%',
-      height: '100%',
       opacity: 0.3,
     },
     splashFigure: {
@@ -29,15 +27,12 @@ export default () => ({
       alignItems: 'center',
     },
     splashStatic: {
-      zIndex: 2,
-      top: height <= 640 ? 40 : 100,
+      top: height <= 640 ? 20 : 80,
     },
     splashStaticSimplified: {
-      zIndex: 2,
-      top: height <= 640 ? 40 : 24,
+      top: height <= 640 ? 30 : 0,
     },
     splashAnimating: {
-      zIndex: 1,
       top: '50%',
       marginTop: -30,
     },
