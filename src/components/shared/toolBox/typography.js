@@ -1,6 +1,6 @@
-import React from "react";
-import { Text } from "react-native";
-import theme from "./styles";
+import React from 'react';
+import { Text } from 'react-native';
+import theme from './styles';
 
 export const H1 = ({ children, style, onPress }) => (
   <Text style={[theme.h1, style]} onPress={onPress}>
