@@ -1,11 +1,10 @@
 import React from 'react';
 import {
-  View, Animated, ScrollView, Keyboard
+  View, TouchableOpacity, ScrollView
 } from 'react-native';
 import { translate } from 'react-i18next';
 import Icon from '../../shared/toolBox/icon';
 import Input from '../../shared/toolBox/input';
-import { IconButton } from '../../shared/toolBox/button';
 import { colors } from '../../../constants/styleGuide';
 import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import withTheme from '../../shared/withTheme';
@@ -22,80 +21,15 @@ class Bookmark extends React.Component {
     query: '',
   };
 
-  animatedStyles = {
-    height: new Animated.Value(75),
-    paddingTop: new Animated.Value(20),
-  };
-
-  componentDidMount() {
-    this.keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      this.onKeyboardOpen
-    );
-    this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      this.onKeyboardClose
-    );
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
   setQuery = query => {
     this.setState({
       query,
     });
   };
 
-  onKeyboardOpen = () => {
-    this.onKeyboardChanged(true);
-  };
-
-  onKeyboardClose = () => {
-    this.onKeyboardChanged(false);
-  };
-
   closeCurrent() {
     if (this.current) this.current.snapTo({ index: 0 });
   }
-
-  hideHeadingElements = showHeader => {
-    const { height, paddingTop } = this.animatedStyles;
-    this.closeCurrent();
-    if (showHeader) {
-      Animated.parallel([
-        Animated.timing(paddingTop, {
-          toValue: 0,
-          duration: 400,
-          delay: 0,
-        }),
-        Animated.timing(height, {
-          toValue: 0,
-          duration: 400,
-          delay: 0,
-        }),
-      ]).start();
-    } else {
-      Animated.parallel([
-        Animated.timing(height, {
-          toValue: 75,
-          duration: 400,
-          delay: 0,
-        }),
-        Animated.timing(paddingTop, {
-          toValue: 20,
-          duration: 400,
-          delay: 0,
-        }),
-      ]).start();
-    }
-  };
-
-  onKeyboardChanged = showHeader => {
-    this.hideHeadingElements(showHeader);
-  };
 
   componentDidUpdate() {
     this.current = null;
@@ -128,7 +62,7 @@ class Bookmark extends React.Component {
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} >
           <View style={styles.innerContainer}>
             <View style={styles.form}>
               <View style={styles.addressContainer}>
@@ -154,25 +88,6 @@ class Bookmark extends React.Component {
                   value={query}
                 />
               </View>
-              <Animated.View
-                style={[styles.titleContainer, this.animatedStyles]}
-              >
-                <IconButton
-                  style={[styles.addButton, styles.theme.addButton]}
-                  iconStyle={[styles.addButtonIcon, styles.theme.addButtonIcon]}
-                  titleStyle={[
-                    styles.addButtonText,
-                    styles.theme.addButtonText,
-                  ]}
-                  title={t('Add a new bookmark')}
-                  icon="cross"
-                  color={colors[theme].white}
-                  iconSize={21}
-                  onClick={() =>
-                    navigation.navigate({ name: 'AddBookmark', params: { title: t('New bookmark') } })
-                  }
-                />
-              </Animated.View>
               <Bookmarks
                 navigate={navigation.navigate}
                 draggable={true}
@@ -182,6 +97,19 @@ class Bookmark extends React.Component {
             </View>
           </View>
         </ScrollView>
+        <TouchableOpacity
+          style={[styles.titleContainer]}
+          onPress={() =>
+            navigation.navigate({ name: 'AddBookmark', params: { title: t('New bookmark') } })
+          }
+        >
+          <Icon
+            style={[styles.addButtonIcon]}
+            name="cross"
+            color={colors[theme].white}
+            iconSize={21}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
