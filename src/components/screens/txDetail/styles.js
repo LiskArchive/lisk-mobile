@@ -35,6 +35,7 @@ export default () => ({
       alignItems: 'center',
       fontFamily: fonts.family.context,
       fontWeight: 'bold',
+      marginRight: 10,
     },
     referenceValue: {
       flexWrap: 'wrap',

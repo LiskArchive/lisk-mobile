@@ -38,7 +38,7 @@ class Item extends React.Component {
           ) : null}
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>{data.label}</B>
-            <Small style={[styles.label, styles.theme.label]}>
+            <Small style={[styles.label, styles.theme.label]} numberOfLines={1}>
               {data.address}
             </Small>
           </View>

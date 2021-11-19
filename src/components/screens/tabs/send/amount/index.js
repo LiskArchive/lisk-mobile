@@ -3,7 +3,6 @@ import connect from 'redux-connect-decorator';
 
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
-import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import {
   pricesRetrieved as pricesRetrievedAction,
   dynamicFeesRetrieved as dynamicFeesRetrievedAction,
@@ -12,8 +11,6 @@ import { tokenMap } from '../../../../../constants/tokens';
 import AmountLSK from './lsk';
 import AmountBTC from './btc';
 import HeaderBackButton from '../../../router/headerBackButton';
-
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 @connect(
   state => ({
