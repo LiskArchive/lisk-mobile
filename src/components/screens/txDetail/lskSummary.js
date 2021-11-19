@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
 import FormattedDate from '../../shared/formattedDate';
 import withTheme from '../../shared/withTheme';
-import { P } from '../../shared/toolBox/typography';
+import { P, B } from '../../shared/toolBox/typography';
 import { getTxConstant } from '../../../constants/transactions';
 import getStyles from './styles';
 
@@ -30,9 +30,9 @@ const LskSummary = ({
     <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
       <View style={styles.titleContainer}>
         <View>
-          <P style={[styles.transactionTitle, styles.theme.transactionTitle]}>
+          <B style={[styles.transactionTitle, styles.theme.transactionTitle]}>
             {t(getTxConstant(tx).title)}
-          </P>
+          </B>
           <TimeStamp timestamp={tx.timestamp} styles={styles} />
         </View>
         <Graphics styles={styles} tx={tx} theme={theme} />
