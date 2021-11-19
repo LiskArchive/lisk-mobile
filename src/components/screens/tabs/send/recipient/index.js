@@ -17,6 +17,7 @@ import Bookmarks from '../../../../shared/bookmarks';
 import { validateAddress } from '../../../../../utilities/validators';
 import DropDownHolder from '../../../../../utilities/alert';
 import HeaderBackButton from '../../../router/headerBackButton';
+import StepProgress from '../../../../shared/multiStep/stepProgress';
 
 class Recipient extends React.Component {
   scannedData = {};
@@ -46,6 +47,7 @@ class Recipient extends React.Component {
     setOptions({
       title: null,
       headerLeft: () => <HeaderBackButton title={'Send LSK'} safeArea={true} noIcon={true} />,
+      headerRight: () => <StepProgress currentIndex={1} length={3} />
     });
   }
 

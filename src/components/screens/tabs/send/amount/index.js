@@ -11,6 +11,7 @@ import { tokenMap } from '../../../../../constants/tokens';
 import AmountLSK from './lsk';
 import AmountBTC from './btc';
 import HeaderBackButton from '../../../router/headerBackButton';
+import StepProgress from '../../../../shared/multiStep/stepProgress';
 
 @connect(
   state => ({
@@ -33,7 +34,8 @@ class Amount extends React.Component {
         {...props}
         onPress={prevStep}
         safeArea={true}
-        title={'Amount'} />,
+        title={'Send LSK'} />,
+      headerRight: () => <StepProgress currentIndex={2} length={3} />
     });
   }
 

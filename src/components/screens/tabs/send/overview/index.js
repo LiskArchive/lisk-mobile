@@ -17,6 +17,7 @@ import { tokenMap } from '../../../../../constants/tokens';
 import DropDownHolder from '../../../../../utilities/alert';
 import HeaderBackButton from '../../../router/headerBackButton';
 import ReadMore from './readMore';
+import StepProgress from '../../../../shared/multiStep/stepProgress';
 
 const getTranslatedMessages = (t) => ({
   initialize: {
@@ -28,7 +29,7 @@ const getTranslatedMessages = (t) => ({
     reference: t('Account initialization')
   },
   send: {
-    title: t('Ready to send'),
+    title: t('Send LSk'),
     button: t('Send now'),
     buttonBusy: t('Sending')
   }
@@ -60,7 +61,8 @@ class Overview extends React.Component {
         onPress={prevStep}
         safeArea={true}
         title={send.title}
-      />
+      />,
+      headerRight: () => <StepProgress currentIndex={3} length={3} />
     };
 
     if (route.params?.initialize) {
@@ -70,7 +72,7 @@ class Overview extends React.Component {
 
       options = {
         title: initialize.title,
-        headerLeft: () => null
+        headerLeft: () => null,
       };
     }
 
