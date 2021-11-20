@@ -206,7 +206,7 @@ class TransactionDetail extends React.Component {
               onPress={() => goToWallet(tx.senderAddress, this.props)}
               style={[styles.value, styles.theme.value, styles.transactionId]}
             >
-              {getAccountLabel(tx.senderAddress, this.props)}
+              {getAccountLabel(tx.senderAddress, { ...this.props, truncate: true })}
             </A>
           </View>
           <Avatar address={config.firstAddress} size={40} />
@@ -219,12 +219,23 @@ class TransactionDetail extends React.Component {
                 onPress={() => goToWallet(tx.recipientAddress, this.props)}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
               >
-                {getAccountLabel(tx.recipientAddress, this.props)}
+                {getAccountLabel(tx.recipientAddress, { ...this.props, truncate: true })}
               </A>
             </View>
             <Avatar address={config.secondAddress} size={40} />
           </Row>
         )}
+        {isTransfer(tx) && <Row title={'Amount'}>
+          {!incognito ? (
+            <H4 style={config.amountStyle}>
+              {config.amountSign}
+              <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
+            </H4>
+          ) : null}
+          {incognito ? (
+            <Blur value={amount} direction={config.direction} style={styles.amountBlur} />
+          ) : null}
+        </Row>}
         {!isUnlock(tx) ? null : (
           <Row title="Amount">
             <B style={[styles.value, styles.theme.value]}>
@@ -246,11 +257,6 @@ class TransactionDetail extends React.Component {
             <B style={[styles.value, styles.theme.value, styles.referenceValue]}>{tx.data}</B>
           </Row>
         ) : null}
-        <Row title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
-          <B style={[styles.value, styles.theme.value]}>
-            {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
-          </B>
-        </Row>
         <Row title="Transaction ID">
           {activeToken === 'LSK' ? (
             <Share
@@ -269,17 +275,11 @@ class TransactionDetail extends React.Component {
             </A>
           )}
         </Row>
-        {isTransfer(tx) && <Row title={'Amount'}>
-          {!incognito ? (
-            <H4 style={config.amountStyle}>
-              {config.amountSign}
-              <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
-            </H4>
-          ) : null}
-          {incognito ? (
-            <Blur value={amount} direction={config.direction} style={styles.amountBlur} />
-          ) : null}
-        </Row>}
+        <Row title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
+          <B style={[styles.value, styles.theme.value]}>
+            {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
+          </B>
+        </Row>
         {isVoting ? <VoteList votes={votes} /> : null}
       </ScrollView>
     );

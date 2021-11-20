@@ -1,6 +1,7 @@
 import { Linking } from 'react-native';
 import { isRegistration, isTransfer, isVote } from '../../../constants/transactions';
 import { getTransactionExplorerURL } from '../../../utilities/api/btc/transactions';
+import { stringShortener } from '../../../utilities/helpers';
 
 export const goToWallet = (address, { navigation, account, activeToken }) => {
   if (
@@ -11,7 +12,12 @@ export const goToWallet = (address, { navigation, account, activeToken }) => {
   }
 };
 
-export const getAccountLabel = (address, { t, followedAccounts, activeToken }) => {
+export const getAccountLabel = (
+  address,
+  {
+    t, followedAccounts, activeToken, truncate
+  }
+) => {
   if (address === 'Unparsed Address') {
     return t('Unparsed Address');
   }
@@ -21,6 +27,9 @@ export const getAccountLabel = (address, { t, followedAccounts, activeToken }) =
   );
   if (followedAccount) {
     return followedAccount.label;
+  }
+  if (truncate) {
+    return stringShortener(address, 6, 5);
   }
 
   return address;
