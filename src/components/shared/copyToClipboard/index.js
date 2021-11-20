@@ -23,17 +23,14 @@ class CopyToClipBoard extends React.Component {
 
   render() {
     const {
-      showIcon,
       value,
       type,
       label,
-      iconColor,
       iconSize,
       styles,
       style,
       iconStyle,
       labelStyle,
-      t,
     } = this.props;
     const Element = type || Text;
     const text = label || value;
@@ -41,17 +38,15 @@ class CopyToClipBoard extends React.Component {
     return (
       <View style={[styles.container, style]}>
         <Element style={labelStyle} onPress={this.copy}>
-          {this.state.copied ? t('Copied to clipboard') : text}
+          {text}
         </Element>
-        {showIcon && !this.state.copied ? (
-          <Icon
-            onPress={this.copy}
-            name="copy"
-            color={iconColor || colors.light.white}
-            size={iconSize || 16}
-            style={[styles.icon, iconStyle]}
-          />
-        ) : null}
+        <Icon
+          onPress={this.copy}
+          name={this.state.copied ? 'checkmark' : 'copy'}
+          color={this.state.copied ? colors.light.ufoGreen : colors.light.blueGray}
+          size={iconSize || 16}
+          style={[iconStyle]}
+        />
       </View>
     );
   }

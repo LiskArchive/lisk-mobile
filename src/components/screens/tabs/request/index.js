@@ -108,7 +108,6 @@ class Request extends React.Component {
                   labelStyle={[styles.address, styles.theme.address]}
                   showIcon={true}
                   iconSize={18}
-                  iconStyle={styles.copyIcon}
                   value={address}
                   type={B}
                 />

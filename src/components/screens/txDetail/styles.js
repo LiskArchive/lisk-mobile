@@ -5,8 +5,10 @@ export default () => ({
   common: {
     container: {
       flex: 1,
+    },
+    contentContainer: {
       padding: 20,
-      paddingTop: 30,
+      paddingTop: 20,
     },
     addressContainer: {
       flexDirection: 'row',

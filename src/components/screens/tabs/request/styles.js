@@ -38,9 +38,6 @@ export default () => ({
       alignItems: 'center',
       width: '100%',
     },
-    copyIcon: {
-      color: colors.light.blueGray,
-    },
     body: {
       flex: 1,
       flexDirection: 'column',

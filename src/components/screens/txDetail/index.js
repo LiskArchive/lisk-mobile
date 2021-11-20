@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
@@ -17,7 +18,7 @@ import Row from './row';
 import { transactions as transactionsAPI } from '../../../utilities/api';
 import getStyles from './styles';
 import VoteList from './voteList';
-import { merge } from '../../../utilities/helpers';
+import { merge, stringShortener } from '../../../utilities/helpers';
 import {
   goToWallet, getAccountLabel, getAccountTitle, openExplorer
 } from './utils';
@@ -29,6 +30,7 @@ import {
 } from '../../../constants/transactions';
 import Avatar from '../../shared/avatar';
 import Blur from '../../shared/transactions/blur';
+import CopyToClipboard from '../../shared/copyToClipboard';
 
 const getConfig = (styles, tx, accountAddress) => {
   if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
@@ -100,7 +102,7 @@ class TransactionDetail extends React.Component {
     try {
       const { data } = await transactionsAPI.get(activeToken, {
         address: route.params?.account ?? account[activeToken].address,
-        id
+        id,
       });
       const tx = data[0] || {};
 
@@ -173,6 +175,7 @@ class TransactionDetail extends React.Component {
     return (
       <ScrollView
         style={[styles.container, styles.theme.container]}
+        contentContainerStyle={styles.contentContainer}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />}
       >
         {activeToken === 'LSK' ? (
@@ -257,14 +260,23 @@ class TransactionDetail extends React.Component {
             <B style={[styles.value, styles.theme.value, styles.referenceValue]}>{tx.data}</B>
           </Row>
         ) : null}
+        {tx.confirmations ? (
+          <Row title="Confirmations">
+            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
+              {tx.confirmations}
+            </B>
+          </Row>
+        ) : null}
         <Row title="Transaction ID">
           {activeToken === 'LSK' ? (
-            <Share
-              type={B}
-              value={tx.id}
-              title={tx.id}
-              icon={true}
+            <CopyToClipboard
               style={[styles.value, styles.theme.value, styles.transactionId]}
+              labelStyle={[styles.value, styles.theme.value, styles.referenceValue]}
+              showIcon={true}
+              iconSize={18}
+              value={tx.id}
+              type={B}
+              label={stringShortener(tx.id, 15, 6)}
             />
           ) : (
             <A
@@ -275,6 +287,24 @@ class TransactionDetail extends React.Component {
             </A>
           )}
         </Row>
+        {tx.blockHeight ? (
+          <Row title="Block Height">
+            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
+              {tx.blockHeight}
+            </B>
+          </Row>
+        ) : null}
+        {tx.blockId ? (
+          <Row title="Block ID">
+            <Share
+              type={B}
+              value={tx.blockId}
+              title={stringShortener(tx.blockId, 15, 6)}
+              icon={true}
+              style={[styles.value, styles.theme.value, styles.transactionId]}
+            />
+          </Row>
+        ) : null}
         <Row title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
           <B style={[styles.value, styles.theme.value]}>
             {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
