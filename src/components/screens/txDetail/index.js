@@ -7,7 +7,6 @@ import { translate } from 'react-i18next';
 import withTheme from '../../shared/withTheme';
 import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../../shared/formattedNumber';
-import Share from '../../shared/share';
 import { B, A, H4, } from '../../shared/toolBox/typography';
 import IconButton from '../router/headerBackButton';
 import Loading from '../../shared/transactions/loading';
