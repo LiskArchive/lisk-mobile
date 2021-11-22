@@ -1,13 +1,12 @@
 import { colors, boxes } from '../../../../constants/styleGuide';
-import { deviceHeight } from '../../../../utilities/device';
+import { isSmallDevice } from '../../../../utilities/device';
 
-const height = deviceHeight();
 
 export default () => ({
   common: {
     container: {
       height: '100%',
-      paddingTop: height <= 640 ? 100 : 110,
+      paddingTop: isSmallDevice ? 140 : 180,
     },
     waves: {
       width: '100%',

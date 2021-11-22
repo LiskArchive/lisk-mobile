@@ -1,7 +1,5 @@
 import { colors } from '../../../../constants/styleGuide';
-import { deviceHeight } from '../../../../utilities/device';
-
-const height = deviceHeight();
+import { isSmallDevice } from '../../../../utilities/device';
 
 export default () => ({
   common: {
@@ -27,14 +25,10 @@ export default () => ({
       alignItems: 'center',
     },
     splashStatic: {
-      top: height <= 640 ? 10 : 60,
+      top: isSmallDevice ? 80 : 120,
     },
     splashStaticSimplified: {
-      top: height <= 640 ? 20 : 0,
-    },
-    splashAnimating: {
-      top: '50%',
-      marginTop: -30,
+      top: isSmallDevice ? 20 : 0,
     },
     splashImage: {
       height: 60,
