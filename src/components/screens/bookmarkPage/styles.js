@@ -73,8 +73,6 @@ export default () => ({
     },
     addButtonIcon: {
       transform: [{ rotate: '45deg' }],
-      width: 40,
-      height: 40,
     },
   },
   [themes.light]: {

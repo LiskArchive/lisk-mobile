@@ -107,7 +107,7 @@ class Bookmark extends React.Component {
             style={[styles.addButtonIcon]}
             name="cross"
             color={colors[theme].white}
-            iconSize={21}
+            size={25}
           />
         </TouchableOpacity>
       </View>
