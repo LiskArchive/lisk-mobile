@@ -235,7 +235,7 @@ class TransactionDetail extends React.Component {
             </H4>
           ) : null}
           {incognito ? (
-            <Blur value={amount} direction={config.direction} style={styles.amountBlur} />
+            <Blur value={amount} direction={config.direction} />
           ) : null}
         </Row>}
         {!isUnlock(tx) ? null : (

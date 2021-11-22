@@ -107,11 +107,6 @@ export default () => ({
     transactionId: {
       marginBottom: 0,
     },
-    amountBlur: {
-      justifyContent: 'center',
-      textAlign: 'center',
-      flexDirection: 'row',
-    },
     empty: {
       height: '100%',
       marginTop: 0,
