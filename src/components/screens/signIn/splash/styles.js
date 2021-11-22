@@ -27,10 +27,10 @@ export default () => ({
       alignItems: 'center',
     },
     splashStatic: {
-      top: height <= 640 ? 20 : 80,
+      top: height <= 640 ? 10 : 60,
     },
     splashStaticSimplified: {
-      top: height <= 640 ? 30 : 0,
+      top: height <= 640 ? 20 : 0,
     },
     splashAnimating: {
       top: '50%',

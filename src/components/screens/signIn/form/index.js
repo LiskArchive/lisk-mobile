@@ -197,9 +197,10 @@ class Form extends React.Component {
             innerStyles={{
               input: [
                 styles.input,
+                styles.theme.input,
                 revealPassphrase ? styles.inputRevealed : null,
-                styles.theme.input
               ],
+              inputLabel: [styles.label, styles.theme.label]
             }}
             value={passphrase.value}
             onChange={this.onInputChange}
@@ -219,7 +220,7 @@ class Form extends React.Component {
 
           <IconButton
             onPress={this.toggleCamera}
-            titleStyle={styles.scanButtonTitle}
+            titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
             style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
             title={t('Scan')}
             icon="scanner"
