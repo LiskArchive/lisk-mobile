@@ -3,7 +3,6 @@ import connect from 'redux-connect-decorator';
 
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
-import { deviceHeight, SCREEN_HEIGHTS } from '../../../../../utilities/device';
 import {
   pricesRetrieved as pricesRetrievedAction,
   dynamicFeesRetrieved as dynamicFeesRetrievedAction,
@@ -12,8 +11,7 @@ import { tokenMap } from '../../../../../constants/tokens';
 import AmountLSK from './lsk';
 import AmountBTC from './btc';
 import HeaderBackButton from '../../../router/headerBackButton';
-
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
+import StepProgress from '../../../../shared/multiStep/stepProgress';
 
 @connect(
   state => ({
@@ -31,8 +29,13 @@ class Amount extends React.Component {
     const { navigation, prevStep } = this.props;
 
     navigation.setOptions({
-      title: isSmallScreen ? 'Send' : 'Amount',
-      headerLeft: props => <HeaderBackButton {...props} onPress={prevStep} safeArea={true} />,
+      title: null,
+      headerLeft: props => <HeaderBackButton
+        {...props}
+        onPress={prevStep}
+        safeArea={true}
+        title={'Send LSK'} />,
+      headerRight: () => <StepProgress currentIndex={2} length={3} />
     });
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
@@ -6,49 +7,72 @@ import { translate } from 'react-i18next';
 import withTheme from '../../shared/withTheme';
 import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../../shared/formattedNumber';
-import Share from '../../shared/share';
-import { B, A } from '../../shared/toolBox/typography';
+import { B, A, H4, } from '../../shared/toolBox/typography';
 import IconButton from '../router/headerBackButton';
 import Loading from '../../shared/transactions/loading';
 import EmptyState from '../../shared/transactions/empty';
 import LskSummary from './lskSummary';
 import BtcSummary from './btcSummary';
 import Row from './row';
-import {
-  transactions as transactionsAPI,
-} from '../../../utilities/api';
+import { transactions as transactionsAPI } from '../../../utilities/api';
 import getStyles from './styles';
 import VoteList from './voteList';
-import { merge } from '../../../utilities/helpers';
+import { merge, stringShortener } from '../../../utilities/helpers';
 import {
   goToWallet, getAccountLabel, getAccountTitle, openExplorer
 } from './utils';
 import {
-  isRegistration, isTransfer, isVote, isUnlock,
+  isRegistration,
+  isTransfer,
+  isVote,
+  isUnlock,
 } from '../../../constants/transactions';
+import Avatar from '../../shared/avatar';
+import Blur from '../../shared/transactions/blur';
+import CopyToClipboard from '../../shared/copyToClipboard';
+
+const getConfig = (styles, tx, accountAddress) => {
+  if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
+    return {
+      arrowStyle: styles.reverseArrow,
+      amountStyle: [styles.incoming, styles.theme.incoming],
+      firstAddress: tx.recipientAddress,
+      secondAddress: tx.senderAddress,
+      amountSign: '',
+      direction: 'incoming'
+    };
+  }
+  return {
+    arrowStyle: null,
+    amountStyle: [styles.outgoing, styles.theme.outgoing],
+    firstAddress: tx.senderAddress,
+    secondAddress: tx.recipientAddress,
+    amountSign: '-',
+    direction: 'outgoing'
+  };
+};
 
 @connect(
-  state => ({
+  (state) => ({
     followedAccounts: state.accounts.followed || [],
     account: state.accounts.info || {},
     activeToken: state.settings.token.active,
-    language: state.settings.language,
+    language: state.settings.language
   }),
   {}
 )
-
 class TransactionDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
-      headerLeft: <IconButton title="" icon="back" onPress={params.action} />,
+      headerLeft: <IconButton title="" icon="back" onPress={params.action} />
     };
   };
 
   state = {
     tx: null,
     refreshing: false,
-    votes: [],
+    votes: []
   };
 
   componentDidMount() {
@@ -64,7 +88,7 @@ class TransactionDetail extends React.Component {
     }
     navigation.setParams({
       theme,
-      action: backAction,
+      action: backAction
     });
   }
 
@@ -72,7 +96,7 @@ class TransactionDetail extends React.Component {
   async retrieveTransaction(id, delay = 0) {
     const { tx: currentTx } = this.state;
     const {
-      t, activeToken, account, route,
+      t, activeToken, account, route
     } = this.props;
     try {
       const { data } = await transactionsAPI.get(activeToken, {
@@ -85,14 +109,14 @@ class TransactionDetail extends React.Component {
       // example: navigating from a deep link
       if (!tx.id && !currentTx) {
         this.setState({
-          error: t('Transaction not found'),
+          error: t('Transaction not found')
         });
       } else {
         setTimeout(
           () =>
-            this.setState(prevState => ({
+            this.setState((prevState) => ({
               tx: merge(prevState.tx, tx),
-              refreshing: false,
+              refreshing: false
             })),
           delay
         );
@@ -100,7 +124,7 @@ class TransactionDetail extends React.Component {
     } catch (error) {
       if (!currentTx) {
         this.setState({
-          error: t('An error occurred, please try again.'),
+          error: t('An error occurred, please try again.')
         });
       }
     }
@@ -109,7 +133,7 @@ class TransactionDetail extends React.Component {
   onRefresh = () => {
     this.setState(
       {
-        refreshing: true,
+        refreshing: true
       },
       () => this.retrieveTransaction(this.state.tx.id, 1500)
     );
@@ -118,12 +142,7 @@ class TransactionDetail extends React.Component {
   // eslint-disable-next-line complexity
   render() {
     const {
-      styles,
-      account,
-      t,
-      activeToken,
-      language,
-      route,
+      styles, account, t, activeToken, language, route
     } = this.props;
     const {
       tx, error, refreshing, votes
@@ -149,13 +168,14 @@ class TransactionDetail extends React.Component {
     const incognito = route.params?.incognito ?? null;
     const isDelegateRegistration = isRegistration(tx);
     const isVoting = isVote(tx);
+    const config = getConfig(styles, tx, walletAccountAddress);
+    const amount = fromRawLsk(tx.amount);
 
     return (
       <ScrollView
         style={[styles.container, styles.theme.container]}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />
-        }
+        contentContainerStyle={styles.contentContainer}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />}
       >
         {activeToken === 'LSK' ? (
           <LskSummary
@@ -174,54 +194,60 @@ class TransactionDetail extends React.Component {
         )}
 
         {isDelegateRegistration && (
-          <Row icon={'delegate'} title={'Delegate username'}>
+          <Row title={'Delegate username'}>
             <View>
-              <B style={[styles.value, styles.theme.value]}>
-                {tx.delegate}
-              </B>
+              <B style={[styles.value, styles.theme.value]}>{tx.delegate}</B>
             </View>
           </Row>
         )}
 
-        <Row
-          icon={isVoting || isDelegateRegistration ? 'user' : 'send'}
-          title={getAccountTitle(tx)}
-        >
+        <Row title={getAccountTitle(tx)}>
           <View style={styles.addressContainer}>
             <A
               value={tx.senderAddress}
               onPress={() => goToWallet(tx.senderAddress, this.props)}
               style={[styles.value, styles.theme.value, styles.transactionId]}
             >
-              {getAccountLabel(tx.senderAddress, this.props)}
+              {getAccountLabel(tx.senderAddress, { ...this.props, truncate: true })}
             </A>
           </View>
+          <Avatar address={config.firstAddress} size={40} />
         </Row>
         {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? null : (
-          <Row icon="recipient" title="Recipient">
+          <Row title="Recipient">
             <View style={styles.addressContainer}>
               <A
                 value={tx.senderAddress}
                 onPress={() => goToWallet(tx.recipientAddress, this.props)}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
               >
-                {getAccountLabel(tx.recipientAddress, this.props)}
+                {getAccountLabel(tx.recipientAddress, { ...this.props, truncate: true })}
               </A>
             </View>
+            <Avatar address={config.secondAddress} size={40} />
           </Row>
         )}
-        {
-          !isUnlock(tx) ? null : (
-            <Row icon="amount" title="Amount">
-              <B style={[styles.value, styles.theme.value]}>
-                <FormattedNumber tokenType={activeToken} language={language}>
-                  {fromRawLsk(tx.amount)}
-                </FormattedNumber>
-              </B>
-            </Row>
-          )
-        }
-        <Row icon="tx-fee" title="Transaction fee">
+        {isTransfer(tx) && <Row title={'Amount'}>
+          {!incognito ? (
+            <H4 style={config.amountStyle}>
+              {config.amountSign}
+              <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
+            </H4>
+          ) : null}
+          {incognito ? (
+            <Blur value={amount} direction={config.direction} />
+          ) : null}
+        </Row>}
+        {!isUnlock(tx) ? null : (
+          <Row title="Amount">
+            <B style={[styles.value, styles.theme.value]}>
+              <FormattedNumber tokenType={activeToken} language={language}>
+                {fromRawLsk(tx.amount)}
+              </FormattedNumber>
+            </B>
+          </Row>
+        )}
+        <Row title="Transaction fee">
           <B style={[styles.value, styles.theme.value]}>
             <FormattedNumber tokenType={activeToken} language={language}>
               {fromRawLsk(tx.fee)}
@@ -229,27 +255,27 @@ class TransactionDetail extends React.Component {
           </B>
         </Row>
         {tx.data ? (
-          <Row icon="reference" title="Message">
-            <B
-              style={[styles.value, styles.theme.value, styles.referenceValue]}
-            >
-              {tx.data}
+          <Row title="Message">
+            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>{tx.data}</B>
+          </Row>
+        ) : null}
+        {tx.confirmations ? (
+          <Row title="Confirmations">
+            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
+              {tx.confirmations}
             </B>
           </Row>
         ) : null}
-        <Row icon="confirmations" title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
-          <B style={[styles.value, styles.theme.value]}>
-            {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
-          </B>
-        </Row>
-        <Row icon="tx-id" title="Transaction ID">
+        <Row title="Transaction ID">
           {activeToken === 'LSK' ? (
-            <Share
-              type={B}
-              value={tx.id}
-              title={tx.id}
-              icon={true}
+            <CopyToClipboard
               style={[styles.value, styles.theme.value, styles.transactionId]}
+              labelStyle={[styles.value, styles.theme.value, styles.referenceValue]}
+              showIcon={true}
+              iconSize={18}
+              value={tx.id}
+              type={B}
+              label={stringShortener(tx.id, 15, 6)}
             />
           ) : (
             <A
@@ -260,11 +286,32 @@ class TransactionDetail extends React.Component {
             </A>
           )}
         </Row>
-        {
-          isVoting
-            ? <VoteList votes={votes} />
-            : null
-        }
+        {tx.blockHeight ? (
+          <Row title="Block Height">
+            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
+              {tx.blockHeight}
+            </B>
+          </Row>
+        ) : null}
+        {tx.blockId ? (
+          <Row title="Block ID">
+            <CopyToClipboard
+              style={[styles.value, styles.theme.value, styles.transactionId]}
+              labelStyle={[styles.value, styles.theme.value, styles.referenceValue]}
+              showIcon={true}
+              iconSize={18}
+              value={tx.blockId}
+              type={B}
+              label={stringShortener(tx.blockId, 15, 6)}
+            />
+          </Row>
+        ) : null}
+        <Row title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
+          <B style={[styles.value, styles.theme.value]}>
+            {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
+          </B>
+        </Row>
+        {isVoting ? <VoteList votes={votes} /> : null}
       </ScrollView>
     );
   }

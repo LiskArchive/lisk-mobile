@@ -31,7 +31,7 @@ const normalizeTransactionsResponse = (list) =>
       : tx.sender.address,
     amount: getAmount(tx),
     fee: tx.fee,
-    timestamp: tx.block.timestamp,
+    timestamp: tx.block?.timestamp,
     confirmations: tx.nonce,
     nonce: tx.nonce,
     type: tx.moduleAssetName,
@@ -39,14 +39,16 @@ const normalizeTransactionsResponse = (list) =>
     moduleAssetName: tx.moduleAssetName,
     data: tx.moduleAssetName === 'token:transfer' ? tx.asset.data : '',
     votes: tx.moduleAssetName === 'dpos:voteDelegate' ? tx.asset.votes : [],
-    delegate: tx.moduleAssetName === 'dpos:registerDelegate' ? tx.asset.username : ''
+    delegate: tx.moduleAssetName === 'dpos:registerDelegate' ? tx.asset.username : '',
+    blockId: tx.block?.id,
+    blockHeight: tx.block?.height,
   }));
 
 export const get = async ({
   id, address, limit, offset
 }) => {
   if (id !== undefined) {
-    const txs = await apiClient.getTransactions(id);
+    const txs = await apiClient.getTransaction(id);
     return { data: normalizeTransactionsResponse(txs), meta: {} };
   }
   const txs = await apiClient.getTransactions(address, limit, offset);

@@ -33,7 +33,10 @@ export const P = ({ children, style, onPress }) => (
 );
 
 export const B = ({
-  children, style, onPress, testID
+  children,
+  style,
+  onPress,
+  testID
 }) => (
   <Text testID={testID} style={[theme.b, style]} onPress={onPress}>
     {children}
@@ -46,14 +49,22 @@ export const Span = ({ children, style, onPress }) => (
   </Text>
 );
 
-export const Small = ({ children, style, onPress }) => (
-  <Text style={[theme.small, style]} onPress={onPress}>
+export const Small = ({
+  children,
+  style,
+  onPress,
+  ...props
+}) => (
+  <Text style={[theme.small, style]} onPress={onPress} {...props}>
     {children}
   </Text>
 );
 
 export const A = ({
-  children, style, onPress, testID
+  children,
+  style,
+  onPress,
+  testID
 }) => (
   <Text testID={testID} style={[theme.a, style]} onPress={onPress}>
     {children}

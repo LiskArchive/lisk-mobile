@@ -1,11 +1,10 @@
 export default () => ({
   common: {
     container: {
-      minWidth: '20%',
       flexDirection: 'row',
-    },
-    icon: {
-      marginLeft: 5,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flex: 1,
     },
   },
 });

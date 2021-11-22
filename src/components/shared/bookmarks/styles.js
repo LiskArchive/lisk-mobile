@@ -34,6 +34,7 @@ export default () => ({
     innerContainer: {
       flexDirection: 'row',
       justifyContent: 'flex-start',
+      flex: 1,
     },
     title: {
       marginBottom: 0,
@@ -60,6 +61,7 @@ export default () => ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      marginRight: 20,
     },
     imageContainer: {
       width: '100%',
@@ -91,6 +93,9 @@ export default () => ({
       width: '100%',
       textAlign: 'center',
       color: colors.light.white,
+    },
+    label: {
+      maxWidth: '90%'
     },
     noResult: {
       marginTop: 11,

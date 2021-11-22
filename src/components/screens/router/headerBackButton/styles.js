@@ -1,3 +1,4 @@
+import { fonts } from '../../../../constants/styleGuide';
 import { deviceType } from '../../../../utilities/device';
 
 const type = deviceType();
@@ -11,13 +12,24 @@ if (type === 'android') {
 
 export default () => ({
   common: {
-    main: {
-      width: 60,
-      height: 40,
+    title: {
+      fontFamily: fonts.family.heading,
+      fontSize: 24,
+    },
+    paddingLeft: {
+      paddingLeft: 20,
+    },
+    container: {
+      flexDirection: 'row',
+      alignItems: 'center',
       marginTop: normalMarginTop,
+    },
+    main: {
+      width: 50,
+      height: 40,
     },
     safeArea: {
       marginTop: safeAreaMarginTop,
-    },
-  },
+    }
+  }
 });

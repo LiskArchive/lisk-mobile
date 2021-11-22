@@ -99,7 +99,6 @@ class Request extends React.Component {
               <P style={[styles.addressLabel, styles.theme.addressLabel]}>
                 {t(`Your ${tokenMap[activeToken].label} address`)}
               </P>
-
               <View style={styles.addressContainer}>
                 {activeToken === tokenMap.LSK.key && (
                   <Avatar style={styles.avatar} address={address} size={24} />
@@ -109,7 +108,6 @@ class Request extends React.Component {
                   labelStyle={[styles.address, styles.theme.address]}
                   showIcon={true}
                   iconSize={18}
-                  iconStyle={styles.copyIcon}
                   value={address}
                   type={B}
                 />

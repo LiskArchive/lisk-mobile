@@ -172,8 +172,8 @@ describe('api/transactions', () => {
 
 describe('Should get transaction detail for one transaction', () => {
   beforeAll(() => {
-    apiClient.getTransactions = jest.fn();
-    apiClient.getTransactions.mockResolvedValue([
+    apiClient.getTransaction = jest.fn();
+    apiClient.getTransaction.mockResolvedValue([
       {
         ...response.data[0],
         moduleAssetId: '2:0',
@@ -191,7 +191,7 @@ describe('Should get transaction detail for one transaction', () => {
     await transactions.get({
       id: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
     });
-    expect(apiClient.getTransactions).toBeCalledWith('lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw');
+    expect(apiClient.getTransaction).toBeCalledWith('lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw');
   });
 
   it('Should extract amount for transfer type', async () => {
@@ -204,8 +204,8 @@ describe('Should get transaction detail for one transaction', () => {
 
 describe('Should get amount from unlock token transaction type', () => {
   beforeAll(() => {
-    apiClient.getTransactions = jest.fn();
-    apiClient.getTransactions.mockResolvedValue([
+    apiClient.getTransaction = jest.fn();
+    apiClient.getTransaction.mockResolvedValue([
       {
         ...response.data[0],
         moduleAssetId: '5:2',

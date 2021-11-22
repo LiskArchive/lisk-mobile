@@ -10,13 +10,16 @@ import { fonts } from '../../../constants/styleGuide';
 
 const noShadow = {
   borderBottomWidth: 0,
-  elevation: 0
+  elevation: 0,
 };
 
 const genericTitle = {
   fontFamily: fonts.family.heading,
-  fontSize: 18,
-  textAlign: 'center'
+  fontSize: 20,
+};
+
+const noTitle = {
+  opacity: 0
 };
 
 const navigationOptions = {};
@@ -97,24 +100,23 @@ navigationOptions.Wallet = () => {
 };
 
 navigationOptions.Request = {
-  title: t('Request'),
-
-  headerLeft: () => <HeaderPlaceholderButton />,
+  title: null,
+  headerLeft: () => <HeaderBackButton title="Request" noIcon />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
 
 navigationOptions.Bookmarks = {
-  title: t('Bookmarks'),
   tabBarLabel: 'Bookmarks',
-  headerLeft: () => <HeaderPlaceholderButton />,
+  title: null,
+  headerLeft: () => <HeaderBackButton title="Bookmarks" noIcon />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
 
 navigationOptions.Settings = {
-  title: t('Settings'),
-  headerLeft: () => <HeaderPlaceholderButton />,
+  title: null,
+  headerLeft: () => <HeaderBackButton title="Settings" noIcon />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
@@ -129,10 +131,10 @@ navigationOptions.Register = {
 
 navigationOptions.TxDetail = {
   title: 'Transaction details',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  headerLeft: (props) => <HeaderBackButton {...props} title="Transaction details" />,
   headerRight: () => <HeaderPlaceholderButton />,
   headerStyle: noShadow,
-  headerTitleStyle: genericTitle
+  headerTitleStyle: noTitle
 };
 
 navigationOptions.CurrencySelection = {
@@ -178,10 +180,10 @@ navigationOptions.PassphraseBackup = {
 };
 
 navigationOptions.AddBookmark = {
-  title: 'New bookmark',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  title: null,
+  headerLeft: (props) => <HeaderBackButton {...props} title='New bookmark' />,
   headerStyle: noShadow,
-  headerTitleStyle: genericTitle
+  headerTitleStyle: genericTitle,
 };
 
 navigationOptions.SignIn = {

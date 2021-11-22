@@ -5,8 +5,19 @@ export default () => ({
   common: {
     container: {
       flex: 1,
-      paddingTop: 0,
-      paddingBottom: 20,
+    },
+    contentContainer: {
+      padding: 20,
+      paddingTop: 20,
+    },
+    addressContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      flex: 1,
+    },
+    transactionTitle: {
+      fontFamily: fonts.family.contextSemiBold,
+      fontSize: 20
     },
     divider: {
       margin: 20,
@@ -20,11 +31,13 @@ export default () => ({
       alignItems: 'center',
       fontFamily: fonts.family.context,
       marginTop: 5,
+      fontSize: 14,
     },
     value: {
       alignItems: 'center',
       fontFamily: fonts.family.context,
       fontWeight: 'bold',
+      marginRight: 10,
     },
     referenceValue: {
       flexWrap: 'wrap',
@@ -34,11 +47,8 @@ export default () => ({
       flexDirection: 'row',
       flex: 1,
       alignItems: 'center',
-      paddingBottom: 16,
-      paddingTop: 16,
+      paddingVertical: 10,
       borderBottomWidth: 1,
-      marginLeft: 20,
-      marginRight: 20,
     },
     rowIconWrapper: {
       width: 36,
@@ -73,16 +83,21 @@ export default () => ({
     },
     senderAndRecipient: {
       marginBottom: 10,
-      paddingTop: 20,
       paddingBottom: 20,
       flexDirection: 'column',
-      alignItems: 'center',
       borderBottomWidth: 1,
     },
     row: {
       marginBottom: 14,
       flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'space-between'
+    },
+    titleContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingRight: 20,
     },
     incoming: {},
     outgoing: {},
@@ -91,11 +106,6 @@ export default () => ({
     },
     transactionId: {
       marginBottom: 0,
-    },
-    amountBlur: {
-      justifyContent: 'center',
-      textAlign: 'center',
-      flexDirection: 'row',
     },
     empty: {
       height: '100%',
@@ -124,11 +134,13 @@ export default () => ({
     date: {
       color: colors.light.slateGray,
     },
+    transactionTitle: {
+      color: colors.dark.zodiacBlue,
+    },
     value: {
       color: colors.light.black,
     },
     senderAndRecipient: {
-      backgroundColor: colors.light.whiteSmoke,
       borderBottomColor: colors.light.mystic,
       borderTopColor: colors.light.mystic,
     },
@@ -165,11 +177,13 @@ export default () => ({
     date: {
       color: colors.dark.slateGray,
     },
+    transactionTitle: {
+      color: colors.dark.white,
+    },
     value: {
       color: colors.dark.white,
     },
     senderAndRecipient: {
-      backgroundColor: colors.dark.headerBg,
       borderBottomColor: setColorOpacity(colors.light.white, 0.24),
       borderTopColor: setColorOpacity(colors.light.white, 0.24),
     },
