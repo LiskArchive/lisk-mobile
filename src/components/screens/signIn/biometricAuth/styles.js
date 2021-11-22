@@ -1,7 +1,6 @@
 import { colors, boxes } from '../../../../constants/styleGuide';
 import { isSmallDevice } from '../../../../utilities/device';
 
-
 export default () => ({
   common: {
     container: {
