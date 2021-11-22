@@ -296,12 +296,14 @@ class TransactionDetail extends React.Component {
         ) : null}
         {tx.blockId ? (
           <Row title="Block ID">
-            <Share
-              type={B}
-              value={tx.blockId}
-              title={stringShortener(tx.blockId, 15, 6)}
-              icon={true}
+            <CopyToClipboard
               style={[styles.value, styles.theme.value, styles.transactionId]}
+              labelStyle={[styles.value, styles.theme.value, styles.referenceValue]}
+              showIcon={true}
+              iconSize={18}
+              value={tx.blockId}
+              type={B}
+              label={stringShortener(tx.blockId, 15, 6)}
             />
           </Row>
         ) : null}
