@@ -4,7 +4,7 @@ import Icon from '../../../shared/toolBox/icon';
 import easing from '../../../../utilities/easing';
 import { deviceHeight } from '../../../../utilities/device';
 import getStyles from './styles';
-import { colors, themes } from '../../../../constants/styleGuide';
+import { colors } from '../../../../constants/styleGuide';
 import withTheme from '../../../shared/withTheme';
 
 class Splash extends React.Component {
@@ -44,13 +44,12 @@ class Splash extends React.Component {
   }
 
   render() {
-    const { top, bgOpacity, iconOpacity } = this.state;
-    const { showSimplifiedView, styles, theme } = this.props;
+    const { bgOpacity, iconOpacity } = this.state;
+    const { showSimplifiedView, styles } = this.props;
 
     return (
       <View style={styles.splashContainer}>
         <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]} />
-
         <Animated.View
           style={
             showSimplifiedView
@@ -70,17 +69,6 @@ class Splash extends React.Component {
             name="lisk-full"
             size={55}
             color={colors.light.ultramarineBlue}
-          />
-        </Animated.View>
-
-        <Animated.View
-          style={[styles.splashFigure, styles.splashAnimating, { top }]}
-        >
-          <Icon
-            name="lisk-full"
-            size={55}
-            color={ theme === themes.light ? colors.light.white : colors.dark.black}
-            style={styles.splashLogo}
           />
         </Animated.View>
       </View>

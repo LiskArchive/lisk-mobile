@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable complexity */
 import React from 'react';
 import { View, Animated } from 'react-native';
@@ -16,6 +17,7 @@ import CreateAccount from '../createAccount';
 import Title from '../title';
 import SignInSvg from '../../../../assets/svgs/SignInSvg';
 import withTheme from '../../../shared/withTheme';
+import SignInDarkSvg from '../../../../assets/svgs/SignInDarkSvg';
 
 class BiometricAuth extends React.Component {
   state = {
@@ -102,11 +104,11 @@ class BiometricAuth extends React.Component {
       opacity, tried, busy, biometricAuth
     } = this.state;
 
-    let pageTitle = t('Choose an authentication method.');
+    let pageTitle = t('Choose an authentication method');
     if (busy) {
       pageTitle = sensorType === 'Face ID'
-        ? t('Look at the front camera to authenticate.')
-        : t('Place your finger over the touch sensor to authenticate.');
+        ? t('Look at the front camera to authenticate')
+        : t('Place your finger over the touch sensor to authenticate');
     }
 
     return (
@@ -114,7 +116,7 @@ class BiometricAuth extends React.Component {
         <Title opacity={opacity}>{pageTitle}</Title>
 
         <View style={styles.waves}>
-          {!biometricAuth ? <SignInSvg /> : null}
+          {!biometricAuth ? theme === themes.dark ? <SignInDarkSvg /> : <SignInSvg /> : null}
           {biometricAuth && tried && (
             <LottieView
               source={wavesError}
