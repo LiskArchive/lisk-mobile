@@ -20,6 +20,7 @@ export default () => ({
     input: {
       fontFamily: fonts.family.passphrase,
       textAlign: 'justify',
+      color: colors.dark.whiteSmoke
     },
     inputRevealed: {
       fontFamily: fonts.family.passphraseText,
@@ -69,9 +70,26 @@ export default () => ({
       marginBottom: deviceType() === 'iOSx' ? 35 : 10,
     },
   },
+  [themes.light]: {
+    input: {
+      color: colors.dark.zodiacBlue
+    },
+    label: {
+      color: colors.dark.maastrichtBlue
+    },
+    scanButtonTitle: {
+      color: colors.dark.maastrichtBlue
+    }
+  },
   [themes.dark]: {
     input: {
       color: colors.dark.whiteSmoke
+    },
+    label: {
+      color: colors.dark.whiteSmoke
+    },
+    scanButtonTitle: {
+      color: colors.dark.whiteSmoke
     }
-  }
+  },
 });
