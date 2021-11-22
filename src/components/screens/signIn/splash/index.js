@@ -3,8 +3,9 @@ import { Animated, View } from 'react-native';
 import Icon from '../../../shared/toolBox/icon';
 import easing from '../../../../utilities/easing';
 import { deviceHeight } from '../../../../utilities/device';
-import styles from './styles';
+import getStyles from './styles';
 import { colors } from '../../../../constants/styleGuide';
+import withTheme from '../../../shared/withTheme';
 
 class Splash extends React.Component {
   state = {
@@ -43,13 +44,12 @@ class Splash extends React.Component {
   }
 
   render() {
-    const { top, bgOpacity, iconOpacity } = this.state;
-    const { showSimplifiedView } = this.props;
+    const { bgOpacity, iconOpacity } = this.state;
+    const { showSimplifiedView, styles } = this.props;
 
     return (
       <View style={styles.splashContainer}>
         <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]} />
-
         <Animated.View
           style={
             showSimplifiedView
@@ -71,20 +71,9 @@ class Splash extends React.Component {
             color={colors.light.ultramarineBlue}
           />
         </Animated.View>
-
-        <Animated.View
-          style={[styles.splashFigure, styles.splashAnimating, { top }]}
-        >
-          <Icon
-            name="lisk-full"
-            size={55}
-            color={colors.light.white}
-            style={styles.splashLogo}
-          />
-        </Animated.View>
       </View>
     );
   }
 }
 
-export default Splash;
+export default withTheme(Splash, getStyles());

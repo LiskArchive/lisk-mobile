@@ -1,14 +1,23 @@
-import { StyleSheet } from 'react-native';
-import { colors } from '../../../constants/styleGuide';
+import { colors, themes } from '../../../constants/styleGuide';
 
-const styles = {
-  wrapper: {
-    backgroundColor: colors.light.white,
-    flex: 1,
+export default () => ({
+  common: {
+    wrapper: {
+      flex: 1,
+    },
+    container: {
+      flex: 1,
+    },
   },
-  container: {
-    flex: 1,
+  [themes.light]: {
+    wrapper: {
+      backgroundColor: colors.dark.white
+    }
   },
-};
 
-export default StyleSheet.create(styles);
+  [themes.dark]: {
+    wrapper: {
+      backgroundColor: colors.dark.black
+    }
+  },
+});

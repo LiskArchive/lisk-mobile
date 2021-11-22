@@ -37,6 +37,8 @@ export const deviceWidth = () => width;
  */
 export const deviceHeight = () => height;
 
+export const isSmallDevice = deviceHeight() <= 680;
+
 /**
  * @returns {Number} - The height of the header
  */

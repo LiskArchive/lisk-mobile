@@ -1,6 +1,6 @@
 {
-  "Look at the front camera to authenticate.": "Look at the front camera to authenticate.",
-  "Place your finger over the touch sensor to authenticate.": "Place your finger over the touch sensor to authenticate.",
+  "Look at the front camera to authenticate": "Look at the front camera to authenticate",
+  "Place your finger over the touch sensor to authenticate": "Place your finger over the touch sensor to authenticate",
   "Sign in manually": "Sign in manually",
   "Signing in...": "Signing in...",
   "1. Creating your account": "1. Creating your account",
@@ -203,7 +203,7 @@
   "We’ve got good news!": "We’ve got good news!",
   "Add a new bookmark": "Add a new bookmark",
   "Add address to bookmarks": "Add address to bookmarks",
-  "Choose an authentication method.": "Choose an authentication method.",
+  "Choose an authentication method": "Choose an authentication method",
   "Info": "Info",
   "Make sure to initialize your account with an outgoing transaction, to improve even further the security of your account": "Make sure to initialize your account with an outgoing transaction, to improve even further the security of your account",
   "Message": "Message",

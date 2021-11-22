@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
-import styles from './styles';
+import getStyles from './styles';
 import Input from '../../../shared/toolBox/input';
 import { validatePassphrase } from '../../../../utilities/passphrase';
 import KeyboardAwareScrollView from '../../../shared/toolBox/keyboardAwareScrollView';
@@ -11,10 +11,13 @@ import { colors } from '../../../../constants/styleGuide';
 import DropDownHolder from '../../../../utilities/alert';
 import CreateAccount from '../createAccount';
 import Title from '../title';
+import withTheme from '../../../shared/withTheme';
 
 const devDefaultPass = process.env.passphrase || '';
 
-const BackButton = ({ toggleView, sensorType, t }) => (
+const BackButton = ({
+  toggleView, sensorType, t, styles
+}) => (
   <IconButton
     onPress={toggleView}
     titleStyle={styles.backButtonTitle}
@@ -147,6 +150,7 @@ class Form extends React.Component {
       sensorType,
       showBackButton,
       showSimplifiedView,
+      styles,
     } = this.props;
 
     return (
@@ -157,7 +161,7 @@ class Form extends React.Component {
         testID="signInForm"
       >
         {showBackButton ? (
-          <BackButton toggleView={toggleView} sensorType={sensorType} t={t} />
+          <BackButton toggleView={toggleView} sensorType={sensorType} t={t} styles={styles} />
         ) : null}
 
         <Scanner
@@ -193,8 +197,10 @@ class Form extends React.Component {
             innerStyles={{
               input: [
                 styles.input,
+                styles.theme.input,
                 revealPassphrase ? styles.inputRevealed : null,
               ],
+              inputLabel: [styles.label, styles.theme.label]
             }}
             value={passphrase.value}
             onChange={this.onInputChange}
@@ -214,7 +220,7 @@ class Form extends React.Component {
 
           <IconButton
             onPress={this.toggleCamera}
-            titleStyle={styles.scanButtonTitle}
+            titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
             style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
             title={t('Scan')}
             icon="scanner"
@@ -241,4 +247,4 @@ class Form extends React.Component {
   }
 }
 
-export default translate()(Form);
+export default withTheme(translate()(Form), getStyles());

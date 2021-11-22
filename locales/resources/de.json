@@ -1,6 +1,6 @@
 {
-  "Look at the front camera to authenticate.": "Schau bitte in die Kamera, um dich anzumelden.",
-  "Place your finger over the touch sensor to authenticate.": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden.",
+  "Look at the front camera to authenticate": "Schau bitte in die Kamera, um dich anzumelden",
+  "Place your finger over the touch sensor to authenticate": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
   "Sign in manually": "Manuell anmelden",
   "Signing in...": "Anmelden...",
   "1. Creating your account": "1. Konto wird erstellt",
@@ -203,7 +203,7 @@
   "We’ve got good news!": "Gute Neuigkeiten für dich!",
   "Add a new bookmark": "Zu Lesezeichen hinzufügen",
   "Add address to bookmarks": "Diese Addresse zu Lesezeichen hinzufügen",
-  "Choose an authentication method.": "Wähle eine Authentifizierungsmethode",
+  "Choose an authentication method": "Wähle eine Authentifizierungsmethode",
   "Info": "Info",
   "Make sure to initialize your account with an outgoing transaction, to improve even further the security of your account": "Stelle sicher, dass dein Account durch eine ausgehende Transaktion initialisiert ist, um die Sicherheit deines Accounts weiter zu verbessern.",
   "Message": "Nachricht",
