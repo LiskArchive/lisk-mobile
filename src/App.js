@@ -21,7 +21,6 @@ const ThemedApp = () => {
         <StatusBar
           barStyle={theme === themes.light ? 'dark-content' : 'light-content'}
         />
-        <Loading />
         <Router />
         <Alert />
         <Modal />

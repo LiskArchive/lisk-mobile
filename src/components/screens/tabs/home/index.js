@@ -250,28 +250,26 @@ class Home extends React.Component {
     }
     const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
     return (
-      <SafeAreaView style={styles.flex} >
-        <View
-          style={[styles.flex, styles.theme.homeContainer]}>
-          {Platform.OS !== 'ios' ? (
-            <StatusBar barStyle="light-content" />
-          ) : (
-            <StatusBar
-              barStyle={isFocused ? 'light-content' : otherPageStatusBar}
-            />
-          )}
-          <AccountSummary
-            navigation={navigation}
-            scrollY={this.scrollY}
-            isFocused={isFocused}
-            style={styles.accountSummary}
-            incognito={this.props.incognito}
+      <View
+        style={[styles.flex, styles.theme.homeContainer]}>
+        {Platform.OS !== 'ios' ? (
+          <StatusBar barStyle="light-content" />
+        ) : (
+          <StatusBar
+            barStyle={isFocused ? 'light-content' : otherPageStatusBar}
           />
-          <View style={[styles.container, styles.theme.container]} >
-            {content}
-          </View>
+        )}
+        <AccountSummary
+          navigation={navigation}
+          scrollY={this.scrollY}
+          isFocused={isFocused}
+          style={styles.accountSummary}
+          incognito={this.props.incognito}
+        />
+        <View style={[styles.container, styles.theme.container]} >
+          {content}
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 }
