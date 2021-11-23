@@ -50,8 +50,8 @@ class DraggableItem extends React.Component {
                 transform: [
                   {
                     translateX: this._deltaX.interpolate({
-                      inputRange: [-240, 0],
-                      outputRange: [0, 240],
+                      inputRange: [-50, 0],
+                      outputRange: [0, 180],
                     }),
                   },
                 ],
@@ -91,8 +91,8 @@ class DraggableItem extends React.Component {
                 transform: [
                   {
                     translateX: this._deltaX.interpolate({
-                      inputRange: [-240, 0],
-                      outputRange: [0, 130],
+                      inputRange: [-50, 0],
+                      outputRange: [0, 100],
                     }),
                   },
                 ],
@@ -125,7 +125,7 @@ class DraggableItem extends React.Component {
           boundaries={{ right: 0 }}
           snapPoints={[
             { x: 0, damping: -0.7, tension: 300 },
-            { x: -240, damping: -0.7, tension: 300 },
+            { x: -50, damping: -0.7, tension: 300 },
           ]}
           onDrag={() => setRef(this.ref, data.address)}
           animatedValueX={this._deltaX}
