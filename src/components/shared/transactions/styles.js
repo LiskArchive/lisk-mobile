@@ -7,6 +7,7 @@ export default () => ({
     container: {
       paddingRight: 20,
       paddingLeft: 20,
+      paddingTop: 20,
     },
     itemContainer: {
       width: '100%',

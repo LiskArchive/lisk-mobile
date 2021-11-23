@@ -76,7 +76,7 @@ class InfiniteScrollView extends React.Component {
         ref={el => {
           this.scrollView = el;
         }}
-        style={this.props.style}
+        style={[this.props.style]}
         stickyHeaderIndices={this.props.stickyHeaderIndices}
         scrollEventThrottle={8}
       >

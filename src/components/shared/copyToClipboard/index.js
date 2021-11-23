@@ -31,9 +31,12 @@ class CopyToClipBoard extends React.Component {
       style,
       iconStyle,
       labelStyle,
+      iconColor,
     } = this.props;
     const Element = type || Text;
     const text = label || value;
+
+    const color = iconColor || colors.light.blueGray;
 
     return (
       <View style={[styles.container, style]}>
@@ -43,7 +46,7 @@ class CopyToClipBoard extends React.Component {
         <Icon
           onPress={this.copy}
           name={this.state.copied ? 'checkmark' : 'copy'}
-          color={this.state.copied ? colors.light.ufoGreen : colors.light.blueGray}
+          color={this.state.copied ? colors.light.ufoGreen : color}
           size={iconSize || 16}
           style={[iconStyle]}
         />

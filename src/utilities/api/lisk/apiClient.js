@@ -5,6 +5,7 @@ class LiskAPIClient {
     this._url = url;
   }
 
+  // eslint-disable-next-line max-statements
   async getAccount(address) {
     const resp = await fetch(`${this._url}/v2/accounts?address=${address}`, config.requestOptions);
     if (!resp.ok && resp.status === 404) {
@@ -27,7 +28,11 @@ class LiskAPIClient {
         initialized: true,
       };
     }
-    return { ...data[0].summary, initialized: true, nonce: data[0].sequence.nonce };
+    const lockedBalance = data[0].dpos.unlocking
+      ?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
+    return {
+      ...data[0].summary, initialized: true, nonce: data[0].sequence.nonce, lockedBalance
+    };
   }
 
   async getTransaction(id) {

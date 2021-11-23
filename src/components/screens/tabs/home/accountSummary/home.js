@@ -1,6 +1,7 @@
 import React from 'react';
 import { Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import { settingsUpdated as settingsUpdatedAction } from '../../../../../actions/settings';
 import Profile from './profile';
 import easing from '../../../../../utilities/easing';
@@ -12,6 +13,7 @@ import getStyles from './styles';
   (state) => ({
     settings: state.settings,
     accounts: state.accounts,
+    activeToken: state.settings.token.active,
     priceTicker: state.service.priceTicker
   }),
   {
@@ -31,7 +33,7 @@ class AccountSummary extends React.Component {
     };
   }
 
-  height = 140;
+  height = 260;
 
   componentDidMount() {
     this.screenWidth = Dimensions.get('window').width;
@@ -61,11 +63,14 @@ class AccountSummary extends React.Component {
   };
 
   renderProfile = (data) => {
-    const { settings, priceTicker } = this.props;
+    const {
+      settings, priceTicker, t, accounts, activeToken
+    } = this.props;
     const token = Object.keys(settings.token.list)[data.index];
-
+    const { address, lockedBalance } = accounts.info[activeToken];
     return (
       <Profile
+        t={t}
         key={token}
         token={token}
         priceTicker={priceTicker}
@@ -73,6 +78,9 @@ class AccountSummary extends React.Component {
         settings={settings}
         interpolate={this.interpolate}
         height={this.height}
+        address={address}
+        lockedBalance={lockedBalance}
+        {...this.props}
       />
     );
   };
@@ -113,4 +121,4 @@ class AccountSummary extends React.Component {
   }
 }
 
-export default withTheme(AccountSummary, getStyles());
+export default withTheme(translate()(AccountSummary), getStyles());
