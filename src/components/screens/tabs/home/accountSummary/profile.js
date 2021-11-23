@@ -72,7 +72,6 @@ const Profile = ({
         style={[styles.flex, styles.profileContainer]} >
         <AView style={[styles.row, {
           opacity: interpolate([0, height - 180, height - 85], [1, 1, 0]),
-          top: interpolate([0, height - 50], [0, height - 120]),
         }]}>
           <AView >
             <View style={styles.row} >
@@ -100,7 +99,6 @@ const Profile = ({
           <AView
             style={[
               styles.avatarContainer,
-              { marginTop: interpolate([0, 100], [0, 100]) }
             ]}
           >
             <Avatar address={account.address} size={50} />
@@ -109,7 +107,6 @@ const Profile = ({
         <AView style={[
           {
             opacity: interpolate([0, 30], [1, 0]),
-            top: interpolate([0, 100], [0, 80]),
           },
         ]}>
           <View style={[styles.row, styles.keyValueRow]} >
@@ -119,7 +116,6 @@ const Profile = ({
                 styles.balance,
                 {
                   opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
-                  top: interpolate([0, height - 50], [0, height - 120]),
                 },
               ]}
             >
@@ -151,7 +147,6 @@ const Profile = ({
                 styles.balance,
                 {
                   opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
-                  top: interpolate([0, height - 50], [0, height - 120]),
                 },
               ]}
             >
