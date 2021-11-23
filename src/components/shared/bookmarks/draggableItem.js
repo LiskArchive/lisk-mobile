@@ -9,6 +9,7 @@ import Icon from '../toolBox/icon';
 import { colors } from '../../../constants/styleGuide';
 import DeleteBookmarkModal from './deleteBookmarkModal';
 import ModalHolder from '../../../utilities/modal';
+import { stringShortener } from '../../../utilities/helpers';
 
 @connect(
   () => ({}),
@@ -150,7 +151,7 @@ class DraggableItem extends React.Component {
                   {data.label}
                 </B>
                 <Small style={[styles.label, styles.theme.label]}>
-                  {data.address}
+                  {stringShortener(data.address, 6, 4)}
                 </Small>
               </View>
             </View>

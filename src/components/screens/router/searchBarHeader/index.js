@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   View, Animated, useWindowDimensions, Easing
 } from 'react-native';
@@ -10,8 +10,7 @@ import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import Input from '../../../shared/toolBox/input';
 import Icon from '../../../shared/toolBox/icon';
-import { H3 } from '../../../shared/toolBox/typography';
-import { useEffect } from 'react';
+import { H3, P } from '../../../shared/toolBox/typography';
 
 const HeaderBackButton = ({
   theme,
@@ -59,25 +58,32 @@ const HeaderBackButton = ({
           })
         }]
       }} >
-        <Icon
-          style={styles.searchIcon}
-          name="search"
-          size={18}
-          color={colors.light.blueGray}
-        />
-        <Input
-          placeholder={t('Search for a bookmark')}
-          autoCorrect={false}
-          reference={input => {
-            this.input = input;
-          }}
-          innerStyles={{
-            input: [styles.input],
-          }}
-          onChange={onChange}
-          value={value}
-          returnKeyType="search"
-        />
+        <View style={styles.searchRow} >
+          <View style={styles.flex} >
+            <Icon
+              style={styles.searchIcon}
+              name="search"
+              size={18}
+              color={colors.light.blueGray}
+            />
+            <Input
+              placeholder={t('Search for a bookmark')}
+              autoCorrect={false}
+              reference={input => {
+                this.input = input;
+              }}
+              innerStyles={{
+                input: [styles.input],
+              }}
+              onChange={onChange}
+              value={value}
+              returnKeyType="search"
+            />
+          </View>
+          <TouchableOpacity style={styles.iconButton} onPress={() => setIsSearchOpen(false)}>
+            <P style={styles.cancelButton} >{t('Cancel')}</P>
+          </TouchableOpacity>
+        </View>
       </Animated.View> : <View style={styles.container} >
         <View style={styles.row} >
           {noIcon ? null : <TouchableOpacity onPress={onPress}>
