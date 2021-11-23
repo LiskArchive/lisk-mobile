@@ -20,7 +20,7 @@ export default () => ({
       borderRadius: 22,
       alignItems: 'center',
       justifyContent: 'center',
-      paddingTop: 5,
+      paddingTop: 2,
       position: 'absolute',
       bottom: 0,
       right: 0,

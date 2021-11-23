@@ -95,7 +95,7 @@ export default () => ({
       color: colors.light.white,
     },
     label: {
-      maxWidth: '90%'
+      flex: 1
     },
     noResult: {
       marginTop: 11,

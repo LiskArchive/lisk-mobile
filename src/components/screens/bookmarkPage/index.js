@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, TouchableOpacity, ScrollView, SafeAreaView, Keyboard
+  View, TouchableOpacity, ScrollView, SafeAreaView
 } from 'react-native';
 import { translate } from 'react-i18next';
 import Icon from '../../shared/toolBox/icon';
@@ -40,15 +40,6 @@ class Bookmark extends React.Component {
     this.prev.snapTo({ index: 0 });
     this.address = address;
     this.current = next;
-  }
-
-  componentDidMount() {
-    Keyboard.addListener('keyboardDidHide', () => this.setState({ isSearchOpen: false }))
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  componentWillUnmount() {
-    Keyboard.removeAllListeners('keyboardDidHide');
   }
 
   setRef = (ref, address) => {

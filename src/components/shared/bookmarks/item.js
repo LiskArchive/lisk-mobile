@@ -8,6 +8,7 @@ import getStyles from './styles';
 import Icon from '../toolBox/icon';
 import { themes, colors } from '../../../constants/styleGuide';
 import DraggableItem from './draggableItem';
+import { stringShortener } from '../../../utilities/helpers';
 
 class Item extends React.Component {
   showDetail = () => {
@@ -39,7 +40,7 @@ class Item extends React.Component {
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>{data.label}</B>
             <Small style={[styles.label, styles.theme.label]} numberOfLines={1}>
-              {data.address}
+              {stringShortener(data.address, 6, 4)}
             </Small>
           </View>
         </View>

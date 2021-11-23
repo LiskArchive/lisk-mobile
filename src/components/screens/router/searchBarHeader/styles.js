@@ -1,4 +1,4 @@
-import { fonts } from '../../../../constants/styleGuide';
+import { colors, fonts } from '../../../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -18,6 +18,17 @@ export default () => ({
     row: {
       flexDirection: 'row',
       alignItems: 'center',
+    },
+    searchRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingRight: 20,
+    },
+    flex: {
+      flex: 1,
+    },
+    cancelButton: {
+      color: colors.light.ultramarineBlue,
     },
     miconButtonain: {
       padding: 10,
