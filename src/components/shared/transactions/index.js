@@ -122,7 +122,7 @@ class Transactions extends React.Component {
               followedAccounts={followedAccounts}
               pending={transactions.pending}
               activeToken={activeToken}
-              transactions={transactions.confirmed}
+                transactions={[...transactions.confirmed, ...transactions.confirmed, ...transactions.confirmed, ...transactions.confirmed]}
             />
             {footer ? <Footer /> : null}
           </Fragment>

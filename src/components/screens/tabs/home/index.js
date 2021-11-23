@@ -29,6 +29,7 @@ import { themes } from '../../../../constants/styleGuide';
 import HomeHeaderTitle from '../../router/homeHeaderTitle';
 import { B } from '../../../shared/toolBox/typography';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -250,8 +251,12 @@ class Home extends React.Component {
     }
     const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
     return (
-      <View
-        style={[styles.flex, styles.theme.homeContainer]}>
+      <ScrollView
+        style={[styles.flex, styles.theme.homeContainer]}
+        // contentContainerStyle={styles.flex}
+        // stickyHeaderIndices={[2]}
+        showsVerticalScrollIndicator={false}
+      >
         {Platform.OS !== 'ios' ? (
           <StatusBar barStyle="light-content" />
         ) : (
@@ -269,7 +274,7 @@ class Home extends React.Component {
         <View style={[styles.container, styles.theme.container]} >
           {content}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
