@@ -111,7 +111,7 @@ export default () => ({
       top: 0,
       left: Screen.width - 200,
       width: Screen.width,
-      backgroundColor: colors.light.mystic,
+      backgroundColor: colors.light.blueGray,
       height: 80,
       justifyContent: 'center',
     },
@@ -165,10 +165,10 @@ export default () => ({
       backgroundColor: colors.light.burntSieanna,
     },
     editContent: {
-      color: colors.light.slateGray,
+      color: colors.light.white,
     },
     editButton: {
-      backgroundColor: colors.light.mystic,
+      backgroundColor: colors.light.blueGray,
     },
   },
   [themes.dark]: {
@@ -197,10 +197,10 @@ export default () => ({
       backgroundColor: colors.dark.burntSieanna,
     },
     editContent: {
-      color: colors.dark.slateGray,
+      color: colors.dark.white,
     },
     editButton: {
-      backgroundColor: colors.dark.textInputBg,
+      backgroundColor: colors.dark.blueGray,
     },
   },
 });
