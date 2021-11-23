@@ -27,6 +27,8 @@ import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { themes } from '../../../../constants/styleGuide';
 import HomeHeaderTitle from '../../router/homeHeaderTitle';
+import { B } from '../../../shared/toolBox/typography';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -248,22 +250,28 @@ class Home extends React.Component {
     }
     const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
     return (
-      <View style={[styles.container, styles.theme.container]}>
-        {Platform.OS !== 'ios' ? (
-          <StatusBar barStyle="light-content" />
-        ) : (
-          <StatusBar
-            barStyle={isFocused ? 'light-content' : otherPageStatusBar}
+      <SafeAreaView style={styles.flex} >
+        <View
+          style={[styles.flex, styles.theme.homeContainer]}>
+          {Platform.OS !== 'ios' ? (
+            <StatusBar barStyle="light-content" />
+          ) : (
+            <StatusBar
+              barStyle={isFocused ? 'light-content' : otherPageStatusBar}
+            />
+          )}
+          <AccountSummary
+            navigation={navigation}
+            scrollY={this.scrollY}
+            isFocused={isFocused}
+            style={styles.accountSummary}
+            incognito={this.props.incognito}
           />
-        )}
-        <AccountSummary
-          navigation={navigation}
-          scrollY={this.scrollY}
-          isFocused={isFocused}
-          style={styles.accountSummary}
-        />
-        {content}
-      </View>
+          <View style={[styles.container, styles.theme.container]} >
+            {content}
+          </View>
+        </View>
+      </SafeAreaView>
     );
   }
 }

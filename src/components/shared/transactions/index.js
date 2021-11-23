@@ -84,7 +84,6 @@ class Transactions extends React.Component {
     });
   };
 
-  // eslint-disable-next-line complexity
   render() {
     const {
       styles,
@@ -103,34 +102,22 @@ class Transactions extends React.Component {
     const incognito = type === 'home' && incognitoMode;
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
-    const height = type === 'home' ? 180 : 205;
 
     return (
       <Anim style={[styles.container, { opacity, top }]}>
         {!transactions
-        || (transactions.confirmed.length === 0
-          && transactions.pending.length === 0) ? (
+          || (transactions.confirmed.length === 0
+            && transactions.pending.length === 0) ? (
           <Fragment />
           ) : (
           <Fragment>
-            <View style={[styles.placeholder, { height }]}>
-              {Platform.OS === 'ios' && refreshing ? (
-                <ActivityIndicator size="large" />
-              ) : null}
-            </View>
+            {Platform.OS === 'ios' && refreshing ? (
+              <ActivityIndicator size="large" />
+            ) : null}
             <View style={styles.innerContainer}>
               <H3 style={[styles.title, styles.theme.title]}>
                 {t('Activity')}
               </H3>
-              {type === 'home' ? (
-                <IconButton
-                  title=""
-                  icon={incognito ? 'disable-incognito' : 'enable-incognito'}
-                  color={colors.dark.slateGray}
-                  iconSize={20}
-                  onClick={this.toggleIncognito}
-                />
-              ) : null}
             </View>
             <List
               incognito={incognito}
@@ -143,7 +130,7 @@ class Transactions extends React.Component {
             />
             {footer ? <Footer /> : null}
           </Fragment>
-          )}
+        )}
       </Anim>
     );
   }

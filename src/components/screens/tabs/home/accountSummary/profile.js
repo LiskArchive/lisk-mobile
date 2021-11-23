@@ -1,18 +1,24 @@
 import React from 'react';
-import { Image, Animated, View } from 'react-native';
+import {
+  Image, Animated, View, ImageBackground
+} from 'react-native';
 import { useSelector } from 'react-redux';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import Avatar from '../../../../shared/avatar';
 import { fromRawLsk } from '../../../../../utilities/conversions';
 import FormattedNumber from '../../../../shared/formattedNumber';
-import { P, H3 } from '../../../../shared/toolBox/typography';
+import { P, H3, B, H2 } from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
-import Icon from '../../../../shared/toolBox/icon';
-import { tokenMap } from '../../../../../constants/tokens';
 import blurBig from '../../../../../assets/images/balanceBlur/darkBig.png';
 import blurMedium from '../../../../../assets/images/balanceBlur/darkMedium.png';
 import blurSmall from '../../../../../assets/images/balanceBlur/darkSmall.png';
+import LiskBackgroundLight from '../../../../../assets/images/homeBg-light.png'
+import LiskBackgroundDark from '../../../../../assets/images/homeBg-dark.png'
+import CopyToClipboard from '../../../../shared/copyToClipboard';
+import { stringShortener } from '../../../../../utilities/helpers';
 import { colors, themes } from '../../../../../constants/styleGuide';
+import { IconButton } from '../../../../shared/toolBox/button';
 
 const blurs = {
   blurBig,
@@ -32,104 +38,148 @@ const getBalanceSize = (normalizedBalance) => {
 
 const Profile = ({
   styles,
-  priceTicker,
   interpolate,
-  height,
   account,
-  settings,
   token,
+  t,
+  height,
+  address,
+  lockedBalance,
   theme,
+  settings,
+  settingsUpdated,
+  incognito,
 }) => {
-  const language = useSelector(state => state.settings.language);
   const AView = Animated.View;
+  const language = useSelector(state => state.settings.language);
 
   const normalizedBalance = fromRawLsk(account.balance);
   const balanceSize = getBalanceSize(normalizedBalance);
+  const normalizedLockedBalance = fromRawLsk(lockedBalance);
+  const lockedSize = getBalanceSize(normalizedLockedBalance);
 
-  let fiatBalance = 0;
-  const ratio = priceTicker[token][settings.currency];
-  if (ratio) {
-    fiatBalance = (normalizedBalance * ratio).toLocaleString(
-      `${language}-${language.toUpperCase()}`,
-      { maximumFractionDigits: 2 }
-    );
-  }
+  const toggleIncognito = () => {
+    ReactNativeHapticFeedback.trigger('selection');
+    settingsUpdated({
+      incognito: !incognito,
+    });
+  };
 
   return (
-    <View testID="accountSummary">
-      <AView
-        style={[
-          styles.avatarContainer,
-          { marginTop: interpolate([0, 100], [0, 100]) },
-        ]}
-      >
-        {token === 'LSK' ? (
-          <Avatar address={account.address} size={50} />
-        ) : (
-          <View style={styles.tokenLogoWrapper}>
-            <Icon
-              style={styles.tokenLogo}
-              name={tokenMap[token].icon}
-              size={30}
-              color={
-                theme === themes.light
-                  ? colors.light.BTC
-                  : colors.dark.homeHeaderBg
-              }
-            />
-          </View>
-        )}
-      </AView>
-
-      <AView
-        style={[
-          styles.balance,
-          {
-            opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
-            top: interpolate([0, height - 50], [0, height - 120]),
-          },
-        ]}
-      >
-        <FormattedNumber
-          tokenType={token}
-          style={[
-            styles.theme.homeBalance,
-            settings.incognito ? styles.invisibleTitle : null,
-          ]}
-          type={H3}
-          language={language}
-        >
-          {normalizedBalance}
-        </FormattedNumber>
-        <Image
-          source={blurs[`blur${balanceSize}`]}
-          style={[
-            styles.blur,
-            styles[`blur${balanceSize}`],
-            settings.incognito ? styles.visibleBlur : null,
-          ]}
-        />
-      </AView>
-      <AView
-        style={[
-          styles.fiat,
+    <AView testID="accountSummary" style={[styles.flex, styles.theme.flex]}>
+      <ImageBackground
+        source={theme === themes.dark ? LiskBackgroundDark : LiskBackgroundLight}
+        style={[styles.flex, styles.profileContainer]} >
+        <AView style={[styles.row, {
+          opacity: interpolate([0, height / 2, height - 85], [1, 1, 0]),
+          top: interpolate([0, height - 50], [0, height - 120]),
+        }]}>
+          <AView >
+            <View style={styles.row} >
+              <H2 style={styles.title} >{t('Lisk Wallet')}</H2>
+              <IconButton
+                title=""
+                icon={incognito ? 'disable-incognito' : 'enable-incognito'}
+                color={colors.light.white}
+                iconSize={20}
+                onClick={toggleIncognito}
+              />
+            </View>
+            <View style={styles.copyContainer} >
+              <CopyToClipboard
+                value={address}
+                type={P}
+                label={stringShortener(address, 6, 5)}
+                labelStyle={styles.label}
+                iconColor={colors.dark.white}
+                iconStyle={styles.iconStyle}
+                style={{ justifyContent: 'flex-start' }}
+              />
+            </View>
+          </AView>
+          <AView
+            style={[
+              styles.avatarContainer,
+              { marginTop: interpolate([0, 100], [0, 100]) }
+            ]}
+          >
+            <Avatar address={account.address} size={50} />
+          </AView>
+        </AView>
+        <AView style={[
           {
             opacity: interpolate([0, 30], [1, 0]),
             top: interpolate([0, 100], [0, 80]),
           },
-        ]}
-      >
-        {!(
-          settings.incognito
-          || fiatBalance === 'NaN'
-          || !fiatBalance
-        ) ? (
-          <P style={[styles.fiatValue, styles.theme.fiatValue]}>
-            {`~ ${fiatBalance} ${settings.currency}`}
-          </P>
-          ) : null}
-      </AView>
-    </View>
+        ]}>
+          <View style={[styles.row, styles.keyValueRow]} >
+            <P style={styles.label} >{t('Available')}</P>
+            <AView
+              style={[
+                styles.balance,
+                {
+                  opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
+                  top: interpolate([0, height - 50], [0, height - 120]),
+                },
+              ]}
+            >
+              <FormattedNumber
+                tokenType={token}
+                style={[
+                  styles.theme.homeBalance,
+                  settings.incognito ? styles.invisibleTitle : null,
+                ]}
+                type={H3}
+                language={language}
+              >
+                {normalizedBalance}
+              </FormattedNumber>
+              <Image
+                source={blurs[`blur${balanceSize}`]}
+                style={[
+                  styles.blur,
+                  styles[`blur${balanceSize}`],
+                  settings.incognito ? styles.visibleBlur : null,
+                ]}
+              />
+            </AView>
+          </View>
+          <View style={[styles.row, styles.keyValueRow]} >
+            <P style={styles.label} >{t('Locked')}</P>
+            <AView
+              style={[
+                styles.balance,
+                {
+                  opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
+                  top: interpolate([0, height - 50], [0, height - 120]),
+                },
+              ]}
+            >
+              <FormattedNumber
+                tokenType={token}
+                style={[
+                  styles.theme.homeBalance,
+                  settings.incognito ? styles.invisibleTitle : null,
+                ]}
+                type={H3}
+                language={language}
+              >
+                {normalizedLockedBalance}
+              </FormattedNumber>
+              <Image
+                source={blurs[`blur${lockedSize}`]}
+                style={[
+                  styles.blur,
+                  styles[`blur${lockedSize}`],
+                  settings.incognito ? styles.visibleBlur : null,
+                ]}
+              />
+            </AView>
+          </View>
+        </AView>
+
+      </ImageBackground>
+    </AView>
   );
 };
 
