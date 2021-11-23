@@ -71,7 +71,7 @@ const Profile = ({
         source={theme === themes.dark ? LiskBackgroundDark : LiskBackgroundLight}
         style={[styles.flex, styles.profileContainer]} >
         <AView style={[styles.row, {
-          opacity: interpolate([0, height / 2, height - 85], [1, 1, 0]),
+          opacity: interpolate([0, height - 180, height - 85], [1, 1, 0]),
           top: interpolate([0, height - 50], [0, height - 120]),
         }]}>
           <AView >

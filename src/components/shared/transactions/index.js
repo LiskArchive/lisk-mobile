@@ -94,7 +94,6 @@ class Transactions extends React.Component {
       footer,
       incognitoMode,
       followedAccounts,
-      refreshing,
       type,
       t,
     } = this.props;
@@ -111,9 +110,6 @@ class Transactions extends React.Component {
           <Fragment />
           ) : (
           <Fragment>
-            {Platform.OS === 'ios' && refreshing ? (
-              <ActivityIndicator size="large" />
-            ) : null}
             <View style={styles.innerContainer}>
               <H3 style={[styles.title, styles.theme.title]}>
                 {t('Activity')}
@@ -130,7 +126,7 @@ class Transactions extends React.Component {
             />
             {footer ? <Footer /> : null}
           </Fragment>
-        )}
+          )}
       </Anim>
     );
   }
