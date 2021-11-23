@@ -108,10 +108,7 @@ navigationOptions.Request = {
 
 navigationOptions.Bookmarks = {
   tabBarLabel: 'Bookmarks',
-  title: null,
-  headerLeft: () => <HeaderBackButton title="Bookmarks" noIcon />,
-  headerStyle: noShadow,
-  headerTitleStyle: genericTitle
+  headerShown: false
 };
 
 navigationOptions.Settings = {

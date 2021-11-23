@@ -42,7 +42,8 @@ class Input extends React.Component {
       secureTextEntry,
       placeholder,
       testID,
-      accessibilityLabel
+      accessibilityLabel,
+      returnKeyType
     } = this.props;
 
     let { keyboardAppearance } = this.props;
@@ -85,6 +86,7 @@ class Input extends React.Component {
           multiline={multiline}
           ref={input => reference(input)}
           value={value}
+          returnKeyType={returnKeyType}
           keyboardType={keyboardType}
           keyboardAppearance={keyboardAppearance}
           autoFocus={autoFocus}

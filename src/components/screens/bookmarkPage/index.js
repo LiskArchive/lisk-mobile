@@ -1,15 +1,14 @@
 import React from 'react';
 import {
-  View, TouchableOpacity, ScrollView
+  View, TouchableOpacity, ScrollView, SafeAreaView, Keyboard
 } from 'react-native';
 import { translate } from 'react-i18next';
 import Icon from '../../shared/toolBox/icon';
-import Input from '../../shared/toolBox/input';
 import { colors } from '../../../constants/styleGuide';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../shared/bookmarks';
+import SearchBarHeader from '../router/searchBarHeader';
 
 class Bookmark extends React.Component {
   activeInputRef = null;
@@ -19,6 +18,7 @@ class Bookmark extends React.Component {
   state = {
     header: true,
     query: '',
+    isSearchOpen: false
   };
 
   setQuery = query => {
@@ -42,6 +42,15 @@ class Bookmark extends React.Component {
     this.current = next;
   }
 
+  componentDidMount() {
+    Keyboard.addListener('keyboardDidHide', () => this.setState({ isSearchOpen: false }))
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  componentWillUnmount() {
+    Keyboard.removeAllListeners('keyboardDidHide');
+  }
+
   setRef = (ref, address) => {
     if (!address) {
       this.prev = null;
@@ -58,36 +67,20 @@ class Bookmark extends React.Component {
       styles, navigation, theme, t
     } = this.props;
     const { query } = this.state;
-    const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
+      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+        <SearchBarHeader
+          title={'Bookmarks'}
+          noIcon={true}
+          onChange={this.setQuery}
+          value={query}
+          isSearchOpen={this.state.isSearchOpen}
+          setIsSearchOpen={val => this.setState({ isSearchOpen: val })}
+        />
         <ScrollView style={styles.container} >
           <View style={styles.innerContainer}>
             <View style={styles.form}>
-              <View style={styles.addressContainer}>
-                <Icon
-                  style={styles.searchIcon}
-                  name="search"
-                  size={18}
-                  color={colors.light.blueGray}
-                />
-                <Input
-                  label={isSmallScreen ? '' : t('Search')}
-                  placeholder={isSmallScreen ? t('Search for a bookmark') : ''}
-                  autoCorrect={false}
-                  reference={input => {
-                    this.input = input;
-                  }}
-                  innerStyles={{
-                    errorMessage: styles.errorMessage,
-                    input: [styles.input, styles.addressInput],
-                    containerStyle: styles.addressInputContainer,
-                  }}
-                  onChange={this.setQuery}
-                  value={query}
-                />
-              </View>
               <Bookmarks
                 navigate={navigation.navigate}
                 draggable={true}
@@ -110,7 +103,7 @@ class Bookmark extends React.Component {
             size={25}
           />
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     );
   }
 }
