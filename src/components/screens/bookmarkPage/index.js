@@ -1,16 +1,14 @@
 import React from 'react';
 import {
-  View, Animated, ScrollView, Keyboard
+  View, TouchableOpacity, ScrollView, SafeAreaView
 } from 'react-native';
 import { translate } from 'react-i18next';
 import Icon from '../../shared/toolBox/icon';
-import Input from '../../shared/toolBox/input';
-import { IconButton } from '../../shared/toolBox/button';
 import { colors } from '../../../constants/styleGuide';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../shared/bookmarks';
+import SearchBarHeader from '../router/searchBarHeader';
 
 class Bookmark extends React.Component {
   activeInputRef = null;
@@ -20,28 +18,8 @@ class Bookmark extends React.Component {
   state = {
     header: true,
     query: '',
+    isSearchOpen: false
   };
-
-  animatedStyles = {
-    height: new Animated.Value(75),
-    paddingTop: new Animated.Value(20),
-  };
-
-  componentDidMount() {
-    this.keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      this.onKeyboardOpen
-    );
-    this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      this.onKeyboardClose
-    );
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
 
   setQuery = query => {
     this.setState({
@@ -49,53 +27,9 @@ class Bookmark extends React.Component {
     });
   };
 
-  onKeyboardOpen = () => {
-    this.onKeyboardChanged(true);
-  };
-
-  onKeyboardClose = () => {
-    this.onKeyboardChanged(false);
-  };
-
   closeCurrent() {
     if (this.current) this.current.snapTo({ index: 0 });
   }
-
-  hideHeadingElements = showHeader => {
-    const { height, paddingTop } = this.animatedStyles;
-    this.closeCurrent();
-    if (showHeader) {
-      Animated.parallel([
-        Animated.timing(paddingTop, {
-          toValue: 0,
-          duration: 400,
-          delay: 0,
-        }),
-        Animated.timing(height, {
-          toValue: 0,
-          duration: 400,
-          delay: 0,
-        }),
-      ]).start();
-    } else {
-      Animated.parallel([
-        Animated.timing(height, {
-          toValue: 75,
-          duration: 400,
-          delay: 0,
-        }),
-        Animated.timing(paddingTop, {
-          toValue: 20,
-          duration: 400,
-          delay: 0,
-        }),
-      ]).start();
-    }
-  };
-
-  onKeyboardChanged = showHeader => {
-    this.hideHeadingElements(showHeader);
-  };
 
   componentDidUpdate() {
     this.current = null;
@@ -124,55 +58,20 @@ class Bookmark extends React.Component {
       styles, navigation, theme, t
     } = this.props;
     const { query } = this.state;
-    const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <ScrollView style={styles.container}>
+      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+        <SearchBarHeader
+          title={'Bookmarks'}
+          noIcon={true}
+          onChange={this.setQuery}
+          value={query}
+          isSearchOpen={this.state.isSearchOpen}
+          setIsSearchOpen={val => this.setState({ isSearchOpen: val })}
+        />
+        <ScrollView style={styles.container} >
           <View style={styles.innerContainer}>
             <View style={styles.form}>
-              <View style={styles.addressContainer}>
-                <Icon
-                  style={styles.searchIcon}
-                  name="search"
-                  size={18}
-                  color={colors.light.blueGray}
-                />
-                <Input
-                  label={isSmallScreen ? '' : t('Search')}
-                  placeholder={isSmallScreen ? t('Search for a bookmark') : ''}
-                  autoCorrect={false}
-                  reference={input => {
-                    this.input = input;
-                  }}
-                  innerStyles={{
-                    errorMessage: styles.errorMessage,
-                    input: [styles.input, styles.addressInput],
-                    containerStyle: styles.addressInputContainer,
-                  }}
-                  onChange={this.setQuery}
-                  value={query}
-                />
-              </View>
-              <Animated.View
-                style={[styles.titleContainer, this.animatedStyles]}
-              >
-                <IconButton
-                  style={[styles.addButton, styles.theme.addButton]}
-                  iconStyle={[styles.addButtonIcon, styles.theme.addButtonIcon]}
-                  titleStyle={[
-                    styles.addButtonText,
-                    styles.theme.addButtonText,
-                  ]}
-                  title={t('Add a new bookmark')}
-                  icon="cross"
-                  color={colors[theme].white}
-                  iconSize={21}
-                  onClick={() =>
-                    navigation.navigate({ name: 'AddBookmark', params: { title: t('New bookmark') } })
-                  }
-                />
-              </Animated.View>
               <Bookmarks
                 navigate={navigation.navigate}
                 draggable={true}
@@ -182,7 +81,20 @@ class Bookmark extends React.Component {
             </View>
           </View>
         </ScrollView>
-      </View>
+        <TouchableOpacity
+          style={[styles.titleContainer]}
+          onPress={() =>
+            navigation.navigate({ name: 'AddBookmark', params: { title: t('New bookmark') } })
+          }
+        >
+          <Icon
+            style={[styles.addButtonIcon]}
+            name="cross"
+            color={colors[theme].white}
+            size={20}
+          />
+        </TouchableOpacity>
+      </SafeAreaView>
     );
   }
 }

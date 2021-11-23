@@ -9,6 +9,7 @@ import Icon from '../toolBox/icon';
 import { colors } from '../../../constants/styleGuide';
 import DeleteBookmarkModal from './deleteBookmarkModal';
 import ModalHolder from '../../../utilities/modal';
+import { stringShortener } from '../../../utilities/helpers';
 
 @connect(
   () => ({}),
@@ -49,8 +50,8 @@ class DraggableItem extends React.Component {
                 transform: [
                   {
                     translateX: this._deltaX.interpolate({
-                      inputRange: [-240, 0],
-                      outputRange: [0, 240],
+                      inputRange: [-50, 0],
+                      outputRange: [0, 180],
                     }),
                   },
                 ],
@@ -74,7 +75,7 @@ class DraggableItem extends React.Component {
                 name="edit-bookmark"
                 size={21}
                 style={[styles.iconButton, styles.theme.editContent]}
-                color={colors[theme].mystic}
+                color={colors[theme].white}
               />
               <P style={[styles.buttonContent, styles.theme.editContent]}>
                 {t('Edit')}
@@ -90,8 +91,8 @@ class DraggableItem extends React.Component {
                 transform: [
                   {
                     translateX: this._deltaX.interpolate({
-                      inputRange: [-240, 0],
-                      outputRange: [0, 130],
+                      inputRange: [-50, 0],
+                      outputRange: [0, 100],
                     }),
                   },
                 ],
@@ -124,7 +125,7 @@ class DraggableItem extends React.Component {
           boundaries={{ right: 0 }}
           snapPoints={[
             { x: 0, damping: -0.7, tension: 300 },
-            { x: -240, damping: -0.7, tension: 300 },
+            { x: -50, damping: -0.7, tension: 300 },
           ]}
           onDrag={() => setRef(this.ref, data.address)}
           animatedValueX={this._deltaX}
@@ -150,7 +151,7 @@ class DraggableItem extends React.Component {
                   {data.label}
                 </B>
                 <Small style={[styles.label, styles.theme.label]}>
-                  {data.address}
+                  {stringShortener(data.address, 6, 4)}
                 </Small>
               </View>
             </View>
