@@ -3,6 +3,7 @@ import { colors, fonts } from '../../../../constants/styleGuide';
 export default () => ({
   common: {
     navContainer: {
+      paddingTop: 10,
       height: 50
     },
     title: {
