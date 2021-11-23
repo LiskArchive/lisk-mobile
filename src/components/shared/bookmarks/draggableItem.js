@@ -75,7 +75,7 @@ class DraggableItem extends React.Component {
                 name="edit-bookmark"
                 size={21}
                 style={[styles.iconButton, styles.theme.editContent]}
-                color={colors[theme].mystic}
+                color={colors[theme].white}
               />
               <P style={[styles.buttonContent, styles.theme.editContent]}>
                 {t('Edit')}
