@@ -71,7 +71,7 @@ const Profile = ({
         <ImageBackground
           source={theme === themes.dark ? LiskBackgroundDark : LiskBackgroundLight}
           style={[styles.imgContainer]}
-          imageStyle={{ opacity: theme === themes.dark ? 0.3 : 1 }}
+          imageStyle={{ opacity: theme === themes.dark ? 0.3 : 1, }}
         >
           <AView style={[styles.row, {
             opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
@@ -159,9 +159,10 @@ const Profile = ({
                   tokenType={token}
                   style={[
                     styles.theme.homeBalance,
+                    styles.lockedBalance,
                     settings.incognito ? styles.invisibleTitle : null,
                   ]}
-                  type={H3}
+                  type={P}
                   language={language}
                 >
                   {normalizedLockedBalance}

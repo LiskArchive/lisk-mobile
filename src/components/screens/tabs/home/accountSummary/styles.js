@@ -1,4 +1,4 @@
-import { themes, colors } from '../../../../../constants/styleGuide';
+import { themes, colors, fonts } from '../../../../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -6,11 +6,14 @@ export default () => ({
       flex: 1,
     },
     imgContainer: {
-      width: '100%'
+      width: '100%',
+      height: '100%',
+      marginTop: 60,
     },
     profileContainer: {
       padding: 20,
-      paddingTop: 90,
+      paddingTop: 20,
+      marginTop: 10,
     },
     invisibleTitle: {
       color: 'transparent',
@@ -69,6 +72,9 @@ export default () => ({
       flexDirection: 'row',
       justifyContent: 'center',
       height: 45,
+    },
+    lockedBalance: {
+      fontSize: fonts.size.h3
     },
   },
   [themes.light]: {
