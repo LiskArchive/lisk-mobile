@@ -1,6 +1,4 @@
 import React from 'react';
-
-import DynamicHeaderBackground from './dynamicHeaderBackground';
 import HomeHeaderTitle from './homeHeaderTitle';
 import { t } from './helper';
 import HeaderBackButton from './headerBackButton';
@@ -62,26 +60,8 @@ navigationOptions.Home = {
 };
 
 navigationOptions.HomeStack = () => {
-  const os = deviceType();
-  let headerStyle = {
-    height: os === 'iOSx' ? 90 : 64
-  };
-  if (os === 'android') {
-    headerStyle = {
-      height: 56
-    };
-  }
-  // tabBarOnPress: ({ defaultHandler, navigation }) => {
-  //   if (navigation.isFocused() && navigation.getParam('scrollToTop')) {
-  //     navigation.state.params.scrollToTop();
-  //   } else {
-  //     defaultHandler(0);
-  //   }
-  // },
   return {
-    headerTitle: () => <HomeHeaderTitle type="home" />,
-    headerBackground: () => <DynamicHeaderBackground />,
-    headerStyle
+    headerShown: false
   };
 };
 

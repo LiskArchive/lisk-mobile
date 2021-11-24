@@ -175,7 +175,7 @@
   "This field is required.": "Dieses Feld wird benötigt.",
   "Add bookmark": "Zu Lesezeichen hinzufügen",
   "Delegate registration": "Delegiertenregistrierung",
-  "Second passphrase registration": "Registrierung einer zweiten Passphrase",
+  "Register multisignature group": "Multisignaturgruppe registrieren",
   "Transfer": "Senden",
   "Vote": "Abstimmen",
   "Don’t want to use bioAuth?": "Möchtest du {{sensorType}} nicht benutzen?",

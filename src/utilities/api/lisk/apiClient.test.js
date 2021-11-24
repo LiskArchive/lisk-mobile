@@ -24,11 +24,14 @@ describe('apiClient', () => {
           data: [{
             sequence: { nonce: 0 },
             summary: account,
+            dpos: {
+              unlocking: [{ amount: '100000' }]
+            }
           }],
         })
       }));
       const result = await apiClient.getAccount(account.address);
-      expect(result).toEqual({ ...account, nonce: 0 });
+      expect(result).toEqual({ ...account, nonce: 0, lockedBalance: 100000, });
     });
 
     it('Return an empty account in case of 404', async () => {

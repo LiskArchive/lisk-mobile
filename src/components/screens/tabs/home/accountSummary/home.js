@@ -1,6 +1,7 @@
 import React from 'react';
 import { Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { translate } from 'react-i18next';
 import { settingsUpdated as settingsUpdatedAction } from '../../../../../actions/settings';
 import Profile from './profile';
 import easing from '../../../../../utilities/easing';
@@ -12,6 +13,7 @@ import getStyles from './styles';
   (state) => ({
     settings: state.settings,
     accounts: state.accounts,
+    activeToken: state.settings.token.active,
     priceTicker: state.service.priceTicker
   }),
   {
@@ -31,7 +33,7 @@ class AccountSummary extends React.Component {
     };
   }
 
-  height = 140;
+  height = 260;
 
   componentDidMount() {
     this.screenWidth = Dimensions.get('window').width;
@@ -61,11 +63,14 @@ class AccountSummary extends React.Component {
   };
 
   renderProfile = (data) => {
-    const { settings, priceTicker } = this.props;
+    const {
+      settings, priceTicker, t, accounts, activeToken
+    } = this.props;
     const token = Object.keys(settings.token.list)[data.index];
-
+    const { address, lockedBalance } = accounts.info[activeToken];
     return (
       <Profile
+        t={t}
         key={token}
         token={token}
         priceTicker={priceTicker}
@@ -73,6 +78,9 @@ class AccountSummary extends React.Component {
         settings={settings}
         interpolate={this.interpolate}
         height={this.height}
+        address={address}
+        lockedBalance={lockedBalance}
+        {...this.props}
       />
     );
   };
@@ -81,7 +89,6 @@ class AccountSummary extends React.Component {
     const {
       accounts: { info },
       settings: { token },
-      styles
     } = this.props;
     const {
       initialAnimations: { opacity, top },
@@ -91,26 +98,14 @@ class AccountSummary extends React.Component {
     return (
       <Animated.View
         style={[
-          styles.homeContainer,
-          styles.theme[`homeContainer${token.active}`],
-          this.props.style,
-          { top, opacity, paddingBottom: this.interpolate([0, 100], [15, 0]) }
+          { height: this.interpolate([0, 150], [280, 0]) },
+          { top, opacity, paddingBottom: this.interpolate([0, 100], [15, 0]) },
         ]}
       >
-        <Animated.View
-          style={[
-            styles.container,
-            { height: this.height },
-            {
-              marginTop: this.interpolate([0, this.height + 10], [0, -1 * this.height])
-            }
-          ]}
-        >
           {this.renderProfile({ item: profiles[0], index: 0 })}
-        </Animated.View>
       </Animated.View>
     );
   }
 }
 
-export default withTheme(AccountSummary, getStyles());
+export default withTheme(translate()(AccountSummary), getStyles());

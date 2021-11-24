@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import {
-  View, Animated, Platform, ActivityIndicator
+  View, Animated
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
@@ -10,11 +10,9 @@ import { settingsUpdated as settingsUpdatedAction } from '../../../actions/setti
 import List from './list';
 import Footer from './footer';
 import { H3 } from '../toolBox/typography';
-import colors from '../../../constants/styleGuide/colors';
 import easing from '../../../utilities/easing';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { IconButton } from '../toolBox/button';
 
 /**
  * This component is a HOC to decide which state to show:
@@ -84,7 +82,6 @@ class Transactions extends React.Component {
     });
   };
 
-  // eslint-disable-next-line complexity
   render() {
     const {
       styles,
@@ -95,7 +92,6 @@ class Transactions extends React.Component {
       footer,
       incognitoMode,
       followedAccounts,
-      refreshing,
       type,
       t,
     } = this.props;
@@ -103,34 +99,19 @@ class Transactions extends React.Component {
     const incognito = type === 'home' && incognitoMode;
     const Anim = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
-    const height = type === 'home' ? 180 : 205;
 
     return (
-      <Anim style={[styles.container, { opacity, top }]}>
+      <Anim style={[styles.container, styles.theme.container, { opacity, top }]}>
         {!transactions
-        || (transactions.confirmed.length === 0
-          && transactions.pending.length === 0) ? (
+          || (transactions.confirmed.length === 0
+            && transactions.pending.length === 0) ? (
           <Fragment />
           ) : (
           <Fragment>
-            <View style={[styles.placeholder, { height }]}>
-              {Platform.OS === 'ios' && refreshing ? (
-                <ActivityIndicator size="large" />
-              ) : null}
-            </View>
             <View style={styles.innerContainer}>
               <H3 style={[styles.title, styles.theme.title]}>
                 {t('Activity')}
               </H3>
-              {type === 'home' ? (
-                <IconButton
-                  title=""
-                  icon={incognito ? 'disable-incognito' : 'enable-incognito'}
-                  color={colors.dark.slateGray}
-                  iconSize={20}
-                  onClick={this.toggleIncognito}
-                />
-              ) : null}
             </View>
             <List
               incognito={incognito}

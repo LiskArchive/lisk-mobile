@@ -4,7 +4,6 @@ import { Provider, useSelector } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 
 import Router from './components/screens/router';
-import Loading from './components/shared/loading';
 import store from './store/index';
 import ThemeContext from './contexts/theme';
 import { themes } from './constants/styleGuide';
@@ -21,7 +20,6 @@ const ThemedApp = () => {
         <StatusBar
           barStyle={theme === themes.light ? 'dark-content' : 'light-content'}
         />
-        <Loading />
         <Router />
         <Alert />
         <Modal />
