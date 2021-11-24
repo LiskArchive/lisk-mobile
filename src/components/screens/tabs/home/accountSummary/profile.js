@@ -66,115 +66,120 @@ const Profile = ({
   };
 
   return (
-    <AView testID="accountSummary" style={[styles.flex, styles.theme.flex]}>
-      <ImageBackground
-        source={theme === themes.dark ? LiskBackgroundDark : LiskBackgroundLight}
-        style={[styles.flex, styles.profileContainer]} >
-        <AView style={[styles.row, {
-          opacity: interpolate([0, height - 180, height - 85], [1, 1, 0]),
-        }]}>
-          <AView >
-            <View style={styles.row} >
-              <H2 style={styles.title} >{t('Lisk Wallet')}</H2>
-              <IconButton
-                title=""
-                icon={incognito ? 'disable-incognito' : 'enable-incognito'}
-                color={colors.light.white}
-                iconSize={20}
-                onClick={toggleIncognito}
-              />
-            </View>
-            <View style={styles.copyContainer} >
-              <CopyToClipboard
-                value={address}
-                type={P}
-                label={stringShortener(address, 6, 5)}
-                labelStyle={styles.label}
-                iconColor={colors.dark.white}
-                iconStyle={styles.iconStyle}
-                style={{ justifyContent: 'flex-start' }}
-              />
-            </View>
-          </AView>
-          <AView
-            style={[
-              styles.avatarContainer,
-            ]}
-          >
-            <Avatar address={account.address} size={50} />
-          </AView>
-        </AView>
-        <AView style={[
-          {
-            opacity: interpolate([0, 30], [1, 0]),
-          },
-        ]}>
-          <View style={[styles.row, styles.keyValueRow]} >
-            <P style={styles.label} >{t('Available')}</P>
+    <View testID="accountSummary">
+      <AView style={[styles.profileContainer,
+        { marginTop: interpolate([0, 100], [0, 100]) },
+      ]}>
+        <ImageBackground
+          source={theme === themes.dark ? LiskBackgroundDark : LiskBackgroundLight}
+          style={[styles.imgContainer]} >
+          <AView style={[styles.row, {
+            opacity: interpolate([0, height - 180, height - 85], [1, 1, 0]),
+          }]}>
+            <AView >
+              <View style={styles.row} >
+                <H2 style={styles.title} >{t('Lisk Wallet')}</H2>
+                <IconButton
+                  title=""
+                  icon={incognito ? 'disable-incognito' : 'enable-incognito'}
+                  color={colors.light.white}
+                  iconSize={20}
+                  onClick={toggleIncognito}
+                />
+              </View>
+              <View style={styles.copyContainer} >
+                <CopyToClipboard
+                  value={address}
+                  type={P}
+                  label={stringShortener(address, 6, 5)}
+                  labelStyle={styles.label}
+                  iconColor={colors.dark.white}
+                  iconStyle={styles.iconStyle}
+                  style={{ justifyContent: 'flex-start' }}
+                />
+              </View>
+            </AView>
             <AView
               style={[
-                styles.balance,
-                {
-                  opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
-                },
+                styles.avatarContainer,
               ]}
             >
-              <FormattedNumber
-                tokenType={token}
-                style={[
-                  styles.theme.homeBalance,
-                  settings.incognito ? styles.invisibleTitle : null,
-                ]}
-                type={H3}
-                language={language}
-              >
-                {normalizedBalance}
-              </FormattedNumber>
-              <Image
-                source={blurs[`blur${balanceSize}`]}
-                style={[
-                  styles.blur,
-                  styles[`blur${balanceSize}`],
-                  settings.incognito ? styles.visibleBlur : null,
-                ]}
-              />
+              <Avatar address={account.address} size={50} />
             </AView>
-          </View>
-          <View style={[styles.row, styles.keyValueRow]} >
-            <P style={styles.label} >{t('Locked')}</P>
-            <AView
-              style={[
-                styles.balance,
-                {
-                  opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
-                },
-              ]}
-            >
-              <FormattedNumber
-                tokenType={token}
+          </AView>
+          <AView style={[
+            {
+              opacity: interpolate([0, 30], [1, 0]),
+            },
+          ]}>
+            <View style={[styles.row, styles.keyValueRow]} >
+              <P style={styles.label} >{t('Available')}</P>
+              <AView
                 style={[
-                  styles.theme.homeBalance,
-                  settings.incognito ? styles.invisibleTitle : null,
+                  styles.balance,
+                  {
+                    opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
+                    top: interpolate([0, height - 50], [0, height - 120]),
+                  },
                 ]}
-                type={H3}
-                language={language}
               >
-                {normalizedLockedBalance}
-              </FormattedNumber>
-              <Image
-                source={blurs[`blur${lockedSize}`]}
+                <FormattedNumber
+                  tokenType={token}
+                  style={[
+                    styles.theme.homeBalance,
+                    settings.incognito ? styles.invisibleTitle : null,
+                  ]}
+                  type={H3}
+                  language={language}
+                >
+                  {normalizedBalance}
+                </FormattedNumber>
+                <Image
+                  source={blurs[`blur${balanceSize}`]}
+                  style={[
+                    styles.blur,
+                    styles[`blur${balanceSize}`],
+                    settings.incognito ? styles.visibleBlur : null,
+                  ]}
+                />
+              </AView>
+            </View>
+            <View style={[styles.row, styles.keyValueRow]} >
+              <P style={styles.label} >{t('Locked')}</P>
+              <AView
                 style={[
-                  styles.blur,
-                  styles[`blur${lockedSize}`],
-                  settings.incognito ? styles.visibleBlur : null,
+                  styles.balance,
+                  {
+                    opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
+                  },
                 ]}
-              />
-            </AView>
-          </View>
-        </AView>
+              >
+                <FormattedNumber
+                  tokenType={token}
+                  style={[
+                    styles.theme.homeBalance,
+                    settings.incognito ? styles.invisibleTitle : null,
+                  ]}
+                  type={H3}
+                  language={language}
+                >
+                  {normalizedLockedBalance}
+                </FormattedNumber>
+                <Image
+                  source={blurs[`blur${lockedSize}`]}
+                  style={[
+                    styles.blur,
+                    styles[`blur${lockedSize}`],
+                    settings.incognito ? styles.visibleBlur : null,
+                  ]}
+                />
+              </AView>
+            </View>
+          </AView>
 
-      </ImageBackground>
-    </AView>
+        </ImageBackground>
+      </AView>
+    </View>
   );
 };
 

@@ -4,13 +4,11 @@ export default () => ({
   common: {
     flex: {
       flex: 1,
-      minHeight: 290,
+    },
+    imgContainer: {
+      width: '100%'
     },
     profileContainer: {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      left: 0,
       padding: 20,
       paddingTop: 90,
     },
@@ -60,7 +58,6 @@ export default () => ({
       borderTopColor: colors.dark.whiteSmoke,
       marginTop: 10,
       paddingTop: 10,
-      minHeight: 30,
     },
     tokenLogo: {
       textAlign: 'center',

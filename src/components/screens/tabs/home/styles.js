@@ -5,17 +5,17 @@ export default () => ({
     flex: {
       flex: 1,
     },
-    container: {
-      flex: 1,
-      borderTopRightRadius: 20,
-      borderTopLeftRadius: 20,
+    homeContainer: {
+      paddingTop: 20
     },
-    accountSummary: {
-      zIndex: 2,
-      // position: 'absolute',
-      left: 0,
+    scrollView: {
       top: 0,
-      // width: '100%',
+    },
+    scrollViewContainer: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      left: 0,
     },
     loadingState: {
       marginTop: 180,

@@ -175,7 +175,7 @@
   "This field is required.": "This field is required.",
   "Add bookmark": "Add bookmark",
   "Delegate registration": "Delegate registration",
-  "Second passphrase registration": "Second passphrase registration",
+  "Register multisignature group": "Register multisignature group",
   "Transfer": "Transfer",
   "Vote": "Vote",
   "Don’t want to use bioAuth?": "Don't want to use {{sensorType}}?",

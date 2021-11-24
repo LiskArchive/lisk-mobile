@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, RefreshControl } from 'react-native';
+import { ScrollView, RefreshControl, View } from 'react-native';
 import { themes, colors } from '../../../constants/styleGuide';
 
 /**
@@ -62,6 +62,7 @@ class InfiniteScrollView extends React.Component {
       <ScrollView
         onScroll={this.onScroll}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={this.props.contentContainerStyle}
         refreshControl={
           <RefreshControl
             progressViewOffset={170}
@@ -78,9 +79,10 @@ class InfiniteScrollView extends React.Component {
           this.scrollView = el;
         }}
         style={[this.props.style]}
-        stickyHeaderIndices={this.props.stickyHeaderIndices}
+        stickyHeaderIndices={0}
         scrollEventThrottle={8}
       >
+        <View style={{ height: 280, backgroundColor: 'transparent' }} />
         {this.props.render(this.state.refreshing)}
       </ScrollView>
     );
