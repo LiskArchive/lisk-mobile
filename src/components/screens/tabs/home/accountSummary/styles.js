@@ -39,23 +39,25 @@ export default () => ({
       color: colors.dark.white,
     },
     copyContainer: {
-      marginTop: 10,
+      marginTop: 5,
       marginBottom: 5,
+      height: 20,
     },
     label: {
       color: colors.dark.white,
-      marginRight: 10,
+      marginRight: 5,
     },
     iconStyle: {
-      marginLeft: 10,
+      marginLeft: 5,
+      paddingTop: 2,
     },
     row: {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
     keyValueRow: {
-      borderTopWidth: 0.2,
-      borderTopColor: colors.dark.whiteSmoke,
+      borderTopWidth: 1,
+      borderTopColor: 'rgba(255, 255, 255, 0.2)',
       marginTop: 10,
       paddingTop: 10,
     },

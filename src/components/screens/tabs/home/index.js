@@ -1,6 +1,7 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import {
-  View, Animated, StatusBar, Platform
+  View, Animated, StatusBar, Platform, RefreshControl
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from '@react-navigation/compat';
@@ -20,13 +21,13 @@ import Loading from '../../../shared/transactions/loading';
 import {
   loadMore, resetTxAndFetch, showIntroModal, showInitializationModal
 } from './utils';
-import { viewportHeight } from '../../../../utilities/device';
+import { deviceHeight, viewportHeight } from '../../../../utilities/device';
 import InfiniteScrollView from '../../../shared/infiniteScrollView';
-import InfiniteScrollViewUpdate from '../../../shared/InfiniteScrollViewUpdate';
+import ParallaxHeader from '../../../shared/ParallaxHeader';
 import { tokenKeys } from '../../../../constants/tokens';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
-import { themes } from '../../../../constants/styleGuide';
+import { colors, themes } from '../../../../constants/styleGuide';
 import HomeHeaderTitle from '../../router/homeHeaderTitle';
 
 const itemHeight = 90;
@@ -60,6 +61,7 @@ const summaryHeight = 200;
 class Home extends React.Component {
   state = {
     footer: null,
+    refreshing: false
   };
 
   scrollY = new Animated.Value(0);
@@ -196,6 +198,20 @@ class Home extends React.Component {
     }
   }
 
+  onScroll = Animated.event([
+    {
+      nativeEvent: { contentOffset: { y: this.scrollY } },
+    },
+  ]);
+
+  onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.props.updateTransactions();
+    setTimeout(() => {
+      this.setState({ refreshing: false });
+    }, 2000);
+  };
+
   render() {
     const {
       styles,
@@ -205,36 +221,41 @@ class Home extends React.Component {
       updateTransactions,
       theme,
       isFocused,
+      activeToken,
     } = this.props;
     let content = null;
     if (!transactions.loaded) {
-      content = <Loading style={styles.loadingState} />;
+      content = <Loading style={[styles.loadingContainer, styles.theme.loadingContainer]} />;
     } else {
       const listElements = transactions.count > 0
         ? [...transactions.pending, ...transactions.confirmed]
-        : [];
-      const onScroll = Animated.event([
-        {
-          nativeEvent: { contentOffset: { y: this.scrollY } },
-        },
-      ]);
+        : ['emptyState'];
       content = (
-        <InfiniteScrollViewUpdate
+        <InfiniteScrollView
           ref={el => {
             this.scrollView = el;
           }}
           scrollEventThrottle={8}
-          onScroll={onScroll}
+          onScroll={this.onScroll}
           style={[styles.scrollView]}
-          contentContainerStyle={[styles.scrollViewContainer]}
           refresh={updateTransactions}
           loadMore={() => { loadMore(this.props); }}
+          list={listElements}
           count={transactions.count}
-          data={[...listElements, ...listElements, ...listElements, ...listElements]}
-          incognito={this.props.incognito}
-          activeToken={this.props.activeToken}
-          followedAccounts={this.props.followedAccounts}
-          navigate={this.props.navigation.navigate}
+          render={refreshing =>
+            transactions.count > 0 ? (
+              <Transactions
+                type="home"
+                transactions={transactions}
+                footer={this.state.footer}
+                navigate={navigation.push}
+                account={account[activeToken]}
+                refreshing={refreshing}
+              />
+            ) : (
+              <Empty refreshing={refreshing} />
+            )
+          }
         />
       );
     }
@@ -250,13 +271,35 @@ class Home extends React.Component {
             barStyle={isFocused ? 'light-content' : otherPageStatusBar}
           />
         )}
-        <AccountSummary
-          navigation={navigation}
-          scrollY={this.scrollY}
-          isFocused={isFocused}
-          incognito={this.props.incognito}
+        <ParallaxHeader
+          headerMinHeight={70}
+          headerMaxHeight={280}
+          extraScrollHeight={20}
+          navbarColor="#3498db"
+          alwaysShowTitle={false}
+          refreshControl={
+            <RefreshControl
+              progressViewOffset={deviceHeight() / 3}
+              onRefresh={this.onRefresh}
+              refreshing={this.state.refreshing}
+              tintColor={
+                this.props.theme === themes.light
+                  ? colors.light.slateGray
+                  : colors.dark.platinum
+              }
+            />
+          }
+          title={<AccountSummary
+            navigation={navigation}
+            scrollY={this.scrollY}
+            isFocused={isFocused}
+            incognito={this.props.incognito}
+          />}
+          renderContent={() => content}
+          scrollViewProps={{
+            onScroll: this.onScroll
+          }}
         />
-          {content}
       </View>
     );
   }

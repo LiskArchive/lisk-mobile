@@ -126,7 +126,7 @@ class Transactions extends React.Component {
             />
             {footer ? <Footer /> : null}
           </Fragment>
-        )}
+          )}
       </Anim>
     );
   }
