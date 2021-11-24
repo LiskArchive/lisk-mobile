@@ -1,4 +1,4 @@
-import { Platform, Dimensions } from 'react-native'
+import { Platform, Dimensions } from 'react-native';
 import { colors, themes } from '../../../constants/styleGuide';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
