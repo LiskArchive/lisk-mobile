@@ -12,7 +12,6 @@ const fetchTransactions = async (dispatch, getState, data) => {
       getState().settings.token.active,
       data
     );
-
     dispatch({
       type: actionTypes.transactionsLoaded,
       data: {
@@ -20,7 +19,6 @@ const fetchTransactions = async (dispatch, getState, data) => {
         count: response.meta.count,
       },
     });
-
     dispatch(loadingFinished(actionTypes.transactionsLoaded));
   } catch (error) {
     dispatch(loadingFinished(actionTypes.transactionsLoaded));

@@ -7,7 +7,7 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import Avatar from '../../../../shared/avatar';
 import { fromRawLsk } from '../../../../../utilities/conversions';
 import FormattedNumber from '../../../../shared/formattedNumber';
-import { P, H3, B, H2 } from '../../../../shared/toolBox/typography';
+import { P, H3, H2 } from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import blurBig from '../../../../../assets/images/balanceBlur/darkBig.png';
@@ -66,15 +66,15 @@ const Profile = ({
   };
 
   return (
-    <View testID="accountSummary">
-      <AView style={[styles.profileContainer,
-        { marginTop: interpolate([0, 100], [0, 100]) },
-      ]}>
+    <View testID="accountSummary" style={styles.flex}>
+      <View style={[styles.flex, styles.profileContainer]}>
         <ImageBackground
           source={theme === themes.dark ? LiskBackgroundDark : LiskBackgroundLight}
-          style={[styles.imgContainer]} >
+          style={[styles.imgContainer]}
+          imageStyle={{ opacity: theme === themes.dark ? 0.3 : 1 }}
+        >
           <AView style={[styles.row, {
-            opacity: interpolate([0, height - 180, height - 85], [1, 1, 0]),
+            opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
           }]}>
             <AView >
               <View style={styles.row} >
@@ -151,6 +151,7 @@ const Profile = ({
                   styles.balance,
                   {
                     opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
+                    top: interpolate([0, height - 50], [0, height - 120]),
                   },
                 ]}
               >
@@ -178,7 +179,7 @@ const Profile = ({
           </AView>
 
         </ImageBackground>
-      </AView>
+      </View>
     </View>
   );
 };
