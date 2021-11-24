@@ -1,6 +1,4 @@
 import React from 'react';
-
-import DynamicHeaderBackground from './dynamicHeaderBackground';
 import HomeHeaderTitle from './homeHeaderTitle';
 import { t } from './helper';
 import HeaderBackButton from './headerBackButton';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, RefreshControl, View } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { themes, colors } from '../../../constants/styleGuide';
 
 /**
