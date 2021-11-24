@@ -13,8 +13,8 @@ import getStyles from './styles';
 import blurBig from '../../../../../assets/images/balanceBlur/darkBig.png';
 import blurMedium from '../../../../../assets/images/balanceBlur/darkMedium.png';
 import blurSmall from '../../../../../assets/images/balanceBlur/darkSmall.png';
-import LiskBackgroundLight from '../../../../../assets/images/homeBg-light.png'
-import LiskBackgroundDark from '../../../../../assets/images/homeBg-dark.png'
+import LiskBackgroundLight from '../../../../../assets/images/homeBg-light.png';
+import LiskBackgroundDark from '../../../../../assets/images/homeBg-dark.png';
 import CopyToClipboard from '../../../../shared/copyToClipboard';
 import { stringShortener } from '../../../../../utilities/helpers';
 import { colors, themes } from '../../../../../constants/styleGuide';
