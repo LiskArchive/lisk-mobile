@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -15,7 +15,6 @@ import Balance from './balance';
 import Input from './input';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
-import { deviceType } from '../../../../../utilities/device';
 import DropDownHolder from '../../../../../utilities/alert';
 import { languageMap } from '../../../../../constants/languages';
 import * as transactionConstants from '../../../../../constants/transactions';
@@ -24,8 +23,6 @@ import Message from './message';
 import useTransactionFeeCalculation, {
   createTransactionObject
 } from '../../../../../hooks/transactionFee/useTransactionFeeCalculation';
-
-const isAndroid = deviceType() === 'android';
 
 const calculateDynamicFee = (priority, feePerByte, size, minFee, maxAssetFee) => {
   // tie breaker is only meant for medium and high processing speeds
@@ -36,7 +33,6 @@ const calculateDynamicFee = (priority, feePerByte, size, minFee, maxAssetFee) =>
 };
 
 const AmountLSK = (props) => {
-  const inputRef = useRef();
   const [state, setState] = useState({
     fee: 0,
     amount: '',
@@ -148,10 +144,6 @@ const AmountLSK = (props) => {
     pricesRetrieved();
     dynamicFeesRetrieved();
     loadInitialData();
-    if (isAndroid) {
-      // Sometimes keyboard don't show up on android when screen mounts
-      setTimeout(() => inputRef.current.focus(), 250);
-    }
     getDynamicFees();
   }, []);
 
@@ -315,7 +307,7 @@ const AmountLSK = (props) => {
             priceTicker={priceTicker}
           />
           <Input
-            autoFocus={!isAndroid}
+            autoFocus={true}
             label={t('Amount (LSK)', { tokenType: 'LSK' })}
             sendMaximumLabel={t('Send maximum amount')}
             sendMaximum={setMaximumValue}
