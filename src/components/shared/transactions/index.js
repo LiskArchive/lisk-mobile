@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import {
-  View, Animated, Platform, ActivityIndicator
+  View, Animated
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
@@ -10,11 +10,9 @@ import { settingsUpdated as settingsUpdatedAction } from '../../../actions/setti
 import List from './list';
 import Footer from './footer';
 import { H3 } from '../toolBox/typography';
-import colors from '../../../constants/styleGuide/colors';
 import easing from '../../../utilities/easing';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { IconButton } from '../toolBox/button';
 
 /**
  * This component is a HOC to decide which state to show:
