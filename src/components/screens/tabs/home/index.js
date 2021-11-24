@@ -22,14 +22,12 @@ import {
 } from './utils';
 import { viewportHeight } from '../../../../utilities/device';
 import InfiniteScrollView from '../../../shared/infiniteScrollView';
+import InfiniteScrollViewUpdate from '../../../shared/InfiniteScrollViewUpdate';
 import { tokenKeys } from '../../../../constants/tokens';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { themes } from '../../../../constants/styleGuide';
 import HomeHeaderTitle from '../../router/homeHeaderTitle';
-import { B } from '../../../shared/toolBox/typography';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -49,6 +47,7 @@ const summaryHeight = 200;
     activeToken: state.settings.token.active,
     btcIntroShown: state.settings.btcIntroShown,
     settings: state.settings,
+    followedAccounts: state.accounts.followed || [],
   }),
   {
     transactionsLoaded: transactionsLoadedAction,
@@ -206,7 +205,6 @@ class Home extends React.Component {
       updateTransactions,
       theme,
       isFocused,
-      activeToken,
     } = this.props;
     let content = null;
     if (!transactions.loaded) {
@@ -214,48 +212,36 @@ class Home extends React.Component {
     } else {
       const listElements = transactions.count > 0
         ? [...transactions.pending, ...transactions.confirmed]
-        : ['emptyState'];
+        : [];
       const onScroll = Animated.event([
         {
           nativeEvent: { contentOffset: { y: this.scrollY } },
         },
       ]);
       content = (
-        <InfiniteScrollView
+        <InfiniteScrollViewUpdate
           ref={el => {
             this.scrollView = el;
           }}
           scrollEventThrottle={8}
           onScroll={onScroll}
           style={[styles.scrollView]}
+          contentContainerStyle={[styles.scrollViewContainer]}
           refresh={updateTransactions}
           loadMore={() => { loadMore(this.props); }}
-          list={listElements}
           count={transactions.count}
-          render={refreshing =>
-            transactions.count > 0 ? (
-              <Transactions
-                type="home"
-                transactions={transactions}
-                footer={this.state.footer}
-                navigate={navigation.push}
-                account={account[activeToken]}
-                refreshing={refreshing}
-              />
-            ) : (
-              <Empty refreshing={refreshing} />
-            )
-          }
+          data={[...listElements, ...listElements, ...listElements, ...listElements]}
+          incognito={this.props.incognito}
+          activeToken={this.props.activeToken}
+          followedAccounts={this.props.followedAccounts}
+          navigate={this.props.navigation.navigate}
         />
       );
     }
     const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
     return (
-      <ScrollView
+      <View
         style={[styles.flex, styles.theme.homeContainer]}
-        // contentContainerStyle={styles.flex}
-        // stickyHeaderIndices={[2]}
-        showsVerticalScrollIndicator={false}
       >
         {Platform.OS !== 'ios' ? (
           <StatusBar barStyle="light-content" />
@@ -268,13 +254,10 @@ class Home extends React.Component {
           navigation={navigation}
           scrollY={this.scrollY}
           isFocused={isFocused}
-          style={styles.accountSummary}
           incognito={this.props.incognito}
         />
-        <View style={[styles.container, styles.theme.container]} >
           {content}
-        </View>
-      </ScrollView>
+      </View>
     );
   }
 }

@@ -8,6 +8,9 @@ export default () => ({
       paddingRight: 20,
       paddingLeft: 20,
       paddingTop: 20,
+      flex: 1,
+      borderTopRightRadius: 20,
+      borderTopLeftRadius: 20,
     },
     itemContainer: {
       width: '100%',
@@ -129,6 +132,9 @@ export default () => ({
     },
   },
   [themes.light]: {
+    container: {
+      backgroundColor: colors.light.white,
+    },
     itemContainer: {
       borderBottomColor: colors.light.mystic,
     },
@@ -164,6 +170,9 @@ export default () => ({
     },
   },
   [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.black,
+    },
     title: {
       color: colors.dark.white,
     },

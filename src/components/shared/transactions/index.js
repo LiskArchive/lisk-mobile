@@ -103,7 +103,7 @@ class Transactions extends React.Component {
     const { opacity, top } = this.state.initialAnimations;
 
     return (
-      <Anim style={[styles.container, { opacity, top }]}>
+      <Anim style={[styles.container, styles.theme.container, { opacity, top }]}>
         {!transactions
           || (transactions.confirmed.length === 0
             && transactions.pending.length === 0) ? (
@@ -122,11 +122,11 @@ class Transactions extends React.Component {
               followedAccounts={followedAccounts}
               pending={transactions.pending}
               activeToken={activeToken}
-                transactions={[...transactions.confirmed, ...transactions.confirmed, ...transactions.confirmed, ...transactions.confirmed]}
+              transactions={transactions.confirmed}
             />
             {footer ? <Footer /> : null}
           </Fragment>
-          )}
+        )}
       </Anim>
     );
   }

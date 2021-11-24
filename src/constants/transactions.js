@@ -140,7 +140,7 @@ export const transactions = {
   [moduleAssetNameIdMap.registerMultisignatureGroup]: {
     moduleAssetId: '4:0',
     fee: 5e8,
-    title: t('Second passphrase registration'),
+    title: t('Register multisignature group'),
     image: (theme) => (theme === themes.light ? setSecondPassphraseLight : setSecondPassphraseDark)
   },
   [moduleAssetNameIdMap.registerDelegate]: {
