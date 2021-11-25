@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Animated, RefreshControl } from 'react-native';
+import { View, Animated } from 'react-native';
 import {
   account as accountAPI,
   transactions as transactionsAPI,
@@ -17,9 +17,6 @@ import {
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import HomeHeaderTitle from '../router/homeHeaderTitle';
-import ParallaxHeader from '../../shared/ParallaxHeader';
-import { deviceHeight } from '../../../utilities/device';
-import { colors, themes } from '../../../constants/styleGuide';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -48,7 +45,6 @@ class Wallet extends React.Component {
       pending: [],
       loaded: false,
     },
-    refreshing: false,
   };
 
   scrollY = new Animated.Value(0);
@@ -175,14 +171,6 @@ class Wallet extends React.Component {
     this.fetchInitialData();
   }
 
-  onRefresh = () => {
-    this.setState({ refreshing: true });
-    this.refresh();
-    setTimeout(() => {
-      this.setState({ refreshing: false });
-    }, 2000);
-  };
-
   componentDidUpdate(prevProps, prevState) {
     const { activeToken, followedAccounts } = this.props;
     const storedAccount = followedAccounts[activeToken].filter(
@@ -253,32 +241,15 @@ class Wallet extends React.Component {
 
     return (
       <View style={[styles.container, styles.theme.container]}>
-        <ParallaxHeader
-          headerMinHeight={70}
-          headerMaxHeight={220}
-          extraScrollHeight={20}
-          navbarColor="#3498db"
-          alwaysShowTitle={false}
-          refreshControl={
-            <RefreshControl
-              progressViewOffset={deviceHeight() / 3}
-              onRefresh={this.onRefresh}
-              refreshing={this.state.refreshing}
-              tintColor={
-                this.props.theme === themes.light
-                  ? colors.light.slateGray
-                  : colors.dark.platinum
-              }
-            />
-          }
-          title={account && account.address && <AccountSummary
+        {account && account.address ? (
+          <AccountSummary
             navigation={navigation}
             scrollY={this.scrollY}
             account={account}
             style={styles.accountSummary}
-          />}
-          renderContent={() => content}
-        />
+          />
+        ) : null}
+        {content}
       </View>
     );
   }
