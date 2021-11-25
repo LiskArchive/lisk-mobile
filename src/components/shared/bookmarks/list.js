@@ -5,7 +5,6 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const List = ({
-  styles,
   list,
   activeToken,
   showAvatar,
@@ -15,7 +14,7 @@ const List = ({
 }) => {
   const Element = draggable ? DraggableItem : Item;
   return (
-    <View style={styles.emptyState}>
+    <View >
       {list.map(item => (
         <Element
           showAvatar={showAvatar}

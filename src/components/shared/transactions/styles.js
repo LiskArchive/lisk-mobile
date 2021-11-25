@@ -81,12 +81,9 @@ export default () => ({
       alignItems: 'center',
       justifyContent: 'center',
       flex: 1,
-      height: viewportHeight() - 170,
-      marginTop: 170,
-    },
-    noActivity: {
-      width: '100%',
-      alignItems: 'center',
+      height: viewportHeight() - 200,
+      borderTopRightRadius: 20,
+      borderTopLeftRadius: 20,
     },
     empty: {
       width: 260,
@@ -180,7 +177,7 @@ export default () => ({
       borderBottomColor: setColorOpacity(colors.light.white, 0.24),
     },
     emptyState: {
-      backgroundColor: colors.dark.mainBg,
+      backgroundColor: colors.dark.black,
     },
     address: {
       color: colors.dark.white,
