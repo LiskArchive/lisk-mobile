@@ -286,7 +286,7 @@ const AmountLSK = (props) => {
   const byteCount = encodeURI(value).split(/%..|./).length - 1;
 
   return (
-    <KeyboardAvoidingView style={[styles.theme.wrapper, styles.wrapper]} behavior="padding" >
+    <View style={[styles.theme.wrapper, styles.wrapper]} behavior="padding" >
       <KeyboardAwareScrollView
         viewIsInsideTab
         onSubmit={onSubmit}
@@ -332,7 +332,7 @@ const AmountLSK = (props) => {
           />
         </View>
       </KeyboardAwareScrollView>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
