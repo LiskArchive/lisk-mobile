@@ -17,6 +17,8 @@ import {
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import HomeHeaderTitle from '../router/homeHeaderTitle';
+import ParallaxHeader from '../../shared/ParallaxHeader';
+import { colors, themes } from '../../../constants/styleGuide';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -241,7 +243,36 @@ class Wallet extends React.Component {
 
     return (
       <View style={[styles.container, styles.theme.container]}>
-        {account && account.address ? (
+        <ParallaxHeader
+          headerMinHeight={70}
+          headerMaxHeight={220}
+          extraScrollHeight={20}
+          navbarColor="#3498db"
+          alwaysShowTitle={false}
+          // refreshControl={
+          //   <RefreshControl
+          //     progressViewOffset={deviceHeight() / 3}
+          //     onRefresh={this.onRefresh}
+          //     refreshing={this.state.refreshing}
+          //     tintColor={
+          //       this.props.theme === themes.light
+          //         ? colors.light.slateGray
+          //         : colors.dark.platinum
+          //     }
+          //   />
+          // }
+          title={account && account.address && <AccountSummary
+            navigation={navigation}
+            scrollY={this.scrollY}
+            account={account}
+            style={styles.accountSummary}
+          />}
+          renderContent={() => content}
+          scrollViewProps={{
+            // onScroll: this.onScroll
+          }}
+        />
+        {/* {account && account.address ? (
           <AccountSummary
             navigation={navigation}
             scrollY={this.scrollY}
@@ -249,7 +280,7 @@ class Wallet extends React.Component {
             style={styles.accountSummary}
           />
         ) : null}
-        {content}
+        {content} */}
       </View>
     );
   }

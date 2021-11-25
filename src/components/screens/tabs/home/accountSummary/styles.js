@@ -44,7 +44,7 @@ export default () => ({
     copyContainer: {
       marginTop: 5,
       marginBottom: 5,
-      height: 20,
+      height: 25,
     },
     label: {
       color: colors.dark.white,
