@@ -11,6 +11,7 @@ import Icon from '../../../shared/toolBox/icon';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import FormattedNumber from '../../../shared/formattedNumber';
 import { tokenMap, tokenKeys } from '../../../../constants/tokens';
+import Share from '../../../shared/share';
 import { P, H2 } from '../../../shared/toolBox/typography';
 import { IconButton } from '../../../shared/toolBox/button';
 import easing from '../../../../utilities/easing';
@@ -20,7 +21,6 @@ import getStyles from './styles';
 import { colors } from '../../../../constants/styleGuide';
 import DeleteBookmarkModal from '../../../shared/bookmarks/deleteBookmarkModal';
 import modalHolder from '../../../../utilities/modal';
-import CopyToClipboard from '../../../shared/copyToClipboard';
 
 @connect(
   state => ({
@@ -128,7 +128,7 @@ class AccountSummary extends React.Component {
     const AView = Animated.View;
     const { opacity, top } = this.state.initialAnimations;
     const normalizedBalance = fromRawLsk(account.balance);
-    const height = 223;
+    const height = 203;
     const isFollowed = followedAccounts[activeToken].some(
       item => item.address === account.address
     );
@@ -175,14 +175,14 @@ class AccountSummary extends React.Component {
             },
           ]}
         >
-          <CopyToClipboard
-            value={address}
+          <Share
             type={P}
-            label={stringShortener(address, 9, 6)}
-            labelStyle={[styles.addressP, styles.theme.walletAddress]}
+            style={[styles.addressP, styles.theme.walletAddress]}
             iconColor={colors.light.blueGray}
-            iconStyle={styles.iconStyle}
-            style={{ justifyContent: 'center' }}
+            containerStyle={styles.addressContainer}
+            value={account.address}
+            title={address}
+            icon={true}
           />
         </AView>
         <AView
