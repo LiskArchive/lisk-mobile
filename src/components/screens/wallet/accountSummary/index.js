@@ -11,7 +11,6 @@ import Icon from '../../../shared/toolBox/icon';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import FormattedNumber from '../../../shared/formattedNumber';
 import { tokenMap, tokenKeys } from '../../../../constants/tokens';
-import Share from '../../../shared/share';
 import { P, H2 } from '../../../shared/toolBox/typography';
 import { IconButton } from '../../../shared/toolBox/button';
 import easing from '../../../../utilities/easing';

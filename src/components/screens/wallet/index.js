@@ -18,7 +18,6 @@ import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import HomeHeaderTitle from '../router/homeHeaderTitle';
 import ParallaxHeader from '../../shared/ParallaxHeader';
-import { colors, themes } from '../../../constants/styleGuide';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -272,15 +271,6 @@ class Wallet extends React.Component {
             // onScroll: this.onScroll
           }}
         />
-        {/* {account && account.address ? (
-          <AccountSummary
-            navigation={navigation}
-            scrollY={this.scrollY}
-            account={account}
-            style={styles.accountSummary}
-          />
-        ) : null}
-        {content} */}
       </View>
     );
   }
