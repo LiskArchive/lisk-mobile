@@ -2,7 +2,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, KeyboardAvoidingView } from 'react-native';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { TextEncoder } from 'text-encoding';
@@ -286,7 +286,7 @@ const AmountLSK = (props) => {
   const byteCount = encodeURI(value).split(/%..|./).length - 1;
 
   return (
-    <View style={[styles.theme.wrapper, styles.wrapper]}>
+    <KeyboardAvoidingView style={[styles.theme.wrapper, styles.wrapper]} behavior="padding" >
       <KeyboardAwareScrollView
         viewIsInsideTab
         onSubmit={onSubmit}
@@ -332,7 +332,7 @@ const AmountLSK = (props) => {
           />
         </View>
       </KeyboardAwareScrollView>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
