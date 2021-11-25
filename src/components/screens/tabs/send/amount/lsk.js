@@ -2,7 +2,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useEffect, useState } from 'react';
-import { View, KeyboardAvoidingView } from 'react-native';
+import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { TextEncoder } from 'text-encoding';
