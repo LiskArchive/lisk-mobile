@@ -13,7 +13,7 @@ import { themes } from '../../../constants/styleGuide';
 const EmptyState = ({
   theme, styles, refreshing, t, message, style = {}
 }) => (
-  <View style={[styles.emptyState, styles.theme.container, style]}>
+  <View style={[styles.emptyState, style]}>
     <View style={styles.emptyStateActivityIndicator}>
       {Platform.OS === 'ios' && refreshing ? (
         <ActivityIndicator size="large" />
