@@ -30,7 +30,6 @@ const HeaderBackButton = ({
     color = theme === themes.light ? colors.light.black : colors.dark.white;
   }
   const width = useRef(new Animated.Value(0)).current;
-  const inputRef = useRef()
   const { width: windowWidth } = useWindowDimensions();
 
   const openSearchBar = () => {
@@ -38,9 +37,9 @@ const HeaderBackButton = ({
   };
 
   const closeSearchBar = () => {
-    setIsSearchOpen(false)
-    onChange('')
-  }
+    setIsSearchOpen(false);
+    onChange('');
+  };
 
   useEffect(() => {
     if (isSearchOpen) {
