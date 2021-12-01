@@ -61,14 +61,12 @@ class Modal extends React.Component {
                 headerStyle,
               ]}
             >
-              <View style={{ flexDirection: 'row' }}>
                 <HeaderBackButton
                   onPress={this.closeModal}
                   icon="cross"
                   style={styles.closeButton}
                 />
                 <B style={[styles.title, styles.theme.title]}>{title}</B>
-              </View>
             </View>
             <ScrollView>
               <View style={[styles.contentContainer, contentStyle]}>
