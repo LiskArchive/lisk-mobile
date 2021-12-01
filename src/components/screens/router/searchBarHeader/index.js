@@ -30,11 +30,17 @@ const HeaderBackButton = ({
     color = theme === themes.light ? colors.light.black : colors.dark.white;
   }
   const width = useRef(new Animated.Value(0)).current;
+  const inputRef = useRef()
   const { width: windowWidth } = useWindowDimensions();
 
   const openSearchBar = () => {
     setIsSearchOpen(true);
   };
+
+  const closeSearchBar = () => {
+    setIsSearchOpen(false)
+    onChange('')
+  }
 
   useEffect(() => {
     if (isSearchOpen) {
@@ -69,18 +75,16 @@ const HeaderBackButton = ({
             <Input
               placeholder={t('Search for a bookmark')}
               autoCorrect={false}
-              reference={input => {
-                this.input = input;
-              }}
               innerStyles={{
                 input: [styles.input],
               }}
+              autoFocus
               onChange={onChange}
               value={value}
               returnKeyType="search"
             />
           </View>
-          <TouchableOpacity style={styles.iconButton} onPress={() => setIsSearchOpen(false)}>
+          <TouchableOpacity style={styles.iconButton} onPress={closeSearchBar}>
             <P style={styles.cancelButton} >{t('Cancel')}</P>
           </TouchableOpacity>
         </View>
