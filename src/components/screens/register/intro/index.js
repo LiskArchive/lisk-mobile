@@ -7,6 +7,7 @@ import Slider from '../../intro/heading';
 import addressImg from '../../../../assets/images/registrationIntro/address3x.png';
 import securePassphraseImg from '../../../../assets/images/registrationIntro/securePassphrase3x.png';
 import uniqueAvatarImg from '../../../../assets/images/registrationIntro/uniqueAvatar3x.png';
+import HeaderBackButton from '../../router/headerBackButton';
 
 class Intro extends React.Component {
   state = {
@@ -25,6 +26,7 @@ class Intro extends React.Component {
 
     setOptions({
       title: t('Account creation'),
+      headerLeft: (props) => <HeaderBackButton {...props} onPress={this.props.navigation.goBack} />,
     });
   }
 
