@@ -29,7 +29,7 @@ const HeaderBackButton = ({
         <IconButton
           style={[styles.main, styles.theme.main, style]}
           icon={icon || 'back'}
-          onPress={onPress}
+          onClick={onPress}
           color={color}
         />
       )}
