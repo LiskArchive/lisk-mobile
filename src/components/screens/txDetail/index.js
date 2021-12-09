@@ -270,7 +270,7 @@ class TransactionDetail extends React.Component {
           {activeToken === 'LSK' ? (
             <CopyToClipboard
               style={[styles.value, styles.theme.value, styles.transactionId]}
-              labelStyle={[styles.value, styles.theme.value, styles.referenceValue]}
+              labelStyle={[styles.value, styles.theme.value]}
               showIcon={true}
               iconSize={18}
               value={tx.id}
@@ -288,7 +288,7 @@ class TransactionDetail extends React.Component {
         </Row>
         {tx.blockHeight ? (
           <Row title="Block Height">
-            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
+            <B style={[styles.value, styles.theme.value]}>
               {tx.blockHeight}
             </B>
           </Row>
@@ -297,7 +297,7 @@ class TransactionDetail extends React.Component {
           <Row title="Block ID">
             <CopyToClipboard
               style={[styles.value, styles.theme.value, styles.transactionId]}
-              labelStyle={[styles.value, styles.theme.value, styles.referenceValue]}
+              labelStyle={[styles.value, styles.theme.value]}
               showIcon={true}
               iconSize={18}
               value={tx.blockId}

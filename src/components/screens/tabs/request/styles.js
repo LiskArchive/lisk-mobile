@@ -33,6 +33,7 @@ export default () => ({
     address: {
       fontSize: fonts.size.base,
       maxWidth: '90%',
+      marginRight: 15,
     },
     copyContainer: {
       alignItems: 'center',
