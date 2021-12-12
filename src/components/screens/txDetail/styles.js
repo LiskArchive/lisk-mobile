@@ -17,7 +17,7 @@ export default () => ({
     },
     transactionTitle: {
       fontFamily: fonts.family.contextSemiBold,
-      fontSize: 20
+      fontSize: 16,
     },
     divider: {
       margin: 20,
