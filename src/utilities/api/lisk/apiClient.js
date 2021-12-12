@@ -28,12 +28,20 @@ class LiskAPIClient {
         initialized: true,
       };
     }
-    console.log('data', data)
     const lockedBalance = data[0].dpos.unlocking
       ?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
     return {
       ...data[0].summary, initialized: true, nonce: data[0].sequence.nonce, lockedBalance
     };
+  }
+
+  async getBlocks() {
+    const resp = await fetch(`${this._url}/v2/blocks`, config.requestOptions);
+    if (!resp.ok) {
+      throw new Error('Failed to request account from server.');
+    }
+    const { data } = await resp.json();
+    return data;
   }
 
   async getTransaction(id) {

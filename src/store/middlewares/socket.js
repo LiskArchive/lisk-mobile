@@ -15,23 +15,31 @@ const closeConnection = () => {
   BackgroundTimer.stopBackgroundTimer();
 };
 
-export const checkBalance = store => {
+export const checkBalance = (store) => {
   const activeToken = store.getState().settings.token.active;
   const { address, balance } = store.getState().accounts.info[activeToken];
-  return accountAPI.getSummary(activeToken, { address }).then(res => {
+  return accountAPI.getSummary(activeToken, { address }).then((res) => {
     if (res.balance !== balance) {
       store.dispatch(blockUpdated());
     }
   });
 };
 
-const socketSetup = store => {
+export const getBlocks = (store) => {
+  const activeToken = store.getState().settings.token.active;
+  return accountAPI.getBlocks(activeToken).then((res) => {
+    console.log(res);
+  });
+};
+
+const socketSetup = (store) => {
   BackgroundTimer.runBackgroundTimer(() => {
     checkBalance(store);
+    getBlocks(store);
   }, 30000);
 };
 
-const handleConnectivityChange = connectionInfo => {
+const handleConnectivityChange = (connectionInfo) => {
   if (connectionInfo.isConnected) {
     DropDownHolder.closeAlert();
   } else if (!connectionInfo.isConnected) {
@@ -44,7 +52,7 @@ const handleConnectivityChange = connectionInfo => {
 
 let unsubscribe;
 
-const socketMiddleware = store => next => action => {
+const socketMiddleware = (store) => (next) => (action) => {
   next(action);
   switch (action.type) {
     case actionTypes.accountSignedIn:
