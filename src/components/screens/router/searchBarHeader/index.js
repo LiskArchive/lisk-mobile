@@ -81,7 +81,8 @@ const HeaderBackButton = ({
                 autoCorrect={false}
                 autoFocus
                 innerStyles={{
-                  input: [styles.input]
+                  input: [styles.input],
+                  containerStyle: [styles.inputContainer]
                 }}
                 placeholderTextColor={
                   theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray

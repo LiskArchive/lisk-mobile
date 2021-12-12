@@ -44,7 +44,12 @@ export default () => ({
     input: {
       flexWrap: 'wrap',
       paddingLeft: 35,
-      marginTop: -20
+      paddingBottom: 10,
+      paddingTop: 10,
+      fontFamily: fonts.family.context
     },
+    inputContainer: {
+      marginTop: -20,
+    }
   }
 });
