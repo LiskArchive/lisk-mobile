@@ -25,9 +25,9 @@ export const checkBalance = (store) => {
   });
 };
 
-export const getBlocks = (store) => {
+export const getNetworkInfo = (store) => {
   const activeToken = store.getState().settings.token.active;
-  return accountAPI.getBlocks(activeToken).then((res) => {
+  return accountAPI.getNetworkInfo(activeToken).then((res) => {
     console.log(res);
   });
 };
@@ -35,7 +35,7 @@ export const getBlocks = (store) => {
 const socketSetup = (store) => {
   BackgroundTimer.runBackgroundTimer(() => {
     checkBalance(store);
-    getBlocks(store);
+    getNetworkInfo(store);
   }, 30000);
 };
 

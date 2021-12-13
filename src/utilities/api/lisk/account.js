@@ -4,8 +4,8 @@ import { apiClient } from './apiClient';
 export const getSummary = params =>
   apiClient.getAccount(params.address);
 
-export const getBlocks = () =>
-  apiClient.getBlocks();
+export const getNetworkInfo = () =>
+  apiClient.getNetworkInfo();
 
 export const extractAddress = passphrase =>
   Lisk.cryptography.getBase32AddressFromPassphrase(passphrase);

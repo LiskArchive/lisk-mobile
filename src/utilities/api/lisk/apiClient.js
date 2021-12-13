@@ -35,13 +35,16 @@ class LiskAPIClient {
     };
   }
 
-  async getBlocks() {
-    const resp = await fetch(`${this._url}/v2/blocks`, config.requestOptions);
+  async getNetworkInfo() {
+    const resp = await fetch(`${this._url}/v2/network/status`, config.requestOptions);
     if (!resp.ok) {
       throw new Error('Failed to request account from server.');
     }
     const { data } = await resp.json();
-    return data;
+    return {
+      height: data.height,
+      blockTime: data.blockTime
+    };
   }
 
   async getTransaction(id) {

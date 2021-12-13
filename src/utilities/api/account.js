@@ -21,8 +21,8 @@ const getSummary = (tokenType, params) =>
  * Retrieves block data for related token from Node API.
  * @param {String} tokenType
  */
-const getBlocks = (tokenType) =>
-  getMappedFunction(tokenType, 'account', 'getBlocks')();
+const getNetworkInfo = (tokenType) =>
+  getMappedFunction(tokenType, 'account', 'getNetworkInfo')();
 
 /**
  * Extracts public key from passphrase for given token.
@@ -46,5 +46,5 @@ export default {
   getSummary,
   extractPublicKey,
   extractAddress,
-  getBlocks,
+  getNetworkInfo,
 };
