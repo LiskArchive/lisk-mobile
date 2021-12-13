@@ -300,6 +300,7 @@ class Home extends React.Component {
             onScroll: this.onScroll
           }}
         />
+        <View style={[styles.fixedBg, styles.theme.fixedBg]}></View>
       </View>
     );
   }
