@@ -5,12 +5,10 @@ import { account as accountAPI } from '../utilities/api';
  * Updates redux store with network status
  * @returns {Function} Thunk action function
  */
-export const networkInfoUpdated = (data) => (dispatch) => {
-  dispatch({
-    type: actionTypes.networkInfoUpdated,
-    data
-  });
-};
+export const networkInfoUpdated = (data) => (dispatch) => dispatch({
+  type: actionTypes.networkInfoUpdated,
+  data
+});
 
 /**
  * Returns a pure action object to store the given account

@@ -14,6 +14,7 @@ import {
   accountFetched as accountFetchedAction,
 } from '../../../../actions/accounts';
 import { settingsUpdated as settingsUpdatedAction } from '../../../../actions/settings';
+import { getNetworkInfo as getNetworkInfoAction } from '../../../../actions/network';
 import AccountSummary from './accountSummary/home';
 import Transactions from '../../../shared/transactions';
 import Empty from '../../../shared/transactions/empty';
@@ -56,6 +57,7 @@ const summaryHeight = 200;
     updateTransactions: blockUpdatedAction,
     accountFetched: accountFetchedAction,
     settingsUpdated: settingsUpdatedAction,
+    getNetworkInfo: getNetworkInfoAction,
   }
 )
 class Home extends React.Component {
@@ -122,7 +124,12 @@ class Home extends React.Component {
       settingsUpdated,
       incognito,
       route,
+      activeToken,
+      getNetworkInfo
     } = this.props;
+    if (activeToken) {
+      getNetworkInfo(activeToken);
+    }
     addListener('willFocus', this.screenWillFocus);
     if (route.params && route.params.discreet && !incognito) {
       settingsUpdated({ incognito: true });

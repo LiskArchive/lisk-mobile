@@ -2,6 +2,7 @@ import BackgroundTimer from 'react-native-background-timer';
 import NetInfo from '@react-native-community/netinfo';
 import actionTypes from '../../constants/actions';
 import { blockUpdated } from '../../actions/accounts';
+import { networkInfoUpdated } from '../../actions/network';
 import { account as accountAPI } from '../../utilities/api';
 import DropDownHolder from '../../utilities/alert';
 import i18n from '../../../locales';
@@ -28,7 +29,7 @@ export const checkBalance = (store) => {
 export const getNetworkInfo = (store) => {
   const activeToken = store.getState().settings.token.active;
   return accountAPI.getNetworkInfo(activeToken).then((res) => {
-    console.log(res);
+    store.dispatch(networkInfoUpdated(res));
   });
 };
 

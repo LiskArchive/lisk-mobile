@@ -15,7 +15,7 @@ export const INITIAL_STATE = {
 const networks = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case actionTypes.networkInfoUpdated:
-      return action.data.payload;
+      return action.data;
 
     default:
       return state;
