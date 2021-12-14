@@ -182,12 +182,12 @@ const Profile = ({
                     ]}
                   />
                 </AView>
-                <TouchableOpacity
+                {Number(normalizedLockedBalance) > 0 ? <TouchableOpacity
                   style={styles.icon}
                   onPress={() => navigation.navigate('LockedBalance')}
                 >
                   <Icon name="forward" color={colors.light.white} size={28} />
-                </TouchableOpacity>
+                </TouchableOpacity> : null}
               </View>
             </View>
           </AView>

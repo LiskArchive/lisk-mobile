@@ -125,7 +125,7 @@ class Home extends React.Component {
       incognito,
       route,
       activeToken,
-      getNetworkInfo
+      getNetworkInfo,
     } = this.props;
     if (activeToken) {
       getNetworkInfo(activeToken);

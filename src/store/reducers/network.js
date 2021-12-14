@@ -2,7 +2,7 @@ import actionTypes from '../../constants/actions';
 
 export const INITIAL_STATE = {
   height: 0,
-  blockTime: 10,
+  blockTime: 0,
 };
 
 /**
