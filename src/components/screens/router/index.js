@@ -59,7 +59,7 @@ const MainNavigator = () => {
           />
           <MainStack.Screen name="SignIn" component={SignIn} options={navigationOptions.SignIn} />
           <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
-          <MainStack.Screen name="Main" component={Tabs} options={getHeaderOptions} />
+          <MainStack.Screen name="Main" component={Tabs} options={navigationOptions.NoHeader} />
           <MainStack.Screen
             name="AddBookmark"
             component={AddBookmark}

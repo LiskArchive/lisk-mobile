@@ -18,14 +18,13 @@ export const getHeaderOptions = ({ route }) => {
 };
 
 const getIcon = ({ route }) => ({
-  tabBarIcon: props => (
-    <TabBarIcon name={route.name.toLowerCase()} {...props} />
-  ),
+  tabBarIcon: (props) => <TabBarIcon name={route.name.toLowerCase()} {...props} />
 });
 
 const Tab = createBottomTabNavigator();
 const SendStack = createStackNavigator();
 const HomeStack = createStackNavigator();
+const Stack = createStackNavigator();
 
 /**
  * We needed to wrap Home and Send screens in a dedicated navigator
@@ -34,20 +33,11 @@ const HomeStack = createStackNavigator();
  * Components under Tabs navigator can't control the header of the Main navigator
  */
 const HomeNavigator = ({ route }) => (
-  <HomeStack.Navigator
-    initialRouteName="Home"
-    mode="modal"
-  >
+  <HomeStack.Navigator initialRouteName="Home" mode="modal">
     <HomeStack.Screen
       name="Home"
       component={Home}
-      options={navigationOptions.HomeStack}
-      initialParams={route.params}
-    />
-    <HomeStack.Screen
-      name="LockedBalance"
-      component={LockedBalanceDetails}
-      options={navigationOptions.HomeStack}
+      options={navigationOptions.NoHeader}
       initialParams={route.params}
     />
   </HomeStack.Navigator>
@@ -74,4 +64,15 @@ const Tabs = () => (
   </Tab.Navigator>
 );
 
-export default Tabs;
+const AppNavigator = () => (
+  <Stack.Navigator initialRouteName="Home" mode="modal" >
+    <Stack.Screen name="Home" component={Tabs} options={getHeaderOptions} />
+    <Stack.Screen
+      name="LockedBalance"
+      component={LockedBalanceDetails}
+      options={navigationOptions.NoHeader}
+    />
+  </Stack.Navigator>
+);
+
+export default AppNavigator;

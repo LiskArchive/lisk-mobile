@@ -59,18 +59,11 @@ navigationOptions.Home = {
   header: () => null
 };
 
-navigationOptions.HomeStack = () => {
+navigationOptions.NoHeader = () => {
   return {
     headerShown: false
   };
 };
-
-navigationOptions.LockedBalanceDetails = () => ({
-  title: null,
-  headerLeft: () => <HeaderBackButton title="Locked Balance Details" noIcon rightIcon="cross" />,
-  headerStyle: noShadow,
-  headerTitleStyle: genericTitle
-});
 
 navigationOptions.Wallet = () => {
   const type = deviceType();
