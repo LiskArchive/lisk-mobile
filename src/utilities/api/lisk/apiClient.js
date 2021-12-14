@@ -34,7 +34,8 @@ class LiskAPIClient {
       initialized: true,
       nonce: data[0].sequence.nonce,
       lockedBalance,
-      unlocking: data[0].dpos.unlocking
+      unlocking: data[0].dpos.unlocking,
+      sentVotes: data[0].dpos.sentVotes
     };
   }
 

@@ -1,7 +1,6 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useMemo, useState } from 'react';
-import {
-  View, Text, ScrollView, SafeAreaView
-} from 'react-native';
+import { View, ScrollView, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import moment from 'moment';
@@ -11,6 +10,9 @@ import withTheme from '../../../../shared/withTheme';
 import HeaderBackButton from '../../../router/headerBackButton';
 import getStyles from './styles';
 import { fromRawLsk } from '../../../../../utilities/conversions';
+import LockSvg from '../../../../../assets/svgs/LockSvg';
+import ProgressSvg from '../../../../../assets/svgs/ProgressSvg';
+import UnlockSvg from '../../../../../assets/svgs/UnlockSvg';
 
 const getPendingTime = (unvoteHeight, unlockHeight) => {
   const awaitingBlocks = unlockHeight - unvoteHeight;
@@ -19,26 +21,56 @@ const getPendingTime = (unvoteHeight, unlockHeight) => {
   return moment().to(momentSeconds, true);
 };
 
+const RowItem = ({
+  styles, title, value, IconComponent
+}) => (
+  <View style={[styles.row, styles.theme.row]}>
+    <View style={styles.flex}>
+      <P style={[styles.text, styles.theme.text]}>{title}</P>
+    </View>
+    <View style={[styles.flexOne, styles.flexRow]}>
+      <View style={styles.iconContainer}>
+        <IconComponent size={1.2} />
+      </View>
+      <P style={[styles.text, styles.theme.text]}>{value}</P>
+    </View>
+  </View>
+);
+
 const LockedBalanceDetails = ({
   account, styles, navigation, t, activeToken, network
 }) => {
-  const [lockedTokens, setLockedTokens] = useState({});
-  const tokensToUnlock = account[activeToken]?.unlocking ?? [];
+  const [unlockedTokens, setUnunlockedTokens] = useState({});
+  const [availableTokens, setAvailableTokens] = useState([]);
+  const [lockedTokensSum, setLockedTokensSum] = useState('');
 
   const networkHeight = useMemo(() => network.height, [network]);
+  const sentVotes = useMemo(() => account[activeToken].sentVotes, [account]);
 
   useEffect(() => {
-    const lockedTokensHashMap = {};
+    const tokensToUnlock = account[activeToken]?.unlocking ?? [];
+    const unlockedTokensHashMap = {};
+    const availableToUnlock = [];
     tokensToUnlock.forEach((token) => {
       const pendingTime = getPendingTime(network.height, token.height.end);
-      if (lockedTokensHashMap[pendingTime]) {
-        lockedTokensHashMap[pendingTime].push(token);
+      if (network.height > token.height.end) {
+        availableToUnlock.push(token);
+      } else if (unlockedTokensHashMap[pendingTime]) {
+        unlockedTokensHashMap[pendingTime].push(token);
       } else {
-        lockedTokensHashMap[pendingTime] = [token];
+        unlockedTokensHashMap[pendingTime] = [token];
       }
     });
-    setLockedTokens(lockedTokensHashMap);
+    setAvailableTokens(availableToUnlock);
+    setUnunlockedTokens(unlockedTokensHashMap);
   }, [networkHeight]);
+
+
+  useEffect(() => {
+    if (sentVotes?.length) {
+      setLockedTokensSum(sentVotes.reduce((a, b) => a + BigInt(b.amount), BigInt(0)));
+    }
+  }, [sentVotes]);
 
   return (
     <SafeAreaView style={styles.theme.container}>
@@ -56,29 +88,44 @@ const LockedBalanceDetails = ({
           </P>
           <View style={styles.tableContent}>
             <View style={[styles.row, styles.theme.row]}>
-              <View style={styles.flexOne}>
+              <View style={styles.flex}>
                 <B style={[styles.text, styles.theme.text]}>{t('Amount')}</B>
               </View>
               <View style={styles.flexOne}>
                 <B style={[styles.text, styles.theme.text]}>{t('Status')}</B>
               </View>
             </View>
-            {Object.keys(lockedTokens).map((time) => (
-              <View style={[styles.row, styles.theme.row]} key={time}>
-                <View style={styles.flexOne}>
-                  <P style={[styles.text, styles.theme.text]}>
-                    {fromRawLsk(lockedTokens[time].reduce((a, b) => a + Number(b.amount), 0))}
-                  </P>
-                </View>
-                <View style={styles.flexOne}>
-                  <P style={[styles.text, styles.theme.text]}>
-                    {t('will be available to unlock', {
-                      timeToUnlock: time
-                    })}
-                  </P>
-                </View>
-              </View>
+            {lockedTokensSum ? (
+              <RowItem
+                title={fromRawLsk(lockedTokensSum)}
+                value={t('locked')}
+                IconComponent={LockSvg}
+                styles={styles}
+              />
+            ) : null}
+            {Object.keys(unlockedTokens).map((time) => (
+              <RowItem
+                key={time}
+                title={fromRawLsk(
+                  unlockedTokens[time].reduce((a, b) => a + BigInt(b.amount), BigInt(0))
+                )}
+                value={t('will be available to unlock', {
+                  timeToUnlock: time
+                })}
+                IconComponent={ProgressSvg}
+                styles={styles}
+              />
             ))}
+            {availableTokens.length ? (
+              <RowItem
+                title={fromRawLsk(
+                  availableTokens.reduce((a, b) => a + BigInt(b.amount), BigInt(0))
+                )}
+                value={t('available to unlock (only on desktop)')}
+                IconComponent={UnlockSvg}
+                styles={styles}
+              />
+            ) : null}
           </View>
         </View>
       </ScrollView>

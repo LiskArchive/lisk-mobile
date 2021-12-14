@@ -17,11 +17,22 @@ export default () => ({
       borderBottomWidth: 1,
       marginVertical: 7,
     },
+    flex: {
+      flex: 1,
+    },
     flexOne: {
-      flex: 1
+      flex: 1.3
+    },
+    flexRow: {
+      flexDirection: 'row',
+    },
+    iconContainer: {
+      marginRight: 5,
+      marginTop: 5
     },
     text: {
-      fontSize: 18,
+      fontSize: 17,
+      flex: 1,
     },
   },
   [themes.light]: {
