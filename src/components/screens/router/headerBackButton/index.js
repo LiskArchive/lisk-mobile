@@ -44,7 +44,7 @@ const HeaderBackButton = ({
       {rightIcon ? (
         <IconButton
           style={[styles.main, styles.theme.main, style]}
-          icon={rightIcon || 'back'}
+          icon={rightIcon}
           onPress={onRightPress}
           color={rightColor}
         />
