@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import config from '../../../../lsk.config';
 
 class LiskAPIClient {
@@ -28,12 +29,14 @@ class LiskAPIClient {
         initialized: true
       };
     }
-    const lockedBalance = data[0].dpos.unlocking?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
+    const unlockingAmount = data[0].dpos.unlocking
+      ?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
+    const totalSentVotes = data[0].dpos.sentVotes?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
     return {
       ...data[0].summary,
       initialized: true,
       nonce: data[0].sequence.nonce,
-      lockedBalance,
+      lockedBalance: unlockingAmount + totalSentVotes,
       unlocking: data[0].dpos.unlocking,
       sentVotes: data[0].dpos.sentVotes
     };
