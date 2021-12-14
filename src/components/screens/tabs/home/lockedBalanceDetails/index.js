@@ -65,7 +65,6 @@ const LockedBalanceDetails = ({
     setUnunlockedTokens(unlockedTokensHashMap);
   }, [networkHeight]);
 
-
   useEffect(() => {
     if (sentVotes?.length) {
       setLockedTokensSum(sentVotes.reduce((a, b) => a + BigInt(b.amount), BigInt(0)));
