@@ -42,7 +42,7 @@ class LiskAPIClient {
   async getNetworkInfo() {
     const resp = await fetch(`${this._url}/v2/network/status`, config.requestOptions);
     if (!resp.ok) {
-      throw new Error('Failed to request account from server.');
+      throw new Error('Failed to request network info from server.');
     }
     const { data } = await resp.json();
     return {
