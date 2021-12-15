@@ -10,6 +10,7 @@ import Settings from '../tabs/settings';
 import TabBarIcon from './tabBarIcon';
 import Home from '../tabs/home';
 import navigationOptions from './navigationOptions';
+import LockedBalanceDetails from '../tabs/home/lockedBalanceDetails';
 
 export const getHeaderOptions = ({ route }) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
@@ -17,14 +18,13 @@ export const getHeaderOptions = ({ route }) => {
 };
 
 const getIcon = ({ route }) => ({
-  tabBarIcon: props => (
-    <TabBarIcon name={route.name.toLowerCase()} {...props} />
-  ),
+  tabBarIcon: (props) => <TabBarIcon name={route.name.toLowerCase()} {...props} />
 });
 
 const Tab = createBottomTabNavigator();
 const SendStack = createStackNavigator();
 const HomeStack = createStackNavigator();
+const Stack = createStackNavigator();
 
 /**
  * We needed to wrap Home and Send screens in a dedicated navigator
@@ -37,7 +37,7 @@ const HomeNavigator = ({ route }) => (
     <HomeStack.Screen
       name="Home"
       component={Home}
-      options={navigationOptions.HomeStack}
+      options={navigationOptions.NoHeader}
       initialParams={route.params}
     />
   </HomeStack.Navigator>
@@ -64,4 +64,33 @@ const Tabs = () => (
   </Tab.Navigator>
 );
 
-export default Tabs;
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01
+  }
+};
+
+const AppNavigator = () => (
+  <Stack.Navigator initialRouteName="Home" mode="modal">
+    <Stack.Screen name="Home" component={Tabs} options={getHeaderOptions} />
+    <Stack.Screen
+      name="LockedBalance"
+      component={LockedBalanceDetails}
+      options={{
+        headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config
+        }
+      }}
+    />
+  </Stack.Navigator>
+);
+
+export default AppNavigator;

@@ -16,7 +16,7 @@ import EnableBioAuth from '../enableBioAuth';
 import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
-import Tabs, { getHeaderOptions } from './tabStack';
+import AppNavigator from './appNavigator';
 import { colors } from '../../../constants/styleGuide';
 
 import navigationOptions from './navigationOptions';
@@ -59,7 +59,7 @@ const MainNavigator = () => {
           />
           <MainStack.Screen name="SignIn" component={SignIn} options={navigationOptions.SignIn} />
           <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
-          <MainStack.Screen name="Main" component={Tabs} options={getHeaderOptions} />
+          <MainStack.Screen name="Main" component={AppNavigator} options={navigationOptions.NoHeader} />
           <MainStack.Screen
             name="AddBookmark"
             component={AddBookmark}

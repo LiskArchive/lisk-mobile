@@ -15,9 +15,9 @@ export default () => ({
     },
     titleContainer: {
       backgroundColor: colors.light.ultramarineBlue,
-      width: 43,
-      height: 43,
-      borderRadius: 22,
+      width: 54,
+      height: 54,
+      borderRadius: 26,
       alignItems: 'center',
       justifyContent: 'center',
       paddingTop: 2,

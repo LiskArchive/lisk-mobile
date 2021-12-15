@@ -22,6 +22,7 @@
   "Address or label": "Address or label",
   "Allow camera access": "Allow camera access",
   "Amount": "Amount",
+  "Status": "Status",
   "Amount (LSK)": "Amount ({{tokenType}})",
   "Amount (including 0.1 LSK)": "Amount (including 0.1 LSK)",
   "Amount in LSK (optional)": "Amount in LSK (Optional)",
@@ -232,5 +233,9 @@
   "The time taken to expedite the transaction is mainly dependent on the fee.": "The time taken to expedite the transaction is mainly dependent on the fee.",
   "The higher the fee, the faster the transaction will be confirmed.": "The higher the fee, the faster the transaction will be confirmed.",
   "Got it": "Got it",
-  "Provide a correct amount of LSK": "Provide a correct amount of LSK"
+  "Provide a correct amount of LSK": "Provide a correct amount of LSK",
+  "Locked balance details": "Locked balance details",
+  "Find details of your locked balance and the unlock waiting period.": "Find details of your locked balance and the unlock waiting period.",
+  "will be available to unlock": "will be available to unlock in ~ {{timeToUnlock}}",
+  "available to unlock (only on desktop)": "available to unlock (only on desktop)"
 }

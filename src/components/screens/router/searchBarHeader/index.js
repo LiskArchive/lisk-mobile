@@ -54,61 +54,64 @@ const HeaderBackButton = ({
   }, [isSearchOpen]);
 
   return (
-    <View style={styles.navContainer} >
-      {isSearchOpen ? <Animated.View style={{
-        transform: [{
-          translateX: width.interpolate({
-            inputRange: [0, 1],
-            outputRange: [windowWidth, 0]
-          })
-        }]
-      }} >
-        <View style={styles.searchRow} >
-          <View style={styles.flex} >
-            <Icon
-              style={styles.searchIcon}
-              name="search"
-              size={18}
-              color={colors.light.blueGray}
-            />
-            <Input
-              placeholder={t('Search for a bookmark')}
-              autoCorrect={false}
-              autoFocus
-              innerStyles={{
-                input: [styles.input],
-              }}
-              onChange={onChange}
-              value={value}
-              returnKeyType="search"
-            />
+    <View style={styles.navContainer}>
+      {isSearchOpen ? (
+        <Animated.View
+          style={{
+            transform: [
+              {
+                translateX: width.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [windowWidth, 0]
+                })
+              }
+            ]
+          }}
+        >
+          <View style={styles.searchRow}>
+            <View style={styles.flex}>
+              <Icon
+                style={styles.searchIcon}
+                name="search"
+                size={18}
+                color={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
+              />
+              <Input
+                placeholder={t('Search for a bookmark')}
+                autoCorrect={false}
+                autoFocus
+                innerStyles={{
+                  input: [styles.input],
+                  containerStyle: [styles.inputContainer]
+                }}
+                placeholderTextColor={
+                  theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
+                }
+                onChange={onChange}
+                value={value}
+                returnKeyType="search"
+              />
+            </View>
+            <TouchableOpacity style={styles.iconButton} onPress={closeSearchBar}>
+              <P style={styles.cancelButton}>{t('Cancel')}</P>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.iconButton} onPress={closeSearchBar}>
-            <P style={styles.cancelButton} >{t('Cancel')}</P>
+        </Animated.View>
+      ) : (
+        <View style={styles.container}>
+          <View style={styles.row}>
+            {noIcon ? null : (
+              <TouchableOpacity onPress={onPress}>
+                <Icon name={icon || 'back'} color={color} />
+              </TouchableOpacity>
+            )}
+            <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>
+          </View>
+          <TouchableOpacity onPress={openSearchBar} style={styles.iconButton}>
+            <Icon name={'search'} color={colors.light.blueGray} size={18} />
           </TouchableOpacity>
         </View>
-      </Animated.View> : <View style={styles.container} >
-        <View style={styles.row} >
-          {noIcon ? null : <TouchableOpacity onPress={onPress}>
-            <Icon
-              name={icon || 'back'}
-              color={color}
-            />
-          </TouchableOpacity>}
-          <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>
-        </View>
-        <TouchableOpacity
-          onPress={openSearchBar}
-          style={styles.iconButton}
-        >
-          <Icon
-            name={'search'}
-            color={colors.light.blueGray}
-            size={18}
-          />
-        </TouchableOpacity>
-      </View>}
-
+      )}
     </View>
   );
 };
