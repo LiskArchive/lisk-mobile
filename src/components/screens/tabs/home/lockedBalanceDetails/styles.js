@@ -27,12 +27,17 @@ export default () => ({
       flexDirection: 'row',
     },
     iconContainer: {
-      marginRight: 5,
+      marginRight: 13,
       marginTop: 5
     },
     text: {
       fontSize: 17,
       flex: 1,
+    },
+    headerText: {
+      fontSize: 17,
+      flex: 1,
+      fontFamily: fonts.family.contextSemiBold
     },
   },
   [themes.light]: {
@@ -44,7 +49,7 @@ export default () => ({
       borderBottomColor: colors.light.platinum
     },
     infoText: {
-      color: colors.light.black
+      color: colors.light.black,
     },
     text: {
       color: colors.light.zodiacBlue

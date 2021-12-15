@@ -96,10 +96,10 @@ const LockedBalanceDetails = ({
           <View style={styles.tableContent}>
             <View style={[styles.row, styles.theme.row]}>
               <View style={styles.flex}>
-                <B style={[styles.text, styles.theme.text]}>{t('Amount')}</B>
+                <P style={[styles.headerText, styles.theme.text]}>{t('Amount')}</P>
               </View>
               <View style={styles.flexOne}>
-                <B style={[styles.text, styles.theme.text]}>{t('Status')}</B>
+                <P style={[styles.headerText, styles.theme.text]}>{t('Status')}</P>
               </View>
             </View>
             {lockedTokensSum ? (

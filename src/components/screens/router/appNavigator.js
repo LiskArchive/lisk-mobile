@@ -33,7 +33,7 @@ const Stack = createStackNavigator();
  * Components under Tabs navigator can't control the header of the Main navigator
  */
 const HomeNavigator = ({ route }) => (
-  <HomeStack.Navigator initialRouteName="Home" mode="modal">
+  <HomeStack.Navigator initialRouteName="Home">
     <HomeStack.Screen
       name="Home"
       component={Home}
@@ -64,13 +64,31 @@ const Tabs = () => (
   </Tab.Navigator>
 );
 
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01
+  }
+};
+
 const AppNavigator = () => (
-  <Stack.Navigator initialRouteName="Home" mode="modal" >
+  <Stack.Navigator initialRouteName="Home" mode="modal">
     <Stack.Screen name="Home" component={Tabs} options={getHeaderOptions} />
     <Stack.Screen
       name="LockedBalance"
       component={LockedBalanceDetails}
-      options={navigationOptions.NoHeader}
+      options={{
+        headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config
+        }
+      }}
     />
   </Stack.Navigator>
 );
