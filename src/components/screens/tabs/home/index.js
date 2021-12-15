@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import React from 'react';
 import {
-  View, Animated, StatusBar, Platform, RefreshControl, StyleSheet
+  View, Animated, StatusBar, Platform, RefreshControl,
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from '@react-navigation/compat';
