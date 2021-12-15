@@ -13,6 +13,7 @@ import { fromRawLsk } from '../../../../../utilities/conversions';
 import LockSvg from '../../../../../assets/svgs/LockSvg';
 import ProgressSvg from '../../../../../assets/svgs/ProgressSvg';
 import UnlockSvg from '../../../../../assets/svgs/UnlockSvg';
+import FormattedNumber from '../../../../shared/formattedNumber';
 
 const getPendingTime = (unvoteHeight, unlockHeight) => {
   const awaitingBlocks = unlockHeight - unvoteHeight;
@@ -22,11 +23,18 @@ const getPendingTime = (unvoteHeight, unlockHeight) => {
 };
 
 const RowItem = ({
-  styles, title, value, IconComponent
+  styles, title, value, IconComponent, tokenType, language
 }) => (
   <View style={[styles.row, styles.theme.row]}>
     <View style={styles.flex}>
-      <P style={[styles.text, styles.theme.text]}>{title}</P>
+      <FormattedNumber
+        type={P}
+        style={[styles.text, styles.theme.text]}
+        tokenType={tokenType}
+        language={language}
+      >
+        {title}
+      </FormattedNumber>
     </View>
     <View style={[styles.flexOne, styles.flexRow]}>
       <View style={styles.iconContainer}>
@@ -38,7 +46,7 @@ const RowItem = ({
 );
 
 const LockedBalanceDetails = ({
-  account, styles, navigation, t, activeToken, network
+  account, styles, navigation, t, activeToken, network, language
 }) => {
   const [unlockedTokens, setUnunlockedTokens] = useState({});
   const [availableTokens, setAvailableTokens] = useState([]);
@@ -100,6 +108,8 @@ const LockedBalanceDetails = ({
                 value={t('locked')}
                 IconComponent={LockSvg}
                 styles={styles}
+                tokenType={activeToken}
+                language={language}
               />
             ) : null}
             {Object.keys(unlockedTokens).map((time) => (
@@ -113,6 +123,8 @@ const LockedBalanceDetails = ({
                 })}
                 IconComponent={ProgressSvg}
                 styles={styles}
+                tokenType={activeToken}
+                language={language}
               />
             ))}
             {availableTokens.length ? (
@@ -123,6 +135,8 @@ const LockedBalanceDetails = ({
                 value={t('available to unlock (only on desktop)')}
                 IconComponent={UnlockSvg}
                 styles={styles}
+                tokenType={activeToken}
+                language={language}
               />
             ) : null}
           </View>
@@ -135,7 +149,8 @@ const LockedBalanceDetails = ({
 const mapStateToProps = (state) => ({
   account: state.accounts.info || {},
   activeToken: state.settings.token.active,
-  network: state.network
+  network: state.network,
+  language: state.settings.language,
 });
 
 export default connect(mapStateToProps)(withTheme(translate()(LockedBalanceDetails), getStyles()));

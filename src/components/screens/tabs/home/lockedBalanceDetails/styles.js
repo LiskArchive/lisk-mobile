@@ -1,4 +1,4 @@
-import { themes, colors } from '../../../../../constants/styleGuide';
+import { themes, colors, fonts } from '../../../../../constants/styleGuide';
 
 export default () => ({
   common: {
@@ -47,7 +47,7 @@ export default () => ({
       color: colors.light.black
     },
     text: {
-      color: colors.light.black
+      color: colors.light.zodiacBlue
     }
   },
   [themes.dark]: {
