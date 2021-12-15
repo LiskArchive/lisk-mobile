@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import moment from 'moment';
 import { colors } from '../../../../../constants/styleGuide';
-import { B, P } from '../../../../shared/toolBox/typography';
+import { P } from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import HeaderBackButton from '../../../router/headerBackButton';
 import getStyles from './styles';
