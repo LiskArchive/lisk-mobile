@@ -13,11 +13,14 @@ const HeaderBackButton = ({
   style,
   onPress,
   color,
+  rightColor,
   icon,
   safeArea,
   title,
   t,
-  noIcon
+  noIcon,
+  rightIcon,
+  onRightPress
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
@@ -33,7 +36,19 @@ const HeaderBackButton = ({
           color={color}
         />
       )}
-      {title && <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>}
+      <View style={styles.titleContainer}>
+        {title && (
+          <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>
+        )}
+      </View>
+      {rightIcon ? (
+        <IconButton
+          style={[styles.main, styles.theme.main, style]}
+          icon={rightIcon || 'back'}
+          onPress={onRightPress}
+          color={rightColor}
+        />
+      ) : null}
     </View>
   );
 };

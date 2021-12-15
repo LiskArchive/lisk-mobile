@@ -27,6 +27,7 @@ export default () => ({
     },
     flex: {
       flex: 1,
+      justifyContent: 'center',
     },
     cancelButton: {
       color: colors.light.ultramarineBlue,
@@ -39,12 +40,16 @@ export default () => ({
       position: 'absolute',
       zIndex: 1,
       left: 30,
-      bottom: 16,
     },
     input: {
       flexWrap: 'wrap',
       paddingLeft: 35,
-      marginTop: -20
+      paddingBottom: 10,
+      paddingTop: 10,
+      fontFamily: fonts.family.context
     },
+    inputContainer: {
+      marginTop: -20,
+    }
   }
 });

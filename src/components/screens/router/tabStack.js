@@ -10,6 +10,7 @@ import Settings from '../tabs/settings';
 import TabBarIcon from './tabBarIcon';
 import Home from '../tabs/home';
 import navigationOptions from './navigationOptions';
+import LockedBalanceDetails from '../tabs/home/lockedBalanceDetails';
 
 export const getHeaderOptions = ({ route }) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
@@ -33,10 +34,19 @@ const HomeStack = createStackNavigator();
  * Components under Tabs navigator can't control the header of the Main navigator
  */
 const HomeNavigator = ({ route }) => (
-  <HomeStack.Navigator initialRouteName="Home">
+  <HomeStack.Navigator
+    initialRouteName="Home"
+    mode="modal"
+  >
     <HomeStack.Screen
       name="Home"
       component={Home}
+      options={navigationOptions.HomeStack}
+      initialParams={route.params}
+    />
+    <HomeStack.Screen
+      name="LockedBalance"
+      component={LockedBalanceDetails}
       options={navigationOptions.HomeStack}
       initialParams={route.params}
     />

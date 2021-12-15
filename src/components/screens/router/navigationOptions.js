@@ -8,12 +8,12 @@ import { fonts } from '../../../constants/styleGuide';
 
 const noShadow = {
   borderBottomWidth: 0,
-  elevation: 0,
+  elevation: 0
 };
 
 const genericTitle = {
   fontFamily: fonts.family.heading,
-  fontSize: 20,
+  fontSize: 20
 };
 
 const noTitle = {
@@ -64,6 +64,13 @@ navigationOptions.HomeStack = () => {
     headerShown: false
   };
 };
+
+navigationOptions.LockedBalanceDetails = () => ({
+  title: null,
+  headerLeft: () => <HeaderBackButton title="Locked Balance Details" noIcon rightIcon="cross" />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle
+});
 
 navigationOptions.Wallet = () => {
   const type = deviceType();
@@ -157,9 +164,9 @@ navigationOptions.PassphraseBackup = {
 
 navigationOptions.AddBookmark = {
   title: null,
-  headerLeft: (props) => <HeaderBackButton {...props} title='New bookmark' />,
+  headerLeft: (props) => <HeaderBackButton {...props} title="New bookmark" />,
   headerStyle: noShadow,
-  headerTitleStyle: genericTitle,
+  headerTitleStyle: genericTitle
 };
 
 navigationOptions.SignIn = {

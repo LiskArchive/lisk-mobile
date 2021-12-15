@@ -28,6 +28,7 @@ class LiskAPIClient {
         initialized: true,
       };
     }
+    console.log('data', data)
     const lockedBalance = data[0].dpos.unlocking
       ?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
     return {

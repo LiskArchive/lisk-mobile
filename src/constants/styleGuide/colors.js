@@ -13,7 +13,8 @@ const common = {
   mystic: '#EDF0F5',
   whiteSmoke: '#F5F7FA',
   burntSieanna: '#EC6868',
-  ufoGreen: '#2AD67C'
+  ufoGreen: '#2AD67C',
+  mountainMist: '#9999A0',
 };
 
 const light = {
