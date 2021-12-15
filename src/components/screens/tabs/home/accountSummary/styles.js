@@ -8,7 +8,7 @@ export default () => ({
     imgContainer: {
       width: '100%',
       height: '100%',
-      marginTop: 60,
+      marginTop: 25,
     },
     profileContainer: {
       padding: 20,

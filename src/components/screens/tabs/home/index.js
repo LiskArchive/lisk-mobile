@@ -269,7 +269,7 @@ class Home extends React.Component {
         )}
         <ParallaxHeader
           headerMinHeight={70}
-          headerMaxHeight={280}
+          headerMaxHeight={260}
           extraScrollHeight={20}
           navbarColor="#3498db"
           alwaysShowTitle={false}
