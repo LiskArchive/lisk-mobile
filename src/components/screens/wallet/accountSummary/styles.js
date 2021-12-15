@@ -5,16 +5,12 @@ export default () => ({
   common: {
     walletContainer: {
       overflow: 'hidden',
-      padding: 10,
     },
     avatarContainer: {
       elevation: 4,
       alignItems: 'center',
       paddingBottom: 12,
       width: '100%',
-    },
-    iconStyle: {
-      marginLeft: 10,
     },
     tokenLogoWrapper: {
       borderRadius: 30,
@@ -34,10 +30,9 @@ export default () => ({
       width: '100%',
       textAlign: 'center',
       zIndex: 2,
-      height: 30,
     },
     addressP: {
-      textAlign: 'center',
+      lineHeight: 25,
     },
     addressContainer: {
       justifyContent: 'center',

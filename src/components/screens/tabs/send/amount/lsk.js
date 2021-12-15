@@ -286,7 +286,7 @@ const AmountLSK = (props) => {
   const byteCount = encodeURI(value).split(/%..|./).length - 1;
 
   return (
-    <View style={[styles.theme.wrapper, styles.wrapper]} behavior="padding" >
+    <View style={[styles.theme.wrapper, styles.wrapper]}>
       <KeyboardAwareScrollView
         viewIsInsideTab
         onSubmit={onSubmit}
