@@ -13,7 +13,7 @@ export default () => ({
       position: 'absolute',
       flex: 1,
       zIndex: -1,
-      top: deviceHeight() / 1.5,
+      top: deviceHeight() / 2,
       right: 0,
       left: 0,
       bottom: 0
