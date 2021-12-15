@@ -42,3 +42,5 @@ export const extractAddress = passphrase => {
   });
   return btc.address;
 };
+
+export const getNetworkInfo = async () => { };

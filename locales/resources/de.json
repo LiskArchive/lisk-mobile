@@ -232,5 +232,9 @@
   "The time taken to expedite the transaction is mainly dependent on the fee.": "",
   "The higher the fee, the faster the transaction will be confirmed.": "",
   "Got it": "",
-  "Provide a correct amount of LSK": ""
+  "Provide a correct amount of LSK": "",
+  "Locked balance details": "",
+  "Find details of your locked balance and the unlock waiting period.": "",
+  "will be available to unlock": "... ~ {{timeToUnlock}}",
+  "available to unlock (only on desktop)": ""
 }

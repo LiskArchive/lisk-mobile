@@ -1,9 +1,6 @@
 import actionTypes from '../constants/actions';
 import { retrieveAccounts } from '../utilities/storage';
-import {
-  account as accountAPI,
-  transactions as transactionsAPI,
-} from '../utilities/api';
+import { account as accountAPI, transactions as transactionsAPI } from '../utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
 
 /**
@@ -18,17 +15,17 @@ import { loadingStarted, loadingFinished } from './loading';
  *
  * @returns {Function} Thunk action function
  */
-export const followedAccountsRetrieved = () => dispatch => {
-  retrieveAccounts().then(accounts => {
+export const followedAccountsRetrieved = () => (dispatch) => {
+  retrieveAccounts().then((accounts) => {
     if (accounts.LSK) {
       dispatch({
         type: actionTypes.followedAccountsRetrieved,
-        data: accounts,
+        data: accounts
       });
     } else {
       dispatch({
         type: actionTypes.followedAccountsRetrieved,
-        data: { LSK: accounts, BTC: [] },
+        data: { LSK: accounts, BTC: [] }
       });
     }
   });
@@ -49,8 +46,8 @@ export const accountFollowed = (address, label) => (dispatch, getState) => {
     type: actionTypes.accountFollowed,
     data: {
       account: { address, label },
-      activeToken,
-    },
+      activeToken
+    }
   });
 };
 
@@ -62,11 +59,11 @@ export const accountFollowed = (address, label) => (dispatch, getState) => {
  *
  * @returns {Object} - Pure action function
  */
-export const accountUnFollowed = address => (dispatch, getState) => {
+export const accountUnFollowed = (address) => (dispatch, getState) => {
   const activeToken = getState().settings.token.active;
   dispatch({
     type: actionTypes.accountUnFollowed,
-    data: { address, activeToken },
+    data: { address, activeToken }
   });
 };
 
@@ -87,8 +84,8 @@ export const accountEdited = (address, label) => (dispatch, getState) => {
     type: actionTypes.accountEdited,
     data: {
       account: { address, label },
-      activeToken,
-    },
+      activeToken
+    }
   });
 };
 
@@ -101,42 +98,51 @@ export const accountEdited = (address, label) => (dispatch, getState) => {
  * @param {String} data.passphrase - The valid passphrase to sign in using
  * @returns {Function} Thunk function
  */
-export const accountSignedIn = ({ passphrase }) => (dispatch, getState) => {
-  const tokens = getState().settings.token.list;
-  const info = Object.keys(tokens).reduce((accounts, token) => {
-    const address1 = accountAPI.extractAddress(token, passphrase);
-    accounts[token] = { address: address1 };
-    return accounts;
-  }, {});
+export const accountSignedIn = ({ passphrase }) =>
+  (dispatch, getState) => {
+    const tokens = getState().settings.token.list;
+    const info = Object.keys(tokens).reduce((accounts, token) => {
+      const address1 = accountAPI.extractAddress(token, passphrase);
+      accounts[token] = { address: address1 };
+      return accounts;
+    }, {});
 
-  dispatch({
-    type: actionTypes.accountSignedIn,
-    data: {
-      info,
-      passphrase,
-    },
-  });
-  dispatch(followedAccountsRetrieved());
-};
+    dispatch({
+      type: actionTypes.accountSignedIn,
+      data: {
+        info,
+        passphrase
+      }
+    });
+    dispatch(followedAccountsRetrieved());
+  };
 
 export const accountSignedOut = () => ({
-  type: actionTypes.accountSignedOut,
+  type: actionTypes.accountSignedOut
 });
 
-export const accountFetched = givenToken => (dispatch, getState) => {
+export const accountFetched = (givenToken) => (dispatch, getState) => {
   const selectedToken = givenToken || getState().settings.token.active;
   const { address } = getState().accounts.info[selectedToken];
 
   dispatch(loadingStarted(actionTypes.accountFetched));
   return accountAPI
     .getSummary(selectedToken, { address })
-    .then(account => {
+    .then((account) => {
+      accountAPI.getNetworkInfo(selectedToken).then(data => {
+        if (data) {
+          dispatch({
+            type: actionTypes.networkInfoUpdated,
+            data,
+          });
+        }
+      });
       dispatch({
         type: actionTypes.accountUpdated,
         data: {
           account,
-          activeToken: selectedToken,
-        },
+          activeToken: selectedToken
+        }
       });
       dispatch(loadingFinished(actionTypes.accountFetched));
     })
@@ -155,13 +161,11 @@ export const blockUpdated = () => async (dispatch, getState) => {
   try {
     const response = await transactionsAPI.get(activeToken, {
       address,
-      offset: 0,
+      offset: 0
     });
 
     const newTransactions = lastTx
-      ? response.data.filter(
-        tx => tx.confirmations === 0 || tx.timestamp > lastTx.timestamp
-      )
+      ? response.data.filter((tx) => tx.confirmations === 0 || tx.timestamp > lastTx.timestamp)
       : response.data;
 
     if (newTransactions.length) {
@@ -169,8 +173,8 @@ export const blockUpdated = () => async (dispatch, getState) => {
         type: actionTypes.transactionsUpdated,
         data: {
           confirmed: newTransactions,
-          count: response.meta.count,
-        },
+          count: response.meta.count
+        }
       });
 
       const account = await accountAPI.getSummary(activeToken, { address });
@@ -179,8 +183,8 @@ export const blockUpdated = () => async (dispatch, getState) => {
         type: actionTypes.accountUpdated,
         data: {
           account,
-          activeToken,
-        },
+          activeToken
+        }
       });
     }
   } catch (error) {
