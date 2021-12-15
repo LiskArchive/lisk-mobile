@@ -1,5 +1,5 @@
 import { themes, colors } from '../../../constants/styleGuide';
-import { viewportHeight } from '../../../utilities/device';
+import { deviceHeight, viewportHeight } from '../../../utilities/device';
 import { setColorOpacity } from '../../../utilities/helpers';
 
 export default () => ({
@@ -11,6 +11,7 @@ export default () => ({
       flex: 1,
       borderTopRightRadius: 20,
       borderTopLeftRadius: 20,
+      minHeight: deviceHeight() - 400,
     },
     itemContainer: {
       width: '100%',
