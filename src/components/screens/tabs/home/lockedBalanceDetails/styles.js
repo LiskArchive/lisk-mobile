@@ -41,7 +41,7 @@ export default () => ({
       flex: 1
     },
     row: {
-      borderBottomColor: colors.light.grey
+      borderBottomColor: colors.light.platinum
     },
     infoText: {
       color: colors.light.black
@@ -56,7 +56,7 @@ export default () => ({
       flex: 1
     },
     infoText: {
-      color: colors.dark.grey
+      color: colors.dark.platinum
     },
     text: {
       color: colors.dark.white
