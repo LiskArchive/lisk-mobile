@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import React from 'react';
 import {
-  View, Animated, StatusBar, Platform, RefreshControl,
+  View, Animated, StatusBar, Platform, RefreshControl
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from '@react-navigation/compat';
@@ -58,7 +58,7 @@ const summaryHeight = 200;
     updateTransactions: blockUpdatedAction,
     accountFetched: accountFetchedAction,
     settingsUpdated: settingsUpdatedAction,
-    getNetworkInfo: getNetworkInfoAction,
+    getNetworkInfo: getNetworkInfoAction
   }
 )
 class Home extends React.Component {
@@ -126,7 +126,7 @@ class Home extends React.Component {
       incognito,
       route,
       activeToken,
-      getNetworkInfo,
+      getNetworkInfo
     } = this.props;
     if (activeToken) {
       getNetworkInfo(activeToken);
@@ -157,8 +157,7 @@ class Home extends React.Component {
       }
     } = this.props;
     const prevTokenList = prevProps.settings.token.list;
-    const prevTransactionCount = prevProps.transactions.pending.length
-      + prevProps.transactions.confirmed.length;
+    const prevTransactionCount = prevProps.transactions.pending.length + prevProps.transactions.confirmed.length;
     const transactionCount = transactions.pending.length + transactions.confirmed.length;
     const shouldUpdateState = prevProps.transactions.loaded !== transactions.loaded
       || prevTransactionCount !== transactionCount;
@@ -261,7 +260,10 @@ class Home extends React.Component {
                 refreshing={refreshing}
               />
             ) : (
-              <Empty refreshing={refreshing} />
+              <Empty
+                style={[styles.emptyContainer, styles.theme.emptyContainer]}
+                refreshing={refreshing}
+              />
             )
           }
         />

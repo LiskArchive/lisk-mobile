@@ -12,6 +12,7 @@
     "test": "jest --config ./jest.config.js --env=jsdom",
     "test:live": "npm test -- --watch",
     "test:android": "cd android && ./gradlew --project-cache-dir ../.gradlecache test",
+    "build:android": "cd android && ./gradlew assembleRelease",
     "lint": "npx eslint --quiet ./",
     "i18n": "node ./scripts/scanner.config.js",
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
