@@ -9,7 +9,7 @@ import { toRawLsk, fromRawLsk } from '../../../../../utilities/conversions';
 import { PrimaryButton } from '../../../../shared/toolBox/button';
 import Avatar from '../../../../shared/avatar';
 import Icon from '../../../../shared/toolBox/icon';
-import { H4, B, P } from '../../../../shared/toolBox/typography';
+import { P } from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { colors } from '../../../../../constants/styleGuide';
@@ -167,71 +167,58 @@ class Overview extends React.Component {
         <View>
           <ReadMore actionType={actionType} styles={styles} messages={translatedMessages} t={t} />
 
-          <View style={[styles.row, styles.theme.row, styles.addressContainer]}>
-            {settings.token.active === tokenMap.LSK.key ? (
-              <Avatar address={address || ''} style={styles.avatar} size={50} />
-            ) : (
-              <View style={[styles.addressIconContainer, styles.theme.addressIconContainer]}>
-                <Icon name="btc" style={styles.addressIcon} color={colors[theme].white} size={20} />
+          <View style={[styles.rowContent, styles.theme.rowContent]} >
+            <View style={[styles.addressContainer]} >
+              <View>
+                <P style={styles.theme.text} >{t('Wallet details')}</P>
+                {bookmark
+                  ? <P style={[styles.bookmark, styles.text, styles.theme.text]}>
+                    {bookmark.label}
+                  </P>
+                  : null}
               </View>
-            )}
+              {settings.token.active === tokenMap.LSK.key ? (
+                <Avatar address={address || ''} style={styles.avatar} size={50} />
+              ) : (
+                <View style={[styles.addressIconContainer, styles.theme.addressIconContainer]}>
+                  <Icon name="btc" style={styles.addressIcon} color={colors[theme].white} size={20} />
+                </View>
+              )}
+            </View>
 
-            {bookmark ? <H4 style={styles.theme.text}>{bookmark.label}</H4> : null}
-
-            <P style={[styles.text, styles.theme.address, styles.address]}>{address}</P>
+            <P style={[styles.theme.address, styles.address]}>{address}</P>
           </View>
 
-          <View style={[styles.row, styles.theme.row]}>
-            <Icon
-              name={actionType === 'initialize' ? 'tx-fee' : 'amount'}
-              style={styles.icon}
-              size={20}
-              color={colors.light.blueGray}
-            />
-
-            <View style={styles.rowContent}>
-              <P style={[styles.label, styles.theme.label]}>
-                {actionType === 'initialize' ? t('Transaction fee') : t('Amount')}
-              </P>
-              <B style={[styles.text, styles.theme.text]}>
-                <FormattedNumber tokenType={settings.token.active} language={language}>
-                  {amount}
-                </FormattedNumber>
-              </B>
-            </View>
+          <View style={[styles.rowContent, styles.theme.rowContent]}>
+            <P style={[styles.label, styles.theme.label]}>
+              {actionType === 'initialize' ? t('Transaction fee') : t('Amount')}
+            </P>
+            <P style={[styles.text, styles.theme.text]}>
+              <FormattedNumber tokenType={settings.token.active} language={language}>
+                {amount}
+              </FormattedNumber>
+            </P>
           </View>
           {priority && (
-            <View style={[styles.row, styles.theme.row]}>
-              <Icon name="priority" style={styles.icon} size={20} color={colors.light.blueGray} />
-              <View style={styles.rowContent}>
-                <P style={[styles.label, styles.theme.label]}>{t('Priority')}</P>
-                <B style={[styles.text, styles.theme.text]}>{priority}</B>
-              </View>
+            <View style={[styles.rowContent, styles.theme.rowContent]}>
+              <P style={[styles.label, styles.theme.label]}>{t('Priority')}</P>
+              <P style={[styles.text, styles.theme.text]}>{priority}</P>
             </View>
           )}
-          {actionType !== 'initialize' ? (
-            <View style={[styles.row, styles.theme.row]}>
-              <Icon name="tx-fee" style={styles.icon} size={20} color={colors.light.blueGray} />
-
-              <View style={styles.rowContent}>
-                <P style={[styles.label, styles.theme.label]}>{t('Transaction fee')}</P>
-                <B style={[styles.text, styles.theme.text]}>
-                  <FormattedNumber tokenType={settings.token.active} language={language}>
-                    {fromRawLsk(fee)}
-                  </FormattedNumber>
-                </B>
-              </View>
+          {reference ? (
+            <View style={[styles.rowContent, styles.theme.rowContent]}>
+              <P style={[styles.label, styles.theme.label]}>{t('Message')}</P>
+              <P style={[styles.text, styles.theme.text]}>{reference}</P>
             </View>
           ) : null}
-
-          {reference ? (
-            <View style={[styles.row, styles.theme.row]}>
-              <Icon name="reference" style={styles.icon} size={20} color={colors.light.blueGray} />
-
-              <View style={styles.rowContent}>
-                <P style={[styles.label, styles.theme.label]}>{t('Message')}</P>
-                <B style={[styles.text, styles.theme.text]}>{reference}</B>
-              </View>
+          {actionType !== 'initialize' ? (
+            <View style={[styles.rowContent, styles.theme.rowContent]}>
+              <P style={[styles.label, styles.theme.label]}>{t('Transaction fee')}</P>
+              <P style={[styles.text, styles.theme.text]}>
+                <FormattedNumber tokenType={settings.token.active} language={language}>
+                  {fromRawLsk(fee)}
+                </FormattedNumber>
+              </P>
             </View>
           ) : null}
         </View>

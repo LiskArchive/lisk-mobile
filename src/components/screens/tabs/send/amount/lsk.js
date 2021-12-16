@@ -244,7 +244,7 @@ const AmountLSK = (props) => {
 
   const localizeAmount = (amount) => {
     const { language } = props;
-    return Number(amount).toLocaleString(`${language}-${language.toUpperCase()}`, {
+    return Number(amount).toLocaleString(`${language}-${language?.toUpperCase()}`, {
       maximumFractionDigits: 20
     });
   };

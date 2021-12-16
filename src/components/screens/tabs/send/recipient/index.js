@@ -47,7 +47,8 @@ class Recipient extends React.Component {
     setOptions({
       title: null,
       headerLeft: () => <HeaderBackButton title={'Send LSK'} safeArea={true} noIcon={true} />,
-      headerRight: () => <StepProgress currentIndex={1} length={3} />
+      headerRight: () => <StepProgress currentIndex={1} length={3} />,
+      headerShown: true,
     });
   }
 
@@ -138,7 +139,6 @@ class Recipient extends React.Component {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
-          isCameraOpen={this.isCameraOpen}
           ref={el => {
             this.scanner = el;
           }}

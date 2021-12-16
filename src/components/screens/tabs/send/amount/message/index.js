@@ -45,12 +45,12 @@ const Message = ({
           <View style={styles.labelRow}>
             <View style={styles.row}>
               <P style={[styles.label, styles.theme.label]}>{t('Message (optional)')}</P>
-              <TouchableOpacity style={styles.actionButton} onPress={openModal} >
+              <TouchableOpacity style={styles.optional} onPress={openModal} >
                 <InfoSvg color={svgcolor[theme]} />
               </TouchableOpacity>
             </View>
             <TouchableOpacity
-              style={styles.actionButton}
+              style={[styles.optional]}
               onPress={() => {
                 setCollapsed(true);
                 onChange('');

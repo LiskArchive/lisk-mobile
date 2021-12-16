@@ -8,7 +8,7 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     scrollView: {
-      marginTop: 20,
+      paddingTop: 220,
     },
     accountSummary: {
       zIndex: 2,
