@@ -9,6 +9,11 @@ export default () => ({
     homeContainer: {
       paddingTop: 20
     },
+    emptyContainer: {
+      borderTopRightRadius: 20,
+      borderTopLeftRadius: 20,
+      marginTop: 0,
+    },
     fixedBg: {
       position: 'absolute',
       flex: 1,
@@ -39,6 +44,9 @@ export default () => ({
     fixedBg: {
       backgroundColor: colors.light.white
     },
+    emptyContainer: {
+      backgroundColor: colors.light.white
+    },
     loadingContainer: {
       backgroundColor: colors.light.white
     },
@@ -51,6 +59,9 @@ export default () => ({
       backgroundColor: colors.dark.mainBg
     },
     fixedBg: {
+      backgroundColor: colors.dark.mainBg
+    },
+    emptyContainer: {
       backgroundColor: colors.dark.mainBg
     },
     loadingContainer: {

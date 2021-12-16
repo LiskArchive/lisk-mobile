@@ -230,7 +230,7 @@ class AccountSummary extends React.Component {
             iconSize={20}
             onClick={() => {
               navigation.navigate({
-                name: 'Main',
+                name: 'Home',
                 params: {
                   screen: 'Send',
                   params: {

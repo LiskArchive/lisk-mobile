@@ -39,8 +39,6 @@ class Send extends React.Component {
     // Reset the progress if active token has changed
     if (prevProps.settings.token.active !== this.props.settings.token.active) {
       this.resetMultiStep();
-    } else {
-      this.checkQuery();
     }
   }
 
@@ -57,7 +55,7 @@ class Send extends React.Component {
   checkQuery = () => {
     const query = this.props.route.params?.query ?? {};
 
-    if (this.state.query !== query && query && Object.keys(query).length) {
+    if (query?.address) {
       this.resetMultiStep(query);
     }
   };

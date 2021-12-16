@@ -139,7 +139,6 @@ class Recipient extends React.Component {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
-          isCameraOpen={this.isCameraOpen}
           ref={el => {
             this.scanner = el;
           }}
