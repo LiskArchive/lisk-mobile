@@ -42,6 +42,9 @@ export default () => ({
     actionButton: {
       paddingRight: 10,
     },
+    optional: {
+      paddingHorizontal: 10,
+    },
     modalText: {
       fontSize: 15,
       marginBottom: 10,
