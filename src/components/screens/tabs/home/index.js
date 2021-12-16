@@ -157,7 +157,8 @@ class Home extends React.Component {
       }
     } = this.props;
     const prevTokenList = prevProps.settings.token.list;
-    const prevTransactionCount = prevProps.transactions.pending.length + prevProps.transactions.confirmed.length;
+    const prevTransactionCount = prevProps.transactions.pending.length
+      + prevProps.transactions.confirmed.length;
     const transactionCount = transactions.pending.length + transactions.confirmed.length;
     const shouldUpdateState = prevProps.transactions.loaded !== transactions.loaded
       || prevTransactionCount !== transactionCount;
