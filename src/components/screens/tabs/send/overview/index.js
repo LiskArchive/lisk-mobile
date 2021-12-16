@@ -9,7 +9,7 @@ import { toRawLsk, fromRawLsk } from '../../../../../utilities/conversions';
 import { PrimaryButton } from '../../../../shared/toolBox/button';
 import Avatar from '../../../../shared/avatar';
 import Icon from '../../../../shared/toolBox/icon';
-import { H4, B, P } from '../../../../shared/toolBox/typography';
+import { P } from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { colors } from '../../../../../constants/styleGuide';
