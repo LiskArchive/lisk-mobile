@@ -28,7 +28,6 @@ const AmountBalance = ({
     style={[
       styles.balanceContainer,
       styles.theme.balanceContainer,
-      incognito ? styles.balanceContainerIncognito : {}
     ]}
     source={amountBg}
   >

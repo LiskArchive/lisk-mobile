@@ -10,17 +10,6 @@ export default () => ({
       padding: 10,
       marginBottom: 5,
       borderRadius: 5,
-      shadowOffset: {
-        width: 0,
-        height: 1
-      },
-      shadowOpacity: 0.22,
-      shadowRadius: 2.22,
-      elevation: 3,
-    },
-    balanceContainerIncognito: {
-      paddingTop: boxes.boxPadding - 2,
-      paddingBottom: boxes.boxPadding - 2
     },
     balanceText: {
       fontSize: 13,
