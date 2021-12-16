@@ -55,7 +55,7 @@ class Send extends React.Component {
   checkQuery = () => {
     const query = this.props.route.params?.query ?? {};
 
-    if (query?.address) {
+    if (query.address) {
       this.resetMultiStep(query);
     }
   };
