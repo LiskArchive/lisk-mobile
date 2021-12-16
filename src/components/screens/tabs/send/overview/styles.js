@@ -26,6 +26,9 @@ export default () => ({
     icon: {
       marginTop: 25,
     },
+    bookmark: {
+      paddingTop: 8,
+    },
     rowContent: {
       paddingTop: 5,
       paddingBottom: 20,

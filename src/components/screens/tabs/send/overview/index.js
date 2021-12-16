@@ -170,8 +170,12 @@ class Overview extends React.Component {
           <View style={[styles.rowContent, styles.theme.rowContent]} >
             <View style={[styles.addressContainer]} >
               <View>
-                <P>{t('Wallet details')}</P>
-                {bookmark ? <H4 style={styles.theme.text}>{bookmark.label}</H4> : null}
+                <P style={styles.theme.text} >{t('Wallet details')}</P>
+                {bookmark
+                  ? <P style={[styles.bookmark, styles.text, styles.theme.text]}>
+                    {bookmark.label}
+                  </P>
+                  : null}
               </View>
               {settings.token.active === tokenMap.LSK.key ? (
                 <Avatar address={address || ''} style={styles.avatar} size={50} />
