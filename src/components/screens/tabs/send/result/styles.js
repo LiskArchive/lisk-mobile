@@ -43,6 +43,9 @@ export default () => ({
     },
     subtitle: {
       color: colors.light.slateGray
+    },
+    title: {
+      color: colors.light.zodiacBlue
     }
   },
   [themes.dark]: {
@@ -51,6 +54,9 @@ export default () => ({
     },
     subtitle: {
       color: colors.dark.ghost
-    }
+    },
+    title: {
+      color: colors.dark.ghost
+    },
   }
 });

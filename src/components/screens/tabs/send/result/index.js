@@ -73,7 +73,7 @@ class Result extends React.Component {
           <View style={styles.illustration}>
             {theme === themes.dark ? <TxSuccessDarkSvg /> : <TxSuccesSvg />}
           </View>
-          <B style={[styles.title, styles.theme.subtitle]}>{t('Transaction Submitted')}</B>
+          <B style={[styles.title, styles.theme.title]}>{t('Transaction Submitted')}</B>
           <P style={[styles.subtitle, styles.theme.subtitle]}>
             {t(
               'Your transaction has been submitted and will be confirmed in a few moments.'
