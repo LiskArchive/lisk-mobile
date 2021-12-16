@@ -8,6 +8,8 @@ export default () => ({
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
       padding: 10,
+      paddingTop: 15,
+      paddingBottom: 15,
       marginBottom: 5,
       borderRadius: 5,
     },
@@ -29,7 +31,7 @@ export default () => ({
       alignItems: 'flex-end'
     },
     translated: {
-      fontSize: 13,
+      fontSize: 14,
       color: colors.light.ultramarineBlue
     }
   },
@@ -37,19 +39,31 @@ export default () => ({
   [themes.light]: {
     balanceContainer: {
       backgroundColor: colors.light.white,
-      shadowColor: colors.light.black,
+      borderColor: colors.light.platinum,
+      borderWidth: 1,
     },
     balanceText: {
       color: colors.light.inkBlue,
-    }
+    },
+    balanceNumber: {
+      color: colors.light.inkBlue,
+    },
+    translated: {
+      color: `${colors.dark.inkBlue}B3`,
+    },
   },
   [themes.dark]: {
     balanceContainer: {
-      backgroundColor: colors.light.black,
-      shadowColor: colors.light.whiteSmoke,
+      backgroundColor: colors.dark.headerBg,
+    },
+    balanceNumber: {
+      color: colors.dark.platinum,
     },
     balanceText: {
       color: colors.dark.platinum,
-    }
+    },
+    translated: {
+      color: colors.dark.platinum,
+    },
   }
 });

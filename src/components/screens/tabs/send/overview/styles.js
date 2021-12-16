@@ -8,7 +8,9 @@ import { setColorOpacity } from '../../../../../utilities/helpers';
 
 export default () => ({
   common: {
-    container: {},
+    container: {
+      paddingTop: 10,
+    },
     innerContainer: {
       flexGrow: 1,
       flexDirection: 'column',
@@ -25,7 +27,9 @@ export default () => ({
       marginTop: 25,
     },
     rowContent: {
-      paddingLeft: 13,
+      paddingTop: 5,
+      paddingBottom: 20,
+      borderBottomWidth: 1,
     },
     title: {
       fontSize: 12,
@@ -35,9 +39,9 @@ export default () => ({
       paddingBottom: 15,
     },
     address: {
-      paddingTop: 5,
       paddingRight: 0,
       paddingBottom: 0,
+      fontSize: 15
     },
     button: {
       borderRadius: 0,
@@ -56,16 +60,15 @@ export default () => ({
       flexWrap: 'wrap',
       flex: 1,
       paddingRight: 30,
+      fontSize: 17,
+      fontFamily: fonts.family.contextSemiBold
     },
     subtitle: {
       marginTop: 7,
     },
     addressContainer: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      textAlign: 'center',
-      paddingTop: boxes.boxPadding,
-      paddingBottom: boxes.boxPadding,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
     addressIconContainer: {
       width: 50,
@@ -97,6 +100,9 @@ export default () => ({
     row: {
       borderBottomColor: colors.light.mystic,
     },
+    rowContent: {
+      borderBottomColor: colors.light.mystic,
+    },
     text: {
       color: colors.light.black,
     },
@@ -104,7 +110,7 @@ export default () => ({
       color: colors.light.slateGray,
     },
     label: {
-      color: colors.light.slateGray,
+      color: colors.light.zodiacBlue,
     },
     subtitle: {
       color: colors.light.slateGray,
@@ -122,6 +128,9 @@ export default () => ({
       backgroundColor: colors.dark.BTC,
     },
     row: {
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15),
+    },
+    rowContent: {
       borderBottomColor: setColorOpacity(colors.light.white, 0.15),
     },
     text: {

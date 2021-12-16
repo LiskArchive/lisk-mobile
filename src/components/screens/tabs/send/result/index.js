@@ -37,8 +37,7 @@ class Result extends React.Component {
       navigation: { setOptions }
     } = this.props;
     setOptions({
-      title: 'Sent',
-      headerLeft: () => null
+      headerShown: false
     });
     this.startDate = new Date();
   }
@@ -49,7 +48,7 @@ class Result extends React.Component {
     } = this.props;
     clearTimeout(this.timeouts.created);
     clearTimeout(this.timeouts.confirmed);
-    setOptions({ title: 'Send' });
+    setOptions({ title: 'Send', headerShown: true });
   }
 
   render() {

@@ -10,6 +10,8 @@ import getStyles from './styles';
 import darkBlur from '../../../../../../assets/images/amountFormBalanceBlur/dark.png';
 import lightBlur from '../../../../../../assets/images/amountFormBalanceBlur/light.png';
 import amountBg from '../../../../../../assets/images/amount-bg.png';
+import amountBgLight from '../../../../../../assets/images/amount-bg-light.png';
+import { themes } from '../../../../../../constants/styleGuide';
 
 const blurs = { dark: darkBlur, light: lightBlur };
 
@@ -29,7 +31,7 @@ const AmountBalance = ({
       styles.balanceContainer,
       styles.theme.balanceContainer,
     ]}
-    source={amountBg}
+    source={theme === themes.dark ? amountBg : amountBgLight}
   >
     <P style={[styles.balanceText, styles.theme.balanceText]}>{t('Available Balance')}</P>
     {incognito ? (
@@ -46,7 +48,7 @@ const AmountBalance = ({
         </FormattedNumber>
         {valueInCurrency ? (
           <View style={styles.currencyContainer}>
-            <Text style={[styles.translated]}>
+            <Text style={[styles.translated, styles.theme.translated]}>
               <Text>~&nbsp;</Text>
               {`${valueInCurrency} ${currency}`}
             </Text>

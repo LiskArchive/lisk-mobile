@@ -47,7 +47,8 @@ class Recipient extends React.Component {
     setOptions({
       title: null,
       headerLeft: () => <HeaderBackButton title={'Send LSK'} safeArea={true} noIcon={true} />,
-      headerRight: () => <StepProgress currentIndex={1} length={3} />
+      headerRight: () => <StepProgress currentIndex={1} length={3} />,
+      headerShown: true,
     });
   }
 
