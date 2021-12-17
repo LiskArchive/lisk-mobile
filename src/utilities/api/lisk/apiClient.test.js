@@ -291,4 +291,44 @@ describe('apiClient', () => {
       }
     });
   });
+
+  describe('getLatestBlock', () => {
+    const data = {
+      height: 2912982123,
+    };
+
+    it('Gets latest block', async () => {
+      global.fetch.mockReturnValue(
+        Promise.resolve({
+          ok: true,
+          status: 200,
+          json: () => ({
+            data: [{
+              height: 2912982123,
+            }]
+          })
+        })
+      );
+      const result = await apiClient.getLatestBlock();
+      expect(result).toEqual(data);
+      expect(fetch).toHaveBeenCalledWith(
+        'https://service.lisk.com/api/v2/blocks',
+        expect.anything()
+      );
+    });
+
+    it('Throw error for all other errors', async () => {
+      global.fetch.mockReturnValue(
+        Promise.resolve({
+          ok: false,
+          status: 500
+        })
+      );
+      try {
+        await apiClient.getLatestBlock();
+      } catch (e) {
+        expect(e.message).toEqual('Failed to retrieve the latest block from server.');
+      }
+    });
+  });
 });

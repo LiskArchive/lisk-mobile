@@ -32,7 +32,7 @@ const normalizeTransactionsResponse = (list, block) =>
     amount: getAmount(tx),
     fee: tx.fee,
     timestamp: tx.block?.timestamp,
-    confirmations: block ? block.height - tx.block?.height : 0,
+    confirmations: block ? block.height - tx.block?.height + 1 : 0,
     nonce: tx.nonce,
     type: tx.moduleAssetName,
     moduleAssetId: tx.moduleAssetId,

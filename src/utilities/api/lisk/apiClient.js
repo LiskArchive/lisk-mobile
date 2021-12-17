@@ -117,8 +117,8 @@ class LiskAPIClient {
     if (!resp.ok) {
       throw new Error('Failed to retrieve the latest block from server.');
     }
-    const block = await resp.json();
-    return block[0];
+    const { data } = await resp.json();
+    return data[0];
   }
 }
 
