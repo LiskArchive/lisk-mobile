@@ -147,7 +147,6 @@ class TransactionDetail extends React.Component {
     const {
       tx, error, refreshing, votes
     } = this.state;
-
     if (error) {
       return (
         <View style={[styles.container, styles.theme.container]}>
@@ -306,9 +305,9 @@ class TransactionDetail extends React.Component {
             />
           </Row>
         ) : null}
-        <Row title={activeToken === 'LSK' ? 'Nonce' : 'Confirmations'}>
+        <Row title={'Nonce'}>
           <B style={[styles.value, styles.theme.value]}>
-            {activeToken === 'LSK' ? tx.nonce : tx.confirmations || t('Not confirmed yet.')}
+            {tx.nonce}
           </B>
         </Row>
         {isVoting ? <VoteList votes={votes} /> : null}
