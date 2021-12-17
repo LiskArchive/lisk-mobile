@@ -22,7 +22,7 @@ const getAmount = (tx) => {
  * Normalizes transaction data retrieved from Lisk Core API
  * https://lisk.com/documentation/lisk-core/reference/api.html#/Transactions/get_transactions__id_
  */
-const normalizeTransactionsResponse = (list) =>
+const normalizeTransactionsResponse = (list, block) =>
   list.map((tx) => ({
     id: tx.id,
     senderAddress: tx.sender.address,
@@ -32,7 +32,7 @@ const normalizeTransactionsResponse = (list) =>
     amount: getAmount(tx),
     fee: tx.fee,
     timestamp: tx.block?.timestamp,
-    confirmations: tx.nonce,
+    confirmations: block ? block.height - tx.block?.height : 0,
     nonce: tx.nonce,
     type: tx.moduleAssetName,
     moduleAssetId: tx.moduleAssetId,
@@ -47,13 +47,14 @@ const normalizeTransactionsResponse = (list) =>
 export const get = async ({
   id, address, limit, offset
 }) => {
+  const block = await apiClient.getLatestBlock();
   if (id !== undefined) {
     const txs = await apiClient.getTransaction(id);
-    return { data: normalizeTransactionsResponse(txs), meta: {} };
+    return { data: normalizeTransactionsResponse(txs, block), meta: {} };
   }
   const txs = await apiClient.getTransactions(address, limit, offset);
   return {
-    data: normalizeTransactionsResponse(txs),
+    data: normalizeTransactionsResponse(txs, block),
     meta: {
       limit,
       offset,
@@ -85,6 +86,8 @@ export const create = async ({
     },
     signatures: []
   };
+
+  console.log('create', tx);
   const networkIdentifier = Buffer.from(
     config.isTestnet ? config.testnetNetworkID : config.networkID,
     'hex'
