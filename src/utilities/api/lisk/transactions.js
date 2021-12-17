@@ -87,7 +87,6 @@ export const create = async ({
     signatures: []
   };
 
-  console.log('create', tx);
   const networkIdentifier = Buffer.from(
     config.isTestnet ? config.testnetNetworkID : config.networkID,
     'hex'
