@@ -215,7 +215,7 @@ const AmountLSK = (props) => {
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    if (!amount || !Number(amount)) {
+    if (!amount || !Number(amount) || amount <= 0) {
       setState((prevState) => ({
         ...prevState,
         errorMessage: t('Provide a correct amount of LSK')
@@ -295,6 +295,7 @@ const AmountLSK = (props) => {
           title: t('Continue')
         }}
         disabled={!isPriorityFetched || state.errorMessage}
+        buttonTestID="submit-button"
       >
         <View>
           <Balance
