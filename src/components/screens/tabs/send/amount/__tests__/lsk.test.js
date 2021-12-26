@@ -98,6 +98,25 @@ test("Should calculate transaction fee if there's no priority", (done) => {
   }, 100);
 });
 
+test('Should show error message if amount to send is not valid', (done) => {
+  const { getAllByText, getByLabelText, getByTestId } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} />
+    </Provider>
+  );
+
+  const input = getByLabelText('amount-input');
+  const button = getByTestId('submit-button');
+  act(() => {
+    fireEvent.changeText(input, '-1');
+    fireEvent.press(button);
+    setTimeout(() => {
+      expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
+      done();
+    }, 1000);
+  });
+});
+
 test('Should re-Calculate transaction fee when the amount to send is changed', (done) => {
   const { getAllByText, getByLabelText } = render(
     <Provider store={store}>

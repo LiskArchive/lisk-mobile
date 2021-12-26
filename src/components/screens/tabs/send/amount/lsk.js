@@ -211,6 +211,7 @@ const AmountLSK = (props) => {
   };
 
   const onSubmit = () => {
+    console.log('===>>>>Submitting baby<<<======')
     const { t, nextStep, sharedData } = props;
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
@@ -295,6 +296,7 @@ const AmountLSK = (props) => {
           title: t('Continue')
         }}
         disabled={!isPriorityFetched || state.errorMessage}
+        buttonTestID="submit-button"
       >
         <View>
           <Balance

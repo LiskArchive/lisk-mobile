@@ -1,3 +1,4 @@
+import React from 'react'
 import { NativeModules } from 'react-native';
 
 NativeModules.RNCNetInfo = {
@@ -13,6 +14,8 @@ jest.mock('react-native-appearance', () => ({
 jest.mock('react-native-gesture-handler', () => ({
   TouchableOpacity: jest.fn().mockImplementation(({ children }) => children)
 }));
+
+jest.mock('react-native/Libraries/Components/Touchable/TouchableOpacity', () => 'TouchableOpacity');
 
 jest.mock('@react-navigation/stack', () => ({
   useHeaderHeight: jest.fn(),
