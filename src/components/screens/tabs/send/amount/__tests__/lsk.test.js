@@ -98,7 +98,7 @@ test("Should calculate transaction fee if there's no priority", (done) => {
   }, 100);
 });
 
-test('Should show error message if amount to send is not valid', (done) => {
+test('Should show error message if amount to send is a negative value', (done) => {
   const { getAllByText, getByLabelText, getByTestId } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -109,6 +109,25 @@ test('Should show error message if amount to send is not valid', (done) => {
   const button = getByTestId('submit-button');
   act(() => {
     fireEvent.changeText(input, '-1');
+    fireEvent.press(button);
+    setTimeout(() => {
+      expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
+      done();
+    }, 1000);
+  });
+});
+
+test('Should show error message if amount to send is not valid', (done) => {
+  const { getAllByText, getByLabelText, getByTestId } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} />
+    </Provider>
+  );
+
+  const input = getByLabelText('amount-input');
+  const button = getByTestId('submit-button');
+  act(() => {
+    fireEvent.changeText(input, 'asdf');
     fireEvent.press(button);
     setTimeout(() => {
       expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
