@@ -5,6 +5,8 @@ Object {
   "amount": "1000000",
   "asset": Object {},
   "block": Object {
+    "height": 15201096,
+    "id": "381b0cc8ced666899b8113d3b4837cd3314bb440c5d84a6eba5f027992f9ac13",
     "timestamp": 72473846,
   },
   "blockId": "9937261865542489722",
