@@ -53,8 +53,8 @@ export const merge = (...rest) => Object.assign({}, ...rest);
  *
  * @returns {String} - the shortened string
  */
-export const stringShortener = (str = '', leftPadd = 10, rightPadd = 0) => {
-  if (str.length > 15) {
+export const stringShortener = (str, leftPadd = 10, rightPadd = 0) => {
+  if (str && str.length > 15) {
     return `${str.substr(0, leftPadd)}...${rightPadd ? str.substr(-1 * rightPadd) : ''}`;
   }
   return str;

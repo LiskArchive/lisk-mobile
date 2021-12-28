@@ -29,6 +29,7 @@ class LiskAPIClient {
         initialized: true
       };
     }
+    console.log(data)
     const unlockingAmount = data[0].dpos.unlocking
       ?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
     const totalSentVotes = data[0].dpos.sentVotes?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
