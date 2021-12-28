@@ -317,7 +317,7 @@ describe('apiClient', () => {
       );
     });
 
-    it('should throw error when failed to fetch latest blocks, async () => {
+    it('should throw error when failed to fetch latest blocks', async () => {
       global.fetch.mockReturnValue(
         Promise.resolve({
           ok: false,
