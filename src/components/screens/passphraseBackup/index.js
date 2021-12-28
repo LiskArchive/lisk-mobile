@@ -1,7 +1,6 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, ScrollView, SafeAreaView } from 'react-native';
 import { translate } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 import PassphraseCopy from '../../shared/passphraseCopy';
@@ -37,8 +36,8 @@ class PassphraseBackup extends React.Component {
     const { passphraseRevealed } = this.state;
 
     return (
-      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-        <ScrollView contentContainerStyle={styles.container}>
+      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
+        <ScrollView style={styles.container} >
           <PassphraseCopy passphrase={passphrase} />
           <P style={[styles.QRText, styles.theme.text]}>
             {t('Private use only')}
