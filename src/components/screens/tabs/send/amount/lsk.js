@@ -198,9 +198,10 @@ const AmountLSK = (props) => {
     if (!validateAmount(str)) {
       message = t('The amount value is invalid.');
     } else if (
-      accounts.info[token.active].balance < fee
-      // eslint-disable-next-line no-undef
-      || parseFloat(str) > fromRawLsk(BigInt(accounts.info[token.active].balance) - fee)
+      accounts.info[token.active].balance
+        && (accounts.info[token.active].balance < fee
+        // eslint-disable-next-line no-undef
+        || parseFloat(str) > fromRawLsk(BigInt(accounts.info[token.active].balance) - fee))
     ) {
       message = t('Your balance is not sufficient.');
     }
