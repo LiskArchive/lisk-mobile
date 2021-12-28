@@ -14,7 +14,7 @@ import {
 } from '../../../utilities/device';
 import { P, A } from '../../shared/toolBox/typography';
 
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
 @connect(state => ({
