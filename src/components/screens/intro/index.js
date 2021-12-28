@@ -70,7 +70,7 @@ class Intro extends React.Component {
         step: 4,
         title: t('Easy access'),
         description: t(
-          'Create an account with one passphrase to access your LSK and BTC cryptocurrencies.'
+          'Create an account using passphrase to access your LSK cryptocurrency.'
         ),
         imageSrc: easyAccessImg,
         imageStyle: styles.illustration,
