@@ -105,6 +105,21 @@ class LiskAPIClient {
     const { transactionId, message } = await resp.json();
     return { id: transactionId, message };
   }
+
+  async getLatestBlock() {
+    const options = {
+      ...config.requestOptions,
+      params: {
+        limit: 1
+      },
+    };
+    const resp = await fetch(`${this._url}/v2/blocks`, options);
+    if (!resp.ok) {
+      throw new Error('Failed to retrieve the latest block from server.');
+    }
+    const { data } = await resp.json();
+    return data[0];
+  }
 }
 
 export const apiClient = new LiskAPIClient(
