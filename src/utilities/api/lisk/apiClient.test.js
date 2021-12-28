@@ -297,7 +297,7 @@ describe('apiClient', () => {
       height: 2912982123,
     };
 
-    it('Gets latest block', async () => {
+    it('should get latest blocks', async () => {
       global.fetch.mockReturnValue(
         Promise.resolve({
           ok: true,
@@ -317,7 +317,7 @@ describe('apiClient', () => {
       );
     });
 
-    it('Throw error for all other errors', async () => {
+    it('should throw error when failed to fetch latest blocks, async () => {
       global.fetch.mockReturnValue(
         Promise.resolve({
           ok: false,
