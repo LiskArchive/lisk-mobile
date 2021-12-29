@@ -26,7 +26,7 @@ class PassphraseBackup extends React.Component {
   };
 
   showQRCode = () => {
-    this.setState({ passphraseRevealed: true });
+    this.setState({ passphraseRevealed: !this.state.passphraseRevealed });
   };
 
   render() {
@@ -42,7 +42,7 @@ class PassphraseBackup extends React.Component {
           <P style={[styles.QRText, styles.theme.text]}>
             {t('Private use only')}
             <A style={styles.button} onPress={this.showQRCode}>
-              &nbsp;{t('Reveal QR code')}
+              &nbsp;{this.state.passphraseRevealed ? t('Hide QR code') : t('Show QR code')}
             </A>
           </P>
           {passphraseRevealed && (
