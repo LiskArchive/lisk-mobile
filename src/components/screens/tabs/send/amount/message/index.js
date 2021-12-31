@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Input from '../../../../../shared/toolBox/input';
 import withTheme from '../../../../../shared/withTheme';
 import getStyles from './styles';
@@ -78,7 +77,7 @@ const Message = ({
       ) : (
         <TouchableOpacity onPress={() => setCollapsed(false)} style={[styles.addMessage]} accessibilityLabel="open-message">
           <View style={styles.row}>
-            <TouchableOpacity style={styles.actionButton}>
+            <TouchableOpacity style={styles.actionButton} testID='open-message-input' >
               <AddSvg color={colors.light.ultramarineBlue} />
             </TouchableOpacity>
             <P style={[styles.title, styles.theme.title]}>{t('Add Message (optional)')}</P>

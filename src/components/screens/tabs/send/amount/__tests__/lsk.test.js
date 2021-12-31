@@ -153,24 +153,26 @@ test('Should re-Calculate transaction fee when the amount to send is changed', (
   });
 });
 
-test.skip('Should re-Calculate transaction fee when message is added', (done) => {
-  const { getAllByText, getByLabelText } = render(
+test('Should re-Calculate transaction fee when message is added', (done) => {
+  const { getAllByText, getByLabelText, getByTestId } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
     </Provider>
   );
 
+  const button = getByTestId('open-message-input');
+  fireEvent.press(button);
   const input = getByLabelText('message-input');
   act(() => {
-    fireEvent.changeText(input, 'Test data');
+    fireEvent.changeText(input, 'test data');
     setTimeout(() => {
-      expect(getAllByText('0.00141 LSK')).toHaveLength(1);
+      expect(getAllByText('0.00147 LSK')).toHaveLength(1);
       done();
     }, 1000);
   });
 });
 
-describe.skip('Priority', () => {
+describe('Priority', () => {
   beforeEach(() => {
     service.getDynamicFees = jest.fn();
     service.getDynamicFees.mockResolvedValue({
