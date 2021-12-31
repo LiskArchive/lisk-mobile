@@ -67,6 +67,8 @@ class Home extends React.Component {
     refreshing: false
   };
 
+  canLoadMore = true;
+
   scrollY = new Animated.Value(0);
 
   scrollView = null;
@@ -144,6 +146,25 @@ class Home extends React.Component {
     }, 1200);
   }
 
+  loadMore = ({ nativeEvent }) => {
+    console.log('here', this.canLoadMore)
+    const isCloseToBottom = ({
+      layoutMeasurement,
+      contentOffset,
+      contentSize,
+    }) => {
+      const paddingToBottom = 20;
+      return (
+        layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom
+      );
+    };
+    if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
+      console.log('loading more')
+      this.canLoadMore = false;
+      loadMore(this.props);
+    }
+  };
+
   // eslint-disable-next-line max-statements
   componentDidUpdate(prevProps) {
     const {
@@ -162,7 +183,12 @@ class Home extends React.Component {
     const transactionCount = transactions.pending.length + transactions.confirmed.length;
     const shouldUpdateState = prevProps.transactions.loaded !== transactions.loaded
       || prevTransactionCount !== transactionCount;
-
+    const transactionList = transactions.count > 0
+      ? [...transactions.pending, ...transactions.confirmed]
+      : ['emptyState'];
+    if (prevTransactionCount !== transactionList.length) {
+      this.canLoadMore = transactionList.length < transactions.count;
+    }
     if (shouldUpdateState) {
       this.setState({
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount
@@ -304,7 +330,7 @@ class Home extends React.Component {
           }
           renderContent={() => content}
           scrollViewProps={{
-            onScroll: this.onScroll
+            onScroll: this.loadMore
           }}
         />
         <View style={[styles.fixedBg, styles.theme.fixedBg]}></View>

@@ -4,7 +4,7 @@ import * as transactions from './transactions';
 jest.mock('./apiClient');
 
 const response = {
-  meta: { offset: 0, limit: 10, count: 2 },
+  meta: { offset: 0, limit: 10, total: 2 },
   data: [
     {
       id: '10703320139793065364',
@@ -73,7 +73,7 @@ const response = {
 describe('api/transactions', () => {
   beforeAll(() => {
     apiClient.getTransactions = jest.fn();
-    apiClient.getTransactions.mockResolvedValue(response.data);
+    apiClient.getTransactions.mockResolvedValue({ meta: response.meta, data: response.data});
     apiClient.sendTransaction = jest.fn();
     apiClient.getLatestBlock = jest.fn();
     apiClient.getLatestBlock.mockResolvedValue({

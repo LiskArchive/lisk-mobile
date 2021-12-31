@@ -4,7 +4,6 @@ export default () => ({
   common: {
     container: {
       flex: 1,
-      alignContent: 'space-around',
       backgroundColor: colors.light.white,
     },
     scrollView: {

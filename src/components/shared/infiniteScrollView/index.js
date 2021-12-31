@@ -62,7 +62,7 @@ class InfiniteScrollView extends React.Component {
       <ScrollView
         onScroll={this.onScroll}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={this.props.contentContainerStyle}
+        contentContainerStyle={[this.props.contentContainerStyle]}
         refreshControl={
           <RefreshControl
             progressViewOffset={170}
