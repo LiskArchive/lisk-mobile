@@ -46,6 +46,7 @@ const Priority = ({
 }) => {
   const openInfoModal = () => {
     ModalHolder.open({
+      title: 'Transaction Fee',
       component: () => <PriorityInfo t={t} styles={styles}/>,
     });
   };
