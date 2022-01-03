@@ -56,14 +56,16 @@ const SendNavigator = ({ route }) => (
 
 const Tabs = () => (
   <Tab.Navigator initialRouteName="Home" >
-    <Tab.Screen name="Home" component={HomeNavigator} options={getIcon}
+    <Tab.Screen name="Home" component={Home} options={getIcon}
       listeners={({ route, navigation }) => ({
         tabPress: (e) => {
           e.preventDefault();
-          const navigationInRoute = route?.state?.routes?.[0];
-          if (!!navigationInRoute
-            && !!navigationInRoute.params && !!navigationInRoute.params.scrollToTop) {
-            navigationInRoute.params.scrollToTop();
+          const { history } = navigation.getState();
+          if (history[history.length - 1].key === route.key) {
+            if (!!route
+              && !!route.params && !!route.params.scrollToTop) {
+              route.params.scrollToTop();
+            }
           }
           navigation.navigate('Home');
         },
