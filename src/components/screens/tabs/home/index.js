@@ -67,6 +67,8 @@ class Home extends React.Component {
     refreshing: false
   };
 
+  canLoadMore = true;
+
   scrollY = new Animated.Value(0);
 
   scrollView = null;
@@ -86,15 +88,8 @@ class Home extends React.Component {
 
   scrollToTop = () => {
     if (this.scrollView) {
-      this.scrollView.scrollTo(0);
+      this.scrollView.scrollTo({ y: 0, animated: true });
     }
-  };
-
-  bindInfiniteScroll = () => {
-    // set param on tab navigator (parent of stack navigator)
-    this.props.navigation.dangerouslyGetParent().setParams({
-      scrollToTop: () => this.scrollToTop()
-    });
   };
 
   refreshAccountAndTx = () => {
@@ -107,7 +102,6 @@ class Home extends React.Component {
 
   screenWillFocus = () => {
     if (this.lastActiveToken === null) {
-      this.bindInfiniteScroll();
       this.setHeader();
       this.modalTimeout = setTimeout(() => {
         showIntroModal(this.props);
@@ -131,6 +125,9 @@ class Home extends React.Component {
     if (activeToken) {
       getNetworkInfo(activeToken);
     }
+    this.props.navigation.setParams({
+      scrollToTop: this.scrollToTop,
+    });
     addListener('willFocus', this.screenWillFocus);
     if (route.params && route.params.discreet && !incognito) {
       settingsUpdated({ incognito: true });
@@ -143,6 +140,23 @@ class Home extends React.Component {
       showInitializationModal(this.props);
     }, 1200);
   }
+
+  loadMore = ({ nativeEvent }) => {
+    const isCloseToBottom = ({
+      layoutMeasurement,
+      contentOffset,
+      contentSize,
+    }) => {
+      const paddingToBottom = 20;
+      return (
+        layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom
+      );
+    };
+    if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
+      this.canLoadMore = false;
+      loadMore(this.props);
+    }
+  };
 
   // eslint-disable-next-line max-statements
   componentDidUpdate(prevProps) {
@@ -162,7 +176,12 @@ class Home extends React.Component {
     const transactionCount = transactions.pending.length + transactions.confirmed.length;
     const shouldUpdateState = prevProps.transactions.loaded !== transactions.loaded
       || prevTransactionCount !== transactionCount;
-
+    const transactionList = transactions.count > 0
+      ? [...transactions.pending, ...transactions.confirmed]
+      : ['emptyState'];
+    if (prevTransactionCount !== transactionList.length) {
+      this.canLoadMore = transactionList.length < transactions.count;
+    }
     if (shouldUpdateState) {
       this.setState({
         footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount
@@ -238,9 +257,9 @@ class Home extends React.Component {
         : ['emptyState'];
       content = (
         <InfiniteScrollView
-          ref={(el) => {
-            this.scrollView = el;
-          }}
+          // ref={(el) => {
+          //   this.scrollView = el;
+          // }}
           scrollEventThrottle={8}
           onScroll={this.onScroll}
           style={[styles.scrollView]}
@@ -279,6 +298,9 @@ class Home extends React.Component {
           <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
         )}
         <ParallaxHeader
+          reference={(el) => {
+            this.scrollView = el;
+          }}
           headerMinHeight={70}
           headerMaxHeight={260}
           extraScrollHeight={20}
@@ -304,7 +326,7 @@ class Home extends React.Component {
           }
           renderContent={() => content}
           scrollViewProps={{
-            onScroll: this.onScroll
+            onScroll: this.loadMore
           }}
         />
         <View style={[styles.fixedBg, styles.theme.fixedBg]}></View>

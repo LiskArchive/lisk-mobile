@@ -80,7 +80,7 @@ class LiskAPIClient {
     if (!resp.ok) {
       throw new Error('Failed to request transactions from server.');
     }
-    const { data } = await resp.json();
+    const data = await resp.json();
     return data;
   }
 

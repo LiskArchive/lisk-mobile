@@ -188,7 +188,7 @@ describe('apiClient', () => {
         })
       );
       const result = await apiClient.getTransactions(account.address);
-      expect(result).toEqual(txList);
+      expect(result.data).toEqual(txList);
       expect(fetch).toHaveBeenCalledWith(
         `https://service.lisk.com/api/v2/transactions?address=${account.address}&limit=10&offset=0&includePending=false&sort=timestamp:desc`,
         expect.anything()

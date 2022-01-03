@@ -29,3 +29,7 @@ jest.mock('@react-navigation/compat', () => ({ withNavigation: (component) => co
 jest.mock('react-native-keyboard-aware-scroll-view', () => ({
   KeyboardAwareScrollView: jest.fn().mockImplementation(({ children }) => children)
 }));
+
+if (!global.setImmediate) {
+  global.setImmediate = setTimeout;
+}

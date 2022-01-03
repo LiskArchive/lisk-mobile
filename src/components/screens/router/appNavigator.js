@@ -23,25 +23,7 @@ const getIcon = ({ route }) => ({
 
 const Tab = createBottomTabNavigator();
 const SendStack = createStackNavigator();
-const HomeStack = createStackNavigator();
 const Stack = createStackNavigator();
-
-/**
- * We needed to wrap Home and Send screens in a dedicated navigator
- * so they can modify to the header based on the component state.
- *
- * Components under Tabs navigator can't control the header of the Main navigator
- */
-const HomeNavigator = ({ route }) => (
-  <HomeStack.Navigator initialRouteName="Home">
-    <HomeStack.Screen
-      name="Home"
-      component={Home}
-      options={navigationOptions.NoHeader}
-      initialParams={route.params}
-    />
-  </HomeStack.Navigator>
-);
 
 const SendNavigator = ({ route }) => (
   <SendStack.Navigator initialRouteName="Send">
@@ -55,8 +37,20 @@ const SendNavigator = ({ route }) => (
 );
 
 const Tabs = () => (
-  <Tab.Navigator initialRouteName="Home">
-    <Tab.Screen name="Home" component={HomeNavigator} options={getIcon} />
+  <Tab.Navigator initialRouteName="Home" >
+    <Tab.Screen name="Home" component={Home} options={getIcon}
+      listeners={({ route, navigation }) => ({
+        tabPress: (e) => {
+          e.preventDefault();
+          const { history } = navigation.getState();
+          if (history[history.length - 1].key === route.key) {
+            if (route.params?.scrollToTop) {
+              route.params.scrollToTop();
+            }
+          }
+          navigation.navigate('Home');
+        },
+      })} />
     <Tab.Screen name="Request" component={Request} options={getIcon} />
     <Tab.Screen name="Send" component={SendNavigator} options={getIcon} />
     <Tab.Screen name="Bookmarks" component={Bookmarks} options={getIcon} />
