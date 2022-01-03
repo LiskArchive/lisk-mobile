@@ -62,8 +62,7 @@ const Tabs = () => (
           e.preventDefault();
           const { history } = navigation.getState();
           if (history[history.length - 1].key === route.key) {
-            if (!!route
-              && !!route.params && !!route.params.scrollToTop) {
+            if (route.params?.scrollToTop) {
               route.params.scrollToTop();
             }
           }
