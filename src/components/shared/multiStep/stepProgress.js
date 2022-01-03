@@ -7,10 +7,10 @@ import getStyles from './styles';
 const StepProgress = ({ styles, currentIndex, length }) => {
   return (
     <View style={styles.container}>
-      <B>Step </B>
-      <B>{currentIndex}</B>
-      <B>/</B>
-      <P>{length}</P>
+      <B style={styles.theme.step} >Step </B>
+      <B style={styles.theme.step} >{currentIndex}</B>
+      <B style={styles.theme.step} >/</B>
+      <P style={styles.theme.step} >{length}</P>
     </View>
   );
 };
