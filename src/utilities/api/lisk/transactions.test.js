@@ -73,7 +73,7 @@ const response = {
 describe('api/transactions', () => {
   beforeAll(() => {
     apiClient.getTransactions = jest.fn();
-    apiClient.getTransactions.mockResolvedValue({ meta: response.meta, data: response.data});
+    apiClient.getTransactions.mockResolvedValue({ meta: response.meta, data: response.data });
     apiClient.sendTransaction = jest.fn();
     apiClient.getLatestBlock = jest.fn();
     apiClient.getLatestBlock.mockResolvedValue({
