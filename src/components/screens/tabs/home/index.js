@@ -88,7 +88,7 @@ class Home extends React.Component {
 
   scrollToTop = () => {
     if (this.scrollView) {
-      this.scrollView.scrollTo(0);
+      this.scrollView.scrollTo({ y: 0, animated: true });
     }
   };
 
