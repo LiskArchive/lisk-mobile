@@ -92,13 +92,6 @@ class Home extends React.Component {
     }
   };
 
-  bindInfiniteScroll = () => {
-    // set param on tab navigator (parent of stack navigator)
-    this.props.navigation.dangerouslyGetParent().setParams({
-      scrollToTop: () => this.scrollToTop()
-    });
-  };
-
   refreshAccountAndTx = () => {
     this.lastActiveToken = this.props.activeToken;
     this.initialFetchTimeout = setTimeout(() => {
@@ -109,7 +102,6 @@ class Home extends React.Component {
 
   screenWillFocus = () => {
     if (this.lastActiveToken === null) {
-      this.bindInfiniteScroll();
       this.setHeader();
       this.modalTimeout = setTimeout(() => {
         showIntroModal(this.props);
@@ -133,6 +125,9 @@ class Home extends React.Component {
     if (activeToken) {
       getNetworkInfo(activeToken);
     }
+    this.props.navigation.setParams({
+      scrollToTop: this.scrollToTop,
+    });
     addListener('willFocus', this.screenWillFocus);
     if (route.params && route.params.discreet && !incognito) {
       settingsUpdated({ incognito: true });
@@ -262,9 +257,9 @@ class Home extends React.Component {
         : ['emptyState'];
       content = (
         <InfiniteScrollView
-          ref={(el) => {
-            this.scrollView = el;
-          }}
+          // ref={(el) => {
+          //   this.scrollView = el;
+          // }}
           scrollEventThrottle={8}
           onScroll={this.onScroll}
           style={[styles.scrollView]}
@@ -303,6 +298,9 @@ class Home extends React.Component {
           <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
         )}
         <ParallaxHeader
+          reference={(el) => {
+            this.scrollView = el;
+          }}
           headerMinHeight={70}
           headerMaxHeight={260}
           extraScrollHeight={20}

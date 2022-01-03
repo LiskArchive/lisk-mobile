@@ -115,7 +115,8 @@ class RNParallax extends Component {
     const {
       renderContent,
       scrollViewProps,
-      refreshControl
+      refreshControl,
+      reference
     } = this.props;
     const { scrollY } = this.state;
     const { onScroll } = scrollViewProps;
@@ -135,6 +136,7 @@ class RNParallax extends Component {
             listener: onScroll,
           },
         )}
+        ref={reference}
         refreshControl={refreshControl}
         {...renderableScrollViewProps}>
         <View
