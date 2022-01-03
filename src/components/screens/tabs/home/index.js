@@ -147,7 +147,6 @@ class Home extends React.Component {
   }
 
   loadMore = ({ nativeEvent }) => {
-    console.log('here', this.canLoadMore)
     const isCloseToBottom = ({
       layoutMeasurement,
       contentOffset,
@@ -159,7 +158,6 @@ class Home extends React.Component {
       );
     };
     if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
-      console.log('loading more')
       this.canLoadMore = false;
       loadMore(this.props);
     }
