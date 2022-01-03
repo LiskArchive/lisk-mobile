@@ -1,4 +1,6 @@
+import { Platform } from 'react-native';
 import * as Lisk from '@liskhq/lisk-client';
+import * as LiskAndroidPatch from './utils/index';
 import { apiClient } from './apiClient';
 import {
   isTransfer,
@@ -91,7 +93,11 @@ export const create = async ({
     config.isTestnet ? config.testnetNetworkID : config.networkID,
     'hex'
   );
-  return Lisk.transactions.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase);
+  return Platform.select({
+    android:
+      LiskAndroidPatch.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase),
+    ios: Lisk.transactions.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase)
+  });
 };
 
 export const broadcast = async (transaction) => {
