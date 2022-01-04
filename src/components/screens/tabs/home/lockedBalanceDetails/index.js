@@ -4,7 +4,7 @@ import { View, ScrollView, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import moment from 'moment';
-import { colors } from '../../../../../constants/styleGuide';
+import { colors, themes } from '../../../../../constants/styleGuide';
 import { P } from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import HeaderBackButton from '../../../router/headerBackButton';
@@ -23,7 +23,7 @@ const getPendingTime = (unvoteHeight, unlockHeight) => {
 };
 
 const RowItem = ({
-  styles, title, value, IconComponent, tokenType, language
+  styles, title, value, IconComponent, tokenType, language, theme
 }) => (
   <View style={[styles.row, styles.theme.row]}>
     <View style={styles.flex}>
@@ -38,7 +38,9 @@ const RowItem = ({
     </View>
     <View style={[styles.flexOne, styles.flexRow]}>
       <View style={styles.iconContainer}>
-        <IconComponent size={1.2} />
+        <IconComponent
+          size={1.2}
+          color={theme === themes.dark ? colors.dark.ultramarineBlue : colors.light.inkBlue} />
       </View>
       <P style={[styles.text, styles.theme.text]}>{value}</P>
     </View>
@@ -46,7 +48,7 @@ const RowItem = ({
 );
 
 const LockedBalanceDetails = ({
-  account, styles, navigation, t, activeToken, network, language
+  account, styles, navigation, t, activeToken, network, language, theme
 }) => {
   const [unlockedTokens, setUnunlockedTokens] = useState({});
   const [availableTokens, setAvailableTokens] = useState([]);
@@ -110,6 +112,7 @@ const LockedBalanceDetails = ({
                 styles={styles}
                 tokenType={activeToken}
                 language={language}
+                theme={theme}
               />
             ) : null}
             {Object.keys(unlockedTokens).map((time) => (
@@ -125,6 +128,7 @@ const LockedBalanceDetails = ({
                 styles={styles}
                 tokenType={activeToken}
                 language={language}
+                theme={theme}
               />
             ))}
             {availableTokens.length ? (
@@ -137,6 +141,7 @@ const LockedBalanceDetails = ({
                 styles={styles}
                 tokenType={activeToken}
                 language={language}
+                theme={theme}
               />
             ) : null}
           </View>

@@ -20,6 +20,7 @@ import { P, Small } from '../../shared/toolBox/typography';
 import { decodeLaunchUrl } from '../../../utilities/qrCode';
 import { tokenMap } from '../../../constants/tokens';
 import { validateAddress } from '../../../utilities/validators';
+import { stringShortener } from '../../../utilities/helpers';
 
 @connect(
   state => ({ accounts: state.accounts.followed, activeToken: state.settings.token.active }),
@@ -268,7 +269,7 @@ class AddToBookmark extends React.Component {
                     />
                   ) : null}
                   <Small style={[styles.address, styles.theme.address]}>
-                    {incomingData.address}
+                    {stringShortener(incomingData.address, 10, 3)}
                   </Small>
                 </View>
               </View>
