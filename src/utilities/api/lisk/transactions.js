@@ -93,11 +93,10 @@ export const create = async ({
     config.isTestnet ? config.testnetNetworkID : config.networkID,
     'hex'
   );
-  return Platform.select({
-    android:
-      LiskAndroidPatch.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase),
-    ios: Lisk.transactions.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase)
-  });
+  if (Platform.OS === 'android') {
+    return LiskAndroidPatch.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase);
+  }
+  return Lisk.transactions.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase);
 };
 
 export const broadcast = async (transaction) => {
