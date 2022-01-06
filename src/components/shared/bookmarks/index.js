@@ -28,6 +28,7 @@ class Bookmarks extends React.Component {
       setRef,
       draggable,
       activeToken,
+      renderEmpty
     } = this.props;
     const showAvatar = activeToken === tokenKeys[0];
 
@@ -42,7 +43,7 @@ class Bookmarks extends React.Component {
     return (
       <View style={styles.container}>
         {list[activeToken].length === 0 || filterList.length === 0 ? (
-            <Empty />
+          renderEmpty && <Empty />
         ) : (
           <List
             draggable={draggable}

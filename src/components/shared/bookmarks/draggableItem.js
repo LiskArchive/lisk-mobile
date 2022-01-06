@@ -151,7 +151,7 @@ class DraggableItem extends React.Component {
                   {data.label}
                 </B>
                 <Small style={[styles.label, styles.theme.label]}>
-                  {stringShortener(data.address, 20, 8)}
+                  {stringShortener(data.address, 6, 5)}
                 </Small>
               </View>
             </View>

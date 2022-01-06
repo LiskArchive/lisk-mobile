@@ -212,6 +212,7 @@ class Recipient extends React.Component {
             <Bookmarks
               navigate={this.forward}
               query={this.state.address.value}
+              renderEmpty={false}
             />
           </View>
         </KeyboardAwareScrollView>

@@ -40,7 +40,7 @@ class Item extends React.Component {
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>{data.label}</B>
             <Small style={[styles.label, styles.theme.label]} numberOfLines={1}>
-              {stringShortener(data.address, 6, 4)}
+              {stringShortener(data.address, 6, 5)}
             </Small>
           </View>
         </View>
