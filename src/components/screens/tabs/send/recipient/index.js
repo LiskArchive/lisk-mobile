@@ -1,16 +1,14 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
-
+import connect from 'redux-connect-decorator';
 import { IconButton } from '../../../../shared/toolBox/button';
-import { tokenMap } from '../../../../../constants/tokens';
 import Input from '../../../../shared/toolBox/input';
 import { colors } from '../../../../../constants/styleGuide';
 import Avatar from '../../../../shared/avatar';
 import Scanner from '../../../../shared/scanner';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import { merge } from '../../../../../utilities/helpers';
-import connect from 'redux-connect-decorator';
 import { decodeLaunchUrl } from '../../../../../utilities/qrCode';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';

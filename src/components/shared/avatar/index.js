@@ -13,7 +13,6 @@ import {
 import { validateAddress } from '../../../utilities/validators';
 import Icon from '../toolBox/icon';
 import { colors, themes } from '../../../constants/styleGuide';
-import { setColorOpacity } from '../../../utilities/helpers';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
