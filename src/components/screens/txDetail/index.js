@@ -36,8 +36,8 @@ const getConfig = (styles, tx, accountAddress) => {
     return {
       arrowStyle: styles.reverseArrow,
       amountStyle: [styles.incoming, styles.theme.incoming],
-      firstAddress: tx.recipientAddress,
-      secondAddress: tx.senderAddress,
+      firstAddress: tx.senderAddress,
+      secondAddress: tx.recipientAddress,
       amountSign: '',
       direction: 'incoming'
     };
