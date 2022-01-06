@@ -22,7 +22,9 @@ export default () => ({
     input: {
       marginTop: 0,
       flexWrap: 'wrap',
+      borderRadius: 10,
       flex: 1,
+      fontFamily: fonts.family.contextSemiBold
     },
     scanButton: {
       position: 'absolute',

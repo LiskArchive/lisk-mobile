@@ -35,7 +35,7 @@ const LskSummary = ({
           </B>
           <TimeStamp timestamp={tx.timestamp} styles={styles} />
         </View>
-        <Graphics styles={styles} tx={tx} theme={theme} />
+        <Graphics tx={tx} theme={theme} />
       </View>
     </View>
   );

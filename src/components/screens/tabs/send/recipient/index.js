@@ -195,13 +195,12 @@ class Recipient extends React.Component {
                 autoCorrect={false}
                 onChange={this.setAddress}
                 value={address.value}
+                placeholder={t('Insert public address or a name')}
                 innerStyles={{
                   input: [
                     styles.input,
                     styles.addressInput,
-                    token.active === tokenMap.LSK.key
-                      ? styles.addressInputWithAvatar
-                      : null,
+                    styles.addressInputWithAvatar,
                   ],
                   containerStyle: styles.addressInputContainer,
                   inputLabel: styles.theme.inputLabel,
