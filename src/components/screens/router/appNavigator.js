@@ -11,7 +11,6 @@ import TabBarIcon from './tabBarIcon';
 import Home from '../tabs/home';
 import navigationOptions from './navigationOptions';
 import LockedBalanceDetails from '../tabs/home/lockedBalanceDetails';
-import { Platform } from 'react-native';
 
 export const getHeaderOptions = ({ route }) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
@@ -38,7 +37,7 @@ const SendNavigator = ({ route }) => (
 );
 
 const Tabs = () => (
-  <Tab.Navigator initialRouteName="Home" tabBarOptions={{ keyboardHidesTabBar: Platform.select({ android: true, ios: false }) }} >
+  <Tab.Navigator initialRouteName="Home" >
     <Tab.Screen name="Home" component={Home} options={getIcon}
       listeners={({ route, navigation }) => ({
         tabPress: (e) => {
