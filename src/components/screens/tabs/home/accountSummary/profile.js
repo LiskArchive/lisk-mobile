@@ -79,7 +79,7 @@ const Profile = ({
             style={[
               styles.row,
               {
-                opacity: interpolate([0, height - 120, height - 85], [1, 1, 0])
+                opacity: interpolate([0, height - 200], [1, 0])
               }
             ]}
           >

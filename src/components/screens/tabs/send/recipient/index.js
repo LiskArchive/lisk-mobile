@@ -10,6 +10,7 @@ import Avatar from '../../../../shared/avatar';
 import Scanner from '../../../../shared/scanner';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import { merge } from '../../../../../utilities/helpers';
+import connect from 'redux-connect-decorator';
 import { decodeLaunchUrl } from '../../../../../utilities/qrCode';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
@@ -19,6 +20,11 @@ import DropDownHolder from '../../../../../utilities/alert';
 import HeaderBackButton from '../../../router/headerBackButton';
 import StepProgress from '../../../../shared/multiStep/stepProgress';
 
+@connect(
+  state => ({
+    list: state.accounts.followed,
+  }),
+)
 class Recipient extends React.Component {
   scannedData = {};
 
@@ -126,15 +132,13 @@ class Recipient extends React.Component {
       settings: { token },
       navigation,
       styles,
-      accounts,
       t,
       lng,
+      list
     } = this.props;
     const { address } = this.state;
 
-    const inputLabel = accounts.followed.length
-      ? t('Address or label')
-      : t('Address');
+    const placeholder = list[token.active]?.length ? t('Insert public address or a name') : t('Insert public address');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -178,27 +182,24 @@ class Recipient extends React.Component {
                 iconSize={19.5}
                 color={colors.light.ultramarineBlue}
               />
-
-              {token.active === tokenMap.LSK.key ? (
-                <Avatar
-                  style={styles.avatar}
-                  address={address.value}
-                  size={24.6}
-                />
-              ) : null}
-
+              <Avatar
+                style={styles.avatar}
+                address={address.value}
+                size={24.6}
+              />
               <Input
                 reference={input => {
                   this.input = input;
                 }}
-                label={inputLabel}
+                label={t('Recipient')}
                 autoCorrect={false}
                 onChange={this.setAddress}
                 value={address.value}
-                placeholder={t('Insert public address or a name')}
+                placeholder={placeholder}
                 innerStyles={{
                   input: [
                     styles.input,
+                    styles.theme.input,
                     styles.addressInput,
                     styles.addressInputWithAvatar,
                   ],

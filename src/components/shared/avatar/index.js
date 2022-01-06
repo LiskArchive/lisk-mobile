@@ -61,8 +61,8 @@ class Avatar extends React.Component {
             size={size}
             color={
               theme === themes.light
-                ? colors.light.platinum
-                : setColorOpacity(colors[theme].white, 0.24)
+                ? colors.light.blueGray
+                : colors.dark.mountainMist
             }
           />
         </Wrapper>

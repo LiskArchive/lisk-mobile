@@ -24,7 +24,7 @@ export default () => ({
       flexWrap: 'wrap',
       borderRadius: 10,
       flex: 1,
-      fontFamily: fonts.family.contextSemiBold
+      fontFamily: fonts.family.contextSemiBold,
     },
     scanButton: {
       position: 'absolute',
@@ -88,6 +88,9 @@ export default () => ({
     inputLabel: {
       color: colors.light.maastrichtBlue,
     },
+    input: {
+      borderColor: colors.light.zodiacBlue
+    },
   },
   [themes.dark]: {
     wrapper: {
@@ -98,6 +101,9 @@ export default () => ({
     },
     inputLabel: {
       color: colors.light.platinum,
+    },
+    input: {
+      borderColor: colors.dark.footerBg
     },
   },
 });
