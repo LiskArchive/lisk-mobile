@@ -41,6 +41,9 @@ export default () => ({
       right: boxes.boxPadding - 5,
       width: 90,
     },
+    titleContainer: {
+      paddingHorizontal: 20,
+    },
     addressContainer: {
       width: '100%',
       paddingTop: 0,
@@ -91,6 +94,9 @@ export default () => ({
     input: {
       borderColor: colors.light.zodiacBlue
     },
+    title: {
+      color: colors.light.maastrichtBlue
+    },
   },
   [themes.dark]: {
     wrapper: {
@@ -100,10 +106,13 @@ export default () => ({
       color: colors.light.platinum,
     },
     inputLabel: {
-      color: colors.light.platinum,
+      color: colors.light.white,
     },
     input: {
       borderColor: colors.dark.footerBg
+    },
+    title: {
+      color: colors.dark.white
     },
   },
 });

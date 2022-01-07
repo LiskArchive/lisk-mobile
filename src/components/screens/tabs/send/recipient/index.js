@@ -17,6 +17,7 @@ import { validateAddress } from '../../../../../utilities/validators';
 import DropDownHolder from '../../../../../utilities/alert';
 import HeaderBackButton from '../../../router/headerBackButton';
 import StepProgress from '../../../../shared/multiStep/stepProgress';
+import { H4 } from '../../../../shared/toolBox/typography';
 
 @connect(
   state => ({
@@ -135,8 +136,8 @@ class Recipient extends React.Component {
       list
     } = this.props;
     const { address } = this.state;
-
-    const placeholder = list[token.active]?.length ? t('Insert public address or a name') : t('Insert public address');
+    const hasBookmarks = !!list[token.active]?.length;
+    const placeholder = hasBookmarks ? t('Insert public address or a name') : t('Insert public address');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -206,7 +207,11 @@ class Recipient extends React.Component {
                 }}
               />
             </View>
-
+            {hasBookmarks && <View>
+              <View style={[styles.titleContainer]} >
+                <H4 style={styles.theme.title} >{t('Choose from bookmarks')}</H4>
+              </View>
+            </View>}
             <Bookmarks
               navigate={this.forward}
               query={this.state.address.value}

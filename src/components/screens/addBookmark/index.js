@@ -269,7 +269,7 @@ class AddToBookmark extends React.Component {
                     />
                   ) : null}
                   <Small style={[styles.address, styles.theme.address]}>
-                    {stringShortener(incomingData.address, 10, 3)}
+                    {stringShortener(incomingData.address, 6, 5)}
                   </Small>
                 </View>
               </View>
