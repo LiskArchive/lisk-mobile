@@ -40,7 +40,7 @@ class InfiniteScrollView extends React.Component {
   }
 
   onScroll = e => {
-    this.props.onScroll(e);
+    this.props.onScroll?.(e);
     this.loadMore(e);
   };
 

@@ -65,18 +65,8 @@ navigationOptions.NoHeader = () => {
   };
 };
 
-navigationOptions.Wallet = () => {
-  const type = deviceType();
-  return {
-    headerTitle: () => <HomeHeaderTitle type="wallet" />,
-    headerLeft: (props) => <HeaderBackButton {...props} />,
-    headerRight: () => <HeaderPlaceholderButton />,
-    headerStyle: {
-      height: type === 'iOSx' ? 90 : 64,
-      ...noShadow
-    },
-    headerTitleStyle: genericTitle
-  };
+navigationOptions.Wallet = {
+  header: () => null
 };
 
 navigationOptions.Request = {

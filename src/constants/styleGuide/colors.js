@@ -10,6 +10,7 @@ const common = {
   blueGray: '#8A8CA2',
   ghost: '#BEC1CD',
   platinum: '#E1E3EA',
+  platinumGray: '#DFE6F2',
   mystic: '#EDF0F5',
   whiteSmoke: '#F5F7FA',
   burntSieanna: '#EC6868',
