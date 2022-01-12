@@ -168,13 +168,7 @@ class Wallet extends React.Component {
   render() {
     const { transactions, account } = this.state;
 
-    const {
-      styles, navigation, activeToken, followedAccounts
-    } = this.props;
-
-    const storedAccount = followedAccounts[activeToken].find(
-      (item) => item.address === this.state.account.address
-    );
+    const { styles, navigation } = this.props;
 
     let content = null;
 
@@ -225,7 +219,7 @@ class Wallet extends React.Component {
             title="Account Details"
             onPress={this.props.navigation.goBack}
             rightIconComponent={() => (
-              <TouchableOpacity onPress={this.toggleBookmark} >
+              <TouchableOpacity onPress={this.toggleBookmark}>
                 <BookmarkSvg />
               </TouchableOpacity>
             )}
