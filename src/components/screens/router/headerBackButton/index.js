@@ -20,7 +20,8 @@ const HeaderBackButton = ({
   t,
   noIcon,
   rightIcon,
-  onRightPress
+  onRightPress,
+  rightIconComponent,
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
@@ -49,6 +50,7 @@ const HeaderBackButton = ({
           color={rightColor}
         />
       ) : null}
+      {rightIconComponent && rightIconComponent()}
     </View>
   );
 };

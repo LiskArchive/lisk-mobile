@@ -1,6 +1,8 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Animated, SafeAreaView } from 'react-native';
+import {
+  View, Animated, SafeAreaView, TouchableOpacity
+} from 'react-native';
 import { account as accountAPI, transactions as transactionsAPI } from '../../../utilities/api';
 import AccountSummary from './accountSummary';
 import Transactions from '../../shared/transactions';
@@ -13,8 +15,10 @@ import {
 } from '../../../actions/loading';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
-import HomeHeaderTitle from '../router/homeHeaderTitle';
 import HeaderBackButton from '../router/headerBackButton';
+import modalHolder from '../../../utilities/modal';
+import DeleteBookmarkModal from '../../shared/bookmarks/deleteBookmarkModal';
+import BookmarkSvg from '../../../assets/svgs/BookmarkSvg';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -135,6 +139,32 @@ class Wallet extends React.Component {
     this.fetchInitialData();
   }
 
+  toggleBookmark = () => {
+    const {
+      followedAccounts, navigation, accountUnFollowed, t, activeToken
+    } = this.props;
+
+    const isFollowed = followedAccounts[activeToken].some(
+      (item) => item.address === this.state.account.address
+    );
+
+    if (isFollowed) {
+      modalHolder.open({
+        title: 'Delete bookmark',
+        component: DeleteBookmarkModal,
+        callback: () => accountUnFollowed(this.state.account.address)
+      });
+    } else {
+      navigation.navigate({
+        name: 'AddBookmark',
+        params: {
+          account: this.state.account,
+          title: t('Add bookmark')
+        }
+      });
+    }
+  };
+
   render() {
     const { transactions, account } = this.state;
 
@@ -190,8 +220,16 @@ class Wallet extends React.Component {
 
     return (
       <View style={[styles.container, styles.theme.container]}>
-        <SafeAreaView style={styles.flex} >
-          <HeaderBackButton title="Account Details" onPress={this.props.navigation.goBack} />
+        <SafeAreaView style={styles.flex}>
+          <HeaderBackButton
+            title="Account Details"
+            onPress={this.props.navigation.goBack}
+            rightIconComponent={() => (
+              <TouchableOpacity onPress={this.toggleBookmark} >
+                <BookmarkSvg />
+              </TouchableOpacity>
+            )}
+          />
           {account && account.address ? (
             <AccountSummary
               navigation={navigation}

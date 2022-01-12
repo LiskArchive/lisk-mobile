@@ -11,10 +11,7 @@ import {
 import Avatar from '../../../shared/avatar';
 import { fromRawLsk } from '../../../../utilities/conversions';
 import FormattedNumber from '../../../shared/formattedNumber';
-import { tokenKeys } from '../../../../constants/tokens';
-import Share from '../../../shared/share';
-import { P, H2, B } from '../../../shared/toolBox/typography';
-import { IconButton } from '../../../shared/toolBox/button';
+import { P, B } from '../../../shared/toolBox/typography';
 import easing from '../../../../utilities/easing';
 import { stringShortener } from '../../../../utilities/helpers';
 import withTheme from '../../../shared/withTheme';

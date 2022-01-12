@@ -27,6 +27,7 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center',
       marginTop: normalMarginTop,
+      paddingRight: 20,
     },
     main: {
       width: 50,
