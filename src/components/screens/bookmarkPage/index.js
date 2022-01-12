@@ -77,6 +77,7 @@ class Bookmark extends React.Component {
                 draggable={true}
                 setRef={this.setRef}
                 query={query}
+                renderEmpty
               />
             </View>
           </View>

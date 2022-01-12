@@ -11,6 +11,8 @@ import TabBarIcon from './tabBarIcon';
 import Home from '../tabs/home';
 import navigationOptions from './navigationOptions';
 import LockedBalanceDetails from '../tabs/home/lockedBalanceDetails';
+import { colors, themes } from '../../../constants/styleGuide';
+import withTheme from '../../shared/withTheme';
 
 export const getHeaderOptions = ({ route }) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
@@ -36,8 +38,14 @@ const SendNavigator = ({ route }) => (
   </SendStack.Navigator>
 );
 
-const Tabs = () => (
-  <Tab.Navigator initialRouteName="Home" >
+const Tabs = ({ theme }) => (
+  <Tab.Navigator initialRouteName="Home" tabBarOptions={{
+    style: {
+      backgroundColor: theme === themes.light ? colors.light.athensWhite : colors.dark.footerBg,
+      borderTopColor: theme === themes.light ? colors.light.platinumGray : colors.dark.footerBg,
+      borderTopWidth: 1,
+    }
+  }} >
     <Tab.Screen name="Home" component={Home} options={getIcon}
       listeners={({ route, navigation }) => ({
         tabPress: (e) => {
@@ -58,6 +66,8 @@ const Tabs = () => (
   </Tab.Navigator>
 );
 
+const ThemedTabs = withTheme(Tabs, {});
+
 const config = {
   animation: 'spring',
   config: {
@@ -72,7 +82,7 @@ const config = {
 
 const AppNavigator = () => (
   <Stack.Navigator initialRouteName="Home" mode="modal">
-    <Stack.Screen name="Home" component={Tabs} options={getHeaderOptions} />
+    <Stack.Screen name="Home" component={ThemedTabs} options={getHeaderOptions} />
     <Stack.Screen
       name="LockedBalance"
       component={LockedBalanceDetails}

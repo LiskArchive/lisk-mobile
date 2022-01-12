@@ -79,7 +79,7 @@ const Profile = ({
             style={[
               styles.row,
               {
-                opacity: interpolate([0, height - 120, height - 85], [1, 1, 0])
+                opacity: interpolate([0, height - 200], [1, 0])
               }
             ]}
           >
@@ -151,6 +151,11 @@ const Profile = ({
             </View>
             <View style={[styles.row, styles.keyValueRow]}>
               <P style={styles.label}>{t('Locked')}</P>
+            <TouchableOpacity
+              style={styles.icon}
+              onPress={() => navigation.navigate('LockedBalance')}
+              disabled={Number(normalizedLockedBalance) <= 0}
+            >
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <AView
                   style={[
@@ -182,14 +187,15 @@ const Profile = ({
                     ]}
                   />
                 </AView>
-                {Number(normalizedLockedBalance) > 0 ? <TouchableOpacity
+                {Number(normalizedLockedBalance) > 0 ? <View
                   style={styles.icon}
                   onPress={() => navigation.navigate('LockedBalance')}
                 >
                   <Icon name="forward" color={colors.light.white} size={28} />
-                </TouchableOpacity> : null}
+                  </View> : null}
               </View>
-            </View>
+            </TouchableOpacity>
+              </View>
           </AView>
         </ImageBackground>
       </View>

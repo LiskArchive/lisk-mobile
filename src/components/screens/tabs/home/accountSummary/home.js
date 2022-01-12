@@ -98,8 +98,8 @@ class AccountSummary extends React.Component {
     return (
       <Animated.View
         style={[
-          { height: this.interpolate([0, 150], [280, 0]) },
-          { top, opacity, paddingBottom: this.interpolate([0, 100], [15, 0]) },
+          { height: this.interpolate([0, 280], [280, 0]) },
+          { top, opacity, paddingBottom: this.interpolate([0, 280], [15, 0]) },
         ]}
       >
           {this.renderProfile({ item: profiles[0], index: 0 })}

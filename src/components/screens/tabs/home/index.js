@@ -1,11 +1,10 @@
 /* eslint-disable max-lines */
 import React from 'react';
 import {
-  View, Animated, StatusBar, Platform, RefreshControl
+  View, Animated, StatusBar, Platform, RefreshControl, SafeAreaView
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from '@react-navigation/compat';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   transactionsReset as transactionsResetAction,
   transactionsLoaded as transactionsLoadedAction

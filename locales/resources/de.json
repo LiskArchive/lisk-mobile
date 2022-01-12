@@ -238,5 +238,7 @@
   "Locked balance details": "",
   "Find details of your locked balance and the unlock waiting period.": "",
   "will be available to unlock": "... ~ {{timeToUnlock}}",
-  "available to unlock (only on desktop)": ""
+  "available to unlock (only on desktop)": "",
+  "Insert public address or a name": "",
+  "Insert public address": ""
 }

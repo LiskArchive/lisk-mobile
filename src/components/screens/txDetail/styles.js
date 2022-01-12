@@ -66,7 +66,6 @@ export default () => ({
     valueContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingRight: 18,
     },
     avatar: {
       paddingBottom: 0,
@@ -97,7 +96,6 @@ export default () => ({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingRight: 20,
     },
     incoming: {},
     outgoing: {},
