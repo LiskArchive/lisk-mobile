@@ -1,5 +1,4 @@
 import React from 'react';
-import HomeHeaderTitle from './homeHeaderTitle';
 import { t } from './helper';
 import HeaderBackButton from './headerBackButton';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
