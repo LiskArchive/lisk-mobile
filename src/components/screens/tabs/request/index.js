@@ -17,7 +17,6 @@ import reg from '../../../../constants/regex';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { themes, colors } from '../../../../constants/styleGuide';
-import { tokenMap } from '../../../../constants/tokens';
 import Avatar from '../../../shared/avatar';
 import CopyToClipboard from '../../../shared/copyToClipboard';
 import { languageMap } from '../../../../constants/languages';
@@ -97,12 +96,10 @@ class Request extends React.Component {
           <View style={[styles.innerContainer, styles.theme.innerContainer]}>
             <View style={styles.subHeader}>
               <P style={[styles.addressLabel, styles.theme.addressLabel]}>
-                {t(`Your ${tokenMap[activeToken].label} address`)}
+                {t('Your Lisk address')}
               </P>
               <View style={styles.addressContainer}>
-                {activeToken === tokenMap.LSK.key && (
-                  <Avatar style={styles.avatar} address={address} size={24} />
-                )}
+                <Avatar style={styles.avatar} address={address} size={24} />
                 <CopyToClipboard
                   style={styles.copyContainer}
                   labelStyle={[styles.address, styles.theme.address]}
@@ -146,18 +143,16 @@ class Request extends React.Component {
                 </Share>
               </View>
 
-              {activeToken === tokenMap.LSK.key ? (
-                <View style={styles.inputContainer}>
-                  <Input
-                    label={t('Amount in LSK (optional)')}
-                    autoCorrect={false}
-                    onChange={this.changeHandler}
-                    value={amount.value}
-                    keyboardType="numeric"
-                    error={amount.validity === 1 ? t('Invalid amount') : ''}
-                  />
-                </View>
-              ) : null}
+              <View style={styles.inputContainer}>
+                <Input
+                  label={t('Amount in LSK (optional)')}
+                  autoCorrect={false}
+                  onChange={this.changeHandler}
+                  value={amount.value}
+                  keyboardType="numeric"
+                  error={amount.validity === 1 ? t('Invalid amount') : ''}
+                />
+              </View>
             </View>
           </View>
         </KeyboardAwareScrollView>
