@@ -1,6 +1,5 @@
 import { themes, colors } from '../../../constants/styleGuide';
 
-
 export default () => ({
   common: {
     container: {
