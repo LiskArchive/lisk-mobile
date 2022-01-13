@@ -3,7 +3,12 @@ import connect from 'redux-connect-decorator';
 import {
   View, Animated, SafeAreaView, TouchableOpacity
 } from 'react-native';
+import { translate } from 'react-i18next';
 import { account as accountAPI, transactions as transactionsAPI } from '../../../utilities/api';
+import {
+  accountFollowed as accountFollowedAction,
+  accountUnFollowed as accountUnFollowedAction
+} from '../../../actions/accounts';
 import AccountSummary from './accountSummary';
 import Transactions from '../../shared/transactions';
 import InfiniteScrollView from '../../shared/infiniteScrollView';
@@ -36,7 +41,9 @@ import BookmarkSvg from '../../../assets/svgs/BookmarkSvg';
   }),
   {
     loadingStarted: loadingStartedAction,
-    loadingFinished: loadingFinishedAction
+    loadingFinished: loadingFinishedAction,
+    accountFollowed: accountFollowedAction,
+    accountUnFollowed: accountUnFollowedAction,
   }
 )
 class Wallet extends React.Component {
@@ -239,4 +246,4 @@ class Wallet extends React.Component {
   }
 }
 
-export default withTheme(Wallet, getStyles());
+export default withTheme(translate()(Wallet), getStyles());

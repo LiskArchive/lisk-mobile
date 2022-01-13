@@ -17,8 +17,6 @@ import { stringShortener } from '../../../../utilities/helpers';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../../../constants/styleGuide';
-import DeleteBookmarkModal from '../../../shared/bookmarks/deleteBookmarkModal';
-import modalHolder from '../../../../utilities/modal';
 import CopyToClipboard from '../../../shared/copyToClipboard';
 import Icon from '../../../shared/toolBox/icon';
 
@@ -73,36 +71,21 @@ class AccountSummary extends React.Component {
     }).start();
   };
 
-  toggleBookmark = () => {
-    const {
-      followedAccounts, account, navigation, accountUnFollowed, t, activeToken
-    } = this.props;
-
-    const isFollowed = followedAccounts[activeToken].some(
-      (item) => item.address === account.address
-    );
-
-    if (isFollowed) {
-      modalHolder.open({
-        title: 'Delete bookmark',
-        component: DeleteBookmarkModal,
-        callback: () => accountUnFollowed(account.address)
-      });
-    } else {
-      navigation.navigate({
-        name: 'AddBookmark',
-        params: {
-          account,
-          title: t('Add bookmark')
-        }
-      });
-    }
-  };
-
   componentDidMount() {
     this.screenWidth = Dimensions.get('window').width;
     this.initialFadeIn();
   }
+
+  sendLSK = () =>
+    this.props.navigation.navigate({
+      name: 'Home',
+      params: {
+        screen: 'Send',
+        params: {
+          query: { address: this.props.account.address }
+        }
+      }
+    });
 
   render() {
     const {
@@ -151,14 +134,14 @@ class AccountSummary extends React.Component {
               {normalizedBalance}
             </FormattedNumber>
           </View>
-          <TouchableOpacity style={[styles.button, styles.theme.button]}>
+          <TouchableOpacity style={[styles.button, styles.theme.button]} onPress={this.sendLSK} >
             <Icon
               name="send"
               size={18}
               style={styles.sendIcon}
               color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
             />
-            <P style={styles.theme.send} >{t('Send LSK')}</P>
+            <P style={styles.theme.send}>{t('Send LSK')}</P>
           </TouchableOpacity>
         </View>
       </AView>
