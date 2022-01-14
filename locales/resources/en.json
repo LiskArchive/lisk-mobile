@@ -250,6 +250,9 @@
       "copy": "Available on desktop only",
       "button": "use desktop"
     },
+    "mandatory": "Mandatory",
+    "optional": "Optional",
+    "required": "Required signatures",
     "error": {
       "title": "A bookmark with this name already exists",
       "copy": "Please choose another name."

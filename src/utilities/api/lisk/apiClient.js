@@ -38,7 +38,8 @@ class LiskAPIClient {
       nonce: data[0].sequence.nonce,
       lockedBalance: unlockingAmount + totalSentVotes,
       unlocking: data[0].dpos.unlocking,
-      sentVotes: data[0].dpos.sentVotes
+      sentVotes: data[0].dpos.sentVotes,
+      keys: data[0].keys
     };
   }
 
