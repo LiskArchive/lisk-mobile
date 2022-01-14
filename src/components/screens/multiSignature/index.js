@@ -57,7 +57,7 @@ const MultiSignature = ({
             ))}
             </View>
             <View>
-              <B style={[styles.theme.copy, styles.requiredTitle]} >{t('required')}</B>
+              <B style={[styles.theme.copy, styles.requiredTitle]} >{t('multisignature.required')}</B>
               <P style={styles.theme.copy} >{numberOfSignatures}</P>
             </View>
           </View>
