@@ -67,7 +67,7 @@ class AccountSummary extends React.Component {
       settings, priceTicker, t, accounts, activeToken
     } = this.props;
     const token = Object.keys(settings.token.list)[data.index];
-    const { address, lockedBalance } = accounts.info[activeToken];
+    const { address, lockedBalance, isMultisignature } = accounts.info[activeToken];
     return (
       <Profile
         t={t}
@@ -80,6 +80,7 @@ class AccountSummary extends React.Component {
         height={this.height}
         address={address}
         lockedBalance={lockedBalance}
+        isMultiSignature={isMultisignature}
         {...this.props}
       />
     );

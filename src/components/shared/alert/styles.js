@@ -3,7 +3,7 @@ import { colors, fonts } from '../../../constants/styleGuide';
 export default () => ({
   common: {
     titleStyle: {
-      fontSize: fonts.size.base,
+      fontSize: 14,
       textAlign: 'left',
       fontWeight: 'bold',
       color: colors.light.white,

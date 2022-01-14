@@ -13,6 +13,7 @@ import navigationOptions from './navigationOptions';
 import LockedBalanceDetails from '../tabs/home/lockedBalanceDetails';
 import { colors, themes } from '../../../constants/styleGuide';
 import withTheme from '../../shared/withTheme';
+import MultiSignature from '../multiSignature';
 
 export const getHeaderOptions = ({ route }) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
@@ -86,6 +87,17 @@ const AppNavigator = () => (
     <Stack.Screen
       name="LockedBalance"
       component={LockedBalanceDetails}
+      options={{
+        headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config
+        }
+      }}
+    />
+    <Stack.Screen
+      name="Multisignature"
+      component={MultiSignature}
       options={{
         headerShown: false,
         transitionSpec: {

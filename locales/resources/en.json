@@ -241,5 +241,22 @@
   "will be available to unlock": "will be available to unlock in ~ {{timeToUnlock}}",
   "available to unlock (only on desktop)": "available to unlock (only on desktop)",
   "Insert public address or a name": "Insert public address or a name",
-  "Insert public address": "Insert public address"
+  "Insert public address": "Insert public address",
+  "Multisignature account details": "Multisignature account details",
+  "multisignature": {
+    "copy1": "This is a multisignature account, which allows a group of users to control shared LSK.",
+    "copy2": "This account requires 2 signatures to createa transaction.",
+    "info": {
+      "copy": "Available on desktop only",
+      "button": "use desktop"
+    },
+    "error": {
+      "title": "A bookmark with this name already exists",
+      "copy": "Please choose another name."
+    },
+    "send": {
+      "copy": "Sending transaction using multisignature accounts is available only on Lisk Desktop . ",
+      "button": "use desktop"
+    }
+  }
 }

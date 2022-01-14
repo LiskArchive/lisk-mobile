@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import React from 'react';
 import { BackHandler, View } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
@@ -14,22 +15,27 @@ import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import {
   accountFollowed as accountFollowedAction,
-  accountEdited as accountEditedAction,
+  accountEdited as accountEditedAction
 } from '../../../actions/accounts';
 import { P, Small } from '../../shared/toolBox/typography';
 import { decodeLaunchUrl } from '../../../utilities/qrCode';
 import { tokenMap } from '../../../constants/tokens';
 import { validateAddress } from '../../../utilities/validators';
 import { stringShortener } from '../../../utilities/helpers';
+import DropDownHolder from '../../../utilities/alert';
 
 @connect(
-  state => ({ accounts: state.accounts.followed, activeToken: state.settings.token.active }),
+  (state) => ({
+    accounts: state.accounts.followed,
+    activeToken: state.settings.token.active,
+    followedAccounts: state.accounts.followed || []
+  }),
   { accountFollowed: accountFollowedAction, accountEdited: accountEditedAction }
 )
 class AddToBookmark extends React.Component {
   activeInputRef = null;
 
-  validateLabel = str => {
+  validateLabel = (str) => {
     if (str === '') {
       return -1;
     }
@@ -43,13 +49,13 @@ class AddToBookmark extends React.Component {
     header: true,
     address: {
       value: '',
-      validity: 0,
+      validity: 0
     },
     label: {
       value: '',
-      validity: 0,
+      validity: 0
     },
-    avatarPreview: false,
+    avatarPreview: false
   };
 
   componentDidMount() {
@@ -61,11 +67,11 @@ class AddToBookmark extends React.Component {
       }, 300);
     } else {
       const editMode = accounts[activeToken]
-        .filter(item => item.address === account.address).length > 0;
+        .filter((item) => item.address === account.address).length > 0;
       this.setState({
         editMode,
         label: { value: account.label || '' },
-        incomingData: account,
+        incomingData: account
       });
       setTimeout(() => {
         if (this.labelRef) this.labelRef.focus();
@@ -91,12 +97,12 @@ class AddToBookmark extends React.Component {
   setAvatarPreviewTimeout = () => {
     this.avatarPreviewTimeout = setTimeout(() => {
       this.setState({
-        avatarPreview: true,
+        avatarPreview: true
       });
     }, 300);
   };
 
-  onQRCodeRead = data => {
+  onQRCodeRead = (data) => {
     const decodedData = decodeLaunchUrl(data);
     this.setAddress(decodedData.address);
     this.scannedData = decodedData;
@@ -104,42 +110,44 @@ class AddToBookmark extends React.Component {
   };
 
   onCloseScanner = () => {
-    this.props.navigation.dispatch(
-      CommonActions.setParams({ action: false })
-    );
+    this.props.navigation.dispatch(CommonActions.setParams({ action: false }));
   };
 
-  setAddress = value => {
+  setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
     if (validateAddress(this.props.activeToken, value) === 0) {
       this.setAvatarPreviewTimeout();
     }
     this.setState({
       address: { value },
-      avatarPreview: false,
+      avatarPreview: false
     });
   };
 
-  setLabel = value => {
+  setLabel = (value) => {
     this.setState({
       label: {
         value,
-        validity: this.validateLabel(value),
-      },
+        validity: this.validateLabel(value)
+      }
     });
   };
 
   // eslint-disable-next-line max-statements
   submitForm = () => {
     const {
-      accountFollowed,
-      navigation,
-      accountEdited,
-      activeToken,
+      accountFollowed, navigation, accountEdited, activeToken, followedAccounts, t
     } = this.props;
     const {
       address, label, incomingData, editMode
     } = this.state;
+    const accountList = followedAccounts[activeToken];
+    const filteredAccount = accountList?.filter(
+      (account) => account.label.toLocaleLowerCase() === label.value.toLocaleLowerCase()
+    );
+    if (filteredAccount?.length) {
+      return DropDownHolder.error(t('multisignature.error.title'), t('multisignature.error.copy'));
+    }
     const addressValidity = validateAddress(activeToken, address.value);
     const labelValidity = this.validateLabel(label.value);
     if (incomingData && labelValidity === 0) {
@@ -153,12 +161,12 @@ class AddToBookmark extends React.Component {
       this.setState({
         address: {
           value: address.value,
-          validity: addressValidity,
+          validity: addressValidity
         },
         label: {
           value: label.value,
-          validity: labelValidity,
-        },
+          validity: labelValidity
+        }
       });
     }
   };
@@ -173,7 +181,7 @@ class AddToBookmark extends React.Component {
     const shouldDisplayAvatar = activeToken === tokenMap.LSK.key;
     const errors = {
       label: t('The label must be shorter than 20 characters.'),
-      address: t('Invalid address.'),
+      address: t('Invalid address.')
     };
     const setError = (validity, fieldName) => {
       switch (validity) {
@@ -189,7 +197,7 @@ class AddToBookmark extends React.Component {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
-          ref={el => {
+          ref={(el) => {
             this.scanner = el;
           }}
           navigation={navigation}
@@ -202,11 +210,11 @@ class AddToBookmark extends React.Component {
         <KeyboardAwareScrollView
           onSubmit={this.submitForm}
           button={{
-            title: editMode ? t('Save changes') : t('Add to bookmarks'),
+            title: editMode ? t('Save changes') : t('Add to bookmarks')
           }}
           styles={{
             container: styles.container,
-            innerContainer: styles.innerContainer,
+            innerContainer: styles.innerContainer
           }}
         >
           <View style={styles.form}>
@@ -214,29 +222,19 @@ class AddToBookmark extends React.Component {
               <View style={styles.addressContainer}>
                 <IconButton
                   onPress={() => this.scanner.toggleCamera()}
-                  titleStyle={[
-                    styles.scanButtonTitle,
-                    styles.theme.scanButtonTitle,
-                  ]}
-                  style={[
-                    styles.scanButton,
-                    lng === 'de' ? styles.longTitle : null,
-                  ]}
+                  titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
+                  style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
                   title={t('Scan')}
                   icon="scanner"
                   iconSize={18}
                   color={colors.light.ultramarineBlue}
                 />
                 {shouldDisplayAvatar ? (
-                  <Avatar
-                    style={styles.avatar}
-                    address={address.value}
-                    size={24}
-                  />
+                  <Avatar style={styles.avatar} address={address.value} size={24} />
                 ) : null}
                 <Input
                   label={t('Address')}
-                  reference={input => {
+                  reference={(input) => {
                     this.addressRef = input;
                   }}
                   autoCorrect={false}
@@ -245,9 +243,9 @@ class AddToBookmark extends React.Component {
                     input: [
                       styles.input,
                       styles.addressInput,
-                      shouldDisplayAvatar ? styles.addressInputWithAvatar : {},
+                      shouldDisplayAvatar ? styles.addressInputWithAvatar : {}
                     ],
-                    containerStyle: styles.addressInputContainer,
+                    containerStyle: styles.addressInputContainer
                   }}
                   onChange={this.setAddress}
                   value={address.value}
@@ -276,7 +274,7 @@ class AddToBookmark extends React.Component {
             )}
             <Input
               label={t('Label')}
-              reference={input => {
+              reference={(input) => {
                 this.labelRef = input;
               }}
               autoCorrect={false}
