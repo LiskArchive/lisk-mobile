@@ -9,7 +9,7 @@ export default () => ({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      borderBottomWidth: 2,
+      borderBottomWidth: 1,
       paddingBottom: 15,
       marginBottom: 15
     },
