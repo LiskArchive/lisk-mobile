@@ -222,12 +222,6 @@ class Home extends React.Component {
     }
   }
 
-  onScroll = Animated.event([
-    {
-      nativeEvent: { contentOffset: { y: this.scrollY } }
-    }
-  ]);
-
   onRefresh = () => {
     this.setState({ refreshing: true });
     this.props.updateTransactions();
@@ -260,7 +254,6 @@ class Home extends React.Component {
           //   this.scrollView = el;
           // }}
           scrollEventThrottle={8}
-          onScroll={this.onScroll}
           style={[styles.scrollView]}
           refresh={updateTransactions}
           loadMore={() => {

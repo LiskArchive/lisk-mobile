@@ -3,28 +3,65 @@ import { themes, colors } from '../../../constants/styleGuide';
 export default () => ({
   common: {
     container: {
+      flex: 1
+    },
+    flex: {
       flex: 1,
-      backgroundColor: colors.light.white,
+      zIndex: 10
+    },
+    loadingContainer: {
+      flex: 1,
+      alignItems: 'center'
     },
     scrollView: {
-      paddingTop: 220,
+      paddingTop: 220
+    },
+    titleContainer: {
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      marginBottom: -30
     },
     accountSummary: {
       zIndex: 2,
       position: 'absolute',
       left: 0,
       top: 0,
-      width: '100%',
+      width: '100%'
     },
+    fixedBottom: {
+      bottom: 0,
+      position: 'absolute',
+      height: 60,
+      right: 0,
+      left: 0
+    }
   },
   [themes.light]: {
-    container: {
-      backgroundColor: colors.light.white,
+    titleContainer: {
+      backgroundColor: colors.light.white
     },
+    title: {
+      color: colors.light.black
+    },
+    container: {
+      backgroundColor: colors.light.whiteSmoke
+    },
+    fixedBottom: {
+      backgroundColor: colors.light.white
+    }
   },
   [themes.dark]: {
-    container: {
-      backgroundColor: colors.dark.mainBg,
+    titleContainer: {
+      backgroundColor: colors.dark.black
     },
-  },
+    container: {
+      backgroundColor: colors.dark.textInputBg
+    },
+    title: {
+      color: colors.dark.white
+    },
+    fixedBottom: {
+      backgroundColor: colors.dark.black
+    }
+  }
 });
