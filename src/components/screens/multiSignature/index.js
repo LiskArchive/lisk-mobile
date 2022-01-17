@@ -29,41 +29,55 @@ const MultiSignature = ({
         onRightPress={navigation.goBack}
         rightIcon={'cross'}
         rightColor={colors.light.ultramarineBlue}
+        containerStyle={styles.header}
       />
       <ScrollView>
         <View style={[styles.container]}>
           <P style={[styles.copy, styles.theme.copy]}>{t('multisignature.copy1')}</P>
-          <P style={[styles.copy, styles.theme.copy]}>{t('multisignature.copy2')}</P>
-          <InfoComponent
-            text={t('multisignature.info.copy')}
-            buttonText={t('multisignature.info.button')}
-            onPress={openLiskDesktopDownload}
-          />
+          <P style={[styles.copy, styles.theme.copy]}>{t('multisignature.copy2', { numberOfSignatures })}</P>
+          <View style={styles.infoContainer}>
+            <InfoComponent
+              text={t('multisignature.info.copy')}
+              buttonText={t('multisignature.info.button')}
+              onPress={openLiskDesktopDownload}
+            />
+          </View>
           <View>
-            <View style={[styles.signatureListContainer, styles.theme.signatureListContainer]} >
-            {memberList?.map((member, i) => (
-              <View key={member.address} style={[styles.row, styles.signatureList]} >
-                <P style={styles.theme.light} >{i + 1}.</P>
-                <View style={styles.avatarContainer} >
-                <Avatar address={member.address} size={40} />
+            <View style={[styles.signatureListContainer, styles.theme.signatureListContainer]}>
+              {[
+                ...memberList,
+                ...memberList,
+                ...memberList,
+                ...memberList,
+                ...memberList,
+                ...memberList,
+                ...memberList,
+                ...memberList
+              ]?.map((member, i) => (
+                <View key={member.address} style={[styles.row, styles.signatureList]}>
+                  <P style={styles.theme.light}>{i + 1}.</P>
+                  <View style={styles.avatarContainer}>
+                    <Avatar address={member.address} size={40} />
                   </View>
-                <View style={styles.row} >
-                  <View style={styles.detailsContainer} >
-                    <B style={styles.theme.copy} >{stringShortener(member.address, 7, 5)}</B>
-                    <P style={styles.theme.light}>{stringShortener(member.publicKey, 5, 4)}</P>
+                  <View style={styles.row}>
+                    <View style={styles.detailsContainer}>
+                      <B style={styles.theme.copy}>{stringShortener(member.address, 7, 5)}</B>
+                      <P style={styles.theme.light}>{stringShortener(member.publicKey, 5, 4)}</P>
+                    </View>
+                    <P style={styles.theme.copy}>
+                      {member.isMandatory
+                        ? t('multisignature.mandatory')
+                        : t('multisignature.optional')}
+                    </P>
                   </View>
-                <P style={styles.theme.copy} >
-                    {member.isMandatory
-                      ? t('multisignature.mandatory')
-                      : t('multisignature.optional')}
-                </P>
-              </View>
-              </View>
-            ))}
+                </View>
+              ))}
             </View>
             <View>
-              <B style={[styles.theme.copy, styles.requiredTitle]} >{t('multisignature.required')}</B>
-              <P style={styles.theme.copy} >{numberOfSignatures}</P>
+              <B style={[styles.theme.copy, styles.requiredTitle]}>
+                {t('multisignature.required')}
+              </B>
+              <P style={styles.theme.copy}>{numberOfSignatures}</P>
             </View>
           </View>
         </View>

@@ -6,12 +6,18 @@ export default () => ({
     container: {
       padding: 20
     },
+    header: {
+      paddingTop: 20,
+    },
     copy: {
       fontSize: fonts.size.base,
       marginBottom: 10,
     },
     row: {
       flexDirection: 'row'
+    },
+    infoContainer: {
+      paddingTop: 15,
     },
     signatureList: {
       paddingVertical: 10,

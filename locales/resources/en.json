@@ -245,7 +245,7 @@
   "Multisignature account details": "Multisignature account details",
   "multisignature": {
     "copy1": "This is a multisignature account, which allows a group of users to control shared LSK.",
-    "copy2": "This account requires 2 signatures to createa transaction.",
+    "copy2": "This account requires {{numberOfSignatures}} signatures to create a transaction.",
     "info": {
       "copy": "Available on desktop only",
       "button": "use desktop"
