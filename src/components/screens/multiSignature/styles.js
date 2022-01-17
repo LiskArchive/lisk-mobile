@@ -39,7 +39,7 @@ export default () => ({
       paddingLeft: 10,
     },
     moreButton: {
-      paddingLeft: 25,
+      paddingLeft: 38,
       paddingTop: 10,
       marginBottom: 10,
     },

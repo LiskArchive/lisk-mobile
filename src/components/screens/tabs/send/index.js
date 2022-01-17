@@ -164,7 +164,7 @@ class Send extends React.Component {
             <View style={styles.illustrationWrapper}>
               <SendLSKIllustrationSvg />
             </View>
-            <P style={styles.theme.copy}>{t('multisignature.send.copy')}</P>
+            <P style={styles.theme.copy}>{t('multisignature.send.description')}</P>
             <TouchableOpacity style={styles.buttonContainer} onPress={this.openLiskDesktopDownload}>
               <B style={styles.theme.button}>{t('multisignature.send.button')}</B>
             </TouchableOpacity>

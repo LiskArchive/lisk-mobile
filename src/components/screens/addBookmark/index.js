@@ -146,7 +146,7 @@ class AddToBookmark extends React.Component {
       (account) => account.label.toLocaleLowerCase() === label.value.toLocaleLowerCase()
     );
     if (filteredAccount?.length) {
-      return DropDownHolder.error(t('multisignature.error.title'), t('multisignature.error.copy'));
+      return DropDownHolder.error(t('multisignature.error.title'), t('multisignature.error.description'));
     }
     const addressValidity = validateAddress(activeToken, address.value);
     const labelValidity = this.validateLabel(label.value);

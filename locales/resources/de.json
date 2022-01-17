@@ -243,8 +243,8 @@
   "Insert public address": "",
   "Multisignature account details": "",
   "multisignature": {
-    "copy1": "",
-    "copy2": "",
+    "description1": "",
+    "description2": "",
     "info": {
       "copy": "",
       "button": ""
@@ -254,10 +254,10 @@
     "required": "",
     "error": {
       "title": "",
-      "copy": "."
+      "description": "."
     },
     "send": {
-      "copy": "",
+      "description": "",
       "button": ""
     },
     "showMore": "",

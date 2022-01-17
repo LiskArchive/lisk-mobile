@@ -43,13 +43,13 @@ const MultiSignature = ({
       />
       <ScrollView>
         <View style={[styles.container]}>
-          <P style={[styles.copy, styles.theme.copy]}>{t('multisignature.copy1')}</P>
+          <P style={[styles.copy, styles.theme.copy]}>{t('multisignature.description1')}</P>
           <P style={[styles.copy, styles.theme.copy]}>
-            {t('multisignature.copy2', { numberOfSignatures })}
+            {t('multisignature.description2', { numberOfSignatures })}
           </P>
           <View style={styles.infoContainer}>
             <InfoComponent
-              text={t('multisignature.info.copy')}
+              text={t('multisignature.info.description')}
               buttonText={t('multisignature.info.button')}
               onPress={openLiskDesktopDownload}
             />
