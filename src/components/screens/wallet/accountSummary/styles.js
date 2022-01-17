@@ -18,7 +18,8 @@ export default () => ({
       marginBottom: 5
     },
     copy: {
-      fontSize: fonts.size.base
+      fontSize: fonts.size.base,
+      lineHeight: 18
     },
     icon: {
       marginTop: 3,

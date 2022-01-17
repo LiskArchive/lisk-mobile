@@ -176,7 +176,9 @@ class Wallet extends React.Component {
   render() {
     const { transactions, account } = this.state;
 
-    const { styles, navigation, t } = this.props;
+    const {
+      styles, navigation, t
+    } = this.props;
 
     let content = null;
 
@@ -204,7 +206,7 @@ class Wallet extends React.Component {
           count={transactions.count}
           renderTitle={() => (
             <View style={[styles.titleContainer, styles.theme.titleContainer]}>
-              <H3>{t('Activity')}</H3>
+              <H3 style={styles.theme.title}>{t('Activity')}</H3>
             </View>
           )}
           render={(refreshing) =>
@@ -228,7 +230,7 @@ class Wallet extends React.Component {
 
     return (
       <View style={[styles.container, styles.theme.container]}>
-        <SafeAreaView style={styles.flex}>
+        <SafeAreaView style={[styles.flex]}>
           <HeaderBackButton
             title="Account Details"
             onPress={this.props.navigation.goBack}
@@ -248,6 +250,7 @@ class Wallet extends React.Component {
           ) : null}
           {content}
         </SafeAreaView>
+        <View style={[styles.fixedBottom, styles.theme.fixedBottom]} />
       </View>
     );
   }

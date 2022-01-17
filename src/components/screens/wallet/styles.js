@@ -6,7 +6,8 @@ export default () => ({
       flex: 1
     },
     flex: {
-      flex: 1
+      flex: 1,
+      zIndex: 10
     },
     loadingContainer: {
       flex: 1,
@@ -18,7 +19,7 @@ export default () => ({
     titleContainer: {
       paddingHorizontal: 20,
       paddingVertical: 10,
-      marginBottom: -30,
+      marginBottom: -30
     },
     accountSummary: {
       zIndex: 2,
@@ -26,14 +27,27 @@ export default () => ({
       left: 0,
       top: 0,
       width: '100%'
+    },
+    fixedBottom: {
+      bottom: 0,
+      position: 'absolute',
+      height: 60,
+      right: 0,
+      left: 0
     }
   },
   [themes.light]: {
     titleContainer: {
       backgroundColor: colors.light.white
     },
+    title: {
+      color: colors.light.black
+    },
     container: {
       backgroundColor: colors.light.whiteSmoke
+    },
+    fixedBottom: {
+      backgroundColor: colors.light.white
     }
   },
   [themes.dark]: {
@@ -42,6 +56,12 @@ export default () => ({
     },
     container: {
       backgroundColor: colors.dark.textInputBg
+    },
+    title: {
+      color: colors.dark.white
+    },
+    fixedBottom: {
+      backgroundColor: colors.dark.black
     }
   }
 });
