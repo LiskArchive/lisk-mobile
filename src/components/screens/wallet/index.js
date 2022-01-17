@@ -25,6 +25,7 @@ import modalHolder from '../../../utilities/modal';
 import DeleteBookmarkModal from '../../shared/bookmarks/deleteBookmarkModal';
 import BookmarkSvg from '../../../assets/svgs/BookmarkSvg';
 import { H3 } from '../../shared/toolBox/typography';
+import LoadingBar from '../../shared/loading';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -38,7 +39,8 @@ import { H3 } from '../../shared/toolBox/typography';
 @connect(
   (state) => ({
     followedAccounts: state.accounts.followed || [],
-    activeToken: state.settings.token.active
+    activeToken: state.settings.token.active,
+    loading: state.loading
   }),
   {
     loadingStarted: loadingStartedAction,
@@ -173,6 +175,7 @@ class Wallet extends React.Component {
     }
   };
 
+
   render() {
     const { transactions, account } = this.state;
 
@@ -207,6 +210,7 @@ class Wallet extends React.Component {
           renderTitle={() => (
             <View style={[styles.titleContainer, styles.theme.titleContainer]}>
               <H3 style={styles.theme.title}>{t('Activity')}</H3>
+              <LoadingBar loading={!!this.props.loading?.length} />
             </View>
           )}
           render={(refreshing) =>
