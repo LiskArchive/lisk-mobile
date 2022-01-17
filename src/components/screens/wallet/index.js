@@ -24,6 +24,7 @@ import HeaderBackButton from '../router/headerBackButton';
 import modalHolder from '../../../utilities/modal';
 import DeleteBookmarkModal from '../../shared/bookmarks/deleteBookmarkModal';
 import BookmarkSvg from '../../../assets/svgs/BookmarkSvg';
+import { H3 } from '../../shared/toolBox/typography';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -43,7 +44,7 @@ import BookmarkSvg from '../../../assets/svgs/BookmarkSvg';
     loadingStarted: loadingStartedAction,
     loadingFinished: loadingFinishedAction,
     accountFollowed: accountFollowedAction,
-    accountUnFollowed: accountUnFollowedAction,
+    accountUnFollowed: accountUnFollowedAction
   }
 )
 class Wallet extends React.Component {
@@ -175,7 +176,7 @@ class Wallet extends React.Component {
   render() {
     const { transactions, account } = this.state;
 
-    const { styles, navigation } = this.props;
+    const { styles, navigation, t } = this.props;
 
     let content = null;
 
@@ -201,6 +202,11 @@ class Wallet extends React.Component {
           loadMore={this.loadMore}
           list={listElements}
           count={transactions.count}
+          renderTitle={() => (
+            <View style={[styles.titleContainer, styles.theme.titleContainer]}>
+              <H3>{t('Activity')}</H3>
+            </View>
+          )}
           render={(refreshing) =>
             transactions.count > 0 ? (
               <Transactions
@@ -210,6 +216,7 @@ class Wallet extends React.Component {
                 navigate={navigation.push}
                 account={account}
                 refreshing={refreshing}
+                noTitle
               />
             ) : (
               <Empty refreshing={refreshing} />
