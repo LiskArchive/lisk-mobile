@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
-import { View, SafeAreaView, ScrollView, Linking } from 'react-native';
+import {
+  View, SafeAreaView, ScrollView, Linking
+} from 'react-native';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { B, P } from '../../shared/toolBox/typography';
@@ -51,9 +53,9 @@ const MultiSignature = ({
                     <P style={styles.theme.light}>{stringShortener(member.publicKey, 5, 4)}</P>
                   </View>
                 <P style={styles.theme.copy} >
-                  {member.isMandatory
-                    ? `(${t('multisignature.mandatory')})`
-                    : `(${t('multisignature.optional')})`}
+                    {member.isMandatory
+                      ? t('multisignature.mandatory')
+                      : t('multisignature.optional')}
                 </P>
               </View>
               </View>
