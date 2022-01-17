@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   View, SafeAreaView, ScrollView, Linking
 } from 'react-native';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { B, P } from '../../shared/toolBox/typography';
 import withTheme from '../../shared/withTheme';
 import HeaderBackButton from '../router/headerBackButton';
@@ -16,10 +17,19 @@ import { colors } from '../../../constants/styleGuide';
 const MultiSignature = ({
   t, styles, navigation, multiSigAccount
 }) => {
-  const memberList = useMemo(() => multiSigAccount?.members, [multiSigAccount]);
+  const [showAll, setShowAll] = useState(false);
+  const memberList = useMemo(
+    () => multiSigAccount?.members,
+    [multiSigAccount]
+  );
   const numberOfSignatures = useMemo(() => multiSigAccount?.numberOfSignatures, [multiSigAccount]);
 
   const openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet');
+
+  const listToShow = useMemo(
+    () => (showAll ? memberList : memberList?.slice(0, 4)),
+    [memberList, showAll]
+  );
 
   return (
     <SafeAreaView style={styles.theme.container}>
@@ -34,7 +44,9 @@ const MultiSignature = ({
       <ScrollView>
         <View style={[styles.container]}>
           <P style={[styles.copy, styles.theme.copy]}>{t('multisignature.copy1')}</P>
-          <P style={[styles.copy, styles.theme.copy]}>{t('multisignature.copy2', { numberOfSignatures })}</P>
+          <P style={[styles.copy, styles.theme.copy]}>
+            {t('multisignature.copy2', { numberOfSignatures })}
+          </P>
           <View style={styles.infoContainer}>
             <InfoComponent
               text={t('multisignature.info.copy')}
@@ -44,18 +56,9 @@ const MultiSignature = ({
           </View>
           <View>
             <View style={[styles.signatureListContainer, styles.theme.signatureListContainer]}>
-              {[
-                ...memberList,
-                ...memberList,
-                ...memberList,
-                ...memberList,
-                ...memberList,
-                ...memberList,
-                ...memberList,
-                ...memberList
-              ]?.map((member, i) => (
+              {listToShow?.map((member, i) => (
                 <View key={member.address} style={[styles.row, styles.signatureList]}>
-                  <P style={styles.theme.light}>{i + 1}.</P>
+                  <P style={[styles.number, styles.theme.light]}>{i + 1}.</P>
                   <View style={styles.avatarContainer}>
                     <Avatar address={member.address} size={40} />
                   </View>
@@ -72,6 +75,16 @@ const MultiSignature = ({
                   </View>
                 </View>
               ))}
+              {memberList?.length > 4 && !showAll && (
+                <TouchableOpacity style={styles.moreButton} onPress={() => setShowAll(true)}>
+                  <B style={[styles.theme.moreButton]}>{t('multisignature.showMore')}</B>
+                </TouchableOpacity>
+              )}
+              {memberList?.length > 4 && showAll && (
+                <TouchableOpacity style={styles.moreButton} onPress={() => setShowAll(false)}>
+                  <B style={[styles.theme.moreButton]}>{t('multisignature.showLess')}</B>
+                </TouchableOpacity>
+              )}
             </View>
             <View>
               <B style={[styles.theme.copy, styles.requiredTitle]}>

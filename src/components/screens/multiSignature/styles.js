@@ -37,6 +37,14 @@ export default () => ({
     },
     avatarContainer: {
       paddingLeft: 10,
+    },
+    moreButton: {
+      paddingLeft: 25,
+      paddingTop: 10,
+      marginBottom: 10,
+    },
+    number: {
+      width: 25,
     }
   },
   [themes.light]: {
@@ -52,6 +60,9 @@ export default () => ({
     },
     signatureListContainer: {
       borderBottomColor: setColorOpacity(colors.light.black, 0.15)
+    },
+    moreButton: {
+      color: colors.light.ultramarineBlue
     }
   },
   [themes.dark]: {
@@ -67,6 +78,9 @@ export default () => ({
     },
     signatureListContainer: {
       borderBottomColor: setColorOpacity(colors.dark.white, 0.3)
+    },
+    moreButton: {
+      color: colors.dark.ultramarineBlue
     }
   }
 });

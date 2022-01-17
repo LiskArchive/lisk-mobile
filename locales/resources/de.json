@@ -240,5 +240,27 @@
   "will be available to unlock": "... ~ {{timeToUnlock}}",
   "available to unlock (only on desktop)": "",
   "Insert public address or a name": "",
-  "Insert public address": ""
+  "Insert public address": "",
+  "Multisignature account details": "",
+  "multisignature": {
+    "copy1": "",
+    "copy2": "",
+    "info": {
+      "copy": "",
+      "button": ""
+    },
+    "mandatory": "",
+    "optional": "",
+    "required": "",
+    "error": {
+      "title": "",
+      "copy": "."
+    },
+    "send": {
+      "copy": "",
+      "button": ""
+    },
+    "showMore": "",
+    "showLess": ""
+  }
 }

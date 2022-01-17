@@ -260,6 +260,8 @@
     "send": {
       "copy": "Sending transaction using multisignature accounts is available only on Lisk Desktop . ",
       "button": "use desktop"
-    }
+    },
+    "showMore": "Show more...",
+    "showLess": "Show less..."
   }
 }
