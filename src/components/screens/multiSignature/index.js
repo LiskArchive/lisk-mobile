@@ -14,8 +14,8 @@ import { colors } from '../../../constants/styleGuide';
 const MultiSignature = ({
   t, styles, navigation, multiSigAccount
 }) => {
-  const memberList = useMemo(() => multiSigAccount.members, [multiSigAccount]);
-  const numberOfSignatures = useMemo(() => multiSigAccount.numberOfSignatures, [multiSigAccount]);
+  const memberList = useMemo(() => multiSigAccount?.members, [multiSigAccount]);
+  const numberOfSignatures = useMemo(() => multiSigAccount?.numberOfSignatures, [multiSigAccount]);
 
   const openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet')
 
