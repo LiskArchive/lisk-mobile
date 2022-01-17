@@ -175,7 +175,6 @@ class Wallet extends React.Component {
     }
   };
 
-
   render() {
     const { transactions, account } = this.state;
 
