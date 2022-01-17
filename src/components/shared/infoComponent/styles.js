@@ -1,4 +1,4 @@
-import { themes, colors, fonts } from '../../../constants/styleGuide';
+import { themes, colors } from '../../../constants/styleGuide';
 import { setColorOpacity } from '../../../utilities/helpers';
 
 export default () => ({
