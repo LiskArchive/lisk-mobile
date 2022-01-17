@@ -200,8 +200,6 @@ class Wallet extends React.Component {
             this.scrollView = el;
           }}
           scrollEventThrottle={8}
-          // onScroll={onScroll}
-          // contentContainerStyle={[styles.scrollView]}
           refresh={this.refresh.bind(this)}
           loadMore={this.loadMore}
           list={listElements}
