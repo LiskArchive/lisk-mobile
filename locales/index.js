@@ -9,7 +9,6 @@ i18n.init({
   defaultNS: 'common',
   saveMissing: true,
   debug: false,
-  keySeparator: '>',
   nsSeparator: '|',
 });
 

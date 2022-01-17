@@ -72,7 +72,7 @@ export default () => ({
     },
     address: {
       fontWeight: 'bold',
-      // marginLeft: 10,
+      flex: 1,
     },
     staticAddressContainer: {
       flexDirection: 'row',

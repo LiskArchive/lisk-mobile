@@ -22,7 +22,9 @@ export default () => ({
     input: {
       marginTop: 0,
       flexWrap: 'wrap',
+      borderRadius: 10,
       flex: 1,
+      fontFamily: fonts.family.contextSemiBold,
     },
     scanButton: {
       position: 'absolute',
@@ -38,6 +40,9 @@ export default () => ({
     longTitle: {
       right: boxes.boxPadding - 5,
       width: 90,
+    },
+    titleContainer: {
+      paddingHorizontal: 20,
     },
     addressContainer: {
       width: '100%',
@@ -86,6 +91,12 @@ export default () => ({
     inputLabel: {
       color: colors.light.maastrichtBlue,
     },
+    input: {
+      borderColor: colors.light.zodiacBlue
+    },
+    title: {
+      color: colors.light.maastrichtBlue
+    },
   },
   [themes.dark]: {
     wrapper: {
@@ -95,7 +106,13 @@ export default () => ({
       color: colors.light.platinum,
     },
     inputLabel: {
-      color: colors.light.platinum,
+      color: colors.light.white,
+    },
+    input: {
+      borderColor: colors.dark.footerBg
+    },
+    title: {
+      color: colors.dark.white
     },
   },
 });

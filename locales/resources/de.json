@@ -238,5 +238,29 @@
   "Locked balance details": "",
   "Find details of your locked balance and the unlock waiting period.": "",
   "will be available to unlock": "... ~ {{timeToUnlock}}",
-  "available to unlock (only on desktop)": ""
+  "available to unlock (only on desktop)": "",
+  "Insert public address or a name": "",
+  "Insert public address": "",
+  "Multisignature account details": "",
+  "multisignature": {
+    "description1": "",
+    "description2": "",
+    "info": {
+      "copy": "",
+      "button": ""
+    },
+    "mandatory": "",
+    "optional": "",
+    "required": "",
+    "error": {
+      "title": "",
+      "description": "."
+    },
+    "send": {
+      "description": "",
+      "button": ""
+    },
+    "showMore": "",
+    "showLess": ""
+  }
 }

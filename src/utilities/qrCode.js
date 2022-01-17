@@ -11,7 +11,7 @@ export const decodeLaunchUrl = data => {
       ? data.match(amountReg)[0].replace('amount=', '')
       : '';
     const reference = data.match(referenceReg)
-      ? data.match(referenceReg)[0].replace('reference=', '')
+      ? window.decodeURIComponent(data.match(referenceReg)[0].replace('reference=', ''))
       : '';
 
     return { address, amount, reference };

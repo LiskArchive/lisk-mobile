@@ -22,7 +22,8 @@ const light = {
   ...common,
   outgoingArrow: common.maastrichtBlue,
   headerBg: common.whiteSmoke,
-  tabBarText: common.black
+  tabBarText: common.black,
+  athensWhite: '#F7F9FB',
 };
 
 const dark = {

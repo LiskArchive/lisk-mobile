@@ -15,6 +15,20 @@ export default () => ({
       paddingTop: 20,
       marginTop: 10,
     },
+    avatarContainer: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    avatar: {
+      padding: 10,
+      height: 50,
+      width: 50,
+      borderRadius: 25,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 15,
+      backgroundColor: colors.light.white
+    },
     invisibleTitle: {
       color: 'transparent',
     },

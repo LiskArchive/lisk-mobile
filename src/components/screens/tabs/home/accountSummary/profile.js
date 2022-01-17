@@ -20,6 +20,7 @@ import { stringShortener } from '../../../../../utilities/helpers';
 import { colors, themes } from '../../../../../constants/styleGuide';
 import { IconButton } from '../../../../shared/toolBox/button';
 import Icon from '../../../../shared/toolBox/icon';
+import MultiSignatureSvg from '../../../../../assets/svgs/MultiSignatureSvg';
 
 const blurs = {
   blurBig,
@@ -50,6 +51,7 @@ const Profile = ({
   settings,
   settingsUpdated,
   incognito,
+  isMultiSignature,
   navigation
 }) => {
   const AView = Animated.View;
@@ -79,7 +81,7 @@ const Profile = ({
             style={[
               styles.row,
               {
-                opacity: interpolate([0, height - 120, height - 85], [1, 1, 0])
+                opacity: interpolate([0, height - 200], [1, 0])
               }
             ]}
           >
@@ -107,6 +109,14 @@ const Profile = ({
               </View>
             </AView>
             <AView style={[styles.avatarContainer]}>
+              {isMultiSignature && (
+                <TouchableOpacity
+                  style={[styles.avatar]}
+                  onPress={() => navigation.navigate('Multisignature')}
+                >
+                  <MultiSignatureSvg size={1.2} />
+                </TouchableOpacity>
+              )}
               <Avatar address={account.address} size={50} />
             </AView>
           </AView>
@@ -151,44 +161,49 @@ const Profile = ({
             </View>
             <View style={[styles.row, styles.keyValueRow]}>
               <P style={styles.label}>{t('Locked')}</P>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <AView
-                  style={[
-                    styles.balance,
-                    {
-                      opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
-                      top: interpolate([0, height - 50], [0, height - 120])
-                    }
-                  ]}
-                >
-                  <FormattedNumber
-                    tokenType={token}
+              <TouchableOpacity
+                style={styles.icon}
+                onPress={() => navigation.navigate('LockedBalance')}
+                disabled={Number(normalizedLockedBalance) <= 0}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <AView
                     style={[
-                      styles.theme.homeBalance,
-                      styles.lockedBalance,
-                      settings.incognito ? styles.invisibleTitle : null
+                      styles.balance,
+                      {
+                        opacity: interpolate([0, height - 120, height - 85], [1, 1, 0]),
+                        top: interpolate([0, height - 50], [0, height - 120])
+                      }
                     ]}
-                    type={P}
-                    language={language}
                   >
-                    {normalizedLockedBalance}
-                  </FormattedNumber>
-                  <Image
-                    source={blurs[`blur${lockedSize}`]}
-                    style={[
-                      styles.blur,
-                      styles[`blur${lockedSize}`],
-                      settings.incognito ? styles.visibleBlur : null
-                    ]}
-                  />
-                </AView>
-                {Number(normalizedLockedBalance) > 0 ? <TouchableOpacity
-                  style={styles.icon}
-                  onPress={() => navigation.navigate('LockedBalance')}
-                >
-                  <Icon name="forward" color={colors.light.white} size={28} />
-                </TouchableOpacity> : null}
-              </View>
+                    <FormattedNumber
+                      tokenType={token}
+                      style={[
+                        styles.theme.homeBalance,
+                        styles.lockedBalance,
+                        settings.incognito ? styles.invisibleTitle : null
+                      ]}
+                      type={P}
+                      language={language}
+                    >
+                      {normalizedLockedBalance}
+                    </FormattedNumber>
+                    <Image
+                      source={blurs[`blur${lockedSize}`]}
+                      style={[
+                        styles.blur,
+                        styles[`blur${lockedSize}`],
+                        settings.incognito ? styles.visibleBlur : null
+                      ]}
+                    />
+                  </AView>
+                  {Number(normalizedLockedBalance) > 0 ? (
+                    <View style={styles.icon} onPress={() => navigation.navigate('LockedBalance')}>
+                      <Icon name="forward" color={colors.light.white} size={28} />
+                    </View>
+                  ) : null}
+                </View>
+              </TouchableOpacity>
             </View>
           </AView>
         </ImageBackground>

@@ -35,7 +35,7 @@ class RNParallax extends Component {
   }
 
   getInputRange() {
-    return [-this.getExtraScrollHeight(), 0, this.getHeaderScrollDistance()];
+    return [-this.getExtraScrollHeight(), 0, this.getHeaderScrollDistance() - 50];
   }
 
   getHeaderHeight() {
@@ -81,10 +81,9 @@ class RNParallax extends Component {
 
   getTitleOpacity() {
     const { scrollY } = this.state;
-    const { alwaysShowTitle } = this.props;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
-      outputRange: [1, 1, alwaysShowTitle ? 1 : 0],
+      outputRange: [1, 1, 0],
       extrapolate: 'clamp',
     });
   }

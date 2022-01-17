@@ -21,14 +21,15 @@ const HeaderBackButton = ({
   noIcon,
   rightIcon,
   onRightPress,
-  rightIconComponent
+  rightIconComponent,
+  containerStyle
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
   }
 
   return (
-    <View style={[styles.container, safeArea ? styles.safeArea : null]}>
+    <View style={[styles.container, safeArea ? styles.safeArea : null, containerStyle]}>
       {noIcon ? null : (
         <IconButton
           style={[styles.main, styles.theme.main, style]}

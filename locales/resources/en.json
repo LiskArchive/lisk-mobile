@@ -239,5 +239,29 @@
   "Locked balance details": "Locked balance details",
   "Find details of your locked balance and the unlock waiting period.": "Find details of your locked balance and the unlock waiting period.",
   "will be available to unlock": "will be available to unlock in ~ {{timeToUnlock}}",
-  "available to unlock (only on desktop)": "available to unlock (only on desktop)"
+  "available to unlock (only on desktop)": "available to unlock (only on desktop)",
+  "Insert public address or a name": "Insert public address or a name",
+  "Insert public address": "Insert public address",
+  "Multisignature account details": "Multisignature account details",
+  "multisignature": {
+    "description1": "This is a multisignature account, which allows a group of users to control shared LSK.",
+    "description2": "This account requires {{numberOfSignatures}} signatures to create a transaction.",
+    "info": {
+      "description": "Available on desktop only",
+      "button": "use desktop"
+    },
+    "mandatory": "(Mandatory)",
+    "optional": "(Optional)",
+    "required": "Required signatures",
+    "error": {
+      "title": "A bookmark with this name already exists",
+      "description": "Please choose another name."
+    },
+    "send": {
+      "description": "Sending transaction using multisignature accounts is available only on Lisk Desktop . ",
+      "button": "use desktop"
+    },
+    "showMore": "Show more...",
+    "showLess": "Show less..."
+  }
 }
