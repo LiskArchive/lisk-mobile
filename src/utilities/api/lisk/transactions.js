@@ -1,4 +1,6 @@
+import { Platform } from 'react-native';
 import * as Lisk from '@liskhq/lisk-client';
+import * as LiskAndroidPatch from './utils/index';
 import { apiClient } from './apiClient';
 import {
   isTransfer,
@@ -22,7 +24,7 @@ const getAmount = (tx) => {
  * Normalizes transaction data retrieved from Lisk Core API
  * https://lisk.com/documentation/lisk-core/reference/api.html#/Transactions/get_transactions__id_
  */
-const normalizeTransactionsResponse = (list) =>
+const normalizeTransactionsResponse = (list, block) =>
   list.map((tx) => ({
     id: tx.id,
     senderAddress: tx.sender.address,
@@ -32,7 +34,7 @@ const normalizeTransactionsResponse = (list) =>
     amount: getAmount(tx),
     fee: tx.fee,
     timestamp: tx.block?.timestamp,
-    confirmations: tx.nonce,
+    confirmations: block ? block.height - tx.block?.height + 1 : 0,
     nonce: tx.nonce,
     type: tx.moduleAssetName,
     moduleAssetId: tx.moduleAssetId,
@@ -47,17 +49,18 @@ const normalizeTransactionsResponse = (list) =>
 export const get = async ({
   id, address, limit, offset
 }) => {
+  const block = await apiClient.getLatestBlock();
   if (id !== undefined) {
     const txs = await apiClient.getTransaction(id);
-    return { data: normalizeTransactionsResponse(txs), meta: {} };
+    return { data: normalizeTransactionsResponse(txs, block), meta: {} };
   }
-  const txs = await apiClient.getTransactions(address, limit, offset);
+  const { data, meta } = await apiClient.getTransactions(address, limit, offset);
   return {
-    data: normalizeTransactionsResponse(txs),
+    data: normalizeTransactionsResponse(data, block),
     meta: {
       limit,
       offset,
-      count: txs.length
+      count: meta.total
     }
   };
 };
@@ -85,10 +88,14 @@ export const create = async ({
     },
     signatures: []
   };
+
   const networkIdentifier = Buffer.from(
     config.isTestnet ? config.testnetNetworkID : config.networkID,
     'hex'
   );
+  if (Platform.OS === 'android') {
+    return LiskAndroidPatch.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase);
+  }
   return Lisk.transactions.signTransaction(transferAssetSchema, tx, networkIdentifier, passphrase);
 };
 

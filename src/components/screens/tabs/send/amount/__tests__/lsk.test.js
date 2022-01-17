@@ -85,19 +85,58 @@ test('Should render correct balance of User LSK', () => {
   expect(getAllByText('1 LSK')).toHaveLength(1);
 });
 
-test("Should calculate transaction fee if there's no priority", async (done) => {
+test("Should calculate transaction fee if there's no priority", (done) => {
   const { getAllByText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
     </Provider>
   );
+
   setTimeout(() => {
     expect(getAllByText('0.00138 LSK')).toHaveLength(1);
     done();
   }, 100);
 });
 
-test('Should re-Calculate transaction fee when the amount to send is changed', async (done) => {
+test('Should show error message if amount to send is a negative value', (done) => {
+  const { getAllByText, getByLabelText, getByTestId } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} />
+    </Provider>
+  );
+
+  const input = getByLabelText('amount-input');
+  const button = getByTestId('submit-button');
+  act(() => {
+    fireEvent.changeText(input, '-1');
+    fireEvent.press(button);
+    setTimeout(() => {
+      expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
+      done();
+    }, 1000);
+  });
+});
+
+test('Should show error message if amount to send is not valid', (done) => {
+  const { getAllByText, getByLabelText, getByTestId } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} />
+    </Provider>
+  );
+
+  const input = getByLabelText('amount-input');
+  const button = getByTestId('submit-button');
+  act(() => {
+    fireEvent.changeText(input, 'asdf');
+    fireEvent.press(button);
+    setTimeout(() => {
+      expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
+      done();
+    }, 1000);
+  });
+});
+
+test('Should re-Calculate transaction fee when the amount to send is changed', (done) => {
   const { getAllByText, getByLabelText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -114,16 +153,23 @@ test('Should re-Calculate transaction fee when the amount to send is changed', a
   });
 });
 
-test('Should re-Calculate transaction fee when message is added', async (done) => {
-  const { getAllByText } = render(
+test('Should re-Calculate transaction fee when message is added', (done) => {
+  const { getAllByText, getByLabelText, getByTestId } = render(
     <Provider store={store}>
-      <SendLsk {...mockProps} sharedData={{ reference: 'Message' }} />
+      <SendLsk {...mockProps} />
     </Provider>
   );
-  setTimeout(() => {
-    expect(getAllByText('0.00145 LSK')).toHaveLength(1);
-    done();
-  }, 100);
+
+  const button = getByTestId('open-message-input');
+  fireEvent.press(button);
+  const input = getByLabelText('message-input');
+  act(() => {
+    fireEvent.changeText(input, 'test data');
+    setTimeout(() => {
+      expect(getAllByText('0.00147 LSK')).toHaveLength(1);
+      done();
+    }, 1000);
+  });
 });
 
 describe('Priority', () => {
@@ -137,12 +183,13 @@ describe('Priority', () => {
     jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
   });
 
-  it('Should show priority selection field when priority is gotten', async (done) => {
+  it('Should show priority selection field when priority is gotten', (done) => {
     const { getAllByText } = render(
       <Provider store={store}>
         <SendLsk {...mockProps} />
       </Provider>
     );
+
     setTimeout(() => {
       expect(getAllByText('Low')).toHaveLength(1);
       expect(getAllByText('0.001 LSK')).toHaveLength(1);

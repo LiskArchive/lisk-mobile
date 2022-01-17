@@ -23,6 +23,7 @@ module.exports = {
     'src/utilities/networks.js',
     'src/utilities/passphrase.js',
     'src/utilities/api/account.js',
+    'src/assets',
   ],
   coverageThreshold: {
     global: {

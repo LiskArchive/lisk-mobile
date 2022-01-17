@@ -122,6 +122,11 @@ describe('helpers', () => {
         'test_test_..._test'
       );
     });
+
+    it('should return undefined/null when str is undefined or null', () => {
+      expect(stringShortener(null)).toBeNull();
+      expect(stringShortener()).toBeUndefined();
+    });
   });
 
   describe('removeUndefinedKeys', () => {

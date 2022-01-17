@@ -46,7 +46,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Lisk uses  your comera to scan QRcodes</string>
+	<string>Lisk uses your camera to scan QR codes</string>
 	<key>NSContactsUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSFaceIDUsageDescription</key>
@@ -58,9 +58,9 @@
 	<key>NSMotionUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Lisk uses your photo library to access your stored qr codes.</string>
+	<string>Lisk uses your photo library to access your stored QR codes.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Lisk uses your photo library to access your stored qr codes.</string>
+	<string>Lisk uses your photo library to access your stored QR codes.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 	<key>UIAppFonts</key>

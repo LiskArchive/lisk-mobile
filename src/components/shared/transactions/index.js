@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
-import {
-  View, Animated
-} from 'react-native';
+import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { translate } from 'react-i18next';
@@ -21,21 +19,21 @@ import getStyles from './styles';
  * It performs the initial animation after the user logged in.
  */
 @connect(
-  state => ({
+  (state) => ({
     incognitoMode: state.settings.incognito,
     activeToken: state.settings.token.active,
-    followedAccounts: state.accounts.followed || [],
+    followedAccounts: state.accounts.followed || []
   }),
   {
-    settingsUpdated: settingsUpdatedAction,
+    settingsUpdated: settingsUpdatedAction
   }
 )
 class Transactions extends React.Component {
   state = {
     initialAnimations: {
       opacity: new Animated.Value(0),
-      top: new Animated.Value(20),
-    },
+      top: new Animated.Value(20)
+    }
   };
 
   componentDidMount() {
@@ -44,7 +42,7 @@ class Transactions extends React.Component {
       RNShake.addEventListener('ShakeEvent', () => {
         if (!timeout) {
           this.props.settingsUpdated({
-            incognito: !this.props.incognitoMode,
+            incognito: !this.props.incognitoMode
           });
           timeout = setTimeout(() => {
             timeout = false;
@@ -65,20 +63,20 @@ class Transactions extends React.Component {
     Animated.timing(opacity, {
       toValue: 1,
       duration: 400,
-      delay: 100,
+      delay: 100
     }).start();
     Animated.timing(top, {
       toValue: 0,
       duration: 400,
       delay: 100,
-      easing: easing.easeInOutQuart,
+      easing: easing.easeInOutQuart
     }).start();
   };
 
   toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
     this.props.settingsUpdated({
-      incognito: !this.props.incognitoMode,
+      incognito: !this.props.incognitoMode
     });
   };
 
@@ -94,6 +92,7 @@ class Transactions extends React.Component {
       followedAccounts,
       type,
       t,
+      noTitle
     } = this.props;
 
     const incognito = type === 'home' && incognitoMode;
@@ -103,16 +102,15 @@ class Transactions extends React.Component {
     return (
       <Anim style={[styles.container, styles.theme.container, { opacity, top }]}>
         {!transactions
-          || (transactions.confirmed.length === 0
-            && transactions.pending.length === 0) ? (
+        || (transactions.confirmed.length === 0 && transactions.pending.length === 0) ? (
           <Fragment />
           ) : (
           <Fragment>
-            <View style={styles.innerContainer}>
-              <H3 style={[styles.title, styles.theme.title]}>
-                {t('Activity')}
-              </H3>
-            </View>
+            {noTitle ? null : (
+              <View style={styles.innerContainer}>
+                <H3 style={[styles.title, styles.theme.title]}>{t('Activity')}</H3>
+              </View>
+            )}
             <List
               incognito={incognito}
               navigate={navigate}

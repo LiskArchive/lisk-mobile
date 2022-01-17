@@ -1,5 +1,7 @@
 import React from 'react';
-import { BackHandler } from 'react-native';
+import {
+  BackHandler, View, SafeAreaView, TouchableOpacity, Linking
+} from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 
@@ -12,40 +14,55 @@ import Result from './result';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { tokenMap } from '../../../../constants/tokens';
+import SendLSKIllustrationSvg from '../../../../assets/svgs/SendLSKIllustrationSvg';
+import HeaderBackButton from '../../router/headerBackButton';
+import { B, P } from '../../../shared/toolBox/typography';
 
 @connect(
-  state => ({
+  (state) => ({
     accounts: state.accounts,
-    settings: state.settings,
+    settings: state.settings
   }),
   {}
 )
 class Send extends React.Component {
   state = {
     showProgressBar: true,
-    query: {},
+    query: {}
   };
 
   componentDidMount() {
-    const { navigation } = this.props;
+    const {
+      navigation,
+      accounts,
+      settings,
+      navigation: { setOptions },
+      styles
+    } = this.props;
 
     this.subs = [
       navigation.addListener('focus', this.didFocus),
-      navigation.addListener('blur', this.willBlur),
+      navigation.addListener('blur', this.willBlur)
     ];
+    if (accounts.info[settings.token.active].isMultisignature) {
+      setOptions({
+        title: null,
+        headerLeft: () => (
+          <HeaderBackButton title="Send LSK" noIcon containerStyle={styles.navContainer} />
+        )
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
     // Reset the progress if active token has changed
     if (prevProps.settings.token.active !== this.props.settings.token.active) {
       this.resetMultiStep();
-    } else {
-      this.checkQuery();
     }
   }
 
   componentWillUnmount() {
-    this.subs.forEach(sub => sub?.remove?.());
+    this.subs.forEach((sub) => sub?.remove?.());
   }
 
   resetMultiStep = () => {
@@ -57,7 +74,7 @@ class Send extends React.Component {
   checkQuery = () => {
     const query = this.props.route.params?.query ?? {};
 
-    if (this.state.query !== query && query && Object.keys(query).length) {
+    if (query.address) {
       this.resetMultiStep(query);
     }
   };
@@ -67,10 +84,7 @@ class Send extends React.Component {
       route, accounts, settings, t
     } = this.props;
 
-    BackHandler.addEventListener(
-      'hardwareBackPress',
-      this.onBackButtonPressedAndroid
-    );
+    BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
 
     if (route.params?.initialize ?? false) {
       this.nav.move({
@@ -78,8 +92,8 @@ class Send extends React.Component {
         data: {
           address: accounts.info[settings.token.active].address,
           amount: 0.1,
-          reference: t('Account initialization'),
-        },
+          reference: t('Account initialization')
+        }
       });
     } else {
       this.checkQuery();
@@ -87,17 +101,14 @@ class Send extends React.Component {
   };
 
   willBlur = () => {
-    BackHandler.removeEventListener(
-      'hardwareBackPress',
-      this.onBackButtonPressedAndroid
-    );
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
   };
 
   finalCallback = () => {
     this.props.navigation.navigate({ name: 'Home' });
   };
 
-  hideProgressBar = data => {
+  hideProgressBar = (data) => {
     this.setState({ showProgressBar: !data });
   };
 
@@ -113,51 +124,69 @@ class Send extends React.Component {
     return false;
   };
 
+  openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet');
+
   render() {
     const {
-      styles, accounts, navigation, route, settings
+      styles, accounts, navigation, route, settings, t
     } = this.props;
 
     let steps = [
       {
         component: Recipient,
-        title: 'form',
+        title: 'form'
       },
       {
         component: Amount,
-        title: 'amount',
+        title: 'amount'
       },
       {
         component: Overview,
-        title: 'Overview',
+        title: 'Overview'
       },
       {
         component: Result,
-        title: 'result',
-      },
+        title: 'result'
+      }
     ];
 
     if (accounts.info[settings.token.active].secondPublicKey) {
       steps.splice(3, 0, {
         component: SecondPassphrase,
-        title: 'secondPassphrase',
+        title: 'secondPassphrase'
       });
     }
 
+    if (accounts.info[settings.token.active].isMultisignature) {
+      return (
+        <SafeAreaView style={[styles.flex, styles.theme.multiSigContainer]}>
+          <View style={[styles.multiSigContainer]}>
+            <View style={styles.illustrationWrapper}>
+              <SendLSKIllustrationSvg />
+            </View>
+            <P style={styles.theme.copy}>{t('multisignature.send.description')}</P>
+            <TouchableOpacity style={styles.buttonContainer} onPress={this.openLiskDesktopDownload}>
+              <B style={styles.theme.button}>{t('multisignature.send.button')}</B>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      );
+    }
+
     if (settings.token.active !== tokenMap.LSK.key) {
-      steps = steps.filter(s => s.title !== 'reference');
+      steps = steps.filter((s) => s.title !== 'reference');
     }
 
     return (
       <MultiStep
-        ref={el => {
+        ref={(el) => {
           this.nav = el;
         }}
         navStyles={{ multiStepWrapper: styles.multiStepWrapper }}
         finalCallback={this.finalCallback}
         showProgressBar={this.state.showProgressBar}
       >
-        {steps.map(step => (
+        {steps.map((step) => (
           <step.component
             key={step.title}
             navigation={navigation}

@@ -1,7 +1,7 @@
-import { Dimensions } from 'react-native';
-import { themes, boxes, colors } from '../../../../../constants/styleGuide';
+import {
+  themes, boxes, colors, fonts
+} from '../../../../../constants/styleGuide';
 
-const { height } = Dimensions.get('window');
 export default () => ({
   common: {
     container: {
@@ -9,36 +9,54 @@ export default () => ({
       justifyContent: 'space-between',
       flex: 1,
       backgroundColor: boxes.white,
-      padding: boxes.boxPadding,
+      padding: boxes.boxPadding
+    },
+    subtitle: {
+      textAlign: 'center'
+    },
+    title: {
+      textAlign: 'center',
+      fontSize: fonts.size.h4,
+      marginBottom: 10
+    },
+    illustrationContainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingBottom: 50
     },
     illustration: {
-      width: '100%',
-      height: height <= 640 ? 250 : 350,
-      paddingBottom: 50,
+      marginBottom: 20
     },
     button: {
-      marginTop: 20,
+      marginTop: 20
     },
     anchor: {
       color: colors.light.ultramarineBlue,
       fontWeight: '600',
-      alignSelf: 'center',
-    },
+      alignSelf: 'center'
+    }
   },
   [themes.light]: {
     container: {
-      backgroundColor: colors.light.white,
+      backgroundColor: colors.light.white
     },
     subtitle: {
-      color: colors.light.slateGray,
+      color: colors.light.slateGray
     },
+    title: {
+      color: colors.light.zodiacBlue
+    }
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.mainBg,
+      backgroundColor: colors.dark.mainBg
     },
     subtitle: {
-      color: colors.dark.ghost,
+      color: colors.dark.ghost
     },
-  },
+    title: {
+      color: colors.dark.ghost
+    },
+  }
 });

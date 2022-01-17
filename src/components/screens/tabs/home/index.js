@@ -1,19 +1,20 @@
 /* eslint-disable max-lines */
 import React from 'react';
 import {
-  View, Animated, StatusBar, Platform, RefreshControl
+  View, Animated, StatusBar, Platform, RefreshControl, SafeAreaView
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from '@react-navigation/compat';
 import {
   transactionsReset as transactionsResetAction,
-  transactionsLoaded as transactionsLoadedAction,
+  transactionsLoaded as transactionsLoadedAction
 } from '../../../../actions/transactions';
 import {
   blockUpdated as blockUpdatedAction,
-  accountFetched as accountFetchedAction,
+  accountFetched as accountFetchedAction
 } from '../../../../actions/accounts';
 import { settingsUpdated as settingsUpdatedAction } from '../../../../actions/settings';
+import { getNetworkInfo as getNetworkInfoAction } from '../../../../actions/network';
 import AccountSummary from './accountSummary/home';
 import Transactions from '../../../shared/transactions';
 import Empty from '../../../shared/transactions/empty';
@@ -41,14 +42,14 @@ const summaryHeight = 200;
  * about any unforeseen issue/change
  */
 @connect(
-  state => ({
+  (state) => ({
     account: state.accounts.info || {},
     transactions: state.transactions,
     incognito: state.settings.incognito,
     activeToken: state.settings.token.active,
     btcIntroShown: state.settings.btcIntroShown,
     settings: state.settings,
-    followedAccounts: state.accounts.followed || [],
+    followedAccounts: state.accounts.followed || []
   }),
   {
     transactionsLoaded: transactionsLoadedAction,
@@ -56,6 +57,7 @@ const summaryHeight = 200;
     updateTransactions: blockUpdatedAction,
     accountFetched: accountFetchedAction,
     settingsUpdated: settingsUpdatedAction,
+    getNetworkInfo: getNetworkInfoAction
   }
 )
 class Home extends React.Component {
@@ -63,6 +65,8 @@ class Home extends React.Component {
     footer: null,
     refreshing: false
   };
+
+  canLoadMore = true;
 
   scrollY = new Animated.Value(0);
 
@@ -72,43 +76,35 @@ class Home extends React.Component {
 
   setHeader = () => {
     const {
-      navigation: { setOptions },
+      navigation: { setOptions }
     } = this.props;
     setOptions({
       headerTitle: () => (
-        <HomeHeaderTitle
-          type="home"
-          scrollToTop={this.scrollToTop}
-          scrollY={this.scrollY}
-        />
-      ),
+        <HomeHeaderTitle type="home" scrollToTop={this.scrollToTop} scrollY={this.scrollY} />
+      )
     });
   };
 
   scrollToTop = () => {
     if (this.scrollView) {
-      this.scrollView.scrollTo(0);
+      this.scrollView.scrollTo({ y: 0, animated: true });
     }
-  };
-
-  bindInfiniteScroll = () => {
-    // set param on tab navigator (parent of stack navigator)
-    this.props.navigation.dangerouslyGetParent().setParams({
-      scrollToTop: () => this.scrollToTop(),
-    });
   };
 
   refreshAccountAndTx = () => {
     this.lastActiveToken = this.props.activeToken;
-    this.initialFetchTimeout = setTimeout(() => { resetTxAndFetch(this.props); }, 200);
+    this.initialFetchTimeout = setTimeout(() => {
+      resetTxAndFetch(this.props);
+    }, 200);
     this.props.accountFetched();
   };
 
   screenWillFocus = () => {
     if (this.lastActiveToken === null) {
-      this.bindInfiniteScroll();
       this.setHeader();
-      this.modalTimeout = setTimeout(() => { showIntroModal(this.props); }, 1200);
+      this.modalTimeout = setTimeout(() => {
+        showIntroModal(this.props);
+      }, 1200);
     }
     if (this.lastActiveToken !== this.props.activeToken) {
       this.refreshAccountAndTx();
@@ -122,7 +118,15 @@ class Home extends React.Component {
       settingsUpdated,
       incognito,
       route,
+      activeToken,
+      getNetworkInfo
     } = this.props;
+    if (activeToken) {
+      getNetworkInfo(activeToken);
+    }
+    this.props.navigation.setParams({
+      scrollToTop: this.scrollToTop,
+    });
     addListener('willFocus', this.screenWillFocus);
     if (route.params && route.params.discreet && !incognito) {
       settingsUpdated({ incognito: true });
@@ -136,6 +140,23 @@ class Home extends React.Component {
     }, 1200);
   }
 
+  loadMore = ({ nativeEvent }) => {
+    const isCloseToBottom = ({
+      layoutMeasurement,
+      contentOffset,
+      contentSize,
+    }) => {
+      const paddingToBottom = 20;
+      return (
+        layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom
+      );
+    };
+    if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
+      this.canLoadMore = false;
+      loadMore(this.props);
+    }
+  };
+
   // eslint-disable-next-line max-statements
   componentDidUpdate(prevProps) {
     const {
@@ -145,8 +166,8 @@ class Home extends React.Component {
       activeToken,
       isFocused,
       settings: {
-        token: { list },
-      },
+        token: { list }
+      }
     } = this.props;
     const prevTokenList = prevProps.settings.token.list;
     const prevTransactionCount = prevProps.transactions.pending.length
@@ -154,12 +175,15 @@ class Home extends React.Component {
     const transactionCount = transactions.pending.length + transactions.confirmed.length;
     const shouldUpdateState = prevProps.transactions.loaded !== transactions.loaded
       || prevTransactionCount !== transactionCount;
-
+    const transactionList = transactions.count > 0
+      ? [...transactions.pending, ...transactions.confirmed]
+      : ['emptyState'];
+    if (prevTransactionCount !== transactionList.length) {
+      this.canLoadMore = transactionList.length < transactions.count;
+    }
     if (shouldUpdateState) {
       this.setState({
-        footer:
-          Math.floor((viewportHeight() - summaryHeight) / itemHeight)
-          < transactionCount,
+        footer: Math.floor((viewportHeight() - summaryHeight) / itemHeight) < transactionCount
       });
     }
     if (this.shouldFetchAccounts(prevTokenList, list)) {
@@ -184,25 +208,19 @@ class Home extends React.Component {
   }
 
   shouldFetchAccounts = (prevList, newList) =>
-    Object.keys(prevList).some(token => newList[token] !== prevList[token]);
+    Object.keys(prevList).some((token) => newList[token] !== prevList[token]);
 
   fetchInactiveTokensAccounts() {
     const { activeToken, accountFetched, settings } = this.props;
     const inactiveTokens = tokenKeys.filter(
-      key => settings.token.list[key] && key !== activeToken
+      (key) => settings.token.list[key] && key !== activeToken
     );
     if (inactiveTokens.length > 0) {
-      inactiveTokens.forEach(token => {
+      inactiveTokens.forEach((token) => {
         accountFetched(token);
       });
     }
   }
-
-  onScroll = Animated.event([
-    {
-      nativeEvent: { contentOffset: { y: this.scrollY } },
-    },
-  ]);
 
   onRefresh = () => {
     this.setState({ refreshing: true });
@@ -221,7 +239,7 @@ class Home extends React.Component {
       updateTransactions,
       theme,
       isFocused,
-      activeToken,
+      activeToken
     } = this.props;
     let content = null;
     if (!transactions.loaded) {
@@ -232,28 +250,32 @@ class Home extends React.Component {
         : ['emptyState'];
       content = (
         <InfiniteScrollView
-          ref={el => {
-            this.scrollView = el;
-          }}
+          // ref={(el) => {
+          //   this.scrollView = el;
+          // }}
           scrollEventThrottle={8}
-          onScroll={this.onScroll}
           style={[styles.scrollView]}
           refresh={updateTransactions}
-          loadMore={() => { loadMore(this.props); }}
+          loadMore={() => {
+            loadMore(this.props);
+          }}
           list={listElements}
           count={transactions.count}
-          render={refreshing =>
+          render={(refreshing) =>
             transactions.count > 0 ? (
               <Transactions
                 type="home"
                 transactions={transactions}
                 footer={this.state.footer}
-                navigate={navigation.push}
+                navigate={navigation.navigate}
                 account={account[activeToken]}
                 refreshing={refreshing}
               />
             ) : (
-              <Empty refreshing={refreshing} />
+              <Empty
+                style={[styles.emptyContainer, styles.theme.emptyContainer]}
+                refreshing={refreshing}
+              />
             )
           }
         />
@@ -261,19 +283,18 @@ class Home extends React.Component {
     }
     const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
     return (
-      <View
-        style={[styles.flex, styles.theme.homeContainer]}
-      >
+      <SafeAreaView style={[styles.flex, styles.theme.homeContainer]}>
         {Platform.OS !== 'ios' ? (
           <StatusBar barStyle="light-content" />
         ) : (
-          <StatusBar
-            barStyle={isFocused ? 'light-content' : otherPageStatusBar}
-          />
+          <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
         )}
         <ParallaxHeader
+          reference={(el) => {
+            this.scrollView = el;
+          }}
           headerMinHeight={70}
-          headerMaxHeight={280}
+          headerMaxHeight={260}
           extraScrollHeight={20}
           navbarColor="#3498db"
           alwaysShowTitle={false}
@@ -283,24 +304,25 @@ class Home extends React.Component {
               onRefresh={this.onRefresh}
               refreshing={this.state.refreshing}
               tintColor={
-                this.props.theme === themes.light
-                  ? colors.light.slateGray
-                  : colors.dark.platinum
+                this.props.theme === themes.light ? colors.light.slateGray : colors.dark.platinum
               }
             />
           }
-          title={<AccountSummary
-            navigation={navigation}
-            scrollY={this.scrollY}
-            isFocused={isFocused}
-            incognito={this.props.incognito}
-          />}
+          title={
+            <AccountSummary
+              navigation={navigation}
+              scrollY={this.scrollY}
+              isFocused={isFocused}
+              incognito={this.props.incognito}
+            />
+          }
           renderContent={() => content}
           scrollViewProps={{
-            onScroll: this.onScroll
+            onScroll: this.loadMore
           }}
         />
-      </View>
+        <View style={[styles.fixedBg, styles.theme.fixedBg]}></View>
+      </SafeAreaView>
     );
   }
 }

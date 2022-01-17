@@ -91,7 +91,8 @@
   "Removed votes": "Entfernte Stimmen",
   "Request LSK tokens from other accounts.": "{{tokenType}} Tokens von einem Konto anfragen",
   "Return to home": "Zurück zur Startseite",
-  "Reveal QR code": "Zeige QR Code",
+  "Show QR code": "Zeige QR Code",
+  "Hide QR code": "",
   "Save and continue": "Speichern und weiter",
   "Save changes": "Änderungen speichern",
   "Scan": "scannen",
@@ -113,7 +114,8 @@
   "Sign out": "Abmelden",
   "Store your passphrase:": "Speichere deine Passphrase:",
   "Tap on the QR Code to share it.": "Tippe auf den QR-Code um ihn zu teilen",
-  "Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.": "Vielen Dank. Deine Transaktion wird verarbeitet. Es kann bis zu 15 Minuten dauern um sie zu bestätigen.",
+  "Transaction Submitted": "",
+  "Your transaction has been submitted and will be confirmed in a few moments.": "",
   "The Avatar represents the address, making it easy to recognize.": "Der Avatar stellt die Adresse dar. Hiermit kannst du diese einfacher erkennen.",
   "The address is unique and can’t be changed. It’s yours. Find it in your home page.": "Die Adresse ist einzigartig und kann nicht verändert werden. Du kannst deine Adresse auf dem Homescreen der App finden.",
   "The amount value is invalid.": "Der Betrag ist ungültig.",
@@ -222,7 +224,7 @@
   "Secure authentication": "Sichere Authentifizierung",
   "Access all functions via advanced biometric authentication.": "Greife auf alle Funktionen via biometrischer Authentifizierung zu.",
   "Easy access": "Einfacher Zugriff",
-  "Create an account with one passphrase to access your LSK and BTC cryptocurrencies.": "Erstelle einen Account mit einer Passphrase um auf deine LSK und BTC Tokens zusammen zuzugreifen.",
+  "Create an account using passphrase to access your LSK cryptocurrency.": "Erstellen Sie ein Konto mit Passphrase für den Zugriff auf Ihre LSK-Kryptowährung.",
   "Votes": "",
   "Send maximum amount": "",
   "Priority": "",
@@ -232,5 +234,33 @@
   "The time taken to expedite the transaction is mainly dependent on the fee.": "",
   "The higher the fee, the faster the transaction will be confirmed.": "",
   "Got it": "",
-  "Provide a correct amount of LSK": ""
+  "Provide a correct amount of LSK": "",
+  "Locked balance details": "",
+  "Find details of your locked balance and the unlock waiting period.": "",
+  "will be available to unlock": "... ~ {{timeToUnlock}}",
+  "available to unlock (only on desktop)": "",
+  "Insert public address or a name": "",
+  "Insert public address": "",
+  "Multisignature account details": "",
+  "multisignature": {
+    "description1": "",
+    "description2": "",
+    "info": {
+      "copy": "",
+      "button": ""
+    },
+    "mandatory": "",
+    "optional": "",
+    "required": "",
+    "error": {
+      "title": "",
+      "description": "."
+    },
+    "send": {
+      "description": "",
+      "button": ""
+    },
+    "showMore": "",
+    "showLess": ""
+  }
 }

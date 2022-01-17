@@ -65,7 +65,7 @@ class Item extends React.Component {
       return t('Unparsed Address');
     }
 
-    return stringShortener(address, 10, 3);
+    return stringShortener(address, 6, 5);
   };
 
   // eslint-disable-next-line
@@ -120,7 +120,7 @@ class Item extends React.Component {
           </View>
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>
-              {activeToken === 'LSK' && !isTransfer(tx)
+              {!isTransfer(tx)
                 ? t(getTxConstant(tx).title)
                 : addressText}
             </B>
@@ -134,8 +134,7 @@ class Item extends React.Component {
         </View>
         {isTransfer(tx) && (
           <View style={[styles.column, styles.amountWrapper]}>
-            {(activeToken === 'LSK'
-              && tx.recipientAddress === tx.senderAddress)
+            {(tx.recipientAddress === tx.senderAddress)
               || incognito ? null : (
               <View style={[styles[direction], styles.theme[direction]]}>
                 <FormattedNumber

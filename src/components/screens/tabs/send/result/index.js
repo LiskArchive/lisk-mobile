@@ -2,100 +2,53 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import LottieView from 'lottie-react-native';
 import { PrimaryButton } from '../../../../shared/toolBox/button';
-import { A, P } from '../../../../shared/toolBox/typography';
-import txCreatedAnimLight from '../../../../../assets/animations/tx-created-light.json';
-import txPendingAnimLight from '../../../../../assets/animations/tx-pending-light.json';
-import txConfirmedAnimLight from '../../../../../assets/animations/tx-confirmed-light.json';
-import txCreatedAnimDark from '../../../../../assets/animations/tx-created-dark.json';
-import txPendingAnimDark from '../../../../../assets/animations/tx-pending-dark.json';
-import txConfirmedAnimDark from '../../../../../assets/animations/tx-confirmed-dark.json';
+import { A, B, P } from '../../../../shared/toolBox/typography';
 import withTheme from '../../../../shared/withTheme';
 import getStyles from './styles';
 import { themes } from '../../../../../constants/styleGuide';
-
-const createdAnimDuration = 6200;
+import TxSuccesSvg from '../../../../../assets/svgs/TxSuccesSvg';
+import TxSuccessDarkSvg from '../../../../../assets/svgs/TxSuccessDarkSvg';
 
 @connect(
-  state => ({
+  (state) => ({
     account: state.accounts.info,
     transactions: state.transactions,
     activeToken: state.settings.active,
-    followedAccounts: state.accounts.followed,
+    followedAccounts: state.accounts.followed
   }),
   {}
 )
 class Result extends React.Component {
   state = {
     step: 0,
-    txConfirmed: false,
+    txConfirmed: false
   };
 
   animation = [];
 
   timeouts = {
     created: null,
-    confirmed: null,
+    confirmed: null
   };
 
   componentDidMount() {
     const {
-      navigation: { setOptions },
+      navigation: { setOptions }
     } = this.props;
     setOptions({
-      title: 'Sent',
-      headerLeft: () => null,
+      headerShown: false
     });
     this.startDate = new Date();
-    this.play('created');
   }
 
   componentWillUnmount() {
     const {
-      navigation: { setOptions },
+      navigation: { setOptions }
     } = this.props;
     clearTimeout(this.timeouts.created);
     clearTimeout(this.timeouts.confirmed);
-    setOptions({ title: 'Send' });
-  }
-
-  // eslint-disable-next-line react/no-deprecated
-  componentWillUpdate(nextProp) {
-    const { sharedData } = this.props;
-    const nowPending = this.props.transactions.pending.filter(tx => tx.id === sharedData.txId)
-      .length > 0;
-    const nextConfirmed = nextProp.transactions.confirmed.filter(tx => tx.id === sharedData.txId)
-      .length > 0;
-
-    if (nowPending && nextConfirmed) {
-      this.setState({ txConfirmed: true }, () => { this.play('confirmed'); });
-    }
-  }
-
-  play(stage) {
-    if (stage === 'created') {
-      this.animation[0].play();
-      this.timeouts.created = setTimeout(() => {
-        this.setState(
-          {
-            step: 1,
-          },
-          () => {
-            this.animation[1].play();
-          }
-        );
-      }, createdAnimDuration);
-    } else if (stage === 'confirmed') {
-      this.setState(
-        {
-          step: 2,
-        },
-        () => {
-          this.animation[2].play();
-        }
-      );
-    }
+    setOptions({ title: 'Send', headerShown: true });
   }
 
   render() {
@@ -105,56 +58,26 @@ class Result extends React.Component {
       finalCallback,
       reset,
       navigation,
-      theme,
       followedAccounts,
       settings: { token },
       sharedData: { address },
+      theme,
     } = this.props;
-    const { step } = this.state;
 
-    const isNotFollowed = !followedAccounts[token.active].some(
-      item => item.address === address
-    );
-
-    const [txCreatedAnim, txPendingAnim, txConfirmedAnim] = theme === themes.light
-      ? [txCreatedAnimLight, txPendingAnimLight, txConfirmedAnimLight]
-      : [txCreatedAnimDark, txPendingAnimDark, txConfirmedAnimDark];
+    const isNotFollowed = !followedAccounts[token.active].some((item) => item.address === address);
 
     return (
       <View style={[styles.container, styles.theme.container]}>
-        <P style={styles.theme.subtitle}>
-          {t(
-            'Thank you. Your transaction is being processed. It may take up to 15 minutes to be confirmed.'
-          )}
-        </P>
-        <View style={styles.illustration}>
-          {step === 0 ? (
-            <LottieView
-              source={txCreatedAnim}
-              loop={false}
-              ref={el => {
-                this.animation[0] = el;
-              }}
-            />
-          ) : null}
-          {step === 1 ? (
-            <LottieView
-              source={txPendingAnim}
-              loop={true}
-              ref={el => {
-                this.animation[1] = el;
-              }}
-            />
-          ) : null}
-          {step === 2 ? (
-            <LottieView
-              source={txConfirmedAnim}
-              loop={false}
-              ref={el => {
-                this.animation[2] = el;
-              }}
-            />
-          ) : null}
+        <View style={styles.illustrationContainer}>
+          <View style={styles.illustration}>
+            {theme === themes.dark ? <TxSuccessDarkSvg /> : <TxSuccesSvg />}
+          </View>
+          <B style={[styles.title, styles.theme.title]}>{t('Transaction Submitted')}</B>
+          <P style={[styles.subtitle, styles.theme.subtitle]}>
+            {t(
+              'Your transaction has been submitted and will be confirmed in a few moments.'
+            )}
+          </P>
         </View>
         <View style={styles.footer}>
           {isNotFollowed && (
@@ -164,7 +87,7 @@ class Result extends React.Component {
                   name: 'AddBookmark',
                   params: {
                     title: t('New bookmark'),
-                    account: { address },
+                    account: { address }
                   }
                 })
               }

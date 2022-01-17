@@ -77,6 +77,7 @@ class Bookmark extends React.Component {
                 draggable={true}
                 setRef={this.setRef}
                 query={query}
+                renderEmpty
               />
             </View>
           </View>
@@ -91,7 +92,7 @@ class Bookmark extends React.Component {
             style={[styles.addButtonIcon]}
             name="cross"
             color={colors[theme].white}
-            size={20}
+            size={30}
           />
         </TouchableOpacity>
       </SafeAreaView>

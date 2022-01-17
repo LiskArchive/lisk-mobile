@@ -14,6 +14,8 @@ jest.mock('react-native-gesture-handler', () => ({
   TouchableOpacity: jest.fn().mockImplementation(({ children }) => children)
 }));
 
+jest.mock('react-native/Libraries/Components/Touchable/TouchableOpacity', () => 'TouchableOpacity');
+
 jest.mock('@react-navigation/stack', () => ({
   useHeaderHeight: jest.fn(),
   createStackNavigator: () => ({
@@ -27,3 +29,7 @@ jest.mock('@react-navigation/compat', () => ({ withNavigation: (component) => co
 jest.mock('react-native-keyboard-aware-scroll-view', () => ({
   KeyboardAwareScrollView: jest.fn().mockImplementation(({ children }) => children)
 }));
+
+if (!global.setImmediate) {
+  global.setImmediate = setTimeout;
+}

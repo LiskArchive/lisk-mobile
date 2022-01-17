@@ -10,17 +10,20 @@ const common = {
   blueGray: '#8A8CA2',
   ghost: '#BEC1CD',
   platinum: '#E1E3EA',
+  platinumGray: '#DFE6F2',
   mystic: '#EDF0F5',
   whiteSmoke: '#F5F7FA',
   burntSieanna: '#EC6868',
-  ufoGreen: '#2AD67C'
+  ufoGreen: '#2AD67C',
+  mountainMist: '#9999A0',
 };
 
 const light = {
   ...common,
   outgoingArrow: common.maastrichtBlue,
   headerBg: common.whiteSmoke,
-  tabBarText: common.black
+  tabBarText: common.black,
+  athensWhite: '#F7F9FB',
 };
 
 const dark = {

@@ -6,13 +6,12 @@ export default () => ({
       flex: 1,
     },
     container: {
-      alignItems: 'center',
       paddingHorizontal: boxes.boxPadding,
-      paddingVertical: 2 * boxes.boxPadding,
     },
     qrCodeContainer: {
       marginTop: boxes.boxPadding,
       alignItems: 'center',
+      paddingBottom: 60
     },
     text: {
       marginBottom: 28,

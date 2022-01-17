@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
-
+import connect from 'redux-connect-decorator';
 import { IconButton } from '../../../../shared/toolBox/button';
-import { tokenMap } from '../../../../../constants/tokens';
 import Input from '../../../../shared/toolBox/input';
 import { colors } from '../../../../../constants/styleGuide';
 import Avatar from '../../../../shared/avatar';
@@ -18,7 +17,13 @@ import { validateAddress } from '../../../../../utilities/validators';
 import DropDownHolder from '../../../../../utilities/alert';
 import HeaderBackButton from '../../../router/headerBackButton';
 import StepProgress from '../../../../shared/multiStep/stepProgress';
+import { H4 } from '../../../../shared/toolBox/typography';
 
+@connect(
+  state => ({
+    list: state.accounts.followed,
+  }),
+)
 class Recipient extends React.Component {
   scannedData = {};
 
@@ -47,7 +52,8 @@ class Recipient extends React.Component {
     setOptions({
       title: null,
       headerLeft: () => <HeaderBackButton title={'Send LSK'} safeArea={true} noIcon={true} />,
-      headerRight: () => <StepProgress currentIndex={1} length={3} />
+      headerRight: () => <StepProgress currentIndex={1} length={3} />,
+      headerShown: true,
     });
   }
 
@@ -125,20 +131,17 @@ class Recipient extends React.Component {
       settings: { token },
       navigation,
       styles,
-      accounts,
       t,
       lng,
+      list
     } = this.props;
     const { address } = this.state;
-
-    const inputLabel = accounts.followed.length
-      ? t('Address or label')
-      : t('Address');
+    const hasBookmarks = !!list[token.active]?.length;
+    const placeholder = hasBookmarks ? t('Insert public address or a name') : t('Insert public address');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
-          isCameraOpen={this.isCameraOpen}
           ref={el => {
             this.scanner = el;
           }}
@@ -178,40 +181,41 @@ class Recipient extends React.Component {
                 iconSize={19.5}
                 color={colors.light.ultramarineBlue}
               />
-
-              {token.active === tokenMap.LSK.key ? (
-                <Avatar
-                  style={styles.avatar}
-                  address={address.value}
-                  size={24.6}
-                />
-              ) : null}
-
+              <Avatar
+                style={styles.avatar}
+                address={address.value}
+                size={24.6}
+              />
               <Input
                 reference={input => {
                   this.input = input;
                 }}
-                label={inputLabel}
+                label={t('Recipient')}
                 autoCorrect={false}
                 onChange={this.setAddress}
                 value={address.value}
+                placeholder={placeholder}
                 innerStyles={{
                   input: [
                     styles.input,
+                    styles.theme.input,
                     styles.addressInput,
-                    token.active === tokenMap.LSK.key
-                      ? styles.addressInputWithAvatar
-                      : null,
+                    styles.addressInputWithAvatar,
                   ],
                   containerStyle: styles.addressInputContainer,
                   inputLabel: styles.theme.inputLabel,
                 }}
               />
             </View>
-
+            {hasBookmarks && <View>
+              <View style={[styles.titleContainer]} >
+                <H4 style={styles.theme.title} >{t('Choose from bookmarks')}</H4>
+              </View>
+            </View>}
             <Bookmarks
               navigate={this.forward}
               query={this.state.address.value}
+              renderEmpty={false}
             />
           </View>
         </KeyboardAwareScrollView>

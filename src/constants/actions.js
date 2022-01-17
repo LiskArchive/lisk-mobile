@@ -26,6 +26,8 @@ const actionTypes = {
   // Service
   pricesRetrieved: 'PRICES_RETRIEVED',
   dynamicFeesRetrieved: 'DYNAMIC_FEES_RETRIEVED',
+  // Network
+  networkInfoUpdated: 'NETWORK_INFO_UPDATED',
 };
 
 export default actionTypes;

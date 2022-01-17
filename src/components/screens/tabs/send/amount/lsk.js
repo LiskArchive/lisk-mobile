@@ -198,9 +198,10 @@ const AmountLSK = (props) => {
     if (!validateAmount(str)) {
       message = t('The amount value is invalid.');
     } else if (
-      accounts.info[token.active].balance < fee
-      // eslint-disable-next-line no-undef
-      || parseFloat(str) > fromRawLsk(BigInt(accounts.info[token.active].balance) - fee)
+      accounts.info[token.active].balance
+        && (accounts.info[token.active].balance < fee
+        // eslint-disable-next-line no-undef
+        || parseFloat(str) > fromRawLsk(BigInt(accounts.info[token.active].balance) - fee))
     ) {
       message = t('Your balance is not sufficient.');
     }
@@ -215,7 +216,7 @@ const AmountLSK = (props) => {
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    if (!amount || !Number(amount)) {
+    if (!amount || !Number(amount) || amount <= 0) {
       setState((prevState) => ({
         ...prevState,
         errorMessage: t('Provide a correct amount of LSK')
@@ -244,7 +245,7 @@ const AmountLSK = (props) => {
 
   const localizeAmount = (amount) => {
     const { language } = props;
-    return Number(amount).toLocaleString(`${language}-${language.toUpperCase()}`, {
+    return Number(amount).toLocaleString(`${language}-${language?.toUpperCase()}`, {
       maximumFractionDigits: 20
     });
   };
@@ -295,6 +296,7 @@ const AmountLSK = (props) => {
           title: t('Continue')
         }}
         disabled={!isPriorityFetched || state.errorMessage}
+        buttonTestID="submit-button"
       >
         <View>
           <Balance

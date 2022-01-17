@@ -13,27 +13,45 @@ const HeaderBackButton = ({
   style,
   onPress,
   color,
+  rightColor,
   icon,
   safeArea,
   title,
   t,
-  noIcon
+  noIcon,
+  rightIcon,
+  onRightPress,
+  rightIconComponent,
+  containerStyle
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
   }
 
   return (
-    <View style={[styles.container, safeArea ? styles.safeArea : null]}>
+    <View style={[styles.container, safeArea ? styles.safeArea : null, containerStyle]}>
       {noIcon ? null : (
         <IconButton
           style={[styles.main, styles.theme.main, style]}
           icon={icon || 'back'}
-          onPress={onPress}
+          onClick={onPress}
           color={color}
         />
       )}
-      {title && <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>}
+      <View style={styles.titleContainer}>
+        {title && (
+          <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>
+        )}
+      </View>
+      {rightIcon ? (
+        <IconButton
+          style={[styles.main, styles.theme.main, style]}
+          icon={rightIcon}
+          onPress={onRightPress}
+          color={rightColor}
+        />
+      ) : null}
+        {rightIconComponent && rightIconComponent()}
     </View>
   );
 };

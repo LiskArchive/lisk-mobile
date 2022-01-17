@@ -1,10 +1,14 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
-import { View, Animated } from 'react-native';
 import {
-  account as accountAPI,
-  transactions as transactionsAPI,
-} from '../../../utilities/api';
+  View, Animated, SafeAreaView, TouchableOpacity
+} from 'react-native';
+import { translate } from 'react-i18next';
+import { account as accountAPI, transactions as transactionsAPI } from '../../../utilities/api';
+import {
+  accountFollowed as accountFollowedAction,
+  accountUnFollowed as accountUnFollowedAction
+} from '../../../actions/accounts';
 import AccountSummary from './accountSummary';
 import Transactions from '../../shared/transactions';
 import InfiniteScrollView from '../../shared/infiniteScrollView';
@@ -12,11 +16,16 @@ import Empty from '../../shared/transactions/empty';
 import Loading from '../../shared/transactions/loading';
 import {
   loadingStarted as loadingStartedAction,
-  loadingFinished as loadingFinishedAction,
+  loadingFinished as loadingFinishedAction
 } from '../../../actions/loading';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
-import HomeHeaderTitle from '../router/homeHeaderTitle';
+import HeaderBackButton from '../router/headerBackButton';
+import modalHolder from '../../../utilities/modal';
+import DeleteBookmarkModal from '../../shared/bookmarks/deleteBookmarkModal';
+import BookmarkSvg from '../../../assets/svgs/BookmarkSvg';
+import { H3 } from '../../shared/toolBox/typography';
+import LoadingBar from '../../shared/loading';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -28,14 +37,17 @@ import HomeHeaderTitle from '../router/homeHeaderTitle';
  * about any unforeseen issue/change
  */
 @connect(
-  state => ({
+  (state) => ({
     followedAccounts: state.accounts.followed || [],
     activeToken: state.settings.token.active,
+    loading: state.loading
   }),
   {
     loadingStarted: loadingStartedAction,
     loadingFinished: loadingFinishedAction,
-  },
+    accountFollowed: accountFollowedAction,
+    accountUnFollowed: accountUnFollowedAction
+  }
 )
 class Wallet extends React.Component {
   state = {
@@ -43,8 +55,8 @@ class Wallet extends React.Component {
     transactions: {
       confirmed: [],
       pending: [],
-      loaded: false,
-    },
+      loaded: false
+    }
   };
 
   scrollY = new Animated.Value(0);
@@ -53,39 +65,12 @@ class Wallet extends React.Component {
     this.scrollY.interpolate({
       inputRange,
       outputRange,
-      extrapolate: 'clamp',
+      extrapolate: 'clamp'
     });
-
-  setHeader = () => {
-    const {
-      activeToken,
-      navigation: { setOptions },
-      followedAccounts,
-    } = this.props;
-    const storedAccount = followedAccounts[activeToken].find(
-      item => item.address === this.state.account.address
-    );
-
-    setOptions({
-      headerTitle: () => (
-        <HomeHeaderTitle
-          type="wallet"
-          scrollToTop={this.scrollToTop}
-          scrollY={this.scrollY}
-          balance={this.state.account.balance}
-          address={this.state.account.address}
-          placeHolder={storedAccount ? storedAccount.label : ''}
-        />
-      ),
-    });
-  };
 
   async fetchInitialData() {
     const {
-      route,
-      loadingStarted,
-      loadingFinished,
-      activeToken,
+      route, loadingStarted, loadingFinished, activeToken
     } = this.props;
     const address = route.params?.address;
 
@@ -94,24 +79,19 @@ class Wallet extends React.Component {
       this.address = address;
       const account = await accountAPI.getSummary(activeToken, { address });
       const tx = await transactionsAPI.get(activeToken, {
-        address,
+        address
       });
       loadingFinished();
 
-      this.setState(
-        {
-          account,
-          transactions: {
-            confirmed: tx.data,
-            pending: [],
-            loaded: true,
-            count: tx.meta.count,
-          },
-        },
-        () => {
-          this.setHeader();
-        },
-      );
+      this.setState({
+        account,
+        transactions: {
+          confirmed: tx.data,
+          pending: [],
+          loaded: true,
+          count: tx.meta.count
+        }
+      });
     }
   }
 
@@ -121,11 +101,9 @@ class Wallet extends React.Component {
     const { address } = navigation.state.params;
     const account = await accountAPI.getSummary(activeToken, { address });
     const transactions = await transactionsAPI.get(activeToken, {
-      address: this.address,
+      address: this.address
     });
-    const newTransactions = transactions.data.filter(
-      t => t.timestamp > confirmed[0].timestamp
-    );
+    const newTransactions = transactions.data.filter((t) => t.timestamp > confirmed[0].timestamp);
 
     if (newTransactions.length > 0) {
       this.setState({
@@ -134,8 +112,8 @@ class Wallet extends React.Component {
           confirmed: [...newTransactions, ...confirmed],
           pending: [],
           count: transactions.meta.count,
-          loaded: true,
-        },
+          loaded: true
+        }
       });
     }
   }
@@ -147,7 +125,7 @@ class Wallet extends React.Component {
     try {
       const transactions = await transactionsAPI.get(this.props.activeToken, {
         address: this.address,
-        offset: confirmed.length,
+        offset: confirmed.length
       });
 
       this.props.loadingFinished();
@@ -158,8 +136,8 @@ class Wallet extends React.Component {
             confirmed: [...confirmed, ...transactions.data],
             pending: [],
             count: transactions.meta.count,
-            loaded: true,
-          },
+            loaded: true
+          }
         });
       }
     } catch (error) {
@@ -171,57 +149,68 @@ class Wallet extends React.Component {
     this.fetchInitialData();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { activeToken, followedAccounts } = this.props;
-    const storedAccount = followedAccounts[activeToken].filter(
-      item => item.address === this.state.account.address
-    );
-    const prevStoredAccount = prevProps.followedAccounts[activeToken].filter(
-      item => item.address === this.state.account.address
+  toggleBookmark = () => {
+    const {
+      followedAccounts, navigation, accountUnFollowed, t, activeToken
+    } = this.props;
+
+    const isFollowed = followedAccounts[activeToken].some(
+      (item) => item.address === this.state.account.address
     );
 
-    if (
-      storedAccount.length !== prevStoredAccount.length
-      || (storedAccount.length
-        && storedAccount[0].label !== prevStoredAccount[0].label)
-      || this.state.account.balance !== prevState.account.balance
-    ) {
-      this.setHeader();
+    if (isFollowed) {
+      modalHolder.open({
+        title: 'Delete bookmark',
+        component: DeleteBookmarkModal,
+        callback: () => accountUnFollowed(this.state.account.address)
+      });
+    } else {
+      navigation.navigate({
+        name: 'AddBookmark',
+        params: {
+          account: this.state.account,
+          title: t('Add bookmark')
+        }
+      });
     }
-    this.fetchInitialData();
-  }
+  };
 
   render() {
     const { transactions, account } = this.state;
 
-    const { styles, navigation } = this.props;
+    const {
+      styles, navigation, t
+    } = this.props;
 
     let content = null;
 
     if (!transactions.loaded) {
-      content = <Loading />;
+      content = (
+        <View style={[styles.loadingContainer]}>
+          <Loading />
+        </View>
+      );
     } else {
       const listElements = transactions.count > 0
         ? [...transactions.pending, ...transactions.confirmed]
         : ['emptyState'];
-      const onScroll = Animated.event([
-        {
-          nativeEvent: { contentOffset: { y: this.scrollY } },
-        },
-      ]);
       content = (
         <InfiniteScrollView
-          ref={el => {
+          ref={(el) => {
             this.scrollView = el;
           }}
           scrollEventThrottle={8}
-          onScroll={onScroll}
-          style={[styles.scrollView]}
           refresh={this.refresh.bind(this)}
           loadMore={this.loadMore}
           list={listElements}
           count={transactions.count}
-          render={refreshing =>
+          renderTitle={() => (
+            <View style={[styles.titleContainer, styles.theme.titleContainer]}>
+              <H3 style={styles.theme.title}>{t('Activity')}</H3>
+              <LoadingBar loading={!!this.props.loading?.length} />
+            </View>
+          )}
+          render={(refreshing) =>
             transactions.count > 0 ? (
               <Transactions
                 type="wallet"
@@ -230,6 +219,7 @@ class Wallet extends React.Component {
                 navigate={navigation.push}
                 account={account}
                 refreshing={refreshing}
+                noTitle
               />
             ) : (
               <Empty refreshing={refreshing} />
@@ -241,18 +231,30 @@ class Wallet extends React.Component {
 
     return (
       <View style={[styles.container, styles.theme.container]}>
-        {account && account.address ? (
-          <AccountSummary
-            navigation={navigation}
-            scrollY={this.scrollY}
-            account={account}
-            style={styles.accountSummary}
+        <SafeAreaView style={[styles.flex]}>
+          <HeaderBackButton
+            title="Account Details"
+            onPress={this.props.navigation.goBack}
+            rightIconComponent={() => (
+              <TouchableOpacity onPress={this.toggleBookmark}>
+                <BookmarkSvg />
+              </TouchableOpacity>
+            )}
           />
-        ) : null}
-        {content}
+          {account && account.address ? (
+            <AccountSummary
+              navigation={navigation}
+              scrollY={this.scrollY}
+              account={account}
+              style={styles.accountSummary}
+            />
+          ) : null}
+          {content}
+        </SafeAreaView>
+        <View style={[styles.fixedBottom, styles.theme.fixedBottom]} />
       </View>
     );
   }
 }
 
-export default withTheme(Wallet, getStyles());
+export default withTheme(translate()(Wallet), getStyles());

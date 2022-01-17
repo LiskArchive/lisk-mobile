@@ -1,5 +1,4 @@
 import React from 'react';
-import HomeHeaderTitle from './homeHeaderTitle';
 import { t } from './helper';
 import HeaderBackButton from './headerBackButton';
 import HeaderPlaceholderButton from './headerPlaceholderButton';
@@ -8,12 +7,12 @@ import { fonts } from '../../../constants/styleGuide';
 
 const noShadow = {
   borderBottomWidth: 0,
-  elevation: 0,
+  elevation: 0
 };
 
 const genericTitle = {
   fontFamily: fonts.family.heading,
-  fontSize: 20,
+  fontSize: 20
 };
 
 const noTitle = {
@@ -59,24 +58,14 @@ navigationOptions.Home = {
   header: () => null
 };
 
-navigationOptions.HomeStack = () => {
+navigationOptions.NoHeader = () => {
   return {
     headerShown: false
   };
 };
 
-navigationOptions.Wallet = () => {
-  const type = deviceType();
-  return {
-    headerTitle: () => <HomeHeaderTitle type="wallet" />,
-    headerLeft: (props) => <HeaderBackButton {...props} />,
-    headerRight: () => <HeaderPlaceholderButton />,
-    headerStyle: {
-      height: type === 'iOSx' ? 90 : 64,
-      ...noShadow
-    },
-    headerTitleStyle: genericTitle
-  };
+navigationOptions.Wallet = {
+  header: () => null
 };
 
 navigationOptions.Request = {
@@ -100,7 +89,6 @@ navigationOptions.Settings = {
 
 navigationOptions.Register = {
   title: 'Account creation',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
   headerRight: () => <HeaderPlaceholderButton />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
@@ -158,9 +146,9 @@ navigationOptions.PassphraseBackup = {
 
 navigationOptions.AddBookmark = {
   title: null,
-  headerLeft: (props) => <HeaderBackButton {...props} title='New bookmark' />,
+  headerLeft: (props) => <HeaderBackButton {...props} title="New bookmark" />,
   headerStyle: noShadow,
-  headerTitleStyle: genericTitle,
+  headerTitleStyle: genericTitle
 };
 
 navigationOptions.SignIn = {

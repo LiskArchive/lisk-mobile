@@ -4,7 +4,7 @@ import * as transactions from './transactions';
 jest.mock('./apiClient');
 
 const response = {
-  meta: { offset: 0, limit: 10, count: 2 },
+  meta: { offset: 0, limit: 10, total: 2 },
   data: [
     {
       id: '10703320139793065364',
@@ -30,7 +30,9 @@ const response = {
         address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
       },
       block: {
-        timestamp: 72473846
+        id: '381b0cc8ced666899b8113d3b4837cd3314bb440c5d84a6eba5f027992f9ac13',
+        timestamp: 72473846,
+        height: 15201096
       }
     },
     {
@@ -59,7 +61,9 @@ const response = {
         address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw'
       },
       block: {
-        timestamp: 72473846
+        id: '381b0cc8ced666899b8113d3b4837cd3314bb440c5d84a6eba5f027992f9ac13',
+        timestamp: 72473846,
+        height: 15101096
       }
     }
   ],
@@ -69,8 +73,13 @@ const response = {
 describe('api/transactions', () => {
   beforeAll(() => {
     apiClient.getTransactions = jest.fn();
-    apiClient.getTransactions.mockResolvedValue(response.data);
+    apiClient.getTransactions.mockResolvedValue({ meta: response.meta, data: response.data });
     apiClient.sendTransaction = jest.fn();
+    apiClient.getLatestBlock = jest.fn();
+    apiClient.getLatestBlock.mockResolvedValue({
+      height: 15301076,
+      timestamp: 1640594580,
+    });
   });
 
   describe('get', () => {
@@ -92,11 +101,13 @@ describe('api/transactions', () => {
             amount: 0,
             fee: '10000000',
             timestamp: 72473846,
-            confirmations: undefined,
+            confirmations: 99981,
             nonce: undefined,
             type: undefined,
             moduleAssetId: undefined,
             moduleAssetName: undefined,
+            blockHeight: 15201096,
+            blockId: '381b0cc8ced666899b8113d3b4837cd3314bb440c5d84a6eba5f027992f9ac13',
             data: '',
             votes: [],
             delegate: ''
@@ -108,11 +119,13 @@ describe('api/transactions', () => {
             amount: 0,
             fee: '10000000',
             timestamp: 72473846,
-            confirmations: undefined,
+            confirmations: 199981,
             nonce: undefined,
             type: undefined,
             moduleAssetId: undefined,
             moduleAssetName: undefined,
+            blockHeight: 15101096,
+            blockId: '381b0cc8ced666899b8113d3b4837cd3314bb440c5d84a6eba5f027992f9ac13',
             data: '',
             votes: [],
             delegate: ''
@@ -205,6 +218,11 @@ describe('Should get transaction detail for one transaction', () => {
 describe('Should get amount from unlock token transaction type', () => {
   beforeAll(() => {
     apiClient.getTransaction = jest.fn();
+    apiClient.getLatestBlock = jest.fn();
+    apiClient.getLatestBlock.mockResolvedValue({
+      height: 15301076,
+      timestamp: 1640594580,
+    });
     apiClient.getTransaction.mockResolvedValue([
       {
         ...response.data[0],
