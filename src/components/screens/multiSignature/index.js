@@ -19,7 +19,7 @@ const MultiSignature = ({
   const memberList = useMemo(() => multiSigAccount?.members, [multiSigAccount]);
   const numberOfSignatures = useMemo(() => multiSigAccount?.numberOfSignatures, [multiSigAccount]);
 
-  const openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet')
+  const openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet');
 
   return (
     <SafeAreaView style={styles.theme.container}>
