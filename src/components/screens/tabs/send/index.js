@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BackHandler, View, SafeAreaView, TouchableOpacity
+  BackHandler, View, SafeAreaView, TouchableOpacity, Linking
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
@@ -124,6 +124,8 @@ class Send extends React.Component {
     return false;
   };
 
+  openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet');
+
   render() {
     const {
       styles, accounts, navigation, route, settings, t
@@ -157,13 +159,13 @@ class Send extends React.Component {
 
     if (accounts.info[settings.token.active].isMultisignature) {
       return (
-        <SafeAreaView style={[styles.flex, styles.theme.multiSigContainer]} >
+        <SafeAreaView style={[styles.flex, styles.theme.multiSigContainer]}>
           <View style={[styles.multiSigContainer]}>
             <View style={styles.illustrationWrapper}>
               <SendLSKIllustrationSvg />
             </View>
-            <P style={styles.theme.copy} >{t('multisignature.send.copy')}</P>
-            <TouchableOpacity style={styles.buttonContainer} >
+            <P style={styles.theme.copy}>{t('multisignature.send.copy')}</P>
+            <TouchableOpacity style={styles.buttonContainer} onPress={this.openLiskDesktopDownload}>
               <B style={styles.theme.button}>{t('multisignature.send.button')}</B>
             </TouchableOpacity>
           </View>

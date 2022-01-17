@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, SafeAreaView, ScrollView } from 'react-native';
+import { View, SafeAreaView, ScrollView, Linking } from 'react-native';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { B, P } from '../../shared/toolBox/typography';
@@ -17,6 +17,8 @@ const MultiSignature = ({
   const memberList = useMemo(() => multiSigAccount.members, [multiSigAccount]);
   const numberOfSignatures = useMemo(() => multiSigAccount.numberOfSignatures, [multiSigAccount]);
 
+  const openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet')
+
   return (
     <SafeAreaView style={styles.theme.container}>
       <HeaderBackButton
@@ -33,6 +35,7 @@ const MultiSignature = ({
           <InfoComponent
             text={t('multisignature.info.copy')}
             buttonText={t('multisignature.info.button')}
+            onPress={openLiskDesktopDownload}
           />
           <View>
             <View style={[styles.signatureListContainer, styles.theme.signatureListContainer]} >
