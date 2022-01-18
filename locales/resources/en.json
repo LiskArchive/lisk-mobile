@@ -256,7 +256,7 @@
       "description": "Please choose another name."
     },
     "send": {
-      "description": "Sending transaction using multisignature accounts is available only on Lisk Desktop . ",
+      "description": "Sending transaction using multisignature accounts is available only on Lisk Desktop.",
       "button": "use desktop"
     },
     "showMore": "Show more...",

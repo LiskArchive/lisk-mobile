@@ -37,7 +37,6 @@ class Send extends React.Component {
       accounts,
       settings,
       navigation: { setOptions },
-      styles
     } = this.props;
 
     this.subs = [
@@ -46,10 +45,7 @@ class Send extends React.Component {
     ];
     if (accounts.info[settings.token.active].isMultisignature) {
       setOptions({
-        title: null,
-        headerLeft: () => (
-          <HeaderBackButton title="Send LSK" noIcon containerStyle={styles.navContainer} />
-        )
+        headerShown: false,
       });
     }
   }
@@ -160,14 +156,20 @@ class Send extends React.Component {
     if (accounts.info[settings.token.active].isMultisignature) {
       return (
         <SafeAreaView style={[styles.flex, styles.theme.multiSigContainer]}>
-          <View style={[styles.multiSigContainer]}>
-            <View style={styles.illustrationWrapper}>
-              <SendLSKIllustrationSvg />
+          <HeaderBackButton title="Send LSK" noIcon containerStyle={styles.navContainer} />
+          <View style={[styles.flex]}>
+            <View style={[styles.multiSigContainer]}>
+              <View style={styles.illustrationWrapper}>
+                <SendLSKIllustrationSvg />
+              </View>
+              <P style={styles.theme.copy}>{t('multisignature.send.description')}</P>
+              <TouchableOpacity
+                style={styles.buttonContainer}
+                onPress={this.openLiskDesktopDownload}
+              >
+                <B style={[styles.button, styles.theme.button]}>{t('multisignature.send.button')}</B>
+              </TouchableOpacity>
             </View>
-            <P style={styles.theme.copy}>{t('multisignature.send.description')}</P>
-            <TouchableOpacity style={styles.buttonContainer} onPress={this.openLiskDesktopDownload}>
-              <B style={styles.theme.button}>{t('multisignature.send.button')}</B>
-            </TouchableOpacity>
           </View>
         </SafeAreaView>
       );
