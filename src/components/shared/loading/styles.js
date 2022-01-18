@@ -25,10 +25,6 @@ export default () => ({
       left: 0,
       position: 'absolute',
     },
-    android: {
-      backgroundColor: colors.light.ultramarineBlue,
-      height: 4,
-    },
     visible: {
       height: 4,
     },
