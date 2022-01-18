@@ -1,5 +1,4 @@
 import { Dimensions } from 'react-native';
-import { colors } from '../../../constants/styleGuide';
 
 const { width } = Dimensions.get('window');
 const height = Math.floor((16 / 523) * width);
@@ -24,10 +23,6 @@ export default () => ({
       height: 0,
       left: 0,
       position: 'absolute',
-    },
-    android: {
-      backgroundColor: colors.light.ultramarineBlue,
-      height: 4,
     },
     visible: {
       height: 4,

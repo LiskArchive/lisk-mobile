@@ -28,8 +28,8 @@ class FingerprintOverlay extends React.Component {
     const { styles, error, t } = this.props;
     const iconColor = error ? colors.light.burntSieanna : colors.light.blue;
     const message = error
-      ? t('Unauthorized! Please try again.')
-      : t('Place your finger over the touch sensor to authenticate.');
+      ? t('fingerprint.unauthorized')
+      : t('fingerprint.placeFinger');
     return (
       <BlurOverlay
         ref={ref => {

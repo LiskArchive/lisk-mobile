@@ -1,6 +1,5 @@
 {
   "Look at the front camera to authenticate": "Schau bitte in die Kamera, um dich anzumelden",
-  "Place your finger over the touch sensor to authenticate": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
   "Sign in manually": "Manuell anmelden",
   "Signing in...": "Anmelden...",
   "1. Creating your account": "1. Konto wird erstellt",
@@ -129,7 +128,6 @@
   "Transaction not found": "Transaktion nicht gefunden",
   "Transfer your LSK tokens easily to other accounts by simply scanning their QR code.": "Einfach den QR code scannen, um LSK Tokens an ein anderes Konto zu verschicken.",
   "terms and conditions.": "allgemeinen Geschäftsbedingungen",
-  "Unauthorized! Please try again.": "Nicht autorisiert! Nochmal versuchen.",
   "Verification": "Bestätigen",
   "Voter": "Wähler(in)",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Wilkommen bei Lisk. Jetzt kannst du LSK Tokens unterwegs senden und empfangen.",
@@ -262,5 +260,9 @@
     },
     "showMore": "",
     "showLess": ""
+  },
+  "fingerprint": {
+    "placeFinger": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
+    "unauthorized": "Nicht autorisiert! Nochmal versuchen."
   }
 }

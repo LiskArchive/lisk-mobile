@@ -19,11 +19,14 @@ export default () => ({
     multiStepWrapper: {
       height: '100%'
     },
+    button: {
+      textAlign: 'center'
+    },
     illustrationWrapper: {
       padding: 20
     },
     navContainer: {
-      paddingTop: 40
+      paddingTop: 20
     },
     buttonContainer: {
       padding: 10,
