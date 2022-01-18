@@ -63,6 +63,7 @@ export default () => ({
     label: {
       color: colors.dark.white,
       marginRight: 5,
+      lineHeight: 20
     },
     iconStyle: {
       marginLeft: 5,
