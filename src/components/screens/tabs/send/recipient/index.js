@@ -151,64 +151,63 @@ class Recipient extends React.Component {
           permissionDialogTitle={t('Permission to use camera')}
           permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
-
-        <View style={styles.form}>
-          <View style={styles.addressContainer}>
-            <IconButton
-              onPress={() => this.scanner.toggleCamera()}
-              titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-              style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-              title={t('Scan')}
-              icon="scanner"
-              iconSize={19.5}
-              color={colors.light.ultramarineBlue}
-            />
-            <Avatar style={styles.avatar} address={address.value} size={24.6} />
-            <Input
-              reference={(input) => {
-                this.input = input;
-              }}
-              label={t('Recipient')}
-              autoCorrect={false}
-              onChange={this.setAddress}
-              value={address.value}
-              placeholder={placeholder}
-              innerStyles={{
-                input: [
-                  styles.input,
-                  styles.theme.input,
-                  styles.addressInput,
-                  styles.addressInputWithAvatar
-                ],
-                containerStyle: styles.addressInputContainer,
-                inputLabel: styles.theme.inputLabel
-              }}
-            />
-          </View>
-          {hasBookmarks && (
-            <View>
-              <View style={[styles.titleContainer]}>
-                <H4 style={styles.theme.title}>{t('Choose from bookmarks')}</H4>
-              </View>
+        <KeyboardAwareScrollView
+          viewIsInsideTab
+          styles={{
+            innerContainer: [styles.innerContainer, styles.flex],
+            container: styles.flex
+          }}
+          noFooterButton
+        >
+          <View style={styles.form}>
+            <View style={styles.addressContainer}>
+              <IconButton
+                onPress={() => this.scanner.toggleCamera()}
+                titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
+                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                title={t('Scan')}
+                icon="scanner"
+                iconSize={19.5}
+                color={colors.light.ultramarineBlue}
+              />
+              <Avatar style={styles.avatar} address={address.value} size={24.6} />
+              <Input
+                reference={(input) => {
+                  this.input = input;
+                }}
+                label={t('Recipient')}
+                autoCorrect={false}
+                onChange={this.setAddress}
+                value={address.value}
+                placeholder={placeholder}
+                innerStyles={{
+                  input: [
+                    styles.input,
+                    styles.theme.input,
+                    styles.addressInput,
+                    styles.addressInputWithAvatar
+                  ],
+                  containerStyle: styles.addressInputContainer,
+                  inputLabel: styles.theme.inputLabel
+                }}
+              />
             </View>
-          )}
-          <KeyboardAwareScrollView
-            viewIsInsideTab
-            styles={{
-              innerContainer: [styles.innerContainer, styles.flex],
-              container: styles.flex
-            }}
-            noFooterButton
-          >
+            {hasBookmarks && (
+              <View>
+                <View style={[styles.titleContainer]}>
+                  <H4 style={styles.theme.title}>{t('Choose from bookmarks')}</H4>
+                </View>
+              </View>
+            )}
             <Bookmarks
               navigate={this.forward}
               query={this.state.address.value}
               renderEmpty={false}
             />
-          </KeyboardAwareScrollView>
-          <View style={styles.footerButtonContainer}>
-            <PrimaryButton title={t('Continue')} onClick={this.submitForm} />
           </View>
+        </KeyboardAwareScrollView>
+        <View style={styles.footerButtonContainer}>
+          <PrimaryButton title={t('Continue')} onClick={this.submitForm} />
         </View>
       </View>
     );

@@ -61,7 +61,7 @@ export default () => ({
       }),
     },
     footerButtonContainer: {
-      paddingHorizontal: 20
+      padding: 20
     },
     addressInputWithAvatar: {
       paddingLeft: 48.5,
