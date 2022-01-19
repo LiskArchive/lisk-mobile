@@ -16,6 +16,7 @@ export default () => ({
       paddingBottom: 24,
     },
     form: {
+      flex: 1,
       paddingTop: boxes.boxPadding,
       paddingBottom: boxes.boxPadding,
     },
@@ -23,7 +24,6 @@ export default () => ({
       marginTop: 0,
       flexWrap: 'wrap',
       borderRadius: 10,
-      flex: 1,
       fontFamily: fonts.family.contextSemiBold,
     },
     scanButton: {
@@ -59,6 +59,9 @@ export default () => ({
           paddingBottom: 10,
         },
       }),
+    },
+    footerButtonContainer: {
+      paddingHorizontal: 20
     },
     addressInputWithAvatar: {
       paddingLeft: 48.5,
