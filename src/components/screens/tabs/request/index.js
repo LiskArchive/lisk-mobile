@@ -26,7 +26,6 @@ const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
 @connect(state => ({
   account: state.accounts.info,
-  activeToken: state.settings.token.active,
   language: state.settings.language,
 }))
 class Request extends React.Component {
@@ -35,21 +34,12 @@ class Request extends React.Component {
     url: '',
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.activeToken !== this.props.activeToken) {
-      this.setState({
-        amount: { value: '', validity: -1 },
-        url: '',
-      });
-    }
-  }
-
   validator = str => reg.amount.test(str);
 
   // eslint-disable-next-line max-statements
   changeHandler = val => {
-    const { account, activeToken, language } = this.props;
-    const { address } = account[activeToken];
+    const { account, language } = this.props;
+    const { address } = account.LSK;
 
     if (language === languageMap.en.code) {
       val = val.replace(/,/g, '.');
@@ -79,10 +69,10 @@ class Request extends React.Component {
 
   render() {
     const {
-      styles, theme, account, t, activeToken
+      styles, theme, account, t
     } = this.props;
     const { amount, url } = this.state;
-    const { address } = account[activeToken];
+    const { address } = account.LSK;
     const extraHeight = deviceType() === 'android' ? 170 : 0;
 
     return (
