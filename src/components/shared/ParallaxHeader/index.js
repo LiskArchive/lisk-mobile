@@ -151,8 +151,8 @@ class RNParallax extends Component {
     const { styles } = this.props;
     return (
       <View style={[styles.container, containerStyle]}>
-        {this.renderScrollView()}
         {this.renderHeaderTitle()}
+        {this.renderScrollView()}
       </View>
     );
   }
