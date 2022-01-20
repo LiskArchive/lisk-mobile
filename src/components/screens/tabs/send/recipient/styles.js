@@ -18,7 +18,7 @@ export default () => ({
     form: {
       flex: 1,
       paddingTop: boxes.boxPadding,
-      paddingBottom: boxes.boxPadding,
+      paddingBottom: 10,
     },
     input: {
       marginTop: 0,
@@ -43,6 +43,7 @@ export default () => ({
     },
     titleContainer: {
       paddingHorizontal: 20,
+      paddingBottom: 10,
     },
     addressContainer: {
       width: '100%',
@@ -61,7 +62,8 @@ export default () => ({
       }),
     },
     footerButtonContainer: {
-      padding: 20
+      paddingHorizontal: 20,
+      paddingBottom: 10,
     },
     addressInputWithAvatar: {
       paddingLeft: 48.5,
