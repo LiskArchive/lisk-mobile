@@ -69,7 +69,6 @@ class Send extends React.Component {
 
   checkQuery = () => {
     const query = this.props.route.params?.query ?? {};
-
     if (query.address) {
       this.resetMultiStep(query);
     }
@@ -97,6 +96,8 @@ class Send extends React.Component {
   };
 
   willBlur = () => {
+    this.props.navigation.setParams({ query: { address: '' } });
+    this.setState({ query: {} });
     BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
   };
 
