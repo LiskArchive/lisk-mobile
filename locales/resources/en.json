@@ -265,5 +265,14 @@
   "fingerprint": {
     "unauthorized": "Unauthorized! Please try again.",
     "placeFinger": "Place your finger over the touch sensor to authenticate."
+  },
+  "banners": {
+    "btcRemoval": {
+      "title": "Please note: BTC is not supported in this release {{release}}",
+      "buttons": {
+        "gotIt": "Got it",
+        "readMore": "Read more"
+      }
+    }
   }
 }

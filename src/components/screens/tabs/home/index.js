@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-lines */
 import React from 'react';
 import {
@@ -30,6 +31,9 @@ import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { colors, themes } from '../../../../constants/styleGuide';
 import HomeHeaderTitle from '../../router/homeHeaderTitle';
+import Banner from '../../../shared/banner';
+import BTCRemoval from '../../banners/BtcRemoval';
+import { fetchData, persistData } from '../../../../utilities/storage';
 
 const itemHeight = 90;
 const summaryHeight = 200;
@@ -47,7 +51,6 @@ const summaryHeight = 200;
     transactions: state.transactions,
     incognito: state.settings.incognito,
     activeToken: state.settings.token.active,
-    btcIntroShown: state.settings.btcIntroShown,
     settings: state.settings,
     followedAccounts: state.accounts.followed || []
   }),
@@ -63,7 +66,8 @@ const summaryHeight = 200;
 class Home extends React.Component {
   state = {
     footer: null,
-    refreshing: false
+    refreshing: false,
+    hideBtcRemoval: true
   };
 
   canLoadMore = true;
@@ -81,7 +85,8 @@ class Home extends React.Component {
     setOptions({
       headerTitle: () => (
         <HomeHeaderTitle type="home" scrollToTop={this.scrollToTop} scrollY={this.scrollY} />
-      )
+      ),
+      tabBarVisible: this.state.hideBtcRemoval
     });
   };
 
@@ -125,7 +130,7 @@ class Home extends React.Component {
       getNetworkInfo(activeToken);
     }
     this.props.navigation.setParams({
-      scrollToTop: this.scrollToTop,
+      scrollToTop: this.scrollToTop
     });
     addListener('willFocus', this.screenWillFocus);
     if (route.params && route.params.discreet && !incognito) {
@@ -138,18 +143,27 @@ class Home extends React.Component {
     setTimeout(() => {
       showInitializationModal(this.props);
     }, 1200);
+    this.checkBTCBanner();
   }
 
+  checkBTCBanner = async () => {
+    const hideBtcRemoval = await fetchData('@list-hideBtcRemoval');
+    this.setState({
+      hideBtcRemoval: Boolean(hideBtcRemoval)
+    });
+  };
+
+  hideBTCBanner = () => {
+    persistData('@list-hideBtcRemoval', 'true');
+    this.setState({
+      hideBtcRemoval: true
+    });
+  };
+
   loadMore = ({ nativeEvent }) => {
-    const isCloseToBottom = ({
-      layoutMeasurement,
-      contentOffset,
-      contentSize,
-    }) => {
+    const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
       const paddingToBottom = 20;
-      return (
-        layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom
-      );
+      return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
     };
     if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
       this.canLoadMore = false;
@@ -158,7 +172,7 @@ class Home extends React.Component {
   };
 
   // eslint-disable-next-line max-statements
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const {
       transactions,
       account,
@@ -193,6 +207,9 @@ class Home extends React.Component {
       prevProps.account[activeToken].balance !== account[activeToken].balance
       || prevProps.incognito !== incognito
     ) {
+      this.setHeader();
+    }
+    if (prevState.hideBtcRemoval !== this.state.hideBtcRemoval) {
       this.setHeader();
     }
     if (prevProps.activeToken !== activeToken && isFocused) {
@@ -282,6 +299,13 @@ class Home extends React.Component {
       );
     }
     const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
+    if (!this.state.hideBtcRemoval) {
+      return (
+        <Banner>
+          <BTCRemoval closeBanner={this.hideBTCBanner} />
+        </Banner>
+      );
+    }
     return (
       <SafeAreaView style={[styles.flex, styles.theme.homeContainer]}>
         {Platform.OS !== 'ios' ? (

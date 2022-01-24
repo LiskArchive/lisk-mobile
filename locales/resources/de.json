@@ -264,5 +264,14 @@
   "fingerprint": {
     "placeFinger": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
     "unauthorized": "Nicht autorisiert! Nochmal versuchen."
+  },
+  "banners": {
+    "btcRemoval": {
+      "title": "",
+      "buttons": {
+        "gotIt": "",
+        "readMore": ""
+      }
+    }
   }
 }
