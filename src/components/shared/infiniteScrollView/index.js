@@ -52,11 +52,10 @@ class InfiniteScrollView extends React.Component {
 
   onRefresh = () => {
     this.setState({ refreshing: true });
-    this.props.refresh().then(() => {
-      setTimeout(() => {
-        this.setState({ refreshing: false });
-      }, 2000);
-    });
+    this.props.refresh();
+    setTimeout(() => {
+      this.setState({ refreshing: false });
+    }, 2000);
   };
 
   render() {
@@ -67,7 +66,6 @@ class InfiniteScrollView extends React.Component {
         contentContainerStyle={[this.props.contentContainerStyle]}
         refreshControl={
           <RefreshControl
-            progressViewOffset={170}
             onRefresh={this.onRefresh}
             refreshing={this.state.refreshing}
             tintColor={
