@@ -140,7 +140,7 @@ class RNParallax extends Component {
         {...renderableScrollViewProps}>
         {this.renderHeaderTitle()}
         <View
-          style={[{ marginTop: this.getHeaderMaxHeight(), zIndex: 99 }]}>
+          style={[{ marginTop: this.getHeaderMaxHeight() }]}>
           {renderContent()}
         </View>
       </Animated.ScrollView>
