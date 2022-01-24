@@ -28,6 +28,7 @@ export default () => ({
       alignItems: 'center',
       marginTop: normalMarginTop,
       paddingRight: 20,
+      paddingTop: 10,
     },
     main: {
       width: 50,

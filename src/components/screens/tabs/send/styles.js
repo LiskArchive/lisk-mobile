@@ -26,7 +26,7 @@ export default () => ({
       padding: 20
     },
     navContainer: {
-      paddingTop: 20
+      paddingTop: 15
     },
     buttonContainer: {
       padding: 10,
