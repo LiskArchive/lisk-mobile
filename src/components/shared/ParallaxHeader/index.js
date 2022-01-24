@@ -138,8 +138,9 @@ class RNParallax extends Component {
         ref={reference}
         refreshControl={refreshControl}
         {...renderableScrollViewProps}>
+        {this.renderHeaderTitle()}
         <View
-          style={[{ marginTop: this.getHeaderMaxHeight() }]}>
+          style={[{ marginTop: this.getHeaderMaxHeight(), zIndex: 99 }]}>
           {renderContent()}
         </View>
       </Animated.ScrollView>
@@ -151,7 +152,6 @@ class RNParallax extends Component {
     const { styles } = this.props;
     return (
       <View style={[styles.container, containerStyle]}>
-        {this.renderHeaderTitle()}
         {this.renderScrollView()}
       </View>
     );
