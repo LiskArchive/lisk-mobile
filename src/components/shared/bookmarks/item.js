@@ -27,7 +27,7 @@ class Item extends React.Component {
         style={[styles.linkedItem, styles.theme.linkedItem]}
         onPress={this.showDetail}
       >
-        <View style={styles.innerContainer}>
+        <View style={[styles.innerContainer]}>
           {showAvatar ? (
             <View style={[styles.itemColumn, styles.avatarContainer]}>
               <Avatar
@@ -44,7 +44,7 @@ class Item extends React.Component {
             </Small>
           </View>
         </View>
-        <View style={[styles.column, styles.amountWrapper]}>
+        <View style={[styles.amountWrapper]}>
           <Icon
             name="forward"
             size={21}

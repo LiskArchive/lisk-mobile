@@ -12,6 +12,16 @@ export default () => ({
       paddingRight: 20,
       paddingLeft: 20,
     },
+    column: {
+      flex: 1,
+    },
+    buttonContainer: {
+      marginTop: 10,
+      paddingVertical: 10
+    },
+    buttonText: {
+      color: colors.light.ultramarineBlue
+    },
     itemContainer: {
       flex: 1,
       width: '100%',
@@ -19,6 +29,9 @@ export default () => ({
       paddingTop: 20,
       paddingBottom: 20,
       borderBottomWidth: 1,
+    },
+    infoButton: {
+      padding: 15,
     },
     linkedItem: {
       flex: 1,
@@ -67,6 +80,9 @@ export default () => ({
       alignItems: 'center',
       marginBottom: 10,
       marginTop: 40,
+    },
+    lightOpacity: {
+      opacity: 0.5,
     },
     noBookmarkImage: {
       width: 264,
@@ -169,6 +185,9 @@ export default () => ({
     editButton: {
       backgroundColor: colors.light.blueGray,
     },
+    text: {
+      color: colors.light.black
+    }
   },
   [themes.dark]: {
     title: {
@@ -201,5 +220,8 @@ export default () => ({
     editButton: {
       backgroundColor: colors.dark.blueGray,
     },
+    text: {
+      color: colors.dark.white
+    }
   },
 });

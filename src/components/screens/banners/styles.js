@@ -23,6 +23,11 @@ export default () => ({
       color: colors.light.white,
       padding: 20
     },
+    description: {
+      textAlign: 'center',
+      color: colors.light.white,
+      paddingBottom: 20
+    },
     readMoreButton: {
       marginBottom: 20,
       backgroundColor: 'transparent',

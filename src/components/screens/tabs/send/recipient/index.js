@@ -18,9 +18,11 @@ import DropDownHolder from '../../../../../utilities/alert';
 import HeaderBackButton from '../../../router/headerBackButton';
 import StepProgress from '../../../../shared/multiStep/stepProgress';
 import { H4 } from '../../../../shared/toolBox/typography';
+import { tokenMap } from '../../../../../constants/tokens';
 
 @connect((state) => ({
-  list: state.accounts.followed
+  list: state.accounts.followed.LSK
+    ?.filter(list => validateAddress(tokenMap[0], list.address) === 0)
 }))
 class Recipient extends React.Component {
   scannedData = {};
@@ -126,7 +128,6 @@ class Recipient extends React.Component {
 
   render() {
     const {
-      settings: { token },
       navigation,
       styles,
       t,
@@ -134,7 +135,7 @@ class Recipient extends React.Component {
       list
     } = this.props;
     const { address } = this.state;
-    const hasBookmarks = !!list[token.active]?.length;
+    const hasBookmarks = !!list?.length;
     const placeholder = hasBookmarks
       ? t('Insert public address or a name')
       : t('Insert public address');
