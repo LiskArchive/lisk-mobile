@@ -277,7 +277,8 @@
   },
   "banners": {
     "btcRemoval": {
-      "title": "Please note: BTC is not supported in this release {{release}}",
+      "title": "Please note: BTC support has been removed as of Lisk {{release}}",
+      "description": "If you are affected by this change, please tap the link below to learn how to access your BTC using an alternative application.",
       "buttons": {
         "gotIt": "Got it",
         "readMore": "Read more"

@@ -265,9 +265,19 @@
     "placeFinger": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
     "unauthorized": "Nicht autorisiert! Nochmal versuchen."
   },
+  "bookmarks": {
+    "disabled": {
+      "title": "",
+      "description": "",
+      "buttons": {
+        "close": ""
+      }
+    }
+  },
   "banners": {
     "btcRemoval": {
       "title": "",
+      "description": "",
       "buttons": {
         "gotIt": "",
         "readMore": ""

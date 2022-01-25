@@ -5,10 +5,9 @@ import { Linking, View, TouchableOpacity } from 'react-native';
 import BTCRemovalSVG from '../../../assets/svgs/BTCRemovalSVG';
 import LinkSvg from '../../../assets/svgs/LinkSvg';
 import { PrimaryButton } from '../../shared/toolBox/button';
-import { B, H2 } from '../../shared/toolBox/typography';
+import { B, H2, P } from '../../shared/toolBox/typography';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
-import packageJson from '../../../../package.json';
 import { deviceHeight } from '../../../utilities/device';
 
 const BTCRemoval = ({ styles, t, closeBanner }) => {
@@ -18,8 +17,11 @@ const BTCRemoval = ({ styles, t, closeBanner }) => {
   return (
     <View style={styles.container}>
       <H2 style={styles.title}>
-        {t('banners.btcRemoval.title', { release: packageJson.version })}
+        {t('banners.btcRemoval.title', { release: '2.0.0' })}
       </H2>
+      <P style={styles.description}>
+        {t('banners.btcRemoval.description')}
+      </P>
       <View style={styles.content}>
         <View style={styles.svgContainer}>
           <BTCRemovalSVG size={height < 700 ? 0.7 : height > 850 ? 1 : 0.8} />
