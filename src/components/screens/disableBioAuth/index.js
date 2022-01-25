@@ -8,6 +8,7 @@ import { PrimaryButton } from '../../shared/toolBox/button';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import PassphraseCopy from '../../shared/passphraseCopy';
+import HeaderBackButton from '../router/headerBackButton';
 
 @connect(
   state => ({
@@ -26,7 +27,8 @@ class DisableBioAuth extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setOptions({
-      title: this.props.route.params?.title ?? 'Bio Auth',
+      title: null,
+      headerLeft: props => <HeaderBackButton title={this.props.route.params?.title ?? 'Bio Auth'} onPress={this.props.navigation.goBack} {...props} />
     });
   }
 
