@@ -1,14 +1,15 @@
 import React from 'react';
 import {
-  View, TouchableOpacity, Animated, Text
+  View, TouchableOpacity, Animated
 } from 'react-native';
+import { translate } from 'react-i18next';
 import Interactable from 'react-native-interactable';
 import connect from 'redux-connect-decorator';
 import { accountUnFollowed as accountUnFollowedAction } from '../../../actions/accounts';
 import Avatar from '../avatar';
 import { B, Small, P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
-import { colors } from '../../../constants/styleGuide';
+import { colors, themes } from '../../../constants/styleGuide';
 import DeleteBookmarkModal from './deleteBookmarkModal';
 import ModalHolder from '../../../utilities/modal';
 import { stringShortener } from '../../../utilities/helpers';
@@ -33,11 +34,15 @@ class DraggableItem extends React.Component {
   };
 
   openDisabledModal = () => {
+    const { t, styles } = this.props;
     ModalHolder.open({
-      title: 'Disabled',
+      title: t('bookmarks.disabled.title'),
       component: () => (
         <View>
-          <Text>This account is not initialized</Text>
+          <P style={[styles.text, styles.theme.text]} >{t('bookmarks.disabled.description')}</P>
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => ModalHolder.close()} >
+            <B style={styles.buttonText} >{t('bookmarks.disabled.buttons.close')}</B>
+          </TouchableOpacity>
         </View>
       )
     });
@@ -166,7 +171,11 @@ class DraggableItem extends React.Component {
               {isInvalidAddress && (
                 <Animated.View>
                   <TouchableOpacity style={styles.infoButton} onPress={this.openDisabledModal}>
-                    <WarningSvg />
+                    <WarningSvg
+                      color={
+                        theme === themes.light ? colors.light.zodiacBlue : colors.dark.mountainMist
+                      }
+                    />
                   </TouchableOpacity>
                 </Animated.View>
               )}
@@ -178,4 +187,4 @@ class DraggableItem extends React.Component {
   }
 }
 
-export default DraggableItem;
+export default translate()(DraggableItem);

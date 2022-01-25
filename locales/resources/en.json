@@ -266,6 +266,15 @@
     "unauthorized": "Unauthorized! Please try again.",
     "placeFinger": "Place your finger over the touch sensor to authenticate."
   },
+  "bookmarks": {
+    "disabled": {
+      "title": "Disabled",
+      "description": "This account is not initialized",
+      "buttons": {
+        "close": "Got it"
+      }
+    }
+  },
   "banners": {
     "btcRemoval": {
       "title": "Please note: BTC is not supported in this release {{release}}",

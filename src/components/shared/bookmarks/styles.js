@@ -15,6 +15,13 @@ export default () => ({
     column: {
       flex: 1,
     },
+    buttonContainer: {
+      marginTop: 10,
+      paddingVertical: 10
+    },
+    buttonText: {
+      color: colors.light.ultramarineBlue
+    },
     itemContainer: {
       flex: 1,
       width: '100%',
@@ -178,6 +185,9 @@ export default () => ({
     editButton: {
       backgroundColor: colors.light.blueGray,
     },
+    text: {
+      color: colors.light.black
+    }
   },
   [themes.dark]: {
     title: {
@@ -210,5 +220,8 @@ export default () => ({
     editButton: {
       backgroundColor: colors.dark.blueGray,
     },
+    text: {
+      color: colors.dark.white
+    }
   },
 });
