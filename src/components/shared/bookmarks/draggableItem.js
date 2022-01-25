@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, TouchableOpacity, Animated } from 'react-native';
+import {
+  View, TouchableOpacity, Animated, Text
+} from 'react-native';
 import Interactable from 'react-native-interactable';
 import connect from 'redux-connect-decorator';
 import { accountUnFollowed as accountUnFollowedAction } from '../../../actions/accounts';
@@ -10,13 +12,11 @@ import { colors } from '../../../constants/styleGuide';
 import DeleteBookmarkModal from './deleteBookmarkModal';
 import ModalHolder from '../../../utilities/modal';
 import { stringShortener } from '../../../utilities/helpers';
+import WarningSvg from '../../../assets/svgs/WarningSvg';
 
-@connect(
-  () => ({}),
-  {
-    accountUnFollowed: accountUnFollowedAction,
-  }
-)
+@connect(() => ({}), {
+  accountUnFollowed: accountUnFollowedAction
+})
 class DraggableItem extends React.Component {
   _deltaX = new Animated.Value(0);
 
@@ -28,60 +28,69 @@ class DraggableItem extends React.Component {
     ModalHolder.open({
       title: 'Delete bookmark',
       component: DeleteBookmarkModal,
-      callback: () => accountUnFollowed(data.address),
+      callback: () => accountUnFollowed(data.address)
+    });
+  };
+
+  openDisabledModal = () => {
+    ModalHolder.open({
+      title: 'Disabled',
+      component: () => (
+        <View>
+          <Text>This account is not initialized</Text>
+        </View>
+      )
     });
   };
 
   render() {
     const {
-      styles, data, theme, navigate, setRef, t, showAvatar
+      styles, data, theme, navigate, setRef, t, showAvatar, isInvalidAddress
     } = this.props;
 
     return (
-      <View
-        style={[styles.itemContainer, styles.theme.itemContainer]}
-      >
+      <View style={[styles.itemContainer, styles.theme.itemContainer]}>
         <View style={styles.draggableRow} pointerEvents="box-none">
-          <Animated.View
-            style={[
-              styles.editButton,
-              styles.theme.editButton,
-              {
-                transform: [
-                  {
-                    translateX: this._deltaX.interpolate({
-                      inputRange: [-240, 0],
-                      outputRange: [0, 240],
-                    }),
-                  },
-                ],
-              },
-            ]}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                this.ref.snapTo({ index: 0 });
-                navigate({
-                  name: 'AddBookmark',
-                  params: {
-                    account: data,
-                    title: t('Edit bookmark'),
-                  },
-                });
-              }}
-              style={[styles.button]}
+          {isInvalidAddress ? null : (
+            <Animated.View
+              style={[
+                styles.editButton,
+                styles.theme.editButton,
+                {
+                  transform: [
+                    {
+                      translateX: this._deltaX.interpolate({
+                        inputRange: [-240, 0],
+                        outputRange: [0, 240]
+                      })
+                    }
+                  ]
+                }
+              ]}
             >
-              <Icon
-                name="edit-bookmark"
-                size={21}
-                style={[styles.iconButton, styles.theme.editContent]}
-                color={colors[theme].white}
-              />
-              <P style={[styles.buttonContent, styles.theme.editContent]}>
-                {t('Edit')}
-              </P>
-            </TouchableOpacity>
-          </Animated.View>
+              <TouchableOpacity
+                onPress={() => {
+                  this.ref.snapTo({ index: 0 });
+                  navigate({
+                    name: 'AddBookmark',
+                    params: {
+                      account: data,
+                      title: t('Edit bookmark')
+                    }
+                  });
+                }}
+                style={[styles.button]}
+              >
+                <Icon
+                  name="edit-bookmark"
+                  size={21}
+                  style={[styles.iconButton, styles.theme.editContent]}
+                  color={colors[theme].white}
+                />
+                <P style={[styles.buttonContent, styles.theme.editContent]}>{t('Edit')}</P>
+              </TouchableOpacity>
+            </Animated.View>
+          )}
 
           <Animated.View
             style={[
@@ -92,11 +101,11 @@ class DraggableItem extends React.Component {
                   {
                     translateX: this._deltaX.interpolate({
                       inputRange: [-240, 0],
-                      outputRange: [0, 130],
-                    }),
-                  },
-                ],
-              },
+                      outputRange: [0, 130]
+                    })
+                  }
+                ]
+              }
             ]}
           >
             <TouchableOpacity
@@ -118,14 +127,14 @@ class DraggableItem extends React.Component {
         </View>
 
         <Interactable.View
-          ref={ref => {
+          ref={(ref) => {
             this.ref = ref;
           }}
           horizontalOnly={true}
           boundaries={{ right: 0 }}
           snapPoints={[
             { x: 0, damping: -0.7, tension: 300 },
-            { x: -240, damping: -0.7, tension: 300 },
+            { x: -240, damping: -0.7, tension: 300 }
           ]}
           onDrag={() => setRef(this.ref, data.address)}
           animatedValueX={this._deltaX}
@@ -136,24 +145,31 @@ class DraggableItem extends React.Component {
             onPress={() => navigate('Wallet', { address: data.address })}
             style={styles.row}
           >
-            <View style={styles.innerContainer}>
+            <View style={[styles.innerContainer]}>
               {showAvatar ? (
-                <View style={[styles.itemColumn, styles.avatarContainer]}>
-                  <Avatar
-                    address={data.address}
-                    size={43}
-                    style={styles.theme.avatar}
-                  />
+                <View
+                  style={[
+                    styles.itemColumn,
+                    styles.avatarContainer,
+                    isInvalidAddress && styles.lightOpacity
+                  ]}
+                >
+                  <Avatar address={data.address} size={43} style={styles.theme.avatar} />
                 </View>
               ) : null}
-              <View style={styles.column}>
-                <B style={[styles.address, styles.theme.address]}>
-                  {data.label}
-                </B>
+              <View style={[styles.column, isInvalidAddress && styles.lightOpacity]}>
+                <B style={[styles.address, styles.theme.address]}>{data.label}</B>
                 <Small style={[styles.label, styles.theme.label]}>
                   {stringShortener(data.address, 6, 5)}
                 </Small>
               </View>
+              {isInvalidAddress && (
+                <Animated.View>
+                  <TouchableOpacity style={styles.infoButton} onPress={this.openDisabledModal}>
+                    <WarningSvg />
+                  </TouchableOpacity>
+                </Animated.View>
+              )}
             </View>
           </TouchableOpacity>
         </Interactable.View>

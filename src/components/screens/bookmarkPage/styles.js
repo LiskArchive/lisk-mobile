@@ -9,10 +9,6 @@ export default () => ({
     wrapper: {
       flex: 1,
     },
-    innerContainer: {
-      flexDirection: 'column',
-      paddingBottom: 24,
-    },
     titleContainer: {
       backgroundColor: colors.light.ultramarineBlue,
       width: 54,
