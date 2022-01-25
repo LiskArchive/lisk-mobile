@@ -24,7 +24,7 @@ const BTCRemoval = ({ styles, t, closeBanner }) => {
       </P>
       <View style={styles.content}>
         <View style={styles.svgContainer}>
-          <BTCRemovalSVG size={height < 700 ? 0.7 : height > 850 ? 1 : 0.8} />
+          <BTCRemovalSVG size={height < 700 ? 0.6 : height > 850 ? 0.9 : 0.7} />
         </View>
       </View>
       <TouchableOpacity style={styles.readMoreButton} onPress={readMore}>

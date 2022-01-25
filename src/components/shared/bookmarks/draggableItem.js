@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  View, TouchableOpacity, Animated
-} from 'react-native';
+import { View, TouchableOpacity, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import Interactable from 'react-native-interactable';
 import connect from 'redux-connect-decorator';
@@ -39,9 +37,9 @@ class DraggableItem extends React.Component {
       title: t('bookmarks.disabled.title'),
       component: () => (
         <View>
-          <P style={[styles.text, styles.theme.text]} >{t('bookmarks.disabled.description')}</P>
-          <TouchableOpacity style={styles.buttonContainer} onPress={() => ModalHolder.close()} >
-            <B style={styles.buttonText} >{t('bookmarks.disabled.buttons.close')}</B>
+          <P style={[styles.text, styles.theme.text]}>{t('bookmarks.disabled.description')}</P>
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => ModalHolder.close()}>
+            <B style={styles.buttonText}>{t('bookmarks.disabled.buttons.close')}</B>
           </TouchableOpacity>
         </View>
       )
@@ -56,46 +54,58 @@ class DraggableItem extends React.Component {
     return (
       <View style={[styles.itemContainer, styles.theme.itemContainer]}>
         <View style={styles.draggableRow} pointerEvents="box-none">
-          {isInvalidAddress ? null : (
-            <Animated.View
-              style={[
-                styles.editButton,
-                styles.theme.editButton,
-                {
-                  transform: [
-                    {
-                      translateX: this._deltaX.interpolate({
-                        inputRange: [-240, 0],
-                        outputRange: [0, 240]
-                      })
-                    }
-                  ]
-                }
-              ]}
+          <Animated.View
+            style={[
+              styles.editButton,
+              styles.theme.editButton,
+              isInvalidAddress && styles.lightOpacity,
+              {
+                transform: [
+                  {
+                    translateX: this._deltaX.interpolate({
+                      inputRange: [-240, 0],
+                      outputRange: [0, 240]
+                    })
+                  }
+                ]
+              }
+            ]}
+          >
+            <TouchableOpacity
+              onPress={() => {
+                this.ref.snapTo({ index: 0 });
+                navigate({
+                  name: 'AddBookmark',
+                  params: {
+                    account: data,
+                    title: t('Edit bookmark')
+                  }
+                });
+              }}
+              style={[styles.button]}
+              disabled={isInvalidAddress}
             >
-              <TouchableOpacity
-                onPress={() => {
-                  this.ref.snapTo({ index: 0 });
-                  navigate({
-                    name: 'AddBookmark',
-                    params: {
-                      account: data,
-                      title: t('Edit bookmark')
-                    }
-                  });
-                }}
-                style={[styles.button]}
+              <Icon
+                name="edit-bookmark"
+                size={21}
+                style={[
+                  styles.iconButton,
+                  styles.theme.editContent,
+                  isInvalidAddress && { opacity: 0.5 }
+                ]}
+                color={colors[theme].white}
+              />
+              <P
+                style={[
+                  styles.buttonContent,
+                  styles.theme.editContent,
+                  isInvalidAddress && { opacity: 0.5 }
+                ]}
               >
-                <Icon
-                  name="edit-bookmark"
-                  size={21}
-                  style={[styles.iconButton, styles.theme.editContent]}
-                  color={colors[theme].white}
-                />
-                <P style={[styles.buttonContent, styles.theme.editContent]}>{t('Edit')}</P>
-              </TouchableOpacity>
-            </Animated.View>
-          )}
+                {t('Edit')}
+              </P>
+            </TouchableOpacity>
+          </Animated.View>
 
           <Animated.View
             style={[
