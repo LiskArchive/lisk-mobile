@@ -269,7 +269,7 @@
   "bookmarks": {
     "disabled": {
       "title": "Disabled",
-      "description": "This is a legacy account and can not be used on this network.",
+      "description": "This bookmark is associated with a legacy account and can no longer be used.",
       "buttons": {
         "close": "Got it"
       }
