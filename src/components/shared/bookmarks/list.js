@@ -10,15 +10,15 @@ const List = ({
 }) => {
   const Element = draggable ? DraggableItem : Item;
   return (
-    <View style={[!list?.length && styles.emptyState]}>
-      {list?.map((item) => (
+    <View style={[!list.length && styles.emptyState]}>
+      {list.map((item) => (
         <Element
           showAvatar={showAvatar}
           setRef={setRef}
           navigate={navigate}
           key={`${activeToken}-${item.address}`}
           data={item}
-          isInvalidAddress={validateAddress('LSK', item.address) !== -1}
+          isInvalidAddress={validateAddress('LSK', item.address) === -1}
         />
       ))}
     </View>
