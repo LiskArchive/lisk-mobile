@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { translate } from 'react-i18next';
 import { IconButton } from '../../../shared/toolBox/button';
 import { colors, themes } from '../../../../constants/styleGuide';
@@ -29,7 +29,14 @@ const HeaderBackButton = ({
   }
 
   return (
-    <View style={[styles.container, safeArea ? styles.safeArea : null, containerStyle]}>
+    <View
+      style={[
+        styles.container,
+        safeArea ? styles.safeArea : null,
+        containerStyle,
+        { width: Dimensions.get('window').width }
+      ]}
+    >
       {noIcon ? null : (
         <IconButton
           style={[styles.main, styles.theme.main, style]}
@@ -38,11 +45,7 @@ const HeaderBackButton = ({
           color={color}
         />
       )}
-      <View style={styles.titleContainer}>
-        {title && (
-          <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>
-        )}
-      </View>
+      {title && <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>}
       {rightIcon ? (
         <IconButton
           style={[styles.main, styles.theme.main, style]}
@@ -51,7 +54,7 @@ const HeaderBackButton = ({
           color={rightColor}
         />
       ) : null}
-        {rightIconComponent && rightIconComponent()}
+      {rightIconComponent && rightIconComponent()}
     </View>
   );
 };

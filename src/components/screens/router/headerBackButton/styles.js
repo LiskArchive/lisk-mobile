@@ -16,9 +16,11 @@ export default () => ({
       fontFamily: fonts.family.heading,
       fontSize: 25,
       width: 240,
+      flex: 1,
     },
     titleContainer: {
       flex: 1,
+      backgroundColor: 'red'
     },
     paddingLeft: {
       paddingLeft: 20,

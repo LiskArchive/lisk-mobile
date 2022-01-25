@@ -3,7 +3,8 @@ import { themes, colors, fonts } from '../../../../../constants/styleGuide';
 export default () => ({
   common: {
     container: {
-      paddingTop: 20,
+      paddingTop: 2,
+      backgroundColor: 'red',
     },
     content: {
       padding: 20,
