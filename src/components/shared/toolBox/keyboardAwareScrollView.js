@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React, { Fragment, useState } from 'react';
 import { useHeaderHeight } from '@react-navigation/stack';
 import { View } from 'react-native';
@@ -107,7 +108,7 @@ const ScrollAwareActionBar = ({
           )}
         </View>
       </KeyboardAwareScrollView>
-      {buttonStyle === theme.keyboardStickyButton && (
+      {!noFooterButton && buttonStyle === theme.keyboardStickyButton && (
         <KeyboardTrackingView style={trackerView[osType]}>
           {extraContent}
           {renderButton([theme.keyboardStickyButton])}
