@@ -8,6 +8,9 @@ import { setColorOpacity } from '../../../../../utilities/helpers';
 
 export default () => ({
   common: {
+    flex: {
+      flex: 1,
+    },
     container: {
       paddingTop: 10,
     },

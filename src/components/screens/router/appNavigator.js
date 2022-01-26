@@ -25,19 +25,7 @@ const getIcon = ({ route }) => ({
 });
 
 const Tab = createBottomTabNavigator();
-const SendStack = createStackNavigator();
 const Stack = createStackNavigator();
-
-const SendNavigator = ({ route }) => (
-  <SendStack.Navigator initialRouteName="Send">
-    <SendStack.Screen
-      name="Send"
-      component={Send}
-      options={navigationOptions.SendStack}
-      initialParams={route.params}
-    />
-  </SendStack.Navigator>
-);
 
 const Tabs = ({ theme }) => (
   <Tab.Navigator initialRouteName="Home" tabBarOptions={{
@@ -61,7 +49,7 @@ const Tabs = ({ theme }) => (
         },
       })} />
     <Tab.Screen name="Request" component={Request} options={getIcon} />
-    <Tab.Screen name="Send" component={SendNavigator} options={getIcon} />
+    <Tab.Screen name="Send" component={Send} options={getIcon} />
     <Tab.Screen name="Bookmarks" component={Bookmarks} options={getIcon} />
     <Tab.Screen name="Settings" component={Settings} options={getIcon} />
   </Tab.Navigator>

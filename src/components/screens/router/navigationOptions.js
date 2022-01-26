@@ -24,7 +24,7 @@ const navigationOptions = {};
 navigationOptions.Main = {};
 
 navigationOptions.Send = {
-  header: () => null
+  headerShown: false
 };
 
 navigationOptions.SendStack = () => {

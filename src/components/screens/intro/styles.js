@@ -8,6 +8,9 @@ const styles = {
   container: {
     backgroundColor: colors.light.white,
   },
+  flex: {
+    flex: 1,
+  },
   wrapper: {
     backgroundColor: colors.light.white,
     height: '100%',
@@ -95,8 +98,6 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    height: 300,
-    width: '100%',
     backgroundColor: colors.light.white,
   },
   illustrationWrapper: {
@@ -140,9 +141,7 @@ const styles = {
   buttonContainer: {
     zIndex: 10,
     width: '100%',
-    alignItems: 'stretch',
-    position: 'absolute',
-    bottom: 20,
+    margin: 10,
   },
   button: {
     marginHorizontal: 20,

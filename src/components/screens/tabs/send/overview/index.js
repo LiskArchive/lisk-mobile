@@ -3,6 +3,7 @@ import { View, ScrollView } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { transactionAdded as transactionAddedAction } from '../../../../../actions/transactions';
 import FormattedNumber from '../../../../shared/formattedNumber';
 import { toRawLsk, fromRawLsk } from '../../../../../utilities/conversions';
@@ -17,7 +18,6 @@ import { tokenMap } from '../../../../../constants/tokens';
 import DropDownHolder from '../../../../../utilities/alert';
 import HeaderBackButton from '../../../router/headerBackButton';
 import ReadMore from './readMore';
-import StepProgress from '../../../../shared/multiStep/stepProgress';
 
 const getTranslatedMessages = (t) => ({
   initialize: {
@@ -48,51 +48,6 @@ class Overview extends React.Component {
     initialize: false,
     busy: false
   };
-
-  componentDidMount() {
-    const {
-      t, prevStep, navigation, route
-    } = this.props;
-    const { send, initialize } = getTranslatedMessages(t);
-    let options = {
-      title: null,
-      headerLeft: (props) => <HeaderBackButton
-        {...props}
-        onPress={prevStep}
-        safeArea={true}
-        title={send.title}
-      />,
-      headerRight: () => <StepProgress currentIndex={3} length={3} />
-    };
-
-    if (route.params?.initialize) {
-      this.setState({
-        initialize: true
-      });
-
-      options = {
-        title: initialize.title,
-        headerLeft: () => null,
-      };
-    }
-
-    navigation.setOptions(options);
-    navigation.setParams({ initialize: false });
-  }
-
-  componentDidUpdate(prevProps) {
-    const {
-      t, lng, navigation, route
-    } = this.props;
-
-    if (prevProps.lng !== lng) {
-      const { initialize, send } = getTranslatedMessages(t);
-
-      navigation.setOptions({
-        title: route.params?.initialize ? initialize : send
-      });
-    }
-  }
 
   componentWillUnmount() {
     const {
@@ -151,7 +106,8 @@ class Overview extends React.Component {
         address, amount, reference, fee, priority
       },
       settings: { token },
-      language
+      language,
+      prevStep
     } = this.props;
 
     const actionType = route.params?.initialize || this.state.initialize ? 'initialize' : 'send';
@@ -160,82 +116,96 @@ class Overview extends React.Component {
     const bookmark = followed[token.active].find((item) => item.address === address);
 
     return (
-      <ScrollView
-        style={[styles.container, styles.theme.container]}
-        contentContainerStyle={styles.innerContainer}
-      >
-        <View>
-          <ReadMore actionType={actionType} styles={styles} messages={translatedMessages} t={t} />
+      <SafeAreaView style={styles.flex} >
+        <HeaderBackButton
+          title={route.params?.initialize ? 'Initialize your account' : 'Send LSK'}
+          onPress={prevStep}
+          currentIndex={1}
+          length={3}
+          step={true}
+        />
+        <ScrollView
+          style={[styles.container, styles.theme.container]}
+          contentContainerStyle={styles.innerContainer}
+        >
+          <View>
+            <ReadMore actionType={actionType} styles={styles} messages={translatedMessages} t={t} />
 
-          <View style={[styles.rowContent, styles.theme.rowContent]} >
-            <View style={[styles.addressContainer]} >
-              <View>
-                <P style={styles.theme.text} >{t('Wallet details')}</P>
-                {bookmark
-                  ? <P style={[styles.bookmark, styles.text, styles.theme.text]}>
-                    {bookmark.label}
-                  </P>
-                  : null}
-              </View>
-              {settings.token.active === tokenMap.LSK.key ? (
-                <Avatar address={address || ''} style={styles.avatar} size={50} />
-              ) : (
-                <View style={[styles.addressIconContainer, styles.theme.addressIconContainer]}>
-                  <Icon name="btc" style={styles.addressIcon} color={colors[theme].white} size={20} />
+            <View style={[styles.rowContent, styles.theme.rowContent]}>
+              <View style={[styles.addressContainer]}>
+                <View>
+                  <P style={styles.theme.text}>{t('Wallet details')}</P>
+                  {bookmark ? (
+                    <P style={[styles.bookmark, styles.text, styles.theme.text]}>
+                      {bookmark.label}
+                    </P>
+                  ) : null}
                 </View>
-              )}
+                {settings.token.active === tokenMap.LSK.key ? (
+                  <Avatar address={address || ''} style={styles.avatar} size={50} />
+                ) : (
+                  <View style={[styles.addressIconContainer, styles.theme.addressIconContainer]}>
+                    <Icon
+                      name="btc"
+                      style={styles.addressIcon}
+                      color={colors[theme].white}
+                      size={20}
+                    />
+                  </View>
+                )}
+              </View>
+
+              <P style={[styles.theme.address, styles.address]}>{address}</P>
             </View>
 
-            <P style={[styles.theme.address, styles.address]}>{address}</P>
-          </View>
-
-          <View style={[styles.rowContent, styles.theme.rowContent]}>
-            <P style={[styles.label, styles.theme.label]}>
-              {actionType === 'initialize' ? t('Transaction fee') : t('Amount')}
-            </P>
-            <P style={[styles.text, styles.theme.text]}>
-              <FormattedNumber tokenType={settings.token.active} language={language}>
-                {amount}
-              </FormattedNumber>
-            </P>
-          </View>
-          {priority && (
             <View style={[styles.rowContent, styles.theme.rowContent]}>
-              <P style={[styles.label, styles.theme.label]}>{t('Priority')}</P>
-              <P style={[styles.text, styles.theme.text]}>{priority}</P>
-            </View>
-          )}
-          {reference ? (
-            <View style={[styles.rowContent, styles.theme.rowContent]}>
-              <P style={[styles.label, styles.theme.label]}>{t('Message')}</P>
-              <P style={[styles.text, styles.theme.text]}>{reference}</P>
-            </View>
-          ) : null}
-          {actionType !== 'initialize' ? (
-            <View style={[styles.rowContent, styles.theme.rowContent]}>
-              <P style={[styles.label, styles.theme.label]}>{t('Transaction fee')}</P>
+              <P style={[styles.label, styles.theme.label]}>
+                {actionType === 'initialize' ? t('Transaction fee') : t('Amount')}
+              </P>
               <P style={[styles.text, styles.theme.text]}>
                 <FormattedNumber tokenType={settings.token.active} language={language}>
-                  {fromRawLsk(fee)}
+                  {amount}
                 </FormattedNumber>
               </P>
             </View>
-          ) : null}
-        </View>
+            {priority && (
+              <View style={[styles.rowContent, styles.theme.rowContent]}>
+                <P style={[styles.label, styles.theme.label]}>{t('Priority')}</P>
+                <P style={[styles.text, styles.theme.text]}>{priority}</P>
+              </View>
+            )}
+            {reference ? (
+              <View style={[styles.rowContent, styles.theme.rowContent]}>
+                <P style={[styles.label, styles.theme.label]}>{t('Message')}</P>
+                <P style={[styles.text, styles.theme.text]}>{reference}</P>
+              </View>
+            ) : null}
+            {actionType !== 'initialize' ? (
+              <View style={[styles.rowContent, styles.theme.rowContent]}>
+                <P style={[styles.label, styles.theme.label]}>{t('Transaction fee')}</P>
+                <P style={[styles.text, styles.theme.text]}>
+                  <FormattedNumber tokenType={settings.token.active} language={language}>
+                    {fromRawLsk(fee)}
+                  </FormattedNumber>
+                </P>
+              </View>
+            ) : null}
+          </View>
 
-        <View>
-          <PrimaryButton
-            disabled={this.state.busy}
-            style={styles.button}
-            onClick={this.send}
-            title={
-              this.state.busy
-                ? translatedMessages[actionType].buttonBusy
-                : translatedMessages[actionType].button
-            }
-          />
-        </View>
-      </ScrollView>
+          <View>
+            <PrimaryButton
+              disabled={this.state.busy}
+              style={styles.button}
+              onClick={this.send}
+              title={
+                this.state.busy
+                  ? translatedMessages[actionType].buttonBusy
+                  : translatedMessages[actionType].button
+              }
+            />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }

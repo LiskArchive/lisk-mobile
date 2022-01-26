@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { translate } from 'react-i18next';
@@ -6,6 +7,7 @@ import { colors, themes } from '../../../../constants/styleGuide';
 import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
 import { H3 } from '../../../shared/toolBox/typography';
+import StepProgress from '../../../shared/multiStep/stepProgress';
 
 const HeaderBackButton = ({
   theme,
@@ -22,7 +24,10 @@ const HeaderBackButton = ({
   rightIcon,
   onRightPress,
   rightIconComponent,
-  containerStyle
+  containerStyle,
+  step,
+  currentIndex,
+  length,
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
@@ -34,7 +39,7 @@ const HeaderBackButton = ({
         styles.container,
         safeArea ? styles.safeArea : null,
         containerStyle,
-        { width: Dimensions.get('window').width }
+        { width: Dimensions.get('window').width },
       ]}
     >
       {noIcon ? null : (
@@ -55,6 +60,7 @@ const HeaderBackButton = ({
         />
       ) : null}
       {rightIconComponent && rightIconComponent()}
+      {step && <StepProgress currentIndex={currentIndex} length={length} />}
     </View>
   );
 };
