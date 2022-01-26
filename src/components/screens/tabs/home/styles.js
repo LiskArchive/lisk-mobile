@@ -13,6 +13,8 @@ export default () => ({
       borderTopRightRadius: 20,
       borderTopLeftRadius: 20,
       marginTop: 0,
+      minHeight: deviceHeight() - 400,
+      padding: 20,
     },
     fixedBg: {
       position: 'absolute',
@@ -25,10 +27,6 @@ export default () => ({
     },
     scrollView: {
       top: 0
-    },
-    loadingContainer: {
-      flex: 1,
-      paddingVertical: 150
     },
     scrollViewContainer: {
       position: 'absolute',
@@ -47,9 +45,6 @@ export default () => ({
     emptyContainer: {
       backgroundColor: colors.light.white
     },
-    loadingContainer: {
-      backgroundColor: colors.light.white
-    },
     homeContainer: {
       backgroundColor: colors.light.ultramarineBlue
     }
@@ -62,9 +57,6 @@ export default () => ({
       backgroundColor: colors.dark.mainBg
     },
     emptyContainer: {
-      backgroundColor: colors.dark.mainBg
-    },
-    loadingContainer: {
       backgroundColor: colors.dark.mainBg
     },
     homeContainer: {
