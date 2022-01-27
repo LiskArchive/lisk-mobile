@@ -277,7 +277,7 @@
   },
   "banners": {
     "btcRemoval": {
-      "title": "Please note: BTC support has been removed as of Lisk {{release}}",
+      "title": "Please note: BTC support has been removed as of Lisk Mobile {{release}}",
       "description": "If you are affected by this change, please tap the link below to learn how to access your BTC using an alternative application.",
       "buttons": {
         "gotIt": "Got it",
