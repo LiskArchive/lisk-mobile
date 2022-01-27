@@ -26,7 +26,7 @@ class Amount extends React.Component {
   render() {
     const { styles } = this.props;
     return (
-      <SafeAreaView style={styles.wrapper}>
+      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
         <HeaderBackButton
           title={'Send LSK'}
           onPress={this.props.prevStep}

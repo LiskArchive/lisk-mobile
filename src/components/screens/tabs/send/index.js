@@ -53,7 +53,7 @@ class Send extends React.Component {
   resetMultiStep = () => {
     const query = this.props.route.params?.query ?? {};
     this.setState({ query });
-    this.nav.reset(query);
+    this.nav?.reset?.(query);
   };
 
   checkQuery = () => {

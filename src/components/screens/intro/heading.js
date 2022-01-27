@@ -74,7 +74,7 @@ class Heading extends React.Component {
                   resizeMethod="scale"
                   source={item.imageSrc}
                   resizeMode="center"
-                  style={[item.imageStyle]}
+                  style={styles.imageSrc}
                 />
               </View>
               {item.step === descriptionContent.length && (

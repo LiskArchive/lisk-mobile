@@ -28,9 +28,13 @@ const HeaderBackButton = ({
   step,
   currentIndex,
   length,
+  alwaysLight
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
+  }
+  if (alwaysLight) {
+    color = colors.dark.black;
   }
 
   return (
@@ -40,6 +44,7 @@ const HeaderBackButton = ({
         safeArea ? styles.safeArea : null,
         containerStyle,
         { width: Dimensions.get('window').width },
+        alwaysLight && styles.whiteBackground
       ]}
     >
       {noIcon ? null : (

@@ -1,4 +1,4 @@
-import { fonts } from '../../../../constants/styleGuide';
+import { colors, fonts } from '../../../../constants/styleGuide';
 import { deviceType } from '../../../../utilities/device';
 
 const type = deviceType();
@@ -21,6 +21,9 @@ export default () => ({
     titleContainer: {
       flex: 1,
       backgroundColor: 'red'
+    },
+    whiteBackground: {
+      backgroundColor: colors.light.white
     },
     paddingLeft: {
       paddingLeft: 20,

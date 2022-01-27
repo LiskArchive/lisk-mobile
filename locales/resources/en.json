@@ -268,7 +268,7 @@
   },
   "bookmarks": {
     "disabled": {
-      "title": "Disabled",
+      "title": "Disabled Bookmark",
       "description": "This bookmark is associated with a legacy account and can no longer be used.",
       "buttons": {
         "close": "Got it"

@@ -15,6 +15,9 @@ const styles = {
     backgroundColor: colors.light.white,
     height: '100%',
   },
+  imageSrc: {
+    flex: 1, resizeMode: 'contain'
+  },
   splashContainer: {
     backgroundColor: colors.light.white,
     position: 'absolute',
@@ -75,6 +78,7 @@ const styles = {
   },
   headingContainer: {
     flex: 1,
+    paddingBottom: 20,
   },
   descriptionWrapper: {
     paddingTop: 30,

@@ -116,11 +116,11 @@ class Overview extends React.Component {
     const bookmark = followed[token.active].find((item) => item.address === address);
 
     return (
-      <SafeAreaView style={styles.flex} >
+      <SafeAreaView style={[styles.flex, styles.theme.container]} >
         <HeaderBackButton
           title={route.params?.initialize ? 'Initialize your account' : 'Send LSK'}
           onPress={prevStep}
-          currentIndex={1}
+          currentIndex={3}
           length={3}
           step={true}
         />
