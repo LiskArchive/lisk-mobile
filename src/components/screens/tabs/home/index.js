@@ -52,7 +52,8 @@ const summaryHeight = 200;
     incognito: state.settings.incognito,
     activeToken: state.settings.token.active,
     settings: state.settings,
-    followedAccounts: state.accounts.followed || []
+    followedAccounts: state.accounts.followed || [],
+    loading: state.loading?.filter(loading => loading === 'TRANSACTIONS_LOADED')
   }),
   {
     transactionsLoaded: transactionsLoadedAction,
@@ -256,10 +257,11 @@ class Home extends React.Component {
       updateTransactions,
       theme,
       isFocused,
-      activeToken
+      activeToken,
+      loading
     } = this.props;
     let content = null;
-    if (!transactions.loaded) {
+    if (!loading?.length && !transactions.loaded) {
       content = <Loading style={[
         styles.emptyContainer,
         styles.theme.emptyContainer
