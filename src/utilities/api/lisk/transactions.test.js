@@ -78,7 +78,7 @@ describe('api/transactions', () => {
     apiClient.getLatestBlock = jest.fn();
     apiClient.getLatestBlock.mockResolvedValue({
       height: 15301076,
-      timestamp: 1640594580,
+      timestamp: 1640594580
     });
   });
 
@@ -134,16 +134,35 @@ describe('api/transactions', () => {
         meta: { limit: undefined, offset: undefined, count: 2 }
       });
     });
+    describe('empty account', () => {
+      beforeAll(() => {
+        apiClient.getTransactions.mockResolvedValue({ meta: undefined, data: undefined });
+      });
+      it('should resolve correctly for empty accounts', async () => {
+        const result = await transactions.get({
+          address: response.data[0].recipient.address
+        });
+        expect(apiClient.getTransactions).toBeCalledWith(
+          response.data[0].recipient.address,
+          undefined,
+          undefined
+        );
+        expect(result).toEqual({
+          data: [],
+          meta: {}
+        });
+      });
 
-    it('Should handle rejections', async () => {
-      const errorMessage = { message: 'Error!' };
-      apiClient.getTransactions.mockRejectedValueOnce(errorMessage);
+      it('Should handle rejections', async () => {
+        const errorMessage = { message: 'Error!' };
+        apiClient.getTransactions.mockRejectedValueOnce(errorMessage);
 
-      try {
-        await transactions.get({ address: response.data[0].recipientId });
-      } catch (error) {
-        expect(error).toBe(errorMessage);
-      }
+        try {
+          await transactions.get({ address: response.data[0].recipientId });
+        } catch (error) {
+          expect(error).toBe(errorMessage);
+        }
+      });
     });
   });
 
@@ -221,7 +240,7 @@ describe('Should get amount from unlock token transaction type', () => {
     apiClient.getLatestBlock = jest.fn();
     apiClient.getLatestBlock.mockResolvedValue({
       height: 15301076,
-      timestamp: 1640594580,
+      timestamp: 1640594580
     });
     apiClient.getTransaction.mockResolvedValue([
       {

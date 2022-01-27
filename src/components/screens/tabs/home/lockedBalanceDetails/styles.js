@@ -4,7 +4,6 @@ export default () => ({
   common: {
     container: {
       paddingTop: 2,
-      backgroundColor: 'red',
     },
     content: {
       padding: 20,

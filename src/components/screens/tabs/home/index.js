@@ -53,7 +53,6 @@ const summaryHeight = 200;
     activeToken: state.settings.token.active,
     settings: state.settings,
     followedAccounts: state.accounts.followed || [],
-    loading: state.loading?.filter(loading => loading === 'TRANSACTIONS_LOADED')
   }),
   {
     transactionsLoaded: transactionsLoadedAction,
@@ -185,8 +184,7 @@ class Home extends React.Component {
       }
     } = this.props;
     const prevTokenList = prevProps.settings.token.list;
-    const prevTransactionCount = prevProps.transactions.pending.length
-      + prevProps.transactions.confirmed.length;
+    const prevTransactionCount = prevProps.transactions.pending.length + prevProps.transactions.confirmed.length;
     const transactionCount = transactions.pending.length + transactions.confirmed.length;
     const shouldUpdateState = prevProps.transactions.loaded !== transactions.loaded
       || prevTransactionCount !== transactionCount;
@@ -258,23 +256,14 @@ class Home extends React.Component {
       theme,
       isFocused,
       activeToken,
-      loading
     } = this.props;
     let content = null;
-    if (!loading?.length && !transactions.loaded) {
-      content = <Loading style={[
-        styles.emptyContainer,
-        styles.theme.emptyContainer
-      ]} />;
-    } else {
+    if (transactions.loaded) {
       const listElements = transactions.count > 0
         ? [...transactions.pending, ...transactions.confirmed]
         : ['emptyState'];
       content = (
         <InfiniteScrollView
-          // ref={(el) => {
-          //   this.scrollView = el;
-          // }}
           scrollEventThrottle={8}
           style={[styles.scrollView]}
           refresh={updateTransactions}
@@ -302,6 +291,8 @@ class Home extends React.Component {
           }
         />
       );
+    } else {
+      content = <Loading style={[styles.emptyContainer, styles.theme.emptyContainer]} />;
     }
     const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
     if (!this.state.hideBtcRemoval) {

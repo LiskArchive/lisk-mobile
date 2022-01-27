@@ -55,13 +55,19 @@ export const get = async ({
     return { data: normalizeTransactionsResponse(txs, block), meta: {} };
   }
   const { data, meta } = await apiClient.getTransactions(address, limit, offset);
+  if (data) {
+    return {
+      data: normalizeTransactionsResponse(data, block),
+      meta: {
+        limit,
+        offset,
+        count: meta.total
+      }
+    };
+  }
   return {
-    data: normalizeTransactionsResponse(data, block),
-    meta: {
-      limit,
-      offset,
-      count: meta.total
-    }
+    data: [],
+    meta: {}
   };
 };
 
