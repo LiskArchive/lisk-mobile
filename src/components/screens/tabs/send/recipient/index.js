@@ -200,6 +200,7 @@ class Recipient extends React.Component {
               navigate={this.forward}
               query={this.state.address.value}
               renderEmpty={false}
+              filterAddress
             />
           </KeyboardAwareScrollView>
         </View>

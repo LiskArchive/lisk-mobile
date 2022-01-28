@@ -14,6 +14,9 @@ export default () => ({
     column: {
       flex: 1,
     },
+    emptyView: {
+      marginBottom: 40,
+    },
     buttonContainer: {
       marginTop: 10,
       paddingVertical: 10

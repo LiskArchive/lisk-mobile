@@ -8,8 +8,10 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { themes } from '../../../constants/styleGuide';
 
-const EmptyState = ({ theme, styles, t }) => (
-  <View style={styles.emptyState}>
+const EmptyState = ({
+  theme, styles, t, style
+}) => (
+  <View style={[styles.emptyState, style]}>
     <View style={styles.imageContainer}>
       <Image
         style={styles.noBookmarkImage}
