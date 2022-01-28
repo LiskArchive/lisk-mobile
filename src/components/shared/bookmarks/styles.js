@@ -32,6 +32,7 @@ export default () => ({
     },
     infoButton: {
       padding: 15,
+      paddingRight: 0,
     },
     linkedItem: {
       flex: 1,

@@ -12,6 +12,7 @@ const fetchTransactions = async (dispatch, getState, data) => {
       getState().settings.token.active,
       data
     );
+
     dispatch({
       type: actionTypes.transactionsLoaded,
       data: {

@@ -77,9 +77,9 @@ const Message = ({
       ) : (
         <TouchableOpacity onPress={() => setCollapsed(false)} style={[styles.addMessage]} accessibilityLabel="open-message">
           <View style={styles.row}>
-            <TouchableOpacity style={styles.actionButton} testID='open-message-input' >
+            <View style={styles.actionButton} testID='open-message-input' >
               <AddSvg color={colors.light.ultramarineBlue} />
-            </TouchableOpacity>
+            </View>
             <P style={[styles.title, styles.theme.title]}>{t('Add Message (optional)')}</P>
           </View>
         </TouchableOpacity>

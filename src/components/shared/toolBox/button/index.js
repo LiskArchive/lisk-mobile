@@ -29,6 +29,7 @@ const BaseButton = props => {
         props.style,
         disabled ? styles.disabledButtonContainer : null,
       ]}
+      disabled={disabled}
     >
       <Text style={[noPredefinedStyle ? null : styles.buttonText, textStyle]}>
         {children || title}

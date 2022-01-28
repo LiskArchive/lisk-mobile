@@ -69,11 +69,14 @@ class Heading extends React.Component {
                   {t(item.description)}
                 </P>
               </View>
-              <Image
-                resizeMethod={'scale'}
-                source={item.imageSrc}
-                style={item.imageStyle}
-              />
+              <View style={styles.flex} >
+                <Image
+                  resizeMethod="scale"
+                  source={item.imageSrc}
+                  resizeMode="center"
+                  style={styles.imageSrc}
+                />
+              </View>
               {item.step === descriptionContent.length && (
                 <View style={[styles.buttonContainer, buttonStyle]}>
                   {item.acceptTermsSwitch && (

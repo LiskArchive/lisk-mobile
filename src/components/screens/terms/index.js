@@ -6,10 +6,7 @@ import URLs from '../../../constants/URLs';
 const Terms = () => (
   <View style={{ flex: 1, overflow: 'hidden' }}>
     <WebView
-      source={{ uri: URLs.liskTermsAndConditions }}
-      style={{
-        marginTop: -20,
-      }}
+      source={{ uri: URLs.liskPrivacyPolicy }}
       startInLoadingState={true}
     />
   </View>

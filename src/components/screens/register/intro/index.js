@@ -1,5 +1,6 @@
 import React from 'react';
 import { translate } from 'react-i18next';
+import connect from 'redux-connect-decorator';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { generatePassphrase } from '../../../../utilities/passphrase';
@@ -8,17 +9,32 @@ import addressImg from '../../../../assets/images/registrationIntro/address3x.pn
 import securePassphraseImg from '../../../../assets/images/registrationIntro/securePassphrase3x.png';
 import uniqueAvatarImg from '../../../../assets/images/registrationIntro/uniqueAvatar3x.png';
 import HeaderBackButton from '../../router/headerBackButton';
+import {
+  accountSignedIn as accountSignedInAction,
+  accountFetched as accountFetchedAction
+} from '../../../../actions/accounts';
+import { pricesRetrieved as pricesRetrievedAction } from '../../../../actions/service';
 
+@connect(
+  state => ({
+    settings: state.settings,
+  }),
+  {
+    accountSignedIn: accountSignedInAction,
+    accountFetched: accountFetchedAction,
+    pricesRetrieved: pricesRetrievedAction,
+  }
+)
 class Intro extends React.Component {
   state = {
     passphrase: '',
-    buttonStatus: true,
+    buttonStatus: true
   };
 
   componentDidMount() {
     const {
       t,
-      navigation: { setOptions },
+      navigation: { setOptions }
     } = this.props;
 
     const passphrase = this.props.route.params?.passphrase ?? generatePassphrase();
@@ -26,20 +42,23 @@ class Intro extends React.Component {
 
     setOptions({
       title: t('Account creation'),
-      headerLeft: (props) => <HeaderBackButton {...props} onPress={this.props.navigation.goBack} />,
+      headerLeft: (props) => <HeaderBackButton {...props} onPress={this.props.navigation.goBack} />
     });
   }
 
-  confirm = status => {
+  confirm = (status) => {
     this.setState({
-      buttonStatus: !status,
+      buttonStatus: !status
     });
   };
 
   forward = () => {
     this.props.nextStep({
-      passphrase: this.state.passphrase,
+      passphrase: this.state.passphrase
     });
+    this.props.accountSignedIn({ passphrase: this.state.passphrase });
+    this.props.accountFetched();
+    this.props.pricesRetrieved();
   };
 
   render() {
@@ -52,15 +71,14 @@ class Intro extends React.Component {
         description:
           'The address is unique and can’t be changed. It’s yours. Find it in your home page.',
         imageSrc: addressImg,
-        imageStyle: styles.sliderImage,
+        imageStyle: styles.sliderImage
       },
       {
         step: 2,
         title: 'A unique avatar',
-        description:
-          'The Avatar represents the address, making it easy to recognize.',
+        description: 'The Avatar represents the address, making it easy to recognize.',
         imageSrc: uniqueAvatarImg,
-        imageStyle: styles.sliderImage,
+        imageStyle: styles.sliderImage
       },
       {
         step: 3,
@@ -68,8 +86,8 @@ class Intro extends React.Component {
         description:
           'Your passphrase is used to access your account. No one can reset it, not even Lisk.',
         imageSrc: securePassphraseImg,
-        imageStyle: styles.sliderImage,
-      },
+        imageStyle: styles.sliderImage
+      }
     ];
 
     return (

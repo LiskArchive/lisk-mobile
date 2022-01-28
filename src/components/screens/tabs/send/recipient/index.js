@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { PrimaryButton, IconButton } from '../../../../shared/toolBox/button';
 import Input from '../../../../shared/toolBox/input';
 import { colors } from '../../../../../constants/styleGuide';
@@ -16,13 +17,13 @@ import Bookmarks from '../../../../shared/bookmarks';
 import { validateAddress } from '../../../../../utilities/validators';
 import DropDownHolder from '../../../../../utilities/alert';
 import HeaderBackButton from '../../../router/headerBackButton';
-import StepProgress from '../../../../shared/multiStep/stepProgress';
 import { H4 } from '../../../../shared/toolBox/typography';
 import { tokenMap } from '../../../../../constants/tokens';
 
 @connect((state) => ({
-  list: state.accounts.followed.LSK
-    ?.filter(list => validateAddress(tokenMap[0], list.address) === 0)
+  list: state.accounts.followed.LSK?.filter(
+    (list) => validateAddress(tokenMap[0], list.address) === 0
+  )
 }))
 class Recipient extends React.Component {
   scannedData = {};
@@ -50,10 +51,7 @@ class Recipient extends React.Component {
     }
 
     setOptions({
-      title: null,
-      headerLeft: () => <HeaderBackButton title={'Send LSK'} safeArea={true} noIcon={true} />,
-      headerRight: () => <StepProgress currentIndex={1} length={3} />,
-      headerShown: true
+      headerShown: false
     });
   }
 
@@ -128,11 +126,7 @@ class Recipient extends React.Component {
 
   render() {
     const {
-      navigation,
-      styles,
-      t,
-      lng,
-      list
+      navigation, styles, t, lng, list
     } = this.props;
     const { address } = this.state;
     const hasBookmarks = !!list?.length;
@@ -141,7 +135,7 @@ class Recipient extends React.Component {
       : t('Insert public address');
 
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
+      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
           ref={(el) => {
             this.scanner = el;
@@ -152,6 +146,7 @@ class Recipient extends React.Component {
           permissionDialogTitle={t('Permission to use camera')}
           permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
+        <HeaderBackButton title={'Send LSK'} noIcon={true} currentIndex={1} length={3} step={true} />
         <View style={styles.form}>
           <View style={styles.addressContainer}>
             <IconButton
@@ -210,7 +205,7 @@ class Recipient extends React.Component {
         <View style={styles.footerButtonContainer}>
           <PrimaryButton title={t('Continue')} onClick={this.submitForm} />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

@@ -137,6 +137,7 @@ class RNParallax extends Component {
         )}
         ref={reference}
         refreshControl={refreshControl}
+        showsVerticalScrollIndicator={false}
         {...renderableScrollViewProps}>
         {this.renderHeaderTitle()}
         <View

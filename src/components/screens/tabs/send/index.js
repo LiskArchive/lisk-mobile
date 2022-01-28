@@ -32,22 +32,11 @@ class Send extends React.Component {
   };
 
   componentDidMount() {
-    const {
-      navigation,
-      accounts,
-      settings,
-      navigation: { setOptions },
-    } = this.props;
-
+    const { navigation } = this.props;
     this.subs = [
       navigation.addListener('focus', this.didFocus),
       navigation.addListener('blur', this.willBlur)
     ];
-    if (accounts.info[settings.token.active].isMultisignature) {
-      setOptions({
-        headerShown: false,
-      });
-    }
   }
 
   componentDidUpdate(prevProps) {
@@ -64,7 +53,7 @@ class Send extends React.Component {
   resetMultiStep = () => {
     const query = this.props.route.params?.query ?? {};
     this.setState({ query });
-    this.nav.reset(query);
+    this.nav?.reset?.(query);
   };
 
   checkQuery = () => {
@@ -157,7 +146,7 @@ class Send extends React.Component {
     if (accounts.info[settings.token.active].isMultisignature) {
       return (
         <SafeAreaView style={[styles.flex, styles.theme.multiSigContainer]}>
-          <HeaderBackButton title="Send LSK" noIcon containerStyle={styles.navContainer} />
+          <HeaderBackButton title="Send LSK" noIcon />
           <View style={[styles.flex]}>
             <View style={[styles.multiSigContainer]}>
               <View style={styles.illustrationWrapper}>
@@ -168,7 +157,9 @@ class Send extends React.Component {
                 style={styles.buttonContainer}
                 onPress={this.openLiskDesktopDownload}
               >
-                <B style={[styles.button, styles.theme.button]}>{t('multisignature.send.button')}</B>
+                <B style={[styles.button, styles.theme.button]}>
+                  {t('multisignature.send.button')}
+                </B>
               </TouchableOpacity>
             </View>
           </View>

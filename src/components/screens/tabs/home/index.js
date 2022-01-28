@@ -52,7 +52,7 @@ const summaryHeight = 200;
     incognito: state.settings.incognito,
     activeToken: state.settings.token.active,
     settings: state.settings,
-    followedAccounts: state.accounts.followed || []
+    followedAccounts: state.accounts.followed || [],
   }),
   {
     transactionsLoaded: transactionsLoadedAction,
@@ -185,7 +185,7 @@ class Home extends React.Component {
     } = this.props;
     const prevTokenList = prevProps.settings.token.list;
     const prevTransactionCount = prevProps.transactions.pending.length
-      + prevProps.transactions.confirmed.length;
+    + prevProps.transactions.confirmed.length;
     const transactionCount = transactions.pending.length + transactions.confirmed.length;
     const shouldUpdateState = prevProps.transactions.loaded !== transactions.loaded
       || prevTransactionCount !== transactionCount;
@@ -256,20 +256,15 @@ class Home extends React.Component {
       updateTransactions,
       theme,
       isFocused,
-      activeToken
+      activeToken,
     } = this.props;
     let content = null;
-    if (!transactions.loaded) {
-      content = <Loading style={[styles.loadingContainer, styles.theme.loadingContainer]} />;
-    } else {
+    if (transactions.loaded) {
       const listElements = transactions.count > 0
         ? [...transactions.pending, ...transactions.confirmed]
         : ['emptyState'];
       content = (
         <InfiniteScrollView
-          // ref={(el) => {
-          //   this.scrollView = el;
-          // }}
           scrollEventThrottle={8}
           style={[styles.scrollView]}
           refresh={updateTransactions}
@@ -297,6 +292,8 @@ class Home extends React.Component {
           }
         />
       );
+    } else {
+      content = <Loading style={[styles.emptyContainer, styles.theme.emptyContainer]} />;
     }
     const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
     if (!this.state.hideBtcRemoval) {

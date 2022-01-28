@@ -24,7 +24,7 @@ const navigationOptions = {};
 navigationOptions.Main = {};
 
 navigationOptions.Send = {
-  header: () => null
+  headerShown: false
 };
 
 navigationOptions.SendStack = () => {
@@ -118,7 +118,7 @@ navigationOptions.About = {
 
 navigationOptions.Terms = {
   title: null,
-  headerLeft: (props) => <HeaderBackButton title="Terms of use" {...props} />,
+  headerLeft: (props) => <HeaderBackButton title="Terms of use" {...props} alwaysLight />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };

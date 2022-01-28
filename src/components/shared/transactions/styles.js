@@ -1,5 +1,5 @@
 import { themes, colors } from '../../../constants/styleGuide';
-import { deviceHeight, viewportHeight } from '../../../utilities/device';
+import { deviceHeight } from '../../../utilities/device';
 import { setColorOpacity } from '../../../utilities/helpers';
 
 export default () => ({
@@ -73,6 +73,7 @@ export default () => ({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      padding: 20,
     },
     emptyStateActivityIndicator: {
       position: 'absolute',
@@ -82,8 +83,6 @@ export default () => ({
       alignItems: 'center',
       justifyContent: 'center',
       flex: 1,
-      height: viewportHeight() - 170,
-      marginTop: 170,
     },
     noActivity: {
       width: '100%',
