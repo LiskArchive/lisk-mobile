@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { AppState } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
@@ -97,35 +98,37 @@ class Scanner extends React.Component {
     return (
       <Fragment>
         {camera.visible ? (
-          <RNCamera
-            ref={ref => {
-              this.camera = ref;
-            }}
-            style={[styles.preview, styles.cameraPreview, scanner]}
-            onBarCodeRead={this.readQRcode}
-            barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-            type={RNCamera.Constants.Type.back}
-            captureAudio={false}
-            notAuthorizedView={
-              <CameraAccess close={this.toggleCamera} fullScreen={fullScreen} />
-            }
-            pendingAuthorizationView={
-              <CameraAccess close={this.toggleCamera} />
-            }
-            androidCameraPermissionOptions={{
-              title: permissionDialogTitle,
-              message: permissionDialogMessage,
-              buttonPositive: 'Ok',
-              buttonNegative: 'Cancel',
-            }}
-          >
-            <CameraOverlay
-              containerStyles={cameraOverlay}
-              toggleGallery={this.toggleGallery}
-              photoPermission={photo.permission}
-              close={this.toggleCamera}
-            />
-          </RNCamera>
+          <SafeAreaView style={styles.scannerContainer} >
+            <RNCamera
+              ref={ref => {
+                this.camera = ref;
+              }}
+              style={[styles.preview, styles.cameraPreview, scanner]}
+              onBarCodeRead={this.readQRcode}
+              barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+              type={RNCamera.Constants.Type.back}
+              captureAudio={false}
+              notAuthorizedView={
+                <CameraAccess close={this.toggleCamera} fullScreen={fullScreen} />
+              }
+              pendingAuthorizationView={
+                <CameraAccess close={this.toggleCamera} />
+              }
+              androidCameraPermissionOptions={{
+                title: permissionDialogTitle,
+                message: permissionDialogMessage,
+                buttonPositive: 'Ok',
+                buttonNegative: 'Cancel',
+              }}
+            >
+              <CameraOverlay
+                containerStyles={cameraOverlay}
+                toggleGallery={this.toggleGallery}
+                photoPermission={photo.permission}
+                close={this.toggleCamera}
+              />
+            </RNCamera>
+          </SafeAreaView>
         ) : null}
         <CameraRoll
           containerStyles={cameraRoll}

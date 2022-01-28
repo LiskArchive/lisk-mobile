@@ -95,11 +95,9 @@ export default () => ({
       alignItems: 'center',
       paddingLeft: 0,
     },
-    cameraAccessCloseButton: {
-      position: 'absolute',
-      zIndex: 2,
-      left: 0,
-      top: deviceType() === 'iOSx' ? 40 : 30,
+    scannerContainer: {
+      flex: 1,
+      zIndex: 1000
     },
   },
   [themes.light]: {
