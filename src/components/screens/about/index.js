@@ -34,7 +34,7 @@ const About = ({ styles, t }) => (
     </P>
 
     <A onPress={openLiskWebsite} style={[styles.link, styles.theme.link]}>
-      {t('Read more on the Lisk&reg; website')}
+      {t('Read more on the Lisk website')}
     </A>
   </View>
 );

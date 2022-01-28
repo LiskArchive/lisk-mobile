@@ -26,6 +26,8 @@ import DeleteBookmarkModal from '../../shared/bookmarks/deleteBookmarkModal';
 import BookmarkSvg from '../../../assets/svgs/BookmarkSvg';
 import { H3 } from '../../shared/toolBox/typography';
 import LoadingBar from '../../shared/loading';
+import BookmarkOutlineSvg from '../../../assets/svgs/BookmarkOutlineSvg';
+import { colors, themes } from '../../../constants/styleGuide';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -149,16 +151,21 @@ class Wallet extends React.Component {
     this.fetchInitialData();
   }
 
-  toggleBookmark = () => {
-    const {
-      followedAccounts, navigation, accountUnFollowed, t, activeToken
-    } = this.props;
+  isFollowed = () => {
+    const { followedAccounts, activeToken } = this.props;
 
-    const isFollowed = followedAccounts[activeToken].some(
+    return followedAccounts[activeToken].some(
       (item) => item.address === this.state.account.address
     );
+  };
 
-    if (isFollowed) {
+  toggleBookmark = () => {
+    const {
+      navigation, accountUnFollowed, t, route
+    } = this.props;
+    const address = route.params?.address;
+
+    if (this.isFollowed()) {
       modalHolder.open({
         title: 'Delete bookmark',
         component: DeleteBookmarkModal,
@@ -168,7 +175,7 @@ class Wallet extends React.Component {
       navigation.navigate({
         name: 'AddBookmark',
         params: {
-          account: this.state.account,
+          account: { address },
           title: t('Add bookmark')
         }
       });
@@ -179,7 +186,7 @@ class Wallet extends React.Component {
     const { transactions, account } = this.state;
 
     const {
-      styles, navigation, t
+      styles, navigation, t, theme
     } = this.props;
 
     let content = null;
@@ -237,7 +244,14 @@ class Wallet extends React.Component {
             onPress={this.props.navigation.goBack}
             rightIconComponent={() => (
               <TouchableOpacity onPress={this.toggleBookmark}>
-                <BookmarkSvg />
+                {this.isFollowed() ? (
+                  <BookmarkSvg />
+                ) : (
+                  <BookmarkOutlineSvg
+                      color={theme === themes.light
+                        ? colors.light.zodiacBlue : colors.dark.mountainMist}
+                  />
+                )}
               </TouchableOpacity>
             )}
           />

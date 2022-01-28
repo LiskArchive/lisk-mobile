@@ -21,9 +21,9 @@ class Bookmark extends React.Component {
     isSearchOpen: false
   };
 
-  setQuery = query => {
+  setQuery = (query) => {
     this.setState({
-      query,
+      query
     });
   };
 
@@ -67,19 +67,17 @@ class Bookmark extends React.Component {
           onChange={this.setQuery}
           value={query}
           isSearchOpen={this.state.isSearchOpen}
-          setIsSearchOpen={val => this.setState({ isSearchOpen: val })}
+          setIsSearchOpen={(val) => this.setState({ isSearchOpen: val })}
         />
-        <ScrollView style={styles.container} >
-          <View style={styles.innerContainer}>
-            <View style={styles.form}>
-              <Bookmarks
-                navigate={navigation.navigate}
-                draggable={true}
-                setRef={this.setRef}
-                query={query}
-                renderEmpty
-              />
-            </View>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={styles.form}>
+            <Bookmarks
+              navigate={navigation.navigate}
+              draggable={true}
+              setRef={this.setRef}
+              query={query}
+              renderEmpty
+            />
           </View>
         </ScrollView>
         <TouchableOpacity
@@ -88,12 +86,7 @@ class Bookmark extends React.Component {
             navigation.navigate({ name: 'AddBookmark', params: { title: t('New bookmark') } })
           }
         >
-          <Icon
-            style={[styles.addButtonIcon]}
-            name="cross"
-            color={colors[theme].white}
-            size={30}
-          />
+          <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={30} />
         </TouchableOpacity>
       </SafeAreaView>
     );

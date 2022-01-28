@@ -1,9 +1,7 @@
 /* eslint-disable complexity */
-import React, { Fragment, useState } from 'react';
-import { useHeaderHeight } from '@react-navigation/stack';
+import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { KeyboardTrackingView } from 'react-native-keyboard-tracking-view';
 import { withNavigation } from '@react-navigation/compat';
 import { PrimaryButton } from './button';
 import theme from './styles';
@@ -19,20 +17,9 @@ const ScrollAwareActionBar = ({
   styles,
   viewIsInsideTab,
   noFooterButton,
-  extraContent,
+  extraContent
 }) => {
-  const [buttonStyle, setButtonStyle] = useState(theme.footerButton);
-  const headerHeight = useHeaderHeight();
-
-  const toggleButtonView = status => {
-    if (status) {
-      setButtonStyle(theme.footerButton);
-    } else {
-      setButtonStyle(theme.keyboardStickyButton);
-    }
-  };
-
-  const renderButton = style => {
+  const renderButton = (style) => {
     return (
       <PrimaryButton
         testID={buttonTestID}
@@ -55,51 +42,19 @@ const ScrollAwareActionBar = ({
   const osType = deviceType();
   const shouldBeOptimizedForIphoneX = !viewIsInsideTab && osType === 'iOSx';
 
-  const trackerView = {
-    android: {
-      width: '100%',
-    },
-    iOS: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      width: '100%',
-      marginBottom: viewIsInsideTab ? -1 * (headerHeight - 10) : 0,
-    },
-    iOSx: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      width: '100%',
-      marginBottom: viewIsInsideTab ? -1 * (headerHeight - 14) : 0,
-    },
-  };
-
   return (
     <Fragment>
       <KeyboardAwareScrollView
         enableOnAndroid={true}
-        contentContainerStyle={[
-          styles ? styles.container : null,
-          theme.scrollViewContainer,
-        ]}
-        onKeyboardWillHide={() => toggleButtonView(true)}
-        onKeyboardDidHide={() => toggleButtonView(true)}
-        onKeyboardWillShow={() => toggleButtonView(false)}
-        onKeyboardDidShow={() => toggleButtonView(false)}
+        contentContainerStyle={[styles ? styles.container : null, theme.scrollViewContainer]}
       >
-        <View
-          style={[
-            styles ? styles.innerContainer : null,
-            theme.scrollViewInnerContainer,
-          ]}
-        >
+        <View style={[styles ? styles.innerContainer : null, theme.scrollViewInnerContainer]}>
           {children}
-          {!noFooterButton && buttonStyle === theme.footerButton && (
+          {!noFooterButton && (
             <View
               style={[
                 theme.footerButtonContainer,
-                shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
+                shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null
               ]}
             >
               {extraContent}
@@ -108,12 +63,6 @@ const ScrollAwareActionBar = ({
           )}
         </View>
       </KeyboardAwareScrollView>
-      {!noFooterButton && buttonStyle === theme.keyboardStickyButton && (
-        <KeyboardTrackingView style={trackerView[osType]}>
-          {extraContent}
-          {renderButton([theme.keyboardStickyButton])}
-        </KeyboardTrackingView>
-      )}
     </Fragment>
   );
 };

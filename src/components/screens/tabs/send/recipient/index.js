@@ -178,6 +178,7 @@ class Recipient extends React.Component {
                 containerStyle: styles.addressInputContainer,
                 inputLabel: styles.theme.inputLabel
               }}
+              placeholderTextColor={colors.light.mountainMist}
             />
           </View>
           {hasBookmarks && (
