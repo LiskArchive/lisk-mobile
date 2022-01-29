@@ -18,7 +18,7 @@ const List = ({
           navigate={navigate}
           key={`${activeToken}-${item.address}`}
           data={item}
-          isInvalidAddress={validateAddress('LSK', item.address) === -1}
+          isInvalidAddress={validateAddress('LSK', item.address) === 1}
         />
       ))}
     </View>

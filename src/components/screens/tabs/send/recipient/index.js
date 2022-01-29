@@ -178,6 +178,7 @@ class Recipient extends React.Component {
                 containerStyle: styles.addressInputContainer,
                 inputLabel: styles.theme.inputLabel
               }}
+              placeholderTextColor={colors.light.mountainMist}
             />
           </View>
           {hasBookmarks && (
@@ -199,6 +200,7 @@ class Recipient extends React.Component {
               navigate={this.forward}
               query={this.state.address.value}
               renderEmpty={false}
+              filterAddress
             />
           </KeyboardAwareScrollView>
         </View>

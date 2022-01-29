@@ -157,7 +157,7 @@ class DraggableItem extends React.Component {
         >
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => navigate('Wallet', { address: data.address })}
+            onPress={() => !isInvalidAddress && navigate('Wallet', { address: data.address })}
             style={styles.row}
           >
             <View style={[styles.innerContainer]}>

@@ -36,6 +36,7 @@ export default () => ({
     },
     form: {
       paddingBottom: 10,
+      flex: 1,
     },
     input: {
       marginTop: 0,

@@ -8,7 +8,7 @@ const CreateAccount = ({
   t, onPress, style, opacity = 1
 }) => (
   <Animated.View style={[styles.linkWrapper, style, { opacity }]}>
-    <P style={styles.question}>{t('Don’t have a Lisk ID?')}</P>
+    <P style={styles.question}>{t('Don’t have a Lisk Account?')}</P>
 
     <A testID="createAccountButton" style={styles.link} onPress={onPress}>
       {t('Create it now')}
