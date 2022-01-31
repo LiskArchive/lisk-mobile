@@ -36,6 +36,8 @@ export default () => ({
       paddingBottom: 14,
       flexDirection: 'row',
       justifyContent: 'space-between',
+      borderTopColor: 'rgba(57, 68, 81, 0.85)',
+      borderTopWidth: deviceType() === 'iOSx' ? 34 : 10,
     },
     galleryButton: {
       borderRadius: 4,
@@ -97,7 +99,12 @@ export default () => ({
     },
     scannerContainer: {
       flex: 1,
-      zIndex: 1000
+      zIndex: 1000,
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      left: 0,
+      bottom: 0,
     },
   },
   [themes.light]: {

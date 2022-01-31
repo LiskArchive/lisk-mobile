@@ -122,7 +122,7 @@ class Scanner extends React.Component {
               }}
             >
               <CameraOverlay
-                containerStyles={cameraOverlay}
+                containerStyles={[styles.cameraOverlay, cameraOverlay]}
                 toggleGallery={this.toggleGallery}
                 photoPermission={photo.permission}
                 close={this.toggleCamera}
