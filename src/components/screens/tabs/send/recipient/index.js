@@ -136,6 +136,7 @@ class Recipient extends React.Component {
 
     return (
       <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+        <HeaderBackButton title={'Send LSK'} noIcon={true} currentIndex={1} length={3} step={true} />
         <Scanner
           ref={(el) => {
             this.scanner = el;
@@ -146,7 +147,6 @@ class Recipient extends React.Component {
           permissionDialogTitle={t('Permission to use camera')}
           permissionDialogMessage={t('Lisk needs to connect to your camera')}
         />
-        <HeaderBackButton title={'Send LSK'} noIcon={true} currentIndex={1} length={3} step={true} />
         <View style={styles.form}>
           <View style={styles.addressContainer}>
             <IconButton
