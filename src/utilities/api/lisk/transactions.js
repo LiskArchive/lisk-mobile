@@ -106,6 +106,11 @@ export const create = async ({
 };
 
 export const broadcast = async (transaction) => {
-  const txBytes = Lisk.transactions.getBytes(transferAssetSchema, transaction).toString('hex');
+  let txBytes;
+  if (Platform.OS === 'android') {
+    txBytes = LiskAndroidPatch.getBytes(transaction).toString('hex');
+  } else {
+    txBytes = Lisk.transactions.getBytes(transferAssetSchema, transaction).toString('hex');
+  }
   return apiClient.sendTransaction({ transaction: txBytes });
 };

@@ -95,3 +95,18 @@ export const signTransaction = (
     id: Lisk.cryptography.hash(Lisk.transactions.getBytes(assetSchema, transactionObject))
   };
 };
+
+export const getBytes = (
+  transactionObject,
+) => {
+  if (typeof transactionObject.asset !== 'object' || transactionObject.asset === null) {
+    throw new Error('Asset must be of type object and not null');
+  }
+  const assetBytes = encodeTransferAsset(transactionObject.asset);
+  const transactionBytes = encodeTransaction({
+    ...transactionObject,
+    asset: assetBytes,
+  });
+
+  return transactionBytes;
+};
