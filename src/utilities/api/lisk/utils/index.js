@@ -1,5 +1,9 @@
 /* eslint-disable max-statements */
 import * as Lisk from '@liskhq/lisk-client';
+import {
+  encodeTransferAsset,
+  encodeTransaction
+} from './encode';
 
 export const baseTransactionSchema = {
   $id: 'lisk/base-transaction',
@@ -41,14 +45,13 @@ export const baseTransactionSchema = {
 };
 
 export const getSigningBytes = (
-  assetSchema,
   transactionObject,
 ) => {
   if (typeof transactionObject.asset !== 'object' || transactionObject.asset === null) {
     throw new Error('Asset must be of type object and not null');
   }
-  const assetBytes = Lisk.codec.codec.encode((assetSchema), transactionObject.asset);
-  const transactionBytes = Lisk.codec.codec.encode(baseTransactionSchema, {
+  const assetBytes = encodeTransferAsset(transactionObject.asset);
+  const transactionBytes = encodeTransaction({
     ...transactionObject,
     asset: assetBytes,
     signatures: [],
@@ -81,7 +84,7 @@ export const signTransaction = (
 
   const transactionWithNetworkIdentifierBytes = Buffer.concat([
     networkIdentifier,
-    getSigningBytes(assetSchema, transactionObject),
+    getSigningBytes(transactionObject),
   ]);
 
   const signature = Lisk.cryptography.signData(transactionWithNetworkIdentifierBytes, passphrase);
