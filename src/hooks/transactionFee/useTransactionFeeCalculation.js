@@ -1,10 +1,12 @@
 /* eslint-disable max-statements */
 /* eslint-disable max-len */
 import { useEffect, useReducer } from 'react';
+import { Platform } from 'react-native';
 import { transactions } from '@liskhq/lisk-client';
 import { actionTypes, reducer, getInitialState } from './reducer';
 import * as transactionsConstants from '../../constants/transactions';
 import { fromRawLsk, toRawLsk } from '../../utilities/conversions';
+import computeMinFee from './fees';
 
 export const createTransactionObject = (nonce, amount = 0, message = '') => ({
   moduleID: 2,
@@ -37,9 +39,16 @@ export const getTransactionFee = async ({
     transaction.amount,
     transaction.data
   );
-  const minFee = transactions.computeMinFee(schema, transactionObject, {
-    baseFees: transactionsConstants.BASE_FEES
-  });
+  let minFee;
+  if (Platform.OS === 'android') {
+    minFee = computeMinFee(transactionObject, {
+      baseFees: transactionsConstants.BASE_FEES
+    });
+  } else {
+    minFee = transactions.computeMinFee(schema, transactionObject, {
+      baseFees: transactionsConstants.BASE_FEES
+    });
+  }
 
   // tie breaker is only meant for medium and high processing speeds
   const tieBreaker = selectedPriorityIndex === 0
