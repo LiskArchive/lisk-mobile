@@ -50,19 +50,19 @@ const ScrollAwareActionBar = ({
       >
         <View style={[styles ? styles.innerContainer : null, theme.scrollViewInnerContainer]}>
           {children}
-          {!noFooterButton && (
-            <View
-              style={[
-                theme.footerButtonContainer,
-                shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null
-              ]}
-            >
-              {extraContent}
-              {renderButton(theme.footerButton)}
-            </View>
-          )}
         </View>
       </KeyboardAwareScrollView>
+      {!noFooterButton && (
+        <View
+          style={[
+            theme.footerButtonContainer,
+            shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null
+          ]}
+        >
+          {extraContent}
+          {renderButton(theme.footerButton)}
+        </View>
+      )}
     </Fragment>
   );
 };
