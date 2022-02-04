@@ -21,9 +21,9 @@ The next section details the prerequisites to install Lisk Mobile from source us
 
  - Git
    - `brew install git`
- - NodeJS (recommended 12.4.0)
+ - NodeJS (recommended 14.9.0)
    - `brew install nvm`
- - npm (recommended 6.9.0)
+ - npm (recommended 6.14.16)
    - npm is shipped with NodeJS. but to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
  - watchman
    - `brew install watchman`
@@ -158,7 +158,7 @@ See [contributors section](https://github.com/LiskHQ/lisk-mobile/graphs/contribu
 
 ## License
 
-Copyright © 2016-2018 Lisk Foundation
+Copyright © 2016-2022 Lisk Foundation
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
