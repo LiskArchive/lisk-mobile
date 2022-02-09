@@ -20,14 +20,15 @@ export const INITIAL_STATE = {
  * If the settings read from the Async storage
  * indicates a fiat currency that is not active anymore
  * this function reverts to Euro.
- *
+ * It also makes the default selected active token to LSK
  * @param {Object} settings - Full settings Object
  * @returns {Object} Setting object
  */
-const fallbackToEUR = (settings) => {
+const fallback = (settings) => {
   settings.currency = currencyKeys.includes(settings.currency)
     ? settings.currency
     : currencyKeys[0];
+  settings.token.active = tokenKeys[0];
   return settings;
 };
 
@@ -71,7 +72,7 @@ const settings = (state = INITIAL_STATE, action = {}) => {
         },
       });
     case actionTypes.settingsRetrieved:
-      return merge(state, fallbackToEUR(action.data));
+      return merge(state, fallback(action.data));
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 import settings, { INITIAL_STATE } from './settings';
 import actionTypes from '../../constants/actions';
+import { tokenKeys } from '../../constants/tokens';
 
 const defaultTokens = {
   active: 'LSK',
@@ -154,6 +155,25 @@ describe('Reducers: Settings', () => {
         currency: 'EUR',
         sensorType: 'Face ID',
         token: defaultTokens,
+      });
+    });
+    it('should fallback active token to LSK and currency to EUR', () => {
+      const action = {
+        type: actionTypes.settingsRetrieved,
+        data: {
+          token: {
+            active: tokenKeys[1]
+          }
+        },
+      };
+      const state = {};
+
+      const changedState = settings(state, action);
+      expect(changedState).toEqual({
+        currency: 'EUR',
+        token: {
+          active: tokenKeys[0]
+        }
       });
     });
   });
