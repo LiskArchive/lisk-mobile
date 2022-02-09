@@ -216,7 +216,7 @@ const AmountLSK = (props) => {
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    if (!amount || !Number(amount) || amount <= 0) {
+    if (!amount || !Number(amount) || amount <= transactionConstants.MIN_LSK_AMOUNT_TO_SEND) {
       setState((prevState) => ({
         ...prevState,
         errorMessage: t('Provide a correct amount of LSK')
