@@ -99,7 +99,6 @@ export default () => ({
       marginTop: 15,
     },
     iconButton: {
-      marginBottom: 10,
       width: '100%',
       textAlign: 'center',
     },
@@ -152,8 +151,8 @@ export default () => ({
     row: {
       left: 0,
       right: 0,
-      height: 60,
       width: '100%',
+      paddingVertical: 10,
     },
   },
   [themes.light]: {
