@@ -13,22 +13,19 @@ class Success extends React.Component {
     const {
       t,
       hideNav,
-      navigation: { setOptions },
+      navigation: { setOptions }
     } = this.props;
 
     hideNav();
 
     setOptions({
       headerLeft: () => <HeaderPlaceholderButton />,
-      title: t('Perfect! You’re all set'),
+      title: t('Perfect! You’re all set')
     });
   }
 
   render() {
-    const {
-      t,
-      navigation: { pop },
-    } = this.props;
+    const { t, navigation } = this.props;
 
     return (
       <SafeAreaView style={styles.wrapper}>
@@ -36,9 +33,7 @@ class Success extends React.Component {
           <View>
             <View style={styles.titleContainer}>
               <P style={styles.subTitle}>
-                {t(
-                  'Great! now you can use your passphrase to sign in to your account.'
-                )}
+                {t('Great! now you can use your passphrase to sign in to your account.')}
               </P>
             </View>
             <View style={styles.imageContainer}>
@@ -49,7 +44,12 @@ class Success extends React.Component {
             <PrimaryButton
               testID="registerSuccess"
               style={styles.button}
-              onClick={pop}
+              onClick={() =>
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Main' }]
+                })
+              }
               title={t('Sign in now')}
             />
           </View>

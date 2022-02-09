@@ -9,6 +9,7 @@ export default ({ logoSize }) => ({
       flexDirection: 'column',
       alignItems: 'center',
       padding: boxes.boxPadding,
+      paddingTop: 50,
     },
     logo: {
       overflow: 'hidden',

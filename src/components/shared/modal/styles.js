@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import { themes, colors, boxes } from '../../../constants/styleGuide';
 import { setColorOpacity } from '../../../utilities/helpers';
 import { deviceType } from '../../../utilities/device';
@@ -23,27 +22,21 @@ export default () => ({
       overflow: 'hidden',
     },
     titleContainer: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: 50,
-      zIndex: 2,
       flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingRight: 20,
+      paddingLeft: 25,
     },
     title: {
       paddingTop: 15,
       paddingBottom: 15,
-      width: '70%',
-      textAlign: 'center',
     },
     closeButton: {
-      top: Platform.OS === 'ios' ? 8 : 0,
       zIndex: 2,
     },
     contentContainer: {
-      paddingHorizontal: boxes.boxPadding,
-      paddingTop: boxes.boxPadding + 50,
+      padding: boxes.boxPadding,
       paddingBottom:
         deviceType() === 'iOSx' ? boxes.boxPadding + 20 : boxes.boxPadding,
     },

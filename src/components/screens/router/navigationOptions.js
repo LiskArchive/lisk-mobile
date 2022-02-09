@@ -24,7 +24,7 @@ const navigationOptions = {};
 navigationOptions.Main = {};
 
 navigationOptions.Send = {
-  header: () => null
+  headerShown: false
 };
 
 navigationOptions.SendStack = () => {
@@ -95,7 +95,7 @@ navigationOptions.Register = {
 };
 
 navigationOptions.TxDetail = {
-  title: 'Transaction details',
+  title: null,
   headerLeft: (props) => <HeaderBackButton {...props} title="Transaction details" />,
   headerRight: () => <HeaderPlaceholderButton />,
   headerStyle: noShadow,
@@ -103,43 +103,41 @@ navigationOptions.TxDetail = {
 };
 
 navigationOptions.CurrencySelection = {
-  title: 'Select your currency',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  title: null,
+  headerLeft: (props) => <HeaderBackButton title="Select your currency" {...props} />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
 
 navigationOptions.About = {
-  title: 'About Lisk',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  title: null,
+  headerLeft: (props) => <HeaderBackButton title="About Lisk" {...props} />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
 
 navigationOptions.Terms = {
-  title: 'Terms of use',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  title: null,
+  headerLeft: (props) => <HeaderBackButton title="Terms of use" {...props} alwaysLight />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
 
 navigationOptions.EnableBioAuth = {
-  title: 'Enable Bio Auth',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  title: null,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
 
 navigationOptions.DisableBioAuth = {
-  title: 'Btop Auth',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  title: null,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };
 
 navigationOptions.PassphraseBackup = {
-  title: 'Passphrase backup',
-  headerLeft: (props) => <HeaderBackButton {...props} />,
+  title: null,
+  headerLeft: (props) => <HeaderBackButton title="Passphrase backup" {...props} />,
   headerStyle: noShadow,
   headerTitleStyle: genericTitle
 };

@@ -1,9 +1,10 @@
 import { themes, colors, fonts } from '../../../../../constants/styleGuide';
+import { setColorOpacity } from '../../../../../utilities/helpers';
 
 export default () => ({
   common: {
     container: {
-      paddingTop: 20,
+      paddingTop: 2,
     },
     content: {
       padding: 20,
@@ -46,7 +47,7 @@ export default () => ({
       flex: 1
     },
     row: {
-      borderBottomColor: colors.light.platinum
+      borderBottomColor: colors.light.mystic
     },
     infoText: {
       color: colors.light.black,
@@ -67,7 +68,7 @@ export default () => ({
       color: colors.dark.white
     },
     row: {
-      borderBottomColor: colors.light.white
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15)
     },
   }
 });

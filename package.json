@@ -1,6 +1,6 @@
 {
   "name": "Lisk",
-  "version": "2.0.0-rc.0",
+  "version": "2.0.0",
   "description": "The Lisk official mobile wallet",
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
   "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",

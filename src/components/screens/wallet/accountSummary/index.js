@@ -78,6 +78,7 @@ class AccountSummary extends React.Component {
 
   sendLSK = () =>
     this.props.navigation.navigate({
+      key: Math.random(),
       name: 'Home',
       params: {
         screen: 'Send',

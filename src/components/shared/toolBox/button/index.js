@@ -4,18 +4,6 @@ import getStyles from './styles';
 import Icon from '../icon';
 import withTheme from '../../withTheme';
 
-const modifyProps = props => {
-  const modifiedProps = Object.keys(props)
-    .filter(key => !/onClick|children|style/.test(key))
-    .reduce((acc, key) => {
-      acc[key] = props[key];
-      return acc;
-    }, {});
-  modifiedProps.onPress = () => props.onClick();
-
-  return modifiedProps;
-};
-
 /**
  * Button Component
  */
@@ -28,17 +16,20 @@ const BaseButton = props => {
     disabled,
     testID,
     noPredefinedStyle,
+    onClick,
+    onPress
   } = props;
 
   return (
     <TouchableOpacity
-      {...modifyProps(props)}
+      onPress={onPress || onClick}
       testID={testID}
       style={[
         noPredefinedStyle ? null : styles.buttonContainer,
         props.style,
         disabled ? styles.disabledButtonContainer : null,
       ]}
+      disabled={disabled}
     >
       <Text style={[noPredefinedStyle ? null : styles.buttonText, textStyle]}>
         {children || title}
@@ -66,6 +57,7 @@ const BasePrimaryButton = props => {
       textStyle={[
         styles.primaryButtonText,
         noTheme ? null : styles.theme.primaryButtonText,
+        props.textStyle
       ]}
     />
   );
@@ -114,6 +106,7 @@ const IconButton = props => {
     color,
     iconSize,
     onClick,
+    onPress,
     iconStyle,
   } = props;
   const viewProps = Object.keys(props)
@@ -124,7 +117,7 @@ const IconButton = props => {
     }, {});
   return (
     <TouchableHighlight
-      onPress={onClick}
+      onPress={onClick || onPress}
       underlayColor="transparent"
       {...viewProps}
       style={[props.styles.iconButton, style]}

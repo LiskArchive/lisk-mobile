@@ -81,7 +81,7 @@
   "Processing speed": "Processing speed",
   "Looking for processing speed options...": "Looking for processing speed options...",
   "Read more": "Mehr erfahren",
-  "Read more on the Lisk&reg; website": "Erfahre mehr auf der Lisk® Website",
+  "Read more on the Lisk website": "Erfahre mehr auf der Lisk® Website",
   "Ready to send": "Bereit zu senden",
   "Recipient": "Empfänger",
   "Reference": "Nachricht",
@@ -171,7 +171,7 @@
   "Transaction Details": "Transaktionsdetails",
   "Connection error, try later!": "Verbindungsfehler! Bitte versuche es später!",
   "Create it now": "Jetzt erstellen",
-  "Don’t have a Lisk ID?": "Noch keine Lisk ID?",
+  "Don’t have a Lisk Account?": "Noch keine Lisk ID?",
   "This field is required.": "Dieses Feld wird benötigt.",
   "Add bookmark": "Zu Lesezeichen hinzufügen",
   "Delegate registration": "Delegiertenregistrierung",
@@ -264,5 +264,24 @@
   "fingerprint": {
     "placeFinger": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
     "unauthorized": "Nicht autorisiert! Nochmal versuchen."
+  },
+  "bookmarks": {
+    "disabled": {
+      "title": "",
+      "description": "",
+      "buttons": {
+        "close": ""
+      }
+    }
+  },
+  "banners": {
+    "btcRemoval": {
+      "title": "",
+      "description": "",
+      "buttons": {
+        "gotIt": "",
+        "readMore": ""
+      }
+    }
   }
 }

@@ -3,12 +3,12 @@ import { View, ScrollView } from 'react-native';
 import ModalBox from 'react-native-modalbox';
 import { translate } from 'react-i18next';
 import { B } from '../toolBox/typography';
-import { boxes } from '../../../constants/styleGuide';
+import { boxes, colors, themes } from '../../../constants/styleGuide';
 import withTheme from '../withTheme';
-import HeaderBackButton from '../../screens/router/headerBackButton';
 import { deviceHeight, headerHeight } from '../../../utilities/device';
 import getStyles from './styles';
 import ModalHolder from '../../../utilities/modal';
+import Icon from '../toolBox/icon';
 
 class Modal extends React.Component {
   state = {
@@ -39,7 +39,7 @@ class Modal extends React.Component {
   };
 
   render() {
-    const { styles } = this.props;
+    const { styles, theme } = this.props;
     const { contentStyle, headerStyle } = this.state;
     const { title, Component, modalCallback } = this.state;
 
@@ -52,7 +52,6 @@ class Modal extends React.Component {
         <View style={styles.wrapper}>
           <View
             style={[styles.container, styles.theme.container]}
-            onLayout={this.setHeaderHeight}
           >
             <View
               style={[
@@ -61,12 +60,13 @@ class Modal extends React.Component {
                 headerStyle,
               ]}
             >
-              <HeaderBackButton
+              <B style={[styles.title, styles.theme.title]}>{title}</B>
+              <Icon
                 onPress={this.closeModal}
-                icon="cross"
+                name="cross"
+                color={theme === themes.light ? colors.light.black : colors.dark.white}
                 style={styles.closeButton}
               />
-              <B style={[styles.title, styles.theme.title]}>{title}</B>
             </View>
             <ScrollView>
               <View style={[styles.contentContainer, contentStyle]}>

@@ -8,7 +8,7 @@ export const goToWallet = (address, { navigation, account, activeToken }) => {
     address !== account[activeToken].address
     && address !== 'Unparsed Address'
   ) {
-    navigation.navigate({ name: 'Wallet', params: { address } });
+    navigation.navigate({ key: address, name: 'Wallet', params: { address } });
   }
 };
 

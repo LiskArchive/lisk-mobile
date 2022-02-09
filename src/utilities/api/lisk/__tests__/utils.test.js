@@ -3,6 +3,7 @@ import {
   signTransaction,
   getSigningBytes,
   baseTransactionSchema,
+  getBytes
 } from '../utils';
 
 describe('sign', () => {
@@ -57,20 +58,12 @@ describe('sign', () => {
 
   describe('getSigningBytes', () => {
     it('should throw error for invalid asset object', () => {
-      const invalidAssets = [
-        { ...validTransaction, asset: { ...validTransaction.asset, amount: 1000 } },
-        {
-          ...validTransaction,
-          asset: { ...validTransaction.asset, recipientAddress: 'dummyAddress' },
-        },
-      ];
-      return invalidAssets.forEach(transactionObject =>
-        // eslint-disable-next-line max-nested-callbacks
-        expect(() => getSigningBytes(validAssetSchema, transactionObject)).toThrow(),);
+      const invalidAssets = { ...validTransaction, asset: null };
+      expect(() => getSigningBytes(invalidAssets)).toThrow();
     });
 
     it('should return transaction bytes for given asset', () => {
-      const signingBytes = getSigningBytes(validAssetSchema, { ...validTransaction });
+      const signingBytes = getSigningBytes({ ...validTransaction });
       expect(signingBytes).toMatchSnapshot();
       const decodedTransaction = Lisk.codec.codec.decode(baseTransactionSchema, signingBytes);
       const decodedAsset = Lisk.codec.codec.decode(
@@ -80,6 +73,27 @@ describe('sign', () => {
       return expect({ ...decodedTransaction, asset: { ...decodedAsset } }).toEqual({
         ...validTransaction,
         signatures: [],
+      });
+    });
+  });
+
+  describe('getBytes', () => {
+    it('should throw error for invalid asset object', () => {
+      const invalidAssets = { ...validTransaction, asset: null };
+      expect(() => getBytes(invalidAssets)).toThrow();
+    });
+
+    it('should return transaction bytes for given asset', () => {
+      const txBytes = getBytes({ ...validTransaction });
+      expect(txBytes).toMatchSnapshot();
+      const decodedTransaction = Lisk.codec.codec.decode(baseTransactionSchema, txBytes);
+      const decodedAsset = Lisk.codec.codec.decode(
+        validAssetSchema,
+        (decodedTransaction).asset
+      );
+      return expect({ ...decodedTransaction, asset: { ...decodedAsset } }).toEqual({
+        ...validTransaction,
+        signatures: []
       });
     });
   });

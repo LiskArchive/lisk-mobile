@@ -1,16 +1,28 @@
 import { Dimensions } from 'react-native';
 import { themes, colors, fonts } from '../../../constants/styleGuide';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../utilities/device';
 import { setColorOpacity } from '../../../utilities/helpers';
 
 const Screen = Dimensions.get('window');
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default () => ({
   common: {
     container: {
       paddingRight: 20,
       paddingLeft: 20,
+      flex: 1,
+    },
+    column: {
+      flex: 1,
+    },
+    emptyView: {
+      marginBottom: 40,
+    },
+    buttonContainer: {
+      marginTop: 10,
+      paddingVertical: 10
+    },
+    buttonText: {
+      color: colors.light.ultramarineBlue
     },
     itemContainer: {
       flex: 1,
@@ -19,6 +31,10 @@ export default () => ({
       paddingTop: 20,
       paddingBottom: 20,
       borderBottomWidth: 1,
+    },
+    infoButton: {
+      padding: 15,
+      paddingRight: 0,
     },
     linkedItem: {
       flex: 1,
@@ -55,7 +71,6 @@ export default () => ({
     },
     emptyState: {
       marginTop: 0,
-      width: '100%',
       display: 'flex',
       flex: 1,
       alignItems: 'center',
@@ -63,21 +78,21 @@ export default () => ({
       marginRight: 20,
     },
     imageContainer: {
-      width: '100%',
-      alignItems: 'center',
       marginBottom: 10,
-      marginTop: 40,
+    },
+    lightOpacity: {
+      opacity: 0.5,
     },
     noBookmarkImage: {
       width: 264,
       height: 100,
     },
     emptyTitle: {
-      paddingTop: isSmallScreen ? 0 : 10,
+      paddingTop: 10,
       textAlign: 'center',
       paddingRight: 40,
       paddingLeft: 40,
-      fontSize: isSmallScreen ? fonts.size.small : fonts.size.base,
+      fontSize: fonts.size.base,
       color: colors.light.blueGray,
     },
     icon: {
@@ -169,6 +184,9 @@ export default () => ({
     editButton: {
       backgroundColor: colors.light.blueGray,
     },
+    text: {
+      color: colors.light.black
+    }
   },
   [themes.dark]: {
     title: {
@@ -201,5 +219,8 @@ export default () => ({
     editButton: {
       backgroundColor: colors.dark.blueGray,
     },
+    text: {
+      color: colors.dark.white
+    }
   },
 });

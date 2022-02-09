@@ -6,7 +6,7 @@ export default () => ({
       flex: 1,
     },
     container: {
-      paddingHorizontal: boxes.boxPadding,
+      padding: boxes.boxPadding,
     },
     qrCodeContainer: {
       marginTop: boxes.boxPadding,

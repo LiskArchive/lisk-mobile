@@ -55,13 +55,19 @@ export const get = async ({
     return { data: normalizeTransactionsResponse(txs, block), meta: {} };
   }
   const { data, meta } = await apiClient.getTransactions(address, limit, offset);
+  if (data) {
+    return {
+      data: normalizeTransactionsResponse(data, block),
+      meta: {
+        limit,
+        offset,
+        count: meta.total
+      }
+    };
+  }
   return {
-    data: normalizeTransactionsResponse(data, block),
-    meta: {
-      limit,
-      offset,
-      count: meta.total
-    }
+    data: [],
+    meta: {}
   };
 };
 
@@ -100,6 +106,11 @@ export const create = async ({
 };
 
 export const broadcast = async (transaction) => {
-  const txBytes = Lisk.transactions.getBytes(transferAssetSchema, transaction).toString('hex');
+  let txBytes;
+  if (Platform.OS === 'android') {
+    txBytes = LiskAndroidPatch.getBytes(transaction).toString('hex');
+  } else {
+    txBytes = Lisk.transactions.getBytes(transferAssetSchema, transaction).toString('hex');
+  }
   return apiClient.sendTransaction({ transaction: txBytes });
 };

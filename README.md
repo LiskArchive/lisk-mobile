@@ -5,8 +5,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/LiskHQ/lisk-mobile)
 [![DeepScan grade](https://deepscan.io/api/teams/6759/projects/8872/branches/113512/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=6759&pid=8872&bid=113512)
-[![dependencies Status](https://david-dm.org/liskHQ/lisk-mobile/status.svg)](https://david-dm.org/liskHQ/lisk-mobile)
-[![devDependencies Status](https://david-dm.org/liskHQ/lisk-mobile/dev-status.svg)](https://david-dm.org/liskHQ/lisk-mobile?type=dev)
 
 Lisk Mobile is a cross-platform application written in React Native and primarily build for iOS and Android. It provides the users with all the functionality they need to send and receive LSK tokens, as well as reviewing the activity history of their or any other account in the Lisk blockchain.
 
@@ -23,9 +21,9 @@ The next section details the prerequisites to install Lisk Mobile from source us
 
  - Git
    - `brew install git`
- - NodeJS (recommended 12.4.0)
+ - NodeJS (recommended 14.9.0)
    - `brew install nvm`
- - npm (recommended 6.9.0)
+ - npm (recommended 6.14.16)
    - npm is shipped with NodeJS. but to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
  - watchman
    - `brew install watchman`
@@ -160,7 +158,7 @@ See [contributors section](https://github.com/LiskHQ/lisk-mobile/graphs/contribu
 
 ## License
 
-Copyright © 2016-2018 Lisk Foundation
+Copyright © 2016-2022 Lisk Foundation
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 

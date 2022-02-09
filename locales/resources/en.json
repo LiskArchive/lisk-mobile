@@ -82,7 +82,7 @@
   "Processing speed": "Processing speed",
   "Looking for processing speed options...": "Looking for processing speed options...",
   "Read more": "Read more",
-  "Read more on the Lisk&reg; website": "Read more on the Lisk® website",
+  "Read more on the Lisk website": "Read more on the Lisk website",
   "Ready to send": "Ready to send",
   "Recipient": "Recipient",
   "Reference": "Reference",
@@ -172,7 +172,7 @@
   "Transaction Details": "Transaction Details",
   "Connection error, try later!": "Connection error, try later!",
   "Create it now": "Create it now",
-  "Don’t have a Lisk ID?": "Don’t have a Lisk ID?",
+  "Don’t have a Lisk Account?": "Don’t have a Lisk Account?",
   "This field is required.": "This field is required.",
   "Add bookmark": "Add bookmark",
   "Delegate registration": "Delegate registration",
@@ -265,5 +265,24 @@
   "fingerprint": {
     "unauthorized": "Unauthorized! Please try again.",
     "placeFinger": "Place your finger over the touch sensor to authenticate."
+  },
+  "bookmarks": {
+    "disabled": {
+      "title": "Disabled Bookmark",
+      "description": "This bookmark is associated with a legacy account and can no longer be used.",
+      "buttons": {
+        "close": "Got it"
+      }
+    }
+  },
+  "banners": {
+    "btcRemoval": {
+      "title": "Please note: BTC support has been removed as of Lisk Mobile {{release}}",
+      "description": "If you are affected by this change, please tap the link below to learn how to access your BTC using an alternative application.",
+      "buttons": {
+        "gotIt": "Got it",
+        "readMore": "Read more"
+      }
+    }
   }
 }

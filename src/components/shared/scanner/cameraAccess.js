@@ -30,7 +30,6 @@ const CameraAccess = ({
           icon="back"
           title=""
           onPress={close}
-          style={styles.cameraAccessCloseButton}
           titleStyle={styles.theme.closeButton}
           color={colors.light.blueGray}
         />

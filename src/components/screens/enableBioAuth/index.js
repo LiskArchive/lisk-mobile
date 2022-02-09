@@ -10,6 +10,7 @@ import { PrimaryButton } from '../../shared/toolBox/button';
 import { themes, colors } from '../../../constants/styleGuide';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
+import HeaderBackButton from '../router/headerBackButton';
 
 @connect(
   state => ({
@@ -29,7 +30,8 @@ class EnableBioAuth extends React.Component {
   componentDidMount() {
     const title = this.props.route.params?.title ?? 'Bio Auth';
     this.props.navigation.setOptions({
-      title: `Enable ${title}`,
+      title: null,
+      headerLeft: (props) => <HeaderBackButton title={`Enable ${title}`} onPress={this.props.navigation.goBack} {...props} />
     });
   }
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Clipboard } from 'react-native';
+import { Text, Clipboard } from 'react-native';
 import { translate } from 'react-i18next';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from '../toolBox/icon';
 import { colors } from '../../../constants/styleGuide';
 import withTheme from '../withTheme';
@@ -39,18 +40,19 @@ class CopyToClipBoard extends React.Component {
     const color = iconColor || colors.light.blueGray;
 
     return (
-      <View style={[styles.container, style]}>
-        <Element style={labelStyle} onPress={this.copy}>
+      <TouchableOpacity style={[styles.container, style]} onPress={this.copy}>
+        <Element style={labelStyle}>
           {text}
         </Element>
-        <Icon
-          onPress={this.copy}
-          name={this.state.copied ? 'checkmark' : 'copy'}
-          color={this.state.copied ? colors.light.ufoGreen : color}
-          size={iconSize || 16}
-          style={[iconStyle]}
-        />
-      </View>
+        <TouchableOpacity onPress={this.copy}>
+          <Icon
+            name={this.state.copied ? 'checkmark' : 'copy'}
+            color={this.state.copied ? colors.light.ufoGreen : color}
+            size={iconSize || 16}
+            style={[iconStyle]}
+            />
+          </TouchableOpacity>
+      </TouchableOpacity>
     );
   }
 }

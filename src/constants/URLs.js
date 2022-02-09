@@ -1,6 +1,7 @@
 export default {
   liskHomepage: 'https://lisk.com/',
-  liskTermsAndConditions: 'https://lisk.com/privacy-policy-mobile',
+  liskTermsAndConditions: 'https://lisk.com/terms-conditions',
+  liskPrivacyPolicy: 'https://lisk.com/privacy',
   liskGettingStarted:
     'https://lisk.com/what-is-blockchain',
   BTCMinerFees: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',

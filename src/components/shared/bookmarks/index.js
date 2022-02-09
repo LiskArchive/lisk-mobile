@@ -8,6 +8,7 @@ import Empty from './empty';
 import withTheme from '../withTheme';
 import { tokenKeys } from '../../../constants/tokens';
 import getStyles from './styles';
+import { validateAddress } from '../../../utilities/validators';
 
 @connect(
   state => ({
@@ -28,11 +29,15 @@ class Bookmarks extends React.Component {
       setRef,
       draggable,
       activeToken,
-      renderEmpty
+      renderEmpty,
+      filterAddress,
     } = this.props;
     const showAvatar = activeToken === tokenKeys[0];
 
     const filterList = list[activeToken].filter(item => {
+      if (filterAddress && validateAddress(tokenKeys[0], item.address) === 1) {
+        return false;
+      }
       if (query.length === 0) return true;
       return (
         item.address.indexOf(query) >= 0
@@ -43,7 +48,7 @@ class Bookmarks extends React.Component {
     return (
       <View style={styles.container}>
         {list[activeToken].length === 0 || filterList.length === 0 ? (
-          renderEmpty && <Empty />
+          renderEmpty && <Empty style={styles.emptyView} />
         ) : (
           <List
             draggable={draggable}

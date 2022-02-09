@@ -8,9 +8,15 @@ const styles = {
   container: {
     backgroundColor: colors.light.white,
   },
+  flex: {
+    flex: 1,
+  },
   wrapper: {
     backgroundColor: colors.light.white,
     height: '100%',
+  },
+  imageSrc: {
+    flex: 1, resizeMode: 'contain'
   },
   splashContainer: {
     backgroundColor: colors.light.white,
@@ -72,6 +78,7 @@ const styles = {
   },
   headingContainer: {
     flex: 1,
+    paddingBottom: 20,
   },
   descriptionWrapper: {
     paddingTop: 30,
@@ -95,8 +102,6 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    height: 300,
-    width: '100%',
     backgroundColor: colors.light.white,
   },
   illustrationWrapper: {
@@ -140,9 +145,7 @@ const styles = {
   buttonContainer: {
     zIndex: 10,
     width: '100%',
-    alignItems: 'stretch',
-    position: 'absolute',
-    bottom: 20,
+    margin: 10,
   },
   button: {
     marginHorizontal: 20,

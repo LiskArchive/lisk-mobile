@@ -1,9 +1,9 @@
-import { fonts } from '../../../../constants/styleGuide';
+import { colors, fonts } from '../../../../constants/styleGuide';
 import { deviceType } from '../../../../utilities/device';
 
 const type = deviceType();
 let normalMarginTop = type === 'iOSx' ? -3 : 0;
-let safeAreaMarginTop = type === 'iOSx' ? 50 : 20;
+let safeAreaMarginTop = type === 'iOSx' ? 45 : 20;
 
 if (type === 'android') {
   normalMarginTop = 0;
@@ -16,9 +16,14 @@ export default () => ({
       fontFamily: fonts.family.heading,
       fontSize: 25,
       width: 240,
+      flex: 1,
     },
     titleContainer: {
       flex: 1,
+      backgroundColor: 'red'
+    },
+    whiteBackground: {
+      backgroundColor: colors.light.white
     },
     paddingLeft: {
       paddingLeft: 20,
@@ -28,6 +33,7 @@ export default () => ({
       alignItems: 'center',
       marginTop: normalMarginTop,
       paddingRight: 20,
+      paddingTop: 10,
     },
     main: {
       width: 50,
