@@ -11,6 +11,9 @@ export default () => ({
       paddingLeft: 20,
       flex: 1,
     },
+    swipeBookmark: {
+      paddingHorizontal: 20,
+    },
     column: {
       flex: 1,
     },

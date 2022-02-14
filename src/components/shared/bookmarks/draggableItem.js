@@ -98,7 +98,7 @@ const DraggableItem = ({
         onPress={() =>
           !isInvalidAddress && navigate('Wallet', { address: data.address })
         }
-        style={styles.row}
+        style={[styles.row, styles.swipeBookmark]}
       >
         <View style={[styles.innerContainer]}>
           {showAvatar ? (
