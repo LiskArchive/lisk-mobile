@@ -9,7 +9,7 @@ import { TextEncoder } from 'text-encoding';
 import { transactions } from '@liskhq/lisk-client';
 import KeyboardAwareScrollView from '../../../../shared/toolBox/keyboardAwareScrollView';
 import { fromRawLsk, toRawLsk } from '../../../../../utilities/conversions';
-import { merge, validateAmount } from '../../../../../utilities/helpers';
+import { isNumeric, merge, validateAmount } from '../../../../../utilities/helpers';
 import * as apiClient from '../../../../../utilities/api';
 import Balance from './balance';
 import Input from './input';
@@ -84,23 +84,31 @@ const AmountLSK = (props) => {
 
   const onChange = (text, isMaximum) => {
     const { language, t } = props;
-    let errorMessage = '';
-    if (!isMaximum) {
-      setIsMaximum(false);
+    try {
+      if (!isMaximum) {
+        setIsMaximum(false);
+      }
+      transactions.convertLSKToBeddows(text);
+      if (!isNumeric(text)) {
+        throw Error(`Invalid amount ${text}`);
+      }
+      if (language === languageMap.en.code) {
+        text = text.replace(/,/g, '.');
+      } else {
+        text = text.replace(/\./g, ',');
+      }
+      setState((prevState) => ({
+        ...prevState,
+        amount: text,
+        errorMessage: '',
+      }));
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        amount: text,
+        errorMessage: t('Provide a correct amount of LSK')
+      }));
     }
-    if (value && !validateAmount(text)) {
-      errorMessage = t('Provide a correct amount of LSK');
-    }
-    if (language === languageMap.en.code) {
-      text = text.replace(/,/g, '.');
-    } else {
-      text = text.replace(/\./g, ',');
-    }
-    setState((prevState) => ({
-      ...prevState,
-      amount: text,
-      errorMessage
-    }));
   };
 
   const setMaximumValue = () => {
@@ -216,21 +224,13 @@ const AmountLSK = (props) => {
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    if (!amount || !Number(amount) || amount <= 0) {
-      setState((prevState) => ({
-        ...prevState,
-        errorMessage: t('Provide a correct amount of LSK')
-      }));
-      return;
-    }
     if (Number(amount) > Number(fromRawLsk(maxAmount.value))) {
-      // eslint-disable-next-line consistent-return
-      return DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
+      DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
+      return;
     }
     if (messageValidator(reference.value) === 0) {
       DropDownHolder.closeAlert();
-      // eslint-disable-next-line consistent-return
-      return nextStep(
+      nextStep(
         merge(sharedData, {
           reference: reference.value,
           amount,
@@ -238,9 +238,9 @@ const AmountLSK = (props) => {
           priority: transactionPriority && transactionPriority.title
         })
       );
+      return;
     }
-    // eslint-disable-next-line consistent-return
-    return DropDownHolder.error(t('Error'), validity.message);
+    DropDownHolder.error(t('Error'), validity.message);
   };
 
   const localizeAmount = (amount) => {
