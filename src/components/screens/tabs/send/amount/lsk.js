@@ -216,31 +216,31 @@ const AmountLSK = (props) => {
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    if (!amount || !Number(amount) || amount <= transactionConstants.MIN_LSK_AMOUNT_TO_SEND) {
-      setState((prevState) => ({
-        ...prevState,
-        errorMessage: t('Provide a correct amount of LSK')
-      }));
-      return;
-    }
-    if (Number(amount) > Number(fromRawLsk(maxAmount.value))) {
+    if (amount
+      && (Number(amount) === 0 || Number(amount) > transactionConstants.MIN_LSK_AMOUNT_TO_SEND)) {
+      if (Number(amount) > Number(fromRawLsk(maxAmount.value))) {
       // eslint-disable-next-line consistent-return
-      return DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
-    }
-    if (messageValidator(reference.value) === 0) {
-      DropDownHolder.closeAlert();
+        return DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
+      }
+      if (messageValidator(reference.value) === 0) {
+        DropDownHolder.closeAlert();
+        // eslint-disable-next-line consistent-return
+        return nextStep(
+          merge(sharedData, {
+            reference: reference.value,
+            amount,
+            fee: toRawLsk(fee.value),
+            priority: transactionPriority && transactionPriority.title
+          })
+        );
+      }
       // eslint-disable-next-line consistent-return
-      return nextStep(
-        merge(sharedData, {
-          reference: reference.value,
-          amount,
-          fee: toRawLsk(fee.value),
-          priority: transactionPriority && transactionPriority.title
-        })
-      );
+      return DropDownHolder.error(t('Error'), validity.message);
     }
-    // eslint-disable-next-line consistent-return
-    return DropDownHolder.error(t('Error'), validity.message);
+    setState((prevState) => ({
+      ...prevState,
+      errorMessage: t('Provide a correct amount of LSK')
+    }));
   };
 
   const localizeAmount = (amount) => {
