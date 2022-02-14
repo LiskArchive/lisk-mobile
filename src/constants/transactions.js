@@ -20,7 +20,6 @@ import txUnknownDark from '../assets/images/txDetail/tx-unknown-dark.png';
 
 export const DEFAULT_MIN_REMAINING_BALANCE = 5000000;
 export const MIN_FEE_PER_BYTE = 1000;
-export const MIN_LSK_AMOUNT_TO_SEND = 1e-9;
 
 const modules = {
   token: 2,
