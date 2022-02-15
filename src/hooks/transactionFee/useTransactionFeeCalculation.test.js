@@ -33,7 +33,7 @@ describe('useTransactionFeeCalculation', () => {
     expect(Number(result.current.maxAmount.value)).toBeLessThan(18997997000);
   });
 
-  it('should calculate correctly for maximum balance', async () => {
+  it('should have minimum balance of 0.05LSK when a user sends maximum balance', async () => {
     const firstRender = renderHook(() =>
       useTransactionFeeCalculation({ ...props }));
     await firstRender.waitForValueToChange(() => firstRender.result.current.maxAmount.value);
