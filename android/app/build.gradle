@@ -152,8 +152,8 @@ android {
         applicationId "io.lisk.mobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 59
-        versionName "2.0.1-alpha.0"
+        versionCode 60
+        versionName "2.1.0-alpha.0"
         missingDimensionStrategy 'react-native-camera', 'mlkit'
         multiDexEnabled true
     }
