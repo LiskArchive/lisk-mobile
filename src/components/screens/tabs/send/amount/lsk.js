@@ -85,9 +85,7 @@ const AmountLSK = (props) => {
   const onChange = (text, isMaximum) => {
     const { language, t } = props;
     try {
-      if (!isMaximum) {
-        setIsMaximum(false);
-      }
+      setIsMaximum(!!isMaximum);
       transactions.convertLSKToBeddows(text);
       if (!isNumeric(text)) {
         throw Error(`Invalid amount ${text}`);

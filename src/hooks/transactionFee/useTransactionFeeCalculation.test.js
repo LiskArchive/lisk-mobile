@@ -28,7 +28,7 @@ describe('useTransactionFeeCalculation', () => {
     await waitForValueToChange(() => result.current.maxAmount.value);
     expect(Number(result.current.fee.value)).toEqual(0.00138);
     expect(Number(result.current.minFee.value)).toEqual(0.00138);
-    expect(Number(result.current.maxAmount.value)).toEqual(18992851000);
+    expect(Number(result.current.maxAmount.value)).toEqual(18992855000);
     expect(Number(result.current.maxAmount.value)).toBeLessThan(18997997000);
   });
 });
