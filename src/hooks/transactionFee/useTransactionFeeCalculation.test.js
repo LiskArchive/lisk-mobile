@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import * as transactionConstants from '../../constants/transactions';
+import { fromRawLsk, toRawLsk } from '../../utilities/conversions';
 import useTransactionFeeCalculation from './useTransactionFeeCalculation';
 
 describe('useTransactionFeeCalculation', () => {
@@ -30,5 +31,30 @@ describe('useTransactionFeeCalculation', () => {
     expect(Number(result.current.minFee.value)).toEqual(0.00138);
     expect(Number(result.current.maxAmount.value)).toEqual(18992855000);
     expect(Number(result.current.maxAmount.value)).toBeLessThan(18997997000);
+  });
+
+  it('should calculate correctly for maximum balance', async () => {
+    const firstRender = renderHook(() =>
+      useTransactionFeeCalculation({ ...props }));
+    await firstRender.waitForValueToChange(() => firstRender.result.current.maxAmount.value);
+
+    const { result, waitForValueToChange } = renderHook(() =>
+      useTransactionFeeCalculation({
+        ...props,
+        transaction: {
+          ...props.transaction,
+          amount: fromRawLsk(firstRender.result.current.maxAmount.value),
+        },
+      }));
+
+    await waitForValueToChange(() => result.current.fee.value);
+
+    const balance = Number(props.account.balance)
+      - result.current.maxAmount.value
+      - toRawLsk(result.current.fee.value);
+
+    expect(
+      balance
+    ).toEqual(transactionConstants.DEFAULT_MIN_REMAINING_BALANCE);
   });
 });
