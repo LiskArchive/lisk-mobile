@@ -229,7 +229,9 @@ class Wallet extends React.Component {
                 noTitle
               />
             ) : (
-              <Empty refreshing={refreshing} />
+                <Empty
+                  style={[styles.emptyContainer, styles.theme.emptyContainer]}
+                  refreshing={refreshing} />
             )
           }
         />
