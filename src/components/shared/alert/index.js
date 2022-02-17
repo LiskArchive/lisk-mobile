@@ -16,7 +16,7 @@ const Alert = ({ styles }) => (
     messageStyle={styles.messageStyle}
     errorColor={colors.light.burntSieanna}
     ref={ref => DropDownHolder.initialize(ref)}
-    closeInterval={6000}
+    closeInterval={2000}
   />
 );
 
