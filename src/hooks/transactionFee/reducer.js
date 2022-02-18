@@ -39,11 +39,15 @@ const reducer = (state, action) => {
     case actionTypes.setMaxAmount: {
       const balance = action.payload.account?.balance;
       const availableBalance = calculateAvailableBalance(balance);
+      let maxAmount = availableBalance - toRawLsk(action.payload.response.value);
+      if (maxAmount < 0) {
+        maxAmount = 0;
+      }
       const result = {
         ...action.response,
         maxAmount: {
           ...state.maxAmount,
-          value: availableBalance - toRawLsk(action.payload.response.value),
+          value: maxAmount
         },
       };
 
