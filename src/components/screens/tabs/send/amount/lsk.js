@@ -222,7 +222,7 @@ const AmountLSK = (props) => {
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    if (Number(amount) > Number(fromRawLsk(maxAmount.value))) {
+    if (Number(amount) + fee.value > Number(fromRawLsk(maxAmount.value))) {
       DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
       return;
     }

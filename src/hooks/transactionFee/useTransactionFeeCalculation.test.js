@@ -57,4 +57,19 @@ describe('useTransactionFeeCalculation', () => {
       balance
     ).toEqual(transactionConstants.DEFAULT_MIN_REMAINING_BALANCE);
   });
+
+  it('should return 0 for maximum balance if user balance is 0.05LSK', async () => {
+    const updatedProps = {
+      ...props,
+      account: {
+        balance: transactionConstants.DEFAULT_MIN_REMAINING_BALANCE
+      }
+    };
+
+    const { result, waitForValueToChange } = renderHook(() =>
+      useTransactionFeeCalculation({ ...updatedProps }));
+
+    await waitForValueToChange(() => result.current.maxAmount.value);
+    expect(Number(result.current.maxAmount.value)).toEqual(0);
+  });
 });
