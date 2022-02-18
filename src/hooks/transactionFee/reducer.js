@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-import { transactions } from '@liskhq/lisk-client';
 import { DEFAULT_MIN_REMAINING_BALANCE } from '../../constants/transactions';
 import { toRawLsk } from '../../utilities/conversions';
 
