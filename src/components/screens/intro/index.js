@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { translate } from 'react-i18next';
@@ -23,6 +24,7 @@ import styles from './styles';
 )
 class Intro extends React.Component {
   skip() {
+    AsyncStorage.setItem('@lisk-mobile-intro', 'true');
     this.props.navigation.push('SignIn', { signOut: true });
   }
 
