@@ -281,13 +281,28 @@ describe('apiClient', () => {
       global.fetch.mockReturnValue(
         Promise.resolve({
           ok: false,
-          status: 500
+          status: 500,
+          json: () => ({ message: '' })
         })
       );
       try {
         await apiClient.sendTransaction();
       } catch (e) {
         expect(e.message).toEqual('Failed to send transactions to server.');
+      }
+    });
+    it('should throw error if tx fails due to receiving account minimum balance', async () => {
+      global.fetch.mockReturnValue(
+        Promise.resolve({
+          ok: false,
+          status: 500,
+          json: () => ({ message: 'Transaction payload was rejected by the network node: Recipient account 3d943a7de8202872d...address does not meet the minimum remaining balance requirement: 5000000' })
+        })
+      );
+      try {
+        await apiClient.sendTransaction();
+      } catch (e) {
+        expect(e.message).toEqual('Recipient account does not meet 0.05LSK miminum balance requirement');
       }
     });
   });
