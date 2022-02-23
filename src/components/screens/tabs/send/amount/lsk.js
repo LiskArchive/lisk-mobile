@@ -222,7 +222,8 @@ const AmountLSK = (props) => {
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    if (Number(amount) + fee.value > Number(fromRawLsk(maxAmount.value))) {
+    if (accounts.info[settings.token.active].balance - toRawLsk(amount) - toRawLsk(fee.value)
+      < transactionConstants.DEFAULT_MIN_REMAINING_BALANCE) {
       DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
       return;
     }
@@ -293,7 +294,7 @@ const AmountLSK = (props) => {
         button={{
           title: t('Continue')
         }}
-        disabled={!isPriorityFetched || state.errorMessage}
+        // disabled={!isPriorityFetched || state.errorMessage}
         buttonTestID="submit-button"
       >
         <View>
