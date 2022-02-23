@@ -294,7 +294,7 @@ const AmountLSK = (props) => {
         button={{
           title: t('Continue')
         }}
-        // disabled={!isPriorityFetched || state.errorMessage}
+        disabled={!isPriorityFetched || state.errorMessage}
         buttonTestID="submit-button"
       >
         <View>
