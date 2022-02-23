@@ -86,14 +86,14 @@ const AmountLSK = (props) => {
     const { language, t } = props;
     try {
       setIsMaximum(!!isMaximum);
-      transactions.convertLSKToBeddows(text);
-      if (!isNumeric(text)) {
-        throw Error(`Invalid amount ${text}`);
-      }
       if (language === languageMap.en.code) {
         text = text.replace(/,/g, '.');
       } else {
         text = text.replace(/\./g, ',');
+      }
+      transactions.convertLSKToBeddows(text);
+      if (!isNumeric(text)) {
+        throw Error(`Invalid amount ${text}`);
       }
       setState((prevState) => ({
         ...prevState,
