@@ -1,5 +1,6 @@
 export const errorMap = {
   'minimum remaining balance requirement': 'Recipient account does not meet 0.05LSK miminum balance requirement',
+  'nonce is lower than account nonce': 'Please wait until previous transaction is confirmed'
 };
 
 const errorKeys = Object.keys(errorMap);
