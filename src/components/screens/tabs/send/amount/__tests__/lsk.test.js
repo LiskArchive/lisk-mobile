@@ -149,6 +149,23 @@ test('Should show error message if amount to send is not valid', (done) => {
   });
 });
 
+test('Should show error message if amount to send is empty', (done) => {
+  const { getAllByText, getByTestId } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} />
+    </Provider>
+  );
+
+  const submitButton = getByTestId('submit-button');
+  fireEvent.press(submitButton);
+  act(() => {
+    setTimeout(() => {
+      expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
+      done();
+    }, 1000);
+  });
+});
+
 test('Should re-Calculate transaction fee when the amount to send is changed', (done) => {
   const { getAllByText, getByLabelText } = render(
     <Provider store={store}>

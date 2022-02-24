@@ -222,7 +222,15 @@ const AmountLSK = (props) => {
     const { amount, errorMessage } = state;
     if (errorMessage !== '') return;
     const transactionPriority = priority ? priority[selectedPriority] : null;
-    if (Number(amount) + fee.value > Number(fromRawLsk(maxAmount.value))) {
+    if (!amount) {
+      setState(prevState => ({
+        ...prevState,
+        errorMessage: t('Provide a correct amount of LSK')
+      }));
+      return;
+    }
+    if (accounts.info[settings.token.active].balance - toRawLsk(amount) - toRawLsk(fee.value)
+      < transactionConstants.DEFAULT_MIN_REMAINING_BALANCE) {
       DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
       return;
     }
