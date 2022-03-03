@@ -211,7 +211,7 @@ class TransactionDetail extends React.Component {
             </View>
             <Avatar address={config.firstAddress} size={40} />
           </Row>
-          {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress && (
+          {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? null : (
             <Row title="Recipient">
               <View style={styles.addressContainer}>
                 <A
