@@ -211,7 +211,7 @@ class TransactionDetail extends React.Component {
             </View>
             <Avatar address={config.firstAddress} size={40} />
           </Row>
-          {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? null : (
+          {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress && (
             <Row title="Recipient">
               <View style={styles.addressContainer}>
                 <A
@@ -231,12 +231,9 @@ class TransactionDetail extends React.Component {
                 {config.amountSign}
                 <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
               </H4>
-            ) : null}
-            {incognito ? (
-              <Blur value={amount} direction={config.direction} />
-            ) : null}
+            ) : <Blur value={amount} direction={config.direction} />}
           </Row>}
-          {!isUnlock(tx) ? null : (
+          {!isUnlock(tx) && (
             <Row title="Amount">
               <B style={[styles.value, styles.theme.value]}>
                 <FormattedNumber tokenType={activeToken} language={language}>
@@ -252,18 +249,18 @@ class TransactionDetail extends React.Component {
               </FormattedNumber>
             </B>
           </Row>
-          {tx.data ? (
+          {!!tx.data && (
             <Row title="Message">
               <B style={[styles.value, styles.theme.value, styles.referenceValue]}>{tx.data}</B>
             </Row>
-          ) : null}
-          {tx.confirmations ? (
+          )}
+          {!!tx.confirmations && (
             <Row title="Confirmations">
               <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
                 {tx.confirmations}
               </B>
             </Row>
-          ) : null}
+          )}
           <Row title="Transaction ID">
             {activeToken === 'LSK' ? (
               <CopyToClipboard
@@ -284,14 +281,14 @@ class TransactionDetail extends React.Component {
               </A>
             )}
           </Row>
-          {tx.blockHeight ? (
+          {!!tx.blockHeight && (
             <Row title="Block Height">
               <B style={[styles.value, styles.theme.value]}>
                 {tx.blockHeight}
               </B>
             </Row>
-          ) : null}
-          {tx.blockId ? (
+          )}
+          {!!tx.blockId && (
             <Row title="Block ID">
               <CopyToClipboard
                 style={[styles.value, styles.theme.value, styles.transactionId]}
@@ -303,7 +300,7 @@ class TransactionDetail extends React.Component {
                 label={stringShortener(tx.blockId, 15, 6)}
               />
             </Row>
-          ) : null}
+          )}
           <Row title={'Nonce'}>
             <B style={[styles.value, styles.theme.value]}>
               {tx.nonce}
