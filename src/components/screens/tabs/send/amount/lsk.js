@@ -118,7 +118,7 @@ const AmountLSK = (props) => {
     if (isMaximum) {
       onChange(fromRawLsk(maxAmount.value), true);
     }
-  }, [isMaximum, fee.value]);
+  }, [isMaximum, fee.value, maxAmount.value, reference.value]);
 
   const loadInitialData = () => {
     const { sharedData } = props;
