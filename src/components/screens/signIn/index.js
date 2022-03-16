@@ -321,10 +321,6 @@ class SignIn extends React.Component {
     return false;
   }
 
-  componentDidUpdate() {
-    console.log(this.state.view);
-  }
-
   componentDidMount() {
     this.props.settingsRetrieved();
     this.setupDeepLinking();
