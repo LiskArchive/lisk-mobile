@@ -115,3 +115,10 @@ export const setColorOpacity = (hex, alpha = 1) => {
 };
 
 export const validateAmount = (amount) => new RegExp(regex.amount).test(amount);
+
+/**
+ * This function tests if a string passed can be parsed to a number
+ * @param {string} value
+ * @returns {boolean}
+ */
+export const isNumeric = (value) => /^([0-9]+\.?[0-9]*|\.[0-9]+)$/.test(value);

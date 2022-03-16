@@ -4,11 +4,11 @@ import React from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import withTheme from '../../shared/withTheme';
 import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../../shared/formattedNumber';
 import { B, A, H4, } from '../../shared/toolBox/typography';
-import IconButton from '../router/headerBackButton';
 import Loading from '../../shared/transactions/loading';
 import EmptyState from '../../shared/transactions/empty';
 import LskSummary from './lskSummary';
@@ -30,6 +30,7 @@ import {
 import Avatar from '../../shared/avatar';
 import Blur from '../../shared/transactions/blur';
 import CopyToClipboard from '../../shared/copyToClipboard';
+import HeaderBackButton from '../router/headerBackButton';
 
 const getConfig = (styles, tx, accountAddress) => {
   if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
@@ -62,13 +63,6 @@ const getConfig = (styles, tx, accountAddress) => {
   {}
 )
 class TransactionDetail extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      headerLeft: <IconButton title="" icon="back" onPress={params.action} />
-    };
-  };
-
   state = {
     tx: null,
     refreshing: false,
@@ -171,147 +165,150 @@ class TransactionDetail extends React.Component {
     const amount = fromRawLsk(tx.amount);
 
     return (
-      <ScrollView
-        style={[styles.container, styles.theme.container]}
-        contentContainerStyle={styles.contentContainer}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />}
-      >
-        {activeToken === 'LSK' ? (
-          <LskSummary
-            incognito={incognito}
-            accountAddress={walletAccountAddress}
-            tx={tx}
-            language={language}
-          />
-        ) : (
-          <BtcSummary
-            incognito={incognito}
-            accountAddress={walletAccountAddress}
-            tx={tx}
-            language={language}
-          />
-        )}
+      <SafeAreaView style={[styles.container, styles.theme.container]} >
+        <HeaderBackButton
+          title="Transaction Details"
+          onPress={this.props.navigation.goBack}
+        />
+        <ScrollView
+          style={[styles.container, styles.theme.container]}
+          contentContainerStyle={styles.contentContainer}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />}
+        >
+          {activeToken === 'LSK' ? (
+            <LskSummary
+              incognito={incognito}
+              accountAddress={walletAccountAddress}
+              tx={tx}
+              language={language}
+            />
+          ) : (
+            <BtcSummary
+              incognito={incognito}
+              accountAddress={walletAccountAddress}
+              tx={tx}
+              language={language}
+            />
+          )}
 
-        {isDelegateRegistration && (
-          <Row title={'Delegate username'}>
-            <View>
-              <B style={[styles.value, styles.theme.value]}>{tx.delegate}</B>
-            </View>
-          </Row>
-        )}
+          {isDelegateRegistration && (
+            <Row title={'Delegate username'}>
+              <View>
+                <B style={[styles.value, styles.theme.value]}>{tx.delegate}</B>
+              </View>
+            </Row>
+          )}
 
-        <Row title={getAccountTitle(tx)}>
-          <View style={styles.addressContainer}>
-            <A
-              value={tx.senderAddress}
-              onPress={() => goToWallet(tx.senderAddress, this.props)}
-              style={[styles.value, styles.theme.value, styles.transactionId]}
-            >
-              {getAccountLabel(tx.senderAddress, { ...this.props, truncate: true })}
-            </A>
-          </View>
-          <Avatar address={config.firstAddress} size={40} />
-        </Row>
-        {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? null : (
-          <Row title="Recipient">
+          <Row title={getAccountTitle(tx)}>
             <View style={styles.addressContainer}>
               <A
                 value={tx.senderAddress}
-                onPress={() => goToWallet(tx.recipientAddress, this.props)}
+                onPress={() => goToWallet(tx.senderAddress, this.props)}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
               >
-                {getAccountLabel(tx.recipientAddress, { ...this.props, truncate: true })}
+                {getAccountLabel(tx.senderAddress, { ...this.props, truncate: true })}
               </A>
             </View>
-            <Avatar address={config.secondAddress} size={40} />
+            <Avatar address={config.firstAddress} size={40} />
           </Row>
-        )}
-        {isTransfer(tx) && <Row title={'Amount'}>
-          {!incognito ? (
-            <H4 style={config.amountStyle}>
-              {config.amountSign}
-              <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
-            </H4>
-          ) : null}
-          {incognito ? (
-            <Blur value={amount} direction={config.direction} />
-          ) : null}
-        </Row>}
-        {!isUnlock(tx) ? null : (
-          <Row title="Amount">
+          {!isTransfer(tx) || tx.recipientAddress === tx.senderAddress ? null : (
+            <Row title="Recipient">
+              <View style={styles.addressContainer}>
+                <A
+                  value={tx.senderAddress}
+                  onPress={() => goToWallet(tx.recipientAddress, this.props)}
+                  style={[styles.value, styles.theme.value, styles.transactionId]}
+                >
+                  {getAccountLabel(tx.recipientAddress, { ...this.props, truncate: true })}
+                </A>
+              </View>
+              <Avatar address={config.secondAddress} size={40} />
+            </Row>
+          )}
+          {isTransfer(tx) && <Row title={'Amount'}>
+            {!incognito ? (
+              <H4 style={config.amountStyle}>
+                {config.amountSign}
+                <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
+              </H4>
+            ) : <Blur value={amount} direction={config.direction} />}
+          </Row>}
+          {!isUnlock(tx) && (
+            <Row title="Amount">
+              <B style={[styles.value, styles.theme.value]}>
+                <FormattedNumber tokenType={activeToken} language={language}>
+                  {fromRawLsk(tx.amount)}
+                </FormattedNumber>
+              </B>
+            </Row>
+          )}
+          <Row title="Transaction fee">
             <B style={[styles.value, styles.theme.value]}>
               <FormattedNumber tokenType={activeToken} language={language}>
-                {fromRawLsk(tx.amount)}
+                {fromRawLsk(tx.fee)}
               </FormattedNumber>
             </B>
           </Row>
-        )}
-        <Row title="Transaction fee">
-          <B style={[styles.value, styles.theme.value]}>
-            <FormattedNumber tokenType={activeToken} language={language}>
-              {fromRawLsk(tx.fee)}
-            </FormattedNumber>
-          </B>
-        </Row>
-        {tx.data ? (
-          <Row title="Message">
-            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>{tx.data}</B>
-          </Row>
-        ) : null}
-        {tx.confirmations ? (
-          <Row title="Confirmations">
-            <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
-              {tx.confirmations}
-            </B>
-          </Row>
-        ) : null}
-        <Row title="Transaction ID">
-          {activeToken === 'LSK' ? (
-            <CopyToClipboard
-              style={[styles.value, styles.theme.value, styles.transactionId]}
-              labelStyle={[styles.value, styles.theme.value]}
-              showIcon={true}
-              iconSize={18}
-              value={tx.id}
-              type={B}
-              label={stringShortener(tx.id, 15, 6)}
-            />
-          ) : (
-            <A
-              style={[styles.explorerLink, styles.theme.explorerLink]}
-              onPress={() => openExplorer(tx.id)}
-            >
-              {t('View more on Blockchain.info')}
-            </A>
+          {!!tx.data && (
+            <Row title="Message">
+              <B style={[styles.value, styles.theme.value, styles.referenceValue]}>{tx.data}</B>
+            </Row>
           )}
-        </Row>
-        {tx.blockHeight ? (
-          <Row title="Block Height">
+          {!!tx.confirmations && (
+            <Row title="Confirmations">
+              <B style={[styles.value, styles.theme.value, styles.referenceValue]}>
+                {tx.confirmations}
+              </B>
+            </Row>
+          )}
+          <Row title="Transaction ID">
+            {activeToken === 'LSK' ? (
+              <CopyToClipboard
+                style={[styles.value, styles.theme.value, styles.transactionId]}
+                labelStyle={[styles.value, styles.theme.value]}
+                showIcon={true}
+                iconSize={18}
+                value={tx.id}
+                type={B}
+                label={stringShortener(tx.id, 15, 6)}
+              />
+            ) : (
+              <A
+                style={[styles.explorerLink, styles.theme.explorerLink]}
+                onPress={() => openExplorer(tx.id)}
+              >
+                {t('View more on Blockchain.info')}
+              </A>
+            )}
+          </Row>
+          {!!tx.blockHeight && (
+            <Row title="Block Height">
+              <B style={[styles.value, styles.theme.value]}>
+                {tx.blockHeight}
+              </B>
+            </Row>
+          )}
+          {!!tx.blockId && (
+            <Row title="Block ID">
+              <CopyToClipboard
+                style={[styles.value, styles.theme.value, styles.transactionId]}
+                labelStyle={[styles.value, styles.theme.value]}
+                showIcon={true}
+                iconSize={18}
+                value={tx.blockId}
+                type={B}
+                label={stringShortener(tx.blockId, 15, 6)}
+              />
+            </Row>
+          )}
+          <Row title={'Nonce'}>
             <B style={[styles.value, styles.theme.value]}>
-              {tx.blockHeight}
+              {tx.nonce}
             </B>
           </Row>
-        ) : null}
-        {tx.blockId ? (
-          <Row title="Block ID">
-            <CopyToClipboard
-              style={[styles.value, styles.theme.value, styles.transactionId]}
-              labelStyle={[styles.value, styles.theme.value]}
-              showIcon={true}
-              iconSize={18}
-              value={tx.blockId}
-              type={B}
-              label={stringShortener(tx.blockId, 15, 6)}
-            />
-          </Row>
-        ) : null}
-        <Row title={'Nonce'}>
-          <B style={[styles.value, styles.theme.value]}>
-            {tx.nonce}
-          </B>
-        </Row>
-        {isVoting ? <VoteList votes={votes} /> : null}
-      </ScrollView>
+          {isVoting ? <VoteList votes={votes} /> : null}
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }

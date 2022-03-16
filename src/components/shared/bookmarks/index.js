@@ -46,7 +46,7 @@ class Bookmarks extends React.Component {
     });
 
     return (
-      <View style={styles.container}>
+      <View style={[!draggable && styles.container]}>
         {list[activeToken].length === 0 || filterList.length === 0 ? (
           renderEmpty && <Empty style={styles.emptyView} />
         ) : (

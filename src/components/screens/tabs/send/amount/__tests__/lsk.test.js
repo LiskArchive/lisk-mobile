@@ -98,18 +98,33 @@ test("Should calculate transaction fee if there's no priority", (done) => {
   }, 100);
 });
 
-test('Should show error message if amount to send is a negative value', (done) => {
-  const { getAllByText, getByLabelText, getByTestId } = render(
+test('Should show error message if amount is between 0 and 1e-8', (done) => {
+  const { getAllByText, getByLabelText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
     </Provider>
   );
 
   const input = getByLabelText('amount-input');
-  const button = getByTestId('submit-button');
+  act(() => {
+    fireEvent.changeText(input, '0.000000001');
+    setTimeout(() => {
+      expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
+      done();
+    }, 1000);
+  });
+});
+
+test('Should show error message if amount to send is a negative value', (done) => {
+  const { getAllByText, getByLabelText } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} />
+    </Provider>
+  );
+
+  const input = getByLabelText('amount-input');
   act(() => {
     fireEvent.changeText(input, '-1');
-    fireEvent.press(button);
     setTimeout(() => {
       expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
       done();
@@ -118,17 +133,32 @@ test('Should show error message if amount to send is a negative value', (done) =
 });
 
 test('Should show error message if amount to send is not valid', (done) => {
-  const { getAllByText, getByLabelText, getByTestId } = render(
+  const { getAllByText, getByLabelText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
     </Provider>
   );
 
   const input = getByLabelText('amount-input');
-  const button = getByTestId('submit-button');
   act(() => {
     fireEvent.changeText(input, 'asdf');
-    fireEvent.press(button);
+    setTimeout(() => {
+      expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
+      done();
+    }, 1000);
+  });
+});
+
+test('Should show error message if amount to send is empty', (done) => {
+  const { getAllByText, getByTestId } = render(
+    <Provider store={store}>
+      <SendLsk {...mockProps} />
+    </Provider>
+  );
+
+  const submitButton = getByTestId('submit-button');
+  fireEvent.press(submitButton);
+  act(() => {
     setTimeout(() => {
       expect(getAllByText('Provide a correct amount of LSK')).toHaveLength(1);
       done();

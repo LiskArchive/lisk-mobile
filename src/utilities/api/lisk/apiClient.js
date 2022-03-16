@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import config from '../../../../lsk.config';
+import errorHandler from '../errorHandler';
 
 class LiskAPIClient {
   constructor(url) {
@@ -101,7 +102,8 @@ class LiskAPIClient {
       body: JSON.stringify(tx)
     });
     if (!resp.ok) {
-      throw new Error('Failed to send transactions to server.');
+      const response = await resp.json();
+      throw new Error(errorHandler(response));
     }
     const { transactionId, message } = await resp.json();
     return { id: transactionId, message };

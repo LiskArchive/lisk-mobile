@@ -1,30 +1,35 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { Provider, useSelector } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 
 import Router from './components/screens/router';
 import store from './store/index';
 import ThemeContext from './contexts/theme';
-import { themes } from './constants/styleGuide';
+import { colors, themes } from './constants/styleGuide';
 import i18n from '../locales';
 import Alert from './components/shared/alert';
 import Modal from './components/shared/modal';
 
 const ThemedApp = () => {
   const { theme } = useSelector(state => state.settings);
-
   return (
-    <ThemeContext.Provider value={theme}>
-      <I18nextProvider i18n={i18n}>
-        <StatusBar
-          barStyle={theme === themes.light ? 'dark-content' : 'light-content'}
-        />
-        <Router />
-        <Alert />
-        <Modal />
-      </I18nextProvider>
-    </ThemeContext.Provider>
+    <View style={{
+      flex: 1,
+      backgroundColor: theme === themes.dark
+        ? colors.dark.black : colors.light.white
+    }} >
+      <ThemeContext.Provider value={theme}>
+        <I18nextProvider i18n={i18n}>
+          <StatusBar
+            barStyle={theme === themes.light ? 'dark-content' : 'light-content'}
+          />
+          <Router />
+          <Alert />
+          <Modal />
+        </I18nextProvider>
+      </ThemeContext.Provider>
+    </View>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   Keyboard,
   DeviceEventEmitter,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 
@@ -60,7 +61,6 @@ class SignIn extends React.Component {
   deepLinkURL = '';
 
   state = {
-    destinationDefined: false,
     storedPassphrase: null,
     view: 'splash',
     androidDialog: {
@@ -95,6 +95,10 @@ class SignIn extends React.Component {
   };
 
   async defineDefaultAuthMethod() {
+    const introShowed = await AsyncStorage.getItem('@lisk-mobile-intro');
+    if (!introShowed) {
+      this.props.navigation.navigate('Intro');
+    }
     const { password } = await getPassphraseFromKeyChain();
     let sensorType = null;
     try {
@@ -102,14 +106,16 @@ class SignIn extends React.Component {
     } catch (error) {
       sensorType = null;
     }
-    const signOut = this.props.route.params?.signOut;
-    const delay = this.state.view === 'splash' && !signOut ? 1100 : 0;
-    // Update the store
     this.props.settingsUpdated({
       sensorType,
       hasStoredPassphrase: !!password,
     });
-    // Update the component state
+    this.updateView();
+  }
+
+  updateView = (password, sensorType) => {
+    const signOut = this.props.route.params?.signOut;
+    const delay = this.state.view === 'splash' && !signOut ? 1100 : 0;
     this.timeout = setTimeout(() => {
       if (password && sensorType) {
         this.setState({
@@ -326,20 +332,7 @@ class SignIn extends React.Component {
       }));
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () =>
       this.setState({ keyboardIsOpen: false }));
-  }
-
-  componentDidUpdate() {
-    const { settings, navigation } = this.props;
-    const { destinationDefined } = this.state;
-
-    if (settings.validated && !destinationDefined) {
-      if (settings.showedIntro) {
-        this.init();
-      } else {
-        navigation.push('Intro');
-      }
-      this.setState({ destinationDefined: true });
-    }
+    this.init();
   }
 
   componentWillUnmount() {
