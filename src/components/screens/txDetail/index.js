@@ -233,7 +233,7 @@ class TransactionDetail extends React.Component {
               </H4>
             ) : <Blur value={amount} direction={config.direction} />}
           </Row>}
-          {!isUnlock(tx) && (
+          {isUnlock(tx) && (
             <Row title="Amount">
               <B style={[styles.value, styles.theme.value]}>
                 <FormattedNumber tokenType={activeToken} language={language}>
