@@ -110,7 +110,7 @@ class SignIn extends React.Component {
       sensorType,
       hasStoredPassphrase: !!password,
     });
-    this.updateView();
+    this.updateView(password, sensorType);
   }
 
   updateView = (password, sensorType) => {
