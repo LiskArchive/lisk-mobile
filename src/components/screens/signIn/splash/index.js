@@ -1,11 +1,11 @@
 import React from 'react';
 import { Animated, View } from 'react-native';
-import Icon from '../../../shared/toolBox/icon';
-import easing from '../../../../utilities/easing';
-import { deviceHeight } from '../../../../utilities/device';
+import Icon from 'components/shared/toolBox/icon';
+import easing from 'utilities/easing';
+import { deviceHeight } from 'utilities/device';
+import { colors } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
-import { colors } from '../../../../constants/styleGuide';
-import withTheme from '../../../shared/withTheme';
 
 class Splash extends React.Component {
   state = {

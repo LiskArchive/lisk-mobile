@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { colors, themes } from 'constants/styleGuide';
 import Send from '../tabs/send';
 import Bookmarks from '../bookmarkPage';
 import Request from '../tabs/request';
@@ -11,7 +12,6 @@ import TabBarIcon from './tabBarIcon';
 import Home from '../tabs/home';
 import navigationOptions from './navigationOptions';
 import LockedBalanceDetails from '../tabs/home/lockedBalanceDetails';
-import { colors, themes } from '../../../constants/styleGuide';
 import withTheme from '../../shared/withTheme';
 import MultiSignature from '../multiSignature';
 

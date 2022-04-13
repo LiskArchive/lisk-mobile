@@ -109,6 +109,18 @@
     }
   ],
   "settings": {
-    "mocha/additionalTestFunctions": ["describeModule"]
+    "mocha/additionalTestFunctions": ["describeModule"],
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["constants", "./src/constants"],
+          ["components", "./src/components"],
+          ["assets", "./src/assets"],
+          ["utilities", "./src/utilities"],
+          ["actions", "./src/actions"]
+        ],
+        "extensions": [ ".js", ".jsx", ".json"]
+      }
+    }
   }
 }

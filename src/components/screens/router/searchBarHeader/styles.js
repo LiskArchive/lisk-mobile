@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { colors, fonts } from '../../../../constants/styleGuide';
+import { colors, fonts } from 'constants/styleGuide';
 
 const paddingTop = Platform.OS === 'android' ? 16 : 10;
 

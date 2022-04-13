@@ -1,8 +1,8 @@
-import actionTypes from '../../constants/actions';
-import { storeSettings } from '../../utilities/storage';
-import { deviceLocale } from '../../utilities/device';
+import actionTypes from 'constants/actions';
+import { storeSettings } from 'utilities/storage';
+import { deviceLocale } from 'utilities/device';
 import i18n from '../../../locales';
-// import { languageKeys } from '../../constants/languages';
+// import { languageKeys } from 'constants/languages';
 import { pricesRetrieved } from '../../actions/service';
 
 const settingsMiddleware = store => next => action => {

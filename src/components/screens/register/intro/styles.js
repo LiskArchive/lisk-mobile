@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { deviceType } from '../../../../utilities/device';
+import { deviceType } from 'utilities/device';
 
 const styles = {
   wrapper: {

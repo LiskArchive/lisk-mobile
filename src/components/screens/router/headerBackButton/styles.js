@@ -1,5 +1,5 @@
-import { colors, fonts } from '../../../../constants/styleGuide';
-import { deviceType } from '../../../../utilities/device';
+import { colors, fonts } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
 
 const type = deviceType();
 let normalMarginTop = type === 'iOSx' ? -3 : 0;

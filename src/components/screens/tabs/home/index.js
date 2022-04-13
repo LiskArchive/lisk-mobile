@@ -6,34 +6,34 @@ import {
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { withNavigationFocus } from '@react-navigation/compat';
+import Transactions from 'components/shared/transactions';
+import Empty from 'components/shared/transactions/empty';
+import Loading from 'components/shared/transactions/loading';
+import { deviceHeight, viewportHeight } from 'utilities/device';
+import InfiniteScrollView from 'components/shared/infiniteScrollView';
+import ParallaxHeader from 'components/shared/ParallaxHeader';
+import { tokenKeys } from 'constants/tokens';
+import withTheme from 'components/shared/withTheme';
+import { colors, themes } from 'constants/styleGuide';
+import Banner from 'components/shared/banner';
+import { fetchData, persistData } from 'utilities/storage';
+import getStyles from './styles';
+import HomeHeaderTitle from '../../router/homeHeaderTitle';
+import BTCRemoval from '../../banners/BtcRemoval';
 import {
-  transactionsReset as transactionsResetAction,
-  transactionsLoaded as transactionsLoadedAction
-} from '../../../../actions/transactions';
+  loadMore, resetTxAndFetch, showIntroModal, showInitializationModal
+} from './utils';
+import AccountSummary from './accountSummary/home';
+import { getNetworkInfo as getNetworkInfoAction } from '../../../../actions/network';
+import { settingsUpdated as settingsUpdatedAction } from '../../../../actions/settings';
 import {
   blockUpdated as blockUpdatedAction,
   accountFetched as accountFetchedAction
 } from '../../../../actions/accounts';
-import { settingsUpdated as settingsUpdatedAction } from '../../../../actions/settings';
-import { getNetworkInfo as getNetworkInfoAction } from '../../../../actions/network';
-import AccountSummary from './accountSummary/home';
-import Transactions from '../../../shared/transactions';
-import Empty from '../../../shared/transactions/empty';
-import Loading from '../../../shared/transactions/loading';
 import {
-  loadMore, resetTxAndFetch, showIntroModal, showInitializationModal
-} from './utils';
-import { deviceHeight, viewportHeight } from '../../../../utilities/device';
-import InfiniteScrollView from '../../../shared/infiniteScrollView';
-import ParallaxHeader from '../../../shared/ParallaxHeader';
-import { tokenKeys } from '../../../../constants/tokens';
-import withTheme from '../../../shared/withTheme';
-import getStyles from './styles';
-import { colors, themes } from '../../../../constants/styleGuide';
-import HomeHeaderTitle from '../../router/homeHeaderTitle';
-import Banner from '../../../shared/banner';
-import BTCRemoval from '../../banners/BtcRemoval';
-import { fetchData, persistData } from '../../../../utilities/storage';
+  transactionsReset as transactionsResetAction,
+  transactionsLoaded as transactionsLoadedAction
+} from '../../../../actions/transactions';
 
 const itemHeight = 90;
 const summaryHeight = 200;

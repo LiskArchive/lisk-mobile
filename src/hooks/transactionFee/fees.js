@@ -1,4 +1,4 @@
-import { getBytes } from '../../utilities/api/lisk/utils';
+import { getBytes } from 'utilities/api/lisk/utils';
 
 const DEFAULT_MIN_FEE_PER_BYTE = 1000;
 const DEFAULT_NUMBER_OF_SIGNATURES = 1;

@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
-import { themes, colors, fonts } from '../../../constants/styleGuide';
-import { setColorOpacity } from '../../../utilities/helpers';
+import { themes, colors, fonts } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 const Screen = Dimensions.get('window');
 

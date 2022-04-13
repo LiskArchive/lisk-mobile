@@ -4,22 +4,22 @@ import { View, TouchableWithoutFeedback } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { translate } from 'react-i18next';
-import Share from '../../../shared/share';
+import Share from 'components/shared/share';
 import {
   deviceWidth,
   deviceHeight,
   deviceType,
   SCREEN_HEIGHTS,
-} from '../../../../utilities/device';
-import Input from '../../../shared/toolBox/input';
-import { P, B } from '../../../shared/toolBox/typography';
-import reg from '../../../../constants/regex';
-import withTheme from '../../../shared/withTheme';
+} from 'utilities/device';
+import Input from 'components/shared/toolBox/input';
+import { P, B } from 'components/shared/toolBox/typography';
+import reg from 'constants/regex';
+import withTheme from 'components/shared/withTheme';
+import { themes, colors } from 'constants/styleGuide';
+import Avatar from 'components/shared/avatar';
+import CopyToClipboard from 'components/shared/copyToClipboard';
+import { languageMap } from 'constants/languages';
 import getStyles from './styles';
-import { themes, colors } from '../../../../constants/styleGuide';
-import Avatar from '../../../shared/avatar';
-import CopyToClipboard from '../../../shared/copyToClipboard';
-import { languageMap } from '../../../../constants/languages';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);

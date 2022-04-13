@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { P } from 'components/shared/toolBox/typography';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 import styles from './styles';
-import { P } from '../../../shared/toolBox/typography';
-import { PrimaryButton } from '../../../shared/toolBox/button';
 import HeaderPlaceholderButton from '../../router/headerPlaceholderButton';
 import image from '../../../../assets/images/registrationProcess/success3x.png';
 

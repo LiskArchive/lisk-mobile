@@ -3,15 +3,15 @@ import connect from 'redux-connect-decorator';
 import { View, ScrollView, SafeAreaView } from 'react-native';
 import { translate } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
-import PassphraseCopy from '../../shared/passphraseCopy';
-import { themes, colors } from '../../../constants/styleGuide';
-import withTheme from '../../shared/withTheme';
-import getStyles from './styles';
+import { themes, colors } from 'constants/styleGuide';
 import {
   deviceWidth,
   deviceHeight,
   SCREEN_HEIGHTS,
-} from '../../../utilities/device';
+} from 'utilities/device';
+import PassphraseCopy from '../../shared/passphraseCopy';
+import withTheme from '../../shared/withTheme';
+import getStyles from './styles';
 import { P, A } from '../../shared/toolBox/typography';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD;

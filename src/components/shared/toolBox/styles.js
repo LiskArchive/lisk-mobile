@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { fonts, colors, boxes } from '../../../constants/styleGuide';
+import { fonts, colors, boxes } from 'constants/styleGuide';
 
 const styles = {
   h1: {

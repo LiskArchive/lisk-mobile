@@ -5,8 +5,16 @@ import { ScrollView, View, RefreshControl } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { fromRawLsk } from 'utilities/conversions';
+import { transactions as transactionsAPI } from 'utilities/api';
+import { merge, stringShortener } from 'utilities/helpers';
+import {
+  isRegistration,
+  isTransfer,
+  isVote,
+  isUnlock,
+} from 'constants/transactions';
 import withTheme from '../../shared/withTheme';
-import { fromRawLsk } from '../../../utilities/conversions';
 import FormattedNumber from '../../shared/formattedNumber';
 import { B, A, H4, } from '../../shared/toolBox/typography';
 import Loading from '../../shared/transactions/loading';
@@ -14,19 +22,11 @@ import EmptyState from '../../shared/transactions/empty';
 import LskSummary from './lskSummary';
 import BtcSummary from './btcSummary';
 import Row from './row';
-import { transactions as transactionsAPI } from '../../../utilities/api';
 import getStyles from './styles';
 import VoteList from './voteList';
-import { merge, stringShortener } from '../../../utilities/helpers';
 import {
   goToWallet, getAccountLabel, getAccountTitle, openExplorer
 } from './utils';
-import {
-  isRegistration,
-  isTransfer,
-  isVote,
-  isUnlock,
-} from '../../../constants/transactions';
 import Avatar from '../../shared/avatar';
 import Blur from '../../shared/transactions/blur';
 import CopyToClipboard from '../../shared/copyToClipboard';

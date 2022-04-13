@@ -1,7 +1,7 @@
+import actionTypes from 'constants/actions';
+import { tokenMap } from 'constants/tokens';
+import { merge } from 'utilities/helpers';
 import accounts, { INITIAL_STATE } from './accounts';
-import actionTypes from '../../constants/actions';
-import { tokenMap } from '../../constants/tokens';
-import { merge } from '../../utilities/helpers';
 
 const data = {
   activeToken: tokenMap.LSK.key,

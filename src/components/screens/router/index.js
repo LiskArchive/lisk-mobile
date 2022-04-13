@@ -4,6 +4,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 
+import { colors } from 'constants/styleGuide';
 import AddBookmark from '../addBookmark';
 import SignIn from '../signIn';
 import TxDetail from '../txDetail';
@@ -17,7 +18,6 @@ import DisableBioAuth from '../disableBioAuth';
 import PassphraseBackup from '../passphraseBackup';
 import Intro from '../intro';
 import AppNavigator from './appNavigator';
-import { colors } from '../../../constants/styleGuide';
 
 import navigationOptions from './navigationOptions';
 

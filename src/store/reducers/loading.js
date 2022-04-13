@@ -1,4 +1,4 @@
-import actionTypes from '../../constants/actions';
+import actionTypes from 'constants/actions';
 
 /**
  * This reducer is designed to store and retrieve the required data

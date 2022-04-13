@@ -1,9 +1,10 @@
 import React from 'react';
 import { ScrollView, View, NativeModules } from 'react-native';
+import { tokenMap } from 'constants/tokens';
+import { transactions as transactionsAPI } from 'utilities/api';
+import { isTransfer } from 'constants/transactions';
 import withTheme from '../../withTheme';
 import Loading from '../../transactions/loading';
-import { tokenMap } from '../../../../constants/tokens';
-import { transactions as transactionsAPI } from '../../../../utilities/api';
 import getStyles from './styles';
 import { PrimaryButton } from '../../toolBox/button';
 import {
@@ -16,7 +17,6 @@ import {
   TxTitle,
   Confirmations,
 } from './dataRows';
-import { isTransfer } from '../../../../constants/transactions';
 
 const getConfig = (styles, account, tx) => {
   if (account.address !== tx.senderAddress && isTransfer(tx)) {

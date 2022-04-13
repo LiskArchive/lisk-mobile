@@ -4,21 +4,21 @@ import {
 } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
+import Avatar from 'components/shared/avatar';
+import { fromRawLsk } from 'utilities/conversions';
+import FormattedNumber from 'components/shared/formattedNumber';
+import { P, B } from 'components/shared/toolBox/typography';
+import easing from 'utilities/easing';
+import { stringShortener } from 'utilities/helpers';
+import withTheme from 'components/shared/withTheme';
+import { colors, themes } from 'constants/styleGuide';
+import CopyToClipboard from 'components/shared/copyToClipboard';
+import Icon from 'components/shared/toolBox/icon';
+import getStyles from './styles';
 import {
   accountFollowed as accountFollowedAction,
   accountUnFollowed as accountUnFollowedAction
 } from '../../../../actions/accounts';
-import Avatar from '../../../shared/avatar';
-import { fromRawLsk } from '../../../../utilities/conversions';
-import FormattedNumber from '../../../shared/formattedNumber';
-import { P, B } from '../../../shared/toolBox/typography';
-import easing from '../../../../utilities/easing';
-import { stringShortener } from '../../../../utilities/helpers';
-import withTheme from '../../../shared/withTheme';
-import getStyles from './styles';
-import { colors, themes } from '../../../../constants/styleGuide';
-import CopyToClipboard from '../../../shared/copyToClipboard';
-import Icon from '../../../shared/toolBox/icon';
 
 @connect(
   (state) => ({

@@ -4,7 +4,9 @@ import {
   View, Animated, SafeAreaView, TouchableOpacity
 } from 'react-native';
 import { translate } from 'react-i18next';
-import { account as accountAPI, transactions as transactionsAPI } from '../../../utilities/api';
+import { account as accountAPI, transactions as transactionsAPI } from 'utilities/api';
+import modalHolder from 'utilities/modal';
+import { colors, themes } from 'constants/styleGuide';
 import {
   accountFollowed as accountFollowedAction,
   accountUnFollowed as accountUnFollowedAction
@@ -21,13 +23,11 @@ import {
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import HeaderBackButton from '../router/headerBackButton';
-import modalHolder from '../../../utilities/modal';
 import DeleteBookmarkModal from '../../shared/bookmarks/deleteBookmarkModal';
 import BookmarkSvg from '../../../assets/svgs/BookmarkSvg';
 import { H3 } from '../../shared/toolBox/typography';
 import LoadingBar from '../../shared/loading';
 import BookmarkOutlineSvg from '../../../assets/svgs/BookmarkOutlineSvg';
-import { colors, themes } from '../../../constants/styleGuide';
 
 /**
  * This component would be mounted first and would be used to config and redirect

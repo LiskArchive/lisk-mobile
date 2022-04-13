@@ -1,9 +1,9 @@
 import { TransactionBuilder, ECPair } from 'bitcoinjs-lib';
+import { tokenMap } from 'constants/tokens';
 import config from '../../../../btc.config';
 import { extractAddress, getDerivedPathFromPassphrase } from './account';
 import { merge } from '../../helpers';
 import { validateAddress } from '../../validators';
-import { tokenMap } from '../../../constants/tokens';
 
 /**
  * Normalizes transaction data retrieved from Blockchain.info API

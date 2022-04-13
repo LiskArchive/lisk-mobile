@@ -4,11 +4,11 @@ import connect from 'redux-connect-decorator';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { translate } from 'react-i18next';
 import RNShake from 'react-native-shake';
+import easing from 'utilities/easing';
 import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
 import List from './list';
 import Footer from './footer';
 import { H3 } from '../toolBox/typography';
-import easing from '../../../utilities/easing';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 

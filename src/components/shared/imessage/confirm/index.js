@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { toRawLsk, includeFee } from 'utilities/conversions';
+import { colors } from 'constants/styleGuide';
+import * as transactionsAPI from 'utilities/api/lisk/transactions';
+import { extractAddress } from 'utilities/api/lisk/account';
 import FormattedNumber from '../../formattedNumber';
-import { toRawLsk, includeFee } from '../../../../utilities/conversions';
 import { PrimaryButton, Button } from '../../toolBox/button';
 import Avatar from '../../avatar';
 import Icon from '../../toolBox/icon';
 import { B, P, Small } from '../../toolBox/typography';
-import { colors } from '../../../../constants/styleGuide';
 import styles from './styles';
-import * as transactionsAPI from '../../../../utilities/api/lisk/transactions';
-import { extractAddress } from '../../../../utilities/api/lisk/account';
 
 class Confirm extends Component {
   state = {

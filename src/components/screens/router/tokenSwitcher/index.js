@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import withTheme from '../../../shared/withTheme';
-import { IconButton } from '../../../shared/toolBox/button';
-import getStyles from './styles';
+import withTheme from 'components/shared/withTheme';
+import { IconButton } from 'components/shared/toolBox/button';
+import { tokenKeys, tokenMap } from 'constants/tokens';
+import { colors } from 'constants/styleGuide';
+import ModalHolder from 'utilities/modal';
+import { deviceType } from 'utilities/device';
 import AssetSelection from './assetSelection';
-import { tokenKeys, tokenMap } from '../../../../constants/tokens';
-import { colors } from '../../../../constants/styleGuide';
-import ModalHolder from '../../../../utilities/modal';
-import { deviceType } from '../../../../utilities/device';
+import getStyles from './styles';
 
 const onClick = () => {
   ModalHolder.open({ title: 'Your assets', component: AssetSelection });

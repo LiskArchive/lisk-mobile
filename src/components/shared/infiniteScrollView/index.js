@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ScrollView, RefreshControl
 } from 'react-native';
-import { themes, colors } from '../../../constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 
 /**
  * InfiniteScrollView is a wrapper for react native ScrollView

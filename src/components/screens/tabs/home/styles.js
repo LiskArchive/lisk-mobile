@@ -1,5 +1,5 @@
-import { themes, colors } from '../../../../constants/styleGuide';
-import { deviceHeight } from '../../../../utilities/device';
+import { themes, colors } from 'constants/styleGuide';
+import { deviceHeight } from 'utilities/device';
 
 export default () => ({
   common: {

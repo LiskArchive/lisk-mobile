@@ -2,11 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { P } from 'components/shared/toolBox/typography';
+import { PrimaryButton, Button } from 'components/shared/toolBox/button';
+import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
+import { assembleWordOptions } from 'utilities/passphrase';
 import styles from './styles';
-import { P } from '../../../shared/toolBox/typography';
-import { PrimaryButton, Button } from '../../../shared/toolBox/button';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../../utilities/device';
-import { assembleWordOptions } from '../../../../utilities/passphrase';
 import HeaderBackButton from '../../router/headerBackButton';
 
 /**

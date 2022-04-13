@@ -1,5 +1,5 @@
+import actionTypes from 'constants/actions';
 import network from './network';
-import actionTypes from '../../constants/actions';
 
 const initialState = { height: 0, blockTime: 0 };
 describe('Reducers: Loading', () => {

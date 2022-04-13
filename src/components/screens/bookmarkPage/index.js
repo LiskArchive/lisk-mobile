@@ -3,8 +3,8 @@ import {
   View, TouchableOpacity, ScrollView, SafeAreaView
 } from 'react-native';
 import { translate } from 'react-i18next';
+import { colors } from 'constants/styleGuide';
 import Icon from '../../shared/toolBox/icon';
-import { colors } from '../../../constants/styleGuide';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
 import Bookmarks from '../../shared/bookmarks';

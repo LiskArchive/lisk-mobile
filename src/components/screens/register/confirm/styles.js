@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { deviceHeight, SCREEN_HEIGHTS } from '../../../../utilities/device';
-import { colors, fonts, boxes } from '../../../../constants/styleGuide';
+import { deviceHeight, SCREEN_HEIGHTS } from 'utilities/device';
+import { colors, fonts, boxes } from 'constants/styleGuide';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 

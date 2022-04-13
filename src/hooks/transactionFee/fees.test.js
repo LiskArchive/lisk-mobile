@@ -1,5 +1,5 @@
 import * as Lisk from '@liskhq/lisk-client';
-import { getBytes } from '../../utilities/api/lisk/utils';
+import { getBytes } from 'utilities/api/lisk/utils';
 import computeMinFee from './fees';
 
 describe('fee', () => {

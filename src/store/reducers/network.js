@@ -1,4 +1,4 @@
-import actionTypes from '../../constants/actions';
+import actionTypes from 'constants/actions';
 
 export const INITIAL_STATE = {
   height: 0,

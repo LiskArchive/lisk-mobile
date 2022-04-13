@@ -2,12 +2,12 @@
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { translate } from 'react-i18next';
-import { IconButton } from '../../../shared/toolBox/button';
-import { colors, themes } from '../../../../constants/styleGuide';
-import withTheme from '../../../shared/withTheme';
+import { IconButton } from 'components/shared/toolBox/button';
+import { colors, themes } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import { H3 } from 'components/shared/toolBox/typography';
+import StepProgress from 'components/shared/multiStep/stepProgress';
 import getStyles from './styles';
-import { H3 } from '../../../shared/toolBox/typography';
-import StepProgress from '../../../shared/multiStep/stepProgress';
 
 const HeaderBackButton = ({
   theme,

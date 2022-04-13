@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
+import Input from 'components/shared/toolBox/input';
+import { validatePassphrase } from 'utilities/passphrase';
+import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScrollView';
+import Scanner from 'components/shared/scanner';
+import { IconButton } from 'components/shared/toolBox/button';
+import { colors } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import DropDownHolder from 'utilities/alert';
 import getStyles from './styles';
-import Input from '../../../shared/toolBox/input';
-import { validatePassphrase } from '../../../../utilities/passphrase';
-import KeyboardAwareScrollView from '../../../shared/toolBox/keyboardAwareScrollView';
-import Scanner from '../../../shared/scanner';
-import { IconButton } from '../../../shared/toolBox/button';
-import { colors } from '../../../../constants/styleGuide';
-import DropDownHolder from '../../../../utilities/alert';
 import CreateAccount from '../createAccount';
 import Title from '../title';
-import withTheme from '../../../shared/withTheme';
 
 const devDefaultPass = process.env.passphrase || '';
 

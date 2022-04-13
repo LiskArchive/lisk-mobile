@@ -1,3 +1,4 @@
+import { themes } from 'constants/styleGuide';
 import {
   createThemedStyles,
   merge,
@@ -7,8 +8,6 @@ import {
   setColorOpacity,
   isNumeric
 } from './helpers';
-
-import { themes } from '../constants/styleGuide';
 
 describe('helpers', () => {
   describe('createThemedStyles', () => {

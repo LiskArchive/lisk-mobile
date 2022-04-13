@@ -5,18 +5,18 @@ import {
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 
-import MultiStep from '../../../shared/multiStep';
+import MultiStep from 'components/shared/multiStep';
+import withTheme from 'components/shared/withTheme';
+import { tokenMap } from 'constants/tokens';
+import { B, P } from 'components/shared/toolBox/typography';
 import Recipient from './recipient';
 import Amount from './amount';
 import Overview from './overview';
 import SecondPassphrase from './secondPassphrase';
 import Result from './result';
-import withTheme from '../../../shared/withTheme';
 import getStyles from './styles';
-import { tokenMap } from '../../../../constants/tokens';
 import SendLSKIllustrationSvg from '../../../../assets/svgs/SendLSKIllustrationSvg';
 import HeaderBackButton from '../../router/headerBackButton';
-import { B, P } from '../../../shared/toolBox/typography';
 
 @connect(
   (state) => ({

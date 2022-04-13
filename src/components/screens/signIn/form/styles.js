@@ -1,5 +1,5 @@
-import { colors, fonts, themes } from '../../../../constants/styleGuide';
-import { deviceType, isSmallDevice } from '../../../../utilities/device';
+import { colors, fonts, themes } from 'constants/styleGuide';
+import { deviceType, isSmallDevice } from 'utilities/device';
 
 export default () => ({
   common: {

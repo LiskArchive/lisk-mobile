@@ -1,5 +1,5 @@
+import actionTypes from 'constants/actions';
 import transactions, { INITIAL_STATE } from './transactions';
-import actionTypes from '../../constants/actions';
 
 describe('Reducers: Transactions', () => {
   const transaction1 = {

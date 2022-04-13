@@ -3,11 +3,11 @@ import { View, Text } from 'react-native';
 import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Switch from 'react-native-switch-pro';
+import { B, P } from 'components/shared/toolBox/typography';
+import CopyToClipboard from 'components/shared/copyToClipboard';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import { colors } from 'constants/styleGuide';
 import styles from './styles';
-import { B, P } from '../../../shared/toolBox/typography';
-import CopyToClipboard from '../../../shared/copyToClipboard';
-import { PrimaryButton } from '../../../shared/toolBox/button';
-import { colors } from '../../../../constants/styleGuide';
 import HeaderBackButton from '../../router/headerBackButton';
 
 class SafeKeeping extends React.Component {

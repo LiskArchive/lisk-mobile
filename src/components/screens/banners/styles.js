@@ -1,5 +1,5 @@
-import { colors } from '../../../constants/styleGuide';
-import { deviceHeight } from '../../../utilities/device';
+import { colors } from 'constants/styleGuide';
+import { deviceHeight } from 'utilities/device';
 
 const height = deviceHeight();
 

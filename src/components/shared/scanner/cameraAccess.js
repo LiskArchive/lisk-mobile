@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 import { Image, TouchableHighlight } from 'react-native';
 import OpenAppSettings from 'react-native-app-settings';
 import { translate } from 'react-i18next';
+import { themes, colors } from 'constants/styleGuide';
 import { P, H4 } from '../toolBox/typography';
 import cameraPermissionIconLight from '../../../assets/images/camera3xLight.png';
 import cameraPermissionIconDark from '../../../assets/images/camera3xDark.png';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { themes, colors } from '../../../constants/styleGuide';
 import { IconButton } from '../toolBox/button';
 
 const CameraAccess = ({

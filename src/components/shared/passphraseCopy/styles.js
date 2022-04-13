@@ -1,7 +1,7 @@
 import {
   themes, colors, boxes, fonts
-} from '../../../constants/styleGuide';
-import { setColorOpacity } from '../../../utilities/helpers';
+} from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {

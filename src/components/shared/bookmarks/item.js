@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
+import { themes, colors } from 'constants/styleGuide';
+import { stringShortener } from 'utilities/helpers';
 import Avatar from '../avatar';
 import { B, Small } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import Icon from '../toolBox/icon';
-import { themes, colors } from '../../../constants/styleGuide';
 import DraggableItem from './draggableItem';
-import { stringShortener } from '../../../utilities/helpers';
 
 class Item extends React.Component {
   showDetail = () => {

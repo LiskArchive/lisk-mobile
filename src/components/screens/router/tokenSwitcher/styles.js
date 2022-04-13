@@ -1,4 +1,4 @@
-import { deviceType } from '../../../../utilities/device';
+import { deviceType } from 'utilities/device';
 
 const type = deviceType();
 let marginTop = type === 'iOSx' ? 5 : 7;

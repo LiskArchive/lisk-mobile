@@ -1,7 +1,7 @@
-import ModalHolder from '../../../../utilities/modal';
+import ModalHolder from 'utilities/modal';
+import { tokenMap } from 'constants/tokens';
+import { fromRawLsk } from 'utilities/conversions';
 import IntroModal from './introModal';
-import { tokenMap } from '../../../../constants/tokens';
-import { fromRawLsk } from '../../../../utilities/conversions';
 import InitializationModal from './initializationModal';
 
 export const showIntroModal = ({ btcIntroShown, settingsUpdated }) => {

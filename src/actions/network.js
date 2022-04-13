@@ -1,5 +1,5 @@
-import actionTypes from '../constants/actions';
-import { account as accountAPI } from '../utilities/api';
+import actionTypes from 'constants/actions';
+import { account as accountAPI } from 'utilities/api';
 
 /**
  * Updates redux store with network status

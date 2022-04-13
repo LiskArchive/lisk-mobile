@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import {
   themes, colors, boxes, fonts
-} from '../../../constants/styleGuide';
+} from 'constants/styleGuide';
 
 export default () => ({
   common: {

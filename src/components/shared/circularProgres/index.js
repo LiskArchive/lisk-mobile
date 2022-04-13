@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Circle, Svg } from 'react-native-svg';
-import { colors } from '../../../constants/styleGuide';
+import { colors } from 'constants/styleGuide';
 
 const CircularProgress = ({ style, value, max }) => {
   let percentage = (value * 100) / max;

@@ -1,13 +1,13 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import txConstants, { moduleAssetNameIdMap } from '../constants/transactions';
-import actionTypes from '../constants/actions';
+import txConstants, { moduleAssetNameIdMap } from 'constants/transactions';
+import actionTypes from 'constants/actions';
+import { transactions as transactionsAPI } from 'utilities/api';
 import {
   transactionsLoaded,
   transactionAdded,
   transactionsReset,
 } from './transactions';
-import { transactions as transactionsAPI } from '../utilities/api';
 import { INITIAL_STATE as settings } from '../store/reducers/settings';
 
 const middlewares = [thunk];

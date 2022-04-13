@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
-import withTheme from '../../../shared/withTheme';
+import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
 @connect(state => ({

@@ -1,5 +1,5 @@
-import actionTypes from '../../constants/actions';
-import { merge } from '../../utilities/helpers';
+import actionTypes from 'constants/actions';
+import { merge } from 'utilities/helpers';
 
 export const INITIAL_STATE = {
   loaded: false,

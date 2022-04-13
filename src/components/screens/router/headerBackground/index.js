@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import withTheme from '../../../shared/withTheme';
+import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
 const HeaderBackground = ({ styles, noBorder }) => {

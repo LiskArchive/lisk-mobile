@@ -1,6 +1,6 @@
-import actionTypes from '../constants/actions';
-import { retrieveAccounts } from '../utilities/storage';
-import { account as accountAPI, transactions as transactionsAPI } from '../utilities/api';
+import actionTypes from 'constants/actions';
+import { retrieveAccounts } from 'utilities/storage';
+import { account as accountAPI, transactions as transactionsAPI } from 'utilities/api';
 import { loadingStarted, loadingFinished } from './loading';
 
 /**

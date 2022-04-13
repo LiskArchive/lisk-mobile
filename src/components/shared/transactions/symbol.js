@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Image } from 'react-native';
+import { getTxConstant, moduleAssetNameIdMap } from 'constants/transactions';
+import { colors, themes } from 'constants/styleGuide';
 import Avatar from '../avatar';
 import Icon from '../toolBox/icon';
-import { getTxConstant, moduleAssetNameIdMap } from '../../../constants/transactions';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { colors, themes } from '../../../constants/styleGuide';
 
 const Symbol = ({
   token,

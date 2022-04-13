@@ -2,13 +2,13 @@
 import React from 'react';
 import { translate } from 'react-i18next';
 import { Linking, View, TouchableOpacity } from 'react-native';
+import { deviceHeight } from 'utilities/device';
 import BTCRemovalSVG from '../../../assets/svgs/BTCRemovalSVG';
 import LinkSvg from '../../../assets/svgs/LinkSvg';
 import { PrimaryButton } from '../../shared/toolBox/button';
 import { B, H2, P } from '../../shared/toolBox/typography';
 import withTheme from '../../shared/withTheme';
 import getStyles from './styles';
-import { deviceHeight } from '../../../utilities/device';
 
 const BTCRemoval = ({ styles, t, closeBanner }) => {
   const height = deviceHeight();

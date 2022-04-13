@@ -1,5 +1,14 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import actionTypes from 'constants/actions';
+import * as storageUtility from 'utilities/storage';
+import {
+  account as accountAPI,
+  transactions as transactionsAPI,
+} from 'utilities/api';
+import data from 'constants/mockStore';
+import { INITIAL_STATE as accounts } from '../store/reducers/accounts';
+import { INITIAL_STATE as settings } from '../store/reducers/settings';
 import {
   accountFollowed,
   accountUnFollowed,
@@ -10,15 +19,6 @@ import {
   accountSignedOut,
   followedAccountsRetrieved,
 } from './accounts';
-import actionTypes from '../constants/actions';
-import * as storageUtility from '../utilities/storage';
-import {
-  account as accountAPI,
-  transactions as transactionsAPI,
-} from '../utilities/api';
-import { INITIAL_STATE as accounts } from '../store/reducers/accounts';
-import { INITIAL_STATE as settings } from '../store/reducers/settings';
-import data from '../constants/mockStore';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

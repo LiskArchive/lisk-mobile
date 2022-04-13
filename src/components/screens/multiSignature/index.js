@@ -5,14 +5,14 @@ import {
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { stringShortener } from 'utilities/helpers';
+import { colors } from 'constants/styleGuide';
 import { B, P } from '../../shared/toolBox/typography';
 import withTheme from '../../shared/withTheme';
 import HeaderBackButton from '../router/headerBackButton';
 import getStyles from './styles';
 import InfoComponent from '../../shared/infoComponent';
 import Avatar from '../../shared/avatar';
-import { stringShortener } from '../../../utilities/helpers';
-import { colors } from '../../../constants/styleGuide';
 
 const MultiSignature = ({
   t, styles, navigation, multiSigAccount

@@ -5,12 +5,12 @@ import {
 } from 'react-native';
 import { translate } from 'react-i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { colors, themes } from '../../../../constants/styleGuide';
-import withTheme from '../../../shared/withTheme';
+import { colors, themes } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import Input from 'components/shared/toolBox/input';
+import Icon from 'components/shared/toolBox/icon';
+import { H3, P } from 'components/shared/toolBox/typography';
 import getStyles from './styles';
-import Input from '../../../shared/toolBox/input';
-import Icon from '../../../shared/toolBox/icon';
-import { H3, P } from '../../../shared/toolBox/typography';
 
 const HeaderBackButton = ({
   theme,

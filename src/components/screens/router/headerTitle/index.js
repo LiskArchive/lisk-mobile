@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated } from 'react-native';
 import { translate } from 'react-i18next';
-import withTheme from '../../../shared/withTheme';
+import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
 const HeaderTitle = ({

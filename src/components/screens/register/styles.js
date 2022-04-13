@@ -1,6 +1,6 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
-import { colors } from '../../../constants/styleGuide';
-import { deviceType } from '../../../utilities/device';
+import { colors } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
 
 const { height } = Dimensions.get('window');
 const navigatorHeight = 75 + (deviceType() === 'iOSx' ? 23 : 0);

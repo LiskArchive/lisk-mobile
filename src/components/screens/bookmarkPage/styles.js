@@ -1,8 +1,8 @@
 import { Platform } from 'react-native';
 import {
   themes, colors, fonts
-} from '../../../constants/styleGuide';
-import { setColorOpacity } from '../../../utilities/helpers';
+} from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {

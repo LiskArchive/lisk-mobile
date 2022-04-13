@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
+import { getTxConstant } from 'constants/transactions';
 import FormattedDate from '../../shared/formattedDate';
 import withTheme from '../../shared/withTheme';
 import { P, B } from '../../shared/toolBox/typography';
-import { getTxConstant } from '../../../constants/transactions';
 import getStyles from './styles';
 
 const Graphics = ({ tx, theme }) => (

@@ -2,14 +2,14 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
+import { colors, themes } from 'constants/styleGuide';
+import ModalHolder from 'utilities/modal';
+import { stringShortener } from 'utilities/helpers';
 import { accountUnFollowed as accountUnFollowedAction } from '../../../actions/accounts';
 import Avatar from '../avatar';
 import { B, Small, P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
-import { colors, themes } from '../../../constants/styleGuide';
 import DeleteBookmarkModal from './deleteBookmarkModal';
-import ModalHolder from '../../../utilities/modal';
-import { stringShortener } from '../../../utilities/helpers';
 import WarningSvg from '../../../assets/svgs/WarningSvg';
 import SwipeableRow from '../Swipeable';
 

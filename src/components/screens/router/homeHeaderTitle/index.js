@@ -7,10 +7,13 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import { fromRawLsk } from '../../../../utilities/conversions';
-import Avatar from '../../../shared/avatar';
-import Icon from '../../../shared/toolBox/icon';
-import withTheme from '../../../shared/withTheme';
+import { fromRawLsk } from 'utilities/conversions';
+import Avatar from 'components/shared/avatar';
+import Icon from 'components/shared/toolBox/icon';
+import withTheme from 'components/shared/withTheme';
+import { tokenMap } from 'constants/tokens';
+import { colors } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
 import getStyles from './styles';
 import darkBig from '../../../../assets/images/balanceBlur/darkBig.png';
 import darkMedium from '../../../../assets/images/balanceBlur/darkMedium.png';
@@ -18,9 +21,6 @@ import darkSmall from '../../../../assets/images/balanceBlur/darkSmall.png';
 import lightBig from '../../../../assets/images/balanceBlur/lightBig.png';
 import lightMedium from '../../../../assets/images/balanceBlur/lightMedium.png';
 import lightSmall from '../../../../assets/images/balanceBlur/lightSmall.png';
-import { tokenMap } from '../../../../constants/tokens';
-import { colors } from '../../../../constants/styleGuide';
-import { deviceType } from '../../../../utilities/device';
 
 const blurs = {
   darkBig,

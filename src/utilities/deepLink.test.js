@@ -1,5 +1,5 @@
+import { tokenMap } from 'constants/tokens';
 import deepLinkMapper from './deepLink';
-import { tokenMap } from '../constants/tokens';
 
 describe('Deep Link Handler', () => {
   it('returns null if given url is falsy', () => {

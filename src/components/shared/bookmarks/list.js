@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
+import { validateAddress } from 'utilities/validators';
 import { DraggableItem, Item } from './item';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { validateAddress } from '../../../utilities/validators';
 
 const List = ({
   styles, list, activeToken, showAvatar, setRef, navigate, draggable

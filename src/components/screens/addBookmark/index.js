@@ -5,9 +5,14 @@ import { CommonActions } from '@react-navigation/native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 
+import { colors } from 'constants/styleGuide';
+import { decodeLaunchUrl } from 'utilities/qrCode';
+import { tokenMap } from 'constants/tokens';
+import { validateAddress } from 'utilities/validators';
+import { stringShortener } from 'utilities/helpers';
+import DropDownHolder from 'utilities/alert';
 import { IconButton } from '../../shared/toolBox/button';
 import Input from '../../shared/toolBox/input';
-import { colors } from '../../../constants/styleGuide';
 import Avatar from '../../shared/avatar';
 import Scanner from '../../shared/scanner';
 import KeyboardAwareScrollView from '../../shared/toolBox/keyboardAwareScrollView';
@@ -18,11 +23,6 @@ import {
   accountEdited as accountEditedAction
 } from '../../../actions/accounts';
 import { P, Small } from '../../shared/toolBox/typography';
-import { decodeLaunchUrl } from '../../../utilities/qrCode';
-import { tokenMap } from '../../../constants/tokens';
-import { validateAddress } from '../../../utilities/validators';
-import { stringShortener } from '../../../utilities/helpers';
-import DropDownHolder from '../../../utilities/alert';
 
 @connect(
   (state) => ({

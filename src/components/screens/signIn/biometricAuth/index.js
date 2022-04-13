@@ -5,18 +5,18 @@ import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
-import { bioMetricAuthentication } from '../../../../utilities/passphrase';
-import Icon from '../../../shared/toolBox/icon';
+import { bioMetricAuthentication } from 'utilities/passphrase';
+import Icon from 'components/shared/toolBox/icon';
+import { colors, themes } from 'constants/styleGuide';
+import { P } from 'components/shared/toolBox/typography';
+import { PrimaryButton, Button } from 'components/shared/toolBox/button';
+import waves from 'assets/animations/waves.json';
+import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
-import { colors, themes } from '../../../../constants/styleGuide';
-import { P } from '../../../shared/toolBox/typography';
-import { PrimaryButton, Button } from '../../../shared/toolBox/button';
-import waves from '../../../../assets/animations/waves.json';
 import wavesError from '../../../../assets/animations/waves-error.json';
 import CreateAccount from '../createAccount';
 import Title from '../title';
 import SignInSvg from '../../../../assets/svgs/SignInSvg';
-import withTheme from '../../../shared/withTheme';
 import SignInDarkSvg from '../../../../assets/svgs/SignInDarkSvg';
 
 class BiometricAuth extends React.Component {

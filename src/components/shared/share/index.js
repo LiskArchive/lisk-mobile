@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Share as ShareAPI } from 'react-native';
+import { colors } from 'constants/styleGuide';
 import Icon from '../toolBox/icon';
-import { colors } from '../../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 

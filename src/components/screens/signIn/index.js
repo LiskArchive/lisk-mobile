@@ -17,29 +17,29 @@ import FingerprintScanner from 'react-native-fingerprint-scanner';
 import SplashScreen from 'react-native-splash-screen';
 // eslint-disable-next-line import/no-unresolved
 import QuickActions from 'react-native-quick-actions';
-import FingerprintOverlay from '../../shared/fingerprintOverlay';
-import getStyles from './styles';
-import withTheme from '../../shared/withTheme';
+import quickActionsList from 'constants/quickActions';
+import FingerprintOverlay from 'components/shared/fingerprintOverlay';
+import withTheme from 'components/shared/withTheme';
+import deepLinkMapper, { parseDeepLink } from 'utilities/deepLink';
+import { deviceHeight } from 'utilities/device';
 import {
   getPassphraseFromKeyChain,
   storePassphraseInKeyChain,
   bioMetricAuthentication,
-} from '../../../utilities/passphrase';
+} from 'utilities/passphrase';
 import {
   accountSignedIn as accountSignedInAction,
   accountFetched as accountFetchedAction,
-} from '../../../actions/accounts';
+} from 'actions/accounts';
 import {
   settingsUpdated as settingsUpdatedAction,
   settingsRetrieved as settingsRetrievedAction,
-} from '../../../actions/settings';
-import { pricesRetrieved as pricesRetrievedAction } from '../../../actions/service';
+} from 'actions/settings';
+import { pricesRetrieved as pricesRetrievedAction } from 'actions/service';
+import getStyles from './styles';
 import Splash from './splash';
 import Form from './form';
 import BiometricAuth from './biometricAuth';
-import deepLinkMapper, { parseDeepLink } from '../../../utilities/deepLink';
-import quickActionsList from '../../../constants/quickActions';
-import { deviceHeight } from '../../../utilities/device';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();

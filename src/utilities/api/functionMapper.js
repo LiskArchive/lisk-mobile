@@ -1,4 +1,4 @@
-import { tokenMap } from '../../constants/tokens';
+import { tokenMap } from 'constants/tokens';
 import * as liskAccount from './lisk/account';
 import * as liskTransactions from './lisk/transactions';
 import * as btcAccount from './btc/account';

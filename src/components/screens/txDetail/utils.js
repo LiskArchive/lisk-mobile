@@ -1,7 +1,7 @@
 import { Linking } from 'react-native';
-import { isRegistration, isTransfer, isVote } from '../../../constants/transactions';
-import { getTransactionExplorerURL } from '../../../utilities/api/btc/transactions';
-import { stringShortener } from '../../../utilities/helpers';
+import { isRegistration, isTransfer, isVote } from 'constants/transactions';
+import { getTransactionExplorerURL } from 'utilities/api/btc/transactions';
+import { stringShortener } from 'utilities/helpers';
 
 export const goToWallet = (address, { navigation, account, activeToken }) => {
   if (

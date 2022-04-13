@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated } from 'react-native';
-import { P } from '../../../shared/toolBox/typography';
-import { SCREEN_HEIGHTS, deviceHeight } from '../../../../utilities/device';
+import { P } from 'components/shared/toolBox/typography';
+import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
 import styles from './styles';
 
 const Title = ({ children, opacity = 1 }) => {

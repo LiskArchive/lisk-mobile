@@ -1,6 +1,6 @@
-import { themes, colors } from '../../../constants/styleGuide';
-import { deviceHeight } from '../../../utilities/device';
-import { setColorOpacity } from '../../../utilities/helpers';
+import { themes, colors } from 'constants/styleGuide';
+import { deviceHeight } from 'utilities/device';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {

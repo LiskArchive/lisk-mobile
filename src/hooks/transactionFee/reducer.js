@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import { DEFAULT_MIN_REMAINING_BALANCE } from '../../constants/transactions';
-import { toRawLsk } from '../../utilities/conversions';
+import { DEFAULT_MIN_REMAINING_BALANCE } from 'constants/transactions';
+import { toRawLsk } from 'utilities/conversions';
 
 const calculateAvailableBalance = (balance) => {
   return Math.max(balance - DEFAULT_MIN_REMAINING_BALANCE, 0);

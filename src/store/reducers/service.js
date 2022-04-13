@@ -1,6 +1,6 @@
-import actionTypes from '../../constants/actions';
-import { merge } from '../../utilities/helpers';
-import { tokenKeys } from '../../constants/tokens';
+import actionTypes from 'constants/actions';
+import { merge } from 'utilities/helpers';
+import { tokenKeys } from 'constants/tokens';
 
 export const INITIAL_STATE = {
   priceTicker: tokenKeys.reduce(

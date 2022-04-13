@@ -4,13 +4,13 @@ import connect from 'redux-connect-decorator';
 import Swiper from 'react-native-swiper';
 import Switch from 'react-native-switch-pro';
 import { translate } from 'react-i18next';
+import { colors } from 'constants/styleGuide';
+import { headerHeight } from 'utilities/device';
+import URLs from 'constants/URLs';
 import { H2, P, A } from '../../shared/toolBox/typography';
 import styles from './styles';
-import { colors } from '../../../constants/styleGuide';
 import { PrimaryButton } from '../../shared/toolBox/button';
-import { headerHeight } from '../../../utilities/device';
 import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
-import URLs from '../../../constants/URLs';
 
 @connect(
   () => ({}),

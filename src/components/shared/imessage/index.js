@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
-import { getPassphraseFromKeyChain } from '../../../utilities/passphrase';
+import { getPassphraseFromKeyChain } from 'utilities/passphrase';
+import { languageMap } from 'constants/languages';
 import ThemeContext from '../../../contexts/theme';
 import Confirm from './confirm';
 import TxDetail from './txDetail';
@@ -9,7 +10,6 @@ import Form from './form';
 import Rejected from './rejected';
 import SignInWarning from './signInWarning';
 import DevSettings from './devSettings';
-import { languageMap } from '../../../constants/languages';
 
 const { MessagesManager } = NativeModules;
 const MessagesEvents = new NativeEventEmitter(MessagesManager);

@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
+import { themes } from 'constants/styleGuide';
 import noBookmarkLightImg from '../../../assets/images/send/noBookmarks3xLight.png';
 import noBookmarkDarkImg from '../../../assets/images/send/noBookmarks3xDark.png';
 import { P } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { themes } from '../../../constants/styleGuide';
 
 const EmptyState = ({
   theme, styles, t, style

@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { Text, View, Picker } from 'react-native';
+import reg from 'constants/regex';
+import { colors } from 'constants/styleGuide';
 import { PrimaryButton, IconButton } from '../../toolBox/button';
 import Icon from '../../toolBox/icon';
-import reg from '../../../../constants/regex';
-import { colors } from '../../../../constants/styleGuide';
 import Input from '../../toolBox/input';
 import Avatar from '../../avatar';
 import { P, Small } from '../../toolBox/typography';

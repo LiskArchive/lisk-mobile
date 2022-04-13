@@ -3,9 +3,9 @@
 import { useEffect, useReducer } from 'react';
 import { Platform } from 'react-native';
 import { transactions } from '@liskhq/lisk-client';
+import * as transactionsConstants from 'constants/transactions';
+import { fromRawLsk, toRawLsk } from 'utilities/conversions';
 import { actionTypes, reducer, getInitialState } from './reducer';
-import * as transactionsConstants from '../../constants/transactions';
-import { fromRawLsk, toRawLsk } from '../../utilities/conversions';
 import computeMinFee from './fees';
 
 export const createTransactionObject = (nonce, amount = 0, message = '') => ({
