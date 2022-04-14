@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { stringShortener } from 'utilities/helpers';
 import { colors } from 'constants/styleGuide';
-import { B, P } from '../../shared/toolBox/typography';
-import withTheme from '../../shared/withTheme';
-import HeaderBackButton from '../router/headerBackButton';
+import { B, P } from 'components/shared/toolBox/typography';
+import withTheme from 'components/shared/withTheme';
+import HeaderBackButton from 'navigation/headerBackButton';
+import InfoComponent from 'components/shared/infoComponent';
+import Avatar from 'components/shared/avatar';
 import getStyles from './styles';
-import InfoComponent from '../../shared/infoComponent';
-import Avatar from '../../shared/avatar';
 
 const MultiSignature = ({
   t, styles, navigation, multiSigAccount

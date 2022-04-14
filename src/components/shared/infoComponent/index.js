@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import InfoRoundSvg from '../../../assets/svgs/InfoRoundSvg';
+import InfoRoundSvg from 'assets/svgs/InfoRoundSvg';
 import { P, B } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';

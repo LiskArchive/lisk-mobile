@@ -4,8 +4,8 @@ import { translate } from 'react-i18next';
 import easing from 'utilities/easing';
 import { deviceHeight } from 'utilities/device';
 import { colors } from 'constants/styleGuide';
-import Icon from '../../shared/toolBox/icon';
-import { P } from '../../shared/toolBox/typography';
+import Icon from 'components/shared/toolBox/icon';
+import { P } from 'components/shared/toolBox/typography';
 import styles from './styles';
 
 class Splash extends React.Component {

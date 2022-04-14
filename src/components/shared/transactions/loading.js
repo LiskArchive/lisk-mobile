@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { themes } from 'constants/styleGuide';
-import noActivityLight from '../../../assets/images/loading3xLight.png';
-import noActivityDark from '../../../assets/images/loading3xDark.png';
+import noActivityLight from 'assets/images/loading3xLight.png';
+import noActivityDark from 'assets/images/loading3xDark.png';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 

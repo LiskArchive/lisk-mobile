@@ -14,11 +14,15 @@ import {
   isVote,
   isUnlock,
 } from 'constants/transactions';
-import withTheme from '../../shared/withTheme';
-import FormattedNumber from '../../shared/formattedNumber';
-import { B, A, H4, } from '../../shared/toolBox/typography';
-import Loading from '../../shared/transactions/loading';
-import EmptyState from '../../shared/transactions/empty';
+import withTheme from 'components/shared/withTheme';
+import FormattedNumber from 'components/shared/formattedNumber';
+import { B, A, H4, } from 'components/shared/toolBox/typography';
+import Loading from 'components/shared/transactions/loading';
+import EmptyState from 'components/shared/transactions/empty';
+import Avatar from 'components/shared/avatar';
+import Blur from 'components/shared/transactions/blur';
+import CopyToClipboard from 'components/shared/copyToClipboard';
+import HeaderBackButton from 'navigation/headerBackButton';
 import LskSummary from './lskSummary';
 import BtcSummary from './btcSummary';
 import Row from './row';
@@ -27,10 +31,6 @@ import VoteList from './voteList';
 import {
   goToWallet, getAccountLabel, getAccountTitle, openExplorer
 } from './utils';
-import Avatar from '../../shared/avatar';
-import Blur from '../../shared/transactions/blur';
-import CopyToClipboard from '../../shared/copyToClipboard';
-import HeaderBackButton from '../router/headerBackButton';
 
 const getConfig = (styles, tx, accountAddress) => {
   if (accountAddress !== tx.senderAddress && isTransfer(tx)) {

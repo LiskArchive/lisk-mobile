@@ -11,18 +11,18 @@ import { tokenMap } from 'constants/tokens';
 import { validateAddress } from 'utilities/validators';
 import { stringShortener } from 'utilities/helpers';
 import DropDownHolder from 'utilities/alert';
-import { IconButton } from '../../shared/toolBox/button';
-import Input from '../../shared/toolBox/input';
-import Avatar from '../../shared/avatar';
-import Scanner from '../../shared/scanner';
-import KeyboardAwareScrollView from '../../shared/toolBox/keyboardAwareScrollView';
-import withTheme from '../../shared/withTheme';
-import getStyles from './styles';
+import { IconButton } from 'components/shared/toolBox/button';
+import Input from 'components/shared/toolBox/input';
+import Avatar from 'components/shared/avatar';
+import Scanner from 'components/shared/scanner';
+import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScrollView';
+import withTheme from 'components/shared/withTheme';
+import { P, Small } from 'components/shared/toolBox/typography';
 import {
   accountFollowed as accountFollowedAction,
   accountEdited as accountEditedAction
-} from '../../../actions/accounts';
-import { P, Small } from '../../shared/toolBox/typography';
+} from 'actions/accounts';
+import getStyles from './styles';
 
 @connect(
   (state) => ({

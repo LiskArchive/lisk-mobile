@@ -4,11 +4,11 @@ import {
 } from 'react-native';
 import { translate } from 'react-i18next';
 import { colors } from 'constants/styleGuide';
-import Icon from '../../shared/toolBox/icon';
-import withTheme from '../../shared/withTheme';
+import SearchBarHeader from 'navigation/searchBarHeader';
+import Icon from 'components/shared/toolBox/icon';
+import withTheme from 'components/shared/withTheme';
+import Bookmarks from 'components/shared/bookmarks';
 import getStyles from './styles';
-import Bookmarks from '../../shared/bookmarks';
-import SearchBarHeader from '../router/searchBarHeader';
 
 class Bookmark extends React.Component {
   activeInputRef = null;

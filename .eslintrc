@@ -117,7 +117,10 @@
           ["components", "./src/components"],
           ["assets", "./src/assets"],
           ["utilities", "./src/utilities"],
-          ["actions", "./src/actions"]
+          ["actions", "./src/actions"],
+          ["navigation", "./src/navigation"],
+          ["packages", "./src/packages"],
+          ["hooks", "./src/hooks"]
         ],
         "extensions": [ ".js", ".jsx", ".json"]
       }

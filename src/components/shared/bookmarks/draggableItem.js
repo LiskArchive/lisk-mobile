@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { colors, themes } from 'constants/styleGuide';
 import ModalHolder from 'utilities/modal';
 import { stringShortener } from 'utilities/helpers';
-import { accountUnFollowed as accountUnFollowedAction } from '../../../actions/accounts';
+import { accountUnFollowed as accountUnFollowedAction } from 'actions/accounts';
+import WarningSvg from 'assets/svgs/WarningSvg';
 import Avatar from '../avatar';
 import { B, Small, P } from '../toolBox/typography';
 import Icon from '../toolBox/icon';
 import DeleteBookmarkModal from './deleteBookmarkModal';
-import WarningSvg from '../../../assets/svgs/WarningSvg';
 import SwipeableRow from '../Swipeable';
 
 const DraggableItem = ({

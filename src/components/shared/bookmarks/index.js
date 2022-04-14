@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
 import { tokenKeys } from 'constants/tokens';
 import { validateAddress } from 'utilities/validators';
-import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
 import List from './list';
 import Empty from './empty';
 import withTheme from '../withTheme';

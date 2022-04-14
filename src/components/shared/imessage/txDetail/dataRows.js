@@ -3,6 +3,8 @@ import { View, Image } from 'react-native';
 import { fromRawLsk } from 'utilities/conversions';
 import { isTransfer, getTxConstant } from 'constants/transactions';
 import { colors, themes } from 'constants/styleGuide';
+import arrowLight from 'assets/images/txDetail/arrow-light2x.png';
+import arrowDark from 'assets/images/txDetail/arrow-dark2x.png';
 import FormattedDate from '../../formattedDate';
 import FormattedNumber from '../../formattedNumber';
 import {
@@ -10,8 +12,6 @@ import {
 } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
 import Avatar from '../../avatar';
-import arrowLight from '../../../../assets/images/txDetail/arrow-light2x.png';
-import arrowDark from '../../../../assets/images/txDetail/arrow-dark2x.png';
 
 export const TimeStamp = ({ timestamp, styles }) => {
   if (timestamp) {

@@ -7,9 +7,9 @@ import { B, P } from 'components/shared/toolBox/typography';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { stringShortener } from 'utilities/helpers';
 import { fromRawLsk } from 'utilities/conversions';
+import loadingAnimation from 'assets/animations/loading-dots.json';
 import Row from '../row';
 import getStyles from './styles';
-import loadingAnimation from '../../../../assets/animations/loading-dots.json';
 
 const VoteList = ({ votes, styles, t }) => {
   const loader = (

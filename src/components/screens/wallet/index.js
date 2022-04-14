@@ -7,27 +7,27 @@ import { translate } from 'react-i18next';
 import { account as accountAPI, transactions as transactionsAPI } from 'utilities/api';
 import modalHolder from 'utilities/modal';
 import { colors, themes } from 'constants/styleGuide';
-import {
-  accountFollowed as accountFollowedAction,
-  accountUnFollowed as accountUnFollowedAction
-} from '../../../actions/accounts';
-import AccountSummary from './accountSummary';
-import Transactions from '../../shared/transactions';
-import InfiniteScrollView from '../../shared/infiniteScrollView';
-import Empty from '../../shared/transactions/empty';
-import Loading from '../../shared/transactions/loading';
+import Transactions from 'components/shared/transactions';
+import InfiniteScrollView from 'components/shared/infiniteScrollView';
+import Empty from 'components/shared/transactions/empty';
+import Loading from 'components/shared/transactions/loading';
+import withTheme from 'components/shared/withTheme';
+import HeaderBackButton from 'navigation/headerBackButton';
+import DeleteBookmarkModal from 'components/shared/bookmarks/deleteBookmarkModal';
+import { H3 } from 'components/shared/toolBox/typography';
+import LoadingBar from 'components/shared/loading';
 import {
   loadingStarted as loadingStartedAction,
   loadingFinished as loadingFinishedAction
-} from '../../../actions/loading';
-import withTheme from '../../shared/withTheme';
+} from 'actions/loading';
+import {
+  accountFollowed as accountFollowedAction,
+  accountUnFollowed as accountUnFollowedAction
+} from 'actions/accounts';
+import BookmarkSvg from 'assets/svgs/BookmarkSvg';
+import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
 import getStyles from './styles';
-import HeaderBackButton from '../router/headerBackButton';
-import DeleteBookmarkModal from '../../shared/bookmarks/deleteBookmarkModal';
-import BookmarkSvg from '../../../assets/svgs/BookmarkSvg';
-import { H3 } from '../../shared/toolBox/typography';
-import LoadingBar from '../../shared/loading';
-import BookmarkOutlineSvg from '../../../assets/svgs/BookmarkOutlineSvg';
+import AccountSummary from './accountSummary';
 
 /**
  * This component would be mounted first and would be used to config and redirect

@@ -7,10 +7,10 @@ import { translate } from 'react-i18next';
 import { colors } from 'constants/styleGuide';
 import { headerHeight } from 'utilities/device';
 import URLs from 'constants/URLs';
-import { H2, P, A } from '../../shared/toolBox/typography';
+import { H2, P, A } from 'components/shared/toolBox/typography';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
 import styles from './styles';
-import { PrimaryButton } from '../../shared/toolBox/button';
-import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
 
 @connect(
   () => ({}),

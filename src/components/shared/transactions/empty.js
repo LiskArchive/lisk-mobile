@@ -4,8 +4,8 @@ import {
 } from 'react-native';
 import { translate } from 'react-i18next';
 import { themes } from 'constants/styleGuide';
-import emptyHomeLight from '../../../assets/images/home/emptyHomeLight3x.png';
-import emptyHomeDark from '../../../assets/images/home/emptyHomeDark3x.png';
+import emptyHomeLight from 'assets/images/home/emptyHomeLight3x.png';
+import emptyHomeDark from 'assets/images/home/emptyHomeDark3x.png';
 import { P } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';

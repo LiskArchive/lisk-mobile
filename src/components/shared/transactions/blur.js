@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import withTheme from '../withTheme';
+import darkMediumOutgoing from 'assets/images/amountBlur/outgoing/darkMedium.png';
+import darkSmallOutgoing from 'assets/images/amountBlur/outgoing/darkSmall.png';
+import darkMediumIncoming from 'assets/images/amountBlur/incoming/darkMedium.png';
+import darkSmallIncoming from 'assets/images/amountBlur/incoming/darkSmall.png';
+import lightMediumOutgoing from 'assets/images/amountBlur/outgoing/lightMedium.png';
+import lightSmallOutgoing from 'assets/images/amountBlur/outgoing/lightSmall.png';
+import lightMediumIncoming from 'assets/images/amountBlur/incoming/lightMedium.png';
+import lightSmallIncoming from 'assets/images/amountBlur/incoming/lightSmall.png';
 import getStyles from './styles';
-import darkMediumOutgoing from '../../../assets/images/amountBlur/outgoing/darkMedium.png';
-import darkSmallOutgoing from '../../../assets/images/amountBlur/outgoing/darkSmall.png';
-import darkMediumIncoming from '../../../assets/images/amountBlur/incoming/darkMedium.png';
-import darkSmallIncoming from '../../../assets/images/amountBlur/incoming/darkSmall.png';
-import lightMediumOutgoing from '../../../assets/images/amountBlur/outgoing/lightMedium.png';
-import lightSmallOutgoing from '../../../assets/images/amountBlur/outgoing/lightSmall.png';
-import lightMediumIncoming from '../../../assets/images/amountBlur/incoming/lightMedium.png';
-import lightSmallIncoming from '../../../assets/images/amountBlur/incoming/lightSmall.png';
+import withTheme from '../withTheme';
 
 const blurs = {
   outgoing: {

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View } from 'react-native';
 import LottieView from 'lottie-react-native';
 
-import progressBar from '../../../assets/animations/progressBar.json';
+import progressBar from 'assets/animations/progressBar.json';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 

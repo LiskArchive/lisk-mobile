@@ -3,13 +3,13 @@ import { StatusBar, View } from 'react-native';
 import { Provider, useSelector } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 
-import Router from './components/screens/router';
-import store from './store/index';
+import { colors, themes } from 'constants/styleGuide';
+import Router from 'navigation';
+import Alert from 'components/shared/alert';
+import Modal from 'components/shared/modal';
 import ThemeContext from './contexts/theme';
-import { colors, themes } from './constants/styleGuide';
 import i18n from '../locales';
-import Alert from './components/shared/alert';
-import Modal from './components/shared/modal';
+import store from './store/index';
 
 const ThemedApp = () => {
   const { theme } = useSelector(state => state.settings);

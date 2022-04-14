@@ -9,10 +9,10 @@ import {
   deviceHeight,
   SCREEN_HEIGHTS,
 } from 'utilities/device';
-import PassphraseCopy from '../../shared/passphraseCopy';
-import withTheme from '../../shared/withTheme';
+import PassphraseCopy from 'components/shared/passphraseCopy';
+import withTheme from 'components/shared/withTheme';
+import { P, A } from 'components/shared/toolBox/typography';
 import getStyles from './styles';
-import { P, A } from '../../shared/toolBox/typography';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);

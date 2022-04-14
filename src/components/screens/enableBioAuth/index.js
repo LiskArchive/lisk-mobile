@@ -4,13 +4,13 @@ import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { storePassphraseInKeyChain } from 'utilities/passphrase';
 import { themes, colors } from 'constants/styleGuide';
-import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
-import { B, P, Small } from '../../shared/toolBox/typography';
-import Icon from '../../shared/toolBox/icon';
-import { PrimaryButton } from '../../shared/toolBox/button';
-import withTheme from '../../shared/withTheme';
+import { B, P, Small } from 'components/shared/toolBox/typography';
+import Icon from 'components/shared/toolBox/icon';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import withTheme from 'components/shared/withTheme';
+import HeaderBackButton from 'navigation/headerBackButton';
+import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
 import getStyles from './styles';
-import HeaderBackButton from '../router/headerBackButton';
 
 @connect(
   state => ({
