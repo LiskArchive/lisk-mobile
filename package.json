@@ -15,7 +15,9 @@
     "lint": "npx eslint --quiet ./",
     "i18n": "node ./scripts/scanner.config.js",
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "e2e:ios": "detox build -c ios.debug && detox test -c ios.debug",
+    "e2e:android": "detox build -c android.debug && detox test -c android.debug"
   },
   "dependencies": {
     "@liskhq/lisk-client": "5.2.0",
@@ -42,6 +44,7 @@
     "buffer-reverse": "^1.0.1",
     "console-browserify": "^1.2.0",
     "constants-browserify": "^1.0.0",
+    "detox": "^19.6.5",
     "dns.js": "^1.0.1",
     "domain-browser": "^1.2.0",
     "events": "^1.1.1",

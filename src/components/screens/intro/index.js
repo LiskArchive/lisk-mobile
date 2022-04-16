@@ -81,7 +81,7 @@ class Intro extends React.Component {
     ];
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.wrapper}>
+        <View style={styles.wrapper} testID='intro-screen' >
           <Splash />
           <Heading
             skip={this.skip.bind(this)}
