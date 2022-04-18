@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { translate } from 'react-i18next';
-import connect from 'redux-connect-decorator';
+import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { generatePassphrase } from 'utilities/passphrase';
 import Slider from 'components/screens/intro/heading';
@@ -15,92 +15,80 @@ import {
 import { pricesRetrieved as pricesRetrievedAction } from 'actions/service';
 import styles from './styles';
 
-@connect(
-  state => ({
-    settings: state.settings,
-  }),
+const descriptionContent = [
   {
-    accountSignedIn: accountSignedInAction,
-    accountFetched: accountFetchedAction,
-    pricesRetrieved: pricesRetrievedAction,
+    step: 1,
+    title: 'Your Lisk address',
+    description:
+      'The address is unique and can’t be changed. It’s yours. Find it in your home page.',
+    imageSrc: addressImg,
+    imageStyle: styles.sliderImage
+  },
+  {
+    step: 2,
+    title: 'A unique avatar',
+    description: 'The Avatar represents the address, making it easy to recognize.',
+    imageSrc: uniqueAvatarImg,
+    imageStyle: styles.sliderImage
+  },
+  {
+    step: 3,
+    title: 'A secure passphrase',
+    description:
+      'Your passphrase is used to access your account. No one can reset it, not even Lisk.',
+    imageSrc: securePassphraseImg,
+    imageStyle: styles.sliderImage
   }
-)
-class Intro extends React.Component {
-  state = {
-    passphrase: '',
-    buttonStatus: true
+];
+
+const Intro = ({
+  t, nextStep,
+  accountSignedIn,
+  accountFetched,
+  pricesRetrieved, navigation, route
+}) => {
+  const [passphrase, setPassphrase] = useState('');
+
+  const forward = () => {
+    nextStep({
+      passphrase
+    });
+    accountSignedIn({ passphrase });
+    accountFetched();
+    pricesRetrieved();
   };
 
-  componentDidMount() {
-    const {
-      t,
-      navigation: { setOptions }
-    } = this.props;
+  useEffect(() => {
+    const { setOptions } = navigation;
 
-    const passphrase = this.props.route.params?.passphrase ?? generatePassphrase();
-    this.setState({ passphrase });
+    const passphrase = route.params?.passphrase ?? generatePassphrase();
+
+    setPassphrase(passphrase);
 
     setOptions({
       title: t('Account creation'),
-      headerLeft: (props) => <HeaderBackButton {...props} onPress={this.props.navigation.goBack} />
+      headerLeft: (props) => <HeaderBackButton {...props} onPress={navigation.goBack} />
     });
-  }
+  }, []);
 
-  confirm = (status) => {
-    this.setState({
-      buttonStatus: !status
-    });
-  };
+  return <SafeAreaView style={styles.wrapper}>
+    <Slider
+      descriptionContent={descriptionContent}
+      skip={forward}
+      testID="accountCreation"
+      t={t}
+    ></Slider>
+  </SafeAreaView>;
+};
 
-  forward = () => {
-    this.props.nextStep({
-      passphrase: this.state.passphrase
-    });
-    this.props.accountSignedIn({ passphrase: this.state.passphrase });
-    this.props.accountFetched();
-    this.props.pricesRetrieved();
-  };
+const mapStateToProps = state => ({
+  settings: state.settings
+});
 
-  render() {
-    const { t } = this.props;
+const mapDispatchToProps = {
+  accountSignedIn: accountSignedInAction,
+  accountFetched: accountFetchedAction,
+  pricesRetrieved: pricesRetrievedAction,
+};
 
-    const descriptionContent = [
-      {
-        step: 1,
-        title: 'Your Lisk address',
-        description:
-          'The address is unique and can’t be changed. It’s yours. Find it in your home page.',
-        imageSrc: addressImg,
-        imageStyle: styles.sliderImage
-      },
-      {
-        step: 2,
-        title: 'A unique avatar',
-        description: 'The Avatar represents the address, making it easy to recognize.',
-        imageSrc: uniqueAvatarImg,
-        imageStyle: styles.sliderImage
-      },
-      {
-        step: 3,
-        title: 'A secure passphrase',
-        description:
-          'Your passphrase is used to access your account. No one can reset it, not even Lisk.',
-        imageSrc: securePassphraseImg,
-        imageStyle: styles.sliderImage
-      }
-    ];
-
-    return (
-      <SafeAreaView style={styles.wrapper}>
-        <Slider
-          descriptionContent={descriptionContent}
-          skip={this.forward}
-          testID="accountCreation"
-          t={t}
-        ></Slider>
-      </SafeAreaView>
-    );
-  }
-}
-
-export default translate()(Intro);
+export default translate()(connect(mapStateToProps, mapDispatchToProps)(Intro));
