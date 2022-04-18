@@ -1,7 +1,7 @@
-import React from 'react';
-import connect from 'redux-connect-decorator';
+import React, { useState } from 'react';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { translate } from 'react-i18next';
 import Share from 'components/shared/share';
@@ -24,23 +24,17 @@ import getStyles from './styles';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
-@connect(state => ({
-  account: state.accounts.info,
-  language: state.settings.language,
-}))
-class Request extends React.Component {
-  state = {
-    amount: { value: '', validity: -1 },
-    url: '',
-  };
+const Request = ({
+  styles, theme, account, t, language
+}) => {
+  const { address } = account.LSK;
+  const [amount, setAmount] = useState({ value: '', validity: -1 });
+  const [url, setUrl] = useState('');
+  const extraHeight = deviceType() === 'android' ? 170 : 0;
 
-  validator = str => reg.amount.test(str);
+  const validator = str => reg.amount.test(str);
 
-  // eslint-disable-next-line max-statements
-  changeHandler = val => {
-    const { account, language } = this.props;
-    const { address } = account.LSK;
-
+  const changeHandler = val => {
     if (language === languageMap.en.code) {
       val = val.replace(/,/g, '.');
     } else {
@@ -51,104 +45,94 @@ class Request extends React.Component {
     let amount = val;
 
     if (val !== '') {
-      amountValidity = this.validator(val) ? 0 : 1;
+      amountValidity = validator(val) ? 0 : 1;
       amount = {
         value: val,
         validity: amountValidity,
       };
     }
-
-    this.setState({
-      amount,
-      url:
-        amountValidity === 0
-          ? `lisk://wallet?recipient=${address}&amount=${val}`
-          : address,
-    });
+    setUrl(amountValidity === 0
+      ? `lisk://wallet?recipient=${address}&amount=${val}`
+      : address);
+    setAmount(amount);
   };
 
-  render() {
-    const {
-      styles, theme, account, t
-    } = this.props;
-    const { amount, url } = this.state;
-    const { address } = account.LSK;
-    const extraHeight = deviceType() === 'android' ? 170 : 0;
-
-    return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <KeyboardAwareScrollView
-          viewIsInsideTab
-          enableOnAndroid={true}
-          enableResetScrollToCoords={false}
-          extraHeight={extraHeight}
-        >
-          <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-            <View style={styles.subHeader}>
-              <P style={[styles.addressLabel, styles.theme.addressLabel]}>
-                {t('Your Lisk address')}
-              </P>
-              <View style={styles.addressContainer}>
-                <Avatar style={styles.avatar} address={address} size={24} />
-                <CopyToClipboard
-                  style={styles.copyContainer}
-                  labelStyle={[styles.address, styles.theme.address]}
-                  showIcon={true}
-                  iconSize={18}
-                  value={address}
-                  type={B}
-                />
-              </View>
-            </View>
-
-            <View style={styles.body}>
-              <View style={styles.shareContainer}>
-                <Share
-                  type={TouchableWithoutFeedback}
-                  value={url || address}
-                  title={url || address}
-                >
-                  <View style={styles.shareContent}>
-                    <QRCode
-                      value={url || address}
-                      size={qrCodeSize}
-                      color={
-                        theme === themes.light
-                          ? colors.light.black
-                          : colors.dark.white
-                      }
-                      backgroundColor={
-                        theme === themes.light
-                          ? colors.light.white
-                          : colors.dark.maastrichtBlue
-                      }
-                    />
-
-                    <View style={styles.shareTextContainer}>
-                      <P style={[styles.shareText, styles.theme.shareText]}>
-                        {t('Tap on the QR Code to share it.')}
-                      </P>
-                    </View>
-                  </View>
-                </Share>
-              </View>
-
-              <View style={styles.inputContainer}>
-                <Input
-                  label={t('Amount in LSK (optional)')}
-                  autoCorrect={false}
-                  onChange={this.changeHandler}
-                  value={amount.value}
-                  keyboardType="numeric"
-                  error={amount.validity === 1 ? t('Invalid amount') : ''}
-                />
-              </View>
-            </View>
+  return <View style={[styles.wrapper, styles.theme.wrapper]}>
+    <KeyboardAwareScrollView
+      viewIsInsideTab
+      enableOnAndroid={true}
+      enableResetScrollToCoords={false}
+      extraHeight={extraHeight}
+    >
+      <View style={[styles.innerContainer, styles.theme.innerContainer]}>
+        <View style={styles.subHeader}>
+          <P style={[styles.addressLabel, styles.theme.addressLabel]}>
+            {t('Your Lisk address')}
+          </P>
+          <View style={styles.addressContainer}>
+            <Avatar style={styles.avatar} address={address} size={24} />
+            <CopyToClipboard
+              style={styles.copyContainer}
+              labelStyle={[styles.address, styles.theme.address]}
+              showIcon={true}
+              iconSize={18}
+              value={address}
+              type={B}
+            />
           </View>
-        </KeyboardAwareScrollView>
-      </View>
-    );
-  }
-}
+        </View>
 
-export default withTheme(translate()(Request), getStyles());
+        <View style={styles.body}>
+          <View style={styles.shareContainer}>
+            <Share
+              type={TouchableWithoutFeedback}
+              value={url || address}
+              title={url || address}
+            >
+              <View style={styles.shareContent}>
+                <QRCode
+                  value={url || address}
+                  size={qrCodeSize}
+                  color={
+                    theme === themes.light
+                      ? colors.light.black
+                      : colors.dark.white
+                  }
+                  backgroundColor={
+                    theme === themes.light
+                      ? colors.light.white
+                      : colors.dark.maastrichtBlue
+                  }
+                />
+
+                <View style={styles.shareTextContainer}>
+                  <P style={[styles.shareText, styles.theme.shareText]}>
+                    {t('Tap on the QR Code to share it.')}
+                  </P>
+                </View>
+              </View>
+            </Share>
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Input
+              label={t('Amount in LSK (optional)')}
+              autoCorrect={false}
+              onChange={changeHandler}
+              value={amount.value}
+              keyboardType="numeric"
+              error={amount.validity === 1 ? t('Invalid amount') : ''}
+            />
+          </View>
+        </View>
+      </View>
+    </KeyboardAwareScrollView>
+  </View>;
+};
+
+const mapStateToProps = state => ({
+  account: state.accounts.info,
+  language: state.settings.language,
+});
+
+export default withTheme(translate()(connect(mapStateToProps)(Request)), getStyles());
