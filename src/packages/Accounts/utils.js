@@ -36,7 +36,7 @@ export const showInitializationModal = ({
   if (
     activeToken === tokenMap.LSK.key
     && !account[activeToken].initialized
-    && (!transactions || transactions.pending.length < 1)
+    && (!transactions || transactions.pending?.length < 1)
     && balance >= 0.2
   ) {
     ModalHolder.open({

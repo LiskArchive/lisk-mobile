@@ -9,7 +9,7 @@ import SignIn from 'packages/Auth/SignIn';
 import Register from 'packages/Auth/Register';
 import AddBookmark from 'components/screens/addBookmark';
 import TxDetail from 'components/screens/txDetail';
-import Wallet from 'components/screens/wallet';
+import Wallet from 'packages/Wallet';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
