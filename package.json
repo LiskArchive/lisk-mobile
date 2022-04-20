@@ -56,7 +56,7 @@
     "i18next": "^14.0.1",
     "lottie-ios": "3.2.3",
     "lottie-react-native": "4.1.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "patch-package": "^6.4.7",
     "path-browserify": "^0.0.0",
     "process": "^0.11.10",
