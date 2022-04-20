@@ -10,7 +10,7 @@ import Send from 'packages/Send';
 import Home from 'packages/Accounts';
 import LockedBalanceDetails from 'packages/Accounts/lockedBalanceDetails';
 import withTheme from 'components/shared/withTheme';
-import Bookmarks from 'components/screens/bookmarkPage';
+import Bookmarks from 'packages/Bookmark';
 import MultiSignature from 'components/screens/multiSignature';
 import TabBarIcon from './tabBarIcon';
 import navigationOptions from './navigationOptions';
