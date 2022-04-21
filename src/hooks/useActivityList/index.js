@@ -25,7 +25,7 @@ const useActivityList = ({ address, activeToken }) => {
 
   const refresh = async () => {
     const { confirmed } = transactions;
-    setIsRefreshing(true)
+    setIsRefreshing(true);
     const account = await accountAPI.getSummary(activeToken, { address });
     const data = await transactionsAPI.get(activeToken, {
       address
@@ -38,7 +38,7 @@ const useActivityList = ({ address, activeToken }) => {
       loaded: true,
       count: data.meta.count
     });
-    setIsRefreshing(false)
+    setIsRefreshing(false);
   };
 
   const loadMore = async () => {

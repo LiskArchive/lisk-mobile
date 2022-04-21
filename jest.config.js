@@ -24,6 +24,8 @@ module.exports = {
     'src/utilities/passphrase.js',
     'src/utilities/api/account.js',
     'src/assets',
+    'src/packages',
+    'src/navigation'
   ],
   coverageThreshold: {
     global: {
