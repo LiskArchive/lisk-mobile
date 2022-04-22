@@ -61,6 +61,7 @@ const Intro = ({
   useEffect(() => {
     const { setOptions } = navigation;
 
+    // eslint-disable-next-line no-shadow
     const passphrase = route.params?.passphrase ?? generatePassphrase();
 
     setPassphrase(passphrase);
