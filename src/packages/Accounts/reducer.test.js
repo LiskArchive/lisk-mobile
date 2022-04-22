@@ -1,6 +1,6 @@
 import actionTypes from 'constants/actions';
 import * as storageUtility from 'utilities/storage';
-import accountsMiddleware from './accounts';
+import accountsMiddleware from './reducer';
 
 describe('Middleware: Accounts', () => {
   const accountA = {
