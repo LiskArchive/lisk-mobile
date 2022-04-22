@@ -3,7 +3,7 @@ import NetInfo from '@react-native-community/netinfo';
 import actionTypes from 'constants/actions';
 import { account as accountAPI } from 'utilities/api';
 import DropDownHolder from 'utilities/alert';
-import { blockUpdated } from '../../actions/accounts';
+import { blockUpdated } from 'packages/Accounts/actions';
 import { networkInfoUpdated } from '../../actions/network';
 import i18n from '../../../locales';
 

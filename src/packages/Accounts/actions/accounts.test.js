@@ -7,8 +7,8 @@ import {
   transactions as transactionsAPI,
 } from 'utilities/api';
 import data from 'constants/mockStore';
-import { INITIAL_STATE as accounts } from '../store/reducers/accounts';
-import { INITIAL_STATE as settings } from '../store/reducers/settings';
+import { INITIAL_STATE as accounts } from '../../../store/reducers/accounts';
+import { INITIAL_STATE as settings } from '../../../store/reducers/settings';
 import {
   accountFollowed,
   accountUnFollowed,
@@ -18,7 +18,7 @@ import {
   blockUpdated,
   accountSignedOut,
   followedAccountsRetrieved,
-} from './accounts';
+} from './index';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
