@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+/* eslint-disable no-shadow */
 import React, { useEffect, useRef, useState } from 'react';
 import {
   LogBox,

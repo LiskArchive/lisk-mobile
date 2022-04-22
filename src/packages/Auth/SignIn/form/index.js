@@ -165,7 +165,7 @@ class Form extends React.Component {
         ) : null}
 
         <Scanner
-          ref={el => {
+          reference={el => {
             this.scanner = el;
           }}
           containerStyles={{

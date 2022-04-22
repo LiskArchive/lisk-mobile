@@ -151,7 +151,7 @@ class SecondPassphrase extends React.Component {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <Scanner
-          ref={el => {
+          reference={el => {
             this.scanner = el;
           }}
           containerStyles={{

@@ -138,7 +138,7 @@ class Recipient extends React.Component {
       <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
         <HeaderBackButton title={'Send LSK'} noIcon={true} currentIndex={1} length={3} step={true} />
         <Scanner
-          ref={(el) => {
+          reference={(el) => {
             this.scanner = el;
           }}
           navigation={navigation}

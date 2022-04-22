@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { useEffect, useState } from 'react';
 import { account as accountAPI, transactions as transactionsAPI } from 'utilities/api';
 

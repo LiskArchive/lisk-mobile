@@ -93,6 +93,7 @@ class Scanner extends React.Component {
       fullScreen,
       permissionDialogTitle,
       permissionDialogMessage,
+      reference
     } = this.props;
     const { camera, photo } = this.state;
     return (
@@ -100,7 +101,7 @@ class Scanner extends React.Component {
         {camera.visible ? (
           <SafeAreaView style={styles.scannerContainer} >
             <RNCamera
-              ref={this.props.ref}
+              ref={reference}
               style={[styles.preview, styles.cameraPreview, scanner]}
               onBarCodeRead={this.readQRcode}
               barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}

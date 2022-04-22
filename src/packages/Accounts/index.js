@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable max-lines */
+/* eslint-disable no-shadow */
 import React, {
   createRef, useEffect, useRef, useState
 } from 'react';

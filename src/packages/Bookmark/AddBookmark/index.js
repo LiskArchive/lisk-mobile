@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
 import { BackHandler, View } from 'react-native';
@@ -144,7 +145,7 @@ const AddToBookmark = ({
 
   return <View style={[styles.wrapper, styles.theme.wrapper]}>
     <Scanner
-      ref={scanner}
+      reference={scanner}
       navigation={navigation}
       readFromCameraRoll={true}
       onQRCodeRead={onQRCodeRead}

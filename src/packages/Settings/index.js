@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable complexity */
 import React, { useState } from 'react';
 import { ScrollView, View, Platform } from 'react-native';
@@ -55,7 +56,7 @@ const Settings = ({
     });
   };
 
-  signOut = () => {
+  const signOut = () => {
     accountSignedOut();
     navigation.reset({
       index: 0,

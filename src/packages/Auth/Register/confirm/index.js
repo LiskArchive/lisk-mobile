@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
