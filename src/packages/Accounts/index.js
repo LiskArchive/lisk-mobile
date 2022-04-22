@@ -25,7 +25,7 @@ import { getNetworkInfo as getNetworkInfoAction } from 'actions/network';
 import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
 import {
   accountFetched as accountFetchedAction
-} from 'actions/accounts';
+} from 'packages/Accounts/actions';
 
 import getStyles from './styles';
 import {
