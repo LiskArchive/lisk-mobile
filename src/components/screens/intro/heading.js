@@ -9,7 +9,7 @@ import { headerHeight } from 'utilities/device';
 import URLs from 'constants/URLs';
 import { H2, P, A } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
 import styles from './styles';
 
 @connect(

@@ -1,5 +1,5 @@
-import actionTypes from 'constants/actions';
 import { getSettings } from 'utilities/storage';
+import actionTypes from '../actionTypes';
 
 /**
  * Returns a pure action object to store the given account

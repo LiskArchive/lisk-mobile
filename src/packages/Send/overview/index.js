@@ -4,7 +4,6 @@ import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { transactionAdded as transactionAddedAction } from 'actions/transactions';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { toRawLsk, fromRawLsk } from 'utilities/conversions';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -16,6 +15,7 @@ import { colors } from 'constants/styleGuide';
 import { tokenMap } from 'constants/tokens';
 import DropDownHolder from 'utilities/alert';
 import HeaderBackButton from 'navigation/headerBackButton';
+import { transactionAdded as transactionAddedAction } from '../actions/transactions';
 import getStyles from './styles';
 import ReadMore from './readMore';
 

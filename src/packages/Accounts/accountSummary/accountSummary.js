@@ -2,11 +2,11 @@ import React from 'react';
 import { Animated, Dimensions } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
 import easing from 'utilities/easing';
 import { tokenKeys } from 'constants/tokens';
 import withTheme from 'components/shared/withTheme';
-import Profile from './profile';
+import Profile from '../Profile';
 import getStyles from './styles';
 
 @connect(
@@ -20,7 +20,7 @@ import getStyles from './styles';
     settingsUpdated: settingsUpdatedAction
   }
 )
-class AccountSummary extends React.Component {
+class AccountSummaryScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -109,4 +109,4 @@ class AccountSummary extends React.Component {
   }
 }
 
-export default withTheme(translate()(AccountSummary), getStyles());
+export const AccountSummary = withTheme(translate()(AccountSummaryScreen), getStyles());

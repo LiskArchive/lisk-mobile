@@ -1,6 +1,5 @@
-import actionTypes from 'constants/actions';
-
 import { account as accountAPI, transactions as transactionsAPI } from 'utilities/api';
+import actionTypes from '../actionTypes';
 
 // eslint-disable-next-line max-statements
 export const blockUpdated = () => async (dispatch, getState) => {

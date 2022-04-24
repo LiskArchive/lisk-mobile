@@ -1,5 +1,5 @@
-import actionTypes from 'constants/actions';
 import { tokenKeys } from 'constants/tokens';
+import actionTypes from '../actionTypes';
 import settings, { INITIAL_STATE } from './settings';
 
 const defaultTokens = {
