@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { colors, themes } from 'constants/styleGuide';
 import ModalHolder from 'utilities/modal';
 import { stringShortener } from 'utilities/helpers';
-import { accountUnFollowed as accountUnFollowedAction } from 'actions/accounts';
+import { accountUnFollowed as accountUnFollowedAction } from 'packages/Accounts/actions';
 import WarningSvg from 'assets/svgs/WarningSvg';
 import Avatar from '../avatar';
 import { B, Small, P } from '../toolBox/typography';

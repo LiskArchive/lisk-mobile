@@ -1,6 +1,6 @@
-import actionTypes from 'constants/actions';
 import * as storageUtility from 'utilities/storage';
 import { settingsUpdated, settingsRetrieved } from './settings';
+import actionTypes from '../actionTypes';
 
 const settings = {
   sensorType: 'Face ID',

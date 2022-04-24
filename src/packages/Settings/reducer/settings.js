@@ -1,8 +1,8 @@
-import actionTypes from 'constants/actions';
 import { currencyKeys } from 'constants/currencies';
 import { merge } from 'utilities/helpers';
 import { themes } from 'constants/styleGuide';
 import { tokenKeys } from 'constants/tokens';
+import actionTypes from '../actionTypes';
 
 export const INITIAL_STATE = {
   theme: themes.light,

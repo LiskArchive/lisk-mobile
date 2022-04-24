@@ -1,5 +1,5 @@
-import actionTypes from 'constants/actions';
 import { retrieveAccounts } from 'utilities/storage';
+import actionTypes from '../actionTypes';
 /**
  * Retrieves the stored accounts and then
  * dispatches an action to store the accounts

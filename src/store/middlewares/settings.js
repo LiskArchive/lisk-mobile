@@ -1,4 +1,4 @@
-import actionTypes from 'constants/actions';
+import actionTypes from 'packages/Settings/actionTypes';
 import { storeSettings } from 'utilities/storage';
 import { deviceLocale } from 'utilities/device';
 import i18n from '../../../locales';

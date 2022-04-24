@@ -1,4 +1,4 @@
-import actionTypes from 'constants/actions';
+import actionTypes from '../actionTypes';
 
 /**
  * Returns a pure action object to remove the given account

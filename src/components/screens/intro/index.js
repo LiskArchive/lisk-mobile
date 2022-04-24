@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { translate } from 'react-i18next';
-import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
 import activityHistoryImg from 'assets/images/intro/activityHistory3x.png';
 import tokensTransferImg from 'assets/images/intro/tokensTransfer3x.png';
 import secureAuthenticationImg from 'assets/images/intro/secureAuthentication3x.png';

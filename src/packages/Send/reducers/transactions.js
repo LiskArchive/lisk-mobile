@@ -1,5 +1,6 @@
-import actionTypes from 'constants/actions';
 import { merge } from 'utilities/helpers';
+import accountTypes from 'packages/Accounts/actionTypes';
+import actionTypes from '../actionTypes';
 
 export const INITIAL_STATE = {
   loaded: false,
@@ -58,7 +59,7 @@ const transactions = (state = INITIAL_STATE, action = {}) => {
       });
 
     case actionTypes.transactionsReset:
-    case actionTypes.accountSignedOut:
+    case accountTypes.accountSignedOut:
       return INITIAL_STATE;
 
     default:

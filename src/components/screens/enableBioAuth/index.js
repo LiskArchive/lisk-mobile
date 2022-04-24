@@ -9,7 +9,7 @@ import Icon from 'components/shared/toolBox/icon';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'navigation/headerBackButton';
-import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
 import getStyles from './styles';
 
 @connect(

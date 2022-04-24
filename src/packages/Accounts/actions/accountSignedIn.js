@@ -1,6 +1,6 @@
-import actionTypes from 'constants/actions';
 import { account as accountAPI } from 'utilities/api';
 import { followedAccountsRetrieved } from './followedAccountsRetrieved';
+import actionTypes from '../actionTypes';
 
 /**
  * Extracts the addresses for all enabled tokens from

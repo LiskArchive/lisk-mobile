@@ -1,14 +1,15 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import actionTypes from 'constants/actions';
 import * as storageUtility from 'utilities/storage';
 import {
   account as accountAPI,
   transactions as transactionsAPI,
 } from 'utilities/api';
+import utilActions from 'constants/actions';
 import data from 'constants/mockStore';
-import { INITIAL_STATE as accounts } from '../../../store/reducers/accounts';
-import { INITIAL_STATE as settings } from '../../../store/reducers/settings';
+import { INITIAL_STATE as settings } from 'packages/Settings/reducer';
+import actionTypes from '../actionTypes';
+import { INITIAL_STATE as accounts } from '../reducer';
 import {
   accountFollowed,
   accountUnFollowed,
@@ -192,8 +193,8 @@ describe('Action: Accounts', () => {
       accounts,
     });
     const expectedActions = [
-      { type: actionTypes.loadingStarted, data: actionTypes.accountFetched },
-      { type: actionTypes.loadingFinished, data: actionTypes.accountFetched },
+      { type: utilActions.loadingStarted, data: actionTypes.accountFetched },
+      { type: utilActions.loadingFinished, data: actionTypes.accountFetched },
     ];
     accountAPI.getSummary.mockRejectedValueOnce({ error: true });
     await store.dispatch(accountFetched());
@@ -206,7 +207,7 @@ describe('Action: Accounts', () => {
       accounts,
     });
     const expectedActions = [
-      { type: actionTypes.loadingStarted, data: actionTypes.accountFetched },
+      { type: utilActions.loadingStarted, data: actionTypes.accountFetched },
       {
         type: actionTypes.accountUpdated,
         data: {
@@ -214,7 +215,7 @@ describe('Action: Accounts', () => {
           activeToken: data.activeToken,
         },
       },
-      { type: actionTypes.loadingFinished, data: actionTypes.accountFetched },
+      { type: utilActions.loadingFinished, data: actionTypes.accountFetched },
     ];
     accountAPI.getSummary.mockResolvedValueOnce(data.account);
     await store.dispatch(accountFetched());

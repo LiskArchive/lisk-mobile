@@ -22,7 +22,7 @@ import { colors, themes } from 'constants/styleGuide';
 import Banner from 'components/shared/banner';
 import { fetchData, persistData } from 'utilities/storage';
 import { getNetworkInfo as getNetworkInfoAction } from 'actions/network';
-import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
 import {
   accountFetched as accountFetchedAction
 } from 'packages/Accounts/actions';
@@ -31,7 +31,7 @@ import getStyles from './styles';
 import {
   showInitializationModal
 } from './utils';
-import AccountSummary from './accountSummary/home';
+import AccountSummary from './accountSummary';
 import useActivityList from '../../hooks/useActivityList';
 
 /**

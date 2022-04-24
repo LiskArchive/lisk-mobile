@@ -11,7 +11,7 @@ import HeaderBackButton from 'navigation/headerBackButton';
 import {
   accountSignedIn as accountSignedInAction,
   accountFetched as accountFetchedAction
-} from 'actions/accounts';
+} from 'packages/Accounts/actions';
 import { pricesRetrieved as pricesRetrievedAction } from 'actions/service';
 import styles from './styles';
 

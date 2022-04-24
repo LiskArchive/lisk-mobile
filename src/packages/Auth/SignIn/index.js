@@ -31,12 +31,12 @@ import {
 import {
   accountSignedIn as accountSignedInAction,
   accountFetched as accountFetchedAction,
-} from 'actions/accounts';
+} from 'packages/Accounts/actions';
+import { pricesRetrieved as pricesRetrievedAction } from 'actions/service';
 import {
   settingsUpdated as settingsUpdatedAction,
   settingsRetrieved as settingsRetrievedAction,
-} from 'actions/settings';
-import { pricesRetrieved as pricesRetrievedAction } from 'actions/service';
+} from '../../Settings/actions';
 import getStyles from './styles';
 import Splash from './splash';
 import Form from './form';

@@ -1,4 +1,4 @@
-import actionTypes from 'constants/actions';
+import actionTypes from '../actionTypes';
 /**
  * Returns a pure action object to store the given account
  * in the list of followed accounts
