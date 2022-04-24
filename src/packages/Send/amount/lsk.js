@@ -279,7 +279,7 @@ const AmountLSK = (props) => {
     const ratio = priceTicker[token][settings?.currency];
     if (ratio) {
       return (fromRawLsk(accounts.info[settings?.token?.active]?.balance) * ratio).toLocaleString(
-        `${language}-${language.toUpperCase()}`,
+        `${language}-${language?.toUpperCase()}`,
         { maximumFractionDigits: 2 }
       );
     }
