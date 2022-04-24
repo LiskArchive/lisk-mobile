@@ -23,7 +23,7 @@ import { P, Small } from 'components/shared/toolBox/typography';
 import {
   accountFollowed as accountFollowedAction,
   accountEdited as accountEditedAction
-} from 'actions/accounts';
+} from 'packages/Accounts/actions';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements

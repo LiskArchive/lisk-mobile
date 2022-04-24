@@ -1,4 +1,4 @@
-import actionTypes from 'constants/actions';
+import actionTypes from 'packages/Accounts/actionTypes';
 import { storeFollowedAccount } from 'utilities/storage';
 
 const accountsMiddleware = store => next => action => {

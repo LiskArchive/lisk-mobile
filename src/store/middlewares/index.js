@@ -1,5 +1,5 @@
 import thunk from 'redux-thunk';
-import accountsMiddleware from '../../packages/Accounts/reducer';
+import accountsMiddleware from './accounts';
 import socketMiddleware from './socket';
 import settingsMiddleware from './settings';
 

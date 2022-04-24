@@ -1,4 +1,5 @@
-import actionTypes from 'constants/actions';
+import accountTypes from 'packages/Accounts/actionTypes'
+import actionTypes from '../actionTypes';
 import transactions, { INITIAL_STATE } from './transactions';
 
 describe('Reducers: Transactions', () => {
@@ -76,7 +77,7 @@ describe('Reducers: Transactions', () => {
       confirmed: [transaction1, transaction2],
       count: 10,
     };
-    const action = { type: actionTypes.accountSignedOut };
+    const action = { type: accountTypes.accountSignedOut };
     const changedState = transactions(state, action);
     expect(changedState).toEqual(emptyState);
   });

@@ -1,6 +1,6 @@
-export { default as accounts } from './accounts';
-export { default as transactions } from './transactions';
+export { default as accounts } from 'packages/Accounts/reducer/accounts';
+export { default as settings } from 'packages/Settings/reducer/settings';
+export { default as transactions } from '../../packages/Send/reducers/transactions';
 export { default as loading } from './loading';
-export { default as settings } from './settings';
 export { default as service } from './service';
 export { default as network } from './network';

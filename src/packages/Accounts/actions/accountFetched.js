@@ -1,6 +1,7 @@
-import actionTypes from 'constants/actions';
-
 import { account as accountAPI } from 'utilities/api';
+import utilTypes from 'constants/actions';
+import actionTypes from '../actionTypes';
+
 import { loadingStarted, loadingFinished } from '../../../actions/loading';
 
 export const accountFetched = (givenToken) => (dispatch, getState) => {
@@ -14,7 +15,7 @@ export const accountFetched = (givenToken) => (dispatch, getState) => {
       accountAPI.getNetworkInfo(selectedToken).then(data => {
         if (data) {
           dispatch({
-            type: actionTypes.networkInfoUpdated,
+            type: utilTypes.networkInfoUpdated,
             data,
           });
         }

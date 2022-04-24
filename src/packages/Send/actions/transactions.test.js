@@ -1,14 +1,15 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import txConstants, { moduleAssetNameIdMap } from 'constants/transactions';
-import actionTypes from 'constants/actions';
 import { transactions as transactionsAPI } from 'utilities/api';
+import { INITIAL_STATE as settings } from 'packages/Settings/reducer';
+import utilTypes from 'constants/actions';
+import actionTypes from '../actionTypes';
 import {
   transactionsLoaded,
   transactionAdded,
   transactionsReset,
 } from './transactions';
-import { INITIAL_STATE as settings } from '../store/reducers/settings';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -94,7 +95,7 @@ describe('Action: Accounts', () => {
     it('should load more transactions', async () => {
       const expectedActions = [
         {
-          type: actionTypes.loadingStarted,
+          type: utilTypes.loadingStarted,
           data: actionTypes.transactionsLoaded,
         },
         {
@@ -105,7 +106,7 @@ describe('Action: Accounts', () => {
           },
         },
         {
-          type: actionTypes.loadingFinished,
+          type: utilTypes.loadingFinished,
           data: actionTypes.transactionsLoaded,
         },
       ];
@@ -118,11 +119,11 @@ describe('Action: Accounts', () => {
     it('should handle rejections', async () => {
       const expectedActions = [
         {
-          type: actionTypes.loadingStarted,
+          type: utilTypes.loadingStarted,
           data: actionTypes.transactionsLoaded,
         },
         {
-          type: actionTypes.loadingFinished,
+          type: utilTypes.loadingFinished,
           data: actionTypes.transactionsLoaded,
         },
       ];

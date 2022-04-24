@@ -1,6 +1,6 @@
 import BackgroundTimer from 'react-native-background-timer';
 import NetInfo from '@react-native-community/netinfo';
-import actionTypes from 'constants/actions';
+import actionTypes from 'packages/Accounts/actionTypes';
 import { account as accountAPI } from 'utilities/api';
 import DropDownHolder from 'utilities/alert';
 import { blockUpdated } from 'packages/Accounts/actions';

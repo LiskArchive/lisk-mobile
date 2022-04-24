@@ -20,7 +20,7 @@ import { colors, themes } from 'constants/styleGuide';
 import { IconButton } from 'components/shared/toolBox/button';
 import Icon from 'components/shared/toolBox/icon';
 import MultiSignatureSvg from 'assets/svgs/MultiSignatureSvg';
-import getStyles from './styles';
+import getStyles from '../accountSummary/styles';
 
 const blurs = {
   blurBig,
@@ -38,7 +38,7 @@ const getBalanceSize = (normalizedBalance) => {
   return 'Small';
 };
 
-const Profile = ({
+const ProfileScreen = ({
   styles,
   interpolate,
   account,
@@ -212,4 +212,4 @@ const Profile = ({
   );
 };
 
-export default withTheme(Profile, getStyles());
+export const Profile = withTheme(ProfileScreen, getStyles());

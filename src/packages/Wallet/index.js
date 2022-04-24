@@ -22,7 +22,7 @@ import {
 import {
   accountFollowed as accountFollowedAction,
   accountUnFollowed as accountUnFollowedAction
-} from 'actions/accounts';
+} from 'packages/Accounts/actions';
 import BookmarkSvg from 'assets/svgs/BookmarkSvg';
 import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
 import getStyles from './styles';

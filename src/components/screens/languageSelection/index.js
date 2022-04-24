@@ -6,7 +6,7 @@ import { colors } from 'constants/styleGuide';
 import { P } from 'components/shared/toolBox/typography';
 import Icon from 'components/shared/toolBox/icon';
 import withTheme from 'components/shared/withTheme';
-import { settingsUpdated as settingsUpdatedAction } from 'actions/settings';
+import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
 import getStyles from './styles';
 
 @connect(

@@ -1,8 +1,8 @@
-import actionTypes from 'constants/actions';
 import { moduleAssetNameIdMap } from 'constants/transactions';
 import { transactions as transactionsAPI } from 'utilities/api';
 import { tokenMap } from 'constants/tokens';
-import { loadingStarted, loadingFinished } from './loading';
+import { loadingStarted, loadingFinished } from 'actions/loading';
+import actionTypes from '../actionTypes';
 
 const fetchTransactions = async (dispatch, getState, data) => {
   dispatch(loadingStarted(actionTypes.transactionsLoaded));
