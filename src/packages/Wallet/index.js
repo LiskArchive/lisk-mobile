@@ -48,7 +48,7 @@ const Wallet = ({
 
   const isFollowed = () => {
     return followedAccounts[activeToken].some(
-      (item) => item.address === account.address
+      (item) => item.address === account?.address
     );
   };
 
@@ -122,8 +122,8 @@ const Wallet = ({
       <HeaderBackButton
         title="Account Details"
         onPress={navigation.goBack}
-        rightIconComponent={() => (
-          <TouchableOpacity onPress={toggleBookmark}>
+        rightIconComponent={() => (account
+          && <TouchableOpacity onPress={toggleBookmark}>
             {isFollowed() ? (
               <BookmarkSvg />
             ) : (
