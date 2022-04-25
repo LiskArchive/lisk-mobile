@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { View, ScrollView, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import moment from 'moment';
 import { colors, themes } from 'constants/styleGuide';
 import { P } from 'components/shared/toolBox/typography';
 import withTheme from 'components/shared/withTheme';
