@@ -123,6 +123,7 @@ const AddToBookmark = ({
     }
   };
 
+  // eslint-disable-next-line max-statements
   useEffect(() => {
     const account = route.params?.account ?? null;
     const { setOptions } = navigation;
@@ -132,12 +133,13 @@ const AddToBookmark = ({
       setEditMode(editMode);
       setLabel({ value: account.label || '' });
       setIncomingData(account);
-      setOptions({
-        title: null,
-        headerLeft: (props) => <HeaderBackButton {...props} title="Edit bookmark" />,
-      });
+      if (editMode) {
+        setOptions({
+          title: null,
+          headerLeft: (props) => <HeaderBackButton {...props} title="Edit bookmark" />,
+        });
+      }
     }
-
     BackHandler.addEventListener('hardwareBackPress', onBackButtonPressedAndroid);
 
     return () => BackHandler.removeEventListener('hardwareBackPress', onBackButtonPressedAndroid);
