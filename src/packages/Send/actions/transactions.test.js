@@ -1,9 +1,9 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import txConstants, { moduleAssetNameIdMap } from 'constants/transactions';
 import { transactions as transactionsAPI } from 'utilities/api';
 import { INITIAL_STATE as settings } from 'packages/Settings/reducer';
 import utilTypes from 'constants/actions';
+import { transactions as txConstants, moduleAssetNameIdMap } from '../constants';
 import actionTypes from '../actionTypes';
 import {
   transactionsLoaded,

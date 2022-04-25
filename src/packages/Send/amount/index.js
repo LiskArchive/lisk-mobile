@@ -7,7 +7,7 @@ import {
   pricesRetrieved as pricesRetrievedAction,
   dynamicFeesRetrieved as dynamicFeesRetrievedAction
 } from 'actions/service';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import getStyles from './styles';
 import AmountLSK from './lsk';
 

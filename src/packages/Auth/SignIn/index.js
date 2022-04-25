@@ -27,7 +27,7 @@ import {
   getPassphraseFromKeyChain,
   storePassphraseInKeyChain,
   bioMetricAuthentication,
-} from 'utilities/passphrase';
+} from 'packages/Auth/utils';
 import {
   accountSignedIn as accountSignedInAction,
   accountFetched as accountFetchedAction,

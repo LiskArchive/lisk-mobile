@@ -5,7 +5,7 @@ import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import LottieView from 'lottie-react-native';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
-import { bioMetricAuthentication } from 'utilities/passphrase';
+import { bioMetricAuthentication } from 'packages/Auth/utils';
 import Icon from 'components/shared/toolBox/icon';
 import { colors, themes } from 'constants/styleGuide';
 import { P } from 'components/shared/toolBox/typography';

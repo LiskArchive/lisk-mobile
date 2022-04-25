@@ -12,7 +12,7 @@ import {
   deviceHeight,
   SCREEN_HEIGHTS,
 } from 'utilities/device';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import CircularProgress from './circularProgress';
 import getStyles from './styles';
 

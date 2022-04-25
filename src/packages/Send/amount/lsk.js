@@ -11,13 +11,12 @@ import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScro
 import { fromRawLsk, toRawLsk } from 'utilities/conversions';
 import { isNumeric, merge, validateAmount } from 'utilities/helpers';
 import * as apiClient from 'utilities/api';
-import * as transactionConstants from 'constants/transactions';
+import * as transactionConstants from 'packages/Send/constants';
 import withTheme from 'components/shared/withTheme';
 import DropDownHolder from 'utilities/alert';
 import { languageMap } from 'constants/languages';
-import useTransactionFeeCalculation, {
-  createTransactionObject
-} from 'hooks/transactionFee/useTransactionFeeCalculation';
+import { useTransactionFeeCalculation } from '../hooks/transactionFee';
+import { createTransactionObject } from '../utils';
 import Balance from './balance';
 import Input from './input';
 import getStyles from './styles';

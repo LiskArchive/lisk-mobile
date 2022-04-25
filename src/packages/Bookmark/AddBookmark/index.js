@@ -11,7 +11,7 @@ import { decodeLaunchUrl } from 'utilities/qrCode';
 import { tokenMap } from 'constants/tokens';
 import { validateAddress } from 'utilities/validators';
 import { stringShortener } from 'utilities/helpers';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import DropDownHolder from 'utilities/alert';
 import { IconButton } from 'components/shared/toolBox/button';
 import Input from 'components/shared/toolBox/input';

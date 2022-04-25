@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
-import { getPassphraseFromKeyChain } from 'utilities/passphrase';
+import { getPassphraseFromKeyChain } from 'packages/Auth/utils';
 import { languageMap } from 'constants/languages';
 import ThemeContext from '../../../contexts/theme';
 import Confirm from './confirm';

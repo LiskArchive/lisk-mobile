@@ -6,7 +6,7 @@ import Switch from 'react-native-switch-pro';
 import { B, P } from 'components/shared/toolBox/typography';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import { colors } from 'constants/styleGuide';
 import styles from './styles';
 

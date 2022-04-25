@@ -4,7 +4,7 @@ import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { P } from 'components/shared/toolBox/typography';
 import Icon from 'components/shared/toolBox/icon';
 import { themes, colors } from 'constants/styleGuide';
-import { bioMetricAuthentication } from 'utilities/passphrase';
+import { bioMetricAuthentication } from 'packages/Auth/utils';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 

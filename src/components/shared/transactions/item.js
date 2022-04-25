@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 import connect from 'redux-connect-decorator';
 import { fromRawLsk } from 'utilities/conversions';
 import { stringShortener } from 'utilities/helpers';
-import { getTxConstant, isTransfer } from 'constants/transactions';
+import { getTxConstant, isTransfer } from 'packages/Send/constants';
 import loadingAnimation from 'assets/animations/loading-dots.json';
 import FormattedNumber from '../formattedNumber';
 import Symbol from './symbol';

@@ -15,7 +15,7 @@ import Loading from 'components/shared/transactions/loading';
 import { deviceHeight } from 'utilities/device';
 import InfiniteScrollView from 'components/shared/infiniteScrollView';
 import ParallaxHeader from 'components/shared/ParallaxHeader';
-import HomeHeaderTitle from 'navigation/homeHeaderTitle';
+import HomeHeaderTitle from 'components/navigation/homeHeaderTitle';
 import BTCRemoval from 'components/screens/banners/BtcRemoval';
 import withTheme from 'components/shared/withTheme';
 import { colors, themes } from 'constants/styleGuide';

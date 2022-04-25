@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import HeaderPlaceholderButton from 'navigation/headerPlaceholderButton';
+import HeaderPlaceholderButton from 'components/navigation/headerPlaceholderButton';
 import image from 'assets/images/registrationProcess/success3x.png';
 import styles from './styles';
 

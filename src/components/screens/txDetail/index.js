@@ -13,7 +13,7 @@ import {
   isTransfer,
   isVote,
   isUnlock,
-} from 'constants/transactions';
+} from 'packages/Send/constants';
 import withTheme from 'components/shared/withTheme';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { B, A, H4, } from 'components/shared/toolBox/typography';
@@ -22,7 +22,7 @@ import EmptyState from 'components/shared/transactions/empty';
 import Avatar from 'components/shared/avatar';
 import Blur from 'components/shared/transactions/blur';
 import CopyToClipboard from 'components/shared/copyToClipboard';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import LskSummary from './lskSummary';
 import BtcSummary from './btcSummary';
 import Row from './row';
