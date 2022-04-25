@@ -1,4 +1,4 @@
-import accountTypes from 'packages/Accounts/actionTypes'
+import accountTypes from 'packages/Accounts/actionTypes';
 import actionTypes from '../actionTypes';
 import transactions, { INITIAL_STATE } from './transactions';
 
