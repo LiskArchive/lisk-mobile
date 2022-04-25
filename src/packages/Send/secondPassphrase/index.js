@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Platform, Image } from 'react-native';
 import { translate } from 'react-i18next';
-import { validatePassphrase } from 'utilities/passphrase';
+import { validatePassphrase } from 'packages/Auth/utils';
 import { extractPublicKey } from 'utilities/api/lisk/account';
 import Input from 'components/shared/toolBox/input';
 import { IconButton } from 'components/shared/toolBox/button';
@@ -17,7 +17,7 @@ import Scanner from 'components/shared/scanner';
 import DropDownHolder from 'utilities/alert';
 import SecondPassPhraseDarkImg from 'assets/images/send/secondPassphrase3xDark.png';
 import SecondPassPhraseLightImg from 'assets/images/send/secondPassphrase3xLight.png';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import getStyles from './styles';
 
 const devDefaultSecondPass = process.env.secondPassphrase || '';

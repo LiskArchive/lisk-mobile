@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { getTxConstant, moduleAssetNameIdMap } from 'constants/transactions';
+import { getTxConstant, moduleAssetNameIdMap } from 'packages/Send/constants';
 import { colors, themes } from 'constants/styleGuide';
 import Avatar from '../avatar';
 import Icon from '../toolBox/icon';

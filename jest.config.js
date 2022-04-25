@@ -21,7 +21,7 @@ module.exports = {
     'src/utilities/device.js',
     'src/utilities/easing.js',
     'src/utilities/networks.js',
-    'src/utilities/passphrase.js',
+    'src/packages/Auth/utils/passphrase.js',
     'src/utilities/api/account.js',
     'src/assets',
     'src/packages',

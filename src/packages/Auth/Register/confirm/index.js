@@ -5,9 +5,9 @@ import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
-import { assembleWordOptions } from 'utilities/passphrase';
+import { assembleWordOptions } from 'packages/Auth/utils';
 import styles from './styles';
 
 /**

@@ -1,5 +1,5 @@
 import { Linking } from 'react-native';
-import { isRegistration, isTransfer, isVote } from 'constants/transactions';
+import { isRegistration, isTransfer, isVote } from 'packages/Send/constants';
 import { getTransactionExplorerURL } from 'utilities/api/btc/transactions';
 import { stringShortener } from 'utilities/helpers';
 

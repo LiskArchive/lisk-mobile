@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import Input from 'components/shared/toolBox/input';
-import { validatePassphrase } from 'utilities/passphrase';
+import { validatePassphrase } from 'packages/Auth/utils';
 import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScrollView';
 import Scanner from 'components/shared/scanner';
 import { IconButton } from 'components/shared/toolBox/button';

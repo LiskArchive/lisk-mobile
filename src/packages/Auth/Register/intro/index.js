@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { generatePassphrase } from 'utilities/passphrase';
+import { generatePassphrase } from 'packages/Auth/utils';
 import Slider from 'components/screens/intro/heading';
 import addressImg from 'assets/images/registrationIntro/address3x.png';
 import securePassphraseImg from 'assets/images/registrationIntro/securePassphrase3x.png';
 import uniqueAvatarImg from 'assets/images/registrationIntro/uniqueAvatar3x.png';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import {
   accountSignedIn as accountSignedInAction,
   accountFetched as accountFetchedAction

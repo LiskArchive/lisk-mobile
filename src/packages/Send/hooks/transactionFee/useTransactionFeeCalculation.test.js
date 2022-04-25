@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
-import * as transactionConstants from 'constants/transactions';
+import * as transactionConstants from 'packages/Send/constants';
 import { fromRawLsk, toRawLsk } from 'utilities/conversions';
-import useTransactionFeeCalculation from './useTransactionFeeCalculation';
+import { useTransactionFeeCalculation } from './useTransactionFeeCalculation';
 
 describe('useTransactionFeeCalculation', () => {
   const props = {

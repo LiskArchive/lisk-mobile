@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { View, Image } from 'react-native';
 import { fromRawLsk } from 'utilities/conversions';
-import { isTransfer, getTxConstant } from 'constants/transactions';
+import { isTransfer, getTxConstant } from 'packages/Send/constants';
 import { colors, themes } from 'constants/styleGuide';
 import arrowLight from 'assets/images/txDetail/arrow-light2x.png';
 import arrowDark from 'assets/images/txDetail/arrow-dark2x.png';

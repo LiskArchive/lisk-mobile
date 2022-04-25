@@ -6,7 +6,7 @@ import {
 } from 'react-native-keychain';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
-import { extractAddress } from './api/lisk/account';
+import { extractAddress } from '../../../utilities/api/lisk/account';
 
 const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
 

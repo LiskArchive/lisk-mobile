@@ -1,9 +1,9 @@
 import React from 'react';
 import { deviceType } from 'utilities/device';
 import { fonts } from 'constants/styleGuide';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import HeaderPlaceholderButton from 'components/navigation/headerPlaceholderButton';
 import { t } from './helper';
-import HeaderBackButton from './headerBackButton';
-import HeaderPlaceholderButton from './headerPlaceholderButton';
 
 const noShadow = {
   borderBottomWidth: 0,

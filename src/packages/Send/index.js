@@ -10,7 +10,7 @@ import withTheme from 'components/shared/withTheme';
 import { tokenMap } from 'constants/tokens';
 import { B, P } from 'components/shared/toolBox/typography';
 import SendLSKIllustrationSvg from 'assets/svgs/SendLSKIllustrationSvg';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import Recipient from './recipient';
 import Amount from './amount';
 import Overview from './overview';

@@ -14,7 +14,7 @@ import withTheme from 'components/shared/withTheme';
 import { colors } from 'constants/styleGuide';
 import { tokenMap } from 'constants/tokens';
 import DropDownHolder from 'utilities/alert';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import { transactionAdded as transactionAddedAction } from '../actions/transactions';
 import getStyles from './styles';
 import ReadMore from './readMore';

@@ -15,7 +15,7 @@ import withTheme from 'components/shared/withTheme';
 import Bookmarks from 'components/shared/bookmarks';
 import { validateAddress } from 'utilities/validators';
 import DropDownHolder from 'utilities/alert';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H4 } from 'components/shared/toolBox/typography';
 import { tokenMap } from 'constants/tokens';
 import getStyles from './styles';

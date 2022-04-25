@@ -4,7 +4,7 @@ import {
   isTransfer,
   moduleAssetNameIdMap,
   transferAssetSchema
-} from 'constants/transactions';
+} from 'packages/Send/constants';
 import * as LiskAndroidPatch from './utils/index';
 import { apiClient } from './apiClient';
 import config from '../../../../lsk.config';

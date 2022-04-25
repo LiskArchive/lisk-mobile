@@ -11,7 +11,7 @@ import InfiniteScrollView from 'components/shared/infiniteScrollView';
 import Empty from 'components/shared/transactions/empty';
 import Loading from 'components/shared/transactions/loading';
 import withTheme from 'components/shared/withTheme';
-import HeaderBackButton from 'navigation/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import DeleteBookmarkModal from 'components/shared/bookmarks/deleteBookmarkModal';
 import { H3 } from 'components/shared/toolBox/typography';
 import LoadingBar from 'components/shared/loading';

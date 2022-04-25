@@ -12,7 +12,7 @@ import LockedBalanceDetails from 'packages/Accounts/lockedBalanceDetails';
 import withTheme from 'components/shared/withTheme';
 import Bookmarks from 'packages/Bookmark';
 import MultiSignature from 'components/screens/multiSignature';
-import TabBarIcon from './tabBarIcon';
+import TabBarIcon from 'components/navigation/tabBarIcon';
 import navigationOptions from './navigationOptions';
 
 export const getHeaderOptions = ({ route }) => {

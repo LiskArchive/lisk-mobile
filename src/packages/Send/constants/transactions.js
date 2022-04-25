@@ -1,22 +1,22 @@
-import { themes } from './styleGuide';
+import { themes } from 'constants/styleGuide';
 
-import setSecondPassphraseLight from '../assets/images/txDetail/second-passphrase-light.png';
-import setSecondPassphraseDark from '../assets/images/txDetail/second-passphrase-dark.png';
+import setSecondPassphraseLight from 'assets/images/txDetail/second-passphrase-light.png';
+import setSecondPassphraseDark from 'assets/images/txDetail/second-passphrase-dark.png';
 
-import registerDelegateLight from '../assets/images/txDetail/delegate-registration-light.png';
-import registerDelegateDark from '../assets/images/txDetail/delegate-registration-dark.png';
+import registerDelegateLight from 'assets/images/txDetail/delegate-registration-light.png';
+import registerDelegateDark from 'assets/images/txDetail/delegate-registration-dark.png';
 
-import voteLight from '../assets/images/txDetail/vote-light.png';
-import voteDark from '../assets/images/txDetail/vote-dark.png';
+import voteLight from 'assets/images/txDetail/vote-light.png';
+import voteDark from 'assets/images/txDetail/vote-dark.png';
 
-import transferDark from '../assets/images/txDetail/transfer-dark.png';
-import transferLight from '../assets/images/txDetail/transfer-light.png';
+import transferDark from 'assets/images/txDetail/transfer-dark.png';
+import transferLight from 'assets/images/txDetail/transfer-light.png';
 
-import txUnlockLight from '../assets/images/txDetail/tx-unlock.png';
-import txUnlockDark from '../assets/images/txDetail/tx-unlock-dark.png';
+import txUnlockLight from 'assets/images/txDetail/tx-unlock.png';
+import txUnlockDark from 'assets/images/txDetail/tx-unlock-dark.png';
 
-import txUnknownLight from '../assets/images/txDetail/tx-unknown-light.png';
-import txUnknownDark from '../assets/images/txDetail/tx-unknown-dark.png';
+import txUnknownLight from 'assets/images/txDetail/tx-unknown-light.png';
+import txUnknownDark from 'assets/images/txDetail/tx-unknown-dark.png';
 
 export const DEFAULT_MIN_REMAINING_BALANCE = 5000000;
 export const MIN_FEE_PER_BYTE = 1000;
@@ -182,5 +182,3 @@ export const isRegistration = ({ moduleAssetId }) =>
 export const isVote = ({ moduleAssetId }) => moduleAssetId === moduleAssetNameIdMap.voteDelegate;
 
 export const isUnlock = ({ moduleAssetId }) => moduleAssetId === moduleAssetNameIdMap.unlockToken;
-
-export default transactions;

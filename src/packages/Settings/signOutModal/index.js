@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { A, Small } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import { removePassphraseFromKeyChain } from 'utilities/passphrase';
+import { removePassphraseFromKeyChain } from 'packages/Auth/utils';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
