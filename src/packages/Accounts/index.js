@@ -9,9 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigationFocus } from '@react-navigation/compat';
-import {Manager as TransactionsManager} from 'packages/Accounts/components/activity';
-import { EmptyState } from 'packages/Accounts/components/activity';
-import Loading from 'packages/Accounts/components/activity/loading';
+import { Manager as TransactionsManager, EmptyState, LoadingState } from 'packages/Accounts/components/activity';
 import { deviceHeight } from 'utilities/device';
 import InfiniteScrollView from 'components/shared/infiniteScrollView';
 import ParallaxHeader from 'components/shared/ParallaxHeader';
@@ -153,7 +151,7 @@ const Home = ({
       />
     );
   } else {
-    content = <Loading style={[styles.emptyContainer, styles.theme.emptyContainer]} />;
+    content = <LoadingState style={[styles.emptyContainer, styles.theme.emptyContainer]} />;
   }
   const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
   if (!hideBtcRemoval) {
