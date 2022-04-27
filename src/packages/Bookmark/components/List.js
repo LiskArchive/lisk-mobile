@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { validateAddress } from 'utilities/validators';
 import withTheme from 'components/shared/withTheme';
-import { DraggableItem, Item } from './item';
+import { DraggableItem, Item } from './Item';
 import getStyles from './styles';
 
 const List = ({
