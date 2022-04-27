@@ -13,7 +13,7 @@ import ProgressSvg from 'assets/svgs/ProgressSvg';
 import UnlockSvg from 'assets/svgs/UnlockSvg';
 import FormattedNumber from 'components/shared/formattedNumber';
 import getStyles from './styles';
-import { getPendingTime } from '../utils/index';
+import { getPendingTime } from '../../utils';
 
 const RowItem = ({
   styles, title, value, IconComponent, tokenType, language, theme

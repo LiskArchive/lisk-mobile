@@ -12,9 +12,7 @@ import SwitchButton from 'components/shared/toolBox/switchButton';
 import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
 import { accountSignedOut as accountSignedOutAction } from 'packages/Accounts/actions';
 import ModalHolder from 'utilities/modal';
-import ItemTitle from './itemTitle';
-import SignOutButton from './signOutButton';
-import SignOutModal from './signOutModal';
+import { ItemTitle, SignOutButton, SignOutModal } from './components';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements

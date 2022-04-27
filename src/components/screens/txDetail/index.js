@@ -17,7 +17,7 @@ import {
 import withTheme from 'components/shared/withTheme';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { B, A, H4, } from 'components/shared/toolBox/typography';
-import { EmptyState, LoadingState } from 'packages/Accounts/components/activity';
+import { EmptyState, LoadingState } from 'packages/Accounts/components';
 import Avatar from 'components/shared/avatar';
 import Blur from 'components/shared/blur';
 import CopyToClipboard from 'components/shared/copyToClipboard';

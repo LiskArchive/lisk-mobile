@@ -11,11 +11,9 @@ import { tokenMap } from 'constants/tokens';
 import { B, P } from 'components/shared/toolBox/typography';
 import SendLSKIllustrationSvg from 'assets/svgs/SendLSKIllustrationSvg';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import Recipient from './recipient';
-import Amount from './amount';
-import Overview from './overview';
-import SecondPassphrase from './secondPassphrase';
-import Result from './result';
+import {
+  Amount, Overview, Recipient, SecondPassphrase, Result
+} from './components';
 import getStyles from './styles';
 
 @connect(
