@@ -11,7 +11,7 @@ import Avatar from 'components/shared/avatar';
 import { B, Small, P } from 'components/shared/toolBox/typography';
 import Icon from 'components/shared/toolBox/icon';
 import SwipeableRow from 'components/shared/Swipeable';
-import DeleteBookmarkModal from './deleteBookmarkModal';
+import DeleteBookmarkModal from './DeleteBookmarkModal';
 
 const DraggableItem = ({
   styles,

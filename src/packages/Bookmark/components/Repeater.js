@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { tokenKeys } from 'constants/tokens';
 import { validateAddress } from 'utilities/validators';
 import withTheme from 'components/shared/withTheme';
-import List from './list';
-import Empty from './empty';
+import List from './List';
+import Empty from './Empty';
 import getStyles from './styles';
 
 const Repeater = ({

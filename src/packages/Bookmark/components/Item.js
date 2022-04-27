@@ -7,7 +7,7 @@ import Avatar from 'components/shared/avatar';
 import { B, Small } from 'components/shared/toolBox/typography';
 import withTheme from 'components/shared/withTheme';
 import Icon from 'components/shared/toolBox/icon';
-import DraggableItem from './draggableItem';
+import DraggableItem from './DraggableItem';
 import getStyles from './styles';
 
 class Item extends React.Component {

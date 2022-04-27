@@ -7,7 +7,7 @@ import { fromRawLsk } from 'utilities/conversions';
 import { stringShortener } from 'utilities/helpers';
 import { getTxConstant, isTransfer } from 'packages/Send/constants';
 import loadingAnimation from 'assets/animations/loading-dots.json';
-import Blur from 'components/shared/blur';
+import { Blur } from 'components/shared/blur';
 import FormattedNumber from 'components/shared/formattedNumber';
 import FormattedDate from 'components/shared/formattedDate';
 import { B, Small } from 'components/shared/toolBox/typography';
