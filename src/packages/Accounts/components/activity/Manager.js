@@ -104,7 +104,7 @@ class Manager extends React.Component {
         {!transactions
           || (transactions.confirmed.length === 0 && transactions.pending.length === 0) ? (
           <Fragment />
-        ) : (
+          ) : (
           <Fragment>
             {noTitle ? null : (
               <View style={styles.innerContainer}>
@@ -122,7 +122,7 @@ class Manager extends React.Component {
             />
             {footer ? <Footer /> : null}
           </Fragment>
-        )}
+          )}
       </Anim>
     );
   }

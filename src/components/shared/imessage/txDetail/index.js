@@ -3,8 +3,8 @@ import { ScrollView, View, NativeModules } from 'react-native';
 import { tokenMap } from 'constants/tokens';
 import { transactions as transactionsAPI } from 'utilities/api';
 import { isTransfer } from 'packages/Send/constants';
+import { LoadingState } from 'packages/Accounts/components/activity';
 import withTheme from '../../withTheme';
-import Loading from '../../transactions/loading';
 import getStyles from './styles';
 import { PrimaryButton } from '../../toolBox/button';
 import {
@@ -93,7 +93,7 @@ class TransactionDetail extends React.Component {
     if (!tx.senderAddress) {
       return (
         <View style={[styles.container, styles.theme.container]}>
-          <Loading />
+          <LoadingState />
         </View>
       );
     }

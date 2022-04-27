@@ -6,9 +6,8 @@ import {
 import { translate } from 'react-i18next';
 import modalHolder from 'utilities/modal';
 import { colors, themes } from 'constants/styleGuide';
-import { Manager as TransactionsManager, EmptyState } from 'packages/Accounts/components/activity';
+import { Manager as TransactionsManager, EmptyState, LoadingState } from 'packages/Accounts/components/activity';
 import InfiniteScrollView from 'components/shared/infiniteScrollView';
-import Loading from 'packages/Accounts/components/activity/loading';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { DeleteBookmarkModal } from 'packages/Bookmark/components';
@@ -75,7 +74,7 @@ const Wallet = ({
   if (!transactions.loaded) {
     content = (
       <View style={[styles.loadingContainer]}>
-        <Loading />
+        <LoadingState />
       </View>
     );
   } else {
