@@ -6,10 +6,10 @@ import { translate } from 'react-i18next';
 import RNShake from 'react-native-shake';
 import easing from 'utilities/easing';
 import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
+import { H3 } from 'components/shared/toolBox/typography';
+import withTheme from 'components/shared/withTheme';
 import List from './list';
 import Footer from './footer';
-import { H3 } from '../toolBox/typography';
-import withTheme from '../withTheme';
 import getStyles from './styles';
 
 /**
@@ -28,7 +28,7 @@ import getStyles from './styles';
     settingsUpdated: settingsUpdatedAction
   }
 )
-class Transactions extends React.Component {
+class Manager extends React.Component {
   state = {
     initialAnimations: {
       opacity: new Animated.Value(0),
@@ -102,9 +102,9 @@ class Transactions extends React.Component {
     return (
       <Anim style={[styles.container, styles.theme.container, { opacity, top }]}>
         {!transactions
-        || (transactions.confirmed.length === 0 && transactions.pending.length === 0) ? (
+          || (transactions.confirmed.length === 0 && transactions.pending.length === 0) ? (
           <Fragment />
-          ) : (
+        ) : (
           <Fragment>
             {noTitle ? null : (
               <View style={styles.innerContainer}>
@@ -122,9 +122,9 @@ class Transactions extends React.Component {
             />
             {footer ? <Footer /> : null}
           </Fragment>
-          )}
+        )}
       </Anim>
     );
   }
 }
-export default withTheme(translate()(Transactions), getStyles());
+export default withTheme(translate()(Manager), getStyles());

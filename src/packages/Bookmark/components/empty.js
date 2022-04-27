@@ -4,8 +4,8 @@ import { translate } from 'react-i18next';
 import { themes } from 'constants/styleGuide';
 import noBookmarkLightImg from 'assets/images/send/noBookmarks3xLight.png';
 import noBookmarkDarkImg from 'assets/images/send/noBookmarks3xDark.png';
-import { P } from '../toolBox/typography';
-import withTheme from '../withTheme';
+import { P } from 'components/shared/toolBox/typography';
+import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
 const EmptyState = ({

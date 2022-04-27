@@ -3,12 +3,12 @@ import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 import { themes, colors } from 'constants/styleGuide';
 import { stringShortener } from 'utilities/helpers';
-import Avatar from '../avatar';
-import { B, Small } from '../toolBox/typography';
-import withTheme from '../withTheme';
-import getStyles from './styles';
-import Icon from '../toolBox/icon';
+import Avatar from 'components/shared/avatar';
+import { B, Small } from 'components/shared/toolBox/typography';
+import withTheme from 'components/shared/withTheme';
+import Icon from 'components/shared/toolBox/icon';
 import DraggableItem from './draggableItem';
+import getStyles from './styles';
 
 class Item extends React.Component {
   showDetail = () => {

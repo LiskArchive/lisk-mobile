@@ -7,7 +7,7 @@ import withTheme from 'components/shared/withTheme';
 import Icon from 'components/shared/toolBox/icon';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { P, H3 } from 'components/shared/toolBox/typography';
-import Blur from 'components/shared/transactions/blur';
+import Blur from 'components/shared/blur';
 import getStyles from './styles';
 
 const BtcSummary = ({
