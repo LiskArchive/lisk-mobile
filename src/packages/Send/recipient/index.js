@@ -12,7 +12,7 @@ import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScro
 import { merge } from 'utilities/helpers';
 import { decodeLaunchUrl } from 'utilities/qrCode';
 import withTheme from 'components/shared/withTheme';
-import Bookmarks from 'components/shared/bookmarks';
+import { Repeater } from 'packages/Bookmark/components';
 import { validateAddress } from 'utilities/validators';
 import DropDownHolder from 'utilities/alert';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -196,7 +196,7 @@ class Recipient extends React.Component {
             }}
             noFooterButton
           >
-            <Bookmarks
+            <Repeater
               navigate={this.forward}
               query={this.state.address.value}
               renderEmpty={false}

@@ -17,10 +17,10 @@ import {
 import withTheme from 'components/shared/withTheme';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { B, A, H4, } from 'components/shared/toolBox/typography';
-import Loading from 'components/shared/transactions/loading';
-import EmptyState from 'components/shared/transactions/empty';
+import Loading from 'packages/Accounts/components/activity/loading';
+import { EmptyState } from 'packages/Accounts/components/activity';
 import Avatar from 'components/shared/avatar';
-import Blur from 'components/shared/transactions/blur';
+import Blur from 'components/shared/blur';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import LskSummary from './lskSummary';

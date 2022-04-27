@@ -7,12 +7,12 @@ import { fromRawLsk } from 'utilities/conversions';
 import { stringShortener } from 'utilities/helpers';
 import { getTxConstant, isTransfer } from 'packages/Send/constants';
 import loadingAnimation from 'assets/animations/loading-dots.json';
-import FormattedNumber from '../formattedNumber';
+import Blur from 'components/shared/blur';
+import FormattedNumber from 'components/shared/formattedNumber';
+import FormattedDate from 'components/shared/formattedDate';
+import { B, Small } from 'components/shared/toolBox/typography';
+import withTheme from 'components/shared/withTheme';
 import Symbol from './symbol';
-import FormattedDate from '../formattedDate';
-import { B, Small } from '../toolBox/typography';
-import Blur from './blur';
-import withTheme from '../withTheme';
 import getStyles from './styles';
 
 const TimeStamp = ({

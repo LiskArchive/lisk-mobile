@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigationFocus } from '@react-navigation/compat';
-import Transactions from 'components/shared/transactions';
-import Empty from 'components/shared/transactions/empty';
-import Loading from 'components/shared/transactions/loading';
+import {Manager as TransactionsManager} from 'packages/Accounts/components/activity';
+import { EmptyState } from 'packages/Accounts/components/activity';
+import Loading from 'packages/Accounts/components/activity/loading';
 import { deviceHeight } from 'utilities/device';
 import InfiniteScrollView from 'components/shared/infiniteScrollView';
 import ParallaxHeader from 'components/shared/ParallaxHeader';
@@ -32,7 +32,7 @@ import {
   showInitializationModal
 } from './utils';
 import AccountSummary from './accountSummary';
-import useActivityList from '../../hooks/useActivityList';
+import useActivityList from './hooks/useActivityList';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -136,16 +136,15 @@ const Home = ({
         count={transactions.count}
         render={(refreshing) =>
           transactions.count > 0 ? (
-            <Transactions
+            <TransactionsManager
               type="home"
               transactions={transactions}
-              // footer={footer}
               navigate={navigation.navigate}
               account={account[activeToken]}
               refreshing={refreshing}
             />
           ) : (
-            <Empty
+            <EmptyState
               style={[styles.emptyContainer, styles.theme.emptyContainer]}
               refreshing={loading}
             />

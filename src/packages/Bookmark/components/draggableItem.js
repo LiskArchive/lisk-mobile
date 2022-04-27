@@ -7,11 +7,11 @@ import ModalHolder from 'utilities/modal';
 import { stringShortener } from 'utilities/helpers';
 import { accountUnFollowed as accountUnFollowedAction } from 'packages/Accounts/actions';
 import WarningSvg from 'assets/svgs/WarningSvg';
-import Avatar from '../avatar';
-import { B, Small, P } from '../toolBox/typography';
-import Icon from '../toolBox/icon';
+import Avatar from 'components/shared/avatar';
+import { B, Small, P } from 'components/shared/toolBox/typography';
+import Icon from 'components/shared/toolBox/icon';
+import SwipeableRow from 'components/shared/Swipeable';
 import DeleteBookmarkModal from './deleteBookmarkModal';
-import SwipeableRow from '../Swipeable';
 
 const DraggableItem = ({
   styles,

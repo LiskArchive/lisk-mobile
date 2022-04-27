@@ -8,7 +8,7 @@ import { colors } from 'constants/styleGuide';
 import SearchBarHeader from 'components/navigation/searchBarHeader';
 import Icon from 'components/shared/toolBox/icon';
 import withTheme from 'components/shared/withTheme';
-import Bookmarks from 'components/shared/bookmarks';
+import { Repeater } from './components';
 import getStyles from './styles';
 
 const Bookmark = ({
@@ -30,7 +30,7 @@ const Bookmark = ({
     />
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.form}>
-        <Bookmarks
+        <Repeater
           navigate={navigation.navigate}
           draggable={true}
           query={query}

@@ -6,13 +6,12 @@ import {
 import { translate } from 'react-i18next';
 import modalHolder from 'utilities/modal';
 import { colors, themes } from 'constants/styleGuide';
-import Transactions from 'components/shared/transactions';
+import { Manager as TransactionsManager, EmptyState } from 'packages/Accounts/components/activity';
 import InfiniteScrollView from 'components/shared/infiniteScrollView';
-import Empty from 'components/shared/transactions/empty';
-import Loading from 'components/shared/transactions/loading';
+import Loading from 'packages/Accounts/components/activity/loading';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import DeleteBookmarkModal from 'components/shared/bookmarks/deleteBookmarkModal';
+import { DeleteBookmarkModal } from 'packages/Bookmark/components';
 import { H3 } from 'components/shared/toolBox/typography';
 import LoadingBar from 'components/shared/loading';
 import {
@@ -25,9 +24,9 @@ import {
 } from 'packages/Accounts/actions';
 import BookmarkSvg from 'assets/svgs/BookmarkSvg';
 import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
+import useActivityList from 'packages/Accounts/hooks/useActivityList';
 import getStyles from './styles';
 import AccountSummary from './accountSummary';
-import useActivityList from '../../hooks/useActivityList';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -98,7 +97,7 @@ const Wallet = ({
         )}
         render={(refreshing) =>
           transactions.count > 0 ? (
-            <Transactions
+            <TransactionsManager
               type="wallet"
               transactions={transactions}
               // footer={footer}
@@ -108,7 +107,7 @@ const Wallet = ({
               noTitle
             />
           ) : (
-            <Empty
+            <EmptyState
               style={[styles.emptyContainer, styles.theme.emptyContainer]}
               refreshing={refreshing} />
           )
