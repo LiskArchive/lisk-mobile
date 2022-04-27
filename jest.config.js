@@ -20,6 +20,7 @@ module.exports = {
     'src/utilities/conversions.js',
     'src/utilities/device.js',
     'src/utilities/easing.js',
+    'src/utilities/api/',
     'src/utilities/networks.js',
     'src/packages/Auth/utils/passphrase.js',
     'src/utilities/api/account.js',
