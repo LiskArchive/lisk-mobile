@@ -2,8 +2,7 @@ import moment from 'moment';
 import ModalHolder from 'utilities/modal';
 import { tokenMap } from 'constants/tokens';
 import { fromRawLsk } from 'utilities/conversions';
-import IntroModal from '../introModal';
-import InitializationModal from '../initializationModal';
+import { InitializationModal, IntroModal } from '../components';
 
 export const showIntroModal = ({ btcIntroShown, settingsUpdated }) => {
   if (!btcIntroShown) {

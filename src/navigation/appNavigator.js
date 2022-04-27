@@ -8,7 +8,7 @@ import Settings from 'packages/Settings';
 import Request from 'packages/Request';
 import Send from 'packages/Send';
 import Home from 'packages/Accounts';
-import LockedBalanceDetails from 'packages/Accounts/lockedBalanceDetails';
+import { LockedBalanceDetails } from 'packages/Accounts/components';
 import withTheme from 'components/shared/withTheme';
 import Bookmarks from 'packages/Bookmark';
 import MultiSignature from 'components/screens/multiSignature';

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigationFocus } from '@react-navigation/compat';
-import { Manager as TransactionsManager, EmptyState, LoadingState } from 'packages/Accounts/components/activity';
+import { Manager as TransactionsManager, EmptyState, LoadingState } from 'packages/Accounts/components';
 import { deviceHeight } from 'utilities/device';
 import InfiniteScrollView from 'components/shared/infiniteScrollView';
 import ParallaxHeader from 'components/shared/ParallaxHeader';
@@ -29,7 +29,7 @@ import getStyles from './styles';
 import {
   showInitializationModal
 } from './utils';
-import AccountSummary from './accountSummary';
+import AccountSummary from './components/AccountSummary';
 import useActivityList from './hooks/useActivityList';
 
 /**

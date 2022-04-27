@@ -6,7 +6,7 @@ import {
 import { translate } from 'react-i18next';
 import modalHolder from 'utilities/modal';
 import { colors, themes } from 'constants/styleGuide';
-import { Manager as TransactionsManager, EmptyState, LoadingState } from 'packages/Accounts/components/activity';
+import { Manager as TransactionsManager, EmptyState, LoadingState } from 'packages/Accounts/components';
 import InfiniteScrollView from 'components/shared/infiniteScrollView';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -25,7 +25,7 @@ import BookmarkSvg from 'assets/svgs/BookmarkSvg';
 import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
 import useActivityList from 'packages/Accounts/hooks/useActivityList';
 import getStyles from './styles';
-import AccountSummary from './accountSummary';
+import { AccountSummary } from './components';
 
 /**
  * This component would be mounted first and would be used to config and redirect

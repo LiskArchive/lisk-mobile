@@ -12,7 +12,7 @@ import FormattedNumber from 'components/shared/formattedNumber';
 import FormattedDate from 'components/shared/formattedDate';
 import { B, Small } from 'components/shared/toolBox/typography';
 import withTheme from 'components/shared/withTheme';
-import Symbol from './symbol';
+import Symbol from './Symbol';
 import getStyles from './styles';
 
 const TimeStamp = ({

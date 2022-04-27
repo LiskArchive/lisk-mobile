@@ -3,7 +3,7 @@ import { ScrollView, View, NativeModules } from 'react-native';
 import { tokenMap } from 'constants/tokens';
 import { transactions as transactionsAPI } from 'utilities/api';
 import { isTransfer } from 'packages/Send/constants';
-import { LoadingState } from 'packages/Accounts/components/activity';
+import { LoadingState } from 'packages/Accounts/components';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 import { PrimaryButton } from '../../toolBox/button';

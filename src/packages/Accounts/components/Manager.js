@@ -8,8 +8,8 @@ import easing from 'utilities/easing';
 import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
 import { H3 } from 'components/shared/toolBox/typography';
 import withTheme from 'components/shared/withTheme';
-import List from './list';
-import Footer from './footer';
+import List from './List';
+import Footer from './Footer';
 import getStyles from './styles';
 
 /**
