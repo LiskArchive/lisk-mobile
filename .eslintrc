@@ -119,7 +119,7 @@
           ["utilities", "./src/utilities"],
           ["actions", "./src/actions"],
           ["navigation", "./src/navigation"],
-          ["packages", "./src/packages"],
+          ["modules", "./src/modules"],
           ["hooks", "./src/hooks"],
           ["store", "./src/store"]
         ],
