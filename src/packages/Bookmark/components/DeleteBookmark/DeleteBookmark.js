@@ -6,7 +6,7 @@ import { Button } from 'components/shared/toolBox/button';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
-const DeleteBookmarkModal = ({
+const DeleteBookmark = ({
   styles, t, close, modalCallback
 }) => {
   const onConfirm = () => {
@@ -36,4 +36,4 @@ const DeleteBookmarkModal = ({
   </View>;
 };
 
-export const DeleteBookmark = withTheme(translate()(DeleteBookmarkModal), getStyles());
+export const DeleteBookmarkModal = withTheme(translate()(DeleteBookmark), getStyles());
