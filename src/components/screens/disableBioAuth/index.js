@@ -2,12 +2,12 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { removePassphraseFromKeyChain } from 'packages/Auth/utils';
+import { removePassphraseFromKeyChain } from 'modules/Auth/utils';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import withTheme from 'components/shared/withTheme';
 import PassphraseCopy from 'components/shared/passphraseCopy';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import getStyles from './styles';
 
 @connect(

@@ -1,5 +1,5 @@
 import * as storageUtility from 'utilities/storage';
-import actionTypes from 'packages/Accounts/actionTypes';
+import actionTypes from 'modules/Accounts/actionTypes';
 import accountsMiddleware from './accounts';
 
 describe('Middleware: Accounts', () => {

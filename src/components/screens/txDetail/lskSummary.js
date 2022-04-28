@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
-import { getTxConstant } from 'packages/Send/constants';
+import { getTxConstant } from 'modules/Send/constants';
 import FormattedDate from 'components/shared/formattedDate';
 import withTheme from 'components/shared/withTheme';
 import { P, B } from 'components/shared/toolBox/typography';
