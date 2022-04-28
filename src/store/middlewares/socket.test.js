@@ -1,6 +1,6 @@
 import BackgroundTimer from 'react-native-background-timer';
-import actionTypes from 'packages/Accounts/actionTypes';
-import { INITIAL_STATE as settings } from 'packages/Settings/reducer';
+import actionTypes from 'modules/Accounts/actionTypes';
+import { INITIAL_STATE as settings } from 'modules/Settings/reducer';
 import { account as accountAPI } from 'utilities/api';
 import { merge } from 'utilities/helpers';
 import { tokenKeys } from 'constants/tokens';

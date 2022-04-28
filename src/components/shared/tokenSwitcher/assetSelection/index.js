@@ -4,7 +4,7 @@ import connect from 'redux-connect-decorator';
 import { B, Small } from 'components/shared/toolBox/typography';
 import Icon from 'components/shared/toolBox/icon';
 import { tokenMap, tokenKeys } from 'constants/tokens';
-import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import { colors } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import FormatedNumber from 'components/shared/formattedNumber';

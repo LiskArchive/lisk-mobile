@@ -5,11 +5,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 
 import { colors } from 'constants/styleGuide';
-import SignIn from 'packages/Auth/SignIn';
-import Register from 'packages/Auth/Register';
-import AddBookmark from 'packages/Bookmark/AddBookmark';
+import SignIn from 'modules/Auth/SignIn';
+import Register from 'modules/Auth/Register';
+import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TxDetail from 'components/screens/txDetail';
-import Wallet from 'packages/Wallet';
+import Wallet from 'modules/Wallet';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';

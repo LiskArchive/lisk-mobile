@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import actionTypes from 'constants/actions';
 import { service as serviceAPI } from 'utilities/api';
-import { INITIAL_STATE as settings } from 'packages/Settings/reducer';
+import { INITIAL_STATE as settings } from 'modules/Settings/reducer';
 import { pricesRetrieved, dynamicFeesRetrieved } from './service';
 
 const middlewares = [thunk];

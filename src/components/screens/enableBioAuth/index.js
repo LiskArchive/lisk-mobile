@@ -2,14 +2,14 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import { storePassphraseInKeyChain } from 'packages/Auth/utils';
+import { storePassphraseInKeyChain } from 'modules/Auth/utils';
 import { themes, colors } from 'constants/styleGuide';
 import { B, P, Small } from 'components/shared/toolBox/typography';
 import Icon from 'components/shared/toolBox/icon';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { settingsUpdated as settingsUpdatedAction } from 'packages/Settings/actions';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import getStyles from './styles';
 
 @connect(

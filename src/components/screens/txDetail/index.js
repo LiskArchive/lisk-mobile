@@ -13,11 +13,11 @@ import {
   isTransfer,
   isVote,
   isUnlock,
-} from 'packages/Send/constants';
+} from 'modules/Send/constants';
 import withTheme from 'components/shared/withTheme';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { B, A, H4, } from 'components/shared/toolBox/typography';
-import { EmptyState, LoadingState } from 'packages/Accounts/components';
+import { EmptyState, LoadingState } from 'modules/Accounts/components';
 import Avatar from 'components/shared/avatar';
 import Blur from 'components/shared/blur';
 import CopyToClipboard from 'components/shared/copyToClipboard';
