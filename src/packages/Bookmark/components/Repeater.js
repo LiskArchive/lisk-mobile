@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { tokenKeys } from 'constants/tokens';
 import { validateAddress } from 'utilities/validators';
 import withTheme from 'components/shared/withTheme';
+import EmptyState from './EmptyState';
 import List from './List';
-import Empty from './Empty';
 import getStyles from './styles';
 
 const Repeater = ({
@@ -36,7 +36,7 @@ const Repeater = ({
 
   return <View style={[!draggable && styles.container]}>
     {list[activeToken]?.length === 0 || filterList?.length === 0 ? (
-      renderEmpty && <Empty style={styles.emptyView} />
+      renderEmpty && <EmptyState style={styles.emptyView} />
     ) : (
       <List
         draggable={draggable}
