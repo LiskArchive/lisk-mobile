@@ -1,10 +1,10 @@
 import BackgroundTimer from 'react-native-background-timer';
+import actionTypes from 'modules/Accounts/actionTypes';
+import { INITIAL_STATE as settings } from 'modules/Settings/reducer';
+import { account as accountAPI } from 'utilities/api';
+import { merge } from 'utilities/helpers';
+import { tokenKeys } from 'constants/tokens';
 import socketMiddleware, { checkBalance } from './socket';
-import actionTypes from '../../constants/actions';
-import { account as accountAPI } from '../../utilities/api';
-import { merge } from '../../utilities/helpers';
-import { INITIAL_STATE as settings } from '../reducers/settings';
-import { tokenKeys } from '../../constants/tokens';
 
 describe('Middleware: Accounts', () => {
   beforeEach(() => {

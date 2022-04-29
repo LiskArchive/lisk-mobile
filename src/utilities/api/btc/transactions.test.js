@@ -1,8 +1,8 @@
 import { networks } from 'bitcoinjs-lib';
 import fetchMock from 'fetch-mock';
+import response from 'constants/btcTransactionMock';
 import * as transactions from './transactions';
 import config from '../../../../btc.config';
-import response from '../../../constants/btcTransactionMock';
 
 const passphrase = 'say width dwarf confirm rule party pact iron edge dignity wish direct';
 

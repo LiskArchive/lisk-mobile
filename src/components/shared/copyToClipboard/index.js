@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, Clipboard } from 'react-native';
 import { translate } from 'react-i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { colors } from 'constants/styleGuide';
 import Icon from '../toolBox/icon';
-import { colors } from '../../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 

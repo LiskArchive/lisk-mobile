@@ -1,5 +1,5 @@
-import { service as serviceAPI } from '../utilities/api';
-import actionTypes from '../constants/actions';
+import { service as serviceAPI } from 'utilities/api';
+import actionTypes from 'constants/actions';
 
 export const pricesRetrieved = () => (dispatch, getState) => {
   const {

@@ -1,5 +1,5 @@
 import URL from 'url-parse';
-import { tokenMap } from '../constants/tokens';
+import { tokenMap } from 'constants/tokens';
 
 export function parseDeepLink(deepLinkURL) {
   const { hostname, pathname, query } = new URL(deepLinkURL, true);

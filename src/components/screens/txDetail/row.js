@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import withTheme from '../../shared/withTheme';
-import { P } from '../../shared/toolBox/typography';
-import Icon from '../../shared/toolBox/icon';
+import { colors } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import { P } from 'components/shared/toolBox/typography';
+import Icon from 'components/shared/toolBox/icon';
 import getStyles from './styles';
-import { colors } from '../../../constants/styleGuide';
 
 const Row = ({
   styles, theme, t, icon, title, children, style

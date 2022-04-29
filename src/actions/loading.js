@@ -1,4 +1,4 @@
-import actionTypes from '../constants/actions';
+import actionTypes from 'constants/actions';
 
 /**
  * Returns a pure action object to store the Id of Api call which

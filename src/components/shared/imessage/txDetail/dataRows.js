@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react';
 import { View, Image } from 'react-native';
+import { fromRawLsk } from 'utilities/conversions';
+import { isTransfer, getTxConstant } from 'modules/Send/constants';
+import { colors, themes } from 'constants/styleGuide';
+import arrowLight from 'assets/images/txDetail/arrow-light2x.png';
+import arrowDark from 'assets/images/txDetail/arrow-dark2x.png';
 import FormattedDate from '../../formattedDate';
-import { fromRawLsk } from '../../../../utilities/conversions';
 import FormattedNumber from '../../formattedNumber';
 import {
   B, P, H1, H3, A
 } from '../../toolBox/typography';
 import Icon from '../../toolBox/icon';
 import Avatar from '../../avatar';
-import { isTransfer, getTxConstant } from '../../../../constants/transactions';
-import arrowLight from '../../../../assets/images/txDetail/arrow-light2x.png';
-import arrowDark from '../../../../assets/images/txDetail/arrow-dark2x.png';
-import { colors, themes } from '../../../../constants/styleGuide';
 
 export const TimeStamp = ({ timestamp, styles }) => {
   if (timestamp) {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
 import Svg, { G } from 'react-native-svg';
+import { validateAddress } from 'utilities/validators';
+import { colors, themes } from 'constants/styleGuide';
 import { Gradients, gradientSchemes } from './gradients';
 import {
   getShape,
@@ -10,9 +12,7 @@ import {
   randomId,
   replaceUrlByHashOnScheme,
 } from './utils';
-import { validateAddress } from '../../../utilities/validators';
 import Icon from '../toolBox/icon';
-import { colors, themes } from '../../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 

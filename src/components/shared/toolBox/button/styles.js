@@ -1,6 +1,6 @@
 import {
   themes, fonts, colors, boxes
-} from '../../../../constants/styleGuide';
+} from 'constants/styleGuide';
 
 export default () => ({
   common: {

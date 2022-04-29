@@ -2,15 +2,15 @@ import React from 'react';
 import { View } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
-import { storePassphraseInKeyChain } from '../../../utilities/passphrase';
-import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
-import { B, P, Small } from '../../shared/toolBox/typography';
-import Icon from '../../shared/toolBox/icon';
-import { PrimaryButton } from '../../shared/toolBox/button';
-import { themes, colors } from '../../../constants/styleGuide';
-import withTheme from '../../shared/withTheme';
+import { storePassphraseInKeyChain } from 'modules/Auth/utils';
+import { themes, colors } from 'constants/styleGuide';
+import { B, P, Small } from 'components/shared/toolBox/typography';
+import Icon from 'components/shared/toolBox/icon';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import withTheme from 'components/shared/withTheme';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import getStyles from './styles';
-import HeaderBackButton from '../router/headerBackButton';
 
 @connect(
   state => ({

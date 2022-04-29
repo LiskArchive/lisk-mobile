@@ -1,10 +1,10 @@
 import BackgroundTimer from 'react-native-background-timer';
 import NetInfo from '@react-native-community/netinfo';
-import actionTypes from '../../constants/actions';
-import { blockUpdated } from '../../actions/accounts';
+import actionTypes from 'modules/Accounts/actionTypes';
+import { account as accountAPI } from 'utilities/api';
+import DropDownHolder from 'utilities/alert';
+import { blockUpdated } from 'modules/Accounts/actions';
 import { networkInfoUpdated } from '../../actions/network';
-import { account as accountAPI } from '../../utilities/api';
-import DropDownHolder from '../../utilities/alert';
 import i18n from '../../../locales';
 
 /** To-Do We have to disable socket connection because of

@@ -2,14 +2,14 @@ import React, { Fragment } from 'react';
 import { View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { translate } from 'react-i18next';
-import withTheme from '../../../shared/withTheme';
-import { B, P } from '../../../shared/toolBox/typography';
+import withTheme from 'components/shared/withTheme';
+import { B, P } from 'components/shared/toolBox/typography';
+import FormattedNumber from 'components/shared/formattedNumber';
+import { stringShortener } from 'utilities/helpers';
+import { fromRawLsk } from 'utilities/conversions';
+import loadingAnimation from 'assets/animations/loading-dots.json';
 import Row from '../row';
 import getStyles from './styles';
-import loadingAnimation from '../../../../assets/animations/loading-dots.json';
-import FormattedNumber from '../../../shared/formattedNumber';
-import { stringShortener } from '../../../../utilities/helpers';
-import { fromRawLsk } from '../../../../utilities/conversions';
 
 const VoteList = ({ votes, styles, t }) => {
   const loader = (

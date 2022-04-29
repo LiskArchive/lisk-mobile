@@ -7,9 +7,9 @@ import {
 // import OpenAppSettings from 'react-native-app-settings';
 import { translate } from 'react-i18next';
 // import Icon from '../toolBox/icon';
+import { colors } from 'constants/styleGuide';
 import { IconButton } from '../toolBox/button';
 import { P } from '../toolBox/typography';
-import { colors } from '../../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 

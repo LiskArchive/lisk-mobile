@@ -5,32 +5,31 @@ import { ScrollView, View, RefreshControl } from 'react-native';
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import withTheme from '../../shared/withTheme';
-import { fromRawLsk } from '../../../utilities/conversions';
-import FormattedNumber from '../../shared/formattedNumber';
-import { B, A, H4, } from '../../shared/toolBox/typography';
-import Loading from '../../shared/transactions/loading';
-import EmptyState from '../../shared/transactions/empty';
-import LskSummary from './lskSummary';
-import BtcSummary from './btcSummary';
-import Row from './row';
-import { transactions as transactionsAPI } from '../../../utilities/api';
-import getStyles from './styles';
-import VoteList from './voteList';
-import { merge, stringShortener } from '../../../utilities/helpers';
-import {
-  goToWallet, getAccountLabel, getAccountTitle, openExplorer
-} from './utils';
+import { fromRawLsk } from 'utilities/conversions';
+import { transactions as transactionsAPI } from 'utilities/api';
+import { merge, stringShortener } from 'utilities/helpers';
 import {
   isRegistration,
   isTransfer,
   isVote,
   isUnlock,
-} from '../../../constants/transactions';
-import Avatar from '../../shared/avatar';
-import Blur from '../../shared/transactions/blur';
-import CopyToClipboard from '../../shared/copyToClipboard';
-import HeaderBackButton from '../router/headerBackButton';
+} from 'modules/Send/constants';
+import withTheme from 'components/shared/withTheme';
+import FormattedNumber from 'components/shared/formattedNumber';
+import { B, A, H4, } from 'components/shared/toolBox/typography';
+import { EmptyState, LoadingState } from 'modules/Accounts/components';
+import Avatar from 'components/shared/avatar';
+import Blur from 'components/shared/blur';
+import CopyToClipboard from 'components/shared/copyToClipboard';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import LskSummary from './lskSummary';
+import BtcSummary from './btcSummary';
+import Row from './row';
+import getStyles from './styles';
+import VoteList from './voteList';
+import {
+  goToWallet, getAccountLabel, getAccountTitle, openExplorer
+} from './utils';
 
 const getConfig = (styles, tx, accountAddress) => {
   if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
@@ -152,7 +151,7 @@ class TransactionDetail extends React.Component {
     if (!tx) {
       return (
         <View style={[styles.container, styles.theme.container]}>
-          <Loading />
+          <LoadingState />
         </View>
       );
     }

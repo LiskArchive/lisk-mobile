@@ -1,7 +1,7 @@
 import { address as BTCAddress } from 'bitcoinjs-lib';
 import { cryptography } from '@liskhq/lisk-client';
+import { tokenMap } from 'constants/tokens';
 import btcConfig from '../../btc.config';
-import { tokenMap } from '../constants/tokens';
 
 /**
  * Validates the given address with respect to the tokenType

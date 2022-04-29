@@ -1,12 +1,12 @@
 import { Platform } from 'react-native';
 import * as Lisk from '@liskhq/lisk-client';
-import * as LiskAndroidPatch from './utils/index';
-import { apiClient } from './apiClient';
 import {
   isTransfer,
   moduleAssetNameIdMap,
   transferAssetSchema
-} from '../../../constants/transactions';
+} from 'modules/Send/constants';
+import * as LiskAndroidPatch from './utils/index';
+import { apiClient } from './apiClient';
 import config from '../../../../lsk.config';
 
 const getAmount = (tx) => {

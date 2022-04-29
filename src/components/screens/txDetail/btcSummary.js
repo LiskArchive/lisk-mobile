@@ -1,14 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
-import FormattedDate from '../../shared/formattedDate';
-import withTheme from '../../shared/withTheme';
-import { fromRawLsk } from '../../../utilities/conversions';
-import Icon from '../../shared/toolBox/icon';
-import FormattedNumber from '../../shared/formattedNumber';
-import { P, H3 } from '../../shared/toolBox/typography';
-import Blur from '../../shared/transactions/blur';
+import { fromRawLsk } from 'utilities/conversions';
+import { colors } from 'constants/styleGuide';
+import FormattedDate from 'components/shared/formattedDate';
+import withTheme from 'components/shared/withTheme';
+import Icon from 'components/shared/toolBox/icon';
+import FormattedNumber from 'components/shared/formattedNumber';
+import { P, H3 } from 'components/shared/toolBox/typography';
+import Blur from 'components/shared/blur';
 import getStyles from './styles';
-import { colors } from '../../../constants/styleGuide';
 
 const BtcSummary = ({
   styles,

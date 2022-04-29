@@ -32,6 +32,7 @@
     "no-confusing-arrow": "off",
     "key-spacing": ["error", { "beforeColon": false }],
     "import/named": "off",
+    "import/prefer-default-export": "off",
     "jsx-a11y/alt-text": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/click-events-have-key-events": "off",
@@ -60,7 +61,6 @@
     "react/require-default-props": "off",
     "react/sort-comp": "off",
     "react/display-name": "off",
-
     "implicit-arrow-linebreak": "off",
     "react/jsx-closing-tag-location": "off",
 
@@ -109,6 +109,22 @@
     }
   ],
   "settings": {
-    "mocha/additionalTestFunctions": ["describeModule"]
+    "mocha/additionalTestFunctions": ["describeModule"],
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["constants", "./src/constants"],
+          ["components", "./src/components"],
+          ["assets", "./src/assets"],
+          ["utilities", "./src/utilities"],
+          ["actions", "./src/actions"],
+          ["navigation", "./src/navigation"],
+          ["modules", "./src/modules"],
+          ["hooks", "./src/hooks"],
+          ["store", "./src/store"]
+        ],
+        "extensions": [ ".js", ".jsx", ".json"]
+      }
+    }
   }
 }

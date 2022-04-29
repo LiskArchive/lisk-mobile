@@ -2,13 +2,13 @@ import React from 'react';
 import connect from 'redux-connect-decorator';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { removePassphraseFromKeyChain } from '../../../utilities/passphrase';
-import { settingsUpdated as settingsUpdatedAction } from '../../../actions/settings';
-import { PrimaryButton } from '../../shared/toolBox/button';
-import withTheme from '../../shared/withTheme';
+import { removePassphraseFromKeyChain } from 'modules/Auth/utils';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import withTheme from 'components/shared/withTheme';
+import PassphraseCopy from 'components/shared/passphraseCopy';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import getStyles from './styles';
-import PassphraseCopy from '../../shared/passphraseCopy';
-import HeaderBackButton from '../router/headerBackButton';
 
 @connect(
   state => ({

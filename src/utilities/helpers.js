@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import regex from '../constants/regex';
-import { themes } from '../constants/styleGuide';
+import regex from 'constants/regex';
+import { themes } from 'constants/styleGuide';
 
 /**
  * Helps to create themed stylesheet for components.

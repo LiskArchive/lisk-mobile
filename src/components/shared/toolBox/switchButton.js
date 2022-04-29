@@ -1,7 +1,7 @@
 import React from 'react';
 import Switch from 'react-native-switch-pro';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { colors, themes } from '../../../constants/styleGuide';
+import { colors, themes } from 'constants/styleGuide';
 
 const switchButton = ({
   value, height, onSyncPress, style, theme

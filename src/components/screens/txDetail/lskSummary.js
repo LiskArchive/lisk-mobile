@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { translate } from 'react-i18next';
-import FormattedDate from '../../shared/formattedDate';
-import withTheme from '../../shared/withTheme';
-import { P, B } from '../../shared/toolBox/typography';
-import { getTxConstant } from '../../../constants/transactions';
+import { getTxConstant } from 'modules/Send/constants';
+import FormattedDate from 'components/shared/formattedDate';
+import withTheme from 'components/shared/withTheme';
+import { P, B } from 'components/shared/toolBox/typography';
 import getStyles from './styles';
 
 const Graphics = ({ tx, theme }) => (
