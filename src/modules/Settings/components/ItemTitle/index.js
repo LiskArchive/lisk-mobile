@@ -34,6 +34,7 @@ const ItemTitle = ({
   targetStateLabel,
   authenticate,
   description,
+  testID,
 }) => {
   const authenticateFn = cb => {
     bioMetricAuthentication({
@@ -79,7 +80,7 @@ const ItemTitle = ({
   useEffect(() => () => FingerprintScanner.release());
 
   return (
-    <TouchableHighlight {...props}>
+    <TouchableHighlight testID='testID' {...props}>
       <Fragment>
         <Icon
           name={icon}
@@ -117,7 +118,7 @@ const ItemTitle = ({
               />
             </Fragment>
           ) : (
-            <Fragment>{targetStateLabel}</Fragment>
+              <View testID={`${testID}-target`} >{targetStateLabel}</View>
           )}
         </View>
       </Fragment>

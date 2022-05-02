@@ -1,4 +1,5 @@
 import { currencyKeys } from 'constants/currencies';
+import { languageKeys } from 'constants/languages';
 import { merge } from 'utilities/helpers';
 import { themes } from 'constants/styleGuide';
 import { tokenKeys } from 'constants/tokens';
@@ -7,6 +8,7 @@ import actionTypes from '../actionTypes';
 export const INITIAL_STATE = {
   theme: themes.light,
   currency: currencyKeys[0],
+  language: languageKeys[0],
   token: {
     active: tokenKeys[0],
     list: tokenKeys.reduce((acc, key) => {

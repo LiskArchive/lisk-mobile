@@ -108,6 +108,7 @@ const IconButton = props => {
     onClick,
     onPress,
     iconStyle,
+    testID
   } = props;
   const viewProps = Object.keys(props)
     .filter(key => !/titleStyle|style|title|icon|color/.test(key))
@@ -120,6 +121,7 @@ const IconButton = props => {
       onPress={onClick || onPress}
       underlayColor="transparent"
       {...viewProps}
+      testID={testID}
       style={[props.styles.iconButton, style]}
     >
       <Fragment>

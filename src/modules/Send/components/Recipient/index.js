@@ -168,6 +168,7 @@ class Recipient extends React.Component {
               onChange={this.setAddress}
               value={address.value}
               placeholder={placeholder}
+              testID='recipient-input'
               innerStyles={{
                 input: [
                   styles.input,
@@ -205,7 +206,7 @@ class Recipient extends React.Component {
           </KeyboardAwareScrollView>
         </View>
         <View style={styles.footerButtonContainer}>
-          <PrimaryButton title={t('Continue')} onClick={this.submitForm} />
+          <PrimaryButton testID="submit" title={t('Continue')} onClick={this.submitForm} />
         </View>
       </SafeAreaView>
     );
