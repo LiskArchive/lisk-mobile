@@ -43,6 +43,7 @@ const AmountBalance = ({
           style={[styles.balanceNumber, styles.theme.balanceNumber]}
           tokenType={tokenType}
           language={language}
+          testID="currency-balance"
         >
           {value}
         </FormattedNumber>

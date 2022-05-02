@@ -25,9 +25,8 @@ const AmountInput = ({
     </View>
     {valueInCurrency ? (
       <View style={styles.currencyContainer}>
-        <Text style={[styles.currencyText, styles.theme.currencyText]}>
-          <Text style={styles.currencyPrefix}>~&nbsp;</Text>
-          {`${valueInCurrency} ${currency}`}
+        <Text style={[styles.currencyText, styles.theme.currencyText]} testID="currency-amount">
+          ~ {`${valueInCurrency} ${currency}`}
         </Text>
       </View>
     ) : null}

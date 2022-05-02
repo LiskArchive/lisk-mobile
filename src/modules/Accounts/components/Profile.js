@@ -146,11 +146,13 @@ const ProfileScreen = ({
                   ]}
                   type={H3}
                   language={language}
+                  testID="token-balance"
                 >
                   {normalizedBalance}
                 </FormattedNumber>
                 <Image
                   source={blurs[`blur${balanceSize}`]}
+                  testID="amount-blur"
                   style={[
                     styles.blur,
                     styles[`blur${balanceSize}`],
