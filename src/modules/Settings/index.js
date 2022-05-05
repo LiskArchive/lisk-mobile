@@ -79,7 +79,7 @@ const Settings = ({
         {targetStateLabel[0]}
       </P>
   );
-  return <View style={[styles.container, styles.theme.container]}>
+  return <View testID='settings-screen' style={[styles.container, styles.theme.container]}>
       <ScrollView style={styles.innerContainer}>
         <View style={styles.group}>
           <H4 style={[styles.subHeader, styles.theme.subHeader]}>
@@ -124,6 +124,7 @@ const Settings = ({
 
           <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
             <ItemTitle
+              testID="enable-incognito"
               icon="enable-incognito"
               targetStateLabel={
                 <SwitchButton
@@ -144,6 +145,7 @@ const Settings = ({
           </H4>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
+              testID="dark-mode"
               icon="dark-mode"
               targetStateLabel={
                 <SwitchButton
