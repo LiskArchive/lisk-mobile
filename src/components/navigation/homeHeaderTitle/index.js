@@ -52,6 +52,7 @@ const ExtendedTitle = ({
   token,
   scrollY,
   wallet,
+  activeToken,
 }) => {
   let balanceSize = 'Small';
   if (balance > 6) balanceSize = 'Big';
@@ -70,7 +71,7 @@ const ExtendedTitle = ({
         },
       ]}
     >
-      {token === 'LSK' ? (
+      {token === activeToken ? (
         <Avatar address={address} size={30} style={styles.avatar} />
       ) : (
         <View
@@ -173,6 +174,7 @@ const HomeHeaderTitle = ({
             incognito={data.incognito}
             type={data.type}
             wallet={wallet}
+            activeToken={active}
           />
         </View>
       </TouchableWithoutFeedback>

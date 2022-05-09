@@ -30,7 +30,7 @@ import {
   showInitializationModal
 } from './utils';
 import AccountSummary from './components/AccountSummary';
-import useActivityList from './hooks/useActivityList';
+import useTransactionList from './hooks/useTransactionList';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -58,7 +58,7 @@ const Home = ({
     transactions,
     loadMore,
     loading, refresh, refreshing
-  } = useActivityList({ address: account[activeToken].address, activeToken });
+  } = useTransactionList({ address: account[activeToken].address, activeToken });
   const [hideBtcRemoval, setHideBtcRemoval] = useState(true);
 
   const scrollY = useRef(new Animated.Value(0));

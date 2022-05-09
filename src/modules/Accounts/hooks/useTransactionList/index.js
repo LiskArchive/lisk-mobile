@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { account as accountAPI, transactions as transactionsAPI } from 'utilities/api';
 
-const useActivityList = ({ address, activeToken }) => {
+const useTransactionList = ({ address, activeToken }) => {
   const [loading, setIsLoading] = useState(false);
   const [refreshing, setIsRefreshing] = useState(false);
   const [transactions, setTransactions] = useState({});
@@ -78,4 +78,4 @@ const useActivityList = ({ address, activeToken }) => {
   };
 };
 
-export default useActivityList;
+export default useTransactionList;

@@ -23,7 +23,7 @@ const TimeStamp = ({ timestamp, styles }) => {
   return null;
 };
 
-const LskSummary = ({
+const TransactionSummary = ({
   styles, theme, t, tx
 }) => {
   return (
@@ -41,4 +41,4 @@ const LskSummary = ({
   );
 };
 
-export default withTheme(translate()(LskSummary), getStyles());
+export default withTheme(translate()(TransactionSummary), getStyles());
