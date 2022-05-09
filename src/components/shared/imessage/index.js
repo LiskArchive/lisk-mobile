@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
 import { getPassphraseFromKeyChain } from 'modules/Auth/utils';
 import { languageMap } from 'constants/languages';
+import { TransactionDetails } from 'modules/Accounts/components/TransactionDetails';
 import ThemeContext from '../../../contexts/theme';
 import Confirm from './confirm';
-import TxDetail from './txDetail';
 import Pending from './pending';
 import Form from './form';
 import Rejected from './rejected';
@@ -183,7 +183,7 @@ class LiskMessageExtension extends Component {
             return <Rejected status="rejected" sharedData={parsedData} />;
           case 'transferred':
             return (
-              <TxDetail
+              <TransactionDetails
                 account={{ address: address.value }}
                 sharedData={parsedData}
                 txID={parsedData.txID}

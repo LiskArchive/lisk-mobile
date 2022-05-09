@@ -22,8 +22,7 @@ import Avatar from 'components/shared/avatar';
 import Blur from 'components/shared/blur';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import LskSummary from './lskSummary';
-import BtcSummary from './btcSummary';
+import TransactionSummary from './TransactionSummary';
 import Row from './row';
 import getStyles from './styles';
 import VoteList from './voteList';
@@ -61,7 +60,7 @@ const getConfig = (styles, tx, accountAddress) => {
   }),
   {}
 )
-class TransactionDetail extends React.Component {
+class TransactionDetails extends React.Component {
   state = {
     tx: null,
     refreshing: false,
@@ -174,22 +173,12 @@ class TransactionDetail extends React.Component {
           contentContainerStyle={styles.contentContainer}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />}
         >
-          {activeToken === 'LSK' ? (
-            <LskSummary
-              incognito={incognito}
-              accountAddress={walletAccountAddress}
-              tx={tx}
-              language={language}
-            />
-          ) : (
-            <BtcSummary
-              incognito={incognito}
-              accountAddress={walletAccountAddress}
-              tx={tx}
-              language={language}
-            />
-          )}
-
+          <TransactionSummary
+            incognito={incognito}
+            accountAddress={walletAccountAddress}
+            tx={tx}
+            language={language}
+          />
           {isDelegateRegistration && (
             <Row title={'Delegate username'}>
               <View>
@@ -312,4 +301,4 @@ class TransactionDetail extends React.Component {
   }
 }
 
-export default withTheme(translate()(TransactionDetail), getStyles());
+export default withTheme(translate()(TransactionDetails), getStyles());
