@@ -1,60 +1,43 @@
-import React from 'react';
-import { Animated, Dimensions } from 'react-native';
-import connect from 'redux-connect-decorator';
+/* eslint-disable max-statements */
+import React, { useEffect, useRef } from 'react';
+import { Animated, } from 'react-native';
 import { translate } from 'react-i18next';
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
+import { useSelector, useDispatch } from 'react-redux';
 import easing from 'utilities/easing';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import { tokenKeys } from 'constants/tokens';
 import withTheme from 'components/shared/withTheme';
 import Profile from '../Profile';
 import getStyles from './styles';
 
-@connect(
-  (state) => ({
-    settings: state.settings,
-    accounts: state.accounts,
-    activeToken: state.settings.token.active,
-    priceTicker: state.service.priceTicker
-  }),
-  {
-    settingsUpdated: settingsUpdatedAction
-  }
-)
-class AccountSummaryScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      balanceWidth: 0,
-      addressWidth: 0,
-      initialAnimations: {
-        opacity: new Animated.Value(0),
-        top: new Animated.Value(-20)
-      },
-    };
-  }
+const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
+  const settings = useSelector(state => state.settings);
+  const accounts = useSelector(state => state.accounts);
+  const activeToken = useSelector(state => state.settings.token.active);
+  const priceTicker = useSelector(state => state.service.priceTicker);
+  const dispatch = useDispatch();
 
-  height = 260;
+  const settingsUpdated = (data) => {
+    dispatch(settingsUpdatedAction(data));
+  };
 
-  componentDidMount() {
-    this.screenWidth = Dimensions.get('window').width;
-    this.initialFadeIn();
-  }
+  const opacity = useRef(new Animated.Value(0));
+  const top = useRef(new Animated.Value(-20));
 
-  interpolate = (inputRange, outputRange) =>
-    this.props.scrollY.interpolate({
+  const interpolate = (inputRange, outputRange) =>
+    scrollY.interpolate({
       inputRange,
       outputRange,
       extrapolate: 'clamp'
     });
 
-  initialFadeIn = () => {
-    const { opacity, top } = this.state.initialAnimations;
-    Animated.timing(opacity, {
+  const initialFadeIn = () => {
+    Animated.timing(opacity.current, {
       toValue: 1,
       duration: 400,
       delay: 100
     }).start();
-    Animated.timing(top, {
+    Animated.timing(top.current, {
       toValue: 0,
       duration: 400,
       delay: 100,
@@ -62,51 +45,48 @@ class AccountSummaryScreen extends React.Component {
     }).start();
   };
 
-  renderProfile = (data) => {
-    const {
-      settings, priceTicker, t, accounts, activeToken
-    } = this.props;
+  useEffect(() => {
+    initialFadeIn();
+  }, []);
+
+  const renderProfile = (data) => {
     const token = Object.keys(settings.token.list)[data.index];
     const { address, lockedBalance, isMultisignature } = accounts.info[activeToken];
-    return (
-      <Profile
-        t={t}
-        key={token}
-        token={token}
-        priceTicker={priceTicker}
-        account={data.item}
-        settings={settings}
-        interpolate={this.interpolate}
-        height={this.height}
-        address={address}
-        lockedBalance={lockedBalance}
-        isMultiSignature={isMultisignature}
-        {...this.props}
-      />
-    );
+    return <Profile
+      t={t}
+      key={token}
+      token={token}
+      priceTicker={priceTicker}
+      account={data.item}
+      settings={settings}
+      interpolate={interpolate}
+      height={260}
+      address={address}
+      lockedBalance={lockedBalance}
+      isMultiSignature={isMultisignature}
+      settingsUpdated={settingsUpdated}
+      incognito={settings.incognito}
+      navigation={navigation}
+    />;
   };
 
-  render() {
-    const {
-      accounts: { info },
-      settings: { token },
-    } = this.props;
-    const {
-      initialAnimations: { opacity, top },
-    } = this.state;
-    const profiles = tokenKeys.filter((key) => token.list[key]).map((key) => info[key]);
+  const { info } = accounts;
+  const { token } = settings;
 
-    return (
-      <Animated.View
-        style={[
-          { height: this.interpolate([0, 280], [280, 0]) },
-          { top, opacity, paddingBottom: this.interpolate([0, 280], [15, 0]) },
-        ]}
-      >
-          {this.renderProfile({ item: profiles[0], index: 0 })}
-      </Animated.View>
-    );
-  }
-}
+  const profiles = tokenKeys.filter((key) => token.list[key]).map((key) => info[key]);
+
+  return <Animated.View
+    style={[
+      { height: interpolate([0, 280], [280, 0]) },
+      {
+        top: top.current,
+        opacity: opacity.current,
+        paddingBottom: interpolate([0, 280], [15, 0])
+      },
+    ]}
+  >
+    {renderProfile({ item: profiles[0], index: 0 })}
+  </Animated.View>;
+};
 
 export const AccountSummary = withTheme(translate()(AccountSummaryScreen), getStyles());
