@@ -93,7 +93,7 @@ const TransactionDetails = ({
 
     if (transaction) {
       setTx(transaction);
-      setVotes(transaction?.votes);
+      setVotes(transaction.votes);
     } else {
       backAction = () => navigation.navigate({ name: 'Home' });
     }
@@ -112,7 +112,7 @@ const TransactionDetails = ({
   }, [transactionId]);
 
   const onRefresh = () => {
-    retrieveTransaction(tx?.id, 1500);
+    retrieveTransaction(tx?.id);
   };
 
   if (error) {
