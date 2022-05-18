@@ -8,7 +8,7 @@ import { colors } from 'constants/styleGuide';
 import SignIn from 'modules/Auth/SignIn';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
-import TxDetail from 'components/screens/txDetail';
+import { TransactionDetails } from 'modules/Accounts/components/TransactionDetails';
 import Wallet from 'modules/Wallet';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
@@ -74,7 +74,7 @@ const MainNavigator = () => {
           <MainStack.Screen name="Terms" component={Terms} options={navigationOptions.Terms} />
           <MainStack.Screen
             name="TxDetail"
-            component={TxDetail}
+            component={TransactionDetails}
             options={navigationOptions.TxDetail}
           />
           <MainStack.Screen name="Wallet" component={Wallet} options={navigationOptions.Wallet} />

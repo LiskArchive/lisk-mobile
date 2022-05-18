@@ -23,7 +23,7 @@ import {
 } from 'modules/Accounts/actions';
 import BookmarkSvg from 'assets/svgs/BookmarkSvg';
 import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
-import useActivityList from 'modules/Accounts/hooks/useActivityList';
+import useTransactionList from 'modules/Accounts/hooks/useTransactionList';
 import getStyles from './styles';
 import { AccountSummary } from './components';
 
@@ -42,7 +42,7 @@ const Wallet = ({
 }) => {
   const {
     transactions, loading, loadMore, refresh, account
-  } = useActivityList({ address: route.params?.address, activeToken });
+  } = useTransactionList({ address: route.params?.address, activeToken });
 
   const isFollowed = () => {
     return followedAccounts[activeToken].some(

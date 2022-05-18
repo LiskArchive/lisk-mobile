@@ -5,7 +5,7 @@ import {
 } from 'utilities/api';
 import { tokenMap } from 'constants/tokens';
 import data from 'constants/mockStore';
-import useActivityList from './index';
+import useTransactionList from './index';
 
 describe('useTransactionFeeCalculation', () => {
   beforeAll(() => {
@@ -17,7 +17,7 @@ describe('useTransactionFeeCalculation', () => {
     accountAPI.getSummary.mockResolvedValueOnce(data.account);
     transactionsAPI.get.mockResolvedValueOnce(data.transactions);
     const { result, waitForValueToChange } = renderHook(() =>
-      useActivityList({ address: data.account.address, activeToken: tokenMap.LSK.key }));
+      useTransactionList({ address: data.account.address, activeToken: tokenMap.LSK.key }));
 
     await waitForValueToChange(() => result.current.account);
     expect(result.current.account).toEqual(data.account);
@@ -34,7 +34,7 @@ describe('useTransactionFeeCalculation', () => {
     accountAPI.getSummary.mockResolvedValue(data.account);
     transactionsAPI.get.mockResolvedValue(data.transactions);
     const { result, waitForValueToChange } = renderHook(() =>
-      useActivityList({ address: data.account.address, activeToken: tokenMap.LSK.key }));
+      useTransactionList({ address: data.account.address, activeToken: tokenMap.LSK.key }));
     await waitForValueToChange(() => result.current.account);
     result.current.loadMore();
     await waitForValueToChange(() => result.current.transactions);

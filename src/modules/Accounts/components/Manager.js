@@ -1,71 +1,46 @@
-import React, { Fragment } from 'react';
+/* eslint-disable max-statements */
+import React, { Fragment, useEffect, useRef } from 'react';
 import { View, Animated } from 'react-native';
-import connect from 'redux-connect-decorator';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { translate } from 'react-i18next';
 import RNShake from 'react-native-shake';
 import easing from 'utilities/easing';
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
+import { settingsUpdated } from 'modules/Settings/actions';
 import { H3 } from 'components/shared/toolBox/typography';
 import withTheme from 'components/shared/withTheme';
+import { useDispatch, useSelector } from 'react-redux';
 import List from './List';
 import Footer from './Footer';
 import getStyles from './styles';
 
-/**
- * This component is a HOC to decide which state to show:
- * Loading, Empty (No transactions) or the List view.
- *
- * It performs the initial animation after the user logged in.
- */
-@connect(
-  (state) => ({
-    incognitoMode: state.settings.incognito,
-    activeToken: state.settings.token.active,
-    followedAccounts: state.accounts.followed || []
-  }),
-  {
-    settingsUpdated: settingsUpdatedAction
-  }
-)
-class Manager extends React.Component {
-  state = {
-    initialAnimations: {
-      opacity: new Animated.Value(0),
-      top: new Animated.Value(20)
-    }
-  };
+const Manager = ({
+  type,
+  styles,
+  transactions,
+  navigate,
+  account,
+  footer,
+  t,
+  noTitle
+}) => {
+  const {
+    incognito: incognitoMode, token:
+    { active: activeToken }
+  } = useSelector(state => state.settings);
+  const followedAccounts = useSelector(state => state.accounts.followed);
+  const dispatch = useDispatch();
+  const incognito = type === 'home' && incognitoMode;
+  const Anim = Animated.View;
 
-  componentDidMount() {
-    let timeout = null;
-    if (this.props.type === 'home') {
-      RNShake.addEventListener('ShakeEvent', () => {
-        if (!timeout) {
-          this.props.settingsUpdated({
-            incognito: !this.props.incognitoMode
-          });
-          timeout = setTimeout(() => {
-            timeout = false;
-          }, 1000);
-        }
-      });
-    }
-    this.initialFadeIn();
-  }
+  const opacity = useRef(new Animated.Value(0));
+  const top = useRef(new Animated.Value(20));
 
-  // eslint-disable-next-line class-methods-use-this
-  componentWillUnmount() {
-    RNShake.removeEventListener('ShakeEvent');
-  }
-
-  initialFadeIn = () => {
-    const { opacity, top } = this.state.initialAnimations;
-    Animated.timing(opacity, {
+  const initialFadeIn = () => {
+    Animated.timing(opacity.current, {
       toValue: 1,
       duration: 400,
       delay: 100
     }).start();
-    Animated.timing(top, {
+    Animated.timing(top.current, {
       toValue: 0,
       duration: 400,
       delay: 100,
@@ -73,58 +48,51 @@ class Manager extends React.Component {
     }).start();
   };
 
-  toggleIncognito = () => {
-    ReactNativeHapticFeedback.trigger('selection');
-    this.props.settingsUpdated({
-      incognito: !this.props.incognitoMode
-    });
-  };
+  useEffect(() => {
+    let timeout = null;
+    if (type === 'home') {
+      RNShake.addEventListener('ShakeEvent', () => {
+        if (!timeout) {
+          dispatch(settingsUpdated({
+            incognito: !incognitoMode
+          }));
+          timeout = setTimeout(() => {
+            timeout = false;
+          }, 1000);
+        }
+      });
+    }
+    initialFadeIn();
+    return () => {
+      clearTimeout(timeout);
+      RNShake.removeEventListener('ShakeEvent');
+    };
+  }, []);
 
-  render() {
-    const {
-      styles,
-      transactions,
-      navigate,
-      activeToken,
-      account,
-      footer,
-      incognitoMode,
-      followedAccounts,
-      type,
-      t,
-      noTitle
-    } = this.props;
+  return <Anim style={[styles.container, styles.theme.container, { opacity: opacity.current, top: top.current }]} testID="transactions-list-manager" >
+    {!transactions
+      || (transactions.confirmed.length === 0 && transactions.pending.length === 0) ? (
+      <Fragment />
+      ) : (
+      <Fragment>
+        {noTitle ? null : (
+          <View style={styles.innerContainer}>
+            <H3 style={[styles.title, styles.theme.title]}>{t('Activity')}</H3>
+          </View>
+        )}
+        <List
+          incognito={incognito}
+          navigate={navigate}
+          account={account ? account.address : ''}
+          followedAccounts={followedAccounts ?? {}}
+          pending={transactions.pending}
+          activeToken={activeToken}
+          transactions={transactions.confirmed}
+        />
+        {footer ? <Footer /> : null}
+      </Fragment>
+      )}
+  </Anim>;
+};
 
-    const incognito = type === 'home' && incognitoMode;
-    const Anim = Animated.View;
-    const { opacity, top } = this.state.initialAnimations;
-
-    return (
-      <Anim style={[styles.container, styles.theme.container, { opacity, top }]}>
-        {!transactions
-          || (transactions.confirmed.length === 0 && transactions.pending.length === 0) ? (
-          <Fragment />
-          ) : (
-          <Fragment>
-            {noTitle ? null : (
-              <View style={styles.innerContainer}>
-                <H3 style={[styles.title, styles.theme.title]}>{t('Activity')}</H3>
-              </View>
-            )}
-            <List
-              incognito={incognito}
-              navigate={navigate}
-              account={account ? account.address : ''}
-              followedAccounts={followedAccounts}
-              pending={transactions.pending}
-              activeToken={activeToken}
-              transactions={transactions.confirmed}
-            />
-            {footer ? <Footer /> : null}
-          </Fragment>
-          )}
-      </Anim>
-    );
-  }
-}
 export default withTheme(translate()(Manager), getStyles());

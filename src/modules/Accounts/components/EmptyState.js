@@ -13,7 +13,7 @@ import getStyles from './styles';
 const EmptyState = ({
   theme, styles, refreshing, t, message, style = {}
 }) => (
-  <View style={[styles.emptyState, style]}>
+  <View style={[styles.emptyState, style]} testID="empty-transaction-list" >
     <View style={styles.emptyStateActivityIndicator}>
       {Platform.OS === 'ios' && refreshing ? (
         <ActivityIndicator size="large" />

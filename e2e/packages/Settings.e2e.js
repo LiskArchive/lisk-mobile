@@ -1,4 +1,5 @@
 import { device, element, by, } from 'detox';
+import testConstants from '../utils/testConstants';
 
 describe('Settings Screen', () => {
   beforeAll(async () => {
@@ -12,7 +13,7 @@ describe('Settings Screen', () => {
 
   it('should load settings screen', async () => {
     await element(by.id('signInPassphraseInput')).atIndex(1).tap();
-    await element(by.id('signInPassphraseInput')).atIndex(1).replaceText('benefit era often time inch divorce cup rare kidney sting negative ritual');
+    await element(by.id('signInPassphraseInput')).atIndex(1).replaceText(testConstants.account);
     await element(by.id('signInButton')).atIndex(1).tap();
     await element(by.text('Got it')).tap();
     await element(by.text('Settings')).tap();

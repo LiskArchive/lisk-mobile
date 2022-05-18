@@ -13,7 +13,6 @@ import { Manager as TransactionsManager, EmptyState, LoadingState } from 'module
 import { deviceHeight } from 'utilities/device';
 import InfiniteScrollView from 'components/shared/infiniteScrollView';
 import ParallaxHeader from 'components/shared/ParallaxHeader';
-import HomeHeaderTitle from 'components/navigation/homeHeaderTitle';
 import BTCRemoval from 'components/screens/banners/BtcRemoval';
 import withTheme from 'components/shared/withTheme';
 import { colors, themes } from 'constants/styleGuide';
@@ -30,7 +29,7 @@ import {
   showInitializationModal
 } from './utils';
 import AccountSummary from './components/AccountSummary';
-import useActivityList from './hooks/useActivityList';
+import useTransactionList from './hooks/useTransactionList';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -58,7 +57,7 @@ const Home = ({
     transactions,
     loadMore,
     loading, refresh, refreshing
-  } = useActivityList({ address: account[activeToken].address, activeToken });
+  } = useTransactionList({ address: account[activeToken].address, activeToken });
   const [hideBtcRemoval, setHideBtcRemoval] = useState(true);
 
   const scrollY = useRef(new Animated.Value(0));
@@ -75,9 +74,6 @@ const Home = ({
       setOptions
     } = navigation;
     setOptions({
-      headerTitle: () => (
-        <HomeHeaderTitle type="home" scrollToTop={scrollToTop} />
-      ),
       tabBarVisible: hideBtcRemoval
     });
   };
