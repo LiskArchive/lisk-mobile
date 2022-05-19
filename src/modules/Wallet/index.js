@@ -113,7 +113,7 @@ const Wallet = ({
     );
   }
 
-  return <View style={[styles.container, styles.theme.container]}>
+  return <View style={[styles.container, styles.theme.container]} testID="wallet-screen" >
     <SafeAreaView style={[styles.flex]}>
       <HeaderBackButton
         title="Account Details"
