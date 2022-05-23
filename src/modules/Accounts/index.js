@@ -51,12 +51,14 @@ const Home = ({
   incognito,
   getNetworkInfo,
   settingsUpdated,
-  route
+  route,
+  pendingTransactions
 }) => {
   const {
     transactions,
     loadMore,
-    loading, refresh, refreshing
+    loading, refresh, refreshing,
+    addPending
   } = useTransactionList({ address: account[activeToken].address, activeToken });
   const [hideBtcRemoval, setHideBtcRemoval] = useState(true);
 
@@ -77,6 +79,12 @@ const Home = ({
       tabBarVisible: hideBtcRemoval
     });
   };
+
+  useEffect(() => {
+    if (pendingTransactions?.length) {
+      addPending(pendingTransactions);
+    }
+  }, [pendingTransactions]);
 
   const closeBtcBanner = () => {
     persistData('@list-hideBtcRemoval', 'true');
@@ -118,7 +126,7 @@ const Home = ({
   let content = null;
   if (transactions.loaded) {
     const listElements = transactions.count > 0
-      ? [...transactions.pending, ...transactions.confirmed]
+      ? [...pendingTransactions, ...transactions.confirmed]
       : ['emptyState'];
     content = (
       <InfiniteScrollView
@@ -205,6 +213,7 @@ const mapStateToProps = state => ({
   activeToken: state.settings.token.active,
   settings: state.settings,
   followedAccounts: state.accounts.followed || [],
+  pendingTransactions: state.transactions.pending
 });
 
 const mapDispatchToProps = ({
