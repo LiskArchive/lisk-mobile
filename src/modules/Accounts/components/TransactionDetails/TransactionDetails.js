@@ -139,7 +139,7 @@ const TransactionDetails = ({
   const amount = fromRawLsk(tx.amount);
 
   return (
-    <SafeAreaView style={[styles.container, styles.theme.container]} >
+    <SafeAreaView style={[styles.container, styles.theme.container]} testID="transaction-details" >
       <HeaderBackButton
         title="Transaction Details"
         onPress={navigation.goBack}
@@ -186,6 +186,7 @@ const TransactionDetails = ({
                   navigation, account, activeToken
                 })}
                 style={[styles.value, styles.theme.value, styles.transactionId]}
+                testID="recipient"
               >
                 {getAccountLabel(tx.recipientAddress, {
                   t, followedAccounts, activeToken, truncate: true

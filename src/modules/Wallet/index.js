@@ -1,5 +1,6 @@
+/* eslint-disable max-statements */
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   View, SafeAreaView, TouchableOpacity
 } from 'react-native';
@@ -13,14 +14,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { DeleteBookmarkModal } from 'modules/Bookmark/components';
 import { H3 } from 'components/shared/toolBox/typography';
 import LoadingBar from 'components/shared/loading';
-import {
-  loadingStarted as loadingStartedAction,
-  loadingFinished as loadingFinishedAction
-} from 'actions/loading';
-import {
-  accountFollowed as accountFollowedAction,
-  accountUnFollowed as accountUnFollowedAction
-} from 'modules/Accounts/actions';
+import { accountUnFollowed } from 'modules/Accounts/actions';
 import BookmarkSvg from 'assets/svgs/BookmarkSvg';
 import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
 import useTransactionList from 'modules/Accounts/hooks/useTransactionList';
@@ -38,8 +32,12 @@ import { AccountSummary } from './components';
  */
 
 const Wallet = ({
-  styles, navigation, t, route, accountUnFollowed, theme, activeToken, followedAccounts
+  styles, navigation, t, route, theme
 }) => {
+  const followedAccounts = useSelector(state => state.accounts.followed || []);
+  const activeToken = useSelector(state => state.settings.token.active);
+  const dispatch = useDispatch();
+
   const {
     transactions, loading, loadMore, refresh, account
   } = useTransactionList({ address: route.params?.address, activeToken });
@@ -56,7 +54,7 @@ const Wallet = ({
       modalHolder.open({
         title: 'Delete bookmark',
         component: DeleteBookmarkModal,
-        callback: () => accountUnFollowed(address)
+        callback: () => dispatch(accountUnFollowed(address))
       });
     } else {
       navigation.navigate({
@@ -115,7 +113,7 @@ const Wallet = ({
     );
   }
 
-  return <View style={[styles.container, styles.theme.container]}>
+  return <View style={[styles.container, styles.theme.container]} testID="wallet-screen" >
     <SafeAreaView style={[styles.flex]}>
       <HeaderBackButton
         title="Account Details"
@@ -146,19 +144,4 @@ const Wallet = ({
   </View>;
 };
 
-const mapStateToProps = state => ({
-  followedAccounts: state.accounts.followed || [],
-  activeToken: state.settings.token.active,
-  loading: state.loading
-});
-
-const mapDispatchToProps = {
-  loadingStarted: loadingStartedAction,
-  loadingFinished: loadingFinishedAction,
-  accountFollowed: accountFollowedAction,
-  accountUnFollowed: accountUnFollowedAction
-};
-
-export default withTheme(translate()(connect(
-  mapStateToProps, mapDispatchToProps
-)(Wallet)), getStyles());
+export default withTheme(translate()(Wallet), getStyles());

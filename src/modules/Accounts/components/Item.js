@@ -99,6 +99,7 @@ const Item = ({
     <TouchableOpacity
       style={[styles.itemContainer, styles.theme.itemContainer]}
       onPress={showDetail}
+      testID="transaction-item"
     >
       <View style={styles.innerContainer}>
         <View style={[styles.itemColumn, styles.avatarContainer]}>
