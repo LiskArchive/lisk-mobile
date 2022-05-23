@@ -7,6 +7,7 @@ const useTransactionList = ({ address, activeToken }) => {
   const [refreshing, setIsRefreshing] = useState(false);
   const [transactions, setTransactions] = useState({});
   const [account, setAccount] = useState(null);
+  const [pending, setPending] = useState([])
 
   const fetchInitialData = async () => {
     setIsLoading(true);
@@ -18,7 +19,6 @@ const useTransactionList = ({ address, activeToken }) => {
     setAccount(account);
     setTransactions({
       confirmed: tx.data,
-      pending: [],
       loaded: true,
       count: tx.meta.count
     });
@@ -35,7 +35,6 @@ const useTransactionList = ({ address, activeToken }) => {
     setAccount(account);
     setTransactions({
       confirmed: [...newTransactions, ...confirmed],
-      pending: [],
       loaded: true,
       count: data.meta.count
     });
@@ -57,7 +56,6 @@ const useTransactionList = ({ address, activeToken }) => {
       if (transactions.data.length > 0) {
         setTransactions({
           confirmed: [...confirmed, ...transactions.data],
-          pending: [],
           count: transactions.meta.count,
           loaded: true
         });
@@ -74,7 +72,13 @@ const useTransactionList = ({ address, activeToken }) => {
   }, [address]);
 
   return {
-    loading, loadMore, account, refresh, transactions, refreshing
+    loading,
+    loadMore,
+    account,
+    refresh,
+    transactions: { ...transactions, pending },
+    refreshing,
+    addPending: setPending
   };
 };
 
