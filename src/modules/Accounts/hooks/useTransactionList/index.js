@@ -7,7 +7,7 @@ const useTransactionList = ({ address, activeToken }) => {
   const [refreshing, setIsRefreshing] = useState(false);
   const [transactions, setTransactions] = useState({});
   const [account, setAccount] = useState(null);
-  const [pending, setPending] = useState([])
+  const [pending, setPending] = useState([]);
 
   const fetchInitialData = async () => {
     setIsLoading(true);
