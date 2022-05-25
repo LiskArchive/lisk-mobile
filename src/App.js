@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { StatusBar, View } from 'react-native';
 import { Provider, useSelector } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
