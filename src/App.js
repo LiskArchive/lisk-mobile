@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { StatusBar, View } from 'react-native';
 import { Provider, useSelector } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
@@ -33,8 +33,7 @@ const ThemedApp = () => {
   );
 };
 
-// eslint-disable-next-line no-undef
-const App: () => React$Node = () => {
+const App = () => {
   return (
     <Provider store={store}>
       <ThemedApp />
