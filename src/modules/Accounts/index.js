@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-/* eslint-disable max-lines */
 /* eslint-disable no-shadow */
 import React, {
   createRef, useEffect, useRef, useState
@@ -52,16 +50,15 @@ const Home = ({
   getNetworkInfo,
   settingsUpdated,
   route,
-  pendingTransactions
 }) => {
   const {
     transactions,
     loadMore,
-    loading, refresh, refreshing,
-    addPending
+    loading,
+    refresh,
+    refreshing,
   } = useTransactionList({ address: account[activeToken].address, activeToken });
   const [hideBtcRemoval, setHideBtcRemoval] = useState(true);
-
   const scrollY = useRef(new Animated.Value(0));
   const scrollView = createRef();
 
@@ -79,12 +76,6 @@ const Home = ({
       tabBarVisible: hideBtcRemoval
     });
   };
-
-  useEffect(() => {
-    if (pendingTransactions?.length) {
-      addPending(pendingTransactions);
-    }
-  }, [pendingTransactions]);
 
   const closeBtcBanner = () => {
     persistData('@list-hideBtcRemoval', 'true');
@@ -126,7 +117,7 @@ const Home = ({
   let content = null;
   if (transactions.loaded) {
     const listElements = transactions.count > 0
-      ? [...pendingTransactions, ...transactions.confirmed]
+      ? [...transactions.confirmed]
       : ['emptyState'];
     content = (
       <InfiniteScrollView
@@ -213,7 +204,6 @@ const mapStateToProps = state => ({
   activeToken: state.settings.token.active,
   settings: state.settings,
   followedAccounts: state.accounts.followed || [],
-  pendingTransactions: state.transactions.pending
 });
 
 const mapDispatchToProps = ({

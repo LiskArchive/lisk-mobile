@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { colors, themes } from 'constants/styleGuide';
 import Settings from 'modules/Settings';
 import Request from 'modules/Request';
-import Send from 'modules/Send';
+import Send from 'modules/Transactions';
 import Home from 'modules/Accounts';
 import { LockedBalanceDetails } from 'modules/Accounts/components';
 import withTheme from 'components/shared/withTheme';
@@ -28,13 +28,17 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const Tabs = ({ theme }) => (
-  <Tab.Navigator initialRouteName="Home" tabBarOptions={{
-    style: {
-      backgroundColor: theme === themes.light ? colors.light.athensWhite : colors.dark.footerBg,
-      borderTopColor: theme === themes.light ? colors.light.platinumGray : colors.dark.footerBg,
-      borderTopWidth: 1,
-    }
-  }} >
+  <Tab.Navigator
+    initialRouteName="Home"
+    lazy
+    screenOptions={{ unmountOnBlur: false }}
+    tabBarOptions={{
+      style: {
+        backgroundColor: theme === themes.light ? colors.light.athensWhite : colors.dark.footerBg,
+        borderTopColor: theme === themes.light ? colors.light.platinumGray : colors.dark.footerBg,
+        borderTopWidth: 1,
+      }
+    }} >
     <Tab.Screen name="Home" component={Home} options={getIcon}
       listeners={({ route, navigation }) => ({
         tabPress: (e) => {

@@ -12,7 +12,7 @@ const List = ({
   activeToken,
   followedAccounts,
   navigate,
-  pending = [],
+  pending,
   incognito,
 }) => (
   <View style={styles.nativeList}>

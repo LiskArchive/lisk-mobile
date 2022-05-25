@@ -36,7 +36,7 @@ const ThemedApp = () => {
 const App = () => {
   return (
     <Provider store={store}>
-      <ThemedApp />
+        <ThemedApp />
     </Provider>
   );
 };

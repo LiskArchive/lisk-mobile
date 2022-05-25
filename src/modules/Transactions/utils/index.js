@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 import { Platform } from 'react-native';
 import { transactions } from '@liskhq/lisk-client';
-import * as transactionsConstants from 'modules/Send/constants';
+import * as transactionsConstants from 'modules/Transactions/constants';
 import { fromRawLsk, toRawLsk } from 'utilities/conversions';
 import computeMinFee from './fees';
 
