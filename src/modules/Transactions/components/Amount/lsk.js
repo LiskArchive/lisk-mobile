@@ -11,7 +11,7 @@ import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScro
 import { fromRawLsk, toRawLsk } from 'utilities/conversions';
 import { isNumeric, merge, validateAmount } from 'utilities/helpers';
 import * as apiClient from 'utilities/api';
-import * as transactionConstants from 'modules/Send/constants';
+import * as transactionConstants from 'modules/Transactions/constants';
 import withTheme from 'components/shared/withTheme';
 import DropDownHolder from 'utilities/alert';
 import { languageMap } from 'constants/languages';

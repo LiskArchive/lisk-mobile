@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { DEFAULT_MIN_REMAINING_BALANCE } from 'modules/Send/constants';
+import { DEFAULT_MIN_REMAINING_BALANCE } from 'modules/Transactions/constants';
 import { toRawLsk } from 'utilities/conversions';
 
 const calculateAvailableBalance = (balance) => {

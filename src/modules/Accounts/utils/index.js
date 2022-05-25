@@ -15,14 +15,13 @@ export const showIntroModal = ({ btcIntroShown, settingsUpdated }) => {
 };
 
 export const loadMore = ({
-  activeToken,
-  account,
+  address,
   transactionsLoaded,
   transactions,
 }) => {
-  if (account[activeToken]) {
+  if (address) {
     transactionsLoaded({
-      address: account[activeToken].address,
+      address,
       offset: transactions.confirmed.length,
     });
   }
@@ -51,13 +50,12 @@ export const showInitializationModal = ({
 export const resetTxAndFetch = ({
   transactionsReset,
   transactionsLoaded,
-  account,
-  activeToken,
+  address,
 }) => {
   transactionsReset();
   // giving some time for the transition animations to settle
   transactionsLoaded({
-    address: account[activeToken].address,
+    address,
     offset: 0,
   });
 };
