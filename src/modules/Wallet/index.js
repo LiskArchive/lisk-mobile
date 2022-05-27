@@ -77,7 +77,7 @@ const Wallet = ({
     );
   } else {
     const listElements = transactions.count > 0
-      ? [...transactions.pending, ...transactions.confirmed]
+      ? [...transactions.confirmed]
       : ['emptyState'];
     content = (
       <InfiniteScrollView

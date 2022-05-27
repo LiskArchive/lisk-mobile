@@ -33,11 +33,10 @@ const ThemedApp = () => {
   );
 };
 
-// eslint-disable-next-line no-undef
-const App: () => React$Node = () => {
+const App = () => {
   return (
     <Provider store={store}>
-      <ThemedApp />
+        <ThemedApp />
     </Provider>
   );
 };

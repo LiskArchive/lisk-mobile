@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-/* eslint-disable max-lines */
 /* eslint-disable no-shadow */
 import React, {
   createRef, useEffect, useRef, useState
@@ -51,15 +49,16 @@ const Home = ({
   incognito,
   getNetworkInfo,
   settingsUpdated,
-  route
+  route,
 }) => {
   const {
     transactions,
     loadMore,
-    loading, refresh, refreshing
+    loading,
+    refresh,
+    refreshing,
   } = useTransactionList({ address: account[activeToken].address, activeToken });
   const [hideBtcRemoval, setHideBtcRemoval] = useState(true);
-
   const scrollY = useRef(new Animated.Value(0));
   const scrollView = createRef();
 
@@ -118,7 +117,7 @@ const Home = ({
   let content = null;
   if (transactions.loaded) {
     const listElements = transactions.count > 0
-      ? [...transactions.pending, ...transactions.confirmed]
+      ? [...transactions.confirmed]
       : ['emptyState'];
     content = (
       <InfiniteScrollView

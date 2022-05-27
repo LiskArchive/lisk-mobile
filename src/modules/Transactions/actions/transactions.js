@@ -1,4 +1,4 @@
-import { moduleAssetNameIdMap } from 'modules/Send/constants';
+import { moduleAssetNameIdMap } from 'modules/Transactions/constants';
 import { transactions as transactionsAPI } from 'utilities/api';
 import { tokenMap } from 'constants/tokens';
 import { loadingStarted, loadingFinished } from 'actions/loading';

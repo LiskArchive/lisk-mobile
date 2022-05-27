@@ -13,7 +13,7 @@ import {
   isTransfer,
   isVote,
   isUnlock,
-} from 'modules/Send/constants';
+} from 'modules/Transactions/constants';
 import withTheme from 'components/shared/withTheme';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { B, A, H4, } from 'components/shared/toolBox/typography';
