@@ -19,7 +19,7 @@ export default () => ({
     },
     title: {
       fontFamily: fonts.family.heading,
-      fontSize: fonts.size.h4,
+      fontSize: fonts.size.h3,
       padding: 5
     },
     description: {
