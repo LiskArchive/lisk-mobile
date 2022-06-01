@@ -1,5 +1,4 @@
 {
-  "Look at the front camera to authenticate": "Look at the front camera to authenticate",
   "Sign in manually": "Sign in manually",
   "Signing in...": "Signing in...",
   "1. Creating your account": "1. Creating your account",
@@ -240,8 +239,8 @@
   "available to unlock (only on desktop)": "available to unlock (only on desktop)",
   "Insert public address or a name": "Insert public address or a name",
   "Insert public address": "Insert public address",
-  "Multisignature account details": "Multisignature account details",
   "multisignature": {
+    "account_details": "Multisignature account details",
     "description1": "This is a multisignature account, which allows a group of users to control shared LSK.",
     "description2": "This account requires {{numberOfSignatures}} signatures to create a transaction.",
     "info": {
@@ -264,7 +263,8 @@
   },
   "fingerprint": {
     "unauthorized": "Unauthorized! Please try again.",
-    "placeFinger": "Place your finger over the touch sensor to authenticate."
+    "face_id": "Look at the front camera to authenticate",
+    "touch_id": "Place your finger over the touch sensor to authenticate"
   },
   "bookmarks": {
     "disabled": {
@@ -282,6 +282,16 @@
       "buttons": {
         "gotIt": "Got it",
         "readMore": "Read more"
+      }
+    }
+  },
+  "auth": {
+    "setup": {
+      "password_setup_success_title": "Perfect! You're all set",
+      "password_setup_success_description": "You can now download encrypted secret recovery phrase.",
+      "buttons": {
+        "download": "Download",
+        "password_setup_continue": "Continue to Dashboard"
       }
     }
   }

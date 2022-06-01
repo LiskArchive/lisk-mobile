@@ -107,8 +107,8 @@ class BiometricAuth extends React.Component {
     let pageTitle = t('Choose an authentication method');
     if (busy) {
       pageTitle = sensorType === 'Face ID'
-        ? t('Look at the front camera to authenticate')
-        : t('Place your finger over the touch sensor to authenticate');
+        ? t('fingerprint.face_id')
+        : t('fingerprint.touch_id');
     }
 
     return (

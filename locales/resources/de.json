@@ -1,5 +1,4 @@
 {
-  "Look at the front camera to authenticate": "Schau bitte in die Kamera, um dich anzumelden",
   "Sign in manually": "Manuell anmelden",
   "Signing in...": "Anmelden...",
   "1. Creating your account": "1. Konto wird erstellt",
@@ -239,8 +238,8 @@
   "available to unlock (only on desktop)": "",
   "Insert public address or a name": "",
   "Insert public address": "",
-  "Multisignature account details": "",
   "multisignature": {
+    "account_details": "",
     "description1": "",
     "description2": "",
     "info": {
@@ -262,8 +261,9 @@
     "showLess": ""
   },
   "fingerprint": {
-    "placeFinger": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
-    "unauthorized": "Nicht autorisiert! Nochmal versuchen."
+    "unauthorized": "Nicht autorisiert! Nochmal versuchen.",
+    "touch_id": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
+    "face_id": "Schau bitte in die Kamera, um dich anzumelden"
   },
   "bookmarks": {
     "disabled": {
