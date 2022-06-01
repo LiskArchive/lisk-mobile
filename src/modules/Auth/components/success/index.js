@@ -5,7 +5,7 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import getStyles from './styles';
 
 const SuccessScreen = ({
-  illustration, title, description, styles, onContinue, buttonText, children
+  illustration, title, description, styles, onContinue, buttonText, children, disabled
 }) => <View style={[styles.wrapper, styles.theme.wrapper]} >
     <View style={[styles.container]} >
       <View style={styles.illustration} >
@@ -20,6 +20,7 @@ const SuccessScreen = ({
       title={buttonText}
       style={styles.continueButton}
       onPress={onContinue}
+      disabled={disabled}
     />
   </View>;
 
