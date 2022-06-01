@@ -8,7 +8,7 @@ import SuccessScreen from '../components/success';
 import getStyles from './styles';
 
 const PasswordSetupSuccess = ({ styles }) => <SuccessScreen
-  Illustration={FlowerSuccessSvg}
+  illustration={<FlowerSuccessSvg />}
   title="Perfect! You're all set"
   description="You can now download encrypted secret recovery phrase."
   buttonText="Continue to Dashboard" >
