@@ -29,7 +29,7 @@ class FingerprintOverlay extends React.Component {
     const iconColor = error ? colors.light.burntSieanna : colors.light.blue;
     const message = error
       ? t('fingerprint.unauthorized')
-      : t('fingerprint.placeFinger');
+      : t('fingerprint.touch_id');
     return (
       <BlurOverlay
         ref={ref => {
