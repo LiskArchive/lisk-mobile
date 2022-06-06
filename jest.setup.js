@@ -11,7 +11,8 @@ jest.mock('react-native-appearance', () => ({
 }));
 
 jest.mock('react-native-gesture-handler', () => ({
-  TouchableOpacity: jest.fn().mockImplementation(({ children }) => children)
+  TouchableOpacity: jest.fn().mockImplementation(({ children }) => children),
+  Switch: jest.fn().mockImplementation(() => null)
 }));
 
 jest.mock('react-native/Libraries/Components/Touchable/TouchableOpacity', () => 'TouchableOpacity');

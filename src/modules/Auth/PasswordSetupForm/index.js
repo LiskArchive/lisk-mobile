@@ -26,6 +26,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
       <Text style={[styles.description, styles.theme.description]} >{t('auth.setup.password_setup_description')}</Text>
       <View>
         <Input
+          testID="enter-password"
           innerStyles={{ containerStyle: styles.inputContainer, input: styles.input }}
           label={t('auth.form.enter_password')}
           secureTextEntry
@@ -33,6 +34,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
           value={password}
         />
         <Input
+          testID="confirm-password"
           innerStyles={{ containerStyle: styles.inputContainer, input: styles.input }}
           label={t('auth.form.confirm_password')}
           secureTextEntry
@@ -40,6 +42,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
           value={confirmPassword}
         />
         <Input
+          testID="account-name"
           innerStyles={{ containerStyle: styles.inputContainer, input: styles.input }}
           label={t('auth.form.account_name')}
           onChange={setAccountName}
