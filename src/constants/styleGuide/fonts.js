@@ -25,6 +25,6 @@ export default {
     h4: 19,
     base: 16,
     small: 13,
-    input: 13,
+    input: 14,
   },
 };
