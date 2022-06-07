@@ -1,7 +1,7 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
+import { createThemedStyles } from 'utilities/helpers';
 import ThemeContext from '../../../contexts/theme';
-import { createThemedStyles } from '../../../utilities/helpers';
 
 const getDisplayName = Component =>
   Component.displayName || Component.name || 'Component';

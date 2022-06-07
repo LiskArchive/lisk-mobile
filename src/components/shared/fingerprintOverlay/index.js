@@ -2,9 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 import BlurOverlay from 'react-native-blur-overlay';
 import { translate } from 'react-i18next';
+import { colors } from 'constants/styleGuide';
 import Icon from '../toolBox/icon';
 import { H4, P } from '../toolBox/typography';
-import { colors } from '../../../constants/styleGuide';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -29,7 +29,7 @@ class FingerprintOverlay extends React.Component {
     const iconColor = error ? colors.light.burntSieanna : colors.light.blue;
     const message = error
       ? t('fingerprint.unauthorized')
-      : t('fingerprint.placeFinger');
+      : t('fingerprint.touch_id');
     return (
       <BlurOverlay
         ref={ref => {

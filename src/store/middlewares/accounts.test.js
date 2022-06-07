@@ -1,6 +1,6 @@
+import * as storageUtility from 'utilities/storage';
+import actionTypes from 'modules/Accounts/actionTypes';
 import accountsMiddleware from './accounts';
-import actionTypes from '../../constants/actions';
-import * as storageUtility from '../../utilities/storage';
 
 describe('Middleware: Accounts', () => {
   const accountA = {

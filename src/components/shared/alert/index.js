@@ -1,9 +1,9 @@
 import React from 'react';
 import DropdownAlert from 'react-native-dropdownalert';
+import { colors } from 'constants/styleGuide';
+import DropDownHolder from 'utilities/alert';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import { colors } from '../../../constants/styleGuide';
-import DropDownHolder from '../../../utilities/alert';
 
 const Alert = ({ styles }) => (
   <DropdownAlert

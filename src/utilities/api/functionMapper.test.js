@@ -1,4 +1,4 @@
-import { tokenMap } from '../../constants/tokens';
+import { tokenMap } from 'constants/tokens';
 import getMappedFunction from './functionMapper';
 
 describe('api/functionMapper', () => {

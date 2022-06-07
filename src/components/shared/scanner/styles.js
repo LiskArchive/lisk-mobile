@@ -1,11 +1,11 @@
-import { themes, colors } from '../../../constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 import {
   deviceHeight,
   deviceWidth,
   viewportHeight,
   headerHeight,
   deviceType,
-} from '../../../utilities/device';
+} from 'utilities/device';
 
 const height = deviceHeight();
 const width = deviceWidth();

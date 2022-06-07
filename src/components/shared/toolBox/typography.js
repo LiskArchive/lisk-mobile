@@ -2,32 +2,42 @@ import React from 'react';
 import { Text } from 'react-native';
 import theme from './styles';
 
-export const H1 = ({ children, style, onPress }) => (
-  <Text style={[theme.h1, style]} onPress={onPress}>
+export const H1 = ({
+  children, style, onPress, ...props
+}) => (
+  <Text style={[theme.h1, style]} onPress={onPress} {...props}>
     {children}
   </Text>
 );
 
-export const H2 = ({ children, style, onPress }) => (
-  <Text style={[theme.h2, style]} onPress={onPress}>
+export const H2 = ({
+  children, style, onPress, ...props
+}) => (
+  <Text style={[theme.h2, style]} onPress={onPress} {...props}>
     {children}
   </Text>
 );
 
-export const H3 = ({ children, style, onPress }) => (
-  <Text style={[theme.h3, style]} onPress={onPress}>
+export const H3 = ({
+  children, style, onPress, ...props
+}) => (
+  <Text style={[theme.h3, style]} onPress={onPress} {...props}>
     {children}
   </Text>
 );
 
-export const H4 = ({ children, style, onPress }) => (
-  <Text style={[theme.h4, style]} onPress={onPress}>
+export const H4 = ({
+  children, style, onPress, ...props
+}) => (
+  <Text style={[theme.h4, style]} onPress={onPress} {...props}>
     {children}
   </Text>
 );
 
-export const P = ({ children, style, onPress }) => (
-  <Text style={[theme.p, style]} onPress={onPress}>
+export const P = ({
+  children, style, onPress, ...props
+}) => (
+  <Text style={[theme.p, style]} onPress={onPress} {...props}>
     {children}
   </Text>
 );

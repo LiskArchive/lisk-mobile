@@ -1,5 +1,5 @@
 import { Platform, Dimensions } from 'react-native';
-import { colors, themes } from '../../../constants/styleGuide';
+import { colors, themes } from 'constants/styleGuide';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;

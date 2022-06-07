@@ -1,4 +1,4 @@
-import { colors, themes } from '../../../constants/styleGuide';
+import { colors, themes } from 'constants/styleGuide';
 
 export default () => ({
   common: {

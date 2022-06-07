@@ -1,5 +1,5 @@
+import actionTypes from 'constants/actions';
 import loading from './loading';
-import actionTypes from '../../constants/actions';
 
 describe('Reducers: Loading', () => {
   let state;

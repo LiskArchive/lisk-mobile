@@ -2,12 +2,12 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 import ModalBox from 'react-native-modalbox';
 import { translate } from 'react-i18next';
+import { boxes, colors, themes } from 'constants/styleGuide';
+import { deviceHeight, headerHeight } from 'utilities/device';
+import ModalHolder from 'utilities/modal';
 import { B } from '../toolBox/typography';
-import { boxes, colors, themes } from '../../../constants/styleGuide';
 import withTheme from '../withTheme';
-import { deviceHeight, headerHeight } from '../../../utilities/device';
 import getStyles from './styles';
-import ModalHolder from '../../../utilities/modal';
 import Icon from '../toolBox/icon';
 
 class Modal extends React.Component {

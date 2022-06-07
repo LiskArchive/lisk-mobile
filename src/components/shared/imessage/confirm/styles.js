@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { boxes, colors, fonts } from '../../../../constants/styleGuide';
+import { boxes, colors, fonts } from 'constants/styleGuide';
 
 export default StyleSheet.create({
   container: {
