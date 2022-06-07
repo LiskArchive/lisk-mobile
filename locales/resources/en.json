@@ -300,7 +300,12 @@
     "form": {
       "enter_password": "Enter password",
       "confirm_password": "Confirm your password",
-      "account_name": "Account name (optional)"
+      "account_name": "Account name (optional)",
+      "password_setup_continue": "Continue to Dashboard",
+      "errors": {
+        "password_error": "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character",
+        "confirm_password_error": "Confirm that passwords match"
+      }
     }
   }
 }

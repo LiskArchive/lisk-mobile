@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { translate } from 'react-i18next';
@@ -9,19 +9,38 @@ import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
 import getStyles from './styles';
+import { passwordValidator } from '../validators';
 
 const PasswordSetupForm = ({ navigation, styles, t }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountName, setAccountName] = useState('');
   const [accepted, setAccepted] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
+  // eslint-disable-next-line consistent-return
+  const submitForm = () => {
+    if (!passwordValidator(password)) {
+      return setPasswordError('auth.form.errors.password_error');
+    }
+    if (password !== confirmPassword) {
+      return setConfirmPasswordError('auth.form.errors.confirm_password_error');
+    }
+    // TODO: Call function to add account and navigate to next screen
+  };
+
+  useEffect(() => {
+    setPasswordError('');
+    setConfirmPasswordError('');
+  }, [password, confirmPassword]);
 
   return <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
-      <HeaderBackButton
-        title="auth.setup.password_setup_title"
-        onRightPress={navigation.goBack}
-        containerStyle={styles.header}
-      />
+    <HeaderBackButton
+      title="auth.setup.password_setup_title"
+      onRightPress={navigation.goBack}
+      containerStyle={styles.header}
+    />
     <ScrollView contentContainerStyle={styles.container} >
       <Text style={[styles.description, styles.theme.description]} >{t('auth.setup.password_setup_description')}</Text>
       <View>
@@ -32,6 +51,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
           secureTextEntry
           onChange={setPassword}
           value={password}
+          error={passwordError && t(passwordError)}
         />
         <Input
           testID="confirm-password"
@@ -40,6 +60,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
           secureTextEntry
           onChange={setConfirmPassword}
           value={confirmPassword}
+          error={confirmPasswordError && t(confirmPasswordError)}
         />
         <Input
           testID="account-name"
@@ -65,7 +86,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
       </View>
       <PrimaryButton
         title={t('auth.setup.buttons.save_account')}
-        onPress={() => { }}
+        onPress={submitForm}
         disabled={!accepted}
       />
     </View>

@@ -283,5 +283,28 @@
         "readMore": ""
       }
     }
+  },
+  "auth": {
+    "setup": {
+      "password_setup_title": "",
+      "password_setup_description": "",
+      "password_setup_success_title": "",
+      "password_setup_success_description": "",
+      "buttons": {
+        "download": "",
+        "password_setup_continue": "",
+        "save_account": ""
+      }
+    },
+    "form": {
+      "enter_password": "",
+      "confirm_password": "",
+      "account_name": "",
+      "password_setup_continue": "",
+      "errors": {
+        "password_error": "",
+        "confirm_password_error": ""
+      }
+    }
   }
 }
