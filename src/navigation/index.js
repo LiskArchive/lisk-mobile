@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 
 import { colors } from 'constants/styleGuide';
-import SignIn from 'modules/Auth/SignIn';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import { TransactionDetails } from 'modules/Accounts/components/TransactionDetails';
@@ -20,6 +19,7 @@ import Intro from 'components/screens/intro';
 import AppNavigator from './appNavigator';
 
 import navigationOptions from './navigationOptions';
+import AuthMethod from '../modules/Auth/AuthMethod';
 
 const MainStack = createStackNavigator();
 
@@ -57,7 +57,7 @@ const MainNavigator = () => {
             component={Register}
             options={navigationOptions.Register}
           />
-          <MainStack.Screen name="SignIn" component={SignIn} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="SignIn" component={AuthMethod} options={navigationOptions.SignIn} />
           <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
           <MainStack.Screen name="Main" component={AppNavigator} options={navigationOptions.NoHeader} />
           <MainStack.Screen
