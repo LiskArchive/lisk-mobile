@@ -291,6 +291,8 @@
       "password_setup_description": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
       "password_setup_success_title": "Perfect! You're all set",
       "password_setup_success_description": "You can now download encrypted secret recovery phrase.",
+      "secret_phrase": "Secret recovery phrase",
+      "restore_file": "Restore from file",
       "buttons": {
         "download": "Download",
         "password_setup_continue": "Continue to Dashboard",
