@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
-const AuthTypeItem = ({ illustration, label, styles }) => <View style={styles.container} >
+const AuthTypeItem = ({
+  illustration, label, styles, onPress
+}) => <TouchableOpacity style={styles.container} onPress={onPress} >
   <View style={styles.illustration} >
     {illustration}
   </View>
@@ -12,6 +14,6 @@ const AuthTypeItem = ({ illustration, label, styles }) => <View style={styles.co
       {label}
     </Text>
   </View>
-</View>;
+</TouchableOpacity>;
 
 export default withTheme(AuthTypeItem, getStyles());

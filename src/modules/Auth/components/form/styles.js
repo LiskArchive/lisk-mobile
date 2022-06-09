@@ -5,7 +5,6 @@ export default () => ({
   common: {
     container: {
       height: '100%',
-      paddingTop: isSmallDevice ? 140 : 180,
     },
     containerSimplified: {
       height: '100%',
@@ -25,7 +24,7 @@ export default () => ({
     passphraseRevealButton: {
       position: 'absolute',
       zIndex: 99,
-      left: 85,
+      left: 155,
       top: 15,
     },
     scanButton: {
