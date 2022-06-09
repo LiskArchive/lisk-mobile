@@ -7,6 +7,15 @@ export default () => ({
       paddingRight: 20,
       paddingTop: 20,
     },
+    inputRow: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    inputIcon: {
+      position: 'absolute',
+      right: 5,
+      padding: 10,
+    },
     inputLabel: {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,

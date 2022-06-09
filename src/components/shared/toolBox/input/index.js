@@ -1,13 +1,20 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import {
+  View, Text, TextInput, TouchableOpacity
+} from 'react-native';
 import { themes } from 'constants/styleGuide';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import EyeSvg from '../../../../assets/svgs/EyeSvg';
 
 class Input extends React.Component {
   state = {
     isFocused: false,
+    secureTextEntry: this.props.secureTextEntry
   };
+
+  toggleSecureTextEntry = () =>
+    this.setState(prevState => ({ secureTextEntry: !prevState.secureTextEntry }))
 
   onFocus = e => {
     this.setState({ isFocused: true });
@@ -44,7 +51,7 @@ class Input extends React.Component {
       testID,
       accessibilityLabel,
       returnKeyType,
-      placeholderTextColor
+      placeholderTextColor,
     } = this.props;
 
     let { keyboardAppearance } = this.props;
@@ -79,7 +86,7 @@ class Input extends React.Component {
             {label}
           </Text>
         ) : null}
-
+        <View style={styles.inputRow} >
         <TextInput
           testID={testID}
           style={inputStyle}
@@ -95,12 +102,18 @@ class Input extends React.Component {
           autoCorrect={autoCorrect}
           onFocus={this.onFocus}
           allowFontScaling={false}
-          secureTextEntry={secureTextEntry}
+          secureTextEntry={this.state.secureTextEntry}
           onBlur={this.onBlur}
           placeholder={placeholder}
           placeholderTextColor={placeholderTextColor}
           accessibilityLabel={accessibilityLabel}
         />
+          {secureTextEntry && <TouchableOpacity
+            onPress={this.toggleSecureTextEntry}
+            style={styles.inputIcon} >
+            <EyeSvg />
+          </TouchableOpacity>}
+        </View>
 
         {error ? (
           <View style={styles.errorMessageContainer}>

@@ -287,11 +287,24 @@
   },
   "auth": {
     "setup": {
+      "password_setup_title": "Set up device password",
+      "password_setup_description": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
       "password_setup_success_title": "Perfect! You're all set",
       "password_setup_success_description": "You can now download encrypted secret recovery phrase.",
       "buttons": {
         "download": "Download",
-        "password_setup_continue": "Continue to Dashboard"
+        "password_setup_continue": "Continue to Dashboard",
+        "save_account": "Save account"
+      }
+    },
+    "form": {
+      "enter_password": "Enter password",
+      "confirm_password": "Confirm your password",
+      "account_name": "Account name (optional)",
+      "password_setup_continue": "Continue to Dashboard",
+      "errors": {
+        "password_error": "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character",
+        "confirm_password_error": "Confirm that passwords match"
       }
     }
   }
