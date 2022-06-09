@@ -26,6 +26,7 @@ const AuthMethod = ({
   styles,
   route,
   t,
+  navigation
 }) => {
   const signOut = route.params?.signOut;
   const dispatch = useDispatch();
@@ -44,8 +45,8 @@ const AuthMethod = ({
       <View style={[styles.container]}>
         <Splash animate={!signOut} showSimplifiedView={false} />
         <View>
-          <AuthTypeItem illustration={<PassphraseSvg />} label={t('auth.setup.secret_phrase')} />
-          <AuthTypeItem illustration={<UploadSvg />} label={t('auth.setup.restore_file')} />
+          <AuthTypeItem illustration={<PassphraseSvg />} label={t('auth.setup.secret_phrase')} onPress={() => navigation.navigate('SecretRecoveryPhrase')} />
+          <AuthTypeItem illustration={<UploadSvg />} label={t('auth.setup.restore_file')} onPress={() => navigation.navigate('SecretRecoveryPhrase')} />
         </View>
         <CreateAccount />
       </View>

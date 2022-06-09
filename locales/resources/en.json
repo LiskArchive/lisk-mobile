@@ -1,4 +1,10 @@
 {
+  "commons": {
+    "secret_recovery_phrase": "Secret recovery phrase",
+    "buttons": {
+      "continue": "Continue"
+    }
+  },
   "Sign in manually": "Sign in manually",
   "Signing in...": "Signing in...",
   "1. Creating your account": "1. Creating your account",
@@ -69,7 +75,6 @@
   "No internet connection!": "No internet connection!",
   "Not confirmed yet.": "Not confirmed yet.",
   "Optional: add a label to save this address for the future.": "Optional: add a label to save this address for the future.",
-  "Passphrase": "Passphrase",
   "Passphrase verification": "Passphrase verification",
   "Passphrase will be the only option to access your account.": "Passphrase will be the only option to access your account.",
   "Pending confirmation": "Pending confirmation",

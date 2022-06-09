@@ -39,7 +39,7 @@ import {
 } from '../../Settings/actions';
 import getStyles from './styles';
 import Splash from './splash';
-import Form from './form';
+import Form from '../components/form';
 import BiometricAuth from './biometricAuth';
 
 // there is a warning in RNOS module. remove this then that warning is fixed

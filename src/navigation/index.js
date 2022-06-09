@@ -20,6 +20,8 @@ import AppNavigator from './appNavigator';
 
 import navigationOptions from './navigationOptions';
 import AuthMethod from '../modules/Auth/AuthMethod';
+import SignIn from '../modules/Auth/SignIn';
+import SecretRecoveryPhrase from '../modules/Auth/SecretRecoveryPhrase';
 
 const MainStack = createStackNavigator();
 
@@ -51,13 +53,14 @@ const MainNavigator = () => {
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={themeColors}>
-        <MainStack.Navigator initialRouteName="SignIn">
+        <MainStack.Navigator initialRouteName="AuthMethod">
           <MainStack.Screen
             name="Register"
             component={Register}
             options={navigationOptions.Register}
           />
-          <MainStack.Screen name="SignIn" component={AuthMethod} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="AuthMethod" component={AuthMethod} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="SecretRecoveryPhrase" component={SecretRecoveryPhrase} options={navigationOptions.SignIn} />
           <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
           <MainStack.Screen name="Main" component={AppNavigator} options={navigationOptions.NoHeader} />
           <MainStack.Screen
