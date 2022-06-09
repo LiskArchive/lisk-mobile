@@ -15,7 +15,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountName, setAccountName] = useState('');
-  const [accepted, setAccepted] = useState(false);
+  const [isAgreed, setIsAgreed] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
@@ -75,8 +75,8 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
       <View style={styles.actionContainer} >
         <View style={styles.switch} >
           <Switch
-            value={accepted}
-            onValueChange={setAccepted}
+            value={isAgreed}
+            onValueChange={setIsAgreed}
             trackColor={{ true: colors.light.ultramarineBlue }}
           />
         </View>
@@ -87,7 +87,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
       <PrimaryButton
         title={t('auth.setup.buttons.save_account')}
         onPress={submitForm}
-        disabled={!accepted}
+        disabled={!isAgreed}
       />
     </View>
   </SafeAreaView>;
