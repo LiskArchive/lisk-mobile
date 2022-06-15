@@ -4,7 +4,7 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { translate } from 'react-i18next';
 import SplashScreen from 'react-native-splash-screen';
 import withTheme from 'components/shared/withTheme';
@@ -26,9 +26,10 @@ const AuthMethod = ({
   styles,
   route,
   t,
-  navigation
+  navigation,
 }) => {
   const signOut = route.params?.signOut;
+  const settings = useSelector(state => state.settings);
   const dispatch = useDispatch();
 
   const init = () => {
@@ -36,8 +37,12 @@ const AuthMethod = ({
   };
 
   useEffect(() => {
-    dispatch(settingsRetrieved());
-    init();
+    if (settings.showedIntro) {
+      dispatch(settingsRetrieved());
+      init();
+    } else {
+      navigation.push('Intro');
+    }
   }, []);
 
   return (
@@ -45,8 +50,8 @@ const AuthMethod = ({
       <View style={[styles.container]}>
         <Splash animate={!signOut} showSimplifiedView={false} />
         <View>
-          <AuthTypeItem illustration={<PassphraseSvg />} label={t('auth.setup.secret_phrase')} onPress={() => navigation.navigate('SecretRecoveryPhrase')} />
-          <AuthTypeItem illustration={<UploadSvg />} label={t('auth.setup.restore_file')} onPress={() => navigation.navigate('SecretRecoveryPhrase')} />
+          <AuthTypeItem illustration={<PassphraseSvg />} label={t('auth.setup.secret_phrase')} onPress={() => navigation.navigate('SecretRecoveryPhrase')} testID="secret-phrase" />
+          <AuthTypeItem illustration={<UploadSvg />} label={t('auth.setup.restore_file')} onPress={() => navigation.navigate('SecretRecoveryPhrase')} testID="restore-from-file" />
         </View>
         <CreateAccount />
       </View>
