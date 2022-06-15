@@ -15,8 +15,6 @@ import getStyles from './styles';
 
 const CameraOverlay = ({
   styles,
-  // photoPermission,
-  // toggleGallery,
   safeArea,
   containerStyles,
   t,
@@ -39,25 +37,6 @@ const CameraOverlay = ({
         {t('Scan a QR code.')}
       </P>
     </View>
-    {/* <TouchableHighlight
-      underlayColor="transparent"
-      onPress={() => {
-        if (
-          photoPermission === 'authorized' ||
-          (photoPermission === 'undetermined' && Platform.OS === 'ios')
-        ) {
-          toggleGallery();
-        } else {
-          OpenAppSettings.open();
-        }
-      }}
-      style={[
-        styles.galleryButton,
-        photoPermission ? styles.galleryEnabled : styles.galleryDisabled,
-      ]}
-    >
-      <Icon size={18} color={colors.light.white} name="gallery" />
-    </TouchableHighlight> */}
   </View>
 );
 
