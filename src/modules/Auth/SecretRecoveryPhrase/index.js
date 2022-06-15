@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable no-shadow */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Platform,
   Keyboard,
@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { translate } from 'react-i18next';
 import withTheme from 'components/shared/withTheme';
+import Scanner from 'components/shared/scanner';
 import { deviceHeight } from 'utilities/device';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
@@ -25,6 +26,8 @@ const SecretRecoveryPhrase = ({
   const [keyboardIsOpen, setKeyboardIsOpen] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const signOut = route.params?.signOut;
+  const scanner = useRef();
+
   const onFormSubmission = (passphrase) => {
     console.log(passphrase);
     navigation.navigate('PasswordSetupForm');
@@ -45,6 +48,10 @@ const SecretRecoveryPhrase = ({
     Keyboard.addListener('keyboardDidHide', () => setKeyboardIsOpen(false));
   };
 
+  const onQRCodeRead = value => {
+    onFormSubmission(value);
+  };
+
   useEffect(() => {
     addKeyboardListeners();
     return () => {
@@ -52,12 +59,29 @@ const SecretRecoveryPhrase = ({
     };
   }, []);
 
+  const scanQrCode = () => {
+    scanner.current.toggleCamera();
+  };
+
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
         title="auth.setup.add_account"
         onPress={navigation.goBack}
         containerStyle={styles.header}
+      />
+      <Scanner
+        ref={scanner}
+        containerStyles={{
+          cameraRoll: styles.cameraRoll,
+          cameraOverlay: styles.cameraOverlay,
+        }}
+        fullScreen={true}
+        navigation={navigation}
+        readFromCameraRoll={false}
+        onQRCodeRead={onQRCodeRead}
+        permissionDialogTitle={t('Permission to use camera')}
+        permissionDialogMessage={t('Lisk needs to connect to your camera')}
       />
       <View style={styles.container} >
         <P style={[styles.description, styles.theme.description]} >{t('auth.setup.add_account_description')}</P>
@@ -67,6 +91,7 @@ const SecretRecoveryPhrase = ({
           showBackButton={false}
           signIn={onFormSubmission}
           showSimplifiedView={showSimplifiedView()}
+          scanQrCode={scanQrCode}
         />
       </View>
     </SafeAreaView>

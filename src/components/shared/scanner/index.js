@@ -1,9 +1,8 @@
 /* eslint-disable max-statements */
 import React, {
-  Fragment, useEffect, useState, forwardRef, useImperativeHandle
+  Fragment, useEffect, useState, forwardRef, useImperativeHandle,
 } from 'react';
-import { AppState } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { AppState, SafeAreaView } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
@@ -17,7 +16,6 @@ import getStyles from './styles';
 const Scanner = forwardRef(({
   styles,
   containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
-  // readFromCameraRoll,
   onQRCodeRead,
   onClose,
   isCameraOpen,

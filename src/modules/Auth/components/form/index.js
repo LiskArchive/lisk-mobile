@@ -1,10 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
 import Input from 'components/shared/toolBox/input';
 import { ScrollView } from 'react-native-gesture-handler';
 import { validatePassphrase } from 'modules/Auth/utils';
-import Scanner from 'components/shared/scanner';
 import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
@@ -15,7 +14,7 @@ const devDefaultPass = process.env.passphrase || '';
 
 const Form = ({
   t,
-  navigation,
+  scanQrCode,
   lng,
   signIn,
   styles,
@@ -25,8 +24,6 @@ const Form = ({
     value: devDefaultPass,
     validity: [],
   });
-
-  const scanner = useRef();
 
   const onInputChange = (value) => {
     setPassphrase(
@@ -67,16 +64,11 @@ const Form = ({
     }
   };
 
-  const onQRCodeRead = value => {
-    onInputChange(value);
-    onFormSubmission(value);
-  };
-
   const onTogglePassphraseReveal = () =>
     setShowPassword(prevState => !prevState);
 
   const toggleCamera = () => {
-    scanner.current.toggleCamera();
+    scanQrCode();
     Keyboard.dismiss();
   };
 
@@ -85,20 +77,6 @@ const Form = ({
     testID="secretPhraseForm"
   >
     <ScrollView contentContainerStyle={styles.container} >
-      <Scanner
-        ref={scanner}
-        containerStyles={{
-          cameraRoll: styles.cameraRoll,
-          cameraOverlay: styles.cameraOverlay,
-        }}
-        fullScreen={true}
-        navigation={navigation}
-        readFromCameraRoll={false}
-        onQRCodeRead={onQRCodeRead}
-        permissionDialogTitle={t('Permission to use camera')}
-        permissionDialogMessage={t('Lisk needs to connect to your camera')}
-      />
-
       <Input
         testID="signInPassphraseInput"
         noTheme={true}
