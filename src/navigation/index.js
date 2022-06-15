@@ -22,6 +22,7 @@ import navigationOptions from './navigationOptions';
 import AuthMethod from '../modules/Auth/AuthMethod';
 import SignIn from '../modules/Auth/SignIn';
 import SecretRecoveryPhrase from '../modules/Auth/SecretRecoveryPhrase';
+import PasswordSetupForm from '../modules/Auth/PasswordSetupForm';
 
 const MainStack = createStackNavigator();
 
@@ -61,6 +62,8 @@ const MainNavigator = () => {
           />
           <MainStack.Screen name="AuthMethod" component={AuthMethod} options={navigationOptions.SignIn} />
           <MainStack.Screen name="SecretRecoveryPhrase" component={SecretRecoveryPhrase} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="PasswordSetupForm" component={PasswordSetupForm} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="SignIn" component={SignIn} options={navigationOptions.SignIn} />
           <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
           <MainStack.Screen name="Main" component={AppNavigator} options={navigationOptions.NoHeader} />
           <MainStack.Screen

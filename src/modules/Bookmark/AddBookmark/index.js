@@ -147,7 +147,7 @@ const AddToBookmark = ({
 
   return <View style={[styles.wrapper, styles.theme.wrapper]}>
     <Scanner
-      reference={scanner}
+      ref={scanner}
       navigation={navigation}
       readFromCameraRoll={true}
       onQRCodeRead={onQRCodeRead}

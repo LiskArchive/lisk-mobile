@@ -2,15 +2,14 @@ import React, { useRef, useState } from 'react';
 import { View, Keyboard } from 'react-native';
 import { translate } from 'react-i18next';
 import Input from 'components/shared/toolBox/input';
+import { ScrollView } from 'react-native-gesture-handler';
 import { validatePassphrase } from 'modules/Auth/utils';
-import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScrollView';
 import Scanner from 'components/shared/scanner';
-import { IconButton } from 'components/shared/toolBox/button';
+import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import DropDownHolder from 'utilities/alert';
 import getStyles from './styles';
-import CreateAccount from '../createAccount';
 
 const devDefaultPass = process.env.passphrase || '';
 
@@ -19,7 +18,6 @@ const Form = ({
   navigation,
   lng,
   signIn,
-  showSimplifiedView,
   styles,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -41,13 +39,8 @@ const Form = ({
     );
   };
 
-  const goToRegistration = () => {
-    Keyboard.dismiss();
-    navigation.navigate({ name: 'Register' });
-  };
-
-  const onFormSubmission = (passphrase) => {
-    const normalizedPassphrase = passphrase.trim();
+  const onFormSubmission = (secretRecoveryPhrase = '') => {
+    const normalizedPassphrase = secretRecoveryPhrase.trim();
     const validity = validatePassphrase(normalizedPassphrase);
 
     if (!validity.length) {
@@ -88,19 +81,12 @@ const Form = ({
   };
 
   return <View
-    style={
-      showSimplifiedView ? styles.containerSimplified : styles.container
-    }
+    style={styles.container}
     testID="secretPhraseForm"
   >
-    <KeyboardAwareScrollView
-      noTheme={true}
-      button={t('commons.buttons.continue')}
-      buttonTestID="continueButton"
-      onSubmit={onFormSubmission}
-    >
+    <ScrollView contentContainerStyle={styles.container} >
       <Scanner
-        reference={scanner}
+        ref={scanner}
         containerStyles={{
           cameraRoll: styles.cameraRoll,
           cameraOverlay: styles.cameraOverlay,
@@ -123,6 +109,7 @@ const Form = ({
             styles.theme.input,
             showPassword ? styles.inputRevealed : null,
           ],
+          containerStyle: styles.inputContainer,
           inputLabel: [styles.label, styles.theme.label]
         }}
         value={passphrase.value}
@@ -150,7 +137,12 @@ const Form = ({
         iconSize={16}
         color={colors.light.ultramarineBlue}
       />
-    </KeyboardAwareScrollView>
+    </ScrollView>
+    <PrimaryButton
+      testID="continue-button"
+      title={t('commons.buttons.continue')}
+      onPress={() => onFormSubmission(passphrase.value)}
+    />
   </View>;
 };
 

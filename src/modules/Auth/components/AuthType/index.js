@@ -4,8 +4,8 @@ import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
 const AuthTypeItem = ({
-  illustration, label, styles, onPress
-}) => <TouchableOpacity style={styles.container} onPress={onPress} >
+  illustration, label, styles, onPress, testID
+}) => <TouchableOpacity style={styles.container} onPress={onPress} testID={testID} >
   <View style={styles.illustration} >
     {illustration}
   </View>

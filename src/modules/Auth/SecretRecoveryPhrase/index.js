@@ -2,16 +2,17 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import {
-  View,
   Platform,
   Keyboard,
   SafeAreaView,
+  View
 } from 'react-native';
 import { translate } from 'react-i18next';
 import withTheme from 'components/shared/withTheme';
 import { deviceHeight } from 'utilities/device';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { P } from 'components/shared/toolBox/typography';
 import getStyles from './styles';
-import Splash from '../components/splash';
 import Form from '../components/form';
 
 // eslint-disable-next-line max-statements
@@ -19,12 +20,14 @@ const SecretRecoveryPhrase = ({
   styles,
   route,
   navigation,
+  t,
 }) => {
   const [keyboardIsOpen, setKeyboardIsOpen] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const signOut = route.params?.signOut;
   const onFormSubmission = (passphrase) => {
     console.log(passphrase);
+    navigation.navigate('PasswordSetupForm');
   };
 
   const showSimplifiedView = () => {
@@ -51,14 +54,21 @@ const SecretRecoveryPhrase = ({
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+      <HeaderBackButton
+        title="auth.setup.add_account"
+        onPress={navigation.goBack}
+        containerStyle={styles.header}
+      />
+      <View style={styles.container} >
+        <P style={[styles.description, styles.theme.description]} >{t('auth.setup.add_account_description')}</P>
         <Form
           animate={!signOut}
           navigation={navigation}
-          toggleView={() => { }}
           showBackButton={false}
           signIn={onFormSubmission}
           showSimplifiedView={showSimplifiedView()}
         />
+      </View>
     </SafeAreaView>
   );
 };

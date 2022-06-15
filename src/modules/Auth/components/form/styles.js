@@ -1,22 +1,19 @@
 import { colors, fonts, themes } from 'constants/styleGuide';
-import { deviceType, isSmallDevice } from 'utilities/device';
+import { deviceType } from 'utilities/device';
 
 export default () => ({
   common: {
     container: {
-      height: '100%',
-    },
-    containerSimplified: {
-      height: '100%',
-      paddingTop: isSmallDevice ? 50 : 120,
-    },
-    paddingBottom: {
-      paddingBottom: isSmallDevice ? 0 : 40,
+      flex: 1,
     },
     input: {
       fontFamily: fonts.family.passphrase,
       textAlign: 'justify',
       color: colors.dark.whiteSmoke
+    },
+    inputContainer: {
+      paddingLeft: 0,
+      paddingRight: 0,
     },
     inputRevealed: {
       fontFamily: fonts.family.passphraseText,
@@ -24,7 +21,7 @@ export default () => ({
     passphraseRevealButton: {
       position: 'absolute',
       zIndex: 99,
-      left: 155,
+      left: 165,
       top: 15,
     },
     scanButton: {

@@ -10,6 +10,9 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
 import getStyles from './styles';
 import { passwordValidator } from '../validators';
+import PasswordSetupSuccess from '../PasswordSetupSuccess';
+
+const jsonData = { dummy: 'Dummy data' };
 
 const PasswordSetupForm = ({ navigation, styles, t }) => {
   const [password, setPassword] = useState('');
@@ -18,6 +21,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
   const [isAgreed, setIsAgreed] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   // eslint-disable-next-line consistent-return
   const submitForm = () => {
@@ -27,6 +31,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
     if (password !== confirmPassword) {
       return setConfirmPasswordError('auth.form.errors.confirm_password_error');
     }
+    setIsSuccess(true);
     // TODO: Call function to add account and navigate to next screen
   };
 
@@ -35,10 +40,12 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
     setConfirmPasswordError('');
   }, [password, confirmPassword]);
 
-  return <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
+  return isSuccess
+    ? <PasswordSetupSuccess encryptedJson={jsonData} />
+    : <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
     <HeaderBackButton
       title="auth.setup.password_setup_title"
-      onRightPress={navigation.goBack}
+      onPress={navigation.goBack}
       containerStyle={styles.header}
     />
     <ScrollView contentContainerStyle={styles.container} >
