@@ -18,6 +18,7 @@ export default () => ({
     },
     bottom: {
       padding: boxes.boxPadding,
+      marginBottom: boxes.boxPadding,
     },
     button: {
       width: '100%',

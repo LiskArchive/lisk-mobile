@@ -51,7 +51,7 @@ const ManageAccount = ({
           iconStyle={styles.icon}
           iconSize={20}
           titleStyle={[styles.theme.remove]}
-          title={t('auth.setup.buttons.add_another_account')}
+          title={t('auth.setup.buttons.remove_account')}
           style={[styles.button, styles.outline]}
         />
       </View>

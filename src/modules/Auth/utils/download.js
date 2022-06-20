@@ -7,8 +7,8 @@ export const downloadJSON = async (data, cb) => {
   try {
     let path = `${RNFS.CachesDirectoryPath}/encrypted_secret_recovery_phrase.json`;
     if (Platform.OS === 'android') {
-      path = `${RNFS.DownloadDirectoryPath}/encrypted_secret_recovery_phrase.json`;
       await Permissions.request(Permissions.PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
+      path = `${RNFS.DownloadDirectoryPath}/encrypted_secret_recovery_phrase.json`;
       await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
     } else {
       await RNFS.writeFile(path, JSON.stringify(data), 'utf8');

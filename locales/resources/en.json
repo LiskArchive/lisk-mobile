@@ -306,7 +306,8 @@
         "download": "Download",
         "password_setup_continue": "Continue to Dashboard",
         "save_account": "Save account",
-        "add_another_account": "Add another account"
+        "add_another_account": "Add another account",
+        "remove_account": "Remove an account"
     }
     },
     "form": {
