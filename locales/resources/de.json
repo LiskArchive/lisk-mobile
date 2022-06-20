@@ -288,6 +288,7 @@
     "setup": {
       "add_account": "",
       "manage_accounts": "",
+      "decrypt_passphrase": "",
       "add_account_description": "",
       "secret_phrase": "",
       "restore_file": "",

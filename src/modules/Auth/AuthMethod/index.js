@@ -49,13 +49,10 @@ const AuthMethod = ({
 
   const selectEncryptedJSON = async () => {
     try {
-      const file = await DocumentPicker.pickSingle({ type: [DocumentPicker.types.allFiles] });
+      const file = await DocumentPicker.pickSingle({ type: DocumentPicker.types.allFiles });
       const data = await RNFS.readFile(file.uri);
       console.log(data);
-      /** TODO: Decrypt JSON file before navigating to Passphrase Screen
-       * and pass passphrase to next screen
-      */
-      navigation.navigate('SecretRecoveryPhrase');
+      navigation.navigate('DecryptPhrase', { title: 'auth.setup.decrypt_passphrase', address: 'lskqzpfr3uq8bm2jee5dkv4ns79uuswjzc9bbpezu', successRoute: 'SecretRecoveryPhrase' });
     } catch (error) {
       console.log(error);
     }

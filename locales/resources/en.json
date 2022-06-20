@@ -294,6 +294,7 @@
     "setup": {
       "add_account": "Add account",
       "manage_accounts": "Manage accounts",
+      "decrypt_passphrase": "Decrypt your secret recovery phrase",
       "add_account_description": "Enter your secret recovery phrase to manage your account",
       "password_setup_title": "Set up device password",
       "password_setup_description": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
