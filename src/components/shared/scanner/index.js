@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import React, {
-  Fragment, useEffect, useState, forwardRef, useImperativeHandle,
+  Fragment, useEffect, useState, forwardRef, useImperativeHandle, useCallback,
 } from 'react';
 import { AppState, SafeAreaView } from 'react-native';
 import Permissions from 'react-native-permissions';
@@ -40,11 +40,11 @@ const Scanner = forwardRef(({
     setPhoto(prevState => ({ ...prevState, permissions: permissions.photo }));
   };
 
-  const checkPermissions = () => {
+  const checkPermissions = useCallback(() => {
     Permissions.checkMultiple(['camera', 'photo']).then(response => {
       setPermissions(response);
     });
-  };
+  }, []);
 
   const readFromPhotoGallery = items => {
     setCamera(prevState => ({ ...prevState, visible: false }));
@@ -62,7 +62,7 @@ const Scanner = forwardRef(({
     }
   };
 
-  const toggleCamera = () => {
+  const toggleCamera = useCallback(() => {
     if (typeof isCameraOpen === 'function') {
       isCameraOpen(!camera.visible);
     }
@@ -71,7 +71,7 @@ const Scanner = forwardRef(({
     if (!camera.visible && typeof onClose === 'function') {
       onClose();
     }
-  };
+  }, []);
 
   useImperativeHandle(ref, () => ({ toggleCamera }));
 
