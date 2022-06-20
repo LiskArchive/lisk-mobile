@@ -286,6 +286,11 @@
   },
   "auth": {
     "setup": {
+      "add_account": "",
+      "manage_accounts": "",
+      "add_account_description": "",
+      "secret_phrase": "",
+      "restore_file": "",
       "password_setup_title": "",
       "password_setup_description": "",
       "password_setup_success_title": "",
@@ -293,7 +298,8 @@
       "buttons": {
         "download": "",
         "password_setup_continue": "",
-        "save_account": ""
+        "save_account": "",
+        "add_another_account": "Add another account"
       }
     },
     "form": {
