@@ -37,7 +37,7 @@ export default () => ({
       color: colors.light.zodiacBlue,
     },
     address: {
-      color: colors.light.silverGrey
+      color: colors.light.blueGray
     }
   },
 
