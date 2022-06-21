@@ -1,4 +1,10 @@
 {
+  "commons": {
+    "secret_recovery_phrase": "Secret recovery phrase",
+    "buttons": {
+      "continue": "Continue"
+    }
+  },
   "Sign in manually": "Sign in manually",
   "Signing in...": "Signing in...",
   "1. Creating your account": "1. Creating your account",
@@ -69,7 +75,6 @@
   "No internet connection!": "No internet connection!",
   "Not confirmed yet.": "Not confirmed yet.",
   "Optional: add a label to save this address for the future.": "Optional: add a label to save this address for the future.",
-  "Passphrase": "Passphrase",
   "Passphrase verification": "Passphrase verification",
   "Passphrase will be the only option to access your account.": "Passphrase will be the only option to access your account.",
   "Pending confirmation": "Pending confirmation",
@@ -287,10 +292,14 @@
   },
   "auth": {
     "setup": {
+      "add_account": "Add account",
+      "add_account_description": "Enter your secret recovery phrase to manage your account",
       "password_setup_title": "Set up device password",
       "password_setup_description": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
       "password_setup_success_title": "Perfect! You're all set",
       "password_setup_success_description": "You can now download encrypted secret recovery phrase.",
+      "secret_phrase": "Secret recovery phrase",
+      "restore_file": "Restore from file",
       "buttons": {
         "download": "Download",
         "password_setup_continue": "Continue to Dashboard",

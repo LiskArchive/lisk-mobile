@@ -26,7 +26,7 @@ import styles from './styles';
 class Intro extends React.Component {
   skip() {
     AsyncStorage.setItem('@lisk-mobile-intro', 'true');
-    this.props.navigation.push('SignIn', { signOut: true });
+    this.props.navigation.push('AuthMethod', { signOut: true });
   }
 
   componentDidMount() {

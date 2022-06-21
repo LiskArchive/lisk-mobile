@@ -9,11 +9,9 @@ import SuccessScreen from '../components/success';
 import getStyles from './styles';
 import { downloadJSON } from '../utils';
 
-const jsonData = { dummy: 'Dummy data' };
-
-const PasswordSetupSuccess = ({ styles, t }) => {
+const PasswordSetupSuccess = ({ styles, t, encryptedJson }) => {
   const [downloaded, setDownloaded] = useState(false);
-  const downloadFile = () => downloadJSON(jsonData, (e) => {
+  const downloadFile = () => downloadJSON(encryptedJson, (e) => {
     if (!e) {
       setDownloaded(true);
     }
