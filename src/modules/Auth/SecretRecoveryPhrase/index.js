@@ -30,7 +30,7 @@ const SecretRecoveryPhrase = ({
 
   const onFormSubmission = (passphrase) => {
     console.log(passphrase);
-    navigation.navigate('PasswordSetupForm');
+    navigation.navigate('PasswordSetupForm', { passphrase });
   };
 
   const showSimplifiedView = () => {
