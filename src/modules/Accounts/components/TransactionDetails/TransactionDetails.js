@@ -28,7 +28,7 @@ import Row from './row';
 import getStyles from './styles';
 import VoteList from './voteList';
 import {
-  goToWallet, getAccountLabel, getAccountTitle, openExplorer
+  goToWallet, getAccountLabel, getAccountTitle
 } from './utils';
 
 const getConfig = (styles, tx, accountAddress) => {
@@ -233,7 +233,6 @@ const TransactionDetails = ({
           </Row>
         )}
         <Row title="Transaction ID">
-          {activeToken === 'LSK' ? (
             <CopyToClipboard
               style={[styles.value, styles.theme.value, styles.transactionId]}
               labelStyle={[styles.value, styles.theme.value]}
@@ -243,14 +242,6 @@ const TransactionDetails = ({
               type={B}
               label={stringShortener(tx.id, 15, 6)}
             />
-          ) : (
-            <A
-              style={[styles.explorerLink, styles.theme.explorerLink]}
-              onPress={() => openExplorer(tx.id)}
-            >
-              {t('View more on Blockchain.info')}
-            </A>
-          )}
         </Row>
         {!!tx.blockHeight && (
           <Row title="Block Height">
