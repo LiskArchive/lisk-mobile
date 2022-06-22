@@ -16,6 +16,7 @@ module.exports = {
     'src/contexts/',
     'src/store/index.js',
     'src/store/middlewares/index.js',
+    'src/store/middlewares/socket.js',
     'src/store/reducers/index.js',
     'src/utilities/conversions.js',
     'src/utilities/device.js',
@@ -24,6 +25,7 @@ module.exports = {
     'src/utilities/networks.js',
     'src/modules/Auth/utils/passphrase.js',
     'src/utilities/api/account.js',
+    'utilities/explicitBipKeyDerivation.js',
     'src/assets',
     'src/modules',
     'src/navigation'

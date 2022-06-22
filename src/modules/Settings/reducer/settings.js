@@ -68,7 +68,7 @@ const defineActiveToken = (actionToken, stateToken) => {
  *
  * @returns {Object} The latest state
  */
-const settings = (state = INITIAL_STATE, action = {}) => {
+export const settings = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case actionTypes.settingsUpdated:
       return merge(state, action.data, {
