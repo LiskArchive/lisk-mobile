@@ -109,6 +109,7 @@
     "redux": "^4.0.5",
     "redux-connect-decorator": "^0.2.1",
     "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "socket.io-client": "^3.1.2",
     "stream-browserify": "^3.0.0",
