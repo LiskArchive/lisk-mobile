@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import actionTypes from '../actionTypes';
+import actionTypes from '../../actionTypes';
 
 /**
  * Trigger this action to log out of the account

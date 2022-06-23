@@ -10,7 +10,7 @@ import { colors, themes } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
-import { accountSignedOut as accountSignedOutAction } from 'modules/Accounts/actions';
+import { accountSignedOut as accountSignedOutAction } from 'modules/Accounts/store/actions';
 import ModalHolder from 'utilities/modal';
 import { ItemTitle, SignOutButton, SignOutModal } from './components';
 import getStyles from './styles';

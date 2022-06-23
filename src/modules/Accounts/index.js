@@ -20,7 +20,7 @@ import { getNetworkInfo as getNetworkInfoAction } from 'actions/network';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import {
   accountFetched as accountFetchedAction
-} from 'modules/Accounts/actions';
+} from 'modules/Accounts/store/actions';
 
 import getStyles from './styles';
 import {

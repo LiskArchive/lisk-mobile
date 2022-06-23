@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import actionTypes from '../actionTypes';
+import actionTypes from '../../actionTypes';
 
 /**
  *

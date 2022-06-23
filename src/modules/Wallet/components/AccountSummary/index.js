@@ -16,7 +16,7 @@ import Icon from 'components/shared/toolBox/icon';
 import {
   accountFollowed as accountFollowedAction,
   accountUnFollowed as accountUnFollowedAction
-} from 'modules/Accounts/actions';
+} from 'modules/Accounts/store/actions';
 import getStyles from './styles';
 
 const AView = Animated.View;
