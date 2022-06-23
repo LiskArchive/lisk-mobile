@@ -33,8 +33,8 @@ const PasswordForm = ({
       />
     </View>
     <PrimaryButton
-        title={t('banners.btcRemoval.buttons.gotIt')}
         noTheme
+        title={t('banners.btcRemoval.buttons.gotIt')}
         disabled={!password}
         onPress={onSubmit}
       />
