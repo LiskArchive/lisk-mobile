@@ -1,6 +1,4 @@
-import { Linking } from 'react-native';
 import { isRegistration, isTransfer, isVote } from 'modules/Transactions/constants';
-import { getTransactionExplorerURL } from 'utilities/api/btc/transactions';
 import { stringShortener } from 'utilities/helpers';
 
 export const goToWallet = (address, { navigation, account, activeToken }) => {
@@ -33,12 +31,6 @@ export const getAccountLabel = (
   }
 
   return address;
-};
-
-export const openExplorer = (id) => {
-  Linking.openURL(getTransactionExplorerURL(id))
-    // eslint-disable-next-line no-console
-    .catch(err => console.error('An error occurred', err));
 };
 
 export const getAccountTitle = tx => {

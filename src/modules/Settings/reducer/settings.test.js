@@ -1,6 +1,6 @@
 import { tokenKeys } from 'constants/tokens';
 import actionTypes from '../actionTypes';
-import settings, { INITIAL_STATE } from './settings';
+import { INITIAL_STATE, settings } from './settings';
 
 const defaultTokens = {
   active: 'LSK',

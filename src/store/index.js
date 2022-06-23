@@ -1,12 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistStore } from 'redux-persist';
 import * as reducers from './reducers';
 import middleWares from './middlewares';
 
-const App = combineReducers(reducers);
+export * from './selectors';
+
+const rootReducer = combineReducers(reducers);
 const store = createStore(
-  App,
+  rootReducer,
   composeWithDevTools(applyMiddleware(...middleWares))
 );
+export const persistedStore = persistStore(store);
 
 export default store;

@@ -11,10 +11,14 @@ import colors from 'constants/styleGuide/colors';
 import getStyles from './styles';
 import { passwordValidator } from '../validators';
 import PasswordSetupSuccess from '../PasswordSetupSuccess';
+import { useEncryptAccount } from '../hooks/useEncryptAccount';
 
-const jsonData = { dummy: 'Dummy data' };
-
-const PasswordSetupForm = ({ navigation, styles, t }) => {
+// eslint-disable-next-line max-statements
+const PasswordSetupForm = ({
+  navigation, styles, t, route
+}) => {
+  const { encryptAccount } = useEncryptAccount();
+  const { passphrase } = route.params;
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountName, setAccountName] = useState('');
@@ -22,6 +26,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [encryptedJSON, setEncryptedJSON] = useState();
 
   // eslint-disable-next-line consistent-return
   const submitForm = () => {
@@ -31,6 +36,8 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
     if (password !== confirmPassword) {
       return setConfirmPasswordError('auth.form.errors.confirm_password_error');
     }
+    const data = encryptAccount({ recoveryPhrase: passphrase, password, name: accountName });
+    setEncryptedJSON(data);
     setIsSuccess(true);
     // TODO: Call function to add account and navigate to next screen
   };
@@ -41,7 +48,7 @@ const PasswordSetupForm = ({ navigation, styles, t }) => {
   }, [password, confirmPassword]);
 
   return isSuccess
-    ? <PasswordSetupSuccess encryptedJson={jsonData} />
+    ? <PasswordSetupSuccess encryptedJson={encryptedJSON} />
     : <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
     <HeaderBackButton
       title="auth.setup.password_setup_title"

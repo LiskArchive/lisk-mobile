@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`api/btc/service getPriceTicker handles non-500 errors 1`] = `[FetchError: invalid json response body at https://service.lisk.com/api/v2/market/prices reason: Unexpected end of JSON input]`;
