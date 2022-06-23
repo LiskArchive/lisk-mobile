@@ -293,6 +293,8 @@
   "auth": {
     "setup": {
       "add_account": "Add account",
+      "manage_accounts": "Manage accounts",
+      "decrypt_passphrase": "Decrypt your secret recovery phrase",
       "add_account_description": "Enter your secret recovery phrase to manage your account",
       "password_setup_title": "Set up device password",
       "password_setup_description": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
@@ -303,8 +305,10 @@
       "buttons": {
         "download": "Download",
         "password_setup_continue": "Continue to Dashboard",
-        "save_account": "Save account"
-      }
+        "save_account": "Save account",
+        "add_another_account": "Add another account",
+        "remove_account": "Remove an account"
+    }
     },
     "form": {
       "enter_password": "Enter password",
