@@ -6,7 +6,9 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { translate } from 'react-i18next';
+import RNFS from 'react-native-fs';
 import SplashScreen from 'react-native-splash-screen';
+import DocumentPicker from 'react-native-document-picker';
 import withTheme from 'components/shared/withTheme';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
@@ -45,13 +47,26 @@ const AuthMethod = ({
     }
   }, []);
 
+  const selectEncryptedJSON = async () => {
+    try {
+      const file = await DocumentPicker.pickSingle({ type: DocumentPicker.types.allFiles });
+      await RNFS.readFile(file.uri);
+      /**
+       * TODO: Confirm valid file and show necessary error if any
+       */
+      navigation.navigate('DecryptPhrase', { title: 'auth.setup.decrypt_passphrase', address: 'lskqzpfr3uq8bm2jee5dkv4ns79uuswjzc9bbpezu', successRoute: 'SecretRecoveryPhrase' });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
         <Splash animate={!signOut} showSimplifiedView={false} />
         <View>
           <AuthTypeItem illustration={<PassphraseSvg />} label={t('auth.setup.secret_phrase')} onPress={() => navigation.navigate('SecretRecoveryPhrase')} testID="secret-phrase" />
-          <AuthTypeItem illustration={<UploadSvg />} label={t('auth.setup.restore_file')} onPress={() => navigation.navigate('SecretRecoveryPhrase')} testID="restore-from-file" />
+          <AuthTypeItem illustration={<UploadSvg />} label={t('auth.setup.restore_file')} onPress={selectEncryptedJSON} testID="restore-from-file" />
         </View>
         <CreateAccount />
       </View>
