@@ -4,17 +4,19 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { mockSavedAccounts } from 'tests/fixtures/accounts';
-import actionTypes from "../../actionTypes";
+import actionTypes from '../../actionTypes';
 import { useAccounts } from './useAccounts';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const ReduxProvider = ({ children, reduxStore }) => (
   <Provider store={reduxStore}>{children}</Provider>
-)
+);
 
 const mockDispatch = jest.fn();
-const accountStateObject = { [mockSavedAccounts[0].metadata.address]: mockSavedAccounts[0] };
+const accountStateObject = {
+  [mockSavedAccounts[0].metadata.address]: mockSavedAccounts[0],
+};
 const mockState = {
   account: {
     list: accountStateObject,
@@ -26,8 +28,8 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('useAccount hook', () => {
-    const store = mockStore(mockState);
-    const wrapper = ({ children }) => (
+  const store = mockStore(mockState);
+  const wrapper = ({ children }) => (
     <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
   );
   beforeEach(() => {
@@ -47,14 +49,12 @@ describe('useAccount hook', () => {
     act(() => {
       setAccount(mockSavedAccounts[0]);
     });
-    expect(store.getActions()).toEqual([expectedAction])
+    expect(store.getActions()).toEqual([expectedAction]);
   });
 
   it('accounts should return and convert state as an array', async () => {
     const { accounts } = result.current;
-    const expectArrayAccounts = [
-      mockSavedAccounts[0],
-    ];
+    const expectArrayAccounts = [mockSavedAccounts[0]];
     expect(accounts).toMatchObject(expectArrayAccounts);
   });
 
@@ -76,6 +76,6 @@ describe('useAccount hook', () => {
     act(() => {
       deleteAccountByAddress(address);
     });
-    expect(store.getActions()).toEqual([expectedAction])
+    expect(store.getActions()).toEqual([expectedAction]);
   });
 });

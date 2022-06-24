@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addAccount, deleteAccount } from '../../store/actions'
+import { addAccount, deleteAccount } from '../../store/actions';
 import { selectAccounts } from '../../store/selectors';
 
 export function useAccounts() {
