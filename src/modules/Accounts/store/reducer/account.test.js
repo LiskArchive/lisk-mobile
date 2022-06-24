@@ -1,6 +1,6 @@
 import actionTypes from '../../actionTypes';
 import { list, current } from './account';
-import { mockSavedAccounts } from 'mocks';
+import { mockSavedAccounts } from 'tests/fixtures/accounts';
 
 describe('Auth reducer', () => {
   it('Should return accountSchema if setCurrentAccount action type is triggered', async () => {
