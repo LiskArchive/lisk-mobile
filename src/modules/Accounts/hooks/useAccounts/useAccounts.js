@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addAccount, deleteAccount } from '../../store/actions';
 import { selectAccounts } from '../../store/selectors';
 
-export function useAccounts() {
+export const useAccounts = () => {
   const dispatch = useDispatch();
   const accountsObject = useSelector(selectAccounts);
   const setAccount = useCallback((account) => dispatch(addAccount(account)), []);
@@ -23,4 +23,4 @@ export function useAccounts() {
     deleteAccountByAddress,
     getAccountByAddress,
   };
-}
+};
