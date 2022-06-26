@@ -21,3 +21,13 @@ export const deleteAccount = (address) => ({
   type: actionTypes.deleteAccount,
   address,
 });
+
+export const setAccountSummary = accountSummary => ({
+  type: actionTypes.setAccountSummary,
+  accountSummary
+});
+
+export const resetAccountSummary = summary => ({
+  type: actionTypes.resetAccountSummary,
+  summary
+});

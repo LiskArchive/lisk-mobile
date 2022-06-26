@@ -20,6 +20,22 @@ export const current = (state = {}, { type, encryptedAccount }) => {
 /**
  *
  * @param {Object} state
+ * @param {type: String, accountSummary: Object} action
+ */
+export const summary = (state = {}, { type, accountSummary }) => {
+  switch (type) {
+    case actionTypes.setAccountSummary:
+      return accountSummary;
+    case actionTypes.resetAccountSummary:
+      return {};
+    default:
+      return state;
+  }
+};
+
+/**
+ *
+ * @param {Object} state
  * @param {type: String, encryptedAccount: Object, address: string} action
  */
 export const list = (state = {}, { type, encryptedAccount, address }) => {
@@ -46,10 +62,10 @@ const persistConfig = {
   key: 'account',
   storage: AsyncStorage,
   whitelist: ['list'], // only navigation will be persisted
-  blacklist: ['current'],
+  blacklist: ['current', 'summary'],
 };
 
-const accountReducer = combineReducers({ current, list });
+const accountReducer = combineReducers({ current, list, summary });
 
 // eslint-disable-next-line import/prefer-default-export
 const account = persistReducer(persistConfig, accountReducer);

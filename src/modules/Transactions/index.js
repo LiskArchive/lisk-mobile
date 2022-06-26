@@ -18,7 +18,7 @@ import getStyles from './styles';
 
 @connect(
   (state) => ({
-    accounts: state.accounts,
+    accounts: state.account.summary,
     settings: state.settings
   }),
   {}
@@ -63,7 +63,7 @@ class Send extends React.Component {
 
   didFocus = () => {
     const {
-      route, accounts, settings, t
+      route, accounts, t
     } = this.props;
 
     BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressedAndroid);
@@ -72,7 +72,7 @@ class Send extends React.Component {
       this.nav.move({
         to: 3,
         data: {
-          address: accounts.info[settings.token.active].address,
+          address: accounts.address,
           amount: 0.1,
           reference: t('Account initialization')
         }
@@ -134,14 +134,14 @@ class Send extends React.Component {
       }
     ];
 
-    if (accounts.info[settings.token.active].secondPublicKey) {
+    if (accounts.secondPublicKey) {
       steps.splice(3, 0, {
         component: SecondPassphrase,
         title: 'secondPassphrase'
       });
     }
 
-    if (accounts.info[settings.token.active].isMultisignature) {
+    if (accounts.isMultisignature) {
       return (
         <SafeAreaView style={[styles.flex, styles.theme.multiSigContainer]}>
           <HeaderBackButton title="Send LSK" noIcon />

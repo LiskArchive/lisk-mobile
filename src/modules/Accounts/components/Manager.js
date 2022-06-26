@@ -26,7 +26,6 @@ const Manager = ({
     incognito: incognitoMode, token:
     { active: activeToken }
   } = useSelector(state => state.settings);
-  const followedAccounts = useSelector(state => state.accounts.followed);
   const dispatch = useDispatch();
   const incognito = type === 'home' && incognitoMode;
   const Anim = Animated.View;
@@ -84,7 +83,7 @@ const Manager = ({
           incognito={incognito}
           navigate={navigate}
           account={account ? account.address : ''}
-          followedAccounts={followedAccounts ?? {}}
+          followedAccounts={{}}
           pending={transactions.pending}
           activeToken={activeToken}
           transactions={transactions.confirmed}

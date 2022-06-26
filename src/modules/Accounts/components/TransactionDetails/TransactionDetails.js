@@ -30,6 +30,7 @@ import VoteList from './voteList';
 import {
   goToWallet, getAccountLabel, getAccountTitle
 } from './utils';
+import { useAccountInfo } from '../../hooks/useAccounts/useAccountInfo';
 
 const getConfig = (styles, tx, accountAddress) => {
   if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
@@ -59,8 +60,9 @@ const TransactionDetails = ({
   const [refreshing, setRefreshing] = useState(false);
   const [votes, setVotes] = useState([]);
   const [error, setError] = useState(null);
+  const { summary: account } = useAccountInfo();
 
-  const { followed: followedAccounts, info: account } = useSelector((state) => state.accounts);
+  const followedAccounts = [];
   const { token: { active: activeToken }, language } = useSelector((state) => state.settings);
 
   const retrieveTransaction = async (id) => {

@@ -8,7 +8,7 @@ import { translate } from 'react-i18next';
 import { ScrollView } from 'react-native-gesture-handler';
 import withTheme from 'components/shared/withTheme';
 import { H2 } from 'components/shared/toolBox/typography';
-import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { useAccounts, useCurrentAccount, useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
 import { IconButton } from 'components/shared/toolBox/button';
 import { colors, themes } from 'constants/styleGuide';
 import Splash from '../components/splash';
@@ -22,6 +22,15 @@ const ManageAccount = ({
   navigation,
 }) => {
   const { accounts } = useAccounts();
+  const [, setAccount] = useCurrentAccount();
+  const { getAccount } = useAccountInfo();
+
+  const selectAccount = account => {
+    setAccount(account);
+    getAccount(account.metadata.address).then(() => {
+      navigation.navigate('Main');
+    });
+  };
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
@@ -30,7 +39,7 @@ const ManageAccount = ({
         <View style={[styles.body]}>
           <H2 style={styles.title} >{t('auth.setup.manage_accounts')}</H2>
           {accounts.map(account =>
-            <AccountItem key={account.metadata.address} username={account.metadata.name} address={account.metadata.address} />)}
+            <AccountItem key={account.metadata.address} username={account.metadata.name} address={account.metadata.address} onPress={() => selectAccount(account)} />)}
         </View>
       </ScrollView>
       <View style={styles.bottom} >
