@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import withTheme from 'components/shared/withTheme';
 import Avatar from 'components/shared/avatar';
@@ -16,4 +16,4 @@ const AccountItem = ({
     </View>
   </TouchableOpacity>;
 
-export default withTheme(AccountItem, getStyles());
+export default memo(withTheme(AccountItem, getStyles()));
