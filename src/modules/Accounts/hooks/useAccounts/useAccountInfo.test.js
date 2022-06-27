@@ -48,7 +48,7 @@ describe('useAccountInfo hook', () => {
   );
   beforeEach(() => {
     mockDispatch.mockClear();
-    apiClient.getAccount = jest.fn()
+    apiClient.getAccount = jest.fn();
     global.fetch = jest.fn();
   });
   const { result } = renderHook(() => useAccountInfo(), { wrapper });
@@ -58,7 +58,7 @@ describe('useAccountInfo hook', () => {
 
   it('getAccount should make api call to get account details', async () => {
     const { getAccount } = result.current;
-    let expectedResult = {
+    const expectedResult = {
       address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw',
       balance: '10000',
       publicKey: 'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
@@ -71,8 +71,7 @@ describe('useAccountInfo hook', () => {
       unlocking: []
     };
     fetch.mockResolvedValueOnce({ ok: true, status: 200, json: () => ({ data: [account] }) });
-    const data = await getAccount(account.address)
+    const data = await getAccount(account.address);
     expect(data).toEqual(expectedResult);
   });
-
 });

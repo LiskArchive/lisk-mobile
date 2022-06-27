@@ -39,7 +39,7 @@ describe('useCurrentAccount hook', () => {
   });
 
   it('setAccount should dispatch an action', async () => {
-    const [_, setAccount]  = result.current;
+    const [, setAccount] = result.current;
     const expectedAction = {
       type: actionTypes.setCurrentAccount,
       encryptedAccount: mockSavedAccounts[0],
@@ -51,8 +51,7 @@ describe('useCurrentAccount hook', () => {
   });
 
   it('getAccount should return specific account selected by address', async () => {
-    const [currentAccount]  = result.current;
+    const [currentAccount] = result.current;
     expect(currentAccount).toMatchObject(mockSavedAccounts[0]);
   });
-
 });
