@@ -16,4 +16,4 @@ const AccountItem = ({
     </View>
   </TouchableOpacity>;
 
-export default withTheme(AccountItem, getStyles())
+export default withTheme(AccountItem, getStyles());
