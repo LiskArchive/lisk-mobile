@@ -12,6 +12,7 @@ import DocumentPicker from 'react-native-document-picker';
 import withTheme from 'components/shared/withTheme';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import {
   settingsRetrieved
 } from '../../Settings/actions';
@@ -33,6 +34,7 @@ const AuthMethod = ({
   const signOut = route.params?.signOut;
   const settings = useSelector(state => state.settings);
   const dispatch = useDispatch();
+  const { accounts } = useAccounts();
 
   const init = () => {
     SplashScreen.hide();
@@ -42,6 +44,9 @@ const AuthMethod = ({
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());
       init();
+      if (accounts.length) {
+        navigation.navigate('ManageAccount');
+      }
     } else {
       navigation.push('Intro');
     }

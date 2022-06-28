@@ -11,7 +11,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import {
   accountSignedIn as accountSignedInAction,
   accountFetched as accountFetchedAction
-} from 'modules/Accounts/actions';
+} from 'modules/Accounts/store/actions';
 import { pricesRetrieved as pricesRetrievedAction } from 'actions/service';
 import styles from './styles';
 

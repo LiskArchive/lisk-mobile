@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { translate } from 'react-i18next';
 import Share from 'components/shared/share';
@@ -19,6 +19,7 @@ import withTheme from 'components/shared/withTheme';
 import { themes, colors } from 'constants/styleGuide';
 import Avatar from 'components/shared/avatar';
 import CopyToClipboard from 'components/shared/copyToClipboard';
+import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
 import { languageMap } from 'constants/languages';
 import getStyles from './styles';
 
@@ -26,9 +27,11 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
 const Request = ({
-  styles, theme, account, t, language
+  styles, theme, t
 }) => {
-  const { address } = account.LSK;
+  const { summary: account } = useAccountInfo();
+  const language = useSelector(state => state.settings.language);
+  const { address } = account;
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [url, setUrl] = useState('');
   const extraHeight = deviceType() === 'android' ? 170 : 0;
@@ -131,9 +134,4 @@ const Request = ({
   </View>;
 };
 
-const mapStateToProps = state => ({
-  account: state.accounts.info,
-  language: state.settings.language,
-});
-
-export default withTheme(translate()(connect(mapStateToProps)(Request)), getStyles());
+export default withTheme(translate()(Request), getStyles());

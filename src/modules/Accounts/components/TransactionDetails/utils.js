@@ -20,7 +20,7 @@ export const getAccountLabel = (
     return t('Unparsed Address');
   }
 
-  const followedAccount = followedAccounts[activeToken].find(
+  const followedAccount = followedAccounts[activeToken]?.find(
     a => a.address === address
   );
   if (followedAccount) {

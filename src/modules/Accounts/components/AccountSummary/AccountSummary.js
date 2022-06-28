@@ -5,15 +5,14 @@ import { translate } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import easing from 'utilities/easing';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
-import { tokenKeys } from 'constants/tokens';
 import withTheme from 'components/shared/withTheme';
+import { useAccountInfo } from '../../hooks/useAccounts/useAccountInfo';
 import Profile from '../Profile';
 import getStyles from './styles';
 
 const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
   const settings = useSelector(state => state.settings);
-  const accounts = useSelector(state => state.accounts);
-  const activeToken = useSelector(state => state.settings.token.active);
+  const { summary: account } = useAccountInfo();
   const priceTicker = useSelector(state => state.service.priceTicker);
   const dispatch = useDispatch();
 
@@ -51,7 +50,7 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
 
   const renderProfile = (data) => {
     const token = Object.keys(settings.token.list)[data.index];
-    const { address, lockedBalance, isMultisignature } = accounts.info[activeToken];
+    const { address, lockedBalance, isMultisignature } = account;
     return <Profile
       t={t}
       key={token}
@@ -70,11 +69,6 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
     />;
   };
 
-  const { info } = accounts;
-  const { token } = settings;
-
-  const profiles = tokenKeys.filter((key) => token.list[key]).map((key) => info[key]);
-
   return <Animated.View
     style={[
       { height: interpolate([0, 280], [280, 0]) },
@@ -85,7 +79,7 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
       },
     ]}
   >
-    {renderProfile({ item: profiles[0], index: 0 })}
+    {renderProfile({ item: account })}
   </Animated.View>;
 };
 

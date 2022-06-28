@@ -8,6 +8,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import getStyles from './styles';
 import { passwordValidator } from '../validators';
 import PasswordSetupSuccess from '../PasswordSetupSuccess';
@@ -18,6 +19,7 @@ const PasswordSetupForm = ({
   navigation, styles, t, route
 }) => {
   const { encryptAccount } = useEncryptAccount();
+  const { setAccount } = useAccounts();
   const { passphrase } = route.params;
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -39,7 +41,8 @@ const PasswordSetupForm = ({
     const data = encryptAccount({ recoveryPhrase: passphrase, password, name: accountName });
     setEncryptedJSON(data);
     setIsSuccess(true);
-    // TODO: Call function to add account and navigate to next screen
+    setAccount(data);
+    navigation.navigate('ManageAccount');
   };
 
   useEffect(() => {
