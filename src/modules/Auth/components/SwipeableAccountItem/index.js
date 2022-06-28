@@ -64,4 +64,4 @@ const SwipeableAccountItem = ({
   </SwipeableRow>;
 };
 
-export default memo(withTheme(SwipeableAccountItem, getStyles()));
+export default withTheme(SwipeableAccountItem, getStyles());
