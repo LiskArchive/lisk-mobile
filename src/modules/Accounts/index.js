@@ -110,9 +110,9 @@ const Home = ({
     // }, 1200);
     checkBTCBanner();
 
-    return () => {
-      // clearTimeout(initializationTimeout);
-    };
+    // return () => {
+    //   clearTimeout(initializationTimeout);
+    // };
   }, []);
 
   let content = null;
