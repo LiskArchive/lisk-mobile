@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import withTheme from 'components/shared/withTheme';
 import Avatar from 'components/shared/avatar';
