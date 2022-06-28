@@ -48,26 +48,7 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
     initialFadeIn();
   }, []);
 
-  const renderProfile = (data) => {
-    const token = Object.keys(settings.token.list)[data.index];
-    const { address, lockedBalance, isMultisignature } = account;
-    return <Profile
-      t={t}
-      key={token}
-      token={token}
-      priceTicker={priceTicker}
-      account={data.item}
-      settings={settings}
-      interpolate={interpolate}
-      height={260}
-      address={address}
-      lockedBalance={lockedBalance}
-      isMultiSignature={isMultisignature}
-      settingsUpdated={settingsUpdated}
-      incognito={settings.incognito}
-      navigation={navigation}
-    />;
-  };
+  const { address, lockedBalance, isMultisignature } = account;
 
   return <Animated.View
     style={[
@@ -79,7 +60,20 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
       },
     ]}
   >
-    {renderProfile({ item: account })}
+    <Profile
+      t={t}
+      priceTicker={priceTicker}
+      account={account}
+      settings={settings}
+      interpolate={interpolate}
+      height={260}
+      address={address}
+      lockedBalance={lockedBalance}
+      isMultiSignature={isMultisignature}
+      settingsUpdated={settingsUpdated}
+      incognito={settings.incognito}
+      navigation={navigation}
+    />
   </Animated.View>;
 };
 
