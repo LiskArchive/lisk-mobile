@@ -2,9 +2,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, } from 'react-native';
 import { translate } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import easing from 'utilities/easing';
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import withTheme from 'components/shared/withTheme';
 import { useAccountInfo } from '../../hooks/useAccounts/useAccountInfo';
 import Profile from '../Profile';
@@ -14,11 +13,6 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
   const settings = useSelector(state => state.settings);
   const { summary: account } = useAccountInfo();
   const priceTicker = useSelector(state => state.service.priceTicker);
-  const dispatch = useDispatch();
-
-  const settingsUpdated = (data) => {
-    dispatch(settingsUpdatedAction(data));
-  };
 
   const opacity = useRef(new Animated.Value(0));
   const top = useRef(new Animated.Value(-20));
@@ -48,26 +42,7 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
     initialFadeIn();
   }, []);
 
-  const renderProfile = (data) => {
-    const token = Object.keys(settings.token.list)[data.index];
-    const { address, lockedBalance, isMultisignature } = account;
-    return <Profile
-      t={t}
-      key={token}
-      token={token}
-      priceTicker={priceTicker}
-      account={data.item}
-      settings={settings}
-      interpolate={interpolate}
-      height={300}
-      address={address}
-      lockedBalance={lockedBalance}
-      isMultiSignature={isMultisignature}
-      settingsUpdated={settingsUpdated}
-      incognito={settings.incognito}
-      navigation={navigation}
-    />;
-  };
+  const { address, lockedBalance, isMultisignature } = account;
 
   return <Animated.View
     style={[
@@ -79,7 +54,18 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
       },
     ]}
   >
-    {renderProfile({ item: account })}
+    <Profile
+      t={t}
+      priceTicker={priceTicker}
+      account={account}
+      settings={settings}
+      interpolate={interpolate}
+      height={260}
+      address={address}
+      lockedBalance={lockedBalance}
+      isMultiSignature={isMultisignature}
+      navigation={navigation}
+    />
   </Animated.View>;
 };
 

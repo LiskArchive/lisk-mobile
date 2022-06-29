@@ -17,6 +17,7 @@ const common = {
   ufoGreen: '#2AD67C',
   mountainMist: '#9999A0',
   silverGrey: '#C5CFE4',
+  furyRed: '#FF4557',
 };
 
 const light = {

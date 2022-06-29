@@ -294,6 +294,7 @@
     "setup": {
       "add_account": "Add account",
       "manage_accounts": "Manage accounts",
+      "switch_account": "Switch account",
       "decrypt_passphrase": "Decrypt your secret recovery phrase",
       "add_account_description": "Enter your secret recovery phrase to manage your account",
       "password_setup_title": "Set up device password",

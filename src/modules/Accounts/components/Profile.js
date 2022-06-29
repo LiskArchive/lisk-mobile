@@ -3,7 +3,6 @@ import {
   Image, Animated, View, ImageBackground, TouchableOpacity
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import Avatar from 'components/shared/avatar';
 import { fromRawLsk } from 'utilities/conversions';
 import FormattedNumber from 'components/shared/formattedNumber';
@@ -49,8 +48,6 @@ const ProfileScreen = ({
   lockedBalance,
   theme,
   settings,
-  settingsUpdated,
-  incognito,
   isMultiSignature,
   navigation
 }) => {
@@ -61,13 +58,6 @@ const ProfileScreen = ({
   const balanceSize = getBalanceSize(normalizedBalance);
   const normalizedLockedBalance = fromRawLsk(lockedBalance);
   const lockedSize = getBalanceSize(normalizedLockedBalance);
-
-  const toggleIncognito = () => {
-    ReactNativeHapticFeedback.trigger('selection');
-    settingsUpdated({
-      incognito: !incognito
-    });
-  };
 
   return (
     <View testID="accountSummary" style={styles.flex}>
@@ -81,15 +71,15 @@ const ProfileScreen = ({
             opacity: interpolate([0, height - 200], [1, 0]),
           }, styles.accountTitle]} >
             <View style={styles.row}>
-              <View style={styles.row} >
+              <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('SwitchAccount')} >
                 <H2 style={styles.title}>{t('Accounts')}</H2>
                 <View style={styles.icon} onPress={() => navigation.navigate('SwitchAccount')}>
                   <Icon name="forward" color={colors.light.white} size={22} />
                 </View>
-              </View>
+              </TouchableOpacity>
               <View style={styles.row} >
                 <IncognitoSwitch />
-                {!isMultiSignature && (
+                {isMultiSignature && (
                   <TouchableOpacity
                     style={[styles.avatar]}
                     onPress={() => navigation.navigate('Multisignature')}
