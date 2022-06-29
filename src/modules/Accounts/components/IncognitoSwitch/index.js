@@ -36,7 +36,7 @@ const IncognitoSwitch = ({ styles }) => {
             ],
           }]} >
           <View style={styles.incognitoIcon} >
-            <IncognitoSvg size={1.2} />
+            <IncognitoSvg size={1.1} disabled={incognito} />
           </View>
         </Animated.View>
     </TouchableOpacity>
