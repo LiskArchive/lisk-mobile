@@ -59,7 +59,7 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
       account={data.item}
       settings={settings}
       interpolate={interpolate}
-      height={260}
+      height={300}
       address={address}
       lockedBalance={lockedBalance}
       isMultiSignature={isMultisignature}
@@ -71,11 +71,11 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
 
   return <Animated.View
     style={[
-      { height: interpolate([0, 280], [280, 0]) },
+      { height: interpolate([0, 320], [320, 0]) },
       {
         top: top.current,
         opacity: opacity.current,
-        paddingBottom: interpolate([0, 280], [15, 0])
+        paddingBottom: interpolate([0, 320], [15, 0])
       },
     ]}
   >

@@ -17,10 +17,10 @@ import LiskBackgroundDark from 'assets/images/homeBg-dark.png';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { stringShortener } from 'utilities/helpers';
 import { colors, themes } from 'constants/styleGuide';
-import { IconButton } from 'components/shared/toolBox/button';
 import Icon from 'components/shared/toolBox/icon';
 import MultiSignatureSvg from 'assets/svgs/MultiSignatureSvg';
 import getStyles from './AccountSummary/styles';
+import IncognitoSwitch from './IncognitoSwitch';
 
 const blurs = {
   blurBig,
@@ -77,6 +77,29 @@ const ProfileScreen = ({
           style={[styles.imgContainer]}
           imageStyle={{ opacity: theme === themes.dark ? 0.3 : 1 }}
         >
+          <AView style={[{
+            opacity: interpolate([0, height - 200], [1, 0]),
+          }, styles.accountTitle]} >
+            <View style={styles.row}>
+              <View style={styles.row} >
+                <H2 style={styles.title}>{t('Accounts')}</H2>
+                <View style={styles.icon} onPress={() => navigation.navigate('SwitchAccount')}>
+                  <Icon name="forward" color={colors.light.white} size={22} />
+                </View>
+              </View>
+              <View style={styles.row} >
+                <IncognitoSwitch />
+                {!isMultiSignature && (
+                  <TouchableOpacity
+                    style={[styles.avatar]}
+                    onPress={() => navigation.navigate('Multisignature')}
+                  >
+                    <MultiSignatureSvg size={1} />
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+          </AView>
           <AView
             style={[
               styles.row,
@@ -88,13 +111,6 @@ const ProfileScreen = ({
             <AView>
               <View style={styles.row}>
                 <H2 style={styles.title}>{t('Lisk Wallet')}</H2>
-                <IconButton
-                  title=""
-                  icon={incognito ? 'disable-incognito' : 'enable-incognito'}
-                  color={colors.light.white}
-                  iconSize={20}
-                  onClick={toggleIncognito}
-                />
               </View>
               <View style={styles.copyContainer}>
                 <CopyToClipboard
@@ -109,15 +125,7 @@ const ProfileScreen = ({
               </View>
             </AView>
             <AView style={[styles.avatarContainer]}>
-              {isMultiSignature && (
-                <TouchableOpacity
-                  style={[styles.avatar]}
-                  onPress={() => navigation.navigate('Multisignature')}
-                >
-                  <MultiSignatureSvg size={1.2} />
-                </TouchableOpacity>
-              )}
-              <Avatar address={account.address} size={50} />
+              <Avatar address={account.address} size={40} />
             </AView>
           </AView>
           <AView

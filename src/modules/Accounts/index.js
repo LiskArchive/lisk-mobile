@@ -167,7 +167,7 @@ const Home = ({
       <ParallaxHeader
         reference={scrollView}
         headerMinHeight={70}
-        headerMaxHeight={260}
+        headerMaxHeight={300}
         extraScrollHeight={20}
         navbarColor="#3498db"
         alwaysShowTitle={false}
