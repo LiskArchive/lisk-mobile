@@ -16,15 +16,16 @@ import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import PassphraseBackup from 'components/screens/passphraseBackup';
 import Intro from 'components/screens/intro';
-import AppNavigator from './appNavigator';
 
+import AuthMethod from 'modules/Auth/AuthMethod';
+import SignIn from 'modules/Auth/SignIn';
+import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
+import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
+import ManageAccount from 'modules/Auth/ManageAccount';
+import DecryptPhrase from 'modules/Auth/DecryptPhrase';
+import SwitchAccount from 'modules/Auth/SwitchAccount';
 import navigationOptions from './navigationOptions';
-import AuthMethod from '../modules/Auth/AuthMethod';
-import SignIn from '../modules/Auth/SignIn';
-import SecretRecoveryPhrase from '../modules/Auth/SecretRecoveryPhrase';
-import PasswordSetupForm from '../modules/Auth/PasswordSetupForm';
-import ManageAccount from '../modules/Auth/ManageAccount';
-import DecryptPhrase from '../modules/Auth/DecryptPhrase';
+import AppNavigator from './appNavigator';
 
 const MainStack = createStackNavigator();
 
@@ -63,6 +64,7 @@ const MainNavigator = () => {
             options={navigationOptions.Register}
           />
           <MainStack.Screen name="AuthMethod" component={AuthMethod} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="SwitchAccount" component={SwitchAccount} options={navigationOptions.SignIn} />
           <MainStack.Screen name="DecryptPhrase" component={DecryptPhrase} options={navigationOptions.SignIn} />
           <MainStack.Screen name="ManageAccount" component={ManageAccount} options={navigationOptions.SignIn} />
           <MainStack.Screen name="SecretRecoveryPhrase" component={SecretRecoveryPhrase} options={navigationOptions.SignIn} />
