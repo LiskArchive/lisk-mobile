@@ -9,7 +9,9 @@ import SuccessScreen from '../components/success';
 import getStyles from './styles';
 import { downloadJSON } from '../utils';
 
-const PasswordSetupSuccess = ({ styles, t, encryptedJson }) => {
+const PasswordSetupSuccess = ({
+  styles, t, encryptedJson, onContinue
+}) => {
   const [downloaded, setDownloaded] = useState(false);
   const downloadFile = () => downloadJSON(encryptedJson, (e) => {
     if (!e) {
@@ -23,6 +25,7 @@ const PasswordSetupSuccess = ({ styles, t, encryptedJson }) => {
     description={t('auth.setup.password_setup_success_description') }
     buttonText={t('auth.setup.buttons.password_setup_continue')}
     disabled={!downloaded}
+    onContinue={onContinue}
   >
     <View>
       <View style={[styles.downloadFile]} >

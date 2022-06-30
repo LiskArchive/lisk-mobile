@@ -2,14 +2,22 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import PasswordForm from '../components/PasswordForm';
 import getStyles from './styles';
 
-const DecryptPhrase = ({ styles, navigation, route }) => {
+const DecryptPhrase = ({
+  styles, navigation, account, route, nextStep
+}) => {
   const { title, address, successRoute } = route.params;
 
-  const onSubmit = () => {
-    navigation.navigate(successRoute);
+  const onSubmit = (password) => {
+    if (nextStep && typeof nextStep === 'function') {
+      const decrpytedAccount = decryptAccount(account, password);
+      nextStep({ ...decrpytedAccount, encryptedAccount: account });
+    } else {
+      navigation.navigate(successRoute);
+    }
   };
 
   return <SafeAreaView style={styles.container} >

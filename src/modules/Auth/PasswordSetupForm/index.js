@@ -50,8 +50,10 @@ const PasswordSetupForm = ({
     setConfirmPasswordError('');
   }, [password, confirmPassword]);
 
+  const onContinue = () => navigation.navigate('Main');
+
   return isSuccess
-    ? <PasswordSetupSuccess encryptedJson={encryptedJSON} />
+    ? <PasswordSetupSuccess encryptedJson={encryptedJSON} onContinue={onContinue} />
     : <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
     <HeaderBackButton
       title="auth.setup.password_setup_title"

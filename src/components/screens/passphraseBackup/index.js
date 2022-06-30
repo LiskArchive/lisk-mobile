@@ -1,72 +1,77 @@
-import React from 'react';
-import connect from 'redux-connect-decorator';
+import React, { useState } from 'react';
 import { View, ScrollView, SafeAreaView } from 'react-native';
 import { translate } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 import { themes, colors } from 'constants/styleGuide';
-import {
-  deviceWidth,
-  deviceHeight,
-  SCREEN_HEIGHTS,
-} from 'utilities/device';
+import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from 'utilities/device';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 import PassphraseCopy from 'components/shared/passphraseCopy';
 import withTheme from 'components/shared/withTheme';
 import { P, A } from 'components/shared/toolBox/typography';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import getStyles from './styles';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
-@connect(state => ({
-  passphrase: state.accounts.passphrase,
-}))
-class PassphraseBackup extends React.Component {
-  state = {
-    passphraseRevealed: false,
+const PassphraseBackup = ({
+  styles,
+  t,
+  theme,
+  navigation,
+  sharedData: data,
+  nextStep,
+}) => {
+  const [passphraseRevealed, setPassphraseReveal] = useState(false);
+
+  const toggleQRCode = () => {
+    setPassphraseReveal(!passphraseRevealed);
   };
 
-  showQRCode = () => {
-    this.setState({ passphraseRevealed: !this.state.passphraseRevealed });
+  const nextScreen = () => {
+    nextStep({ passphrase: data.recoveryPhrase });
   };
 
-  render() {
-    const {
-      styles, passphrase, theme, t
-    } = this.props;
-    const { passphraseRevealed } = this.state;
-
-    return (
-      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
-        <ScrollView style={styles.container} >
-          <PassphraseCopy passphrase={passphrase} />
-          <P style={[styles.QRText, styles.theme.text]}>
-            {t('Private use only')}
-            <A style={styles.button} onPress={this.showQRCode}>
-              &nbsp;{this.state.passphraseRevealed ? t('Hide QR code') : t('Show QR code')}
-            </A>
-          </P>
-          {passphraseRevealed && (
-            <View style={styles.qrCodeContainer}>
-              <QRCode
-                value={passphrase}
-                size={qrCodeSize}
-                color={
-                  theme === themes.light
-                    ? colors.light.black
-                    : colors.dark.white
-                }
-                backgroundColor={
-                  theme === themes.light
-                    ? colors.light.white
-                    : colors.dark.maastrichtBlue
-                }
-              />
-            </View>
-          )}
-        </ScrollView>
-      </SafeAreaView>
-    );
-  }
-}
+  return (
+    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+      <HeaderBackButton
+        title={'settings.backup_phrase.title'}
+        onPress={navigation.goBack}
+      />
+      <ScrollView style={styles.container}>
+        <PassphraseCopy passphrase={data.recoveryPhrase} />
+        <P style={[styles.QRText, styles.theme.text]}>
+          {t('Private use only')}
+          <A style={styles.button} onPress={toggleQRCode}>
+            &nbsp;{passphraseRevealed ? t('Hide QR code') : t('Show QR code')}
+          </A>
+        </P>
+        {passphraseRevealed && (
+          <View style={styles.qrCodeContainer}>
+            <QRCode
+              value={data.recoveryPhrase}
+              size={qrCodeSize}
+              color={
+                theme === themes.light ? colors.light.black : colors.dark.white
+              }
+              backgroundColor={
+                theme === themes.light
+                  ? colors.light.white
+                  : colors.dark.maastrichtBlue
+              }
+            />
+          </View>
+        )}
+      </ScrollView>
+      <View style={styles.container} >
+      <PrimaryButton
+        noTheme
+        title={t('settings.backup_phrase.continue')}
+        onPress={nextScreen}
+      />
+      </View>
+    </SafeAreaView>
+  );
+};
 
 export default withTheme(translate()(PassphraseBackup), getStyles());

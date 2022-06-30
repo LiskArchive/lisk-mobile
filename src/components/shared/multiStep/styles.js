@@ -2,6 +2,9 @@ import { colors, themes } from 'constants/styleGuide';
 
 export default () => ({
   common: {
+    flex: {
+      flex: 1,
+    },
     container: {
       flexDirection: 'row',
       alignItems: 'center',

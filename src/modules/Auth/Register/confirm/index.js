@@ -43,7 +43,8 @@ const chooseRandomWords = (qty, words) => {
 const Confirm = ({
   t,
   nextStep,
-  sharedData: { passphrase }, navigation, prevStep
+  sharedData: { passphrase }, navigation, prevStep,
+  customHeader
 }) => {
   const [buttonStatus, setButtonStatus] = useState(true);
   const [missing, setMissing] = useState([]);
@@ -162,14 +163,15 @@ const Confirm = ({
     setOptions({
       headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
       title:
-        deviceHeight() >= SCREEN_HEIGHTS.SM
-          ? t('Passphrase verification')
-          : t('Verification'),
+          deviceHeight() >= SCREEN_HEIGHTS.SM
+            ? t('Passphrase verification')
+            : t('Verification'),
     });
     generateTest();
   }, []);
 
   return <SafeAreaView style={styles.wrapper}>
+    {customHeader && <HeaderBackButton title={'settings.backup_phrase.confirm_phrase'} onPress={navigation.goBack} />}
     <View style={styles.container}>
       <View style={styles.body}>
         <View style={styles.box}>
