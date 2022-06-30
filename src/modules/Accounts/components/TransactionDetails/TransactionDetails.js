@@ -134,7 +134,7 @@ const TransactionDetails = ({
   }
 
   const walletAccountAddress = route.params?.account ?? account[activeToken].address;
-  const incognito = route.params?.incognito ?? null;
+  const discrete = route.params?.discrete ?? null;
   const isDelegateRegistration = isRegistration(tx);
   const isVoting = isVote(tx);
   const config = getConfig(styles, tx, walletAccountAddress);
@@ -152,7 +152,7 @@ const TransactionDetails = ({
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
         <TransactionSummary
-          incognito={incognito}
+          discrete={discrete}
           accountAddress={walletAccountAddress}
           tx={tx}
           language={language}
@@ -199,7 +199,7 @@ const TransactionDetails = ({
           </Row>
         )}
         {isTransfer(tx) && <Row title={'Amount'}>
-          {!incognito ? (
+          {!discrete ? (
             <H4 style={config.amountStyle}>
               {config.amountSign}
               <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>

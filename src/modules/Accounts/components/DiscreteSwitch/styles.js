@@ -2,7 +2,7 @@ import { colors } from 'constants/styleGuide';
 
 export default () => ({
   common: {
-    incognitoWrapper: {
+    discreteWrapper: {
       borderWidth: 1,
       marginRight: 10,
       width: 68,
@@ -10,7 +10,7 @@ export default () => ({
       borderRadius: 25,
       padding: 2
     },
-    incognitoIcon: {
+    discreteIcon: {
       backgroundColor: colors.light.white,
       width: 30,
       height: 30,

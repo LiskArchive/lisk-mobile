@@ -47,7 +47,7 @@ const ExtendedTitle = ({
   theme,
   styles,
   address,
-  incognito,
+  discrete,
   type,
   token,
   scrollY,
@@ -88,7 +88,7 @@ const ExtendedTitle = ({
           />
         </View>
       )}
-      {incognito ? (
+      {discrete ? (
         <Image
           source={blurs[`${theme}${balanceSize}`]}
           style={styles[`blur${balanceSize}`]}
@@ -134,7 +134,7 @@ const localizedBalance = balance => {
 const HomeHeaderTitle = ({
   styles, type, scrollY, address, balance, placeHolder, scrollToTop
 }) => {
-  const { token: { active }, theme, incognito } = useSelector(state => state.settings);
+  const { token: { active }, theme, discrete } = useSelector(state => state.settings);
   const { info } = useSelector(state => state.accounts);
   const wallet = false;
   const os = deviceType();
@@ -144,7 +144,7 @@ const HomeHeaderTitle = ({
     placeHolder: type === 'wallet' ? placeHolder : `${tokenMap[active].label} wallet`,
     scrollY: scrollY || new Animated.Value(0),
     theme,
-    incognito,
+    discrete,
     token: active,
     address: type === 'wallet' ? address : info[active]?.address ?? '',
     balance: type === 'wallet' ? balance : info[active]?.balance ?? 0,
@@ -171,7 +171,7 @@ const HomeHeaderTitle = ({
             styles={styles}
             scrollY={data.scrollY}
             address={data.address}
-            incognito={data.incognito}
+            discrete={data.discrete}
             type={data.type}
             wallet={wallet}
             activeToken={active}

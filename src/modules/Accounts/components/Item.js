@@ -50,7 +50,7 @@ const Item = ({
   activeToken,
   account,
   followedAccounts,
-  incognito,
+  discrete,
   navigate,
 }) => {
   const animation = useRef();
@@ -63,7 +63,7 @@ const Item = ({
   }, []);
 
   const showDetail = () => {
-    navigate('TxDetail', { tx, account, incognito });
+    navigate('TxDetail', { tx, account, discrete });
   };
 
   const getAddressText = address => {
@@ -128,7 +128,7 @@ const Item = ({
       {isTransfer(tx) && (
         <View style={[styles.column, styles.amountWrapper]}>
           {(tx.recipientAddress === tx.senderAddress)
-            || incognito ? null : (
+            || discrete ? null : (
             <View style={[styles[direction], styles.theme[direction]]}>
               <FormattedNumber
                 trim={true}
@@ -144,7 +144,7 @@ const Item = ({
               </FormattedNumber>
             </View>
             )}
-          {tx.recipientAddress !== tx.senderAddress && incognito ? (
+          {tx.recipientAddress !== tx.senderAddress && discrete ? (
             <Blur value={amount} direction={direction} />
           ) : null}
           {

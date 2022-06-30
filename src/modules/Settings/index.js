@@ -50,7 +50,7 @@ const Settings = ({
 
   const toggleIncognito = () => {
     settingsUpdated({
-      incognito: !settings.incognito,
+      discrete: !settings.discrete,
     });
   };
 
@@ -124,11 +124,11 @@ const Settings = ({
 
           <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
             <ItemTitle
-              testID="enable-incognito"
-              icon="enable-incognito"
+              testID="enable-discrete"
+              icon="enable-discrete"
               targetStateLabel={
                 <SwitchButton
-                  value={settings.incognito}
+                  value={settings.discrete}
                   theme={theme}
                   onSyncPress={toggleIncognito}
                 />

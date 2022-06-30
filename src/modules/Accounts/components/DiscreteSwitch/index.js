@@ -9,24 +9,24 @@ import withTheme from 'components/shared/withTheme';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import getStyles from './styles';
 
-const IncognitoSwitch = ({ styles }) => {
+const DiscreteSwitch = ({ styles }) => {
   const translateX = useRef(new Animated.Value(0)).current;
-  const incognito = useSelector(state => state.settings.incognito);
+  const discrete = useSelector(state => state.settings.discrete);
   const dispatch = useDispatch();
 
   const toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
     dispatch(settingsUpdated({
-      incognito: !incognito
+      discrete: !discrete
     }));
   };
 
   useEffect(() => {
-    Animated.spring(translateX, { toValue: incognito ? 31 : 0, useNativeDriver: true }).start();
-  }, [incognito]);
+    Animated.spring(translateX, { toValue: discrete ? 31 : 0, useNativeDriver: true }).start();
+  }, [discrete]);
 
   return (
-    <TouchableOpacity style={[styles.incognitoWrapper]} onPress={toggleIncognito} >
+    <TouchableOpacity style={[styles.discreteWrapper]} onPress={toggleIncognito} >
         <Animated.View style={[
           {
             transform: [
@@ -35,12 +35,12 @@ const IncognitoSwitch = ({ styles }) => {
               },
             ],
           }]} >
-          <View style={styles.incognitoIcon} >
-            <IncognitoSvg size={1.1} disabled={incognito} />
+          <View style={styles.discreteIcon} >
+            <IncognitoSvg size={1.1} disabled={discrete} />
           </View>
         </Animated.View>
     </TouchableOpacity>
   );
 };
 
-export default withTheme(translate()(IncognitoSwitch), getStyles());
+export default withTheme(translate()(DiscreteSwitch), getStyles());

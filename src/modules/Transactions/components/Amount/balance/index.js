@@ -19,7 +19,7 @@ const AmountBalance = ({
   t,
   styles,
   theme,
-  incognito,
+  discrete,
   value = 0,
   tokenType,
   language,
@@ -34,7 +34,7 @@ const AmountBalance = ({
     source={theme === themes.dark ? amountBg : amountBgLight}
   >
     <P style={[styles.balanceText, styles.theme.balanceText]}>{t('Available Balance')}</P>
-    {incognito ? (
+    {discrete ? (
       <Image source={blurs[theme]} style={styles.balanceIncognito} />
     ) : (
       <View style={[styles.row]}>

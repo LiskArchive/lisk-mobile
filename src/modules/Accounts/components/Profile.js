@@ -19,7 +19,7 @@ import { colors, themes } from 'constants/styleGuide';
 import Icon from 'components/shared/toolBox/icon';
 import MultiSignatureSvg from 'assets/svgs/MultiSignatureSvg';
 import getStyles from './AccountSummary/styles';
-import IncognitoSwitch from './IncognitoSwitch';
+import DiscreteSwitch from './DiscreteSwitch';
 
 const blurs = {
   blurBig,
@@ -78,7 +78,7 @@ const ProfileScreen = ({
                 </View>
               </TouchableOpacity>
               <View style={styles.row} >
-                <IncognitoSwitch />
+                <DiscreteSwitch />
                 {isMultiSignature && (
                   <TouchableOpacity
                     style={[styles.avatar]}
@@ -140,7 +140,7 @@ const ProfileScreen = ({
                   tokenType={token}
                   style={[
                     styles.theme.homeBalance,
-                    settings.incognito ? styles.invisibleTitle : null
+                    settings.discrete ? styles.invisibleTitle : null
                   ]}
                   type={H3}
                   language={language}
@@ -154,7 +154,7 @@ const ProfileScreen = ({
                   style={[
                     styles.blur,
                     styles[`blur${balanceSize}`],
-                    settings.incognito ? styles.visibleBlur : null
+                    settings.discrete ? styles.visibleBlur : null
                   ]}
                 />
               </AView>
@@ -181,7 +181,7 @@ const ProfileScreen = ({
                       style={[
                         styles.theme.homeBalance,
                         styles.lockedBalance,
-                        settings.incognito ? styles.invisibleTitle : null
+                        settings.discrete ? styles.invisibleTitle : null
                       ]}
                       type={P}
                       language={language}
@@ -193,7 +193,7 @@ const ProfileScreen = ({
                       style={[
                         styles.blur,
                         styles[`blur${lockedSize}`],
-                        settings.incognito ? styles.visibleBlur : null
+                        settings.discrete ? styles.visibleBlur : null
                       ]}
                     />
                   </AView>

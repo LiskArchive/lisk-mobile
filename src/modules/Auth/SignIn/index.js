@@ -231,7 +231,7 @@ const SignIn = ({
   const onDeepLinkRequested = (event) => {
     const isSignedIn = accounts.passphrase;
     if (event.type && event.type === 'Discreet') {
-      settingsUpdated({ incognito: true });
+      settingsUpdated({ discrete: true });
     }
     if (isSignedIn) {
       navigateToDeepLink(event.url);
