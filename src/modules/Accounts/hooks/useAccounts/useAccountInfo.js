@@ -16,6 +16,7 @@ export function useAccountInfo() {
   // eslint-disable-next-line
   useEffect(() => {
     if (!address) {
+      // eslint-disable-next-line
       return false;
     }
     dispatch(resetAccountSummary());
