@@ -33,13 +33,11 @@ const Settings = ({
   };
 
   const showDialog = () => {
-    console.log('hey');
     setShow(true);
     setError(null);
   };
 
   const hideDialog = () => {
-    console.log('holla');
     setShow(false);
   };
 

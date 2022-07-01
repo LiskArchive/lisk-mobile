@@ -9,6 +9,7 @@ import PassphraseCopy from 'components/shared/passphraseCopy';
 import withTheme from 'components/shared/withTheme';
 import { P, A } from 'components/shared/toolBox/typography';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import { useNavigation } from '@react-navigation/native';
 import getStyles from './styles';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD;
@@ -18,11 +19,11 @@ const PassphraseBackup = ({
   styles,
   t,
   theme,
-  navigation,
   sharedData: data,
   nextStep,
 }) => {
   const [passphraseRevealed, setPassphraseReveal] = useState(false);
+  const navigation = useNavigation();
 
   const toggleQRCode = () => {
     setPassphraseReveal(!passphraseRevealed);
@@ -40,12 +41,14 @@ const PassphraseBackup = ({
       />
       <ScrollView style={styles.container}>
         <PassphraseCopy passphrase={data.recoveryPhrase} />
-        <P style={[styles.QRText, styles.theme.text]}>
-          {t('Private use only')}
+        <View style={styles.row}>
+          <P style={[styles.QRText, styles.theme.text]}>
+            {t('Private use only')}
+          </P>
           <A style={styles.button} onPress={toggleQRCode}>
-            &nbsp;{passphraseRevealed ? t('Hide QR code') : t('Show QR code')}
+            {passphraseRevealed ? t('Hide QR code') : t('Show QR code')}
           </A>
-        </P>
+        </View>
         {passphraseRevealed && (
           <View style={styles.qrCodeContainer}>
             <QRCode
@@ -63,12 +66,12 @@ const PassphraseBackup = ({
           </View>
         )}
       </ScrollView>
-      <View style={styles.container} >
-      <PrimaryButton
-        noTheme
-        title={t('settings.backup_phrase.continue')}
-        onPress={nextScreen}
-      />
+      <View style={styles.container}>
+        <PrimaryButton
+          noTheme
+          title={t('settings.backup_phrase.continue')}
+          onPress={nextScreen}
+        />
       </View>
     </SafeAreaView>
   );

@@ -16,14 +16,20 @@ export default () => ({
     text: {
       marginBottom: 28,
     },
-    QRText: {
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
       marginTop: 26,
       marginBottom: 8,
+    },
+    QRText: {
       textAlign: 'center',
     },
     button: {
       color: colors.light.ultramarineBlue,
       fontWeight: 'bold',
+      paddingLeft: 5,
     },
   },
 

@@ -10,7 +10,7 @@ const MultiStep = ({
   children,
   finalCallback,
   backButtonTitle,
-  showNav,
+  hasNav,
   navStyles,
   interactive,
   backButton,
@@ -85,7 +85,7 @@ const MultiStep = ({
       style={styles.flex}
       key={key}
     >
-      {showNav ? (
+      {hasNav && (
         <Nav
           normalizedStyles={normalizedStyles}
           hideGroups={hideGroups}
@@ -103,7 +103,7 @@ const MultiStep = ({
           prevStep={prev}
           move={this.move}
         />
-      ) : null}
+      )}
       {ProgressBar ? (
         <ProgressBar current={currentIndex} total={children.length} />
       ) : null}

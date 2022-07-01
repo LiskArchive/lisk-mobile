@@ -1,5 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
@@ -7,8 +8,9 @@ import PasswordForm from '../components/PasswordForm';
 import getStyles from './styles';
 
 const DecryptPhrase = ({
-  styles, navigation, account, route, nextStep
+  styles, account, route, nextStep
 }) => {
+  const navigation = useNavigation();
   const { title, address, successRoute } = route.params;
 
   const onSubmit = (password) => {
