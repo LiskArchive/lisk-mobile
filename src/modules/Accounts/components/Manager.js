@@ -23,11 +23,11 @@ const Manager = ({
   noTitle
 }) => {
   const {
-    incognito: incognitoMode, token:
+    discrete: discreteMode, token:
     { active: activeToken }
   } = useSelector(state => state.settings);
   const dispatch = useDispatch();
-  const incognito = type === 'home' && incognitoMode;
+  const discrete = type === 'home' && discreteMode;
   const Anim = Animated.View;
 
   const opacity = useRef(new Animated.Value(0));
@@ -53,7 +53,7 @@ const Manager = ({
       RNShake.addEventListener('ShakeEvent', () => {
         if (!timeout) {
           dispatch(settingsUpdated({
-            incognito: !incognitoMode
+            discrete: !discreteMode
           }));
           timeout = setTimeout(() => {
             timeout = false;
@@ -80,7 +80,7 @@ const Manager = ({
           </View>
         )}
         <List
-          incognito={incognito}
+          discrete={discrete}
           navigate={navigate}
           account={account ? account.address : ''}
           followedAccounts={{}}

@@ -50,7 +50,7 @@ const Settings = ({
 
   const toggleIncognito = () => {
     settingsUpdated({
-      incognito: !settings.incognito,
+      discrete: !settings.discrete,
     });
   };
 
