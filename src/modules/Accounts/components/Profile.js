@@ -3,7 +3,6 @@ import {
   Image, Animated, View, ImageBackground, TouchableOpacity
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import Avatar from 'components/shared/avatar';
 import { fromRawLsk } from 'utilities/conversions';
 import FormattedNumber from 'components/shared/formattedNumber';
@@ -17,10 +16,10 @@ import LiskBackgroundDark from 'assets/images/homeBg-dark.png';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { stringShortener } from 'utilities/helpers';
 import { colors, themes } from 'constants/styleGuide';
-import { IconButton } from 'components/shared/toolBox/button';
 import Icon from 'components/shared/toolBox/icon';
 import MultiSignatureSvg from 'assets/svgs/MultiSignatureSvg';
 import getStyles from './AccountSummary/styles';
+import DiscreteSwitch from './DiscreteSwitch';
 
 const blurs = {
   blurBig,
@@ -49,8 +48,6 @@ const ProfileScreen = ({
   lockedBalance,
   theme,
   settings,
-  settingsUpdated,
-  incognito,
   isMultiSignature,
   navigation
 }) => {
@@ -62,13 +59,6 @@ const ProfileScreen = ({
   const normalizedLockedBalance = fromRawLsk(lockedBalance);
   const lockedSize = getBalanceSize(normalizedLockedBalance);
 
-  const toggleIncognito = () => {
-    ReactNativeHapticFeedback.trigger('selection');
-    settingsUpdated({
-      incognito: !incognito
-    });
-  };
-
   return (
     <View testID="accountSummary" style={styles.flex}>
       <View style={[styles.flex, styles.profileContainer]}>
@@ -77,6 +67,29 @@ const ProfileScreen = ({
           style={[styles.imgContainer]}
           imageStyle={{ opacity: theme === themes.dark ? 0.3 : 1 }}
         >
+          <AView style={[{
+            opacity: interpolate([0, height - 200], [1, 0]),
+          }, styles.accountTitle]} >
+            <View style={styles.row}>
+              <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('SwitchAccount')} >
+                <H2 style={styles.title}>{t('Accounts')}</H2>
+                <View style={styles.icon} onPress={() => navigation.navigate('SwitchAccount')}>
+                  <Icon name="forward" color={colors.light.white} size={22} />
+                </View>
+              </TouchableOpacity>
+              <View style={styles.row} >
+                <DiscreteSwitch />
+                {isMultiSignature && (
+                  <TouchableOpacity
+                    style={[styles.avatar]}
+                    onPress={() => navigation.navigate('Multisignature')}
+                  >
+                    <MultiSignatureSvg size={1} />
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+          </AView>
           <AView
             style={[
               styles.row,
@@ -88,13 +101,6 @@ const ProfileScreen = ({
             <AView>
               <View style={styles.row}>
                 <H2 style={styles.title}>{t('Lisk Wallet')}</H2>
-                <IconButton
-                  title=""
-                  icon={incognito ? 'disable-incognito' : 'enable-incognito'}
-                  color={colors.light.white}
-                  iconSize={20}
-                  onClick={toggleIncognito}
-                />
               </View>
               <View style={styles.copyContainer}>
                 <CopyToClipboard
@@ -109,15 +115,7 @@ const ProfileScreen = ({
               </View>
             </AView>
             <AView style={[styles.avatarContainer]}>
-              {isMultiSignature && (
-                <TouchableOpacity
-                  style={[styles.avatar]}
-                  onPress={() => navigation.navigate('Multisignature')}
-                >
-                  <MultiSignatureSvg size={1.2} />
-                </TouchableOpacity>
-              )}
-              <Avatar address={account.address} size={50} />
+              <Avatar address={account.address} size={40} />
             </AView>
           </AView>
           <AView
@@ -142,7 +140,7 @@ const ProfileScreen = ({
                   tokenType={token}
                   style={[
                     styles.theme.homeBalance,
-                    settings.incognito ? styles.invisibleTitle : null
+                    settings.discrete ? styles.invisibleTitle : null
                   ]}
                   type={H3}
                   language={language}
@@ -156,7 +154,7 @@ const ProfileScreen = ({
                   style={[
                     styles.blur,
                     styles[`blur${balanceSize}`],
-                    settings.incognito ? styles.visibleBlur : null
+                    settings.discrete ? styles.visibleBlur : null
                   ]}
                 />
               </AView>
@@ -183,7 +181,7 @@ const ProfileScreen = ({
                       style={[
                         styles.theme.homeBalance,
                         styles.lockedBalance,
-                        settings.incognito ? styles.invisibleTitle : null
+                        settings.discrete ? styles.invisibleTitle : null
                       ]}
                       type={P}
                       language={language}
@@ -195,7 +193,7 @@ const ProfileScreen = ({
                       style={[
                         styles.blur,
                         styles[`blur${lockedSize}`],
-                        settings.incognito ? styles.visibleBlur : null
+                        settings.discrete ? styles.visibleBlur : null
                       ]}
                     />
                   </AView>

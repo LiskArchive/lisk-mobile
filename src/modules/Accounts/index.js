@@ -46,7 +46,7 @@ const Home = ({
   theme,
   isFocused,
   activeToken,
-  incognito,
+  discrete,
   getNetworkInfo,
   settingsUpdated,
   route,
@@ -100,8 +100,8 @@ const Home = ({
     setParams({
       scrollToTop
     });
-    if (route.params && route.params.discreet && !incognito) {
-      settingsUpdated({ incognito: true });
+    if (route.params && route.params.discreet && !discrete) {
+      settingsUpdated({ discrete: true });
     }
     // const initializationTimeout = setTimeout(() => {
     //   showInitializationModal({
@@ -167,7 +167,7 @@ const Home = ({
       <ParallaxHeader
         reference={scrollView}
         headerMinHeight={70}
-        headerMaxHeight={260}
+        headerMaxHeight={300}
         extraScrollHeight={20}
         navbarColor="#3498db"
         alwaysShowTitle={false}
@@ -186,7 +186,7 @@ const Home = ({
             navigation={navigation}
             scrollY={scrollY.current}
             isFocused={isFocused}
-            incognito={incognito}
+            discrete={discrete}
           />
         }
         renderContent={() => content}
@@ -200,7 +200,7 @@ const Home = ({
 };
 
 const mapStateToProps = state => ({
-  incognito: state.settings.incognito,
+  discrete: state.settings.discrete,
   activeToken: state.settings.token.active,
   settings: state.settings,
 });
