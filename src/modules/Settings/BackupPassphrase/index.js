@@ -24,7 +24,7 @@ const BackupPassphrase = () => {
         }}
       />
       <PassphraseBackup />
-      <Confirm customHeader={true} />
+      <Confirm customHeader />
       <PasswordSetupSuccess encryptedJson={account} onContinue={navigation.goBack} />
     </MultiStep>
   );
