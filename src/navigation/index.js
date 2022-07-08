@@ -14,9 +14,9 @@ import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
-import PassphraseBackup from 'components/screens/passphraseBackup';
 import Intro from 'components/screens/intro';
 
+import PassphraseBackup from 'modules/Settings/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
 import SignIn from 'modules/Auth/SignIn';
 import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
@@ -103,7 +103,7 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="PassphraseBackup"
             component={PassphraseBackup}
-            options={navigationOptions.PassphraseBackup}
+            options={navigationOptions.NoHeader}
           />
         </MainStack.Navigator>
       </NavigationContainer>

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
@@ -43,8 +44,10 @@ const chooseRandomWords = (qty, words) => {
 const Confirm = ({
   t,
   nextStep,
-  sharedData: { passphrase }, navigation, prevStep
+  sharedData: { passphrase }, prevStep,
+  customHeader
 }) => {
+  const navigation = useNavigation();
   const [buttonStatus, setButtonStatus] = useState(true);
   const [missing, setMissing] = useState([]);
   const [options, setOptions] = useState([]);
@@ -162,14 +165,15 @@ const Confirm = ({
     setOptions({
       headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
       title:
-        deviceHeight() >= SCREEN_HEIGHTS.SM
-          ? t('Passphrase verification')
-          : t('Verification'),
+          deviceHeight() >= SCREEN_HEIGHTS.SM
+            ? t('Passphrase verification')
+            : t('Verification'),
     });
     generateTest();
   }, []);
 
   return <SafeAreaView style={styles.wrapper}>
+    {customHeader && <HeaderBackButton title={'settings.backup_phrase.confirm_phrase'} onPress={navigation.goBack} />}
     <View style={styles.container}>
       <View style={styles.body}>
         <View style={styles.box}>

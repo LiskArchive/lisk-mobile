@@ -13,15 +13,13 @@ export function useAccountInfo() {
 
   const getAccount = (add) => apiClient.apiClient.getAccount(add);
 
-  // eslint-disable-next-line
   useEffect(() => {
-    if (!address) {
-      return false;
+    if (address) {
+      dispatch(resetAccountSummary());
+      getAccount(address).then(data => {
+        dispatch(setAccountSummary(data));
+      });
     }
-    dispatch(resetAccountSummary());
-    getAccount(address).then(data => {
-      dispatch(setAccountSummary(data));
-    });
   }, [address]);
 
   const summary = useSelector(selectAccountSummary);

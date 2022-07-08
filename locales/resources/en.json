@@ -153,14 +153,12 @@
   "Your wallet": "Your wallet",
   "Copied to clipboard": "Copied to clipboard",
   "About Lisk": "About Lisk",
-  "Backup your passphrase": "Backup your passphrase",
   "Dark mode": "Dark mode",
   "Disabled": "Disabled",
   "Discreet mode": "Discreet mode",
   "Enabled": "Enabled",
   "Hide balance and transaction amounts.": "Hide balance and transaction amounts.",
   "Manage your bookmarks.": "Manage your bookmarks.",
-  "Terms of use": "Terms of use",
   "Currency": "Currency",
   "General": "General",
   "Language": "Language",
@@ -244,6 +242,26 @@
   "available to unlock (only on desktop)": "available to unlock (only on desktop)",
   "Insert public address or a name": "Insert public address or a name",
   "Insert public address": "Insert public address",
+  "settings": {
+    "menu": {
+      "backup_passphrase": "Backup your passphrase",
+      "about": "About Lisk",
+      "dark_mode": "Dark mode",
+      "disabled": "Disabled",
+      "enabled": "Enabled",
+      "discreet_mode": "Discreet mode",
+      "terms": "Terms of use",
+      "currency": "Currency"
+    },
+    "descriptions": {
+      "discreet_mode": "Hide balance and transaction amounts."
+    },
+    "backup_phrase": {
+      "title": "Backup secret recovery phrase",
+      "confirm_phrase": "Confirm your secret recovery phrase",
+      "continue": "Continue"
+    }
+  },
   "multisignature": {
     "account_details": "Multisignature account details",
     "description1": "This is a multisignature account, which allows a group of users to control shared LSK.",

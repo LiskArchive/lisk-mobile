@@ -8,7 +8,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
-import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import getStyles from './styles';
 import { passwordValidator } from '../validators';
 import PasswordSetupSuccess from '../PasswordSetupSuccess';
@@ -20,6 +20,7 @@ const PasswordSetupForm = ({
 }) => {
   const { encryptAccount } = useEncryptAccount();
   const { setAccount } = useAccounts();
+  const [, setCurrentAccount] = useCurrentAccount();
   const { passphrase } = route.params;
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -42,7 +43,7 @@ const PasswordSetupForm = ({
     setEncryptedJSON(data);
     setIsSuccess(true);
     setAccount(data);
-    navigation.navigate('ManageAccount');
+    setCurrentAccount(data);
   };
 
   useEffect(() => {
@@ -50,8 +51,10 @@ const PasswordSetupForm = ({
     setConfirmPasswordError('');
   }, [password, confirmPassword]);
 
+  const onContinue = () => navigation.navigate('Main');
+
   return isSuccess
-    ? <PasswordSetupSuccess encryptedJson={encryptedJSON} />
+    ? <PasswordSetupSuccess encryptedJson={encryptedJSON} onContinue={onContinue} />
     : <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
     <HeaderBackButton
       title="auth.setup.password_setup_title"

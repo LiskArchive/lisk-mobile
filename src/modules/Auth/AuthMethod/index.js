@@ -65,6 +65,10 @@ const AuthMethod = ({
     }
   };
 
+  const createAccount = () => {
+    navigation.navigate('Register');
+  };
+
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
@@ -73,7 +77,7 @@ const AuthMethod = ({
           <AuthTypeItem illustration={<PassphraseSvg />} label={t('auth.setup.secret_phrase')} onPress={() => navigation.navigate('SecretRecoveryPhrase')} testID="secret-phrase" />
           <AuthTypeItem illustration={<UploadSvg />} label={t('auth.setup.restore_file')} onPress={selectEncryptedJSON} testID="restore-from-file" />
         </View>
-        <CreateAccount />
+        <CreateAccount onPress={createAccount} />
       </View>
     </SafeAreaView>
   );

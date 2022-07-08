@@ -46,7 +46,7 @@ const Register = ({ navigation, route, t }) => {
   return <View style={[styles.container, noNavStyle]}>
     <MultiStep
       progressBar={progressBar}
-      showNav={showNav}
+      hasNav={showNav}
       navStyles={styles}
       hideSteps={true}
       groupButton={NavButton}
