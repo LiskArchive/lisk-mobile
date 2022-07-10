@@ -7,7 +7,6 @@ export default () => ({
     container: {
       flexDirection: 'row',
       borderBottomWidth: 1,
-      borderColor: colors.light.platinumGray,
       padding: boxes.boxPadding,
       paddingVertical: 10,
       alignItems: 'center',
@@ -30,6 +29,9 @@ export default () => ({
   },
 
   [themes.light]: {
+    container: {
+      borderColor: colors.light.platinumGray,
+    },
     wrapper: {
       backgroundColor: colors.light.white,
     },
@@ -42,6 +44,9 @@ export default () => ({
   },
 
   [themes.dark]: {
+    container: {
+      borderColor: colors.light.volcanicSand,
+    },
     wrapper: {
       backgroundColor: colors.dark.mainBg,
     },

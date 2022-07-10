@@ -8,12 +8,20 @@ import getStyles from './styles';
 
 const AccountItem = ({
   address, username, styles, onPress, testID
-}) => <TouchableOpacity style={styles.container} onPress={onPress} testID={testID} >
+}) => (
+  <TouchableOpacity
+    style={[styles.container, styles.theme.container]}
+    onPress={onPress}
+    testID={testID}
+  >
     <Avatar address={address} size={45} style={styles.avatar} />
-    <View style={styles.content} >
+    <View style={styles.content}>
       {!!username && <P style={styles.username}>{username}</P>}
-      <P style={[styles.address, styles.theme.address]}>{stringShortener(address, 5, 5)}</P>
+      <P style={[styles.address, styles.theme.address]}>
+        {stringShortener(address, 5, 5)}
+      </P>
     </View>
-  </TouchableOpacity>;
+  </TouchableOpacity>
+);
 
 export default withTheme(AccountItem, getStyles());

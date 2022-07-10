@@ -47,7 +47,7 @@ const SwitchAccount = ({
           iconStyle={styles.icon}
           iconSize={20}
           title={t('auth.setup.buttons.add_another_account')}
-          style={[styles.button, styles.outline]}
+          style={[styles.button, styles.outline, styles.theme.outline]}
         />
       </View>
     </SafeAreaView>

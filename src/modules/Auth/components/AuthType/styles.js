@@ -10,7 +10,6 @@ export default () => ({
       paddingHorizontal: boxes.boxPadding,
       paddingVertical: 30,
       borderWidth: 1,
-      borderColor: colors.light.platinumGray,
       borderRadius: 10,
       marginVertical: 10
     },
@@ -25,6 +24,9 @@ export default () => ({
   },
 
   [themes.light]: {
+    container: {
+      borderColor: colors.light.platinumGray,
+    },
     wrapper: {
       backgroundColor: colors.light.white,
     },
@@ -34,6 +36,9 @@ export default () => ({
   },
 
   [themes.dark]: {
+    container: {
+      borderColor: colors.light.volcanicSand,
+    },
     wrapper: {
       backgroundColor: colors.dark.mainBg,
     },
