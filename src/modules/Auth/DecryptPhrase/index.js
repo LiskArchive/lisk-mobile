@@ -22,7 +22,7 @@ const DecryptPhrase = ({
     }
   };
 
-  return <SafeAreaView style={styles.container} >
+  return <SafeAreaView style={[styles.container, styles.theme.wrapper]} >
     <HeaderBackButton
       title={title}
       onPress={navigation.goBack}
