@@ -1,44 +1,33 @@
 import {
-  themes, colors, boxes, fonts
+  themes, colors, fonts
 } from 'constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {
-      flex: 1,
-      padding: boxes.boxPadding,
-      marginVertical: boxes.boxPadding
-    },
-    container: {
-      flex: 1,
+    downloadFile: {
+      flexDirection: 'row',
+      marginTop: 20,
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
-    avatarContainer: {
-      alignItems: 'center',
+    file: {
+      paddingHorizontal: 10
     },
-    address: {
-      marginTop: 10,
-      textAlign: 'center',
-      color: colors.light.blueGray,
+    text: {
+      fontFamily: fonts.family.heading,
       fontSize: fonts.size.small
     },
-    illustration: {
-      paddingVertical: 30
-    },
-    title: {
+    download: {
       fontFamily: fonts.family.heading,
-      fontSize: fonts.size.h3,
-      padding: 5
-    },
-    description: {
-      fontFamily: fonts.family.context,
       fontSize: fonts.size.base,
-      textAlign: 'center',
-      padding: 10
+      color: colors.light.ultramarineBlue
     },
-    continueButton: {
-      paddingHorizontal: 20
+    downloadButton: {
+      paddingHorizontal: 40,
+      paddingVertical: 10,
+      alignSelf: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row'
     }
   },
 

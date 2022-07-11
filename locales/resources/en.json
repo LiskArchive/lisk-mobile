@@ -313,6 +313,9 @@
       "add_account": "Add account",
       "manage_accounts": "Manage accounts",
       "switch_account": "Switch account",
+      "delete_account": "Choose account",
+      "remove_account": "Remove account?",
+      "remove_account_description": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
       "decrypt_passphrase": "Decrypt your secret recovery phrase",
       "add_account_description": "Enter your secret recovery phrase to manage your account",
       "password_setup_title": "Set up device password",
@@ -323,6 +326,7 @@
       "restore_file": "Restore from file",
       "buttons": {
         "download": "Download",
+        "remove_now": "Remove now",
         "password_setup_continue": "Continue to Dashboard",
         "save_account": "Save account",
         "add_another_account": "Add another account",

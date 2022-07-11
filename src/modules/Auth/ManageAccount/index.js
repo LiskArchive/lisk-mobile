@@ -53,7 +53,7 @@ const ManageAccount = ({
           style={[styles.button, styles.outline]}
         />
         <IconButton
-          onPress={() => { }}
+          onPress={() => navigation.navigate('DeleteAccount')}
           color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
           icon="delete-bookmark"
           iconStyle={styles.icon}
