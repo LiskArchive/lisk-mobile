@@ -22,9 +22,9 @@ const DecryptPhrase = ({
   const onSubmit = (password) => {
     const { successRoute } = route.params;
     if (nextStep && typeof nextStep === 'function') {
-      const decrpytedAccount = decryptAccount(account, password);
+      const decryptedAccount = decryptAccount(account, password);
       nextStep({
-        ...decrpytedAccount,
+        ...decryptedAccount,
         encryptedAccount: sharedData ? sharedData.encryptedAccount : account,
       });
     } else {

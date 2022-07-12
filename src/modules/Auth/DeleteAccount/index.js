@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 import { SafeAreaView, View } from 'react-native';
 import { translate } from 'react-i18next';
