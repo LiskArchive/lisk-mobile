@@ -4,6 +4,13 @@ import {
 
 export default () => ({
   common: {
+    wrapper: {
+      flex: 1,
+    },
+    closeIcon: {
+      alignSelf: 'flex-end',
+      marginRight: 20,
+    },
     downloadFile: {
       flexDirection: 'row',
       marginTop: 20,

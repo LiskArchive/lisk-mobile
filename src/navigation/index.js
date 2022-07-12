@@ -24,7 +24,7 @@ import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
 import ManageAccount from 'modules/Auth/ManageAccount';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import SwitchAccount from 'modules/Auth/SwitchAccount';
-import DeleteAccount from 'modules/Auth/DeleteAccount';
+import DeleteAccount from 'modules/Auth/RemoveAccount';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './appNavigator';
 
