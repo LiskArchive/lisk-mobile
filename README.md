@@ -32,13 +32,15 @@ The prerequisites to install and run Lisk Mobile from source using the different
   $ brew install node
   ```
 
-- [nvm](https://github.com/nvm-sh/nvm)
+- [NVM](https://github.com/nvm-sh/nvm)
 
   ```bash
   $ brew install nvm
   ```
 
-- [npm](https://www.npmjs.com/) (recommended 6.14.16)
+  Remember to follow Brew additional steps for enabling NVM fully. After running `brew install nvm`, Brew will detail this steps.
+
+- [NPM](https://www.npmjs.com/) (recommended 6.14.16)
 
   ```bash
   $ nvm install-latest-npm
