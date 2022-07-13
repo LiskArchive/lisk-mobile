@@ -39,7 +39,7 @@ const ManageAccount = ({
         <View style={[styles.body]}>
           <H2 style={styles.title} >{t('auth.setup.manage_accounts')}</H2>
           {accounts.map(account =>
-            <AccountItem key={account.metadata.address} username={account.metadata.name} address={account.metadata.address} onPress={() => selectAccount(account)} />)}
+            <AccountItem key={account.metadata.address} account={account} onPress={() => selectAccount(account)} />)}
         </View>
       </ScrollView>
       <View style={styles.bottom} >

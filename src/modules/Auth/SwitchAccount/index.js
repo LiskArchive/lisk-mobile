@@ -37,7 +37,7 @@ const SwitchAccount = ({
         onPress={navigation.goBack} />
       <ScrollView style={styles.container} >
         {accounts.map(acc =>
-          <AccountItem key={acc.metadata.address} username={acc.metadata.name} address={acc.metadata.address} onPress={() => selectAccount(acc)} active={acc.metadata.address === account.metadata?.address} />)}
+          <AccountItem key={acc.metadata.address} account={acc} onPress={() => selectAccount(acc)} active={acc.metadata.address === account.metadata?.address} />)}
       </ScrollView>
       <View style={styles.bottom} >
         <IconButton

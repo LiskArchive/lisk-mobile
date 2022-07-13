@@ -28,8 +28,7 @@ const DeleteAccount = ({ styles, t, nextStep }) => {
             {accounts.map((acc) => (
               <AccountItem
                 key={acc.metadata.address}
-                username={acc.metadata.name}
-                address={acc.metadata.address}
+                account={acc}
                 onPress={() => selectAccount(acc)}
               />
             ))}

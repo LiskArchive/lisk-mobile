@@ -1,20 +1,15 @@
-import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import withTheme from 'components/shared/withTheme';
-import Avatar from 'components/shared/avatar';
-import { stringShortener } from 'utilities/helpers';
-import { P } from 'components/shared/toolBox/typography';
-import Icon from 'components/shared/toolBox/icon';
-import { colors } from 'constants/styleGuide';
-import getStyles from './styles';
+import React from "react";
+import { View, TouchableOpacity } from "react-native";
+import withTheme from "components/shared/withTheme";
+import Avatar from "components/shared/avatar";
+import { stringShortener } from "utilities/helpers";
+import { P } from "components/shared/toolBox/typography";
+import Icon from "components/shared/toolBox/icon";
+import { colors } from "constants/styleGuide";
+import getStyles from "./styles";
 
-const SwipeableAccountItem = ({
-  address,
-  username,
-  styles,
-  onPress,
-  testID,
-}) => {
+const SwipeableAccountItem = ({ account, styles, onPress, testID }) => {
+  const { address, name: username } = account.metadata;
   return (
     <TouchableOpacity
       style={styles.container}
