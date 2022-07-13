@@ -14,7 +14,7 @@ import getStyles from './styles';
 const SwipeableAccountItem = ({
   account, styles, onPress, testID, theme, active
 }) => {
-  const {name: username, address} = account.metadata
+  const { name: username, address } = account.metadata;
   return <SwipeableRow
     leftActions={[
       {

@@ -1,12 +1,14 @@
-import React from "react";
-import { View, TouchableOpacity } from "react-native";
-import withTheme from "components/shared/withTheme";
-import Avatar from "components/shared/avatar";
-import { stringShortener } from "utilities/helpers";
-import { P } from "components/shared/toolBox/typography";
-import getStyles from "./styles";
+import React from 'react';
+import { View, TouchableOpacity } from 'react-native';
+import withTheme from 'components/shared/withTheme';
+import Avatar from 'components/shared/avatar';
+import { stringShortener } from 'utilities/helpers';
+import { P } from 'components/shared/toolBox/typography';
+import getStyles from './styles';
 
-const AccountItem = ({ account, styles, onPress, testID }) => {
+const AccountItem = ({
+  account, styles, onPress, testID
+}) => {
   const { name: username, address } = account.metadata;
   return (
     <TouchableOpacity
