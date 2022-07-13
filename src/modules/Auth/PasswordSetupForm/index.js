@@ -8,7 +8,10 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
-import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
+import {
+  useAccounts,
+  useCurrentAccount,
+} from 'modules/Accounts/hooks/useAccounts';
 import getStyles from './styles';
 import { passwordValidator } from '../validators';
 import PasswordSetupSuccess from '../PasswordSetupSuccess';
@@ -39,7 +42,11 @@ const PasswordSetupForm = ({
     if (password !== confirmPassword) {
       return setConfirmPasswordError('auth.form.errors.confirm_password_error');
     }
-    const data = encryptAccount({ recoveryPhrase: passphrase, password, name: accountName });
+    const data = encryptAccount({
+      recoveryPhrase: passphrase,
+      password,
+      name: accountName,
+    });
     setEncryptedJSON(data);
     setIsSuccess(true);
     setAccount(data);
@@ -53,64 +60,85 @@ const PasswordSetupForm = ({
 
   const onContinue = () => navigation.navigate('Main');
 
-  return isSuccess
-    ? <PasswordSetupSuccess encryptedJson={encryptedJSON} onContinue={onContinue} />
-    : <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
-    <HeaderBackButton
-      title="auth.setup.password_setup_title"
-      onPress={navigation.goBack}
-      containerStyle={styles.header}
-    />
-    <ScrollView contentContainerStyle={styles.container} >
-      <Text style={[styles.description, styles.theme.description]} >{t('auth.setup.password_setup_description')}</Text>
-      <View>
-        <Input
-          testID="enter-password"
-          innerStyles={{ containerStyle: styles.inputContainer, input: styles.input }}
-          label={t('auth.form.enter_password')}
-          secureTextEntry
-          onChange={setPassword}
-          value={password}
-          error={passwordError && t(passwordError)}
+  return (
+    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+      {isSuccess ? (
+        <PasswordSetupSuccess
+          encryptedJson={encryptedJSON}
+          onContinue={onContinue}
         />
-        <Input
-          testID="confirm-password"
-          innerStyles={{ containerStyle: styles.inputContainer, input: styles.input }}
-          label={t('auth.form.confirm_password')}
-          secureTextEntry
-          onChange={setConfirmPassword}
-          value={confirmPassword}
-          error={confirmPasswordError && t(confirmPasswordError)}
-        />
-        <Input
-          testID="account-name"
-          innerStyles={{ containerStyle: styles.inputContainer, input: styles.input }}
-          label={t('auth.form.account_name')}
-          onChange={setAccountName}
-          value={accountName}
-        />
-      </View>
-    </ScrollView>
-    <View style={styles.container} >
-      <View style={styles.actionContainer} >
-        <View style={styles.switch} >
-          <Switch
-            value={isAgreed}
-            onValueChange={setIsAgreed}
-            trackColor={{ true: colors.light.ultramarineBlue }}
+      ) : (
+        <View>
+          <HeaderBackButton
+            title="auth.setup.password_setup_title"
+            onPress={navigation.goBack}
+            containerStyle={styles.header}
           />
+          <ScrollView contentContainerStyle={styles.container}>
+            <Text style={[styles.description, styles.theme.description]}>
+              {t('auth.setup.password_setup_description')}
+            </Text>
+            <View>
+              <Input
+                testID="enter-password"
+                innerStyles={{
+                  containerStyle: styles.inputContainer,
+                  input: styles.input,
+                }}
+                label={t('auth.form.enter_password')}
+                secureTextEntry
+                onChange={setPassword}
+                value={password}
+                error={passwordError && t(passwordError)}
+              />
+              <Input
+                testID="confirm-password"
+                innerStyles={{
+                  containerStyle: styles.inputContainer,
+                  input: styles.input,
+                }}
+                label={t('auth.form.confirm_password')}
+                secureTextEntry
+                onChange={setConfirmPassword}
+                value={confirmPassword}
+                error={confirmPasswordError && t(confirmPasswordError)}
+              />
+              <Input
+                testID="account-name"
+                innerStyles={{
+                  containerStyle: styles.inputContainer,
+                  input: styles.input,
+                }}
+                label={t('auth.form.account_name')}
+                onChange={setAccountName}
+                value={accountName}
+              />
+            </View>
+          </ScrollView>
+          <View style={styles.container}>
+            <View style={styles.actionContainer}>
+              <View style={styles.switch}>
+                <Switch
+                  value={isAgreed}
+                  onValueChange={setIsAgreed}
+                  trackColor={{ true: colors.light.ultramarineBlue }}
+                />
+              </View>
+              <Text style={[styles.actionText, styles.theme.description]}>
+                I agree to store my encrypted secret recovery phrase on this
+                device
+              </Text>
+            </View>
+            <PrimaryButton
+              title={t('auth.setup.buttons.save_account')}
+              onPress={submitForm}
+              disabled={!isAgreed}
+            />
+          </View>
         </View>
-        <Text style={[styles.actionText, styles.theme.description]} >
-          I agree to store my encrypted secret recovery phrase on this device
-        </Text>
-      </View>
-      <PrimaryButton
-        title={t('auth.setup.buttons.save_account')}
-        onPress={submitForm}
-        disabled={!isAgreed}
-      />
-    </View>
-  </SafeAreaView>;
+      )}
+    </SafeAreaView>
+  );
 };
 
 export default withTheme(translate()(PasswordSetupForm), getStyles());

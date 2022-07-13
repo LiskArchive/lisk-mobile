@@ -45,7 +45,7 @@ export default () => ({
       backgroundColor: colors.dark.mainBg,
     },
     username: {
-      color: colors.dark.ghost,
+      color: colors.dark.white,
     },
     address: {
       color: colors.light.whiteSmoke

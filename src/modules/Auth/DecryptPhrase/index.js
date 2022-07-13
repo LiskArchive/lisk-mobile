@@ -33,12 +33,13 @@ const DecryptPhrase = ({
     }
   };
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <HeaderBackButton title={title} onPress={navigation.goBack} />
-      <PasswordForm address={address} onSubmit={onSubmit} />
-    </SafeAreaView>
-  );
+  return <SafeAreaView style={[styles.container, styles.theme.wrapper]} >
+    <HeaderBackButton
+      title={title}
+      onPress={navigation.goBack}
+    />
+    <PasswordForm address={address} onSubmit={onSubmit} />
+  </SafeAreaView>;
 };
 
 export default withTheme(DecryptPhrase, getStyles());

@@ -1,14 +1,13 @@
 import {
-  themes, colors, boxes, fonts
+  themes, colors, fonts
 } from 'constants/styleGuide';
 
 export default () => ({
   common: {
     container: {
       flexDirection: 'row',
-      padding: boxes.boxPadding,
-      borderWidth: 1,
-      borderColor: colors.light.platinumGray,
+      padding: 15,
+      borderWidth: 0.4,
       borderRadius: 10,
       marginVertical: 10
     },
@@ -30,6 +29,9 @@ export default () => ({
   },
 
   [themes.light]: {
+    container: {
+      borderColor: colors.light.platinumGray,
+    },
     wrapper: {
       backgroundColor: colors.light.white,
     },
@@ -42,14 +44,17 @@ export default () => ({
   },
 
   [themes.dark]: {
+    container: {
+      borderColor: colors.light.platinumGray,
+    },
     wrapper: {
       backgroundColor: colors.dark.mainBg,
     },
     username: {
-      color: colors.dark.ghost,
+      color: colors.dark.white,
     },
     address: {
-      color: colors.light.whiteSmoke
+      color: colors.light.mountainMist
     }
   },
 });

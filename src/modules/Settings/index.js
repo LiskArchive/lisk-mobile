@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable complexity */
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
@@ -10,10 +11,8 @@ import { colors, themes } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
-import { accountSignedOut as accountSignedOutAction } from 'modules/Accounts/store/actions';
-import ModalHolder from 'utilities/modal';
 import app from 'constants/app';
-import { ItemTitle, SignOutButton, SignOutModal } from './components';
+import { ItemTitle } from './components';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
@@ -24,7 +23,6 @@ const Settings = ({
   settings,
   t,
   settingsUpdated,
-  accountSignedOut
 }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
@@ -52,14 +50,6 @@ const Settings = ({
   const toggleIncognito = () => {
     settingsUpdated({
       discrete: !settings.discrete,
-    });
-  };
-
-  const signOut = () => {
-    accountSignedOut();
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'SignIn', params: { signOut: true } }],
     });
   };
 
@@ -111,7 +101,6 @@ const Settings = ({
           <ItemTitle
             navigation={navigation}
             target="PassphraseBackup"
-            // authenticate={true}
             showDialog={showDialog}
             hideDialog={hideDialog}
             setError={setErrorMessage}
@@ -196,20 +185,6 @@ const Settings = ({
           />
         </View>
       </View>
-
-      <View style={[styles.group, styles.signOut]}>
-        <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
-          <SignOutButton
-            onClick={() =>
-              ModalHolder.open({
-                title: 'Signing out',
-                component: SignOutModal,
-                callback: signOut,
-              })
-            }
-          />
-        </View>
-      </View>
     </ScrollView>
     {Platform.OS === 'android' && Platform.Version < 23 ? (
       <FingerprintOverlay
@@ -226,7 +201,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   settingsUpdated: settingsUpdatedAction,
-  accountSignedOut: accountSignedOutAction,
 };
 
 export default withTheme(translate()(

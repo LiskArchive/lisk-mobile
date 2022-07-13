@@ -18,7 +18,6 @@ import Intro from 'components/screens/intro';
 
 import PassphraseBackup from 'modules/Settings/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
-import SignIn from 'modules/Auth/SignIn';
 import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
 import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
 import ManageAccount from 'modules/Auth/ManageAccount';
@@ -71,7 +70,6 @@ const MainNavigator = () => {
           <MainStack.Screen name="ManageAccount" component={ManageAccount} options={navigationOptions.SignIn} />
           <MainStack.Screen name="SecretRecoveryPhrase" component={SecretRecoveryPhrase} options={navigationOptions.SignIn} />
           <MainStack.Screen name="PasswordSetupForm" component={PasswordSetupForm} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="SignIn" component={SignIn} options={navigationOptions.SignIn} />
           <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
           <MainStack.Screen name="Main" component={AppNavigator} options={navigationOptions.NoHeader} />
           <MainStack.Screen

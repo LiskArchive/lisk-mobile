@@ -28,12 +28,14 @@ export default () => ({
     },
     outline: {
       borderWidth: 1,
-      borderColor: colors.light.platinumGray,
       borderRadius: 5,
       minHeight: 50,
     },
   },
   [themes.light]: {
+    outline: {
+      borderColor: colors.light.platinumGray,
+    },
     wrapper: {
       backgroundColor: colors.dark.white
     },
@@ -43,6 +45,9 @@ export default () => ({
   },
 
   [themes.dark]: {
+    outline: {
+      borderColor: colors.light.volcanicSand,
+    },
     wrapper: {
       backgroundColor: colors.dark.black
     },

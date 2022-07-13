@@ -50,7 +50,7 @@ const ManageAccount = ({
           iconStyle={styles.icon}
           iconSize={20}
           title={t('auth.setup.buttons.add_another_account')}
-          style={[styles.button, styles.outline]}
+          style={[styles.button, styles.outline, styles.theme.outline]}
         />
         <IconButton
           onPress={() => navigation.navigate('DeleteAccount')}
@@ -60,7 +60,7 @@ const ManageAccount = ({
           iconSize={20}
           titleStyle={[styles.theme.remove]}
           title={t('auth.setup.buttons.remove_account')}
-          style={[styles.button, styles.outline]}
+          style={[styles.button, styles.outline, styles.theme.outline]}
         />
       </View>
     </SafeAreaView>
