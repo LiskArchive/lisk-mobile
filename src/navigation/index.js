@@ -24,6 +24,7 @@ import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
 import ManageAccount from 'modules/Auth/ManageAccount';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import SwitchAccount from 'modules/Auth/SwitchAccount';
+import DeleteAccount from 'modules/Auth/RemoveAccount';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './appNavigator';
 
@@ -65,6 +66,7 @@ const MainNavigator = () => {
           />
           <MainStack.Screen name="AuthMethod" component={AuthMethod} options={navigationOptions.SignIn} />
           <MainStack.Screen name="SwitchAccount" component={SwitchAccount} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="DeleteAccount" component={DeleteAccount} options={navigationOptions.SignIn} />
           <MainStack.Screen name="DecryptPhrase" component={DecryptPhrase} options={navigationOptions.SignIn} />
           <MainStack.Screen name="ManageAccount" component={ManageAccount} options={navigationOptions.SignIn} />
           <MainStack.Screen name="SecretRecoveryPhrase" component={SecretRecoveryPhrase} options={navigationOptions.SignIn} />

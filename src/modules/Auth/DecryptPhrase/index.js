@@ -8,27 +8,37 @@ import PasswordForm from '../components/PasswordForm';
 import getStyles from './styles';
 
 const DecryptPhrase = ({
-  styles, account, route, nextStep
+  styles, account, route, nextStep, sharedData
 }) => {
   const navigation = useNavigation();
-  const { title, address, successRoute } = route.params;
+  const { title } = route.params;
+  let address;
+  if (sharedData?.encryptedAccount) {
+    address = sharedData?.encryptedAccount?.metadata?.address;
+  } else {
+    address = route.params.address;
+  }
 
   const onSubmit = (password) => {
+    const { successRoute } = route.params;
     if (nextStep && typeof nextStep === 'function') {
-      const decrpytedAccount = decryptAccount(account, password);
-      nextStep({ ...decrpytedAccount, encryptedAccount: account });
+      const decryptedAccount = decryptAccount(account, password);
+      // TODO: Implement error handling
+      nextStep({
+        ...decryptedAccount,
+        encryptedAccount: sharedData ? sharedData.encryptedAccount : account,
+      });
     } else {
       navigation.navigate(successRoute);
     }
   };
 
-  return <SafeAreaView style={styles.container} >
-    <HeaderBackButton
-      title={title}
-      onPress={navigation.goBack}
-    />
-    <PasswordForm address={address} onSubmit={onSubmit} />
-  </SafeAreaView>;
+  return (
+    <SafeAreaView style={styles.container}>
+      <HeaderBackButton title={title} onPress={navigation.goBack} />
+      <PasswordForm address={address} onSubmit={onSubmit} />
+    </SafeAreaView>
+  );
 };
 
 export default withTheme(DecryptPhrase, getStyles());
