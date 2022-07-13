@@ -16,7 +16,7 @@ const AccountItem = ({
   >
     <Avatar address={address} size={45} style={styles.avatar} />
     <View style={styles.content}>
-      {!!username && <P style={styles.username}>{username}</P>}
+      {!!username && <P style={[styles.username, styles.theme.username]}>{username}</P>}
       <P style={[styles.address, styles.theme.address]}>
         {stringShortener(address, 5, 5)}
       </P>
