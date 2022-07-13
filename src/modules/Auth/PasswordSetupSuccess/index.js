@@ -4,6 +4,7 @@ import withTheme from 'components/shared/withTheme';
 import FlowerSuccessSvg from 'assets/svgs/FlowerSuccessSvg';
 import FileSvg from 'assets/svgs/FileSvg';
 import DownloadSvg from 'assets/svgs/DownloadSvg';
+import { themes } from 'constants/styleGuide';
 import { translate } from 'react-i18next';
 import SuccessScreen from '../components/success';
 import getStyles from './styles';
@@ -20,7 +21,7 @@ const PasswordSetupSuccess = ({
   });
 
   return <SuccessScreen
-    illustration={<FlowerSuccessSvg theme={theme} />}
+    illustration={<FlowerSuccessSvg fill={theme === themes.dark ? '#9999A0' : '#0C152E'} />}
     title={t('auth.setup.password_setup_success_title')}
     description={t('auth.setup.password_setup_success_description') }
     buttonText={t('auth.setup.buttons.password_setup_continue')}
