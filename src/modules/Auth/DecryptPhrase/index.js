@@ -23,6 +23,7 @@ const DecryptPhrase = ({
     const { successRoute } = route.params;
     if (nextStep && typeof nextStep === 'function') {
       const decryptedAccount = decryptAccount(account, password);
+      // TODO: Implement error handling
       nextStep({
         ...decryptedAccount,
         encryptedAccount: sharedData ? sharedData.encryptedAccount : account,
