@@ -6,10 +6,10 @@ export default () => ({
   common: {
     container: {
       flexDirection: 'row',
-      padding: 15,
-      borderWidth: 0.4,
-      borderRadius: 10,
-      marginVertical: 10
+      borderBottomWidth: 1,
+      borderColor: colors.light.platinumGray,
+      paddingVertical: 10,
+      alignItems: 'center',
     },
     avatar: {
       marginRight: 15,
@@ -29,9 +29,6 @@ export default () => ({
   },
 
   [themes.light]: {
-    container: {
-      borderColor: colors.light.platinumGray,
-    },
     wrapper: {
       backgroundColor: colors.light.white,
     },
@@ -44,9 +41,6 @@ export default () => ({
   },
 
   [themes.dark]: {
-    container: {
-      borderColor: colors.light.platinumGray,
-    },
     wrapper: {
       backgroundColor: colors.dark.mainBg,
     },
@@ -54,7 +48,7 @@ export default () => ({
       color: colors.dark.white,
     },
     address: {
-      color: colors.light.mountainMist
+      color: colors.light.whiteSmoke
     }
   },
 });

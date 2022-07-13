@@ -289,6 +289,9 @@
       "add_account": "",
       "manage_accounts": "",
       "switch_account": "",
+      "delete_account": "",
+      "remove_account": "",
+      "remove_account_description": "",
       "decrypt_passphrase": "",
       "add_account_description": "",
       "secret_phrase": "",
@@ -299,6 +302,7 @@
       "password_setup_success_description": "",
       "buttons": {
         "download": "",
+        "remove_now": "",
         "password_setup_continue": "",
         "save_account": "",
         "add_another_account": "Add another account"
