@@ -307,7 +307,7 @@ const AmountLSK = (props) => {
           <Balance
             value={fromRawLsk(accounts.info[settings.token.active].balance)}
             tokenType={settings.token.active}
-            incognito={settings.incognito}
+            discrete={settings.discrete}
             language={language}
             currency={settings.currency}
             valueInCurrency={getBalanceInCurrency()}

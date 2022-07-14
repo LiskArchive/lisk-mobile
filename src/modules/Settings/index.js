@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable complexity */
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
@@ -10,9 +11,8 @@ import { colors, themes } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
-import { accountSignedOut as accountSignedOutAction } from 'modules/Accounts/actions';
-import ModalHolder from 'utilities/modal';
-import { ItemTitle, SignOutButton, SignOutModal } from './components';
+import app from 'constants/app';
+import { ItemTitle } from './components';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
@@ -23,7 +23,6 @@ const Settings = ({
   settings,
   t,
   settingsUpdated,
-  accountSignedOut
 }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
@@ -44,21 +43,13 @@ const Settings = ({
   const switchTheme = () => {
     settingsUpdated({
       theme:
-          settings.theme === themes.dark ? themes.light : themes.dark,
+        settings.theme === themes.dark ? themes.light : themes.dark,
     });
   };
 
   const toggleIncognito = () => {
     settingsUpdated({
-      incognito: !settings.incognito,
-    });
-  };
-
-  const signOut = () => {
-    accountSignedOut();
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'SignIn', params: { signOut: true } }],
+      discrete: !settings.discrete,
     });
   };
 
@@ -75,150 +66,133 @@ const Settings = ({
     target = 'DisableBioAuth';
   }
   const sensorStatus = (
-      <P style={{ color: targetStateLabel[1] || colors[theme].platinum }}>
-        {targetStateLabel[0]}
-      </P>
+    <P style={{ color: targetStateLabel[1] || colors[theme].platinum }}>
+      {targetStateLabel[0]}
+    </P>
   );
   return <View testID='settings-screen' style={[styles.container, styles.theme.container]}>
-      <ScrollView style={styles.innerContainer}>
-        <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
-            {t('Security')}
-          </H4>
-          {settings.sensorType ? (
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                navigation={navigation}
-                showDialog={showDialog}
-                hideDialog={hideDialog}
-                setError={setErrorMessage}
-                target={target}
-                authenticate={true}
-                targetStateLabel={sensorStatus}
-                icon={
-                  settings.sensorType === 'Face ID'
-                    ? 'face-id-small'
-                    : 'touch-id-small'
-                }
-                iconSize={settings.sensorType === 'Face ID' ? 18 : 20}
-                title={settings.sensorType}
+    <ScrollView style={styles.innerContainer}>
+      <View style={styles.group}>
+        <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+          {t('Security')}
+        </H4>
+        {settings.sensorType ? (
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              navigation={navigation}
+              showDialog={showDialog}
+              hideDialog={hideDialog}
+              setError={setErrorMessage}
+              target={target}
+              authenticate={true}
+              targetStateLabel={sensorStatus}
+              icon={
+                settings.sensorType === app.faceId
+                  ? 'face-id-small'
+                  : 'touch-id-small'
+              }
+              iconSize={settings.sensorType === app.faceId ? 18 : 20}
+              title={settings.sensorType}
+            />
+          </View>
+        ) : null}
+
+        <View style={[styles.item, styles.theme.item]}>
+          <ItemTitle
+            navigation={navigation}
+            target="PassphraseBackup"
+            showDialog={showDialog}
+            hideDialog={hideDialog}
+            setError={setErrorMessage}
+            icon="backup"
+            title={t('settings.menu.backup_passphrase')}
+            iconSize={22}
+          />
+        </View>
+
+        <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+          <ItemTitle
+            testID="enable-incognito"
+            icon="enable-incognito"
+            targetStateLabel={
+              <SwitchButton
+                value={settings.incognito}
+                theme={theme}
+                onSyncPress={toggleIncognito}
               />
-            </View>
-          ) : null}
+            }
+            title={t('settings.menu.discreet_mode')}
+            description={t('settings.descriptions.discreet_mode')}
+          />
+        </View>
+      </View>
 
-          {settings.sensorType && settings.hasStoredPassphrase ? (
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                navigation={navigation}
-                target="PassphraseBackup"
-                authenticate={true}
-                showDialog={showDialog}
-                hideDialog={hideDialog}
-                setError={setErrorMessage}
-                icon="backup"
-                title={t('Backup your passphrase')}
-                iconSize={22}
+      <View style={styles.group}>
+        <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+          {t('General')}
+        </H4>
+        <View style={[styles.item, styles.theme.item]}>
+          <ItemTitle
+            testID="dark-mode"
+            icon="dark-mode"
+            targetStateLabel={
+              <SwitchButton
+                value={settings.theme === themes.dark}
+                theme={theme}
+                onSyncPress={switchTheme}
               />
-            </View>
-          ) : null}
-
-          <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
-            <ItemTitle
-              testID="enable-incognito"
-              icon="enable-incognito"
-              targetStateLabel={
-                <SwitchButton
-                  value={settings.incognito}
-                  theme={theme}
-                  onSyncPress={toggleIncognito}
-                />
-              }
-              title={t('Discreet mode')}
-              description={t('Hide balance and transaction amounts.')}
-            />
-          </View>
+            }
+            title={t('settings.menu.dark_mode')}
+          />
         </View>
 
-        <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
-            {t('General')}
-          </H4>
-          <View style={[styles.item, styles.theme.item]}>
-            <ItemTitle
-              testID="dark-mode"
-              icon="dark-mode"
-              targetStateLabel={
-                <SwitchButton
-                  value={settings.theme === themes.dark}
-                  theme={theme}
-                  onSyncPress={switchTheme}
-                />
-              }
-              title={t('Dark mode')}
-            />
-          </View>
-
-          <View style={[styles.item, styles.theme.item]}>
-            <ItemTitle
-              navigation={navigation}
-              icon="currency"
-              title={t('Currency')}
-              target="CurrencySelection"
-              targetStateLabel={
-                <P style={styles.theme.targetStateLabel}>
-                  {settings.currency}
-                </P>
-              }
-            />
-          </View>
-
+        <View style={[styles.item, styles.theme.item]}>
+          <ItemTitle
+            navigation={navigation}
+            icon="currency"
+            title={t('settings.menu.currency')}
+            target="CurrencySelection"
+            targetStateLabel={
+              <P style={styles.theme.targetStateLabel}>
+                {settings.currency}
+              </P>
+            }
+          />
         </View>
 
-        <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
-            {t('Info')}
-          </H4>
+      </View>
 
-          <View style={[styles.item, styles.theme.item]}>
-            <ItemTitle
-              navigation={navigation}
-              target="About"
-              icon="about"
-              title={t('About Lisk')}
-            />
-          </View>
+      <View style={styles.group}>
+        <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+          {t('Info')}
+        </H4>
 
-          <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
-            <ItemTitle
-              navigation={navigation}
-              icon="terms"
-              target="Terms"
-              title={t('Terms of use')}
-            />
-          </View>
+        <View style={[styles.item, styles.theme.item]}>
+          <ItemTitle
+            navigation={navigation}
+            target="About"
+            icon="about"
+            title={t('settings.menu.about')}
+          />
         </View>
 
-        <View style={[styles.group, styles.signOut]}>
-          <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
-            <SignOutButton
-              onClick={() =>
-                ModalHolder.open({
-                  title: 'Signing out',
-                  component: SignOutModal,
-                  callback: signOut,
-                })
-              }
-            />
-          </View>
+        <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+          <ItemTitle
+            navigation={navigation}
+            icon="terms"
+            target="Terms"
+            title={t('settings.menu.terms')}
+          />
         </View>
-      </ScrollView>
-      {Platform.OS === 'android' && Platform.Version < 23 ? (
-        <FingerprintOverlay
-          onModalClosed={hideDialog}
-          error={error}
-          show={show} />
-      ) : null}
-    </View>;
+      </View>
+    </ScrollView>
+    {Platform.OS === 'android' && Platform.Version < 23 ? (
+      <FingerprintOverlay
+        onModalClosed={hideDialog}
+        error={error}
+        show={show} />
+    ) : null}
+  </View>;
 };
 
 const mapStateToProps = state => ({
@@ -227,7 +201,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   settingsUpdated: settingsUpdatedAction,
-  accountSignedOut: accountSignedOutAction,
 };
 
 export default withTheme(translate()(

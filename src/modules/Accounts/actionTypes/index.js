@@ -1,15 +1,9 @@
 const actionTypes = {
-  accountUpdated: 'ACCOUNT_UPDATED',
-  accountSignedOut: 'ACCOUNT_SIGNED_OUT',
-  accountSignedIn: 'ACCOUNT_SIGNED_IN',
-  accountFetched: 'ACCOUNT_FETCHED',
-  accountFollowed: 'ACCOUNT_FOLLOWED',
-  accountEdited: 'ACCOUNT_EDITED',
-  accountUnFollowed: 'ACCOUNT_UN_FOLLOWED',
-  followedAccountsRetrieved: 'FOLLOWED_ACCOUNTS_RETRIEVED',
-  accountsStored: 'ACCOUNTS_STORED',
-  networkInfoUpdated: 'NETWORK_INFO_UPDATED',
-  transactionsUpdated: 'TRANSACTIONS_UPDATED',
+  setCurrentAccount: 'SET_CURRENT_ACCOUNT',
+  addAccount: 'ADD_ACCOUNT',
+  deleteAccount: 'DELETE_ACCOUNT',
+  setAccountSummary: 'SET_ACCOUNT_SUMMARY',
+  resetAccountSummary: 'RESET_ACCOUNT_SUMMARY'
 };
 
 export default actionTypes;

@@ -14,7 +14,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { DeleteBookmarkModal } from 'modules/Bookmark/components';
 import { H3 } from 'components/shared/toolBox/typography';
 import LoadingBar from 'components/shared/loading';
-import { accountUnFollowed } from 'modules/Accounts/actions';
+import { accountUnFollowed } from 'modules/Accounts/store/actions';
 import BookmarkSvg from 'assets/svgs/BookmarkSvg';
 import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
 import useTransactionList from 'modules/Accounts/hooks/useTransactionList';

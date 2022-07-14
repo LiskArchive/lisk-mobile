@@ -10,10 +10,12 @@ export default () => ({
       height: '100%',
       marginTop: 25,
     },
+    accountTitle: {
+      marginTop: 5,
+      marginBottom: 25,
+    },
     profileContainer: {
-      padding: 20,
-      paddingTop: 20,
-      marginTop: 10,
+      paddingHorizontal: 20,
     },
     avatarContainer: {
       flexDirection: 'row',
@@ -21,12 +23,11 @@ export default () => ({
     },
     avatar: {
       padding: 10,
-      height: 50,
-      width: 50,
+      height: 40,
+      width: 40,
       borderRadius: 25,
       alignItems: 'center',
       justifyContent: 'center',
-      marginRight: 15,
       backgroundColor: colors.light.white
     },
     invisibleTitle: {
@@ -72,6 +73,7 @@ export default () => ({
     row: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center'
     },
     keyValueRow: {
       borderTopWidth: 1,

@@ -1,6 +1,7 @@
 import { tokenKeys } from 'constants/tokens';
+import app from 'constants/app';
 import actionTypes from '../actionTypes';
-import settings, { INITIAL_STATE } from './settings';
+import { INITIAL_STATE, settings } from './settings';
 
 const defaultTokens = {
   active: 'LSK',
@@ -48,12 +49,12 @@ describe('Reducers: Settings', () => {
       const action = {
         type: actionTypes.settingsUpdated,
         data: {
-          sensorType: 'Face ID',
+          sensorType: app.faceId,
         },
       };
       const changedState = settings(state, action);
       expect(changedState).toEqual({
-        sensorType: 'Face ID',
+        sensorType: app.faceId,
         token: defaultTokens,
       });
     });
@@ -144,7 +145,7 @@ describe('Reducers: Settings', () => {
       const action = {
         type: actionTypes.settingsRetrieved,
         data: {
-          sensorType: 'Face ID',
+          sensorType: app.faceId,
           token: defaultTokens,
         },
       };
@@ -153,7 +154,7 @@ describe('Reducers: Settings', () => {
       const changedState = settings(state, action);
       expect(changedState).toEqual({
         currency: 'EUR',
-        sensorType: 'Face ID',
+        sensorType: app.faceId,
         token: defaultTokens,
       });
     });

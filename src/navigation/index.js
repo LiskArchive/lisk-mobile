@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 
 import { colors } from 'constants/styleGuide';
-import SignIn from 'modules/Auth/SignIn';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import { TransactionDetails } from 'modules/Accounts/components/TransactionDetails';
@@ -15,11 +14,18 @@ import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
-import PassphraseBackup from 'components/screens/passphraseBackup';
 import Intro from 'components/screens/intro';
-import AppNavigator from './appNavigator';
 
+import PassphraseBackup from 'modules/Settings/BackupPassphrase';
+import AuthMethod from 'modules/Auth/AuthMethod';
+import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
+import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
+import ManageAccount from 'modules/Auth/ManageAccount';
+import DecryptPhrase from 'modules/Auth/DecryptPhrase';
+import SwitchAccount from 'modules/Auth/SwitchAccount';
+import DeleteAccount from 'modules/Auth/RemoveAccount';
 import navigationOptions from './navigationOptions';
+import AppNavigator from './appNavigator';
 
 const MainStack = createStackNavigator();
 
@@ -51,13 +57,19 @@ const MainNavigator = () => {
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={themeColors}>
-        <MainStack.Navigator initialRouteName="SignIn">
+        <MainStack.Navigator initialRouteName="AuthMethod">
           <MainStack.Screen
             name="Register"
             component={Register}
             options={navigationOptions.Register}
           />
-          <MainStack.Screen name="SignIn" component={SignIn} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="AuthMethod" component={AuthMethod} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="SwitchAccount" component={SwitchAccount} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="DeleteAccount" component={DeleteAccount} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="DecryptPhrase" component={DecryptPhrase} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="ManageAccount" component={ManageAccount} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="SecretRecoveryPhrase" component={SecretRecoveryPhrase} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="PasswordSetupForm" component={PasswordSetupForm} options={navigationOptions.SignIn} />
           <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
           <MainStack.Screen name="Main" component={AppNavigator} options={navigationOptions.NoHeader} />
           <MainStack.Screen
@@ -91,7 +103,7 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="PassphraseBackup"
             component={PassphraseBackup}
-            options={navigationOptions.PassphraseBackup}
+            options={navigationOptions.NoHeader}
           />
         </MainStack.Navigator>
       </NavigationContainer>

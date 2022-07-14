@@ -28,8 +28,9 @@ import Row from './row';
 import getStyles from './styles';
 import VoteList from './voteList';
 import {
-  goToWallet, getAccountLabel, getAccountTitle, openExplorer
+  goToWallet, getAccountLabel, getAccountTitle
 } from './utils';
+import { useAccountInfo } from '../../hooks/useAccounts/useAccountInfo';
 
 const getConfig = (styles, tx, accountAddress) => {
   if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
@@ -59,8 +60,9 @@ const TransactionDetails = ({
   const [refreshing, setRefreshing] = useState(false);
   const [votes, setVotes] = useState([]);
   const [error, setError] = useState(null);
+  const { summary: account } = useAccountInfo();
 
-  const { followed: followedAccounts, info: account } = useSelector((state) => state.accounts);
+  const followedAccounts = [];
   const { token: { active: activeToken }, language } = useSelector((state) => state.settings);
 
   const retrieveTransaction = async (id) => {
@@ -132,7 +134,7 @@ const TransactionDetails = ({
   }
 
   const walletAccountAddress = route.params?.account ?? account[activeToken].address;
-  const incognito = route.params?.incognito ?? null;
+  const discrete = route.params?.discrete ?? null;
   const isDelegateRegistration = isRegistration(tx);
   const isVoting = isVote(tx);
   const config = getConfig(styles, tx, walletAccountAddress);
@@ -150,7 +152,7 @@ const TransactionDetails = ({
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
         <TransactionSummary
-          incognito={incognito}
+          discrete={discrete}
           accountAddress={walletAccountAddress}
           tx={tx}
           language={language}
@@ -197,7 +199,7 @@ const TransactionDetails = ({
           </Row>
         )}
         {isTransfer(tx) && <Row title={'Amount'}>
-          {!incognito ? (
+          {!discrete ? (
             <H4 style={config.amountStyle}>
               {config.amountSign}
               <FormattedNumber language={language}>{fromRawLsk(tx.amount)}</FormattedNumber>
@@ -233,7 +235,6 @@ const TransactionDetails = ({
           </Row>
         )}
         <Row title="Transaction ID">
-          {activeToken === 'LSK' ? (
             <CopyToClipboard
               style={[styles.value, styles.theme.value, styles.transactionId]}
               labelStyle={[styles.value, styles.theme.value]}
@@ -243,14 +244,6 @@ const TransactionDetails = ({
               type={B}
               label={stringShortener(tx.id, 15, 6)}
             />
-          ) : (
-            <A
-              style={[styles.explorerLink, styles.theme.explorerLink]}
-              onPress={() => openExplorer(tx.id)}
-            >
-              {t('View more on Blockchain.info')}
-            </A>
-          )}
         </Row>
         {!!tx.blockHeight && (
           <Row title="Block Height">

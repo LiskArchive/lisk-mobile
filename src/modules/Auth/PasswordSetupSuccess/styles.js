@@ -20,7 +20,6 @@ export default () => ({
     download: {
       fontFamily: fonts.family.heading,
       fontSize: fonts.size.base,
-      color: colors.light.ultramarineBlue
     },
     downloadButton: {
       paddingHorizontal: 40,
@@ -32,6 +31,12 @@ export default () => ({
   },
 
   [themes.light]: {
+    download: {
+      color: colors.light.ultramarineBlue
+    },
+    text: {
+      color: colors.light.zodiacBlue
+    },
     wrapper: {
       backgroundColor: colors.light.white,
     },
@@ -44,6 +49,12 @@ export default () => ({
   },
 
   [themes.dark]: {
+    text: {
+      color: colors.light.white
+    },
+    download: {
+      color: colors.light.ultramarineBlue
+    },
     wrapper: {
       backgroundColor: colors.dark.mainBg,
     },

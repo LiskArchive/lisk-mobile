@@ -121,7 +121,8 @@
           ["navigation", "./src/navigation"],
           ["modules", "./src/modules"],
           ["hooks", "./src/hooks"],
-          ["store", "./src/store"]
+          ["store", "./src/store"],
+          ["tests", "./src/tests"]
         ],
         "extensions": [ ".js", ".jsx", ".json"]
       }

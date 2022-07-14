@@ -17,13 +17,10 @@ import { validateAddress } from 'utilities/validators';
 import DropDownHolder from 'utilities/alert';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H4 } from 'components/shared/toolBox/typography';
-import { tokenMap } from 'constants/tokens';
 import getStyles from './styles';
 
-@connect((state) => ({
-  list: state.accounts.followed.LSK?.filter(
-    (list) => validateAddress(tokenMap[0], list.address) === 0
-  )
+@connect(() => ({
+  list: []
 }))
 class Recipient extends React.Component {
   scannedData = {};

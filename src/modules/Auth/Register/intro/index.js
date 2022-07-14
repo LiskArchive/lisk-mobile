@@ -8,11 +8,6 @@ import addressImg from 'assets/images/registrationIntro/address3x.png';
 import securePassphraseImg from 'assets/images/registrationIntro/securePassphrase3x.png';
 import uniqueAvatarImg from 'assets/images/registrationIntro/uniqueAvatar3x.png';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import {
-  accountSignedIn as accountSignedInAction,
-  accountFetched as accountFetchedAction
-} from 'modules/Accounts/actions';
-import { pricesRetrieved as pricesRetrievedAction } from 'actions/service';
 import styles from './styles';
 
 const descriptionContent = [
@@ -43,9 +38,7 @@ const descriptionContent = [
 
 const Intro = ({
   t, nextStep,
-  accountSignedIn,
-  accountFetched,
-  pricesRetrieved, navigation, route
+  navigation, route
 }) => {
   const [passphrase, setPassphrase] = useState('');
 
@@ -53,9 +46,6 @@ const Intro = ({
     nextStep({
       passphrase
     });
-    accountSignedIn({ passphrase });
-    accountFetched();
-    pricesRetrieved();
   };
 
   useEffect(() => {
@@ -86,10 +76,4 @@ const mapStateToProps = state => ({
   settings: state.settings
 });
 
-const mapDispatchToProps = {
-  accountSignedIn: accountSignedInAction,
-  accountFetched: accountFetchedAction,
-  pricesRetrieved: pricesRetrievedAction,
-};
-
-export default translate()(connect(mapStateToProps, mapDispatchToProps)(Intro));
+export default translate()(connect(mapStateToProps)(Intro));

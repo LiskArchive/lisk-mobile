@@ -2,14 +2,14 @@ import React from 'react';
 import { StatusBar, View } from 'react-native';
 import { Provider, useSelector } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
-
+import { PersistGate } from 'redux-persist/integration/react';
 import { colors, themes } from 'constants/styleGuide';
 import Router from 'navigation';
 import Alert from 'components/shared/alert';
 import Modal from 'components/shared/modal';
 import ThemeContext from './contexts/theme';
 import i18n from '../locales';
-import store from './store/index';
+import store, { persistedStore } from './store/index';
 
 const ThemedApp = () => {
   const { theme } = useSelector(state => state.settings);
@@ -36,7 +36,9 @@ const ThemedApp = () => {
 const App = () => {
   return (
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistedStore} >
         <ThemedApp />
+      </PersistGate>
     </Provider>
   );
 };

@@ -301,13 +301,15 @@ PODS:
     - React-Core
   - react-native-cameraroll (4.0.2):
     - React-Core
+  - react-native-document-picker (8.1.1):
+    - React-Core
   - react-native-fingerprint-scanner (6.0.0):
     - React
   - react-native-netinfo (6.0.0):
     - React-Core
   - react-native-randombytes (3.6.1):
     - React-Core
-  - react-native-safe-area-context (3.4.1):
+  - react-native-safe-area-context (3.3.2):
     - React-Core
   - react-native-shake (3.5.0):
     - React-Core
@@ -381,7 +383,7 @@ PODS:
     - React-perflogger (= 0.65.1)
   - ReactNativeKeyboardTrackingView (5.7.0):
     - React
-  - RNCAsyncStorage (1.17.7):
+  - RNCAsyncStorage (1.15.8):
     - React-Core
   - RNDeviceInfo (8.0.2):
     - React-Core
@@ -403,7 +405,7 @@ PODS:
     - React-Core
   - RNScreens (2.18.1):
     - React-Core
-  - RNShare (7.6.4):
+  - RNShare (7.5.0):
     - React-Core
   - RNSVG (12.1.0):
     - React
@@ -467,6 +469,7 @@ DEPENDENCIES:
   - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-camera (from `../node_modules/react-native-camera`)
   - "react-native-cameraroll (from `../node_modules/@react-native-community/cameraroll`)"
+  - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fingerprint-scanner (from `../node_modules/react-native-fingerprint-scanner`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-randombytes (from `../node_modules/react-native-randombytes`)
@@ -579,6 +582,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-camera"
   react-native-cameraroll:
     :path: "../node_modules/@react-native-community/cameraroll"
+  react-native-document-picker:
+    :path: "../node_modules/react-native-document-picker"
   react-native-fingerprint-scanner:
     :path: "../node_modules/react-native-fingerprint-scanner"
   react-native-netinfo:
@@ -695,10 +700,11 @@ SPEC CHECKSUMS:
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-camera: f432fcf1b32b528bbf7c3543d3e3b1deb0c5b72a
   react-native-cameraroll: 1965db75c851b15e77a22ca0ac78e32af6b571ae
+  react-native-document-picker: f68191637788994baed5f57d12994aa32cf8bf88
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
   react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
   react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846
-  react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
+  react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-shake: 41a1ea8ec541fccf3f01566edef8d3cb722b00e3
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-webview: 6520e3e7b4933de76b95ef542c8d7115cf45b68e
@@ -715,7 +721,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 85187f19dd9c47a7c102f9994f9d14e4dc2110de
   ReactCommon: eafed38eec7b591c31751bfa7494801618460459
   ReactNativeKeyboardTrackingView: 02137fac3b2ebd330d74fa54ead48b14750a2306
-  RNCAsyncStorage: d81ee5c3db1060afd49ea7045ad460eff82d2b7d
+  RNCAsyncStorage: e8b8d6320a0dd90eb610fb0d0b1ef90596697c69
   RNDeviceInfo: a9601119924a67d2479d3facf04cec7b658f44ed
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
@@ -726,7 +732,7 @@ SPEC CHECKSUMS:
   RNQuickAction: 6d404a869dc872cde841ad3147416a670d13fa93
   RNReactNativeHapticFeedback: 653a8c126a0f5e88ce15ffe280b3ff37e1fbb285
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
-  RNShare: 4406f61af043027b695c3a0b8f39e2c2bdacde12
+  RNShare: 2e8e9dadea058057642a9351ca2878867ad4ad5c
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   SajjadBlurOverlay: 4366a3417954b7d4a8a70682e0c43959ff76a3cb

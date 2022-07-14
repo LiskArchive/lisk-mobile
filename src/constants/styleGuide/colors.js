@@ -16,6 +16,9 @@ const common = {
   burntSieanna: '#EC6868',
   ufoGreen: '#2AD67C',
   mountainMist: '#9999A0',
+  silverGrey: '#C5CFE4',
+  furyRed: '#FF4557',
+  volcanicSand: '#4D4D50'
 };
 
 const light = {

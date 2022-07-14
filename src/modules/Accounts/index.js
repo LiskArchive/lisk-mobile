@@ -20,14 +20,15 @@ import { getNetworkInfo as getNetworkInfoAction } from 'actions/network';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import {
   accountFetched as accountFetchedAction
-} from 'modules/Accounts/actions';
+} from 'modules/Accounts/store/actions';
 
 import getStyles from './styles';
-import {
-  showInitializationModal
-} from './utils';
+// import {
+//   showInitializationModal
+// } from './utils';
 import AccountSummary from './components/AccountSummary';
 import useTransactionList from './hooks/useTransactionList';
+import { useAccountInfo } from './hooks/useAccounts/useAccountInfo';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -41,23 +42,23 @@ import useTransactionList from './hooks/useTransactionList';
 // eslint-disable-next-line max-statements
 const Home = ({
   styles,
-  account,
   navigation,
   theme,
   isFocused,
   activeToken,
-  incognito,
+  discrete,
   getNetworkInfo,
   settingsUpdated,
   route,
 }) => {
+  const { summary } = useAccountInfo();
   const {
     transactions,
     loadMore,
     loading,
     refresh,
     refreshing,
-  } = useTransactionList({ address: account[activeToken].address, activeToken });
+  } = useTransactionList({ address: summary.address, activeToken: 'LSK' });
   const [hideBtcRemoval, setHideBtcRemoval] = useState(true);
   const scrollY = useRef(new Animated.Value(0));
   const scrollView = createRef();
@@ -99,19 +100,19 @@ const Home = ({
     setParams({
       scrollToTop
     });
-    if (route.params && route.params.discreet && !incognito) {
-      settingsUpdated({ incognito: true });
+    if (route.params && route.params.discreet && !discrete) {
+      settingsUpdated({ discrete: true });
     }
-    const initializationTimeout = setTimeout(() => {
-      showInitializationModal({
-        account, activeToken, transactions, navigation
-      });
-    }, 1200);
+    // const initializationTimeout = setTimeout(() => {
+    //   showInitializationModal({
+    //     account, activeToken, transactions, navigation
+    //   });
+    // }, 1200);
     checkBTCBanner();
 
-    return () => {
-      clearTimeout(initializationTimeout);
-    };
+    // return () => {
+    //   clearTimeout(initializationTimeout);
+    // };
   }, []);
 
   let content = null;
@@ -133,7 +134,7 @@ const Home = ({
               type="home"
               transactions={transactions}
               navigate={navigation.navigate}
-              account={account[activeToken]}
+              account={summary}
               refreshing={refreshing}
             />
           ) : (
@@ -166,7 +167,7 @@ const Home = ({
       <ParallaxHeader
         reference={scrollView}
         headerMinHeight={70}
-        headerMaxHeight={260}
+        headerMaxHeight={300}
         extraScrollHeight={20}
         navbarColor="#3498db"
         alwaysShowTitle={false}
@@ -185,7 +186,7 @@ const Home = ({
             navigation={navigation}
             scrollY={scrollY.current}
             isFocused={isFocused}
-            incognito={incognito}
+            discrete={discrete}
           />
         }
         renderContent={() => content}
@@ -199,11 +200,9 @@ const Home = ({
 };
 
 const mapStateToProps = state => ({
-  account: state.accounts.info || {},
-  incognito: state.settings.incognito,
+  discrete: state.settings.discrete,
   activeToken: state.settings.token.active,
   settings: state.settings,
-  followedAccounts: state.accounts.followed || [],
 });
 
 const mapDispatchToProps = ({

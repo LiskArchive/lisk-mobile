@@ -13,14 +13,14 @@ const List = ({
   followedAccounts,
   navigate,
   pending,
-  incognito,
+  discrete,
 }) => (
   <View style={styles.nativeList}>
     {pending.map(tx => (
       <Item
         key={tx}
         navigate={navigate}
-        incognito={incognito}
+        discrete={discrete}
         account={account}
         activeToken={activeToken}
         followedAccounts={followedAccounts}
@@ -32,7 +32,7 @@ const List = ({
       <Item
         key={tx.id}
         navigate={navigate}
-        incognito={incognito}
+        discrete={discrete}
         account={account}
         activeToken={activeToken}
         followedAccounts={followedAccounts}

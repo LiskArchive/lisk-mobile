@@ -1,3 +1,5 @@
+import { persistReducer } from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { currencyKeys } from 'constants/currencies';
 import { languageKeys } from 'constants/languages';
 import { merge } from 'utilities/helpers';
@@ -9,6 +11,8 @@ export const INITIAL_STATE = {
   theme: themes.light,
   currency: currencyKeys[0],
   language: languageKeys[0],
+  enableCustomDerivationPath: false,
+  showedIntro: false,
   token: {
     active: tokenKeys[0],
     list: tokenKeys.reduce((acc, key) => {
@@ -64,7 +68,7 @@ const defineActiveToken = (actionToken, stateToken) => {
  *
  * @returns {Object} The latest state
  */
-const settings = (state = INITIAL_STATE, action = {}) => {
+export const settings = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case actionTypes.settingsUpdated:
       return merge(state, action.data, {
@@ -80,4 +84,9 @@ const settings = (state = INITIAL_STATE, action = {}) => {
   }
 };
 
-export default settings;
+const persistConfig = {
+  key: 'settings',
+  storage: AsyncStorage,
+};
+
+export default persistReducer(persistConfig, settings);

@@ -11,6 +11,7 @@ export default () => ({
       padding: boxes.boxPadding,
     },
     description: {
+      flex: 1,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.base,
     },
@@ -19,6 +20,7 @@ export default () => ({
     },
     inputContainer: {
       paddingLeft: 0,
+      paddingRight: 0,
     },
     input: {
       fontFamily: fonts.family.context

@@ -5,16 +5,19 @@ import { Platform } from 'react-native';
 
 export const downloadJSON = async (data, cb) => {
   try {
-    const path = `${RNFS.CachesDirectoryPath}/encrypted_secret_recovery_phrase.json`;
+    let path = `${RNFS.CachesDirectoryPath}/encrypted_secret_recovery_phrase.json`;
     if (Platform.OS === 'android') {
       await Permissions.request(Permissions.PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
+      path = `${RNFS.DownloadDirectoryPath}/encrypted_secret_recovery_phrase.json`;
+      await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
+    } else {
+      await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
+      await Share.open({
+        filename: 'encrypted_secret_recovery_phrase.json',
+        saveToFiles: true,
+        url: path
+      });
     }
-    await RNFS.writeFile(path, data, 'utf8');
-    await Share.open({
-      filename: 'encrypted_secret_recovery_phrase.json',
-      saveToFiles: true,
-      url: path
-    });
     cb();
   } catch (error) {
     cb(error);

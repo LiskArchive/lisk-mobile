@@ -23,7 +23,7 @@ import { P, Small } from 'components/shared/toolBox/typography';
 import {
   accountFollowed as accountFollowedAction,
   accountEdited as accountEditedAction
-} from 'modules/Accounts/actions';
+} from 'modules/Accounts/store/actions';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
@@ -147,7 +147,7 @@ const AddToBookmark = ({
 
   return <View style={[styles.wrapper, styles.theme.wrapper]}>
     <Scanner
-      reference={scanner}
+      ref={scanner}
       navigation={navigation}
       readFromCameraRoll={true}
       onQRCodeRead={onQRCodeRead}

@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
+import withTheme from 'components/shared/withTheme';
 import { assembleWordOptions } from 'modules/Auth/utils';
-import styles from './styles';
+import getStyles from './styles';
 
 /**
  * Returns a random index which doesn't exist in list
@@ -43,8 +45,11 @@ const chooseRandomWords = (qty, words) => {
 const Confirm = ({
   t,
   nextStep,
-  sharedData: { passphrase }, navigation, prevStep
+  sharedData: { passphrase }, prevStep,
+  customHeader,
+  styles
 }) => {
+  const navigation = useNavigation();
   const [buttonStatus, setButtonStatus] = useState(true);
   const [missing, setMissing] = useState([]);
   const [options, setOptions] = useState([]);
@@ -148,7 +153,7 @@ const Confirm = ({
         const element = optionIndex >= 0 ? (
           generatePlaceholder(index, optionIndex, val)
         ) : (
-          <P key={index} style={styles.word}>
+          <P key={index} style={[styles.word, styles.theme.word]}>
             {val}
           </P>
         );
@@ -162,14 +167,15 @@ const Confirm = ({
     setOptions({
       headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
       title:
-        deviceHeight() >= SCREEN_HEIGHTS.SM
-          ? t('Passphrase verification')
-          : t('Verification'),
+          deviceHeight() >= SCREEN_HEIGHTS.SM
+            ? t('Passphrase verification')
+            : t('Verification'),
     });
     generateTest();
   }, []);
 
-  return <SafeAreaView style={styles.wrapper}>
+  return <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+    {customHeader && <HeaderBackButton title={'settings.backup_phrase.confirm_phrase'} onPress={navigation.goBack} />}
     <View style={styles.container}>
       <View style={styles.body}>
         <View style={styles.box}>
@@ -219,4 +225,4 @@ const Confirm = ({
   </SafeAreaView>;
 };
 
-export default translate()(Confirm);
+export default withTheme(translate()(Confirm), getStyles());

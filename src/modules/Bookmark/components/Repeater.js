@@ -23,7 +23,7 @@ const Repeater = ({
   const showAvatar = activeToken === tokenKeys[0];
 
   const filterList = useMemo(() =>
-    list[activeToken]?.filter(item => {
+    list?.filter(item => {
       if (filterAddress && validateAddress(tokenKeys[0], item.address) === 1) {
         return false;
       }
@@ -50,7 +50,7 @@ const Repeater = ({
 };
 
 const mapStateToProps = state => ({
-  list: state.accounts.followed,
+  list: [],
   activeToken: state.settings.token.active,
 });
 

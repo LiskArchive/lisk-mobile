@@ -1,6 +1,8 @@
-import React, { Fragment } from 'react';
-import { AppState } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+/* eslint-disable max-statements */
+import React, {
+  Fragment, useEffect, useState, forwardRef, useImperativeHandle, useCallback,
+} from 'react';
+import { AppState, SafeAreaView } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
@@ -11,133 +13,121 @@ import CameraRoll from './cameraRoll';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
-class Scanner extends React.Component {
-  state = {
-    camera: {
-      permission: 'undetermined',
-      visible: false,
-    },
-    photo: {
-      permission: 'undetermined',
-      visible: false,
-    },
+const Scanner = forwardRef(({
+  styles,
+  containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
+  onQRCodeRead,
+  onClose,
+  isCameraOpen,
+  fullScreen,
+  permissionDialogTitle,
+  permissionDialogMessage,
+  reference,
+  navigation
+}, ref) => {
+  const [camera, setCamera] = useState({
+    permission: 'undetermined',
+    visible: false,
+  });
+
+  const [photo, setPhoto] = useState({
+    permission: 'undetermined',
+    visible: false,
+  });
+
+  const setPermissions = permissions => {
+    setCamera(prevState => ({ ...prevState, permissions: permissions.camera }));
+    setPhoto(prevState => ({ ...prevState, permissions: permissions.photo }));
   };
 
-  componentDidMount() {
-    this.checkPermissions();
-    AppState.addEventListener('change', this.checkPermissions);
-  }
-
-  checkPermissions = () => {
+  const checkPermissions = useCallback(() => {
     Permissions.checkMultiple(['camera', 'photo']).then(response => {
-      this.setPermissions(response);
+      setPermissions(response);
     });
-  };
+  }, []);
 
-  setPermissions = permissions => {
-    const { camera, photo } = this.state;
-    camera.permission = permissions.camera;
-    photo.permission = permissions.photo;
-    this.setState({ camera, photo });
-  };
+  const readFromPhotoGallery = items => {
+    setCamera(prevState => ({ ...prevState, visible: false }));
+    setPhoto(prevState => ({ ...prevState, visible: false }));
 
-  toggleCamera = () => {
-    const { camera } = this.state;
-    const { isCameraOpen } = this.props;
-
-    camera.visible = !camera.visible;
-    if (typeof isCameraOpen === 'function') {
-      isCameraOpen(camera.visible);
-    }
-    this.setState({ camera });
-
-    if (!camera.visible && typeof this.props.onClose === 'function') {
-      this.props.onClose();
-    }
-  };
-
-  toggleGallery = () => {
-    const { photo } = this.state;
-    photo.visible = !photo.visible;
-    this.setState({ photo });
-  };
-
-  readFromPhotoGallery = items => {
-    const { photo, camera } = this.state;
-    photo.visible = false;
-    camera.visible = false;
-    this.setState({ photo, camera });
-
-    this.props.navigation.setOptions({
+    navigation.setOptions({
       tabBar: !photo.visible,
       headerLeft: true,
     });
 
     if (items.length > 0) {
       QRCode.decode(items[0].uri, (error, result) => {
-        this.props.onQRCodeRead(result);
+        onQRCodeRead(result);
       });
     }
   };
 
-  readQRcode = event => {
-    this.toggleCamera();
-    this.props.onQRCodeRead(event.data);
+  const toggleCamera = useCallback(() => {
+    if (typeof isCameraOpen === 'function') {
+      isCameraOpen(!camera.visible);
+    }
+    setCamera(prevState => ({ ...prevState, visible: !prevState.visible }));
+
+    if (!camera.visible && typeof onClose === 'function') {
+      onClose();
+    }
+  }, []);
+
+  useImperativeHandle(ref, () => ({ toggleCamera }));
+
+  const toggleGallery = () => {
+    setPhoto(prevState => ({ ...prevState, visible: !prevState.visible }));
   };
 
-  render() {
-    const {
-      styles,
-      containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
-      // readFromCameraRoll,
-      fullScreen,
-      permissionDialogTitle,
-      permissionDialogMessage,
-      reference
-    } = this.props;
-    const { camera, photo } = this.state;
-    return (
-      <Fragment>
-        {camera.visible ? (
-          <SafeAreaView style={styles.scannerContainer} >
-            <RNCamera
-              ref={reference}
-              style={[styles.preview, styles.cameraPreview, scanner]}
-              onBarCodeRead={this.readQRcode}
-              barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-              type={RNCamera.Constants.Type.back}
-              captureAudio={false}
-              notAuthorizedView={
-                <CameraAccess close={this.toggleCamera} fullScreen={fullScreen} />
-              }
-              pendingAuthorizationView={
-                <CameraAccess close={this.toggleCamera} />
-              }
-              androidCameraPermissionOptions={{
-                title: permissionDialogTitle,
-                message: permissionDialogMessage,
-                buttonPositive: 'Ok',
-                buttonNegative: 'Cancel',
-              }}
-            >
-              <CameraOverlay
-                containerStyles={[styles.cameraOverlay, cameraOverlay]}
-                toggleGallery={this.toggleGallery}
-                photoPermission={photo.permission}
-                close={this.toggleCamera}
-              />
-            </RNCamera>
-          </SafeAreaView>
-        ) : null}
-        <CameraRoll
-          containerStyles={cameraRoll}
-          onSelect={this.readFromPhotoGallery}
-          permission={photo.permission}
-          visible={photo.visible}
-        />
-      </Fragment>
-    );
-  }
-}
+  const readQRcode = event => {
+    toggleCamera();
+    onQRCodeRead(event.data);
+  };
+
+  useEffect(() => {
+    checkPermissions();
+    AppState.addEventListener('change', checkPermissions);
+  }, []);
+
+  return <Fragment>
+    {camera.visible ? (
+      <SafeAreaView style={styles.scannerContainer} >
+        <RNCamera
+          ref={reference}
+          style={[styles.preview, styles.cameraPreview, scanner]}
+          onBarCodeRead={readQRcode}
+          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+          type={RNCamera.Constants.Type.back}
+          captureAudio={false}
+          notAuthorizedView={
+            <CameraAccess close={toggleCamera} fullScreen={fullScreen} />
+          }
+          pendingAuthorizationView={
+            <CameraAccess close={toggleCamera} />
+          }
+          androidCameraPermissionOptions={{
+            title: permissionDialogTitle,
+            message: permissionDialogMessage,
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
+        >
+          <CameraOverlay
+            containerStyles={[styles.cameraOverlay, cameraOverlay]}
+            toggleGallery={toggleGallery}
+            photoPermission={photo.permission}
+            close={toggleCamera}
+          />
+        </RNCamera>
+      </SafeAreaView>
+    ) : null}
+    <CameraRoll
+      containerStyles={cameraRoll}
+      onSelect={readFromPhotoGallery}
+      permission={photo.permission}
+      visible={photo.visible}
+    />
+  </Fragment>;
+});
 
 export default withTheme(Scanner, getStyles(), true);

@@ -1,4 +1,10 @@
 {
+  "commons": {
+    "secret_recovery_phrase": "Secret recovery phrase",
+    "buttons": {
+      "continue": "Continue"
+    }
+  },
   "Sign in manually": "Sign in manually",
   "Signing in...": "Signing in...",
   "1. Creating your account": "1. Creating your account",
@@ -69,7 +75,6 @@
   "No internet connection!": "No internet connection!",
   "Not confirmed yet.": "Not confirmed yet.",
   "Optional: add a label to save this address for the future.": "Optional: add a label to save this address for the future.",
-  "Passphrase": "Passphrase",
   "Passphrase verification": "Passphrase verification",
   "Passphrase will be the only option to access your account.": "Passphrase will be the only option to access your account.",
   "Pending confirmation": "Pending confirmation",
@@ -148,14 +153,12 @@
   "Your wallet": "Your wallet",
   "Copied to clipboard": "Copied to clipboard",
   "About Lisk": "About Lisk",
-  "Backup your passphrase": "Backup your passphrase",
   "Dark mode": "Dark mode",
   "Disabled": "Disabled",
   "Discreet mode": "Discreet mode",
   "Enabled": "Enabled",
   "Hide balance and transaction amounts.": "Hide balance and transaction amounts.",
   "Manage your bookmarks.": "Manage your bookmarks.",
-  "Terms of use": "Terms of use",
   "Currency": "Currency",
   "General": "General",
   "Language": "Language",
@@ -239,6 +242,26 @@
   "available to unlock (only on desktop)": "available to unlock (only on desktop)",
   "Insert public address or a name": "Insert public address or a name",
   "Insert public address": "Insert public address",
+  "settings": {
+    "menu": {
+      "backup_passphrase": "Backup your passphrase",
+      "about": "About Lisk",
+      "dark_mode": "Dark mode",
+      "disabled": "Disabled",
+      "enabled": "Enabled",
+      "discreet_mode": "Discreet mode",
+      "terms": "Terms of use",
+      "currency": "Currency"
+    },
+    "descriptions": {
+      "discreet_mode": "Hide balance and transaction amounts."
+    },
+    "backup_phrase": {
+      "title": "Backup secret recovery phrase",
+      "confirm_phrase": "Confirm your secret recovery phrase",
+      "continue": "Continue"
+    }
+  },
   "multisignature": {
     "account_details": "Multisignature account details",
     "description1": "This is a multisignature account, which allows a group of users to control shared LSK.",
@@ -287,15 +310,28 @@
   },
   "auth": {
     "setup": {
+      "add_account": "Add account",
+      "manage_accounts": "Manage accounts",
+      "switch_account": "Switch account",
+      "delete_account": "Choose account",
+      "remove_account": "Remove account?",
+      "remove_account_description": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
+      "decrypt_passphrase": "Decrypt your secret recovery phrase",
+      "add_account_description": "Enter your secret recovery phrase to manage your account",
       "password_setup_title": "Set up device password",
       "password_setup_description": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
       "password_setup_success_title": "Perfect! You're all set",
       "password_setup_success_description": "You can now download encrypted secret recovery phrase.",
+      "secret_phrase": "Secret recovery phrase",
+      "restore_file": "Restore from file",
       "buttons": {
         "download": "Download",
+        "remove_now": "Remove now",
         "password_setup_continue": "Continue to Dashboard",
-        "save_account": "Save account"
-      }
+        "save_account": "Save account",
+        "add_another_account": "Add another account",
+        "remove_account": "Remove an account"
+    }
     },
     "form": {
       "enter_password": "Enter password",

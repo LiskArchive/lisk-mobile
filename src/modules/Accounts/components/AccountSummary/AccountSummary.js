@@ -2,24 +2,17 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, } from 'react-native';
 import { translate } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import easing from 'utilities/easing';
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
-import { tokenKeys } from 'constants/tokens';
 import withTheme from 'components/shared/withTheme';
+import { useAccountInfo } from '../../hooks/useAccounts/useAccountInfo';
 import Profile from '../Profile';
 import getStyles from './styles';
 
 const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
   const settings = useSelector(state => state.settings);
-  const accounts = useSelector(state => state.accounts);
-  const activeToken = useSelector(state => state.settings.token.active);
+  const { summary: account } = useAccountInfo();
   const priceTicker = useSelector(state => state.service.priceTicker);
-  const dispatch = useDispatch();
-
-  const settingsUpdated = (data) => {
-    dispatch(settingsUpdatedAction(data));
-  };
 
   const opacity = useRef(new Animated.Value(0));
   const top = useRef(new Animated.Value(-20));
@@ -49,43 +42,30 @@ const AccountSummaryScreen = ({ t, scrollY, navigation }) => {
     initialFadeIn();
   }, []);
 
-  const renderProfile = (data) => {
-    const token = Object.keys(settings.token.list)[data.index];
-    const { address, lockedBalance, isMultisignature } = accounts.info[activeToken];
-    return <Profile
+  const { address, lockedBalance, isMultisignature } = account;
+
+  return <Animated.View
+    style={[
+      { height: interpolate([0, 320], [320, 0]) },
+      {
+        top: top.current,
+        opacity: opacity.current,
+        paddingBottom: interpolate([0, 320], [15, 0])
+      },
+    ]}
+  >
+    <Profile
       t={t}
-      key={token}
-      token={token}
       priceTicker={priceTicker}
-      account={data.item}
+      account={account}
       settings={settings}
       interpolate={interpolate}
       height={260}
       address={address}
       lockedBalance={lockedBalance}
       isMultiSignature={isMultisignature}
-      settingsUpdated={settingsUpdated}
-      incognito={settings.incognito}
       navigation={navigation}
-    />;
-  };
-
-  const { info } = accounts;
-  const { token } = settings;
-
-  const profiles = tokenKeys.filter((key) => token.list[key]).map((key) => info[key]);
-
-  return <Animated.View
-    style={[
-      { height: interpolate([0, 280], [280, 0]) },
-      {
-        top: top.current,
-        opacity: opacity.current,
-        paddingBottom: interpolate([0, 280], [15, 0])
-      },
-    ]}
-  >
-    {renderProfile({ item: profiles[0], index: 0 })}
+    />
   </Animated.View>;
 };
 
