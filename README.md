@@ -10,39 +10,68 @@ Lisk Mobile is a cross-platform application written in React Native and primaril
 
 [![Get it from iTunes](https://lisk.com/sites/default/files/pictures/2020-01/download_on_the_app_store_badge.svg)](https://itunes.apple.com/us/app/lisk/id1436809559?mt=8) [![Get it on Google Play](https://lisk.com/sites/default/files/pictures/2020-01/download_on_the_play_store_badge.svg)](https://play.google.com/store/apps/details?id=io.lisk.mobile&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
 
-## For Contributors
-Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for more information.
+## Pre-Installation
 
-## Development
+The prerequisites to install and run Lisk Mobile from source using the different tagged releases are listed bellow. If you don't have them installed on your machine, please run the attached commands from your terminal.
 
-### Pre-Installation
-The next section details the prerequisites to install Lisk Mobile from source using the different tagged releases.
+- [Brew](https://brew.sh/)
 
+  ```bash
+  $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  ```
 
- - Git
-   - `brew install git`
- - NodeJS (recommended 14.9.0)
-   - `brew install nvm`
- - npm (recommended 6.14.16)
-   - npm is shipped with NodeJS. but to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
- - watchman
-   - `brew install watchman`
+- [Git](https://git-scm.com/)
+
+  ```bash
+  $ brew install git
+  ```
+
+- [Node.js](https://nodejs.org/en/) (recommended 14.9.0)
+
+  ```bash
+  $ brew install node
+  ```
+
+- [NVM](https://github.com/nvm-sh/nvm)
+
+  ```bash
+  $ brew install nvm
+  ```
+
+  Remember to follow Brew additional steps for enabling NVM fully. After running `brew install nvm`, Brew will detail this steps.
+
+- [NPM](https://www.npmjs.com/) (recommended 6.14.16)
+
+  ```bash
+  $ nvm install-latest-npm
+  ```
+
+  `npm` is shipped with Node.js. But to have a specific version installed see [here](https://stackoverflow.com/questions/9755841/how-can-i-change-the-version-of-npm-using-nvm).
+
+- [Watchman](https://facebook.github.io/watchman/docs/install.html)
+
+  ```bash
+  $ brew install watchman
+  ```
 
 ### iOS
+
 - Install the latest version of [Xcode](https://apps.apple.com/ng/app/xcode/id497799835?mt=12)
 
 ### Android
- - Install [Android Studio](https://developer.android.com/studio/index.html), which sould have these options checked installed:
-   - Android SDK
-   - Android SDK Platform
-   - Performance (Intel ® HAXM)
-   - Android Virtual Device
- - Install the Android SDK. Consider these configurations:
+
+- Install [Android Studio](https://developer.android.com/studio/index.html), which sould have these options checked installed:
+  - Android SDK
+  - Android SDK Platform
+  - Performance (Intel ® HAXM)
+  - Android Virtual Device
+- Install the Android SDK. Consider these configurations:
   - compileSdkVersion: 30
   - buildToolsVersion: 30.0.2
 
+## Installation
 
-### Installation
+On your terminal, go to the directory you want to install Lisk Mobile and run:
 
 ```bash
 $ git clone https://github.com/LiskHQ/lisk-mobile.git
@@ -52,28 +81,107 @@ $ npm ci
 $ npm run link
 ```
 
-For Mac Users, to run on ios, you have to install pods. Run:
+### Run
+
+```bash
+$ npm start
 ```
+
+### Run on iOS - MacOS with Intel chip
+
+To run the app on ios, you have to install `pods`.
+
+For this, just run:
+
+```bash
 $ npx pod-install
 $ npm run ios
 ```
+
+### Run on iOS - MacOS with Apple chip
+
+If your machine has the [Apple Silicon](https://support.apple.com/en-us/HT211814) chip (not Intel), you will have to run some additional steps, which we hope are going to be solved in a short term while the new chip is more widely adopted.
+
+The process is:
+
+1. Locate in Terminal app in Finder.
+2. Right-click and click on _Get Info_
+3. Check the Open using _Rosetta_ checkbox.
+4. Quit Terminal app and run it again
+5. Go to your app folder and run `sudo gem install ffi`
+6. Run `npx pod-install`
+7. Run `npm run ios`
+
+More details [here](https://armen-mkrtchian.medium.com/run-cocoapods-on-apple-silicon-and-macos-big-sur-developer-transition-kit-b62acffc1387).
+
+### Run on Android
+
 To run android:
-```
+
+```bash
 $ npm run android
 ```
 
-### Development environment
+### Build on iOS
+
+```bash
+$ npm run build:ios
+```
+
+### Build on Android
+
+```bash
+$ npm run build:android
+```
+
+### Unit Tests
+
+#### Single run
+
+```bash
+$ npm run test
+```
+
+## Development
+
 You can run the project in Xcode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. Please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
 
-There is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read  [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
+There is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
+
+### Environment variables
+
+You can fill out `env.json` with this variables:
+
+```json
+{
+  "network": "Lisk network's name, can be mainnet or testnet.",
+  "passphrase": "Passphrase of your LSK account, to be filled out automatically on login",
+  "secondPassphrase": "Second passphrase of your LSK account, to be filled out automatically on send process.",
+  "useCommercialFonts": "Tells styleGuide/fonts.js file to load commercial fonts instead of Open Sans."
+}
+```
+
+In order to avoid committing that file you can follow [this approach](https://stackoverflow.com/a/3320183) as following:
+
+```bash
+$ git update-index --assume-unchanged env.json
+```
 
 ### Possible Errors for Mac Users
-#### `lottie-ios/Lottie.modulemap`
+
+#### Errors on `lottie-ios/Lottie.modulemap`
+
+If you face this error when trying to run the app:
+
 ```
 /Users/***/Library/Developer/Xcode/DerivedData/Lisk-***/Build/Products/Debug-iphonesimulator/lottie-ios/Lottie.modulemap
 ```
-- Add the following to the end of your Podfile (especially M1 users)
-```
+
+Follow this steps to solve it:
+
+1. Add the following to the end of your Podfile (especially M1 users)
+
+```ruby
 post_install do |installer|
   react_native_post_install(installer)
     installer.pods_project.targets.each do |target|
@@ -83,43 +191,40 @@ post_install do |installer|
     end
 end
 ```
-- Remove Pods folder and Podfile.lock ```rm -rf ios/Pods && rm -rf ios/Podfile.lock```
-- ```npx pod-install```
 
-#### `Duplicate symbols for architecture x86_64`
+2. Remove Pods folder and Podfile.lock `rm -rf ios/Pods && rm -rf ios/Podfile.lock`
+3. Run `npx pod-install` on your terminal.
+
+#### Duplicate symbols for architecture `x86_64`
+
+If you face this error when trying to run the app:
+
 ```
 Products/Debug-iphonesimulator/react-native-udp/libreact-native-udp.a(GCDAsyncUdpSocket.o)
 ld: 144 duplicate symbols for architecture x86_64
 ```
-- Run ```npx patch-package```
-- Remove Pods folder and Podfile.lock ```rm -rf ios/Pods && rm -rf ios/Podfile.lock```
-- ```npx pod-install```
 
-### Other Possible Error
-#### `SDK location not found. `
+Follow this steps to solve it:
+
+1. Run `npx patch-package`
+2. Remove Pods folder and Podfile.lock `rm -rf ios/Pods && rm -rf ios/Podfile.lock`
+3. `npx pod-install`
+
+#### Other possible errors
+
+##### `SDK location not found. `
+
 Create `android/local.properties` and add this line in the file for Mac Users:
+
 ```
 sdk.dir=/Users/username/Library/Android/sdk
 ```
+
 OR
 Set the environmental PATH to your sdk installation location.
 
+### Using Commercial Fonts
 
-#### Environment variables
-You can fill out `env.json` with those variables:
-```
-network             -> Lisk network's name, can be mainnet or testnet.
-passphrase          -> Passphrase of your LSK account, to be filled out automatically on login.
-secondPassphrase    -> Second passphrase of your LSK account, to be filled out automatically on send process.
-useCommercialFonts  -> Tells styleGuide/fonts.js file to load commercial fonts instead of Open Sans.
-```
-
-In order to avoid committing that file you can follow [this approach](https://stackoverflow.com/a/3320183) as following
-```bash
-$ git update-index --assume-unchanged env.json
-```
-
-#### Using Commercial Fonts
 Since some of the fonts used in the production version are commercial, this repository only contains open source fonts and uses `Open Sans` as a replacement for the commercial ones.
 
 If you have licensed copies of `Basier Circle` and `Gilroy`, you can add them to [fonts folder](./src/assets/fonts) with the naming convention stated in [`styleGuide/fonts.js`](./src/constants/styleGuide/fonts.js) file and make sure all the fonts are linked.
@@ -128,32 +233,16 @@ If you have licensed copies of `Basier Circle` and `Gilroy`, you can add them to
 $ react-native link ./src/assets/fonts
 ```
 
-#### Run
-```bash
-$ npm start
-```
-
-#### Build - iOS
-```bash
-$ npm run build:ios
-```
-
-#### Build - Android
-```bash
-$ npm run build:android
-```
-
-### Unit Tests
-
-#### Single run
-```bash
-$ npm run test
-```
-
 ## iMessage Extension
+
 Please check out [iMessage extension docs](ios/LiskMessageExtension/README.md) for more information.
 
+## Contributing
+
+Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for more information.
+
 ## Contributors
+
 See [contributors section](https://github.com/LiskHQ/lisk-mobile/graphs/contributors).
 
 ## License
@@ -164,4 +253,4 @@ This program is free software: you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the [GNU General Public License](https://github.com/LiskHQ/lisk-hub/tree/master/LICENSE) along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the [GNU General Public License](https://github.com/LiskHQ/lisk-hub/tree/master/LICENSE) along with this program. If not, see <http://www.gnu.org/licenses/>.
