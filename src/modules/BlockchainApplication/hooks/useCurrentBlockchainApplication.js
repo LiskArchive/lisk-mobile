@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectCurrentApplication } from '../store/selectors';
-import { setCurrentApplication } from '../store/actions';
+import { setCurrentApplication as setCurrentApplicationAction } from '../store/actions';
 
 /**
  * Hook that manages the blockchain application currently logged in
@@ -16,10 +16,10 @@ export function useCurrentBlockchainApplication() {
 
   const currentApplication = useSelector(selectCurrentApplication);
 
-  const setApplication = useCallback(
-    (application) => dispatch(setCurrentApplication(application)),
+  const setCurrentApplication = useCallback(
+    (application) => dispatch(setCurrentApplicationAction(application)),
     [],
   );
 
-  return [currentApplication, setApplication];
+  return [currentApplication, setCurrentApplication];
 }

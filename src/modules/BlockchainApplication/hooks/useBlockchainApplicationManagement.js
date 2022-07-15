@@ -1,11 +1,14 @@
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addApplication, deleteApplication } from '../store/actions';
-import { selectApplications } from '../store/selectors';
+import {
+  addApplicationByChainId as addApplicationAction,
+  deleteApplicationByChainId as deleteApplicationAction
+} from '../store/actions';
+import { selectApplications as selectApplicationsSelector } from '../store/selectors';
 import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplication';
 import { usePinBlockchainApplication } from './usePinBlockchainApplication';
-import { APPLICATIONS_MOCK } from '../mocks';
+import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
 
 /**
  * Hook that handle all the logic related to blockchain applications management.
@@ -18,30 +21,31 @@ import { APPLICATIONS_MOCK } from '../mocks';
 export function useBlockchainApplicationManagement() {
   const dispatch = useDispatch();
 
-  const [currentApplication,
-    setCurrentApplication] = useCurrentBlockchainApplication();
+  const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
+
+  console.log({ currentApplicationnnnn: useCurrentBlockchainApplication() });
 
   const { checkPinByChainId } = usePinBlockchainApplication();
 
-  const applicationsObject = useSelector(selectApplications);
+  const applicationsObject = useSelector(selectApplicationsSelector);
 
   const applications = useMemo(
     () => {
       const appsList = Object.values(applicationsObject);
 
-      return [...APPLICATIONS_MOCK, ...appsList].map((app) => ({
+      return [...BLOCKCHAIN_APPLICATIONS_MOCK, ...appsList].map((app) => ({
         ...app,
         isPinned: checkPinByChainId(app.chainID),
       })).sort((a) => (a.isPinned ? -1 : 1));
     },
-    [applicationsObject, APPLICATIONS_MOCK],
+    [applicationsObject, BLOCKCHAIN_APPLICATIONS_MOCK],
   );
 
-  const setApplication = useCallback(
+  const addApplicationByChainId = useCallback(
     (application) => {
       if (application.isDefault) return;
 
-      dispatch(addApplication(application));
+      dispatch(addApplicationAction(application));
     },
     [],
   );
@@ -53,11 +57,11 @@ export function useBlockchainApplicationManagement() {
 
   const deleteApplicationByChainId = useCallback(
     (chainId) => {
-      dispatch(deleteApplication(chainId));
+      dispatch(deleteApplicationAction(chainId));
 
-      if (currentApplication.chainID === chainId) {
-        // Set Lisk as default if application in use is being deleted
-        setCurrentApplication(APPLICATIONS_MOCK[0]);
+      if (currentApplication && currentApplication.chainID === chainId) {
+        // Set Lisk as default if application in use is being deleted.
+        setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
       }
     },
     [],
@@ -65,7 +69,7 @@ export function useBlockchainApplicationManagement() {
 
   return {
     applications,
-    setApplication,
+    addApplicationByChainId,
     getApplicationByChainId,
     deleteApplicationByChainId,
   };

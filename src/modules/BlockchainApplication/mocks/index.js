@@ -1,4 +1,4 @@
-export const APPLICATIONS_MOCK = [
+export const BLOCKCHAIN_APPLICATIONS_MOCK = [
   {
     name: 'Lisk',
     chainID: 'aq02qkbb35u4jdq8szo3pnsq',
@@ -13,7 +13,7 @@ export const APPLICATIONS_MOCK = [
     state: 'active',
     serviceURLs: ['https://service.colecti.com'],
     lastUpdated: 123789456,
-    isDefault: true,
+    isDefault: false,
   },
   {
     name: 'Enevti',
@@ -21,7 +21,7 @@ export const APPLICATIONS_MOCK = [
     state: 'active',
     serviceURLs: ['https://service.enevti.com'],
     lastUpdated: 456123789,
-    isDefault: true,
+    isDefault: false,
   },
   {
     name: 'DoEdu',
@@ -45,6 +45,14 @@ export const APPLICATIONS_MOCK = [
     state: 'active',
     serviceURLs: ['https://service.liskdex.com'],
     lastUpdated: 123456789,
-    isDefault: true,
+    isDefault: false,
   },
 ];
+
+export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.reduce(
+  (obj, val) => {
+    obj[val.chainID] = val;
+    return obj;
+  },
+  {},
+);
