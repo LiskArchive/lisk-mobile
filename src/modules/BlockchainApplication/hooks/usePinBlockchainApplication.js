@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectPinnedApplications } from '../store/selectors';
 import { toggleApplicationPin } from '../store/actions';
 
-// eslint-disable-next-line
 export function usePinBlockchainApplication() {
   const dispatch = useDispatch();
   const pins = useSelector(selectPinnedApplications);

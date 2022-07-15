@@ -83,4 +83,6 @@ const persistConfig = {
 
 const blockchainApplicationsReducer = combineReducers({ pins, applications, current });
 
-export const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer);
+const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer);
+
+export default blockchainApplications;

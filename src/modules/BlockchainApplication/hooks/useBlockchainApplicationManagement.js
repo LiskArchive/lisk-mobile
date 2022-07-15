@@ -7,7 +7,7 @@ import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplicati
 import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 import { APPLICATIONS_MOCK } from '../mocks';
 
-export default function useBlockchainApplicationManagement() {
+export function useBlockchainApplicationManagement() {
   const dispatch = useDispatch();
 
   const [currentApplication,
