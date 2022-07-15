@@ -10,9 +10,15 @@ import Modal from 'components/shared/modal';
 import ThemeContext from './contexts/theme';
 import i18n from '../locales';
 import store, { persistedStore } from './store/index';
+import useBlockchainApplicationManagement from './modules/BlockchainApplication/hooks/useBlockchainApplicationManagement';
 
 const ThemedApp = () => {
   const { theme } = useSelector(state => state.settings);
+
+  const jeje = useBlockchainApplicationManagement();
+
+  console.log({ jeje });
+
   return (
     <View style={{
       flex: 1,
