@@ -1,6 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
-
-const APPLICATIONS_MOCK = [
+export const APPLICATIONS_MOCK = [
   {
     name: 'Lisk',
     chainID: 'aq02qkbb35u4jdq8szo3pnsq',
@@ -50,26 +48,3 @@ const APPLICATIONS_MOCK = [
     isDefault: true,
   },
 ];
-
-export function useBlockchainApplications() {
-  const [data, setData] = useState(undefined);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(undefined);
-
-  const query = useCallback(() => {
-    new Promise((resolve) => {
-      setTimeout((() => {
-        resolve({ data: APPLICATIONS_MOCK });
-      }), 2000);
-    }).then(res => {
-      setData(res.data);
-      setLoading(false);
-    }).catch(err => setError(err));
-  }, []);
-
-  useEffect(() => {
-    query();
-  }, []);
-
-  return { data, loading, error };
-}
