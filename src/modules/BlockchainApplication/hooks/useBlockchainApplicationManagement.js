@@ -7,6 +7,14 @@ import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplicati
 import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 import { APPLICATIONS_MOCK } from '../mocks';
 
+/**
+ * Hook that handle all the logic related to blockchain applications management.
+ * Enables the component/hooks to use applications logic from one single place.
+ *
+ * @returns {Object} - Available blockchain applications array, a set
+ * application handler, get application by chain ID handler and  a delete
+ * application by ID handler.
+ */
 export function useBlockchainApplicationManagement() {
   const dispatch = useDispatch();
 
