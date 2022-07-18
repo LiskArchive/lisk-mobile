@@ -36,7 +36,7 @@ export function useBlockchainApplicationManagement() {
         isPinned: checkPinByChainId(app.chainID),
       })).sort((a) => (a.isPinned ? -1 : 1));
     },
-    [applicationsObject, BLOCKCHAIN_APPLICATIONS_MOCK],
+    [applicationsObject, checkPinByChainId],
   );
 
   const addApplicationByChainId = useCallback(
@@ -45,7 +45,7 @@ export function useBlockchainApplicationManagement() {
 
       dispatch(addApplicationAction(application));
     },
-    [],
+    [dispatch],
   );
 
   const getApplicationByChainId = useCallback(
@@ -62,7 +62,7 @@ export function useBlockchainApplicationManagement() {
         setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
       }
     },
-    [],
+    [currentApplication, dispatch, setCurrentApplication],
   );
 
   return {

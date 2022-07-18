@@ -18,7 +18,7 @@ export function useCurrentBlockchainApplication() {
 
   const setCurrentApplication = useCallback(
     (application) => dispatch(setCurrentApplicationAction(application)),
-    [],
+    [dispatch],
   );
 
   return [currentApplication, setCurrentApplication];

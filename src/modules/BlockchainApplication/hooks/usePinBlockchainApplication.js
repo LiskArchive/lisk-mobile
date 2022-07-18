@@ -18,7 +18,7 @@ export function usePinBlockchainApplication() {
   const pins = useSelector(selectPinnedApplications);
 
   const togglePin = useCallback((chainId) =>
-    dispatch(toggleApplicationPin(chainId)), []);
+    dispatch(toggleApplicationPin(chainId)), [dispatch]);
 
   const checkPinByChainId = useCallback((chainId) =>
     pins.includes(chainId), [pins]);
