@@ -49,9 +49,7 @@ describe('useBlockchainApplicationManagement hook', () => {
   const { result } = renderHook(() => useBlockchainApplicationManagement(), { wrapper });
 
   it('addApplicationByChainId should not trigger on mounting', () => {
-    const { addApplicationByChainId } = result.current;
-
-    expect(addApplicationByChainId).toHaveBeenCalledTimes(0);
+    expect(store.getActions()).toEqual([]);
   });
 
   it('addApplicationByChainId should dispatch an action', () => {
