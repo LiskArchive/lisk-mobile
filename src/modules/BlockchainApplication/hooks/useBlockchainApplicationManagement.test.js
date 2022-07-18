@@ -7,6 +7,8 @@ import { BLOCKCHAIN_APPLICATIONS_MOCK, MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK } fro
 import actionTypes from '../store/actionTypes';
 import { useBlockchainApplicationManagement } from './useBlockchainApplicationManagement';
 
+import * as useCurrentBlockchainApplication from './useCurrentBlockchainApplication';
+
 const mockStore = configureMockStore();
 const mockDispatch = jest.fn();
 const mockState = {
@@ -27,9 +29,10 @@ jest.mock('react-redux', () => ({
   useDispatch: () => mockDispatch,
 }));
 
-jest.mock('./useCurrentBlockchainApplication.js', () => ({
-  useCurrentBlockchainApplication: () => [mockCurrentApplication, mockSetCurrentApplication],
-}));
+jest.spyOn(useCurrentBlockchainApplication,
+  'useCurrentBlockchainApplication').mockImplementation(
+  () => ([mockCurrentApplication, mockSetCurrentApplication])
+);
 
 jest.mock('./usePinBlockchainApplication.js', () => ({
   usePinBlockchainApplication: jest.fn(() => (
@@ -42,10 +45,6 @@ describe('useBlockchainApplicationManagement hook', () => {
   const wrapper = ({ children }) => (
     <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
   );
-
-  beforeEach(() => {
-    mockDispatch.mockClear();
-  });
 
   const { result } = renderHook(() => useBlockchainApplicationManagement(), { wrapper });
 
@@ -113,14 +112,11 @@ describe('useBlockchainApplicationManagement hook', () => {
 
   it('deleteApplicationByChainId should dispatch an action and set application to Lisk if current application is being deleted', async () => {
     const { deleteApplicationByChainId } = result.current;
+
     const expectedActions = [
       {
         type: actionTypes.deleteApplicationByChainId,
         chainId: mockCurrentApplication.chainID,
-      },
-      {
-        type: actionTypes.setCurrentApplication,
-        application: BLOCKCHAIN_APPLICATIONS_MOCK[0],
       }
     ];
 
@@ -131,5 +127,6 @@ describe('useBlockchainApplicationManagement hook', () => {
     });
 
     expect(store.getActions()).toEqual(expectedActions);
+    expect(mockSetCurrentApplication).toHaveBeenCalledTimes(1);
   });
 });

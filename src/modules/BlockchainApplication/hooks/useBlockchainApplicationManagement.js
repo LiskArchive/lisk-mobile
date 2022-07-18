@@ -5,7 +5,7 @@ import {
   addApplicationByChainId as addApplicationAction,
   deleteApplicationByChainId as deleteApplicationAction
 } from '../store/actions';
-import { selectApplications as selectApplicationsSelector } from '../store/selectors';
+import { selectApplications } from '../store/selectors';
 import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplication';
 import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
@@ -23,11 +23,11 @@ export function useBlockchainApplicationManagement() {
 
   const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
 
-  console.log({ currentApplicationnnnn: useCurrentBlockchainApplication() });
+  console.log({ currentApplication });
 
   const { checkPinByChainId } = usePinBlockchainApplication();
 
-  const applicationsObject = useSelector(selectApplicationsSelector);
+  const applicationsObject = useSelector(selectApplications);
 
   const applications = useMemo(
     () => {
@@ -61,6 +61,7 @@ export function useBlockchainApplicationManagement() {
 
       if (currentApplication && currentApplication.chainID === chainId) {
         // Set Lisk as default if application in use is being deleted.
+        console.log('insideeee');
         setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
       }
     },
