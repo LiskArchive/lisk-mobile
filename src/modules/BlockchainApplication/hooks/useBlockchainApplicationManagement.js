@@ -23,8 +23,6 @@ export function useBlockchainApplicationManagement() {
 
   const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
 
-  console.log({ currentApplication });
-
   const { checkPinByChainId } = usePinBlockchainApplication();
 
   const applicationsObject = useSelector(selectApplications);
@@ -61,7 +59,6 @@ export function useBlockchainApplicationManagement() {
 
       if (currentApplication && currentApplication.chainID === chainId) {
         // Set Lisk as default if application in use is being deleted.
-        console.log('insideeee');
         setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
       }
     },
