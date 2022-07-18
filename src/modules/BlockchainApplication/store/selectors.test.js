@@ -3,9 +3,13 @@ import { selectPinnedApplications, selectApplications, selectCurrentApplication 
 
 describe('Application Explorer selector', () => {
   it('Should return list of pinned applications if action type is triggered', async () => {
-    const state = { blockchainApplications: { pins: BLOCKCHAIN_APPLICATIONS_MOCK } };
+    const pins = BLOCKCHAIN_APPLICATIONS_MOCK.map(({ chainID }) => chainID);
 
-    expect(selectPinnedApplications(state)).toEqual(BLOCKCHAIN_APPLICATIONS_MOCK);
+    const state = {
+      blockchainApplications: { pins }
+    };
+
+    expect(selectPinnedApplications(state)).toEqual(pins);
   });
 
   it('Should return list of all applications if action type is triggered', async () => {
