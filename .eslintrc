@@ -8,7 +8,7 @@
     "browser": true,
     "jest": true
   },
-  "plugins": ["react", "import", "babel", "jest"],
+  "plugins": ["react", "react-hooks", "import", "babel", "jest"],
   "globals": {
     "PRODUCTION": true,
     "TEST": true
@@ -61,9 +61,10 @@
     "react/require-default-props": "off",
     "react/sort-comp": "off",
     "react/display-name": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "implicit-arrow-linebreak": "off",
     "react/jsx-closing-tag-location": "off",
-
     "jest/no-focused-tests": "error",
     "prefer-destructuring": "off",
     "prefer-object-spread": 2,
