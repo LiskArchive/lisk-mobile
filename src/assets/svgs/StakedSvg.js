@@ -10,7 +10,6 @@ export default () => (
     height="62"
     viewBox="0 0 52 62"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
   >
     <G clip-path="url(#clip0_37_3592)">
       <Path
