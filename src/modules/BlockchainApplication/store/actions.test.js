@@ -11,10 +11,6 @@ const chainId = BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID;
 const sampleBlockchainApplication = BLOCKCHAIN_APPLICATIONS_MOCK[0];
 
 describe('actions:  blockchainApplication', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should create an action to toggle blockchain application', () => {
     const expectedAction = {
       type: actionTypes.toggleApplicationPin,

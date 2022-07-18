@@ -42,9 +42,14 @@ jest.mock('./usePinBlockchainApplication.js', () => ({
 
 describe('useBlockchainApplicationManagement hook', () => {
   const store = mockStore(mockState);
+
   const wrapper = ({ children }) => (
     <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
   );
+
+  beforeEach(() => {
+    mockDispatch.mockClear();
+  });
 
   const { result } = renderHook(() => useBlockchainApplicationManagement(), { wrapper });
 

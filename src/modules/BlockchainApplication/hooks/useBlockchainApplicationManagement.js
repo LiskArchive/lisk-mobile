@@ -31,6 +31,7 @@ export function useBlockchainApplicationManagement() {
     () => {
       const appsList = Object.values(applicationsObject);
 
+      // TODO: Replace with API call when new version integration is made.
       return [...BLOCKCHAIN_APPLICATIONS_MOCK, ...appsList].map((app) => ({
         ...app,
         isPinned: checkPinByChainId(app.chainID),
