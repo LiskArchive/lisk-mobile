@@ -13,6 +13,7 @@ import store, { persistedStore } from './store/index';
 
 const ThemedApp = () => {
   const { theme } = useSelector(state => state.settings);
+
   return (
     <View style={{
       flex: 1,
