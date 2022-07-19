@@ -26,6 +26,7 @@ export function useGetApplicationsMetaQuery() {
 	const { checkPinByChainId } = usePinBlockchainApplication();
 
 	function query() {
+		// TODO: Replace with real API call when backend is available.
 		return new Promise(resolve => {
 			setTimeout(() => {
 				resolve({ data: BLOCKCHAIN_APPLICATIONS_MOCK });

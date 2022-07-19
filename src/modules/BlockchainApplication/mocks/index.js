@@ -1,53 +1,48 @@
-export const BLOCKCHAIN_APPLICATIONS_MOCK = [
-	{
-		name: 'Lisk',
-		chainID: 'aq02qkbb35u4jdq8szo3pnsq',
-		state: 'active',
-		serviceURLs: ['https://service.lisk.com'],
-		lastUpdated: 123456789,
-		isDefault: true,
+const LISK_BLOCKCHAIN_APPLICATION = {
+	name: 'Lisk',
+	chainID: 'aq02qkbb35u4jdq8szo3pnsq',
+	title: 'Lisk',
+	description: 'A blockchain application platform',
+	network: 'mainnet',
+	isDefault: true,
+	genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
+	apis: {
+		rest: ['https://service.lisk.com'],
+		rpc: ['wss://service.lisk.com'],
 	},
-	{
-		name: 'Colecti',
-		chainID: 'mi34vyyd12g2lkf0rza1irws',
-		state: 'active',
-		serviceURLs: ['https://service.colecti.com'],
-		lastUpdated: 123789456,
+	explorers: ['https://lisk.observer', 'https://explorer.lisk.io'],
+	images: {
+		logo: {
+			png: 'https://avatars.githubusercontent.com/u/16600915?s=200&v=4', // URL
+			svg: '', // URL
+		},
+		background: 'rgba(255,255,255,0.1)', // URL
+	},
+};
+
+export const BLOCKCHAIN_APPLICATIONS_MOCK = [LISK_BLOCKCHAIN_APPLICATION].concat(
+	[...new Array(5)].map((_, index) => ({
+		name: `Application ${index}`,
+		chainID: `app${index}chainID`,
+		title: `Application ${index} title`,
+		description: `Application ${index} description`,
+		network: 'mainnet',
 		isDefault: false,
-	},
-	{
-		name: 'Enevti',
-		chainID: 'aq86llsb35u4syc8aet7xenf',
-		state: 'active',
-		serviceURLs: ['https://service.enevti.com'],
-		lastUpdated: 456123789,
-		isDefault: false,
-	},
-	{
-		name: 'DoEdu',
-		chainID: 'aq96eeqk77r4syc8aet9fcey',
-		state: 'active',
-		serviceURLs: ['https://service.doedu.com'],
-		lastUpdated: 789123456,
-		isDefault: false,
-	},
-	{
-		name: 'Kalipo',
-		chainID: 'aq25derd17a4syc8aet3pryt',
-		state: 'active',
-		serviceURLs: ['https://service.kalipo.com'],
-		lastUpdated: 789456123,
-		isDefault: false,
-	},
-	{
-		name: 'Lisk DEX',
-		chainID: 'dz38fkbb35u4jdq8szo3pnsq',
-		state: 'active',
-		serviceURLs: ['https://service.liskdex.com'],
-		lastUpdated: 123456789,
-		isDefault: false,
-	},
-];
+		genesisBlock: `https://downloads.app${index}.com/app${index}/mainnet/genesis_block.json.tar.gz`,
+		apis: {
+			rest: [`https://service.app${index}.com`],
+			rpc: [`wss://service.app${index}.com`],
+		},
+		explorers: [`https://app${index}.observer`, `https://explorer.app${index}.io`],
+		images: {
+			logo: {
+				png: `https://picsum.photos/id/${index}/20/20`, // URL
+				svg: '', // URL
+			},
+			background: '#FFFFFF', // URL
+		},
+	})),
+);
 
 export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.reduce(
 	(obj, val) => {
