@@ -3,9 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { usePinBlockchainApplication } from '../hooks/usePinBlockchainApplication';
 import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
-import { selectApplications } from '../store/selectors';
+import { selectApplications as selectApplicationsSelector } from '../store/selectors';
 import { setApplications as setApplicationsAction } from '../store/actions';
 
+/**
+ * Hook for fetching blockchain applications metadata and manage the network
+ * request state.
+ * @returns {Object} - The applications data, a isLoading flag to indicate if
+ * the data is loading (network request) and isError object containing an
+ * error if occurred during the API call.
+ */
 export function useGetApplicationsMetaQuery() {
 	// TODO: Replace data, isLoading and isError
 	// by React Query when package integration is done.
@@ -13,7 +20,7 @@ export function useGetApplicationsMetaQuery() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(undefined);
 
-	const applicationsState = useSelector(selectApplications);
+	const applicationsState = useSelector(selectApplicationsSelector);
 	const dispatch = useDispatch();
 
 	const { checkPinByChainId } = usePinBlockchainApplication();
