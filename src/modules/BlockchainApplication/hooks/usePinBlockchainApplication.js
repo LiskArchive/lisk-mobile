@@ -13,15 +13,13 @@ import { toggleApplicationPin } from '../store/actions';
  * and a handler for checking pinned application by chain ID.
  */
 export function usePinBlockchainApplication() {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  const pins = useSelector(selectPinnedApplications);
+	const pins = useSelector(selectPinnedApplications);
 
-  const togglePin = useCallback((chainId) =>
-    dispatch(toggleApplicationPin(chainId)), [dispatch]);
+	const togglePin = useCallback(chainId => dispatch(toggleApplicationPin(chainId)), [dispatch]);
 
-  const checkPinByChainId = useCallback((chainId) =>
-    pins.includes(chainId), [pins]);
+	const checkPinByChainId = useCallback(chainId => pins.includes(chainId), [pins]);
 
-  return { pins, togglePin, checkPinByChainId };
+	return { pins, togglePin, checkPinByChainId };
 }

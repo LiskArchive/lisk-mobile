@@ -14,8 +14,6 @@ function BlockchainApplicationsList({ styles }) {
 
 	const extraHeight = deviceType() === 'android' ? 170 : 0;
 
-	console.log({ applications });
-
 	return (
 		<View style={[styles.wrapper, styles.theme.wrapper]}>
 			<KeyboardAwareScrollView
@@ -32,14 +30,20 @@ function BlockchainApplicationsList({ styles }) {
 					</View>
 
 					<View style={styles.body}>
-						{applications.map(application => (
-							<P
-								key={application.chainID}
-								style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}
-							>
-								{application.name}
+						{applications.isLoading ? (
+							<P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+								Loading apps...
 							</P>
-						))}
+						) : (
+							applications.data.map(application => (
+								<P
+									key={application.chainID}
+									style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}
+								>
+									{application.name}
+								</P>
+							))
+						)}
 					</View>
 				</View>
 			</KeyboardAwareScrollView>

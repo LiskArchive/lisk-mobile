@@ -1,14 +1,13 @@
-import { useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
-  addApplicationByChainId as addApplicationAction,
-  deleteApplicationByChainId as deleteApplicationAction
+	addApplicationByChainId as addApplicationAction,
+	deleteApplicationByChainId as deleteApplicationAction,
 } from '../store/actions';
-import { selectApplications } from '../store/selectors';
 import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplication';
-import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
+import { useGetApplicationsMetaQuery } from '../api/useGetApplicationsQuery';
 
 /**
  * Hook that handle all the logic related to blockchain applications management.
@@ -19,57 +18,42 @@ import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
  * application by ID handler.
  */
 export function useBlockchainApplicationManagement() {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
+	const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
 
-  const { checkPinByChainId } = usePinBlockchainApplication();
+	const applications = useGetApplicationsMetaQuery();
 
-  const applicationsObject = useSelector(selectApplications);
+	const addApplicationByChainId = useCallback(
+		application => {
+			if (application.isDefault) return;
 
-  const applications = useMemo(
-    () => {
-      const appsList = Object.values(applicationsObject);
+			dispatch(addApplicationAction(application));
+		},
+		[dispatch],
+	);
 
-      // TODO: Replace with API call when new version integration is made.
-      return [...BLOCKCHAIN_APPLICATIONS_MOCK, ...appsList].map((app) => ({
-        ...app,
-        isPinned: checkPinByChainId(app.chainID),
-      })).sort((a) => (a.isPinned ? -1 : 1));
-    },
-    [applicationsObject, checkPinByChainId],
-  );
+	const getApplicationByChainId = useCallback(
+		chainId => applications.find(app => app.chainID === chainId),
+		[applications],
+	);
 
-  const addApplicationByChainId = useCallback(
-    (application) => {
-      if (application.isDefault) return;
+	const deleteApplicationByChainId = useCallback(
+		chainId => {
+			dispatch(deleteApplicationAction(chainId));
 
-      dispatch(addApplicationAction(application));
-    },
-    [dispatch],
-  );
+			if (currentApplication && currentApplication.chainID === chainId) {
+				// Set Lisk as default if application in use is being deleted.
+				setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
+			}
+		},
+		[currentApplication, dispatch, setCurrentApplication],
+	);
 
-  const getApplicationByChainId = useCallback(
-    (chainId) => applications.find((app) => app.chainID === chainId),
-    [applications],
-  );
-
-  const deleteApplicationByChainId = useCallback(
-    (chainId) => {
-      dispatch(deleteApplicationAction(chainId));
-
-      if (currentApplication && currentApplication.chainID === chainId) {
-        // Set Lisk as default if application in use is being deleted.
-        setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
-      }
-    },
-    [currentApplication, dispatch, setCurrentApplication],
-  );
-
-  return {
-    applications,
-    addApplicationByChainId,
-    getApplicationByChainId,
-    deleteApplicationByChainId,
-  };
+	return {
+		applications,
+		addApplicationByChainId,
+		getApplicationByChainId,
+		deleteApplicationByChainId,
+	};
 }

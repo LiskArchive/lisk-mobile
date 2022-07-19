@@ -10,9 +10,9 @@ import actionTypes from './actionTypes';
  * @param {Object} action
  */
 const initialState = {
-  pins: [],
-  applications: {},
-  current: null,
+	pins: [],
+	applications: {},
+	current: null,
 };
 
 /**
@@ -20,17 +20,17 @@ const initialState = {
  * @param {Object} state
  * @param {type: String, chainId: string} action
  */
-export const pins = (state = initialState.pins, { type, chainId }) => {
-  switch (type) {
-    case actionTypes.toggleApplicationPin:
-      if (chainId && state.includes(chainId)) {
-        return state.filter((pinnedChainId) => pinnedChainId !== chainId);
-      }
-      return chainId ? [...state, chainId] : [...state];
+export const pinsReducer = (state = initialState.pins, { type, chainId }) => {
+	switch (type) {
+		case actionTypes.toggleApplicationPin:
+			if (chainId && state.includes(chainId)) {
+				return state.filter(pinnedChainId => pinnedChainId !== chainId);
+			}
+			return chainId ? [...state, chainId] : [...state];
 
-    default:
-      return state;
-  }
+		default:
+			return state;
+	}
 };
 
 /**
@@ -38,26 +38,32 @@ export const pins = (state = initialState.pins, { type, chainId }) => {
  * @param {Object} state
  * @param {type: String, data: Object} action
  */
-export const applications = (state = initialState.applications, { type, application, chainId }) => {
-  switch (type) {
-    case actionTypes.addApplicationByChainId:
-      // In cases where a new node for an existing application is being added,
-      // the new service url should be appended to the serviceURLs array of the application
-      if (application.chainID in state) {
-        state[application.chainID].serviceURLs.push(application.serviceURLs);
-      } else {
-        state[application.chainID] = application;
-      }
-      return state;
+export const applicationsReducer = (
+	state = initialState.applications,
+	{ type, applications, application, chainId },
+) => {
+	switch (type) {
+		case actionTypes.setApplications:
+			state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {});
+			return state;
+		case actionTypes.addApplicationByChainId:
+			// In cases where a new node for an existing application is being added,
+			// the new service url should be appended to the serviceURLs array of the application
+			if (application.chainID in state) {
+				state[application.chainID].serviceURLs.push(application.serviceURLs);
+			} else {
+				state[application.chainID] = application;
+			}
+			return state;
 
-    case actionTypes.deleteApplicationByChainId: {
-      delete state[chainId];
-      return { ...state };
-    }
+		case actionTypes.deleteApplicationByChainId: {
+			delete state[chainId];
+			return { ...state };
+		}
 
-    default:
-      return state;
-  }
+		default:
+			return state;
+	}
 };
 
 /**
@@ -65,23 +71,27 @@ export const applications = (state = initialState.applications, { type, applicat
  * @param {Object} state
  * @param {type: String, application: Object} action
  */
-export const current = (state = null, { type, application }) => {
-  switch (type) {
-    case actionTypes.setCurrentApplication:
-      return application;
-    default:
-      return state;
-  }
+export const currentReducer = (state = null, { type, application }) => {
+	switch (type) {
+		case actionTypes.setCurrentApplication:
+			return application;
+		default:
+			return state;
+	}
 };
 
 const persistConfig = {
-  key: 'blockchainApplications',
-  storage: AsyncStorage,
-  whitelist: ['pins', 'applications'],
-  blacklist: ['current'],
+	key: 'blockchainApplications',
+	storage: AsyncStorage,
+	whitelist: ['pins', 'applications'],
+	blacklist: ['current'],
 };
 
-const blockchainApplicationsReducer = combineReducers({ pins, applications, current });
+const blockchainApplicationsReducer = combineReducers({
+	pins: pinsReducer,
+	applications: applicationsReducer,
+	current: currentReducer,
+});
 
 const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer);
 
