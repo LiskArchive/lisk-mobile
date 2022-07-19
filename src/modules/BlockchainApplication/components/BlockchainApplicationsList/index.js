@@ -5,11 +5,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import withTheme from 'components/shared/withTheme';
 import { P } from 'components/shared/toolBox/typography';
 import { deviceType } from 'utilities/device';
+import { colors, themes } from 'constants/styleGuide';
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
+import CaretSvg from '../../../../assets/svgs/CaretSvg';
 
 import getBlockchainApplicationsListStyles from './styles';
 
-function BlockchainApplicationsList({ styles }) {
+function BlockchainApplicationsList({ theme, styles }) {
 	const { applications } = useBlockchainApplicationManagement();
 
 	const extraHeight = deviceType() === 'android' ? 170 : 0;
@@ -43,14 +45,21 @@ function BlockchainApplicationsList({ styles }) {
 										paddingTop: index === 0 ? 0 : 16,
 									}}
 								>
-									<Image
-										source={{ uri: application.images.logo.png }}
-										style={{ ...styles.applicationLogoImage }}
-									/>
+									<View style={styles.applicationNameContainer}>
+										<Image
+											source={{ uri: application.images.logo.png }}
+											style={{ ...styles.applicationLogoImage }}
+										/>
 
-									<P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-										{application.name}
-									</P>
+										<P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+											{application.name}
+										</P>
+									</View>
+
+									<CaretSvg
+										direction="right"
+										color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
+									/>
 								</View>
 							))
 						)}

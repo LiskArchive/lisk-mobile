@@ -26,10 +26,16 @@ export default function getBlockchainApplicationsListStyles() {
 			applicationContainer: {
 				flexDirection: 'row',
 				alignItems: 'center',
+				justifyContent: 'space-between',
 				paddingTop: 16,
 				paddingBottom: 16,
 				borderBottomWidth: 1,
 				borderBottomColor: colors.light.platinumGray,
+			},
+			applicationNameContainer: {
+				flex: 1,
+				flexDirection: 'row',
+				alignItems: 'center',
 			},
 			applicationLogoImage: {
 				borderRadius: 50,
