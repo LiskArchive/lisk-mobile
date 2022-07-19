@@ -4,17 +4,20 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { colors, themes } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import MultiSignature from 'components/screens/multiSignature';
+import TabBarIcon from 'components/navigation/tabBarIcon';
+
 import Settings from 'modules/Settings';
 // import Request from 'modules/Request';
 import Send from 'modules/Transactions';
 import Home from 'modules/Accounts';
 import { LockedBalanceDetails } from 'modules/Accounts/components';
-import withTheme from 'components/shared/withTheme';
 import Bookmarks from 'modules/Bookmark';
-import MultiSignature from 'components/screens/multiSignature';
-import TabBarIcon from 'components/navigation/tabBarIcon';
-import navigationOptions from './navigationOptions';
+import ApplicationsSvg from '../assets/svgs/ApplicationsSvg';
 import BlockchainApplicationsExplorer from '../modules/BlockchainApplication/components/BlockchainApplicationsExplorer';
+
+import navigationOptions from './navigationOptions';
 
 export const getHeaderOptions = ({ route }) => {
 	const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
@@ -58,7 +61,11 @@ const Tabs = ({ theme }) => (
 				},
 			})}
 		/>
-		<Tab.Screen name="Applications" component={BlockchainApplicationsExplorer} options={getIcon} />
+		<Tab.Screen
+			name="Applications"
+			component={BlockchainApplicationsExplorer}
+			options={{ tabBarIcon: props => <ApplicationsSvg {...props} /> }}
+		/>
 		<Tab.Screen name="Send" component={Send} options={getIcon} />
 		<Tab.Screen name="Bookmarks" component={Bookmarks} options={getIcon} />
 		<Tab.Screen name="Settings" component={Settings} options={getIcon} />
