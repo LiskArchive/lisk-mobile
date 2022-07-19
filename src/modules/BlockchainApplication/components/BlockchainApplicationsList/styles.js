@@ -10,12 +10,12 @@ export default function getBlockchainApplicationsListStyles() {
 				flexDirection: 'column',
 				flex: 1,
 			},
-			subHeader: {
+			searchContainer: {
 				flexDirection: 'column',
 				paddingTop: boxes.boxPadding,
 				paddingLeft: boxes.boxPadding,
 				paddingRight: boxes.boxPadding,
-				paddingBottom: 40,
+				paddingBottom: boxes.boxPadding,
 			},
 			body: {
 				flex: 1,
@@ -23,10 +23,25 @@ export default function getBlockchainApplicationsListStyles() {
 				justifyContent: 'center',
 				padding: boxes.boxPadding,
 			},
+			applicationContainer: {
+				flexDirection: 'row',
+				alignItems: 'center',
+				paddingTop: 16,
+				paddingBottom: 16,
+				borderBottomWidth: 1,
+				borderBottomColor: colors.light.platinumGray,
+			},
+			applicationLogoImage: {
+				borderRadius: 50,
+				width: 40,
+				height: 40,
+				marginRight: 16,
+			},
 			applicationNameLabel: {
 				fontSize: fonts.size.base,
 				maxWidth: '90%',
 				marginRight: 15,
+				fontWeight: '600',
 			},
 		},
 		[themes.light]: {
@@ -37,7 +52,7 @@ export default function getBlockchainApplicationsListStyles() {
 				backgroundColor: colors.light.white,
 			},
 			applicationNameLabel: {
-				color: colors.light.slateGray,
+				color: colors.light.zodiacBlue,
 			},
 		},
 

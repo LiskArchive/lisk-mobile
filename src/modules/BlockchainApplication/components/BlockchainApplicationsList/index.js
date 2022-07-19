@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import withTheme from 'components/shared/withTheme';
@@ -23,7 +23,7 @@ function BlockchainApplicationsList({ styles }) {
 				extraHeight={extraHeight}
 			>
 				<View style={[styles.innerContainer, styles.theme.innerContainer]}>
-					<View style={styles.subHeader}>
+					<View style={styles.searchContainer}>
 						<P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
 							Search for apps...
 						</P>
@@ -35,13 +35,23 @@ function BlockchainApplicationsList({ styles }) {
 								Loading apps...
 							</P>
 						) : (
-							applications.data.map(application => (
-								<P
+							applications.data.map((application, index) => (
+								<View
 									key={application.chainID}
-									style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}
+									style={{
+										...styles.applicationContainer,
+										paddingTop: index === 0 ? 0 : 16,
+									}}
 								>
-									{application.name}
-								</P>
+									<Image
+										source={{ uri: application.images.logo.png }}
+										style={{ ...styles.applicationLogoImage }}
+									/>
+
+									<P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+										{application.name}
+									</P>
+								</View>
 							))
 						)}
 					</View>

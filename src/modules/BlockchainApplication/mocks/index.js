@@ -16,7 +16,7 @@ const LISK_BLOCKCHAIN_APPLICATION = {
 			png: 'https://avatars.githubusercontent.com/u/16600915?s=200&v=4', // URL
 			svg: '', // URL
 		},
-		background: 'rgba(255,255,255,0.1)', // URL
+		background: '#FFFFFF1A', // URL
 	},
 };
 
