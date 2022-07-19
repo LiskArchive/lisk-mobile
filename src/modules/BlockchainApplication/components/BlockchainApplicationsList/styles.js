@@ -42,6 +42,8 @@ export default function getBlockchainApplicationsListStyles() {
 				width: 40,
 				height: 40,
 				marginRight: 16,
+				borderWidth: 1,
+				borderColor: colors.light.platinumGray,
 			},
 			applicationNameLabel: {
 				fontSize: fonts.size.base,
