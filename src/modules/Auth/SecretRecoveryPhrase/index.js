@@ -29,7 +29,6 @@ const SecretRecoveryPhrase = ({
   const scanner = useRef();
 
   const onFormSubmission = (passphrase) => {
-    console.log(passphrase);
     navigation.navigate('PasswordSetupForm', { passphrase });
   };
 

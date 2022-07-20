@@ -29,6 +29,7 @@ import getStyles from './styles';
 import AccountSummary from './components/AccountSummary';
 import useTransactionList from './hooks/useTransactionList';
 import { useAccountInfo } from './hooks/useAccounts/useAccountInfo';
+import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -159,6 +160,7 @@ const Home = ({
   }
   return (
     <SafeAreaView style={[styles.flex, styles.theme.homeContainer]}>
+      <ApplicationSwitcher />
       {Platform.OS !== 'ios' ? (
         <StatusBar barStyle="light-content" />
       ) : (

@@ -46,6 +46,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     serviceURLs: ['https://service.liskdex.com'],
     lastUpdated: 123456789,
     isDefault: false,
+    isDisabled: true,
   },
 ];
 

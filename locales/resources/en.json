@@ -352,6 +352,9 @@
       "terminated": "Terminated",
       "totalSupply": "Total Supply",
       "staked": "Staked"
+    },
+    "management": {
+      "add": "Add application"
     }
   }
 }

@@ -327,6 +327,9 @@
       "terminated": "",
       "totalSupply": "",
       "staked": ""
+    },
+    "management": {
+      "add": ""
     }
   }
 }
