@@ -12,9 +12,12 @@ import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApp
 import CaretSvg from '../../../../assets/svgs/CaretSvg'
 
 import getBlockchainApplicationsListStyles from './styles'
+import { useSearch } from '../../../../hooks/useSearch'
 
 function BlockchainApplicationsList({ theme, styles }) {
   const { applications } = useBlockchainApplicationManagement()
+
+  const { term, setTerm } = useSearch()
 
   const extraHeight = deviceType() === 'android' ? 170 : 0
 
@@ -45,8 +48,8 @@ function BlockchainApplicationsList({ theme, styles }) {
               placeholderTextColor={
                 theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
               }
-              onChange={(props) => console.log({ props })}
-              value=""
+              onChange={(value) => setTerm(value)}
+              value={term}
               returnKeyType="search"
             />
           </View>
