@@ -318,5 +318,15 @@
         "confirm_password_error": ""
       }
     }
+  },
+  "application": {
+    "stats": {
+      "title": "",
+      "registered": "",
+      "active": "",
+      "terminated": "",
+      "totalSupply": "",
+      "staked": ""
+    }
   }
 }

@@ -343,5 +343,15 @@
         "confirm_password_error": "Confirm that passwords match"
       }
     }
+  },
+  "application": {
+    "stats": {
+      "title": "Application Stats",
+      "registered": "Registered",
+      "active": "Active",
+      "terminated": "Terminated",
+      "totalSupply": "Total Supply",
+      "staked": "Staked"
+    }
   }
 }
