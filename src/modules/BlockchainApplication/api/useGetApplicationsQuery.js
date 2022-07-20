@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { usePinBlockchainApplication } from '../hooks/usePinBlockchainApplication';
-import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
-import { selectApplications as selectApplicationsSelector } from '../store/selectors';
-import { setApplications as setApplicationsAction } from '../store/actions';
+import { usePinBlockchainApplication } from '../hooks/usePinBlockchainApplication'
+import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks'
+import { selectApplications as selectApplicationsSelector } from '../store/selectors'
+import { setApplications as setApplicationsAction } from '../store/actions'
 
 /**
  * Hook for fetching blockchain applications metadata and manage the network
@@ -14,46 +14,46 @@ import { setApplications as setApplicationsAction } from '../store/actions';
  * error if occurred during the API call.
  */
 export function useGetApplicationsMetaQuery() {
-	// TODO: Replace data, isLoading and isError
-	// by React Query when package integration is done.
-	const [data, setData] = useState(undefined);
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(undefined);
+  // TODO: Replace data, isLoading and isError
+  // by React Query when package integration is done.
+  const [data, setData] = useState(undefined)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(undefined)
 
-	const applicationsState = useSelector(selectApplicationsSelector);
-	const dispatch = useDispatch();
+  const applicationsState = useSelector(selectApplicationsSelector)
+  const dispatch = useDispatch()
 
-	const { checkPinByChainId } = usePinBlockchainApplication();
+  const { checkPinByChainId } = usePinBlockchainApplication()
 
-	function query() {
-		// TODO: Replace with real API call when backend is available.
-		return new Promise(resolve => {
-			setTimeout(() => {
-				resolve({ data: BLOCKCHAIN_APPLICATIONS_MOCK });
-			}, 250);
-		});
-	}
+  function query() {
+    // TODO: Replace with real API call when backend is available.
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ data: BLOCKCHAIN_APPLICATIONS_MOCK })
+      }, 250)
+    })
+  }
 
-	useEffect(() => {
-		query()
-			.then(res => {
-				setData(res.data);
-				setIsLoading(false);
-			})
-			.catch(error => setIsError(error));
-	}, []);
+  useEffect(() => {
+    query()
+      .then((res) => {
+        setData(res.data)
+        setIsLoading(false)
+      })
+      .catch((error) => setIsError(error))
+  }, [])
 
-	useEffect(() => {
-		if (data) {
-			const applications = data
-				.concat([...Object.values(applicationsState)])
-				.map(app => ({ ...app, isPinned: checkPinByChainId(app.chainID) }))
-				.sort(a => (a.isPinned ? -1 : 1));
+  useEffect(() => {
+    if (data) {
+      const applications = data
+        .concat([...Object.values(applicationsState)])
+        .map((app) => ({ ...app, isPinned: checkPinByChainId(app.chainID) }))
+        .sort((a) => (a.isPinned ? -1 : 1))
 
-			dispatch(setApplicationsAction(applications));
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data, checkPinByChainId, dispatch]);
+      dispatch(setApplicationsAction(applications))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, checkPinByChainId, dispatch])
 
-	return { data, isLoading, isError };
+  return { data, isLoading, isError }
 }
