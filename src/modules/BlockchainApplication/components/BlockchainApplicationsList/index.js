@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Image } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import withTheme from 'components/shared/withTheme'
+import { useTheme } from 'hooks/useTheme'
 import { P } from 'components/shared/toolBox/typography'
 import { deviceType } from 'utilities/device'
 import { colors, themes } from 'constants/styleGuide'
@@ -14,7 +14,9 @@ import CaretSvg from '../../../../assets/svgs/CaretSvg'
 import getBlockchainApplicationsListStyles from './styles'
 import { useSearch } from '../../../../hooks/useSearch'
 
-function BlockchainApplicationsList({ theme, styles }) {
+export default function BlockchainApplicationsList() {
+  const { theme, styles } = useTheme({ styles: getBlockchainApplicationsListStyles() })
+
   const { applications } = useBlockchainApplicationManagement()
 
   const { term, setTerm } = useSearch()
@@ -45,9 +47,7 @@ function BlockchainApplicationsList({ theme, styles }) {
                 input: [styles.input],
                 containerStyle: [styles.inputContainer],
               }}
-              placeholderTextColor={
-                theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
-              }
+              placeholderTextColor={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
               onChange={(value) => setTerm(value)}
               value={term}
               returnKeyType="search"
@@ -56,9 +56,7 @@ function BlockchainApplicationsList({ theme, styles }) {
 
           <View style={styles.body}>
             {applications.isLoading ? (
-              <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-                Loading apps...
-              </P>
+              <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>Loading apps...</P>
             ) : (
               applications.data.map((application, index) => (
                 <View
@@ -69,14 +67,9 @@ function BlockchainApplicationsList({ theme, styles }) {
                   }}
                 >
                   <View style={styles.applicationNameContainer}>
-                    <Image
-                      source={{ uri: application.images.logo.png }}
-                      style={{ ...styles.applicationLogoImage }}
-                    />
+                    <Image source={{ uri: application.images.logo.png }} style={{ ...styles.applicationLogoImage }} />
 
-                    <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-                      {application.name}
-                    </P>
+                    <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>{application.name}</P>
                   </View>
 
                   <CaretSvg
@@ -92,5 +85,3 @@ function BlockchainApplicationsList({ theme, styles }) {
     </View>
   )
 }
-
-export default withTheme(BlockchainApplicationsList, getBlockchainApplicationsListStyles())
