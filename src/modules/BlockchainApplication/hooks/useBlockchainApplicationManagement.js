@@ -52,8 +52,8 @@ export function useBlockchainApplicationManagement() {
   )
 
   const getApplicationByChainId = useCallback(
-    (chainId) => applications.find((app) => app.chainID === chainId),
-    [applications]
+    (chainId) => applications.data.find((app) => app.chainID === chainId),
+    [applications.data]
   )
 
   const deleteApplicationByChainId = useCallback(

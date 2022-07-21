@@ -18,10 +18,8 @@ const mockState = {
   },
 }
 
-const ReduxProvider = ({ children, reduxStore }) => (
-  <Provider store={reduxStore}>{children}</Provider>
-)
-const mockCurrentApplication = BLOCKCHAIN_APPLICATIONS_MOCK[3]
+const ReduxProvider = ({ children, reduxStore }) => <Provider store={reduxStore}>{children}</Provider>
+const mockCurrentApplication = BLOCKCHAIN_APPLICATIONS_MOCK[0]
 const mockSetCurrentApplication = jest.fn()
 
 jest.mock('react-redux', () => ({
@@ -84,11 +82,9 @@ describe('useBlockchainApplicationManagement hook', () => {
   it('getApplicationByChainId should return an application if chainId exists', () => {
     const { getApplicationByChainId } = result.current
 
-    const updatedApplication = { ...BLOCKCHAIN_APPLICATIONS_MOCK[4], isPinned: false }
+    const updatedApplication = { ...BLOCKCHAIN_APPLICATIONS_MOCK[3], isPinned: false }
 
-    expect(getApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[4].chainID)).toEqual(
-      updatedApplication
-    )
+    expect(getApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[3].chainID)).toEqual(updatedApplication)
   })
 
   it('getApplicationByChainId should return undefined if chainId does not exist', () => {
@@ -102,13 +98,13 @@ describe('useBlockchainApplicationManagement hook', () => {
 
     const expectedAction = {
       type: actionTypes.deleteApplicationByChainId,
-      chainId: BLOCKCHAIN_APPLICATIONS_MOCK[4].chainID,
+      chainId: BLOCKCHAIN_APPLICATIONS_MOCK[3].chainID,
     }
 
     store.clearActions()
 
     act(() => {
-      deleteApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[4].chainID)
+      deleteApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[3].chainID)
     })
 
     expect(store.getActions()).toEqual([expectedAction])
