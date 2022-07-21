@@ -37,23 +37,18 @@ export function useGetApplicationsMetaQuery() {
   useEffect(() => {
     query()
       .then((res) => {
+        const applications = res.data
+          .concat([...Object.values(applicationsState)])
+          .map((app) => ({ ...app, isPinned: checkPinByChainId(app.chainID) }))
+          .sort((a) => (a.isPinned ? -1 : 1))
+
         setData(res.data)
         setIsLoading(false)
+        dispatch(setApplicationsAction(applications))
       })
       .catch((error) => setIsError(error))
-  }, [])
-
-  useEffect(() => {
-    if (data) {
-      const applications = data
-        .concat([...Object.values(applicationsState)])
-        .map((app) => ({ ...app, isPinned: checkPinByChainId(app.chainID) }))
-        .sort((a) => (a.isPinned ? -1 : 1))
-
-      dispatch(setApplicationsAction(applications))
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, checkPinByChainId, dispatch])
+  }, [])
 
   return { data, isLoading, isError }
 }

@@ -27,7 +27,6 @@ export default function getBlockchainApplicationsListStyles() {
         borderBottomColor: colors.light.platinumGray,
       },
       applicationNameContainer: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
       },
@@ -50,7 +49,6 @@ export default function getBlockchainApplicationsListStyles() {
         alignItems: 'center',
         width: '100%',
         marginTop: 32,
-        marginBottom: boxes.boxPadding,
       },
       searchIcon: {
         position: 'absolute',
@@ -70,9 +68,6 @@ export default function getBlockchainApplicationsListStyles() {
       inputContainer: {
         marginTop: -20,
         position: 'relative',
-      },
-      statsButton: {
-        // marginRight: 52,
       },
       statsModal: {
         height: 500,

@@ -10,14 +10,17 @@ import { colors, themes } from 'constants/styleGuide'
 import Input from 'components/shared/toolBox/input'
 import Icon from 'components/shared/toolBox/icon'
 import { IconButton } from 'components/shared/toolBox/button'
+import Swipeable from 'components/shared/Swipeable'
+import PinSvg from 'assets/svgs/PinSvg'
 import { useSearch } from '../../../../hooks/useSearch'
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement'
 import CaretSvg from '../../../../assets/svgs/CaretSvg'
 import StatsSvg from '../../../../assets/svgs/StatsSvg'
-import ApplicationStats from '../ApplicationStat'
+import HeaderBackButton from '../../../../components/navigation/headerBackButton'
 
 import getBlockchainApplicationsListStyles from './styles'
-import HeaderBackButton from '../../../../components/navigation/headerBackButton'
+import ApplicationStats from '../ApplicationStat'
+import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication'
 
 export default function BlockchainApplicationsList() {
   const [showStatsModal, setShowStatsModal] = useState(false)
@@ -25,6 +28,8 @@ export default function BlockchainApplicationsList() {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationsListStyles() })
 
   const { applications } = useBlockchainApplicationManagement()
+
+  const { togglePin } = usePinBlockchainApplication()
 
   const { term, setTerm } = useSearch()
 
@@ -82,25 +87,37 @@ export default function BlockchainApplicationsList() {
             {applications.isLoading ? (
               <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>Loading apps...</P>
             ) : (
-              applications.data.map((application, index) => (
-                <View
+              applications.data.map((application) => (
+                <Swipeable
                   key={application.chainID}
-                  style={{
-                    ...styles.applicationContainer,
-                    paddingTop: index === 0 ? 0 : 16,
-                  }}
+                  leftActions={[
+                    {
+                      title: !application.isPinned ? 'Pin' : 'Unpin',
+                      color: colors.light.ufoGreen,
+                      icon: () => <PinSvg color={colors.light.white} />,
+                      onPress: () => togglePin(application.chainID),
+                    },
+                  ]}
                 >
-                  <View style={styles.applicationNameContainer}>
-                    <Image source={{ uri: application.images.logo.png }} style={{ ...styles.applicationLogoImage }} />
+                  <View key={application.chainID} style={styles.applicationContainer}>
+                    <View style={styles.applicationNameContainer}>
+                      <Image source={{ uri: application.images.logo.png }} style={{ ...styles.applicationLogoImage }} />
 
-                    <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>{application.name}</P>
+                      <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>{application.name}</P>
+                    </View>
+
+                    <View style={styles.applicationNameContainer}>
+                      {application.isPinned && (
+                        <PinSvg color={colors.light.ultramarineBlue} style={{ marginRight: 8 }} />
+                      )}
+
+                      <CaretSvg
+                        direction="right"
+                        color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
+                      />
+                    </View>
                   </View>
-
-                  <CaretSvg
-                    direction="right"
-                    color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
-                  />
-                </View>
+                </Swipeable>
               ))
             )}
           </View>

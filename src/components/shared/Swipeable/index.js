@@ -1,38 +1,30 @@
-import React, { useRef } from 'react';
-import {
-  Animated, Text, View
-} from 'react-native';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { RectButton } from 'react-native-gesture-handler';
-import styles from './styles';
+import React, { useRef } from 'react'
+import { Animated, Text, View } from 'react-native'
+import BaseSwipeable from 'react-native-gesture-handler/Swipeable'
+import { RectButton } from 'react-native-gesture-handler'
+import styles from './styles'
 
-const DragglabeItem = ({ children, leftActions, rightActions }) => {
-  const swipeableRow = useRef();
+const Swipeable = ({ children, leftActions, rightActions, style }) => {
+  const swipeableRef = useRef()
 
   const renderAction = (text, color, icon, onPress, x, progress) => {
     const trans = progress.interpolate({
       inputRange: [0, 1],
       outputRange: [x, 0],
-    });
+    })
 
     const close = () => {
-      swipeableRow.current?.close();
-    };
+      swipeableRef.current?.close()
+    }
 
     const pressHandler = () => {
-      close();
-      onPress();
-    };
+      close()
+      onPress()
+    }
 
     return (
       <Animated.View style={[{ flex: 1, transform: [{ translateX: trans }] }]}>
-        <RectButton
-          style={[
-            styles.rightAction,
-            { backgroundColor: color, paddingVertical: 5 },
-          ]}
-          onPress={pressHandler}
-        >
+        <RectButton style={[styles.rightAction, { backgroundColor: color, paddingVertical: 5 }]} onPress={pressHandler}>
           <View
             style={{
               flex: 1,
@@ -46,8 +38,8 @@ const DragglabeItem = ({ children, leftActions, rightActions }) => {
           </View>
         </RectButton>
       </Animated.View>
-    );
-  };
+    )
+  }
 
   const renderLeftActions = (progress) => (
     <View
@@ -58,16 +50,10 @@ const DragglabeItem = ({ children, leftActions, rightActions }) => {
       }}
     >
       {leftActions.map((action, i) =>
-        renderAction(
-          action.title,
-          action.color,
-          action.icon,
-          action.onPress,
-          -(70 * leftActions.length + i),
-          progress
-        ))}
+        renderAction(action.title, action.color, action.icon, action.onPress, -(70 * leftActions.length + i), progress)
+      )}
     </View>
-  );
+  )
 
   const renderRightActions = (progress) => (
     <View
@@ -77,33 +63,28 @@ const DragglabeItem = ({ children, leftActions, rightActions }) => {
       }}
     >
       {rightActions.map((action, i) =>
-        renderAction(
-          action.title,
-          action.color,
-          action.icon,
-          action.onPress,
-          70 * (rightActions.length - i),
-          progress
-        ))}
+        renderAction(action.title, action.color, action.icon, action.onPress, 70 * (rightActions.length - i), progress)
+      )}
     </View>
-  );
+  )
 
   const updateRef = (ref) => {
-    swipeableRow.current = ref;
-  };
+    swipeableRef.current = ref
+  }
 
   return (
-    <Swipeable
+    <BaseSwipeable
       ref={updateRef}
+      containerStyle={style}
       friction={2}
       enableTrackpadTwoFingerGesture
       rightThreshold={40}
-      renderLeftActions={leftActions.length && renderLeftActions}
-      renderRightActions={rightActions.length && renderRightActions}
+      renderLeftActions={leftActions && leftActions.length && renderLeftActions}
+      renderRightActions={rightActions && rightActions.length && renderRightActions}
     >
       {children}
-    </Swipeable>
-  );
-};
+    </BaseSwipeable>
+  )
+}
 
-export default DragglabeItem;
+export default Swipeable

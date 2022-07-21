@@ -1,5 +1,5 @@
-import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import { useCallback, useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import {
   addApplicationByChainId as addApplicationAction,
@@ -8,6 +8,8 @@ import {
 import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplication'
 import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks'
 import { useGetApplicationsMetaQuery } from '../api/useGetApplicationsQuery'
+import { usePinBlockchainApplication } from './usePinBlockchainApplication'
+import { selectApplications as selectApplicationsSelector } from '../store/selectors'
 
 /**
  * Hook that handle all the logic related to blockchain applications management.
@@ -20,9 +22,25 @@ import { useGetApplicationsMetaQuery } from '../api/useGetApplicationsQuery'
 export function useBlockchainApplicationManagement() {
   const dispatch = useDispatch()
 
+  const applicationsState = useSelector(selectApplicationsSelector)
+
+  const getApplicationsMetaQuery = useGetApplicationsMetaQuery()
+
+  const { pins, checkPinByChainId } = usePinBlockchainApplication()
+
   const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication()
 
-  const applications = useGetApplicationsMetaQuery()
+  const applications = useMemo(() => {
+    const data = Object.values(applicationsState)
+      .map((app) => ({
+        ...app,
+        isPinned: checkPinByChainId(app.chainID),
+      }))
+      .sort((a) => (a.isPinned ? -1 : 1))
+
+    return { ...getApplicationsMetaQuery, data }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getApplicationsMetaQuery, pins, applicationsState, checkPinByChainId])
 
   const addApplicationByChainId = useCallback(
     (application) => {
