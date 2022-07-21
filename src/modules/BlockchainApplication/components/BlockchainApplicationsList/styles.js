@@ -72,8 +72,8 @@ export default function getBlockchainApplicationsListStyles() {
       statsModal: {
         height: 500,
         zIndex: 2,
-        borderTopLeftRadius: 32,
-        borderTopRightRadius: 32,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
       },
       statsModalCloseButton: {
         position: 'absolute',

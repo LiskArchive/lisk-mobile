@@ -9,12 +9,12 @@ import { deviceType } from 'utilities/device'
 import { colors, themes } from 'constants/styleGuide'
 import Input from 'components/shared/toolBox/input'
 import Icon from 'components/shared/toolBox/icon'
-import { Button } from 'components/shared/toolBox/button'
+import { IconButton } from 'components/shared/toolBox/button'
 import { useSearch } from '../../../../hooks/useSearch'
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement'
 import CaretSvg from '../../../../assets/svgs/CaretSvg'
-
 import ApplicationStats from '../ApplicationStat'
+
 import getBlockchainApplicationsListStyles from './styles'
 
 export default function BlockchainApplicationsList() {
@@ -37,10 +37,11 @@ export default function BlockchainApplicationsList() {
         extraHeight={extraHeight}
       >
         <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-          <Button
+          <IconButton
             style={[styles.actionButton, styles.theme.actionButton]}
             textStyle={[styles.buttonText, styles.theme.buttonText]}
             onClick={() => setShowStatsModal(true)}
+            icon="back"
             title="Stats"
           />
 
