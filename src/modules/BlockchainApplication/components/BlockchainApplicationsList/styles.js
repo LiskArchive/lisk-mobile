@@ -4,7 +4,8 @@ export default function getBlockchainApplicationsListStyles() {
   return {
     common: {
       wrapper: {
-        height: '100%',
+        flex: 1,
+        paddingTop: 44,
       },
       innerContainer: {
         flexDirection: 'column',
@@ -68,6 +69,10 @@ export default function getBlockchainApplicationsListStyles() {
       },
       inputContainer: {
         marginTop: -20,
+        position: 'relative',
+      },
+      statsButton: {
+        // marginRight: 52,
       },
       statsModal: {
         height: 500,

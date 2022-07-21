@@ -1,6 +1,4 @@
-import {
-  themes, fonts, colors, boxes
-} from 'constants/styleGuide';
+import { themes, fonts, colors, boxes } from 'constants/styleGuide'
 
 export default () => ({
   common: {
@@ -10,7 +8,7 @@ export default () => ({
       textAlign: 'center',
     },
     iconButton: {
-      width: 40,
+      minWidth: 40,
       height: 30,
       paddingLeft: boxes.elementPadding,
       flexDirection: 'row',
@@ -59,4 +57,4 @@ export default () => ({
     primaryButtonContainer: {},
     primaryButtonText: {},
   },
-});
+})

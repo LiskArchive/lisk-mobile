@@ -99,7 +99,8 @@ const IconButton = (props) => {
         ) : (
           <Icon style={iconStyle} name={icon} size={iconSize || 30} color={color || '#000'} />
         )}
-        <Text style={[props.styles.iconButtonTitle, titleStyle]}>{title || ''}</Text>
+
+        {title && <Text style={[props.styles.iconButtonTitle, titleStyle]}>{title}</Text>}
       </Fragment>
     </TouchableHighlight>
   )

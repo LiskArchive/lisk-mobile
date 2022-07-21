@@ -13,9 +13,11 @@ import { IconButton } from 'components/shared/toolBox/button'
 import { useSearch } from '../../../../hooks/useSearch'
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement'
 import CaretSvg from '../../../../assets/svgs/CaretSvg'
+import StatsSvg from '../../../../assets/svgs/StatsSvg'
 import ApplicationStats from '../ApplicationStat'
 
 import getBlockchainApplicationsListStyles from './styles'
+import HeaderBackButton from '../../../../components/navigation/headerBackButton'
 
 export default function BlockchainApplicationsList() {
   const [showStatsModal, setShowStatsModal] = useState(false)
@@ -30,6 +32,23 @@ export default function BlockchainApplicationsList() {
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
+      <HeaderBackButton
+        title="Applications"
+        noIcon
+        rightIconComponent={() => (
+          <IconButton
+            onClick={() => setShowStatsModal(true)}
+            icon={<StatsSvg height={20} />}
+            title="Stats"
+            titleStyle={{
+              marginLeft: 8,
+              color: theme === themes.dark ? colors.dark.mountainMist : colors.light.zodiacBlue,
+            }}
+            style={styles.statsButton}
+          />
+        )}
+      />
+
       <KeyboardAwareScrollView
         viewIsInsideTab
         enableOnAndroid={true}
@@ -37,14 +56,6 @@ export default function BlockchainApplicationsList() {
         extraHeight={extraHeight}
       >
         <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-          <IconButton
-            style={[styles.actionButton, styles.theme.actionButton]}
-            textStyle={[styles.buttonText, styles.theme.buttonText]}
-            onClick={() => setShowStatsModal(true)}
-            icon="back"
-            title="Stats"
-          />
-
           <View style={styles.searchContainer}>
             <Icon
               style={styles.searchIcon}
