@@ -19,9 +19,7 @@ describe('BlockchainApplication reducers', () => {
         chainId: BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID,
       }
 
-      expect(pins([BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID], actionData)).not.toContain(
-        actionData.data
-      )
+      expect(pins([BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID], actionData)).not.toContain(actionData.data)
     })
   })
 

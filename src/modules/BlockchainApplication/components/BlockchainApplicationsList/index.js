@@ -8,11 +8,11 @@ import { deviceType } from 'utilities/device'
 import { colors, themes } from 'constants/styleGuide'
 import Input from 'components/shared/toolBox/input'
 import Icon from 'components/shared/toolBox/icon'
+import { useSearch } from '../../../../hooks/useSearch'
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement'
 import CaretSvg from '../../../../assets/svgs/CaretSvg'
 
 import getBlockchainApplicationsListStyles from './styles'
-import { useSearch } from '../../../../hooks/useSearch'
 
 export default function BlockchainApplicationsList() {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationsListStyles() })
