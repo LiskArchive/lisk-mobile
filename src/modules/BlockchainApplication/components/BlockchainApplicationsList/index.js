@@ -12,15 +12,15 @@ import Icon from 'components/shared/toolBox/icon'
 import { IconButton } from 'components/shared/toolBox/button'
 import Swipeable from 'components/shared/Swipeable'
 import PinSvg from 'assets/svgs/PinSvg'
-import { useSearch } from '../../../../hooks/useSearch'
+import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication'
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement'
+import { useSearch } from '../../../../hooks/useSearch'
 import CaretSvg from '../../../../assets/svgs/CaretSvg'
 import StatsSvg from '../../../../assets/svgs/StatsSvg'
 import HeaderBackButton from '../../../../components/navigation/headerBackButton'
+import ApplicationStats from '../ApplicationStat'
 
 import getBlockchainApplicationsListStyles from './styles'
-import ApplicationStats from '../ApplicationStat'
-import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication'
 
 export default function BlockchainApplicationsList() {
   const [showStatsModal, setShowStatsModal] = useState(false)
@@ -94,7 +94,9 @@ export default function BlockchainApplicationsList() {
                     {
                       title: !application.isPinned ? 'Pin' : 'Unpin',
                       color: colors.light.ufoGreen,
-                      icon: () => <PinSvg color={colors.light.white} />,
+                      icon: () => (
+                        <PinSvg color={colors.light.white} variant={!application.isPinned ? 'outline' : 'closed'} />
+                      ),
                       onPress: () => togglePin(application.chainID),
                     },
                   ]}
@@ -108,7 +110,7 @@ export default function BlockchainApplicationsList() {
 
                     <View style={styles.applicationNameContainer}>
                       {application.isPinned && (
-                        <PinSvg color={colors.light.ultramarineBlue} style={{ marginRight: 8 }} />
+                        <PinSvg color={colors.light.ultramarineBlue} style={{ marginRight: 12 }} variant="fill" />
                       )}
 
                       <CaretSvg
