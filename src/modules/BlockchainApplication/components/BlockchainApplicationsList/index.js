@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Image } from 'react-native'
+import ModalBox from 'react-native-modalbox'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { useTheme } from 'hooks/useTheme'
@@ -8,13 +9,17 @@ import { deviceType } from 'utilities/device'
 import { colors, themes } from 'constants/styleGuide'
 import Input from 'components/shared/toolBox/input'
 import Icon from 'components/shared/toolBox/icon'
+import { Button } from 'components/shared/toolBox/button'
 import { useSearch } from '../../../../hooks/useSearch'
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement'
 import CaretSvg from '../../../../assets/svgs/CaretSvg'
 
+import ApplicationStats from '../ApplicationStat'
 import getBlockchainApplicationsListStyles from './styles'
 
 export default function BlockchainApplicationsList() {
+  const [showStatsModal, setShowStatsModal] = useState(false)
+
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationsListStyles() })
 
   const { applications } = useBlockchainApplicationManagement()
@@ -32,6 +37,13 @@ export default function BlockchainApplicationsList() {
         extraHeight={extraHeight}
       >
         <View style={[styles.innerContainer, styles.theme.innerContainer]}>
+          <Button
+            style={[styles.actionButton, styles.theme.actionButton]}
+            textStyle={[styles.buttonText, styles.theme.buttonText]}
+            onClick={() => setShowStatsModal(true)}
+            title="Stats"
+          />
+
           <View style={styles.searchContainer}>
             <Icon
               style={styles.searchIcon}
@@ -82,6 +94,33 @@ export default function BlockchainApplicationsList() {
           </View>
         </View>
       </KeyboardAwareScrollView>
+
+      <ModalBox
+        position="bottom"
+        style={styles.statsModal}
+        isOpen={showStatsModal}
+        onClosed={() => setShowStatsModal(false)}
+      >
+        <Icon
+          onPress={() => setShowStatsModal(false)}
+          name="cross"
+          color={theme === themes.light ? colors.light.black : colors.dark.white}
+          style={styles.statsModalCloseButton}
+          size={24}
+        />
+
+        <ApplicationStats
+          totalSupply={10000}
+          staked={500000}
+          stats={{ registered: 100, active: 50, terminated: 80 }}
+          styles={{
+            container: {
+              borderTopLeftRadius: 32,
+              borderTopRightRadius: 32,
+            },
+          }}
+        />
+      </ModalBox>
     </View>
   )
 }

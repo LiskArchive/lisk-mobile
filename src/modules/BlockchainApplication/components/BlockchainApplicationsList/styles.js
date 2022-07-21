@@ -69,6 +69,18 @@ export default function getBlockchainApplicationsListStyles() {
       inputContainer: {
         marginTop: -20,
       },
+      statsModal: {
+        height: 500,
+        zIndex: 2,
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
+      },
+      statsModalCloseButton: {
+        position: 'absolute',
+        right: 12,
+        top: 24,
+        zIndex: 1,
+      },
     },
     [themes.light]: {
       wrapper: {
