@@ -251,12 +251,12 @@
       "currency": "Währung"
     },
     "descriptions": {
-      "discreet_mode": "Hide balance and transaction amounts."
+      "discreet_mode": "Guthaben und Transaktionsbeträge ausblenden."
     },
     "backup_phrase": {
-      "title": "Backup secret recovery phrase",
-      "confirm_phrase": "Confirm your secret recovery phrase",
-      "continue": "Continue"
+      "title": "Sichern Sie die geheime Wiederherstellungsphrase",
+      "confirm_phrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
+      "continue": "Weiter"
     }
   },
   "multisignature": {
