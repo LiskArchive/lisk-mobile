@@ -26,7 +26,7 @@ describe('useSearch hook', () => {
       result.current.setTerm('value');
     });
 
-    // returns the changed term instanly, but not the debounced term before delay time passed.
+    // returns the changed term instantly, but not the debounced term before delay time passed.
     expect(result.current.term).toBe('value');
     expect(result.current.debouncedTerm).toBe('');
 
