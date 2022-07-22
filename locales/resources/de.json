@@ -327,6 +327,18 @@
       "terminated": "",
       "totalSupply": "",
       "staked": ""
+    },
+    "details": {
+      "deposited": "",
+      "chainID": "",
+      "last_updated": "",
+      "status": "",
+      "last_certificate_height": ""
+    },
+    "manage": {
+      "buttons": {
+        "add_application": ""
+      }
     }
   }
 }

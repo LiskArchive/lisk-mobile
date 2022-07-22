@@ -352,6 +352,18 @@
       "terminated": "Terminated",
       "totalSupply": "Total Supply",
       "staked": "Staked"
+    },
+    "details": {
+      "deposited": "Deposited",
+      "chainID": "Chain ID",
+      "last_updated": "Last Updated",
+      "status": "Status",
+      "last_certificate_height": "Last Certificate Height"
+    },
+    "manage": {
+      "buttons": {
+        "add_application": "Add application now"
+      }
     }
   }
 }

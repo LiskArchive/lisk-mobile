@@ -20,7 +20,6 @@ export default () => ({
     },
     titleContainer: {
       flex: 1,
-      backgroundColor: 'red'
     },
     whiteBackground: {
       backgroundColor: colors.light.white

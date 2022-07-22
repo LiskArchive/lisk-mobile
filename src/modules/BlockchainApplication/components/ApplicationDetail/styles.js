@@ -7,10 +7,17 @@ export default {
     flex: {
       flex: 1,
     },
+    header: {
+      height: 200,
+    },
+    explore: {
+      paddingTop: 40,
+    },
     body: {
       padding: boxes.boxPadding,
     },
     logoContainer: {
+      marginTop: -35,
       height: 70,
       width: 70,
       borderRadius: 35,
@@ -19,12 +26,10 @@ export default {
     title: {
       textAlign: 'center',
       fontFamily: fonts.family.contextSemiBold,
-      marginVertical: 20,
     },
     address: {
       textAlign: 'center',
       fontSize: fonts.size.small,
-      marginVertical: 10,
       fontFamily: fonts.family.context,
     },
     row: {
@@ -33,7 +38,7 @@ export default {
     },
     appLinkContainer: {
       justifyContent: 'center',
-      marginTop: 10,
+      marginBottom: 10,
     },
     depositedContainer: {
       justifyContent: 'center',
