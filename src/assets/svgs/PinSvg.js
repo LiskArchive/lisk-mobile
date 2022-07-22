@@ -2,7 +2,9 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 
-export default function PinSvg({ color, height, width, style, variant = 'outline' }) {
+export default function PinSvg({
+  color, height, width, style, variant = 'outline'
+}) {
   let children;
 
   switch (variant) {

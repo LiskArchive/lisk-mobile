@@ -44,5 +44,7 @@ export function useSearch(props) {
     }
   }, [debouncedTerm, onDebounceRef]);
 
-  return { term, debouncedTerm, searching, setTerm };
+  return {
+    term, debouncedTerm, searching, setTerm
+  };
 }

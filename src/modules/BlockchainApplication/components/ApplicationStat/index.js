@@ -26,7 +26,9 @@ const widthAndHeight = width / 2.5;
 const { ultramarineBlue, ufoGreen, zodiacBlue } = colors.light;
 const sliceColor = [ultramarineBlue, ufoGreen, zodiacBlue];
 
-const LegendItem = ({ styles, label, amount, t }) => (
+const LegendItem = ({
+  styles, label, amount, t
+}) => (
   <View style={styles.legend}>
     <View style={styles.legendItem}>
       <View style={[styles.legendIcon, styles[`${label}Icon`]]}></View>
@@ -38,7 +40,9 @@ const LegendItem = ({ styles, label, amount, t }) => (
   </View>
 );
 
-const ApplicationStats = ({ t, totalSupply, staked, stats, ...props }) => {
+const ApplicationStats = ({
+  t, totalSupply, staked, stats, ...props
+}) => {
   const { styles } = useTheme({ styles: getStyles() });
 
   const series = [stats.registered, stats.active, stats.terminated];

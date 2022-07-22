@@ -4,7 +4,9 @@ import BaseSwipeable from 'react-native-gesture-handler/Swipeable';
 import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 
-const Swipeable = ({ children, leftActions, rightActions, style }) => {
+const Swipeable = ({
+  children, leftActions, rightActions, style
+}) => {
   const swipeableRef = useRef();
 
   const renderAction = (text, color, icon, onPress, x, progress) => {
@@ -60,8 +62,7 @@ const Swipeable = ({ children, leftActions, rightActions, style }) => {
           action.onPress,
           -(70 * leftActions.length + i),
           progress
-        )
-      )}
+        ))}
     </View>
   );
 
@@ -80,8 +81,7 @@ const Swipeable = ({ children, leftActions, rightActions, style }) => {
           action.onPress,
           70 * (rightActions.length - i),
           progress
-        )
-      )}
+        ))}
     </View>
   );
 

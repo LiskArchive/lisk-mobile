@@ -1,35 +1,34 @@
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { colors, themes } from 'constants/styleGuide'
-import withTheme from 'components/shared/withTheme'
-import MultiSignature from 'components/screens/multiSignature'
-import TabBarIcon from 'components/navigation/tabBarIcon'
+import { colors, themes } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import MultiSignature from 'components/screens/multiSignature';
+import TabBarIcon from 'components/navigation/tabBarIcon';
 
-import Settings from 'modules/Settings'
-// import Request from 'modules/Request';
-import Send from 'modules/Transactions'
-import Home from 'modules/Accounts'
-import { LockedBalanceDetails } from 'modules/Accounts/components'
-import Bookmarks from 'modules/Bookmark'
-import ApplicationsSvg from '../assets/svgs/ApplicationsSvg'
-import BlockchainApplicationsExplorer from '../modules/BlockchainApplication/components/BlockchainApplicationsExplorer'
+import Settings from 'modules/Settings';
+import Send from 'modules/Transactions';
+import Home from 'modules/Accounts';
+import { LockedBalanceDetails } from 'modules/Accounts/components';
+import Bookmarks from 'modules/Bookmark';
+import ApplicationsSvg from '../assets/svgs/ApplicationsSvg';
+import BlockchainApplicationsExplorer from '../modules/BlockchainApplication/components/BlockchainApplicationsExplorer';
 
-import navigationOptions from './navigationOptions'
+import navigationOptions from './navigationOptions';
 
 export const getHeaderOptions = ({ route }) => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home'
-  return navigationOptions[routeName]
-}
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
+  return navigationOptions[routeName];
+};
 
 const getIcon = ({ route }) => ({
   tabBarIcon: (props) => <TabBarIcon name={route.name.toLowerCase()} {...props} />,
-})
+});
 
-const Tab = createBottomTabNavigator()
-const Stack = createStackNavigator()
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const Tabs = ({ theme }) => (
   <Tab.Navigator
@@ -50,14 +49,14 @@ const Tabs = ({ theme }) => (
       options={getIcon}
       listeners={({ route, navigation }) => ({
         tabPress: (e) => {
-          e.preventDefault()
-          const { history } = navigation.getState()
+          e.preventDefault();
+          const { history } = navigation.getState();
           if (history[history.length - 1].key === route.key) {
             if (route.params?.scrollToTop) {
-              route.params.scrollToTop()
+              route.params.scrollToTop();
             }
           }
-          navigation.navigate('Home')
+          navigation.navigate('Home');
         },
       })}
     />
@@ -70,9 +69,9 @@ const Tabs = ({ theme }) => (
     <Tab.Screen name="Bookmarks" component={Bookmarks} options={getIcon} />
     <Tab.Screen name="Settings" component={Settings} options={getIcon} />
   </Tab.Navigator>
-)
+);
 
-const ThemedTabs = withTheme(Tabs, {})
+const ThemedTabs = withTheme(Tabs, {});
 
 const config = {
   animation: 'spring',
@@ -84,7 +83,7 @@ const config = {
     restDisplacementThreshold: 0.01,
     restSpeedThreshold: 0.01,
   },
-}
+};
 
 const AppNavigator = () => (
   <Stack.Navigator initialRouteName="Home" mode="modal">
@@ -112,6 +111,6 @@ const AppNavigator = () => (
       }}
     />
   </Stack.Navigator>
-)
+);
 
-export default AppNavigator
+export default AppNavigator;

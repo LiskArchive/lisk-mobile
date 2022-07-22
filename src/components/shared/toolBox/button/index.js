@@ -66,7 +66,9 @@ const BasePrimaryButton = (props) => {
 export const PrimaryButton = withTheme(BasePrimaryButton, getStyles());
 
 const LabelButton = (props) => {
-  const labelStyle = ({ propsStyle, disabled, styles, style }) => {
+  const labelStyle = ({
+    propsStyle, disabled, styles, style
+  }) => {
     const mergestyle = [styles.button, styles.labelButton];
 
     const propStylesArr = propsStyle instanceof Array ? propsStyle : [propsStyle];
@@ -96,8 +98,9 @@ const LabelButton = (props) => {
  * @param {Number?} props.iconSize The size of the icon in pixels
  */
 const IconButton = (props) => {
-  const { titleStyle, style, title, icon, color, iconSize, onClick, onPress, iconStyle, testID } =
-    props;
+  const {
+    titleStyle, style, title, icon, color, iconSize, onClick, onPress, iconStyle, testID
+  } = props;
 
   const viewProps = Object.keys(props)
     .filter((key) => !/titleStyle|style|title|icon|color/.test(key))

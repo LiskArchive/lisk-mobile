@@ -1,7 +1,9 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 
-export default function ApplicationsSvg({ color, height, width, style }) {
+export default function ApplicationsSvg({
+  color, height, width, style
+}) {
   return (
     <Svg
       width={`${width || 20}`}
