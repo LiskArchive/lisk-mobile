@@ -1,7 +1,7 @@
 import actionTypes from './actionTypes';
 
 /**
- * Trigger this action to set current blockchain application
+ * Trigger this action to set blockchain applications
  *
  * @returns {Object} - Action object
  */
