@@ -9,6 +9,7 @@ export default {
     },
     header: {
       height: 200,
+      backgroundColor: colors.light.ultramarineBlue
     },
     explore: {
       paddingTop: 40,

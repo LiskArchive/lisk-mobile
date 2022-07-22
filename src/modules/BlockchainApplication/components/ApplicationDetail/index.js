@@ -26,7 +26,7 @@ const ApplicationDetail = ({
   deposited,
   address,
   token,
-  color,
+  backgroundColor,
   variant,
   t,
 }) => {
@@ -36,7 +36,7 @@ const ApplicationDetail = ({
     <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
       {variant === 'explore' && (
         <ImageBackground
-          style={[styles.header, styles.explore, { backgroundColor: color }]}
+          style={[styles.header, styles.explore, backgroundColor && { backgroundColor }]}
           source={wavesPattern}
           resizeMode="cover"
         >
@@ -51,7 +51,7 @@ const ApplicationDetail = ({
       )}
       {variant === 'manage' && (
         <View
-          style={[styles.header, { backgroundColor: color }]}
+          style={[styles.header, backgroundColor && { backgroundColor }]}
           resizeMode="stretch"
         >
           <HeaderBackButton title={name} onPress={navigation.goBack} />
