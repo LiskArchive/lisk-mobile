@@ -328,5 +328,13 @@
       "totalSupply": "",
       "staked": ""
     }
+  },
+  "blockchainApplicationsList": {
+    "title": "Anwendungen",
+    "statsButtonText": "Stats",
+    "searchPlaceholder": "Suchanwendung",
+    "loadingText": "Anwendungen werden geladen...",
+    "pinText": "Pin",
+    "unpinText": "Unpin"
   }
 }

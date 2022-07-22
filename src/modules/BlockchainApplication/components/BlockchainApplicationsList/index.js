@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Image } from 'react-native';
 import ModalBox from 'react-native-modalbox';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
@@ -22,7 +23,7 @@ import ApplicationStats from '../ApplicationStat';
 
 import getBlockchainApplicationsListStyles from './styles';
 
-export default function BlockchainApplicationsList() {
+function BlockchainApplicationsList({ t }) {
   const [showStatsModal, setShowStatsModal] = useState(false);
 
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationsListStyles() });
@@ -38,13 +39,13 @@ export default function BlockchainApplicationsList() {
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
-        title="Applications"
+        title={t('blockchainApplicationsList.title')}
         noIcon
         rightIconComponent={() => (
           <IconButton
             onClick={() => setShowStatsModal(true)}
             icon={<StatsSvg height={20} />}
-            title="Stats"
+            title={t('blockchainApplicationsList.statsButtonText')}
             titleStyle={{
               marginLeft: 8,
               color: theme === themes.dark ? colors.dark.mountainMist : colors.light.zodiacBlue,
@@ -69,7 +70,7 @@ export default function BlockchainApplicationsList() {
               color={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
             />
             <Input
-              placeholder="Search applications"
+              placeholder={t('blockchainApplicationsList.searchPlaceholder')}
               autoCorrect={false}
               autoFocus
               innerStyles={{
@@ -88,7 +89,7 @@ export default function BlockchainApplicationsList() {
           <View style={styles.body}>
             {applications.isLoading ? (
               <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-                Loading apps...
+                {t('blockchainApplicationsList.loadingText')}
               </P>
             ) : (
               applications.data.map((application) => (
@@ -96,7 +97,9 @@ export default function BlockchainApplicationsList() {
                   key={application.chainID}
                   leftActions={[
                     {
-                      title: !application.isPinned ? 'Pin' : 'Unpin',
+                      title: !application.isPinned
+                        ? t('blockchainApplicationsList.pinText')
+                        : t('blockchainApplicationsList.unpinText'),
                       color: colors.light.ufoGreen,
                       icon: () => (
                         <PinSvg
@@ -171,3 +174,5 @@ export default function BlockchainApplicationsList() {
     </View>
   );
 }
+
+export default translate()(BlockchainApplicationsList);
