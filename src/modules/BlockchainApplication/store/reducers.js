@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import { persistReducer } from 'redux-persist'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import actionTypes from './actionTypes'
+import actionTypes from './actionTypes';
 
 /**
  * Initial State
@@ -13,7 +13,7 @@ const initialState = {
   pins: [],
   applications: {},
   current: null,
-}
+};
 
 /**
  *
@@ -24,14 +24,14 @@ export const pinsReducer = (state = initialState.pins, { type, chainId }) => {
   switch (type) {
     case actionTypes.toggleApplicationPin:
       if (chainId && state.includes(chainId)) {
-        return state.filter((pinnedChainId) => pinnedChainId !== chainId)
+        return state.filter((pinnedChainId) => pinnedChainId !== chainId);
       }
-      return chainId ? [...state, chainId] : [...state]
+      return chainId ? [...state, chainId] : [...state];
 
     default:
-      return state
+      return state;
   }
-}
+};
 
 /**
  *
@@ -44,27 +44,27 @@ export const applicationsReducer = (
 ) => {
   switch (type) {
     case actionTypes.setApplications:
-      state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {})
-      return state
+      state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {});
+      return state;
     case actionTypes.addApplicationByChainId:
       // In cases where a new node for an existing application is being added,
       // the new service url should be appended to the serviceURLs array of the application
       if (application.chainID in state) {
-        state[application.chainID].serviceURLs.push(application.serviceURLs)
+        state[application.chainID].serviceURLs.push(application.serviceURLs);
       } else {
-        state[application.chainID] = application
+        state[application.chainID] = application;
       }
-      return state
+      return state;
 
     case actionTypes.deleteApplicationByChainId: {
-      delete state[chainId]
-      return { ...state }
+      delete state[chainId];
+      return { ...state };
     }
 
     default:
-      return state
+      return state;
   }
-}
+};
 
 /**
  *
@@ -74,25 +74,25 @@ export const applicationsReducer = (
 export const currentReducer = (state = null, { type, application }) => {
   switch (type) {
     case actionTypes.setCurrentApplication:
-      return application
+      return application;
     default:
-      return state
+      return state;
   }
-}
+};
 
 const persistConfig = {
   key: 'blockchainApplications',
   storage: AsyncStorage,
   whitelist: ['pins', 'applications'],
   blacklist: ['current'],
-}
+};
 
 const blockchainApplicationsReducer = combineReducers({
   pins: pinsReducer,
   applications: applicationsReducer,
   current: currentReducer,
-})
+});
 
-const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer)
+const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer);
 
-export default blockchainApplications
+export default blockchainApplications;

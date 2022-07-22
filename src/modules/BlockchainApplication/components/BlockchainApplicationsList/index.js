@@ -1,39 +1,39 @@
-import React, { useState } from 'react'
-import { View, Image } from 'react-native'
-import ModalBox from 'react-native-modalbox'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import React, { useState } from 'react';
+import { View, Image } from 'react-native';
+import ModalBox from 'react-native-modalbox';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { useTheme } from 'hooks/useTheme'
-import { P } from 'components/shared/toolBox/typography'
-import { deviceType } from 'utilities/device'
-import { colors, themes } from 'constants/styleGuide'
-import Input from 'components/shared/toolBox/input'
-import Icon from 'components/shared/toolBox/icon'
-import { IconButton } from 'components/shared/toolBox/button'
-import Swipeable from 'components/shared/Swipeable'
-import PinSvg from 'assets/svgs/PinSvg'
-import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication'
-import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement'
-import { useSearch } from '../../../../hooks/useSearch'
-import CaretSvg from '../../../../assets/svgs/CaretSvg'
-import StatsSvg from '../../../../assets/svgs/StatsSvg'
-import HeaderBackButton from '../../../../components/navigation/headerBackButton'
-import ApplicationStats from '../ApplicationStat'
+import { useTheme } from 'hooks/useTheme';
+import { P } from 'components/shared/toolBox/typography';
+import { deviceType } from 'utilities/device';
+import { colors, themes } from 'constants/styleGuide';
+import Input from 'components/shared/toolBox/input';
+import Icon from 'components/shared/toolBox/icon';
+import { IconButton } from 'components/shared/toolBox/button';
+import Swipeable from 'components/shared/Swipeable';
+import PinSvg from 'assets/svgs/PinSvg';
+import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
+import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
+import { useSearch } from '../../../../hooks/useSearch';
+import CaretSvg from '../../../../assets/svgs/CaretSvg';
+import StatsSvg from '../../../../assets/svgs/StatsSvg';
+import HeaderBackButton from '../../../../components/navigation/headerBackButton';
+import ApplicationStats from '../ApplicationStat';
 
-import getBlockchainApplicationsListStyles from './styles'
+import getBlockchainApplicationsListStyles from './styles';
 
 export default function BlockchainApplicationsList() {
-  const [showStatsModal, setShowStatsModal] = useState(false)
+  const [showStatsModal, setShowStatsModal] = useState(false);
 
-  const { theme, styles } = useTheme({ styles: getBlockchainApplicationsListStyles() })
+  const { theme, styles } = useTheme({ styles: getBlockchainApplicationsListStyles() });
 
-  const { applications } = useBlockchainApplicationManagement()
+  const { applications } = useBlockchainApplicationManagement();
 
-  const { togglePin } = usePinBlockchainApplication()
+  const { togglePin } = usePinBlockchainApplication();
 
-  const { term, setTerm } = useSearch()
+  const { term, setTerm } = useSearch();
 
-  const extraHeight = deviceType() === 'android' ? 170 : 0
+  const extraHeight = deviceType() === 'android' ? 170 : 0;
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -76,7 +76,9 @@ export default function BlockchainApplicationsList() {
                 input: [styles.input],
                 containerStyle: [styles.inputContainer],
               }}
-              placeholderTextColor={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
+              placeholderTextColor={
+                theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
+              }
               onChange={(value) => setTerm(value)}
               value={term}
               returnKeyType="search"
@@ -85,7 +87,9 @@ export default function BlockchainApplicationsList() {
 
           <View style={styles.body}>
             {applications.isLoading ? (
-              <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>Loading apps...</P>
+              <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+                Loading apps...
+              </P>
             ) : (
               applications.data.map((application) => (
                 <Swipeable
@@ -95,7 +99,10 @@ export default function BlockchainApplicationsList() {
                       title: !application.isPinned ? 'Pin' : 'Unpin',
                       color: colors.light.ufoGreen,
                       icon: () => (
-                        <PinSvg color={colors.light.white} variant={!application.isPinned ? 'outline' : 'closed'} />
+                        <PinSvg
+                          color={colors.light.white}
+                          variant={!application.isPinned ? 'outline' : 'closed'}
+                        />
                       ),
                       onPress: () => togglePin(application.chainID),
                     },
@@ -103,14 +110,23 @@ export default function BlockchainApplicationsList() {
                 >
                   <View key={application.chainID} style={styles.applicationContainer}>
                     <View style={styles.applicationNameContainer}>
-                      <Image source={{ uri: application.images.logo.png }} style={{ ...styles.applicationLogoImage }} />
+                      <Image
+                        source={{ uri: application.images.logo.png }}
+                        style={{ ...styles.applicationLogoImage }}
+                      />
 
-                      <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>{application.name}</P>
+                      <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+                        {application.name}
+                      </P>
                     </View>
 
                     <View style={styles.applicationNameContainer}>
                       {application.isPinned && (
-                        <PinSvg color={colors.light.ultramarineBlue} style={{ marginRight: 12 }} variant="fill" />
+                        <PinSvg
+                          color={colors.light.ultramarineBlue}
+                          style={{ marginRight: 12 }}
+                          variant="fill"
+                        />
                       )}
 
                       <CaretSvg
@@ -153,5 +169,5 @@ export default function BlockchainApplicationsList() {
         />
       </ModalBox>
     </View>
-  )
+  );
 }

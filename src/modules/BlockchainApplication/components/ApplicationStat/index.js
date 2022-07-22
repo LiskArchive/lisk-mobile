@@ -1,17 +1,17 @@
-import React from 'react'
-import { View, Dimensions } from 'react-native'
-import PieChart from 'react-native-pie-chart'
-import { translate } from 'react-i18next'
+import React from 'react';
+import { View, Dimensions } from 'react-native';
+import PieChart from 'react-native-pie-chart';
+import { translate } from 'react-i18next';
 
-import { H2, P } from 'components/shared/toolBox/typography'
-import { useTheme } from 'hooks/useTheme'
-import { colors } from 'constants/styleGuide'
-import TotalSupplySvg from 'assets/svgs/TotalSupplySvg'
-import StakedSvg from 'assets/svgs/StakedSvg'
+import { H2, P } from 'components/shared/toolBox/typography';
+import { useTheme } from 'hooks/useTheme';
+import { colors } from 'constants/styleGuide';
+import TotalSupplySvg from 'assets/svgs/TotalSupplySvg';
+import StakedSvg from 'assets/svgs/StakedSvg';
 
-import getStyles from './styles'
+import getStyles from './styles';
 
-const { width } = Dimensions.get('window')
+const { width } = Dimensions.get('window');
 
 /**
  * @param {Object} props
@@ -22,9 +22,9 @@ const { width } = Dimensions.get('window')
  * @param {Number} props.stats.amount
  */
 
-const widthAndHeight = width / 2.5
-const { ultramarineBlue, ufoGreen, zodiacBlue } = colors.light
-const sliceColor = [ultramarineBlue, ufoGreen, zodiacBlue]
+const widthAndHeight = width / 2.5;
+const { ultramarineBlue, ufoGreen, zodiacBlue } = colors.light;
+const sliceColor = [ultramarineBlue, ufoGreen, zodiacBlue];
 
 const LegendItem = ({ styles, label, amount, t }) => (
   <View style={styles.legend}>
@@ -36,12 +36,12 @@ const LegendItem = ({ styles, label, amount, t }) => (
       </P>
     </View>
   </View>
-)
+);
 
 const ApplicationStats = ({ t, totalSupply, staked, stats, ...props }) => {
-  const { styles } = useTheme({ styles: getStyles() })
+  const { styles } = useTheme({ styles: getStyles() });
 
-  const series = [stats.registered, stats.active, stats.terminated]
+  const series = [stats.registered, stats.active, stats.terminated];
 
   return (
     <View style={[styles.container, styles.theme.container, props.styles.container]}>
@@ -76,7 +76,7 @@ const ApplicationStats = ({ t, totalSupply, staked, stats, ...props }) => {
         <StakedSvg />
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default translate()(ApplicationStats)
+export default translate()(ApplicationStats);

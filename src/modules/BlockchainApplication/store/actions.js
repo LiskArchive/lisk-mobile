@@ -1,4 +1,4 @@
-import actionTypes from './actionTypes'
+import actionTypes from './actionTypes';
 
 /**
  * Trigger this action to set current blockchain application
@@ -8,7 +8,7 @@ import actionTypes from './actionTypes'
 export const setApplications = (applications) => ({
   type: actionTypes.setApplications,
   applications,
-})
+});
 
 /**
  * Trigger this action to toggle blockchain application pin
@@ -18,7 +18,7 @@ export const setApplications = (applications) => ({
 export const toggleApplicationPin = (chainId) => ({
   type: actionTypes.toggleApplicationPin,
   chainId,
-})
+});
 
 /**
  * Trigger this action to add blockchain application
@@ -28,7 +28,7 @@ export const toggleApplicationPin = (chainId) => ({
 export const addApplicationByChainId = (application) => ({
   type: actionTypes.addApplicationByChainId,
   application,
-})
+});
 
 /**
  * Trigger this action to delete blockchain application
@@ -38,7 +38,7 @@ export const addApplicationByChainId = (application) => ({
 export const deleteApplicationByChainId = (chainId) => ({
   type: actionTypes.deleteApplicationByChainId,
   chainId,
-})
+});
 
 /**
  * Trigger this action to set current blockchain application
@@ -48,4 +48,4 @@ export const deleteApplicationByChainId = (chainId) => ({
 export const setCurrentApplication = (application) => ({
   type: actionTypes.setCurrentApplication,
   application,
-})
+});

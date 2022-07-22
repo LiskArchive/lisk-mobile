@@ -1,30 +1,33 @@
-import React, { useRef } from 'react'
-import { Animated, Text, View } from 'react-native'
-import BaseSwipeable from 'react-native-gesture-handler/Swipeable'
-import { RectButton } from 'react-native-gesture-handler'
-import styles from './styles'
+import React, { useRef } from 'react';
+import { Animated, Text, View } from 'react-native';
+import BaseSwipeable from 'react-native-gesture-handler/Swipeable';
+import { RectButton } from 'react-native-gesture-handler';
+import styles from './styles';
 
 const Swipeable = ({ children, leftActions, rightActions, style }) => {
-  const swipeableRef = useRef()
+  const swipeableRef = useRef();
 
   const renderAction = (text, color, icon, onPress, x, progress) => {
     const trans = progress.interpolate({
       inputRange: [0, 1],
       outputRange: [x, 0],
-    })
+    });
 
     const close = () => {
-      swipeableRef.current?.close()
-    }
+      swipeableRef.current?.close();
+    };
 
     const pressHandler = () => {
-      close()
-      onPress()
-    }
+      close();
+      onPress();
+    };
 
     return (
       <Animated.View style={[{ flex: 1, transform: [{ translateX: trans }] }]}>
-        <RectButton style={[styles.rightAction, { backgroundColor: color, paddingVertical: 5 }]} onPress={pressHandler}>
+        <RectButton
+          style={[styles.rightAction, { backgroundColor: color, paddingVertical: 5 }]}
+          onPress={pressHandler}
+        >
           <View
             style={{
               flex: 1,
@@ -38,8 +41,8 @@ const Swipeable = ({ children, leftActions, rightActions, style }) => {
           </View>
         </RectButton>
       </Animated.View>
-    )
-  }
+    );
+  };
 
   const renderLeftActions = (progress) => (
     <View
@@ -50,10 +53,17 @@ const Swipeable = ({ children, leftActions, rightActions, style }) => {
       }}
     >
       {leftActions.map((action, i) =>
-        renderAction(action.title, action.color, action.icon, action.onPress, -(70 * leftActions.length + i), progress)
+        renderAction(
+          action.title,
+          action.color,
+          action.icon,
+          action.onPress,
+          -(70 * leftActions.length + i),
+          progress
+        )
       )}
     </View>
-  )
+  );
 
   const renderRightActions = (progress) => (
     <View
@@ -63,14 +73,21 @@ const Swipeable = ({ children, leftActions, rightActions, style }) => {
       }}
     >
       {rightActions.map((action, i) =>
-        renderAction(action.title, action.color, action.icon, action.onPress, 70 * (rightActions.length - i), progress)
+        renderAction(
+          action.title,
+          action.color,
+          action.icon,
+          action.onPress,
+          70 * (rightActions.length - i),
+          progress
+        )
       )}
     </View>
-  )
+  );
 
   const updateRef = (ref) => {
-    swipeableRef.current = ref
-  }
+    swipeableRef.current = ref;
+  };
 
   return (
     <BaseSwipeable
@@ -84,7 +101,7 @@ const Swipeable = ({ children, leftActions, rightActions, style }) => {
     >
       {children}
     </BaseSwipeable>
-  )
-}
+  );
+};
 
-export default Swipeable
+export default Swipeable;

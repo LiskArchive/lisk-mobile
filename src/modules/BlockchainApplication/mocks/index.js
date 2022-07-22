@@ -104,9 +104,12 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       background: '#FFFFFF1A', // URL
     },
   },
-]
+];
 
-export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.reduce((obj, val) => {
-  obj[val.chainID] = val
-  return obj
-}, {})
+export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.reduce(
+  (obj, val) => {
+    obj[val.chainID] = val;
+    return obj;
+  },
+  {}
+);

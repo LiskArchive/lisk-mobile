@@ -1,4 +1,4 @@
-import { themes, colors, boxes, fonts } from 'constants/styleGuide'
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -75,4 +75,4 @@ export default () => ({
       backgroundColor: colors.dark.bg,
     },
   },
-})
+});
