@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { usePinBlockchainApplication } from '../hooks/usePinBlockchainApplication';
 import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
-import { selectApplications as selectApplicationsSelector } from '../store/selectors';
 import { setApplications as setApplicationsAction } from '../store/actions';
 
 /**
@@ -20,10 +18,7 @@ export function useGetApplicationsMetaQuery() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(undefined);
 
-  const applicationsState = useSelector(selectApplicationsSelector);
   const dispatch = useDispatch();
-
-  const { checkPinByChainId } = usePinBlockchainApplication();
 
   function query() {
     // TODO: Replace with real API call when backend is available.
@@ -37,14 +32,9 @@ export function useGetApplicationsMetaQuery() {
   useEffect(() => {
     query()
       .then((res) => {
-        const applications = res.data
-          .concat([...Object.values(applicationsState)])
-          .map((app) => ({ ...app, isPinned: checkPinByChainId(app.chainID) }))
-          .sort((a) => (a.isPinned ? -1 : 1));
-
         setData(res.data);
         setIsLoading(false);
-        dispatch(setApplicationsAction(applications));
+        dispatch(setApplicationsAction(res.data));
       })
       .catch((error) => setIsError(error));
     // eslint-disable-next-line react-hooks/exhaustive-deps
