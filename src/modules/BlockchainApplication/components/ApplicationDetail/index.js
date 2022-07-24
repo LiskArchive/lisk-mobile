@@ -10,7 +10,10 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import wavesPattern from 'assets/images/waves_pattern_large.png';
 import { colors } from 'constants/styleGuide';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import getStyles from './styles';
+import PinSvg from '../../../../assets/svgs/PinSvg';
+import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 /**
  *
  * @param {Object} props
@@ -21,7 +24,7 @@ const ApplicationDetail = ({
   chainID,
   state,
   lastCertificateHeight,
-  serviceURLs,
+  serviceURL,
   lastUpdated,
   deposited,
   address,
@@ -32,6 +35,11 @@ const ApplicationDetail = ({
 }) => {
   const { styles } = useTheme({ styles: getStyles });
   const navigation = useNavigation();
+
+  const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
+
+  const isPinned = checkPinByChainId(chainID);
+
   return (
     <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
       {variant === 'explore' && (
@@ -59,11 +67,16 @@ const ApplicationDetail = ({
       )}
       <View style={[styles.logoContainer, styles.theme.logoContainer]}></View>
       <View style={[styles.flex, styles.body]}>
-        <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
+        <View style={styles.titleRow} >
+          <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
+          <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)} >
+            <PinSvg variant={isPinned ? 'fill' : 'outline'} width={25} height={25} />
+          </TouchableOpacity>
+        </View>
         <P style={[styles.address, styles.theme.address]}>{address}</P>
         <View style={[styles.row, styles.appLinkContainer]}>
           <UrlSvg size={1.2} />
-          <P style={styles.url}>{serviceURLs}</P>
+          <P style={styles.url}>{serviceURL}</P>
         </View>
         <View style={[styles.row, styles.depositedContainer]}>
           <P style={styles.deposited}>{t('application.details.deposited')}: </P>

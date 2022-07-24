@@ -24,7 +24,16 @@ export default {
       borderRadius: 35,
       alignSelf: 'center',
     },
+    titleRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    pinIcon: {
+      marginHorizontal: 5,
+    },
     title: {
+      marginHorizontal: 5,
       textAlign: 'center',
       fontFamily: fonts.family.contextSemiBold,
     },
