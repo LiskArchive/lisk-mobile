@@ -37,7 +37,7 @@ const ManageAccount = ({
       <ScrollView style={styles.container} >
         <Splash animate={false} />
         <View style={[styles.body]}>
-          <H2 style={styles.title} >{t('auth.setup.manage_accounts')}</H2>
+          <H2 style={styles.title} >{t('auth.setup.manageAccounts')}</H2>
           {accounts.map(account =>
             <AccountItem key={account.metadata.address} account={account} onPress={() => selectAccount(account)} />)}
         </View>
@@ -49,7 +49,7 @@ const ManageAccount = ({
           icon="user"
           iconStyle={styles.icon}
           iconSize={20}
-          title={t('auth.setup.buttons.add_another_account')}
+          title={t('auth.setup.buttons.addAnotherAccount')}
           style={[styles.button, styles.outline, styles.theme.outline]}
         />
         <IconButton
@@ -59,7 +59,7 @@ const ManageAccount = ({
           iconStyle={styles.icon}
           iconSize={20}
           titleStyle={[styles.theme.remove]}
-          title={t('auth.setup.buttons.remove_account')}
+          title={t('auth.setup.buttons.removeAccount')}
           style={[styles.button, styles.outline, styles.theme.outline]}
         />
       </View>

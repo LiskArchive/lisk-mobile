@@ -22,9 +22,9 @@ const PasswordSetupSuccess = ({
 
   return <SuccessScreen
     illustration={<FlowerSuccessSvg fill={theme === themes.dark ? '#9999A0' : '#0C152E'} />}
-    title={t('auth.setup.password_setup_success_title')}
-    description={t('auth.setup.password_setup_success_description') }
-    buttonText={t('auth.setup.buttons.password_setup_continue')}
+    title={t('auth.setup.passwordSetupSuccessTitle')}
+    description={t('auth.setup.passwordSetupSuccessDescription') }
+    buttonText={t('auth.setup.buttons.passwordSetupContinue')}
     disabled={!downloaded}
     onContinue={onContinue}
   >

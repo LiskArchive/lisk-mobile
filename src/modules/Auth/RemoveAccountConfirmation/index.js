@@ -39,8 +39,8 @@ const RemoveAccountConfirmation = ({
       />
       <SuccessScreen
         illustration={<FlowerSuccessSvg />}
-        title={t('auth.setup.remove_account')}
-        description={t('auth.setup.remove_account_description')}
+        title={t('auth.setup.removeAccount')}
+        description={t('auth.setup.removeAccount_description')}
         buttonText={t('auth.setup.buttons.remove_now')}
         disabled={!downloaded}
         onContinue={() => onContinue(encryptedAccount)}

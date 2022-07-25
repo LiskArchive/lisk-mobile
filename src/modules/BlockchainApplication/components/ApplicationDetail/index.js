@@ -18,6 +18,9 @@ import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplica
  *
  * @param {Object} props
  * @param {'manage' | 'explore'} variant
+ * 'manage' -> uses plain app background header and application name by the top
+ * 'explore' -> uses app background with patterns
+ *
  */
 const ApplicationDetail = ({
   name,
@@ -40,6 +43,10 @@ const ApplicationDetail = ({
 
   const isPinned = checkPinByChainId(chainID);
 
+  const addApplication = () => {
+    // TODO: Implement add application
+  };
+
   return (
     <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
       {variant === 'explore' && (
@@ -50,7 +57,6 @@ const ApplicationDetail = ({
         >
           <HeaderBackButton
             noIcon
-            title=" "
             rightIcon="cross"
             rightColor={colors.dark.white}
             onRightPress={navigation.goBack}
@@ -106,7 +112,7 @@ const ApplicationDetail = ({
           <View style={styles.flex}>
             <View style={styles.item}>
               <P style={styles.smallTitle}>
-                {t('application.details.last_updated')}{' '}
+                {t('application.details.lastUpdated')}{' '}
               </P>
               <P style={[styles.value, styles.theme.value]}>
                 {moment(lastUpdated).format('Dd MMM YYYY')}
@@ -114,7 +120,7 @@ const ApplicationDetail = ({
             </View>
             <View style={styles.item}>
               <P style={styles.smallTitle}>
-                {t('application.details.last_certificate_height')}
+                {t('application.details.lastCertificateHeight')}
               </P>
               <P style={[styles.value, styles.theme.value]}>
                 {lastCertificateHeight}
@@ -125,8 +131,8 @@ const ApplicationDetail = ({
         {variant === 'manage' && (
           <View>
             <PrimaryButton
-              onClick={() => {}}
-              title={t('application.manage.buttons.add_application')}
+              onClick={addApplication}
+              title={t('application.manage.buttons.addApplication')}
             />
           </View>
         )}

@@ -84,7 +84,7 @@ const SecretRecoveryPhrase = ({
         permissionDialogMessage={t('Lisk needs to connect to your camera')}
       />
       <View style={styles.container} >
-        <P style={[styles.description, styles.theme.description]} >{t('auth.setup.add_account_description')}</P>
+        <P style={[styles.description, styles.theme.description]} >{t('auth.setup.addAccountDescription')}</P>
         <Form
           animate={!signOut}
           navigation={navigation}
