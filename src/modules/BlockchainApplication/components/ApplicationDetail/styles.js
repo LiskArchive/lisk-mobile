@@ -107,7 +107,7 @@ export default {
       backgroundColor: colors.light.white,
     },
     logoContainer: {
-      backgroundColor: colors.dark.mainBg,
+      backgroundColor: colors.dark.whiteSmoke,
     },
     title: {
       color: colors.light.zodiacBlue,
@@ -124,7 +124,7 @@ export default {
       backgroundColor: colors.dark.mainBg,
     },
     logoContainer: {
-      backgroundColor: colors.dark.whiteSmoke,
+      backgroundColor: colors.dark.mainBg,
     },
     address: {
       color: colors.dark.white,

@@ -1,27 +1,29 @@
-import React, { useEffect } from "react";
-import { LogBox, View, SafeAreaView } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { translate } from "react-i18next";
-import RNFS from "react-native-fs";
-import SplashScreen from "react-native-splash-screen";
-import DocumentPicker from "react-native-document-picker";
-import withTheme from "components/shared/withTheme";
-import PassphraseSvg from "assets/svgs/PassphraseSvg";
-import UploadSvg from "assets/svgs/UploadSvg";
-import { useAccounts } from "modules/Accounts/hooks/useAccounts";
+import React, { useEffect } from 'react';
+import { LogBox, View, SafeAreaView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { translate } from 'react-i18next';
+import RNFS from 'react-native-fs';
+import SplashScreen from 'react-native-splash-screen';
+import DocumentPicker from 'react-native-document-picker';
+import withTheme from 'components/shared/withTheme';
+import PassphraseSvg from 'assets/svgs/PassphraseSvg';
+import UploadSvg from 'assets/svgs/UploadSvg';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { BLOCKCHAIN_APPLICATIONS_MOCK } from 'modules/BlockchainApplication/mocks';
-import { useCurrentBlockchainApplication } from "modules/BlockchainApplication/hooks/useCurrentBlockchainApplication";
-import { settingsRetrieved } from "../../Settings/actions";
-import getStyles from "./styles";
-import Splash from "../components/splash";
-import CreateAccount from "../components/createAccount";
-import AuthTypeItem from "../components/AuthType";
+import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
+import { settingsRetrieved } from '../../Settings/actions';
+import getStyles from './styles';
+import Splash from '../components/splash';
+import CreateAccount from '../components/createAccount';
+import AuthTypeItem from '../components/AuthType';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();
 
 // eslint-disable-next-line max-statements
-const AuthMethod = ({ styles, route, t, navigation }) => {
+const AuthMethod = ({
+  styles, route, t, navigation
+}) => {
   const signOut = route.params?.signOut;
   const settings = useSelector((state) => state.settings);
   const [, setCurrentApplication] = useCurrentBlockchainApplication();
@@ -33,15 +35,15 @@ const AuthMethod = ({ styles, route, t, navigation }) => {
   };
 
   useEffect(() => {
-    setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0])
+    setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());
       init();
       if (accounts.length) {
-        navigation.navigate("ManageAccount");
+        navigation.navigate('ManageAccount');
       }
     } else {
-      navigation.push("Intro");
+      navigation.push('Intro');
     }
   }, []);
 
@@ -54,10 +56,10 @@ const AuthMethod = ({ styles, route, t, navigation }) => {
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
-      navigation.navigate("DecryptPhrase", {
-        title: "auth.setup.decryptPassphrase",
-        address: "lskqzpfr3uq8bm2jee5dkv4ns79uuswjzc9bbpezu",
-        successRoute: "SecretRecoveryPhrase",
+      navigation.navigate('DecryptPhrase', {
+        title: 'auth.setup.decryptPassphrase',
+        address: 'lskqzpfr3uq8bm2jee5dkv4ns79uuswjzc9bbpezu',
+        successRoute: 'SecretRecoveryPhrase',
       });
     } catch (error) {
       // TODO: Handle error message
@@ -65,7 +67,7 @@ const AuthMethod = ({ styles, route, t, navigation }) => {
   };
 
   const createAccount = () => {
-    navigation.navigate("Register");
+    navigation.navigate('Register');
   };
 
   return (
@@ -75,13 +77,13 @@ const AuthMethod = ({ styles, route, t, navigation }) => {
         <View>
           <AuthTypeItem
             illustration={<PassphraseSvg />}
-            label={t("auth.setup.secret_phrase")}
-            onPress={() => navigation.navigate("SecretRecoveryPhrase")}
+            label={t('auth.setup.secret_phrase')}
+            onPress={() => navigation.navigate('SecretRecoveryPhrase')}
             testID="secret-phrase"
           />
           <AuthTypeItem
             illustration={<UploadSvg />}
-            label={t("auth.setup.restore_file")}
+            label={t('auth.setup.restore_file')}
             onPress={selectEncryptedJSON}
             testID="restore-from-file"
           />

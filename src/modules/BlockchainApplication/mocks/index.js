@@ -19,6 +19,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       },
       background: '#FFFFFF1A', // URL
     },
+    deposited: 681782312,
   },
   {
     name: 'Coleti',
@@ -40,6 +41,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       },
       background: '#FFFFFF1A', // URL
     },
+    deposited: 8712312
   },
   {
     name: 'DoEdu',
@@ -61,6 +63,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       },
       background: '#FFFFFF1A', // URL
     },
+    deposited: 4872312
   },
   {
     name: 'Enevti',
@@ -82,6 +85,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       },
       background: '#FFFFFF1A', // URL
     },
+    deposited: 4875312
   },
   {
     name: 'Kalipo',
@@ -103,6 +107,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       },
       background: '#FFFFFF1A', // URL
     },
+    deposited: 4875312
   },
 ];
 

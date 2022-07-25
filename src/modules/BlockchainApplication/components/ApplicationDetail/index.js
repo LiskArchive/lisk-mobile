@@ -1,5 +1,7 @@
 import React from 'react';
-import { ScrollView, View, ImageBackground } from 'react-native';
+import {
+  ScrollView, View, ImageBackground, Image
+} from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import moment from 'moment';
 import { translate } from 'react-i18next';
@@ -14,6 +16,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import getStyles from './styles';
 import PinSvg from '../../../../assets/svgs/PinSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
+import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 /**
  *
  * @param {Object} props
@@ -31,27 +34,32 @@ const ApplicationDetail = ({
   lastUpdated,
   deposited,
   address,
-  token,
   backgroundColor,
   variant,
+  image,
   t,
 }) => {
   const { styles } = useTheme({ styles: getStyles });
   const navigation = useNavigation();
 
   const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
+  const { addApplicationByChainId } = useBlockchainApplicationManagement();
 
   const isPinned = checkPinByChainId(chainID);
 
   const addApplication = () => {
-    // TODO: Implement add application
+    addApplicationByChainId(chainID);
   };
 
   return (
     <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
       {variant === 'explore' && (
         <ImageBackground
-          style={[styles.header, styles.explore, backgroundColor && { backgroundColor }]}
+          style={[
+            styles.header,
+            styles.explore,
+            backgroundColor && { backgroundColor },
+          ]}
           source={wavesPattern}
           resizeMode="cover"
         >
@@ -71,12 +79,22 @@ const ApplicationDetail = ({
           <HeaderBackButton title={name} onPress={navigation.goBack} />
         </View>
       )}
-      <View style={[styles.logoContainer, styles.theme.logoContainer]}></View>
+      <Image
+        style={[styles.logoContainer, styles.theme.logoContainer]}
+        source={{ uri: image }}
+      ></Image>
       <View style={[styles.flex, styles.body]}>
-        <View style={styles.titleRow} >
+        <View style={styles.titleRow}>
           <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
-          <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)} >
-            <PinSvg variant={isPinned ? 'fill' : 'outline'} width={25} height={25} />
+          <TouchableOpacity
+            style={styles.pinIcon}
+            onPress={() => togglePin(chainID)}
+          >
+            <PinSvg
+              variant={isPinned ? 'fill' : 'outline'}
+              width={25}
+              height={25}
+            />
           </TouchableOpacity>
         </View>
         <P style={[styles.address, styles.theme.address]}>{address}</P>
@@ -88,7 +106,7 @@ const ApplicationDetail = ({
           <P style={styles.deposited}>{t('application.details.deposited')}: </P>
           <P
             style={styles.amount}
-          >{`${deposited.toLocaleString()} ${token}`}</P>
+          >{`${deposited.toLocaleString()} LSK`}</P>
         </View>
         <View style={styles.stats}>
           <View style={styles.flex}>
@@ -115,7 +133,7 @@ const ApplicationDetail = ({
                 {t('application.details.lastUpdated')}{' '}
               </P>
               <P style={[styles.value, styles.theme.value]}>
-                {moment(lastUpdated).format('Dd MMM YYYY')}
+                {moment(lastUpdated).format('D MMM YYYY')}
               </P>
             </View>
             <View style={styles.item}>

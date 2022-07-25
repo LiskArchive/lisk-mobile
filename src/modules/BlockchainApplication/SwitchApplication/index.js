@@ -6,8 +6,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
-import ApplicationItem from '../components/ApplicationItem';
 import { colors, themes } from 'constants/styleGuide';
+import ApplicationItem from '../components/ApplicationItem';
 import getStyles from './styles';
 import { useCurrentBlockchainApplication } from '../hooks/useCurrentBlockchainApplication';
 import { useBlockchainApplicationManagement } from '../hooks/useBlockchainApplicationManagement';
@@ -20,6 +20,10 @@ const SwitchAccount = ({ t, navigation }) => {
   const selectApplication = (acc) => {
     setApplication(acc);
     navigation.goBack();
+  };
+
+  const addApplication = () => {
+    navigation.navigate('AddApplication');
   };
 
   return (
@@ -46,6 +50,7 @@ const SwitchAccount = ({ t, navigation }) => {
       <View style={styles.bottom}>
         <TouchableOpacity
           style={[styles.button, styles.outline, styles.theme.outline]}
+          onPress={addApplication}
         >
           <View style={styles.icon}>
             <AddSvg />

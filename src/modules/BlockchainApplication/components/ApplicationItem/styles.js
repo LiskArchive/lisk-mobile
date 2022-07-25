@@ -31,6 +31,12 @@ export default {
     content: {
       flex: 1,
       justifyContent: 'center',
+    },
+    iconContainer: {
+      flexDirection: 'row'
+    },
+    icon: {
+      padding: 3
     }
   },
 
