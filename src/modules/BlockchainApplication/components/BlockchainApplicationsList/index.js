@@ -12,13 +12,13 @@ import Input from 'components/shared/toolBox/input';
 import Icon from 'components/shared/toolBox/icon';
 import { IconButton } from 'components/shared/toolBox/button';
 import Swipeable from 'components/shared/Swipeable';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import PinSvg from 'assets/svgs/PinSvg';
-import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
+import { useSearch } from 'hooks/useSearch';
+import CaretSvg from 'assets/svgs/CaretSvg';
+import StatsSvg from 'assets/svgs/StatsSvg';
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
-import { useSearch } from '../../../../hooks/useSearch';
-import CaretSvg from '../../../../assets/svgs/CaretSvg';
-import StatsSvg from '../../../../assets/svgs/StatsSvg';
-import HeaderBackButton from '../../../../components/navigation/headerBackButton';
+import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 import ApplicationStats from '../ApplicationStat';
 
 import getBlockchainApplicationsListStyles from './styles';
