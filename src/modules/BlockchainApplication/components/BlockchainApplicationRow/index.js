@@ -35,7 +35,7 @@ function BlockchainApplicationRow({ t, application }) {
         },
       ]}
     >
-      <View key={application.chainID} style={styles.applicationContainer}>
+      <View style={styles.applicationContainer}>
         <View style={styles.applicationNameContainer}>
           <Image source={{ uri: application.images.logo.png }} style={{ ...styles.applicationLogoImage }} />
 
