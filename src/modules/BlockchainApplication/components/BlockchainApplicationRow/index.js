@@ -12,6 +12,10 @@ import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplica
 
 import getBlockchainApplicationRowStyles from './styles';
 
+/**
+ * Renders a Blockchain Application row for the Blockchain Applications component.
+ * @param {Object} application - Blockchain application to render.
+ */
 function BlockchainApplicationRow({ t, application }) {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
 

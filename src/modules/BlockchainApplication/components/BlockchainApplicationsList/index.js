@@ -17,6 +17,10 @@ import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplica
 
 import getBlockchainApplicationsListStyles from './styles';
 
+/**
+ * Renders a paginated list of blockchain applications, where users can search for them.
+ * @param {Array} applications - Blockchain applications to list.
+ */
 function BlockchainApplicationsList({ t, applications }) {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationsListStyles() });
 

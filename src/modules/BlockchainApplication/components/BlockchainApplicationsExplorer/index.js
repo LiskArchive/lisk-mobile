@@ -15,6 +15,11 @@ import BlockchainApplicationsList from '../BlockchainApplicationsList';
 
 import getBlockchainApplicationsExplorerStyles from './styles';
 
+/**
+ *
+ * Renders a component that enable users to search, list and
+ * view blockchain applications.
+ */
 function BlockchainApplicationsExplorer({ t }) {
   const [showStatsModal, setShowStatsModal] = useState(false);
 
