@@ -18,17 +18,16 @@ export function useBlockchainApplicationExplorer() {
   const { pins, checkPinByChainId } = usePinBlockchainApplication();
 
   const applications = useMemo(() => {
-    const data = Object.values(applicationsState)
-      .map((app) => ({
-        ...app,
-        isPinned: checkPinByChainId(app.chainID),
-      }));
+    const data = Object.values(applicationsState).map((app) => ({
+      ...app,
+      isPinned: checkPinByChainId(app.chainID),
+    }));
 
     return { ...getApplicationsMetaQuery, data };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getApplicationsMetaQuery, pins, applicationsState, checkPinByChainId]);
 
   return {
-    applications
+    applications,
   };
 }

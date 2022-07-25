@@ -49,9 +49,7 @@ function BlockchainApplicationsList({ t, applications }) {
               input: [styles.input],
               containerStyle: [styles.inputContainer],
             }}
-            placeholderTextColor={
-              theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
-            }
+            placeholderTextColor={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
             onChange={(value) => setTerm(value)}
             value={term}
             returnKeyType="search"
@@ -74,10 +72,7 @@ function BlockchainApplicationsList({ t, applications }) {
                       : t('blockchainApplicationsList.unpinText'),
                     color: colors.light.ufoGreen,
                     icon: () => (
-                      <PinSvg
-                        color={colors.light.white}
-                        variant={!application.isPinned ? 'outline' : 'closed'}
-                      />
+                      <PinSvg color={colors.light.white} variant={!application.isPinned ? 'outline' : 'closed'} />
                     ),
                     onPress: () => togglePin(application.chainID),
                   },
@@ -85,23 +80,14 @@ function BlockchainApplicationsList({ t, applications }) {
               >
                 <View key={application.chainID} style={styles.applicationContainer}>
                   <View style={styles.applicationNameContainer}>
-                    <Image
-                      source={{ uri: application.images.logo.png }}
-                      style={{ ...styles.applicationLogoImage }}
-                    />
+                    <Image source={{ uri: application.images.logo.png }} style={{ ...styles.applicationLogoImage }} />
 
-                    <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-                      {application.name}
-                    </P>
+                    <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>{application.name}</P>
                   </View>
 
                   <View style={styles.applicationNameContainer}>
                     {application.isPinned && (
-                      <PinSvg
-                        color={colors.light.ultramarineBlue}
-                        style={{ marginRight: 12 }}
-                        variant="fill"
-                      />
+                      <PinSvg color={colors.light.ultramarineBlue} style={{ marginRight: 12 }} variant="fill" />
                     )}
 
                     <CaretSvg

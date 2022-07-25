@@ -41,7 +41,7 @@ function BlockchainApplicationsExplorer({ t }) {
         )}
       />
 
-      <BlockchainApplicationsList applications={applications}/>
+      <BlockchainApplicationsList applications={applications} />
 
       <ModalBox
         position="bottom"

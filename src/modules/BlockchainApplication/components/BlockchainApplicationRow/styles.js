@@ -1,6 +1,6 @@
 import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
-export default function getBlockchainApplicationsListStyles() {
+export default function getBlockchainApplicationRowStyles() {
   return {
     common: {
       container: {

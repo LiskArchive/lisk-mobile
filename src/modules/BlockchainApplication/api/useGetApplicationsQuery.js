@@ -41,7 +41,9 @@ export function useGetApplicationsMetaQuery() {
       })
       .catch((error) => setIsError(error));
 
-    return () => { clearInterval(timer.current); };
+    return () => {
+      clearInterval(timer.current);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
