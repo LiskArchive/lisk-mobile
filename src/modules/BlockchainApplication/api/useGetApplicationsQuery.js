@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
@@ -18,12 +18,15 @@ export function useGetApplicationsMetaQuery() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(undefined);
 
+  const timer = useRef();
+
   const dispatch = useDispatch();
 
   function query() {
     // TODO: Replace with real API call when backend is available.
+
     return new Promise((resolve) => {
-      setTimeout(() => {
+      timer.current = setTimeout(() => {
         resolve({ data: BLOCKCHAIN_APPLICATIONS_MOCK });
       }, 250);
     });
@@ -37,6 +40,8 @@ export function useGetApplicationsMetaQuery() {
         dispatch(setApplicationsAction(res.data));
       })
       .catch((error) => setIsError(error));
+
+    return () => { clearInterval(timer.current); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
