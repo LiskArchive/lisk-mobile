@@ -365,5 +365,13 @@
         "addApplication": "Add application now"
       }
     }
-  }
+  },
+    "blockchainApplicationsList": {
+      "title": "Applications",
+      "statsButtonText": "Stats",
+      "searchPlaceholder": "Search application",
+      "loadingText": "Loading applications...",
+      "pinText": "Pin",
+      "unpinText": "Unpin"
+    }
 }

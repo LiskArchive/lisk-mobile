@@ -21,7 +21,7 @@ const mockState = {
 const ReduxProvider = ({ children, reduxStore }) => (
   <Provider store={reduxStore}>{children}</Provider>
 );
-const mockCurrentApplication = BLOCKCHAIN_APPLICATIONS_MOCK[3];
+const mockCurrentApplication = BLOCKCHAIN_APPLICATIONS_MOCK[0];
 const mockSetCurrentApplication = jest.fn();
 
 jest.mock('react-redux', () => ({
@@ -29,23 +29,22 @@ jest.mock('react-redux', () => ({
   useDispatch: () => mockDispatch,
 }));
 
-jest.spyOn(useCurrentBlockchainApplication,
-  'useCurrentBlockchainApplication').mockImplementation(
-  () => ([mockCurrentApplication, mockSetCurrentApplication])
-);
+jest
+  .spyOn(useCurrentBlockchainApplication, 'useCurrentBlockchainApplication')
+  .mockImplementation(() => [mockCurrentApplication, mockSetCurrentApplication]);
 
 jest.mock('./usePinBlockchainApplication.js', () => ({
-  usePinBlockchainApplication: jest.fn(() => (
-    { pins: [], togglePin: jest.fn(), checkPinByChainId: jest.fn() }
-  )),
+  usePinBlockchainApplication: jest.fn(() => ({
+    pins: [],
+    togglePin: jest.fn(),
+    checkPinByChainId: jest.fn(),
+  })),
 }));
 
 describe('useBlockchainApplicationManagement hook', () => {
   const store = mockStore(mockState);
 
-  const wrapper = ({ children }) => (
-    <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
-  );
+  const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>;
 
   beforeEach(() => {
     mockDispatch.mockClear();
@@ -85,11 +84,11 @@ describe('useBlockchainApplicationManagement hook', () => {
   it('getApplicationByChainId should return an application if chainId exists', () => {
     const { getApplicationByChainId } = result.current;
 
-    const updatedApplication = { ...BLOCKCHAIN_APPLICATIONS_MOCK[4], isPinned: false };
+    const updatedApplication = { ...BLOCKCHAIN_APPLICATIONS_MOCK[3], isPinned: false };
 
-    expect(
-      getApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[4].chainID)
-    ).toEqual(updatedApplication);
+    expect(getApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[3].chainID)).toEqual(
+      updatedApplication
+    );
   });
 
   it('getApplicationByChainId should return undefined if chainId does not exist', () => {
@@ -103,13 +102,13 @@ describe('useBlockchainApplicationManagement hook', () => {
 
     const expectedAction = {
       type: actionTypes.deleteApplicationByChainId,
-      chainId: BLOCKCHAIN_APPLICATIONS_MOCK[4].chainID,
+      chainId: BLOCKCHAIN_APPLICATIONS_MOCK[3].chainID,
     };
 
     store.clearActions();
 
     act(() => {
-      deleteApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[4].chainID);
+      deleteApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[3].chainID);
     });
 
     expect(store.getActions()).toEqual([expectedAction]);
@@ -122,7 +121,7 @@ describe('useBlockchainApplicationManagement hook', () => {
       {
         type: actionTypes.deleteApplicationByChainId,
         chainId: mockCurrentApplication.chainID,
-      }
+      },
     ];
 
     store.clearActions();

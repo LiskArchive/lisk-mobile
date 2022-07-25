@@ -1,12 +1,16 @@
 import { BLOCKCHAIN_APPLICATIONS_MOCK, MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
-import { selectPinnedApplications, selectApplications, selectCurrentApplication } from './selectors';
+import {
+  selectPinnedApplications,
+  selectApplications,
+  selectCurrentApplication,
+} from './selectors';
 
 describe('Application Explorer selector', () => {
   it('Should return list of pinned applications if action type is triggered', async () => {
     const pins = BLOCKCHAIN_APPLICATIONS_MOCK.map(({ chainID }) => chainID);
 
     const state = {
-      blockchainApplications: { pins }
+      blockchainApplications: { pins },
     };
 
     expect(selectPinnedApplications(state)).toEqual(pins);

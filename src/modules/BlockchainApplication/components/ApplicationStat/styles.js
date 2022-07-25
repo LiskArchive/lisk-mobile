@@ -11,10 +11,10 @@ export default () => ({
       marginVertical: 10,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     legendAmount: {
-      fontFamily: fonts.family.contextSemiBold
+      fontFamily: fonts.family.contextSemiBold,
     },
     legendItem: {
       flexDirection: 'row',
@@ -47,7 +47,7 @@ export default () => ({
       marginVertical: 10,
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
     },
     cardTitle: {
       fontFamily: fonts.family.context,

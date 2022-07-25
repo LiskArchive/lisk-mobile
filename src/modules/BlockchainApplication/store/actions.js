@@ -1,6 +1,16 @@
 import actionTypes from './actionTypes';
 
 /**
+ * Trigger this action to set blockchain applications
+ *
+ * @returns {Object} - Action object
+ */
+export const setApplications = (applications) => ({
+  type: actionTypes.setApplications,
+  applications,
+});
+
+/**
  * Trigger this action to toggle blockchain application pin
  *
  * @returns {Object} - Action object
