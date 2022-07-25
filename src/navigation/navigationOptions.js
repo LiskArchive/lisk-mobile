@@ -67,9 +67,6 @@ navigationOptions.Wallet = {
 navigationOptions.Applications = {
   title: null,
   header: () => null,
-  //   headerLeft: () => <HeaderBackButton title="Applications" noIcon />,
-  //   headerStyle: noShadow,
-  //   headerTitleStyle: genericTitle,
 };
 
 navigationOptions.Bookmarks = {
