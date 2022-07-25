@@ -5,15 +5,11 @@ import {
 export default function getBlockchainApplicationsListStyles() {
   return {
     common: {
-      wrapper: {
-        flex: 1,
-        paddingTop: 44,
-      },
-      innerContainer: {
+      container: {
         flexDirection: 'column',
         flex: 1,
       },
-      body: {
+      listContainer: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -85,10 +81,7 @@ export default function getBlockchainApplicationsListStyles() {
       },
     },
     [themes.light]: {
-      wrapper: {
-        backgroundColor: colors.light.white,
-      },
-      innerContainer: {
+      container: {
         backgroundColor: colors.light.white,
       },
       applicationNameLabel: {
@@ -97,10 +90,7 @@ export default function getBlockchainApplicationsListStyles() {
     },
 
     [themes.dark]: {
-      wrapper: {
-        backgroundColor: colors.dark.mainBg,
-      },
-      innerContainer: {
+      container: {
         backgroundColor: colors.dark.mainBg,
       },
       applicationNameLabel: {
