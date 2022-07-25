@@ -239,7 +239,7 @@
   "Insert public address or a name": "",
   "Insert public address": "",
   "multisignature": {
-    "account_details": "",
+    "accountDetails": "",
     "description1": "",
     "description2": "",
     "info": {
@@ -262,8 +262,8 @@
   },
   "fingerprint": {
     "unauthorized": "Nicht autorisiert! Nochmal versuchen.",
-    "touch_id": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
-    "face_id": "Schau bitte in die Kamera, um dich anzumelden"
+    "touchId": "Platziere deinen Finger auf den Touchsensor, um dich anzumelden",
+    "faceId": "Schau bitte in die Kamera, um dich anzumelden"
   },
   "bookmarks": {
     "disabled": {
@@ -287,35 +287,35 @@
   "auth": {
     "setup": {
       "add_account": "",
-      "manage_accounts": "",
-      "switch_account": "",
-      "delete_account": "",
-      "remove_account": "",
-      "remove_account_description": "",
-      "decrypt_passphrase": "",
-      "add_account_description": "",
+      "manageAccounts": "",
+      "switchAccount": "",
+      "deleteAccount": "",
+      "removeAccount": "",
+      "removeAccount_description": "",
+      "decryptPassphrase": "",
+      "addAccountDescription": "",
       "secret_phrase": "",
       "restore_file": "",
-      "password_setup_title": "",
-      "password_setup_description": "",
-      "password_setup_success_title": "",
-      "password_setup_success_description": "",
+      "passwordSetupTitle": "",
+      "passwordSetupDescription": "",
+      "passwordSetupSuccessTitle": "",
+      "passwordSetupSuccessDescription": "",
       "buttons": {
         "download": "",
         "remove_now": "",
-        "password_setup_continue": "",
+        "passwordSetupContinue": "",
         "save_account": "",
-        "add_another_account": "Add another account"
+        "addAnotherAccount": "Add another account"
       }
     },
     "form": {
-      "enter_password": "",
-      "confirm_password": "",
-      "account_name": "",
-      "password_setup_continue": "",
+      "enterPassword": "",
+      "confirmPassword": "",
+      "accountName": "",
+      "passwordSetupContinue": "",
       "errors": {
-        "password_error": "",
-        "confirm_password_error": ""
+        "passwordError": "",
+        "confirmPasswordError": ""
       }
     }
   },
@@ -327,6 +327,18 @@
       "terminated": "",
       "totalSupply": "",
       "staked": ""
+    },
+    "details": {
+      "deposited": "",
+      "chainID": "",
+      "lastUpdated": "",
+      "status": "",
+      "lastCertificateHeight": ""
+    },
+    "manage": {
+      "buttons": {
+        "addApplication": ""
+      }
     }
   }
 }

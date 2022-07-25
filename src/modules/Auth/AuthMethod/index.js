@@ -59,7 +59,7 @@ const AuthMethod = ({
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
-      navigation.navigate('DecryptPhrase', { title: 'auth.setup.decrypt_passphrase', address: 'lskqzpfr3uq8bm2jee5dkv4ns79uuswjzc9bbpezu', successRoute: 'SecretRecoveryPhrase' });
+      navigation.navigate('DecryptPhrase', { title: 'auth.setup.decryptPassphrase', address: 'lskqzpfr3uq8bm2jee5dkv4ns79uuswjzc9bbpezu', successRoute: 'SecretRecoveryPhrase' });
     } catch (error) {
       console.log(error);
     }

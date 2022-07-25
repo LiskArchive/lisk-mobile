@@ -105,7 +105,7 @@ const Settings = ({
             hideDialog={hideDialog}
             setError={setErrorMessage}
             icon="backup"
-            title={t('settings.menu.backup_passphrase')}
+            title={t('settings.menu.backupPassphrase')}
             iconSize={22}
           />
         </View>
@@ -121,8 +121,8 @@ const Settings = ({
                 onSyncPress={toggleIncognito}
               />
             }
-            title={t('settings.menu.discreet_mode')}
-            description={t('settings.descriptions.discreet_mode')}
+            title={t('settings.menu.discreetMode')}
+            description={t('settings.descriptions.discreetMode')}
           />
         </View>
       </View>

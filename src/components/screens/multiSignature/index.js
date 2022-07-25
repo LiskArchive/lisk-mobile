@@ -35,7 +35,7 @@ const MultiSignature = ({
     <SafeAreaView style={styles.theme.container}>
       <HeaderBackButton
         noIcon
-        title="multisignature.account_details"
+        title="multisignature.accountDetails"
         onRightPress={navigation.goBack}
         rightIcon={'cross'}
         rightColor={colors.light.ultramarineBlue}

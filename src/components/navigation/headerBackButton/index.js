@@ -28,7 +28,7 @@ const HeaderBackButton = ({
   step,
   currentIndex,
   length,
-  alwaysLight
+  alwaysLight,
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
@@ -44,7 +44,7 @@ const HeaderBackButton = ({
         safeArea ? styles.safeArea : null,
         containerStyle,
         { width: Dimensions.get('window').width },
-        alwaysLight && styles.whiteBackground
+        alwaysLight && styles.whiteBackground,
       ]}
     >
       {noIcon ? null : (
@@ -56,7 +56,13 @@ const HeaderBackButton = ({
           testID="header-left-icon"
         />
       )}
-      {title && <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>}
+      <View style={styles.titleContainer}>
+        {title && (
+          <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>
+            {t(title)}
+          </H3>
+        )}
+      </View>
       {rightIcon ? (
         <IconButton
           style={[styles.main, styles.theme.main, style]}
