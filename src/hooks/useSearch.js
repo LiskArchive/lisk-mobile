@@ -16,13 +16,10 @@ export function useSearch(props) {
   const [term, setTerm] = useState('');
   const [searching, setSearching] = useState(false);
 
-  const onSearchRef = useRef();
-  const onDebounceRef = useRef();
+  const onSearchRef = useRef(props?.onSearch);
+  const onDebounceRef = useRef(props?.onDebounce);
 
   const debouncedTerm = useDebounce(term, (props && props.delay) || SEARCH_DEBOUNCE_DELAY);
-
-  onSearchRef.current = props && props.onSearch;
-  onDebounceRef.current = props && props.onDebounce;
 
   useEffect(() => {
     if (term) {
