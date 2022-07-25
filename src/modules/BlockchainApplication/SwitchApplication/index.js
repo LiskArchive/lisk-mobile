@@ -7,6 +7,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
 import ApplicationItem from '../components/ApplicationItem';
+import { colors, themes } from 'constants/styleGuide';
 import getStyles from './styles';
 import { useCurrentBlockchainApplication } from '../hooks/useCurrentBlockchainApplication';
 import { useBlockchainApplicationManagement } from '../hooks/useBlockchainApplicationManagement';
@@ -15,24 +16,30 @@ import AddSvg from '../../../assets/svgs/AddSvg';
 const SwitchAccount = ({ t, navigation }) => {
   const { applications } = useBlockchainApplicationManagement();
   const [application, setApplication] = useCurrentBlockchainApplication();
-  const { styles } = useTheme({ styles: getStyles });
+  const { styles, theme } = useTheme({ styles: getStyles });
   const selectApplication = (acc) => {
     setApplication(acc);
+    navigation.goBack();
   };
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
-        title={t('auth.setup.switch_account')}
+        noIcon
+        title={t('application.title.switchApplication')}
         onPress={navigation.goBack}
+        rightIcon="cross"
+        rightColor={theme === themes.dark ? colors.dark.white : colors.light.zodiacBlue}
+        onRightPress={navigation.goBack}
       />
       <ScrollView style={styles.container}>
-        {applications.map((app) => (
+        {applications.data?.map((app) => (
           <ApplicationItem
             key={app.chainID}
             application={app}
             onPress={() => selectApplication(app)}
             active={app.chainID === application?.chainID}
+            image={app.images?.logo.png}
           />
         ))}
       </ScrollView>
@@ -43,7 +50,7 @@ const SwitchAccount = ({ t, navigation }) => {
           <View style={styles.icon}>
             <AddSvg />
           </View>
-          <P style={styles.buttonText} >{t('application.management.add')}</P>
+          <P style={styles.buttonText} >{t('application.manage.add')}</P>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

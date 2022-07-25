@@ -15,6 +15,7 @@ export default {
       marginRight: 15,
       height: 40,
       width: 40,
+      borderRadius: 20,
     },
     disabled: {
       opacity: 0.4,

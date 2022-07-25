@@ -8,7 +8,7 @@ import WarningFilledSvg from 'assets/svgs/WarningFilledSvg';
 import getStyles from './styles';
 
 const ApplicationItem = ({
-  application, onPress, active, testID
+  application, onPress, active, testID, image
 }) => {
   const { name: applicationName, isDisabled } = application;
   const { styles, theme } = useTheme({ styles: getStyles });
@@ -18,7 +18,7 @@ const ApplicationItem = ({
       onPress={onPress}
       testID={testID}
     >
-      <Image source={ColectiImg} style={[styles.avatar, isDisabled && styles.disabled]} />
+      <Image source={{ uri: image }} style={[styles.avatar, isDisabled && styles.disabled]} />
       <View style={[styles.content, isDisabled && styles.disabled]}>
         <P style={[styles.username, styles.theme.username]}>
           {applicationName}

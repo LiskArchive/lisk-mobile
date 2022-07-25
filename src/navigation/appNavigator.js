@@ -4,15 +4,18 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { colors, themes } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import MultiSignature from 'components/screens/multiSignature';
+import TabBarIcon from 'components/navigation/tabBarIcon';
+
 import Settings from 'modules/Settings';
-import Request from 'modules/Request';
 import Send from 'modules/Transactions';
 import Home from 'modules/Accounts';
 import { LockedBalanceDetails } from 'modules/Accounts/components';
-import withTheme from 'components/shared/withTheme';
 import Bookmarks from 'modules/Bookmark';
-import MultiSignature from 'components/screens/multiSignature';
-import TabBarIcon from 'components/navigation/tabBarIcon';
+import ApplicationsSvg from '../assets/svgs/ApplicationsSvg';
+import BlockchainApplicationsExplorer from '../modules/BlockchainApplication/components/BlockchainApplicationsExplorer';
+
 import navigationOptions from './navigationOptions';
 
 export const getHeaderOptions = ({ route }) => {
@@ -21,7 +24,7 @@ export const getHeaderOptions = ({ route }) => {
 };
 
 const getIcon = ({ route }) => ({
-  tabBarIcon: (props) => <TabBarIcon name={route.name.toLowerCase()} {...props} />
+  tabBarIcon: (props) => <TabBarIcon name={route.name.toLowerCase()} {...props} />,
 });
 
 const Tab = createBottomTabNavigator();
@@ -37,9 +40,13 @@ const Tabs = ({ theme }) => (
         backgroundColor: theme === themes.light ? colors.light.athensWhite : colors.dark.footerBg,
         borderTopColor: theme === themes.light ? colors.light.platinumGray : colors.dark.footerBg,
         borderTopWidth: 1,
-      }
-    }} >
-    <Tab.Screen name="Home" component={Home} options={getIcon}
+      },
+    }}
+  >
+    <Tab.Screen
+      name="Home"
+      component={Home}
+      options={getIcon}
       listeners={({ route, navigation }) => ({
         tabPress: (e) => {
           e.preventDefault();
@@ -51,8 +58,13 @@ const Tabs = ({ theme }) => (
           }
           navigation.navigate('Home');
         },
-      })} />
-    <Tab.Screen name="Request" component={Request} options={getIcon} />
+      })}
+    />
+    <Tab.Screen
+      name="Applications"
+      component={BlockchainApplicationsExplorer}
+      options={{ tabBarIcon: (props) => <ApplicationsSvg {...props} /> }}
+    />
     <Tab.Screen name="Send" component={Send} options={getIcon} />
     <Tab.Screen name="Bookmarks" component={Bookmarks} options={getIcon} />
     <Tab.Screen name="Settings" component={Settings} options={getIcon} />
@@ -69,8 +81,8 @@ const config = {
     mass: 3,
     overshootClamping: true,
     restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01
-  }
+    restSpeedThreshold: 0.01,
+  },
 };
 
 const AppNavigator = () => (
@@ -83,8 +95,8 @@ const AppNavigator = () => (
         headerShown: false,
         transitionSpec: {
           open: config,
-          close: config
-        }
+          close: config,
+        },
       }}
     />
     <Stack.Screen
@@ -94,8 +106,8 @@ const AppNavigator = () => (
         headerShown: false,
         transitionSpec: {
           open: config,
-          close: config
-        }
+          close: config,
+        },
       }}
     />
   </Stack.Navigator>

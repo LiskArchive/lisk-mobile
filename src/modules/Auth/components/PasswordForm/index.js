@@ -18,7 +18,7 @@ const PasswordForm = ({
       <Avatar address={address} size={45} style={styles.avatar} />
       <P style={[styles.address, styles.theme.address]}>{address}</P>
       <Input
-        placeholder={t('auth.form.enter_password')}
+        placeholder={t('auth.form.enterPassword')}
         autoCorrect={false}
         autoFocus
         innerStyles={{

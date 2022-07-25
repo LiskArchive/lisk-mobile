@@ -30,17 +30,17 @@ const PasswordSetupForm = ({
   const [accountName, setAccountName] = useState('');
   const [isAgreed, setIsAgreed] = useState(false);
   const [passwordError, setPasswordError] = useState('');
-  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [confirmPasswordError, setconfirmPasswordError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [encryptedJSON, setEncryptedJSON] = useState();
 
   // eslint-disable-next-line consistent-return
   const submitForm = () => {
     if (!passwordValidator(password)) {
-      return setPasswordError('auth.form.errors.password_error');
+      return setPasswordError('auth.form.errors.passwordError');
     }
     if (password !== confirmPassword) {
-      return setConfirmPasswordError('auth.form.errors.confirm_password_error');
+      return setconfirmPasswordError('auth.form.errors.confirmPasswordError');
     }
     const data = encryptAccount({
       recoveryPhrase: passphrase,
@@ -55,7 +55,7 @@ const PasswordSetupForm = ({
 
   useEffect(() => {
     setPasswordError('');
-    setConfirmPasswordError('');
+    setconfirmPasswordError('');
   }, [password, confirmPassword]);
 
   const onContinue = () => navigation.navigate('Main');
@@ -70,13 +70,13 @@ const PasswordSetupForm = ({
       ) : (
         <View>
           <HeaderBackButton
-            title="auth.setup.password_setup_title"
+            title="auth.setup.passwordSetupTitle"
             onPress={navigation.goBack}
             containerStyle={styles.header}
           />
           <ScrollView contentContainerStyle={styles.container}>
             <Text style={[styles.description, styles.theme.description]}>
-              {t('auth.setup.password_setup_description')}
+              {t('auth.setup.passwordSetupDescription')}
             </Text>
             <View>
               <Input
@@ -85,7 +85,7 @@ const PasswordSetupForm = ({
                   containerStyle: styles.inputContainer,
                   input: styles.input,
                 }}
-                label={t('auth.form.enter_password')}
+                label={t('auth.form.enterPassword')}
                 secureTextEntry
                 onChange={setPassword}
                 value={password}
@@ -97,7 +97,7 @@ const PasswordSetupForm = ({
                   containerStyle: styles.inputContainer,
                   input: styles.input,
                 }}
-                label={t('auth.form.confirm_password')}
+                label={t('auth.form.confirmPassword')}
                 secureTextEntry
                 onChange={setConfirmPassword}
                 value={confirmPassword}
@@ -109,7 +109,7 @@ const PasswordSetupForm = ({
                   containerStyle: styles.inputContainer,
                   input: styles.input,
                 }}
-                label={t('auth.form.account_name')}
+                label={t('auth.form.accountName')}
                 onChange={setAccountName}
                 value={accountName}
               />

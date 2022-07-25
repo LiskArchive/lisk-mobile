@@ -57,7 +57,7 @@ const ApplicationSwitcher = () => {
               ]}
             >
               <Image
-                source={currentApplication.imageURL}
+                source={{uri: currentApplication.images?.logo.png}}
                 style={[styles.avatar]}
               />
               <P style={[styles.appName, styles.theme.appName]}>

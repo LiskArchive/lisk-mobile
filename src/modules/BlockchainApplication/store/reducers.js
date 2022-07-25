@@ -20,7 +20,7 @@ const initialState = {
  * @param {Object} state
  * @param {type: String, chainId: string} action
  */
-export const pins = (state = initialState.pins, { type, chainId }) => {
+export const pinsReducer = (state = initialState.pins, { type, chainId }) => {
   switch (type) {
     case actionTypes.toggleApplicationPin:
       if (chainId && state.includes(chainId)) {
@@ -38,8 +38,16 @@ export const pins = (state = initialState.pins, { type, chainId }) => {
  * @param {Object} state
  * @param {type: String, data: Object} action
  */
-export const applications = (state = initialState.applications, { type, application, chainId }) => {
+export const applicationsReducer = (
+  state = initialState.applications,
+  {
+    type, applications, application, chainId
+  }
+) => {
   switch (type) {
+    case actionTypes.setApplications:
+      state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {});
+      return state;
     case actionTypes.addApplicationByChainId:
       // In cases where a new node for an existing application is being added,
       // the new service url should be appended to the serviceURLs array of the application
@@ -65,7 +73,7 @@ export const applications = (state = initialState.applications, { type, applicat
  * @param {Object} state
  * @param {type: String, application: Object} action
  */
-export const current = (state = null, { type, application }) => {
+export const currentReducer = (state = null, { type, application }) => {
   switch (type) {
     case actionTypes.setCurrentApplication:
       return application;
@@ -81,7 +89,11 @@ const persistConfig = {
   blacklist: ['current'],
 };
 
-const blockchainApplicationsReducer = combineReducers({ pins, applications, current });
+const blockchainApplicationsReducer = combineReducers({
+  pins: pinsReducer,
+  applications: applicationsReducer,
+  current: currentReducer,
+});
 
 const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer);
 

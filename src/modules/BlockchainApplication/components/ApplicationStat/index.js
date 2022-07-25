@@ -2,11 +2,13 @@ import React from 'react';
 import { View, Dimensions } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 import { translate } from 'react-i18next';
+
 import { H2, P } from 'components/shared/toolBox/typography';
-import withTheme from 'components/shared/withTheme';
+import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
 import TotalSupplySvg from 'assets/svgs/TotalSupplySvg';
 import StakedSvg from 'assets/svgs/StakedSvg';
+
 import getStyles from './styles';
 
 const { width } = Dimensions.get('window');
@@ -39,12 +41,14 @@ const LegendItem = ({
 );
 
 const ApplicationStats = ({
-  t, styles, totalSupply, staked, stats
+  t, totalSupply, staked, stats, ...props
 }) => {
+  const { styles } = useTheme({ styles: getStyles() });
+
   const series = [stats.registered, stats.active, stats.terminated];
 
   return (
-    <View style={[styles.container, styles.theme.container]}>
+    <View style={[styles.container, styles.theme.container, props.styles.container]}>
       <H2>{t('application.stats.title')}</H2>
       <View style={styles.chartContainer}>
         <PieChart
@@ -56,24 +60,9 @@ const ApplicationStats = ({
           coverFill={'#FFF'}
         />
         <View style={styles.legend}>
-          <LegendItem
-            styles={styles}
-            label={'registered'}
-            amount={stats.registered}
-            t={t}
-          />
-          <LegendItem
-            styles={styles}
-            label={'active'}
-            amount={stats.active}
-            t={t}
-          />
-          <LegendItem
-            styles={styles}
-            label={'terminated'}
-            amount={stats.terminated}
-            t={t}
-          />
+          <LegendItem styles={styles} label={'registered'} amount={stats.registered} t={t} />
+          <LegendItem styles={styles} label={'active'} amount={stats.active} t={t} />
+          <LegendItem styles={styles} label={'terminated'} amount={stats.terminated} t={t} />
         </View>
       </View>
       <View style={[styles.card]}>
@@ -85,12 +74,8 @@ const ApplicationStats = ({
       </View>
       <View style={[styles.card, styles.staked]}>
         <View>
-          <P style={[styles.cardTitle, styles.blackText]}>
-            {t('application.stats.staked')}
-          </P>
-          <P style={[styles.amount, styles.blackText]}>
-            {staked.toLocaleString()}
-          </P>
+          <P style={[styles.cardTitle, styles.blackText]}>{t('application.stats.staked')}</P>
+          <P style={[styles.amount, styles.blackText]}>{staked.toLocaleString()}</P>
         </View>
         <StakedSvg />
       </View>
@@ -98,4 +83,4 @@ const ApplicationStats = ({
   );
 };
 
-export default withTheme(translate()(ApplicationStats), getStyles());
+export default translate()(ApplicationStats);

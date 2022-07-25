@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   addApplicationByChainId as addApplicationAction,
-  deleteApplicationByChainId as deleteApplicationAction
+  deleteApplicationByChainId as deleteApplicationAction,
 } from '../store/actions';
-import { selectApplications } from '../store/selectors';
 import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplication';
-import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
+import { useGetApplicationsMetaQuery } from '../api/useGetApplicationsQuery';
+import { usePinBlockchainApplication } from './usePinBlockchainApplication';
+import { selectApplications as selectApplicationsSelector } from '../store/selectors';
 
 /**
  * Hook that handle all the logic related to blockchain applications management.
@@ -21,24 +22,25 @@ import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
 export function useBlockchainApplicationManagement() {
   const dispatch = useDispatch();
 
+  const applicationsState = useSelector(selectApplicationsSelector);
+
+  const getApplicationsMetaQuery = useGetApplicationsMetaQuery();
+
+  const { pins, checkPinByChainId } = usePinBlockchainApplication();
+
   const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
 
-  const { checkPinByChainId } = usePinBlockchainApplication();
-
-  const applicationsObject = useSelector(selectApplications);
-
-  const applications = useMemo(
-    () => {
-      const appsList = Object.values(applicationsObject);
-
-      // TODO: Replace with API call when new version integration is made.
-      return [...BLOCKCHAIN_APPLICATIONS_MOCK, ...appsList].map((app) => ({
+  const applications = useMemo(() => {
+    const data = Object.values(applicationsState)
+      .map((app) => ({
         ...app,
         isPinned: checkPinByChainId(app.chainID),
-      })).sort((a) => (a.isPinned ? -1 : 1));
-    },
-    [applicationsObject, checkPinByChainId],
-  );
+      }))
+      .sort((a) => (a.isPinned ? -1 : 1));
+
+    return { ...getApplicationsMetaQuery, data };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getApplicationsMetaQuery, pins, applicationsState, checkPinByChainId]);
 
   const addApplicationByChainId = useCallback(
     (application) => {
@@ -46,12 +48,12 @@ export function useBlockchainApplicationManagement() {
 
       dispatch(addApplicationAction(application));
     },
-    [dispatch],
+    [dispatch]
   );
 
   const getApplicationByChainId = useCallback(
-    (chainId) => applications.find((app) => app.chainID === chainId),
-    [applications],
+    (chainId) => applications.data.find((app) => app.chainID === chainId),
+    [applications.data]
   );
 
   const deleteApplicationByChainId = useCallback(
@@ -63,7 +65,7 @@ export function useBlockchainApplicationManagement() {
         setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
       }
     },
-    [currentApplication, dispatch, setCurrentApplication],
+    [currentApplication, dispatch, setCurrentApplication]
   );
 
   return {

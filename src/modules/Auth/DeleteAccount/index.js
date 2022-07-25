@@ -21,7 +21,7 @@ const DeleteAccount = ({ styles, t, nextStep }) => {
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={styles.wrapper}>
           <HeaderBackButton
-            title={t('auth.setup.delete_account')}
+            title={t('auth.setup.deleteAccount')}
             onPress={navigation.goBack}
           />
           <ScrollView style={styles.container}>

@@ -27,9 +27,7 @@ jest.mock('react-redux', () => ({
 describe('usePinBlockchainApplication hook', () => {
   const store = mockStore(mockState);
 
-  const wrapper = ({ children }) => (
-    <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
-  );
+  const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>;
 
   beforeEach(() => {
     mockDispatch.mockClear();
@@ -48,10 +46,12 @@ describe('usePinBlockchainApplication hook', () => {
 
     const expectedAction = {
       type: actionTypes.toggleApplicationPin,
-      chainId
+      chainId,
     };
 
-    act(() => { togglePin(chainId); });
+    act(() => {
+      togglePin(chainId);
+    });
 
     expect(store.getActions()).toEqual([expectedAction]);
   });
@@ -60,7 +60,9 @@ describe('usePinBlockchainApplication hook', () => {
     const { pins, togglePin } = result.current;
     const chainId = BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID;
 
-    act(() => { togglePin(chainId); });
+    act(() => {
+      togglePin(chainId);
+    });
 
     const expectPins = BLOCKCHAIN_APPLICATIONS_MOCK.map(({ chainID }) => chainID);
 
@@ -71,7 +73,9 @@ describe('usePinBlockchainApplication hook', () => {
     const { checkPinByChainId, togglePin } = result.current;
     const chainId = BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID;
 
-    act(() => { togglePin(chainId); });
+    act(() => {
+      togglePin(chainId);
+    });
     expect(checkPinByChainId(chainId)).toBeTruthy();
   });
 
@@ -79,8 +83,9 @@ describe('usePinBlockchainApplication hook', () => {
     mockState.blockchainApplications.pins = [];
 
     const {
-      result:
-        { current: { checkPinByChainId } },
+      result: {
+        current: { checkPinByChainId },
+      },
     } = renderHook(() => usePinBlockchainApplication(), { wrapper });
 
     const chainId = BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID;
