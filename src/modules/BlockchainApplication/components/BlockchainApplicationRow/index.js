@@ -30,24 +30,41 @@ function BlockchainApplicationRow({ t, application }) {
             ? t('blockchainApplicationsList.pinText')
             : t('blockchainApplicationsList.unpinText'),
           color: colors.light.ufoGreen,
-          icon: () => <PinSvg color={colors.light.white} variant={!application.isPinned ? 'outline' : 'closed'} />,
+          icon: () => (
+            <PinSvg
+              color={colors.light.white}
+              variant={!application.isPinned ? 'outline' : 'closed'}
+            />
+          ),
           onPress: () => togglePin(application.chainID),
         },
       ]}
     >
       <View style={styles.applicationContainer}>
         <View style={styles.applicationNameContainer}>
-          <Image source={{ uri: application.images.logo.png }} style={{ ...styles.applicationLogoImage }} />
+          <Image
+            source={{ uri: application.images.logo.png }}
+            style={{ ...styles.applicationLogoImage }}
+          />
 
-          <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>{application.name}</P>
+          <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+            {application.name}
+          </P>
         </View>
 
         <View style={styles.applicationNameContainer}>
           {application.isPinned && (
-            <PinSvg color={colors.light.ultramarineBlue} style={{ marginRight: 12 }} variant="fill" />
+            <PinSvg
+              color={colors.light.ultramarineBlue}
+              style={{ marginRight: 12 }}
+              variant="fill"
+            />
           )}
 
-          <CaretSvg direction="right" color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white} />
+          <CaretSvg
+            direction="right"
+            color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
+          />
         </View>
       </View>
     </Swipeable>

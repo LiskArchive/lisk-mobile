@@ -11,10 +11,15 @@ class Input extends React.Component {
     secureTextEntry: this.props.secureTextEntry,
   };
 
-  toggleSecureTextEntry = () => this.setState((prevState) => ({ secureTextEntry: !prevState.secureTextEntry }));
+  toggleSecureTextEntry = () =>
+    this.setState((prevState) => ({
+      secureTextEntry: !prevState.secureTextEntry,
+    }));
 
   onFocus = (e) => {
-    this.setState({ isFocused: true });
+    this.setState({
+      isFocused: true,
+    });
 
     if (typeof this.props.onFocus === 'function') {
       this.props.onFocus(e);
@@ -22,7 +27,9 @@ class Input extends React.Component {
   };
 
   onBlur = (e) => {
-    this.setState({ isFocused: false });
+    this.setState({
+      isFocused: false,
+    });
 
     if (typeof this.props.onBlur === 'function') {
       this.props.onBlur(e);
@@ -70,7 +77,9 @@ class Input extends React.Component {
     return (
       <View style={[styles.inputContainer, innerStyles.containerStyle]}>
         {label ? (
-          <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>{label}</Text>
+          <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
+            {label}
+          </Text>
         ) : null}
         <View style={styles.inputRow}>
           <TextInput

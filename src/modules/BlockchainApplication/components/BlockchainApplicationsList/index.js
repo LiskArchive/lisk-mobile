@@ -49,11 +49,15 @@ function BlockchainApplicationsList({ t, applications }) {
             input: [styles.input],
             containerStyle: [styles.inputContainer],
           }}
-          placeholderTextColor={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
+          placeholderTextColor={
+            theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
+          }
           onChange={(value) => setTerm(value)}
           value={term}
           returnKeyType="search"
-          disabled={applications.isLoading || applications.isFetching || applications.data?.length === 0}
+          disabled={
+            applications.isLoading || applications.isFetching || applications.data?.length === 0
+          }
         />
       </View>
 

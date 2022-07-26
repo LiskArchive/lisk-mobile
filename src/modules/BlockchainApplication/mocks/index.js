@@ -106,7 +106,9 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
   },
 ];
 
-export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.reduce((obj, val) => {
-  obj[val.chainID] = val;
-  return obj;
-}, {});
+export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.reduce(
+  (obj, val) => {
+    obj[val.chainID] = val;
+    return obj;
+  }, {}
+);

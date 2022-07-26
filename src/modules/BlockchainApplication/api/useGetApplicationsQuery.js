@@ -8,10 +8,14 @@ import { setApplications as setApplicationsAction } from '../store/actions';
 /**
  * @typedef {Object} GetBlockchainApplicationsMetaQuery
  * @property {Array} data - The blockchain applications returned data.
- * @property {Object} meta - The metadata of the blockchain applications data (total, count and offset).
- * @property {boolean} isLoading - Flag that indicates if the initial data request is loading or not.
- * @property {boolean} isFetching - Flag that indicates if an additional network request is being executed.
- * @property {Object} error - An error object, if any request to fetch the data fails.
+ * @property {Object} meta - The metadata of the blockchain applications data
+ *  (total, count and offset).
+ * @property {boolean} isLoading - Flag that indicates if the initial data
+ * request is loading or not.
+ * @property {boolean} isFetching - Flag that indicates if an additional
+ * network request is being executed.
+ * @property {Object} error - An error object, if any request to fetch
+ * the data fails.
  * @property {Function} refetch - Callback to fetch all data again from server.
  * @property {Function} fetMore - Callback to fetch paginated data.
  */

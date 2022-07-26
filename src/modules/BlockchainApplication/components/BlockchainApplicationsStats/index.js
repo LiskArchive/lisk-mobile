@@ -22,7 +22,9 @@ const { width } = Dimensions.get('window');
  * @param {Number} props.stats.amount
  */
 
-const LegendItem = ({ styles, label, amount, t }) => (
+const LegendItem = ({
+  styles, label, amount, t
+}) => (
   <View style={styles.legend}>
     <View style={styles.legendItem}>
       <View style={[styles.legendIcon, styles[`${label}Icon`]]}></View>
@@ -34,7 +36,9 @@ const LegendItem = ({ styles, label, amount, t }) => (
   </View>
 );
 
-const BlockchainApplicationsStats = ({ t, totalSupply, staked, stats, ...props }) => {
+const BlockchainApplicationsStats = ({
+  t, totalSupply, staked, stats, ...props
+}) => {
   const { theme, styles } = useTheme({ styles: getStyles() });
 
   const widthAndHeight = width / 2.5;
