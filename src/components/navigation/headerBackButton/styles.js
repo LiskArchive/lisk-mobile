@@ -19,6 +19,7 @@ export default () => ({
     },
     titleContainer: {
       flex: 1,
+      minHeight: 40,
     },
     whiteBackground: {
       backgroundColor: colors.light.white

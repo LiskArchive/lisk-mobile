@@ -337,7 +337,9 @@
     },
     "manage": {
       "add": "",
+      "successTitle": "",
       "buttons": {
+        "continue": "",
         "addApplication": ""
       }
     }

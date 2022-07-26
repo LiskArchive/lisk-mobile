@@ -30,12 +30,12 @@ const ApplicationDetail = ({
   chainID,
   state,
   lastCertificateHeight,
-  serviceURL,
   lastUpdated,
   deposited,
   address,
   backgroundColor,
   variant,
+  explorers,
   image,
   t,
 }) => {
@@ -49,6 +49,7 @@ const ApplicationDetail = ({
 
   const addApplication = () => {
     addApplicationByChainId(chainID);
+    navigation.navigate('AddApplicationSuccess');
   };
 
   return (
@@ -100,7 +101,7 @@ const ApplicationDetail = ({
         <P style={[styles.address, styles.theme.address]}>{address}</P>
         <View style={[styles.row, styles.appLinkContainer]}>
           <UrlSvg size={1.2} />
-          <P style={styles.url}>{serviceURL}</P>
+          <P style={styles.url}>{explorers[0]}</P>
         </View>
         <View style={[styles.row, styles.depositedContainer]}>
           <P style={styles.deposited}>{t('application.details.deposited')}: </P>

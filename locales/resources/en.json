@@ -365,8 +365,10 @@
     },
     "manage": {
       "add": "Add application",
+      "successTitle": "Perfect! Application has now been added",
       "buttons": {
-        "addApplication": "Add application now"
+        "addApplication": "Add application now",
+        "continue": "Continue to wallet"
       }
     }
   },

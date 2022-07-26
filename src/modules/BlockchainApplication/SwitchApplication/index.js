@@ -4,14 +4,14 @@ import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 import { ScrollView } from 'react-native-gesture-handler';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
+import { useTheme } from 'hooks/useTheme';
+import AddSvg from 'assets/svgs/AddSvg';
 import { colors, themes } from 'constants/styleGuide';
 import ApplicationItem from '../components/ApplicationItem';
 import getStyles from './styles';
 import { useCurrentBlockchainApplication } from '../hooks/useCurrentBlockchainApplication';
 import { useBlockchainApplicationManagement } from '../hooks/useBlockchainApplicationManagement';
-import AddSvg from '../../../assets/svgs/AddSvg';
 
 const SwitchAccount = ({ t, navigation }) => {
   const { applications } = useBlockchainApplicationManagement();

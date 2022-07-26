@@ -29,6 +29,7 @@ import AddApplication from 'modules/BlockchainApplication/AddApplication';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './appNavigator';
 import ApplicationDetail from '../modules/BlockchainApplication/ApplicationDetail';
+import AddApplicationSuccess from '../modules/BlockchainApplication/AddApplicationSuccess';
 
 const MainStack = createStackNavigator();
 
@@ -76,6 +77,7 @@ const MainNavigator = () => {
           <MainStack.Screen name="SwitchApplication" component={SwitchApplication} options={navigationOptions.SignIn} />
           <MainStack.Screen name="AddApplication" component={AddApplication} options={navigationOptions.SignIn} />
           <MainStack.Screen name="ApplicationDetail" component={ApplicationDetail} options={navigationOptions.SignIn} />
+          <MainStack.Screen name="AddApplicationSuccess" component={AddApplicationSuccess} options={navigationOptions.SignIn} />
           <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
           <MainStack.Screen name="Main" component={AppNavigator} options={navigationOptions.NoHeader} />
           <MainStack.Screen
