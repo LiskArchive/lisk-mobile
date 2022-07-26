@@ -12,7 +12,7 @@ const ApplicationDetail = ({ route }) => {
   const chainID = route.params.chainID;
 
   const application = useMemo(
-    () => applications?.data.filter((app) => app.chainID === chainID),
+    () => applications.data.filter((app) => app.chainID === chainID),
     [chainID, applications]
   )[0];
 
