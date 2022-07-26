@@ -17,9 +17,7 @@ const mockState = {
   },
 };
 
-const ReduxProvider = ({ children, reduxStore }) => (
-  <Provider store={reduxStore}>{children}</Provider>
-);
+const ReduxProvider = ({ children, reduxStore }) => <Provider store={reduxStore}>{children}</Provider>;
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn().mockImplementation((fn) => fn(mockState)),
@@ -34,9 +32,7 @@ describe('useGetApplicationsMetaQuery hook', () => {
   function setupHook() {
     const store = mockStore(mockState);
 
-    const wrapper = ({ children }) => (
-    <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
-    );
+    const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>;
 
     const hook = renderHook(() => useGetApplicationsMetaQuery(), { wrapper });
 
@@ -51,7 +47,7 @@ describe('useGetApplicationsMetaQuery hook', () => {
     expect(result.current).toMatchObject({
       data: undefined,
       isLoading: true,
-      isError: undefined
+      error: undefined,
     });
 
     await waitForNextUpdate();
@@ -67,7 +63,7 @@ describe('useGetApplicationsMetaQuery hook', () => {
     expect(result.current).toMatchObject({
       data: BLOCKCHAIN_APPLICATIONS_MOCK,
       isLoading: false,
-      isError: undefined
+      error: undefined,
     });
   });
 
@@ -79,7 +75,7 @@ describe('useGetApplicationsMetaQuery hook', () => {
 
     const {
       hook: { waitForNextUpdate },
-      store
+      store,
     } = setupHook();
 
     await waitForNextUpdate();

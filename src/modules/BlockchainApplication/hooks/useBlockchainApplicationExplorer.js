@@ -7,8 +7,7 @@ import { selectApplications as selectApplicationsSelector } from '../store/selec
 
 /**
  * Hook that handle all the logic related to blockchain applications explorer.
- *
- * @returns {Object} - Available blockchain applications array.
+ * @returns {Object} Available blockchain applications array.
  */
 export function useBlockchainApplicationExplorer() {
   const applicationsState = useSelector(selectApplicationsSelector);
