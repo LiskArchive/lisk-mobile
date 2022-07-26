@@ -17,7 +17,12 @@ import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
 const Settings = ({
-  styles, theme, navigation, settings, t, settingsUpdated
+  styles,
+  theme,
+  navigation,
+  settings,
+  t,
+  settingsUpdated
 }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
