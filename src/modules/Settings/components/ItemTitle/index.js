@@ -59,6 +59,11 @@ const ItemTitle = ({
     underlayColor: 'transparent',
   };
 
+  const iconProps = {
+    color: theme === themes.light ? colors.light.blueGray : colors.dark.slateGray,
+    style: styles.icon,
+  };
+
   if (target) {
     props.onPress = () => {
       if (authenticate) {
@@ -81,16 +86,14 @@ const ItemTitle = ({
 
   return (
     <TouchableHighlight testID="testID" {...props}>
+      {/* TODO: Update to use own defined icons (remove react-native-vector-icons)
+      to solve current inconsistencies.
+      */}
       <Fragment>
         {React.isValidElement(icon) ? (
-          icon
+          React.cloneElement(icon, iconProps)
         ) : (
-          <Icon
-            name={icon}
-            size={iconSize}
-            color={theme === themes.light ? colors.light.blueGray : colors.dark.slateGray}
-            style={styles.icon}
-          />
+          <Icon name={icon} size={iconSize} {...iconProps} />
         )}
 
         <View style={styles.titleContainer}>

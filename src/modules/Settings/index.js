@@ -14,15 +14,11 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actio
 import app from 'constants/app';
 import { ItemTitle } from './components';
 import getStyles from './styles';
+import PrivacySvg from '../../assets/svgs/PrivacySvg';
 
 // eslint-disable-next-line max-statements
 const Settings = ({
-  styles,
-  theme,
-  navigation,
-  settings,
-  t,
-  settingsUpdated
+  styles, theme, navigation, settings, t, settingsUpdated
 }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
@@ -169,7 +165,7 @@ const Settings = ({
           <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
             <ItemTitle
               navigation={navigation}
-              icon="terms"
+              icon={<PrivacySvg />}
               target="PrivacyPolicy"
               title={t('settings.menu.privacyPolicy')}
             />
