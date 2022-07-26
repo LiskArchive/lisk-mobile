@@ -240,18 +240,18 @@
   "Insert public address": "",
   "settings": {
     "menu": {
-      "backup_passphrase": "Sichern Sie Ihre Passphrase",
+      "backupPassphrase": "Sichern Sie Ihre Passphrase",
       "about": "Über Lisk",
       "dark_mode": "Dunkler Modus",
       "disabled": "Deaktiviert",
       "enabled": "Ermöglicht",
-      "discreet_mode": "Diskreter Modus",
+      "discreetMode": "Diskreter Modus",
       "terms": "Nutzungsbedingungen",
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung"
     },
     "descriptions": {
-      "discreet_mode": "Guthaben und Transaktionsbeträge ausblenden."
+      "discreetMode": "Guthaben und Transaktionsbeträge ausblenden."
     },
     "backup_phrase": {
       "title": "Sichern Sie die geheime Wiederherstellungsphrase",
