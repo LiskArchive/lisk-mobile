@@ -36,14 +36,14 @@ const ItemTitle = ({
   description,
   testID,
 }) => {
-  const authenticateFn = cb => {
+  const authenticateFn = (cb) => {
     bioMetricAuthentication({
       successCallback: () => {
         hideDialog();
         cb();
       },
       errorCallback: () => {},
-      androidError: error => setError(error),
+      androidError: (error) => setError(error),
     });
 
     if (Platform.OS === 'android') {
@@ -57,6 +57,11 @@ const ItemTitle = ({
   const props = {
     style: styles.container,
     underlayColor: 'transparent',
+  };
+
+  const iconProps = {
+    color: theme === themes.light ? colors.light.blueGray : colors.dark.slateGray,
+    style: styles.icon,
   };
 
   if (target) {
@@ -80,26 +85,20 @@ const ItemTitle = ({
   useEffect(() => () => FingerprintScanner.release());
 
   return (
-    <TouchableHighlight testID='testID' {...props}>
+    <TouchableHighlight testID="testID" {...props}>
+      {/* TODO: Update to use own defined icons (remove react-native-vector-icons)
+      to solve current inconsistencies.
+      */}
       <Fragment>
-        <Icon
-          name={icon}
-          size={iconSize}
-          color={
-            theme === themes.light
-              ? colors.light.blueGray
-              : colors.dark.slateGray
-          }
-          style={styles.icon}
-        />
+        {React.isValidElement(icon) ? (
+          React.cloneElement(icon, iconProps)
+        ) : (
+          <Icon name={icon} size={iconSize} {...iconProps} />
+        )}
 
         <View style={styles.titleContainer}>
           <P style={[styles.title, styles.theme.title]}>{title}</P>
-          {description ? (
-            <P style={[styles.subtitle, styles.theme.subtitle]}>
-              {description}
-            </P>
-          ) : null}
+          {description && <P style={[styles.subtitle, styles.theme.subtitle]}>{description}</P>}
         </View>
 
         <View style={styles.arrow}>
@@ -110,15 +109,11 @@ const ItemTitle = ({
                 name="forward"
                 size={16}
                 style={styles.arrowIcon}
-                color={
-                  theme === themes.light
-                    ? colors.light.maastrichtBlue
-                    : colors.dark.white
-                }
+                color={theme === themes.light ? colors.light.maastrichtBlue : colors.dark.white}
               />
             </Fragment>
           ) : (
-              <View testID={`${testID}-target`} >{targetStateLabel}</View>
+            <View testID={`${testID}-target`}>{targetStateLabel}</View>
           )}
         </View>
       </Fragment>

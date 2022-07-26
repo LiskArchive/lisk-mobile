@@ -14,20 +14,16 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actio
 import app from 'constants/app';
 import { ItemTitle } from './components';
 import getStyles from './styles';
+import PrivacySvg from '../../assets/svgs/PrivacySvg';
 
 // eslint-disable-next-line max-statements
 const Settings = ({
-  styles,
-  theme,
-  navigation,
-  settings,
-  t,
-  settingsUpdated,
+  styles, theme, navigation, settings, t, settingsUpdated
 }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
 
-  const setErrorMessage = error => {
+  const setErrorMessage = (error) => {
     setError(error.message);
   };
 
@@ -42,8 +38,7 @@ const Settings = ({
 
   const switchTheme = () => {
     settingsUpdated({
-      theme:
-        settings.theme === themes.dark ? themes.light : themes.dark,
+      theme: settings.theme === themes.dark ? themes.light : themes.dark,
     });
   };
 
@@ -59,143 +54,132 @@ const Settings = ({
   if (settings.sensorType && settings.hasStoredPassphrase) {
     targetStateLabel = [
       t('Enabled'),
-      theme === themes.light
-        ? colors.light.maastrichtBlue
-        : colors.dark.platinum,
+      theme === themes.light ? colors.light.maastrichtBlue : colors.dark.platinum,
     ];
     target = 'DisableBioAuth';
   }
   const sensorStatus = (
-    <P style={{ color: targetStateLabel[1] || colors[theme].platinum }}>
-      {targetStateLabel[0]}
-    </P>
+    <P style={{ color: targetStateLabel[1] || colors[theme].platinum }}>{targetStateLabel[0]}</P>
   );
-  return <View testID='settings-screen' style={[styles.container, styles.theme.container]}>
-    <ScrollView style={styles.innerContainer}>
-      <View style={styles.group}>
-        <H4 style={[styles.subHeader, styles.theme.subHeader]}>
-          {t('Security')}
-        </H4>
-        {settings.sensorType ? (
+  return (
+    <View testID="settings-screen" style={[styles.container, styles.theme.container]}>
+      <ScrollView style={styles.innerContainer}>
+        <View style={styles.group}>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Security')}</H4>
+          {settings.sensorType ? (
+            <View style={[styles.item, styles.theme.item]}>
+              <ItemTitle
+                navigation={navigation}
+                showDialog={showDialog}
+                hideDialog={hideDialog}
+                setError={setErrorMessage}
+                target={target}
+                authenticate={true}
+                targetStateLabel={sensorStatus}
+                icon={settings.sensorType === app.faceId ? 'face-id-small' : 'touch-id-small'}
+                iconSize={settings.sensorType === app.faceId ? 18 : 20}
+                title={settings.sensorType}
+              />
+            </View>
+          ) : null}
+
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               navigation={navigation}
+              target="PassphraseBackup"
               showDialog={showDialog}
               hideDialog={hideDialog}
               setError={setErrorMessage}
-              target={target}
-              authenticate={true}
-              targetStateLabel={sensorStatus}
-              icon={
-                settings.sensorType === app.faceId
-                  ? 'face-id-small'
-                  : 'touch-id-small'
-              }
-              iconSize={settings.sensorType === app.faceId ? 18 : 20}
-              title={settings.sensorType}
+              icon="backup"
+              title={t('settings.menu.backupPassphrase')}
+              iconSize={22}
             />
           </View>
-        ) : null}
 
-        <View style={[styles.item, styles.theme.item]}>
-          <ItemTitle
-            navigation={navigation}
-            target="PassphraseBackup"
-            showDialog={showDialog}
-            hideDialog={hideDialog}
-            setError={setErrorMessage}
-            icon="backup"
-            title={t('settings.menu.backupPassphrase')}
-            iconSize={22}
-          />
+          <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+            <ItemTitle
+              testID="enable-incognito"
+              icon="enable-incognito"
+              targetStateLabel={
+                <SwitchButton
+                  value={settings.incognito}
+                  theme={theme}
+                  onSyncPress={toggleIncognito}
+                />
+              }
+              title={t('settings.menu.discreetMode')}
+              description={t('settings.descriptions.discreetMode')}
+            />
+          </View>
         </View>
 
-        <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
-          <ItemTitle
-            testID="enable-incognito"
-            icon="enable-incognito"
-            targetStateLabel={
-              <SwitchButton
-                value={settings.incognito}
-                theme={theme}
-                onSyncPress={toggleIncognito}
-              />
-            }
-            title={t('settings.menu.discreetMode')}
-            description={t('settings.descriptions.discreetMode')}
-          />
-        </View>
-      </View>
+        <View style={styles.group}>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('General')}</H4>
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              testID="dark-mode"
+              icon="dark-mode"
+              targetStateLabel={
+                <SwitchButton
+                  value={settings.theme === themes.dark}
+                  theme={theme}
+                  onSyncPress={switchTheme}
+                />
+              }
+              title={t('settings.menu.dark_mode')}
+            />
+          </View>
 
-      <View style={styles.group}>
-        <H4 style={[styles.subHeader, styles.theme.subHeader]}>
-          {t('General')}
-        </H4>
-        <View style={[styles.item, styles.theme.item]}>
-          <ItemTitle
-            testID="dark-mode"
-            icon="dark-mode"
-            targetStateLabel={
-              <SwitchButton
-                value={settings.theme === themes.dark}
-                theme={theme}
-                onSyncPress={switchTheme}
-              />
-            }
-            title={t('settings.menu.dark_mode')}
-          />
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              navigation={navigation}
+              icon="currency"
+              title={t('settings.menu.currency')}
+              target="CurrencySelection"
+              targetStateLabel={<P style={styles.theme.targetStateLabel}>{settings.currency}</P>}
+            />
+          </View>
         </View>
 
-        <View style={[styles.item, styles.theme.item]}>
-          <ItemTitle
-            navigation={navigation}
-            icon="currency"
-            title={t('settings.menu.currency')}
-            target="CurrencySelection"
-            targetStateLabel={
-              <P style={styles.theme.targetStateLabel}>
-                {settings.currency}
-              </P>
-            }
-          />
+        <View style={styles.group}>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Info')}</H4>
+
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              navigation={navigation}
+              target="About"
+              icon="about"
+              title={t('settings.menu.about')}
+            />
+          </View>
+
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              navigation={navigation}
+              icon="terms"
+              target="Terms"
+              title={t('settings.menu.terms')}
+            />
+          </View>
+
+          <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+            <ItemTitle
+              navigation={navigation}
+              icon={<PrivacySvg />}
+              target="PrivacyPolicy"
+              title={t('settings.menu.privacyPolicy')}
+            />
+          </View>
         </View>
-
-      </View>
-
-      <View style={styles.group}>
-        <H4 style={[styles.subHeader, styles.theme.subHeader]}>
-          {t('Info')}
-        </H4>
-
-        <View style={[styles.item, styles.theme.item]}>
-          <ItemTitle
-            navigation={navigation}
-            target="About"
-            icon="about"
-            title={t('settings.menu.about')}
-          />
-        </View>
-
-        <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
-          <ItemTitle
-            navigation={navigation}
-            icon="terms"
-            target="Terms"
-            title={t('settings.menu.terms')}
-          />
-        </View>
-      </View>
-    </ScrollView>
-    {Platform.OS === 'android' && Platform.Version < 23 ? (
-      <FingerprintOverlay
-        onModalClosed={hideDialog}
-        error={error}
-        show={show} />
-    ) : null}
-  </View>;
+      </ScrollView>
+      {Platform.OS === 'android' && Platform.Version < 23 ? (
+        <FingerprintOverlay onModalClosed={hideDialog} error={error} show={show} />
+      ) : null}
+    </View>
+  );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   settings: state.settings,
 });
 
@@ -203,6 +187,7 @@ const mapDispatchToProps = {
   settingsUpdated: settingsUpdatedAction,
 };
 
-export default withTheme(translate()(
-  connect(mapStateToProps, mapDispatchToProps)(Settings)
-), getStyles());
+export default withTheme(
+  translate()(connect(mapStateToProps, mapDispatchToProps)(Settings)),
+  getStyles()
+);

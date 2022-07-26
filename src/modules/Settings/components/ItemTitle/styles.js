@@ -19,7 +19,7 @@ export default () => ({
       fontSize: fonts.size.small,
     },
     icon: {
-      width: 25,
+      marginRight: 16,
     },
     arrow: {
       flexDirection: 'row',

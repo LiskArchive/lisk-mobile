@@ -238,6 +238,27 @@
   "available to unlock (only on desktop)": "",
   "Insert public address or a name": "",
   "Insert public address": "",
+  "settings": {
+    "menu": {
+      "backupPassphrase": "Sichern Sie Ihre Passphrase",
+      "about": "Über Lisk",
+      "dark_mode": "Dunkler Modus",
+      "disabled": "Deaktiviert",
+      "enabled": "Ermöglicht",
+      "discreetMode": "Diskreter Modus",
+      "terms": "Nutzungsbedingungen",
+      "privacyPolicy": "Datenschutz-Bestimmungen",
+      "currency": "Währung"
+    },
+    "descriptions": {
+      "discreetMode": "Guthaben und Transaktionsbeträge ausblenden."
+    },
+    "backup_phrase": {
+      "title": "Sichern Sie die geheime Wiederherstellungsphrase",
+      "confirm_phrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
+      "continue": "Weiter"
+    }
+  },
   "multisignature": {
     "accountDetails": "",
     "description1": "",
