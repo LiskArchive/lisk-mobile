@@ -2,9 +2,13 @@ import {
   themes, colors, boxes, fonts
 } from 'constants/styleGuide';
 
-export default function getBlockchainApplicationsListStyles() {
+export default function getBlockchainApplicationRowStyles() {
   return {
     common: {
+      container: {
+        flexDirection: 'column',
+        flex: 1,
+      },
       listContainer: {
         flex: 1,
         flexDirection: 'column',

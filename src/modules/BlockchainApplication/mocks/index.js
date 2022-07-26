@@ -110,6 +110,5 @@ export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.
   (obj, val) => {
     obj[val.chainID] = val;
     return obj;
-  },
-  {}
+  }, {}
 );

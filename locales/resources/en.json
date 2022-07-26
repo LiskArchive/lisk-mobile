@@ -372,6 +372,8 @@
       "statsButtonText": "Stats",
       "searchPlaceholder": "Search application",
       "loadingText": "Loading applications...",
+      "errorText": "Error loading your applications.",
+      "emptyText": "You have no applications yet.",
       "pinText": "Pin",
       "unpinText": "Unpin"
     }
