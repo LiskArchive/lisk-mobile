@@ -112,6 +112,7 @@ export function useGetApplicationsMetaQuery() {
     meta,
     isLoading,
     error,
+    isError: !!error,
     refetch: fetchData,
     fetchMore: fetchMoreData,
     isFetching,

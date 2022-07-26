@@ -26,13 +26,34 @@ function BlockchainApplicationsList({ t, applications }) {
 
   const extraHeight = deviceType() === 'android' ? 170 : 0;
 
+  const renderData = () => {
+    if (applications.isLoading) {
+      return <P style={[styles.listContainer]}>{t('blockchainApplicationsList.loadingText')}</P>;
+    }
+
+    if (applications.isError) {
+      return <P style={[styles.listContainer]}>{t('blockchainApplicationsList.errorText')}</P>;
+    }
+
+    if (applications.data?.length === 0) {
+      return <P style={[styles.listContainer]}>{t('blockchainApplicationsList.emptyText')}</P>;
+    }
+
+    return (
+      <>
+        {applications.data.map((application) => (
+          <BlockchainApplicationRow key={application.chainID} application={application} />
+        ))}
+      </>
+    );
+  };
+
   return (
     <KeyboardAwareScrollView
       viewIsInsideTab
       enableOnAndroid={true}
       enableResetScrollToCoords={false}
       extraHeight={extraHeight}
-      style={[styles.innerContainer, styles.theme.innerContainer]}
     >
       <View style={styles.searchContainer}>
         <Icon
@@ -61,17 +82,7 @@ function BlockchainApplicationsList({ t, applications }) {
         />
       </View>
 
-      {applications.isLoading ? (
-        <P style={[styles.listContainer]}>{t('blockchainApplicationsList.loadingText')}</P>
-      ) : applications.data?.length > 0 ? (
-        <View style={styles.listContainer}>
-          {applications.data.map((application) => (
-            <BlockchainApplicationRow key={application.chainID} application={application} />
-          ))}
-        </View>
-      ) : (
-        <P>No applications available.</P>
-      )}
+      <View style={styles.listContainer}>{renderData()}</View>
     </KeyboardAwareScrollView>
   );
 }

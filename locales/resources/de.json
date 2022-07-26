@@ -346,6 +346,8 @@
     "statsButtonText": "Stats",
     "searchPlaceholder": "Suchanwendung",
     "loadingText": "Anwendungen werden geladen...",
+    "errorText": "Fehler beim Laden Ihrer Anwendungen.",
+    "emptyText": "Sie haben noch keine Bewerbungen.",
     "pinText": "Pin",
     "unpinText": "Unpin"
   }
