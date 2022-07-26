@@ -9,7 +9,7 @@ import Icon from 'components/shared/toolBox/icon';
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import StatsSvg from 'assets/svgs/StatsSvg';
-import ApplicationStats from '../ApplicationStat';
+import BlockchainApplicationsStats from '../BlockchainApplicationsStats';
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 import BlockchainApplicationsList from '../BlockchainApplicationsList';
 
@@ -62,14 +62,14 @@ function BlockchainApplicationsExplorer({ t }) {
           size={24}
         />
 
-        <ApplicationStats
+        <BlockchainApplicationsStats
           totalSupply={10000}
           staked={500000}
           stats={{ registered: 100, active: 50, terminated: 80 }}
           styles={{
             container: {
-              borderTopLeftRadius: 32,
-              borderTopRightRadius: 32,
+              borderTopLeftRadius: 24,
+              borderTopRightRadius: 24,
             },
           }}
         />

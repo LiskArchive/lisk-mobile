@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 
 import { H2, P } from 'components/shared/toolBox/typography';
 import { useTheme } from 'hooks/useTheme';
-import { colors } from 'constants/styleGuide';
+import { colors, themes } from 'constants/styleGuide';
 import TotalSupplySvg from 'assets/svgs/TotalSupplySvg';
 import StakedSvg from 'assets/svgs/StakedSvg';
 
@@ -22,34 +22,30 @@ const { width } = Dimensions.get('window');
  * @param {Number} props.stats.amount
  */
 
-const widthAndHeight = width / 2.5;
-const { ultramarineBlue, ufoGreen, zodiacBlue } = colors.light;
-const sliceColor = [ultramarineBlue, ufoGreen, zodiacBlue];
-
-const LegendItem = ({
-  styles, label, amount, t
-}) => (
+const LegendItem = ({ styles, label, amount, t }) => (
   <View style={styles.legend}>
     <View style={styles.legendItem}>
       <View style={[styles.legendIcon, styles[`${label}Icon`]]}></View>
-      <P style={[styles[label]]}>
-        <P style={[styles.legendAmount]}>{amount} </P>
+      <P style={[styles[label], styles.legendLabel, styles.theme.legendLabel]}>
+        <P style={[styles.legendAmount, styles.legendLabel, styles.theme.legendLabel]}>{amount} </P>
         {t(`application.stats.${label}`)}
       </P>
     </View>
   </View>
 );
 
-const ApplicationStats = ({
-  t, totalSupply, staked, stats, ...props
-}) => {
-  const { styles } = useTheme({ styles: getStyles() });
+const BlockchainApplicationsStats = ({ t, totalSupply, staked, stats, ...props }) => {
+  const { theme, styles } = useTheme({ styles: getStyles() });
+
+  const widthAndHeight = width / 2.5;
+  const { ultramarineBlue, ufoGreen, zodiacBlue } = colors.light;
+  const sliceColor = [ultramarineBlue, ufoGreen, zodiacBlue];
 
   const series = [stats.registered, stats.active, stats.terminated];
 
   return (
     <View style={[styles.container, styles.theme.container, props.styles.container]}>
-      <H2>{t('application.stats.title')}</H2>
+      <H2 style={[styles.title, styles.theme.title]}>{t('application.stats.title')}</H2>
       <View style={styles.chartContainer}>
         <PieChart
           widthAndHeight={widthAndHeight}
@@ -57,7 +53,7 @@ const ApplicationStats = ({
           sliceColor={sliceColor}
           doughnut={true}
           coverRadius={0.7}
-          coverFill={'#FFF'}
+          coverFill={theme === themes.light ? colors.light.white : colors.dark.textInputBg}
         />
         <View style={styles.legend}>
           <LegendItem styles={styles} label={'registered'} amount={stats.registered} t={t} />
@@ -83,4 +79,4 @@ const ApplicationStats = ({
   );
 };
 
-export default translate()(ApplicationStats);
+export default translate()(BlockchainApplicationsStats);
