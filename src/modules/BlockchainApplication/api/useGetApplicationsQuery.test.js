@@ -17,7 +17,9 @@ const mockState = {
   },
 };
 
-const ReduxProvider = ({ children, reduxStore }) => <Provider store={reduxStore}>{children}</Provider>;
+const ReduxProvider = ({ children, reduxStore }) => (
+  <Provider store={reduxStore}>{children}</Provider>
+);
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn().mockImplementation((fn) => fn(mockState)),

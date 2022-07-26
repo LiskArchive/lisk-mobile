@@ -69,7 +69,10 @@ export function useGetApplicationsMetaQuery() {
         }, 250);
       })
         .then((res) => {
-          const newData = res.data.map((app, index) => ({ ...app, chainId: `${app.chainID}-refetch${index}` }));
+          const newData = res.data.map((app, index) => ({
+            ...app,
+            chainId: `${app.chainID}-refetch${index}`,
+          }));
 
           setData([...data, ...newData]);
           setMeta(res.meta);
@@ -100,5 +103,13 @@ export function useGetApplicationsMetaQuery() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { data, meta, isLoading, error, refetch: fetchData, fetchMore: fetchMoreData, isFetching };
+  return {
+    data,
+    meta,
+    isLoading,
+    error,
+    refetch: fetchData,
+    fetchMore: fetchMoreData,
+    isFetching,
+  };
 }
