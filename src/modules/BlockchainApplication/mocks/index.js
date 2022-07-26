@@ -6,7 +6,8 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     description: 'A blockchain application platform',
     network: 'mainnet',
     isDefault: true,
-    genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
+    genesisBlock:
+      'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
     apis: {
       rest: ['https://service.lisk.com'],
       rpc: ['wss://service.lisk.com'],
@@ -20,6 +21,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       background: '#FFFFFF1A', // URL
     },
     deposited: 681782312,
+    state: 'active',
   },
   {
     name: 'Coleti',
@@ -28,7 +30,8 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     description: 'A Lisk-based NFT marketplace',
     network: 'mainnet',
     isDefault: false,
-    genesisBlock: 'https://downloads.coleti.com/lisk/mainnet/genesis_block.json.tar.gz',
+    genesisBlock:
+      'https://downloads.coleti.com/lisk/mainnet/genesis_block.json.tar.gz',
     apis: {
       rest: ['https://service.coleti.com'],
       rpc: ['wss://service.coleti.com'],
@@ -41,7 +44,8 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       },
       background: '#FFFFFF1A', // URL
     },
-    deposited: 8712312
+    state: 'terminated',
+    deposited: 8712312,
   },
   {
     name: 'DoEdu',
@@ -50,7 +54,8 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     description: 'An educational platform built with Lisk SDK',
     network: 'mainnet',
     isDefault: false,
-    genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
+    genesisBlock:
+      'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
     apis: {
       rest: ['https://service.doedu.com'],
       rpc: ['wss://service.doedu.com'],
@@ -63,7 +68,8 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       },
       background: '#FFFFFF1A', // URL
     },
-    deposited: 4872312
+    state: 'active',
+    deposited: 4872312,
   },
   {
     name: 'Enevti',
@@ -72,7 +78,8 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     description: 'A decentralized social media NFT platform',
     network: 'mainnet',
     isDefault: false,
-    genesisBlock: 'https://downloads.enevti.com/lisk/mainnet/genesis_block.json.tar.gz',
+    genesisBlock:
+      'https://downloads.enevti.com/lisk/mainnet/genesis_block.json.tar.gz',
     apis: {
       rest: ['https://service.enevti.com'],
       rpc: ['wss://service.enevti.com'],
@@ -85,16 +92,19 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       },
       background: '#FFFFFF1A', // URL
     },
-    deposited: 4875312
+    state: 'registered',
+    deposited: 4875312,
   },
   {
     name: 'Kalipo',
     chainID: 'aq25derd17a4syc8aet3pryt',
     title: 'Kalipo',
-    description: 'A platform to support Decentralized Autonomous Organizations (DAOs)',
+    description:
+      'A platform to support Decentralized Autonomous Organizations (DAOs)',
     network: 'mainnet',
     isDefault: false,
-    genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
+    genesisBlock:
+      'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
     apis: {
       rest: ['https://service.lisk.com'],
       rpc: ['wss://service.lisk.com'],
@@ -107,7 +117,8 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
       },
       background: '#FFFFFF1A', // URL
     },
-    deposited: 4875312
+    state: 'active',
+    deposited: 4875312,
   },
 ];
 
@@ -115,6 +126,5 @@ export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.
   (obj, val) => {
     obj[val.chainID] = val;
     return obj;
-  },
-  {}
+  }, {}
 );

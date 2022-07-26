@@ -113,6 +113,13 @@ navigationOptions.Terms = {
   headerTitleStyle: genericTitle,
 };
 
+navigationOptions.PrivacyPolicy = {
+  title: null,
+  headerLeft: (props) => <HeaderBackButton title="Privacy Policy" {...props} alwaysLight />,
+  headerStyle: noShadow,
+  headerTitleStyle: genericTitle,
+};
+
 navigationOptions.EnableBioAuth = {
   title: null,
   headerStyle: noShadow,

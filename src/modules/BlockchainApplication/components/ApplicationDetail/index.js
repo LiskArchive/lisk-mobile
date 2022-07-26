@@ -124,7 +124,7 @@ const ApplicationDetail = ({
               <View
                 style={[styles.stateContainer, styles[`${state}Container`]]}
               >
-                <P style={[styles.value, styles[state]]}>{state}</P>
+                <P style={[styles.value, styles[state], styles.theme[state]]}>{state}</P>
               </View>
             </View>
           </View>

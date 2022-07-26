@@ -100,6 +100,9 @@ export default {
     },
     active: {
       color: colors.light.ufoGreen,
+    },
+    terminated: {
+      color: colors.light.zodiacBlue
     }
   },
   [themes.light]: {
@@ -118,6 +121,9 @@ export default {
     value: {
       color: colors.light.zodiacBlue,
     },
+    terminated: {
+      color: colors.light.zodiacBlue
+    }
   },
   [themes.dark]: {
     container: {
@@ -135,5 +141,8 @@ export default {
     value: {
       color: colors.dark.white,
     },
+    terminated: {
+      color: colors.light.white
+    }
   },
 };

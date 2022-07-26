@@ -7,6 +7,9 @@ export default () => ({
     container: {
       padding: boxes.boxPadding,
     },
+    title: {
+      color: colors.light.zodiacBlue,
+    },
     chartContainer: {
       marginVertical: 10,
       flexDirection: 'row',
@@ -66,15 +69,30 @@ export default () => ({
     blackText: {
       color: colors.light.zodiacBlue,
     },
+    legendLabel: {
+      color: colors.light.zodiacBlue,
+    },
   },
   [themes.light]: {
     container: {
       backgroundColor: colors.light.white,
     },
+    title: {
+      color: colors.light.zodiacBlue,
+    },
+    legendLabel: {
+      color: colors.light.zodiacBlue,
+    },
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.bg,
+      backgroundColor: colors.dark.textInputBg,
+    },
+    title: {
+      color: colors.dark.white,
+    },
+    legendLabel: {
+      color: colors.dark.white,
     },
   },
 });
