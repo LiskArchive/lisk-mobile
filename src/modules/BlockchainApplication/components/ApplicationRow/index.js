@@ -9,10 +9,10 @@ import Swipeable from 'components/shared/Swipeable';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
-import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
-
-import getBlockchainApplicationRowStyles from './styles';
 import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
+
+import { useBlockchainApplicationRowActions } from './hooks';
+import getBlockchainApplicationRowStyles from './styles';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
@@ -23,32 +23,25 @@ import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchai
  * active or not.
  * @param {boolean} showCaret - Flag for showing/hiding caret icon for clicking on the row.
  */
-function BlockchainApplicationRow({ t, application, onPress, variant, showActive, showCaret }) {
+function BlockchainApplicationRow({
+  t,
+  application,
+  onPress,
+  variant = 'manage',
+  showActive,
+  showCaret,
+}) {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
   const [currentApplication] = useCurrentBlockchainApplication();
 
-  const { togglePin } = usePinBlockchainApplication();
+  const { leftActions, rightActions } = useBlockchainApplicationRowActions({
+    t,
+    application,
+    variant,
+  });
 
   return (
-    <Swipeable
-      key={application.chainID}
-      enabled={variant === 'explore'}
-      leftActions={[
-        {
-          title: !application.isPinned
-            ? t('blockchainApplicationsList.pinText')
-            : t('blockchainApplicationsList.unpinText'),
-          color: colors.light.ufoGreen,
-          icon: () => (
-            <PinSvg
-              color={colors.light.white}
-              variant={!application.isPinned ? 'outline' : 'closed'}
-            />
-          ),
-          onPress: () => togglePin(application.chainID),
-        },
-      ]}
-    >
+    <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
       <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
         <View style={styles.applicationNameContainer}>
           <Image
