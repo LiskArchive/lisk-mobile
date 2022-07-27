@@ -7,6 +7,9 @@ export default function getBlockchainApplicationsExplorerStyles() {
         flex: 1,
         paddingTop: 44,
       },
+      message: {
+        padding: 20
+      },
       statsModal: {
         height: 500,
         zIndex: 2,
@@ -24,12 +27,18 @@ export default function getBlockchainApplicationsExplorerStyles() {
       wrapper: {
         backgroundColor: colors.light.white,
       },
+      message: {
+        color: colors.light.zodiacBlue
+      }
     },
 
     [themes.dark]: {
       wrapper: {
         backgroundColor: colors.dark.mainBg,
       },
+      message: {
+        color: colors.dark.white
+      }
     },
   };
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
@@ -8,22 +8,29 @@ import { colors, themes } from 'constants/styleGuide';
 import Swipeable from 'components/shared/Swipeable';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 
 import getBlockchainApplicationRowStyles from './styles';
+import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
  * @param {Object} application - Blockchain application to render.
+ * @param {'explore' | 'manage'} variant - Enables swipe on application row item for explore
  */
-function BlockchainApplicationRow({ t, application }) {
+function BlockchainApplicationRow({
+  t, application, onPress, variant, showActive, showCaret
+}) {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
+  const [currentApplication] = useCurrentBlockchainApplication();
 
   const { togglePin } = usePinBlockchainApplication();
 
   return (
     <Swipeable
       key={application.chainID}
+      enabled={variant === 'explore'}
       leftActions={[
         {
           title: !application.isPinned
@@ -40,7 +47,7 @@ function BlockchainApplicationRow({ t, application }) {
         },
       ]}
     >
-      <View style={styles.applicationContainer}>
+      <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
         <View style={styles.applicationNameContainer}>
           <Image
             source={{ uri: application.images.logo.png }}
@@ -60,13 +67,18 @@ function BlockchainApplicationRow({ t, application }) {
               variant="fill"
             />
           )}
+          {showActive && currentApplication.chainID === application.chainID && (
+          <View style={styles.icon}>
+            <CircleCheckedSvg />
+          </View>
+          )}
 
-          <CaretSvg
+          {showCaret && <CaretSvg
             direction="right"
             color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
-          />
+          />}
         </View>
-      </View>
+      </TouchableOpacity>
     </Swipeable>
   );
 }

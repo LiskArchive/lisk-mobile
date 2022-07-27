@@ -332,7 +332,7 @@
         "save_account": "Save account",
         "addAnotherAccount": "Add another account",
         "removeAccount": "Remove an account"
-    }
+      }
     },
     "form": {
       "enterPassword": "Enter password",
@@ -346,6 +346,9 @@
     }
   },
   "application": {
+    "title": {
+      "switchApplication": "Switch application"
+    },
     "stats": {
       "title": "Application Stats",
       "registered": "Registered",
@@ -362,8 +365,11 @@
       "lastCertificateHeight": "Last Certificate Height"
     },
     "manage": {
+      "add": "Add application",
+      "successTitle": "Perfect! Application has now been added",
       "buttons": {
-        "addApplication": "Add application now"
+        "addApplication": "Add application now",
+        "continue": "Continue to wallet"
       }
     }
   },

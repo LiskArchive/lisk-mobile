@@ -29,7 +29,8 @@ export default () => ({
     title: {
       fontFamily: fonts.family.heading,
       fontSize: fonts.size.h3,
-      padding: 5
+      padding: 5,
+      textAlign: 'center',
     },
     description: {
       fontFamily: fonts.family.context,

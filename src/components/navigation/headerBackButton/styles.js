@@ -15,11 +15,11 @@ export default () => ({
     title: {
       fontFamily: fonts.family.heading,
       fontSize: 25,
-      width: 240,
       flex: 1,
     },
     titleContainer: {
       flex: 1,
+      minHeight: 40,
     },
     whiteBackground: {
       backgroundColor: colors.light.white

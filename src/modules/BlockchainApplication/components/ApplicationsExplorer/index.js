@@ -8,24 +8,68 @@ import { colors, themes } from 'constants/styleGuide';
 import Icon from 'components/shared/toolBox/icon';
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import { P } from 'components/shared/toolBox/typography';
 import StatsSvg from 'assets/svgs/StatsSvg';
-import BlockchainApplicationsStats from '../BlockchainApplicationsStats';
+import BlockchainApplicationsStats from '../ApplicationsStats';
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
-import BlockchainApplicationsList from '../BlockchainApplicationsList';
 
 import getBlockchainApplicationsExplorerStyles from './styles';
+import ApplicationList from '../ApplicationList';
+import BlockchainApplicationRow from '../ApplicationRow';
 
 /**
  *
  * Renders a component that enable users to search, list and
  * view blockchain applications.
  */
-function BlockchainApplicationsExplorer({ t }) {
+function BlockchainApplicationsExplorer({ t, navigation }) {
   const [showStatsModal, setShowStatsModal] = useState(false);
 
   const { applications } = useBlockchainApplicationExplorer();
 
-  const { theme, styles } = useTheme({ styles: getBlockchainApplicationsExplorerStyles() });
+  const { theme, styles } = useTheme({
+    styles: getBlockchainApplicationsExplorerStyles(),
+  });
+
+  const renderData = () => {
+    if (applications.isLoading) {
+      return (
+        <P style={[styles.message, styles.theme.message]}>
+          {t('blockchainApplicationsList.loadingText')}
+        </P>
+      );
+    }
+
+    if (applications.isError) {
+      return (
+        <P style={[styles.message, styles.theme.message]}>
+          {t('blockchainApplicationsList.errorText')}
+        </P>
+      );
+    }
+
+    if (applications.data?.length === 0) {
+      return (
+        <P style={[styles.message, styles.theme.message]}>
+          {t('blockchainApplicationsList.emptyText')}
+        </P>
+      );
+    }
+    return (
+      <ApplicationList
+        applications={applications.data}
+        Component={BlockchainApplicationRow}
+        onItemPress={(item) =>
+          navigation.navigate('ApplicationDetail', {
+            chainID: item.chainID,
+            variant: 'explore',
+          })
+        }
+        showCaret
+        variant='explore'
+      />
+    );
+  };
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -39,14 +83,17 @@ function BlockchainApplicationsExplorer({ t }) {
             title={t('blockchainApplicationsList.statsButtonText')}
             titleStyle={{
               marginLeft: 8,
-              color: theme === themes.dark ? colors.dark.mountainMist : colors.light.zodiacBlue,
+              color:
+                theme === themes.dark
+                  ? colors.dark.mountainMist
+                  : colors.light.zodiacBlue,
             }}
             style={styles.statsButton}
           />
         )}
       />
 
-      <BlockchainApplicationsList applications={applications} />
+      {renderData()}
 
       <ModalBox
         position="bottom"
@@ -57,7 +104,9 @@ function BlockchainApplicationsExplorer({ t }) {
         <Icon
           onPress={() => setShowStatsModal(false)}
           name="cross"
-          color={theme === themes.light ? colors.light.black : colors.dark.white}
+          color={
+            theme === themes.light ? colors.light.black : colors.dark.white
+          }
           style={styles.statsModalCloseButton}
           size={24}
         />

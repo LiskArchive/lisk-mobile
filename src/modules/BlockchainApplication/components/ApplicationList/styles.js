@@ -2,10 +2,14 @@ import {
   themes, colors, boxes, fonts
 } from 'constants/styleGuide';
 
-export default function getBlockchainApplicationsListStyles() {
+export default function getApplicationListStyles() {
   return {
     common: {
-      listContainer: {
+      innerContainer: {
+        flexDirection: 'column',
+        flex: 1,
+      },
+      body: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -77,7 +81,7 @@ export default function getBlockchainApplicationsListStyles() {
       },
     },
     [themes.light]: {
-      container: {
+      innerContainer: {
         backgroundColor: colors.light.white,
       },
       applicationNameLabel: {
@@ -86,7 +90,7 @@ export default function getBlockchainApplicationsListStyles() {
     },
 
     [themes.dark]: {
-      container: {
+      innerContainer: {
         backgroundColor: colors.dark.mainBg,
       },
       applicationNameLabel: {

@@ -5,7 +5,7 @@ import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 
 const Swipeable = ({
-  children, leftActions, rightActions, style
+  children, leftActions, rightActions, style, enabled = true
 }) => {
   const swipeableRef = useRef();
 
@@ -91,6 +91,7 @@ const Swipeable = ({
 
   return (
     <BaseSwipeable
+      enabled={enabled}
       ref={updateRef}
       containerStyle={style}
       friction={2}

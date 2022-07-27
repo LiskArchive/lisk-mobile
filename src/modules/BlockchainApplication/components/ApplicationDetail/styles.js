@@ -1,14 +1,22 @@
 import {
   themes, colors, boxes, fonts
 } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
+
+const type = deviceType();
+
+const safeAreaMarginTop = type === 'iOSx' ? 45 : 20;
 
 export default {
   common: {
     flex: {
       flex: 1,
     },
+    container: {
+      paddingTop: safeAreaMarginTop
+    },
     header: {
-      height: 200,
+      height: 230,
       backgroundColor: colors.light.ultramarineBlue
     },
     explore: {
@@ -100,6 +108,9 @@ export default {
     },
     active: {
       color: colors.light.ufoGreen,
+    },
+    terminated: {
+      color: colors.light.zodiacBlue
     }
   },
   [themes.light]: {
@@ -107,7 +118,7 @@ export default {
       backgroundColor: colors.light.white,
     },
     logoContainer: {
-      backgroundColor: colors.dark.mainBg,
+      backgroundColor: colors.dark.whiteSmoke,
     },
     title: {
       color: colors.light.zodiacBlue,
@@ -118,13 +129,16 @@ export default {
     value: {
       color: colors.light.zodiacBlue,
     },
+    terminated: {
+      color: colors.light.zodiacBlue
+    }
   },
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.mainBg,
     },
     logoContainer: {
-      backgroundColor: colors.dark.whiteSmoke,
+      backgroundColor: colors.dark.mainBg,
     },
     address: {
       color: colors.dark.white,
@@ -135,5 +149,8 @@ export default {
     value: {
       color: colors.dark.white,
     },
+    terminated: {
+      color: colors.light.white
+    }
   },
 };
