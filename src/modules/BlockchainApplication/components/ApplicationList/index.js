@@ -10,7 +10,7 @@ import Icon from 'components/shared/toolBox/icon';
 import getBlockchainApplicationsListStyles from './styles';
 
 function ApplicationList({
-  t, applications, Component, onItemPress
+  t, applications, Component, onItemPress, ...props
 }) {
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsListStyles(),
@@ -71,6 +71,7 @@ function ApplicationList({
                 image={item.images?.logo.png}
                 showPinned={true}
                 onPress={() => onItemPress(item)}
+                {...props}
               />
             )}
           />

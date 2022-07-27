@@ -11,7 +11,7 @@ import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchai
 import getStyles from './styles';
 
 const ApplicationSwitcher = () => {
-  const { styles, theme } = useTheme({ styles: getStyles });
+  const { styles } = useTheme({ styles: getStyles });
   const translateY = useRef(new Animated.Value(0));
   const navigation = useNavigation();
   const [currentApplication] = useCurrentBlockchainApplication();
@@ -63,7 +63,7 @@ const ApplicationSwitcher = () => {
               <P style={[styles.appName, styles.theme.appName]}>
                 {currentApplication.name}
               </P>
-              <SwitchSvg theme={theme} />
+              <SwitchSvg />
             </Animated.View>
           </View>
         </FlingGestureHandler>

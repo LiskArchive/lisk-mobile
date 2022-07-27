@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
-import { ScrollView } from 'react-native-gesture-handler';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
 import { useTheme } from 'hooks/useTheme';
@@ -12,10 +11,11 @@ import ApplicationItem from '../components/ApplicationItem';
 import getStyles from './styles';
 import { useCurrentBlockchainApplication } from '../hooks/useCurrentBlockchainApplication';
 import { useBlockchainApplicationManagement } from '../hooks/useBlockchainApplicationManagement';
+import ApplicationList from '../components/ApplicationList';
 
 const SwitchAccount = ({ t, navigation }) => {
   const { applications } = useBlockchainApplicationManagement();
-  const [application, setApplication] = useCurrentBlockchainApplication();
+  const [, setApplication] = useCurrentBlockchainApplication();
   const { styles, theme } = useTheme({ styles: getStyles });
   const selectApplication = (acc) => {
     setApplication(acc);
@@ -33,20 +33,17 @@ const SwitchAccount = ({ t, navigation }) => {
         title={t('application.title.switchApplication')}
         onPress={navigation.goBack}
         rightIcon="cross"
-        rightColor={theme === themes.dark ? colors.dark.white : colors.light.zodiacBlue}
+        rightColor={
+          theme === themes.dark ? colors.dark.white : colors.light.zodiacBlue
+        }
         onRightPress={navigation.goBack}
       />
-      <ScrollView style={styles.container}>
-        {applications.data?.map((app) => (
-          <ApplicationItem
-            key={app.chainID}
-            application={app}
-            onPress={() => selectApplication(app)}
-            active={app.chainID === application?.chainID}
-            image={app.images?.logo.png}
-          />
-        ))}
-      </ScrollView>
+      <ApplicationList
+        applications={applications.data}
+        Component={ApplicationItem}
+        onItemPress={selectApplication}
+        showActive
+      />
       <View style={styles.bottom}>
         <TouchableOpacity
           style={[styles.button, styles.outline, styles.theme.outline]}
@@ -55,7 +52,7 @@ const SwitchAccount = ({ t, navigation }) => {
           <View style={styles.icon}>
             <AddSvg />
           </View>
-          <P style={styles.buttonText} >{t('application.manage.add')}</P>
+          <P style={styles.buttonText}>{t('application.manage.add')}</P>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

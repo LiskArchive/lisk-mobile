@@ -4,21 +4,25 @@ import { P } from 'components/shared/toolBox/typography';
 import { useTheme } from 'hooks/useTheme';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import WarningFilledSvg from 'assets/svgs/WarningFilledSvg';
+import PinSvg from 'assets/svgs/PinSvg';
+import CaretSvg from 'assets/svgs/CaretSvg';
+import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 import getStyles from './styles';
-import PinSvg from '../../../../assets/svgs/PinSvg';
-import CaretSvg from '../../../../assets/svgs/CaretSvg';
 
 const ApplicationItem = ({
   application,
   onPress,
-  active,
   testID,
   image,
+  showActive,
   showPinned,
   showCaret,
 }) => {
-  const { name: applicationName, isDisabled, isPinned } = application;
+  const {
+    name: applicationName, isDisabled, isPinned, chainID
+  } = application;
   const { styles, theme } = useTheme({ styles: getStyles });
+  const [currentApplication] = useCurrentBlockchainApplication();
   return (
     <TouchableOpacity
       style={[styles.container, styles.theme.container]}
@@ -35,7 +39,7 @@ const ApplicationItem = ({
         </P>
       </View>
       <View style={styles.iconContainer}>
-        {active && (
+        {showActive && currentApplication.chainID === chainID && (
           <View style={styles.icon}>
             <CircleCheckedSvg />
           </View>
