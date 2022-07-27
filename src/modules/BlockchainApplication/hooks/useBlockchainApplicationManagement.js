@@ -1,13 +1,13 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  setApplications as setApplicationsAction,
   addApplicationByChainId as addApplicationAction,
   deleteApplicationByChainId as deleteApplicationAction,
 } from '../store/actions';
 import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplication';
-import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
-import { useGetApplicationsMetaQuery } from '../api/useGetApplicationsQuery';
+import { BLOCKCHAIN_APPLICATIONS_MOCK, DEFAULT_BLOCKCHAIN_APPLICATION } from '../mocks';
 import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 import { selectApplications as selectApplicationsSelector } from '../store/selectors';
 
@@ -24,8 +24,6 @@ export function useBlockchainApplicationManagement() {
 
   const applicationsState = useSelector(selectApplicationsSelector);
 
-  const getApplicationsMetaQuery = useGetApplicationsMetaQuery();
-
   const { pins, checkPinByChainId } = usePinBlockchainApplication();
 
   const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
@@ -38,9 +36,9 @@ export function useBlockchainApplicationManagement() {
       }))
       .sort((a) => (a.isPinned ? -1 : 1));
 
-    return { ...getApplicationsMetaQuery, data };
+    return { data };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getApplicationsMetaQuery, pins, applicationsState, checkPinByChainId]);
+  }, [pins, applicationsState, checkPinByChainId]);
 
   const addApplicationByChainId = useCallback(
     (application) => {
@@ -67,6 +65,10 @@ export function useBlockchainApplicationManagement() {
     },
     [currentApplication, dispatch, setCurrentApplication]
   );
+
+  useEffect(() => {
+    dispatch(setApplicationsAction([DEFAULT_BLOCKCHAIN_APPLICATION]));
+  }, [dispatch]);
 
   return {
     applications,
