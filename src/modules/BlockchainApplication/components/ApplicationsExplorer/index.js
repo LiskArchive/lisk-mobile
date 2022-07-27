@@ -10,12 +10,12 @@ import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
 import StatsSvg from 'assets/svgs/StatsSvg';
-import BlockchainApplicationsStats from '../BlockchainApplicationsStats';
+import BlockchainApplicationsStats from '../ApplicationsStats';
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 
 import getBlockchainApplicationsExplorerStyles from './styles';
 import ApplicationList from '../ApplicationList';
-import BlockchainApplicationRow from '../BlockchainApplicationRow';
+import BlockchainApplicationRow from '../ApplicationRow';
 
 /**
  *

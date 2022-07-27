@@ -11,7 +11,7 @@ import getStyles from './styles';
 import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 import ApplicationList from '../ApplicationList';
-import BlockchainApplicationRow from '../BlockchainApplicationRow';
+import BlockchainApplicationRow from '../ApplicationRow';
 
 const SwitchAccount = ({ t, navigation }) => {
   const { applications } = useBlockchainApplicationManagement();

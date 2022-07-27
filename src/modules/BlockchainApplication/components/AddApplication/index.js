@@ -6,7 +6,7 @@ import { useTheme } from 'hooks/useTheme';
 import ApplicationList from '../ApplicationList';
 import getAddApplicationStyles from './styles';
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
-import BlockchainApplicationRow from '../BlockchainApplicationRow';
+import BlockchainApplicationRow from '../ApplicationRow';
 
 const AddApplication = ({ navigation, t }) => {
   const { styles } = useTheme({ styles: getAddApplicationStyles() });

@@ -14,7 +14,7 @@ import Home from 'modules/Accounts';
 import { LockedBalanceDetails } from 'modules/Accounts/components';
 import Bookmarks from 'modules/Bookmark';
 import ApplicationsSvg from '../assets/svgs/ApplicationsSvg';
-import BlockchainApplicationsExplorer from '../modules/BlockchainApplication/components/BlockchainApplicationsExplorer';
+import BlockchainApplicationsExplorer from '../modules/BlockchainApplication/components/ApplicationsExplorer';
 
 import navigationOptions from './navigationOptions';
 
