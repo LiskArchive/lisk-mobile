@@ -6,7 +6,7 @@ import { useTheme } from 'hooks/useTheme';
 import { getInfiniteScrollListStyles } from './styles';
 
 /**
- * Infinite scroll list component for rendering API paginated data.
+ * Infinite scroll list component for rendering API fetched paginated data.
  * @param {Array<Object>} data - List of distinct items to render.
  * @param {Function?} keyExtractor - Function that extracts a unique key for a given
  * item at the specified index. Key is used for caching and as the react key to track
