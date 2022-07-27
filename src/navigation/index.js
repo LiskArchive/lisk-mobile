@@ -29,9 +29,10 @@ import SwitchApplication from 'modules/BlockchainApplication/components/SwitchAp
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
 import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
+import DeleteApplication from '../modules/BlockchainApplication/components/DeleteApplication';
+import DeleteApplicationSuccess from '../modules/BlockchainApplication/components/DeleteApplicationSuccess';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './appNavigator';
-import DeleteApplication from '../modules/BlockchainApplication/components/DeleteApplication';
 
 const MainStack = createStackNavigator();
 
@@ -138,6 +139,11 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="DeleteApplication"
             component={DeleteApplication}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="DeleteApplicationSuccess"
+            component={DeleteApplicationSuccess}
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen name="About" component={About} options={navigationOptions.About} />

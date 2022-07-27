@@ -7,13 +7,21 @@ import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
 import { colors, themes } from 'constants/styleGuide';
+import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 
 import getDeleteBlockchainApplicationStyles from './styles';
 
 function DeleteBlockchainApplication({ navigation, route }) {
   const { theme, styles } = useTheme({ styles: getDeleteBlockchainApplicationStyles() });
 
+  const { deleteApplicationByChainId } = useBlockchainApplicationManagement();
+
   const { application } = route.params;
+
+  const handleDeleteApplicationClick = () => {
+    deleteApplicationByChainId(application.chainID);
+    navigation.navigate('DeleteApplicationSuccess', { application });
+  };
 
   return (
     <View style={[styles.container, styles.theme.container]}>
@@ -45,7 +53,7 @@ function DeleteBlockchainApplication({ navigation, route }) {
       </View>
 
       <PrimaryButton
-        onClick={() => console.log('on delete app...')}
+        onClick={handleDeleteApplicationClick}
         title={'Remove now'}
         style={[styles.submitButton]}
       />

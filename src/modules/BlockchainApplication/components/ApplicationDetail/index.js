@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  ScrollView, View, ImageBackground, Image
-} from 'react-native';
+import { ScrollView, View, ImageBackground, Image } from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import moment from 'moment';
 import { translate } from 'react-i18next';
@@ -50,7 +48,7 @@ const ApplicationDetail = ({ t, route, navigation }) => {
     image,
   } = application;
 
-  const addApplication = () => {
+  const handleAddApplicationClick = () => {
     addApplicationByChainId(chainID);
     navigation.navigate('AddApplicationSuccess');
   };
@@ -91,15 +89,8 @@ const ApplicationDetail = ({ t, route, navigation }) => {
       <View style={[styles.flex, styles.body]}>
         <View style={styles.titleRow}>
           <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
-          <TouchableOpacity
-            style={styles.pinIcon}
-            onPress={() => togglePin(chainID)}
-          >
-            <PinSvg
-              variant={isPinned ? 'fill' : 'outline'}
-              width={25}
-              height={25}
-            />
+          <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
+            <PinSvg variant={isPinned ? 'fill' : 'outline'} width={25} height={25} />
           </TouchableOpacity>
         </View>
         <P style={[styles.address, styles.theme.address]}>{address}</P>
@@ -114,47 +105,33 @@ const ApplicationDetail = ({ t, route, navigation }) => {
         <View style={styles.stats}>
           <View style={styles.flex}>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {t('application.details.chainID')}{' '}
-              </P>
+              <P style={styles.smallTitle}>{t('application.details.chainID')} </P>
               <P style={[styles.value, styles.theme.value]}>{chainID}</P>
             </View>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {t('application.details.status')}{' '}
-              </P>
-              <View
-                style={[styles.stateContainer, styles[`${state}Container`]]}
-              >
-                <P style={[styles.value, styles[state], styles.theme[state]]}>
-                  {state}
-                </P>
+              <P style={styles.smallTitle}>{t('application.details.status')} </P>
+              <View style={[styles.stateContainer, styles[`${state}Container`]]}>
+                <P style={[styles.value, styles[state], styles.theme[state]]}>{state}</P>
               </View>
             </View>
           </View>
           <View style={styles.flex}>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {t('application.details.lastUpdated')}{' '}
-              </P>
+              <P style={styles.smallTitle}>{t('application.details.lastUpdated')} </P>
               <P style={[styles.value, styles.theme.value]}>
                 {moment(lastUpdated).format('D MMM YYYY')}
               </P>
             </View>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {t('application.details.lastCertificateHeight')}
-              </P>
-              <P style={[styles.value, styles.theme.value]}>
-                {lastCertificateHeight}
-              </P>
+              <P style={styles.smallTitle}>{t('application.details.lastCertificateHeight')}</P>
+              <P style={[styles.value, styles.theme.value]}>{lastCertificateHeight}</P>
             </View>
           </View>
         </View>
         {variant === 'manage' && (
           <View>
             <PrimaryButton
-              onClick={addApplication}
+              onClick={handleAddApplicationClick}
               title={t('application.manage.buttons.addApplication')}
             />
           </View>

@@ -66,7 +66,7 @@ function BlockchainApplicationRow({
           )}
           {showActive && currentApplication.chainID === application.chainID && (
             <View style={styles.icon}>
-              <CircleCheckedSvg />
+              <CircleCheckedSvg variant="fill" />
             </View>
           )}
 
