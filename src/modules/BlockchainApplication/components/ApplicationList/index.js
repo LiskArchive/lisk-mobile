@@ -9,9 +9,7 @@ import Input from 'components/shared/toolBox/input';
 import Icon from 'components/shared/toolBox/icon';
 import getBlockchainApplicationsListStyles from './styles';
 
-function ApplicationList({
-  t, applications, Component, onItemPress, ...props
-}) {
+function ApplicationList({ t, applications, Component, onItemPress, ...props }) {
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsListStyles(),
   });
@@ -25,11 +23,7 @@ function ApplicationList({
           style={styles.searchIcon}
           name="search"
           size={18}
-          color={
-            theme === themes.dark
-              ? colors.dark.mountainMist
-              : colors.light.blueGray
-          }
+          color={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
         />
         <Input
           placeholder={t('blockchainApplicationsList.searchPlaceholder')}
@@ -40,9 +34,7 @@ function ApplicationList({
             containerStyle: [styles.inputContainer],
           }}
           placeholderTextColor={
-            theme === themes.dark
-              ? colors.dark.mountainMist
-              : colors.light.blueGray
+            theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
           }
           onChange={(value) => setTerm(value)}
           value={term}
@@ -52,12 +44,7 @@ function ApplicationList({
 
       <View style={styles.body}>
         {applications.isLoading ? (
-          <P
-            style={[
-              styles.applicationNameLabel,
-              styles.theme.applicationNameLabel,
-            ]}
-          >
+          <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
             {t('blockchainApplicationsList.loadingText')}
           </P>
         ) : (

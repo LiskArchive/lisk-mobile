@@ -18,10 +18,12 @@ import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchai
  * Renders a Blockchain Application row for the Blockchain Applications component.
  * @param {Object} application - Blockchain application to render.
  * @param {'explore' | 'manage'} variant - Enables swipe on application row item for explore
+ * @param {Function} onPress - Callback to trigger on row click.
+ * @param {boolean} showActive - Flag for showing/hiding icon that visualizes if the app is
+ * active or not.
+ * @param {boolean} showCaret - Flag for showing/hiding caret icon for clicking on the row.
  */
-function BlockchainApplicationRow({
-  t, application, onPress, variant, showActive, showCaret
-}) {
+function BlockchainApplicationRow({ t, application, onPress, variant, showActive, showCaret }) {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
   const [currentApplication] = useCurrentBlockchainApplication();
 
@@ -68,15 +70,17 @@ function BlockchainApplicationRow({
             />
           )}
           {showActive && currentApplication.chainID === application.chainID && (
-          <View style={styles.icon}>
-            <CircleCheckedSvg />
-          </View>
+            <View style={styles.icon}>
+              <CircleCheckedSvg />
+            </View>
           )}
 
-          {showCaret && <CaretSvg
-            direction="right"
-            color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
-          />}
+          {showCaret && (
+            <CaretSvg
+              direction="right"
+              color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
+            />
+          )}
         </View>
       </TouchableOpacity>
     </Swipeable>

@@ -33,9 +33,7 @@ const SwitchAccount = ({ t, navigation }) => {
         title={t('application.title.switchApplication')}
         onPress={navigation.goBack}
         rightIcon="cross"
-        rightColor={
-          theme === themes.dark ? colors.dark.white : colors.light.zodiacBlue
-        }
+        rightColor={theme === themes.dark ? colors.dark.white : colors.light.zodiacBlue}
         onRightPress={navigation.goBack}
       />
       <ApplicationList
