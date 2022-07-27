@@ -9,7 +9,7 @@ import Input from 'components/shared/toolBox/input';
 import Icon from 'components/shared/toolBox/icon';
 import getBlockchainApplicationsListStyles from './styles';
 
-function ApplicationList({ t, applications, Component, onItemPress, ...props }) {
+function ApplicationList({ t, applications, Component, onItemPress, navigation, ...props }) {
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsListStyles(),
   });
@@ -54,6 +54,7 @@ function ApplicationList({ t, applications, Component, onItemPress, ...props }) 
             renderItem={({ item }) => (
               <Component
                 application={item}
+                navigation={navigation}
                 key={item.chainID}
                 image={item.images?.logo.png}
                 showPinned={true}

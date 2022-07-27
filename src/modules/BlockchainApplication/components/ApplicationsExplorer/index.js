@@ -66,7 +66,8 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
           })
         }
         showCaret
-        variant='explore'
+        variant="explore"
+        navigation={navigation}
       />
     );
   };
@@ -83,10 +84,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
             title={t('blockchainApplicationsList.statsButtonText')}
             titleStyle={{
               marginLeft: 8,
-              color:
-                theme === themes.dark
-                  ? colors.dark.mountainMist
-                  : colors.light.zodiacBlue,
+              color: theme === themes.dark ? colors.dark.mountainMist : colors.light.zodiacBlue,
             }}
             style={styles.statsButton}
           />
@@ -104,9 +102,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         <Icon
           onPress={() => setShowStatsModal(false)}
           name="cross"
-          color={
-            theme === themes.light ? colors.light.black : colors.dark.white
-          }
+          color={theme === themes.light ? colors.light.black : colors.dark.white}
           style={styles.statsModalCloseButton}
           size={24}
         />

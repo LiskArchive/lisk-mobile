@@ -30,6 +30,7 @@ function BlockchainApplicationRow({
   variant = 'manage',
   showActive,
   showCaret,
+  navigation,
 }) {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
   const [currentApplication] = useCurrentBlockchainApplication();
@@ -38,6 +39,7 @@ function BlockchainApplicationRow({
     t,
     application,
     variant,
+    navigation,
   });
 
   return (

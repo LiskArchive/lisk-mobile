@@ -6,7 +6,7 @@ import DeleteSvg from 'assets/svgs/DeleteSvg';
 
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 
-export function useBlockchainApplicationRowActions({ t, application, variant }) {
+export function useBlockchainApplicationRowActions({ t, application, variant, navigation }) {
   const { togglePin } = usePinBlockchainApplication();
 
   let leftActions;
@@ -38,7 +38,7 @@ export function useBlockchainApplicationRowActions({ t, application, variant }) 
           color: colors.light.furyRed,
           icon: () => <DeleteSvg color={colors.light.white} />,
           onPress: () => {
-            console.log('deleting app...');
+            navigation.navigate('DeleteApplication', { application });
           },
         },
       ];

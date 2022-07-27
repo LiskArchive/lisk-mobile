@@ -13,7 +13,7 @@ import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApp
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
 
-const SwitchAccount = ({ t, navigation }) => {
+const SwitchApplication = ({ t, navigation }) => {
   const { applications } = useBlockchainApplicationManagement();
   const [, setApplication] = useCurrentBlockchainApplication();
   const { styles, theme } = useTheme({ styles: getStyles });
@@ -41,6 +41,7 @@ const SwitchAccount = ({ t, navigation }) => {
         Component={BlockchainApplicationRow}
         onItemPress={selectApplication}
         showActive
+        navigation={navigation}
       />
       <View style={styles.bottom}>
         <TouchableOpacity
@@ -57,4 +58,4 @@ const SwitchAccount = ({ t, navigation }) => {
   );
 };
 
-export default translate()(SwitchAccount);
+export default translate()(SwitchApplication);

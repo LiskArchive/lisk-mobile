@@ -31,6 +31,7 @@ import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddA
 import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './appNavigator';
+import DeleteApplication from '../modules/BlockchainApplication/components/DeleteApplication';
 
 const MainStack = createStackNavigator();
 
@@ -114,10 +115,31 @@ const MainNavigator = () => {
             component={AddBookmark}
             options={navigationOptions.AddBookmark}
           />
-          <MainStack.Screen name="SwitchApplication" component={SwitchApplication} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="AddApplication" component={AddApplication} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="ApplicationDetail" component={ApplicationDetail} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="AddApplicationSuccess" component={AddApplicationSuccess} options={navigationOptions.SignIn} />
+          <MainStack.Screen
+            name="SwitchApplication"
+            component={SwitchApplication}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="AddApplication"
+            component={AddApplication}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="ApplicationDetail"
+            component={ApplicationDetail}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="AddApplicationSuccess"
+            component={AddApplicationSuccess}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="DeleteApplication"
+            component={DeleteApplication}
+            options={navigationOptions.SignIn}
+          />
           <MainStack.Screen name="About" component={About} options={navigationOptions.About} />
           <MainStack.Screen
             name="CurrencySelection"
