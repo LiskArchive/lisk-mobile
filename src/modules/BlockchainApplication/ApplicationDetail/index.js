@@ -9,7 +9,7 @@ const ApplicationDetail = ({ route }) => {
   const { styles } = useTheme({ styles: getAddApplicationStyles() });
   const { applications } = useBlockchainApplicationManagement();
 
-  const chainID = route.params.chainID;
+  const { chainID, variant } = route.params;
 
   const application = useMemo(
     () => applications.data.filter((app) => app.chainID === chainID),
@@ -21,7 +21,7 @@ const ApplicationDetail = ({ route }) => {
       <ApplicationDetailComponent
         {...application}
         image={application.images.logo.png}
-        variant="manage"
+        variant={variant}
       />
     </View>
   );

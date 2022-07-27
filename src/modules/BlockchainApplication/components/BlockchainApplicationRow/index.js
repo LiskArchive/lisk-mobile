@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
@@ -16,7 +16,7 @@ import getBlockchainApplicationRowStyles from './styles';
  * Renders a Blockchain Application row for the Blockchain Applications component.
  * @param {Object} application - Blockchain application to render.
  */
-function BlockchainApplicationRow({ t, application }) {
+function BlockchainApplicationRow({ t, application, onPress }) {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
 
   const { togglePin } = usePinBlockchainApplication();
@@ -40,7 +40,7 @@ function BlockchainApplicationRow({ t, application }) {
         },
       ]}
     >
-      <View style={styles.applicationContainer}>
+      <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
         <View style={styles.applicationNameContainer}>
           <Image
             source={{ uri: application.images.logo.png }}
@@ -66,7 +66,7 @@ function BlockchainApplicationRow({ t, application }) {
             color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
           />
         </View>
-      </View>
+      </TouchableOpacity>
     </Swipeable>
   );
 }
