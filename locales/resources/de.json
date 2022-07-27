@@ -341,6 +341,9 @@
     }
   },
   "application": {
+    "title": {
+      "switchApplication": "Switch application"
+    },
     "stats": {
       "title": "",
       "registered": "",
