@@ -8,22 +8,29 @@ import { colors, themes } from 'constants/styleGuide';
 import Swipeable from 'components/shared/Swipeable';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 
 import getBlockchainApplicationRowStyles from './styles';
+import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
  * @param {Object} application - Blockchain application to render.
+ * @param {'explore' | 'manage'} variant - Enables swipe on application row item for explore
  */
-function BlockchainApplicationRow({ t, application, onPress }) {
+function BlockchainApplicationRow({
+  t, application, onPress, variant, showActive, showCaret
+}) {
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
+  const [currentApplication] = useCurrentBlockchainApplication();
 
   const { togglePin } = usePinBlockchainApplication();
 
   return (
     <Swipeable
       key={application.chainID}
+      enabled={variant === 'explore'}
       leftActions={[
         {
           title: !application.isPinned
@@ -60,11 +67,16 @@ function BlockchainApplicationRow({ t, application, onPress }) {
               variant="fill"
             />
           )}
+          {showActive && currentApplication.chainID === application.chainID && (
+          <View style={styles.icon}>
+            <CircleCheckedSvg />
+          </View>
+          )}
 
-          <CaretSvg
+          {showCaret && <CaretSvg
             direction="right"
             color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
-          />
+          />}
         </View>
       </TouchableOpacity>
     </Swipeable>

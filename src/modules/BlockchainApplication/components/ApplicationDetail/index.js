@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   ScrollView, View, ImageBackground, Image
 } from 'react-native';
@@ -6,17 +6,16 @@ import { useTheme } from 'hooks/useTheme';
 import moment from 'moment';
 import { translate } from 'react-i18next';
 import { H3, P } from 'components/shared/toolBox/typography';
-import { useNavigation } from '@react-navigation/native';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import wavesPattern from 'assets/images/waves_pattern_large.png';
 import { colors } from 'constants/styleGuide';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import getStyles from './styles';
-import PinSvg from '../../../../assets/svgs/PinSvg';
+import PinSvg from 'assets/svgs/PinSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
+import getStyles from './styles';
 /**
  *
  * @param {Object} props
@@ -25,27 +24,31 @@ import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApp
  * 'explore' -> uses app background with patterns
  *
  */
-const ApplicationDetail = ({
-  name,
-  chainID,
-  state,
-  lastCertificateHeight,
-  lastUpdated,
-  deposited,
-  address,
-  backgroundColor,
-  variant,
-  explorers,
-  image,
-  t,
-}) => {
+const ApplicationDetail = ({ t, route, navigation }) => {
   const { styles } = useTheme({ styles: getStyles });
-  const navigation = useNavigation();
 
   const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
-  const { addApplicationByChainId } = useBlockchainApplicationManagement();
+  const { applications, addApplicationByChainId } = useBlockchainApplicationManagement();
+  const { chainID, variant } = route.params;
+
+  const application = useMemo(
+    () => applications.data.filter((app) => app.chainID === chainID),
+    [chainID, applications]
+  )[0];
 
   const isPinned = checkPinByChainId(chainID);
+
+  const {
+    name,
+    state,
+    lastCertificateHeight,
+    lastUpdated,
+    deposited,
+    address,
+    backgroundColor,
+    explorers,
+    image,
+  } = application;
 
   const addApplication = () => {
     addApplicationByChainId(chainID);
@@ -59,6 +62,7 @@ const ApplicationDetail = ({
           style={[
             styles.header,
             styles.explore,
+            styles.container,
             backgroundColor && { backgroundColor },
           ]}
           source={wavesPattern}
@@ -74,7 +78,7 @@ const ApplicationDetail = ({
       )}
       {variant === 'manage' && (
         <View
-          style={[styles.header, backgroundColor && { backgroundColor }]}
+          style={[styles.header, styles.container, backgroundColor && { backgroundColor }]}
           resizeMode="stretch"
         >
           <HeaderBackButton title={name} onPress={navigation.goBack} />
@@ -105,9 +109,7 @@ const ApplicationDetail = ({
         </View>
         <View style={[styles.row, styles.depositedContainer]}>
           <P style={styles.deposited}>{t('application.details.deposited')}: </P>
-          <P
-            style={styles.amount}
-          >{`${deposited.toLocaleString()} LSK`}</P>
+          <P style={styles.amount}>{`${deposited.toLocaleString()} LSK`}</P>
         </View>
         <View style={styles.stats}>
           <View style={styles.flex}>
@@ -124,7 +126,9 @@ const ApplicationDetail = ({
               <View
                 style={[styles.stateContainer, styles[`${state}Container`]]}
               >
-                <P style={[styles.value, styles[state], styles.theme[state]]}>{state}</P>
+                <P style={[styles.value, styles[state], styles.theme[state]]}>
+                  {state}
+                </P>
               </View>
             </View>
           </View>

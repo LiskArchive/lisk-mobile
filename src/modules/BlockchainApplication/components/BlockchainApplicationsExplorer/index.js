@@ -65,6 +65,8 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
             variant: 'explore',
           })
         }
+        showCaret
+        variant='explore'
       />
     );
   };

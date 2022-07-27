@@ -25,12 +25,12 @@ import ManageAccount from 'modules/Auth/ManageAccount';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import SwitchAccount from 'modules/Auth/SwitchAccount';
 import DeleteAccount from 'modules/Auth/RemoveAccount';
-import SwitchApplication from 'modules/BlockchainApplication/SwitchApplication';
-import AddApplication from 'modules/BlockchainApplication/AddApplication';
+import SwitchApplication from 'modules/BlockchainApplication/components/SwitchApplication';
+import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
+import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
+import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './appNavigator';
-import ApplicationDetail from '../modules/BlockchainApplication/ApplicationDetail';
-import AddApplicationSuccess from '../modules/BlockchainApplication/AddApplicationSuccess';
 
 const MainStack = createStackNavigator();
 

@@ -7,11 +7,11 @@ import { P } from 'components/shared/toolBox/typography';
 import { useTheme } from 'hooks/useTheme';
 import AddSvg from 'assets/svgs/AddSvg';
 import { colors, themes } from 'constants/styleGuide';
-import ApplicationItem from '../components/ApplicationItem';
 import getStyles from './styles';
-import { useCurrentBlockchainApplication } from '../hooks/useCurrentBlockchainApplication';
-import { useBlockchainApplicationManagement } from '../hooks/useBlockchainApplicationManagement';
-import ApplicationList from '../components/ApplicationList';
+import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
+import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
+import ApplicationList from '../ApplicationList';
+import BlockchainApplicationRow from '../BlockchainApplicationRow';
 
 const SwitchAccount = ({ t, navigation }) => {
   const { applications } = useBlockchainApplicationManagement();
@@ -40,7 +40,7 @@ const SwitchAccount = ({ t, navigation }) => {
       />
       <ApplicationList
         applications={applications.data}
-        Component={ApplicationItem}
+        Component={BlockchainApplicationRow}
         onItemPress={selectApplication}
         showActive
       />

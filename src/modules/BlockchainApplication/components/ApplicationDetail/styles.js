@@ -1,14 +1,22 @@
 import {
   themes, colors, boxes, fonts
 } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
+
+const type = deviceType();
+
+const safeAreaMarginTop = type === 'iOSx' ? 45 : 20;
 
 export default {
   common: {
     flex: {
       flex: 1,
     },
+    container: {
+      paddingTop: safeAreaMarginTop
+    },
     header: {
-      height: 200,
+      height: 230,
       backgroundColor: colors.light.ultramarineBlue
     },
     explore: {
