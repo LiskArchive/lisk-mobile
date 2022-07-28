@@ -49,7 +49,7 @@ function ApplicationList({ t, applications, Component, onItemPress, navigation, 
           </P>
         ) : (
           <FlatList
-            data={applications}
+            data={applications.data}
             keyExtractor={(item) => item.chainID}
             renderItem={({ item }) => (
               <Component

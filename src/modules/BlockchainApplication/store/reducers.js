@@ -40,15 +40,13 @@ export const pinsReducer = (state = initialState.pins, { type, chainId }) => {
  */
 export const applicationsReducer = (
   state = initialState.applications,
-  {
-    type, applications, application, chainId
-  }
+  { type, applications, application, chainId }
 ) => {
   switch (type) {
     case actionTypes.setApplications:
       state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {});
       return state;
-    case actionTypes.addApplicationByChainId:
+    case actionTypes.addApplication:
       // In cases where a new node for an existing application is being added,
       // the new service url should be appended to the serviceURLs array of the application
       if (application.chainID in state) {

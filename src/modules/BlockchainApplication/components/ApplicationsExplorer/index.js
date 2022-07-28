@@ -57,7 +57,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
     }
     return (
       <ApplicationList
-        applications={applications.data}
+        applications={applications}
         Component={BlockchainApplicationRow}
         onItemPress={(item) =>
           navigation.navigate('ApplicationDetail', {

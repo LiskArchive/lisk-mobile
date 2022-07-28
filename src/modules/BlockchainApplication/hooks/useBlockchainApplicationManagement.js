@@ -1,9 +1,9 @@
+/* eslint-disable max-statements */
 import { useCallback, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  setApplications as setApplicationsAction,
-  addApplicationByChainId as addApplicationAction,
+  addApplication as addApplicationAction,
   deleteApplicationByChainId as deleteApplicationAction,
 } from '../store/actions';
 import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplication';
@@ -29,6 +29,7 @@ export function useBlockchainApplicationManagement() {
   const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
 
   const applications = useMemo(() => {
+    console.log('recalculating...');
     const data = Object.values(applicationsState)
       .map((app) => ({
         ...app,
@@ -40,7 +41,9 @@ export function useBlockchainApplicationManagement() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pins, applicationsState, checkPinByChainId]);
 
-  const addApplicationByChainId = useCallback(
+  console.log({ applicationsState, applications });
+
+  const addApplication = useCallback(
     (application) => {
       if (application.isDefault) return;
 
@@ -67,12 +70,13 @@ export function useBlockchainApplicationManagement() {
   );
 
   useEffect(() => {
-    dispatch(setApplicationsAction([DEFAULT_BLOCKCHAIN_APPLICATION]));
-  }, [dispatch]);
+    if (Object.keys(applicationsState).length === 0)
+      dispatch(addApplicationAction([DEFAULT_BLOCKCHAIN_APPLICATION]));
+  }, [applicationsState, dispatch]);
 
   return {
     applications,
-    addApplicationByChainId,
+    addApplication,
     getApplicationByChainId,
     deleteApplicationByChainId,
   };

@@ -37,7 +37,7 @@ const SwitchApplication = ({ t, navigation }) => {
         onRightPress={navigation.goBack}
       />
       <ApplicationList
-        applications={applications.data}
+        applications={applications}
         Component={BlockchainApplicationRow}
         onItemPress={selectApplication}
         showActive

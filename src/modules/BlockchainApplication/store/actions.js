@@ -25,8 +25,8 @@ export const toggleApplicationPin = (chainId) => ({
  *
  * @returns {Object} - Action object
  */
-export const addApplicationByChainId = (application) => ({
-  type: actionTypes.addApplicationByChainId,
+export const addApplication = (application) => ({
+  type: actionTypes.addApplication,
   application,
 });
 

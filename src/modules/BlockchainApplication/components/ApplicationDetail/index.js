@@ -1,5 +1,6 @@
+/* eslint-disable max-statements */
 import React, { useMemo } from 'react';
-import { ScrollView, View, ImageBackground, Image } from 'react-native';
+import { ScrollView, View, ImageBackground, Image, Text } from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import moment from 'moment';
 import { translate } from 'react-i18next';
@@ -14,6 +15,7 @@ import PinSvg from 'assets/svgs/PinSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 import getStyles from './styles';
+import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 /**
  *
  * @param {Object} props
@@ -26,15 +28,29 @@ const ApplicationDetail = ({ t, route, navigation }) => {
   const { styles } = useTheme({ styles: getStyles });
 
   const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
-  const { applications, addApplicationByChainId } = useBlockchainApplicationManagement();
+  const { addApplication } = useBlockchainApplicationManagement();
+  const { applications } = useBlockchainApplicationExplorer();
   const { chainID, variant } = route.params;
 
   const application = useMemo(
-    () => applications.data.filter((app) => app.chainID === chainID),
+    () => applications.data?.filter((app) => app.chainID === chainID) ?? [],
     [chainID, applications]
   )[0];
 
   const isPinned = checkPinByChainId(chainID);
+
+  const handleAddApplicationClick = () => {
+    addApplication(application);
+    navigation.navigate('AddApplicationSuccess');
+  };
+
+  if (applications.isLoading) {
+    return (
+      <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
+        <Text>Loading applications...</Text>
+      </ScrollView>
+    );
+  }
 
   const {
     name,
@@ -47,11 +63,6 @@ const ApplicationDetail = ({ t, route, navigation }) => {
     explorers,
     image,
   } = application;
-
-  const handleAddApplicationClick = () => {
-    addApplicationByChainId(chainID);
-    navigation.navigate('AddApplicationSuccess');
-  };
 
   return (
     <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
