@@ -1,28 +1,29 @@
-export const BLOCKCHAIN_APPLICATIONS_MOCK = [
-  {
-    name: 'Lisk',
-    chainID: 'aq02qkbb35u4jdq8szo3pnsq',
-    title: 'Lisk',
-    description: 'A blockchain application platform',
-    network: 'mainnet',
-    isDefault: true,
-    genesisBlock:
-      'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
-    apis: [{
-      rest: 'https://service.lisk.com',
-      rpc: 'wss://service.lisk.com',
-    }],
-    explorers: ['https://lisk.observer', 'https://explorer.lisk.io'],
-    images: {
-      logo: {
-        png: 'https://avatars.githubusercontent.com/u/16600915?s=200&v=4', // URL
-        svg: '', // URL
-      },
-      background: '#FFFFFF1A', // URL
+export const DEFAULT_BLOCKCHAIN_APPLICATION = {
+  name: 'Lisk',
+  chainID: 'aq02qkbb35u4jdq8szo3pnsq',
+  title: 'Lisk',
+  description: 'A blockchain application platform',
+  network: 'mainnet',
+  isDefault: true,
+  genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
+  apis: [{
+    rest: 'https://service.lisk.com',
+    rpc: ['wss://service.lisk.com'],
+  }],
+  explorers: ['https://lisk.observer', 'https://explorer.lisk.io'],
+  images: {
+    logo: {
+      png: 'https://avatars.githubusercontent.com/u/16600915?s=200&v=4', // URL
+      svg: '', // URL
     },
-    deposited: 681782312,
-    state: 'active',
+    background: '#FFFFFF1A', // URL
   },
+  deposited: 681782312,
+  state: 'active',
+};
+
+export const BLOCKCHAIN_APPLICATIONS_MOCK = [
+  DEFAULT_BLOCKCHAIN_APPLICATION,
   {
     name: 'Coleti',
     chainID: 'mi34vyyd12g2lkf0rza1irws',
@@ -102,8 +103,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     name: 'Kalipo',
     chainID: 'aq25derd17a4syc8aet3pryt',
     title: 'Kalipo',
-    description:
-      'A platform to support Decentralized Autonomous Organizations (DAOs)',
+    description: 'A platform to support Decentralized Autonomous Organizations (DAOs)',
     network: 'mainnet',
     isDefault: false,
     genesisBlock:
@@ -129,5 +129,6 @@ export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.
   (obj, val) => {
     obj[val.chainID] = val;
     return obj;
-  }, {}
+  },
+  {}
 );

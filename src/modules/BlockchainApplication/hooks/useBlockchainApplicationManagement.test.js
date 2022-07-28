@@ -52,30 +52,30 @@ describe('useBlockchainApplicationManagement hook', () => {
 
   const { result } = renderHook(() => useBlockchainApplicationManagement(), { wrapper });
 
-  it('addApplicationByChainId should not trigger on mounting', () => {
+  it('addApplication should not trigger on mounting', () => {
     expect(store.getActions()).toEqual([]);
   });
 
-  it('addApplicationByChainId should dispatch an action', () => {
-    const { addApplicationByChainId } = result.current;
+  it('addApplication should dispatch an action', () => {
+    const { addApplication } = result.current;
 
     const expectedAction = {
-      type: actionTypes.addApplicationByChainId,
+      type: actionTypes.addApplication,
       application: BLOCKCHAIN_APPLICATIONS_MOCK[3],
     };
 
     act(() => {
-      addApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[3]);
+      addApplication(BLOCKCHAIN_APPLICATIONS_MOCK[3]);
     });
 
     expect(store.getActions()).toEqual([expectedAction]);
   });
 
-  it('addApplicationByChainId should not dispatch an action while adding default application', () => {
-    const { addApplicationByChainId } = result.current;
+  it('addApplication should not dispatch an action while adding default application', () => {
+    const { addApplication } = result.current;
 
     act(() => {
-      addApplicationByChainId(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
+      addApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
     });
 
     expect(mockDispatch).not.toHaveBeenCalled();

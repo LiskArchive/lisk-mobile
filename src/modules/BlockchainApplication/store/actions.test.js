@@ -2,7 +2,7 @@ import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
 import actionTypes from './actionTypes';
 import {
   toggleApplicationPin,
-  addApplicationByChainId,
+  addApplication,
   deleteApplicationByChainId,
   setCurrentApplication,
 } from './actions';
@@ -22,11 +22,11 @@ describe('actions:  blockchainApplication', () => {
 
   it('should create an action to add blockchain application', () => {
     const expectedAction = {
-      type: actionTypes.addApplicationByChainId,
+      type: actionTypes.addApplication,
       application: sampleBlockchainApplication,
     };
 
-    expect(addApplicationByChainId(sampleBlockchainApplication)).toEqual(expectedAction);
+    expect(addApplication(sampleBlockchainApplication)).toEqual(expectedAction);
   });
 
   it('should create an action to delete blockchain application', () => {

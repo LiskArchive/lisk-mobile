@@ -46,17 +46,13 @@ export const applicationsReducer = (
 ) => {
   switch (type) {
     case actionTypes.setApplications:
-      state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {});
+      state = applications.reduce(
+        (acc, app) => ({ ...acc, [app.chainID]: app }),
+        {}
+      );
       return state;
-    case actionTypes.addApplicationByChainId:
-      // In cases where a new node for an existing application is being added,
-      // the new service url should be appended to the serviceURLs array of the application
-      if (application.chainID in state) {
-        state[application.chainID].serviceURLs.push(application.serviceURLs);
-      } else {
-        state[application.chainID] = application;
-      }
-      return state;
+    case actionTypes.addApplication:
+      return { ...state, [application.chainID]: application };
 
     case actionTypes.deleteApplicationByChainId: {
       delete state[chainId];
@@ -95,6 +91,9 @@ const blockchainApplicationsReducer = combineReducers({
   current: currentReducer,
 });
 
-const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer);
+const blockchainApplications = persistReducer(
+  persistConfig,
+  blockchainApplicationsReducer
+);
 
 export default blockchainApplications;

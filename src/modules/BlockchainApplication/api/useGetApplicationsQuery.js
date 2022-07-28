@@ -1,9 +1,7 @@
 /* eslint-disable max-statements */
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
-import { setApplications as setApplicationsAction } from '../store/actions';
 
 /**
  * @typedef {Object} GetBlockchainApplicationsMetaQuery
@@ -36,8 +34,6 @@ export function useGetApplicationsMetaQuery() {
   const [page, setPage] = useState(0);
 
   const timer = useRef();
-
-  const dispatch = useDispatch();
 
   function fetchData() {
     // TODO: Replace with real API call when backend is available.
@@ -82,7 +78,6 @@ export function useGetApplicationsMetaQuery() {
           setMeta(res.meta);
           setPage(page + 1);
           setIsFetching(false);
-          dispatch(setApplicationsAction(newData));
         })
         .catch((e) => {
           setError(e);
@@ -97,7 +92,6 @@ export function useGetApplicationsMetaQuery() {
         setData(res.data);
         setMeta(res.meta);
         setIsLoading(false);
-        dispatch(setApplicationsAction(res.data));
       })
       .catch((e) => setError(e));
 
