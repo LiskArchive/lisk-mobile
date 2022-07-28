@@ -9,6 +9,25 @@ export default {
       flex: 1,
       paddingVertical: boxes.boxPadding,
     },
+    urlContainer: {
+      borderWidth: 1,
+      borderColor: colors.light.platinumGray,
+      padding: 20,
+      borderRadius: 10,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    url: {
+      color: colors.light.ultramarineBlue
+    },
+    modal: {
+      height: 500,
+      zIndex: 2,
+      borderTopLeftRadius: 24,
+      borderTopRightRadius: 24,
+      padding: 20,
+    },
     title: {
       textAlign: 'center',
       marginBottom: 10,
