@@ -46,31 +46,13 @@ export const applicationsReducer = (
 ) => {
   switch (type) {
     case actionTypes.setApplications:
-      state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {});
+      state = applications.reduce(
+        (acc, app) => ({ ...acc, [app.chainID]: app }),
+        {}
+      );
       return state;
     case actionTypes.addApplication:
-      // In cases where a new node for an existing application is being added,
-      // the new api urls should be appended to the prev apis of the application.
-
-      // eslint-disable-next-line no-case-declarations
-      let updatedState;
-
-      if (state[application.chainID]) {
-        updatedState = {
-          ...state,
-          [application.chainID]: {
-            ...application,
-            apis: {
-              rest: state[application.chainID].apis.rest.concat(application.apis.rest),
-              rpc: state[application.chainID].apis.rpc.concat(application.apis.rpc),
-            },
-          },
-        };
-      } else {
-        updatedState = { ...state, [application.chainID]: application };
-      }
-
-      return updatedState;
+      return { ...state, [application.chainID]: application };
 
     case actionTypes.deleteApplicationByChainId: {
       delete state[chainId];
@@ -109,6 +91,9 @@ const blockchainApplicationsReducer = combineReducers({
   current: currentReducer,
 });
 
-const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer);
+const blockchainApplications = persistReducer(
+  persistConfig,
+  blockchainApplicationsReducer
+);
 
 export default blockchainApplications;

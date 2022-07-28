@@ -1,7 +1,9 @@
+/* eslint-disable max-statements */
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useState } from 'react';
 import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
+import ModalBox from 'react-native-modalbox';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
 import { useTheme } from 'hooks/useTheme';
@@ -12,18 +14,40 @@ import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchai
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
+import SelectNode from '../SelectNode';
 
 const SwitchApplication = ({ t, navigation }) => {
   const { applications } = useBlockchainApplicationManagement();
   const [, setApplication] = useCurrentBlockchainApplication();
   const { styles, theme } = useTheme({ styles: getStyles });
-  const selectApplication = (acc) => {
+  const [selectedApplication, setSelectedApplication] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const addApplication = () => {
+    navigation.navigate('AddApplication');
+  };
+
+  const toggleModal = (bool) => {
+    setIsModalOpen(bool);
+  };
+
+  const switchApplication = (acc) => {
     setApplication(acc);
     navigation.goBack();
   };
 
-  const addApplication = () => {
-    navigation.navigate('AddApplication');
+  const onUrlSelect = (item) => {
+    toggleModal(false);
+    switchApplication({ ...selectedApplication, serviceURL: item });
+  };
+
+  const selectApplication = (acc) => {
+    if (acc.apis.length > 1) {
+      setSelectedApplication(acc);
+      toggleModal(true);
+    } else {
+      switchApplication({ ...acc, serviceURL: acc.apis[0] });
+    }
   };
 
   return (
@@ -54,6 +78,21 @@ const SwitchApplication = ({ t, navigation }) => {
           <P style={styles.buttonText}>{t('application.manage.add.buttonText')}</P>
         </TouchableOpacity>
       </View>
+      <ModalBox
+        position="bottom"
+        isOpen={isModalOpen}
+        onClosed={() => toggleModal(false)}
+        style={styles.modal}
+      >
+        {selectedApplication && (
+          <SelectNode
+            styles={styles}
+            onPress={onUrlSelect}
+            application={selectedApplication}
+            closeModal={() => toggleModal(false)}
+          />
+        )}
+      </ModalBox>
     </SafeAreaView>
   );
 };

@@ -6,10 +6,10 @@ export const DEFAULT_BLOCKCHAIN_APPLICATION = {
   network: 'mainnet',
   isDefault: true,
   genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
-  apis: {
-    rest: ['https://service.lisk.com'],
+  apis: [{
+    rest: 'https://service.lisk.com',
     rpc: ['wss://service.lisk.com'],
-  },
+  }],
   explorers: ['https://lisk.observer', 'https://explorer.lisk.io'],
   images: {
     logo: {
@@ -31,11 +31,15 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     description: 'A Lisk-based NFT marketplace',
     network: 'mainnet',
     isDefault: false,
-    genesisBlock: 'https://downloads.coleti.com/lisk/mainnet/genesis_block.json.tar.gz',
-    apis: {
-      rest: ['https://service.coleti.com'],
-      rpc: ['wss://service.coleti.com'],
-    },
+    genesisBlock:
+      'https://downloads.coleti.com/lisk/mainnet/genesis_block.json.tar.gz',
+    apis: [{
+      rest: 'https://service.coleti.com',
+      rpc: 'wss://service.coleti.com',
+    }, {
+      rest: 'https://service2.coleti.com',
+      rpc: 'wss://service2.coleti.com',
+    }],
     explorers: ['https://coleti.observer', 'https://explorer.coleti.io'],
     images: {
       logo: {
@@ -54,11 +58,12 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     description: 'An educational platform built with Lisk SDK',
     network: 'mainnet',
     isDefault: false,
-    genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
-    apis: {
-      rest: ['https://service.doedu.com'],
-      rpc: ['wss://service.doedu.com'],
-    },
+    genesisBlock:
+      'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
+    apis: [{
+      rest: 'https://service.doedu.com',
+      rpc: 'wss://service.doedu.com',
+    }],
     explorers: ['https://doedu.observer', 'https://explorer.doedu.io'],
     images: {
       logo: {
@@ -77,11 +82,12 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     description: 'A decentralized social media NFT platform',
     network: 'mainnet',
     isDefault: false,
-    genesisBlock: 'https://downloads.enevti.com/lisk/mainnet/genesis_block.json.tar.gz',
-    apis: {
-      rest: ['https://service.enevti.com'],
-      rpc: ['wss://service.enevti.com'],
-    },
+    genesisBlock:
+      'https://downloads.enevti.com/lisk/mainnet/genesis_block.json.tar.gz',
+    apis: [{
+      rest: 'https://service.enevti.com',
+      rpc: 'wss://service.enevti.com',
+    }],
     explorers: ['https://enevti.observer', 'https://explorer.enevti.io'],
     images: {
       logo: {
@@ -100,11 +106,12 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
     description: 'A platform to support Decentralized Autonomous Organizations (DAOs)',
     network: 'mainnet',
     isDefault: false,
-    genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
-    apis: {
-      rest: ['https://service.lisk.com'],
-      rpc: ['wss://service.lisk.com'],
-    },
+    genesisBlock:
+      'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
+    apis: [{
+      rest: 'https://service.lisk.com',
+      rpc: 'wss://service.lisk.com',
+    }],
     explorers: ['https://lisk.observer', 'https://explorer.lisk.io'],
     images: {
       logo: {
