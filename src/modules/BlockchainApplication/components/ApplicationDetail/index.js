@@ -1,6 +1,8 @@
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
-import { ScrollView, View, ImageBackground, Image, Text } from 'react-native';
+import {
+  ScrollView, View, ImageBackground, Image, Text
+} from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import moment from 'moment';
 import { translate } from 'react-i18next';

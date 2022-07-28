@@ -11,7 +11,9 @@ import RefreshSvg from 'assets/svgs/RefreshSvg';
 import { colors } from 'constants/styleGuide';
 import getStyles from './styles';
 
-const SwipeableAccountItem = ({ account, styles, onPress, testID, theme, active }) => {
+const SwipeableAccountItem = ({
+  account, styles, onPress, testID, theme, active
+}) => {
   const { name: username, address } = account.metadata;
   return (
     <SwipeableRow

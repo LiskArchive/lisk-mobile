@@ -29,7 +29,6 @@ export function useBlockchainApplicationManagement() {
   const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
 
   const applications = useMemo(() => {
-    console.log('recalculating...');
     const data = Object.values(applicationsState)
       .map((app) => ({
         ...app,
@@ -40,8 +39,6 @@ export function useBlockchainApplicationManagement() {
     return { data };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pins, applicationsState, checkPinByChainId]);
-
-  console.log({ applicationsState, applications });
 
   const addApplication = useCallback(
     (application) => {
@@ -70,8 +67,9 @@ export function useBlockchainApplicationManagement() {
   );
 
   useEffect(() => {
-    if (Object.keys(applicationsState).length === 0)
+    if (Object.keys(applicationsState).length === 0) {
       dispatch(addApplicationAction([DEFAULT_BLOCKCHAIN_APPLICATION]));
+    }
   }, [applicationsState, dispatch]);
 
   return {

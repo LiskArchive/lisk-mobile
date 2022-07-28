@@ -40,7 +40,9 @@ export const pinsReducer = (state = initialState.pins, { type, chainId }) => {
  */
 export const applicationsReducer = (
   state = initialState.applications,
-  { type, applications, application, chainId }
+  {
+    type, applications, application, chainId
+  }
 ) => {
   switch (type) {
     case actionTypes.setApplications:
@@ -49,12 +51,14 @@ export const applicationsReducer = (
     case actionTypes.addApplication:
       // In cases where a new node for an existing application is being added,
       // the new service url should be appended to the serviceURLs array of the application
-      if (application.chainID in state) {
-        state[application.chainID].serviceURLs.push(application.serviceURLs);
+      // eslint-disable-next-line no-case-declarations
+      const newState = { ...state, [application.chainID]: application };
+      if (newState[application.chainID]) {
+        newState[application.chainID].serviceURLs.push(application.serviceURLs);
       } else {
-        state[application.chainID] = application;
+        newState[application.chainID] = application;
       }
-      return state;
+      return newState;
 
     case actionTypes.deleteApplicationByChainId: {
       delete state[chainId];

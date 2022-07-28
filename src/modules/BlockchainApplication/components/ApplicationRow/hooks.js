@@ -6,7 +6,9 @@ import DeleteSvg from 'assets/svgs/DeleteSvg';
 
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 
-export function useBlockchainApplicationRowActions({ t, application, variant, navigation }) {
+export function useBlockchainApplicationRowActions({
+  t, application, variant, navigation
+}) {
   const { togglePin } = usePinBlockchainApplication();
 
   let leftActions;
