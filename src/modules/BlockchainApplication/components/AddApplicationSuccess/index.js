@@ -7,9 +7,9 @@ const AddApplicationSuccess = ({ t, navigation }) => {
   return (
     <SuccessScreen
       illustration={<AddApplicationSuccessSvg />}
-      title={t('application.manage.successTitle')}
+      title={t('application.manage.add.successTitle')}
       onContinue={() => navigation.navigate('Main')}
-      buttonText={t('application.manage.buttons.continue')}
+      buttonText={t('application.manage.continueToWalletButtonText')}
     />
   );
 };

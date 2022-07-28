@@ -35,7 +35,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
     if (applications.isLoading) {
       return (
         <P style={[styles.message, styles.theme.message]}>
-          {t('blockchainApplicationsList.loadingText')}
+          {t('application.explore.applicationList.loadingText')}
         </P>
       );
     }
@@ -43,7 +43,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
     if (applications.isError) {
       return (
         <P style={[styles.message, styles.theme.message]}>
-          {t('blockchainApplicationsList.errorText')}
+          {t('application.explore.applicationList.errorText')}
         </P>
       );
     }
@@ -51,7 +51,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
     if (applications.data?.length === 0) {
       return (
         <P style={[styles.message, styles.theme.message]}>
-          {t('blockchainApplicationsList.emptyText')}
+          {t('application.explore.applicationList.emptyText')}
         </P>
       );
     }
@@ -75,13 +75,13 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
-        title={t('blockchainApplicationsList.title')}
+        title={t('application.explore.title')}
         noIcon
         rightIconComponent={() => (
           <IconButton
             onClick={() => setShowStatsModal(true)}
             icon={<StatsSvg height={20} />}
-            title={t('blockchainApplicationsList.statsButtonText')}
+            title={t('application.explore.statsButtonText')}
             titleStyle={{
               marginLeft: 8,
               color: theme === themes.dark ? colors.dark.mountainMist : colors.light.zodiacBlue,

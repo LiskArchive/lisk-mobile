@@ -365,22 +365,29 @@
       "lastCertificateHeight": "Last Certificate Height"
     },
     "manage": {
-      "add": "Add application",
-      "successTitle": "Perfect! Application has now been added",
-      "buttons": {
-        "addApplication": "Add application now",
-        "continue": "Continue to wallet"
-      }
-    }
-  },
-    "blockchainApplicationsList": {
+      "add": {
+        "buttonText": "Add application",
+        "successTitle": "Perfect! Application has now been added",
+        "confirmButtonText": "Add application now"
+      },
+      "delete": {
+        "title": "Remove application?",
+        "descriptionText": "This application will no longer be in your application list.",
+        "confirmButtonText": "Remove now"
+      },
+      "continueToWalletButtonText": "Continue to wallet" 
+    },
+    "explore":{
       "title": "Applications",
       "statsButtonText": "Stats",
-      "searchPlaceholder": "Search application",
-      "loadingText": "Loading applications...",
-      "errorText": "Error loading your applications.",
-      "emptyText": "You have no applications yet.",
-      "pinText": "Pin",
-      "unpinText": "Unpin"
-    }
+      "applicationList":{
+        "searchPlaceholder": "Search application",
+        "loadingText": "Loading applications...",
+        "errorText": "Error loading your applications.",
+        "emptyText": "You have no applications yet.",
+        "pinText": "Pin",
+        "unpinText": "Unpin",
+        "deleteText": "Delete"
+      }
+    }}
 }

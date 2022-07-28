@@ -342,40 +342,47 @@
   },
   "application": {
     "title": {
-      "switchApplication": "Switch application"
+      "switchApplication": "Anwendung wechseln"
     },
     "stats": {
-      "title": "",
-      "registered": "",
-      "active": "",
-      "terminated": "",
-      "totalSupply": "",
-      "staked": ""
+      "title": "Anwendungsstatistik",
+      "registered": "Eingetragen",
+      "active": "Activ",
+      "terminated": "Beendet",
+      "totalSupply": "Gesamtversorgung",
+      "staked": "Abgesteckt"
     },
     "details": {
-      "deposited": "",
-      "chainID": "",
-      "lastUpdated": "",
-      "status": "",
-      "lastCertificateHeight": ""
+      "deposited": "Eingezahlt",
+      "chainID": "Ketten-ID",
+      "lastUpdated": "Zuletzt aktualisiert",
+      "status": "Status",
+      "lastCertificateHeight": "Höhe des letzten Zertifikats"
     },
     "manage": {
-      "add": "",
-      "successTitle": "",
-      "buttons": {
-        "continue": "",
-        "addApplication": ""
+      "add": {
+        "buttonText": "Anwendung hinzufügen",
+        "successTitle": "Perfekt! Anwendung wurde jetzt hinzugefügt",
+        "confirmButtonText": "Anwendung jetzt hinzufügen"
+      },
+      "delete": {
+        "title": "Anwendung entfernen?",
+        "descriptionText": "Diese Anwendung befindet sich nicht mehr in Ihrer Anwendungsliste.",
+        "confirmButtonText": "Jetzt entfernen"
+      },
+      "continueToWalletButtonText": "Weiter zur Geldbörse"
+    },
+    "explore":{
+      "title": "Anwendungen",
+      "statsButtonText": "Statistiken",
+      "applicationList":{
+        "searchPlaceholder": "Suchanwendung",
+        "loadingText": "Anwendungen werden geladen...",
+        "errorText": "Fehler beim Laden Ihrer Anwendungen.",
+        "emptyText": "Sie haben noch keine Bewerbungen.",
+        "pinText": "Pin",
+        "unpinText": "Unpin",
+        "deleteText": "Löschen"
       }
-    }
-  },
-  "blockchainApplicationsList": {
-    "title": "Anwendungen",
-    "statsButtonText": "Stats",
-    "searchPlaceholder": "Suchanwendung",
-    "loadingText": "Anwendungen werden geladen...",
-    "errorText": "Fehler beim Laden Ihrer Anwendungen.",
-    "emptyText": "Sie haben noch keine Bewerbungen.",
-    "pinText": "Pin",
-    "unpinText": "Unpin"
-  }
+    }}
 }

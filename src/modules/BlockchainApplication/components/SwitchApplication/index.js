@@ -51,7 +51,7 @@ const SwitchApplication = ({ t, navigation }) => {
           <View style={styles.icon}>
             <AddSvg />
           </View>
-          <P style={styles.buttonText}>{t('application.manage.add')}</P>
+          <P style={styles.buttonText}>{t('application.manage.add.buttonText')}</P>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

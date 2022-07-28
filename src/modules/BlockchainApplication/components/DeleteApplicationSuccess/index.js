@@ -14,7 +14,7 @@ function DeleteApplicationSuccess({ t, navigation, route }) {
       title={'Application has now been removed'}
       description={`You can always add ${application.name} again to your application list.`}
       onContinue={() => navigation.navigate('Main')}
-      buttonText={t('application.manage.buttons.continue')}
+      buttonText={t('application.manage.continueToWalletButtonText')}
     />
   );
 }

@@ -11,7 +11,7 @@ import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApp
 
 import getDeleteBlockchainApplicationStyles from './styles';
 
-function DeleteBlockchainApplication({ navigation, route }) {
+function DeleteBlockchainApplication({ t, navigation, route }) {
   const { theme, styles } = useTheme({ styles: getDeleteBlockchainApplicationStyles() });
 
   const { deleteApplicationByChainId } = useBlockchainApplicationManagement();
@@ -34,7 +34,7 @@ function DeleteBlockchainApplication({ navigation, route }) {
       />
 
       <View style={[styles.innerContainer]}>
-        <H2 style={[styles.title, styles.theme.title]}>Remove application?</H2>
+        <H2 style={[styles.title, styles.theme.title]}>{t('application.manage.delete.title')}</H2>
 
         <View style={[styles.applicationNameContainer]}>
           <Image
@@ -48,13 +48,13 @@ function DeleteBlockchainApplication({ navigation, route }) {
         </View>
 
         <P style={[styles.descriptionText, styles.theme.descriptionText]}>
-          This application will no longer be in your application list.
+          {t('application.manage.delete.descriptionText')}
         </P>
       </View>
 
       <PrimaryButton
         onClick={handleDeleteApplicationClick}
-        title={'Remove now'}
+        title={t('application.manage.delete.confirmButtonText')}
         style={[styles.submitButton]}
       />
     </View>

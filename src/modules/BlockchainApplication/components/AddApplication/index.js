@@ -14,7 +14,7 @@ const AddApplication = ({ navigation, t }) => {
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton title={t('blockchainApplicationsList.title')} onPress={navigation.goBack} />
+      <HeaderBackButton title={t('application.explore.title')} onPress={navigation.goBack} />
       <ApplicationList
         applications={applications}
         Component={BlockchainApplicationRow}
