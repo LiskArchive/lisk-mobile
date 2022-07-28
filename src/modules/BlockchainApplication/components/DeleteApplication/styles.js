@@ -1,6 +1,4 @@
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default function getDeleteBlockchainApplicationStyles() {
   return {
@@ -48,11 +46,29 @@ export default function getDeleteBlockchainApplicationStyles() {
       container: {
         backgroundColor: colors.light.white,
       },
+      title: {
+        color: colors.light.zodiacBlue,
+      },
+      applicationNameLabel: {
+        color: colors.light.zodiacBlue,
+      },
+      descriptionText: {
+        color: colors.light.zodiacBlue,
+      },
     },
 
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
+      },
+      title: {
+        color: colors.dark.white,
+      },
+      applicationNameLabel: {
+        color: colors.dark.white,
+      },
+      descriptionText: {
+        color: colors.dark.white,
       },
     },
   };

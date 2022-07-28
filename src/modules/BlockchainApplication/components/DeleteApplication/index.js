@@ -34,7 +34,7 @@ function DeleteBlockchainApplication({ navigation, route }) {
       />
 
       <View style={[styles.innerContainer]}>
-        <H2 style={[styles.title]}>Remove application?</H2>
+        <H2 style={[styles.title, styles.theme.title]}>Remove application?</H2>
 
         <View style={[styles.applicationNameContainer]}>
           <Image
@@ -47,7 +47,7 @@ function DeleteBlockchainApplication({ navigation, route }) {
           </P>
         </View>
 
-        <P style={[styles.descriptionText]}>
+        <P style={[styles.descriptionText, styles.theme.descriptionText]}>
           This application will no longer be in your application list.
         </P>
       </View>
