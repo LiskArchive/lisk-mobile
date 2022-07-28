@@ -9,7 +9,9 @@ import Input from 'components/shared/toolBox/input';
 import Icon from 'components/shared/toolBox/icon';
 import getBlockchainApplicationsListStyles from './styles';
 
-function ApplicationList({ t, applications, Component, onItemPress, navigation, ...props }) {
+function ApplicationList({
+  t, applications, Component, onItemPress, navigation, ...props
+}) {
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsListStyles(),
   });

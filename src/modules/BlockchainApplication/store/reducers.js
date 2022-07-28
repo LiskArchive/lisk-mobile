@@ -40,7 +40,9 @@ export const pinsReducer = (state = initialState.pins, { type, chainId }) => {
  */
 export const applicationsReducer = (
   state = initialState.applications,
-  { type, applications, application, chainId }
+  {
+    type, applications, application, chainId
+  }
 ) => {
   switch (type) {
     case actionTypes.setApplications:
