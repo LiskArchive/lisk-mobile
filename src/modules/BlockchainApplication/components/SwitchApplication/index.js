@@ -13,7 +13,7 @@ import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApp
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
 
-const SwitchAccount = ({ t, navigation }) => {
+const SwitchApplication = ({ t, navigation }) => {
   const { applications } = useBlockchainApplicationManagement();
   const [, setApplication] = useCurrentBlockchainApplication();
   const { styles, theme } = useTheme({ styles: getStyles });
@@ -33,16 +33,15 @@ const SwitchAccount = ({ t, navigation }) => {
         title={t('application.title.switchApplication')}
         onPress={navigation.goBack}
         rightIcon="cross"
-        rightColor={
-          theme === themes.dark ? colors.dark.white : colors.light.zodiacBlue
-        }
+        rightColor={theme === themes.dark ? colors.dark.white : colors.light.zodiacBlue}
         onRightPress={navigation.goBack}
       />
       <ApplicationList
-        applications={applications.data}
+        applications={applications}
         Component={BlockchainApplicationRow}
         onItemPress={selectApplication}
         showActive
+        navigation={navigation}
       />
       <View style={styles.bottom}>
         <TouchableOpacity
@@ -52,11 +51,11 @@ const SwitchAccount = ({ t, navigation }) => {
           <View style={styles.icon}>
             <AddSvg />
           </View>
-          <P style={styles.buttonText}>{t('application.manage.add')}</P>
+          <P style={styles.buttonText}>{t('application.manage.add.buttonText')}</P>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
 
-export default translate()(SwitchAccount);
+export default translate()(SwitchApplication);

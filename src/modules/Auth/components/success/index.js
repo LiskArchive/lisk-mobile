@@ -20,7 +20,7 @@ const SuccessScreen = ({
     <View style={[styles.container]}>
       <View style={styles.illustration}>
         {address ? (
-          <View style={styles.avatarContainer} >
+          <View style={styles.avatarContainer}>
             <Avatar address={address} size={40} />
             <Text style={styles.address}>{address}</Text>
           </View>
@@ -29,9 +29,7 @@ const SuccessScreen = ({
         )}
       </View>
       <Text style={[styles.title, styles.theme.title]}>{title}</Text>
-      <Text style={[styles.description, styles.theme.description]}>
-        {description}
-      </Text>
+      <Text style={[styles.description, styles.theme.description]}>{description}</Text>
       {children}
     </View>
     <PrimaryButton

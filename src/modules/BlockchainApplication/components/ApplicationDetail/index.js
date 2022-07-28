@@ -1,6 +1,7 @@
+/* eslint-disable max-statements */
 import React, { useMemo } from 'react';
 import {
-  ScrollView, View, ImageBackground, Image
+  ScrollView, View, ImageBackground, Image, Text
 } from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import moment from 'moment';
@@ -16,6 +17,7 @@ import PinSvg from 'assets/svgs/PinSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 import getStyles from './styles';
+import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 /**
  *
  * @param {Object} props
@@ -28,15 +30,29 @@ const ApplicationDetail = ({ t, route, navigation }) => {
   const { styles } = useTheme({ styles: getStyles });
 
   const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
-  const { applications, addApplicationByChainId } = useBlockchainApplicationManagement();
+  const { addApplication } = useBlockchainApplicationManagement();
+  const { applications } = useBlockchainApplicationExplorer();
   const { chainID, variant } = route.params;
 
   const application = useMemo(
-    () => applications.data.filter((app) => app.chainID === chainID),
+    () => applications.data?.filter((app) => app.chainID === chainID) ?? [],
     [chainID, applications]
   )[0];
 
   const isPinned = checkPinByChainId(chainID);
+
+  const handleAddApplicationClick = () => {
+    addApplication(application);
+    navigation.navigate('AddApplicationSuccess');
+  };
+
+  if (applications.isLoading) {
+    return (
+      <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
+        <Text>Loading applications...</Text>
+      </ScrollView>
+    );
+  }
 
   const {
     name,
@@ -49,11 +65,6 @@ const ApplicationDetail = ({ t, route, navigation }) => {
     explorers,
     image,
   } = application;
-
-  const addApplication = () => {
-    addApplicationByChainId(chainID);
-    navigation.navigate('AddApplicationSuccess');
-  };
 
   return (
     <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
@@ -91,15 +102,8 @@ const ApplicationDetail = ({ t, route, navigation }) => {
       <View style={[styles.flex, styles.body]}>
         <View style={styles.titleRow}>
           <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
-          <TouchableOpacity
-            style={styles.pinIcon}
-            onPress={() => togglePin(chainID)}
-          >
-            <PinSvg
-              variant={isPinned ? 'fill' : 'outline'}
-              width={25}
-              height={25}
-            />
+          <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
+            <PinSvg variant={isPinned ? 'fill' : 'outline'} width={25} height={25} />
           </TouchableOpacity>
         </View>
         <P style={[styles.address, styles.theme.address]}>{address}</P>
@@ -114,48 +118,34 @@ const ApplicationDetail = ({ t, route, navigation }) => {
         <View style={styles.stats}>
           <View style={styles.flex}>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {t('application.details.chainID')}{' '}
-              </P>
+              <P style={styles.smallTitle}>{t('application.details.chainID')} </P>
               <P style={[styles.value, styles.theme.value]}>{chainID}</P>
             </View>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {t('application.details.status')}{' '}
-              </P>
-              <View
-                style={[styles.stateContainer, styles[`${state}Container`]]}
-              >
-                <P style={[styles.value, styles[state], styles.theme[state]]}>
-                  {state}
-                </P>
+              <P style={styles.smallTitle}>{t('application.details.status')} </P>
+              <View style={[styles.stateContainer, styles[`${state}Container`]]}>
+                <P style={[styles.value, styles[state], styles.theme[state]]}>{state}</P>
               </View>
             </View>
           </View>
           <View style={styles.flex}>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {t('application.details.lastUpdated')}{' '}
-              </P>
+              <P style={styles.smallTitle}>{t('application.details.lastUpdated')} </P>
               <P style={[styles.value, styles.theme.value]}>
                 {moment(lastUpdated).format('D MMM YYYY')}
               </P>
             </View>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {t('application.details.lastCertificateHeight')}
-              </P>
-              <P style={[styles.value, styles.theme.value]}>
-                {lastCertificateHeight}
-              </P>
+              <P style={styles.smallTitle}>{t('application.details.lastCertificateHeight')}</P>
+              <P style={[styles.value, styles.theme.value]}>{lastCertificateHeight}</P>
             </View>
           </View>
         </View>
         {variant === 'manage' && (
           <View>
             <PrimaryButton
-              onClick={addApplication}
-              title={t('application.manage.buttons.addApplication')}
+              onClick={handleAddApplicationClick}
+              title={t('application.manage.add.confirmButtonText')}
             />
           </View>
         )}

@@ -48,15 +48,29 @@ export const applicationsReducer = (
     case actionTypes.setApplications:
       state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {});
       return state;
-    case actionTypes.addApplicationByChainId:
+    case actionTypes.addApplication:
       // In cases where a new node for an existing application is being added,
-      // the new service url should be appended to the serviceURLs array of the application
-      if (application.chainID in state) {
-        state[application.chainID].serviceURLs.push(application.serviceURLs);
+      // the new api urls should be appended to the prev apis of the application.
+
+      // eslint-disable-next-line no-case-declarations
+      let updatedState;
+
+      if (state[application.chainID]) {
+        updatedState = {
+          ...state,
+          [application.chainID]: {
+            ...application,
+            apis: {
+              rest: state[application.chainID].apis.rest.concat(application.apis.rest),
+              rpc: state[application.chainID].apis.rpc.concat(application.apis.rpc),
+            },
+          },
+        };
       } else {
-        state[application.chainID] = application;
+        updatedState = { ...state, [application.chainID]: application };
       }
-      return state;
+
+      return updatedState;
 
     case actionTypes.deleteApplicationByChainId: {
       delete state[chainId];

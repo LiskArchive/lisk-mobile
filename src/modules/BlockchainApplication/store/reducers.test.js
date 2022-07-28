@@ -35,7 +35,7 @@ describe('BlockchainApplication reducers', () => {
         lastUpdated: 789456123,
       };
       const actionData = {
-        type: actionTypes.addApplicationByChainId,
+        type: actionTypes.addApplication,
         application: newApplication,
       };
       const changedState = applicationsReducer(MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK, actionData);
