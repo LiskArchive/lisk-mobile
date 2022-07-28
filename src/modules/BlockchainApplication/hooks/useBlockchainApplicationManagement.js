@@ -68,7 +68,7 @@ export function useBlockchainApplicationManagement() {
 
   useEffect(() => {
     if (Object.keys(applicationsState).length === 0) {
-      dispatch(addApplicationAction([DEFAULT_BLOCKCHAIN_APPLICATION]));
+      dispatch(addApplicationAction(DEFAULT_BLOCKCHAIN_APPLICATION));
     }
   }, [applicationsState, dispatch]);
 
