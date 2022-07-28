@@ -22,7 +22,7 @@ export default {
       color: colors.light.ultramarineBlue
     },
     modal: {
-      height: 500,
+      height: 300,
       zIndex: 2,
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
