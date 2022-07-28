@@ -34,16 +34,18 @@ export function useBlockchainApplicationRowActions({
       break;
 
     case 'manage':
-      rightActions = [
-        {
-          title: t('application.explore.applicationList.deleteText'),
-          color: colors.light.furyRed,
-          icon: () => <DeleteSvg color={colors.light.white} />,
-          onPress: () => {
-            navigation.navigate('DeleteApplication', { application });
+      if (!application.isDefault) {
+        rightActions = [
+          {
+            title: t('application.explore.applicationList.deleteText'),
+            color: colors.light.furyRed,
+            icon: () => <DeleteSvg color={colors.light.white} />,
+            onPress: () => {
+              navigation.navigate('DeleteApplication', { application });
+            },
           },
-        },
-      ];
+        ];
+      }
       break;
 
     default:
