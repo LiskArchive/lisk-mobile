@@ -6,10 +6,9 @@ export default () => ({
   common: {
     wrapper: {
       flex: 1,
-      padding: boxes.boxPadding,
-      marginVertical: boxes.boxPadding
     },
     container: {
+      padding: boxes.boxPadding,
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center'
@@ -39,7 +38,8 @@ export default () => ({
       padding: 10
     },
     continueButton: {
-      paddingHorizontal: 20
+      paddingHorizontal: 20,
+      margin: boxes.boxPadding,
     }
   },
 
