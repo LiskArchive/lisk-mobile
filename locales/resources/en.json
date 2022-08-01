@@ -244,17 +244,18 @@
   "Insert public address": "Insert public address",
   "settings": {
     "menu": {
-      "backup_passphrase": "Backup your passphrase",
+      "backupPassphrase": "Backup your passphrase",
       "about": "About Lisk",
       "dark_mode": "Dark mode",
       "disabled": "Disabled",
       "enabled": "Enabled",
-      "discreet_mode": "Discreet mode",
+      "discreetMode": "Discreet mode",
       "terms": "Terms of use",
+      "privacyPolicy": "Privacy Policy",
       "currency": "Currency"
     },
     "descriptions": {
-      "discreet_mode": "Hide balance and transaction amounts."
+      "discreetMode": "Hide balance and transaction amounts."
     },
     "backup_phrase": {
       "title": "Backup secret recovery phrase",
@@ -263,7 +264,7 @@
     }
   },
   "multisignature": {
-    "account_details": "Multisignature account details",
+    "accountDetails": "Multisignature account details",
     "description1": "This is a multisignature account, which allows a group of users to control shared LSK.",
     "description2": "This account requires {{numberOfSignatures}} signatures to create a transaction.",
     "info": {
@@ -286,8 +287,8 @@
   },
   "fingerprint": {
     "unauthorized": "Unauthorized! Please try again.",
-    "face_id": "Look at the front camera to authenticate",
-    "touch_id": "Place your finger over the touch sensor to authenticate"
+    "faceId": "Look at the front camera to authenticate",
+    "touchId": "Place your finger over the touch sensor to authenticate"
   },
   "bookmarks": {
     "disabled": {
@@ -311,37 +312,86 @@
   "auth": {
     "setup": {
       "add_account": "Add account",
-      "manage_accounts": "Manage accounts",
-      "switch_account": "Switch account",
-      "delete_account": "Choose account",
-      "remove_account": "Remove account?",
-      "remove_account_description": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
-      "decrypt_passphrase": "Decrypt your secret recovery phrase",
-      "add_account_description": "Enter your secret recovery phrase to manage your account",
-      "password_setup_title": "Set up device password",
-      "password_setup_description": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
-      "password_setup_success_title": "Perfect! You're all set",
-      "password_setup_success_description": "You can now download encrypted secret recovery phrase.",
+      "manageAccounts": "Manage accounts",
+      "switchAccount": "Switch account",
+      "deleteAccount": "Choose account",
+      "removeAccount": "Remove account?",
+      "removeAccount_description": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
+      "decryptPassphrase": "Decrypt your secret recovery phrase",
+      "addAccountDescription": "Enter your secret recovery phrase to manage your account",
+      "passwordSetupTitle": "Set up device password",
+      "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
+      "passwordSetupSuccessTitle": "Perfect! You're all set",
+      "passwordSetupSuccessDescription": "You can now download encrypted secret recovery phrase.",
       "secret_phrase": "Secret recovery phrase",
       "restore_file": "Restore from file",
       "buttons": {
         "download": "Download",
         "remove_now": "Remove now",
-        "password_setup_continue": "Continue to Dashboard",
+        "passwordSetupContinue": "Continue to Dashboard",
         "save_account": "Save account",
-        "add_another_account": "Add another account",
-        "remove_account": "Remove an account"
-    }
+        "addAnotherAccount": "Add another account",
+        "removeAccount": "Remove an account"
+      }
     },
     "form": {
-      "enter_password": "Enter password",
-      "confirm_password": "Confirm your password",
-      "account_name": "Account name (optional)",
-      "password_setup_continue": "Continue to Dashboard",
+      "enterPassword": "Enter password",
+      "confirmPassword": "Confirm your password",
+      "accountName": "Account name (optional)",
+      "passwordSetupContinue": "Continue to Dashboard",
       "errors": {
-        "password_error": "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character",
-        "confirm_password_error": "Confirm that passwords match"
+        "passwordError": "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character",
+        "confirmPasswordError": "Confirm that passwords match"
       }
     }
-  }
+  },
+  "application": {
+    "title": {
+      "switchApplication": "Switch application"
+    },
+    "stats": {
+      "title": "Application Stats",
+      "registered": "Registered",
+      "active": "Active",
+      "terminated": "Terminated",
+      "totalSupply": "Total Supply",
+      "staked": "Staked"
+    },
+    "details": {
+      "deposited": "Deposited",
+      "chainID": "Chain ID",
+      "lastUpdated": "Last Updated",
+      "status": "Status",
+      "lastCertificateHeight": "Last Certificate Height"
+    },
+    "manage": {
+      "add": {
+        "buttonText": "Add application",
+        "successTitle": "Perfect! Application has now been added",
+        "confirmButtonText": "Add application now"
+      },
+      "delete": {
+        "title": "Remove application?",
+        "descriptionText": "This application will no longer be in your application list.",
+        "confirmButtonText": "Remove now"
+      },
+      "deleteDefaultApplicationModal": {
+        "description": "The default application can not be removed",
+        "buttonText": "Continue to Applications"
+      },
+      "continueToWalletButtonText": "Continue to wallet" 
+    },
+    "explore":{
+      "title": "Applications",
+      "statsButtonText": "Stats",
+      "applicationList":{
+        "searchPlaceholder": "Search application",
+        "loadingText": "Loading applications...",
+        "errorText": "Error loading your applications.",
+        "emptyText": "You have no applications yet.",
+        "pinText": "Pin",
+        "unpinText": "Unpin",
+        "deleteText": "Delete"
+      }
+    }}
 }

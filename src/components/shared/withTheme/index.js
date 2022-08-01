@@ -7,6 +7,7 @@ const getDisplayName = Component =>
   Component.displayName || Component.name || 'Component';
 
 /**
+ * @deprecated - Use useTheme hook instead.
  * React Navigation has a problem with rendering components as
  * route handlers when they're wrapped with React's forwardRef API.
  * Because of this, we need to avoid using refs in them.
@@ -15,7 +16,7 @@ const getDisplayName = Component =>
  * However, it's safe to use refs in child components and forwardRefs flag
  * should be true when wrapping them with this HOC.
  */
-export default (WrappedComponent, styles, forwardRefs = false) => {
+const withTheme = (WrappedComponent, styles, forwardRefs = false) => {
   class WithTheme extends React.Component {
     render() {
       // normalized the forwarded reference
@@ -52,3 +53,5 @@ export default (WrappedComponent, styles, forwardRefs = false) => {
     ))
     : HoistedWithTheme;
 };
+
+export default withTheme;

@@ -33,7 +33,7 @@ const SwitchAccount = ({
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
-        title={t('auth.setup.switch_account')}
+        title={t('auth.setup.switchAccount')}
         onPress={navigation.goBack} />
       <ScrollView style={styles.container} >
         {accounts.map(acc =>
@@ -46,7 +46,7 @@ const SwitchAccount = ({
           icon="user"
           iconStyle={styles.icon}
           iconSize={20}
-          title={t('auth.setup.buttons.add_another_account')}
+          title={t('auth.setup.buttons.addAnotherAccount')}
           style={[styles.button, styles.outline, styles.theme.outline]}
         />
       </View>

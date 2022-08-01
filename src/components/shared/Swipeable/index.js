@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
-import {
-  Animated, Text, View
-} from 'react-native';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { Animated, Text, View } from 'react-native';
+import BaseSwipeable from 'react-native-gesture-handler/Swipeable';
 import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 
-const DragglabeItem = ({ children, leftActions, rightActions }) => {
-  const swipeableRow = useRef();
+const Swipeable = ({
+  children, leftActions, rightActions, style, enabled = true
+}) => {
+  const swipeableRef = useRef();
 
   const renderAction = (text, color, icon, onPress, x, progress) => {
     const trans = progress.interpolate({
@@ -16,7 +16,7 @@ const DragglabeItem = ({ children, leftActions, rightActions }) => {
     });
 
     const close = () => {
-      swipeableRow.current?.close();
+      swipeableRef.current?.close();
     };
 
     const pressHandler = () => {
@@ -27,10 +27,7 @@ const DragglabeItem = ({ children, leftActions, rightActions }) => {
     return (
       <Animated.View style={[{ flex: 1, transform: [{ translateX: trans }] }]}>
         <RectButton
-          style={[
-            styles.rightAction,
-            { backgroundColor: color, paddingVertical: 5 },
-          ]}
+          style={[styles.rightAction, { backgroundColor: color, paddingVertical: 5 }]}
           onPress={pressHandler}
         >
           <View
@@ -89,21 +86,23 @@ const DragglabeItem = ({ children, leftActions, rightActions }) => {
   );
 
   const updateRef = (ref) => {
-    swipeableRow.current = ref;
+    swipeableRef.current = ref;
   };
 
   return (
-    <Swipeable
+    <BaseSwipeable
+      enabled={enabled}
       ref={updateRef}
+      containerStyle={style}
       friction={2}
       enableTrackpadTwoFingerGesture
       rightThreshold={40}
-      renderLeftActions={leftActions.length && renderLeftActions}
-      renderRightActions={rightActions.length && renderRightActions}
+      renderLeftActions={leftActions && leftActions.length && renderLeftActions}
+      renderRightActions={rightActions && rightActions.length && renderRightActions}
     >
       {children}
-    </Swipeable>
+    </BaseSwipeable>
   );
 };
 
-export default DragglabeItem;
+export default Swipeable;

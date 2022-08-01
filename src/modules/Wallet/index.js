@@ -80,6 +80,7 @@ const Wallet = ({
       ? [...transactions.confirmed]
       : ['emptyState'];
     content = (
+      // TODO: Use InfiniteScrollList instead when react-query is implemented.
       <InfiniteScrollView
         scrollEventThrottle={8}
         refresh={refresh}

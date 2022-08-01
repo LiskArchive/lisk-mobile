@@ -18,7 +18,8 @@ const common = {
   mountainMist: '#9999A0',
   silverGrey: '#C5CFE4',
   furyRed: '#FF4557',
-  volcanicSand: '#4D4D50'
+  volcanicSand: '#4D4D50',
+  yellowCopacabana: '#F7E36D'
 };
 
 const light = {

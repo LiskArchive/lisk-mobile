@@ -7,10 +7,7 @@ import middleWares from './middlewares';
 export * from './selectors';
 
 const rootReducer = combineReducers(reducers);
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(...middleWares))
-);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(...middleWares)));
 export const persistedStore = persistStore(store);
 
 export default store;

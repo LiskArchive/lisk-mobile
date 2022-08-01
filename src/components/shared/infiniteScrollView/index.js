@@ -5,6 +5,7 @@ import {
 import { themes, colors } from 'constants/styleGuide';
 
 /**
+ * @deprecated - Use InfiniteScrollList instead.
  * InfiniteScrollView is a wrapper for react native ScrollView
  * component.
  * Accepts 3 parameter

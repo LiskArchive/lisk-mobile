@@ -12,6 +12,7 @@ import Wallet from 'modules/Wallet';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
+import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import Intro from 'components/screens/intro';
@@ -24,6 +25,12 @@ import ManageAccount from 'modules/Auth/ManageAccount';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import SwitchAccount from 'modules/Auth/SwitchAccount';
 import DeleteAccount from 'modules/Auth/RemoveAccount';
+import SwitchApplication from 'modules/BlockchainApplication/components/SwitchApplication';
+import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
+import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
+import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
+import DeleteApplication from '../modules/BlockchainApplication/components/DeleteApplication';
+import DeleteApplicationSuccess from '../modules/BlockchainApplication/components/DeleteApplicationSuccess';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './appNavigator';
 
@@ -35,7 +42,7 @@ const darkTabs = {
   background: colors.light.white,
   card: colors.light.white,
   text: colors.light.tabBarText,
-  border: 'transparent'
+  border: 'transparent',
 };
 
 const lightTabs = {
@@ -44,14 +51,14 @@ const lightTabs = {
   background: colors.dark.white,
   card: colors.dark.black,
   text: colors.dark.tabBarText,
-  border: 'transparent'
+  border: 'transparent',
 };
 
 const MainNavigator = () => {
   const { theme } = useSelector((state) => state.settings);
   const themeColors = {
     dark: theme === 'light',
-    colors: theme === 'light' ? darkTabs : lightTabs
+    colors: theme === 'light' ? darkTabs : lightTabs,
   };
 
   return (
@@ -63,19 +70,81 @@ const MainNavigator = () => {
             component={Register}
             options={navigationOptions.Register}
           />
-          <MainStack.Screen name="AuthMethod" component={AuthMethod} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="SwitchAccount" component={SwitchAccount} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="DeleteAccount" component={DeleteAccount} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="DecryptPhrase" component={DecryptPhrase} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="ManageAccount" component={ManageAccount} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="SecretRecoveryPhrase" component={SecretRecoveryPhrase} options={navigationOptions.SignIn} />
-          <MainStack.Screen name="PasswordSetupForm" component={PasswordSetupForm} options={navigationOptions.SignIn} />
+          <MainStack.Screen
+            name="AuthMethod"
+            component={AuthMethod}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="SwitchAccount"
+            component={SwitchAccount}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="DeleteAccount"
+            component={DeleteAccount}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="DecryptPhrase"
+            component={DecryptPhrase}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="ManageAccount"
+            component={ManageAccount}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="SecretRecoveryPhrase"
+            component={SecretRecoveryPhrase}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="PasswordSetupForm"
+            component={PasswordSetupForm}
+            options={navigationOptions.SignIn}
+          />
           <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
-          <MainStack.Screen name="Main" component={AppNavigator} options={navigationOptions.NoHeader} />
+          <MainStack.Screen
+            name="Main"
+            component={AppNavigator}
+            options={navigationOptions.NoHeader}
+          />
           <MainStack.Screen
             name="AddBookmark"
             component={AddBookmark}
             options={navigationOptions.AddBookmark}
+          />
+          <MainStack.Screen
+            name="SwitchApplication"
+            component={SwitchApplication}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="AddApplication"
+            component={AddApplication}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="ApplicationDetail"
+            component={ApplicationDetail}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="AddApplicationSuccess"
+            component={AddApplicationSuccess}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="DeleteApplication"
+            component={DeleteApplication}
+            options={navigationOptions.SignIn}
+          />
+          <MainStack.Screen
+            name="DeleteApplicationSuccess"
+            component={DeleteApplicationSuccess}
+            options={navigationOptions.SignIn}
           />
           <MainStack.Screen name="About" component={About} options={navigationOptions.About} />
           <MainStack.Screen
@@ -84,6 +153,11 @@ const MainNavigator = () => {
             options={navigationOptions.CurrencySelection}
           />
           <MainStack.Screen name="Terms" component={Terms} options={navigationOptions.Terms} />
+          <MainStack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicy}
+            options={navigationOptions.PrivacyPolicy}
+          />
           <MainStack.Screen
             name="TxDetail"
             component={TransactionDetails}
