@@ -97,8 +97,8 @@ function BlockchainApplicationRow({
         coverScreen
       >
         <ErrorScreen
-          description="The default application can not be removed"
-          buttonText="Continue to Applications"
+          description={t('application.manage.deleteDefaultApplicationModal.description')}
+          buttonText={t('application.manage.deleteDefaultApplicationModal.buttonText')}
           onContinue={() => setShowDeleteDefaultApplicationModal(false)}
         />
 
