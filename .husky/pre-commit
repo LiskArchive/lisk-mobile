@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+echo "💅 Linting code"
 npx eslint --quiet ./
