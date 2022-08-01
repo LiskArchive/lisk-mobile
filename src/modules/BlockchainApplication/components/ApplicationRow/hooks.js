@@ -11,7 +11,7 @@ export function useBlockchainApplicationRowActions({
   application,
   variant,
   navigation,
-  setShowCannotDeleteDefaultApplicationModal
+  setShowDeleteDefaultApplicationModal
 }) {
   const { togglePin } = usePinBlockchainApplication();
 
@@ -46,7 +46,7 @@ export function useBlockchainApplicationRowActions({
           icon: () => <DeleteSvg color={colors.light.white} />,
           onPress: () => {
             if (application.isDefault) {
-              setShowCannotDeleteDefaultApplicationModal(true);
+              setShowDeleteDefaultApplicationModal(true);
             } else {
               navigation.navigate('DeleteApplication', { application });
             }

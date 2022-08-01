@@ -35,8 +35,8 @@ function BlockchainApplicationRow({
   navigation,
 }) {
   const [
-    showCannotDeleteDefaultApplicationModal,
-    setShowCannotDeleteDefaultApplicationModal
+    showDeleteDefaultApplicationModal,
+    setShowDeleteDefaultApplicationModal
   ] = useState(false);
 
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
@@ -47,60 +47,61 @@ function BlockchainApplicationRow({
     application,
     variant,
     navigation,
-    setShowCannotDeleteDefaultApplicationModal
+    setShowDeleteDefaultApplicationModal
   });
 
-  console.log({ showCannotDeleteDefaultApplicationModal });
+  console.log({ showDeleteDefaultApplicationModal });
 
   return (
     <>
-    <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
-      <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
-        <View style={styles.applicationNameContainer}>
-          <Image
-            source={{ uri: application.images.logo.png }}
-            style={{ ...styles.applicationLogoImage }}
-          />
-
-          <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-            {application.name}
-          </P>
-        </View>
-
-        <View style={styles.applicationNameContainer}>
-          {application.isPinned && (
-            <PinSvg
-              color={colors.light.ultramarineBlue}
-              style={{ marginRight: 12 }}
-              variant="fill"
+      <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
+        <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
+          <View style={styles.applicationNameContainer}>
+            <Image
+              source={{ uri: application.images.logo.png }}
+              style={{ ...styles.applicationLogoImage }}
             />
-          )}
-          {showActive && currentApplication.chainID === application.chainID && (
-            <View style={styles.icon}>
-              <CircleCheckedSvg variant="fill" />
-            </View>
-          )}
 
-          {showCaret && (
-            <CaretSvg
-              direction="right"
-              color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
-            />
-          )}
-        </View>
-      </TouchableOpacity>
-    </Swipeable>
+            <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+              {application.name}
+            </P>
+          </View>
 
-    <ModalBox
+          <View style={styles.applicationNameContainer}>
+            {application.isPinned && (
+              <PinSvg
+                color={colors.light.ultramarineBlue}
+                style={{ marginRight: 12 }}
+                variant="fill"
+              />
+            )}
+            {showActive && currentApplication.chainID === application.chainID && (
+              <View style={styles.icon}>
+                <CircleCheckedSvg variant="fill" />
+              </View>
+            )}
+
+            {showCaret && (
+              <CaretSvg
+                direction="right"
+                color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
+              />
+            )}
+          </View>
+        </TouchableOpacity>
+      </Swipeable>
+
+      <ModalBox
         position="bottom"
-        style={styles.statsModal}
-        isOpen={showCannotDeleteDefaultApplicationModal}
-        onClosed={() => setShowCannotDeleteDefaultApplicationModal(false)}
+        style={styles.deleteDefaultApplicationModal}
+        isOpen={showDeleteDefaultApplicationModal}
+        onClosed={() => setShowDeleteDefaultApplicationModal(false)}
+        coverScreen
       >
         <ErrorScreen
           description="The default application can not be removed"
           buttonText="Continue to Applications"
-          onContinue={() => setShowCannotDeleteDefaultApplicationModal(false)}
+          onContinue={() => setShowDeleteDefaultApplicationModal(false)}
         />
 
       </ModalBox>
