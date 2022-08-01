@@ -25,14 +25,14 @@ export default function ErrorScreen({
       <View style={[styles.container]}>
         <View style={styles.illustration}>
 
-        <CircleCrossedSvg height={48} width={48}/>
+        <CircleCrossedSvg height={48} width={48} style={[styles.icon]}/>
 
         </View>
 
         {title && (
-            <Text style={[styles.title, styles.theme.title, baseStyles?.title]}>
-              {title}
-            </Text>
+          <Text style={[styles.title, styles.theme.title, baseStyles?.title]}>
+            {title}
+          </Text>
         )}
 
         {description && (

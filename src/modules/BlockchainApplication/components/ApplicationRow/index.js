@@ -50,8 +50,6 @@ function BlockchainApplicationRow({
     setShowDeleteDefaultApplicationModal
   });
 
-  console.log({ showDeleteDefaultApplicationModal });
-
   return (
     <>
       <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
@@ -76,7 +74,7 @@ function BlockchainApplicationRow({
               />
             )}
             {showActive && currentApplication.chainID === application.chainID && (
-              <View style={styles.icon}>
+              <View style={{ marginRight: 12 }}>
                 <CircleCheckedSvg variant="fill" />
               </View>
             )}

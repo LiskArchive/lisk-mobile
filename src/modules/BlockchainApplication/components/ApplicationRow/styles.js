@@ -37,18 +37,11 @@ export default function getBlockchainApplicationRowStyles() {
         fontWeight: '600',
       },
       deleteDefaultApplicationModal: {
-
         backgroundColor: colors.light.white,
-        height: 300,
+        height: 280,
         zIndex: 3,
         borderTopLeftRadius: 24,
         borderTopRightRadius: 24,
-      },
-      deleteDefaultApplicationModalCloseButton: {
-        position: 'absolute',
-        right: 12,
-        top: 24,
-        zIndex: 1,
       },
     },
     [themes.light]: {

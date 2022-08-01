@@ -15,17 +15,8 @@ export default function getErrorScreenStyles() {
         alignItems: 'center',
         justifyContent: 'center'
       },
-      avatarContainer: {
-        alignItems: 'center',
-      },
-      address: {
-        marginTop: 10,
-        textAlign: 'center',
-        color: colors.light.blueGray,
-        fontSize: fonts.size.small
-      },
-      illustration: {
-        paddingVertical: 30
+      icon: {
+        marginBottom: 16,
       },
       title: {
         fontFamily: fonts.family.heading,
@@ -37,10 +28,11 @@ export default function getErrorScreenStyles() {
         fontFamily: fonts.family.context,
         fontSize: fonts.size.base,
         textAlign: 'center',
-        padding: 10
+        padding: 8,
+        marginBottom: 0,
       },
       continueButton: {
-        paddingHorizontal: 20
+        paddingHorizontal: 24
       }
     },
 
