@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
+import ModalBox from 'react-native-modalbox';
 import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
@@ -9,6 +10,7 @@ import Swipeable from 'components/shared/Swipeable';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import ErrorScreen from 'components/screens/ErrorScreen';
 import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 
 import { useBlockchainApplicationRowActions } from './hooks';
@@ -32,6 +34,11 @@ function BlockchainApplicationRow({
   showCaret,
   navigation,
 }) {
+  const [
+    showDeleteDefaultApplicationModal,
+    setShowDeleteDefaultApplicationModal
+  ] = useState(false);
+
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
   const [currentApplication] = useCurrentBlockchainApplication();
 
@@ -40,45 +47,63 @@ function BlockchainApplicationRow({
     application,
     variant,
     navigation,
+    setShowDeleteDefaultApplicationModal
   });
 
   return (
-    <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
-      <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
-        <View style={styles.applicationNameContainer}>
-          <Image
-            source={{ uri: application.images.logo.png }}
-            style={{ ...styles.applicationLogoImage }}
-          />
-
-          <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-            {application.name}
-          </P>
-        </View>
-
-        <View style={styles.applicationNameContainer}>
-          {application.isPinned && (
-            <PinSvg
-              color={colors.light.ultramarineBlue}
-              style={{ marginRight: 12 }}
-              variant="fill"
+    <>
+      <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
+        <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
+          <View style={styles.applicationNameContainer}>
+            <Image
+              source={{ uri: application.images.logo.png }}
+              style={{ ...styles.applicationLogoImage }}
             />
-          )}
-          {showActive && currentApplication.chainID === application.chainID && (
-            <View style={styles.icon}>
-              <CircleCheckedSvg variant="fill" />
-            </View>
-          )}
 
-          {showCaret && (
-            <CaretSvg
-              direction="right"
-              color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
-            />
-          )}
-        </View>
-      </TouchableOpacity>
-    </Swipeable>
+            <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+              {application.name}
+            </P>
+          </View>
+
+          <View style={styles.applicationNameContainer}>
+            {application.isPinned && (
+              <PinSvg
+                color={colors.light.ultramarineBlue}
+                style={{ marginRight: 12 }}
+                variant="fill"
+              />
+            )}
+            {showActive && currentApplication.chainID === application.chainID && (
+              <View style={{ marginRight: 12 }}>
+                <CircleCheckedSvg variant="fill" />
+              </View>
+            )}
+
+            {showCaret && (
+              <CaretSvg
+                direction="right"
+                color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
+              />
+            )}
+          </View>
+        </TouchableOpacity>
+      </Swipeable>
+
+      <ModalBox
+        position="bottom"
+        style={styles.deleteDefaultApplicationModal}
+        isOpen={showDeleteDefaultApplicationModal}
+        onClosed={() => setShowDeleteDefaultApplicationModal(false)}
+        coverScreen
+      >
+        <ErrorScreen
+          description={t('application.manage.deleteDefaultApplicationModal.description')}
+          buttonText={t('application.manage.deleteDefaultApplicationModal.buttonText')}
+          onContinue={() => setShowDeleteDefaultApplicationModal(false)}
+        />
+
+      </ModalBox>
+    </>
   );
 }
 

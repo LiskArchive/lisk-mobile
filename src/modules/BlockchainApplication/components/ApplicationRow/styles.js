@@ -1,5 +1,5 @@
 import {
-  themes, colors, boxes, fonts
+  themes, colors, fonts
 } from 'constants/styleGuide';
 
 export default function getBlockchainApplicationRowStyles() {
@@ -8,12 +8,6 @@ export default function getBlockchainApplicationRowStyles() {
       container: {
         flexDirection: 'column',
         flex: 1,
-      },
-      listContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: boxes.boxPadding,
       },
       applicationContainer: {
         flexDirection: 'row',
@@ -42,42 +36,12 @@ export default function getBlockchainApplicationRowStyles() {
         marginRight: 15,
         fontWeight: '600',
       },
-      searchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: '100%',
-        marginTop: 32,
-      },
-      searchIcon: {
-        position: 'absolute',
-        zIndex: 1,
-        left: 30,
-      },
-      input: {
-        flexWrap: 'wrap',
-        paddingLeft: 36,
-        paddingBottom: 8,
-        paddingTop: 8,
-        fontFamily: fonts.family.context,
-        borderRadius: 26,
-        borderWidth: 1,
-        borderColor: colors.light.platinumGray,
-      },
-      inputContainer: {
-        marginTop: -20,
-        position: 'relative',
-      },
-      statsModal: {
-        height: 500,
-        zIndex: 2,
+      deleteDefaultApplicationModal: {
+        backgroundColor: colors.light.white,
+        height: 280,
+        zIndex: 3,
         borderTopLeftRadius: 24,
         borderTopRightRadius: 24,
-      },
-      statsModalCloseButton: {
-        position: 'absolute',
-        right: 12,
-        top: 24,
-        zIndex: 1,
       },
     },
     [themes.light]: {

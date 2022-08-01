@@ -375,6 +375,10 @@
         "descriptionText": "This application will no longer be in your application list.",
         "confirmButtonText": "Remove now"
       },
+      "deleteDefaultApplicationModal": {
+        "description": "The default application can not be removed",
+        "buttonText": "Continue to Applications"
+      },
       "continueToWalletButtonText": "Continue to wallet" 
     },
     "explore":{

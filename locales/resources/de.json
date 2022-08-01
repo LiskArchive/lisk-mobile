@@ -370,6 +370,10 @@
         "descriptionText": "Diese Anwendung befindet sich nicht mehr in Ihrer Anwendungsliste.",
         "confirmButtonText": "Jetzt entfernen"
       },
+      "deleteDefaultApplicationModal": {
+        "description": "Die Standardanwendung kann nicht entfernt werden",
+        "buttonText": "Weiter zu Anwendungen"
+      },
       "continueToWalletButtonText": "Weiter zur Geldbörse"
     },
     "explore":{
