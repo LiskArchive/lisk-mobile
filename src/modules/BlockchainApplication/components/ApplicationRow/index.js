@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
+import ModalBox from 'react-native-modalbox';
 import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
@@ -9,6 +10,7 @@ import Swipeable from 'components/shared/Swipeable';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import ErrorScreen from 'components/screens/ErrorScreen';
 import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 
 import { useBlockchainApplicationRowActions } from './hooks';
@@ -32,6 +34,11 @@ function BlockchainApplicationRow({
   showCaret,
   navigation,
 }) {
+  const [
+    showCannotDeleteDefaultApplicationModal,
+    setShowCannotDeleteDefaultApplicationModal
+  ] = useState(false);
+
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
   const [currentApplication] = useCurrentBlockchainApplication();
 
@@ -40,9 +47,13 @@ function BlockchainApplicationRow({
     application,
     variant,
     navigation,
+    setShowCannotDeleteDefaultApplicationModal
   });
 
+  console.log({ showCannotDeleteDefaultApplicationModal });
+
   return (
+    <>
     <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
       <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
         <View style={styles.applicationNameContainer}>
@@ -79,6 +90,21 @@ function BlockchainApplicationRow({
         </View>
       </TouchableOpacity>
     </Swipeable>
+
+    <ModalBox
+        position="bottom"
+        style={styles.statsModal}
+        isOpen={showCannotDeleteDefaultApplicationModal}
+        onClosed={() => setShowCannotDeleteDefaultApplicationModal(false)}
+      >
+        <ErrorScreen
+          description="The default application can not be removed"
+          buttonText="Continue to Applications"
+          onContinue={() => setShowCannotDeleteDefaultApplicationModal(false)}
+        />
+
+      </ModalBox>
+    </>
   );
 }
 

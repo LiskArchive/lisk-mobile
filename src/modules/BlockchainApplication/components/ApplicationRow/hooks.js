@@ -7,7 +7,11 @@ import DeleteSvg from 'assets/svgs/DeleteSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 
 export function useBlockchainApplicationRowActions({
-  t, application, variant, navigation
+  t,
+  application,
+  variant,
+  navigation,
+  setShowCannotDeleteDefaultApplicationModal
 }) {
   const { togglePin } = usePinBlockchainApplication();
 
@@ -34,18 +38,22 @@ export function useBlockchainApplicationRowActions({
       break;
 
     case 'manage':
-      if (!application.isDefault) {
-        rightActions = [
-          {
-            title: t('application.explore.applicationList.deleteText'),
-            color: colors.light.furyRed,
-            icon: () => <DeleteSvg color={colors.light.white} />,
-            onPress: () => {
+
+      rightActions = [
+        {
+          title: t('application.explore.applicationList.deleteText'),
+          color: colors.light.furyRed,
+          icon: () => <DeleteSvg color={colors.light.white} />,
+          onPress: () => {
+            if (application.isDefault) {
+              setShowCannotDeleteDefaultApplicationModal(true);
+            } else {
               navigation.navigate('DeleteApplication', { application });
-            },
+            }
           },
-        ];
-      }
+        },
+      ];
+
       break;
 
     default:
