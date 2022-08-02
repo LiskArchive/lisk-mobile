@@ -19,10 +19,6 @@ const navigationOptions = {};
 
 navigationOptions.Main = {};
 
-navigationOptions.Send = {
-  headerShown: false,
-};
-
 navigationOptions.SendStack = () => {
   const os = deviceType();
   let headerStyle = {
@@ -67,6 +63,12 @@ navigationOptions.Wallet = {
 navigationOptions.Applications = {
   title: null,
   header: () => null,
+};
+
+navigationOptions.Send = {
+  title: null,
+  header: () => null,
+
 };
 
 navigationOptions.Bookmarks = {
