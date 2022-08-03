@@ -21,7 +21,12 @@ export function PickerLabel({ children, style: baseStyle }) {
   );
 }
 
-export function PickerToggle({ children, placeholder, style: baseStyle }) {
+export function PickerToggle({
+  children,
+  placeholder,
+  disabled,
+  style: baseStyle
+}) {
   const { value, setShowMenu } = usePicker();
 
   const { styles } = useTheme({
@@ -30,8 +35,9 @@ export function PickerToggle({ children, placeholder, style: baseStyle }) {
 
   return (
     <TouchableOpacity
-      style={[styles.toggleContainer, styles.theme.toggleContainer, baseStyle?.container]}
       onPress={() => setShowMenu(true)}
+      disabled={disabled}
+      style={[styles.toggleContainer, styles.theme.toggleContainer, baseStyle?.container]}
     >
       {children || (
         <View style={[styles.toggleTextContainer]}>
@@ -70,7 +76,9 @@ export function PickerMenu({ children, style: baseStyle }) {
   );
 }
 
-export function PickerItem({ value, children, style: baseStyle }) {
+export function PickerItem({
+  value, children, style: baseStyle
+}) {
   const { setShowMenu, onChange } = usePicker();
 
   const { styles } = useTheme({
@@ -85,7 +93,7 @@ export function PickerItem({ value, children, style: baseStyle }) {
       }}
       style={[styles.itemContainer, baseStyle]}
     >
-     {children || <Text>{value}</Text>}
+     {typeof children === 'string' ? <Text>{children}</Text> : children}
     </TouchableOpacity>
   );
 }
