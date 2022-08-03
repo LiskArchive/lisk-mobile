@@ -1,10 +1,11 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
 
 import getSendTokenApplicationsSelectStyles from './styles';
+import Picker from '../../../../components/shared/Picker';
 
 export default function SendTokenApplicationsSelect({
   nextStep,
@@ -15,18 +16,38 @@ export default function SendTokenApplicationsSelect({
     styles: getSendTokenApplicationsSelectStyles(),
   });
 
-  return (
-    <View style={styles.wrapper}>
-      <Text>Content here</Text>
+  const [senderApplication, setSenderApplication] = useState(undefined);
 
-      <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
-        <PrimaryButton
-          noTheme={true}
-          style={styles.button}
-          onClick={() => nextStep()}
-          title={'Continue'}
-        />
+  return (
+    <View style={[styles.wrapper, styles.theme.wrapper]}>
+      <View style={[styles.container]}>
+
+        <Picker
+          value={senderApplication}
+          onChange={(selectedApplication) => setSenderApplication(selectedApplication)}
+        >
+          <Picker.Label>
+            From Application
+          </Picker.Label>
+
+          <Picker.Toggle placeholder="Select an Application"/>
+
+          <Picker.Menu>
+            <Picker.Item value="lisk" />
+            <Picker.Item value="coleti" />
+            <Picker.Item value="doedu" />
+            <Picker.Item value="kalipo" />
+          </Picker.Menu>
+        </Picker>
+
       </View>
+
+      <PrimaryButton
+        noTheme={true}
+        style={styles.button}
+        onClick={() => nextStep()}
+        title={'Continue'}
+      />
     </View>
   );
 }

@@ -1,11 +1,16 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default function getSendTokenApplicationsSelectStyles() {
   return {
     common: {
       wrapper: {
         flex: 1,
+        paddingLeft: boxes.boxPadding,
+        paddingRight: boxes.boxPadding
       },
+      container: {
+        flex: 1,
+      }
     },
     [themes.light]: {
       wrapper: {

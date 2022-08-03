@@ -39,8 +39,7 @@ export default function SendToken({ navigation, route }) {
       <Stepper
         currentIndex={0}
         progressBar={ProgressBar}
-        styles={{ progressBar: { wrapper: { marginBottom: 40 } } }}
-       // navStyles={sendTokenNavStyles}
+        styles={{ progressBar: { wrapper: { marginBottom: 20, marginTop: 20 } } }}
       >
         {steps.map(step => (
           <step.component
