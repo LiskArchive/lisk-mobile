@@ -23,7 +23,7 @@ const styles = {
     position: 'absolute',
     bottom: -1 * navigatorHeight,
     left: 0,
-    paddingTop: 24,
+    paddingTop: 94,
   },
   multiStepGroupWrapper: {
     width: '100%',

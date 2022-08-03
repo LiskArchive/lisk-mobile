@@ -9,7 +9,7 @@ import { Button } from './element';
  * @param {Object?} props.customButton if passed, if should be valid React element
  * @param {Array} props.rest the rest of the props
  */
-const NavigatorButton = ({ children, customButton, ...rest }) => {
+const MultiStepNavigatorButton = ({ children, customButton, ...rest }) => {
   if (customButton === undefined) {
     return <Button {...rest}>{children}</Button>;
   }
@@ -21,4 +21,4 @@ const NavigatorButton = ({ children, customButton, ...rest }) => {
   );
 };
 
-export default NavigatorButton;
+export default MultiStepNavigatorButton;

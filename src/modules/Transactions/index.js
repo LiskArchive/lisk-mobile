@@ -5,7 +5,7 @@ import {
 import connect from 'redux-connect-decorator';
 import { translate } from 'react-i18next';
 
-import MultiStep from 'components/shared/multiStep';
+import MultiStep from 'components/shared/__MultiStep';
 import withTheme from 'components/shared/withTheme';
 import { tokenMap } from 'constants/tokens';
 import { B, P } from 'components/shared/toolBox/typography';

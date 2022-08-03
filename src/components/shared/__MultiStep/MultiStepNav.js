@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigatorButton from './navigatorButton';
+import NavigatorButton from './MultiStepNavigatorButton';
 import { Element } from './element';
 import {
   backButtonFn,

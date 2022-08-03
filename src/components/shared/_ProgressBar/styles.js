@@ -3,10 +3,7 @@ import { themes, colors } from 'constants/styleGuide';
 export default () => ({
   common: {
     progressContainer: {
-      position: 'absolute',
       zIndex: 1,
-      top: 0,
-      left: 0,
       width: '100%',
       height: 2,
       backgroundColor: 'transparent',

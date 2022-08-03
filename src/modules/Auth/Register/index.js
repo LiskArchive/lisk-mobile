@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, BackHandler } from 'react-native';
 import { translate } from 'react-i18next';
-import MultiStep from 'components/shared/multiStep';
+import MultiStep from 'components/shared/__MultiStep';
 import { Small } from 'components/shared/toolBox/typography';
-import progressBar from 'components/shared/progressBar';
+import progressBar from 'components/shared/_ProgressBar';
 import Confirm from './confirm';
 import Success from './success';
 import SafeKeeping from './safeKeeping';
@@ -52,7 +52,7 @@ const Register = ({ navigation, route, t }) => {
       groupButton={NavButton}
       activeTitle={ActiveTitle}
       showProgressBar
-      progressStepContainerStyle={styles.progressStepContainer}
+      styles={{ progressBar: { progressStepContainer: styles.progressStepContainer } }}
       backButtonTitle="Back"
     >
       <Intro

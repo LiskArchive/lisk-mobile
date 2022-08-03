@@ -8,7 +8,7 @@ const StepProgress = ({ styles, currentIndex, length }) => {
   return (
     <View style={styles.container}>
       <B style={styles.theme.step} >Step </B>
-      <B style={styles.theme.step} >{currentIndex}</B>
+      <B style={styles.theme.stessp} >{currentIndex}</B>
       <B style={styles.theme.step} >/</B>
       <P style={styles.theme.step} >{length}</P>
     </View>

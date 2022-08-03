@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import MultiStep from 'components/shared/multiStep';
+import MultiStep from 'components/shared/__MultiStep';
 import PassphraseBackup from 'components/screens/passphraseBackup';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import { useCurrentAccount, useAccountInfo } from 'modules/Accounts/hooks/useAccounts';

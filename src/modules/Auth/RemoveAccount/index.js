@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import MultiStep from 'components/shared/multiStep';
+import MultiStep from 'components/shared/__MultiStep';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import DeleteAccount from '../DeleteAccount';
 import RemoveAccountConfirmation from '../RemoveAccountConfirmation';
