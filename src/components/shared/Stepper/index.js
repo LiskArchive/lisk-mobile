@@ -3,12 +3,12 @@ import { View } from 'react-native';
 
 import { useTheme } from 'hooks/useTheme';
 
-import Nav from './MultiStepNav';
+import Nav from './StepperNav';
 import { getStyles as normalizeStyles } from './utils';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
-export default function MultiStep({
+export default function Stepper({
   children,
   finalCallback,
   backButtonTitle,

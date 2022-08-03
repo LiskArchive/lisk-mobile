@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import MultiStep from 'components/shared/__MultiStep';
-import ProgressBar from 'components/shared/_ProgressBar';
+import Stepper from 'components/shared/Stepper';
+import ProgressBar from 'components/shared/ProgressBar';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getSendTokenStyles } from './styles';
@@ -36,7 +36,7 @@ export default function SendToken({ navigation, route }) {
         noIcon
       />
 
-      <MultiStep
+      <Stepper
         currentIndex={0}
         progressBar={ProgressBar}
         styles={{ progressBar: { wrapper: { marginBottom: 40 } } }}
@@ -49,7 +49,7 @@ export default function SendToken({ navigation, route }) {
             route={route}
           />
         ))}
-      </MultiStep>
+      </Stepper>
 
     </SafeAreaView>
   );

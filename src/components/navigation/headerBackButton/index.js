@@ -6,7 +6,7 @@ import { IconButton } from 'components/shared/toolBox/button';
 import { colors, themes } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import { H3 } from 'components/shared/toolBox/typography';
-import StepProgress from 'components/shared/__MultiStep/_StepProgress';
+import StepProgress from 'components/shared/Stepper/StepProgress';
 import getStyles from './styles';
 
 const HeaderBackButton = ({

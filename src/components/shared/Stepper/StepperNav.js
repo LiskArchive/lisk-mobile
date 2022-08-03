@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigatorButton from './MultiStepNavigatorButton';
+import NavigatorButton from './StepperNavigatorButton';
 import { Element } from './element';
 import {
   backButtonFn,
@@ -9,7 +9,7 @@ import {
   noGroupTitle,
 } from './utils';
 
-const MultiStepNav = ({
+const StepperNav = ({
   steps,
   interactive,
   current,
@@ -81,4 +81,4 @@ const MultiStepNav = ({
   );
 };
 
-export default MultiStepNav;
+export default StepperNav;
