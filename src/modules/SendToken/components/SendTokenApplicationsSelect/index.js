@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
@@ -21,30 +21,46 @@ export default function SendTokenApplicationsSelect({
 
   const [recipientApplication, setRecipientApplication] = useState(undefined);
 
+  const defaultApplication = applications.data?.find(
+    application => application.isDefault
+  );
+
+  function handleOnChangeRecipientApplication(selectedApplicationChainID) {
+    const selectedApplication = applications.data?.find(
+      application => application.chainID === selectedApplicationChainID
+    );
+
+    setRecipientApplication(selectedApplication);
+  }
+
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
-        <Picker
-          value={recipientApplication}
-          onChange={(selectedApplication) => setRecipientApplication(selectedApplication)}
-        >
+        <Picker>
           <Picker.Label>
             From Application
           </Picker.Label>
 
           <Picker.Toggle disabled style={{ container: { marginBottom: 16 } }}>
-            <Text>
-              {applications.isLoading ? 'Loading...'
-                : applications.data?.find(
-                  application => application.isDefault
-                )?.name}
-            </Text>
+            {
+              applications.isLoading ? (
+                <Text>Loading...</Text>
+              ) : (
+                <View style={[styles.applicationNameContainer]}>
+                  <Text>{defaultApplication?.name}</Text>
+                  <Image
+                    source={{ uri: defaultApplication?.images.logo.png }}
+                    style={[styles.applicationLogoImage]}
+                  />
+                </View>
+              )
+            }
           </Picker.Toggle>
         </Picker>
 
         <Picker
           value={recipientApplication}
-          onChange={(selectedApplication) => setRecipientApplication(selectedApplication)}
+          onChange={handleOnChangeRecipientApplication}
         >
           <Picker.Label>
             To Application
@@ -55,11 +71,15 @@ export default function SendTokenApplicationsSelect({
             placeholder="Select an Application"
           >
             {recipientApplication && (
-              <Text>
-                {applications.data?.find(
-                  application => application.chainID === recipientApplication
-                )?.name}
-              </Text>
+              <View style={[styles.applicationNameContainer]}>
+                <Text>
+                  {recipientApplication.name}
+                </Text>
+                <Image
+                  source={{ uri: recipientApplication.images.logo.png }}
+                  style={[styles.applicationLogoImage]}
+                />
+              </View>
             )}
           </Picker.Toggle>
 
@@ -69,7 +89,12 @@ export default function SendTokenApplicationsSelect({
                 key={application.chainID}
                 value={application.chainID}
               >
-                {application.name}
+                <Text>{application.name}</Text>
+
+                <Image
+                  source={{ uri: application.images.logo.png }}
+                  style={[styles.applicationLogoImage]}
+                />
               </Picker.Item>
             ))}
           </Picker.Menu>

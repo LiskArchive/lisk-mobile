@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import ModalBox from 'react-native-modalbox';
 
 import { useTheme } from 'hooks/useTheme';
@@ -40,18 +40,19 @@ export function PickerToggle({
       style={[styles.toggleContainer, styles.theme.toggleContainer, baseStyle?.container]}
     >
       {children || (
-        <View style={[styles.toggleTextContainer]}>
-          <Text style={[
+        <Text
+          style={[
             styles[value ? 'toggleText' : 'togglePlaceholder'],
             styles.theme[value ? 'toggleText' : 'togglePlaceholder'],
             baseStyle?.toggleText
-          ]}>
-            {value || placeholder}
-          </Text>
-
-          <CaretSvg direction='right'/>
-        </View>
+          ]}
+        >
+          {value || placeholder}
+        </Text>
       )}
+
+      {!disabled && <CaretSvg direction='right'/>}
+
     </TouchableOpacity>
   );
 }

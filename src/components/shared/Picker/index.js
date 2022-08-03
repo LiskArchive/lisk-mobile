@@ -19,14 +19,12 @@ export default function Picker({
 
   return (
     <PickerContext.Provider
-      value={
-        {
-          showMenu,
-          setShowMenu,
-          value,
-          onChange
-        }
-      }
+      value={{
+        showMenu,
+        setShowMenu,
+        value,
+        onChange
+      }}
     >
       {children}
     </PickerContext.Provider>

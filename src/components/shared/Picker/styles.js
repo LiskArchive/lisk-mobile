@@ -13,12 +13,9 @@ export function getPickerStyles() {
         color: colors.light.maastrichtBlue,
         borderRadius: 2,
         padding: 16,
-      },
-      toggleTextContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        width: '100%',
       },
       toggleText: {
         fontSize: 16,
@@ -40,7 +37,6 @@ export function getPickerStyles() {
       itemContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
         padding: 16,
         borderBottomWidth: 1,
         borderBottomColor: colors.light.platinumGray,
