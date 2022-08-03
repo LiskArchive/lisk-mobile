@@ -1,4 +1,4 @@
-import React, { createContext, useState, useRef } from 'react';
+import React, { createContext, useState } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import {
@@ -12,13 +12,10 @@ export const PickerContext = createContext({});
 
 export default function Picker({
   children,
-  options,
   value,
   onChange
 }) {
   const [showMenu, setShowMenu] = useState(false);
-
-  const menuContainerRef = useRef(null);
 
   return (
     <PickerContext.Provider
@@ -26,8 +23,6 @@ export default function Picker({
         {
           showMenu,
           setShowMenu,
-          menuContainerRef,
-          options,
           value,
           onChange
         }
