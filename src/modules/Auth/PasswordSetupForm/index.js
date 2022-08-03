@@ -35,14 +35,14 @@ const PasswordSetupForm = ({
   const [encryptedJSON, setEncryptedJSON] = useState();
 
   // eslint-disable-next-line consistent-return
-  const submitForm = () => {
+  const submitForm = async () => {
     if (!passwordValidator(password)) {
       return setPasswordError('auth.form.errors.passwordError');
     }
     if (password !== confirmPassword) {
       return setconfirmPasswordError('auth.form.errors.confirmPasswordError');
     }
-    const data = encryptAccount({
+    const data = await encryptAccount({
       recoveryPhrase: passphrase,
       password,
       name: accountName,

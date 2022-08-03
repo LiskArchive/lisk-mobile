@@ -19,7 +19,7 @@ export const validateAddress = (tokenType, address) => {
     case tokenMap.LSK.key:
     default:
       try {
-        cryptography.validateLisk32Address(address);
+        cryptography.address.validateLisk32Address(address);
         return 0;
       } catch (error) {
         return 1;

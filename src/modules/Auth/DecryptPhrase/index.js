@@ -1,35 +1,49 @@
+/* eslint-disable max-statements */
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import withTheme from 'components/shared/withTheme';
+import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
+import { translate } from 'react-i18next';
+import DropDownHolder from 'utilities/alert';
+import {
+  useAccounts,
+} from 'modules/Accounts/hooks/useAccounts';
 import PasswordForm from '../components/PasswordForm';
 import getStyles from './styles';
 
 const DecryptPhrase = ({
-  styles, account, route, nextStep, sharedData
+  account, route, nextStep, sharedData, t
 }) => {
   const navigation = useNavigation();
-  const { title } = route.params;
-  let address;
+  const { setAccount } = useAccounts();
+  const { styles } = useTheme({ styles: getStyles });
+
+  const { title, encryptedData } = route.params;
+  let encryptedAccount;
   if (sharedData?.encryptedAccount) {
-    address = sharedData?.encryptedAccount?.metadata?.address;
+    encryptedAccount = sharedData?.encryptedAccount;
   } else {
-    address = route.params.address;
+    encryptedAccount = JSON.parse(encryptedData);
   }
 
-  const onSubmit = (password) => {
-    const { successRoute } = route.params;
-    if (nextStep && typeof nextStep === 'function') {
-      const decryptedAccount = decryptAccount(account, password);
+  const onSubmit = async (password) => {
+    try {
+      const { successRoute } = route.params;
+      const decryptedAccount = await decryptAccount(encryptedAccount.encryptedPassphrase, password);
+      if (nextStep && typeof nextStep === 'function') {
+        nextStep({
+          ...decryptedAccount,
+          encryptedAccount: sharedData ? sharedData.encryptedAccount : account,
+        });
+      } else {
+        setAccount(encryptedAccount);
+        navigation.navigate(successRoute);
+      }
+    } catch (error) {
       // TODO: Implement error handling
-      nextStep({
-        ...decryptedAccount,
-        encryptedAccount: sharedData ? sharedData.encryptedAccount : account,
-      });
-    } else {
-      navigation.navigate(successRoute);
+      DropDownHolder.error(t('Error'), 'Invalid password provided');
     }
   };
 
@@ -38,8 +52,8 @@ const DecryptPhrase = ({
       title={title}
       onPress={navigation.goBack}
     />
-    <PasswordForm address={address} onSubmit={onSubmit} />
+    <PasswordForm address={encryptedAccount.metadata.address} onSubmit={onSubmit} />
   </SafeAreaView>;
 };
 
-export default withTheme(DecryptPhrase, getStyles());
+export default translate()(DecryptPhrase);
