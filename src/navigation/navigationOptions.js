@@ -68,7 +68,6 @@ navigationOptions.Applications = {
 navigationOptions.Send = {
   title: null,
   header: () => null,
-
 };
 
 navigationOptions.Bookmarks = {

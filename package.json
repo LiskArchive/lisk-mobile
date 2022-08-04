@@ -67,6 +67,7 @@
     "punycode": "^1.4.1",
     "querystring-es3": "^0.2.1",
     "react": "17.0.2",
+    "react-hook-form": "^7.34.0",
     "react-i18next": "^9.0.2",
     "react-native": "0.65.1",
     "react-native-app-settings": "^2.0.1",

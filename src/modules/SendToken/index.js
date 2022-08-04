@@ -8,11 +8,14 @@ import ProgressBar from 'components/shared/ProgressBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getSendTokenStyles } from './styles';
 import SendTokenApplicationsSelect from './components/SendTokenApplicationsSelect';
+import { useSendTokenForm } from './hooks';
 
 export default function SendToken({ navigation, route }) {
   const { styles } = useTheme({
     styles: getSendTokenStyles(),
   });
+
+  const form = useSendTokenForm();
 
   const steps = [
     {
@@ -32,7 +35,7 @@ export default function SendToken({ navigation, route }) {
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
-        title="Send Token"
+        title="Send token"
         noIcon
       />
 
@@ -46,6 +49,7 @@ export default function SendToken({ navigation, route }) {
             key={step.title}
             navigation={navigation}
             route={route}
+            form={form}
           />
         ))}
       </Stepper>
