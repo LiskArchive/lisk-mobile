@@ -23,16 +23,26 @@ export default function getSendTokenApplicationsSelectStyles() {
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
       },
+      accountAddress: {
+        marginLeft: 8,
+        color: colors.light.blueGray
+      }
     },
     [themes.light]: {
       wrapper: {
         backgroundColor: colors.light.white,
       },
+      accountAddress: {
+        color: colors.light.blueGray
+      }
     },
     [themes.dark]: {
       wrapper: {
         backgroundColor: colors.dark.mainBg,
       },
+      accountAddress: {
+        color: colors.light.whiteSmoke
+      }
     },
   };
 }

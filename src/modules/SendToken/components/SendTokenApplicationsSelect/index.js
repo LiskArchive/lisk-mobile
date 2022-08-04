@@ -3,37 +3,27 @@ import { View, Text, Image } from 'react-native';
 import { Controller } from 'react-hook-form';
 
 import { PrimaryButton } from 'components/shared/toolBox/button';
+import Picker from 'components/shared/Picker';
+import Avatar from 'components/shared/avatar';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import { stringShortener } from 'utilities/helpers';
 import { useTheme } from 'hooks/useTheme';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { useBlockchainApplicationExplorer } from '../../../BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 
 import getSendTokenApplicationsSelectStyles from './styles';
-import Picker from '../../../../components/shared/Picker';
-import { useBlockchainApplicationExplorer } from '../../../BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 
 export default function SendTokenApplicationsSelect({
   nextStep,
   form
-  // navigation,
-  // route,
 }) {
   const { applications } = useBlockchainApplicationExplorer();
+
+  const { accounts } = useAccounts();
 
   const { styles } = useTheme({
     styles: getSendTokenApplicationsSelectStyles(),
   });
-
-  // const [recipientApplication, setRecipientApplication] = useState(undefined);
-
-  // const defaultApplication = applications.data?.find(
-  //   application => application.isDefault
-  // );
-
-  // function handleOnChangeRecipientApplication(selectedApplicationChainID) {
-  //   const selectedApplication = applications.data?.find(
-  //     application => application.chainID === selectedApplicationChainID
-  //   );
-
-  //   form.setValue(selectedApplication);
-  // }
 
   if (applications.isLoading) {
     return (
@@ -73,9 +63,7 @@ export default function SendTokenApplicationsSelect({
                 </Picker.Toggle>
               </Picker>
             );
-          }
-
-          }
+          }}
         />
 
         <Controller
@@ -98,6 +86,7 @@ export default function SendTokenApplicationsSelect({
                 <Picker.Toggle
                   disabled={applications.loading}
                   placeholder="Select an Application"
+                  style={{ container: { marginBottom: 16 } }}
                 >
                   {recipientApplication && (
                     <View style={[styles.applicationNameContainer]}>
@@ -132,6 +121,39 @@ export default function SendTokenApplicationsSelect({
           }}
         />
 
+        <Controller
+          control={form.control}
+          name="recipientAccountAddress"
+          render={({ field }) => {
+            const recipientAccount = accounts.find(
+              account => account.metadata.address === field.value
+            );
+
+            return (
+              <Picker>
+                <Picker.Label>Recipient</Picker.Label>
+
+                <Picker.Toggle disabled>
+                  <View style={[styles.applicationNameContainer]}>
+                    <Avatar
+                      address={recipientAccount.metadata.address}
+                      size={24}
+                      style={{ marginRight: 8 }}
+                    />
+
+                    <Text>{recipientAccount.metadata.name}</Text>
+
+                    <Text style={[styles.accountAddress, styles.theme.accountAddress]}>
+                      {stringShortener(recipientAccount.metadata.address, 5, 5)}
+                    </Text>
+                  </View>
+
+                  <CircleCheckedSvg variant="fill" />
+                </Picker.Toggle>
+              </Picker>
+            );
+          }}
+        />
       </View>
 
       <PrimaryButton
