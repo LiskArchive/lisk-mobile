@@ -1,13 +1,15 @@
 import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Stepper from 'components/shared/Stepper';
 import ProgressBar from 'components/shared/ProgressBar';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { getSendTokenStyles } from './styles';
-import SendTokenApplicationsSelect from './components/SendTokenApplicationsSelect';
+import SendTokenSelectApplicationsStep from './components/SendTokenSelectApplicationsStep';
+import SendTokenSelectTokenStep from './components/SendTokenSelectTokenStep';
+import SendTokenSummaryStep from './components/SendTokenSummaryStep';
 import { useSendTokenForm } from './hooks';
 
 export default function SendToken({ navigation, route }) {
@@ -19,16 +21,16 @@ export default function SendToken({ navigation, route }) {
 
   const steps = [
     {
-      component: SendTokenApplicationsSelect,
-      title: 'sendTokenApplicationsSelect'
+      component: SendTokenSelectApplicationsStep,
+      title: 'selectApplications'
     },
     {
-      component: SendTokenApplicationsSelect,
-      title: 'component2'
+      component: SendTokenSelectTokenStep,
+      title: 'selectToken'
     },
     {
-      component: SendTokenApplicationsSelect,
-      title: 'component3'
+      component: SendTokenSummaryStep,
+      title: 'summary'
     },
   ];
 

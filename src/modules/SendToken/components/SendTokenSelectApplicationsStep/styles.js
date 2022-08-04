@@ -1,6 +1,6 @@
 import { themes, colors, boxes } from 'constants/styleGuide';
 
-export default function getSendTokenApplicationsSelectStyles() {
+export default function getSendTokenSelectApplicationsStepStyles() {
   return {
     common: {
       wrapper: {

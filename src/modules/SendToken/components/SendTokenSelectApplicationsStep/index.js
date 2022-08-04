@@ -11,9 +11,9 @@ import { useTheme } from 'hooks/useTheme';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useBlockchainApplicationExplorer } from '../../../BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 
-import getSendTokenApplicationsSelectStyles from './styles';
+import getSendTokenSelectApplicationsStepStyles from './styles';
 
-export default function SendTokenApplicationsSelect({
+export default function SendTokenSelectApplicationsStep({
   nextStep,
   form
 }) {
@@ -22,7 +22,7 @@ export default function SendTokenApplicationsSelect({
   const { accounts } = useAccounts();
 
   const { styles } = useTheme({
-    styles: getSendTokenApplicationsSelectStyles(),
+    styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
   if (applications.isLoading) {
