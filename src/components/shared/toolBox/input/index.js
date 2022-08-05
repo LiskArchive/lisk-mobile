@@ -59,6 +59,7 @@ class Input extends React.Component {
       returnKeyType,
       placeholderTextColor,
       disabled,
+      adornments
     } = this.props;
 
     let { keyboardAppearance } = this.props;
@@ -84,6 +85,12 @@ class Input extends React.Component {
           </Text>
         ) : null}
         <View style={styles.inputRow}>
+          {adornments?.left && (
+            <View style={styles.leftAdornment}>
+              {adornments?.left}
+            </View>
+          )}
+
           <TextInput
             testID={testID}
             editable={!disabled}
@@ -107,8 +114,18 @@ class Input extends React.Component {
             placeholderTextColor={placeholderTextColor}
             accessibilityLabel={accessibilityLabel}
           />
+
+          {adornments?.right && (
+            <View style={styles.rightAdornment}>
+              {adornments?.right}
+            </View>
+          )}
+
           {secureTextEntry && (
-            <TouchableOpacity onPress={this.toggleSecureTextEntry} style={styles.inputIcon}>
+            <TouchableOpacity
+              onPress={this.toggleSecureTextEntry}
+              style={styles.secureTextEntryIcon}
+            >
               <EyeSvg />
             </TouchableOpacity>
           )}

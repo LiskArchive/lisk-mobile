@@ -11,13 +11,19 @@ export default function getSendTokenSelectTokenStepStyles() {
       container: {
         flex: 1,
       },
-      tokenNameContainer: {
+      row: {
         flexDirection: 'row',
         alignItems: 'center',
       },
       tokenSvg: {
         marginLeft: 8,
       },
+      balanceText: {
+        color: colors.light.ultramarineBlue,
+      },
+      tokenAmountInCurrencyText: {
+        color: colors.light.slateGray
+      }
     },
     [themes.light]: {
       wrapper: {

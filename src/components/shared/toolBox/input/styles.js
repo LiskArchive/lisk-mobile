@@ -11,7 +11,17 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center'
     },
-    inputIcon: {
+    rightAdornment: {
+      position: 'absolute',
+      right: 5,
+      padding: 10,
+    },
+    leftAdornment: {
+      position: 'absolute',
+      left: 5,
+      padding: 10,
+    },
+    secureTextEntryIcon: {
       position: 'absolute',
       right: 5,
       padding: 10,

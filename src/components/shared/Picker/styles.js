@@ -5,7 +5,7 @@ export function getPickerStyles() {
     common: {
       label: {
         color: colors.light.maastrichtBlue,
-        marginBottom: 8
+        marginBottom: 8,
       },
       toggleContainer: {
         borderWidth: 1,
