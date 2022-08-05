@@ -125,7 +125,6 @@ export default function SendTokenSelectApplicationsStep({
           control={form.control}
           name="recipientAccountAddress"
           render={({ field }) => {
-            console.log({ accounts });
             const recipientAccount = accounts.find(
               account => account.metadata.address === field.value
             );

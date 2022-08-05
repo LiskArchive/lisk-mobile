@@ -9,6 +9,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 
 import getSendTokenSelectTokenStepStyles from './styles';
 import { useGetTokensQuery } from '../../api/useGetTokensQuery';
+import TokenSvg from '../../../../assets/svgs/TokenSvg';
 
 export default function SendTokenSelectTokenStep({
   nextStep,
@@ -30,7 +31,7 @@ export default function SendTokenSelectTokenStep({
           control={form.control}
           name="tokenID"
           render={({ field }) => {
-            const token = tokens.data?.find(_token => _token.tokenID === field.value);
+            const selectedToken = tokens.data?.find(token => token.tokenID === field.value);
 
             return (
               <Picker value={field.value} onChange={field.onChange}>
@@ -38,21 +39,30 @@ export default function SendTokenSelectTokenStep({
                   <Text>Token</Text>
                 </Picker.Label>
 
-                <Picker.Toggle>
-                  <View style={[styles.applicationNameContainer]}>
+                <Picker.Toggle disabled={tokens.isLoading || tokens.error}>
+                  <View style={[styles.tokenNameContainer]}>
                     {tokens.isLoading ? (
                       <Text>Loading...</Text>
                     ) : (
                       <>
-                        <Text>{token.name}</Text>
-                        {/* <Image
-                        source={{ uri: senderApplication.images.logo.png }}
-                        style={[styles.applicationLogoImage]}
-                        /> */}
+                        <Text>{selectedToken.symbol}</Text>
+                        <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
                       </>
                     )}
                   </View>
                 </Picker.Toggle>
+
+                <Picker.Menu>
+                  {tokens.data?.map(token => (
+                    <Picker.Item
+                      key={token.tokenID}
+                      value={token.tokenID}
+                    >
+                      <Text>{token.symbol}</Text>
+                      <TokenSvg symbol={token.symbol} style={styles.tokenSvg} />
+                    </Picker.Item>
+                  ))}
+                </Picker.Menu>
               </Picker>
             );
           }}

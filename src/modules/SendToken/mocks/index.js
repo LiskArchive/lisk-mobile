@@ -13,8 +13,8 @@ export const TOKENS_MOCK = [
   },
   {
     tokenID: '2bc561cf98009a',
-    name: 'BITCOIN',
-    symbol: 'BTC',
+    name: 'COLECTI',
+    symbol: 'COL',
     availableBalance: '4000000',
     lockedBalances: [
       {
@@ -24,14 +24,26 @@ export const TOKENS_MOCK = [
     ]
   },
   {
-    tokenID: '2as601cd98007f',
-    name: 'ETHER',
-    symbol: 'ETH',
-    availableBalance: '3400000',
+    tokenID: '3as601cd98117m',
+    name: 'KALIPO',
+    symbol: 'TKN',
+    availableBalance: '2900000',
     lockedBalances: [
       {
-        moduleID: '6',
-        amount: '13000'
+        moduleID: '5',
+        amount: '11000'
+      }
+    ]
+  },
+  {
+    tokenID: '1as631cd08007k',
+    name: 'DOCUEDU',
+    symbol: 'DOE',
+    availableBalance: '34000000',
+    lockedBalances: [
+      {
+        moduleID: '4',
+        amount: '12000'
       }
     ]
   },

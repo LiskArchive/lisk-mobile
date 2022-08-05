@@ -11,6 +11,13 @@ export default function getSendTokenSelectTokenStepStyles() {
       container: {
         flex: 1,
       },
+      tokenNameContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      tokenSvg: {
+        marginLeft: 8,
+      },
     },
     [themes.light]: {
       wrapper: {
