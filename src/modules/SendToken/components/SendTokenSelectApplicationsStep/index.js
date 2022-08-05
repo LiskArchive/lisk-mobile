@@ -77,7 +77,7 @@ export default function SendTokenSelectApplicationsStep({
             return (
               <Picker
                 value={form.value}
-                onChange={selectedApplicationChainID => field.onChange(selectedApplicationChainID)}
+                onChange={field.onChange}
               >
                 <Picker.Label>
                   To Application
@@ -125,6 +125,7 @@ export default function SendTokenSelectApplicationsStep({
           control={form.control}
           name="recipientAccountAddress"
           render={({ field }) => {
+            console.log({ accounts });
             const recipientAccount = accounts.find(
               account => account.metadata.address === field.value
             );

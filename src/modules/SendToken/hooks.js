@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
+import { TOKENS_MOCK } from './mocks';
 
 export function useSendTokenForm() {
   const [currentApplication] = useCurrentBlockchainApplication();
@@ -11,7 +12,8 @@ export function useSendTokenForm() {
     defaultValues: {
       senderApplicationChainID: currentApplication.chainID,
       recipientApplicationChainID: '',
-      recipientAccountAddress: currentAccount.metadata.address
+      recipientAccountAddress: currentAccount.metadata.address,
+      tokenID: TOKENS_MOCK.find(token => token.symbol === 'LSK')?.tokenID
     }
   });
 
