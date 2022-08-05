@@ -56,8 +56,8 @@ export function TokenSelectField({
             <Text>Loading...</Text>
           ) : (
             <>
-              <Text>{selectedToken.symbol}</Text>
-              <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
+              <Text>{selectedToken?.symbol}</Text>
+              <TokenSvg symbol={selectedToken?.symbol} style={styles.tokenSvg} />
             </>
           )}
         </View>
@@ -99,7 +99,7 @@ export function TokenAmountField({
 
   return (
     <Input
-      label={`Amount (${selectedToken.symbol})`}
+      label={`Amount (${selectedToken?.symbol})`}
       value={field.value}
       placeholder={`Add your amount of ${selectedToken?.symbol}`}
       keyboardType="numeric"
