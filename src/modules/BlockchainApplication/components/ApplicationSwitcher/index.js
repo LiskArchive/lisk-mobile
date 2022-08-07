@@ -24,7 +24,6 @@ const ApplicationSwitcher = () => {
   };
 
   const switchApplication = (direction) => {
-    // TODO: Implement switching application here
     let currentIndex;
     for (let i = 0; i < applications.data.length; i++) {
       if (applications.data[i].chainID === currentApplication.chainID) {
