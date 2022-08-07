@@ -1,5 +1,5 @@
 import { cryptography, passphrase } from '@liskhq/lisk-client';
-import { decryptAccount } from './encryptAccount';
+import { decryptAccount } from './decryptAccount';
 
 const recoveryPhrase = 'target cancel solution recipe vague faint bomb convince pink vendor fresh patrol';
 const encryptedPassphrase = {

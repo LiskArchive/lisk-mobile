@@ -56,13 +56,11 @@ const HeaderBackButton = ({
           testID="header-left-icon"
         />
       )}
-      <View style={styles.titleContainer}>
-        {title && (
+      {title && (
           <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>
             {t(title)}
           </H3>
-        )}
-      </View>
+      )}
       {rightIcon ? (
         <IconButton
           style={[styles.main, styles.theme.main, style]}

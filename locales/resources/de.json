@@ -314,6 +314,7 @@
       "removeAccount": "",
       "removeAccount_description": "",
       "decryptPassphrase": "",
+      "decryptPassphraseError": "",
       "addAccountDescription": "",
       "secret_phrase": "",
       "restore_file": "",

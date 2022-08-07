@@ -3,7 +3,7 @@ import * as transactionConstants from 'modules/Transactions/constants';
 import { fromRawLsk, toRawLsk } from 'utilities/conversions';
 import { useTransactionFeeCalculation } from './useTransactionFeeCalculation';
 
-describe('useTransactionFeeCalculation', () => {
+describe.skip('useTransactionFeeCalculation', () => {
   const props = {
     selectedPriority: transactionConstants.DEFAULT_PRIORITY[0],
     token: 'LSK',

@@ -8,7 +8,7 @@ export const getNetworkInfo = () =>
   apiClient.getNetworkInfo();
 
 export const extractAddress = passphrase =>
-  Lisk.cryptography.getBase32AddressFromPassphrase(passphrase);
+  Lisk.cryptography.address.getLisk32AddressFromPassphrase(passphrase);
 
 export const extractPublicKey = passphrase =>
-  Lisk.cryptography.getKeys(passphrase).publicKey.toString('hex');
+  Lisk.cryptography.ed.getKeys(passphrase).publicKey.toString('hex');

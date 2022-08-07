@@ -71,7 +71,7 @@ export const signTransaction = (
   if (!passphrase) {
     throw new Error('Passphrase is required to sign a transaction');
   }
-  const { publicKey } = Lisk.cryptography.getAddressAndPublicKeyFromPassphrase(passphrase);
+  const { publicKey } = Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase);
 
   if (
     !Buffer.isBuffer(transactionObject.senderPublicKey)

@@ -14,7 +14,7 @@ import PasswordForm from '../components/PasswordForm';
 import getStyles from './styles';
 
 const DecryptPhrase = ({
-  account, route, nextStep, sharedData, t
+  account, route, nextStep, t
 }) => {
   const navigation = useNavigation();
   const { setAccount } = useAccounts();
@@ -22,8 +22,8 @@ const DecryptPhrase = ({
 
   const { title, encryptedData } = route.params;
   let encryptedAccount;
-  if (sharedData?.encryptedAccount) {
-    encryptedAccount = sharedData?.encryptedAccount;
+  if (account) {
+    encryptedAccount = account;
   } else {
     encryptedAccount = JSON.parse(encryptedData);
   }
@@ -34,16 +34,15 @@ const DecryptPhrase = ({
       const decryptedAccount = await decryptAccount(encryptedAccount.encryptedPassphrase, password);
       if (nextStep && typeof nextStep === 'function') {
         nextStep({
-          ...decryptedAccount,
-          encryptedAccount: sharedData ? sharedData.encryptedAccount : account,
+          recoveryPhrase: decryptedAccount,
+          encryptedAccount,
         });
       } else {
         setAccount(encryptedAccount);
         navigation.navigate(successRoute);
       }
     } catch (error) {
-      // TODO: Implement error handling
-      DropDownHolder.error(t('Error'), 'Invalid password provided');
+      DropDownHolder.error(t('Error'), t('auth.setup.decryptPassphraseError'));
     }
   };
 

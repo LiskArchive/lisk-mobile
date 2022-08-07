@@ -35,6 +35,7 @@ const AuthMethod = ({
   };
 
   useEffect(() => {
+    // TODO: Replace with live data
     setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());

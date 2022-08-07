@@ -76,8 +76,8 @@ export const create = async ({
 }) => {
   const {
     publicKey: senderPublicKey
-  } = Lisk.cryptography.getAddressAndPublicKeyFromPassphrase(passphrase);
-  const recipient = Lisk.cryptography.getAddressFromLisk32Address(recipientAddress);
+  } = Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase);
+  const recipient = Lisk.cryptography.address.getAddressFromLisk32Address(recipientAddress);
   const tx = {
     moduleID: 2,
     assetID: 0,

@@ -19,7 +19,7 @@ const BackupPassphrase = ({ styles }) => {
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
     <MultiStep currentIndex={0}>
       <DecryptPhrase
-        account={summary}
+        account={account}
         route={{
           params: {
             address: summary.address,
