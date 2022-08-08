@@ -14,6 +14,7 @@ export default function getSendTokenSelectTokenStepStyles() {
       row: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center'
       },
       tokenSvg: {
         marginLeft: 8,
@@ -23,6 +24,35 @@ export default function getSendTokenSelectTokenStepStyles() {
       },
       tokenAmountInCurrencyText: {
         color: colors.light.slateGray
+      },
+      priorityButtonBase: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 108,
+        borderWidth: 1,
+        borderRadius: 60,
+        fontWeight: '200',
+        paddingTop: 8,
+        paddingBottom: 8
+      },
+      notSelectedPriorityButton: {
+        borderColor: colors.light.platinumGray,
+        color: colors.light.platinumGray,
+      },
+      selectedPriorityButton: {
+        borderColor: colors.light.ultramarineBlue,
+      },
+      label: {
+        marginBottom: 8
+      },
+      priorityButtonText: {
+        color: colors.light.zodiacBlue,
+        fontWeight: '300'
+      },
+      priorityButtonFeeText: {
+        color: colors.light.zodiacBlue,
+        fontWeight: '600'
       }
     },
     [themes.light]: {

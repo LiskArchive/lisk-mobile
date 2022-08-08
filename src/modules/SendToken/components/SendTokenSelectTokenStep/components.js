@@ -4,13 +4,14 @@ import { useController } from 'react-hook-form';
 
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
-import { LabelButton } from 'components/shared/toolBox/button';
+import { Button, LabelButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useAccountInfo } from '../../../Accounts/hooks/useAccounts/useAccountInfo';
 
 import getSendTokenSelectTokenStepStyles from './styles';
-import { useAccountInfo } from '../../../Accounts/hooks/useAccounts/useAccountInfo';
 import { useTokenAmountInCurrency } from './hooks';
 
 export function TokenSelectField({
@@ -143,7 +144,7 @@ export function SendTokenDescriptionField({ form }) {
       <LabelButton
         onClick={() => setShowInput(true)}
         style={{ width: 178 }}
-        textStyle={{ fontSize: 14, lineHeight: 0 }}
+        textStyle={{ fontSize: 14, lineHeight: 0, marginBottom: 16 }}
       >
         + Add message (Optional)
       </LabelButton>
@@ -162,6 +163,7 @@ export function SendTokenDescriptionField({ form }) {
           paddingTop: 0,
           paddingRight: 0,
           paddingLeft: 0,
+          marginBottom: 16
         },
         inputLabel: {
           marginBottom: 8
@@ -172,5 +174,63 @@ export function SendTokenDescriptionField({ form }) {
         }
       }}
     />
+  );
+}
+
+export function SendTokenPriorityField({ form }) {
+  const { field } = useController({
+    name: 'priority',
+    control: form.control,
+  });
+
+  const { styles } = useTheme({
+    styles: getSendTokenSelectTokenStepStyles(),
+  });
+
+  return (
+    <View>
+      <Text style={[styles.label]}>Priority</Text>
+
+      <View style={[styles.row, { width: '100%' }]}>
+        <TouchableOpacity
+          onPress={() => field.onChange('low')}
+          style={[
+            styles.priorityButtonBase,
+            styles[field.value === 'low' ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
+            { marginRight: 8 }
+          ]}
+        >
+          <Text style={[styles.priorityButtonText]}>Low</Text>
+
+          <Text style={[styles.priorityButtonFeeText]}>0.05 LSK</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => field.onChange('medium')}
+          style={[
+            styles.priorityButtonBase,
+            styles[field.value === 'medium' ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
+            { marginRight: 8 }
+          ]}
+        >
+          <Text style={[styles.priorityButtonText]}>Medium</Text>
+
+          <Text style={[styles.priorityButtonFeeText]}>0.15 LSK</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => field.onChange('high')}
+          style={[
+            styles.priorityButtonBase,
+            styles[field.value === 'high' ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
+            { marginRight: 8 }
+          ]}
+        >
+          <Text style={[styles.priorityButtonText]}>High</Text>
+
+          <Text style={[styles.priorityButtonFeeText]}>0.9 LSK</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
