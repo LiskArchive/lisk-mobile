@@ -89,19 +89,19 @@ export function SendTokenRecipientApplicationField({ form, applications }) {
         </Picker.Toggle>
 
         <Picker.Menu>
-          {applications.data?.map((application) => (
+          {applications?.data?.map((application) => (
             <Picker.Item
               key={application.chainID}
               value={application.chainID}
             >
 
-            <Text>{application.name}</Text>
+              <Text>{application.name}</Text>
 
-            <Image
-              source={{ uri: application.images.logo.png }}
-              style={[styles.applicationLogoImage]}
-            />
-          </Picker.Item>
+              <Image
+                source={{ uri: application.images.logo.png }}
+                style={[styles.applicationLogoImage]}
+              />
+            </Picker.Item>
           ))}
       </Picker.Menu>
     </Picker>
