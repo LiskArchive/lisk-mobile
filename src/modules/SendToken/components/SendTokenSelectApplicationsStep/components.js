@@ -40,7 +40,7 @@ export function SendTokenSenderApplicationField({ form, applications }) {
                 style={[styles.applicationLogoImage]}
               />
             </>
-          ) : <Text>No sender found.</Text> }
+          ) : <Text>No application found.</Text> }
         </View>
       </Picker.Toggle>
     </Picker>
@@ -71,11 +71,11 @@ export function SendTokenRecipientApplicationField({ form, applications }) {
         </Picker.Label>
 
         <Picker.Toggle
-          disabled={applications.loading}
+          disabled={applications?.loading}
           placeholder="Select an Application"
           style={{ container: { marginBottom: 16 } }}
         >
-          {recipientApplication && (
+          {recipientApplication ? (
             <View style={[styles.applicationNameContainer]}>
               <Text>
                 {recipientApplication.name}
@@ -85,7 +85,7 @@ export function SendTokenRecipientApplicationField({ form, applications }) {
                 style={[styles.applicationLogoImage]}
               />
             </View>
-          )}
+          ) : <Text>No application found.</Text>}
         </Picker.Toggle>
 
         <Picker.Menu>
