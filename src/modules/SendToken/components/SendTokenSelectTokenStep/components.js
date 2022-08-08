@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useController } from 'react-hook-form';
 
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
-import { Button, LabelButton } from 'components/shared/toolBox/button';
+import { LabelButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useAccountInfo } from '../../../Accounts/hooks/useAccounts/useAccountInfo';
 
 import getSendTokenSelectTokenStepStyles from './styles';
