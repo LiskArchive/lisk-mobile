@@ -22,8 +22,8 @@ export default () => ({
       lineHeight: 18,
     },
     labelButton: {
+      textAlign: 'left',
       backgroundColor: 'transparent',
-      color: colors.light.ultramarineBlue,
       fontSize: fonts.size.base,
       borderWidth: 2,
       borderColor: 'transparent',

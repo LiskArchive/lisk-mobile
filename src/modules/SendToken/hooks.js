@@ -14,7 +14,8 @@ export function useSendTokenForm() {
       recipientApplicationChainID: '',
       recipientAccountAddress: currentAccount.metadata.address,
       tokenID: TOKENS_MOCK.find(token => token.symbol === 'LSK')?.tokenID,
-      amount: 0
+      amount: 0,
+      message: ''
     }
   });
 

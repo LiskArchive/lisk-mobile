@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { useController } from 'react-hook-form';
 
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
+import { LabelButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
 import { fromRawLsk } from 'utilities/conversions';
-import TokenSvg from '../../../../assets/svgs/TokenSvg';
+import TokenSvg from 'assets/svgs/TokenSvg';
 
 import getSendTokenSelectTokenStepStyles from './styles';
 import { useAccountInfo } from '../../../Accounts/hooks/useAccounts/useAccountInfo';
@@ -115,13 +116,59 @@ export function TokenAmountField({
         containerStyle: {
           paddingTop: 0,
           paddingRight: 0,
-          paddingLeft: 0
+          paddingLeft: 0,
+          marginBottom: 16
         },
         inputLabel: {
           marginBottom: 8
         },
         input: {
           padding: 16
+        }
+      }}
+    />
+  );
+}
+
+export function SendTokenDescriptionField({ form }) {
+  const [showInput, setShowInput] = useState(false);
+
+  const { field } = useController({
+    name: 'message',
+    control: form.control,
+  });
+
+  if (!showInput) {
+    return (
+      <LabelButton
+        onClick={() => setShowInput(true)}
+        style={{ width: 178 }}
+        textStyle={{ fontSize: 14, lineHeight: 0 }}
+      >
+        + Add message (Optional)
+      </LabelButton>
+    );
+  }
+
+  return (
+    <Input
+      label="Message (optional)"
+      value={field.value}
+      placeholder="Add an optional message"
+      onChange={field.onChange}
+      multiline
+      innerStyles={{
+        containerStyle: {
+          paddingTop: 0,
+          paddingRight: 0,
+          paddingLeft: 0,
+        },
+        inputLabel: {
+          marginBottom: 8
+        },
+        input: {
+          padding: 16,
+          minHeight: 80
         }
       }}
     />
