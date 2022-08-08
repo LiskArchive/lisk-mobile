@@ -1,13 +1,6 @@
-export const roundAccessor = (arr = [], i, direction = 'next') => {
-  const index = i || 0;
+export const roundAccessor = (arr = [], index = 0, direction = 'next') => {
   if (direction === 'next') {
-    if (arr[index + 1] === undefined) {
-      return arr[0];
-    }
-    return arr[index + 1];
+    return arr[index + 1] ? arr[0] : arr[index + 1];
   }
-  if (index === 0) {
-    return arr[arr.length - 1];
-  }
-  return arr[index - 1];
+  return !index ? arr[arr.length - 1] : arr[index - 1];
 };

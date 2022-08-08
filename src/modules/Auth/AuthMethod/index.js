@@ -53,13 +53,13 @@ const AuthMethod = ({
       const file = await DocumentPicker.pickSingle({
         type: DocumentPicker.types.allFiles,
       });
-      const data = await RNFS.readFile(file.uri);
+      const encryptedData = await RNFS.readFile(file.uri);
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
       navigation.navigate('DecryptPhrase', {
         title: 'auth.setup.decryptPassphrase',
-        encryptedData: data,
+        encryptedData,
         successRoute: 'ManageAccount',
       });
     } catch (error) {

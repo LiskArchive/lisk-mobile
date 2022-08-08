@@ -41,10 +41,7 @@ const defaultKeys = {
 };
 
 jest.spyOn(cryptography.ed, 'getKeys').mockReturnValue(defaultKeys);
-jest.spyOn(cryptography.encrypt, 'decryptPassphraseWithPassword').mockResolvedValue(JSON.stringify({
-  recoveryPhrase,
-}));
-jest.spyOn(cryptography.encrypt, 'encryptPassphraseWithPassword').mockResolvedValue(encryptedPassphrase);
+jest.spyOn(cryptography.encrypt, 'encryptMessageWithPassword').mockResolvedValue(encryptedPassphrase);
 jest.spyOn(cryptography.address, 'getLisk32AddressFromPublicKey').mockReturnValue(address);
 jest.spyOn(passphrase.Mnemonic, 'validateMnemonic').mockReturnValue(true);
 
@@ -84,7 +81,7 @@ describe('encryptAccount', () => {
     try {
       await encryptAccount(accountDetails);
     } catch (error) {
-      expect(error.message).toEqual('Failed to extract keypair for given recovery phrase.');
+      expect(error.message).toEqual('Error: Failed to extract keypair for given recovery phrase.');
     }
   });
 });

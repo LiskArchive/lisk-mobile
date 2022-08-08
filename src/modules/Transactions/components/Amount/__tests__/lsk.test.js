@@ -4,13 +4,19 @@ import { act } from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import service from 'utilities/api/service';
+import account from 'utilities/api/account';
 import SendLsk from '../lsk';
 
+jest.mock('utilities/api');
+jest.mock('utilities/api/account');
 jest.mock('utilities/api/service');
 
 const mockStore = configureMockStore();
 
 const mockStoreProps = {
+  account: {
+    current: { metadata: { address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw' } }
+  },
   service: {
     priceTicker: {
       LSK: {
@@ -62,17 +68,24 @@ const mockProps = {
   sharedData: {}
 };
 
-jest.mock('utilities/api');
-jest.mock('utilities/api/lisk/service');
+describe.skip('Send amount screen', () => {
+  beforeEach(() => {
+    account.getSummary.mockResolvedValue({
+      address: mockStoreProps.account.current.metadata.address,
+      balance: '100000000',
+      nonce: '10',
+    });
+  });
 
-test.skip('Should render Send LSK correctly', () => {
-  const { getAllByText } = render(
-    <Provider store={store}>
-      <SendLsk {...mockProps} />
-    </Provider>
-  );
+  it('Should render Send LSK correctly', () => {
+    const { getAllByText } = render(
+      <Provider store={store}>
+        <SendLsk {...mockProps} />
+      </Provider>
+    );
 
-  expect(getAllByText('Available Balance')).toHaveLength(1);
+    expect(getAllByText('Available Balance')).toHaveLength(1);
+  });
 });
 
 test.skip('Should render correct balance of User LSK', () => {

@@ -21,20 +21,15 @@ const DecryptPhrase = ({
   const { styles } = useTheme({ styles: getStyles });
 
   const { title, encryptedData } = route.params;
-  let encryptedAccount;
-  if (account) {
-    encryptedAccount = account;
-  } else {
-    encryptedAccount = JSON.parse(encryptedData);
-  }
+  const encryptedAccount = account || JSON.parse(encryptedData);
 
   const onSubmit = async (password) => {
     try {
       const { successRoute } = route.params;
-      const decryptedAccount = await decryptAccount(encryptedAccount.encryptedPassphrase, password);
+      const recoveryPhrase = await decryptAccount(encryptedAccount.encryptedPassphrase, password);
       if (nextStep && typeof nextStep === 'function') {
         nextStep({
-          recoveryPhrase: decryptedAccount,
+          recoveryPhrase,
           encryptedAccount,
         });
       } else {

@@ -24,14 +24,9 @@ const ApplicationSwitcher = () => {
   };
 
   const switchApplication = (direction) => {
-    let currentIndex;
-    for (let i = 0; i < applications.data.length; i++) {
-      if (applications.data[i].chainID === currentApplication.chainID) {
-        currentIndex = i;
-        break;
-      }
-    }
-    setCurrentApplication(roundAccessor(applications.data, currentIndex, direction));
+    const chainIndex = applications.data
+      .findIndex(app => app.chainID === currentApplication.chainID);
+    setCurrentApplication(roundAccessor(applications.data, chainIndex, direction));
   };
 
   const onFlingDirectionChange = (direction) => {
