@@ -64,13 +64,13 @@ export const useTransactionFeeCalculation = ({
     });
   }, [
     transaction.amount,
-    transaction.data,
+    transaction.data, // not needed
     transaction.recipientAddress,
-    transaction.username,
+    transaction.username, // not needed
     selectedPriority.value,
-    transaction.mandatoryKeys,
-    transaction.optionalKeys,
-    selectedPriorityIndex
+    transaction.mandatoryKeys, // not needed
+    transaction.optionalKeys, // not needed
+    selectedPriorityIndex // not needed
   ]);
 
   return state;

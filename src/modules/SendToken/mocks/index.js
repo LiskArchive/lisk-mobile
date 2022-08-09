@@ -48,3 +48,9 @@ export const TOKENS_MOCK = [
     ]
   },
 ];
+
+export const FEES_BY_PRIORITIES_MOCK = {
+  low: 100,
+  medium: 320,
+  high: 500
+};

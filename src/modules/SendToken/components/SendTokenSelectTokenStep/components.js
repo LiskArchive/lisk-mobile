@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -13,6 +14,8 @@ import { useAccountInfo } from '../../../Accounts/hooks/useAccounts/useAccountIn
 
 import getSendTokenSelectTokenStepStyles from './styles';
 import { useTokenAmountInCurrency } from './hooks';
+import { PRIORITY_NAMES_MAP } from '../../constants';
+import useTransactionPriorities from '../../hooks/useTransactionPriorities';
 
 export function TokenSelectField({
   form,
@@ -178,6 +181,12 @@ export function SendTokenDescriptionField({ form }) {
 }
 
 export function SendTokenPriorityField({ form }) {
+  const {
+    data: prioritiesData,
+    isLoading: isLoadingPrioritiesData,
+    error: errorOnPriorities
+  } = useTransactionPriorities(form.watch('amount'), form.watch('message'));
+
   const { field } = useController({
     name: 'priority',
     control: form.control,
@@ -187,49 +196,44 @@ export function SendTokenPriorityField({ form }) {
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
+  if (isLoadingPrioritiesData) {
+    return (
+      <View>
+        <Text style={[styles.label]}>Priority</Text>
+        <Text>Loading priorities...</Text>
+      </View>
+    );
+  }
+
+  if (errorOnPriorities) {
+    return (
+      <View>
+        <Text style={[styles.label]}>Priority</Text>
+        <Text>Error loading priorities!</Text>
+      </View>
+    );
+  }
+
   return (
     <View>
       <Text style={[styles.label]}>Priority</Text>
 
       <View style={[styles.row, { width: '100%' }]}>
-        <TouchableOpacity
-          onPress={() => field.onChange('low')}
-          style={[
-            styles.priorityButtonBase,
-            styles[field.value === 'low' ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
-            { marginRight: 8 }
-          ]}
-        >
-          <Text style={[styles.priorityButtonText]}>Low</Text>
+        {prioritiesData.map(priority => (
+          <TouchableOpacity
+            key={priority.code}
+            onPress={() => field.onChange(priority.code)}
+            style={[
+              styles.priorityButtonBase,
+              styles[field.value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
+              { marginRight: 8 }
+            ]}
+          >
+            <Text style={[styles.priorityButtonText]}>{PRIORITY_NAMES_MAP[priority.code]}</Text>
 
-          <Text style={[styles.priorityButtonFeeText]}>0.05 LSK</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => field.onChange('medium')}
-          style={[
-            styles.priorityButtonBase,
-            styles[field.value === 'medium' ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
-            { marginRight: 8 }
-          ]}
-        >
-          <Text style={[styles.priorityButtonText]}>Medium</Text>
-
-          <Text style={[styles.priorityButtonFeeText]}>0.15 LSK</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => field.onChange('high')}
-          style={[
-            styles.priorityButtonBase,
-            styles[field.value === 'high' ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
-            { marginRight: 8 }
-          ]}
-        >
-          <Text style={[styles.priorityButtonText]}>High</Text>
-
-          <Text style={[styles.priorityButtonFeeText]}>0.9 LSK</Text>
-        </TouchableOpacity>
+            <Text style={[styles.priorityButtonFeeText]}>{priority.fee} LSK</Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
   );

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as apiClient from 'utilities/api/lisk/apiClient';
-import { resetAccountSummary, setAccountSummary } from '../../store/actions';
+import { setAccountSummary } from '../../store/actions';
 import { selectAccountSummary } from '../../store/selectors';
 import { useCurrentAccount } from './useCurrentAccount';
 
@@ -15,7 +15,6 @@ export function useAccountInfo() {
 
   useEffect(() => {
     if (address) {
-      dispatch(resetAccountSummary());
       getAccount(address).then(data => {
         dispatch(setAccountSummary(data));
       });

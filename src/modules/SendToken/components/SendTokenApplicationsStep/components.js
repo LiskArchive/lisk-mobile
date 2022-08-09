@@ -62,47 +62,47 @@ export function SendTokenRecipientApplicationField({ form, applications }) {
   );
 
   return (
-      <Picker
-        value={form.value}
-        onChange={field.onChange}
+    <Picker
+      value={form.value}
+      onChange={field.onChange}
+    >
+      <Picker.Label>
+        To Application
+      </Picker.Label>
+
+      <Picker.Toggle
+        disabled={applications?.loading}
+        placeholder="Select an Application"
+        style={{ container: { marginBottom: 16 } }}
       >
-        <Picker.Label>
-          To Application
-        </Picker.Label>
+        {recipientApplication && (
+          <View style={[styles.applicationNameContainer]}>
+            <Text>
+              {recipientApplication.name}
+            </Text>
+            <Image
+              source={{ uri: recipientApplication.images.logo.png }}
+              style={[styles.applicationLogoImage]}
+            />
+          </View>
+        )}
+      </Picker.Toggle>
 
-        <Picker.Toggle
-          disabled={applications?.loading}
-          placeholder="Select an Application"
-          style={{ container: { marginBottom: 16 } }}
-        >
-          {recipientApplication ? (
-            <View style={[styles.applicationNameContainer]}>
-              <Text>
-                {recipientApplication.name}
-              </Text>
-              <Image
-                source={{ uri: recipientApplication.images.logo.png }}
-                style={[styles.applicationLogoImage]}
-              />
-            </View>
-          ) : <Text>No application found.</Text>}
-        </Picker.Toggle>
+      <Picker.Menu>
+        {applications?.data?.map((application) => (
+          <Picker.Item
+            key={application.chainID}
+            value={application.chainID}
+          >
 
-        <Picker.Menu>
-          {applications?.data?.map((application) => (
-            <Picker.Item
-              key={application.chainID}
-              value={application.chainID}
-            >
+            <Text>{application.name}</Text>
 
-              <Text>{application.name}</Text>
-
-              <Image
-                source={{ uri: application.images.logo.png }}
-                style={[styles.applicationLogoImage]}
-              />
-            </Picker.Item>
-          ))}
+            <Image
+              source={{ uri: application.images.logo.png }}
+              style={[styles.applicationLogoImage]}
+            />
+          </Picker.Item>
+        ))}
       </Picker.Menu>
     </Picker>
   );
@@ -145,4 +145,8 @@ export function SendTokenRecipientAccountField({ form, accounts }) {
         </Picker.Toggle>
       </Picker>
   );
+}
+
+export function SendTokenTransactionFeeField() {
+
 }

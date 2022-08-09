@@ -7,10 +7,10 @@ import Stepper from 'components/shared/Stepper';
 import ProgressBar from 'components/shared/ProgressBar';
 
 import { getSendTokenStyles } from './styles';
-import SendTokenSelectApplicationsStep from './components/SendTokenSelectApplicationsStep';
+import SendTokenApplicationsStep from './components/SendTokenApplicationsStep';
 import SendTokenSelectTokenStep from './components/SendTokenSelectTokenStep';
 import SendTokenSummaryStep from './components/SendTokenSummaryStep';
-import { useSendTokenForm } from './hooks';
+import useSendTokenForm from './hooks/useSendTokenForm';
 
 export default function SendToken({ navigation, route }) {
   const { styles } = useTheme({
@@ -21,7 +21,7 @@ export default function SendToken({ navigation, route }) {
 
   const steps = [
     {
-      component: SendTokenSelectApplicationsStep,
+      component: SendTokenApplicationsStep,
       title: 'selectApplications'
     },
     {
@@ -55,7 +55,6 @@ export default function SendToken({ navigation, route }) {
           />
         ))}
       </Stepper>
-
     </SafeAreaView>
   );
 }
