@@ -37,6 +37,6 @@ export function getInitializationFee({ tokenID, amount, recipientAccount }) {
 }
 
 // TODO: Add business logic missing when updating to LSK Client v6.
-export function getCCMFee({ tokenID, amount, priorityFee }) {
-  return tokenID.length + 0.5 * amount + priorityFee;
+export function getCCMFee() {
+  return 1;
 }

@@ -34,7 +34,7 @@ export default function useInitializationFeeCalculator({
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accounts, priority, tokenID, amount]);
+  }, [recipientAccountAddress, accounts, priority, tokenID, amount]);
 
   return { data, isLoading, error };
 }

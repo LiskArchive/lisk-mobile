@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
@@ -18,14 +19,13 @@ import { PRIORITY_NAMES_MAP } from '../../constants';
 import useTransactionPriorities from '../../hooks/useTransactionPriorities';
 import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
 import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
+import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
 export function TokenSelectField({
   form,
   tokens
 }) {
   const currentAccountInfo = useAccountInfo();
-
-  console.log({ currentAccountInfo });
 
   const { field } = useController({
     name: 'tokenID',
@@ -266,6 +266,8 @@ export function SendTokenTransactionFeesLabels({ form, tokens }) {
     recipientAccountAddress: form.watch('recipientAccountAddress'),
   });
 
+  const cmmFee = useCCMFeeCalculator();
+
   if (transactionFee.error) {
     return <Text>Error calculating fees!</Text>;
   }
@@ -283,14 +285,17 @@ export function SendTokenTransactionFeesLabels({ form, tokens }) {
       <View style={[styles.feeContainer]}>
         <Text>Initialization fee</Text>
         {initializationFee.isLoading ? (
-          <Text>Loading transaction fee...</Text>) : (
+          <Text>Loading initialization fee...</Text>) : (
           <Text>{initializationFee.data} {selectedToken?.symbol}</Text>
         )}
       </View>
 
       <View style={[styles.feeContainer]}>
         <Text>CCM fee</Text>
-        <Text>0 {selectedToken?.symbol}</Text>
+        {cmmFee.isLoading ? (
+          <Text>Loading CCM fee...</Text>) : (
+          <Text>{cmmFee.data} {selectedToken?.symbol}</Text>
+        )}
       </View>
     </View>
   );
