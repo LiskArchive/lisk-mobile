@@ -16,6 +16,12 @@ export default function getSendTokenSelectTokenStepStyles() {
         alignItems: 'center',
         justifyContent: 'center'
       },
+      feeContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 16
+      },
       tokenSvg: {
         marginLeft: 8,
       },

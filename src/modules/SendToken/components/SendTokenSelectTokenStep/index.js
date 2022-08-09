@@ -8,7 +8,11 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import getSendTokenSelectTokenStepStyles from './styles';
 import { useGetTokensQuery } from '../../api/useGetTokensQuery';
 import {
-  SendTokenDescriptionField, SendTokenPriorityField, TokenAmountField, TokenSelectField
+  SendTokenDescriptionField,
+  SendTokenPriorityField,
+  SendTokenTransactionFeesLabels,
+  TokenAmountField,
+  TokenSelectField
 } from './components';
 
 export default function SendTokenSelectTokenStep({
@@ -27,10 +31,11 @@ export default function SendTokenSelectTokenStep({
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
-        <TokenSelectField form={form} tokens={tokens}/>
-        <TokenAmountField form={form} tokens={tokens}/>
+        <TokenSelectField form={form} tokens={tokens} />
+        <TokenAmountField form={form} tokens={tokens} />
         <SendTokenDescriptionField form={form} />
         <SendTokenPriorityField form={form} />
+        <SendTokenTransactionFeesLabels form={form} tokens={tokens} />
       </View>
 
       <PrimaryButton

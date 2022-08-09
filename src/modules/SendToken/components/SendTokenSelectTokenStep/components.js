@@ -16,12 +16,16 @@ import getSendTokenSelectTokenStepStyles from './styles';
 import { useTokenAmountInCurrency } from './hooks';
 import { PRIORITY_NAMES_MAP } from '../../constants';
 import useTransactionPriorities from '../../hooks/useTransactionPriorities';
+import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
+import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
 
 export function TokenSelectField({
   form,
   tokens
 }) {
   const currentAccountInfo = useAccountInfo();
+
+  console.log({ currentAccountInfo });
 
   const { field } = useController({
     name: 'tokenID',
@@ -215,7 +219,7 @@ export function SendTokenPriorityField({ form }) {
   }
 
   return (
-    <View>
+    <View style={{ marginBottom: 16 }}>
       <Text style={[styles.label]}>Priority</Text>
 
       <View style={[styles.row, { width: '100%' }]}>
@@ -234,6 +238,59 @@ export function SendTokenPriorityField({ form }) {
             <Text style={[styles.priorityButtonFeeText]}>{priority.fee} LSK</Text>
           </TouchableOpacity>
         ))}
+      </View>
+    </View>
+  );
+}
+
+export function SendTokenTransactionFeesLabels({ form, tokens }) {
+  const { styles } = useTheme({
+    styles: getSendTokenSelectTokenStepStyles(),
+  });
+
+  const tokenID = form.watch('tokenID');
+
+  const selectedToken = tokens.data?.find(token => token.tokenID === tokenID);
+
+  const transactionFee = useTransactionFeeCalculator({
+    tokenID,
+    amount: form.watch('amount'),
+    priority: form.watch('priority'),
+    message: form.watch('message'),
+  });
+
+  const initializationFee = useInitializationFeeCalculator({
+    tokenID,
+    amount: form.watch('amount'),
+    priority: form.watch('priority'),
+    recipientAccountAddress: form.watch('recipientAccountAddress'),
+  });
+
+  if (transactionFee.error) {
+    return <Text>Error calculating fees!</Text>;
+  }
+
+  return (
+    <View>
+      <View style={[styles.feeContainer]}>
+        <Text>Transaction fee</Text>
+        {transactionFee.isLoading ? (
+          <Text>Loading transaction fee...</Text>) : (
+          <Text>{transactionFee.data} {selectedToken?.symbol}</Text>
+        )}
+      </View>
+
+      <View style={[styles.feeContainer]}>
+        <Text>Initialization fee</Text>
+        {initializationFee.isLoading ? (
+          <Text>Loading transaction fee...</Text>) : (
+          <Text>{initializationFee.data} {selectedToken?.symbol}</Text>
+        )}
+      </View>
+
+      <View style={[styles.feeContainer]}>
+        <Text>CCM fee</Text>
+        <Text>0 {selectedToken?.symbol}</Text>
       </View>
     </View>
   );

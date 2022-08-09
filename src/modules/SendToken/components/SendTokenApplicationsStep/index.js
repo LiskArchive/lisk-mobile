@@ -17,6 +17,8 @@ export default function SendTokenSelectApplicationsStep({
 
   const { accounts } = useAccounts();
 
+  console.log({ accounts });
+
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
