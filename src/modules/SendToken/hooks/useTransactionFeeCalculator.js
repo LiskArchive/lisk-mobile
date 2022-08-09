@@ -40,7 +40,7 @@ export default function useTransactionFeeCalculator({
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoadingPrioritiesData, priority, tokenID, amount]);
+  }, [isLoadingPrioritiesData, priority, tokenID, amount, message]);
 
   return { data, isLoading, error: error || errorOnPriorities };
 }

@@ -38,17 +38,22 @@ export default function SendTokenSelectTokenStep({
         <SendTokenTransactionFeesLabels form={form} tokens={tokens} />
       </View>
 
-      <PrimaryButton
-        noTheme
-        onClick={() => nextStep()}
-        title={'Proceed to confirmation'}
-      />
+      <View style={[styles.row]}>
+        <Button
+          style={{ marginRight: 16, flex: 1 }}
+          onClick={() => prevStep()}
+          title={'Back'}
+        />
 
-      <Button
-        style={{ marginTop: 16 }}
-        onClick={() => prevStep()}
-        title={'Back'}
-      />
+        <PrimaryButton
+          noTheme
+          onClick={() => nextStep()}
+          title={'Continue'}
+          style={{ flex: 1 }}
+        />
+
+      </View>
+
     </View>
   );
 }
