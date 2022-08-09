@@ -7,9 +7,9 @@ import Stepper from 'components/shared/Stepper';
 import ProgressBar from 'components/shared/ProgressBar';
 
 import { getSendTokenStyles } from './styles';
-import SendTokenApplicationsStep from './components/SendTokenApplicationsStep';
-import SendTokenSelectTokenStep from './components/SendTokenSelectTokenStep';
-import SendTokenSummaryStep from './components/SendTokenSummaryStep';
+import SendTokenApplicationsStep from './components/SelectApplicationsStep';
+import SendTokenSelectTokenStep from './components/SelectTokenStep';
+import SendTokenSummaryStep from './components/SummaryStep';
 import useSendTokenForm from './hooks/useSendTokenForm';
 
 export default function SendToken({ navigation, route }) {
