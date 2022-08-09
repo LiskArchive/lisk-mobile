@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import {
+  useCallback, useEffect, useMemo, useState
+} from 'react';
 import { account as accountAPI } from 'utilities/api';
 import { useCurrentAccount } from './useCurrentAccount';
 
@@ -11,14 +13,14 @@ export const useCurrentAccountDetails = () => {
   const [accountDetails, setAccountDetails] = useState({});
 
   // TODO: Replace with react query
-  const fetchAccountDetails = async () => {
+  const fetchAccountDetails = useCallback(async () => {
     const details = await accountAPI.getSummary('LSK', { address });
     setAccountDetails(details);
-  };
+  }, [address]);
 
   useEffect(() => {
-    fetchAccountDetails(address);
-  }, [address]);
+    fetchAccountDetails();
+  }, [address, fetchAccountDetails]);
 
   return accountDetails;
 };

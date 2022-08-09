@@ -47,12 +47,12 @@ const ApplicationSwitcher = () => {
       <FlingGestureHandler
         onHandlerStateChange={() => onFlingDirectionChange('down')}
         direction={Directions.DOWN}
-        onEnded={() => switchApplication('next')}
+        onEnded={() => switchApplication('prev')}
       >
         <FlingGestureHandler
           onHandlerStateChange={() => onFlingDirectionChange('up')}
           direction={Directions.UP}
-          onEnded={() => switchApplication('prev')}
+          onEnded={() => switchApplication('next')}
         >
           <View style={[styles.container, styles.theme.container]}>
             <Animated.View

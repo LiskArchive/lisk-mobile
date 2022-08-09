@@ -1,5 +1,4 @@
-/* eslint-disable max-statements */
-/* eslint-disable max-len */
+/* eslint-disable max-statements, max-len */
 import { Platform } from 'react-native';
 import { transactions } from '@liskhq/lisk-client';
 import * as transactionsConstants from 'modules/Transactions/constants';
