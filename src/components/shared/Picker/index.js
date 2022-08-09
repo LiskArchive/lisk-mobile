@@ -1,14 +1,12 @@
-import React, { createContext, useState } from 'react';
+import React, { useState } from 'react';
 
-// eslint-disable-next-line import/no-cycle
+import { PickerContext } from './hooks';
 import {
   PickerItem,
   PickerLabel,
   PickerMenu,
   PickerToggle
 } from './components';
-
-export const PickerContext = createContext({});
 
 export default function Picker({
   children,

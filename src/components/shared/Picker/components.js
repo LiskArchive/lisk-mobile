@@ -3,9 +3,8 @@ import { Text, TouchableOpacity } from 'react-native';
 import ModalBox from 'react-native-modalbox';
 
 import { useTheme } from 'hooks/useTheme';
-
 import CaretSvg from 'assets/svgs/CaretSvg';
-// eslint-disable-next-line import/no-cycle
+
 import { usePicker } from './hooks';
 import { getPickerStyles } from './styles';
 
