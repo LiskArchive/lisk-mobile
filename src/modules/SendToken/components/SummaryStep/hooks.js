@@ -1,10 +1,10 @@
 /* eslint-disable max-statements */
 import { useCurrentAccount, useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { useGetTokensQuery } from '../../api/useGetTokensQuery';
 import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
 import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
-import { useBlockchainApplicationExplorer } from '../../../BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 
 export function useSendTokenSummary({ form }) {
   const { applications } = useBlockchainApplicationExplorer();
