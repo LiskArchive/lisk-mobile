@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Stepper from 'components/shared/Stepper';
-import ProgressBar from 'components/shared/ProgressBar';
 
 import { getSendTokenStyles } from './styles';
 import SendTokenApplicationsStep from './components/SelectApplicationsStep';
@@ -41,11 +40,7 @@ export default function SendToken({ navigation, route }) {
         noIcon
       />
 
-      <Stepper
-        currentIndex={0}
-        progressBar={ProgressBar}
-        styles={{ progressBar: { wrapper: { marginBottom: 20, marginTop: 20 } } }}
-      >
+      <Stepper>
         {steps.map(step => (
           <step.component
             key={step.title}

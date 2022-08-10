@@ -11,6 +11,20 @@ export default function getSendTokenSummaryStepStyles() {
       container: {
         flex: 1,
       },
+      row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingTop: 16,
+        paddingBottom: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.light.platinumGray,
+      },
+      buttonsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
     },
     [themes.light]: {
       wrapper: {

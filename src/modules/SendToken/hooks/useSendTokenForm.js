@@ -17,7 +17,9 @@ export default function useSendTokenForm() {
       amount: 0,
       message: '',
       priority: 'low',
-      fee: 0,
+      transactionFee: 0,
+      initializationFee: 0,
+      cmmFee: 0
     }
   });
 
