@@ -23,11 +23,11 @@ export function useSendTokenSummary({ form }) {
   const message = form.watch('message');
   const priority = form.watch('priority');
 
-  const senderApplication = applications?.data?.find(
+  const senderApplication = applications.data?.find(
     application => application.chainID === senderApplicationChainID
   );
 
-  const recipientApplication = applications?.data?.find(
+  const recipientApplication = applications.data?.find(
     application => application.chainID === recipientApplicationChainID
   );
 
