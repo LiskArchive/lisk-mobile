@@ -47,13 +47,14 @@ export function useSendTokenSummary({ form }) {
   });
 
   const initializationFee = useInitializationFeeCalculator({
-    tokenID,
-    amount,
-    priority,
+    tokenID,    
     recipientAccountAddress,
   });
 
-  const cmmFee = useCCMFeeCalculator();
+  const cmmFee = useCCMFeeCalculator({
+    senderApplicationChainID,
+    recipientApplicationChainID
+  });
 
   return {
     senderApplication,
