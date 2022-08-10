@@ -22,7 +22,7 @@ export const createTransactionObject = (nonce, amount = 0, message = '') => ({
   signatures: [],
 });
 
-export const getTransactionFee = ({
+export const getTransactionFee = async ({
   transaction,
   selectedPriority,
   selectedPriorityIndex,
@@ -70,7 +70,6 @@ export const getTransactionFee = ({
       feedback,
     };
   } catch (error) {
-    console.log('minFee', error);
     return { value: 0, error: false, feedback: '' };
   }
 
