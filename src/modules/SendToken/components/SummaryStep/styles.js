@@ -60,6 +60,23 @@ export default function getSendTokenSummaryStepStyles() {
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
       },
+      confirmAndSignTransactionModal: {
+        backgroundColor: colors.light.white,
+        height: 560,
+        zIndex: 3,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        paddingLeft: boxes.boxPadding,
+        paddingRight: boxes.boxPadding,
+        paddingTop: 24,
+        paddingBottom: 24
+      },
+      iconWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        marginBottom: 16,
+      },
     },
     [themes.light]: {
       wrapper: {
