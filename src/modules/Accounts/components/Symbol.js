@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { getTxConstant, moduleAssetNameIdMap } from 'modules/Transactions/constants';
+import { getTxConstant, moduleCommandNameIdMap } from 'modules/Transactions/constants';
 import { colors, themes } from 'constants/styleGuide';
 import Avatar from 'components/shared/avatar';
 import Icon from 'components/shared/toolBox/icon';
@@ -32,7 +32,7 @@ const Symbol = ({
       </View>
     );
   }
-  if (moduleAssetId === moduleAssetNameIdMap.transfer) {
+  if (moduleAssetId === moduleCommandNameIdMap.transfer) {
     return <Avatar address={address} size={40} style={styles.theme.avatar} />;
   }
   return (

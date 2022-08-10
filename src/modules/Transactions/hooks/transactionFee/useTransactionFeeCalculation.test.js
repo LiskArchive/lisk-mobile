@@ -13,7 +13,7 @@ describe.skip('useTransactionFeeCalculation', () => {
     priorityOptions: transactionConstants.DEFAULT_PRIORITY,
     transaction: {
       recipientAddress: 'lskdxc4ta5j43jp9ro3f8zqbxta9fn6jwzjucw7yt',
-      moduleAssetId: transactionConstants.moduleAssetNameIdMap.transfer,
+      moduleAssetId: transactionConstants.moduleCommandNameIdMap.transfer,
       amount: 0,
       nonce: 1,
       senderPublicKey: Buffer.alloc(32),

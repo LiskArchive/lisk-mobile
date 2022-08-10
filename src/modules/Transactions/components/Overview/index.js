@@ -8,11 +8,8 @@ import FormattedNumber from 'components/shared/formattedNumber';
 import { toRawLsk, fromRawLsk } from 'utilities/conversions';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
-import Icon from 'components/shared/toolBox/icon';
 import { P } from 'components/shared/toolBox/typography';
 import withTheme from 'components/shared/withTheme';
-import { colors } from 'constants/styleGuide';
-import { tokenMap } from 'constants/tokens';
 import DropDownHolder from 'utilities/alert';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,14 +36,11 @@ const getTranslatedMessages = (t) => ({
 const Overview = ({
   t,
   styles,
-  theme,
   route,
-  settings,
   accounts: { followed, passphrase },
   sharedData: {
     address, amount, reference, fee, priority, secondPassphrase, dynamicFeePerByte
   },
-  settings: { token },
   nextStep,
   prevStep,
   navigation: { setParams }
@@ -87,7 +81,7 @@ const Overview = ({
   const actionType = route.params?.initialize ? 'initialize' : 'send';
 
   const translatedMessages = getTranslatedMessages(t);
-  const bookmark = followed[token.active].find((item) => item.address === address);
+  const bookmark = followed.find((item) => item.address === address);
 
   return <SafeAreaView style={[styles.flex, styles.theme.container]} >
     <HeaderBackButton
@@ -114,18 +108,7 @@ const Overview = ({
                 </P>
               ) : null}
             </View>
-            {settings.token.active === tokenMap.LSK.key ? (
               <Avatar address={address || ''} style={styles.avatar} size={50} />
-            ) : (
-              <View style={[styles.addressIconContainer, styles.theme.addressIconContainer]}>
-                <Icon
-                  name="btc"
-                  style={styles.addressIcon}
-                  color={colors[theme].white}
-                  size={20}
-                />
-              </View>
-            )}
           </View>
 
           <P style={[styles.theme.address, styles.address]}>{address}</P>
@@ -136,7 +119,7 @@ const Overview = ({
             {actionType === 'initialize' ? t('Transaction fee') : t('Amount')}
           </P>
           <P style={[styles.text, styles.theme.text]}>
-            <FormattedNumber tokenType={settings.token.active} language={language}>
+            <FormattedNumber tokenType={'LSK'} language={language}>
               {amount}
             </FormattedNumber>
           </P>
@@ -157,7 +140,7 @@ const Overview = ({
           <View style={[styles.rowContent, styles.theme.rowContent]}>
             <P style={[styles.label, styles.theme.label]}>{t('Transaction fee')}</P>
             <P style={[styles.text, styles.theme.text]}>
-              <FormattedNumber tokenType={settings.token.active} language={language}>
+              <FormattedNumber tokenType={'LSK'} language={language}>
                 {fromRawLsk(fee)}
               </FormattedNumber>
             </P>

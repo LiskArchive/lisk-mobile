@@ -1,4 +1,4 @@
-import { moduleAssetNameIdMap } from 'modules/Transactions/constants';
+import { moduleCommandNameIdMap } from 'modules/Transactions/constants';
 import { transactions as transactionsAPI } from 'utilities/api';
 import { tokenMap } from 'constants/tokens';
 import { loadingStarted, loadingFinished } from 'actions/loading';
@@ -71,7 +71,7 @@ export const transactionAdded = (data, successCb, errorCb) => async (
           recipientAddress: data.recipientAddress,
           amount: data.amount,
           fee: data.fee,
-          moduleAssetId: moduleAssetNameIdMap.transfer,
+          moduleAssetId: moduleCommandNameIdMap.transfer,
           data: data.reference,
         },
       });

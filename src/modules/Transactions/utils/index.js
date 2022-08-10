@@ -7,7 +7,7 @@ import computeMinFee from './fees';
 
 export const createTransactionObject = (nonce, amount = 0, message = '') => ({
   moduleID: 2,
-  assetID: 0,
+  commandID: 0,
   // eslint-disable-next-line no-undef
   nonce: BigInt(nonce),
   // eslint-disable-next-line no-undef
@@ -31,7 +31,7 @@ export const getTransactionFee = async ({
     const feePerByte = selectedPriority.value ?? 0;
     const schema = transactionsConstants.transferAssetSchema;
     const maxAssetFee = transactionsConstants.moduleAssetMap[
-      transactionsConstants.moduleAssetNameIdMap.transfer
+      transactionsConstants.moduleCommandNameIdMap.transfer
     ].maxFee;
     const transactionObject = createTransactionObject(
       transaction.nonce,
@@ -39,6 +39,9 @@ export const getTransactionFee = async ({
       transaction.data
     );
     let minFee;
+    minFee = transactions.computeMinFee(transactionObject, schema, {
+      baseFees: transactionsConstants.BASE_FEES,
+    });
     if (Platform.OS === 'android') {
       minFee = computeMinFee(transactionObject, {
         baseFees: transactionsConstants.BASE_FEES,

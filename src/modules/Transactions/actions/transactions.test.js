@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { transactions as transactionsAPI } from 'utilities/api';
 import { INITIAL_STATE as settings } from 'modules/Settings/reducer';
 import utilTypes from 'constants/actions';
-import { transactions as txConstants, moduleAssetNameIdMap } from '../constants';
+import { transactions as txConstants, moduleCommandNameIdMap } from '../constants';
 import actionTypes from '../actionTypes';
 import {
   transactionsLoaded,
@@ -154,7 +154,7 @@ describe('Action: Accounts', () => {
       amount: 1000,
       recipientAddress: 'recipientAddress',
       reference: 'test ref',
-      fee: txConstants[moduleAssetNameIdMap.transfer].fee
+      fee: txConstants[moduleCommandNameIdMap.transfer].fee
     };
 
     it('should call pendingTransactionAdded when send request is successful', async () => {
@@ -170,7 +170,7 @@ describe('Action: Accounts', () => {
             fee: inputData.fee,
             amount: inputData.amount,
             data: inputData.reference,
-            moduleAssetId: txConstants[moduleAssetNameIdMap.transfer].moduleAssetId,
+            moduleAssetId: txConstants[moduleCommandNameIdMap.transfer].moduleAssetId,
           },
         },
       ];

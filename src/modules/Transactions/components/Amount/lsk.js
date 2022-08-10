@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { TextEncoder } from 'text-encoding';
 import { transactions } from '@liskhq/lisk-client';
 import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScrollView';
@@ -22,7 +22,7 @@ import Input from './input';
 import getStyles from './styles';
 import Priority from './priority';
 import Message from './message';
-import { useCurrentAccountDetails } from '../../../Accounts/hooks/useAccounts/useCurrentAccountDetails';
+import { selectAccountSummary } from '../../../Accounts/store/selectors';
 
 const calculateDynamicFee = (priority, feePerByte, size, minFee, maxAssetFee) => {
   // tie breaker is only meant for medium and high processing speeds
@@ -51,7 +51,7 @@ const AmountLSK = (props) => {
     styles, t, settings, language, priceTicker
   } = props;
   const { amount } = state;
-  const account = useCurrentAccountDetails();
+  const account = useSelector(selectAccountSummary);
 
   const { validity, value } = reference;
 
@@ -63,9 +63,9 @@ const AmountLSK = (props) => {
     account,
     priorityOptions,
     transaction: {
-      moduleAssetId: transactionConstants.moduleAssetNameIdMap.transfer,
+      moduleCommandID: transactionConstants.moduleCommandNameIdMap.transfer,
       amount: state.amount,
-      nonce: account.nonce,
+      nonce: account.nonce ?? '0',
       senderPublicKey: Buffer.alloc(32),
       data: reference.value
     },
