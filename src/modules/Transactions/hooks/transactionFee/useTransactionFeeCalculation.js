@@ -26,11 +26,11 @@ export const useTransactionFeeCalculation = ({
 }) => {
   const [state, dispatch] = useReducer(reducer, account, getInitialState);
   const calculateTransactionFees = async (params) => {
-    const fee = await getTransactionFee(params);
+    const fee = getTransactionFee(params);
 
     dispatch({ type: actionTypes.setFee, payload: { response: fee, account, token } });
 
-    const minFee = await getTransactionFee(
+    const minFee = getTransactionFee(
       {
         ...params,
         selectedPriority: priorityOptions[0],
@@ -40,7 +40,7 @@ export const useTransactionFeeCalculation = ({
 
     dispatch({ type: actionTypes.setMinFee, payload: { response: minFee, account, token } });
 
-    const maxAmountFee = await getTransactionFee(
+    const maxAmountFee = getTransactionFee(
       {
         ...params,
         transaction: { ...params.transaction, amount: fromRawLsk(account.balance) },
@@ -64,13 +64,13 @@ export const useTransactionFeeCalculation = ({
     });
   }, [
     transaction.amount,
-    transaction.data,
+    transaction.data, // not needed
     transaction.recipientAddress,
-    transaction.username,
+    transaction.username, // not needed
     selectedPriority.value,
-    transaction.mandatoryKeys,
-    transaction.optionalKeys,
-    selectedPriorityIndex
+    transaction.mandatoryKeys, // not needed
+    transaction.optionalKeys, // not needed
+    selectedPriorityIndex // not needed
   ]);
 
   return state;

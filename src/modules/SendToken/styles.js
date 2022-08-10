@@ -1,29 +1,48 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
-import { colors } from 'constants/styleGuide';
+
+import { themes, colors } from 'constants/styleGuide';
 import { deviceType } from 'utilities/device';
 
 const { height } = Dimensions.get('window');
 const navigatorHeight = 75 + (deviceType() === 'iOSx' ? 23 : 0);
 
-const styles = {
+export function getSendTokenStyles() {
+  return {
+    common: {
+      wrapper: {
+        flex: 1,
+        height: '100%',
+        // paddingTop: 44,
+      },
+    },
+    [themes.light]: {
+      wrapper: {
+        backgroundColor: colors.light.white,
+      },
+    },
+    [themes.dark]: {
+      wrapper: {
+        backgroundColor: colors.dark.mainBg,
+      },
+    },
+  };
+}
+
+export const sendTokenNavStyles = StyleSheet.create({
   container: {
     height: '100%',
-    width: '100%',
+    width: '10%',
     backgroundColor: colors.light.white,
   },
   back: {
     color: 'black',
   },
   multiStepWrapper: {
-    height: '100%',
+    height: '10%',
   },
   multiStepNavWrapper: {
     height: height > 640 ? navigatorHeight : 0,
-    width: '100%',
-    position: 'absolute',
-    bottom: -1 * navigatorHeight,
-    left: 0,
-    paddingTop: 94,
+    width: '10%',
   },
   multiStepGroupWrapper: {
     width: '100%',
@@ -40,6 +59,7 @@ const styles = {
     fontSize: 1,
     color: 'transparent',
     marginTop: 14,
+    marginBottom: 20,
     marginRight: 10,
     marginLeft: 10,
     backgroundColor: colors.light.ghost,
@@ -65,6 +85,4 @@ const styles = {
   progressStepContainer: {
     backgroundColor: colors.light.ghost,
   },
-};
-
-export default StyleSheet.create(styles);
+});
