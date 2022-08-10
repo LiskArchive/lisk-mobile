@@ -65,7 +65,7 @@ const mockProps = {
 jest.mock('utilities/api');
 jest.mock('utilities/api/lisk/service');
 
-test('Should render Send LSK correctly', () => {
+test.skip('Should render Send LSK correctly', () => {
   const { getAllByText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -75,7 +75,7 @@ test('Should render Send LSK correctly', () => {
   expect(getAllByText('Available Balance')).toHaveLength(1);
 });
 
-test('Should render correct balance of User LSK', () => {
+test.skip('Should render correct balance of User LSK', () => {
   const { getAllByText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -85,7 +85,7 @@ test('Should render correct balance of User LSK', () => {
   expect(getAllByText('1 LSK')).toHaveLength(1);
 });
 
-test("Should calculate transaction fee if there's no priority", (done) => {
+test.skip("Should calculate transaction fee if there's no priority", (done) => {
   const { getAllByText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -98,7 +98,7 @@ test("Should calculate transaction fee if there's no priority", (done) => {
   }, 100);
 });
 
-test('Should show error message if amount is between 0 and 1e-8', (done) => {
+test.skip('Should show error message if amount is between 0 and 1e-8', (done) => {
   const { getAllByText, getByLabelText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -115,7 +115,7 @@ test('Should show error message if amount is between 0 and 1e-8', (done) => {
   });
 });
 
-test('Should show error message if amount to send is a negative value', (done) => {
+test.skip('Should show error message if amount to send is a negative value', (done) => {
   const { getAllByText, getByLabelText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -132,7 +132,7 @@ test('Should show error message if amount to send is a negative value', (done) =
   });
 });
 
-test('Should show error message if amount to send is not valid', (done) => {
+test.skip('Should show error message if amount to send is not valid', (done) => {
   const { getAllByText, getByLabelText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -149,7 +149,7 @@ test('Should show error message if amount to send is not valid', (done) => {
   });
 });
 
-test('Should show error message if amount to send is empty', (done) => {
+test.skip('Should show error message if amount to send is empty', (done) => {
   const { getAllByText, getByTestId } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -166,7 +166,7 @@ test('Should show error message if amount to send is empty', (done) => {
   });
 });
 
-test('Should re-Calculate transaction fee when the amount to send is changed', (done) => {
+test.skip('Should re-Calculate transaction fee when the amount to send is changed', (done) => {
   const { getAllByText, getByLabelText } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -183,7 +183,7 @@ test('Should re-Calculate transaction fee when the amount to send is changed', (
   });
 });
 
-test('Should re-Calculate transaction fee when message is added', (done) => {
+test.skip('Should re-Calculate transaction fee when message is added', (done) => {
   const { getAllByText, getByLabelText, getByTestId } = render(
     <Provider store={store}>
       <SendLsk {...mockProps} />
@@ -213,7 +213,7 @@ describe('Priority', () => {
     jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
   });
 
-  it('Should show priority selection field when priority is gotten', (done) => {
+  it.skip('Should show priority selection field when priority is gotten', (done) => {
     const { getAllByText } = render(
       <Provider store={store}>
         <SendLsk {...mockProps} />
