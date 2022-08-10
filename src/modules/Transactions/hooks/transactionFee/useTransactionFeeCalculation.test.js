@@ -23,10 +23,9 @@ describe.skip('useTransactionFeeCalculation', () => {
   };
 
   it('should return calculated fees', async () => {
-    const { result, waitForValueToChange } = renderHook(() =>
+    const { result } = renderHook(() =>
       useTransactionFeeCalculation({ ...props }));
 
-    await waitForValueToChange(() => result.current.maxAmount.value);
     expect(Number(result.current.fee.value)).toEqual(0.00138);
     expect(Number(result.current.minFee.value)).toEqual(0.00138);
     expect(Number(result.current.maxAmount.value)).toEqual(18992855000);
@@ -36,9 +35,8 @@ describe.skip('useTransactionFeeCalculation', () => {
   it('should have minimum balance of 0.05LSK when a user sends maximum balance', async () => {
     const firstRender = renderHook(() =>
       useTransactionFeeCalculation({ ...props }));
-    await firstRender.waitForValueToChange(() => firstRender.result.current.maxAmount.value);
 
-    const { result, waitForValueToChange } = renderHook(() =>
+    const { result } = renderHook(() =>
       useTransactionFeeCalculation({
         ...props,
         transaction: {
@@ -46,8 +44,6 @@ describe.skip('useTransactionFeeCalculation', () => {
           amount: fromRawLsk(firstRender.result.current.maxAmount.value),
         },
       }));
-
-    await waitForValueToChange(() => result.current.fee.value);
 
     const balance = Number(props.account.balance)
       - result.current.maxAmount.value
@@ -66,10 +62,9 @@ describe.skip('useTransactionFeeCalculation', () => {
       }
     };
 
-    const { result, waitForValueToChange } = renderHook(() =>
+    const { result } = renderHook(() =>
       useTransactionFeeCalculation({ ...updatedProps }));
 
-    await waitForValueToChange(() => result.current.maxAmount.value);
     expect(Number(result.current.maxAmount.value)).toEqual(0);
   });
 });

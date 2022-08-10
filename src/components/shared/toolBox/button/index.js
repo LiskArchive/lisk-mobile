@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { TouchableHighlight, TouchableOpacity, Text } from 'react-native';
+import { colors } from 'constants/styleGuide';
 import getStyles from './styles';
 import Icon from '../icon';
 import withTheme from '../../withTheme';
@@ -79,7 +80,13 @@ const LabelButton = (props) => {
     return mergestyle;
   };
 
-  return <Button {...props} style={labelStyle(props)} />;
+  return (
+    <Button
+      {...props}
+      style={labelStyle(props)}
+      textStyle={{ color: colors.light.ultramarineBlue, ...props.textStyle }}
+    />
+  );
 };
 
 /**

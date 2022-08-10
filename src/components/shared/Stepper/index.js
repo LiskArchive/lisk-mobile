@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import withTheme from 'components/shared/withTheme';
-import Nav from './navigator';
+
+import { useTheme } from 'hooks/useTheme';
+
+import Nav from './StepperNav';
 import { getStyles as normalizeStyles } from './utils';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
-const MultiStep = ({
+export default function Stepper({
   children,
   finalCallback,
   backButtonTitle,
@@ -22,11 +24,15 @@ const MultiStep = ({
   groupButton,
   stepButton,
   progressBar,
-  styles,
-}) => {
+  styles: baseStyles,
+}) {
   const [key, setKey] = useState(0);
   const [data, setData] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const { styles } = useTheme({
+    styles: getStyles(),
+  });
 
   const keepTargetInRange = (target, moves, index, totalSteps) => {
     if (typeof target === 'number') {
@@ -104,12 +110,14 @@ const MultiStep = ({
           move={this.move}
         />
       )}
-      {ProgressBar ? (
-        <ProgressBar current={currentIndex} total={children.length} />
-      ) : null}
+      {ProgressBar && (
+        <ProgressBar
+          current={currentIndex}
+          total={children.length}
+          styles={baseStyles?.progressBar}
+        />
+      )}
       {React.cloneElement(currentChild, extraProps)}
     </View>
   );
-};
-
-export default withTheme(MultiStep, getStyles());
+}

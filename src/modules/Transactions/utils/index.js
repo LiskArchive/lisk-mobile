@@ -22,7 +22,7 @@ export const createTransactionObject = (nonce, amount = 0, message = '') => ({
   signatures: [],
 });
 
-export const getTransactionFee = async ({
+export const getTransactionFee = ({
   transaction,
   selectedPriority,
   selectedPriorityIndex,

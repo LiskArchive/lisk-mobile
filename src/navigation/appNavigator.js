@@ -9,7 +9,7 @@ import MultiSignature from 'components/screens/multiSignature';
 import TabBarIcon from 'components/navigation/tabBarIcon';
 
 import Settings from 'modules/Settings';
-import Send from 'modules/Transactions';
+import SendToken from 'modules/SendToken';
 import Home from 'modules/Accounts';
 import { LockedBalanceDetails } from 'modules/Accounts/components';
 import Bookmarks from 'modules/Bookmark';
@@ -65,7 +65,7 @@ const Tabs = ({ theme }) => (
       component={BlockchainApplicationsExplorer}
       options={{ tabBarIcon: (props) => <ApplicationsSvg {...props} /> }}
     />
-    <Tab.Screen name="Send" component={Send} options={getIcon} />
+    <Tab.Screen name="Send" component={SendToken} options={getIcon} />
     <Tab.Screen name="Bookmarks" component={Bookmarks} options={getIcon} />
     <Tab.Screen name="Settings" component={Settings} options={getIcon} />
   </Tab.Navigator>
