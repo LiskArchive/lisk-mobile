@@ -134,13 +134,13 @@ export default function SendTokenSummaryStep({
       <View style={[styles.buttonsContainer]}>
         <Button
           style={{ marginRight: 16, flex: 1 }}
-          onClick={() => prevStep()}
+          onClick={prevStep}
           title={'Back'}
         />
 
         <PrimaryButton
           noTheme
-          onClick={() => nextStep()}
+          onClick={nextStep}
           title={'Send'}
           style={{ flex: 1 }}
         />

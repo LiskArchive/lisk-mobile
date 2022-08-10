@@ -47,7 +47,7 @@ export function useSendTokenSummary({ form }) {
   });
 
   const initializationFee = useInitializationFeeCalculator({
-    tokenID,    
+    tokenID,
     recipientAccountAddress,
   });
 
