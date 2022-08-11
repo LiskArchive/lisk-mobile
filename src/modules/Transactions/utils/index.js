@@ -38,8 +38,7 @@ export const getTransactionFee = async ({
       transaction.amount,
       transaction.data
     );
-    let minFee;
-    minFee = transactions.computeMinFee(transactionObject, schema, {
+    let minFee = transactions.computeMinFee(transactionObject, schema, {
       baseFees: transactionsConstants.BASE_FEES,
     });
     if (Platform.OS === 'android') {
