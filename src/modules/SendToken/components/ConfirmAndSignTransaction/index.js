@@ -11,15 +11,17 @@ import Input from 'components/shared/toolBox/input';
 import getConfirmAndSignTransactionStyles from './styles';
 import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount';
 import useConfirmAndSignTransactionForm from './hooks';
+import useBroadcastTransactionMutation from '../../api/useBroadcastTransactionMutation';
 
 export default function ConfirmAndSignTransaction({
   amount,
   token,
-  // onCompleted
 }) {
   const [currentAccount] = useCurrentAccount();
 
-  const form = useConfirmAndSignTransactionForm();
+  const broadcastTransactionMutation = useBroadcastTransactionMutation();
+
+  const form = useConfirmAndSignTransactionForm({ broadcastTransactionMutation });
 
   const { field } = useController({
     name: 'password',
@@ -86,8 +88,9 @@ export default function ConfirmAndSignTransaction({
       <PrimaryButton
         noTheme
         onClick={form.handleSubmit}
-        title={`Confirm and send ${amount} ${token.symbol}`}
-       style={{ marginBottom: 24 }}
+        title={broadcastTransactionMutation.isLoading ? 'Loading...' : `Confirm and send ${amount} ${token.symbol}`}
+        style={{ marginBottom: 24 }}
+        disabled={broadcastTransactionMutation.isLoading}
       />
     </View>
   );
