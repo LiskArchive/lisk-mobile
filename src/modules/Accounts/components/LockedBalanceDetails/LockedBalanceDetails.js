@@ -14,6 +14,7 @@ import UnlockSvg from 'assets/svgs/UnlockSvg';
 import FormattedNumber from 'components/shared/formattedNumber';
 import getStyles from './styles';
 import { getPendingTime } from '../../utils';
+import { useAccountInfo } from '../../hooks/useAccounts/useAccountInfo';
 
 const RowItem = ({
   styles, title, value, IconComponent, tokenType, language, theme
@@ -41,17 +42,19 @@ const RowItem = ({
 );
 
 const LockedBalanceDetailsScreen = ({
-  account, styles, navigation, t, activeToken, network, language, theme
+  styles, navigation, t, network, language, theme
 }) => {
+  const { summary: account } = useAccountInfo();
+
   const [unlockedTokens, setUnunlockedTokens] = useState({});
   const [availableTokens, setAvailableTokens] = useState([]);
   const [lockedTokensSum, setLockedTokensSum] = useState('');
 
   const networkHeight = useMemo(() => network.height, [network]);
-  const sentVotes = useMemo(() => account[activeToken].sentVotes, [account]);
+  const sentVotes = useMemo(() => account.sentVotes, [account]);
 
   useEffect(() => {
-    const tokensToUnlock = account[activeToken]?.unlocking ?? [];
+    const tokensToUnlock = account?.unlocking ?? [];
     const unlockedTokensHashMap = {};
     const availableToUnlock = [];
     tokensToUnlock.forEach((token) => {
@@ -103,7 +106,7 @@ const LockedBalanceDetailsScreen = ({
                 value={t('locked')}
                 IconComponent={LockSvg}
                 styles={styles}
-                tokenType={activeToken}
+                tokenType={'LSK'}
                 language={language}
                 theme={theme}
               />
@@ -119,7 +122,7 @@ const LockedBalanceDetailsScreen = ({
                 })}
                 IconComponent={ProgressSvg}
                 styles={styles}
-                tokenType={activeToken}
+                tokenType={'LSK'}
                 language={language}
                 theme={theme}
               />
@@ -132,7 +135,7 @@ const LockedBalanceDetailsScreen = ({
                 value={t('available to unlock (only on desktop)')}
                 IconComponent={UnlockSvg}
                 styles={styles}
-                tokenType={activeToken}
+                tokenType={'LSK'}
                 language={language}
                 theme={theme}
               />
@@ -145,8 +148,6 @@ const LockedBalanceDetailsScreen = ({
 };
 
 const mapStateToProps = (state) => ({
-  account: state.accounts.info || {},
-  activeToken: state.settings.token.active,
   network: state.network,
   language: state.settings.language,
 });
