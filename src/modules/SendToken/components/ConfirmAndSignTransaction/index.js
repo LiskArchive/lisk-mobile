@@ -13,7 +13,9 @@ import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurren
 import useConfirmAndSignTransactionForm from './hooks';
 
 export default function ConfirmAndSignTransaction({
-  amount, token, onCompleted
+  amount,
+  token,
+  // onCompleted
 }) {
   const [currentAccount] = useCurrentAccount();
 
@@ -83,7 +85,7 @@ export default function ConfirmAndSignTransaction({
 
       <PrimaryButton
         noTheme
-        onClick={() => console.log('submitting...')}
+        onClick={form.handleSubmit}
         title={`Confirm and send ${amount} ${token.symbol}`}
        style={{ marginBottom: 24 }}
       />
