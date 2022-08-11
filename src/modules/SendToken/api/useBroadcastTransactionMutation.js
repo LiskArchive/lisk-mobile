@@ -3,6 +3,7 @@ import { broadcastTransactionMockHandler } from '../mocks/handlers';
 
 export default function useBroadcastTransactionMutation(options = {}) {
   function handleBroadcastTransaction(variables) {
+    // TODO: Implement real API call when update to service v3 API is done.
     console.log({ variables });
 
     return broadcastTransactionMockHandler;

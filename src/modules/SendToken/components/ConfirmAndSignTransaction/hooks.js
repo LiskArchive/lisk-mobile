@@ -8,9 +8,8 @@ export default function useConfirmAndSignTransactionForm({ broadcastTransactionM
   });
 
   const handleSubmit = baseHandleSubmit((values) => {
+    // TODO: Run sign TX process when SDK v6 integration is done.
     console.log({ values });
-
-    // Run sign TX process
 
     broadcastTransactionMutation.mutate(
       { transaction: '123lk1j23lk12j3l12kj3' },
