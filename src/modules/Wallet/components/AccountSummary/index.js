@@ -25,7 +25,6 @@ const AccountSummary = ({
   styles,
   account,
   followedAccounts,
-  activeToken,
   settings: { token },
   language,
   t,
@@ -33,7 +32,7 @@ const AccountSummary = ({
   theme
 }) => {
   const normalizedBalance = fromRawLsk(account.balance);
-  const isFollowed = followedAccounts[activeToken].find(
+  const isFollowed = followedAccounts.find(
     (item) => item.address === account.address
   );
 
@@ -90,8 +89,9 @@ const AccountSummary = ({
   </AView>;
 };
 
+// TODO: Implement bookmark
 const mapStateToProps = state => ({
-  followedAccounts: state.accounts.followed,
+  followedAccounts: [],
   settings: state.settings,
   activeToken: state.settings.token.active,
   language: state.settings.language

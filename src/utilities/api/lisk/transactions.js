@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import * as Lisk from '@liskhq/lisk-client';
 import {
   isTransfer,
-  moduleAssetNameIdMap,
+  moduleCommandNameIdMap,
   transferAssetSchema
 } from 'modules/Transactions/constants';
 import * as LiskAndroidPatch from './utils/index';
@@ -10,10 +10,10 @@ import { apiClient } from './apiClient';
 import config from '../../../../lsk.config';
 
 const getAmount = (tx) => {
-  if (moduleAssetNameIdMap.transfer === tx.moduleAssetId) {
+  if (moduleCommandNameIdMap.transfer === tx.moduleAssetId) {
     return tx.asset.amount;
   }
-  if (moduleAssetNameIdMap.unlockToken === tx.moduleAssetId) {
+  if (moduleCommandNameIdMap.unlockToken === tx.moduleAssetId) {
     // eslint-disable-next-line no-undef
     return tx.asset?.unlockObjects?.reduce?.((a, b) => a + BigInt(b.amount), BigInt(0)).toString();
   }
@@ -76,11 +76,11 @@ export const create = async ({
 }) => {
   const {
     publicKey: senderPublicKey
-  } = Lisk.cryptography.getAddressAndPublicKeyFromPassphrase(passphrase);
-  const recipient = Lisk.cryptography.getAddressFromLisk32Address(recipientAddress);
+  } = Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase);
+  const recipient = Lisk.cryptography.address.getAddressFromLisk32Address(recipientAddress);
   const tx = {
     moduleID: 2,
-    assetID: 0,
+    commandID: 0,
     senderPublicKey,
     // eslint-disable-next-line no-undef
     fee: BigInt(fee),

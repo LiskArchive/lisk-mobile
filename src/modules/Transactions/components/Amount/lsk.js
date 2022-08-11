@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { TextEncoder } from 'text-encoding';
 import { transactions } from '@liskhq/lisk-client';
 import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScrollView';
@@ -22,6 +22,7 @@ import Input from './input';
 import getStyles from './styles';
 import Priority from './priority';
 import Message from './message';
+import { selectAccountSummary } from '../../../Accounts/store/selectors';
 
 const calculateDynamicFee = (priority, feePerByte, size, minFee, maxAssetFee) => {
   // tie breaker is only meant for medium and high processing speeds
@@ -47,9 +48,10 @@ const AmountLSK = (props) => {
   });
 
   const {
-    accounts, styles, t, settings, language, priceTicker
+    styles, t, settings, language, priceTicker
   } = props;
   const { amount } = state;
+  const account = useSelector(selectAccountSummary);
 
   const { validity, value } = reference;
 
@@ -58,12 +60,12 @@ const AmountLSK = (props) => {
   const { fee, maxAmount } = useTransactionFeeCalculation({
     selectedPriority: priorityOptions[selectedPriority],
     token: settings.token.active,
-    account: accounts.info[settings.token.active],
+    account,
     priorityOptions,
     transaction: {
-      moduleAssetId: transactionConstants.moduleAssetNameIdMap.transfer,
+      moduleCommandID: transactionConstants.moduleCommandNameIdMap.transfer,
       amount: state.amount,
-      nonce: accounts.info[settings.token.active].nonce,
+      nonce: account.nonce ?? '0',
       senderPublicKey: Buffer.alloc(32),
       data: reference.value
     },
@@ -153,8 +155,7 @@ const AmountLSK = (props) => {
   }, []);
 
   const getRawTransaction = (amount, message) => {
-    const { accounts, settings } = props;
-    return createTransactionObject(accounts.info[settings.token.active].nonce, amount, message);
+    return createTransactionObject(account.nonce, amount, message);
   };
 
   const getFee = (amount) => {
@@ -190,8 +191,6 @@ const AmountLSK = (props) => {
   const validator = (str, fee) => {
     const {
       t,
-      accounts,
-      settings: { token }
     } = props;
     if (str === '' || parseFloat(str) === 0) {
       return {
@@ -203,10 +202,10 @@ const AmountLSK = (props) => {
     if (!validateAmount(str)) {
       message = t('The amount value is invalid.');
     } else if (
-      accounts.info[token.active].balance
-      && (accounts.info[token.active].balance < fee
+      account.balance
+      && (account.balance < fee
         // eslint-disable-next-line no-undef
-        || parseFloat(str) > fromRawLsk(BigInt(accounts.info[token.active].balance) - fee))
+        || parseFloat(str) > fromRawLsk(BigInt(account.balance) - fee))
     ) {
       message = t('Your balance is not sufficient.');
     }
@@ -228,7 +227,7 @@ const AmountLSK = (props) => {
       }));
       return;
     }
-    if (accounts.info[settings.token.active].balance - toRawLsk(amount) - toRawLsk(fee.value)
+    if (account.balance - toRawLsk(amount) - toRawLsk(fee.value)
       < transactionConstants.DEFAULT_MIN_REMAINING_BALANCE) {
       DropDownHolder.error(t('Error'), t('Your balance is not sufficient.'));
       return;
@@ -258,13 +257,13 @@ const AmountLSK = (props) => {
   const getValueInCurrency = () => {
     const {
       priceTicker,
-      settings: { currency, token }
+      settings: { currency }
     } = props;
     const { amount } = state;
     let valueInCurrency = 0;
     // eslint-disable-next-line no-undef
-    if (amount && validator(amount, BigInt(0)).code === 0 && priceTicker[token.active][currency]) {
-      valueInCurrency = (amount * priceTicker[token.active][currency]).toFixed(2);
+    if (amount && validator(amount, BigInt(0)).code === 0 && priceTicker.LSK[currency]) {
+      valueInCurrency = (amount * priceTicker.LSK[currency]).toFixed(2);
       valueInCurrency = valueInCurrency === 'NaN' ? 0 : valueInCurrency;
     }
     return localizeAmount(valueInCurrency);
@@ -272,12 +271,12 @@ const AmountLSK = (props) => {
 
   const getBalanceInCurrency = () => {
     const {
-      priceTicker, settings, accounts, language
+      priceTicker, settings, language
     } = props;
     const token = settings?.token?.active;
     const ratio = priceTicker[token][settings?.currency];
     if (ratio) {
-      return (fromRawLsk(accounts.info[settings?.token?.active]?.balance) * ratio).toLocaleString(
+      return (fromRawLsk(account?.balance) * ratio).toLocaleString(
         `${language}-${language?.toUpperCase()}`,
         { maximumFractionDigits: 2 }
       );
@@ -305,7 +304,7 @@ const AmountLSK = (props) => {
       >
         <View>
           <Balance
-            value={fromRawLsk(accounts.info[settings.token.active].balance)}
+            value={fromRawLsk(account.balance)}
             tokenType={settings.token.active}
             discrete={settings.discrete}
             language={language}

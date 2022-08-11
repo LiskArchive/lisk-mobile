@@ -35,6 +35,7 @@ const AuthMethod = ({
   };
 
   useEffect(() => {
+    // TODO: Replace with live data
     setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());
@@ -52,14 +53,14 @@ const AuthMethod = ({
       const file = await DocumentPicker.pickSingle({
         type: DocumentPicker.types.allFiles,
       });
-      await RNFS.readFile(file.uri);
+      const encryptedData = await RNFS.readFile(file.uri);
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
       navigation.navigate('DecryptPhrase', {
         title: 'auth.setup.decryptPassphrase',
-        address: 'lskqzpfr3uq8bm2jee5dkv4ns79uuswjzc9bbpezu',
-        successRoute: 'SecretRecoveryPhrase',
+        encryptedData,
+        successRoute: 'ManageAccount',
       });
     } catch (error) {
       // TODO: Handle error message

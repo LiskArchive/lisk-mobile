@@ -6,7 +6,7 @@ import {
   getBytes
 } from '../utils';
 
-describe('sign', () => {
+describe.skip('sign', () => {
   const validAssetSchema = {
     $id: 'lisk/transfer-transaction',
     title: 'Transfer transaction asset',
@@ -38,7 +38,7 @@ describe('sign', () => {
   );
   const passphrase1 = 'trim elegant oven term access apple obtain error grain excite lawn neck';
   const { publicKey: publicKey1 } = Lisk
-    .cryptography.getAddressAndPublicKeyFromPassphrase(passphrase1);
+    .cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase1);
 
   const validTransaction = {
     moduleID: 2,

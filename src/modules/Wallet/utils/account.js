@@ -23,7 +23,7 @@ export const extractKeyPair = ({
   }
 
   if (LiskPassphrase.Mnemonic.validateMnemonic(passphrase)) {
-    const keyPair = cryptography.getKeys(passphrase);
+    const keyPair = cryptography.ed.getKeys(passphrase);
     return {
       publicKey: keyPair.publicKey.toString('hex'),
       privateKey: keyPair.privateKey.toString('hex'),
@@ -82,10 +82,10 @@ export const extractPrivateKey = (
 export const extractAddressFromPublicKey = (data) => {
   if (regex.publicKey.test(data)) {
     const binaryPublicKey = Buffer.from(data, 'hex');
-    return cryptography.getBase32AddressFromPublicKey(binaryPublicKey).toString('hex');
+    return cryptography.address.getLisk32AddressFromPublicKey(binaryPublicKey).toString('hex');
   }
   if (Buffer.isBuffer(data)) {
-    return cryptography.getBase32AddressFromPublicKey(data);
+    return cryptography.address.getLisk32AddressFromPublicKey(data);
   }
   throw Error(`Unable to convert publicKey ${data} to address`);
 };
@@ -98,7 +98,7 @@ export const extractAddressFromPublicKey = (data) => {
  */
 export const extractAddressFromPassphrase = (data) => {
   if (LiskPassphrase.Mnemonic.validateMnemonic(data)) {
-    return cryptography.getBase32AddressFromPassphrase(data).toString('hex');
+    return cryptography.address.getLisk32AddressFromPassphrase(data).toString('hex');
   }
   throw Error('Invalid passphrase');
 };
@@ -109,9 +109,9 @@ export const extractAddressFromPassphrase = (data) => {
  * @param {String} data - passphrase or public key
  * @returns {String?} - Extracted address for a given valid passphrase or publicKey
  */
-export const getBase32AddressFromAddress = (data) => {
+export const getLisk32AddressFromAddress = (data) => {
   try {
-    return cryptography.getBase32AddressFromAddress(data);
+    return cryptography.address.getLisk32AddressFromAddress(data);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);

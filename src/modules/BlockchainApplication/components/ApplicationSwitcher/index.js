@@ -2,26 +2,31 @@ import React, { useRef } from 'react';
 import {
   View, Animated, Image, TouchableOpacity
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'hooks/useTheme';
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler';
 import { P } from 'components/shared/toolBox/typography';
 import SwitchSvg from 'assets/svgs/SwitchSvg';
-import { useNavigation } from '@react-navigation/native';
 import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
+import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
+import { roundAccessor } from '../../utils';
 import getStyles from './styles';
 
 const ApplicationSwitcher = () => {
   const { styles } = useTheme({ styles: getStyles });
   const translateY = useRef(new Animated.Value(0));
   const navigation = useNavigation();
-  const [currentApplication] = useCurrentBlockchainApplication();
+  const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
+  const { applications } = useBlockchainApplicationManagement();
 
   const navigateToSwitchApplication = () => {
     navigation.navigate('SwitchApplication');
   };
 
-  const switchApplication = () => {
-    // TODO: Implement switching application here
+  const switchApplication = (direction) => {
+    const chainIndex = applications.data
+      .findIndex(app => app.chainID === currentApplication.chainID);
+    setCurrentApplication(roundAccessor(applications.data, chainIndex, direction));
   };
 
   const onFlingDirectionChange = (direction) => {
@@ -42,12 +47,12 @@ const ApplicationSwitcher = () => {
       <FlingGestureHandler
         onHandlerStateChange={() => onFlingDirectionChange('down')}
         direction={Directions.DOWN}
-        onEnded={switchApplication}
+        onEnded={() => switchApplication('prev')}
       >
         <FlingGestureHandler
           onHandlerStateChange={() => onFlingDirectionChange('up')}
           direction={Directions.UP}
-          onEnded={switchApplication}
+          onEnded={() => switchApplication('next')}
         >
           <View style={[styles.container, styles.theme.container]}>
             <Animated.View

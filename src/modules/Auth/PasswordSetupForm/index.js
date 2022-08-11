@@ -8,6 +8,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
+import DropDownHolder from 'utilities/alert';
 import {
   useAccounts,
   useCurrentAccount,
@@ -34,23 +35,27 @@ const PasswordSetupForm = ({
   const [isSuccess, setIsSuccess] = useState(false);
   const [encryptedJSON, setEncryptedJSON] = useState();
 
-  // eslint-disable-next-line consistent-return
-  const submitForm = () => {
-    if (!passwordValidator(password)) {
-      return setPasswordError('auth.form.errors.passwordError');
+  // eslint-disable-next-line max-statements, consistent-return
+  const submitForm = async () => {
+    try {
+      if (!passwordValidator(password)) {
+        return setPasswordError('auth.form.errors.passwordError');
+      }
+      if (password !== confirmPassword) {
+        return setconfirmPasswordError('auth.form.errors.confirmPasswordError');
+      }
+      const data = await encryptAccount({
+        recoveryPhrase: passphrase,
+        password,
+        name: accountName,
+      });
+      setEncryptedJSON(data);
+      setIsSuccess(true);
+      setAccount(data);
+      setCurrentAccount(data);
+    } catch (error) {
+      return DropDownHolder.error(t('Error'), t('auth.setup.decryptPassphraseError'));
     }
-    if (password !== confirmPassword) {
-      return setconfirmPasswordError('auth.form.errors.confirmPasswordError');
-    }
-    const data = encryptAccount({
-      recoveryPhrase: passphrase,
-      password,
-      name: accountName,
-    });
-    setEncryptedJSON(data);
-    setIsSuccess(true);
-    setAccount(data);
-    setCurrentAccount(data);
   };
 
   useEffect(() => {

@@ -318,6 +318,7 @@
       "removeAccount": "Remove account?",
       "removeAccount_description": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
       "decryptPassphrase": "Decrypt your secret recovery phrase",
+      "decryptPassphraseError": "Unable to decrypt account. Please check your password",
       "addAccountDescription": "Enter your secret recovery phrase to manage your account",
       "passwordSetupTitle": "Set up device password",
       "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
