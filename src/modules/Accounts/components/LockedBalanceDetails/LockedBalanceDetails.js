@@ -46,7 +46,7 @@ const LockedBalanceDetailsScreen = ({
 }) => {
   const { summary: account } = useAccountInfo();
 
-  const [unlockedTokens, setUnunlockedTokens] = useState({});
+  const [unlockedTokens, setUnlockedTokens] = useState({});
   const [availableTokens, setAvailableTokens] = useState([]);
   const [lockedTokensSum, setLockedTokensSum] = useState('');
 
@@ -68,7 +68,7 @@ const LockedBalanceDetailsScreen = ({
       }
     });
     setAvailableTokens(availableToUnlock);
-    setUnunlockedTokens(unlockedTokensHashMap);
+    setUnlockedTokens(unlockedTokensHashMap);
   }, [networkHeight]);
 
   useEffect(() => {

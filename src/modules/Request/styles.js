@@ -1,6 +1,9 @@
 import {
   themes, colors, boxes, fonts
 } from 'constants/styleGuide';
+import {
+  deviceWidth,
+} from 'utilities/device';
 
 export default () => ({
   common: {
@@ -11,12 +14,20 @@ export default () => ({
       flexDirection: 'column',
       flex: 1,
     },
-    subHeader: {
-      flexDirection: 'column',
-      paddingTop: boxes.boxPadding,
-      paddingLeft: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
-      paddingBottom: 40,
+    applicationNameContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    applicationLogoImage: {
+      borderRadius: 50,
+      width: 24,
+      height: 24,
+      marginLeft: 8,
+      borderWidth: 1,
+      borderColor: colors.light.platinumGray,
+    },
+    body: {
+      padding: boxes.boxPadding,
     },
     addressLabel: {
       fontSize: fonts.size.small,
@@ -26,9 +37,13 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center',
       width: '90%',
+      marginBottom: 20,
     },
     avatar: {
       marginRight: 10,
+    },
+    tokenSvg: {
+      marginLeft: 8,
     },
     address: {
       fontSize: fonts.size.base,
@@ -39,19 +54,17 @@ export default () => ({
       alignItems: 'center',
       width: '100%',
     },
-    body: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      paddingBottom: boxes.boxPadding,
-    },
     shareContainer: {
       alignItems: 'center',
-      marginBottom: 10,
+      height: 100,
     },
-    shareContent: {
-      flexDirection: 'column',
-      alignItems: 'center',
+    modalContainer: {
+      backgroundColor: colors.light.white,
+      height: deviceWidth(),
+      zIndex: 3,
+      borderTopLeftRadius: 24,
+      borderTopRightRadius: 24,
+      alignItems: 'center'
     },
     shareTextContainer: {
       marginTop: 16,
@@ -61,9 +74,13 @@ export default () => ({
     shareText: {
       fontSize: fonts.size.small,
     },
-    inputContainer: {
-      height: 100,
-    },
+    closeButton: {
+      alignSelf: 'flex-end',
+      margin: 10,
+      padding: 10,
+      backgroundColor: colors.light.platinumGray,
+      borderRadius: 50,
+    }
   },
 
   [themes.light]: {

@@ -11,13 +11,7 @@ import { translate } from 'react-i18next';
 import Share from 'components/shared/share';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import TokenSvg from 'assets/svgs/TokenSvg';
-import Modal from 'react-native-modalbox';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import {
-  deviceWidth,
-} from 'utilities/device';
 import { P, B } from 'components/shared/toolBox/typography';
-import Icon from 'components/shared/toolBox/icon';
 import reg from 'constants/regex';
 import withTheme from 'components/shared/withTheme';
 import { themes, colors } from 'constants/styleGuide';
@@ -33,8 +27,6 @@ import { useGetTokensQuery } from '../SendToken/api/useGetTokensQuery';
 import AmountInput from './components/AmountInput';
 import { useCurrencyConverter } from './hooks/useCurrencyConverter';
 
-const qrCodeSize = deviceWidth() * 0.52;
-
 const Request = ({
   styles, theme, t, navigation
 }) => {
@@ -46,7 +38,6 @@ const Request = ({
   const [recipientApplication, setRecipientApplication] = useState(null);
   const [recipientToken, setRecipientToken] = useState(null);
   const [url, setUrl] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
   const { applications } = useBlockchainApplicationExplorer();
   const { data: tokens } = useGetTokensQuery(account.address);
   const valueInCurrency = useCurrencyConverter(amount.value);
@@ -71,7 +62,7 @@ const Request = ({
       };
     }
     setUrl(amountValidity === 0
-      ? `lisk://wallet?recipient=${address}&amount=${val}&recipientApplication=${recipientApplication?.chainID}&recipientToken=${recipientToken.tokenId}`
+      ? `lisk://wallet?recipient=${address}&amount=${val}`
       : address);
     setAmount(amount);
   };
@@ -84,21 +75,6 @@ const Request = ({
   useEffect(() => {
     dispatch(pricesRetrieved());
   }, []);
-
-  const renderQRCode = (size) => <QRCode
-    value={url || address}
-    size={size}
-    color={
-      theme === themes.light
-        ? colors.light.black
-        : colors.dark.white
-    }
-    backgroundColor={
-      theme === themes.light
-        ? colors.light.white
-        : colors.dark.maastrichtBlue
-    }
-  />;
 
   if (applications.isLoading) {
     return (
@@ -114,8 +90,6 @@ const Request = ({
     <HeaderBackButton
       title="requestTokens.title"
       onPress={navigation.goBack}
-      rightIconComponent={() => <TouchableOpacity
-        onPress={() => setModalOpen(true)}>{renderQRCode(20)}</TouchableOpacity>}
     />
     <KeyboardAwareScrollView
       viewIsInsideTab
@@ -203,33 +177,39 @@ const Request = ({
             value={amount.value}
           />
 
+          <View style={styles.shareContainer}>
+            <Share
+              type={TouchableWithoutFeedback}
+              value={url || address}
+              title={url || address}
+            >
+              <View style={styles.shareContent}>
+                <QRCode
+                  value={url || address}
+                  size={0.72}
+                  color={
+                    theme === themes.light
+                      ? colors.light.black
+                      : colors.dark.white
+                  }
+                  backgroundColor={
+                    theme === themes.light
+                      ? colors.light.white
+                      : colors.dark.maastrichtBlue
+                  }
+                />
+
+                <View style={styles.shareTextContainer}>
+                  <P style={[styles.shareText, styles.theme.shareText]}>
+                    {t('Tap on the QR Code to share it.')}
+                  </P>
+                </View>
+              </View>
+            </Share>
+          </View>
         </View>
       </View>
     </KeyboardAwareScrollView>
-    <Modal style={styles.modalContainer} isOpen={modalOpen} onClosed={() => setModalOpen(false)} position="bottom" >
-      <View style={styles.closeButton}>
-      <Icon
-        onPress={() => setModalOpen(false)}
-        name="cross"
-        color={colors.light.ultramarineBlue}
-        size={20}
-      />
-      </View>
-      <Share
-        type={TouchableWithoutFeedback}
-        value={url || address}
-        title={url || address}
-      >
-        <View style={styles.shareContent}>
-          {renderQRCode(qrCodeSize)}
-          <View style={styles.shareTextContainer}>
-            <P style={[styles.shareText, styles.theme.shareText]}>
-              {t('Tap on the QR Code to share it.')}
-            </P>
-          </View>
-        </View>
-      </Share>
-    </Modal>
   </SafeAreaView>;
 };
 

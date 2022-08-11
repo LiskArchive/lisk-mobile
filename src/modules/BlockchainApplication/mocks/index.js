@@ -125,6 +125,17 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
   },
 ];
 
+export const TOKENS_MOCK = [{
+  name: 'LSK',
+  tokenId: 'sa9112dfe38',
+  images: {
+    logo: {
+      png: 'https://avatars.githubusercontent.com/u/16600915?s=200&v=4', // URL
+      svg: '', // URL
+    },
+  },
+}];
+
 export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.reduce(
   (obj, val) => {
     obj[val.chainID] = val;

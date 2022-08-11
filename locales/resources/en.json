@@ -394,5 +394,9 @@
         "unpinText": "Unpin",
         "deleteText": "Delete"
       }
-    }}
+    }},
+  "requestTokens": {
+    "title": "Request Tokens",
+    "recipient": "Recipient"
+  }
 }
