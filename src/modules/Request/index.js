@@ -163,7 +163,7 @@ const Request = ({
               </View>
             </Picker.Toggle>
             <Picker.Menu>
-              {applications?.data?.map((application) => (
+              {applications.data?.map((application) => (
                 <Picker.Item
                   key={application.chainID}
                   value={application}
