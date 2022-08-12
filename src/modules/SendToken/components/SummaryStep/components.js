@@ -35,9 +35,9 @@ export function SendTokenSummaryModal({
               setActiveStep('sendTokenSuccess');
               console.log('on success...');
             }}
-            onError={() => {
+            onError={(error) => {
               setActiveStep('sendTokenError');
-              console.log('on error...');
+              console.log('on error...', error);
             }}
         />
         );

@@ -3,13 +3,18 @@ import {
   Svg, Path, G, Defs, ClipPath, Rect
 } from 'react-native-svg';
 
-export default () => (
+export default function TxSuccessDarkSvg({
+  height = 110,
+  width = 130,
+  style,
+}) {
+  return (
   <Svg
-    width="130"
-    height="110"
+    height={height}
+    width={width}
     viewBox="0 0 130 110"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
+    style={style}
   >
     <G clipPath="url(#clip0_504_3433)">
       <Path d="M30.0343 94.2027H97.6974V91.6732L27.4336 91.4874L30.0343 94.2027Z" fill="#DFE6F2" />
@@ -123,4 +128,5 @@ export default () => (
       </ClipPath>
     </Defs>
   </Svg>
-);
+  );
+}

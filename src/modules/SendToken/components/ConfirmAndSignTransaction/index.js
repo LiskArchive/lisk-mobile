@@ -23,6 +23,8 @@ export default function ConfirmAndSignTransaction({
 
   const broadcastTransactionMutation = useBroadcastTransactionMutation();
 
+  console.log({ broadcastTransactionMutation });
+
   const form = useConfirmAndSignTransactionForm({
     broadcastTransactionMutation, onSuccess, onError
   });

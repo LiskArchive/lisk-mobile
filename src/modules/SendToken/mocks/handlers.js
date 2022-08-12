@@ -6,10 +6,10 @@ import { API_VERSION } from '../../../utilities/api/constants';
 import { BROADCASTED_TRANSACTION_MOCK } from './index';
 
 export const broadcastTransactionMockHandler = rest.post(
-  `*/api/${API_VERSION}/transactions`,
+  `http://104.248.241.229:9901/api/${API_VERSION}/transactions`,
   (_, res, ctx) => {
     return res(
-      ctx.status(200),
+      ctx.status(403),
       ctx.json(BROADCASTED_TRANSACTION_MOCK),
     );
   }

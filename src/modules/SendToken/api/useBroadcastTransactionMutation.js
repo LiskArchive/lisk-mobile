@@ -17,7 +17,7 @@ export default function useSendTransactionMutation(options = {}) {
       baseURL: currentBlockchainApplication?.apis[0][METHOD]
         ?? currentBlockchainApplication?.apis[0].rest,
       path: `/api/${API_VERSION}/transactions`,
-      method: 'POST',
+      method: 'post',
       params: { limit: LIMIT, ...variables },
     };
 
@@ -40,6 +40,8 @@ export default function useSendTransactionMutation(options = {}) {
     },
     ...options
   });
+
+  console.log({ mutation });
 
   return mutation;
 }
