@@ -1,14 +1,19 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
 
-import { BROADCASTED_TRANSACTION_MOCK } from '.';
+import { API_VERSION } from '../../../utilities/api/constants';
 
-export const broadcastTransactionMockHandler = rest.post('http://104.248.241.229:9901/api/v3/transactions', (_, res, ctx) => {
-  return res(
-    ctx.status(200),
-    ctx.json(BROADCASTED_TRANSACTION_MOCK),
-  );
-});
+import { BROADCASTED_TRANSACTION_MOCK } from './index';
+
+export const broadcastTransactionMockHandler = rest.post(
+  `*/api/${API_VERSION}/transactions`,
+  (_, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json(BROADCASTED_TRANSACTION_MOCK),
+    );
+  }
+);
 
 export const sendTokenMockHandlers = [
   broadcastTransactionMockHandler

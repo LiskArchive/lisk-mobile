@@ -2,9 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 
 import {
   METHOD,
-  LIMIT as limit,
+  LIMIT,
   API_VERSION,
-  // API_METHOD,
 } from 'utilities/api/constants';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 
@@ -19,14 +18,11 @@ export default function useSendTransactionMutation(options = {}) {
         ?? currentBlockchainApplication?.apis[0].rest,
       path: `/api/${API_VERSION}/transactions/`,
       method: 'POST',
-      params: { limit, ...variables },
+      params: { LIMIT, ...variables },
     };
 
     // TODO: Implement real API call when update to service v3 API is done.
-    // return API_METHOD[METHOD]({
-    //   path,
-    //   config,
-    // });
+    // return API_METHOD[METHOD](config);
     console.log({ config });
 
     return broadcastTransactionMockHandler;
