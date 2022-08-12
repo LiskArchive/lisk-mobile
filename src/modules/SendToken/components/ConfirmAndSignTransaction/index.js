@@ -16,12 +16,16 @@ import useBroadcastTransactionMutation from '../../api/useBroadcastTransactionMu
 export default function ConfirmAndSignTransaction({
   amount,
   token,
+  onSuccess,
+  onError
 }) {
   const [currentAccount] = useCurrentAccount();
 
   const broadcastTransactionMutation = useBroadcastTransactionMutation();
 
-  const form = useConfirmAndSignTransactionForm({ broadcastTransactionMutation });
+  const form = useConfirmAndSignTransactionForm({
+    broadcastTransactionMutation, onSuccess, onError
+  });
 
   const { field } = useController({
     name: 'password',

@@ -1,28 +1,26 @@
 /* eslint-disable max-statements */
 import React, { useState } from 'react';
 import { View, Text, Image } from 'react-native';
-import ModalBox from 'react-native-modalbox';
 
 import { useTheme } from 'hooks/useTheme';
-import { colors } from 'constants/styleGuide';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import { P } from 'components/shared/toolBox/typography';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import { stringShortener } from 'utilities/helpers';
 import CopyToClipboard from 'components/shared/copyToClipboard';
-import Icon from 'components/shared/toolBox/icon';
 import { PRIORITY_NAMES_MAP } from '../../constants';
 
 import getSendTokenSummaryStepStyles from './styles';
 import { useSendTokenSummary } from './hooks';
-import ConfirmAndSignTransaction from '../ConfirmAndSignTransaction';
+import { SendTokenSummaryModal } from './components';
 
 export default function SendTokenSummaryStep({
   prevStep,
   form,
+  navigation
 }) {
-  const [showConfirmAndSignTransactionModal,
-    setShowConfirmAndSignTransactionModal] = useState(false);
+  const [showSendTokenSummaryModal,
+    setShowSendTokenSummaryModal] = useState(false);
 
   const { styles } = useTheme({
     styles: getSendTokenSummaryStepStyles(),
@@ -151,35 +149,19 @@ export default function SendTokenSummaryStep({
 
           <PrimaryButton
             noTheme
-            onClick={() => setShowConfirmAndSignTransactionModal(true)}
+            onClick={() => setShowSendTokenSummaryModal(true)}
             title={'Send'}
             style={{ flex: 1 }}
           />
         </View>
       </View>
 
-      <ModalBox
-        position="bottom"
-        style={[styles.confirmAndSignTransactionModal]}
-        isOpen={showConfirmAndSignTransactionModal}
-        onClosed={() => setShowConfirmAndSignTransactionModal(false)}
-        coverScreen
-      >
-        <View style={styles.iconWrapper}>
-          <Icon
-            onPress={() => setShowConfirmAndSignTransactionModal(false)}
-            name="cross"
-            color={colors.light.ultramarineBlue}
-            size={24}
-          />
-        </View>
-
-        <ConfirmAndSignTransaction
-          amount={summary.amount}
-          token={summary.token}
-          onCompleted={() => console.log('on completed...')}
-        />
-      </ModalBox>
+      <SendTokenSummaryModal
+        show={showSendTokenSummaryModal}
+        setShow={setShowSendTokenSummaryModal}
+        summary={summary}
+        navigation={navigation}
+      />
     </>
   );
 }
