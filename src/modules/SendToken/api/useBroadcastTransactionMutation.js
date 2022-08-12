@@ -18,7 +18,7 @@ export default function useSendTransactionMutation(options = {}) {
         ?? currentBlockchainApplication?.apis[0].rest,
       path: `/api/${API_VERSION}/transactions`,
       method: 'POST',
-      params: { LIMIT, ...variables },
+      params: { limit: LIMIT, ...variables },
     };
 
     // TODO: Implement real API call when update to service v3 API is done.
