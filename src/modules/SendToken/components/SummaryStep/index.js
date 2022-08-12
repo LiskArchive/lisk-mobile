@@ -6,7 +6,7 @@ import ModalBox from 'react-native-modalbox';
 import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import { P, } from 'components/shared/toolBox/typography';
+import { P } from 'components/shared/toolBox/typography';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import { stringShortener } from 'utilities/helpers';
 import CopyToClipboard from 'components/shared/copyToClipboard';

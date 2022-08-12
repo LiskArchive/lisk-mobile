@@ -14,9 +14,9 @@ export default function useSendTransactionMutation(options = {}) {
 
   function handleBroadcastTransaction(variables) {
     const config = {
-      baseUrl: currentBlockchainApplication?.apis[0][METHOD]
+      baseURL: currentBlockchainApplication?.apis[0][METHOD]
         ?? currentBlockchainApplication?.apis[0].rest,
-      path: `/api/${API_VERSION}/transactions/`,
+      path: `/api/${API_VERSION}/transactions`,
       method: 'POST',
       params: { LIMIT, ...variables },
     };
