@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import ModalBox from 'react-native-modalbox';
+import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
@@ -16,13 +17,33 @@ export function SendTokenSummaryModal({
   show,
   setShow,
   summary,
-  navigation
+  handleResetForm,
 }) {
+  const navigation = useNavigation();
+
   const [activeStep, setActiveStep] = useState('confirmAndSignTransaction');
 
   const { styles } = useTheme({
     styles: getSendTokenSummaryStepStyles(),
   });
+
+  function handleOnProcessCompleted() {
+    switch (activeStep) {
+      case 'confirmAndSignTransaction':
+        setShow(false);
+        break;
+
+      case 'sendTokenSuccess':
+        handleResetForm();
+        setShow(false);
+        navigation.navigate('Home');
+        break;
+
+      case 'sendTokenError':
+      default:
+        break;
+    }
+  }
 
   function renderStep() {
     switch (activeStep) {
@@ -31,19 +52,21 @@ export function SendTokenSummaryModal({
           <ConfirmAndSignTransaction
             amount={summary.amount}
             token={summary.token}
-            onSuccess={() => {
-              setActiveStep('sendTokenSuccess');
-              console.log('on success...');
-            }}
-            onError={(error) => {
-              setActiveStep('sendTokenError');
-              console.log('on error...', error);
-            }}
-        />
+            onSuccess={() => setActiveStep('sendTokenSuccess')}
+            onError={() => setActiveStep('sendTokenError')}
+          />
         );
 
       case 'sendTokenSuccess':
-        return <SendTokenSuccess navigation={navigation}/>;
+        return (
+          <SendTokenSuccess
+            onClick={() => {
+              handleResetForm();
+              setShow(false);
+              navigation.navigate('Home');
+            }}
+          />
+        );
 
       case 'sendTokenError':
         return <SendTokenError navigation={navigation}/>;
@@ -58,7 +81,7 @@ export function SendTokenSummaryModal({
       position="bottom"
       style={[styles.confirmAndSignTransactionModal]}
       isOpen={show}
-      onClosed={() => setShow(false)}
+      onClosed={handleOnProcessCompleted}
       coverScreen
       useNativeDriver
       >

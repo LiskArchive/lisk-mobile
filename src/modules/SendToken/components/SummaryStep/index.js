@@ -15,9 +15,9 @@ import { useSendTokenSummary } from './hooks';
 import { SendTokenSummaryModal } from './components';
 
 export default function SendTokenSummaryStep({
-  prevStep,
   form,
-  navigation
+  prevStep,
+  reset
 }) {
   const [showSendTokenSummaryModal,
     setShowSendTokenSummaryModal] = useState(false);
@@ -160,7 +160,10 @@ export default function SendTokenSummaryStep({
         show={showSendTokenSummaryModal}
         setShow={setShowSendTokenSummaryModal}
         summary={summary}
-        navigation={navigation}
+        handleResetForm={() => {
+          form.handleReset();
+          reset();
+        }}
       />
     </>
   );
