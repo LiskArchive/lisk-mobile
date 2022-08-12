@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   View, TouchableWithoutFeedback, SafeAreaView, Image
 } from 'react-native';
@@ -11,18 +11,17 @@ import { translate } from 'react-i18next';
 import Share from 'components/shared/share';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import TokenSvg from 'assets/svgs/TokenSvg';
-import Modal from 'react-native-modalbox';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   deviceWidth,
 } from 'utilities/device';
 import { P, B } from 'components/shared/toolBox/typography';
-import Icon from 'components/shared/toolBox/icon';
 import reg from 'constants/regex';
 import withTheme from 'components/shared/withTheme';
 import { themes, colors } from 'constants/styleGuide';
 import Avatar from 'components/shared/avatar';
 import CopyToClipboard from 'components/shared/copyToClipboard';
+import BottomModal from 'components/shared/BottomModal';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
 import { languageMap } from 'constants/languages';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
@@ -32,6 +31,8 @@ import getStyles from './styles';
 import { useGetTokensQuery } from '../SendToken/api/useGetTokensQuery';
 import AmountInput from './components/AmountInput';
 import { useCurrencyConverter } from './hooks/useCurrencyConverter';
+import MessageInput from './components/MessageInput';
+import { serializeQueryString } from './utils';
 
 const qrCodeSize = deviceWidth() * 0.52;
 
@@ -43,9 +44,9 @@ const Request = ({
   const { currency } = useSelector(state => state.settings);
   const { address } = account;
   const [amount, setAmount] = useState({ value: '', validity: -1 });
+  const [message, setMessage] = useState('');
   const [recipientApplication, setRecipientApplication] = useState(null);
   const [recipientToken, setRecipientToken] = useState(null);
-  const [url, setUrl] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const { applications } = useBlockchainApplicationExplorer();
   const { data: tokens } = useGetTokensQuery(account.address);
@@ -70,11 +71,19 @@ const Request = ({
         validity: amountValidity,
       };
     }
-    setUrl(amountValidity === 0
-      ? `lisk://wallet?recipient=${address}&amount=${val}&recipientApplication=${recipientApplication?.chainID}&recipientToken=${recipientToken.tokenId}`
-      : address);
     setAmount(amount);
   };
+
+  const qrCodeUrl = useMemo(() => {
+    const amountValidity = validator(amount.value) ? 0 : 1;
+    const queryString = serializeQueryString({
+      recipient: address,
+      amount: amountValidity === 0 ? amount.value : 0,
+      recipientApplication: recipientApplication?.chainID,
+      recipientToken: recipientToken?.tokenId
+    });
+    return `lisk://wallet${queryString}`;
+  }, [address, amount.value, recipientApplication, recipientToken]);
 
   const handleApplicationChange = application => {
     setRecipientApplication(application);
@@ -86,7 +95,7 @@ const Request = ({
   }, []);
 
   const renderQRCode = (size) => <QRCode
-    value={url || address}
+    value={qrCodeUrl}
     size={size}
     color={
       theme === themes.light
@@ -203,24 +212,18 @@ const Request = ({
             value={amount.value}
           />
 
+          <MessageInput onChange={setMessage} value={message} />
+
         </View>
       </View>
     </KeyboardAwareScrollView>
-    <Modal style={styles.modalContainer} isOpen={modalOpen} onClosed={() => setModalOpen(false)} position="bottom" >
-      <View style={styles.closeButton}>
-      <Icon
-        onPress={() => setModalOpen(false)}
-        name="cross"
-        color={colors.light.ultramarineBlue}
-        size={20}
-      />
-      </View>
+    <BottomModal style={styles.modalContainer} isOpen={modalOpen} toggleModal={setModalOpen} >
       <Share
         type={TouchableWithoutFeedback}
-        value={url || address}
-        title={url || address}
+        value={qrCodeUrl}
+        title={qrCodeUrl}
       >
-        <View style={styles.shareContent}>
+        <View>
           {renderQRCode(qrCodeSize)}
           <View style={styles.shareTextContainer}>
             <P style={[styles.shareText, styles.theme.shareText]}>
@@ -229,7 +232,7 @@ const Request = ({
           </View>
         </View>
       </Share>
-    </Modal>
+    </BottomModal>
   </SafeAreaView>;
 };
 

@@ -1,9 +1,6 @@
 import {
   themes, colors, boxes, fonts
 } from 'constants/styleGuide';
-import {
-  deviceWidth,
-} from 'utilities/device';
 
 export default () => ({
   common: {
@@ -59,12 +56,8 @@ export default () => ({
       height: 100,
     },
     modalContainer: {
-      backgroundColor: colors.light.white,
-      height: deviceWidth(),
-      zIndex: 3,
-      borderTopLeftRadius: 24,
-      borderTopRightRadius: 24,
-      alignItems: 'center'
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     shareTextContainer: {
       marginTop: 16,
