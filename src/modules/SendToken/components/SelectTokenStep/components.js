@@ -261,12 +261,13 @@ export function SendTokenTransactionFeesLabels({ form, tokens }) {
 
   const initializationFee = useInitializationFeeCalculator({
     tokenID,
-    amount: form.watch('amount'),
-    priority: form.watch('priority'),
     recipientAccountAddress: form.watch('recipientAccountAddress'),
   });
 
-  const cmmFee = useCCMFeeCalculator();
+  const cmmFee = useCCMFeeCalculator({
+    senderApplicationChainID: form.watch('senderApplicationChainID'),
+    recipientApplicationChainID: form.watch('recipientApplicationChainID')
+  });
 
   if (transactionFee.error) {
     return <Text>Error calculating fees!</Text>;

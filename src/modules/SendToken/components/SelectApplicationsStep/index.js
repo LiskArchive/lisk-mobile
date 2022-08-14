@@ -53,7 +53,7 @@ export default function SendTokenSelectApplicationsStep({
       <PrimaryButton
         noTheme
         style={styles.button}
-        onClick={() => nextStep()}
+        onClick={nextStep}
         title={'Continue'}
       />
     </View>
