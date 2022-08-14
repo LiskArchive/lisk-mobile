@@ -163,7 +163,7 @@ const ProfileScreen = ({
               <P style={styles.label}>{t('Locked')}</P>
               <TouchableOpacity
                 style={styles.icon}
-                onPress={() => navigation.navigate('Request')}
+                onPress={() => navigation.navigate('LockedBalance')}
                 disabled={Number(normalizedLockedBalance) <= 0}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>

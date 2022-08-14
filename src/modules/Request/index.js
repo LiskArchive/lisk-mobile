@@ -20,7 +20,7 @@ import reg from 'constants/regex';
 import withTheme from 'components/shared/withTheme';
 import { themes, colors } from 'constants/styleGuide';
 import Avatar from 'components/shared/avatar';
-import CopyToClipboard from 'components/shared/copyToClipboard';
+import { stringShortener } from 'utilities/helpers';
 import BottomModal from 'components/shared/BottomModal';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
 import { languageMap } from 'constants/languages';
@@ -42,7 +42,7 @@ const Request = ({
   const { summary: account } = useAccountInfo();
   const language = useSelector(state => state.settings.language);
   const { currency } = useSelector(state => state.settings);
-  const { address } = account;
+  const { address, username } = account;
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
   const [recipientApplication, setRecipientApplication] = useState(null);
@@ -137,15 +137,13 @@ const Request = ({
             {t('requestTokens.recipient')}
           </P>
           <View style={styles.addressContainer}>
-            <Avatar style={styles.avatar} address={address} size={24} />
-            <CopyToClipboard
-              style={styles.copyContainer}
-              labelStyle={[styles.address, styles.theme.address]}
-              showIcon={true}
-              iconSize={18}
-              value={address}
-              type={B}
-            />
+            <Avatar style={styles.avatar} address={address} size={40} />
+            <View>
+              {username && <B style={styles.theme.username} >{username}</B>}
+              <P style={[styles.address, styles.theme.address]} >
+                {stringShortener(address, 9, 6)}
+              </P>
+            </View>
           </View>
           <Picker onChange={handleApplicationChange} >
             <Picker.Label>Recipient Application</Picker.Label>
@@ -153,13 +151,13 @@ const Request = ({
               <View style={[styles.applicationNameContainer]}>
                 {recipientApplication ? (
                   <>
-                    <P>{recipientApplication.name}</P>
+                    <P style={styles.theme.username} >{recipientApplication.name}</P>
                     <Image
                       source={{ uri: recipientApplication.images.logo.png }}
                       style={[styles.applicationLogoImage]}
                     />
                   </>
-                ) : <P>Select Application</P>}
+                ) : <P style={styles.theme.username}>Select Application</P>}
               </View>
             </Picker.Toggle>
             <Picker.Menu>
@@ -168,7 +166,7 @@ const Request = ({
                   key={application.chainID}
                   value={application}
                 >
-                  <P>{application.name}</P>
+                  <P style={styles.theme.username}>{application.name}</P>
                   <Image
                     source={{ uri: application.images.logo.png }}
                     style={[styles.applicationLogoImage]}
@@ -186,10 +184,10 @@ const Request = ({
               <View style={[styles.applicationNameContainer]}>
                 {recipientToken ? (
                   <>
-                    <P>{recipientToken.name}</P>
+                    <P style={styles.theme.username}>{recipientToken.name}</P>
                     <TokenSvg symbol={recipientToken.symbol} style={styles.tokenSvg} />
                   </>
-                ) : <P>Select Token</P>}
+                ) : <P style={styles.theme.username}>Select Token</P>}
               </View>
             </Picker.Toggle>
             <Picker.Menu>
@@ -198,7 +196,7 @@ const Request = ({
                   key={token.tokenID}
                   value={token}
                 >
-                  <P>{token.name}</P>
+                  <P style={styles.theme.username}>{token.name}</P>
                   <TokenSvg symbol={token.symbol} style={styles.tokenSvg} />
                 </Picker.Item>
               ))}

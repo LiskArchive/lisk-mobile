@@ -18,7 +18,6 @@ export default () => ({
       alignSelf: 'flex-end',
       marginTop: -20,
       padding: 10,
-      backgroundColor: colors.light.platinumGray,
       borderRadius: 50,
     },
     horizontalLine: {
@@ -26,7 +25,6 @@ export default () => ({
       width: 60,
       borderRadius: 40,
       marginTop: 40,
-      backgroundColor: colors.light.silverGrey
     }
   },
 
@@ -34,11 +32,23 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.light.white,
     },
+    horizontalLine: {
+      backgroundColor: colors.light.silverGrey
+    },
+    closeButton: {
+      backgroundColor: colors.light.platinumGray,
+    }
   },
 
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.mainBg,
     },
+    horizontalLine: {
+      backgroundColor: colors.dark.volcanicSand
+    },
+    closeButton: {
+      backgroundColor: colors.dark.volcanicSand,
+    }
   },
 });

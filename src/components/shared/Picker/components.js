@@ -4,6 +4,7 @@ import ModalBox from 'react-native-modalbox';
 
 import { useTheme } from 'hooks/useTheme';
 import CaretSvg from 'assets/svgs/CaretSvg';
+import { themes, colors } from 'constants/styleGuide';
 
 import { usePicker } from './hooks';
 import { getPickerStyles } from './styles';
@@ -28,7 +29,7 @@ export function PickerToggle({
 }) {
   const { value, setShowMenu } = usePicker();
 
-  const { styles } = useTheme({
+  const { styles, theme } = useTheme({
     styles: getPickerStyles(),
   });
 
@@ -50,7 +51,7 @@ export function PickerToggle({
         </Text>
       )}
 
-      {!disabled && <CaretSvg direction='right'/>}
+      {!disabled && <CaretSvg color={theme === themes.dark ? colors.dark.volcanicSand : colors.light.ultramarineBlue} direction='right'/>}
 
     </TouchableOpacity>
   );
@@ -59,15 +60,16 @@ export function PickerToggle({
 export function PickerMenu({ children, style: baseStyle }) {
   const { showMenu, setShowMenu } = usePicker();
 
-  const { styles } = useTheme({
+  const { styles, theme } = useTheme({
     styles: getPickerStyles(),
   });
 
   return (
     <ModalBox
       position="bottom"
-      style={[styles.menuContainer, baseStyle]}
+      style={[styles.menuContainer, styles.theme.menuContainer, baseStyle]}
       isOpen={showMenu}
+      backdropColor={theme === themes.dark ? colors.dark.volcanicSand : colors.light.white }
       onClosed={() => setShowMenu(false)}
       coverScreen
     >
@@ -91,7 +93,7 @@ export function PickerItem({
         onChange(value);
         setShowMenu(false);
       }}
-      style={[styles.itemContainer, baseStyle]}
+      style={[styles.itemContainer, styles.theme.itemContainer, baseStyle]}
     >
      {typeof children === 'string' ? <Text>{children}</Text> : children}
     </TouchableOpacity>

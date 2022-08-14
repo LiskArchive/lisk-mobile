@@ -28,13 +28,13 @@ export default () => ({
     },
     addressLabel: {
       fontSize: fonts.size.small,
-      marginBottom: 8,
+      marginBottom: 10,
     },
     addressContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       width: '90%',
-      marginBottom: 20,
+      marginBottom: 30,
     },
     avatar: {
       marginRight: 10,
@@ -43,8 +43,7 @@ export default () => ({
       marginLeft: 8,
     },
     address: {
-      fontSize: fonts.size.base,
-      maxWidth: '90%',
+      fontSize: fonts.size.small,
       marginRight: 15,
     },
     copyContainer: {
@@ -86,8 +85,11 @@ export default () => ({
     addressLabel: {
       color: colors.light.slateGray,
     },
+    username: {
+      color: colors.light.zodiacBlue,
+    },
     address: {
-      color: colors.light.maastrichtBlue,
+      color: colors.light.blueGray,
     },
     shareText: {
       color: colors.light.slateGray,
@@ -103,6 +105,9 @@ export default () => ({
     },
     addressLabel: {
       color: colors.light.platinum,
+    },
+    username: {
+      color: colors.dark.white,
     },
     address: {
       color: colors.dark.white,
