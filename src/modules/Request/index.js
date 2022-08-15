@@ -17,7 +17,7 @@ import {
 } from 'utilities/device';
 import { P, B } from 'components/shared/toolBox/typography';
 import reg from 'constants/regex';
-import {useTheme} from 'hooks/useTheme';
+import { useTheme } from 'hooks/useTheme';
 import { themes, colors } from 'constants/styleGuide';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
@@ -235,4 +235,4 @@ const Request = ({
   </SafeAreaView>;
 };
 
-export default translate()(Request)
+export default translate()(Request);
