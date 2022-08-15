@@ -74,10 +74,10 @@ export default function getSendTokenSelectTokenStepStyles() {
         backgroundColor: colors.light.white,
       },
       text: {
-        color: colors.light.blueGray
+        color: colors.light.zodiacBlue
       },
       label: {
-        color: colors.light.blueGray
+        color: colors.light.zodiacBlue
       },
       priorityButtonText: {
         color: colors.light.zodiacBlue,

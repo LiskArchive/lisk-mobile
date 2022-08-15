@@ -39,7 +39,7 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         color: colors.light.blueGray
       },
       text: {
-        color: colors.light.blueGray
+        color: colors.light.zodiacBlue
       }
     },
     [themes.dark]: {
