@@ -42,7 +42,7 @@ function SendTokenSelectTokenStep({
 
       <View style={[styles.row]}>
         <Button
-          style={{ marginRight: 16, flex: 1 }}
+          style={[styles.prevStepButton, styles.theme.prevStepButton]}
           onClick={prevStep}
           title={t('sendToken.tokenSelect.prevStepButtonText')}
         />

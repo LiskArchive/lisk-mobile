@@ -57,13 +57,13 @@ export default function getSendTokenErrorStyles() {
         backgroundColor: colors.dark.mainBg
       },
       subtitle: {
-        color: colors.dark.ghost
+        color: colors.dark.slateGray
       },
       title: {
-        color: colors.dark.ghost
+        color: colors.dark.white
       },
       actionLabel: {
-        color: colors.dark.ghost
+        color: colors.dark.slateGray
       },
     }
   };

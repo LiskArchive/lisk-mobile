@@ -45,10 +45,10 @@ export default function getSendTokenSuccessStyles() {
         backgroundColor: colors.dark.mainBg
       },
       subtitle: {
-        color: colors.dark.ghost
+        color: colors.dark.slateGray
       },
       title: {
-        color: colors.dark.ghost
+        color: colors.dark.white
       },
     }
   };

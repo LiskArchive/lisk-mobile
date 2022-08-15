@@ -18,6 +18,7 @@ export function SendTokenSummaryModal({
   setShow,
   summary,
   handleResetForm,
+  handleResetStepper
 }) {
   const navigation = useNavigation();
 
@@ -62,6 +63,7 @@ export function SendTokenSummaryModal({
           <SendTokenSuccess
             onClick={() => {
               handleResetForm();
+              handleResetStepper();
               setShow(false);
               navigation.navigate('Home');
             }}
@@ -69,7 +71,14 @@ export function SendTokenSummaryModal({
         );
 
       case 'sendTokenError':
-        return <SendTokenError navigation={navigation}/>;
+        return (
+          <SendTokenError
+            onClick={() => {
+              handleResetStepper();
+              setShow(false);
+            }}
+          />
+        );
 
       default:
         return null;
@@ -79,7 +88,10 @@ export function SendTokenSummaryModal({
   return (
     <ModalBox
       position="bottom"
-      style={[styles.confirmAndSignTransactionModal]}
+      style={[
+        styles.confirmAndSignTransactionModal,
+        styles.theme.confirmAndSignTransactionModal
+      ]}
       isOpen={show}
       onClosed={handleOnProcessCompleted}
       coverScreen

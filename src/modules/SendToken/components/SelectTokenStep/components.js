@@ -66,7 +66,10 @@ export function TokenSelectField({
             <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
           ) : (
             <>
-              <Text>{selectedToken?.symbol}</Text>
+              <Text style={[styles.text, styles.theme.text]}>
+                {selectedToken?.symbol}
+              </Text>
+
               <TokenSvg symbol={selectedToken?.symbol} style={styles.tokenSvg} />
             </>
           )}
@@ -79,7 +82,10 @@ export function TokenSelectField({
             key={token.tokenID}
             value={token.tokenID}
           >
-            <Text>{token.symbol}</Text>
+            <Text style={[styles.text, styles.theme.text]}>
+              {token.symbol}
+            </Text>
+
             <TokenSvg symbol={token.symbol} style={styles.tokenSvg} />
           </Picker.Item>
         ))}
@@ -225,7 +231,7 @@ export function SendTokenPriorityField({ form, t }) {
   if (errorOnPriorities) {
     return (
       <View>
-        <Text style={[styles.label]}>
+        <Text style={[styles.label, styles.theme.label]}>
           {t('sendToken.tokenSelect.priorityFieldLabel')}
         </Text>
 
@@ -238,7 +244,7 @@ export function SendTokenPriorityField({ form, t }) {
 
   return (
     <View style={{ marginBottom: 16 }}>
-      <Text style={[styles.label]}>
+      <Text style={[styles.label, styles.theme.label]}>
         {t('sendToken.tokenSelect.priorityFieldLabel')}
       </Text>
 
@@ -253,9 +259,13 @@ export function SendTokenPriorityField({ form, t }) {
               { marginRight: 8 }
             ]}
           >
-            <Text style={[styles.priorityButtonText]}>{t(PRIORITY_NAMES_MAP[priority.code])}</Text>
+            <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
+              {t(PRIORITY_NAMES_MAP[priority.code])}
+            </Text>
 
-            <Text style={[styles.priorityButtonFeeText]}>{priority.fee} LSK</Text>
+            <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
+              {priority.fee} LSK
+            </Text>
           </TouchableOpacity>
         ))}
       </View>

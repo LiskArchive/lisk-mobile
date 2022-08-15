@@ -33,7 +33,7 @@ function SendTokenSummaryStep({
   return (
     <>
       <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <View style={[styles.container]}>
+        <View style={[styles.container, styles.theme.container]}>
           <View style={[styles.fieldRow]}>
             <Text style={[styles.label]}>
               {t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
@@ -194,6 +194,7 @@ function SendTokenSummaryStep({
           form.handleReset();
           reset();
         }}
+        handleResetStepper = {reset}
       />
     </>
   );

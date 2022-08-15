@@ -56,6 +56,9 @@ export default () => ({
   [themes.light]: {},
 
   [themes.dark]: {
+    buttonText: {
+      color: colors.light.white,
+    },
     primaryButtonContainer: {},
     primaryButtonText: {},
   },

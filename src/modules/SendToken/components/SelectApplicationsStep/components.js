@@ -34,14 +34,17 @@ export function SendTokenSenderApplicationField({ form, applications, t }) {
         <View style={[styles.applicationNameContainer]}>
           {senderApplication ? (
             <>
-              <Text>{senderApplication.name}</Text>
+              <Text style={[styles.text, styles.theme.text]}>
+                {senderApplication.name}
+              </Text>
+
               <Image
                 source={{ uri: senderApplication.images.logo.png }}
                 style={[styles.applicationLogoImage]}
               />
             </>
           ) : (
-            <Text>
+            <Text style={[styles.text, styles.theme.text]}>
               {t('sendToken.applicationsSelect.notApplicationFoundText')}.
             </Text>
           )}
@@ -83,9 +86,10 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
       >
         {recipientApplication && (
           <View style={[styles.applicationNameContainer]}>
-            <Text>
+            <Text style={[styles.text, styles.theme.text]}>
               {recipientApplication.name}
             </Text>
+
             <Image
               source={{ uri: recipientApplication.images.logo.png }}
               style={[styles.applicationLogoImage]}
@@ -101,7 +105,9 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
             value={application.chainID}
           >
 
-            <Text>{application.name}</Text>
+            <Text style={[styles.text, styles.theme.text]}>
+              {application.name}
+            </Text>
 
             <Image
               source={{ uri: application.images.logo.png }}
@@ -142,7 +148,9 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
               style={{ marginRight: 8 }}
             />
 
-            <Text>{recipientAccount.metadata.name}</Text>
+            <Text style={[styles.text, styles.theme.text]}>
+              {recipientAccount.metadata.name}
+            </Text>
 
             <Text style={[styles.accountAddress, styles.theme.accountAddress]}>
               {stringShortener(recipientAccount.metadata.address, 5, 5)}

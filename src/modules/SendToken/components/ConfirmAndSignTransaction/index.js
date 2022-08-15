@@ -40,7 +40,7 @@ function ConfirmAndSignTransaction({
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
-      <View style={[styles.contentContainer]}>
+      <View style={[styles.contentContainer, styles.theme.contentContainer]}>
         <Text
           style={[styles.title, styles.theme.title]}
         >
