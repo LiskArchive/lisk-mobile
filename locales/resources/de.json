@@ -33,7 +33,7 @@
   "Close": "Schließen",
   "Confirm": "Bestätigen",
   "Confirmations": "Bestätigungen",
-  "Continue": "Weiter",
+  "Weiter": "Weiter",
   "Copy to clipboard": "In Zwischenablage kopieren",
   "Copyright": "Copyright",
   "Couldn’t recognize the address or label. Please make sure it’s correct.": "Die Adresse oder Bezeichnung konnte nicht erkannt werden. Bitte überprüfe sie.",
@@ -343,7 +343,7 @@
   },
   "application": {
     "title": {
-      "switchApplication": "Anwendung wechseln"
+      "switchApplication": "App wechseln"
     },
     "stats": {
       "title": "Anwendungsstatistik",
@@ -362,13 +362,13 @@
     },
     "manage": {
       "add": {
-        "buttonText": "Anwendung hinzufügen",
-        "successTitle": "Perfekt! Anwendung wurde jetzt hinzugefügt",
-        "confirmButtonText": "Anwendung jetzt hinzufügen"
+        "buttonText": "App hinzufügen",
+        "successTitle": "Perfekt! App wurde jetzt hinzugefügt",
+        "confirmButtonText": "App jetzt hinzufügen"
       },
       "delete": {
-        "title": "Anwendung entfernen?",
-        "descriptionText": "Diese Anwendung befindet sich nicht mehr in Ihrer Anwendungsliste.",
+        "title": "App entfernen?",
+        "descriptionText": "Diese App befindet sich nicht mehr in Ihrer Anwendungsliste.",
         "confirmButtonText": "Jetzt entfernen"
       },
       "deleteDefaultApplicationModal": {
@@ -397,5 +397,68 @@
       "selectApplication": "",
       "selectToken": "",
       "token": ""
+    },
+  "sendToken": {
+    "applicationsSelect": {
+      "loadingApplicationsText": "Laden...",
+      "senderApplicationFieldLabel": "Aus App",
+      "notApplicationFoundText": "Keine App gefunden",
+      "recipientApplicationFieldLabel": "Zur App",
+      "recipientApplicationFieldPlaceholder": "Wählen Sie eine App aus",
+      "recipientAccountFieldLabel": "Empfänger:in",
+      "nextStepButtonText": "Weiter"
+    },
+    "tokenSelect": {
+      "prevStepButtonText": "Zurück",
+      "nextStepButtonText": "Weiter",
+      "tokenIDFieldLabel": "Token",
+      "tokenIDBalanceLabel": "Gleichgewicht",
+      "loadingTokensText": "Laden...",
+      "tokenAmountFieldLabel": "Menge ({{selectedTokenSymbol}})",
+      "tokenAmountFieldLabelPlain": "Menge",
+      "tokenAmountFieldPlaceholder": "Fügen Sie Ihre ({{selectedTokenSymbol}})-Menge hinzu",
+      "messageFieldTriggerButtonText": "+ Nachricht hinzufügen (optional)",
+      "messageFieldLabel": "Nachricht (optional)",
+      "messageFieldLabelPlain": "Nachricht",
+      "messageFieldPlaceholder": "Fügen Sie eine optionale Nachricht hinzu",
+      "priorityFieldLabel": "Priorität",
+      "loadingPrioritiesText": "Prioritäten werden geladen...",
+      "errorLoadingPrioritiesText": "Fehler beim Laden der Prioritäten!",
+      "lowPriorityLabel": "Niedrig",
+      "mediumPriorityLabel": "Mittel",
+      "highPriorityLabel": "Hoch",
+      "transactionFeeLabel": "Transaktionsgebühr",
+      "loadingTransactionFeeText": "Transaktionsgebühr wird geladen...",
+      "errorLoadingTransactionFeeText": "Fehler bei der Gebührenberechnung!",      
+      "initializationFeeLabel": "Initialisierungsgebühr",
+      "loadingInitializationFeeText": "Initialisierungsgebühr wird geladen...",
+      "cmmFeeLabel": "CCM-Gebühr",
+      "loadingCmmFeeText": "CCM-Gebühr wird geladen..."
+    },
+    "summary": {
+      "prevStepButtonText": "Zurück",
+      "submitTransactionButtonText": "Senden"
+    },
+    "confirmAndSign": {
+      "title": "Geben Sie Ihr Passwort ein",
+      "description": "Bitte geben Sie Ihr Gerätekennwort ein, um eine Transaktion zu unterzeichnen.",
+      "passwordInputPlaceholder": "Passwort eingeben",
+      "loadingText": "Laden...",
+      "sendTokenSubmitButtonText": "Bestätigen und senden Sie {{amount}} {{tokenSymbol}}"
+    },
+    "result": {
+      "success": {
+        "title": "Transaktion übermittelt",
+        "description": "Sie finden es in Ihrem Wallet und es wird in Sekundenschnelle bestätigt.",
+        "closeButtonText": "Zurück zum Portemonnaie"
+      },
+      "error": {
+        "title": "Transaktion fehlgeschlagen",
+        "description": "Bei der Transaktion ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+        "retryButtonText": "Versuchen Sie es nochmal",
+        "reportErrorLabel": "Bleibt das Problem bestehen?",
+        "reportErrorButtonText": "Melden Sie den Fehler per E-Mail"
+      }
     }
+  }
 }
