@@ -310,44 +310,50 @@ export function SendTokenTransactionFeesLabels({ form, tokens, t }) {
   return (
     <View>
       <View style={[styles.feeContainer]}>
-        <Text>
+        <Text style={[styles.text, styles.theme.text]}>
           {t('sendToken.tokenSelect.transactionFeeLabel')}
         </Text>
 
         {transactionFee.isLoading ? (
-          <Text>
+          <Text style={[styles.text, styles.theme.text]}>
             {t('sendToken.tokenSelect.loadingTransactionFeeText')}
           </Text>
         ) : (
-          <Text>{transactionFee.data} {selectedToken?.symbol}</Text>
+          <Text style={[styles.text, styles.theme.text]}>
+            {transactionFee.data} {selectedToken?.symbol}
+          </Text>
         )}
       </View>
 
       <View style={[styles.feeContainer]}>
-        <Text>
+        <Text style={[styles.text, styles.theme.text]}>
           {t('sendToken.tokenSelect.initializationFeeLabel')}
         </Text>
 
         {initializationFee.isLoading ? (
-          <Text>
+          <Text style={[styles.text, styles.theme.text]}>
             {t('sendToken.tokenSelect.loadingInitializationFeeText')}
           </Text>
         ) : (
-          <Text>{initializationFee.data} {selectedToken?.symbol}</Text>
+          <Text style={[styles.text, styles.theme.text]}>
+            {initializationFee.data} {selectedToken?.symbol}
+          </Text>
         )}
       </View>
 
       <View style={[styles.feeContainer]}>
-        <Text>
+        <Text style={[styles.text, styles.theme.text]}>
           {t('sendToken.tokenSelect.cmmFeeLabel')}
         </Text>
 
         {cmmFee.isLoading ? (
-          <Text>
+          <Text style={[styles.text, styles.theme.text]}>
             {t('sendToken.tokenSelect.loadingCmmFeeText')}
           </Text>
         ) : (
-          <Text>{cmmFee.data} {selectedToken?.symbol}</Text>
+          <Text style={[styles.text, styles.theme.text]}>
+            {cmmFee.data} {selectedToken?.symbol}
+          </Text>
         )}
       </View>
     </View>
