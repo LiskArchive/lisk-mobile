@@ -8,11 +8,11 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
 import Input from 'components/shared/toolBox/input';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import useSendTokenMutation from '../../api/useSendTokenMutation';
 
 import getConfirmAndSignTransactionStyles from './styles';
-import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount';
 import useConfirmAndSignTransactionForm from './hooks';
-import useSendTokenMutation from '../../api/useSendTokenMutation';
 
 function ConfirmAndSignTransaction({
   amount,

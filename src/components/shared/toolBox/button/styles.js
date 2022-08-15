@@ -53,13 +53,15 @@ export default () => ({
     },
   },
 
-  [themes.light]: {},
+  [themes.light]: {
+    buttonText: {
+      color: colors.light.maastrichtBlue,
+    },
+  },
 
   [themes.dark]: {
     buttonText: {
       color: colors.light.white,
     },
-    primaryButtonContainer: {},
-    primaryButtonText: {},
   },
 });
