@@ -17,7 +17,7 @@ import {
 } from 'utilities/device';
 import { P, B } from 'components/shared/toolBox/typography';
 import reg from 'constants/regex';
-import withTheme from 'components/shared/withTheme';
+import {useTheme} from 'hooks/useTheme';
 import { themes, colors } from 'constants/styleGuide';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
@@ -37,8 +37,9 @@ import { serializeQueryString } from './utils';
 const qrCodeSize = deviceWidth() * 0.52;
 
 const Request = ({
-  styles, theme, t, navigation
+  t, navigation
 }) => {
+  const { styles, theme } = useTheme({ styles: getStyles() });
   const { summary: account } = useAccountInfo();
   const language = useSelector(state => state.settings.language);
   const { currency } = useSelector(state => state.settings);
@@ -234,4 +235,4 @@ const Request = ({
   </SafeAreaView>;
 };
 
-export default withTheme(translate()(Request), getStyles());
+export default translate()(Request)
