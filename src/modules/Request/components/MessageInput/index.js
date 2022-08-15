@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 import Input from 'components/shared/toolBox/input';
-import withTheme from 'components/shared/withTheme';
 import CircularProgress from 'components/shared/circularProgres';
 import { P } from 'components/shared/toolBox/typography';
 import InfoSvg from 'assets/svgs/InfoSvg';
@@ -11,6 +10,7 @@ import { colors } from 'constants/styleGuide';
 import AddSvg from 'assets/svgs/AddSvg';
 import FadeInView from 'components/shared/fadeInView';
 import ModalHolder from 'utilities/modal';
+import { useTheme } from 'hooks/useTheme';
 import getStyles from './styles';
 
 const svgcolor = { dark: colors.light.whiteSmoke, light: colors.light.zodiacBlue };
@@ -29,8 +29,9 @@ const MessageInfo = ({ t, styles }) => (
 );
 
 const MessageInput = ({
-  styles, value, validity, byteCount, t, onChange, theme
+  value, validity, byteCount, t, onChange
 }) => {
+  const { styles, theme } = useTheme({ styles: getStyles() });
   const [collapsed, setCollapsed] = useState(true);
   const openModal = () =>
     ModalHolder.open({
@@ -89,4 +90,4 @@ const MessageInput = ({
   );
 };
 
-export default withTheme(translate()(MessageInput), getStyles());
+export default translate()(MessageInput);

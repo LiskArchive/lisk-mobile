@@ -1,10 +1,11 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, fonts, } from 'constants/styleGuide';
 
 export function getPickerStyles() {
   return {
     common: {
       label: {
         color: colors.light.maastrichtBlue,
+        fontSize: fonts.size.base,
         marginBottom: 8,
       },
       toggleContainer: {

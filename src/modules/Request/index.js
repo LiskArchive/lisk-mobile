@@ -146,7 +146,7 @@ const Request = ({
             </View>
           </View>
           <Picker onChange={handleApplicationChange} >
-            <Picker.Label>Recipient Application</Picker.Label>
+            <Picker.Label>{t('requestTokens.recipientApplication')}</Picker.Label>
             <Picker.Toggle style={{ container: { marginBottom: 16 } }}>
               <View style={[styles.applicationNameContainer]}>
                 {recipientApplication ? (
@@ -157,7 +157,7 @@ const Request = ({
                       style={[styles.applicationLogoImage]}
                     />
                   </>
-                ) : <P style={styles.theme.username}>Select Application</P>}
+                ) : <P style={styles.theme.username}>{t('requestTokens.selectApplication')}</P>}
               </View>
             </Picker.Toggle>
             <Picker.Menu>
@@ -177,7 +177,7 @@ const Request = ({
           </Picker>
 
           <Picker onChange={setRecipientToken} >
-            <Picker.Label>Token</Picker.Label>
+            <Picker.Label>{t('requestTokens.token')}</Picker.Label>
             <Picker.Toggle
               disabled={!recipientApplication}
               style={{ container: { marginBottom: 16 } }}>
@@ -187,7 +187,7 @@ const Request = ({
                     <P style={styles.theme.username}>{recipientToken.name}</P>
                     <TokenSvg symbol={recipientToken.symbol} style={styles.tokenSvg} />
                   </>
-                ) : <P style={styles.theme.username}>Select Token</P>}
+                ) : <P style={styles.theme.username}>{t('requestTokens.selectToken')}</P>}
               </View>
             </Picker.Toggle>
             <Picker.Menu>
@@ -215,7 +215,7 @@ const Request = ({
         </View>
       </View>
     </KeyboardAwareScrollView>
-    <BottomModal style={styles.modalContainer} isOpen={modalOpen} toggleModal={setModalOpen} >
+    <BottomModal style={styles.modalContainer} show={modalOpen} toggleShow={setModalOpen} >
       <Share
         type={TouchableWithoutFeedback}
         value={qrCodeUrl}

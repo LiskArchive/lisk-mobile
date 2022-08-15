@@ -27,7 +27,7 @@ export default () => ({
       padding: boxes.boxPadding,
     },
     addressLabel: {
-      fontSize: fonts.size.small,
+      fontSize: fonts.size.base,
       marginBottom: 10,
     },
     addressContainer: {
@@ -83,7 +83,7 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     addressLabel: {
-      color: colors.light.slateGray,
+      color: colors.light.maastrichtBlue,
     },
     username: {
       color: colors.light.zodiacBlue,

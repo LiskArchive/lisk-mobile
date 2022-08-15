@@ -14,7 +14,7 @@ export default () => ({
       borderTopRightRadius: 24,
       padding: boxes.boxPadding,
     },
-    closeButton: {
+    closeButtonContainer: {
       alignSelf: 'flex-end',
       marginTop: -20,
       padding: 10,
@@ -35,7 +35,7 @@ export default () => ({
     horizontalLine: {
       backgroundColor: colors.light.silverGrey
     },
-    closeButton: {
+    closeButtonContainer: {
       backgroundColor: colors.light.platinumGray,
     }
   },
@@ -47,7 +47,7 @@ export default () => ({
     horizontalLine: {
       backgroundColor: colors.dark.volcanicSand
     },
-    closeButton: {
+    closeButtonContainer: {
       backgroundColor: colors.dark.volcanicSand,
     }
   },
