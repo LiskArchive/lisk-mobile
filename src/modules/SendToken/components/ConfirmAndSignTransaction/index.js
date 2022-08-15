@@ -11,7 +11,7 @@ import Input from 'components/shared/toolBox/input';
 import getConfirmAndSignTransactionStyles from './styles';
 import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount';
 import useConfirmAndSignTransactionForm from './hooks';
-import useBroadcastTransactionMutation from '../../api/useBroadcastTransactionMutation';
+import useSendTokenMutation from '../../api/useSendTokenMutation';
 
 export default function ConfirmAndSignTransaction({
   amount,
@@ -21,12 +21,10 @@ export default function ConfirmAndSignTransaction({
 }) {
   const [currentAccount] = useCurrentAccount();
 
-  const broadcastTransactionMutation = useBroadcastTransactionMutation();
-
-  console.log({ broadcastTransactionMutation });
+  const sendTokenMutation = useSendTokenMutation();
 
   const form = useConfirmAndSignTransactionForm({
-    broadcastTransactionMutation, onSuccess, onError
+    sendTokenMutation, onSuccess, onError
   });
 
   const { field } = useController({
@@ -87,16 +85,15 @@ export default function ConfirmAndSignTransaction({
           secureTextEntry
           onChange={field.onChange}
           value={field.value}
-          // error={passwordError && t(passwordError)}
         />
       </View>
 
       <PrimaryButton
         noTheme
         onClick={form.handleSubmit}
-        title={broadcastTransactionMutation.isLoading ? 'Loading...' : `Confirm and send ${amount} ${token.symbol}`}
+        title={sendTokenMutation.isLoading ? 'Loading...' : `Confirm and send ${amount} ${token.symbol}`}
         style={{ marginBottom: 24 }}
-        disabled={broadcastTransactionMutation.isLoading}
+        disabled={sendTokenMutation.isLoading}
       />
     </View>
   );

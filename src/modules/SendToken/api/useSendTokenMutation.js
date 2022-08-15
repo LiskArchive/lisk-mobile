@@ -7,12 +7,12 @@ import {
 } from 'utilities/api/constants';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 
-import { broadcastTransactionMockHandler } from '../mocks/handlers';
+import { sendTokenMockHandler } from '../mocks/handlers';
 
-export default function useSendTransactionMutation(options = {}) {
+export default function useSendTokenMutation(options = {}) {
   const [currentBlockchainApplication] = useCurrentBlockchainApplication();
 
-  function handleBroadcastTransaction(variables) {
+  function handleSendToken(variables) {
     const config = {
       baseURL: currentBlockchainApplication?.apis[0][METHOD]
         ?? currentBlockchainApplication?.apis[0].rest,
@@ -25,10 +25,10 @@ export default function useSendTransactionMutation(options = {}) {
     // return API_METHOD[METHOD](config);
     console.log({ config });
 
-    return broadcastTransactionMockHandler;
+    return sendTokenMockHandler;
   }
 
-  const mutation = useMutation(handleBroadcastTransaction, {
+  const mutation = useMutation(handleSendToken, {
     onSuccess: (data) => {
       // TODO: Apply txs cache update when query is cached by react-query.
       // queryClient.setQueryData(['transactions', { id: data.transactionID }], data)
@@ -40,8 +40,6 @@ export default function useSendTransactionMutation(options = {}) {
     },
     ...options
   });
-
-  console.log({ mutation });
 
   return mutation;
 }

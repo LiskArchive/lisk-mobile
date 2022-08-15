@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 export default function useConfirmAndSignTransactionForm({
-  broadcastTransactionMutation,
+  sendTokenMutation,
   onSuccess,
   onError
 }) {
@@ -15,7 +15,7 @@ export default function useConfirmAndSignTransactionForm({
     // TODO: Run sign TX process when SDK v6 integration is done.
     console.log({ values });
 
-    broadcastTransactionMutation.mutate(
+    sendTokenMutation.mutate(
       { transaction: '123lk1j23lk12j3l12kj3' },
       {
         onSuccess,
