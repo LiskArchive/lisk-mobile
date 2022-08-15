@@ -17,7 +17,7 @@ import { getTransactionFee } from '../../utils';
  * @returns {object}
  */
 export const useTransactionFeeCalculation = ({
-  token,
+  token = 'LSK',
   account,
   selectedPriority,
   transaction,
@@ -64,7 +64,7 @@ export const useTransactionFeeCalculation = ({
     });
   }, [
     transaction.amount,
-    selectedPriority.value,
+    selectedPriority.fee,
     selectedPriorityIndex
   ]);
 

@@ -91,8 +91,7 @@ class LiskAPIClient {
     if (!resp.ok) {
       throw new Error('Failed to request fees from server.');
     }
-    const { data } = await resp.json();
-    return data;
+    return resp.json();
   }
 
   async sendTransaction(tx) {

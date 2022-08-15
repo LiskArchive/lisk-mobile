@@ -1,18 +1,17 @@
 /* eslint-disable max-statements, max-len */
 import { Platform } from 'react-native';
-import { transactions } from '@liskhq/lisk-client';
+import Lisk, { transactions } from '@liskhq/lisk-client';
 import * as transactionsConstants from 'modules/Transactions/constants';
 import { fromRawLsk, toRawLsk } from 'utilities/conversions';
 import computeMinFee from './fees';
 
-export const createTransactionObject = (nonce, amount = 0, message = '') => ({
+export const createTransactionObject = (nonce, amount = 0, message = '', publicKey) => ({
   moduleID: 2,
   commandID: 0,
   // eslint-disable-next-line no-undef
   nonce: BigInt(nonce),
   // eslint-disable-next-line no-undef
   fee: BigInt(0),
-  senderPublicKey: Buffer.alloc(32),
   asset: {
     // eslint-disable-next-line no-undef
     amount: BigInt(toRawLsk(Number(amount))),
@@ -20,34 +19,40 @@ export const createTransactionObject = (nonce, amount = 0, message = '') => ({
     data: message,
   },
   signatures: [],
+  senderPublicKey: Buffer.from(publicKey, 'hex')
 });
 
 export const getTransactionFee = async ({
+  account,
   transaction,
   selectedPriority,
   selectedPriorityIndex,
 }) => {
   try {
-    const feePerByte = selectedPriority.value ?? 0;
+    const feePerByte = selectedPriority.fee ?? 0;
     const schema = transactionsConstants.transferAssetSchema;
     const maxAssetFee = transactionsConstants.moduleAssetMap[
       transactionsConstants.moduleCommandNameIdMap.transfer
     ].maxFee;
     const transactionObject = createTransactionObject(
-      transaction.nonce,
+      account.nonce,
       transaction.amount,
-      transaction.data
+      transaction.data,
+      account.publicKey
     );
-    let minFee;
-    if (Platform.OS === 'android') {
-      minFee = computeMinFee(transactionObject, {
-        baseFees: transactionsConstants.BASE_FEES,
-      });
-    } else {
-      minFee = transactions.computeMinFee(schema, transactionObject, {
-        baseFees: transactionsConstants.BASE_FEES,
-      });
-    }
+    // let minFee;
+    // if (Platform.OS === 'android') {
+    //   minFee = computeMinFee(transactionObject, {
+    //     baseFees: transactionsConstants.BASE_FEES,
+    //   });
+    // } else {
+    //   minFee = transactions.computeMinFee(transactionObject, schema, {
+    //     baseFees: transactionsConstants.BASE_FEES,
+    //   });
+    // }
+    const minFee = transactions.computeMinFee(transactionObject, schema, {
+      baseFees: transactionsConstants.BASE_FEES,
+    });
     const tieBreaker = selectedPriorityIndex === 0
       ? 0
       : transactionsConstants.MIN_FEE_PER_BYTE * feePerByte * Math.random();
@@ -67,6 +72,7 @@ export const getTransactionFee = async ({
       feedback,
     };
   } catch (error) {
+    console.log('error', error)
     return { value: 0, error: false, feedback: '' };
   }
 
