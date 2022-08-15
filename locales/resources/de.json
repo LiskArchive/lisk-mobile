@@ -389,5 +389,13 @@
         "unpinText": "Unpin",
         "deleteText": "Löschen"
       }
-    }}
+    }},
+    "requestTokens": {
+      "title": "",
+      "recipient": "",
+      "recipientApplication": "",
+      "selectApplication": "",
+      "selectToken": "",
+      "token": ""
+    }
 }

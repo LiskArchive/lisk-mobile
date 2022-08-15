@@ -394,5 +394,13 @@
         "unpinText": "Unpin",
         "deleteText": "Delete"
       }
-    }}
+    }},
+  "requestTokens": {
+    "title": "Request Tokens",
+    "recipient": "Recipient",
+    "recipientApplication": "Recipient Application",
+    "selectApplication": "Select Application",
+    "selectToken": "Select Token",
+    "token": "Token"
+  }
 }

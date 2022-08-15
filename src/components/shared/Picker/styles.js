@@ -1,16 +1,15 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, fonts, } from 'constants/styleGuide';
 
 export function getPickerStyles() {
   return {
     common: {
       label: {
         color: colors.light.maastrichtBlue,
+        fontSize: fonts.size.base,
         marginBottom: 8,
       },
       toggleContainer: {
         borderWidth: 1,
-        borderColor: colors.light.platinum,
-        color: colors.light.maastrichtBlue,
         borderRadius: 2,
         padding: 16,
         flexDirection: 'row',
@@ -28,7 +27,6 @@ export function getPickerStyles() {
         fontWeight: '400'
       },
       menuContainer: {
-        backgroundColor: colors.light.white,
         height: '50%',
         zIndex: 3,
         borderTopLeftRadius: 24,
@@ -38,13 +36,18 @@ export function getPickerStyles() {
         flexDirection: 'row',
         alignItems: 'center',
         padding: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: colors.light.platinumGray,
       }
     },
     [themes.light]: {
+      itemContainer: {
+        borderBottomWidth: 1,
+        borderBottomColor: colors.light.platinumGray,
+      },
       label: {
         color: colors.light.maastrichtBlue,
+      },
+      menuContainer: {
+        backgroundColor: colors.light.white
       },
       toggleContainer: {
         borderColor: colors.light.platinum,
@@ -55,12 +58,20 @@ export function getPickerStyles() {
       }
     },
     [themes.dark]: {
+      itemContainer: {
+        borderBottomWidth: 1,
+        borderBottomColor: colors.dark.volcanicSand,
+      },
       label: {
         color: colors.dark.platinum,
       },
+      menuContainer: {
+        backgroundColor: colors.dark.mainBg,
+        borderWidth: 1,
+      },
       toggleContainer: {
         color: colors.dark.white,
-        borderColor: colors.dark.mainBg,
+        borderColor: colors.dark.volcanicSand,
       },
       toggleText: {
         color: colors.dark.white
