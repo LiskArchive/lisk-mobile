@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { useController } from 'react-hook-form';
+import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -13,11 +14,12 @@ import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurren
 import useConfirmAndSignTransactionForm from './hooks';
 import useSendTokenMutation from '../../api/useSendTokenMutation';
 
-export default function ConfirmAndSignTransaction({
+function ConfirmAndSignTransaction({
   amount,
   token,
   onSuccess,
-  onError
+  onError,
+  t
 }) {
   const [currentAccount] = useCurrentAccount();
 
@@ -42,13 +44,13 @@ export default function ConfirmAndSignTransaction({
         <Text
           style={[styles.title, styles.theme.title]}
         >
-          Enter your password
+          {t('sendToken.confirmAndSign.title')}
         </Text>
 
         <Text
           style={[styles.instructionsText, styles.theme.instructionsText]}
         >
-          Please provide your device password to sign a transaction.
+          {t('sendToken.confirmAndSign.description')}
         </Text>
 
         <Avatar
@@ -81,7 +83,7 @@ export default function ConfirmAndSignTransaction({
               padding: 16
             }
           }}
-          placeholder={'Enter password'}
+          placeholder={t('sendToken.confirmAndSign.passwordInputPlaceholder')}
           secureTextEntry
           onChange={field.onChange}
           value={field.value}
@@ -91,10 +93,17 @@ export default function ConfirmAndSignTransaction({
       <PrimaryButton
         noTheme
         onClick={form.handleSubmit}
-        title={sendTokenMutation.isLoading ? 'Loading...' : `Confirm and send ${amount} ${token.symbol}`}
+        title={
+          sendTokenMutation.isLoading
+            ? t('sendToken.confirmAndSign.loadingText')
+            : t('sendToken.confirmAndSign.sendTokenSubmitButtonText',
+              { amount, tokenSymbol: token.symbol })
+          }
         style={{ marginBottom: 24 }}
         disabled={sendTokenMutation.isLoading}
       />
     </View>
   );
 }
+
+export default translate()(ConfirmAndSignTransaction);

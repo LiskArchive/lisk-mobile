@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import React, { useState } from 'react';
 import { View, Text, Image } from 'react-native';
+import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
@@ -14,10 +15,11 @@ import getSendTokenSummaryStepStyles from './styles';
 import { useSendTokenSummary } from './hooks';
 import { SendTokenSummaryModal } from './components';
 
-export default function SendTokenSummaryStep({
+function SendTokenSummaryStep({
   form,
   prevStep,
-  reset
+  reset,
+  t
 }) {
   const [showSendTokenSummaryModal,
     setShowSendTokenSummaryModal] = useState(false);
@@ -33,7 +35,9 @@ export default function SendTokenSummaryStep({
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={[styles.container]}>
           <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>From Application</Text>
+            <Text style={[styles.label]}>
+              {t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
+            </Text>
 
             <View style={[styles.row]}>
               <Text style={[styles.valueText, styles.theme.valueText]}>
@@ -48,7 +52,9 @@ export default function SendTokenSummaryStep({
           </View>
 
           <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>To Application</Text>
+            <Text style={[styles.label]}>
+              {t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
+            </Text>
 
             <View style={[styles.row]}>
               <Text style={[styles.valueText, styles.theme.valueText]}>
@@ -63,7 +69,9 @@ export default function SendTokenSummaryStep({
           </View>
 
           <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>Recipient</Text>
+            <Text style={[styles.label]}>
+              {t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
+            </Text>
 
             <CopyToClipboard
               style={[styles.valueText, styles.theme.valueText]}
@@ -78,7 +86,9 @@ export default function SendTokenSummaryStep({
           </View>
 
           <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>Token</Text>
+            <Text style={[styles.label]}>
+              {t('sendToken.tokenSelect.tokenIDFieldLabel')}
+            </Text>
 
             <View style={[styles.row]}>
               <Text
@@ -92,7 +102,9 @@ export default function SendTokenSummaryStep({
           </View>
 
           <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>Amount</Text>
+            <Text style={[styles.label]}>
+              {t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')}
+            </Text>
 
             <Text
               style={[styles.valueText, styles.theme.valueText]}
@@ -103,7 +115,9 @@ export default function SendTokenSummaryStep({
 
           {!!summary.message && (
             <View style={[styles.messageRow]}>
-              <Text style={[styles.label, { marginBottom: 8 }]}>Message</Text>
+              <Text style={[styles.label, { marginBottom: 8 }]}>
+                {t('sendToken.tokenSelect.messageFieldLabelPlain')}
+              </Text>
 
               <Text
                 style={[styles.valueText, styles.theme.valueText]}
@@ -114,28 +128,44 @@ export default function SendTokenSummaryStep({
           )}
 
           <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>Priority</Text>
+            <Text style={[styles.label]}>
+              {t('sendToken.tokenSelect.priorityFieldLabel')}
+            </Text>
 
             <Text
               style={[styles.valueText, styles.theme.valueText]}
             >
-              {PRIORITY_NAMES_MAP[summary.priority]}
+              {t(PRIORITY_NAMES_MAP[summary.priority])}
             </Text>
           </View>
 
           <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>Transaction fee</Text>
+            <Text style={[styles.label]}>
+              {t('sendToken.tokenSelect.transactionFeeLabel')}
+            </Text>
 
             <Text style={[styles.valueText, styles.theme.valueText]}>
               {summary.transactionFee?.data} {summary.token?.symbol}
             </Text>
           </View>
 
-          <View style={[styles.fieldRow, { borderBottomColor: 'transparent' }]}>
-            <Text style={[styles.label]}>CCM fee</Text>
+          <View style={[styles.fieldRow]}>
+            <Text style={[styles.label]}>
+              {t('sendToken.tokenSelect.initializationFeeLabel')}
+            </Text>
 
             <Text style={[styles.valueText, styles.theme.valueText]}>
               {summary.initializationFee?.data} {summary.token?.symbol}
+            </Text>
+          </View>
+
+          <View style={[styles.fieldRow, { borderBottomColor: 'transparent' }]}>
+            <Text style={[styles.label]}>
+              {t('sendToken.tokenSelect.cmmFeeLabel')}
+            </Text>
+
+            <Text style={[styles.valueText, styles.theme.valueText]}>
+              {summary.cmmFee?.data} {summary.token?.symbol}
             </Text>
           </View>
         </View>
@@ -144,13 +174,13 @@ export default function SendTokenSummaryStep({
           <Button
             style={{ marginRight: 16, flex: 1 }}
             onClick={prevStep}
-            title={'Back'}
+            title={t('sendToken.summary.prevStepButtonText')}
           />
 
           <PrimaryButton
             noTheme
             onClick={() => setShowSendTokenSummaryModal(true)}
-            title={'Send'}
+            title={t('sendToken.summary.submitTransactionButtonText')}
             style={{ flex: 1 }}
           />
         </View>
@@ -168,3 +198,5 @@ export default function SendTokenSummaryStep({
     </>
   );
 }
+
+export default translate()(SendTokenSummaryStep);

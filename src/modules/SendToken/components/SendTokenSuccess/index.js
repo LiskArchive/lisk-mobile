@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -9,7 +10,7 @@ import { themes } from 'constants/styleGuide';
 
 import getSendTokenSuccessStyles from './styles';
 
-export default function SendTokenSuccess({ onClick }) {
+function SendTokenSuccess({ onClick, t }) {
   const { styles, theme } = useTheme({
     styles: getSendTokenSuccessStyles(),
   });
@@ -22,18 +23,22 @@ export default function SendTokenSuccess({ onClick }) {
           : <TxSuccessSvg style={styles.illustration}/>
         }
 
-        <Text style={[styles.title, styles.theme.title]}>Transaction submitted</Text>
+        <Text style={[styles.title, styles.theme.title]}>
+          {t('sendToken.result.success.title')}
+        </Text>
 
         <Text style={[styles.subtitle, styles.theme.subtitle]}>
-          You will find it in your Wallet and it will be confirmed in a matter of seconds.
+          {t('sendToken.result.success.description')}
         </Text>
       </View>
 
       <PrimaryButton
         style={{ marginBottom: 24 }}
         onClick={onClick}
-        title="Back to wallet"
+        title={t('sendToken.result.success.closeButtonText')}
       />
     </View>
   );
 }
+
+export default translate()(SendTokenSuccess);

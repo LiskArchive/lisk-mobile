@@ -10,7 +10,7 @@ import { useTheme } from 'hooks/useTheme';
 
 import getSendTokenSelectApplicationsStepStyles from './styles';
 
-export function SendTokenSenderApplicationField({ form, applications }) {
+export function SendTokenSenderApplicationField({ form, applications, t }) {
   const { field } = useController({
     name: 'senderApplicationChainID',
     control: form.control,
@@ -27,7 +27,7 @@ export function SendTokenSenderApplicationField({ form, applications }) {
   return (
     <Picker>
       <Picker.Label>
-        From Application
+        {t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
       </Picker.Label>
 
       <Picker.Toggle disabled style={{ container: { marginBottom: 16 } }}>
@@ -40,14 +40,18 @@ export function SendTokenSenderApplicationField({ form, applications }) {
                 style={[styles.applicationLogoImage]}
               />
             </>
-          ) : <Text>No application found.</Text> }
+          ) : (
+            <Text>
+              {t('sendToken.applicationsSelect.notApplicationFoundText')}.
+            </Text>
+          )}
         </View>
       </Picker.Toggle>
     </Picker>
   );
 }
 
-export function SendTokenRecipientApplicationField({ form, applications }) {
+export function SendTokenRecipientApplicationField({ form, applications, t }) {
   const { field } = useController({
     name: 'recipientApplicationChainID',
     control: form.control,
@@ -67,12 +71,14 @@ export function SendTokenRecipientApplicationField({ form, applications }) {
       onChange={field.onChange}
     >
       <Picker.Label>
-        To Application
+        {t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
       </Picker.Label>
 
       <Picker.Toggle
         disabled={applications?.loading}
-        placeholder="Select an Application"
+        placeholder={
+          t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')
+        }
         style={{ container: { marginBottom: 16 } }}
       >
         {recipientApplication && (
@@ -108,7 +114,7 @@ export function SendTokenRecipientApplicationField({ form, applications }) {
   );
 }
 
-export function SendTokenRecipientAccountField({ form, accounts }) {
+export function SendTokenRecipientAccountField({ form, accounts, t }) {
   const { field } = useController({
     name: 'recipientAccountAddress',
     control: form.control,
@@ -124,7 +130,9 @@ export function SendTokenRecipientAccountField({ form, accounts }) {
 
   return (
       <Picker>
-        <Picker.Label>Recipient</Picker.Label>
+        <Picker.Label>
+          {t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
+        </Picker.Label>
 
         <Picker.Toggle disabled>
           <View style={[styles.applicationNameContainer]}>
@@ -145,8 +153,4 @@ export function SendTokenRecipientAccountField({ form, accounts }) {
         </Picker.Toggle>
       </Picker>
   );
-}
-
-export function SendTokenTransactionFeeField() {
-
 }
