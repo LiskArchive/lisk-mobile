@@ -26,6 +26,9 @@ export default function getSendTokenSelectApplicationsStepStyles() {
       accountAddress: {
         marginLeft: 8,
         color: colors.light.blueGray
+      },
+      text: {
+        color: colors.light.blueGray
       }
     },
     [themes.light]: {
@@ -34,6 +37,9 @@ export default function getSendTokenSelectApplicationsStepStyles() {
       },
       accountAddress: {
         color: colors.light.blueGray
+      },
+      text: {
+        color: colors.light.zodiacBlue
       }
     },
     [themes.dark]: {
@@ -41,6 +47,9 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         backgroundColor: colors.dark.mainBg,
       },
       accountAddress: {
+        color: colors.light.whiteSmoke
+      },
+      text: {
         color: colors.light.whiteSmoke
       }
     },

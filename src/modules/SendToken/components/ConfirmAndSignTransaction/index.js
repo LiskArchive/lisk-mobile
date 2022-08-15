@@ -1,27 +1,33 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { useController } from 'react-hook-form';
+import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
 import Input from 'components/shared/toolBox/input';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import useSendTokenMutation from '../../api/useSendTokenMutation';
 
 import getConfirmAndSignTransactionStyles from './styles';
-import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount';
 import useConfirmAndSignTransactionForm from './hooks';
-import useBroadcastTransactionMutation from '../../api/useBroadcastTransactionMutation';
 
-export default function ConfirmAndSignTransaction({
+function ConfirmAndSignTransaction({
   amount,
   token,
+  onSuccess,
+  onError,
+  t
 }) {
   const [currentAccount] = useCurrentAccount();
 
-  const broadcastTransactionMutation = useBroadcastTransactionMutation();
+  const sendTokenMutation = useSendTokenMutation();
 
-  const form = useConfirmAndSignTransactionForm({ broadcastTransactionMutation });
+  const form = useConfirmAndSignTransactionForm({
+    sendTokenMutation, onSuccess, onError
+  });
 
   const { field } = useController({
     name: 'password',
@@ -34,17 +40,17 @@ export default function ConfirmAndSignTransaction({
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
-      <View style={[styles.contentContainer]}>
+      <View style={[styles.contentContainer, styles.theme.contentContainer]}>
         <Text
           style={[styles.title, styles.theme.title]}
         >
-          Enter your password
+          {t('sendToken.confirmAndSign.title')}
         </Text>
 
         <Text
           style={[styles.instructionsText, styles.theme.instructionsText]}
         >
-          Please provide your device password to sign a transaction.
+          {t('sendToken.confirmAndSign.description')}
         </Text>
 
         <Avatar
@@ -77,21 +83,27 @@ export default function ConfirmAndSignTransaction({
               padding: 16
             }
           }}
-          placeholder={'Enter password'}
+          placeholder={t('sendToken.confirmAndSign.passwordInputPlaceholder')}
           secureTextEntry
           onChange={field.onChange}
           value={field.value}
-          // error={passwordError && t(passwordError)}
         />
       </View>
 
       <PrimaryButton
         noTheme
         onClick={form.handleSubmit}
-        title={broadcastTransactionMutation.isLoading ? 'Loading...' : `Confirm and send ${amount} ${token.symbol}`}
+        title={
+          sendTokenMutation.isLoading
+            ? t('sendToken.confirmAndSign.loadingText')
+            : t('sendToken.confirmAndSign.sendTokenSubmitButtonText',
+              { amount, tokenSymbol: token.symbol })
+          }
         style={{ marginBottom: 24 }}
-        disabled={broadcastTransactionMutation.isLoading}
+        disabled={sendTokenMutation.isLoading}
       />
     </View>
   );
 }
+
+export default translate()(ConfirmAndSignTransaction);

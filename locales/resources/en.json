@@ -402,5 +402,68 @@
     "selectApplication": "Select Application",
     "selectToken": "Select Token",
     "token": "Token"
+  },
+  "sendToken": {
+    "applicationsSelect": {
+      "loadingApplicationsText": "Loading...",
+      "senderApplicationFieldLabel": "From Application",
+      "notApplicationFoundText": "No application found",
+      "recipientApplicationFieldLabel": "To Application",
+      "recipientApplicationFieldPlaceholder": "Select an Application",
+      "recipientAccountFieldLabel": "Recipient",
+      "nextStepButtonText": "Continue"
+    },
+    "tokenSelect": {
+      "prevStepButtonText": "Back",
+      "nextStepButtonText": "Continue",
+      "tokenIDFieldLabel": "Token",
+      "tokenIDBalanceLabel": "Bal",
+      "loadingTokensText": "Loading...",
+      "tokenAmountFieldLabel": "Amount ({{selectedTokenSymbol}})",
+      "tokenAmountFieldLabelPlain": "Amount",
+      "tokenAmountFieldPlaceholder": "Add your amount of ({{selectedTokenSymbol}})",
+      "messageFieldTriggerButtonText": "+ Add message (optional)",
+      "messageFieldLabel": "Message (optional)",
+      "messageFieldLabelPlain": "Message",
+      "messageFieldPlaceholder": "Add an optional message",
+      "priorityFieldLabel": "Priority",
+      "loadingPrioritiesText": "Loading priorities...",
+      "errorLoadingPrioritiesText": "Error loading priorities!",
+      "lowPriorityLabel": "Low",
+      "mediumPriorityLabel": "Medium",
+      "highPriorityLabel": "High",
+      "transactionFeeLabel": "Transaction fee",
+      "loadingTransactionFeeText": "Loading transaction fee...",
+      "errorLoadingTransactionFeeText": "Error calculating fees!",      
+      "initializationFeeLabel": "Initialization fee",
+      "loadingInitializationFeeText": "Loading initialization fee...",
+      "cmmFeeLabel": "CCM fee",
+      "loadingCmmFeeText": "Loading CCM fee..."
+    },
+    "summary": {
+      "prevStepButtonText": "Back",
+      "submitTransactionButtonText": "Send"
+    },
+    "confirmAndSign": {
+      "title": "Enter your password",
+      "description": "Please provide your device password to sign a transaction.",
+      "passwordInputPlaceholder": "Enter password",
+      "loadingText": "Loading...",
+      "sendTokenSubmitButtonText": "Confirm and send {{amount}} {{tokenSymbol}}"
+    },
+    "result": {
+      "success": {
+        "title": "Transaction submitted",
+        "description": "You will find it in your Wallet and it will be confirmed in a matter of seconds.",
+        "closeButtonText": "Back to wallet"
+      },
+      "error": {
+        "title": "Transaction failed",
+        "description": "There was an error on the transaction. Please try again.",
+        "retryButtonText": "Try again",
+        "reportErrorLabel": "Is the problem persisting?",
+        "reportErrorButtonText": "Report the error via email"
+      }
+    }
   }
 }

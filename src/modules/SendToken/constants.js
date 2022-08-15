@@ -39,9 +39,9 @@ export const DEFAULT_MIN_REMAINING_BALANCE = 5000000;
 export const MIN_FEE_PER_BYTE = 1000;
 
 export const PRIORITY_NAMES_MAP = {
-  low: 'Low',
-  medium: 'Medium',
-  high: 'High'
+  low: t('sendToken.tokenSelect.lowPriorityLabel'),
+  medium: t('sendToken.tokenSelect.mediumPriorityLabel'),
+  high: t('sendToken.tokenSelect.highPriorityLabel'),
 };
 
 const MODULES = {

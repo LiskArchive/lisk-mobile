@@ -82,17 +82,29 @@ export default function getSendTokenSummaryStepStyles() {
       wrapper: {
         backgroundColor: colors.light.white,
       },
+      container: {
+        backgroundColor: colors.light.white,
+      },
       valueText: {
         color: colors.light.zodiacBlue,
       },
+      confirmAndSignTransactionModal: {
+        backgroundColor: colors.light.white,
+      }
     },
     [themes.dark]: {
       wrapper: {
         backgroundColor: colors.dark.mainBg,
       },
+      container: {
+        backgroundColor: colors.dark.mainBg,
+      },
       valueText: {
         color: colors.light.white,
       },
+      confirmAndSignTransactionModal: {
+        backgroundColor: colors.dark.mainBg,
+      }
     },
   };
 }
