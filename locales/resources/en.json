@@ -397,6 +397,10 @@
     }},
   "requestTokens": {
     "title": "Request Tokens",
-    "recipient": "Recipient"
+    "recipient": "Recipient",
+    "recipientApplication": "Recipient Application",
+    "selectApplication": "Select Application",
+    "selectToken": "Select Token",
+    "token": "Token"
   }
 }
