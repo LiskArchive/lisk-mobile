@@ -21,6 +21,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.7",
     "@liskhq/lisk-client": "6.0.0-alpha.2",
     "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/art": "^1.2.0",
@@ -126,7 +127,8 @@
     "url": "^0.10.3",
     "url-parse": "^1.5.9",
     "util": "^0.10.4",
-    "vm-browserify": "^0.0.4"
+    "vm-browserify": "^0.0.4",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

@@ -190,11 +190,12 @@ function SendTokenSummaryStep({
         show={showSendTokenSummaryModal}
         setShow={setShowSendTokenSummaryModal}
         summary={summary}
+        form={form}
         handleResetForm={() => {
           form.handleReset();
           reset();
         }}
-        handleResetStepper = {reset}
+        handleResetStepper={reset}
       />
     </>
   );
