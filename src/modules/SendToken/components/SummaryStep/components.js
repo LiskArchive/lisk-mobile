@@ -47,8 +47,6 @@ export function SendTokenSummaryModal({
     }
   }
 
-  console.log({ activeStep });
-
   function renderStep() {
     switch (activeStep) {
       case 'confirmAndSignTransaction':

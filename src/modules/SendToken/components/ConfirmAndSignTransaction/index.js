@@ -47,6 +47,8 @@ function ConfirmAndSignTransaction({
     onError
   ]);
 
+  const submitDisabled = form.sendTokenMutation.isLoading || !field.value;
+
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.contentContainer, styles.theme.contentContainer]}>
@@ -109,7 +111,7 @@ function ConfirmAndSignTransaction({
               { amount, tokenSymbol: token.symbol })
           }
         style={{ marginBottom: 24 }}
-        disabled={form.sendTokenMutation.isLoading}
+        disabled={submitDisabled}
       />
     </View>
   );
