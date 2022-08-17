@@ -42,38 +42,41 @@ export function TokenSelectField({
   const selectedToken = tokens.data?.find(token => token.tokenID === field.value);
 
   return (
-    <Picker value={field.value} onChange={field.onChange}>
+    <Picker
+      value={field.value}
+      onChange={field.onChange}
+      error={form.formState.errors.tokenID?.message}
+    >
       <View style={{ ...styles.row, justifyContent: 'space-between' }}>
         <Picker.Label>
           {t('sendToken.tokenSelect.tokenIDFieldLabel')}
         </Picker.Label>
 
-        <Picker.Label>
-          {t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
-          {/* TODO: Read token symbol from account info when backend send the data */}
-          <Text style={[styles.balanceText]}>
-            {normalizedBalance} {selectedToken?.symbol}
-          </Text>
-        </Picker.Label>
+        {selectedToken && (
+          <Picker.Label>
+            {t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
+            {/* TODO: Read token symbol from account info when backend send the data */}
+            <Text style={[styles.balanceText]}>
+              {normalizedBalance} {selectedToken.symbol}
+            </Text>
+          </Picker.Label>
+        )}
       </View>
 
       <Picker.Toggle
         disabled={tokens.isLoading || tokens.error}
-        style={{ container: { marginBottom: 16 } }}
       >
-        <View style={[styles.row]}>
-          {tokens.isLoading ? (
-            <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
-          ) : (
-            <>
-              <Text style={[styles.text, styles.theme.text]}>
-                {selectedToken?.symbol}
-              </Text>
+        {tokens.isLoading ? (
+          <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
+        ) : selectedToken && (
+          <View style={[styles.row]}>
+            <Text style={[styles.text, styles.theme.text]}>
+              {selectedToken.symbol}
+            </Text>
 
-              <TokenSvg symbol={selectedToken?.symbol} style={styles.tokenSvg} />
-            </>
-          )}
-        </View>
+            <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
+          </View>
+        )}
       </Picker.Toggle>
 
       <Picker.Menu>
@@ -117,16 +120,20 @@ export function TokenAmountField({
   return (
     <Input
       label= {
-        t('sendToken.tokenSelect.tokenAmountFieldLabel',
-          { selectedTokenSymbol: selectedToken?.symbol || '' })
+        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldLabel',
+          { selectedTokenSymbol: selectedToken.symbol || '' })
+          : t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
       }
       value={field.value}
       placeholder= {
-        t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
-          { selectedTokenSymbol: selectedToken?.symbol || '' })
+        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
+          { selectedTokenSymbol: selectedToken.symbol || '' })
+          : t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
       }
-      keyboardType="numeric"
       onChange={field.onChange}
+      keyboardType="numeric"
+      disabled={!selectedToken}
+      error={form.formState.errors.amount?.message}
       adornments={{
         right: (
           <Text style={[styles.tokenAmountInCurrencyText]}>
@@ -139,7 +146,8 @@ export function TokenAmountField({
           paddingTop: 0,
           paddingRight: 0,
           paddingLeft: 0,
-          marginBottom: 16
+          marginBottom: 16,
+          marginTop: 16,
         },
         inputLabel: {
           marginBottom: 8

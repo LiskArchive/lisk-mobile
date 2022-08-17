@@ -1,6 +1,6 @@
 export const DEFAULT_BLOCKCHAIN_APPLICATION = {
   name: 'Lisk',
-  chainID: 'aq02qkbb35u4jdq8szo3pnsq',
+  chainID: 1,
   title: 'Lisk',
   description: 'A blockchain application platform',
   network: 'mainnet',
@@ -26,7 +26,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
   DEFAULT_BLOCKCHAIN_APPLICATION,
   {
     name: 'Coleti',
-    chainID: 'mi34vyyd12g2lkf0rza1irws',
+    chainID: 2,
     title: 'Coleti',
     description: 'A Lisk-based NFT marketplace',
     network: 'mainnet',
@@ -53,7 +53,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
   },
   {
     name: 'DoEdu',
-    chainID: 'aq96eeqk77r4syc8aet9fcey',
+    chainID: 3,
     title: 'DoEdu',
     description: 'An educational platform built with Lisk SDK',
     network: 'mainnet',
@@ -77,7 +77,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
   },
   {
     name: 'Enevti',
-    chainID: 'aq86llsb35u4syc8aet7xenf',
+    chainID: 4,
     title: 'Enevti',
     description: 'A decentralized social media NFT platform',
     network: 'mainnet',
@@ -101,7 +101,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
   },
   {
     name: 'Kalipo',
-    chainID: 'aq25derd17a4syc8aet3pryt',
+    chainID: 5,
     title: 'Kalipo',
     description: 'A platform to support Decentralized Autonomous Organizations (DAOs)',
     network: 'mainnet',

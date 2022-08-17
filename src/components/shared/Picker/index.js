@@ -11,7 +11,8 @@ import {
 export default function Picker({
   children,
   value,
-  onChange
+  onChange,
+  error
 }) {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -21,7 +22,8 @@ export default function Picker({
         showMenu,
         setShowMenu,
         value,
-        onChange
+        onChange,
+        error
       }}
     >
       {children}

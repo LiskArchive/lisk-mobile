@@ -17,6 +17,7 @@ export function SendTokenSummaryModal({
   show,
   setShow,
   summary,
+  form,
   handleResetForm,
   handleResetStepper
 }) {
@@ -53,6 +54,7 @@ export function SendTokenSummaryModal({
           <ConfirmAndSignTransaction
             amount={summary.amount}
             token={summary.token}
+            form={form}
             onSuccess={() => setActiveStep('sendTokenSuccess')}
             onError={() => setActiveStep('sendTokenError')}
           />

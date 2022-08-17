@@ -407,10 +407,12 @@
     "applicationsSelect": {
       "loadingApplicationsText": "Loading...",
       "senderApplicationFieldLabel": "From Application",
+      "senderApplicationFieldPlaceholder": "Select sender application",
       "notApplicationFoundText": "No application found",
       "recipientApplicationFieldLabel": "To Application",
       "recipientApplicationFieldPlaceholder": "Select an Application",
       "recipientAccountFieldLabel": "Recipient",
+      "recipientAccountFieldPlaceholder": "Select a recipient account",
       "nextStepButtonText": "Continue"
     },
     "tokenSelect": {
@@ -422,6 +424,7 @@
       "tokenAmountFieldLabel": "Amount ({{selectedTokenSymbol}})",
       "tokenAmountFieldLabelPlain": "Amount",
       "tokenAmountFieldPlaceholder": "Add your amount of ({{selectedTokenSymbol}})",
+      "tokenAmountFieldPlaceholderPlain": "Select a token to add amount",
       "messageFieldTriggerButtonText": "+ Add message (optional)",
       "messageFieldLabel": "Message (optional)",
       "messageFieldLabelPlain": "Message",
@@ -464,6 +467,17 @@
         "reportErrorLabel": "Is the problem persisting?",
         "reportErrorButtonText": "Report the error via email"
       }
+    },
+    "errors" : {
+      "generalMessage": "Please fill all the required fields to send your tokens.",
+      "senderApplicationChainID": "Application to send from must be specified",
+      "recipientApplicationChainID": "Application who receives the tokens must be specified",
+      "recipientAccountAddress": "Recipient account must be specified",
+      "tokenID": "Token to send must be specified",
+      "amountRequired": "Token amount is required",
+      "amountMustBeNumber": "Amount must be a number",
+      "amountMustBePositive": "Token amount must be a positive number",
+      "priority":"Priority must be specified"
     }
   }
 }

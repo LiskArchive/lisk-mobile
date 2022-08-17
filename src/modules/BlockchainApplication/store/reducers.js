@@ -55,8 +55,10 @@ export const applicationsReducer = (
       return { ...state, [application.chainID]: application };
 
     case actionTypes.deleteApplicationByChainId: {
-      delete state[chainId];
-      return { ...state };
+      // eslint-disable-next-line no-unused-vars
+      const { [chainId]: _, ...stateWithoutDeletedApplication } = state;
+
+      return stateWithoutDeletedApplication;
     }
 
     default:

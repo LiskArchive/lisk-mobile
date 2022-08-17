@@ -25,30 +25,31 @@ export function SendTokenSenderApplicationField({ form, applications, t }) {
   );
 
   return (
-    <Picker>
+    <Picker
+      value={field.value}
+      onChange={field.onChange}
+      error={form.formState.errors.senderApplicationChainID?.message}
+    >
       <Picker.Label>
         {t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
       </Picker.Label>
 
-      <Picker.Toggle disabled style={{ container: { marginBottom: 16 } }}>
-        <View style={[styles.applicationNameContainer]}>
-          {senderApplication ? (
-            <>
-              <Text style={[styles.text, styles.theme.text]}>
-                {senderApplication.name}
-              </Text>
-
-              <Image
-                source={{ uri: senderApplication.images.logo.png }}
-                style={[styles.applicationLogoImage]}
-              />
-            </>
-          ) : (
+      <Picker.Toggle
+        disabled
+        placeholder={t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')}
+      >
+        {senderApplication && (
+          <View style={[styles.applicationNameContainer]}>
             <Text style={[styles.text, styles.theme.text]}>
-              {t('sendToken.applicationsSelect.notApplicationFoundText')}.
+              {senderApplication.name}
             </Text>
-          )}
-        </View>
+
+            <Image
+              source={{ uri: senderApplication.images.logo.png }}
+              style={[styles.applicationLogoImage]}
+            />
+          </View>
+        )}
       </Picker.Toggle>
     </Picker>
   );
@@ -72,8 +73,9 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
     <Picker
       value={form.value}
       onChange={field.onChange}
+      error={form.formState.errors.recipientApplicationChainID?.message}
     >
-      <Picker.Label>
+      <Picker.Label style={{ marginTop: 16 }}>
         {t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
       </Picker.Label>
 
@@ -82,7 +84,6 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
         placeholder={
           t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')
         }
-        style={{ container: { marginBottom: 16 } }}
       >
         {recipientApplication && (
           <View style={[styles.applicationNameContainer]}>
@@ -135,30 +136,41 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
   );
 
   return (
-      <Picker>
-        <Picker.Label>
-          {t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
-        </Picker.Label>
+    <Picker
+      value={form.value}
+      onChange={field.onChange}
+      error={form.formState.errors.recipientAccountAddress?.message}
+    >
+      <Picker.Label style={ { marginTop: 16 } }>
+        {t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
+      </Picker.Label>
 
-        <Picker.Toggle disabled>
-          <View style={[styles.applicationNameContainer]}>
-            <Avatar
-              address={recipientAccount.metadata.address}
-              size={24}
-              style={{ marginRight: 8 }}
-            />
+      <Picker.Toggle
+        disabled
+        placeholder={t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
+      >
+        {recipientAccount && (
+          <>
+            <View style={[styles.applicationNameContainer]}>
+              <Avatar
+                address={recipientAccount.metadata.address}
+                size={24}
+                style={{ marginRight: 8 }}
+              />
 
-            <Text style={[styles.text, styles.theme.text]}>
-              {recipientAccount.metadata.name}
-            </Text>
+              <Text style={[styles.text, styles.theme.text]}>
+                {recipientAccount.metadata.name}
+              </Text>
 
-            <Text style={[styles.accountAddress, styles.theme.accountAddress]}>
-              {stringShortener(recipientAccount.metadata.address, 5, 5)}
-            </Text>
-          </View>
+              <Text style={[styles.accountAddress, styles.theme.accountAddress]}>
+                {stringShortener(recipientAccount.metadata.address, 5, 5)}
+              </Text>
+            </View>
 
-          <CircleCheckedSvg variant="fill" />
-        </Picker.Toggle>
-      </Picker>
+            <CircleCheckedSvg variant="fill" />
+          </>
+        )}
+      </Picker.Toggle>
+    </Picker>
   );
 }

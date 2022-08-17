@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useController } from 'react-hook-form';
 import { translate } from 'react-i18next';
@@ -9,34 +9,47 @@ import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
 import Input from 'components/shared/toolBox/input';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
-import useSendTokenMutation from '../../api/useSendTokenMutation';
 
 import getConfirmAndSignTransactionStyles from './styles';
-import useConfirmAndSignTransactionForm from './hooks';
 
 function ConfirmAndSignTransaction({
   amount,
   token,
+  form,
   onSuccess,
   onError,
   t
 }) {
-  const [currentAccount] = useCurrentAccount();
-
-  const sendTokenMutation = useSendTokenMutation();
-
-  const form = useConfirmAndSignTransactionForm({
-    sendTokenMutation, onSuccess, onError
-  });
-
   const { field } = useController({
-    name: 'password',
+    name: 'userPassword',
     control: form.control,
   });
+
+  const [currentAccount] = useCurrentAccount();
 
   const { styles } = useTheme({
     styles: getConfirmAndSignTransactionStyles(),
   });
+
+  useEffect(() => {
+    if (form.sendTokenMutation.isSuccess) {
+      onSuccess();
+      form.sendTokenMutation.reset();
+    }
+
+    if (form.sendTokenMutation.isError) {
+      onError();
+      form.sendTokenMutation.reset();
+    }
+  }, [
+    form.sendTokenMutation,
+    onSuccess,
+    onError
+  ]);
+
+  const submitDisabled = form.sendTokenMutation.isLoading
+    || !field.value
+    || Object.keys(form.formState.errors).length > 0;
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -90,18 +103,26 @@ function ConfirmAndSignTransaction({
         />
       </View>
 
-      <PrimaryButton
-        noTheme
-        onClick={form.handleSubmit}
-        title={
-          sendTokenMutation.isLoading
-            ? t('sendToken.confirmAndSign.loadingText')
-            : t('sendToken.confirmAndSign.sendTokenSubmitButtonText',
-              { amount, tokenSymbol: token.symbol })
-          }
-        style={{ marginBottom: 24 }}
-        disabled={sendTokenMutation.isLoading}
-      />
+      <View>
+        {Object.keys(form.formState.errors).length > 0 && (
+          <Text style={[styles.errorText]}>
+            {t('sendToken.errors.generalMessage')}
+          </Text>
+        )}
+
+        <PrimaryButton
+          noTheme
+          onClick={form.handleSubmit}
+          title={
+            form.sendTokenMutation.isLoading
+              ? t('sendToken.confirmAndSign.loadingText')
+              : t('sendToken.confirmAndSign.sendTokenSubmitButtonText',
+                { amount, tokenSymbol: token?.symbol })
+            }
+          style={{ marginBottom: 24 }}
+          disabled={submitDisabled}
+        />
+      </View>
     </View>
   );
 }

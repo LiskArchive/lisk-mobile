@@ -35,6 +35,11 @@ export default function getConfirmAndSignTransactionStyles() {
       inputContainer: {
         width: '100%',
         margin: 0
+      },
+      errorText: {
+        marginBottom: 16,
+        color: colors.light.burntSieanna,
+        textAlign: 'center',
       }
     },
     [themes.light]: {
