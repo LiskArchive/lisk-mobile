@@ -29,8 +29,9 @@ import SwitchApplication from 'modules/BlockchainApplication/components/SwitchAp
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
 import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
-import DeleteApplication from '../modules/BlockchainApplication/components/DeleteApplication';
-import DeleteApplicationSuccess from '../modules/BlockchainApplication/components/DeleteApplicationSuccess';
+import Request from 'modules/Request';
+import DeleteApplication from 'modules/BlockchainApplication/components/DeleteApplication';
+import DeleteApplicationSuccess from 'modules/BlockchainApplication/components/DeleteApplicationSuccess';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './appNavigator';
 
@@ -177,6 +178,11 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="PassphraseBackup"
             component={PassphraseBackup}
+            options={navigationOptions.NoHeader}
+          />
+          <MainStack.Screen
+            name="Request"
+            component={Request}
             options={navigationOptions.NoHeader}
           />
         </MainStack.Navigator>

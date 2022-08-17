@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
@@ -15,10 +16,11 @@ import {
   TokenSelectField
 } from './components';
 
-export default function SendTokenSelectTokenStep({
+function SendTokenSelectTokenStep({
   nextStep,
   prevStep,
-  form
+  form,
+  t
 }) {
   const [currentAccount] = useCurrentAccount();
 
@@ -31,24 +33,24 @@ export default function SendTokenSelectTokenStep({
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
-        <TokenSelectField form={form} tokens={tokens} />
-        <TokenAmountField form={form} tokens={tokens} />
-        <SendTokenDescriptionField form={form} />
-        <SendTokenPriorityField form={form} />
-        <SendTokenTransactionFeesLabels form={form} tokens={tokens} />
+        <TokenSelectField form={form} tokens={tokens} t={t}/>
+        <TokenAmountField form={form} tokens={tokens} t={t}/>
+        <SendTokenDescriptionField form={form} t={t}/>
+        <SendTokenPriorityField form={form} t={t}/>
+        <SendTokenTransactionFeesLabels form={form} tokens={tokens} t={t}/>
       </View>
 
       <View style={[styles.row]}>
         <Button
-          style={{ marginRight: 16, flex: 1 }}
+          style={[styles.prevStepButton, styles.theme.prevStepButton]}
           onClick={prevStep}
-          title={'Back'}
+          title={t('sendToken.tokenSelect.prevStepButtonText')}
         />
 
         <PrimaryButton
           noTheme
           onClick={nextStep}
-          title={'Continue'}
+          title={t('sendToken.tokenSelect.nextStepButtonText')}
           style={{ flex: 1 }}
         />
 
@@ -57,3 +59,5 @@ export default function SendTokenSelectTokenStep({
     </View>
   );
 }
+
+export default translate()(SendTokenSelectTokenStep);

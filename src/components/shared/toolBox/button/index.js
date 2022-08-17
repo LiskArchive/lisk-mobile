@@ -32,7 +32,11 @@ const BaseButton = (props) => {
       ]}
       disabled={disabled}
     >
-      <Text style={[noPredefinedStyle ? null : styles.buttonText, textStyle]}>
+      <Text style={[
+        noPredefinedStyle ? null : styles.buttonText,
+        styles.theme.buttonText,
+        textStyle
+      ]}>
         {children || title}
       </Text>
     </TouchableOpacity>

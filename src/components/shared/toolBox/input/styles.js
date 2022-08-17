@@ -44,21 +44,15 @@ export default () => ({
       borderColor: colors.light.ultramarineBlue,
     },
     errorMessageContainer: {
-      marginTop: 10,
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'flex-start',
+      marginTop: 8,
       marginBottom: 8,
     },
     errorMessage: {
       fontFamily: fonts.family.context,
-      marginLeft: 0,
-      marginRight: 0,
-      marginTop: 0,
       fontSize: fonts.size.input,
-      backgroundColor: colors.light.burntSieanna,
-      paddingHorizontal: 16,
-      paddingVertical: 8,
     },
   },
 
@@ -77,7 +71,7 @@ export default () => ({
       color: colors.light.burntSieanna,
     },
     errorMessage: {
-      color: colors.light.white,
+      color: colors.light.burntSieanna,
     },
   },
 
@@ -97,7 +91,7 @@ export default () => ({
       color: colors.dark.burntSieanna,
     },
     errorMessage: {
-      color: colors.dark.white,
+      color: colors.light.burntSieanna,
     },
   },
 });

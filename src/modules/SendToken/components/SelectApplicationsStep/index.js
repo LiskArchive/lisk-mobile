@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { translate } from 'react-i18next';
 
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
@@ -9,9 +10,10 @@ import { useBlockchainApplicationExplorer } from '../../../BlockchainApplication
 import getSendTokenSelectApplicationsStepStyles from './styles';
 import { SendTokenRecipientAccountField, SendTokenRecipientApplicationField, SendTokenSenderApplicationField } from './components';
 
-export default function SendTokenSelectApplicationsStep({
+function SendTokenSelectApplicationsStep({
   nextStep,
-  form
+  form,
+  t
 }) {
   const { applications } = useBlockchainApplicationExplorer();
 
@@ -25,7 +27,7 @@ export default function SendTokenSelectApplicationsStep({
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={[styles.container]}>
-          <Text>Loading...</Text>
+          <Text>{t('sendToken.applicationsSelect.loadingApplicationsText')}</Text>
         </View>
       </View>
     );
@@ -37,16 +39,19 @@ export default function SendTokenSelectApplicationsStep({
         <SendTokenSenderApplicationField
           form={form}
           applications={applications}
+          t={t}
         />
 
         <SendTokenRecipientApplicationField
           form={form}
           applications={applications}
+          t={t}
         />
 
         <SendTokenRecipientAccountField
           form={form}
           accounts={accounts}
+          t={t}
         />
       </View>
 
@@ -54,8 +59,10 @@ export default function SendTokenSelectApplicationsStep({
         noTheme
         style={styles.button}
         onClick={nextStep}
-        title={'Continue'}
+        title={t('sendToken.applicationsSelect.nextStepButtonText')}
       />
     </View>
   );
 }
+
+export default translate()(SendTokenSelectApplicationsStep);

@@ -35,17 +35,46 @@ export default function getConfirmAndSignTransactionStyles() {
       inputContainer: {
         width: '100%',
         margin: 0
+      },
+      errorText: {
+        marginBottom: 16,
+        color: colors.light.burntSieanna,
+        textAlign: 'center',
       }
     },
     [themes.light]: {
       wrapper: {
         backgroundColor: colors.light.white,
       },
+      contentContainer: {
+        backgroundColor: colors.light.white,
+      },
+      title: {
+        color: colors.light.zodiacBlue,
+      },
+      instructionsText: {
+        color: colors.light.zodiacBlue,
+      },
+      accountNameText: {
+        color: colors.light.zodiacBlue,
+      }
     },
     [themes.dark]: {
       wrapper: {
         backgroundColor: colors.dark.mainBg,
       },
+      contentContainer: {
+        backgroundColor: colors.dark.mainBg,
+      },
+      title: {
+        color: colors.light.white,
+      },
+      instructionsText: {
+        color: colors.light.slateGray,
+      },
+      accountNameText: {
+        color: colors.light.white,
+      }
     },
   };
 }

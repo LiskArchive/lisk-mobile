@@ -4,6 +4,7 @@ import ModalBox from 'react-native-modalbox';
 
 import { useTheme } from 'hooks/useTheme';
 import CaretSvg from 'assets/svgs/CaretSvg';
+import { themes, colors } from 'constants/styleGuide';
 
 import { usePicker } from './hooks';
 import { getPickerStyles } from './styles';
@@ -26,48 +27,65 @@ export function PickerToggle({
   disabled,
   style: baseStyle
 }) {
-  const { value, setShowMenu } = usePicker();
+  const { value, setShowMenu, error } = usePicker();
 
-  const { styles } = useTheme({
-    styles: getPickerStyles(),
+  const { styles, theme } = useTheme({
+    styles: getPickerStyles(error),
   });
 
   return (
-    <TouchableOpacity
-      onPress={() => setShowMenu(true)}
-      disabled={disabled}
-      style={[styles.toggleContainer, styles.theme.toggleContainer, baseStyle?.container]}
-    >
-      {children || (
-        <Text
-          style={[
-            styles[value ? 'toggleText' : 'togglePlaceholder'],
-            styles.theme[value ? 'toggleText' : 'togglePlaceholder'],
-            baseStyle?.toggleText
-          ]}
-        >
-          {value || placeholder}
+    <>
+      <TouchableOpacity
+        onPress={() => setShowMenu(true)}
+        disabled={disabled}
+        style={[
+          styles.toggleContainer,
+          styles.theme.toggleContainer,
+          baseStyle?.container
+        ]}
+      >
+        {children || (
+          <Text
+            style={[
+              styles[value ? 'toggleText' : 'togglePlaceholder'],
+              styles.theme[value ? 'toggleText' : 'togglePlaceholder'],
+              baseStyle?.toggleText
+            ]}
+          >
+            {value || placeholder}
+          </Text>
+        )}
+
+        {!disabled && (
+          <CaretSvg
+            color={theme === themes.dark ? colors.dark.volcanicSand : colors.light.silverGrey}
+            direction='right'
+          />
+        )}
+      </TouchableOpacity>
+
+      {error && (
+        <Text style={[styles.errorText]}>
+          {error}
         </Text>
       )}
-
-      {!disabled && <CaretSvg direction='right'/>}
-
-    </TouchableOpacity>
+    </>
   );
 }
 
 export function PickerMenu({ children, style: baseStyle }) {
   const { showMenu, setShowMenu } = usePicker();
 
-  const { styles } = useTheme({
+  const { styles, theme } = useTheme({
     styles: getPickerStyles(),
   });
 
   return (
     <ModalBox
       position="bottom"
-      style={[styles.menuContainer, baseStyle]}
+      style={[styles.menuContainer, styles.theme.menuContainer, baseStyle]}
       isOpen={showMenu}
+      backdropColor={theme === themes.dark ? colors.dark.volcanicSand : colors.light.white }
       onClosed={() => setShowMenu(false)}
       coverScreen
     >
@@ -91,7 +109,7 @@ export function PickerItem({
         onChange(value);
         setShowMenu(false);
       }}
-      style={[styles.itemContainer, baseStyle]}
+      style={[styles.itemContainer, styles.theme.itemContainer, baseStyle]}
     >
      {typeof children === 'string' ? <Text>{children}</Text> : children}
     </TouchableOpacity>

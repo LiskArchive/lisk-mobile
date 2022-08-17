@@ -23,7 +23,8 @@ import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
 export function TokenSelectField({
   form,
-  tokens
+  tokens,
+  t
 }) {
   const currentAccountInfo = useAccountInfo();
 
@@ -41,35 +42,41 @@ export function TokenSelectField({
   const selectedToken = tokens.data?.find(token => token.tokenID === field.value);
 
   return (
-    <Picker value={field.value} onChange={field.onChange}>
+    <Picker
+      value={field.value}
+      onChange={field.onChange}
+      error={form.formState.errors.tokenID?.message}
+    >
       <View style={{ ...styles.row, justifyContent: 'space-between' }}>
         <Picker.Label>
-          Token
+          {t('sendToken.tokenSelect.tokenIDFieldLabel')}
         </Picker.Label>
 
-        <Picker.Label>
-          Bal: {' '}
-          {/* TODO: Read token symbol from account info when backend send the data */}
-          <Text style={[styles.balanceText]}>
-            {normalizedBalance} {selectedToken?.symbol}
-          </Text>
-        </Picker.Label>
+        {selectedToken && (
+          <Picker.Label>
+            {t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
+            {/* TODO: Read token symbol from account info when backend send the data */}
+            <Text style={[styles.balanceText]}>
+              {normalizedBalance} {selectedToken.symbol}
+            </Text>
+          </Picker.Label>
+        )}
       </View>
 
       <Picker.Toggle
         disabled={tokens.isLoading || tokens.error}
-        style={{ container: { marginBottom: 16 } }}
       >
-        <View style={[styles.row]}>
-          {tokens.isLoading ? (
-            <Text>Loading...</Text>
-          ) : (
-            <>
-              <Text>{selectedToken?.symbol}</Text>
-              <TokenSvg symbol={selectedToken?.symbol} style={styles.tokenSvg} />
-            </>
-          )}
-        </View>
+        {tokens.isLoading ? (
+          <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
+        ) : selectedToken && (
+          <View style={[styles.row]}>
+            <Text style={[styles.text, styles.theme.text]}>
+              {selectedToken.symbol}
+            </Text>
+
+            <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
+          </View>
+        )}
       </Picker.Toggle>
 
       <Picker.Menu>
@@ -78,7 +85,10 @@ export function TokenSelectField({
             key={token.tokenID}
             value={token.tokenID}
           >
-            <Text>{token.symbol}</Text>
+            <Text style={[styles.text, styles.theme.text]}>
+              {token.symbol}
+            </Text>
+
             <TokenSvg symbol={token.symbol} style={styles.tokenSvg} />
           </Picker.Item>
         ))}
@@ -89,7 +99,8 @@ export function TokenSelectField({
 
 export function TokenAmountField({
   form,
-  tokens
+  tokens,
+  t
 }) {
   const { field } = useController({
     name: 'amount',
@@ -108,11 +119,21 @@ export function TokenAmountField({
 
   return (
     <Input
-      label={`Amount (${selectedToken?.symbol})`}
+      label= {
+        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldLabel',
+          { selectedTokenSymbol: selectedToken.symbol || '' })
+          : t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
+      }
       value={field.value}
-      placeholder={`Add your amount of ${selectedToken?.symbol}`}
-      keyboardType="numeric"
+      placeholder= {
+        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
+          { selectedTokenSymbol: selectedToken.symbol || '' })
+          : t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
+      }
       onChange={field.onChange}
+      keyboardType="numeric"
+      disabled={!selectedToken}
+      error={form.formState.errors.amount?.message}
       adornments={{
         right: (
           <Text style={[styles.tokenAmountInCurrencyText]}>
@@ -125,7 +146,8 @@ export function TokenAmountField({
           paddingTop: 0,
           paddingRight: 0,
           paddingLeft: 0,
-          marginBottom: 16
+          marginBottom: 16,
+          marginTop: 16,
         },
         inputLabel: {
           marginBottom: 8
@@ -138,7 +160,7 @@ export function TokenAmountField({
   );
 }
 
-export function SendTokenDescriptionField({ form }) {
+export function SendTokenDescriptionField({ form, t }) {
   const [showInput, setShowInput] = useState(false);
 
   const { field } = useController({
@@ -153,16 +175,16 @@ export function SendTokenDescriptionField({ form }) {
         style={{ width: 178 }}
         textStyle={{ fontSize: 14, lineHeight: 0, marginBottom: 16 }}
       >
-        + Add message (Optional)
+        {t('sendToken.tokenSelect.messageFieldTriggerButtonText')}
       </LabelButton>
     );
   }
 
   return (
     <Input
-      label="Message (optional)"
+      label={t('sendToken.tokenSelect.messageFieldLabel')}
       value={field.value}
-      placeholder="Add an optional message"
+      placeholder={t('sendToken.tokenSelect.messageFieldPlaceholder')}
       onChange={field.onChange}
       multiline
       innerStyles={{
@@ -184,7 +206,7 @@ export function SendTokenDescriptionField({ form }) {
   );
 }
 
-export function SendTokenPriorityField({ form }) {
+export function SendTokenPriorityField({ form, t }) {
   const {
     data: prioritiesData,
     isLoading: isLoadingPrioritiesData,
@@ -203,8 +225,13 @@ export function SendTokenPriorityField({ form }) {
   if (isLoadingPrioritiesData) {
     return (
       <View>
-        <Text style={[styles.label]}>Priority</Text>
-        <Text>Loading priorities...</Text>
+        <Text style={[styles.label]}>
+          {t('sendToken.tokenSelect.priorityFieldLabel')}
+        </Text>
+
+        <Text>
+          {t('sendToken.tokenSelect.loadingPrioritiesText')}
+        </Text>
       </View>
     );
   }
@@ -212,15 +239,22 @@ export function SendTokenPriorityField({ form }) {
   if (errorOnPriorities) {
     return (
       <View>
-        <Text style={[styles.label]}>Priority</Text>
-        <Text>Error loading priorities!</Text>
+        <Text style={[styles.label, styles.theme.label]}>
+          {t('sendToken.tokenSelect.priorityFieldLabel')}
+        </Text>
+
+        <Text>
+          {t('sendToken.tokenSelect.errorLoadingPrioritiesText')}
+        </Text>
       </View>
     );
   }
 
   return (
     <View style={{ marginBottom: 16 }}>
-      <Text style={[styles.label]}>Priority</Text>
+      <Text style={[styles.label, styles.theme.label]}>
+        {t('sendToken.tokenSelect.priorityFieldLabel')}
+      </Text>
 
       <View style={[styles.row, { width: '100%' }]}>
         {prioritiesData.map(priority => (
@@ -233,9 +267,13 @@ export function SendTokenPriorityField({ form }) {
               { marginRight: 8 }
             ]}
           >
-            <Text style={[styles.priorityButtonText]}>{PRIORITY_NAMES_MAP[priority.code]}</Text>
+            <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
+              {t(PRIORITY_NAMES_MAP[priority.code])}
+            </Text>
 
-            <Text style={[styles.priorityButtonFeeText]}>{priority.fee} LSK</Text>
+            <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
+              {priority.fee} LSK
+            </Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -243,7 +281,7 @@ export function SendTokenPriorityField({ form }) {
   );
 }
 
-export function SendTokenTransactionFeesLabels({ form, tokens }) {
+export function SendTokenTransactionFeesLabels({ form, tokens, t }) {
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
@@ -270,32 +308,60 @@ export function SendTokenTransactionFeesLabels({ form, tokens }) {
   });
 
   if (transactionFee.error) {
-    return <Text>Error calculating fees!</Text>;
+    return (
+      <Text>
+        {t('sendToken.tokenSelect.errorLoadingTransactionFeeText')}
+      </Text>
+    );
   }
 
   return (
     <View>
       <View style={[styles.feeContainer]}>
-        <Text>Transaction fee</Text>
+        <Text style={[styles.text, styles.theme.text]}>
+          {t('sendToken.tokenSelect.transactionFeeLabel')}
+        </Text>
+
         {transactionFee.isLoading ? (
-          <Text>Loading transaction fee...</Text>) : (
-          <Text>{transactionFee.data} {selectedToken?.symbol}</Text>
+          <Text style={[styles.text, styles.theme.text]}>
+            {t('sendToken.tokenSelect.loadingTransactionFeeText')}
+          </Text>
+        ) : (
+          <Text style={[styles.text, styles.theme.text]}>
+            {transactionFee.data} {selectedToken?.symbol}
+          </Text>
         )}
       </View>
 
       <View style={[styles.feeContainer]}>
-        <Text>Initialization fee</Text>
+        <Text style={[styles.text, styles.theme.text]}>
+          {t('sendToken.tokenSelect.initializationFeeLabel')}
+        </Text>
+
         {initializationFee.isLoading ? (
-          <Text>Loading initialization fee...</Text>) : (
-          <Text>{initializationFee.data} {selectedToken?.symbol}</Text>
+          <Text style={[styles.text, styles.theme.text]}>
+            {t('sendToken.tokenSelect.loadingInitializationFeeText')}
+          </Text>
+        ) : (
+          <Text style={[styles.text, styles.theme.text]}>
+            {initializationFee.data} {selectedToken?.symbol}
+          </Text>
         )}
       </View>
 
       <View style={[styles.feeContainer]}>
-        <Text>CCM fee</Text>
+        <Text style={[styles.text, styles.theme.text]}>
+          {t('sendToken.tokenSelect.cmmFeeLabel')}
+        </Text>
+
         {cmmFee.isLoading ? (
-          <Text>Loading CCM fee...</Text>) : (
-          <Text>{cmmFee.data} {selectedToken?.symbol}</Text>
+          <Text style={[styles.text, styles.theme.text]}>
+            {t('sendToken.tokenSelect.loadingCmmFeeText')}
+          </Text>
+        ) : (
+          <Text style={[styles.text, styles.theme.text]}>
+            {cmmFee.data} {selectedToken?.symbol}
+          </Text>
         )}
       </View>
     </View>

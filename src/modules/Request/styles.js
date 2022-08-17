@@ -11,47 +11,52 @@ export default () => ({
       flexDirection: 'column',
       flex: 1,
     },
-    subHeader: {
-      flexDirection: 'column',
-      paddingTop: boxes.boxPadding,
-      paddingLeft: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
-      paddingBottom: 40,
+    applicationNameContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    applicationLogoImage: {
+      borderRadius: 50,
+      width: 24,
+      height: 24,
+      marginLeft: 8,
+      borderWidth: 1,
+      borderColor: colors.light.platinumGray,
+    },
+    body: {
+      padding: boxes.boxPadding,
     },
     addressLabel: {
-      fontSize: fonts.size.small,
-      marginBottom: 8,
+      fontSize: fonts.size.base,
+      marginBottom: 10,
     },
     addressContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       width: '90%',
+      marginBottom: 30,
     },
     avatar: {
       marginRight: 10,
     },
+    tokenSvg: {
+      marginLeft: 8,
+    },
     address: {
-      fontSize: fonts.size.base,
-      maxWidth: '90%',
+      fontSize: fonts.size.small,
       marginRight: 15,
     },
     copyContainer: {
       alignItems: 'center',
       width: '100%',
     },
-    body: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      paddingBottom: boxes.boxPadding,
-    },
     shareContainer: {
       alignItems: 'center',
-      marginBottom: 10,
+      height: 100,
     },
-    shareContent: {
-      flexDirection: 'column',
+    modalContainer: {
       alignItems: 'center',
+      justifyContent: 'center'
     },
     shareTextContainer: {
       marginTop: 16,
@@ -61,9 +66,13 @@ export default () => ({
     shareText: {
       fontSize: fonts.size.small,
     },
-    inputContainer: {
-      height: 100,
-    },
+    closeButton: {
+      alignSelf: 'flex-end',
+      margin: 10,
+      padding: 10,
+      backgroundColor: colors.light.platinumGray,
+      borderRadius: 50,
+    }
   },
 
   [themes.light]: {
@@ -74,10 +83,13 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     addressLabel: {
-      color: colors.light.slateGray,
+      color: colors.light.maastrichtBlue,
+    },
+    username: {
+      color: colors.light.zodiacBlue,
     },
     address: {
-      color: colors.light.maastrichtBlue,
+      color: colors.light.blueGray,
     },
     shareText: {
       color: colors.light.slateGray,
@@ -93,6 +105,9 @@ export default () => ({
     },
     addressLabel: {
       color: colors.light.platinum,
+    },
+    username: {
+      color: colors.dark.white,
     },
     address: {
       color: colors.dark.white,

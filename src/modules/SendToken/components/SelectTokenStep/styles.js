@@ -50,7 +50,8 @@ export default function getSendTokenSelectTokenStepStyles() {
         borderColor: colors.light.ultramarineBlue,
       },
       label: {
-        marginBottom: 8
+        marginBottom: 8,
+        color: colors.light.blueGray
       },
       priorityButtonText: {
         color: colors.light.zodiacBlue,
@@ -59,17 +60,51 @@ export default function getSendTokenSelectTokenStepStyles() {
       priorityButtonFeeText: {
         color: colors.light.zodiacBlue,
         fontWeight: '600'
-      }
+      },
+      text: {
+        color: colors.light.blueGray
+      },
+      prevStepButton: {
+        marginRight: 16,
+        flex: 1
+      },
     },
     [themes.light]: {
       wrapper: {
         backgroundColor: colors.light.white,
+      },
+      text: {
+        color: colors.light.zodiacBlue
+      },
+      label: {
+        color: colors.light.zodiacBlue
+      },
+      priorityButtonText: {
+        color: colors.light.zodiacBlue,
+      },
+      priorityButtonFeeText: {
+        color: colors.light.zodiacBlue,
       },
     },
     [themes.dark]: {
       wrapper: {
         backgroundColor: colors.dark.mainBg,
       },
+      text: {
+        color: colors.light.whiteSmoke
+      },
+      label: {
+        color: colors.light.white
+      },
+      priorityButtonText: {
+        color: colors.light.whiteSmoke
+      },
+      priorityButtonFeeText: {
+        color: colors.light.whiteSmoke,
+      },
+      prevStepButton: {
+        color: colors.light.whiteSmoke,
+      }
     },
   };
 }
