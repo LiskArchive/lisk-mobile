@@ -14,7 +14,7 @@ export default function useTransactionFeeCalculator({
   const {
     data: prioritiesData,
     isLoading: isLoadingPrioritiesData,
-  } = useTransactionPriorities(amount, message);
+  } = useTransactionPriorities();
 
   const data = useMemo(() => {
     const priorityFee = prioritiesData?.reduce((acc, _priority) => {

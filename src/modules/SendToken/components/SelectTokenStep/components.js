@@ -210,7 +210,7 @@ export function SendTokenPriorityField({ form, t }) {
     data: prioritiesData,
     isLoading: isLoadingPrioritiesData,
     error: errorOnPriorities
-  } = useTransactionPriorities(form.watch('amount'), form.watch('message'));
+  } = useTransactionPriorities();
 
   const { field } = useController({
     name: 'priority',
