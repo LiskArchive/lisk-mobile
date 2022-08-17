@@ -23,6 +23,7 @@ import Blur from 'components/shared/blur';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useSelector } from 'react-redux';
+import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 import TransactionSummary from './TransactionSummary';
 import Row from './row';
 import getStyles from './styles';
@@ -30,7 +31,12 @@ import VoteList from './voteList';
 import {
   goToWallet, getAccountLabel, getAccountTitle
 } from './utils';
-import { useAccountInfo } from '../../hooks/useAccounts/useAccountInfo';
+import {
+  isRegistration,
+  isTransfer,
+  isVote,
+  isUnlock,
+} from '../../constants';
 
 const getConfig = (styles, tx, accountAddress) => {
   if (accountAddress !== tx.senderAddress && isTransfer(tx)) {

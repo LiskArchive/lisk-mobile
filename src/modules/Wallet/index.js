@@ -17,7 +17,7 @@ import LoadingBar from 'components/shared/loading';
 import { accountUnFollowed } from 'modules/Accounts/store/actions';
 import BookmarkSvg from 'assets/svgs/BookmarkSvg';
 import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
-import useTransactionList from 'modules/Accounts/hooks/useTransactionList';
+import useTransactionList from 'modules/Transactions/hooks/useTransactionList';
 import getStyles from './styles';
 import { AccountSummary } from './components';
 
