@@ -1,6 +1,6 @@
 import { themes, colors, fonts, } from 'constants/styleGuide';
 
-export function getPickerStyles() {
+export function getPickerStyles(error) {
   return {
     common: {
       label: {
@@ -36,6 +36,11 @@ export function getPickerStyles() {
         flexDirection: 'row',
         alignItems: 'center',
         padding: 16,
+      },
+      errorText: {
+        marginTop: -8,
+        marginBottom: 16,
+        color: colors.light.burntSieanna,
       }
     },
     [themes.light]: {
@@ -50,7 +55,7 @@ export function getPickerStyles() {
         backgroundColor: colors.light.white
       },
       toggleContainer: {
-        borderColor: colors.light.platinum,
+        borderColor: error ? colors.light.burntSieanna : colors.light.platinum,
         color: colors.light.maastrichtBlue,
       },
       toggleText: {
@@ -71,7 +76,7 @@ export function getPickerStyles() {
       },
       toggleContainer: {
         color: colors.dark.white,
-        borderColor: colors.dark.volcanicSand,
+        borderColor: error ? colors.light.burntSieanna : colors.dark.volcanicSand,
       },
       toggleText: {
         color: colors.dark.white

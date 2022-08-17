@@ -27,33 +27,49 @@ export function PickerToggle({
   disabled,
   style: baseStyle
 }) {
-  const { value, setShowMenu } = usePicker();
+  const { value, setShowMenu, error } = usePicker();
 
   const { styles, theme } = useTheme({
-    styles: getPickerStyles(),
+    styles: getPickerStyles(error),
   });
 
   return (
-    <TouchableOpacity
-      onPress={() => setShowMenu(true)}
-      disabled={disabled}
-      style={[styles.toggleContainer, styles.theme.toggleContainer, baseStyle?.container]}
-    >
-      {children || (
-        <Text
-          style={[
-            styles[value ? 'toggleText' : 'togglePlaceholder'],
-            styles.theme[value ? 'toggleText' : 'togglePlaceholder'],
-            baseStyle?.toggleText
-          ]}
-        >
-          {value || placeholder}
+    <>
+      <TouchableOpacity
+        onPress={() => setShowMenu(true)}
+        disabled={disabled}
+        style={[
+          styles.toggleContainer,
+          styles.theme.toggleContainer,
+          baseStyle?.container
+        ]}
+      >
+        {children || (
+          <Text
+            style={[
+              styles[value ? 'toggleText' : 'togglePlaceholder'],
+              styles.theme[value ? 'toggleText' : 'togglePlaceholder'],
+              baseStyle?.toggleText
+            ]}
+          >
+            {value || placeholder}
+          </Text>
+        )}
+
+        {!disabled && (
+          <CaretSvg
+            color={theme === themes.dark ? colors.dark.volcanicSand : colors.light.silverGrey}
+            direction='right'
+          />
+        )}
+      </TouchableOpacity>
+
+      {error && (
+        <Text style={[styles.errorText]}>
+          {error}
         </Text>
       )}
-
-      {!disabled && <CaretSvg color={theme === themes.dark ? colors.dark.volcanicSand : colors.light.ultramarineBlue} direction='right'/>}
-
-    </TouchableOpacity>
+    </>
   );
 }
 

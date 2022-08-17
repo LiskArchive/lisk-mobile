@@ -42,19 +42,25 @@ export function TokenSelectField({
   const selectedToken = tokens.data?.find(token => token.tokenID === field.value);
 
   return (
-    <Picker value={field.value} onChange={field.onChange}>
+    <Picker
+      value={field.value}
+      onChange={field.onChange}
+      error={form.formState.errors.tokenID?.message}
+    >
       <View style={{ ...styles.row, justifyContent: 'space-between' }}>
         <Picker.Label>
           {t('sendToken.tokenSelect.tokenIDFieldLabel')}
         </Picker.Label>
 
-        <Picker.Label>
-          {t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
-          {/* TODO: Read token symbol from account info when backend send the data */}
-          <Text style={[styles.balanceText]}>
-            {normalizedBalance} {selectedToken?.symbol}
-          </Text>
-        </Picker.Label>
+        {selectedToken && (
+          <Picker.Label>
+            {t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
+            {/* TODO: Read token symbol from account info when backend send the data */}
+            <Text style={[styles.balanceText]}>
+              {normalizedBalance} {selectedToken?.symbol}
+            </Text>
+          </Picker.Label>
+        )}
       </View>
 
       <Picker.Toggle
@@ -64,7 +70,7 @@ export function TokenSelectField({
         <View style={[styles.row]}>
           {tokens.isLoading ? (
             <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
-          ) : (
+          ) : selectedToken && (
             <>
               <Text style={[styles.text, styles.theme.text]}>
                 {selectedToken?.symbol}
@@ -117,16 +123,17 @@ export function TokenAmountField({
   return (
     <Input
       label= {
-        t('sendToken.tokenSelect.tokenAmountFieldLabel',
-          { selectedTokenSymbol: selectedToken?.symbol || '' })
+        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldLabel',
+          { selectedTokenSymbol: selectedToken?.symbol || '' }) : 'Amount'
       }
       value={field.value}
       placeholder= {
-        t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
-          { selectedTokenSymbol: selectedToken?.symbol || '' })
+        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
+          { selectedTokenSymbol: selectedToken?.symbol || '' }) : 'Select a token to add amount'
       }
       onChange={field.onChange}
       keyboardType="numeric"
+      disabled={!selectedToken}
       error={form.formState.errors.amount?.message}
       adornments={{
         right: (

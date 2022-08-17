@@ -106,27 +106,25 @@ function ConfirmAndSignTransaction({
       </View>
 
       <View>
+        {Object.keys(form.formState.errors).length > 0 && (
+          <Text style={[styles.errorText]}>
+            Please fill all the required fields to send your tokens.
+          </Text>
+        )}
 
-      {Object.keys(form.formState.errors).length > 0 && (
-        <Text style={[styles.errorText]}>
-          Please fill all the required fields to send your tokens.
-        </Text>
-      )}
-
-      <PrimaryButton
-        noTheme
-        onClick={form.handleSubmit}
-        title={
-          form.sendTokenMutation.isLoading
-            ? t('sendToken.confirmAndSign.loadingText')
-            : t('sendToken.confirmAndSign.sendTokenSubmitButtonText',
-              { amount, tokenSymbol: token.symbol })
-          }
-        style={{ marginBottom: 24 }}
-        disabled={submitDisabled}
-      />
+        <PrimaryButton
+          noTheme
+          onClick={form.handleSubmit}
+          title={
+            form.sendTokenMutation.isLoading
+              ? t('sendToken.confirmAndSign.loadingText')
+              : t('sendToken.confirmAndSign.sendTokenSubmitButtonText',
+                { amount, tokenSymbol: token?.symbol })
+            }
+          style={{ marginBottom: 24 }}
+          disabled={submitDisabled}
+        />
       </View>
-
     </View>
   );
 }
