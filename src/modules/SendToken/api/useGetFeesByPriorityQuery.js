@@ -4,13 +4,15 @@ import ApiClient from 'utilities/api/lisk/apiClient';
 
 export function useGetFeesByPriorityQuery() {
   const {
-    isLoading, error, data: { data }, refetch
+    isLoading, error, data, refetch
   } = useQuery(['priorityFees'], () => ApiClient.getFees());
 
   const result = useMemo(() => {
     return data?.feeEstimatePerByte;
   }, [data]);
 
+  console.log(result);
+  
   return {
     data: { low: 0.005, medium: 0.007, high: 0.01 },
     isLoading,

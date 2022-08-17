@@ -45,7 +45,7 @@ class LiskAPIClient {
   }
 
   async getNetworkInfo() {
-    const resp = await fetch(`${this._url}/v2/network/status`, config.requestOptions);
+    const resp = await fetch(`${this._url}/v3/network/status`, config.requestOptions);
     if (!resp.ok) {
       throw new Error('Failed to request network info from server.');
     }
@@ -58,7 +58,7 @@ class LiskAPIClient {
 
   async getTransaction(id) {
     const resp = await fetch(
-      `${this._url}/v2/transactions?transactionId=${id}`,
+      `${this._url}/v3/transactions?transactionId=${id}`,
       config.requestOptions
     );
     if (!resp.ok && resp.status === 404) {
@@ -73,7 +73,7 @@ class LiskAPIClient {
 
   async getTransactions(address, limit = 10, offset = 0) {
     const resp = await fetch(
-      `${this._url}/v2/transactions?address=${address}&limit=${limit}&offset=${offset}&includePending=false&sort=timestamp:desc`,
+      `${this._url}/v3/transactions?address=${address}&limit=${limit}&offset=${offset}&includePending=false&sort=timestamp:desc`,
       config.requestOptions
     );
     if (!resp.ok && resp.status === 404) {
@@ -87,11 +87,16 @@ class LiskAPIClient {
   }
 
   async getFees() {
-    const resp = await fetch(`${this._url}/v2/fees`, config.requestOptions);
-    if (!resp.ok) {
-      throw new Error('Failed to request fees from server.');
+    try {
+      const resp = await fetch(`${this._url}/v3/fees`, config.requestOptions);
+      if (!resp.ok) {
+        throw new Error('Failed to request fees from server.');
+      }
+      const data = resp.json();
+      return data;
+    } catch (error) {
+      return {};
     }
-    return resp.json();
   }
 
   async sendTransaction(tx) {

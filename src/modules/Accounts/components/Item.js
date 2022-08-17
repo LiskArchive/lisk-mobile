@@ -6,7 +6,7 @@ import LottieView from 'lottie-react-native';
 import { translate } from 'react-i18next';
 import { fromRawLsk } from 'utilities/conversions';
 import { stringShortener } from 'utilities/helpers';
-import { getTxConstant, isTransfer } from 'modules/Transactions/constants';
+import { getTxConstant, isTransfer } from 'modules/SendToken/constants';
 import loadingAnimation from 'assets/animations/loading-dots.json';
 import { Blur } from 'components/shared/blur';
 import FormattedNumber from 'components/shared/formattedNumber';
