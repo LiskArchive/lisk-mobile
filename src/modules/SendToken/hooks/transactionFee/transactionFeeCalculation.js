@@ -12,7 +12,6 @@ import { getTransactionFee } from '../../utils';
  * @returns {object}
  *
  */
-
 export const calculateMinimumFee = ({
   account,
   transaction,
@@ -29,6 +28,15 @@ export const calculateMinimumFee = ({
   return minFee;
 };
 
+/**
+ *
+ * @param {object} data
+ * @param {object} data.account - Active account info
+ * @param {object} data.selectedPriority - Selected priority info
+ * @param {object} data.transaction - Raw transaction payload
+ * @returns {object}
+ *
+ */
 export const calculateMaximumFeeAmount = ({ account, transaction, ...params }) => {
   const maxAmountFee = getTransactionFee(
     {
@@ -40,6 +48,15 @@ export const calculateMaximumFeeAmount = ({ account, transaction, ...params }) =
   return maxAmountFee;
 };
 
+/**
+ *
+ * @param {object} data
+ * @param {object} data.account - Active account info
+ * @param {object} data.selectedPriority - Selected priority info
+ * @param {object} data.transaction - Raw transaction payload
+ * @returns {object}
+ *
+ */
 export const calculateTransactionFees = ({
   account,
   selectedPriority,
