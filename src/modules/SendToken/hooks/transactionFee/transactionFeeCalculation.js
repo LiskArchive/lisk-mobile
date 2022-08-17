@@ -4,15 +4,13 @@ import { fromRawLsk } from 'utilities/conversions';
 import { getTransactionFee } from '../../utils';
 
 /**
- * Custom hook to define tx fee
  *
  * @param {object} data
- * @param {string} data.token - Option of LSK and BTC
  * @param {object} data.account - Active account info
  * @param {object} data.selectedPriority - Selected priority info
  * @param {object} data.transaction - Raw transaction payload
- * @param {array} data.priorityOptions - Array of priority configs for High, Mid, Low
  * @returns {object}
+ *
  */
 
 export const calculateMinimumFee = ({
