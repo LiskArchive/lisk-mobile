@@ -1,41 +1,58 @@
-/* eslint-disable no-shadow */
-import React, { useState } from 'react';
-import { View, TouchableWithoutFeedback } from 'react-native';
+/* eslint-disable complexity */
+/* eslint-disable max-statements, no-shadow */
+import React, { useEffect, useMemo, useState } from 'react';
+import {
+  View, TouchableWithoutFeedback, SafeAreaView, Image
+} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { translate } from 'react-i18next';
 import Share from 'components/shared/share';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import TokenSvg from 'assets/svgs/TokenSvg';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   deviceWidth,
-  deviceHeight,
-  deviceType,
-  SCREEN_HEIGHTS,
 } from 'utilities/device';
-import Input from 'components/shared/toolBox/input';
 import { P, B } from 'components/shared/toolBox/typography';
 import reg from 'constants/regex';
-import withTheme from 'components/shared/withTheme';
+import { useTheme } from 'hooks/useTheme';
 import { themes, colors } from 'constants/styleGuide';
 import Avatar from 'components/shared/avatar';
-import CopyToClipboard from 'components/shared/copyToClipboard';
+import { stringShortener } from 'utilities/helpers';
+import BottomModal from 'components/shared/BottomModal';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
 import { languageMap } from 'constants/languages';
+import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { pricesRetrieved } from 'actions/service';
+import Picker from 'components/shared/Picker';
 import getStyles from './styles';
+import { useGetTokensQuery } from '../SendToken/api/useGetTokensQuery';
+import AmountInput from './components/AmountInput';
+import { useCurrencyConverter } from './hooks/useCurrencyConverter';
+import MessageInput from './components/MessageInput';
+import { serializeQueryString } from './utils';
 
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
-const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
+const qrCodeSize = deviceWidth() * 0.52;
 
 const Request = ({
-  styles, theme, t
+  t, navigation
 }) => {
+  const { styles, theme } = useTheme({ styles: getStyles() });
   const { summary: account } = useAccountInfo();
   const language = useSelector(state => state.settings.language);
-  const { address } = account;
+  const { currency } = useSelector(state => state.settings);
+  const { address, username } = account;
   const [amount, setAmount] = useState({ value: '', validity: -1 });
-  const [url, setUrl] = useState('');
-  const extraHeight = deviceType() === 'android' ? 170 : 0;
-
+  const [message, setMessage] = useState('');
+  const [recipientApplication, setRecipientApplication] = useState(null);
+  const [recipientToken, setRecipientToken] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const { applications } = useBlockchainApplicationExplorer();
+  const { data: tokens } = useGetTokensQuery(account.address);
+  const valueInCurrency = useCurrencyConverter(amount.value);
+  const dispatch = useDispatch();
   const validator = str => reg.amount.test(str);
 
   const changeHandler = val => {
@@ -55,83 +72,167 @@ const Request = ({
         validity: amountValidity,
       };
     }
-    setUrl(amountValidity === 0
-      ? `lisk://wallet?recipient=${address}&amount=${val}`
-      : address);
     setAmount(amount);
   };
 
-  return <View style={[styles.wrapper, styles.theme.wrapper]}>
+  const qrCodeUrl = useMemo(() => {
+    const amountValidity = validator(amount.value) ? 0 : 1;
+    const queryString = serializeQueryString({
+      recipient: address,
+      amount: amountValidity === 0 ? amount.value : 0,
+      recipientApplication: recipientApplication?.chainID,
+      recipientToken: recipientToken?.tokenId
+    });
+    return `lisk://wallet${queryString}`;
+  }, [address, amount.value, recipientApplication, recipientToken]);
+
+  const handleApplicationChange = application => {
+    setRecipientApplication(application);
+    setRecipientToken(null);
+  };
+
+  useEffect(() => {
+    dispatch(pricesRetrieved());
+  }, []);
+
+  const renderQRCode = (size) => <QRCode
+    value={qrCodeUrl}
+    size={size}
+    color={
+      theme === themes.light
+        ? colors.light.black
+        : colors.dark.white
+    }
+    backgroundColor={
+      theme === themes.light
+        ? colors.light.white
+        : colors.dark.maastrichtBlue
+    }
+  />;
+
+  if (applications.isLoading) {
+    return (
+      <View style={[styles.wrapper, styles.theme.wrapper]}>
+        <View style={[styles.container]}>
+          <P>Loading...</P>
+        </View>
+      </View>
+    );
+  }
+
+  return <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+    <HeaderBackButton
+      title="requestTokens.title"
+      onPress={navigation.goBack}
+      rightIconComponent={() => <TouchableOpacity
+        onPress={() => setModalOpen(true)}>{renderQRCode(20)}</TouchableOpacity>}
+    />
     <KeyboardAwareScrollView
       viewIsInsideTab
       enableOnAndroid={true}
       enableResetScrollToCoords={false}
-      extraHeight={extraHeight}
     >
       <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-        <View style={styles.subHeader}>
+        <View style={styles.body}>
           <P style={[styles.addressLabel, styles.theme.addressLabel]}>
-            {t('Your Lisk address')}
+            {t('requestTokens.recipient')}
           </P>
           <View style={styles.addressContainer}>
-            <Avatar style={styles.avatar} address={address} size={24} />
-            <CopyToClipboard
-              style={styles.copyContainer}
-              labelStyle={[styles.address, styles.theme.address]}
-              showIcon={true}
-              iconSize={18}
-              value={address}
-              type={B}
-            />
+            <Avatar style={styles.avatar} address={address} size={40} />
+            <View>
+              {username && <B style={styles.theme.username} >{username}</B>}
+              <P style={[styles.address, styles.theme.address]} >
+                {stringShortener(address, 9, 6)}
+              </P>
+            </View>
           </View>
-        </View>
-
-        <View style={styles.body}>
-          <View style={styles.shareContainer}>
-            <Share
-              type={TouchableWithoutFeedback}
-              value={url || address}
-              title={url || address}
-            >
-              <View style={styles.shareContent}>
-                <QRCode
-                  value={url || address}
-                  size={qrCodeSize}
-                  color={
-                    theme === themes.light
-                      ? colors.light.black
-                      : colors.dark.white
-                  }
-                  backgroundColor={
-                    theme === themes.light
-                      ? colors.light.white
-                      : colors.dark.maastrichtBlue
-                  }
-                />
-
-                <View style={styles.shareTextContainer}>
-                  <P style={[styles.shareText, styles.theme.shareText]}>
-                    {t('Tap on the QR Code to share it.')}
-                  </P>
-                </View>
+          <Picker onChange={handleApplicationChange} >
+            <Picker.Label>{t('requestTokens.recipientApplication')}</Picker.Label>
+            <Picker.Toggle style={{ container: { marginBottom: 16 } }}>
+              <View style={[styles.applicationNameContainer]}>
+                {recipientApplication ? (
+                  <>
+                    <P style={styles.theme.username} >{recipientApplication.name}</P>
+                    <Image
+                      source={{ uri: recipientApplication.images.logo.png }}
+                      style={[styles.applicationLogoImage]}
+                    />
+                  </>
+                ) : <P style={styles.theme.username}>{t('requestTokens.selectApplication')}</P>}
               </View>
-            </Share>
-          </View>
+            </Picker.Toggle>
+            <Picker.Menu>
+              {applications.data?.map((application) => (
+                <Picker.Item
+                  key={application.chainID}
+                  value={application}
+                >
+                  <P style={styles.theme.username}>{application.name}</P>
+                  <Image
+                    source={{ uri: application.images.logo.png }}
+                    style={[styles.applicationLogoImage]}
+                  />
+                </Picker.Item>
+              ))}
+            </Picker.Menu>
+          </Picker>
 
-          <View style={styles.inputContainer}>
-            <Input
-              label={t('Amount in LSK (optional)')}
-              autoCorrect={false}
-              onChange={changeHandler}
-              value={amount.value}
-              keyboardType="numeric"
-              error={amount.validity === 1 ? t('Invalid amount') : ''}
-            />
-          </View>
+          <Picker onChange={setRecipientToken} >
+            <Picker.Label>{t('requestTokens.token')}</Picker.Label>
+            <Picker.Toggle
+              disabled={!recipientApplication}
+              style={{ container: { marginBottom: 16 } }}>
+              <View style={[styles.applicationNameContainer]}>
+                {recipientToken ? (
+                  <>
+                    <P style={styles.theme.username}>{recipientToken.name}</P>
+                    <TokenSvg symbol={recipientToken.symbol} style={styles.tokenSvg} />
+                  </>
+                ) : <P style={styles.theme.username}>{t('requestTokens.selectToken')}</P>}
+              </View>
+            </Picker.Toggle>
+            <Picker.Menu>
+              {tokens?.map((token) => (
+                <Picker.Item
+                  key={token.tokenID}
+                  value={token}
+                >
+                  <P style={styles.theme.username}>{token.name}</P>
+                  <TokenSvg symbol={token.symbol} style={styles.tokenSvg} />
+                </Picker.Item>
+              ))}
+            </Picker.Menu>
+          </Picker>
+
+          <AmountInput
+            currency={currency}
+            valueInCurrency={valueInCurrency}
+            onChange={changeHandler}
+            value={amount.value}
+          />
+
+          <MessageInput onChange={setMessage} value={message} />
+
         </View>
       </View>
     </KeyboardAwareScrollView>
-  </View>;
+    <BottomModal style={styles.modalContainer} show={modalOpen} toggleShow={setModalOpen} >
+      <Share
+        type={TouchableWithoutFeedback}
+        value={qrCodeUrl}
+        title={qrCodeUrl}
+      >
+        <View>
+          {renderQRCode(qrCodeSize)}
+          <View style={styles.shareTextContainer}>
+            <P style={[styles.shareText, styles.theme.shareText]}>
+              {t('Tap on the QR Code to share it.')}
+            </P>
+          </View>
+        </View>
+      </Share>
+    </BottomModal>
+  </SafeAreaView>;
 };
 
-export default withTheme(translate()(Request), getStyles());
+export default translate()(Request);

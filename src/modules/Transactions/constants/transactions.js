@@ -28,7 +28,7 @@ const modules = {
   legacyAccount: 1000
 };
 
-const assets = {
+const commands = {
   transfer: 0,
   registerDelegate: 0,
   voteDelegate: 1,
@@ -41,7 +41,7 @@ const assets = {
 export const BASE_FEES = [
   Object.freeze({
     moduleID: modules.dpos,
-    assetID: assets.registerDelegate,
+    assetID: commands.registerDelegate,
     baseFee: '1000000000'
   })
 ];
@@ -52,42 +52,42 @@ export const DEFAULT_PRIORITY = [
   { title: 'High', amount: 0 }
 ];
 
-export const moduleAssetNameIdMap = {
-  transfer: `${modules.token}:${assets.transfer}`,
-  unlockToken: `${modules.dpos}:${assets.unlockToken}`,
-  voteDelegate: `${modules.dpos}:${assets.voteDelegate}`,
-  registerDelegate: `${modules.dpos}:${assets.registerDelegate}`,
-  reportDelegateMisbehavior: `${modules.dpos}:${assets.reportDelegateMisbehavior}`,
-  registerMultisignatureGroup: `${modules.multiSignature}:${assets.registerMultisignatureGroup}`,
-  reclaimLSK: `${modules.legacyAccount}:${assets.reclaimLSK}`
+export const moduleCommandNameIdMap = {
+  transfer: `${modules.token}:${commands.transfer}`,
+  unlockToken: `${modules.dpos}:${commands.unlockToken}`,
+  voteDelegate: `${modules.dpos}:${commands.voteDelegate}`,
+  registerDelegate: `${modules.dpos}:${commands.registerDelegate}`,
+  reportDelegateMisbehavior: `${modules.dpos}:${commands.reportDelegateMisbehavior}`,
+  registerMultisignatureGroup: `${modules.multiSignature}:${commands.registerMultisignatureGroup}`,
+  reclaimLSK: `${modules.legacyAccount}:${commands.reclaimLSK}`
 };
 
 export const moduleAssetMap = {
-  [moduleAssetNameIdMap.transfer]: {
+  [moduleCommandNameIdMap.transfer]: {
     maxFee: 1e7,
     icon: 'txDefault'
   },
-  [moduleAssetNameIdMap.unlockToken]: {
+  [moduleCommandNameIdMap.unlockToken]: {
     maxFee: 1e7,
     icon: 'unlockToken'
   },
-  [moduleAssetNameIdMap.voteDelegate]: {
+  [moduleCommandNameIdMap.voteDelegate]: {
     maxFee: 1e8,
     icon: 'vote'
   },
-  [moduleAssetNameIdMap.registerDelegate]: {
+  [moduleCommandNameIdMap.registerDelegate]: {
     maxFee: 25e8,
     icon: 'registerDelegate'
   },
-  [moduleAssetNameIdMap.reportDelegateMisbehavior]: {
+  [moduleCommandNameIdMap.reportDelegateMisbehavior]: {
     maxFee: 1e7,
     icon: 'reportDelegateMisbehavior'
   },
-  [moduleAssetNameIdMap.registerMultisignatureGroup]: {
+  [moduleCommandNameIdMap.registerMultisignatureGroup]: {
     maxFee: 5e8,
     icon: 'multisignatureTransaction'
   },
-  [moduleAssetNameIdMap.reclaimLSK]: {
+  [moduleCommandNameIdMap.reclaimLSK]: {
     maxFee: 1e7,
     icon: 'txDefault'
   }
@@ -131,31 +131,31 @@ export const transferAssetSchema = {
 };
 
 export const transactions = {
-  [moduleAssetNameIdMap.transfer]: {
+  [moduleCommandNameIdMap.transfer]: {
     moduleAssetId: '2:0',
     fee: 1e7,
     title: t('Transfer'),
     image: (theme) => (theme === themes.light ? transferLight : transferDark)
   },
-  [moduleAssetNameIdMap.registerMultisignatureGroup]: {
+  [moduleCommandNameIdMap.registerMultisignatureGroup]: {
     moduleAssetId: '4:0',
     fee: 5e8,
     title: t('Register multisignature group'),
     image: (theme) => (theme === themes.light ? setSecondPassphraseLight : setSecondPassphraseDark)
   },
-  [moduleAssetNameIdMap.registerDelegate]: {
+  [moduleCommandNameIdMap.registerDelegate]: {
     moduleAssetId: '5:0',
     fee: 25e8,
     title: t('Delegate registration'),
     image: (theme) => (theme === themes.light ? registerDelegateLight : registerDelegateDark)
   },
-  [moduleAssetNameIdMap.voteDelegate]: {
+  [moduleCommandNameIdMap.voteDelegate]: {
     moduleAssetId: '5:1',
     fee: 1e8,
     title: t('Vote'),
     image: (theme) => (theme === themes.light ? voteLight : voteDark)
   },
-  [moduleAssetNameIdMap.unlockToken]: {
+  [moduleCommandNameIdMap.unlockToken]: {
     moduleAssetId: '5:2',
     fee: 1e8,
     title: t('Unlock'),
@@ -174,11 +174,11 @@ export const getTxConstant = ({ moduleAssetId }) => {
   };
 };
 
-export const isTransfer = ({ moduleAssetId }) => moduleAssetId === moduleAssetNameIdMap.transfer;
+export const isTransfer = ({ moduleAssetId }) => moduleAssetId === moduleCommandNameIdMap.transfer;
 
 export const isRegistration = ({ moduleAssetId }) =>
-  moduleAssetId === moduleAssetNameIdMap.registerDelegate;
+  moduleAssetId === moduleCommandNameIdMap.registerDelegate;
 
-export const isVote = ({ moduleAssetId }) => moduleAssetId === moduleAssetNameIdMap.voteDelegate;
+export const isVote = ({ moduleAssetId }) => moduleAssetId === moduleCommandNameIdMap.voteDelegate;
 
-export const isUnlock = ({ moduleAssetId }) => moduleAssetId === moduleAssetNameIdMap.unlockToken;
+export const isUnlock = ({ moduleAssetId }) => moduleAssetId === moduleCommandNameIdMap.unlockToken;

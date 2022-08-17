@@ -8,7 +8,6 @@ import { translate } from 'react-i18next';
 
 import { colors } from 'constants/styleGuide';
 import { decodeLaunchUrl } from 'utilities/qrCode';
-import { tokenMap } from 'constants/tokens';
 import { validateAddress } from 'utilities/validators';
 import { stringShortener } from 'utilities/helpers';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -32,7 +31,6 @@ const AddToBookmark = ({
   styles,
   t,
   lng,
-  activeToken,
   accounts,
   route,
   accountFollowed,
@@ -45,7 +43,6 @@ const AddToBookmark = ({
 
   const scanner = useRef();
 
-  const shouldDisplayAvatar = activeToken === tokenMap.LSK.key;
   const errors = {
     label: t('The label must be shorter than 20 characters.'),
     address: t('Invalid address.')
@@ -95,14 +92,14 @@ const AddToBookmark = ({
 
   // eslint-disable-next-line max-statements
   const submitForm = () => {
-    const accountList = followedAccounts[activeToken];
+    const accountList = followedAccounts;
     const filteredAccount = accountList?.filter(
       (account) => account.label.toLocaleLowerCase() === label.value.toLocaleLowerCase()
     );
     if (filteredAccount?.length) {
       return DropDownHolder.error(t('multisignature.error.title'), t('multisignature.error.description'));
     }
-    const addressValidity = validateAddress(activeToken, address.value);
+    const addressValidity = validateAddress('LSK', address.value);
     const labelValidity = validateLabel(label.value);
     if (incomingData && labelValidity === 0) {
       const action = editMode ? accountEdited : accountFollowed;
@@ -128,7 +125,7 @@ const AddToBookmark = ({
     const account = route.params?.account ?? null;
     const { setOptions } = navigation;
     if (account) {
-      const editMode = accounts[activeToken]
+      const editMode = accounts
         .filter((item) => item.address === account.address).length > 0;
       setEditMode(editMode);
       setLabel({ value: account.label || '' });
@@ -177,9 +174,7 @@ const AddToBookmark = ({
               iconSize={18}
               color={colors.light.ultramarineBlue}
             />
-            {shouldDisplayAvatar ? (
               <Avatar style={styles.avatar} address={address.value} size={24} />
-            ) : null}
             <Input
               label={t('Address')}
               autoCorrect={false}
@@ -188,7 +183,7 @@ const AddToBookmark = ({
                 input: [
                   styles.input,
                   styles.addressInput,
-                  shouldDisplayAvatar ? styles.addressInputWithAvatar : {}
+                  styles.addressInputWithAvatar
                 ],
                 containerStyle: styles.addressInputContainer
               }}
@@ -201,13 +196,11 @@ const AddToBookmark = ({
           <View style={styles.row}>
             <P style={[styles.label, styles.theme.label]}>Address</P>
             <View style={styles.staticAddressContainer}>
-              {shouldDisplayAvatar ? (
                 <Avatar
                   address={incomingData.address || ''}
                   style={styles.staticAvatar}
                   size={35}
                 />
-              ) : null}
               <Small style={[styles.address, styles.theme.address]}>
                 {stringShortener(incomingData.address, 6, 5)}
               </Small>
@@ -228,9 +221,9 @@ const AddToBookmark = ({
   </View>;
 };
 
+// TODO: Implement bookmarks
 const mapStateToProps = state => ({
-  accounts: state.accounts.followed,
-  activeToken: state.settings.token.active,
+  accounts: [],
   followedAccounts: state.accounts.followed || []
 });
 

@@ -39,12 +39,15 @@ class Recipient extends React.Component {
   componentDidMount() {
     const {
       sharedData,
-      navigation: { setOptions }
+      navigation: { setOptions },
+      route
     } = this.props;
 
-    if (sharedData.address) {
+    if (route.params?.query) {
+      this.setAddress(route.params.query?.address);
+    }
+    if (sharedData?.address) {
       this.setAddress(sharedData.address);
-      setTimeout(() => this.input.focus(), 250);
     }
 
     setOptions({
@@ -70,7 +73,7 @@ class Recipient extends React.Component {
   setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
 
-    if (validateAddress(this.props.settings.token.active, value) === 0) {
+    if (validateAddress('LSK', value) === 0) {
       this.setAvatarPreviewTimeout();
     }
 

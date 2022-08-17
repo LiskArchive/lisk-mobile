@@ -1,9 +1,8 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import { translate } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import MultiStep from 'components/shared/multiStep';
+import Stepper from 'components/shared/Stepper';
 import PassphraseBackup from 'components/screens/passphraseBackup';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import { useCurrentAccount, useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
@@ -17,9 +17,9 @@ const BackupPassphrase = ({ styles }) => {
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
-    <MultiStep currentIndex={0}>
+    <Stepper currentIndex={0}>
       <DecryptPhrase
-        account={summary}
+        account={account}
         route={{
           params: {
             address: summary.address,
@@ -30,7 +30,7 @@ const BackupPassphrase = ({ styles }) => {
       <PassphraseBackup />
       <Confirm customHeader />
       <PasswordSetupSuccess encryptedJson={account} onContinue={navigation.goBack} />
-    </MultiStep>
+    </Stepper>
     </SafeAreaView>
   );
 };

@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   View, SafeAreaView, TouchableOpacity
 } from 'react-native';
@@ -34,16 +34,16 @@ import { AccountSummary } from './components';
 const Wallet = ({
   styles, navigation, t, route, theme
 }) => {
-  const followedAccounts = useSelector(state => state.accounts.followed || []);
-  const activeToken = useSelector(state => state.settings.token.active);
+  // TODO: Implement getting bookmarked accounts
+  const followedAccounts = [];
   const dispatch = useDispatch();
 
   const {
     transactions, loading, loadMore, refresh, account
-  } = useTransactionList({ address: route.params?.address, activeToken });
+  } = useTransactionList({ address: route.params?.address, activeToken: 'LSK' });
 
   const isFollowed = () => {
-    return followedAccounts[activeToken].some(
+    return followedAccounts.some(
       (item) => item.address === account?.address
     );
   };

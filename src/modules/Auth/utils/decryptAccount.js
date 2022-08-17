@@ -1,20 +1,15 @@
-// TODO: this function should be imported from SDK - #4342
-// eslint-disable-next-line no-unused-vars
-const decryptAES256GCMWithPassword = ({ encryptedPassphrase, password }) => JSON.stringify({
-  privateKey: 'private-key-mock',
-  recoveryPhrase: 'target cancel solution recipe vague faint bomb convince pink vendor fresh patrol',
-});
+import { cryptography } from '@liskhq/lisk-client';
 
-// eslint-disable-next-line
-export const decryptAccount = (accountSchema, password) => {
+export const decryptAccount = async (encryptedPassphrase, password) => {
   try {
-    const plainText = decryptAES256GCMWithPassword({
-      encryptedPassphrase: accountSchema,
-      password,
-    });
-    const { privateKey, recoveryPhrase } = JSON.parse(plainText);
-    return { privateKey, recoveryPhrase, error: false };
+    const { encrypt } = cryptography;
+    const plainText = await encrypt.decryptMessageWithPassword(
+      encryptedPassphrase,
+      password
+    );
+    const { recoveryPhrase } = JSON.parse(plainText);
+    return recoveryPhrase;
   } catch (error) {
-    return { privateKey: null, recoveryPhrase: null, error: true };
+    throw new Error(error);
   }
 };

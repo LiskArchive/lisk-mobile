@@ -36,7 +36,7 @@ const PasswordForm = ({
         noTheme
         title={t('banners.btcRemoval.buttons.gotIt')}
         disabled={!password}
-        onPress={onSubmit}
+        onPress={() => onSubmit(password)}
       />
   </View>;
 };

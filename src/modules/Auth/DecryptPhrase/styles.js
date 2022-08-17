@@ -1,11 +1,9 @@
-import {
-  themes, colors
-} from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 
-export default () => ({
+export default {
   common: {
     container: {
-      flex: 1
+      flex: 1,
     },
   },
 
@@ -17,8 +15,8 @@ export default () => ({
       color: colors.light.zodiacBlue,
     },
     address: {
-      color: colors.light.silverGrey
-    }
+      color: colors.light.silverGrey,
+    },
   },
 
   [themes.dark]: {
@@ -29,7 +27,7 @@ export default () => ({
       color: colors.dark.ghost,
     },
     address: {
-      color: colors.light.whiteSmoke
-    }
+      color: colors.light.whiteSmoke,
+    },
   },
-});
+};

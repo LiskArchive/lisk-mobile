@@ -22,8 +22,8 @@ export default () => ({
       lineHeight: 18,
     },
     labelButton: {
+      textAlign: 'left',
       backgroundColor: 'transparent',
-      color: colors.light.ultramarineBlue,
       fontSize: fonts.size.base,
       borderWidth: 2,
       borderColor: 'transparent',
@@ -53,10 +53,15 @@ export default () => ({
     },
   },
 
-  [themes.light]: {},
+  [themes.light]: {
+    buttonText: {
+      color: colors.light.maastrichtBlue,
+    },
+  },
 
   [themes.dark]: {
-    primaryButtonContainer: {},
-    primaryButtonText: {},
+    buttonText: {
+      color: colors.light.white,
+    },
   },
 });
