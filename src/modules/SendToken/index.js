@@ -38,6 +38,7 @@ export default function SendToken({ navigation, route }) {
       <HeaderBackButton
         title="Send token"
         noIcon
+        containerStyle={{ marginBottom: 24 }}
       />
 
       <Stepper>
