@@ -24,5 +24,3 @@ const useTransactionList = ({ address }) => {
     refreshing: false,
   };
 };
-
-export default useTransactionList;
