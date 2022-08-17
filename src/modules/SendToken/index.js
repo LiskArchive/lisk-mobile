@@ -1,5 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -10,8 +11,11 @@ import SendTokenApplicationsStep from './components/SelectApplicationsStep';
 import SendTokenSelectTokenStep from './components/SelectTokenStep';
 import SendTokenSummaryStep from './components/SummaryStep';
 import useSendTokenForm from './hooks/useSendTokenForm';
+import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
 
 export default function SendToken({ navigation, route }) {
+  const account = useSelector(state => state.account);
+
   const { styles } = useTheme({
     styles: getSendTokenStyles(),
   });
@@ -33,6 +37,8 @@ export default function SendToken({ navigation, route }) {
     },
   ];
 
+  const accountIsMultisignature = account.summary.isMultisignature;
+
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
@@ -41,6 +47,9 @@ export default function SendToken({ navigation, route }) {
         containerStyle={{ marginBottom: 24 }}
       />
 
+      {accountIsMultisignature ? (
+        <SendTokenOnMultisignatureAccount />
+      ) : (
       <Stepper>
         {steps.map(step => (
           <step.component
@@ -51,6 +60,8 @@ export default function SendToken({ navigation, route }) {
           />
         ))}
       </Stepper>
+      )}
+
     </SafeAreaView>
   );
 }
