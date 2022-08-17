@@ -14,18 +14,6 @@ import { getTransactionFee } from '../../utils';
  * @param {array} data.priorityOptions - Array of priority configs for High, Mid, Low
  * @returns {object}
  */
-export const calculateTransactionFees = ({
-  account,
-  selectedPriority,
-  transaction,
-}) => {
-  const fee = getTransactionFee({
-    account,
-    selectedPriority,
-    transaction,
-  });
-  return fee;
-};
 
 export const calculateMinimumFee = ({
   account,
@@ -47,8 +35,39 @@ export const calculateMaximumFeeAmount = ({ account, transaction, ...params }) =
   const maxAmountFee = getTransactionFee(
     {
       ...params,
+      account,
       transaction: { transaction, amount: fromRawLsk(account.balance) },
     }
   );
   return maxAmountFee;
+};
+
+export const calculateTransactionFees = ({
+  account,
+  selectedPriority,
+  transaction,
+}) => {
+  const minFee = calculateMinimumFee({
+    account,
+    transaction,
+    selectedPriority,
+  });
+  const maxFee = calculateMaximumFeeAmount({
+    account,
+    transaction,
+    selectedPriority
+  });
+  const fee = getTransactionFee({
+    account,
+    selectedPriority,
+    transaction,
+  });
+
+  if (fee.value < minFee.value) {
+    return minFee;
+  }
+  if (fee.value > maxFee.value) {
+    return maxFee;
+  }
+  return fee;
 };

@@ -21,6 +21,19 @@ describe('useTheme hook', () => {
     expect(useTheme).toBeDefined();
   });
 
+  it("should use default object when style isn't passed", async () => {
+    const wrapper = ({ children }) => (
+      <ThemeContext.Provider value={defaultTheme}>
+        {children}
+      </ThemeContext.Provider>
+    );
+
+    const { result } = renderHook(() => useTheme({}), { wrapper });
+
+    expect(result.current.styles).toMatchObject({});
+    expect(result.current.theme).toBe(defaultTheme);
+  });
+
   it('returns correct values after on change', async () => {
     const wrapper = ({ children }) => (
       <ThemeContext.Provider value={defaultTheme}>

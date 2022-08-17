@@ -8,13 +8,11 @@ export function useGetFeesByPriorityQuery() {
   } = useQuery(['priorityFees'], () => ApiClient.getFees());
 
   const result = useMemo(() => {
-    return data?.feeEstimatePerByte;
+    return data?.data?.feeEstimatePerByte;
   }, [data]);
 
-  console.log(result);
-
   return {
-    data: { low: 0.005, medium: 0.007, high: 0.01 },
+    data: result,
     isLoading,
     error,
     isError: !!error,

@@ -1,13 +1,13 @@
 /* eslint-disable max-statements, max-len */
 import { Platform } from 'react-native';
-import { transactions } from '@liskhq/lisk-client';
+import { transactions, cryptography } from '@liskhq/lisk-client';
 import * as transactionsConstants from 'modules/SendToken/constants';
 import { fromRawLsk, toRawLsk } from 'utilities/conversions';
 import computeMinFee from './fees';
 
 export const createTransactionObject = (nonce, amount = 0, message = '', publicKey) => ({
-  moduleID: Buffer.from('2', 4),
-  commandID: Buffer.from('0', 4),
+  moduleID: cryptography.utils.intToBuffer('2', 4),
+  commandID: cryptography.utils.intToBuffer('0', 4),
   // eslint-disable-next-line no-undef
   nonce: BigInt(nonce),
   // eslint-disable-next-line no-undef
@@ -69,6 +69,7 @@ export const getTransactionFee = ({
       feedback,
     };
   } catch (error) {
+    console.log('error-here', error);
     return { value: 0, error: false, feedback: '' };
   }
 };

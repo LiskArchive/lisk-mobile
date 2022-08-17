@@ -1,6 +1,5 @@
-/* eslint-disable max-lines */
-/* eslint-disable max-statements */
-import React, { useState } from 'react';
+/* eslint-disable max-lines, max-statements */
+import React, { useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useController } from 'react-hook-form';
@@ -11,7 +10,7 @@ import { LabelButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
-import { useAccountInfo } from '../../../Accounts/hooks/useAccounts/useAccountInfo';
+import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 
 import getSendTokenSelectTokenStepStyles from './styles';
 import { useTokenAmountInCurrency } from './hooks';
@@ -222,6 +221,15 @@ export function SendTokenPriorityField({ form, t }) {
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
+  const shouldShowPrioritiesData = useMemo(
+    () => prioritiesData && prioritiesData[0]?.fee,
+    [prioritiesData]
+  );
+
+  if (!shouldShowPrioritiesData) {
+    return null;
+  }
+
   if (isLoadingPrioritiesData) {
     return (
       <View>
@@ -307,30 +315,15 @@ export function SendTokenTransactionFeesLabels({ form, tokens, t }) {
     recipientApplicationChainID: form.watch('recipientApplicationChainID')
   });
 
-  if (transactionFee.error) {
-    return (
-      <Text>
-        {t('sendToken.tokenSelect.errorLoadingTransactionFeeText')}
-      </Text>
-    );
-  }
-
   return (
     <View>
       <View style={[styles.feeContainer]}>
         <Text style={[styles.text, styles.theme.text]}>
           {t('sendToken.tokenSelect.transactionFeeLabel')}
         </Text>
-
-        {transactionFee.isLoading ? (
-          <Text style={[styles.text, styles.theme.text]}>
-            {t('sendToken.tokenSelect.loadingTransactionFeeText')}
-          </Text>
-        ) : (
           <Text style={[styles.text, styles.theme.text]}>
             {transactionFee.data} {selectedToken?.symbol}
           </Text>
-        )}
       </View>
 
       <View style={[styles.feeContainer]}>

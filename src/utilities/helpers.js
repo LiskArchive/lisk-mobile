@@ -101,7 +101,6 @@ export const isEmpty = (collection) => {
 export const setColorOpacity = (hex, alpha = 1) => {
   if (hex.length !== 7 && hex.length !== 4) {
     // eslint-disable-next-line no-console
-    console.warn('setColorOpacity: Invalid hex color.');
     return hex;
   }
 

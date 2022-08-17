@@ -18,15 +18,6 @@ export default function useTransactionPriorities() {
     return [];
   }, [feesByPriorityQuery.data]);
 
-  // const params = {
-  //   transaction: { amount },
-  //   account: { ...account, publicKey: currAccount.metadata.pubkey, balance: 100000000000 },
-  //   priorityOptions: data,
-  //   selectedPriority: { fee: 0.07 }
-  // }
-
-  // console.log("calculateTransactionFees", calculateTransactionFees(params));
-
   return {
     ...feesByPriorityQuery,
     data

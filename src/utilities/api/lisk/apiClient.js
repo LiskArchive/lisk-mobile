@@ -100,7 +100,7 @@ class LiskAPIClient {
   }
 
   async sendTransaction(tx) {
-    const resp = await fetch(`${this._url}/v2/transactions`, {
+    const resp = await fetch(`${this._url}/v3/transactions`, {
       ...config.requestOptions,
       method: 'POST',
       body: JSON.stringify(tx)
@@ -120,7 +120,7 @@ class LiskAPIClient {
         limit: 1
       },
     };
-    const resp = await fetch(`${this._url}/v2/blocks`, options);
+    const resp = await fetch(`${this._url}/v3/blocks`, options);
     if (!resp.ok) {
       throw new Error('Failed to retrieve the latest block from server.');
     }
