@@ -48,9 +48,10 @@ describe('BlockchainApplication reducers', () => {
         type: actionTypes.deleteApplicationByChainId,
         chainId: BLOCKCHAIN_APPLICATIONS_MOCK[1].chainID,
       };
+
       const changedState = applicationsReducer(MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK, actionData);
 
-      expect(changedState).not.toHaveProperty(actionData.chainId);
+      expect(changedState).not.toHaveProperty(`${actionData.chainId}`);
     });
   });
 
