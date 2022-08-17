@@ -125,8 +125,9 @@ export function TokenAmountField({
         t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
           { selectedTokenSymbol: selectedToken?.symbol || '' })
       }
-      keyboardType="numeric"
       onChange={field.onChange}
+      keyboardType="numeric"
+      error={form.formState.errors.amount?.message}
       adornments={{
         right: (
           <Text style={[styles.tokenAmountInCurrencyText]}>

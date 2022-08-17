@@ -28,7 +28,7 @@ export default function useSendTokenForm() {
     senderApplicationChainID: yup.number().required(),
     recipientApplicationChainID: yup.number().required(),
     recipientAccountAddress: yup.string().required(),
-    amount: yup.number().positive().required(),
+    amount: yup.number().required('Token amount is required').positive('Token amount must be a positive number'),
     priority: yup.string().required(),
   }).required();
 

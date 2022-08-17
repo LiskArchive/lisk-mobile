@@ -47,7 +47,11 @@ function ConfirmAndSignTransaction({
     onError
   ]);
 
-  const submitDisabled = form.sendTokenMutation.isLoading || !field.value;
+  const submitDisabled = form.sendTokenMutation.isLoading
+    || !field.value
+    || Object.keys(form.formState.errors).length > 0;
+
+  console.log({ errorrrrrs: form.formState.errors });
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -101,6 +105,14 @@ function ConfirmAndSignTransaction({
         />
       </View>
 
+      <View>
+
+      {Object.keys(form.formState.errors).length > 0 && (
+        <Text style={[styles.errorText]}>
+          Please fill all the required fields to send your tokens.
+        </Text>
+      )}
+
       <PrimaryButton
         noTheme
         onClick={form.handleSubmit}
@@ -113,6 +125,8 @@ function ConfirmAndSignTransaction({
         style={{ marginBottom: 24 }}
         disabled={submitDisabled}
       />
+      </View>
+
     </View>
   );
 }
