@@ -106,7 +106,7 @@ function ConfirmAndSignTransaction({
       <View>
         {Object.keys(form.formState.errors).length > 0 && (
           <Text style={[styles.errorText]}>
-            Please fill all the required fields to send your tokens.
+            {t('sendToken.errors.generalMessage')}
           </Text>
         )}
 

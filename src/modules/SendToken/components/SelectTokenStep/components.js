@@ -125,12 +125,14 @@ export function TokenAmountField({
     <Input
       label= {
         selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldLabel',
-          { selectedTokenSymbol: selectedToken?.symbol || '' }) : 'Amount'
+          { selectedTokenSymbol: selectedToken?.symbol || '' })
+          : t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
       }
       value={field.value}
       placeholder= {
         selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
-          { selectedTokenSymbol: selectedToken?.symbol || '' }) : 'Select a token to add amount'
+          { selectedTokenSymbol: selectedToken?.symbol || '' })
+          : t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
       }
       onChange={field.onChange}
       keyboardType="numeric"

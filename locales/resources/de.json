@@ -402,10 +402,12 @@
     "applicationsSelect": {
       "loadingApplicationsText": "Laden...",
       "senderApplicationFieldLabel": "Aus App",
+      "senderApplicationFieldPlaceholder": "Senderanwendung auswählen",
       "notApplicationFoundText": "Keine App gefunden",
       "recipientApplicationFieldLabel": "Zur App",
       "recipientApplicationFieldPlaceholder": "Wählen Sie eine App aus",
       "recipientAccountFieldLabel": "Empfänger:in",
+      "recipientAccountFieldPlaceholder": "Wählen Sie ein Empfängerkonto aus",
       "nextStepButtonText": "Weiter"
     },
     "tokenSelect": {
@@ -417,6 +419,7 @@
       "tokenAmountFieldLabel": "Menge ({{selectedTokenSymbol}})",
       "tokenAmountFieldLabelPlain": "Menge",
       "tokenAmountFieldPlaceholder": "Fügen Sie Ihre ({{selectedTokenSymbol}})-Menge hinzu",
+      "tokenAmountFieldPlaceholderPlain": "Wählen Sie einen Token aus, um den Betrag hinzuzufügen",
       "messageFieldTriggerButtonText": "+ Nachricht hinzufügen (optional)",
       "messageFieldLabel": "Nachricht (optional)",
       "messageFieldLabelPlain": "Nachricht",
@@ -459,6 +462,17 @@
         "reportErrorLabel": "Bleibt das Problem bestehen?",
         "reportErrorButtonText": "Melden Sie den Fehler per E-Mail"
       }
+    },
+    "errors" : {
+      "generalMessage": "Bitte füllen Sie alle erforderlichen Felder aus, um Ihre Token zu senden.",
+      "senderApplicationChainID": "Die App, von der gesendet werden soll, muss angegeben werden",
+      "recipientApplicationChainID": "Die App, die die Token erhält, muss angegeben werden",
+      "recipientAccountAddress": "Empfängerkonto muss angegeben werden",
+      "tokenID": "Zu sendendes Token muss angegeben werden",
+      "amountRequired": "Token-Betrag ist erforderlich",
+      "amountMustBeNumber": "Der Betrag muss eine Zahl sein",
+      "amountMustBePositive": "Tokenbetrag muss eine positive Zahl sein",
+      "priority":"Priorität muss angegeben werden"
     }
   }
 }

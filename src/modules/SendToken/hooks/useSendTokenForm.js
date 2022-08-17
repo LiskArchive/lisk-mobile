@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import i18next from 'i18next';
 
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
@@ -25,12 +26,14 @@ export default function useSendTokenForm() {
   };
 
   const validationSchema = yup.object({
-    senderApplicationChainID: yup.number().required('Application to send from must be specified'),
-    recipientApplicationChainID: yup.number().required('Application who receives the tokens must be specified'),
-    recipientAccountAddress: yup.string().required('Recipient account must be specified'),
-    tokenID: yup.string().required('Token to send must be specified'),
-    amount: yup.number().required('Token amount is required').positive('Token amount must be a positive number'),
-    priority: yup.string().required('Priority must be specified'),
+    senderApplicationChainID: yup.number().required(i18next.t('sendToken.errors.senderApplicationChainID')),
+    recipientApplicationChainID: yup.number().required(i18next.t('sendToken.errors.recipientApplicationChainID')),
+    recipientAccountAddress: yup.string().required(i18next.t('sendToken.errors.recipientAccountAddress')),
+    tokenID: yup.string().required(i18next.t('sendToken.errors.tokenID')),
+    amount: yup.number(i18next.t('sendToken.errors.amountMustBeNumber'))
+      .required(i18next.t('sendToken.errors.amountRequired'))
+      .positive(i18next.t('sendToken.errors.amountMustBePositive')),
+    priority: yup.string().required(i18next.t('sendToken.errors.priority')),
   }).required();
 
   const { handleSubmit: baseHandleSubmit, ...form } = useForm({

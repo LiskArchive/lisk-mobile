@@ -36,7 +36,7 @@ export function SendTokenSenderApplicationField({ form, applications, t }) {
 
       <Picker.Toggle
         disabled
-        placeholder="Select sender application"
+        placeholder={t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')}
       >
         {senderApplication && (
           <View style={[styles.applicationNameContainer]}>
@@ -136,12 +136,19 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
   );
 
   return (
-    <Picker error={form.formState.errors.recipientAccountAddress?.message}>
+    <Picker
+      value={form.value}
+      onChange={field.onChange}
+      error={form.formState.errors.recipientAccountAddress?.message}
+    >
       <Picker.Label style={ { marginTop: 16 } }>
         {t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
       </Picker.Label>
 
-      <Picker.Toggle disabled placeholder="Select a recipient account">
+      <Picker.Toggle
+        disabled
+        placeholder={t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
+      >
         {recipientAccount && (
           <>
             <View style={[styles.applicationNameContainer]}>
