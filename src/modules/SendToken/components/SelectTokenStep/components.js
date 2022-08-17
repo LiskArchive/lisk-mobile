@@ -65,21 +65,22 @@ export function TokenSelectField({
 
       <Picker.Toggle
         disabled={tokens.isLoading || tokens.error}
-        style={{ container: { marginBottom: 16 } }}
       >
-        <View style={[styles.row]}>
-          {tokens.isLoading ? (
-            <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
-          ) : selectedToken && (
-            <>
-              <Text style={[styles.text, styles.theme.text]}>
-                {selectedToken?.symbol}
-              </Text>
+        {selectedToken && (
+          <View style={[styles.row]}>
+            {tokens.isLoading ? (
+              <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
+            ) : (
+              <>
+                <Text style={[styles.text, styles.theme.text]}>
+                  {selectedToken?.symbol}
+                </Text>
 
-              <TokenSvg symbol={selectedToken?.symbol} style={styles.tokenSvg} />
-            </>
-          )}
-        </View>
+                <TokenSvg symbol={selectedToken?.symbol} style={styles.tokenSvg} />
+              </>
+            )}
+          </View>
+        )}
       </Picker.Toggle>
 
       <Picker.Menu>
@@ -147,7 +148,8 @@ export function TokenAmountField({
           paddingTop: 0,
           paddingRight: 0,
           paddingLeft: 0,
-          marginBottom: 16
+          marginBottom: 16,
+          marginTop: 16,
         },
         inputLabel: {
           marginBottom: 8

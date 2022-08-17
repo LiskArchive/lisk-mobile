@@ -38,7 +38,7 @@ export function getPickerStyles(error) {
         padding: 16,
       },
       errorText: {
-        marginTop: -8,
+        marginTop: 8,
         marginBottom: 16,
         color: colors.light.burntSieanna,
       }

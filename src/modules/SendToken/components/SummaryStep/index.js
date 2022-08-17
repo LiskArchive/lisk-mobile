@@ -78,9 +78,9 @@ function SendTokenSummaryStep({
               labelStyle={[styles.valueText, styles.theme.valueText, { marginRight: 8 }]}
               showIcon
               iconSize={18}
-              value={summary.recipientAccount.metadata.address}
+              value={summary.recipientAccount?.metadata.address}
               type={P}
-              label={stringShortener(summary.recipientAccount.metadata.address, 5, 5)}
+              label={stringShortener(summary.recipientAccount?.metadata.address, 5, 5)}
             />
 
           </View>

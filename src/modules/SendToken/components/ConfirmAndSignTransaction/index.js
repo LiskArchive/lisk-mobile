@@ -51,8 +51,6 @@ function ConfirmAndSignTransaction({
     || !field.value
     || Object.keys(form.formState.errors).length > 0;
 
-  console.log({ errorrrrrs: form.formState.errors });
-
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.contentContainer, styles.theme.contentContainer]}>

@@ -25,12 +25,12 @@ export default function useSendTokenForm() {
   };
 
   const validationSchema = yup.object({
-    senderApplicationChainID: yup.number().required(),
-    recipientApplicationChainID: yup.number().required(),
-    recipientAccountAddress: yup.string().required(),
+    senderApplicationChainID: yup.number().required('Application to send from must be specified'),
+    recipientApplicationChainID: yup.number().required('Application who receives the tokens must be specified'),
+    recipientAccountAddress: yup.string().required('Recipient account must be specified'),
     tokenID: yup.string().required('Token to send must be specified'),
     amount: yup.number().required('Token amount is required').positive('Token amount must be a positive number'),
-    priority: yup.string().required(),
+    priority: yup.string().required('Priority must be specified'),
   }).required();
 
   const { handleSubmit: baseHandleSubmit, ...form } = useForm({
