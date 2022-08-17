@@ -66,19 +66,15 @@ export function TokenSelectField({
       <Picker.Toggle
         disabled={tokens.isLoading || tokens.error}
       >
-        {selectedToken && (
+        {tokens.isLoading ? (
+          <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
+        ) : selectedToken && (
           <View style={[styles.row]}>
-            {tokens.isLoading ? (
-              <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
-            ) : (
-              <>
-                <Text style={[styles.text, styles.theme.text]}>
-                  {selectedToken.symbol}
-                </Text>
+            <Text style={[styles.text, styles.theme.text]}>
+              {selectedToken.symbol}
+            </Text>
 
-                <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
-              </>
-            )}
+            <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
           </View>
         )}
       </Picker.Toggle>
