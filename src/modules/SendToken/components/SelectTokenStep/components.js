@@ -57,7 +57,7 @@ export function TokenSelectField({
             {t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
             {/* TODO: Read token symbol from account info when backend send the data */}
             <Text style={[styles.balanceText]}>
-              {normalizedBalance} {selectedToken?.symbol}
+              {normalizedBalance} {selectedToken.symbol}
             </Text>
           </Picker.Label>
         )}
@@ -73,10 +73,10 @@ export function TokenSelectField({
             ) : (
               <>
                 <Text style={[styles.text, styles.theme.text]}>
-                  {selectedToken?.symbol}
+                  {selectedToken.symbol}
                 </Text>
 
-                <TokenSvg symbol={selectedToken?.symbol} style={styles.tokenSvg} />
+                <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
               </>
             )}
           </View>
@@ -125,13 +125,13 @@ export function TokenAmountField({
     <Input
       label= {
         selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldLabel',
-          { selectedTokenSymbol: selectedToken?.symbol || '' })
+          { selectedTokenSymbol: selectedToken.symbol || '' })
           : t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
       }
       value={field.value}
       placeholder= {
         selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
-          { selectedTokenSymbol: selectedToken?.symbol || '' })
+          { selectedTokenSymbol: selectedToken.symbol || '' })
           : t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
       }
       onChange={field.onChange}
