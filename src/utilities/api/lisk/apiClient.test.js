@@ -175,7 +175,6 @@ describe('apiClient', () => {
           json: () => ({ data: fees })
         })
       );
-      // TODO: Test return value for fees
       const { data: result } = await apiClient.getFees();
       expect(result).toEqual(fees);
       expect(fetch).toHaveBeenCalledWith('https://service.lisk.com/api/v3/fees', expect.anything());
