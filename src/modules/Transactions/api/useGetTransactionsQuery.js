@@ -7,9 +7,17 @@ import {
   API_VERSION,
   API_METHOD
 } from 'utilities/api/constants';
-import { GET_TRANSACTIONS_QUERY } from '../../../utilities/api/queries';
-import { useAccountInfo } from '../../Accounts/hooks/useAccounts/useAccountInfo';
+import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
+import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 
+/**
+ * Fetch user account transactions in paginated mode.
+ * Executes the API call once the hook is mounted.
+ * @param {Object} config - Custom configurations for the query.
+ * @param {Object} options - Custom options for the query.
+ * @returns - The query state of the API call. Includes the data
+ * (with the array of transactions), loading state, error state, and more.
+ */
 export function useGetTransactionsQuery({ config: customConfig = {}, options = {} } = {}) {
   const account = useAccountInfo();
 
@@ -24,7 +32,7 @@ export function useGetTransactionsQuery({ config: customConfig = {}, options = {
     ...customConfig,
   };
 
-  async function handleGetTransactions({ pageParam = 1 }) {
+  function handleGetTransactions({ pageParam = 1 }) {
     return API_METHOD[METHOD]({
       ...config,
       params: {

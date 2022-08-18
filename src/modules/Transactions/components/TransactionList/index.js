@@ -9,7 +9,7 @@ export default function TransactionList() {
 
   return (
     <View>
-      <Text>TransactionList</Text>
+      <Text>Transactions</Text>
     </View>
   );
 }
