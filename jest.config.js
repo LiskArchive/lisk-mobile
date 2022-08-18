@@ -26,6 +26,7 @@ module.exports = {
     'src/modules/Auth/utils/passphrase.js',
     'src/utilities/api/account.js',
     'utilities/explicitBipKeyDerivation.js',
+    'utilities/tests/mock-react-i18next.js',
     'src/assets',
     'src/modules',
     'src/navigation'
