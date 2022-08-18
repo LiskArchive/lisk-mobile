@@ -2,8 +2,18 @@ import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default {
   common: {
+    switcherContainer: {
+      alignItems: 'center'
+    },
     container: {
       overflow: 'hidden',
+      borderWidth: 2,
+      borderRadius: 50,
+      borderColor: colors.light.silverGrey,
+      padding: 5,
+    },
+    iconContainer: {
+      marginRight: 10,
     },
     switch: {
       alignItems: 'center',
@@ -11,7 +21,7 @@ export default {
       justifyContent: 'center',
     },
     avatar: {
-      marginHorizontal: 10,
+      marginHorizontal: 8,
       height: 30,
       width: 30,
       borderRadius: 15,

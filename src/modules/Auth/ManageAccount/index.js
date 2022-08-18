@@ -8,7 +8,7 @@ import { translate } from 'react-i18next';
 import { ScrollView } from 'react-native-gesture-handler';
 import withTheme from 'components/shared/withTheme';
 import { H2 } from 'components/shared/toolBox/typography';
-import { useAccounts, useCurrentAccount, useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
+import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import { IconButton } from 'components/shared/toolBox/button';
 import { colors, themes } from 'constants/styleGuide';
 import Splash from '../components/splash';
@@ -23,13 +23,10 @@ const ManageAccount = ({
 }) => {
   const { accounts } = useAccounts();
   const [, setAccount] = useCurrentAccount();
-  const { getAccount } = useAccountInfo();
 
   const selectAccount = account => {
     setAccount(account);
-    getAccount(account.metadata.address).then(() => {
-      navigation.navigate('Main');
-    });
+    navigation.navigate('Main');
   };
 
   return (

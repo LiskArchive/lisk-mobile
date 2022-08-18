@@ -49,7 +49,7 @@ class CopyToClipBoard extends React.Component {
             name={this.state.copied ? 'checkmark' : 'copy'}
             color={this.state.copied ? colors.light.ufoGreen : color}
             size={iconSize || 16}
-            style={[iconStyle]}
+            style={[styles.copyIcon, iconStyle]}
             />
           </TouchableOpacity>
       </TouchableOpacity>

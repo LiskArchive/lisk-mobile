@@ -15,67 +15,6 @@ describe('apiClient', () => {
     jest.clearAllMocks();
   });
 
-  describe('getAccount', () => {
-    it('Retrieve accounts by address', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: true,
-          status: 200,
-          json: () => ({
-            data: [
-              {
-                sequence: { nonce: 0 },
-                summary: account,
-                dpos: {
-                  unlocking: [{ amount: '100000' }],
-                  sentVotes: []
-                }
-              }
-            ]
-          })
-        })
-      );
-      const result = await apiClient.getAccount(account.address);
-      expect(result).toEqual({
-        ...account,
-        nonce: 0,
-        lockedBalance: 100000,
-        sentVotes: [],
-        unlocking: [{ amount: '100000' }]
-      });
-    });
-
-    it('Return an empty account in case of 404', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: false,
-          status: 404
-        })
-      );
-      const result = await apiClient.getAccount(account.address);
-      expect(result).toEqual({
-        address: account.address,
-        balance: 0,
-        nonce: 0,
-        initialized: true
-      });
-    });
-
-    it('Throw error for all other errors', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: false,
-          status: 500
-        })
-      );
-      try {
-        await apiClient.getAccount(account.address);
-      } catch (e) {
-        expect(e.message).toEqual('Failed to request account from server.');
-      }
-    });
-  });
-
   describe('getTransaction', () => {
     const tx = {
       id: 'sample_id',
@@ -223,7 +162,9 @@ describe('apiClient', () => {
 
   describe('getFees', () => {
     const fees = {
-      USD: 1
+      low: 0.0001,
+      medium: 0.0003,
+      high: 0.0008
     };
 
     it('Retrieves the latest fees', async () => {
@@ -235,8 +176,8 @@ describe('apiClient', () => {
         })
       );
       // TODO: Test return value for fees
-      await apiClient.getFees();
-      // expect(result).toEqual(fees);
+      const { data: result } = await apiClient.getFees();
+      expect(result).toEqual(fees);
       expect(fetch).toHaveBeenCalledWith('https://service.lisk.com/api/v3/fees', expect.anything());
     });
 
