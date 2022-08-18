@@ -147,6 +147,11 @@ describe('helpers', () => {
   });
 
   describe('setColorOpacity', () => {
+    it('should return color if length is not 4 or 7', () => {
+      expect(setColorOpacity('#2345', 0.15)).toBe('#2345');
+      expect(setColorOpacity('#2345678', 0.15)).toBe('#2345678');
+    });
+
     it('Should turn #000 into rgba(0, 0, 0, 0.15) with alpha 0.15', () => {
       expect(setColorOpacity('#000', 0.15)).toBe('rgba(0, 0, 0, 0.15)');
     });

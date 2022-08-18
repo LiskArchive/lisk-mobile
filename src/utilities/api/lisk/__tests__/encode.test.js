@@ -1,5 +1,5 @@
 import * as Lisk from '@liskhq/lisk-client';
-import { transferAssetSchema } from 'modules/Transactions/constants';
+import { transferAssetSchema } from 'modules/SendToken/constants';
 import { baseTransactionSchema } from '../utils';
 import { encodeTransaction, encodeTransferAsset } from '../utils/encode';
 

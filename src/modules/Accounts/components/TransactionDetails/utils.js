@@ -1,4 +1,4 @@
-import { isRegistration, isTransfer, isVote } from 'modules/Transactions/constants';
+import { isRegistration, isTransfer, isVote } from 'modules/SendToken/constants';
 import { stringShortener } from 'utilities/helpers';
 
 export const goToWallet = (address, { navigation, account }) => {

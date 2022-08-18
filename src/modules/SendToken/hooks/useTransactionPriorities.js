@@ -1,23 +1,22 @@
+import { useMemo } from 'react';
 import { useGetFeesByPriorityQuery } from '../api/useGetFeesByPriorityQuery';
-import { getPriorityFee } from '../helpers';
 
-export default function useTransactionPriorities(amount, message) {
+export default function useTransactionPriorities() {
   const feesByPriorityQuery = useGetFeesByPriorityQuery();
 
-  let data;
-
-  if (feesByPriorityQuery.data) {
-    data = Object.entries(feesByPriorityQuery.data).map(
-      ([priorityCode, priorityBaseFee]) => (
-        {
-          code: priorityCode,
-          fee: getPriorityFee({
-            amount, priorityCode, priorityBaseFee, message
-          })
-        }
-      )
-    );
-  }
+  const data = useMemo(() => {
+    if (feesByPriorityQuery.data) {
+      return Object.entries(feesByPriorityQuery.data).map(
+        ([priorityCode, priorityBaseFee]) => (
+          {
+            code: priorityCode,
+            fee: priorityBaseFee,
+          }
+        )
+      );
+    }
+    return [];
+  }, [feesByPriorityQuery.data]);
 
   return {
     ...feesByPriorityQuery,

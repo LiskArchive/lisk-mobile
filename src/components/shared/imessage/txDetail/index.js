@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, View, NativeModules } from 'react-native';
 import { tokenMap } from 'constants/tokens';
 import { transactions as transactionsAPI } from 'utilities/api';
-import { isTransfer } from 'modules/Transactions/constants';
+import { isTransfer } from 'modules/SendToken/constants';
 import { LoadingState } from 'modules/Accounts/components';
 import withTheme from '../../withTheme';
 import getStyles from './styles';

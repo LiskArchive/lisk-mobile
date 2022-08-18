@@ -1,4 +1,5 @@
 import { themes } from 'constants/styleGuide';
+import { cryptography } from '@liskhq/lisk-client';
 import setSecondPassphraseLight from 'assets/images/txDetail/second-passphrase-light.png';
 import setSecondPassphraseDark from 'assets/images/txDetail/second-passphrase-dark.png';
 
@@ -63,8 +64,8 @@ const ASSETS = {
 
 export const BASE_FEES = [
   Object.freeze({
-    moduleID: MODULES.dpos,
-    assetID: ASSETS.registerDelegate,
+    moduleID: cryptography.utils.intToBuffer(MODULES.dpos, 4),
+    assetID: cryptography.utils.intToBuffer(ASSETS.registerDelegate, 4),
     baseFee: '1000000000'
   })
 ];
