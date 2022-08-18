@@ -20,6 +20,7 @@ import getStyles from './styles';
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
 import { useAccountTokens } from './hooks/useAccounts/useAccountTokens';
 import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
+import TokensTab from './components/TokensTab';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -38,8 +39,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const { tokens } = useAccountTokens(address);
 
-  console.log('tokens', tokens);
-
   const { styles } = useTheme({ styles: getStyles() });
 
   const switchAccount = () => { };
@@ -55,7 +54,7 @@ const Home = () => {
     <SafeAreaView style={[styles.flex, styles.theme.homeContainer]}>
       <View style={[styles.row, styles.alignItemsCenter, styles.topContainer]} >
         <TouchableOpacity style={[styles.discreteContainer]} onPress={toggleIncognito} >
-          <IncognitoSvg size={1.2} disabled={discrete} />
+          <IncognitoSvg size={1.1} disabled={discrete} />
         </TouchableOpacity>
         <View style={styles.flex} >
           <ApplicationSwitcher />
@@ -88,6 +87,7 @@ const Home = () => {
             </TouchableOpacity>
           </View>
         </View>
+        <TokensTab tokens={tokens} />
       </View>
     </SafeAreaView>
   );
