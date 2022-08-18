@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import config from '../../../../lsk.config';
-import errorHandler from '../errorHandler';
 
 class LiskAPIClient {
   constructor(url) {
@@ -53,59 +52,6 @@ class LiskAPIClient {
       height: data.height,
       blockTime: data.blockTime
     };
-  }
-
-  async getTransaction(id) {
-    const resp = await fetch(
-      `${this._url}/v3/transactions?transactionId=${id}`,
-      config.requestOptions
-    );
-    if (!resp.ok && resp.status === 404) {
-      return [];
-    }
-    if (!resp.ok) {
-      throw new Error('Failed to request transactions from server.');
-    }
-    const { data } = await resp.json();
-    return data;
-  }
-
-  async getTransactions(address, limit = 10, offset = 0) {
-    const resp = await fetch(
-      `${this._url}/v3/transactions?address=${address}&limit=${limit}&offset=${offset}&includePending=false&sort=timestamp:desc`,
-      config.requestOptions
-    );
-    if (!resp.ok && resp.status === 404) {
-      return [];
-    }
-    if (!resp.ok) {
-      throw new Error('Failed to request transactions from server.');
-    }
-    const data = await resp.json();
-    return data;
-  }
-
-  async getFees() {
-    const resp = await fetch(`${this._url}/v3/fees`, config.requestOptions);
-    if (!resp.ok) {
-      throw new Error('Failed to request fees from server.');
-    }
-    const data = resp.json();
-    return data;
-  }
-
-  async sendTransaction(tx) {
-    const resp = await fetch(`${this._url}/v3/transactions`, {
-      ...config.requestOptions,
-      method: 'POST',
-      body: JSON.stringify(tx)
-    });
-    if (!resp.ok) {
-      const response = await resp.json();
-      throw new Error(errorHandler(response));
-    }
-    const { transactionId, message } = await resp.json();
-    return { id: transactionId, message };
   }
 
   async getLatestBlock() {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { toRawLsk, includeFee } from 'utilities/conversions';
+import { includeFee } from 'utilities/conversions';
 import { colors } from 'constants/styleGuide';
-import * as transactionsAPI from 'utilities/api/lisk/transactions';
 import { extractAddress } from 'utilities/api/lisk/account';
 import FormattedNumber from '../../formattedNumber';
 import { PrimaryButton, Button } from '../../toolBox/button';
@@ -29,22 +28,22 @@ class Confirm extends Component {
       sharedData: { address, amount },
     } = this.props;
 
-    const data = {
-      recipientAddress: address,
-      amount: toRawLsk(amount),
-      passphrase,
-    };
-
     this.setState({ busy: true, errorMessage: '' });
 
     try {
       this.setState({ busy: false });
 
-      const tx = await transactionsAPI.create(data);
-      const { id } = await transactionsAPI.broadcast(tx);
+      // TODO: Consume transactions hooks instead when they are created.
+      // const data = {
+      //   recipientAddress: address,
+      //   amount: toRawLsk(amount),
+      //   passphrase,
+      // };
+      // const tx = await transactionsAPI.create(data);
+      // const { id } = await transactionsAPI.broadcast(tx);
 
       composeMessage({
-        id,
+        id: '',
         address: { value: extractAddress(passphrase), validity: 0 },
         amount,
         state: 'transferred',

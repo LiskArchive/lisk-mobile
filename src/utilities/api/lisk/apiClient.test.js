@@ -15,42 +15,34 @@ describe('apiClient', () => {
     jest.clearAllMocks();
   });
 
-  describe('getTransaction', () => {
-    const tx = {
-      id: 'sample_id',
-      amount: 1
-    };
-
-    it('Retrieve a transaction by id', async () => {
+  describe('getAccount', () => {
+    it('Retrieve accounts by address', async () => {
       global.fetch.mockReturnValue(
         Promise.resolve({
           ok: true,
           status: 200,
           json: () => ({
-            data: {
-              id: 'sample_id',
-              amount: 1
-            }
+            data: [
+              {
+                sequence: { nonce: 0 },
+                summary: account,
+                dpos: {
+                  unlocking: [{ amount: '100000' }],
+                  sentVotes: []
+                }
+              }
+            ]
           })
         })
       );
-      const result = await apiClient.getTransaction(tx.id);
-      expect(result).toEqual(tx);
-      expect(fetch).toHaveBeenCalledWith(
-        `https://service.lisk.com/api/v3/transactions?transactionId=${tx.id}`,
-        expect.anything()
-      );
-    });
-
-    it('Return an empty account in case of 404', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: false,
-          status: 404
-        })
-      );
-      const result = await apiClient.getTransaction(tx.id);
-      expect(result).toEqual([]);
+      const result = await apiClient.getAccount(account.address);
+      expect(result).toEqual({
+        ...account,
+        nonce: 0,
+        lockedBalance: 100000,
+        sentVotes: [],
+        unlocking: [{ amount: '100000' }]
+      });
     });
 
     it('Throw error for all other errors', async () => {
@@ -61,9 +53,9 @@ describe('apiClient', () => {
         })
       );
       try {
-        await apiClient.getTransaction(tx.id);
+        await apiClient.getAccount(account.address);
       } catch (e) {
-        expect(e.message).toEqual('Failed to request transactions from server.');
+        expect(e.message).toEqual('Failed to request account from server.');
       }
     });
   });
@@ -191,59 +183,6 @@ describe('apiClient', () => {
         await apiClient.getFees();
       } catch (e) {
         expect(e.message).toEqual('Failed to request fees from server.');
-      }
-    });
-  });
-
-  describe('sendTransaction', () => {
-    const tx = {
-      id: 1
-    };
-
-    it('be able to send transactions', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: true,
-          status: 200,
-          json: () => ({ data: tx })
-        })
-      );
-      await apiClient.sendTransaction(tx);
-      expect(fetch).toHaveBeenCalledWith(
-        'https://service.lisk.com/api/v3/transactions',
-        expect.objectContaining({
-          method: 'POST',
-          body: JSON.stringify(tx)
-        })
-      );
-    });
-
-    it('Throw error is the tx fails', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: false,
-          status: 500,
-          json: () => ({ message: '' })
-        })
-      );
-      try {
-        await apiClient.sendTransaction();
-      } catch (e) {
-        expect(e.message).toEqual('Failed to send transactions to server.');
-      }
-    });
-    it('should throw error if tx fails due to receiving account minimum balance', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: false,
-          status: 500,
-          json: () => ({ message: 'Transaction payload was rejected by the network node: Recipient account 3d943a7de8202872d...address does not meet the minimum remaining balance requirement: 5000000' })
-        })
-      );
-      try {
-        await apiClient.sendTransaction();
-      } catch (e) {
-        expect(e.message).toEqual('Recipient account does not meet 0.05LSK miminum balance requirement');
       }
     });
   });
