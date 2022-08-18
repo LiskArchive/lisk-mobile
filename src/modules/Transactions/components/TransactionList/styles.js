@@ -3,7 +3,7 @@ import { themes, colors, boxes } from 'constants/styleGuide';
 export default function getTransactionListStyles() {
   return {
     common: {
-      wrapper: {
+      container: {
         flex: 1,
         paddingTop: boxes.boxPadding,
         paddingBottom: boxes.boxPadding,
@@ -17,7 +17,7 @@ export default function getTransactionListStyles() {
       }
     },
     [themes.light]: {
-      wrapper: {
+      container: {
         backgroundColor: colors.light.white,
       },
       title: {
@@ -25,7 +25,7 @@ export default function getTransactionListStyles() {
       },
     },
     [themes.dark]: {
-      wrapper: {
+      container: {
         backgroundColor: colors.dark.mainBg,
       },
       title: {

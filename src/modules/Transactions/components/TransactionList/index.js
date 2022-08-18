@@ -16,7 +16,7 @@ export default function TransactionList() {
   console.log({ query });
 
   return (
-    <View style={[styles.wrapper, styles.theme.wrapper]}>
+    <View style={[styles.container, styles.theme.container]}>
       <Text style={[styles.title, styles.theme.title]}>Transactions</Text>
     </View>
   );
