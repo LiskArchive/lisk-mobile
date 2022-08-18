@@ -42,20 +42,26 @@ export function useGetTransactionsQuery({ config: customConfig = {}, options = {
     });
   }
 
-  const query = useInfiniteQuery([GET_TRANSACTIONS_QUERY, config], handleGetTransactions, {
-    ...options,
-    select: (data) => data.pages.reduce((prevPages, page) => {
+  function handleQuerySelect(data) {
+    return data.pages.reduce((prevPages, page) => {
       const newData = page?.data || [];
       return {
         ...page,
         data: prevPages.data ? [...prevPages.data, ...newData] : newData,
       };
-    }),
-    getNextPageParam: (lastPage) => {
-      const offset = lastPage.meta.count + lastPage.meta.offset;
-      const hasMore = offset < lastPage.meta.total;
-      return !hasMore ? undefined : { offset };
-    },
+    });
+  }
+
+  function handleGetNextPageParam(lastPage) {
+    const offset = lastPage.meta.count + lastPage.meta.offset;
+    const hasMore = offset < lastPage.meta.total;
+    return !hasMore ? undefined : { offset };
+  }
+
+  const query = useInfiniteQuery([GET_TRANSACTIONS_QUERY, config], handleGetTransactions, {
+    ...options,
+    select: handleQuerySelect,
+    getNextPageParam: handleGetNextPageParam
   });
 
   return query;
