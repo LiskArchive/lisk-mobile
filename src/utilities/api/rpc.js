@@ -10,21 +10,24 @@ import apiClient from './APIClient';
  * if fails on server it throws an error,
  *
  */
-const rpc = ({
+export default function rpc({
   event,
   params,
   data,
-}) => new Promise((resolve, reject) => {
-  if (apiClient.socket.disconnected) {
-    reject(new Error('socket not connected'));
-    return;
-  }
-  apiClient.socket.emit(event, params || data || {}, (response) => {
-    if (Object.keys(response).length && response.error) {
-      return reject(response);
-    }
-    return resolve(response);
-  });
-});
+}) {
+  return new Promise((resolve, reject) => {
+    if (apiClient.socket.disconnected) {
+      reject(new Error('socket not connected'));
 
-export default rpc;
+      return;
+    }
+
+    apiClient.socket.emit(event, params || data || {}, (response) => {
+      if (Object.keys(response).length && response.error) {
+        return reject(response);
+      }
+
+      return resolve(response);
+    });
+  });
+}
