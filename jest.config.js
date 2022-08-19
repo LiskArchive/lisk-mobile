@@ -55,7 +55,8 @@ module.exports = {
     TEST: true
   },
   preset: 'react-native',
-  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect', './scripts/setupJestAfterEnv.js'],
+  resetModules: true,
   coverageReporters: ['text', 'html', 'lcov', 'cobertura'],
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?react-native|@react-native-community|@react-native|@react-navigation)'
