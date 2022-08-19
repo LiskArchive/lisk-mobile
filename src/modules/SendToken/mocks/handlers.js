@@ -11,10 +11,7 @@ export const sendTokenMockHandler = rest.post(
     return res(
       ctx.status(201),
       ctx.json(BROADCASTED_TRANSACTION_MOCK),
+      ctx.delay(20)
     );
   }
 );
-
-export const sendTokenMockHandlers = [
-  sendTokenMockHandler
-];

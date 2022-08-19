@@ -1,14 +1,14 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import {
-  API_BASE_URL,
   METHOD,
   LIMIT,
   API_VERSION,
-  API_METHOD
+  API_METHOD,
+  API_BASE_URL
 } from 'utilities/api/constants';
 import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
-import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
+// import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 
 /**
  * Fetch user account transactions in paginated mode.
@@ -19,24 +19,27 @@ import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInf
  * (with the array of transactions), loading state, error state, and more.
  */
 export function useGetTransactionsQuery({ config: customConfig = {}, options = {} } = {}) {
-  const account = useAccountInfo();
+  // const account = useAccountInfo();
 
   const config = {
     baseURL: API_BASE_URL,
-    path: `/api/${API_VERSION}/transactions`,
+    url: `/api/${API_VERSION}/transactions`,
     method: 'get',
+    event: 'get.transactions',
+    ...customConfig,
     params: {
       limit: LIMIT,
-      senderAddress: account.summary.address,
+      // TODO: Unmock to senderAddress: account.summary.address when backend is available.
+      senderAddress: 'lskezo8pcrbsoceuuu64rpc8w2qkont2ec3n772yu',
+      ...(customConfig?.params || {})
     },
-    ...customConfig,
   };
 
-  function handleGetTransactions({ pageParam = 1 }) {
+  function handleGetTransactions({ pageParam }) {
     return API_METHOD[METHOD]({
       ...config,
       params: {
-        ...config.params,
+        ...(config.params || {}),
         ...pageParam,
       },
     });
@@ -55,14 +58,19 @@ export function useGetTransactionsQuery({ config: customConfig = {}, options = {
   function handleGetNextPageParam(lastPage) {
     const offset = lastPage.meta.count + lastPage.meta.offset;
     const hasMore = offset < lastPage.meta.total;
+
     return !hasMore ? undefined : { offset };
   }
 
-  const query = useInfiniteQuery([GET_TRANSACTIONS_QUERY, config], handleGetTransactions, {
-    ...options,
-    select: handleQuerySelect,
-    getNextPageParam: handleGetNextPageParam
-  });
+  const query = useInfiniteQuery(
+    [GET_TRANSACTIONS_QUERY, METHOD, config],
+    handleGetTransactions,
+    {
+      ...options,
+      select: handleQuerySelect,
+      getNextPageParam: handleGetNextPageParam
+    }
+  );
 
   return query;
 }
