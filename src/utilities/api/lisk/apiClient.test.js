@@ -102,56 +102,6 @@ describe('apiClient', () => {
     });
   });
 
-  describe('getTransactions', () => {
-    const txList = [
-      {
-        id: 'sample_id',
-        amount: 1
-      }
-    ];
-
-    it('Retrieve a list of transaction for given address', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: true,
-          status: 200,
-          json: () => ({ data: txList })
-        })
-      );
-      const result = await apiClient.getTransactions(account.address);
-      expect(result.data).toEqual(txList);
-      expect(fetch).toHaveBeenCalledWith(
-        `https://service.lisk.com/api/v3/transactions?address=${account.address}&limit=10&offset=0&includePending=false&sort=timestamp:desc`,
-        expect.anything()
-      );
-    });
-
-    it('Return an empty account in case of 404', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: false,
-          status: 404
-        })
-      );
-      const result = await apiClient.getTransactions(account.address);
-      expect(result).toEqual([]);
-    });
-
-    it('Throw error for all other errors', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: false,
-          status: 500
-        })
-      );
-      try {
-        await apiClient.getTransactions(account.address);
-      } catch (e) {
-        expect(e.message).toEqual('Failed to request transactions from server.');
-      }
-    });
-  });
-
   describe('getFees', () => {
     const fees = {
       low: 0.0001,
