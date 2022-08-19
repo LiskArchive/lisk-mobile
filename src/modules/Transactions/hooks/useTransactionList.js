@@ -1,26 +1,14 @@
-import {
-  useEffect
-} from 'react';
-
-const useTransactionList = ({ address }) => {
-  const transactions = {};
-
-  const fetchInitialData = () => { };
-
-  const fetchMore = () => { };
-
-  useEffect(() => {
-    if (address) {
-      fetchInitialData();
-    }
-  }, [address]);
-
+/**
+ * @deprecated - Use useGetTransactionsQuery instead.
+ * TODO: Remove when wallet module is refactored and stop using it.
+ */
+export default function useTransactionList() {
   return {
     loading: true,
-    loadMore: fetchMore,
+    loadMore: () => {},
     account: null,
-    refresh: fetchInitialData,
-    transactions,
+    refresh: () => {},
+    transactions: [],
     refreshing: false,
   };
-};
+}
