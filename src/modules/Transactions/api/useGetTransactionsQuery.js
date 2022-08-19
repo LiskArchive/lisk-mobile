@@ -1,13 +1,11 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-
 import {
   METHOD,
   LIMIT,
   API_VERSION,
-  API_METHOD,
   API_BASE_URL
 } from 'utilities/api/constants';
 import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
+import { useCustomInfiniteQuery } from '../../../utilities/api/hooks/useCustomInfiniteQuery';
 // import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 
 /**
@@ -35,42 +33,9 @@ export function useGetTransactionsQuery({ config: customConfig = {}, options = {
     },
   };
 
-  function handleGetTransactions({ pageParam }) {
-    return API_METHOD[METHOD]({
-      ...config,
-      params: {
-        ...(config.params || {}),
-        ...pageParam,
-      },
-    });
-  }
+  const keys = [GET_TRANSACTIONS_QUERY, METHOD, config];
 
-  function handleQuerySelect(data) {
-    return data.pages.reduce((prevPages, page) => {
-      const newData = page?.data || [];
-      return {
-        ...page,
-        data: prevPages.data ? [...prevPages.data, ...newData] : newData,
-      };
-    });
-  }
-
-  function handleGetNextPageParam(lastPage) {
-    const offset = lastPage.meta.count + lastPage.meta.offset;
-    const hasMore = offset < lastPage.meta.total;
-
-    return !hasMore ? undefined : { offset };
-  }
-
-  const query = useInfiniteQuery(
-    [GET_TRANSACTIONS_QUERY, METHOD, config],
-    handleGetTransactions,
-    {
-      ...options,
-      select: handleQuerySelect,
-      getNextPageParam: handleGetNextPageParam
-    }
-  );
+  const query = useCustomInfiniteQuery({ config, options, keys });
 
   return query;
 }
