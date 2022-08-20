@@ -32,7 +32,7 @@ import TokensTab from './components/TokensTab';
  */
 
 // eslint-disable-next-line max-statements
-const Home = () => {
+const Home = ({ navigation }) => {
   const [currAccount] = useCurrentAccount();
   const { address, name: username } = currAccount.metadata;
   const discrete = useSelector(state => state.settings.discrete);
@@ -41,7 +41,7 @@ const Home = () => {
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const switchAccount = () => { };
+  const switchAccount = () => navigation.navigate('SwitchAccount');
 
   const toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
@@ -49,6 +49,9 @@ const Home = () => {
       discrete: !discrete
     }));
   };
+
+  const requestTokens = () => navigation.navigate('Request');
+  const sendTokens = () => navigation.navigate('Send');
 
   return (
     <SafeAreaView style={[styles.flex, styles.theme.homeContainer]}>
@@ -79,15 +82,15 @@ const Home = () => {
             </TouchableOpacity>
           </View>
           <View style={[styles.row, styles.buttonContainer]} >
-            <TouchableOpacity style={[styles.button]} >
+            <TouchableOpacity style={[styles.button]} onPress={requestTokens} >
               <P style={[styles.buttonText]} >Request</P>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.sendButton]} >
+            <TouchableOpacity style={[styles.button, styles.sendButton]} onPress={sendTokens} >
               <P style={[styles.buttonText, styles.sendButtonText]} >Send</P>
             </TouchableOpacity>
           </View>
         </View>
-        <TokensTab tokens={tokens} />
+        <TokensTab tokens={tokens?.slice(0, 2)} />
       </View>
     </SafeAreaView>
   );

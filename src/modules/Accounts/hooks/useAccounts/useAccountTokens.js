@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 export function useAccountTokens(address) {
   const {
     isLoading, error, data, refetch
-  } = useQuery(['accountTokens'], () => ApiClient.getTokens(address));
+  } = useQuery([`accountTokens-${address}`], () => ApiClient.getTokens(address));
 
   return {
     isLoading, error, tokens: data, refetch
