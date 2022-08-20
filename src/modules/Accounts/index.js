@@ -38,6 +38,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { tokens } = useAccountTokens(address);
 
+  // TODO: Remove clg statement;
   console.log('tokens', tokens);
 
   const { styles } = useTheme({ styles: getStyles() });
