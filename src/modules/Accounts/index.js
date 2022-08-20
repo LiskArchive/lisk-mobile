@@ -18,7 +18,6 @@ import { settingsUpdated } from 'modules/Settings/actions';
 import getStyles from './styles';
 
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
-import { useAccountTokens } from './hooks/useAccounts/useAccountTokens';
 import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
 import TokensTab from './components/TokensTab';
 
@@ -37,7 +36,6 @@ const Home = ({ navigation }) => {
   const { address, name: username } = currAccount.metadata;
   const discrete = useSelector(state => state.settings.discrete);
   const dispatch = useDispatch();
-  const { tokens } = useAccountTokens(address);
 
   const { styles } = useTheme({ styles: getStyles() });
 
@@ -90,7 +88,7 @@ const Home = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-        <TokensTab tokens={tokens?.slice(0, 2)} />
+        <TokensTab />
       </View>
     </SafeAreaView>
   );

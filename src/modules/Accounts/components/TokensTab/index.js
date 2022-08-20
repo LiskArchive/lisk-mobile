@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { memo, useMemo, useState } from 'react';
 import { TouchableOpacity, View, FlatList } from 'react-native';
 import { P, H3 } from 'components/shared/toolBox/typography';
@@ -8,6 +9,9 @@ import CaretSvg from 'assets/svgs/CaretSvg';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import { useNavigation } from '@react-navigation/native';
 import tokensTabStyles from './styles';
+import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
+import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens';
+import EmptyState from '../EmptyState';
 
 const TokenItem = ({ token }) => {
   const { styles } = useTheme({ styles: tokensTabStyles });
@@ -25,10 +29,14 @@ const TokenItem = ({ token }) => {
   </View>;
 };
 
-const TokensTab = ({ tokens = [], fullScreen = false }) => {
-  const { styles } = useTheme({ styles: tokensTabStyles });
+const TokensTab = ({ fullScreen = false }) => {
+  const [currAccount] = useCurrentAccount();
+  const { address } = currAccount.metadata;
+  const { data: tokens = [], isLoading } = useAccountTokens(address);
   const [activeTab, setActiveTab] = useState(0);
   const navigation = useNavigation();
+
+  const { styles } = useTheme({ styles: tokensTabStyles });
 
   const hasLockedTokens = useMemo(() => tokens.some(token => token.lockedBalances), [tokens]);
 
@@ -47,6 +55,12 @@ const TokensTab = ({ tokens = [], fullScreen = false }) => {
   }, [tokens]);
 
   const viewAllTokens = () => navigation.navigate('Tokens');
+
+  const showViewMore = useMemo(() => !fullScreen || !tokens.length, [fullScreen, tokens]);
+
+  const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
+
+  console.log('isEmpty', isEmpty);
 
   return <View style={styles.container} >
     <View style={[styles.row, styles.alignCenter]} >
@@ -67,7 +81,7 @@ const TokensTab = ({ tokens = [], fullScreen = false }) => {
         </TouchableOpacity>
         }
       </View>
-      {!fullScreen
+      {!showViewMore
         && <TouchableOpacity style={[styles.tabItem, styles.row]} onPress={viewAllTokens} >
         <P style={[styles.tabItemText, styles.viewAll]} >View all</P>
         <View style={[styles.viewIcon]} >
@@ -76,6 +90,7 @@ const TokensTab = ({ tokens = [], fullScreen = false }) => {
       </TouchableOpacity>}
     </View>
     <View style={styles.tokenContainer} >
+      {isEmpty && <EmptyState message="You do not have any token on this account. You can request for tokens" />}
       {activeTab === 0
         && <FlatList
           data={tokens}
