@@ -60,8 +60,6 @@ const TokensTab = ({ fullScreen = false }) => {
 
   const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
 
-  console.log('isEmpty', isEmpty);
-
   return <View style={styles.container} >
     <View style={[styles.row, styles.alignCenter]} >
       <View style={styles.tabsContainer} >
