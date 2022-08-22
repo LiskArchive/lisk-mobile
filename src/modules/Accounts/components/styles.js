@@ -83,7 +83,7 @@ export default () => ({
       textAlign: 'center',
       padding: 10,
       marginTop: 10,
-      color: colors.light.mountainMist,
+      color: colors.light.sparkleGray,
     },
     noActivity: {
       width: '100%',
