@@ -5,7 +5,7 @@ import {
   API_BASE_URL
 } from 'utilities/api/constants';
 import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
-import { useCustomInfiniteQuery } from '../../../utilities/api/hooks/useCustomInfiniteQuery';
+import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 
 /**
  * Fetch user account transactions in paginated mode.

@@ -5,6 +5,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
 import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
+
 import { fromRawLsk } from 'utilities/conversions';
 import { transactions as transactionsAPI } from 'utilities/api';
 import { merge, stringShortener } from 'utilities/helpers';
@@ -22,7 +24,6 @@ import Avatar from 'components/shared/avatar';
 import Blur from 'components/shared/blur';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { useSelector } from 'react-redux';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 import TransactionSummary from './TransactionSummary';
 import Row from './row';

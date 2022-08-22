@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
+
 import { getPassphraseFromKeyChain } from 'modules/Auth/utils';
 import { languageMap } from 'constants/languages';
-
 import { TransactionDetails } from 'modules/Transactions/components/TransactionDetails';
 import ThemeContext from '../../../contexts/theme';
 import Confirm from './confirm';
