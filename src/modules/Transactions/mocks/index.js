@@ -19,6 +19,6 @@ export const getTransactionsMockHandler = rest.get(
       },
     };
 
-    return res(ctx.delay(500), ctx.json(response));
+    return res(ctx.delay(20), ctx.json(response));
   },
 );

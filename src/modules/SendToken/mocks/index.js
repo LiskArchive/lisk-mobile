@@ -5,12 +5,12 @@ import { API_VERSION } from 'utilities/api/constants';
 import { mockSendTokenResponse } from '../__fixtures__';
 
 export const sendTokenMockHandler = rest.post(
-  `http://104.248.241.229:9901/api/${API_VERSION}/transactions`,
+  `*/api/${API_VERSION}/transactions`,
   (_, res, ctx) => {
     return res(
+      ctx.delay(20),
       ctx.status(201),
       ctx.json(mockSendTokenResponse),
-      ctx.delay(20)
     );
   }
 );
