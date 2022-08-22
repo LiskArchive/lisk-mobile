@@ -22,6 +22,7 @@ module.exports = {
     'src/utilities/device.js',
     'src/utilities/easing.js',
     'src/utilities/api/',
+    'src/utilities/tests/',
     'src/utilities/networks.js',
     'src/modules/Auth/utils/passphrase.js',
     'src/utilities/api/account.js',
@@ -66,6 +67,6 @@ module.exports = {
     ['jest-junit', { suiteName: 'jest tests', outputDirectory: '<rootDir>/coverage/jest' }]
   ],
   moduleNameMapper: {
-    'react-i18next': '<rootDir>/src/utilities/tests/mock-react-i18next.js',
+    'react-i18next': '<rootDir>/src/utilities/tests/i18nextWrapper.js',
   }
 };
