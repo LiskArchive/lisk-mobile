@@ -1,9 +1,9 @@
 import { renderHook } from '@testing-library/react-hooks';
 
 import * as useAccountInfoHook from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
+import { queryWrapper } from 'tests/queryWrapper';
+import { mockGetTransactionsQuery } from '../__fixtures__';
 import { useGetTransactionsQuery } from './useGetTransactionsQuery';
-import { GET_TRANSACTIONS_QUERY_MOCK } from '../mocks';
-import { queryWrapper } from '../../../utilities/tests/queryWrapper';
 
 jest.useRealTimers();
 
@@ -40,9 +40,9 @@ describe('useGetTransactionsQuery hook', () => {
     expect(result.current.isSuccess).toBeTruthy();
 
     const expectedResponse = {
-      data: GET_TRANSACTIONS_QUERY_MOCK.data.slice(0, limit),
+      data: mockGetTransactionsQuery.data.slice(0, limit),
       meta: {
-        ...GET_TRANSACTIONS_QUERY_MOCK.meta,
+        ...mockGetTransactionsQuery.meta,
         count: limit,
         offset: 0,
       },

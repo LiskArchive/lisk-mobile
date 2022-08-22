@@ -1,4 +1,4 @@
-import { mockSavedAccounts } from 'tests/fixtures/accounts';
+import { mockSavedAccounts } from '../../__fixtures__';
 import actionTypes from '../../actionTypes';
 import { list, current } from './account';
 

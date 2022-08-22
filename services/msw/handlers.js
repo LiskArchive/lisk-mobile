@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import * as sendTokenHandlers from '../../src/modules/SendToken/mocks/handlers';
-import * as transactionHandlers from '../../src/modules/Transactions/mocks/handlers';
-import * as generalApiHandlers from '../../src/utilities/api/mocks/handlers';
+import * as sendTokenHandlers from 'modules/SendToken/mocks';
+import * as transactionHandlers from 'modules/Transactions/mocks';
+import * as generalApiHandlers from 'utilities/api/mocks';
 
 export default [
   ...Object.values(sendTokenHandlers),

@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 import { useState, useEffect, useRef } from 'react';
 
-import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
+import { mockApplications } from '../__fixtures__';
 
 /**
  * @typedef {Object} GetBlockchainApplicationsMetaQuery
@@ -40,7 +40,7 @@ export function useGetApplicationsMetaQuery() {
     return new Promise((resolve) => {
       timer.current = setTimeout(() => {
         resolve({
-          data: BLOCKCHAIN_APPLICATIONS_MOCK,
+          data: mockApplications,
           meta: {
             count: 10,
             offset: 0,
@@ -59,7 +59,7 @@ export function useGetApplicationsMetaQuery() {
       new Promise((resolve) => {
         timer.current = setTimeout(() => {
           resolve({
-            data: BLOCKCHAIN_APPLICATIONS_MOCK,
+            data: mockApplications,
             meta: {
               count: 10,
               offset: page + 1,

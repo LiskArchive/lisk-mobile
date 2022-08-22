@@ -5,8 +5,8 @@ import {
   API_VERSION,
   API_BASE_URL
 } from 'utilities/api/constants';
-import { queryWrapper } from 'utilities/tests/queryWrapper';
-import { CUSTOM_INFINITE_QUERY_MOCK } from '../mocks';
+import { queryWrapper } from 'tests/queryWrapper';
+import { mockCustomInfiniteQuery } from '../__fixtures__';
 import { useCustomInfiniteQuery } from './useCustomInfiniteQuery';
 
 jest.useRealTimers();
@@ -34,9 +34,9 @@ describe('useCustomInfiniteQuery hook', () => {
     expect(result.current.isSuccess).toBeTruthy();
 
     const expectedResponse = {
-      data: CUSTOM_INFINITE_QUERY_MOCK.data.slice(0, LIMIT),
+      data: mockCustomInfiniteQuery.data.slice(0, LIMIT),
       meta: {
-        ...CUSTOM_INFINITE_QUERY_MOCK.meta,
+        ...mockCustomInfiniteQuery.meta,
         count: LIMIT,
         offset: 0,
       },

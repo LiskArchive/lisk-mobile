@@ -2,18 +2,15 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import { useTheme } from 'hooks/useTheme';
-import { useGetTransactionsQuery } from '../../api/useGetTransactionsQuery';
 
 import getTransactionListStyles from './styles';
 
 export default function TransactionList() {
-  const query = useGetTransactionsQuery();
+  // const query = useGetTransactionsQuery();
 
   const { styles } = useTheme({
     styles: getTransactionListStyles(),
   });
-
-  console.log({ query });
 
   return (
     <View style={[styles.container, styles.theme.container]}>

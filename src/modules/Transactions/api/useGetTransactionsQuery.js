@@ -24,8 +24,6 @@ export function useGetTransactionsQuery({ config: customConfig = {}, options = {
     ...customConfig,
     params: {
       limit: LIMIT,
-      // TODO: Unmock to senderAddress: account.summary.address when backend is available.
-      senderAddress: 'lskezo8pcrbsoceuuu64rpc8w2qkont2ec3n772yu',
       ...(customConfig?.params || {})
     },
   };
