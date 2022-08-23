@@ -69,7 +69,6 @@ export const getTransactionFee = ({
       feedback,
     };
   } catch (error) {
-    console.log('error-here', error);
     return { value: 0, error: false, feedback: '' };
   }
 };

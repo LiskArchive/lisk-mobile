@@ -9,7 +9,7 @@ import { createThemedStyles } from '../utilities/helpers';
  * @param {boolean} noTheme - Flag to disable theme in case of needed.
  * @returns {Object} - The theme stored by context and the themed styles created based on it.
  */
-export function useTheme({ noTheme, styles: baseStyles = {} }) {
+export function useTheme({ noTheme, styles: baseStyles = {} } = {}) {
   const theme = useContext(ThemeContext);
 
   const styles = createThemedStyles(theme, baseStyles, noTheme);

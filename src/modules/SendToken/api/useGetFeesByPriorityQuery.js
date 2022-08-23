@@ -3,19 +3,15 @@ import { useMemo } from 'react';
 import ApiClient from 'utilities/api/lisk/apiClient';
 
 export function useGetFeesByPriorityQuery() {
-  const {
-    isLoading, error, data, refetch
-  } = useQuery(['priorityFees'], () => ApiClient.getFees());
+  const query = useQuery(['priorityFees'], () => ApiClient.getFees());
 
   const result = useMemo(() => {
-    return data?.data?.feeEstimatePerByte;
-  }, [data]);
+    return query.data?.data?.feeEstimatePerByte;
+  }, [query.data]);
 
   return {
+    ...query,
     data: result,
-    isLoading,
-    error,
-    isError: !!error,
-    refetch,
+    isError: !!query.error,
   };
 }

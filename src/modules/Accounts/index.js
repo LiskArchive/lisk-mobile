@@ -14,11 +14,10 @@ import SwitchSvg from 'assets/svgs/SwitchSvg';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { settingsUpdated } from 'modules/Settings/actions';
-
-import getStyles from './styles';
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
-import { useAccountTokens } from './hooks/useAccounts/useAccountTokens';
 import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
+import TokensTab from './components/TokensTab';
+import getStyles from './styles';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -30,19 +29,15 @@ import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
  */
 
 // eslint-disable-next-line max-statements
-const Home = () => {
+const Home = ({ navigation }) => {
   const [currAccount] = useCurrentAccount();
   const { address, name: username } = currAccount.metadata;
   const discrete = useSelector(state => state.settings.discrete);
   const dispatch = useDispatch();
-  const { tokens } = useAccountTokens(address);
-
-  // TODO: Remove clg statement;
-  console.log('tokens', tokens);
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const switchAccount = () => { };
+  const switchAccount = () => navigation.navigate('SwitchAccount');
 
   const toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
@@ -50,6 +45,8 @@ const Home = () => {
       discrete: !discrete
     }));
   };
+  const requestTokens = () => navigation.navigate('Request');
+  const sendTokens = () => navigation.navigate('Send');
 
   return (
     <SafeAreaView style={[styles.flex, styles.theme.homeContainer]}>
@@ -80,14 +77,15 @@ const Home = () => {
             </TouchableOpacity>
           </View>
           <View style={[styles.row, styles.buttonContainer]} >
-            <TouchableOpacity style={[styles.button]} >
+            <TouchableOpacity style={[styles.button]} onPress={requestTokens} >
               <P style={[styles.buttonText]} >Request</P>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.sendButton]} >
+            <TouchableOpacity style={[styles.button, styles.sendButton]} onPress={sendTokens}>
               <P style={[styles.buttonText, styles.sendButtonText]} >Send</P>
             </TouchableOpacity>
           </View>
         </View>
+        <TokensTab />
       </View>
     </SafeAreaView>
   );

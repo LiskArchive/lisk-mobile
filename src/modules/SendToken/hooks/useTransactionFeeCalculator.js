@@ -31,7 +31,8 @@ export default function useTransactionFeeCalculator({
     }).value;
 
     return fee;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoadingPrioritiesData, priority, tokenID, amount, message]);
 
-  return { data };
+  return { data, isLoading: isLoadingPrioritiesData };
 }

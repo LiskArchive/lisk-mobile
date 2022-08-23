@@ -8,7 +8,7 @@ import { translate } from 'react-i18next';
 import { ScrollView } from 'react-native-gesture-handler';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { useAccounts, useCurrentAccount, useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
+import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import { IconButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
 import AccountItem from '../components/SwipeableAccountItem';
@@ -21,13 +21,10 @@ const SwitchAccount = ({
 }) => {
   const { accounts } = useAccounts();
   const [account, setAccount] = useCurrentAccount();
-  const { getAccount } = useAccountInfo();
 
   const selectAccount = acc => {
     setAccount(acc);
-    getAccount(acc.metadata.address).then(() => {
-      navigation.navigate('Main');
-    });
+    navigation.navigate('Main');
   };
 
   return (

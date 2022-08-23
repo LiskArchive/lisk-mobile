@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide';
 import { deviceHeight } from 'utilities/device';
 import { setColorOpacity } from 'utilities/helpers';
 
@@ -75,14 +75,15 @@ export default () => ({
       justifyContent: 'center',
       padding: 20,
     },
-    emptyStateActivityIndicator: {
-      position: 'absolute',
-      top: 0,
-    },
     emptyState: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1,
+      padding: boxes.boxPadding,
+      alignItems: 'center'
+    },
+    message: {
+      textAlign: 'center',
+      padding: 10,
+      marginTop: 10,
+      color: colors.light.sparkleGray,
     },
     noActivity: {
       width: '100%',
@@ -138,9 +139,6 @@ export default () => ({
     itemContainer: {
       borderBottomColor: colors.light.mystic,
     },
-    emptyState: {
-      backgroundColor: colors.light.white,
-    },
     address: {
       color: colors.light.black,
     },
@@ -178,9 +176,6 @@ export default () => ({
     },
     itemContainer: {
       borderBottomColor: setColorOpacity(colors.light.white, 0.24),
-    },
-    emptyState: {
-      backgroundColor: colors.dark.mainBg,
     },
     address: {
       color: colors.dark.white,

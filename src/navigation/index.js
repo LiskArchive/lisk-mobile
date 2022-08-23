@@ -32,6 +32,7 @@ import ApplicationDetail from 'modules/BlockchainApplication/components/Applicat
 import Request from 'modules/Request';
 import DeleteApplication from 'modules/BlockchainApplication/components/DeleteApplication';
 import DeleteApplicationSuccess from 'modules/BlockchainApplication/components/DeleteApplicationSuccess';
+import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './appNavigator';
 
@@ -183,6 +184,11 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="Request"
             component={Request}
+            options={navigationOptions.NoHeader}
+          />
+          <MainStack.Screen
+            name="Tokens"
+            component={TokensScreen}
             options={navigationOptions.NoHeader}
           />
         </MainStack.Navigator>

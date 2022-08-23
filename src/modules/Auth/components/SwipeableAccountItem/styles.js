@@ -6,7 +6,7 @@ export default () => ({
   common: {
     container: {
       flexDirection: 'row',
-      borderBottomWidth: 1,
+      borderBottomWidth: 0.4,
       padding: boxes.boxPadding,
       paddingVertical: 10,
       alignItems: 'center',
