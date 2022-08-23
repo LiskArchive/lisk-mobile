@@ -59,7 +59,11 @@ navigationOptions.Register = {
   headerTitleStyle: genericTitle,
 };
 
-navigationOptions.TxDetail = {
+navigationOptions.TransactionsHistory = {
+  header: () => null,
+};
+
+navigationOptions.TransactionDetails = {
   header: () => null,
 };
 

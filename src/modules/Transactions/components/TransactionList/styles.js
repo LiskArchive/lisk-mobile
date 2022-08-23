@@ -20,6 +20,15 @@ export default function getTransactionListStyles() {
         fontWeight: '500',
         fontSize: 14,
         lineHeight: 18,
+      },
+      labelButton: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      labelButtonText: {
+        fontSize: 12,
       }
     },
     [themes.light]: {

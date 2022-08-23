@@ -1,13 +1,18 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { LIMIT } from 'utilities/api/constants';
-
-import getTransactionListStyles from './styles';
+import { LabelButton } from 'components/shared/toolBox/button';
+import CaretSvg from 'assets/svgs/CaretSvg';
 import { useGetTransactionsQuery } from '../../api/useGetTransactionsQuery';
 
+import getTransactionListStyles from './styles';
+
 export default function TransactionList({ mode = 'overview' }) {
+  const navigation = useNavigation();
+
   const {
     data: transactionsData,
     isLoading: isLoadingTransactions,
@@ -22,7 +27,34 @@ export default function TransactionList({ mode = 'overview' }) {
     styles: getTransactionListStyles(),
   });
 
-  console.log({ transactionsData });
+  function renderHeader() {
+    if (mode === 'full') return null;
+
+    return (
+      <View style={[styles.header]}>
+        <Text style={[styles.title, styles.theme.title]}>
+          Transactions
+        </Text>
+
+        <LabelButton
+          onClick={() => navigation.navigate('TransactionsHistory')}
+          style={styles.labelButton}
+          textStyle={styles.labelButtonText}
+          adornments={{
+            right:
+              <CaretSvg
+                height={12}
+                width={12}
+                direction='right'
+                style={{ marginLeft: 8 }}
+              />
+          }}
+        >
+          View all
+        </LabelButton>
+      </View>
+    );
+  }
 
   function renderBody() {
     if (isLoadingTransactions) {
@@ -34,6 +66,8 @@ export default function TransactionList({ mode = 'overview' }) {
     }
 
     const transactions = transactionsData.data;
+
+    console.log({ transactions });
 
     return (
       <>
@@ -48,12 +82,7 @@ export default function TransactionList({ mode = 'overview' }) {
 
   return (
     <View style={[styles.container, styles.theme.container]}>
-      <View style={[styles.header]}>
-        <Text style={[styles.title, styles.theme.title]}>
-          Transactions
-        </Text>
-
-      </View>
+      {renderHeader()}
 
       {renderBody()}
     </View>

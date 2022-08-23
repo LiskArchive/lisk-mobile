@@ -56,7 +56,7 @@ describe('Deep Link Handler', () => {
   it('handles urls with transactions path', () => {
     const url = 'lisk://transactions?id=1';
     const expectedResult = {
-      name: 'TxDetail',
+      name: 'TransactionDetails',
       params: {
         activeToken: tokenMap.LSK.key,
         txId: '1',

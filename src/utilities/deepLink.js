@@ -36,7 +36,7 @@ export default function deepLinkMapper(deepLinkURL) {
 
     case 'transactions':
       return {
-        name: 'TxDetail',
+        name: 'TransactionDetails',
         params: {
           activeToken: tokenMap.LSK.key,
           txId: query.id,
