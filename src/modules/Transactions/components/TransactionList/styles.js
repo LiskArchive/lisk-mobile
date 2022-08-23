@@ -10,6 +10,12 @@ export default function getTransactionListStyles() {
         paddingLeft: boxes.boxPadding,
         paddingRight: boxes.boxPadding
       },
+      header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 16
+      },
       title: {
         fontWeight: '500',
         fontSize: 14,
