@@ -14,12 +14,10 @@ import SwitchSvg from 'assets/svgs/SwitchSvg';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { settingsUpdated } from 'modules/Settings/actions';
-
-import getStyles from './styles';
-
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
 import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
 import TokensTab from './components/TokensTab';
+import getStyles from './styles';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -47,7 +45,6 @@ const Home = ({ navigation }) => {
       discrete: !discrete
     }));
   };
-
   const requestTokens = () => navigation.navigate('Request');
   const sendTokens = () => navigation.navigate('Send');
 
@@ -55,7 +52,7 @@ const Home = ({ navigation }) => {
     <SafeAreaView style={[styles.flex, styles.theme.homeContainer]}>
       <View style={[styles.row, styles.alignItemsCenter, styles.topContainer]} >
         <TouchableOpacity style={[styles.discreteContainer]} onPress={toggleIncognito} >
-          <IncognitoSvg size={1.1} disabled={discrete} />
+          <IncognitoSvg size={1.2} disabled={discrete} />
         </TouchableOpacity>
         <View style={styles.flex} >
           <ApplicationSwitcher />
@@ -83,7 +80,7 @@ const Home = ({ navigation }) => {
             <TouchableOpacity style={[styles.button]} onPress={requestTokens} >
               <P style={[styles.buttonText]} >Request</P>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.sendButton]} onPress={sendTokens} >
+            <TouchableOpacity style={[styles.button, styles.sendButton]} onPress={sendTokens}>
               <P style={[styles.buttonText, styles.sendButtonText]} >Send</P>
             </TouchableOpacity>
           </View>

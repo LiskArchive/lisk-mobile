@@ -60,7 +60,7 @@ export default () => ({
       borderColor: colors.light.platinumGray,
     },
     sendButton: {
-      backgroundColor: colors.light.white
+      backgroundColor: colors.light.white,
     },
     buttonText: {
       textAlign: 'center',

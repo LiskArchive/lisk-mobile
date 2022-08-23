@@ -30,6 +30,10 @@ class LiskAPIClient {
     if (!resp.ok) {
       throw new Error('Failed to request account from server.');
     }
+
+    if (!resp.ok) {
+      throw new Error('Failed to request account from server.');
+    }
     const { data } = await resp.json();
 
     return data;
