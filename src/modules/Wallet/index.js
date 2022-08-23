@@ -38,6 +38,7 @@ const Wallet = ({
   const followedAccounts = [];
   const dispatch = useDispatch();
 
+  // TODO: Use useGetTransactionsQuery instead.
   const {
     transactions, loading, loadMore, refresh, account
   } = useTransactionList({ address: route.params?.address, activeToken: 'LSK' });

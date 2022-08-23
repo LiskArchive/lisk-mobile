@@ -6,7 +6,7 @@ import { useTheme } from 'hooks/useTheme';
 import getTransactionListStyles from './styles';
 
 export default function TransactionList() {
-  // const query = useGetTransactionsQuery();
+  // TODO: Add useGetTransactionsQuery to fetch TXs.
 
   const { styles } = useTheme({
     styles: getTransactionListStyles(),

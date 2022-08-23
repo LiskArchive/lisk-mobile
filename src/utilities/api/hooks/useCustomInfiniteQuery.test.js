@@ -2,8 +2,8 @@ import { renderHook } from '@testing-library/react-hooks';
 
 import {
   LIMIT,
-  API_VERSION,
-  API_BASE_URL
+  API_BASE_URL,
+  API_URL,
 } from 'utilities/api/constants';
 import { queryWrapper } from 'tests/queryWrapper';
 import { mockCustomInfiniteQuery } from '../__fixtures__';
@@ -14,7 +14,7 @@ jest.useRealTimers();
 describe('useCustomInfiniteQuery hook', () => {
   const config = {
     baseURL: API_BASE_URL,
-    url: `/api/${API_VERSION}/custom-infinite-query`,
+    url: `${API_URL}/custom-infinite-query`,
     method: 'get',
     params: {
       limit: LIMIT,

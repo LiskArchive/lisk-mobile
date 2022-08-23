@@ -1,7 +1,7 @@
 import {
   METHOD,
   LIMIT,
-  API_VERSION,
+  API_URL,
   API_BASE_URL
 } from 'utilities/api/constants';
 import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
@@ -18,7 +18,7 @@ import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQue
 export function useGetTransactionsQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
     baseURL: API_BASE_URL,
-    url: `/api/${API_VERSION}/transactions`,
+    url: `${API_URL}/transactions`,
     method: 'get',
     event: 'get.transactions',
     ...customConfig,
