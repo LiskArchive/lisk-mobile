@@ -11,10 +11,10 @@ const Graphics = ({ tx, theme }) => (
   <Image style={{ width: 40, height: 40 }} source={getTxConstant(tx).image(theme)} />
 );
 
-const TimeStamp = ({ timestamp, styles }) => {
+const TimeStamp = ({ timestamp, styles, format = 'MMM D, YYYY LTS' }) => {
   if (timestamp) {
     return (
-      <FormattedDate format="MMM D, YYYY LTS" type={P} style={[styles.date, styles.theme.date]}>
+      <FormattedDate format={format} type={P} style={[styles.date, styles.theme.date]}>
         {timestamp * 1000}
       </FormattedDate>
     );

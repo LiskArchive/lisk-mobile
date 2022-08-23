@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
@@ -7,6 +7,7 @@ import { LIMIT } from 'utilities/api/constants';
 import { LabelButton } from 'components/shared/toolBox/button';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import { useGetTransactionsQuery } from '../../api/useGetTransactionsQuery';
+import TransactionRow from '../TransactionRow';
 
 import getTransactionListStyles from './styles';
 
@@ -67,16 +68,16 @@ export default function TransactionList({ mode = 'overview' }) {
 
     const transactions = transactionsData.data;
 
-    console.log({ transactions });
+    console.log({ transactionsssss: transactions });
 
     return (
-      <>
-        {transactions.map(transaction => (
-          <Text key={transaction.id}>
-            {transaction.params.recipientAddress}
-          </Text>
-        ))}
-      </>
+      <FlatList
+        data={transactions}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TransactionRow transaction={item} />
+        )}
+      />
     );
   }
 

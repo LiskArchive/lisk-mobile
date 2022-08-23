@@ -13,11 +13,11 @@ import {
 import Icon from '../../toolBox/icon';
 import Avatar from '../../avatar';
 
-export const TimeStamp = ({ timestamp, styles }) => {
+export const TimeStamp = ({ timestamp, styles, format = 'MMM D, YYYY LTS' }) => {
   if (timestamp) {
     return (
       <FormattedDate
-        format="MMM D, YYYY LTS"
+        format={format}
         type={P}
         style={[styles.date, styles.theme.date]}
       >

@@ -20,6 +20,8 @@ export default function TransactionsHistory() {
         onPress={navigation.goBack}
       />
 
+      {/* <Text>pico</Text> */}
+
       <TransactionList mode="full"/>
     </SafeAreaView>
   );

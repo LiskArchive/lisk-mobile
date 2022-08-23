@@ -1,39 +1,30 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 
-export default function getTransactionListStyles() {
+export default function getTransactionRowStyles() {
   return {
     common: {
       container: {
-        flex: 1,
-        paddingTop: boxes.boxPadding,
-        paddingBottom: boxes.boxPadding,
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
-      },
-      header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingTop: 8,
+        paddingBottom: 8,
       },
-      title: {
-        fontWeight: '500',
-        fontSize: 14,
-        lineHeight: 18,
-      },
-      labelButton: {
-        display: 'flex',
-        flexDirection: 'row',
+      column: {
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
       },
-      labelButtonText: {
-        fontSize: 12,
-      },
-
-      transactionAddressText: {
+      addressText: {
         fontWeight: '500',
         fontSize: 16,
         lineHeight: 19,
+        marginBottom: 8
+      },
+      date: {
+        fontWeight: '400',
+        fontSize: 12,
+        lineHeight: 14
       }
     },
     [themes.light]: {
@@ -43,8 +34,11 @@ export default function getTransactionListStyles() {
       title: {
         color: colors.light.zodiacBlue,
       },
-      transactionAddressText: {
+      addressText: {
         color: colors.light.zodiacBlue,
+      },
+      date: {
+        color: colors.light.slateGray,
       },
     },
     [themes.dark]: {
@@ -54,8 +48,11 @@ export default function getTransactionListStyles() {
       title: {
         color: colors.light.white,
       },
-      transactionAddressText: {
+      addressText: {
         color: colors.light.white,
+      },
+      date: {
+        color: colors.light.silverGrey,
       },
     },
   };
