@@ -15,11 +15,6 @@ const account = {
     unconfirmedBalance: '10000',
     initialized: true,
   },
-  sequence: { nonce: 0 },
-  dpos: {
-    unlocking: [],
-    sentVotes: []
-  }
 };
 
 const middlewares = [thunk];
@@ -58,20 +53,8 @@ describe('useAccountInfo hook', () => {
 
   it('getAccount should make api call to get account details', async () => {
     const { getAccount } = result.current;
-    const expectedResult = {
-      address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw',
-      balance: '10000',
-      publicKey: 'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
-      unconfirmedBalance: '10000',
-      initialized: true,
-      nonce: 0,
-      lockedBalance: 0,
-      keys: undefined,
-      sentVotes: [],
-      unlocking: []
-    };
     fetch.mockResolvedValueOnce({ ok: true, status: 200, json: () => ({ data: [account] }) });
     const data = await getAccount(account.address);
-    expect(data).toEqual(expectedResult);
+    expect(data).toEqual([account]);
   });
 });

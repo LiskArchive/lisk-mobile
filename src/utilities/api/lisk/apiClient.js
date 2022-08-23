@@ -7,7 +7,6 @@ class LiskAPIClient {
     this._url = url;
   }
 
-  // eslint-disable-next-line max-statements
   async getAccount(address) {
     const resp = await fetch(`${this._url}/v2/accounts?address=${address}`, config.requestOptions);
     if (!resp.ok && resp.status === 404) {
@@ -22,7 +21,13 @@ class LiskAPIClient {
       throw new Error('Failed to request account from server.');
     }
     const { data } = await resp.json();
-    if (data.length === 0) {
+
+    return data;
+  }
+
+  async getTokens(address) {
+    const resp = await fetch(`${this._url}/v3/tokens?address=${address}`, config.requestOptions);
+    if (!resp.ok && resp.status === 404) {
       return {
         address,
         balance: 0,
@@ -30,18 +35,12 @@ class LiskAPIClient {
         initialized: true
       };
     }
-    const unlockingAmount = data[0].dpos.unlocking
-      ?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
-    const totalSentVotes = data[0].dpos.sentVotes?.reduce?.((a, b) => a + Number(b.amount), 0) ?? 0;
-    return {
-      ...data[0].summary,
-      initialized: true,
-      nonce: data[0].sequence.nonce,
-      lockedBalance: unlockingAmount + totalSentVotes,
-      unlocking: data[0].dpos.unlocking,
-      sentVotes: data[0].dpos.sentVotes,
-      keys: data[0].keys
-    };
+    if (!resp.ok) {
+      throw new Error('Failed to request account from server.');
+    }
+    const { data } = await resp.json();
+
+    return data;
   }
 
   async getNetworkInfo() {
@@ -87,16 +86,12 @@ class LiskAPIClient {
   }
 
   async getFees() {
-    try {
-      const resp = await fetch(`${this._url}/v3/fees`, config.requestOptions);
-      if (!resp.ok) {
-        throw new Error('Failed to request fees from server.');
-      }
-      const data = resp.json();
-      return data;
-    } catch (error) {
-      return {};
+    const resp = await fetch(`${this._url}/v3/fees`, config.requestOptions);
+    if (!resp.ok) {
+      throw new Error('Failed to request fees from server.');
     }
+    const data = resp.json();
+    return data;
   }
 
   async sendTransaction(tx) {
