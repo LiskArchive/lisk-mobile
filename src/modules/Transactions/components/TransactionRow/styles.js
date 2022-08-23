@@ -10,10 +10,20 @@ export default function getTransactionRowStyles() {
         paddingTop: 8,
         paddingBottom: 8,
       },
-      column: {
+      titleContainer: {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
+      },
+      statusContainer: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-end',
+      },
+      row: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
       },
       addressText: {
         fontWeight: '500',
@@ -25,6 +35,22 @@ export default function getTransactionRowStyles() {
         fontWeight: '400',
         fontSize: 12,
         lineHeight: 14
+      },
+      image: {
+        borderRadius: 50,
+        width: 40,
+        height: 40,
+        marginRight: 12,
+      },
+      incomingAmount: {
+        fontWeight: '500',
+        fontSize: 16,
+        lineHeight: 19,
+      },
+      outgoingAmount: {
+        fontWeight: '500',
+        fontSize: 16,
+        lineHeight: 19,
       }
     },
     [themes.light]: {
@@ -40,6 +66,12 @@ export default function getTransactionRowStyles() {
       date: {
         color: colors.light.slateGray,
       },
+      incomingAmount: {
+        color: colors.light.ufoGreen,
+      },
+      outgoingAmount: {
+        color: colors.light.black,
+      },
     },
     [themes.dark]: {
       container: {
@@ -53,6 +85,12 @@ export default function getTransactionRowStyles() {
       },
       date: {
         color: colors.light.silverGrey,
+      },
+      incomingAmount: {
+        color: colors.dark.ufoGreen,
+      },
+      outgoingAmount: {
+        color: colors.dark.white,
       },
     },
   };
