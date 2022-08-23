@@ -3,7 +3,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 
-import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
+import { mockApplications } from '../__fixtures__';
 import actionTypes from '../store/actionTypes';
 import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 
@@ -11,7 +11,7 @@ const mockStore = configureMockStore();
 const mockDispatch = jest.fn();
 const mockState = {
   blockchainApplications: {
-    pins: BLOCKCHAIN_APPLICATIONS_MOCK.map(({ chainID }) => chainID),
+    pins: mockApplications.map(({ chainID }) => chainID),
   },
 };
 
@@ -42,7 +42,7 @@ describe('usePinBlockchainApplication hook', () => {
   it('togglePin should dispatch an action', async () => {
     const { togglePin } = result.current;
 
-    const chainId = BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID;
+    const chainId = mockApplications[0].chainID;
 
     const expectedAction = {
       type: actionTypes.toggleApplicationPin,
@@ -58,20 +58,20 @@ describe('usePinBlockchainApplication hook', () => {
 
   it('should return pins as an array', async () => {
     const { pins, togglePin } = result.current;
-    const chainId = BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID;
+    const chainId = mockApplications[0].chainID;
 
     act(() => {
       togglePin(chainId);
     });
 
-    const expectPins = BLOCKCHAIN_APPLICATIONS_MOCK.map(({ chainID }) => chainID);
+    const expectPins = mockApplications.map(({ chainID }) => chainID);
 
     expect(pins).toEqual(expect.arrayContaining(expectPins));
   });
 
   it('should flag chain as a pinned application', async () => {
     const { checkPinByChainId, togglePin } = result.current;
-    const chainId = BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID;
+    const chainId = mockApplications[0].chainID;
 
     act(() => {
       togglePin(chainId);
@@ -88,7 +88,7 @@ describe('usePinBlockchainApplication hook', () => {
       },
     } = renderHook(() => usePinBlockchainApplication(), { wrapper });
 
-    const chainId = BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID;
+    const chainId = mockApplications[0].chainID;
 
     expect(checkPinByChainId(chainId)).not.toBeTruthy();
   });

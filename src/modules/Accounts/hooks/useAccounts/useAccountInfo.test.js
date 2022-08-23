@@ -4,7 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as apiClient from 'utilities/api/lisk/apiClient';
 import { renderHook } from '@testing-library/react-hooks';
-import { mockSavedAccounts } from 'tests/fixtures/accounts';
+import { mockSavedAccounts } from '../../__fixtures__';
 import { useAccountInfo } from './useAccountInfo';
 
 const account = {

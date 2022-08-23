@@ -7,7 +7,7 @@ import {
 } from 'utilities/api/constants';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 
-import { sendTokenMockHandler } from '../mocks/handlers';
+import { sendTokenMockHandler } from '../mocks';
 
 export default function useSendTokenMutation(options = {}) {
   const [currentBlockchainApplication] = useCurrentBlockchainApplication();

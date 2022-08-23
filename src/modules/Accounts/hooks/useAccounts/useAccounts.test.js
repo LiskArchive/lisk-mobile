@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { mockSavedAccounts } from 'tests/fixtures/accounts';
+import { mockSavedAccounts } from '../../__fixtures__';
 import actionTypes from '../../actionTypes';
 import { useAccounts } from './useAccounts';
 

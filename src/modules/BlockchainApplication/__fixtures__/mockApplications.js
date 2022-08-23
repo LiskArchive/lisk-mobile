@@ -1,29 +1,7 @@
-export const DEFAULT_BLOCKCHAIN_APPLICATION = {
-  name: 'Lisk',
-  chainID: 1,
-  title: 'Lisk',
-  description: 'A blockchain application platform',
-  network: 'mainnet',
-  isDefault: true,
-  genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
-  apis: [{
-    rest: 'https://service.lisk.com',
-    rpc: ['wss://service.lisk.com'],
-  }],
-  explorers: ['https://lisk.observer', 'https://explorer.lisk.io'],
-  images: {
-    logo: {
-      png: 'https://avatars.githubusercontent.com/u/16600915?s=200&v=4', // URL
-      svg: '', // URL
-    },
-    background: '#FFFFFF1A', // URL
-  },
-  deposited: 681782312,
-  state: 'active',
-};
+import { mockDefaultApplication } from './mockDefaultApplication';
 
-export const BLOCKCHAIN_APPLICATIONS_MOCK = [
-  DEFAULT_BLOCKCHAIN_APPLICATION,
+export const mockApplications = [
+  mockDefaultApplication,
   {
     name: 'Coleti',
     chainID: 2,
@@ -125,7 +103,7 @@ export const BLOCKCHAIN_APPLICATIONS_MOCK = [
   },
 ];
 
-export const MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK = BLOCKCHAIN_APPLICATIONS_MOCK.reduce(
+export const mockMappedApplications = mockApplications.reduce(
   (obj, val) => {
     obj[val.chainID] = val;
     return obj;
