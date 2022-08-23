@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { colors } from 'constants/styleGuide';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
-import { TransactionDetails } from 'modules/Accounts/components/TransactionDetails';
+import { TransactionDetails } from 'modules/Transactions/components/TransactionDetails';
 import Wallet from 'modules/Wallet';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';

@@ -22,6 +22,7 @@ module.exports = {
     'src/utilities/device.js',
     'src/utilities/easing.js',
     'src/utilities/api/',
+    'src/tests/',
     'src/utilities/networks.js',
     'src/modules/Auth/utils/passphrase.js',
     'src/utilities/api/account.js',
@@ -55,7 +56,8 @@ module.exports = {
     TEST: true
   },
   preset: 'react-native',
-  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect', './scripts/setupJestAfterEnv.js'],
+  resetModules: true,
   coverageReporters: ['text', 'html', 'lcov', 'cobertura'],
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?react-native|@react-native-community|@react-native|@react-navigation)'
@@ -65,6 +67,6 @@ module.exports = {
     ['jest-junit', { suiteName: 'jest tests', outputDirectory: '<rootDir>/coverage/jest' }]
   ],
   moduleNameMapper: {
-    'react-i18next': '<rootDir>/src/utilities/tests/mock-react-i18next.js',
+    'react-i18next': '<rootDir>/src/tests/i18nextWrapper.js',
   }
 };

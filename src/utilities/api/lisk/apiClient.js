@@ -48,36 +48,6 @@ class LiskAPIClient {
     };
   }
 
-  async getTransaction(id) {
-    const resp = await fetch(
-      `${this._url}/v3/transactions?transactionId=${id}`,
-      config.requestOptions
-    );
-    if (!resp.ok && resp.status === 404) {
-      return [];
-    }
-    if (!resp.ok) {
-      throw new Error('Failed to request transactions from server.');
-    }
-    const { data } = await resp.json();
-    return data;
-  }
-
-  async getTransactions(address, limit = 10, offset = 0) {
-    const resp = await fetch(
-      `${this._url}/v3/transactions?address=${address}&limit=${limit}&offset=${offset}&includePending=false&sort=timestamp:desc`,
-      config.requestOptions
-    );
-    if (!resp.ok && resp.status === 404) {
-      return [];
-    }
-    if (!resp.ok) {
-      throw new Error('Failed to request transactions from server.');
-    }
-    const data = await resp.json();
-    return data;
-  }
-
   async getFees() {
     const resp = await fetch(`${this._url}/v3/fees`, config.requestOptions);
     if (!resp.ok) {

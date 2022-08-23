@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
+import { mockApplications } from '../__fixtures__';
 
 import { useGetApplicationsMetaQuery } from './useGetApplicationsQuery';
 
@@ -24,7 +24,7 @@ describe('useGetApplicationsMetaQuery hook', () => {
     await waitForNextUpdate();
 
     expect(result.current).toMatchObject({
-      data: BLOCKCHAIN_APPLICATIONS_MOCK,
+      data: mockApplications,
       isLoading: false,
       error: undefined,
     });
