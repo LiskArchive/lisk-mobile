@@ -1,63 +1,10 @@
 import { apiClient } from './apiClient';
 
-const account = {
-  address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw',
-  balance: '10000',
-  publicKey: 'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
-  unconfirmedBalance: '10000',
-  initialized: true
-};
-
 describe('apiClient', () => {
   global.fetch = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
-  });
-
-  describe('getAccount', () => {
-    it('Retrieve accounts by address', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: true,
-          status: 200,
-          json: () => ({
-            data: [
-              {
-                sequence: { nonce: 0 },
-                summary: account,
-                dpos: {
-                  unlocking: [{ amount: '100000' }],
-                  sentVotes: []
-                }
-              }
-            ]
-          })
-        })
-      );
-      const result = await apiClient.getAccount(account.address);
-      expect(result).toEqual({
-        ...account,
-        nonce: 0,
-        lockedBalance: 100000,
-        sentVotes: [],
-        unlocking: [{ amount: '100000' }]
-      });
-    });
-
-    it('Throw error for all other errors', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: false,
-          status: 500
-        })
-      );
-      try {
-        await apiClient.getAccount(account.address);
-      } catch (e) {
-        expect(e.message).toEqual('Failed to request account from server.');
-      }
-    });
   });
 
   describe('getNetworkState', () => {
