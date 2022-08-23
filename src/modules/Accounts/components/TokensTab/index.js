@@ -30,7 +30,7 @@ const TokenItem = ({ token }) => {
   </View>;
 };
 
-const TokensTab = ({ fullScreen = false, t }) => {
+const TokensTab = ({ t }) => {
   const [currAccount] = useCurrentAccount();
   const { address } = currAccount.metadata;
   const { data: tokens = [], isLoading } = useAccountTokens(address);
@@ -57,7 +57,7 @@ const TokensTab = ({ fullScreen = false, t }) => {
 
   const viewAllTokens = () => navigation.navigate('Tokens');
 
-  const showViewMore = useMemo(() => !fullScreen && tokens.length, [fullScreen, tokens]);
+  const showViewMore = useMemo(() => tokens.length, [tokens]);
 
   const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
 
@@ -92,14 +92,14 @@ const TokensTab = ({ fullScreen = false, t }) => {
       {isEmpty && <EmptyState message={t('accounts.emptyTokenMessage')} />}
       {activeTab === 0
         && <FlatList
-          data={tokens}
+          data={tokens?.slice(0, 2)}
           renderItem={({ item }) => <TokenItem token={item} />}
           keyExtractor={(item) => item.tokenID}
         />
       }
       {activeTab === 1
         && <FlatList
-          data={lockedTokens}
+          data={lockedTokens?.slice(0, 2)}
           renderItem={({ item }) => <TokenItem token={item} />}
           keyExtractor={(item) => item.tokenID}
         />
