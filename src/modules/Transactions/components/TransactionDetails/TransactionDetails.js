@@ -32,12 +32,6 @@ import VoteList from './voteList';
 import {
   goToWallet, getAccountLabel, getAccountTitle
 } from './utils';
-import {
-  isRegistration,
-  isTransfer,
-  isVote,
-  isUnlock,
-} from '../../constants';
 
 const getConfig = (styles, tx, accountAddress) => {
   if (accountAddress !== tx.senderAddress && isTransfer(tx)) {
