@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import React, { memo, useMemo, useState } from 'react';
 import { TouchableOpacity, View, FlatList } from 'react-native';
+import { translate } from 'react-i18next';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import { fromRawLsk } from 'utilities/conversions';
 import { useTheme } from 'hooks/useTheme';
@@ -29,7 +30,7 @@ const TokenItem = ({ token }) => {
   </View>;
 };
 
-const TokensTab = ({ fullScreen = false }) => {
+const TokensTab = ({ fullScreen = false, t }) => {
   const [currAccount] = useCurrentAccount();
   const { address } = currAccount.metadata;
   const { data: tokens = [], isLoading } = useAccountTokens(address);
@@ -56,7 +57,7 @@ const TokensTab = ({ fullScreen = false }) => {
 
   const viewAllTokens = () => navigation.navigate('Tokens');
 
-  const showViewMore = useMemo(() => !fullScreen || !tokens.length, [fullScreen, tokens]);
+  const showViewMore = useMemo(() => !fullScreen && tokens.length, [fullScreen, tokens]);
 
   const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
 
@@ -67,28 +68,28 @@ const TokensTab = ({ fullScreen = false }) => {
           style={[styles.tabItem, activeTab === 0 && styles.tabItemActive]}
           onPress={() => setActiveTab(0)} >
           <P style={[styles.tabItemText, activeTab === 0 && styles.tabItemTextActive]} >
-            Tokens
+            {t('accounts.tokens')}
           </P>
         </TouchableOpacity>
         {hasLockedTokens && <TouchableOpacity
           style={[styles.tabItem, activeTab === 1 && styles.tabItemActive]}
           onPress={() => setActiveTab(1)}>
           <P style={[styles.tabItemText, activeTab === 1 && styles.tabItemTextActive]} >
-            Locked tokens
+            {t('accounts.lockedTokens')}
           </P>
         </TouchableOpacity>
         }
       </View>
-      {!showViewMore
+      {!!showViewMore
         && <TouchableOpacity style={[styles.tabItem, styles.row]} onPress={viewAllTokens} >
-        <P style={[styles.tabItemText, styles.viewAll]} >View all</P>
-        <View style={[styles.viewIcon]} >
-          <CaretSvg height={15} width={15} direction='right' color={colors.light.ultramarineBlue} />
-        </View>
-      </TouchableOpacity>}
+          <P style={[styles.tabItemText, styles.viewAll]} >{t('accounts.buttons.viewAll')}</P>
+          <View style={[styles.viewIcon]} >
+            <CaretSvg height={15} width={15} direction='right' color={colors.light.ultramarineBlue} />
+          </View>
+        </TouchableOpacity>}
     </View>
     <View style={styles.tokenContainer} >
-      {isEmpty && <EmptyState message="You do not have any token on this account. You can request for tokens" />}
+      {isEmpty && <EmptyState message={t('accounts.emptyTokenMessage')} />}
       {activeTab === 0
         && <FlatList
           data={tokens}
@@ -98,7 +99,7 @@ const TokensTab = ({ fullScreen = false }) => {
       }
       {activeTab === 1
         && <FlatList
-          data={tokens}
+          data={lockedTokens}
           renderItem={({ item }) => <TokenItem token={item} />}
           keyExtractor={(item) => item.tokenID}
         />
@@ -107,4 +108,4 @@ const TokensTab = ({ fullScreen = false }) => {
   </View>;
 };
 
-export default memo(TokensTab);
+export default memo(translate()(TokensTab));

@@ -479,5 +479,15 @@
       "amountMustBePositive": "Token amount must be a positive number",
       "priority":"Priority must be specified"
     }
+  },
+  "accounts": {
+    "tokens": "Tokens",
+    "lockedTokens": "Locked Tokens",
+    "emptyTokenMessage": "You do not have any token on this account. You can request for tokens",
+    "buttons": {
+      "viewAll": "View All",
+      "request": "Request",
+      "send": "Send"
+    }
   }
 }
