@@ -58,8 +58,7 @@ describe('Deep Link Handler', () => {
     const expectedResult = {
       name: 'TransactionDetails',
       params: {
-        activeToken: tokenMap.LSK.key,
-        txId: '1',
+        transactionId: '1',
       },
     };
 

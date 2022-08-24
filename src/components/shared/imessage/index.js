@@ -3,7 +3,7 @@ import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
 
 import { getPassphraseFromKeyChain } from 'modules/Auth/utils';
 import { languageMap } from 'constants/languages';
-import { TransactionDetails } from 'modules/Transactions/components/TransactionDetails';
+import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import ThemeContext from '../../../contexts/theme';
 import Confirm from './confirm';
 import Pending from './pending';
@@ -184,12 +184,7 @@ class LiskMessageExtension extends Component {
             return <Rejected status="rejected" sharedData={parsedData} />;
           case 'transferred':
             return (
-              <TransactionDetails
-                account={{ address: address.value }}
-                sharedData={parsedData}
-                txID={parsedData.txID}
-                language={language}
-              />
+              <TransactionDetails />
             );
           default:
             return isSender ? (
