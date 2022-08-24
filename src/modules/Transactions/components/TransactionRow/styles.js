@@ -76,13 +76,13 @@ export default function getTransactionRowStyles() {
         backgroundColor: colors.dark.mainBg,
       },
       title: {
-        color: colors.light.white,
+        color: colors.dark.white,
       },
       addressText: {
-        color: colors.light.white,
+        color: colors.dark.white,
       },
       date: {
-        color: colors.light.silverGrey,
+        color: colors.dark.silverGrey,
       },
       incomingAmount: {
         color: colors.dark.ufoGreen,

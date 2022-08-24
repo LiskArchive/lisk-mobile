@@ -36,13 +36,11 @@ export function TransactionAmount({ transaction, style }) {
 }
 
 export function TransactionStatus({ transaction }) {
-  const transactionAssets = useTransactionAssets(transaction);
-
   let children;
 
   const props = { height: 14, width: 14 };
 
-  switch (transactionAssets.executionStatus) {
+  switch (transaction.executionStatus) {
     case 'success':
       children = <CheckSvg {...props} />;
       break;

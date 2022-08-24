@@ -30,3 +30,9 @@ export const MODULE_COMMAND_NAMES = {
   reclaimLSK: `${MODULES.legacy}:${COMMANDS.reclaimLSK}`,
   registerkeys: `${MODULES.legacy}:${COMMANDS.registerkeys}`,
 };
+
+export const TRANSACTION_STATUS_NAMES = {
+  success: 'Succeeded',
+  fail: 'Failed',
+  pending: 'Pending'
+};

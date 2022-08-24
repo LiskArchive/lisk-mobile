@@ -52,7 +52,7 @@ export function useTransactionAssets(transaction) {
       assets = {
         ...assets,
         type: 'tokenTransfer',
-        title: 'Transfer',
+        title: 'Token Transfer',
         image: (theme === themes.light ? transferLight : transferDark)
       };
       break;

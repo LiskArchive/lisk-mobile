@@ -25,6 +25,8 @@ const HeaderBackButton = ({
   onRightPress,
   rightIconComponent,
   containerStyle,
+  titleStyle,
+  iconStyle,
   step,
   currentIndex,
   length,
@@ -42,14 +44,14 @@ const HeaderBackButton = ({
       style={[
         styles.container,
         safeArea ? styles.safeArea : null,
-        containerStyle,
         { width: Dimensions.get('window').width },
         alwaysLight && styles.whiteBackground,
+        containerStyle,
       ]}
     >
       {noIcon ? null : (
         <IconButton
-          style={[styles.main, styles.theme.main, style]}
+          style={[styles.main, styles.theme.main, style, iconStyle]}
           icon={icon || 'back'}
           onClick={onPress}
           color={color}
@@ -57,9 +59,16 @@ const HeaderBackButton = ({
         />
       )}
       {title && (
-          <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>
-            {t(title)}
-          </H3>
+        <H3
+          style={[
+            styles.title,
+            { color },
+            noIcon && styles.paddingLeft,
+            titleStyle
+          ]}
+        >
+          {t(title)}
+        </H3>
       )}
       {rightIcon ? (
         <IconButton
