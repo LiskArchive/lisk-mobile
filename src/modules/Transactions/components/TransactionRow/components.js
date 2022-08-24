@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 
 import { fromRawLsk } from 'utilities/conversions';
 import FormattedNumber from 'components/shared/formattedNumber';
-
+import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
+import CheckSvg from 'assets/svgs/CheckSvg';
+import SandClockSvg from 'assets/svgs/SandClockSvg';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 
 export function TransactionAmount({ transaction, style }) {
@@ -28,6 +30,34 @@ export function TransactionAmount({ transaction, style }) {
         </FormattedNumber>
       </Text>
     );
+  }
+
+  return children;
+}
+
+export function TransactionStatus({ transaction }) {
+  const transactionAssets = useTransactionAssets(transaction);
+
+  let children;
+
+  const props = { height: 14, width: 14 };
+
+  switch (transactionAssets.executionStatus) {
+    case 'success':
+      children = <CheckSvg {...props} />;
+      break;
+
+    case 'pending':
+      children = <SandClockSvg {...props}/>;
+      break;
+
+    case 'fail':
+      children = <CircleCrossedSvg {...props}/>;
+      break;
+
+    default:
+      children = null;
+      break;
   }
 
   return children;

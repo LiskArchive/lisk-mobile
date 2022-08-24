@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { colors } from 'constants/styleGuide';
 
 import { useTheme } from 'hooks/useTheme';
 import { LIMIT } from 'utilities/api/constants';
@@ -48,6 +49,7 @@ export default function TransactionList({ mode = 'overview' }) {
                 width={12}
                 direction='right'
                 style={{ marginLeft: 8 }}
+                color={colors.light.ultramarineBlue}
               />
           }}
         >

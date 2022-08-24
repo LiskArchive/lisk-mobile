@@ -7,8 +7,8 @@ export default function getTransactionRowStyles() {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingTop: 8,
-        paddingBottom: 8,
+        paddingTop: 12,
+        paddingBottom: 12,
       },
       titleContainer: {
         flexDirection: 'column',
@@ -45,12 +45,10 @@ export default function getTransactionRowStyles() {
       incomingAmount: {
         fontWeight: '500',
         fontSize: 16,
-        lineHeight: 19,
       },
       outgoingAmount: {
         fontWeight: '500',
         fontSize: 16,
-        lineHeight: 19,
       }
     },
     [themes.light]: {

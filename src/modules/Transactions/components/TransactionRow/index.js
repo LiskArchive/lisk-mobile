@@ -7,7 +7,7 @@ import { TimeStamp } from 'components/shared/imessage/txDetail/dataRows';
 
 import getTransactionRowStyles from './styles';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
-import { TransactionAmount } from './components';
+import { TransactionAmount, TransactionStatus } from './components';
 
 export default function TransactionRow({ transaction }) {
   const { styles } = useTheme({
@@ -38,9 +38,9 @@ export default function TransactionRow({ transaction }) {
       </View>
 
       <View style={[styles.statusContainer, styles.theme.statusContainer]}>
-        <TransactionAmount transaction={transaction} style={{ marginBottom: 8 }} />
+        <TransactionAmount transaction={transaction} style={{ marginBottom: 4 }} />
 
-        <Text>{transaction.executionStatus}</Text>
+        <TransactionStatus transaction={transaction}/>
       </View>
     </View>
   );
