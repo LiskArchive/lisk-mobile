@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { colors } from 'constants/styleGuide';
 
 import { useTheme } from 'hooks/useTheme';
+import { colors } from 'constants/styleGuide';
 import { LIMIT } from 'utilities/api/constants';
 import { LabelButton } from 'components/shared/toolBox/button';
 import CaretSvg from 'assets/svgs/CaretSvg';
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { useGetTransactionsQuery } from '../../api/useGetTransactionsQuery';
 import TransactionRow from '../TransactionRow';
 
@@ -18,7 +19,10 @@ export default function TransactionList({ mode = 'overview' }) {
   const {
     data: transactionsData,
     isLoading: isLoadingTransactions,
-    isError: isErrorOnTransactions
+    isError: isErrorOnTransactions,
+    fetchNextPage: fetchNextTransactionsPage,
+    hasNextPage: hasTransactionsNextPage,
+    isFetchingNextPage: isFetchingTransactionsNextPage,
   } = useGetTransactionsQuery({
     config: {
       params: { limit: mode === 'overview' ? 3 : LIMIT }
@@ -70,15 +74,17 @@ export default function TransactionList({ mode = 'overview' }) {
 
     const transactions = transactionsData.data;
 
-    console.log({ transactionsssss: transactions });
-
     return (
-      <FlatList
+      <InfiniteScrollList
         data={transactions}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+        renderItem={(item) => (
           <TransactionRow transaction={item} />
         )}
+        renderSpinner
+        fetchNextPage={fetchNextTransactionsPage}
+        hasNextPage={hasTransactionsNextPage}
+        isFetchingNextPage={isFetchingTransactionsNextPage}
       />
     );
   }

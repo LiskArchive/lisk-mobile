@@ -11,7 +11,7 @@ import getTransactionsHistoryStyles from './styles';
 export default function TransactionsHistory() {
   const navigation = useNavigation();
 
-  const { styles } = useTheme({ styles: getTransactionsHistoryStyles });
+  const { styles } = useTheme({ styles: getTransactionsHistoryStyles() });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
@@ -19,8 +19,6 @@ export default function TransactionsHistory() {
         title="Transaction history"
         onPress={navigation.goBack}
       />
-
-      {/* <Text>pico</Text> */}
 
       <TransactionList mode="full"/>
     </SafeAreaView>

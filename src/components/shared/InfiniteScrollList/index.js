@@ -38,12 +38,10 @@ export default function InfiniteScrollList(props) {
 
   const renderSpinner = props.renderSpinner || (() => <Text>Loading...</Text>);
 
-  const keyExtractor = props.keyExtractor || (({ id }) => id);
-
   return (
     <FlatList
       data={props.data}
-      keyExtractor={keyExtractor}
+      keyExtractor={props.keyExtractor}
       renderItem={renderItem}
       onEndReached={fetchMore}
       onEndReachedThreshold={props.onEndReachedThreshold || 0.2}
