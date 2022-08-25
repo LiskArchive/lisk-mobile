@@ -7,7 +7,7 @@ import {
 import { translate } from 'react-i18next';
 import modalHolder from 'utilities/modal';
 import { colors, themes } from 'constants/styleGuide';
-import { Manager as TransactionsManager, EmptyState, LoadingState } from 'modules/Accounts/components';
+import { Manager as TransactionsManager, LoadingState } from 'modules/Accounts/components';
 import InfiniteScrollView from 'components/shared/infiniteScrollView';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -18,6 +18,7 @@ import { accountUnFollowed } from 'modules/Accounts/store/actions';
 import BookmarkSvg from 'assets/svgs/BookmarkSvg';
 import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
 import useTransactionList from 'modules/Transactions/hooks/useTransactionList';
+import EmptyState from 'components/shared/EmptyState';
 import getStyles from './styles';
 import { AccountSummary } from './components';
 
@@ -107,7 +108,7 @@ const Wallet = ({
             />
           ) : (
             <EmptyState
-              style={[styles.emptyContainer, styles.theme.emptyContainer]}
+              style={{ container: [styles.emptyContainer, styles.theme.emptyContainer] }}
               refreshing={refreshing} />
           )
         }

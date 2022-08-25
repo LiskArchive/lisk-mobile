@@ -11,6 +11,7 @@ import {
 /**
  * Fetch a transaction based on provided ID.
  * Executes the API call once the hook is mounted.
+ * @param {String} id - ID of the transaction to be fetched.
  * @param {Object} config - Custom configurations for the query.
  * @param {Object} options - Custom options for the query.
  * @returns - The query state of the API call. Includes the data,

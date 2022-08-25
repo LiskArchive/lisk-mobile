@@ -75,30 +75,13 @@ export default () => ({
       justifyContent: 'center',
       padding: 20,
     },
-    emptyState: {
-      padding: boxes.boxPadding,
-      alignItems: 'center'
-    },
-    message: {
-      textAlign: 'center',
-      padding: 10,
-      marginTop: 10,
-      color: colors.light.sparkleGray,
-    },
     noActivity: {
       width: '100%',
       alignItems: 'center',
     },
-    empty: {
-      width: 260,
-      height: 129,
-    },
     loading: {
       width: 237,
       height: 220,
-    },
-    noTxTitle: {
-      paddingTop: 12,
     },
     pendingIcon: {
       width: 18,
@@ -163,9 +146,6 @@ export default () => ({
     incomingSymbol: {
       backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
-    noTxTitle: {
-      color: colors.light.slateGray,
-    },
   },
   [themes.dark]: {
     container: {
@@ -200,9 +180,6 @@ export default () => ({
     },
     incomingSymbol: {
       backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
-    },
-    noTxTitle: {
-      color: colors.dark.slateGray,
     },
   },
 });

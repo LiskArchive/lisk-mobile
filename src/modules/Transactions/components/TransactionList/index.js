@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
@@ -8,6 +9,7 @@ import { LIMIT } from 'utilities/api/constants';
 import { LabelButton } from 'components/shared/toolBox/button';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import EmptyState from 'components/shared/EmptyState';
 import { useGetTransactionsQuery } from '../../api/useGetTransactionsQuery';
 import TransactionRow from '../TransactionRow';
 
@@ -19,7 +21,7 @@ export default function TransactionList({ mode = 'overview' }) {
   const {
     data: transactionsData,
     isLoading: isLoadingTransactions,
-    isError: isErrorOnTransactions,
+    error: errorOnTransactions,
     fetchNextPage: fetchNextTransactionsPage,
     hasNextPage: hasTransactionsNextPage,
     isFetchingNextPage: isFetchingTransactionsNextPage,
@@ -42,23 +44,26 @@ export default function TransactionList({ mode = 'overview' }) {
           Transactions
         </Text>
 
-        <LabelButton
-          onClick={() => navigation.navigate('TransactionsHistory')}
-          style={styles.labelButton}
-          textStyle={styles.labelButtonText}
-          adornments={{
-            right:
-              <CaretSvg
-                height={12}
-                width={12}
-                direction='right'
-                style={{ marginLeft: 8 }}
-                color={colors.light.ultramarineBlue}
-              />
-          }}
-        >
-          View all
-        </LabelButton>
+        {!errorOnTransactions && !isLoadingTransactions && (
+          <LabelButton
+            onClick={() => navigation.navigate('TransactionsHistory')}
+            style={styles.labelButton}
+            textStyle={styles.labelButtonText}
+            adornments={{
+              right:
+                <CaretSvg
+                  height={12}
+                  width={12}
+                  direction='right'
+                  style={{ marginLeft: 8 }}
+                  color={colors.light.ultramarineBlue}
+                />
+            }}
+          >
+            View all
+          </LabelButton>
+        )}
+
       </View>
     );
   }
@@ -68,7 +73,11 @@ export default function TransactionList({ mode = 'overview' }) {
       return <Text>Loading transactions...</Text>;
     }
 
-    if (isErrorOnTransactions) {
+    if (errorOnTransactions) {
+      if (errorOnTransactions.response.status === 404) {
+        return <EmptyState message={i18next.t('You have no transactions yet.')}/>;
+      }
+
       return <Text>Error loading transactions!</Text>;
     }
 

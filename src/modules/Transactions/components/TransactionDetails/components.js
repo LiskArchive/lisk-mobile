@@ -142,7 +142,7 @@ export function TransactionDetailsBody({ transaction }) {
   );
 }
 
-function TransactionDetailsStatus({ status = 'success' }) {
+function TransactionDetailsStatus({ status }) {
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
   let color;
@@ -173,7 +173,7 @@ function TransactionDetailsStatus({ status = 'success' }) {
   return (
     <View style={[styles.statusContainer, { backgroundColor }]}>
       <Text style={[styles.statusText, { color }]}>
-        {TRANSACTION_STATUS_NAMES[status] || 'No status defined'}
+        {TRANSACTION_STATUS_NAMES[status] || 'No status'}
       </Text>
     </View>
   );

@@ -2,7 +2,7 @@
 import { rest } from 'msw';
 
 import { LIMIT, API_VERSION } from 'utilities/api/constants';
-import { mockGetTransactionsQuery, mockTransactions } from '../__fixtures__';
+import { mockGetTransactionsQuery, mockGetTransactionQuery, mockTransactions } from '../__fixtures__';
 
 export const getTransactionsMockHandler = rest.get(
   `*/api/${API_VERSION}/transactions`,
@@ -18,6 +18,15 @@ export const getTransactionsMockHandler = rest.get(
         offset,
       },
     };
+
+    return res(ctx.delay(20), ctx.json(response));
+  },
+);
+
+export const getTransactionMockHandler = rest.get(
+  `*/api/${API_VERSION}/transactions`,
+  async (_, res, ctx) => {
+    const response = mockGetTransactionQuery;
 
     return res(ctx.delay(20), ctx.json(response));
   },
