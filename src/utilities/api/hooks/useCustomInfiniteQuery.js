@@ -8,12 +8,18 @@ import {
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 
 /**
- * Adaptation of useInfiniteQuery with custom configs already set up.
- * @param {Object} config - Query function custom options.
- * @param {Object} options - Query hook general custom options.
- * @param {Array | String} keys - Query hook keys.
- * @returns - The query state of the API call. Includes the data
- * (with the array of transactions), loading state, error state, and more.
+ * Creates a custom hook for infinite queries
+ *
+ * @param {object} configuration - The custom query configuration object
+ * @param {string[]} configuration.keys - The query keys
+ * @param {object} configuration.config - The query config
+ * @param {object} configuration.config.params - The query config params
+ * @param {number} [configuration.config.params.limit] - The query limit
+ * @param {number} [configuration.config.params.offset] - The query offset
+ * @param {string} [configuration.config.params.sort] - The query sort
+ * @param {string} configuration.options - The query options
+ *
+ * @returns The query object
  */
 export const useCustomInfiniteQuery = ({
   keys,

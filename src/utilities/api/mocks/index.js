@@ -2,10 +2,10 @@
 import { rest } from 'msw';
 
 import { LIMIT, API_VERSION } from 'utilities/api/constants';
-import { mockCustomInfiniteQueryData, mockCustomInfiniteQuery } from '../__fixtures__';
+import { mockCustomInfiniteQueryData, mockCustomInfiniteQuery, mockCustomQuery } from '../__fixtures__';
 
 export const customInfiniteQueryMockHandler = rest.get(
-  `*/api/${API_VERSION}/custom-infinite-query`,
+  `*/api/${API_VERSION}/mock/custom-infinite-query`,
   async (req, res, ctx) => {
     const limit = Number(req.url.searchParams.get('limit' || LIMIT));
     const offset = Number(req.url.searchParams.get('offset') || 0);
@@ -18,6 +18,15 @@ export const customInfiniteQueryMockHandler = rest.get(
         offset,
       },
     };
+
+    return res(ctx.delay(500), ctx.json(response));
+  },
+);
+
+export const customQueryMockHandler = rest.get(
+  `*/api/${API_VERSION}/mock/custom-query`,
+  async (req, res, ctx) => {
+    const response = mockCustomQuery;
 
     return res(ctx.delay(500), ctx.json(response));
   },

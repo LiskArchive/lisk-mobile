@@ -1,11 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-
+import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_TRANSACTION_QUERY } from 'utilities/api/queries';
 import {
-  API_METHOD,
-  METHOD,
   API_URL,
-  API_BASE_URL
 } from 'utilities/api/constants';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 
@@ -22,7 +18,6 @@ export function useGetTransactionQuery(id, { config: customConfig = {}, options 
   const [currentAccount] = useCurrentAccount();
 
   const config = {
-    baseURL: API_BASE_URL,
     url: `${API_URL}/transactions`,
     method: 'get',
     event: 'get.transaction',
@@ -34,13 +29,13 @@ export function useGetTransactionQuery(id, { config: customConfig = {}, options 
     },
   };
 
-  const keys = [GET_TRANSACTION_QUERY, METHOD, config];
+  const keys = [GET_TRANSACTION_QUERY];
 
-  const query = useQuery(
+  const query = useCustomQuery({
     keys,
-    async () => API_METHOD[METHOD](config),
+    config,
     options
-  );
+  });
 
   return query;
 }
