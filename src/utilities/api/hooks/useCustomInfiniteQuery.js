@@ -3,7 +3,9 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import {
   METHOD,
   API_METHOD,
+  APPLICATION
 } from 'utilities/api/constants';
+import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 
 /**
  * Adaptation of useInfiniteQuery with custom configs already set up.
@@ -13,13 +15,15 @@ import {
  * @returns - The query state of the API call. Includes the data
  * (with the array of transactions), loading state, error state, and more.
  */
-export function useCustomInfiniteQuery({
-  config = {},
+export const useCustomInfiniteQuery = ({
+  keys,
+  config,
   options = {},
-  keys = [],
-}) {
-  const query = useInfiniteQuery(
-    keys,
+}) => {
+  const [{ chainID }] = useCurrentBlockchainApplication();
+
+  return useInfiniteQuery(
+    [chainID, config, APPLICATION, METHOD, ...keys],
     async ({ pageParam }) => API_METHOD[METHOD]({
       ...config,
       params: {
@@ -28,7 +32,14 @@ export function useCustomInfiniteQuery({
       },
     }),
     {
-      ...options,
+      getNextPageParam: (lastPage = {}) => {
+        const lastPageCount = lastPage.meta?.count || 0;
+        const lastPageOffset = lastPage.meta?.offset || 0;
+
+        const offset = lastPageCount + lastPageOffset;
+        const hasMore = offset < (lastPage.meta?.total ?? Infinity);
+        return !hasMore ? undefined : { offset };
+      },
       select: (data) => data.pages.reduce((prevPages, page) => {
         const newData = page?.data || [];
         return {
@@ -36,13 +47,7 @@ export function useCustomInfiniteQuery({
           data: prevPages.data ? [...prevPages.data, ...newData] : newData,
         };
       }),
-      getNextPageParam: (lastPage) => {
-        const offset = lastPage.meta.count + lastPage.meta.offset;
-        const hasMore = offset < lastPage.meta.total;
-        return !hasMore ? undefined : { offset };
-      },
+      ...options,
     },
   );
-
-  return query;
-}
+};

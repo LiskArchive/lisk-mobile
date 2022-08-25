@@ -9,8 +9,9 @@ export const getTransactionsMockHandler = rest.get(
   async (req, res, ctx) => {
     const limit = Number(req.url.searchParams.get('limit' || LIMIT));
     const offset = Number(req.url.searchParams.get('offset') || 0);
+    const transactionID = req.url.searchParams.get('transactionID');
 
-    const response = {
+    const response = transactionID ? mockGetTransactionQuery : {
       data: mockTransactions.slice(offset, offset + limit),
       meta: {
         ...mockGetTransactionsQuery.meta,
@@ -18,15 +19,6 @@ export const getTransactionsMockHandler = rest.get(
         offset,
       },
     };
-
-    return res(ctx.delay(20), ctx.json(response));
-  },
-);
-
-export const getTransactionMockHandler = rest.get(
-  `*/api/${API_VERSION}/transactions`,
-  async (_, res, ctx) => {
-    const response = mockGetTransactionQuery;
 
     return res(ctx.delay(20), ctx.json(response));
   },

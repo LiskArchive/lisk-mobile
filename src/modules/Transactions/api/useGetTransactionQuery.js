@@ -7,6 +7,7 @@ import {
   API_URL,
   API_BASE_URL
 } from 'utilities/api/constants';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 
 /**
  * Fetch a transaction based on provided ID.
@@ -18,6 +19,8 @@ import {
  * loading state, error state, and more.
  */
 export function useGetTransactionQuery(id, { config: customConfig = {}, options = {} } = {}) {
+  const [currentAccount] = useCurrentAccount();
+
   const config = {
     baseURL: API_BASE_URL,
     url: `${API_URL}/transactions`,
@@ -26,6 +29,7 @@ export function useGetTransactionQuery(id, { config: customConfig = {}, options 
     ...customConfig,
     params: {
       transactionID: id,
+      senderAddress: currentAccount.metadata.address,
       ...(customConfig?.params || {})
     },
   };

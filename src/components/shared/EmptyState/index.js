@@ -44,5 +44,3 @@ export default function EmptyState({
     </View>
   );
 }
-
-// t('You have no transactions yet.')
