@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import i18next from 'i18next';
 import { useGetTransactionQuery } from '../../api/useGetTransactionQuery';
 
 import getTransactionDetailsStyles from './styles';
@@ -28,7 +29,9 @@ export default function TransactionDetails({ route }) {
     if (isLoadingTransaction) {
       return (
         <View style={[styles.container, styles.theme.container]}>
-          <Text>Loading transaction...</Text>
+          <Text>
+            {i18next.t('transactions.transactionDetails.loadingText')}
+          </Text>
         </View>
       );
     }
@@ -36,7 +39,9 @@ export default function TransactionDetails({ route }) {
     if (errorOnTransaction) {
       return (
         <View style={[styles.container, styles.theme.container]}>
-          <Text>Error loading transaction!</Text>
+          <Text>
+            {i18next.t('transactions.transactionDetails.errorText')}
+          </Text>
         </View>
       );
     }
@@ -47,7 +52,7 @@ export default function TransactionDetails({ route }) {
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
       <HeaderBackButton
-        title="Transaction details"
+        title={i18next.t('transactions.transactionDetails.title')}
         onPress={navigation.goBack}
       />
 

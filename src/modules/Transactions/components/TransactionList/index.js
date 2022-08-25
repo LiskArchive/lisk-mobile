@@ -41,7 +41,7 @@ export default function TransactionList({ mode = 'overview' }) {
     return (
       <View style={[styles.header]}>
         <Text style={[styles.title, styles.theme.title]}>
-          Transactions
+          {i18next.t('transactions.transactionList.title')}
         </Text>
 
         {!errorOnTransactions && !isLoadingTransactions && (
@@ -70,15 +70,27 @@ export default function TransactionList({ mode = 'overview' }) {
 
   function renderBody() {
     if (isLoadingTransactions) {
-      return <Text style={{ marginTop: 16 }}>Loading transactions...</Text>;
+      return (
+        <Text style={{ marginTop: 16 }}>
+          {i18next.t('transactions.transactionList.loadingText')}
+        </Text>
+      );
     }
 
     if (errorOnTransactions) {
       if (errorOnTransactions.response.status === 404) {
-        return <EmptyState message={i18next.t('You have no transactions yet.')}/>;
+        return (
+          <EmptyState
+            message={i18next.t('transactions.transactionList.emptyText')}
+          />
+        );
       }
 
-      return <Text style={{ marginTop: 16 }}>Error loading transactions!</Text>;
+      return (
+        <Text style={{ marginTop: 16 }}>
+          {i18next.t('transactions.transactionList.errorText')}
+        </Text>
+      );
     }
 
     const transactions = transactionsData.data;

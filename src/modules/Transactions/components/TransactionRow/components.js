@@ -14,12 +14,12 @@ export function TransactionAmount({ transaction, style }) {
 
   const language = useSelector(state => state.settings.language);
 
-  let children;
+  let children = null;
 
   if (transactionAssets.type === 'tokenTransfer'
     && transaction.params.recipientAddress !== transaction.sender.address
   ) {
-    return (
+    children = (
       <Text style={[transactionAssets.amount.style, style]}>
         {transactionAssets.amount.sign}
 
@@ -36,7 +36,7 @@ export function TransactionAmount({ transaction, style }) {
 }
 
 export function TransactionStatus({ transaction }) {
-  let children;
+  let children = null;
 
   const props = { height: 14, width: 14 };
 
@@ -54,7 +54,6 @@ export function TransactionStatus({ transaction }) {
       break;
 
     default:
-      children = null;
       break;
   }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -16,7 +17,7 @@ export default function TransactionsHistory() {
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
       <HeaderBackButton
-        title="Transaction history"
+        title={i18next.t('transactions.transactionHistory.title')}
         onPress={navigation.goBack}
       />
 

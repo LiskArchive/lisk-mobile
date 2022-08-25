@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
+import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -37,7 +38,7 @@ export function TransactionDetailsBody({ transaction }) {
       <View style={[styles.section, styles.row]}>
         <View style={[styles.column]}>
           <Text style={[styles.label, styles.theme.label]}>
-            Sender
+            {i18next.t('transactions.transactionDetails.senderLabel')}
           </Text>
 
           <CopyToClipboard
@@ -59,7 +60,7 @@ export function TransactionDetailsBody({ transaction }) {
 
       <View style={[styles.section]}>
         <Text style={[styles.label, styles.theme.label]}>
-          Transaction Fee
+          {i18next.t('transactions.transactionDetails.transactionFeeLabel')}
         </Text>
 
         <Text style={[styles.text, styles.theme.text]}>
@@ -69,7 +70,7 @@ export function TransactionDetailsBody({ transaction }) {
 
       <View style={[styles.section]}>
         <Text style={[styles.label, styles.theme.label]}>
-          Nonce
+          {i18next.t('transactions.transactionDetails.nonceLabel')}
         </Text>
 
         <Text style={[styles.text, styles.theme.text]}>
@@ -79,7 +80,7 @@ export function TransactionDetailsBody({ transaction }) {
 
       <View style={[styles.section]}>
         <Text style={[styles.label, styles.theme.label]}>
-          Confirmations
+          {i18next.t('transactions.transactionDetails.confirmationsLabel')}
         </Text>
 
         <Text style={[styles.text, styles.theme.text]}>
@@ -89,7 +90,7 @@ export function TransactionDetailsBody({ transaction }) {
 
       <View style={[styles.section]}>
         <Text style={[styles.label, styles.theme.label]}>
-          Status
+          {i18next.t('transactions.transactionDetails.statusLabel')}
         </Text>
 
         <TransactionDetailsStatus />
@@ -97,7 +98,7 @@ export function TransactionDetailsBody({ transaction }) {
 
       <View style={[styles.section]}>
         <Text style={[styles.label, styles.theme.label]}>
-          Transaction ID
+          {i18next.t('transactions.transactionDetails.transactionIDLabel')}
         </Text>
 
         <CopyToClipboard
@@ -113,7 +114,7 @@ export function TransactionDetailsBody({ transaction }) {
 
       <View style={[styles.section]}>
         <Text style={[styles.label, styles.theme.label]}>
-          Block ID
+          {i18next.t('transactions.transactionDetails.blockIDLabel')}
         </Text>
 
         <CopyToClipboard
@@ -129,7 +130,7 @@ export function TransactionDetailsBody({ transaction }) {
 
       <View style={[styles.section]}>
         <Text style={[styles.label, styles.theme.label]}>
-          Block Height
+          {i18next.t('transactions.transactionDetails.blockHeightLabel')}
         </Text>
 
         <Text style={[styles.text, styles.theme.text]}>
@@ -188,22 +189,23 @@ function TransactionDetailsParams({ params }) {
     <View style={[styles.section]}>
       <View style={[styles.row]}>
         <Text style={[styles.label, styles.theme.label]}>
-          Parameters
+          {i18next.t('transactions.transactionDetails.paramsLabel')}
         </Text>
 
         <LabelButton
           onClick={() => setShow(prevState => !prevState)}
-          // style={{ width: 178 }}
           textStyle={styles.showParamsButton}
         >
-          {!show ? 'Expand' : 'Close'}
+          {!show
+            ? i18next.t('transactions.transactionDetails.showParamsButtonText')
+            : i18next.t('transactions.transactionDetails.hideParamsButtonText')}
         </LabelButton>
       </View>
 
       {show && (
         <>
           <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-            Amount:
+            {i18next.t('transactions.transactionDetails.amountParamsLabel')}:
           </Text>
 
           <Text style={[styles.text, styles.theme.text]}>
@@ -211,7 +213,7 @@ function TransactionDetailsParams({ params }) {
           </Text>
 
           <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-            Recipient address:
+            {i18next.t('transactions.transactionDetails.recipientAddressParamsLabel')}:
           </Text>
 
           <Text style={[styles.text, styles.theme.text]}>
@@ -219,7 +221,7 @@ function TransactionDetailsParams({ params }) {
           </Text>
 
           <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-            Data:
+            {i18next.t('transactions.transactionDetails.dataParamsLabel')}:
           </Text>
 
           <Text style={[styles.text, styles.theme.text]}>

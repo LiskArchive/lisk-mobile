@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 const MODULES = {
   token: 'token',
   auth: 'auth',
@@ -32,7 +34,7 @@ export const MODULE_COMMAND_NAMES = {
 };
 
 export const TRANSACTION_STATUS_NAMES = {
-  success: 'Succeeded',
-  fail: 'Failed',
-  pending: 'Pending'
+  success: i18next.t('transactions.statusText.success'),
+  fail: i18next.t('transactions.statusText.fail'),
+  pending: i18next.t('transactions.statusText.pending'),
 };
