@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors } from 'constants/styleGuide';
 
 import Settings from 'modules/Settings';
-import SendToken from 'modules/SendToken';
 import Home from 'modules/Accounts';
 import Bookmarks from 'modules/Bookmark';
 import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
@@ -54,7 +53,6 @@ export default function Tabs() {
             />
         }}
       />
-      <Tab.Screen name="Send" component={SendToken} options={getTabBarIcon} />
       <Tab.Screen name="Bookmarks" component={Bookmarks} options={getTabBarIcon} />
       <Tab.Screen name="Settings" component={Settings} options={getTabBarIcon} />
     </Tab.Navigator>

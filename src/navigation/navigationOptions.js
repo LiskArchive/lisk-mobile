@@ -1,9 +1,8 @@
 import React from 'react';
-import { deviceType } from 'utilities/device';
+
 import { fonts } from 'constants/styleGuide';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import HeaderPlaceholderButton from 'components/navigation/headerPlaceholderButton';
-import i18next from 'i18next';
 
 const noShadow = {
   borderBottomWidth: 0,
@@ -18,33 +17,6 @@ const genericTitle = {
 const navigationOptions = {};
 
 navigationOptions.Main = {};
-
-navigationOptions.SendStack = () => {
-  const os = deviceType();
-  let headerStyle = {
-    height: os === 'iOSx' ? 90 : 64,
-  };
-  let headerTitleStyle = {
-    marginTop: os === 'iOSx' ? 48 : 18,
-  };
-  if (os === 'android') {
-    headerStyle = {
-      height: 56,
-    };
-    headerTitleStyle = {
-      marginTop: 0,
-      fontFamily: fonts.family.heading,
-      fontSize: 18,
-      textAlign: 'center',
-    };
-  }
-  return {
-    headerStyle,
-    headerTitleStyle,
-    title: i18next.t('Recipient'),
-    headerLeft: () => <HeaderPlaceholderButton />,
-  };
-};
 
 navigationOptions.Home = {
   header: () => null,
