@@ -1,13 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { colors } from 'constants/styleGuide';
-
 import Settings from 'modules/Settings';
 import Home from 'modules/Accounts';
 import Bookmarks from 'modules/Bookmark';
 import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
-import ApplicationsSvg from 'assets/svgs/ApplicationsSvg';
 import { getTabBarIcon } from '../../helpers';
 import { navigationTabBarStyle } from '../../styles';
 
@@ -44,14 +41,7 @@ export default function Tabs() {
       <Tab.Screen
         name="Applications"
         component={BlockchainApplicationsExplorer}
-        options={{
-          tabBarIcon: ({ focused, ...props }) =>
-            <ApplicationsSvg
-              {...props}
-              color={colors.light.white}
-              variant={focused ? 'fill' : 'outline'}
-            />
-        }}
+        options={getTabBarIcon}
       />
       <Tab.Screen name="Bookmarks" component={Bookmarks} options={getTabBarIcon} />
       <Tab.Screen name="Settings" component={Settings} options={getTabBarIcon} />

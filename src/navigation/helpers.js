@@ -1,8 +1,7 @@
 import React from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
-import { colors } from 'constants/styleGuide';
-import TabBarIcon from 'components/navigation/tabBarIcon';
+import TabBarIcon from './components/TabBarIcon';
 import navigationOptions from './navigationOptions';
 
 export function getNavigationHeaderOptions({ route }) {
@@ -12,11 +11,13 @@ export function getNavigationHeaderOptions({ route }) {
 
 export function getTabBarIcon({ route }) {
   return {
-    tabBarIcon: (props) =>
-    <TabBarIcon
-      {...props}
-      name={route.name.toLowerCase()}
-      color={colors.light.white}
-    />
+    tabBarIcon: (props) => {
+      return (
+        <TabBarIcon
+          focused={props.focused}
+          name={route.name}
+        />
+      );
+    }
   };
 }

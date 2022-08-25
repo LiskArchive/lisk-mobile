@@ -2,7 +2,11 @@ import React from 'react';
 import { Svg, Path, Mask } from 'react-native-svg';
 
 export default function ApplicationsSvg({
-  color = '#000000', height, width, style, variant = 'fill'
+  color = '#000000',
+  height = 20,
+  width = 20,
+  style,
+  variant = 'fill'
 }) {
   let children = null;
 
@@ -51,8 +55,8 @@ export default function ApplicationsSvg({
 
   return (
     <Svg
-      width={`${width || 20}`}
-      height={`${height || 20}`}
+      width={width}
+      height={height}
       viewBox="0 0 20 20"
       fill="none"
       style={style}
