@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 import { deviceHeight } from 'utilities/device';
 import { setColorOpacity } from 'utilities/helpers';
 
