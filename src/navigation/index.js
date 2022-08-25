@@ -34,7 +34,7 @@ import DeleteApplication from 'modules/BlockchainApplication/components/DeleteAp
 import DeleteApplicationSuccess from 'modules/BlockchainApplication/components/DeleteApplicationSuccess';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import navigationOptions from './navigationOptions';
-import AppNavigator from './appNavigator';
+import AppNavigator from './components/AppNavigator';
 
 const MainStack = createStackNavigator();
 

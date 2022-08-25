@@ -3,7 +3,7 @@ import { deviceType } from 'utilities/device';
 import { fonts } from 'constants/styleGuide';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import HeaderPlaceholderButton from 'components/navigation/headerPlaceholderButton';
-import { t } from './helper';
+import i18next from 'i18next';
 
 const noShadow = {
   borderBottomWidth: 0,
@@ -41,7 +41,7 @@ navigationOptions.SendStack = () => {
   return {
     headerStyle,
     headerTitleStyle,
-    title: t('Recipient'),
+    title: i18next.t('Recipient'),
     headerLeft: () => <HeaderPlaceholderButton />,
   };
 };
