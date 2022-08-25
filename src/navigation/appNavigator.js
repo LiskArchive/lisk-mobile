@@ -3,8 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { colors, themes } from 'constants/styleGuide';
-import withTheme from 'components/shared/withTheme';
+import { colors } from 'constants/styleGuide';
 import MultiSignature from 'components/screens/multiSignature';
 import TabBarIcon from 'components/navigation/tabBarIcon';
 
@@ -13,8 +12,8 @@ import SendToken from 'modules/SendToken';
 import Home from 'modules/Accounts';
 import { LockedBalanceDetails } from 'modules/Accounts/components';
 import Bookmarks from 'modules/Bookmark';
-import ApplicationsSvg from '../assets/svgs/ApplicationsSvg';
-import BlockchainApplicationsExplorer from '../modules/BlockchainApplication/components/ApplicationsExplorer';
+import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
+import ApplicationsSvg from 'assets/svgs/ApplicationsSvg';
 
 import navigationOptions from './navigationOptions';
 
@@ -24,22 +23,47 @@ export const getHeaderOptions = ({ route }) => {
 };
 
 const getIcon = ({ route }) => ({
-  tabBarIcon: (props) => <TabBarIcon name={route.name.toLowerCase()} {...props} />,
+  tabBarIcon: (props) =>
+    <TabBarIcon
+      {...props}
+      name={route.name.toLowerCase()}
+      color={colors.light.white}
+    />,
 });
+
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
+};
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const Tabs = ({ theme }) => (
+const Tabs = () => (
   <Tab.Navigator
     initialRouteName="Home"
     lazy
     screenOptions={{ unmountOnBlur: false }}
     tabBarOptions={{
+      showLabel: false,
       style: {
-        backgroundColor: theme === themes.light ? colors.light.athensWhite : colors.dark.footerBg,
-        borderTopColor: theme === themes.light ? colors.light.platinumGray : colors.dark.footerBg,
-        borderTopWidth: 1,
+        backgroundColor: colors.light.ultramarineBlue,
+        width: '90%',
+        bottom: 24,
+        borderRadius: 64,
+        minWidth: 300,
+        height: 72,
+        paddingTop: 24,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
       },
     }}
   >
@@ -63,7 +87,14 @@ const Tabs = ({ theme }) => (
     <Tab.Screen
       name="Applications"
       component={BlockchainApplicationsExplorer}
-      options={{ tabBarIcon: (props) => <ApplicationsSvg {...props} /> }}
+      options={{
+        tabBarIcon: ({ focused, ...props }) =>
+          <ApplicationsSvg
+            {...props}
+            color={colors.light.white}
+            variant={focused ? 'fill' : 'outline'}
+          />
+      }}
     />
     <Tab.Screen name="Send" component={SendToken} options={getIcon} />
     <Tab.Screen name="Bookmarks" component={Bookmarks} options={getIcon} />
@@ -71,23 +102,9 @@ const Tabs = ({ theme }) => (
   </Tab.Navigator>
 );
 
-const ThemedTabs = withTheme(Tabs, {});
-
-const config = {
-  animation: 'spring',
-  config: {
-    stiffness: 1000,
-    damping: 500,
-    mass: 3,
-    overshootClamping: true,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
-  },
-};
-
 const AppNavigator = () => (
   <Stack.Navigator initialRouteName="Home" mode="modal">
-    <Stack.Screen name="Home" component={ThemedTabs} options={getHeaderOptions} />
+    <Stack.Screen name="Home" component={Tabs} options={getHeaderOptions} />
     <Stack.Screen
       name="LockedBalance"
       component={LockedBalanceDetails}
