@@ -6,7 +6,7 @@ export const navigationTabBarStyle = {
   bottom: 24,
   borderRadius: 64,
   minWidth: 300,
-  height: 72,
-  paddingTop: 24,
+  height: 64,
+  paddingTop: 26,
   alignSelf: 'center',
 };

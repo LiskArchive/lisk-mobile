@@ -6,7 +6,7 @@ import HomeSvg from 'assets/svgs/HomeSvg';
 import BookmarksSvg from 'assets/svgs/BookmarksSvg';
 import SettingsSvg from 'assets/svgs/SettingsSvg';
 
-export default function TabBarIcon({ name, focused, size = 26 }) {
+export default function TabBarIcon({ name, focused, size = 24 }) {
   const props = {
     height: size,
     width: size,
