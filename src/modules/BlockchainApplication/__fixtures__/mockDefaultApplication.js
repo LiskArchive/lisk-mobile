@@ -7,7 +7,7 @@ export const mockDefaultApplication = {
   isDefault: true,
   genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
   apis: [{
-    rest: 'https://service.lisk.com',
+    rest: 'http://104.248.241.229:9901',
     rpc: 'wss://service.lisk.com',
   }],
   explorers: ['https://lisk.observer', 'https://explorer.lisk.io'],

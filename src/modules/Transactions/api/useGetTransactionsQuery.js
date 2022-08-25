@@ -5,7 +5,7 @@ import {
 } from 'utilities/api/constants';
 import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-import { useCurrentAccount } from '../../Accounts/hooks/useAccounts/useCurrentAccount';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 
 /**
  * Fetch user account transactions in paginated mode.

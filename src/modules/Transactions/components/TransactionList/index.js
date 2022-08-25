@@ -70,7 +70,7 @@ export default function TransactionList({ mode = 'overview' }) {
 
   function renderBody() {
     if (isLoadingTransactions) {
-      return <Text>Loading transactions...</Text>;
+      return <Text style={{ marginTop: 16 }}>Loading transactions...</Text>;
     }
 
     if (errorOnTransactions) {
@@ -78,7 +78,7 @@ export default function TransactionList({ mode = 'overview' }) {
         return <EmptyState message={i18next.t('You have no transactions yet.')}/>;
       }
 
-      return <Text>Error loading transactions!</Text>;
+      return <Text style={{ marginTop: 16 }}>Error loading transactions!</Text>;
     }
 
     const transactions = transactionsData.data;
