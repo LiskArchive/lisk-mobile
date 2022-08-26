@@ -2,7 +2,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  View, SafeAreaView, TouchableOpacity
+  View, SafeAreaView, TouchableOpacity, RefreshControl
 } from 'react-native';
 import { translate } from 'react-i18next';
 import modalHolder from 'utilities/modal';
@@ -107,9 +107,13 @@ const Wallet = ({
               noTitle
             />
           ) : (
-            <EmptyState
-              style={{ container: [styles.emptyContainer, styles.theme.emptyContainer] }}
-              refreshing={refreshing} />
+            <RefreshControl refreshing={refreshing}>
+              <EmptyState
+                style={{
+                  container: [styles.emptyContainer, styles.theme.emptyContainer]
+                }}
+              />
+            </RefreshControl>
           )
         }
       />

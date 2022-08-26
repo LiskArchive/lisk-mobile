@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Platform, View, Image, ActivityIndicator
-} from 'react-native';
+import { View, Image } from 'react-native';
 
 import { themes } from 'constants/styleGuide';
 import { useTheme } from 'hooks/useTheme';
@@ -11,7 +9,6 @@ import { P } from 'components/shared/toolBox/typography';
 import getEmptyStateStyles from './styles';
 
 export default function EmptyState({
-  refreshing,
   message,
   style = {}
 }) {
@@ -19,28 +16,20 @@ export default function EmptyState({
 
   return (
     <View style={[styles.container, style?.container]} >
-      <View style={[styles.activityIndicator, style?.activityIndicator]}>
-        {Platform.OS === 'ios' && refreshing && (
-          <ActivityIndicator size="large" />
-        )}
-      </View>
+      <Image
+        style={[styles.image, style?.image]}
+        source={theme === themes.light ? emptyHomeLight : emptyHomeDark}
+      />
 
-      <View style={[styles.noActivity, style?.noActivity]}>
-        <Image
-          style={[styles.image, style?.image]}
-          source={theme === themes.light ? emptyHomeLight : emptyHomeDark}
-        />
-
-        <P
-          style={[
-            styles.messageText,
-            styles.theme.messageText,
-            style?.messageText
-          ]}
-        >
-          {message}
-        </P>
-      </View>
+      <P
+        style={[
+          styles.messageText,
+          styles.theme.messageText,
+          style?.messageText
+        ]}
+      >
+        {message}
+      </P>
     </View>
   );
 }

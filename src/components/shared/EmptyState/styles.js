@@ -8,14 +8,6 @@ export default function getEmptyStateStyles() {
         justifyContent: 'center',
         flex: 1,
       },
-      activityIndicator: {
-        position: 'absolute',
-        top: 0,
-      },
-      noActivity: {
-        width: '100%',
-        alignItems: 'center',
-      },
       image: {
         width: 260,
         height: 129,
@@ -25,7 +17,7 @@ export default function getEmptyStateStyles() {
       },
     },
     [themes.light]: {
-      emptyState: {
+      container: {
         backgroundColor: colors.light.white,
       },
       messageText: {
@@ -33,7 +25,7 @@ export default function getEmptyStateStyles() {
       },
     },
     [themes.dark]: {
-      emptyState: {
+      container: {
         backgroundColor: colors.dark.mainBg,
       },
       messageText: {
