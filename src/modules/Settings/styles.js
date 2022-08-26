@@ -3,11 +3,10 @@ import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {
-    container: {
-      flex: 1,
-    },
     innerContainer: {
-      padding: boxes.boxPadding,
+      paddingTop: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     group: {
       marginBottom: 20,
@@ -30,9 +29,6 @@ export default () => ({
   },
 
   [themes.light]: {
-    container: {
-      backgroundColor: colors.light.white,
-    },
     subHeader: {
       color: colors.light.maastrichtBlue,
     },
@@ -45,9 +41,6 @@ export default () => ({
   },
 
   [themes.dark]: {
-    container: {
-      backgroundColor: colors.dark.mainBg,
-    },
     subHeader: {
       color: colors.dark.white,
     },

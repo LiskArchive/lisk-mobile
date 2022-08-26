@@ -65,7 +65,7 @@ const MainNavigator = () => {
   };
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider >
       <NavigationContainer theme={themeColors}>
         <MainStack.Navigator initialRouteName="AuthMethod">
           <MainStack.Screen

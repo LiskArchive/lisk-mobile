@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
 import ModalBox from 'react-native-modalbox';
 import { translate } from 'react-i18next';
 
@@ -16,6 +15,7 @@ import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainAppli
 import getBlockchainApplicationsExplorerStyles from './styles';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
+import NavigationSafeAreaView from '../../../../components/navigation/NavigationSafeAreaView';
 
 /**
  *
@@ -73,7 +73,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
   };
 
   return (
-    <View style={[styles.wrapper, styles.theme.wrapper]}>
+    <NavigationSafeAreaView>
       <HeaderBackButton
         title={t('application.explore.title')}
         noIcon
@@ -119,7 +119,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
           }}
         />
       </ModalBox>
-    </View>
+    </NavigationSafeAreaView>
   );
 }
 

@@ -12,6 +12,8 @@ import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import app from 'constants/app';
+import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
+import HeaderBackButton from 'components/shared/headerBackButton';
 import { ItemTitle } from './components';
 import getStyles from './styles';
 import PrivacySvg from '../../assets/svgs/PrivacySvg';
@@ -62,7 +64,12 @@ const Settings = ({
     <P style={{ color: targetStateLabel[1] || colors[theme].platinum }}>{targetStateLabel[0]}</P>
   );
   return (
-    <View testID="settings-screen" style={[styles.container, styles.theme.container]}>
+    <NavigationSafeAreaView>
+       <HeaderBackButton
+        title={t('Settings')}
+        noIcon
+      />
+
       <ScrollView style={styles.innerContainer}>
         <View style={styles.group}>
           <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Security')}</H4>
@@ -175,7 +182,7 @@ const Settings = ({
       {Platform.OS === 'android' && Platform.Version < 23 ? (
         <FingerprintOverlay onModalClosed={hideDialog} error={error} show={show} />
       ) : null}
-    </View>
+    </NavigationSafeAreaView>
   );
 };
 
