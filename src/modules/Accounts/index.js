@@ -12,11 +12,11 @@ import SwitchSvg from 'assets/svgs/SwitchSvg';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { settingsUpdated } from 'modules/Settings/actions';
+import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
 import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
 import TokensTab from './components/TokensTab';
 import getStyles from './styles';
-import NavigationSafeAreaView from '../../components/navigation/NavigationSafeAreaView';
 
 /**
  * This component would be mounted first and would be used to config and redirect

@@ -14,9 +14,9 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actio
 import app from 'constants/app';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import HeaderBackButton from 'components/shared/headerBackButton';
+import PrivacySvg from 'assets/svgs/PrivacySvg';
 import { ItemTitle } from './components';
 import getStyles from './styles';
-import PrivacySvg from '../../assets/svgs/PrivacySvg';
 
 // eslint-disable-next-line max-statements
 const Settings = ({
