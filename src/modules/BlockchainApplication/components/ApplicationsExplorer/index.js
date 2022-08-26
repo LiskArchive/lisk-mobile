@@ -4,6 +4,7 @@ import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { colors, themes } from 'constants/styleGuide';
+import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import Icon from 'components/shared/toolBox/icon';
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -15,7 +16,6 @@ import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainAppli
 import getBlockchainApplicationsExplorerStyles from './styles';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
-import NavigationSafeAreaView from '../../../../components/navigation/NavigationSafeAreaView';
 
 /**
  *

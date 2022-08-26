@@ -6,7 +6,7 @@ import Home from 'modules/Accounts';
 import Bookmarks from 'modules/Bookmark';
 import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
 import { getTabBarIcon } from '../../helpers';
-import { navigationTabBarStyle } from '../../styles';
+import { getNavigationTabBarStyles } from '../../styles';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +18,7 @@ export default function Tabs() {
       screenOptions={{ unmountOnBlur: false }}
       tabBarOptions={{
         showLabel: false,
-        style: navigationTabBarStyle,
+        style: getNavigationTabBarStyles(),
       }}
     >
       <Tab.Screen
