@@ -13,7 +13,7 @@ export function useBlockchainApplicationExplorer() {
   const { pins, checkPinByChainId } = usePinBlockchainApplication();
 
   const applications = useMemo(() => {
-    const data = getApplicationsMetaQuery.data?.map((app) => ({
+    const data = getApplicationsMetaQuery.data.data?.map((app) => ({
       ...app,
       isPinned: checkPinByChainId(app.chainID),
     }));

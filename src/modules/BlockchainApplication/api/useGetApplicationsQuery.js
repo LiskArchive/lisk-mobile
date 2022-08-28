@@ -1,114 +1,34 @@
-/* eslint-disable max-statements */
-import { useState, useEffect, useRef } from 'react';
-
-import { mockApplications } from '../__fixtures__';
-
-/**
- * @typedef {Object} GetBlockchainApplicationsMetaQuery
- * @property {Array} data - The blockchain applications returned data.
- * @property {Object} meta - The metadata of the blockchain applications data
- *  (total, count and offset).
- * @property {boolean} isLoading - Flag that indicates if the initial data
- * request is loading or not.
- * @property {boolean} isFetching - Flag that indicates if an additional
- * network request is being executed.
- * @property {Object} error - An error object, if any request to fetch
- * the data fails.
- * @property {Function} refetch - Callback to fetch all data again from server.
- * @property {Function} fetMore - Callback to fetch paginated data.
- */
+import {
+  LIMIT,
+  API_URL,
+  API_BASE_URL
+} from 'utilities/api/constants';
+import { GET_APPLICATIONS_QUERY } from 'utilities/api/queries';
+import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 
 /**
- * Hook for fetching blockchain applications metadata and manage the network
- * request state.
- * @returns {...GetBlockchainApplicationsMetaQuery} The query state.
+ * Fetch user account applications in paginated mode.
+ * Executes the API call once the hook is mounted.
+ * @param {Object} config - Custom configurations for the query.
+ * @param {Object} options - Custom options for the query.
+ * @returns - The query state of the API call. Includes the data
+ * (with the array of applications), loading state, error state, and more.
  */
-export function useGetApplicationsMetaQuery() {
-  // TODO: Replace data, isLoading and error
-  // by React Query when package integration is done.
-  const [data, setData] = useState(undefined);
-  const [meta, setMeta] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState(undefined);
-  const [page, setPage] = useState(0);
-
-  const timer = useRef();
-
-  function fetchData() {
-    // TODO: Replace with real API call when backend is available.
-    return new Promise((resolve) => {
-      timer.current = setTimeout(() => {
-        resolve({
-          data: mockApplications,
-          meta: {
-            count: 10,
-            offset: 0,
-            total: 150,
-          },
-        });
-      }, 250);
-    });
-  }
-
-  // TODO: Replace with real API call when backend is available.
-  function fetchMoreData() {
-    if (!isLoading) {
-      setIsFetching(true);
-
-      new Promise((resolve) => {
-        timer.current = setTimeout(() => {
-          resolve({
-            data: mockApplications,
-            meta: {
-              count: 10,
-              offset: page + 1,
-              total: 150,
-            },
-          });
-        }, 250);
-      })
-        .then((res) => {
-          const newData = res.data.map((app, index) => ({
-            ...app,
-            chainId: `${app.chainID}-refetch${index}`,
-          }));
-
-          setData([...data, ...newData]);
-          setMeta(res.meta);
-          setPage(page + 1);
-          setIsFetching(false);
-        })
-        .catch((e) => {
-          setError(e);
-          setIsFetching(false);
-        });
-    }
-  }
-
-  useEffect(() => {
-    fetchData()
-      .then((res) => {
-        setData(res.data);
-        setMeta(res.meta);
-        setIsLoading(false);
-      })
-      .catch((e) => setError(e));
-
-    return () => {
-      clearInterval(timer.current);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return {
-    data,
-    meta,
-    isLoading,
-    error,
-    isError: !!error,
-    refetch: fetchData,
-    fetchMore: fetchMoreData,
-    isFetching,
+export function useGetApplicationsMetaQuery({ config: customConfig = {}, options = {} } = {}) {
+  const config = {
+    baseURL: API_BASE_URL,
+    url: `${API_URL}/blockchain/apps`,
+    method: 'get',
+    ...customConfig,
+    params: {
+      limit: LIMIT,
+      ...(customConfig?.params || {})
+    },
   };
+
+  const keys = [GET_APPLICATIONS_QUERY];
+
+  const query = useCustomInfiniteQuery({ config, options, keys });
+
+  return query;
 }
