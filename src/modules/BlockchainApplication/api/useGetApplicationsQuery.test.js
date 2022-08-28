@@ -1,32 +1,32 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { queryWrapper } from 'tests/queryWrapper';
 
 import { mockApplications } from '../__fixtures__';
 
 import { useGetApplicationsMetaQuery } from './useGetApplicationsQuery';
 
 describe('useGetApplicationsMetaQuery hook', () => {
-  it('should return loading state and empty data before mounting', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useGetApplicationsMetaQuery());
-
-    expect(result.current).toMatchObject({
-      data: undefined,
-      isLoading: true,
-      error: undefined,
-    });
-
-    await waitForNextUpdate();
-  });
-
-  it('should return the correct data after mounting', async () => {
+  it('should fetch data correctly', async () => {
     const
-      { result, waitForNextUpdate } = renderHook(() => useGetApplicationsMetaQuery());
+      { result, waitForNextUpdate, waitFor } = renderHook(() =>
+        useGetApplicationsMetaQuery(), { wrapper: queryWrapper });
 
     await waitForNextUpdate();
 
-    expect(result.current).toMatchObject({
+    expect(result.current.isLoading).not.toBeTruthy();
+
+    await waitFor(() => result.current.isFetched);
+
+    expect(result.current.isSuccess).toBeTruthy();
+
+    const expectedResponse = {
       data: mockApplications,
-      isLoading: false,
-      error: undefined,
-    });
+      meta: {
+        count: 20,
+        offset: 0,
+      },
+    };
+
+    expect(result.current.data).toEqual(expectedResponse);
   });
 });
