@@ -6,6 +6,7 @@ import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Stepper from 'components/shared/Stepper';
 
+import { useNavigation } from '@react-navigation/native';
 import { getSendTokenStyles } from './styles';
 import SendTokenApplicationsStep from './components/SelectApplicationsStep';
 import SendTokenSelectTokenStep from './components/SelectTokenStep';
@@ -13,7 +14,9 @@ import SendTokenSummaryStep from './components/SummaryStep';
 import useSendTokenForm from './hooks/useSendTokenForm';
 import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
 
-export default function SendToken({ navigation, route }) {
+export default function SendToken({ route }) {
+  const navigation = useNavigation();
+
   const account = useSelector(state => state.account);
 
   const { styles } = useTheme({
@@ -43,7 +46,7 @@ export default function SendToken({ navigation, route }) {
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
         title="Send token"
-        noIcon
+        onPress={navigation.goBack}
         containerStyle={{ marginBottom: 24 }}
       />
 

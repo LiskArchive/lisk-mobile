@@ -29,12 +29,13 @@ import SwitchApplication from 'modules/BlockchainApplication/components/SwitchAp
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
 import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
+import SendToken from 'modules/SendToken';
 import Request from 'modules/Request';
 import DeleteApplication from 'modules/BlockchainApplication/components/DeleteApplication';
 import DeleteApplicationSuccess from 'modules/BlockchainApplication/components/DeleteApplicationSuccess';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import navigationOptions from './navigationOptions';
-import AppNavigator from './appNavigator';
+import AppNavigator from './components/AppNavigator';
 
 const MainStack = createStackNavigator();
 
@@ -64,7 +65,7 @@ const MainNavigator = () => {
   };
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider >
       <NavigationContainer theme={themeColors}>
         <MainStack.Navigator initialRouteName="AuthMethod">
           <MainStack.Screen
@@ -179,6 +180,11 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="PassphraseBackup"
             component={PassphraseBackup}
+            options={navigationOptions.NoHeader}
+          />
+          <MainStack.Screen
+            name="Send"
+            component={SendToken}
             options={navigationOptions.NoHeader}
           />
           <MainStack.Screen

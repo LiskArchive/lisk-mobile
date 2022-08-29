@@ -71,9 +71,6 @@ export default () => ({
     }
   },
   [themes.light]: {
-    homeContainer: {
-      backgroundColor: colors.light.white
-    },
     username: {
       color: colors.light.platinumGray
     },
@@ -82,9 +79,6 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    homeContainer: {
-      backgroundColor: colors.dark.mainBg
-    },
     username: {
       color: colors.light.platinumGray
     },
