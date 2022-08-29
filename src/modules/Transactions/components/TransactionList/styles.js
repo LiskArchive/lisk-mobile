@@ -8,12 +8,31 @@ export default function getTransactionListStyles() {
         paddingTop: boxes.boxPadding,
         paddingBottom: boxes.boxPadding,
         paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding
+        paddingRight: boxes.boxPadding,
+      },
+      header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
       },
       title: {
         fontWeight: '500',
         fontSize: 14,
-        lineHeight: 18,
+      },
+      labelButton: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      labelButtonText: {
+        fontSize: 12,
+      },
+
+      transactionAddressText: {
+        fontWeight: '500',
+        fontSize: 16,
+        lineHeight: 19,
       }
     },
     [themes.light]: {
@@ -23,12 +42,18 @@ export default function getTransactionListStyles() {
       title: {
         color: colors.light.zodiacBlue,
       },
+      transactionAddressText: {
+        color: colors.light.zodiacBlue,
+      },
     },
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
       },
       title: {
+        color: colors.light.white,
+      },
+      transactionAddressText: {
         color: colors.light.white,
       },
     },

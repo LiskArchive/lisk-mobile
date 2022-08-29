@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { colors } from 'constants/styleGuide';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
-import { TransactionDetails } from 'modules/Transactions/components/TransactionDetails';
+import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import Wallet from 'modules/Wallet';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
@@ -34,6 +34,7 @@ import Request from 'modules/Request';
 import DeleteApplication from 'modules/BlockchainApplication/components/DeleteApplication';
 import DeleteApplicationSuccess from 'modules/BlockchainApplication/components/DeleteApplicationSuccess';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
+import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './components/AppNavigator';
 
@@ -162,9 +163,14 @@ const MainNavigator = () => {
             options={navigationOptions.PrivacyPolicy}
           />
           <MainStack.Screen
-            name="TxDetail"
+            name="TransactionsHistory"
+            component={TransactionsHistory}
+            options={navigationOptions.TransactionsHistory}
+          />
+          <MainStack.Screen
+            name="TransactionDetails"
             component={TransactionDetails}
-            options={navigationOptions.TxDetail}
+            options={navigationOptions.TransactionDetails}
           />
           <MainStack.Screen name="Wallet" component={Wallet} options={navigationOptions.Wallet} />
           <MainStack.Screen

@@ -3,7 +3,7 @@ import { Svg, Path } from 'react-native-svg';
 
 export default function CaretSvg({
   direction = 'left',
-  color = '#000000',
+  color = 'currentColor',
   height = 20,
   width = 20,
   style,
