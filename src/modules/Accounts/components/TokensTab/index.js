@@ -9,10 +9,10 @@ import { colors } from 'constants/styleGuide';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import { useNavigation } from '@react-navigation/native';
+import EmptyState from 'components/shared/EmptyState';
 import tokensTabStyles from './styles';
 import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
 import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens';
-import EmptyState from '../EmptyState';
 
 const TokenItem = ({ token }) => {
   const { styles } = useTheme({ styles: tokensTabStyles });

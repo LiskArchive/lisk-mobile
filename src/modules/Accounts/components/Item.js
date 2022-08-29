@@ -63,7 +63,7 @@ const Item = ({
   }, []);
 
   const showDetail = () => {
-    navigate('TxDetail', { tx, account, discrete });
+    navigate('TransactionDetails', { transactionId: tx.id, account, discrete });
   };
 
   const getAddressText = address => {

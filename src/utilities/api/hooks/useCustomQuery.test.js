@@ -7,8 +7,8 @@ import {
 } from 'utilities/api/constants';
 import { queryWrapper } from 'tests/queryWrapper';
 import * as useCurrentBlockchainApplication from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
-import { mockCustomInfiniteQuery } from '../__fixtures__';
-import { useCustomInfiniteQuery } from './useCustomInfiniteQuery';
+import { mockCustomQuery } from '../__fixtures__';
+import { useCustomQuery } from './useCustomQuery';
 
 jest.useRealTimers();
 
@@ -18,20 +18,20 @@ jest.spyOn(useCurrentBlockchainApplication, 'useCurrentBlockchainApplication').m
   }]
 );
 
-describe('useCustomInfiniteQuery hook', () => {
+describe('useCustomQuery hook', () => {
   const config = {
     baseURL: API_BASE_URL,
-    url: `${API_URL}/mock/custom-infinite-query`,
+    url: `${API_URL}/mock/custom-query`,
     method: 'get',
     params: {
       limit: LIMIT,
     },
   };
-  const keys = ['CUSTOM_INFINITE_QUERY'];
+  const keys = ['CUSTOM_QUERY'];
 
   it('fetch data correctly', async () => {
     const { result, waitFor } = renderHook(
-      () => useCustomInfiniteQuery({ config, keys }), { wrapper: queryWrapper }
+      () => useCustomQuery({ config, keys }), { wrapper: queryWrapper }
     );
 
     expect(result.current.isLoading).toBeTruthy();
@@ -40,14 +40,7 @@ describe('useCustomInfiniteQuery hook', () => {
 
     expect(result.current.isSuccess).toBeTruthy();
 
-    const expectedResponse = {
-      data: mockCustomInfiniteQuery.data.slice(0, LIMIT),
-      meta: {
-        ...mockCustomInfiniteQuery.meta,
-        count: LIMIT,
-        offset: 0,
-      },
-    };
+    const expectedResponse = mockCustomQuery;
 
     expect(result.current.data).toEqual(expectedResponse);
   });

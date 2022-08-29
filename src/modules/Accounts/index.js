@@ -17,6 +17,7 @@ import ApplicationSwitcher from '../BlockchainApplication/components/Application
 import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
 import TokensTab from './components/TokensTab';
 import getStyles from './styles';
+import TransactionList from '../Transactions/components/TransactionList';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -86,6 +87,8 @@ const Home = ({ navigation }) => {
         </View>
         <TokensTab />
       </View>
+
+      <TransactionList />
     </NavigationSafeAreaView>
   );
 };

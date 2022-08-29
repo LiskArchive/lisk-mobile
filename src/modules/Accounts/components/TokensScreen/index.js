@@ -8,9 +8,10 @@ import { fromRawLsk } from 'utilities/conversions';
 import { useTheme } from 'hooks/useTheme';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import EmptyState from 'components/shared/EmptyState';
 import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
 import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens';
-import EmptyState from '../EmptyState';
+
 import tokensTabStyles from './styles';
 
 const TokenItem = ({ token }) => {

@@ -2,10 +2,10 @@ import {
   METHOD,
   LIMIT,
   API_URL,
-  API_BASE_URL
 } from 'utilities/api/constants';
 import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 
 /**
  * Fetch user account transactions in paginated mode.
@@ -16,14 +16,16 @@ import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQue
  * (with the array of transactions), loading state, error state, and more.
  */
 export function useGetTransactionsQuery({ config: customConfig = {}, options = {} } = {}) {
+  const [currentAccount] = useCurrentAccount();
+
   const config = {
-    baseURL: API_BASE_URL,
     url: `${API_URL}/transactions`,
     method: 'get',
     event: 'get.transactions',
     ...customConfig,
     params: {
       limit: LIMIT,
+      senderAddress: currentAccount.metadata.address,
       ...(customConfig?.params || {})
     },
   };

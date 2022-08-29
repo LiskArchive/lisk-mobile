@@ -7,12 +7,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as useCurrentAccount from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { mockApplications, mockMappedApplications } from 'modules/BlockchainApplication/__fixtures__';
 import { mockSavedAccounts } from 'modules/Accounts/__fixtures__';
-import { mockGetTransactionsQuery } from '../__fixtures__';
-import { useGetTransactionsQuery } from './useGetTransactionsQuery';
+import { mockGetTransactionQuery, mockTransactions } from '../__fixtures__';
+import { useGetTransactionQuery } from './useGetTransactionQuery';
+
+const queryClient = new QueryClient();
 
 jest.useRealTimers();
 
-const queryClient = new QueryClient();
 const mockStore = configureMockStore();
 const mockDispatch = jest.fn();
 const mockState = {
@@ -42,10 +43,7 @@ jest.spyOn(useCurrentAccount, 'useCurrentAccount').mockImplementation(
   ])
 );
 
-describe('useGetTransactionsQuery hook', () => {
-  const limit = 2;
-  const config = { params: { limit } };
-
+describe('useGetTransactionQuery hook', () => {
   const store = mockStore(mockState);
 
   const wrapper = ({ children }) => (
@@ -56,7 +54,7 @@ describe('useGetTransactionsQuery hook', () => {
 
   it('fetch data correctly', async () => {
     const { result, waitFor } = renderHook(
-      () => useGetTransactionsQuery({ config }), { wrapper }
+      () => useGetTransactionQuery(mockTransactions[0].id), { wrapper }
     );
 
     expect(result.current.isLoading).toBeTruthy();
@@ -65,14 +63,7 @@ describe('useGetTransactionsQuery hook', () => {
 
     expect(result.current.isSuccess).toBeTruthy();
 
-    const expectedResponse = {
-      data: mockGetTransactionsQuery.data.slice(0, limit),
-      meta: {
-        ...mockGetTransactionsQuery.meta,
-        count: limit,
-        offset: 0,
-      },
-    };
+    const expectedResponse = mockGetTransactionQuery;
 
     expect(result.current.data).toEqual(expectedResponse);
   });

@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import apiClient from 'utilities/api/APIClient';
 import { selectCurrentApplication } from '../store/selectors';
 import { setCurrentApplication as setCurrentApplicationAction } from '../store/actions';
-import apiClient from '../../../utilities/api/APIClient';
 
 /**
  * Hook that manages the blockchain application currently logged in

@@ -118,7 +118,6 @@
   "Sign out": "Sign out",
   "Store your passphrase:": "Store your passphrase:",
   "Tap on the QR Code to share it.": "Tap on the QR Code to share it.",
-  "Transaction Submitted": "Transaction Submitted",
   "Your transaction has been submitted and will be confirmed in a few moments.": "Your transaction has been submitted and will be confirmed in a few moments.",
   "The Avatar represents the address, making it easy to recognize.": "The Avatar represents the address, making it easy to recognize.",
   "The address is unique and can’t be changed. It’s yours. Find it in your home page.": "The address is unique and can’t be changed. It’s yours. Find it in your home page.",
@@ -128,9 +127,6 @@
   "The only way to access your account.": "The only way to access your account.",
   "This is not your second passphrase.": "This is not your second passphrase.",
   "This is your passphrase:": "This is your passphrase:",
-  "Transaction Fee": "Transaction Fee",
-  "Transaction ID": "Transaction ID",
-  "Transaction not found": "Transaction not found",
   "Transfer your LSK tokens easily to other accounts by simply scanning their QR code.": "Transfer your LSK tokens easily to other accounts by simply scanning their QR code.",
   "terms and conditions.": "terms and conditions.",
   "Verification": "Verification",
@@ -171,7 +167,6 @@
   "Select your currency": "Select your currency",
   "Select your language": "Select your language",
   "Settings": "Settings",
-  "Transaction Details": "Transaction Details",
   "Connection error, try later!": "Connection error, try later!",
   "Create it now": "Create it now",
   "Don’t have a Lisk Account?": "Don’t have a Lisk Account?",
@@ -216,8 +211,6 @@
   "Remind me later": "Remind me later",
   "Store your passphrase carefully": "Store your passphrase carefully",
   "Tap and fill in the blanks:": "Tap and fill in the blanks:",
-  "Transaction fee": "Transaction fee",
-  "You have no transactions yet.": "You have no transactions yet.",
   "Available Balance": "Available Balance",
   "Activity history": "Activity history",
   "Token transfer": "Token transfer",
@@ -489,6 +482,42 @@
       "viewAll": "View All",
       "request": "Request",
       "send": "Send"
+    }
+  },
+  "transactions" : {
+    "transactionDetails": {
+      "loadingText": "Loading transaction...",
+      "errorText": "Error loading transaction!",
+      "title": "Transaction details",
+      "senderLabel": "Sender",
+      "transactionFeeLabel": "Transaction Fee",
+      "nonceLabel": "Nonce",
+      "confirmationsLabel": "Confirmations",
+      "statusLabel": "Status",
+      "transactionIDLabel": "Transaction ID",
+      "blockIDLabel": "Block ID",
+      "blockHeightLabel": "Block Height",
+      "paramsLabel": "Parameters",
+      "showParamsButtonText": "Expand",
+      "hideParamsButtonText": "Close",
+      "amountParamsLabel": "Amount",
+      "recipientAddressParamsLabel": "Recipient address",
+      "dataParamsLabel": "Data"
+    },
+    "transactionList": {
+      "loadingText": "Loading transactions...",
+      "errorText": "Error loading transactions!",
+      "emptyText": "You have no transactions yet.",
+      "title": "Transactions",
+      "goToTransactionHistoryButtonText": "View all"
+    },
+    "transactionHistory": {
+      "title": "Transaction history"
+    },
+    "statusText": {
+      "success": "Succeeded",
+      "fail": "Failed",
+      "pending": "Pending"
     }
   }
 }

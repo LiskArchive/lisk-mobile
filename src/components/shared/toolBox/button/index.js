@@ -19,6 +19,7 @@ const BaseButton = (props) => {
     noPredefinedStyle,
     onClick,
     onPress,
+    adornments
   } = props;
 
   return (
@@ -32,6 +33,8 @@ const BaseButton = (props) => {
       ]}
       disabled={disabled}
     >
+      {adornments?.left}
+
       <Text style={[
         noPredefinedStyle ? null : styles.buttonText,
         styles.theme.buttonText,
@@ -39,6 +42,8 @@ const BaseButton = (props) => {
       ]}>
         {children || title}
       </Text>
+
+      {adornments?.right}
     </TouchableOpacity>
   );
 };
