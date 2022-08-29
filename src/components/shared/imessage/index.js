@@ -183,9 +183,7 @@ class LiskMessageExtension extends Component {
           case 'rejected':
             return <Rejected status="rejected" sharedData={parsedData} />;
           case 'transferred':
-            return (
-              <TransactionDetails />
-            );
+            return <TransactionDetails transactionId={parsedData.txID}/>;
           default:
             return isSender ? (
               <Pending sharedData={parsedData} />

@@ -10,10 +10,10 @@ import { useGetTransactionQuery } from '../../api/useGetTransactionQuery';
 import getTransactionDetailsStyles from './styles';
 import { TransactionDetailsBody } from './components';
 
-export default function TransactionDetails({ route }) {
+export default function TransactionDetails(props) {
   const navigation = useNavigation();
 
-  const { transactionId } = route.params;
+  const transactionId = props.route.params.transactionId || props.transactionId;
 
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
