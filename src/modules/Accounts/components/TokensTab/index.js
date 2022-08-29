@@ -16,6 +16,7 @@ import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens';
 
 const TokenItem = ({ token }) => {
   const { styles } = useTheme({ styles: tokensTabStyles });
+  const tokenBalance = Number(fromRawLsk(token.availableBalance)).toLocaleString();
   return <View style={[styles.tokenItem]} >
     <View style={styles.row} >
       <View style={[styles.row, styles.alignCenter]} >
@@ -24,8 +25,9 @@ const TokenItem = ({ token }) => {
       </View>
       <View style={[styles.flex, styles.rightContent]} >
         <H3 style={[styles.theme.tokenTitle]} >
-          {Number(fromRawLsk(token.availableBalance)).toLocaleString()}
+        {tokenBalance}
         </H3>
+        {/* TODO: Implement currency conversion */}
         <P style={[styles.currency, styles.theme.currency]} >25USD</P>
       </View>
     </View>
