@@ -4,7 +4,7 @@ import { setColorOpacity } from 'utilities/helpers';
 export default {
   common: {
     container: {
-      marginVertical: 20,
+      marginTop: 20,
     },
     flex: {
       flex: 1,
@@ -26,7 +26,7 @@ export default {
     },
     tokenContainer: {
       margin: 10,
-      marginTop: 20,
+      // marginTop: 20,
     },
     tokenItem: {
       borderWidth: 1,

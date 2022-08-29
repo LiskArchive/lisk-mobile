@@ -5,7 +5,6 @@ export default function getTransactionListStyles() {
     common: {
       container: {
         flex: 1,
-        paddingTop: boxes.boxPadding,
         paddingBottom: boxes.boxPadding,
         paddingLeft: boxes.boxPadding,
         paddingRight: boxes.boxPadding,

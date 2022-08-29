@@ -78,7 +78,7 @@ export default function TransactionList({ mode = 'overview' }) {
     }
 
     if (errorOnTransactions) {
-      if (errorOnTransactions.response.status === 404) {
+      if (errorOnTransactions.response?.status === 404) {
         return (
           <EmptyState
             message={i18next.t('transactions.transactionList.emptyText')}

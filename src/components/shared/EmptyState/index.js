@@ -15,17 +15,20 @@ export default function EmptyState({
 
   return (
     <View style={[styles.container, style?.container]} >
-      <EmptyStateSvg />
-
-      <P
-        style={[
-          styles.messageText,
-          styles.theme.messageText,
-          style?.messageText
-        ]}
-      >
-        {message}
-      </P>
+      <View>
+        <EmptyStateSvg />
+      </View>
+      <View>
+        <P
+          style={[
+            styles.messageText,
+            styles.theme.messageText,
+            style?.messageText
+          ]}
+        >
+          {message}
+        </P>
+      </View>
     </View>
   );
 }

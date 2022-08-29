@@ -86,9 +86,8 @@ const Home = ({ navigation }) => {
           </View>
         </View>
         <TokensTab />
+        <TransactionList />
       </View>
-
-      <TransactionList />
     </NavigationSafeAreaView>
   );
 };
