@@ -23,7 +23,6 @@ import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
 import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
 import ManageAccount from 'modules/Auth/ManageAccount';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
-import SwitchAccount from 'modules/Auth/SwitchAccount';
 import DeleteAccount from 'modules/Auth/RemoveAccount';
 import SwitchApplication from 'modules/BlockchainApplication/components/SwitchApplication';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
@@ -77,11 +76,6 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="AuthMethod"
             component={AuthMethod}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
-            name="SwitchAccount"
-            component={SwitchAccount}
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen

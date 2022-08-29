@@ -15,8 +15,9 @@ const BottomModal = ({
       isOpen={show}
       onClosed={() => toggleShow(false)}
       style={[styles.wrapper, styles.theme.wrapper, style]}
-      backdropColor={theme === themes.dark ? colors.dark.volcanicSand : colors.light.white }
+      backdropColor={theme === themes.dark ? colors.dark.volcanicSand : colors.light.dark }
       position="bottom"
+      coverScreen
     >
       <View style={styles.row} >
         <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />

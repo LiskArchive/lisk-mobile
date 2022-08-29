@@ -69,7 +69,11 @@ export default () => ({
     },
     sendButtonText: {
       color: colors.light.ultramarineBlue,
-    }
+    },
+    modalContainer: {
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
   },
   [themes.light]: {
     username: {
