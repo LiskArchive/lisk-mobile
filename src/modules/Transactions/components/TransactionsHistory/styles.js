@@ -5,10 +5,7 @@ export default function getTransactionsHistoryStyles() {
     common: {
       container: {
         flex: 1,
-        paddingTop: boxes.boxPadding,
-        paddingBottom: boxes.boxPadding,
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding
+        padding: boxes.boxPadding,
       },
     },
     [themes.light]: {

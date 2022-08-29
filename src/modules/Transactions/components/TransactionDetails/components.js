@@ -43,7 +43,7 @@ export function TransactionDetailsBody({ transaction }) {
 
           <CopyToClipboard
             style={[styles.text, styles.theme.text]}
-            labelStyle={[styles.text, styles.theme.text, { marginRight: 4 }]}
+            labelStyle={[styles.text, styles.theme.text, styles.copyToClipboardLabel]}
             showIcon
             iconSize={18}
             value={transaction.sender.address}
@@ -103,7 +103,7 @@ export function TransactionDetailsBody({ transaction }) {
 
         <CopyToClipboard
           style={[styles.text, styles.theme.text]}
-          labelStyle={[styles.text, styles.theme.text, { marginRight: 4 }]}
+          labelStyle={[styles.text, styles.theme.text, styles.copyToClipboardLabel]}
           showIcon
           iconSize={18}
           value={transaction.id}
@@ -119,7 +119,7 @@ export function TransactionDetailsBody({ transaction }) {
 
         <CopyToClipboard
           style={[styles.text, styles.theme.text]}
-          labelStyle={[styles.text, styles.theme.text, { marginRight: 4 }]}
+          labelStyle={[styles.text, styles.theme.text, styles.copyToClipboardLabel]}
           showIcon
           iconSize={18}
           value={transaction.block.id}

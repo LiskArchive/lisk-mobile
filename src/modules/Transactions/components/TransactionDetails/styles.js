@@ -5,10 +5,7 @@ export default function getTransactionDetailsStyles() {
     common: {
       container: {
         flex: 1,
-        paddingTop: boxes.boxPadding,
-        paddingBottom: boxes.boxPadding,
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding
+        padding: boxes.boxPadding,
       },
       section: {
         paddingBottom: 14,
@@ -30,6 +27,9 @@ export default function getTransactionDetailsStyles() {
       text: {
         fontWeight: '500',
         fontSize: 16,
+      },
+      copyToClipboardLabel: {
+        marginRight: 4
       },
       label: {
         fontWeight: '400',
