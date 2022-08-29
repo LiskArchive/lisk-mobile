@@ -1,8 +1,6 @@
 /* eslint-disable no-shadow */
 import React from 'react';
-import {
-  SafeAreaView, TouchableOpacity, View
-} from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useTheme } from 'hooks/useTheme';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +12,7 @@ import SwitchSvg from 'assets/svgs/SwitchSvg';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { settingsUpdated } from 'modules/Settings/actions';
+import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
 import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
 import TokensTab from './components/TokensTab';
@@ -49,7 +48,7 @@ const Home = ({ navigation }) => {
   const sendTokens = () => navigation.navigate('Send');
 
   return (
-    <SafeAreaView style={[styles.flex, styles.theme.homeContainer]}>
+    <NavigationSafeAreaView>
       <View style={[styles.row, styles.alignItemsCenter, styles.topContainer]} >
         <TouchableOpacity style={[styles.discreteContainer]} onPress={toggleIncognito} >
           <IncognitoSvg size={1.2} disabled={discrete} />
@@ -87,7 +86,7 @@ const Home = ({ navigation }) => {
         </View>
         <TokensTab />
       </View>
-    </SafeAreaView>
+    </NavigationSafeAreaView>
   );
 };
 

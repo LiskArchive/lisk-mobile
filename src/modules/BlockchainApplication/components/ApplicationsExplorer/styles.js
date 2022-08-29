@@ -3,10 +3,6 @@ import { themes, colors } from 'constants/styleGuide';
 export default function getBlockchainApplicationsExplorerStyles() {
   return {
     common: {
-      wrapper: {
-        flex: 1,
-        paddingTop: 44,
-      },
       message: {
         padding: 20
       },
@@ -24,18 +20,12 @@ export default function getBlockchainApplicationsExplorerStyles() {
       },
     },
     [themes.light]: {
-      wrapper: {
-        backgroundColor: colors.light.white,
-      },
       message: {
         color: colors.light.zodiacBlue
       }
     },
 
     [themes.dark]: {
-      wrapper: {
-        backgroundColor: colors.dark.mainBg,
-      },
       message: {
         color: colors.dark.white
       }
