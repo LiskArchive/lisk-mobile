@@ -8,10 +8,6 @@ export default function getEmptyStateStyles() {
         justifyContent: 'center',
         flex: 1,
       },
-      image: {
-        width: 260,
-        height: 129,
-      },
       messageText: {
         marginTop: 16,
       },
