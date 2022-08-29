@@ -1,7 +1,8 @@
 /* eslint-disable max-statements */
-import React, { memo, useMemo, useState } from 'react';
-import { SafeAreaView, View, FlatList } from 'react-native';
+import React, { memo, useMemo } from 'react';
+import { View, FlatList } from 'react-native';
 import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import { fromRawLsk } from 'utilities/conversions';
 import { useTheme } from 'hooks/useTheme';
@@ -14,15 +15,17 @@ import tokensTabStyles from './styles';
 
 const TokenItem = ({ token }) => {
   const { styles } = useTheme({ styles: tokensTabStyles });
-  return <View style={[styles.tokenItem]} >
+  return <View style={[styles.tokenItem, styles.theme.tokenItem]} >
     <View style={styles.row} >
       <View style={[styles.row, styles.alignCenter]} >
         <TokenSvg symbol="LSK" height={28} width={28} />
-        <P style={[styles.tokenTitle]} >Lisk</P>
+        <P style={[styles.tokenTitle, styles.theme.tokenTitle]} >Lisk</P>
       </View>
       <View style={[styles.flex, styles.rightContent]} >
-        <H3>{Number(fromRawLsk(token.availableBalance)).toLocaleString()}</H3>
-        <P>25USD</P>
+        <H3 style={[styles.theme.tokenTitle]} >
+          {Number(fromRawLsk(token.availableBalance)).toLocaleString()}
+        </H3>
+        <P style={[styles.theme.currency]} >25USD</P>
       </View>
     </View>
   </View>;
@@ -32,7 +35,6 @@ const TokensScreen = ({ t, navigation }) => {
   const [currAccount] = useCurrentAccount();
   const { address } = currAccount.metadata;
   const { data: tokens = [], isLoading } = useAccountTokens(address);
-  const [activeTab] = useState(0);
 
   const { styles } = useTheme({ styles: tokensTabStyles });
 
@@ -52,27 +54,18 @@ const TokensScreen = ({ t, navigation }) => {
 
   const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
 
-  return <SafeAreaView style={styles.container} >
+  return <SafeAreaView style={[styles.flex, styles.theme.container]} >
     <HeaderBackButton
-        title={'accounts.allTokens'}
-        onPress={navigation.goBack}
-      />
+      title={'accounts.allTokens'}
+      onPress={navigation.goBack}
+    />
     <View style={styles.tokenContainer} >
       {isEmpty && <EmptyState message={t('accounts.emptyTokenMessage')} />}
-      {activeTab === 0
-        && <FlatList
-          data={tokens}
-          renderItem={({ item }) => <TokenItem token={item} />}
-          keyExtractor={(item) => item.tokenID}
-        />
-      }
-      {activeTab === 1
-        && <FlatList
-          data={lockedTokens}
-          renderItem={({ item }) => <TokenItem token={item} />}
-          keyExtractor={(item) => item.tokenID}
-        />
-      }
+      <FlatList
+        data={tokens}
+        renderItem={({ item }) => <TokenItem token={item} />}
+        keyExtractor={(item) => item.tokenID}
+      />
     </View>
   </SafeAreaView>;
 };

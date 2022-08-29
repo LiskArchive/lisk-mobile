@@ -1,4 +1,5 @@
-import { colors, fonts } from 'constants/styleGuide';
+import { colors, fonts, themes } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default {
   common: {
@@ -57,6 +58,22 @@ export default {
     viewAll: {
       color: colors.light.ultramarineBlue,
       fontSize: 12,
+    }
+  },
+  [themes.light]: {
+    tokenTitle: {
+      color: colors.light.zodiacBlue
+    },
+    currency: {
+      color: setColorOpacity(colors.light.zodiacBlue, 0.7)
+    }
+  },
+  [themes.dark]: {
+    tokenTitle: {
+      color: colors.dark.white
+    },
+    currency: {
+      color: setColorOpacity(colors.light.white, 0.7)
     }
   }
 };

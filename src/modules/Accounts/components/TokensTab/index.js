@@ -20,11 +20,13 @@ const TokenItem = ({ token }) => {
     <View style={styles.row} >
       <View style={[styles.row, styles.alignCenter]} >
         <TokenSvg symbol="LSK" height={28} width={28} />
-        <P style={[styles.tokenTitle]} >Lisk</P>
+        <P style={[styles.tokenTitle, styles.theme.tokenTitle]} >Lisk</P>
       </View>
       <View style={[styles.flex, styles.rightContent]} >
-        <H3>{Number(fromRawLsk(token.availableBalance)).toLocaleString()}</H3>
-        <P>25USD</P>
+        <H3 style={[styles.theme.tokenTitle]} >
+          {Number(fromRawLsk(token.availableBalance)).toLocaleString()}
+        </H3>
+        <P style={[styles.currency, styles.theme.currency]} >25USD</P>
       </View>
     </View>
   </View>;
