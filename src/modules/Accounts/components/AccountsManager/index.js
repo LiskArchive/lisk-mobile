@@ -10,11 +10,11 @@ import { Button, PrimaryButton } from 'components/shared/toolBox/button';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 
 import getAccountsManagerStyles from './styles';
+import AccountItem from '../AccountItem';
 
 export default function AccountsManager({
   mode = 'screen',
   onAccountSelect,
-  item: Item,
   style
 }) {
   const navigation = useNavigation();
@@ -59,13 +59,14 @@ export default function AccountsManager({
         data={accounts}
         keyExtractor={(item) => item.id}
         renderItem={(item) => (
-          <Item
+          <AccountItem
             key={item.metadata.address}
             account={item}
             onPress={() => handleSelectAccountClick(item)}
             active={
               item.metadata.address === currentAccount.metadata?.address
             }
+            mode={mode}
           />
         )}
         renderSpinner

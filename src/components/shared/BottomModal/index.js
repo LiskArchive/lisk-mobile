@@ -20,13 +20,13 @@ const BottomModal = ({
     <Modal
       isOpen={show}
       onClosed={() => toggleShow(false)}
-      style={[styles.container, styles.theme.container, style?.container]}
       backdropColor={
         theme === themes.dark
           ? colors.dark.volcanicSand : colors.light.dark
       }
       position="bottom"
       coverScreen
+      style={[styles.container, styles.theme.container, style?.container]}
       {...props}
     >
       <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />

@@ -1,5 +1,5 @@
 import {
-  themes, colors, boxes
+  themes, colors
 } from 'constants/styleGuide';
 import {
   deviceWidth,
@@ -12,7 +12,7 @@ export default () => ({
       zIndex: 3,
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
-      padding: boxes.boxPadding,
+      padding: 16,
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center'
