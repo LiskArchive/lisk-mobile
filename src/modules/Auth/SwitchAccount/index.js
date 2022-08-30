@@ -11,7 +11,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import { IconButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
-import AccountItem from '../components/SwipeableAccountItem';
+import AccountItem from '../../Accounts/components/SwipeableAccountItem';
 import getStyles from './styles';
 
 const SwitchAccount = ({

@@ -11,7 +11,8 @@ const BottomModal = ({
   show,
   toggleShow,
   children,
-  style
+  style,
+  ...props
 }) => {
   const { styles, theme } = useTheme({ styles: getStyles() });
 
@@ -26,6 +27,7 @@ const BottomModal = ({
       }
       position="bottom"
       coverScreen
+      {...props}
     >
       <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
 

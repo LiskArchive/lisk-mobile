@@ -20,7 +20,7 @@ export default function AccountsManager({
   const navigation = useNavigation();
 
   const { accounts } = useAccounts();
-  const [, setAccount] = useCurrentAccount();
+  const [currentAccount, setAccount] = useCurrentAccount();
 
   const { styles } = useTheme({ styles: getAccountsManagerStyles() });
 
@@ -63,6 +63,9 @@ export default function AccountsManager({
             key={item.metadata.address}
             account={item}
             onPress={() => handleSelectAccountClick(item)}
+            active={
+              item.metadata.address === currentAccount.metadata?.address
+            }
           />
         )}
         renderSpinner
