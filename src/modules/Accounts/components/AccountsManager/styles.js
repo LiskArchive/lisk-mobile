@@ -53,7 +53,7 @@ export default function getAccountsManagerStyles() {
         borderColor: colors.light.volcanicSand,
       },
       title: {
-        color: colors.dark.ghost,
+        color: colors.dark.white,
       },
       description: {
         color: colors.dark.ghost,
