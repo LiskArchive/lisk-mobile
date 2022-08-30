@@ -1,9 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import ApiClient from 'utilities/api/lisk/apiClient';
+import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
+import { GET_PRIORITY_FEES } from 'utilities/api/queries';
+import {
+  API_URL
+} from 'utilities/api/constants';
 
 export function useGetFeesByPriorityQuery() {
-  const query = useQuery(['priorityFees'], () => ApiClient.getFees());
+  const query = useCustomQuery({
+    keys: [GET_PRIORITY_FEES],
+    config: {
+      url: `${API_URL}/fees`,
+      method: 'get',
+    }
+  });
 
   const result = useMemo(() => {
     return query.data?.data?.feeEstimatePerByte;

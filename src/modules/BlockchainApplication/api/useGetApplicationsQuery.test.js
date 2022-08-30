@@ -1,32 +1,51 @@
+import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
+import configureMockStore from 'redux-mock-store';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Provider } from 'react-redux';
 
 import { mockApplications } from '../__fixtures__';
 
 import { useGetApplicationsMetaQuery } from './useGetApplicationsQuery';
 
+const mockState = {
+  blockchainApplications: {
+    current: mockApplications[0],
+    pins: [],
+  },
+};
+
+const queryClient = new QueryClient();
+const mockStore = configureMockStore();
+
+const ReduxProvider = ({ children, reduxStore }) => (
+  <Provider store={reduxStore}>{children}</Provider>
+);
+
 describe('useGetApplicationsMetaQuery hook', () => {
-  it('should return loading state and empty data before mounting', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useGetApplicationsMetaQuery());
-
-    expect(result.current).toMatchObject({
-      data: undefined,
-      isLoading: true,
-      error: undefined,
-    });
-
-    await waitForNextUpdate();
-  });
-
-  it('should return the correct data after mounting', async () => {
+  it('should fetch data correctly', async () => {
+    const store = mockStore(mockState);
+    const wrapper = ({ children }) => (
+      <QueryClientProvider client={queryClient}>
+        <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
+      </QueryClientProvider>
+    );
     const
-      { result, waitForNextUpdate } = renderHook(() => useGetApplicationsMetaQuery());
+      { result, waitFor } = renderHook(() =>
+        useGetApplicationsMetaQuery(), { wrapper });
 
-    await waitForNextUpdate();
+    await waitFor(() => result.current.isFetched);
 
-    expect(result.current).toMatchObject({
+    expect(result.current.isSuccess).toBeTruthy();
+
+    const expectedResponse = {
       data: mockApplications,
-      isLoading: false,
-      error: undefined,
-    });
+      meta: {
+        count: 20,
+        offset: 0,
+      },
+    };
+
+    expect(result.current.data).toEqual(expectedResponse);
   });
 });

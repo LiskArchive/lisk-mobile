@@ -73,7 +73,8 @@ export default () => ({
       borderWidth: 1,
     },
     emptyState: {
-      marginTop: 0,
+      padding: 20,
+      marginTop: 20,
       display: 'flex',
       flex: 1,
       alignItems: 'center',

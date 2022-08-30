@@ -10,6 +10,7 @@ export default () => ({
     },
     body: {
       padding: 20,
+      flex: 1
     },
     topContainer: {
       paddingLeft: 20,

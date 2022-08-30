@@ -1,10 +1,8 @@
-import { colors } from 'constants/styleGuide';
+import { colors, themes } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default {
   common: {
-    container: {
-      marginVertical: 20,
-    },
     flex: {
       flex: 1,
     },
@@ -33,5 +31,27 @@ export default {
       padding: 10,
       borderColor: colors.light.platinumGray
     },
+  },
+  [themes.light]: {
+    container: {
+      backgroundColor: colors.light.white,
+    },
+    tokenTitle: {
+      color: colors.light.zodiacBlue
+    },
+    currency: {
+      color: setColorOpacity(colors.light.zodiacBlue, 0.7)
+    }
+  },
+  [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.mainBg,
+    },
+    tokenTitle: {
+      color: colors.dark.white
+    },
+    currency: {
+      color: setColorOpacity(colors.light.white, 0.7)
+    }
   }
 };

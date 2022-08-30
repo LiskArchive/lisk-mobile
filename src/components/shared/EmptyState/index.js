@@ -16,7 +16,6 @@ export default function EmptyState({
   return (
     <View style={[styles.container, style?.container]} >
       <EmptyStateSvg />
-
       <P
         style={[
           styles.messageText,

@@ -16,6 +16,7 @@ import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainAppli
 import getBlockchainApplicationsExplorerStyles from './styles';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
+import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats';
 
 /**
  *
@@ -26,6 +27,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
   const [showStatsModal, setShowStatsModal] = useState(false);
 
   const { applications } = useBlockchainApplicationExplorer();
+  const { data } = useBlockchainApplicationStats();
 
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsExplorerStyles(),
@@ -108,9 +110,9 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         />
 
         <BlockchainApplicationsStats
-          totalSupply={10000}
-          staked={500000}
-          stats={{ registered: 100, active: 50, terminated: 80 }}
+          totalSupply={data.totalSupplyLSK}
+          staked={data.stakedLSK}
+          stats={{ registered: data.registered, active: data.active, terminated: data.terminated }}
           styles={{
             container: {
               borderTopLeftRadius: 24,

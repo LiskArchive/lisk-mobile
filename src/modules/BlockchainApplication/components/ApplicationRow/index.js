@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 import ModalBox from 'react-native-modalbox';
 import { translate } from 'react-i18next';
@@ -101,10 +101,9 @@ function BlockchainApplicationRow({
           buttonText={t('application.manage.deleteDefaultApplicationModal.buttonText')}
           onContinue={() => setShowDeleteDefaultApplicationModal(false)}
         />
-
       </ModalBox>
     </>
   );
 }
 
-export default translate()(BlockchainApplicationRow);
+export default translate()(memo(BlockchainApplicationRow));

@@ -6,10 +6,12 @@ export default function getEmptyStateStyles() {
       container: {
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1,
+        padding: 10,
       },
       messageText: {
-        marginTop: 16,
+        marginTop: 10,
+        fontSize: 14,
+        textAlign: 'center'
       },
     },
     [themes.light]: {

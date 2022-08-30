@@ -25,17 +25,6 @@ class LiskAPIClient {
     return data;
   }
 
-  async getTokens(address) {
-    const resp = await fetch(`${this._url}/v3/tokens?address=${address}`, config.requestOptions);
-    if (!resp.ok) {
-      throw new Error('Failed to request account from server.');
-    }
-
-    const { data } = await resp.json();
-
-    return data;
-  }
-
   async getNetworkInfo() {
     const resp = await fetch(`${this._url}/v3/network/status`, config.requestOptions);
     if (!resp.ok) {
@@ -46,15 +35,6 @@ class LiskAPIClient {
       height: data.height,
       blockTime: data.blockTime
     };
-  }
-
-  async getFees() {
-    const resp = await fetch(`${this._url}/v3/fees`, config.requestOptions);
-    if (!resp.ok) {
-      throw new Error('Failed to request fees from server.');
-    }
-    const data = resp.json();
-    return data;
   }
 
   async sendTransaction(tx) {
