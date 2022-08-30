@@ -26,7 +26,6 @@ export default {
     },
     tokenContainer: {
       margin: 10,
-      // marginTop: 20,
     },
     tokenItem: {
       borderWidth: 1,
