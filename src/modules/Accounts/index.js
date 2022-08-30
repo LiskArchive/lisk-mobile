@@ -108,9 +108,10 @@ export default function Home() {
         style={{ container: styles.modalContainer }}
       >
         <AccountsManager
+          mode="modal"
           onAccountSelect={() => setShowManageAccountsModal(false)}
           item={AccountItem}
-          mode="modal"
+          style={{ footer: { marginBottom: 16 } }}
         />
       </BottomModal>
     </>

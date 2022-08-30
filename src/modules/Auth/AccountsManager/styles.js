@@ -18,18 +18,11 @@ export default function getAccountsManagerStyles() {
       body: {
         paddingTop: boxes.boxPadding
       },
-      bottom: {
-        padding: boxes.boxPadding,
-        marginBottom: boxes.boxPadding,
-      },
       button: {
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 5,
-      },
-      icon: {
-        width: 30
       },
       outline: {
         borderWidth: 1,
@@ -38,29 +31,26 @@ export default function getAccountsManagerStyles() {
       },
     },
     [themes.light]: {
-      outline: {
-        borderColor: colors.light.platinumGray,
-      },
       container: {
         backgroundColor: colors.dark.white
       },
+      outline: {
+        borderColor: colors.light.platinumGray,
+      },
       title: {
         color: colors.light.zodiacBlue,
       },
       description: {
         color: colors.light.zodiacBlue,
       },
-      remove: {
-        color: colors.light.zodiacBlue,
-      }
     },
 
     [themes.dark]: {
-      outline: {
-        borderColor: colors.light.volcanicSand,
-      },
       container: {
         backgroundColor: colors.dark.black
+      },
+      outline: {
+        borderColor: colors.light.volcanicSand,
       },
       title: {
         color: colors.dark.ghost,
@@ -68,9 +58,6 @@ export default function getAccountsManagerStyles() {
       description: {
         color: colors.dark.ghost,
       },
-      remove: {
-        color: colors.light.white,
-      }
     }
   };
 }

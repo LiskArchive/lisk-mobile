@@ -43,7 +43,7 @@ const SwitchAccount = ({
           icon="user"
           iconStyle={styles.icon}
           iconSize={20}
-          title={t('auth.setup.buttons.addAnotherAccount')}
+          title={t('auth.setup.buttons.addAccount')}
           style={[styles.button, styles.outline, styles.theme.outline]}
         />
       </View>

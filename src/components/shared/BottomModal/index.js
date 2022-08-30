@@ -38,7 +38,7 @@ const BottomModal = ({
         </TouchableOpacity>
       )}
 
-      <View style={[styles.body, style?.body]}>{children}</View>
+      {children}
     </Modal>
   );
 };

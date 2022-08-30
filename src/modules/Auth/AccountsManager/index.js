@@ -6,8 +6,7 @@ import i18next from 'i18next';
 import { useTheme } from 'hooks/useTheme';
 import { H2, P } from 'components/shared/toolBox/typography';
 import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
-import { IconButton } from 'components/shared/toolBox/button';
-import { colors, themes } from 'constants/styleGuide';
+import { Button, PrimaryButton } from 'components/shared/toolBox/button';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 
 import getAccountsManagerStyles from './styles';
@@ -23,7 +22,7 @@ export default function AccountsManager({
   const { accounts } = useAccounts();
   const [, setAccount] = useCurrentAccount();
 
-  const { styles, theme } = useTheme({ styles: getAccountsManagerStyles() });
+  const { styles } = useTheme({ styles: getAccountsManagerStyles() });
 
   function handleSelectAccountClick(account) {
     setAccount(account);
@@ -71,26 +70,21 @@ export default function AccountsManager({
         // is refactored to use react-query.
       />
 
-      <IconButton
-        onPress={() => navigation.navigate('AuthMethod')}
-        color={colors.light.ultramarineBlue}
-        icon="user"
-        iconStyle={styles.icon}
-        iconSize={20}
-        title={i18next.t('auth.setup.buttons.addAnotherAccount')}
-        style={[styles.button, styles.outline, styles.theme.outline]}
-      />
+      <View style={[style?.footer]}>
+        <PrimaryButton
+          onPress={() => navigation.navigate('AuthMethod')}
+          title={i18next.t('auth.setup.buttons.addAccount')}
+          style={[styles.button, styles.outline, styles.theme.outline]}
+        />
 
-      <IconButton
-        onPress={() => navigation.navigate('DeleteAccount')}
-        color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
-        icon="delete-bookmark"
-        iconStyle={styles.icon}
-        iconSize={20}
-        titleStyle={[styles.theme.remove]}
-        title={i18next.t('auth.setup.buttons.removeAccount')}
-        style={[styles.button, styles.outline, styles.theme.outline]}
-      />
+        {mode === 'screen' && (
+          <Button
+            onPress={() => navigation.navigate('DeleteAccount')}
+            title={i18next.t('auth.setup.buttons.removeAccount')}
+            style={[styles.button, styles.outline, styles.theme.outline]}
+          />
+        )}
+      </View>
     </View>
   );
 }

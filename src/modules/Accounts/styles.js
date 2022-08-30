@@ -72,8 +72,8 @@ export default () => ({
       color: colors.light.ultramarineBlue,
     },
     modalContainer: {
-      alignItems: 'center',
-      justifyContent: 'center',
+      // alignItems: 'center',
+      // justifyContent: 'center',
       height: Dimensions.get('window').height / 1.8
     },
   },
