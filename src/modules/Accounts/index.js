@@ -22,7 +22,8 @@ import TokensTab from './components/TokensTab';
 import getStyles from './styles';
 import TransactionList from '../Transactions/components/TransactionList';
 import BottomModal from '../../components/shared/BottomModal';
-import ManageAccounts from '../Auth/ManageAccounts';
+import AccountsManager from '../Auth/AccountsManager';
+import AccountItem from '../Auth/components/AccountItem';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -104,9 +105,13 @@ export default function Home() {
       <BottomModal
         show={showManageAccountsModal}
         toggleShow={setShowManageAccountsModal}
-        style={styles.modalContainer}
+        style={{ container: styles.modalContainer }}
       >
-        <ManageAccounts />
+        <AccountsManager
+          onAccountSelect={() => setShowManageAccountsModal(false)}
+          item={AccountItem}
+          mode="modal"
+        />
       </BottomModal>
     </>
   );

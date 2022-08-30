@@ -1,21 +1,22 @@
 import { colors, themes, boxes } from 'constants/styleGuide';
 
-export default function getManageAccountsStyles() {
+export default function getAccountsManagerStyles() {
   return {
     common: {
-      wrapper: {
-        flex: 1,
-      },
       container: {
         flex: 1,
-        padding: boxes.boxPadding,
-      },
-      body: {
-        paddingTop: boxes.boxPadding
       },
       title: {
         textAlign: 'center',
-        marginBottom: 10,
+        marginBottom: 8,
+      },
+      description: {
+        textAlign: 'center',
+        marginBottom: 8,
+        fontSize: 12
+      },
+      body: {
+        paddingTop: boxes.boxPadding
       },
       bottom: {
         padding: boxes.boxPadding,
@@ -40,8 +41,14 @@ export default function getManageAccountsStyles() {
       outline: {
         borderColor: colors.light.platinumGray,
       },
-      wrapper: {
+      container: {
         backgroundColor: colors.dark.white
+      },
+      title: {
+        color: colors.light.zodiacBlue,
+      },
+      description: {
+        color: colors.light.zodiacBlue,
       },
       remove: {
         color: colors.light.zodiacBlue,
@@ -52,8 +59,14 @@ export default function getManageAccountsStyles() {
       outline: {
         borderColor: colors.light.volcanicSand,
       },
-      wrapper: {
+      container: {
         backgroundColor: colors.dark.black
+      },
+      title: {
+        color: colors.dark.ghost,
+      },
+      description: {
+        color: colors.dark.ghost,
       },
       remove: {
         color: colors.light.white,

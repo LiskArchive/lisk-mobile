@@ -7,7 +7,7 @@ import {
 
 export default () => ({
   common: {
-    wrapper: {
+    container: {
       height: deviceWidth(),
       zIndex: 3,
       borderTopLeftRadius: 24,
@@ -29,7 +29,7 @@ export default () => ({
   },
 
   [themes.light]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.light.white,
     },
     horizontalLine: {
@@ -41,7 +41,7 @@ export default () => ({
   },
 
   [themes.dark]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.mainBg,
     },
     horizontalLine: {

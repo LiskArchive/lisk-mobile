@@ -216,7 +216,11 @@ const Request = ({
         </View>
       </View>
     </KeyboardAwareScrollView>
-    <BottomModal style={styles.modalContainer} show={modalOpen} toggleShow={setModalOpen} >
+    <BottomModal
+      style={{ container: styles.modalContainer }}
+      show={modalOpen}
+      toggleShow={setModalOpen}
+    >
       <Share
         type={TouchableWithoutFeedback}
         value={qrCodeUrl}

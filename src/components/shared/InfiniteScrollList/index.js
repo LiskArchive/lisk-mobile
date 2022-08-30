@@ -25,7 +25,10 @@ import { getInfiniteScrollListStyles } from './styles';
  * length of the list) the bottom edge of the list must be from the end of the content to
  * trigger the onEndReached callback. Default is 0.2.
  */
-export default function InfiniteScrollList(props) {
+export default function InfiniteScrollList({
+  showVerticalScrollIndicator = false,
+  ...props
+}) {
   const { styles } = useTheme({ styles: getInfiniteScrollListStyles() });
 
   const fetchMore = () => {
@@ -47,6 +50,7 @@ export default function InfiniteScrollList(props) {
       onEndReachedThreshold={props.onEndReachedThreshold || 0.2}
       contentContainerStyle={[styles.container, props.style?.container]}
       ListFooterComponent={props.isFetchingNextPage ? renderSpinner : null}
+      showVerticalScrollIndicator={showVerticalScrollIndicator}
     />
   );
 }
