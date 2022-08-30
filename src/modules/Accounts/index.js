@@ -1,5 +1,4 @@
 /* eslint-disable max-statements */
-/* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
@@ -21,9 +20,7 @@ import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
 import TokensTab from './components/TokensTab';
 import getStyles from './styles';
 import TransactionList from '../Transactions/components/TransactionList';
-import BottomModal from '../../components/shared/BottomModal';
-import AccountsManager from '../Auth/AccountsManager';
-import AccountItem from '../Auth/components/AccountItem';
+import AccountsManagerModal from './components/AccountsManagerModal';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -91,7 +88,7 @@ export default function Home() {
                 <P style={[styles.buttonText]} >Request</P>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.button, styles.sendButton]} onPress={sendTokens}>
-                <P style={[styles.buttonText, styles.sendButtonText]} >Send</P>
+                <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
               </TouchableOpacity>
             </View>
           </View>
@@ -102,18 +99,10 @@ export default function Home() {
         </View>
       </NavigationSafeAreaView>
 
-      <BottomModal
+      <AccountsManagerModal
         show={showManageAccountsModal}
-        toggleShow={setShowManageAccountsModal}
-        style={{ container: styles.modalContainer }}
-      >
-        <AccountsManager
-          mode="modal"
-          onAccountSelect={() => setShowManageAccountsModal(false)}
-          item={AccountItem}
-          style={{ footer: { marginBottom: 16 } }}
-        />
-      </BottomModal>
+        setShow={setShowManageAccountsModal}
+      />
     </>
   );
 }

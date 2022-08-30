@@ -1,5 +1,4 @@
 import { themes, colors, fonts } from 'constants/styleGuide';
-import { Dimensions } from 'react-native';
 
 export default () => ({
   common: {
@@ -70,11 +69,6 @@ export default () => ({
     },
     sendButtonText: {
       color: colors.light.ultramarineBlue,
-    },
-    modalContainer: {
-      // alignItems: 'center',
-      // justifyContent: 'center',
-      height: Dimensions.get('window').height / 1.8
     },
   },
   [themes.light]: {

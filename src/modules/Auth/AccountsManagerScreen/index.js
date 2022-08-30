@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'hooks/useTheme';
 import Splash from '../components/splash';
 import AccountItem from '../components/AccountItem';
-import AccountsManager from '../AccountsManager';
+import AccountsManager from '../../Accounts/components/AccountsManager';
 
 import getAccountsManagerScreenStyles from './styles';
 
