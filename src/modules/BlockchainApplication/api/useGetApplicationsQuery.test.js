@@ -11,7 +11,6 @@ import { useGetApplicationsMetaQuery } from './useGetApplicationsQuery';
 const mockState = {
   blockchainApplications: {
     current: mockApplications[0],
-    // applications: mockMappedApplications,
     pins: [],
   },
 };
