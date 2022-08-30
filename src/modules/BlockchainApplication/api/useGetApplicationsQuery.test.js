@@ -1,19 +1,39 @@
+import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import { queryWrapper } from 'tests/queryWrapper';
+import configureMockStore from 'redux-mock-store';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Provider } from 'react-redux';
 
 import { mockApplications } from '../__fixtures__';
 
 import { useGetApplicationsMetaQuery } from './useGetApplicationsQuery';
 
+const mockState = {
+  blockchainApplications: {
+    current: mockApplications[0],
+    // applications: mockMappedApplications,
+    pins: [],
+  },
+};
+
+const queryClient = new QueryClient();
+const mockStore = configureMockStore();
+
+const ReduxProvider = ({ children, reduxStore }) => (
+  <Provider store={reduxStore}>{children}</Provider>
+);
+
 describe('useGetApplicationsMetaQuery hook', () => {
   it('should fetch data correctly', async () => {
+    const store = mockStore(mockState);
+    const wrapper = ({ children }) => (
+      <QueryClientProvider client={queryClient}>
+        <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
+      </QueryClientProvider>
+    );
     const
-      { result, waitForNextUpdate, waitFor } = renderHook(() =>
-        useGetApplicationsMetaQuery(), { wrapper: queryWrapper });
-
-    await waitForNextUpdate();
-
-    expect(result.current.isLoading).not.toBeTruthy();
+      { result, waitFor } = renderHook(() =>
+        useGetApplicationsMetaQuery(), { wrapper });
 
     await waitFor(() => result.current.isFetched);
 
