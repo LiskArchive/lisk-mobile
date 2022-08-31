@@ -109,7 +109,7 @@ export function TransactionDetailsBody({ transaction }) {
 
         <CopyToClipboard
           style={[styles.text, styles.theme.text]}
-          labelStyle={[styles.text, styles.theme.text]}
+          labelStyle={[styles.text, styles.theme.text, { flex: 1 }]}
           showIcon
           iconSize={18}
           value={transaction.id}
@@ -125,7 +125,7 @@ export function TransactionDetailsBody({ transaction }) {
 
         <CopyToClipboard
           style={[styles.text, styles.theme.text]}
-          labelStyle={[styles.text, styles.theme.text]}
+          labelStyle={[styles.text, styles.theme.text, { flex: 1 }]}
           showIcon
           iconSize={18}
           value={transaction.block.id}

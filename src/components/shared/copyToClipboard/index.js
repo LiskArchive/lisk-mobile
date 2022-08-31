@@ -44,7 +44,7 @@ export default function CopyToClipBoard({
 
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={handleCopy}>
-      <Element style={[styles.label, labelStyle]}>
+      <Element style={[labelStyle]}>
         {text}
       </Element>
 

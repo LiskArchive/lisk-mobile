@@ -23,6 +23,7 @@ export default function getTransactionDetailsStyles() {
       column: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
+        flex: 1
       },
       text: {
         fontWeight: '500',

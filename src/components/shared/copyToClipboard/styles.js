@@ -7,8 +7,5 @@ export default () => ({
     copyIcon: {
       marginLeft: 4,
     },
-    label: {
-      flex: 1
-    }
   },
 });
