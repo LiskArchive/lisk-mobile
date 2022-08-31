@@ -40,8 +40,6 @@ export default function Home() {
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  // const switchAccount = () => navigation.navigate('SwitchAccount');
-
   const toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
     dispatch(settingsUpdated({
