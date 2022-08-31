@@ -1,5 +1,6 @@
 import React, { useState, memo } from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import ModalBox from 'react-native-modalbox';
 import { translate } from 'react-i18next';
 

@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTheme } from 'hooks/useTheme';
+import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
 import { P } from 'components/shared/toolBox/typography';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
@@ -33,6 +34,7 @@ import AccountsManagerModal from './components/AccountsManagerModal';
 export default function Home() {
   const navigation = useNavigation();
   const [showManageAccountsModal, setShowManageAccountsModal] = useState(false);
+  const [showManageApplicationsModal, setShowManageApplicationsModal] = useState(false);
   const [currAccount] = useCurrentAccount();
   const { address, name: username } = currAccount.metadata;
   const discrete = useSelector(state => state.settings.discrete);
@@ -57,7 +59,7 @@ export default function Home() {
             <IncognitoSvg size={1.2} disabled={discrete} />
           </TouchableOpacity>
           <View style={styles.flex} >
-            <ApplicationSwitcher />
+            <ApplicationSwitcher onPress={() => setShowManageApplicationsModal(true)} />
           </View>
         </View>
         <View style={[styles.body]} >
@@ -100,6 +102,10 @@ export default function Home() {
       <AccountsManagerModal
         show={showManageAccountsModal}
         setShow={setShowManageAccountsModal}
+      />
+      <ApplicationManagerModal
+        show={showManageApplicationsModal}
+        setShow={setShowManageApplicationsModal}
       />
     </>
   );

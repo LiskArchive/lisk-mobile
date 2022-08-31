@@ -2,6 +2,10 @@ import { colors, themes } from 'constants/styleGuide';
 
 export default {
   common: {
+    container: {
+      width: '100%',
+      flex: 1,
+    },
     urlContainer: {
       borderWidth: 1,
       borderColor: colors.light.platinumGray,
