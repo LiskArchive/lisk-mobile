@@ -497,7 +497,16 @@
       "hideParamsButtonText": "Schließen",
       "amountParamsLabel": "Menge",
       "recipientAddressParamsLabel": "Empfängeradresse",
-      "dataParamsLabel": "Data"
+      "dataParamsLabel": "Data",
+      "tokenIDParamsLabel": "Token-ID",
+      "receivingChainIDParamsLabel": "Empfangsketten-ID",
+      "messageFeeParamsLabel": "Gebührennachricht",
+      "numberOfSignaturesParamsLabel": "Anzahl der Unterschriften",
+      "generatorKeyParamsLabel": "Generator key",
+      "blsKeyParamsLabel": "BLS key",
+      "proofOfPossessionParamsLabel": "Besitznachweis",
+      "header1ParamsLabel": "Kopfzeile 1",
+      "header2ParamsLabel": "Kopfzeile 2"
     },
     "transactionList": {
       "loadingText": "Transaktionen werden geladen...",

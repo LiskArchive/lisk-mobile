@@ -12,9 +12,9 @@ import { P } from 'components/shared/toolBox/typography';
 import { stringShortener, setColorOpacity } from 'utilities/helpers';
 import { colors } from 'constants/styleGuide';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
+import { TRANSACTION_PARAMS_NAMES, TRANSACTION_STATUS_NAMES } from '../../constants';
 
 import getTransactionDetailsStyles from './styles';
-import { TRANSACTION_STATUS_NAMES } from '../../constants';
 
 export function TransactionDetailsBody({ transaction }) {
   const transactionAssets = useTransactionAssets(transaction);
@@ -191,6 +191,8 @@ function TransactionDetailsParams({ params }) {
 
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
+  const paramsEntries = Object.entries(params);
+
   return (
     <View style={[styles.section]}>
       <View style={[styles.row]}>
@@ -209,31 +211,17 @@ function TransactionDetailsParams({ params }) {
       </View>
 
       {show && (
-        <>
-          <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-            {i18next.t('transactions.transactionDetails.amountParamsLabel')}:
-          </Text>
+        paramsEntries.map(([paramKey, paramValue]) => (
+          <>
+            <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
+              {TRANSACTION_PARAMS_NAMES[paramKey]}:
+           </Text>
 
-          <Text style={[styles.text, styles.theme.text]}>
-            {params.amount}
-          </Text>
-
-          <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-            {i18next.t('transactions.transactionDetails.recipientAddressParamsLabel')}:
-          </Text>
-
-          <Text style={[styles.text, styles.theme.text]}>
-            {params.recipientAddress}
-          </Text>
-
-          <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-            {i18next.t('transactions.transactionDetails.dataParamsLabel')}:
-          </Text>
-
-          <Text style={[styles.text, styles.theme.text]}>
-            {params.data}
-          </Text>
-        </>
+           <Text style={[styles.text, styles.theme.text]}>
+             {paramValue}
+           </Text>
+          </>
+        ))
       )}
     </View>
   );
