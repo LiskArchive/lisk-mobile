@@ -6,8 +6,6 @@ export default function getTransactionListStyles() {
       container: {
         flex: 1,
         paddingBottom: boxes.boxPadding,
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
       },
       header: {
         flexDirection: 'row',
@@ -27,7 +25,6 @@ export default function getTransactionListStyles() {
       labelButtonText: {
         fontSize: 12,
       },
-
       transactionAddressText: {
         fontWeight: '500',
         fontSize: 16,

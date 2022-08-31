@@ -40,7 +40,7 @@ export default {
     tabItem: {
       padding: 8,
       paddingHorizontal: 15,
-      marginHorizontal: 5,
+      marginRight: 8,
       borderRadius: 20,
     },
     tabItemText: {

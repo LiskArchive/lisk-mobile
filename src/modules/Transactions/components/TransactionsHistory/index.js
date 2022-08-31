@@ -19,9 +19,10 @@ export default function TransactionsHistory() {
       <HeaderBackButton
         title={i18next.t('transactions.transactionHistory.title')}
         onPress={navigation.goBack}
+        containerStyle={styles.header}
       />
 
-      <TransactionList mode="full"/>
+      <TransactionList mode="full" style={{ container: styles.listContainer }}/>
     </SafeAreaView>
   );
 }

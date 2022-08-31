@@ -7,6 +7,13 @@ export default function getTransactionsHistoryStyles() {
         flex: 1,
         padding: boxes.boxPadding,
       },
+      header: {
+        marginBottom: 24
+      },
+      listContainer: {
+        paddingLeft: boxes.boxPadding,
+        paddingRight: boxes.boxPadding,
+      },
     },
     [themes.light]: {
       container: {

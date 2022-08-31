@@ -15,7 +15,7 @@ import TransactionRow from '../TransactionRow';
 
 import getTransactionListStyles from './styles';
 
-export default function TransactionList({ mode = 'overview' }) {
+export default function TransactionList({ mode = 'overview', style }) {
   const navigation = useNavigation();
 
   const {
@@ -39,15 +39,15 @@ export default function TransactionList({ mode = 'overview' }) {
     if (mode === 'full') return null;
 
     return (
-      <View style={[styles.header]}>
-        <Text style={[styles.title, styles.theme.title]}>
+      <View style={[styles.header, style?.header]}>
+        <Text style={[styles.title, styles.theme.title, style?.title]}>
           {i18next.t('transactions.transactionList.title')}
         </Text>
 
         {!errorOnTransactions && !isLoadingTransactions && (
           <LabelButton
             onClick={() => navigation.navigate('TransactionsHistory')}
-            style={styles.labelButton}
+            style={[styles.labelButton, style?.labelButton]}
             textStyle={styles.labelButtonText}
             adornments={{
               right:
@@ -111,7 +111,13 @@ export default function TransactionList({ mode = 'overview' }) {
   }
 
   return (
-    <View style={[styles.container, styles.theme.container]}>
+    <View
+      style={[
+        styles.container,
+        styles.theme.container,
+        style?.container
+      ]}
+    >
       {renderHeader()}
 
       {renderBody()}
