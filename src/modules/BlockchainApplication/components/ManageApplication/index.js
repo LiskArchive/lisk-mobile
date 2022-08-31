@@ -1,7 +1,8 @@
 /* eslint-disable max-statements */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { translate } from 'react-i18next';
 import BottomModal from 'components/shared/BottomModal';
 import { P, H3 } from 'components/shared/toolBox/typography';
