@@ -71,7 +71,7 @@ export default function TransactionList({ mode = 'overview', style }) {
   function renderBody() {
     if (isLoadingTransactions) {
       return (
-        <Text>
+        <Text style={{ marginTop: 16 }}>
           {i18next.t('transactions.transactionList.loadingText')}
         </Text>
       );
