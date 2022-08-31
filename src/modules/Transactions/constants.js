@@ -38,3 +38,18 @@ export const TRANSACTION_STATUS_NAMES = {
   fail: i18next.t('transactions.statusText.fail'),
   pending: i18next.t('transactions.statusText.pending'),
 };
+
+export const TRANSACTION_PARAMS_NAMES = {
+  tokenID: i18next.t('transactions.transactionDetails.tokenIDParamsLabel'),
+  amount: i18next.t('transactions.transactionDetails.amountParamsLabel'),
+  recipientAddress: i18next.t('transactions.transactionDetails.recipientAddressParamsLabel'),
+  data: i18next.t('transactions.transactionDetails.dataParamsLabel'),
+  receivingChainID: i18next.t('transactions.transactionDetails.receivingChainIDParamsLabel'),
+  messageFee: i18next.t('transactions.transactionDetails.messageFeeParamsLabel'),
+  numberOfSignatures: i18next.t('transactions.transactionDetails.numberOfSignaturesParamsLabel'),
+  generatorKey: i18next.t('transactions.transactionDetails.generatorKeyParamsLabel'),
+  blsKey: i18next.t('transactions.transactionDetails.blsKeyParamsLabel'),
+  proofOfPossession: i18next.t('transactions.transactionDetails.proofOfPossessionParamsLabel'),
+  header1: i18next.t('transactions.transactionDetails.header1ParamsLabel'),
+  header2: i18next.t('transactions.transactionDetails.header2ParamsLabel'),
+};

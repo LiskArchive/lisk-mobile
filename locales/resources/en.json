@@ -502,7 +502,16 @@
       "hideParamsButtonText": "Close",
       "amountParamsLabel": "Amount",
       "recipientAddressParamsLabel": "Recipient address",
-      "dataParamsLabel": "Data"
+      "dataParamsLabel": "Data",
+      "tokenIDParamsLabel": "Token ID",
+      "receivingChainIDParamsLabel": "Receiving Chain ID",
+      "messageFeeParamsLabel": "Fee message",
+      "numberOfSignaturesParamsLabel": "Number of signatures",
+      "generatorKeyParamsLabel": "Generator key",
+      "blsKeyParamsLabel": "BLS key",
+      "proofOfPossessionParamsLabel": "Proof of possession",
+      "header1ParamsLabel": "Header 1",
+      "header2ParamsLabel": "Header 2"
     },
     "transactionList": {
       "loadingText": "Loading transactions...",

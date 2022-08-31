@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import i18next from 'i18next';
 
@@ -12,17 +12,23 @@ import { P } from 'components/shared/toolBox/typography';
 import { stringShortener, setColorOpacity } from 'utilities/helpers';
 import { colors } from 'constants/styleGuide';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
+import { TRANSACTION_PARAMS_NAMES, TRANSACTION_STATUS_NAMES } from '../../constants';
 
 import getTransactionDetailsStyles from './styles';
-import { TRANSACTION_STATUS_NAMES } from '../../constants';
 
 export function TransactionDetailsBody({ transaction }) {
   const transactionAssets = useTransactionAssets(transaction);
 
+  const scrollViewRef = useRef();
+
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
   return (
-    <ScrollView style={[styles.container, styles.theme.container]}>
+    <ScrollView
+      ref={scrollViewRef}
+      onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+      style={[styles.container, styles.theme.container]}
+    >
       <View style={[styles.section]}>
         <Text style={[styles.text, styles.theme.text, { marginBottom: 8 }]}>
           {transactionAssets.title}
@@ -43,7 +49,7 @@ export function TransactionDetailsBody({ transaction }) {
 
           <CopyToClipboard
             style={[styles.text, styles.theme.text]}
-            labelStyle={[styles.text, styles.theme.text, styles.copyToClipboardLabel]}
+            labelStyle={[styles.text, styles.theme.text]}
             showIcon
             iconSize={18}
             value={transaction.sender.address}
@@ -103,12 +109,12 @@ export function TransactionDetailsBody({ transaction }) {
 
         <CopyToClipboard
           style={[styles.text, styles.theme.text]}
-          labelStyle={[styles.text, styles.theme.text, styles.copyToClipboardLabel]}
+          labelStyle={[styles.text, styles.theme.text, { flex: 1 }]}
           showIcon
           iconSize={18}
           value={transaction.id}
           type={P}
-          label={stringShortener(transaction.id, 5, 5)}
+          label={transaction.id}
         />
       </View>
 
@@ -119,12 +125,12 @@ export function TransactionDetailsBody({ transaction }) {
 
         <CopyToClipboard
           style={[styles.text, styles.theme.text]}
-          labelStyle={[styles.text, styles.theme.text, styles.copyToClipboardLabel]}
+          labelStyle={[styles.text, styles.theme.text, { flex: 1 }]}
           showIcon
           iconSize={18}
           value={transaction.block.id}
           type={P}
-          label={stringShortener(transaction.block.id, 5, 5)}
+          label={transaction.block.id}
         />
       </View>
 
@@ -185,6 +191,8 @@ function TransactionDetailsParams({ params }) {
 
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
+  const paramsEntries = Object.entries(params);
+
   return (
     <View style={[styles.section]}>
       <View style={[styles.row]}>
@@ -203,31 +211,17 @@ function TransactionDetailsParams({ params }) {
       </View>
 
       {show && (
-        <>
-          <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-            {i18next.t('transactions.transactionDetails.amountParamsLabel')}:
-          </Text>
+        paramsEntries.map(([paramKey, paramValue]) => (
+          <React.Fragment key={paramKey}>
+            <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
+              {TRANSACTION_PARAMS_NAMES[paramKey]}:
+           </Text>
 
-          <Text style={[styles.text, styles.theme.text]}>
-            {params.amount}
-          </Text>
-
-          <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-            {i18next.t('transactions.transactionDetails.recipientAddressParamsLabel')}:
-          </Text>
-
-          <Text style={[styles.text, styles.theme.text]}>
-            {params.recipientAddress}
-          </Text>
-
-          <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-            {i18next.t('transactions.transactionDetails.dataParamsLabel')}:
-          </Text>
-
-          <Text style={[styles.text, styles.theme.text]}>
-            {params.data}
-          </Text>
-        </>
+           <Text style={[styles.text, styles.theme.text]}>
+             {paramValue}
+           </Text>
+          </React.Fragment>
+        ))
       )}
     </View>
   );

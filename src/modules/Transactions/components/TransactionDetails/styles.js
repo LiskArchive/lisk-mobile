@@ -23,13 +23,11 @@ export default function getTransactionDetailsStyles() {
       column: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
+        flex: 1
       },
       text: {
         fontWeight: '500',
         fontSize: 16,
-      },
-      copyToClipboardLabel: {
-        marginRight: 4
       },
       label: {
         fontWeight: '400',
