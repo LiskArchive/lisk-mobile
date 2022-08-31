@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
 import BottomModal from 'components/shared/BottomModal';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import { useNavigation } from '@react-navigation/native';
@@ -16,7 +16,7 @@ import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
 import SelectNode from '../SelectNode';
 
-const ManageApplication = ({ t, closeModal }) => {
+const ManageApplication = ({ closeModal }) => {
   const navigation = useNavigation();
   const { applications } = useBlockchainApplicationManagement();
   const [, setApplication] = useCurrentBlockchainApplication();
@@ -54,7 +54,7 @@ const ManageApplication = ({ t, closeModal }) => {
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
-      <H3>{t('application.title.switchApplication')}</H3>
+      <H3>{i18next.t('application.title.switchApplication')}</H3>
       <ApplicationList
         applications={applications}
         Component={BlockchainApplicationRow}
@@ -70,7 +70,7 @@ const ManageApplication = ({ t, closeModal }) => {
           <View style={styles.icon}>
             <AddSvg />
           </View>
-          <P style={styles.buttonText}>{t('application.manage.add.buttonText')}</P>
+          <P style={styles.buttonText}>{i18next.t('application.manage.add.buttonText')}</P>
         </TouchableOpacity>
       </View>
       <BottomModal
@@ -91,4 +91,4 @@ const ManageApplication = ({ t, closeModal }) => {
   );
 };
 
-export default translate()(ManageApplication);
+export default ManageApplication;
