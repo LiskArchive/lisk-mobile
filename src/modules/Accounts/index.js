@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTheme } from 'hooks/useTheme';
+import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
 import { P } from 'components/shared/toolBox/typography';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
@@ -21,7 +22,6 @@ import TokensTab from './components/TokensTab';
 import getStyles from './styles';
 import TransactionList from '../Transactions/components/TransactionList';
 import AccountsManagerModal from './components/AccountsManagerModal';
-import ApplicationManagerModal from '../BlockchainApplication/components/ApplicationManagerModal';
 
 /**
  * This component would be mounted first and would be used to config and redirect
