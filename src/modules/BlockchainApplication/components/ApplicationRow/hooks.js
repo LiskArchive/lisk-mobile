@@ -10,8 +10,8 @@ export function useBlockchainApplicationRowActions({
   t,
   application,
   variant,
-  navigation,
-  setShowDeleteDefaultApplicationModal
+  setShowDeleteDefaultApplicationModal,
+  deleteApplication
 }) {
   const { togglePin } = usePinBlockchainApplication();
 
@@ -48,7 +48,7 @@ export function useBlockchainApplicationRowActions({
             if (application.isDefault) {
               setShowDeleteDefaultApplicationModal(true);
             } else {
-              navigation.navigate('DeleteApplication', { application });
+              deleteApplication(application);
             }
           },
         },

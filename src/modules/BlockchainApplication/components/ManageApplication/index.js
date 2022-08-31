@@ -16,7 +16,7 @@ import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
 import SelectNode from '../SelectNode';
 
-const ManageApplication = ({ closeModal }) => {
+const ManageApplication = ({ closeModal, nextStep }) => {
   const navigation = useNavigation();
   const { applications } = useBlockchainApplicationManagement();
   const [, setApplication] = useCurrentBlockchainApplication();
@@ -52,6 +52,10 @@ const ManageApplication = ({ closeModal }) => {
     }
   };
 
+  const deleteApplication = application => {
+    nextStep({ application });
+  };
+
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <H3>{i18next.t('application.title.switchApplication')}</H3>
@@ -61,6 +65,7 @@ const ManageApplication = ({ closeModal }) => {
         onItemPress={selectApplication}
         showActive
         navigation={navigation}
+        deleteApplication={deleteApplication}
       />
       <View style={styles.bottom}>
         <TouchableOpacity
