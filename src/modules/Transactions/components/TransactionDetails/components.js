@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import i18next from 'i18next';
 
@@ -19,10 +19,16 @@ import { TRANSACTION_STATUS_NAMES } from '../../constants';
 export function TransactionDetailsBody({ transaction }) {
   const transactionAssets = useTransactionAssets(transaction);
 
+  const scrollViewRef = useRef();
+
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
   return (
-    <ScrollView style={[styles.container, styles.theme.container]}>
+    <ScrollView
+      ref={scrollViewRef}
+      onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+      style={[styles.container, styles.theme.container]}
+    >
       <View style={[styles.section]}>
         <Text style={[styles.text, styles.theme.text, { marginBottom: 8 }]}>
           {transactionAssets.title}
