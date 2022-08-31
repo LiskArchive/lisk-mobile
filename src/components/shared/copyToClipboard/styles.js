@@ -5,7 +5,10 @@ export default () => ({
       alignItems: 'center',
     },
     copyIcon: {
-      paddingHorizontal: 5,
+      marginLeft: 4,
+    },
+    label: {
+      flex: 1
     }
   },
 });

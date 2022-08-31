@@ -41,7 +41,7 @@ class CopyToClipBoard extends React.Component {
 
     return (
       <TouchableOpacity style={[styles.container, style]} onPress={this.copy}>
-        <Element style={labelStyle}>
+        <Element style={[styles.label, labelStyle]}>
           {text}
         </Element>
         <TouchableOpacity onPress={this.copy}>

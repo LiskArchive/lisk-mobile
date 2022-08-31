@@ -28,9 +28,6 @@ export default function getTransactionDetailsStyles() {
         fontWeight: '500',
         fontSize: 16,
       },
-      copyToClipboardLabel: {
-        marginRight: 4
-      },
       label: {
         fontWeight: '400',
         fontSize: 14,

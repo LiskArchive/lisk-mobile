@@ -49,7 +49,7 @@ export function TransactionDetailsBody({ transaction }) {
 
           <CopyToClipboard
             style={[styles.text, styles.theme.text]}
-            labelStyle={[styles.text, styles.theme.text, styles.copyToClipboardLabel]}
+            labelStyle={[styles.text, styles.theme.text]}
             showIcon
             iconSize={18}
             value={transaction.sender.address}
@@ -109,12 +109,12 @@ export function TransactionDetailsBody({ transaction }) {
 
         <CopyToClipboard
           style={[styles.text, styles.theme.text]}
-          labelStyle={[styles.text, styles.theme.text, styles.copyToClipboardLabel]}
+          labelStyle={[styles.text, styles.theme.text]}
           showIcon
           iconSize={18}
           value={transaction.id}
           type={P}
-          label={stringShortener(transaction.id, 5, 5)}
+          label={transaction.id}
         />
       </View>
 
@@ -125,12 +125,12 @@ export function TransactionDetailsBody({ transaction }) {
 
         <CopyToClipboard
           style={[styles.text, styles.theme.text]}
-          labelStyle={[styles.text, styles.theme.text, styles.copyToClipboardLabel]}
+          labelStyle={[styles.text, styles.theme.text]}
           showIcon
           iconSize={18}
           value={transaction.block.id}
           type={P}
-          label={stringShortener(transaction.block.id, 5, 5)}
+          label={transaction.block.id}
         />
       </View>
 
