@@ -5,13 +5,12 @@ import {
 } from 'react-native';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import { useTheme } from 'hooks/useTheme';
-import { colors, themes } from 'constants/styleGuide';
+import { colors } from 'constants/styleGuide';
 import CaretSvg from 'assets/svgs/CaretSvg';
-import Icon from 'components/shared/toolBox/icon';
 import getStyles from './styles';
 
-const SelectNode = ({ application, onPress, closeModal }) => {
-  const { styles, theme } = useTheme({ styles: getStyles });
+const SelectNode = ({ application, onPress }) => {
+  const { styles } = useTheme({ styles: getStyles });
 
   const {
     name,
@@ -20,22 +19,12 @@ const SelectNode = ({ application, onPress, closeModal }) => {
   } = application;
 
   return (
-    <View>
+    <View style={styles.container} >
       <View style={styles.titleHolder}>
         <View style={styles.row}>
           <Image source={{ uri: images?.logo.png }} style={styles.logo} />
           <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
         </View>
-        <TouchableOpacity onPress={closeModal}>
-          <Icon
-            onPress={closeModal}
-            name="cross"
-            color={
-              theme === themes.light ? colors.light.black : colors.dark.white
-            }
-            size={24}
-          />
-        </TouchableOpacity>
       </View>
       <FlatList
         data={apis}

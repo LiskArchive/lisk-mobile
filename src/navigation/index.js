@@ -24,7 +24,6 @@ import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
 import AccountsManagerScreen from 'modules/Auth/AccountsManagerScreen';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import DeleteAccount from 'modules/Auth/RemoveAccount';
-import SwitchApplication from 'modules/BlockchainApplication/components/SwitchApplication';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
 import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
@@ -113,11 +112,6 @@ const MainNavigator = () => {
             name="AddBookmark"
             component={AddBookmark}
             options={navigationOptions.AddBookmark}
-          />
-          <MainStack.Screen
-            name="SwitchApplication"
-            component={SwitchApplication}
-            options={navigationOptions.SignIn}
           />
           <MainStack.Screen
             name="AddApplication"

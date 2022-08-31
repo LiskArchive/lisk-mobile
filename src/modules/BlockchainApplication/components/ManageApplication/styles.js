@@ -25,13 +25,6 @@ export default {
     url: {
       color: colors.light.ultramarineBlue
     },
-    modal: {
-      height: 300,
-      zIndex: 2,
-      borderTopLeftRadius: 24,
-      borderTopRightRadius: 24,
-      padding: 20,
-    },
     title: {
       textAlign: 'center',
       marginBottom: 10,
