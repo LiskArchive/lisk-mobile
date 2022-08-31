@@ -17,7 +17,7 @@ export default () => ({
       marginRight: 60,
     },
     discreteContainer: {
-      paddingHorizontal: 10
+      marginRight: 10
     },
     accountCard: {
       backgroundColor: colors.light.ultramarineBlue,

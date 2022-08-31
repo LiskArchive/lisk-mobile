@@ -7,8 +7,7 @@ export default function getTransactionRowStyles() {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingTop: 12,
-        paddingBottom: 12,
+        paddingBottom: 24,
       },
       titleContainer: {
         flexDirection: 'column',
