@@ -212,7 +212,7 @@ function TransactionDetailsParams({ params }) {
 
       {show && (
         paramsEntries.map(([paramKey, paramValue]) => (
-          <>
+          <React.Fragment key={paramKey}>
             <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
               {TRANSACTION_PARAMS_NAMES[paramKey]}:
            </Text>
@@ -220,7 +220,7 @@ function TransactionDetailsParams({ params }) {
            <Text style={[styles.text, styles.theme.text]}>
              {paramValue}
            </Text>
-          </>
+          </React.Fragment>
         ))
       )}
     </View>
