@@ -29,8 +29,6 @@ import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddA
 import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
 import SendToken from 'modules/SendToken';
 import Request from 'modules/Request';
-import DeleteApplication from 'modules/BlockchainApplication/components/DeleteApplication';
-import DeleteApplicationSuccess from 'modules/BlockchainApplication/components/DeleteApplicationSuccess';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import navigationOptions from './navigationOptions';
@@ -126,16 +124,6 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="AddApplicationSuccess"
             component={AddApplicationSuccess}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
-            name="DeleteApplication"
-            component={DeleteApplication}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
-            name="DeleteApplicationSuccess"
-            component={DeleteApplicationSuccess}
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen name="About" component={About} options={navigationOptions.About} />

@@ -34,6 +34,7 @@ function BlockchainApplicationRow({
   showActive,
   showCaret,
   navigation,
+  deleteApplication
 }) {
   const [
     showDeleteDefaultApplicationModal,
@@ -48,7 +49,8 @@ function BlockchainApplicationRow({
     application,
     variant,
     navigation,
-    setShowDeleteDefaultApplicationModal
+    setShowDeleteDefaultApplicationModal,
+    deleteApplication,
   });
 
   return (
