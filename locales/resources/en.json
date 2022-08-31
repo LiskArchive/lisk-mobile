@@ -324,8 +324,8 @@
         "remove_now": "Remove now",
         "passwordSetupContinue": "Continue to Dashboard",
         "save_account": "Save account",
-        "addAnotherAccount": "Add another account",
-        "removeAccount": "Remove an account"
+        "addAccount": "Add account",
+        "removeAccount": "Remove account"
       }
     },
     "form": {

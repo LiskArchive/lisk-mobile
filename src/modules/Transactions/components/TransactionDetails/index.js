@@ -1,10 +1,10 @@
 import React from 'react';
 import { SafeAreaView, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import i18next from 'i18next';
 import { useGetTransactionQuery } from '../../api/useGetTransactionQuery';
 
 import getTransactionDetailsStyles from './styles';

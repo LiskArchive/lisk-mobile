@@ -320,7 +320,7 @@
         "remove_now": "",
         "passwordSetupContinue": "",
         "save_account": "",
-        "addAnotherAccount": "Add another account"
+        "addAccount": "Add another account"
       }
     },
     "form": {

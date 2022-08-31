@@ -41,7 +41,7 @@ const AuthMethod = ({
       dispatch(settingsRetrieved());
       init();
       if (accounts.length) {
-        navigation.navigate('ManageAccount');
+        navigation.navigate('AccountsManagerScreen');
       }
     } else {
       navigation.push('Intro');
@@ -60,7 +60,7 @@ const AuthMethod = ({
       navigation.navigate('DecryptPhrase', {
         title: 'auth.setup.decryptPassphrase',
         encryptedData,
-        successRoute: 'ManageAccount',
+        successRoute: 'AccountsManagerScreen',
       });
     } catch (error) {
       // TODO: Handle error message

@@ -69,7 +69,7 @@ export default () => ({
     },
     sendButtonText: {
       color: colors.light.ultramarineBlue,
-    }
+    },
   },
   [themes.light]: {
     username: {

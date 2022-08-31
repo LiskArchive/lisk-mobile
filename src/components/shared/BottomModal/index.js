@@ -7,20 +7,30 @@ import { colors, themes } from 'constants/styleGuide';
 import getStyles from './styles';
 
 const BottomModal = ({
-  showClose = true, show, toggleShow, children, style
+  showClose = true,
+  show,
+  toggleShow,
+  children,
+  style,
+  ...props
 }) => {
   const { styles, theme } = useTheme({ styles: getStyles() });
+
   return (
     <Modal
       isOpen={show}
       onClosed={() => toggleShow(false)}
-      style={[styles.wrapper, styles.theme.wrapper, style]}
-      backdropColor={theme === themes.dark ? colors.dark.volcanicSand : colors.light.white }
+      backdropColor={
+        theme === themes.dark
+          ? colors.dark.volcanicSand : colors.light.dark
+      }
       position="bottom"
+      coverScreen
+      style={[styles.container, styles.theme.container, style?.container]}
+      {...props}
     >
-      <View style={styles.row} >
-        <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
-      </View>
+      <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
+
       {showClose && (
         <TouchableOpacity
           style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
@@ -29,7 +39,8 @@ const BottomModal = ({
           <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
         </TouchableOpacity>
       )}
-      <View style={[styles.body]}>{children}</View>
+
+      {children}
     </Modal>
   );
 };

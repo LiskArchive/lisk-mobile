@@ -21,9 +21,8 @@ import PassphraseBackup from 'modules/Settings/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
 import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
 import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
-import ManageAccount from 'modules/Auth/ManageAccount';
+import AccountsManagerScreen from 'modules/Auth/AccountsManagerScreen';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
-import SwitchAccount from 'modules/Auth/SwitchAccount';
 import DeleteAccount from 'modules/Auth/RemoveAccount';
 import SwitchApplication from 'modules/BlockchainApplication/components/SwitchApplication';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
@@ -80,11 +79,6 @@ const MainNavigator = () => {
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen
-            name="SwitchAccount"
-            component={SwitchAccount}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
             name="DeleteAccount"
             component={DeleteAccount}
             options={navigationOptions.SignIn}
@@ -95,8 +89,8 @@ const MainNavigator = () => {
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen
-            name="ManageAccount"
-            component={ManageAccount}
+            name="AccountsManagerScreen"
+            component={AccountsManagerScreen}
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen

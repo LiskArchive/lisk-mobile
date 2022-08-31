@@ -1,5 +1,5 @@
 import {
-  themes, colors, boxes
+  themes, colors
 } from 'constants/styleGuide';
 import {
   deviceWidth,
@@ -7,29 +7,32 @@ import {
 
 export default () => ({
   common: {
-    wrapper: {
+    container: {
       height: deviceWidth(),
       zIndex: 3,
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
-      padding: boxes.boxPadding,
+      padding: 16,
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     closeButtonContainer: {
       alignSelf: 'flex-end',
-      marginTop: -20,
-      padding: 10,
+      marginTop: -8,
+      padding: 4,
       borderRadius: 50,
     },
     horizontalLine: {
-      height: 8,
-      width: 60,
+      height: 4,
+      width: 34,
       borderRadius: 40,
-      marginTop: 40,
+      marginTop: 4,
     }
   },
 
   [themes.light]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.light.white,
     },
     horizontalLine: {
@@ -41,7 +44,7 @@ export default () => ({
   },
 
   [themes.dark]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.mainBg,
     },
     horizontalLine: {
