@@ -15,7 +15,7 @@ export default function getAccountsManagerStyles() {
       },
       description: {
         textAlign: 'center',
-        marginBottom: 8,
+        marginBottom: 24,
         fontSize: 12
       },
       body: {

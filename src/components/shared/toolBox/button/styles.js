@@ -32,7 +32,7 @@ export default () => ({
     buttonContainer: {
       borderColor: colors.light.ghost,
       borderWidth: 1,
-      borderRadius: 2,
+      borderRadius: 10,
     },
     buttonText: {
       color: colors.light.maastrichtBlue,

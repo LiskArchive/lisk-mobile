@@ -61,7 +61,10 @@ export default function AccountItem({
 
         <View style={styles.content}>
           {!!username && <P style={[styles.username, styles.theme.username]}>{username}</P>}
-          <P style={[styles.address, styles.theme.address]}>{stringShortener(address, 5, 5)}</P>
+
+          <P style={[styles.address, styles.theme.address]}>
+            {stringShortener(address, 6, 6)}
+          </P>
         </View>
 
         <View>{active && <CircleCheckedSvg variant="fill" />}</View>

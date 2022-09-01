@@ -14,7 +14,7 @@ export default function getAccountItemStyles() {
         borderBottomColor: colors.light.platinumGray,
       },
       avatar: {
-        marginRight: 16,
+        marginRight: 8,
       },
       username: {
         fontFamily: fonts.family.contextSemiBold,

@@ -5,7 +5,8 @@ import {
 export default () => ({
   common: {
     container: {
-      padding: boxes.boxPadding,
+      flex: 1,
+      width: '100%',
     },
     title: {
       color: colors.light.zodiacBlue,
