@@ -1,17 +1,13 @@
-/* eslint-disable max-statements */
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import ModalBox from 'react-native-modalbox';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
-import { colors } from 'constants/styleGuide';
-import Icon from 'components/shared/toolBox/icon';
 
 import getSendTokenSummaryStepStyles from './styles';
 import ConfirmAndSignTransaction from '../ConfirmAndSignTransaction';
 import SendTokenSuccess from '../SendTokenSuccess';
 import SendTokenError from '../SendTokenError';
+import BottomModal from '../../../../components/shared/BottomModal';
 
 export function SendTokenSummaryModal({
   show,
@@ -88,27 +84,17 @@ export function SendTokenSummaryModal({
   }
 
   return (
-    <ModalBox
-      position="bottom"
-      style={[
-        styles.confirmAndSignTransactionModal,
-        styles.theme.confirmAndSignTransactionModal
-      ]}
+    <BottomModal
+      style={{
+        container: [
+          styles.confirmAndSignTransactionModal,
+          styles.theme.confirmAndSignTransactionModal
+        ]
+      }}
       isOpen={show}
       onClosed={handleOnProcessCompleted}
-      coverScreen
-      useNativeDriver
       >
-      <View style={styles.iconWrapper}>
-        <Icon
-          onPress={() => setShow(false)}
-          name="cross"
-          color={colors.light.ultramarineBlue}
-          size={24}
-        />
-      </View>
-
       {renderStep()}
-    </ModalBox>
+    </BottomModal>
   );
 }
