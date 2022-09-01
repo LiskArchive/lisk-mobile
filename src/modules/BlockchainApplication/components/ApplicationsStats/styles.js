@@ -75,9 +75,6 @@ export default () => ({
     },
   },
   [themes.light]: {
-    container: {
-      backgroundColor: colors.light.white,
-    },
     title: {
       color: colors.light.zodiacBlue,
     },
@@ -86,9 +83,7 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    container: {
-      backgroundColor: colors.dark.textInputBg,
-    },
+
     title: {
       color: colors.dark.white,
     },

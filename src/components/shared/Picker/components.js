@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import ModalBox from 'react-native-modalbox';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 import { useTheme } from 'hooks/useTheme';
 import CaretSvg from 'assets/svgs/CaretSvg';
@@ -8,6 +7,7 @@ import { themes, colors } from 'constants/styleGuide';
 
 import { usePicker } from './hooks';
 import { getPickerStyles } from './styles';
+import BottomModal from '../BottomModal';
 
 export function PickerLabel({ children, style: baseStyle }) {
   const { styles } = useTheme({
@@ -76,21 +76,22 @@ export function PickerToggle({
 export function PickerMenu({ children, style: baseStyle }) {
   const { showMenu, setShowMenu } = usePicker();
 
-  const { styles, theme } = useTheme({
+  const { styles } = useTheme({
     styles: getPickerStyles(),
   });
 
   return (
-    <ModalBox
-      position="bottom"
-      style={[styles.menuContainer, styles.theme.menuContainer, baseStyle]}
-      isOpen={showMenu}
-      backdropColor={theme === themes.dark ? colors.dark.volcanicSand : colors.light.white }
-      onClosed={() => setShowMenu(false)}
-      coverScreen
+    <BottomModal
+      show={showMenu}
+      toggleShow={() => setShowMenu(false)}
+      style={{
+        container: styles.menuModalContainer
+      }}
     >
-      {children}
-    </ModalBox>
+      <View style={[styles.menuContainer, baseStyle?.container]}>
+        {children}
+      </View>
+    </BottomModal>
   );
 }
 

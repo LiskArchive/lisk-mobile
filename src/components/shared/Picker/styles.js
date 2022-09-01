@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 import { themes, colors, fonts, } from 'constants/styleGuide';
 
 export function getPickerStyles(error) {
@@ -26,16 +28,19 @@ export function getPickerStyles(error) {
         color: colors.light.platinum,
         fontWeight: '400'
       },
+      menuModalContainer: {
+        height: Dimensions.get('window').height / 1.8,
+      },
       menuContainer: {
-        height: '50%',
-        zIndex: 3,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
+        flex: 1,
+        width: '100%',
       },
       itemContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 16,
+        paddingTop: 16,
+        paddingBottom: 16,
+        width: '100%',
       },
       errorText: {
         marginTop: 8,

@@ -4,6 +4,7 @@ import { useController } from 'react-hook-form';
 
 import Picker from 'components/shared/Picker';
 import Avatar from 'components/shared/avatar';
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import { stringShortener } from 'utilities/helpers';
 import { useTheme } from 'hooks/useTheme';
@@ -100,22 +101,27 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
       </Picker.Toggle>
 
       <Picker.Menu>
-        {applications?.data?.map((application) => (
-          <Picker.Item
-            key={application.chainID}
-            value={application.chainID}
-          >
+        <InfiniteScrollList
+          data={applications?.data}
+          keyExtractor={(item) => item.chainID}
+          renderItem={(item) => (
+            <Picker.Item
+              key={item.chainID}
+              value={item.chainID}
+            >
+              <Text style={[styles.text, styles.theme.text]}>
+                {item.name}
+              </Text>
 
-            <Text style={[styles.text, styles.theme.text]}>
-              {application.name}
-            </Text>
-
-            <Image
-              source={{ uri: application.images.logo.png }}
-              style={[styles.applicationLogoImage]}
-            />
-          </Picker.Item>
-        ))}
+              <Image
+                source={{ uri: item.images.logo.png }}
+                style={[styles.applicationLogoImage]}
+              />
+            </Picker.Item>
+          )}
+          renderSpinner
+          // TODO: Integrate pagination props using react-query.
+        />
       </Picker.Menu>
     </Picker>
   );
