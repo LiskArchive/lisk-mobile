@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { colors, themes } from 'constants/styleGuide';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
 import BottomModal from 'components/shared/BottomModal';
 import StatsSvg from 'assets/svgs/StatsSvg';
-import BlockchainApplicationsStats from '../ApplicationsStats';
+import { colors, themes } from 'constants/styleGuide';
 
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
+import BlockchainApplicationsStats from '../ApplicationsStats';
+
 import getBlockchainApplicationsExplorerStyles from './styles';
 
 /**
@@ -98,9 +99,9 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
       </NavigationSafeAreaView>
 
       <BottomModal
+        show={showStatsModal}
+        toggleShow={() => setShowStatsModal(false)}
         style={{ container: styles.statsModal }}
-        isOpen={showStatsModal}
-        onClosed={() => setShowStatsModal(false)}
       >
         <BlockchainApplicationsStats
           totalSupply={data.totalSupplyLSK}

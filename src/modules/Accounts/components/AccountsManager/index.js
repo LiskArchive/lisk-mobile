@@ -3,9 +3,10 @@ import { View } from 'react-native';
 
 import { useTheme } from 'hooks/useTheme';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import DeleteAccountConfirmation from '../DeleteAccountConfirmation';
+import AccountList from '../AccountList';
 
 import getAccountsManagerStyles from './styles';
-import { AccountsList, DeleteAccountConfirmation } from './components';
 
 export default function AccountsManager({
   mode = 'screen',
@@ -28,7 +29,7 @@ export default function AccountsManager({
   switch (activeSection.id) {
     case 'accountsList':
       children = (
-        <AccountsList
+        <AccountList
           mode={mode}
           accounts={accounts}
           onAccountPress={onAccountPress}
