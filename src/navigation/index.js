@@ -23,7 +23,6 @@ import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
 import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
 import AccountsManagerScreen from 'modules/Auth/AccountsManagerScreen';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
-import DeleteAccount from 'modules/Auth/RemoveAccount';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
 import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
@@ -73,11 +72,6 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="AuthMethod"
             component={AuthMethod}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
-            name="DeleteAccount"
-            component={DeleteAccount}
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen

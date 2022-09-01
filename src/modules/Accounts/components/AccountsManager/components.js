@@ -79,16 +79,7 @@ export function AccountsList({
         <PrimaryButton
           onPress={() => navigation.navigate('AuthMethod')}
           title={i18next.t('auth.setup.buttons.addAccount')}
-          // style={[styles.button, styles.outline, styles.theme.outline]}
         />
-
-        {mode === 'screen' && (
-          <Button
-            onPress={() => navigation.navigate('DeleteAccount')}
-            title={i18next.t('auth.setup.buttons.removeAccount')}
-            style={[styles.button, styles.outline, styles.theme.outline]}
-          />
-        )}
       </View>
     </>
   );
@@ -115,8 +106,6 @@ export function DeleteAccountConfirmation({
     deleteAccountByAddress(account.metadata.address);
     onReset();
   }
-
-  console.log({ account });
 
   return (
     <>
