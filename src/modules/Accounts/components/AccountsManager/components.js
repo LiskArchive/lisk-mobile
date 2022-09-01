@@ -66,7 +66,6 @@ export function AccountsList({
             active={
               item.metadata.address === currentAccount.metadata?.address
             }
-            mode={mode}
           />
         )}
         renderSpinner

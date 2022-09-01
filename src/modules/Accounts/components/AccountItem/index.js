@@ -20,7 +20,6 @@ export default function AccountItem({
   onDeletePress,
   testID,
   active,
-  mode = 'screen',
 }) {
   const { styles, theme } = useTheme({ styles: getAccountItemStyles() });
 
@@ -52,10 +51,9 @@ export default function AccountItem({
           onPress: onDeletePress,
         },
       ]}
-      enabled={mode === 'modal'}
     >
       <TouchableOpacity
-        style={[styles.container, styles.theme.container, styles[mode]]}
+        style={[styles.container, styles.theme.container]}
         onPress={onPress}
         testID={testID}
       >
