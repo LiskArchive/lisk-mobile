@@ -48,7 +48,7 @@ const BlockchainApplicationsStats = ({
   const series = [stats.registered, stats.active, stats.terminated];
 
   return (
-    <View style={[styles.container, styles.theme.container, props.styles.container]}>
+    <View style={[styles.container, props.styles.container]}>
       <H2 style={[styles.title, styles.theme.title]}>{t('application.stats.title')}</H2>
       <View style={styles.chartContainer}>
         <PieChart

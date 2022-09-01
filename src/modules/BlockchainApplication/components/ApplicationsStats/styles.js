@@ -5,7 +5,8 @@ import {
 export default () => ({
   common: {
     container: {
-      padding: boxes.boxPadding,
+      flex: 1,
+      width: '100%',
     },
     title: {
       color: colors.light.zodiacBlue,
@@ -74,9 +75,6 @@ export default () => ({
     },
   },
   [themes.light]: {
-    container: {
-      backgroundColor: colors.light.white,
-    },
     title: {
       color: colors.light.zodiacBlue,
     },
@@ -85,9 +83,7 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    container: {
-      backgroundColor: colors.dark.textInputBg,
-    },
+
     title: {
       color: colors.dark.white,
     },

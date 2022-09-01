@@ -305,11 +305,7 @@
   "auth": {
     "setup": {
       "add_account": "Add account",
-      "manageAccounts": "Manage accounts",
       "switchAccount": "Switch account",
-      "deleteAccount": "Choose account",
-      "removeAccount": "Remove account?",
-      "removeAccount_description": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
       "decryptPassphrase": "Decrypt your secret recovery phrase",
       "decryptPassphraseError": "Unable to decrypt account. Please check your password",
       "addAccountDescription": "Enter your secret recovery phrase to manage your account",
@@ -320,12 +316,8 @@
       "secret_phrase": "Secret recovery phrase",
       "restore_file": "Restore from file",
       "buttons": {
-        "download": "Download",
-        "remove_now": "Remove now",
         "passwordSetupContinue": "Continue to Dashboard",
-        "save_account": "Save account",
-        "addAccount": "Add account",
-        "removeAccount": "Remove account"
+        "save_account": "Save account"
       }
     },
     "form": {
@@ -474,6 +466,16 @@
     }
   },
   "accounts": {
+    "accountsManager" : {
+      "title": "Manage accounts",
+      "description": "You can switch your account and also remove any account you're not using at the moment",
+      "addAccountButtonText": "Add account",
+      "deleteAccountTitle": "Remove account?",
+      "deleteAccountDescription": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
+      "deleteAccountButtonText": "Remove now",
+      "downloadFileButtonText": "Download",
+      "backButtonText": "Back"
+    },
     "tokens": "Tokens",
     "lockedTokens": "Locked Tokens",
     "emptyTokenMessage": "You do not have any token on this account. You can request for tokens",

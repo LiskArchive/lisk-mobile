@@ -10,19 +10,11 @@ export default function getAccountItemStyles() {
         paddingTop: 16,
         paddingBottom: 16,
         alignItems: 'center',
-      },
-      modal: {
         borderBottomWidth: 1,
         borderBottomColor: colors.light.platinumGray,
       },
-      screen: {
-        borderRadius: 10,
-        borderWidth: 0.4,
-        padding: 16,
-        marginVertical: 8
-      },
       avatar: {
-        marginRight: 16,
+        marginRight: 8,
       },
       username: {
         fontFamily: fonts.family.contextSemiBold,

@@ -48,7 +48,7 @@ export default {
     },
     outline: {
       borderWidth: 1,
-      borderRadius: 5,
+      borderRadius: 10,
       minHeight: 50,
     },
   },

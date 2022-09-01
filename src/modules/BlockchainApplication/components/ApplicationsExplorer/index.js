@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import ModalBox from 'react-native-modalbox';
 import { translate } from 'react-i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { colors, themes } from 'constants/styleGuide';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
-import Icon from 'components/shared/toolBox/icon';
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
+import BottomModal from 'components/shared/BottomModal';
 import StatsSvg from 'assets/svgs/StatsSvg';
-import BlockchainApplicationsStats from '../ApplicationsStats';
-import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
+import { colors, themes } from 'constants/styleGuide';
 
-import getBlockchainApplicationsExplorerStyles from './styles';
+import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
+import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
-import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats';
+import BlockchainApplicationsStats from '../ApplicationsStats';
+
+import getBlockchainApplicationsExplorerStyles from './styles';
 
 /**
  *
@@ -75,40 +75,34 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
   };
 
   return (
-    <NavigationSafeAreaView>
-      <HeaderBackButton
-        title={t('application.explore.title')}
-        noIcon
-        rightIconComponent={() => (
-          <IconButton
-            onClick={() => setShowStatsModal(true)}
-            icon={<StatsSvg height={20} />}
-            title={t('application.explore.statsButtonText')}
-            titleStyle={{
-              marginLeft: 8,
-              color: theme === themes.dark ? colors.dark.mountainMist : colors.light.zodiacBlue,
-            }}
-            style={styles.statsButton}
-          />
-        )}
-      />
-
-      {renderData()}
-
-      <ModalBox
-        position="bottom"
-        style={styles.statsModal}
-        isOpen={showStatsModal}
-        onClosed={() => setShowStatsModal(false)}
-      >
-        <Icon
-          onPress={() => setShowStatsModal(false)}
-          name="cross"
-          color={theme === themes.light ? colors.light.black : colors.dark.white}
-          style={styles.statsModalCloseButton}
-          size={24}
+    <>
+      <NavigationSafeAreaView>
+        <HeaderBackButton
+          title={t('application.explore.title')}
+          noIcon
+          rightIconComponent={() => (
+            <IconButton
+              onClick={() => setShowStatsModal(true)}
+              icon={<StatsSvg height={20} />}
+              title={t('application.explore.statsButtonText')}
+              titleStyle={{
+                marginLeft: 8,
+                color: theme === themes.dark ? colors.dark.mountainMist : colors.light.zodiacBlue,
+              }}
+              style={styles.statsButton}
+            />
+          )}
         />
 
+        {renderData()}
+
+      </NavigationSafeAreaView>
+
+      <BottomModal
+        show={showStatsModal}
+        toggleShow={() => setShowStatsModal(false)}
+        style={{ container: styles.statsModal }}
+      >
         <BlockchainApplicationsStats
           totalSupply={data.totalSupplyLSK}
           staked={data.stakedLSK}
@@ -120,8 +114,8 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
             },
           }}
         />
-      </ModalBox>
-    </NavigationSafeAreaView>
+      </BottomModal>
+    </>
   );
 }
 

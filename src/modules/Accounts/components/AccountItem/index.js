@@ -4,10 +4,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useTheme } from 'hooks/useTheme';
 import Avatar from 'components/shared/avatar';
-import { stringShortener } from 'utilities/helpers';
 import { P } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
 import Icon from 'components/shared/toolBox/icon';
+import { stringShortener } from 'utilities/helpers';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import RefreshSvg from 'assets/svgs/RefreshSvg';
 import { colors } from 'constants/styleGuide';
@@ -17,9 +17,9 @@ import getAccountItemStyles from './styles';
 export default function AccountItem({
   account,
   onPress,
+  onDeletePress,
   testID,
   active,
-  mode = 'screen',
 }) {
   const { styles, theme } = useTheme({ styles: getAccountItemStyles() });
 
@@ -48,14 +48,12 @@ export default function AccountItem({
           title: 'Delete',
           color: colors.dark.furyRed,
           icon: () => <Icon name="delete-bookmark" size={20} color={colors[theme].white} />,
-          // TODO: Implement delete action.
-          onPress: () => {},
+          onPress: onDeletePress,
         },
       ]}
-      enabled={mode === 'modal'}
     >
       <TouchableOpacity
-        style={[styles.container, styles.theme.container, styles[mode]]}
+        style={[styles.container, styles.theme.container]}
         onPress={onPress}
         testID={testID}
       >
@@ -63,7 +61,10 @@ export default function AccountItem({
 
         <View style={styles.content}>
           {!!username && <P style={[styles.username, styles.theme.username]}>{username}</P>}
-          <P style={[styles.address, styles.theme.address]}>{stringShortener(address, 5, 5)}</P>
+
+          <P style={[styles.address, styles.theme.address]}>
+            {stringShortener(address, 6, 6)}
+          </P>
         </View>
 
         <View>{active && <CircleCheckedSvg variant="fill" />}</View>

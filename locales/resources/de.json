@@ -301,11 +301,7 @@
   "auth": {
     "setup": {
       "add_account": "",
-      "manageAccounts": "",
       "switchAccount": "",
-      "deleteAccount": "",
-      "removeAccount": "",
-      "removeAccount_description": "",
       "decryptPassphrase": "",
       "decryptPassphraseError": "",
       "addAccountDescription": "",
@@ -316,11 +312,8 @@
       "passwordSetupSuccessTitle": "",
       "passwordSetupSuccessDescription": "",
       "buttons": {
-        "download": "",
-        "remove_now": "",
         "passwordSetupContinue": "",
-        "save_account": "",
-        "addAccount": "Add another account"
+        "save_account": ""
       }
     },
     "form": {
@@ -469,6 +462,16 @@
     }
   },
   "accounts": {
+    "accountsManager" : {
+      "title": "Konten verwalten",
+      "description": "Sie können Ihr Konto wechseln und auch jedes Konto entfernen, das Sie derzeit nicht verwenden",
+      "addAccountButtonText": "Konto hinzufügen",
+      "deleteAccountTitle": "Konto entfernen?",
+      "deleteAccountDescription": "Dieses Konto wird nicht mehr auf diesem Gerät gespeichert. Sie können Ihre geheime Wiederherstellungsphrase sichern, bevor Sie sie entfernen.",
+      "deleteAccountButtonText": "Jetzt entfernen",
+      "downloadFileButtonText": "Download",
+      "backButtonText": "Zurück"
+    },
     "tokens": "",
     "lockedTokens": "",
     "emptyTokenMessage": "",

@@ -7,6 +7,7 @@ import { useController } from 'react-hook-form';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { useTheme } from 'hooks/useTheme';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
@@ -79,18 +80,24 @@ export function TokenSelectField({
       </Picker.Toggle>
 
       <Picker.Menu>
-        {tokens.data?.map(token => (
-          <Picker.Item
-            key={token.tokenID}
-            value={token.tokenID}
-          >
-            <Text style={[styles.text, styles.theme.text]}>
-              {token.symbol}
-            </Text>
+        <InfiniteScrollList
+          data={tokens.data}
+          keyExtractor={(item) => item.tokenID}
+          renderItem={(item) => (
+            <Picker.Item
+              key={item.tokenID}
+              value={item.tokenID}
+            >
+              <Text style={[styles.text, styles.theme.text]}>
+                {item.symbol}
+              </Text>
 
-            <TokenSvg symbol={token.symbol} style={styles.tokenSvg} />
-          </Picker.Item>
-        ))}
+              <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
+            </Picker.Item>
+          )}
+          renderSpinner
+          // TODO: Integrate pagination props using react-query.
+        />
       </Picker.Menu>
     </Picker>
   );

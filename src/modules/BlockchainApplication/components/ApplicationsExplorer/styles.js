@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 import { themes, colors } from 'constants/styleGuide';
 
 export default function getBlockchainApplicationsExplorerStyles() {
@@ -7,10 +9,7 @@ export default function getBlockchainApplicationsExplorerStyles() {
         padding: 20
       },
       statsModal: {
-        height: 500,
-        zIndex: 2,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
+        height: Dimensions.get('window').height / 1.6,
       },
       statsModalCloseButton: {
         position: 'absolute',

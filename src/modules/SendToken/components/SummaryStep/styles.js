@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default function getSendTokenSummaryStepStyles() {
@@ -61,15 +63,7 @@ export default function getSendTokenSummaryStepStyles() {
         borderColor: colors.light.platinumGray,
       },
       confirmAndSignTransactionModal: {
-        backgroundColor: colors.light.white,
-        height: 560,
-        zIndex: 3,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
-        paddingTop: 24,
-        paddingBottom: 24
+        height: Dimensions.get('window').height / 1.8,
       },
       iconWrapper: {
         flexDirection: 'row',
