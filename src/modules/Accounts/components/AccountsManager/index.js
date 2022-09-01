@@ -1,33 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { H2, P } from 'components/shared/toolBox/typography';
-import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
-import { Button, PrimaryButton } from 'components/shared/toolBox/button';
-import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 
 import getAccountsManagerStyles from './styles';
-import AccountItem from '../AccountItem';
+import { AccountsList, DeleteAccountConfirmation } from './components';
 
 export default function AccountsManager({
   mode = 'screen',
-  onAccountSelect,
+  onAccountPress,
   style
 }) {
-  const navigation = useNavigation();
+  const [activeSection,
+    setActiveSection] = useState({ id: 'accountsList', data: undefined });
 
   const { accounts } = useAccounts();
-  const [currentAccount, setAccount] = useCurrentAccount();
 
   const { styles } = useTheme({ styles: getAccountsManagerStyles() });
 
-  function handleSelectAccountClick(account) {
-    setAccount(account);
-    navigation.navigate('Main');
-    if (onAccountSelect) onAccountSelect(account);
+  let children = null;
+
+  switch (activeSection.id) {
+    case 'accountsList':
+      children = (
+        <AccountsList
+          mode={mode}
+          accounts={accounts}
+          onAccountPress={onAccountPress}
+          onDeleteAccountPress={(account) =>
+            setActiveSection({ id: 'deleteAccountConfirmation', data: account })}
+          style={style}
+        />
+      );
+      break;
+
+    case 'deleteAccountConfirmation':
+      children = (
+        <DeleteAccountConfirmation
+          style={style}
+          account={activeSection.data}
+          onCancel = {() => setActiveSection({ id: 'accountsList', data: undefined })}
+        />
+      );
+      break;
+
+    default:
+      break;
   }
 
   return (
@@ -38,57 +57,7 @@ export default function AccountsManager({
         style?.container
       ]}
     >
-      <H2 style={[styles.title, styles.theme.title, style?.title]}>
-        {i18next.t('auth.setup.manageAccounts')}
-      </H2>
-
-      {mode === 'modal' && (
-        <P
-          style={[
-            styles.description,
-            styles.theme.description,
-            style?.description
-          ]}
-        >
-          You can switch your account and also remove any account
-          you&apos;re not using at the moment
-        </P>
-      )}
-
-      <InfiniteScrollList
-        data={accounts}
-        keyExtractor={(item) => item.id}
-        renderItem={(item) => (
-          <AccountItem
-            key={item.metadata.address}
-            account={item}
-            onPress={() => handleSelectAccountClick(item)}
-            active={
-              item.metadata.address === currentAccount.metadata?.address
-            }
-            mode={mode}
-          />
-        )}
-        renderSpinner
-        // TODO: Integrate pagination props when useAccounts
-        // is refactored to use react-query.
-      />
-
-      <View style={[style?.footer]}>
-        <PrimaryButton
-          onPress={() => navigation.navigate('AuthMethod')}
-          title={i18next.t('auth.setup.buttons.addAccount')}
-          style={[styles.button, styles.outline, styles.theme.outline]}
-        />
-
-        {mode === 'screen' && (
-          <Button
-            onPress={() => navigation.navigate('DeleteAccount')}
-            title={i18next.t('auth.setup.buttons.removeAccount')}
-            style={[styles.button, styles.outline, styles.theme.outline]}
-          />
-        )}
-      </View>
+      {children}
     </View>
   );
 }

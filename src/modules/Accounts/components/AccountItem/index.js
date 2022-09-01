@@ -17,6 +17,7 @@ import getAccountItemStyles from './styles';
 export default function AccountItem({
   account,
   onPress,
+  onDeletePress,
   testID,
   active,
   mode = 'screen',
@@ -48,8 +49,7 @@ export default function AccountItem({
           title: 'Delete',
           color: colors.dark.furyRed,
           icon: () => <Icon name="delete-bookmark" size={20} color={colors[theme].white} />,
-          // TODO: Implement delete action.
-          onPress: () => {},
+          onPress: onDeletePress,
         },
       ]}
       enabled={mode === 'modal'}

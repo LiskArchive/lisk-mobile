@@ -5,6 +5,7 @@ export default function getAccountsManagerStyles() {
     common: {
       container: {
         flex: 1,
+        width: '100%',
       },
       title: {
         textAlign: 'center',
