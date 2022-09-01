@@ -39,7 +39,7 @@ export function AccountsList({
   return (
     <>
       <H2 style={[styles.title, styles.theme.title, style?.title]}>
-        {i18next.t('auth.setup.manageAccounts')}
+        {i18next.t('accounts.accountsManager.title')}
       </H2>
 
       {mode === 'modal' && (
@@ -50,8 +50,7 @@ export function AccountsList({
             style?.description
           ]}
         >
-          You can switch your account and also remove any account
-          you&apos;re not using at the moment
+          {i18next.t('accounts.accountsManager.description')}
         </P>
       )}
 
@@ -78,7 +77,7 @@ export function AccountsList({
       <View style={[style?.footer]}>
         <PrimaryButton
           onPress={() => navigation.navigate('AuthMethod')}
-          title={i18next.t('auth.setup.buttons.addAccount')}
+          title={i18next.t('accounts.accountsManager.addAccountButtonText')}
         />
       </View>
     </>
@@ -111,7 +110,7 @@ export function DeleteAccountConfirmation({
     <>
       <View style={{ flex: 1 }}>
         <H2 style={[styles.title, styles.theme.title, style?.title]}>
-          {i18next.t('auth.setup.removeAccount')}
+          {i18next.t('accounts.accountsManager.deleteAccountTitle')}
         </H2>
 
         <P
@@ -121,7 +120,7 @@ export function DeleteAccountConfirmation({
             style?.description
           ]}
         >
-          {i18next.t('auth.setup.removeAccount_description')}
+          {i18next.t('accounts.accountsManager.deleteAccountDescription')}
         </P>
 
         <View style={[styles.row, styles.addressContainer]}>
@@ -151,21 +150,21 @@ export function DeleteAccountConfirmation({
               <DownloadSvg style={[styles.downloadFileIcon]}/>
           }}
         >
-          {i18next.t('auth.setup.buttons.download')}
+          {i18next.t('accounts.accountsManager.downloadFileButtonText')}
         </LabelButton>
       </View>
 
       <View style={[style?.footer]}>
         <PrimaryButton
           onPress={handleDelete}
-          title={i18next.t('auth.setup.buttons.remove_now')}
+          title={i18next.t('accounts.accountsManager.deleteAccountButtonText')}
           disabled={!downloaded}
           style={[styles.button, styles.outline, styles.theme.outline]}
         />
 
         <Button
           onPress={onReset}
-          title={'Back'}
+          title={i18next.t('accounts.accountsManager.backButtonText')}
           style={[styles.button, styles.outline, styles.theme.outline]}
         />
       </View>
