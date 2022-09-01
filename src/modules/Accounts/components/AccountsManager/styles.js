@@ -1,4 +1,6 @@
-import { colors, themes, boxes } from 'constants/styleGuide';
+import {
+  colors, themes, boxes, fonts
+} from 'constants/styleGuide';
 
 export default function getAccountsManagerStyles() {
   return {
@@ -28,7 +30,30 @@ export default function getAccountsManagerStyles() {
       outline: {
         borderWidth: 1,
         borderRadius: 5,
-        minHeight: 50,
+        minHeight: 48,
+      },
+      row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      addressContainer: {
+        marginTop: 24,
+        marginBottom: 16,
+      },
+      filenameContainer: {
+        marginTop: 16,
+      },
+      addressText: {
+        fontSize: 14,
+        marginLeft: 8
+      },
+      downloadFileIcon: {
+        marginLeft: 8,
+      },
+      text: {
+        fontFamily: fonts.family.heading,
+        fontSize: fonts.size.small
       },
     },
     [themes.light]: {
@@ -44,6 +69,12 @@ export default function getAccountsManagerStyles() {
       description: {
         color: colors.light.zodiacBlue,
       },
+      text: {
+        color: colors.light.zodiacBlue
+      },
+      addressText: {
+        color: colors.light.blueGray
+      }
     },
 
     [themes.dark]: {
@@ -59,6 +90,12 @@ export default function getAccountsManagerStyles() {
       description: {
         color: colors.dark.ghost,
       },
+      text: {
+        color: colors.light.white
+      },
+      addressText: {
+        color: colors.light.ghost
+      }
     }
   };
 }

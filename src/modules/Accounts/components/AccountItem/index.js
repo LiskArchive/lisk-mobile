@@ -4,10 +4,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useTheme } from 'hooks/useTheme';
 import Avatar from 'components/shared/avatar';
-import { stringShortener } from 'utilities/helpers';
 import { P } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
 import Icon from 'components/shared/toolBox/icon';
+import { stringShortener } from 'utilities/helpers';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import RefreshSvg from 'assets/svgs/RefreshSvg';
 import { colors } from 'constants/styleGuide';

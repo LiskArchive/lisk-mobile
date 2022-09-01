@@ -14,6 +14,7 @@ const DeleteAccount = ({ styles, t, nextStep }) => {
   const navigation = useNavigation();
 
   const selectAccount = (encryptedAccount) => {
+    console.log({ encryptedAccount });
     nextStep({ encryptedAccount });
   };
 

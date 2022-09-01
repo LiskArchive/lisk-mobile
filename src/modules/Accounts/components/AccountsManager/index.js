@@ -19,6 +19,10 @@ export default function AccountsManager({
 
   const { styles } = useTheme({ styles: getAccountsManagerStyles() });
 
+  function handleResetSection() {
+    setActiveSection({ id: 'accountsList', data: undefined });
+  }
+
   let children = null;
 
   switch (activeSection.id) {
@@ -38,9 +42,9 @@ export default function AccountsManager({
     case 'deleteAccountConfirmation':
       children = (
         <DeleteAccountConfirmation
-          style={style}
           account={activeSection.data}
-          onCancel = {() => setActiveSection({ id: 'accountsList', data: undefined })}
+          onReset={handleResetSection}
+          style={style}
         />
       );
       break;
