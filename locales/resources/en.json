@@ -397,7 +397,7 @@
       "recipientApplicationFieldLabel": "To Application",
       "recipientApplicationFieldPlaceholder": "Select an Application",
       "recipientAccountFieldLabel": "Recipient",
-      "recipientAccountFieldPlaceholder": "Select a recipient account",
+      "recipientAccountFieldPlaceholder": "Choose from bookmark",
       "nextStepButtonText": "Continue"
     },
     "tokenSelect": {

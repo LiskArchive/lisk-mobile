@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable complexity */
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
@@ -44,17 +46,29 @@ export function PickerToggle({
           baseStyle?.container
         ]}
       >
-        {children || (
+        {children || (value ? (
           <Text
             style={[
-              styles[value ? 'toggleText' : 'togglePlaceholder'],
-              styles.theme[value ? 'toggleText' : 'togglePlaceholder'],
+              styles.toggleText,
+              styles.theme.toggleText,
               baseStyle?.toggleText
             ]}
           >
             {value || placeholder}
           </Text>
-        )}
+        ) : (
+          typeof placeholder === 'string' ? (
+            <Text
+              style={[
+                styles.togglePlaceholder,
+                styles.theme.togglePlaceholder,
+                baseStyle?.toggleText
+              ]}
+            >
+              {value || placeholder}
+            </Text>
+          ) : placeholder
+        ))}
 
         {!disabled && (
           <CaretSvg

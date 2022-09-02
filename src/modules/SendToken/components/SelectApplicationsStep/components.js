@@ -10,9 +10,11 @@ import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import CircleSvg from 'assets/svgs/CircleSvg';
+import BookmarksSvg from 'assets/svgs/BookmarksSvg';
 import { stringShortener } from 'utilities/helpers';
 
 import getSendTokenSelectApplicationsStepStyles from './styles';
+import colors from '../../../../constants/styleGuide/colors';
 
 export function SendTokenSenderApplicationField({ form, applications, t }) {
   const { field } = useController({
@@ -43,7 +45,7 @@ export function SendTokenSenderApplicationField({ form, applications, t }) {
         placeholder={t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')}
       >
         {senderApplication && (
-          <View style={[styles.applicationNameContainer]}>
+          <View style={[styles.row]}>
             <Text style={[styles.text, styles.theme.text]}>
               {senderApplication.name}
             </Text>
@@ -73,8 +75,6 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
     application => application.chainID === field.value
   );
 
-  console.log({ blaaa: field.value });
-
   return (
     <Picker
       value={field.value}
@@ -87,12 +87,10 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
 
       <Picker.Toggle
         disabled={applications?.loading}
-        placeholder={
-          t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')
-        }
+        placeholder={t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
       >
         {recipientApplication && (
-          <View style={[styles.applicationNameContainer]}>
+          <View style={[styles.row]}>
             <Text style={[styles.text, styles.theme.text]}>
               {recipientApplication.name}
             </Text>
@@ -164,13 +162,13 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
     <>
       <Input
         label={t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
-        value={selectedFieldType === 'input' && field.value}
+        value={selectedFieldType === 'input' ? field.value : ''}
         placeholder="Input wallet address or choose a username"
         onChange={handleInputChange}
         error={selectedFieldType === 'input'
           && form.formState.errors.recipientAccountAddress?.message}
         adornments={{
-          left: <CircleSvg />,
+          left: !field.value && <CircleSvg />,
           right: !!field.value && selectedFieldType === 'input' && (
            <CircleCheckedSvg variant="fill"/>
           )
@@ -199,11 +197,19 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
           && form.formState.errors.recipientAccountAddress?.message}
       >
         <Picker.Toggle
-          placeholder={t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
+          placeholder={
+            <View style={[styles.row]}>
+              <BookmarksSvg variant="outline" color={colors.light.blueGray} style={{ marginRight: 4 }}/>
+
+              <Text style={[styles.placeholder]}>
+                {t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
+              </Text>
+            </View>
+          }
         >
           {selectedFieldType === 'picker' && recipientAccount && (
             <>
-              <View style={[styles.applicationNameContainer]}>
+              <View style={[styles.row]}>
                 <Avatar
                   address={recipientAccount.metadata.address}
                   size={24}

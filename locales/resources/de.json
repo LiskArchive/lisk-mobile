@@ -393,7 +393,7 @@
       "recipientApplicationFieldLabel": "Zur App",
       "recipientApplicationFieldPlaceholder": "Wählen Sie eine App aus",
       "recipientAccountFieldLabel": "Empfänger:in",
-      "recipientAccountFieldPlaceholder": "Wählen Sie ein Empfängerkonto aus",
+      "recipientAccountFieldPlaceholder": "Aus Lesezeichen auswählen",
       "nextStepButtonText": "Weiter"
     },
     "tokenSelect": {

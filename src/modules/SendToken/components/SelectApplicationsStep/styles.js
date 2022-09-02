@@ -11,7 +11,7 @@ export default function getSendTokenSelectApplicationsStepStyles() {
       container: {
         flex: 1,
       },
-      applicationNameContainer: {
+      row: {
         flexDirection: 'row',
         alignItems: 'center',
       },
@@ -29,6 +29,11 @@ export default function getSendTokenSelectApplicationsStepStyles() {
       },
       text: {
         color: colors.light.blueGray
+      },
+      placeholder: {
+        fontSize: 16,
+        color: colors.light.ghost,
+        fontWeight: '400'
       }
     },
     [themes.light]: {

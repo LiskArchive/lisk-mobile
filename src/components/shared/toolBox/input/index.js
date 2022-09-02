@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+/* eslint-disable complexity */
 import React from 'react';
 import {
   View, Text, TextInput, TouchableOpacity
@@ -72,6 +74,10 @@ class Input extends React.Component {
     if (this.state.isFocused) {
       inputStyle = [...inputStyle, styles.inputFocused, styles.theme.inputFocused];
     }
+
+    if (adornments.left) inputStyle = [...inputStyle, styles.inputWithLeftAdornment];
+
+    if (adornments.right) inputStyle = [...inputStyle, styles.inputWithRightAdornment];
 
     if (error) {
       inputStyle = [...inputStyle, styles.theme.inputErrorStyle];

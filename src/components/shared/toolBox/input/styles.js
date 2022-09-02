@@ -13,12 +13,12 @@ export default () => ({
     },
     rightAdornment: {
       position: 'absolute',
-      right: 5,
+      right: 4,
       padding: 10,
     },
     leftAdornment: {
       position: 'absolute',
-      left: 5,
+      left: 4,
       padding: 10,
     },
     secureTextEntryIcon: {
@@ -29,16 +29,20 @@ export default () => ({
     inputLabel: {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
-      marginBottom: 13,
+      marginBottom: 16,
     },
     input: {
       fontSize: fonts.size.base,
-      fontFamily: fonts.family.contextBold,
       width: '100%',
       borderWidth: 1,
-      paddingTop: 11.5,
-      padding: 13,
-      borderRadius: 2,
+      padding: 16,
+      borderRadius: 10,
+    },
+    inputWithLeftAdornment: {
+      paddingLeft: 44,
+    },
+    inputWithRightAdornment: {
+      paddingRight: 44,
     },
     inputFocused: {
       borderColor: colors.light.ultramarineBlue,
