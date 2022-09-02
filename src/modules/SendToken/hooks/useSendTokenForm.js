@@ -4,20 +4,18 @@ import * as yup from 'yup';
 import i18next from 'i18next';
 
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import useSendTokenMutation from '../api/useSendTokenMutation';
 import { mockTokens } from '../__fixtures__';
 
 export default function useSendTokenForm() {
   const [currentApplication] = useCurrentBlockchainApplication();
-  const [currentAccount] = useCurrentAccount();
 
   const sendTokenMutation = useSendTokenMutation();
 
   const defaultValues = {
     senderApplicationChainID: currentApplication.chainID,
     recipientApplicationChainID: undefined,
-    recipientAccountAddress: currentAccount.metadata.address,
+    recipientAccountAddress: undefined,
     tokenID: mockTokens.find(token => token.symbol === 'LSK')?.tokenID,
     amount: 0,
     message: '',
