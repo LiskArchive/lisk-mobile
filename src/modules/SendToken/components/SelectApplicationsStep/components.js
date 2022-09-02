@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image } from 'react-native';
 import { useController } from 'react-hook-form';
+import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import Picker from 'components/shared/Picker';
@@ -16,7 +17,7 @@ import colors from 'constants/styleGuide/colors';
 
 import getSendTokenSelectApplicationsStepStyles from './styles';
 
-export function SendTokenSenderApplicationField({ form, applications, t }) {
+export function SendTokenSenderApplicationField({ form, applications }) {
   const { field } = useController({
     name: 'senderApplicationChainID',
     control: form.control,
@@ -37,12 +38,14 @@ export function SendTokenSenderApplicationField({ form, applications, t }) {
       error={form.formState.errors.senderApplicationChainID?.message}
     >
       <Picker.Label>
-        {t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
+        {i18next.t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
       </Picker.Label>
 
       <Picker.Toggle
         disabled
-        placeholder={t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')}
+        placeholder={
+          i18next.t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')
+        }
       >
         {senderApplication && (
           <View style={[styles.row]}>
@@ -61,7 +64,7 @@ export function SendTokenSenderApplicationField({ form, applications, t }) {
   );
 }
 
-export function SendTokenRecipientApplicationField({ form, applications, t }) {
+export function SendTokenRecipientApplicationField({ form, applications }) {
   const { field } = useController({
     name: 'recipientApplicationChainID',
     control: form.control,
@@ -82,12 +85,14 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
       error={form.formState.errors.recipientApplicationChainID?.message}
     >
       <Picker.Label style={{ marginTop: 16 }}>
-        {t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
+        {i18next.t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
       </Picker.Label>
 
       <Picker.Toggle
         disabled={applications?.loading}
-        placeholder={t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
+        placeholder={
+          i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')
+        }
       >
         {recipientApplication && (
           <View style={[styles.row]}>
@@ -130,7 +135,7 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
   );
 }
 
-export function SendTokenRecipientAccountField({ form, accounts, t }) {
+export function SendTokenRecipientAccountField({ form, accounts }) {
   const [selectedFieldType, setSelectedFieldType] = useState();
 
   const { field } = useController({
@@ -161,7 +166,7 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
   return (
     <>
       <Input
-        label={t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
+        label={i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
         value={selectedFieldType === 'input' ? field.value : ''}
         placeholder="Input wallet address or choose a username"
         onChange={handleInputChange}
@@ -202,7 +207,7 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
               <BookmarksSvg variant="outline" color={colors.light.blueGray} style={{ marginRight: 4 }}/>
 
               <Text style={[styles.placeholder]}>
-                {t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
+                {i18next.t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
               </Text>
             </View>
           }

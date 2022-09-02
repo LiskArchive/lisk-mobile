@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
 
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
@@ -10,10 +10,9 @@ import { useBlockchainApplicationExplorer } from '../../../BlockchainApplication
 import getSendTokenSelectApplicationsStepStyles from './styles';
 import { SendTokenRecipientAccountField, SendTokenRecipientApplicationField, SendTokenSenderApplicationField } from './components';
 
-function SendTokenSelectApplicationsStep({
+export default function SendTokenSelectApplicationsStep({
   nextStep,
-  form,
-  t
+  form
 }) {
   const { applications } = useBlockchainApplicationExplorer();
 
@@ -27,11 +26,17 @@ function SendTokenSelectApplicationsStep({
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={[styles.container]}>
-          <Text>{t('sendToken.applicationsSelect.loadingApplicationsText')}</Text>
+          <Text>
+            {i18next.t('sendToken.applicationsSelect.loadingApplicationsText')}
+          </Text>
         </View>
       </View>
     );
   }
+
+  const disableNextStepButton = form;
+
+  console.log({ disableNextStepButton });
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -39,19 +44,16 @@ function SendTokenSelectApplicationsStep({
         <SendTokenSenderApplicationField
           form={form}
           applications={applications}
-          t={t}
         />
 
         <SendTokenRecipientApplicationField
           form={form}
           applications={applications}
-          t={t}
         />
 
         <SendTokenRecipientAccountField
           form={form}
           accounts={accounts}
-          t={t}
         />
       </View>
 
@@ -59,10 +61,8 @@ function SendTokenSelectApplicationsStep({
         noTheme
         style={styles.button}
         onClick={nextStep}
-        title={t('sendToken.applicationsSelect.nextStepButtonText')}
+        title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
       />
     </View>
   );
 }
-
-export default translate()(SendTokenSelectApplicationsStep);

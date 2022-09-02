@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
+import BottomModal from 'components/shared/BottomModal';
 
-import getSendTokenSummaryStepStyles from './styles';
 import ConfirmAndSignTransaction from '../ConfirmAndSignTransaction';
 import SendTokenSuccess from '../SendTokenSuccess';
 import SendTokenError from '../SendTokenError';
-import BottomModal from '../../../../components/shared/BottomModal';
+import getSendTokenSummaryStepStyles from './styles';
 
 export function SendTokenSummaryModal({
   show,

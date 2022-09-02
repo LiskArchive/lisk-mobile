@@ -3,6 +3,7 @@ import React, { useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useController } from 'react-hook-form';
+import i18next from 'i18next';
 
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
@@ -24,7 +25,6 @@ import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 export function TokenSelectField({
   form,
   tokens,
-  t
 }) {
   const currentAccountInfo = useAccountInfo();
 
@@ -49,12 +49,12 @@ export function TokenSelectField({
     >
       <View style={{ ...styles.row, justifyContent: 'space-between' }}>
         <Picker.Label>
-          {t('sendToken.tokenSelect.tokenIDFieldLabel')}
+          {i18next.t('sendToken.tokenSelect.tokenIDFieldLabel')}
         </Picker.Label>
 
         {selectedToken && (
           <Picker.Label>
-            {t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
+            {i18next.t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
             {/* TODO: Read token symbol from account info when backend send the data */}
             <Text style={[styles.balanceText]}>
               {normalizedBalance} {selectedToken.symbol}
@@ -67,7 +67,9 @@ export function TokenSelectField({
         disabled={tokens.isLoading || tokens.error}
       >
         {tokens.isLoading ? (
-          <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
+          <Text>
+            {i18next.t('sendToken.tokenSelect.loadingTokensText')}
+          </Text>
         ) : selectedToken && (
           <View style={[styles.row]}>
             <Text style={[styles.text, styles.theme.text]}>
@@ -106,7 +108,6 @@ export function TokenSelectField({
 export function TokenAmountField({
   form,
   tokens,
-  t
 }) {
   const { field } = useController({
     name: 'amount',
@@ -126,15 +127,15 @@ export function TokenAmountField({
   return (
     <Input
       label= {
-        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldLabel',
+        selectedToken ? i18next.t('sendToken.tokenSelect.tokenAmountFieldLabel',
           { selectedTokenSymbol: selectedToken.symbol || '' })
-          : t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
+          : i18next.t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
       }
       value={field.value}
       placeholder= {
-        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
+        selectedToken ? i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
           { selectedTokenSymbol: selectedToken.symbol || '' })
-          : t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
+          : i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
       }
       onChange={field.onChange}
       keyboardType="numeric"
@@ -166,7 +167,7 @@ export function TokenAmountField({
   );
 }
 
-export function SendTokenDescriptionField({ form, t }) {
+export function SendTokenDescriptionField({ form }) {
   const [showInput, setShowInput] = useState(false);
 
   const { field } = useController({
@@ -181,16 +182,16 @@ export function SendTokenDescriptionField({ form, t }) {
         style={{ width: 178 }}
         textStyle={{ fontSize: 14, lineHeight: 0, marginBottom: 16 }}
       >
-        {t('sendToken.tokenSelect.messageFieldTriggerButtonText')}
+        {i18next.t('sendToken.tokenSelect.messageFieldTriggerButtonText')}
       </LabelButton>
     );
   }
 
   return (
     <Input
-      label={t('sendToken.tokenSelect.messageFieldLabel')}
+      label={i18next.t('sendToken.tokenSelect.messageFieldLabel')}
       value={field.value}
-      placeholder={t('sendToken.tokenSelect.messageFieldPlaceholder')}
+      placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
       onChange={field.onChange}
       multiline
       innerStyles={{
@@ -212,7 +213,7 @@ export function SendTokenDescriptionField({ form, t }) {
   );
 }
 
-export function SendTokenPriorityField({ form, t }) {
+export function SendTokenPriorityField({ form }) {
   const {
     data: prioritiesData,
     isLoading: isLoadingPrioritiesData,
@@ -241,11 +242,11 @@ export function SendTokenPriorityField({ form, t }) {
     return (
       <View>
         <Text style={[styles.label]}>
-          {t('sendToken.tokenSelect.priorityFieldLabel')}
+          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
         </Text>
 
         <Text>
-          {t('sendToken.tokenSelect.loadingPrioritiesText')}
+          {i18next.t('sendToken.tokenSelect.loadingPrioritiesText')}
         </Text>
       </View>
     );
@@ -255,11 +256,11 @@ export function SendTokenPriorityField({ form, t }) {
     return (
       <View>
         <Text style={[styles.label, styles.theme.label]}>
-          {t('sendToken.tokenSelect.priorityFieldLabel')}
+          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
         </Text>
 
         <Text>
-          {t('sendToken.tokenSelect.errorLoadingPrioritiesText')}
+          {i18next.t('sendToken.tokenSelect.errorLoadingPrioritiesText')}
         </Text>
       </View>
     );
@@ -268,7 +269,7 @@ export function SendTokenPriorityField({ form, t }) {
   return (
     <View style={{ marginBottom: 16 }}>
       <Text style={[styles.label, styles.theme.label]}>
-        {t('sendToken.tokenSelect.priorityFieldLabel')}
+        {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
       </Text>
 
       <View style={[styles.row, { width: '100%' }]}>
@@ -283,7 +284,7 @@ export function SendTokenPriorityField({ form, t }) {
             ]}
           >
             <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
-              {t(PRIORITY_NAMES_MAP[priority.code])}
+              {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
             </Text>
 
             <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
@@ -296,7 +297,7 @@ export function SendTokenPriorityField({ form, t }) {
   );
 }
 
-export function SendTokenTransactionFeesLabels({ form, tokens, t }) {
+export function SendTokenTransactionFeesLabels({ form, tokens }) {
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
@@ -326,7 +327,7 @@ export function SendTokenTransactionFeesLabels({ form, tokens, t }) {
     <View>
       <View style={[styles.feeContainer]}>
         <Text style={[styles.text, styles.theme.text]}>
-          {t('sendToken.tokenSelect.transactionFeeLabel')}
+          {i18next.t('sendToken.tokenSelect.transactionFeeLabel')}
         </Text>
           <Text style={[styles.text, styles.theme.text]}>
             {transactionFee.data} {selectedToken?.symbol}
@@ -335,12 +336,12 @@ export function SendTokenTransactionFeesLabels({ form, tokens, t }) {
 
       <View style={[styles.feeContainer]}>
         <Text style={[styles.text, styles.theme.text]}>
-          {t('sendToken.tokenSelect.initializationFeeLabel')}
+          {i18next.t('sendToken.tokenSelect.initializationFeeLabel')}
         </Text>
 
         {initializationFee.isLoading ? (
           <Text style={[styles.text, styles.theme.text]}>
-            {t('sendToken.tokenSelect.loadingInitializationFeeText')}
+            {i18next.t('sendToken.tokenSelect.loadingInitializationFeeText')}
           </Text>
         ) : (
           <Text style={[styles.text, styles.theme.text]}>
@@ -351,12 +352,12 @@ export function SendTokenTransactionFeesLabels({ form, tokens, t }) {
 
       <View style={[styles.feeContainer]}>
         <Text style={[styles.text, styles.theme.text]}>
-          {t('sendToken.tokenSelect.cmmFeeLabel')}
+          {i18next.t('sendToken.tokenSelect.cmmFeeLabel')}
         </Text>
 
         {cmmFee.isLoading ? (
           <Text style={[styles.text, styles.theme.text]}>
-            {t('sendToken.tokenSelect.loadingCmmFeeText')}
+            {i18next.t('sendToken.tokenSelect.loadingCmmFeeText')}
           </Text>
         ) : (
           <Text style={[styles.text, styles.theme.text]}>

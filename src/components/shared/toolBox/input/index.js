@@ -75,9 +75,9 @@ class Input extends React.Component {
       inputStyle = [...inputStyle, styles.inputFocused, styles.theme.inputFocused];
     }
 
-    if (adornments.left) inputStyle = [...inputStyle, styles.inputWithLeftAdornment];
+    if (adornments?.left) inputStyle = [...inputStyle, styles.inputWithLeftAdornment];
 
-    if (adornments.right) inputStyle = [...inputStyle, styles.inputWithRightAdornment];
+    if (adornments?.right) inputStyle = [...inputStyle, styles.inputWithRightAdornment];
 
     if (error) {
       inputStyle = [...inputStyle, styles.theme.inputErrorStyle];

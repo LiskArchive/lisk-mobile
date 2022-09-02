@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useController } from 'react-hook-form';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -12,13 +12,12 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrent
 
 import getConfirmAndSignTransactionStyles from './styles';
 
-function ConfirmAndSignTransaction({
+export default function ConfirmAndSignTransaction({
   amount,
   token,
   form,
   onSuccess,
   onError,
-  t
 }) {
   const { field } = useController({
     name: 'userPassword',
@@ -57,13 +56,13 @@ function ConfirmAndSignTransaction({
         <Text
           style={[styles.title, styles.theme.title]}
         >
-          {t('sendToken.confirmAndSign.title')}
+          {i18next.t('sendToken.confirmAndSign.title')}
         </Text>
 
         <Text
           style={[styles.instructionsText, styles.theme.instructionsText]}
         >
-          {t('sendToken.confirmAndSign.description')}
+          {i18next.t('sendToken.confirmAndSign.description')}
         </Text>
 
         <Avatar
@@ -96,7 +95,7 @@ function ConfirmAndSignTransaction({
               padding: 16
             }
           }}
-          placeholder={t('sendToken.confirmAndSign.passwordInputPlaceholder')}
+          placeholder={i18next.t('sendToken.confirmAndSign.passwordInputPlaceholder')}
           secureTextEntry
           onChange={field.onChange}
           value={field.value}
@@ -106,7 +105,7 @@ function ConfirmAndSignTransaction({
       <View>
         {Object.keys(form.formState.errors).length > 0 && (
           <Text style={[styles.errorText]}>
-            {t('sendToken.errors.generalMessage')}
+            {i18next.t('sendToken.errors.generalMessage')}
           </Text>
         )}
 
@@ -115,8 +114,8 @@ function ConfirmAndSignTransaction({
           onClick={form.handleSubmit}
           title={
             form.sendTokenMutation.isLoading
-              ? t('sendToken.confirmAndSign.loadingText')
-              : t('sendToken.confirmAndSign.sendTokenSubmitButtonText',
+              ? i18next.t('sendToken.confirmAndSign.loadingText')
+              : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText',
                 { amount, tokenSymbol: token?.symbol })
             }
           style={{ marginBottom: 24 }}
@@ -126,5 +125,3 @@ function ConfirmAndSignTransaction({
     </View>
   );
 }
-
-export default translate()(ConfirmAndSignTransaction);
