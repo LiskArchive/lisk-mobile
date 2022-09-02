@@ -1,5 +1,4 @@
 /* eslint-disable max-statements */
-/* eslint-disable no-nested-ternary */
 /* eslint-disable complexity */
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
