@@ -12,9 +12,9 @@ import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import CircleSvg from 'assets/svgs/CircleSvg';
 import BookmarksSvg from 'assets/svgs/BookmarksSvg';
 import { stringShortener } from 'utilities/helpers';
+import colors from 'constants/styleGuide/colors';
 
 import getSendTokenSelectApplicationsStepStyles from './styles';
-import colors from '../../../../constants/styleGuide/colors';
 
 export function SendTokenSenderApplicationField({ form, applications, t }) {
   const { field } = useController({
@@ -230,6 +230,8 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
           )}
         </Picker.Toggle>
 
+        {/* TODO: Redirect to bookmarks picker when is fixed
+          (replace this menu with it) */}
         <Picker.Menu>
           <InfiniteScrollList
             data={accounts}
@@ -252,12 +254,9 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
                     {stringShortener(item.metadata.address, 6, 6)}
                   </P>
                 </View>
-
-                {/* <View>{active && <CircleCheckedSvg variant="fill" />}</View> */}
               </Picker.Item>
             )}
             renderSpinner
-            // TODO: Integrate pagination props using react-query.
           />
         </Picker.Menu>
       </Picker>

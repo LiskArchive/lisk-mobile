@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable complexity */
 import React from 'react';
@@ -35,6 +36,40 @@ export function PickerToggle({
     styles: getPickerStyles(error),
   });
 
+  let valueToRender = children;
+
+  if (!valueToRender) {
+    if (value) {
+      valueToRender = (
+        <Text
+          style={[
+            styles.toggleText,
+            styles.theme.toggleText,
+            baseStyle?.toggleText
+          ]}
+        >
+          {value}
+        </Text>
+      );
+    }
+
+    if (typeof placeholder === 'string') {
+      valueToRender = (
+        <Text
+          style={[
+            styles.togglePlaceholder,
+            styles.theme.togglePlaceholder,
+            baseStyle?.toggleText
+          ]}
+        >
+          {placeholder}
+        </Text>
+      );
+    } else {
+      valueToRender = placeholder;
+    }
+  }
+
   return (
     <>
       <TouchableOpacity
@@ -46,29 +81,7 @@ export function PickerToggle({
           baseStyle?.container
         ]}
       >
-        {children || (value ? (
-          <Text
-            style={[
-              styles.toggleText,
-              styles.theme.toggleText,
-              baseStyle?.toggleText
-            ]}
-          >
-            {value || placeholder}
-          </Text>
-        ) : (
-          typeof placeholder === 'string' ? (
-            <Text
-              style={[
-                styles.togglePlaceholder,
-                styles.theme.togglePlaceholder,
-                baseStyle?.toggleText
-              ]}
-            >
-              {value || placeholder}
-            </Text>
-          ) : placeholder
-        ))}
+        {valueToRender}
 
         {!disabled && (
           <CaretSvg
