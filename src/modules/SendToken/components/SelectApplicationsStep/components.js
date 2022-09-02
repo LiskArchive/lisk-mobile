@@ -133,7 +133,7 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
 }
 
 export function SendTokenRecipientAccountField({ form, accounts, t }) {
-  const [filledInput, setFilledInput] = useState();
+  const [selectedFieldType, setSelectedFieldType] = useState();
 
   const { field } = useController({
     name: 'recipientAccountAddress',
@@ -149,13 +149,13 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
   );
 
   function handleInputChange(event) {
-    if (filledInput !== 'input') setFilledInput('input');
+    if (selectedFieldType !== 'input') setSelectedFieldType('input');
 
     field.onChange(event);
   }
 
   function handlePickerChange(event) {
-    if (filledInput !== 'picker') setFilledInput('picker');
+    if (selectedFieldType !== 'picker') setSelectedFieldType('picker');
 
     field.onChange(event);
   }
@@ -164,14 +164,14 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
     <>
       <Input
         label={t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
-        value={filledInput === 'input' && field.value}
+        value={selectedFieldType === 'input' && field.value}
         placeholder="Input wallet address or choose a username"
         onChange={handleInputChange}
-        error={filledInput === 'input'
+        error={selectedFieldType === 'input'
           && form.formState.errors.recipientAccountAddress?.message}
         adornments={{
           left: <CircleSvg />,
-          right: !!field.value && filledInput === 'input' && (
+          right: !!field.value && selectedFieldType === 'input' && (
            <CircleCheckedSvg variant="fill"/>
           )
         }}
@@ -193,15 +193,15 @@ export function SendTokenRecipientAccountField({ form, accounts, t }) {
       />
 
       <Picker
-        value={filledInput === 'picker' && field.value}
+        value={selectedFieldType === 'picker' && field.value}
         onChange={handlePickerChange}
-        error={filledInput === 'picker'
+        error={selectedFieldType === 'picker'
           && form.formState.errors.recipientAccountAddress?.message}
       >
         <Picker.Toggle
           placeholder={t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
         >
-          {filledInput === 'picker' && recipientAccount && (
+          {selectedFieldType === 'picker' && recipientAccount && (
             <>
               <View style={[styles.applicationNameContainer]}>
                 <Avatar
