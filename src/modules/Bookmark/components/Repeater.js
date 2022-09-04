@@ -28,9 +28,7 @@ const Repeater = ({
         item.address.indexOf(query) >= 0
         || item.label.toLowerCase().indexOf(query.toLowerCase()) >= 0
       );
-    }), [list]);
-
-  console.log('list', filterList);
+    }), [list, filterAddress, query]);
 
   return <View style={[!draggable && styles.container]}>
     {filterList?.length === 0 ? (
