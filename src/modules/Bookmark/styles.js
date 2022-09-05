@@ -6,6 +6,9 @@ import { setColorOpacity } from 'utilities/helpers';
 
 export default (tabBarHeight) => ({
   common: {
+    container: {
+      flexGrow: 1,
+    },
     titleContainer: {
       backgroundColor: colors.light.ultramarineBlue,
       width: 54,

@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import {
-  View, TouchableOpacity, ScrollView
+  View, TouchableOpacity
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
@@ -40,16 +40,14 @@ export default function Bookmark() {
         isSearchOpen={isSearchOpen}
         setIsSearchOpen={(val) => setIsSearchOpen(val)}
       />
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={styles.form}>
-          <Repeater
-            navigate={navigation.navigate}
-            draggable={true}
-            query={query}
-            renderEmpty
-          />
-        </View>
-      </ScrollView>
+      <View style={styles.container}>
+        <Repeater
+          navigate={navigation.navigate}
+          draggable={true}
+          query={query}
+          renderEmpty
+        />
+      </View>
       <TouchableOpacity
         style={[styles.titleContainer]}
         onPress={() =>
@@ -58,6 +56,6 @@ export default function Bookmark() {
       >
         <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={30} />
       </TouchableOpacity>
-  </NavigationSafeAreaView>
+    </NavigationSafeAreaView>
   );
 }
