@@ -459,6 +459,13 @@
       "amountMustBeNumber": "Der Betrag muss eine Zahl sein",
       "amountMustBePositive": "Tokenbetrag muss eine positive Zahl sein",
       "priority":"Priorität muss angegeben werden"
+    },
+    "info": {
+      "bytesCounter": {
+        "title": "Byte-Zähler",
+        "description1": "Lisk zählt Ihre Nachricht in Bytes, also denken Sie daran, dass die Länge Ihrer Nachricht in verschiedenen Sprachen variieren kann.",
+        "description2": "Unterschiedliche Zeichen können eine unterschiedliche Menge an Bytes verbrauchen."
+      }
     }
   },
   "accounts": {

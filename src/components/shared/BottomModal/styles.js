@@ -15,7 +15,7 @@ export default () => ({
       padding: 16,
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     closeButtonContainer: {
       alignSelf: 'flex-end',

@@ -5,27 +5,29 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
+import { useTheme } from 'hooks/useTheme';
+import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
-import { useTheme } from 'hooks/useTheme';
+import { P } from 'components/shared/toolBox/typography';
+import InfoToggler from 'components/shared/InfoModal';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
-import InfoSvg from 'assets/svgs/InfoSvg';
-import ModalHolder from 'utilities/modal';
-import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
-
-import getSendTokenSelectTokenStepStyles, { sendTokenAmountFieldStyles, SendTokenMessageFieldStyles } from './styles';
-import { useTokenAmountInCurrency } from './hooks';
+import colors from 'constants/styleGuide/colors';
 import { PRIORITY_NAMES_MAP } from '../../constants';
 import useTransactionPriorities from '../../hooks/useTransactionPriorities';
 import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
 import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
-import colors from '../../../../constants/styleGuide/colors';
-import { P } from '../../../../components/shared/toolBox/typography';
+
+import { useTokenAmountInCurrency } from './hooks';
+import getSendTokenSelectTokenStepStyles, {
+  sendTokenAmountFieldStyles,
+  sendTokenMessageFieldStyles
+} from './styles';
 
 export function TokenSelectField({
   form,
@@ -170,13 +172,6 @@ export function SendTokenMessageField({ form }) {
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  function handleOpenInfoModal() {
-    ModalHolder.open({
-      title: 'Bytes Counter',
-      component: () => <P>blabla</P>
-    });
-  }
-
   if (!showInput) {
     return (
       <LabelButton
@@ -192,15 +187,19 @@ export function SendTokenMessageField({ form }) {
   return (
     <Input
       label={
-        <View style={[styles.row, { justifyContent: 'space-between', width: '100%' }]}>
+        <View style={[styles.messageLabelContainer]}>
           <View style={[styles.row]}>
             <P style={[styles.messageLabel, styles.theme.messageLabel]}>
               {i18next.t('sendToken.tokenSelect.messageFieldLabel')}
             </P>
 
-            <TouchableOpacity onPress={handleOpenInfoModal}>
-              <InfoSvg />
-            </TouchableOpacity>
+            <InfoToggler
+              title= {i18next.t('sendToken.info.bytesCounter.title')}
+              description={[
+                i18next.t('sendToken.info.bytesCounter.description1'),
+                i18next.t('sendToken.info.bytesCounter.description2'),
+              ]}
+            />
           </View>
 
           <TouchableOpacity onPress={() => setShowInput(false)}>
@@ -212,7 +211,7 @@ export function SendTokenMessageField({ form }) {
       placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
       onChange={field.onChange}
       multiline
-      innerStyles={SendTokenMessageFieldStyles}
+      innerStyles={sendTokenMessageFieldStyles}
     />
   );
 }

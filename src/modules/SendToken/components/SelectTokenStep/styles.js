@@ -22,6 +22,12 @@ export default function getSendTokenSelectTokenStepStyles() {
         justifyContent: 'space-between',
         marginBottom: 16
       },
+      messageLabelContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
+      },
       tokenSvg: {
         marginLeft: 8,
       },
@@ -121,7 +127,7 @@ export default function getSendTokenSelectTokenStepStyles() {
   };
 }
 
-export const SendTokenMessageFieldStyles = {
+export const sendTokenMessageFieldStyles = {
   containerStyle: {
     paddingTop: 0,
     paddingRight: 0,
