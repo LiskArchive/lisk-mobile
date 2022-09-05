@@ -108,3 +108,35 @@ export default function getSendTokenSelectTokenStepStyles() {
     },
   };
 }
+
+export const sendTokenDescriptionFieldStyles = {
+  containerStyle: {
+    paddingTop: 0,
+    paddingRight: 0,
+    paddingLeft: 0,
+    marginBottom: 16
+  },
+  inputLabel: {
+    marginBottom: 8
+  },
+  input: {
+    padding: 16,
+    minHeight: 80
+  }
+};
+
+export const sendTokenAmountFieldStyles = {
+  containerStyle: {
+    paddingTop: 0,
+    paddingRight: 0,
+    paddingLeft: 0,
+    marginBottom: 16,
+    marginTop: 16,
+  },
+  inputLabel: {
+    marginBottom: 8
+  },
+  input: {
+    padding: 16
+  }
+};

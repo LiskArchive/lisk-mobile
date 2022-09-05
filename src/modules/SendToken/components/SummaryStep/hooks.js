@@ -19,7 +19,7 @@ export function useSendTokenSummary({ form }) {
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');
   const recipientAccountAddress = form.watch('recipientAccountAddress');
   const tokenID = form.watch('tokenID');
-  const amount = form.watch('amount');
+  const amount = parseFloat(form.watch('amount'));
   const message = form.watch('message');
   const priority = form.watch('priority');
 

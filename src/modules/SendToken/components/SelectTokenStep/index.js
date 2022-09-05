@@ -29,6 +29,8 @@ export default function SendTokenSelectTokenStep({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
+  const disableNextStepButton = !form.watch('tokenID') || !form.watch('amount');
+
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
@@ -47,9 +49,10 @@ export default function SendTokenSelectTokenStep({
         />
 
         <PrimaryButton
-          noTheme
           onClick={nextStep}
+          disabled={disableNextStepButton}
           title={i18next.t('sendToken.tokenSelect.nextStepButtonText')}
+          noTheme
           style={{ flex: 1 }}
         />
 

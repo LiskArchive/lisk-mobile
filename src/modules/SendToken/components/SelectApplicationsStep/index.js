@@ -34,9 +34,9 @@ export default function SendTokenSelectApplicationsStep({
     );
   }
 
-  const disableNextStepButton = form;
-
-  console.log({ disableNextStepButton });
+  const disableNextStepButton = !form.watch('senderApplicationChainID')
+   || !form.watch('recipientApplicationChainID')
+   || !form.watch('recipientAccountAddress');
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -58,10 +58,11 @@ export default function SendTokenSelectApplicationsStep({
       </View>
 
       <PrimaryButton
+        onClick={nextStep}
+        disabled={disableNextStepButton}
+        title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
         noTheme
         style={styles.button}
-        onClick={nextStep}
-        title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
       />
     </View>
   );

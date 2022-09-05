@@ -17,7 +17,7 @@ export default function useSendTokenForm() {
     recipientApplicationChainID: undefined,
     recipientAccountAddress: undefined,
     tokenID: mockTokens.find(token => token.symbol === 'LSK')?.tokenID,
-    amount: 0,
+    amount: undefined,
     message: '',
     priority: 'low',
     userPassword: ''

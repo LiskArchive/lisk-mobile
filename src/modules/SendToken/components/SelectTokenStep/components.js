@@ -14,7 +14,7 @@ import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 
-import getSendTokenSelectTokenStepStyles from './styles';
+import getSendTokenSelectTokenStepStyles, { sendTokenAmountFieldStyles, sendTokenDescriptionFieldStyles } from './styles';
 import { useTokenAmountInCurrency } from './hooks';
 import { PRIORITY_NAMES_MAP } from '../../constants';
 import useTransactionPriorities from '../../hooks/useTransactionPriorities';
@@ -126,20 +126,20 @@ export function TokenAmountField({
 
   return (
     <Input
+      value={field.value && field.value.toString()}
+      onChange={value => field.onChange(value && parseFloat(value))}
+      keyboardType="numeric"
+      disabled={!selectedToken}
       label= {
         selectedToken ? i18next.t('sendToken.tokenSelect.tokenAmountFieldLabel',
           { selectedTokenSymbol: selectedToken.symbol || '' })
           : i18next.t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
       }
-      value={field.value}
       placeholder= {
         selectedToken ? i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
           { selectedTokenSymbol: selectedToken.symbol || '' })
           : i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
       }
-      onChange={field.onChange}
-      keyboardType="numeric"
-      disabled={!selectedToken}
       error={form.formState.errors.amount?.message}
       adornments={{
         right: (
@@ -148,21 +148,7 @@ export function TokenAmountField({
           </Text>
         )
       }}
-      innerStyles={{
-        containerStyle: {
-          paddingTop: 0,
-          paddingRight: 0,
-          paddingLeft: 0,
-          marginBottom: 16,
-          marginTop: 16,
-        },
-        inputLabel: {
-          marginBottom: 8
-        },
-        input: {
-          padding: 16
-        }
-      }}
+      innerStyles={sendTokenAmountFieldStyles}
     />
   );
 }
@@ -194,21 +180,7 @@ export function SendTokenDescriptionField({ form }) {
       placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
       onChange={field.onChange}
       multiline
-      innerStyles={{
-        containerStyle: {
-          paddingTop: 0,
-          paddingRight: 0,
-          paddingLeft: 0,
-          marginBottom: 16
-        },
-        inputLabel: {
-          marginBottom: 8
-        },
-        input: {
-          padding: 16,
-          minHeight: 80
-        }
-      }}
+      innerStyles={sendTokenDescriptionFieldStyles}
     />
   );
 }
