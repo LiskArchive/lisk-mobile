@@ -33,7 +33,7 @@ export function useSendTokenSummary({ form }) {
 
   const recipientAccount = accounts.find(
     account => account.metadata.address === recipientAccountAddress
-  );
+  ) || { metadata: { address: recipientAccountAddress }, isNew: true };
 
   const token = tokens.data?.find(
     _token => _token.tokenID === tokenID

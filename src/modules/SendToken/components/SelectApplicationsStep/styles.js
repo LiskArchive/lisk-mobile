@@ -60,3 +60,19 @@ export default function getSendTokenSelectApplicationsStepStyles() {
     },
   };
 }
+
+export const sendTokenRecipientAccountFieldStyles = {
+  containerStyle: {
+    paddingTop: 0,
+    paddingRight: 0,
+    paddingLeft: 0,
+    marginBottom: 16,
+    marginTop: 16,
+  },
+  inputLabel: {
+    marginBottom: 8
+  },
+  input: {
+    padding: 16
+  }
+};

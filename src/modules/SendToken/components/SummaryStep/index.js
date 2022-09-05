@@ -14,6 +14,7 @@ import { PRIORITY_NAMES_MAP } from '../../constants';
 import getSendTokenSummaryStepStyles from './styles';
 import { useSendTokenSummary } from './hooks';
 import { SendTokenSummaryModal } from './components';
+import Avatar from '../../../../components/shared/avatar';
 
 export default function SendTokenSummaryStep({
   form,
@@ -72,16 +73,37 @@ export default function SendTokenSummaryStep({
               {i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
             </Text>
 
-            <CopyToClipboard
-              style={[styles.valueText, styles.theme.valueText]}
-              labelStyle={[styles.valueText, styles.theme.valueText, { marginRight: 8 }]}
-              showIcon
-              iconSize={18}
-              value={summary.recipientAccount?.metadata.address}
-              type={P}
-              label={stringShortener(summary.recipientAccount?.metadata.address, 5, 5)}
-            />
+            {summary.recipientAccount.isNew ? (
+              <CopyToClipboard
+                style={[styles.valueText, styles.theme.valueText]}
+                labelStyle={[styles.valueText, styles.theme.valueText, { marginRight: 8 }]}
+                showIcon
+                iconSize={18}
+                value={summary.recipientAccount?.metadata.address}
+                type={P}
+                label={stringShortener(summary.recipientAccount?.metadata.address, 5, 5)}
+              />
+            ) : (
+              <View style={[styles.row]}>
+                <Avatar
+                  address={summary.recipientAccount?.metadata.address}
+                  size={24}
+                  style={styles.avatar}
+                />
 
+                <View>
+                  {!!summary.recipientAccount?.metadata.name && (
+                    <P style={[styles.valueText, styles.theme.valueText]}>
+                      {summary.recipientAccount?.metadata.name}
+                    </P>
+                  )}
+
+                  <P style={[styles.label, styles.theme.label]}>
+                    {stringShortener(summary.recipientAccount?.metadata.address, 6, 6)}
+                  </P>
+                </View>
+              </View>
+            )}
           </View>
 
           <View style={[styles.fieldRow]}>

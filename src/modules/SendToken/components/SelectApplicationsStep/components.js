@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable complexity */
+import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
@@ -15,7 +16,8 @@ import BookmarksSvg from 'assets/svgs/BookmarksSvg';
 import { stringShortener } from 'utilities/helpers';
 import colors from 'constants/styleGuide/colors';
 
-import getSendTokenSelectApplicationsStepStyles from './styles';
+import getSendTokenSelectApplicationsStepStyles,
+{ sendTokenRecipientAccountFieldStyles } from './styles';
 
 export function SendTokenSenderApplicationField({ form, applications }) {
   const { field } = useController({
@@ -136,10 +138,13 @@ export function SendTokenRecipientApplicationField({ form, applications }) {
 }
 
 export function SendTokenRecipientAccountField({ form, accounts }) {
-  const [selectedFieldType, setSelectedFieldType] = useState();
-
-  const { field } = useController({
+  const { field: addressField } = useController({
     name: 'recipientAccountAddress',
+    control: form.control,
+  });
+
+  const { field: addressFormatField } = useController({
+    name: 'recipientAccountAddressFormat',
     control: form.control,
   });
 
@@ -148,57 +153,43 @@ export function SendTokenRecipientAccountField({ form, accounts }) {
   });
 
   const recipientAccount = accounts.find(
-    account => account.metadata.address === field.value
+    account => account.metadata.address === addressField.value
   );
 
-  function handleInputChange(event) {
-    if (selectedFieldType !== 'input') setSelectedFieldType('input');
+  function handleInputChange(value) {
+    if (addressFormatField.value !== 'input') addressFormatField.onChange('input');
 
-    field.onChange(event);
+    addressField.onChange(value);
   }
 
-  function handlePickerChange(event) {
-    if (selectedFieldType !== 'picker') setSelectedFieldType('picker');
+  function handlePickerChange(value) {
+    if (addressFormatField.value !== 'picker') addressFormatField.onChange('picker');
 
-    field.onChange(event);
+    addressField.onChange(value);
   }
 
   return (
     <>
       <Input
         label={i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
-        value={selectedFieldType === 'input' ? field.value : ''}
+        value={addressFormatField.value === 'input' ? addressField.value : ''}
         placeholder="Input wallet address or choose a username"
         onChange={handleInputChange}
-        error={selectedFieldType === 'input'
+        error={addressFormatField.value === 'input'
           && form.formState.errors.recipientAccountAddress?.message}
         adornments={{
-          left: !field.value && <CircleSvg />,
-          right: !!field.value && selectedFieldType === 'input' && (
+          left: (!addressField.value || addressFormatField.value === 'picker') && <CircleSvg />,
+          right: !!addressField.value && addressFormatField.value === 'input' && (
            <CircleCheckedSvg variant="fill"/>
           )
         }}
-        innerStyles={{
-          containerStyle: {
-            paddingTop: 0,
-            paddingRight: 0,
-            paddingLeft: 0,
-            marginBottom: 16,
-            marginTop: 16,
-          },
-          inputLabel: {
-            marginBottom: 8
-          },
-          input: {
-            padding: 16
-          }
-        }}
+        innerStyles={sendTokenRecipientAccountFieldStyles}
       />
 
       <Picker
-        value={selectedFieldType === 'picker' && field.value}
+        value={addressFormatField.value === 'picker' && addressField.value}
         onChange={handlePickerChange}
-        error={selectedFieldType === 'picker'
+        error={addressFormatField.value === 'picker'
           && form.formState.errors.recipientAccountAddress?.message}
       >
         <Picker.Toggle
@@ -212,7 +203,7 @@ export function SendTokenRecipientAccountField({ form, accounts }) {
             </View>
           }
         >
-          {selectedFieldType === 'picker' && recipientAccount && (
+          {addressFormatField.value === 'picker' && recipientAccount && (
             <>
               <View style={[styles.row]}>
                 <Avatar

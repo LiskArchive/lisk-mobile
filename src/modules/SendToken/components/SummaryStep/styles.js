@@ -16,7 +16,6 @@ export default function getSendTokenSummaryStepStyles() {
       label: {
         fontWeight: '400',
         fontSize: 14,
-        lineHeight: 18,
         color: colors.light.blueGray,
       },
       valueText: {
@@ -71,6 +70,9 @@ export default function getSendTokenSummaryStepStyles() {
         justifyContent: 'flex-end',
         marginBottom: 16,
       },
+      avatar: {
+        marginRight: 8
+      }
     },
     [themes.light]: {
       wrapper: {
