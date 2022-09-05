@@ -30,9 +30,8 @@ export default () => ({
     itemContainer: {
       flex: 1,
       width: '100%',
-      height: 80,
-      paddingTop: 20,
-      paddingBottom: 20,
+      paddingTop: 10,
+      paddingBottom: 10,
       borderBottomWidth: 1,
     },
     infoButton: {

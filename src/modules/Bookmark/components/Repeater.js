@@ -1,30 +1,26 @@
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
-import { translate } from 'react-i18next';
-import { connect } from 'react-redux';
-import { tokenKeys } from 'constants/tokens';
-import { validateAddress } from 'utilities/validators';
-import withTheme from 'components/shared/withTheme';
+import { useSelector } from 'react-redux';
+import { useTheme } from 'hooks/useTheme';
 import EmptyState from './EmptyState';
 import List from './List';
 import getStyles from './styles';
+import { selectBookmarkList } from '../store/selectors';
 
 const Repeater = ({
-  styles,
-  list,
   navigate,
   query,
   setRef,
   draggable,
-  activeToken,
   renderEmpty,
   filterAddress
 }) => {
-  const showAvatar = activeToken === tokenKeys[0];
+  const styles = useTheme({ styles: getStyles() });
+  const list = useSelector(selectBookmarkList);
 
   const filterList = useMemo(() =>
     list?.filter(item => {
-      if (filterAddress && validateAddress(tokenKeys[0], item.address) === 1) {
+      if (filterAddress) {
         return false;
       }
       if (query.length === 0) return true;
@@ -32,16 +28,16 @@ const Repeater = ({
         item.address.indexOf(query) >= 0
         || item.label.toLowerCase().indexOf(query.toLowerCase()) >= 0
       );
-    }), [activeToken, list, tokenKeys]);
+    }), [list, filterAddress, query]);
 
   return <View style={[!draggable && styles.container]}>
-    {list[activeToken]?.length === 0 || filterList?.length === 0 ? (
+    {filterList?.length === 0 ? (
       renderEmpty && <EmptyState style={styles.emptyView} />
     ) : (
       <List
         draggable={draggable}
         list={filterList}
-        showAvatar={showAvatar}
+        showAvatar
         setRef={setRef}
         navigate={navigate}
       />
@@ -49,9 +45,4 @@ const Repeater = ({
   </View>;
 };
 
-const mapStateToProps = state => ({
-  list: [],
-  activeToken: state.settings.token.active,
-});
-
-export default withTheme(translate()(connect(mapStateToProps)(Repeater)), getStyles());
+export default Repeater;

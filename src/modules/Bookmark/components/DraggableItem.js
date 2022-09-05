@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { colors, themes } from 'constants/styleGuide';
 import ModalHolder from 'utilities/modal';
 import { stringShortener } from 'utilities/helpers';
-import { accountUnFollowed as accountUnFollowedAction } from 'modules/Accounts/store/actions';
 import WarningSvg from 'assets/svgs/WarningSvg';
 import Avatar from 'components/shared/avatar';
 import { B, Small, P } from 'components/shared/toolBox/typography';
 import Icon from 'components/shared/toolBox/icon';
 import SwipeableRow from 'components/shared/Swipeable';
 import DeleteBookmarkModal from './DeleteBookmark';
+import { deleteBookmark } from '../store/actions';
 
 const DraggableItem = ({
   styles,
@@ -20,14 +20,14 @@ const DraggableItem = ({
   navigate,
   showAvatar,
   isInvalidAddress,
-  accountUnFollowed,
   t,
 }) => {
+  const dispatch = useDispatch();
   const onDelete = () => {
     ModalHolder.open({
       title: 'Delete bookmark',
       component: DeleteBookmarkModal,
-      callback: () => accountUnFollowed(data.address),
+      callback: () => dispatch(deleteBookmark(data)),
     });
   };
 
@@ -145,8 +145,5 @@ const DraggableItem = ({
     </SwipeableRow>
   );
 };
-const mapDispatchToProps = {
-  accountUnFollowed: accountUnFollowedAction,
-};
 
-export default translate()(connect(null, mapDispatchToProps)(DraggableItem));
+export default translate()(DraggableItem);

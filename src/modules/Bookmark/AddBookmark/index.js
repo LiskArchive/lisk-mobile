@@ -2,9 +2,10 @@
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
 import { BackHandler, View } from 'react-native';
-import { CommonActions } from '@react-navigation/native';
-import { connect } from 'react-redux';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import { translate } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from 'hooks/useTheme';
 
 import { colors } from 'constants/styleGuide';
 import { decodeLaunchUrl } from 'utilities/qrCode';
@@ -17,27 +18,23 @@ import Input from 'components/shared/toolBox/input';
 import Avatar from 'components/shared/avatar';
 import Scanner from 'components/shared/scanner';
 import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScrollView';
-import withTheme from 'components/shared/withTheme';
 import { P, Small } from 'components/shared/toolBox/typography';
-import {
-  accountFollowed as accountFollowedAction,
-  accountEdited as accountEditedAction
-} from 'modules/Accounts/store/actions';
+import { selectBookmarkList } from '../store/selectors';
 import getStyles from './styles';
+import { addBookmark, editBookmark } from '../store/actions';
 
 // eslint-disable-next-line max-statements
 const AddToBookmark = ({
-  navigation,
-  styles,
   t,
   lng,
-  accounts,
   route,
-  accountFollowed,
-  accountEdited, followedAccounts
 }) => {
-  const [address, setAddress] = useState('');
-  const [label, setLabel] = useState({});
+  const bookmarkList = useSelector(selectBookmarkList);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const { styles } = useTheme({ styles: getStyles() });
+  const [address, setAddress] = useState({ value: '' });
+  const [label, setLabel] = useState({ value: '' });
   const [incomingData, setIncomingData] = useState(null);
   const [editMode, setEditMode] = useState(false);
 
@@ -92,8 +89,7 @@ const AddToBookmark = ({
 
   // eslint-disable-next-line max-statements
   const submitForm = () => {
-    const accountList = followedAccounts;
-    const filteredAccount = accountList?.filter(
+    const filteredAccount = bookmarkList?.filter(
       (account) => account.label.toLocaleLowerCase() === label.value.toLocaleLowerCase()
     );
     if (filteredAccount?.length) {
@@ -102,11 +98,11 @@ const AddToBookmark = ({
     const addressValidity = validateAddress('LSK', address.value);
     const labelValidity = validateLabel(label.value);
     if (incomingData && labelValidity === 0) {
-      const action = editMode ? accountEdited : accountFollowed;
-      action(incomingData.address, label.value);
+      const action = editMode ? editBookmark : addBookmark;
+      dispatch(action({ address: incomingData.address, label: label.value }));
       navigation.dispatch(CommonActions.goBack());
     } else if (addressValidity === 0 && labelValidity === 0) {
-      accountFollowed(address.value, label.value);
+      dispatch(addBookmark({ address: address.value, label: label.value }));
       navigation.dispatch(CommonActions.goBack());
     } else {
       setAddress({
@@ -125,7 +121,7 @@ const AddToBookmark = ({
     const account = route.params?.account ?? null;
     const { setOptions } = navigation;
     if (account) {
-      const editMode = accounts
+      const editMode = bookmarkList
         .filter((item) => item.address === account.address).length > 0;
       setEditMode(editMode);
       setLabel({ value: account.label || '' });
@@ -174,7 +170,7 @@ const AddToBookmark = ({
               iconSize={18}
               color={colors.light.ultramarineBlue}
             />
-              <Avatar style={styles.avatar} address={address.value} size={24} />
+            <Avatar style={styles.avatar} address={address.value} size={24} />
             <Input
               label={t('Address')}
               autoCorrect={false}
@@ -196,11 +192,11 @@ const AddToBookmark = ({
           <View style={styles.row}>
             <P style={[styles.label, styles.theme.label]}>Address</P>
             <View style={styles.staticAddressContainer}>
-                <Avatar
-                  address={incomingData.address || ''}
-                  style={styles.staticAvatar}
-                  size={35}
-                />
+              <Avatar
+                address={incomingData.address || ''}
+                style={styles.staticAvatar}
+                size={35}
+              />
               <Small style={[styles.address, styles.theme.address]}>
                 {stringShortener(incomingData.address, 6, 5)}
               </Small>
@@ -221,16 +217,4 @@ const AddToBookmark = ({
   </View>;
 };
 
-// TODO: Implement bookmarks
-const mapStateToProps = state => ({
-  accounts: [],
-  followedAccounts: state.accounts.followed || []
-});
-
-const mapDispatchToProps = {
-  accountFollowed: accountFollowedAction, accountEdited: accountEditedAction
-};
-
-export default withTheme(translate()(
-  connect(mapStateToProps, mapDispatchToProps)(AddToBookmark)
-), getStyles());
+export default translate()(AddToBookmark);
