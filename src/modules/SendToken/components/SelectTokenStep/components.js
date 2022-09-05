@@ -12,15 +12,20 @@ import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { useTheme } from 'hooks/useTheme';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
+import DeleteSvg from 'assets/svgs/DeleteSvg';
+import InfoSvg from 'assets/svgs/InfoSvg';
+import ModalHolder from 'utilities/modal';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 
-import getSendTokenSelectTokenStepStyles, { sendTokenAmountFieldStyles, sendTokenDescriptionFieldStyles } from './styles';
+import getSendTokenSelectTokenStepStyles, { sendTokenAmountFieldStyles, SendTokenMessageFieldStyles } from './styles';
 import { useTokenAmountInCurrency } from './hooks';
 import { PRIORITY_NAMES_MAP } from '../../constants';
 import useTransactionPriorities from '../../hooks/useTransactionPriorities';
 import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
 import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
+import colors from '../../../../constants/styleGuide/colors';
+import { P } from '../../../../components/shared/toolBox/typography';
 
 export function TokenSelectField({
   form,
@@ -153,13 +158,24 @@ export function TokenAmountField({
   );
 }
 
-export function SendTokenDescriptionField({ form }) {
+export function SendTokenMessageField({ form }) {
   const [showInput, setShowInput] = useState(false);
 
   const { field } = useController({
     name: 'message',
     control: form.control,
   });
+
+  const { styles } = useTheme({
+    styles: getSendTokenSelectTokenStepStyles(),
+  });
+
+  function handleOpenInfoModal() {
+    ModalHolder.open({
+      title: 'Bytes Counter',
+      component: () => <P>blabla</P>
+    });
+  }
 
   if (!showInput) {
     return (
@@ -175,12 +191,28 @@ export function SendTokenDescriptionField({ form }) {
 
   return (
     <Input
-      label={i18next.t('sendToken.tokenSelect.messageFieldLabel')}
+      label={
+        <View style={[styles.row, { justifyContent: 'space-between', width: '100%' }]}>
+          <View style={[styles.row]}>
+            <P style={[styles.messageLabel, styles.theme.messageLabel]}>
+              {i18next.t('sendToken.tokenSelect.messageFieldLabel')}
+            </P>
+
+            <TouchableOpacity onPress={handleOpenInfoModal}>
+              <InfoSvg />
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity onPress={() => setShowInput(false)}>
+            <DeleteSvg color={colors.light.ultramarineBlue} height={16}/>
+          </TouchableOpacity>
+        </View>
+      }
       value={field.value}
       placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
       onChange={field.onChange}
       multiline
-      innerStyles={sendTokenDescriptionFieldStyles}
+      innerStyles={SendTokenMessageFieldStyles}
     />
   );
 }

@@ -50,7 +50,13 @@ export default function getSendTokenSelectTokenStepStyles() {
         borderColor: colors.light.ultramarineBlue,
       },
       label: {
+        fontSize: 14,
         marginBottom: 8,
+        color: colors.light.blueGray
+      },
+      messageLabel: {
+        fontSize: 14,
+        marginRight: 4,
         color: colors.light.blueGray
       },
       priorityButtonText: {
@@ -79,6 +85,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       label: {
         color: colors.light.zodiacBlue
       },
+      messageLabel: {
+        color: colors.light.zodiacBlue
+      },
       priorityButtonText: {
         color: colors.light.zodiacBlue,
       },
@@ -96,6 +105,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       label: {
         color: colors.light.white
       },
+      messageLabel: {
+        color: colors.light.white
+      },
       priorityButtonText: {
         color: colors.light.whiteSmoke
       },
@@ -109,7 +121,7 @@ export default function getSendTokenSelectTokenStepStyles() {
   };
 }
 
-export const sendTokenDescriptionFieldStyles = {
+export const SendTokenMessageFieldStyles = {
   containerStyle: {
     paddingTop: 0,
     paddingRight: 0,
