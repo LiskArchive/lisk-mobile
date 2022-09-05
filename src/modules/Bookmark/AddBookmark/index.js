@@ -2,7 +2,7 @@
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
 import { BackHandler, View } from 'react-native';
-import { CommonActions } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import { translate } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'hooks/useTheme';
@@ -25,13 +25,13 @@ import { addBookmark, editBookmark } from '../store/actions';
 
 // eslint-disable-next-line max-statements
 const AddToBookmark = ({
-  navigation,
   t,
   lng,
   route,
 }) => {
   const bookmarkList = useSelector(selectBookmarkList);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const { styles } = useTheme({ styles: getStyles() });
   const [address, setAddress] = useState({ value: '' });
   const [label, setLabel] = useState({ value: '' });

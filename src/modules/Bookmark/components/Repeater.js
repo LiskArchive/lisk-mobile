@@ -37,7 +37,7 @@ const Repeater = ({
       <List
         draggable={draggable}
         list={filterList}
-        showAvatar={true}
+        showAvatar
         setRef={setRef}
         navigate={navigate}
       />
