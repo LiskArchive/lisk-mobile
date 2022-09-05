@@ -12,7 +12,7 @@ import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { P } from 'components/shared/toolBox/typography';
-import InfoToggler from 'components/shared/InfoModal';
+import InfoToggler from 'components/shared/InfoToggler';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';

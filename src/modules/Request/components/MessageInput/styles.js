@@ -39,7 +39,8 @@ export default () => ({
       justifyContent: 'space-between'
     },
     label: {
-      fontSize: 15
+      fontSize: 14,
+      marginRight: 8
     },
     actionButton: {
       paddingRight: 10,
