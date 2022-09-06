@@ -262,7 +262,7 @@
     "description2": "This account requires {{numberOfSignatures}} signatures to create a transaction.",
     "info": {
       "description": "Available on desktop only",
-      "button": "use desktop"
+      "button": "Use Lisk Desktop"
     },
     "mandatory": "(Mandatory)",
     "optional": "(Optional)",
@@ -273,7 +273,7 @@
     },
     "send": {
       "description": "Sending transaction using multisignature accounts is available only on Lisk Desktop.",
-      "button": "use desktop"
+      "button": "Use Lisk Desktop"
     },
     "showMore": "Show more...",
     "showLess": "Show less..."
