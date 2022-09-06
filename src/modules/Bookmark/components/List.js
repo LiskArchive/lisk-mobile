@@ -6,7 +6,7 @@ import { DraggableItem, Item } from './Item';
 import getStyles from './styles';
 
 const List = ({
-  styles, list, navigate, draggable
+  styles, list, onPress, draggable
 }) => {
   const Element = draggable ? DraggableItem : Item;
   return (
@@ -15,7 +15,7 @@ const List = ({
         data={list}
         renderItem={({ item }) => <Element
         showAvatar={true}
-        navigate={navigate}
+        onPress={onPress}
         key={item.address}
         data={item}
         isInvalidAddress={validateAddress('LSK', item.address) === 1} />}

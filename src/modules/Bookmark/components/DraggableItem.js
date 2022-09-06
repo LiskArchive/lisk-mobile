@@ -10,6 +10,7 @@ import Avatar from 'components/shared/avatar';
 import { B, Small, P } from 'components/shared/toolBox/typography';
 import Icon from 'components/shared/toolBox/icon';
 import SwipeableRow from 'components/shared/Swipeable';
+import { useNavigation } from '@react-navigation/native';
 import DeleteBookmarkModal from './DeleteBookmark';
 import { deleteBookmark } from '../store/actions';
 
@@ -17,12 +18,13 @@ const DraggableItem = ({
   styles,
   data,
   theme,
-  navigate,
+  onPress,
   showAvatar,
   isInvalidAddress,
   t,
 }) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const onDelete = () => {
     ModalHolder.open({
       title: 'Delete bookmark',
@@ -68,7 +70,7 @@ const DraggableItem = ({
             />
           ),
           onPress: () =>
-            navigate({
+            navigation.navigate({
               name: 'AddBookmark',
               params: {
                 account: data,
@@ -96,7 +98,7 @@ const DraggableItem = ({
       <TouchableOpacity
         activeOpacity={1}
         onPress={() =>
-          !isInvalidAddress && navigate('Wallet', { address: data.address })
+          !isInvalidAddress && onPress(data)
         }
         style={[styles.row, styles.swipeBookmark]}
       >
