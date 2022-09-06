@@ -465,6 +465,22 @@
         "title": "Byte-Zähler",
         "description1": "Lisk zählt Ihre Nachricht in Bytes, also denken Sie daran, dass die Länge Ihrer Nachricht in verschiedenen Sprachen variieren kann.",
         "description2": "Unterschiedliche Zeichen können eine unterschiedliche Menge an Bytes verbrauchen."
+      },
+      "priority": {
+        "title": "Transaktionspriorität",
+        "description1": "Wenn das Netzwerk ausgelastet ist, werden Transaktionen mit einer höheren Priorität früher bestätigt."
+      },
+      "transactionFee": {
+        "title": "Transaktionsgebühr",
+        "description1": "Gebühr basiert auf Bytes, kann vom Benutzer je nach Priorität festgelegt werden."
+      },
+      "initializationFee": {
+        "title": "Initialisierungsgebühr",
+        "description1": "Einige Befehle haben eine zusätzliche Befehlsgebühr (delegierte Registrierung in DPoS, Kettenregistrierung in Interoperabilität), diese Gebühr sollte genau gleich der durch den Befehl festgelegten Konstante sein."
+      },
+      "cmmFee": {
+        "title": "CMM-Gebühr",
+        "description1": "Kettenübergreifende Nachrichten sind die Objekte, die die kettenübergreifenden Befehle enthalten. Sie haben eine Gebühreneigenschaft, die auch als Nachrichtengebühr bezeichnet wird, um sie von Transaktionsgebühren zu unterscheiden."
       }
     }
   },

@@ -22,11 +22,10 @@ export default function getSendTokenSelectTokenStepStyles() {
         justifyContent: 'space-between',
         marginBottom: 16
       },
-      messageLabelContainer: {
+      labelContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100%'
+        marginBottom: 8,
       },
       tokenSvg: {
         marginLeft: 8,
@@ -57,13 +56,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       },
       label: {
         fontSize: 14,
-        marginBottom: 8,
-        color: colors.light.blueGray
       },
-      messageLabel: {
-        fontSize: 14,
-        marginRight: 4,
-        color: colors.light.blueGray
+      iconLabel: {
+        marginRight: 6,
       },
       priorityButtonText: {
         color: colors.light.zodiacBlue,

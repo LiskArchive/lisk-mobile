@@ -85,11 +85,11 @@ class Input extends React.Component {
 
     return (
       <View style={[styles.inputContainer, innerStyles.containerStyle]}>
-        {label ? (
+        {typeof label === 'string' ? (
           <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
             {label}
           </Text>
-        ) : null}
+        ) : label}
         <View style={styles.inputRow}>
           {adornments?.left && (
             <View style={styles.leftAdornment}>

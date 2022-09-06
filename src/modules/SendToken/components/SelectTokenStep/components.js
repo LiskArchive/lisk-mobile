@@ -187,14 +187,14 @@ export function SendTokenMessageField({ form }) {
   return (
     <Input
       label={
-        <View style={[styles.messageLabelContainer]}>
+        <View style={[styles.labelContainer, { justifyContent: 'space-between' }]}>
           <View style={[styles.row]}>
-            <P style={[styles.messageLabel, styles.theme.messageLabel]}>
+            <P style={[styles.label, styles.theme.label, styles.iconLabel]}>
               {i18next.t('sendToken.tokenSelect.messageFieldLabel')}
             </P>
 
             <InfoToggler
-              title= {i18next.t('sendToken.info.bytesCounter.title')}
+              title={i18next.t('sendToken.info.bytesCounter.title')}
               description={[
                 i18next.t('sendToken.info.bytesCounter.description1'),
                 i18next.t('sendToken.info.bytesCounter.description2'),
@@ -237,9 +237,7 @@ export function SendTokenPriorityField({ form }) {
     [prioritiesData]
   );
 
-  if (!shouldShowPrioritiesData) {
-    return null;
-  }
+  if (!shouldShowPrioritiesData) return null;
 
   if (isLoadingPrioritiesData) {
     return (
@@ -271,9 +269,16 @@ export function SendTokenPriorityField({ form }) {
 
   return (
     <View style={{ marginBottom: 16 }}>
-      <Text style={[styles.label, styles.theme.label]}>
-        {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
-      </Text>
+      <View style={[styles.labelContainer]}>
+        <P style={[styles.label, styles.theme.label, styles.iconLabel]}>
+          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
+        </P>
+
+        <InfoToggler
+          title={i18next.t('sendToken.info.priority.title')}
+          description={i18next.t('sendToken.info.priority.description1')}
+        />
+      </View>
 
       <View style={[styles.row, { width: '100%' }]}>
         {prioritiesData.map(priority => (
@@ -329,18 +334,33 @@ export function SendTokenTransactionFeesLabels({ form, tokens }) {
   return (
     <View>
       <View style={[styles.feeContainer]}>
-        <Text style={[styles.text, styles.theme.text]}>
-          {i18next.t('sendToken.tokenSelect.transactionFeeLabel')}
-        </Text>
-          <Text style={[styles.text, styles.theme.text]}>
-            {transactionFee.data} {selectedToken?.symbol}
+        <View style={[styles.row]}>
+          <Text style={[styles.text, styles.theme.text, styles.iconLabel]}>
+            {i18next.t('sendToken.tokenSelect.transactionFeeLabel')}
           </Text>
+
+          <InfoToggler
+            title={i18next.t('sendToken.info.transactionFee.title')}
+            description={i18next.t('sendToken.info.transactionFee.description1')}
+          />
+        </View>
+
+        <Text style={[styles.text, styles.theme.text]}>
+          {transactionFee.data} {selectedToken?.symbol}
+        </Text>
       </View>
 
       <View style={[styles.feeContainer]}>
-        <Text style={[styles.text, styles.theme.text]}>
-          {i18next.t('sendToken.tokenSelect.initializationFeeLabel')}
-        </Text>
+        <View style={[styles.row]}>
+          <Text style={[styles.text, styles.theme.text, styles.iconLabel]}>
+            {i18next.t('sendToken.tokenSelect.initializationFeeLabel')}
+          </Text>
+
+          <InfoToggler
+            title={i18next.t('sendToken.info.initializationFee.title')}
+            description={i18next.t('sendToken.info.initializationFee.description1')}
+          />
+        </View>
 
         {initializationFee.isLoading ? (
           <Text style={[styles.text, styles.theme.text]}>
@@ -354,9 +374,16 @@ export function SendTokenTransactionFeesLabels({ form, tokens }) {
       </View>
 
       <View style={[styles.feeContainer]}>
-        <Text style={[styles.text, styles.theme.text]}>
-          {i18next.t('sendToken.tokenSelect.cmmFeeLabel')}
-        </Text>
+        <View style={[styles.row]}>
+          <Text style={[styles.text, styles.theme.text, styles.iconLabel]}>
+            {i18next.t('sendToken.tokenSelect.cmmFeeLabel')}
+          </Text>
+
+          <InfoToggler
+            title={i18next.t('sendToken.info.cmmFee.title')}
+            description={i18next.t('sendToken.info.cmmFee.description1')}
+          />
+        </View>
 
         {cmmFee.isLoading ? (
           <Text style={[styles.text, styles.theme.text]}>
