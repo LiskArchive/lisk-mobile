@@ -1,19 +1,33 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default () => ({
   common: {
     progressContainer: {
       zIndex: 1,
-      width: '100%',
-      height: 2,
       backgroundColor: 'transparent',
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: boxes.boxPadding
     },
-    progressStep: {
-      height: '100%',
-      backgroundColor: colors.light.ultramarineBlue,
+    activeStep: {
+      backgroundColor: colors.light.ufoGreen,
     },
+    progressTitleContainer: {
+      backgroundColor: colors.light.ufoGreen,
+      width: 25,
+      height: 25,
+      borderRadius: 15,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    progressTitle: {
+      color: colors.light.white,
+    },
+    progressStepContainer: {
+      flex: 1,
+      height: 2,
+    }
   },
 
   [themes.light]: {
