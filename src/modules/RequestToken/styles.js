@@ -25,8 +25,9 @@ export default () => ({
       borderColor: colors.light.platinumGray,
     },
     addressLabel: {
-      fontSize: fonts.size.base,
-      marginBottom: 10,
+      fontSize: fonts.size.input,
+      fontFamily: fonts.family.context,
+      marginBottom: 8,
     },
     addressContainer: {
       flexDirection: 'row',
