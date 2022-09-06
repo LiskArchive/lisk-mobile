@@ -1,7 +1,6 @@
 /* eslint-disable complexity */
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
@@ -19,25 +18,25 @@ import colors from 'constants/styleGuide/colors';
 import getSendTokenSelectApplicationsStepStyles,
 { sendTokenRecipientAccountFieldStyles } from './styles';
 
-export function SendTokenSenderApplicationField({ form, applications }) {
-  const { field } = useController({
-    name: 'senderApplicationChainID',
-    control: form.control,
-  });
+export function SendTokenSenderApplicationField({
+  value,
+  onChange,
+  errorMessage,
+  applications
+}) {
+  const senderApplication = applications?.data?.find(
+    application => application.chainID === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  const senderApplication = applications?.data?.find(
-    application => application.chainID === field.value
-  );
-
   return (
     <Picker
-      value={field.value}
-      onChange={field.onChange}
-      error={form.formState.errors.senderApplicationChainID?.message}
+      value={value}
+      onChange={onChange}
+      error={errorMessage}
     >
       <Picker.Label>
         {i18next.t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
@@ -66,25 +65,25 @@ export function SendTokenSenderApplicationField({ form, applications }) {
   );
 }
 
-export function SendTokenRecipientApplicationField({ form, applications }) {
-  const { field } = useController({
-    name: 'recipientApplicationChainID',
-    control: form.control,
-  });
+export function SendTokenRecipientApplicationField({
+  value,
+  onChange,
+  errorMessage,
+  applications
+}) {
+  const recipientApplication = applications?.data?.find(
+    application => application.chainID === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  const recipientApplication = applications?.data?.find(
-    application => application.chainID === field.value
-  );
-
   return (
     <Picker
-      value={field.value}
-      onChange={field.onChange}
-      error={form.formState.errors.recipientApplicationChainID?.message}
+      value={value}
+      onChange={onChange}
+      error={errorMessage}
     >
       <Picker.Label style={{ marginTop: 16 }}>
         {i18next.t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
@@ -137,49 +136,45 @@ export function SendTokenRecipientApplicationField({ form, applications }) {
   );
 }
 
-export function SendTokenRecipientAccountField({ form, accounts }) {
-  const { field: addressField } = useController({
-    name: 'recipientAccountAddress',
-    control: form.control,
-  });
-
-  const { field: addressFormatField } = useController({
-    name: 'recipientAccountAddressFormat',
-    control: form.control,
-  });
+export function SendTokenRecipientAccountField({
+  value,
+  onChange,
+  errorMessage,
+  addressFormat,
+  onAddressFormatChange,
+  accounts
+}) {
+  const recipientAccount = accounts.find(
+    account => account.metadata.address === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  const recipientAccount = accounts.find(
-    account => account.metadata.address === addressField.value
-  );
+  function handleInputChange(_value) {
+    if (addressFormat !== 'input') onAddressFormatChange('input');
 
-  function handleInputChange(value) {
-    if (addressFormatField.value !== 'input') addressFormatField.onChange('input');
-
-    addressField.onChange(value);
+    onChange(_value);
   }
 
-  function handlePickerChange(value) {
-    if (addressFormatField.value !== 'picker') addressFormatField.onChange('picker');
+  function handlePickerChange(_value) {
+    if (addressFormat !== 'picker') onAddressFormatChange('picker');
 
-    addressField.onChange(value);
+    onChange(_value);
   }
 
   return (
     <>
       <Input
         label={i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
-        value={addressFormatField.value === 'input' ? addressField.value : ''}
+        value={addressFormat === 'input' ? value : ''}
         placeholder="Input wallet address or choose a username"
         onChange={handleInputChange}
-        error={addressFormatField.value === 'input'
-          && form.formState.errors.recipientAccountAddress?.message}
+        error={addressFormat === 'input' && errorMessage}
         adornments={{
-          left: (!addressField.value || addressFormatField.value === 'picker') && <CircleSvg />,
-          right: !!addressField.value && addressFormatField.value === 'input' && (
+          left: (!value || addressFormat === 'picker') && <CircleSvg />,
+          right: !!value && addressFormat === 'input' && (
            <CircleCheckedSvg variant="fill"/>
           )
         }}
@@ -187,10 +182,9 @@ export function SendTokenRecipientAccountField({ form, accounts }) {
       />
 
       <Picker
-        value={addressFormatField.value === 'picker' && addressField.value}
+        value={addressFormat === 'picker' && value}
         onChange={handlePickerChange}
-        error={addressFormatField.value === 'picker'
-          && form.formState.errors.recipientAccountAddress?.message}
+        error={addressFormat === 'picker' && errorMessage}
       >
         <Picker.Toggle
           placeholder={
@@ -203,7 +197,7 @@ export function SendTokenRecipientAccountField({ form, accounts }) {
             </View>
           }
         >
-          {addressFormatField.value === 'picker' && recipientAccount && (
+          {addressFormat === 'picker' && recipientAccount && (
             <>
               <View style={[styles.row]}>
                 <Avatar

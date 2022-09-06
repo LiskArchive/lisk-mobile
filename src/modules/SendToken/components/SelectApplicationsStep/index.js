@@ -1,5 +1,7 @@
+/* eslint-disable max-statements */
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -17,6 +19,26 @@ export default function SendTokenSelectApplicationsStep({
   const { applications } = useBlockchainApplicationExplorer();
 
   const { accounts } = useAccounts();
+
+  const { field: senderApplicationChainIDField } = useController({
+    name: 'senderApplicationChainID',
+    control: form.control,
+  });
+
+  const { field: recipientApplicationChainIDField } = useController({
+    name: 'recipientApplicationChainID',
+    control: form.control,
+  });
+
+  const { field: addressField } = useController({
+    name: 'recipientAccountAddress',
+    control: form.control,
+  });
+
+  const { field: addressFormatField } = useController({
+    name: 'recipientAccountAddressFormat',
+    control: form.control,
+  });
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
@@ -42,17 +64,25 @@ export default function SendTokenSelectApplicationsStep({
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
         <SendTokenSenderApplicationField
-          form={form}
+          value={senderApplicationChainIDField.value}
+          onChange={senderApplicationChainIDField.onChange}
+          errorMessage={form.formState.errors.senderApplicationChainID?.message}
           applications={applications}
         />
 
         <SendTokenRecipientApplicationField
-          form={form}
+          value={recipientApplicationChainIDField.value}
+          onChange={recipientApplicationChainIDField.onChange}
+          errorMessage={form.formState.errors.recipientApplicationChainID?.message}
           applications={applications}
         />
 
         <SendTokenRecipientAccountField
-          form={form}
+          value={addressField.value}
+          onChange={addressField.onChange}
+          errorMessage={form.formState.errors.recipientAccountAddress?.message}
+          addressFormat={addressFormatField.value}
+          onAddressFormatChange={addressFormatField.onChange}
           accounts={accounts}
         />
       </View>
