@@ -2,7 +2,6 @@
 import React, { useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
@@ -30,15 +29,12 @@ import getSendTokenSelectTokenStepStyles, {
 } from './styles';
 
 export function TokenSelectField({
-  form,
+  value,
+  onChange,
+  errorMessage,
   tokens,
 }) {
   const currentAccountInfo = useAccountInfo();
-
-  const { field } = useController({
-    name: 'tokenID',
-    control: form.control,
-  });
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
@@ -46,13 +42,13 @@ export function TokenSelectField({
 
   const normalizedBalance = fromRawLsk(currentAccountInfo.summary.balance);
 
-  const selectedToken = tokens.data?.find(token => token.tokenID === field.value);
+  const selectedToken = tokens.data?.find(token => token.tokenID === value);
 
   return (
     <Picker
-      value={field.value}
-      onChange={field.onChange}
-      error={form.formState.errors.tokenID?.message}
+      value={value}
+      onChange={onChange}
+      error={errorMessage}
     >
       <View style={{ ...styles.row, justifyContent: 'space-between' }}>
         <Picker.Label>
@@ -113,28 +109,26 @@ export function TokenSelectField({
 }
 
 export function TokenAmountField({
-  form,
+  value,
+  onChange,
+  errorMessage,
+  tokenID,
   tokens,
 }) {
-  const { field } = useController({
-    name: 'amount',
-    control: form.control,
-  });
-
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const { tokenAmountInCurrency, currency } = useTokenAmountInCurrency(field.value);
+  const { tokenAmountInCurrency, currency } = useTokenAmountInCurrency(value);
 
   const selectedToken = tokens.data?.find(
-    token => token.tokenID === form.watch('tokenID')
+    token => token.tokenID === tokenID
   );
 
   return (
     <Input
-      value={field.value && field.value.toString()}
-      onChange={value => field.onChange(value && parseFloat(value))}
+      value={value && value.toString()}
+      onChange={newValue => onChange(newValue && parseFloat(newValue))}
       keyboardType="numeric"
       disabled={!selectedToken}
       label= {
@@ -147,7 +141,7 @@ export function TokenAmountField({
           { selectedTokenSymbol: selectedToken.symbol || '' })
           : i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
       }
-      error={form.formState.errors.amount?.message}
+      error={errorMessage}
       adornments={{
         right: (
           <Text style={[styles.tokenAmountInCurrencyText]}>
@@ -160,17 +154,20 @@ export function TokenAmountField({
   );
 }
 
-export function SendTokenMessageField({ form }) {
+export function SendTokenMessageField({
+  value,
+  onChange,
+}) {
   const [showInput, setShowInput] = useState(false);
-
-  const { field } = useController({
-    name: 'message',
-    control: form.control,
-  });
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
+
+  function handleRemove() {
+    setShowInput(false);
+    onChange('');
+  }
 
   if (!showInput) {
     return (
@@ -186,6 +183,8 @@ export function SendTokenMessageField({ form }) {
 
   return (
     <Input
+      value={value}
+      onChange={onChange}
       label={
         <View style={[styles.labelContainer, { justifyContent: 'space-between' }]}>
           <View style={[styles.row]}>
@@ -202,31 +201,27 @@ export function SendTokenMessageField({ form }) {
             />
           </View>
 
-          <TouchableOpacity onPress={() => setShowInput(false)}>
+          <TouchableOpacity onPress={handleRemove}>
             <DeleteSvg color={colors.light.ultramarineBlue} height={16}/>
           </TouchableOpacity>
         </View>
       }
-      value={field.value}
       placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
-      onChange={field.onChange}
       multiline
       innerStyles={sendTokenMessageFieldStyles}
     />
   );
 }
 
-export function SendTokenPriorityField({ form }) {
+export function SendTokenPriorityField({
+  value,
+  onChange,
+}) {
   const {
     data: prioritiesData,
     isLoading: isLoadingPrioritiesData,
     error: errorOnPriorities
   } = useTransactionPriorities();
-
-  const { field } = useController({
-    name: 'priority',
-    control: form.control,
-  });
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
@@ -284,10 +279,10 @@ export function SendTokenPriorityField({ form }) {
         {prioritiesData.map(priority => (
           <TouchableOpacity
             key={priority.code}
-            onPress={() => field.onChange(priority.code)}
+            onPress={() => onChange(priority.code)}
             style={[
               styles.priorityButtonBase,
-              styles[field.value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
+              styles[value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
               { marginRight: 8 }
             ]}
           >
@@ -305,30 +300,37 @@ export function SendTokenPriorityField({ form }) {
   );
 }
 
-export function SendTokenTransactionFeesLabels({ form, tokens }) {
+export function SendTokenTransactionFeesLabels({
+  tokenID,
+  amount,
+  priority,
+  message,
+  recipientAccountAddress,
+  senderApplicationChainID,
+  recipientApplicationChainID,
+  tokens
+}) {
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
-
-  const tokenID = form.watch('tokenID');
 
   const selectedToken = tokens.data?.find(token => token.tokenID === tokenID);
 
   const transactionFee = useTransactionFeeCalculator({
     tokenID,
-    amount: form.watch('amount'),
-    priority: form.watch('priority'),
-    message: form.watch('message'),
+    amount,
+    priority,
+    message,
   });
 
   const initializationFee = useInitializationFeeCalculator({
     tokenID,
-    recipientAccountAddress: form.watch('recipientAccountAddress'),
+    recipientAccountAddress,
   });
 
   const cmmFee = useCCMFeeCalculator({
-    senderApplicationChainID: form.watch('senderApplicationChainID'),
-    recipientApplicationChainID: form.watch('recipientApplicationChainID')
+    senderApplicationChainID,
+    recipientApplicationChainID
   });
 
   return (
