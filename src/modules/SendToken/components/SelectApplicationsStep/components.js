@@ -16,13 +16,14 @@ import { stringShortener } from 'utilities/helpers';
 import colors from 'constants/styleGuide/colors';
 
 import getSendTokenSelectApplicationsStepStyles,
-{ sendTokenRecipientAccountFieldStyles } from './styles';
+{ getSendTokenRecipientAccountFieldStyles } from './styles';
 
 export function SendTokenSenderApplicationField({
   value,
   onChange,
   errorMessage,
-  applications
+  applications,
+  style
 }) {
   const senderApplication = applications?.data?.find(
     application => application.chainID === value
@@ -38,7 +39,7 @@ export function SendTokenSenderApplicationField({
       onChange={onChange}
       error={errorMessage}
     >
-      <Picker.Label>
+      <Picker.Label style={style?.label}>
         {i18next.t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
       </Picker.Label>
 
@@ -47,6 +48,7 @@ export function SendTokenSenderApplicationField({
         placeholder={
           i18next.t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')
         }
+        style={style?.toggle}
       >
         {senderApplication && (
           <View style={[styles.row]}>
@@ -69,7 +71,8 @@ export function SendTokenRecipientApplicationField({
   value,
   onChange,
   errorMessage,
-  applications
+  applications,
+  style
 }) {
   const recipientApplication = applications?.data?.find(
     application => application.chainID === value
@@ -85,7 +88,7 @@ export function SendTokenRecipientApplicationField({
       onChange={onChange}
       error={errorMessage}
     >
-      <Picker.Label style={{ marginTop: 16 }}>
+      <Picker.Label style={style?.label}>
         {i18next.t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
       </Picker.Label>
 
@@ -94,6 +97,7 @@ export function SendTokenRecipientApplicationField({
         placeholder={
           i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')
         }
+        style={style?.toggle}
       >
         {recipientApplication && (
           <View style={[styles.row]}>
@@ -142,7 +146,8 @@ export function SendTokenRecipientAccountField({
   errorMessage,
   addressFormat,
   onAddressFormatChange,
-  accounts
+  accounts,
+  style
 }) {
   const recipientAccount = accounts.find(
     account => account.metadata.address === value
@@ -178,7 +183,7 @@ export function SendTokenRecipientAccountField({
            <CircleCheckedSvg variant="fill"/>
           )
         }}
-        innerStyles={sendTokenRecipientAccountFieldStyles}
+        innerStyles={getSendTokenRecipientAccountFieldStyles(style)}
       />
 
       <Picker
@@ -196,6 +201,7 @@ export function SendTokenRecipientAccountField({
               </Text>
             </View>
           }
+          style={style?.picker}
         >
           {addressFormat === 'picker' && recipientAccount && (
             <>

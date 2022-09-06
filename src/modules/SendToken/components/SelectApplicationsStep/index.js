@@ -68,6 +68,7 @@ export default function SendTokenSelectApplicationsStep({
           onChange={senderApplicationChainIDField.onChange}
           errorMessage={form.formState.errors.senderApplicationChainID?.message}
           applications={applications}
+          style={{ toggle: { container: { marginBottom: 16 } } }}
         />
 
         <SendTokenRecipientApplicationField
@@ -75,6 +76,7 @@ export default function SendTokenSelectApplicationsStep({
           onChange={recipientApplicationChainIDField.onChange}
           errorMessage={form.formState.errors.recipientApplicationChainID?.message}
           applications={applications}
+          style={{ toggle: { container: { marginBottom: 16 } } }}
         />
 
         <SendTokenRecipientAccountField

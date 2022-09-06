@@ -122,34 +122,43 @@ export default function getSendTokenSelectTokenStepStyles() {
   };
 }
 
-export const sendTokenMessageFieldStyles = {
-  containerStyle: {
-    paddingTop: 0,
-    paddingRight: 0,
-    paddingLeft: 0,
-    marginBottom: 16
-  },
-  inputLabel: {
-    marginBottom: 8
-  },
-  input: {
-    padding: 16,
-    minHeight: 80
-  }
-};
+export function getSendTokenMessageFieldStyles(styles) {
+  return {
+    containerStyle: {
+      paddingTop: 0,
+      paddingRight: 0,
+      paddingLeft: 0,
+      ...styles?.container
+    },
+    inputLabel: {
+      marginBottom: 8,
+      ...styles?.inputLabel
+    },
+    input: {
+      padding: 16,
+      minHeight: 80,
+      ...styles?.input
+    }
+  };
+}
 
-export const sendTokenAmountFieldStyles = {
-  containerStyle: {
-    paddingTop: 0,
-    paddingRight: 0,
-    paddingLeft: 0,
-    marginBottom: 16,
-    marginTop: 16,
-  },
-  inputLabel: {
-    marginBottom: 8
-  },
-  input: {
-    padding: 16
-  }
-};
+export function getSendTokenAmountFieldStyles(styles) {
+  return {
+    containerStyle: {
+      paddingTop: 0,
+      paddingRight: 0,
+      paddingLeft: 0,
+      ...styles?.container
+      // marginBottom: 16,
+      // marginTop: 16,
+    },
+    inputLabel: {
+      marginBottom: 8,
+      ...styles?.inputLabel
+    },
+    input: {
+      padding: 16,
+      ...styles?.input
+    }
+  };
+}

@@ -12,6 +12,7 @@ import { LabelButton } from 'components/shared/toolBox/button';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { P } from 'components/shared/toolBox/typography';
 import InfoToggler from 'components/shared/InfoToggler';
+import FadeInView from 'components/shared/fadeInView';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
@@ -24,17 +25,23 @@ import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
 import { useTokenAmountInCurrency } from './hooks';
 import getSendTokenSelectTokenStepStyles, {
-  sendTokenAmountFieldStyles,
-  sendTokenMessageFieldStyles
+  getSendTokenAmountFieldStyles,
+  getSendTokenMessageFieldStyles
 } from './styles';
+import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount';
+import { useGetTokensQuery } from '../../api/useGetTokensQuery';
 
 export function TokenSelectField({
   value,
   onChange,
   errorMessage,
-  tokens,
+  style
 }) {
+  const [currentAccount] = useCurrentAccount();
+
   const currentAccountInfo = useAccountInfo();
+
+  const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
@@ -51,12 +58,12 @@ export function TokenSelectField({
       error={errorMessage}
     >
       <View style={{ ...styles.row, justifyContent: 'space-between' }}>
-        <Picker.Label>
+        <Picker.Label style={style?.label}>
           {i18next.t('sendToken.tokenSelect.tokenIDFieldLabel')}
         </Picker.Label>
 
         {selectedToken && (
-          <Picker.Label>
+          <Picker.Label style={style?.label}>
             {i18next.t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
             {/* TODO: Read token symbol from account info when backend send the data */}
             <Text style={[styles.balanceText]}>
@@ -68,6 +75,7 @@ export function TokenSelectField({
 
       <Picker.Toggle
         disabled={tokens.isLoading || tokens.error}
+        style={style?.toggle}
       >
         {tokens.isLoading ? (
           <Text>
@@ -108,22 +116,26 @@ export function TokenSelectField({
   );
 }
 
-export function TokenAmountField({
+export function SendTokenAmountField({
   value,
   onChange,
   errorMessage,
   tokenID,
-  tokens,
+  style
 }) {
-  const { styles } = useTheme({
-    styles: getSendTokenSelectTokenStepStyles(),
-  });
+  const [currentAccount] = useCurrentAccount();
+
+  const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
   const { tokenAmountInCurrency, currency } = useTokenAmountInCurrency(value);
 
   const selectedToken = tokens.data?.find(
     token => token.tokenID === tokenID
   );
+
+  const { styles } = useTheme({
+    styles: getSendTokenSelectTokenStepStyles(),
+  });
 
   return (
     <Input
@@ -149,7 +161,7 @@ export function TokenAmountField({
           </Text>
         )
       }}
-      innerStyles={sendTokenAmountFieldStyles}
+      innerStyles={getSendTokenAmountFieldStyles(style)}
     />
   );
 }
@@ -157,6 +169,7 @@ export function TokenAmountField({
 export function SendTokenMessageField({
   value,
   onChange,
+  style
 }) {
   const [showInput, setShowInput] = useState(false);
 
@@ -182,40 +195,43 @@ export function SendTokenMessageField({
   }
 
   return (
-    <Input
-      value={value}
-      onChange={onChange}
-      label={
-        <View style={[styles.labelContainer, { justifyContent: 'space-between' }]}>
-          <View style={[styles.row]}>
-            <P style={[styles.label, styles.theme.label, styles.iconLabel]}>
-              {i18next.t('sendToken.tokenSelect.messageFieldLabel')}
-            </P>
+    <FadeInView>
+      <Input
+        value={value}
+        onChange={onChange}
+        label={
+          <View style={[styles.labelContainer, { justifyContent: 'space-between' }]}>
+            <View style={[styles.row]}>
+              <P style={[styles.label, styles.theme.label, styles.iconLabel]}>
+                {i18next.t('sendToken.tokenSelect.messageFieldLabel')}
+              </P>
 
-            <InfoToggler
-              title={i18next.t('sendToken.info.bytesCounter.title')}
-              description={[
-                i18next.t('sendToken.info.bytesCounter.description1'),
-                i18next.t('sendToken.info.bytesCounter.description2'),
-              ]}
-            />
+              <InfoToggler
+                title={i18next.t('sendToken.info.bytesCounter.title')}
+                description={[
+                  i18next.t('sendToken.info.bytesCounter.description1'),
+                  i18next.t('sendToken.info.bytesCounter.description2'),
+                ]}
+              />
+            </View>
+
+            <TouchableOpacity onPress={handleRemove}>
+              <DeleteSvg color={colors.light.ultramarineBlue} height={16}/>
+            </TouchableOpacity>
           </View>
-
-          <TouchableOpacity onPress={handleRemove}>
-            <DeleteSvg color={colors.light.ultramarineBlue} height={16}/>
-          </TouchableOpacity>
-        </View>
-      }
-      placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
-      multiline
-      innerStyles={sendTokenMessageFieldStyles}
-    />
+        }
+        placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
+        multiline
+        innerStyles={getSendTokenMessageFieldStyles(style)}
+      />
+    </FadeInView>
   );
 }
 
 export function SendTokenPriorityField({
   value,
   onChange,
+  style
 }) {
   const {
     data: prioritiesData,
@@ -237,7 +253,7 @@ export function SendTokenPriorityField({
   if (isLoadingPrioritiesData) {
     return (
       <View>
-        <Text style={[styles.label]}>
+        <Text style={[styles.label, style?.label]}>
           {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
         </Text>
 
@@ -251,7 +267,7 @@ export function SendTokenPriorityField({
   if (errorOnPriorities) {
     return (
       <View>
-        <Text style={[styles.label, styles.theme.label]}>
+        <Text style={[styles.label, styles.theme.label, style?.label]}>
           {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
         </Text>
 
@@ -265,7 +281,7 @@ export function SendTokenPriorityField({
   return (
     <View style={{ marginBottom: 16 }}>
       <View style={[styles.labelContainer]}>
-        <P style={[styles.label, styles.theme.label, styles.iconLabel]}>
+        <P style={[styles.label, styles.theme.label, styles.iconLabel, style?.label]}>
           {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
         </P>
 
@@ -308,11 +324,10 @@ export function SendTokenTransactionFeesLabels({
   recipientAccountAddress,
   senderApplicationChainID,
   recipientApplicationChainID,
-  tokens
 }) {
-  const { styles } = useTheme({
-    styles: getSendTokenSelectTokenStepStyles(),
-  });
+  const [currentAccount] = useCurrentAccount();
+
+  const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
   const selectedToken = tokens.data?.find(token => token.tokenID === tokenID);
 
@@ -331,6 +346,10 @@ export function SendTokenTransactionFeesLabels({
   const cmmFee = useCCMFeeCalculator({
     senderApplicationChainID,
     recipientApplicationChainID
+  });
+
+  const { styles } = useTheme({
+    styles: getSendTokenSelectTokenStepStyles(),
   });
 
   return (

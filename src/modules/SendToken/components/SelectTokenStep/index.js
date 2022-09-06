@@ -6,15 +6,13 @@ import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 
 import getSendTokenSelectTokenStepStyles from './styles';
-import { useGetTokensQuery } from '../../api/useGetTokensQuery';
 import {
   SendTokenMessageField,
   SendTokenPriorityField,
   SendTokenTransactionFeesLabels,
-  TokenAmountField,
+  SendTokenAmountField,
   TokenSelectField
 } from './components';
 
@@ -23,10 +21,6 @@ export default function SendTokenSelectTokenStep({
   prevStep,
   form,
 }) {
-  const [currentAccount] = useCurrentAccount();
-
-  const tokens = useGetTokensQuery(currentAccount.metadata.address);
-
   const { field: tokenIDField } = useController({
     name: 'tokenID',
     control: form.control,
@@ -75,20 +69,21 @@ export default function SendTokenSelectTokenStep({
           value={tokenIDField.value}
           onChange={tokenIDField.onChange}
           errorMessage={form.formState.errors.tokenID?.message}
-          tokens={tokens}
+          style={{ toggle: { container: { marginBottom: 16 } } }}
         />
 
-        <TokenAmountField
+        <SendTokenAmountField
           value={amountField.value}
           onChange={amountField.onChange}
           tokenID={tokenIDField.value}
           errorMessage={form.formState.errors.amount?.message}
-          tokens={tokens}
+          style={{ container: { marginBottom: 16 } }}
         />
 
         <SendTokenMessageField
           value={messageField.value}
           onChange={messageField.onChange}
+          style={{ container: { marginBottom: 16 } }}
         />
 
         <SendTokenPriorityField
@@ -104,7 +99,6 @@ export default function SendTokenSelectTokenStep({
           recipientAccountAddress={recipientAccountAddressField.value}
           senderApplicationChainID={senderApplicationChainIDField.value}
           recipientApplicationChainID={recipientApplicationChainIDField.value}
-          tokens={tokens}
         />
       </View>
 
