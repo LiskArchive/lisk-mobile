@@ -19,19 +19,23 @@ import {
 import { P, B } from 'components/shared/toolBox/typography';
 import reg from 'constants/regex';
 import { useTheme } from 'hooks/useTheme';
+import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import { themes, colors } from 'constants/styleGuide';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
 import BottomModal from 'components/shared/BottomModal';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { pricesRetrieved } from 'actions/service';
 import { SendTokenMessageField, SendTokenAmountField, TokenSelectField } from 'modules/SendToken/components/SelectTokenStep/components';
 import { SendTokenRecipientApplicationField } from 'modules/SendToken/components/SelectApplicationsStep/components';
 import { mockTokens } from 'modules/SendToken/__fixtures__';
+import CopySvg from 'assets/svgs/CopySvg';
 
 import { serializeQueryString } from './utils';
 import getStyles from './styles';
+import CheckSvg from '../../assets/svgs/CheckSvg';
 
 export default function RequestToken() {
   const navigation = useNavigation();
@@ -50,11 +54,9 @@ export default function RequestToken() {
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
-  const validator = str => reg.amount.test(str);
-
-  const qrCodeSize = deviceWidth() * 0.52;
-
   const qrCodeUrl = useMemo(() => {
+    const validator = str => reg.amount.test(str);
+
     const amountValidity = validator(amount.value) ? 0 : 1;
     const queryString = serializeQueryString({
       recipient: address,
@@ -65,6 +67,10 @@ export default function RequestToken() {
     return `lisk://wallet${queryString}`;
   }, [address, amount.value, recipientApplication, recipientToken]);
 
+  const [copiedToClipboard, handleCopyToClipboard] = useCopyToClipboard(qrCodeUrl);
+
+  const qrCodeSize = deviceWidth() * 0.52;
+
   const handleApplicationChange = application => {
     setRecipientApplication(application);
     setRecipientToken(null);
@@ -72,7 +78,7 @@ export default function RequestToken() {
 
   useEffect(() => {
     dispatch(pricesRetrieved());
-  }, []);
+  }, [dispatch]);
 
   const renderQRCode = (size) => <QRCode
     value={qrCodeUrl}
@@ -114,7 +120,6 @@ export default function RequestToken() {
         enableResetScrollToCoords={false}
       >
         <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-          <View style={styles.body}>
             <P style={[styles.addressLabel, styles.theme.addressLabel]}>
               {i18next.t('requestTokens.recipient')}
             </P>
@@ -153,8 +158,30 @@ export default function RequestToken() {
 
             <SendTokenMessageField onChange={setMessage} value={message} />
 
-          </View>
+          <PrimaryButton
+            onPress={handleCopyToClipboard}
+            adornments={{
+              left: (
+                !copiedToClipboard ? (
+                  <CopySvg
+                    color={colors.light.white}
+                    variant="outline"
+                    style={{ marginRight: 8 }}
+                  />
+                ) : (
+                  <CheckSvg
+                    color={colors.light.white}
+                    height={14}
+                    style={{ marginRight: 8 }}
+                  />
+                )
+              )
+            }}
+          >
+            {!copiedToClipboard ? 'Copy link' : 'Link copied!'}
+          </PrimaryButton>
         </View>
+
       </KeyboardAwareScrollView>
 
       <BottomModal

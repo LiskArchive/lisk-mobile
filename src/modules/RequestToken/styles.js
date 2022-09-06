@@ -10,6 +10,7 @@ export default () => ({
     innerContainer: {
       flexDirection: 'column',
       flex: 1,
+      padding: boxes.boxPadding,
     },
     applicationNameContainer: {
       flexDirection: 'row',
@@ -23,9 +24,6 @@ export default () => ({
       borderWidth: 1,
       borderColor: colors.light.platinumGray,
     },
-    body: {
-      padding: boxes.boxPadding,
-    },
     addressLabel: {
       fontSize: fonts.size.base,
       marginBottom: 10,
@@ -38,9 +36,6 @@ export default () => ({
     },
     avatar: {
       marginRight: 10,
-    },
-    tokenSvg: {
-      marginLeft: 8,
     },
     address: {
       fontSize: fonts.size.small,
@@ -66,13 +61,6 @@ export default () => ({
     shareText: {
       fontSize: fonts.size.small,
     },
-    closeButton: {
-      alignSelf: 'flex-end',
-      margin: 10,
-      padding: 10,
-      backgroundColor: colors.light.platinumGray,
-      borderRadius: 50,
-    }
   },
 
   [themes.light]: {
