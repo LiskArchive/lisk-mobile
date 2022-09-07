@@ -15,6 +15,7 @@ import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { mockTokens } from 'modules/SendToken/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import {
   SendTokenMessageField,
   SendTokenAmountField,
@@ -34,11 +35,10 @@ import { themes, colors } from 'constants/styleGuide';
 import {
   deviceWidth,
 } from 'utilities/device';
-import { stringShortener } from 'utilities/helpers';
+import { stringShortener, serializeQueryString } from 'utilities/helpers';
 import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
-import { serializeQueryString } from './utils';
 import getStyles from './styles';
 
 export default function RequestToken() {
@@ -48,12 +48,17 @@ export default function RequestToken() {
 
   const [currentAccount] = useCurrentAccount();
 
+  const [currentApplication] = useCurrentBlockchainApplication();
+
   const { applications } = useBlockchainApplicationExplorer();
 
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
-  const [recipientApplication, setRecipientApplication] = useState(null);
-  const [recipientToken, setRecipientToken] = useState(mockTokens.find(token => token.symbol === 'LSK')?.tokenID);
+  const [
+    recipientApplicationChainID,
+    setRecipientApplicationChainID
+  ] = useState(currentApplication.chainID);
+  const [recipientTokenID, setRecipientTokenID] = useState(mockTokens.find(token => token.symbol === 'LSK')?.tokenID);
   const [modalOpen, setModalOpen] = useState(false);
 
   const { styles, theme } = useTheme({ styles: getStyles() });
@@ -65,20 +70,20 @@ export default function RequestToken() {
     const queryString = serializeQueryString({
       recipient: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
-      recipientApplication: recipientApplication?.chainID,
-      recipientToken: recipientToken?.tokenId
+      recipientApplication: recipientApplicationChainID,
+      recipientToken: recipientTokenID
     });
     return `lisk://wallet${queryString}`;
-  }, [currentAccount.metadata.address, amount.value, recipientApplication, recipientToken]);
+  }, [
+    currentAccount.metadata.address,
+    amount.value,
+    recipientApplicationChainID,
+    recipientTokenID
+  ]);
 
   const [copiedToClipboard, handleCopyToClipboard] = useCopyToClipboard(qrCodeUrl);
 
   const qrCodeSize = deviceWidth() * 0.52;
-
-  const handleApplicationChange = application => {
-    setRecipientApplication(application);
-    setRecipientToken(null);
-  };
 
   useEffect(() => {
     dispatch(pricesRetrieved());
@@ -149,22 +154,22 @@ export default function RequestToken() {
           </View>
 
           <SendTokenRecipientApplicationField
-            value={recipientApplication}
-            onChange={handleApplicationChange}
+            value={recipientApplicationChainID}
+            onChange={setRecipientApplicationChainID}
             applications={applications}
             style={{ toggle: { container: { marginBottom: 16 } } }}
           />
 
           <TokenSelectField
-            value={recipientToken}
-            onChange={setRecipientToken}
+            value={recipientTokenID}
+            onChange={setRecipientTokenID}
             style={{ toggle: { container: { marginBottom: 16 } } }}
           />
 
           <SendTokenAmountField
             value={amount.value}
             onChange={setAmount}
-            tokenID={recipientToken?.tokenID}
+            tokenID={recipientTokenID}
             style={{ container: { marginBottom: 16 } }}
           />
 
