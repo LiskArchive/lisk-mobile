@@ -447,7 +447,8 @@
       },
       "error": {
         "title": "Transaction failed",
-        "description": "There was an error on the transaction. Please try again.",
+        "description1": "There was an error on the transaction.",
+        "description2": "Please try again.",
         "retryButtonText": "Try again",
         "reportErrorLabel": "Is the problem persisting?",
         "reportErrorButtonText": "Report the error via email"

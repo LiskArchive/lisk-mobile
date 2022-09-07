@@ -27,7 +27,7 @@ export default function SendTokenSuccess({ onClick }) {
           {i18next.t('sendToken.result.success.title')}
         </Text>
 
-        <Text style={[styles.subtitle, styles.theme.subtitle]}>
+        <Text style={[styles.description, styles.theme.description]}>
           {i18next.t('sendToken.result.success.description')}
         </Text>
       </View>

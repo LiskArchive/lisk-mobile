@@ -443,7 +443,8 @@
       },
       "error": {
         "title": "Transaktion fehlgeschlagen",
-        "description": "Bei der Transaktion ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+        "description1": "Bei der Transaktion ist ein Fehler aufgetreten.",
+        "description2": "Bitte versuche es erneut.",
         "retryButtonText": "Versuchen Sie es nochmal",
         "reportErrorLabel": "Bleibt das Problem bestehen?",
         "reportErrorButtonText": "Melden Sie den Fehler per E-Mail"

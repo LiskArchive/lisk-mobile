@@ -92,7 +92,7 @@ export function SendTokenSummaryModal({
         ]
       }}
       isOpen={show}
-      onClosed={handleOnProcessCompleted}
+      toggleShow={handleOnProcessCompleted}
       >
       {renderStep()}
     </BottomModal>

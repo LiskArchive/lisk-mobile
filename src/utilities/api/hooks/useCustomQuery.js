@@ -18,11 +18,11 @@ import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/h
  *
  * @returns The query object
  */
-export const useCustomQuery = ({
+export function useCustomQuery({
   keys,
   config,
   options = {},
-}) => {
+}) {
   const [{ chainID }] = useCurrentBlockchainApplication();
 
   return useQuery(
@@ -30,4 +30,4 @@ export const useCustomQuery = ({
     async () => API_METHOD[METHOD](config),
     options,
   );
-};
+}
