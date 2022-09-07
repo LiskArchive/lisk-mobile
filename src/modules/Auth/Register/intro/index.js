@@ -8,6 +8,7 @@ import addressImg from 'assets/images/registrationIntro/address3x.png';
 import securePassphraseImg from 'assets/images/registrationIntro/securePassphrase3x.png';
 import uniqueAvatarImg from 'assets/images/registrationIntro/uniqueAvatar3x.png';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 
 const descriptionContent = [
@@ -38,8 +39,9 @@ const descriptionContent = [
 
 const Intro = ({
   t, nextStep,
-  navigation, route
+  route
 }) => {
+  const navigation = useNavigation();
   const [passphrase, setPassphrase] = useState('');
 
   const forward = () => {

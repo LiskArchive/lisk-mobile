@@ -5,10 +5,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderPlaceholderButton from 'components/navigation/headerPlaceholderButton';
+import { useNavigation } from '@react-navigation/native';
 import image from 'assets/images/registrationProcess/success3x.png';
 import styles from './styles';
 
-const Success = ({ t, hideNav, navigation }) => {
+const Success = ({ t, hideNav }) => {
+  const navigation = useNavigation();
   useEffect(() => {
     const { setOptions } = navigation;
     hideNav();

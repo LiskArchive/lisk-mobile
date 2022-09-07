@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Switch from 'react-native-switch-pro';
+import { useNavigation } from '@react-navigation/native';
 import { B, P } from 'components/shared/toolBox/typography';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -12,8 +13,9 @@ import styles from './styles';
 
 const SafeKeeping = ({
   t,
-  sharedData: { passphrase }, navigation, prevStep, nextStep
+  sharedData: { passphrase }, prevStep, nextStep
 }) => {
+  const navigation = useNavigation();
   const [confirmed, setConfirmed] = useState(false);
 
   useEffect(() => {

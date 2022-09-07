@@ -53,16 +53,16 @@ export default function SendToken({ route }) {
       {accountIsMultisignature ? (
         <SendTokenOnMultisignatureAccount />
       ) : (
-      <Stepper>
-        {steps.map(step => (
-          <step.component
-            key={step.title}
-            navigation={navigation}
-            route={route}
-            form={form}
-          />
-        ))}
-      </Stepper>
+        <Stepper showProgressBar >
+          {steps.map(step => (
+            <step.component
+              key={step.title}
+              navigation={navigation}
+              route={route}
+              form={form}
+            />
+          ))}
+        </Stepper>
       )}
 
     </SafeAreaView>

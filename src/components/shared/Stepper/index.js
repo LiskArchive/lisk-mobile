@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import ProgressBar from 'components/shared/ProgressBar';
 
 import { useTheme } from 'hooks/useTheme';
 
-import Nav from './StepperNav';
-import { getStyles as normalizeStyles } from './utils';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
 export default function Stepper({
   children,
   finalCallback,
-  backButtonTitle,
-  hasNav,
-  navStyles,
-  interactive,
-  backButton,
-  prevPage,
-  hideGroups,
-  hideSteps,
-  activeTitle,
-  navigatorButton,
-  groupButton,
-  stepButton,
-  progressBar,
+  showProgressBar,
   styles: baseStyles,
+  customProgressLength
 }) {
   const [key, setKey] = useState(0);
   const [data, setData] = useState({});
@@ -58,7 +46,6 @@ export default function Stepper({
   };
 
   const prev = (moves = -1) => {
-    // On Lisk Desktop this function is not passed a number by default
     const stepsBack = typeof moves === 'number' ? moves : -1;
     move({ moves: stepsBack });
   };
@@ -81,39 +68,17 @@ export default function Stepper({
     }
   }
 
-  const normalizedStyles = navStyles && normalizeStyles(navStyles);
-  const ProgressBar = progressBar;
-
   const currentChild = React.Children.toArray(children)[currentIndex];
 
   return (
     <View
       style={styles.flex}
-      key={key}
+      // key={key}
     >
-      {hasNav && (
-        <Nav
-          normalizedStyles={normalizedStyles}
-          hideGroups={hideGroups}
-          hideSteps={hideSteps}
-          steps={children}
-          groupButton={groupButton}
-          stepButton={stepButton}
-          interactive={interactive}
-          current={currentIndex}
-          activeTitle={activeTitle}
-          navigatorButton={navigatorButton}
-          backButton={backButton}
-          backButtonTitle={backButtonTitle}
-          prevPage={prevPage}
-          prevStep={prev}
-          move={this.move}
-        />
-      )}
-      {ProgressBar && (
+      {showProgressBar && (
         <ProgressBar
           current={currentIndex}
-          total={children.length}
+          length={customProgressLength || children.length}
           styles={baseStyles?.progressBar}
         />
       )}
