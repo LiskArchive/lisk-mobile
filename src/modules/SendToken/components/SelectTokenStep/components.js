@@ -127,10 +127,15 @@ export function SendTokenAmountField({
 
   const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
-  const { tokenAmountInCurrency, currency } = useTokenAmountInCurrency(value);
-
   const selectedToken = tokens.data?.find(
     token => token.tokenID === tokenID
+  );
+
+  const tokenAmountInCurrency = useTokenAmountInCurrency(
+    {
+      tokenAmount: value,
+      tokenSymbol: selectedToken?.symbol
+    }
   );
 
   const { styles } = useTheme({
@@ -155,9 +160,9 @@ export function SendTokenAmountField({
       }
       error={errorMessage}
       adornments={{
-        right: (
+        right: tokenAmountInCurrency && (
           <Text style={[styles.tokenAmountInCurrencyText]}>
-            ~ {`${tokenAmountInCurrency} ${currency}`}
+            ~ {`${tokenAmountInCurrency.amount} ${tokenAmountInCurrency.currency}`}
           </Text>
         )
       }}

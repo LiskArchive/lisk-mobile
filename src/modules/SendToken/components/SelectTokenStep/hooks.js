@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { pricesRetrieved } from '../../../../actions/service';
 
-export function useTokenAmountInCurrency(tokenAmount) {
+export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
   const dispatch = useDispatch();
 
   const priceTicker = useSelector(state => state.service.priceTicker);
@@ -13,6 +13,8 @@ export function useTokenAmountInCurrency(tokenAmount) {
   useEffect(() => {
     dispatch(pricesRetrieved());
   }, [dispatch]);
+
+  if (tokenSymbol !== 'LSK') return null;
 
   let rawAmountInCurrency = 0;
 
@@ -30,5 +32,5 @@ export function useTokenAmountInCurrency(tokenAmount) {
 
   const tokenAmountInCurrency = localizeAmount(rawAmountInCurrency);
 
-  return { tokenAmountInCurrency, currency: accountSettings.currency };
+  return { amount: tokenAmountInCurrency, currency: accountSettings.currency };
 }
