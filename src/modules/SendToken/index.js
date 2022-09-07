@@ -47,13 +47,16 @@ export default function SendToken({ route }) {
       <HeaderBackButton
         title="Send token"
         onPress={navigation.goBack}
-        containerStyle={{ marginBottom: 24 }}
+        containerStyle={{ marginBottom: 8 }}
       />
 
       {accountIsMultisignature ? (
         <SendTokenOnMultisignatureAccount />
       ) : (
-        <Stepper showProgressBar >
+        <Stepper
+          showProgressBar
+          styles={{ progressBar: { wrapper: styles.progressBar } }}
+        >
           {steps.map(step => (
             <step.component
               key={step.title}

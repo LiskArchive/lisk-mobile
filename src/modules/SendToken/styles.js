@@ -12,8 +12,10 @@ export function getSendTokenStyles() {
       wrapper: {
         flex: 1,
         height: '100%',
-        // paddingTop: 44,
       },
+      progressBar: {
+        marginBottom: 16
+      }
     },
     [themes.light]: {
       wrapper: {

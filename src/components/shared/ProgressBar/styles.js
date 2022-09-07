@@ -1,4 +1,6 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import {
+  themes, colors, boxes
+} from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -11,18 +13,20 @@ export default () => ({
       paddingHorizontal: boxes.boxPadding
     },
     activeStep: {
-      backgroundColor: colors.light.ufoGreen,
+      backgroundColor: colors.light.ultramarineBlue,
     },
     progressTitleContainer: {
-      backgroundColor: colors.light.ufoGreen,
-      width: 25,
-      height: 25,
+      backgroundColor: colors.light.ultramarineBlue,
+      width: 16,
+      height: 16,
       borderRadius: 15,
       alignItems: 'center',
       justifyContent: 'center'
     },
     progressTitle: {
       color: colors.light.white,
+      fontSize: 10,
+      fontWeight: '500'
     },
     progressStepContainer: {
       flex: 1,

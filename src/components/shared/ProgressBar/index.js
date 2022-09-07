@@ -51,7 +51,7 @@ export default function ProgressBar({
           step={i}
           current={current}
           styles={styles}
-          baseStyles={baseStyles}
+          baseStyles={baseStyles?.item}
           isLast={i === steps.length - 1}
         />
       ))}
