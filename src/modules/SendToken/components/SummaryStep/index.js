@@ -79,27 +79,27 @@ export default function SendTokenSummaryStep({
                 labelStyle={[styles.valueText, styles.theme.valueText, { marginRight: 8 }]}
                 showIcon
                 iconSize={18}
-                value={summary.recipientAccount?.metadata.address}
+                value={summary.recipientAccount?.address}
                 type={P}
-                label={stringShortener(summary.recipientAccount?.metadata.address, 5, 5)}
+                label={stringShortener(summary.recipientAccount?.address, 5, 5)}
               />
             ) : (
               <View style={[styles.row]}>
                 <Avatar
-                  address={summary.recipientAccount?.metadata.address}
+                  address={summary.recipientAccount?.address}
                   size={24}
                   style={styles.avatar}
                 />
 
                 <View>
-                  {!!summary.recipientAccount?.metadata.name && (
+                  {!!summary.recipientAccount?.label && (
                     <P style={[styles.valueText, styles.theme.valueText]}>
-                      {summary.recipientAccount?.metadata.name}
+                      {summary.recipientAccount?.label}
                     </P>
                   )}
 
                   <P style={[styles.label, styles.theme.label]}>
-                    {stringShortener(summary.recipientAccount?.metadata.address, 6, 6)}
+                    {stringShortener(summary.recipientAccount?.address, 6, 6)}
                   </P>
                 </View>
               </View>

@@ -8,15 +8,18 @@ import Picker from 'components/shared/Picker';
 import Avatar from 'components/shared/avatar';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import Input from 'components/shared/toolBox/input';
-import { P } from 'components/shared/toolBox/typography';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import CircleSvg from 'assets/svgs/CircleSvg';
 import BookmarksSvg from 'assets/svgs/BookmarksSvg';
 import { stringShortener } from 'utilities/helpers';
 import colors from 'constants/styleGuide/colors';
+import { P } from 'components/shared/toolBox/typography';
 
+import { useSelector } from 'react-redux';
 import getSendTokenSelectApplicationsStepStyles,
 { getSendTokenRecipientAccountFieldStyles } from './styles';
+import { BookmarkList } from '../../../Bookmark/components';
+import { selectBookmarkList } from '../../../Bookmark/store/selectors';
 
 export function SendTokenSenderApplicationField({
   value,
@@ -146,11 +149,12 @@ export function SendTokenRecipientAccountField({
   errorMessage,
   addressFormat,
   onAddressFormatChange,
-  accounts,
   style
 }) {
-  const recipientAccount = accounts.find(
-    account => account.metadata.address === value
+  const bookmarks = useSelector(selectBookmarkList);
+
+  const recipientAccount = bookmarks.find(
+    bookmark => bookmark.address === value
   );
 
   const { styles } = useTheme({
@@ -204,55 +208,46 @@ export function SendTokenRecipientAccountField({
           style={style?.picker}
         >
           {addressFormat === 'picker' && recipientAccount && (
-            <>
-              <View style={[styles.row]}>
-                <Avatar
-                  address={recipientAccount.metadata.address}
-                  size={24}
-                  style={{ marginRight: 8 }}
-                />
+            <View style={[styles.row]}>
+              <Avatar address={recipientAccount.address} size={24} />
 
-                <Text style={[styles.text, styles.theme.text]}>
-                  {recipientAccount.metadata.name}
-                </Text>
+              <Text style={[styles.accountName, styles.theme.accountName]}>
+                {recipientAccount.label}
+              </Text>
 
-                <Text style={[styles.accountAddress, styles.theme.accountAddress]}>
-                  {stringShortener(recipientAccount.metadata.address, 5, 5)}
-                </Text>
-              </View>
+              <Text style={[styles.accountAddress, styles.theme.accountAddress]}>
+                {stringShortener(recipientAccount.address, 5, 5)}
+              </Text>
 
-              <CircleCheckedSvg variant="fill" />
-            </>
+              <CircleCheckedSvg variant="fill" style={{ marginLeft: 8 }}/>
+            </View>
           )}
         </Picker.Toggle>
 
-        {/* TODO: Redirect to bookmarks picker when is fixed
-          (replace this menu with it) */}
         <Picker.Menu>
-          <InfiniteScrollList
-            data={accounts}
-            keyExtractor={(item) => item.id}
-            renderItem={(item) => (
-              <Picker.Item
-                key={item.metadata.address}
-                value={item.metadata.address}
-              >
-                <Avatar address={item.metadata.address} size={45} style={styles.avatar} />
+          <BookmarkList
+            renderEmpty
+            Component={
+              ({ data }) => (
+                <Picker.Item
+                  key={data.address}
+                  value={data.address}
+                >
+                  <Avatar address={data.address} size={40} />
 
-                <View style={styles.content}>
-                  {!!item.metadata.name && (
-                    <P style={[styles.username, styles.theme.username]}>
-                      {item.metadata.name}
+                  <View>
+                    {!!data.label && (
+                      <P style={[styles.accountName, styles.theme.accountName]}>
+                        {data.label}
+                      </P>
+                    )}
+
+                    <P style={[styles.accountAddress, styles.theme.accountAddress]}>
+                      {stringShortener(data.address, 6, 6)}
                     </P>
-                  )}
-
-                  <P style={[styles.address, styles.theme.address]}>
-                    {stringShortener(item.metadata.address, 6, 6)}
-                  </P>
-                </View>
-              </Picker.Item>
-            )}
-            renderSpinner
+                  </View>
+                </Picker.Item>
+              )}
           />
         </Picker.Menu>
       </Picker>

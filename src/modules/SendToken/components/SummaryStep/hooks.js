@@ -1,6 +1,9 @@
 /* eslint-disable max-statements */
-import { useCurrentAccount, useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { useSelector } from 'react-redux';
+
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
 import { useGetTokensQuery } from '../../api/useGetTokensQuery';
 import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
 import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
@@ -11,7 +14,7 @@ export function useSendTokenSummary({ form }) {
 
   const [currentAccount] = useCurrentAccount();
 
-  const { accounts } = useAccounts();
+  const bookmarks = useSelector(selectBookmarkList);
 
   const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
@@ -31,9 +34,9 @@ export function useSendTokenSummary({ form }) {
     application => application.chainID === recipientApplicationChainID
   );
 
-  const recipientAccount = accounts.find(
-    account => account.metadata.address === recipientAccountAddress
-  ) || { metadata: { address: recipientAccountAddress }, isNew: true };
+  const recipientAccount = bookmarks.find(
+    account => account.address === recipientAccountAddress
+  ) || { address: recipientAccountAddress, isNew: true };
 
   const token = tokens.data?.find(
     _token => _token.tokenID === tokenID

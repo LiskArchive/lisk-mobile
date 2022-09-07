@@ -1,4 +1,6 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import {
+  themes, colors, boxes, fonts
+} from 'constants/styleGuide';
 
 export default function getSendTokenSelectApplicationsStepStyles() {
   return {
@@ -23,9 +25,13 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
       },
+      accountName: {
+        fontWeight: '500',
+        fontSize: fonts.size.base,
+        marginLeft: 8,
+      },
       accountAddress: {
         marginLeft: 8,
-        color: colors.light.blueGray
       },
       text: {
         color: colors.light.blueGray
@@ -40,6 +46,9 @@ export default function getSendTokenSelectApplicationsStepStyles() {
       wrapper: {
         backgroundColor: colors.light.white,
       },
+      accountName: {
+        color: colors.light.zodiacBlue
+      },
       accountAddress: {
         color: colors.light.blueGray
       },
@@ -50,6 +59,9 @@ export default function getSendTokenSelectApplicationsStepStyles() {
     [themes.dark]: {
       wrapper: {
         backgroundColor: colors.dark.mainBg,
+      },
+      accountName: {
+        color: colors.light.whiteSmoke
       },
       accountAddress: {
         color: colors.light.whiteSmoke

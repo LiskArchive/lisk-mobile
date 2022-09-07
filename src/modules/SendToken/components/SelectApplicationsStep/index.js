@@ -4,10 +4,9 @@ import { View, Text } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
-import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
-import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import { useBlockchainApplicationExplorer } from '../../../BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 
 import getSendTokenSelectApplicationsStepStyles from './styles';
 import { SendTokenRecipientAccountField, SendTokenRecipientApplicationField, SendTokenSenderApplicationField } from './components';
@@ -17,8 +16,6 @@ export default function SendTokenSelectApplicationsStep({
   form
 }) {
   const { applications } = useBlockchainApplicationExplorer();
-
-  const { accounts } = useAccounts();
 
   const { field: senderApplicationChainIDField } = useController({
     name: 'senderApplicationChainID',
@@ -85,7 +82,6 @@ export default function SendTokenSelectApplicationsStep({
           errorMessage={form.formState.errors.recipientAccountAddress?.message}
           addressFormat={addressFormatField.value}
           onAddressFormatChange={addressFormatField.onChange}
-          accounts={accounts}
         />
       </View>
 
