@@ -14,7 +14,7 @@ import Icon from 'components/shared/toolBox/icon';
 
 import { useTheme } from 'hooks/useTheme';
 import getStyles from './styles';
-import { Repeater } from './components';
+import { BookmarkList } from './components';
 
 export default function Bookmark() {
   const navigation = useNavigation();
@@ -30,6 +30,10 @@ export default function Bookmark() {
 
   const setQueryString = (query) => setQuery(query);
 
+  const onPress = data => {
+    navigation.navigate('Wallet', { address: data.address });
+  };
+
   return (
     <NavigationSafeAreaView>
       <SearchBarHeader
@@ -41,11 +45,11 @@ export default function Bookmark() {
         setIsSearchOpen={(val) => setIsSearchOpen(val)}
       />
       <View style={styles.container}>
-        <Repeater
-          navigate={navigation.navigate}
+        <BookmarkList
           draggable={true}
           query={query}
           renderEmpty
+          onPress={onPress}
         />
       </View>
       <TouchableOpacity

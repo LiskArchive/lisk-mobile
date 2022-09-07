@@ -8,7 +8,7 @@ import getStyles from './styles';
 import { selectBookmarkList } from '../store/selectors';
 
 const Repeater = ({
-  navigate,
+  onPress,
   query,
   setRef,
   draggable,
@@ -39,7 +39,7 @@ const Repeater = ({
         list={filterList}
         showAvatar
         setRef={setRef}
-        navigate={navigate}
+        onPress={onPress}
       />
     )}
   </View>;

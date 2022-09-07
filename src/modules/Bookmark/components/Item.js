@@ -12,9 +12,9 @@ import getStyles from './styles';
 
 class Item extends React.Component {
   showDetail = () => {
-    const { navigate, data } = this.props;
+    const { onPress, data } = this.props;
 
-    navigate(data);
+    onPress(data);
   };
 
   render() {
