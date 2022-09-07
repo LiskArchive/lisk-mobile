@@ -53,7 +53,7 @@ export default function SendToken({ route }) {
       {accountIsMultisignature ? (
         <SendTokenOnMultisignatureAccount />
       ) : (
-        <Stepper showProgressBar={true} >
+        <Stepper showProgressBar >
           {steps.map(step => (
             <step.component
               key={step.title}

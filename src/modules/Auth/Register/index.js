@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, BackHandler } from 'react-native';
-import { translate } from 'react-i18next';
 import Stepper from 'components/shared/Stepper';
+import i18next from 'i18next';
 import Confirm from './confirm';
 import Success from './success';
 import SafeKeeping from './safeKeeping';
 import Intro from './intro';
 import styles from './styles';
 
-const Register = ({ route, t }) => {
+const Register = ({ route }) => {
   const [showNav, setShowNav] = useState(true);
 
   const noNavStyle = showNav ? {} : { paddingBottom: 0 };
@@ -38,26 +38,26 @@ const Register = ({ route, t }) => {
     >
       <Intro
         title="create"
-        group={t('1. Creating your account')}
+        group={i18next.t('1. Creating your account')}
         route={route}
       />
       <SafeKeeping
         title="safekeeping"
-        group={t('2. Saving your passphrase')}
+        group={i18next.t('2. Saving your passphrase')}
         route={route}
       />
       <Confirm
         title="verify"
-        group={t('3. Verifying your passphrase')}
+        group={i18next.t('3. Verifying your passphrase')}
         route={route}
       />
       <Success
         title="success"
-        group={t('4. Security reminder')}
+        group={i18next.t('4. Security reminder')}
         hideNav={hideNav}
       />
     </Stepper>
   </View>;
 };
 
-export default translate()(Register);
+export default Register;
