@@ -1,13 +1,13 @@
 /* eslint-disable max-statements */
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
+import { useMemo, useState } from 'react';
 import { Linking } from 'react-native';
 
 import { useGetNetworkStatusQuery } from 'modules/Network/api/useGetNetworkStatusQuery';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import { SUPPORT_EMAIL_ADDRESS } from 'constants/mail';
 import { API_VERSION } from 'utilities/api/constants';
-import { useState } from 'react';
 
 export function useEmailReport({ errorMessage, error } = {}) {
   const [isFetching, setIsFetching] = useState(false);
@@ -21,49 +21,66 @@ export function useEmailReport({ errorMessage, error } = {}) {
     error: errorOnNetworkStatusData
   } = useGetNetworkStatusQuery();
 
-  let baseBody = '';
+  const url = useMemo(() => {
+    let value;
+    let baseBody;
 
-  if (networkStatusData) {
-    baseBody = `
-      \nImportant metadata for the team, please do not edit:
-      \r
-      Lisk Core Version: ${networkStatusData.data.networkVersion}
-      \r
-      NetworkIdentifier: ${networkStatusData.data.networkIdentifier}
-    `;
-  }
+    if (networkStatusData?.data) {
+      baseBody = `
+        \r
+        Lisk Core Version: ${networkStatusData.data.networkVersion}
+        \r
+        NetworkIdentifier: ${networkStatusData.data.networkIdentifier}
+      `;
+    }
 
-  if (currentApplication?.apis) {
-    const stringifiedAppApis = currentApplication.apis.reduce(
-      (acc, api) => `${acc} - ${api.rest}`, ''
-    );
+    if (currentApplication?.apis) {
+      const stringifiedAppApis = currentApplication.apis.reduce(
+        (acc, api) => `${acc} - ${api.rest}`, ''
+      );
 
-    baseBody += `
-      \r
-      ServiceURL: ${stringifiedAppApis}
-    `;
-  }
+      baseBody += `
+        \r
+        ServiceURL: ${stringifiedAppApis}
+      `;
+    }
 
-  if (errorMessage) {
-    baseBody += `
-      \r
-      Error Message: ${errorMessage}
-    `;
-  }
+    if (errorMessage) {
+      baseBody += `
+        \r
+        Error Message: ${errorMessage}
+      `;
+    }
 
-  if (error) {
-    baseBody += `
-      \r
-      Transaction: ${JSON.stringify(error)}
-    `;
-  }
+    if (error) {
+      baseBody += `
+        \r
+        Transaction: ${JSON.stringify(error)}
+      `;
+    }
 
-  const receiver = SUPPORT_EMAIL_ADDRESS;
-  const subject = `User Reported Error - Lisk - ${API_VERSION}`;
-  const body = encodeURIComponent(baseBody);
-  const url = `mailto:${receiver}?subject=${subject}&body=${body}`;
+    if (baseBody) {
+      baseBody = `\nImportant metadata for the team, please do not edit:${baseBody}`;
+
+      const receiver = SUPPORT_EMAIL_ADDRESS;
+      const subject = `User Reported Error - Lisk - ${API_VERSION}`;
+      const body = encodeURIComponent(baseBody);
+
+      value = `mailto:${receiver}?subject=${subject}&body=${body}`;
+    }
+
+    return value;
+  },
+  [
+    networkStatusData?.data,
+    currentApplication?.apis,
+    errorMessage,
+    error
+  ]);
 
   async function handleSend() {
+    if (!url) return setErrorOnLinking(new Error('Not URL defined before sending.'));
+
     setIsFetching(true);
 
     return Linking.openURL(url).then(
@@ -74,14 +91,6 @@ export function useEmailReport({ errorMessage, error } = {}) {
         setIsFetching(false);
       });
   }
-
-  console.log({
-    url,
-    handleSend,
-    isLoading: isLoadingNetworkStatusData,
-    error: errorOnNetworkStatusData || errorOnLinking,
-    isFetching,
-  });
 
   return {
     url,
