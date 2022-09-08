@@ -50,9 +50,7 @@ export function PickerToggle({
           {value}
         </Text>
       );
-    }
-
-    if (typeof placeholder === 'string') {
+    } else if (typeof placeholder === 'string') {
       valueToRender = (
         <Text
           style={[

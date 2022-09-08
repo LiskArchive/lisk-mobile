@@ -73,20 +73,20 @@ export default function SendTokenSummaryStep({
               {i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
             </Text>
 
-            {summary.recipientAccount.isNew ? (
+            {summary.recipientAccount?.isNew ? (
               <CopyToClipboard
                 style={[styles.valueText, styles.theme.valueText]}
                 labelStyle={[styles.valueText, styles.theme.valueText, { marginRight: 8 }]}
                 showIcon
                 iconSize={18}
-                value={summary.recipientAccount?.address}
+                value={summary.recipientAccount.address}
                 type={P}
-                label={stringShortener(summary.recipientAccount?.address, 5, 5)}
+                label={stringShortener(summary.recipientAccount.address, 5, 5)}
               />
             ) : (
               <View style={[styles.row]}>
                 <Avatar
-                  address={summary.recipientAccount?.address}
+                  address={summary.recipientAccount.address}
                   size={24}
                   style={styles.avatar}
                 />
@@ -94,12 +94,12 @@ export default function SendTokenSummaryStep({
                 <View>
                   {!!summary.recipientAccount?.label && (
                     <P style={[styles.valueText, styles.theme.valueText]}>
-                      {summary.recipientAccount?.label}
+                      {summary.recipientAccount.label}
                     </P>
                   )}
 
                   <P style={[styles.label, styles.theme.label]}>
-                    {stringShortener(summary.recipientAccount?.address, 6, 6)}
+                    {stringShortener(summary.recipientAccount.address, 6, 6)}
                   </P>
                 </View>
               </View>
