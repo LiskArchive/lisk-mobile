@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react-hooks';
 import configureMockStore from 'redux-mock-store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
@@ -10,6 +10,10 @@ import { useEmailReport } from './useEmailReport';
 import { mockNetworkStatus } from '../modules/Network/__fixtures__';
 
 jest.useRealTimers();
+
+jest.mock('react-native/Libraries/Linking/Linking', () => ({
+  openURL: jest.fn(() => Promise.resolve()),
+}));
 
 describe('useEmailReport hook', () => {
   const queryClient = new QueryClient();
@@ -38,8 +42,12 @@ describe('useEmailReport hook', () => {
   it('should insert correctly the network data on body', async () => {
     const { result, waitFor } = renderHook(() => useEmailReport(), { wrapper });
 
-    const expectedNetworkVersionPattern = encodeURIComponent(`Lisk Core Version: ${mockNetworkStatus.data.networkVersion}`);
-    const expectedNetworkIdentifierPattern = encodeURIComponent(`NetworkIdentifier: ${mockNetworkStatus.data.networkIdentifier}`);
+    const expectedNetworkVersionPattern = encodeURIComponent(
+      `Lisk Core Version: ${mockNetworkStatus.data.networkVersion}`
+    );
+    const expectedNetworkIdentifierPattern = encodeURIComponent(
+      `NetworkIdentifier: ${mockNetworkStatus.data.networkIdentifier}`
+    );
 
     expect(result.current.isLoading).toBeTruthy();
 
@@ -65,7 +73,11 @@ describe('useEmailReport hook', () => {
   });
 
   it('should insert correctly the error data on body', async () => {
-    const props = { errorMessage: 'The custom error message', error: { message: 'The error message' } };
+    const props = {
+      errorMessage: 'The custom error message',
+      error: { message: 'The error message' }
+    };
+
     const { result, waitFor } = renderHook(() => useEmailReport(props), { wrapper });
 
     const expectedErrorMessagePattern = encodeURIComponent(props.errorMessage);
@@ -75,5 +87,13 @@ describe('useEmailReport hook', () => {
 
     expect(result.current.url).toMatch(new RegExp(expectedErrorMessagePattern));
     expect(result.current.url).toMatch(new RegExp(expectedErrorPattern));
+  });
+
+  it('should fall in error when no url is defined when triggering handleSend', async () => {
+    const { result } = renderHook(() => useEmailReport(), { wrapper });
+
+    await act(() => result.current.handleSend());
+
+    expect(result.current.error).toBeFalsy();
   });
 });
