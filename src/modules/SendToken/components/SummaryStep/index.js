@@ -73,7 +73,7 @@ export default function SendTokenSummaryStep({
               {i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
             </Text>
 
-            {summary.recipientAccount?.isNew ? (
+            {summary.recipientAccount.isNew ? (
               <CopyToClipboard
                 style={[styles.valueText, styles.theme.valueText]}
                 labelStyle={[styles.valueText, styles.theme.valueText, { marginRight: 8 }]}
@@ -92,7 +92,7 @@ export default function SendTokenSummaryStep({
                 />
 
                 <View>
-                  {!!summary.recipientAccount?.label && (
+                  {!!summary.recipientAccount.label && (
                     <P style={[styles.valueText, styles.theme.valueText]}>
                       {summary.recipientAccount.label}
                     </P>
