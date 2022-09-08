@@ -25,18 +25,6 @@ class LiskAPIClient {
     return data;
   }
 
-  async getNetworkInfo() {
-    const resp = await fetch(`${this._url}/v3/network/status`, config.requestOptions);
-    if (!resp.ok) {
-      throw new Error('Failed to request network info from server.');
-    }
-    const { data } = await resp.json();
-    return {
-      height: data.height,
-      blockTime: data.blockTime
-    };
-  }
-
   async sendTransaction(tx) {
     const resp = await fetch(`${this._url}/v3/transactions`, {
       ...config.requestOptions,
