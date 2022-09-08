@@ -18,7 +18,6 @@ const List = ({
           <Element
             showAvatar
             onPress={onPress}
-            key={item.address}
             data={item}
             isInvalidAddress={validateAddress('LSK', item.address) === 1}
           />

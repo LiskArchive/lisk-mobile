@@ -1,9 +1,12 @@
 /* eslint-disable complexity */
 import React from 'react';
 import { View, Text, Image } from 'react-native';
+import { useSelector } from 'react-redux';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
+import { BookmarkList } from 'modules/Bookmark/components';
+import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
 import Picker from 'components/shared/Picker';
 import Avatar from 'components/shared/avatar';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
@@ -15,11 +18,8 @@ import { stringShortener } from 'utilities/helpers';
 import colors from 'constants/styleGuide/colors';
 import { P } from 'components/shared/toolBox/typography';
 
-import { useSelector } from 'react-redux';
 import getSendTokenSelectApplicationsStepStyles,
 { getSendTokenRecipientAccountFieldStyles } from './styles';
-import { BookmarkList } from '../../../Bookmark/components';
-import { selectBookmarkList } from '../../../Bookmark/store/selectors';
 
 export function SendTokenSenderApplicationField({
   value,

@@ -47,7 +47,7 @@ export default function SendToken({ route }) {
       <HeaderBackButton
         title="Send token"
         onPress={navigation.goBack}
-        containerStyle={{ marginBottom: 8 }}
+        containerStyle={[styles.header]}
       />
 
       {accountIsMultisignature ? (

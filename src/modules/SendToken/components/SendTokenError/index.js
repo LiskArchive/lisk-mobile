@@ -9,8 +9,8 @@ import TxErrorSvg from 'assets/svgs/TxErrorSvg';
 
 import getSendTokenErrorStyles from './styles';
 
-export default function SendTokenError({ onClick }) {
-  const emailReport = useEmailReport();
+export default function SendTokenError({ onClick, error }) {
+  const emailReport = useEmailReport({ error, errorMessage: 'Error sending token' });
 
   const { styles } = useTheme({
     styles: getSendTokenErrorStyles(),

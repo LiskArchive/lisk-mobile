@@ -36,8 +36,8 @@ export default function ConfirmAndSignTransaction({
       form.sendTokenMutation.reset();
     }
 
-    if (form.sendTokenMutation.isError) {
-      onError();
+    if (form.sendTokenMutation.error) {
+      onError(form.sendTokenMutation.error);
       form.sendTokenMutation.reset();
     }
   }, [

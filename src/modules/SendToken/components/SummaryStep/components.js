@@ -20,6 +20,7 @@ export function SendTokenSummaryModal({
   const navigation = useNavigation();
 
   const [activeStep, setActiveStep] = useState('confirmAndSignTransaction');
+  const [error, setError] = useState();
 
   const { styles } = useTheme({
     styles: getSendTokenSummaryStepStyles(),
@@ -52,7 +53,10 @@ export function SendTokenSummaryModal({
             token={summary.token}
             form={form}
             onSuccess={() => setActiveStep('sendTokenSuccess')}
-            onError={() => setActiveStep('sendTokenError')}
+            onError={(_error) => {
+              setError(_error);
+              setActiveStep('sendTokenError');
+            }}
           />
         );
 
@@ -75,6 +79,7 @@ export function SendTokenSummaryModal({
               handleResetStepper();
               setShow(false);
             }}
+            error={error}
           />
         );
 

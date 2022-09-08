@@ -13,6 +13,9 @@ export function getSendTokenStyles() {
         flex: 1,
         height: '100%',
       },
+      header: {
+        marginBottom: 8
+      },
       progressBar: {
         marginBottom: 16
       }
