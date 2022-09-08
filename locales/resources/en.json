@@ -315,9 +315,11 @@
       "passwordSetupSuccessDescription": "You can now download encrypted secret recovery phrase.",
       "secret_phrase": "Secret recovery phrase",
       "restore_file": "Restore from file",
+      "downloaded": "Downloaded!",
       "buttons": {
         "passwordSetupContinue": "Continue to Dashboard",
-        "save_account": "Save account"
+        "save_account": "Save account",
+        "download": "Download"
       }
     },
     "form": {
