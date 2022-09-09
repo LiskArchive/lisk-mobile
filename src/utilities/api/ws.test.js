@@ -1,4 +1,4 @@
-import rpc from './rpc';
+import ws from './ws';
 
 jest.mock('./APIClient', () => ({
   socket: {
@@ -11,18 +11,18 @@ jest.mock('./APIClient', () => ({
   create: jest.fn(),
 }));
 
-describe('rpc', () => {
+describe('ws', () => {
   afterEach(() => {
     jest.resetAllMocks();
     jest.resetModules();
   });
 
-  it('rpc should rejected on disconnected', async () => {
-    const rpcClient = rpc({
+  it('ws should rejected on disconnected', async () => {
+    const wsClient = ws({
       event: 'get.data',
       params: {},
     });
 
-    await expect(rpcClient).rejects.toThrow('socket not connected');
+    await expect(wsClient).rejects.toThrow('socket not connected');
   });
 });

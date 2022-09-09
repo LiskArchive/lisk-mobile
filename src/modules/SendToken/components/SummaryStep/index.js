@@ -45,7 +45,7 @@ export default function SendTokenSummaryStep({
               </Text>
 
               <Image
-                source={{ uri: summary.senderApplication?.images.logo.png }}
+                source={{ uri: summary.senderApplication?.logo.png }}
                 style={[styles.applicationLogoImage]}
               />
             </View>
@@ -62,7 +62,7 @@ export default function SendTokenSummaryStep({
               </Text>
 
               <Image
-                source={{ uri: summary.recipientApplication?.images.logo.png }}
+                source={{ uri: summary.recipientApplication?.logo.png }}
                 style={[styles.applicationLogoImage]}
               />
             </View>

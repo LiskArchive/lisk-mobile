@@ -26,7 +26,7 @@ function DeleteBlockchainApplication({ t, sharedData: { application }, nextStep 
 
         <View style={[styles.applicationNameContainer]}>
           <Image
-            source={{ uri: application.images.logo.png }}
+            source={{ uri: application.logo.png }}
             style={[styles.applicationLogoImage]}
           />
 

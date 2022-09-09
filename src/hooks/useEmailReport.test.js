@@ -65,7 +65,7 @@ describe('useEmailReport hook', () => {
   it('should insert correctly the current application data on body', async () => {
     const { result, waitFor } = renderHook(() => useEmailReport(), { wrapper });
 
-    const expectedAppsApisPattern = encodeURIComponent(mockApplications[0].apis[0].rest);
+    const expectedAppsApisPattern = encodeURIComponent(mockApplications[0].serviceURLs[0].http);
 
     await waitFor(() => !result.current.isLoading);
 

@@ -5,7 +5,6 @@ import {
 } from 'utilities/api/constants';
 import { GET_APPLICATIONS_QUERY } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-import { mockApplications } from '../__fixtures__';
 
 /**
  * Fetch user account applications in paginated mode.
@@ -18,9 +17,9 @@ import { mockApplications } from '../__fixtures__';
 export function useGetApplicationsMetaQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
     baseURL: API_BASE_URL,
-    url: `${API_URL}/blockchain/apps`,
+    url: `${API_URL}/blockchain/apps/meta`,
     method: 'get',
-    event: 'get.blockchainApps',
+    event: 'get.blockchainAppsMeta',
     ...customConfig,
     params: {
       limit: LIMIT,
@@ -32,12 +31,5 @@ export function useGetApplicationsMetaQuery({ config: customConfig = {}, options
 
   const query = useCustomInfiniteQuery({ config, options, keys });
 
-  return {
-    ...query,
-    data: {
-      ...query.data,
-      // TODO: Replace with api response
-      data: mockApplications,
-    }
-  };
+  return query;
 }

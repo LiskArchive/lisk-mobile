@@ -14,6 +14,7 @@ export default function ApplicationList({
   Component,
   onItemPress,
   navigation,
+  style,
   ...props
 }) {
   const { theme, styles } = useTheme({
@@ -23,7 +24,7 @@ export default function ApplicationList({
   const { term, setTerm } = useSearch();
 
   return (
-    <View style={[styles.container, styles.theme.container]}>
+    <View style={[styles.container, styles.theme.container, style?.container]}>
       <Input
         placeholder={i18next.t('application.explore.applicationList.searchPlaceholder')}
         autoCorrect={false}
@@ -46,9 +47,14 @@ export default function ApplicationList({
         }}
       />
 
-      <View style={styles.body}>
+      <View style={[styles.body, style?.body]}>
         {applications.isLoading ? (
-          <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+          <P
+            style={[
+              styles.applicationNameLabel,
+              styles.theme.applicationNameLabel,
+              style?.applicationNameLabel]}
+          >
             {i18next.t('application.explore.applicationList.loadingText')}
           </P>
         ) : (
@@ -60,7 +66,7 @@ export default function ApplicationList({
                 application={item}
                 navigation={navigation}
                 key={item.chainID}
-                image={item.images?.logo.png}
+                image={item.logo.png}
                 showPinned={true}
                 onPress={() => onItemPress(item)}
                 {...props}

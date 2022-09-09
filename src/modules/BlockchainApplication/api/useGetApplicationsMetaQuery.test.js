@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 
 import { mockApplications } from '../__fixtures__';
 
-import { useGetApplicationsMetaQuery } from './useGetApplicationsQuery';
+import { useGetApplicationsMetaQuery } from './useGetApplicationsMetaQuery';
 
 const mockState = {
   blockchainApplications: {

@@ -70,6 +70,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         showCaret
         variant="explore"
         navigation={navigation}
+        style={{ container: styles.applicationsListContainer }}
       />
     );
   };
@@ -92,10 +93,10 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
               style={styles.statsButton}
             />
           )}
+          titleStyle={[styles.header]}
         />
 
         {renderData()}
-
       </NavigationSafeAreaView>
 
       <BottomModal

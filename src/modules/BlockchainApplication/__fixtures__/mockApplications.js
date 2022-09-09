@@ -3,103 +3,127 @@ import { mockDefaultApplication } from './mockDefaultApplication';
 export const mockApplications = [
   mockDefaultApplication,
   {
-    name: 'Coleti',
-    chainID: 2,
-    title: 'Coleti',
+    chainName: 'Coleti',
+    chainID: '00000002',
+    title: 'Coleti - Betanet',
     description: 'A Lisk-based NFT marketplace',
-    network: 'mainnet',
-    isDefault: false,
-    genesisBlock:
+    networkType: 'mainnet',
+    genesisURL:
       'https://downloads.coleti.com/lisk/mainnet/genesis_block.json.tar.gz',
-    apis: [{
-      rest: 'https://service.coleti.com',
-      rpc: 'wss://service.coleti.com',
+    projectPage: 'https://coleti.com',
+    serviceURLs: [{
+      http: 'https://service.coleti.com',
+      ws: 'wss://service.coleti.com',
     }, {
-      rest: 'https://service2.coleti.com',
-      rpc: 'wss://service2.coleti.com',
+      http: 'https://service2.coleti.com',
+      ws: 'wss://service2.coleti.com',
     }],
-    explorers: ['https://coleti.observer', 'https://explorer.coleti.io'],
-    images: {
-      logo: {
-        png: 'https://lisk.com/sites/default/files/2022-02/colecti-logo.jpeg', // URL
-        svg: '', // URL
-      },
-      background: '#FFFFFF1A', // URL
+    logo: {
+      png: 'https://lisk.com/sites/default/files/2022-02/colecti-logo.jpeg',
+      svg: '',
     },
-    state: 'terminated',
-    deposited: 8712312,
+    explorers: [{ tnxPage: 'https://coleti.observer', url: 'https://explorer.coleti.io' }],
+    appNodes: [
+      {
+        url: 'https://betanet.coleti.com',
+        maintainer: 'Coleti GmbH'
+      },
+      {
+        url: 'wss://betanet.coleti.com',
+        maintainer: 'Coleti GmbH'
+      }
+    ],
+    backgroundColor: '#FFFFFF1A',
   },
   {
-    name: 'DoEdu',
-    chainID: 3,
-    title: 'DoEdu',
+    chainName: 'DoEdu',
+    chainID: '00000003',
+    title: 'DoEdu - Betanet',
     description: 'An educational platform built with Lisk SDK',
-    network: 'mainnet',
-    isDefault: false,
-    genesisBlock:
+    networkType: 'mainnet',
+    genesisURL:
       'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
-    apis: [{
-      rest: 'https://service.doedu.com',
-      rpc: 'wss://service.doedu.com',
+    projectPage: 'https://doedu.com',
+    serviceURLs: [{
+      http: 'https://service.doedu.com',
+      ws: 'wss://service.doedu.com',
     }],
-    explorers: ['https://doedu.observer', 'https://explorer.doedu.io'],
-    images: {
-      logo: {
-        png: 'https://lisk.com/sites/default/files/2022-02/doedu-logo.jpg', // URL
-        svg: '', // URL
-      },
-      background: '#FFFFFF1A', // URL
+    logo: {
+      png: 'https://lisk.com/sites/default/files/2022-02/doedu-logo.jpg',
+      svg: '',
     },
-    state: 'active',
-    deposited: 4872312,
+    explorers: [{ tnxPage: 'https://doedu.observer', url: 'https://explorer.doedu.io' }],
+    appNodes: [
+      {
+        url: 'https://betanet.doedu.com',
+        maintainer: 'DoEdu GmbH'
+      },
+      {
+        url: 'wss://betanet.lisk.com',
+        maintainer: 'DoEdu GmbH'
+      }
+    ],
+    backgroundColor: '#FFFFFF1A',
   },
   {
-    name: 'Enevti',
-    chainID: 4,
-    title: 'Enevti',
+    chainName: 'Enevti',
+    chainID: '00000004',
+    title: 'Enevti - Betanet',
     description: 'A decentralized social media NFT platform',
-    network: 'mainnet',
-    isDefault: false,
-    genesisBlock:
+    networkType: 'mainnet',
+    genesisURL:
       'https://downloads.enevti.com/lisk/mainnet/genesis_block.json.tar.gz',
-    apis: [{
-      rest: 'https://service.enevti.com',
-      rpc: 'wss://service.enevti.com',
+    projectPage: 'https://enevti.com',
+    serviceURLs: [{
+      http: 'https://service.enevti.com',
+      ws: 'wss://service.enevti.com',
     }],
-    explorers: ['https://enevti.observer', 'https://explorer.enevti.io'],
-    images: {
-      logo: {
-        png: 'https://lisk.com/sites/default/files/2022-02/enevti-logo.png', // URL
-        svg: '', // URL
-      },
-      background: '#FFFFFF1A', // URL
+    explorers: [{ tnxPage: 'https://enevti.observer', url: 'https://explorer.enevti.io' }],
+    logo: {
+      png: 'https://lisk.com/sites/default/files/2022-02/enevti-logo.png',
+      svg: '',
     },
-    state: 'registered',
-    deposited: 4875312,
+    appNodes: [
+      {
+        url: 'https://betanet.enevti.com',
+        maintainer: 'Enevti GmbH'
+      },
+      {
+        url: 'wss://betanet.enevti.com',
+        maintainer: 'Enevti GmbH'
+      }
+    ],
+    backgroundColor: '#FFFFFF1A',
   },
   {
-    name: 'Kalipo',
-    chainID: 5,
-    title: 'Kalipo',
+    chainName: 'Kalipo',
+    chainID: '00000005',
+    title: 'Kalipo - Betanet',
     description: 'A platform to support Decentralized Autonomous Organizations (DAOs)',
-    network: 'mainnet',
-    isDefault: false,
-    genesisBlock:
+    networkType: 'mainnet',
+    genesisURL:
       'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
-    apis: [{
-      rest: 'https://service.lisk.com',
-      rpc: 'wss://service.lisk.com',
+    projectPage: 'https://kalipo.com',
+    serviceURLs: [{
+      http: 'https://service.kalipo.com',
+      ws: 'wss://service.kalipo.com',
     }],
-    explorers: ['https://lisk.observer', 'https://explorer.lisk.io'],
-    images: {
-      logo: {
-        png: 'https://lisk.com/sites/default/files/2022-07/Kalipo.jpg', // URL
-        svg: '', // URL
-      },
-      background: '#FFFFFF1A', // URL
+    explorers: [{ tnxPage: 'https://kalipo.observer', url: 'https://explorer.kalipo.io' }],
+    logo: {
+      png: 'https://lisk.com/sites/default/files/2022-07/Kalipo.jpg',
+      svg: '',
     },
-    state: 'active',
-    deposited: 4875312,
+    appNodes: [
+      {
+        url: 'https://betanet.kalipo.com',
+        maintainer: 'Kalipo GmbH'
+      },
+      {
+        url: 'wss://betanet.kalipo.com',
+        maintainer: 'Kalipo GmbH'
+      }
+    ],
+    backgroundColor: '#FFFFFF1A',
   },
 ];
 

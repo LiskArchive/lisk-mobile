@@ -10,7 +10,7 @@ import apiClient from './APIClient';
  * if fails on server it throws an error,
  *
  */
-export default function rpc({
+export default function ws({
   event,
   params,
   data,

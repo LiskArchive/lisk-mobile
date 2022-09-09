@@ -60,7 +60,7 @@ export function SendTokenSenderApplicationField({
             </Text>
 
             <Image
-              source={{ uri: senderApplication.images.logo.png }}
+              source={{ uri: senderApplication.logo.png }}
               style={[styles.applicationLogoImage]}
             />
           </View>
@@ -109,7 +109,7 @@ export function SendTokenRecipientApplicationField({
             </Text>
 
             <Image
-              source={{ uri: recipientApplication.images.logo.png }}
+              source={{ uri: recipientApplication.logo.png }}
               style={[styles.applicationLogoImage]}
             />
           </View>
@@ -130,7 +130,7 @@ export function SendTokenRecipientApplicationField({
               </Text>
 
               <Image
-                source={{ uri: item.images.logo.png }}
+                source={{ uri: item.logo.png }}
                 style={[styles.applicationLogoImage]}
               />
             </Picker.Item>

@@ -1,23 +1,36 @@
 export const mockDefaultApplication = {
-  name: 'Lisk',
-  chainID: 1,
-  title: 'Lisk',
-  description: 'A blockchain application platform',
-  network: 'mainnet',
-  isDefault: true,
-  genesisBlock: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
-  apis: [{
-    rest: 'http://104.248.241.229:9901',
-    rpc: 'wss://service.lisk.com',
-  }],
-  explorers: ['https://lisk.observer', 'https://explorer.lisk.io'],
-  images: {
-    logo: {
-      png: 'https://avatars.githubusercontent.com/u/16600915?s=200&v=4', // URL
-      svg: '', // URL
-    },
-    background: '#FFFFFF1A', // URL
+  chainName: 'Lisk',
+  chainID: '00000001',
+  title: 'Lisk - Betanet',
+  description: 'Metadata configuration for the Lisk blockchain (mainchain) in betanet',
+  networkType: 'betanet',
+  genesisURL: 'https://downloads.lisk.com/lisk/betanet/genesis_block.json.tar.gz',
+  projectPage: 'https://lisk.com',
+  serviceURLs: [
+    {
+      http: 'https://betanet-service.lisk.com',
+      ws: 'wss://betanet-service.lisk.com'
+    }
+  ],
+  logo: {
+    png: 'https://lisk-qa.ams3.digitaloceanspaces.com/Artboard%201%20copy%2019.png',
+    svg: 'https://lisk-qa.ams3.digitaloceanspaces.com/Logo-20.svg'
   },
-  deposited: 681782312,
-  state: 'active',
+  explorers: [
+    {
+      url: 'https://betanet.liskscan.com',
+      txnPage: 'https://betanet.liskscan.com/transactions'
+    }
+  ],
+  appNodes: [
+    {
+      url: 'https://betanet.lisk.com',
+      maintainer: 'Lightcurve GmbH'
+    },
+    {
+      url: 'wss://betanet.lisk.com',
+      maintainer: 'Lightcurve GmbH'
+    }
+  ],
+  backgroundColor: '#f7f9fb'
 };

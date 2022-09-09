@@ -10,14 +10,14 @@ export class APIClient {
 
   http = null
 
-  create({ rpc, rest }) {
+  create({ ws, http }) {
     this.socket = io(
-      rpc,
+      ws,
       { transports: ['websocket'] },
     );
     const request = axios.create({
       ...this.axiosConfig,
-      baseURL: rest,
+      baseURL: http,
     });
 
     request.interceptors.response.use((res) => res.data);

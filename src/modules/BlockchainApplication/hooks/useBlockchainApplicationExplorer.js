@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useGetApplicationsMetaQuery } from '../api/useGetApplicationsQuery';
+import { useGetApplicationsMetaQuery } from '../api/useGetApplicationsMetaQuery';
 import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 
 /**
@@ -13,7 +13,7 @@ export function useBlockchainApplicationExplorer() {
   const { pins, checkPinByChainId } = usePinBlockchainApplication();
 
   const applications = useMemo(() => {
-    const data = getApplicationsMetaQuery.data.data?.map((app) => ({
+    const data = getApplicationsMetaQuery.data?.data.map((app) => ({
       ...app,
       isPinned: checkPinByChainId(app.chainID),
     }));

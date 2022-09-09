@@ -4,7 +4,7 @@ import apiClient from '../src/utilities/api/APIClient';
 // Establish API mocking before all tests.
 beforeAll(() => {
   server.listen({ onUnhandledRequest: 'error' });
-  apiClient.create({ rpc: 'wss://localhost', rest: 'http://localhost' });
+  apiClient.create({ ws: 'wss://localhost', http: 'http://localhost' });
 });
 
 // Reset any request handlers that we may add during the tests,

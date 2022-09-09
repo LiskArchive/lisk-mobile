@@ -44,11 +44,11 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
   };
 
   const selectApplication = (acc) => {
-    if (acc.apis.length > 1) {
+    if (acc.serviceURLs.length > 1) {
       setSelectedApplication(acc);
       toggleModal(true);
     } else {
-      switchApplication({ ...acc, serviceURL: acc.apis[0] });
+      switchApplication({ ...acc, serviceURL: acc.serviceURLs[0] });
     }
   };
 

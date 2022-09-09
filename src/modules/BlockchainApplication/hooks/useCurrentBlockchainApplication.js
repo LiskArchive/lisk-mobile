@@ -21,7 +21,7 @@ export function useCurrentBlockchainApplication() {
     (application) => {
       dispatch(setCurrentApplicationAction(application));
 
-      apiClient.create(application?.apis[0]);
+      apiClient.create(application?.serviceURLs[0]);
     },
     [dispatch]
   );
