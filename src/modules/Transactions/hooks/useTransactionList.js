@@ -10,5 +10,5 @@ export default function useTransactionList() {
     refresh: () => {},
     transactions: [],
     refreshing: false,
-  };
+  }
 }

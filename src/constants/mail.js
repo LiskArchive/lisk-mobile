@@ -1,1 +1,1 @@
-export const SUPPORT_EMAIL_ADDRESS = 'mobiledev@lisk.com';
+export const SUPPORT_EMAIL_ADDRESS = 'mobiledev@lisk.com'

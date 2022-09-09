@@ -1,44 +1,42 @@
 /* eslint-disable max-statements */
 /* eslint-disable complexity */
-import React from 'react';
-import {
-  View, Text, TextInput, TouchableOpacity
-} from 'react-native';
-import { themes } from 'constants/styleGuide';
-import withTheme from '../../withTheme';
-import getStyles from './styles';
-import EyeSvg from '../../../../assets/svgs/EyeSvg';
+import React from 'react'
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { themes } from 'constants/styleGuide'
+import withTheme from '../../withTheme'
+import getStyles from './styles'
+import EyeSvg from '../../../../assets/svgs/EyeSvg'
 
 class Input extends React.Component {
   state = {
     isFocused: false,
     secureTextEntry: this.props.secureTextEntry,
-  };
+  }
 
   toggleSecureTextEntry = () =>
     this.setState((prevState) => ({
       secureTextEntry: !prevState.secureTextEntry,
-    }));
+    }))
 
   onFocus = (e) => {
     this.setState({
       isFocused: true,
-    });
+    })
 
     if (typeof this.props.onFocus === 'function') {
-      this.props.onFocus(e);
+      this.props.onFocus(e)
     }
-  };
+  }
 
   onBlur = (e) => {
     this.setState({
       isFocused: false,
-    });
+    })
 
     if (typeof this.props.onBlur === 'function') {
-      this.props.onBlur(e);
+      this.props.onBlur(e)
     }
-  };
+  }
 
   render() {
     const {
@@ -61,26 +59,26 @@ class Input extends React.Component {
       returnKeyType,
       placeholderTextColor,
       disabled,
-      adornments
-    } = this.props;
+      adornments,
+    } = this.props
 
-    let { keyboardAppearance } = this.props;
+    let { keyboardAppearance } = this.props
     if (!keyboardAppearance) {
-      keyboardAppearance = theme === themes.dark ? 'dark' : 'light';
+      keyboardAppearance = theme === themes.dark ? 'dark' : 'light'
     }
 
-    let inputStyle = [styles.input, styles.theme.input, innerStyles.input];
+    let inputStyle = [styles.input, styles.theme.input, innerStyles.input]
 
     if (this.state.isFocused) {
-      inputStyle = [...inputStyle, styles.inputFocused, styles.theme.inputFocused];
+      inputStyle = [...inputStyle, styles.inputFocused, styles.theme.inputFocused]
     }
 
-    if (adornments?.left) inputStyle = [...inputStyle, styles.inputWithLeftAdornment];
+    if (adornments?.left) inputStyle = [...inputStyle, styles.inputWithLeftAdornment]
 
-    if (adornments?.right) inputStyle = [...inputStyle, styles.inputWithRightAdornment];
+    if (adornments?.right) inputStyle = [...inputStyle, styles.inputWithRightAdornment]
 
     if (error) {
-      inputStyle = [...inputStyle, styles.theme.inputErrorStyle];
+      inputStyle = [...inputStyle, styles.theme.inputErrorStyle]
     }
 
     return (
@@ -89,13 +87,11 @@ class Input extends React.Component {
           <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
             {label}
           </Text>
-        ) : label}
+        ) : (
+          label
+        )}
         <View style={styles.inputRow}>
-          {adornments?.left && (
-            <View style={styles.leftAdornment}>
-              {adornments?.left}
-            </View>
-          )}
+          {adornments?.left && <View style={styles.leftAdornment}>{adornments?.left}</View>}
 
           <TextInput
             testID={testID}
@@ -121,11 +117,7 @@ class Input extends React.Component {
             accessibilityLabel={accessibilityLabel}
           />
 
-          {adornments?.right && (
-            <View style={styles.rightAdornment}>
-              {adornments?.right}
-            </View>
-          )}
+          {adornments?.right && <View style={styles.rightAdornment}>{adornments?.right}</View>}
 
           {secureTextEntry && (
             <TouchableOpacity
@@ -143,7 +135,7 @@ class Input extends React.Component {
           </View>
         ) : null}
       </View>
-    );
+    )
   }
 }
 
@@ -152,6 +144,6 @@ Input.defaultProps = {
   innerStyles: {},
   keyboardType: 'default',
   placeholder: '',
-};
+}
 
-export default withTheme(Input, getStyles());
+export default withTheme(Input, getStyles())

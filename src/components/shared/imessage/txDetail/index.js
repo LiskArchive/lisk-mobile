@@ -1,12 +1,12 @@
-import React from 'react';
-import { ScrollView, View, NativeModules } from 'react-native';
-import { tokenMap } from 'constants/tokens';
-import { transactions as transactionsAPI } from 'utilities/api';
-import { isTransfer } from 'modules/SendToken/constants';
-import { LoadingState } from 'modules/Accounts/components';
-import withTheme from '../../withTheme';
-import getStyles from './styles';
-import { PrimaryButton } from '../../toolBox/button';
+import React from 'react'
+import { ScrollView, View, NativeModules } from 'react-native'
+import { tokenMap } from 'constants/tokens'
+import { transactions as transactionsAPI } from 'utilities/api'
+import { isTransfer } from 'modules/SendToken/constants'
+import { LoadingState } from 'modules/Accounts/components'
+import withTheme from '../../withTheme'
+import getStyles from './styles'
+import { PrimaryButton } from '../../toolBox/button'
 import {
   TimeStamp,
   TxAmount,
@@ -16,7 +16,7 @@ import {
   Graphics,
   TxTitle,
   Confirmations,
-} from './dataRows';
+} from './dataRows'
 
 const getConfig = (styles, account, tx) => {
   if (account.address !== tx.senderAddress && isTransfer(tx)) {
@@ -26,7 +26,7 @@ const getConfig = (styles, account, tx) => {
       firstAddress: tx.recipientAddress,
       secondAddress: tx.senderAddress,
       amountSign: '',
-    };
+    }
   }
 
   return {
@@ -35,16 +35,16 @@ const getConfig = (styles, account, tx) => {
     firstAddress: tx.senderAddress,
     secondAddress: tx.recipientAddress,
     amountSign: '-',
-  };
-};
+  }
+}
 
 class TransactionDetail extends React.Component {
   state = {
     tx: {},
-  };
+  }
 
   componentDidMount() {
-    const { txID, sharedData } = this.props;
+    const { txID, sharedData } = this.props
 
     if (txID) {
       transactionsAPI
@@ -58,7 +58,7 @@ class TransactionDetail extends React.Component {
               amount: sharedData.amount,
               notRawLisk: true,
             },
-          });
+          })
         })
         .catch(() => {
           this.setState({
@@ -69,56 +69,40 @@ class TransactionDetail extends React.Component {
               amount: sharedData.amount,
               notRawLisk: true,
             },
-          });
-        });
+          })
+        })
     }
   }
 
   onOpenDeepLink = () => {
-    NativeModules.MessagesManager.openURL(
-      `lisk://transactions?id=${this.state.tx.id}`
-    )
+    NativeModules.MessagesManager.openURL(`lisk://transactions?id=${this.state.tx.id}`)
       // eslint-disable-next-line no-console
       .then(console.log)
       // eslint-disable-next-line no-console
-      .catch(console.log);
-  };
+      .catch(console.log)
+  }
 
   render() {
-    const {
-      styles, theme, account, language
-    } = this.props;
-    const { tx } = this.state;
+    const { styles, theme, account, language } = this.props
+    const { tx } = this.state
 
     if (!tx.senderAddress) {
       return (
         <View style={[styles.container, styles.theme.container]}>
           <LoadingState />
         </View>
-      );
+      )
     }
 
-    const config = getConfig(styles, account, tx);
+    const config = getConfig(styles, account, tx)
 
     return (
-      <ScrollView
-        contentContainerStyle={[styles.container, styles.theme.container]}
-      >
+      <ScrollView contentContainerStyle={[styles.container, styles.theme.container]}>
         <View style={styles.innerContainer}>
-          <View
-            style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}
-          >
-            <Graphics
-              styles={styles}
-              theme={theme}
-              config={config}
-            />
+          <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
+            <Graphics styles={styles} theme={theme} config={config} />
             <TxTitle tx={tx} config={config} />
-            <TxAmount
-              config={config}
-              tx={tx}
-              language={language}
-            />
+            <TxAmount config={config} tx={tx} language={language} />
             <TimeStamp timestamp={tx.timestamp} styles={styles} />
           </View>
           <Sender styles={styles} tx={tx} />
@@ -132,8 +116,8 @@ class TransactionDetail extends React.Component {
           title="Open in Lisk application"
         />
       </ScrollView>
-    );
+    )
   }
 }
 
-export default withTheme(TransactionDetail, getStyles());
+export default withTheme(TransactionDetail, getStyles())

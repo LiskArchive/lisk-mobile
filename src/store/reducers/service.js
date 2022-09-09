@@ -1,6 +1,6 @@
-import actionTypes from 'constants/actions';
-import { merge } from 'utilities/helpers';
-import { tokenKeys } from 'constants/tokens';
+import actionTypes from 'constants/actions'
+import { merge } from 'utilities/helpers'
+import { tokenKeys } from 'constants/tokens'
 
 export const INITIAL_STATE = {
   priceTicker: tokenKeys.reduce(
@@ -11,7 +11,7 @@ export const INITIAL_STATE = {
     {}
   ),
   dynamicFees: {},
-};
+}
 
 const service = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
@@ -27,14 +27,14 @@ const service = (state = INITIAL_STATE, action = {}) => {
             }),
           {}
         ),
-      });
+      })
 
     case actionTypes.dynamicFeesRetrieved:
-      return merge(state, { dynamicFees: action.dynamicFees });
+      return merge(state, { dynamicFees: action.dynamicFees })
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default service;
+export default service

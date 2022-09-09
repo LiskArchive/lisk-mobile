@@ -1,63 +1,54 @@
 /* eslint-disable complexity */
-import React from 'react';
-import { View, Text, Image } from 'react-native';
-import { useSelector } from 'react-redux';
-import i18next from 'i18next';
+import React from 'react'
+import { View, Text, Image } from 'react-native'
+import { useSelector } from 'react-redux'
+import i18next from 'i18next'
 
-import { useTheme } from 'hooks/useTheme';
-import { BookmarkList } from 'modules/Bookmark/components';
-import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
-import Picker from 'components/shared/Picker';
-import Avatar from 'components/shared/avatar';
-import InfiniteScrollList from 'components/shared/InfiniteScrollList';
-import Input from 'components/shared/toolBox/input';
-import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
-import CircleSvg from 'assets/svgs/CircleSvg';
-import BookmarksSvg from 'assets/svgs/BookmarksSvg';
-import { stringShortener } from 'utilities/helpers';
-import colors from 'constants/styleGuide/colors';
-import { P } from 'components/shared/toolBox/typography';
+import { useTheme } from 'hooks/useTheme'
+import { BookmarkList } from 'modules/Bookmark/components'
+import { selectBookmarkList } from 'modules/Bookmark/store/selectors'
+import Picker from 'components/shared/Picker'
+import Avatar from 'components/shared/avatar'
+import InfiniteScrollList from 'components/shared/InfiniteScrollList'
+import Input from 'components/shared/toolBox/input'
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg'
+import CircleSvg from 'assets/svgs/CircleSvg'
+import BookmarksSvg from 'assets/svgs/BookmarksSvg'
+import { stringShortener } from 'utilities/helpers'
+import colors from 'constants/styleGuide/colors'
+import { P } from 'components/shared/toolBox/typography'
 
-import getSendTokenSelectApplicationsStepStyles,
-{ getSendTokenRecipientAccountFieldStyles } from './styles';
+import getSendTokenSelectApplicationsStepStyles, {
+  getSendTokenRecipientAccountFieldStyles,
+} from './styles'
 
 export function SendTokenSenderApplicationField({
   value,
   onChange,
   errorMessage,
   applications,
-  style
+  style,
 }) {
-  const senderApplication = applications?.data?.find(
-    application => application.chainID === value
-  );
+  const senderApplication = applications?.data?.find((application) => application.chainID === value)
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
-  });
+  })
 
   return (
-    <Picker
-      value={value}
-      onChange={onChange}
-      error={errorMessage}
-    >
+    <Picker value={value} onChange={onChange} error={errorMessage}>
       <Picker.Label style={style?.label}>
         {i18next.t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
       </Picker.Label>
 
       <Picker.Toggle
         disabled
-        placeholder={
-          i18next.t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')
-        }
+        placeholder={i18next.t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')}
         style={style?.toggle}
       >
         {senderApplication && (
           <View style={[styles.row]}>
-            <Text style={[styles.text, styles.theme.text]}>
-              {senderApplication.chainName}
-            </Text>
+            <Text style={[styles.text, styles.theme.text]}>{senderApplication.chainName}</Text>
 
             <Image
               source={{ uri: senderApplication.logo.png }}
@@ -67,7 +58,7 @@ export function SendTokenSenderApplicationField({
         )}
       </Picker.Toggle>
     </Picker>
-  );
+  )
 }
 
 export function SendTokenRecipientApplicationField({
@@ -75,38 +66,30 @@ export function SendTokenRecipientApplicationField({
   onChange,
   errorMessage,
   applications,
-  style
+  style,
 }) {
   const recipientApplication = applications?.data?.find(
-    application => application.chainID === value
-  );
+    (application) => application.chainID === value
+  )
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
-  });
+  })
 
   return (
-    <Picker
-      value={value}
-      onChange={onChange}
-      error={errorMessage}
-    >
+    <Picker value={value} onChange={onChange} error={errorMessage}>
       <Picker.Label style={style?.label}>
         {i18next.t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
       </Picker.Label>
 
       <Picker.Toggle
         disabled={applications?.loading}
-        placeholder={
-          i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')
-        }
+        placeholder={i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
         style={style?.toggle}
       >
         {recipientApplication && (
           <View style={[styles.row]}>
-            <Text style={[styles.text, styles.theme.text]}>
-              {recipientApplication.chainName}
-            </Text>
+            <Text style={[styles.text, styles.theme.text]}>{recipientApplication.chainName}</Text>
 
             <Image
               source={{ uri: recipientApplication.logo.png }}
@@ -121,18 +104,10 @@ export function SendTokenRecipientApplicationField({
           data={applications?.data}
           keyExtractor={(item) => item.chainID}
           renderItem={(item) => (
-            <Picker.Item
-              key={item.chainID}
-              value={item.chainID}
-            >
-              <Text style={[styles.text, styles.theme.text]}>
-                {item.chainName}
-              </Text>
+            <Picker.Item key={item.chainID} value={item.chainID}>
+              <Text style={[styles.text, styles.theme.text]}>{item.chainName}</Text>
 
-              <Image
-                source={{ uri: item.logo.png }}
-                style={[styles.applicationLogoImage]}
-              />
+              <Image source={{ uri: item.logo.png }} style={[styles.applicationLogoImage]} />
             </Picker.Item>
           )}
           renderSpinner
@@ -140,7 +115,7 @@ export function SendTokenRecipientApplicationField({
         />
       </Picker.Menu>
     </Picker>
-  );
+  )
 }
 
 export function SendTokenRecipientAccountField({
@@ -149,28 +124,26 @@ export function SendTokenRecipientAccountField({
   errorMessage,
   addressFormat,
   onAddressFormatChange,
-  style
+  style,
 }) {
-  const bookmarks = useSelector(selectBookmarkList);
+  const bookmarks = useSelector(selectBookmarkList)
 
-  const recipientAccount = bookmarks.find(
-    bookmark => bookmark.address === value
-  );
+  const recipientAccount = bookmarks.find((bookmark) => bookmark.address === value)
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
-  });
+  })
 
   function handleInputChange(_value) {
-    if (addressFormat !== 'input') onAddressFormatChange('input');
+    if (addressFormat !== 'input') onAddressFormatChange('input')
 
-    onChange(_value);
+    onChange(_value)
   }
 
   function handlePickerChange(_value) {
-    if (addressFormat !== 'picker') onAddressFormatChange('picker');
+    if (addressFormat !== 'picker') onAddressFormatChange('picker')
 
-    onChange(_value);
+    onChange(_value)
   }
 
   return (
@@ -183,9 +156,7 @@ export function SendTokenRecipientAccountField({
         error={addressFormat === 'input' && errorMessage}
         adornments={{
           left: (!value || addressFormat === 'picker') && <CircleSvg />,
-          right: !!value && addressFormat === 'input' && (
-           <CircleCheckedSvg variant="fill"/>
-          )
+          right: !!value && addressFormat === 'input' && <CircleCheckedSvg variant="fill" />,
         }}
         innerStyles={getSendTokenRecipientAccountFieldStyles(style)}
       />
@@ -198,7 +169,11 @@ export function SendTokenRecipientAccountField({
         <Picker.Toggle
           placeholder={
             <View style={[styles.row]}>
-              <BookmarksSvg variant="outline" color={colors.light.blueGray} style={{ marginRight: 4 }}/>
+              <BookmarksSvg
+                variant="outline"
+                color={colors.light.blueGray}
+                style={{ marginRight: 4 }}
+              />
 
               <Text style={[styles.placeholder]}>
                 {i18next.t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
@@ -219,7 +194,7 @@ export function SendTokenRecipientAccountField({
                 {stringShortener(recipientAccount.address, 5, 5)}
               </Text>
 
-              <CircleCheckedSvg variant="fill" style={{ marginLeft: 8 }}/>
+              <CircleCheckedSvg variant="fill" style={{ marginLeft: 8 }} />
             </View>
           )}
         </Picker.Toggle>
@@ -227,30 +202,24 @@ export function SendTokenRecipientAccountField({
         <Picker.Menu>
           <BookmarkList
             renderEmpty
-            Component={
-              ({ data }) => (
-                <Picker.Item
-                  key={data.address}
-                  value={data.address}
-                >
-                  <Avatar address={data.address} size={40} />
+            Component={({ data }) => (
+              <Picker.Item key={data.address} value={data.address}>
+                <Avatar address={data.address} size={40} />
 
-                  <View>
-                    {!!data.label && (
-                      <P style={[styles.accountName, styles.theme.accountName]}>
-                        {data.label}
-                      </P>
-                    )}
+                <View>
+                  {!!data.label && (
+                    <P style={[styles.accountName, styles.theme.accountName]}>{data.label}</P>
+                  )}
 
-                    <P style={[styles.accountAddress, styles.theme.accountAddress]}>
-                      {stringShortener(data.address, 6, 6)}
-                    </P>
-                  </View>
-                </Picker.Item>
-              )}
+                  <P style={[styles.accountAddress, styles.theme.accountAddress]}>
+                    {stringShortener(data.address, 6, 6)}
+                  </P>
+                </View>
+              </Picker.Item>
+            )}
           />
         </Picker.Menu>
       </Picker>
     </>
-  );
+  )
 }

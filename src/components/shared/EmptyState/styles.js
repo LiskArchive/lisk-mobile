@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide'
 
 export default function getEmptyStateStyles() {
   return {
@@ -11,7 +11,7 @@ export default function getEmptyStateStyles() {
       messageText: {
         marginTop: 10,
         fontSize: 14,
-        textAlign: 'center'
+        textAlign: 'center',
       },
     },
     [themes.light]: {
@@ -30,5 +30,5 @@ export default function getEmptyStateStyles() {
         color: colors.dark.slateGray,
       },
     },
-  };
+  }
 }

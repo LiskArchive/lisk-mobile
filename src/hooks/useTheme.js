@@ -1,7 +1,7 @@
-import { useContext } from 'react';
+import { useContext } from 'react'
 
-import ThemeContext from '../contexts/theme';
-import { createThemedStyles } from '../utilities/helpers';
+import ThemeContext from '../contexts/theme'
+import { createThemedStyles } from '../utilities/helpers'
 
 /**
  * Hook for consuming the app theme.
@@ -10,9 +10,9 @@ import { createThemedStyles } from '../utilities/helpers';
  * @returns {Object} - The theme stored by context and the themed styles created based on it.
  */
 export function useTheme({ noTheme, styles: baseStyles = {} } = {}) {
-  const theme = useContext(ThemeContext);
+  const theme = useContext(ThemeContext)
 
-  const styles = createThemedStyles(theme, baseStyles, noTheme);
+  const styles = createThemedStyles(theme, baseStyles, noTheme)
 
-  return { theme, styles };
+  return { theme, styles }
 }

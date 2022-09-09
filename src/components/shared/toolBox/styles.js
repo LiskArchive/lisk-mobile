@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { fonts, colors, boxes } from 'constants/styleGuide';
+import { StyleSheet } from 'react-native'
+import { fonts, colors, boxes } from 'constants/styleGuide'
 
 const styles = {
   h1: {
@@ -77,6 +77,6 @@ const styles = {
   iPhoneXMargin: {
     marginBottom: 35,
   },
-};
+}
 
-export default StyleSheet.create(styles);
+export default StyleSheet.create(styles)

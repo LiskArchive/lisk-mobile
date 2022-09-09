@@ -1,6 +1,4 @@
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide'
 
 export default function getSendTokenSelectApplicationsStepStyles() {
   return {
@@ -8,7 +6,7 @@ export default function getSendTokenSelectApplicationsStepStyles() {
       wrapper: {
         flex: 1,
         paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding
+        paddingRight: boxes.boxPadding,
       },
       container: {
         flex: 1,
@@ -34,43 +32,43 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         marginLeft: 8,
       },
       text: {
-        color: colors.light.blueGray
+        color: colors.light.blueGray,
       },
       placeholder: {
         fontSize: 16,
         color: colors.light.ghost,
-        fontWeight: '400'
-      }
+        fontWeight: '400',
+      },
     },
     [themes.light]: {
       wrapper: {
         backgroundColor: colors.light.white,
       },
       accountName: {
-        color: colors.light.zodiacBlue
+        color: colors.light.zodiacBlue,
       },
       accountAddress: {
-        color: colors.light.blueGray
+        color: colors.light.blueGray,
       },
       text: {
-        color: colors.light.zodiacBlue
-      }
+        color: colors.light.zodiacBlue,
+      },
     },
     [themes.dark]: {
       wrapper: {
         backgroundColor: colors.dark.mainBg,
       },
       accountName: {
-        color: colors.light.whiteSmoke
+        color: colors.light.whiteSmoke,
       },
       accountAddress: {
-        color: colors.light.whiteSmoke
+        color: colors.light.whiteSmoke,
       },
       text: {
-        color: colors.light.whiteSmoke
-      }
+        color: colors.light.whiteSmoke,
+      },
     },
-  };
+  }
 }
 
 export function getSendTokenRecipientAccountFieldStyles(styles) {
@@ -80,15 +78,15 @@ export function getSendTokenRecipientAccountFieldStyles(styles) {
       paddingRight: 0,
       paddingLeft: 0,
       marginBottom: 8,
-      ...styles?.container
+      ...styles?.container,
     },
     inputLabel: {
       marginBottom: 8,
-      ...styles?.inputLabel
+      ...styles?.inputLabel,
     },
     input: {
       padding: 16,
-      ...styles?.input
-    }
-  };
+      ...styles?.input,
+    },
+  }
 }

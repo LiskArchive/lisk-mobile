@@ -1,6 +1,4 @@
-import {
-  themes, colors, fonts
-} from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide'
 
 export default () => ({
   common: {
@@ -11,7 +9,7 @@ export default () => ({
       justifyContent: 'center',
     },
     file: {
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
     },
     text: {
       fontFamily: fonts.family.heading,
@@ -27,16 +25,16 @@ export default () => ({
       paddingVertical: 10,
       alignSelf: 'center',
       justifyContent: 'center',
-      flexDirection: 'row'
-    }
+      flexDirection: 'row',
+    },
   },
 
   [themes.light]: {
     download: {
-      color: colors.light.ultramarineBlue
+      color: colors.light.ultramarineBlue,
     },
     text: {
-      color: colors.light.zodiacBlue
+      color: colors.light.zodiacBlue,
     },
     wrapper: {
       backgroundColor: colors.light.white,
@@ -51,10 +49,10 @@ export default () => ({
 
   [themes.dark]: {
     text: {
-      color: colors.light.white
+      color: colors.light.white,
     },
     download: {
-      color: colors.light.ultramarineBlue
+      color: colors.light.ultramarineBlue,
     },
     wrapper: {
       backgroundColor: colors.dark.mainBg,
@@ -66,4 +64,4 @@ export default () => ({
       color: colors.dark.ghost,
     },
   },
-});
+})

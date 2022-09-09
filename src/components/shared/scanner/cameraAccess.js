@@ -1,21 +1,19 @@
-import React, { Fragment } from 'react';
-import { Image, TouchableHighlight } from 'react-native';
-import OpenAppSettings from 'react-native-app-settings';
-import { translate } from 'react-i18next';
-import { themes, colors } from 'constants/styleGuide';
-import cameraPermissionIconLight from 'assets/images/camera3xLight.png';
-import cameraPermissionIconDark from 'assets/images/camera3xDark.png';
-import { P, H4 } from '../toolBox/typography';
-import withTheme from '../withTheme';
-import getStyles from './styles';
-import { IconButton } from '../toolBox/button';
+import React, { Fragment } from 'react'
+import { Image, TouchableHighlight } from 'react-native'
+import OpenAppSettings from 'react-native-app-settings'
+import { translate } from 'react-i18next'
+import { themes, colors } from 'constants/styleGuide'
+import cameraPermissionIconLight from 'assets/images/camera3xLight.png'
+import cameraPermissionIconDark from 'assets/images/camera3xDark.png'
+import { P, H4 } from '../toolBox/typography'
+import withTheme from '../withTheme'
+import getStyles from './styles'
+import { IconButton } from '../toolBox/button'
 
-const CameraAccess = ({
-  theme, styles, close, fullScreen, t
-}) => (
+const CameraAccess = ({ theme, styles, close, fullScreen, t }) => (
   <TouchableHighlight
     onPress={() => {
-      OpenAppSettings.open();
+      OpenAppSettings.open()
     }}
     underlayColor="transparent"
     style={[
@@ -35,31 +33,20 @@ const CameraAccess = ({
         />
       ) : null}
       {theme === themes.light ? (
-        <Image
-          style={styles.permissionIcon}
-          source={cameraPermissionIconLight}
-        />
+        <Image style={styles.permissionIcon} source={cameraPermissionIconLight} />
       ) : (
-        <Image
-          style={styles.permissionIcon}
-          source={cameraPermissionIconDark}
-        />
+        <Image style={styles.permissionIcon} source={cameraPermissionIconDark} />
       )}
       <H4 style={[styles.permissionTitle, styles.theme.permissionTitle]}>
         {t('Allow camera access')}
       </H4>
-      <P
-        style={[
-          styles.permissionDescription,
-          styles.theme.permissionDescription,
-        ]}
-      >
+      <P style={[styles.permissionDescription, styles.theme.permissionDescription]}>
         {t(
           'Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.'
         )}
       </P>
     </Fragment>
   </TouchableHighlight>
-);
+)
 
-export default withTheme(translate()(CameraAccess), getStyles());
+export default withTheme(translate()(CameraAccess), getStyles())

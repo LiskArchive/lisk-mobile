@@ -1,10 +1,10 @@
-import { themes, fonts, colors } from 'constants/styleGuide';
+import { themes, fonts, colors } from 'constants/styleGuide'
 
 export default () => ({
   common: {
     inputRow: {
       flexDirection: 'row',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     rightAdornment: {
       position: 'absolute',
@@ -93,4 +93,4 @@ export default () => ({
       color: colors.light.burntSieanna,
     },
   },
-});
+})

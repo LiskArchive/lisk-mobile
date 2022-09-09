@@ -1,5 +1,5 @@
-import React from 'react';
-import { Svg, Path, Circle } from 'react-native-svg';
+import React from 'react'
+import { Svg, Path, Circle } from 'react-native-svg'
 
 export default function CircleCheckedSvg({
   color = '#4070F4',
@@ -8,12 +8,12 @@ export default function CircleCheckedSvg({
   style,
   variant = 'outline',
 }) {
-  let children;
-  let viewBox;
+  let children
+  let viewBox
 
   switch (variant) {
     case 'outline':
-      viewBox = '0 0 80 80';
+      viewBox = '0 0 80 80'
       children = (
         <>
           <Circle cx="40" cy="40" r="39" stroke={color} strokeWidth="2" />
@@ -24,11 +24,11 @@ export default function CircleCheckedSvg({
             fill={color}
           />
         </>
-      );
-      break;
+      )
+      break
 
     case 'fill':
-      viewBox = '0 0 20 20';
+      viewBox = '0 0 20 20'
       children = (
         <Path
           fillRule="evenodd"
@@ -36,16 +36,16 @@ export default function CircleCheckedSvg({
           d="M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C12.3051 1 14.4077 1.86656 16 3.29168C16.22 3.48858 16.4302 3.69614 16.6299 3.91354L9.94099 11.1311C9.90244 11.1727 9.83704 11.1739 9.79693 11.1338L8.03937 9.37623C7.74724 9.08409 7.2736 9.08409 6.98147 9.37623C6.68933 9.66836 6.68933 10.142 6.98147 10.4341L9.68486 13.1375C9.80512 13.2578 10.0012 13.2541 10.1169 13.1295L17.558 5.11163C17.6405 5.23891 17.7198 5.3684 17.796 5.5C18.5617 6.82378 19 8.36071 19 10Z"
           fill={color}
         />
-      );
-      break;
+      )
+      break
 
     default:
-      break;
+      break
   }
 
   return (
     <Svg width={width} height={height} viewBox={viewBox} fill="none" style={style}>
       {children}
     </Svg>
-  );
+  )
 }

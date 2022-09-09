@@ -1,7 +1,7 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react'
 
-export const PickerContext = createContext({});
+export const PickerContext = createContext({})
 
 export function usePicker() {
-  return useContext(PickerContext);
+  return useContext(PickerContext)
 }

@@ -21,7 +21,7 @@ const common = {
   volcanicSand: '#4D4D50',
   yellowCopacabana: '#F7E36D',
   sparkleGray: '#70778B',
-};
+}
 
 const light = {
   ...common,
@@ -29,7 +29,7 @@ const light = {
   headerBg: common.whiteSmoke,
   tabBarText: common.black,
   athensWhite: '#F7F9FB',
-};
+}
 
 const dark = {
   ...common,
@@ -39,10 +39,10 @@ const dark = {
   mainBg: common.black,
   footerBg: '#1C1C1C',
   textInputBg: '#1C1C1E',
-  tabBarText: common.white
-};
+  tabBarText: common.white,
+}
 
 export default {
   light,
-  dark
-};
+  dark,
+}

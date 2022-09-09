@@ -1,30 +1,25 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react'
+import { View } from 'react-native'
 
-import { useTheme } from 'hooks/useTheme';
-import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import DeleteAccountConfirmation from '../DeleteAccountConfirmation';
-import AccountList from '../AccountList';
+import { useTheme } from 'hooks/useTheme'
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts'
+import DeleteAccountConfirmation from '../DeleteAccountConfirmation'
+import AccountList from '../AccountList'
 
-import getAccountsManagerStyles from './styles';
+import getAccountsManagerStyles from './styles'
 
-export default function AccountsManager({
-  mode = 'screen',
-  onAccountPress,
-  style
-}) {
-  const [activeSection,
-    setActiveSection] = useState({ id: 'accountsList', data: undefined });
+export default function AccountsManager({ mode = 'screen', onAccountPress, style }) {
+  const [activeSection, setActiveSection] = useState({ id: 'accountsList', data: undefined })
 
-  const { accounts } = useAccounts();
+  const { accounts } = useAccounts()
 
-  const { styles } = useTheme({ styles: getAccountsManagerStyles() });
+  const { styles } = useTheme({ styles: getAccountsManagerStyles() })
 
   function handleResetSection() {
-    setActiveSection({ id: 'accountsList', data: undefined });
+    setActiveSection({ id: 'accountsList', data: undefined })
   }
 
-  let children = null;
+  let children = null
 
   switch (activeSection.id) {
     case 'accountsList':
@@ -34,11 +29,12 @@ export default function AccountsManager({
           accounts={accounts}
           onAccountPress={onAccountPress}
           onDeleteAccountPress={(account) =>
-            setActiveSection({ id: 'deleteAccountConfirmation', data: account })}
+            setActiveSection({ id: 'deleteAccountConfirmation', data: account })
+          }
           style={style}
         />
-      );
-      break;
+      )
+      break
 
     case 'deleteAccountConfirmation':
       children = (
@@ -47,22 +43,14 @@ export default function AccountsManager({
           onReset={handleResetSection}
           style={style}
         />
-      );
-      break;
+      )
+      break
 
     default:
-      break;
+      break
   }
 
   return (
-    <View
-      style={[
-        styles.container,
-        styles.theme.container,
-        style?.container
-      ]}
-    >
-      {children}
-    </View>
-  );
+    <View style={[styles.container, styles.theme.container, style?.container]}>{children}</View>
+  )
 }

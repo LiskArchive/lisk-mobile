@@ -1,22 +1,16 @@
-import React from 'react';
-import { Svg, Path } from 'react-native-svg';
+import React from 'react'
+import { Svg, Path } from 'react-native-svg'
 
-import colors from 'constants/styleGuide/colors';
+import colors from 'constants/styleGuide/colors'
 
 export default function CheckSvg({
   color = colors.light.ultramarineBlue,
   height = 9,
   width = 12,
-  style
+  style,
 }) {
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 12 9"
-      fill="none"
-      style={style}
-    >
+    <Svg width={width} height={height} viewBox="0 0 12 9" fill="none" style={style}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -24,5 +18,5 @@ export default function CheckSvg({
         fill={color}
       />
     </Svg>
-  );
+  )
 }

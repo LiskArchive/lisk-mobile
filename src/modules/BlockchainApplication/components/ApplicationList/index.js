@@ -1,13 +1,13 @@
-import React from 'react';
-import { FlatList, View } from 'react-native';
-import i18next from 'i18next';
-import { useTheme } from 'hooks/useTheme';
-import { useSearch } from 'hooks/useSearch';
-import { P } from 'components/shared/toolBox/typography';
-import { colors, themes } from 'constants/styleGuide';
-import Input from 'components/shared/toolBox/input';
-import Icon from 'components/shared/toolBox/icon';
-import getBlockchainApplicationsListStyles from './styles';
+import React from 'react'
+import { FlatList, View } from 'react-native'
+import i18next from 'i18next'
+import { useTheme } from 'hooks/useTheme'
+import { useSearch } from 'hooks/useSearch'
+import { P } from 'components/shared/toolBox/typography'
+import { colors, themes } from 'constants/styleGuide'
+import Input from 'components/shared/toolBox/input'
+import Icon from 'components/shared/toolBox/icon'
+import getBlockchainApplicationsListStyles from './styles'
 
 export default function ApplicationList({
   applications,
@@ -19,9 +19,9 @@ export default function ApplicationList({
 }) {
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsListStyles(),
-  });
+  })
 
-  const { term, setTerm } = useSearch();
+  const { term, setTerm } = useSearch()
 
   return (
     <View style={[styles.container, styles.theme.container, style?.container]}>
@@ -36,14 +36,14 @@ export default function ApplicationList({
         onChange={(value) => setTerm(value)}
         value={term}
         returnKeyType="search"
-        adornments = {{
+        adornments={{
           left: (
             <Icon
               name="search"
               size={18}
               color={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
             />
-          )
+          ),
         }}
       />
 
@@ -53,7 +53,8 @@ export default function ApplicationList({
             style={[
               styles.applicationNameLabel,
               styles.theme.applicationNameLabel,
-              style?.applicationNameLabel]}
+              style?.applicationNameLabel,
+            ]}
           >
             {i18next.t('application.explore.applicationList.loadingText')}
           </P>
@@ -76,5 +77,5 @@ export default function ApplicationList({
         )}
       </View>
     </View>
-  );
+  )
 }

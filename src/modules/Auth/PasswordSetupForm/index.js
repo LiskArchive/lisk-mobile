@@ -1,77 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { translate } from 'react-i18next';
-import { Switch } from 'react-native-gesture-handler';
-import withTheme from 'components/shared/withTheme';
-import HeaderBackButton from 'components/navigation/headerBackButton';
-import Input from 'components/shared/toolBox/input';
-import { PrimaryButton } from 'components/shared/toolBox/button';
-import colors from 'constants/styleGuide/colors';
-import DropDownHolder from 'utilities/alert';
-import {
-  useAccounts,
-  useCurrentAccount,
-} from 'modules/Accounts/hooks/useAccounts';
-import getStyles from './styles';
-import { passwordValidator } from '../validators';
-import PasswordSetupSuccess from '../PasswordSetupSuccess';
-import { useEncryptAccount } from '../hooks/useEncryptAccount';
+import React, { useEffect, useState } from 'react'
+import { View, Text, ScrollView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { translate } from 'react-i18next'
+import { Switch } from 'react-native-gesture-handler'
+import withTheme from 'components/shared/withTheme'
+import HeaderBackButton from 'components/navigation/headerBackButton'
+import Input from 'components/shared/toolBox/input'
+import { PrimaryButton } from 'components/shared/toolBox/button'
+import colors from 'constants/styleGuide/colors'
+import DropDownHolder from 'utilities/alert'
+import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts'
+import getStyles from './styles'
+import { passwordValidator } from '../validators'
+import PasswordSetupSuccess from '../PasswordSetupSuccess'
+import { useEncryptAccount } from '../hooks/useEncryptAccount'
 
 // eslint-disable-next-line max-statements
-const PasswordSetupForm = ({
-  navigation, styles, t, route
-}) => {
-  const { encryptAccount } = useEncryptAccount();
-  const { setAccount } = useAccounts();
-  const [, setCurrentAccount] = useCurrentAccount();
-  const { passphrase } = route.params;
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [accountName, setAccountName] = useState('');
-  const [isAgreed, setIsAgreed] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
-  const [confirmPasswordError, setconfirmPasswordError] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [encryptedJSON, setEncryptedJSON] = useState();
+const PasswordSetupForm = ({ navigation, styles, t, route }) => {
+  const { encryptAccount } = useEncryptAccount()
+  const { setAccount } = useAccounts()
+  const [, setCurrentAccount] = useCurrentAccount()
+  const { passphrase } = route.params
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [accountName, setAccountName] = useState('')
+  const [isAgreed, setIsAgreed] = useState(false)
+  const [passwordError, setPasswordError] = useState('')
+  const [confirmPasswordError, setconfirmPasswordError] = useState('')
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [encryptedJSON, setEncryptedJSON] = useState()
 
   // eslint-disable-next-line max-statements, consistent-return
   const submitForm = async () => {
     try {
       if (!passwordValidator(password)) {
-        return setPasswordError('auth.form.errors.passwordError');
+        return setPasswordError('auth.form.errors.passwordError')
       }
       if (password !== confirmPassword) {
-        return setconfirmPasswordError('auth.form.errors.confirmPasswordError');
+        return setconfirmPasswordError('auth.form.errors.confirmPasswordError')
       }
       const data = await encryptAccount({
         recoveryPhrase: passphrase,
         password,
         name: accountName,
-      });
-      setEncryptedJSON(data);
-      setIsSuccess(true);
-      setAccount(data);
-      setCurrentAccount(data);
+      })
+      setEncryptedJSON(data)
+      setIsSuccess(true)
+      setAccount(data)
+      setCurrentAccount(data)
     } catch (error) {
-      return DropDownHolder.error(t('Error'), t('auth.setup.decryptPassphraseError'));
+      return DropDownHolder.error(t('Error'), t('auth.setup.decryptPassphraseError'))
     }
-  };
+  }
 
   useEffect(() => {
-    setPasswordError('');
-    setconfirmPasswordError('');
-  }, [password, confirmPassword]);
+    setPasswordError('')
+    setconfirmPasswordError('')
+  }, [password, confirmPassword])
 
-  const onContinue = () => navigation.navigate('Main');
+  const onContinue = () => navigation.navigate('Main')
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       {isSuccess ? (
-        <PasswordSetupSuccess
-          encryptedJson={encryptedJSON}
-          onContinue={onContinue}
-        />
+        <PasswordSetupSuccess encryptedJson={encryptedJSON} onContinue={onContinue} />
       ) : (
         <View>
           <HeaderBackButton
@@ -130,8 +122,7 @@ const PasswordSetupForm = ({
                 />
               </View>
               <Text style={[styles.actionText, styles.theme.description]}>
-                I agree to store my encrypted secret recovery phrase on this
-                device
+                I agree to store my encrypted secret recovery phrase on this device
               </Text>
             </View>
             <PrimaryButton
@@ -143,7 +134,7 @@ const PasswordSetupForm = ({
         </View>
       )}
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default withTheme(translate()(PasswordSetupForm), getStyles());
+export default withTheme(translate()(PasswordSetupForm), getStyles())

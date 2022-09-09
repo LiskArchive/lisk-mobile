@@ -1,9 +1,5 @@
-import {
-  themes, colors
-} from 'constants/styleGuide';
-import {
-  deviceWidth,
-} from 'utilities/device';
+import { themes, colors } from 'constants/styleGuide'
+import { deviceWidth } from 'utilities/device'
 
 export default () => ({
   common: {
@@ -28,7 +24,7 @@ export default () => ({
       width: 34,
       borderRadius: 40,
       marginTop: 4,
-    }
+    },
   },
 
   [themes.light]: {
@@ -36,11 +32,11 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     horizontalLine: {
-      backgroundColor: colors.light.silverGrey
+      backgroundColor: colors.light.silverGrey,
     },
     closeButtonContainer: {
       backgroundColor: colors.light.platinumGray,
-    }
+    },
   },
 
   [themes.dark]: {
@@ -48,10 +44,10 @@ export default () => ({
       backgroundColor: colors.dark.mainBg,
     },
     horizontalLine: {
-      backgroundColor: colors.dark.volcanicSand
+      backgroundColor: colors.dark.volcanicSand,
     },
     closeButtonContainer: {
       backgroundColor: colors.dark.volcanicSand,
-    }
+    },
   },
-});
+})

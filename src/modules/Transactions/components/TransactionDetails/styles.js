@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide'
 
 export default function getTransactionDetailsStyles() {
   return {
@@ -18,12 +18,12 @@ export default function getTransactionDetailsStyles() {
       row: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
       },
       column: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        flex: 1
+        flex: 1,
       },
       text: {
         fontWeight: '500',
@@ -32,7 +32,7 @@ export default function getTransactionDetailsStyles() {
       label: {
         fontWeight: '400',
         fontSize: 14,
-        marginBottom: 8
+        marginBottom: 8,
       },
       date: {
         fontWeight: '400',
@@ -42,7 +42,7 @@ export default function getTransactionDetailsStyles() {
       statusContainer: {
         padding: 8,
         borderRadius: 6,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
       },
       statusText: {
         fontSize: 14,
@@ -51,8 +51,8 @@ export default function getTransactionDetailsStyles() {
       showParamsButton: {
         fontSize: 14,
         lineHeight: 0,
-        alignSelf: 'flex-start'
-      }
+        alignSelf: 'flex-start',
+      },
     },
     [themes.light]: {
       container: {
@@ -82,5 +82,5 @@ export default function getTransactionDetailsStyles() {
         color: colors.dark.silverGrey,
       },
     },
-  };
+  }
 }

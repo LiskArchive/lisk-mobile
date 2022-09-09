@@ -1,5 +1,5 @@
-import React from 'react';
-import { Svg, Path } from 'react-native-svg';
+import React from 'react'
+import { Svg, Path } from 'react-native-svg'
 
 export default function StatsSvg({ width, height, style }) {
   return (
@@ -15,5 +15,5 @@ export default function StatsSvg({ width, height, style }) {
       <Path d="M10.3448 20C4.63154 20 0 15.3685 0 9.65517H10.3448V20Z" fill="#4070F4" />
       <Path d="M9.65517 20C15.3685 20 20 15.3685 20 9.65517H9.65517V20Z" fill="#2BD67B" />
     </Svg>
-  );
+  )
 }

@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 /* eslint-disable max-len */
-import { fromRawLsk } from 'utilities/conversions';
-import { getTransactionFee } from '../../utils';
+import { fromRawLsk } from 'utilities/conversions'
+import { getTransactionFee } from '../../utils'
 
 /**
  *
@@ -12,21 +12,15 @@ import { getTransactionFee } from '../../utils';
  * @returns {object}
  *
  */
-export const calculateMinimumFee = ({
-  account,
-  transaction,
-  selectedPriority,
-}) => {
-  const minFee = getTransactionFee(
-    {
-      account,
-      transaction,
-      selectedPriority,
-      selectedPriorityIndex: 0
-    }
-  );
-  return minFee;
-};
+export const calculateMinimumFee = ({ account, transaction, selectedPriority }) => {
+  const minFee = getTransactionFee({
+    account,
+    transaction,
+    selectedPriority,
+    selectedPriorityIndex: 0,
+  })
+  return minFee
+}
 
 /**
  *
@@ -38,15 +32,13 @@ export const calculateMinimumFee = ({
  *
  */
 export const calculateMaximumFeeAmount = ({ account, transaction, ...params }) => {
-  const maxAmountFee = getTransactionFee(
-    {
-      ...params,
-      account,
-      transaction: { transaction, amount: fromRawLsk(account.balance) },
-    }
-  );
-  return maxAmountFee;
-};
+  const maxAmountFee = getTransactionFee({
+    ...params,
+    account,
+    transaction: { transaction, amount: fromRawLsk(account.balance) },
+  })
+  return maxAmountFee
+}
 
 /**
  *
@@ -57,32 +49,28 @@ export const calculateMaximumFeeAmount = ({ account, transaction, ...params }) =
  * @returns {object}
  *
  */
-export const calculateTransactionFees = ({
-  account,
-  selectedPriority,
-  transaction,
-}) => {
+export const calculateTransactionFees = ({ account, selectedPriority, transaction }) => {
   const minFee = calculateMinimumFee({
     account,
     transaction,
     selectedPriority,
-  });
+  })
   const maxFee = calculateMaximumFeeAmount({
     account,
     transaction,
-    selectedPriority
-  });
+    selectedPriority,
+  })
   const fee = getTransactionFee({
     account,
     selectedPriority,
     transaction,
-  });
+  })
 
   if (fee.value < minFee.value) {
-    return minFee;
+    return minFee
   }
   if (fee.value > maxFee.value) {
-    return maxFee;
+    return maxFee
   }
-  return fee;
-};
+  return fee
+}

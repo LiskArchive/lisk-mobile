@@ -1,1 +1,1 @@
-export { DeleteBookmarkModal as default } from './DeleteBookmark';
+export { DeleteBookmarkModal as default } from './DeleteBookmark'

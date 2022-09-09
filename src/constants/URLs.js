@@ -6,6 +6,6 @@ const URLs = {
   BTCMinerFees: 'https://bitcoinfees.earn.com/api/v1/fees/recommended',
   BTCTestnet: 'https://btc-test.lisk.com',
   BTCMainnet: 'https://btc.lisk.com',
-};
+}
 
-export default URLs;
+export default URLs

@@ -1,11 +1,11 @@
-import BackgroundTimer from 'react-native-background-timer';
-import { Buffer } from 'buffer';
-const env = require('./env.json');
+import BackgroundTimer from 'react-native-background-timer'
+import { Buffer } from 'buffer'
+const env = require('./env.json')
 
-global.setTimeout = BackgroundTimer.setTimeout.bind(BackgroundTimer);
-global.setInterval = BackgroundTimer.setInterval.bind(BackgroundTimer);
-global.clearTimeout = BackgroundTimer.clearTimeout.bind(BackgroundTimer);
-global.clearInterval = BackgroundTimer.clearInterval.bind(BackgroundTimer);
+global.setTimeout = BackgroundTimer.setTimeout.bind(BackgroundTimer)
+global.setInterval = BackgroundTimer.setInterval.bind(BackgroundTimer)
+global.clearTimeout = BackgroundTimer.clearTimeout.bind(BackgroundTimer)
+global.clearInterval = BackgroundTimer.clearInterval.bind(BackgroundTimer)
 
 if (typeof BigInt === 'undefined') global.BigInt = require('big-integer')
 if (typeof __dirname === 'undefined') global.__dirname = '/'
@@ -22,14 +22,14 @@ if (typeof process === 'undefined') {
 }
 
 for (var p in env) {
-  process.env[p] = env[p];
+  process.env[p] = env[p]
 }
 
 process.browser = false
-global.Buffer = Buffer;
-global.Buffer.prototype.reverse = function() {
-  return require('buffer-reverse')(this, arguments);
-};
+global.Buffer = Buffer
+global.Buffer.prototype.reverse = function () {
+  return require('buffer-reverse')(this, arguments)
+}
 
 // global.location = global.location || { port: 80 }
 const isDev = typeof __DEV__ === 'boolean' && __DEV__
@@ -39,14 +39,14 @@ if (typeof localStorage !== 'undefined') {
 }
 
 if (global.navigator && global.navigator.product === 'ReactNative') {
-  global.navigator.mimeTypes = '';
+  global.navigator.mimeTypes = ''
   try {
-    global.navigator.userAgent = 'ReactNative';
+    global.navigator.userAgent = 'ReactNative'
   } catch (e) {
     console.log(
       'Tried to fake useragent, but failed. This is normal on some devices, you may ignore this error: ' +
         e.message
-    );
+    )
   }
 }
 

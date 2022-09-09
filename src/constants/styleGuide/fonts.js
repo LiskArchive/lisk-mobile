@@ -3,14 +3,14 @@ const commercialFontFamily = {
   context: 'BasierCircle-Regular',
   contextBold: 'BasierCircle-Bold',
   contextSemiBold: 'BasierCircle-SemiBold',
-};
+}
 
 const freeFontFamily = {
   heading: 'OpenSans-Bold',
   context: 'OpenSans-Regular',
   contextBold: 'OpenSans-Bold',
   contextSemiBold: 'OpenSans-SemiBold',
-};
+}
 
 export default {
   family: {
@@ -27,4 +27,4 @@ export default {
     small: 13,
     input: 14,
   },
-};
+}

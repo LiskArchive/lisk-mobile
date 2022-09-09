@@ -1,34 +1,34 @@
-import { themes, colors, fonts } from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide'
 
 export default () => ({
   common: {
     flex: {
-      flex: 1
+      flex: 1,
     },
     homeContainer: {
-      paddingTop: 20
+      paddingTop: 20,
     },
     body: {
       padding: 20,
-      flex: 1
+      flex: 1,
     },
     topContainer: {
       paddingLeft: 20,
       marginRight: 60,
     },
     discreteContainer: {
-      marginRight: 10
+      marginRight: 10,
     },
     accountCard: {
       backgroundColor: colors.light.ultramarineBlue,
       padding: 20,
-      borderRadius: 20
+      borderRadius: 20,
     },
     row: {
       flexDirection: 'row',
     },
     alignItemsCenter: {
-      alignItems: 'center'
+      alignItems: 'center',
     },
     switchContainer: {
       alignSelf: 'flex-start',
@@ -47,7 +47,7 @@ export default () => ({
       marginBottom: 5,
     },
     address: {
-      fontFamily: fonts.family.context
+      fontFamily: fonts.family.context,
     },
     buttonContainer: {
       marginTop: 20,
@@ -65,7 +65,7 @@ export default () => ({
     },
     buttonText: {
       textAlign: 'center',
-      color: colors.light.platinumGray
+      color: colors.light.platinumGray,
     },
     sendButtonText: {
       color: colors.light.ultramarineBlue,
@@ -73,18 +73,18 @@ export default () => ({
   },
   [themes.light]: {
     username: {
-      color: colors.light.platinumGray
+      color: colors.light.platinumGray,
     },
     address: {
-      color: colors.light.platinumGray
+      color: colors.light.platinumGray,
     },
   },
   [themes.dark]: {
     username: {
-      color: colors.light.platinumGray
+      color: colors.light.platinumGray,
     },
     address: {
-      color: colors.light.platinumGray
+      color: colors.light.platinumGray,
     },
-  }
-});
+  },
+})

@@ -371,12 +371,12 @@
         "description": "The default application can not be removed",
         "buttonText": "Continue to Applications"
       },
-      "continueToWalletButtonText": "Continue to wallet" 
+      "continueToWalletButtonText": "Continue to wallet"
     },
-    "explore":{
+    "explore": {
       "title": "Applications",
       "statsButtonText": "Stats",
-      "applicationList":{
+      "applicationList": {
         "searchPlaceholder": "Search application",
         "loadingText": "Loading applications...",
         "errorText": "Error loading your applications.",
@@ -385,7 +385,8 @@
         "unpinText": "Unpin",
         "deleteText": "Delete"
       }
-    }},
+    }
+  },
   "requestTokens": {
     "title": "Request token",
     "recipient": "Recipient",
@@ -428,7 +429,7 @@
       "highPriorityLabel": "High",
       "transactionFeeLabel": "Transaction fee",
       "loadingTransactionFeeText": "Loading transaction fee...",
-      "errorLoadingTransactionFeeText": "Error calculating fees!",      
+      "errorLoadingTransactionFeeText": "Error calculating fees!",
       "initializationFeeLabel": "Initialization fee",
       "loadingInitializationFeeText": "Loading initialization fee...",
       "cmmFeeLabel": "CCM fee",
@@ -460,7 +461,7 @@
         "reportErrorButtonText": "Report the error via email"
       }
     },
-    "errors" : {
+    "errors": {
       "generalMessage": "Please fill all the required fields to send your tokens.",
       "senderApplicationChainID": "Application to send from must be specified",
       "recipientApplicationChainID": "Application who receives the tokens must be specified",
@@ -496,7 +497,7 @@
     }
   },
   "accounts": {
-    "accountsManager" : {
+    "accountsManager": {
       "title": "Manage accounts",
       "description": "You can switch your account and also remove any account you're not using at the moment",
       "addAccountButtonText": "Add account",
@@ -516,7 +517,7 @@
       "send": "Send"
     }
   },
-  "transactions" : {
+  "transactions": {
     "transactionDetails": {
       "loadingText": "Loading transaction...",
       "errorText": "Error loading transaction!",

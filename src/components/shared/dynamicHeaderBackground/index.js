@@ -1,10 +1,10 @@
-import React from 'react';
-import connect from 'redux-connect-decorator';
-import { View } from 'react-native';
-import withTheme from 'components/shared/withTheme';
-import getStyles from './styles';
+import React from 'react'
+import connect from 'redux-connect-decorator'
+import { View } from 'react-native'
+import withTheme from 'components/shared/withTheme'
+import getStyles from './styles'
 
-@connect(state => ({
+@connect((state) => ({
   settings: state.settings,
 }))
 class DynamicHeaderBackground extends React.Component {
@@ -12,10 +12,10 @@ class DynamicHeaderBackground extends React.Component {
     const {
       settings: { token },
       styles,
-    } = this.props;
+    } = this.props
 
-    return <View style={[styles.header, styles.theme[token.active]]} />;
+    return <View style={[styles.header, styles.theme[token.active]]} />
   }
 }
 
-export default withTheme(DynamicHeaderBackground, getStyles());
+export default withTheme(DynamicHeaderBackground, getStyles())

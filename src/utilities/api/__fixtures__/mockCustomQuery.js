@@ -1,4 +1,4 @@
-const mockCustomQueryData = [{ id: '0' }];
+const mockCustomQueryData = [{ id: '0' }]
 
 export const mockCustomQuery = {
   data: mockCustomQueryData,
@@ -7,4 +7,4 @@ export const mockCustomQuery = {
     offset: 0,
     total: 1,
   },
-};
+}

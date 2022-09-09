@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { combineReducers } from 'redux'
+import { persistReducer } from 'redux-persist'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import actionTypes from './actionTypes';
+import actionTypes from './actionTypes'
 
 /**
  * Initial State
@@ -13,7 +13,7 @@ const initialState = {
   pins: [],
   applications: {},
   current: null,
-};
+}
 
 /**
  *
@@ -24,14 +24,14 @@ export const pinsReducer = (state = initialState.pins, { type, chainId }) => {
   switch (type) {
     case actionTypes.toggleApplicationPin:
       if (chainId && state.includes(chainId)) {
-        return state.filter((pinnedChainId) => pinnedChainId !== chainId);
+        return state.filter((pinnedChainId) => pinnedChainId !== chainId)
       }
-      return chainId ? [...state, chainId] : [...state];
+      return chainId ? [...state, chainId] : [...state]
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 /**
  *
@@ -40,31 +40,26 @@ export const pinsReducer = (state = initialState.pins, { type, chainId }) => {
  */
 export const applicationsReducer = (
   state = initialState.applications,
-  {
-    type, applications, application, chainId
-  }
+  { type, applications, application, chainId }
 ) => {
   switch (type) {
     case actionTypes.setApplications:
-      state = applications.reduce(
-        (acc, app) => ({ ...acc, [app.chainID]: app }),
-        {}
-      );
-      return state;
+      state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {})
+      return state
     case actionTypes.addApplication:
-      return { ...state, [application.chainID]: application };
+      return { ...state, [application.chainID]: application }
 
     case actionTypes.deleteApplicationByChainId: {
       // eslint-disable-next-line no-unused-vars
-      const { [chainId]: _, ...stateWithoutDeletedApplication } = state;
+      const { [chainId]: _, ...stateWithoutDeletedApplication } = state
 
-      return stateWithoutDeletedApplication;
+      return stateWithoutDeletedApplication
     }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 /**
  *
@@ -74,28 +69,25 @@ export const applicationsReducer = (
 export const currentReducer = (state = null, { type, application }) => {
   switch (type) {
     case actionTypes.setCurrentApplication:
-      return application;
+      return application
     default:
-      return state;
+      return state
   }
-};
+}
 
 const persistConfig = {
   key: 'blockchainApplications',
   storage: AsyncStorage,
   whitelist: ['pins', 'applications'],
   blacklist: ['current'],
-};
+}
 
 const blockchainApplicationsReducer = combineReducers({
   pins: pinsReducer,
   applications: applicationsReducer,
   current: currentReducer,
-});
+})
 
-const blockchainApplications = persistReducer(
-  persistConfig,
-  blockchainApplicationsReducer
-);
+const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer)
 
-export default blockchainApplications;
+export default blockchainApplications

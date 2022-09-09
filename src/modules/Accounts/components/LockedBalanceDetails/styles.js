@@ -1,5 +1,5 @@
-import { themes, colors, fonts } from 'constants/styleGuide';
-import { setColorOpacity } from 'utilities/helpers';
+import { themes, colors, fonts } from 'constants/styleGuide'
+import { setColorOpacity } from 'utilities/helpers'
 
 export default () => ({
   common: {
@@ -22,14 +22,14 @@ export default () => ({
       flex: 1,
     },
     flexOne: {
-      flex: 1.3
+      flex: 1.3,
     },
     flexRow: {
       flexDirection: 'row',
     },
     iconContainer: {
       marginRight: 13,
-      marginTop: 5
+      marginTop: 5,
     },
     text: {
       fontSize: 17,
@@ -38,37 +38,37 @@ export default () => ({
     headerText: {
       fontSize: 17,
       flex: 1,
-      fontFamily: fonts.family.contextSemiBold
+      fontFamily: fonts.family.contextSemiBold,
     },
   },
   [themes.light]: {
     container: {
       backgroundColor: colors.light.white,
-      flex: 1
+      flex: 1,
     },
     row: {
-      borderBottomColor: colors.light.mystic
+      borderBottomColor: colors.light.mystic,
     },
     infoText: {
       color: colors.light.black,
     },
     text: {
-      color: colors.light.zodiacBlue
-    }
+      color: colors.light.zodiacBlue,
+    },
   },
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.black,
-      flex: 1
+      flex: 1,
     },
     infoText: {
-      color: colors.dark.platinum
+      color: colors.dark.platinum,
     },
     text: {
-      color: colors.dark.white
+      color: colors.dark.white,
     },
     row: {
-      borderBottomColor: setColorOpacity(colors.light.white, 0.15)
+      borderBottomColor: setColorOpacity(colors.light.white, 0.15),
     },
-  }
-});
+  },
+})

@@ -1,11 +1,9 @@
 /* eslint-disable complexity */
-import React from 'react';
-import { Svg, Path } from 'react-native-svg';
+import React from 'react'
+import { Svg, Path } from 'react-native-svg'
 
-export default function PinSvg({
-  color, height, width, style, variant = 'outline'
-}) {
-  let children;
+export default function PinSvg({ color, height, width, style, variant = 'outline' }) {
+  let children
 
   switch (variant) {
     case 'outline':
@@ -16,8 +14,8 @@ export default function PinSvg({
           d="M13.11 4.43217L13.2371 3.62719L16.6978 7.08792L15.8928 7.21502C15.6006 7.26116 15.3304 7.39872 15.1212 7.60794L12.6312 10.098C12.4414 10.2878 12.3101 10.5282 12.2531 10.7905L11.5866 13.8562L6.46884 8.73835L9.53448 8.07191C9.7968 8.01488 10.0372 7.88364 10.227 7.69381L12.7171 5.20377C12.9263 4.99455 13.0638 4.72443 13.11 4.43217ZM12.198 1.87265C12.2617 1.46901 12.7565 1.30813 13.0454 1.59708L18.7279 7.27955C19.0169 7.56851 18.856 8.06325 18.4523 8.12699L16.0956 8.49911C16.0747 8.5024 16.0554 8.51223 16.0405 8.52717L13.5504 11.0172C13.5369 11.0308 13.5275 11.0479 13.5234 11.0667L12.5457 15.5642C12.4617 15.9508 11.9833 16.0913 11.7036 15.8115L8.56813 12.6761L5.03259 16.2116C4.77875 16.4655 4.36719 16.4655 4.11335 16.2116C3.85951 15.9578 3.85951 15.5462 4.11335 15.2924L7.64889 11.7569L4.51346 8.62144C4.23374 8.34172 4.37424 7.86333 4.7608 7.7793L9.25832 6.80158C9.27705 6.7975 9.29423 6.78813 9.30779 6.77457L11.7978 4.28453C11.8128 4.26959 11.8226 4.25029 11.8259 4.22942L12.198 1.87265Z"
           fill={color || 'currentColor'}
         />
-      );
-      break;
+      )
+      break
 
     case 'fill':
       children = (
@@ -29,8 +27,8 @@ export default function PinSvg({
             fill={color || 'currentColor'}
           />
         </>
-      );
-      break;
+      )
+      break
 
     case 'closed':
       children = (
@@ -49,11 +47,11 @@ export default function PinSvg({
             fill={color || 'currentColor'}
           />
         </>
-      );
-      break;
+      )
+      break
 
     default:
-      break;
+      break
   }
 
   return (
@@ -66,5 +64,5 @@ export default function PinSvg({
     >
       {children}
     </Svg>
-  );
+  )
 }

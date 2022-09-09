@@ -1,4 +1,4 @@
-import { colors, themes } from 'constants/styleGuide';
+import { colors, themes } from 'constants/styleGuide'
 
 export default {
   common: {
@@ -27,7 +27,7 @@ export default {
       alignItems: 'center',
     },
     title: {
-      marginHorizontal: 20
+      marginHorizontal: 20,
     },
     logo: {
       width: 50,
@@ -41,4 +41,4 @@ export default {
   [themes.light]: { title: { color: colors.light.zodiacBlue } },
 
   [themes.dark]: { title: { color: colors.dark.white } },
-};
+}

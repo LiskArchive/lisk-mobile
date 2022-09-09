@@ -1,18 +1,18 @@
-import { StyleSheet } from 'react-native';
-import regex from 'constants/regex';
-import { themes } from 'constants/styleGuide';
+import { StyleSheet } from 'react-native'
+import regex from 'constants/regex'
+import { themes } from 'constants/styleGuide'
 
 export const serializeQueryString = (obj) => {
-  let str = '?';
+  let str = '?'
   str += Object.keys(obj)
     .reduce((a, k) => {
       // eslint-disable-next-line no-unused-expressions
-      obj[k] && a.push(`${k}=${encodeURIComponent(obj[k])}`);
-      return a;
+      obj[k] && a.push(`${k}=${encodeURIComponent(obj[k])}`)
+      return a
     }, [])
-    .join('&');
-  return str;
-};
+    .join('&')
+  return str
+}
 
 /**
  * Helps to create themed stylesheet for components.
@@ -23,18 +23,18 @@ export const serializeQueryString = (obj) => {
  */
 export const createThemedStyles = (theme, styles, noTheme = false) => {
   if (!styles.common) {
-    styles.common = {};
+    styles.common = {}
   }
 
   if (!styles[theme]) {
-    styles[theme] = {};
+    styles[theme] = {}
   }
 
   return {
     ...StyleSheet.create(styles.common),
-    theme: noTheme ? StyleSheet.create(styles[themes.light]) : StyleSheet.create(styles[theme])
-  };
-};
+    theme: noTheme ? StyleSheet.create(styles[themes.light]) : StyleSheet.create(styles[theme]),
+  }
+}
 
 /**
  * Helps to keep the code clean while trying to
@@ -46,7 +46,7 @@ export const createThemedStyles = (theme, styles, noTheme = false) => {
  * @returns {Object} - A new object, result of merging
  *  the object properties from right to left
  */
-export const merge = (...rest) => Object.assign({}, ...rest);
+export const merge = (...rest) => Object.assign({}, ...rest)
 
 /**
  * Shortens a given string by replacing a certain number of
@@ -67,10 +67,10 @@ export const merge = (...rest) => Object.assign({}, ...rest);
  */
 export const stringShortener = (str, leftPadd = 10, rightPadd = 0) => {
   if (str && str.length > 15) {
-    return `${str.substr(0, leftPadd)}...${rightPadd ? str.substr(-1 * rightPadd) : ''}`;
+    return `${str.substr(0, leftPadd)}...${rightPadd ? str.substr(-1 * rightPadd) : ''}`
   }
-  return str;
-};
+  return str
+}
 
 /**
  * Removes undefined keys from an object.
@@ -79,14 +79,14 @@ export const stringShortener = (str, leftPadd = 10, rightPadd = 0) => {
  */
 export const removeUndefinedKeys = (obj) =>
   Object.keys(obj).reduce((acc, key) => {
-    const item = obj[key];
+    const item = obj[key]
 
     if (typeof item !== 'undefined') {
-      acc[key] = item;
+      acc[key] = item
     }
 
-    return acc;
-  }, {});
+    return acc
+  }, {})
 
 /**
  * Checks if the given collection is empty.
@@ -95,11 +95,11 @@ export const removeUndefinedKeys = (obj) =>
  */
 export const isEmpty = (collection) => {
   if (Array.isArray(collection)) {
-    return collection.length === 0;
+    return collection.length === 0
   }
 
-  return Object.keys(collection).length === 0;
-};
+  return Object.keys(collection).length === 0
+}
 
 /**
  * Converts a given hex color to rgba with a given alpha
@@ -113,23 +113,24 @@ export const isEmpty = (collection) => {
 export const setColorOpacity = (hex, alpha = 1) => {
   if (hex.length !== 7 && hex.length !== 4) {
     // eslint-disable-next-line no-console
-    return hex;
+    return hex
   }
 
-  const normalizedHex = hex.length === 4 ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}` : hex;
+  const normalizedHex =
+    hex.length === 4 ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}` : hex
 
-  const r = parseInt(normalizedHex.slice(1, 3), 16);
-  const g = parseInt(normalizedHex.slice(3, 5), 16);
-  const b = parseInt(normalizedHex.slice(5, 7), 16);
+  const r = parseInt(normalizedHex.slice(1, 3), 16)
+  const g = parseInt(normalizedHex.slice(3, 5), 16)
+  const b = parseInt(normalizedHex.slice(5, 7), 16)
 
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-};
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`
+}
 
-export const validateAmount = (amount) => new RegExp(regex.amount).test(amount);
+export const validateAmount = (amount) => new RegExp(regex.amount).test(amount)
 
 /**
  * This function tests if a string passed can be parsed to a number
  * @param {string} value
  * @returns {boolean}
  */
-export const isNumeric = (value) => /^([0-9]+\.?[0-9]*|\.[0-9]+)$/.test(value);
+export const isNumeric = (value) => /^([0-9]+\.?[0-9]*|\.[0-9]+)$/.test(value)

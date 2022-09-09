@@ -1,20 +1,20 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import i18next from 'i18next';
+import React from 'react'
+import { View, Text } from 'react-native'
+import i18next from 'i18next'
 
-import { useEmailReport } from 'hooks/useEmailReport';
-import { useTheme } from 'hooks/useTheme';
-import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
-import TxErrorSvg from 'assets/svgs/TxErrorSvg';
+import { useEmailReport } from 'hooks/useEmailReport'
+import { useTheme } from 'hooks/useTheme'
+import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button'
+import TxErrorSvg from 'assets/svgs/TxErrorSvg'
 
-import getSendTokenErrorStyles from './styles';
+import getSendTokenErrorStyles from './styles'
 
 export default function SendTokenError({ onClick, error }) {
-  const emailReport = useEmailReport({ error, errorMessage: 'Error sending token' });
+  const emailReport = useEmailReport({ error, errorMessage: 'Error sending token' })
 
   const { styles } = useTheme({
     styles: getSendTokenErrorStyles(),
-  });
+  })
 
   return (
     <View style={[styles.container, styles.theme.container]}>
@@ -51,5 +51,5 @@ export default function SendTokenError({ onClick, error }) {
         {i18next.t('sendToken.result.error.reportErrorButtonText')}
       </LabelButton>
     </View>
-  );
+  )
 }

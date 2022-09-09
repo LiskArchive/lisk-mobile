@@ -1,8 +1,6 @@
-import React from 'react';
-import {
-  ScrollView, RefreshControl
-} from 'react-native';
-import { themes, colors } from 'constants/styleGuide';
+import React from 'react'
+import { ScrollView, RefreshControl } from 'react-native'
+import { themes, colors } from 'constants/styleGuide'
 
 /**
  * @deprecated - Use InfiniteScrollList instead.
@@ -14,50 +12,43 @@ import { themes, colors } from 'constants/styleGuide';
  * @param {Number} count - The maximum amount possible in the list
  */
 class InfiniteScrollView extends React.Component {
-  canLoadMore = true;
+  canLoadMore = true
 
   state = {
     refreshing: false,
-  };
-
-  loadMore = ({ nativeEvent }) => {
-    const isCloseToBottom = ({
-      layoutMeasurement,
-      contentOffset,
-      contentSize,
-    }) => {
-      const paddingToBottom = 20;
-      return (
-        layoutMeasurement.height + contentOffset.y
-        >= contentSize.height - paddingToBottom
-      );
-    };
-    if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
-      this.canLoadMore = false;
-      this.props.loadMore();
-    }
-  };
-
-  componentDidUpdate() {
-    this.canLoadMore = this.props.list.length < this.props.count;
   }
 
-  onScroll = e => {
-    this.props.onScroll?.(e);
-    this.loadMore(e);
-  };
+  loadMore = ({ nativeEvent }) => {
+    const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
+      const paddingToBottom = 20
+      return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom
+    }
+    if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
+      this.canLoadMore = false
+      this.props.loadMore()
+    }
+  }
 
-  scrollTo = y => {
-    this.scrollView.scrollTo({ y });
-  };
+  componentDidUpdate() {
+    this.canLoadMore = this.props.list.length < this.props.count
+  }
+
+  onScroll = (e) => {
+    this.props.onScroll?.(e)
+    this.loadMore(e)
+  }
+
+  scrollTo = (y) => {
+    this.scrollView.scrollTo({ y })
+  }
 
   onRefresh = () => {
-    this.setState({ refreshing: true });
-    this.props.refresh();
+    this.setState({ refreshing: true })
+    this.props.refresh()
     setTimeout(() => {
-      this.setState({ refreshing: false });
-    }, 2000);
-  };
+      this.setState({ refreshing: false })
+    }, 2000)
+  }
 
   render() {
     return (
@@ -70,14 +61,12 @@ class InfiniteScrollView extends React.Component {
             onRefresh={this.onRefresh}
             refreshing={this.state.refreshing}
             tintColor={
-              this.props.theme === themes.light
-                ? colors.light.slateGray
-                : colors.dark.platinum
+              this.props.theme === themes.light ? colors.light.slateGray : colors.dark.platinum
             }
           />
         }
-        ref={el => {
-          this.scrollView = el;
+        ref={(el) => {
+          this.scrollView = el
         }}
         style={[this.props.style]}
         stickyHeaderIndices={[0]}
@@ -86,12 +75,12 @@ class InfiniteScrollView extends React.Component {
         {this.props.renderTitle?.()}
         {this.props.render(this.state.refreshing)}
       </ScrollView>
-    );
+    )
   }
 }
 
 InfiniteScrollView.defaultProps = {
   theme: themes.light,
-};
+}
 
-export default InfiniteScrollView;
+export default InfiniteScrollView

@@ -1,34 +1,34 @@
-import React from 'react';
-import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import i18next from 'i18next';
+import React from 'react'
+import { View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import i18next from 'i18next'
 
-import { useTheme } from 'hooks/useTheme';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
-import { H2, P } from 'components/shared/toolBox/typography';
-import { PrimaryButton } from 'components/shared/toolBox/button';
-import InfiniteScrollList from 'components/shared/InfiniteScrollList';
-import AccountItem from '../AccountItem';
+import { useTheme } from 'hooks/useTheme'
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts'
+import { H2, P } from 'components/shared/toolBox/typography'
+import { PrimaryButton } from 'components/shared/toolBox/button'
+import InfiniteScrollList from 'components/shared/InfiniteScrollList'
+import AccountItem from '../AccountItem'
 
-import getAccountsListStyles from './styles';
+import getAccountsListStyles from './styles'
 
 export default function AccountsList({
   mode,
   accounts,
   onAccountPress,
   onDeleteAccountPress,
-  style
+  style,
 }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
-  const [currentAccount, setAccount] = useCurrentAccount();
+  const [currentAccount, setAccount] = useCurrentAccount()
 
-  const { styles } = useTheme({ styles: getAccountsListStyles() });
+  const { styles } = useTheme({ styles: getAccountsListStyles() })
 
   function handleSelectAccountClick(account) {
-    setAccount(account);
-    navigation.navigate('Main');
-    if (onAccountPress) onAccountPress(account);
+    setAccount(account)
+    navigation.navigate('Main')
+    if (onAccountPress) onAccountPress(account)
   }
 
   return (
@@ -38,13 +38,7 @@ export default function AccountsList({
       </H2>
 
       {mode === 'modal' && (
-        <P
-          style={[
-            styles.description,
-            styles.theme.description,
-            style?.description
-          ]}
-        >
+        <P style={[styles.description, styles.theme.description, style?.description]}>
           {i18next.t('accounts.accountsManager.description')}
         </P>
       )}
@@ -58,9 +52,7 @@ export default function AccountsList({
             account={item}
             onPress={() => handleSelectAccountClick(item)}
             onDeletePress={() => onDeleteAccountPress(item)}
-            active={
-              item.metadata.address === currentAccount.metadata?.address
-            }
+            active={item.metadata.address === currentAccount.metadata?.address}
           />
         )}
         renderSpinner
@@ -75,5 +67,5 @@ export default function AccountsList({
         />
       </View>
     </>
-  );
+  )
 }

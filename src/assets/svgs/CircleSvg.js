@@ -1,22 +1,16 @@
-import React from 'react';
-import { Svg, Path } from 'react-native-svg';
+import React from 'react'
+import { Svg, Path } from 'react-native-svg'
 
-import colors from 'constants/styleGuide/colors';
+import colors from 'constants/styleGuide/colors'
 
 export default function CircleSvg({
   color = colors.light.blueGray,
   height = 24,
   width = 24,
-  style
+  style,
 }) {
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 24 24"
-      fill="none"
-      style={style}
-    >
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none" style={style}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -24,5 +18,5 @@ export default function CircleSvg({
         fill={color}
       />
     </Svg>
-  );
+  )
 }

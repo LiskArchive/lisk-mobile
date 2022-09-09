@@ -1,5 +1,5 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
-import { setColorOpacity } from 'utilities/helpers';
+import { themes, colors, boxes } from 'constants/styleGuide'
+import { setColorOpacity } from 'utilities/helpers'
 
 export default () => ({
   common: {
@@ -51,4 +51,4 @@ export default () => ({
       color: colors.dark.slateGray,
     },
   },
-});
+})

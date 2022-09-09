@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, Image } from 'react-native';
-import { themes } from 'constants/styleGuide';
-import noActivityLight from 'assets/images/loading3xLight.png';
-import noActivityDark from 'assets/images/loading3xDark.png';
-import withTheme from 'components/shared/withTheme';
-import getStyles from './styles';
+import React from 'react'
+import { View, Image } from 'react-native'
+import { themes } from 'constants/styleGuide'
+import noActivityLight from 'assets/images/loading3xLight.png'
+import noActivityDark from 'assets/images/loading3xDark.png'
+import withTheme from 'components/shared/withTheme'
+import getStyles from './styles'
 
 const LoadingState = ({ theme, styles, style = {} }) => (
   <View style={[styles.loadingState, style]}>
@@ -14,6 +14,6 @@ const LoadingState = ({ theme, styles, style = {} }) => (
       <Image source={noActivityDark} style={styles.loading} />
     )}
   </View>
-);
+)
 
-export default withTheme(LoadingState, getStyles());
+export default withTheme(LoadingState, getStyles())

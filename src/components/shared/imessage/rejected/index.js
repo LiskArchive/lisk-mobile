@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Image } from 'react-native';
-import { B } from '../../toolBox/typography';
-import styles from './styles';
+import React from 'react'
+import { View, Image } from 'react-native'
+import { B } from '../../toolBox/typography'
+import styles from './styles'
 
 const Rejected = ({ sharedData: { amount }, status }) => (
   <View style={styles.container}>
@@ -12,6 +12,6 @@ const Rejected = ({ sharedData: { amount }, status }) => (
       </B>
     </View>
   </View>
-);
+)
 
-export default Rejected;
+export default Rejected

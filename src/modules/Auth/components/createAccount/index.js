@@ -1,12 +1,10 @@
-import React from 'react';
-import { Animated } from 'react-native';
-import { translate } from 'react-i18next';
-import { P, A } from 'components/shared/toolBox/typography';
-import styles from './styles';
+import React from 'react'
+import { Animated } from 'react-native'
+import { translate } from 'react-i18next'
+import { P, A } from 'components/shared/toolBox/typography'
+import styles from './styles'
 
-const CreateAccount = ({
-  t, onPress, style, opacity = 1
-}) => (
+const CreateAccount = ({ t, onPress, style, opacity = 1 }) => (
   <Animated.View style={[styles.linkWrapper, style, { opacity }]}>
     <P style={styles.question}>{t('Don’t have a Lisk Account?')}</P>
 
@@ -14,6 +12,6 @@ const CreateAccount = ({
       {t('Create it now')}
     </A>
   </Animated.View>
-);
+)
 
-export default translate()(CreateAccount);
+export default translate()(CreateAccount)

@@ -1,95 +1,95 @@
-import React from 'react';
-import { renderHook, act } from '@testing-library/react-hooks';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
+import React from 'react'
+import { renderHook, act } from '@testing-library/react-hooks'
+import configureMockStore from 'redux-mock-store'
+import { Provider } from 'react-redux'
 
-import { mockApplicationsMeta } from '../__fixtures__';
-import actionTypes from '../store/actionTypes';
-import { usePinBlockchainApplication } from './usePinBlockchainApplication';
+import { mockApplicationsMeta } from '../__fixtures__'
+import actionTypes from '../store/actionTypes'
+import { usePinBlockchainApplication } from './usePinBlockchainApplication'
 
-const mockStore = configureMockStore();
-const mockDispatch = jest.fn();
+const mockStore = configureMockStore()
+const mockDispatch = jest.fn()
 const mockState = {
   blockchainApplications: {
     pins: mockApplicationsMeta.map(({ chainID }) => chainID),
   },
-};
+}
 
 const ReduxProvider = ({ children, reduxStore }) => (
   <Provider store={reduxStore}>{children}</Provider>
-);
+)
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn().mockImplementation((fn) => fn(mockState)),
   useDispatch: () => mockDispatch,
-}));
+}))
 
 describe('usePinBlockchainApplication hook', () => {
-  const store = mockStore(mockState);
+  const store = mockStore(mockState)
 
-  const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>;
+  const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
 
   beforeEach(() => {
-    mockDispatch.mockClear();
-  });
+    mockDispatch.mockClear()
+  })
 
-  const { result } = renderHook(() => usePinBlockchainApplication(), { wrapper });
+  const { result } = renderHook(() => usePinBlockchainApplication(), { wrapper })
 
   it('togglePin should not be triggered on mounting', async () => {
-    expect(store.getActions()).toEqual([]);
-  });
+    expect(store.getActions()).toEqual([])
+  })
 
   it('togglePin should dispatch an action', async () => {
-    const { togglePin } = result.current;
+    const { togglePin } = result.current
 
-    const chainId = mockApplicationsMeta[0].chainID;
+    const chainId = mockApplicationsMeta[0].chainID
 
     const expectedAction = {
       type: actionTypes.toggleApplicationPin,
       chainId,
-    };
+    }
 
     act(() => {
-      togglePin(chainId);
-    });
+      togglePin(chainId)
+    })
 
-    expect(store.getActions()).toEqual([expectedAction]);
-  });
+    expect(store.getActions()).toEqual([expectedAction])
+  })
 
   it('should return pins as an array', async () => {
-    const { pins, togglePin } = result.current;
-    const chainId = mockApplicationsMeta[0].chainID;
+    const { pins, togglePin } = result.current
+    const chainId = mockApplicationsMeta[0].chainID
 
     act(() => {
-      togglePin(chainId);
-    });
+      togglePin(chainId)
+    })
 
-    const expectPins = mockApplicationsMeta.map(({ chainID }) => chainID);
+    const expectPins = mockApplicationsMeta.map(({ chainID }) => chainID)
 
-    expect(pins).toEqual(expect.arrayContaining(expectPins));
-  });
+    expect(pins).toEqual(expect.arrayContaining(expectPins))
+  })
 
   it('should flag chain as a pinned application', async () => {
-    const { checkPinByChainId, togglePin } = result.current;
-    const chainId = mockApplicationsMeta[0].chainID;
+    const { checkPinByChainId, togglePin } = result.current
+    const chainId = mockApplicationsMeta[0].chainID
 
     act(() => {
-      togglePin(chainId);
-    });
-    expect(checkPinByChainId(chainId)).toBeTruthy();
-  });
+      togglePin(chainId)
+    })
+    expect(checkPinByChainId(chainId)).toBeTruthy()
+  })
 
   it('should not flag chain as a pinned application', async () => {
-    mockState.blockchainApplications.pins = [];
+    mockState.blockchainApplications.pins = []
 
     const {
       result: {
         current: { checkPinByChainId },
       },
-    } = renderHook(() => usePinBlockchainApplication(), { wrapper });
+    } = renderHook(() => usePinBlockchainApplication(), { wrapper })
 
-    const chainId = mockApplicationsMeta[0].chainID;
+    const chainId = mockApplicationsMeta[0].chainID
 
-    expect(checkPinByChainId(chainId)).not.toBeTruthy();
-  });
-});
+    expect(checkPinByChainId(chainId)).not.toBeTruthy()
+  })
+})

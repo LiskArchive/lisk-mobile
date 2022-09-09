@@ -1,15 +1,15 @@
-import * as storageUtility from 'utilities/storage';
-import app from 'constants/app';
-import { settingsUpdated, settingsRetrieved } from './settings';
-import actionTypes from '../actionTypes';
+import * as storageUtility from 'utilities/storage'
+import app from 'constants/app'
+import { settingsUpdated, settingsRetrieved } from './settings'
+import actionTypes from '../actionTypes'
 
 const settings = {
   sensorType: app.faceId,
-};
+}
 
 const store = {
   dispatch: jest.fn(),
-};
+}
 
 describe('actions: settings', () => {
   describe('settingsUpdated', () => {
@@ -17,24 +17,24 @@ describe('actions: settings', () => {
       const expectedAction = {
         data: settings,
         type: actionTypes.settingsUpdated,
-      };
-      expect(settingsUpdated(settings)).toEqual(expectedAction);
-    });
-  });
+      }
+      expect(settingsUpdated(settings)).toEqual(expectedAction)
+    })
+  })
 
   describe('settingsRetrieved', () => {
     beforeEach(() => {
-      storageUtility.getSettings = jest.fn();
-    });
+      storageUtility.getSettings = jest.fn()
+    })
 
     it('should retrieve settings from storage and dispatch action', async () => {
       const expectedAction = {
         data: settings,
         type: actionTypes.settingsRetrieved,
-      };
-      storageUtility.getSettings.mockResolvedValue(settings);
-      await settingsRetrieved()(store.dispatch);
-      expect(store.dispatch).toBeCalledWith(expectedAction);
-    });
-  });
-});
+      }
+      storageUtility.getSettings.mockResolvedValue(settings)
+      await settingsRetrieved()(store.dispatch)
+      expect(store.dispatch).toBeCalledWith(expectedAction)
+    })
+  })
+})

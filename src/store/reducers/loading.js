@@ -1,4 +1,4 @@
-import actionTypes from 'constants/actions';
+import actionTypes from 'constants/actions'
 
 /**
  * This reducer is designed to store and retrieve the required data
@@ -12,12 +12,12 @@ import actionTypes from 'constants/actions';
 const dialog = (state = [], action = {}) => {
   switch (action.type) {
     case actionTypes.loadingStarted:
-      return [...state, action.data];
+      return [...state, action.data]
     case actionTypes.loadingFinished:
-      return state.filter(item => item !== action.data);
+      return state.filter((item) => item !== action.data)
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default dialog;
+export default dialog

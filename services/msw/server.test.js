@@ -1,11 +1,11 @@
-import { server } from './server';
+import { server } from './server'
 
 jest.mock('msw/node', () => ({
   setupServer: jest.fn(() => 'foo'),
-}));
+}))
 
 describe('useGetNetworkStatusQuery hook', () => {
   it('fetching data correctly', async () => {
-    expect(server).toEqual('foo');
-  });
-});
+    expect(server).toEqual('foo')
+  })
+})

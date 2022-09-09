@@ -1,9 +1,9 @@
-import { themes, colors, fonts } from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide'
 
 export default {
   common: {
     switcherContainer: {
-      alignItems: 'center'
+      alignItems: 'center',
     },
     container: {
       overflow: 'hidden',
@@ -30,22 +30,22 @@ export default {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.small,
       marginRight: 10,
-    }
+    },
   },
   [themes.light]: {
     container: {
-      backgroundColor: colors.light.white
+      backgroundColor: colors.light.white,
     },
     appName: {
-      color: colors.light.zodiacBlue
-    }
+      color: colors.light.zodiacBlue,
+    },
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.mainBg
+      backgroundColor: colors.dark.mainBg,
     },
     appName: {
-      color: colors.dark.white
-    }
+      color: colors.dark.white,
+    },
   },
-};
+}

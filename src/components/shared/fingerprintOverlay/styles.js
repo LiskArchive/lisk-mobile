@@ -1,4 +1,4 @@
-import { colors } from 'constants/styleGuide';
+import { colors } from 'constants/styleGuide'
 
 export default () => ({
   common: {
@@ -55,4 +55,4 @@ export default () => ({
       marginTop: 15,
     },
   },
-});
+})

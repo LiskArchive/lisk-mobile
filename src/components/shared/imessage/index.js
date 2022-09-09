@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
+import React, { Component } from 'react'
+import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native'
 
-import { getPassphraseFromKeyChain } from 'modules/Auth/utils';
-import { languageMap } from 'constants/languages';
-import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
-import ThemeContext from '../../../contexts/theme';
-import Confirm from './confirm';
-import Pending from './pending';
-import Form from './form';
-import Rejected from './rejected';
-import SignInWarning from './signInWarning';
-import DevSettings from './devSettings';
+import { getPassphraseFromKeyChain } from 'modules/Auth/utils'
+import { languageMap } from 'constants/languages'
+import TransactionDetails from 'modules/Transactions/components/TransactionDetails'
+import ThemeContext from '../../../contexts/theme'
+import Confirm from './confirm'
+import Pending from './pending'
+import Form from './form'
+import Rejected from './rejected'
+import SignInWarning from './signInWarning'
+import DevSettings from './devSettings'
 
-const { MessagesManager } = NativeModules;
-const MessagesEvents = new NativeEventEmitter(MessagesManager);
+const { MessagesManager } = NativeModules
+const MessagesEvents = new NativeEventEmitter(MessagesManager)
 
 class LiskMessageExtension extends Component {
   state = {
@@ -28,15 +28,15 @@ class LiskMessageExtension extends Component {
     message: {},
     conversation: '',
     state: 'requested',
-  };
+  }
 
   setAccount = () => {
-    getPassphraseFromKeyChain().then(account => {
+    getPassphraseFromKeyChain().then((account) => {
       if (account) {
         this.userData = {
           passphrase: account.password,
           address: account.username,
-        };
+        }
         this.setState(
           {
             passphrase: account.password,
@@ -47,12 +47,12 @@ class LiskMessageExtension extends Component {
             avatarPreview: true,
           },
           () => setTimeout(() => MessagesManager.hideLaunchScreen(), 100)
-        );
+        )
       } else {
-        MessagesManager.hideLaunchScreen();
+        MessagesManager.hideLaunchScreen()
       }
-    });
-  };
+    })
+  }
 
   getMessageExcerpt = () => {
     MessagesManager.getActiveConversation((conversation, message) =>
@@ -60,32 +60,31 @@ class LiskMessageExtension extends Component {
         conversation,
         message,
         parsedData: message.url ? this.parseUrl(message.url) : {},
-      }));
-  };
+      })
+    )
+  }
 
   setPresentationStyle = () => {
-    MessagesManager.getPresentationStyle(presentationStyle =>
-      this.setState({ presentationStyle }));
-  };
+    MessagesManager.getPresentationStyle((presentationStyle) =>
+      this.setState({ presentationStyle })
+    )
+  }
 
   bindPresentationStyleChanged = () => {
-    MessagesEvents.addListener(
-      'onPresentationStyleChanged',
-      ({ presentationStyle }) => this.setState({ presentationStyle })
-    );
-  };
+    MessagesEvents.addListener('onPresentationStyleChanged', ({ presentationStyle }) =>
+      this.setState({ presentationStyle })
+    )
+  }
 
   bindMessageSelected = () => {
-    MessagesEvents.addListener(
-      'didSelectMessage',
-      ({ conversation, message }) =>
-        this.setState({
-          conversation,
-          message,
-          parsedData: this.parseUrl(message.url),
-        })
-    );
-  };
+    MessagesEvents.addListener('didSelectMessage', ({ conversation, message }) =>
+      this.setState({
+        conversation,
+        message,
+        parsedData: this.parseUrl(message.url),
+      })
+    )
+  }
 
   bindStartedSendingMessage = () => {
     MessagesEvents.addListener('didStartSendingMessage', ({ conversation }) =>
@@ -98,35 +97,30 @@ class LiskMessageExtension extends Component {
           value: this.userData.address || '',
           validity: -1,
         },
-      }));
-  };
+      })
+    )
+  }
 
   bindKeyBoardFocused = () => {
-    MessagesManager.updatePresentationStyle('expanded');
-  };
+    MessagesManager.updatePresentationStyle('expanded')
+  }
 
   componentDidMount = () => {
-    this.setAccount();
-    this.getMessageExcerpt();
-    this.setPresentationStyle();
-    this.bindPresentationStyleChanged();
-    this.bindMessageSelected();
-    this.bindStartedSendingMessage();
-  };
+    this.setAccount()
+    this.getMessageExcerpt()
+    this.setPresentationStyle()
+    this.bindPresentationStyleChanged()
+    this.bindMessageSelected()
+    this.bindStartedSendingMessage()
+  }
 
-  composeMessage = ({
-    address,
-    amount,
-    state = 'requested',
-    id,
-    recipientAddress,
-  }) => {
+  composeMessage = ({ address, amount, state = 'requested', id, recipientAddress }) => {
     if (address.validity !== 1) {
-      const recipient = `&recipientAddress=${recipientAddress}`;
-      const txID = id ? `&txID=${id}` : '';
-      const url = `?address=${address.value}&amount=${amount}&state=${state}${txID}${recipient}`;
-      MessagesManager.updatePresentationStyle('compact');
-      this.setState({ state });
+      const recipient = `&recipientAddress=${recipientAddress}`
+      const txID = id ? `&txID=${id}` : ''
+      const url = `?address=${address.value}&amount=${amount}&state=${state}${txID}${recipient}`
+      MessagesManager.updatePresentationStyle('compact')
+      this.setState({ state })
       MessagesManager.composeMessage({
         summaryText: state === 'requested' ? `${state} ${amount} LSK` : '',
         url,
@@ -139,27 +133,25 @@ class LiskMessageExtension extends Component {
       })
         .then(() => true)
         // eslint-disable-next-line no-console
-        .catch(console.log);
+        .catch(console.log)
     }
-  };
+  }
 
   onTogglePresentationStyle = () => {
     MessagesManager.updatePresentationStyle(
       this.state.presentationStyle === 'expanded' ? 'compact' : 'expanded'
     )
-      .then(presentationStyle => this.setState({ presentationStyle }))
+      .then((presentationStyle) => this.setState({ presentationStyle }))
       // eslint-disable-next-line no-console
-      .catch(console.log);
-  };
+      .catch(console.log)
+  }
 
-  parseUrl = url => {
-    const parsedData = url
-      .substring(1)
-      .replace(/&/g, '","')
-      .replace(/=/g, '":"');
+  parseUrl = (url) => {
+    const parsedData = url.substring(1).replace(/&/g, '","').replace(/=/g, '":"')
     return JSON.parse(`{"${parsedData}"}`, (key, value) =>
-      key === '' ? value : decodeURIComponent(value));
-  };
+      key === '' ? value : decodeURIComponent(value)
+    )
+  }
 
   render() {
     const {
@@ -171,19 +163,19 @@ class LiskMessageExtension extends Component {
       passphrase,
       presentationStyle,
       conversation,
-    } = this.state;
-    const language = languageMap.en.code;
+    } = this.state
+    const language = languageMap.en.code
 
-    const isSender = conversation.localParticipiantIdentifier
-      === message.senderParticipantIdentifier;
+    const isSender =
+      conversation.localParticipiantIdentifier === message.senderParticipantIdentifier
 
     const Element = () => {
       if (message.url) {
         switch (parsedData.state) {
           case 'rejected':
-            return <Rejected status="rejected" sharedData={parsedData} />;
+            return <Rejected status="rejected" sharedData={parsedData} />
           case 'transferred':
-            return <TransactionDetails transactionId={parsedData.txID}/>;
+            return <TransactionDetails transactionId={parsedData.txID} />
           default:
             return isSender ? (
               <Pending sharedData={parsedData} />
@@ -197,13 +189,13 @@ class LiskMessageExtension extends Component {
                 composeMessage={this.composeMessage}
                 language={language}
               />
-            );
+            )
         }
       }
-      return null;
-    };
+      return null
+    }
 
-    let content = <SignInWarning />;
+    let content = <SignInWarning />
 
     if (passphrase) {
       content = message.url ? (
@@ -217,20 +209,18 @@ class LiskMessageExtension extends Component {
           inputAddress={address}
           composeMessage={this.composeMessage}
         />
-      );
+      )
     }
 
     return (
       <ThemeContext.Provider value="light">
-        <ScrollView
-          contentContainerStyle={{ flex: 1, backgroundColor: '#F5F7FA' }}
-        >
+        <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#F5F7FA' }}>
           {process.env.NODE_ENV === 'development' && <DevSettings />}
           {content}
         </ScrollView>
       </ThemeContext.Provider>
-    );
+    )
   }
 }
 
-export default LiskMessageExtension;
+export default LiskMessageExtension

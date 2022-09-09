@@ -1,11 +1,11 @@
-import { Platform, Dimensions } from 'react-native';
-import { colors, themes } from 'constants/styleGuide';
+import { Platform, Dimensions } from 'react-native'
+import { colors, themes } from 'constants/styleGuide'
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
-const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
+const { height: SCREEN_HEIGHT } = Dimensions.get('window')
+const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896
 // eslint-disable-next-line no-nested-ternary
-const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
-const DEFAULT_TITLE_COLOR = 'white';
+const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0
+const DEFAULT_TITLE_COLOR = 'white'
 
 export default () => ({
   common: {
@@ -52,12 +52,12 @@ export default () => ({
   },
   [themes.light]: {
     container: {
-      backgroundColor: colors.light.ultramarineBlue
-    }
+      backgroundColor: colors.light.ultramarineBlue,
+    },
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.light.inkBlue
-    }
-  }
-});
+      backgroundColor: colors.light.inkBlue,
+    },
+  },
+})

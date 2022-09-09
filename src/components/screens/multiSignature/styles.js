@@ -1,10 +1,10 @@
-import { themes, colors, fonts } from 'constants/styleGuide';
-import { setColorOpacity } from 'utilities/helpers';
+import { themes, colors, fonts } from 'constants/styleGuide'
+import { setColorOpacity } from 'utilities/helpers'
 
 export default () => ({
   common: {
     container: {
-      padding: 20
+      padding: 20,
     },
     header: {
       paddingTop: 20,
@@ -14,14 +14,14 @@ export default () => ({
       marginBottom: 10,
     },
     row: {
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
     infoContainer: {
       paddingTop: 15,
     },
     signatureList: {
       paddingVertical: 10,
-      alignItems: 'center'
+      alignItems: 'center',
     },
     signatureListContainer: {
       marginTop: 20,
@@ -45,7 +45,7 @@ export default () => ({
     },
     number: {
       width: 25,
-    }
+    },
   },
   [themes.light]: {
     container: {
@@ -53,17 +53,17 @@ export default () => ({
       flex: 1,
     },
     copy: {
-      color: colors.light.zodiacBlue
+      color: colors.light.zodiacBlue,
     },
     light: {
-      color: colors.light.blueGray
+      color: colors.light.blueGray,
     },
     signatureListContainer: {
-      borderBottomColor: setColorOpacity(colors.light.black, 0.15)
+      borderBottomColor: setColorOpacity(colors.light.black, 0.15),
     },
     moreButton: {
-      color: colors.light.ultramarineBlue
-    }
+      color: colors.light.ultramarineBlue,
+    },
   },
   [themes.dark]: {
     container: {
@@ -71,16 +71,16 @@ export default () => ({
       flex: 1,
     },
     copy: {
-      color: colors.dark.white
+      color: colors.dark.white,
     },
     light: {
-      color: colors.light.mountainMist
+      color: colors.light.mountainMist,
     },
     signatureListContainer: {
-      borderBottomColor: setColorOpacity(colors.dark.white, 0.3)
+      borderBottomColor: setColorOpacity(colors.dark.white, 0.3),
     },
     moreButton: {
-      color: colors.dark.ultramarineBlue
-    }
-  }
-});
+      color: colors.dark.ultramarineBlue,
+    },
+  },
+})

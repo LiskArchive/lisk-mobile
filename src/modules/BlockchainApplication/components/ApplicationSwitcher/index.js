@@ -1,33 +1,22 @@
-import React from 'react';
-import {
-  View, Animated, Image, TouchableOpacity
-} from 'react-native';
-import { useTheme } from 'hooks/useTheme';
-import { P } from 'components/shared/toolBox/typography';
-import ChangeSvg from 'assets/svgs/ChangeSvg';
-import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
-import getStyles from './styles';
+import React from 'react'
+import { View, Animated, Image, TouchableOpacity } from 'react-native'
+import { useTheme } from 'hooks/useTheme'
+import { P } from 'components/shared/toolBox/typography'
+import ChangeSvg from 'assets/svgs/ChangeSvg'
+import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication'
+import getStyles from './styles'
 
 const ApplicationSwitcher = ({ onPress }) => {
-  const { styles } = useTheme({ styles: getStyles });
-  const [currentApplication] = useCurrentBlockchainApplication();
+  const { styles } = useTheme({ styles: getStyles })
+  const [currentApplication] = useCurrentBlockchainApplication()
 
   return (
     <View style={styles.switcherContainer}>
-      <TouchableOpacity onPress={onPress} >
+      <TouchableOpacity onPress={onPress}>
         <View style={[styles.container, styles.theme.container]}>
-          <Animated.View
-            style={[
-              styles.switch,
-            ]}
-          >
-            <Image
-              source={{ uri: currentApplication.logo.png }}
-              style={[styles.avatar]}
-            />
-            <P style={[styles.appName, styles.theme.appName]}>
-              {currentApplication.chainName}
-            </P>
+          <Animated.View style={[styles.switch]}>
+            <Image source={{ uri: currentApplication.logo.png }} style={[styles.avatar]} />
+            <P style={[styles.appName, styles.theme.appName]}>{currentApplication.chainName}</P>
             <View style={styles.iconContainer}>
               <ChangeSvg />
             </View>
@@ -35,7 +24,7 @@ const ApplicationSwitcher = ({ onPress }) => {
         </View>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
-export default ApplicationSwitcher;
+export default ApplicationSwitcher

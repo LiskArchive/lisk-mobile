@@ -1,5 +1,5 @@
-import React from 'react';
-import { Svg, Path, Mask } from 'react-native-svg';
+import React from 'react'
+import { Svg, Path, Mask } from 'react-native-svg'
 
 export default ({ size = 0.8 }) => (
   <Svg
@@ -104,4 +104,4 @@ export default ({ size = 0.8 }) => (
       fill="#C5CFE4"
     />
   </Svg>
-);
+)

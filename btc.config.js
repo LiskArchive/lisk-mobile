@@ -1,7 +1,7 @@
-import { networks } from 'bitcoinjs-lib';
-import URLs from './src/constants/URLs';
+import { networks } from 'bitcoinjs-lib'
+import URLs from './src/constants/URLs'
 
-const isTestnet = process.env.network === 'testnet';
+const isTestnet = process.env.network === 'testnet'
 
 export default {
   isTestnet,
@@ -9,9 +9,7 @@ export default {
   minerFeesURL: URLs.BTCMinerFees,
   network: isTestnet ? networks.testnet : networks.bitcoin,
   derivationPath: isTestnet ? "m/44'/1'/0'/0/0" : "m/44'/0'/0'/0/0",
-  transactionExplorerURL: `https://www.blockchain.com/${
-    isTestnet ? 'btctest' : 'btc'
-  }/tx`,
+  transactionExplorerURL: `https://www.blockchain.com/${isTestnet ? 'btctest' : 'btc'}/tx`,
   requestOptions: {
     method: 'GET',
     headers: {
@@ -19,4 +17,4 @@ export default {
       'Content-Type': 'application/json',
     },
   },
-};
+}

@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide'
 
 export default () => ({
   common: {
@@ -11,7 +11,7 @@ export default () => ({
     qrCodeContainer: {
       marginTop: boxes.boxPadding,
       alignItems: 'center',
-      paddingBottom: 60
+      paddingBottom: 60,
     },
     text: {
       marginBottom: 28,
@@ -50,4 +50,4 @@ export default () => ({
       color: colors.dark.ghost,
     },
   },
-});
+})

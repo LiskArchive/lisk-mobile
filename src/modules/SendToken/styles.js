@@ -1,10 +1,10 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native'
 
-import { themes, colors } from 'constants/styleGuide';
-import { deviceType } from 'utilities/device';
+import { themes, colors } from 'constants/styleGuide'
+import { deviceType } from 'utilities/device'
 
-const { height } = Dimensions.get('window');
-const navigatorHeight = 75 + (deviceType() === 'iOSx' ? 23 : 0);
+const { height } = Dimensions.get('window')
+const navigatorHeight = 75 + (deviceType() === 'iOSx' ? 23 : 0)
 
 export function getSendTokenStyles() {
   return {
@@ -14,11 +14,11 @@ export function getSendTokenStyles() {
         height: '100%',
       },
       header: {
-        marginBottom: 8
+        marginBottom: 8,
       },
       progressBar: {
-        marginBottom: 16
-      }
+        marginBottom: 16,
+      },
     },
     [themes.light]: {
       wrapper: {
@@ -30,7 +30,7 @@ export function getSendTokenStyles() {
         backgroundColor: colors.dark.mainBg,
       },
     },
-  };
+  }
 }
 
 export const sendTokenNavStyles = StyleSheet.create({
@@ -90,4 +90,4 @@ export const sendTokenNavStyles = StyleSheet.create({
   progressStepContainer: {
     backgroundColor: colors.light.ghost,
   },
-});
+})

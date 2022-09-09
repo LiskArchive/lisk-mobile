@@ -1,3 +1,3 @@
-const selectSettings = state => state.settings;
+const selectSettings = (state) => state.settings
 
-export { selectSettings };
+export { selectSettings }

@@ -1,5 +1,5 @@
-import { fonts, themes, colors } from 'constants/styleGuide';
-import { deviceType } from 'utilities/device';
+import { fonts, themes, colors } from 'constants/styleGuide'
+import { deviceType } from 'utilities/device'
 
 export default () => ({
   common: {
@@ -22,4 +22,4 @@ export default () => ({
       color: colors.dark.white,
     },
   },
-});
+})

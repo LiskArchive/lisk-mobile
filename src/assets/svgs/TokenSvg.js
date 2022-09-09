@@ -1,14 +1,10 @@
 /* eslint-disable complexity */
-import React from 'react';
-import {
-  Svg, Path, Mask, G, Rect, Defs, Use, Pattern, Image
-} from 'react-native-svg';
+import React from 'react'
+import { Svg, Path, Mask, G, Rect, Defs, Use, Pattern, Image } from 'react-native-svg'
 
-export default function TokenSvg({
-  height = 24, width = 24, style, symbol = 'LSK'
-}) {
-  let children;
-  let viewBox = '0 0 24 24';
+export default function TokenSvg({ height = 24, width = 24, style, symbol = 'LSK' }) {
+  let children
+  let viewBox = '0 0 24 24'
 
   switch (symbol) {
     case 'LSK':
@@ -24,23 +20,33 @@ export default function TokenSvg({
             d="M11.9386 4.83059C11.9288 4.78987 11.8794 4.78987 11.8597 4.83059L10.7145 6.84653C10.7046 6.8669 10.7046 6.88726 10.7145 6.89744L11.8992 8.99483L15.0386 14.5539C15.0485 14.5743 15.0485 14.5947 15.0287 14.615L13.3701 16.5291L11.603 18.5858C11.5734 18.6164 11.5931 18.6673 11.6425 18.6673H14.2883C14.2982 18.6673 14.3179 18.6571 14.3278 18.6469L17.5857 14.8696C17.5955 14.8492 17.6054 14.8288 17.5955 14.8085L11.9386 4.83059ZM10.6948 18.6518C10.702 18.6466 10.7092 18.6414 10.714 18.6362L12.4175 16.5636C12.4463 16.5325 12.4271 16.4807 12.3793 16.4807H10.5034C10.4938 16.4807 10.4747 16.4704 10.4651 16.46L8.87642 14.5325C8.86685 14.5118 8.85728 14.491 8.86685 14.4703L11.5275 9.52719C11.537 9.50647 11.537 9.48574 11.5275 9.47538L10.4269 7.42352C10.4077 7.39243 10.3599 7.39243 10.3407 7.42352L6.4072 14.7398C6.39763 14.7605 6.39763 14.7812 6.4072 14.8019L9.5655 18.6466C9.57507 18.6569 9.58464 18.6673 9.60378 18.6673H10.6757C10.6805 18.6621 10.6877 18.6569 10.6948 18.6518Z"
             fill="white"
           />
-       </>
-      );
-      break;
+        </>
+      )
+      break
 
     case 'COL':
       children = (
         <>
-          <Path fillRule="evenodd" clipRule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#F7F8F9"/>
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+            fill="#F7F8F9"
+          />
           <Mask id="mask0_76_12057" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-            <Path fillRule="evenodd" clipRule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#ffffff"/>
+            <Path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+              fill="#ffffff"
+            />
           </Mask>
           <G mask="url(#mask0_76_12057)">
-            <Rect width="24" height="24" fill="url(#pattern2)"/>
+            <Rect width="24" height="24" fill="url(#pattern2)" />
           </G>
           <Defs>
             <Pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <Use transform="scale(0.0025)" href="#image0_76_12057"/>
+              <Use transform="scale(0.0025)" href="#image0_76_12057" />
             </Pattern>
             <Image
               id="image0_76_12057"
@@ -50,22 +56,25 @@ export default function TokenSvg({
             />
           </Defs>
         </>
-      );
-      break;
+      )
+      break
 
     case 'TKN':
-      viewBox = '0 0 25 24';
+      viewBox = '0 0 25 24'
       children = (
         <>
           <Mask id="mask0_76_12070" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
-            <Path d="M23.6408 15.4029C22.0379 21.8315 15.5261 25.7438 9.09602 24.1407C2.66858 22.538 -1.24421 16.0266 0.359461 9.59838C1.96163 3.16907 8.47345 -0.743639 14.9016 0.859095C21.3313 2.46183 25.2437 8.97401 23.6408 15.4029Z" fill="#F7931A"/>
+            <Path
+              d="M23.6408 15.4029C22.0379 21.8315 15.5261 25.7438 9.09602 24.1407C2.66858 22.538 -1.24421 16.0266 0.359461 9.59838C1.96163 3.16907 8.47345 -0.743639 14.9016 0.859095C21.3313 2.46183 25.2437 8.97401 23.6408 15.4029Z"
+              fill="#F7931A"
+            />
           </Mask>
           <G mask="url(#mask0_76_12070)">
-            <Rect y="0.5" width="24" height="24" fill="url(#pattern0)"/>
+            <Rect y="0.5" width="24" height="24" fill="url(#pattern0)" />
           </G>
           <Defs>
             <Pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <Use href="#image0_76_12070" transform="scale(0.0025)"/>
+              <Use href="#image0_76_12070" transform="scale(0.0025)" />
             </Pattern>
             <Image
               id="image0_76_12070"
@@ -75,22 +84,40 @@ export default function TokenSvg({
             />
           </Defs>
         </>
-      );
-      break;
+      )
+      break
 
     case 'DOE':
       children = (
         <>
-          <Path fillRule="evenodd" clipRule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#182538"/>
-          <Mask id="mask0_377_14911" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-            <Path fillRule="evenodd" clipRule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="white"/>
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+            fill="#182538"
+          />
+          <Mask
+            id="mask0_377_14911"
+            style="mask-type:alpha"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="24"
+            height="24"
+          >
+            <Path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+              fill="white"
+            />
           </Mask>
           <G mask="url(#mask0_377_14911)">
-            <Rect x="4.79999" y="4.80005" width="14.4" height="14.4" fill="url(#pattern0)"/>
+            <Rect x="4.79999" y="4.80005" width="14.4" height="14.4" fill="url(#pattern0)" />
           </G>
           <Defs>
             <Pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <Use href="#image0_377_14911" transform="scale(0.015625)"/>
+              <Use href="#image0_377_14911" transform="scale(0.015625)" />
             </Pattern>
             <Image
               id="image0_377_14911"
@@ -100,22 +127,16 @@ export default function TokenSvg({
             />
           </Defs>
         </>
-      );
-      break;
+      )
+      break
 
     default:
-      break;
+      break
   }
 
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox={viewBox}
-      fill="none"
-      style={style}
-    >
+    <Svg width={width} height={height} viewBox={viewBox} fill="none" style={style}>
       {children}
     </Svg>
-  );
+  )
 }

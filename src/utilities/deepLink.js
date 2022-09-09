@@ -1,18 +1,18 @@
-import URL from 'url-parse';
-import { tokenMap } from 'constants/tokens';
+import URL from 'url-parse'
+import { tokenMap } from 'constants/tokens'
 
 export function parseDeepLink(deepLinkURL) {
-  const { hostname, pathname, query } = new URL(deepLinkURL, true);
-  const path = hostname === 'main' ? `main${pathname}` : hostname;
-  return { path, query };
+  const { hostname, pathname, query } = new URL(deepLinkURL, true)
+  const path = hostname === 'main' ? `main${pathname}` : hostname
+  return { path, query }
 }
 
 export default function deepLinkMapper(deepLinkURL) {
   if (!deepLinkURL) {
-    return null;
+    return null
   }
 
-  const { path, query } = parseDeepLink(deepLinkURL);
+  const { path, query } = parseDeepLink(deepLinkURL)
 
   switch (path) {
     case 'wallet':
@@ -27,12 +27,12 @@ export default function deepLinkMapper(deepLinkURL) {
             reference: query.reference,
           },
         },
-      };
+      }
 
     case 'request':
       return {
         name: 'Request',
-      };
+      }
 
     case 'transactions':
       return {
@@ -40,7 +40,7 @@ export default function deepLinkMapper(deepLinkURL) {
         params: {
           transactionId: query.id,
         },
-      };
+      }
 
     case 'home':
       return {
@@ -48,9 +48,9 @@ export default function deepLinkMapper(deepLinkURL) {
         params: {
           discreet: query.discreet,
         },
-      };
+      }
 
     default:
-      return null;
+      return null
   }
 }

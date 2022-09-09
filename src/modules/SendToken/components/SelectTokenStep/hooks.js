@@ -1,36 +1,39 @@
 /* eslint-disable max-statements */
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { pricesRetrieved } from '../../../../actions/service';
+import { pricesRetrieved } from '../../../../actions/service'
 
 export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const priceTicker = useSelector(state => state.service.priceTicker);
-  const accountSettings = useSelector(state => state.settings);
+  const priceTicker = useSelector((state) => state.service.priceTicker)
+  const accountSettings = useSelector((state) => state.settings)
 
   useEffect(() => {
-    dispatch(pricesRetrieved());
-  }, [dispatch]);
+    dispatch(pricesRetrieved())
+  }, [dispatch])
 
-  if (tokenSymbol !== 'LSK') return null;
+  if (tokenSymbol !== 'LSK') return null
 
-  let rawAmountInCurrency = 0;
+  let rawAmountInCurrency = 0
 
   if (tokenAmount) {
     rawAmountInCurrency = (
       tokenAmount * priceTicker[accountSettings.token.active][accountSettings.currency]
-    ).toFixed(2);
+    ).toFixed(2)
   }
 
   function localizeAmount(amount) {
-    return Number(amount).toLocaleString(`${accountSettings.language}-${accountSettings.language?.toUpperCase()}`, {
-      maximumFractionDigits: 20
-    });
+    return Number(amount).toLocaleString(
+      `${accountSettings.language}-${accountSettings.language?.toUpperCase()}`,
+      {
+        maximumFractionDigits: 20,
+      }
+    )
   }
 
-  const tokenAmountInCurrency = localizeAmount(rawAmountInCurrency);
+  const tokenAmountInCurrency = localizeAmount(rawAmountInCurrency)
 
-  return { amount: tokenAmountInCurrency, currency: accountSettings.currency };
+  return { amount: tokenAmountInCurrency, currency: accountSettings.currency }
 }

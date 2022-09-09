@@ -1,26 +1,19 @@
-import React from 'react';
+import React from 'react'
 import {
   View,
   // TouchableHighlight,
   // Platform,
-} from 'react-native';
+} from 'react-native'
 // import OpenAppSettings from 'react-native-app-settings';
-import { translate } from 'react-i18next';
+import { translate } from 'react-i18next'
 // import Icon from '../toolBox/icon';
-import { colors } from 'constants/styleGuide';
-import { IconButton } from '../toolBox/button';
-import { P } from '../toolBox/typography';
-import withTheme from '../withTheme';
-import getStyles from './styles';
+import { colors } from 'constants/styleGuide'
+import { IconButton } from '../toolBox/button'
+import { P } from '../toolBox/typography'
+import withTheme from '../withTheme'
+import getStyles from './styles'
 
-const CameraOverlay = ({
-  styles,
-  safeArea,
-  containerStyles,
-  t,
-  close,
-  theme,
-}) => (
+const CameraOverlay = ({ styles, safeArea, containerStyles, t, close, theme }) => (
   <View style={[styles.cameraOverlay, containerStyles]}>
     <View style={[styles.headerContainer, safeArea ? styles.safeArea : null]}>
       <IconButton
@@ -38,6 +31,6 @@ const CameraOverlay = ({
       </P>
     </View>
   </View>
-);
+)
 
-export default withTheme(translate()(CameraOverlay), getStyles());
+export default withTheme(translate()(CameraOverlay), getStyles())

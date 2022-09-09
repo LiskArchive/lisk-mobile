@@ -1,1 +1,1 @@
-export { LockedBalanceDetails as default } from './LockedBalanceDetails';
+export { LockedBalanceDetails as default } from './LockedBalanceDetails'

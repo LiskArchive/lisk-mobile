@@ -1,8 +1,4 @@
-import {
-  themes,
-  colors,
-  boxes
-} from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide'
 
 export function getSendTokenOnMultisignatureAccountStyles() {
   return {
@@ -13,34 +9,34 @@ export function getSendTokenOnMultisignatureAccountStyles() {
         alignItems: 'center',
         flex: 1,
         paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding
+        paddingRight: boxes.boxPadding,
       },
       buttonContainer: {
         padding: 8,
         marginTop: 8,
-      }
+      },
     },
     [themes.light]: {
       container: {
-        backgroundColor: colors.light.white
+        backgroundColor: colors.light.white,
       },
       button: {
-        color: colors.light.ultramarineBlue
+        color: colors.light.ultramarineBlue,
       },
       copy: {
-        color: colors.light.zodiacBlue
+        color: colors.light.zodiacBlue,
       },
     },
     [themes.dark]: {
       container: {
-        backgroundColor: colors.dark.mainBg
+        backgroundColor: colors.dark.mainBg,
       },
       button: {
-        color: colors.light.ultramarineBlue
+        color: colors.light.ultramarineBlue,
       },
       copy: {
-        color: colors.light.white
+        color: colors.light.white,
       },
-    }
-  };
+    },
+  }
 }

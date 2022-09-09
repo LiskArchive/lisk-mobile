@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { colors } from 'constants/styleGuide';
+import { StyleSheet } from 'react-native'
+import { colors } from 'constants/styleGuide'
 
 const styles = {
   wrapper: {
@@ -32,6 +32,6 @@ const styles = {
   button: {
     marginBottom: 20,
   },
-};
+}
 
-export default StyleSheet.create(styles);
+export default StyleSheet.create(styles)

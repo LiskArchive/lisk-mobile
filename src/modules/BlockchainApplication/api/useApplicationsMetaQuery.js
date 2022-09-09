@@ -1,10 +1,6 @@
-import {
-  LIMIT,
-  API_URL,
-  API_BASE_URL
-} from 'utilities/api/constants';
-import { GET_APPLICATIONS_QUERY } from 'utilities/api/queries';
-import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
+import { LIMIT, API_URL, API_BASE_URL } from 'utilities/api/constants'
+import { GET_APPLICATIONS_QUERY } from 'utilities/api/queries'
+import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery'
 
 /**
  * Fetch list of blockchain applications metadata (off-chain data) in paginated mode.
@@ -23,13 +19,13 @@ export function useApplicationsMetaQuery({ config: customConfig = {}, options = 
     ...customConfig,
     params: {
       limit: LIMIT,
-      ...(customConfig?.params || {})
+      ...(customConfig?.params || {}),
     },
-  };
+  }
 
-  const keys = [GET_APPLICATIONS_QUERY];
+  const keys = [GET_APPLICATIONS_QUERY]
 
-  const query = useCustomInfiniteQuery({ config, options, keys });
+  const query = useCustomInfiniteQuery({ config, options, keys })
 
-  return query;
+  return query
 }

@@ -1,18 +1,18 @@
-import React from 'react';
-import { View } from 'react-native';
-import { B, P } from '../toolBox/typography';
-import withTheme from '../withTheme';
-import getStyles from './styles';
+import React from 'react'
+import { View } from 'react-native'
+import { B, P } from '../toolBox/typography'
+import withTheme from '../withTheme'
+import getStyles from './styles'
 
 const StepProgress = ({ styles, currentIndex, length }) => {
   return (
     <View style={styles.container}>
-      <B style={styles.theme.step} >Step </B>
-      <B style={styles.theme.step} >{currentIndex}</B>
-      <B style={styles.theme.step} >/</B>
-      <P style={styles.theme.step} >{length}</P>
+      <B style={styles.theme.step}>Step </B>
+      <B style={styles.theme.step}>{currentIndex}</B>
+      <B style={styles.theme.step}>/</B>
+      <P style={styles.theme.step}>{length}</P>
     </View>
-  );
-};
+  )
+}
 
-export default withTheme(StepProgress, getStyles());
+export default withTheme(StepProgress, getStyles())

@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide'
 
 export default function getTransactionRowStyles() {
   return {
@@ -28,12 +28,12 @@ export default function getTransactionRowStyles() {
         fontWeight: '500',
         fontSize: 16,
         lineHeight: 19,
-        marginBottom: 8
+        marginBottom: 8,
       },
       date: {
         fontWeight: '400',
         fontSize: 12,
-        lineHeight: 14
+        lineHeight: 14,
       },
       image: {
         borderRadius: 50,
@@ -48,7 +48,7 @@ export default function getTransactionRowStyles() {
       outgoingAmount: {
         fontWeight: '500',
         fontSize: 16,
-      }
+      },
     },
     [themes.light]: {
       container: {
@@ -90,5 +90,5 @@ export default function getTransactionRowStyles() {
         color: colors.dark.white,
       },
     },
-  };
+  }
 }

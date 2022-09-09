@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
-import * as Lisk from '@liskhq/lisk-client';
-import { encodeTransferAsset, encodeTransaction } from './encode';
+import * as Lisk from '@liskhq/lisk-client'
+import { encodeTransferAsset, encodeTransaction } from './encode'
 
 export const baseTransactionSchema = {
   $id: 'lisk/base-transaction',
@@ -39,80 +39,62 @@ export const baseTransactionSchema = {
       fieldNumber: 7,
     },
   },
-};
+}
 
 export const getSigningBytes = (transactionObject) => {
-  if (
-    typeof transactionObject.asset !== 'object'
-    || transactionObject.asset === null
-  ) {
-    throw new Error('Asset must be of type object and not null');
+  if (typeof transactionObject.asset !== 'object' || transactionObject.asset === null) {
+    throw new Error('Asset must be of type object and not null')
   }
-  const assetBytes = encodeTransferAsset(transactionObject.asset);
+  const assetBytes = encodeTransferAsset(transactionObject.asset)
   const transactionBytes = encodeTransaction({
     ...transactionObject,
     asset: assetBytes,
     signatures: [],
-  });
+  })
 
-  return transactionBytes;
-};
+  return transactionBytes
+}
 
-export const signTransaction = (
-  assetSchema,
-  transactionObject,
-  networkIdentifier,
-  passphrase
-) => {
+export const signTransaction = (assetSchema, transactionObject, networkIdentifier, passphrase) => {
   if (!networkIdentifier.length) {
-    throw new Error('Network identifier is required to sign a transaction');
+    throw new Error('Network identifier is required to sign a transaction')
   }
 
   if (!passphrase) {
-    throw new Error('Passphrase is required to sign a transaction');
+    throw new Error('Passphrase is required to sign a transaction')
   }
-  const { publicKey } = Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase);
+  const { publicKey } = Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase)
 
   if (
-    !Buffer.isBuffer(transactionObject.senderPublicKey)
-    || !transactionObject.senderPublicKey.equals(publicKey)
+    !Buffer.isBuffer(transactionObject.senderPublicKey) ||
+    !transactionObject.senderPublicKey.equals(publicKey)
   ) {
-    throw new Error(
-      'Transaction senderPublicKey does not match public key from passphrase'
-    );
+    throw new Error('Transaction senderPublicKey does not match public key from passphrase')
   }
 
   const transactionWithNetworkIdentifierBytes = Buffer.concat([
     networkIdentifier,
     getSigningBytes(transactionObject),
-  ]);
+  ])
 
-  const signature = Lisk.cryptography.ed.signData(
-    transactionWithNetworkIdentifierBytes,
-    passphrase
-  );
+  const signature = Lisk.cryptography.ed.signData(transactionWithNetworkIdentifierBytes, passphrase)
   // eslint-disable-next-line no-param-reassign
-  transactionObject.signatures = [signature];
+  transactionObject.signatures = [signature]
   return {
     ...transactionObject,
-    id: Lisk.cryptography.hash(
-      Lisk.transactions.getBytes(assetSchema, transactionObject)
-    ),
-  };
-};
+    id: Lisk.cryptography.hash(Lisk.transactions.getBytes(assetSchema, transactionObject)),
+  }
+}
 
 export const getBytes = (transactionObject) => {
-  if (
-    typeof transactionObject.asset !== 'object'
-    || transactionObject.asset === null
-  ) {
-    throw new Error('Asset must be of type object and not null');
+  if (typeof transactionObject.asset !== 'object' || transactionObject.asset === null) {
+    throw new Error('Asset must be of type object and not null')
   }
-  const assetBytes = encodeTransferAsset(transactionObject.asset);
+  const assetBytes = encodeTransferAsset(transactionObject.asset)
   const transactionBytes = encodeTransaction({
     ...transactionObject,
     asset: assetBytes,
-  });
+  })
 
-  return transactionBytes;
-};
+  return transactionBytes
+}

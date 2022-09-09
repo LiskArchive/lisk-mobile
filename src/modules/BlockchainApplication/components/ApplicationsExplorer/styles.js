@@ -1,6 +1,6 @@
-import { Dimensions } from 'react-native';
+import { Dimensions } from 'react-native'
 
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide'
 
 export default function getBlockchainApplicationsExplorerStyles() {
   return {
@@ -13,7 +13,7 @@ export default function getBlockchainApplicationsExplorerStyles() {
         paddingRight: 16
       },
       message: {
-        padding: 20
+        padding: 20,
       },
       statsModal: {
         height: Dimensions.get('window').height / 1.6,
@@ -27,14 +27,14 @@ export default function getBlockchainApplicationsExplorerStyles() {
     },
     [themes.light]: {
       message: {
-        color: colors.light.zodiacBlue
-      }
+        color: colors.light.zodiacBlue,
+      },
     },
 
     [themes.dark]: {
       message: {
-        color: colors.dark.white
-      }
+        color: colors.dark.white,
+      },
     },
-  };
+  }
 }

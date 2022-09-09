@@ -6,7 +6,7 @@ export const mockApplications = [
     address: 'lsk123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
     isDefault: true,
     lastCertificateHeight: 900,
-    lastUpdated: 123456789
+    lastUpdated: 123456789,
   },
   {
     chainName: 'Coleti',
@@ -15,7 +15,7 @@ export const mockApplications = [
     address: 'col123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
     isDefault: false,
     lastCertificateHeight: 800,
-    lastUpdated: 123456788
+    lastUpdated: 123456788,
   },
   {
     chainName: 'DoEdu',
@@ -24,7 +24,7 @@ export const mockApplications = [
     address: 'doe123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
     isDefault: false,
     lastCertificateHeight: 700,
-    lastUpdated: 123456787
+    lastUpdated: 123456787,
   },
   {
     chainName: 'Enevti',
@@ -33,7 +33,7 @@ export const mockApplications = [
     address: 'env123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
     isDefault: false,
     lastCertificateHeight: 600,
-    lastUpdated: 123456786
+    lastUpdated: 123456786,
   },
   {
     chainName: 'Kalipo',
@@ -42,6 +42,6 @@ export const mockApplications = [
     address: 'tkn123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
     isDefault: false,
     lastCertificateHeight: 500,
-    lastUpdated: 123456785
+    lastUpdated: 123456785,
   },
-];
+]

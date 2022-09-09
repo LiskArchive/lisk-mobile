@@ -1,4 +1,4 @@
-import { tokenMap } from './tokens';
+import { tokenMap } from './tokens'
 
 const data = {
   activeToken: tokenMap.LSK.key,
@@ -10,7 +10,7 @@ const data = {
     balance: '10000',
     publicKey: 'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
     unconfirmedBalance: '10000',
-    initialized: true
+    initialized: true,
   },
   transactions: {
     data: [
@@ -31,8 +31,8 @@ const data = {
         signatures: [],
         confirmations: 15227,
         asset: {
-          data: 'manu'
-        }
+          data: 'manu',
+        },
       },
       {
         id: '1374653851777155012559',
@@ -51,8 +51,8 @@ const data = {
         signatures: [],
         confirmations: 15227,
         asset: {
-          data: 'manu'
-        }
+          data: 'manu',
+        },
       },
       {
         id: '137465385177715502559',
@@ -71,14 +71,14 @@ const data = {
         signatures: [],
         confirmations: 15227,
         asset: {
-          data: 'manu'
-        }
-      }
+          data: 'manu',
+        },
+      },
     ],
     meta: {
-      count: 3
-    }
-  }
-};
+      count: 3,
+    },
+  },
+}
 
-export default data;
+export default data

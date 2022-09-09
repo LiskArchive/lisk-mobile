@@ -1,17 +1,17 @@
-import React from 'react';
-import { View, Dimensions } from 'react-native';
-import PieChart from 'react-native-pie-chart';
-import { translate } from 'react-i18next';
+import React from 'react'
+import { View, Dimensions } from 'react-native'
+import PieChart from 'react-native-pie-chart'
+import { translate } from 'react-i18next'
 
-import { H2, P } from 'components/shared/toolBox/typography';
-import { useTheme } from 'hooks/useTheme';
-import { colors, themes } from 'constants/styleGuide';
-import TotalSupplySvg from 'assets/svgs/TotalSupplySvg';
-import StakedSvg from 'assets/svgs/StakedSvg';
+import { H2, P } from 'components/shared/toolBox/typography'
+import { useTheme } from 'hooks/useTheme'
+import { colors, themes } from 'constants/styleGuide'
+import TotalSupplySvg from 'assets/svgs/TotalSupplySvg'
+import StakedSvg from 'assets/svgs/StakedSvg'
 
-import getStyles from './styles';
+import getStyles from './styles'
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get('window')
 
 /**
  * @param {Object} props
@@ -22,9 +22,7 @@ const { width } = Dimensions.get('window');
  * @param {Number} props.stats.amount
  */
 
-const LegendItem = ({
-  styles, label, amount, t
-}) => (
+const LegendItem = ({ styles, label, amount, t }) => (
   <View style={styles.legend}>
     <View style={styles.legendItem}>
       <View style={[styles.legendIcon, styles[`${label}Icon`]]}></View>
@@ -34,18 +32,16 @@ const LegendItem = ({
       </P>
     </View>
   </View>
-);
+)
 
-const BlockchainApplicationsStats = ({
-  t, totalSupply, staked, stats, ...props
-}) => {
-  const { theme, styles } = useTheme({ styles: getStyles() });
+const BlockchainApplicationsStats = ({ t, totalSupply, staked, stats, ...props }) => {
+  const { theme, styles } = useTheme({ styles: getStyles() })
 
-  const widthAndHeight = width / 2.5;
-  const { ultramarineBlue, ufoGreen, zodiacBlue } = colors.light;
-  const sliceColor = [ultramarineBlue, ufoGreen, zodiacBlue];
+  const widthAndHeight = width / 2.5
+  const { ultramarineBlue, ufoGreen, zodiacBlue } = colors.light
+  const sliceColor = [ultramarineBlue, ufoGreen, zodiacBlue]
 
-  const series = [stats.registered, stats.active, stats.terminated];
+  const series = [stats.registered, stats.active, stats.terminated]
 
   return (
     <View style={[styles.container, props.styles.container]}>
@@ -80,7 +76,7 @@ const BlockchainApplicationsStats = ({
         <StakedSvg />
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default translate()(BlockchainApplicationsStats);
+export default translate()(BlockchainApplicationsStats)

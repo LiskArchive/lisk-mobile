@@ -1,10 +1,10 @@
-import React from 'react';
-import { View } from 'react-native';
-import { translate } from 'react-i18next';
-import { P } from '../toolBox/typography';
-import CopyToClipboard from '../copyToClipboard';
-import withTheme from '../withTheme';
-import getStyles from './styles';
+import React from 'react'
+import { View } from 'react-native'
+import { translate } from 'react-i18next'
+import { P } from '../toolBox/typography'
+import CopyToClipboard from '../copyToClipboard'
+import withTheme from '../withTheme'
+import getStyles from './styles'
 
 const PassphraseCopy = ({ styles, passphrase, t }) => (
   <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -23,6 +23,6 @@ const PassphraseCopy = ({ styles, passphrase, t }) => (
       type={P}
     />
   </View>
-);
+)
 
-export default withTheme(translate()(PassphraseCopy), getStyles());
+export default withTheme(translate()(PassphraseCopy), getStyles())

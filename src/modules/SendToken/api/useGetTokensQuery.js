@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react'
 
-import { mockTokens } from '../__fixtures__';
+import { mockTokens } from '../__fixtures__'
 
 /**
  * @typedef {Object} GetTokensQuery
@@ -26,14 +26,14 @@ import { mockTokens } from '../__fixtures__';
 export function useGetTokensQuery(address) {
   // TODO: Replace data, isLoading and error
   // by React Query when package integration is done.
-  const [data, setData] = useState(undefined);
-  const [meta, setMeta] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState(undefined);
-  const [page, setPage] = useState(0);
+  const [data, setData] = useState(undefined)
+  const [meta, setMeta] = useState(undefined)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isFetching, setIsFetching] = useState(false)
+  const [error, setError] = useState(undefined)
+  const [page, setPage] = useState(0)
 
-  const timer = useRef();
+  const timer = useRef()
 
   function fetchData() {
     // TODO: Replace with real API call when backend is available.
@@ -45,17 +45,17 @@ export function useGetTokensQuery(address) {
             address,
             count: 10,
             offset: 0,
-            total: 120
+            total: 120,
           },
-        });
-      }, 250);
-    });
+        })
+      }, 250)
+    })
   }
 
   // TODO: Replace with real API call when backend is available.
   function fetchMoreData() {
     if (!isLoading) {
-      setIsFetching(true);
+      setIsFetching(true)
 
       new Promise((resolve) => {
         timer.current = setTimeout(() => {
@@ -66,41 +66,41 @@ export function useGetTokensQuery(address) {
               offset: page + 1,
               total: 150,
             },
-          });
-        }, 250);
+          })
+        }, 250)
       })
         .then((res) => {
           const newData = res.data.map((app, index) => ({
             ...app,
             chainId: `${app.chainID}-refetch${index}`,
-          }));
+          }))
 
-          setData([...data, ...newData]);
-          setMeta(res.meta);
-          setPage(page + 1);
-          setIsFetching(false);
+          setData([...data, ...newData])
+          setMeta(res.meta)
+          setPage(page + 1)
+          setIsFetching(false)
         })
         .catch((e) => {
-          setError(e);
-          setIsFetching(false);
-        });
+          setError(e)
+          setIsFetching(false)
+        })
     }
   }
 
   useEffect(() => {
     fetchData()
       .then((res) => {
-        setData(res.data);
-        setMeta(res.meta);
-        setIsLoading(false);
+        setData(res.data)
+        setMeta(res.meta)
+        setIsLoading(false)
       })
-      .catch((e) => setError(e));
+      .catch((e) => setError(e))
 
     return () => {
-      clearInterval(timer.current);
-    };
+      clearInterval(timer.current)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   return {
     data,
@@ -111,5 +111,5 @@ export function useGetTokensQuery(address) {
     refetch: fetchData,
     fetchMore: fetchMoreData,
     isFetching,
-  };
+  }
 }

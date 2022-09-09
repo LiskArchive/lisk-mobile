@@ -1,4 +1,4 @@
-import getMappedFunction from './functionMapper';
+import getMappedFunction from './functionMapper'
 
 /**
  * @typedef {Object} AccountSummary
@@ -15,7 +15,7 @@ import getMappedFunction from './functionMapper';
  * @returns {Promise<AccountSummary>}
  */
 const getSummary = (tokenType, params) =>
-  getMappedFunction(tokenType, 'account', 'getSummary')({ ...params });
+  getMappedFunction(tokenType, 'account', 'getSummary')({ ...params })
 
 /**
  * Extracts public key from passphrase for given token.
@@ -24,7 +24,7 @@ const getSummary = (tokenType, params) =>
  * @returns {String}
  */
 const extractPublicKey = (tokenType, passphrase) =>
-  getMappedFunction(tokenType, 'account', 'extractPublicKey')(passphrase);
+  getMappedFunction(tokenType, 'account', 'extractPublicKey')(passphrase)
 
 /**
  * Extracts wallet address from passphrase for given token.
@@ -33,10 +33,10 @@ const extractPublicKey = (tokenType, passphrase) =>
  * @returns {String}
  */
 const extractAddress = (tokenType, passphrase) =>
-  getMappedFunction(tokenType, 'account', 'extractAddress')(passphrase);
+  getMappedFunction(tokenType, 'account', 'extractAddress')(passphrase)
 
 export default {
   getSummary,
   extractPublicKey,
   extractAddress,
-};
+}

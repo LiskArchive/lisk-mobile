@@ -1,22 +1,20 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks'
 
-import {
-  LIMIT,
-  API_BASE_URL,
-  API_URL,
-} from 'utilities/api/constants';
-import { queryWrapper } from 'tests/queryWrapper';
-import * as useCurrentBlockchainApplication from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
-import { mockCustomInfiniteQuery } from '../__fixtures__';
-import { useCustomInfiniteQuery } from './useCustomInfiniteQuery';
+import { LIMIT, API_BASE_URL, API_URL } from 'utilities/api/constants'
+import { queryWrapper } from 'tests/queryWrapper'
+import * as useCurrentBlockchainApplication from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication'
+import { mockCustomInfiniteQuery } from '../__fixtures__'
+import { useCustomInfiniteQuery } from './useCustomInfiniteQuery'
 
-jest.useRealTimers();
+jest.useRealTimers()
 
-jest.spyOn(useCurrentBlockchainApplication, 'useCurrentBlockchainApplication').mockImplementation(
-  () => [{
-    chainID: 'chainIdMock'
-  }]
-);
+jest
+  .spyOn(useCurrentBlockchainApplication, 'useCurrentBlockchainApplication')
+  .mockImplementation(() => [
+    {
+      chainID: 'chainIdMock',
+    },
+  ])
 
 describe('useCustomInfiniteQuery hook', () => {
   const config = {
@@ -26,19 +24,19 @@ describe('useCustomInfiniteQuery hook', () => {
     params: {
       limit: LIMIT,
     },
-  };
-  const keys = ['CUSTOM_INFINITE_QUERY'];
+  }
+  const keys = ['CUSTOM_INFINITE_QUERY']
 
   it('fetch data correctly', async () => {
-    const { result, waitFor } = renderHook(
-      () => useCustomInfiniteQuery({ config, keys }), { wrapper: queryWrapper }
-    );
+    const { result, waitFor } = renderHook(() => useCustomInfiniteQuery({ config, keys }), {
+      wrapper: queryWrapper,
+    })
 
-    expect(result.current.isLoading).toBeTruthy();
+    expect(result.current.isLoading).toBeTruthy()
 
-    await waitFor(() => result.current.isFetched);
+    await waitFor(() => result.current.isFetched)
 
-    expect(result.current.isSuccess).toBeTruthy();
+    expect(result.current.isSuccess).toBeTruthy()
 
     const expectedResponse = {
       data: mockCustomInfiniteQuery.data.slice(0, LIMIT),
@@ -47,8 +45,8 @@ describe('useCustomInfiniteQuery hook', () => {
         count: LIMIT,
         offset: 0,
       },
-    };
+    }
 
-    expect(result.current.data).toEqual(expectedResponse);
-  });
-});
+    expect(result.current.data).toEqual(expectedResponse)
+  })
+})

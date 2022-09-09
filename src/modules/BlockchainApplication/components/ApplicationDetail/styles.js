@@ -1,11 +1,9 @@
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
-import { deviceType } from 'utilities/device';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide'
+import { deviceType } from 'utilities/device'
 
-const type = deviceType();
+const type = deviceType()
 
-const safeAreaMarginTop = type === 'iOSx' ? 45 : 20;
+const safeAreaMarginTop = type === 'iOSx' ? 45 : 20
 
 export default {
   common: {
@@ -13,11 +11,11 @@ export default {
       flex: 1,
     },
     container: {
-      paddingTop: safeAreaMarginTop
+      paddingTop: safeAreaMarginTop,
     },
     header: {
       height: 230,
-      backgroundColor: colors.light.ultramarineBlue
+      backgroundColor: colors.light.ultramarineBlue,
     },
     explore: {
       paddingTop: 40,
@@ -35,7 +33,7 @@ export default {
     titleRow: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     pinIcon: {
       marginHorizontal: 5,
@@ -83,7 +81,7 @@ export default {
     },
     stats: {
       flex: 1,
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
     item: {
       marginBottom: 20,
@@ -104,14 +102,14 @@ export default {
       backgroundColor: 'rgba(0, 213, 99, 0.1)',
     },
     registered: {
-      color: colors.light.ultramarineBlue
+      color: colors.light.ultramarineBlue,
     },
     active: {
       color: colors.light.ufoGreen,
     },
     terminated: {
-      color: colors.light.zodiacBlue
-    }
+      color: colors.light.zodiacBlue,
+    },
   },
   [themes.light]: {
     container: {
@@ -130,8 +128,8 @@ export default {
       color: colors.light.zodiacBlue,
     },
     terminated: {
-      color: colors.light.zodiacBlue
-    }
+      color: colors.light.zodiacBlue,
+    },
   },
   [themes.dark]: {
     container: {
@@ -150,7 +148,7 @@ export default {
       color: colors.dark.white,
     },
     terminated: {
-      color: colors.light.white
-    }
+      color: colors.light.white,
+    },
   },
-};
+}

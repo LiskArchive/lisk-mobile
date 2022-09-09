@@ -1,6 +1,4 @@
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide'
 
 export default () => ({
   common: {
@@ -11,15 +9,15 @@ export default () => ({
       paddingVertical: 30,
       borderWidth: 1,
       borderRadius: 10,
-      marginVertical: 10
+      marginVertical: 10,
     },
     illustration: {
-      marginBottom: 10
+      marginBottom: 10,
     },
     label: {
       fontFamily: fonts.family.contextSemiBold,
       fontSize: fonts.size.h4,
-      padding: 5
+      padding: 5,
     },
   },
 
@@ -46,4 +44,4 @@ export default () => ({
       color: colors.dark.ghost,
     },
   },
-});
+})

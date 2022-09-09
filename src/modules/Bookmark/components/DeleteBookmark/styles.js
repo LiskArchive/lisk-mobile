@@ -1,7 +1,5 @@
-import {
-  themes, colors, fonts, boxes
-} from 'constants/styleGuide';
-import { deviceWidth } from 'utilities/device';
+import { themes, colors, fonts, boxes } from 'constants/styleGuide'
+import { deviceWidth } from 'utilities/device'
 
 export default () => ({
   common: {
@@ -59,4 +57,4 @@ export default () => ({
       color: colors.dark.slateGray,
     },
   },
-});
+})

@@ -1,6 +1,4 @@
-import {
-  colors, themes
-} from 'constants/styleGuide';
+import { colors, themes } from 'constants/styleGuide'
 
 export default function getAccountsManagerStyles() {
   return {
@@ -12,14 +10,14 @@ export default function getAccountsManagerStyles() {
     },
     [themes.light]: {
       container: {
-        backgroundColor: colors.dark.white
+        backgroundColor: colors.dark.white,
       },
     },
 
     [themes.dark]: {
       container: {
-        backgroundColor: colors.dark.black
+        backgroundColor: colors.dark.black,
       },
-    }
-  };
+    },
+  }
 }

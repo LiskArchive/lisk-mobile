@@ -1,38 +1,36 @@
 /* eslint-disable no-shadow */
-import React, { useState } from 'react';
-import {
-  View, TouchableOpacity
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import i18next from 'i18next';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import React, { useState } from 'react'
+import { View, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import i18next from 'i18next'
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 
-import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
-import { colors } from 'constants/styleGuide';
-import SearchBarHeader from 'components/navigation/searchBarHeader';
-import Icon from 'components/shared/toolBox/icon';
+import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView'
+import { colors } from 'constants/styleGuide'
+import SearchBarHeader from 'components/navigation/searchBarHeader'
+import Icon from 'components/shared/toolBox/icon'
 
-import { useTheme } from 'hooks/useTheme';
-import getStyles from './styles';
-import { BookmarkList } from './components';
+import { useTheme } from 'hooks/useTheme'
+import getStyles from './styles'
+import { BookmarkList } from './components'
 
 export default function Bookmark() {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
-  const [query, setQuery] = useState('');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [query, setQuery] = useState('')
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
-  const tabBarHeight = useBottomTabBarHeight();
+  const tabBarHeight = useBottomTabBarHeight()
 
   const { styles, theme } = useTheme({
     styles: getStyles(tabBarHeight),
-  });
+  })
 
-  const setQueryString = (query) => setQuery(query);
+  const setQueryString = (query) => setQuery(query)
 
-  const onPress = data => {
-    navigation.navigate('Wallet', { address: data.address });
-  };
+  const onPress = (data) => {
+    navigation.navigate('Wallet', { address: data.address })
+  }
 
   return (
     <NavigationSafeAreaView>
@@ -45,12 +43,7 @@ export default function Bookmark() {
         setIsSearchOpen={(val) => setIsSearchOpen(val)}
       />
       <View style={styles.container}>
-        <BookmarkList
-          draggable={true}
-          query={query}
-          renderEmpty
-          onPress={onPress}
-        />
+        <BookmarkList draggable={true} query={query} renderEmpty onPress={onPress} />
       </View>
       <TouchableOpacity
         style={[styles.titleContainer]}
@@ -61,5 +54,5 @@ export default function Bookmark() {
         <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={30} />
       </TouchableOpacity>
     </NavigationSafeAreaView>
-  );
+  )
 }

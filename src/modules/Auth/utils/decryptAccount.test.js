@@ -1,7 +1,8 @@
-import { cryptography } from '@liskhq/lisk-client';
-import { decryptAccount } from './decryptAccount';
+import { cryptography } from '@liskhq/lisk-client'
+import { decryptAccount } from './decryptAccount'
 
-const recoveryPhrase = 'target cancel solution recipe vague faint bomb convince pink vendor fresh patrol';
+const recoveryPhrase =
+  'target cancel solution recipe vague faint bomb convince pink vendor fresh patrol'
 const encryptedPassphrase = {
   kdf: 'argon2id',
   kdfparams: {
@@ -17,24 +18,27 @@ const encryptedPassphrase = {
   },
   ciphertext:
     '44fdb2b132d353a5c65f04e5e3afdd531f63abc45444ffd4cdbc7dedc45f899bf5b7478947d57319ea8c620e13480def8a518cc05e46bdddc8ef7c8cfc21a3bd',
-};
+}
 
-const privateKey = 'd92f8ffd3046fa9de33c21cef7af6f1315e289003c19f9b23ce6d499c8641d4e0792fecbbecf6e7370f7a7b217a9d159f380d3ecd0f2760d7a55dd3e27e97184';
-const publicKey = '0792fecbbecf6e7370f7a7b217a9d159f380d3ecd0f2760d7a55dd3e27e97184';
+const privateKey =
+  'd92f8ffd3046fa9de33c21cef7af6f1315e289003c19f9b23ce6d499c8641d4e0792fecbbecf6e7370f7a7b217a9d159f380d3ecd0f2760d7a55dd3e27e97184'
+const publicKey = '0792fecbbecf6e7370f7a7b217a9d159f380d3ecd0f2760d7a55dd3e27e97184'
 const defaultKeys = {
   privateKey: Buffer.from(privateKey, 'hex'),
   publicKey: Buffer.from(publicKey, 'hex'),
-};
+}
 
-jest.spyOn(cryptography.ed, 'getKeys').mockReturnValue(defaultKeys);
-jest.spyOn(cryptography.encrypt, 'decryptMessageWithPassword').mockResolvedValue(JSON.stringify({
-  recoveryPhrase,
-}));
+jest.spyOn(cryptography.ed, 'getKeys').mockReturnValue(defaultKeys)
+jest.spyOn(cryptography.encrypt, 'decryptMessageWithPassword').mockResolvedValue(
+  JSON.stringify({
+    recoveryPhrase,
+  })
+)
 
 describe('decryptAccount', () => {
   it('decrypts account when the correct arguments are passed', async () => {
-    const password = 'samplePassword@1';
-    const res = await decryptAccount(encryptedPassphrase, password);
-    expect(res).toEqual(recoveryPhrase);
-  });
-});
+    const password = 'samplePassword@1'
+    const res = await decryptAccount(encryptedPassphrase, password)
+    expect(res).toEqual(recoveryPhrase)
+  })
+})

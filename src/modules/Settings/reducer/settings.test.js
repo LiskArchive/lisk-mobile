@@ -1,7 +1,7 @@
-import { tokenKeys } from 'constants/tokens';
-import app from 'constants/app';
-import actionTypes from '../actionTypes';
-import { INITIAL_STATE, settings } from './settings';
+import { tokenKeys } from 'constants/tokens'
+import app from 'constants/app'
+import actionTypes from '../actionTypes'
+import { INITIAL_STATE, settings } from './settings'
 
 const defaultTokens = {
   active: 'LSK',
@@ -9,7 +9,7 @@ const defaultTokens = {
     LSK: true,
     BTC: true,
   },
-};
+}
 
 const disabledBTC = {
   active: 'LSK',
@@ -17,7 +17,7 @@ const disabledBTC = {
     LSK: true,
     BTC: false,
   },
-};
+}
 
 const enabledBTC = {
   active: 'BTC',
@@ -25,7 +25,7 @@ const enabledBTC = {
     LSK: true,
     BTC: true,
   },
-};
+}
 
 const invalidBTCActivationAttempt = {
   active: 'BTC',
@@ -33,112 +33,112 @@ const invalidBTCActivationAttempt = {
     LSK: true,
     BTC: false,
   },
-};
+}
 
 describe('Reducers: Settings', () => {
   it('should create the empty state initially', () => {
-    const createdState = settings();
-    expect(createdState).toEqual(INITIAL_STATE);
-  });
+    const createdState = settings()
+    expect(createdState).toEqual(INITIAL_STATE)
+  })
 
   describe('settingsUpdated', () => {
     it('should return updated state', () => {
       const state = {
         token: defaultTokens,
-      };
+      }
       const action = {
         type: actionTypes.settingsUpdated,
         data: {
           sensorType: app.faceId,
         },
-      };
-      const changedState = settings(state, action);
+      }
+      const changedState = settings(state, action)
       expect(changedState).toEqual({
         sensorType: app.faceId,
         token: defaultTokens,
-      });
-    });
+      })
+    })
 
     it('should revert to LSK when disabling the active token', () => {
       const state = {
         token: defaultTokens,
-      };
+      }
       const action = {
         type: actionTypes.settingsUpdated,
         data: {
           token: invalidBTCActivationAttempt,
         },
-      };
-      const changedState = settings(state, action);
+      }
+      const changedState = settings(state, action)
       expect(changedState).toEqual({
         token: disabledBTC,
-      });
-    });
+      })
+    })
 
     it('should revert to LSK if the activated token is already disabled', () => {
       const state = {
         token: disabledBTC,
-      };
+      }
       const action = {
         type: actionTypes.settingsUpdated,
         data: {
           token: invalidBTCActivationAttempt,
         },
-      };
-      const changedState = settings(state, action);
+      }
+      const changedState = settings(state, action)
       expect(changedState).toEqual({
         token: disabledBTC,
-      });
-    });
+      })
+    })
 
     it('should change the active token to LSK if disables that token', () => {
       const state = {
         token: enabledBTC,
-      };
+      }
       const action = {
         type: actionTypes.settingsUpdated,
         data: {
           token: invalidBTCActivationAttempt,
         },
-      };
-      const changedState = settings(state, action);
+      }
+      const changedState = settings(state, action)
       expect(changedState).toEqual({
         token: disabledBTC,
-      });
-    });
+      })
+    })
 
     it('should change the active token if a new one is passed', () => {
       const state = {
         token: defaultTokens,
-      };
+      }
       const action = {
         type: actionTypes.settingsUpdated,
         data: {
           token: enabledBTC,
         },
-      };
-      const changedState = settings(state, action);
+      }
+      const changedState = settings(state, action)
       expect(changedState).toEqual({
         token: enabledBTC,
-      });
-    });
+      })
+    })
 
     it('should change the active token if a active token and list are correctly passed', () => {
       const state = {
         token: disabledBTC,
-      };
+      }
       const action = {
         type: actionTypes.settingsUpdated,
         data: {
           token: enabledBTC,
         },
-      };
-      const changedState = settings(state, action);
+      }
+      const changedState = settings(state, action)
       expect(changedState).toEqual({
         token: enabledBTC,
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe('settingsRetrieved', () => {
     it('should store the retrieved settings', () => {
@@ -148,34 +148,34 @@ describe('Reducers: Settings', () => {
           sensorType: app.faceId,
           token: defaultTokens,
         },
-      };
-      const state = {};
+      }
+      const state = {}
 
-      const changedState = settings(state, action);
+      const changedState = settings(state, action)
       expect(changedState).toEqual({
         currency: 'EUR',
         sensorType: app.faceId,
         token: defaultTokens,
-      });
-    });
+      })
+    })
     it('should fallback active token to LSK and currency to EUR', () => {
       const action = {
         type: actionTypes.settingsRetrieved,
         data: {
           token: {
-            active: tokenKeys[1]
-          }
+            active: tokenKeys[1],
+          },
         },
-      };
-      const state = {};
+      }
+      const state = {}
 
-      const changedState = settings(state, action);
+      const changedState = settings(state, action)
       expect(changedState).toEqual({
         currency: 'EUR',
         token: {
-          active: tokenKeys[0]
-        }
-      });
-    });
-  });
-});
+          active: tokenKeys[0],
+        },
+      })
+    })
+  })
+})

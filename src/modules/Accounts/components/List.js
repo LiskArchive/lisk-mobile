@@ -1,8 +1,8 @@
-import React from 'react';
-import { View } from 'react-native';
-import withTheme from 'components/shared/withTheme';
-import Item from './Item';
-import getStyles from './styles';
+import React from 'react'
+import { View } from 'react-native'
+import withTheme from 'components/shared/withTheme'
+import Item from './Item'
+import getStyles from './styles'
 
 const List = ({
   styles,
@@ -16,7 +16,7 @@ const List = ({
   discrete,
 }) => (
   <View style={styles.nativeList}>
-    {pending.map(tx => (
+    {pending.map((tx) => (
       <Item
         key={tx}
         navigate={navigate}
@@ -28,7 +28,7 @@ const List = ({
         theme={theme}
       />
     ))}
-    {transactions.map(tx => (
+    {transactions.map((tx) => (
       <Item
         key={tx.id}
         navigate={navigate}
@@ -41,6 +41,6 @@ const List = ({
       />
     ))}
   </View>
-);
+)
 
-export default withTheme(List, getStyles());
+export default withTheme(List, getStyles())

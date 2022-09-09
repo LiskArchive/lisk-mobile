@@ -2,4 +2,4 @@
 jest.mock('react-native-device-info', () => ({
   getModel: jest.fn(),
   hasNotch: jest.fn(),
-}));
+}))

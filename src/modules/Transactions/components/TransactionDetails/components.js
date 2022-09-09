@@ -1,27 +1,27 @@
-import React, { useRef, useState } from 'react';
-import { ScrollView, View, Text } from 'react-native';
-import i18next from 'i18next';
+import React, { useRef, useState } from 'react'
+import { ScrollView, View, Text } from 'react-native'
+import i18next from 'i18next'
 
-import { useTheme } from 'hooks/useTheme';
-import { LabelButton } from 'components/shared/toolBox/button';
-import { fromRawLsk } from 'utilities/conversions';
-import { TimeStamp } from 'components/shared/imessage/txDetail/dataRows';
-import CopyToClipboard from 'components/shared/copyToClipboard';
-import Avatar from 'components/shared/avatar';
-import { P } from 'components/shared/toolBox/typography';
-import { stringShortener, setColorOpacity } from 'utilities/helpers';
-import { colors } from 'constants/styleGuide';
-import { useTransactionAssets } from '../../hooks/useTransactionAssets';
-import { TRANSACTION_PARAMS_NAMES, TRANSACTION_STATUS_NAMES } from '../../constants';
+import { useTheme } from 'hooks/useTheme'
+import { LabelButton } from 'components/shared/toolBox/button'
+import { fromRawLsk } from 'utilities/conversions'
+import { TimeStamp } from 'components/shared/imessage/txDetail/dataRows'
+import CopyToClipboard from 'components/shared/copyToClipboard'
+import Avatar from 'components/shared/avatar'
+import { P } from 'components/shared/toolBox/typography'
+import { stringShortener, setColorOpacity } from 'utilities/helpers'
+import { colors } from 'constants/styleGuide'
+import { useTransactionAssets } from '../../hooks/useTransactionAssets'
+import { TRANSACTION_PARAMS_NAMES, TRANSACTION_STATUS_NAMES } from '../../constants'
 
-import getTransactionDetailsStyles from './styles';
+import getTransactionDetailsStyles from './styles'
 
 export function TransactionDetailsBody({ transaction }) {
-  const transactionAssets = useTransactionAssets(transaction);
+  const transactionAssets = useTransactionAssets(transaction)
 
-  const scrollViewRef = useRef();
+  const scrollViewRef = useRef()
 
-  const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
+  const { styles } = useTheme({ styles: getTransactionDetailsStyles() })
 
   return (
     <ScrollView
@@ -58,10 +58,7 @@ export function TransactionDetailsBody({ transaction }) {
           />
         </View>
 
-        <Avatar
-          address={transaction.sender.address}
-          size={40}
-        />
+        <Avatar address={transaction.sender.address} size={40} />
       </View>
 
       <View style={[styles.section]}>
@@ -69,9 +66,7 @@ export function TransactionDetailsBody({ transaction }) {
           {i18next.t('transactions.transactionDetails.transactionFeeLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>
-          {fromRawLsk(transaction.fee)} LSK
-        </Text>
+        <Text style={[styles.text, styles.theme.text]}>{fromRawLsk(transaction.fee)} LSK</Text>
       </View>
 
       <View style={[styles.section]}>
@@ -79,9 +74,7 @@ export function TransactionDetailsBody({ transaction }) {
           {i18next.t('transactions.transactionDetails.nonceLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>
-          {transaction.nonce}
-        </Text>
+        <Text style={[styles.text, styles.theme.text]}>{transaction.nonce}</Text>
       </View>
 
       <View style={[styles.section]}>
@@ -89,9 +82,7 @@ export function TransactionDetailsBody({ transaction }) {
           {i18next.t('transactions.transactionDetails.confirmationsLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>
-          {transaction.confirmations}
-        </Text>
+        <Text style={[styles.text, styles.theme.text]}>{transaction.confirmations}</Text>
       </View>
 
       <View style={[styles.section]}>
@@ -139,42 +130,40 @@ export function TransactionDetailsBody({ transaction }) {
           {i18next.t('transactions.transactionDetails.blockHeightLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>
-          {transaction.block.height}
-        </Text>
+        <Text style={[styles.text, styles.theme.text]}>{transaction.block.height}</Text>
       </View>
 
-      <TransactionDetailsParams params={transaction.params}/>
+      <TransactionDetailsParams params={transaction.params} />
     </ScrollView>
-  );
+  )
 }
 
 function TransactionDetailsStatus({ status }) {
-  const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
+  const { styles } = useTheme({ styles: getTransactionDetailsStyles() })
 
-  let color;
-  let backgroundColor;
+  let color
+  let backgroundColor
 
   switch (status) {
     case 'success':
-      color = colors.light.ufoGreen;
-      backgroundColor = setColorOpacity(colors.light.ufoGreen, 0.15);
-      break;
+      color = colors.light.ufoGreen
+      backgroundColor = setColorOpacity(colors.light.ufoGreen, 0.15)
+      break
 
     case 'pending':
-      color = colors.light.yellowCopacabana;
-      backgroundColor = setColorOpacity(colors.light.yellowCopacabana, 0.15);
-      break;
+      color = colors.light.yellowCopacabana
+      backgroundColor = setColorOpacity(colors.light.yellowCopacabana, 0.15)
+      break
 
     case 'fail':
-      color = colors.light.burntSieanna;
-      backgroundColor = setColorOpacity(colors.light.burntSieanna, 0.15);
-      break;
+      color = colors.light.burntSieanna
+      backgroundColor = setColorOpacity(colors.light.burntSieanna, 0.15)
+      break
 
     default:
-      color = colors.light.white;
-      backgroundColor = colors.light.platinum;
-      break;
+      color = colors.light.white
+      backgroundColor = colors.light.platinum
+      break
   }
 
   return (
@@ -183,15 +172,15 @@ function TransactionDetailsStatus({ status }) {
         {TRANSACTION_STATUS_NAMES[status] || 'No status'}
       </Text>
     </View>
-  );
+  )
 }
 
 function TransactionDetailsParams({ params }) {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
-  const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
+  const { styles } = useTheme({ styles: getTransactionDetailsStyles() })
 
-  const paramsEntries = Object.entries(params);
+  const paramsEntries = Object.entries(params)
 
   return (
     <View style={[styles.section]}>
@@ -201,7 +190,7 @@ function TransactionDetailsParams({ params }) {
         </Text>
 
         <LabelButton
-          onClick={() => setShow(prevState => !prevState)}
+          onClick={() => setShow((prevState) => !prevState)}
           textStyle={styles.showParamsButton}
         >
           {!show
@@ -210,19 +199,16 @@ function TransactionDetailsParams({ params }) {
         </LabelButton>
       </View>
 
-      {show && (
+      {show &&
         paramsEntries.map(([paramKey, paramValue]) => (
           <React.Fragment key={paramKey}>
             <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
               {TRANSACTION_PARAMS_NAMES[paramKey]}:
-           </Text>
+            </Text>
 
-           <Text style={[styles.text, styles.theme.text]}>
-             {paramValue}
-           </Text>
+            <Text style={[styles.text, styles.theme.text]}>{paramValue}</Text>
           </React.Fragment>
-        ))
-      )}
+        ))}
     </View>
-  );
+  )
 }

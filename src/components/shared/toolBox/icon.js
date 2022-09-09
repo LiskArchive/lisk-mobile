@@ -1,8 +1,8 @@
-import React from 'react';
-import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
-import iconsConfig from 'assets/fonts/icons/selection.json';
+import React from 'react'
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons'
+import iconsConfig from 'assets/fonts/icons/selection.json'
 
-const Icomoon = createIconSetFromIcoMoon(iconsConfig);
+const Icomoon = createIconSetFromIcoMoon(iconsConfig)
 
 /**
  * Creates icon from Icomoon selection
@@ -15,16 +15,8 @@ const Icomoon = createIconSetFromIcoMoon(iconsConfig);
  * @param {Object} props.style - styles from stylesheet
  * @param {Function} props.onPress - onPress event handler function
  */
-const Icon = ({
-  name, size, color, style, onPress
-}) => (
-  <Icomoon
-    name={name}
-    size={size || 35}
-    color={color}
-    style={style}
-    onPress={onPress}
-  />
-);
+const Icon = ({ name, size, color, style, onPress }) => (
+  <Icomoon name={name} size={size || 35} color={color} style={style} onPress={onPress} />
+)
 
-export default Icon;
+export default Icon

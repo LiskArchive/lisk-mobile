@@ -1,7 +1,7 @@
-import React from 'react';
-import { translate } from 'react-i18next';
-import AddApplicationSuccessSvg from 'assets/svgs/AddApplicationSuccessSvg';
-import SuccessScreen from 'modules/Auth/components/success';
+import React from 'react'
+import { translate } from 'react-i18next'
+import AddApplicationSuccessSvg from 'assets/svgs/AddApplicationSuccessSvg'
+import SuccessScreen from 'modules/Auth/components/success'
 
 const AddApplicationSuccess = ({ t, navigation }) => {
   return (
@@ -11,7 +11,7 @@ const AddApplicationSuccess = ({ t, navigation }) => {
       onContinue={() => navigation.navigate('Main')}
       buttonText={t('application.manage.continueToWalletButtonText')}
     />
-  );
-};
+  )
+}
 
-export default translate()(AddApplicationSuccess);
+export default translate()(AddApplicationSuccess)

@@ -1,11 +1,11 @@
 /* eslint-disable complexity */
-import React, { Fragment } from 'react';
-import { View } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { withNavigation } from '@react-navigation/compat';
-import { deviceType } from 'utilities/device';
-import { PrimaryButton } from './button';
-import theme from './styles';
+import React, { Fragment } from 'react'
+import { View } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { withNavigation } from '@react-navigation/compat'
+import { deviceType } from 'utilities/device'
+import { PrimaryButton } from './button'
+import theme from './styles'
 
 const ScrollAwareActionBar = ({
   buttonTestID,
@@ -17,7 +17,7 @@ const ScrollAwareActionBar = ({
   styles,
   viewIsInsideTab,
   noFooterButton,
-  extraContent
+  extraContent,
 }) => {
   const renderButton = (style) => {
     return (
@@ -29,8 +29,8 @@ const ScrollAwareActionBar = ({
         onClick={onSubmit}
         style={style}
       />
-    );
-  };
+    )
+  }
 
   /*
    * KeyboardTrackingView library is not optimized for iPhone X and
@@ -39,8 +39,8 @@ const ScrollAwareActionBar = ({
    * the correct botton's height. The following workaround fixes
    * this issue until the library supports SafeAreaView
    */
-  const osType = deviceType();
-  const shouldBeOptimizedForIphoneX = !viewIsInsideTab && osType === 'iOSx';
+  const osType = deviceType()
+  const shouldBeOptimizedForIphoneX = !viewIsInsideTab && osType === 'iOSx'
 
   return (
     <Fragment>
@@ -56,7 +56,7 @@ const ScrollAwareActionBar = ({
         <View
           style={[
             theme.footerButtonContainer,
-            shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null
+            shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
           ]}
         >
           {extraContent}
@@ -64,7 +64,7 @@ const ScrollAwareActionBar = ({
         </View>
       )}
     </Fragment>
-  );
-};
+  )
+}
 
-export default withNavigation(ScrollAwareActionBar);
+export default withNavigation(ScrollAwareActionBar)

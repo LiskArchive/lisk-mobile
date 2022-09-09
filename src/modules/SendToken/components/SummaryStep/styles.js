@@ -1,6 +1,6 @@
-import { Dimensions } from 'react-native';
+import { Dimensions } from 'react-native'
 
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide'
 
 export default function getSendTokenSummaryStepStyles() {
   return {
@@ -8,7 +8,7 @@ export default function getSendTokenSummaryStepStyles() {
       wrapper: {
         flex: 1,
         paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding
+        paddingRight: boxes.boxPadding,
       },
       container: {
         flex: 1,
@@ -71,8 +71,8 @@ export default function getSendTokenSummaryStepStyles() {
         marginBottom: 16,
       },
       avatar: {
-        marginRight: 8
-      }
+        marginRight: 8,
+      },
     },
     [themes.light]: {
       wrapper: {
@@ -86,7 +86,7 @@ export default function getSendTokenSummaryStepStyles() {
       },
       confirmAndSignTransactionModal: {
         backgroundColor: colors.light.white,
-      }
+      },
     },
     [themes.dark]: {
       wrapper: {
@@ -100,7 +100,7 @@ export default function getSendTokenSummaryStepStyles() {
       },
       confirmAndSignTransactionModal: {
         backgroundColor: colors.dark.mainBg,
-      }
+      },
     },
-  };
+  }
 }

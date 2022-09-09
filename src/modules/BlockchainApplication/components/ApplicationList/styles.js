@@ -1,6 +1,4 @@
-import {
-  themes, colors, fonts
-} from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide'
 
 export default function getApplicationListStyles() {
   return {
@@ -80,5 +78,5 @@ export default function getApplicationListStyles() {
         color: colors.light.platinum,
       },
     },
-  };
+  }
 }

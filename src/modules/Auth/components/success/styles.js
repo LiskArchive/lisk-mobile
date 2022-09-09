@@ -1,6 +1,4 @@
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide'
 
 export default () => ({
   common: {
@@ -11,7 +9,7 @@ export default () => ({
       padding: boxes.boxPadding,
       flex: 1,
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     avatarContainer: {
       alignItems: 'center',
@@ -20,10 +18,10 @@ export default () => ({
       marginTop: 10,
       textAlign: 'center',
       color: colors.light.blueGray,
-      fontSize: fonts.size.small
+      fontSize: fonts.size.small,
     },
     illustration: {
-      paddingVertical: 30
+      paddingVertical: 30,
     },
     title: {
       fontFamily: fonts.family.heading,
@@ -35,12 +33,12 @@ export default () => ({
       fontFamily: fonts.family.context,
       fontSize: fonts.size.base,
       textAlign: 'center',
-      padding: 10
+      padding: 10,
     },
     continueButton: {
       paddingHorizontal: 20,
       margin: boxes.boxPadding,
-    }
+    },
   },
 
   [themes.light]: {
@@ -66,4 +64,4 @@ export default () => ({
       color: colors.dark.ghost,
     },
   },
-});
+})

@@ -1,1 +1,1 @@
-export { default as Blur } from './blur';
+export { default as Blur } from './blur'

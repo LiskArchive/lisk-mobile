@@ -1,11 +1,11 @@
-import { persistReducer } from 'redux-persist';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { currencyKeys } from 'constants/currencies';
-import { languageKeys } from 'constants/languages';
-import { merge } from 'utilities/helpers';
-import { themes } from 'constants/styleGuide';
-import { tokenKeys } from 'constants/tokens';
-import actionTypes from '../actionTypes';
+import { persistReducer } from 'redux-persist'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { currencyKeys } from 'constants/currencies'
+import { languageKeys } from 'constants/languages'
+import { merge } from 'utilities/helpers'
+import { themes } from 'constants/styleGuide'
+import { tokenKeys } from 'constants/tokens'
+import actionTypes from '../actionTypes'
 
 export const INITIAL_STATE = {
   theme: themes.light,
@@ -16,11 +16,11 @@ export const INITIAL_STATE = {
   token: {
     active: tokenKeys[0],
     list: tokenKeys.reduce((acc, key) => {
-      acc[key] = true;
-      return acc;
+      acc[key] = true
+      return acc
     }, {}),
   },
-};
+}
 
 /**
  * If the settings read from the Async storage
@@ -31,12 +31,10 @@ export const INITIAL_STATE = {
  * @returns {Object} Setting object
  */
 const fallback = (settings) => {
-  settings.currency = currencyKeys.includes(settings.currency)
-    ? settings.currency
-    : currencyKeys[0];
-  settings.token.active = tokenKeys[0];
-  return settings;
-};
+  settings.currency = currencyKeys.includes(settings.currency) ? settings.currency : currencyKeys[0]
+  settings.token.active = tokenKeys[0]
+  return settings
+}
 
 /**
  * Defines the active token. Reverts to LSK if the active token is disabled.
@@ -47,18 +45,14 @@ const fallback = (settings) => {
  * @returns {String} active token key
  */
 const defineActiveToken = (actionToken, stateToken) => {
-  if (!actionToken) return stateToken.active;
+  if (!actionToken) return stateToken.active
   if (actionToken.active && !actionToken.list) {
-    return stateToken.list[actionToken.active] === true
-      ? actionToken.active
-      : stateToken.active;
+    return stateToken.list[actionToken.active] === true ? actionToken.active : stateToken.active
   }
 
-  const lastActiveToken = actionToken.active || stateToken.active;
-  return actionToken.list[lastActiveToken] === false
-    ? tokenKeys[0]
-    : lastActiveToken;
-};
+  const lastActiveToken = actionToken.active || stateToken.active
+  return actionToken.list[lastActiveToken] === false ? tokenKeys[0] : lastActiveToken
+}
 
 /**
  * This reducer is designed to store and retrieve the saved data
@@ -76,17 +70,17 @@ export const settings = (state = INITIAL_STATE, action = {}) => {
           active: defineActiveToken(action.data.token, state.token),
           list: action.data.token ? action.data.token.list : state.token.list,
         },
-      });
+      })
     case actionTypes.settingsRetrieved:
-      return merge(state, fallback(action.data));
+      return merge(state, fallback(action.data))
     default:
-      return state;
+      return state
   }
-};
+}
 
 const persistConfig = {
   key: 'settings',
   storage: AsyncStorage,
-};
+}
 
-export default persistReducer(persistConfig, settings);
+export default persistReducer(persistConfig, settings)

@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { deviceType } from 'utilities/device';
+import { StyleSheet } from 'react-native'
+import { deviceType } from 'utilities/device'
 
 const styles = {
   wrapper: {
@@ -10,6 +10,6 @@ const styles = {
     height: 375,
     marginTop: deviceType() === 'iOSx' ? 40 : 20,
   },
-};
+}
 
-export default StyleSheet.create(styles);
+export default StyleSheet.create(styles)

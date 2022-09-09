@@ -1,11 +1,11 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
 
-import MultiSignature from 'components/screens/multiSignature';
-import { LockedBalanceDetails } from 'modules/Accounts/components';
+import MultiSignature from 'components/screens/multiSignature'
+import { LockedBalanceDetails } from 'modules/Accounts/components'
 
-import { getNavigationHeaderOptions } from '../../helpers';
-import Tabs from '../Tabs';
+import { getNavigationHeaderOptions } from '../../helpers'
+import Tabs from '../Tabs'
 
 const config = {
   animation: 'spring',
@@ -17,9 +17,9 @@ const config = {
     restDisplacementThreshold: 0.01,
     restSpeedThreshold: 0.01,
   },
-};
+}
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 export default function AppNavigator() {
   return (
@@ -48,5 +48,5 @@ export default function AppNavigator() {
         }}
       />
     </Stack.Navigator>
-  );
+  )
 }

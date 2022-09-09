@@ -1,8 +1,4 @@
-import {
-  colors,
-  themes,
-  boxes
-} from 'constants/styleGuide';
+import { colors, themes, boxes } from 'constants/styleGuide'
 
 export default {
   common: {
@@ -23,7 +19,7 @@ export default {
       justifyContent: 'space-between',
     },
     url: {
-      color: colors.light.ultramarineBlue
+      color: colors.light.ultramarineBlue,
     },
     bottom: {
       marginBottom: boxes.boxPadding,
@@ -36,10 +32,10 @@ export default {
       marginVertical: 5,
     },
     buttonText: {
-      color: colors.light.ultramarineBlue
+      color: colors.light.ultramarineBlue,
     },
     icon: {
-      width: 30
+      width: 30,
     },
     outline: {
       borderWidth: 1,
@@ -52,11 +48,11 @@ export default {
       borderColor: colors.light.platinumGray,
     },
     container: {
-      backgroundColor: colors.dark.white
+      backgroundColor: colors.dark.white,
     },
     remove: {
       color: colors.light.zodiacBlue,
-    }
+    },
   },
 
   [themes.dark]: {
@@ -64,10 +60,10 @@ export default {
       borderColor: colors.light.volcanicSand,
     },
     container: {
-      backgroundColor: colors.dark.black
+      backgroundColor: colors.dark.black,
     },
     remove: {
       color: colors.light.white,
-    }
+    },
   },
-};
+}

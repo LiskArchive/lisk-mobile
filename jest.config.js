@@ -27,43 +27,46 @@ module.exports = {
     'utilities/tests/mock-react-i18next.js',
     'src/assets',
     'src/modules',
-    'src/navigation'
+    'src/navigation',
   ],
   coverageThreshold: {
     global: {
       branches: 65,
       functions: 80,
       lines: 80,
-      statements: 80
-    }
+      statements: 80,
+    },
   },
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
-    '.+\\.(css|png|jpg|ttf)$': 'jest-transform-stub'
+    '.+\\.(css|png|jpg|ttf)$': 'jest-transform-stub',
   },
   setupFiles: [
     './testenv.js',
     // necessary file for react-native-netinfo
     // src: https://github.com/react-native-community/react-native-netinfo#errors-while-running-jest-tests
-    './jest.setup.js'
+    './jest.setup.js',
   ],
   testURL: 'http://localhost',
   globals: {
     PRODUCTION: true,
-    TEST: true
+    TEST: true,
   },
   preset: 'react-native',
-  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect', './scripts/setupJestAfterEnv.js'],
+  setupFilesAfterEnv: [
+    '@testing-library/jest-native/extend-expect',
+    './scripts/setupJestAfterEnv.js',
+  ],
   resetModules: true,
   coverageReporters: ['text', 'html', 'lcov', 'cobertura'],
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?react-native|@react-native-community|@react-native|@react-navigation)'
+    'node_modules/(?!(jest-)?react-native|@react-native-community|@react-native|@react-navigation)',
   ],
   reporters: [
     'default',
-    ['jest-junit', { suiteName: 'jest tests', outputDirectory: '<rootDir>/coverage/jest' }]
+    ['jest-junit', { suiteName: 'jest tests', outputDirectory: '<rootDir>/coverage/jest' }],
   ],
   moduleNameMapper: {
     'react-i18next': '<rootDir>/src/tests/i18nextWrapper.js',
-  }
-};
+  },
+}

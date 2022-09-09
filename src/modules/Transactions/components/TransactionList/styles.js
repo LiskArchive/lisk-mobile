@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide'
 
 export default function getTransactionListStyles() {
   return {
@@ -29,7 +29,7 @@ export default function getTransactionListStyles() {
         fontWeight: '500',
         fontSize: 16,
         lineHeight: 19,
-      }
+      },
     },
     [themes.light]: {
       container: {
@@ -53,5 +53,5 @@ export default function getTransactionListStyles() {
         color: colors.light.white,
       },
     },
-  };
+  }
 }
