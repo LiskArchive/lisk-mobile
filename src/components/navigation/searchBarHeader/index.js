@@ -11,18 +11,18 @@ import { H3, P } from 'components/shared/toolBox/typography'
 import getStyles from './styles'
 
 const HeaderBackButton = ({
-  theme,
-  styles,
-  onPress,
-  color,
-  icon,
-  title,
-  t,
-  noIcon,
-  value,
-  onChange,
-  isSearchOpen,
-  setIsSearchOpen,
+      theme,
+      styles,
+      onPress,
+      color,
+      icon,
+      title,
+      t,
+      noIcon,
+      value,
+      onChange,
+      isSearchOpen,
+      setIsSearchOpen,
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white
