@@ -31,7 +31,7 @@ function DeleteBlockchainApplication({ t, sharedData: { application }, nextStep 
           />
 
           <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-            {application.name}
+            {application.chainName}
           </P>
         </View>
 

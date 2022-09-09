@@ -41,7 +41,7 @@ export default function SendTokenSummaryStep({
 
             <View style={[styles.row]}>
               <Text style={[styles.valueText, styles.theme.valueText]}>
-                {summary.senderApplication?.name}
+                {summary.senderApplication?.chainName}
               </Text>
 
               <Image
@@ -58,7 +58,7 @@ export default function SendTokenSummaryStep({
 
             <View style={[styles.row]}>
               <Text style={[styles.valueText, styles.theme.valueText]}>
-                {summary.recipientApplication?.name}
+                {summary.recipientApplication?.chainName}
               </Text>
 
               <Image

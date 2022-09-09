@@ -56,7 +56,7 @@ export function SendTokenSenderApplicationField({
         {senderApplication && (
           <View style={[styles.row]}>
             <Text style={[styles.text, styles.theme.text]}>
-              {senderApplication.name}
+              {senderApplication.chainName}
             </Text>
 
             <Image
@@ -105,7 +105,7 @@ export function SendTokenRecipientApplicationField({
         {recipientApplication && (
           <View style={[styles.row]}>
             <Text style={[styles.text, styles.theme.text]}>
-              {recipientApplication.name}
+              {recipientApplication.chainName}
             </Text>
 
             <Image
@@ -126,7 +126,7 @@ export function SendTokenRecipientApplicationField({
               value={item.chainID}
             >
               <Text style={[styles.text, styles.theme.text]}>
-                {item.name}
+                {item.chainName}
               </Text>
 
               <Image

@@ -8,8 +8,8 @@ export const mockDefaultApplication = {
   projectPage: 'https://lisk.com',
   serviceURLs: [
     {
-      http: 'https://betanet-service.lisk.com',
-      ws: 'wss://betanet-service.lisk.com'
+      http: 'http://104.248.241.229:9901',
+      ws: 'wss://104.248.241.229:9901'
     }
   ],
   logo: {
@@ -24,11 +24,11 @@ export const mockDefaultApplication = {
   ],
   appNodes: [
     {
-      url: 'https://betanet.lisk.com',
+      url: 'http://104.248.241.229:9901',
       maintainer: 'Lightcurve GmbH'
     },
     {
-      url: 'wss://betanet.lisk.com',
+      url: 'wss://104.248.241.229:9901',
       maintainer: 'Lightcurve GmbH'
     }
   ],

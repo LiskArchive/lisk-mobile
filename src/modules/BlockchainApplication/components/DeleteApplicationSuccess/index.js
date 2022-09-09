@@ -10,7 +10,7 @@ function DeleteApplicationSuccess({ t, finalCallback, sharedData: { application 
     <SuccessScreen
       illustration={<CircleCheckedSvg height={90} width={90} color={colors.light.ufoGreen} />}
       title={'Application has now been removed'}
-      description={`You can always add ${application.name} again to your application list.`}
+      description={`You can always add ${application.chainName} again to your application list.`}
       onContinue={finalCallback}
       buttonText={t('application.manage.continueToWalletButtonText')}
     />
