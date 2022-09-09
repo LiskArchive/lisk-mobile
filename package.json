@@ -190,6 +190,11 @@
   "jest": {
     "preset": "react-native"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "react-native": {
     "zlib": "browserify-zlib",
     "console": "console-browserify",
