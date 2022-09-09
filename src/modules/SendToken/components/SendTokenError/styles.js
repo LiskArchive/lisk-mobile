@@ -6,14 +6,8 @@ export default function getSendTokenErrorStyles() {
   return {
     common: {
       container: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
         flex: 1,
-      },
-      body: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        flex: 1,
+        width: '100%'
       },
       title: {
         textAlign: 'center',
@@ -21,16 +15,17 @@ export default function getSendTokenErrorStyles() {
         fontWeight: '700',
         marginBottom: 16
       },
-      subtitle: {
+      description: {
         textAlign: 'center',
-        marginBottom: 24
+        fontSize: fonts.size.base,
       },
       actionLabel: {
         textAlign: 'center',
-        marginBottom: 16
+        fontSize: fonts.size.base,
       },
       tryAgainButton: {
-        marginBottom: 24
+        marginTop: 24,
+        marginBottom: 24,
       },
       illustrationContainer: {
         alignItems: 'center',
@@ -42,10 +37,10 @@ export default function getSendTokenErrorStyles() {
       container: {
         backgroundColor: colors.light.white
       },
-      subtitle: {
-        color: colors.light.slateGray
-      },
       title: {
+        color: colors.light.zodiacBlue
+      },
+      description: {
         color: colors.light.zodiacBlue
       },
       actionLabel: {
@@ -56,11 +51,11 @@ export default function getSendTokenErrorStyles() {
       container: {
         backgroundColor: colors.dark.mainBg
       },
-      subtitle: {
-        color: colors.dark.slateGray
-      },
       title: {
         color: colors.dark.white
+      },
+      description: {
+        color: colors.dark.slateGray
       },
       actionLabel: {
         color: colors.dark.slateGray

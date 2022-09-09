@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -10,7 +10,7 @@ import { themes } from 'constants/styleGuide';
 
 import getSendTokenSuccessStyles from './styles';
 
-function SendTokenSuccess({ onClick, t }) {
+export default function SendTokenSuccess({ onClick }) {
   const { styles, theme } = useTheme({
     styles: getSendTokenSuccessStyles(),
   });
@@ -24,21 +24,19 @@ function SendTokenSuccess({ onClick, t }) {
         }
 
         <Text style={[styles.title, styles.theme.title]}>
-          {t('sendToken.result.success.title')}
+          {i18next.t('sendToken.result.success.title')}
         </Text>
 
-        <Text style={[styles.subtitle, styles.theme.subtitle]}>
-          {t('sendToken.result.success.description')}
+        <Text style={[styles.description, styles.theme.description]}>
+          {i18next.t('sendToken.result.success.description')}
         </Text>
       </View>
 
       <PrimaryButton
         style={{ marginBottom: 24 }}
         onClick={onClick}
-        title={t('sendToken.result.success.closeButtonText')}
+        title={i18next.t('sendToken.result.success.closeButtonText')}
       />
     </View>
   );
 }
-
-export default translate()(SendTokenSuccess);

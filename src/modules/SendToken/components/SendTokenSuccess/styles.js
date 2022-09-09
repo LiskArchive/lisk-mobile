@@ -6,8 +6,6 @@ export default function getSendTokenSuccessStyles() {
   return {
     common: {
       container: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
         flex: 1,
       },
       title: {
@@ -16,8 +14,9 @@ export default function getSendTokenSuccessStyles() {
         fontWeight: '700',
         marginBottom: 16
       },
-      subtitle: {
-        textAlign: 'center'
+      description: {
+        textAlign: 'center',
+        fontSize: fonts.size.base,
       },
       illustrationContainer: {
         flex: 1,
@@ -33,22 +32,22 @@ export default function getSendTokenSuccessStyles() {
       container: {
         backgroundColor: colors.light.white
       },
-      subtitle: {
-        color: colors.light.slateGray
-      },
       title: {
         color: colors.light.zodiacBlue
-      }
+      },
+      description: {
+        color: colors.light.zodiacBlue
+      },
     },
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg
       },
-      subtitle: {
-        color: colors.dark.slateGray
-      },
       title: {
         color: colors.dark.white
+      },
+      description: {
+        color: colors.dark.slateGray
       },
     }
   };

@@ -7,48 +7,6 @@ describe('apiClient', () => {
     jest.clearAllMocks();
   });
 
-  describe('getNetworkState', () => {
-    const data = {
-      height: 2912982123,
-      blockTime: 10
-    };
-
-    it('Retrieve a transaction by id', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: true,
-          status: 200,
-          json: () => ({
-            data: {
-              height: 2912982123,
-              blockTime: 10
-            }
-          })
-        })
-      );
-      const result = await apiClient.getNetworkInfo();
-      expect(result).toEqual(data);
-      expect(fetch).toHaveBeenCalledWith(
-        'https://service.lisk.com/api/v3/network/status',
-        expect.anything()
-      );
-    });
-
-    it('Throw error for all other errors', async () => {
-      global.fetch.mockReturnValue(
-        Promise.resolve({
-          ok: false,
-          status: 500
-        })
-      );
-      try {
-        await apiClient.getNetworkInfo();
-      } catch (e) {
-        expect(e.message).toEqual('Failed to request network info from server.');
-      }
-    });
-  });
-
   describe('getLatestBlock', () => {
     const data = {
       height: 2912982123,

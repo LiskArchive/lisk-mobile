@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Text, Clipboard } from 'react-native';
+import React from 'react';
+import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
 import Icon from '../toolBox/icon';
 
+import { useCopyToClipboard } from './hooks';
 import getStyles from './styles';
 
 export default function CopyToClipBoard({
@@ -18,23 +19,9 @@ export default function CopyToClipBoard({
   labelStyle,
   iconColor,
 }) {
-  const [copied, setCopied] = useState(false);
-
-  let timeout = useRef();
+  const [copied, handleCopy] = useCopyToClipboard(value);
 
   const { styles } = useTheme({ styles: getStyles() });
-
-  function handleCopy() {
-    setCopied(prevState => !prevState);
-
-    Clipboard.setString(value);
-
-    timeout = setTimeout(() => {
-      setCopied(prevState => !prevState);
-    }, 4000);
-  }
-
-  useEffect(() => () => clearTimeout(timeout), []);
 
   const Element = type || Text;
 

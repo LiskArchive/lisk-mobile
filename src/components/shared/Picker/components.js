@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+/* eslint-disable complexity */
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
@@ -33,6 +35,38 @@ export function PickerToggle({
     styles: getPickerStyles(error),
   });
 
+  let valueToRender = children;
+
+  if (!valueToRender) {
+    if (value) {
+      valueToRender = (
+        <Text
+          style={[
+            styles.toggleText,
+            styles.theme.toggleText,
+            baseStyle?.toggleText
+          ]}
+        >
+          {value}
+        </Text>
+      );
+    } else if (typeof placeholder === 'string') {
+      valueToRender = (
+        <Text
+          style={[
+            styles.togglePlaceholder,
+            styles.theme.togglePlaceholder,
+            baseStyle?.toggleText
+          ]}
+        >
+          {placeholder}
+        </Text>
+      );
+    } else {
+      valueToRender = placeholder;
+    }
+  }
+
   return (
     <>
       <TouchableOpacity
@@ -44,17 +78,7 @@ export function PickerToggle({
           baseStyle?.container
         ]}
       >
-        {children || (
-          <Text
-            style={[
-              styles[value ? 'toggleText' : 'togglePlaceholder'],
-              styles.theme[value ? 'toggleText' : 'togglePlaceholder'],
-              baseStyle?.toggleText
-            ]}
-          >
-            {value || placeholder}
-          </Text>
-        )}
+        {valueToRender}
 
         {!disabled && (
           <CaretSvg

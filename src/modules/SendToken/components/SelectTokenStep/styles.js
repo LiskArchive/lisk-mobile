@@ -22,6 +22,11 @@ export default function getSendTokenSelectTokenStepStyles() {
         justifyContent: 'space-between',
         marginBottom: 16
       },
+      labelContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 8,
+      },
       tokenSvg: {
         marginLeft: 8,
       },
@@ -50,8 +55,10 @@ export default function getSendTokenSelectTokenStepStyles() {
         borderColor: colors.light.ultramarineBlue,
       },
       label: {
-        marginBottom: 8,
-        color: colors.light.blueGray
+        fontSize: 14,
+      },
+      iconLabel: {
+        marginRight: 6,
       },
       priorityButtonText: {
         color: colors.light.zodiacBlue,
@@ -79,6 +86,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       label: {
         color: colors.light.zodiacBlue
       },
+      messageLabel: {
+        color: colors.light.zodiacBlue
+      },
       priorityButtonText: {
         color: colors.light.zodiacBlue,
       },
@@ -96,6 +106,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       label: {
         color: colors.light.white
       },
+      messageLabel: {
+        color: colors.light.white
+      },
       priorityButtonText: {
         color: colors.light.whiteSmoke
       },
@@ -106,5 +119,46 @@ export default function getSendTokenSelectTokenStepStyles() {
         color: colors.light.whiteSmoke,
       }
     },
+  };
+}
+
+export function getSendTokenMessageFieldStyles(styles) {
+  return {
+    containerStyle: {
+      paddingTop: 0,
+      paddingRight: 0,
+      paddingLeft: 0,
+      ...styles?.container
+    },
+    inputLabel: {
+      marginBottom: 8,
+      ...styles?.inputLabel
+    },
+    input: {
+      padding: 16,
+      minHeight: 80,
+      ...styles?.input
+    }
+  };
+}
+
+export function getSendTokenAmountFieldStyles(styles) {
+  return {
+    containerStyle: {
+      paddingTop: 0,
+      paddingRight: 0,
+      paddingLeft: 0,
+      ...styles?.container
+      // marginBottom: 16,
+      // marginTop: 16,
+    },
+    inputLabel: {
+      marginBottom: 8,
+      ...styles?.inputLabel
+    },
+    input: {
+      padding: 16,
+      ...styles?.input
+    }
   };
 }

@@ -4,4 +4,3 @@ export { default as blockchainApplications } from 'modules/BlockchainApplication
 export { default as bookmark } from 'modules/Bookmark/store/reducer';
 export { default as loading } from './loading';
 export { default as service } from './service';
-export { default as network } from './network';

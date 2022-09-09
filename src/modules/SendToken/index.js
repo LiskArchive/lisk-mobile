@@ -1,12 +1,12 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Stepper from 'components/shared/Stepper';
 
-import { useNavigation } from '@react-navigation/native';
 import { getSendTokenStyles } from './styles';
 import SendTokenApplicationsStep from './components/SelectApplicationsStep';
 import SendTokenSelectTokenStep from './components/SelectTokenStep';
@@ -47,13 +47,16 @@ export default function SendToken({ route }) {
       <HeaderBackButton
         title="Send token"
         onPress={navigation.goBack}
-        containerStyle={{ marginBottom: 24 }}
+        containerStyle={[styles.header]}
       />
 
       {accountIsMultisignature ? (
         <SendTokenOnMultisignatureAccount />
       ) : (
-        <Stepper showProgressBar >
+        <Stepper
+          showProgressBar
+          styles={{ progressBar: { wrapper: styles.progressBar } }}
+        >
           {steps.map(step => (
             <step.component
               key={step.title}

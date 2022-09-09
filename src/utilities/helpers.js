@@ -2,6 +2,18 @@ import { StyleSheet } from 'react-native';
 import regex from 'constants/regex';
 import { themes } from 'constants/styleGuide';
 
+export const serializeQueryString = (obj) => {
+  let str = '?';
+  str += Object.keys(obj)
+    .reduce((a, k) => {
+      // eslint-disable-next-line no-unused-expressions
+      obj[k] && a.push(`${k}=${encodeURIComponent(obj[k])}`);
+      return a;
+    }, [])
+    .join('&');
+  return str;
+};
+
 /**
  * Helps to create themed stylesheet for components.
  * @param {Object} styles - style declerations for the component.

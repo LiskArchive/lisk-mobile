@@ -4,7 +4,7 @@ jest.mock('msw/node', () => ({
   setupServer: jest.fn(() => 'foo'),
 }));
 
-describe('useNetworkStatus hook', () => {
+describe('useGetNetworkStatusQuery hook', () => {
   it('fetching data correctly', async () => {
     expect(server).toEqual('foo');
   });

@@ -7,13 +7,14 @@ import List from './List';
 import getStyles from './styles';
 import { selectBookmarkList } from '../store/selectors';
 
-const Repeater = ({
+const BookmarkList = ({
   onPress,
-  query,
+  query = '',
   setRef,
   draggable,
   renderEmpty,
-  filterAddress
+  filterAddress,
+  Component
 }) => {
   const styles = useTheme({ styles: getStyles() });
   const list = useSelector(selectBookmarkList);
@@ -23,10 +24,10 @@ const Repeater = ({
       if (filterAddress) {
         return false;
       }
-      if (query.length === 0) return true;
+      if (query?.length === 0) return true;
       return (
         item.address.indexOf(query) >= 0
-        || item.label.toLowerCase().indexOf(query.toLowerCase()) >= 0
+        || item.label.toLowerCase().indexOf(query?.toLowerCase()) >= 0
       );
     }), [list, filterAddress, query]);
 
@@ -40,9 +41,10 @@ const Repeater = ({
         showAvatar
         setRef={setRef}
         onPress={onPress}
+        Component={Component}
       />
     )}
   </View>;
 };
 
-export default Repeater;
+export default BookmarkList;

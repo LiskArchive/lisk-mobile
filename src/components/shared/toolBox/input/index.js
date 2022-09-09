@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+/* eslint-disable complexity */
 import React from 'react';
 import {
   View, Text, TextInput, TouchableOpacity
@@ -73,17 +75,21 @@ class Input extends React.Component {
       inputStyle = [...inputStyle, styles.inputFocused, styles.theme.inputFocused];
     }
 
+    if (adornments?.left) inputStyle = [...inputStyle, styles.inputWithLeftAdornment];
+
+    if (adornments?.right) inputStyle = [...inputStyle, styles.inputWithRightAdornment];
+
     if (error) {
       inputStyle = [...inputStyle, styles.theme.inputErrorStyle];
     }
 
     return (
       <View style={[styles.inputContainer, innerStyles.containerStyle]}>
-        {label ? (
+        {typeof label === 'string' ? (
           <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
             {label}
           </Text>
-        ) : null}
+        ) : label}
         <View style={styles.inputRow}>
           {adornments?.left && (
             <View style={styles.leftAdornment}>

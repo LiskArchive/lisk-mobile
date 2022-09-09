@@ -7,7 +7,7 @@ export function getPickerStyles(error) {
     common: {
       label: {
         color: colors.light.maastrichtBlue,
-        fontSize: fonts.size.base,
+        fontSize: fonts.size.input,
         marginBottom: 8,
       },
       toggleContainer: {
@@ -25,7 +25,7 @@ export function getPickerStyles(error) {
       },
       togglePlaceholder: {
         fontSize: 16,
-        color: colors.light.platinum,
+        color: colors.light.ghost,
         fontWeight: '400'
       },
       menuModalContainer: {
