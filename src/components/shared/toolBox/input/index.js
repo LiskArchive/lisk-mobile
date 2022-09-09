@@ -84,7 +84,7 @@ class Input extends React.Component {
     }
 
     return (
-      <View style={[styles.inputContainer, innerStyles.containerStyle]}>
+      <View style={[innerStyles.containerStyle]}>
         {typeof label === 'string' ? (
           <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
             {label}

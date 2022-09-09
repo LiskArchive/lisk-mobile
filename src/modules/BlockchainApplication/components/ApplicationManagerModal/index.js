@@ -18,10 +18,11 @@ export default function ApplicationManagerModal({ show, setShow }) {
       show={show}
       toggleShow={setShow}
       style={{ container: styles.container }}
-      >
+    >
       <Stepper
         currentIndex={0}
-        finalCallback={closeModal}>
+        finalCallback={closeModal}
+      >
         <ManageApplication
           closeModal={closeModal}
         />
