@@ -9,7 +9,7 @@ import withTheme from 'components/shared/withTheme';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import { mockDefaultApplication } from 'modules/BlockchainApplication/__fixtures__';
+import { mockDefaultApplicationMeta } from 'modules/BlockchainApplication/__fixtures__';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import { settingsRetrieved } from '../../Settings/actions';
 import getStyles from './styles';
@@ -36,7 +36,7 @@ const AuthMethod = ({
 
   useEffect(() => {
     // TODO: Replace with live data
-    setCurrentApplication(mockDefaultApplication);
+    setCurrentApplication(mockDefaultApplicationMeta);
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());
       init();

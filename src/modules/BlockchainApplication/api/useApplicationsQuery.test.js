@@ -4,13 +4,13 @@ import configureMockStore from 'redux-mock-store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 
-import { mockApplicationsMeta } from '../__fixtures__';
+import { mockApplications } from '../__fixtures__';
 
-import { useApplicationsMetaQuery } from './useApplicationsMetaQuery';
+import { useApplicationsQuery } from './useApplicationsQuery';
 
 const mockState = {
   blockchainApplications: {
-    current: mockApplicationsMeta[0],
+    current: mockApplications[0],
     pins: [],
   },
 };
@@ -22,7 +22,7 @@ const ReduxProvider = ({ children, reduxStore }) => (
   <Provider store={reduxStore}>{children}</Provider>
 );
 
-describe('useApplicationsMetaQuery hook', () => {
+describe('useApplicationsQuery hook', () => {
   it('should fetch data correctly', async () => {
     const store = mockStore(mockState);
     const wrapper = ({ children }) => (
@@ -31,14 +31,14 @@ describe('useApplicationsMetaQuery hook', () => {
       </QueryClientProvider>
     );
     const { result, waitFor } = renderHook(() =>
-      useApplicationsMetaQuery(), { wrapper });
+      useApplicationsQuery(), { wrapper });
 
     await waitFor(() => result.current.isFetched);
 
     expect(result.current.isSuccess).toBeTruthy();
 
     const expectedResponse = {
-      data: mockApplicationsMeta,
+      data: mockApplications,
       meta: {
         count: 20,
         offset: 0,

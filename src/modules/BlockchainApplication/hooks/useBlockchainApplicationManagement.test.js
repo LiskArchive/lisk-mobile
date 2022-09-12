@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { renderHook, act } from '@testing-library/react-hooks';
 
-import { mockApplications, mockMappedApplications } from '../__fixtures__';
+import { mockApplicationsMeta, mockMappedApplicationsMeta } from '../__fixtures__';
 import actionTypes from '../store/actionTypes';
 import { useBlockchainApplicationManagement } from './useBlockchainApplicationManagement';
 
@@ -13,7 +13,7 @@ const mockStore = configureMockStore();
 const mockDispatch = jest.fn();
 const mockState = {
   blockchainApplications: {
-    applications: mockMappedApplications,
+    applications: mockMappedApplicationsMeta,
     pins: [],
   },
 };
@@ -21,7 +21,7 @@ const mockState = {
 const ReduxProvider = ({ children, reduxStore }) => (
   <Provider store={reduxStore}>{children}</Provider>
 );
-const mockCurrentApplication = mockApplications[0];
+const mockCurrentApplication = mockApplicationsMeta[0];
 const mockSetCurrentApplication = jest.fn();
 
 jest.mock('react-redux', () => ({
@@ -61,11 +61,11 @@ describe('useBlockchainApplicationManagement hook', () => {
 
     const expectedAction = {
       type: actionTypes.addApplication,
-      application: mockApplications[3],
+      application: mockApplicationsMeta[3],
     };
 
     act(() => {
-      addApplication(mockApplications[3]);
+      addApplication(mockApplicationsMeta[3]);
     });
 
     expect(store.getActions()).toEqual([expectedAction]);
@@ -75,7 +75,7 @@ describe('useBlockchainApplicationManagement hook', () => {
     const { addApplication } = result.current;
 
     act(() => {
-      addApplication(mockApplications[0]);
+      addApplication(mockApplicationsMeta[0]);
     });
 
     expect(mockDispatch).not.toHaveBeenCalled();
@@ -84,9 +84,9 @@ describe('useBlockchainApplicationManagement hook', () => {
   it('getApplicationByChainId should return an application if chainId exists', () => {
     const { getApplicationByChainId } = result.current;
 
-    const updatedApplication = { ...mockApplications[3], isPinned: false };
+    const updatedApplication = { ...mockApplicationsMeta[3], isPinned: false };
 
-    expect(getApplicationByChainId(mockApplications[3].chainID)).toEqual(
+    expect(getApplicationByChainId(mockApplicationsMeta[3].chainID)).toEqual(
       updatedApplication
     );
   });
@@ -102,13 +102,13 @@ describe('useBlockchainApplicationManagement hook', () => {
 
     const expectedAction = {
       type: actionTypes.deleteApplicationByChainId,
-      chainId: mockApplications[3].chainID,
+      chainId: mockApplicationsMeta[3].chainID,
     };
 
     store.clearActions();
 
     act(() => {
-      deleteApplicationByChainId(mockApplications[3].chainID);
+      deleteApplicationByChainId(mockApplicationsMeta[3].chainID);
     });
 
     expect(store.getActions()).toEqual([expectedAction]);

@@ -14,8 +14,6 @@ export function useBlockchainApplicationExplorer() {
 
   const { pins, checkPinByChainId } = usePinBlockchainApplication();
 
-  console.log({ applicationsQuery });
-
   const applications = useMemo(() => {
     const data = applicationsQuery.data?.data.map((app) => ({
       ...app,

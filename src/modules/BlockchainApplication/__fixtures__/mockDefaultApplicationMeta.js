@@ -1,4 +1,4 @@
-export const mockDefaultApplication = {
+export const mockDefaultApplicationMeta = {
   chainName: 'Lisk',
   chainID: '00000001',
   title: 'Lisk - Betanet',
