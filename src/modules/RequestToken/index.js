@@ -50,7 +50,7 @@ export default function RequestToken() {
 
   const [currentApplication] = useCurrentBlockchainApplication();
 
-  const { applications } = useBlockchainApplicationExplorer();
+  const { applicationsMetadata } = useBlockchainApplicationExplorer();
 
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
@@ -104,7 +104,7 @@ export default function RequestToken() {
     }
   />;
 
-  if (applications.isLoading) {
+  if (applicationsMetadata.isLoading) {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={[styles.container]}>
@@ -156,7 +156,7 @@ export default function RequestToken() {
           <SendTokenRecipientApplicationField
             value={recipientApplicationChainID}
             onChange={setRecipientApplicationChainID}
-            applications={applications}
+            applications={applicationsMetadata}
             style={{ toggle: { container: { marginBottom: 16 } } }}
           />
 

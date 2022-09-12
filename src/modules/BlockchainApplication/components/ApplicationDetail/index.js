@@ -1,10 +1,10 @@
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
 import {
-  ScrollView, View, ImageBackground, Image, Text
+  ScrollView, View, ImageBackground, Image
 } from 'react-native';
 import { useTheme } from 'hooks/useTheme';
-// import moment from 'moment';
+import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -38,12 +38,17 @@ export default function ApplicationDetail({ route }) {
 
   const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
   const { addApplication } = useBlockchainApplicationManagement();
-  const { applications } = useBlockchainApplicationExplorer();
+  const { applications, applicationsMetadata } = useBlockchainApplicationExplorer();
 
   const application = useMemo(
-    () => applications.data?.filter((app) => app.chainID === chainID) ?? [],
+    () => applications.data?.find((app) => app.chainID === chainID),
     [chainID, applications]
-  )[0];
+  );
+
+  const applicationMetadata = useMemo(
+    () => applicationsMetadata.data?.find((app) => app.chainID === chainID),
+    [chainID, applicationsMetadata]
+  );
 
   const isPinned = checkPinByChainId(chainID);
 
@@ -52,25 +57,18 @@ export default function ApplicationDetail({ route }) {
     navigation.navigate('AddApplicationSuccess');
   };
 
-  if (applications.isLoading) {
-    return (
-      <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
-        <Text>Loading applications...</Text>
-      </ScrollView>
-    );
-  }
+  console.log({ application, applicationMetadata });
 
   return (
-    <ScrollView
-      contentContainerStyle={[styles.flex, styles.theme.container]}
-    >
+    <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
       {variant === 'explore' && (
         <ImageBackground
           style={[
             styles.header,
             styles.explore,
             styles.container,
-            application.backgroundColor && { backgroundColor: application.backgroundColor },
+            applicationMetadata?.backgroundColor
+            && { backgroundColor: applicationMetadata?.backgroundColor },
           ]}
           source={wavesPattern}
           resizeMode="cover"
@@ -89,33 +87,38 @@ export default function ApplicationDetail({ route }) {
           style={[
             styles.header,
             styles.container,
-            application.backgroundColor && { backgroundColor: application.backgroundColor }
+            applicationMetadata?.backgroundColor
+            && { backgroundColor: applicationMetadata?.backgroundColor }
           ]}
           resizeMode="stretch"
         >
-          <HeaderBackButton title={application.chainName} onPress={navigation.goBack} />
+          <HeaderBackButton title={applicationMetadata?.chainName} onPress={navigation.goBack} />
         </View>
       )}
 
       <Image
         style={[styles.logoContainer, styles.theme.logoContainer]}
-        source={{ uri: application.logo.png }}
+        source={{ uri: applicationMetadata?.logo.png }}
       />
 
       <View style={[styles.flex, styles.body]}>
         <View style={styles.titleRow}>
-          <H3 style={[styles.title, styles.theme.title]}>{application.chainName}</H3>
+          <H3 style={[styles.title, styles.theme.title]}>
+            {applicationMetadata?.chainName}
+          </H3>
 
           <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
             <PinSvg variant={isPinned ? 'fill' : 'outline'} width={25} height={25} />
           </TouchableOpacity>
         </View>
 
-        {/* <P style={[styles.address, styles.theme.address]}>{application.address}</P> */}
+        <P style={[styles.address, styles.theme.address]}>
+          {application?.address}
+        </P>
 
         <View style={[styles.row, styles.appLinkContainer]}>
           <UrlSvg size={1.2} />
-          <P style={styles.url}>{application.explorers[0].url}</P>
+          <P style={styles.url}>{applicationMetadata?.explorers[0].url}</P>
         </View>
 
         <View style={[styles.row, styles.depositedContainer]}>
@@ -123,7 +126,9 @@ export default function ApplicationDetail({ route }) {
             {i18next.t('application.details.deposited')}:
           </P>
 
-          {/* <P style={styles.amount}>{`${application.deposited.toLocaleString()} LSK`}</P> */}
+          <P style={styles.amount}>
+            {`${application?.deposited.toLocaleString()} LSK`}
+          </P>
         </View>
 
         <View style={styles.stats}>
@@ -136,18 +141,20 @@ export default function ApplicationDetail({ route }) {
             </View>
 
             <View style={styles.item}>
-              <P style={styles.smallTitle}>{i18next.t('application.details.status')} </P>
+              <P style={styles.smallTitle}>
+                {i18next.t('application.details.status')}
+              </P>
 
-              <View style={[styles.stateContainer, styles[`${application.state}Container`]]}>
-                {/* <P
+              <View style={[styles.stateContainer, styles[`${application?.state}Container`]]}>
+                <P
                   style={[
                     styles.value,
-                    styles[application.state],
-                    styles.theme[application.state
-                    ]]}
+                    styles[application?.state],
+                    styles.theme[application?.state]
+                  ]}
                 >
-                  {application.state}
-                </P> */}
+                  {application?.state}
+                </P>
               </View>
             </View>
           </View>
@@ -158,28 +165,26 @@ export default function ApplicationDetail({ route }) {
                 {i18next.t('application.details.lastUpdated')}
               </P>
 
-              {/* <P style={[styles.value, styles.theme.value]}>
-                {moment(application.lastUpdated).format('D MMM YYYY')}
-              </P> */}
+              <P style={[styles.value, styles.theme.value]}>
+                {moment(application?.lastUpdated).format('D MMM YYYY')}
+              </P>
             </View>
 
             <View style={styles.item}>
               <P style={styles.smallTitle}>
                 {i18next.t('application.details.lastCertificateHeight')}
               </P>
-              {/* <P style={[styles.value, styles.theme.value]}>
-                {application.lastCertificateHeight}
-              </P> */}
+              <P style={[styles.value, styles.theme.value]}>
+                {application?.lastCertificateHeight}
+              </P>
             </View>
           </View>
         </View>
 
         {variant === 'manage' && (
-          <View>
-            <PrimaryButton onClick={handleAddApplicationClick}>
-              {i18next.t('application.manage.add.confirmButtonText')}
-            </PrimaryButton>
-          </View>
+          <PrimaryButton onClick={handleAddApplicationClick}>
+            {i18next.t('application.manage.add.confirmButtonText')}
+          </PrimaryButton>
         )}
       </View>
     </ScrollView>

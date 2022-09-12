@@ -12,14 +12,14 @@ import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQue
  * @param {Object} config - Custom configurations for the query.
  * @param {Object} options - Custom options for the query.
  * @returns - The query state of the API call. Includes the data
- * (with the array of applications), loading state, error state, and more.
+ * (applications), loading state, error state, and more.
  */
-export function useGetApplicationsMetaQuery({ config: customConfig = {}, options = {} } = {}) {
+export function useApplicationsMetaQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
     baseURL: API_BASE_URL,
     url: `${API_URL}/blockchain/apps/meta`,
     method: 'get',
-    event: 'get.blockchainAppsMeta',
+    event: 'get.blockchainApplicationsMeta',
     ...customConfig,
     params: {
       limit: LIMIT,
