@@ -318,7 +318,7 @@
       "downloaded": "Downloaded!",
       "buttons": {
         "passwordSetupContinue": "Continue to Dashboard",
-        "save_account": "Save account",
+        "saveAccount": "Save account",
         "download": "Download"
       }
     },
