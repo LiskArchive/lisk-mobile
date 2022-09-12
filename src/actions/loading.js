@@ -1,4 +1,4 @@
-import actionTypes from 'constants/actions'
+import actionTypes from 'constants/actions';
 
 /**
  * Returns a pure action object to store the Id of Api call which
@@ -11,7 +11,7 @@ import actionTypes from 'constants/actions'
 export const loadingStarted = (data) => ({
   data,
   type: actionTypes.loadingStarted,
-})
+});
 
 /**
  * Returns a pure action object to remove the Id of Api call which
@@ -25,4 +25,4 @@ export const loadingStarted = (data) => ({
 export const loadingFinished = (data) => ({
   data,
   type: actionTypes.loadingFinished,
-})
+});

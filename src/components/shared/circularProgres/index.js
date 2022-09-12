@@ -1,19 +1,19 @@
-import React from 'react'
-import { View } from 'react-native'
-import { Circle, Svg } from 'react-native-svg'
-import { colors } from 'constants/styleGuide'
+import React from 'react';
+import { View } from 'react-native';
+import { Circle, Svg } from 'react-native-svg';
+import { colors } from 'constants/styleGuide';
 
 const CircularProgress = ({ style, value, max }) => {
-  let percentage = (value * 100) / max
-  percentage = percentage > 100 ? 100 : percentage
-  const error = value > max
-  const radius = 45
-  const circunference = Math.PI * (radius * 2)
-  const offset = ((100 - percentage) / 100) * circunference
+  let percentage = (value * 100) / max;
+  percentage = percentage > 100 ? 100 : percentage;
+  const error = value > max;
+  const radius = 45;
+  const circunference = Math.PI * (radius * 2);
+  const offset = ((100 - percentage) / 100) * circunference;
   const defaultDimensions = {
     width: 20,
     height: 20,
-  }
+  };
 
   return (
     <View style={[style, (!style || (!style.width && !style.height)) && defaultDimensions]}>
@@ -42,7 +42,7 @@ const CircularProgress = ({ style, value, max }) => {
         />
       </Svg>
     </View>
-  )
-}
+  );
+};
 
-export default CircularProgress
+export default CircularProgress;

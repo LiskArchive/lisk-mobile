@@ -1,16 +1,16 @@
-import { apiClient } from './apiClient'
+import { apiClient } from './apiClient';
 
 describe('apiClient', () => {
-  global.fetch = jest.fn()
+  global.fetch = jest.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks()
-  })
+    jest.clearAllMocks();
+  });
 
   describe('getLatestBlock', () => {
     const data = {
       height: 2912982123,
-    }
+    };
 
     it('should get latest blocks', async () => {
       global.fetch.mockReturnValue(
@@ -25,14 +25,14 @@ describe('apiClient', () => {
             ],
           }),
         })
-      )
-      const result = await apiClient.getLatestBlock()
-      expect(result).toEqual(data)
+      );
+      const result = await apiClient.getLatestBlock();
+      expect(result).toEqual(data);
       expect(fetch).toHaveBeenCalledWith(
         'https://service.lisk.com/api/v3/blocks',
         expect.anything()
-      )
-    })
+      );
+    });
 
     it('should throw error when failed to fetch latest blocks', async () => {
       global.fetch.mockReturnValue(
@@ -40,12 +40,12 @@ describe('apiClient', () => {
           ok: false,
           status: 500,
         })
-      )
+      );
       try {
-        await apiClient.getLatestBlock()
+        await apiClient.getLatestBlock();
       } catch (e) {
-        expect(e.message).toEqual('Failed to retrieve the latest block from server.')
+        expect(e.message).toEqual('Failed to retrieve the latest block from server.');
       }
-    })
-  })
-})
+    });
+  });
+});

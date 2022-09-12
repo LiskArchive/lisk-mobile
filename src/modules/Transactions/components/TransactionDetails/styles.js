@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide'
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default function getTransactionDetailsStyles() {
   return {
@@ -82,5 +82,5 @@ export default function getTransactionDetailsStyles() {
         color: colors.dark.silverGrey,
       },
     },
-  }
+  };
 }

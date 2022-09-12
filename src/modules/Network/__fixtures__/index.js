@@ -1,1 +1,1 @@
-export * from './mockNetworkStatus'
+export * from './mockNetworkStatus';

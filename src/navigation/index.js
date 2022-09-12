@@ -1,39 +1,39 @@
-import React from 'react'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
 
-import { colors } from 'constants/styleGuide'
-import Register from 'modules/Auth/Register'
-import AddBookmark from 'modules/Bookmark/AddBookmark'
-import TransactionDetails from 'modules/Transactions/components/TransactionDetails'
-import Wallet from 'modules/Wallet'
-import About from 'components/screens/about'
-import CurrencySelection from 'components/screens/currencySelection'
-import Terms from 'components/screens/terms'
-import PrivacyPolicy from 'components/screens/PrivacyPolicy'
-import EnableBioAuth from 'components/screens/enableBioAuth'
-import DisableBioAuth from 'components/screens/disableBioAuth'
-import Intro from 'components/screens/intro'
+import { colors } from 'constants/styleGuide';
+import Register from 'modules/Auth/Register';
+import AddBookmark from 'modules/Bookmark/AddBookmark';
+import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
+import Wallet from 'modules/Wallet';
+import About from 'components/screens/about';
+import CurrencySelection from 'components/screens/currencySelection';
+import Terms from 'components/screens/terms';
+import PrivacyPolicy from 'components/screens/PrivacyPolicy';
+import EnableBioAuth from 'components/screens/enableBioAuth';
+import DisableBioAuth from 'components/screens/disableBioAuth';
+import Intro from 'components/screens/intro';
 
-import PassphraseBackup from 'modules/Settings/BackupPassphrase'
-import AuthMethod from 'modules/Auth/AuthMethod'
-import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase'
-import PasswordSetupForm from 'modules/Auth/PasswordSetupForm'
-import AccountsManagerScreen from 'modules/Auth/AccountsManagerScreen'
-import DecryptPhrase from 'modules/Auth/DecryptPhrase'
-import AddApplication from 'modules/BlockchainApplication/components/AddApplication'
-import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess'
-import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail'
-import SendToken from 'modules/SendToken'
-import RequestToken from 'modules/RequestToken'
-import TokensScreen from 'modules/Accounts/components/TokensScreen'
-import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory'
-import navigationOptions from './navigationOptions'
-import AppNavigator from './components/AppNavigator'
+import PassphraseBackup from 'modules/Settings/BackupPassphrase';
+import AuthMethod from 'modules/Auth/AuthMethod';
+import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
+import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
+import AccountsManagerScreen from 'modules/Auth/AccountsManagerScreen';
+import DecryptPhrase from 'modules/Auth/DecryptPhrase';
+import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
+import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
+import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
+import SendToken from 'modules/SendToken';
+import RequestToken from 'modules/RequestToken';
+import TokensScreen from 'modules/Accounts/components/TokensScreen';
+import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
+import navigationOptions from './navigationOptions';
+import AppNavigator from './components/AppNavigator';
 
-const MainStack = createStackNavigator()
+const MainStack = createStackNavigator();
 
 const darkTabs = {
   ...DarkTheme,
@@ -42,7 +42,7 @@ const darkTabs = {
   card: colors.light.white,
   text: colors.light.tabBarText,
   border: 'transparent',
-}
+};
 
 const lightTabs = {
   ...DefaultTheme,
@@ -51,14 +51,14 @@ const lightTabs = {
   card: colors.dark.black,
   text: colors.dark.tabBarText,
   border: 'transparent',
-}
+};
 
 const MainNavigator = () => {
-  const { theme } = useSelector((state) => state.settings)
+  const { theme } = useSelector((state) => state.settings);
   const themeColors = {
     dark: theme === 'light',
     colors: theme === 'light' ? darkTabs : lightTabs,
-  }
+  };
 
   return (
     <SafeAreaProvider>
@@ -176,7 +176,7 @@ const MainNavigator = () => {
         </MainStack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
-  )
-}
+  );
+};
 
-export default MainNavigator
+export default MainNavigator;

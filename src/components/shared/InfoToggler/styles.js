@@ -1,4 +1,4 @@
-import { themes, colors, fonts } from 'constants/styleGuide'
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getInfoTogglerStyles() {
   return {
@@ -37,5 +37,5 @@ export default function getInfoTogglerStyles() {
         color: colors.light.slateGray,
       },
     },
-  }
+  };
 }

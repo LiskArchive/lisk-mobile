@@ -1,19 +1,19 @@
-import { themes } from 'constants/styleGuide'
-import { cryptography } from '@liskhq/lisk-client'
-import setSecondPassphraseLight from 'assets/images/txDetail/second-passphrase-light.png'
-import setSecondPassphraseDark from 'assets/images/txDetail/second-passphrase-dark.png'
+import { themes } from 'constants/styleGuide';
+import { cryptography } from '@liskhq/lisk-client';
+import setSecondPassphraseLight from 'assets/images/txDetail/second-passphrase-light.png';
+import setSecondPassphraseDark from 'assets/images/txDetail/second-passphrase-dark.png';
 
-import registerDelegateLight from 'assets/images/txDetail/delegate-registration-light.png'
-import registerDelegateDark from 'assets/images/txDetail/delegate-registration-dark.png'
+import registerDelegateLight from 'assets/images/txDetail/delegate-registration-light.png';
+import registerDelegateDark from 'assets/images/txDetail/delegate-registration-dark.png';
 
-import voteLight from 'assets/images/txDetail/vote-light.png'
-import voteDark from 'assets/images/txDetail/vote-dark.png'
+import voteLight from 'assets/images/txDetail/vote-light.png';
+import voteDark from 'assets/images/txDetail/vote-dark.png';
 
-import transferDark from 'assets/images/txDetail/transfer-dark.png'
-import transferLight from 'assets/images/txDetail/transfer-light.png'
+import transferDark from 'assets/images/txDetail/transfer-dark.png';
+import transferLight from 'assets/images/txDetail/transfer-light.png';
 
-import txUnlockLight from 'assets/images/txDetail/tx-unlock.png'
-import txUnlockDark from 'assets/images/txDetail/tx-unlock-dark.png'
+import txUnlockLight from 'assets/images/txDetail/tx-unlock.png';
+import txUnlockDark from 'assets/images/txDetail/tx-unlock-dark.png';
 
 /**
  * Since react-navigation doesn't support i18n
@@ -25,32 +25,32 @@ import txUnlockDark from 'assets/images/txDetail/tx-unlock-dark.png'
  * @param {String} str
  * @returns {String} same as the input string
  */
-const t = (str) => str
+const t = (str) => str;
 
-export const DEFAULT_MIN_FEE_PER_BYTE = 1000
+export const DEFAULT_MIN_FEE_PER_BYTE = 1000;
 
-export const DEFAULT_NUMBER_OF_SIGNATURES = 1
+export const DEFAULT_NUMBER_OF_SIGNATURES = 1;
 
-export const DEFAULT_BASE_FEE = '0'
+export const DEFAULT_BASE_FEE = '0';
 
-export const DEFAULT_SIGNATURE_BYTE_SIZE = 64
+export const DEFAULT_SIGNATURE_BYTE_SIZE = 64;
 
-export const DEFAULT_MIN_REMAINING_BALANCE = 5000000
+export const DEFAULT_MIN_REMAINING_BALANCE = 5000000;
 
-export const MIN_FEE_PER_BYTE = 1000
+export const MIN_FEE_PER_BYTE = 1000;
 
 export const PRIORITY_NAMES_MAP = {
   low: t('sendToken.tokenSelect.lowPriorityLabel'),
   medium: t('sendToken.tokenSelect.mediumPriorityLabel'),
   high: t('sendToken.tokenSelect.highPriorityLabel'),
-}
+};
 
 const MODULES = {
   token: 2,
   dpos: 5,
   multiSignature: 4,
   legacyAccount: 1000,
-}
+};
 
 const ASSETS = {
   transfer: 0,
@@ -60,7 +60,7 @@ const ASSETS = {
   registerMultisignatureGroup: 0,
   reclaimLSK: 0,
   reportDelegateMisbehavior: 3,
-}
+};
 
 export const BASE_FEES = [
   Object.freeze({
@@ -68,7 +68,7 @@ export const BASE_FEES = [
     assetID: cryptography.utils.intToBuffer(ASSETS.registerDelegate, 4),
     baseFee: '1000000000',
   }),
-]
+];
 
 export const TRANSFER_ASSETS_SCHEMA = {
   $id: 'lisk/transfer-asset',
@@ -93,7 +93,7 @@ export const TRANSFER_ASSETS_SCHEMA = {
       maxLength: 64,
     },
   },
-}
+};
 
 export const MODULE_ASSET_NAME_ID_MAP = {
   transfer: `${MODULES.token}:${ASSETS.transfer}`,
@@ -103,7 +103,7 @@ export const MODULE_ASSET_NAME_ID_MAP = {
   reportDelegateMisbehavior: `${MODULES.dpos}:${ASSETS.reportDelegateMisbehavior}`,
   registerMultisignatureGroup: `${MODULES.multiSignature}:${ASSETS.registerMultisignatureGroup}`,
   reclaimLSK: `${MODULES.legacyAccount}:${ASSETS.reclaimLSK}`,
-}
+};
 
 export const MODULE_ASSET_MAP = {
   [MODULE_ASSET_NAME_ID_MAP.transfer]: {
@@ -134,7 +134,7 @@ export const MODULE_ASSET_MAP = {
     maxFee: 1e7,
     icon: 'txDefault',
   },
-}
+};
 
 export const TRANSACTIONS_TYPES = {
   [MODULE_ASSET_NAME_ID_MAP.transfer]: {
@@ -167,4 +167,4 @@ export const TRANSACTIONS_TYPES = {
     title: t('Unlock'),
     image: (theme) => (theme === themes.light ? txUnlockLight : txUnlockDark),
   },
-}
+};

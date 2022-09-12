@@ -1,37 +1,37 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { includeFee } from 'utilities/conversions'
-import { colors } from 'constants/styleGuide'
-import { extractAddress } from 'utilities/api/lisk/account'
-import FormattedNumber from '../../formattedNumber'
-import { PrimaryButton, Button } from '../../toolBox/button'
-import Avatar from '../../avatar'
-import Icon from '../../toolBox/icon'
-import { B, P, Small } from '../../toolBox/typography'
-import styles from './styles'
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import { includeFee } from 'utilities/conversions';
+import { colors } from 'constants/styleGuide';
+import { extractAddress } from 'utilities/api/lisk/account';
+import FormattedNumber from '../../formattedNumber';
+import { PrimaryButton, Button } from '../../toolBox/button';
+import Avatar from '../../avatar';
+import Icon from '../../toolBox/icon';
+import { B, P, Small } from '../../toolBox/typography';
+import styles from './styles';
 
 class Confirm extends Component {
   state = {
     errorMessage: false,
     busy: false,
-  }
+  };
 
   // eslint-disable-next-line max-statements
   send = async () => {
     if (this.state.busy) {
-      return
+      return;
     }
 
     const {
       composeMessage,
       passphrase,
       sharedData: { address, amount },
-    } = this.props
+    } = this.props;
 
-    this.setState({ busy: true, errorMessage: '' })
+    this.setState({ busy: true, errorMessage: '' });
 
     try {
-      this.setState({ busy: false })
+      this.setState({ busy: false });
 
       // TODO: Consume transactions hooks instead when they are created.
       // const data = {
@@ -48,14 +48,14 @@ class Confirm extends Component {
         amount,
         state: 'transferred',
         recipientAddress: address,
-      })
+      });
     } catch (error) {
       this.setState({
         busy: false,
         errorMessage: error.message || 'An error happened. Please try later.',
-      })
+      });
     }
-  }
+  };
 
   render() {
     const {
@@ -65,25 +65,25 @@ class Confirm extends Component {
       state,
       language,
       sharedData: { address, amount },
-    } = this.props
+    } = this.props;
 
-    const { busy, errorMessage } = this.state
+    const { busy, errorMessage } = this.state;
 
     const isSender =
-      conversation.localParticipiantIdentifier === message.senderParticipantIdentifier
-    const fee = 1e7
-    const totalAmount = isSender ? amount : includeFee(amount, fee)
+      conversation.localParticipiantIdentifier === message.senderParticipantIdentifier;
+    const fee = 1e7;
+    const totalAmount = isSender ? amount : includeFee(amount, fee);
     const description = isSender
       ? `Your request of ${totalAmount} LSK is pending response.`
-      : `By accepting this request, you will send ${totalAmount} LSK (including transaction fee) from your account.`
+      : `By accepting this request, you will send ${totalAmount} LSK (including transaction fee) from your account.`;
 
     const rejectMessage = () => {
       composeMessage({
         address: { value: address, validity: 0 },
         amount,
         state: 'rejected',
-      })
-    }
+      });
+    };
 
     return (
       <View style={styles.container}>
@@ -150,8 +150,8 @@ class Confirm extends Component {
           </View>
         )}
       </View>
-    )
+    );
   }
 }
 
-export default Confirm
+export default Confirm;

@@ -1,5 +1,5 @@
-import { getSettings } from 'utilities/storage'
-import actionTypes from '../actionTypes'
+import { getSettings } from 'utilities/storage';
+import actionTypes from '../actionTypes';
 
 /**
  * Returns a pure action object to store the given account
@@ -14,7 +14,7 @@ import actionTypes from '../actionTypes'
 export const settingsUpdated = (data) => ({
   type: actionTypes.settingsUpdated,
   data,
-})
+});
 
 /**
  * Reads the settings from the storage
@@ -27,11 +27,11 @@ export const settingsUpdated = (data) => ({
 export const settingsRetrieved = () => (dispatch) =>
   getSettings().then((data) => {
     if (!data.theme) {
-      data.theme = 'light'
+      data.theme = 'light';
     }
 
     dispatch({
       type: actionTypes.settingsRetrieved,
       data,
-    })
-  })
+    });
+  });

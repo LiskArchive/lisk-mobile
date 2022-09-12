@@ -1,4 +1,4 @@
-import { colors, themes, fonts } from 'constants/styleGuide'
+import { colors, themes, fonts } from 'constants/styleGuide';
 
 export default function getDeleteAccountConfirmationStyles() {
   return {
@@ -82,5 +82,5 @@ export default function getDeleteAccountConfirmationStyles() {
         color: colors.light.ghost,
       },
     },
-  }
+  };
 }

@@ -1,11 +1,11 @@
-import i18next from 'i18next'
+import i18next from 'i18next';
 
 const MODULES = {
   token: 'token',
   auth: 'auth',
   dpos: 'dpos',
   legacy: 'legacy',
-}
+};
 
 const COMMANDS = {
   transfer: 'transfer',
@@ -18,7 +18,7 @@ const COMMANDS = {
   voteDelegate: 'voteDelegate',
   reclaimLSK: 'reclaimLSK',
   registerkeys: 'registerkeys',
-}
+};
 
 export const MODULE_COMMAND_NAMES = {
   tokenTransfer: `${MODULES.token}:${COMMANDS.transfer}`,
@@ -31,13 +31,13 @@ export const MODULE_COMMAND_NAMES = {
   voteDelegate: `${MODULES.dpos}:${COMMANDS.voteDelegate}`,
   reclaimLSK: `${MODULES.legacy}:${COMMANDS.reclaimLSK}`,
   registerkeys: `${MODULES.legacy}:${COMMANDS.registerkeys}`,
-}
+};
 
 export const TRANSACTION_STATUS_NAMES = {
   success: i18next.t('transactions.statusText.success'),
   fail: i18next.t('transactions.statusText.fail'),
   pending: i18next.t('transactions.statusText.pending'),
-}
+};
 
 export const TRANSACTION_PARAMS_NAMES = {
   tokenID: i18next.t('transactions.transactionDetails.tokenIDParamsLabel'),
@@ -52,4 +52,4 @@ export const TRANSACTION_PARAMS_NAMES = {
   proofOfPossession: i18next.t('transactions.transactionDetails.proofOfPossessionParamsLabel'),
   header1: i18next.t('transactions.transactionDetails.header1ParamsLabel'),
   header2: i18next.t('transactions.transactionDetails.header2ParamsLabel'),
-}
+};

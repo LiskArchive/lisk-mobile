@@ -1,8 +1,8 @@
-import React from 'react'
-import { Animated } from 'react-native'
-import { translate } from 'react-i18next'
-import withTheme from 'components/shared/withTheme'
-import getStyles from './styles'
+import React from 'react';
+import { Animated } from 'react-native';
+import { translate } from 'react-i18next';
+import withTheme from 'components/shared/withTheme';
+import getStyles from './styles';
 
 const HeaderTitle = ({ styles, t, children, ...rest }) => (
   <Animated.Text
@@ -14,6 +14,6 @@ const HeaderTitle = ({ styles, t, children, ...rest }) => (
   >
     {t(children)}
   </Animated.Text>
-)
+);
 
-export default withTheme(translate()(HeaderTitle), getStyles())
+export default withTheme(translate()(HeaderTitle), getStyles());

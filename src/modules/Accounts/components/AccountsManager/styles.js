@@ -1,4 +1,4 @@
-import { colors, themes } from 'constants/styleGuide'
+import { colors, themes } from 'constants/styleGuide';
 
 export default function getAccountsManagerStyles() {
   return {
@@ -19,5 +19,5 @@ export default function getAccountsManagerStyles() {
         backgroundColor: colors.dark.black,
       },
     },
-  }
+  };
 }

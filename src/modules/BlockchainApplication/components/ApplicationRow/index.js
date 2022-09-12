@@ -1,21 +1,21 @@
-import React, { useState, memo } from 'react'
-import { View, Image } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import ModalBox from 'react-native-modalbox'
-import { translate } from 'react-i18next'
+import React, { useState, memo } from 'react';
+import { View, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import ModalBox from 'react-native-modalbox';
+import { translate } from 'react-i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import { P } from 'components/shared/toolBox/typography'
-import { colors, themes } from 'constants/styleGuide'
-import Swipeable from 'components/shared/Swipeable'
-import PinSvg from 'assets/svgs/PinSvg'
-import CaretSvg from 'assets/svgs/CaretSvg'
-import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg'
-import ErrorScreen from 'components/screens/ErrorScreen'
-import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication'
+import { useTheme } from 'hooks/useTheme';
+import { P } from 'components/shared/toolBox/typography';
+import { colors, themes } from 'constants/styleGuide';
+import Swipeable from 'components/shared/Swipeable';
+import PinSvg from 'assets/svgs/PinSvg';
+import CaretSvg from 'assets/svgs/CaretSvg';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import ErrorScreen from 'components/screens/ErrorScreen';
+import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 
-import { useBlockchainApplicationRowActions } from './hooks'
-import getBlockchainApplicationRowStyles from './styles'
+import { useBlockchainApplicationRowActions } from './hooks';
+import getBlockchainApplicationRowStyles from './styles';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
@@ -36,10 +36,10 @@ function BlockchainApplicationRow({
   navigation,
   deleteApplication,
 }) {
-  const [showDeleteDefaultApplicationModal, setShowDeleteDefaultApplicationModal] = useState(false)
+  const [showDeleteDefaultApplicationModal, setShowDeleteDefaultApplicationModal] = useState(false);
 
-  const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() })
-  const [currentApplication] = useCurrentBlockchainApplication()
+  const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
+  const [currentApplication] = useCurrentBlockchainApplication();
 
   const { leftActions, rightActions } = useBlockchainApplicationRowActions({
     t,
@@ -48,7 +48,7 @@ function BlockchainApplicationRow({
     navigation,
     setShowDeleteDefaultApplicationModal,
     deleteApplication,
-  })
+  });
 
   return (
     <>
@@ -103,7 +103,7 @@ function BlockchainApplicationRow({
         />
       </ModalBox>
     </>
-  )
+  );
 }
 
-export default translate()(memo(BlockchainApplicationRow))
+export default translate()(memo(BlockchainApplicationRow));

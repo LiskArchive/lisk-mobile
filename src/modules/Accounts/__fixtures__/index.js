@@ -1,1 +1,1 @@
-export * from './mockSavedAccounts'
+export * from './mockSavedAccounts';

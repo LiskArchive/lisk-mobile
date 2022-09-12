@@ -1,4 +1,4 @@
-import { themes, fonts, colors } from 'constants/styleGuide'
+import { themes, fonts, colors } from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -93,4 +93,4 @@ export default () => ({
       color: colors.light.burntSieanna,
     },
   },
-})
+});

@@ -1,9 +1,9 @@
-import React from 'react'
-import { View, Text, Share as ShareAPI } from 'react-native'
-import { colors } from 'constants/styleGuide'
-import Icon from '../toolBox/icon'
-import withTheme from '../withTheme'
-import getStyles from './styles'
+import React from 'react';
+import { View, Text, Share as ShareAPI } from 'react-native';
+import { colors } from 'constants/styleGuide';
+import Icon from '../toolBox/icon';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 const Share = ({
   styles,
@@ -16,13 +16,13 @@ const Share = ({
   iconColor,
   title,
 }) => {
-  const Element = type || Text
+  const Element = type || Text;
 
   const shareContent = async () => {
     await ShareAPI.share({
       message: value || children,
-    })
-  }
+    });
+  };
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -39,7 +39,7 @@ const Share = ({
         />
       ) : null}
     </View>
-  )
-}
+  );
+};
 
-export default withTheme(Share, getStyles())
+export default withTheme(Share, getStyles());

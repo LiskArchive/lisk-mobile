@@ -1,25 +1,25 @@
 /* eslint-disable max-statements */
-import React, { useMemo } from 'react'
-import { ScrollView, View, ImageBackground, Image } from 'react-native'
-import { useTheme } from 'hooks/useTheme'
-import moment from 'moment'
-import { useNavigation } from '@react-navigation/native'
-import i18next from 'i18next'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import React, { useMemo } from 'react';
+import { ScrollView, View, ImageBackground, Image } from 'react-native';
+import { useTheme } from 'hooks/useTheme';
+import moment from 'moment';
+import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { H3, P } from 'components/shared/toolBox/typography'
-import UrlSvg from 'assets/svgs/UrlSvg'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import wavesPattern from 'assets/images/waves_pattern_large.png'
-import { colors } from 'constants/styleGuide'
-import PinSvg from 'assets/svgs/PinSvg'
-import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication'
-import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement'
-import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer'
+import { H3, P } from 'components/shared/toolBox/typography';
+import UrlSvg from 'assets/svgs/UrlSvg';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import wavesPattern from 'assets/images/waves_pattern_large.png';
+import { colors } from 'constants/styleGuide';
+import PinSvg from 'assets/svgs/PinSvg';
+import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
+import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
+import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 
-import getStyles from './styles'
-import DataRenderer from '../../../../components/shared/DataRenderer'
+import getStyles from './styles';
+import DataRenderer from '../../../../components/shared/DataRenderer';
 
 /**
  *
@@ -30,31 +30,31 @@ import DataRenderer from '../../../../components/shared/DataRenderer'
  *
  */
 export default function ApplicationDetail({ route }) {
-  const navigation = useNavigation()
-  const { chainID, variant } = route.params
+  const navigation = useNavigation();
+  const { chainID, variant } = route.params;
 
-  const { styles } = useTheme({ styles: getStyles })
+  const { styles } = useTheme({ styles: getStyles });
 
-  const { checkPinByChainId, togglePin } = usePinBlockchainApplication()
-  const { addApplication } = useBlockchainApplicationManagement()
-  const { applications, applicationsMetadata } = useBlockchainApplicationExplorer()
+  const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
+  const { addApplication } = useBlockchainApplicationManagement();
+  const { applications, applicationsMetadata } = useBlockchainApplicationExplorer();
 
   const application = useMemo(
     () => applications.data?.find((app) => app.chainID === chainID),
     [chainID, applications]
-  )
+  );
 
   const applicationMetadata = useMemo(
     () => applicationsMetadata.data?.find((app) => app.chainID === chainID),
     [chainID, applicationsMetadata]
-  )
+  );
 
-  const isPinned = checkPinByChainId(chainID)
+  const isPinned = checkPinByChainId(chainID);
 
   const handleAddApplicationClick = () => {
-    addApplication(application)
-    navigation.navigate('AddApplicationSuccess')
-  }
+    addApplication(application);
+    navigation.navigate('AddApplicationSuccess');
+  };
 
   return (
     <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
@@ -221,5 +221,5 @@ export default function ApplicationDetail({ route }) {
         )}
       </View>
     </ScrollView>
-  )
+  );
 }

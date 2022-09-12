@@ -1,9 +1,9 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native'
-import { colors } from 'constants/styleGuide'
-import { deviceType } from 'utilities/device'
+import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { colors } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
 
-const { height } = Dimensions.get('window')
-const navigatorHeight = 75 + (deviceType() === 'iOSx' ? 23 : 0)
+const { height } = Dimensions.get('window');
+const navigatorHeight = 75 + (deviceType() === 'iOSx' ? 23 : 0);
 
 const styles = {
   container: {
@@ -65,6 +65,6 @@ const styles = {
   progressStepContainer: {
     backgroundColor: colors.light.ghost,
   },
-}
+};
 
-export default StyleSheet.create(styles)
+export default StyleSheet.create(styles);

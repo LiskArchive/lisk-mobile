@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path, G } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path, G } from 'react-native-svg';
 
 export default () => (
   <Svg width="78" height="49" viewBox="0 0 78 49" fill="none">
@@ -160,4 +160,4 @@ export default () => (
       fill="#231F20"
     />
   </Svg>
-)
+);

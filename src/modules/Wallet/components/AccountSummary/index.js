@@ -1,30 +1,30 @@
-import React from 'react'
-import { Animated, TouchableOpacity, View } from 'react-native'
-import { useSelector } from 'react-redux'
-import { translate } from 'react-i18next'
-import Avatar from 'components/shared/avatar'
-import { fromRawLsk } from 'utilities/conversions'
-import FormattedNumber from 'components/shared/formattedNumber'
-import { P, B } from 'components/shared/toolBox/typography'
-import { stringShortener } from 'utilities/helpers'
-import { useTheme } from 'hooks/useTheme'
-import { colors, themes } from 'constants/styleGuide'
-import CopyToClipboard from 'components/shared/copyToClipboard'
-import Icon from 'components/shared/toolBox/icon'
-import getStyles from './styles'
-import { selectBookmarkList } from '../../../Bookmark/store/selectors'
+import React from 'react';
+import { Animated, TouchableOpacity, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { translate } from 'react-i18next';
+import Avatar from 'components/shared/avatar';
+import { fromRawLsk } from 'utilities/conversions';
+import FormattedNumber from 'components/shared/formattedNumber';
+import { P, B } from 'components/shared/toolBox/typography';
+import { stringShortener } from 'utilities/helpers';
+import { useTheme } from 'hooks/useTheme';
+import { colors, themes } from 'constants/styleGuide';
+import CopyToClipboard from 'components/shared/copyToClipboard';
+import Icon from 'components/shared/toolBox/icon';
+import getStyles from './styles';
+import { selectBookmarkList } from '../../../Bookmark/store/selectors';
 
-const AView = Animated.View
+const AView = Animated.View;
 // eslint-disable-next-line max-statements
 const AccountSummary = ({ account, t, navigation, theme }) => {
-  const followedAccounts = useSelector(selectBookmarkList)
-  const { token } = useSelector((state) => state.settings)
-  const language = useSelector((state) => state.settings.language)
+  const followedAccounts = useSelector(selectBookmarkList);
+  const { token } = useSelector((state) => state.settings);
+  const language = useSelector((state) => state.settings.language);
 
-  const { styles } = useTheme({ styles: getStyles() })
+  const { styles } = useTheme({ styles: getStyles() });
 
-  const normalizedBalance = fromRawLsk(account.balance)
-  const isFollowed = followedAccounts.find((item) => item.address === account.address)
+  const normalizedBalance = fromRawLsk(account.balance);
+  const isFollowed = followedAccounts.find((item) => item.address === account.address);
 
   const sendLSK = () =>
     navigation.navigate({
@@ -36,7 +36,7 @@ const AccountSummary = ({ account, t, navigation, theme }) => {
           query: { address: account.address },
         },
       },
-    })
+    });
 
   return (
     <AView style={[styles.walletContainer, styles.theme.walletContainer]}>
@@ -78,7 +78,7 @@ const AccountSummary = ({ account, t, navigation, theme }) => {
         </TouchableOpacity>
       </View>
     </AView>
-  )
-}
+  );
+};
 
-export default translate()(AccountSummary)
+export default translate()(AccountSummary);

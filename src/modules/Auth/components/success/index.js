@@ -1,9 +1,9 @@
-import React from 'react'
-import { View, Text, SafeAreaView } from 'react-native'
-import withTheme from 'components/shared/withTheme'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import Avatar from 'components/shared/avatar'
-import getStyles from './styles'
+import React from 'react';
+import { View, Text, SafeAreaView } from 'react-native';
+import withTheme from 'components/shared/withTheme';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import Avatar from 'components/shared/avatar';
+import getStyles from './styles';
 
 const SuccessScreen = ({
   illustration,
@@ -40,6 +40,6 @@ const SuccessScreen = ({
       disabled={disabled}
     />
   </SafeAreaView>
-)
+);
 
-export default withTheme(SuccessScreen, getStyles())
+export default withTheme(SuccessScreen, getStyles());

@@ -1,20 +1,20 @@
-import React from 'react'
-import { Animated, Text, Image, View, TouchableWithoutFeedback } from 'react-native'
-import { useSelector } from 'react-redux'
-import { fromRawLsk } from 'utilities/conversions'
-import Avatar from 'components/shared/avatar'
-import Icon from 'components/shared/toolBox/icon'
-import withTheme from 'components/shared/withTheme'
-import { tokenMap } from 'constants/tokens'
-import { colors } from 'constants/styleGuide'
-import { deviceType } from 'utilities/device'
-import darkBig from 'assets/images/balanceBlur/darkBig.png'
-import darkMedium from 'assets/images/balanceBlur/darkMedium.png'
-import darkSmall from 'assets/images/balanceBlur/darkSmall.png'
-import lightBig from 'assets/images/balanceBlur/lightBig.png'
-import lightMedium from 'assets/images/balanceBlur/lightMedium.png'
-import lightSmall from 'assets/images/balanceBlur/lightSmall.png'
-import getStyles from './styles'
+import React from 'react';
+import { Animated, Text, Image, View, TouchableWithoutFeedback } from 'react-native';
+import { useSelector } from 'react-redux';
+import { fromRawLsk } from 'utilities/conversions';
+import Avatar from 'components/shared/avatar';
+import Icon from 'components/shared/toolBox/icon';
+import withTheme from 'components/shared/withTheme';
+import { tokenMap } from 'constants/tokens';
+import { colors } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
+import darkBig from 'assets/images/balanceBlur/darkBig.png';
+import darkMedium from 'assets/images/balanceBlur/darkMedium.png';
+import darkSmall from 'assets/images/balanceBlur/darkSmall.png';
+import lightBig from 'assets/images/balanceBlur/lightBig.png';
+import lightMedium from 'assets/images/balanceBlur/lightMedium.png';
+import lightSmall from 'assets/images/balanceBlur/lightSmall.png';
+import getStyles from './styles';
 
 const blurs = {
   darkBig,
@@ -23,7 +23,7 @@ const blurs = {
   lightBig,
   lightMedium,
   lightSmall,
-}
+};
 
 const interpolate = (scrollY, inputRange, outputRange) => {
   if (scrollY && typeof scrollY.interpolate === 'function') {
@@ -31,10 +31,10 @@ const interpolate = (scrollY, inputRange, outputRange) => {
       inputRange,
       outputRange,
       extrapolate: 'clamp',
-    })
+    });
   }
-  return 1
-}
+  return 1;
+};
 
 const ExtendedTitle = ({
   balance,
@@ -47,9 +47,9 @@ const ExtendedTitle = ({
   scrollY,
   wallet,
 }) => {
-  let balanceSize = 'Small'
-  if (balance > 6) balanceSize = 'Big'
-  else if (balance > 2) balanceSize = 'Medium'
+  let balanceSize = 'Small';
+  if (balance > 6) balanceSize = 'Big';
+  else if (balance > 2) balanceSize = 'Medium';
 
   return (
     <Animated.View
@@ -80,8 +80,8 @@ const ExtendedTitle = ({
         <Text style={[styles.title, styles.theme[`${type}Main`]]}>{`${balance} ${token}`}</Text>
       )}
     </Animated.View>
-  )
-}
+  );
+};
 
 const SimpleHeader = ({ styles, type, title, scrollY }) => (
   <Animated.Text
@@ -97,25 +97,25 @@ const SimpleHeader = ({ styles, type, title, scrollY }) => (
   >
     {title}
   </Animated.Text>
-)
+);
 
 const localizedBalance = (balance) => {
-  const language = 'en'
+  const language = 'en';
 
   return Number(balance).toLocaleString(`${language}-${language.toUpperCase()}`, {
     maximumFractionDigits: 20,
-  })
-}
+  });
+};
 
 const HomeHeaderTitle = ({ styles, type, scrollY, address, balance, placeHolder, scrollToTop }) => {
   const {
     token: { active },
     theme,
     discrete,
-  } = useSelector((state) => state.settings)
-  const { info } = useSelector((state) => state.accounts)
-  const wallet = false
-  const os = deviceType()
+  } = useSelector((state) => state.settings);
+  const { info } = useSelector((state) => state.accounts);
+  const wallet = false;
+  const os = deviceType();
 
   const data = {
     type,
@@ -126,7 +126,7 @@ const HomeHeaderTitle = ({ styles, type, scrollY, address, balance, placeHolder,
     token: active,
     address: type === 'wallet' ? address : info[active]?.address ?? '',
     balance: type === 'wallet' ? balance : info[active]?.balance ?? 0,
-  }
+  };
 
   return (
     <View style={[styles.container, styles[`${os}${type}Container`]]}>
@@ -152,7 +152,7 @@ const HomeHeaderTitle = ({ styles, type, scrollY, address, balance, placeHolder,
         </View>
       </TouchableWithoutFeedback>
     </View>
-  )
-}
+  );
+};
 
-export default withTheme(HomeHeaderTitle, getStyles())
+export default withTheme(HomeHeaderTitle, getStyles());

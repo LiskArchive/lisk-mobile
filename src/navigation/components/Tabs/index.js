@@ -1,14 +1,14 @@
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Settings from 'modules/Settings'
-import Home from 'modules/Accounts'
-import Bookmarks from 'modules/Bookmark'
-import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer'
-import { getTabBarIcon } from '../../helpers'
-import { getNavigationTabBarStyles } from '../../styles'
+import Settings from 'modules/Settings';
+import Home from 'modules/Accounts';
+import Bookmarks from 'modules/Bookmark';
+import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
+import { getTabBarIcon } from '../../helpers';
+import { getNavigationTabBarStyles } from '../../styles';
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
   return (
@@ -27,14 +27,14 @@ export default function Tabs() {
         options={getTabBarIcon}
         listeners={({ route, navigation }) => ({
           tabPress: (e) => {
-            e.preventDefault()
-            const { history } = navigation.getState()
+            e.preventDefault();
+            const { history } = navigation.getState();
             if (history[history.length - 1].key === route.key) {
               if (route.params?.scrollToTop) {
-                route.params.scrollToTop()
+                route.params.scrollToTop();
               }
             }
-            navigation.navigate('Home')
+            navigation.navigate('Home');
           },
         })}
       />
@@ -46,5 +46,5 @@ export default function Tabs() {
       <Tab.Screen name="Bookmarks" component={Bookmarks} options={getTabBarIcon} />
       <Tab.Screen name="Settings" component={Settings} options={getTabBarIcon} />
     </Tab.Navigator>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import { Dimensions } from 'react-native'
+import { Dimensions } from 'react-native';
 
-import { themes, colors } from 'constants/styleGuide'
+import { themes, colors } from 'constants/styleGuide';
 
 export default function getBlockchainApplicationsExplorerStyles() {
   return {
@@ -36,5 +36,5 @@ export default function getBlockchainApplicationsExplorerStyles() {
         color: colors.dark.white,
       },
     },
-  }
+  };
 }

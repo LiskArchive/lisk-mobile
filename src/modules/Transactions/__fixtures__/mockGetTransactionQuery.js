@@ -1,4 +1,4 @@
-import { mockTransactions } from './mockTransactions'
+import { mockTransactions } from './mockTransactions';
 
 export const mockGetTransactionQuery = {
   data: [mockTransactions[0]],
@@ -7,4 +7,4 @@ export const mockGetTransactionQuery = {
     offset: 0,
     total: 1,
   },
-}
+};

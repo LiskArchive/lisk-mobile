@@ -1,22 +1,22 @@
 /* eslint-disable max-statements */
-import React, { memo, useMemo, useState } from 'react'
-import { TouchableOpacity, View, FlatList } from 'react-native'
-import { translate } from 'react-i18next'
-import { P, H3 } from 'components/shared/toolBox/typography'
-import { fromRawLsk } from 'utilities/conversions'
-import { useTheme } from 'hooks/useTheme'
-import { colors } from 'constants/styleGuide'
-import CaretSvg from 'assets/svgs/CaretSvg'
-import TokenSvg from 'assets/svgs/TokenSvg'
-import { useNavigation } from '@react-navigation/native'
-import EmptyState from 'components/shared/EmptyState'
-import tokensTabStyles from './styles'
-import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount'
-import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens'
+import React, { memo, useMemo, useState } from 'react';
+import { TouchableOpacity, View, FlatList } from 'react-native';
+import { translate } from 'react-i18next';
+import { P, H3 } from 'components/shared/toolBox/typography';
+import { fromRawLsk } from 'utilities/conversions';
+import { useTheme } from 'hooks/useTheme';
+import { colors } from 'constants/styleGuide';
+import CaretSvg from 'assets/svgs/CaretSvg';
+import TokenSvg from 'assets/svgs/TokenSvg';
+import { useNavigation } from '@react-navigation/native';
+import EmptyState from 'components/shared/EmptyState';
+import tokensTabStyles from './styles';
+import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
+import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens';
 
 const TokenItem = ({ token }) => {
-  const { styles } = useTheme({ styles: tokensTabStyles })
-  const tokenBalance = Number(fromRawLsk(token.availableBalance)).toLocaleString()
+  const { styles } = useTheme({ styles: tokensTabStyles });
+  const tokenBalance = Number(fromRawLsk(token.availableBalance)).toLocaleString();
   return (
     <View style={[styles.tokenItem]}>
       <View style={styles.row}>
@@ -31,41 +31,41 @@ const TokenItem = ({ token }) => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const TokensTab = ({ t }) => {
-  const [currAccount] = useCurrentAccount()
-  const { address } = currAccount.metadata
-  const { data: tokens = [], isLoading } = useAccountTokens(address)
-  const [activeTab, setActiveTab] = useState(0)
-  const navigation = useNavigation()
+  const [currAccount] = useCurrentAccount();
+  const { address } = currAccount.metadata;
+  const { data: tokens = [], isLoading } = useAccountTokens(address);
+  const [activeTab, setActiveTab] = useState(0);
+  const navigation = useNavigation();
 
-  const { styles } = useTheme({ styles: tokensTabStyles })
+  const { styles } = useTheme({ styles: tokensTabStyles });
 
-  const hasLockedTokens = useMemo(() => tokens.some((token) => token.lockedBalances), [tokens])
+  const hasLockedTokens = useMemo(() => tokens.some((token) => token.lockedBalances), [tokens]);
 
   const lockedTokens = useMemo(() => {
-    const res = []
+    const res = [];
     tokens.forEach((token) => {
-      let amount = 0
+      let amount = 0;
       if (token.lockedBalances) {
         token.lockedBalances.forEach((lockedBalance) => {
-          amount += Number(lockedBalance.amount)
-        })
+          amount += Number(lockedBalance.amount);
+        });
       }
       if (amount) {
-        res.push({ symbol: token.symbol, amount })
+        res.push({ symbol: token.symbol, amount });
       }
-    })
-    return lockedTokens
-  }, [tokens])
+    });
+    return lockedTokens;
+  }, [tokens]);
 
-  const viewAllTokens = () => navigation.navigate('Tokens')
+  const viewAllTokens = () => navigation.navigate('Tokens');
 
-  const showViewMore = useMemo(() => tokens.length, [tokens])
+  const showViewMore = useMemo(() => tokens.length, [tokens]);
 
-  const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading])
+  const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
 
   return (
     <View style={styles.container}>
@@ -122,7 +122,7 @@ const TokensTab = ({ t }) => {
         )}
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default memo(translate()(TokensTab))
+export default memo(translate()(TokensTab));

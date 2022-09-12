@@ -1,15 +1,15 @@
-import actionTypes from 'modules/Settings/actionTypes'
-import { storeSettings } from 'utilities/storage'
-import { deviceLocale } from 'utilities/device'
-import i18n from '../../../locales'
+import actionTypes from 'modules/Settings/actionTypes';
+import { storeSettings } from 'utilities/storage';
+import { deviceLocale } from 'utilities/device';
+import i18n from '../../../locales';
 // import { languageKeys } from 'constants/languages';
-import { pricesRetrieved } from '../../actions/service'
+import { pricesRetrieved } from '../../actions/service';
 
 const settingsMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case actionTypes.settingsRetrieved:
       if (!action.data.language) {
-        action.data.language = deviceLocale()
+        action.data.language = deviceLocale();
       }
 
       // if (
@@ -20,30 +20,30 @@ const settingsMiddleware = (store) => (next) => (action) => {
       // } else {
       //   action.data.language = 'en';
       // }
-      action.data.language = 'en'
+      action.data.language = 'en';
 
       // if (!action.data.theme) {
       //   action.data.theme = deviceTheme();
       // }
 
-      next(action)
-      break
+      next(action);
+      break;
     case actionTypes.settingsUpdated:
-      next(action)
+      next(action);
       if (action.data.token) {
-        store.dispatch(pricesRetrieved())
+        store.dispatch(pricesRetrieved());
       }
-      storeSettings(store.getState().settings)
+      storeSettings(store.getState().settings);
 
       if (action.data.language) {
-        i18n.changeLanguage(action.data.language)
+        i18n.changeLanguage(action.data.language);
       }
       // action.data.theme = deviceTheme();
-      break
+      break;
     default:
-      next(action)
-      break
+      next(action);
+      break;
   }
-}
+};
 
-export default settingsMiddleware
+export default settingsMiddleware;

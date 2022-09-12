@@ -1,6 +1,6 @@
-import { Dimensions } from 'react-native'
+import { Dimensions } from 'react-native';
 
-import { themes, colors, boxes } from 'constants/styleGuide'
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default function getSendTokenSummaryStepStyles() {
   return {
@@ -102,5 +102,5 @@ export default function getSendTokenSummaryStepStyles() {
         backgroundColor: colors.dark.mainBg,
       },
     },
-  }
+  };
 }

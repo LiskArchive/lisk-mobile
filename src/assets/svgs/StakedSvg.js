@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
-import React from 'react'
-import { Svg, Path, G, ClipPath, Rect, Defs } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path, G, ClipPath, Rect, Defs } from 'react-native-svg';
 
 export default () => (
   <Svg width="52" height="62" viewBox="0 0 52 62" fill="none">
@@ -304,4 +304,4 @@ export default () => (
       </ClipPath>
     </Defs>
   </Svg>
-)
+);

@@ -4,4 +4,4 @@ export default () => ({
       alignItems: 'center',
     },
   },
-})
+});

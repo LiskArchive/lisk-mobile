@@ -1,7 +1,7 @@
-import { Dimensions } from 'react-native'
+import { Dimensions } from 'react-native';
 
-const { width } = Dimensions.get('window')
-const height = Math.floor((16 / 523) * width)
+const { width } = Dimensions.get('window');
+const height = Math.floor((16 / 523) * width);
 
 export default () => ({
   common: {
@@ -35,4 +35,4 @@ export default () => ({
       position: 'absolute',
     },
   },
-})
+});

@@ -1,22 +1,22 @@
 /* eslint-disable max-statements */
-import React, { memo, useMemo } from 'react'
-import { View, FlatList } from 'react-native'
-import { translate } from 'react-i18next'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { P, H3 } from 'components/shared/toolBox/typography'
-import { fromRawLsk } from 'utilities/conversions'
-import { useTheme } from 'hooks/useTheme'
-import TokenSvg from 'assets/svgs/TokenSvg'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import EmptyState from 'components/shared/EmptyState'
-import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount'
-import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens'
+import React, { memo, useMemo } from 'react';
+import { View, FlatList } from 'react-native';
+import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { P, H3 } from 'components/shared/toolBox/typography';
+import { fromRawLsk } from 'utilities/conversions';
+import { useTheme } from 'hooks/useTheme';
+import TokenSvg from 'assets/svgs/TokenSvg';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import EmptyState from 'components/shared/EmptyState';
+import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
+import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens';
 
-import tokensTabStyles from './styles'
+import tokensTabStyles from './styles';
 
 const TokenItem = ({ token }) => {
-  const tokenBalance = Number(fromRawLsk(token.availableBalance)).toLocaleString()
-  const { styles } = useTheme({ styles: tokensTabStyles })
+  const tokenBalance = Number(fromRawLsk(token.availableBalance)).toLocaleString();
+  const { styles } = useTheme({ styles: tokensTabStyles });
   return (
     <View style={[styles.tokenItem, styles.theme.tokenItem]}>
       <View style={styles.row}>
@@ -31,33 +31,33 @@ const TokenItem = ({ token }) => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const TokensScreen = ({ t, navigation }) => {
-  const [currAccount] = useCurrentAccount()
-  const { address } = currAccount.metadata
-  const { data: tokens = [], isLoading } = useAccountTokens(address)
+  const [currAccount] = useCurrentAccount();
+  const { address } = currAccount.metadata;
+  const { data: tokens = [], isLoading } = useAccountTokens(address);
 
-  const { styles } = useTheme({ styles: tokensTabStyles })
+  const { styles } = useTheme({ styles: tokensTabStyles });
 
   const lockedTokens = useMemo(() => {
-    const res = []
+    const res = [];
     tokens.forEach((token) => {
-      let amount = 0
+      let amount = 0;
       if (token.lockedBalances) {
         token.lockedBalances.forEach((lockedBalance) => {
-          amount += Number(lockedBalance.amount)
-        })
+          amount += Number(lockedBalance.amount);
+        });
       }
       if (amount) {
-        res.push({ symbol: token.symbol, amount })
+        res.push({ symbol: token.symbol, amount });
       }
-    })
-    return lockedTokens
-  }, [tokens])
+    });
+    return lockedTokens;
+  }, [tokens]);
 
-  const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading])
+  const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
 
   return (
     <SafeAreaView style={[styles.flex, styles.theme.container]}>
@@ -71,7 +71,7 @@ const TokensScreen = ({ t, navigation }) => {
         />
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default memo(translate()(TokensScreen))
+export default memo(translate()(TokensScreen));

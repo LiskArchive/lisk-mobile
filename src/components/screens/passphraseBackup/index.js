@@ -1,31 +1,31 @@
-import React, { useState } from 'react'
-import { View, ScrollView, SafeAreaView } from 'react-native'
-import { translate } from 'react-i18next'
-import QRCode from 'react-native-qrcode-svg'
-import { themes, colors } from 'constants/styleGuide'
-import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from 'utilities/device'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import PassphraseCopy from 'components/shared/passphraseCopy'
-import withTheme from 'components/shared/withTheme'
-import { P, A } from 'components/shared/toolBox/typography'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import { useNavigation } from '@react-navigation/native'
-import getStyles from './styles'
+import React, { useState } from 'react';
+import { View, ScrollView, SafeAreaView } from 'react-native';
+import { translate } from 'react-i18next';
+import QRCode from 'react-native-qrcode-svg';
+import { themes, colors } from 'constants/styleGuide';
+import { deviceWidth, deviceHeight, SCREEN_HEIGHTS } from 'utilities/device';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import PassphraseCopy from 'components/shared/passphraseCopy';
+import withTheme from 'components/shared/withTheme';
+import { P, A } from 'components/shared/toolBox/typography';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { useNavigation } from '@react-navigation/native';
+import getStyles from './styles';
 
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD
-const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72)
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD;
+const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
 const PassphraseBackup = ({ styles, t, theme, sharedData: data, nextStep }) => {
-  const [passphraseRevealed, setPassphraseReveal] = useState(false)
-  const navigation = useNavigation()
+  const [passphraseRevealed, setPassphraseReveal] = useState(false);
+  const navigation = useNavigation();
 
   const toggleQRCode = () => {
-    setPassphraseReveal(!passphraseRevealed)
-  }
+    setPassphraseReveal(!passphraseRevealed);
+  };
 
   const nextScreen = () => {
-    nextStep({ passphrase: data.recoveryPhrase })
-  }
+    nextStep({ passphrase: data.recoveryPhrase });
+  };
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
@@ -55,7 +55,7 @@ const PassphraseBackup = ({ styles, t, theme, sharedData: data, nextStep }) => {
         <PrimaryButton noTheme title={t('settings.backup_phrase.continue')} onPress={nextScreen} />
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default withTheme(translate()(PassphraseBackup), getStyles())
+export default withTheme(translate()(PassphraseBackup), getStyles());

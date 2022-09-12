@@ -1,17 +1,17 @@
-export const noGroupTitle = 'groups-not-defined-properly'
+export const noGroupTitle = 'groups-not-defined-properly';
 
 /**
  * @param {Number} current - The index number of the currently active group.
  * @param {Array} group - Array of group elements.
  */
 export const isActiveGroup = (current, group) =>
-  group.steps.map((step) => step.index).includes(current)
+  group.steps.map((step) => step.index).includes(current);
 
 /**
  * @param {Number} current - The index number of the currently active group.
  * @param {Number} index - The index the group to check if it is active.
  */
-export const isActiveStep = (current, index) => current === index
+export const isActiveStep = (current, index) => current === index;
 
 /**
  * @param {Number} current - The index number of the currently active group.
@@ -20,9 +20,9 @@ export const isActiveStep = (current, index) => current === index
  * @param {Function} prevStep - A function to be called to remove to the previous step.
  */
 export const backButtonFn = (current, prevPage, prevStep) => {
-  if (current === 0 && typeof prevPage === 'function') prevPage()
-  else prevStep()
-}
+  if (current === 0 && typeof prevPage === 'function') prevPage();
+  else prevStep();
+};
 
 /**
  * groups the elements based on their title and group properties
@@ -38,20 +38,20 @@ export const groupSteps = (steps) => {
   const allGroupsValid = steps.reduce(
     (prevGroupsWereValid, step) => typeof step.props.group === 'string' && prevGroupsWereValid,
     true
-  )
+  );
 
   return steps.reduce((grouped, step, index) => {
-    const g = grouped.filter((group) => group.title === step.props.group)
-    if (g.length) g[0].steps.push({ index, component: step })
+    const g = grouped.filter((group) => group.title === step.props.group);
+    if (g.length) g[0].steps.push({ index, component: step });
     else {
       grouped[index] = {
         title: allGroupsValid ? step.props.group : noGroupTitle,
         steps: [{ index, component: step }],
-      }
+      };
     }
-    return grouped
-  }, [])
-}
+    return grouped;
+  }, []);
+};
 
 /**
  * In React for web we use the "className" property to define
@@ -65,6 +65,7 @@ export const groupSteps = (steps) => {
  */
 export const getStyles = (styles) =>
   Object.keys(styles).reduce((acc, key) => {
-    acc[key] = typeof document !== 'undefined' ? { className: styles[key] } : { style: styles[key] }
-    return acc
-  }, {})
+    acc[key] =
+      typeof document !== 'undefined' ? { className: styles[key] } : { style: styles[key] };
+    return acc;
+  }, {});

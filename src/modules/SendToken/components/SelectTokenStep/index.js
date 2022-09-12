@@ -1,62 +1,62 @@
 /* eslint-disable max-statements */
-import React from 'react'
-import { View } from 'react-native'
-import { useController } from 'react-hook-form'
-import i18next from 'i18next'
+import React from 'react';
+import { View } from 'react-native';
+import { useController } from 'react-hook-form';
+import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import { PrimaryButton, Button } from 'components/shared/toolBox/button'
+import { useTheme } from 'hooks/useTheme';
+import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 
-import getSendTokenSelectTokenStepStyles from './styles'
+import getSendTokenSelectTokenStepStyles from './styles';
 import {
   SendTokenMessageField,
   SendTokenPriorityField,
   SendTokenTransactionFeesLabels,
   SendTokenAmountField,
   TokenSelectField,
-} from './components'
+} from './components';
 
 export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
   const { field: tokenIDField } = useController({
     name: 'tokenID',
     control: form.control,
-  })
+  });
 
   const { field: amountField } = useController({
     name: 'amount',
     control: form.control,
-  })
+  });
 
   const { field: messageField } = useController({
     name: 'message',
     control: form.control,
-  })
+  });
 
   const { field: priorityField } = useController({
     name: 'priority',
     control: form.control,
-  })
+  });
 
   const { field: recipientAccountAddressField } = useController({
     name: 'recipientAccountAddress',
     control: form.control,
-  })
+  });
 
   const { field: senderApplicationChainIDField } = useController({
     name: 'senderApplicationChainID',
     control: form.control,
-  })
+  });
 
   const { field: recipientApplicationChainIDField } = useController({
     name: 'recipientApplicationChainID',
     control: form.control,
-  })
+  });
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
-  })
+  });
 
-  const disableNextStepButton = !form.watch('tokenID') || !form.watch('amount')
+  const disableNextStepButton = !form.watch('tokenID') || !form.watch('amount');
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -111,5 +111,5 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
         />
       </View>
     </View>
-  )
+  );
 }

@@ -10,4 +10,4 @@ export default {
   // border radius
   buttonBorderRadius: 2,
   boxBorderRadius: 10,
-}
+};

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default function TxErrorSvg({ height = 115, width = 134, style }) {
   return (
@@ -132,5 +132,5 @@ export default function TxErrorSvg({ height = 115, width = 134, style }) {
       <Path d="M106.131 9.1377L118.91 21.9913" stroke="white" strokeWidth="0.5" />
       <Path d="M118.91 9.1377L106.131 21.9913" stroke="white" strokeWidth="0.5" />
     </Svg>
-  )
+  );
 }

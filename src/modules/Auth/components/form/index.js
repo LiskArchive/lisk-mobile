@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
-import { View, Keyboard } from 'react-native'
-import { translate } from 'react-i18next'
-import Input from 'components/shared/toolBox/input'
-import { ScrollView } from 'react-native-gesture-handler'
-import { validatePassphrase } from 'modules/Auth/utils'
-import { IconButton, PrimaryButton } from 'components/shared/toolBox/button'
-import { colors } from 'constants/styleGuide'
-import withTheme from 'components/shared/withTheme'
-import DropDownHolder from 'utilities/alert'
-import getStyles from './styles'
+import React, { useState } from 'react';
+import { View, Keyboard } from 'react-native';
+import { translate } from 'react-i18next';
+import Input from 'components/shared/toolBox/input';
+import { ScrollView } from 'react-native-gesture-handler';
+import { validatePassphrase } from 'modules/Auth/utils';
+import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
+import { colors } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import DropDownHolder from 'utilities/alert';
+import getStyles from './styles';
 
-const devDefaultPass = process.env.passphrase || ''
+const devDefaultPass = process.env.passphrase || '';
 
 const Form = ({ t, scanQrCode, lng, signIn, styles }) => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const [passphrase, setPassphrase] = useState({
     value: devDefaultPass,
     validity: [],
-  })
+  });
 
   const onInputChange = (value) => {
     setPassphrase({
@@ -25,23 +25,23 @@ const Form = ({ t, scanQrCode, lng, signIn, styles }) => {
         value,
         validity: [],
       },
-    })
-  }
+    });
+  };
 
   const onFormSubmission = (secretRecoveryPhrase = '') => {
-    const normalizedPassphrase = secretRecoveryPhrase.trim()
-    const validity = validatePassphrase(normalizedPassphrase)
+    const normalizedPassphrase = secretRecoveryPhrase.trim();
+    const validity = validatePassphrase(normalizedPassphrase);
 
     if (!validity.length) {
-      DropDownHolder.closeAlert()
-      signIn(normalizedPassphrase)
+      DropDownHolder.closeAlert();
+      signIn(normalizedPassphrase);
     } else {
       const errors = validity.filter(
         (item) => item.code !== 'INVALID_MNEMONIC' || validity.length === 1
-      )
+      );
       if (errors.length && errors[0].message && errors[0].message.length) {
-        const errorMessage = errors[0].message.replace(' Please check the passphrase.', '')
-        DropDownHolder.error(t('Error'), errorMessage)
+        const errorMessage = errors[0].message.replace(' Please check the passphrase.', '');
+        DropDownHolder.error(t('Error'), errorMessage);
       }
 
       setPassphrase({
@@ -49,16 +49,16 @@ const Form = ({ t, scanQrCode, lng, signIn, styles }) => {
           value: normalizedPassphrase,
           validity,
         },
-      })
+      });
     }
-  }
+  };
 
-  const onTogglePassphraseReveal = () => setShowPassword((prevState) => !prevState)
+  const onTogglePassphraseReveal = () => setShowPassword((prevState) => !prevState);
 
   const toggleCamera = () => {
-    scanQrCode()
-    Keyboard.dismiss()
-  }
+    scanQrCode();
+    Keyboard.dismiss();
+  };
 
   return (
     <View style={styles.container} testID="secretPhraseForm">
@@ -104,7 +104,7 @@ const Form = ({ t, scanQrCode, lng, signIn, styles }) => {
         onPress={() => onFormSubmission(passphrase.value)}
       />
     </View>
-  )
-}
+  );
+};
 
-export default withTheme(translate()(Form), getStyles())
+export default withTheme(translate()(Form), getStyles());

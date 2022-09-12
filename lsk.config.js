@@ -1,4 +1,4 @@
-const isTestnet = process.env.network === 'testnet'
+const isTestnet = process.env.network === 'testnet';
 
 export default {
   isTestnet,
@@ -13,4 +13,4 @@ export default {
       'Content-Type': 'application/json',
     },
   },
-}
+};

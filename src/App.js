@@ -1,21 +1,21 @@
-import React from 'react'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { I18nextProvider } from 'react-i18next'
-import { StatusBar, View } from 'react-native'
-import { Provider, useSelector } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
+import React from 'react';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { I18nextProvider } from 'react-i18next';
+import { StatusBar, View } from 'react-native';
+import { Provider, useSelector } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import { colors, themes } from 'constants/styleGuide'
-import Router from 'navigation'
-import Alert from 'components/shared/alert'
-import Modal from 'components/shared/modal'
-import reactQueryClient from 'utilities/api/reactQueryClient'
-import ThemeContext from './contexts/theme'
-import i18n from '../locales'
-import store, { persistedStore } from './store/index'
+import { colors, themes } from 'constants/styleGuide';
+import Router from 'navigation';
+import Alert from 'components/shared/alert';
+import Modal from 'components/shared/modal';
+import reactQueryClient from 'utilities/api/reactQueryClient';
+import ThemeContext from './contexts/theme';
+import i18n from '../locales';
+import store, { persistedStore } from './store/index';
 
 const ThemedApp = () => {
-  const { theme } = useSelector((state) => state.settings)
+  const { theme } = useSelector((state) => state.settings);
 
   return (
     <View
@@ -33,8 +33,8 @@ const ThemedApp = () => {
         </I18nextProvider>
       </ThemeContext.Provider>
     </View>
-  )
-}
+  );
+};
 
 export default function App() {
   return (
@@ -45,5 +45,5 @@ export default function App() {
         </PersistGate>
       </Provider>
     </QueryClientProvider>
-  )
+  );
 }

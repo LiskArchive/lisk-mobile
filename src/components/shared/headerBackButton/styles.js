@@ -1,13 +1,13 @@
-import { colors, fonts } from 'constants/styleGuide'
-import { deviceType } from 'utilities/device'
+import { colors, fonts } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
 
-const type = deviceType()
-let normalMarginTop = type === 'iOSx' ? -3 : 0
-let safeAreaMarginTop = type === 'iOSx' ? 45 : 20
+const type = deviceType();
+let normalMarginTop = type === 'iOSx' ? -3 : 0;
+let safeAreaMarginTop = type === 'iOSx' ? 45 : 20;
 
 if (type === 'android') {
-  normalMarginTop = 0
-  safeAreaMarginTop = 0
+  normalMarginTop = 0;
+  safeAreaMarginTop = 0;
 }
 
 export default () => ({
@@ -43,4 +43,4 @@ export default () => ({
       marginTop: safeAreaMarginTop,
     },
   },
-})
+});

@@ -11,6 +11,6 @@ export const currencyMap = {
     symbol: 'CHF',
     label: 'CHF',
   },
-}
+};
 
-export const currencyKeys = Object.keys(currencyMap)
+export const currencyKeys = Object.keys(currencyMap);

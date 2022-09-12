@@ -1,5 +1,5 @@
-import { colors, themes } from 'constants/styleGuide'
-import { setColorOpacity } from 'utilities/helpers'
+import { colors, themes } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default {
   common: {
@@ -54,4 +54,4 @@ export default {
       color: setColorOpacity(colors.light.white, 0.7),
     },
   },
-}
+};

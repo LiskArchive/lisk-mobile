@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
-import { View, NativeModules } from 'react-native'
-import FingerprintScanner from 'react-native-fingerprint-scanner'
-import { B, Small, A } from '../../toolBox/typography'
-import styles from './styles'
+import React, { Component } from 'react';
+import { View, NativeModules } from 'react-native';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
+import { B, Small, A } from '../../toolBox/typography';
+import styles from './styles';
 
 class SignInWarning extends Component {
   state = {
     sensorType: '',
-  }
+  };
 
   async componentDidMount() {
-    let sensorType
+    let sensorType;
 
     try {
-      sensorType = await FingerprintScanner.isSensorAvailable()
+      sensorType = await FingerprintScanner.isSensorAvailable();
     } catch (error) {
-      sensorType = 'biometric authentication'
+      sensorType = 'biometric authentication';
     }
 
-    this.setState({ sensorType })
+    this.setState({ sensorType });
   }
 
   render() {
@@ -36,8 +36,8 @@ class SignInWarning extends Component {
           </Small>
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default SignInWarning
+export default SignInWarning;

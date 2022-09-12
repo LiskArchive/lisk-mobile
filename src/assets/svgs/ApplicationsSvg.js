@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path, Mask } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path, Mask } from 'react-native-svg';
 
 export default function ApplicationsSvg({
   color = '#000000',
@@ -8,7 +8,7 @@ export default function ApplicationsSvg({
   style,
   variant = 'fill',
 }) {
-  let children = null
+  let children = null;
 
   switch (variant) {
     case 'fill':
@@ -19,8 +19,8 @@ export default function ApplicationsSvg({
           clipRule="evenodd"
           fill={color}
         />
-      )
-      break
+      );
+      break;
 
     case 'outline':
       children = (
@@ -46,16 +46,16 @@ export default function ApplicationsSvg({
             mask="url(#path-1-inside-1_395_2617)"
           />
         </>
-      )
-      break
+      );
+      break;
 
     default:
-      break
+      break;
   }
 
   return (
     <Svg width={width} height={height} viewBox="0 0 20 20" fill="none" style={style}>
       {children}
     </Svg>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import React from 'react'
-import { View, Image } from 'react-native'
-import { B } from '../../toolBox/typography'
-import styles from './styles'
+import React from 'react';
+import { View, Image } from 'react-native';
+import { B } from '../../toolBox/typography';
+import styles from './styles';
 
 const Pending = ({ sharedData: { amount } }) => (
   <View style={styles.container}>
@@ -10,6 +10,6 @@ const Pending = ({ sharedData: { amount } }) => (
       <B style={styles.description}>Your request of {amount} LSK is still pending.</B>
     </View>
   </View>
-)
+);
 
-export default Pending
+export default Pending;

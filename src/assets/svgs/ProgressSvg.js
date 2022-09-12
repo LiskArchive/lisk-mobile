@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path, Rect } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path, Rect } from 'react-native-svg';
 
 export default ({ color, size = 1 }) => (
   <Svg
@@ -21,4 +21,4 @@ export default ({ color, size = 1 }) => (
       stroke={color || '#254898'}
     />
   </Svg>
-)
+);

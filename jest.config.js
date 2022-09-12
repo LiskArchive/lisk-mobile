@@ -69,4 +69,4 @@ module.exports = {
   moduleNameMapper: {
     'react-i18next': '<rootDir>/src/tests/i18nextWrapper.js',
   },
-}
+};

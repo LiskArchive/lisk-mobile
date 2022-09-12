@@ -1,14 +1,14 @@
-import React from 'react'
-import connect from 'redux-connect-decorator'
-import { View } from 'react-native'
-import { translate } from 'react-i18next'
-import { removePassphraseFromKeyChain } from 'modules/Auth/utils'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import withTheme from 'components/shared/withTheme'
-import PassphraseCopy from 'components/shared/passphraseCopy'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions'
-import getStyles from './styles'
+import React from 'react';
+import connect from 'redux-connect-decorator';
+import { View } from 'react-native';
+import { translate } from 'react-i18next';
+import { removePassphraseFromKeyChain } from 'modules/Auth/utils';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import withTheme from 'components/shared/withTheme';
+import PassphraseCopy from 'components/shared/passphraseCopy';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
+import getStyles from './styles';
 
 @connect(
   (state) => ({
@@ -20,10 +20,10 @@ import getStyles from './styles'
 )
 class DisableBioAuth extends React.Component {
   confirm = () => {
-    removePassphraseFromKeyChain()
-    this.props.settingsUpdated({ hasStoredPassphrase: false })
-    this.props.navigation.pop()
-  }
+    removePassphraseFromKeyChain();
+    this.props.settingsUpdated({ hasStoredPassphrase: false });
+    this.props.navigation.pop();
+  };
 
   componentDidMount() {
     this.props.navigation.setOptions({
@@ -35,13 +35,13 @@ class DisableBioAuth extends React.Component {
           {...props}
         />
       ),
-    })
+    });
   }
 
   render() {
-    const { t, styles, route, passphrase } = this.props
+    const { t, styles, route, passphrase } = this.props;
 
-    const title = route.params?.title ?? 'Bio Auth'
+    const title = route.params?.title ?? 'Bio Auth';
 
     return (
       <View style={styles.wrapper}>
@@ -53,8 +53,8 @@ class DisableBioAuth extends React.Component {
           <PrimaryButton onClick={this.confirm} title={t('Disable bioAuth', { title })} />
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default withTheme(translate()(DisableBioAuth), getStyles())
+export default withTheme(translate()(DisableBioAuth), getStyles());

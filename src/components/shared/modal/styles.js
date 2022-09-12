@@ -1,6 +1,6 @@
-import { themes, colors, boxes } from 'constants/styleGuide'
-import { setColorOpacity } from 'utilities/helpers'
-import { deviceType } from 'utilities/device'
+import { themes, colors, boxes } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
+import { deviceType } from 'utilities/device';
 
 export default () => ({
   common: {
@@ -67,4 +67,4 @@ export default () => ({
       color: colors.dark.white,
     },
   },
-})
+});

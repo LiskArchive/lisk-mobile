@@ -1,9 +1,9 @@
-import React from 'react'
-import i18next from 'react-i18next'
+import React from 'react';
+import i18next from 'react-i18next';
 
-import colors from 'constants/styleGuide/colors'
-import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg'
-import SuccessScreen from 'modules/Auth/components/success'
+import colors from 'constants/styleGuide/colors';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import SuccessScreen from 'modules/Auth/components/success';
 
 export default function DeleteApplicationSuccess({ finalCallback, sharedData: { application } }) {
   return (
@@ -16,5 +16,5 @@ export default function DeleteApplicationSuccess({ finalCallback, sharedData: { 
       onContinue={finalCallback}
       buttonText={i18next.t('application.manage.continueToWalletButtonText')}
     />
-  )
+  );
 }

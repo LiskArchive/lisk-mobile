@@ -6,17 +6,17 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useCallback,
-} from 'react'
-import { AppState, SafeAreaView } from 'react-native'
-import Permissions from 'react-native-permissions'
-import { RNCamera } from 'react-native-camera'
-import QRCode from '@remobile/react-native-qrcode-local-image'
+} from 'react';
+import { AppState, SafeAreaView } from 'react-native';
+import Permissions from 'react-native-permissions';
+import { RNCamera } from 'react-native-camera';
+import QRCode from '@remobile/react-native-qrcode-local-image';
 
-import CameraAccess from './cameraAccess'
-import CameraOverlay from './cameraOverlay'
-import CameraRoll from './cameraRoll'
-import withTheme from '../withTheme'
-import getStyles from './styles'
+import CameraAccess from './cameraAccess';
+import CameraOverlay from './cameraOverlay';
+import CameraRoll from './cameraRoll';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 const Scanner = forwardRef(
   (
@@ -37,66 +37,66 @@ const Scanner = forwardRef(
     const [camera, setCamera] = useState({
       permission: 'undetermined',
       visible: false,
-    })
+    });
 
     const [photo, setPhoto] = useState({
       permission: 'undetermined',
       visible: false,
-    })
+    });
 
     const setPermissions = (permissions) => {
-      setCamera((prevState) => ({ ...prevState, permissions: permissions.camera }))
-      setPhoto((prevState) => ({ ...prevState, permissions: permissions.photo }))
-    }
+      setCamera((prevState) => ({ ...prevState, permissions: permissions.camera }));
+      setPhoto((prevState) => ({ ...prevState, permissions: permissions.photo }));
+    };
 
     const checkPermissions = useCallback(() => {
       Permissions.checkMultiple(['camera', 'photo']).then((response) => {
-        setPermissions(response)
-      })
-    }, [])
+        setPermissions(response);
+      });
+    }, []);
 
     const readFromPhotoGallery = (items) => {
-      setCamera((prevState) => ({ ...prevState, visible: false }))
-      setPhoto((prevState) => ({ ...prevState, visible: false }))
+      setCamera((prevState) => ({ ...prevState, visible: false }));
+      setPhoto((prevState) => ({ ...prevState, visible: false }));
 
       navigation.setOptions({
         tabBar: !photo.visible,
         headerLeft: true,
-      })
+      });
 
       if (items.length > 0) {
         QRCode.decode(items[0].uri, (error, result) => {
-          onQRCodeRead(result)
-        })
+          onQRCodeRead(result);
+        });
       }
-    }
+    };
 
     const toggleCamera = useCallback(() => {
       if (typeof isCameraOpen === 'function') {
-        isCameraOpen(!camera.visible)
+        isCameraOpen(!camera.visible);
       }
-      setCamera((prevState) => ({ ...prevState, visible: !prevState.visible }))
+      setCamera((prevState) => ({ ...prevState, visible: !prevState.visible }));
 
       if (!camera.visible && typeof onClose === 'function') {
-        onClose()
+        onClose();
       }
-    }, [])
+    }, []);
 
-    useImperativeHandle(ref, () => ({ toggleCamera }))
+    useImperativeHandle(ref, () => ({ toggleCamera }));
 
     const toggleGallery = () => {
-      setPhoto((prevState) => ({ ...prevState, visible: !prevState.visible }))
-    }
+      setPhoto((prevState) => ({ ...prevState, visible: !prevState.visible }));
+    };
 
     const readQRcode = (event) => {
-      toggleCamera()
-      onQRCodeRead(event.data)
-    }
+      toggleCamera();
+      onQRCodeRead(event.data);
+    };
 
     useEffect(() => {
-      checkPermissions()
-      AppState.addEventListener('change', checkPermissions)
-    }, [])
+      checkPermissions();
+      AppState.addEventListener('change', checkPermissions);
+    }, []);
 
     return (
       <Fragment>
@@ -134,8 +134,8 @@ const Scanner = forwardRef(
           visible={photo.visible}
         />
       </Fragment>
-    )
+    );
   }
-)
+);
 
-export default withTheme(Scanner, getStyles(), true)
+export default withTheme(Scanner, getStyles(), true);

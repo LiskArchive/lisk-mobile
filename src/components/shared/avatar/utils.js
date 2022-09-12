@@ -1,6 +1,6 @@
-import { Circle, Polygon, Rect } from 'react-native-svg'
-import BigNumber from 'bignumber.js'
-import crypto from 'crypto'
+import { Circle, Polygon, Rect } from 'react-native-svg';
+import BigNumber from 'bignumber.js';
+import crypto from 'crypto';
 
 /*
  * Account Visual
@@ -50,7 +50,7 @@ const computeTriangle = (props) => ({
   ]
     .map(({ x, y }) => `${x},${y}`)
     .join(' '),
-})
+});
 
 const computePentagon = (props) => ({
   points: [
@@ -77,14 +77,14 @@ const computePentagon = (props) => ({
   ]
     .map(({ x, y }) => `${x},${y}`)
     .join(' '),
-})
+});
 
 export const getShape = (chunk, size, gradient, sizeScale = 1) => {
-  const shapeNames = ['circle', 'triangle', 'square']
+  const shapeNames = ['circle', 'triangle', 'square'];
 
-  const sizes = [1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1].map((x) => x * size * sizeScale)
+  const sizes = [1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1].map((x) => x * size * sizeScale);
 
-  const coordinates = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((x) => x * (size / 40))
+  const coordinates = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((x) => x * (size / 40));
 
   const shapes = {
     circle: {
@@ -129,7 +129,7 @@ export const getShape = (chunk, size, gradient, sizeScale = 1) => {
         size: sizes[chunk[3]],
       }),
     },
-  }
+  };
 
   return {
     component: shapes[shapeNames[chunk.substr(0, 2) % shapeNames.length]].component,
@@ -139,8 +139,8 @@ export const getShape = (chunk, size, gradient, sizeScale = 1) => {
       rotation: chunk.substr(1, 2) * 3.6,
       origin: '100, 100',
     },
-  }
-}
+  };
+};
 
 export const getBackgroundCircle = (size, gradient) => ({
   component: Circle,
@@ -150,25 +150,25 @@ export const getBackgroundCircle = (size, gradient) => ({
     r: size / 2,
     fill: gradient.url,
   },
-})
+});
 
 export const pickTwo = (chunk, options) => [
   options[chunk.substr(0, 2) % options.length],
   options[
     (chunk.substr(0, 2) - 0 + 1 + (chunk.substr(2, 2) % (options.length - 1))) % options.length
   ],
-]
+];
 
 export const getHashChunks = (address) => {
-  const hash = crypto.createHash('sha256')
-  const addressHash = new BigNumber(`0x${hash.update(address).digest('hex')}`).toString().substr(3)
-  return addressHash.match(/\d{5}/g)
-}
+  const hash = crypto.createHash('sha256');
+  const addressHash = new BigNumber(`0x${hash.update(address).digest('hex')}`).toString().substr(3);
+  return addressHash.match(/\d{5}/g);
+};
 
-export const randomId = () => `avatar-${[1, 2, 3, 4].map(() => Math.random() * 100).join('')}`
+export const randomId = () => `avatar-${[1, 2, 3, 4].map(() => Math.random() * 100).join('')}`;
 
 export const replaceUrlByHashOnScheme = (uniqueSvgUrlHash, gradientScheme) => ({
   ...gradientScheme,
   url: gradientScheme.url.replace(/\)/g, `-${uniqueSvgUrlHash})`),
   id: `${gradientScheme.id}-${uniqueSvgUrlHash}`,
-})
+});

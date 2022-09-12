@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide'
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default function getSendTokenSelectTokenStepStyles() {
   return {
@@ -119,7 +119,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         color: colors.light.whiteSmoke,
       },
     },
-  }
+  };
 }
 
 export function getSendTokenMessageFieldStyles(styles) {
@@ -139,7 +139,7 @@ export function getSendTokenMessageFieldStyles(styles) {
       minHeight: 80,
       ...styles?.input,
     },
-  }
+  };
 }
 
 export function getSendTokenAmountFieldStyles(styles) {
@@ -160,5 +160,5 @@ export function getSendTokenAmountFieldStyles(styles) {
       padding: 16,
       ...styles?.input,
     },
-  }
+  };
 }

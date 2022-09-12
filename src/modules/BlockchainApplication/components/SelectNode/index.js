@@ -1,16 +1,16 @@
 /* eslint-disable max-len */
-import React from 'react'
-import { View, TouchableOpacity, Image, FlatList } from 'react-native'
-import { P, H3 } from 'components/shared/toolBox/typography'
-import { useTheme } from 'hooks/useTheme'
-import { colors } from 'constants/styleGuide'
-import CaretSvg from 'assets/svgs/CaretSvg'
-import getStyles from './styles'
+import React from 'react';
+import { View, TouchableOpacity, Image, FlatList } from 'react-native';
+import { P, H3 } from 'components/shared/toolBox/typography';
+import { useTheme } from 'hooks/useTheme';
+import { colors } from 'constants/styleGuide';
+import CaretSvg from 'assets/svgs/CaretSvg';
+import getStyles from './styles';
 
 const SelectNode = ({ application, onPress }) => {
-  const { styles } = useTheme({ styles: getStyles })
+  const { styles } = useTheme({ styles: getStyles });
 
-  const { name, serviceURLs, logo } = application
+  const { name, serviceURLs, logo } = application;
 
   return (
     <View style={styles.container}>
@@ -31,7 +31,7 @@ const SelectNode = ({ application, onPress }) => {
         )}
       />
     </View>
-  )
-}
+  );
+};
 
-export default SelectNode
+export default SelectNode;

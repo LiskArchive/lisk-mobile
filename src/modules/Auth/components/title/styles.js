@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { boxes, colors } from 'constants/styleGuide'
+import { StyleSheet } from 'react-native';
+import { boxes, colors } from 'constants/styleGuide';
 
 const styles = {
   container: {
@@ -9,6 +9,6 @@ const styles = {
     textAlign: 'center',
     color: colors.light.slateGray,
   },
-}
+};
 
-export default StyleSheet.create(styles)
+export default StyleSheet.create(styles);

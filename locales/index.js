@@ -1,5 +1,5 @@
-import i18n from 'i18next'
-import resources from './resources'
+import i18n from 'i18next';
+import resources from './resources';
 
 i18n.init({
   fallbackLng: 'en',
@@ -10,6 +10,6 @@ i18n.init({
   saveMissing: true,
   debug: false,
   nsSeparator: '|',
-})
+});
 
-export default i18n
+export default i18n;

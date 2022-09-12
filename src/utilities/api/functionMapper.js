@@ -1,6 +1,6 @@
-import { tokenMap } from 'constants/tokens'
-import * as liskAccount from './lisk/account'
-import * as liskService from './lisk/service'
+import { tokenMap } from 'constants/tokens';
+import * as liskAccount from './lisk/account';
+import * as liskService from './lisk/service';
 
 /**
  * Resource oriented mapping from token type to utility functions.
@@ -10,7 +10,7 @@ const resourceMap = {
     account: liskAccount,
     service: liskService,
   },
-}
+};
 
 /**
  * Extracts related account API utility for given tokenType and map address.
@@ -21,16 +21,16 @@ const resourceMap = {
  */
 const getMappedFunction = (tokenType, resourceName, functionName) => {
   try {
-    const fn = resourceMap[tokenType][resourceName][functionName]
+    const fn = resourceMap[tokenType][resourceName][functionName];
 
     if (typeof fn === 'function') {
-      return fn
+      return fn;
     }
 
-    throw new Error(`${tokenType} doesn't match a function for ${resourceName}.${functionName}.`)
+    throw new Error(`${tokenType} doesn't match a function for ${resourceName}.${functionName}.`);
   } catch (error) {
-    throw new Error(`Invalid mapper path for ${tokenType} - ${resourceName}.${functionName}.`)
+    throw new Error(`Invalid mapper path for ${tokenType} - ${resourceName}.${functionName}.`);
   }
-}
+};
 
-export default getMappedFunction
+export default getMappedFunction;

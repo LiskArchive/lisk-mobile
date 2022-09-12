@@ -11,10 +11,10 @@ After `MessagesViewController` is initialized and active, we instatiate `RCTRoot
 We export a native module called `MessagesManager` which can be accessed via React Native's [NativeModules](https://facebook.github.io/react-native/docs/native-modules-ios) and [NativeEventEmitter].(https://facebook.github.io/react-native/docs/native-modules-ios#sending-events-to-javascript) utilities.
 
 ```jsx
-import { NativeModules, NativeEventEmitter } from 'react-native'
+import { NativeModules, NativeEventEmitter } from 'react-native';
 
-const { MessagesManager } = NativeModules
-const MessagesEvents = new NativeEventEmitter(MessagesManager)
+const { MessagesManager } = NativeModules;
+const MessagesEvents = new NativeEventEmitter(MessagesManager);
 ```
 
 ## Methods

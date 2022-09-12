@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react'
-import { View } from 'react-native'
-import { useSelector } from 'react-redux'
-import { useTheme } from 'hooks/useTheme'
-import EmptyState from './EmptyState'
-import List from './List'
-import getStyles from './styles'
-import { selectBookmarkList } from '../store/selectors'
+import React, { useMemo } from 'react';
+import { View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { useTheme } from 'hooks/useTheme';
+import EmptyState from './EmptyState';
+import List from './List';
+import getStyles from './styles';
+import { selectBookmarkList } from '../store/selectors';
 
 const BookmarkList = ({
   onPress,
@@ -16,23 +16,23 @@ const BookmarkList = ({
   filterAddress,
   Component,
 }) => {
-  const styles = useTheme({ styles: getStyles() })
-  const list = useSelector(selectBookmarkList)
+  const styles = useTheme({ styles: getStyles() });
+  const list = useSelector(selectBookmarkList);
 
   const filterList = useMemo(
     () =>
       list?.filter((item) => {
         if (filterAddress) {
-          return false
+          return false;
         }
-        if (query?.length === 0) return true
+        if (query?.length === 0) return true;
         return (
           item.address.indexOf(query) >= 0 ||
           item.label.toLowerCase().indexOf(query?.toLowerCase()) >= 0
-        )
+        );
       }),
     [list, filterAddress, query]
-  )
+  );
 
   return (
     <View style={[!draggable && styles.container]}>
@@ -49,7 +49,7 @@ const BookmarkList = ({
         />
       )}
     </View>
-  )
-}
+  );
+};
 
-export default BookmarkList
+export default BookmarkList;

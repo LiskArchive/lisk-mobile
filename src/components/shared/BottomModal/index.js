@@ -1,13 +1,13 @@
-import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
-import Modal from 'react-native-modalbox'
-import Icon from 'components/shared/toolBox/icon'
-import { useTheme } from 'hooks/useTheme'
-import { colors, themes } from 'constants/styleGuide'
-import getStyles from './styles'
+import React from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import Modal from 'react-native-modalbox';
+import Icon from 'components/shared/toolBox/icon';
+import { useTheme } from 'hooks/useTheme';
+import { colors, themes } from 'constants/styleGuide';
+import getStyles from './styles';
 
 const BottomModal = ({ showClose = true, show, toggleShow, children, style, ...props }) => {
-  const { styles, theme } = useTheme({ styles: getStyles() })
+  const { styles, theme } = useTheme({ styles: getStyles() });
 
   return (
     <Modal
@@ -32,7 +32,7 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style, ...p
 
       {children}
     </Modal>
-  )
-}
+  );
+};
 
-export default BottomModal
+export default BottomModal;

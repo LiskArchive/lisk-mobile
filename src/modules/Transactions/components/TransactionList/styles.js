@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide'
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default function getTransactionListStyles() {
   return {
@@ -53,5 +53,5 @@ export default function getTransactionListStyles() {
         color: colors.light.white,
       },
     },
-  }
+  };
 }

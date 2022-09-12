@@ -1,4 +1,4 @@
-import { themes, colors, fonts } from 'constants/styleGuide'
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getSendTokenSuccessStyles() {
   return {
@@ -48,5 +48,5 @@ export default function getSendTokenSuccessStyles() {
         color: colors.dark.slateGray,
       },
     },
-  }
+  };
 }

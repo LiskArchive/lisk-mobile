@@ -1,12 +1,12 @@
-import React, { Fragment, useEffect } from 'react'
-import { View, TouchableHighlight, Platform } from 'react-native'
-import FingerprintScanner from 'react-native-fingerprint-scanner'
-import { P } from 'components/shared/toolBox/typography'
-import Icon from 'components/shared/toolBox/icon'
-import { themes, colors } from 'constants/styleGuide'
-import { bioMetricAuthentication } from 'modules/Auth/utils'
-import withTheme from 'components/shared/withTheme'
-import getStyles from './styles'
+import React, { Fragment, useEffect } from 'react';
+import { View, TouchableHighlight, Platform } from 'react-native';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
+import { P } from 'components/shared/toolBox/typography';
+import Icon from 'components/shared/toolBox/icon';
+import { themes, colors } from 'constants/styleGuide';
+import { bioMetricAuthentication } from 'modules/Auth/utils';
+import withTheme from 'components/shared/withTheme';
+import getStyles from './styles';
 
 /**
  * A single setting item with icon and title
@@ -39,30 +39,30 @@ const ItemTitle = ({
   const authenticateFn = (cb) => {
     bioMetricAuthentication({
       successCallback: () => {
-        hideDialog()
-        cb()
+        hideDialog();
+        cb();
       },
       errorCallback: () => {},
       androidError: (error) => setError(error),
-    })
+    });
 
     if (Platform.OS === 'android') {
       navigation.setOptions({
         headerVisible: false,
-      })
-      showDialog()
+      });
+      showDialog();
     }
-  }
+  };
 
   const props = {
     style: styles.container,
     underlayColor: 'transparent',
-  }
+  };
 
   const iconProps = {
     color: theme === themes.light ? colors.light.blueGray : colors.dark.slateGray,
     style: styles.icon,
-  }
+  };
 
   if (target) {
     props.onPress = () => {
@@ -71,18 +71,18 @@ const ItemTitle = ({
           navigation.navigate({
             name: target,
             params: { title },
-          })
-        })
+          });
+        });
       } else {
         navigation.navigate({
           name: target,
           params: { title },
-        })
+        });
       }
-    }
+    };
   }
 
-  useEffect(() => () => FingerprintScanner.release())
+  useEffect(() => () => FingerprintScanner.release());
 
   return (
     <TouchableHighlight testID="testID" {...props}>
@@ -118,7 +118,7 @@ const ItemTitle = ({
         </View>
       </Fragment>
     </TouchableHighlight>
-  )
-}
+  );
+};
 
-export default withTheme(ItemTitle, getStyles())
+export default withTheme(ItemTitle, getStyles());

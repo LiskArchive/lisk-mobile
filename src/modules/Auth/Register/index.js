@@ -1,35 +1,35 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { View, BackHandler } from 'react-native'
-import Stepper from 'components/shared/Stepper'
-import i18next from 'i18next'
-import Confirm from './confirm'
-import Success from './success'
-import SafeKeeping from './safeKeeping'
-import Intro from './intro'
-import styles from './styles'
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, BackHandler } from 'react-native';
+import Stepper from 'components/shared/Stepper';
+import i18next from 'i18next';
+import Confirm from './confirm';
+import Success from './success';
+import SafeKeeping from './safeKeeping';
+import Intro from './intro';
+import styles from './styles';
 
 const Register = ({ route }) => {
-  const [showNav, setShowNav] = useState(true)
+  const [showNav, setShowNav] = useState(true);
 
-  const noNavStyle = showNav ? {} : { paddingBottom: 0 }
+  const noNavStyle = showNav ? {} : { paddingBottom: 0 };
 
-  const hideNav = () => setShowNav(false)
+  const hideNav = () => setShowNav(false);
 
   const onBackButtonPressedAndroid = useCallback(() => {
-    const action = route.params?.action ?? false
+    const action = route.params?.action ?? false;
 
     if (action && typeof action === 'function') {
-      action()
-      return true
+      action();
+      return true;
     }
 
-    return false
-  }, [])
+    return false;
+  }, []);
 
   useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', onBackButtonPressedAndroid)
-    return () => BackHandler.removeEventListener('hardwareBackPress', onBackButtonPressedAndroid)
-  }, [onBackButtonPressedAndroid])
+    BackHandler.addEventListener('hardwareBackPress', onBackButtonPressedAndroid);
+    return () => BackHandler.removeEventListener('hardwareBackPress', onBackButtonPressedAndroid);
+  }, [onBackButtonPressedAndroid]);
 
   return (
     <View style={[styles.container, noNavStyle]}>
@@ -44,7 +44,7 @@ const Register = ({ route }) => {
         <Success title="success" group={i18next.t('4. Security reminder')} hideNav={hideNav} />
       </Stepper>
     </View>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

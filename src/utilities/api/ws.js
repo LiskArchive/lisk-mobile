@@ -1,4 +1,4 @@
-import apiClient from './APIClient'
+import apiClient from './APIClient';
 
 /**
  * Makes RPC api call
@@ -13,17 +13,17 @@ import apiClient from './APIClient'
 export default function ws({ event, params, data }) {
   return new Promise((resolve, reject) => {
     if (apiClient.socket.disconnected) {
-      reject(new Error('socket not connected'))
+      reject(new Error('socket not connected'));
 
-      return
+      return;
     }
 
     apiClient.socket.emit(event, params || data || {}, (response) => {
       if (Object.keys(response).length && response.error) {
-        return reject(response)
+        return reject(response);
       }
 
-      return resolve(response)
-    })
-  })
+      return resolve(response);
+    });
+  });
 }

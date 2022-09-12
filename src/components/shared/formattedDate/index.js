@@ -1,7 +1,7 @@
-import React from 'react'
-import { Text } from 'react-native'
-import moment from 'moment'
-import 'moment/min/locales'
+import React from 'react';
+import { Text } from 'react-native';
+import moment from 'moment';
+import 'moment/min/locales';
 
 /**
  * Converts the timestamp to moment prettified time and wraps the value in a component
@@ -15,11 +15,11 @@ import 'moment/min/locales'
  * @returns {Object} React native Text component
  */
 const FormattedDate = ({ children, style, type, locale, format = 'MMM D, YYYY' }) => {
-  const Element = type || Text
+  const Element = type || Text;
 
-  moment.locale(locale)
+  moment.locale(locale);
 
-  return <Element style={style}>{moment(children).format(format)}</Element>
-}
+  return <Element style={style}>{moment(children).format(format)}</Element>;
+};
 
-export default FormattedDate
+export default FormattedDate;

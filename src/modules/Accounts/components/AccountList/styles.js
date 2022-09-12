@@ -1,4 +1,4 @@
-import { colors, themes } from 'constants/styleGuide'
+import { colors, themes } from 'constants/styleGuide';
 
 export default function getAccountsListStyles() {
   return {
@@ -30,5 +30,5 @@ export default function getAccountsListStyles() {
         color: colors.dark.ghost,
       },
     },
-  }
+  };
 }

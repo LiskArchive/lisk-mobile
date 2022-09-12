@@ -1,7 +1,7 @@
-import { Platform } from 'react-native'
-import { colors, fonts } from 'constants/styleGuide'
+import { Platform } from 'react-native';
+import { colors, fonts } from 'constants/styleGuide';
 
-const paddingTop = Platform.OS === 'android' ? 16 : 10
+const paddingTop = Platform.OS === 'android' ? 16 : 10;
 
 export default () => ({
   common: {
@@ -55,4 +55,4 @@ export default () => ({
       marginTop: -20,
     },
   },
-})
+});

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default function SendLSKIllustrationSvg({ height = 123, width = 251, style }) {
   return (
@@ -210,5 +210,5 @@ export default function SendLSKIllustrationSvg({ height = 123, width = 251, styl
         fill="#254898"
       />
     </Svg>
-  )
+  );
 }

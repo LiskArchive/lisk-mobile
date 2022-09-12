@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native'
+import { Dimensions } from 'react-native';
 
 export default function getAccountsManagerModalStyles() {
   return {
@@ -10,5 +10,5 @@ export default function getAccountsManagerModalStyles() {
         marginBottom: 16,
       },
     },
-  }
+  };
 }

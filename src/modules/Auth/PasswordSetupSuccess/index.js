@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import withTheme from 'components/shared/withTheme'
-import FlowerSuccessSvg from 'assets/svgs/FlowerSuccessSvg'
-import FileSvg from 'assets/svgs/FileSvg'
-import DownloadSvg from 'assets/svgs/DownloadSvg'
-import { themes } from 'constants/styleGuide'
-import { translate } from 'react-i18next'
-import SuccessScreen from '../components/success'
-import getStyles from './styles'
-import { downloadJSON } from '../utils'
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import withTheme from 'components/shared/withTheme';
+import FlowerSuccessSvg from 'assets/svgs/FlowerSuccessSvg';
+import FileSvg from 'assets/svgs/FileSvg';
+import DownloadSvg from 'assets/svgs/DownloadSvg';
+import { themes } from 'constants/styleGuide';
+import { translate } from 'react-i18next';
+import SuccessScreen from '../components/success';
+import getStyles from './styles';
+import { downloadJSON } from '../utils';
 
 const PasswordSetupSuccess = ({ styles, t, encryptedJson, onContinue, theme }) => {
-  const [downloaded, setDownloaded] = useState(false)
+  const [downloaded, setDownloaded] = useState(false);
 
   const downloadFile = () =>
     downloadJSON(
@@ -19,10 +19,10 @@ const PasswordSetupSuccess = ({ styles, t, encryptedJson, onContinue, theme }) =
       `${encryptedJson.metadata.address}-encrypted_secret_recovery_phrase.json`,
       (e) => {
         if (!e) {
-          setDownloaded(true)
+          setDownloaded(true);
         }
       }
-    )
+    );
 
   return (
     <SuccessScreen
@@ -47,7 +47,7 @@ const PasswordSetupSuccess = ({ styles, t, encryptedJson, onContinue, theme }) =
         >{`${encryptedJson.metadata.address}-encrypted_secret_recovery_phrase.json`}</Text>
       </View>
     </SuccessScreen>
-  )
-}
+  );
+};
 
-export default withTheme(translate()(PasswordSetupSuccess), getStyles())
+export default withTheme(translate()(PasswordSetupSuccess), getStyles());

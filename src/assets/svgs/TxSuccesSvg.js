@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default function TxSuccessSvg({ height = 122, width = 142, style }) {
   return (
@@ -131,5 +131,5 @@ export default function TxSuccessSvg({ height = 122, width = 142, style }) {
         fill="white"
       />
     </Svg>
-  )
+  );
 }

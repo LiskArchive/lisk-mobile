@@ -1,28 +1,28 @@
-import React, { useMemo, useState } from 'react'
-import { View, SafeAreaView, ScrollView, Linking } from 'react-native'
-import { translate } from 'react-i18next'
-import { connect } from 'react-redux'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { stringShortener } from 'utilities/helpers'
-import { colors } from 'constants/styleGuide'
-import { B, P } from 'components/shared/toolBox/typography'
-import withTheme from 'components/shared/withTheme'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import InfoComponent from 'components/shared/infoComponent'
-import Avatar from 'components/shared/avatar'
-import getStyles from './styles'
+import React, { useMemo, useState } from 'react';
+import { View, SafeAreaView, ScrollView, Linking } from 'react-native';
+import { translate } from 'react-i18next';
+import { connect } from 'react-redux';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { stringShortener } from 'utilities/helpers';
+import { colors } from 'constants/styleGuide';
+import { B, P } from 'components/shared/toolBox/typography';
+import withTheme from 'components/shared/withTheme';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import InfoComponent from 'components/shared/infoComponent';
+import Avatar from 'components/shared/avatar';
+import getStyles from './styles';
 
 const MultiSignature = ({ t, styles, navigation, multiSigAccount }) => {
-  const [showAll, setShowAll] = useState(false)
-  const memberList = useMemo(() => multiSigAccount?.members, [multiSigAccount])
-  const numberOfSignatures = useMemo(() => multiSigAccount?.numberOfSignatures, [multiSigAccount])
+  const [showAll, setShowAll] = useState(false);
+  const memberList = useMemo(() => multiSigAccount?.members, [multiSigAccount]);
+  const numberOfSignatures = useMemo(() => multiSigAccount?.numberOfSignatures, [multiSigAccount]);
 
-  const openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet')
+  const openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet');
 
   const listToShow = useMemo(
     () => (showAll ? memberList : memberList?.slice(0, 4)),
     [memberList, showAll]
-  )
+  );
 
   return (
     <SafeAreaView style={styles.theme.container}>
@@ -89,11 +89,11 @@ const MultiSignature = ({ t, styles, navigation, multiSigAccount }) => {
         </View>
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
   multiSigAccount: state.accounts.info?.LSK?.keys ?? {},
-})
+});
 
-export default connect(mapStateToProps)(withTheme(translate()(MultiSignature), getStyles()))
+export default connect(mapStateToProps)(withTheme(translate()(MultiSignature), getStyles()));

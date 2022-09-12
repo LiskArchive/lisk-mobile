@@ -1,29 +1,29 @@
-import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
-import { translate } from 'react-i18next'
-import { useDispatch } from 'react-redux'
-import { colors, themes } from 'constants/styleGuide'
-import ModalHolder from 'utilities/modal'
-import { stringShortener } from 'utilities/helpers'
-import WarningSvg from 'assets/svgs/WarningSvg'
-import Avatar from 'components/shared/avatar'
-import { B, Small, P } from 'components/shared/toolBox/typography'
-import Icon from 'components/shared/toolBox/icon'
-import SwipeableRow from 'components/shared/Swipeable'
-import { useNavigation } from '@react-navigation/native'
-import DeleteBookmarkModal from './DeleteBookmark'
-import { deleteBookmark } from '../store/actions'
+import React from 'react';
+import { View, TouchableOpacity } from 'react-native';
+import { translate } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { colors, themes } from 'constants/styleGuide';
+import ModalHolder from 'utilities/modal';
+import { stringShortener } from 'utilities/helpers';
+import WarningSvg from 'assets/svgs/WarningSvg';
+import Avatar from 'components/shared/avatar';
+import { B, Small, P } from 'components/shared/toolBox/typography';
+import Icon from 'components/shared/toolBox/icon';
+import SwipeableRow from 'components/shared/Swipeable';
+import { useNavigation } from '@react-navigation/native';
+import DeleteBookmarkModal from './DeleteBookmark';
+import { deleteBookmark } from '../store/actions';
 
 const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddress, t }) => {
-  const dispatch = useDispatch()
-  const navigation = useNavigation()
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const onDelete = () => {
     ModalHolder.open({
       title: 'Delete bookmark',
       component: DeleteBookmarkModal,
       callback: () => dispatch(deleteBookmark(data)),
-    })
-  }
+    });
+  };
 
   const openDisabledModal = () => {
     ModalHolder.open({
@@ -36,8 +36,8 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
           </TouchableOpacity>
         </View>
       ),
-    })
-  }
+    });
+  };
 
   return (
     <SwipeableRow
@@ -119,7 +119,7 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
         </View>
       </TouchableOpacity>
     </SwipeableRow>
-  )
-}
+  );
+};
 
-export default translate()(DraggableItem)
+export default translate()(DraggableItem);

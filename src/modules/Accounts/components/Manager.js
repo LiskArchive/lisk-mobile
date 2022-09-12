@@ -1,45 +1,45 @@
 /* eslint-disable max-statements */
-import React, { Fragment, useEffect, useRef } from 'react'
-import { View, Animated } from 'react-native'
-import { translate } from 'react-i18next'
-import RNShake from 'react-native-shake'
-import easing from 'utilities/easing'
-import { settingsUpdated } from 'modules/Settings/actions'
-import { H3 } from 'components/shared/toolBox/typography'
-import withTheme from 'components/shared/withTheme'
-import { useDispatch, useSelector } from 'react-redux'
-import List from './List'
-import Footer from './Footer'
-import getStyles from './styles'
+import React, { Fragment, useEffect, useRef } from 'react';
+import { View, Animated } from 'react-native';
+import { translate } from 'react-i18next';
+import RNShake from 'react-native-shake';
+import easing from 'utilities/easing';
+import { settingsUpdated } from 'modules/Settings/actions';
+import { H3 } from 'components/shared/toolBox/typography';
+import withTheme from 'components/shared/withTheme';
+import { useDispatch, useSelector } from 'react-redux';
+import List from './List';
+import Footer from './Footer';
+import getStyles from './styles';
 
 const Manager = ({ type, styles, transactions, navigate, account, footer, t, noTitle }) => {
   const {
     discrete: discreteMode,
     token: { active: activeToken },
-  } = useSelector((state) => state.settings)
-  const dispatch = useDispatch()
-  const discrete = type === 'home' && discreteMode
-  const Anim = Animated.View
+  } = useSelector((state) => state.settings);
+  const dispatch = useDispatch();
+  const discrete = type === 'home' && discreteMode;
+  const Anim = Animated.View;
 
-  const opacity = useRef(new Animated.Value(0))
-  const top = useRef(new Animated.Value(20))
+  const opacity = useRef(new Animated.Value(0));
+  const top = useRef(new Animated.Value(20));
 
   const initialFadeIn = () => {
     Animated.timing(opacity.current, {
       toValue: 1,
       duration: 400,
       delay: 100,
-    }).start()
+    }).start();
     Animated.timing(top.current, {
       toValue: 0,
       duration: 400,
       delay: 100,
       easing: easing.easeInOutQuart,
-    }).start()
-  }
+    }).start();
+  };
 
   useEffect(() => {
-    let timeout = null
+    let timeout = null;
     if (type === 'home') {
       RNShake.addEventListener('ShakeEvent', () => {
         if (!timeout) {
@@ -47,19 +47,19 @@ const Manager = ({ type, styles, transactions, navigate, account, footer, t, noT
             settingsUpdated({
               discrete: !discreteMode,
             })
-          )
+          );
           timeout = setTimeout(() => {
-            timeout = false
-          }, 1000)
+            timeout = false;
+          }, 1000);
         }
-      })
+      });
     }
-    initialFadeIn()
+    initialFadeIn();
     return () => {
-      clearTimeout(timeout)
-      RNShake.removeEventListener('ShakeEvent')
-    }
-  }, [])
+      clearTimeout(timeout);
+      RNShake.removeEventListener('ShakeEvent');
+    };
+  }, []);
 
   return (
     <Anim
@@ -93,7 +93,7 @@ const Manager = ({ type, styles, transactions, navigate, account, footer, t, noT
         </Fragment>
       )}
     </Anim>
-  )
-}
+  );
+};
 
-export default withTheme(translate()(Manager), getStyles())
+export default withTheme(translate()(Manager), getStyles());

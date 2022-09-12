@@ -1,16 +1,16 @@
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useTheme } from 'hooks/useTheme'
-import AccountsManager from 'modules/Accounts/components/AccountsManager'
-import Splash from '../components/splash'
+import { useTheme } from 'hooks/useTheme';
+import AccountsManager from 'modules/Accounts/components/AccountsManager';
+import Splash from '../components/splash';
 
-import getAccountsManagerScreenStyles from './styles'
+import getAccountsManagerScreenStyles from './styles';
 
 export default function AccountsManagerScreen() {
   const { styles } = useTheme({
     styles: getAccountsManagerScreenStyles(),
-  })
+  });
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
@@ -18,5 +18,5 @@ export default function AccountsManagerScreen() {
 
       <AccountsManager style={{ container: styles.container }} />
     </SafeAreaView>
-  )
+  );
 }

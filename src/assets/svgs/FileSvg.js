@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default function FileSvg({ color = '#8A8CA2', height = 20, width = 18, style }) {
   return (
@@ -9,5 +9,5 @@ export default function FileSvg({ color = '#8A8CA2', height = 20, width = 18, st
         fill={color}
       />
     </Svg>
-  )
+  );
 }

@@ -1,26 +1,26 @@
 /* eslint-disable complexity */
-import React from 'react'
-import { View, Text, Image } from 'react-native'
-import { useSelector } from 'react-redux'
-import i18next from 'i18next'
+import React from 'react';
+import { View, Text, Image } from 'react-native';
+import { useSelector } from 'react-redux';
+import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import { BookmarkList } from 'modules/Bookmark/components'
-import { selectBookmarkList } from 'modules/Bookmark/store/selectors'
-import Picker from 'components/shared/Picker'
-import Avatar from 'components/shared/avatar'
-import InfiniteScrollList from 'components/shared/InfiniteScrollList'
-import Input from 'components/shared/toolBox/input'
-import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg'
-import CircleSvg from 'assets/svgs/CircleSvg'
-import BookmarksSvg from 'assets/svgs/BookmarksSvg'
-import { stringShortener } from 'utilities/helpers'
-import colors from 'constants/styleGuide/colors'
-import { P } from 'components/shared/toolBox/typography'
+import { useTheme } from 'hooks/useTheme';
+import { BookmarkList } from 'modules/Bookmark/components';
+import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
+import Picker from 'components/shared/Picker';
+import Avatar from 'components/shared/avatar';
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import Input from 'components/shared/toolBox/input';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import CircleSvg from 'assets/svgs/CircleSvg';
+import BookmarksSvg from 'assets/svgs/BookmarksSvg';
+import { stringShortener } from 'utilities/helpers';
+import colors from 'constants/styleGuide/colors';
+import { P } from 'components/shared/toolBox/typography';
 
 import getSendTokenSelectApplicationsStepStyles, {
   getSendTokenRecipientAccountFieldStyles,
-} from './styles'
+} from './styles';
 
 export function SendTokenSenderApplicationField({
   value,
@@ -29,11 +29,13 @@ export function SendTokenSenderApplicationField({
   applications,
   style,
 }) {
-  const senderApplication = applications?.data?.find((application) => application.chainID === value)
+  const senderApplication = applications?.data?.find(
+    (application) => application.chainID === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
-  })
+  });
 
   return (
     <Picker value={value} onChange={onChange} error={errorMessage}>
@@ -58,7 +60,7 @@ export function SendTokenSenderApplicationField({
         )}
       </Picker.Toggle>
     </Picker>
-  )
+  );
 }
 
 export function SendTokenRecipientApplicationField({
@@ -70,11 +72,11 @@ export function SendTokenRecipientApplicationField({
 }) {
   const recipientApplication = applications?.data?.find(
     (application) => application.chainID === value
-  )
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
-  })
+  });
 
   return (
     <Picker value={value} onChange={onChange} error={errorMessage}>
@@ -115,7 +117,7 @@ export function SendTokenRecipientApplicationField({
         />
       </Picker.Menu>
     </Picker>
-  )
+  );
 }
 
 export function SendTokenRecipientAccountField({
@@ -126,24 +128,24 @@ export function SendTokenRecipientAccountField({
   onAddressFormatChange,
   style,
 }) {
-  const bookmarks = useSelector(selectBookmarkList)
+  const bookmarks = useSelector(selectBookmarkList);
 
-  const recipientAccount = bookmarks.find((bookmark) => bookmark.address === value)
+  const recipientAccount = bookmarks.find((bookmark) => bookmark.address === value);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
-  })
+  });
 
   function handleInputChange(_value) {
-    if (addressFormat !== 'input') onAddressFormatChange('input')
+    if (addressFormat !== 'input') onAddressFormatChange('input');
 
-    onChange(_value)
+    onChange(_value);
   }
 
   function handlePickerChange(_value) {
-    if (addressFormat !== 'picker') onAddressFormatChange('picker')
+    if (addressFormat !== 'picker') onAddressFormatChange('picker');
 
-    onChange(_value)
+    onChange(_value);
   }
 
   return (
@@ -221,5 +223,5 @@ export function SendTokenRecipientAccountField({
         </Picker.Menu>
       </Picker>
     </>
-  )
+  );
 }

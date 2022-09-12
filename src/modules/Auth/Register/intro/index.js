@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { translate } from 'react-i18next'
-import { connect } from 'react-redux'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { generatePassphrase } from 'modules/Auth/utils'
-import Slider from 'components/screens/intro/heading'
-import addressImg from 'assets/images/registrationIntro/address3x.png'
-import securePassphraseImg from 'assets/images/registrationIntro/securePassphrase3x.png'
-import uniqueAvatarImg from 'assets/images/registrationIntro/uniqueAvatar3x.png'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import { useNavigation } from '@react-navigation/native'
-import styles from './styles'
+import React, { useEffect, useState } from 'react';
+import { translate } from 'react-i18next';
+import { connect } from 'react-redux';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { generatePassphrase } from 'modules/Auth/utils';
+import Slider from 'components/screens/intro/heading';
+import addressImg from 'assets/images/registrationIntro/address3x.png';
+import securePassphraseImg from 'assets/images/registrationIntro/securePassphrase3x.png';
+import uniqueAvatarImg from 'assets/images/registrationIntro/uniqueAvatar3x.png';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { useNavigation } from '@react-navigation/native';
+import styles from './styles';
 
 const descriptionContent = [
   {
@@ -35,31 +35,31 @@ const descriptionContent = [
     imageSrc: securePassphraseImg,
     imageStyle: styles.sliderImage,
   },
-]
+];
 
 const Intro = ({ t, nextStep, route }) => {
-  const navigation = useNavigation()
-  const [passphrase, setPassphrase] = useState('')
+  const navigation = useNavigation();
+  const [passphrase, setPassphrase] = useState('');
 
   const forward = () => {
     nextStep({
       passphrase,
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    const { setOptions } = navigation
+    const { setOptions } = navigation;
 
     // eslint-disable-next-line no-shadow
-    const passphrase = route.params?.passphrase ?? generatePassphrase()
+    const passphrase = route.params?.passphrase ?? generatePassphrase();
 
-    setPassphrase(passphrase)
+    setPassphrase(passphrase);
 
     setOptions({
       title: t('Account creation'),
       headerLeft: (props) => <HeaderBackButton {...props} onPress={navigation.goBack} />,
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -70,11 +70,11 @@ const Intro = ({ t, nextStep, route }) => {
         t={t}
       ></Slider>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
   settings: state.settings,
-})
+});
 
-export default translate()(connect(mapStateToProps)(Intro))
+export default translate()(connect(mapStateToProps)(Intro));

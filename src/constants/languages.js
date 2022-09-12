@@ -9,6 +9,6 @@ export const languageMap = {
     label: 'Deutsch',
     code: 'de',
   },
-}
+};
 
-export const languageKeys = Object.keys(languageMap)
+export const languageKeys = Object.keys(languageMap);

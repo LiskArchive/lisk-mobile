@@ -1,23 +1,23 @@
-import client from './APIClient'
+import client from './APIClient';
 
-jest.useRealTimers()
+jest.useRealTimers();
 
 describe('APIClient', () => {
   it.skip('should work', (done) => {
     client.socket.on('hello', (arg) => {
-      expect(arg).toBe('world')
-      done()
-    })
-    client.socket.emit('hello', 'world')
-  })
+      expect(arg).toBe('world');
+      done();
+    });
+    client.socket.emit('hello', 'world');
+  });
 
   it.skip('should work (with ack)', (done) => {
     client.socket.on('hi', (cb) => {
-      cb('hola')
-    })
+      cb('hola');
+    });
     client.socket.emit('hi', (arg) => {
-      expect(arg).toBe('hola')
-      done()
-    })
-  })
-})
+      expect(arg).toBe('hola');
+      done();
+    });
+  });
+});

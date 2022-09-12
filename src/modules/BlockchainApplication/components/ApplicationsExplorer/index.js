@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
-import { translate } from 'react-i18next'
+import React, { useState } from 'react';
+import { translate } from 'react-i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView'
-import { IconButton } from 'components/shared/toolBox/button'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import { P } from 'components/shared/toolBox/typography'
-import BottomModal from 'components/shared/BottomModal'
-import StatsSvg from 'assets/svgs/StatsSvg'
-import { colors, themes } from 'constants/styleGuide'
+import { useTheme } from 'hooks/useTheme';
+import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
+import { IconButton } from 'components/shared/toolBox/button';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { P } from 'components/shared/toolBox/typography';
+import BottomModal from 'components/shared/BottomModal';
+import StatsSvg from 'assets/svgs/StatsSvg';
+import { colors, themes } from 'constants/styleGuide';
 
-import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer'
-import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats'
-import ApplicationList from '../ApplicationList'
-import BlockchainApplicationRow from '../ApplicationRow'
-import BlockchainApplicationsStats from '../ApplicationsStats'
+import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
+import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats';
+import ApplicationList from '../ApplicationList';
+import BlockchainApplicationRow from '../ApplicationRow';
+import BlockchainApplicationsStats from '../ApplicationsStats';
 
-import getBlockchainApplicationsExplorerStyles from './styles'
+import getBlockchainApplicationsExplorerStyles from './styles';
 
 /**
  *
@@ -24,14 +24,14 @@ import getBlockchainApplicationsExplorerStyles from './styles'
  * view blockchain applications.
  */
 function BlockchainApplicationsExplorer({ t, navigation }) {
-  const [showStatsModal, setShowStatsModal] = useState(false)
+  const [showStatsModal, setShowStatsModal] = useState(false);
 
-  const { applicationsMetadata } = useBlockchainApplicationExplorer()
-  const { data } = useBlockchainApplicationStats()
+  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const { data } = useBlockchainApplicationStats();
 
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsExplorerStyles(),
-  })
+  });
 
   const renderData = () => {
     if (applicationsMetadata.isLoading) {
@@ -39,7 +39,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         <P style={[styles.message, styles.theme.message]}>
           {t('application.explore.applicationList.loadingText')}
         </P>
-      )
+      );
     }
 
     if (applicationsMetadata.isError) {
@@ -47,7 +47,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         <P style={[styles.message, styles.theme.message]}>
           {t('application.explore.applicationList.errorText')}
         </P>
-      )
+      );
     }
 
     if (applicationsMetadata.data?.length === 0) {
@@ -55,7 +55,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         <P style={[styles.message, styles.theme.message]}>
           {t('application.explore.applicationList.emptyText')}
         </P>
-      )
+      );
     }
     return (
       <ApplicationList
@@ -72,8 +72,8 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         navigation={navigation}
         style={{ container: styles.applicationsListContainer }}
       />
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -117,7 +117,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         />
       </BottomModal>
     </>
-  )
+  );
 }
 
-export default translate()(BlockchainApplicationsExplorer)
+export default translate()(BlockchainApplicationsExplorer);

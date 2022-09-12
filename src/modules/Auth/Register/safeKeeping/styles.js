@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native'
-import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device'
-import { colors, fonts, boxes } from 'constants/styleGuide'
+import { StyleSheet } from 'react-native';
+import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
+import { colors, fonts, boxes } from 'constants/styleGuide';
 
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 const styles = {
   wrapper: {
@@ -62,6 +62,6 @@ const styles = {
     color: colors.light.blueGray,
     fontSize: isSmallScreen ? 11 : 13,
   },
-}
+};
 
-export default StyleSheet.create(styles)
+export default StyleSheet.create(styles);

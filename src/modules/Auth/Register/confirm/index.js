@@ -1,15 +1,15 @@
 /* eslint-disable no-shadow */
-import React, { useEffect, useState } from 'react'
-import { View, SafeAreaView } from 'react-native'
-import { translate } from 'react-i18next'
-import { useNavigation } from '@react-navigation/native'
-import { P } from 'components/shared/toolBox/typography'
-import { PrimaryButton, Button } from 'components/shared/toolBox/button'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device'
-import withTheme from 'components/shared/withTheme'
-import { assembleWordOptions } from 'modules/Auth/utils'
-import getStyles from './styles'
+import React, { useEffect, useState } from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { translate } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
+import { P } from 'components/shared/toolBox/typography';
+import { PrimaryButton, Button } from 'components/shared/toolBox/button';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
+import withTheme from 'components/shared/withTheme';
+import { assembleWordOptions } from 'modules/Auth/utils';
+import getStyles from './styles';
 
 /**
  * Returns a random index which doesn't exist in list
@@ -18,12 +18,12 @@ import getStyles from './styles'
  * @returns {Number} random index between 0 and length of words
  */
 const randomIndex = (list, words) => {
-  let index
+  let index;
   do {
-    index = Math.floor(Math.random() * words.length)
-  } while (list.includes(index))
-  return index
-}
+    index = Math.floor(Math.random() * words.length);
+  } while (list.includes(index));
+  return index;
+};
 
 /**
  * Returns a number of random indexes within 0 and the length of words
@@ -31,21 +31,21 @@ const randomIndex = (list, words) => {
  * @returns {Array} the list of random indexes
  */
 const chooseRandomWords = (qty, words) => {
-  const missing = []
+  const missing = [];
 
   for (let i = 0; i < qty; i++) {
-    missing.push(randomIndex(missing, words))
+    missing.push(randomIndex(missing, words));
   }
 
-  return missing
-}
+  return missing;
+};
 
 // eslint-disable-next-line max-statements
 const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHeader, styles }) => {
-  const navigation = useNavigation()
-  const [buttonStatus, setButtonStatus] = useState(true)
-  const [missing, setMissing] = useState([])
-  const [options, setOptions] = useState([])
+  const navigation = useNavigation();
+  const [buttonStatus, setButtonStatus] = useState(true);
+  const [missing, setMissing] = useState([]);
+  const [options, setOptions] = useState([]);
   const [answers, setAnswers] = useState([
     {
       value: undefined,
@@ -55,14 +55,14 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
       value: undefined,
       style: {},
     },
-  ])
-  const [visibleOptions, setVisibleOptions] = useState(-1)
+  ]);
+  const [visibleOptions, setVisibleOptions] = useState(-1);
 
   const generateTest = () => {
-    const words = passphrase.match(/\w+/g)
-    const missing = chooseRandomWords(2, words)
-    setMissing(missing)
-    setOptions(assembleWordOptions(passphrase.split(' '), missing))
+    const words = passphrase.match(/\w+/g);
+    const missing = chooseRandomWords(2, words);
+    setMissing(missing);
+    setOptions(assembleWordOptions(passphrase.split(' '), missing));
     setAnswers([
       {
         value: undefined,
@@ -74,52 +74,52 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
         style: {},
         textStyle: {},
       },
-    ])
-  }
+    ]);
+  };
 
   const toggleOptions = (index) => {
-    const temp = [...answers]
-    temp[index].value = undefined
-    temp[index].style = styles.selectedPlaceholder
-    setVisibleOptions(index)
-    setAnswers(temp)
-  }
+    const temp = [...answers];
+    temp[index].value = undefined;
+    temp[index].style = styles.selectedPlaceholder;
+    setVisibleOptions(index);
+    setAnswers(temp);
+  };
 
   const checkAnswers = (answers) => {
-    const phrase = passphrase.split(' ')
-    const start = answers.filter((item) => item.value).length
-    const result = answers.filter((item) => phrase.includes(item.value)).length
-    const isCorrect = result === 2
+    const phrase = passphrase.split(' ');
+    const start = answers.filter((item) => item.value).length;
+    const result = answers.filter((item) => phrase.includes(item.value)).length;
+    const isCorrect = result === 2;
     if (start === 2) {
       if (!isCorrect) {
         setTimeout(() => {
-          generateTest()
-        }, 1000)
+          generateTest();
+        }, 1000);
       }
       const finalAnswers = answers.map((item) => ({
         value: item.value,
         style: styles.noBorderBottom,
         textStyle: isCorrect ? styles.labelCorrect : styles.labelIncorrect,
-      }))
-      setAnswers(finalAnswers)
-      setButtonStatus(!isCorrect)
+      }));
+      setAnswers(finalAnswers);
+      setButtonStatus(!isCorrect);
     }
-  }
+  };
 
   const fillOption = (item) => {
-    const temp = [...answers]
+    const temp = [...answers];
     temp[visibleOptions] = {
       value: item,
       style: styles.filledOutPlaceholder,
       textStyle: styles.labelUnchecked,
-    }
-    setAnswers(temp)
-    setVisibleOptions(false)
-    checkAnswers(temp)
-  }
+    };
+    setAnswers(temp);
+    setVisibleOptions(false);
+    checkAnswers(temp);
+  };
 
   const generatePlaceholder = (index, optionIndex, value) => {
-    const style = visibleOptions === optionIndex ? null : styles.deActivePlaceholder
+    const style = visibleOptions === optionIndex ? null : styles.deActivePlaceholder;
     return (
       <Button
         noPredefinedStyle
@@ -130,14 +130,14 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
         textStyle={[styles.label, answers[optionIndex].textStyle]}
         style={[styles.placeholder, style, answers[optionIndex].style]}
       />
-    )
-  }
+    );
+  };
 
   const renderPassphrase = () => {
-    const phrase = passphrase.split(' ')
+    const phrase = passphrase.split(' ');
     return missing.length > 0
       ? phrase.map((val, index) => {
-          const optionIndex = missing.indexOf(index)
+          const optionIndex = missing.indexOf(index);
           const element =
             optionIndex >= 0 ? (
               generatePlaceholder(index, optionIndex, val)
@@ -145,20 +145,20 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
               <P key={index} style={[styles.word, styles.theme.word]}>
                 {val}
               </P>
-            )
-          return element
+            );
+          return element;
         })
-      : null
-  }
+      : null;
+  };
 
   useEffect(() => {
-    const { setOptions } = navigation
+    const { setOptions } = navigation;
     setOptions({
       headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
       title: deviceHeight() >= SCREEN_HEIGHTS.SM ? t('Passphrase verification') : t('Verification'),
-    })
-    generateTest()
-  }, [])
+    });
+    generateTest();
+  }, []);
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
@@ -211,7 +211,7 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
         </View>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default withTheme(translate()(Confirm), getStyles())
+export default withTheme(translate()(Confirm), getStyles());

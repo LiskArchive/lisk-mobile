@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default function DeleteSvg({ color = '#4070F4', height = 20, width = 20, style }) {
   return (
@@ -11,5 +11,5 @@ export default function DeleteSvg({ color = '#4070F4', height = 20, width = 20, 
         fill={color}
       />
     </Svg>
-  )
+  );
 }

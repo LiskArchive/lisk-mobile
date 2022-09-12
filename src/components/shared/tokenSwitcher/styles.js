@@ -1,9 +1,9 @@
-import { deviceType } from 'utilities/device'
+import { deviceType } from 'utilities/device';
 
-const type = deviceType()
-let marginTop = type === 'iOSx' ? 5 : 7
+const type = deviceType();
+let marginTop = type === 'iOSx' ? 5 : 7;
 if (type === 'android') {
-  marginTop = 10
+  marginTop = 10;
 }
 export default () => ({
   common: {
@@ -32,4 +32,4 @@ export default () => ({
       marginTop: 4,
     },
   },
-})
+});

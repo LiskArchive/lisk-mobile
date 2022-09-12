@@ -1,14 +1,14 @@
 /* eslint-disable complexity */
-import React, { useRef, useEffect } from 'react'
-import { View, Animated, useWindowDimensions, Easing } from 'react-native'
-import { translate } from 'react-i18next'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { colors, themes } from 'constants/styleGuide'
-import withTheme from 'components/shared/withTheme'
-import Input from 'components/shared/toolBox/input'
-import Icon from 'components/shared/toolBox/icon'
-import { H3, P } from 'components/shared/toolBox/typography'
-import getStyles from './styles'
+import React, { useRef, useEffect } from 'react';
+import { View, Animated, useWindowDimensions, Easing } from 'react-native';
+import { translate } from 'react-i18next';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { colors, themes } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import Input from 'components/shared/toolBox/input';
+import Icon from 'components/shared/toolBox/icon';
+import { H3, P } from 'components/shared/toolBox/typography';
+import getStyles from './styles';
 
 const HeaderBackButton = ({
   theme,
@@ -25,19 +25,19 @@ const HeaderBackButton = ({
   setIsSearchOpen,
 }) => {
   if (!color) {
-    color = theme === themes.light ? colors.light.black : colors.dark.white
+    color = theme === themes.light ? colors.light.black : colors.dark.white;
   }
-  const width = useRef(new Animated.Value(0)).current
-  const { width: windowWidth } = useWindowDimensions()
+  const width = useRef(new Animated.Value(0)).current;
+  const { width: windowWidth } = useWindowDimensions();
 
   const openSearchBar = () => {
-    setIsSearchOpen(true)
-  }
+    setIsSearchOpen(true);
+  };
 
   const closeSearchBar = () => {
-    setIsSearchOpen(false)
-    onChange('')
-  }
+    setIsSearchOpen(false);
+    onChange('');
+  };
 
   useEffect(() => {
     if (isSearchOpen) {
@@ -45,11 +45,11 @@ const HeaderBackButton = ({
         toValue: 1,
         easing: Easing.elastic(),
         duration: 500,
-      }).start()
+      }).start();
     } else {
-      width.setValue(0)
+      width.setValue(0);
     }
-  }, [isSearchOpen])
+  }, [isSearchOpen]);
 
   return (
     <View style={styles.navContainer}>
@@ -111,7 +111,7 @@ const HeaderBackButton = ({
         </View>
       )}
     </View>
-  )
-}
+  );
+};
 
-export default withTheme(translate()(HeaderBackButton), getStyles())
+export default withTheme(translate()(HeaderBackButton), getStyles());

@@ -1,5 +1,5 @@
 const storage = {
   accounts: 'liskStoredAccounts',
-}
+};
 
-export default storage
+export default storage;

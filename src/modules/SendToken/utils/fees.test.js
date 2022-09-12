@@ -1,11 +1,11 @@
-import * as Lisk from '@liskhq/lisk-client'
-import { getBytes } from 'utilities/api/lisk/utils'
-import computeMinFee from './fees'
+import * as Lisk from '@liskhq/lisk-client';
+import { getBytes } from 'utilities/api/lisk/utils';
+import computeMinFee from './fees';
 
 describe.skip('fee', () => {
-  const passphrase1 = 'trim elegant oven term access apple obtain error grain excite lawn neck'
+  const passphrase1 = 'trim elegant oven term access apple obtain error grain excite lawn neck';
   const { publicKey: publicKey1 } =
-    Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase1)
+    Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase1);
   const validTransaction = {
     moduleID: 2,
     assetID: 0,
@@ -18,7 +18,7 @@ describe.skip('fee', () => {
       amount: BigInt('4008489300000000'),
       data: '',
     },
-  }
+  };
   const baseFees = [
     {
       moduleID: 2,
@@ -35,37 +35,37 @@ describe.skip('fee', () => {
       assetID: 0,
       baseFee: '1',
     },
-  ]
+  ];
 
   describe('computeMinFee', () => {
     it('should return minimum fee required to send to network', () => {
       // Arrange
-      const minFee = computeMinFee(validTransaction)
+      const minFee = computeMinFee(validTransaction);
 
       // Assert
-      expect(minFee).not.toBeUndefined()
-      expect(minFee).toMatchSnapshot()
-    })
+      expect(minFee).not.toBeUndefined();
+      expect(minFee).toMatchSnapshot();
+    });
 
     it('should calculate minimum fee for given minFeePerByte', () => {
       // Arrange
-      const options = { minFeePerByte: 2000, baseFees, numberOfSignatures: 1 }
-      const minFee = computeMinFee(validTransaction, options)
+      const options = { minFeePerByte: 2000, baseFees, numberOfSignatures: 1 };
+      const minFee = computeMinFee(validTransaction, options);
 
       // Assert
-      expect(minFee).not.toBeUndefined()
-      expect(minFee).toMatchSnapshot()
-    })
+      expect(minFee).not.toBeUndefined();
+      expect(minFee).toMatchSnapshot();
+    });
 
     it('should calculate minimum fee for transaction from multisignature account', () => {
       // Arrange
-      const options = { minFeePerByte: 2000, baseFees, numberOfSignatures: 64 }
-      const minFee = computeMinFee(validTransaction, options)
+      const options = { minFeePerByte: 2000, baseFees, numberOfSignatures: 64 };
+      const minFee = computeMinFee(validTransaction, options);
 
       // Assert
-      expect(minFee).not.toBeUndefined()
-      expect(minFee).toMatchSnapshot()
-    })
+      expect(minFee).not.toBeUndefined();
+      expect(minFee).toMatchSnapshot();
+    });
 
     it('should calculate minimum fee for transaction from multisignature account which has lower number of signatures than registered public keys', () => {
       // Arrange
@@ -74,7 +74,7 @@ describe.skip('fee', () => {
         baseFees: [],
         numberOfSignatures: 2,
         numberOfEmptySignatures: 3,
-      }
+      };
       const transaction = {
         ...validTransaction,
         signatures: [
@@ -84,13 +84,13 @@ describe.skip('fee', () => {
           Buffer.alloc(0),
           Buffer.alloc(64),
         ],
-      }
-      const minFee = computeMinFee(transaction, options)
-      const txBytes = getBytes({ ...transaction, fee: minFee })
+      };
+      const minFee = computeMinFee(transaction, options);
+      const txBytes = getBytes({ ...transaction, fee: minFee });
 
       // Assert
       // eslint-disable-next-line no-undef
-      expect(minFee.toString()).toEqual(BigInt(txBytes.length * 1000).toString())
-    })
-  })
-})
+      expect(minFee.toString()).toEqual(BigInt(txBytes.length * 1000).toString());
+    });
+  });
+});

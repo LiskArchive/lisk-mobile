@@ -1,45 +1,45 @@
-import React, { useEffect } from 'react'
-import { View, Text } from 'react-native'
-import { useController } from 'react-hook-form'
-import i18next from 'i18next'
+import React, { useEffect } from 'react';
+import { View, Text } from 'react-native';
+import { useController } from 'react-hook-form';
+import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import Avatar from 'components/shared/avatar'
-import { stringShortener } from 'utilities/helpers'
-import Input from 'components/shared/toolBox/input'
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount'
+import { useTheme } from 'hooks/useTheme';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import Avatar from 'components/shared/avatar';
+import { stringShortener } from 'utilities/helpers';
+import Input from 'components/shared/toolBox/input';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 
-import getConfirmAndSignTransactionStyles from './styles'
+import getConfirmAndSignTransactionStyles from './styles';
 
 export default function ConfirmAndSignTransaction({ amount, token, form, onSuccess, onError }) {
   const { field } = useController({
     name: 'userPassword',
     control: form.control,
-  })
+  });
 
-  const [currentAccount] = useCurrentAccount()
+  const [currentAccount] = useCurrentAccount();
 
   const { styles } = useTheme({
     styles: getConfirmAndSignTransactionStyles(),
-  })
+  });
 
   useEffect(() => {
     if (form.sendTokenMutation.isSuccess) {
-      onSuccess()
-      form.sendTokenMutation.reset()
+      onSuccess();
+      form.sendTokenMutation.reset();
     }
 
     if (form.sendTokenMutation.error) {
-      onError(form.sendTokenMutation.error)
-      form.sendTokenMutation.reset()
+      onError(form.sendTokenMutation.error);
+      form.sendTokenMutation.reset();
     }
-  }, [form.sendTokenMutation, onSuccess, onError])
+  }, [form.sendTokenMutation, onSuccess, onError]);
 
   const submitDisabled =
     form.sendTokenMutation.isLoading ||
     !field.value ||
-    Object.keys(form.formState.errors).length > 0
+    Object.keys(form.formState.errors).length > 0;
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -105,5 +105,5 @@ export default function ConfirmAndSignTransaction({ amount, token, form, onSucce
         />
       </View>
     </View>
-  )
+  );
 }

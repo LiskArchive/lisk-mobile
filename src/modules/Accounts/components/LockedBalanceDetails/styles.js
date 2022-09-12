@@ -1,5 +1,5 @@
-import { themes, colors, fonts } from 'constants/styleGuide'
-import { setColorOpacity } from 'utilities/helpers'
+import { themes, colors, fonts } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {
@@ -71,4 +71,4 @@ export default () => ({
       borderBottomColor: setColorOpacity(colors.light.white, 0.15),
     },
   },
-})
+});

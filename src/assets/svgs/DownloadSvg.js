@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default function DownloadSvg({ color = '#4070F4', height = 16, width = 16, style }) {
   return (
@@ -13,5 +13,5 @@ export default function DownloadSvg({ color = '#4070F4', height = 16, width = 16
 
       <Path d="M2.92188 13.6001H13.0844" stroke={color} strokeWidth="1.3" strokeLinecap="round" />
     </Svg>
-  )
+  );
 }

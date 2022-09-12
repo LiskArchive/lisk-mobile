@@ -1,4 +1,4 @@
-import { themes, colors, boxes, fonts } from 'constants/styleGuide'
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default function getSendTokenSelectApplicationsStepStyles() {
   return {
@@ -68,7 +68,7 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         color: colors.light.whiteSmoke,
       },
     },
-  }
+  };
 }
 
 export function getSendTokenRecipientAccountFieldStyles(styles) {
@@ -88,5 +88,5 @@ export function getSendTokenRecipientAccountFieldStyles(styles) {
       padding: 16,
       ...styles?.input,
     },
-  }
+  };
 }

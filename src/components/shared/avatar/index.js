@@ -1,9 +1,9 @@
-import React from 'react'
-import { View, Animated } from 'react-native'
-import Svg, { G } from 'react-native-svg'
-import { validateAddress } from 'utilities/validators'
-import { colors, themes } from 'constants/styleGuide'
-import { Gradients, gradientSchemes } from './gradients'
+import React from 'react';
+import { View, Animated } from 'react-native';
+import Svg, { G } from 'react-native-svg';
+import { validateAddress } from 'utilities/validators';
+import { colors, themes } from 'constants/styleGuide';
+import { Gradients, gradientSchemes } from './gradients';
 import {
   getShape,
   getBackgroundCircle,
@@ -11,36 +11,36 @@ import {
   getHashChunks,
   randomId,
   replaceUrlByHashOnScheme,
-} from './utils'
-import Icon from '../toolBox/icon'
-import withTheme from '../withTheme'
-import getStyles from './styles'
+} from './utils';
+import Icon from '../toolBox/icon';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
 class Avatar extends React.Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.address !== this.props.address
+    return nextProps.address !== this.props.address;
   }
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    this.uniqueSvgUrlHash = randomId()
+    this.uniqueSvgUrlHash = randomId();
   }
 
   // eslint-disable-next-line max-statements
   render() {
-    const { styles, address, size, scale, translate, theme } = this.props
+    const { styles, address, size, scale, translate, theme } = this.props;
 
-    let Wrapper = View
+    let Wrapper = View;
 
-    const scaleAttr = {}
+    const scaleAttr = {};
     if (scale) {
-      Wrapper = Animated.View
+      Wrapper = Animated.View;
       scaleAttr.transform = [
         { scaleX: scale },
         { scaleY: scale },
         { translateY: translate },
         { translateX: translate },
-      ]
+      ];
     }
     if (validateAddress('LSK', address) !== 0) {
       return (
@@ -59,13 +59,13 @@ class Avatar extends React.Component {
             color={theme === themes.light ? colors.light.blueGray : colors.dark.mountainMist}
           />
         </Wrapper>
-      )
+      );
     }
-    const canvasSize = 200
+    const canvasSize = 200;
 
-    const addressHashChunks = getHashChunks(address)
+    const addressHashChunks = getHashChunks(address);
     const gradientScheme =
-      gradientSchemes[addressHashChunks[0].substr(1, 2) % gradientSchemes.length]
+      gradientSchemes[addressHashChunks[0].substr(1, 2) % gradientSchemes.length];
 
     const gradientsSchemesUrlsHashed = {
       primary: gradientScheme.primary.map((...rest) =>
@@ -74,15 +74,15 @@ class Avatar extends React.Component {
       secondary: gradientScheme.secondary.map((...rest) =>
         replaceUrlByHashOnScheme(this.uniqueSvgUrlHash, ...rest)
       ),
-    }
-    const primaryGradients = pickTwo(addressHashChunks[1], gradientsSchemesUrlsHashed.primary)
-    const secondaryGradients = pickTwo(addressHashChunks[2], gradientsSchemesUrlsHashed.secondary)
+    };
+    const primaryGradients = pickTwo(addressHashChunks[1], gradientsSchemesUrlsHashed.primary);
+    const secondaryGradients = pickTwo(addressHashChunks[2], gradientsSchemesUrlsHashed.secondary);
     const shapes = [
       getBackgroundCircle(canvasSize, primaryGradients[0]),
       getShape(addressHashChunks[1], canvasSize, primaryGradients[1], 1),
       getShape(addressHashChunks[2], canvasSize, secondaryGradients[0], 0.23),
       getShape(addressHashChunks[3], canvasSize, secondaryGradients[1], 0.18),
-    ]
+    ];
     return (
       <Wrapper
         style={[
@@ -117,8 +117,8 @@ class Avatar extends React.Component {
           </G>
         </Svg>
       </Wrapper>
-    )
+    );
   }
 }
 
-export default withTheme(Avatar, getStyles())
+export default withTheme(Avatar, getStyles());

@@ -1,10 +1,10 @@
-import { service as serviceAPI } from 'utilities/api'
-import actionTypes from 'constants/actions'
+import { service as serviceAPI } from 'utilities/api';
+import actionTypes from 'constants/actions';
 
 export const pricesRetrieved = () => (dispatch, getState) => {
   const {
     settings: { token },
-  } = getState()
+  } = getState();
 
   serviceAPI
     .getPriceTicker(token.active)
@@ -17,13 +17,13 @@ export const pricesRetrieved = () => (dispatch, getState) => {
         },
       })
     )
-    .catch((err) => console.log(err)) // @TODO: DISCUSS & HANDLE THIS!
-}
+    .catch((err) => console.log(err)); // @TODO: DISCUSS & HANDLE THIS!
+};
 
 export const dynamicFeesRetrieved = () => (dispatch, getState) => {
   const {
     settings: { token },
-  } = getState()
+  } = getState();
 
   serviceAPI
     .getDynamicFees(token.active)
@@ -33,5 +33,5 @@ export const dynamicFeesRetrieved = () => (dispatch, getState) => {
         dynamicFees,
       })
     )
-    .catch((err) => console.log(err)) // @TODO: DISCUSS & HANDLE THIS!
-}
+    .catch((err) => console.log(err)); // @TODO: DISCUSS & HANDLE THIS!
+};

@@ -1,4 +1,4 @@
-import { themes, colors, fonts } from 'constants/styleGuide'
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getConfirmAndSignTransactionStyles() {
   return {
@@ -76,5 +76,5 @@ export default function getConfirmAndSignTransactionStyles() {
         color: colors.light.white,
       },
     },
-  }
+  };
 }

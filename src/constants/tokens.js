@@ -9,6 +9,6 @@ export const tokenMap = {
     label: 'Bitcoin',
     icon: 'btc',
   },
-}
+};
 
-export const tokenKeys = Object.keys(tokenMap)
+export const tokenKeys = Object.keys(tokenMap);

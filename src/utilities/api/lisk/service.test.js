@@ -1,5 +1,5 @@
-import fetchMock from 'fetch-mock'
-import { getPriceTicker } from './service'
+import fetchMock from 'fetch-mock';
+import { getPriceTicker } from './service';
 
 const response = {
   getPriceTicker: {
@@ -37,40 +37,40 @@ const response = {
       },
     ],
   },
-}
+};
 
 describe('api/lisk/service', () => {
   describe('getPriceTicker method', () => {
-    beforeEach(() => fetchMock.reset())
+    beforeEach(() => fetchMock.reset());
 
     it('resolves correctly', async () => {
-      fetchMock.once('*', response.getPriceTicker)
-      const result = await getPriceTicker()
+      fetchMock.once('*', response.getPriceTicker);
+      const result = await getPriceTicker();
       expect(result).toEqual({
         USD: String(response.getPriceTicker.data[0].rate),
         EUR: String(response.getPriceTicker.data[1].rate),
         CHF: String(response.getPriceTicker.data[2].rate),
-      })
-    })
+      });
+    });
 
     it('handles non-500 errors', async () => {
-      fetchMock.once('*', { status: 400 })
+      fetchMock.once('*', { status: 400 });
 
       try {
-        await getPriceTicker()
+        await getPriceTicker();
       } catch (error) {
-        expect(error).toMatchSnapshot()
+        expect(error).toMatchSnapshot();
       }
-    })
+    });
 
     it('handles errors', async () => {
-      fetchMock.once('*', { throws: new TypeError('Failed to fetch') })
+      fetchMock.once('*', { throws: new TypeError('Failed to fetch') });
 
       try {
-        await getPriceTicker()
+        await getPriceTicker();
       } catch (error) {
-        expect(error).toBeTruthy()
+        expect(error).toBeTruthy();
       }
-    })
-  })
-})
+    });
+  });
+});

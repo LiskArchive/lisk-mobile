@@ -1,16 +1,16 @@
-import React from 'react'
-import { View, Image, Linking } from 'react-native'
-import connect from 'redux-connect-decorator'
-import Swiper from 'react-native-swiper'
-import Switch from 'react-native-switch-pro'
-import { translate } from 'react-i18next'
-import { colors } from 'constants/styleGuide'
-import { headerHeight } from 'utilities/device'
-import URLs from 'constants/URLs'
-import { H2, P, A } from 'components/shared/toolBox/typography'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions'
-import styles from './styles'
+import React from 'react';
+import { View, Image, Linking } from 'react-native';
+import connect from 'redux-connect-decorator';
+import Swiper from 'react-native-swiper';
+import Switch from 'react-native-switch-pro';
+import { translate } from 'react-i18next';
+import { colors } from 'constants/styleGuide';
+import { headerHeight } from 'utilities/device';
+import URLs from 'constants/URLs';
+import { H2, P, A } from 'components/shared/toolBox/typography';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
+import styles from './styles';
 
 @connect(() => ({}), {
   settingsUpdated: settingsUpdatedAction,
@@ -18,28 +18,28 @@ import styles from './styles'
 class Heading extends React.Component {
   state = {
     confirmed: false,
-  }
+  };
 
   confirm = (status) => {
     this.setState({
       confirmed: status,
-    })
-  }
+    });
+  };
 
   openTermsAndConditions = () => {
-    Linking.openURL(URLs.liskTermsAndConditions)
-  }
+    Linking.openURL(URLs.liskTermsAndConditions);
+  };
 
   onPress = (slideContent) => {
     if (slideContent.acceptTermsSwitch) {
-      this.props.settingsUpdated({ showedIntro: true })
+      this.props.settingsUpdated({ showedIntro: true });
     }
-    this.props.skip()
-  }
+    this.props.skip();
+  };
 
   render() {
-    const { t, descriptionContent, hasHeader, testID } = this.props
-    const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {}
+    const { t, descriptionContent, hasHeader, testID } = this.props;
+    const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {};
     return (
       <View style={styles.headingContainer}>
         <Swiper
@@ -97,8 +97,8 @@ class Heading extends React.Component {
           ))}
         </Swiper>
       </View>
-    )
+    );
   }
 }
 
-export default translate()(Heading)
+export default translate()(Heading);

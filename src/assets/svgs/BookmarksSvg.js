@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default function BookmarksSvg({
   color = '#000000',
@@ -8,7 +8,7 @@ export default function BookmarksSvg({
   style,
   variant = 'fill',
 }) {
-  let children = null
+  let children = null;
 
   switch (variant) {
     case 'fill':
@@ -23,8 +23,8 @@ export default function BookmarksSvg({
             fill={color}
           />
         </>
-      )
-      break
+      );
+      break;
 
     case 'outline':
       children = (
@@ -40,16 +40,16 @@ export default function BookmarksSvg({
             fill={color}
           />
         </>
-      )
-      break
+      );
+      break;
 
     default:
-      break
+      break;
   }
 
   return (
     <Svg width={width} height={height} viewBox="0 0 20 20" fill="none" style={style}>
       {children}
     </Svg>
-  )
+  );
 }

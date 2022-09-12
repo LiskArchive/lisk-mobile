@@ -1,7 +1,7 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { METHOD, API_METHOD, APPLICATION } from 'utilities/api/constants'
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication'
+import { METHOD, API_METHOD, APPLICATION } from 'utilities/api/constants';
+import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 
 /**
  * Creates a custom hook for infinite queries
@@ -18,7 +18,7 @@ import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/h
  * @returns The query object
  */
 export const useCustomInfiniteQuery = ({ keys, config, options = {} }) => {
-  const [{ chainID }] = useCurrentBlockchainApplication()
+  const [{ chainID }] = useCurrentBlockchainApplication();
 
   return useInfiniteQuery(
     [chainID, config, APPLICATION, METHOD, ...keys],
@@ -32,22 +32,22 @@ export const useCustomInfiniteQuery = ({ keys, config, options = {} }) => {
       }),
     {
       getNextPageParam: (lastPage = {}) => {
-        const lastPageCount = lastPage.meta?.count || 0
-        const lastPageOffset = lastPage.meta?.offset || 0
+        const lastPageCount = lastPage.meta?.count || 0;
+        const lastPageOffset = lastPage.meta?.offset || 0;
 
-        const offset = lastPageCount + lastPageOffset
-        const hasMore = offset < (lastPage.meta?.total ?? Infinity)
-        return !hasMore ? undefined : { offset }
+        const offset = lastPageCount + lastPageOffset;
+        const hasMore = offset < (lastPage.meta?.total ?? Infinity);
+        return !hasMore ? undefined : { offset };
       },
       select: (data) =>
         data.pages.reduce((prevPages, page) => {
-          const newData = page?.data || []
+          const newData = page?.data || [];
           return {
             ...page,
             data: prevPages.data ? [...prevPages.data, ...newData] : newData,
-          }
+          };
         }),
       ...options,
     }
-  )
-}
+  );
+};

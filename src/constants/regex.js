@@ -19,4 +19,4 @@ export default {
   htmlElements: /<(\w+).*?>([\s\S]*?)<\/\1>(.*)/,
   releaseSummary: /<h4>([\s\S]*?)<\/h4>/i,
   searchbar: /^(.{9})(.+)$/,
-}
+};

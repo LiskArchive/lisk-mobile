@@ -44,4 +44,4 @@ export const mockApplications = [
     lastCertificateHeight: 500,
     lastUpdated: 123456785,
   },
-]
+];

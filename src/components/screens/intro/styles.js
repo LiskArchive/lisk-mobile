@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native'
-import { colors, boxes } from 'constants/styleGuide'
-import { deviceHeight, SCREEN_HEIGHTS } from 'utilities/device'
+import { StyleSheet } from 'react-native';
+import { colors, boxes } from 'constants/styleGuide';
+import { deviceHeight, SCREEN_HEIGHTS } from 'utilities/device';
 
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 const styles = {
   container: {
@@ -152,6 +152,6 @@ const styles = {
     marginHorizontal: 20,
     marginRight: 20,
   },
-}
+};
 
-export default StyleSheet.create(styles)
+export default StyleSheet.create(styles);

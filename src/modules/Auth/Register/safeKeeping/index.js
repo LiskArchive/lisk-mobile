@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text } from 'react-native'
-import { translate } from 'react-i18next'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import Switch from 'react-native-switch-pro'
-import { useNavigation } from '@react-navigation/native'
-import { B, P } from 'components/shared/toolBox/typography'
-import CopyToClipboard from 'components/shared/copyToClipboard'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import { colors } from 'constants/styleGuide'
-import styles from './styles'
+import React, { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
+import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Switch from 'react-native-switch-pro';
+import { useNavigation } from '@react-navigation/native';
+import { B, P } from 'components/shared/toolBox/typography';
+import CopyToClipboard from 'components/shared/copyToClipboard';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { colors } from 'constants/styleGuide';
+import styles from './styles';
 
 const SafeKeeping = ({ t, sharedData: { passphrase }, prevStep, nextStep }) => {
-  const navigation = useNavigation()
-  const [confirmed, setConfirmed] = useState(false)
+  const navigation = useNavigation();
+  const [confirmed, setConfirmed] = useState(false);
 
   useEffect(() => {
-    const { setOptions } = navigation
+    const { setOptions } = navigation;
     setOptions({
       headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
       title: t('Your passphrase'),
-    })
-  }, [])
+    });
+  }, []);
 
   const confirm = (status) => {
-    setConfirmed(status)
-  }
+    setConfirmed(status);
+  };
 
   const forward = () => {
     nextStep({
       passphrase,
-    })
-  }
+    });
+  };
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -81,7 +81,7 @@ const SafeKeeping = ({ t, sharedData: { passphrase }, prevStep, nextStep }) => {
         </View>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default translate()(SafeKeeping)
+export default translate()(SafeKeeping);

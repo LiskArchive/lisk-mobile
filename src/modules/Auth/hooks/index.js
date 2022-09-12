@@ -1,1 +1,1 @@
-export * from './useEncryptAccount'
+export * from './useEncryptAccount';

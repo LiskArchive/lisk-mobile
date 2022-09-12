@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react'
-import { View, Text } from 'react-native'
+import React, { useMemo } from 'react';
+import { View, Text } from 'react-native';
 
-import { useTheme } from 'hooks/useTheme'
+import { useTheme } from 'hooks/useTheme';
 
-import getStyles from './styles'
+import getStyles from './styles';
 
 const StepItem = ({ step, styles, baseStyles, current, isLast }) => (
   <>
@@ -21,20 +21,20 @@ const StepItem = ({ step, styles, baseStyles, current, isLast }) => (
       />
     )}
   </>
-)
+);
 
 export default function ProgressBar({ styles: baseStyles, current, length }) {
   const { styles } = useTheme({
     styles: getStyles(),
-  })
+  });
 
   const steps = useMemo(() => {
-    const res = []
+    const res = [];
     for (let i = 0; i < length; i++) {
-      res.push(i + 1)
+      res.push(i + 1);
     }
-    return res
-  }, [length])
+    return res;
+  }, [length]);
 
   return (
     <View style={[styles.progressContainer, styles.theme.progressContainer, baseStyles?.wrapper]}>
@@ -49,5 +49,5 @@ export default function ProgressBar({ styles: baseStyles, current, length }) {
         />
       ))}
     </View>
-  )
+  );
 }

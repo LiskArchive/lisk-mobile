@@ -1,6 +1,6 @@
-import { Dimensions } from 'react-native'
+import { Dimensions } from 'react-native';
 
-import { themes, colors, fonts } from 'constants/styleGuide'
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export function getPickerStyles(error) {
   return {
@@ -87,5 +87,5 @@ export function getPickerStyles(error) {
         color: colors.dark.white,
       },
     },
-  }
+  };
 }

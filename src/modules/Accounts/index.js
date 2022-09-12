@@ -1,27 +1,27 @@
 /* eslint-disable max-statements */
-import React, { useState } from 'react'
-import { TouchableOpacity, View } from 'react-native'
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback'
-import { useNavigation } from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useTheme } from 'hooks/useTheme'
-import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal'
-import { P } from 'components/shared/toolBox/typography'
-import Avatar from 'components/shared/avatar'
-import { stringShortener } from 'utilities/helpers'
-import { colors } from 'constants/styleGuide'
-import SwitchSvg from 'assets/svgs/SwitchSvg'
-import IncognitoSvg from 'assets/svgs/IncognitoSvg'
-import CopyToClipboard from 'components/shared/copyToClipboard'
-import { settingsUpdated } from 'modules/Settings/actions'
-import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView'
-import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher'
-import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount'
-import TokensTab from './components/TokensTab'
-import getStyles from './styles'
-import TransactionList from '../Transactions/components/TransactionList'
-import AccountsManagerModal from './components/AccountsManagerModal'
+import { useTheme } from 'hooks/useTheme';
+import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
+import { P } from 'components/shared/toolBox/typography';
+import Avatar from 'components/shared/avatar';
+import { stringShortener } from 'utilities/helpers';
+import { colors } from 'constants/styleGuide';
+import SwitchSvg from 'assets/svgs/SwitchSvg';
+import IncognitoSvg from 'assets/svgs/IncognitoSvg';
+import CopyToClipboard from 'components/shared/copyToClipboard';
+import { settingsUpdated } from 'modules/Settings/actions';
+import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
+import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
+import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
+import TokensTab from './components/TokensTab';
+import getStyles from './styles';
+import TransactionList from '../Transactions/components/TransactionList';
+import AccountsManagerModal from './components/AccountsManagerModal';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -32,26 +32,26 @@ import AccountsManagerModal from './components/AccountsManagerModal'
  * about any unforeseen issue/change
  */
 export default function Home() {
-  const navigation = useNavigation()
-  const [showManageAccountsModal, setShowManageAccountsModal] = useState(false)
-  const [showManageApplicationsModal, setShowManageApplicationsModal] = useState(false)
-  const [currAccount] = useCurrentAccount()
-  const { address, name: username } = currAccount.metadata
-  const discrete = useSelector((state) => state.settings.discrete)
-  const dispatch = useDispatch()
+  const navigation = useNavigation();
+  const [showManageAccountsModal, setShowManageAccountsModal] = useState(false);
+  const [showManageApplicationsModal, setShowManageApplicationsModal] = useState(false);
+  const [currAccount] = useCurrentAccount();
+  const { address, name: username } = currAccount.metadata;
+  const discrete = useSelector((state) => state.settings.discrete);
+  const dispatch = useDispatch();
 
-  const { styles } = useTheme({ styles: getStyles() })
+  const { styles } = useTheme({ styles: getStyles() });
 
   const toggleIncognito = () => {
-    ReactNativeHapticFeedback.trigger('selection')
+    ReactNativeHapticFeedback.trigger('selection');
     dispatch(
       settingsUpdated({
         discrete: !discrete,
       })
-    )
-  }
-  const requestTokens = () => navigation.navigate('Request')
-  const sendTokens = () => navigation.navigate('Send')
+    );
+  };
+  const requestTokens = () => navigation.navigate('Request');
+  const sendTokens = () => navigation.navigate('Send');
 
   return (
     <>
@@ -107,5 +107,5 @@ export default function Home() {
         setShow={setShowManageApplicationsModal}
       />
     </>
-  )
+  );
 }

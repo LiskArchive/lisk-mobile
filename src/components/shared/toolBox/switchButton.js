@@ -1,13 +1,13 @@
-import React from 'react'
-import Switch from 'react-native-switch-pro'
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback'
-import { colors, themes } from 'constants/styleGuide'
+import React from 'react';
+import Switch from 'react-native-switch-pro';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import { colors, themes } from 'constants/styleGuide';
 
 const switchButton = ({ value, height, onSyncPress, style, theme }) => {
   const onPress = (...params) => {
-    ReactNativeHapticFeedback.trigger('selection')
-    onSyncPress(...params)
-  }
+    ReactNativeHapticFeedback.trigger('selection');
+    onSyncPress(...params);
+  };
 
   return (
     <Switch
@@ -21,7 +21,7 @@ const switchButton = ({ value, height, onSyncPress, style, theme }) => {
       }
       backgroundInactive={theme === themes.light ? colors.light.platinum : colors.dark.slateGray}
     />
-  )
-}
+  );
+};
 
-export default switchButton
+export default switchButton;

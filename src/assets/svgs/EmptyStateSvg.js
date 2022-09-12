@@ -1,13 +1,13 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
-import { useTheme } from 'hooks/useTheme'
-import { themes, colors } from 'constants/styleGuide'
+import { useTheme } from 'hooks/useTheme';
+import { themes, colors } from 'constants/styleGuide';
 
 export default function EmptyStateSvg({ height = 80, width = 216, style }) {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
 
-  const baseColor = theme === themes.light ? colors.light.zodiacBlue : colors.dark.white
+  const baseColor = theme === themes.light ? colors.light.zodiacBlue : colors.dark.white;
 
   return (
     <Svg width={width} height={height} viewBox="0 0 216 80" fill="none" style={style}>
@@ -123,5 +123,5 @@ export default function EmptyStateSvg({ height = 80, width = 216, style }) {
         fill="#2BD67B"
       />
     </Svg>
-  )
+  );
 }

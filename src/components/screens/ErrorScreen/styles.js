@@ -1,4 +1,4 @@
-import { themes, colors, boxes, fonts } from 'constants/styleGuide'
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default function getErrorScreenStyles() {
   return {
@@ -57,5 +57,5 @@ export default function getErrorScreenStyles() {
         color: colors.dark.ghost,
       },
     },
-  }
+  };
 }

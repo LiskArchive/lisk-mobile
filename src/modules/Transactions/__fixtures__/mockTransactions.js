@@ -57,4 +57,4 @@ export const mockTransactions = [
     confirmations: 191,
     executionStatus: null,
   },
-]
+];

@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default () => (
   <Svg
@@ -414,4 +414,4 @@ export default () => (
       fill="#C5CFE4"
     />
   </Svg>
-)
+);

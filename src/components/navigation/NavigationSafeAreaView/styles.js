@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide'
+import { themes, colors } from 'constants/styleGuide';
 
 export default function getNavigationSafeAreaViewStyles(tabBarHeight) {
   return {
@@ -18,5 +18,5 @@ export default function getNavigationSafeAreaViewStyles(tabBarHeight) {
         backgroundColor: colors.dark.mainBg,
       },
     },
-  }
+  };
 }

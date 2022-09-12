@@ -1,22 +1,22 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import i18next from 'i18next'
+import React from 'react';
+import { View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import { colors } from 'constants/styleGuide'
-import { LIMIT } from 'utilities/api/constants'
-import { LabelButton } from 'components/shared/toolBox/button'
-import CaretSvg from 'assets/svgs/CaretSvg'
-import InfiniteScrollList from 'components/shared/InfiniteScrollList'
-import EmptyState from 'components/shared/EmptyState'
-import { useGetTransactionsQuery } from '../../api/useGetTransactionsQuery'
-import TransactionRow from '../TransactionRow'
+import { useTheme } from 'hooks/useTheme';
+import { colors } from 'constants/styleGuide';
+import { LIMIT } from 'utilities/api/constants';
+import { LabelButton } from 'components/shared/toolBox/button';
+import CaretSvg from 'assets/svgs/CaretSvg';
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import EmptyState from 'components/shared/EmptyState';
+import { useGetTransactionsQuery } from '../../api/useGetTransactionsQuery';
+import TransactionRow from '../TransactionRow';
 
-import getTransactionListStyles from './styles'
+import getTransactionListStyles from './styles';
 
 export default function TransactionList({ mode = 'overview', style }) {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const {
     data: transactionsData,
@@ -29,14 +29,14 @@ export default function TransactionList({ mode = 'overview', style }) {
     config: {
       params: { limit: mode === 'overview' ? 3 : LIMIT },
     },
-  })
+  });
 
   const { styles } = useTheme({
     styles: getTransactionListStyles(),
-  })
+  });
 
   function renderHeader() {
-    if (mode === 'full') return null
+    if (mode === 'full') return null;
 
     return (
       <View style={[styles.header, style?.header]}>
@@ -65,7 +65,7 @@ export default function TransactionList({ mode = 'overview', style }) {
           </LabelButton>
         )}
       </View>
-    )
+    );
   }
 
   function renderBody() {
@@ -74,20 +74,20 @@ export default function TransactionList({ mode = 'overview', style }) {
         <Text style={{ marginTop: 16 }}>
           {i18next.t('transactions.transactionList.loadingText')}
         </Text>
-      )
+      );
     }
 
     if (errorOnTransactions) {
       if (errorOnTransactions.response?.status === 404) {
-        return <EmptyState message={i18next.t('transactions.transactionList.emptyText')} />
+        return <EmptyState message={i18next.t('transactions.transactionList.emptyText')} />;
       }
 
       return (
         <Text style={{ marginTop: 16 }}>{i18next.t('transactions.transactionList.errorText')}</Text>
-      )
+      );
     }
 
-    const transactions = transactionsData.data
+    const transactions = transactionsData.data;
 
     return (
       <InfiniteScrollList
@@ -99,7 +99,7 @@ export default function TransactionList({ mode = 'overview', style }) {
         hasNextPage={hasTransactionsNextPage}
         isFetchingNextPage={isFetchingTransactionsNextPage}
       />
-    )
+    );
   }
 
   return (
@@ -108,5 +108,5 @@ export default function TransactionList({ mode = 'overview', style }) {
 
       {renderBody()}
     </View>
-  )
+  );
 }

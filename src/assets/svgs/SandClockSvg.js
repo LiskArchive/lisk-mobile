@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default function SandClockSvg({ color = '#FFB400', height = 13, width = 12, style }) {
   return (
@@ -11,5 +11,5 @@ export default function SandClockSvg({ color = '#FFB400', height = 13, width = 1
         fill={color}
       />
     </Svg>
-  )
+  );
 }

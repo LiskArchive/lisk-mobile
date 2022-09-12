@@ -1,26 +1,26 @@
-import React, { useRef } from 'react'
-import { Animated, Text, View } from 'react-native'
-import BaseSwipeable from 'react-native-gesture-handler/Swipeable'
-import { RectButton } from 'react-native-gesture-handler'
-import styles from './styles'
+import React, { useRef } from 'react';
+import { Animated, Text, View } from 'react-native';
+import BaseSwipeable from 'react-native-gesture-handler/Swipeable';
+import { RectButton } from 'react-native-gesture-handler';
+import styles from './styles';
 
 const Swipeable = ({ children, leftActions, rightActions, style, enabled = true }) => {
-  const swipeableRef = useRef()
+  const swipeableRef = useRef();
 
   const renderAction = (text, color, icon, onPress, x, progress) => {
     const trans = progress.interpolate({
       inputRange: [0, 1],
       outputRange: [x, 0],
-    })
+    });
 
     const close = () => {
-      swipeableRef.current?.close()
-    }
+      swipeableRef.current?.close();
+    };
 
     const pressHandler = () => {
-      close()
-      onPress()
-    }
+      close();
+      onPress();
+    };
 
     return (
       <Animated.View style={[{ flex: 1, transform: [{ translateX: trans }] }]}>
@@ -41,8 +41,8 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
           </View>
         </RectButton>
       </Animated.View>
-    )
-  }
+    );
+  };
 
   const renderLeftActions = (progress) => (
     <View
@@ -63,7 +63,7 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
         )
       )}
     </View>
-  )
+  );
 
   const renderRightActions = (progress) => (
     <View
@@ -83,11 +83,11 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
         )
       )}
     </View>
-  )
+  );
 
   const updateRef = (ref) => {
-    swipeableRef.current = ref
-  }
+    swipeableRef.current = ref;
+  };
 
   return (
     <BaseSwipeable
@@ -102,7 +102,7 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
     >
       {children}
     </BaseSwipeable>
-  )
-}
+  );
+};
 
-export default Swipeable
+export default Swipeable;

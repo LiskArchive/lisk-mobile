@@ -1,8 +1,8 @@
-import React from 'react'
-import { View } from 'react-native'
-import withTheme from 'components/shared/withTheme'
-import Item from './Item'
-import getStyles from './styles'
+import React from 'react';
+import { View } from 'react-native';
+import withTheme from 'components/shared/withTheme';
+import Item from './Item';
+import getStyles from './styles';
 
 const List = ({
   styles,
@@ -41,6 +41,6 @@ const List = ({
       />
     ))}
   </View>
-)
+);
 
-export default withTheme(List, getStyles())
+export default withTheme(List, getStyles());

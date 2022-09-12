@@ -1,40 +1,40 @@
 // TODO: Add business logic missing when updating to LSK Client v6.
 export function getPriorityFee({ amount, priorityCode, priorityBaseFee, message }) {
-  let fee = 0
+  let fee = 0;
 
-  const messageFee = message ? message.length : 1
+  const messageFee = message ? message.length : 1;
 
   switch (priorityCode) {
     case 'low':
-      fee = (messageFee + amount * priorityBaseFee) / 10000
-      break
+      fee = (messageFee + amount * priorityBaseFee) / 10000;
+      break;
 
     case 'medium':
-      fee = (1.5 * messageFee + amount * priorityBaseFee) / 10000
-      break
+      fee = (1.5 * messageFee + amount * priorityBaseFee) / 10000;
+      break;
 
     case 'high':
-      fee = (2 * messageFee + amount * priorityBaseFee) / 10000
-      break
+      fee = (2 * messageFee + amount * priorityBaseFee) / 10000;
+      break;
 
     default:
-      break
+      break;
   }
 
-  return fee
+  return fee;
 }
 
 // TODO: Add business logic missing when updating to LSK Client v6.
 export function getTransactionFee({ tokenID, amount, priorityFee }) {
-  return tokenID.length + 0.5 * amount + priorityFee
+  return tokenID.length + 0.5 * amount + priorityFee;
 }
 
 // TODO: Add business logic missing when updating to LSK Client v6.
 export function getInitializationFee({ tokenID, recipientAccount }) {
-  return tokenID.length + 0.5 + recipientAccount.metadata.address.length
+  return tokenID.length + 0.5 + recipientAccount.metadata.address.length;
 }
 
 // TODO: Add business logic missing when updating to LSK Client v6.
 export function getCCMFee({ senderApplicationChainID, recipientApplicationChainID }) {
-  return (senderApplicationChainID.length * recipientApplicationChainID.length) / 1000
+  return (senderApplicationChainID.length * recipientApplicationChainID.length) / 1000;
 }

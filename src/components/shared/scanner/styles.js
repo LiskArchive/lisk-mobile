@@ -1,16 +1,16 @@
-import { themes, colors } from 'constants/styleGuide'
+import { themes, colors } from 'constants/styleGuide';
 import {
   deviceHeight,
   deviceWidth,
   viewportHeight,
   headerHeight,
   deviceType,
-} from 'utilities/device'
+} from 'utilities/device';
 
-const height = deviceHeight()
-const width = deviceWidth()
-const headFullAndroid = viewportHeight() + headerHeight() + 20
-const headerFullIOS = viewportHeight() + headerHeight()
+const height = deviceHeight();
+const width = deviceWidth();
+const headFullAndroid = viewportHeight() + headerHeight() + 20;
+const headerFullIOS = viewportHeight() + headerHeight();
 export default () => ({
   common: {
     preview: {
@@ -132,4 +132,4 @@ export default () => ({
       color: colors.dark.white,
     },
   },
-})
+});

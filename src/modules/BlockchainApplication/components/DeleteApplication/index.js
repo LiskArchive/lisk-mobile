@@ -1,23 +1,23 @@
-import React from 'react'
-import { translate } from 'react-i18next'
-import { View, Image } from 'react-native'
+import React from 'react';
+import { translate } from 'react-i18next';
+import { View, Image } from 'react-native';
 
-import { H2, P } from 'components/shared/toolBox/typography'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import { useTheme } from 'hooks/useTheme'
-import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement'
+import { H2, P } from 'components/shared/toolBox/typography';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import { useTheme } from 'hooks/useTheme';
+import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 
-import getDeleteBlockchainApplicationStyles from './styles'
+import getDeleteBlockchainApplicationStyles from './styles';
 
 function DeleteBlockchainApplication({ t, sharedData: { application }, nextStep }) {
-  const { styles } = useTheme({ styles: getDeleteBlockchainApplicationStyles() })
+  const { styles } = useTheme({ styles: getDeleteBlockchainApplicationStyles() });
 
-  const { deleteApplicationByChainId } = useBlockchainApplicationManagement()
+  const { deleteApplicationByChainId } = useBlockchainApplicationManagement();
 
   const handleDeleteApplicationClick = () => {
-    deleteApplicationByChainId(application.chainID)
-    nextStep({ application })
-  }
+    deleteApplicationByChainId(application.chainID);
+    nextStep({ application });
+  };
 
   return (
     <View style={[styles.container, styles.theme.container]}>
@@ -46,7 +46,7 @@ function DeleteBlockchainApplication({ t, sharedData: { application }, nextStep 
         style={[styles.submitButton]}
       />
     </View>
-  )
+  );
 }
 
-export default translate()(DeleteBlockchainApplication)
+export default translate()(DeleteBlockchainApplication);

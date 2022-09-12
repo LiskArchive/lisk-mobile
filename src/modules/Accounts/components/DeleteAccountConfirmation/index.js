@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
-import { Platform, ToastAndroid, View } from 'react-native'
-import i18next from 'i18next'
+import React, { useState } from 'react';
+import { Platform, ToastAndroid, View } from 'react-native';
+import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import { useAccounts } from 'modules/Accounts/hooks/useAccounts'
-import { downloadJSON } from 'modules/Auth/utils'
-import { H2, P } from 'components/shared/toolBox/typography'
-import { Button, PrimaryButton, LabelButton } from 'components/shared/toolBox/button'
-import Avatar from 'components/shared/avatar'
-import DownloadSvg from 'assets/svgs/DownloadSvg'
-import FileSvg from 'assets/svgs/FileSvg'
-import { stringShortener } from 'utilities/helpers'
+import { useTheme } from 'hooks/useTheme';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { downloadJSON } from 'modules/Auth/utils';
+import { H2, P } from 'components/shared/toolBox/typography';
+import { Button, PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
+import Avatar from 'components/shared/avatar';
+import DownloadSvg from 'assets/svgs/DownloadSvg';
+import FileSvg from 'assets/svgs/FileSvg';
+import { stringShortener } from 'utilities/helpers';
 
-import getDeleteAccountConfirmationStyles from './styles'
+import getDeleteAccountConfirmationStyles from './styles';
 
 export default function DeleteAccountConfirmation({ account, onReset, style }) {
-  const [downloaded, setDownloaded] = useState(false)
+  const [downloaded, setDownloaded] = useState(false);
 
-  const { deleteAccountByAddress } = useAccounts()
+  const { deleteAccountByAddress } = useAccounts();
 
-  const { styles } = useTheme({ styles: getDeleteAccountConfirmationStyles() })
+  const { styles } = useTheme({ styles: getDeleteAccountConfirmationStyles() });
 
   function handleDownloadFile() {
     downloadJSON(
@@ -27,18 +27,18 @@ export default function DeleteAccountConfirmation({ account, onReset, style }) {
       `${account.metadata.address}-encrypted_secret_recovery_phrase.json`,
       (e) => {
         if (!e) {
-          setDownloaded(true)
+          setDownloaded(true);
           if (Platform.OS === 'android') {
-            ToastAndroid.show(i18next.t('auth.setup.downloaded'), ToastAndroid.BOTTOM)
+            ToastAndroid.show(i18next.t('auth.setup.downloaded'), ToastAndroid.BOTTOM);
           }
         }
       }
-    )
+    );
   }
 
   function handleDelete() {
-    deleteAccountByAddress(account.metadata.address)
-    onReset()
+    deleteAccountByAddress(account.metadata.address);
+    onReset();
   }
 
   return (
@@ -94,5 +94,5 @@ export default function DeleteAccountConfirmation({ account, onReset, style }) {
         />
       </View>
     </>
-  )
+  );
 }

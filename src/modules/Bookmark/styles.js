@@ -1,6 +1,6 @@
-import { Platform } from 'react-native'
-import { themes, colors, fonts } from 'constants/styleGuide'
-import { setColorOpacity } from 'utilities/helpers'
+import { Platform } from 'react-native';
+import { themes, colors, fonts } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default (tabBarHeight) => ({
   common: {
@@ -87,4 +87,4 @@ export default (tabBarHeight) => ({
       borderBottomColor: setColorOpacity(colors.light.white, 0.15),
     },
   },
-})
+});

@@ -1,11 +1,11 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-import * as apiClient from 'utilities/api/lisk/apiClient'
-import { renderHook } from '@testing-library/react-hooks'
-import { mockSavedAccounts } from '../../__fixtures__'
-import { useAccountInfo } from './useAccountInfo'
+import React from 'react';
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import * as apiClient from 'utilities/api/lisk/apiClient';
+import { renderHook } from '@testing-library/react-hooks';
+import { mockSavedAccounts } from '../../__fixtures__';
+import { useAccountInfo } from './useAccountInfo';
 
 const account = {
   summary: {
@@ -15,44 +15,44 @@ const account = {
     unconfirmedBalance: '10000',
     initialized: true,
   },
-}
+};
 
-const middlewares = [thunk]
-const mockStore = configureMockStore(middlewares)
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 const ReduxProvider = ({ children, reduxStore }) => (
   <Provider store={reduxStore}>{children}</Provider>
-)
+);
 
-const mockDispatch = jest.fn()
+const mockDispatch = jest.fn();
 
 const mockState = {
   account: {
     summary: account,
     current: mockSavedAccounts[0],
   },
-}
+};
 jest.mock('react-redux', () => ({
   useSelector: jest.fn().mockImplementation((fn) => fn(mockState)),
   useDispatch: () => mockDispatch,
-}))
+}));
 
 describe('useAccountInfo hook', () => {
-  const store = mockStore(mockState)
-  const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
+  const store = mockStore(mockState);
+  const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>;
   beforeEach(() => {
-    mockDispatch.mockClear()
-    apiClient.getAccount = jest.fn()
-    global.fetch = jest.fn()
-  })
-  const { result } = renderHook(() => useAccountInfo(), { wrapper })
+    mockDispatch.mockClear();
+    apiClient.getAccount = jest.fn();
+    global.fetch = jest.fn();
+  });
+  const { result } = renderHook(() => useAccountInfo(), { wrapper });
   it('useAccountInfo Should not trigger on mounting', async () => {
-    expect(mockDispatch).toHaveBeenCalledTimes(0)
-  })
+    expect(mockDispatch).toHaveBeenCalledTimes(0);
+  });
 
   it('getAccount should make api call to get account details', async () => {
-    const { getAccount } = result.current
-    fetch.mockResolvedValueOnce({ ok: true, status: 200, json: () => ({ data: [account] }) })
-    const data = await getAccount(account.address)
-    expect(data).toEqual([account])
-  })
-})
+    const { getAccount } = result.current;
+    fetch.mockResolvedValueOnce({ ok: true, status: 200, json: () => ({ data: [account] }) });
+    const data = await getAccount(account.address);
+    expect(data).toEqual([account]);
+  });
+});

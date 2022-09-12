@@ -1,8 +1,8 @@
-import { cryptography, passphrase } from '@liskhq/lisk-client'
-import { encryptAccount } from './encryptAccount'
+import { cryptography, passphrase } from '@liskhq/lisk-client';
+import { encryptAccount } from './encryptAccount';
 
 const recoveryPhrase =
-  'target cancel solution recipe vague faint bomb convince pink vendor fresh patrol'
+  'target cancel solution recipe vague faint bomb convince pink vendor fresh patrol';
 const encryptedPassphrase = {
   kdf: 'argon2id',
   kdfparams: {
@@ -18,7 +18,7 @@ const encryptedPassphrase = {
   },
   ciphertext:
     '44fdb2b132d353a5c65f04e5e3afdd531f63abc45444ffd4cdbc7dedc45f899bf5b7478947d57319ea8c620e13480def8a518cc05e46bdddc8ef7c8cfc21a3bd',
-}
+};
 
 const mockAccount = {
   encryptedPassphrase,
@@ -31,35 +31,35 @@ const mockAccount = {
     derivedFromUUID: 'fa3e4ceb-10dc-41ad-810e-17bf51ed93aa',
   },
   version: 1,
-}
+};
 
 const privateKey =
-  'd92f8ffd3046fa9de33c21cef7af6f1315e289003c19f9b23ce6d499c8641d4e0792fecbbecf6e7370f7a7b217a9d159f380d3ecd0f2760d7a55dd3e27e97184'
-const publicKey = '0792fecbbecf6e7370f7a7b217a9d159f380d3ecd0f2760d7a55dd3e27e97184'
-const address = 'lskr4npg3esse6duo56u2war7umuo8embs4cwrkaf'
+  'd92f8ffd3046fa9de33c21cef7af6f1315e289003c19f9b23ce6d499c8641d4e0792fecbbecf6e7370f7a7b217a9d159f380d3ecd0f2760d7a55dd3e27e97184';
+const publicKey = '0792fecbbecf6e7370f7a7b217a9d159f380d3ecd0f2760d7a55dd3e27e97184';
+const address = 'lskr4npg3esse6duo56u2war7umuo8embs4cwrkaf';
 const defaultKeys = {
   privateKey: Buffer.from(privateKey, 'hex'),
   publicKey: Buffer.from(publicKey, 'hex'),
-}
+};
 
-jest.spyOn(cryptography.ed, 'getKeys').mockReturnValue(defaultKeys)
+jest.spyOn(cryptography.ed, 'getKeys').mockReturnValue(defaultKeys);
 jest
   .spyOn(cryptography.encrypt, 'encryptMessageWithPassword')
-  .mockResolvedValue(encryptedPassphrase)
-jest.spyOn(cryptography.address, 'getLisk32AddressFromPublicKey').mockReturnValue(address)
-jest.spyOn(passphrase.Mnemonic, 'validateMnemonic').mockReturnValue(true)
+  .mockResolvedValue(encryptedPassphrase);
+jest.spyOn(cryptography.address, 'getLisk32AddressFromPublicKey').mockReturnValue(address);
+jest.spyOn(passphrase.Mnemonic, 'validateMnemonic').mockReturnValue(true);
 
 describe('encryptAccount', () => {
   it('encrypts account when the correct arguments are passed', async () => {
-    const password = 'samplePassword@1'
-    const name = 'test account'
-    const derivationPath = "m/44'/134'/0'"
+    const password = 'samplePassword@1';
+    const name = 'test account';
+    const derivationPath = "m/44'/134'/0'";
     const accountDetails = {
       recoveryPhrase,
       password,
       name,
       derivationPath,
-    }
+    };
     const updatedMockAccount = {
       encryptedPassphrase: { ...mockAccount.encryptedPassphrase },
       metadata: {
@@ -70,28 +70,28 @@ describe('encryptAccount', () => {
         creationTime: expect.any(String),
       },
       version: 1,
-    }
-    const encryptedAccount = await encryptAccount(accountDetails)
-    expect(encryptedAccount).toEqual(updatedMockAccount)
-  })
+    };
+    const encryptedAccount = await encryptAccount(accountDetails);
+    expect(encryptedAccount).toEqual(updatedMockAccount);
+  });
 
   it('returns an error if passphrase is invalid', async () => {
-    const incorrectRecoveryPhrase = 'target cancel solution recipe vague faint bomb convince pink'
-    const password = 'samplePassword@1'
-    const name = 'test account'
-    const derivationPath = "m/44'/134'/0'"
+    const incorrectRecoveryPhrase = 'target cancel solution recipe vague faint bomb convince pink';
+    const password = 'samplePassword@1';
+    const name = 'test account';
+    const derivationPath = "m/44'/134'/0'";
     const accountDetails = {
       recoveryPhrase: incorrectRecoveryPhrase,
       password,
       name,
       derivationPath,
-    }
-    jest.spyOn(passphrase.Mnemonic, 'validateMnemonic').mockReturnValue(false)
+    };
+    jest.spyOn(passphrase.Mnemonic, 'validateMnemonic').mockReturnValue(false);
 
     try {
-      await encryptAccount(accountDetails)
+      await encryptAccount(accountDetails);
     } catch (error) {
-      expect(error.message).toEqual('Error: Failed to extract keypair for given recovery phrase.')
+      expect(error.message).toEqual('Error: Failed to extract keypair for given recovery phrase.');
     }
-  })
-})
+  });
+});

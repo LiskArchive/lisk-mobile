@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-import { colors } from 'constants/styleGuide'
-import PinSvg from 'assets/svgs/PinSvg'
-import DeleteSvg from 'assets/svgs/DeleteSvg'
+import { colors } from 'constants/styleGuide';
+import PinSvg from 'assets/svgs/PinSvg';
+import DeleteSvg from 'assets/svgs/DeleteSvg';
 
-import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication'
+import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 
 export function useBlockchainApplicationRowActions({
   t,
@@ -13,10 +13,10 @@ export function useBlockchainApplicationRowActions({
   setShowDeleteDefaultApplicationModal,
   deleteApplication,
 }) {
-  const { togglePin } = usePinBlockchainApplication()
+  const { togglePin } = usePinBlockchainApplication();
 
-  let leftActions
-  let rightActions
+  let leftActions;
+  let rightActions;
 
   switch (variant) {
     case 'explore':
@@ -34,8 +34,8 @@ export function useBlockchainApplicationRowActions({
           ),
           onPress: () => togglePin(application.chainID),
         },
-      ]
-      break
+      ];
+      break;
 
     case 'manage':
       rightActions = [
@@ -45,19 +45,19 @@ export function useBlockchainApplicationRowActions({
           icon: () => <DeleteSvg color={colors.light.white} />,
           onPress: () => {
             if (application.isDefault) {
-              setShowDeleteDefaultApplicationModal(true)
+              setShowDeleteDefaultApplicationModal(true);
             } else {
-              deleteApplication(application)
+              deleteApplication(application);
             }
           },
         },
-      ]
+      ];
 
-      break
+      break;
 
     default:
-      break
+      break;
   }
 
-  return { leftActions, rightActions }
+  return { leftActions, rightActions };
 }

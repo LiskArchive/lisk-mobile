@@ -4,6 +4,6 @@ const actionTypes = {
   deleteAccount: 'deleteAccount',
   setAccountSummary: 'SET_ACCOUNT_SUMMARY',
   resetAccountSummary: 'RESET_ACCOUNT_SUMMARY',
-}
+};
 
-export default actionTypes
+export default actionTypes;

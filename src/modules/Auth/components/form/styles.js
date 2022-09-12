@@ -1,5 +1,5 @@
-import { colors, fonts, themes } from 'constants/styleGuide'
-import { deviceType } from 'utilities/device'
+import { colors, fonts, themes } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
 
 export default () => ({
   common: {
@@ -85,4 +85,4 @@ export default () => ({
       color: colors.dark.whiteSmoke,
     },
   },
-})
+});

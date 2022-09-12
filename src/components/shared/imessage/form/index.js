@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from 'react'
-import { Text, View, Picker } from 'react-native'
-import reg from 'constants/regex'
-import { colors } from 'constants/styleGuide'
-import { PrimaryButton, IconButton } from '../../toolBox/button'
-import Icon from '../../toolBox/icon'
-import Input from '../../toolBox/input'
-import Avatar from '../../avatar'
-import { P, Small } from '../../toolBox/typography'
-import styles from './styles'
+import React, { Component, Fragment } from 'react';
+import { Text, View, Picker } from 'react-native';
+import reg from 'constants/regex';
+import { colors } from 'constants/styleGuide';
+import { PrimaryButton, IconButton } from '../../toolBox/button';
+import Icon from '../../toolBox/icon';
+import Input from '../../toolBox/input';
+import Avatar from '../../avatar';
+import { P, Small } from '../../toolBox/typography';
+import styles from './styles';
 
 class LiskMessageExtension extends Component {
   state = {
@@ -20,19 +20,19 @@ class LiskMessageExtension extends Component {
     },
     avatarPreview: false,
     num: [0, 0, 0, 0],
-  }
+  };
 
   validator = {
     address: (str) => {
-      if (str === '') return 2
-      return reg.address.test(str) ? 0 : 1
+      if (str === '') return 2;
+      return reg.address.test(str) ? 0 : 1;
     },
-  }
+  };
 
   componentDidMount() {
-    const { MessagesEvents, inputAddress } = this.props
-    MessagesEvents.addListener('didStartSendingMessage', this.onStartSendingMessage)
-    this.setAddress(inputAddress.value)
+    const { MessagesEvents, inputAddress } = this.props;
+    MessagesEvents.addListener('didStartSendingMessage', this.onStartSendingMessage);
+    this.setAddress(inputAddress.value);
   }
 
   onStartSendingMessage = () => {
@@ -41,15 +41,15 @@ class LiskMessageExtension extends Component {
         num: [0, 0, 0, 0],
       },
       () => this.setAddress(this.props.inputAddress.value)
-    )
-  }
+    );
+  };
 
   setAddress = (value) => {
-    clearTimeout(this.avatarPreviewTimeout)
-    const validity = this.validator.address(value)
+    clearTimeout(this.avatarPreviewTimeout);
+    const validity = this.validator.address(value);
 
     if (validity === 0) {
-      this.setAvatarPreviewTimeout()
+      this.setAvatarPreviewTimeout();
     }
 
     this.setState({
@@ -58,52 +58,52 @@ class LiskMessageExtension extends Component {
         validity,
       },
       avatarPreview: false,
-    })
-  }
+    });
+  };
 
   changePicker = (itemValue, itemIndex) => {
     this.setState({
       amount: { validity: -1 },
       num: this.state.num.map((item, index) => (index === itemIndex ? itemValue : item)),
-    })
-  }
+    });
+  };
 
   setAvatarPreviewTimeout = () => {
     this.avatarPreviewTimeout = setTimeout(() => {
       this.setState({
         avatarPreview: true,
-      })
-    }, 300)
-  }
+      });
+    }, 300);
+  };
 
   send = () => {
-    const { composeMessage, inputAddress } = this.props
-    const { num, address } = this.state
-    const firstDigit = parseInt(num[0], 10) > 0 ? num[0] : ''
+    const { composeMessage, inputAddress } = this.props;
+    const { num, address } = this.state;
+    const firstDigit = parseInt(num[0], 10) > 0 ? num[0] : '';
 
-    const amount = `${firstDigit}${num[1]}.${num[2]}${num[3]}`
+    const amount = `${firstDigit}${num[1]}.${num[2]}${num[3]}`;
     if (parseFloat(amount) > 0) {
       composeMessage({
         address: address.value.length === 0 ? inputAddress : address,
         amount,
-      })
+      });
     } else {
       this.setState({
         amount: {
           validity: 0,
         },
-      })
+      });
     }
-  }
+  };
 
   render() {
-    const { address, avatarPreview, num, amount } = this.state
+    const { address, avatarPreview, num, amount } = this.state;
 
-    const { inputAddress, keyBoardFocused, presentationStyle } = this.props
+    const { inputAddress, keyBoardFocused, presentationStyle } = this.props;
 
-    const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     const pickerActiveColor =
-      amount.validity === -1 ? colors.light.black : colors.light.burntSieanna
+      amount.validity === -1 ? colors.light.black : colors.light.burntSieanna;
 
     return (
       <Fragment>
@@ -155,7 +155,7 @@ class LiskMessageExtension extends Component {
             autoCorrect={false}
             placeholder="Enter a address"
             reference={(input) => {
-              this.input = input
+              this.input = input;
             }}
             onChange={this.setAddress}
             onFocus={keyBoardFocused}
@@ -186,8 +186,8 @@ class LiskMessageExtension extends Component {
           />
         ) : null}
       </Fragment>
-    )
+    );
   }
 }
 
-export default LiskMessageExtension
+export default LiskMessageExtension;

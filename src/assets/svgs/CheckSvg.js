@@ -1,7 +1,7 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
-import colors from 'constants/styleGuide/colors'
+import colors from 'constants/styleGuide/colors';
 
 export default function CheckSvg({
   color = colors.light.ultramarineBlue,
@@ -18,5 +18,5 @@ export default function CheckSvg({
         fill={color}
       />
     </Svg>
-  )
+  );
 }

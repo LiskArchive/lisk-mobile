@@ -1,17 +1,17 @@
-import { cleanup, init } from 'detox'
-import adapter from 'detox/runners/jest/adapter'
+import { cleanup, init } from 'detox';
+import adapter from 'detox/runners/jest/adapter';
 
-const config = require('../.detoxrc.json')
+const config = require('../.detoxrc.json');
 
 beforeAll(async () => {
-  await init(config, { initGlobals: false })
-})
+  await init(config, { initGlobals: false });
+});
 
 beforeEach(async () => {
-  await adapter.beforeEach()
-})
+  await adapter.beforeEach();
+});
 
 afterAll(async () => {
-  await adapter.afterAll()
-  await cleanup()
-})
+  await adapter.afterAll();
+  await cleanup();
+});

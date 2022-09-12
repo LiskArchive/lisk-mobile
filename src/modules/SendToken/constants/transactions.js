@@ -1,29 +1,29 @@
-import { themes } from 'constants/styleGuide'
+import { themes } from 'constants/styleGuide';
 
-import setSecondPassphraseLight from 'assets/images/txDetail/second-passphrase-light.png'
-import setSecondPassphraseDark from 'assets/images/txDetail/second-passphrase-dark.png'
+import setSecondPassphraseLight from 'assets/images/txDetail/second-passphrase-light.png';
+import setSecondPassphraseDark from 'assets/images/txDetail/second-passphrase-dark.png';
 
-import registerDelegateLight from 'assets/images/txDetail/delegate-registration-light.png'
-import registerDelegateDark from 'assets/images/txDetail/delegate-registration-dark.png'
+import registerDelegateLight from 'assets/images/txDetail/delegate-registration-light.png';
+import registerDelegateDark from 'assets/images/txDetail/delegate-registration-dark.png';
 
-import voteLight from 'assets/images/txDetail/vote-light.png'
-import voteDark from 'assets/images/txDetail/vote-dark.png'
+import voteLight from 'assets/images/txDetail/vote-light.png';
+import voteDark from 'assets/images/txDetail/vote-dark.png';
 
-import transferDark from 'assets/images/txDetail/transfer-dark.png'
-import transferLight from 'assets/images/txDetail/transfer-light.png'
+import transferDark from 'assets/images/txDetail/transfer-dark.png';
+import transferLight from 'assets/images/txDetail/transfer-light.png';
 
-import txUnlockLight from 'assets/images/txDetail/tx-unlock.png'
-import txUnlockDark from 'assets/images/txDetail/tx-unlock-dark.png'
+import txUnlockLight from 'assets/images/txDetail/tx-unlock.png';
+import txUnlockDark from 'assets/images/txDetail/tx-unlock-dark.png';
 
-import txUnknownLight from 'assets/images/txDetail/tx-unknown-light.png'
-import txUnknownDark from 'assets/images/txDetail/tx-unknown-dark.png'
+import txUnknownLight from 'assets/images/txDetail/tx-unknown-light.png';
+import txUnknownDark from 'assets/images/txDetail/tx-unknown-dark.png';
 
 const modules = {
   token: 2,
   dpos: 5,
   multiSignature: 4,
   legacyAccount: 1000,
-}
+};
 
 const commands = {
   transfer: 0,
@@ -33,13 +33,13 @@ const commands = {
   registerMultisignatureGroup: 0,
   reclaimLSK: 0,
   reportDelegateMisbehavior: 3,
-}
+};
 
 export const DEFAULT_PRIORITY = [
   { title: 'Low', amount: 0 },
   { title: 'Medium', amount: 0 },
   { title: 'High', amount: 0 },
-]
+];
 
 export const moduleCommandNameIdMap = {
   transfer: `${modules.token}:${commands.transfer}`,
@@ -49,7 +49,7 @@ export const moduleCommandNameIdMap = {
   reportDelegateMisbehavior: `${modules.dpos}:${commands.reportDelegateMisbehavior}`,
   registerMultisignatureGroup: `${modules.multiSignature}:${commands.registerMultisignatureGroup}`,
   reclaimLSK: `${modules.legacyAccount}:${commands.reclaimLSK}`,
-}
+};
 
 export const moduleAssetMap = {
   [moduleCommandNameIdMap.transfer]: {
@@ -80,7 +80,7 @@ export const moduleAssetMap = {
     maxFee: 1e7,
     icon: 'txDefault',
   },
-}
+};
 
 /**
  * Since react-navigation doesn't support i18n
@@ -92,7 +92,7 @@ export const moduleAssetMap = {
  * @param {String} str
  * @returns {String} same as the input string
  */
-const t = (str) => str
+const t = (str) => str;
 
 export const transferAssetSchema = {
   $id: 'lisk/transfer-asset',
@@ -117,7 +117,7 @@ export const transferAssetSchema = {
       maxLength: 64,
     },
   },
-}
+};
 
 export const transactions = {
   [moduleCommandNameIdMap.transfer]: {
@@ -150,24 +150,24 @@ export const transactions = {
     title: t('Unlock'),
     image: (theme) => (theme === themes.light ? txUnlockLight : txUnlockDark),
   },
-}
+};
 
 export const getTxConstant = ({ moduleAssetId }) => {
-  const result = transactions[moduleAssetId] ?? {}
+  const result = transactions[moduleAssetId] ?? {};
   return {
     ...result,
     title: result?.title ?? t('Transaction'),
     image: result?.image
       ? result?.image
       : (theme) => (theme === themes.light ? txUnknownLight : txUnknownDark),
-  }
-}
+  };
+};
 
-export const isTransfer = ({ moduleAssetId }) => moduleAssetId === moduleCommandNameIdMap.transfer
+export const isTransfer = ({ moduleAssetId }) => moduleAssetId === moduleCommandNameIdMap.transfer;
 
 export const isRegistration = ({ moduleAssetId }) =>
-  moduleAssetId === moduleCommandNameIdMap.registerDelegate
+  moduleAssetId === moduleCommandNameIdMap.registerDelegate;
 
-export const isVote = ({ moduleAssetId }) => moduleAssetId === moduleCommandNameIdMap.voteDelegate
+export const isVote = ({ moduleAssetId }) => moduleAssetId === moduleCommandNameIdMap.voteDelegate;
 
-export const isUnlock = ({ moduleAssetId }) => moduleAssetId === moduleCommandNameIdMap.unlockToken
+export const isUnlock = ({ moduleAssetId }) => moduleAssetId === moduleCommandNameIdMap.unlockToken;

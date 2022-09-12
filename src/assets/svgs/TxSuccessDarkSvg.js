@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path, G, Defs, ClipPath, Rect } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path, G, Defs, ClipPath, Rect } from 'react-native-svg';
 
 export default function TxSuccessDarkSvg({ height = 110, width = 130, style }) {
   return (
@@ -119,5 +119,5 @@ export default function TxSuccessDarkSvg({ height = 110, width = 130, style }) {
         </ClipPath>
       </Defs>
     </Svg>
-  )
+  );
 }

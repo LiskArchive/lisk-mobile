@@ -1,6 +1,6 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
-import { themes, colors } from 'constants/styleGuide'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
+import { themes, colors } from 'constants/styleGuide';
 
 export default ({ theme }) => (
   <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -11,4 +11,4 @@ export default ({ theme }) => (
       fill={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
     />
   </Svg>
-)
+);

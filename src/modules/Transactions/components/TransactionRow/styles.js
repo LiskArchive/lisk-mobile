@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide'
+import { themes, colors } from 'constants/styleGuide';
 
 export default function getTransactionRowStyles() {
   return {
@@ -90,5 +90,5 @@ export default function getTransactionRowStyles() {
         color: colors.dark.white,
       },
     },
-  }
+  };
 }

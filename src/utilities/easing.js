@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-restricted-properties
-const { pow } = Math
+const { pow } = Math;
 
 /*
  * Easing Functions - inspired from http://gizma.com/easing/
@@ -32,6 +32,6 @@ const easing = {
   easeOutQuint: (t) => 1 + --t * pow(t, 4),
   // acceleration until halfway, then deceleration
   easeInOutQuint: (t) => (t < 0.5 ? 16 * pow(t, 5) : 1 + 16 * --t * pow(t, 4)),
-}
+};
 
-export default easing
+export default easing;

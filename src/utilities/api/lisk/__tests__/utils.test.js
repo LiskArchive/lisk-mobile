@@ -1,5 +1,5 @@
-import * as Lisk from '@liskhq/lisk-client'
-import { signTransaction, getSigningBytes, baseTransactionSchema, getBytes } from '../utils'
+import * as Lisk from '@liskhq/lisk-client';
+import { signTransaction, getSigningBytes, baseTransactionSchema, getBytes } from '../utils';
 
 describe.skip('sign', () => {
   const validAssetSchema = {
@@ -25,15 +25,15 @@ describe.skip('sign', () => {
         maxLength: 64,
       },
     },
-  }
+  };
 
   const networkIdentifier = Buffer.from(
     'e48feb88db5b5cf5ad71d93cdcd1d879b6d5ed187a36b0002cc34e0ef9883255',
     'hex'
-  )
-  const passphrase1 = 'trim elegant oven term access apple obtain error grain excite lawn neck'
+  );
+  const passphrase1 = 'trim elegant oven term access apple obtain error grain excite lawn neck';
   const { publicKey: publicKey1 } =
-    Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase1)
+    Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase1);
 
   const validTransaction = {
     moduleID: 2,
@@ -49,56 +49,56 @@ describe.skip('sign', () => {
       amount: BigInt('4008489300000000'),
       data: '',
     },
-  }
+  };
 
   describe('getSigningBytes', () => {
     it('should throw error for invalid asset object', () => {
-      const invalidAssets = { ...validTransaction, asset: null }
-      expect(() => getSigningBytes(invalidAssets)).toThrow()
-    })
+      const invalidAssets = { ...validTransaction, asset: null };
+      expect(() => getSigningBytes(invalidAssets)).toThrow();
+    });
 
     it('should return transaction bytes for given asset', () => {
-      const signingBytes = getSigningBytes({ ...validTransaction })
-      expect(signingBytes).toMatchSnapshot()
-      const decodedTransaction = Lisk.codec.codec.decode(baseTransactionSchema, signingBytes)
-      const decodedAsset = Lisk.codec.codec.decode(validAssetSchema, decodedTransaction.asset)
+      const signingBytes = getSigningBytes({ ...validTransaction });
+      expect(signingBytes).toMatchSnapshot();
+      const decodedTransaction = Lisk.codec.codec.decode(baseTransactionSchema, signingBytes);
+      const decodedAsset = Lisk.codec.codec.decode(validAssetSchema, decodedTransaction.asset);
       return expect({ ...decodedTransaction, asset: { ...decodedAsset } }).toEqual({
         ...validTransaction,
         signatures: [],
-      })
-    })
-  })
+      });
+    });
+  });
 
   describe('getBytes', () => {
     it('should throw error for invalid asset object', () => {
-      const invalidAssets = { ...validTransaction, asset: null }
-      expect(() => getBytes(invalidAssets)).toThrow()
-    })
+      const invalidAssets = { ...validTransaction, asset: null };
+      expect(() => getBytes(invalidAssets)).toThrow();
+    });
 
     it('should return transaction bytes for given asset', () => {
-      const txBytes = getBytes({ ...validTransaction })
-      expect(txBytes).toMatchSnapshot()
-      const decodedTransaction = Lisk.codec.codec.decode(baseTransactionSchema, txBytes)
-      const decodedAsset = Lisk.codec.codec.decode(validAssetSchema, decodedTransaction.asset)
+      const txBytes = getBytes({ ...validTransaction });
+      expect(txBytes).toMatchSnapshot();
+      const decodedTransaction = Lisk.codec.codec.decode(baseTransactionSchema, txBytes);
+      const decodedAsset = Lisk.codec.codec.decode(validAssetSchema, decodedTransaction.asset);
       return expect({ ...decodedTransaction, asset: { ...decodedAsset } }).toEqual({
         ...validTransaction,
         signatures: [],
-      })
-    })
-  })
+      });
+    });
+  });
 
   describe('signTransaction', () => {
     it('should throw error for invalid network identifier', () => {
       expect(() =>
         signTransaction(validAssetSchema, validTransaction, Buffer.alloc(0), passphrase1)
-      ).toThrow('Network identifier is required to sign a transaction')
-    })
+      ).toThrow('Network identifier is required to sign a transaction');
+    });
 
     it('should throw error for invalid passphrase', () => {
       expect(() =>
         signTransaction(validAssetSchema, validTransaction, networkIdentifier, '')
-      ).toThrow('Passphrase is required to sign a transaction')
-    })
+      ).toThrow('Passphrase is required to sign a transaction');
+    });
 
     it('should throw error for invalid asset object', () => {
       const invalidAssets = [
@@ -107,14 +107,14 @@ describe.skip('sign', () => {
           ...validTransaction,
           asset: { ...validTransaction.asset, recipientAddress: 'dummyAddress' },
         },
-      ]
+      ];
       return invalidAssets.forEach((transactionObject) =>
         // eslint-disable-next-line max-nested-callbacks
         expect(() =>
           signTransaction(validAssetSchema, transactionObject, networkIdentifier, passphrase1)
         ).toThrow()
-      )
-    })
+      );
+    });
 
     it('should throw error when transaction senderPublicKey does not match public key from passphrase', () => {
       return expect(() =>
@@ -124,8 +124,8 @@ describe.skip('sign', () => {
           networkIdentifier,
           'this is incorrect passphrase'
         )
-      ).toThrow('Transaction senderPublicKey does not match public key from passphrase')
-    })
+      ).toThrow('Transaction senderPublicKey does not match public key from passphrase');
+    });
 
     it('should return signed transaction for given asset schema', () => {
       const signedTransaction = signTransaction(
@@ -133,10 +133,10 @@ describe.skip('sign', () => {
         { ...validTransaction },
         networkIdentifier,
         passphrase1
-      )
-      expect(signedTransaction.signatures[0].length).toBeGreaterThan(0)
-      expect(signedTransaction.signatures).toHaveLength(1)
-      return expect(signedTransaction).toMatchSnapshot()
-    })
-  })
-})
+      );
+      expect(signedTransaction.signatures[0].length).toBeGreaterThan(0);
+      expect(signedTransaction.signatures).toHaveLength(1);
+      return expect(signedTransaction).toMatchSnapshot();
+    });
+  });
+});

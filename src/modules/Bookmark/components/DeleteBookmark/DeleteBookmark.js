@@ -1,16 +1,16 @@
-import React from 'react'
-import { View } from 'react-native'
-import { translate } from 'react-i18next'
-import { A, Small } from 'components/shared/toolBox/typography'
-import { Button } from 'components/shared/toolBox/button'
-import withTheme from 'components/shared/withTheme'
-import getStyles from './styles'
+import React from 'react';
+import { View } from 'react-native';
+import { translate } from 'react-i18next';
+import { A, Small } from 'components/shared/toolBox/typography';
+import { Button } from 'components/shared/toolBox/button';
+import withTheme from 'components/shared/withTheme';
+import getStyles from './styles';
 
 const DeleteBookmark = ({ styles, t, close, modalCallback }) => {
   const onConfirm = () => {
-    modalCallback()
-    close()
-  }
+    modalCallback();
+    close();
+  };
 
   return (
     <View style={styles.container}>
@@ -33,7 +33,7 @@ const DeleteBookmark = ({ styles, t, close, modalCallback }) => {
         {t('Cancel')}
       </A>
     </View>
-  )
-}
+  );
+};
 
-export const DeleteBookmarkModal = withTheme(translate()(DeleteBookmark), getStyles())
+export const DeleteBookmarkModal = withTheme(translate()(DeleteBookmark), getStyles());

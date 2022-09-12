@@ -1,16 +1,16 @@
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import i18next from 'i18next'
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import i18next from 'i18next';
 
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication'
-import useSendTokenMutation from '../api/useSendTokenMutation'
-import { mockTokens } from '../__fixtures__'
+import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
+import useSendTokenMutation from '../api/useSendTokenMutation';
+import { mockTokens } from '../__fixtures__';
 
 export default function useSendTokenForm() {
-  const [currentApplication] = useCurrentBlockchainApplication()
+  const [currentApplication] = useCurrentBlockchainApplication();
 
-  const sendTokenMutation = useSendTokenMutation()
+  const sendTokenMutation = useSendTokenMutation();
 
   const defaultValues = {
     senderApplicationChainID: currentApplication.chainID,
@@ -22,7 +22,7 @@ export default function useSendTokenForm() {
     message: '',
     priority: 'low',
     userPassword: '',
-  }
+  };
 
   const validationSchema = yup
     .object({
@@ -42,28 +42,28 @@ export default function useSendTokenForm() {
         .positive(i18next.t('sendToken.errors.amountMustBePositive')),
       priority: yup.string().required(i18next.t('sendToken.errors.priority')),
     })
-    .required()
+    .required();
 
   const { handleSubmit: baseHandleSubmit, ...form } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
-  })
+  });
 
   const handleSubmit = baseHandleSubmit((values) => {
-    console.log({ values })
+    console.log({ values });
 
     // TODO: Handle TX sign here.
-    const transaction = '123lk1j23lk12j3l12kj3'
+    const transaction = '123lk1j23lk12j3l12kj3';
 
-    sendTokenMutation.mutate({ transaction })
-  })
+    sendTokenMutation.mutate({ transaction });
+  });
 
-  const handleReset = () => form.reset(defaultValues)
+  const handleReset = () => form.reset(defaultValues);
 
   return {
     ...form,
     handleSubmit,
     handleReset,
     sendTokenMutation,
-  }
+  };
 }

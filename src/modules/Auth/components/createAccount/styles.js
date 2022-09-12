@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { colors } from 'constants/styleGuide'
+import { StyleSheet } from 'react-native';
+import { colors } from 'constants/styleGuide';
 
 const styles = {
   container: {
@@ -21,6 +21,6 @@ const styles = {
     fontWeight: 'bold',
     textAlign: 'center',
   },
-}
+};
 
-export default StyleSheet.create(styles)
+export default StyleSheet.create(styles);

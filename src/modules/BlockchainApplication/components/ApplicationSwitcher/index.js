@@ -1,14 +1,14 @@
-import React from 'react'
-import { View, Animated, Image, TouchableOpacity } from 'react-native'
-import { useTheme } from 'hooks/useTheme'
-import { P } from 'components/shared/toolBox/typography'
-import ChangeSvg from 'assets/svgs/ChangeSvg'
-import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication'
-import getStyles from './styles'
+import React from 'react';
+import { View, Animated, Image, TouchableOpacity } from 'react-native';
+import { useTheme } from 'hooks/useTheme';
+import { P } from 'components/shared/toolBox/typography';
+import ChangeSvg from 'assets/svgs/ChangeSvg';
+import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
+import getStyles from './styles';
 
 const ApplicationSwitcher = ({ onPress }) => {
-  const { styles } = useTheme({ styles: getStyles })
-  const [currentApplication] = useCurrentBlockchainApplication()
+  const { styles } = useTheme({ styles: getStyles });
+  const [currentApplication] = useCurrentBlockchainApplication();
 
   return (
     <View style={styles.switcherContainer}>
@@ -24,7 +24,7 @@ const ApplicationSwitcher = ({ onPress }) => {
         </View>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
-export default ApplicationSwitcher
+export default ApplicationSwitcher;

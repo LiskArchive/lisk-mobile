@@ -1,13 +1,13 @@
-import React from 'react'
-import { View, TouchableHighlight, FlatList } from 'react-native'
-import connect from 'redux-connect-decorator'
-import { currencyMap, currencyKeys } from 'constants/currencies'
-import { colors } from 'constants/styleGuide'
-import { P } from 'components/shared/toolBox/typography'
-import Icon from 'components/shared/toolBox/icon'
-import withTheme from 'components/shared/withTheme'
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions'
-import getStyles from './styles'
+import React from 'react';
+import { View, TouchableHighlight, FlatList } from 'react-native';
+import connect from 'redux-connect-decorator';
+import { currencyMap, currencyKeys } from 'constants/currencies';
+import { colors } from 'constants/styleGuide';
+import { P } from 'components/shared/toolBox/typography';
+import Icon from 'components/shared/toolBox/icon';
+import withTheme from 'components/shared/withTheme';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
+import getStyles from './styles';
 
 @connect(
   (state) => ({
@@ -18,14 +18,14 @@ import getStyles from './styles'
   }
 )
 class CurrencySelection extends React.Component {
-  onSelect = (currency) => this.props.settingsUpdated({ currency })
+  onSelect = (currency) => this.props.settingsUpdated({ currency });
 
   render() {
     const {
       styles,
       theme,
       settings: { currency },
-    } = this.props
+    } = this.props;
 
     return (
       <View style={[styles.container, styles.theme.container]}>
@@ -55,8 +55,8 @@ class CurrencySelection extends React.Component {
           )}
         />
       </View>
-    )
+    );
   }
 }
 
-export default withTheme(CurrencySelection, getStyles())
+export default withTheme(CurrencySelection, getStyles());

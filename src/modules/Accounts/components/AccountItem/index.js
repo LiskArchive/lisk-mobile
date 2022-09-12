@@ -1,23 +1,23 @@
-import React from 'react'
-import { View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import React from 'react';
+import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { useTheme } from 'hooks/useTheme'
-import Avatar from 'components/shared/avatar'
-import { P } from 'components/shared/toolBox/typography'
-import Swipeable from 'components/shared/Swipeable'
-import Icon from 'components/shared/toolBox/icon'
-import { stringShortener } from 'utilities/helpers'
-import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg'
-import RefreshSvg from 'assets/svgs/RefreshSvg'
-import { colors } from 'constants/styleGuide'
+import { useTheme } from 'hooks/useTheme';
+import Avatar from 'components/shared/avatar';
+import { P } from 'components/shared/toolBox/typography';
+import Swipeable from 'components/shared/Swipeable';
+import Icon from 'components/shared/toolBox/icon';
+import { stringShortener } from 'utilities/helpers';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import RefreshSvg from 'assets/svgs/RefreshSvg';
+import { colors } from 'constants/styleGuide';
 
-import getAccountItemStyles from './styles'
+import getAccountItemStyles from './styles';
 
 export default function AccountItem({ account, onPress, onDeletePress, testID, active }) {
-  const { styles, theme } = useTheme({ styles: getAccountItemStyles() })
+  const { styles, theme } = useTheme({ styles: getAccountItemStyles() });
 
-  const { name: username, address } = account.metadata
+  const { name: username, address } = account.metadata;
 
   return (
     <Swipeable
@@ -62,5 +62,5 @@ export default function AccountItem({ account, onPress, onDeletePress, testID, a
         <View>{active && <CircleCheckedSvg variant="fill" />}</View>
       </TouchableOpacity>
     </Swipeable>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default () => (
   <Svg
@@ -176,4 +176,4 @@ export default () => (
       fill="#254898"
     />
   </Svg>
-)
+);

@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react'
-import { View, Image } from 'react-native'
-import { translate } from 'react-i18next'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { P } from 'components/shared/toolBox/typography'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import HeaderPlaceholderButton from 'components/navigation/headerPlaceholderButton'
-import { useNavigation } from '@react-navigation/native'
-import image from 'assets/images/registrationProcess/success3x.png'
-import styles from './styles'
+import React, { useEffect } from 'react';
+import { View, Image } from 'react-native';
+import { translate } from 'react-i18next';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { P } from 'components/shared/toolBox/typography';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import HeaderPlaceholderButton from 'components/navigation/headerPlaceholderButton';
+import { useNavigation } from '@react-navigation/native';
+import image from 'assets/images/registrationProcess/success3x.png';
+import styles from './styles';
 
 const Success = ({ t, hideNav }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   useEffect(() => {
-    const { setOptions } = navigation
-    hideNav()
+    const { setOptions } = navigation;
+    hideNav();
     setOptions({
       headerLeft: () => <HeaderPlaceholderButton />,
       title: t('Perfect! You’re all set'),
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -48,7 +48,7 @@ const Success = ({ t, hideNav }) => {
         </View>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default translate()(Success)
+export default translate()(Success);

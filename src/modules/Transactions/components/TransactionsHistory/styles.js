@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide'
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default function getTransactionsHistoryStyles() {
   return {
@@ -25,5 +25,5 @@ export default function getTransactionsHistoryStyles() {
         backgroundColor: colors.dark.mainBg,
       },
     },
-  }
+  };
 }

@@ -1,18 +1,18 @@
-import React from 'react'
-import { SafeAreaView } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import i18next from 'i18next'
+import React from 'react';
+import { SafeAreaView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import HeaderBackButton from 'components/navigation/headerBackButton'
-import TransactionList from '../TransactionList'
+import { useTheme } from 'hooks/useTheme';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import TransactionList from '../TransactionList';
 
-import getTransactionsHistoryStyles from './styles'
+import getTransactionsHistoryStyles from './styles';
 
 export default function TransactionsHistory() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
-  const { styles } = useTheme({ styles: getTransactionsHistoryStyles() })
+  const { styles } = useTheme({ styles: getTransactionsHistoryStyles() });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
@@ -24,5 +24,5 @@ export default function TransactionsHistory() {
 
       <TransactionList mode="full" style={{ container: styles.listContainer }} />
     </SafeAreaView>
-  )
+  );
 }

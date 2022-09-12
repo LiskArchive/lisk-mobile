@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default function PrivacySvg({
   color = 'currentColor',
@@ -8,7 +8,7 @@ export default function PrivacySvg({
   style,
   variant = 'outline',
 }) {
-  let children
+  let children;
 
   switch (variant) {
     case 'outline':
@@ -24,8 +24,8 @@ export default function PrivacySvg({
             fill={color}
           />
         </>
-      )
-      break
+      );
+      break;
 
     case 'fill':
       children = (
@@ -35,16 +35,16 @@ export default function PrivacySvg({
           d="M2.85753 1.29105C2.36535 1.3619 2 1.78361 2 2.28085V11.6066C2 13.7033 3.09449 15.6479 4.88687 16.7357L8.96229 19.2093C9.59996 19.5963 10.4 19.5963 11.0377 19.2093L15.1131 16.7357C16.9055 15.6479 18 13.7033 18 11.6066V2.28085C18 1.78361 17.6346 1.3619 17.1425 1.29105L13.2769 0.734634C11.1035 0.421789 8.8965 0.421788 6.7231 0.734634L2.85753 1.29105ZM8.65 8C8.65 7.25442 9.25442 6.65 10 6.65C10.7456 6.65 11.35 7.25442 11.35 8C11.35 8.74558 10.7456 9.35 10 9.35C9.25442 9.35 8.65 8.74558 8.65 8ZM10 5.35C8.53645 5.35 7.35 6.53645 7.35 8C7.35 9.23929 8.2007 10.2799 9.35 10.5697V13.8516C9.35 14.2105 9.64102 14.5016 10 14.5016C10.359 14.5016 10.65 14.2105 10.65 13.8516V10.5697C11.7993 10.2799 12.65 9.23929 12.65 8C12.65 6.53645 11.4636 5.35 10 5.35Z"
           fill={color}
         />
-      )
-      break
+      );
+      break;
 
     default:
-      break
+      break;
   }
 
   return (
     <Svg width={width} height={height} viewBox="0 0 20 20" fill="none" style={style}>
       {children}
     </Svg>
-  )
+  );
 }

@@ -1,10 +1,10 @@
 /* eslint-disable complexity */
-import React from 'react'
-import { Svg, Path, Mask, G, Rect, Defs, Use, Pattern, Image } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path, Mask, G, Rect, Defs, Use, Pattern, Image } from 'react-native-svg';
 
 export default function TokenSvg({ height = 24, width = 24, style, symbol = 'LSK' }) {
-  let children
-  let viewBox = '0 0 24 24'
+  let children;
+  let viewBox = '0 0 24 24';
 
   switch (symbol) {
     case 'LSK':
@@ -21,8 +21,8 @@ export default function TokenSvg({ height = 24, width = 24, style, symbol = 'LSK
             fill="white"
           />
         </>
-      )
-      break
+      );
+      break;
 
     case 'COL':
       children = (
@@ -56,11 +56,11 @@ export default function TokenSvg({ height = 24, width = 24, style, symbol = 'LSK
             />
           </Defs>
         </>
-      )
-      break
+      );
+      break;
 
     case 'TKN':
-      viewBox = '0 0 25 24'
+      viewBox = '0 0 25 24';
       children = (
         <>
           <Mask id="mask0_76_12070" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
@@ -84,8 +84,8 @@ export default function TokenSvg({ height = 24, width = 24, style, symbol = 'LSK
             />
           </Defs>
         </>
-      )
-      break
+      );
+      break;
 
     case 'DOE':
       children = (
@@ -127,16 +127,16 @@ export default function TokenSvg({ height = 24, width = 24, style, symbol = 'LSK
             />
           </Defs>
         </>
-      )
-      break
+      );
+      break;
 
     default:
-      break
+      break;
   }
 
   return (
     <Svg width={width} height={height} viewBox={viewBox} fill="none" style={style}>
       {children}
     </Svg>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 /* eslint-disable max-len */
-import { fromRawLsk } from 'utilities/conversions'
-import { getTransactionFee } from '../../utils'
+import { fromRawLsk } from 'utilities/conversions';
+import { getTransactionFee } from '../../utils';
 
 /**
  *
@@ -18,9 +18,9 @@ export const calculateMinimumFee = ({ account, transaction, selectedPriority }) 
     transaction,
     selectedPriority,
     selectedPriorityIndex: 0,
-  })
-  return minFee
-}
+  });
+  return minFee;
+};
 
 /**
  *
@@ -36,9 +36,9 @@ export const calculateMaximumFeeAmount = ({ account, transaction, ...params }) =
     ...params,
     account,
     transaction: { transaction, amount: fromRawLsk(account.balance) },
-  })
-  return maxAmountFee
-}
+  });
+  return maxAmountFee;
+};
 
 /**
  *
@@ -54,23 +54,23 @@ export const calculateTransactionFees = ({ account, selectedPriority, transactio
     account,
     transaction,
     selectedPriority,
-  })
+  });
   const maxFee = calculateMaximumFeeAmount({
     account,
     transaction,
     selectedPriority,
-  })
+  });
   const fee = getTransactionFee({
     account,
     selectedPriority,
     transaction,
-  })
+  });
 
   if (fee.value < minFee.value) {
-    return minFee
+    return minFee;
   }
   if (fee.value > maxFee.value) {
-    return maxFee
+    return maxFee;
   }
-  return fee
-}
+  return fee;
+};

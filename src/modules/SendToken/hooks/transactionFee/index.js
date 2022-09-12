@@ -1,1 +1,1 @@
-export * from './transactionFeeCalculation'
+export * from './transactionFeeCalculation';

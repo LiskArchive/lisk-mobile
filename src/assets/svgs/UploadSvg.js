@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, Path } from 'react-native-svg'
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
 
 export default ({ size = 1 }) => (
   <Svg
@@ -22,4 +22,4 @@ export default ({ size = 1 }) => (
       stroke-linejoin="round"
     />
   </Svg>
-)
+);

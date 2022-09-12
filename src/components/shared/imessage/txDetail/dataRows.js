@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react'
-import { View, Image } from 'react-native'
-import { fromRawLsk } from 'utilities/conversions'
-import { isTransfer, getTxConstant } from 'modules/SendToken/constants'
-import { colors, themes } from 'constants/styleGuide'
-import arrowLight from 'assets/images/txDetail/arrow-light2x.png'
-import arrowDark from 'assets/images/txDetail/arrow-dark2x.png'
-import FormattedDate from '../../formattedDate'
-import FormattedNumber from '../../formattedNumber'
-import { B, P, H1, H3, A } from '../../toolBox/typography'
-import Icon from '../../toolBox/icon'
-import Avatar from '../../avatar'
+import React, { Fragment } from 'react';
+import { View, Image } from 'react-native';
+import { fromRawLsk } from 'utilities/conversions';
+import { isTransfer, getTxConstant } from 'modules/SendToken/constants';
+import { colors, themes } from 'constants/styleGuide';
+import arrowLight from 'assets/images/txDetail/arrow-light2x.png';
+import arrowDark from 'assets/images/txDetail/arrow-dark2x.png';
+import FormattedDate from '../../formattedDate';
+import FormattedNumber from '../../formattedNumber';
+import { B, P, H1, H3, A } from '../../toolBox/typography';
+import Icon from '../../toolBox/icon';
+import Avatar from '../../avatar';
 
 export const TimeStamp = ({ timestamp, styles, format = 'MMM D, YYYY LTS' }) => {
   if (timestamp) {
@@ -17,11 +17,11 @@ export const TimeStamp = ({ timestamp, styles, format = 'MMM D, YYYY LTS' }) => 
       <FormattedDate format={format} type={P} style={[styles.date, styles.theme.date]}>
         {timestamp}
       </FormattedDate>
-    )
+    );
   }
 
-  return null
-}
+  return null;
+};
 
 export const TxAmount = ({ config, tx, language }) => {
   if (isTransfer(tx) && tx.recipientAddress !== tx.senderAddress) {
@@ -32,11 +32,11 @@ export const TxAmount = ({ config, tx, language }) => {
           {tx.notRawLisk ? tx.amount : fromRawLsk(tx.amount)}
         </FormattedNumber>
       </H1>
-    )
+    );
   }
 
-  return null
-}
+  return null;
+};
 
 export const Sender = ({ styles, tx }) => (
   <View style={[styles.detailRow, styles.theme.detailRow]}>
@@ -59,11 +59,11 @@ export const Sender = ({ styles, tx }) => (
       </View>
     </View>
   </View>
-)
+);
 
 export const Recipient = ({ styles, tx }) => {
   if (tx.type !== 0 || tx.recipientAddress === tx.senderAddress) {
-    return null
+    return null;
   }
   return (
     <View style={[styles.detailRow, styles.theme.detailRow]}>
@@ -80,8 +80,8 @@ export const Recipient = ({ styles, tx }) => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 export const Reference = ({ tx, styles }) => {
   if (tx.asset && tx.asset.data) {
@@ -93,11 +93,11 @@ export const Reference = ({ tx, styles }) => {
           <B style={[styles.value, styles.theme.value, styles.referenceValue]}>{tx.asset.data}</B>
         </View>
       </View>
-    )
+    );
   }
 
-  return null
-}
+  return null;
+};
 
 export const Graphics = ({ styles, theme, config }) => (
   <View style={styles.row}>
@@ -109,15 +109,15 @@ export const Graphics = ({ styles, theme, config }) => (
     )}
     <Avatar address={config.secondAddress} size={50} />
   </View>
-)
+);
 
 export const TxTitle = ({ tx, config }) => {
   if (!isTransfer(tx) || tx.recipientAddress === tx.senderAddress) {
-    return <H3 style={config.amountStyle}>{getTxConstant(tx).title}</H3>
+    return <H3 style={config.amountStyle}>{getTxConstant(tx).title}</H3>;
   }
 
-  return null
-}
+  return null;
+};
 
 export const Confirmations = ({ styles, tx }) => (
   <View style={[styles.detailRow, styles.theme.detailRow]}>
@@ -127,4 +127,4 @@ export const Confirmations = ({ styles, tx }) => (
       <B style={[styles.value, styles.theme.value]}>{tx.confirmations || 'Not confirmed yet.'}</B>
     </View>
   </View>
-)
+);

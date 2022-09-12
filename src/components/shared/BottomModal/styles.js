@@ -1,5 +1,5 @@
-import { themes, colors } from 'constants/styleGuide'
-import { deviceWidth } from 'utilities/device'
+import { themes, colors } from 'constants/styleGuide';
+import { deviceWidth } from 'utilities/device';
 
 export default () => ({
   common: {
@@ -50,4 +50,4 @@ export default () => ({
       backgroundColor: colors.dark.volcanicSand,
     },
   },
-})
+});

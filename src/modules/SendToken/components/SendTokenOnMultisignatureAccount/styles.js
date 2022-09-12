@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide'
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 export function getSendTokenOnMultisignatureAccountStyles() {
   return {
@@ -38,5 +38,5 @@ export function getSendTokenOnMultisignatureAccountStyles() {
         color: colors.light.white,
       },
     },
-  }
+  };
 }

@@ -1,4 +1,4 @@
-import { themes, fonts, colors, boxes } from 'constants/styleGuide'
+import { themes, fonts, colors, boxes } from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -65,4 +65,4 @@ export default () => ({
       color: colors.light.white,
     },
   },
-})
+});

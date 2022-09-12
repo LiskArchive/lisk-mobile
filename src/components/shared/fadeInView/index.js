@@ -1,15 +1,15 @@
-import React, { useRef } from 'react'
-import { Animated } from 'react-native'
+import React, { useRef } from 'react';
+import { Animated } from 'react-native';
 
 const FadeInView = (props) => {
-  const fadeAnim = useRef(new Animated.Value(0)).current // Initial value for opacity: 0
+  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
 
   React.useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 1000,
-    }).start()
-  }, [fadeAnim])
+    }).start();
+  }, [fadeAnim]);
 
   return (
     <Animated.View // Special animatable View
@@ -20,7 +20,7 @@ const FadeInView = (props) => {
     >
       {props.children}
     </Animated.View>
-  )
-}
+  );
+};
 
-export default FadeInView
+export default FadeInView;

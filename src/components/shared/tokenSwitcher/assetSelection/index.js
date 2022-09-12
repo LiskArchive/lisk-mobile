@@ -1,16 +1,16 @@
-import React from 'react'
-import { View, FlatList, TouchableHighlight } from 'react-native'
-import connect from 'redux-connect-decorator'
-import { B, Small } from 'components/shared/toolBox/typography'
-import Icon from 'components/shared/toolBox/icon'
-import { tokenMap, tokenKeys } from 'constants/tokens'
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions'
-import { colors } from 'constants/styleGuide'
-import withTheme from 'components/shared/withTheme'
-import FormatedNumber from 'components/shared/formattedNumber'
-import { fromRawLsk } from 'utilities/conversions'
-import ModalHolder from 'utilities/modal'
-import getStyles from './styles'
+import React from 'react';
+import { View, FlatList, TouchableHighlight } from 'react-native';
+import connect from 'redux-connect-decorator';
+import { B, Small } from 'components/shared/toolBox/typography';
+import Icon from 'components/shared/toolBox/icon';
+import { tokenMap, tokenKeys } from 'constants/tokens';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
+import { colors } from 'constants/styleGuide';
+import withTheme from 'components/shared/withTheme';
+import FormatedNumber from 'components/shared/formattedNumber';
+import { fromRawLsk } from 'utilities/conversions';
+import ModalHolder from 'utilities/modal';
+import getStyles from './styles';
 
 @connect(
   (state) => ({
@@ -26,16 +26,16 @@ class AssetSelection extends React.Component {
     const {
       settings: { token },
       settingsUpdated,
-    } = this.props
+    } = this.props;
     const updatedTokens = {
       list: token.list,
       active: value,
-    }
+    };
     settingsUpdated({
       token: updatedTokens,
-    })
-    ModalHolder.close()
-  }
+    });
+    ModalHolder.close();
+  };
 
   render() {
     const {
@@ -43,7 +43,7 @@ class AssetSelection extends React.Component {
       theme,
       settings: { token },
       accounts,
-    } = this.props
+    } = this.props;
     return (
       <View style={[styles.container, styles.theme.container]}>
         <FlatList
@@ -92,8 +92,8 @@ class AssetSelection extends React.Component {
           )}
         />
       </View>
-    )
+    );
   }
 }
 
-export default withTheme(AssetSelection, getStyles())
+export default withTheme(AssetSelection, getStyles());

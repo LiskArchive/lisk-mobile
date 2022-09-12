@@ -1,7 +1,7 @@
-import { Dimensions } from 'react-native'
-import { themes, colors, boxes } from 'constants/styleGuide'
+import { Dimensions } from 'react-native';
+import { themes, colors, boxes } from 'constants/styleGuide';
 
-const { height } = Dimensions.get('screen')
+const { height } = Dimensions.get('screen');
 
 export default () => ({
   common: {
@@ -41,4 +41,4 @@ export default () => ({
       color: colors.light.whiteSmoke,
     },
   },
-})
+});

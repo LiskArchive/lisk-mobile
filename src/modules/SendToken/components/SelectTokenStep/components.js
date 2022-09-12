@@ -1,50 +1,50 @@
 /* eslint-disable max-lines, max-statements */
-import React, { useMemo, useState } from 'react'
-import { Text, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import i18next from 'i18next'
+import React, { useMemo, useState } from 'react';
+import { Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo'
-import Input from 'components/shared/toolBox/input'
-import Picker from 'components/shared/Picker'
-import { LabelButton } from 'components/shared/toolBox/button'
-import InfiniteScrollList from 'components/shared/InfiniteScrollList'
-import { P } from 'components/shared/toolBox/typography'
-import InfoToggler from 'components/shared/InfoToggler'
-import FadeInView from 'components/shared/fadeInView'
-import { fromRawLsk } from 'utilities/conversions'
-import TokenSvg from 'assets/svgs/TokenSvg'
-import DeleteSvg from 'assets/svgs/DeleteSvg'
-import colors from 'constants/styleGuide/colors'
-import { PRIORITY_NAMES_MAP } from '../../constants'
-import useTransactionPriorities from '../../hooks/useTransactionPriorities'
-import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator'
-import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator'
-import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator'
+import { useTheme } from 'hooks/useTheme';
+import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
+import Input from 'components/shared/toolBox/input';
+import Picker from 'components/shared/Picker';
+import { LabelButton } from 'components/shared/toolBox/button';
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import { P } from 'components/shared/toolBox/typography';
+import InfoToggler from 'components/shared/InfoToggler';
+import FadeInView from 'components/shared/fadeInView';
+import { fromRawLsk } from 'utilities/conversions';
+import TokenSvg from 'assets/svgs/TokenSvg';
+import DeleteSvg from 'assets/svgs/DeleteSvg';
+import colors from 'constants/styleGuide/colors';
+import { PRIORITY_NAMES_MAP } from '../../constants';
+import useTransactionPriorities from '../../hooks/useTransactionPriorities';
+import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
+import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
+import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
-import { useTokenAmountInCurrency } from './hooks'
+import { useTokenAmountInCurrency } from './hooks';
 import getSendTokenSelectTokenStepStyles, {
   getSendTokenAmountFieldStyles,
   getSendTokenMessageFieldStyles,
-} from './styles'
-import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount'
-import { useGetTokensQuery } from '../../api/useGetTokensQuery'
+} from './styles';
+import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount';
+import { useGetTokensQuery } from '../../api/useGetTokensQuery';
 
 export function TokenSelectField({ value, onChange, errorMessage, style }) {
-  const [currentAccount] = useCurrentAccount()
+  const [currentAccount] = useCurrentAccount();
 
-  const currentAccountInfo = useAccountInfo()
+  const currentAccountInfo = useAccountInfo();
 
-  const tokens = useGetTokensQuery(currentAccount.metadata.address)
+  const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
-  })
+  });
 
-  const normalizedBalance = fromRawLsk(currentAccountInfo.summary.balance)
+  const normalizedBalance = fromRawLsk(currentAccountInfo.summary.balance);
 
-  const selectedToken = tokens.data?.find((token) => token.tokenID === value)
+  const selectedToken = tokens.data?.find((token) => token.tokenID === value);
 
   return (
     <Picker value={value} onChange={onChange} error={errorMessage}>
@@ -94,24 +94,24 @@ export function TokenSelectField({ value, onChange, errorMessage, style }) {
         />
       </Picker.Menu>
     </Picker>
-  )
+  );
 }
 
 export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, style }) {
-  const [currentAccount] = useCurrentAccount()
+  const [currentAccount] = useCurrentAccount();
 
-  const tokens = useGetTokensQuery(currentAccount.metadata.address)
+  const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
-  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID)
+  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
 
   const tokenAmountInCurrency = useTokenAmountInCurrency({
     tokenAmount: value,
     tokenSymbol: selectedToken?.symbol,
-  })
+  });
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
-  })
+  });
 
   return (
     <Input
@@ -143,19 +143,19 @@ export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, s
       }}
       innerStyles={getSendTokenAmountFieldStyles(style)}
     />
-  )
+  );
 }
 
 export function SendTokenMessageField({ value, onChange, style }) {
-  const [showInput, setShowInput] = useState(false)
+  const [showInput, setShowInput] = useState(false);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
-  })
+  });
 
   function handleRemove() {
-    setShowInput(false)
-    onChange('')
+    setShowInput(false);
+    onChange('');
   }
 
   if (!showInput) {
@@ -167,7 +167,7 @@ export function SendTokenMessageField({ value, onChange, style }) {
       >
         {i18next.t('sendToken.tokenSelect.messageFieldTriggerButtonText')}
       </LabelButton>
-    )
+    );
   }
 
   return (
@@ -201,7 +201,7 @@ export function SendTokenMessageField({ value, onChange, style }) {
         innerStyles={getSendTokenMessageFieldStyles(style)}
       />
     </FadeInView>
-  )
+  );
 }
 
 export function SendTokenPriorityField({ value, onChange, style }) {
@@ -209,18 +209,18 @@ export function SendTokenPriorityField({ value, onChange, style }) {
     data: prioritiesData,
     isLoading: isLoadingPrioritiesData,
     error: errorOnPriorities,
-  } = useTransactionPriorities()
+  } = useTransactionPriorities();
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
-  })
+  });
 
   const shouldShowPrioritiesData = useMemo(
     () => prioritiesData && prioritiesData[0]?.fee,
     [prioritiesData]
-  )
+  );
 
-  if (!shouldShowPrioritiesData) return null
+  if (!shouldShowPrioritiesData) return null;
 
   if (isLoadingPrioritiesData) {
     return (
@@ -231,7 +231,7 @@ export function SendTokenPriorityField({ value, onChange, style }) {
 
         <Text>{i18next.t('sendToken.tokenSelect.loadingPrioritiesText')}</Text>
       </View>
-    )
+    );
   }
 
   if (errorOnPriorities) {
@@ -243,7 +243,7 @@ export function SendTokenPriorityField({ value, onChange, style }) {
 
         <Text>{i18next.t('sendToken.tokenSelect.errorLoadingPrioritiesText')}</Text>
       </View>
-    )
+    );
   }
 
   return (
@@ -283,7 +283,7 @@ export function SendTokenPriorityField({ value, onChange, style }) {
         ))}
       </View>
     </View>
-  )
+  );
 }
 
 export function SendTokenTransactionFeesLabels({
@@ -295,32 +295,32 @@ export function SendTokenTransactionFeesLabels({
   senderApplicationChainID,
   recipientApplicationChainID,
 }) {
-  const [currentAccount] = useCurrentAccount()
+  const [currentAccount] = useCurrentAccount();
 
-  const tokens = useGetTokensQuery(currentAccount.metadata.address)
+  const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
-  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID)
+  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
 
   const transactionFee = useTransactionFeeCalculator({
     tokenID,
     amount,
     priority,
     message,
-  })
+  });
 
   const initializationFee = useInitializationFeeCalculator({
     tokenID,
     recipientAccountAddress,
-  })
+  });
 
   const cmmFee = useCCMFeeCalculator({
     senderApplicationChainID,
     recipientApplicationChainID,
-  })
+  });
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
-  })
+  });
 
   return (
     <View>
@@ -387,5 +387,5 @@ export function SendTokenTransactionFeesLabels({
         )}
       </View>
     </View>
-  )
+  );
 }

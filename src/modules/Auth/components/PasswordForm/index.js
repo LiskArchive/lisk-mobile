@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import { View } from 'react-native'
-import { translate } from 'react-i18next'
-import withTheme from 'components/shared/withTheme'
-import Avatar from 'components/shared/avatar'
-import Input from 'components/shared/toolBox/input'
-import { P } from 'components/shared/toolBox/typography'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import { colors, themes } from 'constants/styleGuide'
-import getStyles from './styles'
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { translate } from 'react-i18next';
+import withTheme from 'components/shared/withTheme';
+import Avatar from 'components/shared/avatar';
+import Input from 'components/shared/toolBox/input';
+import { P } from 'components/shared/toolBox/typography';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import { colors, themes } from 'constants/styleGuide';
+import getStyles from './styles';
 
 const PasswordForm = ({ address, styles, onPress, testID, t, theme, onSubmit }) => {
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.container} onPress={onPress} testID={testID}>
       <View style={styles.content}>
@@ -38,7 +38,7 @@ const PasswordForm = ({ address, styles, onPress, testID, t, theme, onSubmit }) 
         onPress={() => onSubmit(password)}
       />
     </View>
-  )
-}
+  );
+};
 
-export default withTheme(translate()(PasswordForm), getStyles())
+export default withTheme(translate()(PasswordForm), getStyles());

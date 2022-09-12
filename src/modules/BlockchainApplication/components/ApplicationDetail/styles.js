@@ -1,9 +1,9 @@
-import { themes, colors, boxes, fonts } from 'constants/styleGuide'
-import { deviceType } from 'utilities/device'
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
 
-const type = deviceType()
+const type = deviceType();
 
-const safeAreaMarginTop = type === 'iOSx' ? 45 : 20
+const safeAreaMarginTop = type === 'iOSx' ? 45 : 20;
 
 export default {
   common: {
@@ -151,4 +151,4 @@ export default {
       color: colors.light.white,
     },
   },
-}
+};

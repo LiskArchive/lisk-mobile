@@ -1,17 +1,17 @@
-import React from 'react'
-import { View, TouchableOpacity, Linking } from 'react-native'
-import i18next from 'i18next'
+import React from 'react';
+import { View, TouchableOpacity, Linking } from 'react-native';
+import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme'
-import { B, P } from 'components/shared/toolBox/typography'
-import SendLSKIllustrationSvg from 'assets/svgs/SendLSKIllustrationSvg'
+import { useTheme } from 'hooks/useTheme';
+import { B, P } from 'components/shared/toolBox/typography';
+import SendLSKIllustrationSvg from 'assets/svgs/SendLSKIllustrationSvg';
 
-import { getSendTokenOnMultisignatureAccountStyles } from './styles'
+import { getSendTokenOnMultisignatureAccountStyles } from './styles';
 
 export default function SendTokenOnMultisignatureAccount() {
   const { styles } = useTheme({
     styles: getSendTokenOnMultisignatureAccountStyles(),
-  })
+  });
 
   return (
     <View style={[styles.container]}>
@@ -28,5 +28,5 @@ export default function SendTokenOnMultisignatureAccount() {
         </B>
       </TouchableOpacity>
     </View>
-  )
+  );
 }

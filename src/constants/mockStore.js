@@ -1,4 +1,4 @@
-import { tokenMap } from './tokens'
+import { tokenMap } from './tokens';
 
 const data = {
   activeToken: tokenMap.LSK.key,
@@ -79,6 +79,6 @@ const data = {
       count: 3,
     },
   },
-}
+};
 
-export default data
+export default data;

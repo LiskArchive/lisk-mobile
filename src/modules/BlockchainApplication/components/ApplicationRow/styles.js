@@ -1,4 +1,4 @@
-import { themes, colors, fonts } from 'constants/styleGuide'
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getBlockchainApplicationRowStyles() {
   return {
@@ -59,5 +59,5 @@ export default function getBlockchainApplicationRowStyles() {
         color: colors.light.platinum,
       },
     },
-  }
+  };
 }

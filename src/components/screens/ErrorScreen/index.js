@@ -1,11 +1,11 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from 'react';
+import { View, Text } from 'react-native';
 
-import { useTheme } from 'hooks/useTheme'
-import { PrimaryButton } from 'components/shared/toolBox/button'
-import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg'
+import { useTheme } from 'hooks/useTheme';
+import { PrimaryButton } from 'components/shared/toolBox/button';
+import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 
-import getErrorScreenStyles from './styles'
+import getErrorScreenStyles from './styles';
 
 export default function ErrorScreen({
   title,
@@ -18,7 +18,7 @@ export default function ErrorScreen({
 }) {
   const { styles } = useTheme({
     styles: getErrorScreenStyles(),
-  })
+  });
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper, baseStyles?.wrapper]}>
@@ -48,5 +48,5 @@ export default function ErrorScreen({
         disabled={disabled}
       />
     </View>
-  )
+  );
 }

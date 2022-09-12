@@ -1,4 +1,4 @@
-import { colors, themes, boxes } from 'constants/styleGuide'
+import { colors, themes, boxes } from 'constants/styleGuide';
 
 export default function getAccountsManagerScreenStyles() {
   return {
@@ -23,5 +23,5 @@ export default function getAccountsManagerScreenStyles() {
         backgroundColor: colors.dark.black,
       },
     },
-  }
+  };
 }

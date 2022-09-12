@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import { Text, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import React, { useState } from 'react';
+import { Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { useTheme } from 'hooks/useTheme'
-import InfoSvg from 'assets/svgs/InfoSvg'
-import BottomModal from '../BottomModal'
+import { useTheme } from 'hooks/useTheme';
+import InfoSvg from 'assets/svgs/InfoSvg';
+import BottomModal from '../BottomModal';
 
-import getInfoTogglerStyles from './styles'
+import getInfoTogglerStyles from './styles';
 
 export default function InfoToggler({ title, description, style }) {
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const { styles } = useTheme({
     styles: getInfoTogglerStyles(),
-  })
+  });
 
   return (
     <>
@@ -57,5 +57,5 @@ export default function InfoToggler({ title, description, style }) {
         </View>
       </BottomModal>
     </>
-  )
+  );
 }

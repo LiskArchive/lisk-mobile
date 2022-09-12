@@ -28,4 +28,4 @@ export const mockSavedAccounts = [
     uuid: 'ef52c117-d7cc-4246-bc9d-4dd506bef82f',
     version: 1,
   },
-]
+];
