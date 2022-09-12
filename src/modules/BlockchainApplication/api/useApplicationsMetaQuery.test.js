@@ -30,9 +30,8 @@ describe('useApplicationsMetaQuery hook', () => {
         <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
       </QueryClientProvider>
     );
-    const
-      { result, waitFor } = renderHook(() =>
-        useApplicationsMetaQuery(), { wrapper });
+    const { result, waitFor } = renderHook(() =>
+      useApplicationsMetaQuery(), { wrapper });
 
     await waitFor(() => result.current.isFetched);
 

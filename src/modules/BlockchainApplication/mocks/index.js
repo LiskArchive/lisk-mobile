@@ -5,7 +5,7 @@ import { LIMIT, API_VERSION } from 'utilities/api/constants';
 import { mockApplications } from '../__fixtures__';
 
 export const getApplicationsMockHandler = rest.get(
-  `*/api/${API_VERSION}/blockchain/apps`,
+  `*/api/${API_VERSION}/blockchain/apps/meta`,
   async (req, res, ctx) => {
     const limit = Number(req.url.searchParams.get('limit' || LIMIT));
     const offset = Number(req.url.searchParams.get('offset') || 0);
