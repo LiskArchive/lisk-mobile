@@ -10,7 +10,7 @@ import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalc
 import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
 export function useSendTokenSummary({ form }) {
-  const { applications } = useBlockchainApplicationExplorer();
+  const { applicationsMetadata } = useBlockchainApplicationExplorer();
 
   const [currentAccount] = useCurrentAccount();
 
@@ -26,11 +26,11 @@ export function useSendTokenSummary({ form }) {
   const message = form.watch('message');
   const priority = form.watch('priority');
 
-  const senderApplication = applications.data?.find(
+  const senderApplication = applicationsMetadata.data?.find(
     application => application.chainID === senderApplicationChainID
   );
 
-  const recipientApplication = applications.data?.find(
+  const recipientApplication = applicationsMetadata.data?.find(
     application => application.chainID === recipientApplicationChainID
   );
 

@@ -5,6 +5,13 @@ import { themes, colors } from 'constants/styleGuide';
 export default function getBlockchainApplicationsExplorerStyles() {
   return {
     common: {
+      header: {
+        marginBottom: 24
+      },
+      applicationsListContainer: {
+        paddingLeft: 16,
+        paddingRight: 16
+      },
       message: {
         padding: 20
       },

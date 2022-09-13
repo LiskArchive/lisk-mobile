@@ -14,8 +14,8 @@ export default function useSendTokenMutation(options = {}) {
 
   function handleSendToken(variables) {
     const config = {
-      baseURL: currentBlockchainApplication?.apis[0][METHOD]
-        ?? currentBlockchainApplication?.apis[0].rest,
+      baseURL: currentBlockchainApplication?.serviceURLs[0][METHOD]
+        ?? currentBlockchainApplication?.serviceURLs[0].http,
       path: `/api/${API_VERSION}/transactions`,
       method: 'post',
       params: { limit: LIMIT, ...variables },

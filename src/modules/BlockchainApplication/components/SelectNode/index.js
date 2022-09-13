@@ -14,28 +14,28 @@ const SelectNode = ({ application, onPress }) => {
 
   const {
     name,
-    apis,
-    images,
+    serviceURLs,
+    logo,
   } = application;
 
   return (
     <View style={styles.container} >
       <View style={styles.titleHolder}>
         <View style={styles.row}>
-          <Image source={{ uri: images?.logo.png }} style={styles.logo} />
+          <Image source={{ uri: logo.png }} style={styles.logo} />
           <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
         </View>
       </View>
       <FlatList
-        data={apis}
-        keyExtractor={(item) => item.rest}
+        data={serviceURLs}
+        keyExtractor={(item) => item.http}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.urlContainer}
             onPress={() => onPress(item)}
             key={item}
           >
-            <P style={styles.url}>{item.rest}</P>
+            <P style={styles.url}>{item.http}</P>
             <CaretSvg direction={'left'} color={colors.light.ultramarineBlue} />
           </TouchableOpacity>
         )}

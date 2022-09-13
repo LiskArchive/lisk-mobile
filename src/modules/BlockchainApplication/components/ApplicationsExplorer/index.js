@@ -26,7 +26,7 @@ import getBlockchainApplicationsExplorerStyles from './styles';
 function BlockchainApplicationsExplorer({ t, navigation }) {
   const [showStatsModal, setShowStatsModal] = useState(false);
 
-  const { applications } = useBlockchainApplicationExplorer();
+  const { applicationsMetadata } = useBlockchainApplicationExplorer();
   const { data } = useBlockchainApplicationStats();
 
   const { theme, styles } = useTheme({
@@ -34,7 +34,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
   });
 
   const renderData = () => {
-    if (applications.isLoading) {
+    if (applicationsMetadata.isLoading) {
       return (
         <P style={[styles.message, styles.theme.message]}>
           {t('application.explore.applicationList.loadingText')}
@@ -42,7 +42,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
       );
     }
 
-    if (applications.isError) {
+    if (applicationsMetadata.isError) {
       return (
         <P style={[styles.message, styles.theme.message]}>
           {t('application.explore.applicationList.errorText')}
@@ -50,7 +50,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
       );
     }
 
-    if (applications.data?.length === 0) {
+    if (applicationsMetadata.data?.length === 0) {
       return (
         <P style={[styles.message, styles.theme.message]}>
           {t('application.explore.applicationList.emptyText')}
@@ -59,7 +59,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
     }
     return (
       <ApplicationList
-        applications={applications}
+        applications={applicationsMetadata}
         Component={BlockchainApplicationRow}
         onItemPress={(item) =>
           navigation.navigate('ApplicationDetail', {
@@ -70,6 +70,7 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         showCaret
         variant="explore"
         navigation={navigation}
+        style={{ container: styles.applicationsListContainer }}
       />
     );
   };
@@ -92,10 +93,10 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
               style={styles.statsButton}
             />
           )}
+          titleStyle={[styles.header]}
         />
 
         {renderData()}
-
       </NavigationSafeAreaView>
 
       <BottomModal

@@ -56,11 +56,11 @@ export function SendTokenSenderApplicationField({
         {senderApplication && (
           <View style={[styles.row]}>
             <Text style={[styles.text, styles.theme.text]}>
-              {senderApplication.name}
+              {senderApplication.chainName}
             </Text>
 
             <Image
-              source={{ uri: senderApplication.images.logo.png }}
+              source={{ uri: senderApplication.logo.png }}
               style={[styles.applicationLogoImage]}
             />
           </View>
@@ -105,11 +105,11 @@ export function SendTokenRecipientApplicationField({
         {recipientApplication && (
           <View style={[styles.row]}>
             <Text style={[styles.text, styles.theme.text]}>
-              {recipientApplication.name}
+              {recipientApplication.chainName}
             </Text>
 
             <Image
-              source={{ uri: recipientApplication.images.logo.png }}
+              source={{ uri: recipientApplication.logo.png }}
               style={[styles.applicationLogoImage]}
             />
           </View>
@@ -126,11 +126,11 @@ export function SendTokenRecipientApplicationField({
               value={item.chainID}
             >
               <Text style={[styles.text, styles.theme.text]}>
-                {item.name}
+                {item.chainName}
               </Text>
 
               <Image
-                source={{ uri: item.images.logo.png }}
+                source={{ uri: item.logo.png }}
                 style={[styles.applicationLogoImage]}
               />
             </Picker.Item>

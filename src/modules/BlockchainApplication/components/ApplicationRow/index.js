@@ -59,12 +59,12 @@ function BlockchainApplicationRow({
         <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
           <View style={styles.applicationNameContainer}>
             <Image
-              source={{ uri: application.images.logo.png }}
+              source={{ uri: application.logo.png }}
               style={{ ...styles.applicationLogoImage }}
             />
 
             <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-              {application.name}
+              {application.chainName}
             </P>
           </View>
 

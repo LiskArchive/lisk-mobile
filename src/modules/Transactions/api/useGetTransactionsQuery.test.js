@@ -5,7 +5,7 @@ import configureMockStore from 'redux-mock-store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import * as useCurrentAccount from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
-import { mockApplications, mockMappedApplications } from 'modules/BlockchainApplication/__fixtures__';
+import { mockApplicationsMeta, mockMappedApplicationsMeta } from 'modules/BlockchainApplication/__fixtures__';
 import { mockSavedAccounts } from 'modules/Accounts/__fixtures__';
 import { mockGetTransactionsQuery } from '../__fixtures__';
 import { useGetTransactionsQuery } from './useGetTransactionsQuery';
@@ -17,8 +17,8 @@ const mockStore = configureMockStore();
 const mockDispatch = jest.fn();
 const mockState = {
   blockchainApplications: {
-    current: mockApplications[0],
-    applications: mockMappedApplications,
+    current: mockApplicationsMeta[0],
+    applications: mockMappedApplicationsMeta,
     pins: [],
   },
 };

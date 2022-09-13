@@ -16,7 +16,7 @@ import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
 import SelectNode from '../SelectNode';
 
-const ManageApplication = ({ closeModal, nextStep }) => {
+const ManageApplication = ({ closeModal, nextStep, style }) => {
   const navigation = useNavigation();
   const { applications } = useBlockchainApplicationManagement();
   const [, setApplication] = useCurrentBlockchainApplication();
@@ -44,11 +44,11 @@ const ManageApplication = ({ closeModal, nextStep }) => {
   };
 
   const selectApplication = (acc) => {
-    if (acc.apis.length > 1) {
+    if (acc.serviceURLs.length > 1) {
       setSelectedApplication(acc);
       toggleModal(true);
     } else {
-      switchApplication({ ...acc, serviceURL: acc.apis[0] });
+      switchApplication({ ...acc, serviceURL: acc.serviceURLs[0] });
     }
   };
 
@@ -57,8 +57,11 @@ const ManageApplication = ({ closeModal, nextStep }) => {
   };
 
   return (
-    <View style={[styles.wrapper, styles.theme.wrapper]}>
-      <H3>{i18next.t('application.title.switchApplication')}</H3>
+    <View style={[styles.container, styles.theme.container, style?.container]}>
+      <H3 style={[styles.title, style?.title]}>
+        {i18next.t('application.title.switchApplication')}
+      </H3>
+
       <ApplicationList
         applications={applications}
         Component={BlockchainApplicationRow}

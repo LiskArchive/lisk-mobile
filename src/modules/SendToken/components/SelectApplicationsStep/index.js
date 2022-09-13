@@ -15,7 +15,7 @@ export default function SendTokenSelectApplicationsStep({
   nextStep,
   form
 }) {
-  const { applications } = useBlockchainApplicationExplorer();
+  const { applicationsMetadata } = useBlockchainApplicationExplorer();
 
   const { field: senderApplicationChainIDField } = useController({
     name: 'senderApplicationChainID',
@@ -41,7 +41,7 @@ export default function SendTokenSelectApplicationsStep({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  if (applications.isLoading) {
+  if (applicationsMetadata.isLoading) {
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={[styles.container]}>
@@ -64,7 +64,7 @@ export default function SendTokenSelectApplicationsStep({
           value={senderApplicationChainIDField.value}
           onChange={senderApplicationChainIDField.onChange}
           errorMessage={form.formState.errors.senderApplicationChainID?.message}
-          applications={applications}
+          applications={applicationsMetadata}
           style={{ toggle: { container: { marginBottom: 16 } } }}
         />
 
@@ -72,7 +72,7 @@ export default function SendTokenSelectApplicationsStep({
           value={recipientApplicationChainIDField.value}
           onChange={recipientApplicationChainIDField.onChange}
           errorMessage={form.formState.errors.recipientApplicationChainID?.message}
-          applications={applications}
+          applications={applicationsMetadata}
           style={{ toggle: { container: { marginBottom: 16 } } }}
         />
 

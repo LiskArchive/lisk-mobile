@@ -22,11 +22,11 @@ const ApplicationSwitcher = ({ onPress }) => {
             ]}
           >
             <Image
-              source={{ uri: currentApplication.images?.logo.png }}
+              source={{ uri: currentApplication.logo.png }}
               style={[styles.avatar]}
             />
             <P style={[styles.appName, styles.theme.appName]}>
-              {currentApplication.name}
+              {currentApplication.chainName}
             </P>
             <View style={styles.iconContainer}>
               <ChangeSvg />

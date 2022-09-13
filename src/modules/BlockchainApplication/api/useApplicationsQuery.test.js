@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 
 import { mockApplications } from '../__fixtures__';
 
-import { useGetApplicationsMetaQuery } from './useGetApplicationsQuery';
+import { useApplicationsQuery } from './useApplicationsQuery';
 
 const mockState = {
   blockchainApplications: {
@@ -22,7 +22,7 @@ const ReduxProvider = ({ children, reduxStore }) => (
   <Provider store={reduxStore}>{children}</Provider>
 );
 
-describe('useGetApplicationsMetaQuery hook', () => {
+describe('useApplicationsQuery hook', () => {
   it('should fetch data correctly', async () => {
     const store = mockStore(mockState);
     const wrapper = ({ children }) => (
@@ -30,9 +30,8 @@ describe('useGetApplicationsMetaQuery hook', () => {
         <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
       </QueryClientProvider>
     );
-    const
-      { result, waitFor } = renderHook(() =>
-        useGetApplicationsMetaQuery(), { wrapper });
+    const { result, waitFor } = renderHook(() =>
+      useApplicationsQuery(), { wrapper });
 
     await waitFor(() => result.current.isFetched);
 

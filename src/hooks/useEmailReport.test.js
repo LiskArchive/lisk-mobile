@@ -4,7 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 
-import { mockApplications } from 'modules/BlockchainApplication/__fixtures__';
+import { mockApplicationsMeta } from 'modules/BlockchainApplication/__fixtures__';
 
 import { useEmailReport } from './useEmailReport';
 import { mockNetworkStatus } from '../modules/Network/__fixtures__';
@@ -23,7 +23,7 @@ describe('useEmailReport hook', () => {
   );
   const mockState = {
     blockchainApplications: {
-      current: mockApplications[0],
+      current: mockApplicationsMeta[0],
       pins: [],
     },
   };
@@ -65,7 +65,7 @@ describe('useEmailReport hook', () => {
   it('should insert correctly the current application data on body', async () => {
     const { result, waitFor } = renderHook(() => useEmailReport(), { wrapper });
 
-    const expectedAppsApisPattern = encodeURIComponent(mockApplications[0].apis[0].rest);
+    const expectedAppsApisPattern = encodeURIComponent(mockApplicationsMeta[0].serviceURLs[0].http);
 
     await waitFor(() => !result.current.isLoading);
 

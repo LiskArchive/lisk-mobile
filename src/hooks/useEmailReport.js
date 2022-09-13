@@ -34,9 +34,9 @@ export function useEmailReport({ errorMessage, error } = {}) {
       `;
     }
 
-    if (currentApplication?.apis) {
-      const stringifiedAppApis = currentApplication.apis.reduce(
-        (acc, api) => `${acc} - ${api.rest}`, ''
+    if (currentApplication?.serviceURLs) {
+      const stringifiedAppApis = currentApplication.serviceURLs.reduce(
+        (acc, serviceURL) => `${acc} - ${serviceURL.http}`, ''
       );
 
       baseBody += `
@@ -73,7 +73,7 @@ export function useEmailReport({ errorMessage, error } = {}) {
   },
   [
     networkStatusData?.data,
-    currentApplication?.apis,
+    currentApplication?.serviceURLs,
     errorMessage,
     error
   ]);
