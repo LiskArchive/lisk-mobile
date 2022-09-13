@@ -16,19 +16,10 @@ export function PickerLabel({ children, style: baseStyle }) {
     styles: getPickerStyles(),
   });
 
-  return (
-    <Text style={[styles.label, styles.theme.label, baseStyle]}>
-      {children}
-    </Text>
-  );
+  return <Text style={[styles.label, styles.theme.label, baseStyle]}>{children}</Text>;
 }
 
-export function PickerToggle({
-  children,
-  placeholder,
-  disabled,
-  style: baseStyle
-}) {
+export function PickerToggle({ children, placeholder, disabled, style: baseStyle }) {
   const { value, setShowMenu, error } = usePicker();
 
   const { styles, theme } = useTheme({
@@ -40,24 +31,14 @@ export function PickerToggle({
   if (!valueToRender) {
     if (value) {
       valueToRender = (
-        <Text
-          style={[
-            styles.toggleText,
-            styles.theme.toggleText,
-            baseStyle?.toggleText
-          ]}
-        >
+        <Text style={[styles.toggleText, styles.theme.toggleText, baseStyle?.toggleText]}>
           {value}
         </Text>
       );
     } else if (typeof placeholder === 'string') {
       valueToRender = (
         <Text
-          style={[
-            styles.togglePlaceholder,
-            styles.theme.togglePlaceholder,
-            baseStyle?.toggleText
-          ]}
+          style={[styles.togglePlaceholder, styles.theme.togglePlaceholder, baseStyle?.toggleText]}
         >
           {placeholder}
         </Text>
@@ -72,27 +53,19 @@ export function PickerToggle({
       <TouchableOpacity
         onPress={() => setShowMenu(true)}
         disabled={disabled}
-        style={[
-          styles.toggleContainer,
-          styles.theme.toggleContainer,
-          baseStyle?.container
-        ]}
+        style={[styles.toggleContainer, styles.theme.toggleContainer, baseStyle?.container]}
       >
         {valueToRender}
 
         {!disabled && (
           <CaretSvg
             color={theme === themes.dark ? colors.dark.volcanicSand : colors.light.silverGrey}
-            direction='right'
+            direction="right"
           />
         )}
       </TouchableOpacity>
 
-      {error && (
-        <Text style={[styles.errorText]}>
-          {error}
-        </Text>
-      )}
+      {error && <Text style={[styles.errorText]}>{error}</Text>}
     </>
   );
 }
@@ -109,19 +82,15 @@ export function PickerMenu({ children, style: baseStyle }) {
       show={showMenu}
       toggleShow={() => setShowMenu(false)}
       style={{
-        container: styles.menuModalContainer
+        container: styles.menuModalContainer,
       }}
     >
-      <View style={[styles.menuContainer, baseStyle?.container]}>
-        {children}
-      </View>
+      <View style={[styles.menuContainer, baseStyle?.container]}>{children}</View>
     </BottomModal>
   );
 }
 
-export function PickerItem({
-  value, children, style: baseStyle
-}) {
+export function PickerItem({ value, children, style: baseStyle }) {
   const { setShowMenu, onChange } = usePicker();
 
   const { styles } = useTheme({
@@ -136,7 +105,7 @@ export function PickerItem({
       }}
       style={[styles.itemContainer, styles.theme.itemContainer, baseStyle]}
     >
-     {typeof children === 'string' ? <Text>{children}</Text> : children}
+      {typeof children === 'string' ? <Text>{children}</Text> : children}
     </TouchableOpacity>
   );
 }

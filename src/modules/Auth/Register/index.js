@@ -31,33 +31,20 @@ const Register = ({ route }) => {
     return () => BackHandler.removeEventListener('hardwareBackPress', onBackButtonPressedAndroid);
   }, [onBackButtonPressedAndroid]);
 
-  return <View style={[styles.container, noNavStyle]}>
-    <Stepper
-      showProgressBar
-      customProgressLength={3}
-    >
-      <Intro
-        title="create"
-        group={i18next.t('1. Creating your account')}
-        route={route}
-      />
-      <SafeKeeping
-        title="safekeeping"
-        group={i18next.t('2. Saving your passphrase')}
-        route={route}
-      />
-      <Confirm
-        title="verify"
-        group={i18next.t('3. Verifying your passphrase')}
-        route={route}
-      />
-      <Success
-        title="success"
-        group={i18next.t('4. Security reminder')}
-        hideNav={hideNav}
-      />
-    </Stepper>
-  </View>;
+  return (
+    <View style={[styles.container, noNavStyle]}>
+      <Stepper showProgressBar customProgressLength={3}>
+        <Intro title="create" group={i18next.t('1. Creating your account')} route={route} />
+        <SafeKeeping
+          title="safekeeping"
+          group={i18next.t('2. Saving your passphrase')}
+          route={route}
+        />
+        <Confirm title="verify" group={i18next.t('3. Verifying your passphrase')} route={route} />
+        <Success title="success" group={i18next.t('4. Security reminder')} hideNav={hideNav} />
+      </Stepper>
+    </View>
+  );
 };
 
 export default Register;

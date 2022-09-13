@@ -28,7 +28,7 @@ const mockDispatch = jest.fn();
 const mockState = {
   account: {
     summary: account,
-    current: mockSavedAccounts[0]
+    current: mockSavedAccounts[0],
   },
 };
 jest.mock('react-redux', () => ({
@@ -38,9 +38,7 @@ jest.mock('react-redux', () => ({
 
 describe('useAccountInfo hook', () => {
   const store = mockStore(mockState);
-  const wrapper = ({ children }) => (
-    <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
-  );
+  const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>;
   beforeEach(() => {
     mockDispatch.mockClear();
     apiClient.getAccount = jest.fn();

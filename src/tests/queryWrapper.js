@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  MutationCache, QueryCache, QueryClient, QueryClientProvider
-} from '@tanstack/react-query';
+import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { addCleanup } from '@testing-library/react-hooks';
 
 export function queryWrapper({ children }) {
@@ -24,9 +22,5 @@ export function queryWrapper({ children }) {
     queryCache.clear();
   });
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
-  );
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 }

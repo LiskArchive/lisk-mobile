@@ -17,7 +17,7 @@ const ScrollAwareActionBar = ({
   styles,
   viewIsInsideTab,
   noFooterButton,
-  extraContent
+  extraContent,
 }) => {
   const renderButton = (style) => {
     return (
@@ -56,7 +56,7 @@ const ScrollAwareActionBar = ({
         <View
           style={[
             theme.footerButtonContainer,
-            shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null
+            shouldBeOptimizedForIphoneX ? theme.iPhoneXMargin : null,
           ]}
         >
           {extraContent}

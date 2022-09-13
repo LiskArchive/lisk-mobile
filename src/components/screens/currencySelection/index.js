@@ -10,7 +10,7 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actio
 import getStyles from './styles';
 
 @connect(
-  state => ({
+  (state) => ({
     settings: state.settings,
   }),
   {
@@ -18,7 +18,7 @@ import getStyles from './styles';
   }
 )
 class CurrencySelection extends React.Component {
-  onSelect = currency => this.props.settingsUpdated({ currency });
+  onSelect = (currency) => this.props.settingsUpdated({ currency });
 
   render() {
     const {
@@ -33,10 +33,7 @@ class CurrencySelection extends React.Component {
           extraData={currency}
           data={currencyKeys}
           renderItem={({ item }) => (
-            <TouchableHighlight
-              onPress={() => this.onSelect(item)}
-              underlayColor="transparent"
-            >
+            <TouchableHighlight onPress={() => this.onSelect(item)} underlayColor="transparent">
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
                 <P style={styles.theme.itemLabel}>{currencyMap[item].label}</P>
 

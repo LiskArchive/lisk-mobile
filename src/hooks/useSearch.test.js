@@ -8,7 +8,7 @@ describe('useSearch hook', () => {
   const defaultProps = {
     delay: 1000,
     onSearch: jest.fn(),
-    onDebounce: jest.fn()
+    onDebounce: jest.fn(),
   };
 
   it('should be defined', () => {
@@ -41,11 +41,13 @@ describe('useSearch hook', () => {
     const onSearch = jest.fn();
     const onDebounce = jest.fn();
 
-    const { result } = renderHook(() => useSearch({
-      ...defaultProps,
-      onSearch,
-      onDebounce
-    }));
+    const { result } = renderHook(() =>
+      useSearch({
+        ...defaultProps,
+        onSearch,
+        onDebounce,
+      })
+    );
 
     // neither onSearch or onDebounce should be called on mount.
     expect(onSearch).not.toBeCalled();

@@ -31,9 +31,7 @@ export default function CopyToClipBoard({
 
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={handleCopy}>
-      <Element style={[labelStyle]}>
-        {text}
-      </Element>
+      <Element style={[labelStyle]}>{text}</Element>
 
       <TouchableOpacity onPress={handleCopy}>
         <Icon

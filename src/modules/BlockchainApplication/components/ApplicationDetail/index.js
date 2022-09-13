@@ -1,8 +1,6 @@
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
-import {
-  ScrollView, View, ImageBackground, Image
-} from 'react-native';
+import { ScrollView, View, ImageBackground, Image } from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
@@ -66,8 +64,9 @@ export default function ApplicationDetail({ route }) {
             styles.header,
             styles.explore,
             styles.container,
-            applicationMetadata?.backgroundColor
-            && { backgroundColor: applicationMetadata?.backgroundColor },
+            applicationMetadata?.backgroundColor && {
+              backgroundColor: applicationMetadata?.backgroundColor,
+            },
           ]}
           source={wavesPattern}
           resizeMode="cover"
@@ -86,8 +85,9 @@ export default function ApplicationDetail({ route }) {
           style={[
             styles.header,
             styles.container,
-            applicationMetadata?.backgroundColor
-            && { backgroundColor: applicationMetadata?.backgroundColor }
+            applicationMetadata?.backgroundColor && {
+              backgroundColor: applicationMetadata?.backgroundColor,
+            },
           ]}
           resizeMode="stretch"
         >
@@ -106,11 +106,7 @@ export default function ApplicationDetail({ route }) {
             isLoading={applicationsMetadata.isLoading}
             error={applicationsMetadata.isError}
             data={applicationMetadata?.chainName}
-            renderData={(data) => (
-              <H3 style={[styles.title, styles.theme.title]}>
-                {data}
-              </H3>
-            )}
+            renderData={(data) => <H3 style={[styles.title, styles.theme.title]}>{data}</H3>}
           />
 
           <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
@@ -122,11 +118,7 @@ export default function ApplicationDetail({ route }) {
           isLoading={applications.isLoading}
           error={applications.isError}
           data={application?.address}
-          renderData={(data) => (
-            <P style={[styles.address, styles.theme.address]}>
-              {data}
-            </P>
-          )}
+          renderData={(data) => <P style={[styles.address, styles.theme.address]}>{data}</P>}
           style={{ empty: [styles.address, styles.theme.address] }}
         />
 
@@ -147,19 +139,13 @@ export default function ApplicationDetail({ route }) {
         </View>
 
         <View style={[styles.row, styles.depositedContainer]}>
-          <P style={styles.deposited}>
-            {i18next.t('application.details.deposited')}:
-          </P>
+          <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
 
           <DataRenderer
             isLoading={applications.isLoading}
             error={applications.isError}
             data={application?.deposited}
-            renderData={(data) => (
-              <P style={styles.amount}>
-                {`${data.toLocaleString()} LSK`}
-              </P>
-            )}
+            renderData={(data) => <P style={styles.amount}>{`${data.toLocaleString()} LSK`}</P>}
             style={{ empty: styles.amount }}
           />
         </View>
@@ -167,40 +153,29 @@ export default function ApplicationDetail({ route }) {
         <View style={styles.stats}>
           <View style={styles.flex}>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {i18next.t('application.details.chainID')}
-              </P>
+              <P style={styles.smallTitle}>{i18next.t('application.details.chainID')}</P>
 
               <P style={[styles.value, styles.theme.value]}>{chainID}</P>
             </View>
 
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {i18next.t('application.details.status')}
-              </P>
+              <P style={styles.smallTitle}>{i18next.t('application.details.status')}</P>
 
               <DataRenderer
                 isLoading={applications.isLoading}
                 error={applications.isError}
                 data={application?.state}
                 renderData={(data) => (
-                  <View
-                    style={[
-                      styles.stateContainer,
-                      styles[`${application?.state}Container`]
-                    ]}
-                  >
-                    <P style={[styles.value, styles[data], styles.theme[data]]}>
-                      {data}
-                    </P>
+                  <View style={[styles.stateContainer, styles[`${application?.state}Container`]]}>
+                    <P style={[styles.value, styles[data], styles.theme[data]]}>{data}</P>
                   </View>
                 )}
                 style={{
                   empty: [
                     styles.value,
                     styles[application?.state],
-                    styles.theme[application?.state]
-                  ]
+                    styles.theme[application?.state],
+                  ],
                 }}
               />
             </View>
@@ -208,9 +183,7 @@ export default function ApplicationDetail({ route }) {
 
           <View style={styles.flex}>
             <View style={styles.item}>
-              <P style={styles.smallTitle}>
-                {i18next.t('application.details.lastUpdated')}
-              </P>
+              <P style={styles.smallTitle}>{i18next.t('application.details.lastUpdated')}</P>
 
               <DataRenderer
                 isLoading={applications.isLoading}
@@ -234,11 +207,7 @@ export default function ApplicationDetail({ route }) {
                 isLoading={applications.isLoading}
                 error={applications.isError}
                 data={application?.lastCertificateHeight}
-                renderData={(data) => (
-                  <P style={[styles.value, styles.theme.value]}>
-                    {data}
-                  </P>
-                )}
+                renderData={(data) => <P style={[styles.value, styles.theme.value]}>{data}</P>}
                 style={{ empty: [styles.value, styles.theme.value] }}
               />
             </View>

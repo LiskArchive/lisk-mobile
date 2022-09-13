@@ -8,16 +8,16 @@ describe('Middleware: Settings', () => {
     NativeModules.SettingsManager = {
       settings: {
         AppleLanguages: ['en_EN'],
-        AppleLocale: 'en_EN'
-      }
+        AppleLocale: 'en_EN',
+      },
     };
   });
   const next = jest.fn();
   const store = {
     dispatch: jest.fn(),
     getState: () => ({
-      settings: {}
-    })
+      settings: {},
+    }),
   };
 
   it('should pass the action', () => {
@@ -30,16 +30,16 @@ describe('Middleware: Settings', () => {
     const action = {
       type: actionTypes.settingsRetrieved,
       data: {
-        currency: 'EUR'
-      }
+        currency: 'EUR',
+      },
     };
 
     const editedAction = {
       type: actionTypes.settingsRetrieved,
       data: {
         currency: 'EUR',
-        language: 'en'
-      }
+        language: 'en',
+      },
     };
 
     settingsMiddleware(store)(next)(action);
@@ -50,8 +50,8 @@ describe('Middleware: Settings', () => {
     const action = {
       type: actionTypes.settingsUpdated,
       data: {
-        test: true
-      }
+        test: true,
+      },
     };
 
     storageUtility.storeSettings = jest.fn();

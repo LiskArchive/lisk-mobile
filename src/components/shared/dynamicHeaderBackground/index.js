@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
-@connect(state => ({
+@connect((state) => ({
   settings: state.settings,
 }))
 class DynamicHeaderBackground extends React.Component {

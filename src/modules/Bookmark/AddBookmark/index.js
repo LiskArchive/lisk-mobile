@@ -24,11 +24,7 @@ import getStyles from './styles';
 import { addBookmark, editBookmark } from '../store/actions';
 
 // eslint-disable-next-line max-statements
-const AddToBookmark = ({
-  t,
-  lng,
-  route,
-}) => {
+const AddToBookmark = ({ t, lng, route }) => {
   const bookmarkList = useSelector(selectBookmarkList);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -42,7 +38,7 @@ const AddToBookmark = ({
 
   const errors = {
     label: t('The label must be shorter than 20 characters.'),
-    address: t('Invalid address.')
+    address: t('Invalid address.'),
   };
   const setError = (validity, fieldName) => {
     switch (validity) {
@@ -74,7 +70,7 @@ const AddToBookmark = ({
   const handleLabel = (value) => {
     setLabel({
       value,
-      validity: validateLabel(value)
+      validity: validateLabel(value),
     });
   };
 
@@ -93,7 +89,10 @@ const AddToBookmark = ({
       (account) => account.label.toLocaleLowerCase() === label.value.toLocaleLowerCase()
     );
     if (filteredAccount?.length) {
-      return DropDownHolder.error(t('multisignature.error.title'), t('multisignature.error.description'));
+      return DropDownHolder.error(
+        t('multisignature.error.title'),
+        t('multisignature.error.description')
+      );
     }
     const addressValidity = validateAddress('LSK', address.value);
     const labelValidity = validateLabel(label.value);
@@ -107,11 +106,11 @@ const AddToBookmark = ({
     } else {
       setAddress({
         value: address.value,
-        validity: addressValidity
+        validity: addressValidity,
       });
       setLabel({
         value: label.value,
-        validity: labelValidity
+        validity: labelValidity,
       });
     }
   };
@@ -121,8 +120,7 @@ const AddToBookmark = ({
     const account = route.params?.account ?? null;
     const { setOptions } = navigation;
     if (account) {
-      const editMode = bookmarkList
-        .filter((item) => item.address === account.address).length > 0;
+      const editMode = bookmarkList.filter((item) => item.address === account.address).length > 0;
       setEditMode(editMode);
       setLabel({ value: account.label || '' });
       setIncomingData(account);
@@ -138,83 +136,81 @@ const AddToBookmark = ({
     return () => BackHandler.removeEventListener('hardwareBackPress', onBackButtonPressedAndroid);
   }, []);
 
-  return <View style={[styles.wrapper, styles.theme.wrapper]}>
-    <Scanner
-      ref={scanner}
-      navigation={navigation}
-      readFromCameraRoll={true}
-      onQRCodeRead={onQRCodeRead}
-      onClose={onCloseScanner}
-      permissionDialogTitle={t('Permission to use camera')}
-      permissionDialogMessage={t('Lisk needs to connect to your camera')}
-    />
-    <KeyboardAwareScrollView
-      onSubmit={submitForm}
-      button={{
-        title: editMode ? t('Save changes') : t('Add to bookmarks')
-      }}
-      styles={{
-        container: styles.container,
-        innerContainer: styles.innerContainer
-      }}
-    >
-      <View style={styles.form}>
-        {!incomingData ? (
-          <View style={styles.addressContainer}>
-            <IconButton
-              onPress={() => scanner.current?.toggleCamera?.()}
-              titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-              style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-              title={t('Scan')}
-              icon="scanner"
-              iconSize={18}
-              color={colors.light.ultramarineBlue}
-            />
-            <Avatar style={styles.avatar} address={address.value} size={24} />
-            <Input
-              label={t('Address')}
-              autoCorrect={false}
-              innerStyles={{
-                errorMessage: styles.errorMessage,
-                input: [
-                  styles.input,
-                  styles.addressInput,
-                  styles.addressInputWithAvatar
-                ],
-                containerStyle: styles.addressInputContainer
-              }}
-              onChange={setAddress}
-              value={address.value}
-              error={setError(address.validity, 'address')}
-            />
-          </View>
-        ) : (
-          <View style={styles.row}>
-            <P style={[styles.label, styles.theme.label]}>Address</P>
-            <View style={styles.staticAddressContainer}>
-              <Avatar
-                address={incomingData.address || ''}
-                style={styles.staticAvatar}
-                size={35}
+  return (
+    <View style={[styles.wrapper, styles.theme.wrapper]}>
+      <Scanner
+        ref={scanner}
+        navigation={navigation}
+        readFromCameraRoll={true}
+        onQRCodeRead={onQRCodeRead}
+        onClose={onCloseScanner}
+        permissionDialogTitle={t('Permission to use camera')}
+        permissionDialogMessage={t('Lisk needs to connect to your camera')}
+      />
+      <KeyboardAwareScrollView
+        onSubmit={submitForm}
+        button={{
+          title: editMode ? t('Save changes') : t('Add to bookmarks'),
+        }}
+        styles={{
+          container: styles.container,
+          innerContainer: styles.innerContainer,
+        }}
+      >
+        <View style={styles.form}>
+          {!incomingData ? (
+            <View style={styles.addressContainer}>
+              <IconButton
+                onPress={() => scanner.current?.toggleCamera?.()}
+                titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
+                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
+                title={t('Scan')}
+                icon="scanner"
+                iconSize={18}
+                color={colors.light.ultramarineBlue}
               />
-              <Small style={[styles.address, styles.theme.address]}>
-                {stringShortener(incomingData.address, 6, 5)}
-              </Small>
+              <Avatar style={styles.avatar} address={address.value} size={24} />
+              <Input
+                label={t('Address')}
+                autoCorrect={false}
+                innerStyles={{
+                  errorMessage: styles.errorMessage,
+                  input: [styles.input, styles.addressInput, styles.addressInputWithAvatar],
+                  containerStyle: styles.addressInputContainer,
+                }}
+                onChange={setAddress}
+                value={address.value}
+                error={setError(address.validity, 'address')}
+              />
             </View>
-          </View>
-        )}
-        <Input
-          label={t('Label')}
-          autoCorrect={false}
-          innerStyles={{ input: styles.input }}
-          multiline={false}
-          onChange={handleLabel}
-          error={setError(label.validity, 'label')}
-          value={label.value}
-        />
-      </View>
-    </KeyboardAwareScrollView>
-  </View>;
+          ) : (
+            <View style={styles.row}>
+              <P style={[styles.label, styles.theme.label]}>Address</P>
+              <View style={styles.staticAddressContainer}>
+                <Avatar
+                  address={incomingData.address || ''}
+                  style={styles.staticAvatar}
+                  size={35}
+                />
+                <Small style={[styles.address, styles.theme.address]}>
+                  {stringShortener(incomingData.address, 6, 5)}
+                </Small>
+              </View>
+            </View>
+          )}
+          <Input
+            label={t('Label')}
+            autoCorrect={false}
+            innerStyles={{ input: styles.input }}
+            multiline={false}
+            onChange={handleLabel}
+            error={setError(label.validity, 'label')}
+            value={label.value}
+          />
+        </View>
+      </KeyboardAwareScrollView>
+    </View>
+  );
 };
 
 export default translate()(AddToBookmark);

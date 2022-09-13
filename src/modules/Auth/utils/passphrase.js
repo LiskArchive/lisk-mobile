@@ -30,7 +30,7 @@ const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
  *  {String} code - specified the possible codes in the description above
  *  {String} message - A descriptive message for what went wrong
  */
-export const validatePassphrase = passphrase => {
+export const validatePassphrase = (passphrase) => {
   if (passphrase.trim().length === 0) {
     return [{ code: 'empty_value', message: 'Invalid Passphrase' }];
   }
@@ -57,7 +57,7 @@ export const generatePassphrase = () => {
  * @param {string} passphrase
  * Store the passphrase and address on the keychain of the device
  */
-export const storePassphraseInKeyChain = passphrase => {
+export const storePassphraseInKeyChain = (passphrase) => {
   const address = extractAddress(passphrase);
   setGenericPassword(address, passphrase, {
     accessGroup: '58UK9RE9TP.io.lisk.mobile',
@@ -70,7 +70,7 @@ export const storePassphraseInKeyChain = passphrase => {
  */
 export const removePassphraseFromKeyChain = async (
   successCallback,
-  errorCallback = err => err
+  errorCallback = (err) => err
 ) => {
   try {
     await resetGenericPassword({ service: 'io.lisk.mobile' });
@@ -80,8 +80,7 @@ export const removePassphraseFromKeyChain = async (
   }
 };
 
-export const getPassphraseFromKeyChain = () =>
-  getGenericPassword({ service: 'io.lisk.mobile' });
+export const getPassphraseFromKeyChain = () => getGenericPassword({ service: 'io.lisk.mobile' });
 
 /**
  * @param {function} successCallback
@@ -93,7 +92,7 @@ export const getPassphraseFromKeyChain = () =>
 // eslint-disable-next-line max-statements
 export const bioMetricAuthentication = async ({
   successCallback,
-  errorCallback = err => err,
+  errorCallback = (err) => err,
   description,
   androidError,
 }) => {
@@ -141,7 +140,7 @@ export const assembleWordOptions = (passphraseWords, missingWords) => {
     return fullWordsList[rand];
   };
 
-  const mixWithMissingWords = options => {
+  const mixWithMissingWords = (options) => {
     options.forEach((list, listIndex) => {
       const rand = Math.floor(Math.random() * 0.99 * list.length);
       list[rand] = passphraseWords[missingWords[listIndex]];

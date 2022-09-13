@@ -15,7 +15,7 @@ export function SendTokenSummaryModal({
   summary,
   form,
   handleResetForm,
-  handleResetStepper
+  handleResetStepper,
 }) {
   const navigation = useNavigation();
 
@@ -93,12 +93,12 @@ export function SendTokenSummaryModal({
       style={{
         container: [
           styles.confirmAndSignTransactionModal,
-          styles.theme.confirmAndSignTransactionModal
-        ]
+          styles.theme.confirmAndSignTransactionModal,
+        ],
       }}
       isOpen={show}
       toggleShow={handleOnProcessCompleted}
-      >
+    >
       {renderStep()}
     </BottomModal>
   );

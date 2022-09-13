@@ -9,9 +9,7 @@ export default {
   minerFeesURL: URLs.BTCMinerFees,
   network: isTestnet ? networks.testnet : networks.bitcoin,
   derivationPath: isTestnet ? "m/44'/1'/0'/0/0" : "m/44'/0'/0'/0/0",
-  transactionExplorerURL: `https://www.blockchain.com/${
-    isTestnet ? 'btctest' : 'btc'
-  }/tx`,
+  transactionExplorerURL: `https://www.blockchain.com/${isTestnet ? 'btctest' : 'btc'}/tx`,
   requestOptions: {
     method: 'GET',
     headers: {

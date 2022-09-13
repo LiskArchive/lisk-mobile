@@ -12,21 +12,20 @@ import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 export function TransactionAmount({ transaction, style }) {
   const transactionAssets = useTransactionAssets(transaction);
 
-  const language = useSelector(state => state.settings.language);
+  const language = useSelector((state) => state.settings.language);
 
   let children = null;
 
-  if (transactionAssets.type === 'tokenTransfer'
-    && transaction.params.recipientAddress !== transaction.sender.address
+  if (
+    transactionAssets.type === 'tokenTransfer' &&
+    transaction.params.recipientAddress !== transaction.sender.address
   ) {
     children = (
       <Text style={[transactionAssets.amount.style, style]}>
         {transactionAssets.amount.sign}
 
         <FormattedNumber language={language}>
-          {transaction.notRawLisk
-            ? transaction.amount
-            : fromRawLsk(transaction.params.amount)}
+          {transaction.notRawLisk ? transaction.amount : fromRawLsk(transaction.params.amount)}
         </FormattedNumber>
       </Text>
     );
@@ -46,11 +45,11 @@ export function TransactionStatus({ transaction }) {
       break;
 
     case 'pending':
-      children = <SandClockSvg {...props}/>;
+      children = <SandClockSvg {...props} />;
       break;
 
     case 'fail':
-      children = <CircleCrossedSvg {...props}/>;
+      children = <CircleCrossedSvg {...props} />;
       break;
 
     default:

@@ -1,8 +1,6 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_TRANSACTION_QUERY } from 'utilities/api/queries';
-import {
-  API_URL,
-} from 'utilities/api/constants';
+import { API_URL } from 'utilities/api/constants';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 
 /**
@@ -25,7 +23,7 @@ export function useGetTransactionQuery(id, { config: customConfig = {}, options 
     params: {
       transactionID: id,
       senderAddress: currentAccount.metadata.address,
-      ...(customConfig?.params || {})
+      ...(customConfig?.params || {}),
     },
   };
 
@@ -34,7 +32,7 @@ export function useGetTransactionQuery(id, { config: customConfig = {}, options 
   const query = useCustomQuery({
     keys,
     config,
-    options
+    options,
   });
 
   return query;

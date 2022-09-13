@@ -3,9 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
-const AuthTypeItem = ({
-  illustration, label, styles, onPress, testID
-}) => (
+const AuthTypeItem = ({ illustration, label, styles, onPress, testID }) => (
   <TouchableOpacity
     style={[styles.container, styles.theme.container]}
     onPress={onPress}

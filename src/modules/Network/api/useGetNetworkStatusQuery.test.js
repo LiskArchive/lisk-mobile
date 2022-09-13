@@ -8,17 +8,19 @@ import { useGetNetworkStatusQuery } from './useGetNetworkStatusQuery';
 
 jest.useRealTimers();
 
-jest.spyOn(useCurrentBlockchainApplication, 'useCurrentBlockchainApplication').mockImplementation(
-  () => [{
-    chainID: 'chainIdMock'
-  }]
-);
+jest
+  .spyOn(useCurrentBlockchainApplication, 'useCurrentBlockchainApplication')
+  .mockImplementation(() => [
+    {
+      chainID: 'chainIdMock',
+    },
+  ]);
 
 describe('useNetworkStatusQuery hook', () => {
   it('fetches data correctly', async () => {
-    const { result, waitFor } = renderHook(
-      () => useGetNetworkStatusQuery(), { wrapper: queryWrapper }
-    );
+    const { result, waitFor } = renderHook(() => useGetNetworkStatusQuery(), {
+      wrapper: queryWrapper,
+    });
 
     expect(result.current.isLoading).toBeTruthy();
 

@@ -1,7 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import {
-  View, SafeAreaView, ScrollView, Linking
-} from 'react-native';
+import { View, SafeAreaView, ScrollView, Linking } from 'react-native';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -14,14 +12,9 @@ import InfoComponent from 'components/shared/infoComponent';
 import Avatar from 'components/shared/avatar';
 import getStyles from './styles';
 
-const MultiSignature = ({
-  t, styles, navigation, multiSigAccount
-}) => {
+const MultiSignature = ({ t, styles, navigation, multiSigAccount }) => {
   const [showAll, setShowAll] = useState(false);
-  const memberList = useMemo(
-    () => multiSigAccount?.members,
-    [multiSigAccount]
-  );
+  const memberList = useMemo(() => multiSigAccount?.members, [multiSigAccount]);
   const numberOfSignatures = useMemo(() => multiSigAccount?.numberOfSignatures, [multiSigAccount]);
 
   const openLiskDesktopDownload = () => Linking.openURL('https://lisk.com/wallet');
@@ -100,7 +93,7 @@ const MultiSignature = ({
 };
 
 const mapStateToProps = (state) => ({
-  multiSigAccount: state.accounts.info?.LSK?.keys ?? {}
+  multiSigAccount: state.accounts.info?.LSK?.keys ?? {},
 });
 
 export default connect(mapStateToProps)(withTheme(translate()(MultiSignature), getStyles()));

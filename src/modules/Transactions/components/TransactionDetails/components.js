@@ -58,10 +58,7 @@ export function TransactionDetailsBody({ transaction }) {
           />
         </View>
 
-        <Avatar
-          address={transaction.sender.address}
-          size={40}
-        />
+        <Avatar address={transaction.sender.address} size={40} />
       </View>
 
       <View style={[styles.section]}>
@@ -69,9 +66,7 @@ export function TransactionDetailsBody({ transaction }) {
           {i18next.t('transactions.transactionDetails.transactionFeeLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>
-          {fromRawLsk(transaction.fee)} LSK
-        </Text>
+        <Text style={[styles.text, styles.theme.text]}>{fromRawLsk(transaction.fee)} LSK</Text>
       </View>
 
       <View style={[styles.section]}>
@@ -79,9 +74,7 @@ export function TransactionDetailsBody({ transaction }) {
           {i18next.t('transactions.transactionDetails.nonceLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>
-          {transaction.nonce}
-        </Text>
+        <Text style={[styles.text, styles.theme.text]}>{transaction.nonce}</Text>
       </View>
 
       <View style={[styles.section]}>
@@ -89,9 +82,7 @@ export function TransactionDetailsBody({ transaction }) {
           {i18next.t('transactions.transactionDetails.confirmationsLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>
-          {transaction.confirmations}
-        </Text>
+        <Text style={[styles.text, styles.theme.text]}>{transaction.confirmations}</Text>
       </View>
 
       <View style={[styles.section]}>
@@ -139,12 +130,10 @@ export function TransactionDetailsBody({ transaction }) {
           {i18next.t('transactions.transactionDetails.blockHeightLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>
-          {transaction.block.height}
-        </Text>
+        <Text style={[styles.text, styles.theme.text]}>{transaction.block.height}</Text>
       </View>
 
-      <TransactionDetailsParams params={transaction.params}/>
+      <TransactionDetailsParams params={transaction.params} />
     </ScrollView>
   );
 }
@@ -201,7 +190,7 @@ function TransactionDetailsParams({ params }) {
         </Text>
 
         <LabelButton
-          onClick={() => setShow(prevState => !prevState)}
+          onClick={() => setShow((prevState) => !prevState)}
           textStyle={styles.showParamsButton}
         >
           {!show
@@ -210,19 +199,16 @@ function TransactionDetailsParams({ params }) {
         </LabelButton>
       </View>
 
-      {show && (
+      {show &&
         paramsEntries.map(([paramKey, paramValue]) => (
           <React.Fragment key={paramKey}>
             <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
               {TRANSACTION_PARAMS_NAMES[paramKey]}:
-           </Text>
+            </Text>
 
-           <Text style={[styles.text, styles.theme.text]}>
-             {paramValue}
-           </Text>
+            <Text style={[styles.text, styles.theme.text]}>{paramValue}</Text>
           </React.Fragment>
-        ))
-      )}
+        ))}
     </View>
   );
 }

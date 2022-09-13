@@ -1,6 +1,4 @@
-import {
-  colors, themes
-} from 'constants/styleGuide';
+import { colors, themes } from 'constants/styleGuide';
 
 export default function getAccountsListStyles() {
   return {
@@ -12,7 +10,7 @@ export default function getAccountsListStyles() {
       description: {
         textAlign: 'center',
         marginBottom: 24,
-        fontSize: 12
+        fontSize: 12,
       },
     },
     [themes.light]: {
@@ -31,6 +29,6 @@ export default function getAccountsListStyles() {
       description: {
         color: colors.dark.ghost,
       },
-    }
+    },
   };
 }

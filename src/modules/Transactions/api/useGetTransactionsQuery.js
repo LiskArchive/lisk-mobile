@@ -1,8 +1,4 @@
-import {
-  METHOD,
-  LIMIT,
-  API_URL,
-} from 'utilities/api/constants';
+import { METHOD, LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
@@ -26,7 +22,7 @@ export function useGetTransactionsQuery({ config: customConfig = {}, options = {
     params: {
       limit: LIMIT,
       senderAddress: currentAccount.metadata.address,
-      ...(customConfig?.params || {})
+      ...(customConfig?.params || {}),
     },
   };
 

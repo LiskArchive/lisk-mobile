@@ -15,13 +15,7 @@ import getStyles from './styles';
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
 
-const PassphraseBackup = ({
-  styles,
-  t,
-  theme,
-  sharedData: data,
-  nextStep,
-}) => {
+const PassphraseBackup = ({ styles, t, theme, sharedData: data, nextStep }) => {
   const [passphraseRevealed, setPassphraseReveal] = useState(false);
   const navigation = useNavigation();
 
@@ -35,16 +29,11 @@ const PassphraseBackup = ({
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton
-        title={'settings.backup_phrase.title'}
-        onPress={navigation.goBack}
-      />
+      <HeaderBackButton title={'settings.backup_phrase.title'} onPress={navigation.goBack} />
       <ScrollView style={styles.container}>
         <PassphraseCopy passphrase={data.recoveryPhrase} />
         <View style={styles.row}>
-          <P style={[styles.QRText, styles.theme.text]}>
-            {t('Private use only')}
-          </P>
+          <P style={[styles.QRText, styles.theme.text]}>{t('Private use only')}</P>
           <A style={styles.button} onPress={toggleQRCode}>
             {passphraseRevealed ? t('Hide QR code') : t('Show QR code')}
           </A>
@@ -54,24 +43,16 @@ const PassphraseBackup = ({
             <QRCode
               value={data.recoveryPhrase}
               size={qrCodeSize}
-              color={
-                theme === themes.light ? colors.light.black : colors.dark.white
-              }
+              color={theme === themes.light ? colors.light.black : colors.dark.white}
               backgroundColor={
-                theme === themes.light
-                  ? colors.light.white
-                  : colors.dark.maastrichtBlue
+                theme === themes.light ? colors.light.white : colors.dark.maastrichtBlue
               }
             />
           </View>
         )}
       </ScrollView>
       <View style={styles.container}>
-        <PrimaryButton
-          noTheme
-          title={t('settings.backup_phrase.continue')}
-          onPress={nextScreen}
-        />
+        <PrimaryButton noTheme title={t('settings.backup_phrase.continue')} onPress={nextScreen} />
       </View>
     </SafeAreaView>
   );

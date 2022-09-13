@@ -7,9 +7,9 @@ export const mockTokens = [
     lockedBalances: [
       {
         moduleID: '5',
-        amount: '10000'
-      }
-    ]
+        amount: '10000',
+      },
+    ],
   },
   {
     tokenID: '2bc561cf98009a',
@@ -19,9 +19,9 @@ export const mockTokens = [
     lockedBalances: [
       {
         moduleID: '4',
-        amount: '5000'
-      }
-    ]
+        amount: '5000',
+      },
+    ],
   },
   {
     tokenID: '3as601cd98117m',
@@ -31,9 +31,9 @@ export const mockTokens = [
     lockedBalances: [
       {
         moduleID: '5',
-        amount: '11000'
-      }
-    ]
+        amount: '11000',
+      },
+    ],
   },
   {
     tokenID: '1as631cd08007k',
@@ -43,8 +43,8 @@ export const mockTokens = [
     lockedBalances: [
       {
         moduleID: '4',
-        amount: '12000'
-      }
-    ]
+        amount: '12000',
+      },
+    ],
   },
 ];

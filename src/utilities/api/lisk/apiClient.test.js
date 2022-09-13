@@ -18,10 +18,12 @@ describe('apiClient', () => {
           ok: true,
           status: 200,
           json: () => ({
-            data: [{
-              height: 2912982123,
-            }]
-          })
+            data: [
+              {
+                height: 2912982123,
+              },
+            ],
+          }),
         })
       );
       const result = await apiClient.getLatestBlock();
@@ -36,7 +38,7 @@ describe('apiClient', () => {
       global.fetch.mockReturnValue(
         Promise.resolve({
           ok: false,
-          status: 500
+          status: 500,
         })
       );
       try {

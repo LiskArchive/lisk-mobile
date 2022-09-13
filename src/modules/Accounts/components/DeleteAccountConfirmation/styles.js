@@ -1,6 +1,4 @@
-import {
-  colors, themes, fonts
-} from 'constants/styleGuide';
+import { colors, themes, fonts } from 'constants/styleGuide';
 
 export default function getDeleteAccountConfirmationStyles() {
   return {
@@ -12,7 +10,7 @@ export default function getDeleteAccountConfirmationStyles() {
       description: {
         textAlign: 'center',
         marginBottom: 24,
-        fontSize: 12
+        fontSize: 12,
       },
       button: {
         width: '100%',
@@ -39,14 +37,14 @@ export default function getDeleteAccountConfirmationStyles() {
       },
       addressText: {
         fontSize: 14,
-        marginLeft: 8
+        marginLeft: 8,
       },
       downloadFileIcon: {
         marginLeft: 8,
       },
       text: {
         fontFamily: fonts.family.heading,
-        fontSize: fonts.size.small
+        fontSize: fonts.size.small,
       },
     },
     [themes.light]: {
@@ -60,11 +58,11 @@ export default function getDeleteAccountConfirmationStyles() {
         color: colors.light.zodiacBlue,
       },
       text: {
-        color: colors.light.zodiacBlue
+        color: colors.light.zodiacBlue,
       },
       addressText: {
-        color: colors.light.blueGray
-      }
+        color: colors.light.blueGray,
+      },
     },
 
     [themes.dark]: {
@@ -78,11 +76,11 @@ export default function getDeleteAccountConfirmationStyles() {
         color: colors.dark.ghost,
       },
       text: {
-        color: colors.light.white
+        color: colors.light.white,
       },
       addressText: {
-        color: colors.light.ghost
-      }
-    }
+        color: colors.light.ghost,
+      },
+    },
   };
 }

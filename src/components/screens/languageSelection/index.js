@@ -10,7 +10,7 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actio
 import getStyles from './styles';
 
 @connect(
-  state => ({
+  (state) => ({
     settings: state.settings,
   }),
   {
@@ -18,7 +18,7 @@ import getStyles from './styles';
   }
 )
 class LanguageSelection extends React.Component {
-  onSelect = language => this.props.settingsUpdated({ language });
+  onSelect = (language) => this.props.settingsUpdated({ language });
 
   render() {
     const {
@@ -33,10 +33,7 @@ class LanguageSelection extends React.Component {
           extraData={language}
           data={languageKeys}
           renderItem={({ item }) => (
-            <TouchableHighlight
-              onPress={() => this.onSelect(item)}
-              underlayColor="transparent"
-            >
+            <TouchableHighlight onPress={() => this.onSelect(item)} underlayColor="transparent">
               <View style={[styles.itemContainer, styles.theme.itemContainer]}>
                 <P style={styles.theme.itemLabel}>{languageMap[item].label}</P>
 

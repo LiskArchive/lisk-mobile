@@ -6,7 +6,7 @@ export default function SettingsSvg({
   height = 20,
   width = 20,
   style,
-  variant = 'fill'
+  variant = 'fill',
 }) {
   let children = null;
 
@@ -52,13 +52,7 @@ export default function SettingsSvg({
   }
 
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 20 20"
-      fill="none"
-      style={style}
-    >
+    <Svg width={width} height={height} viewBox="0 0 20 20" fill="none" style={style}>
       {children}
     </Svg>
   );

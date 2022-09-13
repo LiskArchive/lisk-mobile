@@ -24,15 +24,11 @@ export default function ErrorScreen({
     <View style={[styles.wrapper, styles.theme.wrapper, baseStyles?.wrapper]}>
       <View style={[styles.container]}>
         <View style={styles.illustration}>
-
-        <CircleCrossedSvg height={48} width={48} style={[styles.icon]}/>
-
+          <CircleCrossedSvg height={48} width={48} style={[styles.icon]} />
         </View>
 
         {title && (
-          <Text style={[styles.title, styles.theme.title, baseStyles?.title]}>
-            {title}
-          </Text>
+          <Text style={[styles.title, styles.theme.title, baseStyles?.title]}>{title}</Text>
         )}
 
         {description && (
@@ -52,6 +48,5 @@ export default function ErrorScreen({
         disabled={disabled}
       />
     </View>
-
   );
 }

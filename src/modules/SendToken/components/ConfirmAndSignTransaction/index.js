@@ -12,13 +12,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrent
 
 import getConfirmAndSignTransactionStyles from './styles';
 
-export default function ConfirmAndSignTransaction({
-  amount,
-  token,
-  form,
-  onSuccess,
-  onError,
-}) {
+export default function ConfirmAndSignTransaction({ amount, token, form, onSuccess, onError }) {
   const { field } = useController({
     name: 'userPassword',
     control: form.control,
@@ -40,39 +34,27 @@ export default function ConfirmAndSignTransaction({
       onError(form.sendTokenMutation.error);
       form.sendTokenMutation.reset();
     }
-  }, [
-    form.sendTokenMutation,
-    onSuccess,
-    onError
-  ]);
+  }, [form.sendTokenMutation, onSuccess, onError]);
 
-  const submitDisabled = form.sendTokenMutation.isLoading
-    || !field.value
-    || Object.keys(form.formState.errors).length > 0;
+  const submitDisabled =
+    form.sendTokenMutation.isLoading ||
+    !field.value ||
+    Object.keys(form.formState.errors).length > 0;
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.contentContainer, styles.theme.contentContainer]}>
-        <Text
-          style={[styles.title, styles.theme.title]}
-        >
+        <Text style={[styles.title, styles.theme.title]}>
           {i18next.t('sendToken.confirmAndSign.title')}
         </Text>
 
-        <Text
-          style={[styles.instructionsText, styles.theme.instructionsText]}
-        >
+        <Text style={[styles.instructionsText, styles.theme.instructionsText]}>
           {i18next.t('sendToken.confirmAndSign.description')}
         </Text>
 
-        <Avatar
-          address={currentAccount.metadata?.address}
-          size={56}
-        />
+        <Avatar address={currentAccount.metadata?.address} size={56} />
 
-        <Text
-          style={[styles.accountNameText, styles.theme.accountNameText]}
-        >
+        <Text style={[styles.accountNameText, styles.theme.accountNameText]}>
           {currentAccount.metadata?.name}
         </Text>
 
@@ -86,14 +68,14 @@ export default function ConfirmAndSignTransaction({
               paddingTop: 0,
               paddingRight: 0,
               paddingLeft: 0,
-              marginBottom: 16
+              marginBottom: 16,
             },
             inputLabel: {
-              marginBottom: 8
+              marginBottom: 8,
             },
             input: {
-              padding: 16
-            }
+              padding: 16,
+            },
           }}
           placeholder={i18next.t('sendToken.confirmAndSign.passwordInputPlaceholder')}
           secureTextEntry
@@ -104,9 +86,7 @@ export default function ConfirmAndSignTransaction({
 
       <View>
         {Object.keys(form.formState.errors).length > 0 && (
-          <Text style={[styles.errorText]}>
-            {i18next.t('sendToken.errors.generalMessage')}
-          </Text>
+          <Text style={[styles.errorText]}>{i18next.t('sendToken.errors.generalMessage')}</Text>
         )}
 
         <PrimaryButton
@@ -115,9 +95,11 @@ export default function ConfirmAndSignTransaction({
           title={
             form.sendTokenMutation.isLoading
               ? i18next.t('sendToken.confirmAndSign.loadingText')
-              : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText',
-                { amount, tokenSymbol: token?.symbol })
-            }
+              : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText', {
+                  amount,
+                  tokenSymbol: token?.symbol,
+                })
+          }
           style={{ marginBottom: 24 }}
           disabled={submitDisabled}
         />

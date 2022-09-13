@@ -27,20 +27,18 @@ export function useSendTokenSummary({ form }) {
   const priority = form.watch('priority');
 
   const senderApplication = applicationsMetadata.data?.find(
-    application => application.chainID === senderApplicationChainID
+    (application) => application.chainID === senderApplicationChainID
   );
 
   const recipientApplication = applicationsMetadata.data?.find(
-    application => application.chainID === recipientApplicationChainID
+    (application) => application.chainID === recipientApplicationChainID
   );
 
   const recipientAccount = bookmarks.find(
-    account => account.address === recipientAccountAddress
+    (account) => account.address === recipientAccountAddress
   ) || { address: recipientAccountAddress, isNew: true };
 
-  const token = tokens.data?.find(
-    _token => _token.tokenID === tokenID
-  );
+  const token = tokens.data?.find((_token) => _token.tokenID === tokenID);
 
   const transactionFee = useTransactionFeeCalculator({
     tokenID,
@@ -56,7 +54,7 @@ export function useSendTokenSummary({ form }) {
 
   const cmmFee = useCCMFeeCalculator({
     senderApplicationChainID,
-    recipientApplicationChainID
+    recipientApplicationChainID,
   });
 
   return {
@@ -69,6 +67,6 @@ export function useSendTokenSummary({ form }) {
     priority,
     transactionFee,
     initializationFee,
-    cmmFee
+    cmmFee,
   };
 }

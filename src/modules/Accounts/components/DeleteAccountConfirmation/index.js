@@ -14,11 +14,7 @@ import { stringShortener } from 'utilities/helpers';
 
 import getDeleteAccountConfirmationStyles from './styles';
 
-export default function DeleteAccountConfirmation({
-  account,
-  onReset,
-  style,
-}) {
+export default function DeleteAccountConfirmation({ account, onReset, style }) {
   const [downloaded, setDownloaded] = useState(false);
 
   const { deleteAccountByAddress } = useAccounts();
@@ -26,14 +22,18 @@ export default function DeleteAccountConfirmation({
   const { styles } = useTheme({ styles: getDeleteAccountConfirmationStyles() });
 
   function handleDownloadFile() {
-    downloadJSON(account, `${account.metadata.address}-encrypted_secret_recovery_phrase.json`, (e) => {
-      if (!e) {
-        setDownloaded(true);
-        if (Platform.OS === 'android') {
-          ToastAndroid.show(i18next.t('auth.setup.downloaded'), ToastAndroid.BOTTOM);
+    downloadJSON(
+      account,
+      `${account.metadata.address}-encrypted_secret_recovery_phrase.json`,
+      (e) => {
+        if (!e) {
+          setDownloaded(true);
+          if (Platform.OS === 'android') {
+            ToastAndroid.show(i18next.t('auth.setup.downloaded'), ToastAndroid.BOTTOM);
+          }
         }
       }
-    });
+    );
   }
 
   function handleDelete() {
@@ -48,25 +48,16 @@ export default function DeleteAccountConfirmation({
           {i18next.t('accounts.accountsManager.deleteAccountTitle')}
         </H2>
 
-        <P
-          style={[
-            styles.description,
-            styles.theme.description,
-            style?.description
-          ]}
-        >
+        <P style={[styles.description, styles.theme.description, style?.description]}>
           {i18next.t('accounts.accountsManager.deleteAccountDescription')}
         </P>
 
         <View style={[styles.row, styles.addressContainer]}>
-          <Avatar
-            address={account.metadata.address}
-            size={45}
-          />
+          <Avatar address={account.metadata.address} size={45} />
 
           <P style={[styles.addressText, styles.theme.addressText]}>
             {stringShortener(account.metadata.address, 5, 5)}
-          </P >
+          </P>
         </View>
 
         <View style={[styles.row, styles.filenameContainer]}>
@@ -81,8 +72,7 @@ export default function DeleteAccountConfirmation({
           onPress={handleDownloadFile}
           style={[styles.row]}
           adornments={{
-            right:
-              <DownloadSvg style={[styles.downloadFileIcon]} />
+            right: <DownloadSvg style={[styles.downloadFileIcon]} />,
           }}
         >
           {i18next.t('accounts.accountsManager.downloadFileButtonText')}

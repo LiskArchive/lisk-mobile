@@ -27,8 +27,8 @@ export default function TransactionList({ mode = 'overview', style }) {
     isFetchingNextPage: isFetchingTransactionsNextPage,
   } = useGetTransactionsQuery({
     config: {
-      params: { limit: mode === 'overview' ? 3 : LIMIT }
-    }
+      params: { limit: mode === 'overview' ? 3 : LIMIT },
+    },
   });
 
   const { styles } = useTheme({
@@ -50,20 +50,20 @@ export default function TransactionList({ mode = 'overview', style }) {
             style={[styles.labelButton, style?.labelButton]}
             textStyle={styles.labelButtonText}
             adornments={{
-              right:
+              right: (
                 <CaretSvg
                   height={12}
                   width={12}
-                  direction='right'
+                  direction="right"
                   style={{ marginLeft: 8 }}
                   color={colors.light.ultramarineBlue}
                 />
+              ),
             }}
           >
             View all
           </LabelButton>
         )}
-
       </View>
     );
   }
@@ -79,17 +79,11 @@ export default function TransactionList({ mode = 'overview', style }) {
 
     if (errorOnTransactions) {
       if (errorOnTransactions.response?.status === 404) {
-        return (
-          <EmptyState
-            message={i18next.t('transactions.transactionList.emptyText')}
-          />
-        );
+        return <EmptyState message={i18next.t('transactions.transactionList.emptyText')} />;
       }
 
       return (
-        <Text style={{ marginTop: 16 }}>
-          {i18next.t('transactions.transactionList.errorText')}
-        </Text>
+        <Text style={{ marginTop: 16 }}>{i18next.t('transactions.transactionList.errorText')}</Text>
       );
     }
 
@@ -99,9 +93,7 @@ export default function TransactionList({ mode = 'overview', style }) {
       <InfiniteScrollList
         data={transactions}
         keyExtractor={(item) => item.id}
-        renderItem={(item) => (
-          <TransactionRow transaction={item} />
-        )}
+        renderItem={(item) => <TransactionRow transaction={item} />}
         renderSpinner
         fetchNextPage={fetchNextTransactionsPage}
         hasNextPage={hasTransactionsNextPage}
@@ -111,13 +103,7 @@ export default function TransactionList({ mode = 'overview', style }) {
   }
 
   return (
-    <View
-      style={[
-        styles.container,
-        styles.theme.container,
-        style?.container
-      ]}
-    >
+    <View style={[styles.container, styles.theme.container, style?.container]}>
       {renderHeader()}
 
       {renderBody()}

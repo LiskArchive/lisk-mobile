@@ -9,13 +9,12 @@ import { useTheme } from './useTheme';
 
 describe('useTheme hook', () => {
   const defaultProps = {
-    noTheme: false, styles: { marginTop: 4 }
+    noTheme: false,
+    styles: { marginTop: 4 },
   };
   const defaultTheme = themes.dark;
 
-  jest
-    .spyOn(helpers, 'createThemedStyles')
-    .mockImplementation(() => defaultProps.styles);
+  jest.spyOn(helpers, 'createThemedStyles').mockImplementation(() => defaultProps.styles);
 
   it('should be defined', () => {
     expect(useTheme).toBeDefined();
@@ -23,9 +22,7 @@ describe('useTheme hook', () => {
 
   it("should use default object when style isn't passed", async () => {
     const wrapper = ({ children }) => (
-      <ThemeContext.Provider value={defaultTheme}>
-        {children}
-      </ThemeContext.Provider>
+      <ThemeContext.Provider value={defaultTheme}>{children}</ThemeContext.Provider>
     );
 
     const { result } = renderHook(() => useTheme({}), { wrapper });
@@ -36,9 +33,7 @@ describe('useTheme hook', () => {
 
   it('returns correct values after on change', async () => {
     const wrapper = ({ children }) => (
-      <ThemeContext.Provider value={defaultTheme}>
-        {children}
-      </ThemeContext.Provider>
+      <ThemeContext.Provider value={defaultTheme}>{children}</ThemeContext.Provider>
     );
 
     const { result } = renderHook(() => useTheme(defaultProps), { wrapper });

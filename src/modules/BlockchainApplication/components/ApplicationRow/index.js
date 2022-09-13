@@ -34,12 +34,9 @@ function BlockchainApplicationRow({
   showActive,
   showCaret,
   navigation,
-  deleteApplication
+  deleteApplication,
 }) {
-  const [
-    showDeleteDefaultApplicationModal,
-    setShowDeleteDefaultApplicationModal
-  ] = useState(false);
+  const [showDeleteDefaultApplicationModal, setShowDeleteDefaultApplicationModal] = useState(false);
 
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
   const [currentApplication] = useCurrentBlockchainApplication();

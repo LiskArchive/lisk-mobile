@@ -59,14 +59,7 @@ const HeaderBackButton = ({
         />
       )}
       {title && (
-        <H3
-          style={[
-            styles.title,
-            { color },
-            noIcon && styles.paddingLeft,
-            titleStyle
-          ]}
-        >
+        <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft, titleStyle]}>
           {t(title)}
         </H3>
       )}

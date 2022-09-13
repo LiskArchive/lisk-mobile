@@ -14,7 +14,7 @@ class LiskAPIClient {
         address,
         balance: 0,
         nonce: 0,
-        initialized: true
+        initialized: true,
       };
     }
     if (!resp.ok) {
@@ -29,7 +29,7 @@ class LiskAPIClient {
     const resp = await fetch(`${this._url}/v3/transactions`, {
       ...config.requestOptions,
       method: 'POST',
-      body: JSON.stringify(tx)
+      body: JSON.stringify(tx),
     });
     if (!resp.ok) {
       const response = await resp.json();
@@ -43,7 +43,7 @@ class LiskAPIClient {
     const options = {
       ...config.requestOptions,
       params: {
-        limit: 1
+        limit: 1,
       },
     };
     const resp = await fetch(`${this._url}/v3/blocks`, options);

@@ -163,8 +163,8 @@ describe('Reducers: Settings', () => {
         type: actionTypes.settingsRetrieved,
         data: {
           token: {
-            active: tokenKeys[1]
-          }
+            active: tokenKeys[1],
+          },
         },
       };
       const state = {};
@@ -173,8 +173,8 @@ describe('Reducers: Settings', () => {
       expect(changedState).toEqual({
         currency: 'EUR',
         token: {
-          active: tokenKeys[0]
-        }
+          active: tokenKeys[0],
+        },
       });
     });
   });

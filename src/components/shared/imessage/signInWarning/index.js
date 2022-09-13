@@ -28,10 +28,7 @@ class SignInWarning extends Component {
           <B style={styles.title}>Seems like you’re not signed in</B>
           <Small style={styles.description}>
             Please make sure to
-            <A
-              style={styles.link}
-              onPress={() => NativeModules.MessagesManager.openURL('lisk:')}
-            >
+            <A style={styles.link} onPress={() => NativeModules.MessagesManager.openURL('lisk:')}>
               {' '}
               Sign in{' '}
             </A>

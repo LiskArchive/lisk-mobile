@@ -30,7 +30,9 @@ export const getDynamicFees = async () => {
   if (!response.ok) {
     throw new Error('Fail to request fees');
   }
-  const { data: { feeEstimatePerByte } } = json;
+  const {
+    data: { feeEstimatePerByte },
+  } = json;
   return {
     Low: feeEstimatePerByte.low,
     Medium: feeEstimatePerByte.medium,

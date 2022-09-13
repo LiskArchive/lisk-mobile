@@ -7,8 +7,8 @@ import { pricesRetrieved } from '../../../../actions/service';
 export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
   const dispatch = useDispatch();
 
-  const priceTicker = useSelector(state => state.service.priceTicker);
-  const accountSettings = useSelector(state => state.settings);
+  const priceTicker = useSelector((state) => state.service.priceTicker);
+  const accountSettings = useSelector((state) => state.settings);
 
   useEffect(() => {
     dispatch(pricesRetrieved());
@@ -25,9 +25,12 @@ export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
   }
 
   function localizeAmount(amount) {
-    return Number(amount).toLocaleString(`${accountSettings.language}-${accountSettings.language?.toUpperCase()}`, {
-      maximumFractionDigits: 20
-    });
+    return Number(amount).toLocaleString(
+      `${accountSettings.language}-${accountSettings.language?.toUpperCase()}`,
+      {
+        maximumFractionDigits: 20,
+      }
+    );
   }
 
   const tokenAmountInCurrency = localizeAmount(rawAmountInCurrency);

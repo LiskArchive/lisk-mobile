@@ -6,24 +6,14 @@ import { useTheme } from 'hooks/useTheme';
 import { colors, themes } from 'constants/styleGuide';
 import getStyles from './styles';
 
-const BottomModal = ({
-  showClose = true,
-  show,
-  toggleShow,
-  children,
-  style,
-  ...props
-}) => {
+const BottomModal = ({ showClose = true, show, toggleShow, children, style, ...props }) => {
   const { styles, theme } = useTheme({ styles: getStyles() });
 
   return (
     <Modal
       isOpen={show}
       onClosed={() => toggleShow(false)}
-      backdropColor={
-        theme === themes.dark
-          ? colors.dark.volcanicSand : colors.light.dark
-      }
+      backdropColor={theme === themes.dark ? colors.dark.volcanicSand : colors.light.dark}
       position="bottom"
       coverScreen
       style={[styles.container, styles.theme.container, style?.container]}

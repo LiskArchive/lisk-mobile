@@ -36,14 +36,14 @@ export default function ApplicationList({
         onChange={(value) => setTerm(value)}
         value={term}
         returnKeyType="search"
-        adornments = {{
+        adornments={{
           left: (
             <Icon
               name="search"
               size={18}
               color={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
             />
-          )
+          ),
         }}
       />
 
@@ -53,7 +53,8 @@ export default function ApplicationList({
             style={[
               styles.applicationNameLabel,
               styles.theme.applicationNameLabel,
-              style?.applicationNameLabel]}
+              style?.applicationNameLabel,
+            ]}
           >
             {i18next.t('application.explore.applicationList.loadingText')}
           </P>

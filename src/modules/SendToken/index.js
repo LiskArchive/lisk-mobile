@@ -17,7 +17,7 @@ import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisigna
 export default function SendToken({ route }) {
   const navigation = useNavigation();
 
-  const account = useSelector(state => state.account);
+  const account = useSelector((state) => state.account);
 
   const { styles } = useTheme({
     styles: getSendTokenStyles(),
@@ -28,15 +28,15 @@ export default function SendToken({ route }) {
   const steps = [
     {
       component: SendTokenApplicationsStep,
-      title: 'selectApplications'
+      title: 'selectApplications',
     },
     {
       component: SendTokenSelectTokenStep,
-      title: 'selectToken'
+      title: 'selectToken',
     },
     {
       component: SendTokenSummaryStep,
-      title: 'summary'
+      title: 'summary',
     },
   ];
 
@@ -53,21 +53,12 @@ export default function SendToken({ route }) {
       {accountIsMultisignature ? (
         <SendTokenOnMultisignatureAccount />
       ) : (
-        <Stepper
-          showProgressBar
-          styles={{ progressBar: { wrapper: styles.progressBar } }}
-        >
-          {steps.map(step => (
-            <step.component
-              key={step.title}
-              navigation={navigation}
-              route={route}
-              form={form}
-            />
+        <Stepper showProgressBar styles={{ progressBar: { wrapper: styles.progressBar } }}>
+          {steps.map((step) => (
+            <step.component key={step.title} navigation={navigation} route={route} form={form} />
           ))}
         </Stepper>
       )}
-
     </SafeAreaView>
   );
 }

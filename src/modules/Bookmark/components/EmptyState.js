@@ -8,9 +8,7 @@ import { P } from 'components/shared/toolBox/typography';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
-const EmptyState = ({
-  theme, styles, t, style
-}) => (
+const EmptyState = ({ theme, styles, t, style }) => (
   <View style={[styles.emptyState, style]}>
     <View style={styles.imageContainer}>
       <Image

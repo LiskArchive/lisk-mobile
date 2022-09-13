@@ -86,9 +86,7 @@ describe('useBlockchainApplicationManagement hook', () => {
 
     const updatedApplication = { ...mockApplicationsMeta[3], isPinned: false };
 
-    expect(getApplicationByChainId(mockApplicationsMeta[3].chainID)).toEqual(
-      updatedApplication
-    );
+    expect(getApplicationByChainId(mockApplicationsMeta[3].chainID)).toEqual(updatedApplication);
   });
 
   it('getApplicationByChainId should return undefined if chainId does not exist', () => {

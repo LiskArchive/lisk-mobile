@@ -18,7 +18,7 @@ export function useEmailReport({ errorMessage, error } = {}) {
   const {
     data: networkStatusData,
     isLoading: isLoadingNetworkStatusData,
-    error: errorOnNetworkStatusData
+    error: errorOnNetworkStatusData,
   } = useGetNetworkStatusQuery();
 
   const url = useMemo(() => {
@@ -36,7 +36,8 @@ export function useEmailReport({ errorMessage, error } = {}) {
 
     if (currentApplication?.serviceURLs) {
       const stringifiedAppApis = currentApplication.serviceURLs.reduce(
-        (acc, serviceURL) => `${acc} - ${serviceURL.http}`, ''
+        (acc, serviceURL) => `${acc} - ${serviceURL.http}`,
+        ''
       );
 
       baseBody += `
@@ -70,23 +71,16 @@ export function useEmailReport({ errorMessage, error } = {}) {
     }
 
     return value;
-  },
-  [
-    networkStatusData?.data,
-    currentApplication?.serviceURLs,
-    errorMessage,
-    error
-  ]);
+  }, [networkStatusData?.data, currentApplication?.serviceURLs, errorMessage, error]);
 
   async function handleSend() {
     if (!url) return setErrorOnLinking(new Error('Not URL defined before sending.'));
 
     setIsFetching(true);
 
-    return Linking.openURL(url).then(
-      () => setIsFetching(false)
-    )
-      .catch(_error => {
+    return Linking.openURL(url)
+      .then(() => setIsFetching(false))
+      .catch((_error) => {
         setErrorOnLinking(_error);
         setIsFetching(false);
       });

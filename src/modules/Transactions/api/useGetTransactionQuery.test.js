@@ -5,7 +5,10 @@ import configureMockStore from 'redux-mock-store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import * as useCurrentAccount from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
-import { mockApplicationsMeta, mockMappedApplicationsMeta } from 'modules/BlockchainApplication/__fixtures__';
+import {
+  mockApplicationsMeta,
+  mockMappedApplicationsMeta,
+} from 'modules/BlockchainApplication/__fixtures__';
 import { mockSavedAccounts } from 'modules/Accounts/__fixtures__';
 import { mockGetTransactionQuery, mockTransactions } from '../__fixtures__';
 import { useGetTransactionQuery } from './useGetTransactionQuery';
@@ -33,15 +36,13 @@ jest.mock('react-redux', () => ({
   useDispatch: () => mockDispatch,
 }));
 
-jest.spyOn(useCurrentAccount, 'useCurrentAccount').mockImplementation(
-  () => ([
-    {
-      metadata: {
-        address: mockSavedAccounts[0].metadata.address
-      }
-    }
-  ])
-);
+jest.spyOn(useCurrentAccount, 'useCurrentAccount').mockImplementation(() => [
+  {
+    metadata: {
+      address: mockSavedAccounts[0].metadata.address,
+    },
+  },
+]);
 
 describe('useGetTransactionQuery hook', () => {
   const store = mockStore(mockState);
@@ -53,9 +54,9 @@ describe('useGetTransactionQuery hook', () => {
   );
 
   it('fetch data correctly', async () => {
-    const { result, waitFor } = renderHook(
-      () => useGetTransactionQuery(mockTransactions[0].id), { wrapper }
-    );
+    const { result, waitFor } = renderHook(() => useGetTransactionQuery(mockTransactions[0].id), {
+      wrapper,
+    });
 
     expect(result.current.isLoading).toBeTruthy();
 

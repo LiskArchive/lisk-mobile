@@ -13,14 +13,7 @@ import { P } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
-const CameraOverlay = ({
-  styles,
-  safeArea,
-  containerStyles,
-  t,
-  close,
-  theme,
-}) => (
+const CameraOverlay = ({ styles, safeArea, containerStyles, t, close, theme }) => (
   <View style={[styles.cameraOverlay, containerStyles]}>
     <View style={[styles.headerContainer, safeArea ? styles.safeArea : null]}>
       <IconButton

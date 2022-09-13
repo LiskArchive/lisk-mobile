@@ -36,6 +36,6 @@ export function useBlockchainApplicationExplorer() {
 
   return {
     applications,
-    applicationsMetadata
+    applicationsMetadata,
   };
 }

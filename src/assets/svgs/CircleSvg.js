@@ -7,16 +7,10 @@ export default function CircleSvg({
   color = colors.light.blueGray,
   height = 24,
   width = 24,
-  style
+  style,
 }) {
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 24 24"
-      fill="none"
-      style={style}
-    >
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none" style={style}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"

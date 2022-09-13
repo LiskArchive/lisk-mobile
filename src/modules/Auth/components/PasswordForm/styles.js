@@ -1,7 +1,5 @@
 import { Dimensions } from 'react-native';
-import {
-  themes, colors, boxes
-} from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 const { height } = Dimensions.get('screen');
 
@@ -10,11 +8,11 @@ export default () => ({
     container: {
       flex: 1,
       padding: boxes.boxPadding,
-      paddingTop: height / 4
+      paddingTop: height / 4,
     },
     content: {
       flex: 1,
-      alignItems: 'center'
+      alignItems: 'center',
     },
     address: {
       fontSize: 14,
@@ -23,7 +21,7 @@ export default () => ({
       borderColor: colors.light.platinumGray,
       paddingLeft: 0,
       paddingRight: 0,
-    }
+    },
   },
 
   [themes.light]: {
@@ -31,8 +29,8 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     address: {
-      color: colors.light.silverGrey
-    }
+      color: colors.light.silverGrey,
+    },
   },
 
   [themes.dark]: {
@@ -40,7 +38,7 @@ export default () => ({
       backgroundColor: colors.dark.mainBg,
     },
     address: {
-      color: colors.light.whiteSmoke
-    }
+      color: colors.light.whiteSmoke,
+    },
   },
 });

@@ -17,10 +17,7 @@ export default function InfoToggler({ title, description, style }) {
 
   return (
     <>
-      <TouchableOpacity
-        onPress={() => setShowModal(true)}
-        style={[style?.toggleButton]}
-      >
+      <TouchableOpacity onPress={() => setShowModal(true)} style={[style?.toggleButton]}>
         <InfoSvg />
       </TouchableOpacity>
 
@@ -30,29 +27,19 @@ export default function InfoToggler({ title, description, style }) {
         style={{ container: style?.modal }}
       >
         <View style={[styles.modalContainer]}>
-          {title && (
-            <Text
-              style={[
-                styles.title,
-                styles.theme.title,
-                style?.title
-              ]}
-            >
-              {title}
-            </Text>
-          )}
+          {title && <Text style={[styles.title, styles.theme.title, style?.title]}>{title}</Text>}
 
-          {description && (
-            Array.isArray(description) ? (
+          {description &&
+            (Array.isArray(description) ? (
               description.map((descriptionItem, index) => (
                 <Text
                   key={index}
                   style={[
                     styles.descriptionText,
                     styles.theme.descriptionText,
-                    style?.descriptionText
+                    style?.descriptionText,
                   ]}
-                  >
+                >
                   {descriptionItem}
                 </Text>
               ))
@@ -61,14 +48,13 @@ export default function InfoToggler({ title, description, style }) {
                 style={[
                   styles.descriptionText,
                   styles.theme.descriptionText,
-                  style?.descriptionText
+                  style?.descriptionText,
                 ]}
               >
                 {description}
               </Text>
             ))}
         </View>
-
       </BottomModal>
     </>
   );

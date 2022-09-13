@@ -9,19 +9,14 @@ import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
 import DropDownHolder from 'utilities/alert';
-import {
-  useAccounts,
-  useCurrentAccount,
-} from 'modules/Accounts/hooks/useAccounts';
+import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import getStyles from './styles';
 import { passwordValidator } from '../validators';
 import PasswordSetupSuccess from '../PasswordSetupSuccess';
 import { useEncryptAccount } from '../hooks/useEncryptAccount';
 
 // eslint-disable-next-line max-statements
-const PasswordSetupForm = ({
-  navigation, styles, t, route
-}) => {
+const PasswordSetupForm = ({ navigation, styles, t, route }) => {
   const { encryptAccount } = useEncryptAccount();
   const { setAccount } = useAccounts();
   const [, setCurrentAccount] = useCurrentAccount();
@@ -68,10 +63,7 @@ const PasswordSetupForm = ({
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       {isSuccess ? (
-        <PasswordSetupSuccess
-          encryptedJson={encryptedJSON}
-          onContinue={onContinue}
-        />
+        <PasswordSetupSuccess encryptedJson={encryptedJSON} onContinue={onContinue} />
       ) : (
         <View>
           <HeaderBackButton
@@ -130,8 +122,7 @@ const PasswordSetupForm = ({
                 />
               </View>
               <Text style={[styles.actionText, styles.theme.description]}>
-                I agree to store my encrypted secret recovery phrase on this
-                device
+                I agree to store my encrypted secret recovery phrase on this device
               </Text>
             </View>
             <PrimaryButton

@@ -14,11 +14,11 @@ export function getSendTokenStyles() {
         height: '100%',
       },
       header: {
-        marginBottom: 8
+        marginBottom: 8,
       },
       progressBar: {
-        marginBottom: 16
-      }
+        marginBottom: 16,
+      },
     },
     [themes.light]: {
       wrapper: {

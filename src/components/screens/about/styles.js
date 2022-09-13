@@ -1,6 +1,4 @@
-import {
-  themes, colors, fonts, boxes
-} from 'constants/styleGuide';
+import { themes, colors, fonts, boxes } from 'constants/styleGuide';
 
 export default ({ logoSize }) => ({
   common: {

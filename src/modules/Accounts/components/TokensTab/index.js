@@ -17,21 +17,21 @@ import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens';
 const TokenItem = ({ token }) => {
   const { styles } = useTheme({ styles: tokensTabStyles });
   const tokenBalance = Number(fromRawLsk(token.availableBalance)).toLocaleString();
-  return <View style={[styles.tokenItem]} >
-    <View style={styles.row} >
-      <View style={[styles.row, styles.alignCenter]} >
-        <TokenSvg symbol="LSK" height={28} width={28} />
-        <P style={[styles.tokenTitle, styles.theme.tokenTitle]} >Lisk</P>
-      </View>
-      <View style={[styles.flex, styles.rightContent]} >
-        <H3 style={[styles.theme.tokenTitle]} >
-        {tokenBalance}
-        </H3>
-        {/* TODO: Implement currency conversion */}
-        <P style={[styles.currency, styles.theme.currency]} >25USD</P>
+  return (
+    <View style={[styles.tokenItem]}>
+      <View style={styles.row}>
+        <View style={[styles.row, styles.alignCenter]}>
+          <TokenSvg symbol="LSK" height={28} width={28} />
+          <P style={[styles.tokenTitle, styles.theme.tokenTitle]}>Lisk</P>
+        </View>
+        <View style={[styles.flex, styles.rightContent]}>
+          <H3 style={[styles.theme.tokenTitle]}>{tokenBalance}</H3>
+          {/* TODO: Implement currency conversion */}
+          <P style={[styles.currency, styles.theme.currency]}>25USD</P>
+        </View>
       </View>
     </View>
-  </View>;
+  );
 };
 
 const TokensTab = ({ t }) => {
@@ -43,14 +43,16 @@ const TokensTab = ({ t }) => {
 
   const { styles } = useTheme({ styles: tokensTabStyles });
 
-  const hasLockedTokens = useMemo(() => tokens.some(token => token.lockedBalances), [tokens]);
+  const hasLockedTokens = useMemo(() => tokens.some((token) => token.lockedBalances), [tokens]);
 
   const lockedTokens = useMemo(() => {
     const res = [];
-    tokens.forEach(token => {
+    tokens.forEach((token) => {
       let amount = 0;
       if (token.lockedBalances) {
-        token.lockedBalances.forEach(lockedBalance => { amount += Number(lockedBalance.amount); });
+        token.lockedBalances.forEach((lockedBalance) => {
+          amount += Number(lockedBalance.amount);
+        });
       }
       if (amount) {
         res.push({ symbol: token.symbol, amount });
@@ -65,51 +67,62 @@ const TokensTab = ({ t }) => {
 
   const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
 
-  return <View style={styles.container} >
-    <View style={[styles.row, styles.alignCenter]} >
-      <View style={styles.tabsContainer} >
-        <TouchableOpacity
-          style={[styles.tabItem, activeTab === 0 && styles.tabItemActive]}
-          onPress={() => setActiveTab(0)} >
-          <P style={[styles.tabItemText, activeTab === 0 && styles.tabItemTextActive]} >
-            {t('accounts.tokens')}
-          </P>
-        </TouchableOpacity>
-        {hasLockedTokens && <TouchableOpacity
-          style={[styles.tabItem, activeTab === 1 && styles.tabItemActive]}
-          onPress={() => setActiveTab(1)}>
-          <P style={[styles.tabItemText, activeTab === 1 && styles.tabItemTextActive]} >
-            {t('accounts.lockedTokens')}
-          </P>
-        </TouchableOpacity>
-        }
+  return (
+    <View style={styles.container}>
+      <View style={[styles.row, styles.alignCenter]}>
+        <View style={styles.tabsContainer}>
+          <TouchableOpacity
+            style={[styles.tabItem, activeTab === 0 && styles.tabItemActive]}
+            onPress={() => setActiveTab(0)}
+          >
+            <P style={[styles.tabItemText, activeTab === 0 && styles.tabItemTextActive]}>
+              {t('accounts.tokens')}
+            </P>
+          </TouchableOpacity>
+          {hasLockedTokens && (
+            <TouchableOpacity
+              style={[styles.tabItem, activeTab === 1 && styles.tabItemActive]}
+              onPress={() => setActiveTab(1)}
+            >
+              <P style={[styles.tabItemText, activeTab === 1 && styles.tabItemTextActive]}>
+                {t('accounts.lockedTokens')}
+              </P>
+            </TouchableOpacity>
+          )}
+        </View>
+        {!!showViewMore && (
+          <TouchableOpacity style={[styles.tabItem, styles.row]} onPress={viewAllTokens}>
+            <P style={[styles.tabItemText, styles.viewAll]}>{t('accounts.buttons.viewAll')}</P>
+            <View style={[styles.viewIcon]}>
+              <CaretSvg
+                height={15}
+                width={15}
+                direction="right"
+                color={colors.light.ultramarineBlue}
+              />
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
-      {!!showViewMore
-        && <TouchableOpacity style={[styles.tabItem, styles.row]} onPress={viewAllTokens} >
-          <P style={[styles.tabItemText, styles.viewAll]} >{t('accounts.buttons.viewAll')}</P>
-          <View style={[styles.viewIcon]} >
-            <CaretSvg height={15} width={15} direction='right' color={colors.light.ultramarineBlue} />
-          </View>
-        </TouchableOpacity>}
+      <View style={styles.tokenContainer}>
+        {isEmpty && <EmptyState message={t('accounts.emptyTokenMessage')} />}
+        {activeTab === 0 && (
+          <FlatList
+            data={tokens?.slice(0, 2)}
+            renderItem={({ item }) => <TokenItem token={item} />}
+            keyExtractor={(item) => item.tokenID}
+          />
+        )}
+        {activeTab === 1 && (
+          <FlatList
+            data={lockedTokens?.slice(0, 2)}
+            renderItem={({ item }) => <TokenItem token={item} />}
+            keyExtractor={(item) => item.tokenID}
+          />
+        )}
+      </View>
     </View>
-    <View style={styles.tokenContainer} >
-      {isEmpty && <EmptyState message={t('accounts.emptyTokenMessage')} />}
-      {activeTab === 0
-        && <FlatList
-          data={tokens?.slice(0, 2)}
-          renderItem={({ item }) => <TokenItem token={item} />}
-          keyExtractor={(item) => item.tokenID}
-        />
-      }
-      {activeTab === 1
-        && <FlatList
-          data={lockedTokens?.slice(0, 2)}
-          renderItem={({ item }) => <TokenItem token={item} />}
-          keyExtractor={(item) => item.tokenID}
-        />
-      }
-    </View>
-  </View>;
+  );
 };
 
 export default memo(translate()(TokensTab));

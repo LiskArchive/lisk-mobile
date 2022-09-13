@@ -10,11 +10,7 @@ import apiClient from './APIClient';
  * if fails on server it throws an error,
  *
  */
-export default function ws({
-  event,
-  params,
-  data,
-}) {
+export default function ws({ event, params, data }) {
   return new Promise((resolve, reject) => {
     if (apiClient.socket.disconnected) {
       reject(new Error('socket not connected'));

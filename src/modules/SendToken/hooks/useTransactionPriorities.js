@@ -6,20 +6,16 @@ export default function useTransactionPriorities() {
 
   const data = useMemo(() => {
     if (feesByPriorityQuery.data) {
-      return Object.entries(feesByPriorityQuery.data).map(
-        ([priorityCode, priorityBaseFee]) => (
-          {
-            code: priorityCode,
-            fee: priorityBaseFee,
-          }
-        )
-      );
+      return Object.entries(feesByPriorityQuery.data).map(([priorityCode, priorityBaseFee]) => ({
+        code: priorityCode,
+        fee: priorityBaseFee,
+      }));
     }
     return [];
   }, [feesByPriorityQuery.data]);
 
   return {
     ...feesByPriorityQuery,
-    data
+    data,
   };
 }

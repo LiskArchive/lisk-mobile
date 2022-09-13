@@ -10,7 +10,7 @@ export default {
       flex: 1,
     },
     rightContent: {
-      alignItems: 'flex-end'
+      alignItems: 'flex-end',
     },
     tokenTitle: {
       marginLeft: 10,
@@ -19,7 +19,7 @@ export default {
       flexDirection: 'row',
     },
     alignCenter: {
-      alignItems: 'center'
+      alignItems: 'center',
     },
     viewIcon: {
       marginLeft: 5,
@@ -31,11 +31,11 @@ export default {
       borderWidth: 1,
       borderRadius: 10,
       padding: 10,
-      borderColor: colors.light.platinumGray
+      borderColor: colors.light.platinumGray,
     },
     tabsContainer: {
       flex: 1,
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
     tabItem: {
       padding: 8,
@@ -49,30 +49,30 @@ export default {
     },
     tabItemTextActive: {
       color: colors.light.ultramarineBlue,
-      fontFamily: fonts.family.contextSemiBold
+      fontFamily: fonts.family.contextSemiBold,
     },
     tabItemActive: {
-      backgroundColor: 'rgba(64, 112, 244, 0.102519)'
+      backgroundColor: 'rgba(64, 112, 244, 0.102519)',
     },
     viewAll: {
       color: colors.light.ultramarineBlue,
       fontSize: 12,
-    }
+    },
   },
   [themes.light]: {
     tokenTitle: {
-      color: colors.light.zodiacBlue
+      color: colors.light.zodiacBlue,
     },
     currency: {
-      color: setColorOpacity(colors.light.zodiacBlue, 0.7)
-    }
+      color: setColorOpacity(colors.light.zodiacBlue, 0.7),
+    },
   },
   [themes.dark]: {
     tokenTitle: {
-      color: colors.dark.white
+      color: colors.dark.white,
     },
     currency: {
-      color: setColorOpacity(colors.light.white, 0.7)
-    }
-  }
+      color: setColorOpacity(colors.light.white, 0.7),
+    },
+  },
 };

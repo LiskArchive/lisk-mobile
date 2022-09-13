@@ -13,14 +13,14 @@ export const list = (state = [], { type, payload }) => {
     case actionTypes.addBookmark:
       return [...state, payload];
     case actionTypes.editBookmark:
-      return state.map(acc => {
+      return state.map((acc) => {
         if (acc.address === payload.address) {
           return payload;
         }
         return acc;
       });
     case actionTypes.deleteBookmark:
-      return state.filter(acc => acc.address !== payload.address);
+      return state.filter((acc) => acc.address !== payload.address);
     default:
       return state;
   }

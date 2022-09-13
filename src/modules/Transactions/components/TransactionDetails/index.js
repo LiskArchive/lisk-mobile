@@ -20,7 +20,7 @@ export default function TransactionDetails(props) {
   const {
     data: transactionData,
     isLoading: isLoadingTransaction,
-    error: errorOnTransaction
+    error: errorOnTransaction,
   } = useGetTransactionQuery(transactionId);
 
   const transaction = transactionData?.data[0];
@@ -29,9 +29,7 @@ export default function TransactionDetails(props) {
     if (isLoadingTransaction) {
       return (
         <View style={[styles.container, styles.theme.container]}>
-          <Text>
-            {i18next.t('transactions.transactionDetails.loadingText')}
-          </Text>
+          <Text>{i18next.t('transactions.transactionDetails.loadingText')}</Text>
         </View>
       );
     }
@@ -39,9 +37,7 @@ export default function TransactionDetails(props) {
     if (errorOnTransaction) {
       return (
         <View style={[styles.container, styles.theme.container]}>
-          <Text>
-            {i18next.t('transactions.transactionDetails.errorText')}
-          </Text>
+          <Text>{i18next.t('transactions.transactionDetails.errorText')}</Text>
         </View>
       );
     }

@@ -7,12 +7,12 @@ export function useCopyToClipboard(value) {
   const timeout = useRef();
 
   function handleCopy() {
-    setCopied(prevState => !prevState);
+    setCopied((prevState) => !prevState);
 
     Clipboard.setString(value);
 
     timeout.current = setTimeout(() => {
-      setCopied(prevState => !prevState);
+      setCopied((prevState) => !prevState);
     }, 4000);
   }
 

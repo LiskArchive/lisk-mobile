@@ -19,7 +19,7 @@ export const getApplicationsMockHandler = rest.get(
     };
 
     return res(ctx.delay(20), ctx.json(response));
-  },
+  }
 );
 
 export const getApplicationsMetaMockHandler = rest.get(
@@ -37,5 +37,5 @@ export const getApplicationsMetaMockHandler = rest.get(
     };
 
     return res(ctx.delay(20), ctx.json(response));
-  },
+  }
 );

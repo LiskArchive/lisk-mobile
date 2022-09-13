@@ -14,13 +14,7 @@ import { colors } from 'constants/styleGuide';
 
 import getAccountItemStyles from './styles';
 
-export default function AccountItem({
-  account,
-  onPress,
-  onDeletePress,
-  testID,
-  active,
-}) {
+export default function AccountItem({ account, onPress, onDeletePress, testID, active }) {
   const { styles, theme } = useTheme({ styles: getAccountItemStyles() });
 
   const { name: username, address } = account.metadata;
@@ -62,9 +56,7 @@ export default function AccountItem({
         <View style={styles.content}>
           {!!username && <P style={[styles.username, styles.theme.username]}>{username}</P>}
 
-          <P style={[styles.address, styles.theme.address]}>
-            {stringShortener(address, 6, 6)}
-          </P>
+          <P style={[styles.address, styles.theme.address]}>{stringShortener(address, 6, 6)}</P>
         </View>
 
         <View>{active && <CircleCheckedSvg variant="fill" />}</View>

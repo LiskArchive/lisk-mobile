@@ -9,12 +9,13 @@ import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/
 import { PrimaryButton } from 'components/shared/toolBox/button';
 
 import getSendTokenSelectApplicationsStepStyles from './styles';
-import { SendTokenRecipientAccountField, SendTokenRecipientApplicationField, SendTokenSenderApplicationField } from './components';
+import {
+  SendTokenRecipientAccountField,
+  SendTokenRecipientApplicationField,
+  SendTokenSenderApplicationField,
+} from './components';
 
-export default function SendTokenSelectApplicationsStep({
-  nextStep,
-  form
-}) {
+export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
 
   const { field: senderApplicationChainIDField } = useController({
@@ -45,17 +46,16 @@ export default function SendTokenSelectApplicationsStep({
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
         <View style={[styles.container]}>
-          <Text>
-            {i18next.t('sendToken.applicationsSelect.loadingApplicationsText')}
-          </Text>
+          <Text>{i18next.t('sendToken.applicationsSelect.loadingApplicationsText')}</Text>
         </View>
       </View>
     );
   }
 
-  const disableNextStepButton = !form.watch('senderApplicationChainID')
-   || !form.watch('recipientApplicationChainID')
-   || !form.watch('recipientAccountAddress');
+  const disableNextStepButton =
+    !form.watch('senderApplicationChainID') ||
+    !form.watch('recipientApplicationChainID') ||
+    !form.watch('recipientAccountAddress');
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>

@@ -3,13 +3,14 @@ import { apiClient } from './apiClient';
 
 jest.mock('./apiClient');
 
-const passphrase = 'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
+const passphrase =
+  'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together';
 const account = {
   address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw',
   balance: '10000',
   publicKey: 'cfc390b6e2dea236db4bfa8c7921e845e8fd54ab07e7c2db0af7ee93ef379b19',
   unconfirmedBalance: '10000',
-  initialized: true
+  initialized: true,
 };
 
 describe('api/lisk/account', () => {
@@ -39,12 +40,12 @@ describe('api/lisk/account', () => {
     it('handles empty results coming from getAccount method', async () => {
       apiClient.getAccount.mockResolvedValueOnce({
         data: [],
-        success: false
+        success: false,
       });
       const result = await getSummary({ address: account.address });
       expect(result).toEqual({
         data: [],
-        success: false
+        success: false,
       });
     });
 

@@ -52,12 +52,12 @@ export default () => ({
   },
   [themes.light]: {
     container: {
-      backgroundColor: colors.light.ultramarineBlue
-    }
+      backgroundColor: colors.light.ultramarineBlue,
+    },
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.light.inkBlue
-    }
-  }
+      backgroundColor: colors.light.inkBlue,
+    },
+  },
 });

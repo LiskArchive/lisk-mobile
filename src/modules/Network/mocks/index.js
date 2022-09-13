@@ -6,5 +6,5 @@ import { mockNetworkStatus } from '../__fixtures__';
 
 export const getNetworkStatusMockHandler = rest.get(
   `*/api/${API_VERSION}/network/status`,
-  async (_, res, ctx) => res(ctx.delay(20), ctx.json(mockNetworkStatus)),
+  async (_, res, ctx) => res(ctx.delay(20), ctx.json(mockNetworkStatus))
 );

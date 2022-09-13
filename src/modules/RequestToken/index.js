@@ -1,9 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
 import React, { useEffect, useMemo, useState } from 'react';
-import {
-  View, TouchableWithoutFeedback, SafeAreaView
-} from 'react-native';
+import { View, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { useDispatch } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -19,7 +17,7 @@ import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/h
 import {
   SendTokenMessageField,
   SendTokenAmountField,
-  TokenSelectField
+  TokenSelectField,
 } from 'modules/SendToken/components/SelectTokenStep/components';
 import { SendTokenRecipientApplicationField } from 'modules/SendToken/components/SelectApplicationsStep/components';
 import Share from 'components/shared/share';
@@ -32,9 +30,7 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import { pricesRetrieved } from 'actions/service';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
-import {
-  deviceWidth,
-} from 'utilities/device';
+import { deviceWidth } from 'utilities/device';
 import { stringShortener, serializeQueryString } from 'utilities/helpers';
 import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
@@ -54,31 +50,32 @@ export default function RequestToken() {
 
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
-  const [
-    recipientApplicationChainID,
-    setRecipientApplicationChainID
-  ] = useState(currentApplication.chainID);
-  const [recipientTokenID, setRecipientTokenID] = useState(mockTokens.find(token => token.symbol === 'LSK')?.tokenID);
+  const [recipientApplicationChainID, setRecipientApplicationChainID] = useState(
+    currentApplication.chainID
+  );
+  const [recipientTokenID, setRecipientTokenID] = useState(
+    mockTokens.find((token) => token.symbol === 'LSK')?.tokenID
+  );
   const [modalOpen, setModalOpen] = useState(false);
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
   const qrCodeUrl = useMemo(() => {
-    const validator = str => reg.amount.test(str);
+    const validator = (str) => reg.amount.test(str);
 
     const amountValidity = validator(amount.value) ? 0 : 1;
     const queryString = serializeQueryString({
       recipient: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
       recipientApplication: recipientApplicationChainID,
-      recipientToken: recipientTokenID
+      recipientToken: recipientTokenID,
     });
     return `lisk://wallet${queryString}`;
   }, [
     currentAccount.metadata.address,
     amount.value,
     recipientApplicationChainID,
-    recipientTokenID
+    recipientTokenID,
   ]);
 
   const [copiedToClipboard, handleCopyToClipboard] = useCopyToClipboard(qrCodeUrl);
@@ -89,20 +86,14 @@ export default function RequestToken() {
     dispatch(pricesRetrieved());
   }, [dispatch]);
 
-  const renderQRCode = (size) => <QRCode
-    value={qrCodeUrl}
-    size={size}
-    color={
-      theme === themes.light
-        ? colors.light.black
-        : colors.dark.white
-    }
-    backgroundColor={
-      theme === themes.light
-        ? colors.light.white
-        : colors.dark.maastrichtBlue
-    }
-  />;
+  const renderQRCode = (size) => (
+    <QRCode
+      value={qrCodeUrl}
+      size={size}
+      color={theme === themes.light ? colors.light.black : colors.dark.white}
+      backgroundColor={theme === themes.light ? colors.light.white : colors.dark.maastrichtBlue}
+    />
+  );
 
   if (applicationsMetadata.isLoading) {
     return (
@@ -119,8 +110,9 @@ export default function RequestToken() {
       <HeaderBackButton
         title="requestTokens.title"
         onPress={navigation.goBack}
-        rightIconComponent={() => <TouchableOpacity
-          onPress={() => setModalOpen(true)}>{renderQRCode(20)}</TouchableOpacity>}
+        rightIconComponent={() => (
+          <TouchableOpacity onPress={() => setModalOpen(true)}>{renderQRCode(20)}</TouchableOpacity>
+        )}
       />
 
       <KeyboardAwareScrollView
@@ -134,20 +126,14 @@ export default function RequestToken() {
           </P>
 
           <View style={styles.addressContainer}>
-            <Avatar
-              style={styles.avatar}
-              address={currentAccount.metadata.address}
-              size={40}
-            />
+            <Avatar style={styles.avatar} address={currentAccount.metadata.address} size={40} />
 
             <View>
               {currentAccount.metadata.name && (
-                <B style={styles.theme.username}>
-                  {currentAccount.metadata.name}
-                </B>
+                <B style={styles.theme.username}>{currentAccount.metadata.name}</B>
               )}
 
-              <P style={[styles.address, styles.theme.address]} >
+              <P style={[styles.address, styles.theme.address]}>
                 {stringShortener(currentAccount.metadata.address, 9, 6)}
               </P>
             </View>
@@ -178,27 +164,16 @@ export default function RequestToken() {
           <PrimaryButton
             onPress={handleCopyToClipboard}
             adornments={{
-              left: (
-                !copiedToClipboard ? (
-                  <CopySvg
-                    color={colors.light.white}
-                    variant="outline"
-                    style={{ marginRight: 8 }}
-                  />
-                ) : (
-                  <CheckSvg
-                    color={colors.light.white}
-                    height={14}
-                    style={{ marginRight: 8 }}
-                  />
-                )
-              )
+              left: !copiedToClipboard ? (
+                <CopySvg color={colors.light.white} variant="outline" style={{ marginRight: 8 }} />
+              ) : (
+                <CheckSvg color={colors.light.white} height={14} style={{ marginRight: 8 }} />
+              ),
             }}
           >
             {!copiedToClipboard ? 'Copy link' : 'Link copied!'}
           </PrimaryButton>
         </View>
-
       </KeyboardAwareScrollView>
 
       <BottomModal
@@ -206,11 +181,7 @@ export default function RequestToken() {
         show={modalOpen}
         toggleShow={setModalOpen}
       >
-        <Share
-          type={TouchableWithoutFeedback}
-          value={qrCodeUrl}
-          title={qrCodeUrl}
-        >
+        <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
           <View>
             {renderQRCode(qrCodeSize)}
             <View style={styles.shareTextContainer}>

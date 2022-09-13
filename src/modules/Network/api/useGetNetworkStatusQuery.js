@@ -20,11 +20,9 @@ export function useGetNetworkStatusQuery({ config: customConfig = {}, options } 
     ...customConfig,
   };
 
-  return useCustomQuery(
-    {
-      keys: [GET_NETWORK_STATUS],
-      config,
-      options,
-    },
-  );
+  return useCustomQuery({
+    keys: [GET_NETWORK_STATUS],
+    config,
+    options,
+  });
 }

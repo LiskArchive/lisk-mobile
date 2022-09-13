@@ -13,7 +13,7 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actio
 import getStyles from './styles';
 
 @connect(
-  state => ({
+  (state) => ({
     passphrase: state.accounts.passphrase,
   }),
   {
@@ -31,14 +31,18 @@ class EnableBioAuth extends React.Component {
     const title = this.props.route.params?.title ?? 'Bio Auth';
     this.props.navigation.setOptions({
       title: null,
-      headerLeft: (props) => <HeaderBackButton title={`Enable ${title}`} onPress={this.props.navigation.goBack} {...props} />
+      headerLeft: (props) => (
+        <HeaderBackButton
+          title={`Enable ${title}`}
+          onPress={this.props.navigation.goBack}
+          {...props}
+        />
+      ),
     });
   }
 
   render() {
-    const {
-      theme, styles, route, t
-    } = this.props;
+    const { theme, styles, route, t } = this.props;
 
     const title = route.params?.title ?? 'Bio Auth';
 
@@ -49,9 +53,7 @@ class EnableBioAuth extends React.Component {
             <P style={[styles.subHeader, styles.theme.subHeader]}>
               {t('Here’s what you need to know:')}
             </P>
-            <View
-              style={[styles.row, styles.separator, styles.theme.separator]}
-            >
+            <View style={[styles.row, styles.separator, styles.theme.separator]}>
               <View style={styles.iconWrapper}>
                 <Icon
                   name="passphrase"
@@ -73,9 +75,7 @@ class EnableBioAuth extends React.Component {
                 </Small>
               </View>
             </View>
-            <View
-              style={[styles.row, styles.separator, styles.theme.separator]}
-            >
+            <View style={[styles.row, styles.separator, styles.theme.separator]}>
               <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
                 <Icon
                   name="settings-bg"
@@ -98,9 +98,7 @@ class EnableBioAuth extends React.Component {
                 </Small>
               </View>
             </View>
-            <View
-              style={[styles.row, styles.separator, styles.theme.separator]}
-            >
+            <View style={[styles.row, styles.separator, styles.theme.separator]}>
               <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
                 <Icon
                   name="secure"
@@ -113,13 +111,9 @@ class EnableBioAuth extends React.Component {
                 />
               </View>
               <View style={styles.textWrapper}>
-                <B style={[styles.rowTitle, styles.theme.rowTitle]}>
-                  Fast and secure
-                </B>
+                <B style={[styles.rowTitle, styles.theme.rowTitle]}>Fast and secure</B>
                 <Small style={[styles.description, styles.theme.description]}>
-                  {t(
-                    `${title} offers a secure and faster way to access the Lisk app.`
-                  )}
+                  {t(`${title} offers a secure and faster way to access the Lisk app.`)}
                 </Small>
               </View>
             </View>

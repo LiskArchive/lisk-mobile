@@ -369,10 +369,10 @@
       },
       "continueToWalletButtonText": "Weiter zur Geldbörse"
     },
-    "explore":{
+    "explore": {
       "title": "Anwendungen",
       "statsButtonText": "Statistiken",
-      "applicationList":{
+      "applicationList": {
         "searchPlaceholder": "Suchanwendung",
         "loadingText": "Anwendungen werden geladen...",
         "errorText": "Fehler beim Laden Ihrer Anwendungen.",
@@ -381,15 +381,16 @@
         "unpinText": "Unpin",
         "deleteText": "Löschen"
       }
-    }},
-    "requestTokens": {
-      "title": "",
-      "recipient": "",
-      "recipientApplication": "",
-      "selectApplication": "",
-      "selectToken": "",
-      "token": ""
-    },
+    }
+  },
+  "requestTokens": {
+    "title": "",
+    "recipient": "",
+    "recipientApplication": "",
+    "selectApplication": "",
+    "selectToken": "",
+    "token": ""
+  },
   "sendToken": {
     "applicationsSelect": {
       "loadingApplicationsText": "Laden...",
@@ -424,7 +425,7 @@
       "highPriorityLabel": "Hoch",
       "transactionFeeLabel": "Transaktionsgebühr",
       "loadingTransactionFeeText": "Transaktionsgebühr wird geladen...",
-      "errorLoadingTransactionFeeText": "Fehler bei der Gebührenberechnung!",      
+      "errorLoadingTransactionFeeText": "Fehler bei der Gebührenberechnung!",
       "initializationFeeLabel": "Initialisierungsgebühr",
       "loadingInitializationFeeText": "Initialisierungsgebühr wird geladen...",
       "cmmFeeLabel": "CCM-Gebühr",
@@ -456,7 +457,7 @@
         "reportErrorButtonText": "Melden Sie den Fehler per E-Mail"
       }
     },
-    "errors" : {
+    "errors": {
       "generalMessage": "Bitte füllen Sie alle erforderlichen Felder aus, um Ihre Token zu senden.",
       "senderApplicationChainID": "Die App, von der gesendet werden soll, muss angegeben werden",
       "recipientApplicationChainID": "Die App, die die Token erhält, muss angegeben werden",
@@ -465,7 +466,7 @@
       "amountRequired": "Token-Betrag ist erforderlich",
       "amountMustBeNumber": "Der Betrag muss eine Zahl sein",
       "amountMustBePositive": "Tokenbetrag muss eine positive Zahl sein",
-      "priority":"Priorität muss angegeben werden"
+      "priority": "Priorität muss angegeben werden"
     },
     "info": {
       "bytesCounter": {
@@ -492,7 +493,7 @@
     }
   },
   "accounts": {
-    "accountsManager" : {
+    "accountsManager": {
       "title": "Konten verwalten",
       "description": "Sie können Ihr Konto wechseln und auch jedes Konto entfernen, das Sie derzeit nicht verwenden",
       "addAccountButtonText": "Konto hinzufügen",
@@ -512,7 +513,7 @@
       "send": ""
     }
   },
-  "transactions" : {
+  "transactions": {
     "transactionDetails": {
       "loadingText": "Transaktion wird geladen...",
       "errorText": "Fehler beim Laden der Transaktion!",

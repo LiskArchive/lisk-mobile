@@ -30,8 +30,7 @@ describe('useApplicationsQuery hook', () => {
         <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
       </QueryClientProvider>
     );
-    const { result, waitFor } = renderHook(() =>
-      useApplicationsQuery(), { wrapper });
+    const { result, waitFor } = renderHook(() => useApplicationsQuery(), { wrapper });
 
     await waitFor(() => result.current.isFetched);
 

@@ -4,7 +4,7 @@ export default () => ({
   common: {
     inputRow: {
       flexDirection: 'row',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     rightAdornment: {
       position: 'absolute',

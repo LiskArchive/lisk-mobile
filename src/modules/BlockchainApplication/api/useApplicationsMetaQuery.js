@@ -1,8 +1,4 @@
-import {
-  LIMIT,
-  API_URL,
-  API_BASE_URL
-} from 'utilities/api/constants';
+import { LIMIT, API_URL, API_BASE_URL } from 'utilities/api/constants';
 import { GET_APPLICATIONS_QUERY } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 
@@ -23,7 +19,7 @@ export function useApplicationsMetaQuery({ config: customConfig = {}, options = 
     ...customConfig,
     params: {
       limit: LIMIT,
-      ...(customConfig?.params || {})
+      ...(customConfig?.params || {}),
     },
   };
 

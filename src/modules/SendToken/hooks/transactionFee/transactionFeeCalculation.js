@@ -12,19 +12,13 @@ import { getTransactionFee } from '../../utils';
  * @returns {object}
  *
  */
-export const calculateMinimumFee = ({
-  account,
-  transaction,
-  selectedPriority,
-}) => {
-  const minFee = getTransactionFee(
-    {
-      account,
-      transaction,
-      selectedPriority,
-      selectedPriorityIndex: 0
-    }
-  );
+export const calculateMinimumFee = ({ account, transaction, selectedPriority }) => {
+  const minFee = getTransactionFee({
+    account,
+    transaction,
+    selectedPriority,
+    selectedPriorityIndex: 0,
+  });
   return minFee;
 };
 
@@ -38,13 +32,11 @@ export const calculateMinimumFee = ({
  *
  */
 export const calculateMaximumFeeAmount = ({ account, transaction, ...params }) => {
-  const maxAmountFee = getTransactionFee(
-    {
-      ...params,
-      account,
-      transaction: { transaction, amount: fromRawLsk(account.balance) },
-    }
-  );
+  const maxAmountFee = getTransactionFee({
+    ...params,
+    account,
+    transaction: { transaction, amount: fromRawLsk(account.balance) },
+  });
   return maxAmountFee;
 };
 
@@ -57,11 +49,7 @@ export const calculateMaximumFeeAmount = ({ account, transaction, ...params }) =
  * @returns {object}
  *
  */
-export const calculateTransactionFees = ({
-  account,
-  selectedPriority,
-  transaction,
-}) => {
+export const calculateTransactionFees = ({ account, selectedPriority, transaction }) => {
   const minFee = calculateMinimumFee({
     account,
     transaction,
@@ -70,7 +58,7 @@ export const calculateTransactionFees = ({
   const maxFee = calculateMaximumFeeAmount({
     account,
     transaction,
-    selectedPriority
+    selectedPriority,
   });
   const fee = getTransactionFee({
     account,

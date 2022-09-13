@@ -11,11 +11,7 @@ export default function AccountsManagerModal({ show, setShow }) {
   const { styles } = useTheme({ styles: getAccountsManagerModalStyles() });
 
   return (
-    <BottomModal
-      show={show}
-      toggleShow={setShow}
-      style={{ container: styles.container }}
-    >
+    <BottomModal show={show} toggleShow={setShow} style={{ container: styles.container }}>
       <AccountsManager
         mode="modal"
         onAccountPress={() => setShow(false)}

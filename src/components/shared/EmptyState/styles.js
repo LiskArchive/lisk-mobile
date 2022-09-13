@@ -11,7 +11,7 @@ export default function getEmptyStateStyles() {
       messageText: {
         marginTop: 10,
         fontSize: 14,
-        textAlign: 'center'
+        textAlign: 'center',
       },
     },
     [themes.light]: {

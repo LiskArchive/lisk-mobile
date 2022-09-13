@@ -11,7 +11,7 @@ export function useBlockchainApplicationRowActions({
   application,
   variant,
   setShowDeleteDefaultApplicationModal,
-  deleteApplication
+  deleteApplication,
 }) {
   const { togglePin } = usePinBlockchainApplication();
 
@@ -38,7 +38,6 @@ export function useBlockchainApplicationRowActions({
       break;
 
     case 'manage':
-
       rightActions = [
         {
           title: t('application.explore.applicationList.deleteText'),

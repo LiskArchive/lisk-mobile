@@ -5,9 +5,7 @@ import withTheme from 'components/shared/withTheme';
 import { DraggableItem, Item } from './Item';
 import getStyles from './styles';
 
-const List = ({
-  styles, list, onPress, draggable, Component
-}) => {
+const List = ({ styles, list, onPress, draggable, Component }) => {
   const Element = Component || (draggable ? DraggableItem : Item);
 
   return (

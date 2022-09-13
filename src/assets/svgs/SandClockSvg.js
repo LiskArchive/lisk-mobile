@@ -1,20 +1,9 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 
-export default function SandClockSvg({
-  color = '#FFB400',
-  height = 13,
-  width = 12,
-  style
-}) {
+export default function SandClockSvg({ color = '#FFB400', height = 13, width = 12, style }) {
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 12 13"
-      fill="none"
-      style={style}
-    >
+    <Svg width={width} height={height} viewBox="0 0 12 13" fill="none" style={style}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"

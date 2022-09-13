@@ -26,28 +26,21 @@ export default function TransactionRow({ transaction }) {
       style={[styles.container, styles.theme.container]}
     >
       <View style={[styles.row]}>
-        <Image
-          source={transactionAssets.image }
-          style={[styles.image]}
-        />
+        <Image source={transactionAssets.image} style={[styles.image]} />
 
         <View style={[styles.titleContainer, styles.theme.titleContainer]}>
           <Text style={[styles.addressText, styles.theme.addressText]}>
             {stringShortener(transaction.params.recipientAddress, 5, 5)}
           </Text>
 
-          <TimeStamp
-            timestamp={transaction.block.timestamp}
-            format="MMM D, YYYY"
-            styles={styles}
-          />
+          <TimeStamp timestamp={transaction.block.timestamp} format="MMM D, YYYY" styles={styles} />
         </View>
       </View>
 
       <View style={[styles.statusContainer, styles.theme.statusContainer]}>
         <TransactionAmount transaction={transaction} style={{ marginBottom: 4 }} />
 
-        <TransactionStatus transaction={transaction}/>
+        <TransactionStatus transaction={transaction} />
       </View>
     </TouchableOpacity>
   );

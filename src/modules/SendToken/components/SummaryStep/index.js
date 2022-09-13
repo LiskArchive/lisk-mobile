@@ -16,13 +16,8 @@ import { useSendTokenSummary } from './hooks';
 import { SendTokenSummaryModal } from './components';
 import Avatar from '../../../../components/shared/avatar';
 
-export default function SendTokenSummaryStep({
-  form,
-  prevStep,
-  reset,
-}) {
-  const [showSendTokenSummaryModal,
-    setShowSendTokenSummaryModal] = useState(false);
+export default function SendTokenSummaryStep({ form, prevStep, reset }) {
+  const [showSendTokenSummaryModal, setShowSendTokenSummaryModal] = useState(false);
 
   const { styles } = useTheme({
     styles: getSendTokenSummaryStepStyles(),
@@ -112,9 +107,7 @@ export default function SendTokenSummaryStep({
             </Text>
 
             <View style={[styles.row]}>
-              <Text
-                style={[styles.valueText, styles.theme.valueText]}
-              >
+              <Text style={[styles.valueText, styles.theme.valueText]}>
                 {summary.token?.symbol}
               </Text>
 
@@ -127,10 +120,8 @@ export default function SendTokenSummaryStep({
               {i18next.t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')}
             </Text>
 
-            <Text
-              style={[styles.valueText, styles.theme.valueText]}
-            >
-                {summary.amount} {summary.token?.symbol}
+            <Text style={[styles.valueText, styles.theme.valueText]}>
+              {summary.amount} {summary.token?.symbol}
             </Text>
           </View>
 
@@ -140,11 +131,7 @@ export default function SendTokenSummaryStep({
                 {i18next.t('sendToken.tokenSelect.messageFieldLabelPlain')}
               </Text>
 
-              <Text
-                style={[styles.valueText, styles.theme.valueText]}
-              >
-                {summary.message}
-              </Text>
+              <Text style={[styles.valueText, styles.theme.valueText]}>{summary.message}</Text>
             </View>
           )}
 
@@ -153,9 +140,7 @@ export default function SendTokenSummaryStep({
               {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
             </Text>
 
-            <Text
-              style={[styles.valueText, styles.theme.valueText]}
-            >
+            <Text style={[styles.valueText, styles.theme.valueText]}>
               {i18next.t(PRIORITY_NAMES_MAP[summary.priority])}
             </Text>
           </View>
@@ -181,9 +166,7 @@ export default function SendTokenSummaryStep({
           </View>
 
           <View style={[styles.fieldRow, { borderBottomColor: 'transparent' }]}>
-            <Text style={[styles.label]}>
-              {i18next.t('sendToken.tokenSelect.cmmFeeLabel')}
-            </Text>
+            <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.cmmFeeLabel')}</Text>
 
             <Text style={[styles.valueText, styles.theme.valueText]}>
               {summary.cmmFee?.data} {summary.token?.symbol}

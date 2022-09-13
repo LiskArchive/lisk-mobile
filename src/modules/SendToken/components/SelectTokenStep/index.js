@@ -13,14 +13,10 @@ import {
   SendTokenPriorityField,
   SendTokenTransactionFeesLabels,
   SendTokenAmountField,
-  TokenSelectField
+  TokenSelectField,
 } from './components';
 
-export default function SendTokenSelectTokenStep({
-  nextStep,
-  prevStep,
-  form,
-}) {
+export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
   const { field: tokenIDField } = useController({
     name: 'tokenID',
     control: form.control,
@@ -86,10 +82,7 @@ export default function SendTokenSelectTokenStep({
           style={{ container: { marginBottom: 16 } }}
         />
 
-        <SendTokenPriorityField
-          value={priorityField.value}
-          onChange={priorityField.onChange}
-        />
+        <SendTokenPriorityField value={priorityField.value} onChange={priorityField.onChange} />
 
         <SendTokenTransactionFeesLabels
           tokenID={tokenIDField.value}

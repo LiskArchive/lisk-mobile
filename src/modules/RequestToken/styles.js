@@ -1,6 +1,4 @@
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -52,7 +50,7 @@ export default () => ({
     },
     modalContainer: {
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     shareTextContainer: {
       marginTop: 16,

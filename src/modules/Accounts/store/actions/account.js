@@ -22,12 +22,12 @@ export const deleteAccount = (address) => ({
   address,
 });
 
-export const setAccountSummary = accountSummary => ({
+export const setAccountSummary = (accountSummary) => ({
   type: actionTypes.setAccountSummary,
-  accountSummary
+  accountSummary,
 });
 
-export const resetAccountSummary = summary => ({
+export const resetAccountSummary = (summary) => ({
   type: actionTypes.resetAccountSummary,
-  summary
+  summary,
 });

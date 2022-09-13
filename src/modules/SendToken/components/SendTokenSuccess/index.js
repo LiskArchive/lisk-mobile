@@ -18,10 +18,11 @@ export default function SendTokenSuccess({ onClick }) {
   return (
     <View style={[styles.container, styles.theme.container]}>
       <View style={styles.illustrationContainer}>
-        {theme === themes.dark
-          ? <TxSuccessDarkSvg style={styles.illustration}/>
-          : <TxSuccessSvg style={styles.illustration}/>
-        }
+        {theme === themes.dark ? (
+          <TxSuccessDarkSvg style={styles.illustration} />
+        ) : (
+          <TxSuccessSvg style={styles.illustration} />
+        )}
 
         <Text style={[styles.title, styles.theme.title]}>
           {i18next.t('sendToken.result.success.title')}

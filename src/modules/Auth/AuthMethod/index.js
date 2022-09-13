@@ -21,9 +21,7 @@ import AuthTypeItem from '../components/AuthType';
 LogBox.ignoreAllLogs();
 
 // eslint-disable-next-line max-statements
-const AuthMethod = ({
-  styles, route, t, navigation
-}) => {
+const AuthMethod = ({ styles, route, t, navigation }) => {
   const signOut = route.params?.signOut;
   const settings = useSelector((state) => state.settings);
   const [, setCurrentApplication] = useCurrentBlockchainApplication();

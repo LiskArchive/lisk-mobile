@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  View, TouchableOpacity, Linking
-} from 'react-native';
+import { View, TouchableOpacity, Linking } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
@@ -17,7 +15,7 @@ export default function SendTokenOnMultisignatureAccount() {
 
   return (
     <View style={[styles.container]}>
-      <SendLSKIllustrationSvg style={{ marginBottom: 16 }}/>
+      <SendLSKIllustrationSvg style={{ marginBottom: 16 }} />
 
       <P style={styles.theme.copy}>{i18next.t('multisignature.send.description')}</P>
 
@@ -29,6 +27,6 @@ export default function SendTokenOnMultisignatureAccount() {
           {i18next.t('multisignature.send.button')}
         </B>
       </TouchableOpacity>
-  </View>
+    </View>
   );
 }

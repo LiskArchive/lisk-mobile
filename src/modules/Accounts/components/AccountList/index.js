@@ -17,7 +17,7 @@ export default function AccountsList({
   accounts,
   onAccountPress,
   onDeleteAccountPress,
-  style
+  style,
 }) {
   const navigation = useNavigation();
 
@@ -38,13 +38,7 @@ export default function AccountsList({
       </H2>
 
       {mode === 'modal' && (
-        <P
-          style={[
-            styles.description,
-            styles.theme.description,
-            style?.description
-          ]}
-        >
+        <P style={[styles.description, styles.theme.description, style?.description]}>
           {i18next.t('accounts.accountsManager.description')}
         </P>
       )}
@@ -58,9 +52,7 @@ export default function AccountsList({
             account={item}
             onPress={() => handleSelectAccountClick(item)}
             onDeletePress={() => onDeleteAccountPress(item)}
-            active={
-              item.metadata.address === currentAccount.metadata?.address
-            }
+            active={item.metadata.address === currentAccount.metadata?.address}
           />
         )}
         renderSpinner

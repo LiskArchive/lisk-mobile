@@ -7,7 +7,7 @@ const BigInt = require('big-integer');
 const msg = 0x80;
 const rest = 0x7f;
 
-const writeUInt32 = value => {
+const writeUInt32 = (value) => {
   const result = [];
   let index = 0;
   while (value > rest) {
@@ -21,19 +21,20 @@ const writeUInt32 = value => {
   return Buffer.from(result);
 };
 
-const writeBytes = bytes =>
-  Buffer.concat([writeUInt32(bytes.length), bytes]);
+const writeBytes = (bytes) => Buffer.concat([writeUInt32(bytes.length), bytes]);
 
-const writeString = value => {
+const writeString = (value) => {
   const stringBuffer = Buffer.from(value, 'utf8');
   return writeBytes(stringBuffer);
 };
 
-const writeUInt64 = value => {
+const writeUInt64 = (value) => {
   const result = [];
   let index = 0;
   while (value > BigInt(rest)) {
-    result[index] = BigInt(msg).or(value.and(BigInt(rest))).toJSNumber();
+    result[index] = BigInt(msg)
+      .or(value.and(BigInt(rest)))
+      .toJSNumber();
     value = value.shiftRight(7);
     index += 1;
   }
@@ -62,7 +63,7 @@ const generateKey = (type, fieldNumber) => {
   return keyAsVarInt;
 };
 
-const encodeTransferAsset = asset => {
+const encodeTransferAsset = (asset) => {
   const result = [];
   if (asset.amount === undefined || asset.amount === null) {
     throw new Error('amount must be defined');
@@ -85,7 +86,7 @@ const encodeTransferAsset = asset => {
   return Buffer.concat(result);
 };
 
-const encodeTransaction = tx => {
+const encodeTransaction = (tx) => {
   const result = [];
 
   if (tx.moduleID === undefined || tx.moduleID === null) {

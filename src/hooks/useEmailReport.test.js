@@ -75,7 +75,7 @@ describe('useEmailReport hook', () => {
   it('should insert correctly the error data on body', async () => {
     const props = {
       errorMessage: 'The custom error message',
-      error: { message: 'The error message' }
+      error: { message: 'The error message' },
     };
 
     const { result, waitFor } = renderHook(() => useEmailReport(props), { wrapper });

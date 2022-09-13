@@ -52,7 +52,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
     }
   };
 
-  const deleteApplication = application => {
+  const deleteApplication = (application) => {
     nextStep({ application });
   };
 
@@ -81,11 +81,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
           <P style={styles.buttonText}>{i18next.t('application.manage.add.buttonText')}</P>
         </TouchableOpacity>
       </View>
-      <BottomModal
-        show={isModalOpen}
-        toggleShow={() => toggleModal(false)}
-        style={styles.modal}
-      >
+      <BottomModal show={isModalOpen} toggleShow={() => toggleModal(false)} style={styles.modal}>
         {selectedApplication && (
           <SelectNode
             styles={styles}
