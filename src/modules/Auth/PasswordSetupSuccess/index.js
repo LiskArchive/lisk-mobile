@@ -38,13 +38,18 @@ const PasswordSetupSuccess = ({ styles, t, encryptedJson, onContinue, theme }) =
           <View style={[styles.file]}>
             <FileSvg />
           </View>
-          <Text style={[styles.text, styles.theme.text]}>
-            encrypted_secret_recovery_phrase.json
-          </Text>
+          <Text
+            style={[styles.text, styles.theme.text]}
+          >{`${encryptedJson.metadata.address}-encrypted_secret_recovery_phrase.json`}</Text>
         </View>
-        <Text
-          style={[styles.text, styles.theme.text]}
-        >{`${encryptedJson.metadata.address}-encrypted_secret_recovery_phrase.json`}</Text>
+        <TouchableOpacity style={[styles.downloadFile]} onPress={downloadFile}>
+          <Text style={[styles.download, styles.theme.download]}>
+            {t('auth.setup.buttons.download')}
+          </Text>
+          <View style={[styles.file]}>
+            <DownloadSvg style={[styles.file]} />
+          </View>
+        </TouchableOpacity>
       </View>
     </SuccessScreen>
   );
