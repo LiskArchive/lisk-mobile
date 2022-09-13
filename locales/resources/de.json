@@ -311,9 +311,11 @@
       "passwordSetupDescription": "",
       "passwordSetupSuccessTitle": "",
       "passwordSetupSuccessDescription": "",
+      "downloaded": "",
       "buttons": {
         "passwordSetupContinue": "",
-        "save_account": ""
+        "saveAccount": "",
+        "download": ""
       }
     },
     "form": {

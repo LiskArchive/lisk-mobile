@@ -135,7 +135,7 @@ const PasswordSetupForm = ({
               </Text>
             </View>
             <PrimaryButton
-              title={t('auth.setup.buttons.save_account')}
+              title={t('auth.setup.buttons.saveAccount')}
               onPress={submitForm}
               disabled={!isAgreed}
             />

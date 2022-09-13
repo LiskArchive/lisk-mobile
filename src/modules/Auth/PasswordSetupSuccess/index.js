@@ -14,7 +14,8 @@ const PasswordSetupSuccess = ({
   styles, t, encryptedJson, onContinue, theme
 }) => {
   const [downloaded, setDownloaded] = useState(false);
-  const downloadFile = () => downloadJSON(encryptedJson, (e) => {
+
+  const downloadFile = () => downloadJSON(encryptedJson, `${encryptedJson.metadata.address}-encrypted_secret_recovery_phrase.json`, (e) => {
     if (!e) {
       setDownloaded(true);
     }
@@ -33,7 +34,7 @@ const PasswordSetupSuccess = ({
         <View style={[styles.file]} >
           <FileSvg />
         </View>
-        <Text style={[styles.text, styles.theme.text]} >encrypted_secret_recovery_phrase.json</Text>
+        <Text style={[styles.text, styles.theme.text]} >{`${encryptedJson.metadata.address}-encrypted_secret_recovery_phrase.json`}</Text>
       </View>
       <TouchableOpacity style={[styles.downloadFile]} onPress={downloadFile} >
         <Text style={[styles.download, styles.theme.download]}>{t('auth.setup.buttons.download')}</Text>

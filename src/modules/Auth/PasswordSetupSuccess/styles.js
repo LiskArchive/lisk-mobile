@@ -15,7 +15,8 @@ export default () => ({
     },
     text: {
       fontFamily: fonts.family.heading,
-      fontSize: fonts.size.small
+      fontSize: fonts.size.small,
+      textAlign: 'center',
     },
     download: {
       fontFamily: fonts.family.heading,

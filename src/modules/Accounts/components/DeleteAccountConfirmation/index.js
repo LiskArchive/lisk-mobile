@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Platform, ToastAndroid, View } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
@@ -26,8 +26,13 @@ export default function DeleteAccountConfirmation({
   const { styles } = useTheme({ styles: getDeleteAccountConfirmationStyles() });
 
   function handleDownloadFile() {
-    downloadJSON(account, (e) => {
-      if (!e) setDownloaded(true);
+    downloadJSON(account, `${account.metadata.address}-encrypted_secret_recovery_phrase.json`, (e) => {
+      if (!e) {
+        setDownloaded(true);
+        if (Platform.OS === 'android') {
+          ToastAndroid.show(i18next.t('auth.setup.downloaded'), ToastAndroid.BOTTOM);
+        }
+      }
     });
   }
 
@@ -65,10 +70,10 @@ export default function DeleteAccountConfirmation({
         </View>
 
         <View style={[styles.row, styles.filenameContainer]}>
-          <FileSvg style={[styles.file, { marginRight: 8 }]}/>
+          <FileSvg style={[styles.file, { marginRight: 8 }]} />
 
           <P style={[styles.text, styles.theme.text]}>
-            encrypted_secret_recovery_phrase.json
+            {`${account.metadata.address}-encrypted_secret_recovery_phrase.json`}
           </P>
         </View>
 
@@ -77,7 +82,7 @@ export default function DeleteAccountConfirmation({
           style={[styles.row]}
           adornments={{
             right:
-              <DownloadSvg style={[styles.downloadFileIcon]}/>
+              <DownloadSvg style={[styles.downloadFileIcon]} />
           }}
         >
           {i18next.t('accounts.accountsManager.downloadFileButtonText')}
