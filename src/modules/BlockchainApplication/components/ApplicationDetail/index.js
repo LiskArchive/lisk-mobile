@@ -21,6 +21,7 @@ import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApp
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 
 import getStyles from './styles';
+import DataRenderer from '../../../../components/shared/DataRenderer';
 
 /**
  *
@@ -56,8 +57,6 @@ export default function ApplicationDetail({ route }) {
     addApplication(application);
     navigation.navigate('AddApplicationSuccess');
   };
-
-  console.log({ application, applicationMetadata });
 
   return (
     <ScrollView contentContainerStyle={[styles.flex, styles.theme.container]}>
@@ -103,22 +102,48 @@ export default function ApplicationDetail({ route }) {
 
       <View style={[styles.flex, styles.body]}>
         <View style={styles.titleRow}>
-          <H3 style={[styles.title, styles.theme.title]}>
-            {applicationMetadata?.chainName}
-          </H3>
+          <DataRenderer
+            isLoading={applicationsMetadata.isLoading}
+            error={applicationsMetadata.isError}
+            data={applicationMetadata?.chainName}
+            renderData={(data) => (
+              <H3 style={[styles.title, styles.theme.title]}>
+                {data}
+              </H3>
+            )}
+          />
 
           <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
             <PinSvg variant={isPinned ? 'fill' : 'outline'} width={25} height={25} />
           </TouchableOpacity>
         </View>
 
-        <P style={[styles.address, styles.theme.address]}>
-          {application?.address}
-        </P>
+        <DataRenderer
+          isLoading={applications.isLoading}
+          error={applications.isError}
+          data={applications?.address}
+          renderData={(data) => (
+            <P style={[styles.address, styles.theme.address]}>
+              {data}
+            </P>
+          )}
+          style={{ empty: [styles.address, styles.theme.address] }}
+        />
 
         <View style={[styles.row, styles.appLinkContainer]}>
-          <UrlSvg size={1.2} />
-          <P style={styles.url}>{applicationMetadata?.explorers[0].url}</P>
+          <DataRenderer
+            isLoading={applicationsMetadata.isLoading}
+            error={applicationsMetadata.isError}
+            data={applicationMetadata?.explorers}
+            renderData={(data) => (
+              <>
+                <UrlSvg size={1.2} />
+
+                <P style={styles.url}>{data[0].url}</P>
+              </>
+            )}
+            style={{ empty: styles.url }}
+          />
         </View>
 
         <View style={[styles.row, styles.depositedContainer]}>
@@ -126,9 +151,17 @@ export default function ApplicationDetail({ route }) {
             {i18next.t('application.details.deposited')}:
           </P>
 
-          <P style={styles.amount}>
-            {`${application?.deposited.toLocaleString()} LSK`}
-          </P>
+          <DataRenderer
+            isLoading={applications.isLoading}
+            error={applications.isError}
+            data={application?.deposited}
+            renderData={(data) => (
+              <P style={styles.amount}>
+                {`${data.toLocaleString()} LSK`}
+              </P>
+            )}
+            style={{ empty: styles.amount }}
+          />
         </View>
 
         <View style={styles.stats}>
@@ -137,6 +170,7 @@ export default function ApplicationDetail({ route }) {
               <P style={styles.smallTitle}>
                 {i18next.t('application.details.chainID')}
               </P>
+
               <P style={[styles.value, styles.theme.value]}>{chainID}</P>
             </View>
 
@@ -145,17 +179,30 @@ export default function ApplicationDetail({ route }) {
                 {i18next.t('application.details.status')}
               </P>
 
-              <View style={[styles.stateContainer, styles[`${application?.state}Container`]]}>
-                <P
-                  style={[
+              <DataRenderer
+                isLoading={applications.isLoading}
+                error={applications.isError}
+                data={application?.state}
+                renderData={(data) => (
+                  <View
+                    style={[
+                      styles.stateContainer,
+                      styles[`${application?.state}Container`]
+                    ]}
+                  >
+                    <P style={[styles.value, styles[data], styles.theme[data]]}>
+                      {data}
+                    </P>
+                  </View>
+                )}
+                style={{
+                  empty: [
                     styles.value,
                     styles[application?.state],
                     styles.theme[application?.state]
-                  ]}
-                >
-                  {application?.state}
-                </P>
-              </View>
+                  ]
+                }}
+              />
             </View>
           </View>
 
@@ -165,18 +212,35 @@ export default function ApplicationDetail({ route }) {
                 {i18next.t('application.details.lastUpdated')}
               </P>
 
-              <P style={[styles.value, styles.theme.value]}>
-                {moment(application?.lastUpdated).format('D MMM YYYY')}
-              </P>
+              <DataRenderer
+                isLoading={applications.isLoading}
+                error={applications.isError}
+                data={application?.lastUpdated}
+                renderData={(data) => (
+                  <P style={[styles.value, styles.theme.value]}>
+                    {moment(data).format('D MMM YYYY')}
+                  </P>
+                )}
+                style={{ empty: [styles.value, styles.theme.value] }}
+              />
             </View>
 
             <View style={styles.item}>
               <P style={styles.smallTitle}>
                 {i18next.t('application.details.lastCertificateHeight')}
               </P>
-              <P style={[styles.value, styles.theme.value]}>
-                {application?.lastCertificateHeight}
-              </P>
+
+              <DataRenderer
+                isLoading={applications.isLoading}
+                error={applications.isError}
+                data={application?.lastCertificateHeight}
+                renderData={(data) => (
+                  <P style={[styles.value, styles.theme.value]}>
+                    {data}
+                  </P>
+                )}
+                style={{ empty: [styles.value, styles.theme.value] }}
+              />
             </View>
           </View>
         </View>
