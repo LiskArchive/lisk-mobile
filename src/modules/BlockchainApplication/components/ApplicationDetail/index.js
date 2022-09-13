@@ -121,7 +121,7 @@ export default function ApplicationDetail({ route }) {
         <DataRenderer
           isLoading={applications.isLoading}
           error={applications.isError}
-          data={applications?.address}
+          data={application?.address}
           renderData={(data) => (
             <P style={[styles.address, styles.theme.address]}>
               {data}
