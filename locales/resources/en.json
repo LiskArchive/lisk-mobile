@@ -359,7 +359,11 @@
       "delete": {
         "title": "Remove application?",
         "descriptionText": "This application will no longer be in your application list.",
-        "confirmButtonText": "Remove now"
+        "confirmButtonText": "Remove now",
+        "success": {
+          "title": "Application has now been removed",
+          "description": "You can always add {{applicationName}} again to your application list."
+        }        
       },
       "deleteDefaultApplicationModal": {
         "description": "The default application can not be removed",

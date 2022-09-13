@@ -355,7 +355,11 @@
       "delete": {
         "title": "App entfernen?",
         "descriptionText": "Diese App befindet sich nicht mehr in Ihrer Anwendungsliste.",
-        "confirmButtonText": "Jetzt entfernen"
+        "confirmButtonText": "Jetzt entfernen",
+        "success": {
+          "title": "App wurde jetzt entfernt",
+          "description": "Sie können {{applicationName}} jederzeit wieder zu Ihrer Anwendungsliste hinzufügen."
+        }  
       },
       "deleteDefaultApplicationModal": {
         "description": "Die Standardanwendung kann nicht entfernt werden",
