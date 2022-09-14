@@ -69,7 +69,6 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         }
         showCaret
         variant="explore"
-        navigation={navigation}
         style={{ container: styles.applicationsListContainer }}
       />
     );

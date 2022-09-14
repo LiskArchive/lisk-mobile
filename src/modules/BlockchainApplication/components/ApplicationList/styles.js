@@ -7,11 +7,6 @@ export default function getApplicationListStyles() {
         flexDirection: 'column',
         flex: 1,
       },
-      body: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-      },
       applicationContainer: {
         flexDirection: 'row',
         alignItems: 'center',

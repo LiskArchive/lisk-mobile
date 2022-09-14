@@ -30,7 +30,6 @@ const AddApplication = ({ navigation, t }) => {
           })
         }
         showCaret
-        navigation={navigation}
         style={{ container: styles.applicationsListContainer }}
       />
     </View>
