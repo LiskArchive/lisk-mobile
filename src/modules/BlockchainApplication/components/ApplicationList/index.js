@@ -38,12 +38,8 @@ export default function ApplicationList({
         ) : (
           <>
             <Tabs value={activeTab} onClick={(tab) => setActiveTab(tab)}>
-              <Tabs.Tab value="allApplications">
-                <Text>All applications</Text>
-              </Tabs.Tab>
-              <Tabs.Tab value="externalApplications">
-                <Text>External connections</Text>
-              </Tabs.Tab>
+              <Tabs.Tab value="allApplications">All applications</Tabs.Tab>
+              <Tabs.Tab value="externalApplications">External connections</Tabs.Tab>
             </Tabs>
 
             <Tabs.Panel index="allApplications" value={activeTab}>

@@ -1,4 +1,5 @@
 import { themes, colors } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export function getTabsStyles() {
   return {
@@ -6,14 +7,22 @@ export function getTabsStyles() {
       container: {
         flexDirection: 'row',
         marginBottom: 16,
-        borderColor: colors.light.platinumGray,
         borderWidth: 1,
         borderRadius: 50,
       },
     },
-    [themes.light]: {},
-
-    [themes.dark]: {},
+    [themes.light]: {
+      container: {
+        backgroundColor: colors.light.white,
+        borderColor: colors.light.platinumGray,
+      },
+    },
+    [themes.dark]: {
+      container: {
+        backgroundColor: colors.dark.mainBg,
+        borderColor: colors.dark.sparkleGray,
+      },
+    },
   };
 }
 
@@ -21,18 +30,43 @@ export function getTabStyles(active) {
   return {
     common: {
       container: {
-        width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 8,
-        backgroundColor: active ? colors.light.ultramarineBlue : colors.light.white,
+        justifyContent: 'center',
+        paddingTop: 12,
+        paddingBottom: 12,
+        paddingLeft: 18,
+        paddingRight: 18,
+        borderRadius: 50,
+        flex: 0.5,
+      },
+      text: {
+        color: active ? colors.light.ultramarineBlue : colors.light.zodiacBlue,
         fontSize: 14,
-        marginRight: 24,
-        color: active ? colors.light.ultramarineBlue : colors.light.blueGray,
+        fontWeight: active ? '600' : '400',
+        textAlign: 'center',
       },
     },
-    [themes.light]: {},
+    [themes.light]: {
+      container: {
+        backgroundColor: active
+          ? setColorOpacity(colors.light.ultramarineBlue, 0.1)
+          : colors.light.white,
+      },
+      text: {
+        color: active ? colors.light.ultramarineBlue : colors.light.zodiacBlue,
+      },
+    },
 
-    [themes.dark]: {},
+    [themes.dark]: {
+      container: {
+        backgroundColor: active
+          ? setColorOpacity(colors.dark.ultramarineBlue, 0.3)
+          : colors.dark.mainBg,
+      },
+      text: {
+        color: active ? colors.dark.ultramarineBlue : colors.dark.white,
+      },
+    },
   };
 }

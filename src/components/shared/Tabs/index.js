@@ -14,7 +14,7 @@ export default function Tabs({ value, onClick, children }) {
 
   return (
     <TabsContext.Provider value={{ value, onClick }}>
-      <View style={[styles.container]}>{children}</View>
+      <View style={[styles.container, styles.theme.container]}>{children}</View>
     </TabsContext.Provider>
   );
 }

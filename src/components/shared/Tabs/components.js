@@ -1,12 +1,12 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, TouchableOpacity } from 'react-native';
 
 import { useTheme } from 'hooks/useTheme';
 
 import { useTabs } from './hooks';
 import { getTabStyles } from './styles';
 
-export function Tab({ value, children }) {
+export function Tab({ value, children, style }) {
   const { value: selectedValue, onClick } = useTabs();
 
   const active = selectedValue === value;
@@ -16,8 +16,15 @@ export function Tab({ value, children }) {
   });
 
   return (
-    <TouchableOpacity active={active} onPress={() => onClick(value)} style={[styles.container]}>
-      {children}
+    <TouchableOpacity
+      onPress={() => onClick(value)}
+      style={[styles.container, styles.theme.container, style?.container]}
+    >
+      {typeof children === 'string' ? (
+        <Text style={[styles.text, styles.theme.text, style?.text]}>{children}</Text>
+      ) : (
+        children
+      )}
     </TouchableOpacity>
   );
 }
