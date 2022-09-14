@@ -23,7 +23,6 @@ import getStyles from './styles';
 import TransactionList from '../Transactions/components/TransactionList';
 import AccountsManagerModal from './components/AccountsManagerModal';
 import ConnectionContext from '../../../libs/wcm/context/connectionContext';
-import usePairings from '../../../libs/wcm/hooks/usePairings';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -35,7 +34,7 @@ import usePairings from '../../../libs/wcm/hooks/usePairings';
  */
 export default function Home() {
   // eslint-disable-next-line no-unused-vars
-  const WalletConnectContext = useContext(ConnectionContext)
+  const WalletConnectContext = useContext(ConnectionContext);
   const navigation = useNavigation();
   const [showManageAccountsModal, setShowManageAccountsModal] = useState(false);
   const [showManageApplicationsModal, setShowManageApplicationsModal] = useState(false);
