@@ -7,15 +7,11 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { translate } from 'react-i18next';
 import DropDownHolder from 'utilities/alert';
-import {
-  useAccounts,
-} from 'modules/Accounts/hooks/useAccounts';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import PasswordForm from '../components/PasswordForm';
 import getStyles from './styles';
 
-const DecryptPhrase = ({
-  account, route, nextStep, t
-}) => {
+const DecryptPhrase = ({ account, route, nextStep, t }) => {
   const navigation = useNavigation();
   const { setAccount } = useAccounts();
   const { styles } = useTheme({ styles: getStyles });
@@ -41,13 +37,12 @@ const DecryptPhrase = ({
     }
   };
 
-  return <SafeAreaView style={[styles.container, styles.theme.wrapper]} >
-    <HeaderBackButton
-      title={title}
-      onPress={navigation.goBack}
-    />
-    <PasswordForm address={encryptedAccount.metadata.address} onSubmit={onSubmit} />
-  </SafeAreaView>;
+  return (
+    <SafeAreaView style={[styles.container, styles.theme.wrapper]}>
+      <HeaderBackButton title={title} onPress={navigation.goBack} />
+      <PasswordForm address={encryptedAccount.metadata.address} onSubmit={onSubmit} />
+    </SafeAreaView>
+  );
 };
 
 export default translate()(DecryptPhrase);

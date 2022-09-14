@@ -16,7 +16,7 @@ const List = ({
   discrete,
 }) => (
   <View style={styles.nativeList}>
-    {pending.map(tx => (
+    {pending.map((tx) => (
       <Item
         key={tx}
         navigate={navigate}
@@ -28,7 +28,7 @@ const List = ({
         theme={theme}
       />
     ))}
-    {transactions.map(tx => (
+    {transactions.map((tx) => (
       <Item
         key={tx.id}
         navigate={navigate}

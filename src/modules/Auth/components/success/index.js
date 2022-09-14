@@ -17,30 +17,28 @@ const SuccessScreen = ({
   address,
 }) => (
   <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <View style={[styles.container]}>
-        <View style={styles.illustration}>
-          {address ? (
-            <View style={styles.avatarContainer}>
-              <Avatar address={address} size={40} />
-              <Text style={styles.address}>{address}</Text>
-            </View>
-          ) : (
-            illustration
-          )}
-        </View>
-        <Text style={[styles.title, styles.theme.title]}>{title}</Text>
-        <Text style={[styles.description, styles.theme.description]}>
-          {description}
-        </Text>
-        {children}
+    <View style={[styles.container]}>
+      <View style={styles.illustration}>
+        {address ? (
+          <View style={styles.avatarContainer}>
+            <Avatar address={address} size={40} />
+            <Text style={styles.address}>{address}</Text>
+          </View>
+        ) : (
+          illustration
+        )}
       </View>
-      <PrimaryButton
-        noTheme
-        title={buttonText}
-        style={styles.continueButton}
-        onPress={onContinue}
-        disabled={disabled}
-      />
+      <Text style={[styles.title, styles.theme.title]}>{title}</Text>
+      <Text style={[styles.description, styles.theme.description]}>{description}</Text>
+      {children}
+    </View>
+    <PrimaryButton
+      noTheme
+      title={buttonText}
+      style={styles.continueButton}
+      onPress={onContinue}
+      disabled={disabled}
+    />
   </SafeAreaView>
 );
 

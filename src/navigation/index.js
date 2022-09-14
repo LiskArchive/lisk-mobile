@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { colors } from 'constants/styleGuide';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
-import { TransactionDetails } from 'modules/Accounts/components/TransactionDetails';
+import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import Wallet from 'modules/Wallet';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
@@ -21,19 +21,17 @@ import PassphraseBackup from 'modules/Settings/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
 import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
 import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
-import ManageAccount from 'modules/Auth/ManageAccount';
+import AccountsManagerScreen from 'modules/Auth/AccountsManagerScreen';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
-import SwitchAccount from 'modules/Auth/SwitchAccount';
-import DeleteAccount from 'modules/Auth/RemoveAccount';
-import SwitchApplication from 'modules/BlockchainApplication/components/SwitchApplication';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
 import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
-import Request from 'modules/Request';
-import DeleteApplication from 'modules/BlockchainApplication/components/DeleteApplication';
-import DeleteApplicationSuccess from 'modules/BlockchainApplication/components/DeleteApplicationSuccess';
+import SendToken from 'modules/SendToken';
+import RequestToken from 'modules/RequestToken';
+import TokensScreen from 'modules/Accounts/components/TokensScreen';
+import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import navigationOptions from './navigationOptions';
-import AppNavigator from './appNavigator';
+import AppNavigator from './components/AppNavigator';
 
 const MainStack = createStackNavigator();
 
@@ -77,23 +75,13 @@ const MainNavigator = () => {
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen
-            name="SwitchAccount"
-            component={SwitchAccount}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
-            name="DeleteAccount"
-            component={DeleteAccount}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
             name="DecryptPhrase"
             component={DecryptPhrase}
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen
-            name="ManageAccount"
-            component={ManageAccount}
+            name="AccountsManagerScreen"
+            component={AccountsManagerScreen}
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen
@@ -118,11 +106,6 @@ const MainNavigator = () => {
             options={navigationOptions.AddBookmark}
           />
           <MainStack.Screen
-            name="SwitchApplication"
-            component={SwitchApplication}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
             name="AddApplication"
             component={AddApplication}
             options={navigationOptions.SignIn}
@@ -135,16 +118,6 @@ const MainNavigator = () => {
           <MainStack.Screen
             name="AddApplicationSuccess"
             component={AddApplicationSuccess}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
-            name="DeleteApplication"
-            component={DeleteApplication}
-            options={navigationOptions.SignIn}
-          />
-          <MainStack.Screen
-            name="DeleteApplicationSuccess"
-            component={DeleteApplicationSuccess}
             options={navigationOptions.SignIn}
           />
           <MainStack.Screen name="About" component={About} options={navigationOptions.About} />
@@ -160,9 +133,14 @@ const MainNavigator = () => {
             options={navigationOptions.PrivacyPolicy}
           />
           <MainStack.Screen
-            name="TxDetail"
+            name="TransactionsHistory"
+            component={TransactionsHistory}
+            options={navigationOptions.TransactionsHistory}
+          />
+          <MainStack.Screen
+            name="TransactionDetails"
             component={TransactionDetails}
-            options={navigationOptions.TxDetail}
+            options={navigationOptions.TransactionDetails}
           />
           <MainStack.Screen name="Wallet" component={Wallet} options={navigationOptions.Wallet} />
           <MainStack.Screen
@@ -181,8 +159,18 @@ const MainNavigator = () => {
             options={navigationOptions.NoHeader}
           />
           <MainStack.Screen
+            name="Send"
+            component={SendToken}
+            options={navigationOptions.NoHeader}
+          />
+          <MainStack.Screen
             name="Request"
-            component={Request}
+            component={RequestToken}
+            options={navigationOptions.NoHeader}
+          />
+          <MainStack.Screen
+            name="Tokens"
+            component={TokensScreen}
             options={navigationOptions.NoHeader}
           />
         </MainStack.Navigator>

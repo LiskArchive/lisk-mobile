@@ -1,35 +1,27 @@
-/* eslint-disable no-shadow */
-import React, {
-  createRef, useEffect, useRef, useState
-} from 'react';
-import {
-  View, Animated, StatusBar, Platform, RefreshControl, SafeAreaView
-} from 'react-native';
-import { connect } from 'react-redux';
-import { withNavigationFocus } from '@react-navigation/compat';
-import { Manager as TransactionsManager, EmptyState, LoadingState } from 'modules/Accounts/components';
-import { deviceHeight } from 'utilities/device';
-import InfiniteScrollView from 'components/shared/infiniteScrollView';
-import ParallaxHeader from 'components/shared/ParallaxHeader';
-import BTCRemoval from 'components/screens/banners/BtcRemoval';
-import withTheme from 'components/shared/withTheme';
-import { colors, themes } from 'constants/styleGuide';
-import Banner from 'components/shared/banner';
-import { fetchData, persistData } from 'utilities/storage';
-import { getNetworkInfo as getNetworkInfoAction } from 'actions/network';
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
-import {
-  accountFetched as accountFetchedAction
-} from 'modules/Accounts/store/actions';
+/* eslint-disable max-statements */
+import React, { useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 
-import getStyles from './styles';
-// import {
-//   showInitializationModal
-// } from './utils';
-import AccountSummary from './components/AccountSummary';
-import useTransactionList from './hooks/useTransactionList';
-import { useAccountInfo } from './hooks/useAccounts/useAccountInfo';
+import { useTheme } from 'hooks/useTheme';
+import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
+import { P } from 'components/shared/toolBox/typography';
+import Avatar from 'components/shared/avatar';
+import { stringShortener } from 'utilities/helpers';
+import { colors } from 'constants/styleGuide';
+import SwitchSvg from 'assets/svgs/SwitchSvg';
+import IncognitoSvg from 'assets/svgs/IncognitoSvg';
+import CopyToClipboard from 'components/shared/copyToClipboard';
+import { settingsUpdated } from 'modules/Settings/actions';
+import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
+import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
+import TokensTab from './components/TokensTab';
+import getStyles from './styles';
+import TransactionList from '../Transactions/components/TransactionList';
+import AccountsManagerModal from './components/AccountsManagerModal';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -39,181 +31,81 @@ import ApplicationSwitcher from '../BlockchainApplication/components/Application
  * @todo Implement custom message: this can be used in case we need to notify the user
  * about any unforeseen issue/change
  */
+export default function Home() {
+  const navigation = useNavigation();
+  const [showManageAccountsModal, setShowManageAccountsModal] = useState(false);
+  const [showManageApplicationsModal, setShowManageApplicationsModal] = useState(false);
+  const [currAccount] = useCurrentAccount();
+  const { address, name: username } = currAccount.metadata;
+  const discrete = useSelector((state) => state.settings.discrete);
+  const dispatch = useDispatch();
 
-// eslint-disable-next-line max-statements
-const Home = ({
-  styles,
-  navigation,
-  theme,
-  isFocused,
-  activeToken,
-  discrete,
-  getNetworkInfo,
-  settingsUpdated,
-  route,
-}) => {
-  const { summary } = useAccountInfo();
-  const {
-    transactions,
-    loadMore,
-    loading,
-    refresh,
-    refreshing,
-  } = useTransactionList({ address: summary.address, activeToken: 'LSK' });
-  const [hideBtcRemoval, setHideBtcRemoval] = useState(true);
-  const scrollY = useRef(new Animated.Value(0));
-  const scrollView = createRef();
+  const { styles } = useTheme({ styles: getStyles() });
 
-  const scrollToTop = () => {
-    if (scrollView.current.scrollTo) {
-      scrollView.current.scrollTo({ y: 0, animated: true });
-    }
-  };
-
-  const setHeader = () => {
-    const {
-      setOptions
-    } = navigation;
-    setOptions({
-      tabBarVisible: hideBtcRemoval
-    });
-  };
-
-  const closeBtcBanner = () => {
-    persistData('@list-hideBtcRemoval', 'true');
-    setHideBtcRemoval(true);
-  };
-
-  const checkBTCBanner = async () => {
-    const hideBtcRemoval = await fetchData('@list-hideBtcRemoval');
-    setHideBtcRemoval(Boolean(hideBtcRemoval));
-  };
-
-  useEffect(() => {
-    setHeader();
-  }, [hideBtcRemoval]);
-
-  useEffect(() => {
-    const { setParams } = navigation;
-    if (activeToken) {
-      getNetworkInfo(activeToken);
-    }
-    setParams({
-      scrollToTop
-    });
-    if (route.params && route.params.discreet && !discrete) {
-      settingsUpdated({ discrete: true });
-    }
-    // const initializationTimeout = setTimeout(() => {
-    //   showInitializationModal({
-    //     account, activeToken, transactions, navigation
-    //   });
-    // }, 1200);
-    checkBTCBanner();
-
-    // return () => {
-    //   clearTimeout(initializationTimeout);
-    // };
-  }, []);
-
-  let content = null;
-  if (transactions.loaded) {
-    const listElements = transactions.count > 0
-      ? [...transactions.confirmed]
-      : ['emptyState'];
-    content = (
-      // TODO: Use InfiniteScrollList instead when react-query is implemented.
-      <InfiniteScrollView
-        scrollEventThrottle={8}
-        style={[styles.scrollView]}
-        refresh={refresh}
-        loadMore={loadMore}
-        list={listElements}
-        count={transactions.count}
-        render={(refreshing) =>
-          transactions.count > 0 ? (
-            <TransactionsManager
-              type="home"
-              transactions={transactions}
-              navigate={navigation.navigate}
-              account={summary}
-              refreshing={refreshing}
-            />
-          ) : (
-            <EmptyState
-              style={[styles.emptyContainer, styles.theme.emptyContainer]}
-              refreshing={loading}
-            />
-          )
-        }
-      />
+  const toggleIncognito = () => {
+    ReactNativeHapticFeedback.trigger('selection');
+    dispatch(
+      settingsUpdated({
+        discrete: !discrete,
+      })
     );
-  } else {
-    content = <LoadingState style={[styles.emptyContainer, styles.theme.emptyContainer]} />;
-  }
-  const otherPageStatusBar = theme === themes.light ? 'dark-content' : 'light-content';
-  if (!hideBtcRemoval) {
-    return (
-      <Banner>
-        <BTCRemoval closeBanner={closeBtcBanner} />
-      </Banner>
-    );
-  }
+  };
+  const requestTokens = () => navigation.navigate('Request');
+  const sendTokens = () => navigation.navigate('Send');
+
   return (
-    <SafeAreaView style={[styles.flex, styles.theme.homeContainer]}>
-      <ApplicationSwitcher />
-      {Platform.OS !== 'ios' ? (
-        <StatusBar barStyle="light-content" />
-      ) : (
-        <StatusBar barStyle={isFocused ? 'light-content' : otherPageStatusBar} />
-      )}
-      <ParallaxHeader
-        reference={scrollView}
-        headerMinHeight={70}
-        headerMaxHeight={300}
-        extraScrollHeight={20}
-        navbarColor="#3498db"
-        alwaysShowTitle={false}
-        refreshControl={
-          <RefreshControl
-            progressViewOffset={deviceHeight() / 3}
-            onRefresh={refresh}
-            refreshing={refreshing}
-            tintColor={
-              theme === themes.light ? colors.light.slateGray : colors.dark.platinum
-            }
-          />
-        }
-        title={
-          <AccountSummary
-            navigation={navigation}
-            scrollY={scrollY.current}
-            isFocused={isFocused}
-            discrete={discrete}
-          />
-        }
-        renderContent={() => content}
-        scrollViewProps={{
-          onScroll: loadMore
-        }}
+    <>
+      <NavigationSafeAreaView>
+        <View style={[styles.row, styles.alignItemsCenter, styles.topContainer]}>
+          <TouchableOpacity style={[styles.discreteContainer]} onPress={toggleIncognito}>
+            <IncognitoSvg size={1.2} disabled={discrete} />
+          </TouchableOpacity>
+          <View style={styles.flex}>
+            <ApplicationSwitcher onPress={() => setShowManageApplicationsModal(true)} />
+          </View>
+        </View>
+        <View style={[styles.body]}>
+          <View style={[styles.accountCard]}>
+            <View style={[styles.row]}>
+              <Avatar address={address} size={50} />
+              <View style={[styles.accountDetails]}>
+                <P style={[styles.username, styles.theme.username]}>{username}</P>
+                <View>
+                  <CopyToClipboard
+                    labelStyle={[styles.address, styles.theme.address]}
+                    label={stringShortener(address, 7, 6)}
+                    iconColor={colors.light.platinumGray}
+                  />
+                </View>
+              </View>
+              <TouchableOpacity
+                style={[styles.switchContainer]}
+                onPress={() => setShowManageAccountsModal(true)}
+              >
+                <SwitchSvg />
+              </TouchableOpacity>
+            </View>
+            <View style={[styles.row, styles.buttonContainer]}>
+              <TouchableOpacity style={[styles.button]} onPress={requestTokens}>
+                <P style={[styles.buttonText]}>Request</P>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.button, styles.sendButton]} onPress={sendTokens}>
+                <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <TokensTab />
+
+          <TransactionList />
+        </View>
+      </NavigationSafeAreaView>
+
+      <AccountsManagerModal show={showManageAccountsModal} setShow={setShowManageAccountsModal} />
+      <ApplicationManagerModal
+        show={showManageApplicationsModal}
+        setShow={setShowManageApplicationsModal}
       />
-      <View style={[styles.fixedBg, styles.theme.fixedBg]}></View>
-    </SafeAreaView>
+    </>
   );
-};
-
-const mapStateToProps = state => ({
-  discrete: state.settings.discrete,
-  activeToken: state.settings.token.active,
-  settings: state.settings,
-});
-
-const mapDispatchToProps = ({
-  accountFetched: accountFetchedAction,
-  settingsUpdated: settingsUpdatedAction,
-  getNetworkInfo: getNetworkInfoAction
-});
-
-export default withNavigationFocus(
-  withTheme(connect(mapStateToProps, mapDispatchToProps)(Home), getStyles())
-);
+}

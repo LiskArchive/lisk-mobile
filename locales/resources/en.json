@@ -118,7 +118,6 @@
   "Sign out": "Sign out",
   "Store your passphrase:": "Store your passphrase:",
   "Tap on the QR Code to share it.": "Tap on the QR Code to share it.",
-  "Transaction Submitted": "Transaction Submitted",
   "Your transaction has been submitted and will be confirmed in a few moments.": "Your transaction has been submitted and will be confirmed in a few moments.",
   "The Avatar represents the address, making it easy to recognize.": "The Avatar represents the address, making it easy to recognize.",
   "The address is unique and can’t be changed. It’s yours. Find it in your home page.": "The address is unique and can’t be changed. It’s yours. Find it in your home page.",
@@ -128,9 +127,6 @@
   "The only way to access your account.": "The only way to access your account.",
   "This is not your second passphrase.": "This is not your second passphrase.",
   "This is your passphrase:": "This is your passphrase:",
-  "Transaction Fee": "Transaction Fee",
-  "Transaction ID": "Transaction ID",
-  "Transaction not found": "Transaction not found",
   "Transfer your LSK tokens easily to other accounts by simply scanning their QR code.": "Transfer your LSK tokens easily to other accounts by simply scanning their QR code.",
   "terms and conditions.": "terms and conditions.",
   "Verification": "Verification",
@@ -171,7 +167,6 @@
   "Select your currency": "Select your currency",
   "Select your language": "Select your language",
   "Settings": "Settings",
-  "Transaction Details": "Transaction Details",
   "Connection error, try later!": "Connection error, try later!",
   "Create it now": "Create it now",
   "Don’t have a Lisk Account?": "Don’t have a Lisk Account?",
@@ -216,8 +211,6 @@
   "Remind me later": "Remind me later",
   "Store your passphrase carefully": "Store your passphrase carefully",
   "Tap and fill in the blanks:": "Tap and fill in the blanks:",
-  "Transaction fee": "Transaction fee",
-  "You have no transactions yet.": "You have no transactions yet.",
   "Available Balance": "Available Balance",
   "Activity history": "Activity history",
   "Token transfer": "Token transfer",
@@ -269,7 +262,7 @@
     "description2": "This account requires {{numberOfSignatures}} signatures to create a transaction.",
     "info": {
       "description": "Available on desktop only",
-      "button": "use desktop"
+      "button": "Use Lisk Desktop"
     },
     "mandatory": "(Mandatory)",
     "optional": "(Optional)",
@@ -280,7 +273,7 @@
     },
     "send": {
       "description": "Sending transaction using multisignature accounts is available only on Lisk Desktop.",
-      "button": "use desktop"
+      "button": "Use Lisk Desktop"
     },
     "showMore": "Show more...",
     "showLess": "Show less..."
@@ -312,11 +305,7 @@
   "auth": {
     "setup": {
       "add_account": "Add account",
-      "manageAccounts": "Manage accounts",
       "switchAccount": "Switch account",
-      "deleteAccount": "Choose account",
-      "removeAccount": "Remove account?",
-      "removeAccount_description": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
       "decryptPassphrase": "Decrypt your secret recovery phrase",
       "decryptPassphraseError": "Unable to decrypt account. Please check your password",
       "addAccountDescription": "Enter your secret recovery phrase to manage your account",
@@ -326,13 +315,11 @@
       "passwordSetupSuccessDescription": "You can now download encrypted secret recovery phrase.",
       "secret_phrase": "Secret recovery phrase",
       "restore_file": "Restore from file",
+      "downloaded": "Downloaded!",
       "buttons": {
-        "download": "Download",
-        "remove_now": "Remove now",
         "passwordSetupContinue": "Continue to Dashboard",
-        "save_account": "Save account",
-        "addAnotherAccount": "Add another account",
-        "removeAccount": "Remove an account"
+        "saveAccount": "Save account",
+        "download": "Download"
       }
     },
     "form": {
@@ -374,18 +361,22 @@
       "delete": {
         "title": "Remove application?",
         "descriptionText": "This application will no longer be in your application list.",
-        "confirmButtonText": "Remove now"
+        "confirmButtonText": "Remove now",
+        "success": {
+          "title": "Application has now been removed",
+          "description": "You can always add {{applicationName}} again to your application list."
+        }        
       },
       "deleteDefaultApplicationModal": {
         "description": "The default application can not be removed",
         "buttonText": "Continue to Applications"
       },
-      "continueToWalletButtonText": "Continue to wallet" 
+      "continueToWalletButtonText": "Continue to wallet"
     },
-    "explore":{
+    "explore": {
       "title": "Applications",
       "statsButtonText": "Stats",
-      "applicationList":{
+      "applicationList": {
         "searchPlaceholder": "Search application",
         "loadingText": "Loading applications...",
         "errorText": "Error loading your applications.",
@@ -394,9 +385,10 @@
         "unpinText": "Unpin",
         "deleteText": "Delete"
       }
-    }},
+    }
+  },
   "requestTokens": {
-    "title": "Request Tokens",
+    "title": "Request token",
     "recipient": "Recipient",
     "recipientApplication": "Recipient Application",
     "selectApplication": "Select Application",
@@ -412,7 +404,7 @@
       "recipientApplicationFieldLabel": "To Application",
       "recipientApplicationFieldPlaceholder": "Select an Application",
       "recipientAccountFieldLabel": "Recipient",
-      "recipientAccountFieldPlaceholder": "Select a recipient account",
+      "recipientAccountFieldPlaceholder": "Choose from bookmark",
       "nextStepButtonText": "Continue"
     },
     "tokenSelect": {
@@ -437,7 +429,7 @@
       "highPriorityLabel": "High",
       "transactionFeeLabel": "Transaction fee",
       "loadingTransactionFeeText": "Loading transaction fee...",
-      "errorLoadingTransactionFeeText": "Error calculating fees!",      
+      "errorLoadingTransactionFeeText": "Error calculating fees!",
       "initializationFeeLabel": "Initialization fee",
       "loadingInitializationFeeText": "Loading initialization fee...",
       "cmmFeeLabel": "CCM fee",
@@ -462,13 +454,14 @@
       },
       "error": {
         "title": "Transaction failed",
-        "description": "There was an error on the transaction. Please try again.",
+        "description1": "There was an error on the transaction.",
+        "description2": "Please try again.",
         "retryButtonText": "Try again",
         "reportErrorLabel": "Is the problem persisting?",
         "reportErrorButtonText": "Report the error via email"
       }
     },
-    "errors" : {
+    "errors": {
       "generalMessage": "Please fill all the required fields to send your tokens.",
       "senderApplicationChainID": "Application to send from must be specified",
       "recipientApplicationChainID": "Application who receives the tokens must be specified",
@@ -477,7 +470,96 @@
       "amountRequired": "Token amount is required",
       "amountMustBeNumber": "Amount must be a number",
       "amountMustBePositive": "Token amount must be a positive number",
-      "priority":"Priority must be specified"
+      "priority": "Priority must be specified"
+    },
+    "info": {
+      "bytesCounter": {
+        "title": "Bytes Counter",
+        "description1": "Lisk counts your message in bytes, so keep in mind that the length of your message may vary in different languages.",
+        "description2": "Different characters may consume a varying amount of bytes."
+      },
+      "priority": {
+        "title": "Transaction priority",
+        "description1": "When the network is busy, transactions with a higher priority are confirmed sooner."
+      },
+      "transactionFee": {
+        "title": "Transaction Fee",
+        "description1": "Fee based on bytes, can be set by user depending on priority."
+      },
+      "initializationFee": {
+        "title": "Initialization Fee",
+        "description1": "Some commands have an extra command fee (delegate registration in DPoS, chain registration in Interoperability), this fee should be exactly equal to the constant set by the command."
+      },
+      "cmmFee": {
+        "title": "CMM Fee",
+        "description1": "Cross chain messages are the objects containing the cross-chain commands, they have a fee property also called message fee to distinguish from transaction fees."
+      }
+    }
+  },
+  "accounts": {
+    "accountsManager": {
+      "title": "Manage accounts",
+      "description": "You can switch your account and also remove any account you're not using at the moment",
+      "addAccountButtonText": "Add account",
+      "deleteAccountTitle": "Remove account?",
+      "deleteAccountDescription": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
+      "deleteAccountButtonText": "Remove now",
+      "downloadFileButtonText": "Download",
+      "backButtonText": "Back"
+    },
+    "tokens": "Tokens",
+    "lockedTokens": "Locked Tokens",
+    "emptyTokenMessage": "You do not have any token on this account. You can request for tokens",
+    "allTokens": "All Tokens",
+    "buttons": {
+      "viewAll": "View All",
+      "request": "Request",
+      "send": "Send"
+    }
+  },
+  "transactions": {
+    "transactionDetails": {
+      "loadingText": "Loading transaction...",
+      "errorText": "Error loading transaction!",
+      "title": "Transaction details",
+      "senderLabel": "Sender",
+      "transactionFeeLabel": "Transaction Fee",
+      "nonceLabel": "Nonce",
+      "confirmationsLabel": "Confirmations",
+      "statusLabel": "Status",
+      "transactionIDLabel": "Transaction ID",
+      "blockIDLabel": "Block ID",
+      "blockHeightLabel": "Block Height",
+      "paramsLabel": "Parameters",
+      "showParamsButtonText": "Expand",
+      "hideParamsButtonText": "Close",
+      "amountParamsLabel": "Amount",
+      "recipientAddressParamsLabel": "Recipient address",
+      "dataParamsLabel": "Data",
+      "tokenIDParamsLabel": "Token ID",
+      "receivingChainIDParamsLabel": "Receiving Chain ID",
+      "messageFeeParamsLabel": "Fee message",
+      "numberOfSignaturesParamsLabel": "Number of signatures",
+      "generatorKeyParamsLabel": "Generator key",
+      "blsKeyParamsLabel": "BLS key",
+      "proofOfPossessionParamsLabel": "Proof of possession",
+      "header1ParamsLabel": "Header 1",
+      "header2ParamsLabel": "Header 2"
+    },
+    "transactionList": {
+      "loadingText": "Loading transactions...",
+      "errorText": "Error loading transactions!",
+      "emptyText": "You have no transactions yet.",
+      "title": "Transactions",
+      "goToTransactionHistoryButtonText": "View all"
+    },
+    "transactionHistory": {
+      "title": "Transaction history"
+    },
+    "statusText": {
+      "success": "Succeeded",
+      "fail": "Failed",
+      "pending": "Pending"
     }
   }
 }

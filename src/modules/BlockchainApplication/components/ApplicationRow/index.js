@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import React, { useState, memo } from 'react';
+import { View, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import ModalBox from 'react-native-modalbox';
 import { translate } from 'react-i18next';
 
@@ -33,11 +34,9 @@ function BlockchainApplicationRow({
   showActive,
   showCaret,
   navigation,
+  deleteApplication,
 }) {
-  const [
-    showDeleteDefaultApplicationModal,
-    setShowDeleteDefaultApplicationModal
-  ] = useState(false);
+  const [showDeleteDefaultApplicationModal, setShowDeleteDefaultApplicationModal] = useState(false);
 
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
   const [currentApplication] = useCurrentBlockchainApplication();
@@ -47,7 +46,8 @@ function BlockchainApplicationRow({
     application,
     variant,
     navigation,
-    setShowDeleteDefaultApplicationModal
+    setShowDeleteDefaultApplicationModal,
+    deleteApplication,
   });
 
   return (
@@ -56,12 +56,12 @@ function BlockchainApplicationRow({
         <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
           <View style={styles.applicationNameContainer}>
             <Image
-              source={{ uri: application.images.logo.png }}
+              source={{ uri: application.logo.png }}
               style={{ ...styles.applicationLogoImage }}
             />
 
             <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-              {application.name}
+              {application.chainName}
             </P>
           </View>
 
@@ -101,10 +101,9 @@ function BlockchainApplicationRow({
           buttonText={t('application.manage.deleteDefaultApplicationModal.buttonText')}
           onContinue={() => setShowDeleteDefaultApplicationModal(false)}
         />
-
       </ModalBox>
     </>
   );
 }
 
-export default translate()(BlockchainApplicationRow);
+export default translate()(memo(BlockchainApplicationRow));

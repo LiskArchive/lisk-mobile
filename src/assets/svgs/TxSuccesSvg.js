@@ -1,19 +1,9 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 
-export default function TxSuccessSvg({
-  height = 122,
-  width = 142,
-  style,
-}) {
+export default function TxSuccessSvg({ height = 122, width = 142, style }) {
   return (
-    <Svg
-      height={height}
-      width={width}
-      viewBox="0 0 142 122"
-      fill="none"
-      style={style}
-    >
+    <Svg height={height} width={width} viewBox="0 0 142 122" fill="none" style={style}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"

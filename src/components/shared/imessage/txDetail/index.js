@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, View, NativeModules } from 'react-native';
 import { tokenMap } from 'constants/tokens';
 import { transactions as transactionsAPI } from 'utilities/api';
-import { isTransfer } from 'modules/Transactions/constants';
+import { isTransfer } from 'modules/SendToken/constants';
 import { LoadingState } from 'modules/Accounts/components';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
@@ -75,9 +75,7 @@ class TransactionDetail extends React.Component {
   }
 
   onOpenDeepLink = () => {
-    NativeModules.MessagesManager.openURL(
-      `lisk://transactions?id=${this.state.tx.id}`
-    )
+    NativeModules.MessagesManager.openURL(`lisk://transactions?id=${this.state.tx.id}`)
       // eslint-disable-next-line no-console
       .then(console.log)
       // eslint-disable-next-line no-console
@@ -85,9 +83,7 @@ class TransactionDetail extends React.Component {
   };
 
   render() {
-    const {
-      styles, theme, account, language
-    } = this.props;
+    const { styles, theme, account, language } = this.props;
     const { tx } = this.state;
 
     if (!tx.senderAddress) {
@@ -101,24 +97,12 @@ class TransactionDetail extends React.Component {
     const config = getConfig(styles, account, tx);
 
     return (
-      <ScrollView
-        contentContainerStyle={[styles.container, styles.theme.container]}
-      >
+      <ScrollView contentContainerStyle={[styles.container, styles.theme.container]}>
         <View style={styles.innerContainer}>
-          <View
-            style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}
-          >
-            <Graphics
-              styles={styles}
-              theme={theme}
-              config={config}
-            />
+          <View style={[styles.senderAndRecipient, styles.theme.senderAndRecipient]}>
+            <Graphics styles={styles} theme={theme} config={config} />
             <TxTitle tx={tx} config={config} />
-            <TxAmount
-              config={config}
-              tx={tx}
-              language={language}
-            />
+            <TxAmount config={config} tx={tx} language={language} />
             <TimeStamp timestamp={tx.timestamp} styles={styles} />
           </View>
           <Sender styles={styles} tx={tx} />

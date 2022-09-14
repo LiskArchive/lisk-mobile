@@ -15,19 +15,18 @@ import i18n from '../locales';
 import store, { persistedStore } from './store/index';
 
 const ThemedApp = () => {
-  const { theme } = useSelector(state => state.settings);
+  const { theme } = useSelector((state) => state.settings);
 
   return (
-    <View style={{
-      flex: 1,
-      backgroundColor: theme === themes.dark
-        ? colors.dark.black : colors.light.white
-    }} >
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: theme === themes.dark ? colors.dark.black : colors.light.white,
+      }}
+    >
       <ThemeContext.Provider value={theme}>
         <I18nextProvider i18n={i18n}>
-          <StatusBar
-            barStyle={theme === themes.light ? 'dark-content' : 'light-content'}
-          />
+          <StatusBar barStyle={theme === themes.light ? 'dark-content' : 'light-content'} />
           <Router />
           <Alert />
           <Modal />
@@ -41,7 +40,7 @@ export default function App() {
   return (
     <QueryClientProvider client={reactQueryClient}>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistedStore} >
+        <PersistGate loading={null} persistor={persistedStore}>
           <ThemedApp />
         </PersistGate>
       </Provider>

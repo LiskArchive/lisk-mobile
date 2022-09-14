@@ -1,60 +1,46 @@
 import React from 'react';
-import { Text, Clipboard } from 'react-native';
-import { translate } from 'react-i18next';
+import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
 import Icon from '../toolBox/icon';
-import withTheme from '../withTheme';
+
+import { useCopyToClipboard } from './hooks';
 import getStyles from './styles';
 
-class CopyToClipBoard extends React.Component {
-  state = { copied: false };
+export default function CopyToClipBoard({
+  value,
+  type,
+  label,
+  iconSize,
+  style,
+  iconStyle,
+  labelStyle,
+  iconColor,
+}) {
+  const [copied, handleCopy] = useCopyToClipboard(value);
 
-  copy = () => {
-    this.setState({ copied: !this.state.copied });
-    Clipboard.setString(this.props.value);
-    this.Timeout = setTimeout(() => {
-      this.setState({ copied: !this.state.copied });
-    }, 4000);
-  };
+  const { styles } = useTheme({ styles: getStyles() });
 
-  componentWillUnmount() {
-    clearTimeout(this.Timeout);
-  }
+  const Element = type || Text;
 
-  render() {
-    const {
-      value,
-      type,
-      label,
-      iconSize,
-      styles,
-      style,
-      iconStyle,
-      labelStyle,
-      iconColor,
-    } = this.props;
-    const Element = type || Text;
-    const text = label || value;
+  const text = label || value;
 
-    const color = iconColor || colors.light.blueGray;
+  const color = iconColor || colors.light.blueGray;
 
-    return (
-      <TouchableOpacity style={[styles.container, style]} onPress={this.copy}>
-        <Element style={labelStyle}>
-          {text}
-        </Element>
-        <TouchableOpacity onPress={this.copy}>
-          <Icon
-            name={this.state.copied ? 'checkmark' : 'copy'}
-            color={this.state.copied ? colors.light.ufoGreen : color}
-            size={iconSize || 16}
-            style={[iconStyle]}
-            />
-          </TouchableOpacity>
+  return (
+    <TouchableOpacity style={[styles.container, style]} onPress={handleCopy}>
+      <Element style={[labelStyle]}>{text}</Element>
+
+      <TouchableOpacity onPress={handleCopy}>
+        <Icon
+          name={copied ? 'checkmark' : 'copy'}
+          color={copied ? colors.light.ufoGreen : color}
+          size={iconSize || 16}
+          style={[styles.copyIcon, iconStyle]}
+        />
       </TouchableOpacity>
-    );
-  }
+    </TouchableOpacity>
+  );
 }
-
-export default withTheme(translate()(CopyToClipBoard), getStyles());

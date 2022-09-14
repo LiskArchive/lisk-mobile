@@ -11,7 +11,7 @@ import actionTypes from '../actionTypes';
  * @returns {Object} - Pure action function
  */
 // eslint-disable-next-line import/prefer-default-export
-export const settingsUpdated = data => ({
+export const settingsUpdated = (data) => ({
   type: actionTypes.settingsUpdated,
   data,
 });
@@ -24,13 +24,14 @@ export const settingsUpdated = data => ({
  *
  * @returns {Function} Thunk action function
  */
-export const settingsRetrieved = () => dispatch => getSettings().then(data => {
-  if (!data.theme) {
-    data.theme = 'light';
-  }
+export const settingsRetrieved = () => (dispatch) =>
+  getSettings().then((data) => {
+    if (!data.theme) {
+      data.theme = 'light';
+    }
 
-  dispatch({
-    type: actionTypes.settingsRetrieved,
-    data,
+    dispatch({
+      type: actionTypes.settingsRetrieved,
+      data,
+    });
   });
-});

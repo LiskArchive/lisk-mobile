@@ -1,54 +1,53 @@
-import {
-  themes, colors, boxes
-} from 'constants/styleGuide';
-import {
-  deviceWidth,
-} from 'utilities/device';
+import { themes, colors } from 'constants/styleGuide';
+import { deviceWidth } from 'utilities/device';
 
 export default () => ({
   common: {
-    wrapper: {
+    container: {
       height: deviceWidth(),
       zIndex: 3,
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
-      padding: boxes.boxPadding,
+      padding: 16,
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     closeButtonContainer: {
       alignSelf: 'flex-end',
-      marginTop: -20,
-      padding: 10,
+      marginTop: -8,
+      padding: 4,
       borderRadius: 50,
     },
     horizontalLine: {
-      height: 8,
-      width: 60,
+      height: 4,
+      width: 34,
       borderRadius: 40,
-      marginTop: 40,
-    }
+      marginTop: 4,
+    },
   },
 
   [themes.light]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.light.white,
     },
     horizontalLine: {
-      backgroundColor: colors.light.silverGrey
+      backgroundColor: colors.light.silverGrey,
     },
     closeButtonContainer: {
       backgroundColor: colors.light.platinumGray,
-    }
+    },
   },
 
   [themes.dark]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.mainBg,
     },
     horizontalLine: {
-      backgroundColor: colors.dark.volcanicSand
+      backgroundColor: colors.dark.volcanicSand,
     },
     closeButtonContainer: {
       backgroundColor: colors.dark.volcanicSand,
-    }
+    },
   },
 });

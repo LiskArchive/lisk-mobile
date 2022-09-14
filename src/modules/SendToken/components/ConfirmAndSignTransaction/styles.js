@@ -10,7 +10,7 @@ export default function getConfirmAndSignTransactionStyles() {
         fontFamily: fonts.family.heading,
         fontSize: fonts.size.h3,
         textAlign: 'center',
-        marginBottom: 8
+        marginBottom: 8,
       },
       contentContainer: {
         flex: 1,
@@ -20,27 +20,27 @@ export default function getConfirmAndSignTransactionStyles() {
         fontFamily: fonts.family.context,
         fontSize: fonts.size.base,
         textAlign: 'center',
-        marginBottom: 24
+        marginBottom: 24,
       },
       accountNameText: {
         marginTop: 8,
         marginBottom: 8,
         color: colors.light.zodiacBlue,
-        fontWeight: '500'
+        fontWeight: '500',
       },
       accountAddressText: {
         marginBottom: 24,
-        color: colors.light.blueGray
+        color: colors.light.blueGray,
       },
       inputContainer: {
         width: '100%',
-        margin: 0
+        margin: 0,
       },
       errorText: {
         marginBottom: 16,
         color: colors.light.burntSieanna,
         textAlign: 'center',
-      }
+      },
     },
     [themes.light]: {
       wrapper: {
@@ -57,7 +57,7 @@ export default function getConfirmAndSignTransactionStyles() {
       },
       accountNameText: {
         color: colors.light.zodiacBlue,
-      }
+      },
     },
     [themes.dark]: {
       wrapper: {
@@ -74,7 +74,7 @@ export default function getConfirmAndSignTransactionStyles() {
       },
       accountNameText: {
         color: colors.light.white,
-      }
+      },
     },
   };
 }

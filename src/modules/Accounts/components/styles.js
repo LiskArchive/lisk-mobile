@@ -75,29 +75,13 @@ export default () => ({
       justifyContent: 'center',
       padding: 20,
     },
-    emptyStateActivityIndicator: {
-      position: 'absolute',
-      top: 0,
-    },
-    emptyState: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1,
-    },
     noActivity: {
       width: '100%',
       alignItems: 'center',
     },
-    empty: {
-      width: 260,
-      height: 129,
-    },
     loading: {
       width: 237,
       height: 220,
-    },
-    noTxTitle: {
-      paddingTop: 12,
     },
     pendingIcon: {
       width: 18,
@@ -138,9 +122,6 @@ export default () => ({
     itemContainer: {
       borderBottomColor: colors.light.mystic,
     },
-    emptyState: {
-      backgroundColor: colors.light.white,
-    },
     address: {
       color: colors.light.black,
     },
@@ -165,9 +146,6 @@ export default () => ({
     incomingSymbol: {
       backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
     },
-    noTxTitle: {
-      color: colors.light.slateGray,
-    },
   },
   [themes.dark]: {
     container: {
@@ -178,9 +156,6 @@ export default () => ({
     },
     itemContainer: {
       borderBottomColor: setColorOpacity(colors.light.white, 0.24),
-    },
-    emptyState: {
-      backgroundColor: colors.dark.mainBg,
     },
     address: {
       color: colors.dark.white,
@@ -205,9 +180,6 @@ export default () => ({
     },
     incomingSymbol: {
       backgroundColor: setColorOpacity(colors.light.ufoGreen, 0.15),
-    },
-    noTxTitle: {
-      color: colors.dark.slateGray,
     },
   },
 });

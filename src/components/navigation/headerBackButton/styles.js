@@ -22,7 +22,7 @@ export default () => ({
       minHeight: 40,
     },
     whiteBackground: {
-      backgroundColor: colors.light.white
+      backgroundColor: colors.light.white,
     },
     paddingLeft: {
       paddingLeft: 20,
@@ -40,6 +40,6 @@ export default () => ({
     },
     safeArea: {
       marginTop: safeAreaMarginTop,
-    }
-  }
+    },
+  },
 });

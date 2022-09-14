@@ -5,7 +5,7 @@ import i18n from '../../../locales';
 // import { languageKeys } from 'constants/languages';
 import { pricesRetrieved } from '../../actions/service';
 
-const settingsMiddleware = store => next => action => {
+const settingsMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case actionTypes.settingsRetrieved:
       if (!action.data.language) {

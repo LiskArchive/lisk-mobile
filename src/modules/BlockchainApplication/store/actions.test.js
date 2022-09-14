@@ -1,4 +1,4 @@
-import { BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
+import { mockApplicationsMeta } from '../__fixtures__';
 import actionTypes from './actionTypes';
 import {
   toggleApplicationPin,
@@ -7,8 +7,8 @@ import {
   setCurrentApplication,
 } from './actions';
 
-const chainId = BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID;
-const sampleBlockchainApplication = BLOCKCHAIN_APPLICATIONS_MOCK[0];
+const chainId = mockApplicationsMeta[0].chainID;
+const sampleBlockchainApplication = mockApplicationsMeta[0];
 
 describe('actions:  blockchainApplication', () => {
   it('should create an action to toggle blockchain application', () => {
@@ -41,9 +41,9 @@ describe('actions:  blockchainApplication', () => {
   it('should create an action to set current application', () => {
     const expectedAction = {
       type: actionTypes.setCurrentApplication,
-      application: BLOCKCHAIN_APPLICATIONS_MOCK[0],
+      application: mockApplicationsMeta[0],
     };
 
-    expect(setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0])).toEqual(expectedAction);
+    expect(setCurrentApplication(mockApplicationsMeta[0])).toEqual(expectedAction);
   });
 });

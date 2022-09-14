@@ -25,12 +25,7 @@ const Loading = ({ styles, loading }) => {
 
   return (
     <View style={[styles.wrapper, visible]}>
-      <LottieView
-        style={styles.animation}
-        source={progressBar}
-        loop={loop}
-        ref={animation}
-      />
+      <LottieView style={styles.animation} source={progressBar} loop={loop} ref={animation} />
     </View>
   );
 };

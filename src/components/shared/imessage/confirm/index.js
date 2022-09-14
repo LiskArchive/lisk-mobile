@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { toRawLsk, includeFee } from 'utilities/conversions';
+import { includeFee } from 'utilities/conversions';
 import { colors } from 'constants/styleGuide';
-import * as transactionsAPI from 'utilities/api/lisk/transactions';
 import { extractAddress } from 'utilities/api/lisk/account';
 import FormattedNumber from '../../formattedNumber';
 import { PrimaryButton, Button } from '../../toolBox/button';
@@ -29,22 +28,22 @@ class Confirm extends Component {
       sharedData: { address, amount },
     } = this.props;
 
-    const data = {
-      recipientAddress: address,
-      amount: toRawLsk(amount),
-      passphrase,
-    };
-
     this.setState({ busy: true, errorMessage: '' });
 
     try {
       this.setState({ busy: false });
 
-      const tx = await transactionsAPI.create(data);
-      const { id } = await transactionsAPI.broadcast(tx);
+      // TODO: Consume transactions hooks instead when they are created.
+      // const data = {
+      //   recipientAddress: address,
+      //   amount: toRawLsk(amount),
+      //   passphrase,
+      // };
+      // const tx = await transactionsAPI.create(data);
+      // const { id } = await transactionsAPI.broadcast(tx);
 
       composeMessage({
-        id,
+        id: '',
         address: { value: extractAddress(passphrase), validity: 0 },
         amount,
         state: 'transferred',
@@ -70,8 +69,8 @@ class Confirm extends Component {
 
     const { busy, errorMessage } = this.state;
 
-    const isSender = conversation.localParticipiantIdentifier
-      === message.senderParticipantIdentifier;
+    const isSender =
+      conversation.localParticipiantIdentifier === message.senderParticipantIdentifier;
     const fee = 1e7;
     const totalAmount = isSender ? amount : includeFee(amount, fee);
     const description = isSender
@@ -93,26 +92,15 @@ class Confirm extends Component {
             <View>
               <View style={[styles.row, styles.addressContainer]}>
                 <B style={styles.title}>Requested by</B>
-                <Avatar
-                  address={address || ''}
-                  style={styles.avatar}
-                  size={50}
-                />
+                <Avatar address={address || ''} style={styles.avatar} size={50} />
                 <P style={[styles.text, styles.address]}>{address}</P>
               </View>
               <View style={styles.row}>
-                <Icon
-                  name="amount"
-                  style={styles.icon}
-                  size={20}
-                  color={colors.light.slateGray}
-                />
+                <Icon name="amount" style={styles.icon} size={20} color={colors.light.slateGray} />
                 <View style={styles.rowContent}>
                   <P style={styles.label}>Amount</P>
                   <B style={[styles.text]}>
-                    <FormattedNumber language={language}>
-                      {amount}
-                    </FormattedNumber>
+                    <FormattedNumber language={language}>{amount}</FormattedNumber>
                   </B>
                 </View>
               </View>
@@ -136,12 +124,7 @@ class Confirm extends Component {
             </View>
             {isSender ? null : (
               <View>
-                <View
-                  style={[
-                    styles.errorContainer,
-                    errorMessage ? styles.visible : null,
-                  ]}
-                >
+                <View style={[styles.errorContainer, errorMessage ? styles.visible : null]}>
                   <Icon size={16} name="warning" style={styles.errorIcon} />
                   <Small style={styles.error}>{errorMessage}</Small>
                 </View>
@@ -162,8 +145,7 @@ class Confirm extends Component {
         ) : (
           <View style={[styles.innerContainer, styles.confirmContainer]}>
             <B style={styles.confirmMessage}>
-              You have {state} {amount} LSK. Send the message to let {address}{' '}
-              know.
+              You have {state} {amount} LSK. Send the message to let {address} know.
             </B>
           </View>
         )}

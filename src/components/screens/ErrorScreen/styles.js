@@ -1,6 +1,4 @@
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default function getErrorScreenStyles() {
   return {
@@ -8,12 +6,12 @@ export default function getErrorScreenStyles() {
       wrapper: {
         flex: 1,
         padding: boxes.boxPadding,
-        marginVertical: boxes.boxPadding
+        marginVertical: boxes.boxPadding,
       },
       container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
       },
       icon: {
         marginBottom: 16,
@@ -32,8 +30,8 @@ export default function getErrorScreenStyles() {
         marginBottom: 0,
       },
       continueButton: {
-        paddingHorizontal: 24
-      }
+        paddingHorizontal: 24,
+      },
     },
 
     [themes.light]: {
@@ -58,6 +56,6 @@ export default function getErrorScreenStyles() {
       description: {
         color: colors.dark.ghost,
       },
-    }
+    },
   };
 }

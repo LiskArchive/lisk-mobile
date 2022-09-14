@@ -16,21 +16,21 @@ const BackupPassphrase = ({ styles }) => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} >
-    <Stepper currentIndex={0}>
-      <DecryptPhrase
-        account={account}
-        route={{
-          params: {
-            address: summary.address,
-            title: 'settings.backup_phrase.title',
-          },
-        }}
-      />
-      <PassphraseBackup />
-      <Confirm customHeader />
-      <PasswordSetupSuccess encryptedJson={account} onContinue={navigation.goBack} />
-    </Stepper>
+    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+      <Stepper currentIndex={0}>
+        <DecryptPhrase
+          account={account}
+          route={{
+            params: {
+              address: summary.address,
+              title: 'settings.backup_phrase.title',
+            },
+          }}
+        />
+        <PassphraseBackup />
+        <Confirm customHeader />
+        <PasswordSetupSuccess encryptedJson={account} onContinue={navigation.goBack} />
+      </Stepper>
     </SafeAreaView>
   );
 };

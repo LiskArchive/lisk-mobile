@@ -2,43 +2,42 @@ import { themes, fonts, colors } from 'constants/styleGuide';
 
 export default () => ({
   common: {
-    inputContainer: {
-      paddingLeft: 20,
-      paddingRight: 20,
-      paddingTop: 20,
-    },
     inputRow: {
       flexDirection: 'row',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     rightAdornment: {
       position: 'absolute',
-      right: 5,
+      right: 4,
       padding: 10,
     },
     leftAdornment: {
       position: 'absolute',
-      left: 5,
-      padding: 10,
+      left: 4,
+      padding: 8,
     },
     secureTextEntryIcon: {
       position: 'absolute',
       right: 5,
-      padding: 10,
+      padding: 8,
     },
     inputLabel: {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
-      marginBottom: 13,
+      marginBottom: 16,
     },
     input: {
       fontSize: fonts.size.base,
-      fontFamily: fonts.family.contextBold,
       width: '100%',
       borderWidth: 1,
-      paddingTop: 11.5,
-      padding: 13,
-      borderRadius: 2,
+      padding: 16,
+      borderRadius: 10,
+    },
+    inputWithLeftAdornment: {
+      paddingLeft: 40,
+    },
+    inputWithRightAdornment: {
+      paddingRight: 40,
     },
     inputFocused: {
       borderColor: colors.light.ultramarineBlue,

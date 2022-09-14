@@ -15,16 +15,8 @@ const Icomoon = createIconSetFromIcoMoon(iconsConfig);
  * @param {Object} props.style - styles from stylesheet
  * @param {Function} props.onPress - onPress event handler function
  */
-const Icon = ({
-  name, size, color, style, onPress
-}) => (
-  <Icomoon
-    name={name}
-    size={size || 35}
-    color={color}
-    style={style}
-    onPress={onPress}
-  />
+const Icon = ({ name, size, color, style, onPress }) => (
+  <Icomoon name={name} size={size || 35} color={color} style={style} onPress={onPress} />
 );
 
 export default Icon;

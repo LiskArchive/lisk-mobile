@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`api/transactions Should handle rejections from transactions.broadcast method 1`] = `[TypeError: Cannot read properties of undefined (reading 'length')]`;

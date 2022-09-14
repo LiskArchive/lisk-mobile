@@ -1,13 +1,11 @@
 import { Platform } from 'react-native';
-import {
-  themes, colors, fonts
-} from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
-export default () => ({
+export default (tabBarHeight) => ({
   common: {
-    wrapper: {
-      flex: 1,
+    container: {
+      flexGrow: 1,
     },
     titleContainer: {
       backgroundColor: colors.light.ultramarineBlue,
@@ -18,8 +16,8 @@ export default () => ({
       justifyContent: 'center',
       paddingTop: 2,
       position: 'absolute',
-      bottom: 0,
-      right: 0,
+      bottom: tabBarHeight + 24,
+      right: 16,
       margin: 20,
     },
     headerButton: {
@@ -74,9 +72,6 @@ export default () => ({
     },
   },
   [themes.light]: {
-    wrapper: {
-      backgroundColor: colors.light.white,
-    },
     addButtonText: {
       color: colors.light.ultramarineBlue,
     },
@@ -85,9 +80,6 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    wrapper: {
-      backgroundColor: colors.dark.mainBg,
-    },
     addButtonText: {
       color: colors.dark.ultramarineBlue,
     },

@@ -8,6 +8,7 @@ import addressImg from 'assets/images/registrationIntro/address3x.png';
 import securePassphraseImg from 'assets/images/registrationIntro/securePassphrase3x.png';
 import uniqueAvatarImg from 'assets/images/registrationIntro/uniqueAvatar3x.png';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 
 const descriptionContent = [
@@ -17,14 +18,14 @@ const descriptionContent = [
     description:
       'The address is unique and can’t be changed. It’s yours. Find it in your home page.',
     imageSrc: addressImg,
-    imageStyle: styles.sliderImage
+    imageStyle: styles.sliderImage,
   },
   {
     step: 2,
     title: 'A unique avatar',
     description: 'The Avatar represents the address, making it easy to recognize.',
     imageSrc: uniqueAvatarImg,
-    imageStyle: styles.sliderImage
+    imageStyle: styles.sliderImage,
   },
   {
     step: 3,
@@ -32,19 +33,17 @@ const descriptionContent = [
     description:
       'Your passphrase is used to access your account. No one can reset it, not even Lisk.',
     imageSrc: securePassphraseImg,
-    imageStyle: styles.sliderImage
-  }
+    imageStyle: styles.sliderImage,
+  },
 ];
 
-const Intro = ({
-  t, nextStep,
-  navigation, route
-}) => {
+const Intro = ({ t, nextStep, route }) => {
+  const navigation = useNavigation();
   const [passphrase, setPassphrase] = useState('');
 
   const forward = () => {
     nextStep({
-      passphrase
+      passphrase,
     });
   };
 
@@ -58,22 +57,24 @@ const Intro = ({
 
     setOptions({
       title: t('Account creation'),
-      headerLeft: (props) => <HeaderBackButton {...props} onPress={navigation.goBack} />
+      headerLeft: (props) => <HeaderBackButton {...props} onPress={navigation.goBack} />,
     });
   }, []);
 
-  return <SafeAreaView style={styles.wrapper}>
-    <Slider
-      descriptionContent={descriptionContent}
-      skip={forward}
-      testID="accountCreation"
-      t={t}
-    ></Slider>
-  </SafeAreaView>;
+  return (
+    <SafeAreaView style={styles.wrapper}>
+      <Slider
+        descriptionContent={descriptionContent}
+        skip={forward}
+        testID="accountCreation"
+        t={t}
+      ></Slider>
+    </SafeAreaView>
+  );
 };
 
-const mapStateToProps = state => ({
-  settings: state.settings
+const mapStateToProps = (state) => ({
+  settings: state.settings,
 });
 
 export default translate()(connect(mapStateToProps)(Intro));

@@ -1,33 +1,27 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { colors, themes } from 'constants/styleGuide';
 import ModalHolder from 'utilities/modal';
 import { stringShortener } from 'utilities/helpers';
-import { accountUnFollowed as accountUnFollowedAction } from 'modules/Accounts/store/actions';
 import WarningSvg from 'assets/svgs/WarningSvg';
 import Avatar from 'components/shared/avatar';
 import { B, Small, P } from 'components/shared/toolBox/typography';
 import Icon from 'components/shared/toolBox/icon';
 import SwipeableRow from 'components/shared/Swipeable';
+import { useNavigation } from '@react-navigation/native';
 import DeleteBookmarkModal from './DeleteBookmark';
+import { deleteBookmark } from '../store/actions';
 
-const DraggableItem = ({
-  styles,
-  data,
-  theme,
-  navigate,
-  showAvatar,
-  isInvalidAddress,
-  accountUnFollowed,
-  t,
-}) => {
+const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddress, t }) => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const onDelete = () => {
     ModalHolder.open({
       title: 'Delete bookmark',
       component: DeleteBookmarkModal,
-      callback: () => accountUnFollowed(data.address),
+      callback: () => dispatch(deleteBookmark(data)),
     });
   };
 
@@ -36,16 +30,9 @@ const DraggableItem = ({
       title: t('bookmarks.disabled.title'),
       component: () => (
         <View>
-          <P style={[styles.text, styles.theme.text]}>
-            {t('bookmarks.disabled.description')}
-          </P>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => ModalHolder.close()}
-          >
-            <B style={styles.buttonText}>
-              {t('bookmarks.disabled.buttons.close')}
-            </B>
+          <P style={[styles.text, styles.theme.text]}>{t('bookmarks.disabled.description')}</P>
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => ModalHolder.close()}>
+            <B style={styles.buttonText}>{t('bookmarks.disabled.buttons.close')}</B>
           </TouchableOpacity>
         </View>
       ),
@@ -55,28 +42,30 @@ const DraggableItem = ({
   return (
     <SwipeableRow
       style={[styles.itemContainer, styles.theme.itemContainer]}
-      leftActions={!isInvalidAddress && [
-        {
-          title: 'Edit',
-          color: colors.dark.blueGray,
-          icon: () => (
-            <Icon
-              name="edit-bookmark"
-              size={20}
-              style={[isInvalidAddress && { opacity: 0.5 }]}
-              color={colors[theme].white}
-            />
-          ),
-          onPress: () =>
-            navigate({
-              name: 'AddBookmark',
-              params: {
-                account: data,
-                title: t('Edit bookmark'),
-              },
-            }),
-        },
-      ]}
+      leftActions={
+        !isInvalidAddress && [
+          {
+            title: 'Edit',
+            color: colors.dark.blueGray,
+            icon: () => (
+              <Icon
+                name="edit-bookmark"
+                size={20}
+                style={[isInvalidAddress && { opacity: 0.5 }]}
+                color={colors[theme].white}
+              />
+            ),
+            onPress: () =>
+              navigation.navigate({
+                name: 'AddBookmark',
+                params: {
+                  account: data,
+                  title: t('Edit bookmark'),
+                },
+              }),
+          },
+        ]
+      }
       rightActions={[
         {
           title: 'Delete',
@@ -95,9 +84,7 @@ const DraggableItem = ({
     >
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() =>
-          !isInvalidAddress && navigate('Wallet', { address: data.address })
-        }
+        onPress={() => !isInvalidAddress && onPress(data)}
         style={[styles.row, styles.swipeBookmark]}
       >
         <View style={[styles.innerContainer]}>
@@ -109,16 +96,10 @@ const DraggableItem = ({
                 isInvalidAddress && styles.lightOpacity,
               ]}
             >
-              <Avatar
-                address={data.address}
-                size={43}
-                style={styles.theme.avatar}
-              />
+              <Avatar address={data.address} size={43} style={styles.theme.avatar} />
             </View>
           ) : null}
-          <View
-            style={[styles.column, isInvalidAddress && styles.lightOpacity]}
-          >
+          <View style={[styles.column, isInvalidAddress && styles.lightOpacity]}>
             <B style={[styles.address, styles.theme.address]}>{data.label}</B>
             <Small style={[styles.label, styles.theme.label]}>
               {stringShortener(data.address, 6, 5)}
@@ -126,15 +107,10 @@ const DraggableItem = ({
           </View>
           {isInvalidAddress && (
             <View>
-              <TouchableOpacity
-                style={styles.infoButton}
-                onPress={openDisabledModal}
-              >
+              <TouchableOpacity style={styles.infoButton} onPress={openDisabledModal}>
                 <WarningSvg
                   color={
-                    theme === themes.light
-                      ? colors.light.zodiacBlue
-                      : colors.dark.mountainMist
+                    theme === themes.light ? colors.light.zodiacBlue : colors.dark.mountainMist
                   }
                 />
               </TouchableOpacity>
@@ -145,8 +121,5 @@ const DraggableItem = ({
     </SwipeableRow>
   );
 };
-const mapDispatchToProps = {
-  accountUnFollowed: accountUnFollowedAction,
-};
 
-export default translate()(connect(null, mapDispatchToProps)(DraggableItem));
+export default translate()(DraggableItem);

@@ -13,25 +13,18 @@ const logoSize = 83;
 const openLiskWebsite = () => {
   Linking.openURL(URLs.liskHomepage)
     // eslint-disable-next-line no-console
-    .catch(err => console.error('An error occurred', err));
+    .catch((err) => console.error('An error occurred', err));
 };
 
 const About = ({ styles, t }) => (
   <View style={[styles.container, styles.theme.container]}>
     <View style={styles.logo}>
-      <Image
-        source={Logo}
-        style={styles.logoImage}
-        width={logoSize}
-        height={logoSize}
-      />
+      <Image source={Logo} style={styles.logoImage} width={logoSize} height={logoSize} />
     </View>
 
     <H4 style={[styles.appTitle, styles.theme.appTitle]}>Lisk</H4>
 
-    <P style={[styles.version, styles.theme.version]}>
-      {`Version ${packageJson.version}`}
-    </P>
+    <P style={[styles.version, styles.theme.version]}>{`Version ${packageJson.version}`}</P>
 
     <A onPress={openLiskWebsite} style={[styles.link, styles.theme.link]}>
       {t('Read more on the Lisk website')}

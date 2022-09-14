@@ -11,7 +11,7 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actio
 import getStyles from './styles';
 
 @connect(
-  state => ({
+  (state) => ({
     passphrase: state.accounts.passphrase,
   }),
   {
@@ -28,14 +28,18 @@ class DisableBioAuth extends React.Component {
   componentDidMount() {
     this.props.navigation.setOptions({
       title: null,
-      headerLeft: props => <HeaderBackButton title={this.props.route.params?.title ?? 'Bio Auth'} onPress={this.props.navigation.goBack} {...props} />
+      headerLeft: (props) => (
+        <HeaderBackButton
+          title={this.props.route.params?.title ?? 'Bio Auth'}
+          onPress={this.props.navigation.goBack}
+          {...props}
+        />
+      ),
     });
   }
 
   render() {
-    const {
-      t, styles, route, passphrase
-    } = this.props;
+    const { t, styles, route, passphrase } = this.props;
 
     const title = route.params?.title ?? 'Bio Auth';
 
@@ -46,10 +50,7 @@ class DisableBioAuth extends React.Component {
             <PassphraseCopy passphrase={passphrase} />
           </View>
 
-          <PrimaryButton
-            onClick={this.confirm}
-            title={t('Disable bioAuth', { title })}
-          />
+          <PrimaryButton onClick={this.confirm} title={t('Disable bioAuth', { title })} />
         </View>
       </View>
     );

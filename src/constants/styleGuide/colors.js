@@ -19,7 +19,8 @@ const common = {
   silverGrey: '#C5CFE4',
   furyRed: '#FF4557',
   volcanicSand: '#4D4D50',
-  yellowCopacabana: '#F7E36D'
+  yellowCopacabana: '#F7E36D',
+  sparkleGray: '#70778B',
 };
 
 const light = {
@@ -38,10 +39,10 @@ const dark = {
   mainBg: common.black,
   footerBg: '#1C1C1C',
   textInputBg: '#1C1C1E',
-  tabBarText: common.white
+  tabBarText: common.white,
 };
 
 export default {
   light,
-  dark
+  dark,
 };

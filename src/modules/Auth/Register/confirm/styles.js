@@ -1,7 +1,5 @@
 import { deviceHeight, SCREEN_HEIGHTS } from 'utilities/device';
-import {
-  themes, colors, fonts, boxes
-} from 'constants/styleGuide';
+import { themes, colors, fonts, boxes } from 'constants/styleGuide';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
@@ -113,7 +111,7 @@ export default () => ({
     },
     word: {
       color: colors.light.black,
-    }
+    },
   },
   [themes.dark]: {
     wrapper: {
@@ -121,6 +119,6 @@ export default () => ({
     },
     word: {
       color: colors.light.white,
-    }
-  }
+    },
+  },
 });

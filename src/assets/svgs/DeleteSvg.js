@@ -1,9 +1,7 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 
-export default function DeleteSvg({
-  color = '#4070F4', height = 20, width = 20, style
-}) {
+export default function DeleteSvg({ color = '#4070F4', height = 20, width = 20, style }) {
   return (
     <Svg width={width} height={height} viewBox="0 0 16 16" fill="none" style={style}>
       <Path

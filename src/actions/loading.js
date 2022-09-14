@@ -8,7 +8,7 @@ import actionTypes from 'constants/actions';
  *
  * @returns {Object} - Pure action function
  */
-export const loadingStarted = data => ({
+export const loadingStarted = (data) => ({
   data,
   type: actionTypes.loadingStarted,
 });
@@ -22,7 +22,7 @@ export const loadingStarted = data => ({
  *
  * @returns {Object} - Pure action function
  */
-export const loadingFinished = data => ({
+export const loadingFinished = (data) => ({
   data,
   type: actionTypes.loadingFinished,
 });

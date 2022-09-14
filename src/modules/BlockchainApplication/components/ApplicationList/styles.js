@@ -1,11 +1,9 @@
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getApplicationListStyles() {
   return {
     common: {
-      innerContainer: {
+      container: {
         flexDirection: 'column',
         flex: 1,
       },
@@ -13,7 +11,6 @@ export default function getApplicationListStyles() {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        padding: boxes.boxPadding,
       },
       applicationContainer: {
         flexDirection: 'row',
@@ -42,19 +39,7 @@ export default function getApplicationListStyles() {
         marginRight: 15,
         fontWeight: '600',
       },
-      searchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: '100%',
-        marginTop: 32,
-      },
-      searchIcon: {
-        position: 'absolute',
-        zIndex: 1,
-        left: 30,
-      },
       input: {
-        flexWrap: 'wrap',
         paddingLeft: 36,
         paddingBottom: 8,
         paddingTop: 8,
@@ -62,10 +47,6 @@ export default function getApplicationListStyles() {
         borderRadius: 26,
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
-      },
-      inputContainer: {
-        marginTop: -20,
-        position: 'relative',
       },
       statsModal: {
         height: 500,
@@ -81,7 +62,7 @@ export default function getApplicationListStyles() {
       },
     },
     [themes.light]: {
-      innerContainer: {
+      container: {
         backgroundColor: colors.light.white,
       },
       applicationNameLabel: {
@@ -90,7 +71,7 @@ export default function getApplicationListStyles() {
     },
 
     [themes.dark]: {
-      innerContainer: {
+      container: {
         backgroundColor: colors.dark.mainBg,
       },
       applicationNameLabel: {

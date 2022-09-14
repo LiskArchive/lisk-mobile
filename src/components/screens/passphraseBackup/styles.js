@@ -11,7 +11,7 @@ export default () => ({
     qrCodeContainer: {
       marginTop: boxes.boxPadding,
       alignItems: 'center',
-      paddingBottom: 60
+      paddingBottom: 60,
     },
     text: {
       marginBottom: 28,

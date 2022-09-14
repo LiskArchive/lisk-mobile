@@ -1,52 +1,58 @@
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
-import {
-  View, TouchableOpacity, ScrollView, SafeAreaView
-} from 'react-native';
-import { translate } from 'react-i18next';
+import { View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+
+import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import { colors } from 'constants/styleGuide';
 import SearchBarHeader from 'components/navigation/searchBarHeader';
 import Icon from 'components/shared/toolBox/icon';
-import withTheme from 'components/shared/withTheme';
-import { Repeater } from './components';
-import getStyles from './styles';
 
-const Bookmark = ({
-  styles, navigation, theme, t
-}) => {
+import { useTheme } from 'hooks/useTheme';
+import getStyles from './styles';
+import { BookmarkList } from './components';
+
+export default function Bookmark() {
+  const navigation = useNavigation();
+
   const [query, setQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+  const tabBarHeight = useBottomTabBarHeight();
+
+  const { styles, theme } = useTheme({
+    styles: getStyles(tabBarHeight),
+  });
+
   const setQueryString = (query) => setQuery(query);
 
-  return <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-    <SearchBarHeader
-      title={'Bookmarks'}
-      noIcon={true}
-      onChange={setQueryString}
-      value={query}
-      isSearchOpen={isSearchOpen}
-      setIsSearchOpen={(val) => setIsSearchOpen(val)}
-    />
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={styles.form}>
-        <Repeater
-          navigate={navigation.navigate}
-          draggable={true}
-          query={query}
-          renderEmpty
-        />
-      </View>
-    </ScrollView>
-    <TouchableOpacity
-      style={[styles.titleContainer]}
-      onPress={() =>
-        navigation.navigate({ name: 'AddBookmark', params: { title: t('New bookmark') } })
-      }
-    >
-      <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={30} />
-    </TouchableOpacity>
-  </SafeAreaView>;
-};
+  const onPress = (data) => {
+    navigation.navigate('Wallet', { address: data.address });
+  };
 
-export default withTheme(translate()(Bookmark), getStyles());
+  return (
+    <NavigationSafeAreaView>
+      <SearchBarHeader
+        title={'Bookmarks'}
+        noIcon={true}
+        onChange={setQueryString}
+        value={query}
+        isSearchOpen={isSearchOpen}
+        setIsSearchOpen={(val) => setIsSearchOpen(val)}
+      />
+      <View style={styles.container}>
+        <BookmarkList draggable={true} query={query} renderEmpty onPress={onPress} />
+      </View>
+      <TouchableOpacity
+        style={[styles.titleContainer]}
+        onPress={() =>
+          navigation.navigate({ name: 'AddBookmark', params: { title: i18next.t('New bookmark') } })
+        }
+      >
+        <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={30} />
+      </TouchableOpacity>
+    </NavigationSafeAreaView>
+  );
+}

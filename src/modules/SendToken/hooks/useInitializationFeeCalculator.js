@@ -4,9 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { getInitializationFee } from '../helpers';
 
-export default function useInitializationFeeCalculator({
-  tokenID, recipientAccountAddress
-}) {
+export default function useInitializationFeeCalculator({ tokenID, recipientAccountAddress }) {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
@@ -16,12 +14,13 @@ export default function useInitializationFeeCalculator({
   useEffect(() => {
     if (accounts) {
       const recipientAccount = accounts.find(
-        account => account.metadata.address === recipientAccountAddress
+        (account) => account.metadata.address === recipientAccountAddress
       );
 
       try {
         const fee = getInitializationFee({
-          tokenID, recipientAccount
+          tokenID,
+          recipientAccount,
         });
 
         setData(fee);
@@ -33,7 +32,7 @@ export default function useInitializationFeeCalculator({
         setIsLoading(false);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipientAccountAddress, accounts, tokenID]);
 
   return { data, isLoading, error };

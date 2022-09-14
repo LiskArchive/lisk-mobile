@@ -1,17 +1,13 @@
-/* eslint-disable max-statements */
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import ModalBox from 'react-native-modalbox';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
-import { colors } from 'constants/styleGuide';
-import Icon from 'components/shared/toolBox/icon';
+import BottomModal from 'components/shared/BottomModal';
 
-import getSendTokenSummaryStepStyles from './styles';
 import ConfirmAndSignTransaction from '../ConfirmAndSignTransaction';
 import SendTokenSuccess from '../SendTokenSuccess';
 import SendTokenError from '../SendTokenError';
+import getSendTokenSummaryStepStyles from './styles';
 
 export function SendTokenSummaryModal({
   show,
@@ -19,11 +15,12 @@ export function SendTokenSummaryModal({
   summary,
   form,
   handleResetForm,
-  handleResetStepper
+  handleResetStepper,
 }) {
   const navigation = useNavigation();
 
   const [activeStep, setActiveStep] = useState('confirmAndSignTransaction');
+  const [error, setError] = useState();
 
   const { styles } = useTheme({
     styles: getSendTokenSummaryStepStyles(),
@@ -56,7 +53,10 @@ export function SendTokenSummaryModal({
             token={summary.token}
             form={form}
             onSuccess={() => setActiveStep('sendTokenSuccess')}
-            onError={() => setActiveStep('sendTokenError')}
+            onError={(_error) => {
+              setError(_error);
+              setActiveStep('sendTokenError');
+            }}
           />
         );
 
@@ -79,6 +79,7 @@ export function SendTokenSummaryModal({
               handleResetStepper();
               setShow(false);
             }}
+            error={error}
           />
         );
 
@@ -88,27 +89,17 @@ export function SendTokenSummaryModal({
   }
 
   return (
-    <ModalBox
-      position="bottom"
-      style={[
-        styles.confirmAndSignTransactionModal,
-        styles.theme.confirmAndSignTransactionModal
-      ]}
+    <BottomModal
+      style={{
+        container: [
+          styles.confirmAndSignTransactionModal,
+          styles.theme.confirmAndSignTransactionModal,
+        ],
+      }}
       isOpen={show}
-      onClosed={handleOnProcessCompleted}
-      coverScreen
-      useNativeDriver
-      >
-      <View style={styles.iconWrapper}>
-        <Icon
-          onPress={() => setShow(false)}
-          name="cross"
-          color={colors.light.ultramarineBlue}
-          size={24}
-        />
-      </View>
-
+      toggleShow={handleOnProcessCompleted}
+    >
       {renderStep()}
-    </ModalBox>
+    </BottomModal>
   );
 }

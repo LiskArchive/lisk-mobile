@@ -1,23 +1,23 @@
 {
-  "images" : [
+  "images": [
     {
-      "filename" : "lisk-full-white.png",
-      "idiom" : "universal",
-      "scale" : "1x"
+      "filename": "lisk-full-white.png",
+      "idiom": "universal",
+      "scale": "1x"
     },
     {
-      "filename" : "lisk-full-white@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
+      "filename": "lisk-full-white@2x.png",
+      "idiom": "universal",
+      "scale": "2x"
     },
     {
-      "filename" : "lisk-full-white@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename": "lisk-full-white@3x.png",
+      "idiom": "universal",
+      "scale": "3x"
     }
   ],
-  "info" : {
-    "author" : "xcode",
-    "version" : 1
+  "info": {
+    "author": "xcode",
+    "version": 1
   }
 }

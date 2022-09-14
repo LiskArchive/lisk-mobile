@@ -1,6 +1,4 @@
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default function getDeleteBlockchainApplicationStyles() {
   return {

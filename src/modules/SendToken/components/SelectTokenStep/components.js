@@ -1,37 +1,42 @@
-/* eslint-disable max-lines */
-/* eslint-disable max-statements */
-import React, { useState } from 'react';
+/* eslint-disable max-lines, max-statements */
+import React, { useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useController } from 'react-hook-form';
+import i18next from 'i18next';
 
+import { useTheme } from 'hooks/useTheme';
+import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
-import { useTheme } from 'hooks/useTheme';
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import { P } from 'components/shared/toolBox/typography';
+import InfoToggler from 'components/shared/InfoToggler';
+import FadeInView from 'components/shared/fadeInView';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
-import { useAccountInfo } from '../../../Accounts/hooks/useAccounts/useAccountInfo';
-
-import getSendTokenSelectTokenStepStyles from './styles';
-import { useTokenAmountInCurrency } from './hooks';
+import DeleteSvg from 'assets/svgs/DeleteSvg';
+import colors from 'constants/styleGuide/colors';
 import { PRIORITY_NAMES_MAP } from '../../constants';
 import useTransactionPriorities from '../../hooks/useTransactionPriorities';
 import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
 import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
-export function TokenSelectField({
-  form,
-  tokens,
-  t
-}) {
+import { useTokenAmountInCurrency } from './hooks';
+import getSendTokenSelectTokenStepStyles, {
+  getSendTokenAmountFieldStyles,
+  getSendTokenMessageFieldStyles,
+} from './styles';
+import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount';
+import { useGetTokensQuery } from '../../api/useGetTokensQuery';
+
+export function TokenSelectField({ value, onChange, errorMessage, style }) {
+  const [currentAccount] = useCurrentAccount();
+
   const currentAccountInfo = useAccountInfo();
 
-  const { field } = useController({
-    name: 'tokenID',
-    control: form.control,
-  });
+  const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
@@ -39,22 +44,18 @@ export function TokenSelectField({
 
   const normalizedBalance = fromRawLsk(currentAccountInfo.summary.balance);
 
-  const selectedToken = tokens.data?.find(token => token.tokenID === field.value);
+  const selectedToken = tokens.data?.find((token) => token.tokenID === value);
 
   return (
-    <Picker
-      value={field.value}
-      onChange={field.onChange}
-      error={form.formState.errors.tokenID?.message}
-    >
+    <Picker value={value} onChange={onChange} error={errorMessage}>
       <View style={{ ...styles.row, justifyContent: 'space-between' }}>
-        <Picker.Label>
-          {t('sendToken.tokenSelect.tokenIDFieldLabel')}
+        <Picker.Label style={style?.label}>
+          {i18next.t('sendToken.tokenSelect.tokenIDFieldLabel')}
         </Picker.Label>
 
         {selectedToken && (
-          <Picker.Label>
-            {t('sendToken.tokenSelect.tokenIDBalanceLabel')}: {' '}
+          <Picker.Label style={style?.label}>
+            {i18next.t('sendToken.tokenSelect.tokenIDBalanceLabel')}:{' '}
             {/* TODO: Read token symbol from account info when backend send the data */}
             <Text style={[styles.balanceText]}>
               {normalizedBalance} {selectedToken.symbol}
@@ -63,110 +64,99 @@ export function TokenSelectField({
         )}
       </View>
 
-      <Picker.Toggle
-        disabled={tokens.isLoading || tokens.error}
-      >
+      <Picker.Toggle disabled={tokens.isLoading || tokens.error} style={style?.toggle}>
         {tokens.isLoading ? (
-          <Text>{t('sendToken.tokenSelect.loadingTokensText')}</Text>
-        ) : selectedToken && (
-          <View style={[styles.row]}>
-            <Text style={[styles.text, styles.theme.text]}>
-              {selectedToken.symbol}
-            </Text>
+          <Text>{i18next.t('sendToken.tokenSelect.loadingTokensText')}</Text>
+        ) : (
+          selectedToken && (
+            <View style={[styles.row]}>
+              <Text style={[styles.text, styles.theme.text]}>{selectedToken.symbol}</Text>
 
-            <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
-          </View>
+              <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
+            </View>
+          )
         )}
       </Picker.Toggle>
 
       <Picker.Menu>
-        {tokens.data?.map(token => (
-          <Picker.Item
-            key={token.tokenID}
-            value={token.tokenID}
-          >
-            <Text style={[styles.text, styles.theme.text]}>
-              {token.symbol}
-            </Text>
+        <InfiniteScrollList
+          data={tokens.data}
+          keyExtractor={(item) => item.tokenID}
+          renderItem={(item) => (
+            <Picker.Item key={item.tokenID} value={item.tokenID}>
+              <Text style={[styles.text, styles.theme.text]}>{item.symbol}</Text>
 
-            <TokenSvg symbol={token.symbol} style={styles.tokenSvg} />
-          </Picker.Item>
-        ))}
+              <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
+            </Picker.Item>
+          )}
+          renderSpinner
+          // TODO: Integrate pagination props using react-query.
+        />
       </Picker.Menu>
     </Picker>
   );
 }
 
-export function TokenAmountField({
-  form,
-  tokens,
-  t
-}) {
-  const { field } = useController({
-    name: 'amount',
-    control: form.control,
+export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, style }) {
+  const [currentAccount] = useCurrentAccount();
+
+  const tokens = useGetTokensQuery(currentAccount.metadata.address);
+
+  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
+
+  const tokenAmountInCurrency = useTokenAmountInCurrency({
+    tokenAmount: value,
+    tokenSymbol: selectedToken?.symbol,
   });
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const { tokenAmountInCurrency, currency } = useTokenAmountInCurrency(field.value);
-
-  const selectedToken = tokens.data?.find(
-    token => token.tokenID === form.watch('tokenID')
-  );
-
   return (
     <Input
-      label= {
-        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldLabel',
-          { selectedTokenSymbol: selectedToken.symbol || '' })
-          : t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
-      }
-      value={field.value}
-      placeholder= {
-        selectedToken ? t('sendToken.tokenSelect.tokenAmountFieldPlaceholder',
-          { selectedTokenSymbol: selectedToken.symbol || '' })
-          : t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
-      }
-      onChange={field.onChange}
+      value={value && value.toString()}
+      onChange={(newValue) => onChange(newValue && parseFloat(newValue))}
       keyboardType="numeric"
       disabled={!selectedToken}
-      error={form.formState.errors.amount?.message}
+      label={
+        selectedToken
+          ? i18next.t('sendToken.tokenSelect.tokenAmountFieldLabel', {
+              selectedTokenSymbol: selectedToken.symbol || '',
+            })
+          : i18next.t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
+      }
+      placeholder={
+        selectedToken
+          ? i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholder', {
+              selectedTokenSymbol: selectedToken.symbol || '',
+            })
+          : i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
+      }
+      error={errorMessage}
       adornments={{
-        right: (
+        right: tokenAmountInCurrency && (
           <Text style={[styles.tokenAmountInCurrencyText]}>
-            ~ {`${tokenAmountInCurrency} ${currency}`}
+            ~ {`${tokenAmountInCurrency.amount} ${tokenAmountInCurrency.currency}`}
           </Text>
-        )
+        ),
       }}
-      innerStyles={{
-        containerStyle: {
-          paddingTop: 0,
-          paddingRight: 0,
-          paddingLeft: 0,
-          marginBottom: 16,
-          marginTop: 16,
-        },
-        inputLabel: {
-          marginBottom: 8
-        },
-        input: {
-          padding: 16
-        }
-      }}
+      innerStyles={getSendTokenAmountFieldStyles(style)}
     />
   );
 }
 
-export function SendTokenDescriptionField({ form, t }) {
+export function SendTokenMessageField({ value, onChange, style }) {
   const [showInput, setShowInput] = useState(false);
 
-  const { field } = useController({
-    name: 'message',
-    control: form.control,
+  const { styles } = useTheme({
+    styles: getSendTokenSelectTokenStepStyles(),
   });
+
+  function handleRemove() {
+    setShowInput(false);
+    onChange('');
+  }
 
   if (!showInput) {
     return (
@@ -175,63 +165,71 @@ export function SendTokenDescriptionField({ form, t }) {
         style={{ width: 178 }}
         textStyle={{ fontSize: 14, lineHeight: 0, marginBottom: 16 }}
       >
-        {t('sendToken.tokenSelect.messageFieldTriggerButtonText')}
+        {i18next.t('sendToken.tokenSelect.messageFieldTriggerButtonText')}
       </LabelButton>
     );
   }
 
   return (
-    <Input
-      label={t('sendToken.tokenSelect.messageFieldLabel')}
-      value={field.value}
-      placeholder={t('sendToken.tokenSelect.messageFieldPlaceholder')}
-      onChange={field.onChange}
-      multiline
-      innerStyles={{
-        containerStyle: {
-          paddingTop: 0,
-          paddingRight: 0,
-          paddingLeft: 0,
-          marginBottom: 16
-        },
-        inputLabel: {
-          marginBottom: 8
-        },
-        input: {
-          padding: 16,
-          minHeight: 80
+    <FadeInView>
+      <Input
+        value={value}
+        onChange={onChange}
+        label={
+          <View style={[styles.labelContainer, { justifyContent: 'space-between' }]}>
+            <View style={[styles.row]}>
+              <P style={[styles.label, styles.theme.label, styles.iconLabel]}>
+                {i18next.t('sendToken.tokenSelect.messageFieldLabel')}
+              </P>
+
+              <InfoToggler
+                title={i18next.t('sendToken.info.bytesCounter.title')}
+                description={[
+                  i18next.t('sendToken.info.bytesCounter.description1'),
+                  i18next.t('sendToken.info.bytesCounter.description2'),
+                ]}
+              />
+            </View>
+
+            <TouchableOpacity onPress={handleRemove}>
+              <DeleteSvg color={colors.light.ultramarineBlue} height={16} />
+            </TouchableOpacity>
+          </View>
         }
-      }}
-    />
+        placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
+        multiline
+        innerStyles={getSendTokenMessageFieldStyles(style)}
+      />
+    </FadeInView>
   );
 }
 
-export function SendTokenPriorityField({ form, t }) {
+export function SendTokenPriorityField({ value, onChange, style }) {
   const {
     data: prioritiesData,
     isLoading: isLoadingPrioritiesData,
-    error: errorOnPriorities
-  } = useTransactionPriorities(form.watch('amount'), form.watch('message'));
-
-  const { field } = useController({
-    name: 'priority',
-    control: form.control,
-  });
+    error: errorOnPriorities,
+  } = useTransactionPriorities();
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
+  const shouldShowPrioritiesData = useMemo(
+    () => prioritiesData && prioritiesData[0]?.fee,
+    [prioritiesData]
+  );
+
+  if (!shouldShowPrioritiesData) return null;
+
   if (isLoadingPrioritiesData) {
     return (
       <View>
-        <Text style={[styles.label]}>
-          {t('sendToken.tokenSelect.priorityFieldLabel')}
+        <Text style={[styles.label, style?.label]}>
+          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
         </Text>
 
-        <Text>
-          {t('sendToken.tokenSelect.loadingPrioritiesText')}
-        </Text>
+        <Text>{i18next.t('sendToken.tokenSelect.loadingPrioritiesText')}</Text>
       </View>
     );
   }
@@ -239,36 +237,43 @@ export function SendTokenPriorityField({ form, t }) {
   if (errorOnPriorities) {
     return (
       <View>
-        <Text style={[styles.label, styles.theme.label]}>
-          {t('sendToken.tokenSelect.priorityFieldLabel')}
+        <Text style={[styles.label, styles.theme.label, style?.label]}>
+          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
         </Text>
 
-        <Text>
-          {t('sendToken.tokenSelect.errorLoadingPrioritiesText')}
-        </Text>
+        <Text>{i18next.t('sendToken.tokenSelect.errorLoadingPrioritiesText')}</Text>
       </View>
     );
   }
 
   return (
     <View style={{ marginBottom: 16 }}>
-      <Text style={[styles.label, styles.theme.label]}>
-        {t('sendToken.tokenSelect.priorityFieldLabel')}
-      </Text>
+      <View style={[styles.labelContainer]}>
+        <P style={[styles.label, styles.theme.label, styles.iconLabel, style?.label]}>
+          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
+        </P>
+
+        <InfoToggler
+          title={i18next.t('sendToken.info.priority.title')}
+          description={i18next.t('sendToken.info.priority.description1')}
+        />
+      </View>
 
       <View style={[styles.row, { width: '100%' }]}>
-        {prioritiesData.map(priority => (
+        {prioritiesData.map((priority) => (
           <TouchableOpacity
             key={priority.code}
-            onPress={() => field.onChange(priority.code)}
+            onPress={() => onChange(priority.code)}
             style={[
               styles.priorityButtonBase,
-              styles[field.value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'],
-              { marginRight: 8 }
+              styles[
+                value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
+              ],
+              { marginRight: 8 },
             ]}
           >
             <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
-              {t(PRIORITY_NAMES_MAP[priority.code])}
+              {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
             </Text>
 
             <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
@@ -281,66 +286,76 @@ export function SendTokenPriorityField({ form, t }) {
   );
 }
 
-export function SendTokenTransactionFeesLabels({ form, tokens, t }) {
-  const { styles } = useTheme({
-    styles: getSendTokenSelectTokenStepStyles(),
-  });
+export function SendTokenTransactionFeesLabels({
+  tokenID,
+  amount,
+  priority,
+  message,
+  recipientAccountAddress,
+  senderApplicationChainID,
+  recipientApplicationChainID,
+}) {
+  const [currentAccount] = useCurrentAccount();
 
-  const tokenID = form.watch('tokenID');
+  const tokens = useGetTokensQuery(currentAccount.metadata.address);
 
-  const selectedToken = tokens.data?.find(token => token.tokenID === tokenID);
+  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
 
   const transactionFee = useTransactionFeeCalculator({
     tokenID,
-    amount: form.watch('amount'),
-    priority: form.watch('priority'),
-    message: form.watch('message'),
+    amount,
+    priority,
+    message,
   });
 
   const initializationFee = useInitializationFeeCalculator({
     tokenID,
-    recipientAccountAddress: form.watch('recipientAccountAddress'),
+    recipientAccountAddress,
   });
 
   const cmmFee = useCCMFeeCalculator({
-    senderApplicationChainID: form.watch('senderApplicationChainID'),
-    recipientApplicationChainID: form.watch('recipientApplicationChainID')
+    senderApplicationChainID,
+    recipientApplicationChainID,
   });
 
-  if (transactionFee.error) {
-    return (
-      <Text>
-        {t('sendToken.tokenSelect.errorLoadingTransactionFeeText')}
-      </Text>
-    );
-  }
+  const { styles } = useTheme({
+    styles: getSendTokenSelectTokenStepStyles(),
+  });
 
   return (
     <View>
       <View style={[styles.feeContainer]}>
-        <Text style={[styles.text, styles.theme.text]}>
-          {t('sendToken.tokenSelect.transactionFeeLabel')}
-        </Text>
+        <View style={[styles.row]}>
+          <Text style={[styles.text, styles.theme.text, styles.iconLabel]}>
+            {i18next.t('sendToken.tokenSelect.transactionFeeLabel')}
+          </Text>
 
-        {transactionFee.isLoading ? (
-          <Text style={[styles.text, styles.theme.text]}>
-            {t('sendToken.tokenSelect.loadingTransactionFeeText')}
-          </Text>
-        ) : (
-          <Text style={[styles.text, styles.theme.text]}>
-            {transactionFee.data} {selectedToken?.symbol}
-          </Text>
-        )}
+          <InfoToggler
+            title={i18next.t('sendToken.info.transactionFee.title')}
+            description={i18next.t('sendToken.info.transactionFee.description1')}
+          />
+        </View>
+
+        <Text style={[styles.text, styles.theme.text]}>
+          {transactionFee.data} {selectedToken?.symbol}
+        </Text>
       </View>
 
       <View style={[styles.feeContainer]}>
-        <Text style={[styles.text, styles.theme.text]}>
-          {t('sendToken.tokenSelect.initializationFeeLabel')}
-        </Text>
+        <View style={[styles.row]}>
+          <Text style={[styles.text, styles.theme.text, styles.iconLabel]}>
+            {i18next.t('sendToken.tokenSelect.initializationFeeLabel')}
+          </Text>
+
+          <InfoToggler
+            title={i18next.t('sendToken.info.initializationFee.title')}
+            description={i18next.t('sendToken.info.initializationFee.description1')}
+          />
+        </View>
 
         {initializationFee.isLoading ? (
           <Text style={[styles.text, styles.theme.text]}>
-            {t('sendToken.tokenSelect.loadingInitializationFeeText')}
+            {i18next.t('sendToken.tokenSelect.loadingInitializationFeeText')}
           </Text>
         ) : (
           <Text style={[styles.text, styles.theme.text]}>
@@ -350,13 +365,20 @@ export function SendTokenTransactionFeesLabels({ form, tokens, t }) {
       </View>
 
       <View style={[styles.feeContainer]}>
-        <Text style={[styles.text, styles.theme.text]}>
-          {t('sendToken.tokenSelect.cmmFeeLabel')}
-        </Text>
+        <View style={[styles.row]}>
+          <Text style={[styles.text, styles.theme.text, styles.iconLabel]}>
+            {i18next.t('sendToken.tokenSelect.cmmFeeLabel')}
+          </Text>
+
+          <InfoToggler
+            title={i18next.t('sendToken.info.cmmFee.title')}
+            description={i18next.t('sendToken.info.cmmFee.description1')}
+          />
+        </View>
 
         {cmmFee.isLoading ? (
           <Text style={[styles.text, styles.theme.text]}>
-            {t('sendToken.tokenSelect.loadingCmmFeeText')}
+            {i18next.t('sendToken.tokenSelect.loadingCmmFeeText')}
           </Text>
         ) : (
           <Text style={[styles.text, styles.theme.text]}>

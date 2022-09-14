@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native';
+
 import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default function getSendTokenSummaryStepStyles() {
@@ -6,7 +8,7 @@ export default function getSendTokenSummaryStepStyles() {
       wrapper: {
         flex: 1,
         paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding
+        paddingRight: boxes.boxPadding,
       },
       container: {
         flex: 1,
@@ -14,7 +16,6 @@ export default function getSendTokenSummaryStepStyles() {
       label: {
         fontWeight: '400',
         fontSize: 14,
-        lineHeight: 18,
         color: colors.light.blueGray,
       },
       valueText: {
@@ -61,21 +62,16 @@ export default function getSendTokenSummaryStepStyles() {
         borderColor: colors.light.platinumGray,
       },
       confirmAndSignTransactionModal: {
-        backgroundColor: colors.light.white,
-        height: 560,
-        zIndex: 3,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
-        paddingTop: 24,
-        paddingBottom: 24
+        height: Dimensions.get('window').height / 1.8,
       },
       iconWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-end',
         marginBottom: 16,
+      },
+      avatar: {
+        marginRight: 8,
       },
     },
     [themes.light]: {
@@ -90,7 +86,7 @@ export default function getSendTokenSummaryStepStyles() {
       },
       confirmAndSignTransactionModal: {
         backgroundColor: colors.light.white,
-      }
+      },
     },
     [themes.dark]: {
       wrapper: {
@@ -104,7 +100,7 @@ export default function getSendTokenSummaryStepStyles() {
       },
       confirmAndSignTransactionModal: {
         backgroundColor: colors.dark.mainBg,
-      }
+      },
     },
   };
 }

@@ -1,6 +1,5 @@
 import { tokenMap } from 'constants/tokens';
 import * as liskAccount from './lisk/account';
-import * as liskTransactions from './lisk/transactions';
 import * as liskService from './lisk/service';
 
 /**
@@ -9,7 +8,6 @@ import * as liskService from './lisk/service';
 const resourceMap = {
   [tokenMap.LSK.key]: {
     account: liskAccount,
-    transactions: liskTransactions,
     service: liskService,
   },
 };
@@ -29,13 +27,9 @@ const getMappedFunction = (tokenType, resourceName, functionName) => {
       return fn;
     }
 
-    throw new Error(
-      `${tokenType} doesn't match a function for ${resourceName}.${functionName}.`
-    );
+    throw new Error(`${tokenType} doesn't match a function for ${resourceName}.${functionName}.`);
   } catch (error) {
-    throw new Error(
-      `Invalid mapper path for ${tokenType} - ${resourceName}.${functionName}.`
-    );
+    throw new Error(`Invalid mapper path for ${tokenType} - ${resourceName}.${functionName}.`);
   }
 };
 

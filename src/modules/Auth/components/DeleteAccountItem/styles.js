@@ -1,6 +1,4 @@
-import {
-  themes, colors, fonts
-} from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -25,7 +23,7 @@ export default () => ({
     content: {
       flex: 1,
       justifyContent: 'center',
-    }
+    },
   },
 
   [themes.light]: {
@@ -36,8 +34,8 @@ export default () => ({
       color: colors.light.zodiacBlue,
     },
     address: {
-      color: colors.light.blueGray
-    }
+      color: colors.light.blueGray,
+    },
   },
 
   [themes.dark]: {
@@ -48,7 +46,7 @@ export default () => ({
       color: colors.dark.white,
     },
     address: {
-      color: colors.light.whiteSmoke
-    }
+      color: colors.light.whiteSmoke,
+    },
   },
 });

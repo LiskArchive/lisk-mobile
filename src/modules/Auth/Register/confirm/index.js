@@ -41,25 +41,21 @@ const chooseRandomWords = (qty, words) => {
 };
 
 // eslint-disable-next-line max-statements
-const Confirm = ({
-  t,
-  nextStep,
-  sharedData: { passphrase }, prevStep,
-  customHeader,
-  styles
-}) => {
+const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHeader, styles }) => {
   const navigation = useNavigation();
   const [buttonStatus, setButtonStatus] = useState(true);
   const [missing, setMissing] = useState([]);
   const [options, setOptions] = useState([]);
-  const [answers, setAnswers] = useState([{
-    value: undefined,
-    style: {},
-  },
-  {
-    value: undefined,
-    style: {},
-  }]);
+  const [answers, setAnswers] = useState([
+    {
+      value: undefined,
+      style: {},
+    },
+    {
+      value: undefined,
+      style: {},
+    },
+  ]);
   const [visibleOptions, setVisibleOptions] = useState(-1);
 
   const generateTest = () => {
@@ -89,11 +85,10 @@ const Confirm = ({
     setAnswers(temp);
   };
 
-  const checkAnswers = answers => {
+  const checkAnswers = (answers) => {
     const phrase = passphrase.split(' ');
-    const start = answers.filter(item => item.value).length;
-    const result = answers.filter(item => phrase.includes(item.value))
-      .length;
+    const start = answers.filter((item) => item.value).length;
+    const result = answers.filter((item) => phrase.includes(item.value)).length;
     const isCorrect = result === 2;
     if (start === 2) {
       if (!isCorrect) {
@@ -101,7 +96,7 @@ const Confirm = ({
           generateTest();
         }, 1000);
       }
-      const finalAnswers = answers.map(item => ({
+      const finalAnswers = answers.map((item) => ({
         value: item.value,
         style: styles.noBorderBottom,
         textStyle: isCorrect ? styles.labelCorrect : styles.labelIncorrect,
@@ -111,7 +106,7 @@ const Confirm = ({
     }
   };
 
-  const fillOption = item => {
+  const fillOption = (item) => {
     const temp = [...answers];
     temp[visibleOptions] = {
       value: item,
@@ -124,9 +119,7 @@ const Confirm = ({
   };
 
   const generatePlaceholder = (index, optionIndex, value) => {
-    const style = visibleOptions === optionIndex
-      ? null
-      : styles.deActivePlaceholder;
+    const style = visibleOptions === optionIndex ? null : styles.deActivePlaceholder;
     return (
       <Button
         noPredefinedStyle
@@ -135,11 +128,7 @@ const Confirm = ({
         title={answers[optionIndex].value}
         onClick={() => toggleOptions(optionIndex)}
         textStyle={[styles.label, answers[optionIndex].textStyle]}
-        style={[
-          styles.placeholder,
-          style,
-          answers[optionIndex].style,
-        ]}
+        style={[styles.placeholder, style, answers[optionIndex].style]}
       />
     );
   };
@@ -148,16 +137,17 @@ const Confirm = ({
     const phrase = passphrase.split(' ');
     return missing.length > 0
       ? phrase.map((val, index) => {
-        const optionIndex = missing.indexOf(index);
-        const element = optionIndex >= 0 ? (
-          generatePlaceholder(index, optionIndex, val)
-        ) : (
-          <P key={index} style={[styles.word, styles.theme.word]}>
-            {val}
-          </P>
-        );
-        return element;
-      })
+          const optionIndex = missing.indexOf(index);
+          const element =
+            optionIndex >= 0 ? (
+              generatePlaceholder(index, optionIndex, val)
+            ) : (
+              <P key={index} style={[styles.word, styles.theme.word]}>
+                {val}
+              </P>
+            );
+          return element;
+        })
       : null;
   };
 
@@ -165,34 +155,34 @@ const Confirm = ({
     const { setOptions } = navigation;
     setOptions({
       headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
-      title:
-          deviceHeight() >= SCREEN_HEIGHTS.SM
-            ? t('Passphrase verification')
-            : t('Verification'),
+      title: deviceHeight() >= SCREEN_HEIGHTS.SM ? t('Passphrase verification') : t('Verification'),
     });
     generateTest();
   }, []);
 
-  return <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-    {customHeader && <HeaderBackButton title={'settings.backup_phrase.confirm_phrase'} onPress={navigation.goBack} />}
-    <View style={styles.container}>
-      <View style={styles.body}>
-        <View style={styles.box}>
-          <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
-            {t('Tap and fill in the blanks:')}
-          </P>
-          <View
-            style={[styles.passphraseContainer, styles.horizontalPadding]}
-          >
-            {renderPassphrase()}
-          </View>
-          <View
-            testID="passphraseOptionsContainer"
-            style={[styles.optionsContainer, styles.horizontalPadding]}
-          >
-            {options[visibleOptions] ? (
-              options[visibleOptions].map(
-                (value, idx) => (
+  return (
+    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+      {customHeader && (
+        <HeaderBackButton
+          title={'settings.backup_phrase.confirm_phrase'}
+          onPress={navigation.goBack}
+        />
+      )}
+      <View style={styles.container}>
+        <View style={styles.body}>
+          <View style={styles.box}>
+            <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
+              {t('Tap and fill in the blanks:')}
+            </P>
+            <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
+              {renderPassphrase()}
+            </View>
+            <View
+              testID="passphraseOptionsContainer"
+              style={[styles.optionsContainer, styles.horizontalPadding]}
+            >
+              {options[visibleOptions] ? (
+                options[visibleOptions].map((value, idx) => (
                   <Button
                     noPredefinedStyle
                     testID={`passphraseOptionFor-${value}`}
@@ -202,26 +192,26 @@ const Confirm = ({
                     title={value}
                     onClick={() => fillOption(value)}
                   />
-                )
-              )
-            ) : (
-              <View style={styles.optionPlaceholder} />
-            )}
+                ))
+              ) : (
+                <View style={styles.optionPlaceholder} />
+              )}
+            </View>
           </View>
         </View>
+        <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
+          <PrimaryButton
+            testID="registerConfirmButton"
+            disabled={buttonStatus}
+            noTheme={true}
+            style={styles.button}
+            onClick={() => nextStep({ passphrase })}
+            title={t('Confirm')}
+          />
+        </View>
       </View>
-      <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
-        <PrimaryButton
-          testID="registerConfirmButton"
-          disabled={buttonStatus}
-          noTheme={true}
-          style={styles.button}
-          onClick={() => nextStep({ passphrase })}
-          title={t('Confirm')}
-        />
-      </View>
-    </View>
-  </SafeAreaView>;
+    </SafeAreaView>
+  );
 };
 
 export default withTheme(translate()(Confirm), getStyles());

@@ -22,17 +22,16 @@ export default () => ({
     },
     buttonContainer: {
       marginTop: 10,
-      paddingVertical: 10
+      paddingVertical: 10,
     },
     buttonText: {
-      color: colors.light.ultramarineBlue
+      color: colors.light.ultramarineBlue,
     },
     itemContainer: {
       flex: 1,
       width: '100%',
-      height: 80,
-      paddingTop: 20,
-      paddingBottom: 20,
+      paddingTop: 10,
+      paddingBottom: 10,
       borderBottomWidth: 1,
     },
     infoButton: {
@@ -73,7 +72,8 @@ export default () => ({
       borderWidth: 1,
     },
     emptyState: {
-      marginTop: 0,
+      padding: 20,
+      marginTop: 20,
       display: 'flex',
       flex: 1,
       alignItems: 'center',
@@ -111,7 +111,7 @@ export default () => ({
       color: colors.light.white,
     },
     label: {
-      flex: 1
+      flex: 1,
     },
     noResult: {
       marginTop: 11,
@@ -187,8 +187,8 @@ export default () => ({
       backgroundColor: colors.light.blueGray,
     },
     text: {
-      color: colors.light.black
-    }
+      color: colors.light.black,
+    },
   },
   [themes.dark]: {
     title: {
@@ -222,7 +222,7 @@ export default () => ({
       backgroundColor: colors.dark.blueGray,
     },
     text: {
-      color: colors.dark.white
-    }
+      color: colors.dark.white,
+    },
   },
 });

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { useGetApplicationsMetaQuery } from '../api/useGetApplicationsQuery';
+import { useApplicationsQuery } from '../api/useApplicationsQuery';
+import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
 import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 
 /**
@@ -8,21 +9,33 @@ import { usePinBlockchainApplication } from './usePinBlockchainApplication';
  * @returns {Object} Available blockchain applications array.
  */
 export function useBlockchainApplicationExplorer() {
-  const getApplicationsMetaQuery = useGetApplicationsMetaQuery();
+  const applicationsQuery = useApplicationsQuery();
+  const applicationsMetaQuery = useApplicationsMetaQuery();
 
   const { pins, checkPinByChainId } = usePinBlockchainApplication();
 
   const applications = useMemo(() => {
-    const data = getApplicationsMetaQuery.data?.map((app) => ({
+    const data = applicationsQuery.data?.data.map((app) => ({
       ...app,
       isPinned: checkPinByChainId(app.chainID),
     }));
 
-    return { ...getApplicationsMetaQuery, data };
+    return { ...applicationsQuery, data };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getApplicationsMetaQuery, pins, checkPinByChainId]);
+  }, [applicationsQuery, pins, checkPinByChainId]);
+
+  const applicationsMetadata = useMemo(() => {
+    const data = applicationsMetaQuery.data?.data.map((app) => ({
+      ...app,
+      isPinned: checkPinByChainId(app.chainID),
+    }));
+
+    return { ...applicationsMetaQuery, data };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [applicationsMetaQuery, pins, checkPinByChainId]);
 
   return {
     applications,
+    applicationsMetadata,
   };
 }

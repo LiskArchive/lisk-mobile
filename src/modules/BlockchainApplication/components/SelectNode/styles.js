@@ -2,6 +2,10 @@ import { colors, themes } from 'constants/styleGuide';
 
 export default {
   common: {
+    container: {
+      width: '100%',
+      flex: 1,
+    },
     urlContainer: {
       borderWidth: 1,
       borderColor: colors.light.platinumGray,
@@ -23,7 +27,7 @@ export default {
       alignItems: 'center',
     },
     title: {
-      marginHorizontal: 20
+      marginHorizontal: 20,
     },
     logo: {
       width: 50,

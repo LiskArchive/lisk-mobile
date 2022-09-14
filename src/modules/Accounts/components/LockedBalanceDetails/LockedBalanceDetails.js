@@ -16,9 +16,7 @@ import getStyles from './styles';
 import { getPendingTime } from '../../utils';
 import { useAccountInfo } from '../../hooks/useAccounts/useAccountInfo';
 
-const RowItem = ({
-  styles, title, value, IconComponent, tokenType, language, theme
-}) => (
+const RowItem = ({ styles, title, value, IconComponent, tokenType, language, theme }) => (
   <View style={[styles.row, styles.theme.row]}>
     <View style={styles.flex}>
       <FormattedNumber
@@ -34,16 +32,15 @@ const RowItem = ({
       <View style={styles.iconContainer}>
         <IconComponent
           size={1.2}
-          color={theme === themes.dark ? colors.dark.ultramarineBlue : colors.light.inkBlue} />
+          color={theme === themes.dark ? colors.dark.ultramarineBlue : colors.light.inkBlue}
+        />
       </View>
       <P style={[styles.text, styles.theme.text]}>{value}</P>
     </View>
   </View>
 );
 
-const LockedBalanceDetailsScreen = ({
-  styles, navigation, t, network, language, theme
-}) => {
+const LockedBalanceDetailsScreen = ({ styles, navigation, t, network, language, theme }) => {
   const { summary: account } = useAccountInfo();
 
   const [unlockedTokens, setUnlockedTokens] = useState({});
@@ -118,7 +115,7 @@ const LockedBalanceDetailsScreen = ({
                   unlockedTokens[time].reduce((a, b) => a + BigInt(b.amount), BigInt(0))
                 )}
                 value={t('will be available to unlock', {
-                  timeToUnlock: time
+                  timeToUnlock: time,
                 })}
                 IconComponent={ProgressSvg}
                 styles={styles}

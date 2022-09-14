@@ -15,7 +15,7 @@ const Alert = ({ styles }) => (
     titleStyle={styles.titleStyle}
     messageStyle={styles.messageStyle}
     errorColor={colors.light.burntSieanna}
-    ref={ref => DropDownHolder.initialize(ref)}
+    ref={(ref) => DropDownHolder.initialize(ref)}
     closeInterval={2000}
   />
 );

@@ -17,9 +17,7 @@ class Splash extends React.Component {
   };
 
   componentDidMount() {
-    const {
-      top, bgOpacity, iconOpacity, txtOpacity
-    } = this.state;
+    const { top, bgOpacity, iconOpacity, txtOpacity } = this.state;
 
     Animated.timing(bgOpacity, {
       toValue: 0,
@@ -45,20 +43,12 @@ class Splash extends React.Component {
   }
 
   render() {
-    const {
-      top, bgOpacity, iconOpacity, txtOpacity
-    } = this.state;
+    const { top, bgOpacity, iconOpacity, txtOpacity } = this.state;
     const { t } = this.props;
     return (
       <View style={styles.splashContainer}>
         <Animated.View style={[styles.splashBg, { opacity: bgOpacity }]} />
-        <Animated.View
-          style={[
-            styles.splashFigure,
-            styles.splashStatic,
-            { opacity: iconOpacity },
-          ]}
-        >
+        <Animated.View style={[styles.splashFigure, styles.splashStatic, { opacity: iconOpacity }]}>
           <Icon
             name="lisk-full"
             size={60}
@@ -66,23 +56,12 @@ class Splash extends React.Component {
             style={styles.splashLogo}
           />
         </Animated.View>
-        <Animated.View
-          style={[styles.splashFigure, styles.splashAnimating, { top }]}
-        >
-          <Icon
-            name="lisk-full"
-            size={60}
-            color={colors.light.white}
-            style={styles.splashLogo}
-          />
+        <Animated.View style={[styles.splashFigure, styles.splashAnimating, { top }]}>
+          <Icon name="lisk-full" size={60} color={colors.light.white} style={styles.splashLogo} />
         </Animated.View>
-        <Animated.View
-          style={[styles.splashDescription, { opacity: txtOpacity }]}
-        >
+        <Animated.View style={[styles.splashDescription, { opacity: txtOpacity }]}>
           <P style={styles.splashDescriptionP}>
-            {t(
-              'Welcome to Lisk. Now you can send and request LSK token on the go.'
-            )}
+            {t('Welcome to Lisk. Now you can send and request LSK token on the go.')}
           </P>
         </Animated.View>
       </View>

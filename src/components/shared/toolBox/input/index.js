@@ -1,7 +1,7 @@
+/* eslint-disable max-statements */
+/* eslint-disable complexity */
 import React from 'react';
-import {
-  View, Text, TextInput, TouchableOpacity
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { themes } from 'constants/styleGuide';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
@@ -59,7 +59,7 @@ class Input extends React.Component {
       returnKeyType,
       placeholderTextColor,
       disabled,
-      adornments
+      adornments,
     } = this.props;
 
     let { keyboardAppearance } = this.props;
@@ -73,23 +73,25 @@ class Input extends React.Component {
       inputStyle = [...inputStyle, styles.inputFocused, styles.theme.inputFocused];
     }
 
+    if (adornments?.left) inputStyle = [...inputStyle, styles.inputWithLeftAdornment];
+
+    if (adornments?.right) inputStyle = [...inputStyle, styles.inputWithRightAdornment];
+
     if (error) {
       inputStyle = [...inputStyle, styles.theme.inputErrorStyle];
     }
 
     return (
-      <View style={[styles.inputContainer, innerStyles.containerStyle]}>
-        {label ? (
+      <View style={[innerStyles.containerStyle]}>
+        {typeof label === 'string' ? (
           <Text style={[styles.inputLabel, styles.theme.inputLabel, innerStyles.inputLabel]}>
             {label}
           </Text>
-        ) : null}
+        ) : (
+          label
+        )}
         <View style={styles.inputRow}>
-          {adornments?.left && (
-            <View style={styles.leftAdornment}>
-              {adornments?.left}
-            </View>
-          )}
+          {adornments?.left && <View style={styles.leftAdornment}>{adornments?.left}</View>}
 
           <TextInput
             testID={testID}
@@ -115,11 +117,7 @@ class Input extends React.Component {
             accessibilityLabel={accessibilityLabel}
           />
 
-          {adornments?.right && (
-            <View style={styles.rightAdornment}>
-              {adornments?.right}
-            </View>
-          )}
+          {adornments?.right && <View style={styles.rightAdornment}>{adornments?.right}</View>}
 
           {secureTextEntry && (
             <TouchableOpacity

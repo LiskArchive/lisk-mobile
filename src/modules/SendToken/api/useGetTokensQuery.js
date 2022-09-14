@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 import { useState, useEffect, useRef } from 'react';
 
-import { TOKENS_MOCK } from '../mocks';
+import { mockTokens } from '../__fixtures__';
 
 /**
  * @typedef {Object} GetTokensQuery
@@ -40,12 +40,12 @@ export function useGetTokensQuery(address) {
     return new Promise((resolve) => {
       timer.current = setTimeout(() => {
         resolve({
-          data: TOKENS_MOCK,
+          data: mockTokens,
           meta: {
             address,
             count: 10,
             offset: 0,
-            total: 120
+            total: 120,
           },
         });
       }, 250);
@@ -60,7 +60,7 @@ export function useGetTokensQuery(address) {
       new Promise((resolve) => {
         timer.current = setTimeout(() => {
           resolve({
-            data: TOKENS_MOCK,
+            data: mockTokens,
             meta: {
               count: 10,
               offset: page + 1,

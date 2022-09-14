@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import apiClient from 'utilities/api/APIClient';
 import { selectCurrentApplication } from '../store/selectors';
 import { setCurrentApplication as setCurrentApplicationAction } from '../store/actions';
 
@@ -17,7 +18,11 @@ export function useCurrentBlockchainApplication() {
   const currentApplication = useSelector(selectCurrentApplication);
 
   const setCurrentApplication = useCallback(
-    (application) => dispatch(setCurrentApplicationAction(application)),
+    (application) => {
+      dispatch(setCurrentApplicationAction(application));
+
+      apiClient.create(application?.serviceURLs[0]);
+    },
     [dispatch]
   );
 

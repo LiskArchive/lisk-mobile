@@ -1,4 +1,4 @@
-import { BLOCKCHAIN_APPLICATIONS_MOCK, MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK } from '../mocks';
+import { mockApplicationsMeta, mockMappedApplicationsMeta } from '../__fixtures__';
 import actionTypes from './actionTypes';
 import { pinsReducer, applicationsReducer, currentReducer } from './reducers';
 
@@ -7,7 +7,7 @@ describe('BlockchainApplication reducers', () => {
     it('Should return list of chainIds', async () => {
       const actionData = {
         type: actionTypes.toggleApplicationPin,
-        chainId: BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID,
+        chainId: mockApplicationsMeta[0].chainID,
       };
 
       expect(pinsReducer([], actionData)).toContain(actionData.chainId);
@@ -16,10 +16,10 @@ describe('BlockchainApplication reducers', () => {
     it('Should return list of chainIds without the removed one', () => {
       const actionData = {
         type: actionTypes.toggleApplicationPin,
-        chainId: BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID,
+        chainId: mockApplicationsMeta[0].chainID,
       };
 
-      expect(pinsReducer([BLOCKCHAIN_APPLICATIONS_MOCK[0].chainID], actionData)).not.toContain(
+      expect(pinsReducer([mockApplicationsMeta[0].chainID], actionData)).not.toContain(
         actionData.data
       );
     });
@@ -38,7 +38,7 @@ describe('BlockchainApplication reducers', () => {
         type: actionTypes.addApplication,
         application: newApplication,
       };
-      const changedState = applicationsReducer(MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK, actionData);
+      const changedState = applicationsReducer(mockMappedApplicationsMeta, actionData);
 
       expect(changedState).toHaveProperty(newApplication.chainID, newApplication);
     });
@@ -46,10 +46,10 @@ describe('BlockchainApplication reducers', () => {
     it('Should return list of applicationsReducer without the removed one', () => {
       const actionData = {
         type: actionTypes.deleteApplicationByChainId,
-        chainId: BLOCKCHAIN_APPLICATIONS_MOCK[1].chainID,
+        chainId: mockApplicationsMeta[1].chainID,
       };
 
-      const changedState = applicationsReducer(MAPPED_BLOCKCHAIN_APPLICATIONS_MOCK, actionData);
+      const changedState = applicationsReducer(mockMappedApplicationsMeta, actionData);
 
       expect(changedState).not.toHaveProperty(`${actionData.chainId}`);
     });
@@ -59,9 +59,9 @@ describe('BlockchainApplication reducers', () => {
     it('Should return currentReducer application if setCurrentApplication action type is triggered', () => {
       const actionData = {
         type: actionTypes.setCurrentApplication,
-        application: BLOCKCHAIN_APPLICATIONS_MOCK[0],
+        application: mockApplicationsMeta[0],
       };
-      expect(currentReducer({}, actionData)).toEqual(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
+      expect(currentReducer({}, actionData)).toEqual(mockApplicationsMeta[0]);
     });
   });
 });

@@ -5,7 +5,7 @@ export default () => ({
       alignItems: 'center',
     },
     copyIcon: {
-      paddingHorizontal: 5,
-    }
+      paddingHorizontal: 4,
+    },
   },
 });

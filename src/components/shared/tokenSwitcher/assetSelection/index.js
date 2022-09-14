@@ -13,7 +13,7 @@ import ModalHolder from 'utilities/modal';
 import getStyles from './styles';
 
 @connect(
-  state => ({
+  (state) => ({
     settings: state.settings,
     accounts: state.accounts.info,
   }),
@@ -22,7 +22,7 @@ import getStyles from './styles';
   }
 )
 class AssetSelection extends React.Component {
-  onSelect = value => {
+  onSelect = (value) => {
     const {
       settings: { token },
       settingsUpdated,
@@ -50,10 +50,7 @@ class AssetSelection extends React.Component {
           extraData={token.active}
           data={tokenKeys}
           renderItem={({ item, index }) => (
-            <TouchableHighlight
-              onPress={() => this.onSelect(item)}
-              underlayColor="transparent"
-            >
+            <TouchableHighlight onPress={() => this.onSelect(item)} underlayColor="transparent">
               <View
                 style={[
                   styles.itemContainer,
@@ -71,9 +68,7 @@ class AssetSelection extends React.Component {
                     />
                   </View>
                   <View>
-                    <B style={[styles.itemLabel, styles.theme.itemLabel]}>
-                      {tokenMap[item].label}
-                    </B>
+                    <B style={[styles.itemLabel, styles.theme.itemLabel]}>{tokenMap[item].label}</B>
                     <FormatedNumber
                       type={Small}
                       style={[styles.balance, styles.theme.balance]}

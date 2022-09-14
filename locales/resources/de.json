@@ -112,7 +112,6 @@
   "Sign out": "Abmelden",
   "Store your passphrase:": "Speichere deine Passphrase:",
   "Tap on the QR Code to share it.": "Tippe auf den QR-Code um ihn zu teilen",
-  "Transaction Submitted": "",
   "Your transaction has been submitted and will be confirmed in a few moments.": "",
   "The Avatar represents the address, making it easy to recognize.": "Der Avatar stellt die Adresse dar. Hiermit kannst du diese einfacher erkennen.",
   "The address is unique and can’t be changed. It’s yours. Find it in your home page.": "Die Adresse ist einzigartig und kann nicht verändert werden. Du kannst deine Adresse auf dem Homescreen der App finden.",
@@ -122,9 +121,6 @@
   "The only way to access your account.": "Der einzige Weg auf Ihr Konto zuzugreifen.",
   "This is not your second passphrase.": "Das ist nicht deine zweite Passphrase.",
   "This is your passphrase:": "Das ist deine Passphrase:",
-  "Transaction Fee": "Transaktionsgebühr",
-  "Transaction ID": "Transaktions ID",
-  "Transaction not found": "Transaktion nicht gefunden",
   "Transfer your LSK tokens easily to other accounts by simply scanning their QR code.": "Einfach den QR code scannen, um LSK Tokens an ein anderes Konto zu verschicken.",
   "terms and conditions.": "allgemeinen Geschäftsbedingungen",
   "Verification": "Bestätigen",
@@ -167,7 +163,6 @@
   "Select your currency": "Wähle deine Währung",
   "Select your language": "Wähle deine Sprache",
   "Settings": "Einstellungen",
-  "Transaction Details": "Transaktionsdetails",
   "Connection error, try later!": "Verbindungsfehler! Bitte versuche es später!",
   "Create it now": "Jetzt erstellen",
   "Don’t have a Lisk Account?": "Noch keine Lisk ID?",
@@ -212,8 +207,6 @@
   "Remind me later": "Erinnere mich später",
   "Store your passphrase carefully": "Bewahre deine Passphrase sicher auf",
   "Tap and fill in the blanks:": "Tippe, um die Lücken zu füllen:",
-  "Transaction fee": "Transaktionsgebühr",
-  "You have no transactions yet.": "Du hast keine kürzlichen Aktivitäten.",
   "Available Balance": "Dein Kontobetrag",
   "Activity history": "Aktivitäts Historie",
   "Token transfer": "Token Transfer",
@@ -308,11 +301,7 @@
   "auth": {
     "setup": {
       "add_account": "",
-      "manageAccounts": "",
       "switchAccount": "",
-      "deleteAccount": "",
-      "removeAccount": "",
-      "removeAccount_description": "",
       "decryptPassphrase": "",
       "decryptPassphraseError": "",
       "addAccountDescription": "",
@@ -322,12 +311,11 @@
       "passwordSetupDescription": "",
       "passwordSetupSuccessTitle": "",
       "passwordSetupSuccessDescription": "",
+      "downloaded": "",
       "buttons": {
-        "download": "",
-        "remove_now": "",
         "passwordSetupContinue": "",
-        "save_account": "",
-        "addAnotherAccount": "Add another account"
+        "saveAccount": "",
+        "download": ""
       }
     },
     "form": {
@@ -369,7 +357,11 @@
       "delete": {
         "title": "App entfernen?",
         "descriptionText": "Diese App befindet sich nicht mehr in Ihrer Anwendungsliste.",
-        "confirmButtonText": "Jetzt entfernen"
+        "confirmButtonText": "Jetzt entfernen",
+        "success": {
+          "title": "App wurde jetzt entfernt",
+          "description": "Sie können {{applicationName}} jederzeit wieder zu Ihrer Anwendungsliste hinzufügen."
+        }  
       },
       "deleteDefaultApplicationModal": {
         "description": "Die Standardanwendung kann nicht entfernt werden",
@@ -377,10 +369,10 @@
       },
       "continueToWalletButtonText": "Weiter zur Geldbörse"
     },
-    "explore":{
+    "explore": {
       "title": "Anwendungen",
       "statsButtonText": "Statistiken",
-      "applicationList":{
+      "applicationList": {
         "searchPlaceholder": "Suchanwendung",
         "loadingText": "Anwendungen werden geladen...",
         "errorText": "Fehler beim Laden Ihrer Anwendungen.",
@@ -389,15 +381,16 @@
         "unpinText": "Unpin",
         "deleteText": "Löschen"
       }
-    }},
-    "requestTokens": {
-      "title": "",
-      "recipient": "",
-      "recipientApplication": "",
-      "selectApplication": "",
-      "selectToken": "",
-      "token": ""
-    },
+    }
+  },
+  "requestTokens": {
+    "title": "",
+    "recipient": "",
+    "recipientApplication": "",
+    "selectApplication": "",
+    "selectToken": "",
+    "token": ""
+  },
   "sendToken": {
     "applicationsSelect": {
       "loadingApplicationsText": "Laden...",
@@ -407,7 +400,7 @@
       "recipientApplicationFieldLabel": "Zur App",
       "recipientApplicationFieldPlaceholder": "Wählen Sie eine App aus",
       "recipientAccountFieldLabel": "Empfänger:in",
-      "recipientAccountFieldPlaceholder": "Wählen Sie ein Empfängerkonto aus",
+      "recipientAccountFieldPlaceholder": "Aus Lesezeichen auswählen",
       "nextStepButtonText": "Weiter"
     },
     "tokenSelect": {
@@ -432,7 +425,7 @@
       "highPriorityLabel": "Hoch",
       "transactionFeeLabel": "Transaktionsgebühr",
       "loadingTransactionFeeText": "Transaktionsgebühr wird geladen...",
-      "errorLoadingTransactionFeeText": "Fehler bei der Gebührenberechnung!",      
+      "errorLoadingTransactionFeeText": "Fehler bei der Gebührenberechnung!",
       "initializationFeeLabel": "Initialisierungsgebühr",
       "loadingInitializationFeeText": "Initialisierungsgebühr wird geladen...",
       "cmmFeeLabel": "CCM-Gebühr",
@@ -457,13 +450,14 @@
       },
       "error": {
         "title": "Transaktion fehlgeschlagen",
-        "description": "Bei der Transaktion ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+        "description1": "Bei der Transaktion ist ein Fehler aufgetreten.",
+        "description2": "Bitte versuche es erneut.",
         "retryButtonText": "Versuchen Sie es nochmal",
         "reportErrorLabel": "Bleibt das Problem bestehen?",
         "reportErrorButtonText": "Melden Sie den Fehler per E-Mail"
       }
     },
-    "errors" : {
+    "errors": {
       "generalMessage": "Bitte füllen Sie alle erforderlichen Felder aus, um Ihre Token zu senden.",
       "senderApplicationChainID": "Die App, von der gesendet werden soll, muss angegeben werden",
       "recipientApplicationChainID": "Die App, die die Token erhält, muss angegeben werden",
@@ -472,7 +466,96 @@
       "amountRequired": "Token-Betrag ist erforderlich",
       "amountMustBeNumber": "Der Betrag muss eine Zahl sein",
       "amountMustBePositive": "Tokenbetrag muss eine positive Zahl sein",
-      "priority":"Priorität muss angegeben werden"
+      "priority": "Priorität muss angegeben werden"
+    },
+    "info": {
+      "bytesCounter": {
+        "title": "Byte-Zähler",
+        "description1": "Lisk zählt Ihre Nachricht in Bytes, also denken Sie daran, dass die Länge Ihrer Nachricht in verschiedenen Sprachen variieren kann.",
+        "description2": "Unterschiedliche Zeichen können eine unterschiedliche Menge an Bytes verbrauchen."
+      },
+      "priority": {
+        "title": "Transaktionspriorität",
+        "description1": "Wenn das Netzwerk ausgelastet ist, werden Transaktionen mit einer höheren Priorität früher bestätigt."
+      },
+      "transactionFee": {
+        "title": "Transaktionsgebühr",
+        "description1": "Gebühr basiert auf Bytes, kann vom Benutzer je nach Priorität festgelegt werden."
+      },
+      "initializationFee": {
+        "title": "Initialisierungsgebühr",
+        "description1": "Einige Befehle haben eine zusätzliche Befehlsgebühr (delegierte Registrierung in DPoS, Kettenregistrierung in Interoperabilität), diese Gebühr sollte genau gleich der durch den Befehl festgelegten Konstante sein."
+      },
+      "cmmFee": {
+        "title": "CMM-Gebühr",
+        "description1": "Kettenübergreifende Nachrichten sind die Objekte, die die kettenübergreifenden Befehle enthalten. Sie haben eine Gebühreneigenschaft, die auch als Nachrichtengebühr bezeichnet wird, um sie von Transaktionsgebühren zu unterscheiden."
+      }
+    }
+  },
+  "accounts": {
+    "accountsManager": {
+      "title": "Konten verwalten",
+      "description": "Sie können Ihr Konto wechseln und auch jedes Konto entfernen, das Sie derzeit nicht verwenden",
+      "addAccountButtonText": "Konto hinzufügen",
+      "deleteAccountTitle": "Konto entfernen?",
+      "deleteAccountDescription": "Dieses Konto wird nicht mehr auf diesem Gerät gespeichert. Sie können Ihre geheime Wiederherstellungsphrase sichern, bevor Sie sie entfernen.",
+      "deleteAccountButtonText": "Jetzt entfernen",
+      "downloadFileButtonText": "Download",
+      "backButtonText": "Zurück"
+    },
+    "tokens": "",
+    "lockedTokens": "",
+    "emptyTokenMessage": "",
+    "allTokens": "",
+    "buttons": {
+      "viewAll": "",
+      "request": "",
+      "send": ""
+    }
+  },
+  "transactions": {
+    "transactionDetails": {
+      "loadingText": "Transaktion wird geladen...",
+      "errorText": "Fehler beim Laden der Transaktion!",
+      "title": "Transaktionsdetails",
+      "senderLabel": "Absender",
+      "transactionFeeLabel": "Transaktionsgebühr",
+      "nonceLabel": "Nonce",
+      "confirmationsLabel": "Bestätigungen",
+      "statusLabel": "Status",
+      "transactionIDLabel": "Transaktion ID",
+      "blockIDLabel": "Block ID",
+      "blockHeightLabel": "Blockhöhe",
+      "paramsLabel": "Parameter",
+      "showParamsButtonText": "Erweitern",
+      "hideParamsButtonText": "Schließen",
+      "amountParamsLabel": "Menge",
+      "recipientAddressParamsLabel": "Empfängeradresse",
+      "dataParamsLabel": "Data",
+      "tokenIDParamsLabel": "Token-ID",
+      "receivingChainIDParamsLabel": "Empfangsketten-ID",
+      "messageFeeParamsLabel": "Gebührennachricht",
+      "numberOfSignaturesParamsLabel": "Anzahl der Unterschriften",
+      "generatorKeyParamsLabel": "Generator key",
+      "blsKeyParamsLabel": "BLS key",
+      "proofOfPossessionParamsLabel": "Besitznachweis",
+      "header1ParamsLabel": "Kopfzeile 1",
+      "header2ParamsLabel": "Kopfzeile 2"
+    },
+    "transactionList": {
+      "loadingText": "Transaktionen werden geladen...",
+      "errorText": "Fehler beim Laden von Transaktionen!",
+      "emptyText": "Du hast keine kürzlichen Aktivitäten.",
+      "title": "Transaktionen",
+      "goToTransactionHistoryButtonText": "Alle ansehen"
+    },
+    "transactionHistory": {
+      "title": "Verlauf der Transaktionen"
+    },
+    "statusText": {
+      "success": "Erfolgreich",
+      "fail": "Gescheitert",
+      "pending": "Ausstehend"
     }
   }
 }

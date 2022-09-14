@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  ScrollView, RefreshControl
-} from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { themes, colors } from 'constants/styleGuide';
 
 /**
@@ -21,16 +19,9 @@ class InfiniteScrollView extends React.Component {
   };
 
   loadMore = ({ nativeEvent }) => {
-    const isCloseToBottom = ({
-      layoutMeasurement,
-      contentOffset,
-      contentSize,
-    }) => {
+    const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
       const paddingToBottom = 20;
-      return (
-        layoutMeasurement.height + contentOffset.y
-        >= contentSize.height - paddingToBottom
-      );
+      return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
     };
     if (isCloseToBottom(nativeEvent) && this.canLoadMore) {
       this.canLoadMore = false;
@@ -42,12 +33,12 @@ class InfiniteScrollView extends React.Component {
     this.canLoadMore = this.props.list.length < this.props.count;
   }
 
-  onScroll = e => {
+  onScroll = (e) => {
     this.props.onScroll?.(e);
     this.loadMore(e);
   };
 
-  scrollTo = y => {
+  scrollTo = (y) => {
     this.scrollView.scrollTo({ y });
   };
 
@@ -70,13 +61,11 @@ class InfiniteScrollView extends React.Component {
             onRefresh={this.onRefresh}
             refreshing={this.state.refreshing}
             tintColor={
-              this.props.theme === themes.light
-                ? colors.light.slateGray
-                : colors.dark.platinum
+              this.props.theme === themes.light ? colors.light.slateGray : colors.dark.platinum
             }
           />
         }
-        ref={el => {
+        ref={(el) => {
           this.scrollView = el;
         }}
         style={[this.props.style]}

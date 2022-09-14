@@ -1,66 +1,90 @@
-import { themes, colors } from 'constants/styleGuide';
-import { deviceHeight } from 'utilities/device';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default () => ({
   common: {
     flex: {
-      flex: 1
+      flex: 1,
     },
     homeContainer: {
-      paddingTop: 20
+      paddingTop: 20,
     },
-    emptyContainer: {
-      borderTopRightRadius: 20,
-      borderTopLeftRadius: 20,
-      marginTop: 0,
-      minHeight: deviceHeight() - 400,
+    body: {
       padding: 20,
-    },
-    fixedBg: {
-      position: 'absolute',
       flex: 1,
-      zIndex: -1,
-      top: deviceHeight() / 2,
-      right: 0,
-      left: 0,
-      bottom: 0
     },
-    scrollView: {
-      top: 0
+    topContainer: {
+      paddingLeft: 20,
+      marginRight: 60,
     },
-    scrollViewContainer: {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      left: 0
-    }
+    discreteContainer: {
+      marginRight: 10,
+    },
+    accountCard: {
+      backgroundColor: colors.light.ultramarineBlue,
+      padding: 20,
+      borderRadius: 20,
+    },
+    row: {
+      flexDirection: 'row',
+    },
+    alignItemsCenter: {
+      alignItems: 'center',
+    },
+    switchContainer: {
+      alignSelf: 'flex-start',
+      padding: 10,
+    },
+    avatar: {
+      marginRight: 20,
+    },
+    accountDetails: {
+      flex: 1,
+      paddingHorizontal: 10,
+    },
+    username: {
+      fontFamily: fonts.family.contextBold,
+      fontSize: fonts.size.h3,
+      marginBottom: 5,
+    },
+    address: {
+      fontFamily: fonts.family.context,
+    },
+    buttonContainer: {
+      marginTop: 20,
+    },
+    button: {
+      flex: 1,
+      margin: 10,
+      borderRadius: 30,
+      borderWidth: 1,
+      padding: 10,
+      borderColor: colors.light.platinumGray,
+    },
+    sendButton: {
+      backgroundColor: colors.light.white,
+    },
+    buttonText: {
+      textAlign: 'center',
+      color: colors.light.platinumGray,
+    },
+    sendButtonText: {
+      color: colors.light.ultramarineBlue,
+    },
   },
   [themes.light]: {
-    container: {
-      backgroundColor: colors.light.white
+    username: {
+      color: colors.light.platinumGray,
     },
-    fixedBg: {
-      backgroundColor: colors.light.white
+    address: {
+      color: colors.light.platinumGray,
     },
-    emptyContainer: {
-      backgroundColor: colors.light.white
-    },
-    homeContainer: {
-      backgroundColor: colors.light.ultramarineBlue
-    }
   },
   [themes.dark]: {
-    container: {
-      backgroundColor: colors.dark.mainBg
+    username: {
+      color: colors.light.platinumGray,
     },
-    fixedBg: {
-      backgroundColor: colors.dark.mainBg
+    address: {
+      color: colors.light.platinumGray,
     },
-    emptyContainer: {
-      backgroundColor: colors.dark.mainBg
-    },
-    homeContainer: {
-      backgroundColor: colors.dark.inkBlue
-    }
-  }
+  },
 });

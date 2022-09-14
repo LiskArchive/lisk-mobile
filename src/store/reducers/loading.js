@@ -14,7 +14,7 @@ const dialog = (state = [], action = {}) => {
     case actionTypes.loadingStarted:
       return [...state, action.data];
     case actionTypes.loadingFinished:
-      return state.filter(item => item !== action.data);
+      return state.filter((item) => item !== action.data);
     default:
       return state;
   }

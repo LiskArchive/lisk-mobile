@@ -3,8 +3,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 import { createThemedStyles } from 'utilities/helpers';
 import ThemeContext from '../../../contexts/theme';
 
-const getDisplayName = Component =>
-  Component.displayName || Component.name || 'Component';
+const getDisplayName = (Component) => Component.displayName || Component.name || 'Component';
 
 /**
  * @deprecated - Use useTheme hook instead.
@@ -21,7 +20,7 @@ const withTheme = (WrappedComponent, styles, forwardRefs = false) => {
     render() {
       // normalized the forwarded reference
       const props = Object.keys(this.props)
-        .filter(key => key !== 'forwardedRef')
+        .filter((key) => key !== 'forwardedRef')
         .reduce((acc, key) => {
           acc[key] = this.props[key];
           return acc;
@@ -32,7 +31,7 @@ const withTheme = (WrappedComponent, styles, forwardRefs = false) => {
 
       return (
         <ThemeContext.Consumer>
-          {theme => (
+          {(theme) => (
             <WrappedComponent
               {...props}
               styles={createThemedStyles(theme, styles, this.props.noTheme)}
@@ -48,9 +47,7 @@ const withTheme = (WrappedComponent, styles, forwardRefs = false) => {
   const HoistedWithTheme = hoistNonReactStatics(WithTheme, WrappedComponent);
 
   return forwardRefs
-    ? React.forwardRef((props, ref) => (
-        <HoistedWithTheme {...props} forwardedRef={ref} />
-    ))
+    ? React.forwardRef((props, ref) => <HoistedWithTheme {...props} forwardedRef={ref} />)
     : HoistedWithTheme;
 };
 

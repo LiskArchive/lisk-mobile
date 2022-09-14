@@ -13,7 +13,9 @@ describe('Accounts Screen', () => {
 
   it('should render empty illustration if no activity', async () => {
     await element(by.id('signInPassphraseInput')).atIndex(1).tap();
-    await element(by.id('signInPassphraseInput')).atIndex(1).replaceText(testConstants.emptyAccount);
+    await element(by.id('signInPassphraseInput'))
+      .atIndex(1)
+      .replaceText(testConstants.emptyAccount);
     await element(by.id('signInButton')).atIndex(1).tap();
     await element(by.text('Got it')).tap();
     await expect(element(by.id('empty-transaction-list'))).toExist();

@@ -1,20 +1,22 @@
+import { Dimensions } from 'react-native';
+
 import { themes, colors } from 'constants/styleGuide';
 
 export default function getBlockchainApplicationsExplorerStyles() {
   return {
     common: {
-      wrapper: {
-        flex: 1,
-        paddingTop: 44,
+      header: {
+        marginBottom: 24
+      },
+      applicationsListContainer: {
+        paddingLeft: 16,
+        paddingRight: 16
       },
       message: {
-        padding: 20
+        padding: 20,
       },
       statsModal: {
-        height: 500,
-        zIndex: 2,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
+        height: Dimensions.get('window').height / 1.6,
       },
       statsModalCloseButton: {
         position: 'absolute',
@@ -24,21 +26,15 @@ export default function getBlockchainApplicationsExplorerStyles() {
       },
     },
     [themes.light]: {
-      wrapper: {
-        backgroundColor: colors.light.white,
-      },
       message: {
-        color: colors.light.zodiacBlue
-      }
+        color: colors.light.zodiacBlue,
+      },
     },
 
     [themes.dark]: {
-      wrapper: {
-        backgroundColor: colors.dark.mainBg,
-      },
       message: {
-        color: colors.dark.white
-      }
+        color: colors.dark.white,
+      },
     },
   };
 }

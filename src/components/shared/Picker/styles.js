@@ -1,16 +1,18 @@
-import { themes, colors, fonts, } from 'constants/styleGuide';
+import { Dimensions } from 'react-native';
+
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export function getPickerStyles(error) {
   return {
     common: {
       label: {
         color: colors.light.maastrichtBlue,
-        fontSize: fonts.size.base,
+        fontSize: fonts.size.input,
         marginBottom: 8,
       },
       toggleContainer: {
         borderWidth: 1,
-        borderRadius: 2,
+        borderRadius: 10,
         padding: 16,
         flexDirection: 'row',
         alignItems: 'center',
@@ -23,25 +25,28 @@ export function getPickerStyles(error) {
       },
       togglePlaceholder: {
         fontSize: 16,
-        color: colors.light.platinum,
-        fontWeight: '400'
+        color: colors.light.ghost,
+        fontWeight: '400',
+      },
+      menuModalContainer: {
+        height: Dimensions.get('window').height / 1.8,
       },
       menuContainer: {
-        height: '50%',
-        zIndex: 3,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
+        flex: 1,
+        width: '100%',
       },
       itemContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 16,
+        paddingTop: 16,
+        paddingBottom: 16,
+        width: '100%',
       },
       errorText: {
         marginTop: 8,
         marginBottom: 16,
         color: colors.light.burntSieanna,
-      }
+      },
     },
     [themes.light]: {
       itemContainer: {
@@ -52,15 +57,15 @@ export function getPickerStyles(error) {
         color: colors.light.maastrichtBlue,
       },
       menuContainer: {
-        backgroundColor: colors.light.white
+        backgroundColor: colors.light.white,
       },
       toggleContainer: {
         borderColor: error ? colors.light.burntSieanna : colors.light.platinum,
         color: colors.light.maastrichtBlue,
       },
       toggleText: {
-        color: colors.light.zodiacBlue
-      }
+        color: colors.light.zodiacBlue,
+      },
     },
     [themes.dark]: {
       itemContainer: {
@@ -79,8 +84,8 @@ export function getPickerStyles(error) {
         borderColor: error ? colors.light.burntSieanna : colors.dark.volcanicSand,
       },
       toggleText: {
-        color: colors.dark.white
-      }
+        color: colors.dark.white,
+      },
     },
   };
 }

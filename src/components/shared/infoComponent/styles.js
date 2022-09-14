@@ -7,7 +7,7 @@ export default () => ({
       padding: 10,
       borderWidth: 1,
       borderRadius: 5,
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
     description: {
       paddingHorizontal: 10,
@@ -15,30 +15,30 @@ export default () => ({
     },
     copy: {
       fontSize: 15,
-    }
+    },
   },
   [themes.light]: {
     container: {
       backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.1),
-      borderColor: setColorOpacity(colors.light.ultramarineBlue, 0.5)
+      borderColor: setColorOpacity(colors.light.ultramarineBlue, 0.5),
     },
     copy: {
-      color: colors.light.zodiacBlue
+      color: colors.light.zodiacBlue,
     },
     button: {
-      color: colors.light.ultramarineBlue
-    }
+      color: colors.light.ultramarineBlue,
+    },
   },
   [themes.dark]: {
     container: {
       backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.2),
-      borderColor: setColorOpacity(colors.light.ultramarineBlue, 0.5)
+      borderColor: setColorOpacity(colors.light.ultramarineBlue, 0.5),
     },
     copy: {
-      color: colors.dark.white
+      color: colors.dark.white,
     },
     button: {
-      color: colors.light.ultramarineBlue
-    }
-  }
+      color: colors.light.ultramarineBlue,
+    },
+  },
 });

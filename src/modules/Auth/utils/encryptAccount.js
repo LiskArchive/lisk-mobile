@@ -1,9 +1,6 @@
 /* eslint-disable max-statements */
 import { cryptography } from '@liskhq/lisk-client';
-import {
-  extractKeyPair,
-  extractAddressFromPublicKey,
-} from 'modules/Wallet/utils';
+import { extractKeyPair, extractAddressFromPublicKey } from 'modules/Wallet/utils';
 import { defaultDerivationPath } from 'utilities/explicitBipKeyDerivation';
 
 export const encryptAccount = async ({
@@ -18,9 +15,7 @@ export const encryptAccount = async ({
     const options = {
       passphrase: recoveryPhrase,
       enableCustomDerivationPath,
-      derivationPath: enableCustomDerivationPath
-        ? derivationPath
-        : defaultDerivationPath,
+      derivationPath: enableCustomDerivationPath ? derivationPath : defaultDerivationPath,
     };
     const { privateKey, publicKey, isValid } = extractKeyPair(options);
     if (!isValid) {
@@ -28,10 +23,7 @@ export const encryptAccount = async ({
     }
     const address = extractAddressFromPublicKey(publicKey);
     const plainText = JSON.stringify({ privateKey, recoveryPhrase });
-    const encryptedPassphrase = await encrypt.encryptMessageWithPassword(
-      plainText,
-      password
-    );
+    const encryptedPassphrase = await encrypt.encryptMessageWithPassword(plainText, password);
     return {
       encryptedPassphrase,
       metadata: {

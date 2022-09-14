@@ -2,8 +2,18 @@ import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default {
   common: {
+    switcherContainer: {
+      alignItems: 'center',
+    },
     container: {
       overflow: 'hidden',
+      borderWidth: 2,
+      borderRadius: 50,
+      borderColor: colors.light.silverGrey,
+      padding: 5,
+    },
+    iconContainer: {
+      marginRight: 10,
     },
     switch: {
       alignItems: 'center',
@@ -11,7 +21,7 @@ export default {
       justifyContent: 'center',
     },
     avatar: {
-      marginHorizontal: 10,
+      marginHorizontal: 8,
       height: 30,
       width: 30,
       borderRadius: 15,
@@ -20,22 +30,22 @@ export default {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.small,
       marginRight: 10,
-    }
+    },
   },
   [themes.light]: {
     container: {
-      backgroundColor: colors.light.white
+      backgroundColor: colors.light.white,
     },
     appName: {
-      color: colors.light.zodiacBlue
-    }
+      color: colors.light.zodiacBlue,
+    },
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.mainBg
+      backgroundColor: colors.dark.mainBg,
     },
     appName: {
-      color: colors.dark.white
-    }
+      color: colors.dark.white,
+    },
   },
 };

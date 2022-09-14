@@ -12,15 +12,13 @@ import getStyles from './styles';
 
 class Item extends React.Component {
   showDetail = () => {
-    const { navigate, data } = this.props;
+    const { onPress, data } = this.props;
 
-    navigate(data);
+    onPress(data);
   };
 
   render() {
-    const {
-      styles, data, theme, showAvatar
-    } = this.props;
+    const { styles, data, theme, showAvatar } = this.props;
 
     return (
       <TouchableOpacity
@@ -30,11 +28,7 @@ class Item extends React.Component {
         <View style={[styles.innerContainer]}>
           {showAvatar ? (
             <View style={[styles.itemColumn, styles.avatarContainer]}>
-              <Avatar
-                address={data.address}
-                size={43}
-                style={styles.theme.avatar}
-              />
+              <Avatar address={data.address} size={43} style={styles.theme.avatar} />
             </View>
           ) : null}
           <View style={styles.column}>
@@ -49,9 +43,7 @@ class Item extends React.Component {
             name="forward"
             size={21}
             style={styles.icon}
-            color={
-              theme === themes.light ? colors.light.black : colors.dark.white
-            }
+            color={theme === themes.light ? colors.light.black : colors.dark.white}
           />
         </View>
       </TouchableOpacity>

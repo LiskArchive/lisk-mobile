@@ -2,12 +2,12 @@
 import { useCallback, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { mockApplicationsMeta, mockDefaultApplicationMeta } from '../__fixtures__';
 import {
   addApplication as addApplicationAction,
   deleteApplicationByChainId as deleteApplicationAction,
 } from '../store/actions';
 import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplication';
-import { BLOCKCHAIN_APPLICATIONS_MOCK, DEFAULT_BLOCKCHAIN_APPLICATION } from '../mocks';
 import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 import { selectApplications as selectApplicationsSelector } from '../store/selectors';
 
@@ -60,7 +60,7 @@ export function useBlockchainApplicationManagement() {
 
       if (currentApplication && currentApplication.chainID === chainId) {
         // Set Lisk as default if application in use is being deleted.
-        setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
+        setCurrentApplication(mockApplicationsMeta[0]);
       }
     },
     [currentApplication, dispatch, setCurrentApplication]
@@ -68,7 +68,7 @@ export function useBlockchainApplicationManagement() {
 
   useEffect(() => {
     if (Object.keys(applicationsState).length === 0) {
-      dispatch(addApplicationAction(DEFAULT_BLOCKCHAIN_APPLICATION));
+      dispatch(addApplicationAction(mockDefaultApplicationMeta));
     }
   }, [applicationsState, dispatch]);
 

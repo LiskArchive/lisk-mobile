@@ -1,7 +1,5 @@
 import { deviceHeight, SCREEN_HEIGHTS } from 'utilities/device';
-import {
-  themes, colors, boxes, fonts
-} from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;

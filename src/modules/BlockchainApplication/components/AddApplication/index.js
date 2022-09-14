@@ -10,13 +10,18 @@ import BlockchainApplicationRow from '../ApplicationRow';
 
 const AddApplication = ({ navigation, t }) => {
   const { styles } = useTheme({ styles: getAddApplicationStyles() });
-  const { applications } = useBlockchainApplicationExplorer();
+  const { applicationsMetadata } = useBlockchainApplicationExplorer();
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton title={t('application.explore.title')} onPress={navigation.goBack} />
+      <HeaderBackButton
+        title={t('application.explore.title')}
+        onPress={navigation.goBack}
+        titleStyle={[styles.header]}
+      />
+
       <ApplicationList
-        applications={applications}
+        applications={applicationsMetadata}
         Component={BlockchainApplicationRow}
         onItemPress={(item) =>
           navigation.navigate('ApplicationDetail', {
@@ -26,6 +31,7 @@ const AddApplication = ({ navigation, t }) => {
         }
         showCaret
         navigation={navigation}
+        style={{ container: styles.applicationsListContainer }}
       />
     </View>
   );

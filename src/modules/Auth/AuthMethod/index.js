@@ -9,7 +9,7 @@ import withTheme from 'components/shared/withTheme';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import { BLOCKCHAIN_APPLICATIONS_MOCK } from 'modules/BlockchainApplication/mocks';
+import { mockDefaultApplicationMeta } from 'modules/BlockchainApplication/__fixtures__';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import { settingsRetrieved } from '../../Settings/actions';
 import getStyles from './styles';
@@ -21,9 +21,7 @@ import AuthTypeItem from '../components/AuthType';
 LogBox.ignoreAllLogs();
 
 // eslint-disable-next-line max-statements
-const AuthMethod = ({
-  styles, route, t, navigation
-}) => {
+const AuthMethod = ({ styles, route, t, navigation }) => {
   const signOut = route.params?.signOut;
   const settings = useSelector((state) => state.settings);
   const [, setCurrentApplication] = useCurrentBlockchainApplication();
@@ -36,12 +34,12 @@ const AuthMethod = ({
 
   useEffect(() => {
     // TODO: Replace with live data
-    setCurrentApplication(BLOCKCHAIN_APPLICATIONS_MOCK[0]);
+    setCurrentApplication(mockDefaultApplicationMeta);
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());
       init();
       if (accounts.length) {
-        navigation.navigate('ManageAccount');
+        navigation.navigate('AccountsManagerScreen');
       }
     } else {
       navigation.push('Intro');
@@ -60,7 +58,7 @@ const AuthMethod = ({
       navigation.navigate('DecryptPhrase', {
         title: 'auth.setup.decryptPassphrase',
         encryptedData,
-        successRoute: 'ManageAccount',
+        successRoute: 'AccountsManagerScreen',
       });
     } catch (error) {
       // TODO: Handle error message

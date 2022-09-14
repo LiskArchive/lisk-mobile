@@ -1,47 +1,24 @@
-/* eslint-disable max-statements */
-import { useState, useEffect, useRef } from 'react';
-
-import { FEES_BY_PRIORITIES_MOCK } from '../mocks';
+import { useMemo } from 'react';
+import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
+import { GET_PRIORITY_FEES } from 'utilities/api/queries';
+import { API_URL } from 'utilities/api/constants';
 
 export function useGetFeesByPriorityQuery() {
-  // TODO: Replace data, isLoading and error
-  // by React Query when package integration is done.
-  const [data, setData] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(undefined);
+  const query = useCustomQuery({
+    keys: [GET_PRIORITY_FEES],
+    config: {
+      url: `${API_URL}/fees`,
+      method: 'get',
+    },
+  });
 
-  const timer = useRef();
-
-  function fetchData() {
-    // TODO: Replace with real API call when backend is available.
-    return new Promise((resolve) => {
-      timer.current = setTimeout(() => {
-        resolve({
-          data: { feeEstimatePerByte: FEES_BY_PRIORITIES_MOCK },
-        });
-      }, 250);
-    });
-  }
-
-  useEffect(() => {
-    fetchData()
-      .then((res) => {
-        setData(res.data.feeEstimatePerByte);
-        setIsLoading(false);
-      })
-      .catch((e) => setError(e));
-
-    return () => {
-      clearInterval(timer.current);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const result = useMemo(() => {
+    return query.data?.data?.feeEstimatePerByte;
+  }, [query.data]);
 
   return {
-    data,
-    isLoading,
-    error,
-    isError: !!error,
-    refetch: fetchData,
+    ...query,
+    data: result,
+    isError: !!query.error,
   };
 }

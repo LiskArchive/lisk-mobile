@@ -12,18 +12,15 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import styles from './styles';
 
-@connect(
-  () => ({}),
-  {
-    settingsUpdated: settingsUpdatedAction,
-  }
-)
+@connect(() => ({}), {
+  settingsUpdated: settingsUpdatedAction,
+})
 class Heading extends React.Component {
   state = {
     confirmed: false,
   };
 
-  confirm = status => {
+  confirm = (status) => {
     this.setState({
       confirmed: status,
     });
@@ -33,7 +30,7 @@ class Heading extends React.Component {
     Linking.openURL(URLs.liskTermsAndConditions);
   };
 
-  onPress = slideContent => {
+  onPress = (slideContent) => {
     if (slideContent.acceptTermsSwitch) {
       this.props.settingsUpdated({ showedIntro: true });
     }
@@ -41,9 +38,7 @@ class Heading extends React.Component {
   };
 
   render() {
-    const {
-      t, descriptionContent, hasHeader, testID
-    } = this.props;
+    const { t, descriptionContent, hasHeader, testID } = this.props;
     const buttonStyle = hasHeader ? { marginBottom: headerHeight() } : {};
     return (
       <View style={styles.headingContainer}>
@@ -55,21 +50,13 @@ class Heading extends React.Component {
           activeDotColor={colors.light.ultramarineBlue}
           paginationStyle={styles.headingPagination}
         >
-          {descriptionContent.map(item => (
-            <View
-              key={item.step}
-              style={styles.step}
-              testID={`${testID}-${item.step}`}
-            >
+          {descriptionContent.map((item) => (
+            <View key={item.step} style={styles.step} testID={`${testID}-${item.step}`}>
               <View style={styles.descriptionWrapper}>
-                <H2 style={[styles.centralized, styles.descriptionH]}>
-                  {t(item.title)}
-                </H2>
-                <P style={[styles.centralized, styles.descriptionP]}>
-                  {t(item.description)}
-                </P>
+                <H2 style={[styles.centralized, styles.descriptionH]}>{t(item.title)}</H2>
+                <P style={[styles.centralized, styles.descriptionP]}>{t(item.description)}</P>
               </View>
-              <View style={styles.flex} >
+              <View style={styles.flex}>
                 <Image
                   resizeMethod="scale"
                   source={item.imageSrc}
@@ -91,10 +78,7 @@ class Heading extends React.Component {
                       />
                       <P style={styles.confirmationText}>
                         {t('I have read and agreed with the')}
-                        <A
-                          onPress={this.openTermsAndConditions}
-                          style={styles.link}
-                        >
+                        <A onPress={this.openTermsAndConditions} style={styles.link}>
                           &nbsp;{t('terms and conditions.')}
                         </A>
                       </P>
