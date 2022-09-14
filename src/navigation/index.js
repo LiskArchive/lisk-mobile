@@ -32,6 +32,7 @@ import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './components/AppNavigator';
+import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEventsManager';
 
 const MainStack = createStackNavigator();
 
@@ -59,6 +60,8 @@ const MainNavigator = () => {
     dark: theme === 'light',
     colors: theme === 'light' ? darkTabs : lightTabs,
   };
+  
+  useWalletConnectEventsManager();
 
   return (
     <SafeAreaProvider>

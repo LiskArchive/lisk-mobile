@@ -12,6 +12,7 @@ import Modal from 'components/shared/modal';
 import reactQueryClient from 'utilities/api/reactQueryClient';
 import ThemeContext from './contexts/theme';
 import i18n from '../locales';
+import ConnectionProvider from '../libs/wcm/context/connectionProvider'
 import store, { persistedStore } from './store/index';
 
 const ThemedApp = () => {
@@ -24,14 +25,16 @@ const ThemedApp = () => {
         backgroundColor: theme === themes.dark ? colors.dark.black : colors.light.white,
       }}
     >
-      <ThemeContext.Provider value={theme}>
-        <I18nextProvider i18n={i18n}>
-          <StatusBar barStyle={theme === themes.light ? 'dark-content' : 'light-content'} />
-          <Router />
-          <Alert />
-          <Modal />
-        </I18nextProvider>
-      </ThemeContext.Provider>
+      <ConnectionProvider>
+        <ThemeContext.Provider value={theme}>
+          <I18nextProvider i18n={i18n}>
+            <StatusBar barStyle={theme === themes.light ? 'dark-content' : 'light-content'} />
+            <Router />
+            <Alert />
+            <Modal />
+          </I18nextProvider>
+        </ThemeContext.Provider>
+      </ConnectionProvider>
     </View>
   );
 };
