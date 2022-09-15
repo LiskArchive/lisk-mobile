@@ -34,13 +34,13 @@ export default function getBlockchainApplicationRowStyles() {
         marginRight: 15,
         fontWeight: '600',
       },
-      deleteDefaultApplicationModal: {
-        backgroundColor: colors.light.white,
-        height: 280,
-        zIndex: 3,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
-      },
+      // deleteDefaultApplicationModal: {
+      //   backgroundColor: colors.light.white,
+      //   height: 280,
+      //   zIndex: 3,
+      //   borderTopLeftRadius: 24,
+      //   borderTopRightRadius: 24,
+      // },
     },
     [themes.light]: {
       container: {
