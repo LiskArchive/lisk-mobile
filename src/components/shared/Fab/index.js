@@ -8,15 +8,27 @@ import { colors } from 'constants/styleGuide';
 
 import FloatingActionItem from './FloatingItem';
 
-import { isIphoneX } from './utils/platform';
 import { getTouchableComponent, getRippleProps } from './utils/touchable';
 import styles from './styles';
 
 /**
  *
- * Sample:
- * const actions = [{ text: 'Paste URI', icon: <Component /> }]
- * <Fab actions={actions} onPressItem={(item) => console.log(item)} />
+ * @param {Object[]} actions
+ * @param {string} actions[].text
+ * @param {Component} actions[].icon
+ * @param {number} buttonSize sets the size of Fab and items
+ * @param {boolean} openOnMount decides if the Fab should open when the component mounts
+ * @param {boolean} listenKeyboard decides if the Fab should dismiss when keyboard is in view
+ * @param {boolean} showBackground decides if an overlay is visible when fab is open
+ * @param {Function} onClose function to call when fab closes
+ * @param {Function} onOpen function to call when fab opens
+ * @param {Function} onPressMain function to call when fab is pressed
+ * @param {Function} onPressItem function to call when an item is pressed
+ * @param {Function} actionsPaddingTopBottom padding to add to action items
+ * @param {Function} color color used to get ripple color on android
+ * @param {Function} bottom customizable distance from bottom of screen
+ *
+ * @returns {Component}
  *
  */
 
@@ -28,11 +40,9 @@ const Fab = ({
   listenKeyboard,
   actions,
   onClose,
-  dismissKeyboardOnPress,
   onPressMain,
   onOpen,
   onPressItem,
-  distanceToEdge,
   actionsPaddingTopBottom = 10,
   color = colors.light.ultramarineBlue,
   bottom = 0,
@@ -42,43 +52,27 @@ const Fab = ({
   const actionsBottomAnimation = useRef(new Animated.Value(buttonSize + bottom + 50));
   const animation = useRef(new Animated.Value(openOnMount ? 1 : 0));
   const actionsAnimation = useRef(new Animated.Value(0));
+  const opacity = useRef(new Animated.Value(1));
 
-  const onKeyboardShow = (e) => {
-    const { height } = e.endCoordinates;
-    Animated.parallel([
-      Animated.spring(actionsBottomAnimation.current, {
-        bounciness: 0,
-        toValue: buttonSize + height - (isIphoneX() ? 40 : 0),
-        duration: 250,
-        useNativeDriver: false,
-      }),
-      Animated.spring(mainBottomAnimation.current, {
-        bounciness: 0,
-        toValue: height - (isIphoneX() ? 40 : 0),
-        duration: 250,
-        useNativeDriver: false,
-      }),
-    ]).start();
+  const onKeyboardShow = () => {
+    Animated.spring(opacity.current, {
+      bounciness: 0,
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: false,
+    }).start();
   };
 
   const onKeyboardHideHide = () => {
-    Animated.parallel([
-      Animated.spring(actionsBottomAnimation.current, {
-        bounciness: 0,
-        toValue: buttonSize + actionsPaddingTopBottom,
-        duration: 250,
-        useNativeDriver: false,
-      }),
-      Animated.spring(mainBottomAnimation.current, {
-        bounciness: 0,
-        toValue: mainVerticalDistance,
-        duration: 250,
-        useNativeDriver: false,
-      }),
-    ]).start();
+    Animated.spring(opacity.current, {
+      bounciness: 0,
+      toValue: 1,
+      duration: 250,
+      useNativeDriver: false,
+    }).start();
   };
 
-  const reset = () => {
+  const handleReset = () => {
     Animated.spring(animation.current, { toValue: 0, useNativeDriver: false }).start();
     Animated.spring(actionsAnimation.current, { toValue: 0, useNativeDriver: false }).start();
     setActive(false);
@@ -86,10 +80,6 @@ const Fab = ({
   };
 
   const animateButton = () => {
-    if (dismissKeyboardOnPress) {
-      Keyboard.dismiss();
-    }
-
     onPressMain?.(!active);
 
     if (!active) {
@@ -105,74 +95,13 @@ const Fab = ({
       setActive(true);
       onOpen?.();
     } else {
-      reset();
+      handleReset();
     }
   };
 
   const handlePressItem = (item) => {
     onPressItem(item);
-    reset();
-  };
-
-  const renderMainButton = () => {
-    const animatedViewStyle = {
-      transform: [
-        {
-          rotate: animation.current.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['0deg', '45deg'],
-          }),
-        },
-      ],
-      backgroundColor: animation.current.interpolate({
-        inputRange: [0, 1],
-        outputRange: [colors.light.ultramarineBlue, colors.light.white],
-      }),
-      width: animation.current.interpolate({
-        inputRange: [0, 1],
-        outputRange: [buttonSize, buttonSize - 5],
-      }),
-      height: animation.current.interpolate({
-        inputRange: [0, 1],
-        outputRange: [buttonSize, buttonSize - 5],
-      }),
-    };
-
-    const Touchable = getTouchableComponent();
-    const propStyles = {
-      bottom: mainBottomAnimation.current,
-    };
-
-    const sizeStyle = {
-      width: buttonSize,
-      height: buttonSize,
-      borderRadius: buttonSize / 2,
-    };
-
-    return (
-      <Animated.View
-        style={[styles.buttonContainer, propStyles]}
-        accessible
-        accessibilityLabel="Floating Action Button"
-      >
-        <Touchable
-          {...getRippleProps(color)}
-          style={[styles.button]}
-          activeOpacity={0.85}
-          onPress={animateButton}
-        >
-          <Animated.View style={[styles.buttonTextContainer, sizeStyle, animatedViewStyle]}>
-            <AddSvg
-              color={animation.current.interpolate({
-                inputRange: [0, 1],
-                outputRange: [colors.light.white, colors.light.ultramarineBlue],
-              })}
-              size={1.3}
-            />
-          </Animated.View>
-        </Touchable>
-      </Animated.View>
-    );
+    handleReset();
   };
 
   const renderActions = () => {
@@ -202,7 +131,6 @@ const Fab = ({
           return (
             <FloatingActionItem
               paddingTopBottom={actionsPaddingTopBottom}
-              distanceToEdge={distanceToEdge}
               key={action.text}
               textBackground={textBackground}
               item={action}
@@ -239,25 +167,77 @@ const Fab = ({
   }, []);
 
   const handlePressBackdrop = () => {
-    setActive(false);
+    handleReset(false);
     onClose?.();
   };
 
-  const renderTappableBackground = () => {
-    return (
-      <TouchableOpacity
-        activeOpacity={1}
-        style={[styles.overlay, styles.overlayColor]}
-        onPress={handlePressBackdrop}
-      />
-    );
+  const animatedViewStyle = {
+    transform: [
+      {
+        rotate: animation.current.interpolate({
+          inputRange: [0, 1],
+          outputRange: ['0deg', '45deg'],
+        }),
+      },
+    ],
+    backgroundColor: animation.current.interpolate({
+      inputRange: [0, 1],
+      outputRange: [colors.light.ultramarineBlue, colors.light.white],
+    }),
+    width: animation.current.interpolate({
+      inputRange: [0, 1],
+      outputRange: [buttonSize, buttonSize - 5],
+    }),
+    height: animation.current.interpolate({
+      inputRange: [0, 1],
+      outputRange: [buttonSize, buttonSize - 5],
+    }),
+    opacity: opacity.current,
+  };
+
+  const Touchable = getTouchableComponent();
+  const propStyles = {
+    bottom: mainBottomAnimation.current,
+  };
+
+  const sizeStyle = {
+    width: buttonSize,
+    height: buttonSize,
+    borderRadius: buttonSize / 2,
   };
 
   return (
     <Animated.View pointerEvents="box-none" style={[styles.overlay]}>
-      {active && showBackground && renderTappableBackground()}
+      {active && showBackground && (
+        <TouchableOpacity
+          activeOpacity={1}
+          style={[styles.overlay, styles.overlayColor]}
+          onPress={handlePressBackdrop}
+        />
+      )}
       {renderActions()}
-      {renderMainButton()}
+      <Animated.View
+        style={[styles.buttonContainer, propStyles]}
+        accessible
+        accessibilityLabel="Floating Action Button"
+      >
+        <Touchable
+          {...getRippleProps(color)}
+          style={[styles.button]}
+          activeOpacity={0.85}
+          onPress={animateButton}
+        >
+          <Animated.View style={[styles.buttonTextContainer, sizeStyle, animatedViewStyle]}>
+            <AddSvg
+              color={animation.current.interpolate({
+                inputRange: [0, 1],
+                outputRange: [colors.light.white, colors.light.ultramarineBlue],
+              })}
+              size={20}
+            />
+          </Animated.View>
+        </Touchable>
+      </Animated.View>
     </Animated.View>
   );
 };

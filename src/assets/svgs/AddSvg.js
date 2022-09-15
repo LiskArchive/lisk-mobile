@@ -4,10 +4,10 @@ import { Svg, Path } from 'react-native-svg';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-export default ({ color, size = 1 }) => (
+export default ({ color, height = 16, width = 16 }) => (
   <Svg
-    width={16 * size}
-    height={16 * size}
+    width={width}
+    height={height}
     viewBox="0 0 16 16"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
