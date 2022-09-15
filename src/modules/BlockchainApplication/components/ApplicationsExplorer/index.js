@@ -61,8 +61,12 @@ export default function BlockchainApplicationsExplorer() {
 
         <View style={[styles.body]}>
           <Tabs value={activeTab} onClick={(tab) => setActiveTab(tab)}>
-            <Tabs.Tab value="internalApplications">All applications</Tabs.Tab>
-            <Tabs.Tab value="externalApplications">External connections</Tabs.Tab>
+            <Tabs.Tab value="internalApplications">
+              {i18next.t('application.explore.applicationList.title')}
+            </Tabs.Tab>
+            <Tabs.Tab value="externalApplications">
+              {i18next.t('application.explore.externalApplicationList.title')}
+            </Tabs.Tab>
           </Tabs>
 
           <Tabs.Panel index="internalApplications" value={activeTab}>

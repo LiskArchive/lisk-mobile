@@ -57,7 +57,7 @@ export default function getExternalBlockchainApplicationRowStyles() {
         color: colors.light.platinum,
       },
       applicationChainIdLabel: {
-        color: colors.light.platinum,
+        color: colors.light.blueGray,
       },
     },
   };

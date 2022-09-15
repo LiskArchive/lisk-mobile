@@ -373,13 +373,22 @@
       "title": "Anwendungen",
       "statsButtonText": "Statistiken",
       "applicationList": {
-        "searchPlaceholder": "Suchanwendung",
+        "title": "Alle Apps",
         "loadingText": "Anwendungen werden geladen...",
         "errorText": "Fehler beim Laden Ihrer Anwendungen.",
         "emptyText": "Sie haben noch keine Bewerbungen.",
         "pinText": "Pin",
         "unpinText": "Unpin",
         "deleteText": "Löschen"
+      },
+      "externalApplicationList": {
+        "title": "Externe Verbindungen",
+        "loadingText": "Externe Verbindungen laden...",
+        "errorText": "Fehler beim Laden Ihrer externen Verbindungen.",
+        "emptyText": "Sie haben noch keine externen Verbindungen.",
+        "detailsText": "Info",
+        "disconnectText": "Trennen",
+        "chainIDLabel": "Chain ID"
       }
     }
   },

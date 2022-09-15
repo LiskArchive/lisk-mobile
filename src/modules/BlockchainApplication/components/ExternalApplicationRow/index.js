@@ -1,5 +1,6 @@
 import { View, Image, Text } from 'react-native';
 import React, { useState } from 'react';
+import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
@@ -20,13 +21,13 @@ export default function ExternalApplicationRow({ application }) {
 
   const rightActions = [
     {
-      title: 'Info',
+      title: i18next.t('application.explore.externalApplicationList.detailsText'),
       color: colors.light.blueGray,
       icon: () => <InfoSvg color={colors.light.white} />,
       onPress: () => setShowApplicationInfoModal(true),
     },
     {
-      title: 'Disconnect',
+      title: i18next.t('application.explore.externalApplicationList.disconnectText'),
       color: colors.light.furyRed,
       icon: () => <CircleCrossedSvg color={colors.light.white} />,
       onPress: () => setShowDisconnectApplicationModal(true),
@@ -36,11 +37,11 @@ export default function ExternalApplicationRow({ application }) {
   return (
     <>
       <Swipeable key={application.topic} rightActions={rightActions}>
-        <View style={styles.applicationContainer}>
-          <View style={styles.applicationNameContainer}>
+        <View style={[styles.applicationContainer]}>
+          <View style={[styles.applicationNameContainer]}>
             <Image
               source={{ uri: application.peerMetadata.icons[0] }}
-              style={{ ...styles.applicationLogoImage }}
+              style={[styles.applicationLogoImage]}
             />
 
             <View>
@@ -50,7 +51,7 @@ export default function ExternalApplicationRow({ application }) {
 
               {/* TODO: Figure out from where to read the chainID of the connection. */}
               <P style={[styles.applicationChainIdLabel, styles.theme.applicationChainIdLabel]}>
-                Chain ID: 10
+                {i18next.t('application.explore.externalApplicationList.chainIDLabel')}: 10
               </P>
             </View>
           </View>
