@@ -6,6 +6,7 @@ import i18next from 'i18next';
 import { useTheme } from 'hooks/useTheme';
 import DataRenderer from 'components/shared/DataRenderer';
 import { P } from 'components/shared/toolBox/typography';
+import EmptyState from 'components/shared/EmptyState';
 import usePairings from '../../../../../libs/wcm/hooks/usePairings';
 
 import getBlockchainApplicationsListStyles from './styles';
@@ -74,8 +75,6 @@ export function ExternalBlockchainApplicationsList({ style }) {
     }
   }, [pairings]);
 
-  console.log({ data: pairings.slice(1), loading });
-
   return (
     <DataRenderer
       data={pairings.slice(1)}
@@ -98,6 +97,7 @@ export function ExternalBlockchainApplicationsList({ style }) {
           {i18next.t('application.explore.applicationList.loadingText')}
         </P>
       )}
+      renderEmpty={() => <EmptyState message={'You do not have external connections yet.'} />}
     />
   );
 }
