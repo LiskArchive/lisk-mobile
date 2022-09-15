@@ -6,11 +6,11 @@ export default function getBlockchainApplicationsExplorerStyles() {
   return {
     common: {
       header: {
-        marginBottom: 24
+        marginBottom: 24,
       },
-      applicationsListContainer: {
+      body: {
         paddingLeft: 16,
-        paddingRight: 16
+        paddingRight: 16,
       },
       message: {
         padding: 20,

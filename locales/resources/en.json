@@ -371,19 +371,28 @@
         "description": "The default application can not be removed",
         "buttonText": "Continue to Applications"
       },
-      "continueToWalletButtonText": "Continue to wallet"
+      "continueToWalletButtonText": "Continue to wallet"   
     },
     "explore": {
       "title": "Applications",
       "statsButtonText": "Stats",
       "applicationList": {
-        "searchPlaceholder": "Search application",
+        "title": "All applications",
         "loadingText": "Loading applications...",
         "errorText": "Error loading your applications.",
         "emptyText": "You have no applications yet.",
         "pinText": "Pin",
         "unpinText": "Unpin",
         "deleteText": "Delete"
+      },
+      "externalApplicationList": {
+        "title": "External connections",
+        "loadingText": "Loading external connections...",
+        "errorText": "Error loading your external connections.",
+        "emptyText": "You do not have external connections yet.",
+        "detailsText": "Info",
+        "disconnectText": "Disconnect",
+        "chainIDLabel": "Chain ID"
       }
     }
   },
