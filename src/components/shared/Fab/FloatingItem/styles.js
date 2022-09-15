@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'constants/styleGuide';
+import { colors, fonts } from 'constants/styleGuide';
 
 export default StyleSheet.create({
   container: {
@@ -22,8 +22,9 @@ export default StyleSheet.create({
     height: 22,
   },
   text: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 15,
+    fontFamily: fonts.family.contextBold,
+    color: colors.light.white,
   },
   button: {
     alignItems: 'center',

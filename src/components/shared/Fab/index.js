@@ -16,7 +16,7 @@ import styles from './styles';
  *
  * Sample:
  * const actions = [{ text: 'Paste URI', icon: <Component /> }]
- * <Fab actions={actions} animated onPressItem={(item) => console.log(item)} />
+ * <Fab actions={actions} onPressItem={(item) => console.log(item)} />
  *
  */
 
@@ -27,13 +27,11 @@ const Fab = ({
   showBackground = true,
   listenKeyboard,
   actions,
-  animated = true,
   onClose,
   dismissKeyboardOnPress,
   onPressMain,
   onOpen,
   onPressItem,
-  position = 'left',
   distanceToEdge,
   actionsPaddingTopBottom = 10,
   color = colors.light.ultramarineBlue,
@@ -81,10 +79,8 @@ const Fab = ({
   };
 
   const reset = () => {
-    if (animated) {
-      Animated.spring(animation.current, { toValue: 0, useNativeDriver: false }).start();
-      Animated.spring(actionsAnimation.current, { toValue: 0, useNativeDriver: false }).start();
-    }
+    Animated.spring(animation.current, { toValue: 0, useNativeDriver: false }).start();
+    Animated.spring(actionsAnimation.current, { toValue: 0, useNativeDriver: false }).start();
     setActive(false);
     onClose?.();
   };
@@ -97,18 +93,15 @@ const Fab = ({
     onPressMain?.(!active);
 
     if (!active) {
-      if (animated) {
-        Animated.spring(actionsAnimation.current, { toValue: 1, useNativeDriver: false }).start();
-        // only execute it for the background to prevent extra calls
-        LayoutAnimation.configureNext({
-          duration: 180,
-          create: {
-            type: LayoutAnimation.Types.easeInEaseOut,
-            property: LayoutAnimation.Properties.opacity,
-          },
-        });
-      }
-
+      Animated.spring(actionsAnimation.current, { toValue: 1, useNativeDriver: false }).start();
+      // only execute it for the background to prevent extra calls
+      LayoutAnimation.configureNext({
+        duration: 180,
+        create: {
+          type: LayoutAnimation.Types.easeInEaseOut,
+          property: LayoutAnimation.Properties.opacity,
+        },
+      });
       setActive(true);
       onOpen?.();
     } else {
@@ -122,40 +115,28 @@ const Fab = ({
   };
 
   const renderMainButton = () => {
-    let animatedViewStyle;
-
-    if (animated) {
-      animatedViewStyle = {
-        transform: [
-          {
-            rotate: animation.current.interpolate({
-              inputRange: [0, 1],
-              outputRange: ['0deg', '45deg'],
-            }),
-          },
-        ],
-        backgroundColor: animation.current.interpolate({
-          inputRange: [0, 1],
-          outputRange: [colors.light.ultramarineBlue, colors.light.white],
-        }),
-      };
-    } else if (active) {
-      animatedViewStyle = {
-        transform: [
-          {
-            rotate: '45deg',
-          },
-        ],
-      };
-    } else {
-      animatedViewStyle = {
-        transform: [
-          {
-            rotate: '0deg',
-          },
-        ],
-      };
-    }
+    const animatedViewStyle = {
+      transform: [
+        {
+          rotate: animation.current.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['0deg', '45deg'],
+          }),
+        },
+      ],
+      backgroundColor: animation.current.interpolate({
+        inputRange: [0, 1],
+        outputRange: [colors.light.ultramarineBlue, colors.light.white],
+      }),
+      width: animation.current.interpolate({
+        inputRange: [0, 1],
+        outputRange: [buttonSize, buttonSize - 5],
+      }),
+      height: animation.current.interpolate({
+        inputRange: [0, 1],
+        outputRange: [buttonSize, buttonSize - 5],
+      }),
+    };
 
     const Touchable = getTouchableComponent();
     const propStyles = {
@@ -170,13 +151,13 @@ const Fab = ({
 
     return (
       <Animated.View
-        style={[styles.buttonContainer, sizeStyle, propStyles]}
+        style={[styles.buttonContainer, propStyles]}
         accessible
         accessibilityLabel="Floating Action Button"
       >
         <Touchable
           {...getRippleProps(color)}
-          style={[styles.button, sizeStyle]}
+          style={[styles.button]}
           activeOpacity={0.85}
           onPress={animateButton}
         >
@@ -199,18 +180,12 @@ const Fab = ({
       return undefined;
     }
 
-    let animatedActionsStyle;
-
-    if (animated) {
-      animatedActionsStyle = {
-        opacity: actionsAnimation.current.interpolate({
-          inputRange: [0, 1],
-          outputRange: [0, 1],
-        }),
-      };
-    } else {
-      animatedActionsStyle = { opacity: active ? 1 : 0 };
-    }
+    const animatedActionsStyle = {
+      opacity: actionsAnimation.current.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+      }),
+    };
 
     const actionsStyles = [
       animatedActionsStyle,
@@ -218,10 +193,6 @@ const Fab = ({
         bottom: actionsBottomAnimation.current,
       },
     ];
-
-    if (active) {
-      actionsStyles.push(styles[`${position}ActionsVisible`]);
-    }
 
     return (
       <Animated.View style={[styles.buttonContainer, actionsStyles]} pointerEvents="box-none">
@@ -235,10 +206,8 @@ const Fab = ({
               key={action.text}
               textBackground={textBackground}
               item={action}
-              position={position}
               active={active}
               onPress={handlePressItem}
-              animated={animated}
               buttonSize={buttonSize - 10}
             />
           );
