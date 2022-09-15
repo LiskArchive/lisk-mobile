@@ -44,7 +44,7 @@ export default function DataRenderer({
     return renderError ? renderError(error) : <P style={style?.error}>Error!</P>;
   }
 
-  if (!data || data?.length === 0) {
+  if (!data || data.length === 0) {
     if (hideOnEmpty) return null;
 
     if (renderEmpty) return renderEmpty();
