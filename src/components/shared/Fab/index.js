@@ -167,7 +167,7 @@ const Fab = ({
   }, []);
 
   const handlePressBackdrop = () => {
-    handleReset(false);
+    handleReset();
     onClose?.();
   };
 
