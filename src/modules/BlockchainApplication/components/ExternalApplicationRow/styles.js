@@ -1,6 +1,6 @@
 import { themes, colors, fonts } from 'constants/styleGuide';
 
-export default function getBlockchainApplicationRowStyles() {
+export default function getExternalBlockchainApplicationRowStyles() {
   return {
     common: {
       container: {
@@ -19,6 +19,7 @@ export default function getBlockchainApplicationRowStyles() {
       applicationNameContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginRight: 16,
       },
       applicationLogoImage: {
         borderRadius: 50,
@@ -30,9 +31,10 @@ export default function getBlockchainApplicationRowStyles() {
       },
       applicationNameLabel: {
         fontSize: fonts.size.base,
-        maxWidth: '90%',
-        marginRight: 15,
         fontWeight: '600',
+      },
+      applicationChainIdLabel: {
+        fontSize: fonts.size.small,
       },
     },
     [themes.light]: {
@@ -42,6 +44,9 @@ export default function getBlockchainApplicationRowStyles() {
       applicationNameLabel: {
         color: colors.light.zodiacBlue,
       },
+      applicationChainIdLabel: {
+        color: colors.light.blueGray,
+      },
     },
 
     [themes.dark]: {
@@ -49,6 +54,9 @@ export default function getBlockchainApplicationRowStyles() {
         backgroundColor: colors.dark.mainBg,
       },
       applicationNameLabel: {
+        color: colors.light.platinum,
+      },
+      applicationChainIdLabel: {
         color: colors.light.platinum,
       },
     },
