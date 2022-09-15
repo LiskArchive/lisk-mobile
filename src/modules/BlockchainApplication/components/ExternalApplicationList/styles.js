@@ -1,6 +1,6 @@
 import { themes, colors, fonts } from 'constants/styleGuide';
 
-export default function getApplicationListStyles() {
+export default function getExternalApplicationListStyles() {
   return {
     common: {
       text: {

@@ -32,23 +32,19 @@ export default function DataRenderer({
   renderError,
   renderEmpty,
   hideOnEmpty,
-  style
+  style,
 }) {
   // TODO: Add Skeleton or Loader when component is available.
   if (isLoading) {
-    return renderLoading
-      ? renderLoading()
-      : <P style={style?.loading}>Loading...</P>;
+    return renderLoading ? renderLoading() : <P style={style?.loading}>Loading...</P>;
   }
 
   // TODO: Add Error general component when component is available.
   if (error) {
-    return renderError
-      ? renderError(error)
-      : <P style={style?.error}>Error!</P>;
+    return renderError ? renderError(error) : <P style={style?.error}>Error!</P>;
   }
 
-  if (!data) {
+  if (!data?.length) {
     if (hideOnEmpty) return null;
 
     if (renderEmpty) return renderEmpty();

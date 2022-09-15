@@ -1,6 +1,6 @@
 import { themes, colors, fonts } from 'constants/styleGuide';
 
-export default function getBlockchainApplicationRowStyles() {
+export default function getExternalBlockchainApplicationRowStyles() {
   return {
     common: {
       container: {
@@ -19,6 +19,7 @@ export default function getBlockchainApplicationRowStyles() {
       applicationNameContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginRight: 16,
       },
       applicationLogoImage: {
         borderRadius: 50,
@@ -30,8 +31,6 @@ export default function getBlockchainApplicationRowStyles() {
       },
       applicationNameLabel: {
         fontSize: fonts.size.base,
-        maxWidth: '90%',
-        marginRight: 15,
         fontWeight: '600',
       },
     },

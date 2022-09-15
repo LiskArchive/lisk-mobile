@@ -67,7 +67,6 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
         Component={BlockchainApplicationRow}
         onItemPress={selectApplication}
         showActive
-        navigation={navigation}
         deleteApplication={deleteApplication}
       />
       <View style={styles.bottom}>
