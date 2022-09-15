@@ -9,10 +9,7 @@ import { P } from 'components/shared/toolBox/typography';
 import BottomModal from 'components/shared/BottomModal';
 import StatsSvg from 'assets/svgs/StatsSvg';
 import { colors, themes } from 'constants/styleGuide';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import Fab from 'components/shared/Fab';
-import CopySvg from 'assets/svgs/CopySvg';
-import QRCodeSvg from 'assets/svgs/QRCodeSvg';
+
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats';
 import ApplicationList from '../ApplicationList';
@@ -21,24 +18,12 @@ import BlockchainApplicationsStats from '../ApplicationsStats';
 
 import getBlockchainApplicationsExplorerStyles from './styles';
 
-const actions = [
-  {
-    text: 'Paste URI',
-    icon: <CopySvg variant="outline" color={colors.light.white} />,
-  },
-  {
-    text: 'Scan QR Code',
-    icon: <QRCodeSvg />,
-  },
-];
-
 /**
  *
  * Renders a component that enable users to search, list and
  * view blockchain applications.
  */
 function BlockchainApplicationsExplorer({ t, navigation }) {
-  const tabBarHeight = useBottomTabBarHeight();
   const [showStatsModal, setShowStatsModal] = useState(false);
 
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
@@ -112,7 +97,6 @@ function BlockchainApplicationsExplorer({ t, navigation }) {
         />
 
         {renderData()}
-        <Fab actions={actions} onPressItem={console.log} bottom={tabBarHeight} />
       </NavigationSafeAreaView>
 
       <BottomModal
