@@ -9,14 +9,14 @@ import { P } from 'components/shared/toolBox/typography';
 import EmptyState from 'components/shared/EmptyState';
 import usePairings from '../../../../../libs/wcm/hooks/usePairings';
 
-import getBlockchainApplicationsListStyles from './styles';
+import getExternalApplicationListStyles from './styles';
 
 export default function ExternalBlockchainApplicationsList({ style }) {
   const { pairings } = usePairings();
   const [loading, setLoading] = useState(true);
 
   const { styles } = useTheme({
-    styles: getBlockchainApplicationsListStyles(),
+    styles: getExternalApplicationListStyles(),
   });
 
   useEffect(() => {
