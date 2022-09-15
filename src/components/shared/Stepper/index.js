@@ -67,7 +67,7 @@ export default function Stepper({
   const currentChild = React.Children.toArray(children)[currentIndex];
 
   return (
-    <View style={styles.flex}>
+    <View style={[styles.flex, baseStyles?.container]}>
       {showProgressBar && (
         <ProgressBar
           current={currentIndex}

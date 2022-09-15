@@ -4,7 +4,8 @@ import { View } from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import Tabs from 'components/shared/Tabs';
 
-import { AllBlockchainApplicationsList, ExternalBlockchainApplicationsList } from './components';
+import AllBlockchainApplicationsList from './AllApplicationList';
+import ExternalBlockchainApplicationsList from './ExternalApplicationList';
 import getBlockchainApplicationsListStyles from './styles';
 
 export default function BlockchainApplicationList({
@@ -38,7 +39,7 @@ export default function BlockchainApplicationList({
       </Tabs.Panel>
 
       <Tabs.Panel index="externalApplications" value={activeTab}>
-        <ExternalBlockchainApplicationsList />
+        <ExternalBlockchainApplicationsList style={style} />
       </Tabs.Panel>
     </View>
   );
