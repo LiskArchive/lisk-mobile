@@ -48,11 +48,6 @@ export default function ExternalApplicationRow({ application }) {
               <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
                 {application.peerMetadata.name}
               </P>
-
-              {/* TODO: Figure out from where to read the chainID of the connection. */}
-              <P style={[styles.applicationChainIdLabel, styles.theme.applicationChainIdLabel]}>
-                {i18next.t('application.explore.externalApplicationList.chainIDLabel')}: 10
-              </P>
             </View>
           </View>
 

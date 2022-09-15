@@ -33,9 +33,6 @@ export default function getExternalBlockchainApplicationRowStyles() {
         fontSize: fonts.size.base,
         fontWeight: '600',
       },
-      applicationChainIdLabel: {
-        fontSize: fonts.size.small,
-      },
     },
     [themes.light]: {
       container: {
@@ -43,9 +40,6 @@ export default function getExternalBlockchainApplicationRowStyles() {
       },
       applicationNameLabel: {
         color: colors.light.zodiacBlue,
-      },
-      applicationChainIdLabel: {
-        color: colors.light.blueGray,
       },
     },
 
@@ -55,9 +49,6 @@ export default function getExternalBlockchainApplicationRowStyles() {
       },
       applicationNameLabel: {
         color: colors.light.platinum,
-      },
-      applicationChainIdLabel: {
-        color: colors.light.blueGray,
       },
     },
   };
