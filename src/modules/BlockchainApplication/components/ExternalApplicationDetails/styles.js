@@ -14,6 +14,7 @@ export default function getExternalApplicationDetailsStyles() {
       },
       body: {
         flex: 1,
+        marginBottom: 16,
       },
       title: {
         fontSize: fonts.size.h4,

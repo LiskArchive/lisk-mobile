@@ -15,8 +15,7 @@ import getExternalBlockchainApplicationRowStyles from './styles';
 import ExternalApplicationDetails from '../ExternalApplicationDetails';
 
 export default function ExternalApplicationRow({ application }) {
-  const [showApplicationInfoModal, setShowApplicationInfoModal] = useState(false);
-  const [showDisconnectApplicationModal, setShowDisconnectApplicationModal] = useState(false);
+  const [activeAction, setActiveAction] = useState();
 
   const { styles } = useTheme({ styles: getExternalBlockchainApplicationRowStyles() });
 
@@ -25,15 +24,33 @@ export default function ExternalApplicationRow({ application }) {
       title: i18next.t('application.explore.externalApplicationList.detailsText'),
       color: colors.light.blueGray,
       icon: () => <InfoSvg color={colors.light.white} height={20} width={20} />,
-      onPress: () => setShowApplicationInfoModal(true),
+      onPress: () => setActiveAction('details'),
     },
     {
       title: i18next.t('application.explore.externalApplicationList.disconnectText'),
       color: colors.light.furyRed,
       icon: () => <CircleCrossedSvg color={colors.light.white} height={22} width={22} />,
-      onPress: () => setShowDisconnectApplicationModal(true),
+      onPress: () => setActiveAction('disconnect'),
     },
   ];
+
+  function renderActiveAction() {
+    switch (activeAction) {
+      case 'details':
+        return (
+          <ExternalApplicationDetails
+            application={application}
+            onApplicationDisconnect={() => setActiveAction('disconnect')}
+          />
+        );
+
+      case 'disconnect':
+        return <Text>Disconnect</Text>;
+
+      default:
+        return null;
+    }
+  }
 
   return (
     <>
@@ -60,19 +77,8 @@ export default function ExternalApplicationRow({ application }) {
         </View>
       </Swipeable>
 
-      <BottomModal
-        show={showApplicationInfoModal}
-        toggleShow={() => setShowApplicationInfoModal(false)}
-      >
-        <ExternalApplicationDetails application={application} />
-      </BottomModal>
-
-      <BottomModal
-        show={showDisconnectApplicationModal}
-        toggleShow={() => setShowDisconnectApplicationModal(false)}
-      >
-        {/* TODO: Implement external application Disconnect component. */}
-        <Text>Disconnect</Text>
+      <BottomModal show={!!activeAction} toggleShow={() => setActiveAction(undefined)}>
+        {renderActiveAction()}
       </BottomModal>
     </>
   );

@@ -4,11 +4,12 @@ import { Image, View } from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import FormattedDate from 'components/shared/formattedDate';
+import { Button } from 'components/shared/toolBox/button';
 import { stringShortener } from 'utilities/helpers';
 
 import getExternalApplicationDetailsStyles from './styles';
 
-export default function ExternalApplicationDetails({ application }) {
+export default function ExternalApplicationDetails({ application, onApplicationDisconnect }) {
   const { styles } = useTheme({ styles: getExternalApplicationDetailsStyles() });
 
   return (
@@ -34,6 +35,10 @@ export default function ExternalApplicationDetails({ application }) {
           </FormattedDate>
         </View>
       </View>
+
+      <Button style={{ marginBottom: 16 }} onClick={onApplicationDisconnect}>
+        Disconnect
+      </Button>
     </View>
   );
 }
