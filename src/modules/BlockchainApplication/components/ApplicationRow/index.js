@@ -8,11 +8,11 @@ import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
 import { colors, themes } from 'constants/styleGuide';
 import Swipeable from 'components/shared/Swipeable';
+import BottomModal from 'components/shared/BottomModal';
+import ResultScreen from 'components/screens/ResultScreen';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
-import ErrorScreen from 'components/screens/ErrorScreen';
-import BottomModal from 'components/shared/BottomModal';
 import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 
 import { useBlockchainApplicationRowActions } from './hooks';
@@ -93,7 +93,8 @@ function BlockchainApplicationRow({
         show={showDeleteDefaultApplicationModal}
         toggleShow={() => setShowDeleteDefaultApplicationModal(false)}
       >
-        <ErrorScreen
+        <ResultScreen
+          variant="error"
           description={i18next.t('application.manage.deleteDefaultApplicationModal.description')}
           buttonText={i18next.t('application.manage.deleteDefaultApplicationModal.buttonText')}
           onContinue={() => setShowDeleteDefaultApplicationModal(false)}
