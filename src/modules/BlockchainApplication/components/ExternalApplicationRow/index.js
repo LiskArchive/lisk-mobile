@@ -13,6 +13,7 @@ import InfoSvg from 'assets/svgs/InfoSvg';
 
 import getExternalBlockchainApplicationRowStyles from './styles';
 import ExternalApplicationDetails from '../ExternalApplicationDetails';
+import DisconnectExternalApplication from '../DisconnectExternalApplication';
 
 export default function ExternalApplicationRow({ application }) {
   const [activeAction, setActiveAction] = useState();
@@ -45,7 +46,20 @@ export default function ExternalApplicationRow({ application }) {
         );
 
       case 'disconnect':
-        return <Text>Disconnect</Text>;
+        return (
+          <DisconnectExternalApplication
+            application={application}
+            onSuccess={() => setActiveAction('disconnectSuccess')}
+            onError={() => setActiveAction('disconnectError')}
+            onCancel={() => setActiveAction(undefined)}
+          />
+        );
+
+      case 'disconnectSuccess':
+        return <Text>Success!</Text>;
+
+      case 'disconnectError':
+        return <Text>Error!</Text>;
 
       default:
         return null;

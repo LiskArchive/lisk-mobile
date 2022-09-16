@@ -7,10 +7,13 @@ import FormattedDate from 'components/shared/formattedDate';
 import { Button } from 'components/shared/toolBox/button';
 import { stringShortener } from 'utilities/helpers';
 
-import getExternalApplicationDetailsStyles from './styles';
+import getExternalBlockchainApplicationDetailsStyles from './styles';
 
-export default function ExternalApplicationDetails({ application, onApplicationDisconnect }) {
-  const { styles } = useTheme({ styles: getExternalApplicationDetailsStyles() });
+export default function ExternalBlockchainApplicationDetails({
+  application,
+  onApplicationDisconnect,
+}) {
+  const { styles } = useTheme({ styles: getExternalBlockchainApplicationDetailsStyles() });
 
   return (
     <View style={[styles.container, styles.theme.container]}>
