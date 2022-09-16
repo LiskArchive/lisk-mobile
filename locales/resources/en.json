@@ -392,7 +392,11 @@
         "emptyText": "You do not have external connections yet.",
         "detailsText": "Info",
         "disconnectText": "Disconnect",
-        "chainIDLabel": "Chain ID"
+        "chainIDLabel": "Chain ID",
+        "bridgeApplication": "Bridge Application",
+        "bridgeApplicationDescription": "Paste WalletConnect URI to connection the bridge server",
+        "addApplication": "Add Application",
+        "enterConnectionUri": "Enter connection URI"
       }
     }
   },

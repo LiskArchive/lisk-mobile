@@ -211,7 +211,7 @@ const Fab = ({
       {active && showBackground && (
         <TouchableOpacity
           activeOpacity={1}
-          style={[styles.overlay, styles.overlayColor]}
+          style={[styles.backdrop]}
           onPress={handlePressBackdrop}
         />
       )}

@@ -5,10 +5,17 @@ import { themes, colors } from 'constants/styleGuide';
 export default function getBlockchainApplicationsExplorerStyles() {
   return {
     common: {
+      container: {
+        flex: 1,
+      },
       header: {
         marginBottom: 24,
       },
+      flex: {
+        flex: 1,
+      },
       body: {
+        flex: 1,
         paddingLeft: 16,
         paddingRight: 16,
       },
@@ -17,6 +24,9 @@ export default function getBlockchainApplicationsExplorerStyles() {
       },
       statsModal: {
         height: Dimensions.get('window').height / 1.6,
+      },
+      bridgeModal: {
+        height: 350,
       },
       statsModalCloseButton: {
         position: 'absolute',
