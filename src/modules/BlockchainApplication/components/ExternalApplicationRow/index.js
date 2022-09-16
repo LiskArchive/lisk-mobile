@@ -12,6 +12,7 @@ import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 import InfoSvg from 'assets/svgs/InfoSvg';
 
 import getExternalBlockchainApplicationRowStyles from './styles';
+import ExternalApplicationDetails from '../ExternalApplicationDetails';
 
 export default function ExternalApplicationRow({ application }) {
   const [showApplicationInfoModal, setShowApplicationInfoModal] = useState(false);
@@ -63,8 +64,7 @@ export default function ExternalApplicationRow({ application }) {
         show={showApplicationInfoModal}
         toggleShow={() => setShowApplicationInfoModal(false)}
       >
-        {/* TODO: Implement external application Info component. */}
-        <Text>Info</Text>
+        <ExternalApplicationDetails application={application} />
       </BottomModal>
 
       <BottomModal
