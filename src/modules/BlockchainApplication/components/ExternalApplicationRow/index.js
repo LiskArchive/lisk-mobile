@@ -23,13 +23,13 @@ export default function ExternalApplicationRow({ application }) {
     {
       title: i18next.t('application.explore.externalApplicationList.detailsText'),
       color: colors.light.blueGray,
-      icon: () => <InfoSvg color={colors.light.white} />,
+      icon: () => <InfoSvg color={colors.light.white} height={20} width={20} />,
       onPress: () => setShowApplicationInfoModal(true),
     },
     {
       title: i18next.t('application.explore.externalApplicationList.disconnectText'),
       color: colors.light.furyRed,
-      icon: () => <CircleCrossedSvg color={colors.light.white} />,
+      icon: () => <CircleCrossedSvg color={colors.light.white} height={22} width={22} />,
       onPress: () => setShowDisconnectApplicationModal(true),
     },
   ];

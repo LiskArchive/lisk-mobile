@@ -26,9 +26,41 @@ export default function ExternalBlockchainApplicationsList() {
     }
   }, [pairings]);
 
+  const _data = [
+    {
+      topic: 'ae30ea15f599766496c2e59fec6cb4970f4ae1e14d3e7386af478ae05617b35f',
+      relay: {
+        protocol: 'iridium',
+      },
+      expiry: 1665832072,
+      active: true,
+      peerMetadata: {
+        description: 'WalletConnect wallet',
+        url: 'http://localhost:3000',
+        icons: ['http://localhost:3000/favicon.ico'],
+        name: 'WalletConnect',
+      },
+    },
+    {
+      topic: 'be30ea15f599766496c2e59fec6cb4970f4ae1e14d3e7386af478ae05617b35f',
+      relay: {
+        protocol: 'iridium',
+      },
+      expiry: 1665832072,
+      active: false,
+      peerMetadata: {
+        description: 'Metamask wallet',
+        url: 'http://localhost:3001',
+        icons: ['http://localhost:3001/favicon.ico'],
+        name: 'Metamask',
+      },
+    },
+  ];
+
   return (
     <DataRenderer
-      data={pairings.slice(1)}
+      // data={pairings.slice(1)}
+      data={_data}
       isLoading={isLoading}
       renderData={(data) => (
         <InfiniteScrollList
