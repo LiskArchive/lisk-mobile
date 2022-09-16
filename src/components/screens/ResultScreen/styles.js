@@ -17,18 +17,17 @@ export default () => ({
     title: {
       fontFamily: fonts.family.heading,
       fontSize: fonts.size.h3,
-      padding: 4,
+      marginBottom: 16,
       textAlign: 'center',
     },
     description: {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.base,
       textAlign: 'center',
-      padding: 8,
+      marginBottom: 16,
     },
     continueButton: {
-      paddingHorizontal: 20,
-      margin: boxes.boxPadding,
+      paddingHorizontal: 16,
     },
   },
 

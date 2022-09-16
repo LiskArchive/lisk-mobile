@@ -49,9 +49,13 @@ export default function ResultScreen({
           <Text style={[styles.title, styles.theme.title, baseStyles?.title]}>{title}</Text>
         )}
 
-        <Text style={[styles.description, styles.theme.description, baseStyles?.description]}>
-          {description}
-        </Text>
+        {typeof description === 'string' ? (
+          <Text style={[styles.description, styles.theme.description, baseStyles?.description]}>
+            {description}
+          </Text>
+        ) : (
+          description
+        )}
 
         {children}
       </View>

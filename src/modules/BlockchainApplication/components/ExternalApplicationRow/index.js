@@ -1,19 +1,20 @@
-import { View, Image, Text } from 'react-native';
+import { View, Image } from 'react-native';
 import React, { useState } from 'react';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { P } from 'components/shared/toolBox/typography';
-import { colors } from 'constants/styleGuide';
+import { P, B } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
-import CheckSvg from 'assets/svgs/CheckSvg';
 import BottomModal from 'components/shared/BottomModal';
+import ResultScreen from 'components/screens/ResultScreen';
+import CheckSvg from 'assets/svgs/CheckSvg';
 import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 import InfoSvg from 'assets/svgs/InfoSvg';
-
-import getExternalBlockchainApplicationRowStyles from './styles';
+import { colors } from 'constants/styleGuide';
 import ExternalApplicationDetails from '../ExternalApplicationDetails';
 import DisconnectExternalApplication from '../DisconnectExternalApplication';
+
+import getExternalBlockchainApplicationRowStyles from './styles';
 
 export default function ExternalApplicationRow({ application }) {
   const [activeAction, setActiveAction] = useState();
@@ -56,10 +57,36 @@ export default function ExternalApplicationRow({ application }) {
         );
 
       case 'disconnectSuccess':
-        return <Text>Success!</Text>;
+        return (
+          <ResultScreen
+            variant="success"
+            title="Application has now been disconnected"
+            description={
+              <P style={[styles.resultDescription, styles.theme.resultDescription]}>
+                You can always add <B>{application.peerMetadata.name}</B> again to your application
+                list.
+              </P>
+            }
+            onContinue={() => setActiveAction(undefined)}
+            buttonText="Back to connections"
+          />
+        );
 
       case 'disconnectError':
-        return <Text>Error!</Text>;
+        return (
+          <ResultScreen
+            variant="error"
+            title="Error disconnecting application"
+            description={
+              <P style={[styles.resultDescription, styles.theme.resultDescription]}>
+                There was an error trying to disconnect <B>{application.peerMetadata.name}</B>.
+                Please try again.
+              </P>
+            }
+            onContinue={() => setActiveAction('disconnect')}
+            buttonText="Try again"
+          />
+        );
 
       default:
         return null;
