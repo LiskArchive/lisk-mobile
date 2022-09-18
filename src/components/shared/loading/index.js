@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View } from 'react-native';
-import LottieView from 'lottie-react-native';
+// import LottieView from 'lottie-react-native';
 
-import progressBar from 'assets/animations/progressBar.json';
+// import progressBar from 'assets/animations/progressBar.json';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -25,12 +25,12 @@ const Loading = ({ styles, loading }) => {
 
   return (
     <View style={[styles.wrapper, visible]}>
-      <LottieView
+      {/* <LottieView
         style={styles.animation}
         source={progressBar}
         loop={loop}
         ref={animation}
-      />
+      /> */}
     </View>
   );
 };

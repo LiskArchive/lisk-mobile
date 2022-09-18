@@ -44,6 +44,7 @@ export const encryptAccount = async ({
       version: 1,
     };
   } catch (error) {
+    console.log('error', error);
     throw new Error(error);
   }
 };

@@ -6,10 +6,6 @@ NativeModules.RNCNetInfo = {
   removeListeners: jest.fn()
 };
 
-jest.mock('react-native-appearance', () => ({
-  Appearance: { getColorScheme: jest.fn() }
-}));
-
 jest.mock('react-native-gesture-handler', () => ({
   TouchableOpacity: jest.fn().mockImplementation(({ children }) => children),
   Switch: jest.fn().mockImplementation(() => null)
