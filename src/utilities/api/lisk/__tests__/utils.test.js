@@ -33,7 +33,7 @@ describe.skip('sign', () => {
   );
   const passphrase1 = 'trim elegant oven term access apple obtain error grain excite lawn neck';
   const { publicKey: publicKey1 } =
-    Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase1);
+    Lisk.cryptography.legacy.getPrivateAndPublicKeyFromPassphrase(passphrase1);
 
   const validTransaction = {
     moduleID: 2,
