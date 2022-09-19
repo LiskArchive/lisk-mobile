@@ -130,11 +130,15 @@ export default function TokenList({ mode = 'overview', style }) {
           />
         )}
         renderLoading={() => (
-          <P style={[styles.loadingText, styles.theme.loadingText]}>Loading tokens...</P>
+          <P style={[styles.loadingText, styles.theme.loadingText]}>
+            {i18next.t('accounts.loadingTokensText')}
+          </P>
         )}
         renderEmpty={() => <EmptyState message={i18next.t('accounts.emptyTokenMessage')} />}
         renderError={() => (
-          <P style={[styles.loadingText, styles.theme.loadingText]}>Error loading tokens!</P>
+          <P style={[styles.loadingText, styles.theme.loadingText]}>
+            {i18next.t('accounts.errorOnTokensText')}
+          </P>
         )}
       />
     </View>
