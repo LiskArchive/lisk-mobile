@@ -42,7 +42,7 @@ const defaultKeys = {
   publicKey: Buffer.from(publicKey, 'hex'),
 };
 
-jest.spyOn(cryptography.ed, 'getKeys').mockReturnValue(defaultKeys);
+jest.spyOn(cryptography.legacy, 'getKeys').mockReturnValue(defaultKeys);
 jest
   .spyOn(cryptography.encrypt, 'encryptMessageWithPassword')
   .mockResolvedValue(encryptedPassphrase);
