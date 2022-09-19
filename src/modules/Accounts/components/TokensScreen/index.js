@@ -13,6 +13,7 @@ import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
 import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
 
 import tokensTabStyles from './styles';
+import DataRenderer from '../../../../components/shared/DataRenderer';
 
 const TokenItem = ({ token }) => {
   const tokenBalance = Number(fromRawLsk(token.availableBalance)).toLocaleString();
@@ -37,7 +38,7 @@ const TokenItem = ({ token }) => {
 const TokensScreen = ({ t, navigation }) => {
   const [currAccount] = useCurrentAccount();
   const { address } = currAccount.metadata;
-  const { data: tokens = [], isLoading } = useAccountTokensQuery(address);
+  const { data: tokens = [], isLoading, error } = useAccountTokensQuery(address);
 
   const { styles } = useTheme({ styles: tokensTabStyles });
 
@@ -57,17 +58,24 @@ const TokensScreen = ({ t, navigation }) => {
     return lockedTokens;
   }, [tokens]);
 
-  const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
-
   return (
     <SafeAreaView style={[styles.flex, styles.theme.container]}>
       <HeaderBackButton title={'accounts.allTokens'} onPress={navigation.goBack} />
+
       <View style={styles.tokenContainer}>
-        {isEmpty && <EmptyState message={t('accounts.emptyTokenMessage')} />}
-        <FlatList
+        <DataRenderer
           data={tokens}
-          renderItem={({ item }) => <TokenItem token={item} />}
-          keyExtractor={(item) => item.tokenID}
+          isLoading={isLoading}
+          error={error}
+          renderData={(data) => (
+            <FlatList
+              data={data}
+              renderItem={({ item }) => <TokenItem token={item} />}
+              keyExtractor={(item) => item.tokenID}
+            />
+          )}
+          renderLoading={() => <P>Loading token...</P>}
+          renderEmpty={() => <EmptyState message={t('accounts.emptyTokenMessage')} />}
         />
       </View>
     </SafeAreaView>

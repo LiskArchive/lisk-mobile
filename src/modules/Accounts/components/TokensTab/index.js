@@ -1,20 +1,22 @@
 /* eslint-disable max-statements */
 import React, { memo, useMemo, useState } from 'react';
 import { TouchableOpacity, View, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
-import { P, H3 } from 'components/shared/toolBox/typography';
-import { fromRawLsk } from 'utilities/conversions';
 import { useTheme } from 'hooks/useTheme';
+import { P, H3 } from 'components/shared/toolBox/typography';
+import { LabelButton } from 'components/shared/toolBox/button';
+import DataRenderer from 'components/shared/DataRenderer';
+import EmptyState from 'components/shared/EmptyState';
 import { colors } from 'constants/styleGuide';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import TokenSvg from 'assets/svgs/TokenSvg';
-import { useNavigation } from '@react-navigation/native';
-import EmptyState from 'components/shared/EmptyState';
-import tokensTabStyles from './styles';
+import { fromRawLsk } from 'utilities/conversions';
 import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
 import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
-import DataRenderer from '../../../../components/shared/DataRenderer';
+
+import tokensTabStyles from './styles';
 
 const TokenItem = ({ token }) => {
   const { styles } = useTheme({ styles: tokensTabStyles });
@@ -37,10 +39,18 @@ const TokenItem = ({ token }) => {
 };
 
 const TokensTab = () => {
-  const [currAccount] = useCurrentAccount();
-  const { address } = currAccount.metadata;
-  const { data: tokens = [], isLoading, error } = useAccountTokensQuery(address);
   const [activeTab, setActiveTab] = useState(0);
+
+  const [currAccount] = useCurrentAccount();
+
+  const { address } = currAccount.metadata;
+
+  const {
+    data: tokens = [],
+    isLoading: isLoadingAccountTokens,
+    error: errorOnAccountTokens,
+  } = useAccountTokensQuery(address, { config: { params: { limit: 3 } } });
+
   const navigation = useNavigation();
 
   const { styles } = useTheme({ styles: tokensTabStyles });
@@ -63,11 +73,7 @@ const TokensTab = () => {
     return lockedTokens;
   }, [tokens]);
 
-  const viewAllTokens = () => navigation.navigate('Tokens');
-
   const showViewMore = useMemo(() => tokens.length, [tokens]);
-
-  console.log({ tokens, error });
 
   return (
     <View style={styles.container}>
@@ -81,6 +87,7 @@ const TokensTab = () => {
               {i18next.t('accounts.tokens')}
             </P>
           </TouchableOpacity>
+
           {hasLockedTokens && (
             <TouchableOpacity
               style={[styles.tabItem, activeTab === 1 && styles.tabItemActive]}
@@ -92,28 +99,34 @@ const TokensTab = () => {
             </TouchableOpacity>
           )}
         </View>
+
         {!!showViewMore && (
-          <TouchableOpacity style={[styles.tabItem, styles.row]} onPress={viewAllTokens}>
-            <P style={[styles.tabItemText, styles.viewAll]}>
-              {i18next.t('accounts.buttons.viewAll')}
-            </P>
-            <View style={[styles.viewIcon]}>
-              <CaretSvg
-                height={15}
-                width={15}
-                direction="right"
-                color={colors.light.ultramarineBlue}
-              />
-            </View>
-          </TouchableOpacity>
+          <LabelButton
+            onClick={() => navigation.navigate('Tokens')}
+            style={[styles.labelButton]}
+            textStyle={styles.labelButtonText}
+            adornments={{
+              right: (
+                <CaretSvg
+                  height={12}
+                  width={12}
+                  direction="right"
+                  style={{ marginLeft: 8 }}
+                  color={colors.light.ultramarineBlue}
+                />
+              ),
+            }}
+          >
+            {i18next.t('accounts.buttons.viewAll')}
+          </LabelButton>
         )}
       </View>
 
       <View style={styles.tokenContainer}>
         <DataRenderer
           data={tokens}
-          isLoading={isLoading}
-          error={error}
+          isLoading={isLoadingAccountTokens}
+          error={errorOnAccountTokens?.response?.status !== 404 && errorOnAccountTokens}
           renderData={(data) => (
             <>
               {activeTab === 0 && (
@@ -123,6 +136,7 @@ const TokensTab = () => {
                   keyExtractor={(item) => item.tokenID}
                 />
               )}
+
               {activeTab === 1 && (
                 <FlatList
                   data={lockedTokens?.slice(0, 2)}
@@ -132,7 +146,9 @@ const TokensTab = () => {
               )}
             </>
           )}
-          renderLoading={() => <P>Loading tokens...</P>}
+          renderLoading={() => (
+            <P style={[styles.loadingText, styles.theme.loadingText]}>Loading tokens...</P>
+          )}
           renderEmpty={() => <EmptyState message={i18next.t('accounts.emptyTokenMessage')} />}
         />
       </View>
