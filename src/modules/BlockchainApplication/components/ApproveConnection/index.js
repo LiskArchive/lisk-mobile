@@ -13,8 +13,7 @@ const ApproveConnection = ({ event, closeModal, sharedData: { selectedAccounts }
   const { approve, reject } = useSession();
 
   const connectHandler = async () => {
-    const status = await approve(selectedAccounts);
-    console.log('status', status);
+    await approve(selectedAccounts);
     closeModal();
   };
 

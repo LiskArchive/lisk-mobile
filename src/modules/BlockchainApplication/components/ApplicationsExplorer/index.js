@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
@@ -46,15 +46,13 @@ const actions = [
  */
 export default function BlockchainApplicationsExplorer() {
   const navigation = useNavigation();
-  const AppContext = useContext(ConnectionContext);
+  const { events } = useContext(ConnectionContext);
   const [activeTab, setActiveTab] = useState('internalApplications');
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
   const tabBarHeight = useBottomTabBarHeight();
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
   const { data } = useBlockchainApplicationStats();
-
-  console.log(AppContext);
 
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsExplorerStyles(),
@@ -67,6 +65,8 @@ export default function BlockchainApplicationsExplorer() {
   };
 
   const onCancelConnection = () => setShowBridgeAppModal(false);
+
+  const connectionEvent = useMemo(() => events[events.length - 1], [events]);
 
   return (
     <View style={styles.container}>
@@ -122,8 +122,8 @@ export default function BlockchainApplicationsExplorer() {
       <BottomModal show={showBridgeAppModal} toggleShow={() => setShowBridgeAppModal(false)}>
         <Stepper>
           <BridgeApplication />
-          <InitiateConnection event={AppContext.events[0]} closeModal={onCancelConnection} />
-          <ApproveConnection event={AppContext.events[0]} closeModal={onCancelConnection} />
+          <InitiateConnection event={connectionEvent} closeModal={onCancelConnection} />
+          <ApproveConnection event={connectionEvent} closeModal={onCancelConnection} />
         </Stepper>
       </BottomModal>
       <BottomModal show={showStatsModal} toggleShow={() => setShowStatsModal(false)}>
