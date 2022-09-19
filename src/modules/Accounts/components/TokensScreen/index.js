@@ -10,7 +10,7 @@ import TokenSvg from 'assets/svgs/TokenSvg';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import EmptyState from 'components/shared/EmptyState';
 import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
-import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens';
+import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
 
 import tokensTabStyles from './styles';
 
@@ -37,7 +37,7 @@ const TokenItem = ({ token }) => {
 const TokensScreen = ({ t, navigation }) => {
   const [currAccount] = useCurrentAccount();
   const { address } = currAccount.metadata;
-  const { data: tokens = [], isLoading } = useAccountTokens(address);
+  const { data: tokens = [], isLoading } = useAccountTokensQuery(address);
 
   const { styles } = useTheme({ styles: tokensTabStyles });
 

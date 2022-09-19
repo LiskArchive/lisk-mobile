@@ -1,7 +1,8 @@
 /* eslint-disable max-statements */
 import React, { memo, useMemo, useState } from 'react';
 import { TouchableOpacity, View, FlatList } from 'react-native';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
+
 import { P, H3 } from 'components/shared/toolBox/typography';
 import { fromRawLsk } from 'utilities/conversions';
 import { useTheme } from 'hooks/useTheme';
@@ -12,7 +13,8 @@ import { useNavigation } from '@react-navigation/native';
 import EmptyState from 'components/shared/EmptyState';
 import tokensTabStyles from './styles';
 import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
-import { useAccountTokens } from '../../hooks/useAccounts/useAccountTokens';
+import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
+import DataRenderer from '../../../../components/shared/DataRenderer';
 
 const TokenItem = ({ token }) => {
   const { styles } = useTheme({ styles: tokensTabStyles });
@@ -34,10 +36,10 @@ const TokenItem = ({ token }) => {
   );
 };
 
-const TokensTab = ({ t }) => {
+const TokensTab = () => {
   const [currAccount] = useCurrentAccount();
   const { address } = currAccount.metadata;
-  const { data: tokens = [], isLoading } = useAccountTokens(address);
+  const { data: tokens = [], isLoading, error } = useAccountTokensQuery(address);
   const [activeTab, setActiveTab] = useState(0);
   const navigation = useNavigation();
 
@@ -65,7 +67,7 @@ const TokensTab = ({ t }) => {
 
   const showViewMore = useMemo(() => tokens.length, [tokens]);
 
-  const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
+  console.log({ tokens, error });
 
   return (
     <View style={styles.container}>
@@ -76,7 +78,7 @@ const TokensTab = ({ t }) => {
             onPress={() => setActiveTab(0)}
           >
             <P style={[styles.tabItemText, activeTab === 0 && styles.tabItemTextActive]}>
-              {t('accounts.tokens')}
+              {i18next.t('accounts.tokens')}
             </P>
           </TouchableOpacity>
           {hasLockedTokens && (
@@ -85,14 +87,16 @@ const TokensTab = ({ t }) => {
               onPress={() => setActiveTab(1)}
             >
               <P style={[styles.tabItemText, activeTab === 1 && styles.tabItemTextActive]}>
-                {t('accounts.lockedTokens')}
+                {i18next.t('accounts.lockedTokens')}
               </P>
             </TouchableOpacity>
           )}
         </View>
         {!!showViewMore && (
           <TouchableOpacity style={[styles.tabItem, styles.row]} onPress={viewAllTokens}>
-            <P style={[styles.tabItemText, styles.viewAll]}>{t('accounts.buttons.viewAll')}</P>
+            <P style={[styles.tabItemText, styles.viewAll]}>
+              {i18next.t('accounts.buttons.viewAll')}
+            </P>
             <View style={[styles.viewIcon]}>
               <CaretSvg
                 height={15}
@@ -104,25 +108,36 @@ const TokensTab = ({ t }) => {
           </TouchableOpacity>
         )}
       </View>
+
       <View style={styles.tokenContainer}>
-        {isEmpty && <EmptyState message={t('accounts.emptyTokenMessage')} />}
-        {activeTab === 0 && (
-          <FlatList
-            data={tokens?.slice(0, 2)}
-            renderItem={({ item }) => <TokenItem token={item} />}
-            keyExtractor={(item) => item.tokenID}
-          />
-        )}
-        {activeTab === 1 && (
-          <FlatList
-            data={lockedTokens?.slice(0, 2)}
-            renderItem={({ item }) => <TokenItem token={item} />}
-            keyExtractor={(item) => item.tokenID}
-          />
-        )}
+        <DataRenderer
+          data={tokens}
+          isLoading={isLoading}
+          error={error}
+          renderData={(data) => (
+            <>
+              {activeTab === 0 && (
+                <FlatList
+                  data={data.slice(0, 2)}
+                  renderItem={({ item }) => <TokenItem token={item} />}
+                  keyExtractor={(item) => item.tokenID}
+                />
+              )}
+              {activeTab === 1 && (
+                <FlatList
+                  data={lockedTokens?.slice(0, 2)}
+                  renderItem={({ item }) => <TokenItem token={item} />}
+                  keyExtractor={(item) => item.tokenID}
+                />
+              )}
+            </>
+          )}
+          renderLoading={() => <P>Loading tokens...</P>}
+          renderEmpty={() => <EmptyState message={i18next.t('accounts.emptyTokenMessage')} />}
+        />
       </View>
     </View>
   );
 };
 
-export default memo(translate()(TokensTab));
+export default memo(TokensTab);
