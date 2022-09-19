@@ -28,7 +28,7 @@ const ApproveConnection = ({ event, closeModal, sharedData: { selectedAccounts }
       methods.push(...method.methods)
     );
     return methods;
-  }, [event.meta.params?.requiredNamespaces]);
+  }, [event?.meta?.params?.requiredNamespaces]);
 
   if (!event) {
     return null;
