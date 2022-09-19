@@ -4,6 +4,7 @@ import { setColorOpacity } from 'utilities/helpers';
 export default {
   common: {
     container: {
+      flex: 1,
       padding: boxes.boxPadding,
     },
     title: {

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { View } from 'react-native-interactable';
+/* eslint-disable max-statements */
+import React, { useState, useContext } from 'react';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
+import Stepper from 'components/shared/Stepper';
 
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'hooks/useTheme';
@@ -24,6 +26,9 @@ import ExternalApplicationList from '../ExternalApplicationList';
 
 import getBlockchainApplicationsExplorerStyles from './styles';
 import BridgeApplication from '../BridgeApplication';
+import InitiateConnection from '../InitiateConnection';
+import ApproveConnection from '../ApproveConnection';
+import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
 
 const actions = [
   {
@@ -41,13 +46,15 @@ const actions = [
  */
 export default function BlockchainApplicationsExplorer() {
   const navigation = useNavigation();
-
+  const AppContext = useContext(ConnectionContext);
   const [activeTab, setActiveTab] = useState('internalApplications');
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
   const tabBarHeight = useBottomTabBarHeight();
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
   const { data } = useBlockchainApplicationStats();
+
+  console.log(AppContext);
 
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsExplorerStyles(),
@@ -58,6 +65,8 @@ export default function BlockchainApplicationsExplorer() {
       setShowBridgeAppModal(true);
     }
   };
+
+  const onCancelConnection = () => setShowBridgeAppModal(false);
 
   return (
     <View style={styles.container}>
@@ -110,18 +119,14 @@ export default function BlockchainApplicationsExplorer() {
         </View>
       </NavigationSafeAreaView>
 
-      <BottomModal
-        show={showBridgeAppModal}
-        toggleShow={() => setShowBridgeAppModal(false)}
-        style={{ container: styles.bridgeModal }}
-      >
-        <BridgeApplication />
+      <BottomModal show={showBridgeAppModal} toggleShow={() => setShowBridgeAppModal(false)}>
+        <Stepper>
+          <BridgeApplication />
+          <InitiateConnection event={AppContext.events[0]} closeModal={onCancelConnection} />
+          <ApproveConnection event={AppContext.events[0]} closeModal={onCancelConnection} />
+        </Stepper>
       </BottomModal>
-      <BottomModal
-        show={showStatsModal}
-        toggleShow={() => setShowStatsModal(false)}
-        style={{ container: styles.statsModal }}
-      >
+      <BottomModal show={showStatsModal} toggleShow={() => setShowStatsModal(false)}>
         <ApplicationsStats
           totalSupply={data.totalSupplyLSK}
           staked={data.stakedLSK}

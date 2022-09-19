@@ -1,10 +1,9 @@
 import { themes, colors } from 'constants/styleGuide';
-import { deviceWidth } from 'utilities/device';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {
     container: {
-      height: deviceWidth(),
       zIndex: 3,
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
@@ -12,6 +11,10 @@ export default () => ({
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    overlay: {
+      flex: 1,
+      justifyContent: 'flex-end',
     },
     closeButtonContainer: {
       alignSelf: 'flex-end',
@@ -37,6 +40,9 @@ export default () => ({
     closeButtonContainer: {
       backgroundColor: colors.light.platinumGray,
     },
+    overlay: {
+      backgroundColor: setColorOpacity(colors.light.black, 0.7),
+    },
   },
 
   [themes.dark]: {
@@ -48,6 +54,9 @@ export default () => ({
     },
     closeButtonContainer: {
       backgroundColor: colors.dark.volcanicSand,
+    },
+    overlay: {
+      backgroundColor: setColorOpacity(colors.dark.volcanicSand, 0.7),
     },
   },
 });

@@ -1,4 +1,11 @@
 {
+  "commons": {
+    "secret_recovery_phrase": "",
+    "buttons": {
+      "continue": "",
+      "cancel": ""
+    }
+  },
   "Sign in manually": "Manuell anmelden",
   "Signing in...": "Anmelden...",
   "1. Creating your account": "1. Konto wird erstellt",
@@ -388,7 +395,12 @@
         "emptyText": "Sie haben noch keine externen Verbindungen.",
         "detailsText": "Info",
         "disconnectText": "Trennen",
-        "chainIDLabel": "Chain ID"
+        "chainIDLabel": "",
+        "connectionID": "",
+        "sitePermissions": "",
+        "methods": "",
+        "connectionDescription": "",
+        "accountsTitle": ""
       }
     }
   },

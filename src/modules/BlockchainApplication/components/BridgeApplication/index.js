@@ -8,14 +8,17 @@ import i18next from 'i18next';
 import getStyles from './styles';
 import usePairings from '../../../../../libs/wcm/hooks/usePairings';
 
-const BridgeApplication = () => {
+const BridgeApplication = ({ nextStep }) => {
   const { setUri } = usePairings();
 
   const { styles } = useTheme({ styles: getStyles });
-  const [inputUri, setInputUri] = useState('');
+  const [inputUri, setInputUri] = useState(
+    'wc:3a8c0404ffbc210e0e96ed798d423adde96ea53df4eb94bb40543224db771d57@2?relay-protocol=iridium&symKey=93b5b7f2a878ae3071c9b12c218ba01e1c71c4781f275ef213b6faa631271177'
+  );
 
   const onSubmit = () => {
     setUri(inputUri);
+    nextStep();
   };
 
   return (

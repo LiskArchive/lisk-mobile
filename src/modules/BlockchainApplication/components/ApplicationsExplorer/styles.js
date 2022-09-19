@@ -1,5 +1,3 @@
-import { Dimensions } from 'react-native';
-
 import { themes, colors } from 'constants/styleGuide';
 
 export default function getBlockchainApplicationsExplorerStyles() {
@@ -21,9 +19,6 @@ export default function getBlockchainApplicationsExplorerStyles() {
       },
       message: {
         padding: 20,
-      },
-      statsModal: {
-        height: Dimensions.get('window').height / 1.6,
       },
       bridgeModal: {
         height: 350,
