@@ -1,12 +1,12 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Stepper from 'components/shared/Stepper';
 
-import { useNavigation } from '@react-navigation/native';
 import { getSendTokenStyles } from './styles';
 import SendTokenApplicationsStep from './components/SelectApplicationsStep';
 import SendTokenSelectTokenStep from './components/SelectTokenStep';
@@ -17,7 +17,7 @@ import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisigna
 export default function SendToken({ route }) {
   const navigation = useNavigation();
 
-  const account = useSelector(state => state.account);
+  const account = useSelector((state) => state.account);
 
   const { styles } = useTheme({
     styles: getSendTokenStyles(),
@@ -28,15 +28,15 @@ export default function SendToken({ route }) {
   const steps = [
     {
       component: SendTokenApplicationsStep,
-      title: 'selectApplications'
+      title: 'selectApplications',
     },
     {
       component: SendTokenSelectTokenStep,
-      title: 'selectToken'
+      title: 'selectToken',
     },
     {
       component: SendTokenSummaryStep,
-      title: 'summary'
+      title: 'summary',
     },
   ];
 
@@ -47,24 +47,18 @@ export default function SendToken({ route }) {
       <HeaderBackButton
         title="Send token"
         onPress={navigation.goBack}
-        containerStyle={{ marginBottom: 24 }}
+        containerStyle={[styles.header]}
       />
 
       {accountIsMultisignature ? (
         <SendTokenOnMultisignatureAccount />
       ) : (
-        <Stepper showProgressBar >
-          {steps.map(step => (
-            <step.component
-              key={step.title}
-              navigation={navigation}
-              route={route}
-              form={form}
-            />
+        <Stepper showProgressBar styles={{ progressBar: { wrapper: styles.progressBar } }}>
+          {steps.map((step) => (
+            <step.component key={step.title} navigation={navigation} route={route} form={form} />
           ))}
         </Stepper>
       )}
-
     </SafeAreaView>
   );
 }

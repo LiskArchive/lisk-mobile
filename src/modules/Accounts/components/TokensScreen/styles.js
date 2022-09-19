@@ -7,7 +7,7 @@ export default {
       flex: 1,
     },
     rightContent: {
-      alignItems: 'flex-end'
+      alignItems: 'flex-end',
     },
     tokenTitle: {
       marginLeft: 10,
@@ -16,7 +16,7 @@ export default {
       flexDirection: 'row',
     },
     alignCenter: {
-      alignItems: 'center'
+      alignItems: 'center',
     },
     viewIcon: {
       marginLeft: 5,
@@ -29,7 +29,7 @@ export default {
       borderWidth: 1,
       borderRadius: 10,
       padding: 10,
-      borderColor: colors.light.platinumGray
+      borderColor: colors.light.platinumGray,
     },
   },
   [themes.light]: {
@@ -37,21 +37,21 @@ export default {
       backgroundColor: colors.light.white,
     },
     tokenTitle: {
-      color: colors.light.zodiacBlue
+      color: colors.light.zodiacBlue,
     },
     currency: {
-      color: setColorOpacity(colors.light.zodiacBlue, 0.7)
-    }
+      color: setColorOpacity(colors.light.zodiacBlue, 0.7),
+    },
   },
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.mainBg,
     },
     tokenTitle: {
-      color: colors.dark.white
+      color: colors.dark.white,
     },
     currency: {
-      color: setColorOpacity(colors.light.white, 0.7)
-    }
-  }
+      color: setColorOpacity(colors.light.white, 0.7),
+    },
+  },
 };

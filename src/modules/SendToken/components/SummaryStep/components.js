@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
+import BottomModal from 'components/shared/BottomModal';
 
-import getSendTokenSummaryStepStyles from './styles';
 import ConfirmAndSignTransaction from '../ConfirmAndSignTransaction';
 import SendTokenSuccess from '../SendTokenSuccess';
 import SendTokenError from '../SendTokenError';
-import BottomModal from '../../../../components/shared/BottomModal';
+import getSendTokenSummaryStepStyles from './styles';
 
 export function SendTokenSummaryModal({
   show,
@@ -15,11 +15,12 @@ export function SendTokenSummaryModal({
   summary,
   form,
   handleResetForm,
-  handleResetStepper
+  handleResetStepper,
 }) {
   const navigation = useNavigation();
 
   const [activeStep, setActiveStep] = useState('confirmAndSignTransaction');
+  const [error, setError] = useState();
 
   const { styles } = useTheme({
     styles: getSendTokenSummaryStepStyles(),
@@ -52,7 +53,10 @@ export function SendTokenSummaryModal({
             token={summary.token}
             form={form}
             onSuccess={() => setActiveStep('sendTokenSuccess')}
-            onError={() => setActiveStep('sendTokenError')}
+            onError={(_error) => {
+              setError(_error);
+              setActiveStep('sendTokenError');
+            }}
           />
         );
 
@@ -75,6 +79,7 @@ export function SendTokenSummaryModal({
               handleResetStepper();
               setShow(false);
             }}
+            error={error}
           />
         );
 
@@ -88,12 +93,12 @@ export function SendTokenSummaryModal({
       style={{
         container: [
           styles.confirmAndSignTransactionModal,
-          styles.theme.confirmAndSignTransactionModal
-        ]
+          styles.theme.confirmAndSignTransactionModal,
+        ],
       }}
       isOpen={show}
-      onClosed={handleOnProcessCompleted}
-      >
+      toggleShow={handleOnProcessCompleted}
+    >
       {renderStep()}
     </BottomModal>
   );

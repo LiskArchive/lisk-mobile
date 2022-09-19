@@ -19,9 +19,7 @@ import { ItemTitle } from './components';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
-const Settings = ({
-  styles, theme, navigation, settings, t, settingsUpdated
-}) => {
+const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -65,10 +63,7 @@ const Settings = ({
   );
   return (
     <NavigationSafeAreaView>
-       <HeaderBackButton
-        title={t('Settings')}
-        noIcon
-      />
+      <HeaderBackButton title={t('Settings')} noIcon />
 
       <ScrollView style={styles.innerContainer}>
         <View style={styles.group}>

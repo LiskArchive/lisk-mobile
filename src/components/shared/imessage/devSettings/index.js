@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  NativeModules, View, TouchableHighlight, Text
-} from 'react-native';
+import { NativeModules, View, TouchableHighlight, Text } from 'react-native';
 import styles from './styles';
 
 class DevSettings extends React.Component {
@@ -39,19 +37,13 @@ class DevSettings extends React.Component {
 
     return (
       <View style={styles.wrapper}>
-        <TouchableHighlight
-          style={styles.button}
-          onPress={this.onToggleRemoteDebugging}
-        >
+        <TouchableHighlight style={styles.button} onPress={this.onToggleRemoteDebugging}>
           <Text style={styles.buttonText}>
             {remoteDebuggingEnabled ? 'Disable' : 'Enable'} Remote Debugging
           </Text>
         </TouchableHighlight>
 
-        <TouchableHighlight
-          style={styles.button}
-          onPress={this.onToggleLiveReload}
-        >
+        <TouchableHighlight style={styles.button} onPress={this.onToggleLiveReload}>
           <Text style={styles.buttonText}>
             {liveReloadEnabled ? 'Disable' : 'Enable'} Live Reload
           </Text>

@@ -5,9 +5,7 @@ import getStyles from './styles';
 
 const Banner = ({ styles, children }) => (
   <View style={[styles.container, styles.theme.container]}>
-    <SafeAreaView style={styles.flex} >
-      {children}
-    </SafeAreaView>
+    <SafeAreaView style={styles.flex}>{children}</SafeAreaView>
   </View>
 );
 

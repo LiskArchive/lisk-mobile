@@ -1,74 +1,54 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
-import { translate } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
+
 import { useTheme } from 'hooks/useTheme';
-import { useSearch } from 'hooks/useSearch';
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import DataRenderer from 'components/shared/DataRenderer';
 import { P } from 'components/shared/toolBox/typography';
-import { colors, themes } from 'constants/styleGuide';
-import Input from 'components/shared/toolBox/input';
-import Icon from 'components/shared/toolBox/icon';
+
 import getBlockchainApplicationsListStyles from './styles';
 
-function ApplicationList({
-  t, applications, Component, onItemPress, navigation, ...props
+export default function BlockchainApplicationList({
+  applications,
+  Component,
+  onItemPress,
+  style,
+  ...props
 }) {
-  const { theme, styles } = useTheme({
+  const navigation = useNavigation();
+
+  const { styles } = useTheme({
     styles: getBlockchainApplicationsListStyles(),
   });
 
-  const { term, setTerm } = useSearch();
-
   return (
-    <View style={[styles.innerContainer, styles.theme.innerContainer]}>
-      <View style={styles.searchContainer}>
-        <Icon
-          style={styles.searchIcon}
-          name="search"
-          size={18}
-          color={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
+    <DataRenderer
+      data={applications.data}
+      isLoading={applications.isLoading}
+      error={applications.error}
+      renderData={(data) => (
+        <InfiniteScrollList
+          data={data}
+          keyExtractor={(item) => item.chainID}
+          renderItem={(item) => (
+            <Component
+              application={item}
+              navigation={navigation}
+              key={item.chainID}
+              image={item.logo.png}
+              showPinned={true}
+              onPress={() => onItemPress(item)}
+              {...props}
+            />
+          )}
         />
-        <Input
-          placeholder={t('application.explore.applicationList.searchPlaceholder')}
-          autoCorrect={false}
-          autoFocus
-          innerStyles={{
-            input: [styles.input],
-            containerStyle: [styles.inputContainer],
-          }}
-          placeholderTextColor={
-            theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
-          }
-          onChange={(value) => setTerm(value)}
-          value={term}
-          returnKeyType="search"
-        />
-      </View>
-
-      <View style={styles.body}>
-        {applications.isLoading ? (
-          <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-            {t('application.explore.applicationList.loadingText')}
-          </P>
-        ) : (
-          <FlatList
-            data={applications.data}
-            keyExtractor={(item) => item.chainID}
-            renderItem={({ item }) => (
-              <Component
-                application={item}
-                navigation={navigation}
-                key={item.chainID}
-                image={item.images?.logo.png}
-                showPinned={true}
-                onPress={() => onItemPress(item)}
-                {...props}
-              />
-            )}
-          />
-        )}
-      </View>
-    </View>
+      )}
+      renderLoading={() => (
+        <P style={[styles.text, styles.theme.text, style?.text]}>
+          {i18next.t('application.explore.applicationList.loadingText')}
+        </P>
+      )}
+    />
   );
 }
-
-export default translate()(ApplicationList);

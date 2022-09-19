@@ -16,37 +16,39 @@ const Success = ({ t, hideNav }) => {
     hideNav();
     setOptions({
       headerLeft: () => <HeaderPlaceholderButton />,
-      title: t('Perfect! You’re all set')
+      title: t('Perfect! You’re all set'),
     });
   }, []);
 
-  return <SafeAreaView style={styles.wrapper}>
-    <View style={styles.container}>
-      <View>
-        <View style={styles.titleContainer}>
-          <P style={styles.subTitle}>
-            {t('Great! now you can use your passphrase to sign in to your account.')}
-          </P>
+  return (
+    <SafeAreaView style={styles.wrapper}>
+      <View style={styles.container}>
+        <View>
+          <View style={styles.titleContainer}>
+            <P style={styles.subTitle}>
+              {t('Great! now you can use your passphrase to sign in to your account.')}
+            </P>
+          </View>
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={image} />
+          </View>
         </View>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={image} />
+        <View>
+          <PrimaryButton
+            testID="registerSuccess"
+            style={styles.button}
+            onClick={() =>
+              navigation.reset({
+                index: 0,
+                routes: [{ name: 'Main' }],
+              })
+            }
+            title={t('Sign in now')}
+          />
         </View>
       </View>
-      <View>
-        <PrimaryButton
-          testID="registerSuccess"
-          style={styles.button}
-          onClick={() =>
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'Main' }]
-            })
-          }
-          title={t('Sign in now')}
-        />
-      </View>
-    </View>
-  </SafeAreaView>;
+    </SafeAreaView>
+  );
 };
 
 export default translate()(Success);

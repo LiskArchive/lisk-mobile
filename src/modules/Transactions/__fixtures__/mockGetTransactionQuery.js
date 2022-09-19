@@ -5,6 +5,6 @@ export const mockGetTransactionQuery = {
   meta: {
     count: 1,
     offset: 0,
-    total: 1
+    total: 1,
   },
 };

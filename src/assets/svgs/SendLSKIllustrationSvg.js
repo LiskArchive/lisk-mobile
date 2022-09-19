@@ -1,19 +1,9 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 
-export default function SendLSKIllustrationSvg({
-  height = 123,
-  width = 251,
-  style
-}) {
+export default function SendLSKIllustrationSvg({ height = 123, width = 251, style }) {
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 251 123"
-      fill="none"
-      style={style}
-    >
+    <Svg width={width} height={height} viewBox="0 0 251 123" fill="none" style={style}>
       <Path
         d="M225.366 96.868V71.4759H199.98V46.0838H164.667V122.29H250.722V96.868H225.366Z"
         fill="#2BD67B"

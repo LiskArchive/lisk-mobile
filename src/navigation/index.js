@@ -27,11 +27,12 @@ import AddApplication from 'modules/BlockchainApplication/components/AddApplicat
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
 import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
 import SendToken from 'modules/SendToken';
-import Request from 'modules/Request';
+import RequestToken from 'modules/RequestToken';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import navigationOptions from './navigationOptions';
 import AppNavigator from './components/AppNavigator';
+import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEventsManager';
 
 const MainStack = createStackNavigator();
 
@@ -60,8 +61,10 @@ const MainNavigator = () => {
     colors: theme === 'light' ? darkTabs : lightTabs,
   };
 
+  useWalletConnectEventsManager();
+
   return (
-    <SafeAreaProvider >
+    <SafeAreaProvider>
       <NavigationContainer theme={themeColors}>
         <MainStack.Navigator initialRouteName="AuthMethod">
           <MainStack.Screen
@@ -165,7 +168,7 @@ const MainNavigator = () => {
           />
           <MainStack.Screen
             name="Request"
-            component={Request}
+            component={RequestToken}
             options={navigationOptions.NoHeader}
           />
           <MainStack.Screen

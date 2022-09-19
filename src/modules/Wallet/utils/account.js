@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import { passphrase as LiskPassphrase, cryptography } from '@liskhq/lisk-client';
 import regex from 'constants/regex';
-import { getCustomDerivationKeyPair } from 'utilities/explicitBipKeyDerivation';
 
 /**
  * Extracts Lisk PrivateKey/PublicKey pair from a given valid Mnemonic passphrase
@@ -11,19 +10,26 @@ import { getCustomDerivationKeyPair } from 'utilities/explicitBipKeyDerivation';
  * @param {String} derivationPath - custom derivation path for HW
  * @returns {object} - Extracted publicKey for a given valid passphrase
  */
-export const extractKeyPair = ({
-  passphrase, enableCustomDerivationPath = false, derivationPath,
+export const extractKeyPair = async ({
+  passphrase,
+  enableCustomDerivationPath = false,
+  derivationPath,
 }) => {
   if (enableCustomDerivationPath) {
-    const keyPair = getCustomDerivationKeyPair(passphrase, derivationPath);
+    const privateKey = await cryptography.ed.getKeyPairFromPhraseAndPath(
+      passphrase,
+      derivationPath
+    );
+    const publicKey = cryptography.ed.getPublicKeyFromPrivateKey(privateKey).toString('hex');
     return {
-      ...keyPair,
+      publicKey,
+      privateKey: privateKey.toString('hex'),
       isValid: true,
     };
   }
 
   if (LiskPassphrase.Mnemonic.validateMnemonic(passphrase)) {
-    const keyPair = cryptography.ed.getKeys(passphrase);
+    const keyPair = cryptography.legacy.getKeys(passphrase);
     return {
       publicKey: keyPair.publicKey.toString('hex'),
       privateKey: keyPair.privateKey.toString('hex'),
@@ -42,7 +48,9 @@ export const extractKeyPair = ({
  * @returns {String?} - Extracted publicKey for a given valid passphrase
  */
 export const extractPublicKey = (
-  passphrase, enableCustomDerivationPath = false, derivationPath,
+  passphrase,
+  enableCustomDerivationPath = false,
+  derivationPath
 ) => {
   const keyPair = extractKeyPair({ passphrase, enableCustomDerivationPath, derivationPath });
 
@@ -62,7 +70,9 @@ export const extractPublicKey = (
  * @returns {String?} - Extracted PrivateKey for a given valid passphrase
  */
 export const extractPrivateKey = (
-  passphrase, enableCustomDerivationPath = false, derivationPath,
+  passphrase,
+  enableCustomDerivationPath = false,
+  derivationPath
 ) => {
   const keyPair = extractKeyPair({ passphrase, enableCustomDerivationPath, derivationPath });
 
@@ -151,7 +161,7 @@ export const truncateAddress = (address, size) => {
  * @returns {Number} - Sum of vote amounts
  */
 export const calculateBalanceLockedInVotes = (votes = {}) =>
-  Object.values(votes).reduce((total, vote) => (total + vote.confirmed), 0);
+  Object.values(votes).reduce((total, vote) => total + vote.confirmed, 0);
 
 /**
  * calculates balance locked for the account in unvotes
@@ -182,8 +192,9 @@ export const isBlockHeightReached = (unlockHeight, currentBlockHeight) =>
  * @returns {Array} Array of LSK rows available to unlock
  */
 export const getUnlockableUnlockObjects = (unlocking = [], currentBlockHeight = 0) =>
-  unlocking.filter(vote => isBlockHeightReached(vote.height.end, currentBlockHeight))
-    .map(vote => ({
+  unlocking
+    .filter((vote) => isBlockHeightReached(vote.height.end, currentBlockHeight))
+    .map((vote) => ({
       delegateAddress: vote.delegateAddress,
       amount: vote.amount,
       unvoteHeight: Number(vote.height.start),
@@ -199,9 +210,10 @@ export const getUnlockableUnlockObjects = (unlocking = [], currentBlockHeight = 
 export const calculateUnlockableBalance = (unlocking = [], currentBlockHeight = 0) =>
   unlocking.reduce(
     (sum, vote) =>
-      (isBlockHeightReached(vote.height.end, currentBlockHeight)
-        ? sum + parseInt(vote.amount, 10) : sum),
-    0,
+      isBlockHeightReached(vote.height.end, currentBlockHeight)
+        ? sum + parseInt(vote.amount, 10)
+        : sum,
+    0
   );
 
 /**
@@ -214,18 +226,20 @@ export const calculateUnlockableBalance = (unlocking = [], currentBlockHeight = 
 export const calculateBalanceUnlockableInTheFuture = (unlocking = [], currentBlockHeight = 0) =>
   unlocking.reduce(
     (sum, vote) =>
-      (!isBlockHeightReached(vote.height.end, currentBlockHeight)
-        ? sum + parseInt(vote.amount, 10) : sum),
-    0,
+      !isBlockHeightReached(vote.height.end, currentBlockHeight)
+        ? sum + parseInt(vote.amount, 10)
+        : sum,
+    0
   );
 
 export const calculateRemainingAndSignedMembers = (
   keys = { optionalKeys: [], mandatoryKeys: [] },
   signaturesInTransaction = [],
-  ignoreFirstSignature = false,
+  ignoreFirstSignature = false
 ) => {
   const signatures = ignoreFirstSignature
-    ? signaturesInTransaction.slice(1) : signaturesInTransaction;
+    ? signaturesInTransaction.slice(1)
+    : signaturesInTransaction;
   const { mandatoryKeys, optionalKeys } = keys;
   const signed = [];
   const remaining = [];
@@ -233,7 +247,9 @@ export const calculateRemainingAndSignedMembers = (
   mandatoryKeys.forEach((key, index) => {
     const hasSigned = Boolean(signatures[index]);
     const value = {
-      publicKey: key, mandatory: true, address: extractAddressFromPublicKey(key),
+      publicKey: key,
+      mandatory: true,
+      address: extractAddressFromPublicKey(key),
     };
 
     if (hasSigned) {
@@ -246,7 +262,9 @@ export const calculateRemainingAndSignedMembers = (
   optionalKeys.forEach((key, index) => {
     const hasSigned = Boolean(signatures[index + mandatoryKeys.length]);
     const value = {
-      publicKey: key, mandatory: false, address: extractAddressFromPublicKey(key),
+      publicKey: key,
+      mandatory: false,
+      address: extractAddressFromPublicKey(key),
     };
 
     if (hasSigned) {

@@ -13,16 +13,16 @@ export default () => ({
     },
     flex: {
       flex: 1,
-    }
+    },
   },
   [themes.light]: {
     container: {
-      backgroundColor: colors.light.inkBlue
-    }
+      backgroundColor: colors.light.inkBlue,
+    },
   },
   [themes.dark]: {
     container: {
-      backgroundColor: colors.dark.inkBlue
-    }
-  }
+      backgroundColor: colors.dark.inkBlue,
+    },
+  },
 });

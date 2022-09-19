@@ -45,7 +45,7 @@ export function useGetTokensQuery(address) {
             address,
             count: 10,
             offset: 0,
-            total: 120
+            total: 120,
           },
         });
       }, 250);

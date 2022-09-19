@@ -22,7 +22,7 @@ export default function TransactionsHistory() {
         containerStyle={styles.header}
       />
 
-      <TransactionList mode="full" style={{ container: styles.listContainer }}/>
+      <TransactionList mode="full" style={{ container: styles.listContainer }} />
     </SafeAreaView>
   );
 }

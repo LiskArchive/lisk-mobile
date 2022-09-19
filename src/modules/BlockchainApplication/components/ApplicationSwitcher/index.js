@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  View, Animated, Image, TouchableOpacity
-} from 'react-native';
+import { View, Animated, Image, TouchableOpacity } from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
 import ChangeSvg from 'assets/svgs/ChangeSvg';
@@ -14,20 +12,11 @@ const ApplicationSwitcher = ({ onPress }) => {
 
   return (
     <View style={styles.switcherContainer}>
-      <TouchableOpacity onPress={onPress} >
+      <TouchableOpacity onPress={onPress}>
         <View style={[styles.container, styles.theme.container]}>
-          <Animated.View
-            style={[
-              styles.switch,
-            ]}
-          >
-            <Image
-              source={{ uri: currentApplication.images?.logo.png }}
-              style={[styles.avatar]}
-            />
-            <P style={[styles.appName, styles.theme.appName]}>
-              {currentApplication.name}
-            </P>
+          <Animated.View style={[styles.switch]}>
+            <Image source={{ uri: currentApplication.logo.png }} style={[styles.avatar]} />
+            <P style={[styles.appName, styles.theme.appName]}>{currentApplication.chainName}</P>
             <View style={styles.iconContainer}>
               <ChangeSvg />
             </View>

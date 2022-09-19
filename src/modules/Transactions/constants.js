@@ -17,7 +17,7 @@ const COMMANDS = {
   updateGeneratorKey: 'updateGeneratorKey',
   voteDelegate: 'voteDelegate',
   reclaimLSK: 'reclaimLSK',
-  registerkeys: 'registerkeys'
+  registerkeys: 'registerkeys',
 };
 
 export const MODULE_COMMAND_NAMES = {

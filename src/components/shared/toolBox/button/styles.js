@@ -1,6 +1,4 @@
-import {
-  themes, fonts, colors, boxes
-} from 'constants/styleGuide';
+import { themes, fonts, colors, boxes } from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -33,6 +31,9 @@ export default () => ({
       borderColor: colors.light.ghost,
       borderWidth: 1,
       borderRadius: 10,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     buttonText: {
       color: colors.light.maastrichtBlue,

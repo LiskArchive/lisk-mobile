@@ -23,7 +23,7 @@ class LiskMessageExtension extends Component {
   };
 
   validator = {
-    address: str => {
+    address: (str) => {
       if (str === '') return 2;
       return reg.address.test(str) ? 0 : 1;
     },
@@ -31,10 +31,7 @@ class LiskMessageExtension extends Component {
 
   componentDidMount() {
     const { MessagesEvents, inputAddress } = this.props;
-    MessagesEvents.addListener(
-      'didStartSendingMessage',
-      this.onStartSendingMessage
-    );
+    MessagesEvents.addListener('didStartSendingMessage', this.onStartSendingMessage);
     this.setAddress(inputAddress.value);
   }
 
@@ -47,7 +44,7 @@ class LiskMessageExtension extends Component {
     );
   };
 
-  setAddress = value => {
+  setAddress = (value) => {
     clearTimeout(this.avatarPreviewTimeout);
     const validity = this.validator.address(value);
 
@@ -67,8 +64,7 @@ class LiskMessageExtension extends Component {
   changePicker = (itemValue, itemIndex) => {
     this.setState({
       amount: { validity: -1 },
-      num: this.state.num.map((item, index) =>
-        index === itemIndex ? itemValue : item),
+      num: this.state.num.map((item, index) => (index === itemIndex ? itemValue : item)),
     });
   };
 
@@ -101,15 +97,13 @@ class LiskMessageExtension extends Component {
   };
 
   render() {
-    const {
-      address, avatarPreview, num, amount
-    } = this.state;
+    const { address, avatarPreview, num, amount } = this.state;
 
     const { inputAddress, keyBoardFocused, presentationStyle } = this.props;
 
     const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const pickerActiveColor = amount.validity === -1
-      ? colors.light.black : colors.light.burntSieanna;
+    const pickerActiveColor =
+      amount.validity === -1 ? colors.light.black : colors.light.burntSieanna;
 
     return (
       <Fragment>
@@ -119,9 +113,7 @@ class LiskMessageExtension extends Component {
         <View style={styles.rowContainer}>
           <Small style={styles.pickerCurrency}>LSK</Small>
           <View style={styles.innerContainer}>
-            <Text style={[styles.pickerPoint, { color: pickerActiveColor }]}>
-              .
-            </Text>
+            <Text style={[styles.pickerPoint, { color: pickerActiveColor }]}>.</Text>
             {num.map((val, index) => (
               <Picker
                 key={index}
@@ -129,18 +121,14 @@ class LiskMessageExtension extends Component {
                 style={styles.pickers}
                 itemStyle={styles.pickerItem}
                 itemTextStyle={{ fontSize: 18, color: 'blue' }}
-                onValueChange={itemValue => this.changePicker(itemValue, index)}
+                onValueChange={(itemValue) => this.changePicker(itemValue, index)}
               >
-                {data.map(item => (
+                {data.map((item) => (
                   <Picker.Item
                     key={item}
                     label={item.toString()}
                     value={item}
-                    color={
-                      num[index] === item
-                        ? pickerActiveColor
-                        : 'rgba(0, 0, 0, 0.3)'
-                    }
+                    color={num[index] === item ? pickerActiveColor : 'rgba(0, 0, 0, 0.3)'}
                   />
                 ))}
               </Picker>
@@ -154,11 +142,7 @@ class LiskMessageExtension extends Component {
         </View>
         <View style={styles.addressContainer}>
           {avatarPreview && this.props.avatarPreview ? (
-            <Avatar
-              style={styles.avatar}
-              address={address.value || inputAddress.value}
-              size={30}
-            />
+            <Avatar style={styles.avatar} address={address.value || inputAddress.value} size={30} />
           ) : (
             <Icon
               style={styles.avatar}
@@ -170,7 +154,7 @@ class LiskMessageExtension extends Component {
           <Input
             autoCorrect={false}
             placeholder="Enter a address"
-            reference={input => {
+            reference={(input) => {
               this.input = input;
             }}
             onChange={this.setAddress}

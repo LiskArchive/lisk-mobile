@@ -32,9 +32,7 @@ async function readFiles(config) {
   const translations = {};
   async function read() {
     const i = Object.keys(translations).length;
-    translations[config.lng[i]] = await readFile(
-      `${config.outputPath}/${config.lng[i]}.json`
-    );
+    translations[config.lng[i]] = await readFile(`${config.outputPath}/${config.lng[i]}.json`);
     if (i < config.lng.length - 1) await read();
   }
   await read();
@@ -76,9 +74,9 @@ function parse(config, oldTranslations) {
   });
 
   config.files
-    .map(filePattern => glob.sync(filePattern, {}))
+    .map((filePattern) => glob.sync(filePattern, {}))
     .reduce((accumulator, files) => [...accumulator, ...files], [])
-    .forEach(file => {
+    .forEach((file) => {
       const content = fs.readFileSync(file, 'utf-8');
       parser.parseFuncFromString(
         content,
@@ -91,7 +89,7 @@ function parse(config, oldTranslations) {
   const oldKeys = Object.keys(oldTranslations);
   // filter by new key to find the new translations
   const newKeys = Object.keys(translations)
-    .filter(key => !oldKeys.includes(key))
+    .filter((key) => !oldKeys.includes(key))
     .reduce((accumulator, key) => {
       accumulator[key] = '';
       return accumulator;
@@ -111,17 +109,17 @@ function parse(config, oldTranslations) {
  * @param {Object} newKeys - New translation keys parsed from the jsx files
  */
 async function writeFile(config, language, resources, rawOldKeys, newKeys) {
-  const additionalKeys = language === config.defaultLng
-    ? Object.keys(newKeys).reduce((acc, key) => {
-      acc[key] = key;
-      return acc;
-    }, {})
-    : newKeys;
+  const additionalKeys =
+    language === config.defaultLng
+      ? Object.keys(newKeys).reduce((acc, key) => {
+          acc[key] = key;
+          return acc;
+        }, {})
+      : newKeys;
   const updatedTranslations = {
-
     ...rawOldKeys,
     ...resources,
-    ...additionalKeys
+    ...additionalKeys,
   };
   const outputJSON = `${JSON.stringify(updatedTranslations, null, 2)}\n`;
   fs.writeFileSync(`${config.outputPath}/${language}.json`, outputJSON);
@@ -136,13 +134,10 @@ async function writeFile(config, language, resources, rawOldKeys, newKeys) {
  */
 async function writeFiles(config, resources, newKeys) {
   const count = Object.keys(newKeys).length;
-  const rawOldKeys = Object.keys(resources[config.defaultLng]).reduce(
-    (acc, key) => {
-      acc[key] = '';
-      return acc;
-    },
-    {}
-  );
+  const rawOldKeys = Object.keys(resources[config.defaultLng]).reduce((acc, key) => {
+    acc[key] = '';
+    return acc;
+  }, {});
   let i = 0;
   async function write() {
     const lng = config.lng[i];

@@ -10,9 +10,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { IconButton } from '../toolBox/button';
 
-const CameraAccess = ({
-  theme, styles, close, fullScreen, t
-}) => (
+const CameraAccess = ({ theme, styles, close, fullScreen, t }) => (
   <TouchableHighlight
     onPress={() => {
       OpenAppSettings.open();
@@ -35,25 +33,14 @@ const CameraAccess = ({
         />
       ) : null}
       {theme === themes.light ? (
-        <Image
-          style={styles.permissionIcon}
-          source={cameraPermissionIconLight}
-        />
+        <Image style={styles.permissionIcon} source={cameraPermissionIconLight} />
       ) : (
-        <Image
-          style={styles.permissionIcon}
-          source={cameraPermissionIconDark}
-        />
+        <Image style={styles.permissionIcon} source={cameraPermissionIconDark} />
       )}
       <H4 style={[styles.permissionTitle, styles.theme.permissionTitle]}>
         {t('Allow camera access')}
       </H4>
-      <P
-        style={[
-          styles.permissionDescription,
-          styles.theme.permissionDescription,
-        ]}
-      >
+      <P style={[styles.permissionDescription, styles.theme.permissionDescription]}>
         {t(
           'Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.'
         )}

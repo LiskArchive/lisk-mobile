@@ -46,8 +46,8 @@ jest.mock('react-native', () => ({
       return new Promise((resolve) => {
         resolve(items.keys());
       });
-    })
-  }
+    }),
+  },
 }));
 
 describe('persistData/fetchData', () => {

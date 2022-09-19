@@ -1,9 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
-import {
-  Animated,
-  View,
-} from 'react-native';
+import { Animated, View } from 'react-native';
 import getStyles from './styles';
 import withTheme from '../withTheme';
 
@@ -104,19 +101,15 @@ class RNParallax extends Component {
             opacity: titleOpacity,
           },
           headerTitleStyle,
-        ]}>
+        ]}
+      >
         {title}
       </Animated.View>
     );
   }
 
   renderScrollView() {
-    const {
-      renderContent,
-      scrollViewProps,
-      refreshControl,
-      reference
-    } = this.props;
+    const { renderContent, scrollViewProps, refreshControl, reference } = this.props;
     const { scrollY } = this.state;
     const { onScroll } = scrollViewProps;
 
@@ -128,22 +121,17 @@ class RNParallax extends Component {
       <Animated.ScrollView
         style={[styles.scrollView]}
         scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          {
-            useNativeDriver: false,
-            listener: onScroll,
-          },
-        )}
+        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
+          useNativeDriver: false,
+          listener: onScroll,
+        })}
         ref={reference}
         refreshControl={refreshControl}
         showsVerticalScrollIndicator={false}
-        {...renderableScrollViewProps}>
+        {...renderableScrollViewProps}
+      >
         {this.renderHeaderTitle()}
-        <View
-          style={[{ marginTop: this.getHeaderMaxHeight() }]}>
-          {renderContent()}
-        </View>
+        <View style={[{ marginTop: this.getHeaderMaxHeight() }]}>{renderContent()}</View>
       </Animated.ScrollView>
     );
   }
@@ -151,11 +139,7 @@ class RNParallax extends Component {
   render() {
     const { containerStyle } = this.props;
     const { styles } = this.props;
-    return (
-      <View style={[styles.container, containerStyle]}>
-        {this.renderScrollView()}
-      </View>
-    );
+    return <View style={[styles.container, containerStyle]}>{this.renderScrollView()}</View>;
   }
 }
 

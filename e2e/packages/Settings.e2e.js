@@ -1,4 +1,4 @@
-import { device, element, by, } from 'detox';
+import { device, element, by } from 'detox';
 import testConstants from '../utils/testConstants';
 
 describe('Settings Screen', () => {
@@ -39,7 +39,9 @@ describe('Settings Screen', () => {
     await element(by.text('CHF')).tap();
     await element(by.id('header-left-icon')).tap();
     await element(by.text('Send')).tap();
-    await element(by.id('recipient-input')).replaceText('lskh358ygvdyvu3wzghrqk4g4dhvurjokyocysjrq');
+    await element(by.id('recipient-input')).replaceText(
+      'lskh358ygvdyvu3wzghrqk4g4dhvurjokyocysjrq'
+    );
     await element(by.id('submit')).tap();
     await expect(element(by.id('currency-amount'))).toHaveText('~ 0 CHF');
   });

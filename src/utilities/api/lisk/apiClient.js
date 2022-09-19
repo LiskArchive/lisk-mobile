@@ -14,7 +14,7 @@ class LiskAPIClient {
         address,
         balance: 0,
         nonce: 0,
-        initialized: true
+        initialized: true,
       };
     }
     if (!resp.ok) {
@@ -25,23 +25,11 @@ class LiskAPIClient {
     return data;
   }
 
-  async getNetworkInfo() {
-    const resp = await fetch(`${this._url}/v3/network/status`, config.requestOptions);
-    if (!resp.ok) {
-      throw new Error('Failed to request network info from server.');
-    }
-    const { data } = await resp.json();
-    return {
-      height: data.height,
-      blockTime: data.blockTime
-    };
-  }
-
   async sendTransaction(tx) {
     const resp = await fetch(`${this._url}/v3/transactions`, {
       ...config.requestOptions,
       method: 'POST',
-      body: JSON.stringify(tx)
+      body: JSON.stringify(tx),
     });
     if (!resp.ok) {
       const response = await resp.json();
@@ -55,7 +43,7 @@ class LiskAPIClient {
     const options = {
       ...config.requestOptions,
       params: {
-        limit: 1
+        limit: 1,
       },
     };
     const resp = await fetch(`${this._url}/v3/blocks`, options);

@@ -27,12 +27,10 @@ class FingerprintOverlay extends React.Component {
   render() {
     const { styles, error, t } = this.props;
     const iconColor = error ? colors.light.burntSieanna : colors.light.blue;
-    const message = error
-      ? t('fingerprint.unauthorized')
-      : t('fingerprint.touchId');
+    const message = error ? t('fingerprint.unauthorized') : t('fingerprint.touchId');
     return (
       <BlurOverlay
-        ref={ref => {
+        ref={(ref) => {
           this.ref = ref;
         }}
         radius={24}
@@ -46,12 +44,7 @@ class FingerprintOverlay extends React.Component {
           <H4 style={styles.title}>Fingerprint Verification</H4>
           <View style={styles.innerContainer}>
             <View style={styles.iconWrapper}>
-              <Icon
-                name="touch-id-full"
-                size={60}
-                color={iconColor}
-                style={styles.icon}
-              />
+              <Icon name="touch-id-full" size={60} color={iconColor} style={styles.icon} />
             </View>
             <P style={styles.description}>{message}</P>
           </View>

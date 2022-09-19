@@ -5,9 +5,7 @@ import { P, B } from '../toolBox/typography';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
-const InfoComponent = ({
-  text, buttonText, onPress, styles
-}) => (
+const InfoComponent = ({ text, buttonText, onPress, styles }) => (
   <View style={[styles.container, styles.theme.container]}>
     <InfoRoundSvg />
     <View style={styles.description}>

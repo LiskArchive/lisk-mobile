@@ -2,7 +2,7 @@
 import { useCallback, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { mockApplications, mockDefaultApplication } from '../__fixtures__';
+import { mockApplicationsMeta, mockDefaultApplicationMeta } from '../__fixtures__';
 import {
   addApplication as addApplicationAction,
   deleteApplicationByChainId as deleteApplicationAction,
@@ -60,7 +60,7 @@ export function useBlockchainApplicationManagement() {
 
       if (currentApplication && currentApplication.chainID === chainId) {
         // Set Lisk as default if application in use is being deleted.
-        setCurrentApplication(mockApplications[0]);
+        setCurrentApplication(mockApplicationsMeta[0]);
       }
     },
     [currentApplication, dispatch, setCurrentApplication]
@@ -68,7 +68,7 @@ export function useBlockchainApplicationManagement() {
 
   useEffect(() => {
     if (Object.keys(applicationsState).length === 0) {
-      dispatch(addApplicationAction(mockDefaultApplication));
+      dispatch(addApplicationAction(mockDefaultApplicationMeta));
     }
   }, [applicationsState, dispatch]);
 

@@ -14,13 +14,7 @@ import 'moment/min/locales';
  *
  * @returns {Object} React native Text component
  */
-const FormattedDate = ({
-  children,
-  style,
-  type,
-  locale,
-  format = 'MMM D, YYYY',
-}) => {
+const FormattedDate = ({ children, style, type, locale, format = 'MMM D, YYYY' }) => {
   const Element = type || Text;
 
   moment.locale(locale);

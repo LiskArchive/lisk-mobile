@@ -1,9 +1,7 @@
 /* eslint-disable max-statements */
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  View, SafeAreaView, TouchableOpacity, RefreshControl
-} from 'react-native';
+import { View, SafeAreaView, TouchableOpacity, RefreshControl } from 'react-native';
 import { translate } from 'react-i18next';
 import modalHolder from 'utilities/modal';
 import { colors, themes } from 'constants/styleGuide';
@@ -32,22 +30,19 @@ import { AccountSummary } from './components';
  * about any unforeseen issue/change
  */
 
-const Wallet = ({
-  styles, navigation, t, route, theme
-}) => {
+const Wallet = ({ styles, navigation, t, route, theme }) => {
   // TODO: Implement getting bookmarked accounts
   const followedAccounts = [];
   const dispatch = useDispatch();
 
   // TODO: Use useGetTransactionsQuery instead.
-  const {
-    transactions, loading, loadMore, refresh, account
-  } = useTransactionList({ address: route.params?.address, activeToken: 'LSK' });
+  const { transactions, loading, loadMore, refresh, account } = useTransactionList({
+    address: route.params?.address,
+    activeToken: 'LSK',
+  });
 
   const isFollowed = () => {
-    return followedAccounts.some(
-      (item) => item.address === account?.address
-    );
+    return followedAccounts.some((item) => item.address === account?.address);
   };
 
   const toggleBookmark = () => {
@@ -56,15 +51,15 @@ const Wallet = ({
       modalHolder.open({
         title: 'Delete bookmark',
         component: DeleteBookmarkModal,
-        callback: () => dispatch(accountUnFollowed(address))
+        callback: () => dispatch(accountUnFollowed(address)),
       });
     } else {
       navigation.navigate({
         name: 'AddBookmark',
         params: {
           account: { address },
-          title: t('Add bookmark')
-        }
+          title: t('Add bookmark'),
+        },
       });
     }
   };
@@ -78,9 +73,7 @@ const Wallet = ({
       </View>
     );
   } else {
-    const listElements = transactions.count > 0
-      ? [...transactions.confirmed]
-      : ['emptyState'];
+    const listElements = transactions.count > 0 ? [...transactions.confirmed] : ['emptyState'];
     content = (
       // TODO: Use InfiniteScrollList instead when react-query is implemented.
       <InfiniteScrollView
@@ -110,7 +103,7 @@ const Wallet = ({
             <RefreshControl refreshing={refreshing}>
               <EmptyState
                 style={{
-                  container: [styles.emptyContainer, styles.theme.emptyContainer]
+                  container: [styles.emptyContainer, styles.theme.emptyContainer],
                 }}
               />
             </RefreshControl>
@@ -120,35 +113,36 @@ const Wallet = ({
     );
   }
 
-  return <View style={[styles.container, styles.theme.container]} testID="wallet-screen" >
-    <SafeAreaView style={[styles.flex]}>
-      <HeaderBackButton
-        title="Account Details"
-        onPress={navigation.goBack}
-        rightIconComponent={() => (account
-          && <TouchableOpacity onPress={toggleBookmark}>
-            {isFollowed() ? (
-              <BookmarkSvg />
-            ) : (
-              <BookmarkOutlineSvg
-                color={theme === themes.light
-                  ? colors.light.zodiacBlue : colors.dark.mountainMist}
-              />
-            )}
-          </TouchableOpacity>
-        )}
-      />
-      {account && account.address ? (
-        <AccountSummary
-          navigation={navigation}
-          account={account}
-          style={styles.accountSummary}
+  return (
+    <View style={[styles.container, styles.theme.container]} testID="wallet-screen">
+      <SafeAreaView style={[styles.flex]}>
+        <HeaderBackButton
+          title="Account Details"
+          onPress={navigation.goBack}
+          rightIconComponent={() =>
+            account && (
+              <TouchableOpacity onPress={toggleBookmark}>
+                {isFollowed() ? (
+                  <BookmarkSvg />
+                ) : (
+                  <BookmarkOutlineSvg
+                    color={
+                      theme === themes.light ? colors.light.zodiacBlue : colors.dark.mountainMist
+                    }
+                  />
+                )}
+              </TouchableOpacity>
+            )
+          }
         />
-      ) : null}
-      {content}
-    </SafeAreaView>
-    <View style={[styles.fixedBottom, styles.theme.fixedBottom]} />
-  </View>;
+        {account && account.address ? (
+          <AccountSummary navigation={navigation} account={account} style={styles.accountSummary} />
+        ) : null}
+        {content}
+      </SafeAreaView>
+      <View style={[styles.fixedBottom, styles.theme.fixedBottom]} />
+    </View>
+  );
 };
 
 export default withTheme(translate()(Wallet), getStyles());

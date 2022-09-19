@@ -15,7 +15,7 @@ export function useAccountInfo() {
 
   useEffect(() => {
     if (address) {
-      getAccount(address).then(data => {
+      getAccount(address).then((data) => {
         dispatch(setAccountSummary(data));
       });
     }

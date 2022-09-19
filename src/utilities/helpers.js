@@ -2,6 +2,18 @@ import { StyleSheet } from 'react-native';
 import regex from 'constants/regex';
 import { themes } from 'constants/styleGuide';
 
+export const serializeQueryString = (obj) => {
+  let str = '?';
+  str += Object.keys(obj)
+    .reduce((a, k) => {
+      // eslint-disable-next-line no-unused-expressions
+      obj[k] && a.push(`${k}=${encodeURIComponent(obj[k])}`);
+      return a;
+    }, [])
+    .join('&');
+  return str;
+};
+
 /**
  * Helps to create themed stylesheet for components.
  * @param {Object} styles - style declerations for the component.
@@ -20,7 +32,7 @@ export const createThemedStyles = (theme, styles, noTheme = false) => {
 
   return {
     ...StyleSheet.create(styles.common),
-    theme: noTheme ? StyleSheet.create(styles[themes.light]) : StyleSheet.create(styles[theme])
+    theme: noTheme ? StyleSheet.create(styles[themes.light]) : StyleSheet.create(styles[theme]),
   };
 };
 
@@ -104,7 +116,8 @@ export const setColorOpacity = (hex, alpha = 1) => {
     return hex;
   }
 
-  const normalizedHex = hex.length === 4 ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}` : hex;
+  const normalizedHex =
+    hex.length === 4 ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}` : hex;
 
   const r = parseInt(normalizedHex.slice(1, 3), 16);
   const g = parseInt(normalizedHex.slice(3, 5), 16);

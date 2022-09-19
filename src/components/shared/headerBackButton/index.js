@@ -30,7 +30,7 @@ const HeaderBackButton = ({
   step,
   currentIndex,
   length,
-  alwaysLight
+  alwaysLight,
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
@@ -58,14 +58,7 @@ const HeaderBackButton = ({
         />
       )}
       {title && (
-        <H3
-          style={[
-            styles.title,
-            { color },
-            noIcon && styles.paddingLeft,
-            titleStyle
-          ]}
-        >
+        <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft, titleStyle]}>
           {t(title)}
         </H3>
       )}

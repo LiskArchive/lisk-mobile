@@ -4,23 +4,13 @@ import { Svg, Path } from 'react-native-svg';
 import { useTheme } from 'hooks/useTheme';
 import { themes, colors } from 'constants/styleGuide';
 
-export default function EmptyStateSvg({
-  height = 80,
-  width = 216,
-  style,
-}) {
+export default function EmptyStateSvg({ height = 80, width = 216, style }) {
   const { theme } = useTheme();
 
   const baseColor = theme === themes.light ? colors.light.zodiacBlue : colors.dark.white;
 
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 216 80"
-      fill="none"
-      style={style}
-    >
+    <Svg width={width} height={height} viewBox="0 0 216 80" fill="none" style={style}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -78,7 +68,9 @@ export default function EmptyStateSvg({
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M55.3099 25.9644C55.1791 25.8133 54.9479 25.8021 54.8014 25.9385C53.6833 26.9805 49.1924 31.1659 45.3315 34.7878H50.2447C52.278 33.5905 53.8482 32.6482 54.0469 32.4812C54.6561 31.9888 54.5977 32.1569 54.8308 32.2976C56.6114 33.7157 58.3446 33.3825 58.3446 33.3825C58.1977 29.5994 56.048 26.8135 55.3099 25.9644" fill="#2BD67B"/>
+        d="M55.3099 25.9644C55.1791 25.8133 54.9479 25.8021 54.8014 25.9385C53.6833 26.9805 49.1924 31.1659 45.3315 34.7878H50.2447C52.278 33.5905 53.8482 32.6482 54.0469 32.4812C54.6561 31.9888 54.5977 32.1569 54.8308 32.2976C56.6114 33.7157 58.3446 33.3825 58.3446 33.3825C58.1977 29.5994 56.048 26.8135 55.3099 25.9644"
+        fill="#2BD67B"
+      />
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -98,8 +90,8 @@ export default function EmptyStateSvg({
         d="M193.743 46.7397H99.927L98.0151 44.2178H193.743V46.7397Z"
         fill="#254898"
       />
-      <Path d="M101.515 31.8485H200.925" stroke={baseColor}/>
-      <Path d="M101.515 36.6301H200.925" stroke={baseColor}/>
+      <Path d="M101.515 31.8485H200.925" stroke={baseColor} />
+      <Path d="M101.515 36.6301H200.925" stroke={baseColor} />
       <Path
         fillRule="evenodd"
         clipRule="evenodd"

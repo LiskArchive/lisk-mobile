@@ -21,10 +21,7 @@ import { FlatList, Text } from 'react-native';
  * length of the list) the bottom edge of the list must be from the end of the content to
  * trigger the onEndReached callback. Default is 0.2.
  */
-export default function InfiniteScrollList({
-  showVerticalScrollIndicator = false,
-  ...props
-}) {
+export default function InfiniteScrollList({ showVerticalScrollIndicator = false, ...props }) {
   const fetchMore = () => {
     if (props.hasNextPage) {
       props.fetchNextPage();

@@ -46,13 +46,11 @@ export const netHash = {
 };
 
 export const getMainNetNode = () =>
-  mainNetNodes[
-    Math.floor(Math.random() * mainNetNodes.length) % mainNetNodes.length
-  ];
+  mainNetNodes[Math.floor(Math.random() * mainNetNodes.length) % mainNetNodes.length];
 
-export const getNetwork = code => {
+export const getNetwork = (code) => {
   let network;
-  Object.keys(networks).forEach(key => {
+  Object.keys(networks).forEach((key) => {
     if (networks[key].code === code) {
       network = networks[key];
     }

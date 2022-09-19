@@ -29,7 +29,7 @@ export default function getTransactionListStyles() {
         fontWeight: '500',
         fontSize: 16,
         lineHeight: 19,
-      }
+      },
     },
     [themes.light]: {
       container: {

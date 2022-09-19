@@ -1,10 +1,5 @@
 import * as Lisk from '@liskhq/lisk-client';
-import {
-  signTransaction,
-  getSigningBytes,
-  baseTransactionSchema,
-  getBytes
-} from '../utils';
+import { signTransaction, getSigningBytes, baseTransactionSchema, getBytes } from '../utils';
 
 describe.skip('sign', () => {
   const validAssetSchema = {
@@ -34,11 +29,11 @@ describe.skip('sign', () => {
 
   const networkIdentifier = Buffer.from(
     'e48feb88db5b5cf5ad71d93cdcd1d879b6d5ed187a36b0002cc34e0ef9883255',
-    'hex',
+    'hex'
   );
   const passphrase1 = 'trim elegant oven term access apple obtain error grain excite lawn neck';
-  const { publicKey: publicKey1 } = Lisk
-    .cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase1);
+  const { publicKey: publicKey1 } =
+    Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase1);
 
   const validTransaction = {
     moduleID: 2,
@@ -66,10 +61,7 @@ describe.skip('sign', () => {
       const signingBytes = getSigningBytes({ ...validTransaction });
       expect(signingBytes).toMatchSnapshot();
       const decodedTransaction = Lisk.codec.codec.decode(baseTransactionSchema, signingBytes);
-      const decodedAsset = Lisk.codec.codec.decode(
-        validAssetSchema,
-        (decodedTransaction).asset
-      );
+      const decodedAsset = Lisk.codec.codec.decode(validAssetSchema, decodedTransaction.asset);
       return expect({ ...decodedTransaction, asset: { ...decodedAsset } }).toEqual({
         ...validTransaction,
         signatures: [],
@@ -87,13 +79,10 @@ describe.skip('sign', () => {
       const txBytes = getBytes({ ...validTransaction });
       expect(txBytes).toMatchSnapshot();
       const decodedTransaction = Lisk.codec.codec.decode(baseTransactionSchema, txBytes);
-      const decodedAsset = Lisk.codec.codec.decode(
-        validAssetSchema,
-        (decodedTransaction).asset
-      );
+      const decodedAsset = Lisk.codec.codec.decode(validAssetSchema, decodedTransaction.asset);
       return expect({ ...decodedTransaction, asset: { ...decodedAsset } }).toEqual({
         ...validTransaction,
-        signatures: []
+        signatures: [],
       });
     });
   });
@@ -101,12 +90,14 @@ describe.skip('sign', () => {
   describe('signTransaction', () => {
     it('should throw error for invalid network identifier', () => {
       expect(() =>
-        signTransaction(validAssetSchema, validTransaction, Buffer.alloc(0), passphrase1),).toThrow('Network identifier is required to sign a transaction');
+        signTransaction(validAssetSchema, validTransaction, Buffer.alloc(0), passphrase1)
+      ).toThrow('Network identifier is required to sign a transaction');
     });
 
     it('should throw error for invalid passphrase', () => {
       expect(() =>
-        signTransaction(validAssetSchema, validTransaction, networkIdentifier, ''),).toThrow('Passphrase is required to sign a transaction');
+        signTransaction(validAssetSchema, validTransaction, networkIdentifier, '')
+      ).toThrow('Passphrase is required to sign a transaction');
     });
 
     it('should throw error for invalid asset object', () => {
@@ -117,11 +108,12 @@ describe.skip('sign', () => {
           asset: { ...validTransaction.asset, recipientAddress: 'dummyAddress' },
         },
       ];
-      return invalidAssets.forEach(transactionObject =>
+      return invalidAssets.forEach((transactionObject) =>
         // eslint-disable-next-line max-nested-callbacks
         expect(() =>
-          signTransaction(validAssetSchema, transactionObject, networkIdentifier, passphrase1))
-          .toThrow());
+          signTransaction(validAssetSchema, transactionObject, networkIdentifier, passphrase1)
+        ).toThrow()
+      );
     });
 
     it('should throw error when transaction senderPublicKey does not match public key from passphrase', () => {
@@ -130,9 +122,9 @@ describe.skip('sign', () => {
           validAssetSchema,
           validTransaction,
           networkIdentifier,
-          'this is incorrect passphrase',
-        ))
-        .toThrow('Transaction senderPublicKey does not match public key from passphrase');
+          'this is incorrect passphrase'
+        )
+      ).toThrow('Transaction senderPublicKey does not match public key from passphrase');
     });
 
     it('should return signed transaction for given asset schema', () => {
@@ -140,9 +132,9 @@ describe.skip('sign', () => {
         validAssetSchema,
         { ...validTransaction },
         networkIdentifier,
-        passphrase1,
+        passphrase1
       );
-      expect((signedTransaction.signatures)[0].length).toBeGreaterThan(0);
+      expect(signedTransaction.signatures[0].length).toBeGreaterThan(0);
       expect(signedTransaction.signatures).toHaveLength(1);
       return expect(signedTransaction).toMatchSnapshot();
     });

@@ -34,7 +34,7 @@ export function useTransactionAssets(transaction) {
         amount: {
           style: [styles.incomingAmount, styles.theme.incomingAmount],
           sign: '',
-        }
+        },
       };
     } else {
       assets = {
@@ -53,7 +53,7 @@ export function useTransactionAssets(transaction) {
         ...assets,
         type: 'tokenTransfer',
         title: 'Token Transfer',
-        image: (theme === themes.light ? transferLight : transferDark)
+        image: theme === themes.light ? transferLight : transferDark,
       };
       break;
 
@@ -62,7 +62,7 @@ export function useTransactionAssets(transaction) {
         ...assets,
         type: 'tokenCrossChaintransfer',
         title: 'Cross-chain Transfer',
-        image: (theme === themes.light ? transferLight : transferDark)
+        image: theme === themes.light ? transferLight : transferDark,
       };
       break;
 
@@ -71,7 +71,7 @@ export function useTransactionAssets(transaction) {
         ...assets,
         type: 'registerMultisignatureGroup',
         title: 'Register multisignature group',
-        image: (theme === themes.light ? setSecondPassphraseLight : setSecondPassphraseDark)
+        image: theme === themes.light ? setSecondPassphraseLight : setSecondPassphraseDark,
       };
       break;
 
@@ -80,7 +80,7 @@ export function useTransactionAssets(transaction) {
         ...assets,
         type: 'registerDelegate',
         title: 'Delegate registration',
-        image: (theme === themes.light ? registerDelegateLight : registerDelegateDark)
+        image: theme === themes.light ? registerDelegateLight : registerDelegateDark,
       };
       break;
 
@@ -90,7 +90,7 @@ export function useTransactionAssets(transaction) {
         type: 'reportDelegateMisbehavior',
         title: 'Report Delegate Misbehavior',
         // TODO: Add custom image.
-        image: (theme === themes.light ? txUnknownLight : txUnknownDark)
+        image: theme === themes.light ? txUnknownLight : txUnknownDark,
       };
       break;
 
@@ -99,7 +99,7 @@ export function useTransactionAssets(transaction) {
         ...assets,
         type: 'unlockToken',
         title: 'Unlock',
-        image: (theme === themes.light ? txUnlockLight : txUnlockDark)
+        image: theme === themes.light ? txUnlockLight : txUnlockDark,
       };
       break;
 
@@ -109,7 +109,7 @@ export function useTransactionAssets(transaction) {
         type: 'updateGeneratorKey',
         title: 'Update Generator Key',
         // TODO: Add custom image.
-        image: (theme === themes.light ? txUnknownLight : txUnknownDark)
+        image: theme === themes.light ? txUnknownLight : txUnknownDark,
       };
       break;
 
@@ -118,7 +118,7 @@ export function useTransactionAssets(transaction) {
         ...assets,
         type: 'voteDelegate',
         title: 'Vote',
-        image: (theme === themes.light ? voteLight : voteDark)
+        image: theme === themes.light ? voteLight : voteDark,
       };
       break;
 
@@ -128,7 +128,7 @@ export function useTransactionAssets(transaction) {
         type: 'reclaimLSK',
         title: 'Reclaim LSK',
         // TODO: Add custom image.
-        image: (theme === themes.light ? txUnknownLight : txUnknownDark)
+        image: theme === themes.light ? txUnknownLight : txUnknownDark,
       };
       break;
 
@@ -138,7 +138,7 @@ export function useTransactionAssets(transaction) {
         type: 'registerkeys',
         title: 'Register keys',
         // TODO: Add custom image.
-        image: (theme === themes.light ? registerDelegateLight : registerDelegateDark)
+        image: theme === themes.light ? registerDelegateLight : registerDelegateDark,
       };
       break;
 

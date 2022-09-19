@@ -22,7 +22,7 @@ describe('Bookmark reducer', () => {
   it('Should remove bookmared account', async () => {
     const actionData = {
       type: actionTypes.deleteBookmark,
-      payload: mockBookmark
+      payload: mockBookmark,
     };
     expect(list([mockBookmark], actionData)).toEqual([]);
   });

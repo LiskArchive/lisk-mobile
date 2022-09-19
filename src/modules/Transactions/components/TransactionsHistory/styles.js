@@ -8,7 +8,7 @@ export default function getTransactionsHistoryStyles() {
         padding: boxes.boxPadding,
       },
       header: {
-        marginBottom: 24
+        marginBottom: 24,
       },
       listContainer: {
         paddingLeft: boxes.boxPadding,
@@ -18,12 +18,12 @@ export default function getTransactionsHistoryStyles() {
     [themes.light]: {
       container: {
         backgroundColor: colors.light.white,
-      }
+      },
     },
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
-      }
+      },
     },
   };
 }

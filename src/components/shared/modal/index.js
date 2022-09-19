@@ -19,7 +19,7 @@ class Modal extends React.Component {
     modalCallback: () => true,
   };
 
-  updateModal = config => {
+  updateModal = (config) => {
     this.setState({
       title: this.props.t(config.title),
       Component: config.component || null,
@@ -35,7 +35,9 @@ class Modal extends React.Component {
     const viewHeight = nativeEvent.layout.height;
     const headerStyle = { height: headerHeight() };
     const contentStyle = { paddingTop: headerHeight() + boxes.boxPadding };
-    if (viewHeight >= deviceHeight()) { this.setState({ headerStyle, contentStyle }); }
+    if (viewHeight >= deviceHeight()) {
+      this.setState({ headerStyle, contentStyle });
+    }
   };
 
   render() {
@@ -47,19 +49,11 @@ class Modal extends React.Component {
       <ModalBox
         position={'bottom'}
         style={styles.modal}
-        ref={ref => ModalHolder.initialize(ref, this.updateModal)}
+        ref={(ref) => ModalHolder.initialize(ref, this.updateModal)}
       >
         <View style={styles.wrapper}>
-          <View
-            style={[styles.container, styles.theme.container]}
-          >
-            <View
-              style={[
-                styles.titleContainer,
-                styles.theme.titleContainer,
-                headerStyle,
-              ]}
-            >
+          <View style={[styles.container, styles.theme.container]}>
+            <View style={[styles.titleContainer, styles.theme.titleContainer, headerStyle]}>
               <B style={[styles.title, styles.theme.title]}>{title}</B>
               <Icon
                 onPress={this.closeModal}
@@ -70,10 +64,7 @@ class Modal extends React.Component {
             </View>
             <ScrollView>
               <View style={[styles.contentContainer, contentStyle]}>
-                <Component
-                  modalCallback={modalCallback}
-                  close={this.closeModal}
-                />
+                <Component modalCallback={modalCallback} close={this.closeModal} />
               </View>
             </ScrollView>
           </View>

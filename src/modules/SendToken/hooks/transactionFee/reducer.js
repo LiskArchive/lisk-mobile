@@ -12,7 +12,7 @@ const initialFee = {
   feedback: '',
 };
 
-const getInitialState = account => ({
+const getInitialState = (account) => ({
   fee: initialFee,
   minFee: initialFee,
   maxAmount: {
@@ -47,7 +47,7 @@ const reducer = (state, action) => {
         ...action.response,
         maxAmount: {
           ...state.maxAmount,
-          value: maxAmount
+          value: maxAmount,
         },
       };
 
@@ -59,8 +59,4 @@ const reducer = (state, action) => {
   }
 };
 
-export {
-  actionTypes,
-  getInitialState,
-  reducer,
-};
+export { actionTypes, getInitialState, reducer };

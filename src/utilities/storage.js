@@ -6,7 +6,7 @@ export const blankSettings = {
   validated: true,
 };
 
-const validateAccounts = data => {
+const validateAccounts = (data) => {
   try {
     const parsedData = Array.isArray(data) ? data : JSON.parse(data);
     if (!parsedData || typeof parsedData !== 'object') {
@@ -18,7 +18,7 @@ const validateAccounts = data => {
   }
 };
 
-const validateSettings = data => {
+const validateSettings = (data) => {
   try {
     const parsedData = typeof data === 'object' ? data : JSON.parse(data);
 
@@ -51,20 +51,20 @@ export async function fetchData(key) {
 
 export const retrieveAccounts = () =>
   fetchData('LiskfollowedAccounts')
-    .then(data => validateAccounts(data))
+    .then((data) => validateAccounts(data))
     .catch(() => blankAccounts);
 
-export const storeFollowedAccount = followedAccountsList =>
+export const storeFollowedAccount = (followedAccountsList) =>
   persistData('LiskfollowedAccounts', followedAccountsList)
-    .then(data => validateAccounts(data))
+    .then((data) => validateAccounts(data))
     .catch(() => blankAccounts);
 
 export const getSettings = () =>
   fetchData('LiskSettings')
-    .then(data => validateSettings(data))
+    .then((data) => validateSettings(data))
     .catch(() => blankSettings);
 
-export const storeSettings = settings =>
+export const storeSettings = (settings) =>
   persistData('LiskSettings', settings)
-    .then(data => validateSettings(data))
+    .then((data) => validateSettings(data))
     .catch(() => blankSettings);

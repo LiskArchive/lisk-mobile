@@ -6,7 +6,7 @@ import { getCCMFee } from '../helpers';
 // TODO: Define props and calculation when is more clarity about the fee.
 export default function useCCMFeeCalculator({
   senderApplicationChainID,
-  recipientApplicationChainID
+  recipientApplicationChainID,
 }) {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +16,7 @@ export default function useCCMFeeCalculator({
     try {
       const fee = getCCMFee({
         senderApplicationChainID,
-        recipientApplicationChainID
+        recipientApplicationChainID,
       });
 
       setData(fee);

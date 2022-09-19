@@ -1,7 +1,5 @@
 import { Platform } from 'react-native';
-import {
-  themes, colors, fonts
-} from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
 export default (tabBarHeight) => ({

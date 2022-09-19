@@ -42,10 +42,7 @@ export const baseTransactionSchema = {
 };
 
 export const getSigningBytes = (transactionObject) => {
-  if (
-    typeof transactionObject.asset !== 'object'
-    || transactionObject.asset === null
-  ) {
+  if (typeof transactionObject.asset !== 'object' || transactionObject.asset === null) {
     throw new Error('Asset must be of type object and not null');
   }
   const assetBytes = encodeTransferAsset(transactionObject.asset);
@@ -58,12 +55,7 @@ export const getSigningBytes = (transactionObject) => {
   return transactionBytes;
 };
 
-export const signTransaction = (
-  assetSchema,
-  transactionObject,
-  networkIdentifier,
-  passphrase
-) => {
+export const signTransaction = (assetSchema, transactionObject, networkIdentifier, passphrase) => {
   if (!networkIdentifier.length) {
     throw new Error('Network identifier is required to sign a transaction');
   }
@@ -74,12 +66,10 @@ export const signTransaction = (
   const { publicKey } = Lisk.cryptography.address.getAddressAndPublicKeyFromPassphrase(passphrase);
 
   if (
-    !Buffer.isBuffer(transactionObject.senderPublicKey)
-    || !transactionObject.senderPublicKey.equals(publicKey)
+    !Buffer.isBuffer(transactionObject.senderPublicKey) ||
+    !transactionObject.senderPublicKey.equals(publicKey)
   ) {
-    throw new Error(
-      'Transaction senderPublicKey does not match public key from passphrase'
-    );
+    throw new Error('Transaction senderPublicKey does not match public key from passphrase');
   }
 
   const transactionWithNetworkIdentifierBytes = Buffer.concat([
@@ -95,17 +85,12 @@ export const signTransaction = (
   transactionObject.signatures = [signature];
   return {
     ...transactionObject,
-    id: Lisk.cryptography.hash(
-      Lisk.transactions.getBytes(assetSchema, transactionObject)
-    ),
+    id: Lisk.cryptography.hash(Lisk.transactions.getBytes(assetSchema, transactionObject)),
   };
 };
 
 export const getBytes = (transactionObject) => {
-  if (
-    typeof transactionObject.asset !== 'object'
-    || transactionObject.asset === null
-  ) {
+  if (typeof transactionObject.asset !== 'object' || transactionObject.asset === null) {
     throw new Error('Asset must be of type object and not null');
   }
   const assetBytes = encodeTransferAsset(transactionObject.asset);

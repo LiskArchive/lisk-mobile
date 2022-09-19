@@ -1,6 +1,4 @@
-import {
-  themes, colors, fonts
-} from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getAccountItemStyles() {
   return {
@@ -27,7 +25,7 @@ export default function getAccountItemStyles() {
       content: {
         flex: 1,
         justifyContent: 'center',
-      }
+      },
     },
 
     [themes.light]: {
@@ -41,8 +39,8 @@ export default function getAccountItemStyles() {
         color: colors.light.zodiacBlue,
       },
       address: {
-        color: colors.light.blueGray
-      }
+        color: colors.light.blueGray,
+      },
     },
 
     [themes.dark]: {
@@ -56,8 +54,8 @@ export default function getAccountItemStyles() {
         color: colors.dark.white,
       },
       address: {
-        color: colors.light.ghost
-      }
-    }
+        color: colors.light.ghost,
+      },
+    },
   };
 }

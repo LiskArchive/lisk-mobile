@@ -1,8 +1,6 @@
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
-import {
-  View, TouchableOpacity
-} from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
@@ -30,7 +28,7 @@ export default function Bookmark() {
 
   const setQueryString = (query) => setQuery(query);
 
-  const onPress = data => {
+  const onPress = (data) => {
     navigation.navigate('Wallet', { address: data.address });
   };
 
@@ -45,12 +43,7 @@ export default function Bookmark() {
         setIsSearchOpen={(val) => setIsSearchOpen(val)}
       />
       <View style={styles.container}>
-        <BookmarkList
-          draggable={true}
-          query={query}
-          renderEmpty
-          onPress={onPress}
-        />
+        <BookmarkList draggable={true} query={query} renderEmpty onPress={onPress} />
       </View>
       <TouchableOpacity
         style={[styles.titleContainer]}

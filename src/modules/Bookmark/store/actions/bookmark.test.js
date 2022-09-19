@@ -1,9 +1,5 @@
 import actionTypes from '../actionTypes';
-import {
-  addBookmark,
-  editBookmark,
-  deleteBookmark,
-} from './index';
+import { addBookmark, editBookmark, deleteBookmark } from './index';
 
 describe('actions: bookmark actions', () => {
   const mockBookmark = { label: 'test', address: 'lskaddress' };

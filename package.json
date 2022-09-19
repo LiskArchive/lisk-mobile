@@ -21,8 +21,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@hirishh/lisk-ledger.js": "^2.2.0",
     "@hookform/resolvers": "^2.9.7",
-    "@liskhq/lisk-client": "6.0.0-alpha.2",
+    "@json-rpc-tools/utils": "^1.7.6",
+    "@liskhq/lisk-client": "6.0.0-alpha.3",
     "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/cameraroll": "^4.1.2",
@@ -35,8 +37,11 @@
     "@tanstack/react-query": "^4.0.10",
     "@testing-library/react-hooks": "7.0.2",
     "@tradle/react-native-http": "^2.0.1",
+    "@walletconnect/sign-client": "^2.0.0-rc.2",
+    "@walletconnect/utils": "^2.0.0-rc.2",
     "acorn": "^8.0.5",
     "assert": "^2.0.0",
+    "await-to-js": "^3.0.0",
     "axios": "^0.21.1",
     "base-x": "^3.0.8",
     "big-integer": "^1.6.49",
@@ -155,6 +160,7 @@
     "eslint": "^7.22.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-import": "^2.22.1",
@@ -163,17 +169,18 @@
     "findit": "^2.0.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
-    "husky": "^5.2.0",
+    "husky": "^8.0.0",
     "i18next-scanner": "^3.1.0",
     "jest": "^27.3.1",
     "jest-cli": "^27.3.1",
     "jest-junit": "^13.0.0",
     "jest-runner-eslint": "^0.10.0",
     "jest-transform-stub": "^2.0.0",
-    "lint-staged": "^10.5.4",
+    "lint-staged": "^13.0.3",
     "metro-react-native-babel-preset": "^0.59.0",
     "moxios": "^0.4.0",
     "msw": "^0.44.2",
+    "prettier": "^2.7.1",
     "react-devtools": "^4.25.0",
     "react-native-codegen": "0.0.9",
     "react-test-renderer": "^16.13.1",
@@ -183,6 +190,12 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "npx prettier --write",
+      "npx eslint --fix"
+    ]
   },
   "react-native": {
     "zlib": "browserify-zlib",

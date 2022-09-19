@@ -31,7 +31,7 @@ class LiskMessageExtension extends Component {
   };
 
   setAccount = () => {
-    getPassphraseFromKeyChain().then(account => {
+    getPassphraseFromKeyChain().then((account) => {
       if (account) {
         this.userData = {
           passphrase: account.password,
@@ -60,30 +60,29 @@ class LiskMessageExtension extends Component {
         conversation,
         message,
         parsedData: message.url ? this.parseUrl(message.url) : {},
-      }));
+      })
+    );
   };
 
   setPresentationStyle = () => {
-    MessagesManager.getPresentationStyle(presentationStyle =>
-      this.setState({ presentationStyle }));
+    MessagesManager.getPresentationStyle((presentationStyle) =>
+      this.setState({ presentationStyle })
+    );
   };
 
   bindPresentationStyleChanged = () => {
-    MessagesEvents.addListener(
-      'onPresentationStyleChanged',
-      ({ presentationStyle }) => this.setState({ presentationStyle })
+    MessagesEvents.addListener('onPresentationStyleChanged', ({ presentationStyle }) =>
+      this.setState({ presentationStyle })
     );
   };
 
   bindMessageSelected = () => {
-    MessagesEvents.addListener(
-      'didSelectMessage',
-      ({ conversation, message }) =>
-        this.setState({
-          conversation,
-          message,
-          parsedData: this.parseUrl(message.url),
-        })
+    MessagesEvents.addListener('didSelectMessage', ({ conversation, message }) =>
+      this.setState({
+        conversation,
+        message,
+        parsedData: this.parseUrl(message.url),
+      })
     );
   };
 
@@ -98,7 +97,8 @@ class LiskMessageExtension extends Component {
           value: this.userData.address || '',
           validity: -1,
         },
-      }));
+      })
+    );
   };
 
   bindKeyBoardFocused = () => {
@@ -114,13 +114,7 @@ class LiskMessageExtension extends Component {
     this.bindStartedSendingMessage();
   };
 
-  composeMessage = ({
-    address,
-    amount,
-    state = 'requested',
-    id,
-    recipientAddress,
-  }) => {
+  composeMessage = ({ address, amount, state = 'requested', id, recipientAddress }) => {
     if (address.validity !== 1) {
       const recipient = `&recipientAddress=${recipientAddress}`;
       const txID = id ? `&txID=${id}` : '';
@@ -147,18 +141,16 @@ class LiskMessageExtension extends Component {
     MessagesManager.updatePresentationStyle(
       this.state.presentationStyle === 'expanded' ? 'compact' : 'expanded'
     )
-      .then(presentationStyle => this.setState({ presentationStyle }))
+      .then((presentationStyle) => this.setState({ presentationStyle }))
       // eslint-disable-next-line no-console
       .catch(console.log);
   };
 
-  parseUrl = url => {
-    const parsedData = url
-      .substring(1)
-      .replace(/&/g, '","')
-      .replace(/=/g, '":"');
+  parseUrl = (url) => {
+    const parsedData = url.substring(1).replace(/&/g, '","').replace(/=/g, '":"');
     return JSON.parse(`{"${parsedData}"}`, (key, value) =>
-      key === '' ? value : decodeURIComponent(value));
+      key === '' ? value : decodeURIComponent(value)
+    );
   };
 
   render() {
@@ -174,8 +166,8 @@ class LiskMessageExtension extends Component {
     } = this.state;
     const language = languageMap.en.code;
 
-    const isSender = conversation.localParticipiantIdentifier
-      === message.senderParticipantIdentifier;
+    const isSender =
+      conversation.localParticipiantIdentifier === message.senderParticipantIdentifier;
 
     const Element = () => {
       if (message.url) {
@@ -183,7 +175,7 @@ class LiskMessageExtension extends Component {
           case 'rejected':
             return <Rejected status="rejected" sharedData={parsedData} />;
           case 'transferred':
-            return <TransactionDetails transactionId={parsedData.txID}/>;
+            return <TransactionDetails transactionId={parsedData.txID} />;
           default:
             return isSender ? (
               <Pending sharedData={parsedData} />
@@ -222,9 +214,7 @@ class LiskMessageExtension extends Component {
 
     return (
       <ThemeContext.Provider value="light">
-        <ScrollView
-          contentContainerStyle={{ flex: 1, backgroundColor: '#F5F7FA' }}
-        >
+        <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#F5F7FA' }}>
           {process.env.NODE_ENV === 'development' && <DevSettings />}
           {content}
         </ScrollView>

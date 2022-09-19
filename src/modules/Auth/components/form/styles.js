@@ -9,7 +9,7 @@ export default () => ({
     input: {
       fontFamily: fonts.family.passphrase,
       textAlign: 'justify',
-      color: colors.dark.whiteSmoke
+      color: colors.dark.whiteSmoke,
     },
     inputContainer: {
       paddingLeft: 0,
@@ -65,24 +65,24 @@ export default () => ({
   },
   [themes.light]: {
     input: {
-      color: colors.dark.zodiacBlue
+      color: colors.dark.zodiacBlue,
     },
     label: {
-      color: colors.dark.maastrichtBlue
+      color: colors.dark.maastrichtBlue,
     },
     scanButtonTitle: {
-      color: colors.dark.maastrichtBlue
-    }
+      color: colors.dark.maastrichtBlue,
+    },
   },
   [themes.dark]: {
     input: {
-      color: colors.dark.whiteSmoke
+      color: colors.dark.whiteSmoke,
     },
     label: {
-      color: colors.dark.whiteSmoke
+      color: colors.dark.whiteSmoke,
     },
     scanButtonTitle: {
-      color: colors.dark.whiteSmoke
-    }
+      color: colors.dark.whiteSmoke,
+    },
   },
 });

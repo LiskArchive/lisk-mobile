@@ -1,8 +1,6 @@
 /* eslint-disable complexity */
 import React, { useRef, useEffect } from 'react';
-import {
-  View, Animated, useWindowDimensions, Easing
-} from 'react-native';
+import { View, Animated, useWindowDimensions, Easing } from 'react-native';
 import { translate } from 'react-i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { colors, themes } from 'constants/styleGuide';
@@ -24,7 +22,7 @@ const HeaderBackButton = ({
   value,
   onChange,
   isSearchOpen,
-  setIsSearchOpen
+  setIsSearchOpen,
 }) => {
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
@@ -46,7 +44,7 @@ const HeaderBackButton = ({
       Animated.timing(width, {
         toValue: 1,
         easing: Easing.elastic(),
-        duration: 500
+        duration: 500,
       }).start();
     } else {
       width.setValue(0);
@@ -62,10 +60,10 @@ const HeaderBackButton = ({
               {
                 translateX: width.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [windowWidth, 0]
-                })
-              }
-            ]
+                  outputRange: [windowWidth, 0],
+                }),
+              },
+            ],
           }}
         >
           <View style={styles.searchRow}>
@@ -82,7 +80,7 @@ const HeaderBackButton = ({
                 autoFocus
                 innerStyles={{
                   input: [styles.input],
-                  containerStyle: [styles.inputContainer]
+                  containerStyle: [styles.inputContainer],
                 }}
                 placeholderTextColor={
                   theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray

@@ -27,7 +27,7 @@ export default {
       alignItems: 'center',
     },
     title: {
-      marginHorizontal: 20
+      marginHorizontal: 20,
     },
     logo: {
       width: 50,

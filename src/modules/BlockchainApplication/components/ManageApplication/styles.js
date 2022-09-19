@@ -1,17 +1,13 @@
-import {
-  colors,
-  themes,
-  boxes
-} from 'constants/styleGuide';
+import { colors, themes, boxes } from 'constants/styleGuide';
 
 export default {
   common: {
-    wrapper: {
-      flex: 1,
-    },
     container: {
       flex: 1,
-      paddingVertical: boxes.boxPadding,
+    },
+    title: {
+      textAlign: 'center',
+      marginBottom: 16,
     },
     urlContainer: {
       borderWidth: 1,
@@ -23,14 +19,9 @@ export default {
       justifyContent: 'space-between',
     },
     url: {
-      color: colors.light.ultramarineBlue
-    },
-    title: {
-      textAlign: 'center',
-      marginBottom: 10,
+      color: colors.light.ultramarineBlue,
     },
     bottom: {
-      padding: boxes.boxPadding,
       marginBottom: boxes.boxPadding,
     },
     button: {
@@ -41,10 +32,10 @@ export default {
       marginVertical: 5,
     },
     buttonText: {
-      color: colors.light.ultramarineBlue
+      color: colors.light.ultramarineBlue,
     },
     icon: {
-      width: 30
+      width: 30,
     },
     outline: {
       borderWidth: 1,
@@ -56,23 +47,23 @@ export default {
     outline: {
       borderColor: colors.light.platinumGray,
     },
-    wrapper: {
-      backgroundColor: colors.dark.white
+    container: {
+      backgroundColor: colors.dark.white,
     },
     remove: {
       color: colors.light.zodiacBlue,
-    }
+    },
   },
 
   [themes.dark]: {
     outline: {
       borderColor: colors.light.volcanicSand,
     },
-    wrapper: {
-      backgroundColor: colors.dark.black
+    container: {
+      backgroundColor: colors.dark.black,
     },
     remove: {
       color: colors.light.white,
-    }
+    },
   },
 };

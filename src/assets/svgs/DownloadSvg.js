@@ -1,20 +1,9 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 
-export default function DownloadSvg({
-  color = '#4070F4',
-  height = 16,
-  width = 16,
-  style,
-}) {
+export default function DownloadSvg({ color = '#4070F4', height = 16, width = 16, style }) {
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 16 16"
-      fill="none"
-      style={style}
-    >
+    <Svg width={width} height={height} viewBox="0 0 16 16" fill="none" style={style}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -22,12 +11,7 @@ export default function DownloadSvg({
         fill={color}
       />
 
-      <Path
-        d="M2.92188 13.6001H13.0844"
-        stroke={color}
-        strokeWidth="1.3"
-        strokeLinecap="round"
-      />
+      <Path d="M2.92188 13.6001H13.0844" stroke={color} strokeWidth="1.3" strokeLinecap="round" />
     </Svg>
   );
 }

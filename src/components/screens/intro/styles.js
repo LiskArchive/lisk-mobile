@@ -16,7 +16,8 @@ const styles = {
     height: '100%',
   },
   imageSrc: {
-    flex: 1, resizeMode: 'contain'
+    flex: 1,
+    resizeMode: 'contain',
   },
   splashContainer: {
     backgroundColor: colors.light.white,

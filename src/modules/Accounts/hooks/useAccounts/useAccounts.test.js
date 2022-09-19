@@ -29,9 +29,7 @@ jest.mock('react-redux', () => ({
 
 describe('useAccount hook', () => {
   const store = mockStore(mockState);
-  const wrapper = ({ children }) => (
-    <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
-  );
+  const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>;
   beforeEach(() => {
     mockDispatch.mockClear();
   });

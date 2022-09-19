@@ -69,8 +69,8 @@ class Confirm extends Component {
 
     const { busy, errorMessage } = this.state;
 
-    const isSender = conversation.localParticipiantIdentifier
-      === message.senderParticipantIdentifier;
+    const isSender =
+      conversation.localParticipiantIdentifier === message.senderParticipantIdentifier;
     const fee = 1e7;
     const totalAmount = isSender ? amount : includeFee(amount, fee);
     const description = isSender
@@ -92,26 +92,15 @@ class Confirm extends Component {
             <View>
               <View style={[styles.row, styles.addressContainer]}>
                 <B style={styles.title}>Requested by</B>
-                <Avatar
-                  address={address || ''}
-                  style={styles.avatar}
-                  size={50}
-                />
+                <Avatar address={address || ''} style={styles.avatar} size={50} />
                 <P style={[styles.text, styles.address]}>{address}</P>
               </View>
               <View style={styles.row}>
-                <Icon
-                  name="amount"
-                  style={styles.icon}
-                  size={20}
-                  color={colors.light.slateGray}
-                />
+                <Icon name="amount" style={styles.icon} size={20} color={colors.light.slateGray} />
                 <View style={styles.rowContent}>
                   <P style={styles.label}>Amount</P>
                   <B style={[styles.text]}>
-                    <FormattedNumber language={language}>
-                      {amount}
-                    </FormattedNumber>
+                    <FormattedNumber language={language}>{amount}</FormattedNumber>
                   </B>
                 </View>
               </View>
@@ -135,12 +124,7 @@ class Confirm extends Component {
             </View>
             {isSender ? null : (
               <View>
-                <View
-                  style={[
-                    styles.errorContainer,
-                    errorMessage ? styles.visible : null,
-                  ]}
-                >
+                <View style={[styles.errorContainer, errorMessage ? styles.visible : null]}>
                   <Icon size={16} name="warning" style={styles.errorIcon} />
                   <Small style={styles.error}>{errorMessage}</Small>
                 </View>
@@ -161,8 +145,7 @@ class Confirm extends Component {
         ) : (
           <View style={[styles.innerContainer, styles.confirmContainer]}>
             <B style={styles.confirmMessage}>
-              You have {state} {amount} LSK. Send the message to let {address}{' '}
-              know.
+              You have {state} {amount} LSK. Send the message to let {address} know.
             </B>
           </View>
         )}

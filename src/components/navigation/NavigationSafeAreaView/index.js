@@ -14,9 +14,7 @@ export default function NavigationSafeAreaView({ children, style }) {
   });
 
   return (
-    <SafeAreaView
-      style={[styles.container, styles.theme.container, style]}
-    >
+    <SafeAreaView style={[styles.container, styles.theme.container, style]}>
       {children}
     </SafeAreaView>
   );

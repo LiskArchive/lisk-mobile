@@ -8,10 +8,10 @@ export default () => ({
       flex: 1,
     },
     text: {
-      flex: 1
+      flex: 1,
     },
     icon: {
-      padding: 10
+      padding: 10,
     },
   },
 });

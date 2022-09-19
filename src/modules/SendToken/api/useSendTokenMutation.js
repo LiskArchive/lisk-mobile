@@ -1,10 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import {
-  METHOD,
-  LIMIT,
-  API_VERSION,
-} from 'utilities/api/constants';
+import { METHOD, LIMIT, API_VERSION } from 'utilities/api/constants';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 
 import { sendTokenMockHandler } from '../mocks';
@@ -14,8 +10,9 @@ export default function useSendTokenMutation(options = {}) {
 
   function handleSendToken(variables) {
     const config = {
-      baseURL: currentBlockchainApplication?.apis[0][METHOD]
-        ?? currentBlockchainApplication?.apis[0].rest,
+      baseURL:
+        currentBlockchainApplication?.serviceURLs[0][METHOD] ??
+        currentBlockchainApplication?.serviceURLs[0].http,
       path: `/api/${API_VERSION}/transactions`,
       method: 'post',
       params: { limit: LIMIT, ...variables },
@@ -38,7 +35,7 @@ export default function useSendTokenMutation(options = {}) {
     onError: (error) => {
       if (options.onError) options.onError(error);
     },
-    ...options
+    ...options,
   });
 
   return mutation;

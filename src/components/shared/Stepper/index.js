@@ -12,7 +12,7 @@ export default function Stepper({
   finalCallback,
   showProgressBar,
   styles: baseStyles,
-  customProgressLength
+  customProgressLength,
 }) {
   const [key, setKey] = useState(0);
   const [data, setData] = useState({});
@@ -26,14 +26,10 @@ export default function Stepper({
     if (typeof target === 'number') {
       return Math.max(Math.min(target, totalSteps - 1), 0);
     }
-    return moves > 0
-      ? Math.min(index + moves, totalSteps - 1)
-      : Math.max(0, index + moves);
+    return moves > 0 ? Math.min(index + moves, totalSteps - 1) : Math.max(0, index + moves);
   };
 
-  const move = ({
-    moves, to, data: sharedData, reset = false
-  }) => {
+  const move = ({ moves, to, data: sharedData, reset = false }) => {
     const next = keepTargetInRange(to, moves, currentIndex, children.length);
 
     setCurrentIndex(next);
@@ -71,10 +67,7 @@ export default function Stepper({
   const currentChild = React.Children.toArray(children)[currentIndex];
 
   return (
-    <View
-      style={styles.flex}
-      // key={key}
-    >
+    <View style={[styles.flex, baseStyles?.container]}>
       {showProgressBar && (
         <ProgressBar
           current={currentIndex}

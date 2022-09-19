@@ -4,7 +4,6 @@ import actionTypes from 'modules/Accounts/actionTypes';
 import { account as accountAPI } from 'utilities/api';
 import DropDownHolder from 'utilities/alert';
 import { blockUpdated } from 'modules/Accounts/store/actions';
-import { networkInfoUpdated } from '../../actions/network';
 import i18n from '../../../locales';
 
 /** To-Do We have to disable socket connection because of
@@ -26,17 +25,9 @@ export const checkBalance = (store) => {
   });
 };
 
-export const getNetworkInfo = (store) => {
-  const activeToken = store.getState().settings.token.active;
-  return accountAPI.getNetworkInfo(activeToken).then((res) => {
-    store.dispatch(networkInfoUpdated(res));
-  });
-};
-
 const socketSetup = (store) => {
   BackgroundTimer.runBackgroundTimer(() => {
     checkBalance(store);
-    getNetworkInfo(store);
   }, 30000);
 };
 

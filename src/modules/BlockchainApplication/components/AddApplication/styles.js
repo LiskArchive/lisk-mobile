@@ -1,6 +1,4 @@
-import {
-  themes, colors
-} from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 
 export default function getAddApplicationStyles() {
   return {
@@ -8,6 +6,13 @@ export default function getAddApplicationStyles() {
       wrapper: {
         flex: 1,
         paddingTop: 44,
+      },
+      header: {
+        marginBottom: 24,
+      },
+      applicationsListContainer: {
+        paddingLeft: 16,
+        paddingRight: 16,
       },
     },
     [themes.light]: {

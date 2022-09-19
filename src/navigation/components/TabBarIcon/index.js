@@ -11,7 +11,7 @@ export default function TabBarIcon({ name, focused, size = 24 }) {
     height: size,
     width: size,
     color: colors.light.white,
-    variant: focused ? 'fill' : 'outline'
+    variant: focused ? 'fill' : 'outline',
   };
 
   switch (name) {

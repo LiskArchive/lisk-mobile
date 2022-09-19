@@ -1,5 +1,5 @@
 export default {
   account: '',
   address: '',
-  emptyAccount: ''
+  emptyAccount: '',
 };

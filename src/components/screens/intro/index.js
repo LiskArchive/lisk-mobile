@@ -16,7 +16,7 @@ import Splash from './splash';
 import styles from './styles';
 
 @connect(
-  state => ({
+  (state) => ({
     settings: state.settings,
   }),
   {
@@ -63,18 +63,14 @@ class Intro extends React.Component {
       {
         step: 3,
         title: t('Secure authentication'),
-        description: t(
-          'Access all functions via advanced biometric authentication.'
-        ),
+        description: t('Access all functions via advanced biometric authentication.'),
         imageSrc: secureAuthenticationImg,
         imageStyle: styles.illustration,
       },
       {
         step: 4,
         title: t('Easy access'),
-        description: t(
-          'Create an account using passphrase to access your LSK cryptocurrency.'
-        ),
+        description: t('Create an account using passphrase to access your LSK cryptocurrency.'),
         imageSrc: easyAccessImg,
         imageStyle: styles.illustration,
         acceptTermsSwitch: true,
@@ -82,7 +78,7 @@ class Intro extends React.Component {
     ];
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.wrapper} testID='intro-screen' >
+        <View style={styles.wrapper} testID="intro-screen">
           <Splash />
           <Heading
             skip={this.skip.bind(this)}

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Animated,
-  Text,
-  Image,
-  View,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { Animated, Text, Image, View, TouchableWithoutFeedback } from 'react-native';
 import { useSelector } from 'react-redux';
 import { fromRawLsk } from 'utilities/conversions';
 import Avatar from 'components/shared/avatar';
@@ -65,21 +59,14 @@ const ExtendedTitle = ({
         styles[`${type}Extended`],
         {
           opacity: interpolate(scrollY, [0, 90, 130], [0, 0, 1]),
-          transform: [
-            { translateY: interpolate(scrollY, [0, 100, 210], [100, 100, 0]) },
-          ],
+          transform: [{ translateY: interpolate(scrollY, [0, 100, 210], [100, 100, 0]) }],
         },
       ]}
     >
       {token === activeToken ? (
         <Avatar address={address} size={30} style={styles.avatar} />
       ) : (
-        <View
-          style={[
-            styles.tokenLogoWrapper,
-            wallet ? styles.walletTokenLogoWrapper : null,
-          ]}
-        >
+        <View style={[styles.tokenLogoWrapper, wallet ? styles.walletTokenLogoWrapper : null]}>
           <Icon
             style={styles.tokenLogo}
             name={tokenMap[token].icon}
@@ -89,22 +76,15 @@ const ExtendedTitle = ({
         </View>
       )}
       {discrete ? (
-        <Image
-          source={blurs[`${theme}${balanceSize}`]}
-          style={styles[`blur${balanceSize}`]}
-        />
+        <Image source={blurs[`${theme}${balanceSize}`]} style={styles[`blur${balanceSize}`]} />
       ) : (
-        <Text style={[styles.title, styles.theme[`${type}Main`]]}>
-          {`${balance} ${token}`}
-        </Text>
+        <Text style={[styles.title, styles.theme[`${type}Main`]]}>{`${balance} ${token}`}</Text>
       )}
     </Animated.View>
   );
 };
 
-const SimpleHeader = ({
-  styles, type, title, scrollY
-}) => (
+const SimpleHeader = ({ styles, type, title, scrollY }) => (
   <Animated.Text
     numberOfLines={1}
     style={[
@@ -120,22 +100,21 @@ const SimpleHeader = ({
   </Animated.Text>
 );
 
-const localizedBalance = balance => {
+const localizedBalance = (balance) => {
   const language = 'en';
 
-  return Number(balance).toLocaleString(
-    `${language}-${language.toUpperCase()}`,
-    {
-      maximumFractionDigits: 20,
-    }
-  );
+  return Number(balance).toLocaleString(`${language}-${language.toUpperCase()}`, {
+    maximumFractionDigits: 20,
+  });
 };
 
-const HomeHeaderTitle = ({
-  styles, type, scrollY, address, balance, placeHolder, scrollToTop
-}) => {
-  const { token: { active }, theme, discrete } = useSelector(state => state.settings);
-  const { info } = useSelector(state => state.accounts);
+const HomeHeaderTitle = ({ styles, type, scrollY, address, balance, placeHolder, scrollToTop }) => {
+  const {
+    token: { active },
+    theme,
+    discrete,
+  } = useSelector((state) => state.settings);
+  const { info } = useSelector((state) => state.accounts);
   const wallet = false;
   const os = deviceType();
 
@@ -161,11 +140,7 @@ const HomeHeaderTitle = ({
             scrollY={data.scrollY}
           />
           <ExtendedTitle
-            balance={
-              data.balance
-                ? localizedBalance(fromRawLsk(data.balance))
-                : '0'
-            }
+            balance={data.balance ? localizedBalance(fromRawLsk(data.balance)) : '0'}
             theme={theme}
             token={data.token}
             styles={styles}

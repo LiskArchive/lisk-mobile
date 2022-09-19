@@ -2,7 +2,11 @@
 import { rest } from 'msw';
 
 import { LIMIT, API_VERSION } from 'utilities/api/constants';
-import { mockCustomInfiniteQueryData, mockCustomInfiniteQuery, mockCustomQuery } from '../__fixtures__';
+import {
+  mockCustomInfiniteQueryData,
+  mockCustomInfiniteQuery,
+  mockCustomQuery,
+} from '../__fixtures__';
 
 export const customInfiniteQueryMockHandler = rest.get(
   `*/api/${API_VERSION}/mock/custom-infinite-query`,
@@ -20,7 +24,7 @@ export const customInfiniteQueryMockHandler = rest.get(
     };
 
     return res(ctx.delay(500), ctx.json(response));
-  },
+  }
 );
 
 export const customQueryMockHandler = rest.get(
@@ -29,15 +33,14 @@ export const customQueryMockHandler = rest.get(
     const response = mockCustomQuery;
 
     return res(ctx.delay(500), ctx.json(response));
-  },
+  }
 );
 
-export const webSocketHandler = rest.get(
-  '*/socket.io/',
-  (_, res, ctx) => res(
+export const webSocketHandler = rest.get('*/socket.io/', (_, res, ctx) =>
+  res(
     ctx.status(200),
     ctx.set('Connection', 'keep-alive'),
     ctx.set('Content-Type', 'text/event-stream'),
-    ctx.body('data: SUCCESS\n\n'),
-  ),
+    ctx.body('data: SUCCESS\n\n')
+  )
 );

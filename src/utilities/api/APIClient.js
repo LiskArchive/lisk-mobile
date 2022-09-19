@@ -6,18 +6,15 @@ export class APIClient {
 
   axiosConfig = {
     timeout: 10000,
-  }
+  };
 
-  http = null
+  http = null;
 
-  create({ rpc, rest }) {
-    this.socket = io(
-      rpc,
-      { transports: ['websocket'] },
-    );
+  create({ ws, http }) {
+    this.socket = io(ws, { transports: ['websocket'] });
     const request = axios.create({
       ...this.axiosConfig,
-      baseURL: rest,
+      baseURL: http,
     });
 
     request.interceptors.response.use((res) => res.data);

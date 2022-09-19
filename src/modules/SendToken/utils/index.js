@@ -19,7 +19,7 @@ export const createTransactionObject = (nonce, amount = 0, message = '', publicK
     data: message,
   },
   signatures: [],
-  senderPublicKey: Buffer.from(publicKey, 'hex')
+  senderPublicKey: Buffer.from(publicKey, 'hex'),
 });
 
 export const getTransactionFee = ({
@@ -31,9 +31,9 @@ export const getTransactionFee = ({
   try {
     const feePerByte = selectedPriority.fee ?? 0;
     const schema = transactionsConstants.transferAssetSchema;
-    const maxAssetFee = transactionsConstants.moduleAssetMap[
-      transactionsConstants.moduleCommandNameIdMap.transfer
-    ].maxFee;
+    const maxAssetFee =
+      transactionsConstants.moduleAssetMap[transactionsConstants.moduleCommandNameIdMap.transfer]
+        .maxFee;
 
     const transactionObject = createTransactionObject(
       account.nonce,
@@ -51,18 +51,17 @@ export const getTransactionFee = ({
         baseFees: transactionsConstants.BASE_FEES,
       });
     }
-    const tieBreaker = selectedPriorityIndex === 0
-      ? 0
-      : transactionsConstants.MIN_FEE_PER_BYTE * feePerByte * Math.random();
+    const tieBreaker =
+      selectedPriorityIndex === 0
+        ? 0
+        : transactionsConstants.MIN_FEE_PER_BYTE * feePerByte * Math.random();
     const size = transactions.getBytes(transactionObject, schema).length;
     const calculatedFee = Number(minFee) + size * feePerByte + tieBreaker;
     const cappedFee = Math.min(calculatedFee, maxAssetFee);
     const feeInLsk = fromRawLsk(cappedFee.toString());
     const roundedValue = Number(feeInLsk).toFixed(7).toString();
 
-    const feedback = transaction.amount === ''
-      ? '-'
-      : `${roundedValue ? '' : 'Invalid amount'}`;
+    const feedback = transaction.amount === '' ? '-' : `${roundedValue ? '' : 'Invalid amount'}`;
     return {
       value: roundedValue,
       error: !!feedback,

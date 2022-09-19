@@ -1,4 +1,5 @@
 import React from 'react';
+import i18next from 'i18next';
 
 import { colors } from 'constants/styleGuide';
 import PinSvg from 'assets/svgs/PinSvg';
@@ -7,11 +8,10 @@ import DeleteSvg from 'assets/svgs/DeleteSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 
 export function useBlockchainApplicationRowActions({
-  t,
   application,
   variant,
   setShowDeleteDefaultApplicationModal,
-  deleteApplication
+  deleteApplication,
 }) {
   const { togglePin } = usePinBlockchainApplication();
 
@@ -23,8 +23,8 @@ export function useBlockchainApplicationRowActions({
       leftActions = [
         {
           title: !application.isPinned
-            ? t('application.explore.applicationList.pinText')
-            : t('application.explore.applicationList.unpinText'),
+            ? i18next.t('application.explore.applicationList.pinText')
+            : i18next.t('application.explore.applicationList.unpinText'),
           color: colors.light.ufoGreen,
           icon: () => (
             <PinSvg
@@ -38,10 +38,9 @@ export function useBlockchainApplicationRowActions({
       break;
 
     case 'manage':
-
       rightActions = [
         {
-          title: t('application.explore.applicationList.deleteText'),
+          title: i18next.t('application.explore.applicationList.deleteText'),
           color: colors.light.furyRed,
           icon: () => <DeleteSvg color={colors.light.white} />,
           onPress: () => {

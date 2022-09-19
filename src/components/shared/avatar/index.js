@@ -28,9 +28,7 @@ class Avatar extends React.Component {
 
   // eslint-disable-next-line max-statements
   render() {
-    const {
-      styles, address, size, scale, translate, theme
-    } = this.props;
+    const { styles, address, size, scale, translate, theme } = this.props;
 
     let Wrapper = View;
 
@@ -58,11 +56,7 @@ class Avatar extends React.Component {
             style={[styles.avatar, { width: '100%', height: '100%' }]}
             name="avatar-placeholder"
             size={size}
-            color={
-              theme === themes.light
-                ? colors.light.blueGray
-                : colors.dark.mountainMist
-            }
+            color={theme === themes.light ? colors.light.blueGray : colors.dark.mountainMist}
           />
         </Wrapper>
       );
@@ -70,24 +64,19 @@ class Avatar extends React.Component {
     const canvasSize = 200;
 
     const addressHashChunks = getHashChunks(address);
-    const gradientScheme = gradientSchemes[
-      addressHashChunks[0].substr(1, 2) % gradientSchemes.length
-    ];
+    const gradientScheme =
+      gradientSchemes[addressHashChunks[0].substr(1, 2) % gradientSchemes.length];
 
     const gradientsSchemesUrlsHashed = {
       primary: gradientScheme.primary.map((...rest) =>
-        replaceUrlByHashOnScheme(this.uniqueSvgUrlHash, ...rest)),
+        replaceUrlByHashOnScheme(this.uniqueSvgUrlHash, ...rest)
+      ),
       secondary: gradientScheme.secondary.map((...rest) =>
-        replaceUrlByHashOnScheme(this.uniqueSvgUrlHash, ...rest)),
+        replaceUrlByHashOnScheme(this.uniqueSvgUrlHash, ...rest)
+      ),
     };
-    const primaryGradients = pickTwo(
-      addressHashChunks[1],
-      gradientsSchemesUrlsHashed.primary
-    );
-    const secondaryGradients = pickTwo(
-      addressHashChunks[2],
-      gradientsSchemesUrlsHashed.secondary
-    );
+    const primaryGradients = pickTwo(addressHashChunks[1], gradientsSchemesUrlsHashed.primary);
+    const secondaryGradients = pickTwo(addressHashChunks[2], gradientsSchemesUrlsHashed.secondary);
     const shapes = [
       getBackgroundCircle(canvasSize, primaryGradients[0]),
       getShape(addressHashChunks[1], canvasSize, primaryGradients[1], 1),

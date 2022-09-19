@@ -20,10 +20,10 @@ export default () => ({
     },
     titleContainer: {
       flex: 1,
-      backgroundColor: 'red'
+      backgroundColor: 'red',
     },
     whiteBackground: {
-      backgroundColor: colors.light.white
+      backgroundColor: colors.light.white,
     },
     paddingLeft: {
       paddingLeft: 20,
@@ -41,6 +41,6 @@ export default () => ({
     },
     safeArea: {
       marginTop: safeAreaMarginTop,
-    }
-  }
+    },
+  },
 });

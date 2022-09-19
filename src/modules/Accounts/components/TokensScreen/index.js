@@ -17,21 +17,21 @@ import tokensTabStyles from './styles';
 const TokenItem = ({ token }) => {
   const tokenBalance = Number(fromRawLsk(token.availableBalance)).toLocaleString();
   const { styles } = useTheme({ styles: tokensTabStyles });
-  return <View style={[styles.tokenItem, styles.theme.tokenItem]} >
-    <View style={styles.row} >
-      <View style={[styles.row, styles.alignCenter]} >
-        <TokenSvg symbol="LSK" height={28} width={28} />
-        <P style={[styles.tokenTitle, styles.theme.tokenTitle]} >Lisk</P>
-      </View>
-      <View style={[styles.flex, styles.rightContent]} >
-        <H3 style={[styles.theme.tokenTitle]} >
-          {tokenBalance}
-        </H3>
-        {/* TODO: Implement currency conversion */}
-        <P style={[styles.theme.currency]} >25USD</P>
+  return (
+    <View style={[styles.tokenItem, styles.theme.tokenItem]}>
+      <View style={styles.row}>
+        <View style={[styles.row, styles.alignCenter]}>
+          <TokenSvg symbol="LSK" height={28} width={28} />
+          <P style={[styles.tokenTitle, styles.theme.tokenTitle]}>Lisk</P>
+        </View>
+        <View style={[styles.flex, styles.rightContent]}>
+          <H3 style={[styles.theme.tokenTitle]}>{tokenBalance}</H3>
+          {/* TODO: Implement currency conversion */}
+          <P style={[styles.theme.currency]}>25USD</P>
+        </View>
       </View>
     </View>
-  </View>;
+  );
 };
 
 const TokensScreen = ({ t, navigation }) => {
@@ -43,10 +43,12 @@ const TokensScreen = ({ t, navigation }) => {
 
   const lockedTokens = useMemo(() => {
     const res = [];
-    tokens.forEach(token => {
+    tokens.forEach((token) => {
       let amount = 0;
       if (token.lockedBalances) {
-        token.lockedBalances.forEach(lockedBalance => { amount += Number(lockedBalance.amount); });
+        token.lockedBalances.forEach((lockedBalance) => {
+          amount += Number(lockedBalance.amount);
+        });
       }
       if (amount) {
         res.push({ symbol: token.symbol, amount });
@@ -57,20 +59,19 @@ const TokensScreen = ({ t, navigation }) => {
 
   const isEmpty = useMemo(() => !isLoading && !tokens.length, [tokens, isLoading]);
 
-  return <SafeAreaView style={[styles.flex, styles.theme.container]} >
-    <HeaderBackButton
-      title={'accounts.allTokens'}
-      onPress={navigation.goBack}
-    />
-    <View style={styles.tokenContainer} >
-      {isEmpty && <EmptyState message={t('accounts.emptyTokenMessage')} />}
-      <FlatList
-        data={tokens}
-        renderItem={({ item }) => <TokenItem token={item} />}
-        keyExtractor={(item) => item.tokenID}
-      />
-    </View>
-  </SafeAreaView>;
+  return (
+    <SafeAreaView style={[styles.flex, styles.theme.container]}>
+      <HeaderBackButton title={'accounts.allTokens'} onPress={navigation.goBack} />
+      <View style={styles.tokenContainer}>
+        {isEmpty && <EmptyState message={t('accounts.emptyTokenMessage')} />}
+        <FlatList
+          data={tokens}
+          renderItem={({ item }) => <TokenItem token={item} />}
+          keyExtractor={(item) => item.tokenID}
+        />
+      </View>
+    </SafeAreaView>
+  );
 };
 
 export default memo(translate()(TokensScreen));

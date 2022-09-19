@@ -6,7 +6,7 @@ export default function getSendTokenSelectTokenStepStyles() {
       wrapper: {
         flex: 1,
         paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding
+        paddingRight: boxes.boxPadding,
       },
       container: {
         flex: 1,
@@ -14,13 +14,18 @@ export default function getSendTokenSelectTokenStepStyles() {
       row: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
       },
       feeContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 16
+        marginBottom: 16,
+      },
+      labelContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 8,
       },
       tokenSvg: {
         marginLeft: 8,
@@ -29,7 +34,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         color: colors.light.ultramarineBlue,
       },
       tokenAmountInCurrencyText: {
-        color: colors.light.slateGray
+        color: colors.light.slateGray,
       },
       priorityButtonBase: {
         flexDirection: 'column',
@@ -40,7 +45,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         borderRadius: 60,
         fontWeight: '200',
         paddingTop: 8,
-        paddingBottom: 8
+        paddingBottom: 8,
       },
       notSelectedPriorityButton: {
         borderColor: colors.light.platinumGray,
@@ -50,23 +55,25 @@ export default function getSendTokenSelectTokenStepStyles() {
         borderColor: colors.light.ultramarineBlue,
       },
       label: {
-        marginBottom: 8,
-        color: colors.light.blueGray
+        fontSize: 14,
+      },
+      iconLabel: {
+        marginRight: 6,
       },
       priorityButtonText: {
         color: colors.light.zodiacBlue,
-        fontWeight: '300'
+        fontWeight: '300',
       },
       priorityButtonFeeText: {
         color: colors.light.zodiacBlue,
-        fontWeight: '600'
+        fontWeight: '600',
       },
       text: {
-        color: colors.light.blueGray
+        color: colors.light.blueGray,
       },
       prevStepButton: {
         marginRight: 16,
-        flex: 1
+        flex: 1,
       },
     },
     [themes.light]: {
@@ -74,10 +81,13 @@ export default function getSendTokenSelectTokenStepStyles() {
         backgroundColor: colors.light.white,
       },
       text: {
-        color: colors.light.zodiacBlue
+        color: colors.light.zodiacBlue,
       },
       label: {
-        color: colors.light.zodiacBlue
+        color: colors.light.zodiacBlue,
+      },
+      messageLabel: {
+        color: colors.light.zodiacBlue,
       },
       priorityButtonText: {
         color: colors.light.zodiacBlue,
@@ -91,20 +101,64 @@ export default function getSendTokenSelectTokenStepStyles() {
         backgroundColor: colors.dark.mainBg,
       },
       text: {
-        color: colors.light.whiteSmoke
+        color: colors.light.whiteSmoke,
       },
       label: {
-        color: colors.light.white
+        color: colors.light.white,
+      },
+      messageLabel: {
+        color: colors.light.white,
       },
       priorityButtonText: {
-        color: colors.light.whiteSmoke
+        color: colors.light.whiteSmoke,
       },
       priorityButtonFeeText: {
         color: colors.light.whiteSmoke,
       },
       prevStepButton: {
         color: colors.light.whiteSmoke,
-      }
+      },
+    },
+  };
+}
+
+export function getSendTokenMessageFieldStyles(styles) {
+  return {
+    containerStyle: {
+      paddingTop: 0,
+      paddingRight: 0,
+      paddingLeft: 0,
+      ...styles?.container,
+    },
+    inputLabel: {
+      marginBottom: 8,
+      ...styles?.inputLabel,
+    },
+    input: {
+      padding: 16,
+      minHeight: 80,
+      ...styles?.input,
+    },
+  };
+}
+
+export function getSendTokenAmountFieldStyles(styles) {
+  return {
+    containerStyle: {
+      paddingTop: 0,
+      paddingRight: 0,
+      paddingLeft: 0,
+      ...styles?.container,
+      // marginBottom: 16,
+      // marginTop: 16,
+    },
+    inputLabel: {
+      marginBottom: 8,
+      ...styles?.inputLabel,
+    },
+    input: {
+      padding: 16,
+      ...styles?.input,
     },
   };
 }

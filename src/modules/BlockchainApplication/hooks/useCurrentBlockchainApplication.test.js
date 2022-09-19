@@ -3,7 +3,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 
-import { mockApplications } from '../__fixtures__';
+import { mockApplicationsMeta } from '../__fixtures__';
 import actionTypes from '../store/actionTypes';
 import { useCurrentBlockchainApplication } from './useCurrentBlockchainApplication';
 
@@ -11,7 +11,7 @@ const mockStore = configureMockStore();
 const mockDispatch = jest.fn();
 const mockState = {
   blockchainApplications: {
-    current: mockApplications[0],
+    current: mockApplicationsMeta[0],
   },
 };
 
@@ -42,7 +42,7 @@ describe('useCurrentBlockchainApplication hook', () => {
   it('should return correct current application', async () => {
     const [currentApplication] = result.current;
 
-    expect(currentApplication).toEqual(mockApplications[0]);
+    expect(currentApplication).toEqual(mockApplicationsMeta[0]);
   });
 
   it('setCurrentApplication should dispatch an action', async () => {
@@ -50,11 +50,11 @@ describe('useCurrentBlockchainApplication hook', () => {
 
     const expectedAction = {
       type: actionTypes.setCurrentApplication,
-      application: mockApplications[0],
+      application: mockApplicationsMeta[0],
     };
 
     act(() => {
-      setCurrentApplication(mockApplications[0]);
+      setCurrentApplication(mockApplicationsMeta[0]);
     });
 
     expect(store.getActions()).toEqual([expectedAction]);

@@ -12,12 +12,7 @@ export function getNavigationHeaderOptions({ route }) {
 export function getTabBarIcon({ route }) {
   return {
     tabBarIcon: (props) => {
-      return (
-        <TabBarIcon
-          focused={props.focused}
-          name={route.name}
-        />
-      );
-    }
+      return <TabBarIcon focused={props.focused} name={route.name} />;
+    },
   };
 }

@@ -1,52 +1,59 @@
+/* eslint-disable complexity */
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import { useController } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import i18next from 'i18next';
 
+import { useTheme } from 'hooks/useTheme';
+import { BookmarkList } from 'modules/Bookmark/components';
+import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
 import Picker from 'components/shared/Picker';
 import Avatar from 'components/shared/avatar';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import Input from 'components/shared/toolBox/input';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import CircleSvg from 'assets/svgs/CircleSvg';
+import BookmarksSvg from 'assets/svgs/BookmarksSvg';
 import { stringShortener } from 'utilities/helpers';
-import { useTheme } from 'hooks/useTheme';
+import colors from 'constants/styleGuide/colors';
+import { P } from 'components/shared/toolBox/typography';
 
-import getSendTokenSelectApplicationsStepStyles from './styles';
+import getSendTokenSelectApplicationsStepStyles, {
+  getSendTokenRecipientAccountFieldStyles,
+} from './styles';
 
-export function SendTokenSenderApplicationField({ form, applications, t }) {
-  const { field } = useController({
-    name: 'senderApplicationChainID',
-    control: form.control,
-  });
+export function SendTokenSenderApplicationField({
+  value,
+  onChange,
+  errorMessage,
+  applications,
+  style,
+}) {
+  const senderApplication = applications?.data?.find(
+    (application) => application.chainID === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  const senderApplication = applications?.data?.find(
-    application => application.chainID === field.value
-  );
-
   return (
-    <Picker
-      value={field.value}
-      onChange={field.onChange}
-      error={form.formState.errors.senderApplicationChainID?.message}
-    >
-      <Picker.Label>
-        {t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
+    <Picker value={value} onChange={onChange} error={errorMessage}>
+      <Picker.Label style={style?.label}>
+        {i18next.t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
       </Picker.Label>
 
       <Picker.Toggle
         disabled
-        placeholder={t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')}
+        placeholder={i18next.t('sendToken.applicationsSelect.senderApplicationFieldPlaceholder')}
+        style={style?.toggle}
       >
         {senderApplication && (
-          <View style={[styles.applicationNameContainer]}>
-            <Text style={[styles.text, styles.theme.text]}>
-              {senderApplication.name}
-            </Text>
+          <View style={[styles.row]}>
+            <Text style={[styles.text, styles.theme.text]}>{senderApplication.chainName}</Text>
 
             <Image
-              source={{ uri: senderApplication.images.logo.png }}
+              source={{ uri: senderApplication.logo.png }}
               style={[styles.applicationLogoImage]}
             />
           </View>
@@ -56,44 +63,38 @@ export function SendTokenSenderApplicationField({ form, applications, t }) {
   );
 }
 
-export function SendTokenRecipientApplicationField({ form, applications, t }) {
-  const { field } = useController({
-    name: 'recipientApplicationChainID',
-    control: form.control,
-  });
+export function SendTokenRecipientApplicationField({
+  value,
+  onChange,
+  errorMessage,
+  applications,
+  style,
+}) {
+  const recipientApplication = applications?.data?.find(
+    (application) => application.chainID === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  const recipientApplication = applications?.data?.find(
-    application => application.chainID === field.value
-  );
-
   return (
-    <Picker
-      value={form.value}
-      onChange={field.onChange}
-      error={form.formState.errors.recipientApplicationChainID?.message}
-    >
-      <Picker.Label style={{ marginTop: 16 }}>
-        {t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
+    <Picker value={value} onChange={onChange} error={errorMessage}>
+      <Picker.Label style={style?.label}>
+        {i18next.t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
       </Picker.Label>
 
       <Picker.Toggle
         disabled={applications?.loading}
-        placeholder={
-          t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')
-        }
+        placeholder={i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
+        style={style?.toggle}
       >
         {recipientApplication && (
-          <View style={[styles.applicationNameContainer]}>
-            <Text style={[styles.text, styles.theme.text]}>
-              {recipientApplication.name}
-            </Text>
+          <View style={[styles.row]}>
+            <Text style={[styles.text, styles.theme.text]}>{recipientApplication.chainName}</Text>
 
             <Image
-              source={{ uri: recipientApplication.images.logo.png }}
+              source={{ uri: recipientApplication.logo.png }}
               style={[styles.applicationLogoImage]}
             />
           </View>
@@ -105,18 +106,10 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
           data={applications?.data}
           keyExtractor={(item) => item.chainID}
           renderItem={(item) => (
-            <Picker.Item
-              key={item.chainID}
-              value={item.chainID}
-            >
-              <Text style={[styles.text, styles.theme.text]}>
-                {item.name}
-              </Text>
+            <Picker.Item key={item.chainID} value={item.chainID}>
+              <Text style={[styles.text, styles.theme.text]}>{item.chainName}</Text>
 
-              <Image
-                source={{ uri: item.images.logo.png }}
-                style={[styles.applicationLogoImage]}
-              />
+              <Image source={{ uri: item.logo.png }} style={[styles.applicationLogoImage]} />
             </Picker.Item>
           )}
           renderSpinner
@@ -127,56 +120,108 @@ export function SendTokenRecipientApplicationField({ form, applications, t }) {
   );
 }
 
-export function SendTokenRecipientAccountField({ form, accounts, t }) {
-  const { field } = useController({
-    name: 'recipientAccountAddress',
-    control: form.control,
-  });
+export function SendTokenRecipientAccountField({
+  value,
+  onChange,
+  errorMessage,
+  addressFormat,
+  onAddressFormatChange,
+  style,
+}) {
+  const bookmarks = useSelector(selectBookmarkList);
+
+  const recipientAccount = bookmarks.find((bookmark) => bookmark.address === value);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  const recipientAccount = accounts.find(
-    account => account.metadata.address === field.value
-  );
+  function handleInputChange(_value) {
+    if (addressFormat !== 'input') onAddressFormatChange('input');
+
+    onChange(_value);
+  }
+
+  function handlePickerChange(_value) {
+    if (addressFormat !== 'picker') onAddressFormatChange('picker');
+
+    onChange(_value);
+  }
 
   return (
-    <Picker
-      value={form.value}
-      onChange={field.onChange}
-      error={form.formState.errors.recipientAccountAddress?.message}
-    >
-      <Picker.Label style={ { marginTop: 16 } }>
-        {t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
-      </Picker.Label>
+    <>
+      <Input
+        label={i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
+        value={addressFormat === 'input' ? value : ''}
+        placeholder="Input wallet address or choose a username"
+        onChange={handleInputChange}
+        error={addressFormat === 'input' && errorMessage}
+        adornments={{
+          left: (!value || addressFormat === 'picker') && <CircleSvg />,
+          right: !!value && addressFormat === 'input' && <CircleCheckedSvg variant="fill" />,
+        }}
+        innerStyles={getSendTokenRecipientAccountFieldStyles(style)}
+      />
 
-      <Picker.Toggle
-        disabled
-        placeholder={t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
+      <Picker
+        value={addressFormat === 'picker' && value}
+        onChange={handlePickerChange}
+        error={addressFormat === 'picker' && errorMessage}
       >
-        {recipientAccount && (
-          <>
-            <View style={[styles.applicationNameContainer]}>
-              <Avatar
-                address={recipientAccount.metadata.address}
-                size={24}
-                style={{ marginRight: 8 }}
+        <Picker.Toggle
+          placeholder={
+            <View style={[styles.row]}>
+              <BookmarksSvg
+                variant="outline"
+                color={colors.light.blueGray}
+                style={{ marginRight: 4 }}
               />
 
-              <Text style={[styles.text, styles.theme.text]}>
-                {recipientAccount.metadata.name}
+              <Text style={[styles.placeholder]}>
+                {i18next.t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
+              </Text>
+            </View>
+          }
+          style={style?.picker}
+        >
+          {addressFormat === 'picker' && recipientAccount && (
+            <View style={[styles.row]}>
+              <Avatar address={recipientAccount.address} size={24} />
+
+              <Text style={[styles.accountName, styles.theme.accountName]}>
+                {recipientAccount.label}
               </Text>
 
               <Text style={[styles.accountAddress, styles.theme.accountAddress]}>
-                {stringShortener(recipientAccount.metadata.address, 5, 5)}
+                {stringShortener(recipientAccount.address, 5, 5)}
               </Text>
-            </View>
 
-            <CircleCheckedSvg variant="fill" />
-          </>
-        )}
-      </Picker.Toggle>
-    </Picker>
+              <CircleCheckedSvg variant="fill" style={{ marginLeft: 8 }} />
+            </View>
+          )}
+        </Picker.Toggle>
+
+        <Picker.Menu>
+          <BookmarkList
+            renderEmpty
+            Component={({ data }) => (
+              <Picker.Item key={data.address} value={data.address}>
+                <Avatar address={data.address} size={40} />
+
+                <View>
+                  {!!data.label && (
+                    <P style={[styles.accountName, styles.theme.accountName]}>{data.label}</P>
+                  )}
+
+                  <P style={[styles.accountAddress, styles.theme.accountAddress]}>
+                    {stringShortener(data.address, 6, 6)}
+                  </P>
+                </View>
+              </Picker.Item>
+            )}
+          />
+        </Picker.Menu>
+      </Picker>
+    </>
   );
 }

@@ -22,7 +22,7 @@ const modules = {
   token: 2,
   dpos: 5,
   multiSignature: 4,
-  legacyAccount: 1000
+  legacyAccount: 1000,
 };
 
 const commands = {
@@ -32,13 +32,13 @@ const commands = {
   unlockToken: 2,
   registerMultisignatureGroup: 0,
   reclaimLSK: 0,
-  reportDelegateMisbehavior: 3
+  reportDelegateMisbehavior: 3,
 };
 
 export const DEFAULT_PRIORITY = [
   { title: 'Low', amount: 0 },
   { title: 'Medium', amount: 0 },
-  { title: 'High', amount: 0 }
+  { title: 'High', amount: 0 },
 ];
 
 export const moduleCommandNameIdMap = {
@@ -48,38 +48,38 @@ export const moduleCommandNameIdMap = {
   registerDelegate: `${modules.dpos}:${commands.registerDelegate}`,
   reportDelegateMisbehavior: `${modules.dpos}:${commands.reportDelegateMisbehavior}`,
   registerMultisignatureGroup: `${modules.multiSignature}:${commands.registerMultisignatureGroup}`,
-  reclaimLSK: `${modules.legacyAccount}:${commands.reclaimLSK}`
+  reclaimLSK: `${modules.legacyAccount}:${commands.reclaimLSK}`,
 };
 
 export const moduleAssetMap = {
   [moduleCommandNameIdMap.transfer]: {
     maxFee: 1e7,
-    icon: 'txDefault'
+    icon: 'txDefault',
   },
   [moduleCommandNameIdMap.unlockToken]: {
     maxFee: 1e7,
-    icon: 'unlockToken'
+    icon: 'unlockToken',
   },
   [moduleCommandNameIdMap.voteDelegate]: {
     maxFee: 1e8,
-    icon: 'vote'
+    icon: 'vote',
   },
   [moduleCommandNameIdMap.registerDelegate]: {
     maxFee: 25e8,
-    icon: 'registerDelegate'
+    icon: 'registerDelegate',
   },
   [moduleCommandNameIdMap.reportDelegateMisbehavior]: {
     maxFee: 1e7,
-    icon: 'reportDelegateMisbehavior'
+    icon: 'reportDelegateMisbehavior',
   },
   [moduleCommandNameIdMap.registerMultisignatureGroup]: {
     maxFee: 5e8,
-    icon: 'multisignatureTransaction'
+    icon: 'multisignatureTransaction',
   },
   [moduleCommandNameIdMap.reclaimLSK]: {
     maxFee: 1e7,
-    icon: 'txDefault'
-  }
+    icon: 'txDefault',
+  },
 };
 
 /**
@@ -102,21 +102,21 @@ export const transferAssetSchema = {
   properties: {
     amount: {
       dataType: 'uint64',
-      fieldNumber: 1
+      fieldNumber: 1,
     },
     recipientAddress: {
       dataType: 'bytes',
       fieldNumber: 2,
       minLength: 20,
-      maxLength: 20
+      maxLength: 20,
     },
     data: {
       dataType: 'string',
       fieldNumber: 3,
       minLength: 0,
-      maxLength: 64
-    }
-  }
+      maxLength: 64,
+    },
+  },
 };
 
 export const transactions = {
@@ -124,32 +124,32 @@ export const transactions = {
     moduleAssetId: '2:0',
     fee: 1e7,
     title: t('Transfer'),
-    image: (theme) => (theme === themes.light ? transferLight : transferDark)
+    image: (theme) => (theme === themes.light ? transferLight : transferDark),
   },
   [moduleCommandNameIdMap.registerMultisignatureGroup]: {
     moduleAssetId: '4:0',
     fee: 5e8,
     title: t('Register multisignature group'),
-    image: (theme) => (theme === themes.light ? setSecondPassphraseLight : setSecondPassphraseDark)
+    image: (theme) => (theme === themes.light ? setSecondPassphraseLight : setSecondPassphraseDark),
   },
   [moduleCommandNameIdMap.registerDelegate]: {
     moduleAssetId: '5:0',
     fee: 25e8,
     title: t('Delegate registration'),
-    image: (theme) => (theme === themes.light ? registerDelegateLight : registerDelegateDark)
+    image: (theme) => (theme === themes.light ? registerDelegateLight : registerDelegateDark),
   },
   [moduleCommandNameIdMap.voteDelegate]: {
     moduleAssetId: '5:1',
     fee: 1e8,
     title: t('Vote'),
-    image: (theme) => (theme === themes.light ? voteLight : voteDark)
+    image: (theme) => (theme === themes.light ? voteLight : voteDark),
   },
   [moduleCommandNameIdMap.unlockToken]: {
     moduleAssetId: '5:2',
     fee: 1e8,
     title: t('Unlock'),
-    image: (theme) => (theme === themes.light ? txUnlockLight : txUnlockDark)
-  }
+    image: (theme) => (theme === themes.light ? txUnlockLight : txUnlockDark),
+  },
 };
 
 export const getTxConstant = ({ moduleAssetId }) => {
@@ -159,7 +159,7 @@ export const getTxConstant = ({ moduleAssetId }) => {
     title: result?.title ?? t('Transaction'),
     image: result?.image
       ? result?.image
-      : (theme) => (theme === themes.light ? txUnknownLight : txUnknownDark)
+      : (theme) => (theme === themes.light ? txUnknownLight : txUnknownDark),
   };
 };
 

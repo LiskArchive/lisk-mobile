@@ -1,6 +1,4 @@
-import {
-  themes, colors, fonts
-} from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getBlockchainApplicationRowStyles() {
   return {
@@ -35,13 +33,6 @@ export default function getBlockchainApplicationRowStyles() {
         maxWidth: '90%',
         marginRight: 15,
         fontWeight: '600',
-      },
-      deleteDefaultApplicationModal: {
-        backgroundColor: colors.light.white,
-        height: 280,
-        zIndex: 3,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
       },
     },
     [themes.light]: {

@@ -40,16 +40,11 @@ export const pinsReducer = (state = initialState.pins, { type, chainId }) => {
  */
 export const applicationsReducer = (
   state = initialState.applications,
-  {
-    type, applications, application, chainId
-  }
+  { type, applications, application, chainId }
 ) => {
   switch (type) {
     case actionTypes.setApplications:
-      state = applications.reduce(
-        (acc, app) => ({ ...acc, [app.chainID]: app }),
-        {}
-      );
+      state = applications.reduce((acc, app) => ({ ...acc, [app.chainID]: app }), {});
       return state;
     case actionTypes.addApplication:
       return { ...state, [application.chainID]: application };
@@ -93,9 +88,6 @@ const blockchainApplicationsReducer = combineReducers({
   current: currentReducer,
 });
 
-const blockchainApplications = persistReducer(
-  persistConfig,
-  blockchainApplicationsReducer
-);
+const blockchainApplications = persistReducer(persistConfig, blockchainApplicationsReducer);
 
 export default blockchainApplications;

@@ -39,10 +39,10 @@ const dark = {
   mainBg: common.black,
   footerBg: '#1C1C1C',
   textInputBg: '#1C1C1E',
-  tabBarText: common.white
+  tabBarText: common.white,
 };
 
 export default {
   light,
-  dark
+  dark,
 };

@@ -304,6 +304,7 @@
       "switchAccount": "",
       "decryptPassphrase": "",
       "decryptPassphraseError": "",
+      "encryptPassphraseError": "",
       "addAccountDescription": "",
       "secret_phrase": "",
       "restore_file": "",
@@ -311,9 +312,11 @@
       "passwordSetupDescription": "",
       "passwordSetupSuccessTitle": "",
       "passwordSetupSuccessDescription": "",
+      "downloaded": "",
       "buttons": {
         "passwordSetupContinue": "",
-        "save_account": ""
+        "saveAccount": "",
+        "download": ""
       }
     },
     "form": {
@@ -355,7 +358,11 @@
       "delete": {
         "title": "App entfernen?",
         "descriptionText": "Diese App befindet sich nicht mehr in Ihrer Anwendungsliste.",
-        "confirmButtonText": "Jetzt entfernen"
+        "confirmButtonText": "Jetzt entfernen",
+        "success": {
+          "title": "App wurde jetzt entfernt",
+          "description": "Sie können {{applicationName}} jederzeit wieder zu Ihrer Anwendungsliste hinzufügen."
+        }  
       },
       "deleteDefaultApplicationModal": {
         "description": "Die Standardanwendung kann nicht entfernt werden",
@@ -363,27 +370,37 @@
       },
       "continueToWalletButtonText": "Weiter zur Geldbörse"
     },
-    "explore":{
+    "explore": {
       "title": "Anwendungen",
       "statsButtonText": "Statistiken",
-      "applicationList":{
-        "searchPlaceholder": "Suchanwendung",
+      "applicationList": {
+        "title": "Alle Apps",
         "loadingText": "Anwendungen werden geladen...",
         "errorText": "Fehler beim Laden Ihrer Anwendungen.",
         "emptyText": "Sie haben noch keine Bewerbungen.",
         "pinText": "Pin",
         "unpinText": "Unpin",
         "deleteText": "Löschen"
+      },
+      "externalApplicationList": {
+        "title": "Externe Verbindungen",
+        "loadingText": "Externe Verbindungen laden...",
+        "errorText": "Fehler beim Laden Ihrer externen Verbindungen.",
+        "emptyText": "Sie haben noch keine externen Verbindungen.",
+        "detailsText": "Info",
+        "disconnectText": "Trennen",
+        "chainIDLabel": "Chain ID"
       }
-    }},
-    "requestTokens": {
-      "title": "",
-      "recipient": "",
-      "recipientApplication": "",
-      "selectApplication": "",
-      "selectToken": "",
-      "token": ""
-    },
+    }
+  },
+  "requestTokens": {
+    "title": "",
+    "recipient": "",
+    "recipientApplication": "",
+    "selectApplication": "",
+    "selectToken": "",
+    "token": ""
+  },
   "sendToken": {
     "applicationsSelect": {
       "loadingApplicationsText": "Laden...",
@@ -393,7 +410,7 @@
       "recipientApplicationFieldLabel": "Zur App",
       "recipientApplicationFieldPlaceholder": "Wählen Sie eine App aus",
       "recipientAccountFieldLabel": "Empfänger:in",
-      "recipientAccountFieldPlaceholder": "Wählen Sie ein Empfängerkonto aus",
+      "recipientAccountFieldPlaceholder": "Aus Lesezeichen auswählen",
       "nextStepButtonText": "Weiter"
     },
     "tokenSelect": {
@@ -418,7 +435,7 @@
       "highPriorityLabel": "Hoch",
       "transactionFeeLabel": "Transaktionsgebühr",
       "loadingTransactionFeeText": "Transaktionsgebühr wird geladen...",
-      "errorLoadingTransactionFeeText": "Fehler bei der Gebührenberechnung!",      
+      "errorLoadingTransactionFeeText": "Fehler bei der Gebührenberechnung!",
       "initializationFeeLabel": "Initialisierungsgebühr",
       "loadingInitializationFeeText": "Initialisierungsgebühr wird geladen...",
       "cmmFeeLabel": "CCM-Gebühr",
@@ -443,13 +460,14 @@
       },
       "error": {
         "title": "Transaktion fehlgeschlagen",
-        "description": "Bei der Transaktion ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+        "description1": "Bei der Transaktion ist ein Fehler aufgetreten.",
+        "description2": "Bitte versuche es erneut.",
         "retryButtonText": "Versuchen Sie es nochmal",
         "reportErrorLabel": "Bleibt das Problem bestehen?",
         "reportErrorButtonText": "Melden Sie den Fehler per E-Mail"
       }
     },
-    "errors" : {
+    "errors": {
       "generalMessage": "Bitte füllen Sie alle erforderlichen Felder aus, um Ihre Token zu senden.",
       "senderApplicationChainID": "Die App, von der gesendet werden soll, muss angegeben werden",
       "recipientApplicationChainID": "Die App, die die Token erhält, muss angegeben werden",
@@ -458,11 +476,34 @@
       "amountRequired": "Token-Betrag ist erforderlich",
       "amountMustBeNumber": "Der Betrag muss eine Zahl sein",
       "amountMustBePositive": "Tokenbetrag muss eine positive Zahl sein",
-      "priority":"Priorität muss angegeben werden"
+      "priority": "Priorität muss angegeben werden"
+    },
+    "info": {
+      "bytesCounter": {
+        "title": "Byte-Zähler",
+        "description1": "Lisk zählt Ihre Nachricht in Bytes, also denken Sie daran, dass die Länge Ihrer Nachricht in verschiedenen Sprachen variieren kann.",
+        "description2": "Unterschiedliche Zeichen können eine unterschiedliche Menge an Bytes verbrauchen."
+      },
+      "priority": {
+        "title": "Transaktionspriorität",
+        "description1": "Wenn das Netzwerk ausgelastet ist, werden Transaktionen mit einer höheren Priorität früher bestätigt."
+      },
+      "transactionFee": {
+        "title": "Transaktionsgebühr",
+        "description1": "Gebühr basiert auf Bytes, kann vom Benutzer je nach Priorität festgelegt werden."
+      },
+      "initializationFee": {
+        "title": "Initialisierungsgebühr",
+        "description1": "Einige Befehle haben eine zusätzliche Befehlsgebühr (delegierte Registrierung in DPoS, Kettenregistrierung in Interoperabilität), diese Gebühr sollte genau gleich der durch den Befehl festgelegten Konstante sein."
+      },
+      "cmmFee": {
+        "title": "CMM-Gebühr",
+        "description1": "Kettenübergreifende Nachrichten sind die Objekte, die die kettenübergreifenden Befehle enthalten. Sie haben eine Gebühreneigenschaft, die auch als Nachrichtengebühr bezeichnet wird, um sie von Transaktionsgebühren zu unterscheiden."
+      }
     }
   },
   "accounts": {
-    "accountsManager" : {
+    "accountsManager": {
       "title": "Konten verwalten",
       "description": "Sie können Ihr Konto wechseln und auch jedes Konto entfernen, das Sie derzeit nicht verwenden",
       "addAccountButtonText": "Konto hinzufügen",
@@ -482,7 +523,7 @@
       "send": ""
     }
   },
-  "transactions" : {
+  "transactions": {
     "transactionDetails": {
       "loadingText": "Transaktion wird geladen...",
       "errorText": "Fehler beim Laden der Transaktion!",

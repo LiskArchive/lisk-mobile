@@ -1,7 +1,7 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import * as sendTokenHandlers from 'modules/SendToken/mocks';
 import * as transactionHandlers from 'modules/Transactions/mocks';
 import * as blockchainAppsHandler from 'modules/BlockchainApplication/mocks';
+import * as networkHandlers from 'modules/Network/mocks';
 import * as generalApiHandlers from 'utilities/api/mocks';
 
 export default [
@@ -9,4 +9,5 @@ export default [
   ...Object.values(transactionHandlers),
   ...Object.values(generalApiHandlers),
   ...Object.values(blockchainAppsHandler),
+  ...Object.values(networkHandlers),
 ];

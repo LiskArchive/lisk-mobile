@@ -7,10 +7,6 @@ import { mockSendTokenResponse } from '../__fixtures__';
 export const sendTokenMockHandler = rest.post(
   `*/api/${API_VERSION}/transactions`,
   (_, res, ctx) => {
-    return res(
-      ctx.delay(20),
-      ctx.status(201),
-      ctx.json(mockSendTokenResponse),
-    );
+    return res(ctx.delay(20), ctx.status(201), ctx.json(mockSendTokenResponse));
   }
 );

@@ -8,13 +8,8 @@ import AccountList from '../AccountList';
 
 import getAccountsManagerStyles from './styles';
 
-export default function AccountsManager({
-  mode = 'screen',
-  onAccountPress,
-  style
-}) {
-  const [activeSection,
-    setActiveSection] = useState({ id: 'accountsList', data: undefined });
+export default function AccountsManager({ mode = 'screen', onAccountPress, style }) {
+  const [activeSection, setActiveSection] = useState({ id: 'accountsList', data: undefined });
 
   const { accounts } = useAccounts();
 
@@ -34,7 +29,8 @@ export default function AccountsManager({
           accounts={accounts}
           onAccountPress={onAccountPress}
           onDeleteAccountPress={(account) =>
-            setActiveSection({ id: 'deleteAccountConfirmation', data: account })}
+            setActiveSection({ id: 'deleteAccountConfirmation', data: account })
+          }
           style={style}
         />
       );
@@ -55,14 +51,6 @@ export default function AccountsManager({
   }
 
   return (
-    <View
-      style={[
-        styles.container,
-        styles.theme.container,
-        style?.container
-      ]}
-    >
-      {children}
-    </View>
+    <View style={[styles.container, styles.theme.container, style?.container]}>{children}</View>
   );
 }
