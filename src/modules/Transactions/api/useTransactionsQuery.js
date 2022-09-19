@@ -11,7 +11,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrent
  * @returns - The query state of the API call. Includes the data
  * (with the array of transactions), loading state, error state, and more.
  */
-export function useGetTransactionsQuery({ config: customConfig = {}, options = {} } = {}) {
+export function useTransactionsQuery({ config: customConfig = {}, options = {} } = {}) {
   const [currentAccount] = useCurrentAccount();
 
   const config = {

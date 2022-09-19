@@ -12,7 +12,7 @@ export function useAccountTokensQuery(address, { config: customConfig = {}, opti
     event: 'get.accountTokens',
     ...customConfig,
     params: {
-      address: 'lskezo8pcrbsoceuuu64rpc8w2qkont2ec3n772yu',
+      address,
       limit: LIMIT,
       ...(customConfig?.params || {}),
     },

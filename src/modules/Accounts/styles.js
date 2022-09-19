@@ -1,4 +1,4 @@
-import { themes, colors, fonts } from 'constants/styleGuide';
+import { themes, colors, fonts, boxes } from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -9,11 +9,10 @@ export default () => ({
       paddingTop: 20,
     },
     body: {
-      padding: 20,
-      flex: 1,
+      padding: boxes.boxPadding,
     },
     topContainer: {
-      paddingLeft: 20,
+      marginLeft: 20,
       marginRight: 60,
     },
     discreteContainer: {
