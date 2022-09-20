@@ -13,7 +13,7 @@ const BottomModal = ({ showClose = true, show, toggleShow, children }) => {
       transparent
       visible={show}
       onRequestClose={() => toggleShow(false)}
-      animationType="slide"
+      // animationType="slide"
     >
       <View style={[styles.overlay, styles.theme.overlay]}>
         <View style={[styles.container, styles.theme.container]}>

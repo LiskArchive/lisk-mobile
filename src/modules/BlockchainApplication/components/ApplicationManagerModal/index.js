@@ -15,11 +15,7 @@ export default function ApplicationManagerModal({ show, setShow }) {
 
   return (
     <BottomModal show={show} toggleShow={setShow} style={{ container: styles.container }}>
-      <Stepper
-        currentIndex={0}
-        finalCallback={closeModal}
-        styles={{ container: { width: '100%' } }}
-      >
+      <Stepper currentIndex={0} finalCallback={closeModal}>
         <ManageApplication closeModal={closeModal} />
         <DeleteApplication />
         <DeleteApplicationSuccess />

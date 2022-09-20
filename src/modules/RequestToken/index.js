@@ -176,11 +176,7 @@ export default function RequestToken() {
         </View>
       </KeyboardAwareScrollView>
 
-      <BottomModal
-        style={{ container: styles.modalContainer }}
-        show={modalOpen}
-        toggleShow={setModalOpen}
-      >
+      <BottomModal show={modalOpen} toggleShow={setModalOpen}>
         <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
           <View>
             {renderQRCode(qrCodeSize)}

@@ -9,7 +9,6 @@ export default () => ({
       borderTopRightRadius: 24,
       padding: 16,
       flexDirection: 'column',
-      alignItems: 'center',
       justifyContent: 'center',
     },
     overlay: {
@@ -27,6 +26,7 @@ export default () => ({
       width: 34,
       borderRadius: 40,
       marginTop: 4,
+      alignSelf: 'center',
     },
   },
 
