@@ -2,7 +2,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
-import { BackHandler, View } from 'react-native';
+import { BackHandler, SafeAreaView, View } from 'react-native';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,11 +14,10 @@ import { validateAddress } from 'utilities/validators';
 import { stringShortener } from 'utilities/helpers';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import DropDownHolder from 'utilities/alert';
-import { IconButton } from 'components/shared/toolBox/button';
+import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import Input from 'components/shared/toolBox/input';
 import Avatar from 'components/shared/avatar';
 import Scanner from 'components/shared/scanner';
-import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScrollView';
 import { P, Small } from 'components/shared/toolBox/typography';
 import { selectBookmarkList } from '../store/selectors';
 import { addBookmark, editBookmark } from '../store/actions';
@@ -142,7 +141,7 @@ export default function AddBookmark({ route }) {
   }, [bookmarkList, navigation, route.params?.account, route.params?.action]);
 
   return (
-    <View style={[styles.wrapper, styles.theme.wrapper]}>
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
       <Scanner
         ref={scanner}
         navigation={navigation}
@@ -152,70 +151,62 @@ export default function AddBookmark({ route }) {
         permissionDialogTitle={i18next.t('Permission to use camera')}
         permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
       />
-      <KeyboardAwareScrollView
-        onSubmit={handleSubmit}
-        button={{
-          title: editMode ? i18next.t('Save changes') : i18next.t('Add to bookmarks'),
-        }}
-        styles={{
-          container: styles.container,
-          innerContainer: styles.innerContainer,
-        }}
-      >
-        <View style={styles.form}>
-          {!incomingData ? (
-            <View style={styles.addressContainer}>
-              <Input
-                label={i18next.t('Address')}
-                autoCorrect={false}
-                innerStyles={{
-                  errorMessage: styles.errorMessage,
-                }}
-                onChange={setAddress}
-                value={address.value}
-                error={setError(address.validity, 'address')}
-                adornments={{
-                  left: <Avatar address={address.value} size={24} />,
-                  right: (
-                    <IconButton
-                      onPress={() => scanner.current?.toggleCamera?.()}
-                      titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                      title={i18next.t('Scan')}
-                      icon="scanner"
-                      iconSize={18}
-                      color={colors.light.ultramarineBlue}
-                    />
-                  ),
-                }}
-              />
-            </View>
-          ) : (
-            <View style={styles.row}>
-              <P style={[styles.label, styles.theme.label]}>Address</P>
-              <View style={styles.staticAddressContainer}>
-                <Avatar
-                  address={incomingData?.address || ''}
-                  style={styles.staticAvatar}
-                  size={35}
-                />
-                <Small style={[styles.address, styles.theme.address]}>
-                  {stringShortener(incomingData?.address, 6, 5)}
-                </Small>
-              </View>
-            </View>
-          )}
 
-          <Input
-            label={i18next.t('Label')}
-            autoCorrect={false}
-            innerStyles={{ inputLabel: styles.input }}
-            multiline={false}
-            onChange={handleLabel}
-            error={setError(label.validity, 'label')}
-            value={label.value}
-          />
-        </View>
-      </KeyboardAwareScrollView>
-    </View>
+      <View style={styles.body}>
+        {!incomingData ? (
+          <View style={styles.addressContainer}>
+            <Input
+              label={i18next.t('Address')}
+              autoCorrect={false}
+              innerStyles={{
+                errorMessage: styles.errorMessage,
+              }}
+              onChange={setAddress}
+              value={address.value}
+              error={setError(address.validity, 'address')}
+              adornments={{
+                left: <Avatar address={address.value} size={24} />,
+                right: (
+                  <IconButton
+                    onPress={() => scanner.current?.toggleCamera?.()}
+                    titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
+                    title={i18next.t('Scan')}
+                    icon="scanner"
+                    iconSize={18}
+                    color={colors.light.ultramarineBlue}
+                  />
+                ),
+              }}
+            />
+          </View>
+        ) : (
+          <View style={styles.row}>
+            <P style={[styles.label, styles.theme.label]}>Address</P>
+            <View style={styles.staticAddressContainer}>
+              <Avatar address={incomingData?.address || ''} style={styles.staticAvatar} size={35} />
+              <Small style={[styles.address, styles.theme.address]}>
+                {stringShortener(incomingData?.address, 6, 5)}
+              </Small>
+            </View>
+          </View>
+        )}
+
+        <Input
+          label={i18next.t('Label')}
+          autoCorrect={false}
+          innerStyles={{ inputLabel: styles.input }}
+          multiline={false}
+          onChange={handleLabel}
+          error={setError(label.validity, 'label')}
+          value={label.value}
+        />
+      </View>
+
+      <View style={[styles.footer]}>
+        <PrimaryButton onClick={handleSubmit} noTheme>
+          {editMode ? i18next.t('Save changes') : i18next.t('Add to bookmarks')}
+        </PrimaryButton>
+      </View>
+    </SafeAreaView>
   );
 }

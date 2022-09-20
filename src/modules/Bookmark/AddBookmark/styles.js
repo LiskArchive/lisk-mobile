@@ -1,19 +1,19 @@
 import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
+import { Platform } from 'react-native';
+
 export default () => ({
   common: {
-    wrapper: {
-      flex: 1,
-    },
     container: {
-      padding: boxes.boxPadding,
-    },
-    innerContainer: {
-      flexDirection: 'column',
       flex: 1,
     },
-    form: {
-      paddingBottom: boxes.boxPadding,
+    body: {
+      padding: boxes.boxPadding,
+      flex: 1,
+    },
+    footer: {
+      padding: boxes.boxPadding,
+      paddingBottom: Platform.OS === 'android' ? boxes.boxPadding : 0,
     },
     input: {
       marginTop: 8,
@@ -57,7 +57,7 @@ export default () => ({
     },
   },
   [themes.light]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.light.white,
     },
     scanButtonTitle: {
@@ -71,7 +71,7 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.mainBg,
     },
     scanButtonTitle: {
