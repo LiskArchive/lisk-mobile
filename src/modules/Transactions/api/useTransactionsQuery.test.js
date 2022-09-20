@@ -10,13 +10,12 @@ import {
   mockMappedApplicationsMeta,
 } from 'modules/BlockchainApplication/__fixtures__';
 import { mockSavedAccounts } from 'modules/Accounts/__fixtures__';
-import { mockGetTransactionQuery, mockTransactions } from '../__fixtures__';
-import { useGetTransactionQuery } from './useGetTransactionQuery';
-
-const queryClient = new QueryClient();
+import { mockGetTransactionsQuery } from '../__fixtures__';
+import { useTransactionsQuery } from './useTransactionsQuery';
 
 jest.useRealTimers();
 
+const queryClient = new QueryClient();
 const mockStore = configureMockStore();
 const mockDispatch = jest.fn();
 const mockState = {
@@ -44,7 +43,10 @@ jest.spyOn(useCurrentAccount, 'useCurrentAccount').mockImplementation(() => [
   },
 ]);
 
-describe('useGetTransactionQuery hook', () => {
+describe('useTransactionsQuery hook', () => {
+  const limit = 2;
+  const config = { params: { limit } };
+
   const store = mockStore(mockState);
 
   const wrapper = ({ children }) => (
@@ -54,9 +56,7 @@ describe('useGetTransactionQuery hook', () => {
   );
 
   it('fetch data correctly', async () => {
-    const { result, waitFor } = renderHook(() => useGetTransactionQuery(mockTransactions[0].id), {
-      wrapper,
-    });
+    const { result, waitFor } = renderHook(() => useTransactionsQuery({ config }), { wrapper });
 
     expect(result.current.isLoading).toBeTruthy();
 
@@ -64,7 +64,14 @@ describe('useGetTransactionQuery hook', () => {
 
     expect(result.current.isSuccess).toBeTruthy();
 
-    const expectedResponse = mockGetTransactionQuery;
+    const expectedResponse = {
+      data: mockGetTransactionsQuery.data.slice(0, limit),
+      meta: {
+        ...mockGetTransactionsQuery.meta,
+        count: limit,
+        offset: 0,
+      },
+    };
 
     expect(result.current.data).toEqual(expectedResponse);
   });

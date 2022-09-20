@@ -519,9 +519,11 @@
     "tokens": "Tokens",
     "lockedTokens": "Locked Tokens",
     "emptyTokenMessage": "You do not have any token on this account. You can request for tokens",
+    "loadingTokensText": "Loading tokens...",
+    "errorOnTokensText": "Error loading tokens!",
     "allTokens": "All Tokens",
     "buttons": {
-      "viewAll": "View All",
+      "viewAll": "View all",
       "request": "Request",
       "send": "Send"
     }

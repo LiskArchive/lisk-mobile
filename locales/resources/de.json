@@ -514,7 +514,9 @@
     },
     "tokens": "",
     "lockedTokens": "",
-    "emptyTokenMessage": "",
+    "emptyTokenMessage": "Sie haben kein Token auf diesem Konto. Sie können Token anfordern",
+    "loadingTokensText": "Token werden geladen...",
+    "errorOnTokensText": "Fehler beim Laden der Token!",
     "allTokens": "",
     "buttons": {
       "viewAll": "",
