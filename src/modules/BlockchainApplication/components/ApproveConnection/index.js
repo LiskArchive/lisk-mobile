@@ -35,7 +35,7 @@ const ApproveConnection = ({ event, onFinish, sharedData: { selectedAccounts } }
   }
 
   return (
-    <View>
+    <>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
@@ -77,17 +77,15 @@ const ApproveConnection = ({ event, onFinish, sharedData: { selectedAccounts } }
         ))}
       </View>
       <View style={styles.horizontalLine} />
-      <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton style={[styles.button, styles.outlineButton]} onPress={rejectHandler}>
-            <P style={[styles.buttonText, styles.outlineButtonText]}>Reject</P>
-          </PrimaryButton>
-          <PrimaryButton style={styles.button} onPress={connectHandler}>
-            <P style={[styles.buttonText]}>Approve</P>
-          </PrimaryButton>
-        </View>
+      <View style={[styles.container, styles.buttonContainer]}>
+        <PrimaryButton style={[styles.button, styles.outlineButton]} onPress={rejectHandler}>
+          <P style={[styles.buttonText, styles.outlineButtonText]}>Reject</P>
+        </PrimaryButton>
+        <PrimaryButton style={styles.button} onPress={connectHandler}>
+          <P style={[styles.buttonText]}>Approve</P>
+        </PrimaryButton>
       </View>
-    </View>
+    </>
   );
 };
 
