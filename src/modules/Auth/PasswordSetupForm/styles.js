@@ -12,6 +12,7 @@ export default () => ({
       flex: 1,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.base,
+      marginBottom: 16,
     },
     formContainer: {
       paddingTop: 10,
@@ -19,6 +20,7 @@ export default () => ({
     inputContainer: {
       paddingLeft: 0,
       paddingRight: 0,
+      marginTop: 16,
     },
     input: {
       fontFamily: fonts.family.context,

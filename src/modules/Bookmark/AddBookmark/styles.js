@@ -1,66 +1,29 @@
-import { Platform } from 'react-native';
 import { themes, colors, boxes, fonts } from 'constants/styleGuide';
+
+import { Platform } from 'react-native';
 
 export default () => ({
   common: {
-    wrapper: {
+    container: {
       flex: 1,
     },
-    innerContainer: {
-      flexDirection: 'column',
+    body: {
+      padding: boxes.boxPadding,
       flex: 1,
     },
-    form: {
-      paddingBottom: boxes.boxPadding,
+    footer: {
+      padding: boxes.boxPadding,
+      paddingBottom: Platform.OS === 'android' ? boxes.boxPadding : 0,
     },
     input: {
-      marginTop: 0,
-      flexWrap: 'wrap',
-      flex: 1,
-    },
-    scanButton: {
-      position: 'absolute',
-      right: 20,
-      zIndex: 99,
-      top: 24,
-      paddingLeft: 10,
-      paddingBottom: 10,
-      width: 67,
-      height: 30,
+      marginTop: 8,
     },
     scanButtonTitle: {
       fontSize: 14,
-      paddingLeft: 5,
-    },
-    longTitle: {
-      width: 87,
+      paddingLeft: 8,
     },
     addressContainer: {
       width: '100%',
-    },
-    addressInput: {
-      ...Platform.select({
-        android: {
-          height: 48,
-        },
-        ios: {
-          height: 48,
-          paddingBottom: 10,
-        },
-      }),
-    },
-    addressInputWithAvatar: {
-      paddingLeft: 40,
-    },
-    addressInputContainer: {
-      ...Platform.select({
-        android: {
-          minHeight: 58,
-        },
-        ios: {
-          minHeight: 48,
-        },
-      }),
     },
     avatar: {
       position: 'absolute',
@@ -77,25 +40,24 @@ export default () => ({
       alignItems: 'center',
     },
     staticAvatar: {
-      // paddingBottom: 0,
-      marginRight: 10,
+      marginRight: 8,
     },
     row: {
-      marginTop: 25,
-      marginBottom: 5,
+      marginTop: 24,
+      marginBottom: 4,
       marginRight: boxes.boxPadding,
       marginLeft: boxes.boxPadding,
     },
     label: {
-      marginTop: 5,
-      marginBottom: 7,
+      marginTop: 4,
+      marginBottom: 8,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
       fontWeight: '400',
     },
   },
   [themes.light]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.light.white,
     },
     scanButtonTitle: {
@@ -109,7 +71,7 @@ export default () => ({
     },
   },
   [themes.dark]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.mainBg,
     },
     scanButtonTitle: {
