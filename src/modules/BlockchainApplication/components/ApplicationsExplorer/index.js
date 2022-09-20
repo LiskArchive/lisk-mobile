@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { View } from 'react-native-interactable';
+/* eslint-disable max-statements */
+import React, { useState, useContext, useMemo } from 'react';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
+import Stepper from 'components/shared/Stepper';
 
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'hooks/useTheme';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import { IconButton } from 'components/shared/toolBox/button';
@@ -11,6 +14,9 @@ import Tabs from 'components/shared/Tabs';
 import BottomModal from 'components/shared/BottomModal';
 import StatsSvg from 'assets/svgs/StatsSvg';
 import { colors, themes } from 'constants/styleGuide';
+import Fab from 'components/shared/Fab';
+import QRCodeSvg from 'assets/svgs/QRCodeSvg';
+import CopySvg from 'assets/svgs/CopySvg';
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats';
 import ApplicationList from '../ApplicationList';
@@ -19,6 +25,19 @@ import ApplicationsStats from '../ApplicationsStats';
 import ExternalApplicationList from '../ExternalApplicationList';
 
 import getBlockchainApplicationsExplorerStyles from './styles';
+import BridgeApplication from '../BridgeApplication';
+import InitiateConnection from '../InitiateConnection';
+import ApproveConnection from '../ApproveConnection';
+import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
+
+const actions = [
+  {
+    key: 'paste',
+    text: 'Paste URI',
+    icon: <CopySvg variant="outline" color={colors.light.white} />,
+  },
+  { key: 'scan', text: 'Scan QR Code', icon: <QRCodeSvg /> },
+];
 
 /**
  *
@@ -27,10 +46,11 @@ import getBlockchainApplicationsExplorerStyles from './styles';
  */
 export default function BlockchainApplicationsExplorer() {
   const navigation = useNavigation();
-
+  const { events } = useContext(ConnectionContext);
   const [activeTab, setActiveTab] = useState('internalApplications');
   const [showStatsModal, setShowStatsModal] = useState(false);
-
+  const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
+  const tabBarHeight = useBottomTabBarHeight();
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
   const { data } = useBlockchainApplicationStats();
 
@@ -38,8 +58,18 @@ export default function BlockchainApplicationsExplorer() {
     styles: getBlockchainApplicationsExplorerStyles(),
   });
 
+  const onFabItemPress = (item) => {
+    if (item.key === 'paste') {
+      setShowBridgeAppModal(true);
+    }
+  };
+
+  const onCancelConnection = () => setShowBridgeAppModal(false);
+
+  const connectionEvent = useMemo(() => events[events.length - 1], [events]);
+
   return (
-    <>
+    <View style={styles.container}>
       <NavigationSafeAreaView>
         <HeaderBackButton
           title={i18next.t('application.explore.title')}
@@ -59,8 +89,8 @@ export default function BlockchainApplicationsExplorer() {
           titleStyle={[styles.header]}
         />
 
-        <View style={[styles.body]}>
-          <Tabs value={activeTab} onClick={(tab) => setActiveTab(tab)}>
+        <View style={[styles.body, styles.flex]}>
+          <Tabs value={activeTab} onClick={setActiveTab}>
             <Tabs.Tab value="internalApplications">
               {i18next.t('application.explore.applicationList.title')}
             </Tabs.Tab>
@@ -68,7 +98,6 @@ export default function BlockchainApplicationsExplorer() {
               {i18next.t('application.explore.externalApplicationList.title')}
             </Tabs.Tab>
           </Tabs>
-
           <Tabs.Panel index="internalApplications" value={activeTab}>
             <ApplicationList
               applications={applicationsMetadata}
@@ -90,11 +119,14 @@ export default function BlockchainApplicationsExplorer() {
         </View>
       </NavigationSafeAreaView>
 
-      <BottomModal
-        show={showStatsModal}
-        toggleShow={() => setShowStatsModal(false)}
-        style={{ container: styles.statsModal }}
-      >
+      <BottomModal show={showBridgeAppModal} toggleShow={() => setShowBridgeAppModal(false)}>
+        <Stepper>
+          <BridgeApplication />
+          <InitiateConnection event={connectionEvent} onFinish={onCancelConnection} />
+          <ApproveConnection event={connectionEvent} onFinish={onCancelConnection} />
+        </Stepper>
+      </BottomModal>
+      <BottomModal show={showStatsModal} toggleShow={() => setShowStatsModal(false)}>
         <ApplicationsStats
           totalSupply={data.totalSupplyLSK}
           staked={data.stakedLSK}
@@ -107,6 +139,9 @@ export default function BlockchainApplicationsExplorer() {
           }}
         />
       </BottomModal>
-    </>
+      {activeTab === 'externalApplications' && (
+        <Fab actions={actions} bottom={tabBarHeight} onPressItem={onFabItemPress} />
+      )}
+    </View>
   );
 }

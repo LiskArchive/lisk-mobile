@@ -6,6 +6,7 @@ import DataRenderer from 'components/shared/DataRenderer';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { P } from 'components/shared/toolBox/typography';
 import EmptyState from 'components/shared/EmptyState';
+
 import usePairings from '../../../../../libs/wcm/hooks/usePairings';
 
 import getExternalApplicationListStyles from './styles';

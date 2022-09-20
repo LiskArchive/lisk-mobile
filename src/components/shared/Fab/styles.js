@@ -18,16 +18,17 @@ export default StyleSheet.create({
   },
   overlay: {
     position: 'absolute',
-    bottom: 0,
     left: 0,
     right: 0,
     elevation: 0,
     zIndex: 0,
     top: 0,
-    height: DEVICE_HEIGHT,
-    backgroundColor: 'transparent',
+    bottom: 0,
   },
-  overlayColor: { backgroundColor: 'rgba(12, 21, 46, 0.4)' },
+  backdrop: {
+    height: DEVICE_HEIGHT,
+    backgroundColor: 'rgba(12, 21, 46, 0.4)',
+  },
   buttonContainer: {
     overflow: Platform.OS === 'ios' ? 'visible' : 'hidden',
     zIndex: 2,

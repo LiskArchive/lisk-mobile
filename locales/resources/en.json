@@ -2,7 +2,8 @@
   "commons": {
     "secret_recovery_phrase": "Secret recovery phrase",
     "buttons": {
-      "continue": "Continue"
+      "continue": "Continue",
+      "cancel": "Cancel"
     }
   },
   "Sign in manually": "Sign in manually",
@@ -392,7 +393,16 @@
         "emptyText": "You do not have external connections yet.",
         "detailsText": "Info",
         "disconnectText": "Disconnect",
-        "chainIDLabel": "Chain ID"
+        "chainIDLabel": "Chain ID",
+        "connectionID": "Connection ID",
+        "connectionDescription": "This website is trying to connect with your lisk wallet",
+        "accountsTitle": "Account(s) to use on this site",
+        "sitePermissions": "Site Permissions",
+        "methods": "Methods",
+        "bridgeApplication": "Bridge Application",
+        "bridgeApplicationDescription": "Paste WalletConnect URI to connection the bridge server",
+        "addApplication": "Add Application",
+        "enterConnectionUri": "Enter connection URI"
       }
     }
   },

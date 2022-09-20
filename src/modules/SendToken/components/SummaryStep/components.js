@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import { useTheme } from 'hooks/useTheme';
 import BottomModal from 'components/shared/BottomModal';
 
 import ConfirmAndSignTransaction from '../ConfirmAndSignTransaction';
 import SendTokenSuccess from '../SendTokenSuccess';
 import SendTokenError from '../SendTokenError';
-import getSendTokenSummaryStepStyles from './styles';
 
 export function SendTokenSummaryModal({
   show,
@@ -21,11 +19,6 @@ export function SendTokenSummaryModal({
 
   const [activeStep, setActiveStep] = useState('confirmAndSignTransaction');
   const [error, setError] = useState();
-
-  const { styles } = useTheme({
-    styles: getSendTokenSummaryStepStyles(),
-  });
-
   function handleOnProcessCompleted() {
     switch (activeStep) {
       case 'confirmAndSignTransaction':
@@ -89,16 +82,7 @@ export function SendTokenSummaryModal({
   }
 
   return (
-    <BottomModal
-      style={{
-        container: [
-          styles.confirmAndSignTransactionModal,
-          styles.theme.confirmAndSignTransactionModal,
-        ],
-      }}
-      isOpen={show}
-      toggleShow={handleOnProcessCompleted}
-    >
+    <BottomModal isOpen={show} toggleShow={handleOnProcessCompleted}>
       {renderStep()}
     </BottomModal>
   );
