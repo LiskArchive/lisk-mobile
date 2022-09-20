@@ -9,7 +9,7 @@ import { deviceHeight } from 'utilities/device';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
 import getStyles from './styles';
-import Form from '../components/form';
+import Form from '../components/SecretRecoveryPhraseForm';
 
 // eslint-disable-next-line max-statements
 const SecretRecoveryPhrase = ({ styles, route, navigation, t }) => {
@@ -59,6 +59,7 @@ const SecretRecoveryPhrase = ({ styles, route, navigation, t }) => {
         onPress={navigation.goBack}
         containerStyle={styles.header}
       />
+
       <Scanner
         ref={scanner}
         containerStyles={{
@@ -72,10 +73,12 @@ const SecretRecoveryPhrase = ({ styles, route, navigation, t }) => {
         permissionDialogTitle={t('Permission to use camera')}
         permissionDialogMessage={t('Lisk needs to connect to your camera')}
       />
+
       <View style={styles.container}>
         <P style={[styles.description, styles.theme.description]}>
           {t('auth.setup.addAccountDescription')}
         </P>
+
         <Form
           animate={!signOut}
           navigation={navigation}
