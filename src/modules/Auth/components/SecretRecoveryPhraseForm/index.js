@@ -15,18 +15,16 @@ import getStyles from './styles';
 
 const devDefaultPass = process.env.passphrase || '';
 
-export default function SecretRecoveryPhraseForm({ scanQrCode, lng, signIn }) {
+export default function SecretRecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
   const [showPassword, setShowPassword] = useState(false);
   const [passphrase, setPassphrase] = useState({
     value: devDefaultPass,
     validity: [],
   });
 
-  const { styles } = useTheme({
-    styles: getStyles(),
-  });
+  const { styles } = useTheme({ styles: getStyles() });
 
-  const onInputChange = (value) => {
+  const handleInputChange = (value) => {
     setPassphrase({
       passphrase: {
         value,
@@ -41,7 +39,7 @@ export default function SecretRecoveryPhraseForm({ scanQrCode, lng, signIn }) {
 
     if (!validity.length) {
       DropDownHolder.closeAlert();
-      signIn(normalizedPassphrase);
+      onSubmit(normalizedPassphrase);
     } else {
       const errors = validity.filter(
         (item) => item.code !== 'INVALID_MNEMONIC' || validity.length === 1
@@ -63,7 +61,7 @@ export default function SecretRecoveryPhraseForm({ scanQrCode, lng, signIn }) {
   const onTogglePassphraseReveal = () => setShowPassword((prevState) => !prevState);
 
   const toggleCamera = () => {
-    scanQrCode();
+    onScanQrCode();
     Keyboard.dismiss();
   };
 
@@ -94,7 +92,7 @@ export default function SecretRecoveryPhraseForm({ scanQrCode, lng, signIn }) {
             containerStyle: styles.inputContainer,
           }}
           value={passphrase.value}
-          onChange={onInputChange}
+          onChange={handleInputChange}
           autoCorrect={false}
           multiline
           keyboardAppearance="light"
