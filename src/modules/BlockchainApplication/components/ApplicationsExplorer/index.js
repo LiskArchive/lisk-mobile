@@ -122,8 +122,8 @@ export default function BlockchainApplicationsExplorer() {
       <BottomModal show={showBridgeAppModal} toggleShow={() => setShowBridgeAppModal(false)}>
         <Stepper>
           <BridgeApplication />
-          <InitiateConnection event={connectionEvent} closeModal={onCancelConnection} />
-          <ApproveConnection event={connectionEvent} closeModal={onCancelConnection} />
+          <InitiateConnection event={connectionEvent} onFinish={onCancelConnection} />
+          <ApproveConnection event={connectionEvent} onFinish={onCancelConnection} />
         </Stepper>
       </BottomModal>
       <BottomModal show={showStatsModal} toggleShow={() => setShowStatsModal(false)}>

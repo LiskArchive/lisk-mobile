@@ -12,7 +12,7 @@ import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import Avatar from 'components/shared/avatar';
 import getConnectionStyles from './styles';
 
-const InitiateConnection = ({ event, nextStep }) => {
+const InitiateConnection = ({ event, nextStep, onFinish }) => {
   const { styles } = useTheme({ styles: getConnectionStyles });
   const { accounts } = useAccounts();
   const [selectedAccounts, setSelectedAccounts] = useState([]);
@@ -95,7 +95,7 @@ const InitiateConnection = ({ event, nextStep }) => {
       <View style={styles.horizontalLine} />
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton style={[styles.button, styles.outlineButton]}>
+          <PrimaryButton style={[styles.button, styles.outlineButton]} onPress={onFinish}>
             <P style={[styles.buttonText, styles.outlineButtonText]}>
               {i18next.t('commons.buttons.cancel')}
             </P>

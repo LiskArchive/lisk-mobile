@@ -9,12 +9,7 @@ const BottomModal = ({ showClose = true, show, toggleShow, children }) => {
   const { styles } = useTheme({ styles: getStyles() });
 
   return (
-    <Modal
-      transparent
-      visible={show}
-      onRequestClose={() => toggleShow(false)}
-      // animationType="slide"
-    >
+    <Modal transparent visible={show} onRequestClose={() => toggleShow(false)}>
       <View style={[styles.overlay, styles.theme.overlay]}>
         <View style={[styles.container, styles.theme.container]}>
           <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />

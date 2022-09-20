@@ -8,18 +8,18 @@ import UrlSvg from 'assets/svgs/UrlSvg';
 import getConnectionStyles from './styles';
 import useSession from '../../../../../libs/wcm/hooks/useSession';
 
-const ApproveConnection = ({ event, closeModal, sharedData: { selectedAccounts } }) => {
+const ApproveConnection = ({ event, onFinish, sharedData: { selectedAccounts } }) => {
   const { styles } = useTheme({ styles: getConnectionStyles });
   const { approve, reject } = useSession();
 
   const connectHandler = async () => {
     await approve(selectedAccounts);
-    closeModal();
+    onFinish();
   };
 
   const rejectHandler = () => {
     reject();
-    closeModal();
+    onFinish();
   };
 
   const requiredMethods = useMemo(() => {
