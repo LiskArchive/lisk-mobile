@@ -183,9 +183,9 @@ export default function AddBookmark({ route }) {
           <View style={styles.row}>
             <P style={[styles.label, styles.theme.label]}>Address</P>
             <View style={styles.staticAddressContainer}>
-              <Avatar address={incomingData?.address || ''} style={styles.staticAvatar} size={35} />
+              <Avatar address={incomingData.address || ''} style={styles.staticAvatar} size={35} />
               <Small style={[styles.address, styles.theme.address]}>
-                {stringShortener(incomingData?.address, 6, 5)}
+                {stringShortener(incomingData.address, 6, 5)}
               </Small>
             </View>
           </View>
