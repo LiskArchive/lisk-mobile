@@ -149,8 +149,6 @@ export function getSendTokenAmountFieldStyles(styles) {
       paddingRight: 0,
       paddingLeft: 0,
       ...styles?.container,
-      // marginBottom: 16,
-      // marginTop: 16,
     },
     inputLabel: {
       marginBottom: 8,

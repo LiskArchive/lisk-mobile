@@ -1,9 +1,10 @@
+/* eslint-disable max-statements */
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
 import { BackHandler, View } from 'react-native';
 import { CommonActions, useNavigation } from '@react-navigation/native';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'hooks/useTheme';
 
@@ -20,15 +21,19 @@ import Scanner from 'components/shared/scanner';
 import KeyboardAwareScrollView from 'components/shared/toolBox/keyboardAwareScrollView';
 import { P, Small } from 'components/shared/toolBox/typography';
 import { selectBookmarkList } from '../store/selectors';
-import getStyles from './styles';
 import { addBookmark, editBookmark } from '../store/actions';
 
-// eslint-disable-next-line max-statements
-const AddToBookmark = ({ t, lng, route }) => {
-  const bookmarkList = useSelector(selectBookmarkList);
-  const dispatch = useDispatch();
+import getStyles from './styles';
+
+export default function AddBookmark({ route }) {
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
+
+  const bookmarkList = useSelector(selectBookmarkList);
+
   const { styles } = useTheme({ styles: getStyles() });
+
   const [address, setAddress] = useState({ value: '' });
   const [label, setLabel] = useState({ value: '' });
   const [incomingData, setIncomingData] = useState(null);
@@ -37,27 +42,19 @@ const AddToBookmark = ({ t, lng, route }) => {
   const scanner = useRef();
 
   const errors = {
-    label: t('The label must be shorter than 20 characters.'),
-    address: t('Invalid address.'),
+    label: i18next.t('The label must be shorter than 20 characters.'),
+    address: i18next.t('Invalid address.'),
   };
+
   const setError = (validity, fieldName) => {
     switch (validity) {
       case 1:
         return errors[fieldName];
       case -1:
-        return t('This field is required.');
+        return i18next.t('This field is required.');
       default:
         return '';
     }
-  };
-
-  const onBackButtonPressedAndroid = () => {
-    const action = route.params?.action ?? false;
-    if (action && typeof action === 'function') {
-      action();
-      return true;
-    }
-    return false;
   };
 
   const validateLabel = (str) => {
@@ -74,24 +71,23 @@ const AddToBookmark = ({ t, lng, route }) => {
     });
   };
 
-  const onQRCodeRead = (data) => {
+  const handleQRCodeRead = (data) => {
     const decodedData = decodeLaunchUrl(data);
     setAddress(decodedData.address);
   };
 
-  const onCloseScanner = () => {
+  const handleCloseScanner = () => {
     navigation.dispatch(CommonActions.setParams({ action: false }));
   };
 
-  // eslint-disable-next-line max-statements
-  const submitForm = () => {
+  const handleSubmit = () => {
     const filteredAccount = bookmarkList?.filter(
       (account) => account.label.toLocaleLowerCase() === label.value.toLocaleLowerCase()
     );
     if (filteredAccount?.length) {
       return DropDownHolder.error(
-        t('multisignature.error.title'),
-        t('multisignature.error.description')
+        i18next.t('multisignature.error.title'),
+        i18next.t('multisignature.error.description')
       );
     }
     const addressValidity = validateAddress('LSK', address.value);
@@ -115,26 +111,35 @@ const AddToBookmark = ({ t, lng, route }) => {
     }
   };
 
-  // eslint-disable-next-line max-statements
   useEffect(() => {
+    const handleAndroidBackButtonPress = () => {
+      const action = route.params?.action ?? false;
+      if (action && typeof action === 'function') {
+        action();
+        return true;
+      }
+      return false;
+    };
+
     const account = route.params?.account ?? null;
-    const { setOptions } = navigation;
+
     if (account) {
       const editMode = bookmarkList.filter((item) => item.address === account.address).length > 0;
       setEditMode(editMode);
       setLabel({ value: account.label || '' });
       setIncomingData(account);
       if (editMode) {
-        setOptions({
+        navigation.setOptions({
           title: null,
           headerLeft: (props) => <HeaderBackButton {...props} title="Edit bookmark" />,
         });
       }
     }
-    BackHandler.addEventListener('hardwareBackPress', onBackButtonPressedAndroid);
 
-    return () => BackHandler.removeEventListener('hardwareBackPress', onBackButtonPressedAndroid);
-  }, []);
+    BackHandler.addEventListener('hardwareBackPress', handleAndroidBackButtonPress);
+
+    return () => BackHandler.removeEventListener('hardwareBackPress', handleAndroidBackButtonPress);
+  }, [bookmarkList, navigation, route.params?.account, route.params?.action]);
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -142,15 +147,15 @@ const AddToBookmark = ({ t, lng, route }) => {
         ref={scanner}
         navigation={navigation}
         readFromCameraRoll={true}
-        onQRCodeRead={onQRCodeRead}
-        onClose={onCloseScanner}
-        permissionDialogTitle={t('Permission to use camera')}
-        permissionDialogMessage={t('Lisk needs to connect to your camera')}
+        handleQRCodeRead={handleQRCodeRead}
+        onClose={handleCloseScanner}
+        permissionDialogTitle={i18next.t('Permission to use camera')}
+        permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
       />
       <KeyboardAwareScrollView
-        onSubmit={submitForm}
+        onSubmit={handleSubmit}
         button={{
-          title: editMode ? t('Save changes') : t('Add to bookmarks'),
+          title: editMode ? i18next.t('Save changes') : i18next.t('Add to bookmarks'),
         }}
         styles={{
           container: styles.container,
@@ -160,27 +165,28 @@ const AddToBookmark = ({ t, lng, route }) => {
         <View style={styles.form}>
           {!incomingData ? (
             <View style={styles.addressContainer}>
-              <IconButton
-                onPress={() => scanner.current?.toggleCamera?.()}
-                titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                style={[styles.scanButton, lng === 'de' ? styles.longTitle : null]}
-                title={t('Scan')}
-                icon="scanner"
-                iconSize={18}
-                color={colors.light.ultramarineBlue}
-              />
-              <Avatar style={styles.avatar} address={address.value} size={24} />
               <Input
-                label={t('Address')}
+                label={i18next.t('Address')}
                 autoCorrect={false}
                 innerStyles={{
                   errorMessage: styles.errorMessage,
-                  input: [styles.input, styles.addressInput, styles.addressInputWithAvatar],
-                  containerStyle: styles.addressInputContainer,
                 }}
                 onChange={setAddress}
                 value={address.value}
                 error={setError(address.validity, 'address')}
+                adornments={{
+                  left: <Avatar address={address.value} size={24} />,
+                  right: (
+                    <IconButton
+                      onPress={() => scanner.current?.toggleCamera?.()}
+                      titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
+                      title={i18next.t('Scan')}
+                      icon="scanner"
+                      iconSize={18}
+                      color={colors.light.ultramarineBlue}
+                    />
+                  ),
+                }}
               />
             </View>
           ) : (
@@ -188,20 +194,21 @@ const AddToBookmark = ({ t, lng, route }) => {
               <P style={[styles.label, styles.theme.label]}>Address</P>
               <View style={styles.staticAddressContainer}>
                 <Avatar
-                  address={incomingData.address || ''}
+                  address={incomingData?.address || ''}
                   style={styles.staticAvatar}
                   size={35}
                 />
                 <Small style={[styles.address, styles.theme.address]}>
-                  {stringShortener(incomingData.address, 6, 5)}
+                  {stringShortener(incomingData?.address, 6, 5)}
                 </Small>
               </View>
             </View>
           )}
+
           <Input
-            label={t('Label')}
+            label={i18next.t('Label')}
             autoCorrect={false}
-            innerStyles={{ input: styles.input }}
+            innerStyles={{ inputLabel: styles.input }}
             multiline={false}
             onChange={handleLabel}
             error={setError(label.validity, 'label')}
@@ -211,6 +218,4 @@ const AddToBookmark = ({ t, lng, route }) => {
       </KeyboardAwareScrollView>
     </View>
   );
-};
-
-export default translate()(AddToBookmark);
+}
