@@ -33,12 +33,21 @@ export default function getExternalBlockchainApplicationRowStyles() {
         fontSize: fonts.size.base,
         fontWeight: '600',
       },
+      resultDescription: {
+        fontFamily: fonts.family.context,
+        fontSize: fonts.size.base,
+        textAlign: 'center',
+        marginBottom: 16,
+      },
     },
     [themes.light]: {
       container: {
         backgroundColor: colors.light.white,
       },
       applicationNameLabel: {
+        color: colors.light.zodiacBlue,
+      },
+      resultDescription: {
         color: colors.light.zodiacBlue,
       },
     },
@@ -49,6 +58,9 @@ export default function getExternalBlockchainApplicationRowStyles() {
       },
       applicationNameLabel: {
         color: colors.light.platinum,
+      },
+      resultDescription: {
+        color: colors.dark.ghost,
       },
     },
   };

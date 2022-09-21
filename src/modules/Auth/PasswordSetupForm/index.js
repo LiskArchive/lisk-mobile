@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { translate } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
+
+import { useTheme } from 'hooks/useTheme';
 import { Switch } from 'react-native-gesture-handler';
-import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
 import DropDownHolder from 'utilities/alert';
 import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
-import getStyles from './styles';
 import { passwordValidator } from '../validators';
 import PasswordSetupSuccess from '../PasswordSetupSuccess';
 import { useEncryptAccount } from '../hooks/useEncryptAccount';
 
+import getStyles from './styles';
+
 // eslint-disable-next-line max-statements
-const PasswordSetupForm = ({ navigation, styles, t, route }) => {
+export default function PasswordSetupForm({ route }) {
+  const navigation = useNavigation();
+
   const { encryptAccount } = useEncryptAccount();
   const { setAccount } = useAccounts();
   const [, setCurrentAccount] = useCurrentAccount();
@@ -26,18 +31,20 @@ const PasswordSetupForm = ({ navigation, styles, t, route }) => {
   const [accountName, setAccountName] = useState('');
   const [isAgreed, setIsAgreed] = useState(false);
   const [passwordError, setPasswordError] = useState('');
-  const [confirmPasswordError, setconfirmPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [encryptedJSON, setEncryptedJSON] = useState();
 
+  const { styles } = useTheme({ styles: getStyles() });
+
   // eslint-disable-next-line max-statements, consistent-return
-  const submitForm = async () => {
+  const handleSubmit = async () => {
     try {
       if (!passwordValidator(password)) {
         return setPasswordError('auth.form.errors.passwordError');
       }
       if (password !== confirmPassword) {
-        return setconfirmPasswordError('auth.form.errors.confirmPasswordError');
+        return setConfirmPasswordError('auth.form.errors.confirmPasswordError');
       }
       const data = await encryptAccount({
         recoveryPhrase: passphrase,
@@ -49,13 +56,16 @@ const PasswordSetupForm = ({ navigation, styles, t, route }) => {
       setAccount(data);
       setCurrentAccount(data);
     } catch (error) {
-      return DropDownHolder.error(t('Error'), t('auth.setup.decryptPassphraseError'));
+      return DropDownHolder.error(
+        i18next.t('Error'),
+        i18next.t('auth.setup.decryptPassphraseError')
+      );
     }
   };
 
   useEffect(() => {
     setPasswordError('');
-    setconfirmPasswordError('');
+    setConfirmPasswordError('');
   }, [password, confirmPassword]);
 
   const onContinue = () => navigation.navigate('Main');
@@ -71,10 +81,12 @@ const PasswordSetupForm = ({ navigation, styles, t, route }) => {
             onPress={navigation.goBack}
             containerStyle={styles.header}
           />
+
           <ScrollView contentContainerStyle={styles.container}>
             <Text style={[styles.description, styles.theme.description]}>
-              {t('auth.setup.passwordSetupDescription')}
+              {i18next.t('auth.setup.passwordSetupDescription')}
             </Text>
+
             <View>
               <Input
                 testID="enter-password"
@@ -82,36 +94,39 @@ const PasswordSetupForm = ({ navigation, styles, t, route }) => {
                   containerStyle: styles.inputContainer,
                   input: styles.input,
                 }}
-                label={t('auth.form.enterPassword')}
+                label={i18next.t('auth.form.enterPassword')}
                 secureTextEntry
                 onChange={setPassword}
                 value={password}
-                error={passwordError && t(passwordError)}
+                error={passwordError && i18next.t(passwordError)}
               />
+
               <Input
                 testID="confirm-password"
                 innerStyles={{
                   containerStyle: styles.inputContainer,
                   input: styles.input,
                 }}
-                label={t('auth.form.confirmPassword')}
+                label={i18next.t('auth.form.confirmPassword')}
                 secureTextEntry
                 onChange={setConfirmPassword}
                 value={confirmPassword}
-                error={confirmPasswordError && t(confirmPasswordError)}
+                error={confirmPasswordError && i18next.t(confirmPasswordError)}
               />
+
               <Input
                 testID="account-name"
                 innerStyles={{
                   containerStyle: styles.inputContainer,
                   input: styles.input,
                 }}
-                label={t('auth.form.accountName')}
+                label={i18next.t('auth.form.accountName')}
                 onChange={setAccountName}
                 value={accountName}
               />
             </View>
           </ScrollView>
+
           <View style={styles.container}>
             <View style={styles.actionContainer}>
               <View style={styles.switch}>
@@ -121,13 +136,15 @@ const PasswordSetupForm = ({ navigation, styles, t, route }) => {
                   trackColor={{ true: colors.light.ultramarineBlue }}
                 />
               </View>
+
               <Text style={[styles.actionText, styles.theme.description]}>
                 I agree to store my encrypted secret recovery phrase on this device
               </Text>
             </View>
+
             <PrimaryButton
-              title={t('auth.setup.buttons.saveAccount')}
-              onPress={submitForm}
+              title={i18next.t('auth.setup.buttons.saveAccount')}
+              onPress={handleSubmit}
               disabled={!isAgreed}
             />
           </View>
@@ -135,6 +152,4 @@ const PasswordSetupForm = ({ navigation, styles, t, route }) => {
       )}
     </SafeAreaView>
   );
-};
-
-export default withTheme(translate()(PasswordSetupForm), getStyles());
+}

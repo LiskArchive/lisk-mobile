@@ -1,5 +1,5 @@
 /**
- * @deprecated - Use useGetTransactionsQuery instead.
+ * @deprecated - Use useTransactionsQuery instead.
  * TODO: Remove when wallet module is refactored and stop using it.
  */
 export default function useTransactionList() {

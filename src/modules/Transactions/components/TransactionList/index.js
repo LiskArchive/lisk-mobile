@@ -7,10 +7,12 @@ import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
 import { LIMIT } from 'utilities/api/constants';
 import { LabelButton } from 'components/shared/toolBox/button';
-import CaretSvg from 'assets/svgs/CaretSvg';
+import DataRenderer from 'components/shared/DataRenderer';
+import { P } from 'components/shared/toolBox/typography';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import EmptyState from 'components/shared/EmptyState';
-import { useGetTransactionsQuery } from '../../api/useGetTransactionsQuery';
+import CaretSvg from 'assets/svgs/CaretSvg';
+import { useTransactionsQuery } from '../../api/useTransactionsQuery';
 import TransactionRow from '../TransactionRow';
 
 import getTransactionListStyles from './styles';
@@ -25,7 +27,7 @@ export default function TransactionList({ mode = 'overview', style }) {
     fetchNextPage: fetchNextTransactionsPage,
     hasNextPage: hasTransactionsNextPage,
     isFetchingNextPage: isFetchingTransactionsNextPage,
-  } = useGetTransactionsQuery({
+  } = useTransactionsQuery({
     config: {
       params: { limit: mode === 'overview' ? 3 : LIMIT },
     },
@@ -68,45 +70,39 @@ export default function TransactionList({ mode = 'overview', style }) {
     );
   }
 
-  function renderBody() {
-    if (isLoadingTransactions) {
-      return (
-        <Text style={{ marginTop: 16 }}>
-          {i18next.t('transactions.transactionList.loadingText')}
-        </Text>
-      );
-    }
-
-    if (errorOnTransactions) {
-      if (errorOnTransactions.response?.status === 404) {
-        return <EmptyState message={i18next.t('transactions.transactionList.emptyText')} />;
-      }
-
-      return (
-        <Text style={{ marginTop: 16 }}>{i18next.t('transactions.transactionList.errorText')}</Text>
-      );
-    }
-
-    const transactions = transactionsData.data;
-
-    return (
-      <InfiniteScrollList
-        data={transactions}
-        keyExtractor={(item) => item.id}
-        renderItem={(item) => <TransactionRow transaction={item} />}
-        renderSpinner
-        fetchNextPage={fetchNextTransactionsPage}
-        hasNextPage={hasTransactionsNextPage}
-        isFetchingNextPage={isFetchingTransactionsNextPage}
-      />
-    );
-  }
-
   return (
-    <View style={[styles.container, styles.theme.container, style?.container]}>
+    <View style={[styles.theme.container, style?.container]}>
       {renderHeader()}
 
-      {renderBody()}
+      <DataRenderer
+        data={transactionsData?.data}
+        isLoading={isLoadingTransactions}
+        error={errorOnTransactions && errorOnTransactions.response?.status !== 404}
+        renderData={(data) => (
+          <InfiniteScrollList
+            data={data.slice(0, 2)}
+            keyExtractor={(item) => item.tokenID}
+            renderItem={(item) => <TransactionRow transaction={item} />}
+            renderSpinner
+            fetchNextPage={fetchNextTransactionsPage}
+            hasNextPage={hasTransactionsNextPage}
+            isFetchingNextPage={isFetchingTransactionsNextPage}
+          />
+        )}
+        renderLoading={() => (
+          <P style={[styles.loadingText, styles.theme.loadingText]}>
+            {i18next.t('transactions.transactionList.loadingText')}
+          </P>
+        )}
+        renderEmpty={() => (
+          <EmptyState message={i18next.t('transactions.transactionList.emptyText')} />
+        )}
+        renderError={() => (
+          <P style={[styles.loadingText, styles.theme.loadingText]}>
+            {i18next.t('transactions.transactionList.errorText')}
+          </P>
+        )}
+      />
     </View>
   );
 }

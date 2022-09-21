@@ -5,7 +5,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { useGetTransactionQuery } from '../../api/useGetTransactionQuery';
+import { useTransactionQuery } from '../../api/useTransactionQuery';
 
 import getTransactionDetailsStyles from './styles';
 import { TransactionDetailsBody } from './components';
@@ -21,7 +21,7 @@ export default function TransactionDetails(props) {
     data: transactionData,
     isLoading: isLoadingTransaction,
     error: errorOnTransaction,
-  } = useGetTransactionQuery(transactionId);
+  } = useTransactionQuery(transactionId);
 
   const transaction = transactionData?.data[0];
 

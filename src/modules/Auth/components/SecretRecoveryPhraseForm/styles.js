@@ -18,21 +18,6 @@ export default () => ({
     inputRevealed: {
       fontFamily: fonts.family.passphraseText,
     },
-    passphraseRevealButton: {
-      position: 'absolute',
-      zIndex: 99,
-      left: 165,
-      top: 15,
-    },
-    scanButton: {
-      position: 'absolute',
-      right: 21,
-      zIndex: 99,
-      top: 15,
-      paddingLeft: 10,
-      width: 67,
-      height: 30,
-    },
     scanButtonTitle: {
       fontSize: fonts.size.small,
       color: colors.light.maastrichtBlue,
@@ -61,6 +46,16 @@ export default () => ({
     },
     createAccountWrapper: {
       marginBottom: deviceType() === 'iOSx' ? 35 : 10,
+    },
+    labelContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginBottom: 8,
+    },
+    label: {
+      fontFamily: fonts.family.context,
+      fontSize: fonts.size.input,
     },
   },
   [themes.light]: {

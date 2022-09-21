@@ -11,33 +11,23 @@ export default () => ({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    avatarContainer: {
-      alignItems: 'center',
-    },
-    address: {
-      marginTop: 10,
-      textAlign: 'center',
-      color: colors.light.blueGray,
-      fontSize: fonts.size.small,
-    },
     illustration: {
-      paddingVertical: 30,
+      paddingVertical: 16,
     },
     title: {
       fontFamily: fonts.family.heading,
       fontSize: fonts.size.h3,
-      padding: 5,
+      marginBottom: 16,
       textAlign: 'center',
     },
     description: {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.base,
       textAlign: 'center',
-      padding: 10,
+      marginBottom: 16,
     },
     continueButton: {
-      paddingHorizontal: 20,
-      margin: boxes.boxPadding,
+      paddingHorizontal: 16,
     },
   },
 

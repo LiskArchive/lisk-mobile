@@ -1,16 +1,30 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
-export default function getTransactionListStyles() {
+export default function getTokenListStyles() {
   return {
     common: {
       header: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 8,
       },
-      title: {
-        fontWeight: '500',
-        fontSize: 14,
+      tabsContainer: {
+        flexDirection: 'row',
+      },
+      tabItem: {
+        padding: 8,
+        paddingHorizontal: 16,
+        marginRight: 8,
+        borderRadius: 20,
+      },
+      tabItemTextActive: {
+        color: colors.light.ultramarineBlue,
+        fontFamily: fonts.family.contextSemiBold,
+        fontSize: 12,
+      },
+      tabItemActive: {
+        backgroundColor: 'rgba(64, 112, 244, 0.102519)',
       },
       labelButton: {
         display: 'flex',
@@ -20,11 +34,6 @@ export default function getTransactionListStyles() {
       },
       labelButtonText: {
         fontSize: 12,
-      },
-      transactionAddressText: {
-        fontWeight: '500',
-        fontSize: 16,
-        lineHeight: 19,
       },
       loadingText: {
         fontSize: 14,
@@ -36,13 +45,7 @@ export default function getTransactionListStyles() {
       container: {
         backgroundColor: colors.light.white,
       },
-      title: {
-        color: colors.light.zodiacBlue,
-      },
       loadingText: {
-        color: colors.light.zodiacBlue,
-      },
-      transactionAddressText: {
         color: colors.light.zodiacBlue,
       },
     },
@@ -50,14 +53,8 @@ export default function getTransactionListStyles() {
       container: {
         backgroundColor: colors.dark.mainBg,
       },
-      title: {
-        color: colors.light.white,
-      },
       loadingText: {
         color: colors.dark.white,
-      },
-      transactionAddressText: {
-        color: colors.light.white,
       },
     },
   };

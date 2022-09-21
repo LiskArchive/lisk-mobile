@@ -16,12 +16,14 @@ const usePairings = () => {
    */
   const setUri = useCallback((uri) => {
     if (client?.pair && uri) {
-      client.pair({ uri });
+      return client.pair({ uri });
     }
+
+    return null;
   }, []);
 
   const removePairing = useCallback((topic) => {
-    const newPairings = pairings.filter(pairing => pairing.topic !== topic);
+    const newPairings = pairings.filter((pairing) => pairing.topic !== topic);
     // Also inform the bridge
     setPairings(newPairings);
   }, []);
