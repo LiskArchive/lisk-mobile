@@ -25,7 +25,7 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
     return (
       <Animated.View style={[{ flex: 1, transform: [{ translateX: trans }] }]}>
         <RectButton
-          style={[styles.rightAction, { backgroundColor: color, paddingVertical: 5 }]}
+          style={[styles.rightAction, { backgroundColor: color, paddingVertical: 4 }]}
           onPress={pressHandler}
         >
           <View
@@ -47,7 +47,7 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
   const renderLeftActions = (progress) => (
     <View
       style={{
-        width: 70 * leftActions.length + 10,
+        width: 80 * leftActions.length + 10,
         flexDirection: 'row',
         paddingRight: 10,
       }}
@@ -58,7 +58,7 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
           action.color,
           action.icon,
           action.onPress,
-          -(70 * leftActions.length + i),
+          -(80 * leftActions.length + i),
           progress
         )
       )}
@@ -68,7 +68,7 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
   const renderRightActions = (progress) => (
     <View
       style={{
-        width: 70 * rightActions.length,
+        width: 80 * rightActions.length,
         flexDirection: 'row',
       }}
     >
@@ -78,7 +78,7 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
           action.color,
           action.icon,
           action.onPress,
-          70 * (rightActions.length - i),
+          80 * (rightActions.length - i),
           progress
         )
       )}
