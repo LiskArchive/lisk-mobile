@@ -72,7 +72,7 @@ export default function TokenList({ mode = 'overview', style }) {
       <View style={[styles.header, style?.header]}>
         <View style={[styles.tabsContainer]}>
           <TouchableOpacity
-            style={[styles.tabItem, activeTab === 0 && styles.tabItemActive]}
+            style={[styles.tabItem, activeTab === 0 && styles.theme.tabItemActive]}
             onPress={() => setActiveTab(0)}
           >
             <P style={[styles.tabItemText, activeTab === 0 && styles.tabItemTextActive]}>

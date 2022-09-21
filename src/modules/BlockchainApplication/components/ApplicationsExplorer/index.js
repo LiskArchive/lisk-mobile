@@ -126,6 +126,7 @@ export default function BlockchainApplicationsExplorer() {
           <ApproveConnection event={connectionEvent} onFinish={onCancelConnection} />
         </Stepper>
       </BottomModal>
+
       <BottomModal show={showStatsModal} toggleShow={() => setShowStatsModal(false)}>
         <ApplicationsStats
           totalSupply={data.totalSupplyLSK}

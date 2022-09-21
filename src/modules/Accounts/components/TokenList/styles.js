@@ -1,4 +1,5 @@
 import { themes, colors, fonts } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default function getTokenListStyles() {
   return {
@@ -23,9 +24,6 @@ export default function getTokenListStyles() {
         fontFamily: fonts.family.contextSemiBold,
         fontSize: 12,
       },
-      tabItemActive: {
-        backgroundColor: 'rgba(64, 112, 244, 0.102519)',
-      },
       labelButton: {
         display: 'flex',
         flexDirection: 'row',
@@ -45,6 +43,9 @@ export default function getTokenListStyles() {
       container: {
         backgroundColor: colors.light.white,
       },
+      tabItemActive: {
+        backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.1),
+      },
       loadingText: {
         color: colors.light.zodiacBlue,
       },
@@ -52,6 +53,9 @@ export default function getTokenListStyles() {
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
+      },
+      tabItemActive: {
+        backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
       },
       loadingText: {
         color: colors.dark.white,
