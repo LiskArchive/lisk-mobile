@@ -69,7 +69,7 @@ export default function BlockchainApplicationsExplorer() {
   const connectionEvent = useMemo(() => events[events.length - 1], [events]);
 
   return (
-    <View style={styles.container}>
+    <>
       <NavigationSafeAreaView>
         <HeaderBackButton
           title={i18next.t('application.explore.title')}
@@ -143,6 +143,6 @@ export default function BlockchainApplicationsExplorer() {
       {activeTab === 'externalApplications' && (
         <Fab actions={actions} bottom={tabBarHeight} onPressItem={onFabItemPress} />
       )}
-    </View>
+    </>
   );
 }

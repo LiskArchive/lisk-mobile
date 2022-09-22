@@ -3,9 +3,6 @@ import { themes, colors } from 'constants/styleGuide';
 export default function getBlockchainApplicationsExplorerStyles() {
   return {
     common: {
-      container: {
-        flex: 1,
-      },
       header: {
         marginBottom: 24,
       },

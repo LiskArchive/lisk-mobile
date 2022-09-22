@@ -53,7 +53,10 @@ function BlockchainApplicationRow({
   return (
     <>
       <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
-        <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
+        <TouchableOpacity
+          style={[styles.applicationContainer, styles.theme.applicationContainer]}
+          onPress={onPress}
+        >
           <View style={styles.applicationNameContainer}>
             <Image
               source={{ uri: application.logo.png }}

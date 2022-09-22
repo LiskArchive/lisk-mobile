@@ -6,6 +6,9 @@ import { useTheme } from 'hooks/useTheme';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import DataRenderer from 'components/shared/DataRenderer';
 import { P } from 'components/shared/toolBox/typography';
+import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
+import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import ResultScreen from 'components/screens/ResultScreen';
 
 import getBlockchainApplicationsListStyles from './styles';
 
@@ -48,6 +51,18 @@ export default function BlockchainApplicationList({
         <P style={[styles.text, styles.theme.text, style?.text]}>
           {i18next.t('application.explore.applicationList.loadingText')}
         </P>
+      )}
+      renderEmpty={() => (
+        <ResultScreen
+          illustration={<EmptyIllustrationSvg />}
+          description="No applications available for now. Please try again later."
+        />
+      )}
+      renderError={() => (
+        <ResultScreen
+          illustration={<ErrorIllustrationSvg />}
+          description="Error loading applications. Please try again later."
+        />
       )}
     />
   );

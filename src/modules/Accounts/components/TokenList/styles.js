@@ -38,6 +38,10 @@ export default function getTokenListStyles() {
         marginTop: 8,
         marginBottom: 8,
       },
+      resultScreenContainer: {
+        flex: undefined,
+        maxHeight: 150,
+      },
     },
     [themes.light]: {
       container: {
@@ -58,7 +62,7 @@ export default function getTokenListStyles() {
         backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
       },
       loadingText: {
-        color: colors.dark.white,
+        color: colors.dark.ghost,
       },
     },
   };

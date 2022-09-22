@@ -36,14 +36,14 @@ export default function Bookmark() {
     <NavigationSafeAreaView>
       <SearchBarHeader
         title={'Bookmarks'}
-        noIcon={true}
+        noIcon
         onChange={setQueryString}
         value={query}
         isSearchOpen={isSearchOpen}
         setIsSearchOpen={(val) => setIsSearchOpen(val)}
       />
       <View style={styles.container}>
-        <BookmarkList draggable={true} query={query} renderEmpty onPress={onPress} />
+        <BookmarkList draggable query={query} renderEmpty onPress={onPress} />
       </View>
       <TouchableOpacity
         style={[styles.titleContainer]}

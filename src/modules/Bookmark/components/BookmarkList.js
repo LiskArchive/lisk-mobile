@@ -2,10 +2,11 @@ import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useTheme } from 'hooks/useTheme';
-import EmptyState from './EmptyState';
 import List from './List';
 import getStyles from './styles';
 import { selectBookmarkList } from '../store/selectors';
+import ResultScreen from '../../../components/screens/ResultScreen';
+import EmptyIllustrationSvg from '../../../assets/svgs/EmptyIllustrationSvg';
 
 const BookmarkList = ({
   onPress,
@@ -37,7 +38,16 @@ const BookmarkList = ({
   return (
     <View style={[!draggable && styles.container]}>
       {filterList?.length === 0 ? (
-        renderEmpty && <EmptyState style={styles.emptyView} />
+        renderEmpty && (
+          <ResultScreen
+            illustration={<EmptyIllustrationSvg />}
+            description="You do not have any bookmarks yet."
+            styles={{
+              wrapper: { height: 4 },
+              container: { height: 4 },
+            }}
+          />
+        )
       ) : (
         <List
           draggable={draggable}

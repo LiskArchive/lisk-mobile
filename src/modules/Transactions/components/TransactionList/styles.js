@@ -31,6 +31,10 @@ export default function getTransactionListStyles() {
         marginTop: 8,
         marginBottom: 8,
       },
+      resultScreenContainer: {
+        flex: undefined,
+        maxHeight: 150,
+      },
     },
     [themes.light]: {
       container: {
@@ -54,7 +58,7 @@ export default function getTransactionListStyles() {
         color: colors.light.white,
       },
       loadingText: {
-        color: colors.dark.white,
+        color: colors.dark.ghost,
       },
       transactionAddressText: {
         color: colors.light.white,

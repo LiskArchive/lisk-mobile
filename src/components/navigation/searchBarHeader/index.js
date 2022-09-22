@@ -1,29 +1,33 @@
 /* eslint-disable complexity */
 import React, { useRef, useEffect } from 'react';
 import { View, Animated, useWindowDimensions, Easing } from 'react-native';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { colors, themes } from 'constants/styleGuide';
-import withTheme from 'components/shared/withTheme';
+
+import { useTheme } from 'hooks/useTheme';
 import Input from 'components/shared/toolBox/input';
 import Icon from 'components/shared/toolBox/icon';
 import { H3, P } from 'components/shared/toolBox/typography';
+import { colors, themes } from 'constants/styleGuide';
+import SearchSvg from 'assets/svgs/SearchSvg';
+
 import getStyles from './styles';
 
-const HeaderBackButton = ({
-  theme,
-  styles,
+export default function SearchBarHeader({
   onPress,
   color,
   icon,
   title,
-  t,
   noIcon,
   value,
   onChange,
   isSearchOpen,
   setIsSearchOpen,
-}) => {
+}) {
+  const { theme, styles } = useTheme({
+    styles: getStyles(),
+  });
+
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
   }
@@ -49,7 +53,7 @@ const HeaderBackButton = ({
     } else {
       width.setValue(0);
     }
-  }, [isSearchOpen]);
+  }, [isSearchOpen, width]);
 
   return (
     <View style={styles.navContainer}>
@@ -68,30 +72,30 @@ const HeaderBackButton = ({
         >
           <View style={styles.searchRow}>
             <View style={styles.flex}>
-              <Icon
-                style={styles.searchIcon}
-                name="search"
-                size={18}
-                color={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
-              />
               <Input
-                placeholder={t('Search for a bookmark')}
+                placeholder={i18next.t('Search for a bookmark')}
                 autoCorrect={false}
                 autoFocus
-                innerStyles={{
-                  input: [styles.input],
-                  containerStyle: [styles.inputContainer],
-                }}
+                innerStyles={{ input: [styles.input] }}
                 placeholderTextColor={
-                  theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
+                  theme === themes.dark ? colors.dark.ultramarineBlue : colors.light.blueGray
                 }
                 onChange={onChange}
                 value={value}
                 returnKeyType="search"
+                adornments={{
+                  left: (
+                    <SearchSvg
+                      color={
+                        theme === themes.dark ? colors.dark.ultramarineBlue : colors.light.blueGray
+                      }
+                    />
+                  ),
+                }}
               />
             </View>
             <TouchableOpacity style={styles.iconButton} onPress={closeSearchBar}>
-              <P style={styles.cancelButton}>{t('Cancel')}</P>
+              <P style={styles.cancelButton}>{i18next.t('Cancel')}</P>
             </TouchableOpacity>
           </View>
         </Animated.View>
@@ -103,7 +107,9 @@ const HeaderBackButton = ({
                 <Icon name={icon || 'back'} color={color} />
               </TouchableOpacity>
             )}
-            <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>{t(title)}</H3>
+            <H3 style={[styles.title, { color }, noIcon && styles.paddingLeft]}>
+              {i18next.t(title)}
+            </H3>
           </View>
           <TouchableOpacity onPress={openSearchBar} style={styles.iconButton}>
             <Icon name={'search'} color={colors.light.blueGray} size={18} />
@@ -112,6 +118,4 @@ const HeaderBackButton = ({
       )}
     </View>
   );
-};
-
-export default withTheme(translate()(HeaderBackButton), getStyles());
+}

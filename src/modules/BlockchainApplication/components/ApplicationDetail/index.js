@@ -8,18 +8,18 @@ import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { H3, P } from 'components/shared/toolBox/typography';
-import UrlSvg from 'assets/svgs/UrlSvg';
+import DataRenderer from 'components/shared/DataRenderer';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import wavesPattern from 'assets/images/waves_pattern_large.png';
 import { colors } from 'constants/styleGuide';
+import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
 
 import getStyles from './styles';
-import DataRenderer from '../../../../components/shared/DataRenderer';
 
 /**
  *
@@ -31,6 +31,7 @@ import DataRenderer from '../../../../components/shared/DataRenderer';
  */
 export default function ApplicationDetail({ route }) {
   const navigation = useNavigation();
+
   const { chainID, variant } = route.params;
 
   const { styles } = useTheme({ styles: getStyles });
@@ -71,12 +72,7 @@ export default function ApplicationDetail({ route }) {
           source={wavesPattern}
           resizeMode="cover"
         >
-          <HeaderBackButton
-            noIcon
-            rightIcon="cross"
-            rightColor={colors.dark.white}
-            onRightPress={navigation.goBack}
-          />
+          <HeaderBackButton color={colors.dark.white} onPress={navigation.goBack} />
         </ImageBackground>
       )}
 
@@ -110,7 +106,7 @@ export default function ApplicationDetail({ route }) {
           />
 
           <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
-            <PinSvg variant={isPinned ? 'fill' : 'outline'} width={25} height={25} />
+            <PinSvg variant={isPinned ? 'fill' : 'outline'} width={24} height={24} />
           </TouchableOpacity>
         </View>
 
@@ -129,7 +125,7 @@ export default function ApplicationDetail({ route }) {
             data={applicationMetadata?.explorers}
             renderData={(data) => (
               <>
-                <UrlSvg size={1.2} />
+                <UrlSvg size={1} />
 
                 <P style={styles.url}>{data[0].url}</P>
               </>

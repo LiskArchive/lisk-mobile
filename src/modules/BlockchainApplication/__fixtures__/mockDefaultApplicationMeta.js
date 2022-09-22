@@ -9,28 +9,28 @@ export const mockDefaultApplicationMeta = {
   serviceURLs: [
     {
       http: 'http://104.248.241.229:9901',
-      ws: 'wss://104.248.241.229:9901'
-    }
+      ws: 'wss://104.248.241.229:9901',
+    },
   ],
   logo: {
     png: 'https://lisk-qa.ams3.digitaloceanspaces.com/Artboard%201%20copy%2019.png',
-    svg: 'https://lisk-qa.ams3.digitaloceanspaces.com/Logo-20.svg'
+    svg: 'https://lisk-qa.ams3.digitaloceanspaces.com/Logo-20.svg',
   },
   explorers: [
     {
       url: 'https://betanet.liskscan.com',
-      txnPage: 'https://betanet.liskscan.com/transactions'
-    }
+      txnPage: 'https://betanet.liskscan.com/transactions',
+    },
   ],
   appNodes: [
     {
       url: 'http://104.248.241.229:9901',
-      maintainer: 'Lightcurve GmbH'
+      maintainer: 'Lightcurve GmbH',
     },
     {
       url: 'wss://104.248.241.229:9901',
-      maintainer: 'Lightcurve GmbH'
-    }
+      maintainer: 'Lightcurve GmbH',
+    },
   ],
-  backgroundColor: '#f7f9fb'
+  backgroundColor: '#f7f9fb',
 };
