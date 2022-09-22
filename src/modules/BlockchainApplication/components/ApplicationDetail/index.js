@@ -63,7 +63,6 @@ export default function ApplicationDetail({ route }) {
         <ImageBackground
           style={[
             styles.header,
-            styles.explore,
             styles.container,
             applicationMetadata?.backgroundColor && {
               backgroundColor: applicationMetadata?.backgroundColor,
@@ -211,7 +210,7 @@ export default function ApplicationDetail({ route }) {
         </View>
 
         {variant === 'manage' && (
-          <PrimaryButton onClick={handleAddApplicationClick}>
+          <PrimaryButton onClick={handleAddApplicationClick} noTheme>
             {i18next.t('application.manage.add.confirmButtonText')}
           </PrimaryButton>
         )}

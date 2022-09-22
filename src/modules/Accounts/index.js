@@ -111,6 +111,7 @@ export default function Home() {
       </NavigationSafeAreaView>
 
       <AccountsManagerModal show={showManageAccountsModal} setShow={setShowManageAccountsModal} />
+
       <ApplicationManagerModal
         show={showManageApplicationsModal}
         setShow={setShowManageApplicationsModal}

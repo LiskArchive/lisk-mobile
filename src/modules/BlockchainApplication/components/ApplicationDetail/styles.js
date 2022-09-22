@@ -1,9 +1,8 @@
+import { Platform } from 'react-native';
+
 import { themes, colors, boxes, fonts } from 'constants/styleGuide';
-import { deviceType } from 'utilities/device';
 
-const type = deviceType();
-
-const safeAreaMarginTop = type === 'iOSx' ? 45 : 20;
+const safeAreaPaddingTop = Platform.OS === 'android' ? 0 : 44;
 
 export default {
   common: {
@@ -11,18 +10,17 @@ export default {
       flex: 1,
     },
     container: {
-      paddingTop: safeAreaMarginTop,
+      paddingTop: safeAreaPaddingTop,
     },
     header: {
       height: 230,
       backgroundColor: colors.light.ultramarineBlue,
     },
-    explore: {
-      paddingTop: 40,
-    },
     body: {
       padding: boxes.boxPadding,
       paddingTop: 8,
+      paddingBottom: 44,
+      flex: 1,
     },
     logoContainer: {
       marginTop: -35,

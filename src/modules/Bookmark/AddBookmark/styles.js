@@ -1,7 +1,5 @@
 import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
-import { Platform } from 'react-native';
-
 export default () => ({
   common: {
     container: {
@@ -13,7 +11,6 @@ export default () => ({
     },
     footer: {
       padding: boxes.boxPadding,
-      paddingBottom: Platform.OS === 'android' ? boxes.boxPadding : 0,
     },
     input: {
       marginTop: 8,

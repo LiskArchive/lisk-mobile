@@ -13,7 +13,7 @@ import SearchSvg from 'assets/svgs/SearchSvg';
 
 import getStyles from './styles';
 
-export default function SearchBarHeader({
+export default function HeaderSearchBar({
   onPress,
   color,
   icon,
@@ -56,7 +56,7 @@ export default function SearchBarHeader({
   }, [isSearchOpen, width]);
 
   return (
-    <View style={styles.navContainer}>
+    <View>
       {isSearchOpen ? (
         <Animated.View
           style={{
