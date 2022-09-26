@@ -404,6 +404,10 @@
         "addApplication": "",
         "enterConnectionUri": ""
       }
+    },
+    "signing": {
+      "information": "",
+      "description": ""
     }
   },
   "requestTokens": {

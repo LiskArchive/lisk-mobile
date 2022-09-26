@@ -404,6 +404,10 @@
         "addApplication": "Add Application",
         "enterConnectionUri": "Enter connection URI"
       }
+    },
+    "signing": {
+      "information": "Information",
+      "description": "{{appName}} application requesting signature from your Lisk wallet."
     }
   },
   "requestTokens": {
