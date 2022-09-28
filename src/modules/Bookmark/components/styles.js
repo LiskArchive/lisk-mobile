@@ -71,15 +71,6 @@ export default () => ({
     avatar: {
       borderWidth: 1,
     },
-    emptyState: {
-      padding: 20,
-      marginTop: 20,
-      display: 'flex',
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginRight: 20,
-    },
     imageContainer: {
       marginBottom: 10,
     },

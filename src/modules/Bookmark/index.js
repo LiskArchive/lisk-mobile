@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
@@ -42,9 +42,13 @@ export default function Bookmarks() {
         setIsSearchOpen={(val) => setIsSearchOpen(val)}
       />
 
-      <View style={styles.container}>
-        <BookmarkList draggable query={search.term} renderEmpty onPress={handlePress} />
-      </View>
+      <BookmarkList
+        draggable
+        query={search.term}
+        renderEmpty
+        onPress={handlePress}
+        style={[styles.container]}
+      />
 
       <TouchableOpacity
         style={[styles.titleContainer]}
