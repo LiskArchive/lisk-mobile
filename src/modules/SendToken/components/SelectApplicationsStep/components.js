@@ -29,9 +29,7 @@ export function SendTokenSenderApplicationField({
   applications,
   style,
 }) {
-  const senderApplication = applications?.data?.find(
-    (application) => application.chainID === value
-  );
+  const senderApplication = applications.find((application) => application.chainID === value);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
@@ -70,9 +68,7 @@ export function SendTokenRecipientApplicationField({
   applications,
   style,
 }) {
-  const recipientApplication = applications?.data?.find(
-    (application) => application.chainID === value
-  );
+  const recipientApplication = applications.find((application) => application.chainID === value);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
@@ -103,7 +99,7 @@ export function SendTokenRecipientApplicationField({
 
       <Picker.Menu>
         <InfiniteScrollList
-          data={applications?.data}
+          data={applications}
           keyExtractor={(item) => item.chainID}
           renderItem={(item) => (
             <Picker.Item key={item.chainID} value={item.chainID}>

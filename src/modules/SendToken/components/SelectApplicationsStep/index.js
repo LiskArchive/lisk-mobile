@@ -52,13 +52,13 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
-      <View style={[styles.container]}>
-        <DataRenderer
-          data={applicationsMetadata?.data}
-          isLoading={applicationsMetadata.isLoading}
-          error={applicationsMetadata.error}
-          renderData={(data) => (
-            <>
+      <DataRenderer
+        data={applicationsMetadata?.data}
+        isLoading={applicationsMetadata.isLoading}
+        error={applicationsMetadata.error}
+        renderData={(data) => (
+          <>
+            <View style={[styles.container]}>
               <SendTokenSenderApplicationField
                 value={senderApplicationChainIDField.value}
                 onChange={senderApplicationChainIDField.onChange}
@@ -82,23 +82,23 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
                 addressFormat={addressFormatField.value}
                 onAddressFormatChange={addressFormatField.onChange}
               />
+            </View>
 
-              <PrimaryButton
-                onClick={nextStep}
-                disabled={disableNextStepButton}
-                title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
-                noTheme
-              />
-            </>
-          )}
-          renderError={() => (
-            <ResultScreen
-              illustration={<ErrorIllustrationSvg />}
-              description="Error loading blockchain applications data. Please try again later."
+            <PrimaryButton
+              onClick={nextStep}
+              disabled={disableNextStepButton}
+              title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
+              noTheme
             />
-          )}
-        />
-      </View>
+          </>
+        )}
+        renderError={() => (
+          <ResultScreen
+            illustration={<ErrorIllustrationSvg />}
+            description="Error loading blockchain applications data. Please try again later."
+          />
+        )}
+      />
     </View>
   );
 }
