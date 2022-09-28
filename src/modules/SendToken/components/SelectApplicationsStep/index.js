@@ -1,11 +1,12 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import DataRenderer from 'components/shared/DataRenderer';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 
 import getSendTokenSelectApplicationsStepStyles from './styles';
@@ -42,16 +43,6 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  if (applicationsMetadata.isLoading) {
-    return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <View style={[styles.container]}>
-          <Text>{i18next.t('sendToken.applicationsSelect.loadingApplicationsText')}</Text>
-        </View>
-      </View>
-    );
-  }
-
   const disableNextStepButton =
     !form.watch('senderApplicationChainID') ||
     !form.watch('recipientApplicationChainID') ||
@@ -60,37 +51,49 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
-        <SendTokenSenderApplicationField
-          value={senderApplicationChainIDField.value}
-          onChange={senderApplicationChainIDField.onChange}
-          errorMessage={form.formState.errors.senderApplicationChainID?.message}
-          applications={applicationsMetadata}
-          style={{ toggle: { container: { marginBottom: 16 } } }}
-        />
+        <DataRenderer
+          data={applicationsMetadata?.data}
+          isLoading={applicationsMetadata.isLoading}
+          error={applicationsMetadata.error}
+          renderData={(data) => (
+            <>
+              <SendTokenSenderApplicationField
+                value={senderApplicationChainIDField.value}
+                onChange={senderApplicationChainIDField.onChange}
+                errorMessage={form.formState.errors.senderApplicationChainID?.message}
+                applications={data}
+                style={{ toggle: { container: { marginBottom: 16 } } }}
+              />
 
-        <SendTokenRecipientApplicationField
-          value={recipientApplicationChainIDField.value}
-          onChange={recipientApplicationChainIDField.onChange}
-          errorMessage={form.formState.errors.recipientApplicationChainID?.message}
-          applications={applicationsMetadata}
-          style={{ toggle: { container: { marginBottom: 16 } } }}
-        />
+              <SendTokenRecipientApplicationField
+                value={recipientApplicationChainIDField.value}
+                onChange={recipientApplicationChainIDField.onChange}
+                errorMessage={form.formState.errors.recipientApplicationChainID?.message}
+                applications={data}
+                style={{ toggle: { container: { marginBottom: 16 } } }}
+              />
 
-        <SendTokenRecipientAccountField
-          value={addressField.value}
-          onChange={addressField.onChange}
-          errorMessage={form.formState.errors.recipientAccountAddress?.message}
-          addressFormat={addressFormatField.value}
-          onAddressFormatChange={addressFormatField.onChange}
+              <SendTokenRecipientAccountField
+                value={addressField.value}
+                onChange={addressField.onChange}
+                errorMessage={form.formState.errors.recipientAccountAddress?.message}
+                addressFormat={addressFormatField.value}
+                onAddressFormatChange={addressFormatField.onChange}
+              />
+
+              <PrimaryButton
+                onClick={nextStep}
+                disabled={disableNextStepButton}
+                title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
+                noTheme
+              />
+            </>
+          )}
+
+          // TODO: Add ResultScreen error when component is available
+          // from merging https://github.com/LiskHQ/lisk-mobile/pull/1500
         />
       </View>
-
-      <PrimaryButton
-        onClick={nextStep}
-        disabled={disableNextStepButton}
-        title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
-        noTheme
-      />
     </View>
   );
 }
