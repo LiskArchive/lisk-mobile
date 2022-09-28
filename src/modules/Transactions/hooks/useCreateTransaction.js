@@ -22,7 +22,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const { data: commandParametersSchemasData } = useCommandParametersSchemasQuery();
 
   useEffect(() => {
-    if (authData.data && commandParametersSchemasData?.data && networkStatusData?.data) {
+    if (authData?.data && commandParametersSchemasData?.data && networkStatusData?.data) {
       transaction.init({
         pubkey,
         networkStatus: networkStatusData.data,
