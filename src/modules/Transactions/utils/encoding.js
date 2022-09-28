@@ -1,5 +1,7 @@
-import { codec } from '@liskhq/lisk-codec';
-import { utils } from '@liskhq/lisk-cryptography';
+import * as Lisk from '@liskhq/lisk-client';
+
+// import { codec } from '@liskhq/lisk-codec';
+// import { utils } from '@liskhq/lisk-cryptography';
 
 // TODO: Use from service endpoint/elements
 export const baseTransactionSchema = {
@@ -43,21 +45,23 @@ export const baseTransactionSchema = {
 
 export const getCommandParamsSchema = (module, command, schema) => {
   const moduleCommand = module.concat(':', command);
-  const commandSchema = schema.find((meta) => meta.moduleCommandName === moduleCommand);
+
+  const commandSchema = schema.find((meta) => meta.moduleCommand === moduleCommand);
+
   if (!(commandSchema && commandSchema.schema)) {
-    throw new Error(`Module: ${module} Command: ${command} is not registered.`);
+    throw new Error(`Module: ${module} and Command: ${command} is not registered.`);
   }
 
   return commandSchema.schema;
 };
 
 export const decodeBaseTransaction = (encodedTransaction) =>
-  codec.decode(baseTransactionSchema, encodedTransaction);
+  Lisk.codec.codec.decode(baseTransactionSchema, encodedTransaction);
 
 export const decodeTransaction = (encodedTransaction, paramsSchema) => {
   const transaction = decodeBaseTransaction(encodedTransaction);
-  const params = paramsSchema ? codec.decode(paramsSchema, transaction.params) : {};
-  const id = utils.hash(encodedTransaction);
+  const params = paramsSchema ? Lisk.codec.codec.decode(paramsSchema, transaction.params) : {};
+  const id = Lisk.cryptography.utils.hash(encodedTransaction);
   return {
     ...transaction,
     params,
@@ -68,12 +72,14 @@ export const decodeTransaction = (encodedTransaction, paramsSchema) => {
 export const encodeTransaction = (transaction, paramsSchema) => {
   let encodedParams;
   if (!Buffer.isBuffer(transaction.params)) {
-    encodedParams = paramsSchema ? codec.encode(paramsSchema, transaction.params) : Buffer.alloc(0);
+    encodedParams = paramsSchema
+      ? Lisk.codec.codec.encode(paramsSchema, transaction.params)
+      : Buffer.alloc(0);
   } else {
     encodedParams = transaction.params;
   }
 
-  const decodedTransaction = codec.encode(baseTransactionSchema, {
+  const decodedTransaction = Lisk.codec.codec.encode(baseTransactionSchema, {
     ...transaction,
     params: encodedParams,
   });
@@ -82,15 +88,17 @@ export const encodeTransaction = (transaction, paramsSchema) => {
 };
 
 export const fromTransactionJSON = (transaction, paramsSchema) => {
-  const tx = codec.fromJSON(baseTransactionSchema, {
+  const tx = Lisk.codec.codec.fromJSON(baseTransactionSchema, {
     ...transaction,
     params: '',
   });
   let params;
   if (typeof transaction.params === 'string') {
-    params = paramsSchema ? codec.decode(paramsSchema, Buffer.from(transaction.params, 'hex')) : {};
+    params = paramsSchema
+      ? Lisk.codec.codec.decode(paramsSchema, Buffer.from(transaction.params, 'hex'))
+      : {};
   } else {
-    params = paramsSchema ? codec.fromJSON(paramsSchema, transaction.params) : {};
+    params = paramsSchema ? Lisk.codec.codec.fromJSON(paramsSchema, transaction.params) : {};
   }
 
   return {
@@ -103,17 +111,17 @@ export const fromTransactionJSON = (transaction, paramsSchema) => {
 export const toTransactionJSON = (transaction, paramsSchema) => {
   if (Buffer.isBuffer(transaction.params)) {
     return {
-      ...codec.toJSON(baseTransactionSchema, transaction),
-      params: paramsSchema ? codec.decodeJSON(paramsSchema, transaction.params) : {},
+      ...Lisk.codec.codec.toJSON(baseTransactionSchema, transaction),
+      params: paramsSchema ? Lisk.codec.codec.decodeJSON(paramsSchema, transaction.params) : {},
       id: transaction.id.toString('hex'),
     };
   }
   return {
-    ...codec.toJSON(baseTransactionSchema, {
+    ...Lisk.codec.codec.toJSON(baseTransactionSchema, {
       ...transaction,
       params: Buffer.alloc(0),
     }),
-    params: paramsSchema ? codec.toJSON(paramsSchema, transaction.params) : {},
+    params: paramsSchema ? Lisk.codec.codec.toJSON(paramsSchema, transaction.params) : {},
     id: transaction.id && transaction.id.toString('hex'),
   };
 };

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
-import { useGetTokensQuery } from '../../api/useGetTokensQuery';
+import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
 import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
 import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
@@ -16,7 +16,7 @@ export function useSendTokenSummary({ form }) {
 
   const bookmarks = useSelector(selectBookmarkList);
 
-  const tokens = useGetTokensQuery(currentAccount.metadata.address);
+  const tokens = useAccountTokensQuery(currentAccount.metadata.address);
 
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');

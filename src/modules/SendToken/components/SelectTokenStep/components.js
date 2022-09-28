@@ -5,6 +5,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
@@ -28,15 +30,13 @@ import getSendTokenSelectTokenStepStyles, {
   getSendTokenAmountFieldStyles,
   getSendTokenMessageFieldStyles,
 } from './styles';
-import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount';
-import { useGetTokensQuery } from '../../api/useGetTokensQuery';
 
 export function TokenSelectField({ value, onChange, errorMessage, style }) {
   const [currentAccount] = useCurrentAccount();
 
   const currentAccountInfo = useAccountInfo();
 
-  const tokens = useGetTokensQuery(currentAccount.metadata.address);
+  const tokens = useAccountTokensQuery(currentAccount.metadata.address);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
@@ -100,7 +100,7 @@ export function TokenSelectField({ value, onChange, errorMessage, style }) {
 export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, style }) {
   const [currentAccount] = useCurrentAccount();
 
-  const tokens = useGetTokensQuery(currentAccount.metadata.address);
+  const tokens = useAccountTokensQuery(currentAccount.metadata.address);
 
   const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
 
@@ -297,7 +297,7 @@ export function SendTokenTransactionFeesLabels({
 }) {
   const [currentAccount] = useCurrentAccount();
 
-  const tokens = useGetTokensQuery(currentAccount.metadata.address);
+  const tokens = useAccountTokensQuery(currentAccount.metadata.address);
 
   const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
 

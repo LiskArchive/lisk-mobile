@@ -6,11 +6,19 @@ import i18next from 'i18next';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import useSendTokenMutation from '../api/useSendTokenMutation';
 import { mockTokens } from '../__fixtures__';
+import { useCreateTransaction } from '../../Transactions/hooks/useCreateTransaction';
 
 export default function useSendTokenForm() {
   const [currentApplication] = useCurrentBlockchainApplication();
 
   const sendTokenMutation = useSendTokenMutation();
+
+  const _transaction = useCreateTransaction({
+    module: 'token',
+    command: 'transfer',
+  });
+
+  console.log({ _transaction });
 
   const defaultValues = {
     senderApplicationChainID: currentApplication.chainID,

@@ -1,11 +1,13 @@
 /* eslint-disable no-undef */
-import {
-  signTransaction,
-  signMultiSignatureTransaction,
-  computeMinFee,
-} from '@liskhq/lisk-transactions';
-import { validator } from '@liskhq/lisk-validator';
-import { codec } from '@liskhq/lisk-codec';
+// import {
+//   signTransaction,
+//   signMultiSignatureTransaction,
+//   computeMinFee,
+// } from '@liskhq/lisk-transactions';
+// import { validator } from '@liskhq/lisk-validator';
+// import { codec } from '@liskhq/lisk-codec';
+
+import * as Lisk from '@liskhq/lisk-client';
 
 import {
   baseTransactionSchema,
@@ -77,7 +79,7 @@ export class Transaction {
     );
 
     if (encodedTransaction) {
-      this.transaction.params = codec.decode(this._paramsSchema, baseTrx.params);
+      this.transaction.params = Lisk.codec.codec.decode(this._paramsSchema, baseTrx.params);
     }
     this.computeFee();
   }
@@ -89,7 +91,7 @@ export class Transaction {
    */
   update({ params = null, nonce = null }) {
     if (params) {
-      this.transaction.params = codec.fromJSON(this._paramsSchema, params);
+      this.transaction.params = Lisk.codec.codec.fromJSON(this._paramsSchema, params);
     }
     if (nonce) {
       this.transaction.nonce = BigInt(nonce);
@@ -115,7 +117,7 @@ export class Transaction {
     this._validateTransaction();
 
     if (isMultiSignature || isMultiSignatureRegistration) {
-      const signedTx = signMultiSignatureTransaction(
+      const signedTx = Lisk.transactions.signMultiSignatureTransaction(
         this.transaction,
         chainID,
         privateKey,
@@ -131,7 +133,7 @@ export class Transaction {
       return;
     }
 
-    const signedTx = signTransaction(
+    const signedTx = Lisk.transactions.signTransaction(
       decodedTx,
       Buffer.from(this._networkStatus.networkIdentifier, 'hex'),
       Buffer.from(privateKey, 'hex'),
@@ -164,7 +166,7 @@ export class Transaction {
       computeMinFeeOptions.numberOfSignatures = optionalKeys?.length + mandatoryKeys?.length + 1;
     }
 
-    this.transaction.fee = computeMinFee(
+    this.transaction.fee = Lisk.transactions.computeMinFee(
       this.transaction,
       this._paramsSchema,
       computeMinFeeOptions
@@ -216,8 +218,12 @@ export class Transaction {
     if (typeof this.transaction !== 'object' || this.transaction === null) {
       throw new Error('Transaction must be an object.');
     }
+
     const { params, ...rest } = this.transaction;
-    validator.validate(baseTransactionSchema, {
+
+    console.log({ baseTransactionSchema, rest, params: Buffer.alloc(0) });
+
+    Lisk.validator.validator.validate(baseTransactionSchema, {
       ...rest,
       params: Buffer.alloc(0),
     });

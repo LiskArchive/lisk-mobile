@@ -1,7 +1,7 @@
 import apiClient from './APIClient';
 import ws from './ws';
 
-export const API_BASE_URL = 'http://104.248.241.229:9901';
+export const API_BASE_URL = 'http://localhost:9901';
 
 export const API_VERSION = 'v3';
 

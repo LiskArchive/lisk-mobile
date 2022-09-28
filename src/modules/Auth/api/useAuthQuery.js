@@ -15,7 +15,7 @@ import { API_URL } from 'utilities/api/constants';
  */
 export function useAuthQuery({ config: customConfig = {}, options } = {}) {
   const config = {
-    url: `${API_URL}/fees`,
+    url: `${API_URL}/auth`,
     method: 'get',
     event: 'get.auth',
     ...customConfig,

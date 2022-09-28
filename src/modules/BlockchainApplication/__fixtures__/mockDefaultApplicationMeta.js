@@ -8,8 +8,8 @@ export const mockDefaultApplicationMeta = {
   projectPage: 'https://lisk.com',
   serviceURLs: [
     {
-      http: 'http://104.248.241.229:9901',
-      ws: 'wss://104.248.241.229:9901',
+      http: 'http://localhost:9901',
+      ws: 'wss://localhost:9901',
     },
   ],
   logo: {
