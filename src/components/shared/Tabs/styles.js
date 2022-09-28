@@ -20,7 +20,7 @@ export function getTabsStyles() {
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
-        borderColor: colors.dark.sparkleGray,
+        borderColor: colors.dark.volcanicSand,
       },
     },
   };

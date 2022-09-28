@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { useTheme } from 'hooks/useTheme';
-import EmptyStateSvg from 'assets/svgs/EmptyStateSvg';
+import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import { P } from 'components/shared/toolBox/typography';
 
 import getEmptyStateStyles from './styles';
@@ -12,7 +12,7 @@ export default function EmptyState({ message, style = {} }) {
 
   return (
     <View style={[styles.container, style?.container]}>
-      <EmptyStateSvg />
+      <EmptyIllustrationSvg />
       <P style={[styles.messageText, styles.theme.messageText, style?.messageText]}>{message}</P>
     </View>
   );

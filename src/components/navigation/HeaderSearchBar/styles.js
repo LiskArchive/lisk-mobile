@@ -1,14 +1,16 @@
-import { Platform } from 'react-native';
-import { colors, fonts } from 'constants/styleGuide';
+import { colors, fonts, boxes } from 'constants/styleGuide';
+import { deviceType } from 'utilities/device';
 
-const paddingTop = Platform.OS === 'android' ? 16 : 10;
+const type = deviceType();
+
+let normalMarginTop = type === 'iOSx' ? -3 : 0;
+
+if (type === 'android') {
+  normalMarginTop = 0;
+}
 
 export default () => ({
   common: {
-    navContainer: {
-      paddingTop,
-      height: 50,
-    },
     title: {
       fontFamily: fonts.family.heading,
       fontSize: 24,
@@ -18,6 +20,9 @@ export default () => ({
       alignItems: 'center',
       justifyContent: 'space-between',
       paddingHorizontal: 20,
+      marginTop: normalMarginTop,
+      paddingRight: 20,
+      paddingTop: 10,
     },
     row: {
       flexDirection: 'row',
@@ -26,7 +31,10 @@ export default () => ({
     searchRow: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingRight: 20,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
+      marginTop: normalMarginTop,
+      paddingTop: 10,
     },
     flex: {
       flex: 1,
@@ -34,25 +42,12 @@ export default () => ({
     },
     cancelButton: {
       color: colors.light.ultramarineBlue,
-    },
-    miconButtonain: {
-      padding: 10,
-      backgroundColor: 'green',
-    },
-    searchIcon: {
-      position: 'absolute',
-      zIndex: 1,
-      left: 30,
+      marginLeft: 16,
     },
     input: {
-      flexWrap: 'wrap',
-      paddingLeft: 35,
-      paddingBottom: 10,
-      paddingTop: 10,
+      paddingBottom: 8,
+      paddingTop: 8,
       fontFamily: fonts.family.context,
-    },
-    inputContainer: {
-      marginTop: -20,
     },
   },
 });

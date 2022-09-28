@@ -10,7 +10,9 @@ import { LabelButton } from 'components/shared/toolBox/button';
 import DataRenderer from 'components/shared/DataRenderer';
 import { P } from 'components/shared/toolBox/typography';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
-import EmptyState from 'components/shared/EmptyState';
+import ResultScreen from 'components/screens/ResultScreen';
+import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import { useTransactionsQuery } from '../../api/useTransactionsQuery';
 import TransactionRow from '../TransactionRow';
@@ -95,12 +97,24 @@ export default function TransactionList({ mode = 'overview', style }) {
           </P>
         )}
         renderEmpty={() => (
-          <EmptyState message={i18next.t('transactions.transactionList.emptyText')} />
+          <ResultScreen
+            illustration={<EmptyIllustrationSvg />}
+            description={i18next.t('transactions.transactionList.emptyText')}
+            styles={{
+              wrapper: styles.resultScreenContainer,
+              container: styles.resultScreenContainer,
+            }}
+          />
         )}
         renderError={() => (
-          <P style={[styles.loadingText, styles.theme.loadingText]}>
-            {i18next.t('transactions.transactionList.errorText')}
-          </P>
+          <ResultScreen
+            illustration={<ErrorIllustrationSvg />}
+            description={i18next.t('transactions.transactionList.errorText')}
+            styles={{
+              wrapper: styles.resultScreenContainer,
+              container: styles.resultScreenContainer,
+            }}
+          />
         )}
       />
     </View>

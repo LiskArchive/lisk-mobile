@@ -285,6 +285,7 @@
     "faceId": "Schau bitte in die Kamera, um dich anzumelden"
   },
   "bookmarks": {
+    "emptyText": "Sie haben noch keine Lesezeichen.",
     "disabled": {
       "title": "",
       "description": "",

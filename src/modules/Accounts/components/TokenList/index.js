@@ -12,7 +12,9 @@ import { colors } from 'constants/styleGuide';
 import CaretSvg from 'assets/svgs/CaretSvg';
 
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
-import EmptyState from 'components/shared/EmptyState';
+import ResultScreen from 'components/screens/ResultScreen';
+import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import DataRenderer from 'components/shared/DataRenderer';
 import { LIMIT } from 'utilities/api/constants';
 import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
@@ -72,7 +74,7 @@ export default function TokenList({ mode = 'overview', style }) {
       <View style={[styles.header, style?.header]}>
         <View style={[styles.tabsContainer]}>
           <TouchableOpacity
-            style={[styles.tabItem, activeTab === 0 && styles.tabItemActive]}
+            style={[styles.tabItem, activeTab === 0 && styles.theme.tabItemActive]}
             onPress={() => setActiveTab(0)}
           >
             <P style={[styles.tabItemText, activeTab === 0 && styles.tabItemTextActive]}>
@@ -134,11 +136,25 @@ export default function TokenList({ mode = 'overview', style }) {
             {i18next.t('accounts.loadingTokensText')}
           </P>
         )}
-        renderEmpty={() => <EmptyState message={i18next.t('accounts.emptyTokenMessage')} />}
+        renderEmpty={() => (
+          <ResultScreen
+            illustration={<EmptyIllustrationSvg />}
+            description={i18next.t('accounts.emptyTokenMessage')}
+            styles={{
+              wrapper: styles.resultScreenContainer,
+              container: styles.resultScreenContainer,
+            }}
+          />
+        )}
         renderError={() => (
-          <P style={[styles.loadingText, styles.theme.loadingText]}>
-            {i18next.t('accounts.errorOnTokensText')}
-          </P>
+          <ResultScreen
+            illustration={<ErrorIllustrationSvg />}
+            description={i18next.t('accounts.errorOnTokensText')}
+            styles={{
+              wrapper: styles.resultScreenContainer,
+              container: styles.resultScreenContainer,
+            }}
+          />
         )}
       />
     </View>

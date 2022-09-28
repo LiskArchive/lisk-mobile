@@ -69,7 +69,7 @@ export default function BlockchainApplicationsExplorer() {
   const connectionEvent = useMemo(() => events[events.length - 1], [events]);
 
   return (
-    <View style={styles.container}>
+    <>
       <NavigationSafeAreaView>
         <HeaderBackButton
           title={i18next.t('application.explore.title')}
@@ -126,6 +126,7 @@ export default function BlockchainApplicationsExplorer() {
           <ApproveConnection event={connectionEvent} onFinish={onCancelConnection} />
         </Stepper>
       </BottomModal>
+
       <BottomModal show={showStatsModal} toggleShow={() => setShowStatsModal(false)}>
         <ApplicationsStats
           totalSupply={data.totalSupplyLSK}
@@ -142,6 +143,6 @@ export default function BlockchainApplicationsExplorer() {
       {activeTab === 'externalApplications' && (
         <Fab actions={actions} bottom={tabBarHeight} onPressItem={onFabItemPress} />
       )}
-    </View>
+    </>
   );
 }

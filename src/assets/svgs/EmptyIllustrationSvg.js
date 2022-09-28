@@ -4,7 +4,7 @@ import { Svg, Path } from 'react-native-svg';
 import { useTheme } from 'hooks/useTheme';
 import { themes, colors } from 'constants/styleGuide';
 
-export default function EmptyStateSvg({ height = 80, width = 216, style }) {
+export default function EmptyIllustrationSvg({ height = 80, width = 216, style }) {
   const { theme } = useTheme();
 
   const baseColor = theme === themes.light ? colors.light.zodiacBlue : colors.dark.white;

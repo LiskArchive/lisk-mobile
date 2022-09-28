@@ -14,6 +14,7 @@ export default () => ({
     topContainer: {
       marginLeft: 20,
       marginRight: 60,
+      marginTop: 10,
     },
     discreteContainer: {
       marginRight: 10,

@@ -82,7 +82,7 @@ export function SendTokenSummaryModal({
   }
 
   return (
-    <BottomModal isOpen={show} toggleShow={handleOnProcessCompleted}>
+    <BottomModal show={show} toggleShow={handleOnProcessCompleted}>
       {renderStep()}
     </BottomModal>
   );

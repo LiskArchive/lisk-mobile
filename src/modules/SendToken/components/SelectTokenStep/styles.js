@@ -5,8 +5,7 @@ export default function getSendTokenSelectTokenStepStyles() {
     common: {
       wrapper: {
         flex: 1,
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
+        padding: boxes.boxPadding,
       },
       container: {
         flex: 1,

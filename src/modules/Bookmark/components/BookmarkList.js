@@ -1,8 +1,12 @@
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { useSelector } from 'react-redux';
+import i18next from 'i18next';
+
 import { useTheme } from 'hooks/useTheme';
-import EmptyState from './EmptyState';
+import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import ResultScreen from 'components/screens/ResultScreen';
+
 import List from './List';
 import getStyles from './styles';
 import { selectBookmarkList } from '../store/selectors';
@@ -15,6 +19,7 @@ const BookmarkList = ({
   renderEmpty,
   filterAddress,
   Component,
+  style,
 }) => {
   const styles = useTheme({ styles: getStyles() });
   const list = useSelector(selectBookmarkList);
@@ -35,9 +40,14 @@ const BookmarkList = ({
   );
 
   return (
-    <View style={[!draggable && styles.container]}>
+    <View style={[!draggable && styles.container, style?.container]}>
       {filterList?.length === 0 ? (
-        renderEmpty && <EmptyState style={styles.emptyView} />
+        renderEmpty && (
+          <ResultScreen
+            illustration={<EmptyIllustrationSvg />}
+            description={i18next.t('bookmarks.emptyText')}
+          />
+        )
       ) : (
         <List
           draggable={draggable}

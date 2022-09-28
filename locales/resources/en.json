@@ -285,6 +285,7 @@
     "touchId": "Place your finger over the touch sensor to authenticate"
   },
   "bookmarks": {
+    "emptyText": "You do not have any bookmarks yet.",
     "disabled": {
       "title": "Disabled Bookmark",
       "description": "This bookmark is associated with a legacy account and can no longer be used.",
