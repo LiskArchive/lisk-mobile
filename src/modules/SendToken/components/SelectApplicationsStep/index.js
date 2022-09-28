@@ -8,6 +8,8 @@ import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import DataRenderer from 'components/shared/DataRenderer';
 import { PrimaryButton } from 'components/shared/toolBox/button';
+import ResultScreen from 'components/screens/ResultScreen';
+import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 
 import getSendTokenSelectApplicationsStepStyles from './styles';
 import {
@@ -89,9 +91,12 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
               />
             </>
           )}
-
-          // TODO: Add ResultScreen error when component is available
-          // from merging https://github.com/LiskHQ/lisk-mobile/pull/1500
+          renderError={() => (
+            <ResultScreen
+              illustration={<ErrorIllustrationSvg />}
+              description="Error loading blockchain applications data. Please try again later."
+            />
+          )}
         />
       </View>
     </View>
