@@ -18,8 +18,6 @@ const SignatureRequest = ({ session, onFinish }) => {
   const { styles } = useTheme({ styles: getSignatureStyles });
   const [request, setRequest] = useState(null);
 
-  const selectedAccountAddress = extractAddressFromPublicKey(session.peer.publicKey);
-
   useEffect(() => {
     const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
     if (event) {
@@ -39,6 +37,8 @@ const SignatureRequest = ({ session, onFinish }) => {
   if (!session) {
     return null;
   }
+
+  const selectedAccountAddress = extractAddressFromPublicKey(session.peer.publicKey);
 
   return (
     <>
