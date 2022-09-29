@@ -3,6 +3,7 @@ import { useMemo, useRef } from 'react';
 import { APIClient } from 'utilities/api/APIClient';
 import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
 import { useSupportedTokensQuery } from './useSupportedTokensQuery';
+import { useTokensMetaQuery } from './useTokensMetaQuery';
 
 export function useApplicationSupportedTokensQuery(application) {
   const apiClient = useRef(new APIClient());
@@ -11,29 +12,57 @@ export function useApplicationSupportedTokensQuery(application) {
     apiClient.current.create(application.serviceURLs[0]);
   }
 
-  const { data: { data: accountTokensData = [] } = {}, isSuccess: isAccountTokensSuccess } =
-    useAccountTokensQuery();
+  const {
+    data: tokensMetaData,
+    isLoading: isTokensMetaLoading,
+    error: errorOnTokensMeta,
+    isError: isTokensMetaError,
+  } = useTokensMetaQuery();
 
   const {
-    data: { data: { supportedTokensData = [] } = {} } = {},
-    isSuccess: isSupportedTokensSuccess,
+    data: { data: accountTokensData = [] } = {},
+    isLoading: isAccountTokensLoading,
+    isError: isAccountTokensError,
+    error: errorOnAccountTokens,
+  } = useAccountTokensQuery();
+
+  const {
+    data: { data: { supportedTokens: supportedTokensData = [] } = {} } = {},
+    isLoading: isSupportedTokensLoading,
+    isError: isSupportedTokensError,
+    error: errorOnSupportedTokens,
   } = useSupportedTokensQuery({ client: apiClient.current });
 
-  const isSuccess = isAccountTokensSuccess && isSupportedTokensSuccess;
-
-  const tokens = useMemo(() => {
+  const data = useMemo(() => {
     const isSupportAllToken = supportedTokensData.length === 0;
 
-    return isSupportAllToken
+    console.log({ accountTokensData });
+
+    const tokensOnChainData = isSupportAllToken
       ? accountTokensData
       : accountTokensData.filter(
           (token) =>
             supportedTokensData.find((supportedToken) => supportedToken.symbol === token.symbol)
               .length
         );
-  }, [accountTokensData, supportedTokensData]);
 
-  console.log('tokens', tokens, isSuccess, isAccountTokensSuccess, isSupportedTokensSuccess);
+    const tokens = tokensMetaData?.data?.map((tokenMeta) => ({
+      ...tokenMeta,
+      ...tokensOnChainData.find((tokenOnChain) => tokenOnChain.tokenID === tokenMeta.tokenID),
+    }));
 
-  return isSuccess ? tokens : [];
+    return tokens;
+  }, [accountTokensData, supportedTokensData, tokensMetaData]);
+
+  return {
+    data,
+    isSupportedTokensLoading,
+    isAccountTokensLoading,
+    isTokensMetaLoading,
+    isError: isSupportedTokensError || isAccountTokensError || isTokensMetaError,
+    isLoading: isAccountTokensLoading || isSupportedTokensLoading || isTokensMetaLoading,
+    errorOnSupportedTokens,
+    errorOnAccountTokens,
+    errorOnTokensMeta,
+  };
 }

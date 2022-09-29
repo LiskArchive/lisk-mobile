@@ -22,7 +22,5 @@ export function useTokensMetaQuery({ config: customConfig = {}, options = {} } =
 
   const keys = [GET_TOKENS_METADATA_QUERY];
 
-  const query = useCustomInfiniteQuery({ config, options, keys });
-
-  return query;
+  return useCustomInfiniteQuery({ config, options, keys });
 }

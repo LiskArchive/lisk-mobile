@@ -5,9 +5,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
+import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
-import { useTokensMetaQuery } from 'modules/BlockchainApplication/api/useTokensMetaQuery';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -32,14 +31,14 @@ import getSendTokenSelectTokenStepStyles, {
   getSendTokenMessageFieldStyles,
 } from './styles';
 
-export function TokenSelectField({ value, onChange, errorMessage, style }) {
+export function TokenSelectField({ value, onChange, recipientApplication, errorMessage, style }) {
   const currentAccountInfo = useAccountInfo();
 
   const {
-    data: tokensMetaData,
-    isLoading: isTokensMetaLoading,
-    error: errorOnTokensMeta,
-  } = useTokensMetaQuery();
+    data: supportedTokensData,
+    isLoading: isLoadingSupportedTokens,
+    isError: isSupportedTokensError,
+  } = useApplicationSupportedTokensQuery(recipientApplication);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
@@ -47,9 +46,7 @@ export function TokenSelectField({ value, onChange, errorMessage, style }) {
 
   const normalizedBalance = fromRawLsk(currentAccountInfo.summary.balance);
 
-  const selectedToken = tokensMetaData?.data?.find((token) => token.tokenID === value);
-
-  console.log({ tokensMetaData });
+  const selectedToken = supportedTokensData?.find((token) => token.tokenID === value);
 
   return (
     <Picker value={value} onChange={onChange} error={errorMessage}>
@@ -70,9 +67,9 @@ export function TokenSelectField({ value, onChange, errorMessage, style }) {
       </View>
 
       <DataRenderer
-        data={tokensMetaData?.data}
-        isLoading={isTokensMetaLoading}
-        error={errorOnTokensMeta}
+        data={supportedTokensData}
+        isLoading={isLoadingSupportedTokens}
+        error={isSupportedTokensError}
         renderData={(data) => (
           <>
             <Picker.Toggle style={style?.toggle}>
@@ -107,14 +104,21 @@ export function TokenSelectField({ value, onChange, errorMessage, style }) {
   );
 }
 
-export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, style }) {
+export function SendTokenAmountField({
+  value,
+  onChange,
+  recipientApplication,
+  errorMessage,
+  tokenID,
+  style,
+}) {
   const {
-    data: tokensMetaData,
-    isLoading: isTokensMetaLoading,
-    error: errorOnTokensMeta,
-  } = useTokensMetaQuery();
+    data: supportedTokensData,
+    isLoading: isLoadingSupportedTokens,
+    isError: isSupportedTokensError,
+  } = useApplicationSupportedTokensQuery(recipientApplication);
 
-  const selectedToken = tokensMetaData?.data?.find((token) => token.tokenID === tokenID);
+  const selectedToken = supportedTokensData?.find((token) => token.tokenID === tokenID);
 
   const tokenAmountInCurrency = useTokenAmountInCurrency({
     tokenAmount: value,
@@ -127,9 +131,9 @@ export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, s
 
   return (
     <DataRenderer
-      data={tokensMetaData?.data}
-      isLoading={isTokensMetaLoading}
-      error={errorOnTokensMeta}
+      data={supportedTokensData}
+      isLoading={isLoadingSupportedTokens}
+      error={isSupportedTokensError}
       renderData={() => (
         <Input
           value={value && value.toString()}
@@ -311,12 +315,12 @@ export function SendTokenTransactionFeesLabels({
   priority,
   message,
   recipientAccountAddress,
-  senderApplicationChainID,
-  recipientApplicationChainID,
+  senderApplication,
+  recipientApplication,
 }) {
-  const tokens = useAccountTokensQuery();
+  const { data: tokensData } = useApplicationSupportedTokensQuery();
 
-  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
+  const selectedToken = tokensData?.find((token) => token.tokenID === tokenID);
 
   const transactionFee = useTransactionFeeCalculator({
     tokenID,
@@ -331,8 +335,8 @@ export function SendTokenTransactionFeesLabels({
   });
 
   const cmmFee = useCCMFeeCalculator({
-    senderApplicationChainID,
-    recipientApplicationChainID,
+    senderApplication: senderApplication.chainID,
+    recipientApplicationChainID: recipientApplication.chainID,
   });
 
   const { styles } = useTheme({

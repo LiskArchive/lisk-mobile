@@ -28,7 +28,7 @@ export default function TokenList({ mode = 'overview', style }) {
   const navigation = useNavigation();
 
   const {
-    data: tokensData = [],
+    data: tokensData,
     isLoading: isLoadingTokens,
     error: errorOnTokens,
     fetchNextPage: fetchNextTokensPage,
@@ -41,13 +41,13 @@ export default function TokenList({ mode = 'overview', style }) {
   });
 
   const hasLockedTokens = useMemo(
-    () => tokensData.some((token) => token.lockedBalances),
-    [tokensData]
+    () => tokensData?.data?.some((token) => token.lockedBalances),
+    [tokensData?.data]
   );
 
   const lockedTokens = useMemo(() => {
     const res = [];
-    tokensData.forEach((token) => {
+    tokensData?.data?.forEach((token) => {
       let amount = 0;
       if (token.lockedBalances) {
         token.lockedBalances.forEach((lockedBalance) => {
@@ -59,7 +59,7 @@ export default function TokenList({ mode = 'overview', style }) {
       }
     });
     return lockedTokens;
-  }, [tokensData]);
+  }, [tokensData?.data]);
 
   const { styles } = useTheme({
     styles: getTokenListStyles(),
@@ -113,7 +113,7 @@ export default function TokenList({ mode = 'overview', style }) {
       </View>
 
       <DataRenderer
-        data={activeTab === 0 ? tokensData : lockedTokens}
+        data={activeTab === 0 ? tokensData?.data : lockedTokens}
         isLoading={isLoadingTokens}
         error={errorOnTokens && errorOnTokens.response?.status !== 404}
         renderData={(data) => (

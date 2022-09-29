@@ -13,7 +13,7 @@ export function useSendTokenSummary({ form }) {
 
   const bookmarks = useSelector(selectBookmarkList);
 
-  const tokens = useAccountTokensQuery();
+  const { data: tokensData } = useAccountTokensQuery();
 
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');
@@ -35,7 +35,7 @@ export function useSendTokenSummary({ form }) {
     (account) => account.address === recipientAccountAddress
   ) || { address: recipientAccountAddress, isNew: true };
 
-  const token = tokens.data?.find((_token) => _token.tokenID === tokenID);
+  const token = tokensData.data?.find((_token) => _token.tokenID === tokenID);
 
   const transactionFee = useTransactionFeeCalculator({
     tokenID,
