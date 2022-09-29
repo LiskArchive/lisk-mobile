@@ -15,7 +15,7 @@ export function useApplicationsMetaQuery({ config: customConfig = {}, options = 
     baseURL: API_BASE_URL,
     url: `${API_URL}/blockchain/apps/meta`,
     method: 'get',
-    event: 'get.blockchainApplicationsMeta',
+    event: 'get.blockchain.apps.meta',
     ...customConfig,
     params: {
       limit: LIMIT,

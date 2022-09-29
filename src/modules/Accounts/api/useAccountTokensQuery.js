@@ -1,10 +1,12 @@
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { METHOD, LIMIT, API_URL } from 'utilities/api/constants';
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
 
-export function useAccountTokensQuery(address, { config: customConfig = {}, options = {} } = {}) {
-  const [currentAccount] = useCurrentBlockchainApplication();
+export function useAccountTokensQuery({ config: customConfig = {}, options = {}, client } = {}) {
+  const [currentAccount] = useCurrentAccount();
+
+  const address = currentAccount.metadata.address;
 
   const config = {
     url: `${API_URL}/tokens`,
@@ -20,7 +22,7 @@ export function useAccountTokensQuery(address, { config: customConfig = {}, opti
 
   const keys = [GET_ACCOUNT_TOKENS_QUERY, METHOD, address, currentAccount.chainID, config];
 
-  const query = useCustomInfiniteQuery({ config, options, keys });
+  const query = useCustomInfiniteQuery({ config, options, keys, client });
 
   return {
     ...query,

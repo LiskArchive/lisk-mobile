@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { METHOD, API_METHOD, APPLICATION } from 'utilities/api/constants';
+import defaultClient from 'utilities/api/APIClient';
+import { METHOD, APPLICATION } from 'utilities/api/constants';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 
 /**
@@ -17,13 +18,13 @@ import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/h
  *
  * @returns The query object
  */
-export const useCustomInfiniteQuery = ({ keys, config, options = {} }) => {
+export const useCustomInfiniteQuery = ({ keys, config, options = {}, client = defaultClient }) => {
   const [{ chainID }] = useCurrentBlockchainApplication();
 
   return useInfiniteQuery(
     [chainID, config, APPLICATION, METHOD, ...keys],
     async ({ pageParam }) =>
-      API_METHOD[METHOD]({
+      client[METHOD]({
         ...config,
         params: {
           ...(config.params || {}),

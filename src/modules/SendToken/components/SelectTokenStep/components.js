@@ -5,9 +5,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
 import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
+import { useTokensMetaQuery } from 'modules/BlockchainApplication/api/useTokensMetaQuery';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -15,6 +15,7 @@ import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { P } from 'components/shared/toolBox/typography';
 import InfoToggler from 'components/shared/InfoToggler';
 import FadeInView from 'components/shared/fadeInView';
+import DataRenderer from 'components/shared/DataRenderer';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
@@ -32,11 +33,13 @@ import getSendTokenSelectTokenStepStyles, {
 } from './styles';
 
 export function TokenSelectField({ value, onChange, errorMessage, style }) {
-  const [currentAccount] = useCurrentAccount();
-
   const currentAccountInfo = useAccountInfo();
 
-  const tokens = useAccountTokensQuery(currentAccount.metadata.address);
+  const {
+    data: tokensMetaData,
+    isLoading: isTokensMetaLoading,
+    error: errorOnTokensMeta,
+  } = useTokensMetaQuery();
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
@@ -44,7 +47,9 @@ export function TokenSelectField({ value, onChange, errorMessage, style }) {
 
   const normalizedBalance = fromRawLsk(currentAccountInfo.summary.balance);
 
-  const selectedToken = tokens.data?.find((token) => token.tokenID === value);
+  const selectedToken = tokensMetaData?.data?.find((token) => token.tokenID === value);
+
+  console.log({ tokensMetaData });
 
   return (
     <Picker value={value} onChange={onChange} error={errorMessage}>
@@ -64,45 +69,52 @@ export function TokenSelectField({ value, onChange, errorMessage, style }) {
         )}
       </View>
 
-      <Picker.Toggle disabled={tokens.isLoading || tokens.error} style={style?.toggle}>
-        {tokens.isLoading ? (
-          <Text>{i18next.t('sendToken.tokenSelect.loadingTokensText')}</Text>
-        ) : (
-          selectedToken && (
-            <View style={[styles.row]}>
-              <Text style={[styles.text, styles.theme.text]}>{selectedToken.symbol}</Text>
+      <DataRenderer
+        data={tokensMetaData?.data}
+        isLoading={isTokensMetaLoading}
+        error={errorOnTokensMeta}
+        renderData={(data) => (
+          <>
+            <Picker.Toggle style={style?.toggle}>
+              {selectedToken && (
+                <View style={[styles.row]}>
+                  <Text style={[styles.text, styles.theme.text]}>{selectedToken.symbol}</Text>
 
-              <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
-            </View>
-          )
+                  <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
+                </View>
+              )}
+            </Picker.Toggle>
+
+            <Picker.Menu>
+              <InfiniteScrollList
+                data={data}
+                keyExtractor={(item) => item.tokenID}
+                renderItem={(item) => (
+                  <Picker.Item key={item.tokenID} value={item.tokenID}>
+                    <Text style={[styles.text, styles.theme.text]}>{item.symbol}</Text>
+
+                    <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
+                  </Picker.Item>
+                )}
+                renderSpinner
+                // TODO: Integrate pagination props using react-query.
+              />
+            </Picker.Menu>
+          </>
         )}
-      </Picker.Toggle>
-
-      <Picker.Menu>
-        <InfiniteScrollList
-          data={tokens.data}
-          keyExtractor={(item) => item.tokenID}
-          renderItem={(item) => (
-            <Picker.Item key={item.tokenID} value={item.tokenID}>
-              <Text style={[styles.text, styles.theme.text]}>{item.symbol}</Text>
-
-              <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
-            </Picker.Item>
-          )}
-          renderSpinner
-          // TODO: Integrate pagination props using react-query.
-        />
-      </Picker.Menu>
+      />
     </Picker>
   );
 }
 
 export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, style }) {
-  const [currentAccount] = useCurrentAccount();
+  const {
+    data: tokensMetaData,
+    isLoading: isTokensMetaLoading,
+    error: errorOnTokensMeta,
+  } = useTokensMetaQuery();
 
-  const tokens = useAccountTokensQuery(currentAccount.metadata.address);
-
-  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
+  const selectedToken = tokensMetaData?.data?.find((token) => token.tokenID === tokenID);
 
   const tokenAmountInCurrency = useTokenAmountInCurrency({
     tokenAmount: value,
@@ -114,34 +126,41 @@ export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, s
   });
 
   return (
-    <Input
-      value={value && value.toString()}
-      onChange={(newValue) => onChange(newValue && parseFloat(newValue))}
-      keyboardType="numeric"
-      disabled={!selectedToken}
-      label={
-        selectedToken
-          ? i18next.t('sendToken.tokenSelect.tokenAmountFieldLabel', {
-              selectedTokenSymbol: selectedToken.symbol || '',
-            })
-          : i18next.t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
-      }
-      placeholder={
-        selectedToken
-          ? i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholder', {
-              selectedTokenSymbol: selectedToken.symbol || '',
-            })
-          : i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
-      }
-      error={errorMessage}
-      adornments={{
-        right: tokenAmountInCurrency && (
-          <Text style={[styles.tokenAmountInCurrencyText]}>
-            ~ {`${tokenAmountInCurrency.amount} ${tokenAmountInCurrency.currency}`}
-          </Text>
-        ),
-      }}
-      innerStyles={getSendTokenAmountFieldStyles(style)}
+    <DataRenderer
+      data={tokensMetaData?.data}
+      isLoading={isTokensMetaLoading}
+      error={errorOnTokensMeta}
+      renderData={() => (
+        <Input
+          value={value && value.toString()}
+          onChange={(newValue) => onChange(newValue && parseFloat(newValue))}
+          keyboardType="numeric"
+          disabled={!selectedToken}
+          label={
+            selectedToken
+              ? i18next.t('sendToken.tokenSelect.tokenAmountFieldLabel', {
+                  selectedTokenSymbol: selectedToken.symbol || '',
+                })
+              : i18next.t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
+          }
+          placeholder={
+            selectedToken
+              ? i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholder', {
+                  selectedTokenSymbol: selectedToken.symbol || '',
+                })
+              : i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
+          }
+          error={errorMessage}
+          adornments={{
+            right: tokenAmountInCurrency && (
+              <Text style={[styles.tokenAmountInCurrencyText]}>
+                ~ {`${tokenAmountInCurrency.amount} ${tokenAmountInCurrency.currency}`}
+              </Text>
+            ),
+          }}
+          innerStyles={getSendTokenAmountFieldStyles(style)}
+        />
+      )}
     />
   );
 }
@@ -295,9 +314,7 @@ export function SendTokenTransactionFeesLabels({
   senderApplicationChainID,
   recipientApplicationChainID,
 }) {
-  const [currentAccount] = useCurrentAccount();
-
-  const tokens = useAccountTokensQuery(currentAccount.metadata.address);
+  const tokens = useAccountTokensQuery();
 
   const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
 

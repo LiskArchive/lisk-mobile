@@ -17,7 +17,6 @@ import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import DataRenderer from 'components/shared/DataRenderer';
 import { LIMIT } from 'utilities/api/constants';
-import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
 import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
 import TokenRow from '../TokenRow';
 
@@ -28,9 +27,6 @@ export default function TokenList({ mode = 'overview', style }) {
 
   const navigation = useNavigation();
 
-  const [currentAccount] = useCurrentAccount();
-  const { address } = currentAccount.metadata;
-
   const {
     data: tokensData = [],
     isLoading: isLoadingTokens,
@@ -38,7 +34,7 @@ export default function TokenList({ mode = 'overview', style }) {
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
     isFetchingNextPage: isFetchingTokensNextPage,
-  } = useAccountTokensQuery(address, {
+  } = useAccountTokensQuery({
     config: {
       params: { limit: mode === 'overview' ? 2 : LIMIT },
     },

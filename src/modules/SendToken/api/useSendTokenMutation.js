@@ -19,7 +19,7 @@ export default function useSendTokenMutation(options = {}) {
     };
 
     // TODO: Implement real API call when update to service v3 API is done.
-    // return API_METHOD[METHOD](config);
+    // return client[METHOD](config);
     console.log({ config });
 
     return sendTokenMockHandler;

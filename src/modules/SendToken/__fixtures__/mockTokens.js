@@ -1,6 +1,6 @@
 export const mockTokens = [
   {
-    tokenID: '2ba563cf98003d',
+    tokenID: '0000000100000000',
     name: 'LISK',
     symbol: 'LSK',
     availableBalance: '10000000',
@@ -12,7 +12,7 @@ export const mockTokens = [
     ],
   },
   {
-    tokenID: '2bc561cf98009a',
+    tokenID: '0000000200000000',
     name: 'COLECTI',
     symbol: 'COL',
     availableBalance: '4000000',
@@ -24,7 +24,7 @@ export const mockTokens = [
     ],
   },
   {
-    tokenID: '3as601cd98117m',
+    tokenID: '0000000300000000',
     name: 'KALIPO',
     symbol: 'TKN',
     availableBalance: '2900000',
@@ -36,7 +36,7 @@ export const mockTokens = [
     ],
   },
   {
-    tokenID: '1as631cd08007k',
+    tokenID: '0000000400000000',
     name: 'DOCUEDU',
     symbol: 'DOE',
     availableBalance: '34000000',
