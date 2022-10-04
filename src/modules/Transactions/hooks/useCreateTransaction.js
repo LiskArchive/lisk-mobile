@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
@@ -8,7 +8,8 @@ import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommand
 import { Transaction } from '../utils/Transaction';
 
 export function useCreateTransaction({ module = null, command = null, encodedTransaction = null }) {
-  const [transaction] = useState(new Transaction());
+  const transactionRef = useRef(new Transaction());
+  const transaction = transactionRef.current;
 
   const [currentAccount] = useCurrentAccount();
   const { pubkey, address } = currentAccount.metadata;
@@ -19,34 +20,37 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     config: { params: { address } },
   });
 
-  const { data: commandParametersSchemasData } = useCommandParametersSchemasQuery();
+  const { data: commandParametersSchemasData, isLoading: isCommandParametersSchemasLoading } =
+    useCommandParametersSchemasQuery();
 
-  useEffect(() => {
-    if (authData?.data && commandParametersSchemasData?.data && networkStatusData?.data) {
-      console.log('init...');
+  useEffect(
+    () => {
+      if (!isNetworkStatusLoading && !isAuthLoading && !isCommandParametersSchemasLoading) {
+        transaction.init({
+          pubkey,
+          networkStatus: networkStatusData?.data,
+          auth: authData?.data,
+          commandParametersSchemas: commandParametersSchemasData?.data,
+          module,
+          command,
+          encodedTransaction,
+        });
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      isNetworkStatusLoading,
+      isAuthLoading,
+      isCommandParametersSchemasLoading,
+      transaction,
+      encodedTransaction,
+      module,
+      pubkey,
+      command,
+    ]
+  );
 
-      transaction.init({
-        pubkey,
-        networkStatus: networkStatusData.data,
-        auth: authData.data,
-        commandParametersSchemas: commandParametersSchemasData.data,
-        module,
-        command,
-        encodedTransaction,
-      });
-    }
-  }, [
-    authData?.data,
-    commandParametersSchemasData?.data,
-    networkStatusData?.data,
-    transaction,
-    encodedTransaction,
-    module,
-    pubkey,
-    command,
-  ]);
-
-  const isLoading = isNetworkStatusLoading || isAuthLoading;
+  const isLoading = isNetworkStatusLoading || isAuthLoading || isCommandParametersSchemasLoading;
 
   return [transaction, isLoading];
 }

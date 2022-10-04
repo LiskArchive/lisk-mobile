@@ -21,8 +21,10 @@ export function useAuthQuery({ config: customConfig = {}, options } = {}) {
     ...customConfig,
   };
 
+  const keys = [GET_AUTH_QUERY];
+
   return useCustomQuery({
-    keys: [GET_AUTH_QUERY],
+    keys,
     config,
     options,
   });

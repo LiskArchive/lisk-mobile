@@ -35,6 +35,8 @@ export default function TransactionList({ mode = 'overview', style }) {
     },
   });
 
+  console.log({ transactionsData, errorOnTransactions });
+
   const { styles } = useTheme({
     styles: getTransactionListStyles(),
   });

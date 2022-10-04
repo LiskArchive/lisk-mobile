@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -20,12 +20,15 @@ export default function SendToken({ route }) {
 
   const account = useSelector((state) => state.account);
 
-  const [transaction, isLoadingTransaction] = useCreateTransaction({
-    module: 'token',
-    command: 'transfer',
-  });
+  const createTransactionOptions = useMemo(
+    () => ({
+      module: 'token',
+      command: 'transfer',
+    }),
+    []
+  );
 
-  console.log('uplevel tx: ', transaction);
+  const [transaction, isLoadingTransaction] = useCreateTransaction(createTransactionOptions);
 
   const form = useSendTokenForm({ transaction, isLoadingTransaction });
 

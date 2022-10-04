@@ -56,6 +56,7 @@ export class Transaction {
     this.transaction.command = command;
     this.transaction.params = params;
     this.transaction.signatures = [];
+    this.transaction.nonce = BigInt(auth.nonce || 0);
 
     let baseTx = null;
 
@@ -78,7 +79,7 @@ export class Transaction {
       this.transaction.params = Lisk.codec.codec.decode(this._paramsSchema, baseTx.params);
     }
 
-    // this.computeFee();
+    this.computeFee();
   }
 
   /**
@@ -87,8 +88,6 @@ export class Transaction {
    * @returns void
    */
   update({ params = {}, nonce = null, ...others }) {
-    console.log('on update: ', params);
-
     const updatedTransaction = {
       ...this.transaction,
       ...others,
@@ -96,10 +95,9 @@ export class Transaction {
       nonce: nonce || this.transaction.nonce,
     };
 
-    // eslint-disable-next-line prefer-object-spread
-    this.transaction = Object.assign({}, updatedTransaction);
+    this.transaction = { ...this.transaction, ...updatedTransaction };
 
-    // this.computeFee();
+    this.computeFee();
   }
 
   /**
@@ -148,7 +146,7 @@ export class Transaction {
       );
     }
 
-    // this.transaction = { ...signedTx, params: decodedTx.params };
+    this.transaction = { ...signedTx, params: decodedTx.params };
 
     return signedTx;
   }
@@ -186,7 +184,7 @@ export class Transaction {
     //   computeMinFeeOptions
     // );
 
-    this.transaction.fee = BigInt(100000000);
+    this.transaction = { ...this.transaction, fee: BigInt(100000000) };
   }
 
   /**

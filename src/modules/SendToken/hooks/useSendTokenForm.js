@@ -18,8 +18,6 @@ export default function useSendTokenForm({ transaction, isLoadingTransaction }) 
 
   const sendTokenMutation = useSendTokenMutation();
 
-  console.log({ transaction });
-
   const defaultValues = useMemo(
     () => ({
       senderApplicationChainID: currentApplication.chainID,
@@ -61,13 +59,9 @@ export default function useSendTokenForm({ transaction, isLoadingTransaction }) 
   });
 
   const handleChange = (field, value, onChange) => {
-    try {
-      transaction.update({ params: { [field]: value } });
+    transaction.update({ params: { [field]: value } });
 
-      onChange(value);
-    } catch (error) {
-      console.log({ errorOnHandleSendTokenFieldChange: error });
-    }
+    onChange(value);
   };
 
   const handleSubmit = baseHandleSubmit(async (values) => {
@@ -77,15 +71,6 @@ export default function useSendTokenForm({ transaction, isLoadingTransaction }) 
     );
 
     try {
-      // transaction.update({
-      //   params: {
-      //     amount: 100000000000,
-      //     data: '',
-      //     recipientAddress: 'lsk3ay4z7wqjczbo5ogcqxgxx23xyacxmycwxfh4d',
-      //     tokenID: '0000000000000000',
-      //   },
-      // });
-
       const signedTransaction = await transaction.sign(privateKey);
 
       const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
@@ -98,19 +83,18 @@ export default function useSendTokenForm({ transaction, isLoadingTransaction }) 
 
   const handleReset = () => form.reset(defaultValues);
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (isLoadingTransaction) return null;
-
-    console.log('on effect', { isLoadingTransaction, defaultValues });
-
-    return transaction.update({
-      params: {
-        tokenID: defaultValues.tokenID,
-        recipientAddress: defaultValues.recipientAccountAddress,
-        amount: defaultValues.amount,
-        data: defaultValues.message,
-      },
-    });
+    if (!isLoadingTransaction) {
+      return transaction.update({
+        params: {
+          tokenID: defaultValues.tokenID,
+          recipientAddress: defaultValues.recipientAccountAddress,
+          amount: defaultValues.amount,
+          data: defaultValues.message,
+        },
+      });
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValues, isLoadingTransaction]);
