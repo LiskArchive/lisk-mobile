@@ -6,7 +6,7 @@ import apiClient from 'utilities/api/APIClient';
 import { useAuthQuery } from '../../Auth/api/useAuthQuery';
 import { useCurrentAccount } from '../../Accounts/hooks/useAccounts/useCurrentAccount';
 
-export default function useSendTokenMutation(options = {}) {
+export default function useBroadcastTransactionMutation(options = {}) {
   const queryClient = useQueryClient();
 
   const [currentAccount] = useCurrentAccount();

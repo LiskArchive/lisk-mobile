@@ -7,16 +7,16 @@ import i18next from 'i18next';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
-import useSendTokenMutation from '../api/useSendTokenMutation';
+import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
+import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { mockTokensMeta } from '../__fixtures__';
-import { decryptAccount } from '../../Auth/utils/decryptAccount';
 
 export default function useSendTokenForm({ transaction, isLoadingTransaction }) {
   const [currentAccount] = useCurrentAccount();
 
   const [currentApplication] = useCurrentBlockchainApplication();
 
-  const sendTokenMutation = useSendTokenMutation();
+  const broadcastTransactionMutation = useBroadcastTransactionMutation();
 
   const defaultValues = useMemo(
     () => ({
@@ -75,7 +75,7 @@ export default function useSendTokenForm({ transaction, isLoadingTransaction }) 
 
       const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
 
-      sendTokenMutation.mutate({ transaction: encodedTransaction });
+      broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
     } catch (error) {
       console.log({ errorOnSign: error });
     }
@@ -104,6 +104,6 @@ export default function useSendTokenForm({ transaction, isLoadingTransaction }) 
     handleChange,
     handleSubmit,
     handleReset,
-    sendTokenMutation,
+    broadcastTransactionMutation,
   };
 }
