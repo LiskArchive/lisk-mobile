@@ -1,8 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { GET_AUTH_QUERY } from 'utilities/api/queries';
+import { GET_AUTH_QUERY, GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
 import { METHOD, API_URL } from 'utilities/api/constants';
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import apiClient from 'utilities/api/APIClient';
 import { useAuthQuery } from '../../Auth/api/useAuthQuery';
 import { useCurrentAccount } from '../../Accounts/hooks/useAccounts/useCurrentAccount';
@@ -16,8 +15,6 @@ export default function useSendTokenMutation(options = {}) {
     config: { params: { address: currentAccount.metadata.address } },
   });
 
-  const [{ chainID }] = useCurrentBlockchainApplication();
-
   function handleSendToken({ transaction }) {
     const config = {
       url: `${API_URL}/transactions`,
@@ -30,21 +27,12 @@ export default function useSendTokenMutation(options = {}) {
 
   const mutation = useMutation(handleSendToken, {
     onSuccess: (data) => {
-      const authQueryConfig = {
-        url: `${API_URL}/auth`,
-        method: 'get',
-        event: 'get.auth',
-        params: { address: currentAccount.metadata.address },
-      };
+      queryClient.invalidateQueries([GET_TRANSACTIONS_QUERY]);
 
-      const authQueryKeys = [GET_AUTH_QUERY, METHOD, chainID, authQueryConfig];
-
-      const updatedAuthQueryData = {
+      queryClient.setQueryData([GET_AUTH_QUERY], {
         ...authData?.data,
         nonce: (authData?.nonce || 0) + 1,
-      };
-
-      queryClient.setQueryData(authQueryKeys, updatedAuthQueryData);
+      });
 
       if (options.onSuccess) options.onSuccess(data);
     },
