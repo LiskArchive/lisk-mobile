@@ -81,7 +81,7 @@ export function SendTokenRecipientApplicationField({
       </Picker.Label>
 
       <Picker.Toggle
-        disabled={applications?.loading}
+        disabled={applications.loading}
         placeholder={i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
         style={style?.toggle}
       >

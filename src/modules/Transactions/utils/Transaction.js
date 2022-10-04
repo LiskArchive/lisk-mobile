@@ -195,7 +195,7 @@ export class Transaction {
   decode(encodedTransaction) {
     const transactionBuffer = Buffer.isBuffer(encodedTransaction)
       ? this.transaction
-      : this.encode();
+      : this.encode(this.transaction);
 
     return decodeTransaction(transactionBuffer, this._paramsSchema);
   }

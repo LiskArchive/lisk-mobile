@@ -53,7 +53,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <DataRenderer
-        data={applicationsMetadata?.data}
+        data={applicationsMetadata.data}
         isLoading={applicationsMetadata.isLoading}
         error={applicationsMetadata.error}
         renderData={(data) => (
