@@ -5,6 +5,13 @@ import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuer
 import { useSupportedTokensQuery } from './useSupportedTokensQuery';
 import { mockTokensMeta } from '../../SendToken/__fixtures__';
 
+/**
+ * Fetch list of supported tokens for a given account and blockchain application.
+ * Executes the API call once the hook is mounted.
+ * @param {Object} application - Blockchain application to fetch the supported tokens from.
+ * @returns - The query state of the API call. Includes the data
+ * (supported tokens), loading state, error state, and more.
+ */
 export function useApplicationSupportedTokensQuery(application) {
   const apiClient = useRef(new APIClient());
 
@@ -38,6 +45,8 @@ export function useApplicationSupportedTokensQuery(application) {
         );
 
     const tokens = tokensOnChainData.map((tokenOnChainData) => {
+      // TODO: Query for each token the GET /meta/tokens endpoint when service solves tokenID inconsistency
+      // between GET /tokens and GET /meta/tokens responses.
       const tokenMetaData =
         mockTokensMeta.find((tokenMeta) => tokenMeta.tokenID === tokenOnChainData.tokenID) || {};
 

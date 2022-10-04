@@ -3,6 +3,15 @@ import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQue
 import { METHOD, LIMIT, API_URL, API_BASE_URL } from 'utilities/api/constants';
 import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
 
+/**
+ * Fetch list of tokens available for a given user account.
+ * Executes the API call once the hook is mounted.
+ * @param {Object} config - Custom configurations for the query.
+ * @param {Object} options - Custom options for the query.
+ * @param {Object} client - Custom API client for the query.
+ * @returns - The query state of the API call. Includes the data
+ * (tokens), loading state, error state, and more.
+ */
 export function useAccountTokensQuery({ config: customConfig = {}, options = {}, client } = {}) {
   const [currentAccount] = useCurrentAccount();
 
