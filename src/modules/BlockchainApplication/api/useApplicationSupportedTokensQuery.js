@@ -2,8 +2,8 @@ import { useMemo, useRef } from 'react';
 
 import { APIClient } from 'utilities/api/APIClient';
 import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
+import { mockTokensMeta } from 'modules/SendToken/__fixtures__';
 import { useSupportedTokensQuery } from './useSupportedTokensQuery';
-import { mockTokensMeta } from '../../SendToken/__fixtures__';
 
 /**
  * Fetch list of supported tokens for a given account and blockchain application.
