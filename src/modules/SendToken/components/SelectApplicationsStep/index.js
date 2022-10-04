@@ -31,7 +31,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
     control: form.control,
   });
 
-  const { field: addressField } = useController({
+  const { field: recipientAccountAddressField } = useController({
     name: 'recipientAccountAddress',
     control: form.control,
   });
@@ -76,8 +76,14 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
               />
 
               <SendTokenRecipientAccountField
-                value={addressField.value}
-                onChange={addressField.onChange}
+                value={recipientAccountAddressField.value}
+                onChange={(value) =>
+                  form.handleChange(
+                    'recipientAddress',
+                    value,
+                    recipientAccountAddressField.onChange
+                  )
+                }
                 errorMessage={form.formState.errors.recipientAccountAddress?.message}
                 addressFormat={addressFormatField.value}
                 onAddressFormatChange={addressFormatField.onChange}

@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
-import { mockTokens } from 'modules/SendToken/__fixtures__';
+import { mockTokensMeta } from 'modules/SendToken/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import {
@@ -54,7 +54,7 @@ export default function RequestToken() {
     currentApplication.chainID
   );
   const [recipientTokenID, setRecipientTokenID] = useState(
-    mockTokens.find((token) => token.symbol === 'LSK')?.tokenID
+    mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
   );
   const [modalOpen, setModalOpen] = useState(false);
 

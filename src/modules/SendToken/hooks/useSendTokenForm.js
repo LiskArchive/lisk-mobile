@@ -1,36 +1,39 @@
+/* eslint-disable max-statements */
+import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import i18next from 'i18next';
 
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import useSendTokenMutation from '../api/useSendTokenMutation';
-import { mockTokens } from '../__fixtures__';
-import { useCreateTransaction } from '../../Transactions/hooks/useCreateTransaction';
+import { mockTokensMeta } from '../__fixtures__';
+import { decryptAccount } from '../../Auth/utils/decryptAccount';
 
-export default function useSendTokenForm() {
+export default function useSendTokenForm({ transaction, isLoadingTransaction }) {
+  const [currentAccount] = useCurrentAccount();
+
   const [currentApplication] = useCurrentBlockchainApplication();
 
   const sendTokenMutation = useSendTokenMutation();
 
-  const _transaction = useCreateTransaction({
-    module: 'token',
-    command: 'transfer',
-  });
+  console.log({ transaction });
 
-  console.log({ _transaction });
-
-  const defaultValues = {
-    senderApplicationChainID: currentApplication.chainID,
-    recipientApplicationChainID: currentApplication.chainID,
-    recipientAccountAddress: undefined,
-    recipientAccountAddressFormat: undefined,
-    tokenID: mockTokens.find((token) => token.symbol === 'LSK')?.tokenID,
-    amount: undefined,
-    message: '',
-    priority: 'low',
-    userPassword: '',
-  };
+  const defaultValues = useMemo(
+    () => ({
+      senderApplicationChainID: currentApplication.chainID,
+      recipientApplicationChainID: currentApplication.chainID,
+      recipientAccountAddress: 'lsk3ay4z7wqjczbo5ogcqxgxx23xyacxmycwxfh4d',
+      recipientAccountAddressFormat: 'input',
+      tokenID: mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID,
+      amount: 0,
+      message: '',
+      priority: 'low',
+      userPassword: '',
+    }),
+    [currentApplication.chainID]
+  );
 
   const validationSchema = yup
     .object({
@@ -57,19 +60,64 @@ export default function useSendTokenForm() {
     resolver: yupResolver(validationSchema),
   });
 
-  const handleSubmit = baseHandleSubmit((values) => {
-    console.log({ values });
+  const handleChange = (field, value, onChange) => {
+    try {
+      transaction.update({ params: { [field]: value } });
 
-    // TODO: Handle TX sign here.
-    const transaction = '123lk1j23lk12j3l12kj3';
+      onChange(value);
+    } catch (error) {
+      console.log({ errorOnHandleSendTokenFieldChange: error });
+    }
+  };
 
-    sendTokenMutation.mutate({ transaction });
+  const handleSubmit = baseHandleSubmit(async (values) => {
+    const { privateKey } = await decryptAccount(
+      currentAccount.encryptedPassphrase,
+      values.userPassword
+    );
+
+    try {
+      // transaction.update({
+      //   params: {
+      //     amount: 100000000000,
+      //     data: '',
+      //     recipientAddress: 'lsk3ay4z7wqjczbo5ogcqxgxx23xyacxmycwxfh4d',
+      //     tokenID: '0000000000000000',
+      //   },
+      // });
+
+      const signedTransaction = await transaction.sign(privateKey);
+
+      const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
+
+      sendTokenMutation.mutate({ transaction: encodedTransaction });
+    } catch (error) {
+      console.log({ errorOnSign: error });
+    }
   });
 
   const handleReset = () => form.reset(defaultValues);
 
+  useEffect(() => {
+    if (isLoadingTransaction) return null;
+
+    console.log('on effect', { isLoadingTransaction, defaultValues });
+
+    return transaction.update({
+      params: {
+        tokenID: defaultValues.tokenID,
+        recipientAddress: defaultValues.recipientAccountAddress,
+        amount: defaultValues.amount,
+        data: defaultValues.message,
+      },
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValues, isLoadingTransaction]);
+
   return {
     ...form,
+    handleChange,
     handleSubmit,
     handleReset,
     sendTokenMutation,

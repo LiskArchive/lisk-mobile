@@ -13,9 +13,9 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const [currentAccount] = useCurrentAccount();
   const { pubkey, address } = currentAccount.metadata;
 
-  const { data: networkStatusData } = useNetworkStatusQuery();
+  const { data: networkStatusData, isLoading: isNetworkStatusLoading } = useNetworkStatusQuery();
 
-  const { data: authData } = useAuthQuery({
+  const { data: authData, isLoading: isAuthLoading } = useAuthQuery({
     config: { params: { address } },
   });
 
@@ -23,6 +23,8 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
 
   useEffect(() => {
     if (authData?.data && commandParametersSchemasData?.data && networkStatusData?.data) {
+      console.log('init...');
+
       transaction.init({
         pubkey,
         networkStatus: networkStatusData.data,
@@ -44,5 +46,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     command,
   ]);
 
-  return transaction;
+  const isLoading = isNetworkStatusLoading || isAuthLoading;
+
+  return [transaction, isLoading];
 }

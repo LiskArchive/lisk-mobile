@@ -1,3 +1,3 @@
-export * from './mockTokens';
+export * from './mockTokensMeta';
 export * from './mockFeesByPriorities';
 export * from './mockSendTokenResponse';

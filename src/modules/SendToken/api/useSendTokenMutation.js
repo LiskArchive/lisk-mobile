@@ -1,28 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { METHOD, LIMIT, API_VERSION } from 'utilities/api/constants';
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
-
-import { sendTokenMockHandler } from '../mocks';
+import { METHOD, API_URL } from 'utilities/api/constants';
+import apiClient from 'utilities/api/APIClient';
 
 export default function useSendTokenMutation(options = {}) {
-  const [currentBlockchainApplication] = useCurrentBlockchainApplication();
-
-  function handleSendToken(variables) {
+  function handleSendToken({ transaction }) {
     const config = {
-      baseURL:
-        currentBlockchainApplication?.serviceURLs[0][METHOD] ??
-        currentBlockchainApplication?.serviceURLs[0].http,
-      path: `/api/${API_VERSION}/transactions`,
+      url: `${API_URL}/transactions`,
       method: 'post',
-      params: { limit: LIMIT, ...variables },
+      data: { transaction },
     };
 
-    // TODO: Implement real API call when update to service v3 API is done.
-    // return client[METHOD](config);
-    console.log({ config });
-
-    return sendTokenMockHandler;
+    return apiClient[METHOD](config);
   }
 
   const mutation = useMutation(handleSendToken, {

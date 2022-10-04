@@ -39,6 +39,6 @@ describe('decryptAccount', () => {
   it('decrypts account when the correct arguments are passed', async () => {
     const password = 'samplePassword@1';
     const res = await decryptAccount(encryptedPassphrase, password);
-    expect(res).toEqual(recoveryPhrase);
+    expect(res.recoveryPhrase).toEqual(recoveryPhrase);
   });
 });

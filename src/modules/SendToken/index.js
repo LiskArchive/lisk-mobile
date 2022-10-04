@@ -13,17 +13,25 @@ import SendTokenSelectTokenStep from './components/SelectTokenStep';
 import SendTokenSummaryStep from './components/SummaryStep';
 import useSendTokenForm from './hooks/useSendTokenForm';
 import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
+import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction';
 
 export default function SendToken({ route }) {
   const navigation = useNavigation();
 
   const account = useSelector((state) => state.account);
 
+  const [transaction, isLoadingTransaction] = useCreateTransaction({
+    module: 'token',
+    command: 'transfer',
+  });
+
+  console.log('uplevel tx: ', transaction);
+
+  const form = useSendTokenForm({ transaction, isLoadingTransaction });
+
   const { styles } = useTheme({
     styles: getSendTokenStyles(),
   });
-
-  const form = useSendTokenForm();
 
   const steps = [
     {

@@ -74,7 +74,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
       <View style={[styles.container]}>
         <TokenSelectField
           value={tokenIDField.value}
-          onChange={tokenIDField.onChange}
+          onChange={(value) => form.handleChange('tokenID', value, tokenIDField.onChange)}
           errorMessage={form.formState.errors.tokenID?.message}
           recipientApplication={recipientApplication}
           style={{ toggle: { container: { marginBottom: 16 } } }}
@@ -82,7 +82,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
 
         <SendTokenAmountField
           value={amountField.value}
-          onChange={amountField.onChange}
+          onChange={(value) => form.handleChange('amount', value, amountField.onChange)}
           tokenID={tokenIDField.value}
           errorMessage={form.formState.errors.amount?.message}
           recipientApplication={recipientApplication}
@@ -91,7 +91,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
 
         <SendTokenMessageField
           value={messageField.value}
-          onChange={messageField.onChange}
+          onChange={(value) => form.handleChange('data', value, messageField.onChange)}
           style={{ container: { marginBottom: 16 } }}
         />
 

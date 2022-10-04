@@ -71,6 +71,7 @@ export const decodeTransaction = (encodedTransaction, paramsSchema) => {
 
 export const encodeTransaction = (transaction, paramsSchema) => {
   let encodedParams;
+
   if (!Buffer.isBuffer(transaction.params)) {
     encodedParams = paramsSchema
       ? Lisk.codec.codec.encode(paramsSchema, transaction.params)
@@ -100,6 +101,15 @@ export const fromTransactionJSON = (transaction, paramsSchema) => {
   } else {
     params = paramsSchema ? Lisk.codec.codec.fromJSON(paramsSchema, transaction.params) : {};
   }
+
+  // console.log({
+  //   fromTransactionJSON: {
+  //     transaction,
+  //     paramsSchema,
+  //     params,
+  //     tx,
+  //   },
+  // });
 
   return {
     ...tx,

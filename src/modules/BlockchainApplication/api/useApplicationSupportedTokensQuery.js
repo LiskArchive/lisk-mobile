@@ -3,7 +3,7 @@ import { useMemo, useRef } from 'react';
 import { APIClient } from 'utilities/api/APIClient';
 import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
 import { useSupportedTokensQuery } from './useSupportedTokensQuery';
-import { useTokensMetaQuery } from './useTokensMetaQuery';
+import { mockTokensMeta } from '../../SendToken/__fixtures__';
 
 export function useApplicationSupportedTokensQuery(application) {
   const apiClient = useRef(new APIClient());
@@ -11,13 +11,6 @@ export function useApplicationSupportedTokensQuery(application) {
   if (application?.serviceURLs?.length) {
     apiClient.current.create(application.serviceURLs[0]);
   }
-
-  const {
-    data: tokensMetaData,
-    isLoading: isTokensMetaLoading,
-    error: errorOnTokensMeta,
-    isError: isTokensMetaError,
-  } = useTokensMetaQuery();
 
   const {
     data: { data: accountTokensData = [] } = {},
@@ -36,8 +29,6 @@ export function useApplicationSupportedTokensQuery(application) {
   const data = useMemo(() => {
     const isSupportAllToken = supportedTokensData.length === 0;
 
-    console.log({ accountTokensData });
-
     const tokensOnChainData = isSupportAllToken
       ? accountTokensData
       : accountTokensData.filter(
@@ -46,23 +37,23 @@ export function useApplicationSupportedTokensQuery(application) {
               .length
         );
 
-    const tokens = tokensMetaData?.data?.map((tokenMeta) => ({
-      ...tokenMeta,
-      ...tokensOnChainData.find((tokenOnChain) => tokenOnChain.tokenID === tokenMeta.tokenID),
-    }));
+    const tokens = tokensOnChainData.map((tokenOnChainData) => {
+      const tokenMetaData =
+        mockTokensMeta.find((tokenMeta) => tokenMeta.tokenID === tokenOnChainData.tokenID) || {};
+
+      return { ...tokenOnChainData, ...tokenMetaData };
+    });
 
     return tokens;
-  }, [accountTokensData, supportedTokensData, tokensMetaData]);
+  }, [accountTokensData, supportedTokensData]);
 
   return {
     data,
     isSupportedTokensLoading,
     isAccountTokensLoading,
-    isTokensMetaLoading,
-    isError: isSupportedTokensError || isAccountTokensError || isTokensMetaError,
-    isLoading: isAccountTokensLoading || isSupportedTokensLoading || isTokensMetaLoading,
+    isError: isSupportedTokensError || isAccountTokensError,
+    isLoading: isAccountTokensLoading || isSupportedTokensLoading,
     errorOnSupportedTokens,
     errorOnAccountTokens,
-    errorOnTokensMeta,
   };
 }

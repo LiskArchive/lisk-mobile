@@ -22,7 +22,5 @@ export function useApplicationsQuery(chainID, { config: customConfig = {}, optio
 
   const keys = [GET_APPLICATION_QUERY];
 
-  const query = useCustomInfiniteQuery({ config, options, keys });
-
-  return query;
+  return useCustomInfiniteQuery({ config, options, keys });
 }

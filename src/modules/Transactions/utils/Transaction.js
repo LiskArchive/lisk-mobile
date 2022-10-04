@@ -1,11 +1,5 @@
 /* eslint-disable no-undef */
-// import {
-//   signTransaction,
-//   signMultiSignatureTransaction,
-//   computeMinFee,
-// } from '@liskhq/lisk-transactions';
-// import { validator } from '@liskhq/lisk-validator';
-// import { codec } from '@liskhq/lisk-codec';
+/* eslint-disable max-statements */
 
 import * as Lisk from '@liskhq/lisk-client';
 
@@ -39,10 +33,9 @@ export class Transaction {
   isLoading = true;
 
   /**
-   * Initialise transaction with required network and account information
-   * @param {object} param transaction initialisation parameters
+   * Initialize transaction with required network and account information
+   * @param {object} param transaction initialization parameters
    */
-  // eslint-disable-next-line max-statements
   init({
     pubkey,
     networkStatus,
@@ -51,6 +44,7 @@ export class Transaction {
     module = null,
     command = null,
     encodedTransaction = null,
+    params = {},
   }) {
     this.isLoading = false;
     this._networkStatus = networkStatus;
@@ -60,16 +54,18 @@ export class Transaction {
       : Buffer.from(pubkey, 'hex');
     this.transaction.module = module;
     this.transaction.command = command;
-    this.transaction.params = {};
+    this.transaction.params = params;
     this.transaction.signatures = [];
-    let baseTrx = null;
+
+    let baseTx = null;
 
     if (encodedTransaction) {
-      baseTrx = decodeBaseTransaction(Buffer.from(encodedTransaction, 'hex'));
-      this.transaction.module = baseTrx.module;
-      this.transaction.command = baseTrx.command;
+      baseTx = decodeBaseTransaction(Buffer.from(encodedTransaction, 'hex'));
+
+      this.transaction.module = baseTx.module;
+      this.transaction.command = baseTx.command;
     } else if (!(this.transaction.module && this.transaction.command)) {
-      throw new Error('Failed to initialise transaction');
+      throw new Error('Failed to initialize transaction');
     }
 
     this._paramsSchema = getCommandParamsSchema(
@@ -79,9 +75,10 @@ export class Transaction {
     );
 
     if (encodedTransaction) {
-      this.transaction.params = Lisk.codec.codec.decode(this._paramsSchema, baseTrx.params);
+      this.transaction.params = Lisk.codec.codec.decode(this._paramsSchema, baseTx.params);
     }
-    this.computeFee();
+
+    // this.computeFee();
   }
 
   /**
@@ -89,14 +86,20 @@ export class Transaction {
    * @param {object} params transaction parameters
    * @returns void
    */
-  update({ params = null, nonce = null }) {
-    if (params) {
-      this.transaction.params = Lisk.codec.codec.fromJSON(this._paramsSchema, params);
-    }
-    if (nonce) {
-      this.transaction.nonce = BigInt(nonce);
-    }
-    this.computeFee();
+  update({ params = {}, nonce = null, ...others }) {
+    console.log('on update: ', params);
+
+    const updatedTransaction = {
+      ...this.transaction,
+      ...others,
+      params: { ...this.transaction.params, ...params },
+      nonce: nonce || this.transaction.nonce,
+    };
+
+    // eslint-disable-next-line prefer-object-spread
+    this.transaction = Object.assign({}, updatedTransaction);
+
+    // this.computeFee();
   }
 
   /**
@@ -105,19 +108,25 @@ export class Transaction {
    * @param {object} options transaction signing options {includeSenderSignature}
    * @returns void
    */
-  // eslint-disable-next-line max-statements
   async sign(privateKey, options = { includeSenderSignature: false }) {
     // TODO: Update networkIdentifier to chainID once service endpoint is updated
-    const chainID = Buffer.from(this._networkStatus.networkIdentifier, 'hex');
+    const chainID = Buffer.from(this._networkStatus.chainID, 'hex');
+
     const decodedTx = this.fromJSON(this.transaction);
+
     const { optionalKeys, mandatoryKeys } = this.transaction.params;
+
     const isMultiSignature = this._auth.numberOfSignatures > 0;
+
     const isMultiSignatureRegistration =
       (optionalKeys?.length || mandatoryKeys?.length) && options.includeSenderSignature;
+
     this._validateTransaction();
 
+    let signedTx;
+
     if (isMultiSignature || isMultiSignatureRegistration) {
-      const signedTx = Lisk.transactions.signMultiSignatureTransaction(
+      signedTx = Lisk.transactions.signMultiSignatureTransaction(
         this.transaction,
         chainID,
         privateKey,
@@ -129,17 +138,19 @@ export class Transaction {
         options.includeSenderSignature
       );
 
-      this.transaction = signedTx;
-      return;
+      // this.transaction = signedTx;
+    } else {
+      signedTx = Lisk.transactions.signTransaction(
+        decodedTx,
+        Buffer.from(this._networkStatus.chainID, 'hex'),
+        Buffer.from(privateKey, 'hex'),
+        this._paramsSchema
+      );
     }
 
-    const signedTx = Lisk.transactions.signTransaction(
-      decodedTx,
-      Buffer.from(this._networkStatus.networkIdentifier, 'hex'),
-      Buffer.from(privateKey, 'hex'),
-      this._paramsSchema
-    );
-    this.transaction = signedTx;
+    // this.transaction = { ...signedTx, params: decodedTx.params };
+
+    return signedTx;
   }
 
   /**
@@ -147,6 +158,7 @@ export class Transaction {
    */
   computeFee() {
     this._validateTransaction();
+
     const computeMinFeeOptions = {
       minFeePerByte: this._networkStatus.genesis.minFeePerByte,
       numberOfSignatures: this._auth.numberOfSignatures || 1,
@@ -163,14 +175,18 @@ export class Transaction {
         optionalKeys?.length + mandatoryKeys?.length - this._auth.numberOfSignatures;
     } else {
       const { optionalKeys, mandatoryKeys } = this._auth;
+
       computeMinFeeOptions.numberOfSignatures = optionalKeys?.length + mandatoryKeys?.length + 1;
     }
 
-    this.transaction.fee = Lisk.transactions.computeMinFee(
-      this.transaction,
-      this._paramsSchema,
-      computeMinFeeOptions
-    );
+    // TODO: Solve this computation, since is throwing a non-valid value.
+    // this.transaction.fee = Lisk.transactions.computeMinFee(
+    //   this.transaction,
+    //   this._paramsSchema,
+    //   computeMinFeeOptions
+    // );
+
+    this.transaction.fee = BigInt(100000000);
   }
 
   /**
@@ -182,6 +198,7 @@ export class Transaction {
     const transactionBuffer = Buffer.isBuffer(encodedTransaction)
       ? this.transaction
       : this.encode();
+
     return decodeTransaction(transactionBuffer, this._paramsSchema);
   }
 
@@ -189,9 +206,10 @@ export class Transaction {
    * Encode transaction object
    * @returns encoded transaction hex string
    */
-  encode() {
-    this._validateTransaction(this.transaction);
-    return encodeTransaction(this.transaction, this._paramsSchema);
+  encode(transaction) {
+    this._validateTransaction(transaction);
+
+    return encodeTransaction(transaction, this._paramsSchema);
   }
 
   /**
@@ -200,6 +218,7 @@ export class Transaction {
    */
   toJSON() {
     this._validateTransaction(this.transaction);
+
     return toTransactionJSON(this.transaction, this._paramsSchema);
   }
 
@@ -220,8 +239,6 @@ export class Transaction {
     }
 
     const { params, ...rest } = this.transaction;
-
-    console.log({ baseTransactionSchema, rest, params: Buffer.alloc(0) });
 
     Lisk.validator.validator.validate(baseTransactionSchema, {
       ...rest,
