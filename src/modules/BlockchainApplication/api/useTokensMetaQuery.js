@@ -1,6 +1,6 @@
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { GET_TOKENS_METADATA_QUERY } from 'utilities/api/queries';
-import { LIMIT, API_URL, API_BASE_URL, NETWORK } from 'utilities/api/constants';
+import { LIMIT, API_URL, NETWORK } from 'utilities/api/constants';
 
 /**
  * Fetch list of blockchain applications tokens off-chain metadata.
@@ -12,7 +12,6 @@ import { LIMIT, API_URL, API_BASE_URL, NETWORK } from 'utilities/api/constants';
  */
 export function useTokensMetaQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
-    baseURL: API_BASE_URL,
     url: `${API_URL}/blockchain/apps/meta/tokens`,
     method: 'get',
     event: 'get.tokens.meta',

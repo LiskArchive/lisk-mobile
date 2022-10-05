@@ -1,8 +1,9 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import defaultClient from 'utilities/api/APIClient';
-import { METHOD, APPLICATION } from 'utilities/api/constants';
+import { METHOD } from 'utilities/api/constants';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
+import { APPLICATION } from '../queries';
 
 /**
  * Creates a custom hook for infinite queries

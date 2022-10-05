@@ -1,6 +1,6 @@
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-import { METHOD, LIMIT, API_URL, API_BASE_URL } from 'utilities/api/constants';
+import { METHOD, LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
 
 /**
@@ -18,7 +18,6 @@ export function useAccountTokensQuery({ config: customConfig = {}, options = {},
   const address = currentAccount.metadata.address;
 
   const config = {
-    baseURL: API_BASE_URL,
     url: `${API_URL}/tokens`,
     method: 'get',
     event: 'get.accountTokens',

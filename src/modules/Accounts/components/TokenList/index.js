@@ -52,15 +52,15 @@ export default function TokenList({ mode = 'overview', style }) {
   });
 
   const hasLockedTokens = useMemo(
-    () => tokensData.data?.some((token) => token.lockedBalances) || false,
-    [tokensData.data]
+    () => tokensData?.data?.some((token) => token.lockedBalances) || false,
+    [tokensData?.data]
   );
 
   const lockedTokens = useMemo(() => {
     const res = [];
     let amount = 0;
 
-    tokensData.data?.forEach((token) => {
+    tokensData?.data?.forEach((token) => {
       if (token.lockedBalances) {
         token.lockedBalances.forEach((lockedBalance) => {
           amount += Number(lockedBalance.amount);
@@ -71,7 +71,7 @@ export default function TokenList({ mode = 'overview', style }) {
       }
     });
     return lockedTokens;
-  }, [tokensData.data]);
+  }, [tokensData?.data]);
 
   const { styles } = useTheme({
     styles: getTokenListStyles(),

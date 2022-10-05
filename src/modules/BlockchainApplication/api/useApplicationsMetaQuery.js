@@ -1,4 +1,4 @@
-import { LIMIT, API_URL, API_BASE_URL } from 'utilities/api/constants';
+import { LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_APPLICATIONS_QUERY } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 
@@ -12,7 +12,6 @@ import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQue
  */
 export function useApplicationsMetaQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
-    baseURL: API_BASE_URL,
     url: `${API_URL}/blockchain/apps/meta`,
     method: 'get',
     event: 'get.blockchain.apps.meta',
