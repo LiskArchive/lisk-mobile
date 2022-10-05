@@ -11,7 +11,7 @@ import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadca
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { mockTokensMeta } from '../__fixtures__';
 
-export default function useSendTokenForm({ transaction, isLoadingTransaction }) {
+export default function useSendTokenForm({ transaction, isTransactionSuccess }) {
   const [currentAccount] = useCurrentAccount();
 
   const [currentApplication] = useCurrentBlockchainApplication();
@@ -85,7 +85,7 @@ export default function useSendTokenForm({ transaction, isLoadingTransaction }) 
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (!isLoadingTransaction) {
+    if (isTransactionSuccess) {
       return transaction.update({
         params: {
           tokenID: defaultValues.tokenID,
@@ -97,7 +97,7 @@ export default function useSendTokenForm({ transaction, isLoadingTransaction }) 
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [defaultValues, isLoadingTransaction]);
+  }, [defaultValues, isTransactionSuccess]);
 
   return {
     ...form,

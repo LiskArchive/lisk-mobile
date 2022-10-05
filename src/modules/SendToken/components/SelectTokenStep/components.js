@@ -48,8 +48,6 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
 
   const selectedToken = supportedTokensData?.find((token) => token.tokenID === value);
 
-  console.log({ selectedToken });
-
   return (
     <Picker value={value} onChange={onChange} error={errorMessage}>
       <View style={{ ...styles.row, justifyContent: 'space-between' }}>

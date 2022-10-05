@@ -34,21 +34,33 @@ export default function TokenList({ mode = 'overview', style }) {
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
     isFetchingNextPage: isFetchingTokensNextPage,
+    ...rest
   } = useAccountTokensQuery({
     config: {
       params: { limit: mode === 'overview' ? 2 : LIMIT },
     },
   });
 
+  console.log({
+    data: tokensData,
+    isLoading: isLoadingTokens,
+    error: errorOnTokens,
+    fetchNextPage: fetchNextTokensPage,
+    hasNextPage: hasTokensNextPage,
+    isFetchingNextPage: isFetchingTokensNextPage,
+    ...rest,
+  });
+
   const hasLockedTokens = useMemo(
-    () => tokensData?.data?.some((token) => token.lockedBalances),
-    [tokensData?.data]
+    () => tokensData.data?.some((token) => token.lockedBalances) || false,
+    [tokensData.data]
   );
 
   const lockedTokens = useMemo(() => {
     const res = [];
-    tokensData?.data?.forEach((token) => {
-      let amount = 0;
+    let amount = 0;
+
+    tokensData.data?.forEach((token) => {
       if (token.lockedBalances) {
         token.lockedBalances.forEach((lockedBalance) => {
           amount += Number(lockedBalance.amount);
@@ -59,7 +71,7 @@ export default function TokenList({ mode = 'overview', style }) {
       }
     });
     return lockedTokens;
-  }, [tokensData?.data]);
+  }, [tokensData.data]);
 
   const { styles } = useTheme({
     styles: getTokenListStyles(),

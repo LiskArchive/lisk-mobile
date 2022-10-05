@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import { useEffect, useRef } from 'react';
 
 import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
@@ -14,18 +15,33 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const [currentAccount] = useCurrentAccount();
   const { pubkey, address } = currentAccount.metadata;
 
-  const { data: networkStatusData, isLoading: isNetworkStatusLoading } = useNetworkStatusQuery();
+  const {
+    data: networkStatusData,
+    isLoading: isNetworkStatusLoading,
+    isSuccess: isNetworkStatusSuccess,
+  } = useNetworkStatusQuery();
 
-  const { data: authData, isLoading: isAuthLoading } = useAuthQuery({
+  const {
+    data: authData,
+    isLoading: isAuthLoading,
+    isSuccess: isAuthSuccess,
+  } = useAuthQuery({
     config: { params: { address } },
   });
 
-  const { data: commandParametersSchemasData, isLoading: isCommandParametersSchemasLoading } =
-    useCommandParametersSchemasQuery();
+  const {
+    data: commandParametersSchemasData,
+    isLoading: isCommandParametersSchemasLoading,
+    isSuccess: isCommandParametersSchemasSuccess,
+  } = useCommandParametersSchemasQuery();
+
+  const isLoading = isNetworkStatusLoading || isAuthLoading || isCommandParametersSchemasLoading;
+
+  const isSuccess = isNetworkStatusSuccess && isAuthSuccess && isCommandParametersSchemasSuccess;
 
   useEffect(
     () => {
-      if (!isNetworkStatusLoading && !isAuthLoading && !isCommandParametersSchemasLoading) {
+      if (isSuccess) {
         transaction.init({
           pubkey,
           networkStatus: networkStatusData?.data,
@@ -38,19 +54,8 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      isNetworkStatusLoading,
-      isAuthLoading,
-      isCommandParametersSchemasLoading,
-      transaction,
-      encodedTransaction,
-      module,
-      pubkey,
-      command,
-    ]
+    [isSuccess, transaction, encodedTransaction, module, pubkey, command]
   );
 
-  const isLoading = isNetworkStatusLoading || isAuthLoading || isCommandParametersSchemasLoading;
-
-  return [transaction, isLoading];
+  return { data: transaction, isLoading, isSuccess };
 }

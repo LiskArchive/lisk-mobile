@@ -1,10 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { GET_AUTH_QUERY, GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
+import {
+  GET_AUTH_QUERY,
+  GET_TRANSACTIONS_QUERY,
+  GET_ACCOUNT_TOKENS_QUERY,
+} from 'utilities/api/queries';
 import { METHOD, API_URL } from 'utilities/api/constants';
 import apiClient from 'utilities/api/APIClient';
-import { useAuthQuery } from '../../Auth/api/useAuthQuery';
-import { useCurrentAccount } from '../../Accounts/hooks/useAccounts/useCurrentAccount';
+import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 
 export default function useBroadcastTransactionMutation(options = {}) {
   const queryClient = useQueryClient();
@@ -15,7 +19,7 @@ export default function useBroadcastTransactionMutation(options = {}) {
     config: { params: { address: currentAccount.metadata.address } },
   });
 
-  function handleSendToken({ transaction }) {
+  function handleMutate({ transaction }) {
     const config = {
       url: `${API_URL}/transactions`,
       method: 'post',
@@ -25,8 +29,10 @@ export default function useBroadcastTransactionMutation(options = {}) {
     return apiClient[METHOD](config);
   }
 
-  const mutation = useMutation(handleSendToken, {
+  return useMutation(handleMutate, {
     onSuccess: (data) => {
+      queryClient.invalidateQueries([GET_ACCOUNT_TOKENS_QUERY]);
+
       queryClient.invalidateQueries([GET_TRANSACTIONS_QUERY]);
 
       queryClient.setQueryData([GET_AUTH_QUERY], {
@@ -41,6 +47,4 @@ export default function useBroadcastTransactionMutation(options = {}) {
     },
     ...options,
   });
-
-  return mutation;
 }
