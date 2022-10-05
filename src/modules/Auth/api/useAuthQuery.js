@@ -3,7 +3,7 @@ import { GET_AUTH_QUERY } from 'utilities/api/queries';
 import { API_URL } from 'utilities/api/constants';
 
 /**
- * Creates a custom hook for command parameters schemas queries
+ * Creates a custom hook for auth details query.
  *
  * @param {object} configuration - the custom query configuration object
  * @param {Object} configuration.config - the query config

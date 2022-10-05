@@ -3,7 +3,7 @@ import { GET_TOKENS_METADATA_QUERY } from 'utilities/api/queries';
 import { LIMIT, API_URL, API_BASE_URL, NETWORK } from 'utilities/api/constants';
 
 /**
- * Fetch list of blockchain applications tokens on-chain metadata.
+ * Fetch list of blockchain applications tokens off-chain metadata.
  * Executes the API call once the hook is mounted.
  * @param {Object} config - Custom configurations for the query.
  * @param {Object} options - Custom options for the query.

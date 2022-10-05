@@ -1,8 +1,5 @@
 import * as Lisk from '@liskhq/lisk-client';
 
-// import { codec } from '@liskhq/lisk-codec';
-// import { utils } from '@liskhq/lisk-cryptography';
-
 // TODO: Use from service endpoint/elements
 export const baseTransactionSchema = {
   $id: '/lisk/baseTransaction',
@@ -101,15 +98,6 @@ export const fromTransactionJSON = (transaction, paramsSchema) => {
   } else {
     params = paramsSchema ? Lisk.codec.codec.fromJSON(paramsSchema, transaction.params) : {};
   }
-
-  // console.log({
-  //   fromTransactionJSON: {
-  //     transaction,
-  //     paramsSchema,
-  //     params,
-  //     tx,
-  //   },
-  // });
 
   return {
     ...tx,
