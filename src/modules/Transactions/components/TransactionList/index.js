@@ -85,7 +85,6 @@ export default function TransactionList({ mode = 'overview', style }) {
             data={data.slice(0, 2)}
             keyExtractor={(item) => item.tokenID}
             renderItem={(item) => <TransactionRow transaction={item} />}
-            renderSpinner
             fetchNextPage={fetchNextTransactionsPage}
             hasNextPage={hasTransactionsNextPage}
             isFetchingNextPage={isFetchingTransactionsNextPage}

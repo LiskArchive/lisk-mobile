@@ -34,21 +34,10 @@ export default function TokenList({ mode = 'overview', style }) {
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
     isFetchingNextPage: isFetchingTokensNextPage,
-    ...rest
   } = useAccountTokensQuery({
     config: {
       params: { limit: mode === 'overview' ? 2 : LIMIT },
     },
-  });
-
-  console.log({
-    data: tokensData,
-    isLoading: isLoadingTokens,
-    error: errorOnTokens,
-    fetchNextPage: fetchNextTokensPage,
-    hasNextPage: hasTokensNextPage,
-    isFetchingNextPage: isFetchingTokensNextPage,
-    ...rest,
   });
 
   const hasLockedTokens = useMemo(
@@ -133,7 +122,6 @@ export default function TokenList({ mode = 'overview', style }) {
             data={data.slice(0, 2)}
             keyExtractor={(item) => item.tokenID}
             renderItem={(item) => <TokenRow token={item} />}
-            renderSpinner
             fetchNextPage={fetchNextTokensPage}
             hasNextPage={hasTokensNextPage}
             isFetchingNextPage={isFetchingTokensNextPage}

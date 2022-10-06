@@ -13,7 +13,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const transaction = transactionRef.current;
 
   const [currentAccount] = useCurrentAccount();
-  const { pubkey, address } = currentAccount.metadata;
+  const { pubkey } = currentAccount.metadata;
 
   const {
     data: networkStatusData,
@@ -21,13 +21,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isSuccess: isNetworkStatusSuccess,
   } = useNetworkStatusQuery();
 
-  const {
-    data: authData,
-    isLoading: isAuthLoading,
-    isSuccess: isAuthSuccess,
-  } = useAuthQuery({
-    config: { params: { address } },
-  });
+  const { data: authData, isLoading: isAuthLoading, isSuccess: isAuthSuccess } = useAuthQuery();
 
   const {
     data: commandParametersSchemasData,

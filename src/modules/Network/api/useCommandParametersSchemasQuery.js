@@ -1,6 +1,7 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { API_URL } from 'utilities/api/constants';
 import { GET_COMMAND_PARAMETERS_SCHEMAS_QUERY } from 'utilities/api/queries';
+import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 
 /**
  * Creates a custom hook for command parameters schemas queries
@@ -22,8 +23,11 @@ export function useCommandParametersSchemasQuery({ config: customConfig = {}, op
     ...customConfig,
     params: { ...customConfig.params },
   };
+
+  const keys = useQueryKeys([GET_COMMAND_PARAMETERS_SCHEMAS_QUERY, config]);
+
   return useCustomQuery({
-    keys: [GET_COMMAND_PARAMETERS_SCHEMAS_QUERY],
+    keys,
     config,
     options,
   });

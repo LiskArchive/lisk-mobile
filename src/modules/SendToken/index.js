@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useMemo } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';

@@ -157,34 +157,22 @@ export class Transaction {
   computeFee() {
     this._validateTransaction();
 
-    const computeMinFeeOptions = {
-      minFeePerByte: this._networkStatus.genesis.minFeePerByte,
-      numberOfSignatures: this._auth.numberOfSignatures || 1,
-      numberOfEmptySignatures: 0,
-    };
-
-    if (
-      this.transaction.module === 'auth' &&
-      this.transaction.command === 'registerMultisignatureGroup'
-    ) {
-      const { optionalKeys, mandatoryKeys } = this.transaction.params;
-
-      computeMinFeeOptions.numberOfEmptySignatures =
-        optionalKeys?.length + mandatoryKeys?.length - this._auth.numberOfSignatures;
-    } else {
-      const { optionalKeys, mandatoryKeys } = this._auth;
-
-      computeMinFeeOptions.numberOfSignatures = optionalKeys?.length + mandatoryKeys?.length + 1;
-    }
-
     // TODO: Solve this computation, since is throwing a non-valid value.
-    // this.transaction.fee = Lisk.transactions.computeMinFee(
+    // const computeMinFeeOptions = {
+    //   minFeePerByte: this._networkStatus.genesis.minFeePerByte,
+    //   numberOfSignatures: this._auth.numberOfSignatures || 1,
+    //   numberOfEmptySignatures: 0,
+    // };
+
+    // const fee = Lisk.transactions.computeMinFee(
     //   this.transaction,
     //   this._paramsSchema,
     //   computeMinFeeOptions
-    // );
+    //   );
 
-    this.transaction = { ...this.transaction, fee: BigInt(100000000) };
+    const fee = BigInt(100000000);
+
+    this.transaction = { ...this.transaction, fee };
   }
 
   /**

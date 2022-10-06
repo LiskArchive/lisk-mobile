@@ -108,7 +108,7 @@ export function SendTokenRecipientApplicationField({
               <Image source={{ uri: item.logo.png }} style={[styles.applicationLogoImage]} />
             </Picker.Item>
           )}
-          renderSpinner
+          withDefaultSpinner
           // TODO: Integrate pagination props using react-query.
         />
       </Picker.Menu>

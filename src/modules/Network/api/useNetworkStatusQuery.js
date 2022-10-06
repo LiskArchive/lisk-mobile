@@ -1,6 +1,7 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { API_URL } from 'utilities/api/constants';
 import { GET_NETWORK_STATUS_QUERY } from 'utilities/api/queries';
+import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
 
 /**
  * Creates a custom hook for network status query
@@ -20,8 +21,10 @@ export function useNetworkStatusQuery({ config: customConfig = {}, options } = {
     ...customConfig,
   };
 
+  const keys = useQueryKeys([GET_NETWORK_STATUS_QUERY, config]);
+
   return useCustomQuery({
-    keys: [GET_NETWORK_STATUS_QUERY],
+    keys,
     config,
     options,
   });

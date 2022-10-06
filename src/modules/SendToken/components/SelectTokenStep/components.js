@@ -93,7 +93,6 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
                     <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
                   </Picker.Item>
                 )}
-                renderSpinner
                 // TODO: Integrate pagination props using react-query.
               />
             </Picker.Menu>

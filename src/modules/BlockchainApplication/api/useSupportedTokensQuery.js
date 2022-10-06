@@ -1,6 +1,7 @@
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { GET_SUPPORTED_TOKENS_QUERY } from 'utilities/api/queries';
-import { LIMIT, API_URL } from 'utilities/api/constants';
+import { LIMIT, API_URL, API_BASE_URL } from 'utilities/api/constants';
+import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
 
 /**
  * Fetch list of supported tokens within Lisk ecosystem.
@@ -12,7 +13,7 @@ import { LIMIT, API_URL } from 'utilities/api/constants';
  */
 export function useSupportedTokensQuery({ config: customConfig = {}, options, client } = {}) {
   const config = {
-    // baseURL: API_BASE_URL,
+    baseURL: API_BASE_URL,
     url: `${API_URL}/tokens/supported`,
     method: 'get',
     event: 'get.tokens.supported',
@@ -20,7 +21,7 @@ export function useSupportedTokensQuery({ config: customConfig = {}, options, cl
     params: { limit: LIMIT, ...(customConfig?.params || {}) },
   };
 
-  const keys = [GET_SUPPORTED_TOKENS_QUERY];
+  const keys = useQueryKeys([GET_SUPPORTED_TOKENS_QUERY, config]);
 
   return useCustomInfiniteQuery({
     keys,

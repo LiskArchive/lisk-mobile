@@ -1,7 +1,28 @@
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-import { METHOD, LIMIT, API_URL } from 'utilities/api/constants';
+import { LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
+import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
+
+export function useAccountTokensQueryParams({ config: customConfig = {} } = {}) {
+  const [currentAccount] = useCurrentAccount();
+
+  const config = {
+    url: `${API_URL}/tokens`,
+    method: 'get',
+    event: 'get.accountTokens',
+    ...customConfig,
+    params: {
+      address: currentAccount.metadata.address,
+      limit: LIMIT,
+      ...(customConfig?.params || {}),
+    },
+  };
+
+  const keys = useQueryKeys([GET_ACCOUNT_TOKENS_QUERY, currentAccount.metadata.address, config]);
+
+  return { config, keys };
+}
 
 /**
  * Fetch list of tokens available for a given user account.
@@ -13,23 +34,7 @@ import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
  * (tokens), loading state, error state, and more.
  */
 export function useAccountTokensQuery({ config: customConfig = {}, options = {}, client } = {}) {
-  const [currentAccount] = useCurrentAccount();
-
-  const address = currentAccount.metadata.address;
-
-  const config = {
-    url: `${API_URL}/tokens`,
-    method: 'get',
-    event: 'get.accountTokens',
-    ...customConfig,
-    params: {
-      address,
-      limit: LIMIT,
-      ...(customConfig?.params || {}),
-    },
-  };
-
-  const keys = [GET_ACCOUNT_TOKENS_QUERY, METHOD, address, currentAccount.chainID, config];
+  const { config, keys } = useAccountTokensQueryParams({ config: customConfig });
 
   return useCustomInfiniteQuery({ config, options, keys, client });
 }
