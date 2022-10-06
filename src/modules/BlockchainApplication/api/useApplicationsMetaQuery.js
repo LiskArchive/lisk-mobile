@@ -1,7 +1,7 @@
 import { LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_APPLICATIONS_QUERY } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
+import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 
 /**
  * Fetch list of blockchain applications metadata (off-chain data) in paginated mode.

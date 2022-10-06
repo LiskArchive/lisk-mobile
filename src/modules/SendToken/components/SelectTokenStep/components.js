@@ -317,7 +317,7 @@ export function SendTokenTransactionFeesLabels({
   senderApplication,
   recipientApplication,
 }) {
-  const { data: tokensData } = useApplicationSupportedTokensQuery();
+  const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
   const selectedToken = tokensData?.find((token) => token.tokenID === tokenID);
 
