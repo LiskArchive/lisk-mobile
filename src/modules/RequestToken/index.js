@@ -155,6 +155,7 @@ export default function RequestToken() {
             value={amount.value}
             onChange={setAmount}
             tokenID={recipientTokenID}
+            recipientApplication={currentApplication}
             style={{ container: { marginBottom: 16 } }}
           />
 
