@@ -13,10 +13,12 @@ import { useSupportedTokensQuery } from './useSupportedTokensQuery';
  * (supported tokens), loading state, error state, and more.
  */
 export function useApplicationSupportedTokensQuery(application) {
-  const apiClient = useRef(new APIClient());
+  const fromApplicationApiClient = useRef(new APIClient());
 
   if (application?.serviceURLs?.length) {
-    apiClient.current.create(application.serviceURLs[0]);
+    fromApplicationApiClient.current.create(application.serviceURLs[0]);
+  } else {
+    throw new Error('Supported tokens can only be queried with applications with serviceURLs.');
   }
 
   const {
@@ -31,7 +33,10 @@ export function useApplicationSupportedTokensQuery(application) {
     isLoading: isSupportedTokensLoading,
     isError: isSupportedTokensError,
     error: errorOnSupportedTokens,
-  } = useSupportedTokensQuery({ client: apiClient.current });
+  } = useSupportedTokensQuery({
+    client: fromApplicationApiClient.current,
+    config: { params: { limit: Infinity } },
+  });
 
   const data = useMemo(() => {
     const isSupportAllToken = supportedTokensData.length === 0;
@@ -40,7 +45,7 @@ export function useApplicationSupportedTokensQuery(application) {
       ? accountTokensData
       : accountTokensData.filter(
           (token) =>
-            supportedTokensData.find((supportedToken) => supportedToken.symbol === token.symbol)
+            supportedTokensData.find((supportedToken) => supportedToken.chainID === token.chainID)
               .length
         );
 
