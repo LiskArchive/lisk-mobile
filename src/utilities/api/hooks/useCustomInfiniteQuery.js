@@ -34,7 +34,7 @@ export const useCustomInfiniteQuery = ({ keys, config, options = {}, client = de
         const lastPageOffset = lastPage.meta?.offset || 0;
 
         const offset = lastPageCount + lastPageOffset;
-        const hasMore = offset < (lastPage.meta?.total ?? Infinity);
+        const hasMore = offset < (lastPage.meta?.total ?? 100);
         return !hasMore ? undefined : { offset };
       },
       select: (data) =>

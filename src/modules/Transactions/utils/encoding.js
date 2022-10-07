@@ -90,7 +90,9 @@ export const fromTransactionJSON = (transaction, paramsSchema) => {
     ...transaction,
     params: '',
   });
+
   let params;
+
   if (typeof transaction.params === 'string') {
     params = paramsSchema
       ? Lisk.codec.codec.decode(paramsSchema, Buffer.from(transaction.params, 'hex'))

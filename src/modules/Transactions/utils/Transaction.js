@@ -91,8 +91,11 @@ export class Transaction {
     const updatedTransaction = {
       ...this.transaction,
       ...others,
-      params: { ...this.transaction.params, ...params },
-      nonce: nonce || this.transaction.nonce,
+      params: {
+        ...this.transaction.params,
+        ...Lisk.codec.codec.fromJSON(this._paramsSchema, params),
+      },
+      nonce: nonce ? BigInt(nonce) : this.transaction.nonce,
     };
 
     this.transaction = { ...this.transaction, ...updatedTransaction };
@@ -109,8 +112,6 @@ export class Transaction {
   async sign(privateKey, options = { includeSenderSignature: false }) {
     // TODO: Update networkIdentifier to chainID once service endpoint is updated
     const chainID = Buffer.from(this._networkStatus.chainID, 'hex');
-
-    const decodedTx = this.fromJSON(this.transaction);
 
     const { optionalKeys, mandatoryKeys } = this.transaction.params;
 
@@ -135,18 +136,16 @@ export class Transaction {
         this._paramsSchema,
         options.includeSenderSignature
       );
-
-      // this.transaction = signedTx;
     } else {
       signedTx = Lisk.transactions.signTransaction(
-        decodedTx,
+        this.transaction,
         Buffer.from(this._networkStatus.chainID, 'hex'),
         Buffer.from(privateKey, 'hex'),
         this._paramsSchema
       );
     }
 
-    this.transaction = { ...signedTx, params: decodedTx.params };
+    this.transaction = { ...signedTx, params: this.transaction.params };
 
     return signedTx;
   }
@@ -157,20 +156,17 @@ export class Transaction {
   computeFee() {
     this._validateTransaction();
 
-    // TODO: Solve this computation, since is throwing a non-valid value.
-    // const computeMinFeeOptions = {
-    //   minFeePerByte: this._networkStatus.genesis.minFeePerByte,
-    //   numberOfSignatures: this._auth.numberOfSignatures || 1,
-    //   numberOfEmptySignatures: 0,
-    // };
+    const computeMinFeeOptions = {
+      minFeePerByte: this._networkStatus.genesis.minFeePerByte,
+      numberOfSignatures: this._auth.numberOfSignatures || 1,
+      numberOfEmptySignatures: 0,
+    };
 
-    // const fee = Lisk.transactions.computeMinFee(
-    //   this.transaction,
-    //   this._paramsSchema,
-    //   computeMinFeeOptions
-    //   );
-
-    const fee = BigInt(100000000);
+    const fee = Lisk.transactions.computeMinFee(
+      this.transaction,
+      this._paramsSchema,
+      computeMinFeeOptions
+    );
 
     this.transaction = { ...this.transaction, fee };
   }
