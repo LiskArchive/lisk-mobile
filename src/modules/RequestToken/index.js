@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
-import { mockTokens } from 'modules/SendToken/__fixtures__';
+import { mockTokensMeta } from 'modules/SendToken/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import {
@@ -20,6 +20,7 @@ import {
   TokenSelectField,
 } from 'modules/SendToken/components/SelectTokenStep/components';
 import { SendTokenRecipientApplicationField } from 'modules/SendToken/components/SelectApplicationsStep/components';
+import DataRenderer from 'components/shared/DataRenderer';
 import Share from 'components/shared/share';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P, B } from 'components/shared/toolBox/typography';
@@ -54,7 +55,7 @@ export default function RequestToken() {
     currentApplication.chainID
   );
   const [recipientTokenID, setRecipientTokenID] = useState(
-    mockTokens.find((token) => token.symbol === 'LSK')?.tokenID
+    mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
   );
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -95,16 +96,6 @@ export default function RequestToken() {
     />
   );
 
-  if (applicationsMetadata.isLoading) {
-    return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <View style={[styles.container]}>
-          <P>Loading...</P>
-        </View>
-      </View>
-    );
-  }
-
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
@@ -139,16 +130,24 @@ export default function RequestToken() {
             </View>
           </View>
 
-          <SendTokenRecipientApplicationField
-            value={recipientApplicationChainID}
-            onChange={setRecipientApplicationChainID}
-            applications={applicationsMetadata}
-            style={{ toggle: { container: { marginBottom: 16 } } }}
+          <DataRenderer
+            data={applicationsMetadata.data}
+            isLoading={applicationsMetadata.isLoading}
+            error={applicationsMetadata.error}
+            renderData={(data) => (
+              <SendTokenRecipientApplicationField
+                value={recipientApplicationChainID}
+                onChange={setRecipientApplicationChainID}
+                applications={data}
+                style={{ toggle: { container: { marginBottom: 16 } } }}
+              />
+            )}
           />
 
           <TokenSelectField
             value={recipientTokenID}
             onChange={setRecipientTokenID}
+            recipientApplication={currentApplication}
             style={{ toggle: { container: { marginBottom: 16 } } }}
           />
 
@@ -156,6 +155,7 @@ export default function RequestToken() {
             value={amount.value}
             onChange={setAmount}
             tokenID={recipientTokenID}
+            recipientApplication={currentApplication}
             style={{ container: { marginBottom: 16 } }}
           />
 

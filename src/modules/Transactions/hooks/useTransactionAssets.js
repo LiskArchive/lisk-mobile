@@ -27,7 +27,7 @@ export function useTransactionAssets(transaction) {
 
   let assets = {};
 
-  if (transaction.moduleCommandName === MODULE_COMMAND_NAMES.tokenTransfer) {
+  if (transaction.moduleCommand === MODULE_COMMAND_NAMES.tokenTransfer) {
     if (currentAccount.metadata.address !== transaction.sender.address) {
       assets = {
         ...assets,
@@ -47,7 +47,7 @@ export function useTransactionAssets(transaction) {
     }
   }
 
-  switch (transaction.moduleCommandName) {
+  switch (transaction.moduleCommand) {
     case MODULE_COMMAND_NAMES.tokenTransfer:
       assets = {
         ...assets,

@@ -25,19 +25,19 @@ export default function ConfirmAndSignTransaction({ amount, token, form, onSucce
   });
 
   useEffect(() => {
-    if (form.sendTokenMutation.isSuccess) {
+    if (form.broadcastTransactionMutation.isSuccess) {
       onSuccess();
-      form.sendTokenMutation.reset();
+      form.broadcastTransactionMutation.reset();
     }
 
-    if (form.sendTokenMutation.error) {
-      onError(form.sendTokenMutation.error);
-      form.sendTokenMutation.reset();
+    if (form.broadcastTransactionMutation.error) {
+      onError(form.broadcastTransactionMutation.error);
+      form.broadcastTransactionMutation.reset();
     }
-  }, [form.sendTokenMutation, onSuccess, onError]);
+  }, [form.broadcastTransactionMutation, onSuccess, onError]);
 
   const submitDisabled =
-    form.sendTokenMutation.isLoading ||
+    form.broadcastTransactionMutation.isLoading ||
     !field.value ||
     Object.keys(form.formState.errors).length > 0;
 
@@ -93,7 +93,7 @@ export default function ConfirmAndSignTransaction({ amount, token, form, onSucce
           noTheme
           onClick={form.handleSubmit}
           title={
-            form.sendTokenMutation.isLoading
+            form.broadcastTransactionMutation.isLoading
               ? i18next.t('sendToken.confirmAndSign.loadingText')
               : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText', {
                   amount,

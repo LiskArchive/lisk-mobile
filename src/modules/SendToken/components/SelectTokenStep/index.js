@@ -5,6 +5,7 @@ import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
+import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 
 import getSendTokenSelectTokenStepStyles from './styles';
@@ -17,6 +18,8 @@ import {
 } from './components';
 
 export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
+  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+
   const { field: tokenIDField } = useController({
     name: 'tokenID',
     control: form.control,
@@ -58,27 +61,37 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
 
   const disableNextStepButton = !form.watch('tokenID') || !form.watch('amount');
 
+  const recipientApplication = applicationsMetadata?.data.find(
+    (application) => application.chainID === recipientApplicationChainIDField.value
+  );
+
+  const senderApplication = applicationsMetadata?.data.find(
+    (application) => application.chainID === senderApplicationChainIDField.value
+  );
+
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
         <TokenSelectField
           value={tokenIDField.value}
-          onChange={tokenIDField.onChange}
+          onChange={(value) => form.handleChange('tokenID', value, tokenIDField.onChange)}
           errorMessage={form.formState.errors.tokenID?.message}
+          recipientApplication={recipientApplication}
           style={{ toggle: { container: { marginBottom: 16 } } }}
         />
 
         <SendTokenAmountField
           value={amountField.value}
-          onChange={amountField.onChange}
+          onChange={(value) => form.handleChange('amount', value, amountField.onChange)}
           tokenID={tokenIDField.value}
           errorMessage={form.formState.errors.amount?.message}
+          recipientApplication={recipientApplication}
           style={{ container: { marginBottom: 16 } }}
         />
 
         <SendTokenMessageField
           value={messageField.value}
-          onChange={messageField.onChange}
+          onChange={(value) => form.handleChange('data', value, messageField.onChange)}
           style={{ container: { marginBottom: 16 } }}
         />
 
@@ -90,8 +103,8 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
           priority={priorityField.value}
           message={messageField.value}
           recipientAccountAddress={recipientAccountAddressField.value}
-          senderApplicationChainID={senderApplicationChainIDField.value}
-          recipientApplicationChainID={recipientApplicationChainIDField.value}
+          senderApplication={senderApplication}
+          recipientApplication={recipientApplication}
         />
       </View>
 

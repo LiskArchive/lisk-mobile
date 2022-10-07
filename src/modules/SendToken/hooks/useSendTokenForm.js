@@ -1,28 +1,38 @@
+/* eslint-disable max-statements */
+import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import i18next from 'i18next';
+import * as Lisk from '@liskhq/lisk-client';
 
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
-import useSendTokenMutation from '../api/useSendTokenMutation';
-import { mockTokens } from '../__fixtures__';
+import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
+import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
+import { mockTokensMeta } from '../__fixtures__';
 
-export default function useSendTokenForm() {
+export default function useSendTokenForm({ transaction, isTransactionSuccess }) {
+  const [currentAccount] = useCurrentAccount();
+
   const [currentApplication] = useCurrentBlockchainApplication();
 
-  const sendTokenMutation = useSendTokenMutation();
+  const broadcastTransactionMutation = useBroadcastTransactionMutation();
 
-  const defaultValues = {
-    senderApplicationChainID: currentApplication.chainID,
-    recipientApplicationChainID: currentApplication.chainID,
-    recipientAccountAddress: undefined,
-    recipientAccountAddressFormat: undefined,
-    tokenID: mockTokens.find((token) => token.symbol === 'LSK')?.tokenID,
-    amount: undefined,
-    message: '',
-    priority: 'low',
-    userPassword: '',
-  };
+  const defaultValues = useMemo(
+    () => ({
+      senderApplicationChainID: currentApplication.chainID,
+      recipientApplicationChainID: currentApplication.chainID,
+      recipientAccountAddress: 'lsk3ay4z7wqjczbo5ogcqxgxx23xyacxmycwxfh4d',
+      recipientAccountAddressFormat: 'input',
+      tokenID: mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID,
+      amount: 0,
+      message: '',
+      priority: 'low',
+      userPassword: '',
+    }),
+    [currentApplication.chainID]
+  );
 
   const validationSchema = yup
     .object({
@@ -49,21 +59,58 @@ export default function useSendTokenForm() {
     resolver: yupResolver(validationSchema),
   });
 
-  const handleSubmit = baseHandleSubmit((values) => {
-    console.log({ values });
+  const handleChange = (field, value, onChange) => {
+    if (field === 'amount') {
+      const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
 
-    // TODO: Handle TX sign here.
-    const transaction = '123lk1j23lk12j3l12kj3';
+      transaction.update({ params: { amount: amountInBeddows } });
+    } else {
+      transaction.update({ params: { [field]: value } });
+    }
 
-    sendTokenMutation.mutate({ transaction });
+    onChange(value);
+  };
+
+  const handleSubmit = baseHandleSubmit(async (values) => {
+    const { privateKey } = await decryptAccount(
+      currentAccount.encryptedPassphrase,
+      values.userPassword
+    );
+
+    try {
+      const signedTransaction = await transaction.sign(privateKey);
+
+      const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
+
+      broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+    } catch (error) {
+      console.log({ errorOnSign: error });
+    }
   });
 
   const handleReset = () => form.reset(defaultValues);
 
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (isTransactionSuccess) {
+      return transaction.update({
+        params: {
+          tokenID: defaultValues.tokenID,
+          recipientAddress: defaultValues.recipientAccountAddress,
+          amount: defaultValues.amount,
+          data: defaultValues.message,
+        },
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValues, isTransactionSuccess]);
+
   return {
     ...form,
+    handleChange,
     handleSubmit,
     handleReset,
-    sendTokenMutation,
+    broadcastTransactionMutation,
   };
 }

@@ -1,15 +1,19 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_APPLICATION_STATS } from 'utilities/api/queries';
-import { API_URL, API_BASE_URL } from 'utilities/api/constants';
+import { API_URL } from 'utilities/api/constants';
+import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
 
 export function useBlockchainApplicationStats() {
+  const config = {
+    url: `${API_URL}/blockchain/apps/statistics`,
+    method: 'get',
+  };
+
+  const keys = useQueryKeys([GET_APPLICATION_STATS, config]);
+
   const query = useCustomQuery({
-    keys: [GET_APPLICATION_STATS],
-    config: {
-      baseURL: API_BASE_URL,
-      url: `${API_URL}/blockchain/apps/statistics`,
-      method: 'get',
-    },
+    keys,
+    config,
   });
 
   return {

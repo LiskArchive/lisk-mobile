@@ -17,7 +17,6 @@ import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import DataRenderer from 'components/shared/DataRenderer';
 import { LIMIT } from 'utilities/api/constants';
-import { useCurrentAccount } from '../../hooks/useAccounts/useCurrentAccount';
 import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
 import TokenRow from '../TokenRow';
 
@@ -28,31 +27,29 @@ export default function TokenList({ mode = 'overview', style }) {
 
   const navigation = useNavigation();
 
-  const [currentAccount] = useCurrentAccount();
-  const { address } = currentAccount.metadata;
-
   const {
-    data: tokensData = [],
+    data: tokensData,
     isLoading: isLoadingTokens,
     error: errorOnTokens,
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
     isFetchingNextPage: isFetchingTokensNextPage,
-  } = useAccountTokensQuery(address, {
+  } = useAccountTokensQuery({
     config: {
       params: { limit: mode === 'overview' ? 2 : LIMIT },
     },
   });
 
   const hasLockedTokens = useMemo(
-    () => tokensData.some((token) => token.lockedBalances),
-    [tokensData]
+    () => tokensData?.data?.some((token) => token.lockedBalances) || false,
+    [tokensData?.data]
   );
 
   const lockedTokens = useMemo(() => {
     const res = [];
-    tokensData.forEach((token) => {
-      let amount = 0;
+    let amount = 0;
+
+    tokensData?.data?.forEach((token) => {
       if (token.lockedBalances) {
         token.lockedBalances.forEach((lockedBalance) => {
           amount += Number(lockedBalance.amount);
@@ -63,7 +60,7 @@ export default function TokenList({ mode = 'overview', style }) {
       }
     });
     return lockedTokens;
-  }, [tokensData]);
+  }, [tokensData?.data]);
 
   const { styles } = useTheme({
     styles: getTokenListStyles(),
@@ -117,7 +114,7 @@ export default function TokenList({ mode = 'overview', style }) {
       </View>
 
       <DataRenderer
-        data={activeTab === 0 ? tokensData : lockedTokens}
+        data={activeTab === 0 ? tokensData?.data : lockedTokens}
         isLoading={isLoadingTokens}
         error={errorOnTokens && errorOnTokens.response?.status !== 404}
         renderData={(data) => (
@@ -125,7 +122,6 @@ export default function TokenList({ mode = 'overview', style }) {
             data={data.slice(0, 2)}
             keyExtractor={(item) => item.tokenID}
             renderItem={(item) => <TokenRow token={item} />}
-            renderSpinner
             fetchNextPage={fetchNextTokensPage}
             hasNextPage={hasTokensNextPage}
             isFetchingNextPage={isFetchingTokensNextPage}

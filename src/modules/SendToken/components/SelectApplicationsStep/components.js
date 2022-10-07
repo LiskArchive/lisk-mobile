@@ -29,9 +29,7 @@ export function SendTokenSenderApplicationField({
   applications,
   style,
 }) {
-  const senderApplication = applications?.data?.find(
-    (application) => application.chainID === value
-  );
+  const senderApplication = applications.find((application) => application.chainID === value);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
@@ -70,9 +68,7 @@ export function SendTokenRecipientApplicationField({
   applications,
   style,
 }) {
-  const recipientApplication = applications?.data?.find(
-    (application) => application.chainID === value
-  );
+  const recipientApplication = applications.find((application) => application.chainID === value);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
@@ -85,7 +81,7 @@ export function SendTokenRecipientApplicationField({
       </Picker.Label>
 
       <Picker.Toggle
-        disabled={applications?.loading}
+        disabled={applications.loading}
         placeholder={i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
         style={style?.toggle}
       >
@@ -103,7 +99,7 @@ export function SendTokenRecipientApplicationField({
 
       <Picker.Menu>
         <InfiniteScrollList
-          data={applications?.data}
+          data={applications}
           keyExtractor={(item) => item.chainID}
           renderItem={(item) => (
             <Picker.Item key={item.chainID} value={item.chainID}>
@@ -112,7 +108,7 @@ export function SendTokenRecipientApplicationField({
               <Image source={{ uri: item.logo.png }} style={[styles.applicationLogoImage]} />
             </Picker.Item>
           )}
-          renderSpinner
+          withDefaultSpinner
           // TODO: Integrate pagination props using react-query.
         />
       </Picker.Menu>

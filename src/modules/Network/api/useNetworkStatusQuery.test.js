@@ -4,7 +4,7 @@ import { queryWrapper } from 'tests/queryWrapper';
 import * as useCurrentBlockchainApplication from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 
 import { mockNetworkStatus } from '../__fixtures__';
-import { useGetNetworkStatusQuery } from './useGetNetworkStatusQuery';
+import { useNetworkStatusQuery } from './useNetworkStatusQuery';
 
 jest.useRealTimers();
 
@@ -18,7 +18,7 @@ jest
 
 describe('useNetworkStatusQuery hook', () => {
   it('fetches data correctly', async () => {
-    const { result, waitFor } = renderHook(() => useGetNetworkStatusQuery(), {
+    const { result, waitFor } = renderHook(() => useNetworkStatusQuery(), {
       wrapper: queryWrapper,
     });
 

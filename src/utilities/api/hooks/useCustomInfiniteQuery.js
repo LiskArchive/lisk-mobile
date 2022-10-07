@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { METHOD, API_METHOD, APPLICATION } from 'utilities/api/constants';
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
+import defaultClient from 'utilities/api/APIClient';
+import { METHOD } from 'utilities/api/constants';
 
 /**
  * Creates a custom hook for infinite queries
@@ -17,13 +17,11 @@ import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/h
  *
  * @returns The query object
  */
-export const useCustomInfiniteQuery = ({ keys, config, options = {} }) => {
-  const [{ chainID }] = useCurrentBlockchainApplication();
-
+export const useCustomInfiniteQuery = ({ keys, config, options = {}, client = defaultClient }) => {
   return useInfiniteQuery(
-    [chainID, config, APPLICATION, METHOD, ...keys],
+    keys,
     async ({ pageParam }) =>
-      API_METHOD[METHOD]({
+      client[METHOD]({
         ...config,
         params: {
           ...(config.params || {}),
@@ -36,7 +34,7 @@ export const useCustomInfiniteQuery = ({ keys, config, options = {} }) => {
         const lastPageOffset = lastPage.meta?.offset || 0;
 
         const offset = lastPageCount + lastPageOffset;
-        const hasMore = offset < (lastPage.meta?.total ?? Infinity);
+        const hasMore = offset < (lastPage.meta?.total ?? 100);
         return !hasMore ? undefined : { offset };
       },
       select: (data) =>
