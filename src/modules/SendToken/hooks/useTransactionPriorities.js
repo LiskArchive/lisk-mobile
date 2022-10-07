@@ -1,21 +1,24 @@
 import { useMemo } from 'react';
-import { useGetFeesByPriorityQuery } from '../api/useGetFeesByPriorityQuery';
+
+import { useTransactionFeesQuery } from 'modules/Transactions/api/useTransactionFeesQuery';
 
 export default function useTransactionPriorities() {
-  const feesByPriorityQuery = useGetFeesByPriorityQuery();
+  const { data: transactionFeesData, ...transactionFeesQuery } = useTransactionFeesQuery();
 
   const data = useMemo(() => {
-    if (feesByPriorityQuery.data) {
-      return Object.entries(feesByPriorityQuery.data).map(([priorityCode, priorityBaseFee]) => ({
+    if (transactionFeesData?.data) {
+      const feeEstimatedPerByte = transactionFeesData.data.feeEstimatePerByte;
+
+      return Object.entries(feeEstimatedPerByte).map(([priorityCode, priorityBaseFee]) => ({
         code: priorityCode,
         fee: priorityBaseFee,
       }));
     }
     return [];
-  }, [feesByPriorityQuery.data]);
+  }, [transactionFeesData?.data]);
 
   return {
-    ...feesByPriorityQuery,
+    ...transactionFeesQuery,
     data,
   };
 }
