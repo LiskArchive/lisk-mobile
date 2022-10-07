@@ -12,19 +12,19 @@ import reactQueryClient from 'utilities/api/reactQueryClient';
 import ThemeContext from './contexts/theme';
 import i18n from '../locales';
 import store, { persistedStore } from './store/index';
-// import ConnectionProvider from '../libs/wcm/context/connectionProvider';
+import ConnectionProvider from '../libs/wcm/context/connectionProvider';
 
 export default function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <QueryClientProvider client={reactQueryClient}>
-        {/* <ConnectionProvider> */}
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistedStore}>
-            <ThemedApp />
-          </PersistGate>
-        </Provider>
-        {/* </ConnectionProvider> */}
+        <ConnectionProvider>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistedStore}>
+              <ThemedApp />
+            </PersistGate>
+          </Provider>
+        </ConnectionProvider>
       </QueryClientProvider>
     </I18nextProvider>
   );

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import i18next from 'i18next';
+import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
@@ -59,7 +60,13 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess }) 
   });
 
   const handleChange = (field, value, onChange) => {
-    transaction.update({ params: { [field]: value } });
+    if (field === 'amount') {
+      const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
+
+      transaction.update({ params: { amount: amountInBeddows } });
+    } else {
+      transaction.update({ params: { [field]: value } });
+    }
 
     onChange(value);
   };
