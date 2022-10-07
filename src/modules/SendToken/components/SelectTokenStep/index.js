@@ -17,7 +17,7 @@ import {
   TokenSelectField,
 } from './components';
 
-export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
+export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, transaction }) {
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
 
   const { field: tokenIDField } = useController({
@@ -99,12 +99,10 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
 
         <SendTokenTransactionFeesLabels
           tokenID={tokenIDField.value}
-          amount={amountField.value}
-          priority={priorityField.value}
-          message={messageField.value}
           recipientAccountAddress={recipientAccountAddressField.value}
           senderApplication={senderApplication}
           recipientApplication={recipientApplication}
+          transaction={transaction}
         />
       </View>
 

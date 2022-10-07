@@ -3,6 +3,7 @@ import React, { useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
+import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'hooks/useTheme';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
@@ -21,7 +22,6 @@ import DeleteSvg from 'assets/svgs/DeleteSvg';
 import colors from 'constants/styleGuide/colors';
 import { PRIORITY_NAMES_MAP } from '../../constants';
 import useTransactionPriorities from '../../hooks/useTransactionPriorities';
-import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
 import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
@@ -310,23 +310,18 @@ export function SendTokenPriorityField({ value, onChange, style }) {
 
 export function SendTokenTransactionFeesLabels({
   tokenID,
-  amount,
-  priority,
-  message,
   recipientAccountAddress,
   senderApplication,
   recipientApplication,
+  transaction,
 }) {
   const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
   const selectedToken = tokensData?.find((token) => token.tokenID === tokenID);
 
-  const transactionFee = useTransactionFeeCalculator({
-    tokenID,
-    amount,
-    priority,
-    message,
-  });
+  const transactionFee = Lisk.transactions.convertBeddowsToLSK(
+    transaction.data.transaction.fee.toString()
+  );
 
   const initializationFee = useInitializationFeeCalculator({
     tokenID,
@@ -357,7 +352,7 @@ export function SendTokenTransactionFeesLabels({
         </View>
 
         <Text style={[styles.text, styles.theme.text]}>
-          {transactionFee.data} {selectedToken?.symbol}
+          {transactionFee} {selectedToken?.symbol}
         </Text>
       </View>
 

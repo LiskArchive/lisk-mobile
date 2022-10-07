@@ -16,14 +16,14 @@ import { useSendTokenSummary } from './hooks';
 import { SendTokenSummaryModal } from './components';
 import Avatar from '../../../../components/shared/avatar';
 
-export default function SendTokenSummaryStep({ form, prevStep, reset }) {
+export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
   const [showSendTokenSummaryModal, setShowSendTokenSummaryModal] = useState(false);
 
   const { styles } = useTheme({
     styles: getSendTokenSummaryStepStyles(),
   });
 
-  const summary = useSendTokenSummary({ form });
+  const summary = useSendTokenSummary({ form, transaction });
 
   return (
     <>
@@ -151,7 +151,7 @@ export default function SendTokenSummaryStep({ form, prevStep, reset }) {
             </Text>
 
             <Text style={[styles.valueText, styles.theme.valueText]}>
-              {summary.transactionFee?.data} {summary.token?.symbol}
+              {summary.transactionFee} {summary.token?.symbol}
             </Text>
           </View>
 
