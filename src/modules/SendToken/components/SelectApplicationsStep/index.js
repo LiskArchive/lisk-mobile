@@ -79,7 +79,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
                 value={recipientAccountAddressField.value}
                 onChange={(value) =>
                   form.handleChange(
-                    'recipientAddress',
+                    'params.recipientAddress',
                     value,
                     recipientAccountAddressField.onChange
                   )

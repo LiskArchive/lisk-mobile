@@ -43,14 +43,10 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isTransactionFeeEstimateLoading;
 
   const isSuccess =
-    (isNetworkStatusSuccess && isAuthSuccess && isCommandParametersSchemasSuccess) ||
+    isNetworkStatusSuccess &&
+    isAuthSuccess &&
+    isCommandParametersSchemasSuccess &&
     isTransactionFeeEstimateSuccess;
-
-  console.log({
-    data: transactionFeeEstimateData,
-    isLoading: isTransactionFeeEstimateLoading,
-    isSuccess: isTransactionFeeEstimateSuccess,
-  });
 
   useEffect(
     () => {
@@ -59,7 +55,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
           pubkey,
           networkStatus: networkStatusData?.data,
           auth: authData?.data,
-          feeEstimatePerByte: transactionFeeEstimateData?.data,
+          feeEstimatePerByte: transactionFeeEstimateData?.data.feeEstimatePerByte,
           commandParametersSchemas: commandParametersSchemasData?.data,
           module,
           command,

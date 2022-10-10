@@ -74,7 +74,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
       <View style={[styles.container]}>
         <TokenSelectField
           value={tokenIDField.value}
-          onChange={(value) => form.handleChange('tokenID', value, tokenIDField.onChange)}
+          onChange={(value) => form.handleChange('params.tokenID', value, tokenIDField.onChange)}
           errorMessage={form.formState.errors.tokenID?.message}
           recipientApplication={recipientApplication}
           style={{ toggle: { container: { marginBottom: 16 } } }}
@@ -82,7 +82,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
 
         <SendTokenAmountField
           value={amountField.value}
-          onChange={(value) => form.handleChange('amount', value, amountField.onChange)}
+          onChange={(value) => form.handleChange('params.amount', value, amountField.onChange)}
           tokenID={tokenIDField.value}
           errorMessage={form.formState.errors.amount?.message}
           recipientApplication={recipientApplication}
@@ -91,11 +91,15 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
 
         <SendTokenMessageField
           value={messageField.value}
-          onChange={(value) => form.handleChange('data', value, messageField.onChange)}
+          onChange={(value) => form.handleChange('params.data', value, messageField.onChange)}
           style={{ container: { marginBottom: 16 } }}
         />
 
-        <SendTokenPriorityField value={priorityField.value} onChange={priorityField.onChange} />
+        <SendTokenPriorityField
+          value={priorityField.value}
+          onChange={(value) => form.handleChange('priority', value, priorityField.onChange)}
+          transaction={transaction}
+        />
 
         <SendTokenTransactionFeesLabels
           tokenID={tokenIDField.value}

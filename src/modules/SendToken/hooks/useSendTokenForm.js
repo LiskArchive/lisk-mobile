@@ -60,12 +60,12 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess }) 
   });
 
   const handleChange = (field, value, onChange) => {
-    if (field === 'amount') {
+    if (field === 'params.amount') {
       const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
 
       transaction.update({ params: { amount: amountInBeddows } });
     } else {
-      transaction.update({ params: { [field]: value } });
+      transaction.update({ [field]: value });
     }
 
     onChange(value);
@@ -100,6 +100,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess }) 
           amount: defaultValues.amount,
           data: defaultValues.message,
         },
+        priority: defaultValues.priority,
       });
     }
 

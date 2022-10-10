@@ -1,5 +1,5 @@
 /* eslint-disable max-lines, max-statements */
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
@@ -21,7 +21,6 @@ import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import colors from 'constants/styleGuide/colors';
 import { PRIORITY_NAMES_MAP } from '../../constants';
-import useTransactionPriorities from '../../hooks/useTransactionPriorities';
 import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
@@ -226,47 +225,16 @@ export function SendTokenMessageField({ value, onChange, style }) {
   );
 }
 
-export function SendTokenPriorityField({ value, onChange, style }) {
-  const {
-    data: prioritiesData,
-    isLoading: isLoadingPrioritiesData,
-    error: errorOnPriorities,
-  } = useTransactionPriorities();
-
+export function SendTokenPriorityField({ value, onChange, transaction, style }) {
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const shouldShowPrioritiesData = useMemo(
-    () => prioritiesData && prioritiesData[0]?.fee,
-    [prioritiesData]
-  );
+  const priorities =
+    transaction.data._feeEstimatePerByte &&
+    Object.entries(transaction.data._feeEstimatePerByte).map(([code, fee]) => ({ code, fee }));
 
-  if (!shouldShowPrioritiesData) return null;
-
-  if (isLoadingPrioritiesData) {
-    return (
-      <View>
-        <Text style={[styles.label, style?.label]}>
-          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
-        </Text>
-
-        <Text>{i18next.t('sendToken.tokenSelect.loadingPrioritiesText')}</Text>
-      </View>
-    );
-  }
-
-  if (errorOnPriorities) {
-    return (
-      <View>
-        <Text style={[styles.label, styles.theme.label, style?.label]}>
-          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
-        </Text>
-
-        <Text>{i18next.t('sendToken.tokenSelect.errorLoadingPrioritiesText')}</Text>
-      </View>
-    );
-  }
+  if (!priorities) return null;
 
   return (
     <View style={{ marginBottom: 16 }}>
@@ -282,7 +250,7 @@ export function SendTokenPriorityField({ value, onChange, style }) {
       </View>
 
       <View style={[styles.row, { width: '100%' }]}>
-        {prioritiesData.map((priority) => (
+        {priorities.map((priority) => (
           <TouchableOpacity
             key={priority.code}
             onPress={() => onChange(priority.code)}
