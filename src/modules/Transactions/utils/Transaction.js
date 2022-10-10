@@ -20,6 +20,8 @@ export class Transaction {
 
   _auth = null;
 
+  _feeEstimatePerByte = null;
+
   transaction = {
     module: null,
     command: null,
@@ -40,6 +42,7 @@ export class Transaction {
     pubkey,
     networkStatus,
     auth,
+    feeEstimatePerByte,
     commandParametersSchemas,
     module = null,
     command = null,
@@ -49,6 +52,7 @@ export class Transaction {
     this.isLoading = false;
     this._networkStatus = networkStatus;
     this._auth = auth;
+    this._feeEstimatePerByte = feeEstimatePerByte;
     this.transaction.senderPublicKey = Buffer.isBuffer(pubkey)
       ? pubkey
       : Buffer.from(pubkey, 'hex');

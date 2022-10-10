@@ -31,6 +31,8 @@ export default function SendToken({ route }) {
 
   const transaction = useCreateTransaction(createTransactionOptions);
 
+  console.log({ transaction });
+
   const form = useSendTokenForm({
     transaction: transaction.data,
     isTransactionSuccess: transaction.isSuccess,

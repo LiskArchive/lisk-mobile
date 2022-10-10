@@ -5,6 +5,7 @@ import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
 import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommandParametersSchemasQuery';
+import { useTransactionFeeEstimateQuery } from '../api/useTransactionFeeEstimateQuery';
 
 import { Transaction } from '../utils/Transaction';
 
@@ -29,9 +30,27 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isSuccess: isCommandParametersSchemasSuccess,
   } = useCommandParametersSchemasQuery();
 
-  const isLoading = isNetworkStatusLoading || isAuthLoading || isCommandParametersSchemasLoading;
+  const {
+    data: transactionFeeEstimateData,
+    isLoading: isTransactionFeeEstimateLoading,
+    isSuccess: isTransactionFeeEstimateSuccess,
+  } = useTransactionFeeEstimateQuery();
 
-  const isSuccess = isNetworkStatusSuccess && isAuthSuccess && isCommandParametersSchemasSuccess;
+  const isLoading =
+    isNetworkStatusLoading ||
+    isAuthLoading ||
+    isCommandParametersSchemasLoading ||
+    isTransactionFeeEstimateLoading;
+
+  const isSuccess =
+    (isNetworkStatusSuccess && isAuthSuccess && isCommandParametersSchemasSuccess) ||
+    isTransactionFeeEstimateSuccess;
+
+  console.log({
+    data: transactionFeeEstimateData,
+    isLoading: isTransactionFeeEstimateLoading,
+    isSuccess: isTransactionFeeEstimateSuccess,
+  });
 
   useEffect(
     () => {
@@ -40,6 +59,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
           pubkey,
           networkStatus: networkStatusData?.data,
           auth: authData?.data,
+          feeEstimatePerByte: transactionFeeEstimateData?.data,
           commandParametersSchemas: commandParametersSchemasData?.data,
           module,
           command,

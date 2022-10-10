@@ -1,17 +1,17 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
-import { GET_TRANSACTION_FEES } from 'utilities/api/queries';
+import { GET_TRANSACTION_FEE_ESTIMATE_QUERY } from 'utilities/api/queries';
 import { API_URL } from 'utilities/api/constants';
 
-export function useTransactionFeesQuery({ config: customConfig = {}, options = {} } = {}) {
+export function useTransactionFeeEstimateQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
     url: `${API_URL}/fees`,
     method: 'get',
-    event: 'get.transactions.fees',
+    event: 'get.transaction.feeEstimate',
     ...customConfig,
   };
 
-  const keys = useQueryKeys([GET_TRANSACTION_FEES, config]);
+  const keys = useQueryKeys([GET_TRANSACTION_FEE_ESTIMATE_QUERY, config]);
 
   return useCustomQuery({
     keys,
