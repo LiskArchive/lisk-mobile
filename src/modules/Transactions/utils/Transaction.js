@@ -25,6 +25,7 @@ export class Transaction {
   transaction = {
     module: null,
     command: null,
+    priority: null,
     nonce: BigInt(0),
     fee: BigInt(0),
     senderPublicKey: null,
@@ -160,17 +161,24 @@ export class Transaction {
   computeFee() {
     this._validateTransaction();
 
-    const computeMinFeeOptions = {
-      minFeePerByte: this._networkStatus.genesis.minFeePerByte,
+    const transactionSize = Lisk.transactions.getBytes(this.transaction, this._paramsSchema).length;
+
+    const minFeeOptions = {
       numberOfSignatures: this._auth.numberOfSignatures || 1,
       numberOfEmptySignatures: 0,
     };
 
-    const fee = Lisk.transactions.computeMinFee(
+    const minFee = Lisk.transactions.computeMinFee(
       this.transaction,
       this._paramsSchema,
-      computeMinFeeOptions
+      minFeeOptions
     );
+
+    const priorityFee = this.transaction.priority
+      ? this._feeEstimatePerByte[this.transaction.priority]
+      : 0;
+
+    const fee = minFee + BigInt(priorityFee * transactionSize);
 
     this.transaction = { ...this.transaction, fee };
   }
