@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import { getInitializationFee } from '../helpers';
 
 export default function useInitializationFeeCalculator({ tokenID, recipientAccountAddress }) {
   const [data, setData] = useState();
@@ -13,15 +12,8 @@ export default function useInitializationFeeCalculator({ tokenID, recipientAccou
 
   useEffect(() => {
     if (accounts) {
-      const recipientAccount = accounts.find(
-        (account) => account.metadata.address === recipientAccountAddress
-      );
-
       try {
-        const fee = getInitializationFee({
-          tokenID,
-          recipientAccount,
-        });
+        const fee = 0;
 
         setData(fee);
 
