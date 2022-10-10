@@ -299,7 +299,7 @@ export function SendTokenTransactionFeesLabels({
   });
 
   const cmmFee = useCCMFeeCalculator({
-    senderApplication: senderApplication.chainID,
+    senderApplicationChainID: senderApplication.chainID,
     recipientApplicationChainID: recipientApplication.chainID,
   });
 

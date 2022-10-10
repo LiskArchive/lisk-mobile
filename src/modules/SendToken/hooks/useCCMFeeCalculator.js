@@ -1,8 +1,10 @@
-/* eslint-disable max-statements */
 import { useEffect, useState } from 'react';
 
-// TODO: Define props and calculation when is more clarity about the fee.
-export default function useCCMFeeCalculator() {
+// TODO: Implement real calculation business logic.
+export default function useCCMFeeCalculator({
+  senderApplicationChainID,
+  recipientApplicationChainID,
+}) {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
@@ -19,7 +21,7 @@ export default function useCCMFeeCalculator() {
 
       setIsLoading(false);
     }
-  }, []);
+  }, [senderApplicationChainID, recipientApplicationChainID]);
 
   return { data, isLoading, error };
 }

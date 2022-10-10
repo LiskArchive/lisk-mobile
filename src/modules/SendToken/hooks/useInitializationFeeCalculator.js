@@ -1,8 +1,8 @@
-/* eslint-disable max-statements */
 import { useEffect, useState } from 'react';
 
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 
+// TODO: Implement real calculation business logic.
 export default function useInitializationFeeCalculator({ tokenID, recipientAccountAddress }) {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +24,6 @@ export default function useInitializationFeeCalculator({ tokenID, recipientAccou
         setIsLoading(false);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipientAccountAddress, accounts, tokenID]);
 
   return { data, isLoading, error };
