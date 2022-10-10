@@ -15,14 +15,21 @@ import { useSelector } from 'react-redux';
  *
  * @returns {Object} React native Text component
  */
-const FormattedDate = ({ children, style, type, locale, format = 'MMM D, YYYY' }) => {
+const FormattedDate = ({
+  children,
+  style,
+  type,
+  locale,
+  transformer = moment,
+  format = 'MMM D, YYYY',
+}) => {
   const language = useSelector((state) => state.settings.language);
 
   const Element = type || Text;
 
   moment.locale(locale || language);
 
-  return <Element style={style}>{moment(children).format(format)}</Element>;
+  return <Element style={style}>{transformer(children).format(format)}</Element>;
 };
 
 export default FormattedDate;
