@@ -234,7 +234,9 @@ export function SendTokenPriorityField({ value, onChange, transaction, style }) 
     transaction.data._feeEstimatePerByte &&
     Object.entries(transaction.data._feeEstimatePerByte).map(([code, fee]) => ({ code, fee }));
 
-  if (!priorities) return null;
+  const shouldRender = priorities?.reduce((acc, priority) => acc && priority.fee > 0, true);
+
+  if (!shouldRender) return null;
 
   return (
     <View style={{ marginBottom: 16 }}>
