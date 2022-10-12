@@ -95,7 +95,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
           tokenID={tokenIDField.value}
           errorMessage={
             form.formState.errors.amount?.message ||
-            (isMaxAllowedAmountExceeded && 'Insufficient balance.')
+            (isMaxAllowedAmountExceeded && i18next.t('sendToken.errors.insufficientBalance'))
           }
           recipientApplication={recipientApplication}
           style={{ container: { marginBottom: 16 } }}

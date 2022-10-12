@@ -142,8 +142,7 @@
   "Your connection seems to be down, try again later.": "Your connection seems to be down, try again later.",
   "Your Lisk address": "Your Lisk address",
   "Your Bitcoin address": "Your Bitcoin address",
-  "Your account is not initialized.": "Your account is not initialized.",
-  "Your balance is not sufficient.": "Your balance is not sufficient.",
+  "Your account is not initialized.": "Your account is not initialized.",  
   "Your passphrase": "Your passphrase",
   "Your passphrase is still needed": "Your passphrase is still needed",
   "Your passphrase is used to access your account. No one can reset it, not even Lisk.": "Your passphrase is used to access your account. No one can reset it, not even Lisk.",
@@ -490,7 +489,8 @@
       "amountRequired": "Token amount is required",
       "amountMustBeNumber": "Amount must be a number",
       "amountMustBePositive": "Token amount must be a positive number",
-      "priority": "Priority must be specified"
+      "priority": "Priority must be specified",
+      "insufficientBalance": "Your balance is not sufficient."
     },
     "info": {
       "bytesCounter": {
