@@ -10,12 +10,12 @@ import { P } from 'components/shared/toolBox/typography';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import { stringShortener } from 'utilities/helpers';
 import CopyToClipboard from 'components/shared/copyToClipboard';
+import Avatar from 'components/shared/avatar';
 import { PRIORITY_NAMES_MAP } from '../../constants';
 
 import getSendTokenSummaryStepStyles from './styles';
 import { useSendTokenSummary } from './hooks';
 import { SendTokenSummaryModal } from './components';
-import Avatar from '../../../../components/shared/avatar';
 
 export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
   const [showSendTokenSummaryModal, setShowSendTokenSummaryModal] = useState(false);
@@ -25,8 +25,6 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
   });
 
   const summary = useSendTokenSummary({ form, transaction });
-
-  console.log({ summary });
 
   return (
     <>
@@ -145,7 +143,7 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
               </Text>
 
               <Text style={[styles.valueText, styles.theme.valueText]}>
-                {PRIORITY_NAMES_MAP[summary.priority]}
+                {i18next.t(PRIORITY_NAMES_MAP[summary.priority])}
               </Text>
             </View>
           )}

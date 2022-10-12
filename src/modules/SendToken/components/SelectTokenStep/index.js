@@ -7,6 +7,7 @@ import i18next from 'i18next';
 import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
+import { useSendTokenAmountChecker } from '../../hooks/useSendTokenAmountChecker';
 
 import getSendTokenSelectTokenStepStyles from './styles';
 import {
@@ -16,7 +17,6 @@ import {
   SendTokenAmountField,
   TokenSelectField,
 } from './components';
-import { useSendTokenAmountChecker } from '../../hooks/useSendTokenAmountChecker';
 
 export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, transaction }) {
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
@@ -110,7 +110,6 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
         <SendTokenPriorityField
           value={priorityField.value}
           onChange={(value) => form.handleChange('priority', value, priorityField.onChange)}
-          transaction={transaction}
         />
 
         <SendTokenTransactionFeesLabels

@@ -10,6 +10,7 @@ import { useTheme } from 'hooks/useTheme';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
+import { useTransactionFeeEstimateQuery } from 'modules/Transactions/api/useTransactionFeeEstimateQuery';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -226,14 +227,23 @@ export function SendTokenMessageField({ value, onChange, style }) {
   );
 }
 
-export function SendTokenPriorityField({ value, onChange, transaction, style }) {
+export function SendTokenPriorityField({ value, onChange, style }) {
+  const {
+    data: transactionFeeEstimateData,
+    isLoading: isTransactionFeeEstimateLoading,
+    error: errorOnTransactionFeeEstimate,
+  } = useTransactionFeeEstimateQuery();
+
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
   const priorities =
-    transaction.data._feeEstimatePerByte &&
-    Object.entries(transaction.data._feeEstimatePerByte).map(([code, fee]) => ({ code, fee }));
+    transactionFeeEstimateData?.data.feeEstimatePerByte &&
+    Object.entries(transactionFeeEstimateData.data.feeEstimatePerByte).map(([code, fee]) => ({
+      code,
+      fee,
+    }));
 
   const shouldRender = priorities?.reduce((acc, priority) => acc && priority.fee > 0, true);
 
@@ -252,29 +262,36 @@ export function SendTokenPriorityField({ value, onChange, transaction, style }) 
         />
       </View>
 
-      <View style={[styles.row, { width: '100%' }]}>
-        {priorities.map((priority) => (
-          <TouchableOpacity
-            key={priority.code}
-            onPress={() => onChange(priority.code)}
-            style={[
-              styles.priorityButtonBase,
-              styles[
-                value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
-              ],
-              { marginRight: 8 },
-            ]}
-          >
-            <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
-              {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
-            </Text>
+      <DataRenderer
+        data={priorities}
+        isLoading={isTransactionFeeEstimateLoading}
+        error={errorOnTransactionFeeEstimate}
+        renderData={(data) => (
+          <View style={[styles.row, { width: '100%' }]}>
+            {data.map((priority) => (
+              <TouchableOpacity
+                key={priority.code}
+                onPress={() => onChange(priority.code)}
+                style={[
+                  styles.priorityButtonBase,
+                  styles[
+                    value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
+                  ],
+                  { marginRight: 8 },
+                ]}
+              >
+                <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
+                  {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
+                </Text>
 
-            <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
-              {priority.fee} LSK
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+                <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
+                  {priority.fee} LSK
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+      />
     </View>
   );
 }
@@ -378,16 +395,6 @@ export function SendTokenTransactionFeesLabels({
             <Text style={[styles.text, styles.theme.text]}>0 {selectedToken?.symbol}</Text>
           )}
         />
-
-        {/* {cmmFee.isLoading ? (
-          <Text style={[styles.text, styles.theme.text]}>
-            {i18next.t('sendToken.tokenSelect.loadingCmmFeeText')}
-          </Text>
-        ) : (
-          <Text style={[styles.text, styles.theme.text]}>
-            {cmmFee.data} {selectedToken?.symbol}
-          </Text>
-        )} */}
       </View>
     </View>
   );

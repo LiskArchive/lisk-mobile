@@ -173,7 +173,7 @@ function TransactionDetailsStatus({ status }) {
   return (
     <View style={[styles.statusContainer, { backgroundColor }]}>
       <Text style={[styles.statusText, { color }]}>
-        {TRANSACTION_STATUS_NAMES[status] || 'No status'}
+        {i18next.t(TRANSACTION_STATUS_NAMES[status]) || 'No status'}
       </Text>
     </View>
   );
@@ -205,7 +205,7 @@ function TransactionDetailsParams({ params, show, setShow }) {
         paramsEntries.map(([paramKey, paramValue]) => (
           <React.Fragment key={paramKey}>
             <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-              {TRANSACTION_PARAMS_NAMES[paramKey]}:
+              {i18next.t(TRANSACTION_PARAMS_NAMES[paramKey])}:
             </Text>
 
             <Text style={[styles.text, styles.theme.text]}>{paramValue}</Text>
