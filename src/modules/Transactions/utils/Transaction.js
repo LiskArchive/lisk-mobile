@@ -163,22 +163,16 @@ export class Transaction {
 
     const transactionSize = Lisk.transactions.getBytes(this.transaction, this._paramsSchema).length;
 
-    const minFeeOptions = {
+    const baseFee = Lisk.transactions.computeMinFee(this.transaction, this._paramsSchema, {
       numberOfSignatures: this._auth.numberOfSignatures || 1,
       numberOfEmptySignatures: 0,
-    };
-
-    const minFee = Lisk.transactions.computeMinFee(
-      this.transaction,
-      this._paramsSchema,
-      minFeeOptions
-    );
+    });
 
     const priorityFee = this.transaction.priority
       ? this._feeEstimatePerByte[this.transaction.priority]
       : 0;
 
-    const fee = minFee + BigInt(priorityFee * transactionSize);
+    const fee = baseFee + BigInt(priorityFee * transactionSize);
 
     this.transaction = { ...this.transaction, fee };
   }

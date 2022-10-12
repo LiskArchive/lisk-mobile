@@ -7,7 +7,6 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'hooks/useTheme';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -16,7 +15,6 @@ import { P } from 'components/shared/toolBox/typography';
 import InfoToggler from 'components/shared/InfoToggler';
 import FadeInView from 'components/shared/fadeInView';
 import DataRenderer from 'components/shared/DataRenderer';
-import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import colors from 'constants/styleGuide/colors';
@@ -31,8 +29,6 @@ import getSendTokenSelectTokenStepStyles, {
 } from './styles';
 
 export function TokenSelectField({ value, onChange, recipientApplication, errorMessage, style }) {
-  const currentAccountInfo = useAccountInfo();
-
   const {
     data: supportedTokensData,
     isLoading: isLoadingSupportedTokens,
@@ -43,9 +39,13 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const normalizedBalance = fromRawLsk(currentAccountInfo.summary.balance);
-
   const selectedToken = supportedTokensData?.find((token) => token.tokenID === value);
+
+  const tokenBalance = selectedToken?.availableBalance
+    ? Number(
+        Lisk.transactions.convertBeddowsToLSK(selectedToken?.availableBalance)
+      ).toLocaleString()
+    : 0;
 
   return (
     <Picker value={value} onChange={onChange} error={errorMessage}>
@@ -59,7 +59,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
             {i18next.t('sendToken.tokenSelect.tokenIDBalanceLabel')}:{' '}
             {/* TODO: Read token symbol from account info when backend send the data */}
             <Text style={[styles.balanceText]}>
-              {normalizedBalance} {selectedToken.symbol}
+              {tokenBalance} {selectedToken.symbol}
             </Text>
           </Picker.Label>
         )}
