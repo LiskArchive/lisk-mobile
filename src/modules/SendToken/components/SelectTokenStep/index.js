@@ -16,6 +16,7 @@ import {
   SendTokenAmountField,
   TokenSelectField,
 } from './components';
+import { useSendTokenAmountCheck } from '../../hooks/useSendTokenAmountCheck';
 
 export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, transaction }) {
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
@@ -59,8 +60,6 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const disableNextStepButton = !form.watch('tokenID') || !form.watch('amount');
-
   const recipientApplication = applicationsMetadata?.data.find(
     (application) => application.chainID === recipientApplicationChainIDField.value
   );
@@ -68,6 +67,16 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
   const senderApplication = applicationsMetadata?.data.find(
     (application) => application.chainID === senderApplicationChainIDField.value
   );
+
+  const { isMaxAllowedAmountExceeded } = useSendTokenAmountCheck({
+    recipientApplication,
+    selectedTokenID: tokenIDField.value,
+    amount: amountField.value,
+    transactionFee: transaction.data.transaction.fee,
+  });
+
+  const disableNextStepButton =
+    !form.watch('tokenID') || !form.watch('amount') || isMaxAllowedAmountExceeded;
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -84,7 +93,10 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
           value={amountField.value}
           onChange={(value) => form.handleChange('params.amount', value, amountField.onChange)}
           tokenID={tokenIDField.value}
-          errorMessage={form.formState.errors.amount?.message}
+          errorMessage={
+            form.formState.errors.amount?.message ||
+            (isMaxAllowedAmountExceeded && 'Insufficient balance.')
+          }
           recipientApplication={recipientApplication}
           style={{ container: { marginBottom: 16 } }}
         />
