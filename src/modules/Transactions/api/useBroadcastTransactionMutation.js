@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useAuthQueryParams } from 'modules/Auth/api/useAuthQuery';
+import { useAccountTransactionsQueryParams } from 'modules/Accounts/api/useAccountTransactionsQuery';
 import { useAccountTokensQueryParams } from 'modules/Accounts/api/useAccountTokensQuery';
 import { METHOD, API_URL } from 'utilities/api/constants';
 import apiClient from 'utilities/api/APIClient';
-import { useTransactionsQueryParams } from './useTransactionsQuery';
 
 export default function useBroadcastTransactionMutation(options = {}) {
   const queryClient = useQueryClient();
@@ -16,7 +16,7 @@ export default function useBroadcastTransactionMutation(options = {}) {
     },
   });
   const { keys: accountTokensFullQueryKeys } = useAccountTokensQueryParams();
-  const { keys: transactionsQueryKeys } = useTransactionsQueryParams();
+  const { keys: accountTransactionsQueryKeys } = useAccountTransactionsQueryParams();
 
   return useMutation(
     ({ transaction }) => {
@@ -32,7 +32,7 @@ export default function useBroadcastTransactionMutation(options = {}) {
       onSuccess: (data) => {
         queryClient.invalidateQueries(accountTokensOverviewQueryKeys);
         queryClient.invalidateQueries(accountTokensFullQueryKeys);
-        queryClient.invalidateQueries(transactionsQueryKeys);
+        queryClient.invalidateQueries(accountTransactionsQueryKeys);
 
         const [authQueryCache] = queryClient.getQueriesData(authQueryKeys);
 

@@ -4,9 +4,9 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
+import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
-import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
-import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
 export function useSendTokenSummary({ form, transaction }) {
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
@@ -42,7 +42,6 @@ export function useSendTokenSummary({ form, transaction }) {
   );
 
   const initializationFee = useInitializationFeeCalculator({
-    tokenID,
     recipientAccountAddress,
   });
 

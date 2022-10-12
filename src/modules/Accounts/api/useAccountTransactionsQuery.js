@@ -1,21 +1,25 @@
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { LIMIT, API_URL } from 'utilities/api/constants';
-import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
+import { GET_ACCOUNT_TRANSACTIONS_QUERY } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 
-export function useTransactionsQueryParams({ config: customConfig = {} } = {}) {
+export function useAccountTransactionsQueryParams({ config: customConfig = {} } = {}) {
+  const [currentAccount] = useCurrentAccount();
+
   const config = {
     url: `${API_URL}/transactions`,
     method: 'get',
-    event: 'get.transactions',
+    event: 'get.account.transactions',
     ...customConfig,
     params: {
       limit: LIMIT,
+      senderAddress: currentAccount.metadata.address,
       ...(customConfig?.params || {}),
     },
   };
 
-  const keys = useQueryKeys([GET_TRANSACTIONS_QUERY, config]);
+  const keys = useQueryKeys([GET_ACCOUNT_TRANSACTIONS_QUERY, config]);
 
   return { config, keys };
 }
@@ -28,8 +32,8 @@ export function useTransactionsQueryParams({ config: customConfig = {} } = {}) {
  * @returns - The query state of the API call. Includes the data
  * (with the array of transactions), loading state, error state, and more.
  */
-export function useTransactionsQuery({ config: customConfig = {}, options = {} } = {}) {
-  const { config, keys } = useTransactionsQueryParams({ config: customConfig });
+export function useAccountTransactionsQuery({ config: customConfig = {}, options = {} } = {}) {
+  const { config, keys } = useAccountTransactionsQueryParams({ config: customConfig });
 
   return useCustomInfiniteQuery({ config, options, keys });
 }

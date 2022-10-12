@@ -4,7 +4,7 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 
-export function useSendTokenAmountCheck({
+export function useSendTokenAmountChecker({
   recipientApplication,
   selectedTokenID,
   amount,

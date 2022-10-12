@@ -158,7 +158,7 @@ export class Transaction {
   /**
    * Compute transaction fee
    */
-  computeFee() {
+  computeFee(extraFee = BigInt(0)) {
     this._validateTransaction();
 
     const transactionSize = Lisk.transactions.getBytes(this.transaction, this._paramsSchema).length;
@@ -172,7 +172,7 @@ export class Transaction {
       ? this._feeEstimatePerByte[this.transaction.priority]
       : 0;
 
-    const fee = baseFee + BigInt(priorityFee * transactionSize);
+    const fee = baseFee + BigInt(priorityFee * transactionSize) + extraFee;
 
     this.transaction = { ...this.transaction, fee };
   }

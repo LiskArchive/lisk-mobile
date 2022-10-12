@@ -10,7 +10,7 @@ export function useAccountTokensQueryParams({ config: customConfig = {} } = {}) 
   const config = {
     url: `${API_URL}/tokens`,
     method: 'get',
-    event: 'get.accountTokens',
+    event: 'get.account.tokens',
     ...customConfig,
     params: {
       address: currentAccount.metadata.address,

@@ -8,6 +8,8 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'hooks/useTheme';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
+import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -20,8 +22,6 @@ import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import colors from 'constants/styleGuide/colors';
 import { PRIORITY_NAMES_MAP } from '../../constants';
-import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
-import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
 import { useTokenAmountInCurrency } from './hooks';
 import getSendTokenSelectTokenStepStyles, {
@@ -295,7 +295,6 @@ export function SendTokenTransactionFeesLabels({
   );
 
   const initializationFee = useInitializationFeeCalculator({
-    tokenID,
     recipientAccountAddress,
   });
 
@@ -339,15 +338,19 @@ export function SendTokenTransactionFeesLabels({
           />
         </View>
 
-        {initializationFee.isLoading ? (
-          <Text style={[styles.text, styles.theme.text]}>
-            {i18next.t('sendToken.tokenSelect.loadingInitializationFeeText')}
-          </Text>
-        ) : (
-          <Text style={[styles.text, styles.theme.text]}>
-            {initializationFee.data} {selectedToken?.symbol}
-          </Text>
-        )}
+        <DataRenderer
+          data={initializationFee.data}
+          isLoading={initializationFee.isLoading}
+          error={initializationFee.error}
+          renderData={(data) => (
+            <Text style={[styles.text, styles.theme.text]}>
+              {Lisk.transactions.convertBeddowsToLSK(data.toString())} {selectedToken?.symbol}
+            </Text>
+          )}
+          renderEmpty={() => (
+            <Text style={[styles.text, styles.theme.text]}>0 {selectedToken?.symbol}</Text>
+          )}
+        />
       </View>
 
       <View style={[styles.feeContainer]}>
@@ -362,7 +365,21 @@ export function SendTokenTransactionFeesLabels({
           />
         </View>
 
-        {cmmFee.isLoading ? (
+        <DataRenderer
+          data={cmmFee.data}
+          isLoading={cmmFee.isLoading}
+          error={cmmFee.error}
+          renderData={(data) => (
+            <Text style={[styles.text, styles.theme.text]}>
+              {Lisk.transactions.convertBeddowsToLSK(data.toString())} {selectedToken?.symbol}
+            </Text>
+          )}
+          renderEmpty={() => (
+            <Text style={[styles.text, styles.theme.text]}>0 {selectedToken?.symbol}</Text>
+          )}
+        />
+
+        {/* {cmmFee.isLoading ? (
           <Text style={[styles.text, styles.theme.text]}>
             {i18next.t('sendToken.tokenSelect.loadingCmmFeeText')}
           </Text>
@@ -370,7 +387,7 @@ export function SendTokenTransactionFeesLabels({
           <Text style={[styles.text, styles.theme.text]}>
             {cmmFee.data} {selectedToken?.symbol}
           </Text>
-        )}
+        )} */}
       </View>
     </View>
   );

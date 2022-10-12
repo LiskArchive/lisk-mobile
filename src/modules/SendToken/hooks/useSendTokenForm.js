@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable max-statements */
 import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -9,6 +10,8 @@ import * as Lisk from '@liskhq/lisk-client';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
+import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
+import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { mockTokensMeta } from '../__fixtures__';
 
@@ -23,7 +26,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess }) 
     () => ({
       senderApplicationChainID: currentApplication.chainID,
       recipientApplicationChainID: currentApplication.chainID,
-      recipientAccountAddress: 'lsk3ay4z7wqjczbo5ogcqxgxx23xyacxmycwxfh4d',
+      recipientAccountAddress: 'lsk7tyskeefnd6p6bfksd7ytp5jyaw8f2r9foa6ch',
       recipientAccountAddressFormat: 'input',
       tokenID: mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID,
       amount: 0,
@@ -59,6 +62,15 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess }) 
     resolver: yupResolver(validationSchema),
   });
 
+  const initializationFee = useInitializationFeeCalculator({
+    recipientAccountAddress: form.watch('recipientAccountAddress'),
+  });
+
+  const cmmFee = useCCMFeeCalculator({
+    senderApplicationChainID: form.watch('senderApplicationChainID'),
+    recipientApplicationChainID: form.watch('recipientApplicationChainID'),
+  });
+
   const handleChange = (field, value, onChange) => {
     if (field === 'params.amount') {
       const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
@@ -78,6 +90,14 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess }) 
     );
 
     try {
+      let extraFee = BigInt(0);
+
+      if (initializationFee.data > 0) extraFee += initializationFee.data;
+
+      if (cmmFee.data > 0) extraFee += cmmFee.data;
+
+      if (extraFee) transaction.computeFee(extraFee);
+
       const signedTransaction = await transaction.sign(privateKey);
 
       const encodedTransaction = transaction.encode(signedTransaction).toString('hex');

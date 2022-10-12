@@ -16,7 +16,7 @@ import {
   SendTokenAmountField,
   TokenSelectField,
 } from './components';
-import { useSendTokenAmountCheck } from '../../hooks/useSendTokenAmountCheck';
+import { useSendTokenAmountChecker } from '../../hooks/useSendTokenAmountChecker';
 
 export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, transaction }) {
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
@@ -68,7 +68,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
     (application) => application.chainID === senderApplicationChainIDField.value
   );
 
-  const { isMaxAllowedAmountExceeded } = useSendTokenAmountCheck({
+  const { isMaxAllowedAmountExceeded } = useSendTokenAmountChecker({
     recipientApplication,
     selectedTokenID: tokenIDField.value,
     amount: amountField.value,
