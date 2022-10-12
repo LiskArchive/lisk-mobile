@@ -31,7 +31,7 @@ export default function TransactionList({ mode = 'overview', style }) {
     isFetchingNextPage: isFetchingTransactionsNextPage,
   } = useAccountTransactionsQuery({
     config: {
-      params: { limit: mode === 'overview' ? 3 : LIMIT },
+      params: { limit: mode === 'overview' ? 2 : LIMIT },
     },
   });
 
@@ -82,11 +82,11 @@ export default function TransactionList({ mode = 'overview', style }) {
         error={errorOnTransactions && errorOnTransactions.response?.status !== 404}
         renderData={(data) => (
           <InfiniteScrollList
-            data={data.slice(0, 2)}
-            keyExtractor={(item) => item.tokenID}
+            data={data}
+            keyExtractor={(item) => item.id}
             renderItem={(item) => <TransactionRow transaction={item} />}
             fetchNextPage={fetchNextTransactionsPage}
-            hasNextPage={hasTransactionsNextPage}
+            hasNextPage={mode === 'full' && hasTransactionsNextPage}
             isFetchingNextPage={isFetchingTransactionsNextPage}
           />
         )}

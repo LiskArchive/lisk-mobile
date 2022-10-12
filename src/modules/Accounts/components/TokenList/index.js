@@ -119,11 +119,11 @@ export default function TokenList({ mode = 'overview', style }) {
         error={errorOnTokens && errorOnTokens.response?.status !== 404}
         renderData={(data) => (
           <InfiniteScrollList
-            data={data.slice(0, 2)}
+            data={data}
             keyExtractor={(item) => item.tokenID}
             renderItem={(item) => <TokenRow token={item} />}
             fetchNextPage={fetchNextTokensPage}
-            hasNextPage={hasTokensNextPage}
+            hasNextPage={mode === 'full' && hasTokensNextPage}
             isFetchingNextPage={isFetchingTokensNextPage}
           />
         )}

@@ -19,7 +19,11 @@ export function useAccountTransactionsQueryParams({ config: customConfig = {} } 
     },
   };
 
-  const keys = useQueryKeys([GET_ACCOUNT_TRANSACTIONS_QUERY, config]);
+  const keys = useQueryKeys([
+    GET_ACCOUNT_TRANSACTIONS_QUERY,
+    currentAccount.metadata.address,
+    config,
+  ]);
 
   return { config, keys };
 }
