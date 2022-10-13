@@ -19,6 +19,7 @@ export function SendTokenSummaryModal({
 
   const [activeStep, setActiveStep] = useState('confirmAndSignTransaction');
   const [error, setError] = useState();
+
   function handleOnProcessCompleted() {
     switch (activeStep) {
       case 'confirmAndSignTransaction':
