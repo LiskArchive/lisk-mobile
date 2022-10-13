@@ -13,6 +13,7 @@ import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadca
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
+import DropDownHolder from 'utilities/alert';
 import { mockTokensMeta } from '../__fixtures__';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess }) {
@@ -84,27 +85,40 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess }) 
   };
 
   const handleSubmit = baseHandleSubmit(async (values) => {
-    const { privateKey } = await decryptAccount(
-      currentAccount.encryptedPassphrase,
-      values.userPassword
-    );
+    let privateKey;
 
     try {
-      let extraFee = BigInt(0);
+      const decryptedAccount = await decryptAccount(
+        currentAccount.encryptedPassphrase,
+        values.userPassword
+      );
 
-      if (initializationFee.data > 0) extraFee += initializationFee.data;
-
-      if (cmmFee.data > 0) extraFee += cmmFee.data;
-
-      if (extraFee) transaction.computeFee(extraFee);
-
-      const signedTransaction = await transaction.sign(privateKey);
-
-      const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
-
-      broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+      privateKey = decryptedAccount.privateKey;
     } catch (error) {
-      console.log({ errorOnSign: error });
+      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptPassphraseError'));
+    }
+
+    if (privateKey) {
+      try {
+        let extraFee = BigInt(0);
+
+        if (initializationFee.data > 0) extraFee += initializationFee.data;
+
+        if (cmmFee.data > 0) extraFee += cmmFee.data;
+
+        if (extraFee) transaction.computeFee(extraFee);
+
+        const signedTransaction = await transaction.sign(privateKey);
+
+        const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
+
+        broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+      } catch (error) {
+        DropDownHolder.error(
+          i18next.t('Error'),
+          'Unable to sign your transaction. Please try again.'
+        );
+      }
     }
   });
 
