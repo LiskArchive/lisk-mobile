@@ -1,12 +1,16 @@
+/* eslint-disable no-undef */
 /* eslint-disable max-lines, max-statements */
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
+import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'hooks/useTheme';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
+import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
+import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
+import { useTransactionFeeEstimateQuery } from 'modules/Transactions/api/useTransactionFeeEstimateQuery';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -15,15 +19,10 @@ import { P } from 'components/shared/toolBox/typography';
 import InfoToggler from 'components/shared/InfoToggler';
 import FadeInView from 'components/shared/fadeInView';
 import DataRenderer from 'components/shared/DataRenderer';
-import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import colors from 'constants/styleGuide/colors';
 import { PRIORITY_NAMES_MAP } from '../../constants';
-import useTransactionPriorities from '../../hooks/useTransactionPriorities';
-import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
-import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
-import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
 import { useTokenAmountInCurrency } from './hooks';
 import getSendTokenSelectTokenStepStyles, {
@@ -32,8 +31,6 @@ import getSendTokenSelectTokenStepStyles, {
 } from './styles';
 
 export function TokenSelectField({ value, onChange, recipientApplication, errorMessage, style }) {
-  const currentAccountInfo = useAccountInfo();
-
   const {
     data: supportedTokensData,
     isLoading: isLoadingSupportedTokens,
@@ -44,9 +41,13 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const normalizedBalance = fromRawLsk(currentAccountInfo.summary.balance);
-
   const selectedToken = supportedTokensData?.find((token) => token.tokenID === value);
+
+  const tokenBalance = selectedToken?.availableBalance
+    ? Number(
+        Lisk.transactions.convertBeddowsToLSK(selectedToken?.availableBalance)
+      ).toLocaleString()
+    : 0;
 
   return (
     <Picker value={value} onChange={onChange} error={errorMessage}>
@@ -60,7 +61,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
             {i18next.t('sendToken.tokenSelect.tokenIDBalanceLabel')}:{' '}
             {/* TODO: Read token symbol from account info when backend send the data */}
             <Text style={[styles.balanceText]}>
-              {normalizedBalance} {selectedToken.symbol}
+              {tokenBalance} {selectedToken.symbol}
             </Text>
           </Picker.Label>
         )}
@@ -228,45 +229,25 @@ export function SendTokenMessageField({ value, onChange, style }) {
 
 export function SendTokenPriorityField({ value, onChange, style }) {
   const {
-    data: prioritiesData,
-    isLoading: isLoadingPrioritiesData,
-    error: errorOnPriorities,
-  } = useTransactionPriorities();
+    data: transactionFeeEstimateData,
+    isLoading: isTransactionFeeEstimateLoading,
+    error: errorOnTransactionFeeEstimate,
+  } = useTransactionFeeEstimateQuery();
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const shouldShowPrioritiesData = useMemo(
-    () => prioritiesData && prioritiesData[0]?.fee,
-    [prioritiesData]
-  );
+  const priorities =
+    transactionFeeEstimateData?.data.feeEstimatePerByte &&
+    Object.entries(transactionFeeEstimateData.data.feeEstimatePerByte).map(([code, fee]) => ({
+      code,
+      fee,
+    }));
 
-  if (!shouldShowPrioritiesData) return null;
+  const shouldRender = priorities?.reduce((acc, priority) => acc && priority.fee > 0, true);
 
-  if (isLoadingPrioritiesData) {
-    return (
-      <View>
-        <Text style={[styles.label, style?.label]}>
-          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
-        </Text>
-
-        <Text>{i18next.t('sendToken.tokenSelect.loadingPrioritiesText')}</Text>
-      </View>
-    );
-  }
-
-  if (errorOnPriorities) {
-    return (
-      <View>
-        <Text style={[styles.label, styles.theme.label, style?.label]}>
-          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
-        </Text>
-
-        <Text>{i18next.t('sendToken.tokenSelect.errorLoadingPrioritiesText')}</Text>
-      </View>
-    );
-  }
+  if (!shouldRender) return null;
 
   return (
     <View style={{ marginBottom: 16 }}>
@@ -281,60 +262,61 @@ export function SendTokenPriorityField({ value, onChange, style }) {
         />
       </View>
 
-      <View style={[styles.row, { width: '100%' }]}>
-        {prioritiesData.map((priority) => (
-          <TouchableOpacity
-            key={priority.code}
-            onPress={() => onChange(priority.code)}
-            style={[
-              styles.priorityButtonBase,
-              styles[
-                value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
-              ],
-              { marginRight: 8 },
-            ]}
-          >
-            <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
-              {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
-            </Text>
+      <DataRenderer
+        data={priorities}
+        isLoading={isTransactionFeeEstimateLoading}
+        error={errorOnTransactionFeeEstimate}
+        renderData={(data) => (
+          <View style={[styles.row, { width: '100%' }]}>
+            {data.map((priority) => (
+              <TouchableOpacity
+                key={priority.code}
+                onPress={() => onChange(priority.code)}
+                style={[
+                  styles.priorityButtonBase,
+                  styles[
+                    value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
+                  ],
+                  { marginRight: 8 },
+                ]}
+              >
+                <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
+                  {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
+                </Text>
 
-            <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
-              {priority.fee} LSK
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+                <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
+                  {priority.fee} LSK
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+      />
     </View>
   );
 }
 
 export function SendTokenTransactionFeesLabels({
   tokenID,
-  amount,
-  priority,
-  message,
   recipientAccountAddress,
   senderApplication,
   recipientApplication,
+  transaction,
 }) {
   const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
   const selectedToken = tokensData?.find((token) => token.tokenID === tokenID);
 
-  const transactionFee = useTransactionFeeCalculator({
-    tokenID,
-    amount,
-    priority,
-    message,
-  });
+  const transactionFee = Lisk.transactions.convertBeddowsToLSK(
+    transaction.data.transaction.fee.toString()
+  );
 
   const initializationFee = useInitializationFeeCalculator({
-    tokenID,
     recipientAccountAddress,
   });
 
   const cmmFee = useCCMFeeCalculator({
-    senderApplication: senderApplication.chainID,
+    senderApplicationChainID: senderApplication.chainID,
     recipientApplicationChainID: recipientApplication.chainID,
   });
 
@@ -357,7 +339,7 @@ export function SendTokenTransactionFeesLabels({
         </View>
 
         <Text style={[styles.text, styles.theme.text]}>
-          {transactionFee.data} {selectedToken?.symbol}
+          {transactionFee} {selectedToken?.symbol}
         </Text>
       </View>
 
@@ -373,15 +355,19 @@ export function SendTokenTransactionFeesLabels({
           />
         </View>
 
-        {initializationFee.isLoading ? (
-          <Text style={[styles.text, styles.theme.text]}>
-            {i18next.t('sendToken.tokenSelect.loadingInitializationFeeText')}
-          </Text>
-        ) : (
-          <Text style={[styles.text, styles.theme.text]}>
-            {initializationFee.data} {selectedToken?.symbol}
-          </Text>
-        )}
+        <DataRenderer
+          data={initializationFee.data}
+          isLoading={initializationFee.isLoading}
+          error={initializationFee.error}
+          renderData={(data) => (
+            <Text style={[styles.text, styles.theme.text]}>
+              {Lisk.transactions.convertBeddowsToLSK(data.toString())} {selectedToken?.symbol}
+            </Text>
+          )}
+          renderEmpty={() => (
+            <Text style={[styles.text, styles.theme.text]}>0 {selectedToken?.symbol}</Text>
+          )}
+        />
       </View>
 
       <View style={[styles.feeContainer]}>
@@ -396,15 +382,19 @@ export function SendTokenTransactionFeesLabels({
           />
         </View>
 
-        {cmmFee.isLoading ? (
-          <Text style={[styles.text, styles.theme.text]}>
-            {i18next.t('sendToken.tokenSelect.loadingCmmFeeText')}
-          </Text>
-        ) : (
-          <Text style={[styles.text, styles.theme.text]}>
-            {cmmFee.data} {selectedToken?.symbol}
-          </Text>
-        )}
+        <DataRenderer
+          data={cmmFee.data}
+          isLoading={cmmFee.isLoading}
+          error={cmmFee.error}
+          renderData={(data) => (
+            <Text style={[styles.text, styles.theme.text]}>
+              {Lisk.transactions.convertBeddowsToLSK(data.toString())} {selectedToken?.symbol}
+            </Text>
+          )}
+          renderEmpty={() => (
+            <Text style={[styles.text, styles.theme.text]}>0 {selectedToken?.symbol}</Text>
+          )}
+        />
       </View>
     </View>
   );

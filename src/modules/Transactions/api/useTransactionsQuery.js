@@ -1,12 +1,9 @@
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_TRANSACTIONS_QUERY } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 
 export function useTransactionsQueryParams({ config: customConfig = {} } = {}) {
-  const [currentAccount] = useCurrentAccount();
-
   const config = {
     url: `${API_URL}/transactions`,
     method: 'get',
@@ -14,7 +11,6 @@ export function useTransactionsQueryParams({ config: customConfig = {} } = {}) {
     ...customConfig,
     params: {
       limit: LIMIT,
-      senderAddress: currentAccount.metadata.address,
       ...(customConfig?.params || {}),
     },
   };

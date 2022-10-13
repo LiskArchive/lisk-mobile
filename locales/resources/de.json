@@ -142,8 +142,7 @@
   "Your connection seems to be down, try again later.": "Deine Verbindung scheint unterbrochen zu sein, bitte versuch es spääter noch einmal.",
   "Your Lisk address": "Deine Lisk-Adresse",
   "Your Bitcoin address": "Deine Bitcoin-Adresse",
-  "Your account is not initialized.": "Dein Konto ist nicht initialisiert.",
-  "Your balance is not sufficient.": "Dein Kontobetrag ist nicht ausreichend.",
+  "Your account is not initialized.": "Dein Konto ist nicht initialisiert.",  
   "Your passphrase": "Deine Passphrase",
   "Your passphrase is still needed": "Deine Passphrase wird immer noch gebraucht",
   "Your passphrase is used to access your account. No one can reset it, not even Lisk.": "Deine Passphrase wird benutzt, um auf dein Konto zuzugreifen. Niemand kann sie zurücksetzen, nicht einmal Lisk.",
@@ -490,7 +489,8 @@
       "amountRequired": "Token-Betrag ist erforderlich",
       "amountMustBeNumber": "Der Betrag muss eine Zahl sein",
       "amountMustBePositive": "Tokenbetrag muss eine positive Zahl sein",
-      "priority": "Priorität muss angegeben werden"
+      "priority": "Priorität muss angegeben werden",
+      "insufficientBalance": "Dein Kontobetrag ist nicht ausreichend."
     },
     "info": {
       "bytesCounter": {

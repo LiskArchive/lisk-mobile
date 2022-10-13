@@ -5,10 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { stringShortener } from 'utilities/helpers';
-import { TimeStamp } from 'components/shared/imessage/txDetail/dataRows';
+import { useTransactionAssets } from '../../hooks/useTransactionAssets';
+import TransactionTimestamp from '../TransactionTimestamp';
 
 import getTransactionRowStyles from './styles';
-import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 import { TransactionAmount, TransactionStatus } from './components';
 
 export default function TransactionRow({ transaction }) {
@@ -33,7 +33,11 @@ export default function TransactionRow({ transaction }) {
             {stringShortener(transaction.params.recipientAddress, 5, 5)}
           </Text>
 
-          <TimeStamp timestamp={transaction.block.timestamp} format="MMM D, YYYY" styles={styles} />
+          <TransactionTimestamp
+            timestamp={transaction.block.timestamp}
+            format="MMM D, YYYY"
+            styles={styles}
+          />
         </View>
       </View>
 

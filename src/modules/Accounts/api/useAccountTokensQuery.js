@@ -3,6 +3,7 @@ import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQue
 import { LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
+import apiClient from 'utilities/api/APIClient';
 
 export function useAccountTokensQueryParams({ config: customConfig = {} } = {}) {
   const [currentAccount] = useCurrentAccount();
@@ -10,7 +11,7 @@ export function useAccountTokensQueryParams({ config: customConfig = {} } = {}) 
   const config = {
     url: `${API_URL}/tokens`,
     method: 'get',
-    event: 'get.accountTokens',
+    event: 'get.tokens',
     ...customConfig,
     params: {
       address: currentAccount.metadata.address,
@@ -33,7 +34,11 @@ export function useAccountTokensQueryParams({ config: customConfig = {} } = {}) 
  * @returns - The query state of the API call. Includes the data
  * (tokens), loading state, error state, and more.
  */
-export function useAccountTokensQuery({ config: customConfig = {}, options = {}, client } = {}) {
+export function useAccountTokensQuery({
+  config: customConfig = {},
+  options = {},
+  client = apiClient,
+} = {}) {
   const { config, keys } = useAccountTokensQueryParams({ config: customConfig });
 
   return useCustomInfiniteQuery({ config, options, keys, client });

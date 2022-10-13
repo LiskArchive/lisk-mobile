@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
+import { useAccountTransactionsQuery } from 'modules/Accounts/api/useAccountTransactionsQuery';
 import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
 import { LIMIT } from 'utilities/api/constants';
@@ -14,7 +15,6 @@ import ResultScreen from 'components/screens/ResultScreen';
 import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
-import { useTransactionsQuery } from '../../api/useTransactionsQuery';
 import TransactionRow from '../TransactionRow';
 
 import getTransactionListStyles from './styles';
@@ -29,9 +29,9 @@ export default function TransactionList({ mode = 'overview', style }) {
     fetchNextPage: fetchNextTransactionsPage,
     hasNextPage: hasTransactionsNextPage,
     isFetchingNextPage: isFetchingTransactionsNextPage,
-  } = useTransactionsQuery({
+  } = useAccountTransactionsQuery({
     config: {
-      params: { limit: mode === 'overview' ? 3 : LIMIT },
+      params: { limit: mode === 'overview' ? 2 : LIMIT },
     },
   });
 
@@ -82,11 +82,11 @@ export default function TransactionList({ mode = 'overview', style }) {
         error={errorOnTransactions && errorOnTransactions.response?.status !== 404}
         renderData={(data) => (
           <InfiniteScrollList
-            data={data.slice(0, 2)}
-            keyExtractor={(item) => item.tokenID}
+            data={data}
+            keyExtractor={(item) => item.id}
             renderItem={(item) => <TransactionRow transaction={item} />}
             fetchNextPage={fetchNextTransactionsPage}
-            hasNextPage={hasTransactionsNextPage}
+            hasNextPage={mode === 'full' && hasTransactionsNextPage}
             isFetchingNextPage={isFetchingTransactionsNextPage}
           />
         )}

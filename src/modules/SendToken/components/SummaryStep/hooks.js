@@ -1,19 +1,17 @@
 /* eslint-disable max-statements */
 import { useSelector } from 'react-redux';
+import * as Lisk from '@liskhq/lisk-client';
 
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
+import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
-import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
-import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
-import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
-import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
-export function useSendTokenSummary({ form }) {
+export function useSendTokenSummary({ form, transaction }) {
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
 
   const bookmarks = useSelector(selectBookmarkList);
-
-  const { data: tokensData } = useAccountTokensQuery();
 
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');
@@ -35,17 +33,15 @@ export function useSendTokenSummary({ form }) {
     (account) => account.address === recipientAccountAddress
   ) || { address: recipientAccountAddress, isNew: true };
 
-  const token = tokensData.data?.find((_token) => _token.tokenID === tokenID);
+  const { data: supportedTokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
-  const transactionFee = useTransactionFeeCalculator({
-    tokenID,
-    amount,
-    priority,
-    message,
-  });
+  const token = supportedTokensData?.find((_token) => _token.tokenID === tokenID);
+
+  const transactionFee = Lisk.transactions.convertBeddowsToLSK(
+    transaction.data.transaction.fee.toString()
+  );
 
   const initializationFee = useInitializationFeeCalculator({
-    tokenID,
     recipientAccountAddress,
   });
 

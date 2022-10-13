@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 import { themes } from 'constants/styleGuide';
 
 import setSecondPassphraseLight from 'assets/images/txDetail/second-passphrase-light.png';
@@ -34,12 +36,6 @@ const commands = {
   reclaimLSK: 0,
   reportDelegateMisbehavior: 3,
 };
-
-export const DEFAULT_PRIORITY = [
-  { title: 'Low', amount: 0 },
-  { title: 'Medium', amount: 0 },
-  { title: 'High', amount: 0 },
-];
 
 export const moduleCommandNameIdMap = {
   transfer: `${modules.token}:${commands.transfer}`,
@@ -82,18 +78,6 @@ export const moduleAssetMap = {
   },
 };
 
-/**
- * Since react-navigation doesn't support i18n
- * I've created this dummy function to help i18n scanner
- * understand about these titles.
- * We can remove this as soon as react-navigation supports i18n or
- * we change the router to another lib with i18n support.
- *
- * @param {String} str
- * @returns {String} same as the input string
- */
-const t = (str) => str;
-
 export const transferAssetSchema = {
   $id: 'lisk/transfer-asset',
   title: 'Transfer transaction asset',
@@ -123,31 +107,31 @@ export const transactions = {
   [moduleCommandNameIdMap.transfer]: {
     moduleAssetId: '2:0',
     fee: 1e7,
-    title: t('Transfer'),
+    title: i18next.t('Transfer'),
     image: (theme) => (theme === themes.light ? transferLight : transferDark),
   },
   [moduleCommandNameIdMap.registerMultisignatureGroup]: {
     moduleAssetId: '4:0',
     fee: 5e8,
-    title: t('Register multisignature group'),
+    title: i18next.t('Register multisignature group'),
     image: (theme) => (theme === themes.light ? setSecondPassphraseLight : setSecondPassphraseDark),
   },
   [moduleCommandNameIdMap.registerDelegate]: {
     moduleAssetId: '5:0',
     fee: 25e8,
-    title: t('Delegate registration'),
+    title: i18next.t('Delegate registration'),
     image: (theme) => (theme === themes.light ? registerDelegateLight : registerDelegateDark),
   },
   [moduleCommandNameIdMap.voteDelegate]: {
     moduleAssetId: '5:1',
     fee: 1e8,
-    title: t('Vote'),
+    title: i18next.t('Vote'),
     image: (theme) => (theme === themes.light ? voteLight : voteDark),
   },
   [moduleCommandNameIdMap.unlockToken]: {
     moduleAssetId: '5:2',
     fee: 1e8,
-    title: t('Unlock'),
+    title: i18next.t('Unlock'),
     image: (theme) => (theme === themes.light ? txUnlockLight : txUnlockDark),
   },
 };
@@ -156,7 +140,7 @@ export const getTxConstant = ({ moduleAssetId }) => {
   const result = transactions[moduleAssetId] ?? {};
   return {
     ...result,
-    title: result?.title ?? t('Transaction'),
+    title: result?.title ?? i18next.t('Transaction'),
     image: result?.image
       ? result?.image
       : (theme) => (theme === themes.light ? txUnknownLight : txUnknownDark),

@@ -5,5 +5,5 @@ import { APPLICATION } from '../queries';
 export function useQueryKeys(keys) {
   const [{ chainID }] = useCurrentBlockchainApplication();
 
-  return [chainID, APPLICATION, METHOD, ...keys];
+  return [...keys, chainID, APPLICATION, METHOD];
 }

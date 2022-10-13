@@ -20,9 +20,12 @@ export class Transaction {
 
   _auth = null;
 
+  _feeEstimatePerByte = null;
+
   transaction = {
     module: null,
     command: null,
+    priority: null,
     nonce: BigInt(0),
     fee: BigInt(0),
     senderPublicKey: null,
@@ -40,6 +43,7 @@ export class Transaction {
     pubkey,
     networkStatus,
     auth,
+    feeEstimatePerByte,
     commandParametersSchemas,
     module = null,
     command = null,
@@ -49,6 +53,7 @@ export class Transaction {
     this.isLoading = false;
     this._networkStatus = networkStatus;
     this._auth = auth;
+    this._feeEstimatePerByte = feeEstimatePerByte;
     this.transaction.senderPublicKey = Buffer.isBuffer(pubkey)
       ? pubkey
       : Buffer.from(pubkey, 'hex');
@@ -153,20 +158,21 @@ export class Transaction {
   /**
    * Compute transaction fee
    */
-  computeFee() {
+  computeFee(extraFee = BigInt(0)) {
     this._validateTransaction();
 
-    const computeMinFeeOptions = {
-      minFeePerByte: this._networkStatus.genesis.minFeePerByte,
+    const transactionSize = Lisk.transactions.getBytes(this.transaction, this._paramsSchema).length;
+
+    const baseFee = Lisk.transactions.computeMinFee(this.transaction, this._paramsSchema, {
       numberOfSignatures: this._auth.numberOfSignatures || 1,
       numberOfEmptySignatures: 0,
-    };
+    });
 
-    const fee = Lisk.transactions.computeMinFee(
-      this.transaction,
-      this._paramsSchema,
-      computeMinFeeOptions
-    );
+    const priorityFee = this.transaction.priority
+      ? this._feeEstimatePerByte[this.transaction.priority]
+      : 0;
+
+    const fee = baseFee + BigInt(priorityFee * transactionSize) + extraFee;
 
     this.transaction = { ...this.transaction, fee };
   }

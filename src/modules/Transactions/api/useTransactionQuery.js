@@ -1,8 +1,8 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import { GET_TRANSACTION_QUERY } from 'utilities/api/queries';
 import { API_URL } from 'utilities/api/constants';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
-import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
 
 /**
  * Fetch a transaction based on provided ID.
