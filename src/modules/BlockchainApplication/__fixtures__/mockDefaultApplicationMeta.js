@@ -9,7 +9,7 @@ export const mockDefaultApplicationMeta = {
   serviceURLs: [
     {
       http: 'http://165.22.29.229:9901',
-      ws: 'wss://http://165.22.29.229:9901',
+      ws: 'ws://165.22.29.229:9901/blockchain',
     },
   ],
   logo: {
