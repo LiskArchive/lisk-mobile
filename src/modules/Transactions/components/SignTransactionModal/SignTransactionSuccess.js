@@ -8,11 +8,11 @@ import TxSuccessSvg from 'assets/svgs/TxSuccesSvg';
 import TxSuccessDarkSvg from 'assets/svgs/TxSuccessDarkSvg';
 import { themes } from 'constants/styleGuide';
 
-import getSendTokenSuccessStyles from './styles';
+import { getSignTransactionSuccessStyles } from './styles';
 
 export default function SendTokenSuccess({ onClick }) {
   const { styles, theme } = useTheme({
-    styles: getSendTokenSuccessStyles(),
+    styles: getSignTransactionSuccessStyles(),
   });
 
   return (

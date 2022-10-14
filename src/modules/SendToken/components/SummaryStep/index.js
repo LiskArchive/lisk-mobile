@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
+import { useController } from 'react-hook-form';
 
 import { useTheme } from 'hooks/useTheme';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
@@ -9,10 +10,15 @@ import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 
 import getSendTokenSummaryStepStyles from './styles';
 import { useSendTokenSummary } from './hooks';
-import { SendTokenSummaryModal } from './components';
+import { SignTransactionModal } from '../../../Transactions/components/SignTransactionModal';
 
 export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
   const [showSendTokenSummaryModal, setShowSendTokenSummaryModal] = useState(false);
+
+  const { field } = useController({
+    name: 'userPassword',
+    control: form.control,
+  });
 
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');
@@ -58,16 +64,24 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
         </View>
       </View>
 
-      <SendTokenSummaryModal
+      <SignTransactionModal
         show={showSendTokenSummaryModal}
         setShow={setShowSendTokenSummaryModal}
-        summary={summary}
-        form={form}
-        handleResetForm={() => {
+        onSubmit={form.handleSubmit}
+        onSuccess={() => {
           form.handleReset();
           reset();
         }}
-        handleResetStepper={reset}
+        onError={reset}
+        password={field.value}
+        onPasswordChange={field.onChange}
+        isValidationError={Object.keys(form.formState.errors).length > 0}
+        amount={summary.amount}
+        token={summary.token}
+        isSuccess={form.broadcastTransactionMutation.isSuccess}
+        isLoading={form.broadcastTransactionMutation.isLoading}
+        error={form.broadcastTransactionMutation.error}
+        onReset={form.broadcastTransactionMutation.reset}
       />
     </>
   );
