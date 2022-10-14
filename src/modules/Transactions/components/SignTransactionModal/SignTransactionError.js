@@ -7,13 +7,13 @@ import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
 import TxErrorSvg from 'assets/svgs/TxErrorSvg';
 
-import getSendTokenErrorStyles from './styles';
+import { getSignTransactionErrorStyles } from './styles';
 
-export default function SendTokenError({ onClick, error }) {
+export default function SignTransactionError({ onClick, error }) {
   const emailReport = useEmailReport({ error, errorMessage: 'Error sending token' });
 
   const { styles } = useTheme({
-    styles: getSendTokenErrorStyles(),
+    styles: getSignTransactionErrorStyles(),
   });
 
   return (

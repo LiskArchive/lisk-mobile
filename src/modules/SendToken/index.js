@@ -70,13 +70,7 @@ export default function SendToken({ route }) {
       ) : (
         <Stepper showProgressBar styles={{ progressBar: { wrapper: styles.progressBar } }}>
           {steps.map((step) => (
-            <step.component
-              key={step.title}
-              navigation={navigation}
-              route={route}
-              form={form}
-              transaction={transaction}
-            />
+            <step.component key={step.title} route={route} form={form} transaction={transaction} />
           ))}
         </Stepper>
       )}

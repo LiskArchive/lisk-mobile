@@ -1,45 +1,42 @@
 import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
-import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
-import { stringShortener } from 'utilities/helpers';
 import Input from 'components/shared/toolBox/input';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { stringShortener } from 'utilities/helpers';
 
-import getConfirmAndSignTransactionStyles from './styles';
+import getConfirmTransactionStyles from './styles';
 
-export default function ConfirmAndSignTransaction({ amount, token, form, onSuccess, onError }) {
-  const { field } = useController({
-    name: 'userPassword',
-    control: form.control,
-  });
-
+export default function ConfirmTransaction({
+  amount,
+  token,
+  password,
+  onPasswordChange,
+  onSuccess,
+  onError,
+  isLoading,
+  isSuccess,
+  error,
+  isValidationError,
+  onSubmit,
+}) {
   const [currentAccount] = useCurrentAccount();
 
   const { styles } = useTheme({
-    styles: getConfirmAndSignTransactionStyles(),
+    styles: getConfirmTransactionStyles(),
   });
 
   useEffect(() => {
-    if (form.broadcastTransactionMutation.isSuccess) {
-      onSuccess();
-      form.broadcastTransactionMutation.reset();
-    }
+    if (isSuccess) onSuccess();
 
-    if (form.broadcastTransactionMutation.error) {
-      onError(form.broadcastTransactionMutation.error);
-      form.broadcastTransactionMutation.reset();
-    }
-  }, [form.broadcastTransactionMutation, onSuccess, onError]);
+    if (error) onError(error);
+  }, [isSuccess, error, onSuccess, onError]);
 
-  const submitDisabled =
-    form.broadcastTransactionMutation.isLoading ||
-    !field.value ||
-    Object.keys(form.formState.errors).length > 0;
+  const submitDisabled = isLoading || !password || isValidationError;
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -79,30 +76,29 @@ export default function ConfirmAndSignTransaction({ amount, token, form, onSucce
           }}
           placeholder={i18next.t('sendToken.confirmAndSign.passwordInputPlaceholder')}
           secureTextEntry
-          onChange={field.onChange}
-          value={field.value}
+          onChange={onPasswordChange}
+          value={password}
         />
       </View>
 
       <View>
-        {Object.keys(form.formState.errors).length > 0 && (
+        {isValidationError && (
           <Text style={[styles.errorText]}>{i18next.t('sendToken.errors.generalMessage')}</Text>
         )}
 
         <PrimaryButton
           noTheme
-          onClick={form.handleSubmit}
-          title={
-            form.broadcastTransactionMutation.isLoading
-              ? i18next.t('sendToken.confirmAndSign.loadingText')
-              : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText', {
-                  amount,
-                  tokenSymbol: token?.symbol,
-                })
-          }
+          onClick={onSubmit}
           style={{ marginBottom: 24 }}
           disabled={submitDisabled}
-        />
+        >
+          {isLoading
+            ? i18next.t('sendToken.confirmAndSign.loadingText')
+            : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText', {
+                amount,
+                tokenSymbol: token?.symbol,
+              })}
+        </PrimaryButton>
       </View>
     </View>
   );

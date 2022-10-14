@@ -11,6 +11,7 @@ import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplicatio
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { useTransactionFeeEstimateQuery } from 'modules/Transactions/api/useTransactionFeeEstimateQuery';
+import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -22,7 +23,6 @@ import DataRenderer from 'components/shared/DataRenderer';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import colors from 'constants/styleGuide/colors';
-import { PRIORITY_NAMES_MAP } from '../../constants';
 
 import { useTokenAmountInCurrency } from './hooks';
 import getSendTokenSelectTokenStepStyles, {
