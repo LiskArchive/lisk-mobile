@@ -64,12 +64,16 @@ export function SignTransactionModal({
             onSubmit={onSubmit}
             onSuccess={() => {
               setActiveStep('success');
-              if (onReset) onReset();
+              if (onReset) {
+                onReset();
+              }
             }}
             onError={(__error) => {
               _setError(__error);
               setActiveStep('error');
-              if (onReset) onReset();
+              if (onReset) {
+                onReset();
+              }
             }}
             isLoading={isLoading}
             isSuccess={isSuccess}

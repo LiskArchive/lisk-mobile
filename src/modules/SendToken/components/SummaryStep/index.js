@@ -6,11 +6,11 @@ import { useController } from 'react-hook-form';
 
 import { useTheme } from 'hooks/useTheme';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
+import { SignTransactionModal } from 'modules/Transactions/components/SignTransactionModal';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 
 import getSendTokenSummaryStepStyles from './styles';
 import { useSendTokenSummary } from './hooks';
-import { SignTransactionModal } from '../../../Transactions/components/SignTransactionModal';
 
 export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
   const [showSendTokenSummaryModal, setShowSendTokenSummaryModal] = useState(false);

@@ -5,15 +5,15 @@ import i18next from 'i18next';
 import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'hooks/useTheme';
+import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import { P } from 'components/shared/toolBox/typography';
-import TokenSvg from 'assets/svgs/TokenSvg';
-import { stringShortener } from 'utilities/helpers';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import Avatar from 'components/shared/avatar';
+import TokenSvg from 'assets/svgs/TokenSvg';
+import { stringShortener } from 'utilities/helpers';
 
 import getTransactionSummaryStyles from './styles';
 import { useTransactionSummary } from './hooks';
-import { PRIORITY_NAMES_MAP } from '../../../SendToken/constants';
 
 export default function TransactionSummary(transaction) {
   const summary = useTransactionSummary(transaction);

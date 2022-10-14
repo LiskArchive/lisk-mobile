@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
-import { mockTokensMeta } from 'modules/SendToken/__fixtures__';
+import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import {

@@ -12,9 +12,9 @@ import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/h
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
+import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
-import { mockTokensMeta } from '../__fixtures__';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess }) {
   const [currentAccount] = useCurrentAccount();

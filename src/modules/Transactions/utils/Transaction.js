@@ -1,17 +1,16 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-statements */
-
 import * as Lisk from '@liskhq/lisk-client';
+import { BASE_TRANSACTION_SCHEMA } from './constants';
 
 import {
-  baseTransactionSchema,
   getCommandParamsSchema,
   decodeTransaction,
   decodeBaseTransaction,
   encodeTransaction,
   toTransactionJSON,
   fromTransactionJSON,
-} from './encoding';
+} from './helpers';
 
 export class Transaction {
   _paramsSchema = null;
@@ -228,7 +227,7 @@ export class Transaction {
 
     const { params, ...rest } = this.transaction;
 
-    Lisk.validator.validator.validate(baseTransactionSchema, {
+    Lisk.validator.validator.validate(BASE_TRANSACTION_SCHEMA, {
       ...rest,
       params: Buffer.alloc(0),
     });

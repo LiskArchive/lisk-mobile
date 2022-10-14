@@ -2,7 +2,7 @@ import { useMemo, useRef } from 'react';
 
 import { APIClient } from 'utilities/api/APIClient';
 import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
-import { mockTokensMeta } from 'modules/SendToken/__fixtures__';
+import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useSupportedTokensQuery } from './useSupportedTokensQuery';
 
 /**

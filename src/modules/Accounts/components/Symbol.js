@@ -1,10 +1,13 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { getTxConstant, moduleCommandNameIdMap } from 'modules/SendToken/constants';
+
+import { MODULE_COMMAND_MAP } from 'modules/Transactions/utils/constants';
+import { getTxConstant } from 'modules/Transactions/utils/helpers';
 import { colors, themes } from 'constants/styleGuide';
 import Avatar from 'components/shared/avatar';
 import Icon from 'components/shared/toolBox/icon';
 import withTheme from 'components/shared/withTheme';
+
 import getStyles from './styles';
 
 const Symbol = ({ token, theme, direction, address, styles, moduleAssetId }) => {
@@ -19,7 +22,7 @@ const Symbol = ({ token, theme, direction, address, styles, moduleAssetId }) => 
       </View>
     );
   }
-  if (moduleAssetId === moduleCommandNameIdMap.transfer) {
+  if (moduleAssetId === MODULE_COMMAND_MAP.transfer) {
     return <Avatar address={address} size={40} style={styles.theme.avatar} />;
   }
   return (
