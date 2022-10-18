@@ -3,6 +3,7 @@ import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_TOKENS_METADATA_QUERY } from 'utilities/api/queries';
 import { LIMIT, API_URL, NETWORK } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
+import blockchainAppsMetaAPIClient from 'utilities/api/BlockchainAppsMetaAPIClient';
 
 /**
  * Fetch list of blockchain applications tokens off-chain metadata.
@@ -18,12 +19,14 @@ export function useTokenMetaQuery(tokenID, { config: customConfig = {}, options 
   const config = {
     url: `${API_URL}/blockchain/apps/meta/tokens`,
     method: 'get',
-    event: 'get.token.meta',
+    event: 'get.blockchain.apps.meta.tokens',
     ...customConfig,
     params: { network: NETWORK, limit: LIMIT, tokenID, chainID, ...customConfig.params },
   };
 
+  // console.log({ blockchainAppsMetaAPIClient });
+
   const keys = useQueryKeys([GET_TOKENS_METADATA_QUERY]);
 
-  return useCustomQuery({ config, options, keys });
+  return useCustomQuery({ config, options, keys, client: blockchainAppsMetaAPIClient });
 }

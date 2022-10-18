@@ -12,7 +12,9 @@ const BridgeApplication = ({ nextStep }) => {
   const { setUri } = usePairings();
 
   const { styles } = useTheme({ styles: getStyles });
-  const [inputUri, setInputUri] = useState('');
+  const [inputUri, setInputUri] = useState(
+    'wc:14d776de76a15c3da00e336f07feebb5d1a8a00bc62b3d67d9eeb387b0010578@2?relay-protocol=iridium&symKey=d94b65bd743e2729cd62a6e5196bdaf24a67c8c92b9876ca6ab7dd99fc00ab21'
+  );
 
   const onSubmit = () => {
     setUri(inputUri);

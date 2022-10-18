@@ -15,6 +15,7 @@ const usePairings = () => {
    * @param {string} uri - The URI received from the web app.
    */
   const setUri = useCallback((uri) => {
+    // console.log({ client });
     if (client?.pair && uri) {
       return client.pair({ uri });
     }
