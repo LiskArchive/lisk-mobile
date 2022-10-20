@@ -21,8 +21,6 @@ export function useTokensMetaQuery({ config: customConfig = {}, options = {} } =
     params: { network: NETWORK, limit: LIMIT, ...customConfig.params },
   };
 
-  console.log({ blockchainAppsMetaAPIClient });
-
   const keys = useQueryKeys([GET_TOKENS_METADATA_QUERY]);
 
   return useCustomInfiniteQuery({ config, options, keys, client: blockchainAppsMetaAPIClient });

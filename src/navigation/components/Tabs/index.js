@@ -16,15 +16,16 @@ const Tab = createBottomTabNavigator();
 export default function Tabs() {
   const { session } = useSession();
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const [
+    showExternalApplicationSignatureRequestModal,
+    setShowExternalApplicationSignatureRequestModal,
+  ] = useState(false);
 
   useEffect(() => {
     if (session.request) {
-      setModalOpen(true);
+      setShowExternalApplicationSignatureRequestModal(true);
     }
   }, [session.request]);
-
-  const closeModal = () => setModalOpen(false);
 
   return (
     <>
@@ -63,8 +64,16 @@ export default function Tabs() {
         <Tab.Screen name="Settings" component={Settings} options={getTabBarIcon} />
       </Tab.Navigator>
 
-      <BottomModal show={modalOpen} toggleShow={closeModal}>
-        <ExternalApplicationSignatureRequest session={session.request} onFinish={closeModal} />
+      <BottomModal
+        show={showExternalApplicationSignatureRequestModal}
+        toggleShow={() =>
+          setShowExternalApplicationSignatureRequestModal((prevState) => !prevState)
+        }
+      >
+        <ExternalApplicationSignatureRequest
+          session={session.request}
+          onCancel={() => setShowExternalApplicationSignatureRequestModal(false)}
+        />
       </BottomModal>
     </>
   );

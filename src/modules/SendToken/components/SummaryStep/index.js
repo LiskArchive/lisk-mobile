@@ -6,9 +6,10 @@ import { useController } from 'react-hook-form';
 
 import { useTheme } from 'hooks/useTheme';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
-import { SignTransactionModal } from 'modules/Transactions/components/SignTransactionModal';
+import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
+import BottomModal from 'components/shared/BottomModal';
 
 import getSendTokenSummaryStepStyles from './styles';
 
@@ -64,25 +65,25 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
         </View>
       </View>
 
-      <SignTransactionModal
-        show={showSendTokenSummaryModal}
-        setShow={setShowSendTokenSummaryModal}
-        onSubmit={form.handleSubmit}
-        onSuccess={() => {
-          form.handleReset();
-          reset();
-        }}
-        onError={reset}
-        password={field.value}
-        onPasswordChange={field.onChange}
-        isValidationError={Object.keys(form.formState.errors).length > 0}
-        amount={summary.amount}
-        token={summary.token}
-        isSuccess={form.broadcastTransactionMutation.isSuccess}
-        isLoading={form.broadcastTransactionMutation.isLoading}
-        error={form.broadcastTransactionMutation.error}
-        onReset={form.broadcastTransactionMutation.reset}
-      />
+      <BottomModal show={showSendTokenSummaryModal} showClose={false}>
+        <SignTransaction
+          onSubmit={form.handleSubmit}
+          onSuccess={() => {
+            form.handleReset();
+            reset();
+          }}
+          onError={reset}
+          password={field.value}
+          onPasswordChange={field.onChange}
+          isValidationError={Object.keys(form.formState.errors).length > 0}
+          amount={summary.amount}
+          token={summary.token}
+          isSuccess={form.broadcastTransactionMutation.isSuccess}
+          isLoading={form.broadcastTransactionMutation.isLoading}
+          error={form.broadcastTransactionMutation.error}
+          onReset={form.broadcastTransactionMutation.reset}
+        />
+      </BottomModal>
     </>
   );
 }

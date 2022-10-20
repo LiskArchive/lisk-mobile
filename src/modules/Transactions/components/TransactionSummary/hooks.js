@@ -36,6 +36,8 @@ export function useTransactionSummary({
 
   const { data: supportedTokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
+  console.log({ supportedTokensData, recipientApplication });
+
   const token = supportedTokensData?.find((_token) => _token.tokenID === tokenID);
 
   const transactionFee = Lisk.transactions.convertBeddowsToLSK(fee.toString());

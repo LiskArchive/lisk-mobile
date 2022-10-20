@@ -1,5 +1,5 @@
 import { useContext, useEffect, useCallback } from 'react';
-import { client } from '../utils/connectionCreator';
+import { signClient } from '../utils/connectionCreator';
 import ConnectionContext from '../context/connectionContext';
 import { onApprove, onReject } from '../utils/sessionHandlers';
 import usePairings from './usePairings';
@@ -11,7 +11,7 @@ const useSession = () => {
 
   const approve = useCallback(async (selectedAccounts) => {
     let status = PAIRING_PROPOSAL_STATUS.FAILED;
-    const proposalEvents = events.find(e => e.name === EVENTS.SESSION_PROPOSAL);
+    const proposalEvents = events.find((e) => e.name === EVENTS.SESSION_PROPOSAL);
     if (proposalEvents) {
       setSession({
         ...session,
@@ -26,7 +26,7 @@ const useSession = () => {
   }, []);
 
   const reject = useCallback(async () => {
-    const proposalEvents = events.find(e => e.name === EVENTS.SESSION_PROPOSAL);
+    const proposalEvents = events.find((e) => e.name === EVENTS.SESSION_PROPOSAL);
     if (proposalEvents) {
       setSession({ ...session, request: false });
       await onReject(proposalEvents.meta);
@@ -34,14 +34,13 @@ const useSession = () => {
   }, []);
 
   useEffect(() => {
-    if (client?.session && !session.loaded) {
-      const lastKeyIndex = client.session.keys.length - 1;
-      const data = (lastKeyIndex === 0)
-        ? client.session.get(client.session.keys[lastKeyIndex])
-        : false;
+    if (signClient?.session && !session.loaded) {
+      const lastKeyIndex = signClient.session.keys.length - 1;
+      const data =
+        lastKeyIndex === 0 ? signClient.session.get(signClient.session.keys[lastKeyIndex]) : false;
       setSession({ ...session, loaded: true, data });
     }
-  }, [client, session]);
+  }, [signClient, session]);
 
   return {
     reject,

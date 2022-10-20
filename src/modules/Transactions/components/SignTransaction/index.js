@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import BottomModal from 'components/shared/BottomModal';
-
 import ConfirmTransaction from '../ConfirmTransaction';
 import SignTransactionSuccess from './SignTransactionSuccess';
 import SignTransactionError from './SignTransactionError';
 
-export function SignTransactionModal({
-  show,
-  setShow,
+export function SignTransaction({
   onSuccess,
   onError,
   password,
@@ -28,29 +24,6 @@ export function SignTransactionModal({
   const [activeStep, setActiveStep] = useState('confirm');
 
   const [_error, _setError] = useState();
-
-  function handleToggleShow() {
-    switch (activeStep) {
-      case 'confirm':
-        setShow(false);
-        break;
-
-      case 'success':
-        onSuccess();
-        setShow(false);
-        navigation.navigate('Home');
-        break;
-
-      case 'error':
-        onError();
-        setShow(false);
-        break;
-
-      default:
-        setShow(false);
-        break;
-    }
-  }
 
   function renderStep() {
     switch (activeStep) {
@@ -87,7 +60,6 @@ export function SignTransactionModal({
           <SignTransactionSuccess
             onClick={() => {
               onSuccess();
-              setShow(false);
               navigation.navigate('Home');
             }}
           />
@@ -98,7 +70,6 @@ export function SignTransactionModal({
           <SignTransactionError
             onClick={() => {
               onError();
-              setShow(false);
             }}
             error={_error}
           />
@@ -109,9 +80,5 @@ export function SignTransactionModal({
     }
   }
 
-  return (
-    <BottomModal show={show} toggleShow={handleToggleShow}>
-      {renderStep()}
-    </BottomModal>
-  );
+  return renderStep();
 }

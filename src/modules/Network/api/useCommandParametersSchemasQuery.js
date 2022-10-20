@@ -19,7 +19,7 @@ export function useCommandParametersSchemasQuery({ config: customConfig = {}, op
   const config = {
     url: `${API_URL}/schemas`,
     method: 'get',
-    event: 'get.commands.parameters.schemas',
+    event: 'get.schemas',
     ...customConfig,
     params: { ...customConfig.params },
   };

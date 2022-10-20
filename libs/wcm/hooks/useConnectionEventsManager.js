@@ -1,15 +1,13 @@
 import { useCallback, useEffect, useContext } from 'react';
-import { client } from '../utils/connectionCreator';
+import { signClient } from '../utils/connectionCreator';
 import ConnectionContext from '../context/connectionContext';
 import { EVENTS } from '../constants/lifeCycle';
 
 const useWalletConnectEventsManager = () => {
-  const {
-    pushEvent, disconnect, session, setSession,
-  } = useContext(ConnectionContext);
+  const { pushEvent, disconnect, session, setSession } = useContext(ConnectionContext);
 
   const onSessionRequest = useCallback(async (event) => {
-    const request = client.session.get(event.topic);
+    const request = signClient.session.get(event.topic);
 
     setSession({ ...session, request });
   }, []);
@@ -29,17 +27,12 @@ const useWalletConnectEventsManager = () => {
   }, []);
 
   useEffect(() => {
-    if (client?.on) {
+    if (signClient?.on) {
       Object.keys(EVENTS).forEach((eventName) => {
-        client.on(EVENTS[eventName], eventHandler.bind(null, EVENTS[eventName]));
+        signClient.on(EVENTS[eventName], eventHandler.bind(null, EVENTS[eventName]));
       });
     }
-  }, [
-    onSessionRequest,
-    onSessionDelete,
-    eventHandler,
-    client?.on,
-  ]);
+  }, [onSessionRequest, onSessionDelete, eventHandler, signClient?.on]);
 };
 
 export default useWalletConnectEventsManager;

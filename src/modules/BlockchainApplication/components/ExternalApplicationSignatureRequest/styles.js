@@ -3,27 +3,39 @@ import { boxes, colors, fonts } from 'constants/styleGuide';
 export default {
   common: {
     container: {
-      padding: boxes.boxPadding,
       flex: 1,
     },
     imageContainer: {
       alignItems: 'center',
     },
-    image: {
-      width: 50,
-      height: 50,
-      marginBottom: 10,
-      borderRadius: 25,
+    applicationLogoImage: {
+      borderRadius: 50,
+      width: 40,
+      height: 40,
+      borderWidth: 1,
+      borderColor: colors.light.platinumGray,
+      marginBottom: 8,
     },
-    title: {
+    applicationTitle: {
+      fontSize: fonts.size.base,
       textAlign: 'center',
-      marginBottom: 10,
+      marginBottom: 16,
     },
-    urlContainer: {
+    applicationUrlContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: 5,
+      marginBottom: 4,
+    },
+    applicationUrl: {
+      marginLeft: 4,
+      color: colors.light.ultramarineBlue,
+      fontFamily: fonts.family.contextSemiBold,
+    },
+    applicationChainIDContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     accountItem: {
       flexDirection: 'row',
@@ -31,20 +43,18 @@ export default {
       marginVertical: 5,
     },
     accountContent: {
-      paddingLeft: 10,
+      paddingLeft: 8,
     },
-    url: {
-      marginLeft: 5,
-      color: colors.light.ultramarineBlue,
-      fontFamily: fonts.family.contextSemiBold,
+    labelContainer: {
+      marginBottom: 8,
     },
     label: {
       color: colors.light.blueGray,
-      marginRight: 5,
+      marginRight: 4,
     },
     description: {
       fontFamily: fonts.family.regular,
-      marginVertical: 5,
+      marginVertical: 4,
     },
     value: {
       fontSize: fonts.size.input,
@@ -55,24 +65,21 @@ export default {
     horizontalLine: {
       borderBottomColor: colors.light.platinumGray,
       borderBottomWidth: 1,
+      marginTop: boxes.boxPadding,
+      marginBottom: boxes.boxPadding,
     },
     buttonContainer: {
       flexDirection: 'row',
+      paddingBottom: boxes.boxPadding,
     },
     button: {
       flex: 1,
-      marginHorizontal: 5,
+      marginHorizontal: 4,
     },
     outlineButton: {
       backgroundColor: 'transparent',
       borderWidth: 2,
       borderColor: colors.light.platinumGray,
-    },
-    outlineButtonText: {
-      color: colors.light.zodiacBlue,
-    },
-    buttonText: {
-      fontFamily: fonts.family.contextSemiBold,
     },
   },
 };
