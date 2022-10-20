@@ -40,8 +40,6 @@ export default function TokenList({ mode = 'overview', style }) {
     },
   });
 
-  console.log({ tokensData });
-
   const hasLockedTokens = useMemo(
     () => tokensData?.data?.some((token) => token.lockedBalances) || false,
     [tokensData?.data]

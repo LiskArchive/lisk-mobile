@@ -17,8 +17,4 @@ export async function createSignClient() {
       icons: ['https://lisk.com/documentation/_/img/lisk-symbol.svg'],
     },
   });
-
-  console.log({ createSignClient: signClient });
-
-  // return signClient;
 }

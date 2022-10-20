@@ -24,8 +24,6 @@ export function useTokenMetaQuery(tokenID, { config: customConfig = {}, options 
     params: { network: NETWORK, limit: LIMIT, tokenID, chainID, ...customConfig.params },
   };
 
-  // console.log({ blockchainAppsMetaAPIClient });
-
   const keys = useQueryKeys([GET_TOKENS_METADATA_QUERY]);
 
   return useCustomQuery({ config, options, keys, client: blockchainAppsMetaAPIClient });
