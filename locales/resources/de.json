@@ -142,7 +142,7 @@
   "Your connection seems to be down, try again later.": "Deine Verbindung scheint unterbrochen zu sein, bitte versuch es spääter noch einmal.",
   "Your Lisk address": "Deine Lisk-Adresse",
   "Your Bitcoin address": "Deine Bitcoin-Adresse",
-  "Your account is not initialized.": "Dein Konto ist nicht initialisiert.",  
+  "Your account is not initialized.": "Dein Konto ist nicht initialisiert.",
   "Your passphrase": "Deine Passphrase",
   "Your passphrase is still needed": "Deine Passphrase wird immer noch gebraucht",
   "Your passphrase is used to access your account. No one can reset it, not even Lisk.": "Deine Passphrase wird benutzt, um auf dein Konto zuzugreifen. Niemand kann sie zurücksetzen, nicht einmal Lisk.",
@@ -404,6 +404,10 @@
         "addApplication": "",
         "enterConnectionUri": ""
       }
+    },
+    "signing": {
+      "information": "",
+      "description": ""
     }
   },
   "requestTokens": {

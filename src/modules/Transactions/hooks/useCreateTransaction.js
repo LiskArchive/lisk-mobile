@@ -20,20 +20,28 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     data: networkStatusData,
     isLoading: isNetworkStatusLoading,
     isSuccess: isNetworkStatusSuccess,
+    isError: isErrorOnNetworkStatus,
   } = useNetworkStatusQuery();
 
-  const { data: authData, isLoading: isAuthLoading, isSuccess: isAuthSuccess } = useAuthQuery();
+  const {
+    data: authData,
+    isLoading: isAuthLoading,
+    isSuccess: isAuthSuccess,
+    isError: isErrorOnAuth,
+  } = useAuthQuery();
 
   const {
     data: commandParametersSchemasData,
     isLoading: isCommandParametersSchemasLoading,
     isSuccess: isCommandParametersSchemasSuccess,
+    isError: isErrorOnCommandParametersSchemas,
   } = useCommandParametersSchemasQuery();
 
   const {
     data: transactionFeeEstimateData,
     isLoading: isTransactionFeeEstimateLoading,
     isSuccess: isTransactionFeeEstimateSuccess,
+    isError: isErrorOnTransactionFeeEstimate,
   } = useTransactionFeeEstimateQuery();
 
   const isLoading =
@@ -48,6 +56,12 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isCommandParametersSchemasSuccess &&
     isTransactionFeeEstimateSuccess;
 
+  const isError =
+    isErrorOnNetworkStatus ||
+    isErrorOnAuth ||
+    isErrorOnCommandParametersSchemas ||
+    isErrorOnTransactionFeeEstimate;
+
   useEffect(
     () => {
       if (isSuccess) {
@@ -56,7 +70,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
           networkStatus: networkStatusData?.data,
           auth: authData?.data,
           feeEstimatePerByte: transactionFeeEstimateData?.data.feeEstimatePerByte,
-          commandParametersSchemas: commandParametersSchemasData?.data,
+          commandParametersSchemas: commandParametersSchemasData?.data.commands,
           module,
           command,
           encodedTransaction,
@@ -67,5 +81,5 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     [isSuccess, transaction, encodedTransaction, module, pubkey, command]
   );
 
-  return { data: transaction, isLoading, isSuccess };
+  return { data: transaction, isLoading, isSuccess, isError };
 }

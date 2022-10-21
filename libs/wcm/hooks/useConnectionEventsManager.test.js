@@ -1,17 +1,17 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import { client } from '../utils/connectionCreator';
+import { signClient } from '../utils/connectionCreator';
 import { EVENTS } from '../constants/lifeCycle';
 import useConnectionEventsManager from './useConnectionEventsManager';
 
 const listeners = {};
 jest.mock('../utils/connectionCreator', () => ({
-  client: {
+  signClient: {
     listeners,
     on: jest.fn().mockImplementation((name, listener) => {
       listeners[name] = listener;
     }),
-    session: { get: jest.fn(topic => ({ topic })) },
+    session: { get: jest.fn((topic) => ({ topic })) },
   },
 }));
 
@@ -31,7 +31,7 @@ describe('useConnectionEventsManager', () => {
     renderHook(() => useConnectionEventsManager());
 
     Object.keys(EVENTS).forEach((eventName) => {
-      expect(client.on).toHaveBeenCalledWith(EVENTS[eventName], expect.any(Function));
+      expect(signClient.on).toHaveBeenCalledWith(EVENTS[eventName], expect.any(Function));
     });
   });
 
@@ -42,7 +42,7 @@ describe('useConnectionEventsManager', () => {
       const event = {
         topic: '0x123',
       };
-      client.listeners[EVENTS[eventName]](event);
+      signClient.listeners[EVENTS[eventName]](event);
       expect(pushEvent).toHaveBeenCalledWith({
         name: EVENTS[eventName],
         meta: event,
@@ -60,7 +60,7 @@ describe('useConnectionEventsManager', () => {
     };
 
     // Trigger the event
-    client.listeners[EVENTS.SESSION_REQUEST](event.meta);
+    signClient.listeners[EVENTS.SESSION_REQUEST](event.meta);
 
     expect(setSession).toHaveBeenCalledWith({
       data: false,
@@ -78,7 +78,7 @@ describe('useConnectionEventsManager', () => {
     };
 
     // Trigger the event
-    client.listeners[EVENTS.SESSION_DELETE](event.meta);
+    signClient.listeners[EVENTS.SESSION_DELETE](event.meta);
 
     expect(disconnect).toHaveBeenCalledWith(event.meta.topic);
   });

@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import i18next from 'i18next';
+
 import { H2, P } from 'components/shared/toolBox/typography';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
-import i18next from 'i18next';
-import getStyles from './styles';
 import usePairings from '../../../../../libs/wcm/hooks/usePairings';
+
+import getStyles from './styles';
 
 const BridgeApplication = ({ nextStep }) => {
   const { setUri } = usePairings();
 
+  const [inputUri, setInputUri] = useState(
+    'wc:c119132390b8030ab5ce603210898f710b12e166bf2d1bd6299f51e319b720b9@2?relay-protocol=iridium&symKey=3d59775dda022b3f5e2f7e4be0688dace4c16e978ae887b88bfb37eab4cfe358'
+  );
+
   const { styles } = useTheme({ styles: getStyles });
-  const [inputUri, setInputUri] = useState('');
 
   const onSubmit = () => {
     setUri(inputUri);

@@ -13,11 +13,8 @@ import TokenSvg from 'assets/svgs/TokenSvg';
 import { stringShortener } from 'utilities/helpers';
 
 import getTransactionSummaryStyles from './styles';
-import { useTransactionSummary } from './hooks';
 
 export default function TransactionSummary(transaction) {
-  const summary = useTransactionSummary(transaction);
-
   const { styles } = useTheme({
     styles: getTransactionSummaryStyles(),
   });
@@ -31,11 +28,11 @@ export default function TransactionSummary(transaction) {
 
         <View style={[styles.row]}>
           <Text style={[styles.valueText, styles.theme.valueText]}>
-            {summary.senderApplication?.chainName}
+            {transaction.senderApplication?.chainName}
           </Text>
 
           <Image
-            source={{ uri: summary.senderApplication?.logo.png }}
+            source={{ uri: transaction.senderApplication?.logo.png }}
             style={[styles.applicationLogoImage]}
           />
         </View>
@@ -48,11 +45,11 @@ export default function TransactionSummary(transaction) {
 
         <View style={[styles.row]}>
           <Text style={[styles.valueText, styles.theme.valueText]}>
-            {summary.recipientApplication?.chainName}
+            {transaction.recipientApplication?.chainName}
           </Text>
 
           <Image
-            source={{ uri: summary.recipientApplication?.logo.png }}
+            source={{ uri: transaction.recipientApplication?.logo.png }}
             style={[styles.applicationLogoImage]}
           />
         </View>
@@ -63,29 +60,33 @@ export default function TransactionSummary(transaction) {
           {i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
         </Text>
 
-        {summary.recipientAccount.isNew ? (
+        {transaction.recipientAccount.isNew ? (
           <CopyToClipboard
             style={[styles.valueText, styles.theme.valueText]}
             labelStyle={[styles.valueText, styles.theme.valueText, { marginRight: 8 }]}
             showIcon
             iconSize={18}
-            value={summary.recipientAccount.address}
+            value={transaction.recipientAccount.address}
             type={P}
-            label={stringShortener(summary.recipientAccount.address, 5, 5)}
+            label={stringShortener(transaction.recipientAccount.address, 5, 5)}
           />
         ) : (
           <View style={[styles.row]}>
-            <Avatar address={summary.recipientAccount.address} size={24} style={styles.avatar} />
+            <Avatar
+              address={transaction.recipientAccount.address}
+              size={24}
+              style={styles.avatar}
+            />
 
             <View>
-              {!!summary.recipientAccount.label && (
+              {!!transaction.recipientAccount.label && (
                 <P style={[styles.valueText, styles.theme.valueText]}>
-                  {summary.recipientAccount.label}
+                  {transaction.recipientAccount.label}
                 </P>
               )}
 
               <P style={[styles.label, styles.theme.label]}>
-                {stringShortener(summary.recipientAccount.address, 6, 6)}
+                {stringShortener(transaction.recipientAccount.address, 6, 6)}
               </P>
             </View>
           </View>
@@ -96,9 +97,11 @@ export default function TransactionSummary(transaction) {
         <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.tokenIDFieldLabel')}</Text>
 
         <View style={[styles.row]}>
-          <Text style={[styles.valueText, styles.theme.valueText]}>{summary.token?.symbol}</Text>
+          <Text style={[styles.valueText, styles.theme.valueText]}>
+            {transaction.token?.symbol}
+          </Text>
 
-          <TokenSvg symbol={summary.token?.symbol} style={styles.tokenSvg} />
+          <TokenSvg symbol={transaction.token?.symbol} style={styles.tokenSvg} />
         </View>
       </View>
 
@@ -108,28 +111,28 @@ export default function TransactionSummary(transaction) {
         </Text>
 
         <Text style={[styles.valueText, styles.theme.valueText]}>
-          {summary.amount} {summary.token?.symbol}
+          {transaction.amount} {transaction.token?.symbol}
         </Text>
       </View>
 
-      {!!summary.message && (
+      {!!transaction.message && (
         <View style={[styles.messageRow]}>
           <Text style={[styles.label, { marginBottom: 8 }]}>
             {i18next.t('sendToken.tokenSelect.messageFieldLabelPlain')}
           </Text>
 
-          <Text style={[styles.valueText, styles.theme.valueText]}>{summary.message}</Text>
+          <Text style={[styles.valueText, styles.theme.valueText]}>{transaction.message}</Text>
         </View>
       )}
 
-      {!!summary.priority && (
+      {!!transaction.priority && (
         <View style={[styles.fieldRow]}>
           <Text style={[styles.label]}>
             {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
           </Text>
 
           <Text style={[styles.valueText, styles.theme.valueText]}>
-            {i18next.t(PRIORITY_NAMES_MAP[summary.priority])}
+            {i18next.t(PRIORITY_NAMES_MAP[transaction.priority])}
           </Text>
         </View>
       )}
@@ -138,7 +141,7 @@ export default function TransactionSummary(transaction) {
         <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.transactionFeeLabel')}</Text>
 
         <Text style={[styles.valueText, styles.theme.valueText]}>
-          {summary.transactionFee} {summary.token?.symbol}
+          {transaction.transactionFee} {transaction.token?.symbol}
         </Text>
       </View>
 
@@ -148,8 +151,8 @@ export default function TransactionSummary(transaction) {
         </Text>
 
         <Text style={[styles.valueText, styles.theme.valueText]}>
-          {Lisk.transactions.convertBeddowsToLSK(summary.initializationFee?.data.toString())}{' '}
-          {summary.token?.symbol}
+          {Lisk.transactions.convertBeddowsToLSK(transaction.initializationFee?.data.toString())}{' '}
+          {transaction.token?.symbol}
         </Text>
       </View>
 
@@ -157,8 +160,8 @@ export default function TransactionSummary(transaction) {
         <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.cmmFeeLabel')}</Text>
 
         <Text style={[styles.valueText, styles.theme.valueText]}>
-          {Lisk.transactions.convertBeddowsToLSK(summary.cmmFee?.data.toString())}{' '}
-          {summary.token?.symbol}
+          {Lisk.transactions.convertBeddowsToLSK(transaction.cmmFee?.data.toString())}{' '}
+          {transaction.token?.symbol}
         </Text>
       </View>
     </View>

@@ -4,6 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import { StatusBar, View } from 'react-native';
 import { Provider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import '@walletconnect/react-native-compat';
 
 import { colors, themes } from 'constants/styleGuide';
 import Router from 'navigation';
