@@ -10,7 +10,7 @@ import { themes } from 'constants/styleGuide';
 
 import { getSignTransactionSuccessStyles } from './styles';
 
-export default function SendTokenSuccess({ onClick }) {
+export default function SendTokenSuccess({ onClick, actionButton }) {
   const { styles, theme } = useTheme({
     styles: getSignTransactionSuccessStyles(),
   });
@@ -33,11 +33,13 @@ export default function SendTokenSuccess({ onClick }) {
         </Text>
       </View>
 
-      <PrimaryButton
-        style={{ marginBottom: 24 }}
-        onClick={onClick}
-        title={i18next.t('sendToken.result.success.closeButtonText')}
-      />
+      {actionButton || (
+        <PrimaryButton
+          style={{ marginBottom: 24 }}
+          onClick={onClick}
+          title={i18next.t('sendToken.result.success.closeButtonText')}
+        />
+      )}
     </View>
   );
 }

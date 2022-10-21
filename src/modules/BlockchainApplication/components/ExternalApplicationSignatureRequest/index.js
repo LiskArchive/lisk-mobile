@@ -58,8 +58,6 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
       try {
         const signedTransaction = await transaction.data.sign(privateKey);
 
-        // const signedTransactionInJSON = transaction.data.toJSON();
-
         const encodedTransaction = transaction.data.encode(signedTransaction).toString('hex');
 
         if (!encodedTransaction) throw new Error('No encoded transaction before responding.');
@@ -80,7 +78,7 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
         return (
           <ExternalAppSignatureRequestNotification
             session={session}
-            chainID={event.meta.params.request.params.recipientChainID}
+            recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
             senderAccountAddress={senderAccountAddress}
             onCancel={onCancel}
             onSubmit={() => setActiveStep('summary')}
@@ -101,9 +99,9 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
       case 'sign':
         return (
           <ExternalAppSignatureRequestSignTransaction
+            session={session}
             transaction={_transaction}
             recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
-            onCancel={() => setActiveStep('summary')}
             onSubmit={handleSubmit}
             isLoading={isRespondLoading}
             isSuccess={isRespondSuccess}

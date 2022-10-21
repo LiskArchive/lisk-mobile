@@ -1,12 +1,16 @@
 /* eslint-disable max-statements */
-import React from 'react';
+import React, { useMemo } from 'react';
+import { Linking } from 'react-native';
 
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
 import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
+import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 
 export default function ExternalAppSignatureRequestSignTransaction({
+  session,
   transaction,
   recipientApplicationChainID,
   onSubmit,
@@ -15,6 +19,14 @@ export default function ExternalAppSignatureRequestSignTransaction({
   error,
 }) {
   const [passwordForm, passwordController] = usePasswordForm();
+
+  const signedTransactionString = useMemo(
+    () => JSON.stringify(transaction.toJSON()),
+    [transaction]
+  );
+
+  const [isSignedTransactionCopiedToClipboard, handleCopySignedTransactionToClipboard] =
+    useCopyToClipboard(signedTransactionString);
 
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
 
@@ -31,8 +43,6 @@ export default function ExternalAppSignatureRequestSignTransaction({
   return (
     <SignTransaction
       onSubmit={() => onSubmit(passwordController.field.value)}
-      onSuccess={() => console.log('broadcast signature...')}
-      onError={() => console.log('on error...')}
       password={passwordController.field.value}
       onPasswordChange={passwordController.field.onChange}
       isValidationError={Object.keys(passwordForm.formState.errors).length > 0}
@@ -41,7 +51,18 @@ export default function ExternalAppSignatureRequestSignTransaction({
       isSuccess={isSuccess}
       isLoading={isLoading}
       error={error}
-      onReset={() => console.log('on reset...')}
+      successActionButton={
+        <PrimaryButton onClick={handleCopySignedTransactionToClipboard}>
+          {!isSignedTransactionCopiedToClipboard
+            ? 'Copy and redirect to application site'
+            : 'Copied'}
+        </PrimaryButton>
+      }
+      errorActionButton={
+        <PrimaryButton onClick={() => Linking.openURL(session.peer.metadata.url)}>
+          Redirect to application site
+        </PrimaryButton>
+      }
     />
   );
 }

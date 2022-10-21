@@ -18,6 +18,8 @@ export function SignTransaction({
   onSubmit,
   amount,
   token,
+  successActionButton,
+  errorActionButton,
 }) {
   const navigation = useNavigation();
 
@@ -62,6 +64,7 @@ export function SignTransaction({
               onSuccess();
               navigation.navigate('Home');
             }}
+            actionButton={successActionButton}
           />
         );
 
@@ -72,6 +75,7 @@ export function SignTransaction({
               onError();
             }}
             error={_error}
+            actionButton={errorActionButton}
           />
         );
 

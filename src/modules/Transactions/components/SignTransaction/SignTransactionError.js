@@ -9,7 +9,7 @@ import TxErrorSvg from 'assets/svgs/TxErrorSvg';
 
 import { getSignTransactionErrorStyles } from './styles';
 
-export default function SignTransactionError({ onClick, error }) {
+export default function SignTransactionError({ onClick, error, actionButton }) {
   const emailReport = useEmailReport({ error, errorMessage: 'Error sending token' });
 
   const { styles } = useTheme({
@@ -34,11 +34,13 @@ export default function SignTransactionError({ onClick, error }) {
         {i18next.t('sendToken.result.error.description2')}
       </Text>
 
-      <PrimaryButton
-        onClick={onClick}
-        title={i18next.t('sendToken.result.error.retryButtonText')}
-        style={[styles.tryAgainButton]}
-      />
+      {actionButton || (
+        <PrimaryButton
+          onClick={onClick}
+          title={i18next.t('sendToken.result.error.retryButtonText')}
+          style={[styles.tryAgainButton]}
+        />
+      )}
 
       <Text style={[styles.actionLabel, styles.theme.actionLabel]}>
         {i18next.t('sendToken.result.error.reportErrorLabel')}
