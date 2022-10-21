@@ -65,7 +65,7 @@ export default function Tabs() {
       </Tab.Navigator>
 
       <BottomModal
-        show={showExternalApplicationSignatureRequestModal}
+        show={showExternalApplicationSignatureRequestModal && session.request}
         toggleShow={() =>
           setShowExternalApplicationSignatureRequestModal((prevState) => !prevState)
         }

@@ -66,8 +66,6 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
     }
   }
 
-  if (!session) return null;
-
   return (
     <DataRenderer
       data={transaction.data?.transaction}
