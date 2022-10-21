@@ -16,8 +16,6 @@ const usePairings = () => {
    * @param {string} uri - The URI received from the web app.
    */
   const setUri = useCallback(async (uri) => {
-    console.log({ signClient });
-
     if (signClient?.pair && uri) {
       await signClient.pair({ uri });
     }

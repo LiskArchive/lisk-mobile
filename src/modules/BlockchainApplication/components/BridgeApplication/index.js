@@ -14,7 +14,7 @@ const BridgeApplication = ({ nextStep }) => {
   const { setUri } = usePairings();
 
   const [inputUri, setInputUri] = useState(
-    'wc:8c489cfa71675da3c97676b9ca5bac09fc887676df552f98607f0d0b0c0e9997@2?relay-protocol=iridium&symKey=c7f2e7638d31f94ffd2932724fd17be27341b1b9394a69f17d4484b0d0e5c24e'
+    'wc:c119132390b8030ab5ce603210898f710b12e166bf2d1bd6299f51e319b720b9@2?relay-protocol=iridium&symKey=3d59775dda022b3f5e2f7e4be0688dace4c16e978ae887b88bfb37eab4cfe358'
   );
 
   const { styles } = useTheme({ styles: getStyles });
