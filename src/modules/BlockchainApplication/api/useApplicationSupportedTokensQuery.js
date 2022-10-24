@@ -35,7 +35,6 @@ export function useApplicationSupportedTokensQuery(application) {
     error: errorOnSupportedTokens,
   } = useSupportedTokensQuery({
     client: toApplicationApiClient.current,
-    config: { params: { limit: 100 } },
   });
 
   const data = useMemo(() => {

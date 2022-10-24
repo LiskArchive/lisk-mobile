@@ -11,13 +11,8 @@ export function useBlockchainApplicationStats() {
 
   const keys = useQueryKeys([GET_APPLICATION_STATS, config]);
 
-  const query = useCustomQuery({
+  return useCustomQuery({
     keys,
     config,
   });
-
-  return {
-    ...query,
-    data: query.data?.data ?? {},
-  };
 }

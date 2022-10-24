@@ -1,7 +1,7 @@
 export const mockApplications = [
   {
     chainName: 'Lisk',
-    chainID: '00000001',
+    chainID: '04000000',
     state: 'active',
     address: 'lsk123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
     isDefault: true,

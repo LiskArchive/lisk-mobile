@@ -1,6 +1,6 @@
 export const mockDefaultApplication = {
   name: 'Lisk',
-  chainID: '00000001',
+  chainID: '04000000',
   title: 'Lisk',
   description: 'A blockchain application platform',
   network: 'mainnet',

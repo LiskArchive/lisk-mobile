@@ -18,7 +18,6 @@ import Fab from 'components/shared/Fab';
 import QRCodeSvg from 'assets/svgs/QRCodeSvg';
 import CopySvg from 'assets/svgs/CopySvg';
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
-import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats';
 import ApplicationList from '../ApplicationList';
 import ApplicationRow from '../ApplicationRow';
 import ApplicationsStats from '../ApplicationsStats';
@@ -52,7 +51,6 @@ export default function BlockchainApplicationsExplorer() {
   const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
   const tabBarHeight = useBottomTabBarHeight();
   const { applicationsMetadata } = useBlockchainApplicationExplorer();
-  const { data } = useBlockchainApplicationStats();
 
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsExplorerStyles(),
@@ -129,9 +127,6 @@ export default function BlockchainApplicationsExplorer() {
 
       <BottomModal show={showStatsModal} toggleShow={() => setShowStatsModal(false)}>
         <ApplicationsStats
-          totalSupply={data.totalSupplyLSK}
-          staked={data.stakedLSK}
-          stats={{ registered: data.registered, active: data.active, terminated: data.terminated }}
           styles={{
             container: {
               borderTopLeftRadius: 24,
@@ -140,6 +135,7 @@ export default function BlockchainApplicationsExplorer() {
           }}
         />
       </BottomModal>
+
       {activeTab === 'externalApplications' && (
         <Fab actions={actions} bottom={tabBarHeight} onPressItem={onFabItemPress} />
       )}

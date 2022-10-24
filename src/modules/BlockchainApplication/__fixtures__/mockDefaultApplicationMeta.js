@@ -1,6 +1,6 @@
 export const mockDefaultApplicationMeta = {
   chainName: 'Lisk',
-  chainID: '00000001',
+  chainID: '04000000',
   title: 'Lisk - Betanet',
   description: 'Metadata configuration for the Lisk blockchain (mainchain) in betanet',
   networkType: 'betanet',
