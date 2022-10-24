@@ -52,8 +52,6 @@ const useSession = () => {
 
       const response = formatJsonRpcResult(requestEvent.meta.id, payload);
 
-      console.log({ payload, requestEvent, topic, response });
-
       try {
         await signClient.respond({
           topic,

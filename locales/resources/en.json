@@ -405,9 +405,24 @@
         "enterConnectionUri": "Enter connection URI"
       }
     },
-    "signing": {
-      "information": "Information",
-      "description": "{{appName}} application requesting signature from your Lisk wallet."
+    "externalApplicationSignatureRequest": {
+      "errorOnSignTransactionText": "Unable to sign your transaction. Please try again.",
+      "noEncodedTransactionErrorText": "No encoded transaction before responding.",
+      "notification": {
+        "chainIDLabel" : "Chain ID",
+        "descriptionLabel": "Information",
+        "description": "{{appName}} application requesting signature from your Lisk wallet.",
+        "accountLabel": "Selected account"
+      },
+      "summary": {
+        "cancelButtonText": "Back",
+        "continueButtonText": "Approve"
+      },
+      "sign": {
+        "copyToClipboardButtonText": "Copy and redirect to application site",
+        "copiedToClipboardButtonText": "Copied",
+        "errorButtonText": "Redirect to application site"
+      }
     }
   },
   "requestTokens": {

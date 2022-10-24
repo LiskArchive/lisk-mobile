@@ -60,13 +60,18 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
 
         const encodedTransaction = transaction.data.encode(signedTransaction).toString('hex');
 
-        if (!encodedTransaction) throw new Error('No encoded transaction before responding.');
+        if (!encodedTransaction)
+          throw new Error(
+            i18next.t(
+              'application.externalApplicationSignatureRequest.noEncodedTransactionErrorText'
+            )
+          );
 
         respond({ payload: encodedTransaction });
       } catch (error) {
         DropDownHolder.error(
           i18next.t('Error'),
-          'Unable to sign your transaction. Please try again.'
+          i18next.t('application.externalApplicationSignatureRequest.errorOnSignTransactionText')
         );
       }
     }

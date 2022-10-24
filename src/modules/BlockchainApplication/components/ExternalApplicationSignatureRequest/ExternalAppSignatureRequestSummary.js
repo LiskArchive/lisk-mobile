@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import i18next from 'i18next';
 
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
@@ -39,11 +40,11 @@ export default function ExternalAppSignatureRequestSummary({
 
       <View style={[styles.buttonContainer]}>
         <Button style={[styles.button]} onPress={onCancel}>
-          Back
+          {i18next.t('application.externalApplicationSignatureRequest.summary.cancelButtonText')}
         </Button>
 
         <PrimaryButton style={[styles.button]} onPress={onSubmit}>
-          Approve
+          {i18next.t('application.externalApplicationSignatureRequest.summary.continueButtonText')}
         </PrimaryButton>
       </View>
     </>

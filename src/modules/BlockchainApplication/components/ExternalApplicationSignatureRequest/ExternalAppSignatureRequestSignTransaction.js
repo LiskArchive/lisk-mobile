@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
 import { Linking } from 'react-native';
+import i18next from 'i18next';
 
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
@@ -54,13 +55,17 @@ export default function ExternalAppSignatureRequestSignTransaction({
       successActionButton={
         <PrimaryButton onClick={handleCopySignedTransactionToClipboard}>
           {!isSignedTransactionCopiedToClipboard
-            ? 'Copy and redirect to application site'
-            : 'Copied'}
+            ? i18next.t(
+                'application.externalApplicationSignatureRequest.sign.copyToClipboardButtonText'
+              )
+            : i18next.t(
+                'application.externalApplicationSignatureRequest.sign.copiedToClipboardButtonText'
+              )}
         </PrimaryButton>
       }
       errorActionButton={
         <PrimaryButton onClick={() => Linking.openURL(session.peer.metadata.url)}>
-          Redirect to application site
+          {i18next.t('application.externalApplicationSignatureRequest.sign.errorButtonText')}
         </PrimaryButton>
       }
     />
