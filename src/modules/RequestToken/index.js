@@ -57,7 +57,7 @@ export default function RequestToken() {
   const [recipientTokenID, setRecipientTokenID] = useState(
     mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
   );
-  const [modalOpen, setModalOpen] = useState(false);
+  const [showQRModal, setShowQRModal] = useState(false);
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
@@ -65,11 +65,13 @@ export default function RequestToken() {
     const validator = (str) => reg.amount.test(str);
 
     const amountValidity = validator(amount.value) ? 0 : 1;
+
     const queryString = serializeQueryString({
-      recipient: currentAccount.metadata.address,
+      recipientAddress: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
       recipientApplication: recipientApplicationChainID,
       recipientToken: recipientTokenID,
+      message,
     });
     return `lisk://wallet${queryString}`;
   }, [
@@ -77,6 +79,7 @@ export default function RequestToken() {
     amount.value,
     recipientApplicationChainID,
     recipientTokenID,
+    message,
   ]);
 
   const [copiedToClipboard, handleCopyToClipboard] = useCopyToClipboard(qrCodeUrl);
@@ -102,14 +105,17 @@ export default function RequestToken() {
         title="requestTokens.title"
         onPress={navigation.goBack}
         rightIconComponent={() => (
-          <TouchableOpacity onPress={() => setModalOpen(true)}>{renderQRCode(20)}</TouchableOpacity>
+          <TouchableOpacity onPress={() => setShowQRModal(true)}>
+            {renderQRCode(20)}
+          </TouchableOpacity>
         )}
       />
 
       <KeyboardAwareScrollView
         viewIsInsideTab
-        enableOnAndroid={true}
+        enableOnAndroid
         enableResetScrollToCoords={false}
+        contentContainerStyle={{ flex: 1 }}
       >
         <View style={[styles.innerContainer, styles.theme.innerContainer]}>
           <P style={[styles.addressLabel, styles.theme.addressLabel]}>
@@ -153,14 +159,16 @@ export default function RequestToken() {
 
           <SendTokenAmountField
             value={amount.value}
-            onChange={setAmount}
+            onChange={(value) => setAmount((prevValue) => ({ ...prevValue, value }))}
             tokenID={recipientTokenID}
             recipientApplication={currentApplication}
             style={{ container: { marginBottom: 16 } }}
           />
 
           <SendTokenMessageField onChange={setMessage} value={message} />
+        </View>
 
+        <View style={styles.footer}>
           <PrimaryButton
             onPress={handleCopyToClipboard}
             adornments={{
@@ -176,7 +184,7 @@ export default function RequestToken() {
         </View>
       </KeyboardAwareScrollView>
 
-      <BottomModal show={modalOpen} toggleShow={setModalOpen}>
+      <BottomModal show={showQRModal} toggleShow={setShowQRModal}>
         <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
           <View>
             {renderQRCode(qrCodeSize)}
