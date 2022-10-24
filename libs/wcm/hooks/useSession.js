@@ -42,8 +42,12 @@ const useSession = () => {
 
   const respond = useCallback(
     async ({ payload }) => {
-      if (isSuccess) setIsSuccess(false);
-      if (error) setError(undefined);
+      if (isSuccess) {
+        setIsSuccess(false);
+      }
+      if (error) {
+        setError(undefined);
+      }
 
       setIsLoading(true);
 
