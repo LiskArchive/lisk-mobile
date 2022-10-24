@@ -12,9 +12,9 @@ const useSession = () => {
   const { events, session, setSession } = useContext(ConnectionContext);
   const { refreshPairings } = usePairings();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState();
+  const [isRespondLoading, setIsRespondLoading] = useState(false);
+  const [isRespondSuccess, setIsRespondSuccess] = useState(false);
+  const [errorOnRespond, setErrorOnResponse] = useState();
 
   const approve = useCallback(async (selectedAccounts) => {
     let status = PAIRING_PROPOSAL_STATUS.FAILED;
@@ -42,14 +42,14 @@ const useSession = () => {
 
   const respond = useCallback(
     async ({ payload }) => {
-      if (isSuccess) {
-        setIsSuccess(false);
+      if (isRespondSuccess) {
+        setIsRespondSuccess(false);
       }
-      if (error) {
-        setError(undefined);
+      if (errorOnRespond) {
+        setErrorOnResponse(undefined);
       }
 
-      setIsLoading(true);
+      setIsRespondLoading(true);
 
       const requestEvent = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
       const topic = requestEvent.meta.topic;
@@ -62,16 +62,16 @@ const useSession = () => {
           response,
         });
 
-        setIsLoading(false);
+        setIsRespondLoading(false);
 
-        setIsSuccess(true);
+        setIsRespondSuccess(true);
       } catch (_error) {
-        setError(_error);
+        setErrorOnResponse(_error);
 
-        setIsLoading(false);
+        setIsRespondLoading(false);
       }
     },
-    [error, events]
+    [errorOnRespond, events]
   );
 
   useEffect(() => {
@@ -89,9 +89,9 @@ const useSession = () => {
     respond,
     session,
     setSession,
-    isLoading,
-    isSuccess,
-    error,
+    isRespondLoading,
+    isRespondSuccess,
+    errorOnRespond,
   };
 };
 

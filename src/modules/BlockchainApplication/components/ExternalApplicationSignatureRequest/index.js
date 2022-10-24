@@ -21,12 +21,7 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
 
   const [currentAccount] = useCurrentAccount();
 
-  const {
-    respond,
-    isLoading: isRespondLoading,
-    error: errorOnRespond,
-    isSuccess: isRespondSuccess,
-  } = useSession();
+  const { respond, isRespondLoading, errorOnRespond, isRespondSuccess } = useSession();
 
   const { events } = useContext(ConnectionContext);
 
