@@ -13,9 +13,7 @@ import getStyles from './styles';
 const BridgeApplication = ({ nextStep }) => {
   const { setUri } = usePairings();
 
-  const [inputUri, setInputUri] = useState(
-    'wc:c119132390b8030ab5ce603210898f710b12e166bf2d1bd6299f51e319b720b9@2?relay-protocol=iridium&symKey=3d59775dda022b3f5e2f7e4be0688dace4c16e978ae887b88bfb37eab4cfe358'
-  );
+  const [inputUri, setInputUri] = useState('');
 
   const { styles } = useTheme({ styles: getStyles });
 
@@ -26,10 +24,10 @@ const BridgeApplication = ({ nextStep }) => {
 
   return (
     <View style={styles.container}>
-      <H2 style={[styles.title]}>
+      <H2 style={[styles.title, styles.theme.title]}>
         {i18next.t('application.explore.externalApplicationList.bridgeApplication')}
       </H2>
-      <P style={[styles.description]}>
+      <P style={[styles.description, styles.theme.description]}>
         {i18next.t('application.explore.externalApplicationList.bridgeApplicationDescription')}
       </P>
       <View style={styles.inputContainer}>

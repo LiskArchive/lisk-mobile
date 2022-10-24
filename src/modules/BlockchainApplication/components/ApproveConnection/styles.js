@@ -1,10 +1,11 @@
-import { boxes, colors, fonts } from 'constants/styleGuide';
+import { themes, boxes, colors, fonts } from 'constants/styleGuide';
 
 export default {
   common: {
     container: {
-      padding: boxes.boxPadding,
       flex: 1,
+      paddingTop: boxes.boxPadding,
+      paddingBottom: boxes.boxPadding,
     },
     imageContainer: {
       alignItems: 'center',
@@ -12,34 +13,31 @@ export default {
     image: {
       width: 50,
       height: 50,
-      marginBottom: 10,
+      marginBottom: 8,
       borderRadius: 25,
     },
     title: {
       textAlign: 'center',
-      marginBottom: 10,
+      marginBottom: 8,
     },
     urlContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: 5,
+      marginBottom: 4,
     },
     url: {
-      marginLeft: 5,
+      marginLeft: 4,
       color: colors.light.ultramarineBlue,
       fontFamily: fonts.family.contextSemiBold,
     },
     label: {
       color: colors.light.blueGray,
-      marginRight: 5,
+      marginRight: 4,
     },
     subTitle: {
       fontFamily: fonts.family.contextSemiBold,
-      marginBottom: 5,
-    },
-    value: {
-      fontSize: fonts.size.input,
+      marginBottom: 4,
     },
     permissions: {
       color: colors.light.blueGray,
@@ -53,18 +51,30 @@ export default {
     },
     button: {
       flex: 1,
-      marginHorizontal: 5,
+      marginHorizontal: 4,
     },
-    outlineButton: {
-      backgroundColor: 'transparent',
-      borderWidth: 2,
-      borderColor: colors.light.platinumGray,
-    },
-    outlineButtonText: {
+  },
+  [themes.light]: {
+    title: {
       color: colors.light.zodiacBlue,
     },
-    buttonText: {
-      fontFamily: fonts.family.contextSemiBold,
+    subTitle: {
+      color: colors.light.zodiacBlue,
+    },
+    description: {
+      color: colors.light.zodiacBlue,
+    },
+  },
+
+  [themes.dark]: {
+    title: {
+      color: colors.dark.white,
+    },
+    subTitle: {
+      color: colors.dark.white,
+    },
+    description: {
+      color: colors.dark.white,
     },
   },
 };

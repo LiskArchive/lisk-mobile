@@ -405,9 +405,24 @@
         "enterConnectionUri": ""
       }
     },
-    "signing": {
-      "information": "",
-      "description": ""
+    "externalApplicationSignatureRequest": {
+      "errorOnSignTransactionText": "Ihre Transaktion kann nicht signiert werden. Bitte versuche es erneut.",
+      "noEncodedTransactionErrorText": "Keine verschlüsselte Transaktion vor der Antwort.",
+      "notification": {
+        "chainIDLabel" : "Chain ID",
+        "descriptionLabel": "Information",
+        "description": "Die {{appName}}-App fordert eine Signatur von Ihrem Lisk-Wallet an.",
+        "accountLabel": "Ausgewähltes Konto"
+      },
+      "summary": {
+        "cancelButtonText": "Zurück",
+        "continueButtonText": "Zustimmen"
+      },
+      "sign": {
+        "copyToClipboardButtonText": "Kopieren und zur App-Site weiterleiten",
+        "copiedToClipboardButtonText": "Kopiert",
+        "errorButtonText": "Weiterleitung zur App-Site"
+      }
     }
   },
   "requestTokens": {

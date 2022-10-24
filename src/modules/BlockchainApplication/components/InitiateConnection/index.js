@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { View, Image } from 'react-native';
 import i18next from 'i18next';
 import { H3, P } from 'components/shared/toolBox/typography';
-import { PrimaryButton } from 'components/shared/toolBox/button';
+import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import Checkbox from 'components/shared/Checkbox';
 import { useTheme } from 'hooks/useTheme';
 import { stringShortener } from 'utilities/helpers';
@@ -52,7 +52,9 @@ const InitiateConnection = ({ event, nextStep, onFinish }) => {
             style={styles.image}
           />
         </View>
-        <H3 style={styles.title}>{event.meta.params.proposer.metadata.name}</H3>
+        <H3 style={[styles.title, styles.theme.title]}>
+          {event.meta.params.proposer.metadata.name}
+        </H3>
         <View style={styles.urlContainer}>
           <UrlSvg />
           <P style={styles.url}>{event.meta.params.proposer.metadata.url}</P>
@@ -61,12 +63,14 @@ const InitiateConnection = ({ event, nextStep, onFinish }) => {
           <P style={styles.label}>
             {i18next.t('application.explore.externalApplicationList.chainIDLabel')}:
           </P>
-          <P>{event.meta.id}</P>
+          <P style={[styles.theme.description]}>{event.meta.id}</P>
         </View>
       </View>
       <View style={styles.horizontalLine} />
       <View style={styles.container}>
-        <P>{i18next.t('application.explore.externalApplicationList.connectionDescription')}</P>
+        <P style={[styles.theme.description]}>
+          {i18next.t('application.explore.externalApplicationList.connectionDescription')}
+        </P>
       </View>
       <View style={styles.horizontalLine} />
       <View style={styles.container}>
@@ -74,7 +78,7 @@ const InitiateConnection = ({ event, nextStep, onFinish }) => {
           {i18next.t('application.explore.externalApplicationList.accountsTitle')}:
         </P>
         <Checkbox onPress={onSelectAll} selected={selectAll}>
-          <P>Select All</P>
+          <P style={[styles.theme.description]}>Select All</P>
         </Checkbox>
         {accounts.map((account) => (
           <Checkbox
@@ -85,7 +89,9 @@ const InitiateConnection = ({ event, nextStep, onFinish }) => {
             <View style={styles.accountItem}>
               <Avatar address={account.metadata.address} size={35} />
               <View style={styles.accountContent}>
-                {account.metadata.name ? <P>{account.metadata.name}</P> : null}
+                {account.metadata.name ? (
+                  <P style={[styles.theme.description]}>{account.metadata.name}</P>
+                ) : null}
                 <P style={styles.address}>{stringShortener(account.metadata.address, 7, 4)}</P>
               </View>
             </View>
@@ -95,17 +101,16 @@ const InitiateConnection = ({ event, nextStep, onFinish }) => {
       <View style={styles.horizontalLine} />
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton style={[styles.button, styles.outlineButton]} onPress={onFinish}>
-            <P style={[styles.buttonText, styles.outlineButtonText]}>
-              {i18next.t('commons.buttons.cancel')}
-            </P>
-          </PrimaryButton>
+          <Button style={[styles.button]} onPress={onFinish}>
+            {i18next.t('commons.buttons.cancel')}
+          </Button>
+
           <PrimaryButton
             style={styles.button}
             onPress={onSubmit}
             disabled={!selectedAccounts.length}
           >
-            <P style={[styles.buttonText]}>{i18next.t('commons.buttons.continue')}</P>
+            {i18next.t('commons.buttons.continue')}
           </PrimaryButton>
         </View>
       </View>
