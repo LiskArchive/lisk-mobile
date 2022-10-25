@@ -16,8 +16,7 @@ import useSendTokenForm from './hooks/useSendTokenForm';
 import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
 import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction';
 
-export default function SendToken({ route, ...props }) {
-  console.log({ route, props });
+export default function SendToken({ route }) {
   const navigation = useNavigation();
 
   const account = useSelector((state) => state.account);
@@ -35,6 +34,7 @@ export default function SendToken({ route, ...props }) {
   const form = useSendTokenForm({
     transaction: transaction.data,
     isTransactionSuccess: transaction.isSuccess,
+    initialValues: route.params,
   });
 
   const { styles } = useTheme({

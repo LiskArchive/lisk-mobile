@@ -54,7 +54,7 @@ export default function RequestToken() {
   const [recipientApplicationChainID, setRecipientApplicationChainID] = useState(
     currentApplication.chainID
   );
-  const [recipientTokenID, setRecipientTokenID] = useState(
+  const [tokenID, setTokenID] = useState(
     mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
   );
   const [showQRModal, setShowQRModal] = useState(false);
@@ -67,18 +67,19 @@ export default function RequestToken() {
     const amountValidity = validator(amount.value) ? 0 : 1;
 
     const queryString = serializeQueryString({
-      recipientAddress: currentAccount.metadata.address,
+      recipientAccountAddress: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
-      recipientApplication: recipientApplicationChainID,
-      recipientToken: recipientTokenID,
+      recipientApplicationChainID,
+      tokenID,
       message,
     });
+
     return `lisk://wallet${queryString}`;
   }, [
     currentAccount.metadata.address,
     amount.value,
     recipientApplicationChainID,
-    recipientTokenID,
+    tokenID,
     message,
   ]);
 
@@ -151,8 +152,8 @@ export default function RequestToken() {
           />
 
           <TokenSelectField
-            value={recipientTokenID}
-            onChange={setRecipientTokenID}
+            value={tokenID}
+            onChange={setTokenID}
             recipientApplication={currentApplication}
             style={{ toggle: { container: { marginBottom: 16 } } }}
           />
@@ -160,7 +161,7 @@ export default function RequestToken() {
           <SendTokenAmountField
             value={amount.value}
             onChange={(value) => setAmount((prevValue) => ({ ...prevValue, value }))}
-            tokenID={recipientTokenID}
+            tokenID={tokenID}
             recipientApplication={currentApplication}
             style={{ container: { marginBottom: 16 } }}
           />

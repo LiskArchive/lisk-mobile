@@ -16,7 +16,7 @@ import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 
-export default function useSendTokenForm({ transaction, isTransactionSuccess }) {
+export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
 
   const [currentApplication] = useCurrentBlockchainApplication();
@@ -26,16 +26,18 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess }) 
   const defaultValues = useMemo(
     () => ({
       senderApplicationChainID: currentApplication.chainID,
-      recipientApplicationChainID: currentApplication.chainID,
-      recipientAccountAddress: 'lsk7tyskeefnd6p6bfksd7ytp5jyaw8f2r9foa6ch',
+      recipientApplicationChainID:
+        initialValues.recipientApplicationChainID || currentApplication.chainID,
+      recipientAccountAddress: initialValues.recipientAccountAddress || '',
       recipientAccountAddressFormat: 'input',
-      tokenID: mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID,
-      amount: 0,
-      message: '',
+      tokenID:
+        initialValues.tokenID || mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID,
+      amount: initialValues.amount ? parseFloat(initialValues.amount) : 0,
+      message: initialValues.message || '',
       priority: 'low',
       userPassword: '',
     }),
-    [currentApplication.chainID]
+    [currentApplication.chainID, initialValues]
   );
 
   const validationSchema = yup
