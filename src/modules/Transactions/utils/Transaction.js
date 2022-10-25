@@ -1,8 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-statements */
 import * as Lisk from '@liskhq/lisk-client';
-import { BASE_TRANSACTION_SCHEMA } from './constants';
 
+import { removeUndefinedKeys } from 'utilities/helpers';
+
+import { BASE_TRANSACTION_SCHEMA } from './constants';
 import {
   getCommandParamsSchema,
   decodeTransaction,
@@ -97,7 +99,7 @@ export class Transaction {
       ...others,
       params: {
         ...this.transaction.params,
-        ...Lisk.codec.codec.fromJSON(this._paramsSchema, params),
+        ...Lisk.codec.codec.fromJSON(this._paramsSchema, removeUndefinedKeys(params)),
       },
       nonce: nonce ? BigInt(nonce) : this.transaction.nonce,
     };

@@ -12,14 +12,17 @@ import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/h
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
-import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
+import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
 
   const [currentApplication] = useCurrentBlockchainApplication();
+
+  const { data: applicationSupportedTokensData } =
+    useApplicationSupportedTokensQuery(currentApplication);
 
   const broadcastTransactionMutation = useBroadcastTransactionMutation();
 
@@ -27,17 +30,18 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     () => ({
       senderApplicationChainID: currentApplication.chainID,
       recipientApplicationChainID:
-        initialValues.recipientApplicationChainID || currentApplication.chainID,
-      recipientAccountAddress: initialValues.recipientAccountAddress || '',
+        initialValues?.recipientApplicationChainID || currentApplication.chainID,
+      recipientAccountAddress: initialValues?.recipientAccountAddress,
       recipientAccountAddressFormat: 'input',
       tokenID:
-        initialValues.tokenID || mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID,
-      amount: initialValues.amount ? parseFloat(initialValues.amount) : 0,
-      message: initialValues.message || '',
+        initialValues?.tokenID ||
+        applicationSupportedTokensData?.find((token) => token.symbol === 'LSK')?.tokenID,
+      amount: initialValues?.amount ? parseFloat(initialValues.amount) : 0,
+      message: initialValues?.message || '',
       priority: 'low',
       userPassword: '',
     }),
-    [currentApplication.chainID, initialValues]
+    [currentApplication.chainID, applicationSupportedTokensData, initialValues]
   );
 
   const validationSchema = yup
