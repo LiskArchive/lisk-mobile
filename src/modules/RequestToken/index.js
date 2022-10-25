@@ -186,13 +186,11 @@ export default function RequestToken() {
 
       <BottomModal show={showQRModal} toggleShow={setShowQRModal}>
         <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
-          <View>
-            {renderQRCode(qrCodeSize)}
-            <View style={styles.shareTextContainer}>
-              <P style={[styles.shareText, styles.theme.shareText]}>
-                {i18next.t('Tap on the QR Code to share it.')}
-              </P>
-            </View>
+          {renderQRCode(qrCodeSize)}
+          <View style={styles.shareTextContainer}>
+            <P style={[styles.shareText, styles.theme.shareText]}>
+              {i18next.t('Tap on the QR Code to share it.')}
+            </P>
           </View>
         </Share>
       </BottomModal>
