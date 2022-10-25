@@ -1,10 +1,9 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 
-import { colors } from 'constants/styleGuide';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
@@ -30,156 +29,144 @@ import SendToken from 'modules/SendToken';
 import RequestToken from 'modules/RequestToken';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
-import navigationOptions from './navigationOptions';
 import AppNavigator from './components/AppNavigator';
 import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEventsManager';
 
-const MainStack = createStackNavigator();
+import navigationOptions from './options';
+import navigationLinking from './linking';
+import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
 
-const darkTabs = {
-  ...DarkTheme,
-  primary: colors.dark.ultramarineBlue,
-  background: colors.light.white,
-  card: colors.light.white,
-  text: colors.light.tabBarText,
-  border: 'transparent',
-};
+const StackNavigator = createStackNavigator();
 
-const lightTabs = {
-  ...DefaultTheme,
-  primary: colors.light.ultramarineBlue,
-  background: colors.dark.white,
-  card: colors.dark.black,
-  text: colors.dark.tabBarText,
-  border: 'transparent',
-};
-
-const MainNavigator = () => {
+export default function Navigator() {
   const { theme } = useSelector((state) => state.settings);
+
   const themeColors = {
     dark: theme === 'light',
-    colors: theme === 'light' ? darkTabs : lightTabs,
+    colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
   };
-  
+
   useWalletConnectEventsManager();
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer theme={themeColors}>
-        <MainStack.Navigator initialRouteName="AuthMethod">
-          <MainStack.Screen
+      <NavigationContainer linking={navigationLinking} theme={themeColors}>
+        <StackNavigator.Navigator initialRouteName="AuthMethod">
+          <StackNavigator.Screen
             name="Register"
             component={Register}
             options={navigationOptions.Register}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="AuthMethod"
             component={AuthMethod}
             options={navigationOptions.SignIn}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="DecryptPhrase"
             component={DecryptPhrase}
             options={navigationOptions.SignIn}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="AccountsManagerScreen"
             component={AccountsManagerScreen}
             options={navigationOptions.SignIn}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="SecretRecoveryPhrase"
             component={SecretRecoveryPhrase}
             options={navigationOptions.SignIn}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="PasswordSetupForm"
             component={PasswordSetupForm}
             options={navigationOptions.SignIn}
           />
-          <MainStack.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
-          <MainStack.Screen
+          <StackNavigator.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
+          <StackNavigator.Screen
             name="Main"
             component={AppNavigator}
             options={navigationOptions.NoHeader}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="AddBookmark"
             component={AddBookmark}
             options={navigationOptions.AddBookmark}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="AddApplication"
             component={AddApplication}
             options={navigationOptions.SignIn}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="ApplicationDetail"
             component={ApplicationDetail}
             options={navigationOptions.SignIn}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="AddApplicationSuccess"
             component={AddApplicationSuccess}
             options={navigationOptions.SignIn}
           />
-          <MainStack.Screen name="About" component={About} options={navigationOptions.About} />
-          <MainStack.Screen
+          <StackNavigator.Screen name="About" component={About} options={navigationOptions.About} />
+          <StackNavigator.Screen
             name="CurrencySelection"
             component={CurrencySelection}
             options={navigationOptions.CurrencySelection}
           />
-          <MainStack.Screen name="Terms" component={Terms} options={navigationOptions.Terms} />
-          <MainStack.Screen
+          <StackNavigator.Screen name="Terms" component={Terms} options={navigationOptions.Terms} />
+          <StackNavigator.Screen
             name="PrivacyPolicy"
             component={PrivacyPolicy}
             options={navigationOptions.PrivacyPolicy}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="TransactionsHistory"
             component={TransactionsHistory}
             options={navigationOptions.TransactionsHistory}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="TransactionDetails"
             component={TransactionDetails}
             options={navigationOptions.TransactionDetails}
           />
-          <MainStack.Screen name="Wallet" component={Wallet} options={navigationOptions.Wallet} />
-          <MainStack.Screen
+          <StackNavigator.Screen
+            name="Wallet"
+            component={Wallet}
+            options={navigationOptions.Wallet}
+          />
+          <StackNavigator.Screen
             name="EnableBioAuth"
             component={EnableBioAuth}
             options={navigationOptions.EnableBioAuth}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="DisableBioAuth"
             component={DisableBioAuth}
             options={navigationOptions.DisableBioAuth}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="PassphraseBackup"
             component={PassphraseBackup}
             options={navigationOptions.NoHeader}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="Send"
             component={SendToken}
             options={navigationOptions.NoHeader}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="Request"
             component={RequestToken}
             options={navigationOptions.NoHeader}
           />
-          <MainStack.Screen
+          <StackNavigator.Screen
             name="Tokens"
             component={TokensScreen}
             options={navigationOptions.NoHeader}
           />
-        </MainStack.Navigator>
+        </StackNavigator.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
   );
-};
-
-export default MainNavigator;
+}
