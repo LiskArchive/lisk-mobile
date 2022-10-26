@@ -2,7 +2,8 @@
   "commons": {
     "secret_recovery_phrase": "Secret recovery phrase",
     "buttons": {
-      "continue": "Continue"
+      "continue": "Continue",
+      "cancel": "Cancel"
     }
   },
   "Sign in manually": "Sign in manually",
@@ -142,7 +143,6 @@
   "Your Lisk address": "Your Lisk address",
   "Your Bitcoin address": "Your Bitcoin address",
   "Your account is not initialized.": "Your account is not initialized.",
-  "Your balance is not sufficient.": "Your balance is not sufficient.",
   "Your passphrase": "Your passphrase",
   "Your passphrase is still needed": "Your passphrase is still needed",
   "Your passphrase is used to access your account. No one can reset it, not even Lisk.": "Your passphrase is used to access your account. No one can reset it, not even Lisk.",
@@ -284,6 +284,7 @@
     "touchId": "Place your finger over the touch sensor to authenticate"
   },
   "bookmarks": {
+    "emptyText": "You do not have any bookmarks yet.",
     "disabled": {
       "title": "Disabled Bookmark",
       "description": "This bookmark is associated with a legacy account and can no longer be used.",
@@ -393,7 +394,35 @@
         "emptyText": "You do not have external connections yet.",
         "detailsText": "Info",
         "disconnectText": "Disconnect",
-        "chainIDLabel": "Chain ID"
+        "chainIDLabel": "Chain ID",
+        "connectionID": "Connection ID",
+        "connectionDescription": "This website is trying to connect with your lisk wallet",
+        "accountsTitle": "Account(s) to use on this site",
+        "sitePermissions": "Site Permissions",
+        "methods": "Methods",
+        "bridgeApplication": "Bridge Application",
+        "bridgeApplicationDescription": "Paste WalletConnect URI to connection the bridge server",
+        "addApplication": "Add Application",
+        "enterConnectionUri": "Enter connection URI"
+      }
+    },
+    "externalApplicationSignatureRequest": {
+      "errorOnSignTransactionText": "Unable to sign your transaction. Please try again.",
+      "noEncodedTransactionErrorText": "No encoded transaction before responding.",
+      "notification": {
+        "chainIDLabel" : "Chain ID",
+        "descriptionLabel": "Information",
+        "description": "{{appName}} application requesting signature from your Lisk wallet.",
+        "accountLabel": "Selected account"
+      },
+      "summary": {
+        "cancelButtonText": "Back",
+        "continueButtonText": "Approve"
+      },
+      "sign": {
+        "copyToClipboardButtonText": "Copy and redirect to application site",
+        "copiedToClipboardButtonText": "Copied",
+        "errorButtonText": "Redirect to application site"
       }
     }
   },
@@ -480,7 +509,8 @@
       "amountRequired": "Token amount is required",
       "amountMustBeNumber": "Amount must be a number",
       "amountMustBePositive": "Token amount must be a positive number",
-      "priority": "Priority must be specified"
+      "priority": "Priority must be specified",
+      "insufficientBalance": "Your balance is not sufficient."
     },
     "info": {
       "bytesCounter": {
@@ -520,9 +550,11 @@
     "tokens": "Tokens",
     "lockedTokens": "Locked Tokens",
     "emptyTokenMessage": "You do not have any token on this account. You can request for tokens",
+    "loadingTokensText": "Loading tokens...",
+    "errorOnTokensText": "Error loading tokens!",
     "allTokens": "All Tokens",
     "buttons": {
-      "viewAll": "View All",
+      "viewAll": "View all",
       "request": "Request",
       "send": "Send"
     }

@@ -5,7 +5,9 @@ import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
+import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
+import { useSendTokenAmountChecker } from '../../hooks/useSendTokenAmountChecker';
 
 import getSendTokenSelectTokenStepStyles from './styles';
 import {
@@ -16,7 +18,9 @@ import {
   TokenSelectField,
 } from './components';
 
-export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
+export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, transaction }) {
+  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+
   const { field: tokenIDField } = useController({
     name: 'tokenID',
     control: form.control,
@@ -56,42 +60,64 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form }) {
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const disableNextStepButton = !form.watch('tokenID') || !form.watch('amount');
+  const recipientApplication = applicationsMetadata?.data.find(
+    (application) => application.chainID === recipientApplicationChainIDField.value
+  );
+
+  const senderApplication = applicationsMetadata?.data.find(
+    (application) => application.chainID === senderApplicationChainIDField.value
+  );
+
+  const { isMaxAllowedAmountExceeded } = useSendTokenAmountChecker({
+    recipientApplication,
+    selectedTokenID: tokenIDField.value,
+    amount: amountField.value,
+    transactionFee: transaction.data.transaction.fee,
+  });
+
+  const disableNextStepButton =
+    !form.watch('tokenID') || !form.watch('amount') || isMaxAllowedAmountExceeded;
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <View style={[styles.container]}>
         <TokenSelectField
           value={tokenIDField.value}
-          onChange={tokenIDField.onChange}
+          onChange={(value) => form.handleChange('params.tokenID', value, tokenIDField.onChange)}
           errorMessage={form.formState.errors.tokenID?.message}
+          recipientApplication={recipientApplication}
           style={{ toggle: { container: { marginBottom: 16 } } }}
         />
 
         <SendTokenAmountField
           value={amountField.value}
-          onChange={amountField.onChange}
+          onChange={(value) => form.handleChange('params.amount', value, amountField.onChange)}
           tokenID={tokenIDField.value}
-          errorMessage={form.formState.errors.amount?.message}
+          errorMessage={
+            form.formState.errors.amount?.message ||
+            (isMaxAllowedAmountExceeded && i18next.t('sendToken.errors.insufficientBalance'))
+          }
+          recipientApplication={recipientApplication}
           style={{ container: { marginBottom: 16 } }}
         />
 
         <SendTokenMessageField
           value={messageField.value}
-          onChange={messageField.onChange}
+          onChange={(value) => form.handleChange('params.data', value, messageField.onChange)}
           style={{ container: { marginBottom: 16 } }}
         />
 
-        <SendTokenPriorityField value={priorityField.value} onChange={priorityField.onChange} />
+        <SendTokenPriorityField
+          value={priorityField.value}
+          onChange={(value) => form.handleChange('priority', value, priorityField.onChange)}
+        />
 
         <SendTokenTransactionFeesLabels
           tokenID={tokenIDField.value}
-          amount={amountField.value}
-          priority={priorityField.value}
-          message={messageField.value}
           recipientAccountAddress={recipientAccountAddressField.value}
-          senderApplicationChainID={senderApplicationChainIDField.value}
-          recipientApplicationChainID={recipientApplicationChainIDField.value}
+          senderApplication={senderApplication}
+          recipientApplication={recipientApplication}
+          transaction={transaction}
         />
       </View>
 

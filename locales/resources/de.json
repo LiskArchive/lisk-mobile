@@ -1,4 +1,11 @@
 {
+  "commons": {
+    "secret_recovery_phrase": "",
+    "buttons": {
+      "continue": "",
+      "cancel": ""
+    }
+  },
   "Sign in manually": "Manuell anmelden",
   "Signing in...": "Anmelden...",
   "1. Creating your account": "1. Konto wird erstellt",
@@ -20,6 +27,7 @@
   "Address or label": "Adresse oder Bezeichnung",
   "Allow camera access": "Kamerazugriff erlauben",
   "Amount": "Betrag",
+  "Status": "",
   "Amount (LSK)": "Betrag ({{tokenType}})",
   "Amount (including 0.1 LSK)": "Betrag (inklusive 0.1 LSK Gebühr)",
   "Amount in LSK (optional)": "Betrag in LSK (optional)",
@@ -68,15 +76,14 @@
   "No internet connection!": "Keine Internetverbindung!",
   "Not confirmed yet.": "Noch nicht bestätigt.",
   "Optional: add a label to save this address for the future.": "Optional: Bezeichnung hinzufügen, um diese Adresse zu speichern.",
-  "Passphrase": "Passphrase",
   "Passphrase verification": "Passphrase bestätigen",
   "Passphrase will be the only option to access your account.": "Deine Passphrase ist unerlässlich, um auf dein Account zuzugreifen.",
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Perfect! You’re all set": "Perfekt!",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
-  "Private use only": "Nur für private Nutzung",
   "Please enter an address.": "Bitte Adresse eingeben.",
   "Please enter an amount.": "Bitte Betrag eingeben.",
+  "Private use only": "Nur für private Nutzung",
   "Processing speed": "Processing speed",
   "Looking for processing speed options...": "Looking for processing speed options...",
   "Read more": "Mehr erfahren",
@@ -136,21 +143,18 @@
   "Your Lisk address": "Deine Lisk-Adresse",
   "Your Bitcoin address": "Deine Bitcoin-Adresse",
   "Your account is not initialized.": "Dein Konto ist nicht initialisiert.",
-  "Your balance is not sufficient.": "Dein Kontobetrag ist nicht ausreichend.",
   "Your passphrase": "Deine Passphrase",
   "Your passphrase is still needed": "Deine Passphrase wird immer noch gebraucht",
   "Your passphrase is used to access your account. No one can reset it, not even Lisk.": "Deine Passphrase wird benutzt, um auf dein Konto zuzugreifen. Niemand kann sie zurücksetzen, nicht einmal Lisk.",
   "Your wallet": "Dein Wallet",
   "Copied to clipboard": "In Zwischenablage kopiert",
   "About Lisk": "Über Lisk",
-  "Backup your passphrase": "Sichere deine Passphrase",
   "Dark mode": "Dunkler Modus",
   "Disabled": "Deaktiviert",
   "Discreet mode": "Diskreter Modus",
   "Enabled": "Aktiviert",
   "Hide balance and transaction amounts.": "Kontostand und Transaktionen verbergen.",
   "Manage your bookmarks.": "Lesezeichen verwalten.",
-  "Terms of use": "Nutzungsbedingungen",
   "Currency": "Währung",
   "General": "Allgemein",
   "Language": "Sprache",
@@ -280,6 +284,7 @@
     "faceId": "Schau bitte in die Kamera, um dich anzumelden"
   },
   "bookmarks": {
+    "emptyText": "Sie haben noch keine Lesezeichen.",
     "disabled": {
       "title": "",
       "description": "",
@@ -389,7 +394,35 @@
         "emptyText": "Sie haben noch keine externen Verbindungen.",
         "detailsText": "Info",
         "disconnectText": "Trennen",
-        "chainIDLabel": "Chain ID"
+        "chainIDLabel": "",
+        "connectionID": "",
+        "connectionDescription": "",
+        "accountsTitle": "",
+        "sitePermissions": "",
+        "methods": "",
+        "bridgeApplication": "",
+        "bridgeApplicationDescription": "",
+        "addApplication": "",
+        "enterConnectionUri": ""
+      }
+    },
+    "externalApplicationSignatureRequest": {
+      "errorOnSignTransactionText": "Ihre Transaktion kann nicht signiert werden. Bitte versuche es erneut.",
+      "noEncodedTransactionErrorText": "Keine verschlüsselte Transaktion vor der Antwort.",
+      "notification": {
+        "chainIDLabel" : "Chain ID",
+        "descriptionLabel": "Information",
+        "description": "Die {{appName}}-App fordert eine Signatur von Ihrem Lisk-Wallet an.",
+        "accountLabel": "Ausgewähltes Konto"
+      },
+      "summary": {
+        "cancelButtonText": "Zurück",
+        "continueButtonText": "Zustimmen"
+      },
+      "sign": {
+        "copyToClipboardButtonText": "Kopieren und zur App-Site weiterleiten",
+        "copiedToClipboardButtonText": "Kopiert",
+        "errorButtonText": "Weiterleitung zur App-Site"
       }
     }
   },
@@ -476,7 +509,8 @@
       "amountRequired": "Token-Betrag ist erforderlich",
       "amountMustBeNumber": "Der Betrag muss eine Zahl sein",
       "amountMustBePositive": "Tokenbetrag muss eine positive Zahl sein",
-      "priority": "Priorität muss angegeben werden"
+      "priority": "Priorität muss angegeben werden",
+      "insufficientBalance": "Dein Kontobetrag ist nicht ausreichend."
     },
     "info": {
       "bytesCounter": {
@@ -515,7 +549,9 @@
     },
     "tokens": "",
     "lockedTokens": "",
-    "emptyTokenMessage": "",
+    "emptyTokenMessage": "Sie haben kein Token auf diesem Konto. Sie können Token anfordern",
+    "loadingTokensText": "Token werden geladen...",
+    "errorOnTokensText": "Fehler beim Laden der Token!",
     "allTokens": "",
     "buttons": {
       "viewAll": "",

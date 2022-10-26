@@ -1,6 +1,6 @@
 import { getSdkError } from '@walletconnect/utils';
 import { to } from 'await-to-js';
-import { client } from './connectionCreator';
+import { signClient } from './connectionCreator';
 import { PAIRING_PROPOSAL_STATUS, ERROR_CASES } from '../constants/lifeCycle';
 
 /**
@@ -29,7 +29,7 @@ export const onApprove = async (proposal, selectedAccounts) => {
   }, {});
 
   const [err, response] = await to(
-    client.approve({
+    signClient.approve({
       id,
       relayProtocol: relays[0].protocol,
       namespaces,
@@ -53,7 +53,7 @@ export const onApprove = async (proposal, selectedAccounts) => {
  */
 export const onReject = async (proposal) => {
   const { id } = proposal;
-  await client.reject({
+  await signClient.reject({
     id,
     reason: getSdkError(ERROR_CASES.USER_REJECTED_METHODS),
   });

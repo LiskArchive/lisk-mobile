@@ -1,11 +1,17 @@
+/* eslint-disable no-undef */
 /* eslint-disable max-lines, max-statements */
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
+import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'hooks/useTheme';
-import { useAccountInfo } from 'modules/Accounts/hooks/useAccounts/useAccountInfo';
+import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
+import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
+import { useTransactionFeeEstimateQuery } from 'modules/Transactions/api/useTransactionFeeEstimateQuery';
+import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -13,38 +19,35 @@ import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { P } from 'components/shared/toolBox/typography';
 import InfoToggler from 'components/shared/InfoToggler';
 import FadeInView from 'components/shared/fadeInView';
-import { fromRawLsk } from 'utilities/conversions';
+import DataRenderer from 'components/shared/DataRenderer';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import colors from 'constants/styleGuide/colors';
-import { PRIORITY_NAMES_MAP } from '../../constants';
-import useTransactionPriorities from '../../hooks/useTransactionPriorities';
-import useTransactionFeeCalculator from '../../hooks/useTransactionFeeCalculator';
-import useInitializationFeeCalculator from '../../hooks/useInitializationFeeCalculator';
-import useCCMFeeCalculator from '../../hooks/useCCMFeeCalculator';
 
 import { useTokenAmountInCurrency } from './hooks';
 import getSendTokenSelectTokenStepStyles, {
   getSendTokenAmountFieldStyles,
   getSendTokenMessageFieldStyles,
 } from './styles';
-import { useCurrentAccount } from '../../../Accounts/hooks/useAccounts/useCurrentAccount';
-import { useGetTokensQuery } from '../../api/useGetTokensQuery';
 
-export function TokenSelectField({ value, onChange, errorMessage, style }) {
-  const [currentAccount] = useCurrentAccount();
-
-  const currentAccountInfo = useAccountInfo();
-
-  const tokens = useGetTokensQuery(currentAccount.metadata.address);
+export function TokenSelectField({ value, onChange, recipientApplication, errorMessage, style }) {
+  const {
+    data: supportedTokensData,
+    isLoading: isLoadingSupportedTokens,
+    isError: isSupportedTokensError,
+  } = useApplicationSupportedTokensQuery(recipientApplication);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const normalizedBalance = fromRawLsk(currentAccountInfo.summary.balance);
+  const selectedToken = supportedTokensData?.find((token) => token.tokenID === value);
 
-  const selectedToken = tokens.data?.find((token) => token.tokenID === value);
+  const tokenBalance = selectedToken?.availableBalance
+    ? Number(
+        Lisk.transactions.convertBeddowsToLSK(selectedToken?.availableBalance)
+      ).toLocaleString()
+    : 0;
 
   return (
     <Picker value={value} onChange={onChange} error={errorMessage}>
@@ -58,51 +61,64 @@ export function TokenSelectField({ value, onChange, errorMessage, style }) {
             {i18next.t('sendToken.tokenSelect.tokenIDBalanceLabel')}:{' '}
             {/* TODO: Read token symbol from account info when backend send the data */}
             <Text style={[styles.balanceText]}>
-              {normalizedBalance} {selectedToken.symbol}
+              {tokenBalance} {selectedToken.symbol}
             </Text>
           </Picker.Label>
         )}
       </View>
 
-      <Picker.Toggle disabled={tokens.isLoading || tokens.error} style={style?.toggle}>
-        {tokens.isLoading ? (
-          <Text>{i18next.t('sendToken.tokenSelect.loadingTokensText')}</Text>
-        ) : (
-          selectedToken && (
-            <View style={[styles.row]}>
-              <Text style={[styles.text, styles.theme.text]}>{selectedToken.symbol}</Text>
+      <DataRenderer
+        data={supportedTokensData}
+        isLoading={isLoadingSupportedTokens}
+        error={isSupportedTokensError}
+        renderData={(data) => (
+          <>
+            <Picker.Toggle style={style?.toggle}>
+              {selectedToken && (
+                <View style={[styles.row]}>
+                  <Text style={[styles.text, styles.theme.text]}>{selectedToken.symbol}</Text>
 
-              <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
-            </View>
-          )
+                  <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
+                </View>
+              )}
+            </Picker.Toggle>
+
+            <Picker.Menu>
+              <InfiniteScrollList
+                data={data}
+                keyExtractor={(item) => item.tokenID}
+                renderItem={(item) => (
+                  <Picker.Item key={item.tokenID} value={item.tokenID}>
+                    <Text style={[styles.text, styles.theme.text]}>{item.symbol}</Text>
+
+                    <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
+                  </Picker.Item>
+                )}
+                // TODO: Integrate pagination props using react-query.
+              />
+            </Picker.Menu>
+          </>
         )}
-      </Picker.Toggle>
-
-      <Picker.Menu>
-        <InfiniteScrollList
-          data={tokens.data}
-          keyExtractor={(item) => item.tokenID}
-          renderItem={(item) => (
-            <Picker.Item key={item.tokenID} value={item.tokenID}>
-              <Text style={[styles.text, styles.theme.text]}>{item.symbol}</Text>
-
-              <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
-            </Picker.Item>
-          )}
-          renderSpinner
-          // TODO: Integrate pagination props using react-query.
-        />
-      </Picker.Menu>
+      />
     </Picker>
   );
 }
 
-export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, style }) {
-  const [currentAccount] = useCurrentAccount();
+export function SendTokenAmountField({
+  value,
+  onChange,
+  recipientApplication,
+  errorMessage,
+  tokenID,
+  style,
+}) {
+  const {
+    data: supportedTokensData,
+    isLoading: isLoadingSupportedTokens,
+    isError: isSupportedTokensError,
+  } = useApplicationSupportedTokensQuery(recipientApplication);
 
-  const tokens = useGetTokensQuery(currentAccount.metadata.address);
-
-  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
+  const selectedToken = supportedTokensData?.find((token) => token.tokenID === tokenID);
 
   const tokenAmountInCurrency = useTokenAmountInCurrency({
     tokenAmount: value,
@@ -114,40 +130,47 @@ export function SendTokenAmountField({ value, onChange, errorMessage, tokenID, s
   });
 
   return (
-    <Input
-      value={value && value.toString()}
-      onChange={(newValue) => onChange(newValue && parseFloat(newValue))}
-      keyboardType="numeric"
-      disabled={!selectedToken}
-      label={
-        selectedToken
-          ? i18next.t('sendToken.tokenSelect.tokenAmountFieldLabel', {
-              selectedTokenSymbol: selectedToken.symbol || '',
-            })
-          : i18next.t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
-      }
-      placeholder={
-        selectedToken
-          ? i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholder', {
-              selectedTokenSymbol: selectedToken.symbol || '',
-            })
-          : i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
-      }
-      error={errorMessage}
-      adornments={{
-        right: tokenAmountInCurrency && (
-          <Text style={[styles.tokenAmountInCurrencyText]}>
-            ~ {`${tokenAmountInCurrency.amount} ${tokenAmountInCurrency.currency}`}
-          </Text>
-        ),
-      }}
-      innerStyles={getSendTokenAmountFieldStyles(style)}
+    <DataRenderer
+      data={supportedTokensData}
+      isLoading={isLoadingSupportedTokens}
+      error={isSupportedTokensError}
+      renderData={() => (
+        <Input
+          value={value && value.toString()}
+          onChange={(newValue) => onChange(newValue && parseFloat(newValue))}
+          keyboardType="numeric"
+          disabled={!selectedToken}
+          label={
+            selectedToken
+              ? i18next.t('sendToken.tokenSelect.tokenAmountFieldLabel', {
+                  selectedTokenSymbol: selectedToken.symbol || '',
+                })
+              : i18next.t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')
+          }
+          placeholder={
+            selectedToken
+              ? i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholder', {
+                  selectedTokenSymbol: selectedToken.symbol || '',
+                })
+              : i18next.t('sendToken.tokenSelect.tokenAmountFieldPlaceholderPlain')
+          }
+          error={errorMessage}
+          adornments={{
+            right: tokenAmountInCurrency && (
+              <Text style={[styles.tokenAmountInCurrencyText]}>
+                ~ {`${tokenAmountInCurrency.amount} ${tokenAmountInCurrency.currency}`}
+              </Text>
+            ),
+          }}
+          innerStyles={getSendTokenAmountFieldStyles(style)}
+        />
+      )}
     />
   );
 }
 
 export function SendTokenMessageField({ value, onChange, style }) {
-  const [showInput, setShowInput] = useState(false);
+  const [showInput, setShowInput] = useState(!!value);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
@@ -206,45 +229,25 @@ export function SendTokenMessageField({ value, onChange, style }) {
 
 export function SendTokenPriorityField({ value, onChange, style }) {
   const {
-    data: prioritiesData,
-    isLoading: isLoadingPrioritiesData,
-    error: errorOnPriorities,
-  } = useTransactionPriorities();
+    data: transactionFeeEstimateData,
+    isLoading: isTransactionFeeEstimateLoading,
+    error: errorOnTransactionFeeEstimate,
+  } = useTransactionFeeEstimateQuery();
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const shouldShowPrioritiesData = useMemo(
-    () => prioritiesData && prioritiesData[0]?.fee,
-    [prioritiesData]
-  );
+  const priorities =
+    transactionFeeEstimateData?.data.feeEstimatePerByte &&
+    Object.entries(transactionFeeEstimateData.data.feeEstimatePerByte).map(([code, fee]) => ({
+      code,
+      fee,
+    }));
 
-  if (!shouldShowPrioritiesData) return null;
+  const shouldRender = priorities?.reduce((acc, priority) => acc && priority.fee > 0, true);
 
-  if (isLoadingPrioritiesData) {
-    return (
-      <View>
-        <Text style={[styles.label, style?.label]}>
-          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
-        </Text>
-
-        <Text>{i18next.t('sendToken.tokenSelect.loadingPrioritiesText')}</Text>
-      </View>
-    );
-  }
-
-  if (errorOnPriorities) {
-    return (
-      <View>
-        <Text style={[styles.label, styles.theme.label, style?.label]}>
-          {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
-        </Text>
-
-        <Text>{i18next.t('sendToken.tokenSelect.errorLoadingPrioritiesText')}</Text>
-      </View>
-    );
-  }
+  if (!shouldRender) return null;
 
   return (
     <View style={{ marginBottom: 16 }}>
@@ -259,63 +262,62 @@ export function SendTokenPriorityField({ value, onChange, style }) {
         />
       </View>
 
-      <View style={[styles.row, { width: '100%' }]}>
-        {prioritiesData.map((priority) => (
-          <TouchableOpacity
-            key={priority.code}
-            onPress={() => onChange(priority.code)}
-            style={[
-              styles.priorityButtonBase,
-              styles[
-                value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
-              ],
-              { marginRight: 8 },
-            ]}
-          >
-            <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
-              {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
-            </Text>
+      <DataRenderer
+        data={priorities}
+        isLoading={isTransactionFeeEstimateLoading}
+        error={errorOnTransactionFeeEstimate}
+        renderData={(data) => (
+          <View style={[styles.row, { width: '100%' }]}>
+            {data.map((priority) => (
+              <TouchableOpacity
+                key={priority.code}
+                onPress={() => onChange(priority.code)}
+                style={[
+                  styles.priorityButtonBase,
+                  styles[
+                    value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
+                  ],
+                  { marginRight: 8 },
+                ]}
+              >
+                <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
+                  {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
+                </Text>
 
-            <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
-              {priority.fee} LSK
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+                <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
+                  {priority.fee} LSK
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+      />
     </View>
   );
 }
 
 export function SendTokenTransactionFeesLabels({
   tokenID,
-  amount,
-  priority,
-  message,
   recipientAccountAddress,
-  senderApplicationChainID,
-  recipientApplicationChainID,
+  senderApplication,
+  recipientApplication,
+  transaction,
 }) {
-  const [currentAccount] = useCurrentAccount();
+  const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
-  const tokens = useGetTokensQuery(currentAccount.metadata.address);
+  const selectedToken = tokensData?.find((token) => token.tokenID === tokenID);
 
-  const selectedToken = tokens.data?.find((token) => token.tokenID === tokenID);
-
-  const transactionFee = useTransactionFeeCalculator({
-    tokenID,
-    amount,
-    priority,
-    message,
-  });
+  const transactionFee = Lisk.transactions.convertBeddowsToLSK(
+    transaction.data.transaction.fee.toString()
+  );
 
   const initializationFee = useInitializationFeeCalculator({
-    tokenID,
     recipientAccountAddress,
   });
 
   const cmmFee = useCCMFeeCalculator({
-    senderApplicationChainID,
-    recipientApplicationChainID,
+    senderApplicationChainID: senderApplication.chainID,
+    recipientApplicationChainID: recipientApplication.chainID,
   });
 
   const { styles } = useTheme({
@@ -337,7 +339,7 @@ export function SendTokenTransactionFeesLabels({
         </View>
 
         <Text style={[styles.text, styles.theme.text]}>
-          {transactionFee.data} {selectedToken?.symbol}
+          {transactionFee} {selectedToken?.symbol}
         </Text>
       </View>
 
@@ -353,15 +355,19 @@ export function SendTokenTransactionFeesLabels({
           />
         </View>
 
-        {initializationFee.isLoading ? (
-          <Text style={[styles.text, styles.theme.text]}>
-            {i18next.t('sendToken.tokenSelect.loadingInitializationFeeText')}
-          </Text>
-        ) : (
-          <Text style={[styles.text, styles.theme.text]}>
-            {initializationFee.data} {selectedToken?.symbol}
-          </Text>
-        )}
+        <DataRenderer
+          data={initializationFee.data}
+          isLoading={initializationFee.isLoading}
+          error={initializationFee.error}
+          renderData={(data) => (
+            <Text style={[styles.text, styles.theme.text]}>
+              {Lisk.transactions.convertBeddowsToLSK(data.toString())} {selectedToken?.symbol}
+            </Text>
+          )}
+          renderEmpty={() => (
+            <Text style={[styles.text, styles.theme.text]}>0 {selectedToken?.symbol}</Text>
+          )}
+        />
       </View>
 
       <View style={[styles.feeContainer]}>
@@ -376,15 +382,19 @@ export function SendTokenTransactionFeesLabels({
           />
         </View>
 
-        {cmmFee.isLoading ? (
-          <Text style={[styles.text, styles.theme.text]}>
-            {i18next.t('sendToken.tokenSelect.loadingCmmFeeText')}
-          </Text>
-        ) : (
-          <Text style={[styles.text, styles.theme.text]}>
-            {cmmFee.data} {selectedToken?.symbol}
-          </Text>
-        )}
+        <DataRenderer
+          data={cmmFee.data}
+          isLoading={cmmFee.isLoading}
+          error={cmmFee.error}
+          renderData={(data) => (
+            <Text style={[styles.text, styles.theme.text]}>
+              {Lisk.transactions.convertBeddowsToLSK(data.toString())} {selectedToken?.symbol}
+            </Text>
+          )}
+          renderEmpty={() => (
+            <Text style={[styles.text, styles.theme.text]}>0 {selectedToken?.symbol}</Text>
+          )}
+        />
       </View>
     </View>
   );

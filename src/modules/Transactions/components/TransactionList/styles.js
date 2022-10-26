@@ -1,12 +1,8 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 
 export default function getTransactionListStyles() {
   return {
     common: {
-      container: {
-        flex: 1,
-        paddingBottom: boxes.boxPadding,
-      },
       header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -30,12 +26,24 @@ export default function getTransactionListStyles() {
         fontSize: 16,
         lineHeight: 19,
       },
+      loadingText: {
+        fontSize: 14,
+        marginTop: 8,
+        marginBottom: 8,
+      },
+      resultScreenContainer: {
+        flex: undefined,
+        maxHeight: 150,
+      },
     },
     [themes.light]: {
       container: {
         backgroundColor: colors.light.white,
       },
       title: {
+        color: colors.light.zodiacBlue,
+      },
+      loadingText: {
         color: colors.light.zodiacBlue,
       },
       transactionAddressText: {
@@ -48,6 +56,9 @@ export default function getTransactionListStyles() {
       },
       title: {
         color: colors.light.white,
+      },
+      loadingText: {
+        color: colors.dark.ghost,
       },
       transactionAddressText: {
         color: colors.light.white,

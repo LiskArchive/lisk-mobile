@@ -1,178 +1,53 @@
 /* eslint-disable max-statements */
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View } from 'react-native';
 import i18next from 'i18next';
+import { useController } from 'react-hook-form';
 
 import { useTheme } from 'hooks/useTheme';
+import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
+import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
+import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import { P } from 'components/shared/toolBox/typography';
-import TokenSvg from 'assets/svgs/TokenSvg';
-import { stringShortener } from 'utilities/helpers';
-import CopyToClipboard from 'components/shared/copyToClipboard';
-import { PRIORITY_NAMES_MAP } from '../../constants';
+import BottomModal from 'components/shared/BottomModal';
 
 import getSendTokenSummaryStepStyles from './styles';
-import { useSendTokenSummary } from './hooks';
-import { SendTokenSummaryModal } from './components';
-import Avatar from '../../../../components/shared/avatar';
 
-export default function SendTokenSummaryStep({ form, prevStep, reset }) {
+export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
   const [showSendTokenSummaryModal, setShowSendTokenSummaryModal] = useState(false);
+
+  const { field } = useController({
+    name: 'userPassword',
+    control: form.control,
+  });
+
+  const senderApplicationChainID = form.watch('senderApplicationChainID');
+  const recipientApplicationChainID = form.watch('recipientApplicationChainID');
+  const recipientAccountAddress = form.watch('recipientAccountAddress');
+  const tokenID = form.watch('tokenID');
+  const amount = parseFloat(form.watch('amount'));
+  const message = form.watch('message');
+  const priority = form.watch('priority');
+
+  const summary = useTransactionSummary({
+    senderApplicationChainID,
+    recipientApplicationChainID,
+    recipientAccountAddress,
+    tokenID,
+    amount,
+    message,
+    priority,
+    fee: transaction.data.transaction.fee,
+  });
 
   const { styles } = useTheme({
     styles: getSendTokenSummaryStepStyles(),
   });
 
-  const summary = useSendTokenSummary({ form });
-
   return (
     <>
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <View style={[styles.container, styles.theme.container]}>
-          <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>
-              {i18next.t('sendToken.applicationsSelect.senderApplicationFieldLabel')}
-            </Text>
-
-            <View style={[styles.row]}>
-              <Text style={[styles.valueText, styles.theme.valueText]}>
-                {summary.senderApplication?.chainName}
-              </Text>
-
-              <Image
-                source={{ uri: summary.senderApplication?.logo.png }}
-                style={[styles.applicationLogoImage]}
-              />
-            </View>
-          </View>
-
-          <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>
-              {i18next.t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
-            </Text>
-
-            <View style={[styles.row]}>
-              <Text style={[styles.valueText, styles.theme.valueText]}>
-                {summary.recipientApplication?.chainName}
-              </Text>
-
-              <Image
-                source={{ uri: summary.recipientApplication?.logo.png }}
-                style={[styles.applicationLogoImage]}
-              />
-            </View>
-          </View>
-
-          <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>
-              {i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
-            </Text>
-
-            {summary.recipientAccount.isNew ? (
-              <CopyToClipboard
-                style={[styles.valueText, styles.theme.valueText]}
-                labelStyle={[styles.valueText, styles.theme.valueText, { marginRight: 8 }]}
-                showIcon
-                iconSize={18}
-                value={summary.recipientAccount.address}
-                type={P}
-                label={stringShortener(summary.recipientAccount.address, 5, 5)}
-              />
-            ) : (
-              <View style={[styles.row]}>
-                <Avatar
-                  address={summary.recipientAccount.address}
-                  size={24}
-                  style={styles.avatar}
-                />
-
-                <View>
-                  {!!summary.recipientAccount.label && (
-                    <P style={[styles.valueText, styles.theme.valueText]}>
-                      {summary.recipientAccount.label}
-                    </P>
-                  )}
-
-                  <P style={[styles.label, styles.theme.label]}>
-                    {stringShortener(summary.recipientAccount.address, 6, 6)}
-                  </P>
-                </View>
-              </View>
-            )}
-          </View>
-
-          <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>
-              {i18next.t('sendToken.tokenSelect.tokenIDFieldLabel')}
-            </Text>
-
-            <View style={[styles.row]}>
-              <Text style={[styles.valueText, styles.theme.valueText]}>
-                {summary.token?.symbol}
-              </Text>
-
-              <TokenSvg symbol={summary.token?.symbol} style={styles.tokenSvg} />
-            </View>
-          </View>
-
-          <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>
-              {i18next.t('sendToken.tokenSelect.tokenAmountFieldLabelPlain')}
-            </Text>
-
-            <Text style={[styles.valueText, styles.theme.valueText]}>
-              {summary.amount} {summary.token?.symbol}
-            </Text>
-          </View>
-
-          {!!summary.message && (
-            <View style={[styles.messageRow]}>
-              <Text style={[styles.label, { marginBottom: 8 }]}>
-                {i18next.t('sendToken.tokenSelect.messageFieldLabelPlain')}
-              </Text>
-
-              <Text style={[styles.valueText, styles.theme.valueText]}>{summary.message}</Text>
-            </View>
-          )}
-
-          <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>
-              {i18next.t('sendToken.tokenSelect.priorityFieldLabel')}
-            </Text>
-
-            <Text style={[styles.valueText, styles.theme.valueText]}>
-              {i18next.t(PRIORITY_NAMES_MAP[summary.priority])}
-            </Text>
-          </View>
-
-          <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>
-              {i18next.t('sendToken.tokenSelect.transactionFeeLabel')}
-            </Text>
-
-            <Text style={[styles.valueText, styles.theme.valueText]}>
-              {summary.transactionFee?.data} {summary.token?.symbol}
-            </Text>
-          </View>
-
-          <View style={[styles.fieldRow]}>
-            <Text style={[styles.label]}>
-              {i18next.t('sendToken.tokenSelect.initializationFeeLabel')}
-            </Text>
-
-            <Text style={[styles.valueText, styles.theme.valueText]}>
-              {summary.initializationFee?.data} {summary.token?.symbol}
-            </Text>
-          </View>
-
-          <View style={[styles.fieldRow, { borderBottomColor: 'transparent' }]}>
-            <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.cmmFeeLabel')}</Text>
-
-            <Text style={[styles.valueText, styles.theme.valueText]}>
-              {summary.cmmFee?.data} {summary.token?.symbol}
-            </Text>
-          </View>
-        </View>
+      <View style={[styles.container, styles.theme.container]}>
+        <TransactionSummary {...summary} />
 
         <View style={[styles.buttonsContainer]}>
           <Button
@@ -190,17 +65,25 @@ export default function SendTokenSummaryStep({ form, prevStep, reset }) {
         </View>
       </View>
 
-      <SendTokenSummaryModal
-        show={showSendTokenSummaryModal}
-        setShow={setShowSendTokenSummaryModal}
-        summary={summary}
-        form={form}
-        handleResetForm={() => {
-          form.handleReset();
-          reset();
-        }}
-        handleResetStepper={reset}
-      />
+      <BottomModal show={showSendTokenSummaryModal} showClose={false}>
+        <SignTransaction
+          onSubmit={form.handleSubmit}
+          onSuccess={() => {
+            form.handleReset();
+            reset();
+          }}
+          onError={reset}
+          password={field.value}
+          onPasswordChange={field.onChange}
+          isValidationError={Object.keys(form.formState.errors).length > 0}
+          amount={summary.amount}
+          token={summary.token}
+          isSuccess={form.broadcastTransactionMutation.isSuccess}
+          isLoading={form.broadcastTransactionMutation.isLoading}
+          error={form.broadcastTransactionMutation.error}
+          onReset={form.broadcastTransactionMutation.reset}
+        />
+      </BottomModal>
     </>
   );
 }

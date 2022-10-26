@@ -4,12 +4,13 @@ import i18next from 'i18next';
 import { useTheme } from 'hooks/useTheme';
 import DataRenderer from 'components/shared/DataRenderer';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import ResultScreen from 'components/screens/ResultScreen';
+import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import { P } from 'components/shared/toolBox/typography';
-import EmptyState from 'components/shared/EmptyState';
 import usePairings from '../../../../../libs/wcm/hooks/usePairings';
+import ExternalApplicationRow from '../ExternalApplicationRow';
 
 import getExternalApplicationListStyles from './styles';
-import ExternalApplicationRow from '../ExternalApplicationRow';
 
 export default function ExternalBlockchainApplicationsList() {
   const { pairings } = usePairings();
@@ -42,7 +43,10 @@ export default function ExternalBlockchainApplicationsList() {
         </P>
       )}
       renderEmpty={() => (
-        <EmptyState message={i18next.t('application.explore.externalApplicationList.emptyText')} />
+        <ResultScreen
+          illustration={<EmptyIllustrationSvg />}
+          description={i18next.t('application.explore.externalApplicationList.emptyText')}
+        />
       )}
     />
   );

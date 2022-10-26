@@ -14,11 +14,7 @@ const AddApplication = ({ navigation, t }) => {
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton
-        title={t('application.explore.title')}
-        onPress={navigation.goBack}
-        titleStyle={[styles.header]}
-      />
+      <HeaderBackButton title={t('application.explore.title')} onPress={navigation.goBack} />
 
       <ApplicationList
         applications={applicationsMetadata}

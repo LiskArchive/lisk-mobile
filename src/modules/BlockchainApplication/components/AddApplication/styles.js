@@ -7,9 +7,6 @@ export default function getAddApplicationStyles() {
         flex: 1,
         paddingTop: 44,
       },
-      header: {
-        marginBottom: 24,
-      },
       applicationsListContainer: {
         paddingLeft: 16,
         paddingRight: 16,

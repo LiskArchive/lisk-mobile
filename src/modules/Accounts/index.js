@@ -18,11 +18,11 @@ import { settingsUpdated } from 'modules/Settings/actions';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
 import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
-import TokensTab from './components/TokensTab';
 import getStyles from './styles';
 import TransactionList from '../Transactions/components/TransactionList';
 import AccountsManagerModal from './components/AccountsManagerModal';
 import ConnectionContext from '../../../libs/wcm/context/connectionContext';
+import TokenList from './components/TokenList';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -63,14 +63,17 @@ export default function Home() {
           <TouchableOpacity style={[styles.discreteContainer]} onPress={toggleIncognito}>
             <IncognitoSvg size={1.2} disabled={discrete} />
           </TouchableOpacity>
+
           <View style={styles.flex}>
             <ApplicationSwitcher onPress={() => setShowManageApplicationsModal(true)} />
           </View>
         </View>
+
         <View style={[styles.body]}>
           <View style={[styles.accountCard]}>
             <View style={[styles.row]}>
               <Avatar address={address} size={50} />
+
               <View style={[styles.accountDetails]}>
                 <P style={[styles.username, styles.theme.username]}>{username}</P>
                 <View>
@@ -81,6 +84,7 @@ export default function Home() {
                   />
                 </View>
               </View>
+
               <TouchableOpacity
                 style={[styles.switchContainer]}
                 onPress={() => setShowManageAccountsModal(true)}
@@ -88,23 +92,26 @@ export default function Home() {
                 <SwitchSvg />
               </TouchableOpacity>
             </View>
+
             <View style={[styles.row, styles.buttonContainer]}>
               <TouchableOpacity style={[styles.button]} onPress={requestTokens}>
                 <P style={[styles.buttonText]}>Request</P>
               </TouchableOpacity>
+
               <TouchableOpacity style={[styles.button, styles.sendButton]} onPress={sendTokens}>
                 <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
               </TouchableOpacity>
             </View>
           </View>
 
-          <TokensTab />
+          <TokenList style={{ container: { marginTop: 16 } }} />
 
-          <TransactionList />
+          <TransactionList style={{ container: { marginTop: 16 } }} />
         </View>
       </NavigationSafeAreaView>
 
       <AccountsManagerModal show={showManageAccountsModal} setShow={setShowManageAccountsModal} />
+
       <ApplicationManagerModal
         show={showManageApplicationsModal}
         setShow={setShowManageApplicationsModal}

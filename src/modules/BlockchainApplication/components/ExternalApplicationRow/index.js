@@ -1,21 +1,23 @@
-import { View, Image, Text } from 'react-native';
+import { View, Image } from 'react-native';
 import React, { useState } from 'react';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { P } from 'components/shared/toolBox/typography';
-import { colors } from 'constants/styleGuide';
+import { P, B } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
-import CheckSvg from 'assets/svgs/CheckSvg';
 import BottomModal from 'components/shared/BottomModal';
+import ResultScreen from 'components/screens/ResultScreen';
+import CheckSvg from 'assets/svgs/CheckSvg';
 import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 import InfoSvg from 'assets/svgs/InfoSvg';
+import { colors } from 'constants/styleGuide';
+import ExternalApplicationDetails from '../ExternalApplicationDetails';
+import DisconnectExternalApplication from '../DisconnectExternalApplication';
 
 import getExternalBlockchainApplicationRowStyles from './styles';
 
 export default function ExternalApplicationRow({ application }) {
-  const [showApplicationInfoModal, setShowApplicationInfoModal] = useState(false);
-  const [showDisconnectApplicationModal, setShowDisconnectApplicationModal] = useState(false);
+  const [activeAction, setActiveAction] = useState();
 
   const { styles } = useTheme({ styles: getExternalBlockchainApplicationRowStyles() });
 
@@ -23,16 +25,73 @@ export default function ExternalApplicationRow({ application }) {
     {
       title: i18next.t('application.explore.externalApplicationList.detailsText'),
       color: colors.light.blueGray,
-      icon: () => <InfoSvg color={colors.light.white} />,
-      onPress: () => setShowApplicationInfoModal(true),
+      icon: () => <InfoSvg color={colors.light.white} height={20} width={20} />,
+      onPress: () => setActiveAction('details'),
     },
     {
       title: i18next.t('application.explore.externalApplicationList.disconnectText'),
       color: colors.light.furyRed,
-      icon: () => <CircleCrossedSvg color={colors.light.white} />,
-      onPress: () => setShowDisconnectApplicationModal(true),
+      icon: () => <CircleCrossedSvg color={colors.light.white} height={22} width={22} />,
+      onPress: () => setActiveAction('disconnect'),
     },
   ];
+
+  function renderActiveAction() {
+    switch (activeAction) {
+      case 'details':
+        return (
+          <ExternalApplicationDetails
+            application={application}
+            onApplicationDisconnect={() => setActiveAction('disconnect')}
+          />
+        );
+
+      case 'disconnect':
+        return (
+          <DisconnectExternalApplication
+            application={application}
+            onSuccess={() => setActiveAction('disconnectSuccess')}
+            onError={() => setActiveAction('disconnectError')}
+            onCancel={() => setActiveAction(undefined)}
+          />
+        );
+
+      case 'disconnectSuccess':
+        return (
+          <ResultScreen
+            variant="success"
+            title="Application has now been disconnected"
+            description={
+              <P style={[styles.resultDescription, styles.theme.resultDescription]}>
+                You can always add <B>{application.peerMetadata.name}</B> again to your application
+                list.
+              </P>
+            }
+            onContinue={() => setActiveAction(undefined)}
+            buttonText="Back to connections"
+          />
+        );
+
+      case 'disconnectError':
+        return (
+          <ResultScreen
+            variant="error"
+            title="Error disconnecting application"
+            description={
+              <P style={[styles.resultDescription, styles.theme.resultDescription]}>
+                There was an error trying to disconnect <B>{application.peerMetadata.name}</B>.
+                Please try again.
+              </P>
+            }
+            onContinue={() => setActiveAction('disconnect')}
+            buttonText="Try again"
+          />
+        );
+
+      default:
+        return null;
+    }
+  }
 
   return (
     <>
@@ -59,20 +118,8 @@ export default function ExternalApplicationRow({ application }) {
         </View>
       </Swipeable>
 
-      <BottomModal
-        show={showApplicationInfoModal}
-        toggleShow={() => setShowApplicationInfoModal(false)}
-      >
-        {/* TODO: Implement external application Info component. */}
-        <Text>Info</Text>
-      </BottomModal>
-
-      <BottomModal
-        show={showDisconnectApplicationModal}
-        toggleShow={() => setShowDisconnectApplicationModal(false)}
-      >
-        {/* TODO: Implement external application Disconnect component. */}
-        <Text>Disconnect</Text>
+      <BottomModal show={!!activeAction} toggleShow={() => setActiveAction(undefined)}>
+        {renderActiveAction()}
       </BottomModal>
     </>
   );

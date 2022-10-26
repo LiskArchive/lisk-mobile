@@ -7,7 +7,13 @@ import getStyles from './styles';
 
 const StepItem = ({ step, styles, baseStyles, current, isLast }) => (
   <>
-    <View style={[styles.progressTitleContainer]}>
+    <View
+      style={[
+        styles.progressTitleContainer,
+        styles.theme.progressTitleContainer,
+        current >= step && styles.activeStep,
+      ]}
+    >
       <Text style={[styles.progressTitle]}>{step + 1}</Text>
     </View>
     {!isLast && (

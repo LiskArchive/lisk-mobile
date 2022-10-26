@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import wallets from 'tests/constants/wallets';
-import { client } from '../utils/connectionCreator';
+import { signClient } from '../utils/connectionCreator';
 import { EVENTS } from '../constants/lifeCycle';
 import * as sessionHandlers from '../utils/sessionHandlers';
 import useSession from './useSession';
@@ -25,7 +25,7 @@ jest.mock('@walletconnect/utils', () => ({
 }));
 
 jest.mock('@libs/wcm/utils/connectionCreator', () => ({
-  client: {
+  signClient: {
     session: {
       keys: [session.id],
       get: jest.fn().mockReturnValue(session),
@@ -48,7 +48,7 @@ describe('useSession', () => {
 
   it('Should get the latest session when mounted', () => {
     renderHook(() => useSession());
-    expect(client.session.get).toHaveBeenCalledWith(session.id);
+    expect(signClient.session.get).toHaveBeenCalledWith(session.id);
   });
 
   it('Should call sessionHandlers.onApprove with correct params if approve is called', () => {

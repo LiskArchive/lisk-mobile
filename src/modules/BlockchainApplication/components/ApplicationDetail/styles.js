@@ -1,9 +1,8 @@
+import { Platform } from 'react-native';
+
 import { themes, colors, boxes, fonts } from 'constants/styleGuide';
-import { deviceType } from 'utilities/device';
 
-const type = deviceType();
-
-const safeAreaMarginTop = type === 'iOSx' ? 45 : 20;
+const safeAreaPaddingTop = Platform.OS === 'android' ? 0 : 44;
 
 export default {
   common: {
@@ -11,17 +10,17 @@ export default {
       flex: 1,
     },
     container: {
-      paddingTop: safeAreaMarginTop,
+      paddingTop: safeAreaPaddingTop,
     },
     header: {
       height: 230,
       backgroundColor: colors.light.ultramarineBlue,
     },
-    explore: {
-      paddingTop: 40,
-    },
     body: {
       padding: boxes.boxPadding,
+      paddingTop: 8,
+      paddingBottom: 44,
+      flex: 1,
     },
     logoContainer: {
       marginTop: -35,
@@ -36,10 +35,10 @@ export default {
       justifyContent: 'center',
     },
     pinIcon: {
-      marginHorizontal: 5,
+      marginHorizontal: 2,
     },
     title: {
-      marginHorizontal: 5,
+      marginHorizontal: 4,
       textAlign: 'center',
       fontFamily: fonts.family.contextSemiBold,
     },
@@ -47,6 +46,8 @@ export default {
       textAlign: 'center',
       fontSize: fonts.size.small,
       fontFamily: fonts.family.context,
+      marginTop: 16,
+      marginBottom: 16,
     },
     row: {
       flexDirection: 'row',
@@ -58,25 +59,27 @@ export default {
     },
     depositedContainer: {
       justifyContent: 'center',
-      marginVertical: 25,
+      marginTop: 8,
+      marginBottom: 32,
     },
     deposited: {
-      fontSize: 14,
+      fontSize: fonts.size.input,
       color: colors.light.blueGray,
+      marginRight: 4,
     },
     smallTitle: {
-      fontSize: 14,
+      fontSize: fonts.size.input,
       color: colors.light.blueGray,
-      marginBottom: 10,
+      marginBottom: 8,
     },
     amount: {
       color: colors.light.ultramarineBlue,
       fontFamily: fonts.family.contextBold,
-      fontSize: 18,
+      fontSize: fonts.size.input,
     },
     url: {
-      fontSize: 14,
-      marginLeft: 8,
+      fontSize: fonts.size.input,
+      marginLeft: 4,
       color: colors.light.ultramarineBlue,
     },
     stats: {

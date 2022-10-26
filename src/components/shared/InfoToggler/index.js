@@ -21,11 +21,7 @@ export default function InfoToggler({ title, description, style }) {
         <InfoSvg />
       </TouchableOpacity>
 
-      <BottomModal
-        show={showModal}
-        toggleShow={() => setShowModal(false)}
-        style={{ container: style?.modal }}
-      >
+      <BottomModal show={showModal} toggleShow={() => setShowModal(false)}>
         <View style={[styles.modalContainer]}>
           {title && <Text style={[styles.title, styles.theme.title, style?.title]}>{title}</Text>}
 

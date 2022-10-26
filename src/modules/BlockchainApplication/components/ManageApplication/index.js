@@ -58,7 +58,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
 
   return (
     <View style={[styles.container, styles.theme.container, style?.container]}>
-      <H3 style={[styles.title, style?.title]}>
+      <H3 style={[styles.title, styles.theme.title, style?.title]}>
         {i18next.t('application.title.switchApplication')}
       </H3>
 
@@ -69,7 +69,8 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
         showActive
         deleteApplication={deleteApplication}
       />
-      <View style={styles.bottom}>
+
+      <View style={styles.footer}>
         <TouchableOpacity
           style={[styles.button, styles.outline, styles.theme.outline]}
           onPress={addApplication}
@@ -80,7 +81,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
           <P style={styles.buttonText}>{i18next.t('application.manage.add.buttonText')}</P>
         </TouchableOpacity>
       </View>
-      <BottomModal show={isModalOpen} toggleShow={() => toggleModal(false)} style={styles.modal}>
+      <BottomModal show={isModalOpen} toggleShow={() => toggleModal(false)}>
         {selectedApplication && (
           <SelectNode
             styles={styles}

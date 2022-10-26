@@ -1,6 +1,6 @@
 export const mockDefaultApplicationMeta = {
   chainName: 'Lisk',
-  chainID: '00000001',
+  chainID: '04000000',
   title: 'Lisk - Betanet',
   description: 'Metadata configuration for the Lisk blockchain (mainchain) in betanet',
   networkType: 'betanet',
@@ -8,8 +8,8 @@ export const mockDefaultApplicationMeta = {
   projectPage: 'https://lisk.com',
   serviceURLs: [
     {
-      http: 'http://104.248.241.229:9901',
-      ws: 'wss://104.248.241.229:9901',
+      http: 'http://165.227.246.146:9901',
+      ws: 'ws://165.227.246.146:9901/blockchain',
     },
   ],
   logo: {

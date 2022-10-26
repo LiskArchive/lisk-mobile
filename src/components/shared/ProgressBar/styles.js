@@ -14,7 +14,6 @@ export default () => ({
       backgroundColor: colors.light.ultramarineBlue,
     },
     progressTitleContainer: {
-      backgroundColor: colors.light.ultramarineBlue,
       width: 16,
       height: 16,
       borderRadius: 15,
@@ -36,10 +35,16 @@ export default () => ({
     progressStepContainer: {
       backgroundColor: colors.light.ghost,
     },
+    progressTitleContainer: {
+      backgroundColor: colors.light.ghost,
+    },
   },
 
   [themes.dark]: {
     progressStepContainer: {
+      backgroundColor: colors.dark.slateGray,
+    },
+    progressTitleContainer: {
       backgroundColor: colors.dark.slateGray,
     },
   },

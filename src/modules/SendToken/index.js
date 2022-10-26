@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable max-statements */
+import React, { useMemo } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -13,17 +14,32 @@ import SendTokenSelectTokenStep from './components/SelectTokenStep';
 import SendTokenSummaryStep from './components/SummaryStep';
 import useSendTokenForm from './hooks/useSendTokenForm';
 import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
+import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction';
 
 export default function SendToken({ route }) {
   const navigation = useNavigation();
 
   const account = useSelector((state) => state.account);
 
+  const createTransactionOptions = useMemo(
+    () => ({
+      module: 'token',
+      command: 'transfer',
+    }),
+    []
+  );
+
+  const transaction = useCreateTransaction(createTransactionOptions);
+
+  const form = useSendTokenForm({
+    transaction: transaction.data,
+    isTransactionSuccess: transaction.isSuccess,
+    initialValues: route.params,
+  });
+
   const { styles } = useTheme({
     styles: getSendTokenStyles(),
   });
-
-  const form = useSendTokenForm();
 
   const steps = [
     {
@@ -55,7 +71,7 @@ export default function SendToken({ route }) {
       ) : (
         <Stepper showProgressBar styles={{ progressBar: { wrapper: styles.progressBar } }}>
           {steps.map((step) => (
-            <step.component key={step.title} navigation={navigation} route={route} form={form} />
+            <step.component key={step.title} route={route} form={form} transaction={transaction} />
           ))}
         </Stepper>
       )}

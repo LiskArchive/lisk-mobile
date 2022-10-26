@@ -36,7 +36,7 @@ export const encryptAccount = async ({
       version: 1,
     };
   } catch (error) {
-    console.log('error', error);
+    console.error('error', error);
     throw new Error(error);
   }
 };

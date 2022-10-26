@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
-import { mockTokens } from 'modules/SendToken/__fixtures__';
+import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import {
@@ -20,6 +20,7 @@ import {
   TokenSelectField,
 } from 'modules/SendToken/components/SelectTokenStep/components';
 import { SendTokenRecipientApplicationField } from 'modules/SendToken/components/SelectApplicationsStep/components';
+import DataRenderer from 'components/shared/DataRenderer';
 import Share from 'components/shared/share';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P, B } from 'components/shared/toolBox/typography';
@@ -53,10 +54,10 @@ export default function RequestToken() {
   const [recipientApplicationChainID, setRecipientApplicationChainID] = useState(
     currentApplication.chainID
   );
-  const [recipientTokenID, setRecipientTokenID] = useState(
-    mockTokens.find((token) => token.symbol === 'LSK')?.tokenID
+  const [tokenID, setTokenID] = useState(
+    mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
   );
-  const [modalOpen, setModalOpen] = useState(false);
+  const [showQRModal, setShowQRModal] = useState(false);
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
@@ -64,18 +65,22 @@ export default function RequestToken() {
     const validator = (str) => reg.amount.test(str);
 
     const amountValidity = validator(amount.value) ? 0 : 1;
+
     const queryString = serializeQueryString({
-      recipient: currentAccount.metadata.address,
+      recipientAccountAddress: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
-      recipientApplication: recipientApplicationChainID,
-      recipientToken: recipientTokenID,
+      recipientApplicationChainID,
+      tokenID,
+      message,
     });
+
     return `lisk://wallet${queryString}`;
   }, [
     currentAccount.metadata.address,
     amount.value,
     recipientApplicationChainID,
-    recipientTokenID,
+    tokenID,
+    message,
   ]);
 
   const [copiedToClipboard, handleCopyToClipboard] = useCopyToClipboard(qrCodeUrl);
@@ -95,30 +100,23 @@ export default function RequestToken() {
     />
   );
 
-  if (applicationsMetadata.isLoading) {
-    return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
-        <View style={[styles.container]}>
-          <P>Loading...</P>
-        </View>
-      </View>
-    );
-  }
-
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
         title="requestTokens.title"
         onPress={navigation.goBack}
         rightIconComponent={() => (
-          <TouchableOpacity onPress={() => setModalOpen(true)}>{renderQRCode(20)}</TouchableOpacity>
+          <TouchableOpacity onPress={() => setShowQRModal(true)}>
+            {renderQRCode(20)}
+          </TouchableOpacity>
         )}
       />
 
       <KeyboardAwareScrollView
         viewIsInsideTab
-        enableOnAndroid={true}
+        enableOnAndroid
         enableResetScrollToCoords={false}
+        contentContainerStyle={{ flex: 1 }}
       >
         <View style={[styles.innerContainer, styles.theme.innerContainer]}>
           <P style={[styles.addressLabel, styles.theme.addressLabel]}>
@@ -139,28 +137,39 @@ export default function RequestToken() {
             </View>
           </View>
 
-          <SendTokenRecipientApplicationField
-            value={recipientApplicationChainID}
-            onChange={setRecipientApplicationChainID}
-            applications={applicationsMetadata}
-            style={{ toggle: { container: { marginBottom: 16 } } }}
+          <DataRenderer
+            data={applicationsMetadata.data}
+            isLoading={applicationsMetadata.isLoading}
+            error={applicationsMetadata.error}
+            renderData={(data) => (
+              <SendTokenRecipientApplicationField
+                value={recipientApplicationChainID}
+                onChange={setRecipientApplicationChainID}
+                applications={data}
+                style={{ toggle: { container: { marginBottom: 16 } } }}
+              />
+            )}
           />
 
           <TokenSelectField
-            value={recipientTokenID}
-            onChange={setRecipientTokenID}
+            value={tokenID}
+            onChange={setTokenID}
+            recipientApplication={currentApplication}
             style={{ toggle: { container: { marginBottom: 16 } } }}
           />
 
           <SendTokenAmountField
             value={amount.value}
-            onChange={setAmount}
-            tokenID={recipientTokenID}
+            onChange={(value) => setAmount((prevValue) => ({ ...prevValue, value }))}
+            tokenID={tokenID}
+            recipientApplication={currentApplication}
             style={{ container: { marginBottom: 16 } }}
           />
 
           <SendTokenMessageField onChange={setMessage} value={message} />
+        </View>
 
+        <View style={styles.footer}>
           <PrimaryButton
             onPress={handleCopyToClipboard}
             adornments={{
@@ -176,19 +185,13 @@ export default function RequestToken() {
         </View>
       </KeyboardAwareScrollView>
 
-      <BottomModal
-        style={{ container: styles.modalContainer }}
-        show={modalOpen}
-        toggleShow={setModalOpen}
-      >
+      <BottomModal show={showQRModal} toggleShow={setShowQRModal}>
         <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
-          <View>
-            {renderQRCode(qrCodeSize)}
-            <View style={styles.shareTextContainer}>
-              <P style={[styles.shareText, styles.theme.shareText]}>
-                {i18next.t('Tap on the QR Code to share it.')}
-              </P>
-            </View>
+          {renderQRCode(qrCodeSize)}
+          <View style={styles.shareTextContainer}>
+            <P style={[styles.shareText, styles.theme.shareText]}>
+              {i18next.t('Tap on the QR Code to share it.')}
+            </P>
           </View>
         </Share>
       </BottomModal>

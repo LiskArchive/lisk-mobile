@@ -28,7 +28,7 @@ const defaultKeys = {
   publicKey: Buffer.from(publicKey, 'hex'),
 };
 
-jest.spyOn(cryptography.ed, 'getKeys').mockReturnValue(defaultKeys);
+jest.spyOn(cryptography.legacy, 'getKeys').mockReturnValue(defaultKeys);
 jest.spyOn(cryptography.encrypt, 'decryptMessageWithPassword').mockResolvedValue(
   JSON.stringify({
     recoveryPhrase,
@@ -39,6 +39,6 @@ describe('decryptAccount', () => {
   it('decrypts account when the correct arguments are passed', async () => {
     const password = 'samplePassword@1';
     const res = await decryptAccount(encryptedPassphrase, password);
-    expect(res).toEqual(recoveryPhrase);
+    expect(res.recoveryPhrase).toEqual(recoveryPhrase);
   });
 });

@@ -55,7 +55,7 @@ export default function AccountsList({
             active={item.metadata.address === currentAccount.metadata?.address}
           />
         )}
-        renderSpinner
+        withDefaultSpinner
         // TODO: Integrate pagination props when useAccounts
         // is refactored to use react-query.
       />
