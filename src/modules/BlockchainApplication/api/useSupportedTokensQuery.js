@@ -1,6 +1,6 @@
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { GET_SUPPORTED_TOKENS_QUERY } from 'utilities/api/queries';
-import { LIMIT, API_URL } from 'utilities/api/constants';
+import { API_URL } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 
 /**
@@ -17,7 +17,7 @@ export function useSupportedTokensQuery({ config: customConfig = {}, options, cl
     method: 'get',
     event: 'get.tokens.supported',
     ...customConfig,
-    params: { limit: LIMIT, ...(customConfig?.params || {}) },
+    params: customConfig?.params,
   };
 
   const keys = useQueryKeys([GET_SUPPORTED_TOKENS_QUERY, config]);

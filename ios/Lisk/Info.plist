@@ -1,92 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>Lisk</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
+		<key>CFBundleDevelopmentRegion</key>
+		<string>en</string>
+		<key>CFBundleDisplayName</key>
+		<string>Lisk</string>
+		<key>CFBundleExecutable</key>
+		<string>$(EXECUTABLE_NAME)</string>
+		<key>CFBundleIdentifier</key>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+		<key>CFBundleInfoDictionaryVersion</key>
+		<string>6.0</string>
+		<key>CFBundleName</key>
+		<string>$(PRODUCT_NAME)</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+		<key>CFBundleShortVersionString</key>
+		<string>$(MARKETING_VERSION)</string>
+		<key>CFBundleSignature</key>
+		<string>????</string>
+		<key>CFBundleVersion</key>
+		<string>$(CURRENT_PROJECT_VERSION)</string>
+		<key>LSRequiresIPhoneOS</key>
 		<true/>
-		<key>NSExceptionDomains</key>
+		<key>NSAppTransportSecurity</key>
 		<dict>
-			<key>localhost</key>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+			<key>NSExceptionDomains</key>
 			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
+				<key>localhost</key>
+				<dict>
+					<key>NSExceptionAllowsInsecureHTTPLoads</key>
+					<true/>
+				</dict>
 			</dict>
 		</dict>
+		<key>NSAppleMusicUsageDescription</key>
+		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>NSBluetoothAlwaysUsageDescription</key>
+		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>NSBluetoothPeripheralUsageDescription</key>
+		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>NSCalendarsUsageDescription</key>
+		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Lisk uses your camera to scan QR codes</string>
+		<key>NSContactsUsageDescription</key>
+		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>NSFaceIDUsageDescription</key>
+		<string>$(PRODUCT_NAME) Authentication</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>NSMotionUsageDescription</key>
+		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>NSPhotoLibraryAddUsageDescription</key>
+		<string>Lisk uses your photo library to access your stored QR codes.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Lisk uses your photo library to access your stored QR codes.</string>
+		<key>NSSpeechRecognitionUsageDescription</key>
+		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>UIAppFonts</key>
+		<array>
+			<string>Dots-Regular.ttf</string>
+			<string>PTMono-Regular.ttf</string>
+			<string>OpenSans-Bold.ttf</string>
+			<string>OpenSans-Semibold.ttf</string>
+			<string>OpenSans-Regular.ttf</string>
+			<string>icomoon.ttf</string>
+			<string>Gilroy-Bold.ttf</string>
+			<string>BasierCircle-Bold.otf</string>
+			<string>BasierCircle-Regular.otf</string>
+			<string>BasierCircle-SemiBold.otf</string>
+		</array>
+		<key>UILaunchStoryboardName</key>
+		<string>LaunchScreen</string>
+		<key>UIRequiredDeviceCapabilities</key>
+		<array>
+			<string>armv7</string>
+		</array>
+		<key>UISupportedInterfaceOrientations</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+		</array>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+		<false/>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>lisk</string>
+				</array>
+			</dict>
+		</array>
 	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Lisk uses your camera to scan QR codes</string>
-	<key>NSContactsUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>$(PRODUCT_NAME) Authentication</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>NSMotionUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Lisk uses your photo library to access your stored QR codes.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Lisk uses your photo library to access your stored QR codes.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Dots-Regular.ttf</string>
-		<string>PTMono-Regular.ttf</string>
-		<string>OpenSans-Bold.ttf</string>
-		<string>OpenSans-Semibold.ttf</string>
-		<string>OpenSans-Regular.ttf</string>
-		<string>icomoon.ttf</string>
-		<string>Gilroy-Bold.ttf</string>
-		<string>BasierCircle-Bold.otf</string>
-		<string>BasierCircle-Regular.otf</string>
-		<string>BasierCircle-SemiBold.otf</string>
-	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-</dict>
 </plist>

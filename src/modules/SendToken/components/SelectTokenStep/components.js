@@ -170,7 +170,7 @@ export function SendTokenAmountField({
 }
 
 export function SendTokenMessageField({ value, onChange, style }) {
-  const [showInput, setShowInput] = useState(false);
+  const [showInput, setShowInput] = useState(!!value);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),

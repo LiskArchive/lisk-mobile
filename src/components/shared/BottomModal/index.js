@@ -23,8 +23,7 @@ const BottomModal = ({ showClose = true, show, toggleShow, children }) => {
         delay: 50,
       }).start();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [show]);
+  }, [show, animation]);
 
   const closeModal = () => {
     animation.setValue(0);

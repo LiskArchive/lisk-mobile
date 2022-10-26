@@ -34,6 +34,7 @@ export default function SendToken({ route }) {
   const form = useSendTokenForm({
     transaction: transaction.data,
     isTransactionSuccess: transaction.isSuccess,
+    initialValues: route.params,
   });
 
   const { styles } = useTheme({
