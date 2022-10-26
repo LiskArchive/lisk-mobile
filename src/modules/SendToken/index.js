@@ -37,6 +37,8 @@ export default function SendToken({ route }) {
     initialValues: route.params,
   });
 
+  console.log({ transaction });
+
   const { styles } = useTheme({
     styles: getSendTokenStyles(),
   });

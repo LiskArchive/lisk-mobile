@@ -3,7 +3,7 @@ import {
   createThemedStyles,
   merge,
   stringShortener,
-  removeUndefinedKeys,
+  removeUndefinedObjectKeys,
   isEmpty,
   setColorOpacity,
   isNumeric,
@@ -127,10 +127,10 @@ describe('helpers', () => {
     });
   });
 
-  describe('removeUndefinedKeys', () => {
+  describe('removeUndefinedObjectKeys', () => {
     it('removes undefined keys from the source object', () => {
       const source = { a: undefined, b: 'b', c: 0 };
-      expect(removeUndefinedKeys(source)).toEqual({ b: 'b', c: 0 });
+      expect(removeUndefinedObjectKeys(source)).toEqual({ b: 'b', c: 0 });
     });
   });
 

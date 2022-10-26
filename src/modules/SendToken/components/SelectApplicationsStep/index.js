@@ -50,6 +50,8 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
     !form.watch('recipientApplicationChainID') ||
     !form.watch('recipientAccountAddress');
 
+  console.log({ recipientAccountAddressField });
+
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <DataRenderer
