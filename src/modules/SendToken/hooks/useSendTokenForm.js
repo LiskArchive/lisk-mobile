@@ -125,14 +125,22 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         dryRunTransactionMutation.mutate(
           { transaction: encodedTransaction },
           {
-            onSuccess: () =>
-              broadcastTransactionMutation.mutate({ transaction: encodedTransaction }),
+            onSuccess: (data) => {
+              if (data.success) {
+                broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+              } else {
+                DropDownHolder.error(
+                  'Invalid transaction',
+                  'Please check your inputs, or reload the app and try again.'
+                );
+              }
+            },
           }
         );
       } catch (error) {
         DropDownHolder.error(
           i18next.t('Error'),
-          'Unable to sign your transaction. Please try again.'
+          'Error processing your transaction. Please try again later.'
         );
       }
     }
