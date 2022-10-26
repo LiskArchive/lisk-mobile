@@ -88,7 +88,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
       transaction.update({ params: { amount: amountInBeddows } });
     } else {
-      transaction.update(updateObjectDeepValue({}, field, value));
+      transaction.update(updateObjectDeepValue(field, value));
     }
 
     onChange(value);
