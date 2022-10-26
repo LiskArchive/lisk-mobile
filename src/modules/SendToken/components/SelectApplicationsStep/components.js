@@ -139,8 +139,6 @@ export function SendTokenRecipientAccountField({
   }
 
   function handlePickerChange(_value) {
-    console.log({ _value });
-
     if (addressFormat !== 'picker') onAddressFormatChange('picker');
 
     onChange(_value);
