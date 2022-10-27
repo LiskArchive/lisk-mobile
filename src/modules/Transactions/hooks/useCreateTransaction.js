@@ -9,6 +9,15 @@ import { useTransactionFeeEstimateQuery } from '../api/useTransactionFeeEstimate
 
 import { Transaction } from '../utils/Transaction';
 
+/**
+ * Creates a transaction object with all required build-in
+ * functionalities (sign, encode, decode, update and more).
+ * @param {Object} params
+ * @param {String} params.module - Module of the transaction (optional).
+ * @param {String} params.command - Command of the transaction (optional).
+ * @param {String} params.encodedTransaction - Encoded transaction to create a transaction object from (optional).
+ * @returns {Object} The created transaction data, isLoading, isSuccess and isError states.
+ */
 export function useCreateTransaction({ module = null, command = null, encodedTransaction = null }) {
   const transactionRef = useRef(new Transaction());
   const transaction = transactionRef.current;

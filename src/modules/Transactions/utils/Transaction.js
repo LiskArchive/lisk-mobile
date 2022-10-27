@@ -38,7 +38,7 @@ export class Transaction {
 
   /**
    * Initialize transaction with required network and account information
-   * @param {object} param transaction initialization parameters
+   * @param {object} params - Transaction initialization parameters
    */
   init({
     pubkey,
@@ -90,7 +90,7 @@ export class Transaction {
 
   /**
    * Update transaction object
-   * @param {object} params transaction parameters
+   * @param {object} params - Transaction parameters
    * @returns void
    */
   update({ params = {}, nonce = null, ...others }) {
@@ -157,7 +157,8 @@ export class Transaction {
   }
 
   /**
-   * Compute transaction fee
+   * Compute transaction fee.
+   * @param {number} extraFee - Extra fee to consider in the calculation (optional).
    */
   computeFee(extraFee = BigInt(0)) {
     this._validateTransaction();
@@ -180,8 +181,8 @@ export class Transaction {
 
   /**
    * Decode encoded transaction
-   * @param {buffer} encodedTransaction encoded transaction buffer
-   * @returns transaction object
+   * @param {buffer} encodedTransaction - Encoded transaction buffer
+   * @returns Transaction object
    */
   decode(encodedTransaction) {
     const transactionBuffer = Buffer.isBuffer(encodedTransaction)
@@ -193,7 +194,7 @@ export class Transaction {
 
   /**
    * Encode transaction object
-   * @returns encoded transaction hex string
+   * @returns Encoded transaction hex string
    */
   encode(transaction) {
     this._validateTransaction(transaction);
@@ -220,7 +221,7 @@ export class Transaction {
   }
 
   /**
-   * Validate transaction to be compatible with lisk protocol
+   * Validate transaction to be compatible with Lisk protocol
    */
   _validateTransaction() {
     if (typeof this.transaction !== 'object' || this.transaction === null) {

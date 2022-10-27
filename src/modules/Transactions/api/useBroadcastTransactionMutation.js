@@ -6,6 +6,11 @@ import { METHOD, API_URL } from 'utilities/api/constants';
 import apiClient from 'utilities/api/APIClient';
 import DropDownHolder from 'utilities/alert';
 
+/**
+ * Broadcast signed transactions to a blockchain application
+ * @param {Object} options - Options to pass to the mutation hook.
+ * @returns The mutation to trigger the API call.
+ */
 export default function useBroadcastTransactionMutation(options = {}) {
   const queryClient = useQueryClient();
 
