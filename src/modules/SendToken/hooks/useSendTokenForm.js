@@ -130,8 +130,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
                 broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
               } else {
                 DropDownHolder.error(
-                  'Invalid transaction',
-                  'Please check your inputs, or reload the app and try again.'
+                  i18next.t('transactions.errors.dryRunInvalidTransactionTitle'),
+                  i18next.t('transactions.errors.dryRunInvalidTransactionDescription')
                 );
               }
             },
@@ -140,7 +140,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       } catch (error) {
         DropDownHolder.error(
           i18next.t('Error'),
-          'Error processing your transaction. Please try again later.'
+          i18next.t('transactions.errors.signErrorDescription')
         );
       }
     }

@@ -27,7 +27,7 @@ export default function useDryRunTransactionMutation(options = {}) {
       onError: (error) => {
         DropDownHolder.error(
           i18next.t('Error'),
-          'Error validation your transaction. Please try again later.'
+          i18next.t('transactions.errors.dryRunRequestErrorDescription')
         );
 
         if (options.onError) options.onError(error);

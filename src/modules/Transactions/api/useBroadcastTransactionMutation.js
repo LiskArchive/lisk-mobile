@@ -48,7 +48,7 @@ export default function useBroadcastTransactionMutation(options = {}) {
       onError: (error) => {
         DropDownHolder.error(
           i18next.t('Error'),
-          'Error submitting your transaction. Please try again later.'
+          i18next.t('transactions.errors.broadcastErrorDescription')
         );
 
         if (options.onError) options.onError(error);
