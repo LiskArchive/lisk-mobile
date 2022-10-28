@@ -3,31 +3,20 @@ import React, { createContext, useContext, useEffect, useReducer, useState } fro
 import { useApplicationsQuery } from '../api/useApplicationsQuery';
 import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
 
+import { applicationsContextReducer } from './reducers';
+
 const BlockchainApplicationsManagementContext = createContext();
 
-function applicationsReducer(state, action) {
-  switch (action.type) {
-    case 'set':
-      return action.payload;
-
-    case 'add': {
-      if (!state.find((app) => app.chainID === action.payload.chainID)) {
-        return state;
-      }
-
-      return [...state, action.payload];
-    }
-
-    case 'delete':
-      return state.filter((app) => app.chainID !== action.payload.chainID);
-
-    default:
-      return state;
-  }
-}
-
+/**
+ * Context provider of Blockchain Applications Management. Pass down to children the applications and
+ * current application state saved locally by the user.
+ * @param {Object} children - React nodes to pass down as children.
+ * @returns {Object} value - Blockchain applications state (data, isLoading, isError and error),
+ * current application selected by the user and functions to dispatch the applications state and
+ * current application.
+ */
 export function BlockchainApplicationsManagementProvider({ children }) {
-  const [applications, dispatchApplications] = useReducer(applicationsReducer);
+  const [applications, dispatchApplications] = useReducer(applicationsContextReducer);
 
   const [currentApplication, setCurrentApplication] = useState();
 
@@ -100,6 +89,10 @@ export function BlockchainApplicationsManagementProvider({ children }) {
   );
 }
 
+/**
+ * Allows to consume Blockchain Applications Management context value as hook.
+ * @returns {Object} value - Blockchain Applications Management context value.
+ */
 export function useBlockchainApplicationsManagement() {
   return useContext(BlockchainApplicationsManagementContext);
 }
