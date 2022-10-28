@@ -19,6 +19,7 @@ import getStyles from './styles';
 import Splash from '../components/splash';
 import CreateAccount from '../components/createAccount';
 import AuthTypeItem from '../components/AuthType';
+import { useBlockchainApplicationsManagement } from '../../BlockchainApplication/context/BlockchainApplicationsManagementContext';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();
@@ -31,7 +32,7 @@ export default function AuthMethod({ route }) {
 
   const { accounts } = useAccounts();
 
-  const [, setCurrentApplication] = useCurrentBlockchainApplication();
+  const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
 
   const { styles } = useTheme({
     styles: getStyles(),
@@ -43,9 +44,14 @@ export default function AuthMethod({ route }) {
     SplashScreen.hide();
   };
 
+  const appManagement = useBlockchainApplicationsManagement();
+
+  console.log({ appManagement, currentApplication });
+
   useEffect(() => {
     // TODO: Replace with live data
     setCurrentApplication(mockDefaultApplicationMeta);
+
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());
       init();

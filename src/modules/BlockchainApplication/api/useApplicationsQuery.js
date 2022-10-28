@@ -1,7 +1,8 @@
-import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-import { GET_APPLICATION_QUERY } from 'utilities/api/queries';
-import { LIMIT, API_URL } from 'utilities/api/constants';
-import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
+// import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
+// import { GET_APPLICATION_QUERY } from 'utilities/api/queries';
+// import { LIMIT, API_URL } from 'utilities/api/constants';
+// import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
+import { mockApplications } from '../__fixtures__';
 
 /**
  * Fetch list of blockchain applications on-chain data.
@@ -11,16 +12,25 @@ import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
  * @returns - The query state of the API call. Includes the data
  * (applications), loading state, error state, and more.
  */
-export function useApplicationsQuery(chainID, { config: customConfig = {}, options = {} } = {}) {
-  const config = {
-    url: `${API_URL}/blockchain/apps`,
-    method: 'get',
-    event: 'get.blockchain.apps',
-    ...customConfig,
-    params: { chainID, limit: LIMIT, ...customConfig.params },
+export function useApplicationsQuery() {
+  // { config: customConfig = {}, options = {} } = {}
+
+  // const config = {
+  //   baseURL: 'http://104.248.241.229:9901',
+  //   url: `${API_URL}/blockchain/apps`,
+  //   method: 'get',
+  //   event: 'get.blockchain.apps',
+  //   ...customConfig,
+  //   params: { limit: LIMIT, ...customConfig.params },
+  // };
+
+  // const keys = useQueryKeys([GET_APPLICATION_QUERY, config]);
+
+  // return useCustomInfiniteQuery({ config, options, keys });
+
+  return {
+    data: { data: mockApplications.filter((app) => app.isDefault) },
+    isLoading: false,
+    isError: false,
   };
-
-  const keys = useQueryKeys([GET_APPLICATION_QUERY, config]);
-
-  return useCustomInfiniteQuery({ config, options, keys });
 }

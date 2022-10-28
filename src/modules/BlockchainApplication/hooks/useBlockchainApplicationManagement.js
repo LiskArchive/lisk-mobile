@@ -28,6 +28,12 @@ export function useBlockchainApplicationManagement() {
 
   const [currentApplication, setCurrentApplication] = useCurrentBlockchainApplication();
 
+  useEffect(() => {
+    if (!currentApplication) {
+      console.log('the beggining...');
+    }
+  }, [currentApplication]);
+
   const applications = useMemo(() => {
     const data = Object.values(applicationsState)
       .map((app) => ({

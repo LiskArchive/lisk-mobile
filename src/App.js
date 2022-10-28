@@ -14,6 +14,7 @@ import ThemeContext from './contexts/theme';
 import i18n from '../locales';
 import store, { persistedStore } from './store/index';
 import ConnectionProvider from '../libs/wcm/context/connectionProvider';
+import { BlockchainApplicationsManagementProvider } from './modules/BlockchainApplication/context/BlockchainApplicationsManagementContext';
 
 export default function App() {
   return (
@@ -22,7 +23,9 @@ export default function App() {
         <ConnectionProvider>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistedStore}>
-              <ThemedApp />
+              <BlockchainApplicationsManagementProvider>
+                <ThemedApp />
+              </BlockchainApplicationsManagementProvider>
             </PersistGate>
           </Provider>
         </ConnectionProvider>
