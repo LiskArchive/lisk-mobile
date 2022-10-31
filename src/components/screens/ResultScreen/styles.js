@@ -26,6 +26,9 @@ export default () => ({
       textAlign: 'center',
       marginBottom: 16,
     },
+    buttonContainer: {
+      padding: boxes.boxPadding,
+    },
     continueButton: {
       paddingHorizontal: 16,
     },

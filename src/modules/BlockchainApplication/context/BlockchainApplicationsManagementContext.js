@@ -39,9 +39,11 @@ export function BlockchainApplicationsManagementProvider({ children }) {
           _applications = cachedApplications.map((cachedApp) => {
             // eslint-disable-next-line max-nested-callbacks
             const updatedApp = applicationsData.find((app) => app.chainID === cachedApp.chainID);
+
             if (updatedApp) {
               return { ...cachedApp, ...updatedApp };
             }
+
             return cachedApp;
           });
         }
