@@ -5,7 +5,7 @@ import { Linking } from 'react-native';
 import { SUPPORT_EMAIL_ADDRESS } from 'constants/mail';
 import { API_VERSION } from 'utilities/api/constants';
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
-import { useBlockchainApplicationsManagement } from 'modules/BlockchainApplication/context/BlockchainApplicationsManagementContext';
+import { useBlockchainApplicationsManagement } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationManagement';
 
 export function useEmailReport({ errorMessage, error } = {}) {
   const [isFetching, setIsFetching] = useState(false);

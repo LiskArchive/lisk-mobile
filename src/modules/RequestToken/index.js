@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { useBlockchainApplicationsManagement } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationManagement';
 import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import {
@@ -36,7 +37,6 @@ import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
 import getStyles from './styles';
-import { useBlockchainApplicationsManagement } from '../BlockchainApplication/context/BlockchainApplicationsManagementContext';
 
 export default function RequestToken() {
   const navigation = useNavigation();

@@ -16,7 +16,7 @@ import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 
 import { useBlockchainApplicationRowActions } from './hooks';
 import getBlockchainApplicationRowStyles from './styles';
-import { useBlockchainApplicationsManagement } from '../../context/BlockchainApplicationsManagementContext';
+import { useBlockchainApplicationsManagement } from '../../hooks/useBlockchainApplicationManagement';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.

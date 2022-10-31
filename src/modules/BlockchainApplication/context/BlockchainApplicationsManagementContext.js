@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
+import React, { createContext, useEffect, useReducer, useState } from 'react';
 
 import apiClient from 'utilities/api/APIClient';
 
 import { applicationsContextReducer } from './reducers';
 import { useBlockchainApplicationExplorer } from '../hooks/useBlockchainApplicationExplorer';
 
-const BlockchainApplicationsManagementContext = createContext();
+export const BlockchainApplicationsManagementContext = createContext();
 
 /**
  * Context provider of Blockchain Applications Management. Pass down to children the applications and
@@ -60,12 +60,4 @@ export function BlockchainApplicationsManagementProvider({ children }) {
       {children}
     </BlockchainApplicationsManagementContext.Provider>
   );
-}
-
-/**
- * Allows to consume Blockchain Applications Management context value as hook.
- * @returns {Object} value - Blockchain Applications Management context value.
- */
-export function useBlockchainApplicationsManagement() {
-  return useContext(BlockchainApplicationsManagementContext);
 }

@@ -17,7 +17,7 @@ import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
-import { useBlockchainApplicationsManagement } from '../../context/BlockchainApplicationsManagementContext';
+import { useBlockchainApplicationsManagement } from '../../hooks/useBlockchainApplicationManagement';
 
 import getStyles from './styles';
 

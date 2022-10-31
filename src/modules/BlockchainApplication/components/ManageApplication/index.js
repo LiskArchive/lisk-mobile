@@ -13,7 +13,7 @@ import getStyles from './styles';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
 import SelectNode from '../SelectNode';
-import { useBlockchainApplicationsManagement } from '../../context/BlockchainApplicationsManagementContext';
+import { useBlockchainApplicationsManagement } from '../../hooks/useBlockchainApplicationManagement';
 
 const ManageApplication = ({ closeModal, nextStep, style }) => {
   const navigation = useNavigation();

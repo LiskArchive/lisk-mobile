@@ -8,6 +8,7 @@ import i18next from 'i18next';
 import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { useBlockchainApplicationsManagement } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationManagement';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
@@ -15,7 +16,6 @@ import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { updateObjectDeepValue } from 'utilities/helpers';
 import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { useBlockchainApplicationsManagement } from '../../BlockchainApplication/context/BlockchainApplicationsManagementContext';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();

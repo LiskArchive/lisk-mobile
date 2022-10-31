@@ -3,7 +3,7 @@ import { GET_TOKENS_METADATA_QUERY } from 'utilities/api/queries';
 import { LIMIT, API_URL, NETWORK } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import blockchainAppsMetaAPIClient from 'utilities/api/BlockchainAppsMetaAPIClient';
-import { useBlockchainApplicationsManagement } from '../context/BlockchainApplicationsManagementContext';
+import { useBlockchainApplicationsManagement } from '../hooks/useBlockchainApplicationManagement';
 
 /**
  * Fetch list of blockchain applications tokens off-chain metadata.

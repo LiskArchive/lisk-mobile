@@ -7,7 +7,7 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
 
 import getDeleteBlockchainApplicationStyles from './styles';
-import { useBlockchainApplicationsManagement } from '../../context/BlockchainApplicationsManagementContext';
+import { useBlockchainApplicationsManagement } from '../../hooks/useBlockchainApplicationManagement';
 
 export default function DeleteBlockchainApplication({ sharedData: { application }, nextStep }) {
   const { styles } = useTheme({ styles: getDeleteBlockchainApplicationStyles() });
