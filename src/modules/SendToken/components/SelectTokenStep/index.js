@@ -19,7 +19,7 @@ import {
 } from './components';
 
 export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, transaction }) {
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const applications = useBlockchainApplicationExplorer();
 
   const { field: tokenIDField } = useController({
     name: 'tokenID',
@@ -60,11 +60,11 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const recipientApplication = applicationsMetadata?.data.find(
+  const recipientApplication = applications?.data.find(
     (application) => application.chainID === recipientApplicationChainIDField.value
   );
 
-  const senderApplication = applicationsMetadata?.data.find(
+  const senderApplication = applications?.data.find(
     (application) => application.chainID === senderApplicationChainIDField.value
   );
 

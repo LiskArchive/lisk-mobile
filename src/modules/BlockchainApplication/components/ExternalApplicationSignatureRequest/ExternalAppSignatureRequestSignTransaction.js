@@ -29,9 +29,9 @@ export default function ExternalAppSignatureRequestSignTransaction({
   const [isSignedTransactionCopiedToClipboard, handleCopySignedTransactionToClipboard] =
     useCopyToClipboard(signedTransactionString);
 
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const applications = useBlockchainApplicationExplorer();
 
-  const recipientApplication = applicationsMetadata.data?.find(
+  const recipientApplication = applications.data?.find(
     (application) => application.chainID === recipientApplicationChainID
   );
 

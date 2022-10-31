@@ -1,7 +1,6 @@
-import { LIMIT, API_URL } from 'utilities/api/constants';
-import { GET_APPLICATIONS_QUERY } from 'utilities/api/queries';
+import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
+import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import blockchainAppsMetaAPIClient from 'utilities/api/BlockchainAppsMetaAPIClient';
 
 /**
@@ -24,7 +23,9 @@ export function useApplicationsMetaQuery({ config: customConfig = {}, options = 
     },
   };
 
-  const keys = useQueryKeys([GET_APPLICATIONS_QUERY, config]);
+  const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
+
+  // useQueryKeys([GET_APPLICATIONS_QUERY, config]);
 
   return useCustomInfiniteQuery({ config, options, keys, client: blockchainAppsMetaAPIClient });
 }

@@ -2,16 +2,16 @@
 import { useMemo, useState } from 'react';
 import { Linking } from 'react-native';
 
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import { SUPPORT_EMAIL_ADDRESS } from 'constants/mail';
 import { API_VERSION } from 'utilities/api/constants';
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
+import { useBlockchainApplicationsManagement } from 'modules/BlockchainApplication/context/BlockchainApplicationsManagementContext';
 
 export function useEmailReport({ errorMessage, error } = {}) {
   const [isFetching, setIsFetching] = useState(false);
   const [errorOnLinking, setErrorOnLinking] = useState();
 
-  const [currentApplication] = useCurrentBlockchainApplication();
+  const { currentApplication } = useBlockchainApplicationsManagement();
 
   const {
     data: networkStatusData,

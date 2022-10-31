@@ -1,7 +1,6 @@
 // import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-// import { GET_APPLICATION_QUERY } from 'utilities/api/queries';
-// import { LIMIT, API_URL } from 'utilities/api/constants';
-// import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
+// import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
+// import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
 import { mockApplications } from '../__fixtures__';
 
 /**
@@ -24,7 +23,7 @@ export function useApplicationsQuery() {
   //   params: { limit: LIMIT, ...customConfig.params },
   // };
 
-  // const keys = useQueryKeys([GET_APPLICATION_QUERY, config]);
+  // const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
 
   // return useCustomInfiniteQuery({ config, options, keys });
 

@@ -18,15 +18,15 @@ export function useTransactionSummary({
   priority,
   fee,
 }) {
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const applications = useBlockchainApplicationExplorer();
 
   const bookmarks = useSelector(selectBookmarkList);
 
-  const senderApplication = applicationsMetadata.data?.find(
+  const senderApplication = applications.data?.find(
     (application) => application.chainID === senderApplicationChainID
   );
 
-  const recipientApplication = applicationsMetadata.data?.find(
+  const recipientApplication = applications.data?.find(
     (application) => application.chainID === recipientApplicationChainID
   );
 

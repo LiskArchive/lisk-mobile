@@ -13,7 +13,6 @@ import { useTheme } from 'hooks/useTheme';
 import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
 import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import {
   SendTokenMessageField,
   SendTokenAmountField,
@@ -37,6 +36,7 @@ import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
 import getStyles from './styles';
+import { useBlockchainApplicationsManagement } from '../BlockchainApplication/context/BlockchainApplicationsManagementContext';
 
 export default function RequestToken() {
   const navigation = useNavigation();
@@ -45,9 +45,9 @@ export default function RequestToken() {
 
   const [currentAccount] = useCurrentAccount();
 
-  const [currentApplication] = useCurrentBlockchainApplication();
+  const { currentApplication } = useBlockchainApplicationsManagement();
 
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const applications = useBlockchainApplicationExplorer();
 
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
@@ -138,9 +138,9 @@ export default function RequestToken() {
           </View>
 
           <DataRenderer
-            data={applicationsMetadata.data}
-            isLoading={applicationsMetadata.isLoading}
-            error={applicationsMetadata.error}
+            data={applications.data}
+            isLoading={applications.isLoading}
+            error={applications.error}
             renderData={(data) => (
               <SendTokenRecipientApplicationField
                 value={recipientApplicationChainID}

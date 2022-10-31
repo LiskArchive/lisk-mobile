@@ -13,10 +13,10 @@ import ResultScreen from 'components/screens/ResultScreen';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
-import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 
 import { useBlockchainApplicationRowActions } from './hooks';
 import getBlockchainApplicationRowStyles from './styles';
+import { useBlockchainApplicationsManagement } from '../../context/BlockchainApplicationsManagementContext';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
@@ -40,7 +40,7 @@ function BlockchainApplicationRow({
   const [showDeleteDefaultApplicationModal, setShowDeleteDefaultApplicationModal] = useState(false);
 
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
-  const [currentApplication] = useCurrentBlockchainApplication();
+  const { currentApplication } = useBlockchainApplicationsManagement();
 
   const { leftActions, rightActions } = useBlockchainApplicationRowActions({
     application,

@@ -16,8 +16,8 @@ import { colors } from 'constants/styleGuide';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
-import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
+import { useBlockchainApplicationsManagement } from '../../context/BlockchainApplicationsManagementContext';
 
 import getStyles from './styles';
 
@@ -37,23 +37,19 @@ export default function ApplicationDetail({ route }) {
   const { styles } = useTheme({ styles: getStyles });
 
   const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
-  const { addApplication } = useBlockchainApplicationManagement();
-  const { applications, applicationsMetadata } = useBlockchainApplicationExplorer();
+  const { dispatchApplications } = useBlockchainApplicationsManagement();
+  const applications = useBlockchainApplicationExplorer();
 
   const application = useMemo(
     () => applications.data?.find((app) => app.chainID === chainID),
-    [chainID, applications]
-  );
-
-  const applicationMetadata = useMemo(
-    () => applicationsMetadata.data?.find((app) => app.chainID === chainID),
-    [chainID, applicationsMetadata]
+    [chainID, applications.data]
   );
 
   const isPinned = checkPinByChainId(chainID);
 
   const handleAddApplicationClick = () => {
-    addApplication(application);
+    dispatchApplications({ type: 'add', payload: application });
+
     navigation.navigate('AddApplicationSuccess');
   };
 
@@ -64,8 +60,8 @@ export default function ApplicationDetail({ route }) {
           style={[
             styles.header,
             styles.container,
-            applicationMetadata?.backgroundColor && {
-              backgroundColor: applicationMetadata?.backgroundColor,
+            application?.backgroundColor && {
+              backgroundColor: application.backgroundColor,
             },
           ]}
           source={wavesPattern}
@@ -80,27 +76,39 @@ export default function ApplicationDetail({ route }) {
           style={[
             styles.header,
             styles.container,
-            applicationMetadata?.backgroundColor && {
-              backgroundColor: applicationMetadata?.backgroundColor,
+            application?.backgroundColor && {
+              backgroundColor: application.backgroundColor,
             },
           ]}
           resizeMode="stretch"
         >
-          <HeaderBackButton title={applicationMetadata?.chainName} onPress={navigation.goBack} />
+          <DataRenderer
+            isLoading={applications.isLoading}
+            error={applications.isError}
+            data={application?.chainName}
+            renderData={(data) => <HeaderBackButton title={data} onPress={navigation.goBack} />}
+          />
         </View>
       )}
 
-      <Image
-        style={[styles.logoContainer, styles.theme.logoContainer]}
-        source={{ uri: applicationMetadata?.logo.png }}
+      <DataRenderer
+        isLoading={applications.isLoading}
+        error={applications.isError}
+        data={application?.logo}
+        renderData={(data) => (
+          <Image
+            style={[styles.logoContainer, styles.theme.logoContainer]}
+            source={{ uri: data.png }}
+          />
+        )}
       />
 
       <View style={[styles.flex, styles.body]}>
         <View style={styles.titleRow}>
           <DataRenderer
-            isLoading={applicationsMetadata.isLoading}
-            error={applicationsMetadata.isError}
-            data={applicationMetadata?.chainName}
+            isLoading={applications.isLoading}
+            error={applications.isError}
+            data={application?.chainName}
             renderData={(data) => <H3 style={[styles.title, styles.theme.title]}>{data}</H3>}
           />
 
@@ -119,9 +127,9 @@ export default function ApplicationDetail({ route }) {
 
         <View style={[styles.row, styles.appLinkContainer]}>
           <DataRenderer
-            isLoading={applicationsMetadata.isLoading}
-            error={applicationsMetadata.isError}
-            data={applicationMetadata?.explorers}
+            isLoading={applications.isLoading}
+            error={applications.isError}
+            data={application?.explorers}
             renderData={(data) => (
               <>
                 <UrlSvg size={1} />

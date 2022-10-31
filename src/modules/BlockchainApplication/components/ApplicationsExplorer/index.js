@@ -50,7 +50,8 @@ export default function BlockchainApplicationsExplorer() {
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
   const tabBarHeight = useBottomTabBarHeight();
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+
+  const applications = useBlockchainApplicationExplorer();
 
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsExplorerStyles(),
@@ -98,7 +99,7 @@ export default function BlockchainApplicationsExplorer() {
           </Tabs>
           <Tabs.Panel index="internalApplications" value={activeTab}>
             <ApplicationList
-              applications={applicationsMetadata}
+              applications={applications}
               Component={ApplicationRow}
               onItemPress={(item) =>
                 navigation.navigate('ApplicationDetail', {

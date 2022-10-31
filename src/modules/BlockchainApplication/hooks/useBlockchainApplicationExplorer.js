@@ -2,40 +2,74 @@ import { useMemo } from 'react';
 
 import { useApplicationsQuery } from '../api/useApplicationsQuery';
 import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
-import { usePinBlockchainApplication } from './usePinBlockchainApplication';
 
 /**
  * Hook that handle all the logic related to blockchain applications explorer.
  * @returns {Object} Available blockchain applications on and off-chain data.
  */
-export function useBlockchainApplicationExplorer() {
-  const applicationsQuery = useApplicationsQuery();
-  const applicationsMetaQuery = useApplicationsMetaQuery();
+export function useBlockchainApplicationExplorer({
+  applicationsConfig = {},
+  applicationsMetaConfig = {},
+  applicationsOptions = {},
+  applicationsMetaOptions = {},
+} = {}) {
+  const {
+    data: applicationsData,
+    isLoading: isLoadingApplications,
+    isError: isErrorOnApplications,
+    error: errorOnApplications,
+  } = useApplicationsQuery({
+    config: {
+      baseURL: process.env.SERVICE_API_BASE_URL,
+      ...applicationsConfig,
+    },
+    options: applicationsOptions,
+  });
 
-  const { pins, checkPinByChainId } = usePinBlockchainApplication();
+  const {
+    data: applicationsMetaData,
+    isLoading: isLoadingApplicationsMeta,
+    isError: isErrorOnApplicationsMeta,
+    error: errorOnApplicationsMeta,
+  } = useApplicationsMetaQuery({
+    options: {
+      enabled: !!applicationsData?.data,
+      ...applicationsMetaOptions,
+    },
+    config: {
+      baseURL: process.env.SERVICE_API_BASE_URL,
+      params: {
+        // TODO: Pass as CSV of chainIDs when backend supports feature.
+        // e.g.: applicationsData?.data.map((app) => app.chainID)
+        chainID: applicationsData?.data[0].chainID,
+        ...applicationsMetaConfig?.params,
+      },
+      ...applicationsMetaConfig,
+    },
+  });
 
-  const applications = useMemo(() => {
-    const data = applicationsQuery.data?.data.map((app) => ({
-      ...app,
-      isPinned: checkPinByChainId(app.chainID),
-    }));
+  const isLoading = isLoadingApplications || isLoadingApplicationsMeta;
+  const isError = isErrorOnApplications || isErrorOnApplicationsMeta;
+  const error = errorOnApplications || errorOnApplicationsMeta;
 
-    return { ...applicationsQuery, data };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [applicationsQuery, pins, checkPinByChainId]);
+  const data = useMemo(() => {
+    let _applications;
 
-  const applicationsMetadata = useMemo(() => {
-    const data = applicationsMetaQuery.data?.data.map((app) => ({
-      ...app,
-      isPinned: checkPinByChainId(app.chainID),
-    }));
+    if (applicationsMetaData?.data && applicationsData?.data) {
+      _applications = applicationsMetaData.data.map((appMetadata) => {
+        const app = applicationsData.data.find((_app) => _app.chainID === appMetadata.chainID);
 
-    return { ...applicationsMetaQuery, data };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [applicationsMetaQuery, pins, checkPinByChainId]);
+        return { ...appMetadata, app };
+      });
+    }
+
+    return _applications;
+  }, [applicationsData?.data, applicationsMetaData?.data]);
 
   return {
-    applications,
-    applicationsMetadata,
+    data,
+    isLoading,
+    isError,
+    error,
   };
 }

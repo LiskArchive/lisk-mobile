@@ -19,7 +19,7 @@ import {
 } from './components';
 
 export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const applications = useBlockchainApplicationExplorer();
 
   const { field: senderApplicationChainIDField } = useController({
     name: 'senderApplicationChainID',
@@ -53,9 +53,9 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <DataRenderer
-        data={applicationsMetadata.data}
-        isLoading={applicationsMetadata.isLoading}
-        error={applicationsMetadata.error}
+        data={applications.data}
+        isLoading={applications.isLoading}
+        error={applications.error}
         renderData={(data) => (
           <>
             <View style={[styles.container]}>
