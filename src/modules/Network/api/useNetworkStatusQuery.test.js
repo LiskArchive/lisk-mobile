@@ -1,25 +1,44 @@
+import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook } from '@testing-library/react-hooks';
 
-import { queryWrapper } from 'tests/queryWrapper';
-import * as useCurrentBlockchainApplication from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
+import { BlockchainApplicationsManagementProvider } from 'modules/BlockchainApplication/context/BlockchainApplicationsManagementContext';
+import {
+  mockApplicationsFullData,
+  mockCurrentApplication,
+} from 'modules/BlockchainApplication/__fixtures__';
 
 import { mockNetworkStatus } from '../__fixtures__';
 import { useNetworkStatusQuery } from './useNetworkStatusQuery';
 
 jest.useRealTimers();
 
-jest
-  .spyOn(useCurrentBlockchainApplication, 'useCurrentBlockchainApplication')
-  .mockImplementation(() => [
-    {
-      chainID: 'chainIdMock',
-    },
-  ]);
-
 describe('useNetworkStatusQuery hook', () => {
+  const queryClient = new QueryClient();
+
+  const wrapper = ({ children }) => (
+    <QueryClientProvider client={queryClient}>
+      <BlockchainApplicationsManagementProvider
+        value={{
+          applications: {
+            data: mockApplicationsFullData,
+            isLoading: false,
+            isError: false,
+            error: undefined,
+          },
+          dispatchApplications: jest.fn(),
+          currentApplication: mockCurrentApplication,
+          setCurrentApplication: jest.fn(),
+        }}
+      >
+        {children}
+      </BlockchainApplicationsManagementProvider>
+    </QueryClientProvider>
+  );
+
   it('fetches data correctly', async () => {
     const { result, waitFor } = renderHook(() => useNetworkStatusQuery(), {
-      wrapper: queryWrapper,
+      wrapper,
     });
 
     expect(result.current.isLoading).toBeTruthy();

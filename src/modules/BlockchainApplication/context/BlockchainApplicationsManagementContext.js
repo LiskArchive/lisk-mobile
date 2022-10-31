@@ -1,9 +1,10 @@
-import React, { createContext, useEffect, useReducer, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useReducer, useState } from 'react';
 
 import apiClient from 'utilities/api/APIClient';
-
-import { applicationsContextReducer } from './reducers';
 import { useBlockchainApplicationExplorer } from '../hooks/useBlockchainApplicationExplorer';
+
+import { blockchainApplicationsContextReducer } from './reducers';
+import { getBlockchainApplicationsStorageData } from './helpers';
 
 export const BlockchainApplicationsManagementContext = createContext();
 
@@ -16,7 +17,7 @@ export const BlockchainApplicationsManagementContext = createContext();
  * current application.
  */
 export function BlockchainApplicationsManagementProvider({ children }) {
-  const [applications, dispatchApplications] = useReducer(applicationsContextReducer);
+  const [applications, dispatchApplications] = useReducer(blockchainApplicationsContextReducer);
 
   const [currentApplication, setCurrentApplication] = useState();
 
@@ -27,21 +28,36 @@ export function BlockchainApplicationsManagementProvider({ children }) {
     error: errorOnApplications,
   } = useBlockchainApplicationExplorer({ applicationsConfig: { params: { isDefault: true } } });
 
+  const getCachedApplications = useCallback(() => getBlockchainApplicationsStorageData(), []);
+
   useEffect(() => {
     let _applications;
 
     if (!applications && applicationsData) {
-      _applications = applicationsData;
+      getCachedApplications().then((cachedApplications) => {
+        if (cachedApplications) {
+          _applications = cachedApplications.map((cachedApp) => {
+            // eslint-disable-next-line max-nested-callbacks
+            const updatedApp = applicationsData.find((app) => app.chainID === cachedApp.chainID);
+            if (updatedApp) {
+              return { ...cachedApp, ...updatedApp };
+            }
+            return cachedApp;
+          });
+        }
 
-      dispatchApplications({ type: 'set', payload: _applications });
+        dispatchApplications({ type: 'init', applications: _applications });
+      });
     }
 
-    if (_applications && !currentApplication) {
-      setCurrentApplication(_applications[0]);
+    if (!currentApplication && applicationsData) {
+      setCurrentApplication(applicationsData[0]);
 
-      apiClient.create(_applications[0].serviceURLs[0]);
+      apiClient.create(applicationsData[0].serviceURLs[0]);
     }
-  }, [applicationsData, applications, currentApplication]);
+  }, [applicationsData, applications, currentApplication, getCachedApplications]);
+
+  console.log({ applications });
 
   return (
     <BlockchainApplicationsManagementContext.Provider

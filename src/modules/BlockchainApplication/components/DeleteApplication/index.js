@@ -15,7 +15,7 @@ export default function DeleteBlockchainApplication({ sharedData: { application 
   const { dispatchApplications } = useBlockchainApplicationsManagement();
 
   const handleDeleteApplicationClick = () => {
-    dispatchApplications({ type: 'delete', payload: application });
+    dispatchApplications({ type: 'delete', application });
 
     nextStep({ application });
   };

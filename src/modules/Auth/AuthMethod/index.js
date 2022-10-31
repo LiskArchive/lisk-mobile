@@ -40,9 +40,6 @@ export default function AuthMethod({ route }) {
   };
 
   useEffect(() => {
-    // TODO: Replace with live data
-    // setCurrentApplication(mockDefaultApplicationMeta);
-
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());
       init();

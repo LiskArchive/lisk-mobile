@@ -47,8 +47,10 @@ export default function ApplicationDetail({ route }) {
 
   const isPinned = checkPinByChainId(chainID);
 
+  console.log({ application });
+
   const handleAddApplicationClick = () => {
-    dispatchApplications({ type: 'add', payload: application });
+    dispatchApplications({ type: 'add', application });
 
     navigation.navigate('AddApplicationSuccess');
   };
