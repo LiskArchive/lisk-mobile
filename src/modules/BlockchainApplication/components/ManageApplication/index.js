@@ -13,11 +13,11 @@ import getStyles from './styles';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
 import SelectNode from '../SelectNode';
-import { useBlockchainApplicationsManagement } from '../../hooks/useBlockchainApplicationManagement';
+import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 const ManageApplication = ({ closeModal, nextStep, style }) => {
   const navigation = useNavigation();
-  const { applications, setCurrentApplication } = useBlockchainApplicationsManagement();
+  const { applications, setCurrentApplication } = useApplicationsManagement();
   const { styles } = useTheme({ styles: getStyles });
   const [selectedApplication, setSelectedApplication] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);

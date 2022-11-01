@@ -12,7 +12,7 @@ import AccountItem from '../AccountItem';
 
 import getAccountsListStyles from './styles';
 
-export default function AccountsList({
+export default function AccountList({
   mode,
   accounts,
   onAccountPress,

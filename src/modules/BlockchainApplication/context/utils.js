@@ -1,4 +1,28 @@
-import { setBlockchainApplicationsStorageData } from './helpers';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { APPLICATIONS_STORAGE_KEY } from './constants';
+
+export async function getApplicationsStorageData() {
+  try {
+    const data = await AsyncStorage.getItem(APPLICATIONS_STORAGE_KEY);
+
+    return data != null ? JSON.parse(data) : null;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function setApplicationsStorageData(data) {
+  try {
+    const jsonData = JSON.stringify(data);
+
+    await AsyncStorage.setItem(APPLICATIONS_STORAGE_KEY, jsonData);
+
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
 /**
  * Reducer function for the Blockchain Applications Management context.
@@ -7,7 +31,7 @@ import { setBlockchainApplicationsStorageData } from './helpers';
  * Can be "set" applications, "add" application and "delete" application.
  * @returns {Array} state - The context state of saved applications.
  */
-export function blockchainApplicationsContextReducer(state, { type, applications, application }) {
+export function applicationsContextReducer(state, { type, applications, application }) {
   switch (type) {
     case 'init':
       return applications;
@@ -19,7 +43,7 @@ export function blockchainApplicationsContextReducer(state, { type, applications
 
       const updatedState = [...state, application];
 
-      setBlockchainApplicationsStorageData(updatedState);
+      setApplicationsStorageData(updatedState);
 
       return updatedState;
     }
@@ -27,7 +51,7 @@ export function blockchainApplicationsContextReducer(state, { type, applications
     case 'delete': {
       const updatedState = state.filter((app) => app.chainID !== application.chainID);
 
-      setBlockchainApplicationsStorageData(updatedState);
+      setApplicationsStorageData(updatedState);
 
       return updatedState;
     }

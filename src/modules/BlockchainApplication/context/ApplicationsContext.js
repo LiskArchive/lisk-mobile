@@ -1,23 +1,22 @@
-import React, { createContext, useCallback, useEffect, useReducer, useState } from 'react';
+import React, { createContext, useEffect, useReducer, useState } from 'react';
 
 import apiClient from 'utilities/api/APIClient';
-import { useBlockchainApplicationExplorer } from '../hooks/useBlockchainApplicationExplorer';
+import { useApplicationsExplorer } from '../hooks/useApplicationsExplorer';
 
-import { blockchainApplicationsContextReducer } from './reducers';
-import { getBlockchainApplicationsStorageData } from './helpers';
+import { applicationsContextReducer, getApplicationsStorageData } from './utils';
 
-export const BlockchainApplicationsManagementContext = createContext();
+export const ApplicationsContext = createContext();
 
 /**
- * Context provider of Blockchain Applications Management. Pass down to children the applications and
+ * Context provider of Blockchain Applications. Pass down to children the applications and
  * current application state saved locally by the user.
  * @param {Object} children - React nodes to pass down as children.
  * @returns {Object} value - Blockchain applications state (data, isLoading, isError and error),
  * current application selected by the user and functions to dispatch the applications state and
  * current application.
  */
-export function BlockchainApplicationsManagementProvider({ children }) {
-  const [applications, dispatchApplications] = useReducer(blockchainApplicationsContextReducer);
+export function ApplicationsProvider({ children }) {
+  const [applications, dispatchApplications] = useReducer(applicationsContextReducer);
 
   const [currentApplication, setCurrentApplication] = useState();
 
@@ -26,15 +25,13 @@ export function BlockchainApplicationsManagementProvider({ children }) {
     isLoading: isLoadingApplications,
     isError: isErrorOnApplications,
     error: errorOnApplications,
-  } = useBlockchainApplicationExplorer({ applicationsConfig: { params: { isDefault: true } } });
-
-  const getCachedApplications = useCallback(() => getBlockchainApplicationsStorageData(), []);
+  } = useApplicationsExplorer({ applicationsConfig: { params: { isDefault: true } } });
 
   useEffect(() => {
-    let _applications;
-
     if (!applications && applicationsData) {
-      getCachedApplications().then((cachedApplications) => {
+      let _applications;
+
+      getApplicationsStorageData().then((cachedApplications) => {
         if (cachedApplications) {
           _applications = cachedApplications.map((cachedApp) => {
             // eslint-disable-next-line max-nested-callbacks
@@ -57,12 +54,10 @@ export function BlockchainApplicationsManagementProvider({ children }) {
 
       apiClient.create(applicationsData[0].serviceURLs[0]);
     }
-  }, [applicationsData, applications, currentApplication, getCachedApplications]);
-
-  console.log({ applications });
+  }, [applicationsData, applications, currentApplication]);
 
   return (
-    <BlockchainApplicationsManagementContext.Provider
+    <ApplicationsContext.Provider
       value={{
         applications: {
           data: applications,
@@ -76,6 +71,6 @@ export function BlockchainApplicationsManagementProvider({ children }) {
       }}
     >
       {children}
-    </BlockchainApplicationsManagementContext.Provider>
+    </ApplicationsContext.Provider>
   );
 }

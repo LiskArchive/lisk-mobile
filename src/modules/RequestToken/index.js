@@ -10,8 +10,8 @@ import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
-import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
-import { useBlockchainApplicationsManagement } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationManagement';
+import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
+import { useApplicationsManagement } from 'modules/BlockchainApplication/hooks/useApplicationsManagement';
 import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import {
@@ -45,9 +45,9 @@ export default function RequestToken() {
 
   const [currentAccount] = useCurrentAccount();
 
-  const { currentApplication } = useBlockchainApplicationsManagement();
+  const { currentApplication } = useApplicationsManagement();
 
-  const applications = useBlockchainApplicationExplorer();
+  const applications = useApplicationsExplorer();
 
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');

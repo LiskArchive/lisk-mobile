@@ -6,7 +6,8 @@ export default () => ({
       flex: 1,
     },
     container: {
-      padding: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
@@ -26,8 +27,9 @@ export default () => ({
       textAlign: 'center',
       marginBottom: 16,
     },
-    buttonContainer: {
-      padding: boxes.boxPadding,
+    footer: {
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     continueButton: {
       paddingHorizontal: 16,

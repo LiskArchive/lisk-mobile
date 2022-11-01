@@ -17,7 +17,7 @@ import { colors, themes } from 'constants/styleGuide';
 import Fab from 'components/shared/Fab';
 import QRCodeSvg from 'assets/svgs/QRCodeSvg';
 import CopySvg from 'assets/svgs/CopySvg';
-import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
+import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import ApplicationList from '../ApplicationList';
 import ApplicationRow from '../ApplicationRow';
 import ApplicationsStats from '../ApplicationsStats';
@@ -51,7 +51,7 @@ export default function BlockchainApplicationsExplorer() {
   const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
   const tabBarHeight = useBottomTabBarHeight();
 
-  const applications = useBlockchainApplicationExplorer();
+  const applications = useApplicationsExplorer();
 
   const { theme, styles } = useTheme({
     styles: getBlockchainApplicationsExplorerStyles(),

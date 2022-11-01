@@ -7,12 +7,14 @@ export default () => ({
     },
     container: {
       flex: 1,
-      padding: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     description: {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.base,
-      paddingBottom: 10,
+      paddingTop: 8,
+      paddingBottom: 8,
     },
   },
   [themes.light]: {

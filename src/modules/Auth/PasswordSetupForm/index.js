@@ -75,7 +75,7 @@ export default function PasswordSetupForm({ route }) {
       {isSuccess ? (
         <PasswordSetupSuccess encryptedJson={encryptedJSON} onContinue={onContinue} />
       ) : (
-        <View>
+        <>
           <HeaderBackButton
             title="auth.setup.passwordSetupTitle"
             onPress={navigation.goBack}
@@ -87,47 +87,43 @@ export default function PasswordSetupForm({ route }) {
               {i18next.t('auth.setup.passwordSetupDescription')}
             </Text>
 
-            <View>
-              <Input
-                testID="enter-password"
-                innerStyles={{
-                  containerStyle: styles.inputContainer,
-                  input: styles.input,
-                }}
-                label={i18next.t('auth.form.enterPassword')}
-                secureTextEntry
-                onChange={setPassword}
-                value={password}
-                error={passwordError && i18next.t(passwordError)}
-              />
+            <Input
+              testID="enter-password"
+              innerStyles={{
+                containerStyle: styles.inputContainer,
+                input: styles.input,
+              }}
+              label={i18next.t('auth.form.enterPassword')}
+              secureTextEntry
+              onChange={setPassword}
+              value={password}
+              error={passwordError && i18next.t(passwordError)}
+            />
 
-              <Input
-                testID="confirm-password"
-                innerStyles={{
-                  containerStyle: styles.inputContainer,
-                  input: styles.input,
-                }}
-                label={i18next.t('auth.form.confirmPassword')}
-                secureTextEntry
-                onChange={setConfirmPassword}
-                value={confirmPassword}
-                error={confirmPasswordError && i18next.t(confirmPasswordError)}
-              />
+            <Input
+              testID="confirm-password"
+              innerStyles={{
+                containerStyle: styles.inputContainer,
+                input: styles.input,
+              }}
+              label={i18next.t('auth.form.confirmPassword')}
+              secureTextEntry
+              onChange={setConfirmPassword}
+              value={confirmPassword}
+              error={confirmPasswordError && i18next.t(confirmPasswordError)}
+            />
 
-              <Input
-                testID="account-name"
-                innerStyles={{
-                  containerStyle: styles.inputContainer,
-                  input: styles.input,
-                }}
-                label={i18next.t('auth.form.accountName')}
-                onChange={setAccountName}
-                value={accountName}
-              />
-            </View>
-          </ScrollView>
+            <Input
+              testID="account-name"
+              innerStyles={{
+                containerStyle: styles.inputContainer,
+                input: styles.input,
+              }}
+              label={i18next.t('auth.form.accountName')}
+              onChange={setAccountName}
+              value={accountName}
+            />
 
-          <View style={styles.container}>
             <View style={styles.actionContainer}>
               <View style={styles.switch}>
                 <Switch
@@ -141,14 +137,16 @@ export default function PasswordSetupForm({ route }) {
                 I agree to store my encrypted secret recovery phrase on this device
               </Text>
             </View>
+          </ScrollView>
 
+          <View style={[styles.footer]}>
             <PrimaryButton
               title={i18next.t('auth.setup.buttons.saveAccount')}
               onPress={handleSubmit}
               disabled={!isAgreed}
             />
           </View>
-        </View>
+        </>
       )}
     </SafeAreaView>
   );

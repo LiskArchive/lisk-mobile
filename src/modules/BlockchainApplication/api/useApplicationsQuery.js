@@ -12,7 +12,7 @@ import { mockApplications } from '../__fixtures__';
  * (applications), loading state, error state, and more.
  */
 export function useApplicationsQuery() {
-  // { config: customConfig = {}, options = {} } = {}
+  // Args: { config: customConfig = {}, options = {} } = {}
 
   // const config = {
   //   baseURL: 'http://104.248.241.229:9901',

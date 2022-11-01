@@ -61,7 +61,7 @@ export default function ResultScreen({
       </View>
 
       {onContinue && (
-        <View style={[styles.buttonContainer]}>
+        <View style={[styles.footer]}>
           <PrimaryButton
             noTheme
             title={buttonText}

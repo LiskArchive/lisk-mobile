@@ -1,1 +1,1 @@
-export const BLOCKCHAIN_APPLICATIONS_STORAGE_KEY = '@blockchainApplications';
+export const APPLICATIONS_STORAGE_KEY = '@blockchainApplications';

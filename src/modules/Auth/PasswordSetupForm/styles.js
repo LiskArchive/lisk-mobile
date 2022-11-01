@@ -6,16 +6,18 @@ export default () => ({
       flex: 1,
     },
     container: {
-      padding: boxes.boxPadding,
+      flex: 1,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     description: {
-      flex: 1,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.base,
-      marginBottom: 16,
+      marginTop: 16,
+      marginBottom: 8,
     },
     formContainer: {
-      paddingTop: 10,
+      paddingTop: 8,
     },
     inputContainer: {
       paddingLeft: 0,
@@ -28,15 +30,20 @@ export default () => ({
     actionContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: boxes.boxPadding,
+      justifyContent: 'center',
+      paddingTop: boxes.boxPadding,
     },
     switch: {
-      paddingRight: 10,
+      paddingRight: 8,
     },
     actionText: {
+      flex: 1,
       fontFamily: fonts.family.context,
       fontSize: 14,
-      flex: 1,
+    },
+    footer: {
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
   },
   [themes.light]: {

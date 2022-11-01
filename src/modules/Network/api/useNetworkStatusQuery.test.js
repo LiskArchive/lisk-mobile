@@ -2,7 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook } from '@testing-library/react-hooks';
 
-import { BlockchainApplicationsManagementProvider } from 'modules/BlockchainApplication/context/BlockchainApplicationsManagementContext';
+import { ApplicationsProvider } from 'modules/BlockchainApplication/context/ApplicationsContext';
 import {
   mockApplicationsFullData,
   mockCurrentApplication,
@@ -18,7 +18,7 @@ describe('useNetworkStatusQuery hook', () => {
 
   const wrapper = ({ children }) => (
     <QueryClientProvider client={queryClient}>
-      <BlockchainApplicationsManagementProvider
+      <ApplicationsProvider
         value={{
           applications: {
             data: mockApplicationsFullData,
@@ -32,7 +32,7 @@ describe('useNetworkStatusQuery hook', () => {
         }}
       >
         {children}
-      </BlockchainApplicationsManagementProvider>
+      </ApplicationsProvider>
     </QueryClientProvider>
   );
 

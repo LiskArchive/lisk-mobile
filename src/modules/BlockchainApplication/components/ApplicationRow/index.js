@@ -16,7 +16,7 @@ import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 
 import { useBlockchainApplicationRowActions } from './hooks';
 import getBlockchainApplicationRowStyles from './styles';
-import { useBlockchainApplicationsManagement } from '../../hooks/useBlockchainApplicationManagement';
+import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
@@ -40,7 +40,7 @@ function BlockchainApplicationRow({
   const [showDeleteDefaultApplicationModal, setShowDeleteDefaultApplicationModal] = useState(false);
 
   const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
-  const { currentApplication } = useBlockchainApplicationsManagement();
+  const { currentApplication } = useApplicationsManagement();
 
   const { leftActions, rightActions } = useBlockchainApplicationRowActions({
     application,

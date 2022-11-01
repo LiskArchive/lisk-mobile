@@ -4,7 +4,7 @@ import { Linking } from 'react-native';
 import i18next from 'i18next';
 
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
 import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
 import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
@@ -29,7 +29,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
   const [isSignedTransactionCopiedToClipboard, handleCopySignedTransactionToClipboard] =
     useCopyToClipboard(signedTransactionString);
 
-  const applications = useBlockchainApplicationExplorer();
+  const applications = useApplicationsExplorer();
 
   const recipientApplication = applications.data?.find(
     (application) => application.chainID === recipientApplicationChainID

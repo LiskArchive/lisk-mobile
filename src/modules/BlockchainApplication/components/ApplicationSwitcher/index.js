@@ -4,11 +4,11 @@ import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
 import ChangeSvg from 'assets/svgs/ChangeSvg';
 import getStyles from './styles';
-import { useBlockchainApplicationsManagement } from '../../hooks/useBlockchainApplicationManagement';
+import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 const ApplicationSwitcher = ({ onPress }) => {
   const { styles } = useTheme({ styles: getStyles });
-  const { currentApplication } = useBlockchainApplicationsManagement();
+  const { currentApplication } = useApplicationsManagement();
 
   return (
     <View style={styles.switcherContainer}>

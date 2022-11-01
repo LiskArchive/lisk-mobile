@@ -7,7 +7,7 @@ import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
  * Hook that handle all the logic related to blockchain applications explorer.
  * @returns {Object} Available blockchain applications on and off-chain data.
  */
-export function useBlockchainApplicationExplorer({
+export function useApplicationsExplorer({
   applicationsConfig = {},
   applicationsMetaConfig = {},
   applicationsOptions = {},

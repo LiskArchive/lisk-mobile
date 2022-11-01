@@ -5,7 +5,7 @@ import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import { useSendTokenAmountChecker } from '../../hooks/useSendTokenAmountChecker';
 
@@ -19,7 +19,7 @@ import {
 } from './components';
 
 export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, transaction }) {
-  const applications = useBlockchainApplicationExplorer();
+  const applications = useApplicationsExplorer();
 
   const { field: tokenIDField } = useController({
     name: 'tokenID',
@@ -121,7 +121,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
         />
       </View>
 
-      <View style={[styles.row]}>
+      <View style={[styles.footer]}>
         <Button
           style={[styles.prevStepButton, styles.theme.prevStepButton]}
           onClick={prevStep}

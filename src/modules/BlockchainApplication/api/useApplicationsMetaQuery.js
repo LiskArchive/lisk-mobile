@@ -1,7 +1,8 @@
-import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
-import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
-import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-import blockchainAppsMetaAPIClient from 'utilities/api/BlockchainAppsMetaAPIClient';
+// import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
+// import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
+// import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
+// import blockchainAppsMetaAPIClient from 'utilities/api/BlockchainAppsMetaAPIClient';
+import { mockApplicationsMeta } from '../__fixtures__';
 
 /**
  * Fetch list of blockchain applications metadata (off-chain data) in paginated mode.
@@ -11,21 +12,26 @@ import blockchainAppsMetaAPIClient from 'utilities/api/BlockchainAppsMetaAPIClie
  * @returns - The query state of the API call. Includes the data
  * (applications), loading state, error state, and more.
  */
-export function useApplicationsMetaQuery({ config: customConfig = {}, options = {} } = {}) {
-  const config = {
-    url: `${API_URL}/blockchain/apps/meta`,
-    method: 'get',
-    event: 'get.blockchain.apps.meta',
-    ...customConfig,
-    params: {
-      limit: LIMIT,
-      ...(customConfig?.params || {}),
-    },
+export function useApplicationsMetaQuery() {
+  // { config: customConfig = {}, options = {} } = {}
+  // const config = {
+  //   url: `${API_URL}/blockchain/apps/meta`,
+  //   method: 'get',
+  //   event: 'get.blockchain.apps.meta',
+  //   ...customConfig,
+  //   params: {
+  //     limit: LIMIT,
+  //     ...(customConfig?.params || {}),
+  //   },
+  // };
+
+  // const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
+
+  // return useCustomInfiniteQuery({ config, options, keys, client: blockchainAppsMetaAPIClient });
+
+  return {
+    data: { data: mockApplicationsMeta },
+    isLoading: false,
+    isError: false,
   };
-
-  const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
-
-  // useQueryKeys([GET_APPLICATIONS_QUERY, config]);
-
-  return useCustomInfiniteQuery({ config, options, keys, client: blockchainAppsMetaAPIClient });
 }

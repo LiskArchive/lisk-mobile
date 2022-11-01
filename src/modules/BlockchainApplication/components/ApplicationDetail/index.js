@@ -15,9 +15,10 @@ import wavesPattern from 'assets/images/waves_pattern_large.png';
 import { colors } from 'constants/styleGuide';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
-import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
-import { useBlockchainApplicationsManagement } from '../../hooks/useBlockchainApplicationManagement';
+import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
+import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 import getStyles from './styles';
 
@@ -37,8 +38,8 @@ export default function ApplicationDetail({ route }) {
   const { styles } = useTheme({ styles: getStyles });
 
   const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
-  const { dispatchApplications } = useBlockchainApplicationsManagement();
-  const applications = useBlockchainApplicationExplorer();
+  const { dispatchApplications } = useApplicationsManagement();
+  const applications = useApplicationsExplorer();
 
   const application = useMemo(
     () => applications.data?.find((app) => app.chainID === chainID),
@@ -46,8 +47,6 @@ export default function ApplicationDetail({ route }) {
   );
 
   const isPinned = checkPinByChainId(chainID);
-
-  console.log({ application });
 
   const handleAddApplicationClick = () => {
     dispatchApplications({ type: 'add', application });
@@ -105,7 +104,7 @@ export default function ApplicationDetail({ route }) {
         )}
       />
 
-      <View style={[styles.flex, styles.body]}>
+      <SafeAreaView style={[styles.flex, styles.body]}>
         <View style={styles.titleRow}>
           <DataRenderer
             isLoading={applications.isLoading}
@@ -224,7 +223,7 @@ export default function ApplicationDetail({ route }) {
             {i18next.t('application.manage.add.confirmButtonText')}
           </PrimaryButton>
         )}
-      </View>
+      </SafeAreaView>
     </ScrollView>
   );
 }
