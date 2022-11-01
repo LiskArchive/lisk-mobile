@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Animated, Image, TouchableOpacity } from 'react-native';
+
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
 import ChangeSvg from 'assets/svgs/ChangeSvg';
+
 import getStyles from './styles';
-import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 const ApplicationSwitcher = ({ onPress }) => {
+  const [currentApplication] = useCurrentApplication();
+
   const { styles } = useTheme({ styles: getStyles });
-  const { currentApplication } = useApplicationsManagement();
 
   return (
     <View style={styles.switcherContainer}>

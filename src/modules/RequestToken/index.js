@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
-import { useApplicationsManagement } from 'modules/BlockchainApplication/hooks/useApplicationsManagement';
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import {
@@ -45,7 +45,7 @@ export default function RequestToken() {
 
   const [currentAccount] = useCurrentAccount();
 
-  const { currentApplication } = useApplicationsManagement();
+  const [currentApplication] = useCurrentApplication();
 
   const applications = useApplicationsExplorer();
 

@@ -1,9 +1,10 @@
-import React, { createContext, useEffect, useReducer, useState } from 'react';
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
 
 import apiClient from 'utilities/api/APIClient';
+import { useApplicationsAsyncStorage } from '../hooks/useApplicationsAsyncStorage';
 import { useApplicationsExplorer } from '../hooks/useApplicationsExplorer';
 
-import { applicationsContextReducer, getApplicationsStorageData } from './utils';
+import { applicationsContextReducer } from './utils';
 
 export const ApplicationsContext = createContext();
 
@@ -20,6 +21,8 @@ export function ApplicationsProvider({ children }) {
 
   const [currentApplication, setCurrentApplication] = useState();
 
+  const { getApplications: getApplicationsStorageData } = useApplicationsAsyncStorage();
+
   const {
     data: applicationsData,
     isLoading: isLoadingApplications,
@@ -29,20 +32,14 @@ export function ApplicationsProvider({ children }) {
 
   useEffect(() => {
     if (!applications && applicationsData) {
-      let _applications;
-
       getApplicationsStorageData().then((cachedApplications) => {
+        let _applications = [];
+
         if (cachedApplications) {
-          _applications = cachedApplications.map((cachedApp) => {
+          _applications = cachedApplications.map((cachedChainID) =>
             // eslint-disable-next-line max-nested-callbacks
-            const updatedApp = applicationsData.find((app) => app.chainID === cachedApp.chainID);
-
-            if (updatedApp) {
-              return { ...cachedApp, ...updatedApp };
-            }
-
-            return cachedApp;
-          });
+            applicationsData.find((app) => app.chainID === cachedChainID)
+          );
         }
 
         dispatchApplications({ type: 'init', applications: _applications });
@@ -54,7 +51,7 @@ export function ApplicationsProvider({ children }) {
 
       apiClient.create(applicationsData[0].serviceURLs[0]);
     }
-  }, [applicationsData, applications, currentApplication]);
+  }, [applicationsData, applications, currentApplication, getApplicationsStorageData]);
 
   return (
     <ApplicationsContext.Provider
@@ -73,4 +70,12 @@ export function ApplicationsProvider({ children }) {
       {children}
     </ApplicationsContext.Provider>
   );
+}
+
+/**
+ * Allows to consume Blockchain Applications context value as hook.
+ * @returns {Object} value - Blockchain Applications context value.
+ */
+export function useApplications() {
+  return useContext(ApplicationsContext);
 }

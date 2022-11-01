@@ -3,7 +3,7 @@ import { GET_TOKENS_METADATA_QUERY } from 'utilities/api/queries';
 import { LIMIT, API_URL, NETWORK } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import blockchainAppsMetaAPIClient from 'utilities/api/BlockchainAppsMetaAPIClient';
-import { useApplicationsManagement } from '../hooks/useApplicationsManagement';
+import { useCurrentApplication } from '../hooks/useCurrentApplication';
 
 /**
  * Fetch list of blockchain applications tokens off-chain metadata.
@@ -14,7 +14,7 @@ import { useApplicationsManagement } from '../hooks/useApplicationsManagement';
  * (tokens), loading state, error state, and more.
  */
 export function useTokenMetaQuery(tokenID, { config: customConfig = {}, options = {} } = {}) {
-  const { currentApplication } = useApplicationsManagement();
+  const [currentApplication] = useCurrentApplication();
 
   const config = {
     url: `${API_URL}/blockchain/apps/meta/tokens`,

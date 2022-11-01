@@ -38,7 +38,7 @@ export default function ApplicationDetail({ route }) {
   const { styles } = useTheme({ styles: getStyles });
 
   const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
-  const { dispatchApplications } = useApplicationsManagement();
+  const { addApplication } = useApplicationsManagement();
   const applications = useApplicationsExplorer();
 
   const application = useMemo(
@@ -49,7 +49,7 @@ export default function ApplicationDetail({ route }) {
   const isPinned = checkPinByChainId(chainID);
 
   const handleAddApplicationClick = () => {
-    dispatchApplications({ type: 'add', application });
+    addApplication(application);
 
     navigation.navigate('AddApplicationSuccess');
   };

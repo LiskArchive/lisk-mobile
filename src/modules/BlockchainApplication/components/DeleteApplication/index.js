@@ -12,10 +12,10 @@ import { useApplicationsManagement } from '../../hooks/useApplicationsManagement
 export default function DeleteBlockchainApplication({ sharedData: { application }, nextStep }) {
   const { styles } = useTheme({ styles: getDeleteBlockchainApplicationStyles() });
 
-  const { dispatchApplications } = useApplicationsManagement();
+  const { deleteApplication } = useApplicationsManagement();
 
   const handleDeleteApplicationClick = () => {
-    dispatchApplications({ type: 'delete', application });
+    deleteApplication(application.chainID);
 
     nextStep({ application });
   };
