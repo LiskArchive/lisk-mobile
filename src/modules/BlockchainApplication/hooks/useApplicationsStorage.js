@@ -6,8 +6,6 @@ export function useApplicationsStorage(storageKey) {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState();
 
-  // AsyncStorage.removeItem(storageKey);
-
   const getApplications = useCallback(async () => {
     let applications;
 

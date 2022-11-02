@@ -91,8 +91,6 @@ export function ApplicationsProvider({ children }) {
     [isErrorOnDefaultApplications, isErrorOnApplications]
   );
 
-  console.log({ pins });
-
   return (
     <ApplicationsContext.Provider
       value={{
