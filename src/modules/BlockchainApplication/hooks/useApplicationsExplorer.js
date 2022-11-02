@@ -20,10 +20,7 @@ export function useApplicationsExplorer({
     isError: isErrorOnApplications,
     error: errorOnApplications,
   } = useApplicationsQuery({
-    config: {
-      baseURL: process.env.SERVICE_API_BASE_URL,
-      ...applicationsConfig,
-    },
+    config: applicationsConfig,
     options: applicationsOptions,
   });
 
@@ -38,7 +35,6 @@ export function useApplicationsExplorer({
       ...applicationsMetaOptions,
     },
     config: {
-      baseURL: process.env.SERVICE_API_BASE_URL,
       params: {
         // TODO: Pass as CSV of chainIDs when backend supports feature.
         // e.g.: applicationsData?.data.map((app) => app.chainID)
