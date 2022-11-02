@@ -4,7 +4,7 @@ import apiClient from 'utilities/api/APIClient';
 import { useApplicationsAsyncStorage } from '../hooks/useApplicationsAsyncStorage';
 import { useApplicationsExplorer } from '../hooks/useApplicationsExplorer';
 
-import { applicationsContextReducer } from './utils';
+import { applicationsContextReducer, getInitContextApplications } from './utils';
 
 export const ApplicationsContext = createContext();
 
@@ -24,43 +24,53 @@ export function ApplicationsProvider({ children }) {
   const { getApplications: getApplicationsStorageData } = useApplicationsAsyncStorage();
 
   const {
+    data: defaultApplicationsData,
+    isLoading: isLoadingDefaultApplications,
+    isError: isErrorOnDefaultApplications,
+    error: errorOnDefaultApplications,
+  } = useApplicationsExplorer({ applicationsConfig: { params: { isDefault: true } } });
+
+  const {
     data: applicationsData,
     isLoading: isLoadingApplications,
     isError: isErrorOnApplications,
     error: errorOnApplications,
-  } = useApplicationsExplorer({ applicationsConfig: { params: { isDefault: true } } });
+  } = useApplicationsExplorer();
 
   useEffect(() => {
-    if (!applications && applicationsData) {
-      getApplicationsStorageData().then((cachedApplications) => {
-        let _applications = [];
+    if (!applications && defaultApplicationsData && applicationsData) {
+      getApplicationsStorageData().then((cachedChainIDs) => {
+        const initApplications = getInitContextApplications({
+          applications: applicationsData,
+          defaultApplications: defaultApplicationsData,
+          cachedChainIDs,
+        });
 
-        if (cachedApplications) {
-          _applications = cachedApplications.map((cachedChainID) =>
-            // eslint-disable-next-line max-nested-callbacks
-            applicationsData.find((app) => app.chainID === cachedChainID)
-          );
-        }
-
-        dispatchApplications({ type: 'init', applications: _applications });
+        dispatchApplications({ type: 'init', applications: initApplications });
       });
     }
 
-    if (!currentApplication && applicationsData) {
-      setCurrentApplication(applicationsData[0]);
+    if (!currentApplication && defaultApplicationsData) {
+      setCurrentApplication(defaultApplicationsData[0]);
 
-      apiClient.create(applicationsData[0].serviceURLs[0]);
+      apiClient.create(defaultApplicationsData[0].serviceURLs[0]);
     }
-  }, [applicationsData, applications, currentApplication, getApplicationsStorageData]);
+  }, [
+    defaultApplicationsData,
+    applicationsData,
+    applications,
+    currentApplication,
+    getApplicationsStorageData,
+  ]);
 
   return (
     <ApplicationsContext.Provider
       value={{
         applications: {
           data: applications,
-          isLoading: isLoadingApplications,
-          isError: isErrorOnApplications,
-          error: errorOnApplications,
+          isLoading: isLoadingDefaultApplications || isLoadingApplications,
+          isError: isErrorOnDefaultApplications || isErrorOnApplications,
+          error: errorOnDefaultApplications || errorOnApplications,
         },
         dispatchApplications,
         currentApplication,

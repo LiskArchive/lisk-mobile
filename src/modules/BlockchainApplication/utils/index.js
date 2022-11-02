@@ -20,9 +20,9 @@ export const roundAccessor = (arr = [], index = 0, direction = 'next') => {
  * @param {Object} applicationsMetaData
  */
 export function mergeApplicationsData(applicationsData, applicationsMetaData) {
-  return applicationsMetaData.map((appMetadata) => {
-    const app = applicationsData.find((_app) => _app.chainID === appMetadata.chainID);
+  return applicationsData.map((appMetadata) => {
+    const app = applicationsMetaData.find((_app) => _app.chainID === appMetadata.chainID);
 
-    return { ...appMetadata, app };
+    return { ...appMetadata, ...app };
   });
 }

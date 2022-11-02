@@ -11,9 +11,10 @@ import { mockApplications } from '../__fixtures__';
  * @returns - The query state of the API call. Includes the data
  * (applications), loading state, error state, and more.
  */
-export function useApplicationsQuery() {
-  // Args: { config: customConfig = {}, options = {} } = {}
-
+export function useApplicationsQuery({
+  config: customConfig = {},
+  //  options = {}
+} = {}) {
   // const config = {
   //   baseURL: 'http://104.248.241.229:9901',
   //   url: `${API_URL}/blockchain/apps`,
@@ -28,7 +29,11 @@ export function useApplicationsQuery() {
   // return useCustomInfiniteQuery({ config, options, keys });
 
   return {
-    data: { data: mockApplications.filter((app) => app.isDefault) },
+    data: {
+      data: mockApplications.filter((app) =>
+        customConfig.params?.isDefault ? app.isDefault : true
+      ),
+    },
     isLoading: false,
     isError: false,
   };
