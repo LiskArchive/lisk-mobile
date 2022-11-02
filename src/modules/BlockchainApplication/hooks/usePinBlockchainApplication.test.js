@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import { mockApplicationsMeta } from '../__fixtures__';
 import actionTypes from '../store/actionTypes';
-import { usePinBlockchainApplication } from './usePinBlockchainApplication';
+import { usePinApplications } from './usePinApplications';
 
 const mockStore = configureMockStore();
 const mockDispatch = jest.fn();
@@ -24,7 +24,7 @@ jest.mock('react-redux', () => ({
   useDispatch: () => mockDispatch,
 }));
 
-describe('usePinBlockchainApplication hook', () => {
+describe('usePinApplications hook', () => {
   const store = mockStore(mockState);
 
   const wrapper = ({ children }) => <ReduxProvider reduxStore={store}>{children}</ReduxProvider>;
@@ -33,7 +33,7 @@ describe('usePinBlockchainApplication hook', () => {
     mockDispatch.mockClear();
   });
 
-  const { result } = renderHook(() => usePinBlockchainApplication(), { wrapper });
+  const { result } = renderHook(() => usePinApplications(), { wrapper });
 
   it('togglePin should not be triggered on mounting', async () => {
     expect(store.getActions()).toEqual([]);
@@ -70,13 +70,13 @@ describe('usePinBlockchainApplication hook', () => {
   });
 
   it('should flag chain as a pinned application', async () => {
-    const { checkPinByChainId, togglePin } = result.current;
+    const { checkPin, togglePin } = result.current;
     const chainId = mockApplicationsMeta[0].chainID;
 
     act(() => {
       togglePin(chainId);
     });
-    expect(checkPinByChainId(chainId)).toBeTruthy();
+    expect(checkPin(chainId)).toBeTruthy();
   });
 
   it('should not flag chain as a pinned application', async () => {
@@ -84,12 +84,12 @@ describe('usePinBlockchainApplication hook', () => {
 
     const {
       result: {
-        current: { checkPinByChainId },
+        current: { checkPin },
       },
-    } = renderHook(() => usePinBlockchainApplication(), { wrapper });
+    } = renderHook(() => usePinApplications(), { wrapper });
 
     const chainId = mockApplicationsMeta[0].chainID;
 
-    expect(checkPinByChainId(chainId)).not.toBeTruthy();
+    expect(checkPin(chainId)).not.toBeTruthy();
   });
 });

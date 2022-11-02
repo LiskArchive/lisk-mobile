@@ -1,10 +1,16 @@
-import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
+/* eslint-disable max-statements */
+import React, { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 
 import apiClient from 'utilities/api/APIClient';
-import { useApplicationsAsyncStorage } from '../hooks/useApplicationsAsyncStorage';
+import { useApplicationsStorage } from '../hooks/useApplicationsStorage';
 import { useApplicationsExplorer } from '../hooks/useApplicationsExplorer';
+import { APPLICATIONS_STORAGE_KEY, PINNED_APPLICATIONS_STORAGE_KEY } from '../constants';
 
-import { applicationsContextReducer, getInitContextApplications } from './utils';
+import {
+  applicationsContextReducer,
+  applicationPinsContextReducer,
+  getInitContextApplications,
+} from './utils';
 
 export const ApplicationsContext = createContext();
 
@@ -18,10 +24,14 @@ export const ApplicationsContext = createContext();
  */
 export function ApplicationsProvider({ children }) {
   const [applications, dispatchApplications] = useReducer(applicationsContextReducer);
-
+  const [pins, dispatchPins] = useReducer(applicationPinsContextReducer);
   const [currentApplication, setCurrentApplication] = useState();
 
-  const { getApplications: getApplicationsStorageData } = useApplicationsAsyncStorage();
+  const { getApplications: getApplicationsStorageData } =
+    useApplicationsStorage(APPLICATIONS_STORAGE_KEY);
+  const { getApplications: getPinnedApplicationsStorageData } = useApplicationsStorage(
+    PINNED_APPLICATIONS_STORAGE_KEY
+  );
 
   const {
     data: defaultApplicationsData,
@@ -48,6 +58,10 @@ export function ApplicationsProvider({ children }) {
 
         dispatchApplications({ type: 'init', applications: initApplications });
       });
+
+      getPinnedApplicationsStorageData().then((cachedPins) => {
+        dispatchPins({ type: 'init', pins: cachedPins || [] });
+      });
     }
 
     if (!currentApplication && defaultApplicationsData) {
@@ -61,18 +75,41 @@ export function ApplicationsProvider({ children }) {
     applications,
     currentApplication,
     getApplicationsStorageData,
+    getPinnedApplicationsStorageData,
   ]);
+
+  const isLoading = useMemo(
+    () => isLoadingDefaultApplications || isLoadingApplications,
+    [isLoadingDefaultApplications, isLoadingApplications]
+  );
+  const error = useMemo(
+    () => errorOnDefaultApplications || errorOnApplications,
+    [errorOnDefaultApplications, errorOnApplications]
+  );
+  const isError = useMemo(
+    () => isErrorOnDefaultApplications || isErrorOnApplications,
+    [isErrorOnDefaultApplications, isErrorOnApplications]
+  );
+
+  console.log({ pins });
 
   return (
     <ApplicationsContext.Provider
       value={{
         applications: {
           data: applications,
-          isLoading: isLoadingDefaultApplications || isLoadingApplications,
-          isError: isErrorOnDefaultApplications || isErrorOnApplications,
-          error: errorOnDefaultApplications || errorOnApplications,
+          isLoading,
+          isError,
+          error,
+        },
+        pins: {
+          data: pins,
+          isLoading,
+          isError,
+          error,
         },
         dispatchApplications,
+        dispatchPins,
         currentApplication,
         setCurrentApplication,
       }}

@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
+
 import { useApplications } from '../context/ApplicationsContext';
-import { useApplicationsAsyncStorage } from './useApplicationsAsyncStorage';
+import { APPLICATIONS_STORAGE_KEY } from '../constants';
+import { useApplicationsStorage } from './useApplicationsStorage';
 
 /**
  * Provides an API to add, delete and read the blockchain applications saved by the user.
@@ -13,7 +15,7 @@ export function useApplicationsManagement() {
   const {
     addApplication: addApplicationToStorage,
     deleteApplication: deleteApplicationFromStorage,
-  } = useApplicationsAsyncStorage();
+  } = useApplicationsStorage(APPLICATIONS_STORAGE_KEY);
 
   const addApplication = useCallback(
     (application) =>

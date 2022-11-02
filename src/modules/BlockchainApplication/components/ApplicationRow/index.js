@@ -17,6 +17,7 @@ import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import { useBlockchainApplicationRowActions } from './hooks';
 import getBlockchainApplicationRowStyles from './styles';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
+import { usePinApplications } from '../../hooks/usePinApplications';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
@@ -27,7 +28,7 @@ import { useCurrentApplication } from '../../hooks/useCurrentApplication';
  * active or not.
  * @param {boolean} showCaret - Flag for showing/hiding caret icon for clicking on the row.
  */
-function BlockchainApplicationRow({
+function ApplicationRow({
   application,
   onPress,
   variant = 'manage',
@@ -39,8 +40,9 @@ function BlockchainApplicationRow({
 
   const [showDeleteDefaultApplicationModal, setShowDeleteDefaultApplicationModal] = useState(false);
 
-  const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
   const [currentApplication] = useCurrentApplication();
+
+  const { checkPin } = usePinApplications();
 
   const { leftActions, rightActions } = useBlockchainApplicationRowActions({
     application,
@@ -49,6 +51,10 @@ function BlockchainApplicationRow({
     setShowDeleteDefaultApplicationModal,
     deleteApplication,
   });
+
+  const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
+
+  const applicationPinned = checkPin(application.chainID);
 
   return (
     <>
@@ -69,13 +75,14 @@ function BlockchainApplicationRow({
           </View>
 
           <View style={styles.applicationNameContainer}>
-            {application.isPinned && (
+            {applicationPinned && (
               <PinSvg
                 color={colors.light.ultramarineBlue}
                 style={{ marginRight: 12 }}
                 variant="fill"
               />
             )}
+
             {showActive && currentApplication.chainID === application.chainID && (
               <View style={{ marginRight: 12 }}>
                 <CircleCheckedSvg variant="fill" />
@@ -107,4 +114,4 @@ function BlockchainApplicationRow({
   );
 }
 
-export default memo(BlockchainApplicationRow);
+export default memo(ApplicationRow);

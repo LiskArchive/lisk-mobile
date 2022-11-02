@@ -16,7 +16,7 @@ import { colors } from 'constants/styleGuide';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
+import { usePinApplications } from '../../hooks/usePinApplications';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
@@ -37,7 +37,7 @@ export default function ApplicationDetail({ route }) {
 
   const { styles } = useTheme({ styles: getStyles });
 
-  const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
+  const { checkPin, togglePin } = usePinApplications();
   const { addApplication } = useApplicationsManagement();
   const applications = useApplicationsExplorer();
 
@@ -46,7 +46,7 @@ export default function ApplicationDetail({ route }) {
     [chainID, applications.data]
   );
 
-  const isPinned = checkPinByChainId(chainID);
+  const isPinned = checkPin(chainID);
 
   const handleAddApplicationClick = () => {
     addApplication(application);
