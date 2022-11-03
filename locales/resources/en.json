@@ -601,6 +601,13 @@
       "success": "Succeeded",
       "fail": "Failed",
       "pending": "Pending"
-    }
+    },
+    "errors": {
+      "dryRunRequestErrorDescription": "Error validating your transaction. Please try again later.",
+      "dryRunInvalidTransactionTitle": "Invalid transaction",
+      "dryRunInvalidTransactionDescription": "Please check your inputs, or reload the app and try again.",
+      "broadcastErrorDescription": "Error submitting your transaction. Please try again later.",
+      "signErrorDescription": "Error signing your transaction. Please try again later."
+    }   
   }
 }
