@@ -1,6 +1,7 @@
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
 import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
+import applicationsAPIClient from 'utilities/api/ApplicationsAPIClient';
 
 /**
  * Fetch list of blockchain applications on-chain data.
@@ -22,5 +23,5 @@ export function useApplicationsQuery({ config: customConfig = {}, options = {} }
 
   const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
 
-  return useCustomInfiniteQuery({ config, options, keys });
+  return useCustomInfiniteQuery({ config, options, keys, client: applicationsAPIClient });
 }

@@ -1,4 +1,4 @@
-const isTestnet = process.env.network === 'testnet';
+const isTestnet = process.env.NETWORK === 'testnet';
 
 export default {
   isTestnet,

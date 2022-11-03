@@ -154,7 +154,7 @@ You can fill out `env.json` with this variables:
 
 ```json
 {
-  "network": "Lisk network's name, can be mainnet or testnet.",
+  "NETWORK": "Lisk network's name, can be mainnet or testnet.",
   "passphrase": "Passphrase of your LSK account, to be filled out automatically on login",
   "secondPassphrase": "Second passphrase of your LSK account, to be filled out automatically on send process.",
   "useCommercialFonts": "Tells styleGuide/fonts.js file to load commercial fonts instead of Open Sans."

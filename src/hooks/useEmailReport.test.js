@@ -1,13 +1,10 @@
-import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
-import configureMockStore from 'redux-mock-store';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Provider } from 'react-redux';
 
 import { mockApplicationsMeta } from 'modules/BlockchainApplication/__fixtures__';
 
 import { useEmailReport } from './useEmailReport';
 import { mockNetworkStatus } from '../modules/Network/__fixtures__';
+import { applicationsWrapper } from '../tests/applicationsWrapper';
 
 jest.useRealTimers();
 
@@ -16,24 +13,7 @@ jest.mock('react-native/Libraries/Linking/Linking', () => ({
 }));
 
 describe('useEmailReport hook', () => {
-  const queryClient = new QueryClient();
-  const mockStore = configureMockStore();
-  const ReduxProvider = ({ children, reduxStore }) => (
-    <Provider store={reduxStore}>{children}</Provider>
-  );
-  const mockState = {
-    blockchainApplications: {
-      current: mockApplicationsMeta[0],
-      pins: [],
-    },
-  };
-  const store = mockStore(mockState);
-
-  const wrapper = ({ children }) => (
-    <QueryClientProvider client={queryClient}>
-      <ReduxProvider reduxStore={store}>{children}</ReduxProvider>
-    </QueryClientProvider>
-  );
+  const wrapper = ({ children }) => applicationsWrapper({ children });
 
   it('should be defined', () => {
     expect(useEmailReport).toBeDefined();
@@ -51,10 +31,12 @@ describe('useEmailReport hook', () => {
 
     expect(result.current.isLoading).toBeTruthy();
 
-    expect(result.current.url).not.toMatch(new RegExp(expectedNetworkVersionPattern));
-    expect(result.current.url).not.toMatch(new RegExp(expectedNetworkIdentifierPattern));
+    expect(result.current.url).toBeFalsy();
+    expect(result.current.url).toBeFalsy();
 
     await waitFor(() => !result.current.isLoading);
+
+    console.log({ current: result.current });
 
     expect(result.current.isLoading).toBeFalsy();
 

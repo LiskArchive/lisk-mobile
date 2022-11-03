@@ -2,7 +2,7 @@ import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQue
 import { GET_TOKENS_METADATA_QUERY } from 'utilities/api/queries';
 import { LIMIT, API_URL, NETWORK } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
-import blockchainAppsMetaAPIClient from 'utilities/api/BlockchainAppsMetaAPIClient';
+import applicationsAPIClient from 'utilities/api/ApplicationsAPIClient';
 
 /**
  * Fetch list of blockchain applications tokens off-chain metadata.
@@ -23,5 +23,5 @@ export function useTokensMetaQuery({ config: customConfig = {}, options = {} } =
 
   const keys = useQueryKeys([GET_TOKENS_METADATA_QUERY]);
 
-  return useCustomInfiniteQuery({ config, options, keys, client: blockchainAppsMetaAPIClient });
+  return useCustomInfiniteQuery({ config, options, keys, client: applicationsAPIClient });
 }
