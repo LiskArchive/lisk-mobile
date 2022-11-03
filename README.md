@@ -148,25 +148,6 @@ You can run the project in Xcode and use iOS simulators or alternatively use And
 
 There is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
 
-### Environment variables
-
-You can fill out `env.json` with this variables:
-
-```json
-{
-  "NETWORK": "Lisk network's name, can be mainnet or testnet.",
-  "passphrase": "Passphrase of your LSK account, to be filled out automatically on login",
-  "secondPassphrase": "Second passphrase of your LSK account, to be filled out automatically on send process.",
-  "useCommercialFonts": "Tells styleGuide/fonts.js file to load commercial fonts instead of Open Sans."
-}
-```
-
-In order to avoid committing that file you can follow [this approach](https://stackoverflow.com/a/3320183) as following:
-
-```bash
-$ git update-index --assume-unchanged env.json
-```
-
 ### Possible Errors for Mac Users
 
 #### Errors on `lottie-ios/Lottie.modulemap`
