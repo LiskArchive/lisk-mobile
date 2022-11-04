@@ -5,7 +5,7 @@ import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
 import getStyles from './styles';
 
-const BottomModal = ({ showClose = true, show, toggleShow, children }) => {
+const BottomModal = ({ showClose = true, show, toggleShow, children, style }) => {
   const { styles } = useTheme({ styles: getStyles() });
   const animation = useRef(new Animated.Value(0)).current;
 
@@ -33,8 +33,8 @@ const BottomModal = ({ showClose = true, show, toggleShow, children }) => {
   return (
     <Animated.View style={[show && styles.overlay, styles.theme.overlay, { opacity }]}>
       <Modal transparent visible={show} onRequestClose={closeModal} animationType="slide">
-        <View style={[styles.content]}>
-          <View style={[styles.container, styles.theme.container]}>
+        <View style={[styles.content, style?.content]}>
+          <View style={[styles.container, styles.theme.container, style?.container]}>
             <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
 
             {showClose && (
@@ -45,7 +45,8 @@ const BottomModal = ({ showClose = true, show, toggleShow, children }) => {
                 <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
               </TouchableOpacity>
             )}
-            <ScrollView>{children}</ScrollView>
+
+            <ScrollView style={[style?.children]}>{children}</ScrollView>
           </View>
         </View>
       </Modal>

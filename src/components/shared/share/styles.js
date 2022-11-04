@@ -11,7 +11,7 @@ export default () => ({
       flex: 1,
     },
     icon: {
-      padding: 10,
+      padding: 8,
     },
   },
 });

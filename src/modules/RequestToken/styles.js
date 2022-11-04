@@ -37,34 +37,31 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center',
       width: '90%',
-      marginBottom: 30,
+      marginBottom: 32,
     },
     avatar: {
-      marginRight: 10,
+      marginRight: 8,
     },
     address: {
       fontSize: fonts.size.small,
-      marginRight: 15,
+      marginRight: 16,
     },
     copyContainer: {
       alignItems: 'center',
       width: '100%',
     },
-    shareContainer: {
-      alignItems: 'center',
-      height: 100,
-    },
     modalContainer: {
       alignItems: 'center',
       justifyContent: 'center',
     },
-    shareTextContainer: {
-      marginTop: 16,
-      flexDirection: 'row',
-      alignItems: 'center',
+    shareContainer: {
+      padding: boxes.boxPadding,
+      flex: 1,
     },
     shareText: {
       fontSize: fonts.size.small,
+      textAlign: 'center',
+      marginTop: boxes.boxPadding,
     },
   },
 
