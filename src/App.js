@@ -15,6 +15,9 @@ import i18n from '../locales';
 import store, { persistedStore } from './store/index';
 import ConnectionProvider from '../libs/wcm/context/connectionProvider';
 import { ApplicationsProvider } from './modules/BlockchainApplication/context/ApplicationsContext';
+// import { server } from '../services/msw/server';
+
+// server.listen({});
 
 export default function App() {
   return (

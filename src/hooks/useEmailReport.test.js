@@ -36,8 +36,6 @@ describe('useEmailReport hook', () => {
 
     await waitFor(() => !result.current.isLoading);
 
-    console.log({ current: result.current });
-
     expect(result.current.isLoading).toBeFalsy();
 
     expect(result.current.url).toMatch(new RegExp(expectedNetworkVersionPattern));
