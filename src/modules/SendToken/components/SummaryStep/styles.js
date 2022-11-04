@@ -7,10 +7,12 @@ export default function getSendTokenSummaryStepStyles() {
         flex: 1,
         padding: boxes.boxPadding,
       },
-      buttonsContainer: {
+      footer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingLeft: boxes.boxPadding,
+        paddingRight: boxes.boxPadding,
       },
     },
     [themes.light]: {

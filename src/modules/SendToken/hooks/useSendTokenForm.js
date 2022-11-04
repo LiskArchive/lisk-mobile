@@ -8,8 +8,7 @@ import i18next from 'i18next';
 import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
-import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
@@ -21,7 +20,7 @@ import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
 
-  const [currentApplication] = useCurrentBlockchainApplication();
+  const [currentApplication] = useCurrentApplication();
 
   const { data: applicationSupportedTokensData } =
     useApplicationSupportedTokensQuery(currentApplication);

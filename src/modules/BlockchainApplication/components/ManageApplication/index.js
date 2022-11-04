@@ -3,26 +3,31 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
+
 import BottomModal from 'components/shared/BottomModal';
 import { P, H3 } from 'components/shared/toolBox/typography';
-import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'hooks/useTheme';
 import AddSvg from 'assets/svgs/AddSvg';
 import getStyles from './styles';
-import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
-import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
 import SelectNode from '../SelectNode';
+import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
+import { useCurrentApplication } from '../../hooks/useCurrentApplication';
 
 const ManageApplication = ({ closeModal, nextStep, style }) => {
-  const navigation = useNavigation();
-  const { applications } = useBlockchainApplicationManagement();
-  const [, setApplication] = useCurrentBlockchainApplication();
-  const { styles } = useTheme({ styles: getStyles });
   const [selectedApplication, setSelectedApplication] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navigation = useNavigation();
+
+  const { applications } = useApplicationsManagement();
+
+  const [, setCurrentApplication] = useCurrentApplication();
+
+  const { styles } = useTheme({ styles: getStyles });
 
   const addApplication = () => {
     closeModal();
@@ -34,7 +39,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
   };
 
   const switchApplication = (acc) => {
-    setApplication(acc);
+    setCurrentApplication(acc);
     closeModal();
   };
 

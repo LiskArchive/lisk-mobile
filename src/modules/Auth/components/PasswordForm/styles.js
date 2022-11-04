@@ -1,26 +1,27 @@
-import { Dimensions } from 'react-native';
 import { themes, colors, boxes } from 'constants/styleGuide';
-
-const { height } = Dimensions.get('screen');
 
 export default () => ({
   common: {
     container: {
       flex: 1,
-      padding: boxes.boxPadding,
-      paddingTop: height / 4,
     },
     content: {
       flex: 1,
+      paddingTop: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
       alignItems: 'center',
+    },
+    avatar: {
+      marginBottom: 8,
     },
     address: {
       fontSize: 14,
+      marginBottom: 8,
     },
-    inputContainer: {
-      borderColor: colors.light.platinumGray,
-      paddingLeft: 0,
-      paddingRight: 0,
+    footer: {
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
   },
 

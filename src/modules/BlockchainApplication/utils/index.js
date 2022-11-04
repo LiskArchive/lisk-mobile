@@ -13,3 +13,16 @@ export const roundAccessor = (arr = [], index = 0, direction = 'next') => {
   }
   return index === 0 ? arr[arr.length - 1] : arr[index - 1];
 };
+
+/**
+ * Merges on-chain and off-chain applications data into a single array of objects.
+ * @param {Object} applicationsData
+ * @param {Object} applicationsMetaData
+ */
+export function mergeApplicationsData(applicationsData, applicationsMetaData) {
+  return applicationsData.map((appMetadata) => {
+    const app = applicationsMetaData.find((_app) => _app.chainID === appMetadata.chainID);
+
+    return { ...appMetadata, ...app };
+  });
+}

@@ -369,7 +369,7 @@
         }        
       },
       "deleteDefaultApplicationModal": {
-        "description": "The default application can not be removed",
+        "description": "A default application can not be removed",
         "buttonText": "Continue to Applications"
       },
       "continueToWalletButtonText": "Continue to wallet"   

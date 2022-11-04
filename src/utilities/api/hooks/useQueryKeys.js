@@ -1,9 +1,9 @@
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { METHOD } from 'utilities/api/constants';
 import { APPLICATION } from '../queries';
 
 export function useQueryKeys(keys) {
-  const [{ chainID }] = useCurrentBlockchainApplication();
+  const [currentApplication] = useCurrentApplication();
 
-  return [...keys, chainID, APPLICATION, METHOD];
+  return [...keys, currentApplication?.chainID, APPLICATION, METHOD];
 }

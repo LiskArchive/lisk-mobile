@@ -5,10 +5,10 @@ export default function getSendTokenSelectTokenStepStyles() {
     common: {
       wrapper: {
         flex: 1,
-        padding: boxes.boxPadding,
       },
       container: {
         flex: 1,
+        padding: boxes.boxPadding,
       },
       row: {
         flexDirection: 'row',
@@ -73,6 +73,13 @@ export default function getSendTokenSelectTokenStepStyles() {
       prevStepButton: {
         marginRight: 16,
         flex: 1,
+      },
+      footer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: boxes.boxPadding,
+        paddingRight: boxes.boxPadding,
       },
     },
     [themes.light]: {

@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Animated, Image, TouchableOpacity } from 'react-native';
+
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
 import ChangeSvg from 'assets/svgs/ChangeSvg';
-import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
+
 import getStyles from './styles';
 
 const ApplicationSwitcher = ({ onPress }) => {
+  const [currentApplication] = useCurrentApplication();
+
   const { styles } = useTheme({ styles: getStyles });
-  const [currentApplication] = useCurrentBlockchainApplication();
 
   return (
     <View style={styles.switcherContainer}>

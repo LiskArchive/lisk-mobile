@@ -17,13 +17,13 @@ export default {
       backgroundColor: colors.light.ultramarineBlue,
     },
     body: {
-      padding: boxes.boxPadding,
-      paddingTop: 8,
-      paddingBottom: 44,
       flex: 1,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     logoContainer: {
-      marginTop: -35,
+      marginTop: -32,
+      marginBottom: -32,
       height: 70,
       width: 70,
       borderRadius: 35,

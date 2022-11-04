@@ -5,17 +5,18 @@ import i18next from 'i18next';
 import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
-import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 
 import getDeleteBlockchainApplicationStyles from './styles';
+import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 export default function DeleteBlockchainApplication({ sharedData: { application }, nextStep }) {
   const { styles } = useTheme({ styles: getDeleteBlockchainApplicationStyles() });
 
-  const { deleteApplicationByChainId } = useBlockchainApplicationManagement();
+  const { deleteApplication } = useApplicationsManagement();
 
   const handleDeleteApplicationClick = () => {
-    deleteApplicationByChainId(application.chainID);
+    deleteApplication(application.chainID);
+
     nextStep({ application });
   };
 

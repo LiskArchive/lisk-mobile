@@ -8,10 +8,13 @@ export default () => ({
     },
     innerContainer: {
       flex: 1,
-      padding: boxes.boxPadding,
+      paddingTop: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     footer: {
-      padding: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     applicationNameContainer: {
       flexDirection: 'row',
