@@ -1,21 +1,23 @@
 import React, { useState, memo } from 'react';
 import { View, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import ModalBox from 'react-native-modalbox';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
 import { colors, themes } from 'constants/styleGuide';
 import Swipeable from 'components/shared/Swipeable';
+import BottomModal from 'components/shared/BottomModal';
+import ResultScreen from 'components/screens/ResultScreen';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
-import ErrorScreen from 'components/screens/ErrorScreen';
-import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
 
 import { useBlockchainApplicationRowActions } from './hooks';
 import getBlockchainApplicationRowStyles from './styles';
+import { useCurrentApplication } from '../../hooks/useCurrentApplication';
+import { usePinApplications } from '../../hooks/usePinApplications';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
@@ -26,23 +28,23 @@ import getBlockchainApplicationRowStyles from './styles';
  * active or not.
  * @param {boolean} showCaret - Flag for showing/hiding caret icon for clicking on the row.
  */
-function BlockchainApplicationRow({
-  t,
+function ApplicationRow({
   application,
   onPress,
   variant = 'manage',
   showActive,
   showCaret,
-  navigation,
   deleteApplication,
 }) {
+  const navigation = useNavigation();
+
   const [showDeleteDefaultApplicationModal, setShowDeleteDefaultApplicationModal] = useState(false);
 
-  const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
-  const [currentApplication] = useCurrentBlockchainApplication();
+  const [currentApplication] = useCurrentApplication();
+
+  const { checkPin } = usePinApplications();
 
   const { leftActions, rightActions } = useBlockchainApplicationRowActions({
-    t,
     application,
     variant,
     navigation,
@@ -50,10 +52,17 @@ function BlockchainApplicationRow({
     deleteApplication,
   });
 
+  const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
+
+  const applicationPinned = checkPin(application.chainID);
+
   return (
     <>
       <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
-        <TouchableOpacity style={styles.applicationContainer} onPress={onPress}>
+        <TouchableOpacity
+          style={[styles.applicationContainer, styles.theme.applicationContainer]}
+          onPress={onPress}
+        >
           <View style={styles.applicationNameContainer}>
             <Image
               source={{ uri: application.logo.png }}
@@ -66,13 +75,14 @@ function BlockchainApplicationRow({
           </View>
 
           <View style={styles.applicationNameContainer}>
-            {application.isPinned && (
+            {applicationPinned && (
               <PinSvg
                 color={colors.light.ultramarineBlue}
                 style={{ marginRight: 12 }}
                 variant="fill"
               />
             )}
+
             {showActive && currentApplication.chainID === application.chainID && (
               <View style={{ marginRight: 12 }}>
                 <CircleCheckedSvg variant="fill" />
@@ -89,21 +99,19 @@ function BlockchainApplicationRow({
         </TouchableOpacity>
       </Swipeable>
 
-      <ModalBox
-        position="bottom"
-        style={styles.deleteDefaultApplicationModal}
-        isOpen={showDeleteDefaultApplicationModal}
-        onClosed={() => setShowDeleteDefaultApplicationModal(false)}
-        coverScreen
+      <BottomModal
+        show={showDeleteDefaultApplicationModal}
+        toggleShow={() => setShowDeleteDefaultApplicationModal(false)}
       >
-        <ErrorScreen
-          description={t('application.manage.deleteDefaultApplicationModal.description')}
-          buttonText={t('application.manage.deleteDefaultApplicationModal.buttonText')}
+        <ResultScreen
+          variant="error"
+          description={i18next.t('application.manage.deleteDefaultApplicationModal.description')}
+          buttonText={i18next.t('application.manage.deleteDefaultApplicationModal.buttonText')}
           onContinue={() => setShowDeleteDefaultApplicationModal(false)}
         />
-      </ModalBox>
+      </BottomModal>
     </>
   );
 }
 
-export default translate()(memo(BlockchainApplicationRow));
+export default memo(ApplicationRow);

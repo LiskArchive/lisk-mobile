@@ -1,68 +1,42 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
+
 import { useTheme } from 'hooks/useTheme';
-import { useSearch } from 'hooks/useSearch';
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
+import DataRenderer from 'components/shared/DataRenderer';
 import { P } from 'components/shared/toolBox/typography';
-import { colors, themes } from 'constants/styleGuide';
-import Input from 'components/shared/toolBox/input';
-import Icon from 'components/shared/toolBox/icon';
+import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
+import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import ResultScreen from 'components/screens/ResultScreen';
+
+import { View } from 'react-native';
 import getBlockchainApplicationsListStyles from './styles';
 
-export default function ApplicationList({
+export default function BlockchainApplicationList({
   applications,
   Component,
   onItemPress,
-  navigation,
   style,
   ...props
 }) {
-  const { theme, styles } = useTheme({
+  const navigation = useNavigation();
+
+  const { styles } = useTheme({
     styles: getBlockchainApplicationsListStyles(),
   });
 
-  const { term, setTerm } = useSearch();
-
   return (
-    <View style={[styles.container, styles.theme.container, style?.container]}>
-      <Input
-        placeholder={i18next.t('application.explore.applicationList.searchPlaceholder')}
-        autoCorrect={false}
-        autoFocus
-        innerStyles={{ input: [styles.input] }}
-        placeholderTextColor={
-          theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
-        }
-        onChange={(value) => setTerm(value)}
-        value={term}
-        returnKeyType="search"
-        adornments={{
-          left: (
-            <Icon
-              name="search"
-              size={18}
-              color={theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray}
-            />
-          ),
-        }}
-      />
-
-      <View style={[styles.body, style?.body]}>
-        {applications.isLoading ? (
-          <P
-            style={[
-              styles.applicationNameLabel,
-              styles.theme.applicationNameLabel,
-              style?.applicationNameLabel,
-            ]}
-          >
-            {i18next.t('application.explore.applicationList.loadingText')}
-          </P>
-        ) : (
-          <FlatList
-            data={applications.data}
+    <DataRenderer
+      data={applications.data}
+      isLoading={applications.isLoading}
+      error={applications.error}
+      renderData={(data) => (
+        <View style={[style?.container]}>
+          <InfiniteScrollList
+            data={data}
             keyExtractor={(item) => item.chainID}
-            renderItem={({ item }) => (
+            renderItem={(item) => (
               <Component
                 application={item}
                 navigation={navigation}
@@ -74,8 +48,25 @@ export default function ApplicationList({
               />
             )}
           />
-        )}
-      </View>
-    </View>
+        </View>
+      )}
+      renderLoading={() => (
+        <P style={[styles.text, styles.theme.text, style?.text]}>
+          {i18next.t('application.explore.applicationList.loadingText')}
+        </P>
+      )}
+      renderEmpty={() => (
+        <ResultScreen
+          illustration={<EmptyIllustrationSvg />}
+          description="No applications available for now. Please try again later."
+        />
+      )}
+      renderError={() => (
+        <ResultScreen
+          illustration={<ErrorIllustrationSvg />}
+          description="Error loading applications. Please try again later."
+        />
+      )}
+    />
   );
 }

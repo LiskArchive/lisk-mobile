@@ -24,7 +24,7 @@ export default () => ({
     inputLabel: {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
-      marginBottom: 16,
+      marginBottom: 8,
     },
     input: {
       fontSize: fonts.size.base,

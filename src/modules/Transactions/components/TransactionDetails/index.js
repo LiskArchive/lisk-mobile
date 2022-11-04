@@ -1,11 +1,12 @@
 import React from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { useGetTransactionQuery } from '../../api/useGetTransactionQuery';
+import DataRenderer from 'components/shared/DataRenderer';
+import { useTransactionQuery } from '../../api/useTransactionQuery';
 
 import getTransactionDetailsStyles from './styles';
 import { TransactionDetailsBody } from './components';
@@ -21,29 +22,7 @@ export default function TransactionDetails(props) {
     data: transactionData,
     isLoading: isLoadingTransaction,
     error: errorOnTransaction,
-  } = useGetTransactionQuery(transactionId);
-
-  const transaction = transactionData?.data[0];
-
-  function renderBody() {
-    if (isLoadingTransaction) {
-      return (
-        <View style={[styles.container, styles.theme.container]}>
-          <Text>{i18next.t('transactions.transactionDetails.loadingText')}</Text>
-        </View>
-      );
-    }
-
-    if (errorOnTransaction) {
-      return (
-        <View style={[styles.container, styles.theme.container]}>
-          <Text>{i18next.t('transactions.transactionDetails.errorText')}</Text>
-        </View>
-      );
-    }
-
-    return <TransactionDetailsBody transaction={transaction} />;
-  }
+  } = useTransactionQuery(transactionId);
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
@@ -52,7 +31,16 @@ export default function TransactionDetails(props) {
         onPress={navigation.goBack}
       />
 
-      {renderBody()}
+      <DataRenderer
+        data={transactionData?.data[0]}
+        isLoading={isLoadingTransaction}
+        error={errorOnTransaction}
+        renderData={(data) => <TransactionDetailsBody transaction={data} />}
+        renderLoading={() => (
+          <Text>{i18next.t('transactions.transactionDetails.loadingText')}</Text>
+        )}
+        renderError={() => <Text>{i18next.t('transactions.transactionDetails.errorText')}</Text>}
+      />
     </SafeAreaView>
   );
 }

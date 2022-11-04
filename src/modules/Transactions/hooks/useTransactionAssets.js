@@ -18,6 +18,12 @@ import txUnknownDark from 'assets/images/txDetail/tx-unknown-dark.png';
 import { MODULE_COMMAND_NAMES } from '../constants';
 import getTransactionRowStyles from '../components/TransactionRow/styles';
 
+/**
+ * Allows to get all the necessary UI assets of a transaction (based on it's type) to
+ * render it (images, styles, among others).
+ * @param {Object} transaction - The transaction object to get the assets from.
+ * @returns {Object} - The assets of the transaction.
+ */
 export function useTransactionAssets(transaction) {
   const [currentAccount] = useCurrentAccount();
 
@@ -27,7 +33,7 @@ export function useTransactionAssets(transaction) {
 
   let assets = {};
 
-  if (transaction.moduleCommandName === MODULE_COMMAND_NAMES.tokenTransfer) {
+  if (transaction.moduleCommand === MODULE_COMMAND_NAMES.tokenTransfer) {
     if (currentAccount.metadata.address !== transaction.sender.address) {
       assets = {
         ...assets,
@@ -47,7 +53,7 @@ export function useTransactionAssets(transaction) {
     }
   }
 
-  switch (transaction.moduleCommandName) {
+  switch (transaction.moduleCommand) {
     case MODULE_COMMAND_NAMES.tokenTransfer:
       assets = {
         ...assets,

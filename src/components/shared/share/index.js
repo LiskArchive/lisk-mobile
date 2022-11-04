@@ -29,7 +29,7 @@ const Share = ({
       <Element style={[style, styles.text]} onPress={shareContent}>
         {children || title}
       </Element>
-      {icon ? (
+      {icon && (
         <Icon
           style={styles.icon}
           name="share"
@@ -37,7 +37,7 @@ const Share = ({
           onPress={shareContent}
           color={iconColor || colors.light.blueGray}
         />
-      ) : null}
+      )}
     </View>
   );
 };

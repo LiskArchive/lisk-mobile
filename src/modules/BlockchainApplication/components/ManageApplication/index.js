@@ -3,26 +3,31 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
+
 import BottomModal from 'components/shared/BottomModal';
 import { P, H3 } from 'components/shared/toolBox/typography';
-import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'hooks/useTheme';
 import AddSvg from 'assets/svgs/AddSvg';
 import getStyles from './styles';
-import { useCurrentBlockchainApplication } from '../../hooks/useCurrentBlockchainApplication';
-import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 import ApplicationList from '../ApplicationList';
 import BlockchainApplicationRow from '../ApplicationRow';
 import SelectNode from '../SelectNode';
+import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
+import { useCurrentApplication } from '../../hooks/useCurrentApplication';
 
 const ManageApplication = ({ closeModal, nextStep, style }) => {
-  const navigation = useNavigation();
-  const { applications } = useBlockchainApplicationManagement();
-  const [, setApplication] = useCurrentBlockchainApplication();
-  const { styles } = useTheme({ styles: getStyles });
   const [selectedApplication, setSelectedApplication] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navigation = useNavigation();
+
+  const { applications } = useApplicationsManagement();
+
+  const [, setCurrentApplication] = useCurrentApplication();
+
+  const { styles } = useTheme({ styles: getStyles });
 
   const addApplication = () => {
     closeModal();
@@ -34,7 +39,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
   };
 
   const switchApplication = (acc) => {
-    setApplication(acc);
+    setCurrentApplication(acc);
     closeModal();
   };
 
@@ -58,7 +63,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
 
   return (
     <View style={[styles.container, styles.theme.container, style?.container]}>
-      <H3 style={[styles.title, style?.title]}>
+      <H3 style={[styles.title, styles.theme.title, style?.title]}>
         {i18next.t('application.title.switchApplication')}
       </H3>
 
@@ -67,10 +72,10 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
         Component={BlockchainApplicationRow}
         onItemPress={selectApplication}
         showActive
-        navigation={navigation}
         deleteApplication={deleteApplication}
       />
-      <View style={styles.bottom}>
+
+      <View style={styles.footer}>
         <TouchableOpacity
           style={[styles.button, styles.outline, styles.theme.outline]}
           onPress={addApplication}
@@ -81,7 +86,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
           <P style={styles.buttonText}>{i18next.t('application.manage.add.buttonText')}</P>
         </TouchableOpacity>
       </View>
-      <BottomModal show={isModalOpen} toggleShow={() => toggleModal(false)} style={styles.modal}>
+      <BottomModal show={isModalOpen} toggleShow={() => toggleModal(false)}>
         {selectedApplication && (
           <SelectNode
             styles={styles}

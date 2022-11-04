@@ -2,3 +2,4 @@
 export * from './mockTransactions';
 export * from './mockGetTransactionsQuery';
 export * from './mockGetTransactionQuery';
+export * from './mockTokensMeta';

@@ -5,7 +5,6 @@ import i18next from 'i18next';
 import { useTheme } from 'hooks/useTheme';
 import { LabelButton } from 'components/shared/toolBox/button';
 import { fromRawLsk } from 'utilities/conversions';
-import { TimeStamp } from 'components/shared/imessage/txDetail/dataRows';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import Avatar from 'components/shared/avatar';
 import { P } from 'components/shared/toolBox/typography';
@@ -13,10 +12,13 @@ import { stringShortener, setColorOpacity } from 'utilities/helpers';
 import { colors } from 'constants/styleGuide';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 import { TRANSACTION_PARAMS_NAMES, TRANSACTION_STATUS_NAMES } from '../../constants';
+import TransactionTimestamp from '../TransactionTimestamp';
 
 import getTransactionDetailsStyles from './styles';
 
 export function TransactionDetailsBody({ transaction }) {
+  const [showParams, setShowParams] = useState(false);
+
   const transactionAssets = useTransactionAssets(transaction);
 
   const scrollViewRef = useRef();
@@ -26,7 +28,9 @@ export function TransactionDetailsBody({ transaction }) {
   return (
     <ScrollView
       ref={scrollViewRef}
-      onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+      onContentSizeChange={() =>
+        showParams && scrollViewRef.current.scrollToEnd({ animated: true })
+      }
       style={[styles.container, styles.theme.container]}
     >
       <View style={[styles.section]}>
@@ -34,11 +38,7 @@ export function TransactionDetailsBody({ transaction }) {
           {transactionAssets.title}
         </Text>
 
-        <TimeStamp
-          timestamp={transaction.block.timestamp}
-          format="MMM D, YYYY h:mm:ss A"
-          styles={styles}
-        />
+        <TransactionTimestamp timestamp={transaction.block.timestamp} styles={styles} />
       </View>
 
       <View style={[styles.section, styles.row]}>
@@ -133,7 +133,11 @@ export function TransactionDetailsBody({ transaction }) {
         <Text style={[styles.text, styles.theme.text]}>{transaction.block.height}</Text>
       </View>
 
-      <TransactionDetailsParams params={transaction.params} />
+      <TransactionDetailsParams
+        params={transaction.params}
+        show={showParams}
+        setShow={setShowParams}
+      />
     </ScrollView>
   );
 }
@@ -169,15 +173,13 @@ function TransactionDetailsStatus({ status }) {
   return (
     <View style={[styles.statusContainer, { backgroundColor }]}>
       <Text style={[styles.statusText, { color }]}>
-        {TRANSACTION_STATUS_NAMES[status] || 'No status'}
+        {i18next.t(TRANSACTION_STATUS_NAMES[status]) || 'No status'}
       </Text>
     </View>
   );
 }
 
-function TransactionDetailsParams({ params }) {
-  const [show, setShow] = useState(false);
-
+function TransactionDetailsParams({ params, show, setShow }) {
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
   const paramsEntries = Object.entries(params);
@@ -203,7 +205,7 @@ function TransactionDetailsParams({ params }) {
         paramsEntries.map(([paramKey, paramValue]) => (
           <React.Fragment key={paramKey}>
             <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-              {TRANSACTION_PARAMS_NAMES[paramKey]}:
+              {i18next.t(TRANSACTION_PARAMS_NAMES[paramKey])}:
             </Text>
 
             <Text style={[styles.text, styles.theme.text]}>{paramValue}</Text>

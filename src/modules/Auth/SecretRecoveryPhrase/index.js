@@ -1,56 +1,29 @@
-/* eslint-disable max-lines */
-/* eslint-disable no-shadow */
-import React, { useEffect, useRef, useState } from 'react';
-import { Platform, Keyboard, SafeAreaView, View } from 'react-native';
-import { translate } from 'react-i18next';
-import withTheme from 'components/shared/withTheme';
+import React, { useRef } from 'react';
+import { SafeAreaView, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
+
+import { useTheme } from 'hooks/useTheme';
 import Scanner from 'components/shared/scanner';
-import { deviceHeight } from 'utilities/device';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
+import SecretRecoveryPhraseForm from '../components/SecretRecoveryPhraseForm';
+
 import getStyles from './styles';
-import Form from '../components/form';
 
-// eslint-disable-next-line max-statements
-const SecretRecoveryPhrase = ({ styles, route, navigation, t }) => {
-  const [keyboardIsOpen, setKeyboardIsOpen] = useState(false);
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const signOut = route.params?.signOut;
-  const scanner = useRef();
+export default function SecretRecoveryPhrase() {
+  const navigation = useNavigation();
 
-  const onFormSubmission = (passphrase) => {
+  const scannerRef = useRef();
+
+  const { styles } = useTheme({ styles: getStyles() });
+
+  const handleFormSubmission = (passphrase) =>
     navigation.navigate('PasswordSetupForm', { passphrase });
-  };
 
-  const showSimplifiedView = () => {
-    if (Platform.OS === 'android') {
-      return keyboardHeight / deviceHeight() > 0.35 && keyboardIsOpen;
-    }
-    return false;
-  };
+  const handleQRCodeRead = (value) => handleFormSubmission(value);
 
-  const addKeyboardListeners = () => {
-    Keyboard.addListener('keyboardDidShow', (e) => {
-      setKeyboardIsOpen(true);
-      setKeyboardHeight(e.endCoordinates.height);
-    });
-    Keyboard.addListener('keyboardDidHide', () => setKeyboardIsOpen(false));
-  };
-
-  const onQRCodeRead = (value) => {
-    onFormSubmission(value);
-  };
-
-  useEffect(() => {
-    addKeyboardListeners();
-    return () => {
-      Keyboard.removeAllListeners();
-    };
-  }, []);
-
-  const scanQrCode = () => {
-    scanner.current.toggleCamera();
-  };
+  const handleScanQrCode = () => scannerRef.current.toggleCamera();
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
@@ -59,8 +32,9 @@ const SecretRecoveryPhrase = ({ styles, route, navigation, t }) => {
         onPress={navigation.goBack}
         containerStyle={styles.header}
       />
+
       <Scanner
-        ref={scanner}
+        ref={scannerRef}
         containerStyles={{
           cameraRoll: styles.cameraRoll,
           cameraOverlay: styles.cameraOverlay,
@@ -68,25 +42,18 @@ const SecretRecoveryPhrase = ({ styles, route, navigation, t }) => {
         fullScreen={true}
         navigation={navigation}
         readFromCameraRoll={false}
-        onQRCodeRead={onQRCodeRead}
-        permissionDialogTitle={t('Permission to use camera')}
-        permissionDialogMessage={t('Lisk needs to connect to your camera')}
+        onQRCodeRead={handleQRCodeRead}
+        permissionDialogTitle={i18next.t('Permission to use camera')}
+        permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
       />
+
       <View style={styles.container}>
         <P style={[styles.description, styles.theme.description]}>
-          {t('auth.setup.addAccountDescription')}
+          {i18next.t('auth.setup.addAccountDescription')}
         </P>
-        <Form
-          animate={!signOut}
-          navigation={navigation}
-          showBackButton={false}
-          signIn={onFormSubmission}
-          showSimplifiedView={showSimplifiedView()}
-          scanQrCode={scanQrCode}
-        />
+
+        <SecretRecoveryPhraseForm onSubmit={handleFormSubmission} onScanQrCode={handleScanQrCode} />
       </View>
     </SafeAreaView>
   );
-};
-
-export default withTheme(translate()(SecretRecoveryPhrase), getStyles());
+}

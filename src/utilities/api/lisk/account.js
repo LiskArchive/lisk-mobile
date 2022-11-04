@@ -3,8 +3,10 @@ import { apiClient } from './apiClient';
 
 export const getSummary = (params) => apiClient.getAccount(params.address);
 
-export const extractAddress = (passphrase) =>
-  Lisk.cryptography.address.getLisk32AddressFromPassphrase(passphrase);
+export const extractAddress = (passphrase) => {
+  const { publicKey } = Lisk.cryptography.legacy.getKeys(passphrase);
+  return Lisk.cryptography.address.getLisk32AddressFromPublicKey(publicKey).toString('hex');
+};
 
 export const extractPublicKey = (passphrase) =>
-  Lisk.cryptography.ed.getKeys(passphrase).publicKey.toString('hex');
+  Lisk.cryptography.legacy.getKeys(passphrase).publicKey.toString('hex');

@@ -4,8 +4,8 @@ export const decryptAccount = async (encryptedPassphrase, password) => {
   try {
     const { encrypt } = cryptography;
     const plainText = await encrypt.decryptMessageWithPassword(encryptedPassphrase, password);
-    const { recoveryPhrase } = JSON.parse(plainText);
-    return recoveryPhrase;
+    const { recoveryPhrase, privateKey } = JSON.parse(plainText);
+    return { recoveryPhrase, privateKey };
   } catch (error) {
     throw new Error(error);
   }

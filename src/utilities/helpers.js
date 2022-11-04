@@ -77,8 +77,8 @@ export const stringShortener = (str, leftPadd = 10, rightPadd = 0) => {
  * @param {Object} obj - Source object
  * @returns {Object} - Simplified object
  */
-export const removeUndefinedKeys = (obj) =>
-  Object.keys(obj).reduce((acc, key) => {
+export function removeUndefinedObjectKeys(obj) {
+  return Object.keys(obj).reduce((acc, key) => {
     const item = obj[key];
 
     if (typeof item !== 'undefined') {
@@ -87,6 +87,30 @@ export const removeUndefinedKeys = (obj) =>
 
     return acc;
   }, {});
+}
+
+/**
+ * Access a deep value inside a object and updates it.
+ * Works by passing a path like "foo.bar".
+ * @param {String} path - Path of the object to update the key from.
+ * @param {any} value - Value to replace.
+ * @param {Object} obj - Object to access to (optional). Default value is {}
+ * @param {Boolean} writeUndefined - With true, the function will add to the object
+ * specified keys of the path that don not exist on the original object. With false, it will omit them.
+ * @returns {Object} - The updated object.
+ */
+export function updateObjectDeepValue(path, value, obj = {}, writeUndefined = false) {
+  const [head, ...rest] = path.split('.');
+
+  if (!writeUndefined && !obj[head]) return obj;
+
+  return {
+    ...obj,
+    [head]: rest.length
+      ? updateObjectDeepValue(rest.join('.'), value, obj[head], writeUndefined)
+      : value,
+  };
+}
 
 /**
  * Checks if the given collection is empty.

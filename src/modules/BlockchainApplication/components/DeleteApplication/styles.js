@@ -5,17 +5,13 @@ export default function getDeleteBlockchainApplicationStyles() {
     common: {
       container: {
         flex: 1,
-        padding: boxes.boxPadding,
-        paddingTop: 44,
       },
-      innerContainer: {
+      body: {
         justifyContent: 'center',
         flex: 1,
       },
       title: {
-        width: '100%',
         textAlign: 'center',
-        marginBottom: 32,
       },
       descriptionText: {
         textAlign: 'center',
@@ -31,7 +27,7 @@ export default function getDeleteBlockchainApplicationStyles() {
         height: 80,
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
-        marginBottom: 16,
+        marginBottom: 8,
       },
       applicationNameLabel: {
         fontSize: fonts.size.h3,

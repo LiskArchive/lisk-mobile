@@ -1,17 +1,20 @@
 import React from 'react';
-import { translate } from 'react-i18next';
-import AddApplicationSuccessSvg from 'assets/svgs/AddApplicationSuccessSvg';
-import SuccessScreen from 'modules/Auth/components/success';
+import i18next from 'i18next';
+import { useNavigation } from '@react-navigation/native';
 
-const AddApplicationSuccess = ({ t, navigation }) => {
+import ResultScreen from 'components/screens/ResultScreen';
+import AddApplicationSuccessSvg from 'assets/svgs/AddApplicationSuccessSvg';
+
+export default function AddApplicationSuccess() {
+  const navigation = useNavigation();
+
   return (
-    <SuccessScreen
+    <ResultScreen
       illustration={<AddApplicationSuccessSvg />}
-      title={t('application.manage.add.successTitle')}
+      variant="success"
+      title={i18next.t('application.manage.add.successTitle')}
       onContinue={() => navigation.navigate('Main')}
-      buttonText={t('application.manage.continueToWalletButtonText')}
+      buttonText={i18next.t('application.manage.continueToWalletButtonText')}
     />
   );
-};
-
-export default translate()(AddApplicationSuccess);
+}

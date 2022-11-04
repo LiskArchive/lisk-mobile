@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { METHOD, API_METHOD, APPLICATION } from 'utilities/api/constants';
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
+import defaultClient from 'utilities/api/APIClient';
+import { METHOD } from 'utilities/api/constants';
 
 /**
  * Creates a custom hook for queries.
@@ -14,12 +14,6 @@ import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/h
  *
  * @returns The query object
  */
-export function useCustomQuery({ keys, config, options = {} }) {
-  const [{ chainID }] = useCurrentBlockchainApplication();
-
-  return useQuery(
-    [chainID, config, APPLICATION, METHOD, ...keys],
-    async () => API_METHOD[METHOD](config),
-    options
-  );
+export function useCustomQuery({ keys, config, options = {}, client = defaultClient }) {
+  return useQuery(keys, async () => client[METHOD](config), options);
 }

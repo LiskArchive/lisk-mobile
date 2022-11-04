@@ -14,7 +14,6 @@ export default function getBlockchainApplicationRowStyles() {
         paddingTop: 16,
         paddingBottom: 16,
         borderBottomWidth: 1,
-        borderBottomColor: colors.light.platinumGray,
       },
       applicationNameContainer: {
         flexDirection: 'row',
@@ -34,17 +33,13 @@ export default function getBlockchainApplicationRowStyles() {
         marginRight: 15,
         fontWeight: '600',
       },
-      deleteDefaultApplicationModal: {
-        backgroundColor: colors.light.white,
-        height: 280,
-        zIndex: 3,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
-      },
     },
     [themes.light]: {
       container: {
         backgroundColor: colors.light.white,
+      },
+      applicationContainer: {
+        borderBottomColor: colors.light.platinumGray,
       },
       applicationNameLabel: {
         color: colors.light.zodiacBlue,
@@ -54,6 +49,9 @@ export default function getBlockchainApplicationRowStyles() {
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
+      },
+      applicationContainer: {
+        borderBottomColor: colors.dark.volcanicSand,
       },
       applicationNameLabel: {
         color: colors.light.platinum,

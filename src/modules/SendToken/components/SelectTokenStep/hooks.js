@@ -20,7 +20,7 @@ export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
 
   if (tokenAmount) {
     rawAmountInCurrency = (
-      tokenAmount * priceTicker[accountSettings.token.active][accountSettings.currency]
+      parseFloat(tokenAmount) * priceTicker[accountSettings.token.active][accountSettings.currency]
     ).toFixed(2);
   }
 

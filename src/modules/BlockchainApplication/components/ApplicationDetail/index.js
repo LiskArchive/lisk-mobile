@@ -8,18 +8,19 @@ import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { H3, P } from 'components/shared/toolBox/typography';
-import UrlSvg from 'assets/svgs/UrlSvg';
+import DataRenderer from 'components/shared/DataRenderer';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import wavesPattern from 'assets/images/waves_pattern_large.png';
 import { colors } from 'constants/styleGuide';
+import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
-import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
-import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
-import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { usePinApplications } from '../../hooks/usePinApplications';
+import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
+import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 import getStyles from './styles';
-import DataRenderer from '../../../../components/shared/DataRenderer';
 
 /**
  *
@@ -31,28 +32,25 @@ import DataRenderer from '../../../../components/shared/DataRenderer';
  */
 export default function ApplicationDetail({ route }) {
   const navigation = useNavigation();
+
   const { chainID, variant } = route.params;
 
   const { styles } = useTheme({ styles: getStyles });
 
-  const { checkPinByChainId, togglePin } = usePinBlockchainApplication();
-  const { addApplication } = useBlockchainApplicationManagement();
-  const { applications, applicationsMetadata } = useBlockchainApplicationExplorer();
+  const { checkPin, togglePin } = usePinApplications();
+  const { addApplication } = useApplicationsManagement();
+  const applications = useApplicationsExplorer();
 
   const application = useMemo(
     () => applications.data?.find((app) => app.chainID === chainID),
-    [chainID, applications]
+    [chainID, applications.data]
   );
 
-  const applicationMetadata = useMemo(
-    () => applicationsMetadata.data?.find((app) => app.chainID === chainID),
-    [chainID, applicationsMetadata]
-  );
-
-  const isPinned = checkPinByChainId(chainID);
+  const isPinned = checkPin(chainID);
 
   const handleAddApplicationClick = () => {
     addApplication(application);
+
     navigation.navigate('AddApplicationSuccess');
   };
 
@@ -62,21 +60,15 @@ export default function ApplicationDetail({ route }) {
         <ImageBackground
           style={[
             styles.header,
-            styles.explore,
             styles.container,
-            applicationMetadata?.backgroundColor && {
-              backgroundColor: applicationMetadata?.backgroundColor,
+            application?.backgroundColor && {
+              backgroundColor: application.backgroundColor,
             },
           ]}
           source={wavesPattern}
           resizeMode="cover"
         >
-          <HeaderBackButton
-            noIcon
-            rightIcon="cross"
-            rightColor={colors.dark.white}
-            onRightPress={navigation.goBack}
-          />
+          <HeaderBackButton color={colors.dark.white} onPress={navigation.goBack} />
         </ImageBackground>
       )}
 
@@ -85,32 +77,44 @@ export default function ApplicationDetail({ route }) {
           style={[
             styles.header,
             styles.container,
-            applicationMetadata?.backgroundColor && {
-              backgroundColor: applicationMetadata?.backgroundColor,
+            application?.backgroundColor && {
+              backgroundColor: application.backgroundColor,
             },
           ]}
           resizeMode="stretch"
         >
-          <HeaderBackButton title={applicationMetadata?.chainName} onPress={navigation.goBack} />
+          <DataRenderer
+            isLoading={applications.isLoading}
+            error={applications.isError}
+            data={application?.chainName}
+            renderData={(data) => <HeaderBackButton title={data} onPress={navigation.goBack} />}
+          />
         </View>
       )}
 
-      <Image
-        style={[styles.logoContainer, styles.theme.logoContainer]}
-        source={{ uri: applicationMetadata?.logo.png }}
+      <DataRenderer
+        isLoading={applications.isLoading}
+        error={applications.isError}
+        data={application?.logo}
+        renderData={(data) => (
+          <Image
+            style={[styles.logoContainer, styles.theme.logoContainer]}
+            source={{ uri: data.png }}
+          />
+        )}
       />
 
-      <View style={[styles.flex, styles.body]}>
+      <SafeAreaView style={[styles.flex, styles.body]}>
         <View style={styles.titleRow}>
           <DataRenderer
-            isLoading={applicationsMetadata.isLoading}
-            error={applicationsMetadata.isError}
-            data={applicationMetadata?.chainName}
+            isLoading={applications.isLoading}
+            error={applications.isError}
+            data={application?.chainName}
             renderData={(data) => <H3 style={[styles.title, styles.theme.title]}>{data}</H3>}
           />
 
           <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
-            <PinSvg variant={isPinned ? 'fill' : 'outline'} width={25} height={25} />
+            <PinSvg variant={isPinned ? 'fill' : 'outline'} width={24} height={24} />
           </TouchableOpacity>
         </View>
 
@@ -124,12 +128,12 @@ export default function ApplicationDetail({ route }) {
 
         <View style={[styles.row, styles.appLinkContainer]}>
           <DataRenderer
-            isLoading={applicationsMetadata.isLoading}
-            error={applicationsMetadata.isError}
-            data={applicationMetadata?.explorers}
+            isLoading={applications.isLoading}
+            error={applications.isError}
+            data={application?.explorers}
             renderData={(data) => (
               <>
-                <UrlSvg size={1.2} />
+                <UrlSvg size={1} />
 
                 <P style={styles.url}>{data[0].url}</P>
               </>
@@ -215,11 +219,11 @@ export default function ApplicationDetail({ route }) {
         </View>
 
         {variant === 'manage' && (
-          <PrimaryButton onClick={handleAddApplicationClick}>
+          <PrimaryButton onClick={handleAddApplicationClick} noTheme>
             {i18next.t('application.manage.add.confirmButtonText')}
           </PrimaryButton>
         )}
-      </View>
+      </SafeAreaView>
     </ScrollView>
   );
 }

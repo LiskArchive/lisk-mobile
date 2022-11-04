@@ -1,23 +1,24 @@
-/* eslint-disable no-shadow */
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import { colors } from 'constants/styleGuide';
-import SearchBarHeader from 'components/navigation/searchBarHeader';
+import HeaderSearchBar from 'components/navigation/HeaderSearchBar';
 import Icon from 'components/shared/toolBox/icon';
 
 import { useTheme } from 'hooks/useTheme';
 import getStyles from './styles';
 import { BookmarkList } from './components';
+import { useSearch } from '../../hooks/useSearch';
 
-export default function Bookmark() {
+export default function Bookmarks() {
   const navigation = useNavigation();
 
-  const [query, setQuery] = useState('');
+  const search = useSearch();
+
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const tabBarHeight = useBottomTabBarHeight();
@@ -26,25 +27,29 @@ export default function Bookmark() {
     styles: getStyles(tabBarHeight),
   });
 
-  const setQueryString = (query) => setQuery(query);
+  const handleSearchTermChange = (term) => search.setTerm(term);
 
-  const onPress = (data) => {
-    navigation.navigate('Wallet', { address: data.address });
-  };
+  const handlePress = (data) => navigation.navigate('Wallet', { address: data.address });
 
   return (
     <NavigationSafeAreaView>
-      <SearchBarHeader
+      <HeaderSearchBar
         title={'Bookmarks'}
-        noIcon={true}
-        onChange={setQueryString}
-        value={query}
+        noIcon
+        onChange={handleSearchTermChange}
+        value={search.term}
         isSearchOpen={isSearchOpen}
         setIsSearchOpen={(val) => setIsSearchOpen(val)}
       />
-      <View style={styles.container}>
-        <BookmarkList draggable={true} query={query} renderEmpty onPress={onPress} />
-      </View>
+
+      <BookmarkList
+        draggable
+        query={search.term}
+        renderEmpty
+        onPress={handlePress}
+        style={[styles.container]}
+      />
+
       <TouchableOpacity
         style={[styles.titleContainer]}
         onPress={() =>

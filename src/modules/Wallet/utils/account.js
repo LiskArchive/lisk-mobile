@@ -25,7 +25,7 @@ export const extractKeyPair = ({
   }
 
   if (LiskPassphrase.Mnemonic.validateMnemonic(passphrase)) {
-    const keyPair = cryptography.ed.getKeys(passphrase);
+    const keyPair = cryptography.legacy.getKeys(passphrase);
     return {
       publicKey: keyPair.publicKey.toString('hex'),
       privateKey: keyPair.privateKey.toString('hex'),

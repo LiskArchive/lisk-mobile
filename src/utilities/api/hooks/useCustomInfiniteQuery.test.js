@@ -2,19 +2,10 @@ import { renderHook } from '@testing-library/react-hooks';
 
 import { LIMIT, API_BASE_URL, API_URL } from 'utilities/api/constants';
 import { queryWrapper } from 'tests/queryWrapper';
-import * as useCurrentBlockchainApplication from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import { mockCustomInfiniteQuery } from '../__fixtures__';
 import { useCustomInfiniteQuery } from './useCustomInfiniteQuery';
 
 jest.useRealTimers();
-
-jest
-  .spyOn(useCurrentBlockchainApplication, 'useCurrentBlockchainApplication')
-  .mockImplementation(() => [
-    {
-      chainID: 'chainIdMock',
-    },
-  ]);
 
 describe('useCustomInfiniteQuery hook', () => {
   const config = {

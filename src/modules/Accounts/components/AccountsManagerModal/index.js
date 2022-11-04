@@ -16,7 +16,6 @@ export default function AccountsManagerModal({ show, setShow }) {
         mode="modal"
         onAccountPress={() => setShow(false)}
         item={AccountItem}
-        style={{ footer: styles.footer }}
         swipeToClose={false}
       />
     </BottomModal>

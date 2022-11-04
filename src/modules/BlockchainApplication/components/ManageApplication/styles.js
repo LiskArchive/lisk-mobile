@@ -21,15 +21,16 @@ export default {
     url: {
       color: colors.light.ultramarineBlue,
     },
-    bottom: {
-      marginBottom: boxes.boxPadding,
+    footer: {
+      paddingTop: boxes.boxPadding,
+      paddingBottom: boxes.boxPadding,
     },
     button: {
       flexDirection: 'row',
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
-      marginVertical: 5,
+      marginVertical: 4,
     },
     buttonText: {
       color: colors.light.ultramarineBlue,
@@ -44,11 +45,14 @@ export default {
     },
   },
   [themes.light]: {
+    container: {
+      backgroundColor: colors.dark.white,
+    },
     outline: {
       borderColor: colors.light.platinumGray,
     },
-    container: {
-      backgroundColor: colors.dark.white,
+    title: {
+      color: colors.light.zodiacBlue,
     },
     remove: {
       color: colors.light.zodiacBlue,
@@ -56,11 +60,14 @@ export default {
   },
 
   [themes.dark]: {
+    container: {
+      backgroundColor: colors.dark.black,
+    },
     outline: {
       borderColor: colors.light.volcanicSand,
     },
-    container: {
-      backgroundColor: colors.dark.black,
+    title: {
+      color: colors.dark.white,
     },
     remove: {
       color: colors.light.white,

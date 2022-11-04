@@ -3,12 +3,18 @@ import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 export default () => ({
   common: {
     wrapper: {
+      flex: 1,
       height: '100%',
     },
     innerContainer: {
-      flexDirection: 'column',
       flex: 1,
-      padding: boxes.boxPadding,
+      paddingTop: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
+    },
+    footer: {
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     applicationNameContainer: {
       flexDirection: 'row',

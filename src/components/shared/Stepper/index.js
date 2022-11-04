@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import ProgressBar from 'components/shared/ProgressBar';
@@ -6,7 +7,6 @@ import { useTheme } from 'hooks/useTheme';
 
 import getStyles from './styles';
 
-// eslint-disable-next-line max-statements
 export default function Stepper({
   children,
   finalCallback,
@@ -67,7 +67,7 @@ export default function Stepper({
   const currentChild = React.Children.toArray(children)[currentIndex];
 
   return (
-    <View style={styles.flex}>
+    <View style={[styles.flex, baseStyles?.container]}>
       {showProgressBar && (
         <ProgressBar
           current={currentIndex}
@@ -75,6 +75,7 @@ export default function Stepper({
           styles={baseStyles?.progressBar}
         />
       )}
+
       {React.cloneElement(currentChild, extraProps)}
     </View>
   );

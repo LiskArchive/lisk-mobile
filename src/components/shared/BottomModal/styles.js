@@ -1,17 +1,28 @@
 import { themes, colors } from 'constants/styleGuide';
-import { deviceWidth } from 'utilities/device';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {
     container: {
-      height: deviceWidth(),
       zIndex: 3,
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
       padding: 16,
       flexDirection: 'column',
-      alignItems: 'center',
       justifyContent: 'center',
+    },
+    overlay: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      right: 0,
+      left: 0,
+    },
+    content: {
+      flex: 1,
+      justifyContent: 'flex-end',
     },
     closeButtonContainer: {
       alignSelf: 'flex-end',
@@ -24,6 +35,7 @@ export default () => ({
       width: 34,
       borderRadius: 40,
       marginTop: 4,
+      alignSelf: 'center',
     },
   },
 
@@ -37,6 +49,9 @@ export default () => ({
     closeButtonContainer: {
       backgroundColor: colors.light.platinumGray,
     },
+    overlay: {
+      backgroundColor: setColorOpacity(colors.light.black, 0.7),
+    },
   },
 
   [themes.dark]: {
@@ -48,6 +63,9 @@ export default () => ({
     },
     closeButtonContainer: {
       backgroundColor: colors.dark.volcanicSand,
+    },
+    overlay: {
+      backgroundColor: setColorOpacity(colors.dark.volcanicSand, 0.7),
     },
   },
 });

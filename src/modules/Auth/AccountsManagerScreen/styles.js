@@ -9,7 +9,8 @@ export default function getAccountsManagerScreenStyles() {
       },
       container: {
         flex: 1,
-        padding: boxes.boxPadding,
+        paddingLeft: boxes.boxPadding,
+        paddingRight: boxes.boxPadding,
       },
     },
     [themes.light]: {

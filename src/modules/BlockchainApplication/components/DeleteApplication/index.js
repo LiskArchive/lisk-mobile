@@ -1,34 +1,34 @@
 import React from 'react';
-import { translate } from 'react-i18next';
 import { View, Image } from 'react-native';
+import i18next from 'i18next';
 
 import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
-import { useBlockchainApplicationManagement } from '../../hooks/useBlockchainApplicationManagement';
 
 import getDeleteBlockchainApplicationStyles from './styles';
+import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
-function DeleteBlockchainApplication({ t, sharedData: { application }, nextStep }) {
+export default function DeleteBlockchainApplication({ sharedData: { application }, nextStep }) {
   const { styles } = useTheme({ styles: getDeleteBlockchainApplicationStyles() });
 
-  const { deleteApplicationByChainId } = useBlockchainApplicationManagement();
+  const { deleteApplication } = useApplicationsManagement();
 
   const handleDeleteApplicationClick = () => {
-    deleteApplicationByChainId(application.chainID);
+    deleteApplication(application.chainID);
+
     nextStep({ application });
   };
 
   return (
     <View style={[styles.container, styles.theme.container]}>
-      <View style={[styles.innerContainer]}>
-        <H2 style={[styles.title, styles.theme.title]}>{t('application.manage.delete.title')}</H2>
+      <H2 style={[styles.title, styles.theme.title]}>
+        {i18next.t('application.manage.delete.title')}
+      </H2>
 
+      <View style={[styles.body]}>
         <View style={[styles.applicationNameContainer]}>
-          <Image
-            source={{ uri: application.logo.png }}
-            style={[styles.applicationLogoImage]}
-          />
+          <Image source={{ uri: application.logo.png }} style={[styles.applicationLogoImage]} />
 
           <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
             {application.chainName}
@@ -36,17 +36,15 @@ function DeleteBlockchainApplication({ t, sharedData: { application }, nextStep 
         </View>
 
         <P style={[styles.descriptionText, styles.theme.descriptionText]}>
-          {t('application.manage.delete.descriptionText')}
+          {i18next.t('application.manage.delete.descriptionText')}
         </P>
       </View>
 
       <PrimaryButton
         onClick={handleDeleteApplicationClick}
-        title={t('application.manage.delete.confirmButtonText')}
+        title={i18next.t('application.manage.delete.confirmButtonText')}
         style={[styles.submitButton]}
       />
     </View>
   );
 }
-
-export default translate()(DeleteBlockchainApplication);

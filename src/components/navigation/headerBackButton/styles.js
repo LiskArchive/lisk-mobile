@@ -14,7 +14,7 @@ export default () => ({
   common: {
     title: {
       fontFamily: fonts.family.heading,
-      fontSize: 25,
+      fontSize: 24,
       flex: 1,
     },
     titleContainer: {

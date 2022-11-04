@@ -30,7 +30,9 @@ export default function InfiniteScrollList({ showVerticalScrollIndicator = false
 
   const renderItem = ({ item }) => props.renderItem(item);
 
-  const renderSpinner = props.renderSpinner || (() => <Text>Loading...</Text>);
+  const renderSpinner = props.withDefaultSpinner
+    ? () => <Text>Loading...</Text>
+    : props.renderSpinner;
 
   return (
     <FlatList

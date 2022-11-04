@@ -1,19 +1,13 @@
+import { mockDefaultApplication } from './mockDefaultApplication';
+
 export const mockApplications = [
-  {
-    chainName: 'Lisk',
-    chainID: '00000001',
-    state: 'active',
-    address: 'lsk123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
-    isDefault: true,
-    lastCertificateHeight: 900,
-    lastUpdated: 123456789,
-  },
+  mockDefaultApplication,
   {
     chainName: 'Coleti',
     chainID: '00000002',
     state: 'active',
     address: 'col123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
-    isDefault: false,
+    isDefault: true,
     lastCertificateHeight: 800,
     lastUpdated: 123456788,
   },
@@ -31,7 +25,7 @@ export const mockApplications = [
     chainID: '00000004',
     state: 'active',
     address: 'env123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
-    isDefault: false,
+    isDefault: true,
     lastCertificateHeight: 600,
     lastUpdated: 123456786,
   },

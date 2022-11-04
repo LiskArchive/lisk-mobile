@@ -75,7 +75,7 @@ const styles = {
     bottom: 0,
   },
   iPhoneXMargin: {
-    marginBottom: 35,
+    bottom: 48,
   },
 };
 

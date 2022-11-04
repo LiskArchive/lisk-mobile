@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { translate } from 'react-i18next';
+
 import withTheme from 'components/shared/withTheme';
 import FlowerSuccessSvg from 'assets/svgs/FlowerSuccessSvg';
 import FileSvg from 'assets/svgs/FileSvg';
 import DownloadSvg from 'assets/svgs/DownloadSvg';
 import { themes } from 'constants/styleGuide';
-import { translate } from 'react-i18next';
-import SuccessScreen from '../components/success';
+import ResultScreen from 'components/screens/ResultScreen';
+
 import getStyles from './styles';
 import { downloadJSON } from '../utils';
 
@@ -25,7 +27,7 @@ const PasswordSetupSuccess = ({ styles, t, encryptedJson, onContinue, theme }) =
     );
 
   return (
-    <SuccessScreen
+    <ResultScreen
       illustration={<FlowerSuccessSvg fill={theme === themes.dark ? '#9999A0' : '#0C152E'} />}
       title={t('auth.setup.passwordSetupSuccessTitle')}
       description={t('auth.setup.passwordSetupSuccessDescription')}
@@ -51,7 +53,7 @@ const PasswordSetupSuccess = ({ styles, t, encryptedJson, onContinue, theme }) =
           </View>
         </TouchableOpacity>
       </View>
-    </SuccessScreen>
+    </ResultScreen>
   );
 };
 

@@ -13,7 +13,7 @@ import SwitchButton from 'components/shared/toolBox/switchButton';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import app from 'constants/app';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
-import HeaderBackButton from 'components/shared/headerBackButton';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
 import { ItemTitle } from './components';
 import getStyles from './styles';

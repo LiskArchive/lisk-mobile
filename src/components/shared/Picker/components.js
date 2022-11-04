@@ -78,13 +78,7 @@ export function PickerMenu({ children, style: baseStyle }) {
   });
 
   return (
-    <BottomModal
-      show={showMenu}
-      toggleShow={() => setShowMenu(false)}
-      style={{
-        container: styles.menuModalContainer,
-      }}
-    >
+    <BottomModal show={showMenu} toggleShow={() => setShowMenu(false)}>
       <View style={[styles.menuContainer, baseStyle?.container]}>{children}</View>
     </BottomModal>
   );

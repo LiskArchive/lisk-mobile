@@ -5,23 +5,19 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useTheme } from 'hooks/useTheme';
 import ApplicationList from '../ApplicationList';
 import getAddApplicationStyles from './styles';
-import { useBlockchainApplicationExplorer } from '../../hooks/useBlockchainApplicationExplorer';
+import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import BlockchainApplicationRow from '../ApplicationRow';
 
 const AddApplication = ({ navigation, t }) => {
   const { styles } = useTheme({ styles: getAddApplicationStyles() });
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const applications = useApplicationsExplorer();
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton
-        title={t('application.explore.title')}
-        onPress={navigation.goBack}
-        titleStyle={[styles.header]}
-      />
+      <HeaderBackButton title={t('application.explore.title')} onPress={navigation.goBack} />
 
       <ApplicationList
-        applications={applicationsMetadata}
+        applications={applications}
         Component={BlockchainApplicationRow}
         onItemPress={(item) =>
           navigation.navigate('ApplicationDetail', {
@@ -30,7 +26,6 @@ const AddApplication = ({ navigation, t }) => {
           })
         }
         showCaret
-        navigation={navigation}
         style={{ container: styles.applicationsListContainer }}
       />
     </View>

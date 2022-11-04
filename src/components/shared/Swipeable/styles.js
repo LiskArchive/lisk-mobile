@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   actionText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
   },
   rightAction: {
