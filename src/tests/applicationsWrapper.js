@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ApplicationsProvider } from 'modules/BlockchainApplication/context/ApplicationsContext';
+import { ApplicationsContext } from 'modules/BlockchainApplication/context/ApplicationsContext';
 import {
   mockApplicationsFullData,
   mockCurrentApplication,
@@ -10,7 +10,7 @@ import { queryWrapper } from './queryWrapper';
 export function applicationsWrapper({ children }) {
   return queryWrapper({
     children: (
-      <ApplicationsProvider
+      <ApplicationsContext.Provider
         value={{
           applications: {
             data: mockApplicationsFullData,
@@ -24,7 +24,7 @@ export function applicationsWrapper({ children }) {
         }}
       >
         {children}
-      </ApplicationsProvider>
+      </ApplicationsContext.Provider>
     ),
   });
 }

@@ -31,9 +31,6 @@ describe('useEmailReport hook', () => {
 
     expect(result.current.isLoading).toBeTruthy();
 
-    expect(result.current.url).toBeFalsy();
-    expect(result.current.url).toBeFalsy();
-
     await waitFor(() => !result.current.isLoading);
 
     expect(result.current.isLoading).toBeFalsy();
