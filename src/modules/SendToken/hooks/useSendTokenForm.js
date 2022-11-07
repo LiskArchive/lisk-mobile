@@ -15,7 +15,7 @@ import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitia
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
-import { updateObjectDeepValue } from 'utilities/helpers';
+import { fromPathToObject } from 'utilities/helpers';
 import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
@@ -88,7 +88,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
       transaction.update({ params: { amount: amountInBeddows } });
     } else {
-      transaction.update(updateObjectDeepValue(field, value));
+      transaction.update(fromPathToObject(field, value));
     }
 
     onChange(value);
