@@ -4,6 +4,7 @@
 // import applicationsAPIClient from 'utilities/api/ApplicationsAPIClient';
 import { mockApplicationsMeta } from '../__fixtures__';
 
+// TODO: Un-mock this hook when SDK have the fix.
 /**
  * Fetch list of blockchain applications metadata (off-chain data) in paginated mode.
  * Executes the API call once the hook is mounted.

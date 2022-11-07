@@ -4,6 +4,7 @@
 // import applicationsAPIClient from 'utilities/api/ApplicationsAPIClient';
 import { mockApplications } from '../__fixtures__';
 
+// TODO: Un-mock this hook when SDK have the fix.
 /**
  * Fetch list of blockchain applications on-chain data.
  * Executes the API call once the hook is mounted.
