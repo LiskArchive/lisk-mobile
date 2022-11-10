@@ -135,6 +135,7 @@
     "url-parse": "^1.5.9",
     "util": "^0.10.4",
     "vm-browserify": "^0.0.4",
+    "webassemblyjs": "^1.11.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

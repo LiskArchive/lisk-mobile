@@ -30,7 +30,7 @@ import RequestToken from 'modules/RequestToken';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import AppNavigator from './components/AppNavigator';
-import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEventsManager';
+// import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEventsManager';
 
 import navigationOptions from './options';
 import navigationLinking from './linking';
@@ -46,7 +46,7 @@ export default function Navigator() {
     colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
   };
 
-  useWalletConnectEventsManager();
+  // useWalletConnectEventsManager();
 
   return (
     <SafeAreaProvider>
