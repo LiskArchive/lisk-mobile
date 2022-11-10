@@ -2,7 +2,7 @@
 import { useSelector } from 'react-redux';
 import * as Lisk from '@liskhq/lisk-client';
 
-import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
@@ -18,15 +18,15 @@ export function useTransactionSummary({
   priority,
   fee,
 }) {
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const applications = useApplicationsExplorer();
 
   const bookmarks = useSelector(selectBookmarkList);
 
-  const senderApplication = applicationsMetadata.data?.find(
+  const senderApplication = applications.data?.find(
     (application) => application.chainID === senderApplicationChainID
   );
 
-  const recipientApplication = applicationsMetadata.data?.find(
+  const recipientApplication = applications.data?.find(
     (application) => application.chainID === recipientApplicationChainID
   );
 

@@ -8,21 +8,24 @@ import i18next from 'i18next';
 import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
+import { updateObjectDeepValue } from 'utilities/helpers';
 import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
 
-  const [currentApplication] = useCurrentBlockchainApplication();
+  const [currentApplication] = useCurrentApplication();
 
   const { data: applicationSupportedTokensData } =
     useApplicationSupportedTokensQuery(currentApplication);
+
+  const dryRunTransactionMutation = useDryRunTransactionMutation();
 
   const broadcastTransactionMutation = useBroadcastTransactionMutation();
 
@@ -84,7 +87,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
       transaction.update({ params: { amount: amountInBeddows } });
     } else {
-      transaction.update({ [field]: value });
+      transaction.update(updateObjectDeepValue(field, value));
     }
 
     onChange(value);
@@ -118,11 +121,25 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
 
-        broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+        dryRunTransactionMutation.mutate(
+          { transaction: encodedTransaction },
+          {
+            onSuccess: (data) => {
+              if (data.success) {
+                broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+              } else {
+                DropDownHolder.error(
+                  i18next.t('transactions.errors.dryRunInvalidTransactionTitle'),
+                  i18next.t('transactions.errors.dryRunInvalidTransactionDescription')
+                );
+              }
+            },
+          }
+        );
       } catch (error) {
         DropDownHolder.error(
           i18next.t('Error'),
-          'Unable to sign your transaction. Please try again.'
+          i18next.t('transactions.errors.signErrorDescription')
         );
       }
     }

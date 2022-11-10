@@ -10,8 +10,7 @@ import { API_URL } from 'utilities/api/constants';
  * @param {String} id - ID of the transaction to be fetched.
  * @param {Object} config - Custom configurations for the query.
  * @param {Object} options - Custom options for the query.
- * @returns - The query state of the API call. Includes the data,
- * loading state, error state, and more.
+ * @returns - The query hook to perform the API call.
  */
 export function useTransactionQuery(id, { config: customConfig = {}, options = {} } = {}) {
   const [currentAccount] = useCurrentAccount();

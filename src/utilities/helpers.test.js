@@ -3,7 +3,8 @@ import {
   createThemedStyles,
   merge,
   stringShortener,
-  removeUndefinedKeys,
+  removeUndefinedObjectKeys,
+  updateObjectDeepValue,
   isEmpty,
   setColorOpacity,
   isNumeric,
@@ -127,10 +128,39 @@ describe('helpers', () => {
     });
   });
 
-  describe('removeUndefinedKeys', () => {
+  describe('removeUndefinedObjectKeys', () => {
     it('removes undefined keys from the source object', () => {
-      const source = { a: undefined, b: 'b', c: 0 };
-      expect(removeUndefinedKeys(source)).toEqual({ b: 'b', c: 0 });
+      const obj = { a: undefined, b: 'b', c: 0 };
+
+      expect(removeUndefinedObjectKeys(obj)).toEqual({ b: 'b', c: 0 });
+    });
+  });
+
+  describe('updateObjectDeepValue', () => {
+    it('updates properly an object nested value and returns the object updated', () => {
+      const obj = { a: 'a', b: { b1: 'b1', b2: 'b2' }, c: 'c' };
+
+      expect(updateObjectDeepValue('b.b1', '_b1', obj)).toEqual({
+        a: 'a',
+        b: { b1: '_b1', b2: 'b2' },
+        c: 'c',
+      });
+    });
+
+    it('returns the object not-updated if the specified path does not exist', () => {
+      const obj = { a: 'a', b: { b1: 'b1', b2: 'b2' }, c: 'c' };
+
+      expect(updateObjectDeepValue('b.b3', 'b3', obj)).toEqual(obj);
+    });
+
+    it('returns the object with the new key-value pair added if writeUndefined=true and the specified path does not exist', () => {
+      const obj = { a: 'a', b: { b1: 'b1', b2: 'b2' }, c: 'c' };
+
+      expect(updateObjectDeepValue('b.b3', 'b3', obj, true)).toEqual({
+        a: 'a',
+        b: { b1: 'b1', b2: 'b2', b3: 'b3' },
+        c: 'c',
+      });
     });
   });
 

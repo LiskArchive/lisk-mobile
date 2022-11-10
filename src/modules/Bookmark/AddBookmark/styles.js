@@ -10,7 +10,8 @@ export default () => ({
       flex: 1,
     },
     footer: {
-      padding: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     input: {
       marginTop: 8,

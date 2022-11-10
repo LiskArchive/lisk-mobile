@@ -5,7 +5,7 @@ import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import DataRenderer from 'components/shared/DataRenderer';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import ResultScreen from 'components/screens/ResultScreen';
@@ -19,7 +19,7 @@ import {
 } from './components';
 
 export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const applications = useApplicationsExplorer();
 
   const { field: senderApplicationChainIDField } = useController({
     name: 'senderApplicationChainID',
@@ -53,9 +53,9 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
       <DataRenderer
-        data={applicationsMetadata.data}
-        isLoading={applicationsMetadata.isLoading}
-        error={applicationsMetadata.error}
+        data={applications.data}
+        isLoading={applications.isLoading}
+        error={applications.error}
         renderData={(data) => (
           <>
             <View style={[styles.container]}>
@@ -90,12 +90,14 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
               />
             </View>
 
-            <PrimaryButton
-              onClick={nextStep}
-              disabled={disableNextStepButton}
-              title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
-              noTheme
-            />
+            <View style={[styles.footer]}>
+              <PrimaryButton
+                onClick={nextStep}
+                disabled={disableNextStepButton}
+                title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
+                noTheme
+              />
+            </View>
           </>
         )}
         renderError={() => (

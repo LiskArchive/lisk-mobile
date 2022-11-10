@@ -10,10 +10,10 @@ import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
-import { useBlockchainApplicationExplorer } from 'modules/BlockchainApplication/hooks/useBlockchainApplicationExplorer';
+import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
-import { useCurrentBlockchainApplication } from 'modules/BlockchainApplication/hooks/useCurrentBlockchainApplication';
 import {
   SendTokenMessageField,
   SendTokenAmountField,
@@ -45,9 +45,9 @@ export default function RequestToken() {
 
   const [currentAccount] = useCurrentAccount();
 
-  const [currentApplication] = useCurrentBlockchainApplication();
+  const [currentApplication] = useCurrentApplication();
 
-  const { applicationsMetadata } = useBlockchainApplicationExplorer();
+  const applications = useApplicationsExplorer();
 
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
@@ -138,9 +138,9 @@ export default function RequestToken() {
           </View>
 
           <DataRenderer
-            data={applicationsMetadata.data}
-            isLoading={applicationsMetadata.isLoading}
-            error={applicationsMetadata.error}
+            data={applications.data}
+            isLoading={applications.isLoading}
+            error={applications.error}
             renderData={(data) => (
               <SendTokenRecipientApplicationField
                 value={recipientApplicationChainID}

@@ -1,7 +1,7 @@
 import { networks } from 'bitcoinjs-lib';
 import URLs from './src/constants/URLs';
 
-const isTestnet = process.env.network === 'testnet';
+const isTestnet = process.env.NETWORK === 'testnet';
 
 export default {
   isTestnet,

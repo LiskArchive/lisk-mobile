@@ -11,7 +11,7 @@ import TotalSupplySvg from 'assets/svgs/TotalSupplySvg';
 import StakedSvg from 'assets/svgs/StakedSvg';
 
 import getStyles from './styles';
-import { useBlockchainApplicationStats } from '../../hooks/useBlockchainApplicationStats';
+import { useApplicationStatsQuery } from '../../api/useApplicationStatsQuery';
 
 const { width } = Dimensions.get('window');
 
@@ -23,7 +23,7 @@ export default function BlockchainApplicationsStats(props) {
     data: statsData,
     isLoading: isLoadingStatsData,
     error: errorOnStatsData,
-  } = useBlockchainApplicationStats();
+  } = useApplicationStatsQuery();
 
   const { theme, styles } = useTheme({ styles: getStyles() });
 

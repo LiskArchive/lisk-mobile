@@ -1,7 +1,7 @@
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
-import { GET_APPLICATION_QUERY } from 'utilities/api/queries';
-import { LIMIT, API_URL } from 'utilities/api/constants';
-import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
+import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
+import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
+import applicationsAPIClient from 'utilities/api/ApplicationsAPIClient';
 
 /**
  * Fetch list of blockchain applications on-chain data.
@@ -11,16 +11,17 @@ import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
  * @returns - The query state of the API call. Includes the data
  * (applications), loading state, error state, and more.
  */
-export function useApplicationsQuery(chainID, { config: customConfig = {}, options = {} } = {}) {
+export function useApplicationsQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
+    baseURL: process.env.SERVICE_API_BASE_URL,
     url: `${API_URL}/blockchain/apps`,
     method: 'get',
     event: 'get.blockchain.apps',
     ...customConfig,
-    params: { chainID, limit: LIMIT, ...customConfig.params },
+    params: { limit: LIMIT, ...customConfig.params },
   };
 
-  const keys = useQueryKeys([GET_APPLICATION_QUERY, config]);
+  const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
 
-  return useCustomInfiniteQuery({ config, options, keys });
+  return useCustomInfiniteQuery({ config, options, keys, client: applicationsAPIClient });
 }

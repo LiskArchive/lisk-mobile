@@ -5,10 +5,10 @@ export default function getSendTokenSelectApplicationsStepStyles() {
     common: {
       wrapper: {
         flex: 1,
-        padding: boxes.boxPadding,
       },
       container: {
         flex: 1,
+        padding: boxes.boxPadding,
       },
       row: {
         flexDirection: 'row',
@@ -37,6 +37,10 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         fontSize: 16,
         color: colors.light.ghost,
         fontWeight: '400',
+      },
+      footer: {
+        paddingLeft: boxes.boxPadding,
+        paddingRight: boxes.boxPadding,
       },
     },
     [themes.light]: {

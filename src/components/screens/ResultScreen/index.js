@@ -61,13 +61,15 @@ export default function ResultScreen({
       </View>
 
       {onContinue && (
-        <PrimaryButton
-          noTheme
-          title={buttonText}
-          style={styles.continueButton}
-          onPress={onContinue}
-          disabled={disabled}
-        />
+        <View style={[styles.footer]}>
+          <PrimaryButton
+            noTheme
+            title={buttonText}
+            style={[styles.continueButton]}
+            onPress={onContinue}
+            disabled={disabled}
+          />
+        </View>
       )}
     </SafeAreaView>
   );

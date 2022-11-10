@@ -5,7 +5,7 @@ import { colors } from 'constants/styleGuide';
 import PinSvg from 'assets/svgs/PinSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 
-import { usePinBlockchainApplication } from '../../hooks/usePinBlockchainApplication';
+import { usePinApplications } from '../../hooks/usePinApplications';
 
 export function useBlockchainApplicationRowActions({
   application,
@@ -13,7 +13,7 @@ export function useBlockchainApplicationRowActions({
   setShowDeleteDefaultApplicationModal,
   deleteApplication,
 }) {
-  const { togglePin } = usePinBlockchainApplication();
+  const { togglePin } = usePinApplications();
 
   let leftActions;
   let rightActions;
