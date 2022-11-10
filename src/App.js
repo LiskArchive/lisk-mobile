@@ -5,7 +5,6 @@ import { StatusBar, View } from 'react-native';
 import Router from 'navigation';
 import { Provider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import '@walletconnect/react-native-compat';
 
 import { colors, themes } from 'constants/styleGuide';
 import Alert from 'components/shared/alert';
