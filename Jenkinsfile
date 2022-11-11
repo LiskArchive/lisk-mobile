@@ -7,8 +7,8 @@ pipeline {
         script{
           nvm(getNodejsVersion()) {
             sh '''
-            npm ci
-            npm run link
+            yarn
+            yarn link
             '''
           }
         }

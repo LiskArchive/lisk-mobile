@@ -5,8 +5,7 @@ import { mockApplicationsMeta } from '../__fixtures__';
 
 import { useApplicationsMetaQuery } from './useApplicationsMetaQuery';
 
-// TODO: Un-skip this test when SDK have the fix.
-describe.skip('useApplicationsMetaQuery hook', () => {
+describe('useApplicationsMetaQuery hook', () => {
   it('should fetch data correctly', async () => {
     const wrapper = ({ children }) => applicationsWrapper({ children });
 

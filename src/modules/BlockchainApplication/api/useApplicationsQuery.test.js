@@ -5,8 +5,7 @@ import { mockApplications } from '../__fixtures__';
 
 import { useApplicationsQuery } from './useApplicationsQuery';
 
-// TODO: Un-skip this test when SDK have the fix.
-describe.skip('useApplicationsQuery hook', () => {
+describe('useApplicationsQuery hook', () => {
   it('should fetch data correctly', async () => {
     const wrapper = ({ children }) => applicationsWrapper({ children });
 
