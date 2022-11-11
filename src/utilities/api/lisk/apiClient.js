@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import config from '../../../../lsk.config';
-import errorHandler from '../errorHandler';
 
 class LiskAPIClient {
   constructor(url) {
@@ -23,35 +22,6 @@ class LiskAPIClient {
     const { data } = await resp.json();
 
     return data;
-  }
-
-  async sendTransaction(tx) {
-    const resp = await fetch(`${this._url}/v3/transactions`, {
-      ...config.requestOptions,
-      method: 'POST',
-      body: JSON.stringify(tx),
-    });
-    if (!resp.ok) {
-      const response = await resp.json();
-      throw new Error(errorHandler(response));
-    }
-    const { transactionId, message } = await resp.json();
-    return { id: transactionId, message };
-  }
-
-  async getLatestBlock() {
-    const options = {
-      ...config.requestOptions,
-      params: {
-        limit: 1,
-      },
-    };
-    const resp = await fetch(`${this._url}/v3/blocks`, options);
-    if (!resp.ok) {
-      throw new Error('Failed to retrieve the latest block from server.');
-    }
-    const { data } = await resp.json();
-    return data[0];
   }
 }
 
