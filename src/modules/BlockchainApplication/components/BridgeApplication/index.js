@@ -6,19 +6,26 @@ import { H2, P } from 'components/shared/toolBox/typography';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
-import usePairings from '../../../../../libs/wcm/hooks/usePairings';
+import useWalletConnectPairings from '../../../../../libs/wcm/hooks/usePairings';
 
 import getStyles from './styles';
 
 const BridgeApplication = ({ nextStep }) => {
-  const { setUri } = usePairings();
+  const [status, setStatus] = useState({});
 
   const [inputUri, setInputUri] = useState('');
 
+  const { setUri } = useWalletConnectPairings();
+
   const { styles } = useTheme({ styles: getStyles });
 
-  const onSubmit = () => {
-    setUri(inputUri);
+  const handleSubmit = async () => {
+    setStatus({ ...status, isPending: true });
+
+    const result = await setUri(inputUri);
+
+    setStatus(result);
+
     nextStep();
   };
 
@@ -27,9 +34,11 @@ const BridgeApplication = ({ nextStep }) => {
       <H2 style={[styles.title, styles.theme.title]}>
         {i18next.t('application.explore.externalApplicationList.bridgeApplication')}
       </H2>
+
       <P style={[styles.description, styles.theme.description]}>
         {i18next.t('application.explore.externalApplicationList.bridgeApplicationDescription')}
       </P>
+
       <View style={styles.inputContainer}>
         <Input
           placeholder={i18next.t('application.explore.externalApplicationList.enterConnectionUri')}
@@ -40,11 +49,12 @@ const BridgeApplication = ({ nextStep }) => {
           returnKeyType="done"
         />
       </View>
-      <PrimaryButton
-        title={i18next.t('application.explore.externalApplicationList.addApplication')}
-        disabled={!inputUri}
-        onPress={onSubmit}
-      />
+
+      <PrimaryButton disabled={!inputUri || status.isPending} onPress={handleSubmit}>
+        {status.isPending
+          ? 'Loading...'
+          : i18next.t('application.explore.externalApplicationList.addApplication')}
+      </PrimaryButton>
     </View>
   );
 };

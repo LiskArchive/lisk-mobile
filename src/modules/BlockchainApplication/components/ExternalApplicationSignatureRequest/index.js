@@ -8,9 +8,9 @@ import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransa
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
-import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
+import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
-import useSession from '../../../../../libs/wcm/hooks/useSession';
+import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 
 import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSummary';
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
@@ -21,9 +21,9 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
 
   const [currentAccount] = useCurrentAccount();
 
-  const { respond, isRespondLoading, errorOnRespond, isRespondSuccess } = useSession();
+  const { respond, isRespondLoading, errorOnRespond, isRespondSuccess } = useWalletConnectSession();
 
-  const { events } = useContext(ConnectionContext);
+  const { events } = useContext(WalletConnectContext);
 
   const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
 

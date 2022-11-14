@@ -9,12 +9,12 @@ import ExternalApplicationSignatureRequest from 'modules/BlockchainApplication/c
 import BottomModal from 'components/shared/BottomModal';
 import { getTabBarIcon } from '../../helpers';
 import { getNavigationTabBarStyles } from '../../styles';
-import useSession from '../../../../libs/wcm/hooks/useSession';
+import useWalletConnectSession from '../../../../libs/wcm/hooks/useSession';
 
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
-  const { session } = useSession();
+  const { session } = useWalletConnectSession();
 
   const [
     showExternalApplicationSignatureRequestModal,
