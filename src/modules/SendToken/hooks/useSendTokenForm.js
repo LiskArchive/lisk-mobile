@@ -9,12 +9,13 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
+import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
-import { updateObjectDeepValue } from 'utilities/helpers';
+import { fromPathToObject } from 'utilities/helpers';
 import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
@@ -87,7 +88,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
       transaction.update({ params: { amount: amountInBeddows } });
     } else {
-      transaction.update(updateObjectDeepValue(field, value));
+      transaction.update(fromPathToObject(field, value));
     }
 
     onChange(value);

@@ -99,16 +99,12 @@ export function removeUndefinedObjectKeys(obj) {
  * specified keys of the path that don not exist on the original object. With false, it will omit them.
  * @returns {Object} - The updated object.
  */
-export function updateObjectDeepValue(path, value, obj = {}, writeUndefined = false) {
+export function fromPathToObject(path, value, obj = {}) {
   const [head, ...rest] = path.split('.');
-
-  if (!writeUndefined && !obj[head]) return obj;
 
   return {
     ...obj,
-    [head]: rest.length
-      ? updateObjectDeepValue(rest.join('.'), value, obj[head], writeUndefined)
-      : value,
+    [head]: rest.length ? fromPathToObject(rest.join('.'), value, obj[head]) : value,
   };
 }
 

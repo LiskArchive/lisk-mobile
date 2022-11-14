@@ -37,3 +37,12 @@ target 'Lisk-tvOS' do
 end
 
 use_flipper!()
+
+post_install do |installer|
+  react_native_post_install(installer)
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+          config.build_settings["ONLY_ACTIVE_ARCH"] = "NO"
+        end
+    end
+end

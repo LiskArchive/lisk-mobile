@@ -7,8 +7,9 @@ pipeline {
         script{
           nvm(getNodejsVersion()) {
             sh '''
-            npm ci
-            npm run link
+            npm install -g yarn
+            yarn install
+            yarn run link
             '''
           }
         }
@@ -17,14 +18,14 @@ pipeline {
     stage ('Run ESLint') {
       steps {
         nvm(getNodejsVersion()) {
-          sh 'npm run lint'
+          sh 'yarn run lint'
         }
       }
     }
     stage ('Run unit tests') {
       steps {
         nvm(getNodejsVersion()) {
-          sh 'npm run test'
+          sh 'yarn run test'
         }
       }
     }
