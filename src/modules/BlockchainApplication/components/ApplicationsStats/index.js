@@ -18,7 +18,7 @@ const { width } = Dimensions.get('window');
 /**
  * @param {Object} props.style
  */
-export default function BlockchainApplicationsStats(props) {
+export default function ApplicationsStats(props) {
   const {
     data: statsData,
     isLoading: isLoadingStatsData,

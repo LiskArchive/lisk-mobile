@@ -1,13 +1,13 @@
 import wallets from 'tests/constants/wallets';
 import { signClient } from './connectionCreator';
 import { onApprove, onReject } from './sessionHandlers';
-import { PAIRING_PROPOSAL_STATUS, ERROR_CASES } from '../constants/lifeCycle';
+import { ERROR_CASES, STATUS } from '../constants/lifeCycle';
 
 jest.mock('@walletconnect/utils', () => ({
   getSdkError: jest.fn((str) => str),
 }));
 
-jest.mock('@libs/wcm/utils/connectionCreator', () => ({
+jest.mock('./connectionCreator', () => ({
   signClient: {
     approve: jest.fn().mockImplementation(() =>
       Promise.resolve({
@@ -36,7 +36,7 @@ describe('sessionHandlers', () => {
         namespaces: {},
         relayProtocol: proposal.params.relays[0].protocol,
       });
-      expect(res).toEqual(PAIRING_PROPOSAL_STATUS.SUCCESS);
+      expect(res).toEqual(STATUS.SUCCESS);
     });
 
     it('Should throw error if selectedAccounts is not a list of addresses', async () => {
@@ -44,7 +44,7 @@ describe('sessionHandlers', () => {
         Promise.reject(new Error('Accounts are invalid'))
       );
       const res = await onApprove(proposal, []);
-      expect(res).toEqual(PAIRING_PROPOSAL_STATUS.ERROR);
+      expect(res).toEqual(STATUS.FAILURE);
     });
   });
 

@@ -7,7 +7,7 @@ import DeleteSvg from 'assets/svgs/DeleteSvg';
 
 import { usePinApplications } from '../../hooks/usePinApplications';
 
-export function useBlockchainApplicationRowActions({
+export function useApplicationRowActions({
   application,
   variant,
   setShowDeleteDefaultApplicationModal,

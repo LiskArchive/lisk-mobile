@@ -7,14 +7,15 @@ import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
 import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import { P } from 'components/shared/toolBox/typography';
-import usePairings from '../../../../../libs/wcm/hooks/usePairings';
+import useWalletConnectCPairings from '../../../../../libs/wcm/hooks/usePairings';
 import ExternalApplicationRow from '../ExternalApplicationRow';
 
 import getExternalApplicationListStyles from './styles';
 
-export default function ExternalBlockchainApplicationsList() {
-  const { pairings } = usePairings();
+export default function ExternalApplicationList() {
   const [isLoading, setIsLoading] = useState(true);
+
+  const { pairings } = useWalletConnectCPairings();
 
   const { styles } = useTheme({
     styles: getExternalApplicationListStyles(),

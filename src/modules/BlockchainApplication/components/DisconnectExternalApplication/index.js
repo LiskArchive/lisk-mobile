@@ -6,9 +6,9 @@ import { P, H3, B } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 
 import getDisconnectExternalBlockchainApplicationStyles from './styles';
-import usePairings from '../../../../../libs/wcm/hooks/usePairings';
+import useWalletConnectPairings from '../../../../../libs/wcm/hooks/usePairings';
 
-export default function DisconnectExternalBlockchainApplication({
+export default function DisconnectExternalApplication({
   application,
   onSuccess,
   onError,
@@ -17,7 +17,7 @@ export default function DisconnectExternalBlockchainApplication({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
-  const { disconnect } = usePairings();
+  const { disconnect } = useWalletConnectPairings();
 
   const { styles } = useTheme({ styles: getDisconnectExternalBlockchainApplicationStyles() });
 
