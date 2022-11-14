@@ -17,7 +17,8 @@ const usePairings = () => {
    */
   const setUri = useCallback(async (uri) => {
     try {
-      const data = await signClient.pair({ uri });
+      const data = await signClient.core.pairing.pair({ uri });
+
       return {
         status: STATUS.SUCCESS,
         data,

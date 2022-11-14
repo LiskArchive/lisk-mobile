@@ -36,7 +36,7 @@ const useWalletConnectEventsManager = () => {
       });
     } else {
       // eslint-disable-next-line no-console
-      console.log('There was an error initializing the client');
+      console.log('There was an error initializing the Wallet Connect client');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onSessionRequest, onSessionDelete, eventHandler, signClient?.on]);

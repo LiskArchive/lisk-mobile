@@ -67,7 +67,7 @@ export default function ApplicationsExplorer() {
   const onCancelConnection = () => setShowBridgeAppModal(false);
 
   const connectionEvent = useMemo(() => {
-    if (events.length && events[events.length - 1].name === EVENTS.SESSION_REQUEST) {
+    if (events.length && events[events.length - 1].name === EVENTS.SESSION_PROPOSAL) {
       return events[events.length - 1];
     }
 

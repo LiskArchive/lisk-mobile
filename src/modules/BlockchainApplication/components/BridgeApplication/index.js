@@ -14,9 +14,7 @@ import getStyles from './styles';
 export default function BridgeApplication({ nextStep }) {
   const [status, setStatus] = useState({});
 
-  const [inputUri, setInputUri] = useState(
-    'wc:f49614cf14da79fd7c9ff458bdac3e7f4f1c271b09409b4372f5f35c10f62d8f@2?relay-protocol=iridium&symKey=bbee67f9fa610a6f0c8ddf78af12e360bd013d9f9870d370f8507abb187e8b91'
-  );
+  const [inputUri, setInputUri] = useState('');
 
   const { setUri } = useWalletConnectPairings();
 
@@ -25,12 +23,12 @@ export default function BridgeApplication({ nextStep }) {
   const handleSubmit = async () => {
     setStatus({ ...status, isLoading: true });
 
-    const result = await setUri(inputUri);
+    const response = await setUri(inputUri);
 
-    if (result.status === STATUS.FAILURE) {
-      setStatus({ ...result, isError: true });
-    } else if (result.status === STATUS.SUCCESS) {
-      setStatus({ ...result, isSuccess: true });
+    if (response.status === STATUS.FAILURE) {
+      setStatus({ ...response, isError: true });
+    } else if (response.status === STATUS.SUCCESS) {
+      setStatus({ ...response, isSuccess: true });
     }
   };
 

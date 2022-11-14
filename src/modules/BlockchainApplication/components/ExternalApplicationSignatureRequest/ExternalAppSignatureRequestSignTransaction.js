@@ -38,7 +38,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
   const { data: supportedTokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
   const token = supportedTokensData?.find(
-    (_token) => _token.tokenID === transaction.params.tokenID
+    (_token) => _token.tokenID === transaction.transaction.params.tokenID
   );
 
   return (
@@ -47,7 +47,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
       password={passwordController.field.value}
       onPasswordChange={passwordController.field.onChange}
       isValidationError={Object.keys(passwordForm.formState.errors).length > 0}
-      amount={transaction.params.amount}
+      amount={transaction.transaction.params.amount}
       token={token}
       isSuccess={isSuccess}
       isLoading={isLoading}
