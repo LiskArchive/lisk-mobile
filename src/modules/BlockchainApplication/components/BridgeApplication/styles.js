@@ -1,4 +1,4 @@
-import { themes, boxes, colors } from 'constants/styleGuide';
+import { themes, boxes, colors, fonts } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
 export default {
@@ -19,6 +19,12 @@ export default {
     inputContainer: {
       paddingVertical: boxes.boxPadding,
     },
+    errorMessage: {
+      fontFamily: fonts.family.context,
+      fontSize: fonts.size.input,
+      marginTop: 8,
+      textAlign: 'center',
+    },
   },
   [themes.light]: {
     title: {
@@ -26,6 +32,9 @@ export default {
     },
     description: {
       color: colors.light.zodiacBlue,
+    },
+    errorMessage: {
+      color: colors.light.burntSieanna,
     },
   },
 
@@ -35,6 +44,9 @@ export default {
     },
     description: {
       color: colors.dark.white,
+    },
+    errorMessage: {
+      color: colors.light.burntSieanna,
     },
   },
 };
