@@ -37,15 +37,13 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         initialValues?.recipientApplicationChainID || currentApplication.chainID,
       recipientAccountAddress: initialValues?.recipientAccountAddress,
       recipientAccountAddressFormat: 'input',
-      tokenID:
-        initialValues?.tokenID ||
-        applicationSupportedTokensData?.find((token) => token.symbol === 'LSK')?.tokenID,
+      tokenID: initialValues?.tokenID,
       amount: initialValues?.amount ? parseFloat(initialValues.amount) : 0,
       message: initialValues?.message || '',
       priority: 'low',
       userPassword: '',
     }),
-    [currentApplication.chainID, applicationSupportedTokensData, initialValues]
+    [currentApplication.chainID, initialValues]
   );
 
   const validationSchema = yup
@@ -71,6 +69,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const { handleSubmit: baseHandleSubmit, ...form } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
+    enableReinitialize: true,
   });
 
   const initializationFee = useInitializationFeeCalculator({
@@ -147,6 +146,15 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   });
 
   const handleReset = () => form.reset(defaultValues);
+
+  useEffect(() => {
+    if (applicationSupportedTokensData && !form.getValues('tokenID')) {
+      form.reset({
+        ...defaultValues,
+        tokenID: applicationSupportedTokensData.find((token) => token.symbol === 'LSK')?.tokenID,
+      });
+    }
+  }, [form, defaultValues, applicationSupportedTokensData, initialValues]);
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
