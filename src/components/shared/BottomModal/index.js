@@ -1,56 +1,59 @@
 import React, { useEffect, useRef } from 'react';
-import { TouchableOpacity, View, Modal, ScrollView, Animated, Easing } from 'react-native';
+import { TouchableOpacity, View, Modal, ScrollView, Animated, Dimensions } from 'react-native';
+
 import Icon from 'components/shared/toolBox/icon';
 import { useTheme } from 'hooks/useTheme';
 import { colors } from 'constants/styleGuide';
+
 import getStyles from './styles';
 
 const BottomModal = ({ showClose = true, show, toggleShow, children, style }) => {
-  const { styles } = useTheme({ styles: getStyles() });
-  const animation = useRef(new Animated.Value(0)).current;
+  const panY = useRef(new Animated.Value(Dimensions.get('screen').height)).current;
 
-  const opacity = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 0.7],
-    easing: Easing.elastic(),
+  const { styles } = useTheme({ styles: getStyles() });
+
+  const resetPositionAnimation = Animated.timing(panY, {
+    toValue: 0,
+    duration: 300,
+  });
+
+  const closeAnimation = Animated.timing(panY, {
+    toValue: Dimensions.get('screen').height,
+    duration: 300,
+  });
+
+  const handleClose = () => closeAnimation.start(() => toggleShow(false));
+
+  const top = panY.interpolate({
+    inputRange: [-1, 0, 1],
+    outputRange: [0, 0, 1],
   });
 
   useEffect(() => {
     if (show) {
-      Animated.spring(animation, {
-        toValue: 1,
-        duration: 1000,
-        delay: 50,
-      }).start();
+      resetPositionAnimation.start();
     }
-  }, [show, animation]);
-
-  const closeModal = () => {
-    animation.setValue(0);
-    toggleShow(false);
-  };
+  }, [show, resetPositionAnimation]);
 
   return (
-    <Animated.View style={[show && styles.overlay, styles.theme.overlay, { opacity }]}>
-      <Modal transparent visible={show} onRequestClose={closeModal} animationType="slide">
-        <View style={[styles.content, style?.content]}>
-          <View style={[styles.container, styles.theme.container, style?.container]}>
-            <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
+    <Modal transparent visible={show} onRequestClose={handleClose} animationType="fade">
+      <View style={[styles.overlay, styles.theme.overlay, style?.overlay]}>
+        <Animated.View style={[styles.container, styles.theme.container, { top }]}>
+          <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
 
-            {showClose && (
-              <TouchableOpacity
-                style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
-                onPress={closeModal}
-              >
-                <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
-              </TouchableOpacity>
-            )}
+          {showClose && (
+            <TouchableOpacity
+              style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
+              onPress={handleClose}
+            >
+              <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
+            </TouchableOpacity>
+          )}
 
-            <ScrollView style={[style?.children]}>{children}</ScrollView>
-          </View>
-        </View>
-      </Modal>
-    </Animated.View>
+          <ScrollView style={[style?.children]}>{children}</ScrollView>
+        </Animated.View>
+      </View>
+    </Modal>
   );
 };
 

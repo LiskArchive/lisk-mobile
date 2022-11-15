@@ -4,23 +4,12 @@ import { setColorOpacity } from 'utilities/helpers';
 export default () => ({
   common: {
     container: {
-      zIndex: 3,
-      borderTopLeftRadius: 24,
-      borderTopRightRadius: 24,
+      backgroundColor: 'white',
       padding: 16,
-      flexDirection: 'column',
-      justifyContent: 'center',
+      borderTopRightRadius: 24,
+      borderTopLeftRadius: 24,
     },
     overlay: {
-      flex: 1,
-      justifyContent: 'flex-end',
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      right: 0,
-      left: 0,
-    },
-    content: {
       flex: 1,
       justifyContent: 'flex-end',
     },
@@ -50,7 +39,7 @@ export default () => ({
       backgroundColor: colors.light.platinumGray,
     },
     overlay: {
-      backgroundColor: setColorOpacity(colors.light.black, 0.7),
+      backgroundColor: setColorOpacity(colors.light.black, 0.5),
     },
   },
 
@@ -65,7 +54,7 @@ export default () => ({
       backgroundColor: colors.dark.volcanicSand,
     },
     overlay: {
-      backgroundColor: setColorOpacity(colors.dark.volcanicSand, 0.7),
+      backgroundColor: setColorOpacity(colors.dark.volcanicSand, 0.5),
     },
   },
 });
