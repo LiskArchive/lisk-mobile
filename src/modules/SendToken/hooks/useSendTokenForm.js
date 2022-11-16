@@ -154,7 +154,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         tokenID: applicationSupportedTokensData.find((token) => token.symbol === 'LSK')?.tokenID,
       });
     }
-  }, [form, defaultValues, applicationSupportedTokensData, initialValues]);
+  }, [form, defaultValues, applicationSupportedTokensData]);
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
