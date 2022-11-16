@@ -1,52 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Switch from 'react-native-switch-pro';
 import { useNavigation } from '@react-navigation/native';
+
 import { B, P } from 'components/shared/toolBox/typography';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { colors } from 'constants/styleGuide';
+
 import styles from './styles';
 
-const SafeKeeping = ({ t, sharedData: { passphrase }, prevStep, nextStep }) => {
+export default function RegisterSafeKeeping({ passphrase, prevStep, nextStep }) {
   const navigation = useNavigation();
+
   const [confirmed, setConfirmed] = useState(false);
 
   useEffect(() => {
-    const { setOptions } = navigation;
-    setOptions({
+    navigation.setOptions({
       headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
-      title: t('Your passphrase'),
+      title: i18next.t('Your passphrase'),
     });
-  }, []);
+  }, [navigation, prevStep]);
 
-  const confirm = (status) => {
-    setConfirmed(status);
-  };
-
-  const forward = () => {
-    nextStep({
-      passphrase,
-    });
-  };
+  const handleConfirm = (status) => setConfirmed(status);
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
         <View style={styles.body}>
           <View style={styles.passphraseContainer}>
-            <P style={styles.passphraseTitle}>{t('Store your passphrase carefully')}</P>
+            <P style={styles.passphraseTitle}>{i18next.t('Store your passphrase carefully')}</P>
+
             <Text style={styles.passphrase} testID="passphraseText">
               {passphrase.replace(/\s+/g, '  ')}
             </Text>
+
             <CopyToClipboard
               style={styles.copyContainer}
               labelStyle={styles.copy}
               iconStyle={styles.copy}
-              label={t('Copy to clipboard')}
+              label={i18next.t('Copy to clipboard')}
               showIcon={true}
               iconSize={14}
               value={passphrase}
@@ -54,34 +50,36 @@ const SafeKeeping = ({ t, sharedData: { passphrase }, prevStep, nextStep }) => {
             />
           </View>
         </View>
+
         <View style={styles.footer}>
           <View style={styles.switchContainer}>
             <Switch
               testID="understandResponsibilitySwitch"
               height={26}
               width={43}
-              onSyncPress={confirm}
+              onSyncPress={handleConfirm}
               backgroundActive={colors.light.ultramarineBlue}
               backgroundInactive={colors.light.platinum}
             />
+
             <P style={styles.confirmText}>
-              {t('I understand that it’s my responsibility to keep my passphrase safe.')}
+              {i18next.t('I understand that it’s my responsibility to keep my passphrase safe.')}
             </P>
           </View>
+
           <View>
             <PrimaryButton
               disabled={!confirmed}
               testID="safeKeepingButton"
               style={styles.button}
               noTheme={true}
-              onClick={forward}
-              title={t('I wrote it down')}
-            />
+              onClick={nextStep}
+            >
+              {i18next.t('I wrote it down')}
+            </PrimaryButton>
           </View>
         </View>
       </View>
     </SafeAreaView>
   );
-};
-
-export default translate()(SafeKeeping);
+}

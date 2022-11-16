@@ -1,15 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { View, BackHandler } from 'react-native';
-import Stepper from 'components/shared/Stepper';
+import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
+
+import Stepper from 'components/shared/Stepper';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import Confirm from './confirm';
 import Success from './success';
 import SafeKeeping from './safeKeeping';
 import Intro from './intro';
 import styles from './styles';
+import { generatePassphrase } from '../utils';
 
-const Register = ({ route }) => {
+export default function Register({ route }) {
   const [showNav, setShowNav] = useState(true);
+
+  const passphrase = useMemo(
+    () => route.params?.passphrase ?? generatePassphrase(),
+    [route.params?.passphrase]
+  );
+
+  const navigation = useNavigation();
 
   const noNavStyle = showNav ? {} : { paddingBottom: 0 };
 
@@ -24,7 +35,14 @@ const Register = ({ route }) => {
     }
 
     return false;
-  }, []);
+  }, [route.params?.action]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: i18next.t('Account creation'),
+      headerLeft: (props) => <HeaderBackButton {...props} onPress={navigation.goBack} />,
+    });
+  }, [navigation]);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', onBackButtonPressedAndroid);
@@ -34,17 +52,31 @@ const Register = ({ route }) => {
   return (
     <View style={[styles.container, noNavStyle]}>
       <Stepper showProgressBar customProgressLength={3}>
-        <Intro title="create" group={i18next.t('1. Creating your account')} route={route} />
+        <Intro
+          passphrase={passphrase}
+          title="create"
+          group={i18next.t('1. Creating your account')}
+          route={route}
+        />
         <SafeKeeping
           title="safekeeping"
           group={i18next.t('2. Saving your passphrase')}
+          passphrase={passphrase}
           route={route}
         />
-        <Confirm title="verify" group={i18next.t('3. Verifying your passphrase')} route={route} />
-        <Success title="success" group={i18next.t('4. Security reminder')} hideNav={hideNav} />
+        <Confirm
+          title="verify"
+          group={i18next.t('3. Verifying your passphrase')}
+          passphrase={passphrase}
+          route={route}
+        />
+        <Success
+          title="success"
+          group={i18next.t('4. Security reminder')}
+          passphrase={passphrase}
+          hideNav={hideNav}
+        />
       </Stepper>
     </View>
   );
-};
-
-export default Register;
+}

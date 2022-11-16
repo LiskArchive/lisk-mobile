@@ -1,14 +1,15 @@
-/* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
-import { translate } from 'react-i18next';
+import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
+
+import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
-import withTheme from 'components/shared/withTheme';
 import { assembleWordOptions } from 'modules/Auth/utils';
+
 import getStyles from './styles';
 
 /**
@@ -41,8 +42,9 @@ const chooseRandomWords = (qty, words) => {
 };
 
 // eslint-disable-next-line max-statements
-const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHeader, styles }) => {
+export default function RegisterConfirm({ nextStep, passphrase, prevStep, customHeader }) {
   const navigation = useNavigation();
+
   const [buttonStatus, setButtonStatus] = useState(true);
   const [missing, setMissing] = useState([]);
   const [options, setOptions] = useState([]);
@@ -58,11 +60,15 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
   ]);
   const [visibleOptions, setVisibleOptions] = useState(-1);
 
+  const { styles } = useTheme({
+    styles: getStyles(),
+  });
+
   const generateTest = () => {
     const words = passphrase.match(/\w+/g);
-    const missing = chooseRandomWords(2, words);
-    setMissing(missing);
-    setOptions(assembleWordOptions(passphrase.split(' '), missing));
+    const _missing = chooseRandomWords(2, words);
+    setMissing(_missing);
+    setOptions(assembleWordOptions(passphrase.split(' '), _missing));
     setAnswers([
       {
         value: undefined,
@@ -85,10 +91,10 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
     setAnswers(temp);
   };
 
-  const checkAnswers = (answers) => {
+  const checkAnswers = (_answers) => {
     const phrase = passphrase.split(' ');
-    const start = answers.filter((item) => item.value).length;
-    const result = answers.filter((item) => phrase.includes(item.value)).length;
+    const start = _answers.filter((item) => item.value).length;
+    const result = _answers.filter((item) => phrase.includes(item.value)).length;
     const isCorrect = result === 2;
     if (start === 2) {
       if (!isCorrect) {
@@ -96,7 +102,7 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
           generateTest();
         }, 1000);
       }
-      const finalAnswers = answers.map((item) => ({
+      const finalAnswers = _answers.map((item) => ({
         value: item.value,
         style: styles.noBorderBottom,
         textStyle: isCorrect ? styles.labelCorrect : styles.labelIncorrect,
@@ -152,13 +158,15 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
   };
 
   useEffect(() => {
-    const { setOptions } = navigation;
-    setOptions({
+    navigation.setOptions({
       headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
-      title: deviceHeight() >= SCREEN_HEIGHTS.SM ? t('Passphrase verification') : t('Verification'),
+      title:
+        deviceHeight() >= SCREEN_HEIGHTS.SM
+          ? i18next.t('Passphrase verification')
+          : i18next.t('Verification'),
     });
     generateTest();
-  }, []);
+  }, [navigation]);
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
@@ -172,7 +180,7 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
         <View style={styles.body}>
           <View style={styles.box}>
             <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
-              {t('Tap and fill in the blanks:')}
+              {i18next.t('Tap and fill in the blanks:')}
             </P>
             <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
               {renderPassphrase()}
@@ -206,12 +214,11 @@ const Confirm = ({ t, nextStep, sharedData: { passphrase }, prevStep, customHead
             noTheme={true}
             style={styles.button}
             onClick={() => nextStep({ passphrase })}
-            title={t('Confirm')}
-          />
+          >
+            {i18next.t('Confirm')}
+          </PrimaryButton>
         </View>
       </View>
     </SafeAreaView>
   );
-};
-
-export default withTheme(translate()(Confirm), getStyles());
+}
