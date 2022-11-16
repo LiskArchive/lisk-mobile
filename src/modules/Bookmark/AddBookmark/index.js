@@ -161,7 +161,7 @@ export default function AddBookmark({ route }) {
               innerStyles={{
                 errorMessage: styles.errorMessage,
               }}
-              onChange={setAddress}
+              onChange={(value) => setAddress({ value })}
               value={address.value}
               error={setError(address.validity, 'address')}
               adornments={{

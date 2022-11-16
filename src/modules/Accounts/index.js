@@ -75,6 +75,7 @@ export default function Home() {
                 <P style={[styles.username, styles.theme.username]}>{username}</P>
                 <View>
                   <CopyToClipboard
+                    value={address}
                     labelStyle={[styles.address, styles.theme.address]}
                     label={stringShortener(address, 7, 6)}
                     iconColor={colors.light.platinumGray}
