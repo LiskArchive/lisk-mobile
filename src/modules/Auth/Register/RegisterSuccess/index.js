@@ -49,7 +49,7 @@ export default function RegisterSuccess({ hideNav }) {
               })
             }
           >
-            {i18next.t('Sign in now')}
+            {i18next.t('Continue to Add account')}
           </PrimaryButton>
         </View>
       </View>

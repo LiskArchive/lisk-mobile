@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
@@ -64,11 +64,14 @@ export default function RegisterConfirm({ nextStep, passphrase, prevStep, custom
     styles: getStyles(),
   });
 
-  const generateTest = () => {
+  const generateTest = useCallback(() => {
     const words = passphrase.match(/\w+/g);
     const _missing = chooseRandomWords(2, words);
+
     setMissing(_missing);
+
     setOptions(assembleWordOptions(passphrase.split(' '), _missing));
+
     setAnswers([
       {
         value: undefined,
@@ -81,7 +84,7 @@ export default function RegisterConfirm({ nextStep, passphrase, prevStep, custom
         textStyle: {},
       },
     ]);
-  };
+  }, [passphrase]);
 
   const toggleOptions = (index) => {
     const temp = [...answers];
@@ -166,7 +169,7 @@ export default function RegisterConfirm({ nextStep, passphrase, prevStep, custom
           : i18next.t('Verification'),
     });
     generateTest();
-  }, [navigation]);
+  }, [navigation, generateTest, prevStep]);
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>

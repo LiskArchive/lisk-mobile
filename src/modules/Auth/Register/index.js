@@ -5,12 +5,13 @@ import i18next from 'i18next';
 
 import Stepper from 'components/shared/Stepper';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import Confirm from './confirm';
-import Success from './success';
-import SafeKeeping from './safeKeeping';
-import Intro from './intro';
-import styles from './styles';
 import { generatePassphrase } from '../utils';
+
+import RegisterConfirm from './RegisterConfirm';
+import RegisterSuccess from './RegisterSuccess';
+import RegisterSafeKeeping from './RegisterSafeKeeping';
+import RegisterIntro from './RegisterIntro';
+import styles from './styles';
 
 export default function Register({ route }) {
   const [showNav, setShowNav] = useState(true);
@@ -52,25 +53,25 @@ export default function Register({ route }) {
   return (
     <View style={[styles.container, noNavStyle]}>
       <Stepper showProgressBar customProgressLength={3}>
-        <Intro
-          passphrase={passphrase}
+        <RegisterIntro
           title="create"
           group={i18next.t('1. Creating your account')}
+          passphrase={passphrase}
           route={route}
         />
-        <SafeKeeping
+        <RegisterSafeKeeping
           title="safekeeping"
           group={i18next.t('2. Saving your passphrase')}
           passphrase={passphrase}
           route={route}
         />
-        <Confirm
+        <RegisterConfirm
           title="verify"
           group={i18next.t('3. Verifying your passphrase')}
           passphrase={passphrase}
           route={route}
         />
-        <Success
+        <RegisterSuccess
           title="success"
           group={i18next.t('4. Security reminder')}
           passphrase={passphrase}
