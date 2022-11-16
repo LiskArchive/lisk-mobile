@@ -50,6 +50,9 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
             </TouchableOpacity>
           )}
 
+          {/* TODO: Replace {children} container with another VirtualizedList-backed container.
+          VirtualizedLists should never be nested inside plain ScrollViews with the 
+          same orientation because it can break windowing and other functionality.  */}
           <ScrollView style={[style?.children]}>{children}</ScrollView>
         </Animated.View>
       </View>
