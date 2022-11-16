@@ -81,5 +81,3 @@ export default function AccountList({
     </>
   );
 }
-
-// bubble shield flag other bamboo pave popular assist forget cost mail rude
