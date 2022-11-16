@@ -45,7 +45,7 @@ export default function RegisterSuccess({ hideNav }) {
             onClick={() =>
               navigation.reset({
                 index: 0,
-                routes: [{ name: 'AuthMethod' }],
+                routes: [{ name: 'AuthMethod', params: { authRequired: true } }],
               })
             }
           >

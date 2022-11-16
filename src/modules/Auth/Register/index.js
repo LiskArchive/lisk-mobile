@@ -74,7 +74,6 @@ export default function Register({ route }) {
         <RegisterSuccess
           title="success"
           group={i18next.t('4. Security reminder')}
-          passphrase={passphrase}
           hideNav={hideNav}
         />
       </Stepper>
