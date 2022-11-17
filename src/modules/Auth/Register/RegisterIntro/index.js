@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import i18next from 'i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import Slider from 'components/screens/intro/heading';
 import addressImg from 'assets/images/registrationIntro/address3x.png';
 import securePassphraseImg from 'assets/images/registrationIntro/securePassphrase3x.png';
@@ -35,7 +37,20 @@ const descriptionContent = [
   },
 ];
 
-export default function RegisterIntro({ nextStep }) {
+export default function RegisterIntro({ nextStep, setShowProgressBar }) {
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: null,
+      headerLeft: (props) => (
+        <HeaderBackButton {...props} onPress={() => navigation.navigate('AuthMethod')} />
+      ),
+    });
+
+    setShowProgressBar(false);
+  }, [navigation, setShowProgressBar]);
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <Slider

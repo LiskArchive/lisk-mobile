@@ -4,10 +4,9 @@ import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
-import { P } from 'components/shared/toolBox/typography';
+import { H4, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
 import { assembleWordOptions } from 'modules/Auth/utils';
 
 import getStyles from './styles';
@@ -162,12 +161,12 @@ export default function RegisterConfirm({ nextStep, passphrase, prevStep, custom
 
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: (props) => <HeaderBackButton {...props} onPress={prevStep} />,
-      title:
-        deviceHeight() >= SCREEN_HEIGHTS.SM
-          ? i18next.t('Passphrase verification')
-          : i18next.t('Verification'),
+      headerLeft: (props) => (
+        <HeaderBackButton {...props} onPress={prevStep} title={i18next.t('Create Account')} />
+      ),
+      title: null,
     });
+
     generateTest();
   }, [navigation, generateTest, prevStep]);
 
@@ -179,48 +178,50 @@ export default function RegisterConfirm({ nextStep, passphrase, prevStep, custom
           onPress={navigation.goBack}
         />
       )}
-      <View style={styles.container}>
-        <View style={styles.body}>
-          <View style={styles.box}>
-            <P style={[styles.passphraseTitle, styles.horizontalPadding]}>
-              {i18next.t('Tap and fill in the blanks:')}
-            </P>
-            <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
-              {renderPassphrase()}
-            </View>
-            <View
-              testID="passphraseOptionsContainer"
-              style={[styles.optionsContainer, styles.horizontalPadding]}
-            >
-              {options[visibleOptions] ? (
-                options[visibleOptions].map((value, idx) => (
-                  <Button
-                    noPredefinedStyle
-                    testID={`passphraseOptionFor-${value}`}
-                    style={styles.option}
-                    textStyle={[styles.label, styles.labelOption]}
-                    key={idx}
-                    title={value}
-                    onClick={() => fillOption(value)}
-                  />
-                ))
-              ) : (
-                <View style={styles.optionPlaceholder} />
-              )}
-            </View>
+
+      <View style={styles.body}>
+        <H4 style={styles.title}>{i18next.t('Passphrase verification')}</H4>
+
+        <P style={[styles.passphraseTitle]}>{i18next.t('Tap and fill in the blanks:')}</P>
+
+        <View style={styles.box}>
+          <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
+            {renderPassphrase()}
+          </View>
+
+          <View
+            testID="passphraseOptionsContainer"
+            style={[styles.optionsContainer, styles.horizontalPadding]}
+          >
+            {options[visibleOptions] ? (
+              options[visibleOptions].map((value, idx) => (
+                <Button
+                  noPredefinedStyle
+                  testID={`passphraseOptionFor-${value}`}
+                  style={styles.option}
+                  textStyle={[styles.label, styles.labelOption]}
+                  key={idx}
+                  title={value}
+                  onClick={() => fillOption(value)}
+                />
+              ))
+            ) : (
+              <View style={styles.optionPlaceholder} />
+            )}
           </View>
         </View>
-        <View style={[styles.buttonWrapper, styles.horizontalPadding]}>
-          <PrimaryButton
-            testID="registerConfirmButton"
-            disabled={buttonStatus}
-            noTheme={true}
-            style={styles.button}
-            onClick={() => nextStep({ passphrase })}
-          >
-            {i18next.t('Confirm')}
-          </PrimaryButton>
-        </View>
+      </View>
+
+      <View style={[styles.footer]}>
+        <PrimaryButton
+          testID="registerConfirmButton"
+          disabled={buttonStatus}
+          noTheme={true}
+          style={styles.button}
+          onClick={() => nextStep({ passphrase })}
+        >
+          {i18next.t('Confirm')}
+        </PrimaryButton>
       </View>
     </SafeAreaView>
   );

@@ -82,7 +82,6 @@ const styles = {
     paddingBottom: 20,
   },
   descriptionWrapper: {
-    paddingTop: 30,
     paddingBottom: boxes.boxPadding,
     paddingHorizontal: boxes.boxPadding,
     minHeight: 155,

@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { View, BackHandler } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import Stepper from 'components/shared/Stepper';
-import HeaderBackButton from 'components/navigation/headerBackButton';
 import { generatePassphrase } from '../utils';
 
 import RegisterConfirm from './RegisterConfirm';
@@ -20,8 +18,6 @@ export default function Register({ route }) {
     () => route.params?.passphrase ?? generatePassphrase(),
     [route.params?.passphrase]
   );
-
-  const navigation = useNavigation();
 
   const noNavStyle = showNav ? {} : { paddingBottom: 0 };
 
@@ -39,20 +35,13 @@ export default function Register({ route }) {
   }, [route.params?.action]);
 
   useEffect(() => {
-    navigation.setOptions({
-      title: i18next.t('Account creation'),
-      headerLeft: (props) => <HeaderBackButton {...props} onPress={navigation.goBack} />,
-    });
-  }, [navigation]);
-
-  useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', onBackButtonPressedAndroid);
     return () => BackHandler.removeEventListener('hardwareBackPress', onBackButtonPressedAndroid);
   }, [onBackButtonPressedAndroid]);
 
   return (
     <View style={[styles.container, noNavStyle]}>
-      <Stepper showProgressBar customProgressLength={3}>
+      <Stepper showProgressBar customProgressLength={3} styles={{ container: { marginTop: 16 } }}>
         <RegisterIntro
           title="create"
           group={i18next.t('1. Creating your account')}
@@ -61,7 +50,7 @@ export default function Register({ route }) {
         />
         <RegisterSafeKeeping
           title="safekeeping"
-          group={i18next.t('2. Saving your passphrase')}
+          group={i18next.t('Saving your passphrase')}
           passphrase={passphrase}
           route={route}
         />
