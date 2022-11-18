@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 import React, { useMemo, useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
@@ -21,6 +21,7 @@ import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
 import TokenRow from '../TokenRow';
 
 import getTokenListStyles from './styles';
+import TokenListTabs from './TokenListTabs';
 
 export default function TokenList({ mode = 'overview', style }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -40,11 +41,6 @@ export default function TokenList({ mode = 'overview', style }) {
     },
   });
 
-  const hasLockedTokens = useMemo(
-    () => tokensData?.data?.some((token) => token.lockedBalances) || false,
-    [tokensData?.data]
-  );
-
   const lockedTokens = useMemo(() => {
     const res = [];
     let amount = 0;
@@ -62,36 +58,27 @@ export default function TokenList({ mode = 'overview', style }) {
     return lockedTokens;
   }, [tokensData?.data]);
 
+  console.log({ tokensData, lockedTokens });
+
   const { styles } = useTheme({
     styles: getTokenListStyles(),
   });
 
+  const showViewAllButton =
+    mode === 'overview' && !errorOnTokens && !isLoadingTokens && tokensData?.data.length > 0;
+
   return (
     <View style={[styles.theme.container, style?.container]}>
       <View style={[styles.header, style?.header]}>
-        <View style={[styles.tabsContainer]}>
-          <TouchableOpacity
-            style={[styles.tabItem, activeTab === 0 && styles.theme.tabItemActive]}
-            onPress={() => setActiveTab(0)}
-          >
-            <P style={[styles.tabItemText, activeTab === 0 && styles.tabItemTextActive]}>
-              {i18next.t('accounts.tokens')}
-            </P>
-          </TouchableOpacity>
+        <TokenListTabs
+          tokens={tokensData?.data}
+          lockedTokens={lockedTokens}
+          activeTab={activeTab}
+          onTokensClick={() => setActiveTab(0)}
+          onLockedTokensClick={() => setActiveTab(1)}
+        />
 
-          {hasLockedTokens && (
-            <TouchableOpacity
-              style={[styles.tabItem, activeTab === 1 && styles.tabItemActive]}
-              onPress={() => setActiveTab(1)}
-            >
-              <P style={[styles.tabItemText, activeTab === 1 && styles.tabItemTextActive]}>
-                {i18next.t('accounts.lockedTokens')}
-              </P>
-            </TouchableOpacity>
-          )}
-        </View>
-
-        {mode === 'overview' && !errorOnTokens && !isLoadingTokens && (
+        {showViewAllButton && (
           <LabelButton
             onClick={() => navigation.navigate('Tokens')}
             style={[styles.labelButton]}
