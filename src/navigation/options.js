@@ -1,7 +1,6 @@
 import React from 'react';
 
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import HeaderPlaceholderButton from 'components/navigation/headerPlaceholderButton';
 import { navigationGenericTitleStyle, navigationNoShadowStyle } from './styles';
 
 const navigationOptions = {
@@ -34,8 +33,7 @@ const navigationOptions = {
     header: () => null,
   },
   Register: {
-    title: 'Account creation',
-    headerRight: () => <HeaderPlaceholderButton />,
+    title: null,
     headerStyle: navigationNoShadowStyle,
     headerTitleStyle: navigationGenericTitleStyle,
   },

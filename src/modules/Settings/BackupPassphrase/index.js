@@ -4,7 +4,7 @@ import Stepper from 'components/shared/Stepper';
 import PassphraseBackup from 'components/screens/passphraseBackup';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import { useCurrentAccount, useAccountInfo } from 'modules/Accounts/hooks/useAccounts';
-import Confirm from 'modules/Auth/Register/confirm';
+import RegisterConfirm from 'modules/Auth/Register/RegisterConfirm';
 import PasswordSetupSuccess from 'modules/Auth/PasswordSetupSuccess';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import withTheme from 'components/shared/withTheme';
@@ -28,7 +28,7 @@ const BackupPassphrase = ({ styles }) => {
           }}
         />
         <PassphraseBackup />
-        <Confirm customHeader />
+        <RegisterConfirm customHeader />
         <PasswordSetupSuccess encryptedJson={account} onContinue={navigation.goBack} />
       </Stepper>
     </SafeAreaView>

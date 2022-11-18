@@ -8,18 +8,20 @@ const styles = {
   wrapper: {
     flex: 1,
   },
-  container: {
-    flexDirection: 'column',
-    flex: 1,
-    justifyContent: 'space-between',
-  },
   body: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    padding: boxes.boxPadding,
+  },
+  title: {
+    textAlign: 'center',
+    marginBottom: 8,
   },
   passphraseTitle: {
     color: colors.light.blueGray,
     fontSize: isSmallScreen ? 14 : 16,
+    textAlign: 'center',
+    marginBottom: 24,
   },
   passphraseContainer: {
     justifyContent: 'space-between',

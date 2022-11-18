@@ -3,20 +3,17 @@
     "secret_recovery_phrase": "Secret recovery phrase",
     "buttons": {
       "continue": "Continue",
-      "cancel": "Cancel"
-    }
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    },
+    "copyToClipboard": "Copy to clipboard"
   },
   "Sign in manually": "Sign in manually",
   "Signing in...": "Signing in...",
-  "1. Creating your account": "1. Creating your account",
-  "2. Saving your passphrase": "2. Saving your passphrase",
-  "3. Verifying your passphrase": "3. Verifying your passphrase",
-  "4. Security reminder": "4. Security reminder",
   "A secure passphrase": "A secure passphrase",
   "A unique avatar": "A unique avatar",
   "Access all functions of the app quickly and securely via advanced biometric authentication.": "Access all functions of the app quickly and securely via advanced biometric authentication.",
   "Account address": "Account address",
-  "Account creation": "Account creation",
   "Account initialization": "Account initialization",
   "Activity": "Activity",
   "Add a reference": "Add a reference",
@@ -39,10 +36,7 @@
   "Carefully write it down or copy to the clipboard.": "Carefully write it down or copy to the clipboard.",
   "Choose the correct option for missing words:": "Choose the correct option for missing words:",
   "Close": "Close",
-  "Confirm": "Confirm",
   "Confirmations": "Confirmations",
-  "Continue": "Continue",
-  "Copy to clipboard": "Copy to clipboard",
   "Copyright": "Copyright",
   "Couldn’t recognize the address or label. Please make sure it’s correct.": "Couldn’t recognize the address or label. Please make sure it’s correct.",
   "Delegate username": "Delegate username",
@@ -55,8 +49,6 @@
   "Here’s what you need to know:": "Here’s what you need to know:",
   "Here’s what you will get:": "Here’s what you will get:",
   "I have read and agreed with the": "I have read and agreed with the",
-  "I understand that it’s my responsibility to keep my passphrase safe.": "I understand that its my responsibility to keep my passphrase safe.",
-  "I wrote it down": "I wrote it down",
   "Initialize now": "Initialize now",
   "Initialize your account": "Initialize your account",
   "Initialize your account immediately after you received tokens for the first time.": "Initialize your account immediately after you received tokens for the first time.",
@@ -76,10 +68,8 @@
   "No internet connection!": "No internet connection!",
   "Not confirmed yet.": "Not confirmed yet.",
   "Optional: add a label to save this address for the future.": "Optional: add a label to save this address for the future.",
-  "Passphrase verification": "Passphrase verification",
   "Passphrase will be the only option to access your account.": "Passphrase will be the only option to access your account.",
   "Pending confirmation": "Pending confirmation",
-  "Perfect! You’re all set": "Perfect! You’re all set",
   "Permission to use camera": "Permission to use camera",
   "Please enter an address.": "Please enter an address.",
   "Please enter an amount.": "Please enter an amount.",
@@ -115,7 +105,6 @@
   "Sent": "Sent",
   "Share": "Share",
   "Sign in": "Sign in",
-  "Sign in now": "Sign in now",
   "Sign out": "Sign out",
   "Store your passphrase:": "Store your passphrase:",
   "Tap on the QR Code to share it.": "Tap on the QR Code to share it.",
@@ -209,8 +198,6 @@
   "Add Message (optional)": "Add Message (optional)",
   "Processing fee": "Processing fee",
   "Remind me later": "Remind me later",
-  "Store your passphrase carefully": "Store your passphrase carefully",
-  "Tap and fill in the blanks:": "Tap and fill in the blanks:",
   "Available Balance": "Available Balance",
   "Activity history": "Activity history",
   "Token transfer": "Token transfer",
@@ -304,6 +291,32 @@
     }
   },
   "auth": {
+    "register" : {
+      "title": "Create account",
+      "intro" : {
+        "addressTitle": "Your Lisk address",
+        "addressDescription": "The address is unique and can’t be changed. It’s yours. Find it in your home page.",
+        "avatarTitle": "A unique avatar",
+        "avatarDescription": "The Avatar represents the address, making it easy to recognize.",
+        "passphraseTitle": "A secure passphrase",
+        "passphraseDescription": "Your passphrase is used to access your account. No one can reset it, not even Lisk."
+      },
+      "safeKeeping": {
+        "title": "Saving your passphrase",
+        "description": "Store your passphrase carefully",
+        "understandResponsibilityDescription": "I understand that it’s my responsibility to keep my passphrase safe.",
+        "continueButtonText": "I wrote it down"
+      },
+      "confirm": {
+        "title": "Passphrase verification",
+        "description": "Tap and fill in the blanks:"
+      },
+      "success": {
+        "title": "Perfect! You’re all set",
+        "description": "Great! now you can use your passphrase to sign in to your account.",
+        "continueButtonText": "Continue to Add account"
+      }
+    },
     "setup": {
       "add_account": "Add account",
       "switchAccount": "Switch account",

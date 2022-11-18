@@ -74,10 +74,9 @@ export default function AccountList({
       />
 
       <View style={[style?.footer]}>
-        <PrimaryButton
-          onPress={() => navigation.navigate('AuthMethod')}
-          title={i18next.t('accounts.accountsManager.addAccountButtonText')}
-        />
+        <PrimaryButton onClick={() => navigation.navigate('AuthMethod')}>
+          {i18next.t('accounts.accountsManager.addAccountButtonText')}
+        </PrimaryButton>
       </View>
     </>
   );
