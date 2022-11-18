@@ -19,10 +19,18 @@ export default function getTokenListStyles() {
         marginRight: 8,
         borderRadius: 20,
       },
+      tabSingleItemText: {
+        fontWeight: '500',
+        fontSize: 14,
+      },
+      tabItemText: {
+        color: colors.light.blueGray,
+        fontSize: 14,
+      },
       tabItemTextActive: {
         color: colors.light.ultramarineBlue,
         fontFamily: fonts.family.contextSemiBold,
-        fontSize: 12,
+        fontSize: 14,
       },
       labelButton: {
         display: 'flex',

@@ -8,7 +8,6 @@ import { P } from 'components/shared/toolBox/typography';
 import getTokenListStyles from './styles';
 
 export default function TokenListTabs({
-  // tokens,
   lockedTokens,
   activeTab,
   onTokensClick,
@@ -20,18 +19,22 @@ export default function TokenListTabs({
 
   return (
     <View style={[styles.tabsContainer]}>
-      <TouchableOpacity
-        style={[styles.tabItem, activeTab === 0 && styles.theme.tabItemActive]}
-        onPress={onTokensClick}
-      >
-        <P style={[styles.tabItemText, activeTab === 0 && styles.tabItemTextActive]}>
-          {i18next.t('accounts.tokens')}
-        </P>
-      </TouchableOpacity>
-
-      {!!lockedTokens && (
+      {lockedTokens ? (
         <TouchableOpacity
-          style={[styles.tabItem, activeTab === 1 && styles.tabItemActive]}
+          style={[styles.tabItem, activeTab === 0 && styles.theme.tabItemActive]}
+          onPress={onTokensClick}
+        >
+          <P style={[styles.tabItemText, activeTab === 0 && styles.tabItemTextActive]}>
+            {i18next.t('accounts.tokens')}
+          </P>
+        </TouchableOpacity>
+      ) : (
+        <P style={[styles.tabSingleItemText]}>{i18next.t('accounts.tokens')}</P>
+      )}
+
+      {lockedTokens && (
+        <TouchableOpacity
+          style={[styles.tabItem, activeTab === 1 && styles.theme.tabItemActive]}
           onPress={onLockedTokensClick}
         >
           <P style={[styles.tabItemText, activeTab === 1 && styles.tabItemTextActive]}>

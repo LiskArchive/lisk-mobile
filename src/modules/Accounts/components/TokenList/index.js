@@ -20,8 +20,8 @@ import { LIMIT } from 'utilities/api/constants';
 import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
 import TokenRow from '../TokenRow';
 
-import getTokenListStyles from './styles';
 import TokenListTabs from './TokenListTabs';
+import getTokenListStyles from './styles';
 
 export default function TokenList({ mode = 'overview', style }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -58,8 +58,6 @@ export default function TokenList({ mode = 'overview', style }) {
     return lockedTokens;
   }, [tokensData?.data]);
 
-  console.log({ tokensData, lockedTokens });
-
   const { styles } = useTheme({
     styles: getTokenListStyles(),
   });
@@ -71,7 +69,6 @@ export default function TokenList({ mode = 'overview', style }) {
     <View style={[styles.theme.container, style?.container]}>
       <View style={[styles.header, style?.header]}>
         <TokenListTabs
-          tokens={tokensData?.data}
           lockedTokens={lockedTokens}
           activeTab={activeTab}
           onTokensClick={() => setActiveTab(0)}
