@@ -14,24 +14,22 @@ import styles from './styles';
 const descriptionContent = [
   {
     step: 1,
-    title: 'Your Lisk address',
-    description:
-      'The address is unique and can’t be changed. It’s yours. Find it in your home page.',
+    title: i18next.t('auth.register.intro.addressTitle'),
+    description: i18next.t('auth.register.intro.addressDescription'),
     imageSrc: addressImg,
     imageStyle: styles.sliderImage,
   },
   {
     step: 2,
-    title: 'A unique avatar',
-    description: 'The Avatar represents the address, making it easy to recognize.',
+    title: i18next.t('auth.register.intro.avatarTitle'),
+    description: i18next.t('auth.register.intro.avatarDescription'),
     imageSrc: uniqueAvatarImg,
     imageStyle: styles.sliderImage,
   },
   {
     step: 3,
-    title: 'A secure passphrase',
-    description:
-      'Your passphrase is used to access your account. No one can reset it, not even Lisk.',
+    title: i18next.t('auth.register.intro.passphraseTitle'),
+    description: i18next.t('auth.register.intro.passphraseDescription'),
     imageSrc: securePassphraseImg,
     imageStyle: styles.sliderImage,
   },

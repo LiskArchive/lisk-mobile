@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { View, BackHandler } from 'react-native';
-import i18next from 'i18next';
 
 import Stepper from 'components/shared/Stepper';
 import { generatePassphrase } from '../utils';
@@ -42,29 +41,13 @@ export default function Register({ route }) {
   return (
     <View style={[styles.container, noNavStyle]}>
       <Stepper showProgressBar customProgressLength={3} styles={{ container: { marginTop: 16 } }}>
-        <RegisterIntro
-          title="create"
-          group={i18next.t('1. Creating your account')}
-          passphrase={passphrase}
-          route={route}
-        />
-        <RegisterSafeKeeping
-          title="safekeeping"
-          group={i18next.t('Saving your passphrase')}
-          passphrase={passphrase}
-          route={route}
-        />
-        <RegisterConfirm
-          title="verify"
-          group={i18next.t('3. Verifying your passphrase')}
-          passphrase={passphrase}
-          route={route}
-        />
-        <RegisterSuccess
-          title="success"
-          group={i18next.t('4. Security reminder')}
-          hideNav={hideNav}
-        />
+        <RegisterIntro title="create" passphrase={passphrase} route={route} />
+
+        <RegisterSafeKeeping title="safekeeping" passphrase={passphrase} route={route} />
+
+        <RegisterConfirm title="verify" passphrase={passphrase} route={route} />
+
+        <RegisterSuccess title="success" hideNav={hideNav} />
       </Stepper>
     </View>
   );

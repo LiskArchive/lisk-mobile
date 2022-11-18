@@ -17,7 +17,7 @@ export default function RegisterSuccess({ hideNav }) {
     hideNav();
 
     navigation.setOptions({
-      headerLeft: () => <HeaderBackButton noIcon title={i18next.t('Create Account')} />,
+      headerLeft: () => <HeaderBackButton noIcon title={i18next.t('auth.register.title')} />,
       title: null,
     });
   }, [navigation, hideNav]);
@@ -26,11 +26,9 @@ export default function RegisterSuccess({ hideNav }) {
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.body}>
         <View style={styles.titleContainer}>
-          <H4 style={styles.title}>{i18next.t('Perfect! You’re all set')}</H4>
+          <H4 style={styles.title}>{i18next.t('auth.register.success.title')}</H4>
 
-          <P style={styles.subTitle}>
-            {i18next.t('Great! now you can use your passphrase to sign in to your account.')}
-          </P>
+          <P style={styles.subTitle}>{i18next.t('auth.register.description')}</P>
         </View>
 
         <View style={styles.imageContainer}>
@@ -49,7 +47,7 @@ export default function RegisterSuccess({ hideNav }) {
             })
           }
         >
-          {i18next.t('Continue to Add account')}
+          {i18next.t('auth.register.success.continueButtonText')}
         </PrimaryButton>
       </View>
     </SafeAreaView>

@@ -1,17 +1,16 @@
 {
   "commons": {
-    "secret_recovery_phrase": "",
+    "secret_recovery_phrase": "Geheime Wiederherstellungsphrase",
     "buttons": {
-      "continue": "",
-      "cancel": ""
-    }
+      "continue": "Weiter",
+      "cancel": "Absagen",
+      "confirm": "Bestätigen"
+    },
+    "copyToClipboard": "In die Zwischenablage kopieren"
   },
   "Sign in manually": "Manuell anmelden",
   "Signing in...": "Anmelden...",
   "1. Creating your account": "1. Konto wird erstellt",
-  "Saving your passphrase": "2. Passphrase wird gespeichert",
-  "3. Verifying your passphrase": "3. Passphrase wird bestätigt",
-  "4. Security reminder": "4. Sicherheitserinnerung",
   "A secure passphrase": "Sichere Passphrase",
   "A unique avatar": "Ein einzigartiger Avatar",
   "Access all functions of the app quickly and securely via advanced biometric authentication.": "Erhalte schnellen und sicheren Zugriff auf alle App-Funktionen durch biometrische Authentifizierung.",
@@ -39,10 +38,7 @@
   "Carefully write it down or copy to the clipboard.": "Notiere ihn/ es dir oder kopiere ihn/ es dir in die Zwischenablage.  In Zwischenablage kopieren",
   "Choose the correct option for missing words:": "Wähle die richtigen Worte aus den Optionen:",
   "Close": "Schließen",
-  "Confirm": "Bestätigen",
   "Confirmations": "Bestätigungen",
-  "Continue": "Weiter",
-  "Copy to clipboard": "In Zwischenablage kopieren",
   "Copyright": "Copyright",
   "Couldn’t recognize the address or label. Please make sure it’s correct.": "Die Adresse oder Bezeichnung konnte nicht erkannt werden. Bitte überprüfe sie.",
   "Delegate username": "Spitzname des Delegierter",
@@ -55,8 +51,6 @@
   "Here’s what you need to know:": "Hier ist was du wissen musst:",
   "Here’s what you will get:": "Das wirst du erhalten:",
   "I have read and agreed with the": "Ich akzeptiere die",
-  "I understand that it’s my responsibility to keep my passphrase safe.": "Ich verstehe, dass es in meiner Verantwortung liegt, die Passphrase sicher aufzubewahren.",
-  "I wrote it down": "Ich habe sie aufgeschrieben",
   "Initialize now": "Jetzt initialisieren",
   "Initialize your account": "Dein Konto initialisieren",
   "Initialize your account immediately after you received tokens for the first time.": "Initialisiere dein Konto sofort nachdem du deine ersten Tokens erhalten hast.",
@@ -76,10 +70,8 @@
   "No internet connection!": "Keine Internetverbindung!",
   "Not confirmed yet.": "Noch nicht bestätigt.",
   "Optional: add a label to save this address for the future.": "Optional: Bezeichnung hinzufügen, um diese Adresse zu speichern.",
-  "Passphrase verification": "Passphrase bestätigen",
   "Passphrase will be the only option to access your account.": "Deine Passphrase ist unerlässlich, um auf dein Account zuzugreifen.",
   "Pending confirmation": "Bevorstehende Bestätigung",
-  "Perfect! You’re all set": "Perfekt!",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
   "Please enter an address.": "Bitte Adresse eingeben.",
   "Please enter an amount.": "Bitte Betrag eingeben.",
@@ -115,7 +107,6 @@
   "Sent": "Gesendet",
   "Share": "Teilen",
   "Sign in": "Anmelden",
-  "Continue to Add account": "Jetzt anmelden",
   "Sign out": "Abmelden",
   "Store your passphrase:": "Speichere deine Passphrase:",
   "Tap on the QR Code to share it.": "Tippe auf den QR-Code um ihn zu teilen",
@@ -209,8 +200,6 @@
   "Add Message (optional)": "",
   "Processing fee": "Verarbeitungsgeschwindigkeit",
   "Remind me later": "Erinnere mich später",
-  "Store your passphrase carefully": "Bewahre deine Passphrase sicher auf",
-  "Tap and fill in the blanks:": "Tippe, um die Lücken zu füllen:",
   "Available Balance": "Dein Kontobetrag",
   "Activity history": "Aktivitäts Historie",
   "Token transfer": "Token Transfer",
@@ -304,33 +293,59 @@
     }
   },
   "auth": {
+    "register" : {
+      "title": "Konto erstellen",
+      "intro" : {
+        "addressTitle": "Ihre Lisk-Adresse",
+        "addressDescription": "Die Adresse ist einmalig und kann nicht geändert werden. Es ist deins. Finden Sie es auf Ihrer Homepage.",
+        "avatarTitle": "Ein einzigartiger Avatar",
+        "avatarDescription": "Der Avatar stellt die Adresse dar, wodurch sie leicht zu erkennen ist.",
+        "passphraseTitle": "Eine sichere Passphrase",
+        "passphraseDescription": "Ihre Passphrase wird für den Zugriff auf Ihr Konto verwendet. Niemand kann es zurücksetzen, nicht einmal Lisk."
+      },
+      "safeKeeping": {
+        "title": "Speichern Sie Ihre Passphrase",
+        "description": "Bewahren Sie Ihre Passphrase sorgfältig auf",
+        "understandResponsibilityDescription": "Ich verstehe, dass es in meiner Verantwortung liegt, meine Passphrase sicher aufzubewahren.",
+        "continueButtonText": "Ich habe es aufgeschrieben"
+      },
+      "confirm": {
+        "title": "Überprüfung der Passphrase",
+        "description": "Tippen Sie auf und füllen Sie die Lücken aus:"
+      },
+      "success": {
+        "title": "Perfekt!",
+        "description": "Groß! Jetzt können Sie sich mit Ihrer Passphrase bei Ihrem Konto anmelden.",
+        "continueButtonText": "Weiter zu Konto hinzufügen"
+      }
+    },
     "setup": {
-      "add_account": "",
-      "switchAccount": "",
-      "decryptPassphrase": "",
-      "decryptPassphraseError": "",
-      "addAccountDescription": "",
-      "secret_phrase": "",
-      "restore_file": "",
-      "passwordSetupTitle": "",
-      "passwordSetupDescription": "",
-      "passwordSetupSuccessTitle": "",
-      "passwordSetupSuccessDescription": "",
-      "downloaded": "",
+      "add_account": "Konto hinzufügen",
+      "switchAccount": "Benutzer wechseln",
+      "decryptPassphrase": "Entschlüsseln Sie Ihre geheime Wiederherstellungsphrase",
+      "decryptPassphraseError": "Konto kann nicht entschlüsselt werden. Bitte überprüfen Sie Ihr Passwort",
+      "addAccountDescription": "Geben Sie Ihre geheime Wiederherstellungsphrase ein, um Ihr Konto zu verwalten",
+      "passwordSetupTitle": "Gerätekennwort einrichten",
+      "passwordSetupDescription": "Dieses Passwort wird verwendet, um Ihre geheime Wiederherstellungsphrase zu verschlüsseln, die für die Verwaltung Ihres Kontos verwendet wird.",
+      "passwordSetupSuccessTitle": "Perfekt!",
+      "passwordSetupSuccessDescription": "Sie können jetzt verschlüsselte geheime Wiederherstellungsphrasen herunterladen.",
+      "secret_phrase": "Geheime Wiederherstellungsphrase",
+      "restore_file": "Aus Datei wiederherstellen",
+      "downloaded": "Heruntergeladen!",
       "buttons": {
-        "passwordSetupContinue": "",
-        "saveAccount": "",
-        "download": ""
+        "passwordSetupContinue": "Weiter zu Dashboard",
+        "saveAccount": "Konto speichern",
+        "download": "Heruntergeladen"
       }
     },
     "form": {
-      "enterPassword": "",
-      "confirmPassword": "",
-      "accountName": "",
-      "passwordSetupContinue": "",
+      "enterPassword": "Passwort eingeben",
+      "confirmPassword": "Bestätigen Sie Ihr Passwort",
+      "accountName": "Kontoname (optional)",
+      "passwordSetupContinue": "Weiter zu Dashboard",
       "errors": {
-        "passwordError": "",
-        "confirmPasswordError": ""
+        "passwordError": "Das Passwort muss 8 Zeichen enthalten, einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen",
+        "confirmPasswordError": "Bestätigen Sie, dass die Passwörter übereinstimmen"
       }
     }
   },

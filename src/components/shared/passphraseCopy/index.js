@@ -16,7 +16,7 @@ const PassphraseCopy = ({ styles, passphrase, t }) => (
       style={styles.copyContainer}
       labelStyle={[styles.copy, styles.theme.copy]}
       iconStyle={styles.theme.copy}
-      label={t('Copy to clipboard')}
+      label={t('commons.copyToClipboard')}
       showIcon={true}
       iconSize={14}
       value={passphrase}

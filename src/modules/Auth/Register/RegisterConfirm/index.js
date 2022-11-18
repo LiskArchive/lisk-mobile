@@ -162,7 +162,7 @@ export default function RegisterConfirm({ nextStep, passphrase, prevStep, custom
   useEffect(() => {
     navigation.setOptions({
       headerLeft: (props) => (
-        <HeaderBackButton {...props} onPress={prevStep} title={i18next.t('Create Account')} />
+        <HeaderBackButton {...props} onPress={prevStep} title={i18next.t('auth.register.title')} />
       ),
       title: null,
     });
@@ -180,9 +180,9 @@ export default function RegisterConfirm({ nextStep, passphrase, prevStep, custom
       )}
 
       <View style={styles.body}>
-        <H4 style={styles.title}>{i18next.t('Passphrase verification')}</H4>
+        <H4 style={styles.title}>{i18next.t('auth.register.confirm.title')}</H4>
 
-        <P style={[styles.passphraseTitle]}>{i18next.t('Tap and fill in the blanks:')}</P>
+        <P style={[styles.passphraseTitle]}>{i18next.t('auth.register.confirm.description')}</P>
 
         <View style={styles.box}>
           <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
@@ -220,7 +220,7 @@ export default function RegisterConfirm({ nextStep, passphrase, prevStep, custom
           style={styles.button}
           onClick={() => nextStep({ passphrase })}
         >
-          {i18next.t('Confirm')}
+          {i18next.t('commons.buttons.confirm')}
         </PrimaryButton>
       </View>
     </SafeAreaView>

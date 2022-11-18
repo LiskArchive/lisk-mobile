@@ -25,7 +25,7 @@ export default function RegisterSafeKeeping({
   useEffect(() => {
     navigation.setOptions({
       headerLeft: (props) => (
-        <HeaderBackButton {...props} onPress={prevStep} title={i18next.t('Create Account')} />
+        <HeaderBackButton {...props} onPress={prevStep} title={i18next.t('auth.register.title')} />
       ),
       title: null,
     });
@@ -38,9 +38,9 @@ export default function RegisterSafeKeeping({
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.body}>
-        <H4 style={styles.title}>{i18next.t('Saving your passphrase')}</H4>
+        <H4 style={styles.title}>{i18next.t('auth.register.safeKeeping.title')}</H4>
 
-        <P style={styles.passphraseTitle}>{i18next.t('Store your passphrase carefully')}</P>
+        <P style={styles.passphraseTitle}>{i18next.t('auth.register.safeKeeping.description')}</P>
 
         <View style={styles.passphraseContainer}>
           <Text style={styles.passphrase} testID="passphraseText">
@@ -51,7 +51,7 @@ export default function RegisterSafeKeeping({
             style={styles.copyContainer}
             labelStyle={styles.copy}
             iconStyle={styles.copy}
-            label={i18next.t('Copy to clipboard')}
+            label={i18next.t('commons.copyToClipboard')}
             showIcon={true}
             iconSize={14}
             value={passphrase}
@@ -72,7 +72,7 @@ export default function RegisterSafeKeeping({
           />
 
           <P style={styles.confirmText}>
-            {i18next.t('I understand that it’s my responsibility to keep my passphrase safe.')}
+            {i18next.t('auth.register.safeKeeping.understandResponsibilityDescription')}
           </P>
         </View>
 
@@ -84,7 +84,7 @@ export default function RegisterSafeKeeping({
             noTheme={true}
             onClick={nextStep}
           >
-            {i18next.t('I wrote it down')}
+            {i18next.t('auth.register.safeKeeping.continueButtonText')}
           </PrimaryButton>
         </View>
       </View>
