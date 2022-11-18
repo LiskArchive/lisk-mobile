@@ -14,7 +14,6 @@
   "A unique avatar": "A unique avatar",
   "Access all functions of the app quickly and securely via advanced biometric authentication.": "Access all functions of the app quickly and securely via advanced biometric authentication.",
   "Account address": "Account address",
-  "Create account": "Create account",
   "Account initialization": "Account initialization",
   "Activity": "Activity",
   "Add a reference": "Add a reference",
@@ -293,7 +292,7 @@
   },
   "auth": {
     "register" : {
-      "title": "Create Account",
+      "title": "Create account",
       "intro" : {
         "addressTitle": "Your Lisk address",
         "addressDescription": "The address is unique and can’t be changed. It’s yours. Find it in your home page.",
