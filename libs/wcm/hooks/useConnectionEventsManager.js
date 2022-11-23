@@ -10,10 +10,12 @@ const useWalletConnectEventsManager = () => {
     const request = signClient.session.get(event.topic);
 
     setSession({ ...session, request });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSessionDelete = useCallback((event) => {
     disconnect(event.topic);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const eventHandler = useCallback((name, meta) => {
@@ -24,6 +26,7 @@ const useWalletConnectEventsManager = () => {
     } else if (name === EVENTS.SESSION_REQUEST) {
       onSessionRequest(meta);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -31,7 +34,11 @@ const useWalletConnectEventsManager = () => {
       Object.keys(EVENTS).forEach((eventName) => {
         signClient.on(EVENTS[eventName], eventHandler.bind(null, EVENTS[eventName]));
       });
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('There was an error initializing the Wallet Connect client');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onSessionRequest, onSessionDelete, eventHandler, signClient?.on]);
 };
 

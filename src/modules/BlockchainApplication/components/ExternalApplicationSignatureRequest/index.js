@@ -8,22 +8,23 @@ import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransa
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
-import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
-import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
-import useSession from '../../../../../libs/wcm/hooks/useSession';
+import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
+import { EVENTS, STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
+import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 
 import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSummary';
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
 import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRequestSignTransaction';
 
 export default function ExternalApplicationSignatureRequest({ session, onCancel }) {
+  const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
 
   const [currentAccount] = useCurrentAccount();
 
-  const { respond, isRespondLoading, errorOnRespond, isRespondSuccess } = useSession();
+  const { respond } = useWalletConnectSession();
 
-  const { events } = useContext(ConnectionContext);
+  const { events } = useContext(WalletConnectContext);
 
   const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
 
@@ -37,6 +38,18 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
   const transaction = useCreateTransaction(createTransactionOptions);
 
   const senderAccountAddress = extractAddressFromPublicKey(session.peer.publicKey);
+
+  const handleRespond = async (payload) => {
+    setStatus({ ...session, isLoading: true });
+
+    const response = await respond({ payload });
+
+    if (response.status === STATUS.FAILURE) {
+      setStatus({ ...response, error: new Error(response.message) });
+    } else if (response.status === STATUS.SUCCESS) {
+      setStatus({ ...response, isSuccess: true });
+    }
+  };
 
   const handleSubmit = async (password) => {
     let privateKey;
@@ -62,7 +75,7 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
             )
           );
 
-        respond({ payload: encodedTransaction });
+        handleRespond(encodedTransaction);
       } catch (error) {
         DropDownHolder.error(
           i18next.t('Error'),
@@ -89,7 +102,7 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
         return (
           <ExternalAppSignatureRequestSummary
             session={session}
-            transaction={_transaction}
+            transaction={_transaction.transaction}
             recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
             onCancel={() => setActiveStep('notification')}
             onSubmit={() => setActiveStep('sign')}
@@ -103,9 +116,9 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
             transaction={_transaction}
             recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
             onSubmit={handleSubmit}
-            isLoading={isRespondLoading}
-            isSuccess={isRespondSuccess}
-            error={errorOnRespond}
+            isSuccess={status.isSuccess}
+            isLoading={status.isLoading}
+            error={status.error}
           />
         );
 
@@ -116,7 +129,7 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
 
   return (
     <DataRenderer
-      data={transaction.data?.transaction}
+      data={transaction.data}
       isLoading={transaction.isLoading}
       error={transaction.isError}
       renderData={(data) => renderStep(data)}

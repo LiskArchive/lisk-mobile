@@ -16,7 +16,8 @@ export function useApplicationsStorage(storageKey) {
 
       setStatus('idle');
 
-      applications = cachedApplicationsJSON != null ? JSON.parse(cachedApplicationsJSON) : null;
+      applications =
+        cachedApplicationsJSON != null ? JSON.parse(cachedApplicationsJSON) : undefined;
 
       return applications;
     } catch (_error) {

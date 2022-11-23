@@ -1,15 +1,22 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { View, BackHandler } from 'react-native';
+
 import Stepper from 'components/shared/Stepper';
-import i18next from 'i18next';
-import Confirm from './confirm';
-import Success from './success';
-import SafeKeeping from './safeKeeping';
-import Intro from './intro';
+import { generatePassphrase } from '../utils';
+
+import RegisterConfirm from './RegisterConfirm';
+import RegisterSuccess from './RegisterSuccess';
+import RegisterSafeKeeping from './RegisterSafeKeeping';
+import RegisterIntro from './RegisterIntro';
 import styles from './styles';
 
-const Register = ({ route }) => {
+export default function Register({ route }) {
   const [showNav, setShowNav] = useState(true);
+
+  const passphrase = useMemo(
+    () => route.params?.passphrase ?? generatePassphrase(),
+    [route.params?.passphrase]
+  );
 
   const noNavStyle = showNav ? {} : { paddingBottom: 0 };
 
@@ -24,7 +31,7 @@ const Register = ({ route }) => {
     }
 
     return false;
-  }, []);
+  }, [route.params?.action]);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', onBackButtonPressedAndroid);
@@ -33,18 +40,15 @@ const Register = ({ route }) => {
 
   return (
     <View style={[styles.container, noNavStyle]}>
-      <Stepper showProgressBar customProgressLength={3}>
-        <Intro title="create" group={i18next.t('1. Creating your account')} route={route} />
-        <SafeKeeping
-          title="safekeeping"
-          group={i18next.t('2. Saving your passphrase')}
-          route={route}
-        />
-        <Confirm title="verify" group={i18next.t('3. Verifying your passphrase')} route={route} />
-        <Success title="success" group={i18next.t('4. Security reminder')} hideNav={hideNav} />
+      <Stepper showProgressBar customProgressLength={3} styles={{ container: { marginTop: 16 } }}>
+        <RegisterIntro title="create" passphrase={passphrase} route={route} />
+
+        <RegisterSafeKeeping title="safekeeping" passphrase={passphrase} route={route} />
+
+        <RegisterConfirm title="verify" passphrase={passphrase} route={route} />
+
+        <RegisterSuccess title="success" hideNav={hideNav} />
       </Stepper>
     </View>
   );
-};
-
-export default Register;
+}

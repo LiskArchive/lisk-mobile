@@ -11,19 +11,13 @@ import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ResultScreen from 'components/screens/ResultScreen';
 
 import { View } from 'react-native';
-import getBlockchainApplicationsListStyles from './styles';
+import getApplicationListStyles from './styles';
 
-export default function BlockchainApplicationList({
-  applications,
-  Component,
-  onItemPress,
-  style,
-  ...props
-}) {
+export default function ApplicationList({ applications, Component, onItemPress, style, ...props }) {
   const navigation = useNavigation();
 
   const { styles } = useTheme({
-    styles: getBlockchainApplicationsListStyles(),
+    styles: getApplicationListStyles(),
   });
 
   return (

@@ -1,16 +1,18 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'constants/styleGuide';
+import { colors, boxes } from 'constants/styleGuide';
 
 const styles = {
   wrapper: {
     flex: 1,
   },
-  container: {
-    flexDirection: 'column',
-    marginRight: 20,
-    marginLeft: 20,
+  body: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    padding: boxes.boxPadding,
+  },
+  title: {
+    textAlign: 'center',
+    marginBottom: 8,
   },
   header: {
     marginTop: 8,
@@ -29,8 +31,8 @@ const styles = {
     width: 305,
     height: 340,
   },
-  button: {
-    marginBottom: 20,
+  footer: {
+    padding: boxes.boxPadding,
   },
 };
 

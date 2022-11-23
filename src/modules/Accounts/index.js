@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
@@ -21,7 +21,6 @@ import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
 import getStyles from './styles';
 import TransactionList from '../Transactions/components/TransactionList';
 import AccountsManagerModal from './components/AccountsManagerModal';
-import ConnectionContext from '../../../libs/wcm/context/connectionContext';
 import TokenList from './components/TokenList';
 
 /**
@@ -33,8 +32,6 @@ import TokenList from './components/TokenList';
  * about any unforeseen issue/change
  */
 export default function Home() {
-  // eslint-disable-next-line no-unused-vars
-  const WalletConnectContext = useContext(ConnectionContext);
   const navigation = useNavigation();
   const [showManageAccountsModal, setShowManageAccountsModal] = useState(false);
   const [showManageApplicationsModal, setShowManageApplicationsModal] = useState(false);
@@ -78,6 +75,7 @@ export default function Home() {
                 <P style={[styles.username, styles.theme.username]}>{username}</P>
                 <View>
                   <CopyToClipboard
+                    value={address}
                     labelStyle={[styles.address, styles.theme.address]}
                     label={stringShortener(address, 7, 6)}
                     iconColor={colors.light.platinumGray}

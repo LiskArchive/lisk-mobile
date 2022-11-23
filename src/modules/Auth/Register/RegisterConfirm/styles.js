@@ -8,14 +8,10 @@ export default () => ({
     wrapper: {
       flex: 1,
     },
-    container: {
-      flexDirection: 'column',
-      flex: 1,
-      justifyContent: 'space-between',
-    },
     body: {
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
+      padding: boxes.boxPadding,
     },
     box: {
       borderWidth: 1,
@@ -26,9 +22,15 @@ export default () => ({
       alignItems: 'center',
       height: isSmallScreen ? 290 : 320,
     },
+    title: {
+      textAlign: 'center',
+      marginBottom: 8,
+    },
     passphraseTitle: {
       color: colors.light.blueGray,
       fontSize: isSmallScreen ? 14 : 16,
+      textAlign: 'center',
+      marginBottom: 24,
     },
     passphraseContainer: {
       flexDirection: 'row',
@@ -97,11 +99,7 @@ export default () => ({
       fontSize: fonts.size.base,
       textAlign: 'center',
     },
-    horizontalPadding: {
-      paddingLeft: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
-    },
-    buttonWrapper: {
+    footer: {
       padding: boxes.boxPadding,
     },
   },

@@ -10,13 +10,14 @@ import getStyles from './styles';
 export default function Stepper({
   children,
   finalCallback,
-  showProgressBar,
+  showProgressBar: baseShowProgressBar,
   styles: baseStyles,
   customProgressLength,
 }) {
   const [key, setKey] = useState(0);
   const [data, setData] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showProgressBar, setShowProgressBar] = useState(baseShowProgressBar);
 
   const { styles } = useTheme({
     styles: getStyles(),
@@ -56,6 +57,7 @@ export default function Stepper({
     prevStep: prev,
     sharedData: data,
     reset,
+    setShowProgressBar,
   };
 
   if (currentIndex === children.length - 1) {

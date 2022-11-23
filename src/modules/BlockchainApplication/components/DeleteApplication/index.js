@@ -9,7 +9,7 @@ import { useTheme } from 'hooks/useTheme';
 import getDeleteBlockchainApplicationStyles from './styles';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
-export default function DeleteBlockchainApplication({ sharedData: { application }, nextStep }) {
+export default function DeleteApplication({ sharedData: { application }, nextStep }) {
   const { styles } = useTheme({ styles: getDeleteBlockchainApplicationStyles() });
 
   const { deleteApplication } = useApplicationsManagement();

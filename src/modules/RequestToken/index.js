@@ -185,15 +185,20 @@ export default function RequestToken() {
         </View>
       </KeyboardAwareScrollView>
 
-      <BottomModal show={showQRModal} toggleShow={setShowQRModal}>
-        <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
-          {renderQRCode(qrCodeSize)}
-          <View style={styles.shareTextContainer}>
-            <P style={[styles.shareText, styles.theme.shareText]}>
-              {i18next.t('Tap on the QR Code to share it.')}
-            </P>
-          </View>
-        </Share>
+      <BottomModal
+        show={showQRModal}
+        toggleShow={setShowQRModal}
+        style={{ container: { alignItems: 'center' } }}
+      >
+        <View style={styles.shareContainer}>
+          <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
+            {renderQRCode(qrCodeSize)}
+          </Share>
+
+          <P style={[styles.shareText, styles.theme.shareText]}>
+            {i18next.t('Tap on the QR Code to share it.')}
+          </P>
+        </View>
       </BottomModal>
     </SafeAreaView>
   );

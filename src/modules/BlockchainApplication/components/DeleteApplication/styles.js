@@ -19,7 +19,7 @@ export default function getDeleteBlockchainApplicationStyles() {
       },
       applicationNameContainer: {
         alignItems: 'center',
-        marginBottom: 24,
+        marginBottom: 16,
       },
       applicationLogoImage: {
         borderRadius: 50,
@@ -27,6 +27,7 @@ export default function getDeleteBlockchainApplicationStyles() {
         height: 80,
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
+        marginTop: 16,
         marginBottom: 8,
       },
       applicationNameLabel: {
@@ -35,6 +36,7 @@ export default function getDeleteBlockchainApplicationStyles() {
         fontWeight: '600',
       },
       submitButton: {
+        marginTop: boxes.boxPadding,
         marginBottom: boxes.boxPadding,
       },
     },

@@ -4,7 +4,7 @@ import {
   merge,
   stringShortener,
   removeUndefinedObjectKeys,
-  updateObjectDeepValue,
+  fromPathToObject,
   isEmpty,
   setColorOpacity,
   isNumeric,
@@ -136,27 +136,21 @@ describe('helpers', () => {
     });
   });
 
-  describe('updateObjectDeepValue', () => {
+  describe('fromPathToObject', () => {
     it('updates properly an object nested value and returns the object updated', () => {
       const obj = { a: 'a', b: { b1: 'b1', b2: 'b2' }, c: 'c' };
 
-      expect(updateObjectDeepValue('b.b1', '_b1', obj)).toEqual({
+      expect(fromPathToObject('b.b1', '_b1', obj)).toEqual({
         a: 'a',
         b: { b1: '_b1', b2: 'b2' },
         c: 'c',
       });
     });
 
-    it('returns the object not-updated if the specified path does not exist', () => {
+    it('returns the object also updated if the specified path does not exist', () => {
       const obj = { a: 'a', b: { b1: 'b1', b2: 'b2' }, c: 'c' };
 
-      expect(updateObjectDeepValue('b.b3', 'b3', obj)).toEqual(obj);
-    });
-
-    it('returns the object with the new key-value pair added if writeUndefined=true and the specified path does not exist', () => {
-      const obj = { a: 'a', b: { b1: 'b1', b2: 'b2' }, c: 'c' };
-
-      expect(updateObjectDeepValue('b.b3', 'b3', obj, true)).toEqual({
+      expect(fromPathToObject('b.b3', 'b3', obj)).toEqual({
         a: 'a',
         b: { b1: 'b1', b2: 'b2', b3: 'b3' },
         c: 'c',

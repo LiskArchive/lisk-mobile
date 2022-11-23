@@ -43,13 +43,13 @@ export default function AuthMethod({ route }) {
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());
       init();
-      if (accounts.length) {
+      if (accounts.length && !route.params?.authRequired) {
         navigation.navigate('AccountsManagerScreen');
       }
     } else {
       navigation.push('Intro');
     }
-  }, []);
+  }, [accounts.length, dispatch, navigation, route.params?.authRequired, settings.showedIntro]);
 
   const selectEncryptedJSON = async () => {
     try {

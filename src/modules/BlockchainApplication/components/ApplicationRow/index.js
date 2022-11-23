@@ -14,8 +14,8 @@ import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 
-import { useBlockchainApplicationRowActions } from './hooks';
-import getBlockchainApplicationRowStyles from './styles';
+import { useApplicationRowActions } from './hooks';
+import getApplicationRowStyles from './styles';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
 import { usePinApplications } from '../../hooks/usePinApplications';
 
@@ -44,7 +44,7 @@ function ApplicationRow({
 
   const { checkPin } = usePinApplications();
 
-  const { leftActions, rightActions } = useBlockchainApplicationRowActions({
+  const { leftActions, rightActions } = useApplicationRowActions({
     application,
     variant,
     navigation,
@@ -52,7 +52,7 @@ function ApplicationRow({
     deleteApplication,
   });
 
-  const { theme, styles } = useTheme({ styles: getBlockchainApplicationRowStyles() });
+  const { theme, styles } = useTheme({ styles: getApplicationRowStyles() });
 
   const applicationPinned = checkPin(application.chainID);
 

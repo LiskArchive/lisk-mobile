@@ -9,12 +9,13 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
+import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
-import { updateObjectDeepValue } from 'utilities/helpers';
+import { fromPathToObject } from 'utilities/helpers';
 import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
@@ -36,15 +37,13 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         initialValues?.recipientApplicationChainID || currentApplication.chainID,
       recipientAccountAddress: initialValues?.recipientAccountAddress,
       recipientAccountAddressFormat: 'input',
-      tokenID:
-        initialValues?.tokenID ||
-        applicationSupportedTokensData?.find((token) => token.symbol === 'LSK')?.tokenID,
+      tokenID: initialValues?.tokenID,
       amount: initialValues?.amount ? parseFloat(initialValues.amount) : 0,
       message: initialValues?.message || '',
       priority: 'low',
       userPassword: '',
     }),
-    [currentApplication.chainID, applicationSupportedTokensData, initialValues]
+    [currentApplication.chainID, initialValues]
   );
 
   const validationSchema = yup
@@ -70,6 +69,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const { handleSubmit: baseHandleSubmit, ...form } = useForm({
     defaultValues,
     resolver: yupResolver(validationSchema),
+    enableReinitialize: true,
   });
 
   const initializationFee = useInitializationFeeCalculator({
@@ -87,7 +87,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
       transaction.update({ params: { amount: amountInBeddows } });
     } else {
-      transaction.update(updateObjectDeepValue(field, value));
+      transaction.update(fromPathToObject(field, value));
     }
 
     onChange(value);
@@ -146,6 +146,15 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   });
 
   const handleReset = () => form.reset(defaultValues);
+
+  useEffect(() => {
+    if (applicationSupportedTokensData && !form.getValues('tokenID')) {
+      form.reset({
+        ...defaultValues,
+        tokenID: applicationSupportedTokensData.find((token) => token.symbol === 'LSK')?.tokenID,
+      });
+    }
+  }, [form, defaultValues, applicationSupportedTokensData]);
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {

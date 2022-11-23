@@ -6,19 +6,19 @@ import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import { useTheme } from 'hooks/useTheme';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import getConnectionStyles from './styles';
-import useSession from '../../../../../libs/wcm/hooks/useSession';
+import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 
 const ApproveConnection = ({ event, onFinish, sharedData: { selectedAccounts } }) => {
   const { styles } = useTheme({ styles: getConnectionStyles });
-  const { approve, reject } = useSession();
+  const { approve, reject } = useWalletConnectSession();
 
   const connectHandler = async () => {
     await approve(selectedAccounts);
     onFinish();
   };
 
-  const rejectHandler = () => {
-    reject();
+  const rejectHandler = async () => {
+    await reject();
     onFinish();
   };
 

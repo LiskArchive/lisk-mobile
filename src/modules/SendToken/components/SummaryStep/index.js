@@ -65,7 +65,10 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
         />
       </View>
 
-      <BottomModal show={showSendTokenSummaryModal} showClose={false}>
+      <BottomModal
+        show={showSendTokenSummaryModal}
+        toggleShow={() => setShowSendTokenSummaryModal(false)}
+      >
         <SignTransaction
           onSubmit={form.handleSubmit}
           onSuccess={() => {

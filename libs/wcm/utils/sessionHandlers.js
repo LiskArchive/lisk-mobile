@@ -1,7 +1,7 @@
 import { getSdkError } from '@walletconnect/utils';
 import { to } from 'await-to-js';
 import { signClient } from './connectionCreator';
-import { PAIRING_PROPOSAL_STATUS, ERROR_CASES } from '../constants/lifeCycle';
+import { ERROR_CASES, STATUS } from '../constants/lifeCycle';
 
 /**
  * The approve handler for connection proposal
@@ -39,10 +39,9 @@ export const onApprove = async (proposal, selectedAccounts) => {
   if (!err) {
     const { acknowledged } = response;
     await acknowledged();
-    return PAIRING_PROPOSAL_STATUS.SUCCESS;
+    return STATUS.SUCCESS;
   }
-
-  return PAIRING_PROPOSAL_STATUS.ERROR;
+  return STATUS.FAILURE;
 };
 
 /**
@@ -51,9 +50,9 @@ export const onApprove = async (proposal, selectedAccounts) => {
  * @param {object} proposal The proposal object as received via the event
  * @returns {Promise} The promise that resolves when the rejection is complete
  */
-export const onReject = async (proposal) => {
+export const onReject = (proposal) => {
   const { id } = proposal;
-  await signClient.reject({
+  return signClient.reject({
     id,
     reason: getSdkError(ERROR_CASES.USER_REJECTED_METHODS),
   });

@@ -14,12 +14,12 @@ import { colors } from 'constants/styleGuide';
 import ExternalApplicationDetails from '../ExternalApplicationDetails';
 import DisconnectExternalApplication from '../DisconnectExternalApplication';
 
-import getExternalBlockchainApplicationRowStyles from './styles';
+import getExternalApplicationRowStyles from './styles';
 
 export default function ExternalApplicationRow({ application }) {
   const [activeAction, setActiveAction] = useState();
 
-  const { styles } = useTheme({ styles: getExternalBlockchainApplicationRowStyles() });
+  const { styles } = useTheme({ styles: getExternalApplicationRowStyles() });
 
   const rightActions = [
     {

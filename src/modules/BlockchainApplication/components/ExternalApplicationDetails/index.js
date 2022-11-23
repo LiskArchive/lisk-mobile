@@ -9,10 +9,7 @@ import { stringShortener } from 'utilities/helpers';
 
 import getExternalBlockchainApplicationDetailsStyles from './styles';
 
-export default function ExternalBlockchainApplicationDetails({
-  application,
-  onApplicationDisconnect,
-}) {
+export default function ExternalApplicationDetails({ application, onApplicationDisconnect }) {
   const { styles } = useTheme({ styles: getExternalBlockchainApplicationDetailsStyles() });
 
   return (

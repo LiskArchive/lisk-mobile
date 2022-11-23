@@ -23,11 +23,12 @@ import ApplicationRow from '../ApplicationRow';
 import ApplicationsStats from '../ApplicationsStats';
 import ExternalApplicationList from '../ExternalApplicationList';
 
-import getBlockchainApplicationsExplorerStyles from './styles';
+import getApplicationsExplorerStyles from './styles';
 import BridgeApplication from '../BridgeApplication';
 import InitiateConnection from '../InitiateConnection';
 import ApproveConnection from '../ApproveConnection';
-import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
+import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
+import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
 
 const actions = [
   {
@@ -43,9 +44,9 @@ const actions = [
  * Renders a component that enable users to search, list and
  * view blockchain applications.
  */
-export default function BlockchainApplicationsExplorer() {
+export default function ApplicationsExplorer() {
   const navigation = useNavigation();
-  const { events } = useContext(ConnectionContext);
+  const { events } = useContext(WalletConnectContext);
   const [activeTab, setActiveTab] = useState('internalApplications');
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
@@ -54,7 +55,7 @@ export default function BlockchainApplicationsExplorer() {
   const applications = useApplicationsExplorer();
 
   const { theme, styles } = useTheme({
-    styles: getBlockchainApplicationsExplorerStyles(),
+    styles: getApplicationsExplorerStyles(),
   });
 
   const onFabItemPress = (item) => {
@@ -65,7 +66,13 @@ export default function BlockchainApplicationsExplorer() {
 
   const onCancelConnection = () => setShowBridgeAppModal(false);
 
-  const connectionEvent = useMemo(() => events[events.length - 1], [events]);
+  const connectionEvent = useMemo(() => {
+    if (events.length && events[events.length - 1].name === EVENTS.SESSION_PROPOSAL) {
+      return events[events.length - 1];
+    }
+
+    return undefined;
+  }, [events]);
 
   return (
     <>
