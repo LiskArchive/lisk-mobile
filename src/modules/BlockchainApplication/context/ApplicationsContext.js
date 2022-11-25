@@ -67,7 +67,7 @@ export function ApplicationsProvider({ children }) {
     if (!currentApplication && defaultApplicationsData) {
       setCurrentApplication(defaultApplicationsData[0]);
 
-      apiClient.create(defaultApplicationsData[0].serviceURLs[0]);
+      apiClient.create(defaultApplicationsData[0]?.serviceURLs?.[0]);
     }
   }, [
     defaultApplicationsData,

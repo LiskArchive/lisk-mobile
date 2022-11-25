@@ -38,7 +38,7 @@ export function useApplicationsExplorer({
       params: {
         // TODO: Pass as CSV of chainIDs when backend supports feature.
         // e.g.: applicationsData?.data.map((app) => app.chainID)
-        chainID: applicationsData?.data[0].chainID,
+        chainID: applicationsData?.data[0]?.chainID,
         ...applicationsMetaConfig?.params,
       },
       ...applicationsMetaConfig,

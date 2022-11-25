@@ -31,7 +31,7 @@ export class APIClient {
     return this.http?.request({ ...this.http.defaults, ...config });
   }
 
-  create({ http, ws }) {
+  create({ http, ws } = {}) {
     this.ws = io(ws, { transports: ['websocket'] });
 
     const request = axios.create({
