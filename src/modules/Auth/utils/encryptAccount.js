@@ -38,6 +38,8 @@ export const encryptAccount = async ({
     };
   } catch (error) {
     console.log('error', error);
+    // TODO: Handle error here
+    // WORKAROUND: Return mocked encrypted account if there's an error
     return encryptedAccountMock;
     // throw new Error(error);
   }

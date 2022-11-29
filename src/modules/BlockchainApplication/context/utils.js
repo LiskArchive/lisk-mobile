@@ -5,13 +5,16 @@
  * Can be "init" applications, "add" an application or "delete" an application.
  * @returns {Array} state - The context state of saved applications.
  */
-export function applicationsContextReducer(state, { type, applications, application, chainID }) {
+export function applicationsContextReducer(
+  state = [],
+  { type, applications, application, chainID }
+) {
   switch (type) {
     case 'init':
       return applications;
 
     case 'add': {
-      if (state.find((app) => app.chainID === application.chainID)) {
+      if (state?.find((app) => app.chainID === application.chainID)) {
         return state;
       }
 

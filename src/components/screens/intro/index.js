@@ -9,18 +9,11 @@ import activityHistoryImg from 'assets/images/intro/activityHistory3x.png';
 import tokensTransferImg from 'assets/images/intro/tokensTransfer3x.png';
 import secureAuthenticationImg from 'assets/images/intro/secureAuthentication3x.png';
 import easyAccessImg from 'assets/images/intro/easyAccess3x.png';
-import { useApplicationsMetaQuery } from 'modules/BlockchainApplication/api/useApplicationsMetaQuery';
-import { useApplicationsManagement } from 'modules/BlockchainApplication/hooks/useApplicationsManagement';
-import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import Heading from './heading';
 import Splash from './splash';
 import styles from './styles';
 
 const Intro = ({ navigation, t }) => {
-  const { data: chainMetaData } = useApplicationsMetaQuery();
-  const { addApplication } = useApplicationsManagement();
-  const [, setCurrentApplication] = useCurrentApplication();
-
   const skip = () => {
     AsyncStorage.setItem('@lisk-mobile-intro', 'true');
     navigation.push('AuthMethod', { signOut: true });
@@ -30,13 +23,6 @@ const Intro = ({ navigation, t }) => {
     const timeout = setTimeout(() => SplashScreen.hide(), 500);
     return () => clearTimeout(timeout);
   }, []);
-
-  useEffect(() => {
-    if (chainMetaData) {
-      chainMetaData.data.map((data) => addApplication(data));
-      setCurrentApplication(chainMetaData.data[0]);
-    }
-  }, [chainMetaData]);
 
   const descriptionContent = [
     {
