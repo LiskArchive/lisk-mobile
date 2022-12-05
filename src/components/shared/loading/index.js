@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View } from 'react-native';
+// TODO: Reinstate lottie after upgrade
 // import LottieView from 'lottie-react-native';
 
 // import progressBar from 'assets/animations/progressBar.json';
@@ -25,6 +26,7 @@ const Loading = ({ styles, loading }) => {
 
   return (
     <View style={[styles.wrapper, visible]}>
+      {/* TODO: Reinstate lottie view */}
       {/* <LottieView
         style={styles.animation}
         source={progressBar}
