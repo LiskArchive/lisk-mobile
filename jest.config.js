@@ -37,10 +37,6 @@ module.exports = {
       statements: 80,
     },
   },
-  transform: {
-    '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
-    '.+\\.(css|png|jpg|ttf)$': 'jest-transform-stub',
-  },
   setupFiles: [
     './testenv.js',
     // necessary file for react-native-netinfo

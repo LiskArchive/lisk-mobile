@@ -1,9 +1,9 @@
 import ws from './ws';
 
 jest.mock('./APIClient', () => ({
-  socket: {
+  ws: {
     emit: jest.fn(),
-    disconnected: false,
+    disconnected: true,
   },
   http: {
     request: jest.fn(),

@@ -2,7 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { renderHook, act } from '@testing-library/react-hooks';
+import { act } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-native';
 import { mockSavedAccounts } from '../../__fixtures__';
 import actionTypes from '../../actionTypes';
 import { useAccounts } from './useAccounts';
@@ -25,6 +26,7 @@ const mockState = {
 jest.mock('react-redux', () => ({
   useSelector: jest.fn().mockImplementation((fn) => fn(mockState)),
   useDispatch: () => mockDispatch,
+  Provider: ({ children }) => children,
 }));
 
 describe('useAccount hook', () => {
@@ -47,7 +49,8 @@ describe('useAccount hook', () => {
     act(() => {
       setAccount(mockSavedAccounts[0]);
     });
-    expect(store.getActions()).toEqual([expectedAction]);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
   });
 
   it('accounts should return and convert state as an array', async () => {
@@ -74,6 +77,7 @@ describe('useAccount hook', () => {
     act(() => {
       deleteAccountByAddress(address);
     });
-    expect(store.getActions()).toEqual([expectedAction]);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
   });
 });
