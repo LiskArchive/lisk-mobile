@@ -2,7 +2,6 @@ import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
 import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import applicationsAPIClient from 'utilities/api/ApplicationsAPIClient';
-// import { mockApplicationsMeta } from '../__fixtures__/mockApplicationsMeta';
 
 /**
  * Fetch list of blockchain applications metadata (off-chain data) in paginated mode.
