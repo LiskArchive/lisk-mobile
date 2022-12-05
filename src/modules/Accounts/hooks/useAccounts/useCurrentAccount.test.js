@@ -23,6 +23,7 @@ const mockState = {
 jest.mock('react-redux', () => ({
   useSelector: jest.fn().mockImplementation((fn) => fn(mockState)),
   useDispatch: () => mockDispatch,
+  Provider: ({ children }) => children,
 }));
 
 describe('useCurrentAccount hook', () => {
@@ -45,7 +46,8 @@ describe('useCurrentAccount hook', () => {
     act(() => {
       setAccount(mockSavedAccounts[0]);
     });
-    expect(store.getActions()).toEqual([expectedAction]);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
   });
 
   it('getAccount should return specific account selected by address', async () => {

@@ -9,6 +9,7 @@ import {
 
 const height = deviceHeight();
 const width = deviceWidth();
+
 const headFullAndroid = viewportHeight() + headerHeight() + 20;
 const headerFullIOS = viewportHeight() + headerHeight();
 export default () => ({
@@ -32,12 +33,8 @@ export default () => ({
       opacity: 0.85,
       paddingLeft: 20,
       paddingRight: 20,
-      paddingTop: 14,
-      paddingBottom: 14,
       flexDirection: 'row',
-      justifyContent: 'space-between',
-      borderTopColor: 'rgba(57, 68, 81, 0.85)',
-      borderTopWidth: deviceType() === 'iOSx' ? 34 : 10,
+      alignItems: 'center',
     },
     galleryButton: {
       borderRadius: 4,
@@ -54,9 +51,7 @@ export default () => ({
     },
     galleryDescription: {
       color: colors.light.white,
-      maxWidth: 230,
-      height: 30,
-      lineHeight: 30,
+      flex: 1,
     },
     permissionRequestWrapper: {
       position: 'absolute',
@@ -84,17 +79,7 @@ export default () => ({
       textAlign: 'center',
       color: colors.light.slateGray,
     },
-    headerContainer: {
-      flex: 1,
-      alignItems: 'flex-end',
-      justifyContent: 'flex-start',
-      flexDirection: 'row',
-    },
     closeButton: {
-      width: 50,
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
       paddingLeft: 0,
     },
     scannerContainer: {

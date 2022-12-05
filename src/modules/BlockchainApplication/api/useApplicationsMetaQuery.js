@@ -19,6 +19,7 @@ export function useApplicationsMetaQuery({ config: customConfig = {}, options = 
     ...customConfig,
     params: {
       limit: LIMIT,
+      network: process.env.NETWORK,
       ...(customConfig?.params || {}),
     },
   };

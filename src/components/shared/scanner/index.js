@@ -11,10 +11,10 @@ import { AppState, SafeAreaView } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
 import QRCode from '@remobile/react-native-qrcode-local-image';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 import CameraAccess from './cameraAccess';
 import CameraOverlay from './cameraOverlay';
-import CameraRoll from './cameraRoll';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -22,7 +22,7 @@ const Scanner = forwardRef(
   (
     {
       styles,
-      containerStyles: { scanner, cameraOverlay, cameraRoll } = {},
+      containerStyles: { scanner, cameraOverlay } = {},
       onQRCodeRead,
       onClose,
       isCameraOpen,
@@ -84,8 +84,11 @@ const Scanner = forwardRef(
 
     useImperativeHandle(ref, () => ({ toggleCamera }));
 
-    const toggleGallery = () => {
-      setPhoto((prevState) => ({ ...prevState, visible: !prevState.visible }));
+    const toggleGallery = async () => {
+      const result = await launchImageLibrary();
+      if (!result.didCancel) {
+        readFromPhotoGallery(result.assets);
+      }
     };
 
     const readQRcode = (event) => {
@@ -127,12 +130,6 @@ const Scanner = forwardRef(
             </RNCamera>
           </SafeAreaView>
         ) : null}
-        <CameraRoll
-          containerStyles={cameraRoll}
-          onSelect={readFromPhotoGallery}
-          permission={photo.permission}
-          visible={photo.visible}
-        />
       </Fragment>
     );
   }

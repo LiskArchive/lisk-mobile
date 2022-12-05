@@ -2,14 +2,14 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useRef } from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import LottieView from 'lottie-react-native';
+// import LottieView from 'lottie-react-native';
 import { translate } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { getTxConstant, isTransfer } from 'modules/Transactions/utils/helpers';
 import { fromRawLsk } from 'utilities/conversions';
 import { stringShortener } from 'utilities/helpers';
-import loadingAnimation from 'assets/animations/loading-dots.json';
+// import loadingAnimation from 'assets/animations/loading-dots.json';
 import { Blur } from 'components/shared/blur';
 import FormattedNumber from 'components/shared/formattedNumber';
 import FormattedDate from 'components/shared/formattedDate';
@@ -122,7 +122,11 @@ const Item = ({
           ) : null}
           {typeof tx.timestamp !== 'number' && (
             <View style={styles.pendingIcon}>
-              <LottieView source={loadingAnimation} ref={animation} style={{}} />
+              {/* <LottieView
+                  source={loadingAnimation}
+                  ref={animation}
+                  style={{}}
+                /> */}
             </View>
           )}
         </View>

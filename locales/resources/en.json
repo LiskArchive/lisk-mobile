@@ -322,6 +322,7 @@
       "switchAccount": "Switch account",
       "decryptPassphrase": "Decrypt your secret recovery phrase",
       "decryptPassphraseError": "Unable to decrypt account. Please check your password",
+      "encryptPassphraseError": "Unable to encrypt account.",
       "addAccountDescription": "Enter your secret recovery phrase to manage your account",
       "passwordSetupTitle": "Set up device password",
       "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",

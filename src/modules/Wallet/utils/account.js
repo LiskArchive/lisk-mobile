@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import { passphrase as LiskPassphrase, cryptography } from '@liskhq/lisk-client';
 import regex from 'constants/regex';
-import { getCustomDerivationKeyPair } from 'utilities/explicitBipKeyDerivation';
 
 /**
  * Extracts Lisk PrivateKey/PublicKey pair from a given valid Mnemonic passphrase
@@ -11,15 +10,20 @@ import { getCustomDerivationKeyPair } from 'utilities/explicitBipKeyDerivation';
  * @param {String} derivationPath - custom derivation path for HW
  * @returns {object} - Extracted publicKey for a given valid passphrase
  */
-export const extractKeyPair = ({
+export const extractKeyPair = async ({
   passphrase,
   enableCustomDerivationPath = false,
   derivationPath,
 }) => {
   if (enableCustomDerivationPath) {
-    const keyPair = getCustomDerivationKeyPair(passphrase, derivationPath);
+    const privateKey = await cryptography.ed.getKeyPairFromPhraseAndPath(
+      passphrase,
+      derivationPath
+    );
+    const publicKey = cryptography.ed.getPublicKeyFromPrivateKey(privateKey).toString('hex');
     return {
-      ...keyPair,
+      publicKey,
+      privateKey: privateKey.toString('hex'),
       isValid: true,
     };
   }

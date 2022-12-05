@@ -17,7 +17,7 @@ export const encryptAccount = async ({
       enableCustomDerivationPath,
       derivationPath: enableCustomDerivationPath ? derivationPath : defaultDerivationPath,
     };
-    const { privateKey, publicKey, isValid } = extractKeyPair(options);
+    const { privateKey, publicKey, isValid } = await extractKeyPair(options);
     if (!isValid) {
       throw new Error('Failed to extract keypair for given recovery phrase.');
     }

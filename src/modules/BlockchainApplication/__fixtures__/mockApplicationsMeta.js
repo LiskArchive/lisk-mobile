@@ -8,16 +8,18 @@ export const mockApplicationsMeta = [
     title: 'Coleti - Betanet',
     description: 'A Lisk-based NFT marketplace',
     networkType: 'mainnet',
-    genesisURL:
-      'https://downloads.coleti.com/lisk/mainnet/genesis_block.json.tar.gz',
+    genesisURL: 'https://downloads.coleti.com/lisk/mainnet/genesis_block.json.tar.gz',
     projectPage: 'https://coleti.com',
-    serviceURLs: [{
-      http: 'https://service.coleti.com',
-      ws: 'wss://service.coleti.com',
-    }, {
-      http: 'https://service2.coleti.com',
-      ws: 'wss://service2.coleti.com',
-    }],
+    serviceURLs: [
+      {
+        http: 'https://service.coleti.com',
+        ws: 'wss://service.coleti.com',
+      },
+      {
+        http: 'https://service2.coleti.com',
+        ws: 'wss://service2.coleti.com',
+      },
+    ],
     logo: {
       png: 'https://lisk.com/sites/default/files/2022-02/colecti-logo.jpeg',
       svg: '',
@@ -26,12 +28,12 @@ export const mockApplicationsMeta = [
     appNodes: [
       {
         url: 'https://betanet.coleti.com',
-        maintainer: 'Coleti GmbH'
+        maintainer: 'Coleti GmbH',
       },
       {
         url: 'wss://betanet.coleti.com',
-        maintainer: 'Coleti GmbH'
-      }
+        maintainer: 'Coleti GmbH',
+      },
     ],
     backgroundColor: '#FFFFFF1A',
   },
@@ -41,13 +43,14 @@ export const mockApplicationsMeta = [
     title: 'DoEdu - Betanet',
     description: 'An educational platform built with Lisk SDK',
     networkType: 'mainnet',
-    genesisURL:
-      'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
+    genesisURL: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
     projectPage: 'https://doedu.com',
-    serviceURLs: [{
-      http: 'https://service.doedu.com',
-      ws: 'wss://service.doedu.com',
-    }],
+    serviceURLs: [
+      {
+        http: 'https://service.doedu.com',
+        ws: 'wss://service.doedu.com',
+      },
+    ],
     logo: {
       png: 'https://lisk.com/sites/default/files/2022-02/doedu-logo.jpg',
       svg: '',
@@ -56,12 +59,12 @@ export const mockApplicationsMeta = [
     appNodes: [
       {
         url: 'https://betanet.doedu.com',
-        maintainer: 'DoEdu GmbH'
+        maintainer: 'DoEdu GmbH',
       },
       {
         url: 'wss://betanet.lisk.com',
-        maintainer: 'DoEdu GmbH'
-      }
+        maintainer: 'DoEdu GmbH',
+      },
     ],
     backgroundColor: '#FFFFFF1A',
   },
@@ -71,13 +74,14 @@ export const mockApplicationsMeta = [
     title: 'Enevti - Betanet',
     description: 'A decentralized social media NFT platform',
     networkType: 'mainnet',
-    genesisURL:
-      'https://downloads.enevti.com/lisk/mainnet/genesis_block.json.tar.gz',
+    genesisURL: 'https://downloads.enevti.com/lisk/mainnet/genesis_block.json.tar.gz',
     projectPage: 'https://enevti.com',
-    serviceURLs: [{
-      http: 'https://service.enevti.com',
-      ws: 'wss://service.enevti.com',
-    }],
+    serviceURLs: [
+      {
+        http: 'https://service.enevti.com',
+        ws: 'wss://service.enevti.com',
+      },
+    ],
     explorers: [{ tnxPage: 'https://enevti.observer', url: 'https://explorer.enevti.io' }],
     logo: {
       png: 'https://lisk.com/sites/default/files/2022-02/enevti-logo.png',
@@ -86,12 +90,12 @@ export const mockApplicationsMeta = [
     appNodes: [
       {
         url: 'https://betanet.enevti.com',
-        maintainer: 'Enevti GmbH'
+        maintainer: 'Enevti GmbH',
       },
       {
         url: 'wss://betanet.enevti.com',
-        maintainer: 'Enevti GmbH'
-      }
+        maintainer: 'Enevti GmbH',
+      },
     ],
     backgroundColor: '#FFFFFF1A',
   },
@@ -101,13 +105,14 @@ export const mockApplicationsMeta = [
     title: 'Kalipo - Betanet',
     description: 'A platform to support Decentralized Autonomous Organizations (DAOs)',
     networkType: 'mainnet',
-    genesisURL:
-      'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
+    genesisURL: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
     projectPage: 'https://kalipo.com',
-    serviceURLs: [{
-      http: 'https://service.kalipo.com',
-      ws: 'wss://service.kalipo.com',
-    }],
+    serviceURLs: [
+      {
+        http: 'https://service.kalipo.com',
+        ws: 'wss://service.kalipo.com',
+      },
+    ],
     explorers: [{ tnxPage: 'https://kalipo.observer', url: 'https://explorer.kalipo.io' }],
     logo: {
       png: 'https://lisk.com/sites/default/files/2022-07/Kalipo.jpg',
@@ -116,21 +121,18 @@ export const mockApplicationsMeta = [
     appNodes: [
       {
         url: 'https://betanet.kalipo.com',
-        maintainer: 'Kalipo GmbH'
+        maintainer: 'Kalipo GmbH',
       },
       {
         url: 'wss://betanet.kalipo.com',
-        maintainer: 'Kalipo GmbH'
-      }
+        maintainer: 'Kalipo GmbH',
+      },
     ],
     backgroundColor: '#FFFFFF1A',
   },
 ];
 
-export const mockMappedApplicationsMeta = mockApplicationsMeta.reduce(
-  (obj, val) => {
-    obj[val.chainID] = val;
-    return obj;
-  },
-  {}
-);
+export const mockMappedApplicationsMeta = mockApplicationsMeta.reduce((obj, val) => {
+  obj[val.chainID] = val;
+  return obj;
+}, {});

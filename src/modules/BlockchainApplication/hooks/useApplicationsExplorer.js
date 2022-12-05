@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 
 import { useApplicationsQuery } from '../api/useApplicationsQuery';
 import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
-import { mergeApplicationsData } from '../utils';
 
 /**
  * Hook that handle all the logic related to blockchain applications explorer.
@@ -38,7 +37,7 @@ export function useApplicationsExplorer({
       params: {
         // TODO: Pass as CSV of chainIDs when backend supports feature.
         // e.g.: applicationsData?.data.map((app) => app.chainID)
-        chainID: applicationsData?.data[0].chainID,
+        chainID: applicationsData?.data[0]?.chainID,
         ...applicationsMetaConfig?.params,
       },
       ...applicationsMetaConfig,
@@ -54,7 +53,7 @@ export function useApplicationsExplorer({
       return undefined;
     }
 
-    return mergeApplicationsData(applicationsData.data, applicationsMetaData.data);
+    return applicationsMetaData.data;
   }, [applicationsData?.data, applicationsMetaData?.data]);
 
   return {

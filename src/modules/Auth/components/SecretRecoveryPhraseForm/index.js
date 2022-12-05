@@ -26,10 +26,8 @@ export default function SecretRecoveryPhraseForm({ onSubmit, onScanQrCode, lng }
 
   const handleInputChange = (value) => {
     setPassphrase({
-      passphrase: {
-        value,
-        validity: [],
-      },
+      value,
+      validity: [],
     });
   };
 
