@@ -147,19 +147,16 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const handleReset = () => form.reset(defaultValues);
 
-  // HERE IS THE PROBLEM:
   useEffect(() => {
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
       const defaultTokenID = applicationSupportedTokensData.find(
-        (token) => token.tokenID === 'LSK'
+        (token) => token.symbol === 'LSK'
       )?.tokenID;
-
-      console.log({ applicationSupportedTokensData });
 
       if (defaultTokenID) {
         form.reset({
           ...defaultValues,
-          tokenID: applicationSupportedTokensData.find((token) => token.tokenID === 'LSK')?.tokenID,
+          tokenID: defaultTokenID,
         });
       }
     }
