@@ -147,19 +147,27 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const handleReset = () => form.reset(defaultValues);
 
+  // HERE IS THE PROBLEM:
   useEffect(() => {
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
-      form.reset({
-        ...defaultValues,
-        tokenID: applicationSupportedTokensData.find((token) => token.symbol === 'LSK')?.tokenID,
-      });
+      const defaultTokenID = applicationSupportedTokensData.find(
+        (token) => token.tokenID === 'LSK'
+      )?.tokenID;
+
+      console.log({ applicationSupportedTokensData });
+
+      if (defaultTokenID) {
+        form.reset({
+          ...defaultValues,
+          tokenID: applicationSupportedTokensData.find((token) => token.tokenID === 'LSK')?.tokenID,
+        });
+      }
     }
   }, [form, defaultValues, applicationSupportedTokensData]);
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (isTransactionSuccess) {
-      return transaction.update({
+      transaction.update({
         params: {
           tokenID: defaultValues.tokenID,
           recipientAddress: defaultValues.recipientAccountAddress,

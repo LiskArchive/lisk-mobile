@@ -17,6 +17,8 @@ import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisigna
 import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction';
 
 export default function SendToken({ route }) {
+  console.log('hereeee');
+
   const navigation = useNavigation();
 
   const account = useSelector((state) => state.account);

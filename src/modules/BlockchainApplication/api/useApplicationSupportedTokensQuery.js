@@ -22,14 +22,14 @@ export function useApplicationSupportedTokensQuery(application) {
   }
 
   const {
-    data: { data: accountTokensData = [] } = {},
+    data: { data: accountTokensData } = {},
     isLoading: isAccountTokensLoading,
     isError: isAccountTokensError,
     error: errorOnAccountTokens,
   } = useAccountTokensQuery();
 
   const {
-    data: { data: { supportedTokens: supportedTokensData = [] } = {} } = {},
+    data: { data: { supportedTokens: supportedTokensData } = {} } = {},
     isLoading: isSupportedTokensLoading,
     isError: isSupportedTokensError,
     error: errorOnSupportedTokens,
@@ -38,24 +38,27 @@ export function useApplicationSupportedTokensQuery(application) {
   });
 
   const data = useMemo(() => {
-    const isSupportAllToken = supportedTokensData.length === 0;
+    let tokens;
 
-    const tokensOnChainData = isSupportAllToken
-      ? accountTokensData
-      : accountTokensData.filter(
-          (token) =>
-            supportedTokensData.find((supportedToken) => supportedToken.chainID === token.chainID)
-              .length
-        );
+    if (accountTokensData && supportedTokensData) {
+      const tokensOnChainData = supportedTokensData.isSupportAllToken
+        ? accountTokensData
+        : accountTokensData.filter(
+            (token) =>
+              supportedTokensData.exactTokenIDs.find(
+                (supportedToken) => supportedToken.chainID === token.chainID
+              ).length
+          );
 
-    const tokens = tokensOnChainData.map((tokenOnChainData) => {
-      // TODO: Query for each token the GET /meta/tokens endpoint when service solves tokenID inconsistency
-      // between GET /tokens and GET /meta/tokens responses.
-      const tokenMetaData =
-        mockTokensMeta.find((tokenMeta) => tokenMeta.tokenID === tokenOnChainData.tokenID) || {};
+      tokens = tokensOnChainData.map((tokenOnChainData) => {
+        // TODO: Query for each token the GET /meta/tokens endpoint when service solves tokenID inconsistency
+        // between GET /tokens and GET /meta/tokens responses.
+        const tokenMetaData =
+          mockTokensMeta.find((tokenMeta) => tokenMeta.tokenID === tokenOnChainData.tokenID) || {};
 
-      return { ...tokenOnChainData, ...tokenMetaData };
-    });
+        return { ...tokenOnChainData, ...tokenMetaData };
+      });
+    }
 
     return tokens;
   }, [accountTokensData, supportedTokensData]);
