@@ -3,28 +3,32 @@ import { View } from 'react-native';
 import { useForm, useController } from 'react-hook-form';
 
 import { useTheme } from 'hooks/useTheme';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts/useAccounts';
 import { H2 } from 'components/shared/toolBox/typography';
 import Input from 'components/shared/toolBox/input';
 import { Button, PrimaryButton } from 'components/shared/toolBox/button';
 
-import getEditAccountStyles from './styles';
+import getEditAccountFormStyles from './styles';
 
-export default function EditAccount({ account, onReset, style }) {
+export default function EditAccountForm({ account, onReset, style }) {
+  const { updateAccount } = useAccounts();
+
   const form = useForm({
     defaultValues: {
       name: account.metadata.name,
     },
   });
 
-  const { field: usernameField } = useController({
+  const { field: name } = useController({
     name: 'name',
     control: form.control,
   });
 
-  const { styles } = useTheme({ styles: getEditAccountStyles() });
+  const { styles } = useTheme({ styles: getEditAccountFormStyles() });
 
-  const handleSubmit = form.handleSubmit(async (values) => {
-    console.log({ values });
+  const handleSubmit = form.handleSubmit((values) => {
+    updateAccount(account.metadata.address, values);
+    onReset();
   });
 
   return (
@@ -33,16 +37,16 @@ export default function EditAccount({ account, onReset, style }) {
 
       <Input
         label={'Account name'}
-        value={usernameField.value}
+        value={name.value}
         placeholder="Input wallet address or choose a username"
-        onChange={usernameField.onChange}
+        onChange={name.onChange}
         innerStyles={{
           containerStyle: styles.inputContainer,
         }}
       />
 
       <View style={[style?.footer]}>
-        <PrimaryButton onPress={handleSubmit} style={[styles.submitButton]}>
+        <PrimaryButton onClick={handleSubmit} style={[styles.submitButton]}>
           Done
         </PrimaryButton>
 

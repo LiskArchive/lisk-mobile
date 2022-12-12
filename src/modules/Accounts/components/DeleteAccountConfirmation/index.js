@@ -17,7 +17,7 @@ import getDeleteAccountConfirmationStyles from './styles';
 export default function DeleteAccountConfirmation({ account, onReset, style }) {
   const [downloaded, setDownloaded] = useState(false);
 
-  const { deleteAccountByAddress } = useAccounts();
+  const { deleteAccount } = useAccounts();
 
   const { styles } = useTheme({ styles: getDeleteAccountConfirmationStyles() });
 
@@ -37,7 +37,7 @@ export default function DeleteAccountConfirmation({ account, onReset, style }) {
   }
 
   function handleDelete() {
-    deleteAccountByAddress(account.metadata.address);
+    deleteAccount(account.metadata.address);
     onReset();
   }
 

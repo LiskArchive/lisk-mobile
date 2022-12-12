@@ -38,7 +38,7 @@ export const summary = (state = {}, { type, accountSummary }) => {
  * @param {Object} state
  * @param {type: String, encryptedAccount: Object, address: string} action
  */
-export const list = (state = {}, { type, encryptedAccount, address }) => {
+export const list = (state = {}, { type, encryptedAccount, address, accountData }) => {
   switch (type) {
     case actionTypes.addAccount:
       if (!encryptedAccount?.metadata?.address) {
@@ -48,6 +48,19 @@ export const list = (state = {}, { type, encryptedAccount, address }) => {
         ...state,
         [encryptedAccount?.metadata?.address]: encryptedAccount,
       };
+
+    case actionTypes.updateAccount:
+      return {
+        ...state,
+        [address]: {
+          ...state[address],
+          metadata: {
+            ...state[address].metadata,
+            ...accountData,
+          },
+        },
+      };
+
     case actionTypes.deleteAccount:
       delete state[address];
       return {

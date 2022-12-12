@@ -1,6 +1,6 @@
 import { colors, themes } from 'constants/styleGuide';
 
-export default function getEditAccountStyles() {
+export default function getEditAccountFormStyles() {
   return {
     common: {
       container: {
