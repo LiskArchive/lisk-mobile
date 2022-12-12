@@ -17,8 +17,8 @@ import getAccountItemStyles from './styles';
 export default function AccountItem({
   account,
   onPress,
-  onDeletePress,
   onEditPress,
+  onDeletePress,
   testID,
   active,
 }) {
@@ -42,7 +42,6 @@ export default function AccountItem({
           title: 'Edit',
           color: colors.dark.blueGray,
           icon: () => <Icon name="edit-bookmark" size={20} color={colors[theme].white} />,
-          // TODO: Implement edit action.
           onPress: onEditPress,
         },
         {

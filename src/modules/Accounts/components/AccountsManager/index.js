@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { useTheme } from 'hooks/useTheme';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
@@ -7,6 +7,7 @@ import DeleteAccountConfirmation from '../DeleteAccountConfirmation';
 import AccountList from '../AccountList';
 
 import getAccountsManagerStyles from './styles';
+import EditAccount from '../EditAccount';
 
 export default function AccountsManager({ mode = 'screen', onAccountPress, style }) {
   const [activeSection, setActiveSection] = useState({ id: 'accountsList', data: undefined });
@@ -28,15 +29,19 @@ export default function AccountsManager({ mode = 'screen', onAccountPress, style
           mode={mode}
           accounts={accounts}
           onAccountPress={onAccountPress}
-          onDeleteAccountPress={(account) =>
-            setActiveSection({ id: 'deleteAccountConfirmation', data: account })
-          }
           onEditAccountPress={(account) =>
             setActiveSection({ id: 'editAccountConfirmation', data: account })
+          }
+          onDeleteAccountPress={(account) =>
+            setActiveSection({ id: 'deleteAccountConfirmation', data: account })
           }
           style={style}
         />
       );
+      break;
+
+    case 'editAccountConfirmation':
+      children = <EditAccount account={activeSection.data} onReset={handleResetSection} />;
       break;
 
     case 'deleteAccountConfirmation':
@@ -46,14 +51,6 @@ export default function AccountsManager({ mode = 'screen', onAccountPress, style
           onReset={handleResetSection}
           style={style}
         />
-      );
-      break;
-
-    case 'editAccountConfirmation':
-      children = (
-        <View>
-          <Text>Edit account</Text>
-        </View>
       );
       break;
 
