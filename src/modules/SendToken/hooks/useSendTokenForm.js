@@ -149,17 +149,22 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   useEffect(() => {
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
-      form.reset({
-        ...defaultValues,
-        tokenID: applicationSupportedTokensData.find((token) => token.symbol === 'LSK')?.tokenID,
-      });
+      const defaultTokenID = applicationSupportedTokensData.find(
+        (token) => token.symbol === 'LSK'
+      )?.tokenID;
+
+      if (defaultTokenID) {
+        form.reset({
+          ...defaultValues,
+          tokenID: defaultTokenID,
+        });
+      }
     }
   }, [form, defaultValues, applicationSupportedTokensData]);
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (isTransactionSuccess) {
-      return transaction.update({
+      transaction.update({
         params: {
           tokenID: defaultValues.tokenID,
           recipientAddress: defaultValues.recipientAccountAddress,
