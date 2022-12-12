@@ -19,6 +19,7 @@ export default function AccountList({
   accounts,
   onAccountPress,
   onDeleteAccountPress,
+  onEditAccountPress,
   style,
 }) {
   const navigation = useNavigation();
@@ -65,6 +66,7 @@ export default function AccountList({
             account={item}
             onPress={() => handleSelectAccountClick(item)}
             onDeletePress={() => onDeleteAccountPress(item)}
+            onEditPress={() => onEditAccountPress(item)}
             active={item.metadata.address === currentAccount.metadata?.address}
           />
         )}
