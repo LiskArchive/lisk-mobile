@@ -5,12 +5,15 @@ import { useDownloadFile } from 'hooks/useDownloadFile';
 import DownloadFile from 'components/shared/DownloadFile';
 import ResultScreen from 'components/screens/ResultScreen';
 import CompletedIllustrationSvg from 'assets/svgs/CompletedIllustrationSvg';
+import { getAccountDownloadableFilename } from '../utils/downloadAccount';
 
 export default function PasswordSetupSuccess({ encryptedJson, onContinue }) {
+  const accountFilename = getAccountDownloadableFilename(encryptedJson.metadata.address);
+
   const [downloadFile, { isLoading: isLoadingDownloadFile, isSuccess: isSuccessDownloadFile }] =
     useDownloadFile({
       data: encryptedJson,
-      fileName: `encrypted_secret_recovery_phrase_${encryptedJson.metadata.address}.json`,
+      fileName: accountFilename,
     });
 
   return (
@@ -23,7 +26,7 @@ export default function PasswordSetupSuccess({ encryptedJson, onContinue }) {
       onContinue={onContinue}
     >
       <DownloadFile
-        fileName={`encrypted_secret_recovery_phrase_${encryptedJson.metadata.address}.json`}
+        fileName={accountFilename}
         downloadFile={downloadFile}
         isLoading={isLoadingDownloadFile}
       />

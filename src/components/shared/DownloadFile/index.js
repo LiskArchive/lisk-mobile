@@ -30,7 +30,7 @@ export default function DownloadFile({
   return (
     <View style={[styles.container]}>
       <View style={[styles.row, styles.filenameContainer]}>
-        <FileSvg style={[styles.downloadFileIcon]} />
+        <FileSvg />
 
         <P style={[styles.text, styles.theme.text]}>{fileName}</P>
       </View>

@@ -4,10 +4,11 @@ import { View } from 'react-native';
 import { useTheme } from 'hooks/useTheme';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { P } from 'components/shared/toolBox/typography';
+import DownloadFile from 'components/shared/DownloadFile';
+import CompletedIllustrationSvg from 'assets/svgs/CompletedIllustrationSvg';
+import { getAccountDownloadableFilename } from 'modules/Auth/utils/downloadAccount';
 
 import getEditAccountFormStyles from './styles';
-import CompletedIllustrationSvg from '../../../../assets/svgs/CompletedIllustrationSvg';
-import DownloadFile from '../../../../components/shared/DownloadFile';
 
 export default function EditAccountSuccess({ mode, account, onCompleted, style }) {
   const { styles } = useTheme({ styles: getEditAccountFormStyles() });
@@ -19,6 +20,8 @@ export default function EditAccountSuccess({ mode, account, onCompleted, style }
       onCompleted();
     }
   }
+
+  const accountFilename = getAccountDownloadableFilename(account.metadata.address);
 
   return (
     <>
@@ -35,10 +38,7 @@ export default function EditAccountSuccess({ mode, account, onCompleted, style }
           You can now download encrypted secret recovery phrase to this effect.
         </P>
 
-        <DownloadFile
-          data={account}
-          fileName={`encrypted_secret_recovery_phrase_${account.metadata.address}.json`}
-        />
+        <DownloadFile data={account} fileName={accountFilename} />
       </View>
 
       <PrimaryButton onClick={handleSubmit} style={[styles.submitButton, style?.submitButton]}>

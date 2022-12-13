@@ -9,16 +9,19 @@ import DownloadFile from 'components/shared/DownloadFile';
 import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
+import { getAccountDownloadableFilename } from 'modules/Auth/utils/downloadAccount';
 
 import getDeleteAccountFormStyles from './styles';
 
 export default function DeleteAccountForm({ mode, account, onCompleted, style }) {
   const { deleteAccount } = useAccounts();
 
+  const accountFilename = getAccountDownloadableFilename(account.metadata.address);
+
   const [downloadFile, { isLoading: isLoadingDownloadFile, isSuccess: isSuccessDownloadFile }] =
     useDownloadFile({
       data: account,
-      fileName: `encrypted_secret_recovery_phrase_${account.metadata.address}.json`,
+      fileName: accountFilename,
       onCompleted: () => {
         if (Platform.OS === 'android') {
           ToastAndroid.show(i18next.t('auth.setup.downloaded'), ToastAndroid.BOTTOM);
@@ -66,7 +69,7 @@ export default function DeleteAccountForm({ mode, account, onCompleted, style })
         </View>
 
         <DownloadFile
-          fileName={`encrypted_secret_recovery_phrase_${account.metadata.address}.json`}
+          fileName={accountFilename}
           downloadFile={downloadFile}
           isLoading={isLoadingDownloadFile}
         />

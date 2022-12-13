@@ -14,17 +14,13 @@ export default function getDeleteAccountFormStyles() {
       },
       filenameContainer: {
         marginTop: 16,
-        width: '90%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
       },
-      downloadFileIcon: {
-        marginRight: 8,
-        paddingHorizontal: 10,
-      },
+
       text: {
         fontFamily: fonts.family.heading,
         fontSize: fonts.size.small,
+        marginLeft: 8,
+        maxWidth: 320,
       },
     },
     [themes.light]: {
