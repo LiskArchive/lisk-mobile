@@ -11,14 +11,14 @@ import Avatar from 'components/shared/avatar';
 import DownloadSvg from 'assets/svgs/DownloadSvg';
 import FileSvg from 'assets/svgs/FileSvg';
 
-import getDeleteAccountConfirmationStyles from './styles';
+import getDeleteAccountFormStyles from './styles';
 
-export default function DeleteAccountConfirmation({ mode, account, onReset, style }) {
+export default function DeleteAccountForm({ mode, account, onReset, style }) {
   const [downloaded, setDownloaded] = useState(false);
 
   const { deleteAccount } = useAccounts();
 
-  const { styles } = useTheme({ styles: getDeleteAccountConfirmationStyles() });
+  const { styles } = useTheme({ styles: getDeleteAccountFormStyles() });
 
   function handleDownloadFile() {
     downloadJSON(

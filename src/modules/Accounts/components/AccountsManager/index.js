@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import EditAccountForm from '../EditAccountForm';
-import DeleteAccountConfirmation from '../DeleteAccountConfirmation';
+import DeleteAccountForm from '../DeleteAccountForm';
 import AccountList from '../AccountList';
 
 export default function AccountsManager({ mode = 'screen', onAccountClick, style }) {
@@ -56,7 +56,7 @@ export default function AccountsManager({ mode = 'screen', onAccountClick, style
 
     case 'DeleteAccount':
       children = (
-        <DeleteAccountConfirmation
+        <DeleteAccountForm
           mode="modal"
           account={activeSection.data}
           onReset={handleResetSection}
