@@ -10,7 +10,6 @@ import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
 import DownloadSvg from 'assets/svgs/DownloadSvg';
 import FileSvg from 'assets/svgs/FileSvg';
-import { stringShortener } from 'utilities/helpers';
 
 import getDeleteAccountConfirmationStyles from './styles';
 
@@ -63,12 +62,14 @@ export default function DeleteAccountConfirmation({ mode, account, onReset, styl
           {i18next.t('accounts.accountsManager.deleteAccountDescription')}
         </P>
 
-        <View style={[styles.row, styles.addressContainer]}>
+        <View style={[styles.addressContainer]}>
           <Avatar address={account.metadata.address} size={45} />
 
-          <P style={[styles.addressText, styles.theme.addressText]}>
-            {stringShortener(account.metadata.address, 5, 5)}
+          <P style={[styles.accountNameText, styles.theme.accountNameText]}>
+            {account.metadata.name}
           </P>
+
+          <P style={[styles.addressText, styles.theme.addressText]}>{account.metadata.address}</P>
         </View>
 
         <View style={[styles.row, styles.filenameContainer]}>

@@ -15,15 +15,15 @@ export default function getDeleteAccountConfirmationStyles() {
       },
       modalDescription: {
         textAlign: 'center',
-        marginBottom: 24,
-        fontSize: 12,
+        marginBottom: 8,
+        fontSize: 14,
         maxWidth: 300,
         marginLeft: 'auto',
         marginRight: 'auto',
       },
       screenDescription: {
         textAlign: 'left',
-        marginBottom: 24,
+        marginBottom: 8,
         fontSize: 14,
         lineHeight: 24,
       },
@@ -33,15 +33,21 @@ export default function getDeleteAccountConfirmationStyles() {
         justifyContent: 'center',
       },
       addressContainer: {
-        marginTop: 24,
+        alignItems: 'center',
+        marginTop: 8,
         marginBottom: 16,
       },
       filenameContainer: {
         marginTop: 16,
       },
+      accountNameText: {
+        fontSize: 16,
+        marginTop: 8,
+        fontWeight: '500',
+      },
       addressText: {
         fontSize: 14,
-        marginLeft: 8,
+        marginTop: 8,
       },
       downloadFileIcon: {
         marginLeft: 8,
@@ -61,6 +67,9 @@ export default function getDeleteAccountConfirmationStyles() {
       description: {
         color: colors.light.zodiacBlue,
       },
+      accountNameText: {
+        color: colors.light.zodiacBlue,
+      },
       text: {
         color: colors.light.zodiacBlue,
       },
@@ -75,6 +84,9 @@ export default function getDeleteAccountConfirmationStyles() {
       },
       description: {
         color: colors.dark.ghost,
+      },
+      accountNameText: {
+        color: colors.dark.white,
       },
       text: {
         color: colors.light.white,
