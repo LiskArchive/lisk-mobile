@@ -6,11 +6,11 @@ import { useTheme } from 'hooks/useTheme';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts/useAccounts';
 import { H2 } from 'components/shared/toolBox/typography';
 import Input from 'components/shared/toolBox/input';
-import { Button, PrimaryButton } from 'components/shared/toolBox/button';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 
 import getEditAccountFormStyles from './styles';
 
-export default function EditAccountForm({ account, onReset, style }) {
+export default function EditAccountForm({ account, mode, onReset, style }) {
   const { updateAccount } = useAccounts();
 
   const form = useForm({
@@ -28,13 +28,18 @@ export default function EditAccountForm({ account, onReset, style }) {
 
   const handleSubmit = form.handleSubmit((values) => {
     updateAccount(account.metadata.address, values);
-    onReset();
+
+    if (onReset) {
+      onReset();
+    }
   });
 
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, style?.container]}>
       <View style={[styles.body]}>
-        <H2 style={[styles.title, styles.theme.title, style?.title]}>Edit account name</H2>
+        {mode === 'modal' && (
+          <H2 style={[styles.title, styles.theme.title, style?.title]}>Edit account name</H2>
+        )}
 
         <Input
           label={'Account name'}
@@ -47,13 +52,9 @@ export default function EditAccountForm({ account, onReset, style }) {
         />
       </View>
 
-      <View style={[style?.footer]}>
-        <PrimaryButton onClick={handleSubmit} style={[styles.submitButton]}>
-          Done
-        </PrimaryButton>
-
-        <Button onPress={onReset}>Back</Button>
-      </View>
+      <PrimaryButton onClick={handleSubmit} style={[styles.submitButton, style?.submitButton]}>
+        Done
+      </PrimaryButton>
     </View>
   );
 }

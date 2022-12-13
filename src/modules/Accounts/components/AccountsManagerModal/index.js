@@ -14,7 +14,7 @@ export default function AccountsManagerModal({ show, setShow }) {
     <BottomModal show={show} toggleShow={setShow} style={{ children: styles.container }}>
       <AccountsManager
         mode="modal"
-        onAccountPress={() => setShow(false)}
+        onAccountClick={() => setShow(false)}
         item={AccountItem}
         swipeToClose={false}
       />

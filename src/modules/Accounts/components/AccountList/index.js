@@ -17,9 +17,9 @@ import getAccountsListStyles from './styles';
 export default function AccountList({
   mode,
   accounts,
-  onAccountPress,
-  onDeleteAccountPress,
-  onEditAccountPress,
+  onAccountClick,
+  onDeleteAccountClick,
+  onEditAccountClick,
   style,
 }) {
   const navigation = useNavigation();
@@ -41,7 +41,7 @@ export default function AccountList({
 
       navigation.navigate('Main');
 
-      if (onAccountPress) onAccountPress(account);
+      if (onAccountClick) onAccountClick(account);
     }
   }
 
@@ -65,8 +65,8 @@ export default function AccountList({
             key={item.metadata.address}
             account={item}
             onPress={() => handleSelectAccountClick(item)}
-            onDeletePress={() => onDeleteAccountPress(item)}
-            onEditPress={() => onEditAccountPress(item)}
+            onDeletePress={() => onDeleteAccountClick(item)}
+            onEditPress={() => onEditAccountClick(item)}
             active={item.metadata.address === currentAccount.metadata?.address}
           />
         )}

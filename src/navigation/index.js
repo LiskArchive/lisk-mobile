@@ -35,6 +35,7 @@ import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEve
 import navigationOptions from './options';
 import navigationLinking from './linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
+import EditAccountScreen from '../modules/Accounts/components/EditAccountScreen';
 
 const StackNavigator = createStackNavigator();
 
@@ -162,6 +163,16 @@ export default function Navigator() {
           />
           <StackNavigator.Screen
             name="Tokens"
+            component={TokensScreen}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
+            name="EditAccount"
+            component={EditAccountScreen}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
+            name="DeleteAccount"
             component={TokensScreen}
             options={navigationOptions.NoHeader}
           />

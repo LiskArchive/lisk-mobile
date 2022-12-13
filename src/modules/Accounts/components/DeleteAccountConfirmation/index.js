@@ -6,7 +6,7 @@ import { useTheme } from 'hooks/useTheme';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { downloadJSON } from 'modules/Auth/utils';
 import { H2, P } from 'components/shared/toolBox/typography';
-import { Button, PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
+import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
 import DownloadSvg from 'assets/svgs/DownloadSvg';
 import FileSvg from 'assets/svgs/FileSvg';
@@ -79,16 +79,12 @@ export default function DeleteAccountConfirmation({ account, onReset, style }) {
         </LabelButton>
       </View>
 
-      <View style={[style?.footer]}>
-        <PrimaryButton
-          onPress={handleDelete}
-          title={i18next.t('accounts.accountsManager.deleteAccountButtonText')}
-          disabled={!downloaded}
-          style={[styles.submitButton]}
-        />
-
-        <Button onPress={onReset} title={i18next.t('accounts.accountsManager.backButtonText')} />
-      </View>
+      <PrimaryButton
+        onPress={handleDelete}
+        title={i18next.t('accounts.accountsManager.deleteAccountButtonText')}
+        disabled={!downloaded}
+        style={[styles.submitButton, style?.submitButton]}
+      />
     </View>
   );
 }

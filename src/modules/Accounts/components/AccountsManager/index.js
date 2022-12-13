@@ -1,50 +1,60 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import EditAccountForm from '../EditAccountForm';
 import DeleteAccountConfirmation from '../DeleteAccountConfirmation';
 import AccountList from '../AccountList';
 
-export default function AccountsManager({ mode = 'screen', onAccountPress, style }) {
-  const [activeSection, setActiveSection] = useState({ id: 'accountsList', data: undefined });
+export default function AccountsManager({ mode = 'screen', onAccountClick, style }) {
+  const [activeSection, setActiveSection] = useState({ id: 'AccountList', data: undefined });
+
+  const navigation = useNavigation();
 
   const { accounts } = useAccounts();
 
+  function handleActionClick({ id, data }) {
+    if (mode === 'screen') {
+      return navigation.navigate({ name: id, params: data });
+    }
+
+    return setActiveSection({ id, data });
+  }
+
   function handleResetSection() {
-    setActiveSection({ id: 'accountsList', data: undefined });
+    setActiveSection({ id: 'AccountList', data: undefined });
   }
 
   let children = null;
 
   switch (activeSection.id) {
-    case 'accountsList':
+    case 'AccountList':
       children = (
         <AccountList
           mode={mode}
           accounts={accounts}
-          onAccountPress={onAccountPress}
-          onEditAccountPress={(account) =>
-            setActiveSection({ id: 'editAccountForm', data: account })
-          }
-          onDeleteAccountPress={(account) =>
-            setActiveSection({ id: 'deleteAccountConfirmation', data: account })
+          onAccountClick={onAccountClick}
+          onEditAccountClick={(account) => handleActionClick({ id: 'EditAccount', data: account })}
+          onDeleteAccountClick={(account) =>
+            handleActionClick({ id: 'DeleteAccount', data: account })
           }
           style={style?.list}
         />
       );
       break;
 
-    case 'editAccountForm':
+    case 'EditAccount':
       children = (
         <EditAccountForm
           account={activeSection.data}
           onReset={handleResetSection}
+          mode="modal"
           style={style?.editAccount}
         />
       );
       break;
 
-    case 'deleteAccountConfirmation':
+    case 'DeleteAccount':
       children = (
         <DeleteAccountConfirmation
           account={activeSection.data}

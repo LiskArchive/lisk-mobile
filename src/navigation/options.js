@@ -95,6 +95,10 @@ const navigationOptions = {
   Intro: {
     header: () => null,
   },
+  EditAccount: {
+    title: null,
+    header: () => null,
+  },
 };
 
 export default navigationOptions;
