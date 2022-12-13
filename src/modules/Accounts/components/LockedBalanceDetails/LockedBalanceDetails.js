@@ -14,7 +14,7 @@ import UnlockSvg from 'assets/svgs/UnlockSvg';
 import FormattedNumber from 'components/shared/formattedNumber';
 import getStyles from './styles';
 import { getPendingTime } from '../../utils';
-import { useAccountInfo } from '../../hooks/useAccounts/useAccountInfo';
+import { useAccountInfo } from '../../hooks/useAccountInfo';
 
 const RowItem = ({ styles, title, value, IconComponent, tokenType, language, theme }) => (
   <View style={[styles.row, styles.theme.row]}>

@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { useAccounts } from '../../hooks/useAccounts/useAccounts';
+import { useAccounts } from '../../hooks/useAccounts';
 import EditAccountForm from '../EditAccountForm';
 
 import getEditAccountScreenStyles from './styles';

@@ -1,4 +1,4 @@
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_AUTH_QUERY } from 'utilities/api/queries';
 import { API_URL } from 'utilities/api/constants';

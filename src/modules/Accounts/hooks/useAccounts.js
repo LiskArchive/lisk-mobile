@@ -5,8 +5,8 @@ import {
   addAccount as addAccountAction,
   deleteAccount as deleteAccountAction,
   updateAccount as updateAccountAction,
-} from '../../store/actions';
-import { selectAccounts } from '../../store/selectors';
+} from '../store/actions';
+import { selectAccounts } from '../store/selectors';
 
 export const useAccounts = () => {
   const dispatch = useDispatch();

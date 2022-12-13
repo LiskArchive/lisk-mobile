@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { mockSavedAccounts } from '../../__fixtures__';
-import actionTypes from '../../actionTypes';
+import { mockSavedAccounts } from '../__fixtures__';
+import actionTypes from '../actionTypes';
 import { useCurrentAccount } from './useCurrentAccount';
 
 const middlewares = [thunk];

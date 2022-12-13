@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';

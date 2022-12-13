@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
 import Input from 'components/shared/toolBox/input';

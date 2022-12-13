@@ -17,7 +17,7 @@ import CopyToClipboard from 'components/shared/copyToClipboard';
 import { settingsUpdated } from 'modules/Settings/actions';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
-import { useCurrentAccount } from './hooks/useAccounts/useCurrentAccount';
+import { useCurrentAccount } from './hooks/useCurrentAccount';
 import getStyles from './styles';
 import TransactionList from '../Transactions/components/TransactionList';
 import AccountsManagerModal from './components/AccountsManagerModal';

@@ -5,7 +5,7 @@ import i18next from 'i18next';
 import { extractAddressFromPublicKey } from 'modules/Wallet/utils/account';
 import DataRenderer from 'components/shared/DataRenderer';
 import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransaction';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';

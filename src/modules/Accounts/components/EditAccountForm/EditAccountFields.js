@@ -3,9 +3,9 @@ import { useController } from 'react-hook-form';
 import { View } from 'react-native';
 
 import { useTheme } from 'hooks/useTheme';
-import { useAccounts } from 'modules/Accounts/hooks/useAccounts/useAccounts';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
+import { useAccounts } from '../../hooks/useAccounts';
 
 import getEditAccountFormStyles from './styles';
 
