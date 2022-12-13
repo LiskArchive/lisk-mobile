@@ -5,6 +5,7 @@ export default function getDeleteAccountFormStyles() {
     common: {
       container: {
         flex: 1,
+        width: '100%',
       },
       row: {
         flexDirection: 'row',
@@ -13,9 +14,13 @@ export default function getDeleteAccountFormStyles() {
       },
       filenameContainer: {
         marginTop: 16,
+        width: '90%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
       },
       downloadFileIcon: {
-        marginLeft: 8,
+        marginRight: 8,
+        paddingHorizontal: 10,
       },
       text: {
         fontFamily: fonts.family.heading,

@@ -1,39 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Platform, ToastAndroid, View } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import { downloadJSON } from 'modules/Auth/utils';
+import { useDownloadFile } from 'hooks/useDownloadFile';
+import DownloadFile from 'components/shared/DownloadFile';
 import { H2, P } from 'components/shared/toolBox/typography';
-import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
-import DownloadSvg from 'assets/svgs/DownloadSvg';
-import FileSvg from 'assets/svgs/FileSvg';
 
 import getDeleteAccountFormStyles from './styles';
 
 export default function DeleteAccountForm({ mode, account, onCompleted, style }) {
-  const [downloaded, setDownloaded] = useState(false);
-
   const { deleteAccount } = useAccounts();
 
-  const { styles } = useTheme({ styles: getDeleteAccountFormStyles() });
-
-  function handleDownloadFile() {
-    downloadJSON(
-      account,
-      `${account.metadata.address}-encrypted_secret_recovery_phrase.json`,
-      (e) => {
-        if (!e) {
-          setDownloaded(true);
-          if (Platform.OS === 'android') {
-            ToastAndroid.show(i18next.t('auth.setup.downloaded'), ToastAndroid.BOTTOM);
-          }
+  const [downloadFile, { isLoading: isLoadingDownloadFile, isSuccess: isSuccessDownloadFile }] =
+    useDownloadFile({
+      data: account,
+      fileName: `encrypted_secret_recovery_phrase_${account.metadata.address}.json`,
+      onCompleted: () => {
+        if (Platform.OS === 'android') {
+          ToastAndroid.show(i18next.t('auth.setup.downloaded'), ToastAndroid.BOTTOM);
         }
-      }
-    );
-  }
+      },
+    });
+
+  const { styles } = useTheme({ styles: getDeleteAccountFormStyles() });
 
   function handleDelete() {
     deleteAccount(account.metadata.address);
@@ -72,29 +65,17 @@ export default function DeleteAccountForm({ mode, account, onCompleted, style })
           <P style={[styles.addressText, styles.theme.addressText]}>{account.metadata.address}</P>
         </View>
 
-        <View style={[styles.row, styles.filenameContainer]}>
-          <FileSvg style={[styles.file, { marginRight: 8 }]} />
-
-          <P style={[styles.text, styles.theme.text]}>
-            {`${account.metadata.address}-encrypted_secret_recovery_phrase.json`}
-          </P>
-        </View>
-
-        <LabelButton
-          onPress={handleDownloadFile}
-          style={[styles.row]}
-          adornments={{
-            right: <DownloadSvg style={[styles.downloadFileIcon]} />,
-          }}
-        >
-          {i18next.t('accounts.accountsManager.downloadFileButtonText')}
-        </LabelButton>
+        <DownloadFile
+          fileName={`encrypted_secret_recovery_phrase_${account.metadata.address}.json`}
+          downloadFile={downloadFile}
+          isLoading={isLoadingDownloadFile}
+        />
       </View>
 
       <PrimaryButton
         onPress={handleDelete}
         title={i18next.t('accounts.accountsManager.deleteAccountButtonText')}
-        disabled={!downloaded}
+        disabled={!isSuccessDownloadFile}
         style={[styles.submitButton, style?.submitButton]}
       />
     </View>

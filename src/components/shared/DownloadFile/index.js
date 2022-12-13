@@ -10,7 +10,14 @@ import FileSvg from 'assets/svgs/FileSvg';
 
 import getDeleteAccountFormStyles from './styles';
 
-export default function DownloadFile({ data, fileName, onCompleted, onError }) {
+export default function DownloadFile({
+  data,
+  fileName,
+  onCompleted,
+  onError,
+  downloadFile: baseDownloadFile,
+  isLoading: baseIsLoading,
+}) {
   const [downloadFile, { isLoading }] = useDownloadFile({
     data,
     fileName,
@@ -23,18 +30,18 @@ export default function DownloadFile({ data, fileName, onCompleted, onError }) {
   return (
     <View style={[styles.container]}>
       <View style={[styles.row, styles.filenameContainer]}>
-        <FileSvg style={[styles.file, { marginRight: 8 }]} />
+        <FileSvg style={[styles.downloadFileIcon]} />
 
         <P style={[styles.text, styles.theme.text]}>{fileName}</P>
       </View>
 
       <LabelButton
-        onPress={downloadFile}
+        onPress={baseDownloadFile || downloadFile}
         style={[styles.row]}
         adornments={{
           right: <DownloadSvg style={[styles.downloadFileIcon]} />,
         }}
-        disabled={isLoading}
+        disabled={baseIsLoading || isLoading}
       >
         Download
       </LabelButton>
