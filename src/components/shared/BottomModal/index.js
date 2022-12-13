@@ -38,7 +38,9 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
   return (
     <Modal transparent visible={show} onRequestClose={handleClose} animationType="fade">
       <View style={[styles.overlay, styles.theme.overlay, style?.overlay]}>
-        <Animated.View style={[styles.container, styles.theme.container, { top }]}>
+        <Animated.View
+          style={[styles.container, styles.theme.container, style?.container, { top }]}
+        >
           <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
 
           {showClose && (

@@ -3,6 +3,12 @@ import { colors, themes, fonts } from 'constants/styleGuide';
 export default function getDeleteAccountConfirmationStyles() {
   return {
     common: {
+      container: {
+        flex: 1,
+      },
+      body: {
+        flex: 1,
+      },
       title: {
         textAlign: 'center',
         marginBottom: 8,
@@ -11,17 +17,6 @@ export default function getDeleteAccountConfirmationStyles() {
         textAlign: 'center',
         marginBottom: 24,
         fontSize: 12,
-      },
-      button: {
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginVertical: 5,
-      },
-      outline: {
-        borderWidth: 1,
-        borderRadius: 5,
-        minHeight: 48,
       },
       row: {
         flexDirection: 'row',
@@ -46,11 +41,11 @@ export default function getDeleteAccountConfirmationStyles() {
         fontFamily: fonts.family.heading,
         fontSize: fonts.size.small,
       },
+      submitButton: {
+        marginBottom: 8,
+      },
     },
     [themes.light]: {
-      outline: {
-        borderColor: colors.light.platinumGray,
-      },
       title: {
         color: colors.light.zodiacBlue,
       },
@@ -66,9 +61,6 @@ export default function getDeleteAccountConfirmationStyles() {
     },
 
     [themes.dark]: {
-      outline: {
-        borderColor: colors.light.volcanicSand,
-      },
       title: {
         color: colors.dark.white,
       },

@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
 
-import { useTheme } from 'hooks/useTheme';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import EditAccountForm from '../EditAccountForm';
 import DeleteAccountConfirmation from '../DeleteAccountConfirmation';
 import AccountList from '../AccountList';
 
-import getAccountsManagerStyles from './styles';
-
 export default function AccountsManager({ mode = 'screen', onAccountPress, style }) {
   const [activeSection, setActiveSection] = useState({ id: 'accountsList', data: undefined });
 
   const { accounts } = useAccounts();
-
-  const { styles } = useTheme({ styles: getAccountsManagerStyles() });
 
   function handleResetSection() {
     setActiveSection({ id: 'accountsList', data: undefined });
@@ -35,13 +29,19 @@ export default function AccountsManager({ mode = 'screen', onAccountPress, style
           onDeleteAccountPress={(account) =>
             setActiveSection({ id: 'deleteAccountConfirmation', data: account })
           }
-          style={style}
+          style={style?.list}
         />
       );
       break;
 
     case 'editAccountForm':
-      children = <EditAccountForm account={activeSection.data} onReset={handleResetSection} />;
+      children = (
+        <EditAccountForm
+          account={activeSection.data}
+          onReset={handleResetSection}
+          style={style?.editAccount}
+        />
+      );
       break;
 
     case 'deleteAccountConfirmation':
@@ -49,7 +49,7 @@ export default function AccountsManager({ mode = 'screen', onAccountPress, style
         <DeleteAccountConfirmation
           account={activeSection.data}
           onReset={handleResetSection}
-          style={style}
+          style={style?.deleteAccount}
         />
       );
       break;
@@ -58,7 +58,5 @@ export default function AccountsManager({ mode = 'screen', onAccountPress, style
       break;
   }
 
-  return (
-    <View style={[styles.container, styles.theme.container, style?.container]}>{children}</View>
-  );
+  return children;
 }

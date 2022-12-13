@@ -33,17 +33,19 @@ export default function EditAccountForm({ account, onReset, style }) {
 
   return (
     <View style={[styles.container]}>
-      <H2 style={[styles.title, styles.theme.title, style?.title]}>Edit account name</H2>
+      <View style={[styles.body]}>
+        <H2 style={[styles.title, styles.theme.title, style?.title]}>Edit account name</H2>
 
-      <Input
-        label={'Account name'}
-        value={name.value}
-        placeholder="Input wallet address or choose a username"
-        onChange={name.onChange}
-        innerStyles={{
-          containerStyle: styles.inputContainer,
-        }}
-      />
+        <Input
+          label={'Account name'}
+          value={name.value}
+          placeholder="Enter a name"
+          onChange={name.onChange}
+          innerStyles={{
+            containerStyle: styles.inputContainer,
+          }}
+        />
+      </View>
 
       <View style={[style?.footer]}>
         <PrimaryButton onClick={handleSubmit} style={[styles.submitButton]}>

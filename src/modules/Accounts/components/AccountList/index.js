@@ -46,16 +46,16 @@ export default function AccountList({
   }
 
   return (
-    <>
+    <View style={[styles.container, style?.container]}>
       <H2 style={[styles.title, styles.theme.title, style?.title]}>
         {i18next.t('accounts.accountsManager.title')}
       </H2>
 
-      {mode === 'modal' && (
-        <P style={[styles.description, styles.theme.description, style?.description]}>
-          {i18next.t('accounts.accountsManager.description')}
-        </P>
-      )}
+      <P style={[styles.description, styles.theme.description, style?.description]}>
+        {mode === 'modal'
+          ? i18next.t('accounts.accountsManager.modalDescription')
+          : i18next.t('accounts.accountsManager.screenDescription')}
+      </P>
 
       <InfiniteScrollList
         data={accounts}
@@ -80,6 +80,6 @@ export default function AccountList({
           {i18next.t('accounts.accountsManager.addAccountButtonText')}
         </PrimaryButton>
       </View>
-    </>
+    </View>
   );
 }

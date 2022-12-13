@@ -5,12 +5,7 @@ export default function getAccountsManagerScreenStyles() {
     common: {
       wrapper: {
         flex: 1,
-        paddingTop: boxes.boxPadding,
-      },
-      container: {
-        flex: 1,
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
+        padding: boxes.boxPadding,
       },
     },
     [themes.light]: {

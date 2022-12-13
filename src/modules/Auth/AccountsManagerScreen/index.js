@@ -17,7 +17,7 @@ export default function AccountsManagerScreen() {
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <Splash animate={false} />
 
-      <AccountsManager style={{ container: styles.container }} />
+      <AccountsManager />
     </SafeAreaView>
   );
 }

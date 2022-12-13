@@ -6,6 +6,9 @@ export default function getEditAccountFormStyles() {
       container: {
         flex: 1,
       },
+      body: {
+        flex: 1,
+      },
       title: {
         textAlign: 'center',
         marginBottom: 16,

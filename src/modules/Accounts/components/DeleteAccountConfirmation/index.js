@@ -42,8 +42,8 @@ export default function DeleteAccountConfirmation({ account, onReset, style }) {
   }
 
   return (
-    <>
-      <View style={{ flex: 1 }}>
+    <View style={[styles.container, style?.container]}>
+      <View style={[styles.body, style?.body]}>
         <H2 style={[styles.title, styles.theme.title, style?.title]}>
           {i18next.t('accounts.accountsManager.deleteAccountTitle')}
         </H2>
@@ -84,15 +84,11 @@ export default function DeleteAccountConfirmation({ account, onReset, style }) {
           onPress={handleDelete}
           title={i18next.t('accounts.accountsManager.deleteAccountButtonText')}
           disabled={!downloaded}
-          style={[styles.button, styles.outline, styles.theme.outline]}
+          style={[styles.submitButton]}
         />
 
-        <Button
-          onPress={onReset}
-          title={i18next.t('accounts.accountsManager.backButtonText')}
-          style={[styles.button, styles.outline, styles.theme.outline]}
-        />
+        <Button onPress={onReset} title={i18next.t('accounts.accountsManager.backButtonText')} />
       </View>
-    </>
+    </View>
   );
 }
