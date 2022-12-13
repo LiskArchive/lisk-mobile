@@ -1,6 +1,6 @@
 import { colors, themes, fonts } from 'constants/styleGuide';
 
-export default function getDeleteAccountFormStyles() {
+export default function getDownloadFileStyles() {
   return {
     common: {
       container: {

@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import { useAccounts } from '../../hooks/useAccounts/useAccounts';
 import EditAccountForm from '../EditAccountForm';
 
 import getEditAccountScreenStyles from './styles';
@@ -11,11 +12,13 @@ import getEditAccountScreenStyles from './styles';
 export default function EditAccountScreen({ route }) {
   const navigation = useNavigation();
 
+  const { getAccount } = useAccounts();
+
+  const account = getAccount(route.params.metadata.address);
+
   const { styles } = useTheme({
     styles: getEditAccountScreenStyles(),
   });
-
-  const account = route.params;
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>

@@ -13,7 +13,7 @@ import FileSvg from 'assets/svgs/FileSvg';
 
 import getDeleteAccountFormStyles from './styles';
 
-export default function DeleteAccountForm({ mode, account, onReset, style }) {
+export default function DeleteAccountForm({ mode, account, onCompleted, style }) {
   const [downloaded, setDownloaded] = useState(false);
 
   const { deleteAccount } = useAccounts();
@@ -38,8 +38,8 @@ export default function DeleteAccountForm({ mode, account, onReset, style }) {
   function handleDelete() {
     deleteAccount(account.metadata.address);
 
-    if (onReset) {
-      onReset();
+    if (onCompleted) {
+      onCompleted();
     }
   }
 

@@ -48,7 +48,7 @@ export default function AccountsManager({ mode = 'screen', onAccountClick, style
         <EditAccountForm
           mode="modal"
           account={activeSection.data}
-          onReset={handleResetSection}
+          onCompleted={handleResetSection}
           style={style?.editAccount}
         />
       );
@@ -59,7 +59,7 @@ export default function AccountsManager({ mode = 'screen', onAccountClick, style
         <DeleteAccountForm
           mode="modal"
           account={activeSection.data}
-          onReset={handleResetSection}
+          onCompleted={handleResetSection}
           style={style?.deleteAccount}
         />
       );
