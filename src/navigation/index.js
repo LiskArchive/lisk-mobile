@@ -29,13 +29,14 @@ import SendToken from 'modules/SendToken';
 import RequestToken from 'modules/RequestToken';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
+import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
+import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
 import AppNavigator from './components/AppNavigator';
 import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEventsManager';
 
 import navigationOptions from './options';
 import navigationLinking from './linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
-import EditAccountScreen from '../modules/Accounts/components/EditAccountScreen';
 
 const StackNavigator = createStackNavigator();
 
@@ -173,7 +174,7 @@ export default function Navigator() {
           />
           <StackNavigator.Screen
             name="DeleteAccount"
-            component={TokensScreen}
+            component={DeleteAccountScreen}
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>

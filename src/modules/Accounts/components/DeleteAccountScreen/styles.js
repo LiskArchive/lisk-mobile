@@ -1,6 +1,6 @@
 import { colors, themes, boxes } from 'constants/styleGuide';
 
-export default function getEditAccountScreenStyles() {
+export default function getDeleteAccountScreenStyles() {
   return {
     common: {
       container: {

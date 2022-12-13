@@ -13,10 +13,19 @@ export default function getDeleteAccountConfirmationStyles() {
         textAlign: 'center',
         marginBottom: 8,
       },
-      description: {
+      modalDescription: {
         textAlign: 'center',
         marginBottom: 24,
         fontSize: 12,
+        maxWidth: 300,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+      screenDescription: {
+        textAlign: 'left',
+        marginBottom: 24,
+        fontSize: 14,
+        lineHeight: 24,
       },
       row: {
         flexDirection: 'row',

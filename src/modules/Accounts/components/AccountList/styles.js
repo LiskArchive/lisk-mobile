@@ -14,7 +14,7 @@ export default function getAccountsListStyles() {
         textAlign: 'center',
         marginBottom: 16,
         fontSize: 12,
-        maxWidth: 290,
+        maxWidth: 300,
         marginLeft: 'auto',
         marginRight: 'auto',
       },

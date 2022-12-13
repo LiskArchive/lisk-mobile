@@ -14,7 +14,7 @@ import { stringShortener } from 'utilities/helpers';
 
 import getDeleteAccountConfirmationStyles from './styles';
 
-export default function DeleteAccountConfirmation({ account, onReset, style }) {
+export default function DeleteAccountConfirmation({ mode, account, onReset, style }) {
   const [downloaded, setDownloaded] = useState(false);
 
   const { deleteAccount } = useAccounts();
@@ -38,17 +38,28 @@ export default function DeleteAccountConfirmation({ account, onReset, style }) {
 
   function handleDelete() {
     deleteAccount(account.metadata.address);
-    onReset();
+
+    if (onReset) {
+      onReset();
+    }
   }
 
   return (
     <View style={[styles.container, style?.container]}>
       <View style={[styles.body, style?.body]}>
-        <H2 style={[styles.title, styles.theme.title, style?.title]}>
-          {i18next.t('accounts.accountsManager.deleteAccountTitle')}
-        </H2>
+        {mode === 'modal' && (
+          <H2 style={[styles.title, styles.theme.title, style?.title]}>
+            {i18next.t('accounts.accountsManager.deleteAccountTitle')}
+          </H2>
+        )}
 
-        <P style={[styles.description, styles.theme.description, style?.description]}>
+        <P
+          style={[
+            mode === 'modal' ? styles.modalDescription : styles.screenDescription,
+            styles.theme.description,
+            style?.description,
+          ]}
+        >
           {i18next.t('accounts.accountsManager.deleteAccountDescription')}
         </P>
 

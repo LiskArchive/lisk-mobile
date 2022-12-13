@@ -46,9 +46,9 @@ export default function AccountsManager({ mode = 'screen', onAccountClick, style
     case 'EditAccount':
       children = (
         <EditAccountForm
+          mode="modal"
           account={activeSection.data}
           onReset={handleResetSection}
-          mode="modal"
           style={style?.editAccount}
         />
       );
@@ -57,6 +57,7 @@ export default function AccountsManager({ mode = 'screen', onAccountClick, style
     case 'DeleteAccount':
       children = (
         <DeleteAccountConfirmation
+          mode="modal"
           account={activeSection.data}
           onReset={handleResetSection}
           style={style?.deleteAccount}
