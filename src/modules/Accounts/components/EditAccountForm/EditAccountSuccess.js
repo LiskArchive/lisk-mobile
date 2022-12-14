@@ -10,13 +10,14 @@ import { getAccountDownloadableFilename } from 'modules/Auth/utils/downloadAccou
 
 import getEditAccountFormStyles from './styles';
 
-export default function EditAccountSuccess({ mode, account, onCompleted, style }) {
+export default function EditAccountSuccess({ account, onCompleted, style }) {
   const { styles } = useTheme({ styles: getEditAccountFormStyles() });
 
   function handleSubmit() {
     console.log({ account });
 
     if (onCompleted) {
+      console.log('hereee');
       onCompleted();
     }
   }
@@ -28,13 +29,7 @@ export default function EditAccountSuccess({ mode, account, onCompleted, style }
       <View style={[styles.body]}>
         <CompletedIllustrationSvg style={[styles.illustration]} />
 
-        <P
-          style={[
-            mode === 'modal' ? styles.modalDescription : styles.screenDescription,
-            styles.theme.description,
-            style?.description,
-          ]}
-        >
+        <P style={[styles.description, styles.theme.description, style?.description]}>
           You can now download encrypted secret recovery phrase to this effect.
         </P>
 

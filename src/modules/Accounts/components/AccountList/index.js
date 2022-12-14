@@ -5,6 +5,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
@@ -16,13 +17,14 @@ import getAccountsListStyles from './styles';
 
 export default function AccountList({
   mode,
-  accounts,
   onAccountClick,
   onDeleteAccountClick,
   onEditAccountClick,
   style,
 }) {
   const navigation = useNavigation();
+
+  const { accounts } = useAccounts();
 
   const [currentAccount, setAccount] = useCurrentAccount();
 
@@ -75,7 +77,7 @@ export default function AccountList({
         // is refactored to use react-query.
       />
 
-      <View style={[style?.footer]}>
+      <View style={[styles.footer, style?.footer]}>
         <PrimaryButton onClick={() => navigation.navigate('AuthMethod')}>
           {i18next.t('accounts.accountsManager.addAccountButtonText')}
         </PrimaryButton>

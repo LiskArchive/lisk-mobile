@@ -21,7 +21,7 @@ export default function getEditAccountFormStyles() {
       inputContainer: {
         marginBottom: 24,
       },
-      modalDescription: {
+      description: {
         textAlign: 'center',
         marginBottom: 8,
         fontSize: 14,
@@ -29,12 +29,7 @@ export default function getEditAccountFormStyles() {
         marginLeft: 'auto',
         marginRight: 'auto',
       },
-      screenDescription: {
-        textAlign: 'left',
-        marginBottom: 8,
-        fontSize: 14,
-        lineHeight: 24,
-      },
+
       submitButton: {
         marginBottom: 8,
       },

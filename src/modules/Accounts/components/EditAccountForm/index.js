@@ -27,7 +27,7 @@ export default function EditAccountForm({ account, mode, onCompleted, style }) {
 
       <Stepper currentIndex={0}>
         <EditAccountFields account={account} form={form} style={style} />
-        <EditAccountSuccess mode={mode} account={account} onCompleted={onCompleted} style={style} />
+        <EditAccountSuccess account={account} onCompleted={onCompleted} style={style} />
       </Stepper>
     </View>
   );

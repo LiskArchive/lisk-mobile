@@ -18,6 +18,9 @@ export default function getAccountsListStyles() {
         marginLeft: 'auto',
         marginRight: 'auto',
       },
+      footer: {
+        marginTop: 24,
+      },
     },
     [themes.light]: {
       title: {
