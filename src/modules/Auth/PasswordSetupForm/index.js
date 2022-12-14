@@ -69,7 +69,7 @@ export default function PasswordSetupForm({ route }) {
     setConfirmPasswordError('');
   }, [password, confirmPassword]);
 
-  const onContinue = () => navigation.navigate('AccountsManagerScreen');
+  const onContinue = () => navigation.navigate('Main');
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
