@@ -1,13 +1,10 @@
-import { Dimensions } from 'react-native';
+import { boxes } from 'constants/styleGuide';
 
 export default function getAccountsManagerModalStyles() {
   return {
     common: {
       container: {
-        height: Dimensions.get('window').height / 1.8,
-      },
-      footer: {
-        marginBottom: 16,
+        paddingBottom: boxes.boxPadding,
       },
     },
   };

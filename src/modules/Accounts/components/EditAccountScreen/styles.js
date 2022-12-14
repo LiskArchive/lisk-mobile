@@ -1,21 +1,22 @@
 import { colors, themes, boxes } from 'constants/styleGuide';
 
-export default function getAccountsManagerScreenStyles() {
+export default function getEditAccountScreenStyles() {
   return {
     common: {
-      wrapper: {
+      container: {
         flex: 1,
+      },
+      formContainer: {
         padding: boxes.boxPadding,
       },
     },
     [themes.light]: {
-      wrapper: {
+      container: {
         backgroundColor: colors.dark.white,
       },
     },
-
     [themes.dark]: {
-      wrapper: {
+      container: {
         backgroundColor: colors.dark.black,
       },
     },

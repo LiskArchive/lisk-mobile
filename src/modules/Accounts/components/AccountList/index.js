@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
@@ -16,12 +17,14 @@ import getAccountsListStyles from './styles';
 
 export default function AccountList({
   mode,
-  accounts,
-  onAccountPress,
-  onDeleteAccountPress,
+  onAccountClick,
+  onDeleteAccountClick,
+  onEditAccountClick,
   style,
 }) {
   const navigation = useNavigation();
+
+  const { accounts } = useAccounts();
 
   const [currentAccount, setAccount] = useCurrentAccount();
 
@@ -40,21 +43,21 @@ export default function AccountList({
 
       navigation.navigate('Main');
 
-      if (onAccountPress) onAccountPress(account);
+      if (onAccountClick) onAccountClick(account);
     }
   }
 
   return (
-    <>
+    <View style={[styles.container, style?.container]}>
       <H2 style={[styles.title, styles.theme.title, style?.title]}>
         {i18next.t('accounts.accountsManager.title')}
       </H2>
 
-      {mode === 'modal' && (
-        <P style={[styles.description, styles.theme.description, style?.description]}>
-          {i18next.t('accounts.accountsManager.description')}
-        </P>
-      )}
+      <P style={[styles.description, styles.theme.description, style?.description]}>
+        {mode === 'modal'
+          ? i18next.t('accounts.accountsManager.modalDescription')
+          : i18next.t('accounts.accountsManager.screenDescription')}
+      </P>
 
       <InfiniteScrollList
         data={accounts}
@@ -64,7 +67,8 @@ export default function AccountList({
             key={item.metadata.address}
             account={item}
             onPress={() => handleSelectAccountClick(item)}
-            onDeletePress={() => onDeleteAccountPress(item)}
+            onDeletePress={() => onDeleteAccountClick(item)}
+            onEditPress={() => onEditAccountClick(item)}
             active={item.metadata.address === currentAccount.metadata?.address}
           />
         )}
@@ -73,11 +77,11 @@ export default function AccountList({
         // is refactored to use react-query.
       />
 
-      <View style={[style?.footer]}>
+      <View style={[styles.footer, style?.footer]}>
         <PrimaryButton onClick={() => navigation.navigate('AuthMethod')}>
           {i18next.t('accounts.accountsManager.addAccountButtonText')}
         </PrimaryButton>
       </View>
-    </>
+    </View>
   );
 }

@@ -14,7 +14,14 @@ import { colors } from 'constants/styleGuide';
 
 import getAccountItemStyles from './styles';
 
-export default function AccountItem({ account, onPress, onDeletePress, testID, active }) {
+export default function AccountItem({
+  account,
+  onPress,
+  onEditPress,
+  onDeletePress,
+  testID,
+  active,
+}) {
   const { styles, theme } = useTheme({ styles: getAccountItemStyles() });
 
   const { name: username, address } = account.metadata;
@@ -35,8 +42,7 @@ export default function AccountItem({ account, onPress, onDeletePress, testID, a
           title: 'Edit',
           color: colors.dark.blueGray,
           icon: () => <Icon name="edit-bookmark" size={20} color={colors[theme].white} />,
-          // TODO: Implement edit action.
-          onPress: () => {},
+          onPress: onEditPress,
         },
         {
           title: 'Delete',

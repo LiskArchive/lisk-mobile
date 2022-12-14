@@ -1,11 +1,13 @@
-import { colors, themes } from 'constants/styleGuide';
+import { colors, themes, boxes } from 'constants/styleGuide';
 
-export default function getAccountsManagerStyles() {
+export default function getDeleteAccountScreenStyles() {
   return {
     common: {
       container: {
         flex: 1,
-        width: '100%',
+      },
+      formContainer: {
+        padding: boxes.boxPadding,
       },
     },
     [themes.light]: {
@@ -13,7 +15,6 @@ export default function getAccountsManagerStyles() {
         backgroundColor: colors.dark.white,
       },
     },
-
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.black,

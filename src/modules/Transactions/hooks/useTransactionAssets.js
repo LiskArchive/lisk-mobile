@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 import { themes } from 'constants/styleGuide';
 import { useTheme } from 'hooks/useTheme';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 
 import setSecondPassphraseLight from 'assets/images/txDetail/second-passphrase-light.png';
 import setSecondPassphraseDark from 'assets/images/txDetail/second-passphrase-dark.png';

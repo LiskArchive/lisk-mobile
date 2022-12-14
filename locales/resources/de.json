@@ -552,7 +552,8 @@
   "accounts": {
     "accountsManager": {
       "title": "Konten verwalten",
-      "description": "Sie können Ihr Konto wechseln und auch jedes Konto entfernen, das Sie derzeit nicht verwenden",
+      "modalDescription": "Sie können Ihr Konto bearbeiten, wechseln und sichern und auch ein Konto entfernen, das Sie gerade nicht verwenden",
+      "screenDescription": "Sie können Ihr Konto wechseln und auch jedes Konto entfernen, das Sie derzeit nicht verwenden",
       "addAccountButtonText": "Konto hinzufügen",
       "deleteAccountTitle": "Konto entfernen?",
       "deleteAccountDescription": "Dieses Konto wird nicht mehr auf diesem Gerät gespeichert. Sie können Ihre geheime Wiederherstellungsphrase sichern, bevor Sie sie entfernen.",

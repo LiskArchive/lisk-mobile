@@ -1,4 +1,4 @@
-import { useCurrentAccount } from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';

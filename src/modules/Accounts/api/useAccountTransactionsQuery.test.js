@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import * as useCurrentAccount from 'modules/Accounts/hooks/useAccounts/useCurrentAccount';
+import * as useCurrentAccount from 'modules/Accounts/hooks/useCurrentAccount';
 import { mockGetTransactionsQuery } from 'modules/Transactions/__fixtures__';
 import { mockSavedAccounts } from '../__fixtures__';
 import { useAccountTransactionsQuery } from './useAccountTransactionsQuery';

@@ -552,7 +552,8 @@
   "accounts": {
     "accountsManager": {
       "title": "Manage accounts",
-      "description": "You can switch your account and also remove any account you're not using at the moment",
+      "modalDescription": "You can edit, switch and backup your account and also you can remove an account that you’re not using at the moment",
+      "screenDescription": "You can switch your account and also remove any account you’re not using at the moment",
       "addAccountButtonText": "Add account",
       "deleteAccountTitle": "Remove account?",
       "deleteAccountDescription": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",

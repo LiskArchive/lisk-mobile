@@ -4,8 +4,9 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { act } from '@testing-library/react-hooks';
 import { renderHook } from '@testing-library/react-native';
-import { mockSavedAccounts } from '../../__fixtures__';
-import actionTypes from '../../actionTypes';
+
+import { mockSavedAccounts } from '../__fixtures__';
+import actionTypes from '../actionTypes';
 import { useAccounts } from './useAccounts';
 
 const middlewares = [thunk];
@@ -60,14 +61,14 @@ describe('useAccount hook', () => {
   });
 
   it('getAccount should return specific account selected by address', async () => {
-    const { getAccountByAddress } = result.current;
+    const { getAccount } = result.current;
     const address = mockSavedAccounts[0].metadata.address;
-    const account = getAccountByAddress(address);
+    const account = getAccount(address);
     expect(account).toMatchObject(mockSavedAccounts[0]);
   });
 
   it('deleteAccount should dispatch an action', async () => {
-    const { deleteAccountByAddress } = result.current;
+    const { deleteAccount } = result.current;
     store.clearActions();
     const address = mockSavedAccounts[0].metadata.address;
     const expectedAction = {
@@ -75,7 +76,7 @@ describe('useAccount hook', () => {
       address,
     };
     act(() => {
-      deleteAccountByAddress(address);
+      deleteAccount(address);
     });
     expect(mockDispatch).toHaveBeenCalledTimes(1);
     expect(mockDispatch).toHaveBeenCalledWith(expectedAction);

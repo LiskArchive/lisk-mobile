@@ -11,7 +11,8 @@ import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
 import DropDownHolder from 'utilities/alert';
-import { useAccounts, useCurrentAccount } from 'modules/Accounts/hooks/useAccounts';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { passwordValidator } from '../validators';
 import PasswordSetupSuccess from '../PasswordSetupSuccess';
 import { useEncryptAccount } from '../hooks/useEncryptAccount';
@@ -68,7 +69,7 @@ export default function PasswordSetupForm({ route }) {
     setConfirmPasswordError('');
   }, [password, confirmPassword]);
 
-  const onContinue = () => navigation.navigate('AccountsManagerScreen');
+  const onContinue = () => navigation.navigate('Main');
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>

@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import * as apiClient from 'utilities/api/lisk/apiClient';
-import { setAccountSummary } from '../../store/actions';
-import { selectAccountSummary } from '../../store/selectors';
+import { setAccountSummary } from '../store/actions';
+import { selectAccountSummary } from '../store/selectors';
 import { useCurrentAccount } from './useCurrentAccount';
 
 export function useAccountInfo() {
