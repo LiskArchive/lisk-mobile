@@ -1,21 +1,39 @@
 /* eslint-disable max-statements */
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Share from 'react-native-share';
 import Permissions from 'react-native-permissions';
 import RNFS from 'react-native-fs';
 import { Platform } from 'react-native';
 
+/**
+ * Provides a stateful callback to download data as files.
+ * @param {Object} data - Data to be saved into the File.
+ * @param {String} fileName - Name to put to the downloaded file.
+ * @param {Function} onCompleted - Optional callback to execute if the download success.
+ * @param {Function} onError - Optional callback to execute if the download fails.
+ * @returns {[Function, Object]} - The download trigger function and the download process state (loading, error and success flags).
+ */
 export function useDownloadFile({ data, fileName, onCompleted, onError }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState();
   const [isError, setIsError] = useState();
   const [error, setError] = useState();
 
-  async function handleDownload() {
-    try {
+  const resetState = useCallback(() => {
+    if (isSuccess !== undefined) {
       setIsSuccess();
-      setError();
+    }
+    if (isError !== undefined) {
       setIsError();
+    }
+    if (error !== undefined) {
+      setError();
+    }
+  }, [error, isError, isSuccess]);
+
+  const downloadFile = useCallback(async () => {
+    try {
+      resetState();
 
       setIsLoading(true);
 
@@ -53,7 +71,7 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
         onError(_error);
       }
     }
-  }
+  }, [data, fileName, onCompleted, onError, resetState]);
 
-  return [handleDownload, { isLoading, error, isError, isSuccess }];
+  return [downloadFile, { isLoading, error, isError, isSuccess }];
 }
