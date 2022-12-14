@@ -27,6 +27,7 @@ export default function EditAccountScreen({ route }) {
       <EditAccountForm
         mode="screen"
         account={account}
+        onCompleted={() => navigation.navigate('AccountsManagerScreen')}
         style={{ container: styles.formContainer }}
       />
     </SafeAreaView>

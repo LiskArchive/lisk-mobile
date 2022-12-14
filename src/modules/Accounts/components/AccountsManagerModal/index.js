@@ -20,6 +20,7 @@ export default function AccountsManagerModal({ show, setShow }) {
 
   function handleCompleted() {
     navigation.navigate('Main');
+    setActiveSection({ id: 'AccountList', data: undefined });
     setShow(false);
   }
 

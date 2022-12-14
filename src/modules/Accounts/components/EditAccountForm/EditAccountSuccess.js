@@ -14,10 +14,7 @@ export default function EditAccountSuccess({ account, onCompleted, style }) {
   const { styles } = useTheme({ styles: getEditAccountFormStyles() });
 
   function handleSubmit() {
-    console.log({ account });
-
     if (onCompleted) {
-      console.log('hereee');
       onCompleted();
     }
   }
