@@ -42,8 +42,7 @@ export default () => ({
       fontSize: 14,
     },
     footer: {
-      paddingLeft: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
+      padding: boxes.boxPadding,
     },
   },
   [themes.light]: {

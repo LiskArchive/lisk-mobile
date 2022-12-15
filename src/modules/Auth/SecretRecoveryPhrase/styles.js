@@ -9,6 +9,7 @@ export default () => ({
       flex: 1,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
+      paddingBottom: boxes.boxPadding,
     },
     description: {
       fontFamily: fonts.family.context,

@@ -42,11 +42,7 @@ export default function PasswordSetupForm({ route }) {
         <PasswordSetupSuccess encryptedJson={encryptedAccount} onContinue={handleContinue} />
       ) : (
         <>
-          <HeaderBackButton
-            title="auth.setup.passwordSetupTitle"
-            onPress={navigation.goBack}
-            containerStyle={styles.header}
-          />
+          <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
 
           <ScrollView contentContainerStyle={styles.container}>
             <Text style={[styles.description, styles.theme.description]}>
