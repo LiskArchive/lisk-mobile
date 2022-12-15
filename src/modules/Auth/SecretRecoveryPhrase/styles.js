@@ -22,11 +22,17 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.dark.white,
     },
+    description: {
+      color: colors.light.zodiacBlue,
+    },
   },
 
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.black,
+    },
+    description: {
+      color: colors.dark.ghost,
     },
   },
 });
