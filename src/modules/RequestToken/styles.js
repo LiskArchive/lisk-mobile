@@ -13,8 +13,7 @@ export default () => ({
       paddingRight: boxes.boxPadding,
     },
     footer: {
-      paddingLeft: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
+      padding: boxes.boxPadding,
     },
     applicationNameContainer: {
       flexDirection: 'row',

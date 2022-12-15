@@ -1,5 +1,10 @@
+/* eslint-disable max-statements */
 import React from 'react';
+
+import { useTheme } from 'hooks/useTheme';
 import { P } from 'components/shared/toolBox/typography';
+
+import getDataRendererStyles from './styles';
 
 /**
  * Allows to render API fetched data handling its different
@@ -34,14 +39,24 @@ export default function DataRenderer({
   hideOnEmpty,
   style,
 }) {
+  const { styles } = useTheme({ styles: getDataRendererStyles() });
+
   // TODO: Add Skeleton or Loader when component is available.
   if (isLoading) {
-    return renderLoading ? renderLoading() : <P style={style?.loading}>Loading...</P>;
+    return renderLoading ? (
+      renderLoading()
+    ) : (
+      <P style={[styles.text, styles.theme.text, style?.loading]}>Loading...</P>
+    );
   }
 
   // TODO: Add Error general component when component is available.
   if (error) {
-    return renderError ? renderError(error) : <P style={style?.error}>Error!</P>;
+    return renderError ? (
+      renderError(error)
+    ) : (
+      <P style={[styles.errorText, styles.theme.errorText, style?.error]}>Error!</P>
+    );
   }
 
   if (Array.isArray(data) ? !data.length : !data) {
@@ -49,7 +64,7 @@ export default function DataRenderer({
 
     if (renderEmpty) return renderEmpty();
 
-    return <P style={style?.empty}>No data available</P>;
+    return <P style={[styles.text, styles.theme.text, style?.empty]}>No data available</P>;
   }
 
   return renderData ? renderData(data) : children;
