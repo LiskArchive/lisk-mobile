@@ -6,6 +6,7 @@ import { themes } from 'constants/styleGuide';
 import EyeSvg from 'assets/svgs/EyeSvg';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
+import EyeClosedSvg from '../../../../assets/svgs/EyeClosedSvg';
 
 class Input extends React.Component {
   state = {
@@ -124,7 +125,7 @@ class Input extends React.Component {
               onPress={this.toggleSecureTextEntry}
               style={styles.secureTextEntryIcon}
             >
-              <EyeSvg />
+              {this.state.secureTextEntry ? <EyeSvg /> : <EyeClosedSvg />}
             </TouchableOpacity>
           )}
         </View>
