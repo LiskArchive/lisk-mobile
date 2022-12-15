@@ -29,7 +29,9 @@ export default function TokenListTabs({
           </P>
         </TouchableOpacity>
       ) : (
-        <P style={[styles.tabSingleItemText]}>{i18next.t('accounts.tokens')}</P>
+        <P style={[styles.tabSingleItemText, styles.theme.tabSingleItemText]}>
+          {i18next.t('accounts.tokens')}
+        </P>
       )}
 
       {lockedTokens && (

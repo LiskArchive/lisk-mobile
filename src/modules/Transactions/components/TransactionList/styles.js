@@ -9,7 +9,7 @@ export default function getTransactionListStyles() {
         alignItems: 'center',
       },
       title: {
-        fontWeight: '500',
+        fontWeight: 'bold',
         fontSize: 14,
       },
       labelButton: {

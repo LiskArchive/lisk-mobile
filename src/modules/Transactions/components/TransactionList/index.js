@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
@@ -44,9 +44,9 @@ export default function TransactionList({ mode = 'overview', style }) {
 
     return (
       <View style={[styles.header, style?.header]}>
-        <Text style={[styles.title, styles.theme.title, style?.title]}>
+        <P style={[styles.title, styles.theme.title, style?.title]}>
           {i18next.t('transactions.transactionList.title')}
-        </Text>
+        </P>
 
         {!errorOnTransactions && !isLoadingTransactions && (
           <LabelButton
