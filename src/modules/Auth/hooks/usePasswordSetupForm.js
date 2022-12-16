@@ -26,6 +26,12 @@ const validationSchema = yup
   })
   .required();
 
+/**
+ * Provides a stateful form to handle users passwords setup process.
+ * @param {String} passphrase - Generated passphrase to consider on the submit.
+ * @returns - The form fields, error state, submit callback and other handlers.
+ * Also, the encrypt process state (isLoading, isError, isSuccess, among others).
+ */
 export function usePasswordSetupForm(passphrase) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState();
