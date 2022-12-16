@@ -21,7 +21,7 @@ export default function PasswordSetupSuccess({ encryptedJson, onContinue }) {
       illustration={<CompletedIllustrationSvg />}
       title={i18next.t('auth.setup.passwordSetupSuccessTitle')}
       description={i18next.t('auth.setup.passwordSetupSuccessDescription')}
-      buttonText={i18next.t('auth.setup.buttons.passwordSetupContinue')}
+      buttonText={i18next.t('auth.setup.buttons.passwordSetupContinueButton')}
       disabled={!isSuccessDownloadFile}
       onContinue={onContinue}
     >

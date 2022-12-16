@@ -16,13 +16,13 @@ const validationSchema = yup
   .shape({
     password: yup
       .string()
-      .required('Password must have a value.')
-      .matches(passwordValidationRegex, 'Password must match min requirements'),
+      .required(i18next.t('auth.form.errors.noEmptyPasswordError'))
+      .matches(passwordValidationRegex, i18next.t('auth.form.errors.passwordRequirementsError')),
     confirmPassword: yup
       .string()
-      .required('Confirm password must have a value.')
-      .matches(passwordValidationRegex, 'Password must match min requirements')
-      .oneOf([yup.ref('password'), null], 'Passwords must match'),
+      .required(i18next.t('auth.form.errors.noEmptyConfirmPasswordError'))
+      .matches(passwordValidationRegex, i18next.t('auth.form.errors.passwordRequirementsError'))
+      .oneOf([yup.ref('password'), null], i18next.t('auth.form.errors.passwordsDontMatchError')),
   })
   .required();
 

@@ -23,7 +23,7 @@ export default function PasswordForm({ address, onPress, testID, theme, onSubmit
         <P style={[styles.address, styles.theme.address]}>{address}</P>
 
         <Input
-          placeholder={i18next.t('auth.form.enterPassword')}
+          placeholder={i18next.t('auth.form.passwordLabel')}
           autoCorrect={false}
           autoFocus
           placeholderTextColor={

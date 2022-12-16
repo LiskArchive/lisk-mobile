@@ -332,19 +332,21 @@
       "restore_file": "Restore from file",
       "downloaded": "Downloaded!",
       "buttons": {
-        "passwordSetupContinue": "Continue to Dashboard",
-        "saveAccount": "Save account",
-        "download": "Download"
+        "passwordSetupContinueButton": "Continue to Dashboard",
+        "saveAccountButton": "Save account"
       }
     },
     "form": {
-      "enterPassword": "Enter password",
-      "confirmPassword": "Confirm your password",
-      "accountName": "Account name (optional)",
-      "passwordSetupContinue": "Continue to Dashboard",
+      "passwordLabel": "Enter password",
+      "confirmPasswordLabel": "Confirm your password",
+      "accountNameLabel": "Account name (optional)",
+      "passwordSetupContinueButton": "Continue to Dashboard",
+      "termsAgreementText": "I agree to store my encrypted secret recovery phrase on this device",
       "errors": {
-        "passwordError": "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character",
-        "confirmPasswordError": "Confirm that passwords match"
+        "noEmptyPasswordError": "Password must have a value",
+        "noEmptyConfirmPasswordError": "Confirm password must have a value",
+        "passwordRequirementsError": "Password must contain 8 characters, one uppercase, one lowercase, one number and one special case character",
+        "passwordsDontMatchError": "Confirm that passwords match"
       }
     }
   },

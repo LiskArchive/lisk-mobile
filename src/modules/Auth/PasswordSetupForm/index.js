@@ -29,7 +29,7 @@ export default function PasswordSetupForm({ route }) {
       isAgreedField,
       formState,
     },
-    { encryptedAccount, isLoading, isSuccess, isError },
+    { encryptedAccount, isLoading, isSuccess },
   ] = usePasswordSetupForm(passphrase);
 
   const { styles } = useTheme({ styles: getStyles() });
@@ -57,7 +57,7 @@ export default function PasswordSetupForm({ route }) {
               testID="enter-password"
               value={passwordField.value}
               onChange={passwordField.onChange}
-              label={i18next.t('auth.form.enterPassword')}
+              label={i18next.t('auth.form.passwordLabel')}
               secureTextEntry
               innerStyles={{
                 containerStyle: styles.inputContainer,
@@ -70,7 +70,7 @@ export default function PasswordSetupForm({ route }) {
               testID="confirm-password"
               value={confirmPasswordField.value}
               onChange={confirmPasswordField.onChange}
-              label={i18next.t('auth.form.confirmPassword')}
+              label={i18next.t('auth.form.confirmPasswordLabel')}
               secureTextEntry
               innerStyles={{
                 containerStyle: styles.inputContainer,
@@ -83,7 +83,7 @@ export default function PasswordSetupForm({ route }) {
               testID="account-name"
               value={accountNameField.value}
               onChange={accountNameField.onChange}
-              label={i18next.t('auth.form.accountName')}
+              label={i18next.t('auth.form.accountNameLabel')}
               innerStyles={{
                 containerStyle: styles.inputContainer,
                 input: styles.input,
@@ -100,16 +100,14 @@ export default function PasswordSetupForm({ route }) {
               </View>
 
               <Text style={[styles.actionText, styles.theme.description]}>
-                I agree to store my encrypted secret recovery phrase on this device
+                {i18next.t('auth.form.termsAgreementText')}
               </Text>
             </View>
           </ScrollView>
 
           <View style={[styles.footer]}>
-            {isError && <Text>Error saving your account. Please try again.</Text>}
-
             <PrimaryButton onPress={handleSubmit} disabled={!isAgreedField.value || isLoading}>
-              {isLoading ? 'Loading...' : i18next.t('auth.setup.buttons.saveAccount')}
+              {isLoading ? 'Loading...' : i18next.t('auth.setup.buttons.saveAccountButton')}
             </PrimaryButton>
           </View>
         </>
