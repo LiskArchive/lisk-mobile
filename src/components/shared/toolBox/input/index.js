@@ -2,11 +2,13 @@
 /* eslint-disable complexity */
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+
 import { themes } from 'constants/styleGuide';
 import EyeSvg from 'assets/svgs/EyeSvg';
+import EyeClosedSvg from 'assets/svgs/EyeClosedSvg';
 import withTheme from '../../withTheme';
+
 import getStyles from './styles';
-import EyeClosedSvg from '../../../../assets/svgs/EyeClosedSvg';
 
 class Input extends React.Component {
   state = {
