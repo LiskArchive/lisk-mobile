@@ -318,7 +318,7 @@
       }
     },
     "setup": {
-      "add_account": "Add account",
+      "addAccountTitle": "Add account",
       "switchAccount": "Switch account",
       "decryptPassphrase": "Decrypt your secret recovery phrase",
       "decryptPassphraseError": "Unable to decrypt account. Please check your password",
@@ -328,8 +328,8 @@
       "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
       "passwordSetupSuccessTitle": "Perfect! You're all set",
       "passwordSetupSuccessDescription": "You can now download encrypted secret recovery phrase.",
-      "secret_phrase": "Secret recovery phrase",
-      "restore_file": "Restore from file",
+      "secretPhrase": "Secret recovery phrase",
+      "restoreFromFile": "Restore from file",
       "downloaded": "Downloaded!",
       "buttons": {
         "passwordSetupContinueButton": "Continue to Dashboard",

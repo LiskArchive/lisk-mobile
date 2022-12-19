@@ -8,6 +8,7 @@ export default function getAccountsListStyles() {
       },
       title: {
         textAlign: 'center',
+        marginTop: 24,
         marginBottom: 8,
       },
       description: {

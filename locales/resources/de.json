@@ -319,7 +319,7 @@
       }
     },
     "setup": {
-      "add_account": "Konto hinzufügen",
+      "addAccountTitle": "Konto hinzufügen",
       "switchAccount": "Benutzer wechseln",
       "decryptPassphrase": "Entschlüsseln Sie Ihre geheime Wiederherstellungsphrase",
       "decryptPassphraseError": "Konto kann nicht entschlüsselt werden. Bitte überprüfen Sie Ihr Passwort",
@@ -328,8 +328,8 @@
       "passwordSetupDescription": "Dieses Passwort wird verwendet, um Ihre geheime Wiederherstellungsphrase zu verschlüsseln, die für die Verwaltung Ihres Kontos verwendet wird.",
       "passwordSetupSuccessTitle": "Perfekt!",
       "passwordSetupSuccessDescription": "Sie können jetzt verschlüsselte geheime Wiederherstellungsphrasen herunterladen.",
-      "secret_phrase": "Geheime Wiederherstellungsphrase",
-      "restore_file": "Aus Datei wiederherstellen",
+      "secretPhrase": "Geheime Wiederherstellungsphrase",
+      "restoreFromFile": "Aus Datei wiederherstellen",
       "downloaded": "Heruntergeladen!",
       "buttons": {
         "passwordSetupContinueButton": "Weiter zu Dashboard",

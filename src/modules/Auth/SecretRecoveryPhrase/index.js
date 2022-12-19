@@ -27,7 +27,7 @@ export default function SecretRecoveryPhrase() {
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton title="auth.setup.add_account" onPress={navigation.goBack} />
+      <HeaderBackButton title="auth.setup.addAccountTitle" onPress={navigation.goBack} />
 
       <Scanner
         ref={scannerRef}
