@@ -16,7 +16,7 @@ import { H2 } from 'components/shared/toolBox/typography';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
 import Splash from '../components/splash';
-import CreateAccount from '../components/_CreateAccount';
+import CreateAccount from '../components/CreateAccount';
 import AuthTypeItem from '../components/AuthType';
 
 import getStyles from './styles';
