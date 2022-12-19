@@ -77,12 +77,18 @@ export default function AuthMethod({ route }) {
 
   const handleGoBackClick = () => navigation.navigate('AccountsManagerScreen');
 
+  const showBackButton = navigation.canGoBack() && accounts.length > 0;
+
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <HeaderBackButton onPress={handleGoBackClick} />
+      {showBackButton && <HeaderBackButton onPress={handleGoBackClick} />}
 
       <View style={[styles.body]}>
-        <Splash animate={!signOut} showSimplifiedView={false} />
+        <Splash
+          animate={!signOut}
+          showSimplifiedView={false}
+          style={{ container: { marginTop: 40 } }}
+        />
 
         <H2 style={[styles.title, styles.theme.title]}>
           {i18next.t('auth.setup.addAccountTitle')}
