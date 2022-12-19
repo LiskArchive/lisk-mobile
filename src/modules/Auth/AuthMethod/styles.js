@@ -4,9 +4,9 @@ export default () => ({
   common: {
     container: {
       flex: 1,
-      justifyContent: 'space-between',
     },
     body: {
+      flex: 1,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
     },
@@ -14,6 +14,9 @@ export default () => ({
       textAlign: 'center',
       marginTop: 24,
       marginBottom: 8,
+    },
+    footer: {
+      padding: boxes.boxPadding,
     },
   },
   [themes.light]: {

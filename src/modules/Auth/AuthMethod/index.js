@@ -16,7 +16,7 @@ import { H2 } from 'components/shared/toolBox/typography';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
 import Splash from '../components/splash';
-import CreateAccount from '../components/createAccount';
+import CreateAccount from '../components/_CreateAccount';
 import AuthTypeItem from '../components/AuthType';
 
 import getStyles from './styles';
@@ -79,9 +79,9 @@ export default function AuthMethod({ route }) {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <View style={[styles.body]}>
-        <HeaderBackButton onPress={handleGoBackClick} />
+      <HeaderBackButton onPress={handleGoBackClick} />
 
+      <View style={[styles.body]}>
         <Splash animate={!signOut} showSimplifiedView={false} />
 
         <H2 style={[styles.title, styles.theme.title]}>
@@ -103,7 +103,7 @@ export default function AuthMethod({ route }) {
         />
       </View>
 
-      <CreateAccount onPress={handleCreateAccountClick} />
+      <CreateAccount onPress={handleCreateAccountClick} style={{ container: styles.footer }} />
     </SafeAreaView>
   );
 }
