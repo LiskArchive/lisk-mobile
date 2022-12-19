@@ -9,14 +9,16 @@ import SplashScreen from 'react-native-splash-screen';
 import DocumentPicker from 'react-native-document-picker';
 
 import { useTheme } from 'hooks/useTheme';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { settingsRetrieved } from 'modules/Settings/actions';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
-import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import { settingsRetrieved } from '../../Settings/actions';
-import getStyles from './styles';
+import { H2 } from 'components/shared/toolBox/typography';
 import Splash from '../components/splash';
 import CreateAccount from '../components/createAccount';
 import AuthTypeItem from '../components/AuthType';
+
+import getStyles from './styles';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();
@@ -70,32 +72,33 @@ export default function AuthMethod({ route }) {
     }
   };
 
-  const createAccount = () => {
-    navigation.navigate('Register');
-  };
+  const handleCreateAccountClick = () => navigation.navigate('Register');
 
   return (
-    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <View style={[styles.container]}>
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
+      <View style={[styles.body]}>
         <Splash animate={!signOut} showSimplifiedView={false} />
 
-        <View>
-          <AuthTypeItem
-            illustration={<PassphraseSvg />}
-            label={i18next.t('auth.setup.secret_phrase')}
-            onPress={() => navigation.navigate('SecretRecoveryPhrase')}
-            testID="secret-phrase"
-          />
+        <H2 style={[styles.title, styles.theme.title]}>
+          {i18next.t('auth.setup.addAccountTitle')}
+        </H2>
 
-          <AuthTypeItem
-            illustration={<UploadSvg />}
-            label={i18next.t('auth.setup.restore_file')}
-            onPress={selectEncryptedJSON}
-            testID="restore-from-file"
-          />
-        </View>
-        <CreateAccount onPress={createAccount} />
+        <AuthTypeItem
+          illustration={<PassphraseSvg />}
+          label={i18next.t('auth.setup.secretPhrase')}
+          onPress={() => navigation.navigate('SecretRecoveryPhrase')}
+          testID="secret-phrase"
+        />
+
+        <AuthTypeItem
+          illustration={<UploadSvg />}
+          label={i18next.t('auth.setup.restoreFromFile')}
+          onPress={selectEncryptedJSON}
+          testID="restore-from-file"
+        />
       </View>
+
+      <CreateAccount onPress={handleCreateAccountClick} />
     </SafeAreaView>
   );
 }

@@ -2,24 +2,33 @@ import { colors, themes, boxes } from 'constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {
-      flex: 1,
-    },
     container: {
       flex: 1,
-      padding: boxes.boxPadding,
       justifyContent: 'space-between',
+    },
+    body: {
+      padding: boxes.boxPadding,
+    },
+    title: {
+      textAlign: 'center',
+      marginTop: 24,
+      marginBottom: 8,
     },
   },
   [themes.light]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.white,
     },
+    title: {
+      color: colors.light.zodiacBlue,
+    },
   },
-
   [themes.dark]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.black,
+    },
+    title: {
+      color: colors.dark.white,
     },
   },
 });
