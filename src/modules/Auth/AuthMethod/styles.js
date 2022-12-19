@@ -7,7 +7,8 @@ export default () => ({
       justifyContent: 'space-between',
     },
     body: {
-      padding: boxes.boxPadding,
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     title: {
       textAlign: 'center',

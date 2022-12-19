@@ -11,9 +11,10 @@ import DocumentPicker from 'react-native-document-picker';
 import { useTheme } from 'hooks/useTheme';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { settingsRetrieved } from 'modules/Settings/actions';
+import HeaderBackButton from 'components/navigation/headerBackButton';
+import { H2 } from 'components/shared/toolBox/typography';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
-import { H2 } from 'components/shared/toolBox/typography';
 import Splash from '../components/splash';
 import CreateAccount from '../components/createAccount';
 import AuthTypeItem from '../components/AuthType';
@@ -74,9 +75,13 @@ export default function AuthMethod({ route }) {
 
   const handleCreateAccountClick = () => navigation.navigate('Register');
 
+  const handleGoBackClick = () => navigation.navigate('AccountsManagerScreen');
+
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
       <View style={[styles.body]}>
+        <HeaderBackButton onPress={handleGoBackClick} />
+
         <Splash animate={!signOut} showSimplifiedView={false} />
 
         <H2 style={[styles.title, styles.theme.title]}>
