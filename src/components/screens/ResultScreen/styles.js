@@ -28,8 +28,7 @@ export default () => ({
       marginBottom: 16,
     },
     footer: {
-      paddingLeft: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
+      padding: boxes.boxPadding,
     },
     continueButton: {
       paddingHorizontal: 16,

@@ -39,8 +39,7 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         fontWeight: '400',
       },
       footer: {
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
+        padding: boxes.boxPadding,
       },
     },
     [themes.light]: {

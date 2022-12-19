@@ -2,9 +2,12 @@
 /* eslint-disable complexity */
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+
 import { themes } from 'constants/styleGuide';
 import EyeSvg from 'assets/svgs/EyeSvg';
+import EyeClosedSvg from 'assets/svgs/EyeClosedSvg';
 import withTheme from '../../withTheme';
+
 import getStyles from './styles';
 
 class Input extends React.Component {
@@ -124,7 +127,7 @@ class Input extends React.Component {
               onPress={this.toggleSecureTextEntry}
               style={styles.secureTextEntryIcon}
             >
-              <EyeSvg />
+              {this.state.secureTextEntry ? <EyeSvg /> : <EyeClosedSvg />}
             </TouchableOpacity>
           )}
         </View>

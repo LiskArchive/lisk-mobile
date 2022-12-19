@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
@@ -8,6 +8,7 @@ import { useTheme } from 'hooks/useTheme';
 import { Switch } from 'react-native-gesture-handler';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
+import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
 import PasswordSetupSuccess from '../PasswordSetupSuccess';
@@ -42,16 +43,12 @@ export default function PasswordSetupForm({ route }) {
         <PasswordSetupSuccess encryptedJson={encryptedAccount} onContinue={handleContinue} />
       ) : (
         <>
-          <HeaderBackButton
-            title="auth.setup.passwordSetupTitle"
-            onPress={navigation.goBack}
-            containerStyle={styles.header}
-          />
+          <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
 
           <ScrollView contentContainerStyle={styles.container}>
-            <Text style={[styles.description, styles.theme.description]}>
+            <P style={[styles.description, styles.theme.description]}>
               {i18next.t('auth.setup.passwordSetupDescription')}
-            </Text>
+            </P>
 
             <Input
               testID="enter-password"
@@ -99,9 +96,9 @@ export default function PasswordSetupForm({ route }) {
                 />
               </View>
 
-              <Text style={[styles.actionText, styles.theme.description]}>
+              <P style={[styles.actionText, styles.theme.description]}>
                 {i18next.t('auth.form.termsAgreementText')}
-              </Text>
+              </P>
             </View>
           </ScrollView>
 

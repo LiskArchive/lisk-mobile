@@ -9,6 +9,7 @@ export default () => ({
       flex: 1,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
+      paddingBottom: boxes.boxPadding,
     },
     description: {
       fontFamily: fonts.family.context,
@@ -21,11 +22,17 @@ export default () => ({
     wrapper: {
       backgroundColor: colors.dark.white,
     },
+    description: {
+      color: colors.light.zodiacBlue,
+    },
   },
 
   [themes.dark]: {
     wrapper: {
       backgroundColor: colors.dark.black,
+    },
+    description: {
+      color: colors.dark.ghost,
     },
   },
 });

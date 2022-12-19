@@ -20,12 +20,12 @@ export default function getTokenListStyles() {
         borderRadius: 20,
       },
       tabSingleItemText: {
-        fontWeight: '500',
+        fontWeight: 'bold',
         fontSize: 14,
       },
       tabItemText: {
-        color: colors.light.blueGray,
         fontSize: 14,
+        color: colors.light.blueGray,
       },
       tabItemTextActive: {
         color: colors.light.ultramarineBlue,
@@ -55,6 +55,9 @@ export default function getTokenListStyles() {
       container: {
         backgroundColor: colors.light.white,
       },
+      tabSingleItemText: {
+        color: colors.light.zodiacBlue,
+      },
       tabItemActive: {
         backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.1),
       },
@@ -65,6 +68,9 @@ export default function getTokenListStyles() {
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
+      },
+      tabSingleItemText: {
+        color: colors.light.white,
       },
       tabItemActive: {
         backgroundColor: setColorOpacity(colors.dark.ultramarineBlue, 0.3),
