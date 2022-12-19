@@ -332,19 +332,21 @@
       "restore_file": "Aus Datei wiederherstellen",
       "downloaded": "Heruntergeladen!",
       "buttons": {
-        "passwordSetupContinue": "Weiter zu Dashboard",
-        "saveAccount": "Konto speichern",
-        "download": "Heruntergeladen"
+        "passwordSetupContinueButton": "Weiter zu Dashboard",
+        "saveAccountButton": "Konto speichern"
       }
     },
     "form": {
-      "enterPassword": "Passwort eingeben",
-      "confirmPassword": "Bestätigen Sie Ihr Passwort",
-      "accountName": "Kontoname (optional)",
-      "passwordSetupContinue": "Weiter zu Dashboard",
+      "passwordLabel": "Passwort eingeben",
+      "confirmPasswordLabel": "Bestätigen Sie Ihr Passwort",
+      "accountNameLabel": "Kontoname (optional)",
+      "passwordSetupContinueButton": "Weiter zu Dashboard",
+      "termsAgreementText": "Ich stimme zu, meine verschlüsselte geheime Wiederherstellungsphrase auf diesem Gerät zu speichern",
       "errors": {
-        "passwordError": "Das Passwort muss 8 Zeichen enthalten, einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen",
-        "confirmPasswordError": "Bestätigen Sie, dass die Passwörter übereinstimmen"
+        "noEmptyPasswordError": "Das Passwort muss einen Wert haben",
+        "noEmptyConfirmPasswordError": "Passwort bestätigen muss einen Wert haben",
+        "passwordRequirementsError": "Das Passwort muss 8 Zeichen enthalten, einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und einen Sonderbuchstaben",
+        "passwordsDontMatchError": "Bestätigen Sie, dass die Passwörter übereinstimmen"
       }
     }
   },
