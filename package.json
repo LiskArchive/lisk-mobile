@@ -21,7 +21,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@hirishh/lisk-ledger.js": "^2.2.0",
     "@hookform/resolvers": "^2.9.7",
     "@json-rpc-tools/utils": "^1.7.6",
     "@liskhq/lisk-client": "6.0.0-alpha.4",
@@ -84,7 +83,7 @@
     "react-native-crypto": "^2.2.0",
     "react-native-device-info": "8.0.2",
     "react-native-document-picker": "^8.1.1",
-    "react-native-dropdownalert": "4.3.0",
+    "react-native-dropdownalert": "4.5.1",
     "react-native-fingerprint-scanner": "6.0.0",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^1.10.3",
@@ -108,7 +107,7 @@
     "react-native-share": "^7.5.0",
     "react-native-snap-carousel": "3.9.1",
     "react-native-splash-screen": "3.2.0",
-    "react-native-svg": "12.1.0",
+    "react-native-svg": "^12.5.0",
     "react-native-swiper": "1.6.0",
     "react-native-switch-pro": "1.0.5",
     "react-native-tcp": "^4.0.0",
