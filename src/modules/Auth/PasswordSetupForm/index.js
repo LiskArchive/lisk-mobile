@@ -11,6 +11,7 @@ import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
+import SecureView from 'components/shared/SecureView';
 import PasswordSetupSuccess from '../PasswordSetupSuccess';
 
 import getStyles from './styles';
@@ -39,76 +40,78 @@ export default function PasswordSetupForm({ route }) {
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      {isSuccess ? (
-        <PasswordSetupSuccess encryptedJson={encryptedAccount} onContinue={handleContinue} />
-      ) : (
-        <>
-          <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
+      <SecureView>
+        {isSuccess ? (
+          <PasswordSetupSuccess encryptedJson={encryptedAccount} onContinue={handleContinue} />
+        ) : (
+          <>
+            <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
 
-          <ScrollView contentContainerStyle={styles.container}>
-            <P style={[styles.description, styles.theme.description]}>
-              {i18next.t('auth.setup.passwordSetupDescription')}
-            </P>
-
-            <Input
-              testID="enter-password"
-              value={passwordField.value}
-              onChange={passwordField.onChange}
-              label={i18next.t('auth.form.passwordLabel')}
-              secureTextEntry
-              innerStyles={{
-                containerStyle: styles.inputContainer,
-                input: styles.input,
-              }}
-              error={formState.errors?.password?.message}
-            />
-
-            <Input
-              testID="confirm-password"
-              value={confirmPasswordField.value}
-              onChange={confirmPasswordField.onChange}
-              label={i18next.t('auth.form.confirmPasswordLabel')}
-              secureTextEntry
-              innerStyles={{
-                containerStyle: styles.inputContainer,
-                input: styles.input,
-              }}
-              error={formState.errors?.confirmPassword?.message}
-            />
-
-            <Input
-              testID="account-name"
-              value={accountNameField.value}
-              onChange={accountNameField.onChange}
-              label={i18next.t('auth.form.accountNameLabel')}
-              innerStyles={{
-                containerStyle: styles.inputContainer,
-                input: styles.input,
-              }}
-            />
-
-            <View style={styles.actionContainer}>
-              <View style={styles.switch}>
-                <Switch
-                  value={isAgreedField.value}
-                  onValueChange={(value) => isAgreedField.onChange(value)}
-                  trackColor={{ true: colors.light.ultramarineBlue }}
-                />
-              </View>
-
-              <P style={[styles.actionText, styles.theme.description]}>
-                {i18next.t('auth.form.termsAgreementText')}
+            <ScrollView contentContainerStyle={styles.container}>
+              <P style={[styles.description, styles.theme.description]}>
+                {i18next.t('auth.setup.passwordSetupDescription')}
               </P>
-            </View>
-          </ScrollView>
 
-          <View style={[styles.footer]}>
-            <PrimaryButton onPress={handleSubmit} disabled={!isAgreedField.value || isLoading}>
-              {isLoading ? 'Loading...' : i18next.t('auth.setup.buttons.saveAccountButton')}
-            </PrimaryButton>
-          </View>
-        </>
-      )}
+              <Input
+                testID="enter-password"
+                value={passwordField.value}
+                onChange={passwordField.onChange}
+                label={i18next.t('auth.form.passwordLabel')}
+                secureTextEntry
+                innerStyles={{
+                  containerStyle: styles.inputContainer,
+                  input: styles.input,
+                }}
+                error={formState.errors?.password?.message}
+              />
+
+              <Input
+                testID="confirm-password"
+                value={confirmPasswordField.value}
+                onChange={confirmPasswordField.onChange}
+                label={i18next.t('auth.form.confirmPasswordLabel')}
+                secureTextEntry
+                innerStyles={{
+                  containerStyle: styles.inputContainer,
+                  input: styles.input,
+                }}
+                error={formState.errors?.confirmPassword?.message}
+              />
+
+              <Input
+                testID="account-name"
+                value={accountNameField.value}
+                onChange={accountNameField.onChange}
+                label={i18next.t('auth.form.accountNameLabel')}
+                innerStyles={{
+                  containerStyle: styles.inputContainer,
+                  input: styles.input,
+                }}
+              />
+
+              <View style={styles.actionContainer}>
+                <View style={styles.switch}>
+                  <Switch
+                    value={isAgreedField.value}
+                    onValueChange={(value) => isAgreedField.onChange(value)}
+                    trackColor={{ true: colors.light.ultramarineBlue }}
+                  />
+                </View>
+
+                <P style={[styles.actionText, styles.theme.description]}>
+                  {i18next.t('auth.form.termsAgreementText')}
+                </P>
+              </View>
+            </ScrollView>
+
+            <View style={[styles.footer]}>
+              <PrimaryButton onPress={handleSubmit} disabled={!isAgreedField.value || isLoading}>
+                {isLoading ? 'Loading...' : i18next.t('auth.setup.buttons.saveAccountButton')}
+              </PrimaryButton>
+            </View>
+          </>
+        )}
+      </SecureView>
     </SafeAreaView>
   );
 }
