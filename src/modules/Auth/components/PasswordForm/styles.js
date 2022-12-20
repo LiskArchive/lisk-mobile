@@ -20,8 +20,7 @@ export default () => ({
       marginBottom: 8,
     },
     footer: {
-      paddingLeft: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
+      padding: boxes.boxPadding,
     },
   },
 

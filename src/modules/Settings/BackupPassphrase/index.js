@@ -10,6 +10,7 @@ import PasswordSetupSuccess from 'modules/Auth/PasswordSetupSuccess';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
+import SecureView from '../../../components/shared/SecureView';
 
 const BackupPassphrase = ({ styles }) => {
   const [account] = useCurrentAccount();
@@ -18,20 +19,22 @@ const BackupPassphrase = ({ styles }) => {
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <Stepper currentIndex={0}>
-        <DecryptPhrase
-          account={account}
-          route={{
-            params: {
-              address: summary.address,
-              title: 'settings.backup_phrase.title',
-            },
-          }}
-        />
-        <PassphraseBackup />
-        <RegisterConfirm customHeader />
-        <PasswordSetupSuccess encryptedJson={account} onContinue={navigation.goBack} />
-      </Stepper>
+      <SecureView>
+        <Stepper currentIndex={0}>
+          <DecryptPhrase
+            account={account}
+            route={{
+              params: {
+                address: summary.address,
+                title: 'settings.backup_phrase.title',
+              },
+            }}
+          />
+          <PassphraseBackup />
+          <RegisterConfirm customHeader />
+          <PasswordSetupSuccess encryptedJson={account} onContinue={navigation.goBack} />
+        </Stepper>
+      </SecureView>
     </SafeAreaView>
   );
 };
