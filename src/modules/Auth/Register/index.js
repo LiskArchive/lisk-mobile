@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { BackHandler } from 'react-native';
+import { BackHandler, View } from 'react-native';
 
 import Stepper from 'components/shared/Stepper';
-import SecureView from 'components/shared/SecureView';
+import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
+
 import { generatePassphrase } from '../utils';
 
 import RegisterConfirm from './RegisterConfirm';
@@ -12,6 +13,7 @@ import RegisterIntro from './RegisterIntro';
 import styles from './styles';
 
 export default function Register({ route }) {
+  useScreenshotPrevent();
   const [showNav, setShowNav] = useState(true);
 
   const passphrase = useMemo(
@@ -40,7 +42,7 @@ export default function Register({ route }) {
   }, [onBackButtonPressedAndroid]);
 
   return (
-    <SecureView style={[styles.container, noNavStyle]}>
+    <View style={[styles.container, noNavStyle]}>
       <Stepper showProgressBar customProgressLength={3} styles={{ container: { marginTop: 16 } }}>
         <RegisterIntro title="create" passphrase={passphrase} route={route} />
 
@@ -50,6 +52,6 @@ export default function Register({ route }) {
 
         <RegisterSuccess title="success" hideNav={hideNav} />
       </Stepper>
-    </SecureView>
+    </View>
   );
 }
