@@ -53,8 +53,6 @@ export default function Home() {
   const handleRequestTokensClick = () => navigation.navigate('Request');
   const handleSendTokensClick = () => navigation.navigate('Send');
 
-  console.log({ discrete });
-
   return (
     <>
       <NavigationSafeAreaView>
