@@ -1,7 +1,6 @@
 export default () => ({
   common: {
-    amount: {
-      paddingTop: 4,
+    container: {
       width: '100%',
       textAlign: 'right',
       justifyContent: 'flex-end',
@@ -15,6 +14,11 @@ export default () => ({
       width: 60,
       height: 30,
       marginLeft: -5,
+    },
+    blurBig: {
+      width: 150,
+      height: 30,
+      marginRight: -15,
     },
   },
 });

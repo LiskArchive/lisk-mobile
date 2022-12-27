@@ -8,6 +8,7 @@ import { useTokenMetaQuery } from 'modules/BlockchainApplication/api/useTokenMet
 import { useTokenAmountInCurrency } from 'modules/SendToken/components/SelectTokenStep/hooks';
 import DataRenderer from 'components/shared/DataRenderer';
 import { P, H3 } from 'components/shared/toolBox/typography';
+import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 
@@ -47,7 +48,9 @@ export default function TokenRow({ token }) {
       </View>
 
       <View style={[styles.balanceContainer]}>
-        <H3 style={[styles.theme.title]}>{balance}</H3>
+        <DiscreteModeComponent data={balance} blurVariant="balance">
+          <H3 style={[styles.theme.title]}>{balance}</H3>
+        </DiscreteModeComponent>
 
         <DataRenderer
           data={tokenMetaData?.data[0]}

@@ -1,5 +1,3 @@
-import React from 'react';
-import { View, Image } from 'react-native';
 import darkMediumOutgoing from 'assets/images/amountBlur/outgoing/darkMedium.png';
 import darkSmallOutgoing from 'assets/images/amountBlur/outgoing/darkSmall.png';
 import darkMediumIncoming from 'assets/images/amountBlur/incoming/darkMedium.png';
@@ -8,31 +6,32 @@ import lightMediumOutgoing from 'assets/images/amountBlur/outgoing/lightMedium.p
 import lightSmallOutgoing from 'assets/images/amountBlur/outgoing/lightSmall.png';
 import lightMediumIncoming from 'assets/images/amountBlur/incoming/lightMedium.png';
 import lightSmallIncoming from 'assets/images/amountBlur/incoming/lightSmall.png';
-import getStyles from './styles';
-import withTheme from '../withTheme';
+import darkBigBalance from 'assets/images/balanceBlur/darkBig.png';
+import darkMediumBalance from 'assets/images/balanceBlur/darkMedium.png';
+import darkSmallBalance from 'assets/images/balanceBlur/darkSmall.png';
+import lightBigBalance from 'assets/images/balanceBlur/lightBig.png';
+import lightMediumBalance from 'assets/images/balanceBlur/lightMedium.png';
+import lightSmallBalance from 'assets/images/balanceBlur/lightSmall.png';
 
-const blurs = {
+export const BLUR_VARIANTS = {
   outgoing: {
-    darkMedium: darkMediumOutgoing,
     darkSmall: darkSmallOutgoing,
-    lightMedium: lightMediumOutgoing,
+    darkMedium: darkMediumOutgoing,
     lightSmall: lightSmallOutgoing,
+    lightMedium: lightMediumOutgoing,
   },
   incoming: {
-    darkMedium: darkMediumIncoming,
     darkSmall: darkSmallIncoming,
-    lightMedium: lightMediumIncoming,
+    darkMedium: darkMediumIncoming,
     lightSmall: lightSmallIncoming,
+    lightMedium: lightMediumIncoming,
+  },
+  balance: {
+    darkSmall: darkSmallBalance,
+    darkMedium: darkMediumBalance,
+    darkBig: darkBigBalance,
+    lightSmall: lightSmallBalance,
+    lightMedium: lightMediumBalance,
+    lightBig: lightBigBalance,
   },
 };
-
-const Blur = ({ styles, direction, theme, value, style }) => {
-  const valueSize = value.length > 2 ? 'Medium' : 'Small';
-  return (
-    <View style={[styles.amount, style]}>
-      <Image style={styles[`blur${valueSize}`]} source={blurs[direction][`${theme}${valueSize}`]} />
-    </View>
-  );
-};
-
-export default withTheme(Blur, getStyles());
