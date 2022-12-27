@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
+import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import { Switch } from 'react-native-gesture-handler';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
@@ -18,6 +19,7 @@ import { usePasswordSetupForm } from '../hooks/usePasswordSetupForm';
 
 export default function PasswordSetupForm({ route }) {
   const navigation = useNavigation();
+  useScreenshotPrevent();
 
   const { passphrase } = route.params;
 

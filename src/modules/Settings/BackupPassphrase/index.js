@@ -9,9 +9,11 @@ import RegisterConfirm from 'modules/Auth/Register/RegisterConfirm';
 import PasswordSetupSuccess from 'modules/Auth/PasswordSetupSuccess';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import withTheme from 'components/shared/withTheme';
+import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import getStyles from './styles';
 
 const BackupPassphrase = ({ styles }) => {
+  useScreenshotPrevent();
   const [account] = useCurrentAccount();
   const { summary } = useAccountInfo();
   const navigation = useNavigation();

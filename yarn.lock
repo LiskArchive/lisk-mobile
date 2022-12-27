@@ -10877,6 +10877,11 @@ react-native-screens@^2.18.1:
   resolved "https://npm.lisk.com/react-native-screens/-/react-native-screens-2.18.1.tgz#47b9991c6f762d00d0ed3233e5283d523e859885"
   integrity sha512-r5WZLpmx2hHjC1RgMdPq5YpSU9tEhBpUaZ5M1SUtNIONyiLqQVxabhRCINdebIk4depJiIl7yw2Q85zJyeX6fw==
 
+react-native-screenshot-prevent@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-screenshot-prevent/-/react-native-screenshot-prevent-1.0.5.tgz#f3fdf5f05db4819cd5864bfc0d8f7e6bb75c7dba"
+  integrity sha512-v6LgVGBP/kC6qUoW7pv+AIik+vvgXb8ijOzny32Xg/BOCbOn7BAJIk7nsCkMrciW+TK7qjTO4W05VlzWj8nhSA==
+
 react-native-shake@3.5.0:
   version "3.5.0"
   resolved "https://npm.lisk.com/react-native-shake/-/react-native-shake-3.5.0.tgz#6eb1c6bfa59065b2b6b7aa7250532aa6558b41bc"

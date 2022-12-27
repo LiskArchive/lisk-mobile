@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { View, BackHandler } from 'react-native';
+import { BackHandler, View } from 'react-native';
 
 import Stepper from 'components/shared/Stepper';
+import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
+
 import { generatePassphrase } from '../utils';
 
 import RegisterConfirm from './RegisterConfirm';
@@ -11,6 +13,7 @@ import RegisterIntro from './RegisterIntro';
 import styles from './styles';
 
 export default function Register({ route }) {
+  useScreenshotPrevent();
   const [showNav, setShowNav] = useState(true);
 
   const passphrase = useMemo(

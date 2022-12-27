@@ -8,10 +8,12 @@ import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { colors, themes } from 'constants/styleGuide';
+import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 
 import getStyles from './styles';
 
 export default function PasswordForm({ address, onPress, testID, theme, onSubmit }) {
+  useScreenshotPrevent();
   const [password, setPassword] = useState('');
 
   const { styles } = useTheme({ styles: getStyles() });

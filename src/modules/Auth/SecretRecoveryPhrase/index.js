@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useTheme } from 'hooks/useTheme';
+import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import Scanner from 'components/shared/scanner';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
@@ -12,6 +13,7 @@ import SecretRecoveryPhraseForm from '../components/SecretRecoveryPhraseForm';
 import getStyles from './styles';
 
 export default function SecretRecoveryPhrase() {
+  useScreenshotPrevent();
   const navigation = useNavigation();
 
   const scannerRef = useRef();
