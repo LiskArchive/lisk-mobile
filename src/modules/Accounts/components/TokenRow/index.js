@@ -57,9 +57,11 @@ export default function TokenRow({ token }) {
           isLoading={isTokenMetaLoading}
           error={errorOnTokenMeta}
           renderData={() => (
-            <P style={[styles.theme.currency]}>
-              {tokenAmountInCurrency.amount} {tokenAmountInCurrency.currency}
-            </P>
+            <DiscreteModeComponent data={balance} blurVariant="balance">
+              <P style={[styles.theme.currency]}>
+                {tokenAmountInCurrency.amount} {tokenAmountInCurrency.currency}
+              </P>
+            </DiscreteModeComponent>
           )}
         />
       </View>
