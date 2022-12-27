@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import { colors } from 'constants/styleGuide';
@@ -21,10 +20,8 @@ export default function Bookmarks() {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  const tabBarHeight = useBottomTabBarHeight();
-
   const { styles, theme } = useTheme({
-    styles: getStyles(tabBarHeight),
+    styles: getStyles(),
   });
 
   const handleSearchTermChange = (term) => search.setTerm(term);
@@ -33,31 +30,30 @@ export default function Bookmarks() {
 
   return (
     <NavigationSafeAreaView>
-      <HeaderSearchBar
-        title={'Bookmarks'}
-        noIcon
-        onChange={handleSearchTermChange}
-        value={search.term}
-        isSearchOpen={isSearchOpen}
-        setIsSearchOpen={(val) => setIsSearchOpen(val)}
-      />
+      <View style={{ flex: 1 }}>
+        <HeaderSearchBar
+          title={'Bookmarks'}
+          noIcon
+          onChange={handleSearchTermChange}
+          value={search.term}
+          isSearchOpen={isSearchOpen}
+          setIsSearchOpen={(val) => setIsSearchOpen(val)}
+        />
 
-      <BookmarkList
-        draggable
-        query={search.term}
-        renderEmpty
-        onPress={handlePress}
-        style={[styles.container]}
-      />
+        <BookmarkList draggable query={search.term} renderEmpty onPress={handlePress} />
 
-      <TouchableOpacity
-        style={[styles.titleContainer]}
-        onPress={() =>
-          navigation.navigate({ name: 'AddBookmark', params: { title: i18next.t('New bookmark') } })
-        }
-      >
-        <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={30} />
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.titleContainer]}
+          onPress={() =>
+            navigation.navigate({
+              name: 'AddBookmark',
+              params: { title: i18next.t('New bookmark') },
+            })
+          }
+        >
+          <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={30} />
+        </TouchableOpacity>
+      </View>
     </NavigationSafeAreaView>
   );
 }
