@@ -5,19 +5,19 @@ export default () => ({
       textAlign: 'right',
       justifyContent: 'flex-end',
     },
+    blurSmall: {
+      width: 72,
+      height: 24,
+      marginRight: -15,
+    },
     blurMedium: {
       width: 77,
       height: 30,
-      marginLeft: -10,
-    },
-    blurSmall: {
-      width: 60,
-      height: 30,
-      marginLeft: -5,
+      marginRight: -10,
     },
     blurBig: {
       width: 150,
-      height: 30,
+      height: 26,
       marginRight: -15,
     },
   },
