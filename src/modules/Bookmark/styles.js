@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import { themes, colors, fonts } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
-export default (tabBarHeight) => ({
+export default () => ({
   common: {
     container: {
       flex: 1,
@@ -16,9 +16,9 @@ export default (tabBarHeight) => ({
       justifyContent: 'center',
       paddingTop: 2,
       position: 'absolute',
-      bottom: tabBarHeight + 24,
+      bottom: 0,
       right: 16,
-      margin: 20,
+      margin: 10,
     },
     headerButton: {
       transform: [{ rotate: '45deg' }],
