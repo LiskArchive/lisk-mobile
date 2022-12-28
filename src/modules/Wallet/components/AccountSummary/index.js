@@ -7,7 +7,7 @@ import { fromRawLsk } from 'utilities/conversions';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { P, B } from 'components/shared/toolBox/typography';
 import { stringShortener } from 'utilities/helpers';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { colors, themes } from 'constants/styleGuide';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import Icon from 'components/shared/toolBox/icon';

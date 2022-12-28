@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import * as Lisk from '@liskhq/lisk-client';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { useTokenMetaQuery } from 'modules/BlockchainApplication/api/useTokenMetaQuery';
 import { useTokenAmountInCurrency } from 'modules/SendToken/components/SelectTokenStep/hooks';
 import DataRenderer from 'components/shared/DataRenderer';

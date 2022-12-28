@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import { P } from 'components/shared/toolBox/typography';
 

@@ -2,7 +2,7 @@ import { View, Image } from 'react-native';
 import React, { useState } from 'react';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { P, B } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
 import BottomModal from 'components/shared/BottomModal';

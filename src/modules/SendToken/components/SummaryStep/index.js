@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import i18next from 'i18next';
 import { useController } from 'react-hook-form';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';

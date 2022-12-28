@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 
 import { TabsContext } from './hooks';
 import { Tab, TabsPanel } from './components';

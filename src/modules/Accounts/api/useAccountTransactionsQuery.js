@@ -56,8 +56,12 @@ export function useAccountTransactionsQuery({
     }
 
     client?.ws?.on('new.transactions', invalidateQuery);
-
     client?.ws?.on('delete.transactions', invalidateQuery);
+
+    return () => {
+      client.ws.off('new.transactions');
+      client.ws.off('delete.transactions');
+    };
   }, [client, queryClient]);
 
   return useCustomInfiniteQuery({ config, options, keys, client });

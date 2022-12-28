@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Animated, Image, TouchableOpacity } from 'react-native';
 
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { P } from 'components/shared/toolBox/typography';
 import ChangeSvg from 'assets/svgs/ChangeSvg';
 

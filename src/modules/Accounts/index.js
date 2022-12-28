@@ -5,7 +5,7 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
 import { P } from 'components/shared/toolBox/typography';
 import Avatar from 'components/shared/avatar';

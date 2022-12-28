@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import { useSendTokenAmountChecker } from '../../hooks/useSendTokenAmountChecker';

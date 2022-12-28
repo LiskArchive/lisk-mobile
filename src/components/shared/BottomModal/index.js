@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { TouchableOpacity, View, Modal, ScrollView, Animated, Dimensions } from 'react-native';
 
 import Icon from 'components/shared/toolBox/icon';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
 
 import getStyles from './styles';

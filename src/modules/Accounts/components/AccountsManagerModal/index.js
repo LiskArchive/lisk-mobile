@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import BottomModal from 'components/shared/BottomModal';
 
 import getAccountsManagerModalStyles from './styles';

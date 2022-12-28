@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, FlatList } from 'react-native';
 import { P, H3 } from 'components/shared/toolBox/typography';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import getStyles from './styles';

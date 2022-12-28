@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import FormattedDate from 'components/shared/formattedDate';
 import { Button } from 'components/shared/toolBox/button';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform, ToastAndroid, View } from 'react-native';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useDownloadFile } from 'hooks/useDownloadFile';
 import DownloadFile from 'components/shared/DownloadFile';

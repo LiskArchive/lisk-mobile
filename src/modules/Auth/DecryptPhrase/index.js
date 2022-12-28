@@ -2,7 +2,7 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { translate } from 'react-i18next';

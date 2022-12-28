@@ -3,7 +3,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import { themes, colors } from 'constants/styleGuide';
 

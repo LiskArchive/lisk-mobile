@@ -1,10 +1,11 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 import { themes, colors } from 'constants/styleGuide';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 
 export default ({ width = 8, height = 14, style }) => {
   const { theme } = useTheme();
+
   return (
     <Svg width={width} height={height} viewBox="0 0 8 14" fill="none" style={style}>
       <Path

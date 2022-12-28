@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useAccountTransactionsQuery } from 'modules/Accounts/api/useAccountTransactionsQuery';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
 import { LIMIT } from 'utilities/api/constants';
 import { LabelButton } from 'components/shared/toolBox/button';

@@ -2,10 +2,8 @@ import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 
 import { themes } from 'constants/styleGuide';
-import ThemeContext from '../contexts/theme';
+import { ThemeContext, useTheme } from './ThemeContext';
 import * as helpers from '../utilities/helpers';
-
-import { useTheme } from './useTheme';
 
 describe('useTheme hook', () => {
   const defaultProps = {
