@@ -104,7 +104,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               icon="enable-incognito"
               targetStateLabel={
                 <SwitchButton
-                  value={settings.incognito}
+                  value={settings.discrete}
                   theme={theme}
                   onSyncPress={toggleIncognito}
                 />
