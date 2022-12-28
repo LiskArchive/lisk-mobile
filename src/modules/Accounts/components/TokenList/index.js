@@ -100,7 +100,7 @@ export default function TokenList({ mode = 'overview', style }) {
       <DataRenderer
         data={activeTab === 0 ? tokensData?.data : lockedTokens}
         isLoading={isLoadingTokens}
-        error={errorOnTokens && errorOnTokens.response?.status !== 404}
+        error={errorOnTokens}
         renderData={(data) => (
           <InfiniteScrollList
             data={data}

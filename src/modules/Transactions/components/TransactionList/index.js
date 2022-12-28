@@ -79,7 +79,7 @@ export default function TransactionList({ mode = 'overview', style }) {
       <DataRenderer
         data={transactionsData?.data}
         isLoading={isLoadingTransactions}
-        error={errorOnTransactions && errorOnTransactions.response?.status !== 404}
+        error={errorOnTransactions}
         renderData={(data) => (
           <InfiniteScrollList
             data={data}
