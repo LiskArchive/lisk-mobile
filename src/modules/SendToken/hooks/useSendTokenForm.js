@@ -137,6 +137,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           }
         );
       } catch (error) {
+        console.log({ error });
         DropDownHolder.error(
           i18next.t('Error'),
           i18next.t('transactions.errors.signErrorDescription')
