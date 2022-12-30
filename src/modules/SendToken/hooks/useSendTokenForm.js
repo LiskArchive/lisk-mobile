@@ -81,6 +81,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     recipientApplicationChainID: form.watch('recipientApplicationChainID'),
   });
 
+  console.log({
+    transactionFee: Lisk.transactions.convertBeddowsToLSK(transaction.transaction.fee.toString()),
+  });
+
   const handleChange = (field, value, onChange) => {
     if (field === 'params.amount') {
       const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
@@ -119,6 +123,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
         const signedTransaction = await transaction.sign(privateKey);
 
+        console.log({ signedTransaction });
+
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
 
         dryRunTransactionMutation.mutate(
@@ -128,6 +134,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
               if (data.success) {
                 broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
               } else {
+                console.log({ data });
                 DropDownHolder.error(
                   i18next.t('transactions.errors.dryRunInvalidTransactionTitle'),
                   i18next.t('transactions.errors.dryRunInvalidTransactionDescription')
