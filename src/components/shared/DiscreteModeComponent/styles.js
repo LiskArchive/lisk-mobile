@@ -7,13 +7,13 @@ export default () => ({
     },
     blurSmall: {
       width: 72,
-      height: 24,
-      marginRight: -15,
+      height: 22,
+      marginRight: -5,
     },
     blurMedium: {
-      width: 77,
-      height: 30,
-      marginRight: -10,
+      width: 72,
+      height: 22,
+      marginRight: -5,
     },
     blurBig: {
       width: 150,
