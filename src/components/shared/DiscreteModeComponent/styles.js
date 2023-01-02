@@ -13,12 +13,12 @@ export default () => ({
     blurMedium: {
       width: 72,
       height: 22,
-      marginRight: -5,
+      marginRight: -10,
     },
     blurBig: {
-      width: 150,
-      height: 26,
-      marginRight: -15,
+      width: 128,
+      height: 30,
+      marginRight: -12,
     },
   },
 });

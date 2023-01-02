@@ -17,10 +17,12 @@ export default function DiscreteModeComponent({ children, blurVariant = 'incomin
 
   const dataSize = getDiscreteModeDataSize({ blurVariant, data });
 
+  console.log({ blurVariant, dataSize });
+
   return (
     <View style={[styles.container, style]}>
       <Image
-        style={styles[`blur${dataSize}`]}
+        style={[styles[`blur${dataSize}`]]}
         source={BLUR_VARIANTS[blurVariant][`${theme}${dataSize}`]}
       />
     </View>
