@@ -15,9 +15,7 @@ export default function DiscreteModeComponent({ children, blurVariant = 'incomin
 
   if (!isDiscreteMode) return children;
 
-  const dataSize = getDiscreteModeDataSize({ blurVariant, data });
-
-  console.log({ blurVariant, dataSize });
+  const dataSize = getDiscreteModeDataSize(data);
 
   return (
     <View style={[styles.container, style]}>

@@ -1,24 +1,13 @@
-export function getDiscreteModeDataSize({ blurVariant, data }) {
+export function getDiscreteModeDataSize(data) {
   let dataSize = '';
+  const _data = typeof data !== 'string' ? data.toString() : data;
 
-  switch (blurVariant) {
-    case 'incoming':
-    case 'outgoing':
-      dataSize = data.length > 2 ? 'Medium' : 'Small';
-      break;
-
-    case 'balance':
-      if (data.length <= 2) {
-        dataSize = 'Small';
-      } else if (data.length > 2 && data.length < 6) {
-        dataSize = 'Medium';
-      } else {
-        dataSize = 'Big';
-      }
-      break;
-
-    default:
-      dataSize = 'Small';
+  if (_data.length <= 4) {
+    dataSize = 'Small';
+  } else if (_data.length > 4 && _data.length <= 8) {
+    dataSize = 'Medium';
+  } else {
+    dataSize = 'Big';
   }
 
   return dataSize;
