@@ -179,19 +179,16 @@ export class Transaction {
         ...this.transaction,
         params: {
           ...this.transaction.params,
-          ...(numberOfSignatures &&
-            !this.transaction.params.signatures?.length && {
-              signatures: allocateEmptySignaturesWithEmptyBuffer(numberOfSignatures),
-            }),
+          ...(!this.transaction.params.signatures?.length && {
+            signatures: allocateEmptySignaturesWithEmptyBuffer(numberOfSignatures),
+          }),
         },
       },
       this._paramsSchema,
-      numberOfSignatures
-        ? {
-            numberOfSignatures,
-            numberOfEmptySignatures,
-          }
-        : {}
+      {
+        numberOfSignatures,
+        numberOfEmptySignatures,
+      }
     );
 
     const priorityFee = this.transaction.priority
