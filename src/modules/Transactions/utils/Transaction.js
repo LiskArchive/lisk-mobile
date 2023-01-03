@@ -170,9 +170,7 @@ export class Transaction {
 
     const numberOfSignatures = this._auth.numberOfSignatures || 1;
 
-    const numberOfEmptySignatures = this._auth.mandatoryKeys.length
-      ? this._auth.mandatoryKeys.length + this._auth.optionalKeys.length - numberOfSignatures
-      : 0;
+    const numberOfEmptySignatures = 0;
 
     const minFee = Lisk.transactions.computeMinFee(
       {

@@ -32,7 +32,10 @@ export default function useDryRunTransactionMutation({ onSuccess, onError, ...op
         } else if (data.result === -1) {
           DropDownHolder.error('Invalid transaction', data.errorMessage);
         } else {
-          DropDownHolder.error('Failed transaction', data.errorMessage);
+          // @TODO: Prepare error message by parsing the events based on each transaction type.s
+          const errorMessage = data.events.map((e) => e.name).join(', ');
+
+          DropDownHolder.error('Failed transaction', errorMessage);
         }
       },
       onError: (error) => {
