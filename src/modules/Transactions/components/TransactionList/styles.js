@@ -7,16 +7,14 @@ export default function getTransactionListStyles() {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginBottom: 8,
+      },
+      headerExtraMargin: {
+        marginBottom: 24,
       },
       title: {
         fontWeight: 'bold',
         fontSize: 14,
-      },
-      labelButton: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
       },
       labelButtonText: {
         fontSize: 12,

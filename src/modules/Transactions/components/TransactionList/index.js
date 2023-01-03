@@ -18,6 +18,7 @@ import CaretSvg from 'assets/svgs/CaretSvg';
 import TransactionRow from '../TransactionRow';
 
 import getTransactionListStyles from './styles';
+import { NO_OF_TRANSACTIONS_ON_OVERVIEW } from './constants';
 
 export default function TransactionList({ mode = 'overview', style }) {
   const navigation = useNavigation();
@@ -31,7 +32,7 @@ export default function TransactionList({ mode = 'overview', style }) {
     isFetchingNextPage: isFetchingTransactionsNextPage,
   } = useAccountTransactionsQuery({
     config: {
-      params: { limit: mode === 'overview' ? 2 : LIMIT },
+      params: { limit: mode === 'overview' ? NO_OF_TRANSACTIONS_ON_OVERVIEW : LIMIT },
     },
   });
 
@@ -39,19 +40,22 @@ export default function TransactionList({ mode = 'overview', style }) {
     styles: getTransactionListStyles(),
   });
 
+  const areMoreOnOverview = transactionsData?.meta.count < transactionsData?.meta.total;
+
+  const showViewAllButton = !errorOnTransactions && !isLoadingTransactions && areMoreOnOverview;
+
   function renderHeader() {
     if (mode === 'full') return null;
 
     return (
-      <View style={[styles.header, style?.header]}>
+      <View style={[styles.header, !showViewAllButton && styles.headerExtraMargin, style?.header]}>
         <P style={[styles.title, styles.theme.title, style?.title]}>
           {i18next.t('transactions.transactionList.title')}
         </P>
 
-        {!errorOnTransactions && !isLoadingTransactions && (
+        {showViewAllButton && (
           <LabelButton
             onClick={() => navigation.navigate('TransactionsHistory')}
-            style={[styles.labelButton, style?.labelButton]}
             textStyle={styles.labelButtonText}
             adornments={{
               right: (

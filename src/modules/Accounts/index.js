@@ -105,9 +105,9 @@ export default function Home() {
             </View>
           </View>
 
-          <TokenList style={{ container: { marginTop: 16 } }} />
+          <TokenList mode="overview" style={{ container: { marginTop: 16 } }} />
 
-          <TransactionList style={{ container: { marginTop: 16 } }} />
+          <TransactionList mode="overview" style={{ container: { marginTop: 16 } }} />
         </View>
       </NavigationSafeAreaView>
 
