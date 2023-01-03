@@ -82,7 +82,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   });
 
   const handleChange = (field, value, onChange) => {
-    console.log({ field, value, blaa: fromPathToObject(field, value) });
     if (field === 'params.amount') {
       const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
 
@@ -125,16 +124,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         dryRunTransactionMutation.mutate(
           { transaction: encodedTransaction },
           {
-            onSuccess: ({ data }) => {
-              if (data.result === 1) {
-                broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
-              } else {
-                DropDownHolder.error(
-                  i18next.t('transactions.errors.dryRunInvalidTransactionTitle'),
-                  i18next.t('transactions.errors.dryRunInvalidTransactionDescription')
-                );
-              }
-            },
+            onSuccess: () =>
+              broadcastTransactionMutation.mutate({ transaction: encodedTransaction }),
           }
         );
       } catch (error) {
